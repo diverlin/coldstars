@@ -19,6 +19,9 @@
 
 #pragma once
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
 struct LifeData
 {
     bool is_alive = true;
@@ -28,6 +31,19 @@ struct LifeData
     int dying_time = 0;
     bool garbage_ready = false;
 
-    LifeData()
-    {}        
+    LifeData() = default;
+    ~LifeData() = default;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & is_alive;
+        ar & is_dying;
+        ar & armor;
+        ar & life_time;
+        ar & dying_time;
+        ar & garbage_ready;
+    }
 };

@@ -24,6 +24,8 @@
 
 #include <boost/property_tree/ptree.hpp>
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 class EntityManager;
 
@@ -83,6 +85,11 @@ namespace model {
 class Base : private NonCopyable
 {
 public:
+    Base() = default;
+    ~Base() = default;
+    Base(const std::string& data);
+    std::string data() const;
+
     core::Id type;
 
     int_t descriptor = NONE;
@@ -90,6 +97,18 @@ public:
 
     int_t mesh = NONE;
     int_t material = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & type;
+        ar & descriptor;
+        ar & id;
+        ar & mesh;
+        ar & material;
+    }
 };
 
 } // namespace model

@@ -19,8 +19,24 @@
 #include "Base.hpp"
 #include <ceti/Logger.hpp>
 #include <ceti/StringUtils.hpp>
+#include <ceti/descriptor/macro.hpp>
 
 namespace core {
+
+namespace model {
+
+Base::Base(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Base::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
 
 Base::Base()
 {}

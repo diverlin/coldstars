@@ -24,6 +24,7 @@
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Container.hpp>
 #include <spaceobjects/Ship.hpp>
+#include <spaceobjects/Planet.hpp>
 
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
@@ -168,4 +169,11 @@ TEST(clone, starsystem)
     auto s1 = global::get().starsystemBuilder().create(descriptor);
     auto s2 = global::get().starsystemBuilder().create(descriptor);
     EXPECT_EQ(*s1, *s2);
+}
+
+TEST(model, planet)
+{
+    auto model = new model::Planet;
+    int a = 1;
+
 }

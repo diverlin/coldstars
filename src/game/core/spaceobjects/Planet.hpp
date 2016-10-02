@@ -23,6 +23,9 @@
 
 #include <type/IdType.hpp>
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
 class Land;
 class Vehicle;
 
@@ -30,8 +33,23 @@ namespace model {
 
 class Planet : public Planetoid {
 public:
+    Planet() = default;
+    ~Planet() = default;
+    Planet(const std::string& data);
+    std::string data() const;
+
     int_t land = NONE;
     int_t population = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & land;
+        ar & population;
+    }
 };
 
 } // namespace model

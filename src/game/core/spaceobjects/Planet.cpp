@@ -35,6 +35,23 @@
 
 //#include <jeti/Render.hpp>
 
+#include <ceti/descriptor/macro.hpp>
+
+namespace model {
+
+Planet::Planet(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Planet::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
 namespace control {
 
 Planet::Planet(model::Planet* model)

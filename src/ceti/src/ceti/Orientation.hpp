@@ -21,6 +21,11 @@
 
 #include <ceti/points.hpp>
 
+#include <meti/VectorUtils.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
 namespace ceti {
 
 namespace model {
@@ -28,14 +33,24 @@ namespace model {
 class Orientation
 {
 public:
-    float collisionRadius;
+    Orientation() = default;
+    ~Orientation() = default;
+    Orientation(const std::string& data);
+    std::string data() const;
 
-    glm::vec3 position;
-    glm::vec3 size;
-    glm::vec3 direction;
-    glm::vec3 parentPosition;
+    meti::vec3 position;
+    meti::vec3 size;
+    meti::vec3 direction;
 
-    ceti::Points points;
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & position;
+        ar & size;
+        ar & direction;
+    }
 };
 
 } // namespace model
@@ -48,14 +63,14 @@ public:
     Orientation(model::Orientation* model);
     virtual ~Orientation();
 
-    void setParentPosition(float x, float y, float z) { model()->parentPosition = glm::vec3(x, y, z); }
-    void setParentPosition(const glm::vec3& parentPosition) { model()->parentPosition = parentPosition; }
+    void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
+    void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
 
-    void setPosition(float x, float y, float z)    { model()->position = glm::vec3(x, y, z); m_isUpdated = false; }
-    void setPosition(const glm::vec3& position)   { model()->position = position; m_isUpdated = false; }
+    void setPosition(float x, float y, float z)    { model()->position = meti::vec3(x, y, z); m_isUpdated = false; }
+    void setPosition(const meti::vec3& position)   { model()->position = position; m_isUpdated = false; }
 
-    void setSize(float x, float y, float z) { model()->size = glm::vec3(x, y, z); m_isUpdated = false; }
-    void setSize(const glm::vec3& size) { model()->size = size; m_isUpdated = false; }
+    void setSize(float x, float y, float z) { model()->size = meti::vec3(x, y, z); m_isUpdated = false; }
+    void setSize(const meti::vec3& size) { model()->size = size; m_isUpdated = false; }
 
     const glm::vec3& direction() const { return model()->direction; }
 
@@ -65,24 +80,28 @@ public:
     [[deprecated("depr")]]
     glm::vec3* pPosition() { return &model()->position; }
     [[deprecated("depr")]]
-    const glm::vec3* pParentPosition() { return &model()->parentPosition; }
+    const glm::vec3* pParentPosition() { return &m_parentPosition; }
 
     [[deprecated("depr")]]
-    ceti::Points& points()          { return model()->points; }
+    ceti::Points& points()          { return m_points; }
 
-    float collisionRadius() const  { return model()->collisionRadius; }
+    float collisionRadius() const  { return m_collisionRadius; }
 
     [[deprecated("depr")]]
     void updateOrientation();
 
-    void setDirection(const glm::vec3& direction)   { assert(int(direction.length()) != 1); model()->direction = glm::normalize(direction); m_isUpdated = false; }
-    void setCollisionRadius(float collision_radius) { model()->collisionRadius = collision_radius; }
+    void setDirection(const meti::vec3& direction)   { assert(int(direction.length()) != 1); model()->direction = meti::normalize(direction); m_isUpdated = false; }
+    void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
 private:
     model::Orientation* m_model_orientation = nullptr;
     model::Orientation* model() const { return m_model_orientation; }
 
     bool m_isUpdated = false;
+    float m_collisionRadius;
+    glm::vec3 m_parentPosition;
+
+    ceti::Points m_points;
 };
 
 } // namespace control

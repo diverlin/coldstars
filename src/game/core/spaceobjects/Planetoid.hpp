@@ -24,6 +24,9 @@
 #include <descriptors/PlanetDescriptor.hpp>
 //#include <jeti/Render.hpp>
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
 
 struct UnresolvedDataPlanetoid
 {
@@ -35,7 +38,21 @@ namespace model {
 class Planetoid : public SpaceObject
 {
 public:
+    Planetoid() = default;
+    ~Planetoid() = default;
+    Planetoid(const std::string& data);
+    std::string data() const;
+
     int_t descriptor = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & descriptor;
+    }
 };
 
 } // namespace model

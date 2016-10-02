@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <sstream>
+
 #define MACRO_READ_SERIALIZED_DATA \
     std::stringstream ss; \
     ss << data; \

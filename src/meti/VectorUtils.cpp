@@ -4,6 +4,13 @@
       
 namespace meti {
 
+vec3
+normalize(const vec3& rhs)
+{
+    glm::vec3 vn = glm::normalize(glm::vec3(rhs.x,rhs.y,rhs.z));
+    return vec3(vn);
+}
+
 float distance(const glm::vec3& center1, const glm::vec3& center2)
 {
     float lx = (center2.x - center1.x);
