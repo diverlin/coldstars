@@ -50,7 +50,7 @@ TEST(communication, create_ship)
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-    Ship* ship = global::get().entityManager().get<Ship*>(obj_id);
+    Ship* ship = global::get().entityManager().getEntity<Ship*>(obj_id);
     assert(ship);
     EXPECT_EQ(ship->id(), obj_id);
 }
@@ -62,7 +62,7 @@ TEST(communication, create_bak)
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
-    item::equipment::Bak* bak = global::get().entityManager().get<item::equipment::Bak*>(obj_id);
+    item::equipment::Bak* bak = global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
     assert(bak);
     EXPECT_EQ(bak->id(), obj_id);
 }

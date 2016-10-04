@@ -355,7 +355,7 @@ void Npc::ResolveData()
 {
     applySkillsStrategy();
     
-    ((Vehicle*)global::get().entityManager().get(data_unresolved_npc.vehicle_id))->bindNpc(this);
+    ((Vehicle*)global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
     setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     m_skills.Resolve();
