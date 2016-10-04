@@ -204,7 +204,8 @@ void Npc::__scenarioFireAsteroid()
     m_vehicle->weaponComplex().deactivateWeapons();
 
     m_vehicle->weaponComplex().activateWeapons();
-    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
+    // TODO
+//    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
 }
 
 Planet* Npc::planetForDocking()

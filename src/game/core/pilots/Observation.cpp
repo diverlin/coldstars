@@ -140,21 +140,22 @@ void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>& rDataVec)
 
 void Observation::FindVisibleAsteroidsInSpaceInStatic()
 {
-    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->m_asteroids;
+    // TODO
+//    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->m_asteroids;
     
-    see.ASTEROID  = false;
+//    see.ASTEROID  = false;
     
-    visible_ASTEROID_pair_vec.clear();
+//    visible_ASTEROID_pair_vec.clear();
 
-    for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-        float dist = meti::distance(npc_owner->vehicle()->position(), asteroid_vec[i]->position());
-        if (dist < npc_owner->vehicle()->properties().radar) {
-            visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
-            see.ASTEROID = true;
-        }
-    }
+////    for (unsigned int i=0; i<asteroid_vec.size(); i++) {
+////        float dist = meti::distance(npc_owner->vehicle()->position(), asteroid_vec[i]->position());
+////        if (dist < npc_owner->vehicle()->properties().radar) {
+////            visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
+////            see.ASTEROID = true;
+////        }
+////    }
 
-    Sort(visible_ASTEROID_pair_vec);
+//    Sort(visible_ASTEROID_pair_vec);
 }
 
 void Observation::FindVisibleContainersInSpaceInStatic()

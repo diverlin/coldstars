@@ -43,7 +43,12 @@ public:
     Planetoid(const std::string& data);
     std::string data() const;
 
-    int_t descriptor = NONE;
+    meti::vec3 orbitCenter;
+    float orbitPhi = 0.0f;
+    int radiusA = 0;
+    int radiusB = 0;
+    float speed = 0.0f;
+    bool clockwise = false;
 
 private:
     friend class boost::serialization::access;
@@ -51,7 +56,12 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & descriptor;
+        ar & orbitCenter;
+        ar & orbitPhi;
+        ar & radiusA;
+        ar & radiusB;
+        ar & speed;
+        ar & clockwise;
     }
 };
 

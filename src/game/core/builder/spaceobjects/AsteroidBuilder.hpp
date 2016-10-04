@@ -20,8 +20,11 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace model {
+
 class Asteroid;
 
+} // namespace model
 
 namespace ENTITY
 {
@@ -34,6 +37,7 @@ const int GIVEN_EXPIRIENCE = 100;
 }
 }
 
+namespace builder {
 
 class AsteroidBuilder
 {
@@ -41,9 +45,11 @@ public:
     AsteroidBuilder();
     ~AsteroidBuilder();
 
-    Asteroid* createTemplate(int_t id = NONE) const;
-    Asteroid* create() const;
+    model::Asteroid* createTemplate(int_t id = NONE) const;
+    model::Asteroid* create() const;
 
 private:
-    void createInternals(Asteroid*) const;
+    void createInternals(model::Asteroid*) const;
 }; 
+
+} // namespace builder

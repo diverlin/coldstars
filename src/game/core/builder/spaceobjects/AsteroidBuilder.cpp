@@ -26,6 +26,7 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace builder {
 
 AsteroidBuilder::AsteroidBuilder()
 {}
@@ -33,46 +34,43 @@ AsteroidBuilder::AsteroidBuilder()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::createTemplate(int_t id) const
+model::Asteroid* AsteroidBuilder::createTemplate(int_t id) const
 { 
-    Asteroid* asteroid = new Asteroid(id);
-    assert(asteroid);
+    model::Asteroid* model = new model::Asteroid;
+    model->id = id;
+    assert(model);
 
-    global::get().entityManager().reg(asteroid);
+    global::get().entityManager().reg(model);
     
-    return asteroid;
+    return model;
 } 
 
-Asteroid* AsteroidBuilder::create() const
+model::Asteroid* AsteroidBuilder::create() const
 {
-    Asteroid* asteroid = createTemplate();
-    createInternals(asteroid);
+    model::Asteroid* model = createTemplate();
+    createInternals(model);
         
-    return asteroid;
+    return model;
 } 
            
-void AsteroidBuilder::createInternals(Asteroid* asteroid) const
+void AsteroidBuilder::createInternals(model::Asteroid* model) const
 {           
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
-    
     LifeData data_life;   
     data_life.armor      = 10;
     data_life.dying_time = 50;
     
-    PlanetDescriptor planet_data;
-
-    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
-    planet_data.radius_A      = meti::getRandInt(300, 1200);
-    planet_data.radius_B      = meti::getRandInt(300, 1200);
-    planet_data.orbit_phi_inD = meti::getRandInt(360);
-    planet_data.speed         = 0.1;
-    planet_data.clockwise     = meti::getRandBool();
-    
-    asteroid->setPlanetDescriptor(planet_data);
-    asteroid->setLifeData(data_life);
+    model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
+    model->radiusA = meti::getRandInt(300, 1200);
+    model->radiusB = meti::getRandInt(300, 1200);
+    model->orbitPhi = meti::getRandInt(360);
+    model->speed = 0.1f;
+    model->clockwise = meti::getRandBool();
+    model->dataLife = data_life;
 
     float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
           
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
@@ -80,11 +78,12 @@ void AsteroidBuilder::createInternals(Asteroid* asteroid) const
     float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
-                
-    asteroid->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
+
+    // todo
+    //model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }
 
-
+} // namespace builder
 
 
 

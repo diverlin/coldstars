@@ -22,41 +22,37 @@
 #include <ceti/Logger.hpp>
 #include "../world/starsystem.hpp"
 
+
+
 BlackHole::BlackHole(int id)
-{        
+{
     setId(id);
     setTypeId(type::entity::BLACKHOLE_ID);
     
     setMass(meti::getRandInt(1000, 4000));
 }
 
-/* virtual */
-BlackHole::~BlackHole() 
+BlackHole::~BlackHole()
 {
-    LOG("___::~BlackHole("+std::to_string(id())+")");
-    
     //delete shockwave;
-} 
+}
  
 void BlackHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
          
-void BlackHole::UpdateInSpace(int time, bool show_effect)
+void BlackHole::updateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
 
-    if (time > 0)
-    {
+    if (time > 0) {
         setPosition(position()+meti::getRandXYVec3f(1, 2, 0));
 //        shockwave->setCenter(meti::vec2(center()));
     
         _dataLife().life_time--;
-        if (_dataLife().life_time < 0)
-        {
+        if (_dataLife().life_time < 0) {
             //scale -= 0.1;
-            //if (scale < 1.0)
-            {
+            //if (scale < 1.0) {
                 _dataLife().is_alive = false;
-            }
+            //}
         }
     }
 
@@ -104,7 +100,7 @@ void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
     BlackHole::SaveData(save_ptree, root);
 }
 
-/*virtual*/        
+/*virtual*/
 void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
@@ -115,7 +111,7 @@ void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
     BlackHole::LoadData(load_ptree);
 }
     
-/*virtual*/    
+/*virtual*/
 void BlackHole::Resolve()
 {
     Base::ResolveData();

@@ -615,29 +615,30 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
-    for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
-    { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
-        {   
-            cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
+    // todo
+//    for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
+//    {
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
+//        {
+//            cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);
         
-//            if (data_mouse.left_click == true)
-//            {
-//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-//                {
-//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
-//                }
-//                else
-//                {
-//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                    npc->vehicle()->GetComplexDrive().UpdatePath();
-//                }
-//            }
+////            if (data_mouse.left_click == true)
+////            {
+////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+////                {
+////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
+////                }
+////                else
+////                {
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                    npc->vehicle()->GetComplexDrive().UpdatePath();
+////                }
+////            }
                         
-            return true; 
-        }            
-    }
+//            return true;
+//        }
+//    }
         
     return false;
 }

@@ -228,8 +228,9 @@ void DriveComplex::UpdateDynamicTargetCoord()
 
         case type::entity::ASTEROID_ID:
         { 
-            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;             
-            break;
+        // TODO
+//            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
+//            break;
         } 
          
         case type::entity::VEHICLE_ID:
