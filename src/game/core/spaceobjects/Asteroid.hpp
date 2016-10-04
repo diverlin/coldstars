@@ -21,16 +21,60 @@
 
 #include <spaceobjects/Planetoid.hpp>
 
+namespace model {
+
+class Asteroid : public Planetoid {
+public:
+    Asteroid() = default;
+    ~Asteroid() = default;
+    Asteroid(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
+class Asteroid : public Planetoid
+{
+    public:
+        Asteroid(model::Asteroid*);
+        virtual ~Asteroid();
+
+        int damage() const { return mass()*10; };
+
+        void updateInSpace(int, bool);
+        void collisionEvent(bool);
+
+    private:
+        void _postDeathUniqueEvent(bool);
+
+        model::Asteroid* m_model_asteroid = nullptr;
+
+//        virtual void UpdateInfo() override final;
+};
+
+} // namespace control
+
 class Asteroid : public Planetoid
 {
     public:
         Asteroid(int);
         virtual ~Asteroid();
 
-        int GetDamage() const { return mass()*10; };
+        int damage() const { return mass()*10; };
 
-        void UpdateInSpace(int, bool);            
-        void CollisionEvent(bool);
+        void updateInSpace(int, bool);
+        void collisionEvent(bool);
 
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;

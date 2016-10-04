@@ -39,13 +39,13 @@ class RocketBullet : public SpaceObject
         void SetTarget(SpaceObject* target) { m_Target = target; };
         void SetDamageRate(float damage_rate) { m_DamageRate = damage_rate; };
         
-        int GetDamage() const { return m_DataBullet.damage; };
+        int damage() const { return m_DataBullet.damage; };
         int GetOwnerId() const { return m_OwnerId; };
         
         void CreateDriveComplexTextureDependedStuff();
         void UpdateInSpace(int, bool);
         
-        void CollisionEvent(bool);
+        void collisionEvent(bool);
         
         virtual void hit(int) override final;
         virtual void _postDeathUniqueEvent(bool) override final;  

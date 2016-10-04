@@ -173,7 +173,7 @@ TEST(clone, starsystem)
 
 TEST(model, planet)
 {
-    auto model = new model::Planet;
-    int a = 1;
-
+    model::Planet model1;
+    model::Planet model2(model1.data());
+    EXPECT_EQ(model1.data(), model2.data());
 }
