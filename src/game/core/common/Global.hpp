@@ -82,7 +82,7 @@ class NpcBuilder;
 
 namespace builder {
 
-class AsteroidBuilder;
+class Asteroid;
 
 } // namespace builder
 
@@ -164,7 +164,7 @@ public:
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
-    builder::AsteroidBuilder& asteroidBuilder() { return *m_asteroidBuilder; }
+    builder::Asteroid& asteroidBuilder() { return *m_asteroidBuilder; }
     BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
     ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
     PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
@@ -241,7 +241,7 @@ private:
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
-    builder::AsteroidBuilder* m_asteroidBuilder = nullptr;
+    builder::Asteroid* m_asteroidBuilder = nullptr;
     BlackHoleBuilder* m_blackHoleBuilder = nullptr;
     ContainerBuilder* m_containerBuilder = nullptr;
     PlanetBuilder* m_planetBuilder = nullptr;

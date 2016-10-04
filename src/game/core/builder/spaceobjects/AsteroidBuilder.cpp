@@ -28,13 +28,13 @@
 
 namespace builder {
 
-AsteroidBuilder::AsteroidBuilder()
+Asteroid::Asteroid()
 {}
 
-AsteroidBuilder::~AsteroidBuilder()
+Asteroid::~Asteroid()
 {}
 
-model::Asteroid* AsteroidBuilder::createTemplate(int_t id) const
+model::Asteroid* Asteroid::createTemplate(int_t id) const
 { 
     model::Asteroid* model = new model::Asteroid;
     model->id = id;
@@ -45,7 +45,7 @@ model::Asteroid* AsteroidBuilder::createTemplate(int_t id) const
     return model;
 } 
 
-model::Asteroid* AsteroidBuilder::create() const
+model::Asteroid* Asteroid::create() const
 {
     model::Asteroid* model = createTemplate();
     createInternals(model);
@@ -53,7 +53,7 @@ model::Asteroid* AsteroidBuilder::create() const
     return model;
 } 
            
-void AsteroidBuilder::createInternals(model::Asteroid* model) const
+void Asteroid::createInternals(model::Asteroid* model) const
 {           
     LifeData data_life;   
     data_life.armor      = 10;

@@ -175,7 +175,7 @@ TEST(clone, starsystem)
 
 TEST(model, asteroid)
 {
-    builder::AsteroidBuilder builder;
+    builder::Asteroid builder;
     model::Asteroid* model1 = builder.create();
 
     model::Asteroid model2(model1->data());
