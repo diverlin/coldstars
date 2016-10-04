@@ -45,11 +45,11 @@ public:
     Asteroid();
     ~Asteroid();
 
-    model::Asteroid* createTemplate(int_t id = NONE) const;
-    model::Asteroid* create() const;
+    static model::Asteroid* create();
 
 private:
-    void createInternals(model::Asteroid*) const;
+    static model::Asteroid* createTemplate(int_t id = NONE);
+    static void createInternals(model::Asteroid*);
 }; 
 
 } // namespace builder

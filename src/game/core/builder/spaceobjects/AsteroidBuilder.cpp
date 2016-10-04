@@ -34,7 +34,7 @@ Asteroid::Asteroid()
 Asteroid::~Asteroid()
 {}
 
-model::Asteroid* Asteroid::createTemplate(int_t id) const
+model::Asteroid* Asteroid::createTemplate(int_t id)
 { 
     model::Asteroid* model = new model::Asteroid;
     model->id = id;
@@ -45,7 +45,7 @@ model::Asteroid* Asteroid::createTemplate(int_t id) const
     return model;
 } 
 
-model::Asteroid* Asteroid::create() const
+model::Asteroid* Asteroid::create()
 {
     model::Asteroid* model = createTemplate();
     createInternals(model);
@@ -53,7 +53,7 @@ model::Asteroid* Asteroid::create() const
     return model;
 } 
            
-void Asteroid::createInternals(model::Asteroid* model) const
+void Asteroid::createInternals(model::Asteroid* model)
 {           
     LifeData data_life;   
     data_life.armor      = 10;
