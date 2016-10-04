@@ -55,6 +55,8 @@ class Asteroid : public Planetoid
         void updateInSpace(int, bool);
         void collisionEvent(bool);
 
+        model::Asteroid* model() const { return m_model_asteroid; }
+
     private:
         void _postDeathUniqueEvent(bool);
 
@@ -65,28 +67,28 @@ class Asteroid : public Planetoid
 
 } // namespace control
 
-class Asteroid : public Planetoid
-{
-    public:
-        Asteroid(int);
-        virtual ~Asteroid();
+//class Asteroid : public Planetoid
+//{
+//    public:
+//        Asteroid(int);
+//        virtual ~Asteroid();
 
-        int damage() const { return mass()*10; };
+//        int damage() const { return mass()*10; };
 
-        void updateInSpace(int, bool);
-        void collisionEvent(bool);
+//        void updateInSpace(int, bool);
+//        void collisionEvent(bool);
 
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
+//        virtual void Save(boost::property_tree::ptree&) const override final;
+//        virtual void Load(const boost::property_tree::ptree&) override final;
+//        virtual void Resolve() override final;
         
-    private:          
-        void _postDeathUniqueEvent(bool);
+//    private:
+//        void _postDeathUniqueEvent(bool);
 
-//        virtual void UpdateInfo() override final;
+////        virtual void UpdateInfo() override final;
         
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-}; 
+//        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//        void LoadData(const boost::property_tree::ptree&);
+//        void ResolveData();
+//};
 

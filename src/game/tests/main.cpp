@@ -25,7 +25,9 @@
 #include <spaceobjects/Container.hpp>
 #include <spaceobjects/Ship.hpp>
 #include <spaceobjects/Planet.hpp>
+#include <spaceobjects/Asteroid.hpp>
 
+#include <builder/spaceobjects/AsteroidBuilder.hpp>
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
 #include <builder/world/SectorBuilder.hpp>
@@ -171,9 +173,11 @@ TEST(clone, starsystem)
     EXPECT_EQ(*s1, *s2);
 }
 
-TEST(model, planet)
+TEST(model, asteroid)
 {
-    model::Planet model1;
-    model::Planet model2(model1.data());
-    EXPECT_EQ(model1.data(), model2.data());
+    builder::AsteroidBuilder builder;
+    model::Asteroid* model1 = builder.create();
+
+    model::Asteroid model2(model1->data());
+    EXPECT_EQ(model1->data(), model2.data());
 }

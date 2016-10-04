@@ -107,7 +107,7 @@ void Starsystem::putChildrenToGarbage() const
 {    
     for(unsigned int i=0; i<m_stars.size(); i++)        { global::get().entityManager().addToGarbage(m_stars[i]); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { global::get().entityManager().addToGarbage(m_planets[i]); }
-    for(unsigned int i=0; i<m_asteroids.size(); i++)  { global::get().entityManager().addToGarbage(m_asteroids[i]); }
+    for(unsigned int i=0; i<m_asteroids.size(); i++)  { global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
     for(unsigned int i=0; i<m_containers.size(); i++) { global::get().entityManager().addToGarbage(m_containers[i]); }
     for(unsigned int i=0; i<m_bullets.size(); i++)    { global::get().entityManager().addToGarbage(m_bullets[i]); }
     for(unsigned int i=0; i<m_blackholes.size(); i++) { global::get().entityManager().addToGarbage(m_blackholes[i]); }
@@ -225,9 +225,11 @@ void Starsystem::add(Planet* planet, const SpaceObject* parent, int it)
 }
 
 
-void Starsystem::add(Asteroid* asteroid, const SpaceObject* parent, int it)
+void Starsystem::add(model::Asteroid* model, const SpaceObject* parent, int it)
 {
-    asteroid->bindParent(parent, it);
+    control::Asteroid* asteroid = new control::Asteroid(model);
+
+    //asteroid->bindParent(parent, it);
     
     asteroid->setStarSystem(this);
     asteroid->setPlaceTypeId(type::place::KOSMOS);
@@ -729,7 +731,7 @@ void Starsystem::__updateEntities_s(int time, bool show_effect)
 
     for (unsigned int i=0; i<m_stars.size(); i++)             { m_stars[i]->UpdateInSpace(time, show_effect);  }
     for (unsigned int i=0; i<m_planets.size(); i++)           { m_planets[i]->UpdateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_blackholes.size(); i++)        { m_blackholes[i]->UpdateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_blackholes.size(); i++)        { m_blackholes[i]->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_asteroids.size(); i++)         { m_asteroids[i]->updateInSpace(time, show_effect); }
     
@@ -908,12 +910,12 @@ void Starsystem::__manageDeadObjects_s()
         }
     }
 
-    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
-        if ((*it)->isReadyForGarbage() == true) {
-            global::get().entityManager().addToGarbage(*it);
-            it = m_asteroids.erase(it);
-        }
-    }
+//    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
+//        if ((*it)->isReadyForGarbage() == true) {
+//            global::get().entityManager().addToGarbage(*it);
+//            it = m_asteroids.erase(it);
+//        }
+//    }
 
     for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {

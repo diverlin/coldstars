@@ -22,9 +22,56 @@
 //#include <effects/ShockWaveEffect.hpp> //depr
 #include <spaceobjects/Planetoid.hpp>
 
+namespace model {
+
+class BlackHole : public Planetoid {
+public:
+    BlackHole() = default;
+    ~BlackHole() = default;
+    BlackHole(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
 class BlackHole : public Planetoid
 {
-    public:  
+    public:
+        BlackHole(model::BlackHole*);
+        virtual ~BlackHole();
+
+        //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
+
+        void setPosition(const glm::vec3&);
+
+//        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
+
+        void updateInSpace(int, bool);
+
+    private:
+        void _postDeathUniqueEvent(bool);
+
+        model::BlackHole* m_model_blackhole = nullptr;
+
+//        virtual void UpdateInfo() override final;
+};
+
+} // namespace control
+
+class BlackHole : public Planetoid
+{
+    public:
         BlackHole(int);
         virtual ~BlackHole();
 
@@ -34,7 +81,7 @@ class BlackHole : public Planetoid
         
 //        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
         
-        void UpdateInSpace(int, bool);
+        void updateInSpace(int, bool);
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
@@ -45,7 +92,7 @@ class BlackHole : public Planetoid
         
 //        void UpdateInfo();
         
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };

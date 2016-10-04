@@ -33,7 +33,15 @@ class RocketBullet;
 class Planetoid;
 class Star;
 class Planet;
+
+namespace model {
 class Asteroid;
+} // namespace model
+
+namespace control {
+class Asteroid;
+} // namespace model
+
 class BlackHole;
 class Vehicle;
 class SpaceStation;
@@ -157,7 +165,7 @@ class Starsystem : public SpaceObject
 
         void add(Star*);
         void add(Planet*, const SpaceObject* parent = nullptr, int it = 0);
-        void add(Asteroid*, const SpaceObject* parent = nullptr, int it = 0);
+        void add(model::Asteroid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);
 
@@ -232,7 +240,7 @@ class Starsystem : public SpaceObject
 
         std::vector<Star*>         m_stars;
         std::vector<Planet*>       m_planets;
-        std::vector<Asteroid*>     m_asteroids;
+        std::vector<control::Asteroid*>     m_asteroids;
         std::vector<Container*>    m_containers;
         std::vector<RocketBullet*> m_bullets;
         std::vector<BlackHole*>    m_blackholes;
