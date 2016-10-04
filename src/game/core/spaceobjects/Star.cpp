@@ -160,7 +160,7 @@ void Star::ResolveData()
 {
     LOG(" Star("+std::to_string(id())+")::ResolveData");
     
-    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this);     
+    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this);     
 }
 
 /* virtual override final */

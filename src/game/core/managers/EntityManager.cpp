@@ -129,12 +129,22 @@ void EntityManager::reg(core::model::Base* entity)
     m_models.insert(std::make_pair(entity->id, entity));
 }
 
-core::Base* EntityManager::get(const int_t& id) const
+core::Base* EntityManager::getEntity(const int_t& id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
     std::map<int_t, core::Base*>::const_iterator slice = m_entities_map.find(id);
     assert(slice->second);
     LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
+    return slice->second;
+}
+
+core::model::Base* EntityManager::get(const int_t& id) const
+{
+    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
+    std::map<int_t, core::model::Base*>::const_iterator slice = m_models.find(id);
+    assert(slice->second);
+    // TODO
+    //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return slice->second;
 }
 

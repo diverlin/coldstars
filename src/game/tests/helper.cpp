@@ -45,7 +45,7 @@ Container* getNewContainer(const int_t& child_id)
     auto descriptor = descriptor::Container(child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-    Container* container = global::get().entityManager().get<Container*>(descriptor.id());
+    Container* container = global::get().entityManager().getEntity<Container*>(descriptor.id());
     assert(container->itemSlot());
     assert(container->itemSlot()->item());
     assert(container->itemSlot()->item()->id() == child_id);

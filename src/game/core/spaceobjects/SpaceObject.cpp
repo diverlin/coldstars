@@ -70,7 +70,7 @@ void SpaceObject::setParent(SpaceObject* parent)
 Starsystem* SpaceObject::starsystem()
 {
     if (!m_starsystem) {
-        m_starsystem = static_cast<Starsystem*>(global::get().entityManager().get(model()->starsystem));
+        m_starsystem = static_cast<Starsystem*>(global::get().entityManager().getEntity(model()->starsystem));
         assert(m_starsystem);
     }
     return m_starsystem;
@@ -246,10 +246,10 @@ void SpaceObject::ResolveData()
     LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
     if (data_unresolved_SpaceObject.parent_id != NONE) {
-        m_parent = (SpaceObject*)global::get().entityManager().get(data_unresolved_SpaceObject.parent_id);
+        m_parent = (SpaceObject*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.parent_id);
     }
     if (data_unresolved_SpaceObject.starsystem_id != NONE) {
-        m_starsystem = (Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
+        m_starsystem = (Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id);
     }
 }
 

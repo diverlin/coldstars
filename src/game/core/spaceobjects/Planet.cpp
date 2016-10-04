@@ -75,7 +75,7 @@ void Planet::putChildrenToGarbage() const
 Land* Planet::land()
 {
     if (!m_land) {
-        m_land = static_cast<Land*>(global::get().entityManager().get(model()->land));
+        m_land = static_cast<Land*>(global::get().entityManager().getEntity(model()->land));
     }
 
     assert(m_land);
@@ -209,7 +209,7 @@ void Planet::ResolveData()
 {
     LOG(" Planet("+std::to_string(id())+")::ResolveData");
 
-    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
+    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
 }
 
 /* virtual override final */
