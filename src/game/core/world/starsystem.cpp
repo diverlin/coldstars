@@ -729,12 +729,12 @@ void Starsystem::__updateEntities_s(int time, bool show_effect)
 
     for (unsigned int i=0; i<m_stars.size(); i++)             { m_stars[i]->UpdateInSpace(time, show_effect);  }
     for (unsigned int i=0; i<m_planets.size(); i++)           { m_planets[i]->UpdateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_blackholes.size(); i++)         { m_blackholes[i]->UpdateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_containers.size(); i++)           { m_containers[i]->updateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_asteroids.size(); i++)            { m_asteroids[i]->UpdateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_blackholes.size(); i++)        { m_blackholes[i]->UpdateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_asteroids.size(); i++)         { m_asteroids[i]->updateInSpace(time, show_effect); }
     
-    for (unsigned int i=0; i<m_vehicles.size(); i++)             { m_vehicles[i]->UpdateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_bullets.size(); i++)              { m_bullets[i]->UpdateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_vehicles.size(); i++)          { m_vehicles[i]->UpdateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_bullets.size(); i++)           { m_bullets[i]->UpdateInSpace(time, show_effect); }
     
     // effects
 //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->Update(); }

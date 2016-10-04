@@ -113,7 +113,7 @@ bool RocketBullet::CheckTarget() const
     return false;
 }
 
-void RocketBullet::CollisionEvent(bool show_effect)
+void RocketBullet::collisionEvent(bool show_effect)
 {
     _dataLife().is_alive = false; 
     _dataLife().dying_time = -1;

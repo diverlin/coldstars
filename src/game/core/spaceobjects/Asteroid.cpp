@@ -35,6 +35,75 @@
 
 #include <meti/RandUtils.hpp>
 
+
+namespace control {
+
+Asteroid::Asteroid(model::Asteroid* model)
+    :
+      Planetoid(model)
+    , m_model_asteroid(model)
+{
+//    setId(id);
+//    setTypeId(type::entity::ASTEROID_ID);
+
+    setMass(meti::getRandInt(10, 30));
+}
+
+Asteroid::~Asteroid()
+{}
+
+void Asteroid::updateInSpace(int time, bool show_effect)
+{
+    _checkDeath(show_effect);
+    if (time > 0) {
+        _updatePosition();
+    }
+}
+
+void Asteroid::collisionEvent(bool show_effect)
+{
+    _dataLife().is_alive = false;
+    _dataLife().dying_time = -1;
+}
+
+void Asteroid::_postDeathUniqueEvent(bool show_effect)
+{
+    int angleZ = meti::getRandInt(360);
+    float impulse_strength = 0.5;
+    for (int i=0; i<3; i++) {
+//        Container* container = global::get().containerBuilder().create(4);
+
+//        glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
+//        container->addImpulse(impulse_dir, impulse_strength);
+
+//        starsystem()->add(container, center());
+
+//        angleZ += 120;
+    }
+
+    if (show_effect == true) {
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+//        starsystem()->Add(explosion, center());
+    }
+}
+
+///* virtual override final */
+//void Asteroid::UpdateInfo()
+//{
+//    GetInfo().clear();
+
+//    GetInfo().addTitleStr("ASTEROID");
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
+//}
+
+
+} // namespace control
+
+
 Asteroid::Asteroid(int id)
 {   
     setId(id);
@@ -49,7 +118,7 @@ Asteroid::~Asteroid()
     LOG("___::~Asteroid("+std::to_string(id())+")");
 }
 
-void Asteroid::UpdateInSpace(int time, bool show_effect)
+void Asteroid::updateInSpace(int time, bool show_effect)
 {    
     _checkDeath(show_effect);
     if (time > 0) {
@@ -57,7 +126,7 @@ void Asteroid::UpdateInSpace(int time, bool show_effect)
     }         
 }
 
-void Asteroid::CollisionEvent(bool show_effect)
+void Asteroid::collisionEvent(bool show_effect)
 {
     _dataLife().is_alive = false;
     _dataLife().dying_time = -1;
