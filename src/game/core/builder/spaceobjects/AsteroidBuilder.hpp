@@ -39,11 +39,11 @@ const int GIVEN_EXPIRIENCE = 100;
 
 namespace builder {
 
-class AsteroidBuilder
+class Asteroid
 {
 public:
-    AsteroidBuilder();
-    ~AsteroidBuilder();
+    Asteroid();
+    ~Asteroid();
 
     model::Asteroid* createTemplate(int_t id = NONE) const;
     model::Asteroid* create() const;
