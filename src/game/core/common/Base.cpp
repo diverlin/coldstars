@@ -36,6 +36,17 @@ Base::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
+std::string Base::dataTypeStr() const
+{
+    std::string text;
+    text += "id = (" + std::to_string(id());
+    text += " | " + str(type());
+    text += " | " + str(subtype());
+    text += " | " + str(subsubtype()) + " )";
+    return text;
+}
+
+
 } // namespace model
 
 Base::Base()
@@ -89,21 +100,8 @@ Base::Base(model::Base* model)
       m_model_base(model)
 {}
 
-/*virtual*/
 Base::~Base()
-{
-    LOG("___::~Base("+std::to_string(id())+")");
-}
-
-std::string Base::dataTypeStr() const
-{
-    std::string text;
-    text += "id = (" + std::to_string(id());
-    text += " | " + str(type());
-    text += " | " + str(subtype());
-    text += " | " + str(subsubtype()) + " )";
-    return text;
-}
+{}
 
 //void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{

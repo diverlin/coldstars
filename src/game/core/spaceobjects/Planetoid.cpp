@@ -43,18 +43,14 @@ Planetoid::data() const
 
 namespace control {
 
-
 Planetoid::Planetoid(model::Planetoid* model)
     :
       SpaceObject(model)
     , m_model_planetoid(model)
 {}
 
-/* virtual */
 Planetoid::~Planetoid()
-{
-    LOG("___::~Planetoid("+std::to_string(id())+")");
-}
+{}
 
 void Planetoid::setPlanetDescriptor(int_t descriptor)
 {
