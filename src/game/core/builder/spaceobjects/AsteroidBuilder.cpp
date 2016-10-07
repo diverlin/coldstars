@@ -43,12 +43,12 @@ model::Asteroid* Asteroid::getNew()
 {
     model::Asteroid* model = __createTemplate();
 
-    model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
-    model->radiusA = meti::getRandInt(300, 1200);
-    model->radiusB = meti::getRandInt(300, 1200);
-    model->orbitPhi = meti::getRandInt(360);
-    model->speed = 0.1f;
-    model->clockwise = meti::getRandBool();
+    model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    model->setRadiusA(meti::getRandInt(300, 1200));
+    model->setRadiusB(meti::getRandInt(300, 1200));
+    model->setOrbitPhi(meti::getRandInt(360));
+    model->setSpeed(0.1f);
+    model->setClockwise(meti::getRandBool());
 
     LifeData data_life;
     data_life.armor      = 10;

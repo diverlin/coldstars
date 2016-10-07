@@ -56,11 +56,11 @@ StarBuilder::getNew(const descriptor::BaseOLD& descr)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
-    model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
-    model->radiusA = 50;
-    model->radiusB = 50;
-    model->orbitPhi = 0;
-    model->speed = 1.8f;
+    model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    model->setRadiusA(50);
+    model->setRadiusB(50);
+    model->setOrbitPhi(0);
+    model->setSpeed(1.8f);
 
     LifeData data_life;
     data_life.armor = descr.armor();
