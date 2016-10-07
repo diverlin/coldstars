@@ -29,51 +29,51 @@
     
 #include <meti/RandUtils.hpp>
 
-StarBuilder::StarBuilder()
-{}
+namespace builder {
 
-StarBuilder::~StarBuilder()
-{}
-
-Star* StarBuilder::__getNewTemplate(int_t id)
+model::Star*
+StarBuilder::__getNewTemplate(int_t id)
 { 
-    Star* star = new Star(id);
-    assert(star);
-    global::get().entityManager().reg(star);    
-    return star;
+    model::Star* model = new model::Star;
+    model->id = id;
+
+    assert(model);
+    global::get().entityManager().reg(model);
+    return model;
 } 
  
-Star* StarBuilder::getNew()
+model::Star*
+StarBuilder::getNew()
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::STAR);
     return getNew(descr);
 } 
 
-Star* StarBuilder::getNew(const descriptor::BaseOLD& descr)
+model::Star*
+StarBuilder::getNew(const descriptor::BaseOLD& descr)
 {
+    model::Star* model = __getNewTemplate();
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
     LifeData data_life;
     data_life.armor = descr.armor();
 
-    PlanetDescriptor star_data;
-    star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
-    star_data.radius_A      = 50;
-    star_data.radius_B      = 50;
-    star_data.orbit_phi_inD = 0;
-    star_data.speed         = 1.8;
+    model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
+    model->radiusA = 50;
+    model->radiusB = 50;
+    model->orbitPhi = 0;
+    model->speed = 1.8f;
 
-    Star* star = __getNewTemplate();
-    star->setPlanetDescriptor(star_data);
-    star->setLifeData(data_life);
+    model->dataLife = data_life;
     float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender star->SetRenderData(mesh, texOb, scale);
 
     // alpitodorender star->CalcColor();
-    return star;
+    return model;
 }
           
+} // namespace builder
 
 

@@ -21,22 +21,16 @@
 
 #include <ceti/type/IdType.hpp>
 
+
+namespace model {
 class Star;
-
-
-namespace ENTITY
-{
-namespace STAR
-{
-//const int SCALE_MIN = 200;
-//const int SCALE_MAX = 300;
-}
-}
+} // namespace model
 
 namespace descriptor {
 class BaseOLD;
 } // namespace descriptor
 
+namespace builder {
 
 class StarBuilder
 {
@@ -44,12 +38,12 @@ public:
     StarBuilder();
     ~StarBuilder();
 
-    static Star* getNew();
-    static Star* getNew(const descriptor::BaseOLD&);
+    static model::Star* getNew();
+    static model::Star* getNew(const descriptor::BaseOLD&);
 
 private:
-    static Star* __getNewTemplate(int_t id = NONE);
+    static model::Star* __getNewTemplate(int_t id = NONE);
 };
 
-
+} // namespace builder
 

@@ -102,10 +102,17 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
     return !(*this == rhs);
 }
 
+model::Star*
+Starsystem::star() const
+{
+    assert(!m_stars.empty());
+    return m_stars[0]->model();
+}
+
 /* virtual */
 void Starsystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)        { global::get().entityManager().addToGarbage(m_stars[i]); }
+    for(unsigned int i=0; i<m_stars.size(); i++)        { global::get().entityManager().addToGarbage(m_stars[i]->model()); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { global::get().entityManager().addToGarbage(m_planets[i]->model()); }
     for(unsigned int i=0; i<m_asteroids.size(); i++)  { global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
     for(unsigned int i=0; i<m_containers.size(); i++) { global::get().entityManager().addToGarbage(m_containers[i]); }
@@ -207,8 +214,10 @@ void Starsystem::add(RocketBullet* rocket, const glm::vec3& position, const glm:
     m_bullets.push_back(rocket);
 }
 
-void Starsystem::add(Star* star)
+void Starsystem::add(model::Star* model)
 {
+    control::Star* star = new control::Star(model);
+
     star->setStarSystem(this);
     star->setPlaceTypeId(type::place::KOSMOS);
     m_stars.push_back(star);
@@ -724,11 +733,11 @@ void Starsystem::__updateEntities_s(int time, bool show_effect)
 {
     loadEntitiesResource(); // hack for speed run
 
-    for (unsigned int i=0; i<m_stars.size(); i++)             { m_stars[i]->UpdateInSpace(time, show_effect);  }
-    for (unsigned int i=0; i<m_planets.size(); i++)           { m_planets[i]->UpdateInSpace(time, show_effect); }
+    for (auto star: m_stars) { star->updateInSpace(time, show_effect);  }
+    for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_blackholes.size(); i++)        { m_blackholes[i]->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_asteroids.size(); i++)         { m_asteroids[i]->updateInSpace(time, show_effect); }
+    for (auto asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
     
     for (unsigned int i=0; i<m_vehicles.size(); i++)          { m_vehicles[i]->UpdateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_bullets.size(); i++)           { m_bullets[i]->UpdateInSpace(time, show_effect); }
@@ -769,14 +778,13 @@ void Starsystem::__updateInSpaceInStatic_s()
 
     for (Vehicle* vehicle: m_vehicles) {
         vehicle->npc()->updateInSpaceInStatic();
-        if (vehicle->subtype() == type::entity::SPACESTATION_ID)
-        {
-            ((SpaceStation*)vehicle)->land()->UpdateInStatic();
+        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
+            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
         }
     }
 
-    for (unsigned int i=0; i<m_stars.size(); i++)         { m_stars[i]->UpdateInSpaceInStatic(); }
-    for (unsigned int i=0; i<m_planets.size(); i++)         { m_planets[i]->UpdateInSpaceInStatic(); }
+    for (auto star: m_stars) { star->updateInSpaceInStatic(); }
+    for (auto planet: m_planets) { planet->updateInSpaceInStatic(); }
 
     //garbage_effects.clear();
 }      
@@ -986,7 +994,7 @@ void Starsystem::bombExplosionEvent(Container* container, bool show_effect)
 void Starsystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
-        if ( meti::distance(m_vehicles[i]->position(), star()->position()) < radius ) {
+        if ( meti::distance(m_vehicles[i]->position(), star()->position) < radius ) {
             if (m_vehicles[i]->radarSlot()->item() != nullptr) {
                 m_vehicles[i]->radarSlot()->item()->doLock(2);
             }

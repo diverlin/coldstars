@@ -21,49 +21,120 @@
 
 #include <spaceobjects/Planetoid.hpp>
 
+
+
+namespace model {
+
+class Star : public Planetoid {
+public:
+    static const int SCALE_MIN;
+    static const int SCALE_MAX;
+
+public:
+    Star() = default;
+    ~Star() = default;
+    Star(const std::string& data);
+    std::string data() const;
+
+    int turnSinceLastSparkCounter = 0;
+    int turnSparkThreshold = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & turnSinceLastSparkCounter;
+        ar & turnSparkThreshold;
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
 class Star : public Planetoid
 {
-    public:
-        Star(int);
-        virtual ~Star();
+public:
+    Star(model::Star*);
+    virtual ~Star();
 
-        //alpitodorender
-//        int GetColorId() const;
-//        float GetBrightThreshold() const;
-        float GetDeltaColor() const { return m_DeltaColor; }
-        
-        void hit(int) {}
-        void InitiateSpark();
-        
+    //alpitodorender
+    //        int colorId() const;
+    //        float brightThreshold() const;
+    //float deltaColor() const { return m_deltaColor; }
 
-       // alpitodorender void CalcColor();
-        void UpdateInSpaceInStatic();    
-        void UpdateInSpace(int, bool);
-        
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-                
-    private:
-        float m_DeltaColor;
-        
-        bool m_SparkActive;
-        bool m_SparkGrows;
-        
-        int m_TurnSinceLastSparkCounter;
-        int m_TurnSparkThreshold;
-        
-//        virtual void UpdateInfo() override final;
-        virtual void _postDeathUniqueEvent(bool) override final;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-}; 
+    void hit(int) {}
+    void initiateSpark();
+
+    // alpitodorender void CalcColor();
+    void updateInSpaceInStatic();
+    void updateInSpace(int, bool);
+
+    model::Star* model() const { return m_model_star; }
+
+private:
+    model::Star* m_model_star = nullptr;
+
+    float m_deltaColor = 0.0f;
+    bool m_sparkActive = false;
+    bool m_sparkGrows = false;
+
+    //        virtual void UpdateInfo() override final;
+
+    [[deprecated("ugly, remove")]]
+    void _postDeathUniqueEvent(bool);
+};
+
+} // namespace control
 
 
-    
 
-        
+//class Star : public Planetoid
+//{
+//public:
+//    Star(int);
+//    virtual ~Star();
+
+//    //alpitodorender
+//    //        int GetColorId() const;
+//    //        float GetBrightThreshold() const;
+//    float GetDeltaColor() const { return m_DeltaColor; }
+
+//    void hit(int) {}
+//    void InitiateSpark();
+
+
+//    // alpitodorender void CalcColor();
+//    void UpdateInSpaceInStatic();
+//    void UpdateInSpace(int, bool);
+
+//    virtual void Save(boost::property_tree::ptree&) const override final;
+//    virtual void Load(const boost::property_tree::ptree&) override final;
+//    virtual void Resolve() override final;
+
+//private:
+//    float m_DeltaColor;
+
+//    bool m_SparkActive;
+//    bool m_SparkGrows;
+
+//    int m_TurnSinceLastSparkCounter;
+//    int m_TurnSparkThreshold;
+
+//    //        virtual void UpdateInfo() override final;
+//    virtual void _postDeathUniqueEvent(bool) override final;
+
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+//};
+
+
+
+
+
 
 

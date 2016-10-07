@@ -30,28 +30,46 @@
 
 //#include <jeti/TextureOb.hpp>
 
-#include <glm/gtx/transform.hpp>
+//#include <glm/gtx/transform.hpp>
 
 #include <meti/RandUtils.hpp>
    
-Star::Star(int id)
-:
-m_DeltaColor(0.0),
-m_SparkActive(false),
-m_SparkGrows(false),
-m_TurnSinceLastSparkCounter(0)
-{ 
-    setId(id);
-    setTypeId(type::entity::STAR_ID);
+#include <ceti/serialization/macro.hpp>
 
-    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
-}
-  
-/* virtual */  
-Star::~Star()
+namespace model {
+
+const int Star::SCALE_MIN = 200;
+const int Star::SCALE_MAX = 300;
+
+Star::Star(const std::string& data)
 {
-    LOG("___::~Star("+std::to_string(id())+")");
+    MACRO_READ_SERIALIZED_DATA
 }
+
+std::string
+Star::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+
+namespace control {
+
+Star::Star(model::Star* model)
+:
+  Planetoid(model)
+, m_model_star(model)
+{
+//    setId(id);
+//    setTypeId(type::entity::STAR_ID);
+
+//    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
+}
+
+Star::~Star()
+{}
 
 
 //alpitodorender
@@ -59,72 +77,61 @@ Star::~Star()
 int Star::GetColorId() const { return textureOb().GetData().color_id; }
 
 float Star::GetBrightThreshold() const { return textureOb().GetData().brightThreshold; }
-            
+
 void Star::CalcColor()
 {
     SetColor(getColor4fById(textureOb().GetData().color_id));
 }
 */
-void Star::InitiateSpark()
+void Star::initiateSpark()
 {
-    m_SparkActive = true;
-    m_SparkGrows = true;
-    m_TurnSinceLastSparkCounter = 0;
+    m_sparkActive = true;
+    m_sparkGrows = true;
+    model()->turnSinceLastSparkCounter = 0;
 }
 
-void Star::UpdateInSpaceInStatic()
+void Star::updateInSpaceInStatic()
 {
-    if (m_TurnSinceLastSparkCounter > m_TurnSparkThreshold)
-    {
-        if (meti::getRandInt(1, 2) == 1)
-        {
-            InitiateSpark(); 
+    if (model()->turnSinceLastSparkCounter > model()->turnSparkThreshold) {
+        if (meti::getRandInt(1, 2) == 1) {
+            initiateSpark();
         }
-    }
-    else
-    {
-        m_TurnSinceLastSparkCounter++;    
+    } else {
+        model()->turnSinceLastSparkCounter++;
     }
 }
-               
-void Star::UpdateInSpace(int time, bool show_effect)
+
+void Star::updateInSpace(int time, bool show_effect)
 {
-    if (m_SparkActive == true)
-    {
-        if (show_effect == true)
-        {
-            if (m_SparkGrows == true)
-            {
-                m_DeltaColor += 0.02;
-                //scale += 0.2;
-                if (m_DeltaColor > 1.0)
-                {
-                    m_DeltaColor = 1.0;
-                    starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
-                    m_SparkGrows = false;
-                }
-            } 
-            else
-            {        
-                m_DeltaColor -= 0.005;    
-                //scale -= 0.05;
-                if (m_DeltaColor < 0.0)
-                {
-                    m_DeltaColor = 0;
-                    m_SparkActive = false;
-                } 
-            }
-        }
-        else
-        {
-            starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
-            m_SparkActive = false;
-        }
-    }
+//    if (m_sparkActive) {
+//        if (show_effect == true) {
+//            if (m_SparkGrows == true) {
+//                m_DeltaColor += 0.02;
+//                //scale += 0.2;
+//                if (m_DeltaColor > 1.0)
+//                {
+//                    m_DeltaColor = 1.0;
+//                    starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
+//                    m_SparkGrows = false;
+//                }
+//            } else {
+//                m_DeltaColor -= 0.005;
+//                //scale -= 0.05;
+//                if (m_DeltaColor < 0.0)
+//                {
+//                    m_DeltaColor = 0;
+//                    m_SparkActive = false;
+//                }
+//            }
+//        } else {
+//            starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
+//            m_SparkActive = false;
+//        }
+//    }
 
     //UpdateRotation(); // not relevant for render NEW
-}    
-    
+}
+
 ///* virtual override final */
 //void Star::UpdateInfo()
 //{
@@ -135,65 +142,168 @@ void Star::UpdateInSpace(int time, bool show_effect)
 //    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(center()) );
 //}
 
-/* virtual override final */
 void Star::_postDeathUniqueEvent(bool)
 {}
 
+} // namespace control
+
+
+//Star::Star(int id)
+//:
+//m_DeltaColor(0.0),
+//m_SparkActive(false),
+//m_SparkGrows(false),
+//m_TurnSinceLastSparkCounter(0)
+//{
+//    setId(id);
+//    setTypeId(type::entity::STAR_ID);
+
+//    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
+//}
+  
+//Star::~Star()
+//{}
+
+
+////alpitodorender
+///*
+//int Star::GetColorId() const { return textureOb().GetData().color_id; }
+
+//float Star::GetBrightThreshold() const { return textureOb().GetData().brightThreshold; }
+            
+//void Star::CalcColor()
+//{
+//    SetColor(getColor4fById(textureOb().GetData().color_id));
+//}
+//*/
+//void Star::InitiateSpark()
+//{
+//    m_SparkActive = true;
+//    m_SparkGrows = true;
+//    m_TurnSinceLastSparkCounter = 0;
+//}
+
+//void Star::UpdateInSpaceInStatic()
+//{
+//    if (m_TurnSinceLastSparkCounter > m_TurnSparkThreshold)
+//    {
+//        if (meti::getRandInt(1, 2) == 1)
+//        {
+//            InitiateSpark();
+//        }
+//    }
+//    else
+//    {
+//        m_TurnSinceLastSparkCounter++;
+//    }
+//}
+               
+//void Star::UpdateInSpace(int time, bool show_effect)
+//{
+//    if (m_SparkActive == true)
+//    {
+//        if (show_effect == true)
+//        {
+//            if (m_SparkGrows == true)
+//            {
+//                m_DeltaColor += 0.02;
+//                //scale += 0.2;
+//                if (m_DeltaColor > 1.0)
+//                {
+//                    m_DeltaColor = 1.0;
+//                    starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
+//                    m_SparkGrows = false;
+//                }
+//            }
+//            else
+//            {
+//                m_DeltaColor -= 0.005;
+//                //scale -= 0.05;
+//                if (m_DeltaColor < 0.0)
+//                {
+//                    m_DeltaColor = 0;
+//                    m_SparkActive = false;
+//                }
+//            }
+//        }
+//        else
+//        {
+//            starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
+//            m_SparkActive = false;
+//        }
+//    }
+
+//    //UpdateRotation(); // not relevant for render NEW
+//}
+    
+/////* virtual override final */
+////void Star::UpdateInfo()
+////{
+////    GetInfo().clear();
+////    GetInfo().addTitleStr("STAR");
+////    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+////    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
+////    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(center()) );
+////}
+
+//void Star::_postDeathUniqueEvent(bool)
+//{}
+
    
-void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    LOG(" Star("+std::to_string(id())+")::SaveData");
+//void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    LOG(" Star("+std::to_string(id())+")::SaveData");
     
-    save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
-    save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
-}
+//    save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
+//    save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
+//}
 
-void Star::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    LOG(" Star("+std::to_string(id())+")::LoadData");
+//void Star::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    LOG(" Star("+std::to_string(id())+")::LoadData");
     
-    m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
-    m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");    
-}
+//    m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
+//    m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");
+//}
 
-void Star::ResolveData()
-{
-    LOG(" Star("+std::to_string(id())+")::ResolveData");
+//void Star::ResolveData()
+//{
+//    LOG(" Star("+std::to_string(id())+")::ResolveData");
     
-    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this);     
-}
+//    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this);
+//}
 
-/* virtual override final */
-void Star::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "star." + std::to_string(id())+".";
+///* virtual override final */
+//void Star::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    std::string root = "star." + std::to_string(id())+".";
 
-    Base::SaveData(save_ptree, root);
-   // Orientation::SaveData(save_ptree, root);
-//    BaseDrawable::SaveData(save_ptree, root);
-    SpaceObject::SaveData(save_ptree, root);
-    Planetoid::SaveData(save_ptree, root);
-    Star::SaveData(save_ptree, root);
-}
+//    Base::SaveData(save_ptree, root);
+//   // Orientation::SaveData(save_ptree, root);
+////    BaseDrawable::SaveData(save_ptree, root);
+//    SpaceObject::SaveData(save_ptree, root);
+//    Planetoid::SaveData(save_ptree, root);
+//    Star::SaveData(save_ptree, root);
+//}
 
-/* virtual override final */
-void Star::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-//    Orientation::LoadData(load_ptree);
-//    BaseDrawable::LoadData(load_ptree);
-    SpaceObject::LoadData(load_ptree);
-    Planetoid::LoadData(load_ptree);
-    Star::LoadData(load_ptree);
-}
+///* virtual override final */
+//void Star::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+////    Orientation::LoadData(load_ptree);
+////    BaseDrawable::LoadData(load_ptree);
+//    SpaceObject::LoadData(load_ptree);
+//    Planetoid::LoadData(load_ptree);
+//    Star::LoadData(load_ptree);
+//}
 
-/* virtual override final */
-void Star::Resolve()
-{
-    Base::ResolveData();
- //   Orientation::ResolveData();
-//    BaseDrawable::ResolveData();
-    SpaceObject::ResolveData();
-    Planetoid::ResolveData();
-    Star::ResolveData();
-}
+///* virtual override final */
+//void Star::Resolve()
+//{
+//    Base::ResolveData();
+// //   Orientation::ResolveData();
+////    BaseDrawable::ResolveData();
+//    SpaceObject::ResolveData();
+//    Planetoid::ResolveData();
+//    Star::ResolveData();
+//}

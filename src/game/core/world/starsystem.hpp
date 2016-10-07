@@ -31,17 +31,18 @@
 
 class RocketBullet;
 class Planetoid;
-class Star;
 class Planet;
 
 namespace model {
-class Asteroid;
+class Star;
 class Planet;
+class Asteroid;
 } // namespace model
 
 namespace control {
-class Asteroid;
+class Star;
 class Planet;
+class Asteroid;
 } // namespace model
 
 class BlackHole;
@@ -146,7 +147,7 @@ class Starsystem : public SpaceObject
         int conditionId()     const { return m_condition_id; }
         type::race raceId()          const { return m_race_id; }
         type::race conquerorRaceId() const { return m_conqueror_race_id; }
-        Star* star()          const { return m_stars[0]; }
+        model::Star* star() const;
         Sector* sector()      const { return m_sector; }
 //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
         unsigned int asteroidNum()     const { return m_asteroids.size(); }
@@ -165,7 +166,7 @@ class Starsystem : public SpaceObject
         void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
-        void add(Star*);
+        void add(model::Star*);
         void add(model::Planet*, const SpaceObject* parent = nullptr, int it = 0);
         void add(model::Asteroid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
@@ -208,7 +209,7 @@ class Starsystem : public SpaceObject
         // poor
 
         std::vector<control::Planet*> planets() const { return m_planets; }
-        std::vector<Star*> stars() const { return m_stars; }
+        std::vector<control::Star*> stars() const { return m_stars; }
         std::vector<Vehicle*> vehicles() const { return m_vehicles; }
         std::vector<Container*> containers() const { return m_containers; }
 
@@ -240,7 +241,7 @@ class Starsystem : public SpaceObject
         // ENTITY VECTORS
         //std::vector<Player*>        PLAYER_vec;
 
-        std::vector<Star*> m_stars;
+        std::vector<control::Star*> m_stars;
         std::vector<control::Planet*> m_planets;
         std::vector<control::Asteroid*> m_asteroids;
         std::vector<Container*> m_containers;

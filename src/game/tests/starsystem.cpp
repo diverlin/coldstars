@@ -35,7 +35,7 @@ TEST(starsystem, add_objects)
     /* create opbjects */
     Starsystem* starsystem = StarsystemBuilder::create();
 
-    Star* star = StarBuilder::getNew();
+    model::Star* star = builder::StarBuilder::getNew();
     model::Planet* planet = builder::Planet::getNew();
     Ship* ship = ShipBuilder::getNew();
 

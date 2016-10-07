@@ -81,10 +81,10 @@ public:
     Land* land();
 
     [[warning("check const")]]
-    void AddVehicle(Vehicle*);
+    void addVehicle(Vehicle*);
 
-    void UpdateInSpace(int, bool);
-    void UpdateInSpaceInStatic();
+    void updateInSpace(int, bool);
+    void updateInSpaceInStatic();
 
     model::Planet* model() const { return m_model_planet; }
 
