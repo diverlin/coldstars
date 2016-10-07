@@ -91,20 +91,21 @@ public:
     std::string data() const;
 
     void setId(const int_t& id) { m_id = id; }
-    void setTypeId(const type::entity& major)   { m_type.type = major; }
-    void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
-    void setSubSubTypeId(const type::entity& patch) { m_type.subsubtype = patch; }
+    void setType(const type::entity& major)   { m_type.type = major; }
+    void setSubType(const type::entity& minor) { m_type.subtype = minor; }
+    void setSubSubType(const type::entity& patch) { m_type.subsubtype = patch; }
 
-    void setDescriptorId(const int_t& descriptor) { m_descriptor = descriptor; }
-    void setMeshId(int mesh_id) { m_mesh = mesh_id; }
-    void setTextureId(int texture_id) { m_material = texture_id; }
+    // resources
+    void setDescriptor(const int_t& descriptor) { m_descriptor = descriptor; }
+    void setMesh(int mesh) { m_mesh = mesh; }
+    void setMaterial(int material) { m_material = material; }
 
     const core::Id& ident() const { return m_type; }
     const int_t& id() const { return m_id; }
     const type::entity& type() const { return m_type.type; }
     const type::entity& subtype() const { return m_type.subtype; }
     const type::entity& subsubtype() const { return m_type.subsubtype; }
-    const int_t& descriptorId() const { assert(m_descriptor != -1); return m_descriptor; }
+    const int_t& descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
 
     std::string dataTypeStr() const;
 
@@ -142,8 +143,7 @@ public:
 
 private:
     model::Base* m_model_base = nullptr;
-    model::Base* model() const { return m_model_base; }
-    //friend class EntityManager;
+    //model::Base* model() const { return m_model_base; }
 };
 
 } // namespace control

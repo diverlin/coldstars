@@ -54,7 +54,7 @@ Planetoid::~Planetoid()
 
 void Planetoid::setPlanetDescriptor(int_t descriptor)
 {
-    model()->setDescriptorId(descriptor);
+    model()->setDescriptor(descriptor);
     if (!m_descriptor) {
         //m_descriptor = getDescriptor(descriptor) ... ;
         assert(m_descriptor);
