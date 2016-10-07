@@ -48,6 +48,11 @@ const int Planet::SPEED_MAX = 50;
 const int Planet::POPULATION_MIN = 6000;
 const int Planet::POPULATION_MAX = 20000;
 
+Planet::Planet()
+{
+    setType(type::entity::PLANET_ID);
+}
+
 Planet::Planet(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
@@ -67,10 +72,7 @@ Planet::Planet(model::Planet* model)
     :
       Planetoid(model)
     , m_model_planet(model)
-{    
-//    setId(id);
-//    setTypeId(type::entity::PLANET_ID);
-}
+{}
 
 Planet::~Planet()
 {}
@@ -84,7 +86,7 @@ void Planet::putChildrenToGarbage() const
 Land* Planet::land()
 {
     if (!m_land) {
-        m_land = static_cast<Land*>(global::get().entityManager().getEntity(model()->land));
+        m_land = static_cast<Land*>(global::get().entityManager().getEntity(model()->land()));
     }
 
     assert(m_land);
@@ -93,10 +95,9 @@ Land* Planet::land()
 
 void Planet::BindLand(Land* land)
 {
-    model()->land = land->id();
-    assert(false);
-    //model()->land->SetOwner(this);
-    //setSubTypeId(model()->land->type());
+    model()->setLand(land->id());
+    land->SetOwner(model());
+    model()->setSubType(land->type());
 }
 
 void Planet::addVehicle(Vehicle* vehicle)
@@ -105,7 +106,7 @@ void Planet::addVehicle(Vehicle* vehicle)
         vehicle->setStarSystem(starsystem());
     }
         
-    m_land->AddVehicle(vehicle);
+    land()->AddVehicle(vehicle);
 }
 
 void Planet::updateInSpace(int time, bool show_effect)
@@ -117,7 +118,7 @@ void Planet::updateInSpace(int time, bool show_effect)
 
 void Planet::updateInSpaceInStatic()
 {
-    m_land->UpdateInStatic();
+    land()->UpdateInStatic();
 }
 
 ///* virtual override final */

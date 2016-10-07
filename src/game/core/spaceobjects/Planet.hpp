@@ -43,13 +43,20 @@ public:
     static const int POPULATION_MAX;
 
 public:
-    Planet() = default;
+    Planet();
     ~Planet() = default;
     Planet(const std::string& data);
     std::string data() const;
 
-    int_t land = NONE;
-    int_t population = NONE;
+    void setPopulation(int_t population)  { m_population = population; }
+    void setLand(int_t land)  { m_land = land; }
+
+    int_t population() const { return m_population; }
+    int_t land() const { return m_land; }
+
+private:
+    int_t m_land = NONE;
+    int_t m_population = NONE;
 
 private:
     friend class boost::serialization::access;
@@ -57,8 +64,8 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<Planetoid>(*this);
-        ar & land;
-        ar & population;
+        ar & m_land;
+        ar & m_population;
     }
 };
 
@@ -74,9 +81,7 @@ public:
     virtual ~Planet();
 
     void BindLand(Land*);
-    void SetPopulation(unsigned long int population)  { model()->population = population; }
 
-    unsigned long int GetPopulation() const { return model()->population; }
     [[warning("check const")]]
     Land* land();
 

@@ -66,7 +66,8 @@ void SpaceStation::putChildrenToGarbage() const
 void SpaceStation::BindLand(Land* land)               
 {
     m_Land = land;
-    m_Land->SetOwner(this);
+    // TODO
+    //m_Land->SetOwner(this);
 }
  
 /* virtual override final */          

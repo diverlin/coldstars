@@ -333,9 +333,9 @@ Starsystem::closestInhabitedPlanet(const glm::vec2& _pos) const
     control::Planet* requested_planet = nullptr;
     
     std::vector<control::Planet*> tmp_planet_vec;
-    for(unsigned int i=0; i<m_planets.size(); i++) {
-        if (m_planets[i]->GetPopulation() > 0) {
-            tmp_planet_vec.push_back(m_planets[i]);
+    for(auto planet: m_planets) {
+        if (planet->model()->population() > 0) {
+            tmp_planet_vec.push_back(planet);
         }
     }
     
@@ -362,9 +362,9 @@ Starsystem::randomInhabitedPlanet() const
     control::Planet* requested_planet = nullptr;
 
     std::vector<control::Planet*> tmp_planet_vec;
-    for(unsigned int i=0; i<m_planets.size(); i++) {
-        if (m_planets[i]->GetPopulation() > 0) {
-            tmp_planet_vec.push_back(m_planets[i]);
+    for(auto planet: m_planets) {
+        if (planet->model()->population() > 0) {
+            tmp_planet_vec.push_back(planet);
         }
     }
     

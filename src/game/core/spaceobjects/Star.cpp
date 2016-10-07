@@ -87,17 +87,17 @@ void Star::initiateSpark()
 {
     m_sparkActive = true;
     m_sparkGrows = true;
-    model()->turnSinceLastSparkCounter = 0;
+    model()->setTurnSinceLastSparkCounter(0);
 }
 
 void Star::updateInSpaceInStatic()
 {
-    if (model()->turnSinceLastSparkCounter > model()->turnSparkThreshold) {
+    if (model()->turnSinceLastSparkCounter() > model()->turnSparkThreshold()) {
         if (meti::getRandInt(1, 2) == 1) {
             initiateSpark();
         }
     } else {
-        model()->turnSinceLastSparkCounter++;
+        model()->setTurnSinceLastSparkCounter(model()->turnSinceLastSparkCounter() + 1);
     }
 }
 
