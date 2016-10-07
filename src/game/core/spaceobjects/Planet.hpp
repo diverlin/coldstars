@@ -33,6 +33,16 @@ namespace model {
 
 class Planet : public Planetoid {
 public:
+    static const int DISTANCE_MIN;
+    static const int DISTANCE_MAX;
+    static const int SCALE_MIN;
+    static const int SCALE_MAX;
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
+    static const int POPULATION_MIN;
+    static const int POPULATION_MAX;
+
+public:
     Planet() = default;
     ~Planet() = default;
     Planet(const std::string& data);
