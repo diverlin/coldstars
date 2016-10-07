@@ -676,41 +676,40 @@ void Starsystem::__rocketCollision_s(bool show_effect)
 void Starsystem::__asteroidCollision_s(bool show_effect)
 {
     bool collide = false;    
-    for(unsigned int ai = 0; ai < m_asteroids.size(); ai++)
-    {
-        if (m_asteroids[ai]->isAlive() == true)
-        {
-            if (collide == false)
-            {
-                for (unsigned int vi = 0; vi < m_vehicles.size(); vi++)
-                {
-                    collide = ceti::checkCollision2D(m_asteroids[ai], m_vehicles[vi], show_effect);
-                    if (collide == true) { break; }
+    for(auto asteroid: m_asteroids) {
+        if (asteroid->isAlive()) {
+            if (!collide) {
+                for (auto vehicle: m_vehicles) {
+                    collide = ceti::checkCollision2D(asteroid, vehicle, show_effect);
+                    if (collide) {
+                        break;
+                    }
                 }
+            } else {
+                continue;
             }
-            else { continue; }
 
-            if (collide == false)
-            {
-                for (unsigned int pi = 0; pi < m_planets.size(); pi++)
-                {
-                    collide = ceti::checkCollision2D(m_asteroids[ai], m_planets[pi], show_effect);
-                    if (collide == true) { break; }
+            if (!collide) {
+                for (auto planet: m_planets) {
+                    collide = ceti::checkCollision2D(asteroid, planet, show_effect);
+                    if (collide) {
+                        break;
+                    }
                 }
+            } else {
+                continue;
             }
-            else { continue; }
 
-
-
-            if (collide == false)
-            {
-                for (unsigned int si = 0; si < m_stars.size(); si++)
-                {
-                    collide = ceti::checkCollision2D(m_asteroids[ai], m_stars[si], show_effect);
-                    if (collide == true) { break; }
+            if (!collide) {
+                for (auto star: m_stars) {
+                    collide = ceti::checkCollision2D(asteroid, star, show_effect);
+                    if (collide) {
+                        break;
+                    }
                 }
+            } else {
+                continue;
             }
-            else { continue; }
         }
     }
 }
