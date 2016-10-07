@@ -55,7 +55,7 @@ class Asteroid : public Planetoid
         Asteroid(model::Asteroid*);
         virtual ~Asteroid();
 
-        int damage() const { return mass()*10; };
+        int damage() const { return model()->mass()*10; }
 
         void updateInSpace(int, bool);
         void collisionEvent(bool);

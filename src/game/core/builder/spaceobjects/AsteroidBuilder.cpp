@@ -43,17 +43,17 @@ model::Asteroid* Asteroid::getNew()
 {
     model::Asteroid* model = __createTemplate();
 
-    LifeData data_life;
-    data_life.armor      = 10;
-    data_life.dying_time = 50;
-
     model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
     model->radiusA = meti::getRandInt(300, 1200);
     model->radiusB = meti::getRandInt(300, 1200);
     model->orbitPhi = meti::getRandInt(360);
     model->speed = 0.1f;
     model->clockwise = meti::getRandBool();
-    model->dataLife = data_life;
+
+    LifeData data_life;
+    data_life.armor      = 10;
+    data_life.dying_time = 50;
+    model->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);

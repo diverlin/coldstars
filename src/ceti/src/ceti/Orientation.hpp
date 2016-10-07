@@ -93,9 +93,10 @@ public:
     void setDirection(const meti::vec3& direction)   { assert(int(direction.length()) != 1); model()->direction = meti::normalize(direction); m_isUpdated = false; }
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
+    model::Orientation* model() const { return m_model_orientation; }
+
 private:
     model::Orientation* m_model_orientation = nullptr;
-    model::Orientation* model() const { return m_model_orientation; }
 
     bool m_isUpdated = false;
     float m_collisionRadius;

@@ -56,16 +56,16 @@ StarBuilder::getNew(const descriptor::BaseOLD& descr)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
-    LifeData data_life;
-    data_life.armor = descr.armor();
-
     model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
     model->radiusA = 50;
     model->radiusB = 50;
     model->orbitPhi = 0;
     model->speed = 1.8f;
 
-    model->dataLife = data_life;
+    LifeData data_life;
+    data_life.armor = descr.armor();
+    model->setLifeData(data_life);
+
     float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender star->SetRenderData(mesh, texOb, scale);

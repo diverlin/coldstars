@@ -62,9 +62,6 @@ Planet::getNew(const descriptor::BaseOLD& descr)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
-    LifeData data_life;
-    data_life.armor = descr.armor();
-
     int orbit_radius = 1000; // hack
     model->orbitCenter = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
     model->radiusA = orbit_radius;
@@ -73,7 +70,9 @@ Planet::getNew(const descriptor::BaseOLD& descr)
     model->speed  = meti::getRandInt(model::Planet::SPEED_MIN, model::Planet::SPEED_MAX) / float(orbit_radius);
     model->clockwise = meti::getRandBool();
 
-    model->dataLife = data_life;
+    LifeData data_life;
+    data_life.armor = descr.armor();
+    model->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
