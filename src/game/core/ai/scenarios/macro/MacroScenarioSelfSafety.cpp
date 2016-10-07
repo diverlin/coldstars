@@ -37,8 +37,8 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
     {
         if (npc->stateMachine().macroTaskManager().target()->type() != type::entity::PLANET_ID)
         { 
-            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->planetForDocking()->id());
-            npc->stateMachine().setCurrentMicroTask(microtask);
+//            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->planetForDocking()->id());
+//            npc->stateMachine().setCurrentMicroTask(microtask);
         }
     }
     else

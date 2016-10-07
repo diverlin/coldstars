@@ -40,6 +40,10 @@
 
 namespace model {
 
+const int Asteroid::SCALE_MIN = 20;
+const int Asteroid::SCALE_MAX = 40;
+const int Asteroid::EXPIRIENCE_TO_GIVE = 100;
+
 Asteroid::Asteroid(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

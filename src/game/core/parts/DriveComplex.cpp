@@ -222,7 +222,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
         case type::entity::PLANET_ID:
         { 
             //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;             
-            m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset; 
+            //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
             break;                   
         } 
 
@@ -268,7 +268,7 @@ bool DriveComplex::GetDockingPermission()
 {
     switch(m_target->type())
     {
-        case type::entity::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
+        //case type::entity::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
         case type::entity::VEHICLE_ID: 
         { 
             switch(m_target->subtype())

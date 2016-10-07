@@ -33,49 +33,47 @@
 #include <meti/RandUtils.hpp>
 
 
-PlanetBuilder::PlanetBuilder()
-{}
+namespace builder {
 
-PlanetBuilder::~PlanetBuilder()
-{}
-
-Planet* PlanetBuilder::__createTemplate(int_t id)
+model::Planet*
+Planet::__createTemplate(int_t id)
 {
-    Planet* planet = new Planet(id);
-    assert(planet);
+    model::Planet* model = new model::Planet;
+    model->id = id;
+    assert(model);
 
-    global::get().entityManager().reg(planet);
+    global::get().entityManager().reg(model);
     
-    return planet;
-} 
-       
-Planet* PlanetBuilder::getNew()
+    return model;
+}
+
+model::Planet*
+Planet::getNew()
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::PLANET);
     return getNew(descr);
 } 
      
-Planet* PlanetBuilder::getNew(const descriptor::BaseOLD& descr)
+model::Planet*
+Planet::getNew(const descriptor::BaseOLD& descr)
 {
+    model::Planet* model = __createTemplate();
+
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
     LifeData data_life;
     data_life.armor = descr.armor();
 
-    PlanetDescriptor planet_data;
-
     int orbit_radius = 1000; // hack
-    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
-    planet_data.radius_A      = orbit_radius;
-    planet_data.radius_B      = orbit_radius;
-    planet_data.orbit_phi_inD = 0;
-    planet_data.speed         = (float)meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
-    planet_data.clockwise     = meti::getRandBool();
+    model->orbitCenter = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
+    model->radiusA = orbit_radius;
+    model->radiusB = orbit_radius;
+    model->orbitPhi = 0;
+    model->speed  = meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / float(orbit_radius);
+    model->clockwise = meti::getRandBool();
 
-    Planet* planet = __createTemplate();
-    planet->setPlanetDescriptor(planet_data);
-    planet->setLifeData(data_life);
+    model->dataLife = data_life;
 
     float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -105,7 +103,7 @@ Planet* PlanetBuilder::getNew(const descriptor::BaseOLD& descr)
         planet->AddDecoration(ring);
     }
     */
-    return planet;
+    return model;
 }
 
-
+} // namespace builder

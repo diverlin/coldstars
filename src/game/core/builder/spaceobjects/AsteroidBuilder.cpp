@@ -17,24 +17,18 @@
 */
 
 #include "AsteroidBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/Asteroid.hpp"
+#include <builder/CommonBuilderHeaders.hpp>
+#include <spaceobjects/Asteroid.hpp>
 
 #include <common/constants.hpp>
 
-#include <types/MeshTypes.hpp>
+//#include <types/MeshTypes.hpp>
 
 #include <meti/RandUtils.hpp>
 
 namespace builder {
 
-Asteroid::Asteroid()
-{}
-
-Asteroid::~Asteroid()
-{}
-
-model::Asteroid* Asteroid::createTemplate(int_t id)
+model::Asteroid* Asteroid::__createTemplate(int_t id)
 { 
     model::Asteroid* model = new model::Asteroid;
     model->id = id;
@@ -45,20 +39,14 @@ model::Asteroid* Asteroid::createTemplate(int_t id)
     return model;
 } 
 
-model::Asteroid* Asteroid::create()
+model::Asteroid* Asteroid::getNew()
 {
-    model::Asteroid* model = createTemplate();
-    createInternals(model);
-        
-    return model;
-} 
-           
-void Asteroid::createInternals(model::Asteroid* model)
-{           
-    LifeData data_life;   
+    model::Asteroid* model = __createTemplate();
+
+    LifeData data_life;
     data_life.armor      = 10;
     data_life.dying_time = 50;
-    
+
     model->orbitCenter = meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
     model->radiusA = meti::getRandInt(300, 1200);
     model->radiusB = meti::getRandInt(300, 1200);
@@ -67,12 +55,12 @@ void Asteroid::createInternals(model::Asteroid* model)
     model->clockwise = meti::getRandBool();
     model->dataLife = data_life;
 
-    float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
+    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
-          
+
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 
     float delta_angle = 0.0001*meti::getRandInt(20, 60);
@@ -81,8 +69,10 @@ void Asteroid::createInternals(model::Asteroid* model)
 
     // todo
     //model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
-}
-
+        
+    return model;
+} 
+           
 } // namespace builder
 
 

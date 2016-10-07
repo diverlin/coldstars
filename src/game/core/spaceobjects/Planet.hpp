@@ -76,11 +76,11 @@ public:
     void UpdateInSpace(int, bool);
     void UpdateInSpaceInStatic();
 
+    model::Planet* model() const { return m_model_planet; }
+
 private:
     model::Planet* m_model_planet = nullptr;
     Land* m_land = nullptr;
-
-    model::Planet* model() const { return m_model_planet; }
 
     [[deprecated("ugly, remove")]]
     virtual void putChildrenToGarbage() const override final;
@@ -95,42 +95,42 @@ private:
 
 
 
-class Planet : public Planetoid
-{
-public:
-    Planet(int);
-    virtual ~Planet();
+//class Planet : public Planetoid
+//{
+//public:
+//    Planet(int);
+//    virtual ~Planet();
 
-    void BindLand(Land*);
-    void SetPopulation(unsigned long int population)  { m_population = population; }
+//    void BindLand(Land*);
+//    void SetPopulation(unsigned long int population)  { m_population = population; }
 
-    unsigned long int GetPopulation() const { return m_population; }
-    Land* const GetLand() const { return m_land; }
+//    unsigned long int GetPopulation() const { return m_population; }
+//    Land* const GetLand() const { return m_land; }
 
-    void AddVehicle(Vehicle*) const;
+//    void AddVehicle(Vehicle*) const;
 
-    void UpdateInSpace(int, bool);
-    void UpdateInSpaceInStatic();
+//    void UpdateInSpace(int, bool);
+//    void UpdateInSpaceInStatic();
 
-    virtual void Save(boost::property_tree::ptree&) const override final;
-    virtual void Load(const boost::property_tree::ptree&) override final;
-    virtual void Resolve() override final;
+//    virtual void Save(boost::property_tree::ptree&) const override final;
+//    virtual void Load(const boost::property_tree::ptree&) override final;
+//    virtual void Resolve() override final;
 
-private:
-    Land* m_land;
+//private:
+//    Land* m_land;
 
-    unsigned long int m_population;
+//    unsigned long int m_population;
 
-    virtual void putChildrenToGarbage() const override final;
+//    virtual void putChildrenToGarbage() const override final;
 
-    //        virtual void UpdateInfo() override final;
+//    //        virtual void UpdateInfo() override final;
 
-    void _postDeathUniqueEvent(bool);
+//    void _postDeathUniqueEvent(bool);
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
-};
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+//};
 
 
 

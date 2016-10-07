@@ -36,10 +36,12 @@ class Planet;
 
 namespace model {
 class Asteroid;
+class Planet;
 } // namespace model
 
 namespace control {
 class Asteroid;
+class Planet;
 } // namespace model
 
 class BlackHole;
@@ -164,7 +166,7 @@ class Starsystem : public SpaceObject
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
         void add(Star*);
-        void add(Planet*, const SpaceObject* parent = nullptr, int it = 0);
+        void add(model::Planet*, const SpaceObject* parent = nullptr, int it = 0);
         void add(model::Asteroid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);
@@ -205,14 +207,14 @@ class Starsystem : public SpaceObject
 
         // poor
 
-        std::vector<Planet*> planets() const { return m_planets; }
+        std::vector<control::Planet*> planets() const { return m_planets; }
         std::vector<Star*> stars() const { return m_stars; }
         std::vector<Vehicle*> vehicles() const { return m_vehicles; }
         std::vector<Container*> containers() const { return m_containers; }
 
-        Planet* closestInhabitedPlanet(const glm::vec2&) const;
-        Planet* randomInhabitedPlanet() const;
-        Planet* randomPlanet() const;
+        model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
+        model::Planet* randomInhabitedPlanet() const;
+        model::Planet* randomPlanet() const;
         Vehicle* randomVehicle() const;
         Vehicle* randomVehicleExcludingNpcRaceId(type::race) const;
         Vehicle* randVehicleByNpcRaceId(type::race) const;
@@ -238,12 +240,12 @@ class Starsystem : public SpaceObject
         // ENTITY VECTORS
         //std::vector<Player*>        PLAYER_vec;
 
-        std::vector<Star*>         m_stars;
-        std::vector<Planet*>       m_planets;
-        std::vector<control::Asteroid*>     m_asteroids;
-        std::vector<Container*>    m_containers;
+        std::vector<Star*> m_stars;
+        std::vector<control::Planet*> m_planets;
+        std::vector<control::Asteroid*> m_asteroids;
+        std::vector<Container*> m_containers;
         std::vector<RocketBullet*> m_bullets;
-        std::vector<BlackHole*>    m_blackholes;
+        std::vector<BlackHole*> m_blackholes;
         
         std::vector<Vehicle*> m_vehicles;
         HyperSpace m_hyperspace;

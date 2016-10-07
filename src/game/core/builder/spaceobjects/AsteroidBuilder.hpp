@@ -21,35 +21,18 @@
 #include <ceti/type/IdType.hpp>
 
 namespace model {
-
 class Asteroid;
-
 } // namespace model
-
-namespace ENTITY
-{
-namespace ASTEROID
-{
-const int SCALE_MIN = 20;
-const int SCALE_MAX = 40;
-
-const int GIVEN_EXPIRIENCE = 100;
-}
-}
 
 namespace builder {
 
 class Asteroid
 {
 public:
-    Asteroid();
-    ~Asteroid();
-
-    static model::Asteroid* create();
+    static model::Asteroid* getNew();
 
 private:
-    static model::Asteroid* createTemplate(int_t id = NONE);
-    static void createInternals(model::Asteroid*);
+    static model::Asteroid* __createTemplate(int_t id = NONE);
 }; 
 
 } // namespace builder

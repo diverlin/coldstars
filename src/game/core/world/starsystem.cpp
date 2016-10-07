@@ -106,7 +106,7 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
 void Starsystem::putChildrenToGarbage() const
 {    
     for(unsigned int i=0; i<m_stars.size(); i++)        { global::get().entityManager().addToGarbage(m_stars[i]); }
-    for(unsigned int i=0; i<m_planets.size(); i++)    { global::get().entityManager().addToGarbage(m_planets[i]); }
+    for(unsigned int i=0; i<m_planets.size(); i++)    { global::get().entityManager().addToGarbage(m_planets[i]->model()); }
     for(unsigned int i=0; i<m_asteroids.size(); i++)  { global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
     for(unsigned int i=0; i<m_containers.size(); i++) { global::get().entityManager().addToGarbage(m_containers[i]); }
     for(unsigned int i=0; i<m_bullets.size(); i++)    { global::get().entityManager().addToGarbage(m_bullets[i]); }
@@ -214,9 +214,11 @@ void Starsystem::add(Star* star)
     m_stars.push_back(star);
 }
 
-void Starsystem::add(Planet* planet, const SpaceObject* parent, int it)
+void Starsystem::add(model::Planet* model, const SpaceObject* parent, int it)
 {
-    planet->bindParent(parent, it);
+    control::Planet* planet = new control::Planet(model);
+
+    //planet->bindParent(parent, it);
 
     planet->setStarSystem(this);
     planet->setPlaceTypeId(type::place::KOSMOS);
@@ -312,70 +314,63 @@ void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
 //// ******* TRANSITION ******* 
 
 // poor                
-Planet* Starsystem::closestInhabitedPlanet(const glm::vec2& _pos) const
+model::Planet*
+Starsystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 {        
-    Planet* requested_planet = nullptr;
+    control::Planet* requested_planet = nullptr;
     
-    std::vector<Planet*> tmp_planet_vec;
-    for(unsigned int i=0; i<m_planets.size(); i++)
-    {
-        if (m_planets[i]->GetPopulation() > 0)
-        {
+    std::vector<control::Planet*> tmp_planet_vec;
+    for(unsigned int i=0; i<m_planets.size(); i++) {
+        if (m_planets[i]->GetPopulation() > 0) {
             tmp_planet_vec.push_back(m_planets[i]);
         }
     }
     
-    if (tmp_planet_vec.size() >= 1)
-    {
+    if (tmp_planet_vec.size() >= 1) {
         requested_planet = tmp_planet_vec[0];
         float dist_min = meti::distance(_pos, tmp_planet_vec[0]->position());
-        if (tmp_planet_vec.size() > 1)
-        {
-            for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
-            {
+        if (tmp_planet_vec.size() > 1) {
+            for (unsigned int i=1; i<tmp_planet_vec.size(); i++) {
                 float dist = meti::distance(_pos, tmp_planet_vec[i]->position());
-                if (dist < dist_min)
-                {
+                if (dist < dist_min) {
                     requested_planet = tmp_planet_vec[i];
                     dist_min = dist;
                 }
             }
-
         }
     }
     
-    return requested_planet;
+    return requested_planet->model();
 }
 
-Planet* Starsystem::randomInhabitedPlanet() const
+model::Planet*
+Starsystem::randomInhabitedPlanet() const
 {
-    Planet* requested_planet = nullptr;
+    control::Planet* requested_planet = nullptr;
 
-    std::vector<Planet*> tmp_planet_vec;
-    for(unsigned int i=0; i<m_planets.size(); i++)
-    {
-        if (m_planets[i]->GetPopulation() > 0)
-        {
+    std::vector<control::Planet*> tmp_planet_vec;
+    for(unsigned int i=0; i<m_planets.size(); i++) {
+        if (m_planets[i]->GetPopulation() > 0) {
             tmp_planet_vec.push_back(m_planets[i]);
         }
     }
     
-    if (tmp_planet_vec.size() >= 1)
-    {
-        requested_planet = tmp_planet_vec[meti::getRandInt(tmp_planet_vec.size()-1)];
+    if (tmp_planet_vec.size() >= 1)  {
+        requested_planet = meti::getRand(tmp_planet_vec);
     }
 
-    return requested_planet;
+    return requested_planet->model();
 }
 
-Planet* Starsystem::randomPlanet() const
+model::Planet*
+Starsystem::randomPlanet() const
 {
-    return m_planets[meti::getRandInt(m_planets.size()-1)];
+    return meti::getRand(m_planets)->model();
 }
 
 Vehicle* Starsystem::randomVehicle() const
 {
-    return m_vehicles[meti::getRandInt(m_vehicles.size()-1)];
+    return meti::getRand(m_vehicles);
 }
 
 Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const

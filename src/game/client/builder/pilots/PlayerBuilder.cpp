@@ -45,17 +45,14 @@ PlayerBuilder::~PlayerBuilder()
 Player* PlayerBuilder::GetNewPlayerTemplate(const int_t& id) const
 {
     Player* player = nullptr;
-    if (id == NONE)
-    {
+    if (id == NONE) {
         //id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         player = new Player(id);
     }
-    catch(std::bad_alloc)
-    {
+    catch(std::bad_alloc) {
         //Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
         

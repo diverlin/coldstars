@@ -21,8 +21,9 @@
 
 #include <ceti/type/IdType.hpp>
 
-
+namespace model {
 class Planet;
+} // namespace model
 
 namespace descriptor {
 class BaseOLD;
@@ -30,29 +31,29 @@ class BaseOLD;
 
 namespace ENTITY
 {
-    namespace PLANET
-    {
-        const int DISTANCE_MIN = 400;
-        const int DISTANCE_MAX = 500;
-        const int SCALE_MIN = 100;
-        const int SCALE_MAX = 190;
-        const int SPEED_MIN = 40;
-        const int SPEED_MAX = 50;
-        const int POPULATION_MIN = 6000;
-        const int POPULATION_MAX = 20000;
-    }
+namespace PLANET
+{
+const int DISTANCE_MIN = 400;
+const int DISTANCE_MAX = 500;
+const int SCALE_MIN = 100;
+const int SCALE_MAX = 190;
+const int SPEED_MIN = 40;
+const int SPEED_MAX = 50;
+const int POPULATION_MIN = 6000;
+const int POPULATION_MAX = 20000;
+}
 }    
     
+namespace builder {
 
-class PlanetBuilder
+class Planet
 {
 public:
-    PlanetBuilder();
-    ~PlanetBuilder();
-
-    static Planet* getNew(const descriptor::BaseOLD&);
-    static Planet* getNew();
+    static model::Planet* getNew(const descriptor::BaseOLD&);
+    static model::Planet* getNew();
 
 private:
-    static Planet* __createTemplate(int_t id = NONE);
+    static model::Planet* __createTemplate(int_t id = NONE);
 }; 
+
+} // namespace builder
