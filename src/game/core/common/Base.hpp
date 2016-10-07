@@ -90,24 +90,39 @@ public:
     Base(const std::string& data);
     std::string data() const;
 
-    core::Id type;
+    void setId(const int_t& id) { m_id = id; }
+    void setTypeId(const type::entity& major)   { m_type.type = major; }
+    void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
+    void setSubSubTypeId(const type::entity& patch) { m_type.subsubtype = patch; }
 
-    int_t descriptor = NONE;
-    int_t id = NONE;
+    void setDescriptorId(const int_t& descriptor) { m_descriptor = descriptor; }
+    void setMeshId(int mesh_id) { m_mesh = mesh_id; }
+    void setTextureId(int texture_id) { m_material = texture_id; }
 
-    int_t mesh = NONE;
-    int_t material = NONE;
+    const core::Id& ident() const { return m_type; }
+    const int_t& id() const { return m_id; }
+    const type::entity& type() const { return m_type.type; }
+    const type::entity& subtype() const { return m_type.subtype; }
+    const type::entity& subsubtype() const { return m_type.subsubtype; }
+    const int_t& descriptorId() const { assert(m_descriptor != -1); return m_descriptor; }
+
+private:
+    core::Id m_type;
+    int_t m_descriptor = NONE;
+    int_t m_id = NONE;
+    int_t m_mesh = NONE;
+    int_t m_material = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & type;
-        ar & descriptor;
-        ar & id;
-        ar & mesh;
-        ar & material;
+        ar & m_type;
+        ar & m_descriptor;
+        ar & m_id;
+        ar & m_mesh;
+        ar & m_material;
     }
 };
 
@@ -122,33 +137,25 @@ public:
     virtual ~Base();
 
     virtual void putChildrenToGarbage() const {}
-    void setSubSubTypeId(type::entity patch) { model()->type.subsubtype = patch; }
+    void setSubSubTypeId(type::entity patch) { model()->setSubSubTypeId(patch); }
 
-    void setMeshId(int mesh_id) { model()->mesh = mesh_id; }
-    void setTextureId(int texture_id) { model()->material = texture_id; }
+    void setMeshId(int mesh_id) { model()->setMeshId(mesh_id); }
+    void setTextureId(int texture_id) { model()->setTextureId(texture_id); }
 
-    const core::Id& ident() const { return model()->type; }
-    const int_t& id() const { return model()->id; }
-    const type::entity& type() const { return model()->type.type; }
-    const type::entity& subtype() const { return model()->type.subtype; }
-    const type::entity& subsubtype() const { return model()->type.subsubtype; }
-    const int_t& descriptorId() const { assert(model()->descriptor != -1); return model()->descriptor; }
+    const core::Id& ident() const { return model()->ident(); }
+    const int_t& id() const { return model()->id(); }
+    const type::entity& type() const { return model()->type(); }
+    const type::entity& subtype() const { return model()->subtype(); }
+    const type::entity& subsubtype() const { return model()->subsubtype(); }
+    const int_t& descriptorId() const { assert(model()->descriptorId() != -1); return model()->descriptorId(); }
 
     std::string dataTypeStr() const;
 
-    virtual void Save(boost::property_tree::ptree&) const {}
-    virtual void Load(const boost::property_tree::ptree&) {}
-    virtual void Resolve() {}
-
-    void setId(const int_t& id) { model()->id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
+    void setId(const int_t& id) { model()->setId(id); /*assert(id != 0);*/ } // MAKE PROTECTED
 
 protected:
-    void setTypeId(const type::entity& major)   { model()->type.type = major; }
-    void setSubTypeId(const type::entity& minor) { model()->type.subtype = minor; }
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
+    void setTypeId(const type::entity& major)   { model()->setTypeId(major); }
+    void setSubTypeId(const type::entity& minor) { model()->setSubTypeId(minor); }
 
 private:
     model::Base* m_model_base = nullptr;

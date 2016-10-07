@@ -31,7 +31,7 @@ namespace builder {
 model::Asteroid* Asteroid::__createTemplate(int_t id)
 { 
     model::Asteroid* model = new model::Asteroid;
-    model->id = id;
+    model->setId(id);
     assert(model);
 
     global::get().entityManager().reg(model);

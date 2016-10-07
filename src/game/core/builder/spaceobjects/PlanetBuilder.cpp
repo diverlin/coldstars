@@ -39,7 +39,7 @@ model::Planet*
 Planet::__createTemplate(int_t id)
 {
     model::Planet* model = new model::Planet;
-    model->id = id;
+    model->setId(id);
     assert(model);
 
     global::get().entityManager().reg(model);
