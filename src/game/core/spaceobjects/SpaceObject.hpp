@@ -47,6 +47,7 @@ public:
     SpaceObject(const std::string& data);
     std::string data() const;
 
+    int armor() const { return dataLife.armor; }
     LifeData dataLife;
 
     int_t parent = NONE;

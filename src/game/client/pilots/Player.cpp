@@ -795,18 +795,17 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
-    for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
-    { 
-        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius())
-        {   
-            cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
+//    for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
+//    {
+//        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius()) {
+//            cursor.SetFocusedSpaceObject(visible_STAR_vec[i]);
                 
-            return true; 
-        }
-    }
+//            return true;
+//        }
+//    }
     
-    return false;
+//    return false;
 }
 
 void Player::MouseNavigation(const MouseData& data_mouse) const

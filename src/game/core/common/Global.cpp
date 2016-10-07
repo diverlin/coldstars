@@ -146,11 +146,11 @@ global::global()
     , m_npcBuilder(new NpcBuilder)
 //    , m_itemSlotBuilder(new ItemSlotBuilder)
 //    , m_vehicleSlotBuilder(new VehicleSlotBuilder)
-    , m_asteroidBuilder(new builder::Asteroid)
+//    , m_asteroidBuilder(new builder::Asteroid)
     , m_blackHoleBuilder(new BlackHoleBuilder)
     , m_containerBuilder(new ContainerBuilder)
     //, m_planetBuilder(new PlanetBuilder)
-    , m_starBuilder(new StarBuilder)
+    //, m_starBuilder(new StarBuilder)
     , m_rocketBulletBuilder(new RocketBulletBuilder)
     , m_satelliteBuilder(new SatelliteBuilder)
     , m_spaceStationBuilder(new SpaceStationBuilder)
@@ -216,11 +216,11 @@ global::~global()
 //    delete m_itemSlotBuilder;
 //    delete m_vehicleSlotBuilder;
 
-    delete m_asteroidBuilder;
+//    delete m_asteroidBuilder;
     delete m_blackHoleBuilder;
     delete m_containerBuilder;
-    delete m_planetBuilder;
-    delete m_starBuilder;
+//    delete m_planetBuilder;
+//    delete m_starBuilder;
     delete m_rocketBulletBuilder;
     delete m_satelliteBuilder;
     delete m_spaceStationBuilder;

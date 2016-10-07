@@ -164,11 +164,11 @@ public:
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
-    builder::Asteroid& asteroidBuilder() { return *m_asteroidBuilder; }
+//    builder::Asteroid& asteroidBuilder() { return *m_asteroidBuilder; }
     BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
     ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
-    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
-    StarBuilder& starBuilder() { return *m_starBuilder; }
+//    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
+//    StarBuilder& starBuilder() { return *m_starBuilder; }
     RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
     SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
     SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
@@ -241,11 +241,11 @@ private:
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
-    builder::Asteroid* m_asteroidBuilder = nullptr;
+//    builder::Asteroid* m_asteroidBuilder = nullptr;
     BlackHoleBuilder* m_blackHoleBuilder = nullptr;
     ContainerBuilder* m_containerBuilder = nullptr;
-    PlanetBuilder* m_planetBuilder = nullptr;
-    StarBuilder* m_starBuilder = nullptr;
+//    PlanetBuilder* m_planetBuilder = nullptr;
+//    StarBuilder* m_starBuilder = nullptr;
     RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
     SatelliteBuilder* m_satelliteBuilder = nullptr;
     //ShipBuilder* m_shipBuilder = nullptr;
