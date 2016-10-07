@@ -256,8 +256,8 @@ void Starsystem::add(Container* container, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
         
-    for (unsigned int i=0; i<m_containers.size(); i++) {
-        if (m_containers[i]->id() == container->id()) {
+    for (auto _container: m_containers) {
+        if (_container->id() == container->id()) {
             //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
             exit(1);
         }
