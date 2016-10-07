@@ -106,6 +106,8 @@ public:
     const type::entity& subsubtype() const { return m_type.subsubtype; }
     const int_t& descriptorId() const { assert(m_descriptor != -1); return m_descriptor; }
 
+    std::string dataTypeStr() const;
+
 private:
     core::Id m_type;
     int_t m_descriptor = NONE;
@@ -137,30 +139,11 @@ public:
     virtual ~Base();
 
     virtual void putChildrenToGarbage() const {}
-    void setSubSubTypeId(type::entity patch) { model()->setSubSubTypeId(patch); }
-
-    void setMeshId(int mesh_id) { model()->setMeshId(mesh_id); }
-    void setTextureId(int texture_id) { model()->setTextureId(texture_id); }
-
-    const core::Id& ident() const { return model()->ident(); }
-    const int_t& id() const { return model()->id(); }
-    const type::entity& type() const { return model()->type(); }
-    const type::entity& subtype() const { return model()->subtype(); }
-    const type::entity& subsubtype() const { return model()->subsubtype(); }
-    const int_t& descriptorId() const { assert(model()->descriptorId() != -1); return model()->descriptorId(); }
-
-    std::string dataTypeStr() const;
-
-    void setId(const int_t& id) { model()->setId(id); /*assert(id != 0);*/ } // MAKE PROTECTED
-
-protected:
-    void setTypeId(const type::entity& major)   { model()->setTypeId(major); }
-    void setSubTypeId(const type::entity& minor) { model()->setSubTypeId(minor); }
 
 private:
     model::Base* m_model_base = nullptr;
     model::Base* model() const { return m_model_base; }
-    friend class EntityManager;
+    //friend class EntityManager;
 };
 
 } // namespace control

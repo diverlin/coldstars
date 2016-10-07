@@ -64,7 +64,7 @@ void SpaceObject::setStarSystem(Starsystem* starsystem)
 
 void SpaceObject::setParent(SpaceObject* parent)
 {
-    model()->parent = parent->id();
+    model()->parent = parent->model()->id();
 }
 
 Starsystem* SpaceObject::starsystem()
@@ -93,7 +93,7 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
 /* virtual */
 void SpaceObject::hit(int damage)
 {
-    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
+    LOG(std::string("SpaceObject::hit id=") << std::to_string(model()->id()) << " damage=" << std::to_string(damage));
     model()->dataLife.armor -= damage;
     if (model()->dataLife.armor <= 0) {
         model()->dataLife.armor = 0;
