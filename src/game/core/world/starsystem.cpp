@@ -216,35 +216,39 @@ void Starsystem::add(RocketBullet* rocket, const glm::vec3& position, const glm:
 
 void Starsystem::add(model::Star* model)
 {
-    control::Star* star = new control::Star(model);
+    model->setStarSystem(this->id());
+    model->setPlace(type::place::KOSMOS);
 
-    star->setStarSystem(this);
-    star->setPlaceTypeId(type::place::KOSMOS);
+    control::Star* star = new control::Star(model);
     m_stars.push_back(star);
 }
 
-void Starsystem::add(model::Planet* model, const SpaceObject* parent, int it)
+void Starsystem::add(model::Planet* model, const model::SpaceObject* parent, int it)
 {
-    control::Planet* planet = new control::Planet(model);
-
     //planet->bindParent(parent, it);
 
-    planet->setStarSystem(this);
-    planet->setPlaceTypeId(type::place::KOSMOS);
+    if (parent) {
+        model->setParent(parent->id());
+    }
+    model->setStarSystem(this->id());
+    model->setPlace(type::place::KOSMOS);
 
+    control::Planet* planet = new control::Planet(model);
     m_planets.push_back(planet);
 }
 
 
-void Starsystem::add(model::Asteroid* model, const SpaceObject* parent, int it)
+void Starsystem::add(model::Asteroid* model, const model::SpaceObject* parent, int it)
 {
-    control::Asteroid* asteroid = new control::Asteroid(model);
-
     //asteroid->bindParent(parent, it);
     
-    asteroid->setStarSystem(this);
-    asteroid->setPlaceTypeId(type::place::KOSMOS);
+    if (parent) {
+        model->setParent(parent->id());
+    }
+    model->setStarSystem(this->id());
+    model->setPlace(type::place::KOSMOS);
 
+    control::Asteroid* asteroid = new control::Asteroid(model);
     m_asteroids.push_back(asteroid);
 }
 
@@ -677,7 +681,7 @@ void Starsystem::__asteroidCollision_s(bool show_effect)
 {
     bool collide = false;    
     for(auto asteroid: m_asteroids) {
-        if (asteroid->isAlive()) {
+        if (asteroid->model()->isAlive()) {
             if (!collide) {
                 for (auto vehicle: m_vehicles) {
                     collide = ceti::checkCollision2D(asteroid, vehicle, show_effect);

@@ -67,7 +67,7 @@ Asteroid::Asteroid(model::Asteroid* model)
 //    setId(id);
 //    setTypeId(type::entity::ASTEROID_ID);
 
-    setMass(meti::getRandInt(10, 30));
+    this->model()->setMass(meti::getRandInt(10, 30));
 }
 
 Asteroid::~Asteroid()
@@ -83,8 +83,8 @@ void Asteroid::updateInSpace(int time, bool show_effect)
 
 void Asteroid::collisionEvent(bool show_effect)
 {
-    _dataLife().is_alive = false;
-    _dataLife().dying_time = -1;
+    model()->setIsAlive(false);
+    model()->setDyingTime(-1);
 }
 
 void Asteroid::_postDeathUniqueEvent(bool show_effect)

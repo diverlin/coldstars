@@ -57,20 +57,11 @@ SpaceObject::SpaceObject(model::SpaceObject* model)
 SpaceObject::~SpaceObject()
 {}
 
-void SpaceObject::setStarSystem(Starsystem* starsystem)
-{
-    model()->starsystem = starsystem->id();
-}
-
-void SpaceObject::setParent(SpaceObject* parent)
-{
-    model()->parent = parent->model()->id();
-}
 
 Starsystem* SpaceObject::starsystem()
 {
     if (!m_starsystem) {
-        m_starsystem = static_cast<Starsystem*>(global::get().entityManager().getEntity(model()->starsystem));
+        m_starsystem = static_cast<Starsystem*>(global::get().entityManager().getEntity(model()->starsystem()));
         assert(m_starsystem);
     }
     return m_starsystem;
@@ -90,33 +81,32 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
     externalForce += force_dir * strength;
 }
 
-/* virtual */
 void SpaceObject::hit(int damage)
 {
     LOG(std::string("SpaceObject::hit id=") << std::to_string(model()->id()) << " damage=" << std::to_string(damage));
-    model()->dataLife.armor -= damage;
-    if (model()->dataLife.armor <= 0) {
-        model()->dataLife.armor = 0;
-        model()->dataLife.is_dying = true;
+    model()->setArmor(model()->armor() - damage);
+    if (model()->armor() <= 0) {
+        model()->setArmor(0);
+        model()->setIsDying(true);
     }
-    LOG(std::string("armor=") << std::to_string(model()->dataLife.armor) << " is_dying=" << std::to_string(model()->dataLife.is_dying) << std::endl);
+    LOG(std::string("armor=") << std::to_string(model()->armor()) << " is_dying=" << std::to_string(model()->isDying()) << std::endl);
 }
 
 void SpaceObject::killSilently()
 {
-    model()->dataLife.is_alive = false;
-    model()->dataLife.garbage_ready = true;
+    model()->setIsAlive(false);
+    model()->setGarbageReady(true);
 }
 
 void SpaceObject::_checkDeath(bool show_effect)
 {
-    if (model()->dataLife.is_dying) {
-        model()->dataLife.dying_time--;
-        if (model()->dataLife.dying_time < 0) {
-            model()->dataLife.is_alive = false;
-            if (!model()->dataLife.garbage_ready) {
+    if (model()->isDying()) {
+        model()->setDyingTime(model()->dyingTime() - 1);
+        if (model()->dyingTime() < 0) {
+            model()->setIsAlive(false);
+            if (!model()->garbageReady()) {
                 _postDeathUniqueEvent(show_effect);
-                model()->dataLife.garbage_ready = true;
+                model()->setGarbageReady(true);
             }
         }
     }
