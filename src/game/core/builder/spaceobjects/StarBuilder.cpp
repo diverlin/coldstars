@@ -35,7 +35,7 @@ model::Star*
 StarBuilder::__getNewTemplate(int_t id)
 { 
     model::Star* model = new model::Star;
-    model->id = id;
+    model->setId(id);
 
     assert(model);
     global::get().entityManager().reg(model);

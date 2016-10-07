@@ -112,21 +112,21 @@ void EntityManager::reg(core::Base* entity)
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-void EntityManager::reg(core::model::Base* entity)
+void EntityManager::reg(core::model::Base* model)
 {
-    assert(entity);
-    if (entity->id == NONE) {
+    assert(model);
+    if (model->id() == NONE) {
         //assert(false);
         // TODO fixme
-        entity->id = global::get().idGenerator().nextId();
+        model->setId(global::get().idGenerator().nextId());
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_entities_map.find(entity->id) != m_entities_map.end()) {
+    if (m_entities_map.find(model->id()) != m_entities_map.end()) {
         //throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id) + " which already exists, type = " + entity->dataTypeStr());
     }
 
-    m_models.insert(std::make_pair(entity->id, entity));
+    m_models.insert(std::make_pair(model->id(), model));
 }
 
 core::Base* EntityManager::getEntity(const int_t& id) const
@@ -719,7 +719,7 @@ void EntityManager::addToGarbage(core::model::Base* model)
 {
     //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
-        if (m_entitiesGarbage[i]->id() == model->id) {
+        if (m_entitiesGarbage[i]->id() == model->id()) {
             //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
             exit(1);
         }
