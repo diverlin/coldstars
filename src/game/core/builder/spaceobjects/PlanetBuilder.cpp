@@ -70,12 +70,12 @@ Planet::getNew(const descriptor::BaseOLD& descr)
     model->radiusA = orbit_radius;
     model->radiusB = orbit_radius;
     model->orbitPhi = 0;
-    model->speed  = meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / float(orbit_radius);
+    model->speed  = meti::getRandInt(model::Planet::SPEED_MIN, model::Planet::SPEED_MAX) / float(orbit_radius);
     model->clockwise = meti::getRandBool();
 
     model->dataLife = data_life;
 
-    float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
+    float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
 
