@@ -105,8 +105,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
         if (microScenarioTypeId != type::AISCENARIO::MICRO_DOCKING_ID)
         {
             Planet* planet = npc->planetForDocking(); // find proper planet!
-            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, planet->id());
-            npc->stateMachine().setCurrentMicroTask(microtask); 
+//            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, planet->id());
+//            npc->stateMachine().setCurrentMicroTask(microtask);
                 
             return;
         }
@@ -117,9 +117,9 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
     {
         if (microScenarioTypeId != type::AISCENARIO::MICRO_DOCKING_ID)
         {
-            Planet* planet = npc->planetForDocking(); // find proper planet
-            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, planet->id());
-            npc->stateMachine().setCurrentMicroTask(microtask);
+//            Planet* planet = npc->planetForDocking(); // find proper planet
+//            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, planet->id());
+//            npc->stateMachine().setCurrentMicroTask(microtask);
             
             return;
         }

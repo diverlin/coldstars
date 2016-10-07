@@ -25,6 +25,11 @@ namespace model {
 
 class Asteroid : public Planetoid {
 public:
+    static const int SCALE_MIN;
+    static const int SCALE_MAX;
+    static const int EXPIRIENCE_TO_GIVE;
+
+public:
     Asteroid() = default;
     ~Asteroid() = default;
     Asteroid(const std::string& data);

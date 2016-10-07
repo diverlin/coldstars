@@ -133,113 +133,113 @@ void Planet::_postDeathUniqueEvent(bool)
 
 
 
-Planet::Planet(int id)
-{
-    setId(id);
-    setTypeId(type::entity::PLANET_ID);
-}
-
-Planet::~Planet()
-{}
-
-void Planet::_postDeathUniqueEvent(bool)
-{}
-
-/* virtual override final */
-void Planet::putChildrenToGarbage() const
-{
-    //global::get().entityManager().addToGarbage(m_model->land);
-}
-
-void Planet::BindLand(Land* land)
-{
-    m_land = land;
-    m_land->SetOwner(this);
-    setSubTypeId(m_land->type());
-}
-
-void Planet::AddVehicle(Vehicle* vehicle) const
-{
-    if (vehicle->starsystem() == nullptr) {
-        vehicle->setStarSystem(starsystem());
-    }
-
-    m_land->AddVehicle(vehicle);
-
-}
-
-void Planet::UpdateInSpace(int time, bool show_effect)
-{
-    if (time > 0) {
-        _updatePosition();
-    }
-}
-
-void Planet::UpdateInSpaceInStatic()
-{
-    m_land->UpdateInStatic();
-}
-
-//void Planet::Render_NEW(const jeti::Renderer& render)
+//Planet::Planet(int id)
 //{
-//    //alpitodorender render.DrawMeshLightNormalMap(mesh(), textureOb(), actualModelMatrix());
-//    for (BaseDecor* decor : m_Decorations)
-//    {
-//        decor->Render(render, center());
+//    setId(id);
+//    setTypeId(type::entity::PLANET_ID);
+//}
+
+//Planet::~Planet()
+//{}
+
+//void Planet::_postDeathUniqueEvent(bool)
+//{}
+
+///* virtual override final */
+//void Planet::putChildrenToGarbage() const
+//{
+//    //global::get().entityManager().addToGarbage(m_model->land);
+//}
+
+//void Planet::BindLand(Land* land)
+//{
+//    m_land = land;
+//    m_land->SetOwner(this);
+//    setSubTypeId(m_land->type());
+//}
+
+//void Planet::AddVehicle(Vehicle* vehicle) const
+//{
+//    if (vehicle->starsystem() == nullptr) {
+//        vehicle->setStarSystem(starsystem());
+//    }
+
+//    m_land->AddVehicle(vehicle);
+
+//}
+
+//void Planet::UpdateInSpace(int time, bool show_effect)
+//{
+//    if (time > 0) {
+//        _updatePosition();
 //    }
 //}
 
-void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    LOG(" Planet("+std::to_string(id())+")::SaveData");
+//void Planet::UpdateInSpaceInStatic()
+//{
+//    m_land->UpdateInStatic();
+//}
 
-    //SaveManager::Instance().Put(root+"race_id", race_id);
-    save_ptree.put(root+"population", m_population);
-}
+////void Planet::Render_NEW(const jeti::Renderer& render)
+////{
+////    //alpitodorender render.DrawMeshLightNormalMap(mesh(), textureOb(), actualModelMatrix());
+////    for (BaseDecor* decor : m_Decorations)
+////    {
+////        decor->Render(render, center());
+////    }
+////}
 
-void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    LOG(" Planet("+std::to_string(id())+")::LoadData");
+//void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    LOG(" Planet("+std::to_string(id())+")::SaveData");
 
-    //race_id = SaveManager::Instance().Get<int>(root+"race_id");
-    m_population = load_ptree.get<unsigned int>("population");
-}
+//    //SaveManager::Instance().Put(root+"race_id", race_id);
+//    save_ptree.put(root+"population", m_population);
+//}
 
-void Planet::ResolveData()
-{
-    LOG(" Planet("+std::to_string(id())+")::ResolveData");
+//void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    LOG(" Planet("+std::to_string(id())+")::LoadData");
 
-    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
-}
+//    //race_id = SaveManager::Instance().Get<int>(root+"race_id");
+//    m_population = load_ptree.get<unsigned int>("population");
+//}
 
-/* virtual override final */
-void Planet::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "planet." + std::to_string(id())+".";
+//void Planet::ResolveData()
+//{
+//    LOG(" Planet("+std::to_string(id())+")::ResolveData");
 
-    Base::SaveData(save_ptree, root);
-    //Orientation::SaveData(save_ptree, root);
-    SpaceObject::SaveData(save_ptree, root);
-    Planetoid::SaveData(save_ptree, root);
-    Planet::SaveData(save_ptree, root);
-}
+//    ((Starsystem*)global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
+//}
 
-/* virtual override final */
-void Planet::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-   // Orientation::LoadData(load_ptree);
-    SpaceObject::LoadData(load_ptree);
-    Planetoid::LoadData(load_ptree);
-    Planet::LoadData(load_ptree);
-}
+///* virtual override final */
+//void Planet::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    std::string root = "planet." + std::to_string(id())+".";
 
-/* virtual override final */
-void Planet::Resolve()
-{
-    Base::ResolveData();
-    //Orientation::ResolveData();
-    SpaceObject::ResolveData();
-    Planetoid::ResolveData();
-    Planet::ResolveData();
-}
+//    Base::SaveData(save_ptree, root);
+//    //Orientation::SaveData(save_ptree, root);
+//    SpaceObject::SaveData(save_ptree, root);
+//    Planetoid::SaveData(save_ptree, root);
+//    Planet::SaveData(save_ptree, root);
+//}
+
+///* virtual override final */
+//void Planet::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+//   // Orientation::LoadData(load_ptree);
+//    SpaceObject::LoadData(load_ptree);
+//    Planetoid::LoadData(load_ptree);
+//    Planet::LoadData(load_ptree);
+//}
+
+///* virtual override final */
+//void Planet::Resolve()
+//{
+//    Base::ResolveData();
+//    //Orientation::ResolveData();
+//    SpaceObject::ResolveData();
+//    Planetoid::ResolveData();
+//    Planet::ResolveData();
+//}

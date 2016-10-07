@@ -774,20 +774,20 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
-        {   
-            cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
+//        {
+//            cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]);
   
-            if (data_mouse.left_click == true)
-            {
-                Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
-//                npc->GetStateMachine().SetCurrentMicroTask(microtask);
-//                npc->vehicle()->GetComplexDrive().UpdatePath();
-            }   
+//            if (data_mouse.left_click == true)
+//            {
+//                Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
+////                npc->GetStateMachine().SetCurrentMicroTask(microtask);
+////                npc->vehicle()->GetComplexDrive().UpdatePath();
+//            }
         
-            return true; 
-        }
+//            return true;
+//        }
     }
 
     return false;

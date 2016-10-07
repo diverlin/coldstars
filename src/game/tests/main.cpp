@@ -175,7 +175,7 @@ TEST(clone, starsystem)
 
 TEST(model, asteroid)
 {
-    model::Asteroid* model1 = builder::Asteroid::create();
+    model::Asteroid* model1 = builder::Asteroid::getNew();
     model::Asteroid* model2 = new model::Asteroid(model1->data());
     EXPECT_EQ(model1->data(), model2->data());
 

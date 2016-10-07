@@ -633,8 +633,8 @@ void Vehicle::DockingEvent()
     {
     case type::entity::PLANET_ID:
     {
-        Planet* planet = ((Planet*)m_driveComplex.target());
-        planet->GetLand()->AddVehicle(this);
+//        Planet* planet = ((Planet*)m_driveComplex.target());
+//        planet->GetLand()->AddVehicle(this);
 
         break;
     }
