@@ -16,14 +16,16 @@
        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASELAND_HPP
-#define BASELAND_HPP
+#pragma once
 
 #include <vector>
 #include <string>
 #include <common/Base.hpp>
 
+namespace model {
 class SpaceObject;
+} // namespace model
+
 class Vehicle;
 
 struct UnresolvedDataLand
@@ -37,9 +39,9 @@ class Land : public core::Base
         Land();
         virtual ~Land();
 
-        void SetOwner(SpaceObject* owner)  { this->owner = owner; }
+        void SetOwner(model::SpaceObject* owner)  { this->m_owner = owner; }
         
-        SpaceObject* GetOwner() const { return owner; };
+        model::SpaceObject* GetOwner() const { return m_owner; };
         virtual bool GetPermissionToLand() const = 0;
 
         virtual bool AddVehicle(Vehicle*) = 0;
@@ -50,7 +52,7 @@ class Land : public core::Base
         virtual std::string GetDockVehicleStr() const = 0;
 
     protected:
-        SpaceObject* owner;
+        model::SpaceObject* m_owner = nullptr;
 
         UnresolvedDataLand data_unresolved_Land;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
@@ -58,4 +60,3 @@ class Land : public core::Base
         void ResolveData();
 };
 
-#endif

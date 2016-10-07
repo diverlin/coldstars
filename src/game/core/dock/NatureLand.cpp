@@ -90,9 +90,10 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
     
     VEHICLE_vec.push_back(vehicle);
     
-    if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
-    {
-            vehicle->setStarSystem(owner->starsystem());
+    // used if vehicle added directly after creation
+    if (!vehicle->starsystem()) {
+        // TODO
+        //vehicle->setStarSystem(m_owner->starsystem());
     }
     return true;
 }

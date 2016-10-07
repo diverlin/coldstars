@@ -97,9 +97,9 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
     angar->AddVehicle(vehicle);  
     
     vehicle->setLand(this);        
-    if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
-    {
-            vehicle->setStarSystem(owner->starsystem());
+    if (!vehicle->starsystem()) {
+        // TODO
+        //vehicle->setStarSystem(m_owner->starsystem());
     }
           
     return true;

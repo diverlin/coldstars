@@ -36,8 +36,14 @@ public:
     Star(const std::string& data);
     std::string data() const;
 
-    int turnSinceLastSparkCounter = 0;
-    int turnSparkThreshold = 0;
+    void setTurnSinceLastSparkCounter(int turnSinceLastSparkCounter) { m_turnSinceLastSparkCounter = turnSinceLastSparkCounter; }
+
+    int turnSinceLastSparkCounter() const { return m_turnSinceLastSparkCounter; }
+    int turnSparkThreshold() const { return m_turnSparkThreshold; }
+
+private:
+    int m_turnSinceLastSparkCounter = 0;
+    int m_turnSparkThreshold = 0;
 
 private:
     friend class boost::serialization::access;
@@ -45,8 +51,8 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<Planetoid>(*this);
-        ar & turnSinceLastSparkCounter;
-        ar & turnSparkThreshold;
+        ar & m_turnSinceLastSparkCounter;
+        ar & m_turnSparkThreshold;
     }
 };
 
@@ -61,13 +67,13 @@ public:
     Star(model::Star*);
     virtual ~Star();
 
+    void hit(int) {}
+    void initiateSpark();
+
     //alpitodorender
     //        int colorId() const;
     //        float brightThreshold() const;
     //float deltaColor() const { return m_deltaColor; }
-
-    void hit(int) {}
-    void initiateSpark();
 
     // alpitodorender void CalcColor();
     void updateInSpaceInStatic();

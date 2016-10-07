@@ -26,7 +26,7 @@
 #include "../spaceobjects/SpaceStation.hpp"
 #include "../spaceobjects/SpaceObject.hpp"
 
-Land::Land():owner(nullptr)
+Land::Land():m_owner(nullptr)
 {}
 
 /* virtual */
@@ -36,7 +36,7 @@ Land::~Land()
 
 void Land::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"data_unresolved_Land.owner_id", owner->id());
+    save_ptree.put(root+"data_unresolved_Land.owner_id", m_owner->id());
 }
 
 void Land::LoadData(const boost::property_tree::ptree& load_ptree)
