@@ -23,8 +23,8 @@ class TextureOb;
 class Mesh
 { 
 public:
-    Mesh(const ceti::descriptor::Mesh&);
     Mesh();
+    Mesh(const ceti::descriptor::Mesh&);
     ~Mesh();
 
     int id() const { return m_id; }

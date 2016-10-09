@@ -24,6 +24,36 @@ const int STRIDE_COLOR    = 4;
 
 int Mesh::m_id = 0;
 
+Mesh::Mesh()
+{
+    m_listId = glGenLists(1);
+    glGenVertexArrays(1, &m_vaoId);
+    glGenBuffers(1, &m_vboId);
+
+    std::stringstream ss;
+    ss << "v 0.5 0.0 -0.5 \n"
+       << "v -0.5 0.0 -0.5 \n"
+       << "v -0.5 0.0 0.5 \n"
+       << "v 0.5 0.0 0.5 \n"
+       << "v 0.5 0.0 -0.5 \n"
+       << "v -0.5 0.0 -0.5 \n"
+       << "v -0.5 0.0 0.5 \n"
+       << "v 0.5 0.0 0.5 \n"
+       << "vt 0.0 0.0 \n"
+       << "vt 1.0 0.0 \n"
+       << "vt 0.0 1.0 \n"
+       << "vt 1.0 1.0 \n"
+       << "vn 0.0 1.0 0.0 \n"
+       << "vn 0.0 -1.0 0.0 \n"
+       << "f 1/2/1 2/1/1 3/3/1 \n"
+       << "f 4/4/1 1/2/1 3/3/1 \n"
+       << "f 5/2/2 6/1/2 7/3/2 \n"
+       << "f 8/4/2 5/2/2 7/3/2 \n";
+
+    ObjLoader objLoader(ss);
+    fillVertices(objLoader);
+}
+
 Mesh::Mesh(const ceti::descriptor::Mesh& descriptor)
     :
       m_textureOb(nullptr),
@@ -33,17 +63,10 @@ Mesh::Mesh(const ceti::descriptor::Mesh& descriptor)
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
-    ObjLoader objLoader(descriptor.model());
+    ObjLoader objLoader(descriptor.modelPath());
     
     fillVertices(objLoader);
-    m_boundaryBox = objLoader.GetBoundaryBox();
-}
-
-Mesh::Mesh()
-{     
-    m_listId = glGenLists(1);
-    glGenVertexArrays(1, &m_vaoId);
-    glGenBuffers(1, &m_vboId);
+    m_boundaryBox = objLoader.__boundaryBox();
 }
 
 Mesh::~Mesh()
@@ -63,13 +86,13 @@ void Mesh::fillVertices(const ObjLoader& objLoader)
 
     m_vertices.clear();
 
-    for(unsigned int i=0; i<objLoader.faces_indexes.size(); ++i)
+    for(unsigned int i=0; i<objLoader.m_faces_indexes.size(); ++i)
     {
         Vertex vertex;
         for(unsigned int j=0; j<VERTECIES_PER_POLYGON_NUM; ++j) {
-            vertex.position = objLoader.positions[objLoader.faces_indexes[i].position_index[j] - 1];
-            vertex.texcoord = objLoader.texcoords[objLoader.faces_indexes[i].texcoord_index[j] - 1];
-            vertex.normal   = objLoader.normals[objLoader.faces_indexes[i].normal_index[j] - 1];
+            vertex.position = objLoader.m_positions[objLoader.m_faces_indexes[i].position_index[j] - 1];
+            vertex.texcoord = objLoader.m_texcoords[objLoader.m_faces_indexes[i].texcoord_index[j] - 1];
+            vertex.normal   = objLoader.m_normals[objLoader.m_faces_indexes[i].normal_index[j] - 1];
 
             m_vertices.push_back(vertex);
         }
