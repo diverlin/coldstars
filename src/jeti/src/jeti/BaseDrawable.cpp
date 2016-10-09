@@ -38,15 +38,9 @@ BaseDrawable::BaseDrawable(ceti::model::BaseDrawable* model)
     :
       m_model_base(model)
 {
-    //      m_material(textureOb),
-    //      m_mesh(mesh)
+//    m_material = getMaterial(model->material());
+//    m_mesh = getMaterial(model->mesh());
 }
-
-//BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
-//    :
-//      m_material(textureOb),
-//      m_mesh(mesh)
-//{}
 
 BaseDrawable::~BaseDrawable() {
     delete m_animationRotation;
@@ -119,7 +113,7 @@ bool BaseDrawable::_updateFadeOutEffect()
     }
 }
 
-void BaseDrawable::render(const jeti::Renderer& render)
+void BaseDrawable::draw(const jeti::Renderer& render)
 {
     render.drawMesh(mesh(), material(), actualModelMatrix());
 }

@@ -417,7 +417,7 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 // resizeGl(w*scale, h*scale);
                 {
                     for(Planet* planet: m_planets) {
-                        planet->render(render);
+                        planet->draw(render);
                     }
 
 //                    for(SpaceStationDrawable* spacestation: m_spacestations) {

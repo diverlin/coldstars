@@ -61,7 +61,7 @@ Planet::~Planet()
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
-void Planet::render(const jeti::Renderer& render)
+void Planet::draw(const jeti::Renderer& render)
 {
     render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
 //    for (BaseDecor* decor : m_Decorations) {

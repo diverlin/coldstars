@@ -53,8 +53,6 @@ class Renderer;
 class BaseDrawable
 {
 public:
-//    [[deprecated("remove")]]
-//    BaseDrawable();
     BaseDrawable(ceti::model::BaseDrawable*);
     virtual ~BaseDrawable();
 
@@ -81,7 +79,7 @@ public:
     //        void RenderCollisionRadius(const Renderer&) const;
     //        void RenderAxis(const Renderer&) const;
 
-    virtual void render(const jeti::Renderer& render);
+    virtual void draw(const jeti::Renderer& draw);
 
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }
