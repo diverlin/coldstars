@@ -34,13 +34,13 @@ namespace descriptor {
 class Base
 {
 public:
-    Base(const int_t& type = -1, const int_t& id = -1);
+    Base(int_t type = -1, int_t id = -1);
     ~Base();
 
 //    std::string data() const;
 
-    const int_t& id() const { return m_id; }
-    const int_t& type() const { return m_type; }
+    int_t id() const { return m_id; }
+    int_t type() const { return m_type; }
 
     //std::string info() const = 0;
 

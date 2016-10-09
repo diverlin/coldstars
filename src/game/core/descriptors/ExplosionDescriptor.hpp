@@ -11,7 +11,7 @@ namespace descriptor {
 
 class Explosion {
     public:
-        Explosion(const int_t& starsystem_id, const glm::vec3& center, int damage, int radius);
+        Explosion(int_t starsystem_id, const glm::vec3& center, int damage, int radius);
         Explosion(const std::string& data);
 
         int_t starsystem_id = 0;

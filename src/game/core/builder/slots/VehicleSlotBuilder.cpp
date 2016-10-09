@@ -32,7 +32,7 @@
 #include <common/Global.hpp>
 
 
-VehicleSlot* getNewVehicleSlot(type::entity subtype_id, const int_t& id)
+VehicleSlot* getNewVehicleSlot(type::entity subtype_id, int_t id)
 {
     VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
     assert(vehicle_slot);    

@@ -29,7 +29,7 @@ namespace equipment {
 class Scaner : public Base
 {
 public:
-    Scaner(const int_t& id);
+    Scaner(int_t id);
     virtual ~Scaner();
 
     int scan() const { return m_scan; }

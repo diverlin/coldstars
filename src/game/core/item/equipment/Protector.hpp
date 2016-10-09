@@ -27,7 +27,7 @@ namespace equipment {
 class Protector  : public Base
 {
     public:
-        Protector(const int_t& id);
+        Protector(int_t id);
         virtual ~Protector();
 
         void SetProtectionOrig(int protection_orig) { m_protection_orig = protection_orig; }

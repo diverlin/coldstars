@@ -2,7 +2,7 @@
 
 namespace descriptor {
 
-Hit::Hit(const int_t& owner, const int_t& target, int damage)
+Hit::Hit(int_t owner, int_t target, int damage)
     : BaseOLD(Type::HIT)
 {
     add(Key::OWNER, owner);

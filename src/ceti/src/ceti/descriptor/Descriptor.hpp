@@ -33,7 +33,7 @@ namespace descriptor {
 class Descriptor : public Base
 {
 public:
-    Descriptor(const int_t& type = -1, const int_t& id = -1);
+    Descriptor(int_t type = -1, int_t id = -1);
     Descriptor(const std::string& data);
     ~Descriptor();
 
@@ -41,7 +41,7 @@ public:
 
     bool operator==(const Descriptor& rhs) const;
 
-    const int_t& get_i(int) const;
+    int_t get_i(int) const;
     float get_f(int) const;
     const std::string& get_s(int) const;
     const meti::vec3& get_v3(int) const;

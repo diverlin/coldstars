@@ -21,7 +21,7 @@
 
 namespace descriptor {
 
-Container::Container(const int_t& child_id)
+Container::Container(int_t child_id)
     :
       BaseOLD(Type::CONTAINER)
 {

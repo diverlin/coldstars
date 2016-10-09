@@ -90,7 +90,7 @@ Manager::getRand(const Type& type)
 }
 
 BaseOLD
-Manager::get(const int_t& id)
+Manager::get(int_t id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {

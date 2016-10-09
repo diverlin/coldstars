@@ -21,7 +21,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
-Bomb::Bomb(const int_t& id)
+Bomb::Bomb(int_t id)
 { 
     setId(id);
     setTypeId(type::entity::BOMB_ID);

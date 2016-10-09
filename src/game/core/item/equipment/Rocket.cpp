@@ -63,7 +63,7 @@ void BulletData::Resolve()
 namespace item {
 namespace equipment {
 
-Rocket::Rocket(const int_t& id)
+Rocket::Rocket(int_t id)
 :
 m_ammo_max_orig(0),
 m_ammo(0),

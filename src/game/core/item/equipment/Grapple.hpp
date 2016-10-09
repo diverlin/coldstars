@@ -32,7 +32,7 @@ namespace equipment {
 class Grapple : public Base
 {
 public:
-    Grapple(const int_t& id);
+    Grapple(int_t id);
     virtual ~Grapple();
 
     void SetStrengthOrig(int strength_orig)     { m_strength_orig   = strength_orig; }

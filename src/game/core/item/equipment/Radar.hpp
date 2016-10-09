@@ -27,7 +27,7 @@ namespace equipment {
 class Radar : public Base
 {
     public:
-        Radar(const int_t& id);
+        Radar(int_t id);
         virtual ~Radar();
 
         void SetRadiusOrig(int radius_orig)   { m_radius_orig = radius_orig; }

@@ -6,7 +6,7 @@ namespace descriptor {
 
 class DescriptorOLD : public BaseOLD {
 public:
-    DescriptorOLD(const int_t&, const int_t&);
+    DescriptorOLD(int_t, int_t);
     DescriptorOLD(const std::string& data);
 };
 

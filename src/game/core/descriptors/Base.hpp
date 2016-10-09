@@ -167,12 +167,12 @@ public:
     }
     ~BBase() {}
 
-    const int_t& id() const { return m_id; }
-    const int_t& texture() const { return m_texture; }
-    const int_t& mesh() const { return m_mesh; }
+    int_t id() const { return m_id; }
+    int_t texture() const { return m_texture; }
+    int_t mesh() const { return m_mesh; }
 
-    void setTexture(const int_t& texture) { m_texture = texture; }
-    void setMesh(const int_t& mesh) { m_mesh = mesh; }
+    void setTexture(int_t texture) { m_texture = texture; }
+    void setMesh(int_t mesh) { m_mesh = mesh; }
     virtual std::string info() const {
         std::string result;
         result += std::string("id=") + std::to_string(m_id);
@@ -184,7 +184,7 @@ public:
 protected:
     std::string _str(const std::string& label, const std::vector<int_t>& ids) const {
         std::string result = label;
-        for (const int_t& id: ids) {
+        for (int_t id: ids) {
             result += std::to_string(id) + ",";
         }
         return result;
@@ -218,63 +218,63 @@ public:
 
     bool operator==(const BaseOLD& rhs) const;
 
-    const int_t& texture() const;
-    const int_t& mesh() const;
+    int_t texture() const;
+    int_t mesh() const;
 
-    const int_t& id() const;
-    const int_t& objId() const;
-    const int_t& type() const;
-    const int_t& objType() const;
-    const int_t& descriptor() const;
-    const int_t& race() const;
-    const int_t& damage() const;
-    const int_t& radius() const;
-    const int_t& tech() const;
-    const int_t& modulesNum() const;
-    const int_t& mass() const;
-    const int_t& conditionMax() const;
-    const int_t& deterioration() const;
-    const int_t& fuelMax() const;
-    const int_t& speed() const;
-    const int_t& hyper() const;
-    const int_t& repair() const;
-    const int_t& strength() const;
-    const int_t& scan() const;
-    const int_t& protection() const;
-    const int_t& price() const;
+    int_t id() const;
+    int_t objId() const;
+    int_t type() const;
+    int_t objType() const;
+    int_t descriptor() const;
+    int_t race() const;
+    int_t damage() const;
+    int_t radius() const;
+    int_t tech() const;
+    int_t modulesNum() const;
+    int_t mass() const;
+    int_t conditionMax() const;
+    int_t deterioration() const;
+    int_t fuelMax() const;
+    int_t speed() const;
+    int_t hyper() const;
+    int_t repair() const;
+    int_t strength() const;
+    int_t scan() const;
+    int_t protection() const;
+    int_t price() const;
 
     //vehicle
-    const int_t& space() const;
-    const int_t& armor() const;
-    const int_t& temperature() const;
-    const int_t& drawTurrels() const;
-    const int_t& size() const;
-    const int_t& bakSlotNum() const;
-    const int_t& driveSlotNum() const;
-    const int_t& droidSlotNum() const;
+    int_t space() const;
+    int_t armor() const;
+    int_t temperature() const;
+    int_t drawTurrels() const;
+    int_t size() const;
+    int_t bakSlotNum() const;
+    int_t driveSlotNum() const;
+    int_t droidSlotNum() const;
 #ifdef USE_EXTRA_EQUIPMENT
     const id_type& energizerSlotNum() const;
     const id_type& freezerSlotNum() const;
 #endif
-    const int_t& grappleSlotNum() const;
-    const int_t& protectorSlotNum() const;
-    const int_t& radarSlotNum() const;
-    const int_t& scanerSlotNum() const;
-    const int_t& weaponSlotNum() const;
-    const int_t& artefactSlotNum() const;
-    const int_t& cargoSlotNum() const;
+    int_t grappleSlotNum() const;
+    int_t protectorSlotNum() const;
+    int_t radarSlotNum() const;
+    int_t scanerSlotNum() const;
+    int_t weaponSlotNum() const;
+    int_t artefactSlotNum() const;
+    int_t cargoSlotNum() const;
 
     // dynamic
-    const int_t& owner() const;
-    const int_t& child() const;
-    const int_t& target() const;
+    int_t owner() const;
+    int_t child() const;
+    int_t target() const;
 
 public: // todo make it protected
-    void add(const Key& key, const int_t& value);
+    void add(const Key& key, int_t value);
 
 private:
-    const int_t& __getOrDie(const Key& key) const;
-    const int_t& __get(const Key& key) const;
+    int_t __getOrDie(const Key& key) const;
+    int_t __get(const Key& key) const;
 
     friend class boost::serialization::access;
     template<class Archive>

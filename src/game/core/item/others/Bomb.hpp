@@ -26,7 +26,7 @@
 class Bomb : public item::Base
 {
     public:
-        Bomb(const int_t& id = NONE);
+        Bomb(int_t id = NONE);
         virtual ~Bomb();
 
         void setDamage(int damage) { this->m_damage = damage; }

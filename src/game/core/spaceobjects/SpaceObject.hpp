@@ -50,7 +50,7 @@ public:
     void setArmor(int armor) { m_dataLife.armor = armor; }
     void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
-    void setStarSystem(const int_t& starsystem) { m_starsystem = starsystem; }
+    void setStarSystem(int_t starsystem) { m_starsystem = starsystem; }
     void setPlace(type::place place) { m_place = place;  }
     void setMass(int mass) { m_mass = mass; }
 
@@ -61,15 +61,15 @@ public:
     void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
     void setGarbageReady(bool garbage_ready) { m_dataLife.garbage_ready = garbage_ready; }
 
-    void setParent(const int_t& parent) { m_parent = parent; }
+    void setParent(int_t parent) { m_parent = parent; }
 
     bool isAlive() const { return m_dataLife.is_alive; }
     bool isDying() const { return m_dataLife.is_dying; }
     int dyingTime() const { return m_dataLife.dying_time; }
     bool garbageReady() const { return m_dataLife.garbage_ready; }
 
-    const int_t& starsystem() const { return m_starsystem; }
-    const int_t& parent() const { return m_parent; }
+    int_t starsystem() const { return m_starsystem; }
+    int_t parent() const { return m_parent; }
 
     int mass()  const { return m_mass; }
     int armor() const { return m_dataLife.armor; }

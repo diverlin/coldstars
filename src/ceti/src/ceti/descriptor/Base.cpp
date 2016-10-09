@@ -25,7 +25,7 @@ namespace descriptor {
 IdGenerator Base::m_idGenerator;
 
 
-Base::Base(const int_t& type, const int_t& id)
+Base::Base(int_t type, int_t id)
     :
       m_type(type)
     , m_id(id)
