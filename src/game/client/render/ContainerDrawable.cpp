@@ -20,36 +20,36 @@
 
 namespace view {
 
-Container::Container(jeti::TextureOb* texture, jeti::Mesh* mesh)
-    :
-      BaseDrawable(texture, mesh)
-{
-}
-
-/* virtual */   
-Container::~Container()
-{}
-
-/* virtual override final */
-//void Container::UpdateInfo()
+//Container::Container(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//    :
+//      BaseDrawable(texture, mesh)
 //{
-//    GetInfo().clear();
-//    GetInfo().addTitleStr("CONTAINER");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
+
+///* virtual */
+//Container::~Container()
+//{}
+
+///* virtual override final */
+////void Container::UpdateInfo()
+////{
+////    GetInfo().clear();
+////    GetInfo().addTitleStr("CONTAINER");
+////    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+////    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
+////    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
+////}
  
-/* virtual override final */           
-//void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
-//{
-//    UpdateInfo();
-//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
-//    pos /= zoom;
-//    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+///* virtual override final */
+////void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
+////{
+////    UpdateInfo();
+////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
+////    pos /= zoom;
+////    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
-//    pos.x += 300;
-//    m_ItemSlot->item()->RenderInfo(render, pos);
-//}
+////    pos.x += 300;
+////    m_ItemSlot->item()->RenderInfo(render, pos);
+////}
 
 } // namespace view

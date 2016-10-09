@@ -20,13 +20,24 @@
 
 #include <jeti/BaseDrawable.hpp>
 
-class AsteroidDrawable : public jeti::BaseDrawable
+
+namespace model {
+class Asteroid;
+} // namespace model
+
+namespace view {
+
+class Asteroid : public jeti::BaseDrawable
 {
     public:
-        AsteroidDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~AsteroidDrawable() override final;
+        Asteroid(model::Asteroid*);
+        virtual ~Asteroid() override final;
 
     private:
+        model::Asteroid* model() const  { return m_model_asteroid; }
+        model::Asteroid* m_model_asteroid = nullptr;
 //        virtual void UpdateInfo() override final;
 }; 
+
+} // namespace view
 

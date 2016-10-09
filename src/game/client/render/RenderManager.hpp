@@ -27,18 +27,19 @@ class StarSystemDrawable;
 /// entities
 class Star;
 
-class StarDrawable;
 namespace view {
+class Star;
+class Asteroid;
 class Planet;
-class Container;
+//class Container;
 } // namespace view
 
-class AsteroidDrawable;
-class BlackHoleDrawable;
-class ShipDrawable;
-class SpaceStationDrawable;
-class SatelliteDrawable;
-class BulletDrawable;
+
+//class BlackHoleDrawable;
+//class ShipDrawable;
+//class SpaceStationDrawable;
+//class SatelliteDrawable;
+//class BulletDrawable;
 
 /// effects
 class LazerTraceEffect;
@@ -74,19 +75,19 @@ public:
     /// visible entities
     void addIfVisible(Star*, const VisibilityData&);
     void addIfVisible(view::Planet*, const VisibilityData&);
-    void addIfVisible(AsteroidDrawable*, const VisibilityData&);
-    void addIfVisible(view::Container*, const VisibilityData&);
-    void addIfVisible(BulletDrawable*, const VisibilityData&);
-    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
-    void addIfVisible(ShipDrawable*, const VisibilityData&);
-    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
-    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
+    void addIfVisible(Asteroid*, const VisibilityData&);
+//    void addIfVisible(view::Container*, const VisibilityData&);
+//    void addIfVisible(BulletDrawable*, const VisibilityData&);
+//    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
+//    void addIfVisible(ShipDrawable*, const VisibilityData&);
+//    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
+//    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
 
     /// visible effects
-    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
-    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
-    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
-    void addIfVisible(VerticalFlowText*, const VisibilityData&);
+//    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
+//    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
+//    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
+//    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
     void render(Starsystem*,
                 const meti::vec3& lookFrom,
@@ -98,21 +99,21 @@ public:
 
 private:
     /// visible entities
-    std::vector<StarDrawable*> m_stars;
+    std::vector<Star*> m_stars;
     std::vector<Planet*> m_planets;
-    std::vector<AsteroidDrawable*> m_asteroids;
-    std::vector<view::Container*> m_containers;
-    std::vector<BulletDrawable*> m_bullets;
-    std::vector<BlackHoleDrawable*> m_wormholes;
-    std::vector<ShipDrawable*> m_ships;
-    std::vector<SatelliteDrawable*> m_satellites;
-    std::vector<SpaceStationDrawable*> m_spacestations;
+    std::vector<Asteroid*> m_asteroids;
+//    std::vector<view::Container*> m_containers;
+//    std::vector<BulletDrawable*> m_bullets;
+//    std::vector<BlackHoleDrawable*> m_wormholes;
+//    std::vector<ShipDrawable*> m_ships;
+//    std::vector<SatelliteDrawable*> m_satellites;
+//    std::vector<SpaceStationDrawable*> m_spacestations;
 
     /// visible effects
-    std::vector<ShockWaveEffect*> m_shockwaves;
-    std::vector<LazerTraceEffect*> m_lazertraces;
-    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
-    std::vector<VerticalFlowText*> m_texts;
+//    std::vector<ShockWaveEffect*> m_shockwaves;
+//    std::vector<LazerTraceEffect*> m_lazertraces;
+//    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
+//    std::vector<VerticalFlowText*> m_texts;
     
     void __update(Starsystem* starsystem,
                   const meti::vec3& lookFrom,
@@ -124,15 +125,15 @@ private:
     void __renderAxis(const jeti::Renderer&) const;
 
     /// visible entities
-    void __add(StarDrawable*);
+    void __add(Star*);
     void __add(Planet*);
-    void __add(AsteroidDrawable*);
+    void __add(Asteroid*);
     void __add(Container*);
-    void __add(BulletDrawable*);
-    void __add(BlackHoleDrawable*);
-    void __add(ShipDrawable*);
-    void __add(SpaceStationDrawable*);
-    void __add(SatelliteDrawable*);
+//    void __add(BulletDrawable*);
+//    void __add(BlackHoleDrawable*);
+//    void __add(ShipDrawable*);
+//    void __add(SpaceStationDrawable*);
+//    void __add(SatelliteDrawable*);
 
     /// visible effects
     void __add(ShockWaveEffect*);

@@ -17,18 +17,22 @@
 */
 
 #include "AsteroidDrawable.hpp"
+#include <spaceobjects/Asteroid.hpp>
 
-#include <ceti/Logger.hpp>
+//#include <ceti/Logger.hpp>
  
-AsteroidDrawable::AsteroidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+namespace view {
+
+Asteroid::Asteroid(model::Asteroid* model)
     :
-      jeti::BaseDrawable(texture, mesh)
+      jeti::BaseDrawable(model)
+    , m_model_asteroid(model)
 {   
 
 }
     
 /* virtual override final */
-AsteroidDrawable::~AsteroidDrawable()
+Asteroid::~Asteroid()
 {}
 
 /* virtual override final */
@@ -43,3 +47,5 @@ AsteroidDrawable::~AsteroidDrawable()
 //    m_Info.addNameStr("speed x 100:"); m_Info.addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
 //    m_Info.addNameStr("pos:");         m_Info.addValueStr( str(center()) );
 //}
+
+} // namespace view
