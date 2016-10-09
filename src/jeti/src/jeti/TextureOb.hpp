@@ -31,41 +31,40 @@ namespace jeti {
 
 class TextureOb
 {
-    public:
-        TextureOb(const Material& material);
-        ~TextureOb();
+public:
+    TextureOb();
+    TextureOb(const model::Material& material);
+    ~TextureOb();
 
-        int id() const { return m_Id; }
-        //const glm::vec3 size() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly
-        const glm::vec3 size() const { return glm::vec3(50.0f, 50.0f, 1.0f); }     // ugly
+    int id() const { return m_id; }
+    //const glm::vec3 size() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly
+    const glm::vec3 size() const { return glm::vec3(50.0f, 50.0f, 1.0f); }     // ugly
 
-        int GetFrameWidth() const  { return m_Material.w_slice; }
-        int GetFrameHeight() const { return m_Material.h_slice; }
-        
-        bool isLoaded() const { return m_IsLoaded; }
-        void load();
-        void RemoveFromVRAM();
+    int frameWidth() const  { return m_model.w_slice; }
+    int frameHeight() const { return m_model.h_slice; }
 
-        int UpdateAnimationFrame(float);
+    bool isLoaded() const { return m_isLoaded; }
+    void load();
+    void unloadFromVRAM();
 
-        const Material& GetMaterial() const { return m_Material; }
+    int updateAnimationFrame(float);
 
-    private:
-        int m_Id;
-        Material m_Material;
+    const model::Material& model() const { return m_model; }
 
-        bool m_IsLoaded;
+private:
+    int m_id = 0;
+    model::Material m_model;
 
-        unsigned int m_CurrentFrame;
-        unsigned int m_FramesCount; 
-        float m_LastUpdateTime;
-        float m_Delay;
-        float m_Fps; 
-                    
-        void CreateTextureCoords(int _rows_num, int _columns_num, int _fps);
-        void AddTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
+    bool m_isLoaded = false;
+
+    unsigned int m_currentFrame;
+    unsigned int m_framesCount;
+    float m_lastUpdateTime;
+    float m_delay;
+    float m_frameNum;
+
+    void __createTextureCoords(int _rows_num, int _columns_num, int _fps);
+    void __addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
 };
 
-void loadToVRAM(const std::string&, GLuint&, int&, int&);
-            
 } // namespace jeti

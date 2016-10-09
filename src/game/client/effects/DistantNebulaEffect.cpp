@@ -91,7 +91,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
            
     float angle = meti::getRandInt(0, 360);
     float delta_angle = 0.0;
-    if(textureOb->GetMaterial().is_rotated)
+    if(textureOb->model().is_rotated)
     {
         delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
     }

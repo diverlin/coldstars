@@ -94,7 +94,7 @@ jeti::TextureOb* TextureCollector::getTextureByColorId(type::texture type_id, in
     if (hasTypeId(type_id)) {
         const std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>& vec = m_typesTextures[type_id];
         for(std::pair<TextureDescriptor, jeti::TextureOb*> pair: vec) {
-            if (pair.second->GetMaterial().color_id == color_id) {
+            if (pair.second->model().color_id == color_id) {
                 requested = pair.second;
             }
         }
@@ -196,7 +196,7 @@ jeti::TextureOb* TextureCollector::_tryGetTextureBySizeId(const std::vector<jeti
 {
     jeti::TextureOb* requested = nullptr;
     for (jeti::TextureOb* texture: textures) {
-        if (texture->GetMaterial().size_id == size_id) {
+        if (texture->model().size_id == size_id) {
             requested = texture;
             break;
         }

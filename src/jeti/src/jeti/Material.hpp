@@ -28,31 +28,33 @@
 
 namespace jeti {
 
+namespace model {
+
 struct Material
 {
-    int id;
-    int w, h;
-    int w_slice, h_slice;
-    float fps;
-    int col_num;
-    int row_num;
-    int size_id;
+    int id = 0;
+    int w = 1, h = 1;
+    int w_slice = 1, h_slice = 1;
+    float fps = 0.0f;
+    int col_num = 1;
+    int row_num = 1;
+    int size_id = 0;
 
-    glm::vec4 ambient;
-    glm::vec4 diffuse;
-    glm::vec4 specular;
-    glm::vec4 emission;
-    float shininess;
+    glm::vec4 ambient = glm::vec4(0.2f);
+    glm::vec4 diffuse = glm::vec4(1.0f);
+    glm::vec4 specular = glm::vec4(1.5f);
+    glm::vec4 emission = glm::vec4(0.1f);
+    float shininess = 100.0f;
 
-    GLuint texture;
-    GLuint normalmap;
+    GLuint texture = 0;
+    GLuint normalmap = 0;
 
     glm::vec2 texture_offset;
 
-    bool is_animated;        
-    bool is_loaded;
-    bool is_shared;
-    bool use_alpha; 
+    bool is_animated = false;
+    bool is_loaded = false;
+    bool is_shared = false;
+    bool use_alpha = false;
 
     std::vector<glm::vec2> texCoord_bottomLeft_vec;
     std::vector<glm::vec2> texCoord_bottomRight_vec;
@@ -62,32 +64,11 @@ struct Material
     std::string texture_path; 
     std::string normalmap_path; 
     
-    float brightThreshold;
-    int color_id;
-    bool is_rotated;
-
-    Material()
-    :
-    id(0),
-    w(1), h(1),
-    w_slice(1), h_slice(1),
-    fps(0.0f),
-    col_num(1),
-    row_num(1),    
-    size_id(0),
-    ambient(0.2f),
-    diffuse(1.0f),
-    specular(1.5f),
-    emission(0.1f),
-    shininess(100.0f),
-    texture(0),
-    normalmap(0),
-    is_animated(false),        
-    use_alpha(false),
-    brightThreshold(1.0f),
-    color_id(0),
-    is_rotated(false)
-    {}    
+    float brightThreshold = 1.0f;
+    int color_id = 0;
+    bool is_rotated = 0;
 };
+
+} // namespace model
 
 }

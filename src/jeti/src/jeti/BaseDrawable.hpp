@@ -23,6 +23,7 @@
 #include <ceti/type/IdType.hpp>
 #include <ceti/Orientation.hpp>
 #include <ceti/rect.hpp>
+#include <ceti/descriptor/Collector.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -86,6 +87,10 @@ protected:
 
     bool _updateFadeInEffect(); // depr, move to animation program
     bool _updateFadeOutEffect(); // depr, move to animation program
+
+public:
+    static ceti::Collector<TextureOb*> s_materials;
+    static ceti::Collector<Mesh*> s_meshes;
 
 private:
     ceti::model::BaseDrawable* m_model_base = nullptr;

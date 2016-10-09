@@ -18,128 +18,16 @@
 
 #include "TextureOb.hpp"
 
+#include <meti/RandUtils.hpp>
+
 #include <SFML/Graphics/Image.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 #include <stdexcept>
 
 namespace jeti {
 
-TextureOb::TextureOb(const Material& material)
-    :
-      m_Id(0),
-      m_IsLoaded(false),
-      m_Material(material)
-{ 
-    m_Material.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
-    
-    if ( ((m_Material.col_num == 1) and (m_Material.row_num == 1)) or (m_Material.fps == 0) ) {
-        m_Material.is_animated = false;
-    } else {
-        m_Material.is_animated = true;
-    }   
-
-    //Load();
-    
-    CreateTextureCoords(m_Material.col_num, m_Material.row_num, m_Material.fps);
-    
-    //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
-}  
-
-TextureOb::~TextureOb()
-{ 
-
-}
-
-void TextureOb::load()
-{
-    loadToVRAM(m_Material.texture_path, m_Material.texture, m_Material.w, m_Material.h);
-    if (m_Material.normalmap_path != "") {
-        loadToVRAM(m_Material.normalmap_path, m_Material.normalmap, m_Material.w, m_Material.h);
-    }
-
-    m_IsLoaded = true;
-}
-
-void TextureOb::RemoveFromVRAM()
-{
-    m_IsLoaded = false;
-}
-
-
-void TextureOb::CreateTextureCoords(int col_num, int row_num, int fps)
-{
-    m_CurrentFrame = 0;
-    m_FramesCount = 0;
-    
-    m_Material.w_slice = m_Material.w/col_num;
-    m_Material.h_slice = m_Material.h/row_num;
-    
-    float w_slicef = (float)m_Material.w_slice/m_Material.w;
-    float h_slicef = (float)m_Material.h_slice/m_Material.h;
-    
-    float w_offsetf = 0;
-    float h_offsetf = 0;
-
-    int r = 0;
-    while (r < row_num)
-    {
-       w_offsetf = 0;
-       int c = 0;
-       while (c < col_num)
-       {
-            AddTexCoordQuad(w_offsetf, h_offsetf, w_offsetf + w_slicef, h_offsetf + h_slicef);
-            w_offsetf += w_slicef;
-            m_FramesCount++;
-            c++;
-       }
-       h_offsetf += h_slicef;
-       r++;
-    }
-    
-    m_LastUpdateTime = 0;
-    
-    if (m_Fps == 0) 
-    {
-        m_Fps = m_FramesCount*1.3;
-    }
-    else 
-    {
-        m_Fps = fps;
-    }
-    
-    m_Delay = 1.f/m_Fps;
-}
-
-
-void TextureOb::AddTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
-{
-     m_Material.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
-     m_Material.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
-     m_Material.texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
-     m_Material.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
-}
-
-int TextureOb::UpdateAnimationFrame(float elapsed_time)
-{
-    if (m_Material.is_animated)
-    {
-        if (elapsed_time - m_LastUpdateTime > m_Delay)
-        {
-            m_CurrentFrame++;
-            if ( m_CurrentFrame >= m_FramesCount )
-            {
-                m_CurrentFrame = 0;
-            }
-            m_LastUpdateTime = elapsed_time;
-        }
-        return m_CurrentFrame;
-    }
-    else
-    {
-        return 0;
-    } 
-}
-
+namespace {
 
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
@@ -159,6 +47,158 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+}
+
+void loadToVRAM(GLuint& texture, int& w, int& h)
+{
+    sf::Image image;
+    const sf::Color& color = sf::Color(meti::getRandInt(50, 256),
+                                       meti::getRandInt(50, 256),
+                                       meti::getRandInt(50, 256));
+    image.create(w, h, color);
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+}
+
+} // namespace
+
+TextureOb::TextureOb()
+{
+    m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
+
+    if ( ((m_model.col_num == 1) and (m_model.row_num == 1)) or (m_model.fps == 0) ) {
+        m_model.is_animated = false;
+    } else {
+        m_model.is_animated = true;
+    }
+
+    load();
+
+    __createTextureCoords(m_model.col_num, m_model.row_num, m_model.fps);
+
+    //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
+}
+
+TextureOb::TextureOb(const model::Material& material)
+    :
+      m_model(material)
+{ 
+    m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
+    
+    if ( ((m_model.col_num == 1) && (m_model.row_num == 1)) || (m_model.fps == 0) ) {
+        m_model.is_animated = false;
+    } else {
+        m_model.is_animated = true;
+    }
+
+    load();
+    
+    __createTextureCoords(m_model.col_num, m_model.row_num, m_model.fps);
+    
+    //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
+}  
+
+TextureOb::~TextureOb()
+{ 
+
+}
+
+void TextureOb::load()
+{
+    if (m_model.texture_path != "") {
+        loadToVRAM(m_model.texture_path, m_model.texture, m_model.w, m_model.h);
+    } else {
+        loadToVRAM(m_model.texture, m_model.w, m_model.h);
+    }
+    if (m_model.normalmap_path != "") {
+        loadToVRAM(m_model.normalmap_path, m_model.normalmap, m_model.w, m_model.h);
+    }
+
+    m_isLoaded = true;
+}
+
+void TextureOb::unloadFromVRAM()
+{
+    m_isLoaded = false;
+}
+
+void TextureOb::__createTextureCoords(int col_num, int row_num, int fps)
+{
+    m_currentFrame = 0;
+    m_framesCount = 0;
+    
+    m_model.w_slice = m_model.w/col_num;
+    m_model.h_slice = m_model.h/row_num;
+    
+    float w_slicef = (float)m_model.w_slice/m_model.w;
+    float h_slicef = (float)m_model.h_slice/m_model.h;
+    
+    float w_offsetf = 0;
+    float h_offsetf = 0;
+
+    int r = 0;
+    while (r < row_num)
+    {
+       w_offsetf = 0;
+       int c = 0;
+       while (c < col_num)
+       {
+            __addTexCoordQuad(w_offsetf, h_offsetf, w_offsetf + w_slicef, h_offsetf + h_slicef);
+            w_offsetf += w_slicef;
+            m_framesCount++;
+            c++;
+       }
+       h_offsetf += h_slicef;
+       r++;
+    }
+    
+    m_lastUpdateTime = 0;
+    
+    if (m_frameNum == 0)
+    {
+        m_frameNum = m_framesCount*1.3;
+    }
+    else 
+    {
+        m_frameNum = fps;
+    }
+    
+    m_delay = 1.f/m_frameNum;
+}
+
+
+void TextureOb::__addTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
+{
+     m_model.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
+     m_model.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
+     m_model.texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
+     m_model.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
+}
+
+int TextureOb::updateAnimationFrame(float elapsed_time)
+{
+    if (m_model.is_animated)
+    {
+        if (elapsed_time - m_lastUpdateTime > m_delay)
+        {
+            m_currentFrame++;
+            if ( m_currentFrame >= m_framesCount )
+            {
+                m_currentFrame = 0;
+            }
+            m_lastUpdateTime = elapsed_time;
+        }
+        return m_currentFrame;
+    }
+    else
+    {
+        return 0;
+    } 
 }
 
 } // namespace jeti
