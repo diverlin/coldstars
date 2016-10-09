@@ -33,7 +33,7 @@ class Mesh : public Base
 {
 public:
     Mesh(int type,
-         const std::string& model,
+         const std::string& path,
          const std::string& texture = "",
          const meti::vec3& orientation = meti::vec3(1.0, 0.0, 0.0));
 
@@ -44,7 +44,7 @@ public:
 
     bool operator==(const Mesh& rhs) const;
 
-    const std::string& model() const { return m_modelPath; }
+    const std::string& modelPath() const { return m_modelPath; }
     const std::string& texture() const { return m_texturePath; }
     const glm::vec3& orientation() const { return m_orientation; }
 
