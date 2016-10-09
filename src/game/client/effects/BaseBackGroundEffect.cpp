@@ -61,14 +61,14 @@ const glm::mat4& BaseBackGroundEffect::actualModelMatrix()
 void BaseBackGroundEffect::SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor)
 {
     m_TextureOb = textureOb; 
-    m_Size.x = m_TextureOb->GetFrameWidth()  * scale_factor.x;
-    m_Size.y = m_TextureOb->GetFrameHeight() * scale_factor.y;
+    m_Size.x = m_TextureOb->frameWidth()  * scale_factor.x;
+    m_Size.y = m_TextureOb->frameHeight() * scale_factor.y;
     m_Size.z = 1.0 * scale_factor.z; 
 };
             
 void BaseBackGroundEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"textureOb_path", m_TextureOb->GetMaterial().texture_path);
+    save_ptree.put(root+"textureOb_path", m_TextureOb->model().texture_path);
     
     save_ptree.put(root+"center.x", m_Center.x);
     save_ptree.put(root+"center.y", m_Center.y);    

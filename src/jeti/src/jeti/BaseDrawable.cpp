@@ -34,12 +34,43 @@
 
 namespace jeti {
 
+ceti::Collector<TextureOb*> BaseDrawable::s_materials;
+ceti::Collector<Mesh*> BaseDrawable::s_meshes;
+
+namespace {
+
+TextureOb* getMaterial(int_t id)
+{
+    jeti::TextureOb* material = BaseDrawable::s_materials.get(id);
+    if(!material) {
+        material= new jeti::TextureOb;
+    }
+
+    return material;
+}
+
+jeti::Mesh* getMesh(int_t id)
+{
+    jeti::Mesh* mesh = BaseDrawable::s_meshes.get(id);
+    if(!mesh) {
+        mesh= new jeti::Mesh;
+    }
+
+    return mesh;
+}
+
+} // namespace
+
+
 BaseDrawable::BaseDrawable(ceti::model::BaseDrawable* model)
     :
       m_model_base(model)
 {
-//    m_material = getMaterial(model->material());
-//    m_mesh = getMaterial(model->mesh());
+    m_material = getMaterial(model->material());
+    m_mesh = getMesh(model->mesh());
+
+    assert(m_material);
+    assert(m_mesh);
 }
 
 BaseDrawable::~BaseDrawable() {
