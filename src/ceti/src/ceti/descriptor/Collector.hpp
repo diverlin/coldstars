@@ -29,6 +29,46 @@
 #include <fstream>
 
 namespace ceti {
+
+template<typename T>
+class Collector
+{
+public:
+    Collector() {}
+    ~Collector() {}
+
+    void add(const T& ob) {
+        if (!__isExist(ob)) {
+            m_objects.insert(std::make_pair( ob.id(), ob ));
+        } else {
+            throw std::runtime_error("fail add, id is already exist");
+        }
+    }
+
+    const T& get(const int_t& id) const {
+        auto it = m_objects.find(id);
+        if (it != m_objects.end()) {
+            return it->second;
+        } else {
+            throw std::runtime_error("fail get, id doesn't exist");
+        }
+        assert(false);
+    }
+
+private:
+    std::map<int, T> m_objects;
+
+    bool __isExist(const T& ob) const {
+        return (m_objects.find(ob.id()) != m_objects.end());
+    }
+
+//    void __clear() {
+//        m_objects.clear();
+//    }
+};
+
+
+
 namespace descriptor {
 
 

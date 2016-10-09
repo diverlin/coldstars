@@ -26,73 +26,17 @@ Star::Star(model::Star* model)
     :
       BaseDrawable(model)
     , m_model_star(model)
-    , m_DeltaColor(0.0)
-    , m_SparkActive(false)
-    , m_SparkGrows(false)
-    , m_TurnSinceLastSparkCounter(0)
 { 
 }
   
 Star::~Star()
 {}
 
-//alpitodorender
-/*
-int Star::GetColorId() const { return textureOb().GetData().color_id; }
+void Star::draw()
+{
 
-float Star::GetBrightThreshold() const { return textureOb().GetData().brightThreshold; }
-            
-void Star::CalcColor()
-{
-    SetColor(getColor4fById(textureOb().GetData().color_id));
-}
-*/
-void Star::InitiateSpark()
-{
-    m_SparkActive = true;
-    m_SparkGrows = true;
-    m_TurnSinceLastSparkCounter = 0;
 }
 
-void Star::UpdateInSpace(int time, bool show_effect)
-{
-    if (m_SparkActive == true)
-    {
-        if (show_effect == true)
-        {
-            if (m_SparkGrows == true)
-            {
-                m_DeltaColor += 0.02;
-                //scale += 0.2;
-                if (m_DeltaColor > 1.0)
-                {
-                    m_DeltaColor = 1.0;
-                    //starsystem()->StarSparkEvent(getRandInt(600, 1200));
-                    m_SparkGrows = false;
-                }
-            } 
-            else
-            {        
-                m_DeltaColor -= 0.005;    
-                //scale -= 0.05;
-                if (m_DeltaColor < 0.0)
-                {
-                    m_DeltaColor = 0;
-                    m_SparkActive = false;
-                } 
-            }
-        }
-        else
-        {
-            //starsystem()->StarSparkEvent(getRandInt(600, 1200));
-            m_SparkActive = false;
-        }
-    }
-
-    //UpdateRotation(); // not relevant for render NEW
-}    
-    
-/* virtual override final */
 //void Star::UpdateInfo()
 //{
 //    GetInfo().clear();

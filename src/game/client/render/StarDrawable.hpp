@@ -32,30 +32,11 @@ class Star : public jeti::BaseDrawable
         Star(model::Star*);
         virtual ~Star() final override;
 
-        //alpitodorender
-//        int GetColorId() const;
-//        float GetBrightThreshold() const;
-        float GetDeltaColor() const { return m_DeltaColor; }
-        
-        void InitiateSpark();
-        
+        void draw();
 
-       // alpitodorender void CalcColor(); 
-        void UpdateInSpace(int, bool);
-                
     private:
         model::Star* m_model_star = nullptr;
         model::Star* model() const { return m_model_star; }
-
-        float m_DeltaColor;
-        
-        bool m_SparkActive;
-        bool m_SparkGrows;
-        
-        int m_TurnSinceLastSparkCounter;
-        int m_TurnSparkThreshold;
-        
-        //virtual void UpdateInfo() override final;
 }; 
 
 } // namespace view
