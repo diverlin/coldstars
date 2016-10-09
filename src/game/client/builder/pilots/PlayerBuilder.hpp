@@ -29,7 +29,7 @@ class PlayerBuilder
         static PlayerBuilder& Instance();
         ~PlayerBuilder();
 
-        Player* GetNewPlayerTemplate(const int_t& id = NONE) const;
+        Player* GetNewPlayerTemplate(int_t id = NONE) const;
         Player* createNewPlayer() const;
                                      
     private:               

@@ -2,8 +2,8 @@
 
 #include <ceti/serialization/macro.hpp>
 
-AddToStarsystemDescriptor::AddToStarsystemDescriptor(const int_t& owner,
-                                                     const int_t& object,
+AddToStarsystemDescriptor::AddToStarsystemDescriptor(int_t owner,
+                                                     int_t object,
                                                      const glm::vec3& position,
                                                      const glm::vec3& angle)
     :

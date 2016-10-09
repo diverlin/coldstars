@@ -28,7 +28,7 @@
 namespace item {
 namespace equipment {
 
-Scaner::Scaner(const int_t& id)
+Scaner::Scaner(int_t id)
     :
       m_scan_orig(0)
 {

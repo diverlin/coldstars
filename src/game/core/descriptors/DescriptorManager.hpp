@@ -52,7 +52,7 @@ public:
         }
     }
 
-    const T& get(const int_t& id) const {
+    const T& get(int_t id) const {
         std::cout<<"MManager get(descriptor.id="<<id<<")"<<std::endl;
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
@@ -90,7 +90,7 @@ public:
 
     void add(const BaseOLD&);
     BaseOLD getRand(const Type&);
-    BaseOLD get(const int_t&);
+    BaseOLD get(int_t);
 
     void save();
     void load();

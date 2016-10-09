@@ -27,7 +27,7 @@
 namespace item {
 namespace equipment {
 
-Protector::Protector(const int_t& id)
+Protector::Protector(int_t id)
     :
       m_protection_orig(0)
 {

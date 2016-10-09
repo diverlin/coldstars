@@ -42,7 +42,7 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-Player* PlayerBuilder::GetNewPlayerTemplate(const int_t& id) const
+Player* PlayerBuilder::GetNewPlayerTemplate(int_t id) const
 {
     Player* player = nullptr;
     if (id == NONE) {

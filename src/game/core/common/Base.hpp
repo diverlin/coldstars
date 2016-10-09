@@ -46,11 +46,11 @@ public:
     void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
     const core::Id& ident() const { return m_type; }
-    const int_t& id() const { return m_id; }
+    int_t id() const { return m_id; }
     const type::entity& type() const { return m_type.type; }
     const type::entity& subtype() const { return m_type.subtype; }
     const type::entity& subsubtype() const { return m_type.subsubtype; }
-    const int_t& descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
+    int_t descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
 
     std::string dataTypeStr() const;
 
@@ -58,7 +58,7 @@ public:
     virtual void Load(const boost::property_tree::ptree&) {}
     virtual void Resolve() {}
 
-    void setId(const int_t& id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
+    void setId(int_t id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
 
 protected:
     void setTypeId(const type::entity& major)   { m_type.type = major; }
@@ -91,19 +91,19 @@ public:
     Base(const std::string& data);
     std::string data() const;
 
-    void setId(const int_t& id) { m_id = id; }
+    void setId(int_t id) { m_id = id; }
     void setType(const type::entity& major)   { m_type.type = major; }
     void setSubType(const type::entity& minor) { m_type.subtype = minor; }
     void setSubSubType(const type::entity& patch) { m_type.subsubtype = patch; }
 
-    void setDescriptor(const int_t& descriptor) { m_descriptor = descriptor; }
+    void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
     const core::Id& ident() const { return m_type; }
-    const int_t& id() const { return m_id; }
+    int_t id() const { return m_id; }
     const type::entity& type() const { return m_type.type; }
     const type::entity& subtype() const { return m_type.subtype; }
     const type::entity& subsubtype() const { return m_type.subsubtype; }
-    const int_t& descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
+    int_t descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
 
     std::string dataTypeStr() const;
 

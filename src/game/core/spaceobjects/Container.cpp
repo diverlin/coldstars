@@ -35,7 +35,7 @@
 #include <item/BaseItem.hpp>
 
 
-Container::Container(const int_t& id)
+Container::Container(int_t id)
 {
     setId(id);
     setTypeId(type::entity::CONTAINER_ID);

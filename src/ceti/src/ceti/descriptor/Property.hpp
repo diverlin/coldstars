@@ -33,7 +33,7 @@ class Property : public Id {
 public:
     enum {INT, FLOAT, STR, VEC3};
 
-    Property(const Id& id, const int_t& value)
+    Property(const Id& id, int_t value)
         :
           Id(id)
         , valueType(INT)

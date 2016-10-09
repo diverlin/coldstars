@@ -27,7 +27,7 @@ namespace equipment {
 class Droid : public Base
 {
 public:
-    Droid(const int_t& id);
+    Droid(int_t id);
     virtual ~Droid();
 
     void SetRepairOrig(int repair_orig) { m_repair_orig = repair_orig; }

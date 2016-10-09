@@ -28,7 +28,7 @@ namespace descriptor {
 class Container : public BaseOLD
 {
 public:
-    Container(const int_t& child_id);
+    Container(int_t child_id);
     Container(const std::string& data);
     ~Container() {}
 };

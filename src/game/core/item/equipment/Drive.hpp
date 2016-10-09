@@ -27,7 +27,7 @@ namespace equipment {
 class Drive : public Base
 {
 public:
-    Drive(const int_t& id);
+    Drive(int_t id);
     virtual ~Drive();
 
     void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };

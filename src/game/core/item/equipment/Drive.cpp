@@ -25,7 +25,7 @@
 namespace item {
 namespace equipment {
 
-Drive::Drive(const int_t& id)
+Drive::Drive(int_t id)
 {
     setId(id);
     setTypeId(type::entity::EQUIPMENT_ID);

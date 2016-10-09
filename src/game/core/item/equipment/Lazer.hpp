@@ -29,7 +29,7 @@ namespace equipment {
 class Lazer : public Base
 {
     public:
-        Lazer(const int_t& id);
+        Lazer(int_t id);
         virtual ~Lazer();
 
         void SetDamageOrig(int damage_orig) { m_damage_orig = damage_orig; }

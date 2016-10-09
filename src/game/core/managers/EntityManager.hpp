@@ -38,11 +38,11 @@ public:
     void reg(core::Base*);
     void reg(core::model::Base*);
 
-    core::Base* getEntity(const int_t&) const;
-    core::model::Base* get(const int_t&) const;
+    core::Base* getEntity(int_t) const;
+    core::model::Base* get(int_t) const;
 
     template<class T>
-    T getEntity(const int_t& id) const {
+    T getEntity(int_t id) const {
         core::Base* base = getEntity(id);
         T der = static_cast<T>(base);
         assert(der);

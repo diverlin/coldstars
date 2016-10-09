@@ -28,7 +28,7 @@ namespace descriptor {
 std::map<int, Id> Descriptor::m_ids;
 
 
-Descriptor::Descriptor(const int_t& type, const int_t& id)
+Descriptor::Descriptor(int_t type, int_t id)
     :
       Base(type, id)
 {
@@ -108,7 +108,7 @@ Descriptor::add(const std::vector<Property>& props)
     }
 }
 
-const int_t&
+int_t
 Descriptor::get_i(int key) const
 {
     auto it = m_intValues.find(key);
