@@ -20,13 +20,17 @@
 
 #include <jeti/BaseDrawable.hpp>
 
+namespace model {
 class Star;
+} // namespace model
 
-class StarDrawable : public jeti::BaseDrawable
+namespace view {
+
+class Star : public jeti::BaseDrawable
 {
     public:
-        StarDrawable(jeti::TextureOb*, jeti::Mesh*, Star*);
-        virtual ~StarDrawable() final override;
+        Star(model::Star*);
+        virtual ~Star() final override;
 
         //alpitodorender
 //        int GetColorId() const;
@@ -40,7 +44,9 @@ class StarDrawable : public jeti::BaseDrawable
         void UpdateInSpace(int, bool);
                 
     private:
-        Star* m_star = nullptr;
+        model::Star* m_model_star = nullptr;
+        model::Star* model() const { return m_model_star; }
+
         float m_DeltaColor;
         
         bool m_SparkActive;
@@ -52,7 +58,7 @@ class StarDrawable : public jeti::BaseDrawable
         //virtual void UpdateInfo() override final;
 }; 
 
-
+} // namespace view
 
         
 

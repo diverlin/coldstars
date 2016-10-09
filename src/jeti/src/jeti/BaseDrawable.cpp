@@ -19,30 +19,35 @@
 
 #include "BaseDrawable.hpp"
 #include <Render.hpp>
-
 #include <TextureOb.hpp>
 #include <Mesh.hpp>
+
 #include <animations/BaseAnimationRotation.hpp>
 
-#include <ceti/Orientation.hpp>
-
-#include <glm/gtx/transform.hpp>
 #include <meti/QuaternionUtils.hpp>
 
+#include <ceti/Orientation.hpp>
 #include <ceti/Logger.hpp>
+#include <ceti/Base.hpp>
+
+#include <glm/gtx/transform.hpp>
 
 namespace jeti {
 
-BaseDrawable::BaseDrawable()
-{}
-
-BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
+BaseDrawable::BaseDrawable(ceti::model::BaseDrawable* model)
     :
-      m_material(textureOb),
-      m_mesh(mesh)
-{}
+      m_model_base(model)
+{
+    //      m_material(textureOb),
+    //      m_mesh(mesh)
+}
 
-/* virtual */
+//BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
+//    :
+//      m_material(textureOb),
+//      m_mesh(mesh)
+//{}
+
 BaseDrawable::~BaseDrawable() {
     delete m_animationRotation;
     m_animationRotation= nullptr;

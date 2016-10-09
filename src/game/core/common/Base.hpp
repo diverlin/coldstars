@@ -21,6 +21,7 @@
 #include <struct/IdData.hpp>
 
 #include <ceti/NonCopyable.hpp>
+#include <ceti/Base.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -82,7 +83,7 @@ private:
 
 namespace model {
 
-class Base : private NonCopyable
+class Base : public ceti::model::BaseDrawable
 {
 public:
     Base() = default;
@@ -95,10 +96,7 @@ public:
     void setSubType(const type::entity& minor) { m_type.subtype = minor; }
     void setSubSubType(const type::entity& patch) { m_type.subsubtype = patch; }
 
-    // resources
     void setDescriptor(const int_t& descriptor) { m_descriptor = descriptor; }
-    void setMesh(int mesh) { m_mesh = mesh; }
-    void setMaterial(int material) { m_material = material; }
 
     const core::Id& ident() const { return m_type; }
     const int_t& id() const { return m_id; }
@@ -113,8 +111,6 @@ private:
     core::Id m_type;
     int_t m_descriptor = NONE;
     int_t m_id = NONE;
-    int_t m_mesh = NONE;
-    int_t m_material = NONE;
 
 private:
     friend class boost::serialization::access;
@@ -124,8 +120,6 @@ private:
         ar & m_type;
         ar & m_descriptor;
         ar & m_id;
-        ar & m_mesh;
-        ar & m_material;
     }
 };
 

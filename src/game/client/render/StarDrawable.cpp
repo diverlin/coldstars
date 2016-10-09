@@ -18,10 +18,14 @@
 
 #include "StarDrawable.hpp"
 
-StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh, Star* star)
+#include <spaceobjects/Star.hpp>
+
+namespace view {
+
+Star::Star(model::Star* model)
     :
-      BaseDrawable(texture, mesh)
-    , m_star(star)
+      BaseDrawable(model)
+    , m_model_star(model)
     , m_DeltaColor(0.0)
     , m_SparkActive(false)
     , m_SparkGrows(false)
@@ -29,7 +33,7 @@ StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh, Star* sta
 { 
 }
   
-StarDrawable::~StarDrawable()
+Star::~Star()
 {}
 
 //alpitodorender
@@ -43,14 +47,14 @@ void Star::CalcColor()
     SetColor(getColor4fById(textureOb().GetData().color_id));
 }
 */
-void StarDrawable::InitiateSpark()
+void Star::InitiateSpark()
 {
     m_SparkActive = true;
     m_SparkGrows = true;
     m_TurnSinceLastSparkCounter = 0;
 }
 
-void StarDrawable::UpdateInSpace(int time, bool show_effect)
+void Star::UpdateInSpace(int time, bool show_effect)
 {
     if (m_SparkActive == true)
     {
@@ -97,3 +101,5 @@ void StarDrawable::UpdateInSpace(int time, bool show_effect)
 //    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
 //    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(center()) );
 //}
+
+} // namespace view

@@ -18,25 +18,25 @@
 
 #pragma once
 
-#include <jeti/BaseDrawable.hpp>
+//#include <jeti/BaseDrawable.hpp>
 
-namespace jeti {
-class DriveEffect;
-}
+//namespace jeti {
+//class DriveEffect;
+//}
 
-class BulletDrawable : public jeti::BaseDrawable
-{
-    public:
-        BulletDrawable(jeti::TextureOb*, jeti::Mesh*);
+//class BulletDrawable : public jeti::BaseDrawable
+//{
+//    public:
+//        BulletDrawable(jeti::TextureOb*, jeti::Mesh*);
         
-        virtual ~BulletDrawable() final override;
+//        virtual ~BulletDrawable() final override;
         
-        void CreateDriveComplexTextureDependedStuff();
+//        void CreateDriveComplexTextureDependedStuff();
         
-        //void RenderInSpace(const Renderer&, float);
+//        //void RenderInSpace(const Renderer&, float);
             
-    private:
-        jeti::DriveEffect* m_EffectDrive;
+//    private:
+//        jeti::DriveEffect* m_EffectDrive;
         
-        //virtual void UpdateInfo() override final;
-};
+//        //virtual void UpdateInfo() override final;
+//};

@@ -19,17 +19,24 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
-#include <glm/gtx/quaternion.hpp>
-
 //#include <text/InfoTable.hpp>
+#include <ceti/type/IdType.hpp>
 #include <ceti/Orientation.hpp>
 #include <ceti/rect.hpp>
 
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
+
 namespace ceti {
+
 namespace control {
 class Orientation;
 } // namespace control
+
+namespace model {
+class BaseDrawable;
+} // namespace model
+
 } // namespace ceti
 
 namespace jeti {
@@ -46,9 +53,9 @@ class Renderer;
 class BaseDrawable
 {
 public:
-    [[deprecated("remove this")]]
-    BaseDrawable();
-    BaseDrawable(TextureOb*, Mesh*);
+//    [[deprecated("remove")]]
+//    BaseDrawable();
+    BaseDrawable(ceti::model::BaseDrawable*);
     virtual ~BaseDrawable();
 
     void validateResources() const;
@@ -83,6 +90,9 @@ protected:
     bool _updateFadeOutEffect(); // depr, move to animation program
 
 private:
+    ceti::model::BaseDrawable* m_model_base = nullptr;
+    ceti::model::BaseDrawable* model() const { return m_model_base; }
+
     glm::vec4 m_color;
 
     TextureOb* m_material = nullptr;

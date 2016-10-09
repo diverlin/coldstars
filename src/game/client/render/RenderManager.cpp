@@ -147,18 +147,18 @@ void SpaceViewer::__clear()
     m_stars.clear();
     m_planets.clear();
     m_asteroids.clear();
-    m_containers.clear();
-    m_ships.clear();
-    m_satellites.clear();
-    m_spacestations.clear();
-    m_bullets.clear();
-    m_wormholes.clear();
+//    m_containers.clear();
+//    m_ships.clear();
+//    m_satellites.clear();
+//    m_spacestations.clear();
+//    m_bullets.clear();
+//    m_wormholes.clear();
 
     // effects
-    m_shockwaves.clear();
-    m_lazertraces.clear();
-    m_particlesystems.clear();
-    m_texts.clear();
+//    m_shockwaves.clear();
+//    m_lazertraces.clear();
+//    m_particlesystems.clear();
+//    m_texts.clear();
 }
 
 void SpaceViewer::addIfVisible(Star* star, const VisibilityData& data)
@@ -182,106 +182,106 @@ void SpaceViewer::addIfVisible(view::Planet* planet, const VisibilityData& data)
     }
 }
 
-void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
-            __add(asteroid);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
+//            __add(asteroid);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
-            __add(container);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
+//            __add(container);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
-            __add(bullet);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
+//            __add(bullet);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(wormhole->center(), wormhole->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(wormhole->center(), data.observer.center, data.observer.radius)) {
-            __add(wormhole);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(wormhole->center(), wormhole->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(wormhole->center(), data.observer.center, data.observer.radius)) {
+//            __add(wormhole);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(ship->center(), ship->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(ship->center(), data.observer.center, data.observer.radius)) {
-            __add(ship);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(ship->center(), ship->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(ship->center(), data.observer.center, data.observer.radius)) {
+//            __add(ship);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(spacestation->center(), spacestation->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(spacestation->center(), data.observer.center, data.observer.radius)) {
-            __add(spacestation);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(spacestation->center(), spacestation->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(spacestation->center(), data.observer.center, data.observer.radius)) {
+//            __add(spacestation);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(satellite->center(), satellite->size(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(satellite->center(), data.observer.center, data.observer.radius)) {
-            __add(satellite);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(satellite->center(), satellite->size(), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(satellite->center(), data.observer.center, data.observer.radius)) {
+//            __add(satellite);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
-{
-    if (isRectOnVisibleScreenArea(effect->center(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(effect->center(), data.observer.center, data.observer.radius)) {
-            __add(effect);
-        }
-    }
-}
+//void SpaceViewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
+//{
+//    if (isRectOnVisibleScreenArea(effect->center(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
+//        if (ceti::isPointInObserverRadius(effect->center(), data.observer.center, data.observer.radius)) {
+//            __add(effect);
+//        }
+//    }
+//}
 
-void SpaceViewer::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
-{
-    //    if ( (isLineOnVisibleScreenArea(effect->GetStartPos(), effect->GetEndPos()))) {
-    //        if (isObjectWithinRadarRange(effect, npc->vehicle()))
-    //        {
-    __add(effect);
-    //        }
-    //    }
-}
+//void SpaceViewer::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
+//{
+//    //    if ( (isLineOnVisibleScreenArea(effect->GetStartPos(), effect->GetEndPos()))) {
+//    //        if (isObjectWithinRadarRange(effect, npc->vehicle()))
+//    //        {
+//    __add(effect);
+//    //        }
+//    //    }
+//}
 
-void SpaceViewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
-{
-    //    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
-    //        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
-    __add(effect);
-    //        }
-    //    }
-}
+//void SpaceViewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
+//{
+//    //    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
+//    //        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
+//    __add(effect);
+//    //        }
+//    //    }
+//}
 
-void SpaceViewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
-{
-    if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
-        m_texts.push_back(effect);
-    }
-}
+//void SpaceViewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
+//{
+//    if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
+//        m_texts.push_back(effect);
+//    }
+//}
 
 /// visible entities
-void SpaceViewer::__add(StarDrawable* view)
+void SpaceViewer::__add(Star* view)
 {
     m_stars.push_back(view);
 }
@@ -291,61 +291,61 @@ void SpaceViewer::__add(Planet* view)
     m_planets.push_back(view);
 }
 
-void SpaceViewer::__add(AsteroidDrawable* view)
+void SpaceViewer::__add(Asteroid* view)
 {
     m_asteroids.push_back(view);
 }
 
-void SpaceViewer::__add(Container* view)
-{
-    m_containers.push_back(view);
-}
+//void SpaceViewer::__add(Container* view)
+//{
+//    m_containers.push_back(view);
+//}
 
-void SpaceViewer::__add(BulletDrawable* view)
-{
-    m_bullets.push_back(view);
-}
+//void SpaceViewer::__add(BulletDrawable* view)
+//{
+//    m_bullets.push_back(view);
+//}
 
-void SpaceViewer::__add(BlackHoleDrawable* view)
-{
-    m_wormholes.push_back(view);
-}
+//void SpaceViewer::__add(BlackHoleDrawable* view)
+//{
+//    m_wormholes.push_back(view);
+//}
 
-void SpaceViewer::__add(ShipDrawable* view)
-{
-    m_ships.push_back(view);
-}
+//void SpaceViewer::__add(ShipDrawable* view)
+//{
+//    m_ships.push_back(view);
+//}
 
-void SpaceViewer::__add(SpaceStationDrawable* view)
-{
-    //m_satellites.push_back(view);
-}
+//void SpaceViewer::__add(SpaceStationDrawable* view)
+//{
+//    //m_satellites.push_back(view);
+//}
 
-void SpaceViewer::__add(SatelliteDrawable* view)
-{
-    //m_spacestations.push_back(view);
-}
+//void SpaceViewer::__add(SatelliteDrawable* view)
+//{
+//    //m_spacestations.push_back(view);
+//}
 
-/// visible effects
-void SpaceViewer::__add(ShockWaveEffect* view)
-{
-    m_shockwaves.push_back(view);
-}
+///// visible effects
+//void SpaceViewer::__add(ShockWaveEffect* view)
+//{
+//    m_shockwaves.push_back(view);
+//}
 
-void SpaceViewer::__add(LazerTraceEffect* view)
-{
-    m_lazertraces.push_back(view);
-}
+//void SpaceViewer::__add(LazerTraceEffect* view)
+//{
+//    m_lazertraces.push_back(view);
+//}
 
-void SpaceViewer::__add(jeti::BaseParticleSystem* view)
-{
-    m_particlesystems.push_back(view);
-}
+//void SpaceViewer::__add(jeti::BaseParticleSystem* view)
+//{
+//    m_particlesystems.push_back(view);
+//}
 
-void SpaceViewer::__add(VerticalFlowText* view)
-{
-    m_texts.push_back(view);
-}
+//void SpaceViewer::__add(VerticalFlowText* view)
+//{
+//    m_texts.push_back(view);
+//}
 
 void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
 {   
@@ -374,7 +374,7 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 //starsystem->DrawBackground(render, world_coord);
                 render.setOrthogonalProjection(w*scale, h*scale);
 
-                for(StarDrawable* star: m_stars)
+                for(Star* star: m_stars)
                 {
                     //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
@@ -420,42 +420,42 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                         planet->render(render);
                     }
 
-                    for(SpaceStationDrawable* spacestation: m_spacestations) {
-                        //spacestation->RenderInSpace(render, 1/scale);
-                    }
+//                    for(SpaceStationDrawable* spacestation: m_spacestations) {
+//                        //spacestation->RenderInSpace(render, 1/scale);
+//                    }
 
-                    //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
-                    for(ShipDrawable* ship: m_ships) {
-                        //ship->RenderInSpace(render, 1/scale);
-                    }
+//                    //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
+//                    for(ShipDrawable* ship: m_ships) {
+//                        //ship->RenderInSpace(render, 1/scale);
+//                    }
 
-                    for(AsteroidDrawable* asteroid: m_asteroids) {
+                    for(Asteroid* asteroid: m_asteroids) {
                         //asteroid->Render_NEW(render, world_coord);
                     }
 
-                    for(BlackHoleDrawable* warmhole: m_wormholes) {
-                        //blackhole->Render_NEW(render);
-                    }
+//                    for(BlackHoleDrawable* warmhole: m_wormholes) {
+//                        //blackhole->Render_NEW(render);
+//                    }
                 }
 
-                {
-                    for(Container* container: m_containers) {
-                        container->render(render);
-                    }
+//                {
+//                    for(Container* container: m_containers) {
+//                        container->render(render);
+//                    }
 
-                    for(SatelliteDrawable* satellite: m_satellites) {
-                        //satellite->RenderInSpace(render, 1/scale);
-                    }
+//                    for(SatelliteDrawable* satellite: m_satellites) {
+//                        //satellite->RenderInSpace(render, 1/scale);
+//                    }
 
-                    for(BulletDrawable* bullet: m_bullets) {
-                        //rocket->RenderInSpace(render, 1/scale);
-                    }
-                }
-                //                if (show.collisionRadius() == true)
-                //                {
-                //                    RenderAxis(render);
-                //                    RenderCollisionRadius(render);
-                //                }
+//                    for(BulletDrawable* bullet: m_bullets) {
+//                        //rocket->RenderInSpace(render, 1/scale);
+//                    }
+//                }
+//                //                if (show.collisionRadius() == true)
+//                //                {
+//                //                    RenderAxis(render);
+//                //                    RenderCollisionRadius(render);
+//                //                }
             }
             render.deactivateFbo(3);
         }
@@ -470,31 +470,31 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 float xyz_array[SHOCKWAVES_MAX_NUM][3];
                 float time_array[SHOCKWAVES_MAX_NUM];
 
-                unsigned int i=0;
-                for (i=0; ((i<m_wormholes.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
-                {
-                    const ShockWaveEffect& shockwave = *m_wormholes[i]->GetShockWaveEffect();
+//                unsigned int i=0;
+//                for (i=0; ((i<m_wormholes.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
+//                {
+//                    const ShockWaveEffect& shockwave = *m_wormholes[i]->GetShockWaveEffect();
 
-                    center_array[i][0] = (shockwave.center().x - world_coord.x)/w;
-                    center_array[i][1] = (shockwave.center().y - world_coord.y)/h;
-                    xyz_array[i][0] = shockwave.parameters().x;
-                    xyz_array[i][1] = shockwave.parameters().y;
-                    xyz_array[i][2] = shockwave.parameters().z;
+//                    center_array[i][0] = (shockwave.center().x - world_coord.x)/w;
+//                    center_array[i][1] = (shockwave.center().y - world_coord.y)/h;
+//                    xyz_array[i][0] = shockwave.parameters().x;
+//                    xyz_array[i][1] = shockwave.parameters().y;
+//                    xyz_array[i][2] = shockwave.parameters().z;
                     
-                    time_array[i] = shockwave.time();
-                }
-                for (unsigned int j=0; ((j<m_shockwaves.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
-                {
-                    center_array[i][0] = (m_shockwaves[j]->center().x - world_coord.x)/(w*scale);
-                    center_array[i][1] = (m_shockwaves[j]->center().y - world_coord.y)/(h*scale);
-                    xyz_array[i][0] = m_shockwaves[j]->parameters().x;
-                    xyz_array[i][1] = m_shockwaves[j]->parameters().y;
-                    xyz_array[i][2] = m_shockwaves[j]->parameters().z/scale;
+//                    time_array[i] = shockwave.time();
+//                }
+//                for (unsigned int j=0; ((j<m_shockwaves.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+//                {
+//                    center_array[i][0] = (m_shockwaves[j]->center().x - world_coord.x)/(w*scale);
+//                    center_array[i][1] = (m_shockwaves[j]->center().y - world_coord.y)/(h*scale);
+//                    xyz_array[i][0] = m_shockwaves[j]->parameters().x;
+//                    xyz_array[i][1] = m_shockwaves[j]->parameters().y;
+//                    xyz_array[i][2] = m_shockwaves[j]->parameters().z/scale;
                     
-                    time_array[i] = m_shockwaves[j]->time();
-                }
+//                    time_array[i] = m_shockwaves[j]->time();
+//                }
 
-                render.drawPostEffectShockWaves(render.lastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
+                //render.drawPostEffectShockWaves(render.lastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
             }
             render.deactivateFbo(4);
         }
@@ -510,17 +510,17 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 //resizeGl(w*scale, h*scale);
                 //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
 
-                for(unsigned int i = 0; i<m_lazertraces.size(); i++)
-                {
-                    const LazerTraceEffect& lazer_trace = *m_lazertraces[i];
-                    //render.DrawMesh(lazer_trace.mesh(), lazer_trace.textureOb(), lazer_trace.actualModelMatrix());
-                }
+//                for(unsigned int i = 0; i<m_lazertraces.size(); i++)
+//                {
+//                    const LazerTraceEffect& lazer_trace = *m_lazertraces[i];
+//                    //render.DrawMesh(lazer_trace.mesh(), lazer_trace.textureOb(), lazer_trace.actualModelMatrix());
+//                }
 
-                for(unsigned int i=0; i<m_particlesystems.size(); i++)
-                {
-                    //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                    //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
-                }
+//                for(unsigned int i=0; i<m_particlesystems.size(); i++)
+//                {
+//                    //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
+//                    //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
+//                }
             }
             render.deactivateFbo(5);
         }
@@ -537,9 +537,9 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
         // render text
         //resizeGl(w*scale, h*scale);
         //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-        for(unsigned int i = 0; i<m_texts.size(); i++) {
-            //visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale);
-        }
+//        for(unsigned int i = 0; i<m_texts.size(); i++) {
+//            //visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale);
+//        }
 
         //starsystem->RestoreSceneColor();
     }

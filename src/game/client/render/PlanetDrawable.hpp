@@ -36,6 +36,8 @@ public:
     void render(const jeti::Renderer&) override;
 
 private:
+    model::Planet* m_model_planet = nullptr;
+    model::Planet* model() const { return m_model_planet; }
     //virtual void UpdateInfo() override final;
 }; 
 

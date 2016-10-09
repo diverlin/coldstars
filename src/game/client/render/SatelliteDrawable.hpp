@@ -20,18 +20,18 @@
 
 #include <render/VehicleDrawable.hpp>
 
-class SatelliteDrawable : public VehicleDrawable
-{
-    public:  
-        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~SatelliteDrawable() override final;
+//class SatelliteDrawable : public VehicleDrawable
+//{
+//    public:
+//        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        virtual ~SatelliteDrawable() override final;
             
-        //virtual void UpdateInSpace(int, bool) override final;
+//        //virtual void UpdateInSpace(int, bool) override final;
         
-        void RenderInSpace(const jeti::Renderer&, float);
-        void RenderAtPlanet(const jeti::Renderer&);
+//        void RenderInSpace(const jeti::Renderer&, float);
+//        void RenderAtPlanet(const jeti::Renderer&);
             
-    private:
-        //virtual void UpdateInfo() override final;
-        void UpdateRenderStuff();     
-};
+//    private:
+//        //virtual void UpdateInfo() override final;
+//        void UpdateRenderStuff();
+//};

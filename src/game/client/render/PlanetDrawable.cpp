@@ -19,18 +19,21 @@
 
 #include "PlanetDrawable.hpp"
 
+#include <spaceobjects/Planet.hpp>
+
 ////#include <ceti/StringUtils.hpp>
 //#include <ceti/Logger.hpp>
   
-#include <effects/BaseDecor.hpp>
+//#include <effects/BaseDecor.hpp>
 
 #include <jeti/Render.hpp>
 
 namespace view {
 
-Planet::Planet(model::Planet* planet)
+Planet::Planet(model::Planet* model)
     :
-      jeti::BaseDrawable()
+      jeti::BaseDrawable(model)
+    , m_model_planet(model)
 {
 //    setTexture(planet->texture());
 //    setMesh(planet->mesh());

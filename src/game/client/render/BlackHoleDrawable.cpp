@@ -19,27 +19,27 @@
 #include "BlackHoleDrawable.hpp"
 #include <effects/ShockWaveEffect.hpp>
 
-BlackHoleDrawable::BlackHoleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
-    :
-      BaseDrawable(texture, mesh)
-{
+//BlackHoleDrawable::BlackHoleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//    :
+//      BaseDrawable(texture, mesh)
+//{
 
-}
+//}
 
-/* virtual override final */
-BlackHoleDrawable::~BlackHoleDrawable()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BlackHoleDrawable("+std::to_string(id())+")");
-    #endif
+///* virtual override final */
+//BlackHoleDrawable::~BlackHoleDrawable()
+//{
+//    #if CREATEDESTROY_LOG_ENABLED == 1
+//    Logger::Instance().Log("___::~BlackHoleDrawable("+std::to_string(id())+")");
+//    #endif
     
-    delete m_shockwave;
-} 
+//    delete m_shockwave;
+//}
         
-void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)
-{
-    m_shockwave->Update();
-}
+//void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)
+//{
+//    m_shockwave->Update();
+//}
 
 /* virtual override final */
 //void BlackHole::UpdateInfo()

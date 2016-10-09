@@ -18,25 +18,25 @@
 
 #pragma once
 
-#include <jeti/BaseDrawable.hpp>
+//#include <jeti/BaseDrawable.hpp>
 
-class ShockWaveEffect;
+//class ShockWaveEffect;
 
-class BlackHoleDrawable : public jeti::BaseDrawable
-{
-    public:  
-        BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~BlackHoleDrawable() override final;
+//class BlackHoleDrawable : public jeti::BaseDrawable
+//{
+//    public:
+//        BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        virtual ~BlackHoleDrawable() override final;
 
-        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };
-        ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; };
+//        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };
+//        ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; };
         
-        void UpdateInSpace(int, bool);
+//        void UpdateInSpace(int, bool);
         
-    private:
-        ShockWaveEffect* m_shockwave;
+//    private:
+//        ShockWaveEffect* m_shockwave;
         
-//        virtual void UpdateInfo() override final;
-};
+////        virtual void UpdateInfo() override final;
+//};
 
 
