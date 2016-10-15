@@ -23,7 +23,7 @@ namespace view {
 
 Asteroid::Asteroid(model::Asteroid* model)
     :
-      jeti::view::Base(model)
+      jeti::view::BaseView(model)
     , m_model_asteroid(model)
 {   
 

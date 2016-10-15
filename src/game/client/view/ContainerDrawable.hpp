@@ -22,7 +22,7 @@
 
 namespace view {
 
-class Container : public jeti::view::Base
+class Container : public jeti::view::BaseView
 {
     public:                  
         Container(jeti::TextureOb*, jeti::Mesh*);

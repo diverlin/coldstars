@@ -29,7 +29,7 @@ namespace view {
 
 Planet::Planet(model::Planet* model)
     :
-      jeti::view::Base(model)
+      jeti::view::BaseView(model)
     , m_model_planet(model)
 {
 //    setTexture(planet->texture());

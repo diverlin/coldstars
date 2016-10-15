@@ -27,7 +27,7 @@ class Asteroid;
 
 namespace view {
 
-class Asteroid : public jeti::view::Base
+class Asteroid : public jeti::view::BaseView
 {
     public:
         Asteroid(model::Asteroid*);

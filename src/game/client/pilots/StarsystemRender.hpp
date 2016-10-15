@@ -78,7 +78,7 @@ class StarsystemRender
         ~StarsystemRender();
 
     private:
-        std::vector<jeti::view::Base*> m_objects;
+        std::vector<jeti::view::BaseView*> m_objects;
 
         // VISIBLE ENTITY LIST
         std::vector<Star*>         visible_STAR_vec;
@@ -104,7 +104,7 @@ class StarsystemRender
         void RenderAxis(const jeti::Renderer&) const;
 
         void clearVisibleEntities();
-        void addIfVisible(jeti::view::Base*);
+        void addIfVisible(jeti::view::BaseView*);
 
 //        void addIfVisible(Star*);
 //        void addIfVisible(Planet*);
