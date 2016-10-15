@@ -67,7 +67,7 @@
 #include <pureTest/vectorPerfomanceTest.cpp>
 #include <pureTest/matrixPerfomanceTest.cpp>
 
-#include <render/RenderManager.hpp>
+#include <view/RenderManager.hpp>
 
 #include <types/MeshTypes.hpp>
 

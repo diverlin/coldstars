@@ -20,7 +20,7 @@
 
 //#include <jeti/BaseDrawable.hpp>
 
-//class VehicleDrawable : public jeti::BaseDrawable
+//class VehicleDrawable : public jeti::view::BaseDrawable
 //{
 //    public:
 //        VehicleDrawable(jeti::TextureOb*, jeti::Mesh*);

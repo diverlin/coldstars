@@ -16,22 +16,19 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AsteroidDrawable.hpp"
+#include "Asteroid.hpp"
 #include <spaceobjects/Asteroid.hpp>
-
-//#include <ceti/Logger.hpp>
  
 namespace view {
 
 Asteroid::Asteroid(model::Asteroid* model)
     :
-      jeti::BaseDrawable(model)
+      jeti::view::Base(model)
     , m_model_asteroid(model)
 {   
 
 }
     
-/* virtual override final */
 Asteroid::~Asteroid()
 {}
 

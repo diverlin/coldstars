@@ -16,33 +16,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "StarDrawable.hpp"
 
-#include <spaceobjects/Star.hpp>
+#pragma once
+
+#include <jeti/BaseDrawable.hpp>
+
+namespace model {
+class Planet;
+} // namespace model
 
 namespace view {
 
-Star::Star(model::Star* model)
-    :
-      BaseDrawable(model)
-    , m_model_star(model)
-{ 
-}
-  
-Star::~Star()
-{}
+class Planet : public jeti::view::Base
+{
+public:
+    Planet(model::Planet*);
+    virtual ~Planet() override final;
 
-//void Star::draw(const jeti::Renderer& render)
-//{
-//}
+    void draw(const jeti::Renderer&) override;
 
-//void Star::UpdateInfo()
-//{
-//    GetInfo().clear();
-//    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
-//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
-//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(center()) );
-//}
+private:
+    model::Planet* m_model_planet = nullptr;
+    model::Planet* model() const { return m_model_planet; }
+    //virtual void UpdateInfo() override final;
+}; 
 
 } // namespace view
+
+
+
+
+
+
+

@@ -83,7 +83,7 @@ private:
 
 namespace model {
 
-class Base : public ceti::model::BaseDrawable
+class Base : public ceti::model::BaseView
 {
 public:
     Base() = default;

@@ -20,7 +20,7 @@
 
 //#include <jeti/BaseDrawable.hpp>
 
-//class PlanetoidDrawable : public jeti::BaseDrawable
+//class PlanetoidDrawable : public jeti::view::BaseDrawable
 //{
 //public:
 //    PlanetoidDrawable();

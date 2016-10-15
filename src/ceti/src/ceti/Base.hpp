@@ -28,12 +28,12 @@ namespace ceti {
 
 namespace model {
 
-class BaseDrawable : private NonCopyable
+class BaseView : private NonCopyable
 {
 public:
-    BaseDrawable() = default;
-    ~BaseDrawable() = default;
-    BaseDrawable(const std::string& data);
+    BaseView() = default;
+    ~BaseView() = default;
+    BaseView(const std::string& data);
     std::string data() const;
 
     void setMesh(int mesh) { m_mesh = mesh; }
