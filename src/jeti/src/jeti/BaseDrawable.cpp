@@ -59,6 +59,24 @@ jeti::Mesh* getMesh(int_t id)
     return mesh;
 }
 
+glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
+{
+    glm::mat4 Tm = glm::translate(center);
+
+    glm::quat Qx, Qy, Qz;
+
+    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
+    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
+    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
+
+    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
+    glm::mat4 Sm = glm::scale(size);
+
+    glm::mat4 Mm = Tm * Rm * Sm;
+
+    return Mm;
+}
+
 } // namespace
 
 
@@ -149,41 +167,21 @@ void BaseDrawable::draw(const jeti::Renderer& render)
     render.drawMesh(mesh(), material(), actualModelMatrix());
 }
 
-//###############################
-
 const glm::mat4& BaseDrawable::actualModelMatrix()
-{    
+{
     assert(m_mesh);
     meti::RotationBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
     if (m_animationRotation) {
         m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
     }
-    
+
     m_matrixTranslate = glm::translate(m_orientation->position());
     m_matrixRotate    = glm::toMat4(m_quatDirection * m_quatAnimation);
     m_matrixScale     = glm::scale(m_orientation->size());
 
     m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
-    
+
     return m_matrixModel;
-}
-
-glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
-{
-    glm::mat4 Tm = glm::translate(center);
-
-    glm::quat Qx, Qy, Qz;
-
-    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
-    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
-
-    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
-    glm::mat4 Sm = glm::scale(size);
-
-    glm::mat4 Mm = Tm * Rm * Sm;
-
-    return Mm;
 }
 
 } // namespace jeti

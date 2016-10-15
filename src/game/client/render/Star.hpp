@@ -30,9 +30,9 @@ class Star : public jeti::BaseDrawable
 {
     public:
         Star(model::Star*);
-        virtual ~Star() final override;
+        virtual ~Star() override final;
 
-        void draw();
+//        void draw(const jeti::Renderer& render) override final;
 
     private:
         model::Star* m_model_star = nullptr;
