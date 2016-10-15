@@ -20,23 +20,23 @@
 
 //#include <jeti/BaseDrawable.hpp>
 
-//namespace jeti {
-//class DriveEffect;
-//}
+//class ShockWaveEffect;
 
-//class BulletDrawable : public jeti::BaseDrawable
+//class BlackHoleDrawable : public jeti::view::BaseDrawable
 //{
 //    public:
-//        BulletDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        virtual ~BlackHoleDrawable() override final;
+
+//        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };
+//        ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; };
         
-//        virtual ~BulletDrawable() final override;
+//        void UpdateInSpace(int, bool);
         
-//        void CreateDriveComplexTextureDependedStuff();
-        
-//        //void RenderInSpace(const Renderer&, float);
-            
 //    private:
-//        jeti::DriveEffect* m_EffectDrive;
+//        ShockWaveEffect* m_shockwave;
         
-//        //virtual void UpdateInfo() override final;
+////        virtual void UpdateInfo() override final;
 //};
+
+

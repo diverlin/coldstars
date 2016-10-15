@@ -16,36 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
 #include <jeti/BaseDrawable.hpp>
 
 namespace model {
-class Planet;
+class Star;
 } // namespace model
 
 namespace view {
 
-class Planet : public jeti::BaseDrawable
+class Star : public jeti::view::Base
 {
-public:
-    Planet(model::Planet*);
-    virtual ~Planet() override final;
+    public:
+        Star(model::Star*);
+        virtual ~Star() override final;
 
-    void draw(const jeti::Renderer&) override;
+//        void draw(const jeti::Renderer& render) override final;
 
-private:
-    model::Planet* m_model_planet = nullptr;
-    model::Planet* model() const { return m_model_planet; }
-    //virtual void UpdateInfo() override final;
+    private:
+        model::Star* m_model_star = nullptr;
+        model::Star* model() const { return m_model_star; }
 }; 
 
 } // namespace view
 
-
-
-
-
+        
 
 

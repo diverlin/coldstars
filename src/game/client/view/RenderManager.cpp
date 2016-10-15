@@ -30,15 +30,15 @@
 #include <descriptors/Base.hpp>
 
 /// entities
-#include <render/ShipDrawable.hpp>
-#include <render/BulletDrawable.hpp>
-#include <render/ContainerDrawable.hpp>
-#include <render/StarDrawable.hpp>
-#include <render/PlanetDrawable.hpp>
-#include <render/BlackHoleDrawable.hpp>
-#include <render/AsteroidDrawable.hpp>
-#include <render/SpaceStationDrawable.hpp>
-#include <render/SatelliteDrawable.hpp>
+#include <view/ShipDrawable.hpp>
+#include <view/BulletDrawable.hpp>
+#include <view/ContainerDrawable.hpp>
+#include <view/Star.hpp>
+#include <view/Planet.hpp>
+#include <view/BlackHoleDrawable.hpp>
+#include <view/Asteroid.hpp>
+#include <view/SpaceStationDrawable.hpp>
+#include <view/SatelliteDrawable.hpp>
 
 
 /// effects

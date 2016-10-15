@@ -17,12 +17,9 @@
 */
 
 
-#include "PlanetDrawable.hpp"
+#include "Planet.hpp"
 
 #include <spaceobjects/Planet.hpp>
-
-////#include <ceti/StringUtils.hpp>
-//#include <ceti/Logger.hpp>
   
 //#include <effects/BaseDecor.hpp>
 
@@ -32,7 +29,7 @@ namespace view {
 
 Planet::Planet(model::Planet* model)
     :
-      jeti::BaseDrawable(model)
+      jeti::view::Base(model)
     , m_model_planet(model)
 {
 //    setTexture(planet->texture());

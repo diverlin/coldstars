@@ -18,25 +18,20 @@
 
 #pragma once
 
-//#include <jeti/BaseDrawable.hpp>
+#include <view/VehicleDrawable.hpp>
 
-//class ShockWaveEffect;
-
-//class BlackHoleDrawable : public jeti::BaseDrawable
+//class SatelliteDrawable : public VehicleDrawable
 //{
 //    public:
-//        BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);
-//        virtual ~BlackHoleDrawable() override final;
-
-//        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };
-//        ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; };
+//        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        virtual ~SatelliteDrawable() override final;
+            
+//        //virtual void UpdateInSpace(int, bool) override final;
         
-//        void UpdateInSpace(int, bool);
-        
+//        void RenderInSpace(const jeti::Renderer&, float);
+//        void RenderAtPlanet(const jeti::Renderer&);
+            
 //    private:
-//        ShockWaveEffect* m_shockwave;
-        
-////        virtual void UpdateInfo() override final;
+//        //virtual void UpdateInfo() override final;
+//        void UpdateRenderStuff();
 //};
-
-

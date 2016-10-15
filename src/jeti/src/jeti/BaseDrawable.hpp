@@ -35,27 +35,29 @@ class Orientation;
 } // namespace control
 
 namespace model {
-class BaseDrawable;
+class BaseView;
 } // namespace model
 
 } // namespace ceti
 
 namespace jeti {
 
-const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
-const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
-const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
-
 class Mesh;
 class TextureOb;
 class BaseAnimationRotation;
 class Renderer;
 
-class BaseDrawable
+namespace view {
+
+class Base
 {
+    const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
+    const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
+    const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
+
 public:
-    BaseDrawable(ceti::model::BaseDrawable*);
-    virtual ~BaseDrawable();
+    Base(ceti::model::BaseView*);
+    virtual ~Base();
 
     void validateResources() const;
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
@@ -93,8 +95,8 @@ public:
     static ceti::Collector<Mesh*> s_meshes;
 
 private:
-    ceti::model::BaseDrawable* m_model_base = nullptr;
-    ceti::model::BaseDrawable* model() const { return m_model_base; }
+    ceti::model::BaseView* m_model_base = nullptr;
+    ceti::model::BaseView* model() const { return m_model_base; }
 
     glm::vec4 m_color;
 
@@ -119,6 +121,8 @@ private:
     //        virtual void UpdateInfo() {};
     virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
 };
+
+} // namepsace view
 
 } // namespace jeti
 
