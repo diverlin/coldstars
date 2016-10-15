@@ -27,7 +27,7 @@ class Planet;
 
 namespace view {
 
-class Planet : public jeti::view::Base
+class Planet : public jeti::view::BaseView
 {
 public:
     Planet(model::Planet*);

@@ -26,7 +26,7 @@ class Star;
 
 namespace view {
 
-class Star : public jeti::view::Base
+class Star : public jeti::view::BaseView
 {
     public:
         Star(model::Star*);

@@ -24,7 +24,7 @@ namespace view {
 
 Star::Star(model::Star* model)
     :
-      Base(model)
+      BaseView(model)
     , m_model_star(model)
 { 
 }

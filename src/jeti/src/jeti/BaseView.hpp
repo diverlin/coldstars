@@ -49,15 +49,15 @@ class Renderer;
 
 namespace view {
 
-class Base
+class BaseView
 {
     const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
     const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
     const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
 public:
-    Base(ceti::model::BaseView*);
-    virtual ~Base();
+    BaseView(ceti::model::BaseView*);
+    virtual ~BaseView();
 
     void validateResources() const;
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }

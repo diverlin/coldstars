@@ -36,14 +36,14 @@ namespace jeti {
 
 namespace  view {
 
-ceti::Collector<TextureOb*> Base::s_materials;
-ceti::Collector<Mesh*> Base::s_meshes;
+ceti::Collector<TextureOb*> BaseView::s_materials;
+ceti::Collector<Mesh*> BaseView::s_meshes;
 
 namespace {
 
 TextureOb* getMaterial(int_t id)
 {
-    jeti::TextureOb* material = Base::s_materials.get(id);
+    jeti::TextureOb* material = BaseView::s_materials.get(id);
     if(!material) {
         material= new jeti::TextureOb;
     }
@@ -53,7 +53,7 @@ TextureOb* getMaterial(int_t id)
 
 jeti::Mesh* getMesh(int_t id)
 {
-    jeti::Mesh* mesh = Base::s_meshes.get(id);
+    jeti::Mesh* mesh = BaseView::s_meshes.get(id);
     if(!mesh) {
         mesh= new jeti::Mesh;
     }
@@ -82,7 +82,7 @@ glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const g
 } // namespace
 
 
-Base::Base(ceti::model::BaseView* model)
+BaseView::BaseView(ceti::model::BaseView* model)
     :
       m_model_base(model)
 {
@@ -93,15 +93,15 @@ Base::Base(ceti::model::BaseView* model)
     assert(m_mesh);
 }
 
-Base::~Base() {
+BaseView::~BaseView() {
     delete m_animationRotation;
     m_animationRotation= nullptr;
 }
 
-const glm::vec3& Base::center() const { return m_orientation->position(); }
-const glm::vec3& Base::size() const { return m_orientation->size(); }
+const glm::vec3& BaseView::center() const { return m_orientation->position(); }
+const glm::vec3& BaseView::size() const { return m_orientation->size(); }
 
-void Base::validateResources() const
+void BaseView::validateResources() const
 {
     assert(m_material);
     if (!m_material->isLoaded()) {
@@ -135,14 +135,14 @@ void Base::validateResources() const
 //    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
 //}
 
-void Base::__updateRenderAnimation()
+void BaseView::__updateRenderAnimation()
 {
     if (m_animationRotation != nullptr) {
         //m_AnimationRotation->Update(GetAngle());
     }
 }
 
-bool Base::_updateFadeInEffect()
+bool BaseView::_updateFadeInEffect()
 {
     if (m_color.a > 0.01) {
         m_color.a -= 0.02;
@@ -153,7 +153,7 @@ bool Base::_updateFadeInEffect()
     }
 }
 
-bool Base::_updateFadeOutEffect()
+bool BaseView::_updateFadeOutEffect()
 {
     if (m_color.a < 1.0) {
         m_color.a += 0.02;
@@ -164,12 +164,12 @@ bool Base::_updateFadeOutEffect()
     }
 }
 
-void Base::draw(const jeti::Renderer& render)
+void BaseView::draw(const jeti::Renderer& render)
 {
     render.drawMesh(mesh(), material(), actualModelMatrix());
 }
 
-const glm::mat4& Base::actualModelMatrix()
+const glm::mat4& BaseView::actualModelMatrix()
 {
     assert(m_mesh);
     meti::RotationBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
