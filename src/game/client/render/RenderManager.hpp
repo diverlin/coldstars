@@ -120,7 +120,7 @@ private:
                   const meti::vec3& lookTo,
                   float lookFar);
 
-    void __renderInSpace_NEW(jeti::Renderer&);
+    void __render_NEW(jeti::Renderer&);
     void __renderCollisionRadius(const jeti::Renderer&) const;
     void __renderAxis(const jeti::Renderer&) const;
 

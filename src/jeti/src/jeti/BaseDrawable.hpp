@@ -80,7 +80,7 @@ public:
     //        void RenderCollisionRadius(const Renderer&) const;
     //        void RenderAxis(const Renderer&) const;
 
-    virtual void draw(const jeti::Renderer& draw);
+    virtual void draw(const jeti::Renderer& render);
 
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }
@@ -119,8 +119,6 @@ private:
     //        virtual void UpdateInfo() {};
     virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
 };
-
-glm::mat4 getModelMatrix(const glm::vec3&, const glm::vec3&, const glm::vec3&);  // slow, mainly used for debug (draw collision radius, draw axis)
 
 } // namespace jeti
 

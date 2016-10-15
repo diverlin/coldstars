@@ -347,7 +347,7 @@ void SpaceViewer::__add(Asteroid* view)
 //    m_texts.push_back(view);
 //}
 
-void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
+void SpaceViewer::__render_NEW(jeti::Renderer& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -374,9 +374,9 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 //starsystem->DrawBackground(render, world_coord);
                 render.setOrthogonalProjection(w*scale, h*scale);
 
-                for(Star* star: m_stars)
-                {
-                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
+                for(Star* star: m_stars) {
+                    star->draw(render);
+                    //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
             }
             render.deactivateFbo(0);
@@ -431,6 +431,7 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
 
                     for(Asteroid* asteroid: m_asteroids) {
                         //asteroid->Render_NEW(render, world_coord);
+                        asteroid->draw(render);
                     }
 
 //                    for(BlackHoleDrawable* warmhole: m_wormholes) {
@@ -565,7 +566,7 @@ void SpaceViewer::render(Starsystem* starsystem,
     camera.Update(w, h);
     
     renderer.composeViewMatrix(camera.GetViewMatrix());
-    __renderInSpace_NEW(renderer);
+    __render_NEW(renderer);
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();

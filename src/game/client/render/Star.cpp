@@ -32,10 +32,9 @@ Star::Star(model::Star* model)
 Star::~Star()
 {}
 
-void Star::draw()
-{
-
-}
+//void Star::draw(const jeti::Renderer& render)
+//{
+//}
 
 //void Star::UpdateInfo()
 //{
