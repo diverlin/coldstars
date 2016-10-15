@@ -25,7 +25,7 @@
 //#include <gui/Cursor.hpp>
 //#include <pilots/Show.hpp>
 //#include <jeti/Render.hpp>
-#include <jeti/BaseDrawable.hpp>
+#include <jeti/BaseView.hpp>
 
 //class TurnTimer;
 

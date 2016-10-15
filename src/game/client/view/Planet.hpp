@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <jeti/BaseDrawable.hpp>
+#include <jeti/BaseView.hpp>
 
 namespace model {
 class Planet;

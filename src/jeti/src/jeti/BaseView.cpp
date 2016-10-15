@@ -17,7 +17,7 @@
 */
 
 
-#include "BaseDrawable.hpp"
+#include "BaseView.hpp"
 #include <Render.hpp>
 #include <TextureOb.hpp>
 #include <Mesh.hpp>
