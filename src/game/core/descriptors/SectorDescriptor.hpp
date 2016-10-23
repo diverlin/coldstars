@@ -18,15 +18,14 @@
 
 #pragma once
 
-#include "Base.hpp"
-
 #include <ceti/type/IdType.hpp>
+#include <ceti/Base.hpp>
 
 #include <vector>
 
 namespace descriptor {
 
-struct Sector : public BBase
+struct Sector : public ceti::descriptor::BaseView
 {
 public:
     std::vector<int_t> starsystems;
@@ -35,7 +34,7 @@ public:
     ~Sector() {}
 
     std::string info() const override final {
-        std::string result = "Sector descriptor: " + BBase::info() + _str(" starsystems:", starsystems);
+        std::string result = "Sector descriptor: " + ceti::descriptor::BaseView::info() + _str(" starsystems:", starsystems);
         return result;
     }
 }; 
