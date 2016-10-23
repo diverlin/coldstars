@@ -27,7 +27,7 @@ class Star;
 } // namespace model
 
 namespace descriptor {
-class BaseOLD;
+class Star;
 } // namespace descriptor
 
 namespace builder {
@@ -39,7 +39,7 @@ public:
     ~Star();
 
     static model::Star* getNew();
-    static model::Star* getNew(const descriptor::BaseOLD&);
+    static model::Star* getNew(const descriptor::Star&);
 
 private:
     static model::Star* __getNewTemplate(int_t id = NONE);
