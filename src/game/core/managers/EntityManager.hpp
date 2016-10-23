@@ -36,10 +36,10 @@ public:
     void loadRequest() { m_load_request = true; }
 
     void reg(core::Base*);
-    void reg(core::model::Base*);
+    void reg(model::Base*);
 
     core::Base* getEntity(int_t) const;
-    core::model::Base* get(int_t) const;
+    model::Base* get(int_t) const;
 
     template<class T>
     T getEntity(int_t id) const {
@@ -55,7 +55,7 @@ public:
     bool updateLoadRequest();
 
     void addToGarbage(core::Base*);
-    void addToGarbage(core::model::Base*);
+    void addToGarbage(model::Base*);
     void clearGarbage();
 
 private:
@@ -63,10 +63,10 @@ private:
     bool m_load_request = false;
 
     std::map<int_t, core::Base*> m_entities_map;
-    std::map<int_t, core::model::Base*> m_models;
+    std::map<int_t, model::Base*> m_models;
 
     std::vector<core::Base*> m_entitiesGarbage;
-    std::vector<core::model::Base*> m_garbage;
+    std::vector<model::Base*> m_garbage;
 
     void removeEntity(core::Base*);
 

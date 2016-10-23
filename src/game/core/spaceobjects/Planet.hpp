@@ -32,6 +32,7 @@ class Vehicle;
 namespace model {
 
 class Planet : public Planetoid {
+
 public:
     static const int DISTANCE_MIN;
     static const int DISTANCE_MAX;

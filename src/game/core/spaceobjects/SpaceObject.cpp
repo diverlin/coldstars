@@ -50,7 +50,7 @@ namespace control {
 SpaceObject::SpaceObject(model::SpaceObject* model)
     :
       ceti::control::Orientation(model)
-    , core::control::Base(model)
+    , control::Base(model)
     , m_model_spaceobject(model)
 {}
 
