@@ -85,6 +85,7 @@ glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const g
 BaseView::BaseView(ceti::model::BaseView* model)
     :
       m_model_base(model)
+    , m_orientation(new ceti::control::Orientation(model))
 {
     m_material = getMaterial(model->material());
     m_mesh = getMesh(model->mesh());

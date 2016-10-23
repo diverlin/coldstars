@@ -183,12 +183,13 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
 
-        //assert(mesh);
-    //assert(false);
+    assert(model);
     jeti::view::BaseView* view = __isViewExists(model);
     if (!view) {
-        view::Star* view = new view::Star(model);
+        view = new view::Star(model);
     }
+    assert(view);
+
     __add(view);
     //    }
 }
@@ -302,7 +303,7 @@ void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
 /// visible entities
 void SpaceViewer::__add(jeti::view::BaseView* view)
 {
-    Star* star = static_cast<Star*>(view);
+    view::Star* star = static_cast<view::Star*>(view);
     if (star) {
         m_stars.push_back(star);
     }
@@ -401,6 +402,7 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
                 //starsystem->DrawBackground(render, world_coord);
                 render.setOrthogonalProjection(w*scale, h*scale);
 
+                assert(m_stars.size());
                 for(Star* star: m_stars) {
                     std::cout<<star->model()->typeInfo()<<std::endl;
                     star->draw(render);
