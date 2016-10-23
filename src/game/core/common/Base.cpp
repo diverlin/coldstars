@@ -23,33 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-
-namespace model {
-
-Base::Base(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Base::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-std::string Base::typeInfo() const
-{
-    std::string text;
-    text += "id = (" + std::to_string(id());
-    text += " | " + str(type());
-    text += " | " + str(subtype());
-    text += " | " + str(subsubtype()) + " )";
-    return text;
-}
-
-
-} // namespace model
-
 Base::Base()
 {}
 
@@ -94,6 +67,35 @@ void Base::ResolveData()
     LOG(" Base("+std::to_string(id())+")::ResolveDataUniqueBase");
 }
 
+} // namespace core
+
+
+namespace model {
+
+Base::Base(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Base::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+std::string Base::typeInfo() const
+{
+    std::string text;
+    text += "id = (" + std::to_string(id());
+    text += " | " + str(type());
+    text += " | " + str(subtype());
+    text += " | " + str(subsubtype()) + " )";
+    return text;
+}
+
+
+} // namespace model
+
 namespace control {
 
 Base::Base(model::Base* model)
@@ -131,4 +133,4 @@ Base::~Base()
 
 } // namespace control
 
-} // namespace core
+

@@ -80,6 +80,8 @@ private:
     friend class EntityManager;
 };
 
+} // namespace core
+
 
 namespace model {
 
@@ -142,4 +144,4 @@ private:
 
 } // namespace control
 
-} // namespace core
+

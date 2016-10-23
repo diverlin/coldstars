@@ -39,7 +39,7 @@ struct UnresolvedDataSpaceObject
 
 namespace model {
 
-class SpaceObject : public ceti::model::Orientation, public core::model::Base
+class SpaceObject : public ceti::model::Orientation, public model::Base
 {
 public:
     SpaceObject() = default;
@@ -90,7 +90,7 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<ceti::model::Orientation>(*this);
-        ar & boost::serialization::base_object<core::model::Base>(*this);
+        ar & boost::serialization::base_object<model::Base>(*this);
         ar & m_dataLife;
         ar & m_parent;
         ar & m_starsystem;
@@ -104,7 +104,7 @@ private:
 
 namespace control {
 
-class SpaceObject : public ceti::control::Orientation, public core::control::Base
+class SpaceObject : public ceti::control::Orientation, public control::Base
 {
 public:
     SpaceObject(model::SpaceObject*);

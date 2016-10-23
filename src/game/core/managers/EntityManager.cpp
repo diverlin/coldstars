@@ -112,7 +112,7 @@ void EntityManager::reg(core::Base* entity)
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-void EntityManager::reg(core::model::Base* model)
+void EntityManager::reg(model::Base* model)
 {
     assert(model);
     if (model->id() == NONE) {
@@ -138,10 +138,10 @@ core::Base* EntityManager::getEntity(int_t id) const
     return slice->second;
 }
 
-core::model::Base* EntityManager::get(int_t id) const
+model::Base* EntityManager::get(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, core::model::Base*>::const_iterator slice = m_models.find(id);
+    std::map<int_t, model::Base*>::const_iterator slice = m_models.find(id);
     assert(slice->second);
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
@@ -715,7 +715,7 @@ void EntityManager::addToGarbage(core::Base* entity)
     entity->putChildrenToGarbage();
 }
 
-void EntityManager::addToGarbage(core::model::Base* model)
+void EntityManager::addToGarbage(model::Base* model)
 {
     //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
