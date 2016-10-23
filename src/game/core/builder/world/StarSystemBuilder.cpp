@@ -65,7 +65,7 @@ Starsystem* StarsystemBuilder::create(const std::string& data)
 void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Starsystem& descriptor)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
-    //    CreateStar(starsystem);
+    __createStar(starsystem);
     
     //    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     //    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
@@ -88,7 +88,7 @@ void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebul
 
 void StarsystemBuilder::__createStar(Starsystem* starsystem)
 {
-    model::Star* star = builder::StarBuilder::getNew();
+    model::Star* star = builder::Star::getNew();
     starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }

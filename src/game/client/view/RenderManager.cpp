@@ -30,6 +30,8 @@
 #include <descriptors/Base.hpp>
 
 /// entities
+#include <spaceobjects/Star.hpp>
+
 #include <view/ShipDrawable.hpp>
 #include <view/BulletDrawable.hpp>
 #include <view/ContainerDrawable.hpp>
@@ -132,8 +134,9 @@ SpaceViewer::__update(Starsystem* starsystem,
     visibilityData.observer.center = lookFrom;
     visibilityData.observer.radius = lookFar;
 
+    assert(starsystem->stars().size()>0);
     for(auto* star: starsystem->stars()) {
-        //addIfVisible(star, visibilityData);
+        addIfVisible(star->model(), visibilityData);
     }
 
     for(auto* planet: starsystem->planets()) {
@@ -161,25 +164,41 @@ void SpaceViewer::__clear()
 //    m_texts.clear();
 }
 
-void SpaceViewer::addIfVisible(Star* star, const VisibilityData& data)
+jeti::view::BaseView*
+SpaceViewer::__isViewExists(model::SpaceObject* model)
 {
-//    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-//        const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
-//        jeti::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
-//        jeti::Mesh* mesh = nullptr;
-//        //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
-
-//        assert(mesh);
-//        StarDrawable* view = new StarDrawable(texOb, mesh, star);
-//        __add(view);
-//    }
+    std::map<model::SpaceObject*, jeti::view::BaseView*>::const_iterator it = m_cache.find(model);
+    if (it != m_cache.end()) {
+        return it->second;
+    } else {
+        return nullptr;
+    }
 }
 
-void SpaceViewer::addIfVisible(view::Planet* planet, const VisibilityData& data)
+void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-       __add(planet);
+//    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
+        //const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
+        //jeti::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
+        //jeti::Mesh* mesh = nullptr;
+        //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
+
+        //assert(mesh);
+    //assert(false);
+    jeti::view::BaseView* view = __isViewExists(model);
+    if (!view) {
+        view::Star* view = new view::Star(model);
     }
+    __add(view);
+    //    }
+}
+
+void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
+{
+//    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
+      view::Planet* view = new view::Planet(model);
+       __add(view);
+//    }
 }
 
 //void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
@@ -281,6 +300,14 @@ void SpaceViewer::addIfVisible(view::Planet* planet, const VisibilityData& data)
 //}
 
 /// visible entities
+void SpaceViewer::__add(jeti::view::BaseView* view)
+{
+    Star* star = static_cast<Star*>(view);
+    if (star) {
+        m_stars.push_back(star);
+    }
+}
+
 void SpaceViewer::__add(Star* view)
 {
     m_stars.push_back(view);
@@ -375,6 +402,7 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
                 render.setOrthogonalProjection(w*scale, h*scale);
 
                 for(Star* star: m_stars) {
+                    std::cout<<star->model()->typeInfo()<<std::endl;
                     star->draw(render);
                     //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }

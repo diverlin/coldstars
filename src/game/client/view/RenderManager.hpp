@@ -22,10 +22,29 @@
 #include <jeti/Render.hpp>
 
 #include <world/starsystem.hpp>
+
+#include <map>
+
 class StarSystemDrawable;
 
-/// entities
+namespace model {
 class Star;
+class Asteroid;
+class Planet;
+//class Container;
+} // namespace view
+
+namespace core {
+namespace model {
+class Base;
+} // namespace model
+} // namespace core
+
+namespace jeti {
+namespace view {
+class BaseView;
+} // namespace view
+} // namespace jeti
 
 namespace view {
 class Star;
@@ -73,9 +92,9 @@ public:
     ~SpaceViewer();
 
     /// visible entities
-    void addIfVisible(Star*, const VisibilityData&);
-    void addIfVisible(view::Planet*, const VisibilityData&);
-    void addIfVisible(Asteroid*, const VisibilityData&);
+    void addIfVisible(model::Star*, const VisibilityData&);
+    void addIfVisible(model::Planet*, const VisibilityData&);
+    void addIfVisible(model::Asteroid*, const VisibilityData&);
 //    void addIfVisible(view::Container*, const VisibilityData&);
 //    void addIfVisible(BulletDrawable*, const VisibilityData&);
 //    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
@@ -125,6 +144,7 @@ private:
     void __renderAxis(const jeti::Renderer&) const;
 
     /// visible entities
+    void __add(jeti::view::BaseView*);
     void __add(Star*);
     void __add(Planet*);
     void __add(Asteroid*);
@@ -142,6 +162,10 @@ private:
     void __add(VerticalFlowText*);
 
     void __clear();
+
+    jeti::view::BaseView* __isViewExists(model::SpaceObject*);
+
+    std::map<model::SpaceObject*, jeti::view::BaseView*> m_cache;
 };
 
 } // namespace view
