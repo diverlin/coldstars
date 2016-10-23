@@ -28,6 +28,8 @@
 #include <vector>
 #include <fstream>
 
+#define USE_FAILBACK_RESOURCES
+
 namespace ceti {
 
 template<typename T>
@@ -50,13 +52,18 @@ public:
         if (it != m_objects.end()) {
             return it->second;
         } else {
+#ifndef USE_FAILBACK_RESOURCES
             throw std::runtime_error("fail get, id doesn't exist");
+#else
+            return m_failbackObject;
+#endif // USE_FAILBACK_RESOURCES
         }
         assert(false);
     }
 
 private:
     std::map<int, T> m_objects;
+    T m_failbackObject;
 
     bool __isExist(const T& ob) const {
         return (m_objects.find(ob.id()) != m_objects.end());
