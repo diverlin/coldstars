@@ -45,16 +45,12 @@ Star::__getNewTemplate(int_t id)
 model::Star*
 Star::getNew()
 {
-    assert(false);
-    //    const auto& descr = global::get().descriptors().star().random();
-    //return getNew(descr);
-
-//    const auto& descr = global::get().descriptors().getRand(descriptor::Type::STAR);
-//    return getNew(descr);
+    const auto& descr = global::get().descriptors().star().random();
+    return getNew(descr);
 } 
 
 model::Star*
-Star::getNew(const descriptor::BaseOLD& descr)
+Star::getNew(const descriptor::Star& descr)
 {
     model::Star* model = __getNewTemplate();
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);

@@ -41,6 +41,7 @@ public:
         return result;
     }
 
+    int armor() const { return m_armor; }
     void setArmor(int armor) { m_armor = armor; }
 
 private:
