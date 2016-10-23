@@ -159,53 +159,53 @@ enum class Type: int {
 std::string keyStr(const Key&);
 std::string typeStr(const Type&);
 
-class BBase
-{
-public:
-    BBase() {
-        m_id = m_idGenerator.nextId();
-    }
-    ~BBase() {}
+//class BBase
+//{
+//public:
+//    BBase() {
+//        m_id = m_idGenerator.nextId();
+//    }
+//    ~BBase() {}
 
-    int_t id() const { return m_id; }
-    int_t texture() const { return m_texture; }
-    int_t mesh() const { return m_mesh; }
+//    int_t id() const { return m_id; }
+//    int_t texture() const { return m_texture; }
+//    int_t mesh() const { return m_mesh; }
 
-    void setTexture(int_t texture) { m_texture = texture; }
-    void setMesh(int_t mesh) { m_mesh = mesh; }
-    virtual std::string info() const {
-        std::string result;
-        result += std::string("id=") + std::to_string(m_id);
-        result += std::string(" material=") + std::to_string(m_texture);
-        result += std::string(" geometry=") + std::to_string(m_mesh);
-        return result;
-    }
+//    void setTexture(int_t texture) { m_texture = texture; }
+//    void setMesh(int_t mesh) { m_mesh = mesh; }
+//    virtual std::string info() const {
+//        std::string result;
+//        result += std::string(" id=") + std::to_string(m_id);
+//        result += std::string(" material=") + std::to_string(m_texture);
+//        result += std::string(" geometry=") + std::to_string(m_mesh);
+//        return result;
+//    }
 
-protected:
-    std::string _str(const std::string& label, const std::vector<int_t>& ids) const {
-        std::string result = label;
-        for (int_t id: ids) {
-            result += std::to_string(id) + ",";
-        }
-        return result;
-    }
+//protected:
+//    std::string _str(const std::string& label, const std::vector<int_t>& ids) const {
+//        std::string result = label;
+//        for (int_t id: ids) {
+//            result += std::to_string(id) + ",";
+//        }
+//        return result;
+//    }
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_id;
-        ar & m_texture;
-        ar & m_mesh;
-    }
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & m_id;
+//        ar & m_texture;
+//        ar & m_mesh;
+//    }
 
-private:
-    int_t m_id = -1;
-    int_t m_texture = -1;
-    int_t m_mesh = -1;
+//private:
+//    int_t m_id = -1;
+//    int_t m_texture = -1;
+//    int_t m_mesh = -1;
 
-    static IdGenerator m_idGenerator;
-};
+//    static IdGenerator m_idGenerator;
+//};
 
 class BaseOLD
 {

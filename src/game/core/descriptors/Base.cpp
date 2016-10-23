@@ -22,7 +22,7 @@
 
 namespace descriptor {
 
-IdGenerator BBase::m_idGenerator;
+//IdGenerator BBase::m_idGenerator;
 
 IdGenerator BaseOLD::m_idGenerator;
 

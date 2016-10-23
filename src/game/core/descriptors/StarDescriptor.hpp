@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Base.hpp"
+#include <ceti/Base.hpp>
 #include <ceti/type/IdType.hpp>
 
 #include <vector>
@@ -26,7 +26,7 @@
 
 namespace descriptor {
 
-struct Star : public BBase
+struct Star : public ceti::descriptor::BaseView
 {
 public:
     Star() {}
@@ -37,7 +37,7 @@ public:
     virtual ~Star() {}
 
     std::string info() const override final {
-        std::string result = "Star descriptor: " + BBase::info();
+        std::string result = "Star descriptor: " + ceti::descriptor::BaseView::info();
         return result;
     }
 
@@ -50,7 +50,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & boost::serialization::base_object<BBase>(*this);
+        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_armor;
     }
 }; 
