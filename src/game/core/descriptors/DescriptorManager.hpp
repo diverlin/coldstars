@@ -95,7 +95,7 @@ public:
     void save();
     void load();
 
-    int size() const { return m_descriptors.size(); }
+    unsigned long int size() const { return m_descriptors.size(); }
 
     void add(const Galaxy& galaxy) {
         m_galaxy.add(galaxy);

@@ -105,7 +105,7 @@ public:
     const type::entity& subsubtype() const { return m_type.subsubtype; }
     int_t descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
 
-    std::string dataTypeStr() const;
+    std::string typeInfo() const;
 
 private:
     core::Id m_type;

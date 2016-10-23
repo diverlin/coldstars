@@ -32,11 +32,11 @@ class BaseOLD;
 
 namespace builder {
 
-class StarBuilder
+class Star
 {
 public:
-    StarBuilder();
-    ~StarBuilder();
+    Star();
+    ~Star();
 
     static model::Star* getNew();
     static model::Star* getNew(const descriptor::BaseOLD&);

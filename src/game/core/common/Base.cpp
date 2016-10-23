@@ -37,7 +37,7 @@ Base::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-std::string Base::dataTypeStr() const
+std::string Base::typeInfo() const
 {
     std::string text;
     text += "id = (" + std::to_string(id());
