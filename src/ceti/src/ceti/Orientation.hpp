@@ -38,18 +38,26 @@ public:
     Orientation(const std::string& data);
     std::string data() const;
 
-    meti::vec3 position;
-    meti::vec3 size;
-    meti::vec3 direction;
+    void setPosition(const meti::vec3& position) { m_position = position; }
+    void setSize(const meti::vec3& size) { m_size = size; }
+    void setDirection(const meti::vec3& direction) { m_direction = direction; }
+
+    const meti::vec3& position() const { return m_position; }
+    const meti::vec3& size() const { return m_size; }
+    const meti::vec3& direction() const { return m_direction; }
 
 private:
+    meti::vec3 m_position;
+    meti::vec3 m_size;
+    meti::vec3 m_direction;
+
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & position;
-        ar & size;
-        ar & direction;
+        ar & m_position;
+        ar & m_size;
+        ar & m_direction;
     }
 };
 
@@ -66,19 +74,19 @@ public:
     void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
     void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
 
-    void setPosition(float x, float y, float z)    { model()->position = meti::vec3(x, y, z); m_isUpdated = false; }
-    void setPosition(const meti::vec3& position)   { model()->position = position; m_isUpdated = false; }
+    void setPosition(float x, float y, float z)    { model()->setPosition(meti::vec3(x, y, z)); m_isUpdated = false; }
+    void setPosition(const meti::vec3& position)   { model()->setPosition(position); m_isUpdated = false; }
 
-    void setSize(float x, float y, float z) { model()->size = meti::vec3(x, y, z); m_isUpdated = false; }
-    void setSize(const meti::vec3& size) { model()->size = size; m_isUpdated = false; }
+    void setSize(float x, float y, float z) { model()->setSize(meti::vec3(x, y, z)); m_isUpdated = false; }
+    void setSize(const meti::vec3& size) { model()->setSize(size); m_isUpdated = false; }
 
-    const glm::vec3& direction() const { return model()->direction; }
+    const glm::vec3& direction() const { return model()->direction(); }
 
-    const glm::vec3& position() const { return model()->position; }
-    const glm::vec3& size()  const { return model()->size; }
+    const glm::vec3& position() const { return model()->position(); }
+    const glm::vec3& size()  const { return model()->size(); }
 
     [[deprecated("depr")]]
-    glm::vec3* pPosition() { return &model()->position; }
+    //glm::vec3* pPosition() { return &model()->position(); }
     [[deprecated("depr")]]
     const glm::vec3* pParentPosition() { return &m_parentPosition; }
 
@@ -90,7 +98,7 @@ public:
     [[deprecated("depr")]]
     void updateOrientation();
 
-    void setDirection(const meti::vec3& direction)   { assert(int(direction.length()) != 1); model()->direction = meti::normalize(direction); m_isUpdated = false; }
+    void setDirection(const meti::vec3& direction)   { assert(int(direction.length()) != 1); model()->setDirection(meti::normalize(direction)); m_isUpdated = false; }
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
     model::Orientation* model() const { return m_model_orientation; }

@@ -198,7 +198,7 @@ void Vehicle::addItemSlot(ItemSlot* slot)
         float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
 
         slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-        points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
+        //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
         m_weaponComplex.addSlot(slot);
 
         break;
