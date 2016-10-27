@@ -225,7 +225,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().GetScale();
+    float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
@@ -429,12 +429,12 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
 void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    jeti::Camera& camera = jeti::Screen::get().camera();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    camera.Update(w, h);
+    camera.update(w, h);
     
-    renderer.composeViewMatrix(camera.GetViewMatrix());
+    renderer.composeViewMatrix(camera.viewMatrix());
 
     //float scale = jeti::Screen::get().GetScale();
 

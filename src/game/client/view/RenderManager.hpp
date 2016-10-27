@@ -140,6 +140,7 @@ private:
                   float lookFar);
 
     void __render_NEW(jeti::Renderer&);
+    void __render_NEW2(jeti::Renderer&);
     void __renderCollisionRadius(const jeti::Renderer&) const;
     void __renderAxis(const jeti::Renderer&) const;
 
@@ -160,6 +161,8 @@ private:
     void __add(LazerTraceEffect*);
     void __add(jeti::BaseParticleSystem*);
     void __add(VerticalFlowText*);
+
+    void __cache(model::SpaceObject*, jeti::view::BaseView*);
 
     void __clear();
 

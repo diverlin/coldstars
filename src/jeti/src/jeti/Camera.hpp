@@ -23,37 +23,37 @@
 
 namespace jeti {
 
-const float CAMERA_SPEED_MAX = 10.0f;
-const float CAMERA_INERTIA = 0.95f;
-
 class Camera : public NonCopyable
 {
-    public:
-        Camera();
-        ~Camera();
+    const float CAMERA_SPEED_MAX = 10.0f;
+    const float CAMERA_INERTIA = 0.95f;
 
-        const glm::vec3& GetPos() const { return m_Pos; }
-        const glm::vec3& GetEyePos() const { return m_EyePos; }
-        const glm::mat4& GetViewMatrix() const { return m_Vm; }
-         
-        void AddMoveSpeed(const glm::vec3&);
-        
-        void Update(int, int);  
-                    
-    private:
-        glm::vec3 m_EyePos;
+public:
+    Camera();
+    ~Camera();
 
-        glm::vec3 m_Pos;
-        glm::vec3 m_Dir;
-        glm::vec3 m_Up;
-        
-        float m_InertiaFactor;
-        glm::vec3 m_MoveSpeed;
-        float m_SpeedMax;
-        
-        glm::mat4 m_Vm; 
+    const glm::vec3& lookTo() const { return m_lookTo; }
+    const glm::vec3& lookFrom() const { return m_lookFrom; }
+    const glm::mat4& viewMatrix() const { return m_viewMatrix; }
+
+    void AddMoveSpeed(const glm::vec3&);
+
+    void update(int, int);
+
+private:
+    glm::vec3 m_lookFrom = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    glm::vec3 m_lookTo = glm::vec3(0.0f, 0.0f, 499.0f);
+    glm::vec3 m_direction = glm::vec3(0.0f, 0.0f, -11.0f);
+    glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
+
+    float m_inertiaFactor = CAMERA_INERTIA;
+    glm::vec3 m_moveSpeed;
+    float m_speedMax = CAMERA_SPEED_MAX;
+
+    glm::mat4 m_viewMatrix;
 };
 
-}
+} // namespace jeti
 
 

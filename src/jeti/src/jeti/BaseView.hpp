@@ -84,7 +84,7 @@ public:
 
     virtual void draw(const jeti::Renderer& render);
 
-    //void setOrientationModel(ceti::model::Orientation* model);
+    void setOrientationModel(ceti::model::Orientation*);
 
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }

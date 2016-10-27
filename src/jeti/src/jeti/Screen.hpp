@@ -41,13 +41,13 @@ class Screen : public SFMLWrapper
 
         //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
-        jeti::Renderer& renderer() { return m_Render; }
-        Camera& GetCamera() { return m_Camera; }
+        jeti::Renderer& renderer() { return m_render; }
+        Camera& camera() { return m_camera; }
         
         void SetBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
         
         glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
-        glm::vec2 GetTopRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*scale, m_rect.GetHeight()*scale)); }
+        glm::vec2 GetTopRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*m_scale, m_rect.GetHeight()*m_scale)); }
         
         const glm::vec2& GetBottomLeft() const    { return m_rect.GetBottomLeft(); }
         const glm::vec2& GetTopRight()    const    { return m_rect.GetTopRight(); }
@@ -61,7 +61,7 @@ class Screen : public SFMLWrapper
         
         int GetFramesCounter() const { return frames_counter; }
         
-        float GetScale() const { return scale; }
+        float scale() const { return m_scale; }
         void IncreaseScale();
         void DecreaseScale();
 
@@ -71,8 +71,8 @@ class Screen : public SFMLWrapper
         Screen(const Screen&) = delete;
         Screen& operator=(const Screen&) = delete;
         
-        jeti::Renderer m_Render;
-        Camera m_Camera;
+        jeti::Renderer m_render;
+        Camera m_camera;
         
         bool auto_scroll;
         
@@ -80,7 +80,7 @@ class Screen : public SFMLWrapper
         int frames_counter;        
         float last_time;
         
-        float scale;
+        float m_scale;
         float d_scale;
         ceti::Rect m_rect;
         glm::vec2 target_center;

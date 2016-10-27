@@ -98,7 +98,7 @@ BaseView::~BaseView() {
     m_animationRotation= nullptr;
 }
 
-//void BaseView::setOrientationModel(ceti::model::Orientation* model) { m_orientation = new model; }
+void BaseView::setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
 
 const glm::vec3& BaseView::center() const { return m_orientation->position(); }
 const glm::vec3& BaseView::size() const { return m_orientation->size(); }
@@ -174,6 +174,8 @@ void BaseView::draw(const jeti::Renderer& render)
 const glm::mat4& BaseView::actualModelMatrix()
 {
     assert(m_mesh);
+    assert(m_orientation);
+
     meti::RotationBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
     if (m_animationRotation) {
         m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());

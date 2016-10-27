@@ -24,6 +24,7 @@
 #include <SFML/Graphics/Color.hpp>
 
 #include <stdexcept>
+#include <iostream>
 
 namespace jeti {
 
@@ -51,6 +52,7 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 
 void loadToVRAM(GLuint& texture, int& w, int& h)
 {
+    std::cout<<"gen new loadToVRAM"<<std::endl;
     sf::Image image;
     const sf::Color& color = sf::Color(meti::getRandInt(50, 256),
                                        meti::getRandInt(50, 256),
@@ -110,6 +112,10 @@ TextureOb::~TextureOb()
 
 void TextureOb::load()
 {
+    if (m_isLoaded) {
+        return;
+    }
+
     if (m_model.texture_path != "") {
         loadToVRAM(m_model.texture_path, m_model.texture, m_model.w, m_model.h);
     } else {
@@ -142,12 +148,10 @@ void TextureOb::__createTextureCoords(int col_num, int row_num, int fps)
     float h_offsetf = 0;
 
     int r = 0;
-    while (r < row_num)
-    {
+    while (r < row_num) {
        w_offsetf = 0;
        int c = 0;
-       while (c < col_num)
-       {
+       while (c < col_num) {
             __addTexCoordQuad(w_offsetf, h_offsetf, w_offsetf + w_slicef, h_offsetf + h_slicef);
             w_offsetf += w_slicef;
             m_framesCount++;
@@ -159,12 +163,9 @@ void TextureOb::__createTextureCoords(int col_num, int row_num, int fps)
     
     m_lastUpdateTime = 0;
     
-    if (m_frameNum == 0)
-    {
+    if (m_frameNum == 0) {
         m_frameNum = m_framesCount*1.3;
-    }
-    else 
-    {
+    } else {
         m_frameNum = fps;
     }
     
@@ -182,21 +183,16 @@ void TextureOb::__addTexCoordQuad(float w_start, float h_start, float w_end, flo
 
 int TextureOb::updateAnimationFrame(float elapsed_time)
 {
-    if (m_model.is_animated)
-    {
-        if (elapsed_time - m_lastUpdateTime > m_delay)
-        {
+    if (m_model.is_animated) {
+        if (elapsed_time - m_lastUpdateTime > m_delay) {
             m_currentFrame++;
-            if ( m_currentFrame >= m_framesCount )
-            {
+            if ( m_currentFrame >= m_framesCount ) {
                 m_currentFrame = 0;
             }
             m_lastUpdateTime = elapsed_time;
         }
         return m_currentFrame;
-    }
-    else
-    {
+    } else {
         return 0;
     } 
 }
