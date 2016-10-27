@@ -216,7 +216,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().GetScale();
+    float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
@@ -420,12 +420,12 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
 void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    jeti::Camera& camera = jeti::Screen::get().camera();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    camera.Update(w, h);
+    camera.update(w, h);
     
-    renderer.composeViewMatrix(camera.GetViewMatrix());
+    renderer.composeViewMatrix(camera.viewMatrix());
 
     //float scale = jeti::Screen::get().GetScale();
 
@@ -524,7 +524,7 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
-    float scale = jeti::Screen::get().GetScale();
+    float scale = jeti::Screen::get().scale();
     if (center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - size.x*scale))
         return false;
     if (center.x > (jeti::Screen::get().GetTopRightScreenWC().x   + size.x*scale))
@@ -539,7 +539,7 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
-    float scale = jeti::Screen::get().GetScale();
+    float scale = jeti::Screen::get().scale();
     if (ob_center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - sizeInPixels*scale))
         return false;
     if (ob_center.x > (jeti::Screen::get().GetTopRightScreenWC().x + sizeInPixels*scale))

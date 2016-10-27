@@ -184,9 +184,17 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
 
     assert(model);
+
+    //!--------------
+    model->setPosition(glm::vec3(200, 200, 250));
+    model->setSize(glm::vec3(100, 100, 1));
+    model->setDirection(glm::vec3(0, 1, 0));
+    //!--------------
+
     jeti::view::BaseView* view = __isViewExists(model);
     if (!view) {
         view = new view::Star(model);
+        __cache(model, view);
     }
     assert(view);
 
@@ -309,6 +317,11 @@ void SpaceViewer::__add(jeti::view::BaseView* view)
     }
 }
 
+void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
+{
+    m_cache.insert(std::make_pair(ob, view));
+}
+
 void SpaceViewer::__add(Star* view)
 {
     m_stars.push_back(view);
@@ -375,7 +388,37 @@ void SpaceViewer::__add(Asteroid* view)
 //    m_texts.push_back(view);
 //}
 
+
+
 void SpaceViewer::__render_NEW(jeti::Renderer& render)
+{
+//    bool draw_background    = true;
+//    bool draw_volumetric    = true;
+//    bool draw_something     = false;
+//    bool draw_spaceObjects  = true;
+//    bool draw_shockwave     = true;
+//    bool draw_robustSpaceObjects = true;
+
+    float scale = jeti::Screen::get().scale();
+    int w = jeti::Screen::get().width();
+    int h = jeti::Screen::get().height();
+    //glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
+
+    render.clearColorAndDepthBuffers();
+
+    //render.setPerspectiveProjection(w, h);
+    //starsystem->DrawBackground(render, world_coord);
+    render.setOrthogonalProjection(w*scale, h*scale);
+
+    assert(m_stars.size());
+    for(Star* star: m_stars) {
+        std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
+        star->draw(render);
+        //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
+    }
+}
+
+void SpaceViewer::__render_NEW2(jeti::Renderer& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -384,19 +427,19 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().GetScale();
+    float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.clearColorAndDepthBuffers();
-    
+
     //render.enable_CULLFACE();
     {
         if (draw_background)
         {
             // render background and star to FBO0
-            render.activateFbo(0, w, h);
+            //render.activateFbo(0, w, h);
             {
                 render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
@@ -404,12 +447,12 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
 
                 assert(m_stars.size());
                 for(Star* star: m_stars) {
-                    std::cout<<star->model()->typeInfo()<<std::endl;
+                    std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
                     star->draw(render);
                     //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
             }
-            render.deactivateFbo(0);
+            //render.deactivateFbo(0);
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
@@ -590,13 +633,17 @@ void SpaceViewer::render(Starsystem* starsystem,
     __update(starsystem, lookFrom, lookTo, lookFar);
 
     jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    jeti::Camera& camera = jeti::Screen::get().camera();
+
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    camera.Update(w, h);
+
+    camera.update(w, h);
     
-    renderer.composeViewMatrix(camera.GetViewMatrix());
+    renderer.composeViewMatrix(camera.viewMatrix());
     __render_NEW(renderer);
+
+    jeti::Screen::get().Draw();
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();

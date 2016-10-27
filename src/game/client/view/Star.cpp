@@ -26,7 +26,8 @@ Star::Star(model::Star* model)
     :
       BaseView(model)
     , m_model_star(model)
-{ 
+{
+    setOrientationModel(model);
 }
   
 Star::~Star()

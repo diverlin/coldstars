@@ -39,7 +39,7 @@ Screen::Screen()
 fps(0), 
 frames_counter(0), 
 last_time(0.0), 
-scale(1.0), 
+m_scale(1.0),
 d_scale(0.0)
 {}
 
@@ -62,7 +62,7 @@ void Screen::init()
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
     
     glewInit();             
-    m_Render.init(width, height);
+    m_render.init(width, height);
     
     m_rect.set(0.0, 0.0, width, height);
 }
@@ -108,7 +108,7 @@ void Screen::MovingBy(const glm::vec2& delta)
 
 void Screen::UpdateInSpace()
 {   
-    m_rect.SetBottomLeft(m_Camera.GetPos().x, m_Camera.GetPos().y);
+    m_rect.SetBottomLeft(m_camera.lookTo().x, m_camera.lookTo().y);
     //if (auto_scroll == true)
     //{
         //glm::vec2 d_pos;
@@ -140,9 +140,9 @@ void Screen::Draw()
 void  Screen::IncreaseScale() 
 { 
     d_scale = 0.15;
-    if (scale < 30.0)
+    if (m_scale < 30.0)
     {
-        scale += d_scale;
+        m_scale += d_scale;
         
         glm::vec2 center = m_rect.center();
         float rate = 0.5*d_scale;
@@ -156,9 +156,9 @@ void  Screen::IncreaseScale()
 void Screen::DecreaseScale() 
 { 
     d_scale = -0.15;
-    if (scale > 0.3)
+    if (m_scale > 0.3)
     {
-        scale += d_scale;
+        m_scale += d_scale;
         
         glm::vec2 center = m_rect.center();
         float rate = 0.5*d_scale;

@@ -32,7 +32,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 // for ugly
-#include <glm/glm.hpp> // glm::vec
+#include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/transform.hpp>
 #include <meti/QuaternionUtils.hpp>
@@ -76,7 +76,7 @@ void Renderer::init(int w, int h)
     m_w = w;
     m_h = h;
 
-    glClearColor(0.f, 0.f, 0.f, 0.f);
+    glClearColor(0.5f, 1.0f, 0.5f, 1.0f);
 
     // Enable Z-buffer read and write
     glEnable(GL_DEPTH_TEST);
@@ -227,14 +227,14 @@ void Renderer::drawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
     drawMesh(*m_meshQuad, texOb, ModelMatrix);
 }
 
-void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& modelMatrix) const
 {
     __useTransparentMode(textureOb.model().use_alpha);
  	
     __useProgram(m_shaders.base);
 	{
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 	
 	    glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
@@ -247,7 +247,7 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;       
-    const glm::vec3& eye_pos = Screen::get().GetCamera().GetEyePos();
+    const glm::vec3& eye_pos = Screen::get().camera().lookFrom();
 
     const model::Material& material = textureOb.model();
 
@@ -286,7 +286,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25; 
-    const glm::vec3& eye_pos = Screen::get().GetCamera().GetPos();
+    const glm::vec3& eye_pos = Screen::get().camera().lookTo();
    
     __useTransparentMode(textureOb.model().use_alpha);
     	

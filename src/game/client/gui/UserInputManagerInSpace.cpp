@@ -245,20 +245,14 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
     
     //bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
-    {                
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         m_cameraMoveAxisX = CAMERADIRECTION::LEFT;
-    }           
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == true)
-    {                
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         m_cameraMoveAxisX = CAMERADIRECTION::RIGHT;
-    }   
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == true)
-    {                
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         m_cameraMoveAxisY = CAMERADIRECTION::UP;
-    }   
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) == true)
-    {                
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         m_cameraMoveAxisY = CAMERADIRECTION::DOWN;
     }   
                          
@@ -282,45 +276,30 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
 
 void UserInputInSpace::__scrollCamera(Player* player)
 {
-//    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
+    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
-//    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    jeti::Camera& camera = jeti::Screen::get().camera();
     
-    
-//    // SCROLLING X AXIS
-//    switch (m_CameraMoveAxisX)
-//    {
-//        case CAMERADIRECTION::LEFT:
-//        {
-//            camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
-            
-//            break;
-//        }
-        
-//        case CAMERADIRECTION::RIGHT:
-//        {
-//            camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
-            
-//            break;
-//        }
-//    }
+    // SCROLLING X AXIS
+    switch (m_cameraMoveAxisX)
+    {
+    case CAMERADIRECTION::LEFT:
+        camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+        break;
+    case CAMERADIRECTION::RIGHT:
+        camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+        break;
+    }
 
-//    switch(m_CameraMoveAxisY)
-//    {
-//        case CAMERADIRECTION::UP:
-//        {
-//            camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
-                
-//            break;
-//        }
-            
-//        case CAMERADIRECTION::DOWN:
-//        {
-//            camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
-                
-//            break;
-//        }
-//    }
-     
-//    jeti::Screen::get().MovingBy(m_ScrollAccel);
+    switch(m_cameraMoveAxisY)
+    {
+    case CAMERADIRECTION::UP:
+        camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
+        break;
+    case CAMERADIRECTION::DOWN:
+        camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
+        break;
+    }
+
+    jeti::Screen::get().MovingBy(m_scrollAccel);
 }

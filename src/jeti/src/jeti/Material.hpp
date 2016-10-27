@@ -71,4 +71,4 @@ struct Material
 
 } // namespace model
 
-}
+} // namespace jeti

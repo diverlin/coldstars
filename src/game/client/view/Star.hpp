@@ -28,19 +28,19 @@ namespace view {
 
 class Star : public jeti::view::BaseView
 {
-    public:
-        Star(model::Star*);
-        virtual ~Star() override final;
+public:
+    Star(model::Star*);
+    virtual ~Star() override final;
 
-//        void draw(const jeti::Renderer& render) override final;
-        model::Star* model() const { return m_model_star; }
+    //        void draw(const jeti::Renderer& render) override final;
+    model::Star* model() const { return m_model_star; }
 
-    private:
-        model::Star* m_model_star = nullptr;
+private:
+    model::Star* m_model_star = nullptr;
 }; 
 
 } // namespace view
 
-        
+
 
 

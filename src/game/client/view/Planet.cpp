@@ -32,6 +32,7 @@ Planet::Planet(model::Planet* model)
       jeti::view::BaseView(model)
     , m_model_planet(model)
 {
+    setOrientationModel(model);
 //    setTexture(planet->texture());
 //    setMesh(planet->mesh());
 }
