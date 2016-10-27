@@ -997,7 +997,7 @@ void Starsystem::bombExplosionEvent(Container* container, bool show_effect)
 void Starsystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
-        if ( meti::distance(m_vehicles[i]->position(), star()->position) < radius ) {
+        if ( meti::distance(m_vehicles[i]->position(), star()->position()) < radius ) {
             if (m_vehicles[i]->radarSlot()->item() != nullptr) {
                 m_vehicles[i]->radarSlot()->item()->doLock(2);
             }

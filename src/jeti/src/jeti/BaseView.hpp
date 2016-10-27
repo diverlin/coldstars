@@ -84,6 +84,8 @@ public:
 
     virtual void draw(const jeti::Renderer& render);
 
+    //void setOrientationModel(ceti::model::Orientation* model);
+
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }
 
@@ -102,7 +104,8 @@ private:
 
     TextureOb* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    ceti::control::Orientation* m_orientation = nullptr;
+    //ceti::control::Orientation* m_orientation = nullptr;
+    ceti::model::Orientation* m_orientation = nullptr;
 
     BaseAnimationRotation* m_animationRotation = nullptr;
 
