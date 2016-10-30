@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RenderManager.hpp"
+#include "SpaceView.hpp"
 #include <jeti/constants.hpp>
 
 #include <ceti/Collision.hpp>
