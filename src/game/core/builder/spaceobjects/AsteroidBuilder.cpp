@@ -43,7 +43,7 @@ model::Asteroid* Asteroid::getNew()
 {
     model::Asteroid* model = __createTemplate();
 
-    model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
     model->setRadiusA(meti::getRandInt(300, 1200));
     model->setRadiusB(meti::getRandInt(300, 1200));
     model->setOrbitPhi(meti::getRandInt(360));

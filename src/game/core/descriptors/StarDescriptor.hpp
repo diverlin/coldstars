@@ -18,26 +18,23 @@
 
 #pragma once
 
-#include <ceti/Base.hpp>
-#include <ceti/type/IdType.hpp>
-
-#include <vector>
-#include <sstream>
+#include "PlanetoidDescriptor.hpp"
 
 namespace descriptor {
 
-struct Star : public ceti::descriptor::BaseView
+class Star : public Planetoid
 {
 public:
-    Star() {}
+    Star() = default;
     Star(const std::string& data)
     {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Star() {}
+    virtual ~Star() = default;
 
     std::string info() const override final {
-        std::string result = "Star descriptor: " + ceti::descriptor::BaseView::info();
+        std::string result = "Star descriptor: " + Planetoid::info();
+        result += std::string(" armor=") + std::to_string(m_armor);
         return result;
     }
 
@@ -51,7 +48,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
+        ar & boost::serialization::base_object<Planetoid>(*this);
         ar & m_armor;
     }
 }; 

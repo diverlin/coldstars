@@ -56,18 +56,22 @@ Star::getNew(const descriptor::Star& descr)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
-    model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    model->setRadiusA(50);
-    model->setRadiusB(50);
-    model->setOrbitPhi(0);
-    model->setSpeed(1.8f);
+    // Planetoid
+    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    model->setRadiusA(descr.radiusA());
+    model->setRadiusB(descr.radiusB());
+    model->setOrbitPhi(descr.orbitPhi());
+    model->setSpeed(descr.speed());
+
+    // Orientation
+    model->setSize(descr.size());
 
     LifeData data_life;
     data_life.armor = descr.armor();
     model->setLifeData(data_life);
 
-    float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
-    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    //float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
+    //glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender star->SetRenderData(mesh, texOb, scale);
 
     // alpitodorender star->CalcColor();
