@@ -39,6 +39,7 @@
 #include <common/Global.hpp>
 #include <descriptors/DescriptorManager.hpp>
 #include <types/MeshTypes.hpp>
+#include <types/TextureTypes.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -82,6 +83,22 @@ Generator::getNewStarsystemDescriptor(int race)
 
 /* spaceobjects */
 
+namespace {
+
+int_t meshDescriptorIdFromType(const type::mesh& type) {
+    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    return collector.getByType(int(type)).id();
+}
+
+int_t textureDescriptorIdFromType(const type::texture& type) {
+    descriptor::Collector<descriptor::Material> collector("material_descriptors.txt");
+    //return collector.getByType(int(type)).id();
+    assert(false);
+    return -1;
+}
+
+} // namespace
+
 descriptor::Star
 Generator::getNewStarDescriptor()
 {
@@ -102,10 +119,8 @@ Generator::getNewStarDescriptor()
                                   descriptor::Star::SCALE_MAX);
     descr.setSize(meti::vec3(size));
 
-//    descr.setTexture(TextureCollector::get().getTextureByTypeId(type::TEXTURE::STAR_ID).id());
-    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    const auto& mesh_descr = collector.getByType(int(type::mesh::SPHERE_ID));
-    descr.setMesh(mesh_descr.id());
+    descr.setTexture(textureDescriptorIdFromType(type::texture::STAR_ID));
+    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     return descr;
 }
@@ -129,11 +144,8 @@ Generator::getNewPlanetDescriptor()
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
     descr.setSize(meti::vec3(size));
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
-
-    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    const auto& mesh_descr = collector.getByType(int(type::mesh::SPHERE_ID));
-    descr.setMesh(mesh_descr.id());
+    descr.setTexture(textureDescriptorIdFromType(type::texture::PLANET_ID));
+    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     return descr;
 
