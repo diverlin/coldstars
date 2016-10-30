@@ -18,8 +18,8 @@
 
 #pragma once
 
-#include <ceti/Base.hpp>
-#include <ceti/type/IdType.hpp>
+#include <ceti/descriptor/BaseView.hpp>
+//#include <ceti/type/IdType.hpp>
 
 #include <vector>
 

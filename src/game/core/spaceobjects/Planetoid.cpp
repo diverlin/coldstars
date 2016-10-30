@@ -52,16 +52,17 @@ Planetoid::Planetoid(model::Planetoid* model)
 Planetoid::~Planetoid()
 {}
 
-void Planetoid::setPlanetDescriptor(int_t descriptor)
-{
-    model()->setDescriptor(descriptor);
-    if (!m_descriptor) {
-        //m_descriptor = getDescriptor(descriptor) ... ;
-        assert(m_descriptor);
-    }
-}
+//void Planetoid::setPlanetDescriptor(int_t descriptor)
+//{
+//    model()->setDescriptor(descriptor);
+//    if (!m_descriptor) {
+//        //m_descriptor = getDescriptor(descriptor) ... ;
+//        assert(m_descriptor);
+//    }
+//}
 
-PlanetDescriptor* Planetoid::descriptor() const
+const descriptor::Planet&
+Planetoid::descriptor() const
 {
     return m_descriptor;
 }
@@ -76,11 +77,11 @@ void Planetoid::bindParent(const SpaceObject* const parent, int it)
 
 void Planetoid::__createOrbit()
 {
-    m_orbit.calcPath(descriptor()->radius_A,
-                     descriptor()->radius_B,
-                     descriptor()->speed,
-                     descriptor()->orbit_phi_inD,
-                     descriptor()->clockwise);
+    m_orbit.calcPath(descriptor().radiusA(),
+                     descriptor().radiusB(),
+                     descriptor().speed(),
+                     descriptor().orbitPhi(),
+                     descriptor().clockwise());
 }
 
 /* virtual */
@@ -126,7 +127,11 @@ void Planetoid::bindParent(const SpaceObject* const parent, int it)
         
 void Planetoid::__createOrbit()
 {
-    m_orbit.calcPath(m_planetDescriptor.radius_A, m_planetDescriptor.radius_B, m_planetDescriptor.speed, m_planetDescriptor.orbit_phi_inD, m_planetDescriptor.clockwise);
+    m_orbit.calcPath(m_planet_descriptor.radiusA(),
+                     m_planet_descriptor.radiusB(),
+                     m_planet_descriptor.speed(),
+                     m_planet_descriptor.orbitPhi(),
+                     m_planet_descriptor.clockwise());
 }
 
 /* virtual */

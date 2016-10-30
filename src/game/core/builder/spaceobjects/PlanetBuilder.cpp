@@ -63,7 +63,7 @@ Planet::getNew(const descriptor::BaseOLD& descr)
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
     int orbit_radius = 1000; // hack
-    model->setOrbitCenter(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    //model->setOrbitCenter(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
     model->setRadiusA(orbit_radius);
     model->setRadiusB(orbit_radius);
     model->setOrbitPhi(0);

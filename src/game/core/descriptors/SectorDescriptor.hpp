@@ -19,7 +19,7 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
-#include <ceti/Base.hpp>
+#include <ceti/descriptor/BaseView.hpp>
 
 #include <vector>
 

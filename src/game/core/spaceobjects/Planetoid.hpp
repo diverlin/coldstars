@@ -43,14 +43,14 @@ public:
     Planetoid(const std::string& data);
     std::string data() const;
 
-    void setOrbitCenter(const meti::vec3& orbitCenter) { m_orbitCenter = orbitCenter; }
+    //void setOrbitCenter(const meti::vec3& orbitCenter) { m_orbitCenter = orbitCenter; }
     void setOrbitPhi(float orbitPhi) { m_orbitPhi = orbitPhi; }
     void setRadiusA(int radiusA) { m_radiusA = radiusA; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
     void setSpeed(float speed) { m_speed = speed; }
     void setClockwise(bool clockwise) { m_clockwise = clockwise; }
 
-    const meti::vec3& orbitCenter() const { return m_orbitCenter; }
+    //const meti::vec3& orbitCenter() const { return m_orbitCenter; }
     float orbitPhi() const { return m_orbitPhi; }
     int radiusA() const { return m_radiusA; }
     int radiusB() const { return m_radiusB; }
@@ -58,7 +58,7 @@ public:
     bool clockwise() const { return m_clockwise; }
 
 private:
-    meti::vec3 m_orbitCenter;
+    //meti::vec3 m_orbitCenter;
     float m_orbitPhi = 0.0f;
     int m_radiusA = 0;
     int m_radiusB = 0;
@@ -71,7 +71,7 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_orbitCenter;
+        //ar & m_orbitCenter;
         ar & m_orbitPhi;
         ar & m_radiusA;
         ar & m_radiusB;
@@ -95,7 +95,7 @@ public:
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
-    PlanetDescriptor* descriptor() const;
+    const descriptor::Planet& descriptor() const;
 
     void bindParent(const SpaceObject* const, int);
 
@@ -108,7 +108,7 @@ protected:
 private:
     model::Planetoid* m_model_planetoid = nullptr;
     Orbit m_orbit;
-    PlanetDescriptor* m_descriptor = nullptr;
+    descriptor::Planet m_descriptor;
 
     model::Planetoid* model() const { return m_model_planetoid; }
 
@@ -125,11 +125,11 @@ public:
     Planetoid();
     virtual ~Planetoid();
 
-    void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_planetDescriptor = planet_descriptor; }
+    //void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_planetDescriptor = planet_descriptor; }
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
-    const PlanetDescriptor& planetDescriptor() const { return m_planetDescriptor; }
+    //const PlanetDescriptor& planetDescriptor() const { return m_planetDescriptor; }
 
     void bindParent(const SpaceObject* const, int);
 
@@ -147,7 +147,7 @@ protected:
     void ResolveData();
 
 private:
-    PlanetDescriptor m_planetDescriptor;
+    descriptor::Planet m_planet_descriptor;
     Orbit m_orbit;
 
     void __createOrbit();

@@ -21,17 +21,16 @@
 
 #include <spaceobjects/Planetoid.hpp>
 
-
-
 namespace model {
 
 class Star : public Planetoid {
+
 public:
     static const int SCALE_MIN;
     static const int SCALE_MAX;
 
 public:
-    Star() = default;
+    Star();
     ~Star() = default;
     Star(const std::string& data);
     std::string data() const;

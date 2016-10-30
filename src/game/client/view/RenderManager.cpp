@@ -184,11 +184,12 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
 
     assert(model);
+    //assert(model->type() != )
 
     //!--------------
-    model->setPosition(glm::vec3(200, 200, 250));
-    model->setSize(glm::vec3(100, 100, 1));
-    model->setDirection(glm::vec3(0, 1, 0));
+//    model->setPosition(glm::vec3(200, 200, 250));
+//    model->setSize(glm::vec3(100, 100, 1));
+//    model->setDirection(glm::vec3(0, 1, 0));
     //!--------------
 
     jeti::view::BaseView* view = __isViewExists(model);
