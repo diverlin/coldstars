@@ -16,47 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
-#include "PlanetoidDescriptor.hpp"
+#include "PlanetDescriptor.hpp"
 
 namespace descriptor {
 
-class Star : public Planetoid
-{
-
-public:
-    static const int SCALE_MIN;
-    static const int SCALE_MAX;
-    static const int DISTANCE_MIN;
-    static const int DISTANCE_MAX;
-    static const int SPEED_MIN;
-    static const int SPEED_MAX;
-
-public:
-    Star() = default;
-    Star(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    virtual ~Star() = default;
-
-    std::string info() const override final {
-        std::string result = "Star descriptor: " + Planetoid::info();
-        return result;
-    }
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-    }
-}; 
+const int Planet::SCALE_MIN = 100;
+const int Planet::SCALE_MAX = 190;
+const int Planet::POPULATION_MIN = 6000;
+const int Planet::POPULATION_MAX = 20000;
+const int Planet::DISTANCE_MIN = 400;
+const int Planet::DISTANCE_MAX = 500;
+const int Planet::SPEED_MIN = 40;
+const int Planet::SPEED_MAX = 50;
 
 } // namespace descriptor
-
-
-
-
-

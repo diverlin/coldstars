@@ -220,6 +220,7 @@ void Starsystem::add(model::Star* model)
     model->setPlace(type::place::KOSMOS);
 
     control::Star* star = new control::Star(model);
+    star->initialize();
     m_stars.push_back(star);
 }
 
@@ -233,7 +234,11 @@ void Starsystem::add(model::Planet* model, const model::SpaceObject* parent)
     model->setStarSystem(this->id());
     model->setPlace(type::place::KOSMOS);
 
+    model->setRadiusA(model->radiusA() * (m_planets.size() + 2));
+    model->setRadiusB(model->radiusB() * (m_planets.size() + 2));
+
     control::Planet* planet = new control::Planet(model);
+    planet->initialize();
     m_planets.push_back(planet);
 }
 

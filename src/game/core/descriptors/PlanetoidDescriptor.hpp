@@ -51,7 +51,7 @@ public:
     void setRadiusA(int radiusA) { m_radiusA = radiusA; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
     void setOrbitPhi(int orbitPhi) { m_orbitPhi = orbitPhi; }
-    void setSpeed(int speed) { m_speed = speed; }
+    void setSpeed(float speed) { m_speed = speed; }
     void setClockwise(int clockwise) { m_clockwise = clockwise; }
 
 private:

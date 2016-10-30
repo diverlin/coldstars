@@ -110,7 +110,7 @@ public:
     SpaceObject(model::SpaceObject*);
     ~SpaceObject() override;
 
-    [[warning("check const basense")]]
+    [[warning("check const")]]
     Starsystem* starsystem();
 
     model::SpaceObject* parent();

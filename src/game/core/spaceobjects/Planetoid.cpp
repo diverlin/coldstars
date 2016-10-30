@@ -67,13 +67,13 @@ Planetoid::descriptor() const
     return m_descriptor;
 }
 
-void Planetoid::bindParent(const SpaceObject* const parent, int it)
-{
-    //setParent(parent);
-    __createOrbit();
-    m_orbit.setIt(it);
-    _updatePosition();
-}
+//void Planetoid::bindParent(const SpaceObject* const parent, int it)
+//{
+//    //setParent(parent);
+//    __createOrbit();
+//    m_orbit.setIt(it);
+//    _updatePosition();
+//}
 
 void Planetoid::__createOrbit()
 {
@@ -88,11 +88,23 @@ void Planetoid::__createOrbit()
 void Planetoid::_postDeathUniqueEvent(bool)
 {}
 
+void Planetoid::initialize()
+{
+    if (!m_orbit.initialized()) {
+        m_orbit.calcPath(
+                    model()->radiusA(),
+                    model()->radiusB(),
+                    model()->speed(),
+                    model()->orbitPhi(),
+                    model()->clockwise());
+    }
+}
+
 void Planetoid::_updatePosition()
 {
     m_orbit.updatePosition();
     if (parent()) {
-        //setPosition(parent()->position() + m_orbit.position());
+        setPosition(parent()->position() + m_orbit.position());
     } else {
         setPosition(m_orbit.position());
     }

@@ -41,24 +41,6 @@
 namespace jeti {
 
 Renderer::Renderer()
-:
-m_w(0), m_h(0),
-m_programLight(0),
-m_programLightLocation_uProjectionViewMatrix(-1),
-m_programLightLocation_uModelMatrix(-1),
-m_programLightLocation_uNormalMatrix(-1),
-m_programLightLocation_uLightPos(-1),
-m_programLightLocation_uEyePos(-1),
-m_programLightLocation_uDiffColor(-1),
-m_programLightLocation_uAmbientColor(-1),
-m_programLightLocation_uTexture(-1),
-m_programBlur(0),
-m_activeProgram(0),
-m_transparentModeOn(-1),
-m_postEffectModeOn(-1),
-m_fboNum(FBO_NUM),
-m_indexFboLastActivated(-1),
-m_indexFboLastDeactivated(-1)
 {
     m_light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
     m_light.ambient     = glm::vec4(0.2f);
@@ -183,7 +165,7 @@ void Renderer::setPerspectiveProjection(float w, float h)
 
 void Renderer::setOrthogonalProjection(float w, float h)
 {        
-    m_projectionMatrix = glm::ortho(0.0f, w, 0.0f, h, ZNEAR, ZFAR);
+    m_projectionMatrix = glm::ortho(-w/2 * m_scale, w/2 * m_scale, -h/2 * m_scale, h/2 * m_scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 

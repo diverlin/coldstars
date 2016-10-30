@@ -97,7 +97,8 @@ public:
     const Orbit& orbit() const { return m_orbit; }
     const descriptor::Planet& descriptor() const;
 
-    void bindParent(const SpaceObject* const, int);
+    void initialize();
+    //void bindParent(const SpaceObject* const, int);
 
 protected:
     virtual void putChildrenToGarbage() const {}

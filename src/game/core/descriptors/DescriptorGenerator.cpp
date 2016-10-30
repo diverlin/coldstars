@@ -84,6 +84,16 @@ Generator::getNewStarDescriptor()
     descriptor::Star descr;
     descr.setArmor(10000000);
 
+    int orbit_radius = meti::getRandInt(descriptor::Star::DISTANCE_MIN,
+                                        descriptor::Star::DISTANCE_MAX);
+    descr.setRadiusA(orbit_radius);
+    descr.setRadiusB(orbit_radius);
+    descr.setOrbitPhi(0);
+    float speed = meti::getRandInt(descriptor::Star::SPEED_MIN,
+                                   descriptor::Star::SPEED_MAX) / float(orbit_radius);
+    descr.setSpeed(speed);
+    descr.setClockwise(meti::getRandBool());
+
     float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
     descr.setSize(meti::vec3(size));
@@ -104,9 +114,9 @@ Generator::getNewPlanetDescriptor()
     descr.setRadiusA(orbit_radius);
     descr.setRadiusB(orbit_radius);
     descr.setOrbitPhi(0);
-    descr.setSpeed(meti::getRandInt(descriptor::Planet::SPEED_MIN,
-                                    descriptor::Planet::SPEED_MAX) / float(orbit_radius)
-                   );
+    float speed = meti::getRandInt(descriptor::Planet::SPEED_MIN,
+                                   descriptor::Planet::SPEED_MAX) / float(orbit_radius);
+    descr.setSpeed(speed);
     descr.setClockwise(meti::getRandBool());
 
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
