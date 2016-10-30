@@ -67,10 +67,11 @@ Starsystem* SpaceObject::starsystem()
     return m_starsystem;
 }
 
-model::SpaceObject* SpaceObject::parent()
+model::SpaceObject*
+SpaceObject::parent()
 {
     if (!m_parent) {
-        //m_parent = static_cast<model::SpaceObject*>(global::get().entityManager().get(model()->parent));
+        m_parent = static_cast<model::SpaceObject*>(global::get().entityManager().get(model()->parent()));
         assert(m_parent);
     }
     return m_parent;

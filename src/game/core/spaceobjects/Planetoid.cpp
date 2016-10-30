@@ -92,7 +92,6 @@ void Planetoid::_updatePosition()
 {
     m_orbit.updatePosition();
     if (parent()) {
-        assert(false);
         //setPosition(parent()->position() + m_orbit.position());
     } else {
         setPosition(m_orbit.position());

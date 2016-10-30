@@ -70,8 +70,6 @@ Star::getNew(const descriptor::Star& descr)
     data_life.armor = descr.armor();
     model->setLifeData(data_life);
 
-    //float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
-    //glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender star->SetRenderData(mesh, texOb, scale);
 
     // alpitodorender star->CalcColor();

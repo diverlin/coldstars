@@ -169,6 +169,8 @@ private:
     jeti::view::BaseView* __isViewExists(model::SpaceObject*);
 
     std::map<model::SpaceObject*, jeti::view::BaseView*> m_cache;
+    [[warning("ugly, think how to make it better")]]
+    std::map<jeti::view::BaseView*, model::SpaceObject*> m_cache2;
 };
 
 } // namespace view

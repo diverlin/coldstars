@@ -223,13 +223,13 @@ void Starsystem::add(model::Star* model)
     m_stars.push_back(star);
 }
 
-void Starsystem::add(model::Planet* model, const model::SpaceObject* parent, int it)
+void Starsystem::add(model::Planet* model, const model::SpaceObject* parent)
 {
-    //planet->bindParent(parent, it);
-
-    if (parent) {
-        model->setParent(parent->id());
+    if (!parent) {
+        parent = star();
     }
+
+    model->setParent(parent->id());
     model->setStarSystem(this->id());
     model->setPlace(type::place::KOSMOS);
 

@@ -125,4 +125,10 @@ std::string str(const glm::vec3& v)
     return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
 }
 
+std::string
+to_string(const vec3& v)
+{
+    return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
+}
+
 } // namespace meti

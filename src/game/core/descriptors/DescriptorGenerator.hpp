@@ -29,6 +29,7 @@ class Galaxy;
 class Sector;
 class Starsystem;
 class Star;
+class Planet;
 class BaseOLD;
 
 class Generator {
@@ -40,7 +41,7 @@ static descriptor::Starsystem getNewStarsystemDescriptor(int race = -1);
 
 /* spaceobjects */
 static descriptor::Star getNewStarDescriptor();
-static descriptor::BaseOLD getNewPlanetDescriptor();
+static descriptor::Planet getNewPlanetDescriptor();
 static descriptor::BaseOLD getNewAsteroidDescriptor();
 static descriptor::BaseOLD getNewVehicleDescriptor();
 static descriptor::BaseOLD getNewContainerDescriptor();

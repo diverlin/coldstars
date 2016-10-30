@@ -167,7 +167,7 @@ public:
     void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
     void add(model::Star*);
-    void add(model::Planet*, const model::SpaceObject* parent = nullptr, int it = 0);
+    void add(model::Planet*, const model::SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(Container*, const glm::vec3& = glm::vec3(0.0f));
     void add(BlackHole*, const glm::vec3&);
