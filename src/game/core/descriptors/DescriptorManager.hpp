@@ -24,6 +24,7 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarsystemDescriptor.hpp>
 #include <descriptors/StarDescriptor.hpp>
+#include <descriptors/PlanetDescriptor.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -109,6 +110,9 @@ public:
     void add(const Star& star) {
         m_star.add(star);
     }
+    void add(const Planet& planet) {
+        m_planet.add(planet);
+    }
     void add(const Mesh& mesh) {
         m_mesh.add(mesh);
     }
@@ -120,6 +124,7 @@ public:
     const MManager<Sector>& sector() const { return m_sector; }
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
+    const MManager<Planet>& planet() const { return m_planet; }
     const Collector<Mesh>& mesh() const { return m_mesh; }
     const Collector<Material>& texture() const { return m_material; }
 
@@ -128,6 +133,7 @@ private:
     MManager<Sector> m_sector;
     MManager<Starsystem> m_starsystem;
     MManager<Star> m_star;
+    MManager<Planet> m_planet;
     Collector<Mesh> m_mesh;
     Collector<Material> m_material;
 

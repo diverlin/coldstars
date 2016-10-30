@@ -26,15 +26,15 @@ class Planet;
 } // namespace model
 
 namespace descriptor {
-class BaseOLD;
-}
+class Planet;
+} // namespace descriptor
     
 namespace builder {
 
 class Planet
 {
 public:
-    static model::Planet* getNew(const descriptor::BaseOLD&);
+    static model::Planet* getNew(const descriptor::Planet&);
     static model::Planet* getNew();
 
 private:
