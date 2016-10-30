@@ -59,7 +59,7 @@ Planet::getNew(const descriptor::Planet& descr)
 {
     model::Planet* model = __createTemplate();
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    model->setMesh(descr.mesh());
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
     /// Planetoid

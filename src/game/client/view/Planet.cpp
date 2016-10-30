@@ -61,7 +61,8 @@ Planet::~Planet()
 
 void Planet::draw(const jeti::Renderer& render)
 {
-    render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
+    //render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
+    render.drawMeshLight(mesh(), material(), actualModelMatrix());
 //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());
 //    }

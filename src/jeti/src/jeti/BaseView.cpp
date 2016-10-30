@@ -22,6 +22,10 @@
 #include <TextureOb.hpp>
 #include <Mesh.hpp>
 
+//#include <common/Global.hpp>
+#include <descriptors/DescriptorManager.hpp> // Collector
+#include <types/MeshTypes.hpp>
+
 #include <animations/BaseAnimationRotation.hpp>
 
 #include <meti/QuaternionUtils.hpp>
@@ -44,7 +48,6 @@ namespace {
 TextureOb* getMaterial(int_t id)
 {
     jeti::TextureOb* material = BaseView::s_materials.get(id);
-    assert(material);
     if(!material) {
         material= new jeti::TextureOb;
     }
@@ -54,7 +57,13 @@ TextureOb* getMaterial(int_t id)
 
 jeti::Mesh* getMesh(int_t id)
 {
-    jeti::Mesh* mesh = BaseView::s_meshes.get(id);
+    //jeti::Mesh* mesh = BaseView::s_meshes.get(id);
+    assert(id>0);
+
+    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    const auto& descr = collector.getByType(int(type::mesh::SPHERE_ID));
+    jeti::Mesh* mesh = new jeti::Mesh(descr);
+    assert(mesh);
     if(!mesh) {
         mesh= new jeti::Mesh;
     }

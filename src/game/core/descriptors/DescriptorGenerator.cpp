@@ -36,6 +36,10 @@
 
 #include <item/BaseItem.hpp>
 
+#include <common/Global.hpp>
+#include <descriptors/DescriptorManager.hpp>
+#include <types/MeshTypes.hpp>
+
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
 
@@ -97,8 +101,11 @@ Generator::getNewStarDescriptor()
     float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
     descr.setSize(meti::vec3(size));
+
 //    descr.setTexture(TextureCollector::get().getTextureByTypeId(type::TEXTURE::STAR_ID).id());
-//    descr.setMesh(MeshCollector::get().get(type::mesh::SPHERE_ID).id());
+    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    const auto& mesh_descr = collector.getByType(int(type::mesh::SPHERE_ID));
+    descr.setMesh(mesh_descr.id());
 
     return descr;
 }
@@ -122,8 +129,11 @@ Generator::getNewPlanetDescriptor()
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
     descr.setSize(meti::vec3(size));
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+
+    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    const auto& mesh_descr = collector.getByType(int(type::mesh::SPHERE_ID));
+    descr.setMesh(mesh_descr.id());
 
     return descr;
 

@@ -53,7 +53,7 @@ model::Star*
 Star::getNew(const descriptor::Star& descr)
 {
     model::Star* model = __getNewTemplate();
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    model->setMesh(descr.mesh());
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
     // Planetoid
