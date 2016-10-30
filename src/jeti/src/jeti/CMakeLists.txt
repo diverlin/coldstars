@@ -8,6 +8,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../ma
 file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
+file(GLOB_RECURSE ${PROJECT}_FRAG RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/shaders *.frag)
+file(GLOB_RECURSE ${PROJECT}_VERT RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/shaders *.vert)
+
 set(GTEST_ROOT "/workspace/dist/gtest")
 
 find_package(OpenGL REQUIRED)
@@ -47,7 +50,12 @@ if (NOT COMPILE_FLAGS)
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 
-add_library(${PROJECT} SHARED ${${PROJECT}_SRC} ${${PROJECT}_HDR})
+add_library(${PROJECT} SHARED
+    ${${PROJECT}_SRC}
+    ${${PROJECT}_HDR}
+#    ${${PROJECT}_FRAG}
+#    ${${PROJECT}_VERT}
+    )
 target_link_libraries(${PROJECT}
     ${CETI_PROJECT}
     ${SFML_LIBRARIES}
