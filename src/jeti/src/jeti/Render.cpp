@@ -63,7 +63,7 @@ void Renderer::init(int w, int h)
     // Enable Z-buffer read and write
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
-    glClearDepth(1.f);
+    glClearDepth(1.0);
 
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -218,7 +218,7 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 	
-	    glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
         glUniform1i(glGetUniformLocation(m_shaders.base, "u_Texture"), 0);
 	                        
@@ -646,19 +646,17 @@ void Renderer::drawStarField(int w, int h, float pos_x, float pos_y) const
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.starfield, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.starfield, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
-        glUniform2f(glGetUniformLocation(m_shaders.starfield, "resolution")   , w, h);
-        glUniform2f(glGetUniformLocation(m_shaders.starfield, "mouse")   , pos_x, pos_y);
+        glUniform2f(glGetUniformLocation(m_shaders.starfield, "resolution"), w, h);
+        glUniform2f(glGetUniformLocation(m_shaders.starfield, "mouse"), pos_x, pos_y);
         glUniform1f(glGetUniformLocation(m_shaders.starfield, "time"), 1.0f);
                     
         m_meshQuad->draw();
     }
 }
 
-
 void Renderer::__useProgram(GLuint program) const
 {
-    if (m_activeProgram != program)
-    {
+    if (m_activeProgram != program) {
         glUseProgram(program);
         m_activeProgram = program;
     }
@@ -666,21 +664,16 @@ void Renderer::__useProgram(GLuint program) const
  
 void Renderer::__useTransparentMode(bool transparent_mode_on) const
 {
-    if (m_transparentModeOn != transparent_mode_on)
-	{
-		if (transparent_mode_on == true)
-		{
+    if (m_transparentModeOn != transparent_mode_on) {
+        if (transparent_mode_on) {
 			glEnable(GL_BLEND);
 			glDepthMask(GL_FALSE); // turn off depth buffer writing
 			//glDisable(GL_CULL_FACE);					
-		}
-		else
-		{
+        } else {
 			glDisable(GL_BLEND);
 			glDepthMask(GL_TRUE); // turn on depth buffer writing
 			//glEnable(GL_CULL_FACE);		
 		}
-
         m_transparentModeOn = transparent_mode_on;
 	}
 	
@@ -689,14 +682,11 @@ void Renderer::__useTransparentMode(bool transparent_mode_on) const
 
 void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
 {
-    if (m_postEffectModeOn != posteffect_mode_on)
-	{
-		if (posteffect_mode_on == true)
-		{
+    if (m_postEffectModeOn != posteffect_mode_on) {
+        if (posteffect_mode_on) {
 			glDisable(GL_BLEND);
 			glDepthMask(GL_FALSE);
 		}
-
         m_postEffectModeOn = posteffect_mode_on;
 	}
 	
@@ -867,4 +857,4 @@ void drawInfoIn2Column(
 */
 }
 
-}
+} // namespace jeti

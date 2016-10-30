@@ -44,6 +44,7 @@ namespace {
 TextureOb* getMaterial(int_t id)
 {
     jeti::TextureOb* material = BaseView::s_materials.get(id);
+    assert(material);
     if(!material) {
         material= new jeti::TextureOb;
     }
@@ -95,10 +96,14 @@ BaseView::BaseView(ceti::model::BaseView* model)
 
 BaseView::~BaseView() {
     delete m_animationRotation;
-    m_animationRotation= nullptr;
+    m_animationRotation = nullptr;
 }
 
-void BaseView::setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
+void BaseView::setOrientationModel(ceti::model::Orientation* model)
+{
+    m_orientation = model;
+    m_orientation->setDirection(m_mesh->originDirection());
+}
 
 const glm::vec3& BaseView::center() const { return m_orientation->position(); }
 const glm::vec3& BaseView::size() const { return m_orientation->size(); }
@@ -137,12 +142,12 @@ void BaseView::validateResources() const
 //    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
 //}
 
-void BaseView::__updateRenderAnimation()
-{
-    if (m_animationRotation != nullptr) {
-        //m_AnimationRotation->Update(GetAngle());
-    }
-}
+//void BaseView::__updateRenderAnimation()
+//{
+//    if (m_animationRotation) {
+//        m_animationRotation->Update(GetAngle());
+//    }
+//}
 
 bool BaseView::_updateFadeInEffect()
 {

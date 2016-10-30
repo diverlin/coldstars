@@ -104,7 +104,6 @@ private:
 
     TextureOb* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    //ceti::control::Orientation* m_orientation = nullptr;
     ceti::model::Orientation* m_orientation = nullptr;
 
     BaseAnimationRotation* m_animationRotation = nullptr;
@@ -117,7 +116,7 @@ private:
     glm::quat m_quatDirection;
     glm::quat m_quatAnimation;
 
-    void __updateRenderAnimation();
+    //void __updateRenderAnimation();
 
     //    protected:
     //        InfoTable m_Info;
