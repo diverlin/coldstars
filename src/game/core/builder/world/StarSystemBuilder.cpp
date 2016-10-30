@@ -70,7 +70,7 @@ void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descript
     //    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     //    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
 
-    __createPlanets(starsystem, meti::getRandInt(1,1));
+    __createPlanets(starsystem, meti::getRandInt(2,5));
 }
 
 void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)

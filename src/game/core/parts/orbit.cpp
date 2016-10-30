@@ -23,60 +23,76 @@
 
 
 Orbit::Orbit()
-:
-m_length(0),
-m_it(0)
 {}
 
 Orbit::~Orbit()
 {}
- 
+
+void
+Orbit::__validate() const
+{
+    assert(m_it >= 0);
+    assert(m_coordinates.size());
+}
+
+const glm::vec3&
+Orbit::position() const
+{
+    __validate();
+    return m_coordinates[m_it];
+}
+
 const glm::vec3& Orbit::nextTurnPosition() const
 { 
-    if (m_it + TURN_TIME < m_length)
-    {
+    __validate();
+    if (m_it + TURN_TIME < m_length) {
         return m_coordinates[m_it+TURN_TIME];
-    }
-    else
-    {
-        int d_orbit = m_length-m_it;
+    } else {
+        int d_orbit = m_length - m_it;
         return m_coordinates[TURN_TIME - d_orbit];
     }
 }
 
-
-void Orbit::calcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
+void Orbit::calcPath(float radiusA,
+                     float radiusB,
+                     float speed,
+                     float orbit_phi_inD,
+                     bool clockwise)
 {   
+    assert(speed > 0);
     m_coordinates.clear();
     
     float d_angleInRad = glm::radians(speed);
-    if (clockwise == true) 
-    {
+    if (clockwise) {
         d_angleInRad *= -1;
-    }         
-     
+    }
+
     float orbitPhiInRad = glm::radians(orbit_phi_inD);
     
     glm::vec3 new_coord;
     
-    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
-    { 
-        new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-        new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-        new_coord.z = DEFAULT_ENTITY_ZPOS;             
+    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) {
+        new_coord.x = radiusA * cos(angleInRad) * cos(orbitPhiInRad) - radiusB * sin(angleInRad) * sin(orbitPhiInRad);
+        new_coord.y = radiusA * cos(angleInRad) * sin(orbitPhiInRad) + radiusB * sin(angleInRad) * cos(orbitPhiInRad);
+        new_coord.z = DEFAULT_ENTITY_ZPOS;
         m_coordinates.push_back(new_coord);
     }
     m_length = m_coordinates.size();
+    m_it = 0;
+    m_initialized = true;
 }    
 
-void Orbit::calcPath(float radius, float speed, bool clockwise)
+void Orbit::calcPath(float radius,
+                     float speed,
+                     bool clockwise)
 {       
+    assert(speed > 0);
     m_coordinates.clear();
     
     float d_angleInRad  = glm::radians(speed);
-    if (clockwise == true) {
+    if (clockwise) {
         d_angleInRad *= -1;
-    }    
+    }
     
     glm::vec3 new_coord;
     for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) {
@@ -86,12 +102,17 @@ void Orbit::calcPath(float radius, float speed, bool clockwise)
         m_coordinates.push_back(new_coord);
     }
     m_length = m_coordinates.size();
+    m_it = 0;
+    m_initialized = true;
 }    
 
 void Orbit::updatePosition()
 {   
-    if (m_it < m_length-1) { m_it++; }
-    else                 { m_it=0; }
+    if (m_it < m_length-1) {
+        m_it++;
+    } else {
+        m_it=0;
+    }
 }    
 
 //void Orbit::UpdatePathVisualisation()
