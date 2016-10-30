@@ -24,32 +24,29 @@ namespace descriptor {
 
 class Star : public Planetoid
 {
+
+public:
+    static const int SCALE_MIN;
+    static const int SCALE_MAX;
+
 public:
     Star() = default;
-    Star(const std::string& data)
-    {
+    Star(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
     virtual ~Star() = default;
 
     std::string info() const override final {
         std::string result = "Star descriptor: " + Planetoid::info();
-        result += std::string(" armor=") + std::to_string(m_armor);
         return result;
     }
 
-    int armor() const { return m_armor; }
-    void setArmor(int armor) { m_armor = armor; }
-
 private:
-    int m_armor = 100000;
-
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<Planetoid>(*this);
-        ar & m_armor;
     }
 }; 
 

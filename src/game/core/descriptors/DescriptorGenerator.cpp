@@ -23,7 +23,9 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarsystemDescriptor.hpp>
+
 #include <descriptors/StarDescriptor.hpp>
+#include <descriptors/PlanetDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
@@ -79,23 +81,95 @@ Generator::getNewStarsystemDescriptor(int race)
 descriptor::Star
 Generator::getNewStarDescriptor()
 {
-    descriptor::Star d;
-    d.setArmor(10000000);
-//    d.setTexture(TextureCollector::get().getTextureByTypeId(type::TEXTURE::STAR_ID).id());
-//    d.setMesh(MeshCollector::get().get(type::mesh::SPHERE_ID).id());
+    descriptor::Star descr;
+    descr.setArmor(10000000);
 
-    return d;
+    float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
+                                  descriptor::Star::SCALE_MAX);
+    descr.setSize(meti::vec3(size));
+//    descr.setTexture(TextureCollector::get().getTextureByTypeId(type::TEXTURE::STAR_ID).id());
+//    descr.setMesh(MeshCollector::get().get(type::mesh::SPHERE_ID).id());
+
+    return descr;
 }
 
-descriptor::BaseOLD
+descriptor::Planet
 Generator::getNewPlanetDescriptor()
 {
-    descriptor::BaseOLD descriptor(descriptor::Type::PLANET);
-    descriptor.add(descriptor::Key::ARMOR, 100000);
+    descriptor::Planet descr;
+    descr.setArmor(100000);
+
+    int orbit_radius = meti::getRandInt(descriptor::Planet::DISTANCE_MIN,
+                                        descriptor::Planet::DISTANCE_MAX);
+    descr.setRadiusA(orbit_radius);
+    descr.setRadiusB(orbit_radius);
+    descr.setOrbitPhi(0);
+    descr.setSpeed(meti::getRandInt(descriptor::Planet::SPEED_MIN,
+                                    descriptor::Planet::SPEED_MAX) / float(orbit_radius)
+                   );
+    descr.setClockwise(meti::getRandBool());
+
+    float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
+                                  descriptor::Planet::SCALE_MAX);
+    descr.setSize(meti::vec3(size));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
-    return descriptor;
+    return descr;
+
+
+
+    //model::Planet*
+    //Planet::getNew(const descriptor::BaseOLD& descr)
+    //{
+    //    model::Planet* model = __createTemplate();
+
+    //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    //    //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+
+    //    int orbit_radius = 1000; // hack
+    //    //model->setOrbitCenter(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    //    model->setRadiusA(orbit_radius);
+    //    model->setRadiusB(orbit_radius);
+    //    model->setOrbitPhi(0);
+    //    model->setSpeed(meti::getRandInt(model::Planet::SPEED_MIN, model::Planet::SPEED_MAX) / float(orbit_radius));
+    //    model->setClockwise(meti::getRandBool());
+
+    //    LifeData data_life;
+    //    data_life.armor = descr.armor();
+    //    model->setLifeData(data_life);
+
+    //    float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
+    //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    //    //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
+
+    //    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+    //    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //    //alpitodorender planet->SetAnimationRotation(animation_rotation);
+
+    //    //if (getRandBool())
+    //    {
+    //        //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
+    //        //Atmosphere* atmosphere = new Atmosphere();
+    //        //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
+    //        //alpitodorender planet->AddDecoration(atmosphere);
+    //    }
+
+    //   /*
+    //   {
+    //        Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+
+    //        TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
+    //        Ring* ring = new Ring();
+    //        ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
+    //        //ring->setDirection(glm::normalize(glm::vec3(1.0f)));
+    //        ring->setDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+    //        planet->AddDecoration(ring);
+    //    }
+    //    */
+    //    return model;
+    //}
+
 }
 
 descriptor::BaseOLD

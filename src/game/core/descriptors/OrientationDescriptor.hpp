@@ -36,7 +36,7 @@ public:
 
     std::string info() const override {
         std::string result = "Orientation descriptor: " + ceti::descriptor::BaseView::info();
-        //result += std::string(" size=") + std::to_string(m_size);
+        result += std::string(" size=") + meti::to_string(m_size);
         return result;
     }
 
@@ -45,7 +45,7 @@ public:
     void setSize(const meti::vec3& size) { m_size = size; }
 
 private:
-    meti::vec3 m_size = 0;
+    meti::vec3 m_size;
 
     friend class boost::serialization::access;
     template<class Archive>

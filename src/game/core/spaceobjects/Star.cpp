@@ -38,9 +38,6 @@
 
 namespace model {
 
-const int Star::SCALE_MIN = 200;
-const int Star::SCALE_MAX = 300;
-
 Star::Star()
 {
     setType(type::entity::STAR_ID);

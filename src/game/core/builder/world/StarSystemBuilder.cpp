@@ -70,7 +70,7 @@ void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descript
     //    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     //    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
 
-    //    CreatePlanets(starsystem, starsystem_descriptor.planet_num);
+    __createPlanets(starsystem, meti::getRandInt(1,1));
 }
 
 void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)
@@ -95,12 +95,13 @@ void StarsystemBuilder::__createStar(Starsystem* starsystem)
 
 void StarsystemBuilder::__createPlanets(Starsystem* starsystem, int planet_per_system)
 {
-    int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
+    //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     
-//    for(int i=0; i<planet_per_system; i++) {
-//        Planet* planet = global::get().planetBuilder().getNew(orbit_radius);
-//        starsystem->add(planet, starsystem->star());
-//        orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
-//    }
+    for(int i=0; i<planet_per_system; i++) {
+        model::Planet* planet = builder::Planet::getNew();
+        //starsystem->add(planet, starsystem->star());
+        starsystem->add(planet);
+        //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
+    }
 
 }

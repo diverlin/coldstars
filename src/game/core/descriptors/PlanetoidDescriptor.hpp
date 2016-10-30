@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include "OrientationDescriptor.hpp"
+#include "SpaceobjectDescriptor.hpp"
 
 namespace descriptor {
 
-struct Planetoid : public Orientation
+struct Planetoid : public Spaceobject
 {
 public:
     Planetoid() {}
@@ -33,7 +33,7 @@ public:
     virtual ~Planetoid() {}
 
     std::string info() const override {
-        std::string result = "Planetoid descriptor: " + ceti::descriptor::BaseView::info();
+        std::string result = "Planetoid descriptor: " + Spaceobject::info();
         result += std::string(" radiusA=") + std::to_string(m_radiusA);
         result += std::string(" radiusB=") + std::to_string(m_radiusB);
         result += std::string(" orbitPhi=") + std::to_string(m_orbitPhi);
@@ -65,7 +65,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & boost::serialization::base_object<Orientation>(*this);
+        ar & boost::serialization::base_object<Spaceobject>(*this);
         ar & m_radiusA;
         ar & m_radiusB;
         ar & m_orbitPhi;

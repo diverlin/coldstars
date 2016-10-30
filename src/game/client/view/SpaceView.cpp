@@ -31,6 +31,7 @@
 
 /// entities
 #include <spaceobjects/Star.hpp>
+#include <spaceobjects/Planet.hpp>
 
 #include <view/ShipDrawable.hpp>
 #include <view/BulletDrawable.hpp>
@@ -134,13 +135,14 @@ SpaceViewer::__update(Starsystem* starsystem,
     visibilityData.observer.center = lookFrom;
     visibilityData.observer.radius = lookFar;
 
-    assert(starsystem->stars().size()>0);
+    assert(starsystem->stars().size());
     for(auto* star: starsystem->stars()) {
         addIfVisible(star->model(), visibilityData);
     }
 
+    assert(starsystem->planets().size());
     for(auto* planet: starsystem->planets()) {
-//        addIfVisible(new PlanetDrawable(planet), visibilityData);
+        addIfVisible(planet->model(), visibilityData);
     }
 }
 
@@ -177,21 +179,12 @@ SpaceViewer::__isViewExists(model::SpaceObject* model)
 
 void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
 {
+    assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         //const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
         //jeti::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
-
-    assert(model);
-    //assert(model->type() != )
-
-    //!--------------
-//    model->setPosition(glm::vec3(200, 200, 250));
-//    model->setSize(glm::vec3(100, 100, 1));
-//    model->setDirection(glm::vec3(0, 1, 0));
-    //!--------------
-
     jeti::view::BaseView* view = __isViewExists(model);
     if (!view) {
         view = new view::Star(model);
@@ -205,9 +198,17 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
 
 void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
 {
+    assert(model);
+
 //    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-      view::Planet* view = new view::Planet(model);
-       __add(view);
+    jeti::view::BaseView* view = __isViewExists(model);
+    if (!view) {
+        view = new view::Planet(model);
+        __cache(model, view);
+    }
+    assert(view);
+
+    __add(view);
 //    }
 }
 
@@ -312,15 +313,30 @@ void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
 /// visible entities
 void SpaceViewer::__add(jeti::view::BaseView* view)
 {
-    view::Star* star = static_cast<view::Star*>(view);
-    if (star) {
+    std::map<jeti::view::BaseView*, model::SpaceObject*>::const_iterator it = m_cache2.find(view);
+    assert(it != m_cache2.end());
+    model::SpaceObject* ob = it->second;
+
+    switch(ob->type()) {
+    case type::entity::STAR_ID: {
+        view::Star* star = static_cast<view::Star*>(view);
+        assert(star);
         m_stars.push_back(star);
+        break;
+    }
+    case type::entity::PLANET_ID: {
+        view::Planet* planet = static_cast<view::Planet*>(view);
+        assert(planet);
+        m_planets.push_back(planet);
+        break;
+    }
     }
 }
 
 void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
 {
     m_cache.insert(std::make_pair(ob, view));
+    m_cache2.insert(std::make_pair(view, ob));
 }
 
 void SpaceViewer::__add(Star* view)
@@ -413,9 +429,16 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
 
     assert(m_stars.size());
     for(Star* star: m_stars) {
-        std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
+        //std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
         star->draw(render);
         //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
+    }
+
+    assert(m_planets.size());
+    for(Planet* planet: m_planets) {
+        //std::cout<<"-- render planet "<<planet->model()->typeInfo()<<std::endl;
+        planet->draw(render);
+        //render.DrawMeshMultiTextured(planet->mesh(), planet->textureOb(), planet->actualModelMatrix());
     }
 }
 

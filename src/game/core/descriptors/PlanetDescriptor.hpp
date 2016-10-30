@@ -24,33 +24,35 @@ namespace descriptor {
 
 class Planet : public Planetoid
 {
+
+public:
+    static const int SCALE_MIN;
+    static const int SCALE_MAX;
+    static const int POPULATION_MIN;
+    static const int POPULATION_MAX;
+    static const int DISTANCE_MIN;
+    static const int DISTANCE_MAX;
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
+
 public:
     Planet() = default;
-    Planet(const std::string& data)
-    {
+    Planet(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
     virtual ~Planet() = default;
 
     std::string info() const override final {
         std::string result = "Star descriptor: " + Planetoid::info();
-        result += std::string(" armor=") + std::to_string(m_armor);
         return result;
     }
 
-    int armor() const { return m_armor; }
-    void setArmor(int armor) { m_armor = armor; }
-
 private:
-    [[warning("move it to lower class, closer to Base")]]
-    int m_armor = 100000;
-
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<Planetoid>(*this);
-        ar & m_armor;
     }
 };
 
