@@ -45,7 +45,8 @@ Renderer::Renderer()
     m_light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
     m_light.ambient     = glm::vec4(0.2f);
     m_light.diffuse     = glm::vec4(1.0f);
-    m_light.specular    = glm::vec4(1.5f);
+//    m_light.specular    = glm::vec4(1.5f); // visual artefact
+    m_light.specular    = glm::vec4(0.0f);
     m_light.attenuation = glm::vec3(0.1f);
 }
 
@@ -58,7 +59,7 @@ void Renderer::init(int w, int h)
     m_w = w;
     m_h = h;
 
-    glClearColor(0.5f, 1.0f, 0.5f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     // Enable Z-buffer read and write
     glEnable(GL_DEPTH_TEST);
@@ -214,7 +215,7 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
     __useTransparentMode(textureOb.model().use_alpha);
  	
     __useProgram(m_shaders.base);
-	{
+    {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 	
@@ -222,8 +223,8 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
         glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
         glUniform1i(glGetUniformLocation(m_shaders.base, "u_Texture"), 0);
 	                        
-	    mesh.draw();
-	}
+        mesh.draw();
+    }
 }
 
 void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const

@@ -32,6 +32,5 @@ struct Light
     glm::vec3 attenuation;
 };
 
-}
-
+} // namespace jeti
 

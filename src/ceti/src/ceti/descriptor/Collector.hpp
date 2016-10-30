@@ -112,13 +112,13 @@ public:
     }
 
     const T& getByType(int type) const {
+        //assert(m_descriptorsTypes.size());
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
             return meti::getRand(it->second);
         } else {
             throw std::runtime_error("fail get, type doesn't exist");
         }
-        assert(false);
     }
 
     void save() const

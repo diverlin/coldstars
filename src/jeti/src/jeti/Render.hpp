@@ -95,7 +95,7 @@ public:
     void drawStarField(int, int, float, float) const;
 
 private:
-    float m_scale = 10;
+    float m_scale = 2.5f;
     int m_w = 0;
     int m_h = 0;
 
