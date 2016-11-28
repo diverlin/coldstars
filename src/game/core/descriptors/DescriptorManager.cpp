@@ -33,14 +33,16 @@ namespace descriptor {
 
 namespace {
 const std::string descriptors_fname = "descriptors.txt";
+const std::string descriptor_meshes_fname = "mesh_descriptors.txt";
+const std::string descriptor_materials_fname = "material_descriptors.txt";
 } // namespace
 
 Manager::Manager()
     :
-      m_mesh(Collector<Mesh>("mesh_descriptors.txt"))
-    , m_material(Collector<Material>("material_descriptors.txt"))
+      m_mesh(Collector<Mesh>(descriptor_meshes_fname))
+    , m_material(Collector<Material>(descriptor_materials_fname))
 {
-    bool regenerate = true;
+    bool regenerate = false;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
         load();
     } else {

@@ -1,8 +1,14 @@
 #include "MdLoader.hpp"
 
+#include <ceti/descriptor/Texture.hpp>
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <cassert>
 
 namespace ceti {
 
@@ -37,6 +43,76 @@ MdLoader::MdLoader(const std::string& filepath)
     }
 
     filestream.close();
+}
+
+const std::string&
+MdLoader::value(const std::string& key)
+{
+    auto it = m_data.find(key);
+    assert(it != m_data.end());
+    return m_data[key];
+}
+
+ceti::descriptor::Material*
+InfoLoader::read(const std::string& path)
+{
+    boost::property_tree::ptree root;
+    boost::property_tree::read_json(path, root);
+
+    ceti::descriptor::Association association;
+    ceti::descriptor::Material* material = new ceti::descriptor::Material;
+
+    boost::optional<std::string> name = root.get_optional<std::string>("association.name");
+    boost::optional<std::string> race = root.get_optional<std::string>("association.race");
+    boost::optional<std::string> type = root.get_optional<std::string>("association.type");
+    boost::optional<std::string> subtype = root.get_optional<std::string>("association.subtype");
+    boost::optional<std::string> color = root.get_optional<std::string>("association.color");
+
+    if (name) {
+        association.setName(name.get());
+    }
+    if (race) {
+        association.setRace(race.get());
+    }
+    if (type) {
+        association.setType(type.get());
+    }
+    if (subtype) {
+        association.setSubtype(subtype.get());
+    }
+    if (color) {
+        association.setColor(color.get());
+    }
+
+    boost::optional<float> brightThreshold = root.get_optional<float>("material.brightThreshold");
+    boost::optional<int> row = root.get_optional<int>("material.row");
+    boost::optional<int> col = root.get_optional<int>("material.col");
+    boost::optional<float> fps = root.get_optional<float>("material.fps");
+    boost::optional<bool> alpha = root.get_optional<bool>("material.alpha");
+    boost::optional<bool> auto_rotated = root.get_optional<bool>("material.auto_rotated");
+
+    if (brightThreshold) {
+        material->setBrightThreshold(brightThreshold.get());
+    }
+    if (row) {
+        material->setRow(row.get());
+    }
+    if (col) {
+        material->setCol(col.get());
+    }
+    if (fps) {
+        material->setFps(fps.get());
+    }
+    if (alpha) {
+        material->setAlpha(alpha.get());
+    }
+    if (auto_rotated) {
+        material->setAutoRotated(auto_rotated.get());
+    }
+
+    material->setAssociation(association);
+
+    return material;
 }
 
 } // namespace ceti

@@ -28,6 +28,7 @@
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/FsUtils.hpp>
 #include <ceti/MdLoader.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
@@ -63,19 +64,19 @@ void Data::__generate()
 
 void Data::__collectMeshDescriptors()
 {        
-    using namespace ceti::descriptor;
+//    using namespace ceti::descriptor;
 
-    auto& dm = global::get().descriptors();
-    if (!dm.mesh().loaded()) {
-        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
-        dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
-        dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
+//    auto& dm = global::get().descriptors();
+//    if (!dm.mesh().loaded()) {
+//        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
+//        dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
+//        dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
     
-        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/BabylonStation/babylon_station_mod.obj", "vehicles/BabylonStation/station_texture/babylonstation.jpg") );
-        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/Anna_V_2.0_variations/anna_mod.obj", "vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg") );
+//        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/BabylonStation/babylon_station_mod.obj", "vehicles/BabylonStation/station_texture/babylonstation.jpg") );
+//        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/Anna_V_2.0_variations/anna_mod.obj", "vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg") );
 
-        dm.mesh().save();
-    }
+//        dm.mesh().save();
+//    }
 }
 
 
@@ -83,14 +84,28 @@ void Data::__loadImages()
 {
     using namespace ceti::descriptor;
 
+    //ceti::InfoLoader il("/ramdisk/build/coldstars/src/game/client/data/ship/template.md");
+    //exit(1);
+
     auto& dm = global::get().descriptors();
-    if (!dm.texture().loaded()) {
+    //if (!dm.texture().loaded())
+    {
+
+        Collector<Material> collector("material_descriptors.txt");
 
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
         for(const auto& filepath: result) {
-            ceti::MdLoader md(filepath);
+//            ceti::MdLoader md(filepath);
             std::cout<<filepath<<std::endl;
+
+            ceti::descriptor::Material* material = ceti::InfoLoader::read(filepath);
+            std::cout<<"descriptor:"<<material->data()<<std::endl;
+            //collector.add(material);
         }
+        collector.save();
+
+        assert(false);
+        exit(1);
 
 //        //############ TURREL #########
 //        {
@@ -580,31 +595,31 @@ void Data::__loadImages()
 //        }
 
 
-        //// STARBASE_TEXTURE_ID
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_000.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_001.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_002.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_003.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
+//        //// STARBASE_TEXTURE_ID
+//        {
+//            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_000.png");
+//            //material.setAnimation(Animation());
+//            material.setAssociation(Association(int(type::race::R0_ID)));
+//            dm.add(material);
+//        }
+//        {
+//            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_001.png");
+//            //material.setAnimation(Animation());
+//            material.setAssociation(Association(int(type::race::R0_ID)));
+//            dm.add(material);
+//        }
+//        {
+//            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_002.png");
+//            //material.setAnimation(Animation());
+//            material.setAssociation(Association(int(type::race::R0_ID)));
+//            dm.add(material);
+//        }
+//        {
+//            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_003.png");
+//            //material.setAnimation(Animation());
+//            material.setAssociation(Association(int(type::race::R0_ID)));
+//            dm.add(material);
+//        }
 
     }
 

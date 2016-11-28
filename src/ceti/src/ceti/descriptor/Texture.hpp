@@ -31,43 +31,61 @@ namespace descriptor {
 
 class Association {
 public:
-    Association():
-        m_race(0)
-      , m_type(0)
+    Association()
     {}
 
-    Association(int race, int type = 0):
-        m_race(race)
-      , m_type(type)
-    {}
+public:
+    void setRace(const std::string& race) { m_race = race; }
+    void setType(const std::string& type) { m_type = type; }
+    void setSubtype(const std::string& subtype) { m_subtype = subtype; }
+    void setName(const std::string& name) { m_name = name; }
+    void setColor(const std::string& color) { m_color = color; }
 
 private:
-    int m_race = 0;
-    int m_type = 0;
+    std::string m_race = "";
+    std::string m_type = "";
+    std::string m_subtype = "";
+    std::string m_name = "";
+    std::string m_color = "";
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & m_race;
         ar & m_type;
+        ar & m_subtype;
+        ar & m_name;
+        ar & m_color;
     }
 };
 
-class Animation {
-public:
-    Animation():
-        m_col(1)
-      , m_row(1)
-      , m_fps(1.0f)
-    {}
 
-    Animation(int col, int row, float fps):
-        m_col(col)
-      , m_row(row)
-      , m_fps(fps)
-    {}
+class Material : public Base
+{
+public:
+//    Material(int type,
+//            const std::string& path,
+//            bool alpha = true);
+
+    Material(int_t type = -1);
+    Material(const std::string& data);
+    ~Material();
+
+    std::string data() const;
+
+    bool operator==(const Material& rhs) const;
+
+    void setAssociation(const Association& association) { m_association = association; }
+    void setPath(const std::string& path) { m_path = path; }
+    void setAlpha(bool alpha) { m_alpha = alpha; }
+    void setCol(int col) { m_col = col; }
+    void setRow(int row) { m_row = row; }
+    void setFps(float fps) { m_fps = fps; }
+    void setAutoRotated(bool auto_rotated) { m_autoRotated = auto_rotated; }
+    void setBrightThreshold(float brightThreshold) { m_brightThreshold = brightThreshold; }
+
+    const std::string& path() const { return m_path; }
 
     bool animated() const { return (m_col !=1 || m_row != 1); }
 
@@ -76,45 +94,13 @@ public:
     float fps() const { return m_fps; }
 
 private:
+    std::string m_path = "";
+    bool m_alpha = true;
     int m_col = 1;
     int m_row = 1;
     float m_fps = 1.0f;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & m_col;
-        ar & m_row;
-        ar & m_fps;
-    }
-};
-
-class Material : public Base
-{
-public:
-    Material(int type,
-            const std::string& path,
-            bool alpha = true);
-
-    Material(const std::string& data);
-    ~Material();
-
-    std::string data() const;
-
-    bool operator==(const Material& rhs) const;
-
-    const std::string& path() const { return m_path; }
-
-
-    void setAnimation(const Animation& animation) { m_animation = animation; }
-    void setAssociation(const Association& association) { m_association = association; }
-
-private:
-    std::string m_path = "";
-    bool m_alpha = true;
-    Animation m_animation;
+    bool m_autoRotated = false;
+    float m_brightThreshold = 1.0f;
     Association m_association;
 
 private:
@@ -125,7 +111,11 @@ private:
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_path;
         ar & m_alpha;
-        ar & m_animation;
+        ar & m_col;
+        ar & m_row;
+        ar & m_fps;
+        ar & m_autoRotated;
+        ar & m_brightThreshold;
         ar & m_association;
     }
 };
