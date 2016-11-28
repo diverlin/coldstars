@@ -34,7 +34,9 @@ namespace descriptor {
 class Base
 {
 public:
-    Base(int_t type = -1, int_t id = -1);
+    Base(int_t type = -1);
+    [[deprecated("depr")]]
+    Base(int_t type, int_t id);
     ~Base();
 
 //    std::string data() const;

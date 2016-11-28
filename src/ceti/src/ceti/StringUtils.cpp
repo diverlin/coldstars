@@ -41,6 +41,16 @@ std::string to_string(float val)
     return stream.str();
 }
 
+int to_int(const std::string& val)
+{
+    return std::atoi(val.c_str());
+}
+
+bool to_bool(const std::string& val)
+{
+    return bool(std::atoi(val.c_str()));
+}
+
 std::vector<std::string> split(const std::string& str, const std::string& delim) {
     std::vector<std::string> v;
     std::string::size_type start = 0;

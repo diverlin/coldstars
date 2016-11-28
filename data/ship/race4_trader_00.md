@@ -1,7 +1,16 @@
-type: ship
-name: Evalon
-race: race4
-subtype: trader
-color: blue
+{
 
+"association" : {
+"type": "ship",
+"name": "Evalon",
+"race": "race4",
+"subtype": "trader",
+"color": "blue"
+
+},
+
+"material": {
+}
+ 
+}
  

@@ -29,6 +29,9 @@ namespace ceti {
 std::string to_string(const glm::vec3&);
 std::string to_string(float);
 
+int to_int(const std::string&);
+bool to_bool(const std::string&);
+
 std::vector<std::string> split(const std::string& to_string, const std::string& delim);
 std::string join(const std::vector<std::string>& v, const std::string& delim);
 

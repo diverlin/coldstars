@@ -23,13 +23,9 @@
 namespace ceti {
 namespace descriptor {
 
-Material::Material(int type,
-                   const std::string& path,
-                   bool alpha)
+Material::Material(int_t type)
     :
       Base(type)
-    , m_path(path)
-    , m_alpha(alpha)
 {
 }
 
