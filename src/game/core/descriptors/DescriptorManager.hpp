@@ -113,10 +113,10 @@ public:
     void add(const Planet& planet) {
         m_planet.add(planet);
     }
-    void add(const Mesh& mesh) {
+    void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
-    void add(const Material& texture) {
+    void add(Material* texture) {
         m_material.add(texture);
     }
 

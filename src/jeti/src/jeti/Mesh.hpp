@@ -24,7 +24,7 @@ class Mesh
 { 
 public:
     Mesh();
-    Mesh(const ceti::descriptor::Mesh&);
+    Mesh(ceti::descriptor::Mesh*);
     ~Mesh();
 
     int id() const { return m_id; }

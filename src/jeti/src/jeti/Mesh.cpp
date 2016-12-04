@@ -54,17 +54,16 @@ Mesh::Mesh()
     fillVertices(objLoader);
 }
 
-Mesh::Mesh(const ceti::descriptor::Mesh& descriptor)
+Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     :
       m_textureOb(nullptr),
-      m_originDirection(descriptor.orientation())
+      m_originDirection(descriptor->orientation())
 {     
     m_listId = glGenLists(1);
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
-    ObjLoader objLoader(descriptor.modelPath());
-    
+    ObjLoader objLoader(descriptor->modelPath());
     fillVertices(objLoader);
     m_boundaryBox = objLoader.__boundaryBox();
 }

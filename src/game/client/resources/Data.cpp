@@ -88,24 +88,17 @@ void Data::__loadImages()
     //exit(1);
 
     auto& dm = global::get().descriptors();
-    //if (!dm.texture().loaded())
+    if (!dm.texture().loaded())
     {
-
         Collector<Material> collector("material_descriptors.txt");
 
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
         for(const auto& filepath: result) {
-//            ceti::MdLoader md(filepath);
-            std::cout<<filepath<<std::endl;
-
             ceti::descriptor::Material* material = ceti::InfoLoader::read(filepath);
-            std::cout<<"descriptor:"<<material->data()<<std::endl;
-            //collector.add(material);
+            //std::cout<<"descriptor:"<<material->data()<<std::endl;
+            collector.add(material);
         }
         collector.save();
-
-        assert(false);
-        exit(1);
 
 //        //############ TURREL #########
 //        {
