@@ -42,7 +42,7 @@ Manager::Manager()
       m_mesh(Collector<Mesh>(descriptor_meshes_fname))
     , m_material(Collector<Material>(descriptor_materials_fname))
 {
-    bool regenerate = false;
+    bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
         load();
     } else {

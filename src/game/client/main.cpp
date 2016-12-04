@@ -86,7 +86,7 @@ int main()
     
     jeti::Screen::get().init();
     Data data;
-    jeti::Mesh* mesh = new jeti::Mesh(global::get().descriptors().mesh().getByType(int(type::mesh::PLANE_ID)));
+    jeti::Mesh* mesh = new jeti::Mesh();
     jeti::Screen::get().renderer().setMeshQuad(mesh);
         
     //runMatrixPerfomanceTest();

@@ -32,6 +32,7 @@ namespace descriptor {
 class Mesh : public Base
 {
 public:
+    Mesh()=default;
     Mesh(int type,
          const std::string& path,
          const std::string& texture = "",

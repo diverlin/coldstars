@@ -87,14 +87,24 @@ namespace {
 
 int_t meshDescriptorIdFromType(const type::mesh& type) {
     descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    return collector.getByType(int(type)).id();
+    descriptor::Mesh* descriptor = collector.getByType(int(type));
+
+    if (!descriptor) {
+        descriptor = collector.failback();
+    }
+    assert(descriptor);
+    return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const type::texture& type) {
     descriptor::Collector<descriptor::Material> collector("material_descriptors.txt");
-    //return collector.getByType(int(type)).id();
-    assert(false);
-    return -1;
+    descriptor::Material* descriptor = collector.getByType(int(type));
+
+    if (!descriptor) {
+        descriptor = collector.failback();
+    }
+    assert(descriptor);
+    return descriptor->id();
 }
 
 } // namespace

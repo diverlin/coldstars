@@ -61,7 +61,8 @@ jeti::Mesh* getMesh(int_t id)
     assert(id>0);
 
     descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    const auto& descr = collector.getByType(int(type::mesh::SPHERE_ID));
+    auto* descr = collector.getByType(int(type::mesh::SPHERE_ID));
+    assert(descr);
     jeti::Mesh* mesh = new jeti::Mesh(descr);
     assert(mesh);
     if(!mesh) {
