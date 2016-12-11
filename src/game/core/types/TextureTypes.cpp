@@ -23,7 +23,7 @@ std::string str(type::texture type_id)
 {
     switch(type_id)
     {
-        case type::texture::NONE_ID: return "TYPE::TEXTURE::NONE_ID";
+        case type::texture::FAILBACK: return "TYPE::TEXTURE::FAILBACK";
 
         case type::texture::ANGAR_BACKGROUND_ID: return "TYPE::TEXTURE::ANGAR_BACKGROUND_ID";
         case type::texture::STORE_BACKGROUND_ID: return "TYPE::TEXTURE::STORE_BACKGROUND_ID";

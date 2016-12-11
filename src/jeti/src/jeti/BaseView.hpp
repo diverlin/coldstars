@@ -93,8 +93,8 @@ protected:
     bool _updateFadeOutEffect(); // depr, move to animation program
 
 public:
-    static ceti::Collector<TextureOb*> s_materials;
-    static ceti::Collector<Mesh*> s_meshes;
+    static ceti::Collector<TextureOb> s_materials;
+    static ceti::Collector<Mesh> s_meshes;
 
 private:
     ceti::model::BaseView* m_model_base = nullptr;

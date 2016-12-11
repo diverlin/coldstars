@@ -90,7 +90,7 @@ void Data::__loadImages()
     auto& dm = global::get().descriptors();
     if (!dm.texture().loaded())
     {
-        Collector<Material> collector("material_descriptors.txt");
+        ceti::Collector<Material> collector("material_descriptors.txt");
 
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
         for(const auto& filepath: result) {

@@ -30,60 +30,18 @@
 
 namespace ceti {
 
-//template<typename T>
-//class Collector
-//{
-//public:
-//    Collector() {}
-//    ~Collector() {}
-
-//    void add(const T& ob) {
-//        if (!__isExist(ob)) {
-//            m_objects.insert(std::make_pair( ob.id(), ob ));
-//        } else {
-//            throw std::runtime_error("fail add, id is already exist");
-//        }
-//    }
-
-//    const T& get(int_t id) const {
-//        auto it = m_objects.find(id);
-//        if (it != m_objects.end()) {
-//            return it->second;
-//        } else {
-//#ifndef USE_FAILBACK_RESOURCES
-//            throw std::runtime_error("fail get, id doesn't exist");
-//#else
-//            return m_failbackObject;
-//#endif // USE_FAILBACK_RESOURCES
-//        }
-//        assert(false);
-//    }
-
-//private:
-//    std::map<int, T> m_objects;
-//    T m_failbackObject;
-
-//    bool __isExist(const T& ob) const {
-//        return (m_objects.find(ob.id()) != m_objects.end());
-//    }
-
-////    void __clear() {
-////        m_objects.clear();
-////    }
-//};
-
-
-
-//namespace descriptor {
-
 template<typename T>
 class Collector
 {
 public:
+    Collector()
+        //:
+        //m_failback(new T)
+    {}
     Collector(const std::string& fname)
         :
           m_fname(fname)
-        , m_failback(new T)
+    //, m_failback(new T)
     {
         if (ceti::filesystem::is_file_exists(m_fname)) {
             load();
@@ -93,7 +51,14 @@ public:
 
     bool loaded() const { return m_loaded; }
 
-    T* failback() const { assert(m_failback); return m_failback; }
+    [[warning("make it const")]]
+    T* failback() {
+        if (!m_failback) {
+            m_failback = new T(); // delayed init applied because we need init after ogl initialization
+        }
+        assert(m_failback);
+        return m_failback;
+    }
 
     void add(T* ob) {
         if (!__isExist(ob)) {
@@ -104,30 +69,34 @@ public:
         }
     }
 
-    T* get(int_t id) const {
+    [[warning("make it const")]]
+    T* get(int_t id) {
+        T* result = nullptr;
         auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
-            return it->second;
+            result = it->second;
         }
 #ifdef USE_FAILBACK_RESOURCES
-        return failback();
-#else
-        assert(nullptr);
-        return nullptr;
+        result = failback();
 #endif // USE_FAILBACK_RESOURCES
+        assert(result);
+        return result;
     }
 
-    T* getByType(int type) const {
+    [[warning("make it const")]]
+    T* getByType(int type) {
+        T* result = nullptr;
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
-            return meti::getRand(it->second);
+            result = meti::getRand(it->second);
         }
 #ifdef USE_FAILBACK_RESOURCES
-        return failback();
-#else
-        assert(nullptr);
-        return nullptr;
+        if (!result) {
+            result = failback();
+        }
 #endif // USE_FAILBACK_RESOURCES
+        assert(result);
+        return result;
     }
 
     void save() const

@@ -39,8 +39,8 @@ const std::string descriptor_materials_fname = "material_descriptors.txt";
 
 Manager::Manager()
     :
-      m_mesh(Collector<Mesh>(descriptor_meshes_fname))
-    , m_material(Collector<Material>(descriptor_materials_fname))
+      m_mesh(ceti::Collector<Mesh>(descriptor_meshes_fname))
+    , m_material(ceti::Collector<Material>(descriptor_materials_fname))
 {
     bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {

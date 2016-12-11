@@ -57,11 +57,11 @@ private:
 
     bool m_isLoaded = false;
 
-    unsigned int m_currentFrame;
-    unsigned int m_framesCount;
-    float m_lastUpdateTime;
-    float m_delay;
-    float m_frameNum;
+    unsigned int m_currentFrame = 0;
+    unsigned int m_framesCount = 1;
+    float m_lastUpdateTime = 0.0;
+    float m_delay = 0.0;
+    float m_frameNum = 1;
 
     void __createTextureCoords(int _rows_num, int _columns_num, int _fps);
     void __addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);

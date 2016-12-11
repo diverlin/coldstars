@@ -39,7 +39,7 @@ Screen::Screen()
 fps(0), 
 frames_counter(0), 
 last_time(0.0), 
-m_scale(1.0),
+m_scale(3.0),
 d_scale(0.0)
 {}
 

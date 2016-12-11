@@ -256,13 +256,20 @@ void Mesh::__drawVbo(GLenum primitive_type) const
 
 void Mesh::draw() const
 {
+    __validate();
     __drawVbo();
 }    
 
 void Mesh::draw(GLenum primitive_type) const
 {
+    __validate();
     __drawVbo(primitive_type);
 }  
+
+void Mesh::__validate() const
+{
+    assert(m_vertices.size());
+}
 
 } // namespace jeti
 

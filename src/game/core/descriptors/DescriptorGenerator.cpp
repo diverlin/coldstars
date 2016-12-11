@@ -86,24 +86,14 @@ Generator::getNewStarsystemDescriptor(int race)
 namespace {
 
 int_t meshDescriptorIdFromType(const type::mesh& type) {
-    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    ceti::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
     descriptor::Mesh* descriptor = collector.getByType(int(type));
-
-    if (!descriptor) {
-        descriptor = collector.failback();
-    }
-    assert(descriptor);
     return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const type::texture& type) {
-    descriptor::Collector<descriptor::Material> collector("material_descriptors.txt");
+    ceti::Collector<descriptor::Material> collector("material_descriptors.txt");
     descriptor::Material* descriptor = collector.getByType(int(type));
-
-    if (!descriptor) {
-        descriptor = collector.failback();
-    }
-    assert(descriptor);
     return descriptor->id();
 }
 
