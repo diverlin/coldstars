@@ -64,7 +64,7 @@ void Data::__generate()
 
 void Data::__collectMeshDescriptors()
 {        
-//    using namespace ceti::descriptor;
+    using namespace ceti::descriptor;
 
 //    auto& dm = global::get().descriptors();
 //    if (!dm.mesh().loaded()) {
@@ -77,6 +77,19 @@ void Data::__collectMeshDescriptors()
 
 //        dm.mesh().save();
 //    }
+
+//    auto& dm = global::get().descriptors();
+//    if (!dm.mesh().loaded()) {
+//        ceti::Collector<Mesh> collector("mesh_descriptors.txt");
+
+//        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".omd");
+//        for(const auto& filepath: result) {
+//            ceti::descriptor::Mesh* mesh = ceti::InfoLoader::read(filepath);
+//            //std::cout<<"descriptor:"<<material->data()<<std::endl;
+//            collector.add(mesh);
+//        }
+//        collector.save();
+//    }
 }
 
 
@@ -88,8 +101,7 @@ void Data::__loadImages()
     //exit(1);
 
     auto& dm = global::get().descriptors();
-    if (!dm.texture().loaded())
-    {
+    if (!dm.material().loaded()) {
         ceti::Collector<Material> collector("material_descriptors.txt");
 
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
