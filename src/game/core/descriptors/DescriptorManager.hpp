@@ -125,8 +125,8 @@ public:
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
-    const Collector<Mesh>& mesh() const { return m_mesh; }
-    const Collector<Material>& texture() const { return m_material; }
+    const ceti::Collector<Mesh*>& mesh() const { return m_mesh; }
+    const ceti::Collector<Material*>& texture() const { return m_material; }
 
 private:
     MManager<Galaxy> m_galaxy;
@@ -134,8 +134,8 @@ private:
     MManager<Starsystem> m_starsystem;
     MManager<Star> m_star;
     MManager<Planet> m_planet;
-    Collector<Mesh> m_mesh;
-    Collector<Material> m_material;
+    ceti::Collector<Mesh*> m_mesh;
+    ceti::Collector<Material*> m_material;
 
     std::map<int_t, BaseOLD> m_descriptors;
     std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;

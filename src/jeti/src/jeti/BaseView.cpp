@@ -49,9 +49,10 @@ TextureOb* getMaterial(int_t id)
 {
     jeti::TextureOb* material = BaseView::s_materials.get(id);
     if(!material) {
-        material= new jeti::TextureOb;
+        material = new jeti::TextureOb;
     }
 
+    assert(material);
     return material;
 }
 
@@ -62,13 +63,12 @@ jeti::Mesh* getMesh(int_t id)
 
     descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
     auto* descr = collector.getByType(int(type::mesh::SPHERE_ID));
-    assert(descr);
     jeti::Mesh* mesh = new jeti::Mesh(descr);
-    assert(mesh);
     if(!mesh) {
-        mesh= new jeti::Mesh;
+        mesh = new jeti::Mesh;
     }
 
+    assert(mesh);
     return mesh;
 }
 
@@ -99,9 +99,6 @@ BaseView::BaseView(ceti::model::BaseView* model)
 {
     m_material = getMaterial(model->material());
     m_mesh = getMesh(model->mesh());
-
-    assert(m_material);
-    assert(m_mesh);
 }
 
 BaseView::~BaseView() {
