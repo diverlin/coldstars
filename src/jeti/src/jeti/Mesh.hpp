@@ -2,6 +2,8 @@
 
 #include <MyGl.hpp>
 
+#include <ceti/type/IdType.hpp>
+
 #include <glm/glm.hpp>
 
 #include <string>
@@ -27,8 +29,10 @@ public:
     Mesh(ceti::descriptor::Mesh*);
     ~Mesh();
 
-    int id() const { return m_id; }
+    int_t id() const { return m_id; }
     bool isFlat() const { return m_isFlat; }
+    [[warning("added for compatibility")]]
+    int_t type() const { return 0; }
 
     TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
@@ -50,7 +54,7 @@ private:
         float size;
     };
 
-    static int m_id; // why static??
+    int_t m_id = -1;
     GLenum m_primitiveType = GL_TRIANGLES;
     bool m_isFlat = false;
 

@@ -24,6 +24,7 @@
 
 #include <world/starsystem.hpp>
 #include <jeti/Screen.hpp>
+#include <jeti/Mesh.hpp>
 
 
 #include <spaceobjects/Star.hpp>
@@ -333,8 +334,31 @@ void SpaceViewer::__add(jeti::view::BaseView* view)
     }
 }
 
+void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view)
+{
+    jeti::Mesh* mesh = nullptr;
+
+    int_t descritprorId = model->mesh();
+    auto it = m_meshCollector.find(descritprorId);
+    if (it != m_meshCollector.end()) {
+        mesh = it->second;
+    } else {
+        auto& collector = global::get().descriptors().mesh();
+        auto* descriptor = collector.get(descritprorId);
+        if (descriptor) {
+            mesh = new jeti::Mesh(descriptor);
+        } else {
+            mesh = new jeti::Mesh();
+        }
+
+        //m_meshCollector.add(mesh);
+    }
+    view->setMesh(mesh);
+}
+
 void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
 {
+    __loadResourcesFor(ob, view);
     m_cache.insert(std::make_pair(ob, view));
     m_cache2.insert(std::make_pair(view, ob));
 }

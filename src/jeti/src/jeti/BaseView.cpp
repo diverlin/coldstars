@@ -87,7 +87,7 @@ BaseView::BaseView(ceti::model::BaseView* model)
       m_model_base(model)
 {
     m_material = getMaterial(model->material());
-    m_mesh = getMesh(model->mesh());
+    //m_mesh = getMesh(model->mesh());
 }
 
 BaseView::~BaseView() {
@@ -95,10 +95,14 @@ BaseView::~BaseView() {
     m_animationRotation = nullptr;
 }
 
+void BaseView::setMesh(jeti::Mesh* mesh)
+{
+    m_orientation->setDirection(mesh->originDirection());
+    m_mesh = mesh;
+}
 void BaseView::setOrientationModel(ceti::model::Orientation* model)
 {
     m_orientation = model;
-    m_orientation->setDirection(m_mesh->originDirection());
 }
 
 const glm::vec3& BaseView::center() const { return m_orientation->position(); }

@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <jeti/Render.hpp>
+#include <ceti/descriptor/Collector.hpp>
 
 #include <world/starsystem.hpp>
 
@@ -162,6 +163,7 @@ private:
     void __add(jeti::BaseParticleSystem*);
     void __add(VerticalFlowText*);
 
+    void __loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view);
     void __cache(model::SpaceObject*, jeti::view::BaseView*);
 
     void __clear();
@@ -171,6 +173,13 @@ private:
     std::map<model::SpaceObject*, jeti::view::BaseView*> m_cache;
     [[warning("ugly, think how to make it better")]]
     std::map<jeti::view::BaseView*, model::SpaceObject*> m_cache2;
+
+//    ceti::Collector<jeti::Mesh> m_meshCollector;
+//    ceti::Collector<jeti::TextureOb> m_materialCollector;
+    std::map<int_t, jeti::Mesh*> m_meshCollector;
+//    std::map<int_t, jeti::TextureOb*> m_descriptorToMaterialConverter;
+
+//    ceti::Collector<jeti::TextureOb> m_materialCollector;
 };
 
 } // namespace view

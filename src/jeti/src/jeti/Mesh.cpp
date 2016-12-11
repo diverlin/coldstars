@@ -22,8 +22,6 @@ const int STRIDE_NORMAL   = 3;
 const int STRIDE_COLOR    = 4;
 } // namespace
 
-int Mesh::m_id = 0;
-
 Mesh::Mesh()
 {
     m_listId = glGenLists(1);
@@ -65,6 +63,7 @@ Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
+    m_id = descriptor->id();
     ObjLoader objLoader(descriptor->modelPath());
     fillVertices(objLoader);
     m_boundaryBox = objLoader.__boundaryBox();
@@ -102,8 +101,6 @@ void Mesh::fillVertices(const ObjLoader& objLoader)
     m_vertexCount = m_vertices.size();
 
     __updateVbo();
-
-    m_id++;
 }
 
 void Mesh::fillPointVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
