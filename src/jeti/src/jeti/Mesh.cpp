@@ -52,6 +52,8 @@ Mesh::Mesh()
 
     ObjLoader objLoader(ss);
     fillVertices(objLoader);
+
+    m_isFlat = true;
 }
 
 Mesh::Mesh(ceti::descriptor::Mesh* descriptor)

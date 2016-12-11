@@ -28,6 +28,7 @@ public:
     ~Mesh();
 
     int id() const { return m_id; }
+    bool isFlat() const { return m_isFlat; }
 
     TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
@@ -51,6 +52,7 @@ private:
 
     static int m_id; // why static??
     GLenum m_primitiveType = GL_TRIANGLES;
+    bool m_isFlat = false;
 
     TextureOb* m_textureOb = nullptr;
     std::vector<Vertex> m_vertices;
