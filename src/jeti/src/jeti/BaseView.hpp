@@ -63,7 +63,7 @@ public:
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(TextureOb* material) { m_material = material; }
-    void setMesh(Mesh* mesh) { m_mesh = mesh; }
+    void setMesh(Mesh* mesh);
 
     const glm::mat4& actualModelMatrix();
     const glm::mat4& modelMatrix() const { return m_matrixModel; }

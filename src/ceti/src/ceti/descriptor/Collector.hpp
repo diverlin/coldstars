@@ -61,7 +61,7 @@ public:
     }
 
     void add(T* ob) {
-        if (!__isExist(ob)) {
+        if (!contains(ob->id())) {
             m_descriptors.insert(std::make_pair( ob->id(), ob ));
             m_descriptorsTypes[ob->type()].push_back(ob);
         } else {
@@ -137,6 +137,9 @@ public:
         m_loaded = true;
     }
 
+    bool contains(int_t id) const {
+        return (m_descriptors.find(id) != m_descriptors.end());
+    }
 
 private:
     bool m_loaded = false;
@@ -144,10 +147,6 @@ private:
     T* m_failback = nullptr;
     std::map<int, T*> m_descriptors;
     std::map<int, std::vector<T*>> m_descriptorsTypes;
-
-    bool __isExist(T* ob) const {
-        return (m_descriptors.find(ob->id()) != m_descriptors.end());
-    }
 
     void __clear() {
         m_descriptors.clear();

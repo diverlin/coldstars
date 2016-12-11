@@ -126,6 +126,8 @@ public:
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
     const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
+    [[warning("remove this with const")]]
+    ceti::Collector<Mesh>& mesh() { return m_mesh; }
     const ceti::Collector<Material>& material() const { return m_material; }
 
 private:
