@@ -28,55 +28,53 @@
 #include <vector>
 #include <fstream>
 
-#define USE_FAILBACK_RESOURCES
-
 namespace ceti {
 
-template<typename T>
-class Collector
-{
-public:
-    Collector() {}
-    ~Collector() {}
+//template<typename T>
+//class Collector
+//{
+//public:
+//    Collector() {}
+//    ~Collector() {}
 
-    void add(const T& ob) {
-        if (!__isExist(ob)) {
-            m_objects.insert(std::make_pair( ob.id(), ob ));
-        } else {
-            throw std::runtime_error("fail add, id is already exist");
-        }
-    }
-
-    const T& get(int_t id) const {
-        auto it = m_objects.find(id);
-        if (it != m_objects.end()) {
-            return it->second;
-        } else {
-#ifndef USE_FAILBACK_RESOURCES
-            throw std::runtime_error("fail get, id doesn't exist");
-#else
-            return m_failbackObject;
-#endif // USE_FAILBACK_RESOURCES
-        }
-        assert(false);
-    }
-
-private:
-    std::map<int, T> m_objects;
-    T m_failbackObject;
-
-    bool __isExist(const T& ob) const {
-        return (m_objects.find(ob.id()) != m_objects.end());
-    }
-
-//    void __clear() {
-//        m_objects.clear();
+//    void add(const T& ob) {
+//        if (!__isExist(ob)) {
+//            m_objects.insert(std::make_pair( ob.id(), ob ));
+//        } else {
+//            throw std::runtime_error("fail add, id is already exist");
+//        }
 //    }
-};
+
+//    const T& get(int_t id) const {
+//        auto it = m_objects.find(id);
+//        if (it != m_objects.end()) {
+//            return it->second;
+//        } else {
+//#ifndef USE_FAILBACK_RESOURCES
+//            throw std::runtime_error("fail get, id doesn't exist");
+//#else
+//            return m_failbackObject;
+//#endif // USE_FAILBACK_RESOURCES
+//        }
+//        assert(false);
+//    }
+
+//private:
+//    std::map<int, T> m_objects;
+//    T m_failbackObject;
+
+//    bool __isExist(const T& ob) const {
+//        return (m_objects.find(ob.id()) != m_objects.end());
+//    }
+
+////    void __clear() {
+////        m_objects.clear();
+////    }
+//};
 
 
 
-namespace descriptor {
+//namespace descriptor {
 
 template<typename T>
 class Collector
@@ -95,7 +93,7 @@ public:
 
     bool loaded() const { return m_loaded; }
 
-    T* failback() const { return m_failback; }
+    T* failback() const { assert(m_failback); return m_failback; }
 
     void add(T* ob) {
         if (!__isExist(ob)) {
@@ -111,7 +109,12 @@ public:
         if (it != m_descriptors.end()) {
             return it->second;
         }
-        return -1;
+#ifdef USE_FAILBACK_RESOURCES
+        return failback();
+#else
+        assert(nullptr);
+        return nullptr;
+#endif // USE_FAILBACK_RESOURCES
     }
 
     T* getByType(int type) const {
@@ -119,7 +122,12 @@ public:
         if (it != m_descriptorsTypes.end()) {
             return meti::getRand(it->second);
         }
+#ifdef USE_FAILBACK_RESOURCES
+        return failback();
+#else
+        assert(nullptr);
         return nullptr;
+#endif // USE_FAILBACK_RESOURCES
     }
 
     void save() const
@@ -178,7 +186,7 @@ private:
     }
 };
 
-} // namespace descriptor
+//} // namespace descriptor
 } // namespace ceti
 
 

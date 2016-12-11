@@ -3,6 +3,7 @@ cmake_minimum_required (VERSION 2.8)
 set(USE_MODULES OFF)
 set(USE_ARTEFACTS OFF)
 set(USE_EXTRA_EQUIPMENT OFF)
+set(USE_FAILBACK_RESOURCES ON)
 
 
 set(PROJECT_CORE     ${PROJECT}_core)
