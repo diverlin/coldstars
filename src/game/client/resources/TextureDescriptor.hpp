@@ -37,7 +37,7 @@ struct TextureDescriptor
 
     TextureDescriptor()
     :
-    type_id(type::texture::NONE_ID),
+    type_id(type::texture::FAILBACK),
     subtype_id(type::entity::NONE_ID),
     race_id(type::race::NONE_ID),
     tech_level_id(type::tech::NONE)
@@ -45,18 +45,14 @@ struct TextureDescriptor
 
     bool operator==(const TextureDescriptor& rhs) const
     {
-        if (rhs.type_id != type::texture::NONE_ID)
-            if (type_id != rhs.type_id)
-                return false;
-        if (rhs.subtype_id != type::entity::NONE_ID)
-            if (subtype_id != rhs.subtype_id)
-                return false;
-        if (rhs.race_id != type::race::NONE_ID)
-            if (race_id != rhs.race_id)
-                return false;
-        if (rhs.tech_level_id != type::tech::NONE)
-            if (tech_level_id != rhs.tech_level_id)
-                return false;
+        if (type_id != rhs.type_id)
+            return false;
+        if (subtype_id != rhs.subtype_id)
+            return false;
+        if (race_id != rhs.race_id)
+            return false;
+        if (tech_level_id != rhs.tech_level_id)
+            return false;
 
         return true;
     }

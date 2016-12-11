@@ -23,7 +23,7 @@
 namespace type
 {
     enum class mesh : int {
-        NONE_ID=0, PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID 
+        FAILBACK, PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID
     };
 }  
 

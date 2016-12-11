@@ -31,6 +31,11 @@ set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLM_ROOT_DIR ${COLDSTARS_DEPENDENCIES_ROOT})
 
+set(USE_FAILBACK_RESOURCES ON)
+if(USE_FAILBACK_RESOURCES)
+    add_definitions(-DUSE_FAILBACK_RESOURCES)
+endif()
+
 include_directories(src/)
 include_directories(src/jeti)
 include_directories(src/meti)

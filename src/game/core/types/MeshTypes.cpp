@@ -24,7 +24,7 @@ std::string getTypeStr(type::mesh type)
 {
     switch(type)
     {
-        case type::mesh::NONE_ID:             { return "NONE_ID"; break; }
+        case type::mesh::FAILBACK:             { return "FAILBACK"; break; }
 
         case type::mesh::PLANE_ID:            { return "PLANE_ID"; break; }
         case type::mesh::SPHERE_ID:           { return "SPHERE_ID"; break; }

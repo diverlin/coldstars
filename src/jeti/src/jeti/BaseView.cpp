@@ -40,35 +40,24 @@ namespace jeti {
 
 namespace  view {
 
-ceti::Collector<TextureOb*> BaseView::s_materials;
-ceti::Collector<Mesh*> BaseView::s_meshes;
+ceti::Collector<TextureOb> BaseView::s_materials;
+ceti::Collector<Mesh> BaseView::s_meshes;
 
 namespace {
 
 TextureOb* getMaterial(int_t id)
 {
-    jeti::TextureOb* material = BaseView::s_materials.get(id);
-    if(!material) {
-        material = new jeti::TextureOb;
-    }
-
-    assert(material);
+    //assert(id>0);
+    ceti::Collector<jeti::TextureOb> collector;
+    jeti::TextureOb* material = collector.get(id);
     return material;
 }
 
 jeti::Mesh* getMesh(int_t id)
 {
-    //jeti::Mesh* mesh = BaseView::s_meshes.get(id);
     assert(id>0);
-
-    descriptor::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    auto* descr = collector.getByType(int(type::mesh::SPHERE_ID));
-    jeti::Mesh* mesh = new jeti::Mesh(descr);
-    if(!mesh) {
-        mesh = new jeti::Mesh;
-    }
-
-    assert(mesh);
+    ceti::Collector<jeti::Mesh> collector;
+    jeti::Mesh* mesh = collector.get(id);
     return mesh;
 }
 
