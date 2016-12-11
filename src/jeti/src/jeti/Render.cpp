@@ -134,8 +134,7 @@ void Renderer::__initPostEffects()
   
 void Renderer::__resizePostEffects(int width, int height)
 {
-    for (int i=0; i<m_fboNum; i++)
-    {
+    for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].Resize(width, height);
     }
         
@@ -229,6 +228,11 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 
 void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
+    if (mesh.isFlat()) {
+        drawMesh(mesh, textureOb, ModelMatrix);
+        return;
+    }
+
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::get().camera().lookFrom();
 
@@ -268,6 +272,11 @@ void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 
 void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
+    if (mesh.isFlat()) {
+        drawMesh(mesh, textureOb, ModelMatrix);
+        return;
+    }
+
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::get().camera().lookTo();
    
