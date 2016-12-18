@@ -106,31 +106,31 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
             {
                 case type::entity::STAR_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->model().texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->model()->texture);
                     size = 2*size_base;
                     break;
                 }
                 case type::entity::PLANET_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->model().texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case type::entity::ASTEROID_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->model().texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->model()->texture);
                     size = 1.25*size_base;
                     break;                
                 }
                 case type::entity::BLACKHOLE_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->model().texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case type::entity::VEHICLE_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->model().texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->model()->texture);
                     size = 1*size_base;
                     break;                
                 }
