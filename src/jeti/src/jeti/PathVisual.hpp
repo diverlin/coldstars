@@ -24,7 +24,7 @@
 namespace jeti {
 
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 
 class Mesh;
@@ -35,17 +35,17 @@ class PathVisual
         PathVisual();
         ~PathVisual();
 
-        void FillData(control::TextureOb*, const std::vector<glm::vec3>&, int step, int point_size);
+        void FillData(control::Material*, const std::vector<glm::vec3>&, int step, int point_size);
         void FillData(const std::vector<glm::vec3>&, int step, int point_size);
-        void FillData(control::TextureOb*, int radius, int point_size);
-        void FillData(control::TextureOb*, const glm::vec3&, const glm::vec3&, int step, int point_size);
+        void FillData(control::Material*, int radius, int point_size);
+        void FillData(control::Material*, const glm::vec3&, const glm::vec3&, int step, int point_size);
         
 //        void Draw(const Renderer&, const glm::vec3&);
 //        void Draw(const Renderer&) const;
 
     private:
         Mesh* m_Mesh;
-        control::TextureOb* m_TextureOb;
+        control::Material* m_TextureOb;
         glm::mat4 m_ModelMatrix;
 
         float m_PointSize;

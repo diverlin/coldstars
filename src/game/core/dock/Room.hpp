@@ -24,7 +24,7 @@
 
 namespace jeti {
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 }
 
@@ -45,16 +45,16 @@ public:
     virtual void putChildrenToGarbage() const {}
 
     void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
-    void SetTextureObBackground(jeti::control::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; }
+    void SetTextureObBackground(jeti::control::Material* textureOb_background) { this->textureOb_background = textureOb_background; }
 
     Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; }
-    jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; }
+    jeti::control::Material* GetBackgroundTextureOb() const { return textureOb_background; }
 
     void RenderBackground(const ceti::Rect&) const;
 
 protected:
     Kosmoport* owner_kosmoport;
-    jeti::control::TextureOb* textureOb_background;
+    jeti::control::Material* textureOb_background;
 
     UnresolvedDataRoom data_unresolved_Room;
     void SaveData(boost::property_tree::ptree&, const std::string&) const;

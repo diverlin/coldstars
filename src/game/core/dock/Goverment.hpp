@@ -27,14 +27,14 @@ class Goverment : public Room
         Goverment(int);
         ~Goverment();
 
-        void SetTextureObFace(jeti::control::TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
+        void SetTextureObFace(jeti::control::Material* textureOb_face) { this->textureOb_face = textureOb_face; };
 
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
         void Resolve();
         
     private:
-        jeti::control::TextureOb* textureOb_face;
+        jeti::control::Material* textureOb_face;
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

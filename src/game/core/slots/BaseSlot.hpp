@@ -28,7 +28,7 @@ class Vehicle;
 
 namespace jeti {
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 }
 
@@ -66,7 +66,7 @@ class BaseSlot : public core::Base
     protected:      // make private
         bool m_selected;
         
-        jeti::control::TextureOb* m_textureOb;
+        jeti::control::Material* m_textureOb;
                         
         Base* m_owner;
         

@@ -71,7 +71,7 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 
 namespace control {
 
-TextureOb::TextureOb()
+Material::Material()
 {
     m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
 
@@ -88,7 +88,7 @@ TextureOb::TextureOb()
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }
 
-TextureOb::TextureOb(const model::Material& material)
+Material::Material(const model::Material& material)
     :
       m_model(material)
 { 
@@ -107,12 +107,12 @@ TextureOb::TextureOb(const model::Material& material)
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }  
 
-TextureOb::~TextureOb()
+Material::~Material()
 { 
 
 }
 
-void TextureOb::load()
+void Material::load()
 {
     if (m_isLoaded) {
         return;
@@ -130,12 +130,12 @@ void TextureOb::load()
     m_isLoaded = true;
 }
 
-void TextureOb::unloadFromVRAM()
+void Material::unloadFromVRAM()
 {
     m_isLoaded = false;
 }
 
-void TextureOb::__createTextureCoords(int col_num, int row_num, int fps)
+void Material::__createTextureCoords(int col_num, int row_num, int fps)
 {
     m_currentFrame = 0;
     m_framesCount = 0;
@@ -175,7 +175,7 @@ void TextureOb::__createTextureCoords(int col_num, int row_num, int fps)
 }
 
 
-void TextureOb::__addTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
+void Material::__addTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
 {
      m_model.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
      m_model.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
@@ -183,7 +183,7 @@ void TextureOb::__addTexCoordQuad(float w_start, float h_start, float w_end, flo
      m_model.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
 }
 
-int TextureOb::updateAnimationFrame(float elapsed_time)
+int Material::updateAnimationFrame(float elapsed_time)
 {
     if (m_model.is_animated) {
         if (elapsed_time - m_lastUpdateTime > m_delay) {

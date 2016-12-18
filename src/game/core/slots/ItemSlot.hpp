@@ -153,7 +153,7 @@ public:
 
     bool swapItem(ItemSlot*);
 
-    void updateRange(jeti::control::TextureOb*);
+    void updateRange(jeti::control::Material*);
     void drawRange(const glm::vec2&);
 
     bool checkSubTarget(ItemSlot*) const;

@@ -31,12 +31,12 @@ namespace jeti {
 
 namespace control {
 
-class TextureOb
+class Material
 {
 public:
-    TextureOb();
-    TextureOb(const model::Material& material);
-    ~TextureOb();
+    Material();
+    Material(const model::Material& material);
+    ~Material();
 
     int id() const { return m_id; }
     //const glm::vec3 size() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly

@@ -23,7 +23,7 @@
 class ButtonSingle : public BaseButton
 {
 public:
-    ButtonSingle(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::TextureOb* textureOb)
+    ButtonSingle(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::Material* textureOb)
         :
           BaseButton(type::GUI::BUTTON_SINGLE_ID, subtype_id, info, pAction, textureOb)
     {}

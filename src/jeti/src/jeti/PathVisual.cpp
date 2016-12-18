@@ -41,7 +41,7 @@ PathVisual::~PathVisual()
     delete m_Mesh;
 }
 
-void PathVisual::FillData(control::TextureOb* textureOb, const std::vector<glm::vec3>& vec, int step, int point_size)
+void PathVisual::FillData(control::Material* textureOb, const std::vector<glm::vec3>& vec, int step, int point_size)
 {  
     m_TextureOb = textureOb; 
 
@@ -64,7 +64,7 @@ void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point
     m_Mesh->fillPointVertices(points, colors, sizes);
 }
 
-void PathVisual::FillData(control::TextureOb* textureOb, int radius, int point_size)
+void PathVisual::FillData(control::Material* textureOb, int radius, int point_size)
 {
     m_TextureOb = textureOb; 
 
@@ -83,7 +83,7 @@ void PathVisual::FillData(control::TextureOb* textureOb, int radius, int point_s
     m_Mesh->fillPointVertices(points, colors, sizes);
 }
 
-void PathVisual::FillData(control::TextureOb* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
+void PathVisual::FillData(control::Material* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
 {
     m_TextureOb = textureOb; 
 

@@ -177,7 +177,7 @@ private:
 //    ceti::Collector<jeti::Mesh> m_meshCollector;
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
     std::map<int_t, jeti::Mesh*> m_meshCollector;
-    std::map<int_t, jeti::control::TextureOb*> m_materialCollector;
+    std::map<int_t, jeti::control::Material*> m_materialCollector;
 
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
 };

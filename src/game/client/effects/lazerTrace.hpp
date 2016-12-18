@@ -24,7 +24,7 @@
 namespace jeti {
 class Mesh;
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 class BaseParticleSystem;
 }
@@ -32,7 +32,7 @@ class BaseParticleSystem;
 class LazerTraceEffect
 { 
     public:
-        LazerTraceEffect(jeti::control::TextureOb*, const glm::vec3* const, const glm::vec3* const);
+        LazerTraceEffect(jeti::control::Material*, const glm::vec3* const, const glm::vec3* const);
         ~LazerTraceEffect();
 
         bool isAlive() const { return m_IsAlive; }
@@ -44,7 +44,7 @@ class LazerTraceEffect
 
         const glm::mat4& actualModelMatrix();
         const jeti::Mesh& mesh() const { return *m_Mesh; }
-        const jeti::control::TextureOb& textureOb() const { return *m_TextureOb; }
+        const jeti::control::Material& textureOb() const { return *m_TextureOb; }
 
         void Update();
                     
@@ -53,7 +53,7 @@ class LazerTraceEffect
         int m_LiveTime;
         
         jeti::Mesh* m_Mesh;
-        jeti::control::TextureOb* m_TextureOb;
+        jeti::control::Material* m_TextureOb;
         jeti::BaseParticleSystem* m_ParticleSystem;
 
         const glm::vec3* m_pStartPos;
