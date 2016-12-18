@@ -22,7 +22,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include <TextureOb.hpp> // to be removed
+#include <Material.hpp> // to be removed
 #include <Shaders.hpp>
 #include <ShaderLoader.hpp>
 

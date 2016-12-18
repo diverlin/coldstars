@@ -18,7 +18,7 @@
 
 #include "BaseBackGroundEffect.hpp"
 #include "../resources/TextureCollector.hpp"
-#include <jeti/TextureOb.hpp>
+#include <jeti/Material.hpp>
 #include <jeti/Render.hpp>
 
 #include <glm/gtx/transform.hpp>

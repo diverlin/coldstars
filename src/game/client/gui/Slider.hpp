@@ -20,7 +20,7 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-#include <jeti/TextureOb.hpp>
+#include <jeti/Material.hpp>
 #include <ceti/rect.hpp>
 #include <dock/Shop.hpp>
 #include "MouseData.hpp"
