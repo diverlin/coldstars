@@ -23,7 +23,7 @@
 class ButtonTrigger : public BaseButton
 {
 public:
-    ButtonTrigger(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::TextureOb* textureOb)
+    ButtonTrigger(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::Material* textureOb)
         :
           BaseButton(type::GUI::BUTTON_TRIGGER_ID, subtype_id, info, pAction, textureOb) {}
 

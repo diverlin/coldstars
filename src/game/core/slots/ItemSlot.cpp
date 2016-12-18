@@ -388,7 +388,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     return false;
 }
 
-void ItemSlot::updateRange(jeti::control::TextureOb* _texOb)
+void ItemSlot::updateRange(jeti::control::Material* _texOb)
 {
     float radius = this->itemRadius();
     int size = 6;

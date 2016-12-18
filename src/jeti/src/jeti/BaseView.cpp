@@ -40,17 +40,17 @@ namespace jeti {
 
 namespace  view {
 
-ceti::Collector<control::TextureOb> BaseView::s_materials;
+ceti::Collector<control::Material> BaseView::s_materials;
 ceti::Collector<Mesh> BaseView::s_meshes;
 
 namespace {
 
-control::TextureOb*
+control::Material*
 getMaterial(int_t id)
 {
     //assert(id>0);
-    ceti::Collector<jeti::control::TextureOb> collector;
-    jeti::control::TextureOb* material = collector.get(id);
+    ceti::Collector<jeti::control::Material> collector;
+    jeti::control::Material* material = collector.get(id);
     return material;
 }
 

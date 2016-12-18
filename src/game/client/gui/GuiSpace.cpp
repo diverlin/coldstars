@@ -69,7 +69,7 @@ slider_shared(nullptr)
     
     /** Top bar */
     {
-        jeti::control::TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;
+        jeti::control::Material* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;
         GuiBar* bar_top = new GuiBar(textureOb_bar_top);
     
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
@@ -79,7 +79,7 @@ slider_shared(nullptr)
         AddChild(bar_top, offset);    
 
         {
-            jeti::control::TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;
+            jeti::control::Material* texOb = GuiTextureObCollector::Instance().icon_map;
             ButtonTrigger* galaxymap_button = new ButtonTrigger(type::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
@@ -90,7 +90,7 @@ slider_shared(nullptr)
         }
         
         {
-            jeti::control::TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
+            jeti::control::Material* texOb = GuiTextureObCollector::Instance().icon_plus;
             ButtonSingle* load_button = new ButtonSingle(type::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
@@ -101,7 +101,7 @@ slider_shared(nullptr)
         }
         
         {
-            jeti::control::TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
+            jeti::control::Material* texOb = GuiTextureObCollector::Instance().icon_minus;
             ButtonSingle* save_button = new ButtonSingle(type::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);
 
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
@@ -115,7 +115,7 @@ slider_shared(nullptr)
     
     /** Bottom bar */
     {
-        jeti::control::TextureOb* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;
+        jeti::control::Material* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;
         GuiBar* bar_bottom = new GuiBar(textureOb_bar_bottom);
 
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);

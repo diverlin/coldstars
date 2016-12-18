@@ -51,7 +51,7 @@ class Slider : public BaseGuiElement
                
                ceti::Rect rect;
                ceti::Rect rect_slide;
-               jeti::control::TextureOb* textureOb;
-               jeti::control::TextureOb* textureOb_scale;
+               jeti::control::Material* textureOb;
+               jeti::control::Material* textureOb_scale;
 };
 

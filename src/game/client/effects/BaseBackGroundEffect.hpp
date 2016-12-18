@@ -16,70 +16,68 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEBACKGROUNDEFFECT_HPP
-#define BASEBACKGROUNDEFFECT_HPP
+#pragma once
 
 #include <boost/property_tree/ptree.hpp>
 #include <glm/glm.hpp>
 
 namespace jeti {
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 class Mesh;
 }
 
 class BaseBackGroundEffect
 {
-    public:
-        BaseBackGroundEffect();
-        ~BaseBackGroundEffect();
+public:
+    BaseBackGroundEffect();
+    ~BaseBackGroundEffect();
 
-        void ValidateResources() const;
-        void SetTextureOb(jeti::control::TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
+    void ValidateResources() const;
+    void SetTextureOb(jeti::control::Material* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
-        void setCenter(const glm::vec3& center)     { m_Center = center; }        
-        void setSize(const glm::vec3& size)         { m_Size = size; }
+    void setCenter(const glm::vec3& center)     { m_Center = center; }
+    void setSize(const glm::vec3& size)         { m_Size = size; }
 
-        void SetAngle(float angle)              { m_Angle = angle; }                       
-        void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
+    void SetAngle(float angle)              { m_Angle = angle; }
+    void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
-        const glm::vec3& center() const { return m_Center; }
-        const jeti::control::TextureOb& textureOb() const { return *m_TextureOb; }
+    const glm::vec3& center() const { return m_Center; }
+    const jeti::control::Material& textureOb() const { return *m_TextureOb; }
 
-        const glm::vec4& color() const { return m_Color; }
+    const glm::vec4& color() const { return m_Color; }
 
-        const jeti::Mesh& mesh() const { return *m_Mesh; }
+    const jeti::Mesh& mesh() const { return *m_Mesh; }
 
-        const glm::mat4& actualModelMatrix();
-                
-    protected:
-        unsigned long int id;
-        
-        static unsigned long int counter;
-        
-        jeti::control::TextureOb* m_TextureOb;
-        std::string m_TextureObPath;
-        
-        glm::vec3 m_Center;
-        glm::vec3 m_Size;  
-        glm::vec4 m_Color; 
-        
-        float m_Angle;
-        float m_DeltaAngle;
-           
-        glm::mat4 m_Mm;     
-        glm::mat4 m_Tm;
-        glm::mat4 m_Rm;
-        glm::mat4 m_Sm;
+    const glm::mat4& actualModelMatrix();
 
-        jeti::Mesh* m_Mesh;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+protected:
+    unsigned long int id;
+
+    static unsigned long int counter;
+
+    jeti::control::Material* m_TextureOb;
+    std::string m_TextureObPath;
+
+    glm::vec3 m_Center;
+    glm::vec3 m_Size;
+    glm::vec4 m_Color;
+
+    float m_Angle;
+    float m_DeltaAngle;
+
+    glm::mat4 m_Mm;
+    glm::mat4 m_Tm;
+    glm::mat4 m_Rm;
+    glm::mat4 m_Sm;
+
+    jeti::Mesh* m_Mesh;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
     
 };
 
-#endif 
 

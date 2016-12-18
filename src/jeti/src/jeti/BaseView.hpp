@@ -45,7 +45,7 @@ namespace jeti {
 class Mesh;
 
 namespace control {
-class TextureOb;
+class Material;
 } // namespace control
 
 class BaseAnimationRotation;
@@ -66,7 +66,7 @@ public:
     void validateResources() const;
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
-    void setMaterial(control::TextureOb* material) { m_material = material; }
+    void setMaterial(control::Material* material) { m_material = material; }
     void setMesh(Mesh* mesh);
 
     const glm::mat4& actualModelMatrix();
@@ -75,7 +75,7 @@ public:
     //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
     const Mesh& mesh() const     { return *m_mesh; }
 
-    const control::TextureOb& material() const { return *m_material; }
+    const control::Material& material() const { return *m_material; }
     bool hasMaterial() const { return (m_material != 0); }
 
     const glm::vec4& color() const { return m_color; }
@@ -97,7 +97,7 @@ protected:
     bool _updateFadeOutEffect(); // depr, move to animation program
 
 public:
-    static ceti::Collector<control::TextureOb> s_materials;
+    static ceti::Collector<control::Material> s_materials;
     static ceti::Collector<Mesh> s_meshes;
 
 private:
@@ -106,7 +106,7 @@ private:
 
     glm::vec4 m_color;
 
-    control::TextureOb* m_material = nullptr;
+    control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
     ceti::model::Orientation* m_orientation = nullptr;
 

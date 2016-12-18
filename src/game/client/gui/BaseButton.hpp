@@ -29,11 +29,11 @@ class Renderer;
 class BaseButton : public BaseGuiElement
 {
     public:
-        BaseButton(type::GUI, type::GUI, const std::string&,void (*pAction)(Player*) = nullptr, jeti::control::TextureOb* textureOb = nullptr);
+        BaseButton(type::GUI, type::GUI, const std::string&,void (*pAction)(Player*) = nullptr, jeti::control::Material* textureOb = nullptr);
         virtual ~BaseButton();  
         
-        void SetTextureObAdditional(jeti::control::TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
-        void SetTextureObMask(jeti::control::TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
+        void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
+        void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
         
         //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }              
         void LockOn();
@@ -47,8 +47,8 @@ class BaseButton : public BaseGuiElement
     protected:          
         float m_Alpha;                        
         
-        jeti::control::TextureOb* m_TextureOb_additional;
-        jeti::control::TextureOb* m_TextureOb_mask;
+        jeti::control::Material* m_TextureOb_additional;
+        jeti::control::Material* m_TextureOb_mask;
         
         void (*m_pAction)(Player*);
         
