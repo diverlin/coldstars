@@ -30,6 +30,8 @@ Material::Material(int_t type)
 }
 
 Material::Material(const std::string& data)
+    :
+      Base()
 {
     MACRO_READ_SERIALIZED_DATA
 }
