@@ -211,7 +211,7 @@ void Renderer::drawQuad(const control::Material& texOb, const ceti::Box2D& box) 
 
 void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix) const
 {
-    __useTransparentMode(textureOb.model().use_alpha);
+    __useTransparentMode(textureOb.model()->use_alpha);
  	
     __useProgram(m_shaders.base);
     {
@@ -219,7 +219,7 @@ void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, co
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 	
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.base, "u_Texture"), 0);
 	                        
         mesh.draw();
@@ -236,7 +236,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::get().camera().lookFrom();
 
-    const model::Material& material = textureOb.model();
+    const model::Material& material = *textureOb.model();
 
     __useTransparentMode(material.use_alpha);
  	 	
@@ -263,7 +263,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
         glUniform1f(glGetUniformLocation(m_programLight,  "u_Material.shininess"), material.shininess);
 
 	    glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(m_programLightLocation_uTexture, 0);
 	                        
 	    mesh.draw();
@@ -280,7 +280,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::get().camera().lookTo();
    
-    __useTransparentMode(textureOb.model().use_alpha);
+    __useTransparentMode(textureOb.model()->use_alpha);
     	
     __useProgram(m_shaders.light_normalmap);
 	{
@@ -298,7 +298,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.specular"), 1, glm::value_ptr(m_light.specular));
         glUniform3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.attenuation"), 1, glm::value_ptr(m_light.attenuation));
 
-        const model::Material& material = textureOb.model();
+        const model::Material& material = *textureOb.model();
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.specular"), 1, glm::value_ptr(material.specular));
@@ -306,11 +306,11 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
         glUniform1f(glGetUniformLocation(m_shaders.light_normalmap,  "u_Material.shininess"), material.shininess);
 
 		glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Texture"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().normalmap);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->normalmap);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Normalmap"), 1);
                   
 		mesh.draw();
@@ -319,7 +319,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
 
 void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
-    __useTransparentMode(textureOb.model().use_alpha);
+    __useTransparentMode(textureOb.model()->use_alpha);
  	
     __useProgram(m_shaders.multitexturing);
 	{
@@ -327,14 +327,14 @@ void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::Material& 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	
 		glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_0"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.multitexturing, "Texture_1"), 1);
 		
-        glUniform2f(glGetUniformLocation(m_shaders.multitexturing, "displ"), textureOb.model().texture_offset.x, textureOb.model().texture_offset.y);
+        glUniform2f(glGetUniformLocation(m_shaders.multitexturing, "displ"), textureOb.model()->texture_offset.x, textureOb.model()->texture_offset.y);
 				  
 		mesh.draw();
 	}
@@ -629,7 +629,7 @@ void Renderer::drawParticles(const Mesh& mesh, const control::Material& textureO
         __useProgram(m_shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, textureOb.model().texture);
+            glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
             glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
 
             glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);

@@ -19,6 +19,7 @@
 #include "Material.hpp"
 
 #include <meti/RandUtils.hpp>
+#include <ceti/descriptor/Texture.hpp>
 
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -27,6 +28,23 @@
 #include <iostream>
 
 namespace jeti {
+
+
+namespace model {
+
+Material::Material(ceti::descriptor::Material* descriptor)
+{
+    texture_path = descriptor->path();
+    use_alpha = descriptor->useAlpha();
+
+    col_num = descriptor->col();
+    row_num = descriptor->row();
+    fps = descriptor->fps();
+    is_rotated = descriptor->autoRotated();
+    brightThreshold = descriptor->brightThreshold();
+}
+
+} // namespace model
 
 namespace {
 
@@ -72,37 +90,39 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 namespace control {
 
 Material::Material()
+    :
+      m_model(new model::Material)
 {
-    m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
+    m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
 
-    if ( ((m_model.col_num == 1) and (m_model.row_num == 1)) or (m_model.fps == 0) ) {
-        m_model.is_animated = false;
+    if ( ((m_model->col_num == 1) and (m_model->row_num == 1)) or (m_model->fps == 0) ) {
+        m_model->is_animated = false;
     } else {
-        m_model.is_animated = true;
+        m_model->is_animated = true;
     }
 
     load();
 
-    __createTextureCoords(m_model.col_num, m_model.row_num, m_model.fps);
+    __createTextureCoords(m_model->col_num, m_model->row_num, m_model->fps);
 
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }
 
-Material::Material(const model::Material& material)
+Material::Material(model::Material* material)
     :
       m_model(material)
 { 
-    m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
+    m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
     
-    if ( ((m_model.col_num == 1) && (m_model.row_num == 1)) || (m_model.fps == 0) ) {
-        m_model.is_animated = false;
+    if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (m_model->fps == 0) ) {
+        m_model->is_animated = false;
     } else {
-        m_model.is_animated = true;
+        m_model->is_animated = true;
     }
 
     load();
     
-    __createTextureCoords(m_model.col_num, m_model.row_num, m_model.fps);
+    __createTextureCoords(m_model->col_num, m_model->row_num, m_model->fps);
     
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }  
@@ -118,13 +138,13 @@ void Material::load()
         return;
     }
 
-    if (m_model.texture_path != "") {
-        loadToVRAM(m_model.texture_path, m_model.texture, m_model.w, m_model.h);
+    if (m_model->texture_path != "") {
+        loadToVRAM(m_model->texture_path, m_model->texture, m_model->w, m_model->h);
     } else {
-        loadToVRAM(m_model.texture, m_model.w, m_model.h);
+        loadToVRAM(m_model->texture, m_model->w, m_model->h);
     }
-    if (m_model.normalmap_path != "") {
-        loadToVRAM(m_model.normalmap_path, m_model.normalmap, m_model.w, m_model.h);
+    if (m_model->normalmap_path != "") {
+        loadToVRAM(m_model->normalmap_path, m_model->normalmap, m_model->w, m_model->h);
     }
 
     m_isLoaded = true;
@@ -140,11 +160,11 @@ void Material::__createTextureCoords(int col_num, int row_num, int fps)
     m_currentFrame = 0;
     m_framesCount = 0;
     
-    m_model.w_slice = m_model.w/col_num;
-    m_model.h_slice = m_model.h/row_num;
+    m_model->w_slice = m_model->w/col_num;
+    m_model->h_slice = m_model->h/row_num;
     
-    float w_slicef = (float)m_model.w_slice/m_model.w;
-    float h_slicef = (float)m_model.h_slice/m_model.h;
+    float w_slicef = (float)m_model->w_slice/m_model->w;
+    float h_slicef = (float)m_model->h_slice/m_model->h;
     
     float w_offsetf = 0;
     float h_offsetf = 0;
@@ -177,15 +197,15 @@ void Material::__createTextureCoords(int col_num, int row_num, int fps)
 
 void Material::__addTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
 {
-     m_model.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
-     m_model.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
-     m_model.texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
-     m_model.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
+     m_model->texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
+     m_model->texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
+     m_model->texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
+     m_model->texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
 }
 
 int Material::updateAnimationFrame(float elapsed_time)
 {
-    if (m_model.is_animated) {
+    if (m_model->is_animated) {
         if (elapsed_time - m_lastUpdateTime > m_delay) {
             m_currentFrame++;
             if ( m_currentFrame >= m_framesCount ) {

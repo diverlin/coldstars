@@ -86,9 +86,10 @@ public:
     void setBrightThreshold(float brightThreshold) { m_brightThreshold = brightThreshold; }
 
     const std::string& path() const { return m_path; }
-
+    bool useAlpha() const { return m_alpha; }
     bool animated() const { return (m_col !=1 || m_row != 1); }
-
+    bool autoRotated() const { return m_autoRotated; }
+    float brightThreshold() const { return m_brightThreshold; }
     int col() const { return m_col; }
     int row() const { return m_row; }
     float fps() const { return m_fps; }

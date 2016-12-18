@@ -25,6 +25,7 @@
 #include <world/starsystem.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Mesh.hpp>
+#include <jeti/Material.hpp>
 
 
 #include <spaceobjects/Star.hpp>
@@ -336,6 +337,7 @@ void SpaceViewer::__add(jeti::view::BaseView* view)
 
 void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view)
 {
+    {
     jeti::Mesh* mesh = nullptr;
 
     int_t descritprorId = model->mesh();
@@ -344,40 +346,37 @@ void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::Base
         mesh = it->second;
     } else {
         auto& collector = global::get().descriptors().mesh();
-        auto* descriptor = collector.get(descritprorId);
+        ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
         if (descriptor) {
             mesh = new jeti::Mesh(descriptor);
-        } else {
-            mesh = new jeti::Mesh;
         }
-
+        assert(mesh);
         m_meshCollector.insert(std::make_pair(descritprorId, mesh));
     }
     view->setMesh(mesh);
+    }
 
 
+    {
+    jeti::control::Material* material = nullptr;
 
-//    {
-//    jeti::control::TextureOb* material = nullptr;
+    int_t descritprorId = model->material();
+    auto it = m_materialCollector.find(descritprorId);
+    if (it != m_materialCollector.end()) {
+        material = it->second;
+    } else {
+        auto& collector = global::get().descriptors().material();
+        ceti::descriptor::Material* descriptor = collector.get(descritprorId);
+        if (descriptor) {
+            jeti::model::Material* model = new jeti::model::Material(descriptor);
+            material = new jeti::control::Material(model);
+        }
+        assert(material);
+        m_materialCollector.insert(std::make_pair(descritprorId, material));
+    }
+    view->setMaterial(material);
 
-//    int_t descritprorId = model->material();
-//    auto it = m_materialCollector.find(descritprorId);
-//    if (it != m_materialCollector.end()) {
-//        material = it->second;
-//    } else {
-//        auto& collector = global::get().descriptors().mesh();
-//        auto* descriptor = collector.get(descritprorId);
-//        if (descriptor) {
-//            material = new jeti::control::TextureOb(descriptor);
-//        } else {
-//            material = new jeti::control::TextureOb;
-//        }
-
-//        m_materialCollector.insert(std::make_pair(descritprorId, material));
-//    }
-//    view->setMaterial(material);
-
-//    }
+    }
 }
 
 void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)

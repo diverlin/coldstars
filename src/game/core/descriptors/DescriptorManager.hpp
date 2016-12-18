@@ -125,9 +125,13 @@ public:
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
-    const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
-    [[warning("remove this with const")]]
+
+    [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
+    const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
+
+    [[warning("replace this with const")]]
+    ceti::Collector<Material>& material() { return m_material; }
     const ceti::Collector<Material>& material() const { return m_material; }
 
 private:
