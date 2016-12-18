@@ -27,7 +27,7 @@
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
-//#include <jeti/TextureOb.hpp>
+//#include <jeti/Material.hpp>
 
 GoodsPack::GoodsPack(int id, type::entity subtype_id)
 {

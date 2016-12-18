@@ -19,7 +19,7 @@
 
 #include "BaseView.hpp"
 #include <Render.hpp>
-#include <TextureOb.hpp>
+#include <Material.hpp>
 #include <Mesh.hpp>
 
 //#include <common/Global.hpp>

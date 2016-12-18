@@ -18,7 +18,7 @@
 
 #include "Shield.hpp"
 #include <jeti/Render.hpp>
-#include <jeti/TextureOb.hpp>
+#include <jeti/Material.hpp>
 #include <spaceobjects/SpaceObject.hpp>
 
 

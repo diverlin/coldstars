@@ -19,7 +19,7 @@
 #include "PathVisual.hpp"
 
 #include <Mesh.hpp>
-#include <TextureOb.hpp>
+#include <Material.hpp>
 
 #include <meti/VectorUtils.hpp>
 #include <glm/gtx/transform.hpp>

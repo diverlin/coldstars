@@ -26,7 +26,7 @@
 #include <ceti/Logger.hpp>
 
 //#include <resources/TextureCollector.hpp>
-//#include <jeti/TextureOb.hpp>
+//#include <jeti/Material.hpp>
 //#include <resources/MeshCollector.hpp>
 
 #include <common/Global.hpp>

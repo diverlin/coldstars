@@ -21,7 +21,7 @@
 //#include <jeti/Render.hpp>
 //#include "../resources/TextureCollector.hpp"
  
-//#include <jeti/TextureOb.hpp>
+//#include <jeti/Material.hpp>
 
 Room::Room()
 {    

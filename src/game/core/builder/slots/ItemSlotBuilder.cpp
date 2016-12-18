@@ -25,7 +25,7 @@
 
 //#include <resources/MeshCollector.hpp>
 //#include <resources/TextureCollector.hpp>
-//#include <jeti/TextureOb.hpp>
+//#include <jeti/Material.hpp>
 
 #include <common/Global.hpp>
 

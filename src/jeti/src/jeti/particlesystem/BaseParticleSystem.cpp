@@ -21,7 +21,7 @@
 
 //#include <spaceobjects/SpaceObject.hpp> // depr
 
-#include <TextureOb.hpp>
+#include <Material.hpp>
 #include <Mesh.hpp>
 
 // math

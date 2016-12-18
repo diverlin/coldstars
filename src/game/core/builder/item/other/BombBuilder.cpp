@@ -25,7 +25,7 @@
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
-//#include <jeti/TextureOb.hpp>
+//#include <jeti/Material.hpp>
 
 //#include <boost/property_tree/info_parser.hpp>
 

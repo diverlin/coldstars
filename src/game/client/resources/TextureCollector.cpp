@@ -20,7 +20,7 @@
 
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
-#include <jeti/TextureOb.hpp>
+#include <jeti/Material.hpp>
 
 #include <ceti/Logger.hpp>
 
