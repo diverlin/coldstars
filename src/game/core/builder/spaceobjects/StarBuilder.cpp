@@ -54,7 +54,7 @@ Star::getNew(const descriptor::Star& descr)
 {
     model::Star* model = __getNewTemplate();
     model->setMesh(descr.mesh());
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));

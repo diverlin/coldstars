@@ -31,26 +31,26 @@ class Renderer;
 
 class GuiGalaxyMap : public BaseGuiElement
 {
-    public:
-        GuiGalaxyMap();
-        ~GuiGalaxyMap();
-        
-        void BindGalaxy(Galaxy*);
-        void UnbindGalaxy();
-           
-        Galaxy* GetGalaxy() const { return m_Galaxy; }
+public:
+    GuiGalaxyMap();
+    ~GuiGalaxyMap();
 
-    private:
-        float m_ScaleParsecToScreenCoord;
-        
-        Galaxy* m_Galaxy;
-        
-        jeti::PathVisual m_VisualHyperJumpRange;
-        jeti::PathVisual m_VisualHyperJumpPath;
-        
-        virtual void UpdateUnique(Player*) override final;
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
-        
-        glm::vec3 GetAbsoluteStarSystemPosition(const Starsystem&) const;
+    void BindGalaxy(Galaxy*);
+    void UnbindGalaxy();
+
+    Galaxy* GetGalaxy() const { return m_Galaxy; }
+
+private:
+    float m_ScaleParsecToScreenCoord;
+
+    Galaxy* m_Galaxy;
+
+    jeti::PathVisual m_VisualHyperJumpRange;
+    jeti::PathVisual m_VisualHyperJumpPath;
+
+    virtual void UpdateUnique(Player*) override final;
+    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+
+    glm::vec3 GetAbsoluteStarSystemPosition(const Starsystem&) const;
 };
 

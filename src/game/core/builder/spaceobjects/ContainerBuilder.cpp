@@ -70,7 +70,7 @@ ContainerBuilder::__getNewTemplate()
 }
 
 //Container*
-//ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
+//ContainerBuilder::create(jeti::control::TextureOb* textureOb, BaseItem* item) const
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, textureOb, item);
@@ -88,7 +88,7 @@ ContainerBuilder::__getNewTemplate()
 
 //Container* ContainerBuilder::create(int mineral_ammount) const
 //{
-//    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
+//    //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
 //    GoodsPack* goods_pack = GetNewGoodsPack(type::entity::MINERALS_ID);
 //    goods_pack->Increase(mineral_ammount);
 
@@ -98,7 +98,7 @@ ContainerBuilder::__getNewTemplate()
 //    return container;
 //}
            
-//void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
+//void ContainerBuilder::createInternals(Container* container, jeti::control::TextureOb* textureOb, BaseItem* item) const
 //{
 //    LifeData data_life;
 //    data_life.armor = 1;

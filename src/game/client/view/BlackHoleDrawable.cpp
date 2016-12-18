@@ -19,7 +19,7 @@
 #include "BlackHoleDrawable.hpp"
 #include <effects/ShockWaveEffect.hpp>
 
-//BlackHoleDrawable::BlackHoleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//BlackHoleDrawable::BlackHoleDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      BaseDrawable(texture, mesh)
 //{

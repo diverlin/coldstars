@@ -23,7 +23,9 @@
 #include <ceti/rect.hpp>
 
 namespace jeti {
+namespace control {
 class TextureOb;
+} // namespace control
 }
 
 class Kosmoport;
@@ -36,28 +38,28 @@ struct UnresolvedDataRoom
 
 class Room : public core::Base
 {
-        public: 
-                Room();
-                ~Room();
-                
-                virtual void putChildrenToGarbage() const {};
-                
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; };
-                void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                
-                Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; };
-                jeti::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+public:
+    Room();
+    ~Room();
 
-                void RenderBackground(const ceti::Rect&) const;
-                        
-        protected:
-            Kosmoport* owner_kosmoport;
-                jeti::TextureOb* textureOb_background;
-                
-                UnresolvedDataRoom data_unresolved_Room;
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    virtual void putChildrenToGarbage() const {}
+
+    void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
+    void SetTextureObBackground(jeti::control::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; }
+
+    Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; }
+    jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; }
+
+    void RenderBackground(const ceti::Rect&) const;
+
+protected:
+    Kosmoport* owner_kosmoport;
+    jeti::control::TextureOb* textureOb_background;
+
+    UnresolvedDataRoom data_unresolved_Room;
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

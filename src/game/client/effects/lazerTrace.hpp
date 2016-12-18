@@ -16,22 +16,23 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LAZERTRACE_HPP
-#define LAZERTRACE_HPP 
+#pragma once
 
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
 namespace jeti {
 class Mesh;
+namespace control {
 class TextureOb;
+} // namespace control
 class BaseParticleSystem;
 }
 
 class LazerTraceEffect
 { 
     public:
-        LazerTraceEffect(jeti::TextureOb*, const glm::vec3* const, const glm::vec3* const);
+        LazerTraceEffect(jeti::control::TextureOb*, const glm::vec3* const, const glm::vec3* const);
         ~LazerTraceEffect();
 
         bool isAlive() const { return m_IsAlive; }
@@ -43,7 +44,7 @@ class LazerTraceEffect
 
         const glm::mat4& actualModelMatrix();
         const jeti::Mesh& mesh() const { return *m_Mesh; }
-        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
+        const jeti::control::TextureOb& textureOb() const { return *m_TextureOb; }
 
         void Update();
                     
@@ -52,7 +53,7 @@ class LazerTraceEffect
         int m_LiveTime;
         
         jeti::Mesh* m_Mesh;
-        jeti::TextureOb* m_TextureOb;
+        jeti::control::TextureOb* m_TextureOb;
         jeti::BaseParticleSystem* m_ParticleSystem;
 
         const glm::vec3* m_pStartPos;
@@ -67,4 +68,4 @@ class LazerTraceEffect
 };
 
 
-#endif
+

@@ -18,7 +18,7 @@
 
 //#include "BulletDrawable.hpp"
 
-//BulletDrawable::BulletDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//BulletDrawable::BulletDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //:
 //  BaseDrawable(texture, mesh),
 //  m_EffectDrive(nullptr)

@@ -25,7 +25,7 @@ namespace view {
 class Container : public jeti::view::BaseView
 {
     public:                  
-        Container(jeti::TextureOb*, jeti::Mesh*);
+        Container(jeti::control::TextureOb*, jeti::Mesh*);
         virtual ~Container() final override;
         
         //virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;

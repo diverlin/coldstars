@@ -27,7 +27,9 @@
 class Vehicle;
 
 namespace jeti {
+namespace control {
 class TextureOb;
+} // namespace control
 }
 
 struct UnresolvedDataBaseSlot
@@ -42,7 +44,7 @@ class BaseSlot : public core::Base
         BaseSlot();
         virtual ~BaseSlot();
                 
-//        void SetTextureOb(jeti::TextureOb* textureOb) { m_textureOb = textureOb; }
+//        void SetTextureOb(jeti::control::TextureOb* textureOb) { m_textureOb = textureOb; }
         void setOwner(Base* owner) { m_owner = owner; }
         void setPosition(const glm::vec2& position) { m_position = position; }
         void selectEvent() { m_selected = true; }
@@ -64,7 +66,7 @@ class BaseSlot : public core::Base
     protected:      // make private
         bool m_selected;
         
-        jeti::TextureOb* m_textureOb;
+        jeti::control::TextureOb* m_textureOb;
                         
         Base* m_owner;
         

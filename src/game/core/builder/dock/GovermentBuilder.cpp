@@ -49,10 +49,10 @@ Goverment* GovermentBuilder::create() const
 
 void GovermentBuilder::createInternals(Goverment* goverment) const
 {
-    //jeti::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
+    //jeti::control::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
     //goverment->SetTextureObFace(textureOb_face);
 
-    //jeti::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
+    //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
     //goverment->SetTextureObBackground(textureOb_background);
 
 }

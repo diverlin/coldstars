@@ -18,7 +18,7 @@
 
 //#include "SatelliteDrawable.hpp"
 
-//SatelliteDrawable::SatelliteDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//SatelliteDrawable::SatelliteDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      VehicleDrawable(texture, mesh)
 //{

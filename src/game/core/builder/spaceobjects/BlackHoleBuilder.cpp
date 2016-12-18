@@ -63,7 +63,7 @@ void BlackHoleBuilder::createInternals(BlackHole* blackhole) const
     data_life.life_time = meti::getRandInt(250, 500);
     data_life.dying_time = 2;
 
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);
 
     blackhole->setLifeData(data_life);
     

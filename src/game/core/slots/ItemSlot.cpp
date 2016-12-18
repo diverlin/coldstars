@@ -275,12 +275,12 @@ void ItemSlot::updateVehiclePropetries() const
 //    }
 //}
 
-//void ItemSlot::RenderMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mark) const
+//void ItemSlot::RenderMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::control::TextureOb* textureOb_mark) const
 //{
 //    render.DrawQuad(*textureOb_mark, box);
 //}
 
-//void ItemSlot::RenderTargetMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mask, jeti::TextureOb* textureOb) const
+//void ItemSlot::RenderTargetMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::control::TextureOb* textureOb_mask, jeti::control::TextureOb* textureOb) const
 //{
 //    render.DrawQuad(*textureOb, box);
 //    render.DrawQuad(*textureOb_mask, box);
@@ -388,7 +388,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     return false;
 }
 
-void ItemSlot::updateRange(jeti::TextureOb* _texOb)
+void ItemSlot::updateRange(jeti::control::TextureOb* _texOb)
 {
     float radius = this->itemRadius();
     int size = 6;

@@ -25,31 +25,33 @@ class SpaceObject;
 
 namespace jeti {
 class Renderer;
+namespace control {
 class TextureOb;
+} // namespace control
 }
 
 class ShieldEffect
 {  
-    public:
-        ShieldEffect();
-        ~ShieldEffect();
-        
-        void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
-        void SetAlpha(float alpha) { color.a = alpha; };
-        void setParent(SpaceObject*);
-            
-        void Update();
-        void Render(const jeti::Renderer&, float) const;
+public:
+    ShieldEffect();
+    ~ShieldEffect();
 
-    private:       
-        glm::vec4 color;
-        glm::vec3 size;
-        
-        float alpha_start;
-        float d_alpha;
-        
-        jeti::TextureOb* textureOb;
-        SpaceObject* parent;
-                
+    void SetTextureOb(jeti::control::TextureOb* textureOb) { this->textureOb = textureOb; };
+    void SetAlpha(float alpha) { color.a = alpha; };
+    void setParent(SpaceObject*);
+
+    void Update();
+    void Render(const jeti::Renderer&, float) const;
+
+private:
+    glm::vec4 color;
+    glm::vec3 size;
+
+    float alpha_start;
+    float d_alpha;
+
+    jeti::control::TextureOb* textureOb;
+    SpaceObject* parent;
+
 };
 

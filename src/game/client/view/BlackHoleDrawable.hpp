@@ -25,7 +25,7 @@
 //class BlackHoleDrawable : public jeti::view::BaseDrawable
 //{
 //    public:
-//        BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        BlackHoleDrawable(jeti::control::TextureOb*, jeti::Mesh*);
 //        virtual ~BlackHoleDrawable() override final;
 
 //        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };

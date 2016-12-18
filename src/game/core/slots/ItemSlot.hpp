@@ -146,14 +146,14 @@ public:
 
     //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
     //        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-    //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
-    //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
+    //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*) const;
+    //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*, jeti::control::TextureOb*) const;
 
     item::Base* takeItem();
 
     bool swapItem(ItemSlot*);
 
-    void updateRange(jeti::TextureOb*);
+    void updateRange(jeti::control::TextureOb*);
     void drawRange(const glm::vec2&);
 
     bool checkSubTarget(ItemSlot*) const;

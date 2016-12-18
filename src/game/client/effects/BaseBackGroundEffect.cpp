@@ -58,7 +58,7 @@ const glm::mat4& BaseBackGroundEffect::actualModelMatrix()
     return m_Mm;
 }
         
-void BaseBackGroundEffect::SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor)
+void BaseBackGroundEffect::SetTextureOb(jeti::control::TextureOb* textureOb, const glm::vec3& scale_factor)
 {
     m_TextureOb = textureOb; 
     m_Size.x = m_TextureOb->frameWidth()  * scale_factor.x;

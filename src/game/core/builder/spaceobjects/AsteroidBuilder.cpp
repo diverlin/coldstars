@@ -59,7 +59,7 @@ model::Asteroid* Asteroid::getNew()
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
 
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 

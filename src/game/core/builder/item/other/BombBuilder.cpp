@@ -58,7 +58,7 @@ Bomb* BombBuilder::getNew(const descriptor::BaseOLD& descriptor)
 void BombBuilder::__createInternals(Bomb* bomb, const descriptor::BaseOLD& descriptor)
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
+    //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
     bomb->setDamage(descriptor.damage());

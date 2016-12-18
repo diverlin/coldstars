@@ -175,11 +175,11 @@ private:
     std::map<jeti::view::BaseView*, model::SpaceObject*> m_cache2;
 
 //    ceti::Collector<jeti::Mesh> m_meshCollector;
-//    ceti::Collector<jeti::TextureOb> m_materialCollector;
+//    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
     std::map<int_t, jeti::Mesh*> m_meshCollector;
-//    std::map<int_t, jeti::TextureOb*> m_descriptorToMaterialConverter;
+    std::map<int_t, jeti::control::TextureOb*> m_materialCollector;
 
-//    ceti::Collector<jeti::TextureOb> m_materialCollector;
+//    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
 };
 
 } // namespace view

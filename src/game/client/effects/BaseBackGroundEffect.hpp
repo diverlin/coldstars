@@ -23,7 +23,9 @@
 #include <glm/glm.hpp>
 
 namespace jeti {
+namespace control {
 class TextureOb;
+} // namespace control
 class Mesh;
 }
 
@@ -34,7 +36,7 @@ class BaseBackGroundEffect
         ~BaseBackGroundEffect();
 
         void ValidateResources() const;
-        void SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
+        void SetTextureOb(jeti::control::TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
         void setCenter(const glm::vec3& center)     { m_Center = center; }        
         void setSize(const glm::vec3& size)         { m_Size = size; }
@@ -43,7 +45,7 @@ class BaseBackGroundEffect
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
         const glm::vec3& center() const { return m_Center; }
-        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
+        const jeti::control::TextureOb& textureOb() const { return *m_TextureOb; }
 
         const glm::vec4& color() const { return m_Color; }
 
@@ -56,7 +58,7 @@ class BaseBackGroundEffect
         
         static unsigned long int counter;
         
-        jeti::TextureOb* m_TextureOb;
+        jeti::control::TextureOb* m_TextureOb;
         std::string m_TextureObPath;
         
         glm::vec3 m_Center;

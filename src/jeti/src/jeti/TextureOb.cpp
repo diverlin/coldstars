@@ -69,6 +69,8 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 
 } // namespace
 
+namespace control {
+
 TextureOb::TextureOb()
 {
     m_model.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
@@ -196,6 +198,8 @@ int TextureOb::updateAnimationFrame(float elapsed_time)
         return 0;
     } 
 }
+
+} // namespace control
 
 } // namespace jeti
 

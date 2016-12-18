@@ -183,7 +183,7 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
     assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         //const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
-        //jeti::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
+        //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
     jeti::view::BaseView* view = __isViewExists(model);
@@ -348,12 +348,36 @@ void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::Base
         if (descriptor) {
             mesh = new jeti::Mesh(descriptor);
         } else {
-            mesh = new jeti::Mesh();
+            mesh = new jeti::Mesh;
         }
 
-        //m_meshCollector.add(mesh);
+        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
     }
     view->setMesh(mesh);
+
+
+
+//    {
+//    jeti::control::TextureOb* material = nullptr;
+
+//    int_t descritprorId = model->material();
+//    auto it = m_materialCollector.find(descritprorId);
+//    if (it != m_materialCollector.end()) {
+//        material = it->second;
+//    } else {
+//        auto& collector = global::get().descriptors().mesh();
+//        auto* descriptor = collector.get(descritprorId);
+//        if (descriptor) {
+//            material = new jeti::control::TextureOb(descriptor);
+//        } else {
+//            material = new jeti::control::TextureOb;
+//        }
+
+//        m_materialCollector.insert(std::make_pair(descritprorId, material));
+//    }
+//    view->setMaterial(material);
+
+//    }
 }
 
 void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)

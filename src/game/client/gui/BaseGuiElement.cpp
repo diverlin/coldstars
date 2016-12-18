@@ -28,7 +28,7 @@
 std::map<type::GUI, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
    
-BaseGuiElement::BaseGuiElement(type::GUI type_id, type::GUI subtype_id, const std::string& info, jeti::TextureOb* textureOb)
+BaseGuiElement::BaseGuiElement(type::GUI type_id, type::GUI subtype_id, const std::string& info, jeti::control::TextureOb* textureOb)
 :
 m_Type_id(type_id),
 m_Subtype_id(subtype_id),

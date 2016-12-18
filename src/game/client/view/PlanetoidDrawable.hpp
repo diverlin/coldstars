@@ -24,7 +24,7 @@
 //{
 //public:
 //    PlanetoidDrawable();
-//    PlanetoidDrawable(jeti::TextureOb*, jeti::Mesh*);
+//    PlanetoidDrawable(jeti::control::TextureOb*, jeti::Mesh*);
 //    virtual ~PlanetoidDrawable() override;
 
 //    virtual void __renderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;

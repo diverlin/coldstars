@@ -16,24 +16,23 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONTRIGGER_HPP
-#define BUTTONTRIGGER_HPP
+#pragma once
 
 #include "BaseButton.hpp"
 
 class ButtonTrigger : public BaseButton
 {
-    public:
-        ButtonTrigger(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
+public:
+    ButtonTrigger(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::TextureOb* textureOb)
         :
-        BaseButton(type::GUI::BUTTON_TRIGGER_ID, subtype_id, info, pAction, textureOb) {};
-               
-        virtual ~ButtonTrigger() override final {};  
+          BaseButton(type::GUI::BUTTON_TRIGGER_ID, subtype_id, info, pAction, textureOb) {}
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void UpdateUnique(Player*) override final;
-        
-    private:
+    virtual ~ButtonTrigger() override final {};
+
+    virtual void OnPressEventMBL(Player*) override final;
+    virtual void UpdateUnique(Player*) override final;
+
+private:
 };
 
-#endif
+

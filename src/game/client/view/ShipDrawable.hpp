@@ -23,7 +23,7 @@
 //class ShipDrawable : public VehicleDrawable
 //{
 //    public:
-//        ShipDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        ShipDrawable(jeti::control::TextureOb*, jeti::Mesh*);
 //        virtual ~ShipDrawable() override final;
         
 ////        virtual void UpdateInSpace(int, bool) override final;

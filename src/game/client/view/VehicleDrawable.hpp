@@ -23,7 +23,7 @@
 //class VehicleDrawable : public jeti::view::BaseDrawable
 //{
 //    public:
-//        VehicleDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        VehicleDrawable(jeti::control::TextureOb*, jeti::Mesh*);
 //        virtual ~VehicleDrawable() override;
 
 //        void CreateDriveComplexTextureDependedStuff();
