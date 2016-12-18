@@ -33,7 +33,7 @@ namespace descriptor {
 class Descriptor : public Base
 {
 public:
-    Descriptor(int_t type = -1, int_t id = -1);
+    Descriptor(int_t type);
     Descriptor(const std::string& data);
     ~Descriptor();
 

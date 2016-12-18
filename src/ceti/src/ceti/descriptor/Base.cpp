@@ -33,20 +33,6 @@ Base::Base(int_t type)
     m_id = m_idGenerator.nextId();
 }
 
-Base::Base(int_t type, int_t id)
-    :
-      m_type(type)
-    , m_id(id)
-{
-    if (id == -1) {
-        m_id = m_idGenerator.nextId();
-    }
-}
-
-Base::~Base()
-{
-}
-
 
 } // namespace descriptor
 } // namespace ceti

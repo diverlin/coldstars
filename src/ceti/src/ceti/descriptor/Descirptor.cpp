@@ -28,13 +28,15 @@ namespace descriptor {
 std::map<int, Id> Descriptor::m_ids;
 
 
-Descriptor::Descriptor(int_t type, int_t id)
+Descriptor::Descriptor(int_t type)
     :
-      Base(type, id)
+      Base(type)
 {
 }
 
 Descriptor::Descriptor(const std::string& data)
+    :
+      Base()
 {
     MACRO_READ_SERIALIZED_DATA
 }

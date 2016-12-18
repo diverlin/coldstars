@@ -57,7 +57,7 @@ TEST(descriptor, base)
     Property p5(ids.at(STRING1), "5;4;3;2;1");
     Property p6(ids.at(VEC3), meti::vec3(1.0f, 2.0f, 3.0f));
 
-    Descriptor descr;
+    Descriptor descr(0);
     descr.m_ids = ids;
     descr.add({p1,p2,p3,p4,p5,p6});
 
