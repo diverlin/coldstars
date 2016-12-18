@@ -39,9 +39,9 @@ class NatureLand : public Land
 
         virtual void putChildrenToGarbage() const;
         
-        //void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+        //void SetTextureObBackground(jeti::control::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
         
-        //jeti::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+        //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
         void AddItemSlot(ItemSlot*);
 
@@ -62,7 +62,7 @@ class NatureLand : public Land
         void Resolve();
         
     private:
-        //jeti::TextureOb* textureOb_background;
+        //jeti::control::TextureOb* textureOb_background;
 
         std::vector<Vehicle*> VEHICLE_vec;
         std::vector<ItemSlot*> item_slot_vec;

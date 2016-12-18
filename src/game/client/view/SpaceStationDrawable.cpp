@@ -18,7 +18,7 @@
 
 //#include "SpaceStationDrawable.hpp"
 
-//SpaceStationDrawable::SpaceStationDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//SpaceStationDrawable::SpaceStationDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      VehicleDrawable(texture, mesh)
 //{}

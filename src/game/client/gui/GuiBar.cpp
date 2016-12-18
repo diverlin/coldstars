@@ -21,7 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 
 
-GuiBar::GuiBar(jeti::TextureOb* textureOb)
+GuiBar::GuiBar(jeti::control::TextureOb* textureOb)
 :
 BaseGuiElement(type::GUI::NONE_ID, type::GUI::NONE_ID, "", textureOb)
 {}

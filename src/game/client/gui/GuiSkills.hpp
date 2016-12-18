@@ -42,11 +42,11 @@ class GuiSkills : public BaseGuiElement
         int technic_undo;
         int diplomat_undo;
 
-        jeti::TextureOb* textureOb_skill;
-        jeti::TextureOb* textureOb_skill_transparent;
+        jeti::control::TextureOb* textureOb_skill;
+        jeti::control::TextureOb* textureOb_skill_transparent;
         
         ceti::Rect background_rect;
-        jeti::TextureOb* textureOb_background;
+        jeti::control::TextureOb* textureOb_background;
 };
 
 

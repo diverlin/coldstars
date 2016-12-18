@@ -23,7 +23,7 @@
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 //#include <text/VerticalFlowText.hpp>
 
-//VehicleDrawable::VehicleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//VehicleDrawable::VehicleDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      BaseDrawable(texture, mesh)
 //{}

@@ -181,12 +181,12 @@ void Renderer::__updateProjectionViewMatrix()
 }
 
 
-void Renderer::drawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawQuad(const control::TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     drawMesh(*m_meshQuad, textureOb, ModelMatrix);
 }
 
-void Renderer::drawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
+void Renderer::drawQuad(const control::TextureOb& texOb, const ceti::Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.center();
@@ -209,7 +209,7 @@ void Renderer::drawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
     drawMesh(*m_meshQuad, texOb, ModelMatrix);
 }
 
-void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& modelMatrix) const
+void Renderer::drawMesh(const Mesh& mesh, const control::TextureOb& textureOb, const glm::mat4& modelMatrix) const
 {
     __useTransparentMode(textureOb.model().use_alpha);
  	
@@ -226,7 +226,7 @@ void Renderer::drawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
     }
 }
 
-void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawMeshLight(const Mesh& mesh, const control::TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
         drawMesh(mesh, textureOb, ModelMatrix);
@@ -270,7 +270,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 	}
 }
 
-void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
         drawMesh(mesh, textureOb, ModelMatrix);
@@ -317,7 +317,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 	}
 } 
 
-void Renderer::drawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     __useTransparentMode(textureOb.model().use_alpha);
  	
@@ -620,7 +620,7 @@ void Renderer::drawScreenQuadTextured(GLuint texture, int w, int h) const
     }
 }
  
-void Renderer::drawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::drawParticles(const Mesh& mesh, const control::TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     __enable_POINTSPRITE();
     {   

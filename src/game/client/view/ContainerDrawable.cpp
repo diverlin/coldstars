@@ -20,7 +20,7 @@
 
 namespace view {
 
-//Container::Container(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//Container::Container(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      BaseDrawable(texture, mesh)
 //{

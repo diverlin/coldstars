@@ -54,7 +54,7 @@ SpaceStation* SpaceStationBuilder::create() const
 void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
 {
     //jeti::Mesh* mesh = nullptr;
-    //jeti::TextureOb* texOb = nullptr;
+    //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;
 
     if (meti::getRandInt(1))

@@ -27,7 +27,7 @@
 //class BulletDrawable : public jeti::view::BaseDrawable
 //{
 //    public:
-//        BulletDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        BulletDrawable(jeti::control::TextureOb*, jeti::Mesh*);
         
 //        virtual ~BulletDrawable() final override;
         

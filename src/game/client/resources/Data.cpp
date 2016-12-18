@@ -533,56 +533,56 @@ void Data::__loadImages()
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
         ////}
 
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
         ////}
 
         ////{
         //    //std::vector<int> arg;
         //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
+        //    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
         ////}
 
         ////################################ type::RACE::R7_ID (enemy 2)
@@ -634,7 +634,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s_000.jpg";
 //    material_data.brightThreshold = 1.9f;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::STAR_ID;
@@ -648,7 +648,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s_001.png";
 //    material_data.brightThreshold = 1.825f;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::STAR_ID;
@@ -662,7 +662,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s_100.jpg";
 //    material_data.brightThreshold = 2.525f;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::STAR_ID;
@@ -676,7 +676,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s_101.png";
 //    material_data.brightThreshold = 1.925f;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::STAR_ID;
@@ -692,7 +692,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -707,7 +707,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::GREEN_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -722,7 +722,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -737,7 +737,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -752,7 +752,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -767,7 +767,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -782,7 +782,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -797,7 +797,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -812,7 +812,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -827,7 +827,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -842,7 +842,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -857,7 +857,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -872,7 +872,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -887,7 +887,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -902,7 +902,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -917,7 +917,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -932,7 +932,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -947,7 +947,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -962,7 +962,7 @@ void Data::__loadImages()
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
 //    material_data.is_rotated = false;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
@@ -977,7 +977,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_000.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
@@ -989,7 +989,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_001.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
@@ -1001,7 +1001,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_002.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
@@ -1014,7 +1014,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_kosmoport/an_000.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::ANGAR_BACKGROUND_ID;
@@ -1027,7 +1027,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_kosmoport/st_000.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::STORE_BACKGROUND_ID;
@@ -1040,7 +1040,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_kosmoport/sh_000.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::SHOP_BACKGROUND_ID;
@@ -1053,7 +1053,7 @@ void Data::__loadImages()
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_kosmoport/go_000.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::GOVERMENT_BACKGROUND_ID;
@@ -1069,7 +1069,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path      = DATA_PATH+"planet/p_0000.png";
 //    material_data.normalmap_path    = DATA_PATH+"planet/p_0000_nm.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET_ID;
@@ -1083,7 +1083,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path      = DATA_PATH+"planet/p_1000.png";
 //    material_data.normalmap_path    = DATA_PATH+"planet/p_1000_nm.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET_ID;
@@ -1097,7 +1097,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path      = DATA_PATH+"planet/p_2000.png";
 //    material_data.normalmap_path    = DATA_PATH+"planet/p_2000_nm.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET_ID;
@@ -1112,7 +1112,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path      = DATA_PATH+"planet/p_3000.png";
 //    material_data.normalmap_path    = DATA_PATH+"planet/p_3000_nm.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET_ID;
@@ -1126,7 +1126,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path      = DATA_PATH+"planet/p_4000.png";
 //    material_data.normalmap_path    = DATA_PATH+"planet/p_4000_nm.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET_ID;
@@ -1141,7 +1141,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"planet/atmosphere_000.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::ATMOSPHERE_ID;
@@ -1154,7 +1154,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"planet/atmosphere_001.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::ATMOSPHERE_ID;
@@ -1168,7 +1168,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"planet/ring.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::RING_ID;
@@ -1183,7 +1183,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/particles/particle0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
@@ -1197,7 +1197,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/particles/particle1.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
@@ -1211,7 +1211,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/particles/particle2.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
@@ -1225,7 +1225,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/particles/particle3.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::GREY_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
@@ -1237,7 +1237,7 @@ void Data::__loadImages()
 ////{
 //    //std::vector<int> arg;
 //    //arg.push_back((int)type::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID);
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
+//    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
 ////}
 
 //{
@@ -1245,7 +1245,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/lazer/l_001.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
@@ -1260,7 +1260,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/lazer/l_002.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
@@ -1275,7 +1275,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/lazer/l_003.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
@@ -1290,7 +1290,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/shield/shield0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
@@ -1304,7 +1304,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/shield/shield1.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::GREEN_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
@@ -1318,7 +1318,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/shield/shield2.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
@@ -1332,7 +1332,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"effect/shield/shield3.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
@@ -1348,7 +1348,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s1.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
@@ -1362,7 +1362,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s2.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
@@ -1376,7 +1376,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"star/s3.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
@@ -1393,7 +1393,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
@@ -1409,7 +1409,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
@@ -1425,7 +1425,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech2.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
@@ -1454,7 +1454,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Red0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::RED_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
@@ -1470,7 +1470,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Yellow0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::YELLOW_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
@@ -1486,7 +1486,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Blue0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
@@ -1503,7 +1503,7 @@ void Data::__loadImages()
 //    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech1_Blue0.png";
 //    material_data.use_alpha = true;
 //    material_data.color_id = COLOR::BLUE_ID;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
@@ -1530,7 +1530,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
@@ -1545,7 +1545,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
@@ -1560,7 +1560,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech2.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
@@ -1578,7 +1578,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bullet/r_0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ROCKET_BULLET_ID;
@@ -1591,7 +1591,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bullet/r_1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ROCKET_BULLET_ID;
@@ -1602,12 +1602,12 @@ void Data::__loadImages()
 
 ////{
 //    //std::vector<int> arg;
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_0.png", true, &arg) );
+//    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_0.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_1.png", true, &arg) );
+//    //TextureCollector::Instance().Add( new jeti::control::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_1.png", true, &arg) );
 ////}
 ////TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_0.png', True, []) )
 ////TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_1.png', True, []) )
@@ -1621,7 +1621,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
@@ -1637,7 +1637,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
@@ -1653,7 +1653,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech2.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
@@ -1668,7 +1668,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech3.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
@@ -1686,7 +1686,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
@@ -1702,7 +1702,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
@@ -1718,7 +1718,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech2.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
@@ -1737,7 +1737,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/grapple/grapple_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::GRAPPLE_EQUIPMENT_ID;
@@ -1753,7 +1753,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/grapple/grapple_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::GRAPPLE_EQUIPMENT_ID;
@@ -1773,7 +1773,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/bak/bak_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::BAK_EQUIPMENT_ID;
@@ -1789,7 +1789,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/bak/bak_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::BAK_EQUIPMENT_ID;
@@ -1808,7 +1808,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ENERGIZER_EQUIPMENT_ID;
@@ -1824,7 +1824,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::ENERGIZER_EQUIPMENT_ID;
@@ -1843,7 +1843,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/freezer/freezer_Race0_Tech0.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::FREEZER_EQUIPMENT_ID;
@@ -1859,7 +1859,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/freezer/freezer_Race0_Tech1.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::FREEZER_EQUIPMENT_ID;
@@ -1881,7 +1881,7 @@ void Data::__loadImages()
 //    material_data.col_num = 3;
 //    material_data.row_num = 1;
 //    material_data.fps = 3.0f;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SCANER_EQUIPMENT_ID;
@@ -1899,7 +1899,7 @@ void Data::__loadImages()
 //    material_data.col_num = 3;
 //    material_data.row_num = 1;
 //    material_data.fps = 3.0f;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::SCANER_EQUIPMENT_ID;
@@ -1920,7 +1920,7 @@ void Data::__loadImages()
 //    material_data.col_num = 3;
 //    material_data.row_num = 1;
 //    material_data.fps = 3.0f;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::RADAR_EQUIPMENT_ID;
@@ -1939,7 +1939,7 @@ void Data::__loadImages()
 //    material_data.col_num = 3;
 //    material_data.row_num = 1;
 //    material_data.fps = 3.0f;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id        = type::TEXTURE::RADAR_EQUIPMENT_ID;
@@ -1956,7 +1956,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"item/module.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id = type::TEXTURE::MODULE_ID;
@@ -1972,7 +1972,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/ss_mark_war.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().starsystem_mark_war = textureOb;
 //}
@@ -1981,7 +1981,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/ss_mark_captured.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().starsystem_mark_captured = textureOb;
 //}
@@ -1990,7 +1990,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/mark_player_ss.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().starsystem_mark_player = textureOb;
 //}
@@ -1999,7 +1999,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"icon/minus.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().icon_minus = textureOb;
 //}
@@ -2008,7 +2008,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"icon/plus.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().icon_plus = textureOb;
 //}
@@ -2017,7 +2017,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/skill.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().skill = textureOb;
 //}
@@ -2026,7 +2026,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/skill_transparent.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().skill_transparent = textureOb;
 //}
@@ -2035,7 +2035,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"icon/starsystem_ICON.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().icon_map = textureOb;
 //}
@@ -2044,7 +2044,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"effect/grapple_jet.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().grapple_trail = textureOb;
 //}
@@ -2053,7 +2053,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_blue.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().dot_blue = textureOb;
 //}
@@ -2062,7 +2062,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_green.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().dot_green = textureOb;
 //}
@@ -2071,7 +2071,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_red.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().dot_red = textureOb;
 //}
@@ -2080,7 +2080,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_black.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().dot_black = textureOb;
 //}
@@ -2089,7 +2089,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_yellow.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
   
 //    GuiTextureObCollector::Instance().dot_yellow = textureOb;
 //}
@@ -2098,7 +2098,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/dot_purple.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().dot_purple = textureOb;
 //}
@@ -2108,7 +2108,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/radar_screenrect.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().radar_screenrect = textureOb;
 //}
@@ -2117,7 +2117,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/radar_range.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().radar_range = textureOb;
 //}
@@ -2126,7 +2126,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/radar_background.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().radar_background = textureOb;
 //}
@@ -2135,7 +2135,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/radar_bar.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().radar_bar = textureOb;
 //}
@@ -2144,7 +2144,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/bar_bottom.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().bar_bottom = textureOb;
 //}
@@ -2153,7 +2153,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/bar_left.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().bar_left = textureOb;
 //}
@@ -2162,7 +2162,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/bar_top.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().bar_top = textureOb;
 //}
@@ -2171,7 +2171,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/text_background.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
   
 //    GuiTextureObCollector::Instance().text_background = textureOb;
 //}
@@ -2180,7 +2180,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/slot_mark_accept.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().slot_mark_accept = textureOb;
 //}
@@ -2189,7 +2189,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/mask_round.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().mask_round = textureOb;
 //}
@@ -2198,7 +2198,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"other/slot_mark_reject.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
  
 //    GuiTextureObCollector::Instance().slot_mark_reject = textureOb;
 //}
@@ -2207,7 +2207,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/mark_target.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
   
 //    GuiTextureObCollector::Instance().mark_target = textureOb;
 //}
@@ -2216,7 +2216,7 @@ void Data::__loadImages()
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"gui/mark_target_slot.png";
 //    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::control::TextureOb* textureOb = new jeti::control::TextureOb(material_data);
 
 //    GuiTextureObCollector::Instance().mark_target_slot = textureOb;
 //}

@@ -23,7 +23,7 @@
 //class SatelliteDrawable : public VehicleDrawable
 //{
 //    public:
-//        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
+//        SatelliteDrawable(jeti::control::TextureOb*, jeti::Mesh*);
 //        virtual ~SatelliteDrawable() override final;
             
 //        //virtual void UpdateInSpace(int, bool) override final;

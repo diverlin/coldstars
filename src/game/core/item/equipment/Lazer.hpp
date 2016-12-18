@@ -57,8 +57,8 @@ class Lazer : public Base
         int m_radius_add;
         int m_radius;
 
-        //              jeti::TextureOb* texOb_turrel;
-        //              jeti::TextureOb* texOb_lazerEffect;
+        //              jeti::control::TextureOb* texOb_turrel;
+        //              jeti::control::TextureOb* texOb_lazerEffect;
 
         void virtual addUniqueInfo();
         std::string GetDamageStr();

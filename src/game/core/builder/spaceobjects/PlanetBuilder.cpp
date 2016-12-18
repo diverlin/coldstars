@@ -60,7 +60,7 @@ Planet::getNew(const descriptor::Planet& descr)
     model::Planet* model = __createTemplate();
 
     model->setMesh(descr.mesh());
-    //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+    //jeti::control::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
     /// Planetoid
     model->setRadiusA(descr.radiusA());
@@ -87,7 +87,7 @@ Planet::getNew(const descriptor::Planet& descr)
 
     //if (getRandBool())
     {
-        //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
+        //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
         //Atmosphere* atmosphere = new Atmosphere();
         //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         //alpitodorender planet->AddDecoration(atmosphere);

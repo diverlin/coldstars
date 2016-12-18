@@ -18,7 +18,7 @@
 
 //#include "ShipDrawable.hpp"
 
-//ShipDrawable::ShipDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//ShipDrawable::ShipDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      VehicleDrawable(texture, mesh)
 //{}

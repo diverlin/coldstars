@@ -29,19 +29,23 @@ class Player;
 
 namespace jeti {
 class AnimationEffect2D;
+
+namespace control {
 class TextureOb;
+} // namespace control
+
 class Renderer;
 }
           
 class BaseGuiElement
 {
     public:
-        BaseGuiElement(type::GUI type_id=type::GUI::NONE_ID, type::GUI subtype_id=type::GUI::NONE_ID, const std::string& info="", jeti::TextureOb* textureOb=nullptr);
+        BaseGuiElement(type::GUI type_id=type::GUI::NONE_ID, type::GUI subtype_id=type::GUI::NONE_ID, const std::string& info="", jeti::control::TextureOb* textureOb=nullptr);
         virtual ~BaseGuiElement();
         
         void SetLabel(const std::string& label) { m_Label = label; }
         
-        void SetTextureOb(jeti::TextureOb* textureOb) { m_TextureOb = textureOb; }
+        void SetTextureOb(jeti::control::TextureOb* textureOb) { m_TextureOb = textureOb; }
         
         void setSize(glm::vec2 size) { m_Box.setSize(size); }
             
@@ -51,7 +55,7 @@ class BaseGuiElement
         const ceti::Box2D& GetBox() const { return m_Box; }
         ceti::Box2D& GetBox() { return m_Box; } // !!!
                 
-        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
+        const jeti::control::TextureOb& textureOb() const { return *m_TextureOb; }
                 
         bool GetLock() const { return m_Locked; }
         bool GetPressed() const { return m_Pressed; }
@@ -114,7 +118,7 @@ class BaseGuiElement
         type::GUI m_Type_id;
         type::GUI m_Subtype_id;
         
-        jeti::TextureOb* m_TextureOb;
+        jeti::control::TextureOb* m_TextureOb;
         
         std::string m_Info; 
         std::string m_Label; 

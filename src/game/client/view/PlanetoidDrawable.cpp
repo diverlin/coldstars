@@ -26,7 +26,7 @@
 //PlanetoidDrawable::PlanetoidDrawable()
 //{}
 
-//PlanetoidDrawable::PlanetoidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+//PlanetoidDrawable::PlanetoidDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :
 //      BaseDrawable(texture, mesh)
 //{}

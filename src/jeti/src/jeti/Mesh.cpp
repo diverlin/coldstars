@@ -28,6 +28,38 @@ Mesh::Mesh()
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
+    __genQuad();
+}
+
+Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
+    :
+      m_textureOb(nullptr),
+      m_originDirection(descriptor->orientation())
+{     
+    m_listId = glGenLists(1);
+    glGenVertexArrays(1, &m_vaoId);
+    glGenBuffers(1, &m_vboId);
+
+    if (!descriptor->modelPath().empty()) {
+        m_id = descriptor->id();
+        ObjLoader objLoader(descriptor->modelPath());
+        fillVertices(objLoader);
+        m_boundaryBox = objLoader.__boundaryBox();
+    } else {
+        __genQuad();
+    }
+
+    __validate();
+}
+
+Mesh::~Mesh()
+{
+    glDeleteVertexArrays(1, &m_vaoId);
+    glDeleteVertexArrays(1, &m_vboId);
+}
+
+void Mesh::__genQuad()
+{
     std::stringstream ss;
     ss << "v 0.5 0.0 -0.5 \n"
        << "v -0.5 0.0 -0.5 \n"
@@ -52,27 +84,6 @@ Mesh::Mesh()
     fillVertices(objLoader);
 
     m_isFlat = true;
-}
-
-Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
-    :
-      m_textureOb(nullptr),
-      m_originDirection(descriptor->orientation())
-{     
-    m_listId = glGenLists(1);
-    glGenVertexArrays(1, &m_vaoId);
-    glGenBuffers(1, &m_vboId);
-
-    m_id = descriptor->id();
-    ObjLoader objLoader(descriptor->modelPath());
-    fillVertices(objLoader);
-    m_boundaryBox = objLoader.__boundaryBox();
-}
-
-Mesh::~Mesh()
-{
-    glDeleteVertexArrays(1, &m_vaoId);
-    glDeleteVertexArrays(1, &m_vboId);
 }
 
 void Mesh::fillVertices(const ObjLoader& objLoader)

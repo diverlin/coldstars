@@ -24,7 +24,7 @@
 #include <jeti/Screen.hpp>
 
 
-BaseButton::BaseButton(type::GUI type_id, type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
+BaseButton::BaseButton(type::GUI type_id, type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::TextureOb* textureOb)
 :
 BaseGuiElement(type_id, subtype_id, info, textureOb),
 m_Alpha(1.0f),

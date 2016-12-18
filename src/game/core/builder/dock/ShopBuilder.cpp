@@ -50,7 +50,7 @@ Shop* ShopBuilder::create() const
 
 void ShopBuilder::createInternals(Shop* shop) const
 {    
-    //jeti::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND_ID);
+    //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND_ID);
     //shop->SetTextureObBackground(textureOb_background);
 }
 

@@ -27,7 +27,11 @@
 namespace jeti {
 
 class Particle;
+
+namespace control {
 class TextureOb;
+}
+
 class Mesh;
 
 class BaseParticleSystem 
@@ -38,7 +42,7 @@ class BaseParticleSystem
         
         void ValidateResources() const;
         void SetDying() { m_IsDying = true; }
-        void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
+        void SetTextureOb(control::TextureOb* textureOb) { m_TextureOb = textureOb; }
         //void setParent(SpaceObject* parent) { m_Parent = parent; }
         void setCenter(const glm::vec3& center) { m_Center = center; }
         void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
@@ -48,7 +52,7 @@ class BaseParticleSystem
         bool isAlive() const { return m_IsAlive; }
         const glm::vec3& center() const { return m_Center; }
         const Mesh& mesh() const { return *m_Mesh; }
-        const TextureOb& textureOb() const { return *m_TextureOb; }
+        const control::TextureOb& textureOb() const { return *m_TextureOb; }
 
         unsigned int GetParticlesNum() const { return m_ParticlesNum; }
 
@@ -60,7 +64,7 @@ class BaseParticleSystem
         int m_TypeId;
         unsigned int m_ParticlesNum;
         
-        TextureOb* m_TextureOb;
+        control::TextureOb* m_TextureOb;
         Mesh* m_Mesh;
         ParticleData m_DataParticle;
 

@@ -49,10 +49,10 @@ class GuiRadar : public BaseGuiElement
     private:
         float scale;
         
-        jeti::TextureOb* textureOb_background;
-        jeti::TextureOb* textureOb_bar;
-        jeti::TextureOb* textureOb_screenrect;
-        jeti::TextureOb* textureOb_range;
+        jeti::control::TextureOb* textureOb_background;
+        jeti::control::TextureOb* textureOb_bar;
+        jeti::control::TextureOb* textureOb_screenrect;
+        jeti::control::TextureOb* textureOb_range;
                 
         ceti::Rect rect;
         ceti::Rect screenrect;

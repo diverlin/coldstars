@@ -80,6 +80,7 @@ private:
     void __drawVbo() const;
     void __drawVbo(GLenum) const;
     void __validate() const;
+    void __genQuad();
 };
 
 } // namespace jeti

@@ -33,7 +33,10 @@
 namespace  jeti {
 
 class Mesh;
+
+namespace control {
 class TextureOb;
+} // namespace control
 
 const int FBO_NUM = 6;
 
@@ -69,13 +72,13 @@ public:
 
     void composeViewMatrix(const glm::mat4&);
 
-    void drawMesh                (const Mesh&, const TextureOb&, const glm::mat4&) const;
-    void drawMeshLight           (const Mesh&, const TextureOb&, const glm::mat4&) const;
-    void drawMeshLightNormalMap  (const Mesh&, const TextureOb&, const glm::mat4&) const;
-    void drawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+    void drawMesh                (const Mesh&, const control::TextureOb&, const glm::mat4&) const;
+    void drawMeshLight           (const Mesh&, const control::TextureOb&, const glm::mat4&) const;
+    void drawMeshLightNormalMap  (const Mesh&, const control::TextureOb&, const glm::mat4&) const;
+    void drawMeshMultiTextured   (const Mesh&, const control::TextureOb&, const glm::mat4&) const;
 
-    void drawQuad(const TextureOb&, const glm::mat4&) const;
-    void drawQuad(const TextureOb&, const ceti::Box2D&) const;
+    void drawQuad(const control::TextureOb&, const glm::mat4&) const;
+    void drawQuad(const control::TextureOb&, const ceti::Box2D&) const;
 
     void drawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
     void drawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
@@ -86,7 +89,7 @@ public:
     void drawPostEffectBlur(GLuint, int, int) const;
     void drawScreenQuadTextured(GLuint, int, int) const;
 
-    void drawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
+    void drawParticles(const Mesh&, const control::TextureOb&, const glm::mat4&) const;
 
     void drawAxis(const glm::mat4&, float) const;
     void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;

@@ -16,19 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIBAR_HPP
-#define GUIBAR_HPP
+#pragma once
 
 #include "BaseGuiElement.hpp"
 
 class GuiBar : public BaseGuiElement
 {
-    public:
-        GuiBar(jeti::TextureOb*);
-        ~GuiBar();
-        
-    private:
+public:
+    GuiBar(jeti::control::TextureOb*);
+    ~GuiBar();
+
+private:
 
 };
 
-#endif
+

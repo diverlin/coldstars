@@ -77,7 +77,7 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
 {
     assert(descr.type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
-    //jeti::TextureOb* texOb = nullptr;
+    //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;
     if (true) {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);

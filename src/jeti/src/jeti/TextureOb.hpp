@@ -29,6 +29,8 @@
 
 namespace jeti {
 
+namespace control {
+
 class TextureOb
 {
 public:
@@ -66,5 +68,7 @@ private:
     void __createTextureCoords(int _rows_num, int _columns_num, int _fps);
     void __addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
 };
+
+} // namespace control
 
 } // namespace jeti

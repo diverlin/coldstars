@@ -50,7 +50,7 @@ Satellite* SatelliteBuilder::create() const
 void SatelliteBuilder::createInternals(Satellite* satellite) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
 
     int protection_rate = 1;
     //if (subtype_id == ENTITY::WARRIOR_ID)

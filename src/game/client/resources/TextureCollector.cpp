@@ -41,12 +41,12 @@ TextureCollector::~TextureCollector()
     }
 }
 
-void TextureCollector::setTextureBlank(jeti::TextureOb* texture)
+void TextureCollector::setTextureBlank(jeti::control::TextureOb* texture)
 {
     m_textureBlank = texture;
 }
 
-void TextureCollector::add(jeti::TextureOb* texture, const TextureDescriptor& descriptor)
+void TextureCollector::add(jeti::control::TextureOb* texture, const TextureDescriptor& descriptor)
 {
     if (!isExist(texture)) {
         m_idsTextures.insert(std::make_pair(texture->id(), std::make_pair(descriptor, texture)));
@@ -56,7 +56,7 @@ void TextureCollector::add(jeti::TextureOb* texture, const TextureDescriptor& de
     }
 }
 
-bool TextureCollector::isExist(jeti::TextureOb* texture) const
+bool TextureCollector::isExist(jeti::control::TextureOb* texture) const
 {
     auto it = m_idsTextures.find(texture->id());
     if (it != m_idsTextures.end()) {
@@ -66,9 +66,9 @@ bool TextureCollector::isExist(jeti::TextureOb* texture) const
     }
 }
 
-jeti::TextureOb* TextureCollector::get(int id)
+jeti::control::TextureOb* TextureCollector::get(int id)
 {
-    jeti::TextureOb* requested = nullptr;
+    jeti::control::TextureOb* requested = nullptr;
     if (hasId(id)) {
         requested = m_idsTextures[id].second;
     }
@@ -77,9 +77,9 @@ jeti::TextureOb* TextureCollector::get(int id)
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByTypeId(type::texture type_id)
+jeti::control::TextureOb* TextureCollector::getTextureByTypeId(type::texture type_id)
 {
-    jeti::TextureOb* requested = nullptr;
+    jeti::control::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
         requested = meti::getRand(m_typesTextures[type_id]).second;
     }
@@ -88,12 +88,12 @@ jeti::TextureOb* TextureCollector::getTextureByTypeId(type::texture type_id)
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByColorId(type::texture type_id, int color_id)
+jeti::control::TextureOb* TextureCollector::getTextureByColorId(type::texture type_id, int color_id)
 {
-    jeti::TextureOb* requested = nullptr;
+    jeti::control::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
-        const std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>& vec = m_typesTextures[type_id];
-        for(std::pair<TextureDescriptor, jeti::TextureOb*> pair: vec) {
+        const std::vector<std::pair<TextureDescriptor, jeti::control::TextureOb*>>& vec = m_typesTextures[type_id];
+        for(std::pair<TextureDescriptor, jeti::control::TextureOb*> pair: vec) {
             if (pair.second->model().color_id == color_id) {
                 requested = pair.second;
             }
@@ -104,12 +104,12 @@ jeti::TextureOb* TextureCollector::getTextureByColorId(type::texture type_id, in
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByRaceId(type::texture type_id, type::race race_id)
+jeti::control::TextureOb* TextureCollector::getTextureByRaceId(type::texture type_id, type::race race_id)
 {
-    jeti::TextureOb* requested = nullptr;
+    jeti::control::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
-        const std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>& vec = m_typesTextures[type_id];
-        for(std::pair<TextureDescriptor, jeti::TextureOb*> pair: vec) {
+        const std::vector<std::pair<TextureDescriptor, jeti::control::TextureOb*>>& vec = m_typesTextures[type_id];
+        for(std::pair<TextureDescriptor, jeti::control::TextureOb*> pair: vec) {
             if (pair.first.race_id == race_id) {
                 requested = pair.second;
                 break;
@@ -121,11 +121,11 @@ jeti::TextureOb* TextureCollector::getTextureByRaceId(type::texture type_id, typ
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescriptor& descriptor)
+jeti::control::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescriptor& descriptor)
 {
-    jeti::TextureOb* requested = nullptr;
+    jeti::control::TextureOb* requested = nullptr;
     std::vector<int> ids;
-    std::map<int, std::pair<TextureDescriptor, jeti::TextureOb*>>::const_iterator it = m_idsTextures.begin();
+    std::map<int, std::pair<TextureDescriptor, jeti::control::TextureOb*>>::const_iterator it = m_idsTextures.begin();
     for (; it != m_idsTextures.end(); ++it) {
         if (it->second.first == descriptor) {
             ids.push_back(it->first);
@@ -141,7 +141,7 @@ jeti::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescripto
     return requested;
 }
 
-void TextureCollector::_validate(jeti::TextureOb* requested)
+void TextureCollector::_validate(jeti::control::TextureOb* requested)
 {
     if (!requested) {
         requested = m_textureBlank;
@@ -168,9 +168,9 @@ bool TextureCollector::hasTypeId(type::texture type_id) const
     }
 }
 
-jeti::TextureOb* TextureCollector::_getTextureByClosestSizeId(const std::vector<jeti::TextureOb*>& textures, int size_id)
+jeti::control::TextureOb* TextureCollector::_getTextureByClosestSizeId(const std::vector<jeti::control::TextureOb*>& textures, int size_id)
 {  
-    jeti::TextureOb* requested = _tryGetTextureBySizeId(textures, size_id);
+    jeti::control::TextureOb* requested = _tryGetTextureBySizeId(textures, size_id);
     int sign = 1;
     int i = 1;
 
@@ -186,16 +186,16 @@ jeti::TextureOb* TextureCollector::_getTextureByClosestSizeId(const std::vector<
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::_getTextureBySizeId(const std::vector<jeti::TextureOb*>& textures, int size_id)
+jeti::control::TextureOb* TextureCollector::_getTextureBySizeId(const std::vector<jeti::control::TextureOb*>& textures, int size_id)
 {
-    jeti::TextureOb* requested = _tryGetTextureBySizeId(textures, size_id);
+    jeti::control::TextureOb* requested = _tryGetTextureBySizeId(textures, size_id);
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::_tryGetTextureBySizeId(const std::vector<jeti::TextureOb*>& textures, int size_id)
+jeti::control::TextureOb* TextureCollector::_tryGetTextureBySizeId(const std::vector<jeti::control::TextureOb*>& textures, int size_id)
 {
-    jeti::TextureOb* requested = nullptr;
-    for (jeti::TextureOb* texture: textures) {
+    jeti::control::TextureOb* requested = nullptr;
+    for (jeti::control::TextureOb* texture: textures) {
         if (texture->model().size_id == size_id) {
             requested = texture;
             break;

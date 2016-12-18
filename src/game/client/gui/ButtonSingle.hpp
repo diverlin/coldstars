@@ -16,26 +16,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONSINGLE_HPP
-#define BUTTONSINGLE_HPP
+#pragma once
 
 #include "BaseButton.hpp"
 
 class ButtonSingle : public BaseButton
 {
-    public:
-        ButtonSingle(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
+public:
+    ButtonSingle(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::control::TextureOb* textureOb)
         :
-        BaseButton(type::GUI::BUTTON_SINGLE_ID, subtype_id, info, pAction, textureOb)
-        {}
-               
-        virtual ~ButtonSingle() {}  
+          BaseButton(type::GUI::BUTTON_SINGLE_ID, subtype_id, info, pAction, textureOb)
+    {}
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void UpdateUnique(Player*) override final;
-        
-    private:
+    virtual ~ButtonSingle() {}
+
+    virtual void OnPressEventMBL(Player*) override final;
+    virtual void UpdateUnique(Player*) override final;
+
+private:
 
 };
 
-#endif
