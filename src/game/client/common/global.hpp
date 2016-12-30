@@ -19,6 +19,8 @@
 
 #pragma once
 
+class UserInputInSpace;
+
 namespace jeti {
 class Screen;
 class Renderer;
@@ -38,6 +40,8 @@ public:
     jeti::Renderer& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
 
+    UserInputInSpace& inputsManager() { return *m_inputsManager; }
+
 private:
     global();
     global(const global&) = delete;
@@ -47,6 +51,8 @@ private:
     jeti::Screen* m_screen = nullptr;
     jeti::Renderer* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
+
+    UserInputInSpace* m_inputsManager = nullptr;
 };
 
 } // namespace client

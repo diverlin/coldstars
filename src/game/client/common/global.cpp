@@ -17,9 +17,14 @@
 */
 
 #include "global.hpp"
+
+#include <resources/Data.hpp>
+
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
+
+#include <client/gui/UserInputManagerInSpace.hpp>
 
 namespace client
 {
@@ -35,6 +40,7 @@ global::global()
       m_screen(new jeti::Screen)
     , m_render(new jeti::Renderer)
     , m_camera(new jeti::Camera)
+    , m_inputsManager(new UserInputInSpace)
 {
 }
 
@@ -43,12 +49,15 @@ global::~global()
     delete m_screen;
     delete m_render;
     delete m_camera;
+    delete m_inputsManager;
 }
 
 void
 global::init() {
     m_screen->init();
     m_render->init(m_camera, m_screen->width(), m_screen->height());
+
+    Data data;
 }
 
 } // namespace client
