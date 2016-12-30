@@ -75,7 +75,7 @@ TEST(descriptor,accessors)
 
 TEST(base,hit)
 {
-    MessageManager& messageManager = global::get().messageManager();
+    MessageManager& messageManager =core::global::get().messageManager();
 
     Ship* ship1 = ShipBuilder::getNew();
     Ship* ship2 = ShipBuilder::getNew();
@@ -91,7 +91,7 @@ TEST(base,hit)
 
 TEST(base,critical_hit)
 {
-    MessageManager& messageManager = global::get().messageManager();
+    MessageManager& messageManager =core::global::get().messageManager();
 
     Ship* ship1 = ShipBuilder::getNew();
     Ship* ship2 = ShipBuilder::getNew();
@@ -105,7 +105,7 @@ TEST(base,critical_hit)
 
 TEST(base,bomb)
 {
-//    MessageManager& messageManager = global::get().messageManager();
+//    MessageManager& messageManager =core::global::get().messageManager();
 
 //    Starsystem* starsystem = StarsystemBuilder::getNew();
 //    Ship* ship = ShipBuilder::getNew();
@@ -134,7 +134,7 @@ TEST(base,bomb)
 TEST(descriptor,manager)
 {
     // TODO fix fail
-//    DescriptorManager& descriptor_manager = global::get().descriptorManager();
+//    DescriptorManager& descriptor_manager =core::global::get().descriptorManager();
 //    descriptor::Hit descriptor_hit(1, 2, 3);
 //    descriptor::Base descriptor_starsystem = generateStarSystemDescriptor();
 //    descriptor::Base descriptor_bak = generateBakDescriptor();
@@ -151,25 +151,25 @@ TEST(descriptor,manager)
 
 TEST(clone, galaxy)
 {
-    const auto& descriptor = global::get().descriptors().galaxy().random();
-    auto g1 = global::get().galaxyBuilder().create(descriptor);
-    auto g2 = global::get().galaxyBuilder().create(descriptor);
+    const auto& descriptor =core::global::get().descriptors().galaxy().random();
+    auto g1 =core::global::get().galaxyBuilder().create(descriptor);
+    auto g2 =core::global::get().galaxyBuilder().create(descriptor);
     EXPECT_EQ(*g1, *g2);
 }
 
 TEST(clone, sector)
 {
-    const auto& descriptor = global::get().descriptors().sector().random();
-    auto s1 = global::get().sectorBuilder().create(descriptor);
-    auto s2 = global::get().sectorBuilder().create(descriptor);
+    const auto& descriptor =core::global::get().descriptors().sector().random();
+    auto s1 =core::global::get().sectorBuilder().create(descriptor);
+    auto s2 =core::global::get().sectorBuilder().create(descriptor);
     EXPECT_EQ(*s1, *s2);
 }
 
 TEST(clone, starsystem)
 {
-    const auto& descriptor = global::get().descriptors().starsystem().random();
-    auto s1 = global::get().starsystemBuilder().create(descriptor);
-    auto s2 = global::get().starsystemBuilder().create(descriptor);
+    const auto& descriptor =core::global::get().descriptors().starsystem().random();
+    auto s1 =core::global::get().starsystemBuilder().create(descriptor);
+    auto s2 =core::global::get().starsystemBuilder().create(descriptor);
     EXPECT_EQ(*s1, *s2);
 }
 

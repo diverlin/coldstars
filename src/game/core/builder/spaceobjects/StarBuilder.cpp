@@ -38,14 +38,14 @@ Star::__getNewTemplate(int_t id)
     model->setId(id);
 
     assert(model);
-    global::get().entityManager().reg(model);
+   core::global::get().entityManager().reg(model);
     return model;
 } 
  
 model::Star*
 Star::getNew()
 {
-    const auto& descr = global::get().descriptors().star().random();
+    const auto& descr =core::global::get().descriptors().star().random();
     return getNew(descr);
 } 
 

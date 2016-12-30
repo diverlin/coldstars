@@ -42,7 +42,7 @@ ContainerBuilder::~ContainerBuilder()
 Container*
 ContainerBuilder::getNew()
 {
-    const auto& descriptor = global::get().descriptors().getRand(descriptor::Type::CONTAINER);
+    const auto& descriptor =core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
     return getNew(descriptor);
 }
 
@@ -65,7 +65,7 @@ ContainerBuilder::__getNewTemplate()
 {
     Container* container = new Container;
     assert(container);
-    global::get().entityManager().reg(container);
+   core::global::get().entityManager().reg(container);
     return container;
 }
 
@@ -155,7 +155,7 @@ ContainerBuilder::__createInternals(Container* container, const descriptor::Base
     container->bindItemSlot(item_slot);
 
 //    if (descriptor.child() >= 0) {
-//        item::Base* item = static_cast<item::Base*>(global::get().entityManager().get(descriptor.child()));
+//        item::Base* item = static_cast<item::Base*>(core::global::get().entityManager().get(descriptor.child()));
 //        item_slot->insertItem(item);
 //    }
 }

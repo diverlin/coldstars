@@ -38,7 +38,7 @@ SpaceStation* SpaceStationBuilder::createTemplate(int_t id) const
     SpaceStation* spacestation = new SpaceStation(id);
     assert(spacestation);
 
-    global::get().entityManager().reg(spacestation);
+   core::global::get().entityManager().reg(spacestation);
     
     return spacestation;
 }
@@ -130,5 +130,5 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     
     _createSlots(spacestation);
                 
-    spacestation->BindLand(global::get().kosmoportBuilder().create());
+    spacestation->BindLand(core::global::get().kosmoportBuilder().create());
 }

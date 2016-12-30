@@ -34,7 +34,7 @@ model::Asteroid* Asteroid::__createTemplate(int_t id)
     model->setId(id);
     assert(model);
 
-    global::get().entityManager().reg(model);
+   core::global::get().entityManager().reg(model);
     
     return model;
 } 

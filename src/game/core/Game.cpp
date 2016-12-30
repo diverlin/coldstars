@@ -31,8 +31,8 @@ namespace model {
 
 World::World()
 {
-    auto descriptor = global::get().descriptors().galaxy().random();
-    global::get().god().createWorld(descriptor);
+    auto descriptor =core::global::get().descriptors().galaxy().random();
+   core::global::get().god().createWorld(descriptor);
 }
 
 World::~World()
@@ -40,7 +40,7 @@ World::~World()
 }
 
 Starsystem* World::activeStarsystem() const {
-    return global::get().god().galaxy()->activeStarsystem();
+    return core::global::get().god().galaxy()->activeStarsystem();
 }
 
 bool World::operator==(const World& rhs) const {
@@ -51,14 +51,14 @@ bool World::operator==(const World& rhs) const {
 bool World::run() const
 {
     while (m_isRunning) {
-        global::get().god().update();
+       core::global::get().god().update();
     }
     return EXIT_SUCCESS;
 }
 
 void World::update()
 {
-    global::get().god().update();
+   core::global::get().god().update();
 }
 
 } // namespace model

@@ -112,13 +112,13 @@ Starsystem::star() const
 /* virtual */
 void Starsystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)        { global::get().entityManager().addToGarbage(m_stars[i]->model()); }
-    for(unsigned int i=0; i<m_planets.size(); i++)    { global::get().entityManager().addToGarbage(m_planets[i]->model()); }
-    for(unsigned int i=0; i<m_asteroids.size(); i++)  { global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
-    for(unsigned int i=0; i<m_containers.size(); i++) { global::get().entityManager().addToGarbage(m_containers[i]); }
-    for(unsigned int i=0; i<m_bullets.size(); i++)    { global::get().entityManager().addToGarbage(m_bullets[i]); }
-    for(unsigned int i=0; i<m_blackholes.size(); i++) { global::get().entityManager().addToGarbage(m_blackholes[i]); }
-    for(unsigned int i=0; i<m_vehicles.size(); i++)   { global::get().entityManager().addToGarbage(m_vehicles[i]); }
+    for(unsigned int i=0; i<m_stars.size(); i++)        {core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
+    for(unsigned int i=0; i<m_planets.size(); i++)    {core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
+    for(unsigned int i=0; i<m_asteroids.size(); i++)  {core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
+    for(unsigned int i=0; i<m_containers.size(); i++) {core::global::get().entityManager().addToGarbage(m_containers[i]); }
+    for(unsigned int i=0; i<m_bullets.size(); i++)    {core::global::get().entityManager().addToGarbage(m_bullets[i]); }
+    for(unsigned int i=0; i<m_blackholes.size(); i++) {core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
+    for(unsigned int i=0; i<m_vehicles.size(); i++)   {core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
 }      
 
 Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
@@ -458,7 +458,7 @@ void Starsystem::__updateStates()
         m_asteroid_manager.Update(this);
     }
 
-    if (global::get().config().GetGameMode() == GAME_MODE::CRASH_TEST)
+    if (core::global::get().config().GetGameMode() == GAME_MODE::CRASH_TEST)
     {
         m_asteroid_manager.Update(this);
         __shipManager_s(50);
@@ -468,7 +468,7 @@ void Starsystem::__updateStates()
             glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-            add(global::get().blackHoleBuilder().create(), center3);
+            add(core::global::get().blackHoleBuilder().create(), center3);
         }
     }
     
@@ -484,12 +484,12 @@ void Starsystem::__updateStates()
     bool enemy_is_here    = false;
     bool friendly_is_here = false;
     
-    Vehicle* _vehicle_evil = randomVehicle(global::get().raceDescriptors().getRaces(type::KIND::EVIL));
+    Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
     if (_vehicle_evil) {
         enemy_is_here = true;
     }
 
-    Vehicle* _vehicle_good = randomVehicle(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+    Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     if (_vehicle_good) {
         friendly_is_here = true;
     }
@@ -880,7 +880,7 @@ void Starsystem::__shipManager_s(unsigned int num)
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
 
-        Npc* new_pnpc = global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
+        Npc* new_pnpc =core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
         Ship* new_pship = ShipBuilder::getNew();
         ShipBuilder::equip(new_pship);   // improove
 
@@ -909,35 +909,35 @@ void Starsystem::__manageDeadObjects_s()
 {      
     for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-            global::get().entityManager().addToGarbage(*it);
+           core::global::get().entityManager().addToGarbage(*it);
             it = m_vehicles.erase(it);
         }
     }
 
     for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-            global::get().entityManager().addToGarbage(*it);
+           core::global::get().entityManager().addToGarbage(*it);
             it = m_blackholes.erase(it);
         }
     }
 
 //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
 //        if ((*it)->isReadyForGarbage() == true) {
-//            global::get().entityManager().addToGarbage(*it);
+//           core::global::get().entityManager().addToGarbage(*it);
 //            it = m_asteroids.erase(it);
 //        }
 //    }
 
     for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-            global::get().entityManager().addToGarbage(*it);
+           core::global::get().entityManager().addToGarbage(*it);
             it = m_containers.erase(it);
         }
     }
 
     for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-            global::get().entityManager().addToGarbage(*it);
+           core::global::get().entityManager().addToGarbage(*it);
             it = m_bullets.erase(it);
         }
     }
@@ -1105,7 +1105,7 @@ void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Starsystem::ResolveData()
 {
-    //((Sector*)global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+    //((Sector*)core::global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
 }
 
 void Starsystem::Save(boost::property_tree::ptree& save_ptree) const

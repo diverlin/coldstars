@@ -156,12 +156,12 @@ void Npc::remeberAgressor(Vehicle* agressor)
     {
         if (it->npc_id == agressor->npc()->id())
         {
-            if (it->last_date != global::get().gameDate())
+            if (it->last_date != core::global::get().gameDate())
             {
                 int counter = it->counter;
                 m_agressorsData.erase(it);
                 
-                AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), ++counter);
+                AgressorData agressor_data(agressor->npc()->id(), core::global::get().gameDate(), ++counter);
                 m_agressorsData.insert(agressor_data);
             }
 
@@ -169,7 +169,7 @@ void Npc::remeberAgressor(Vehicle* agressor)
         }
     }
 
-    AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), 1);
+    AgressorData agressor_data(agressor->npc()->id(), core::global::get().gameDate(), 1);
     m_agressorsData.insert(agressor_data);
 }
 
@@ -355,7 +355,7 @@ void Npc::ResolveData()
 {
     applySkillsStrategy();
     
-    ((Vehicle*)global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
+    ((Vehicle*)core::global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
     setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     m_skills.Resolve();

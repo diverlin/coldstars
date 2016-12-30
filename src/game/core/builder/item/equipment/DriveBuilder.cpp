@@ -42,14 +42,14 @@ Drive* DriveBuilder::createTemplate(int_t id) const
     Drive* drive = new Drive(id);
     assert(drive);
 
-    global::get().entityManager().reg(drive);
+   core::global::get().entityManager().reg(drive);
     
     return drive;
 } 
 
 Drive* DriveBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::DRIVE);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 

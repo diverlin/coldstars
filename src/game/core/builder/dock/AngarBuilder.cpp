@@ -38,7 +38,7 @@ Angar* AngarBuilder::createTemplate(int_t id) const
     Angar* angar = new Angar(id);
     assert(angar);
 
-    global::get().entityManager().reg(angar);
+   core::global::get().entityManager().reg(angar);
 
     return angar;
 } 

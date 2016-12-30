@@ -44,7 +44,7 @@ StarsystemBuilder::~StarsystemBuilder()
 
 Starsystem* StarsystemBuilder::create()
 {
-    const descriptor::Starsystem& descriptor = global::get().descriptors().starsystem().random();
+    const descriptor::Starsystem& descriptor =core::global::get().descriptors().starsystem().random();
     return create(descriptor);
 }
 
@@ -52,7 +52,7 @@ Starsystem* StarsystemBuilder::create(const descriptor::Starsystem& descriptor)
 {
     Starsystem* starsystem = new Starsystem;
     assert(starsystem);
-    global::get().entityManager().reg(starsystem);
+   core::global::get().entityManager().reg(starsystem);
     __createInternals(starsystem, descriptor);
     return starsystem;
 } 

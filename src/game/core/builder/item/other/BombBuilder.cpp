@@ -40,7 +40,7 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::getNew()
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::BOMB);
     return getNew(descriptor);
 }
 
@@ -48,7 +48,7 @@ Bomb* BombBuilder::getNew(const descriptor::BaseOLD& descriptor)
 {
     Bomb* bomb = new Bomb;
     assert(bomb);
-    global::get().entityManager().reg(bomb);
+   core::global::get().entityManager().reg(bomb);
 
     __createInternals(bomb, descriptor);
 

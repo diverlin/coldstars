@@ -50,7 +50,7 @@ void Base::putChildrenToGarbage() const
 {
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
-        global::get().entityManager().addToGarbage(modules_vec[i]);
+       core::global::get().entityManager().addToGarbage(modules_vec[i]);
     }
 #endif
 }

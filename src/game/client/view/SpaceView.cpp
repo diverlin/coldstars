@@ -183,7 +183,7 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
 {
     assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-        //const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
+        //const descriptor::Star& descriptor =core::global::get().descriptors().star().get(star->descriptorId());
         //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
@@ -345,7 +345,7 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     if (it != m_meshCollector.end()) {
         mesh = it->second;
     } else {
-        auto& collector = global::get().descriptors().mesh();
+        auto& collector =core::global::get().descriptors().mesh();
         ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
         if (descriptor) {
             mesh = new jeti::Mesh(descriptor);
@@ -365,7 +365,7 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     if (it != m_materialCollector.end()) {
         material = it->second;
     } else {
-        auto& collector = global::get().descriptors().material();
+        auto& collector =core::global::get().descriptors().material();
         ceti::descriptor::Material* descriptor = collector.get(descritprorId);
         if (descriptor) {
             jeti::model::Material* model = new jeti::model::Material(descriptor);

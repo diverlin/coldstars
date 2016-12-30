@@ -84,6 +84,8 @@
 #include <builder/world/SectorBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
 
+namespace core {
+
 global& global::get()
 {
     static global instance;
@@ -229,3 +231,5 @@ global::~global()
     delete m_sectorBuilder;
     delete m_starsystemBuilder;
 }
+
+} // namespace core

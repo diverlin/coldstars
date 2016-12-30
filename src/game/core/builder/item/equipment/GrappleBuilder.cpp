@@ -42,14 +42,14 @@ Grapple* GrappleBuilder::createTemplate(int_t id) const
     Grapple* grapple = new Grapple(id);
     assert(grapple);
 
-    global::get().entityManager().reg(grapple);
+   core::global::get().entityManager().reg(grapple);
     
     return grapple;
 } 
 
 Grapple* GrappleBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
     Grapple* grapple = createTemplate();
     createInternals(grapple, descriptor);
 

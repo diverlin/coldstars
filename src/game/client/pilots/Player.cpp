@@ -968,8 +968,8 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 
 //void Player::ResolveData()
 //{
-//    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
-//    starsystem = (Starsystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
+//    BindNpc((Npc*)core::global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
+//    starsystem = (Starsystem*)core::global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
 //    //client::global::get().screen().SetBottomLeft(data_unresolved_player.screen_pos);
 //}
 

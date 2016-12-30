@@ -67,7 +67,7 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
         {
             if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
             {           
-                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
                 if (target_vehicle != nullptr) {
                     Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
                     npc->stateMachine().setCurrentMicroTask(microtask);

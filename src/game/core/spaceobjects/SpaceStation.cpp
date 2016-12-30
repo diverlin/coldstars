@@ -53,13 +53,12 @@ SpaceStation::~SpaceStation()
 /* virtual override final */
 void SpaceStation::putChildrenToGarbage() const 
 {
-    global::get().entityManager().addToGarbage(m_Land);
+    core::global::get().entityManager().addToGarbage(m_Land);
     npc()->setAlive(false);
-    global::get().entityManager().addToGarbage(npc());
+    core::global::get().entityManager().addToGarbage(npc());
     
-    for(unsigned int i=0; i<m_slots.size(); i++)
-    {
-        global::get().entityManager().addToGarbage(m_slots[i]);
+    for(unsigned int i=0; i<m_slots.size(); i++) {
+        core::global::get().entityManager().addToGarbage(m_slots[i]);
     }
 }
 

@@ -39,7 +39,7 @@ TEST(ship, drop_item_to_space)
     Ship* ship = ShipBuilder::getNew();
 
     /* equip ship */
-    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
+    item::equipment::Drive* drive =core::global::get().driveBuilder().getNew();
     ship->manage(drive);
 
     /* add ship */

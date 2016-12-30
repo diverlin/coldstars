@@ -42,7 +42,7 @@ VehicleSlot::~VehicleSlot()
 void VehicleSlot::putChildrenToGarbage() const
 {
     if (m_vehicle) {
-        global::get().entityManager().addToGarbage(m_vehicle);
+       core::global::get().entityManager().addToGarbage(m_vehicle);
     } 
 }
                       
@@ -118,8 +118,8 @@ void VehicleSlot::ResolveData()
 
     switch(owner()->type())
     {
-        //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-        //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+        //case ENTITY::VEHICLE_ID:     { ((Vehicle*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+        //case ENTITY::CONTAINER_ID:     { ((Container*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
         case type::entity::STORE_ID:           { ((Store*)owner())->addVehicleSlot(this); break; }
         case type::entity::ANGAR_ID:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
     }
