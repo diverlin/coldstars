@@ -21,6 +21,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include <slots/ItemSlot.hpp>
 #include <dock/Kosmoport.hpp>
+#include <common/global.hpp>
 
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>
@@ -51,8 +52,8 @@ GuiManager::GuiManager()
 player(nullptr),
 gui_vehicle_scan(nullptr)
 {   
-    int screen_w = jeti::Screen::get().width();
-    int screen_h = jeti::Screen::get().height();
+    int screen_w = client::global::get().screen().width();
+    int screen_h = client::global::get().screen().height();
     
     /* shared gui */
     {

@@ -19,6 +19,7 @@
 
 #include <gui/UserInput.hpp>
 
+#include <common/global.hpp>
 #include <jeti/Screen.hpp>
 #include <iostream>
 
@@ -33,9 +34,9 @@ void UserInput::update()
     m_keyboardPressedCodes.clear();
     m_mousePressedCodes.clear();
 
-    while(jeti::Screen::get().window().pollEvent(m_event)) {
+    while(client::global::get().screen().window().pollEvent(m_event)) {
         switch(m_event.type)  {
-        case sf::Event::Closed:             { jeti::Screen::get().window().close(); break; }
+        case sf::Event::Closed:             { client::global::get().screen().window().close(); break; }
         case sf::Event::KeyPressed: {
             m_keyboardPressedCodes.push_back(m_event.key.code);
             break;

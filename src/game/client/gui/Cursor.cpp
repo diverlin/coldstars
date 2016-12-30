@@ -19,6 +19,8 @@
 
 #include <gui/Cursor.hpp>
 
+#include <common/global.hpp>
+
 #include <ceti/Logger.hpp>
 
 #include <types/GuiTypes.hpp>
@@ -152,9 +154,9 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::get().window());
-    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::get().height() - mouse_pos.y);
-    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*jeti::Screen::get().scale() + jeti::Screen::get().bottomLeftScreenWC();
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
+    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
+    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*client::global::get().screen().scale() + client::global::get().screen().bottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
@@ -195,7 +197,7 @@ void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
             m_FocusedGuiElement->RenderInfo(render);
         }        
         if (m_FocusedSpaceObject) {
-            //m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::get().GetBottomLeftScreenWC(), jeti::Screen::get().GetScale());
+            //m_FocusedSpaceObject->RenderInfoInSpace(render, client::global::get().screen().GetBottomLeftScreenWC(), client::global::get().screen().GetScale());
         }
     }
     //render.disable_BLEND();  

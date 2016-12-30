@@ -37,6 +37,8 @@
 #include "gui/GuiActions.hpp"
 
 #include "common/TurnTimer.hpp"
+#include <common/global.hpp>
+
 
 #include "pilots/Npc.hpp"
 #include "pilots/Player.hpp"
@@ -88,7 +90,7 @@ int main()
     //runVectorPerfomanceTest();
     //runMatrixPerfomanceTest();
 
-    jeti::Screen::get().init();
+    client::global::get().screen().init();
     Data data;
 
         
@@ -147,7 +149,7 @@ int main()
     /** */
     
 //    // GAME LOOP
-//    while (jeti::Screen::get().GetWindow().isOpen())
+//    while (client::global::get().screen().GetWindow().isOpen())
 //    {
 //        //std::cout<<player->GetNpc()->vehicle()->center().x<<std::endl;
 //        //std::cout<<player->GetNpc()->vehicle()->properties().radar<<std::endl;
