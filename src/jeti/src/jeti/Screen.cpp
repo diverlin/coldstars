@@ -17,7 +17,7 @@
 */
 
 #include "Screen.hpp"
-#include <Render.hpp>
+#include <jeti/Camera.hpp>
 
 #include <jeti/Config.hpp>
 

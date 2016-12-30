@@ -24,10 +24,11 @@
 #include <client/common/global.hpp>
 
 #include <world/starsystem.hpp>
+
 #include <jeti/Screen.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
-
+#include <jeti/Camera.hpp>
 
 #include <spaceobjects/Star.hpp>
 #include <descriptors/Base.hpp>

@@ -22,7 +22,10 @@
 #include <client/common/global.hpp>
 #include <common/Global.hpp>
 #include <common/Config.hpp>
+
 #include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
+
 #include <parts/WeaponComplex.hpp>
 #include <pilots/Npc.hpp>
 #include <pilots/Player.hpp>

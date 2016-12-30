@@ -20,8 +20,10 @@
 #include "StarsystemRender.hpp"
 //#include <common/Config.hpp>
 
-#include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Camera.hpp>
+
 #include <world/starsystem.hpp>
 //#include <common/Global.hpp>
 //#include <managers/EntitiesManager.hpp>
