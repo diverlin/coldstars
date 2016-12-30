@@ -219,7 +219,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
+    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -525,13 +525,13 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
     float scale = jeti::Screen::get().scale();
-    if (center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - size.x*scale))
+    if (center.x < (jeti::Screen::get().bottomLeftScreenWC().x - size.x*scale))
         return false;
-    if (center.x > (jeti::Screen::get().GetTopRightScreenWC().x   + size.x*scale))
+    if (center.x > (jeti::Screen::get().topRightScreenWC().x   + size.x*scale))
         return false;
-    if (center.y < (jeti::Screen::get().GetBottomLeftScreenWC().y - size.y*scale))
+    if (center.y < (jeti::Screen::get().bottomLeftScreenWC().y - size.y*scale))
         return false;
-    if (center.y > (jeti::Screen::get().GetTopRightScreenWC().y   + size.y*scale))
+    if (center.y > (jeti::Screen::get().topRightScreenWC().y   + size.y*scale))
         return false;
     
     return true;
@@ -540,13 +540,13 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
     float scale = jeti::Screen::get().scale();
-    if (ob_center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - sizeInPixels*scale))
+    if (ob_center.x < (jeti::Screen::get().bottomLeftScreenWC().x - sizeInPixels*scale))
         return false;
-    if (ob_center.x > (jeti::Screen::get().GetTopRightScreenWC().x + sizeInPixels*scale))
+    if (ob_center.x > (jeti::Screen::get().topRightScreenWC().x + sizeInPixels*scale))
         return false;
-    if (ob_center.y < (jeti::Screen::get().GetBottomLeftScreenWC().y - sizeInPixels*scale))
+    if (ob_center.y < (jeti::Screen::get().bottomLeftScreenWC().y - sizeInPixels*scale))
         return false;
-    if (ob_center.y > (jeti::Screen::get().GetTopRightScreenWC().y + sizeInPixels*scale))
+    if (ob_center.y > (jeti::Screen::get().topRightScreenWC().y + sizeInPixels*scale))
         return false;
     
     return true;
@@ -554,13 +554,13 @@ bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 
 bool isPointOnScreen(const glm::vec2& p)
 {       
-    if (p.x < (jeti::Screen::get().GetBottomLeftScreenWC().x))
+    if (p.x < (jeti::Screen::get().bottomLeftScreenWC().x))
         return false;
-    if (p.x > (jeti::Screen::get().GetTopRightScreenWC().x))
+    if (p.x > (jeti::Screen::get().topRightScreenWC().x))
         return false;
-    if (p.y < (jeti::Screen::get().GetBottomLeftScreenWC().y))
+    if (p.y < (jeti::Screen::get().bottomLeftScreenWC().y))
         return false;
-    if (p.y > (jeti::Screen::get().GetTopRightScreenWC().y))
+    if (p.y > (jeti::Screen::get().topRightScreenWC().y))
         return false;
     
     return true;

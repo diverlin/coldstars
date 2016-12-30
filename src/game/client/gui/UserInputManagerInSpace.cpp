@@ -129,7 +129,7 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             { 
                 glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-                jeti::Screen::get().InitiateScrollTo(player_pos2);
+                jeti::Screen::get().initiateScrollTo(player_pos2);
                 break; 
             }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }
@@ -201,8 +201,8 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             
             case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::LOAD_ID); break; }
     
-            case sf::Keyboard::K: { jeti::Screen::get().IncreaseScale(); break; }
-            case sf::Keyboard::L: { jeti::Screen::get().DecreaseScale(); break; }
+            case sf::Keyboard::K: { jeti::Screen::get().increaseScale(); break; }
+            case sf::Keyboard::L: { jeti::Screen::get().decreaseScale(); break; }
         }   
     }
 }
@@ -277,22 +277,22 @@ void UserInputInSpace::__scrollCamera(Player* player)
     switch (m_cameraMoveAxisX)
     {
     case CAMERADIRECTION::LEFT:
-        camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+        camera.appendSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
         break;
     case CAMERADIRECTION::RIGHT:
-        camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+        camera.appendSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
         break;
     }
 
     switch(m_cameraMoveAxisY)
     {
     case CAMERADIRECTION::UP:
-        camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
+        camera.appendSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
         break;
     case CAMERADIRECTION::DOWN:
-        camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
+        camera.appendSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
         break;
     }
 
-    jeti::Screen::get().MovingBy(m_scrollAccel);
+    jeti::Screen::get().move(m_scrollAccel);
 }
