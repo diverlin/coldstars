@@ -90,7 +90,7 @@ int main()
     //runVectorPerfomanceTest();
     //runMatrixPerfomanceTest();
 
-    client::global::get().screen().init();
+    client::global::get().init();
     Data data;
 
         

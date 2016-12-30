@@ -54,10 +54,7 @@ void Screen::init()
     m_autoScroll = false;
     
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
-    
-    glewInit();
-    m_render.init(width, height);
-    
+
     m_rect.set(0.0, 0.0, width, height);
 }
 
