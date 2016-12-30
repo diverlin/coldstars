@@ -28,7 +28,7 @@ Camera::Camera()
 Camera::~Camera()
 {}
 
-void Camera::AddMoveSpeed(const glm::vec3& speed) 
+void Camera::appendSpeed(const glm::vec3& speed) 
 { 
     if (glm::length(m_moveSpeed) < m_speedMax) {
         m_moveSpeed += speed; 

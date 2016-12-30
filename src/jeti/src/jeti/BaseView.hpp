@@ -96,9 +96,9 @@ protected:
     bool _updateFadeInEffect(); // depr, move to animation program
     bool _updateFadeOutEffect(); // depr, move to animation program
 
-public:
-    static ceti::Collector<control::Material> s_materials;
-    static ceti::Collector<Mesh> s_meshes;
+//public:
+//    static ceti::Collector<control::Material> s_materials;
+//    static ceti::Collector<Mesh> s_meshes;
 
 private:
     ceti::model::BaseView* m_model_base = nullptr;

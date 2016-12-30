@@ -33,14 +33,14 @@ Screen& Screen::get()
     static Screen screen;
     return screen;
 }
-    
+
 Screen::Screen()
-:
-fps(0), 
-frames_counter(0), 
-last_time(0.0), 
-m_scale(3.0),
-d_scale(0.0)
+    :
+      m_fps(0),
+      m_framesCounter(0),
+      m_lastTime(0.0),
+      m_scale(3.0),
+      m_deltaScale(0.0)
 {}
 
 Screen::~Screen()
@@ -57,38 +57,35 @@ void Screen::init()
 
     std::string title("coldstars");
 
-    auto_scroll = false;
+    m_autoScroll = false;
     
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
     
-    glewInit();             
+    glewInit();
     m_render.init(width, height);
     
     m_rect.set(0.0, 0.0, width, height);
 }
-             
-void Screen::DrawFps()
+
+void Screen::__drawFps()
 {    
     float now_time = elapsedSeconds();
-    if ((now_time - last_time) > 1.0)
-    {
-        fps = frames_counter;
-        frames_counter = 0;
-        last_time = now_time;
-    }
-    else
-    {
-        frames_counter++;
+    if ((now_time - m_lastTime) > 1.0) {
+        m_fps = m_framesCounter;
+        m_framesCounter = 0;
+        m_lastTime = now_time;
+    } else {
+        m_framesCounter++;
     }
     
     //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(global::get().config().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
-    if (meti::getRandInt(30) == 0) std::cout<<"fps="<<fps<<std::endl;
+    if (meti::getRandInt(30) == 0) std::cout<<"fps="<<m_fps<<std::endl;
 }
-    
-    
-     
-void Screen::Resize(int width, int height)
+
+
+
+void Screen::resize(int width, int height)
 {
     //m_Render.SetOrthogonalProjection(width, height);
     
@@ -96,33 +93,33 @@ void Screen::Resize(int width, int height)
     
     //if (global::get().config().MODERN_EFFECTS == true)
     //{
-        //ResizePostEffects(width, height);
+    //ResizePostEffects(width, height);
     //}
 }
-    
-  
-void Screen::MovingBy(const glm::vec2& delta)
+
+
+void Screen::move(const glm::vec2& delta)
 {
     m_rect.MovingBy(delta);
 }
 
-void Screen::UpdateInSpace()
+void Screen::updateInSpace()
 {   
     m_rect.SetBottomLeft(m_camera.lookTo().x, m_camera.lookTo().y);
     //if (auto_scroll == true)
     //{
-        //glm::vec2 d_pos;
-        //float speed = 15.0;
-        //get_dPos_ToPoint(rect.center(), target_center, speed, d_pos);
-        //MovingBy(d_pos);
-        //if ( ( fabs(rect.center().x - target_center.x) < speed ) and ( fabs(rect.center().y - target_center.y) < speed ) )
-        //{
-            //auto_scroll = false;
-        //}
+    //glm::vec2 d_pos;
+    //float speed = 15.0;
+    //get_dPos_ToPoint(rect.center(), target_center, speed, d_pos);
+    //MovingBy(d_pos);
+    //if ( ( fabs(rect.center().x - target_center.x) < speed ) and ( fabs(rect.center().y - target_center.y) < speed ) )
+    //{
+    //auto_scroll = false;
+    //}
     //}
 }
-        
-void Screen::Draw()
+
+void Screen::draw()
 {
     //glPushMatrix();
     //glLoadIdentity();
@@ -133,42 +130,40 @@ void Screen::Draw()
     //drawTexturedRect(texOb, rect2, -2.0);
     //glPopMatrix();
     
-    DrawFps();
+    __drawFps();
     wrDrawSpecific();
 }
 
-void  Screen::IncreaseScale() 
+void  Screen::increaseScale()
 { 
-    d_scale = 0.15;
-    if (m_scale < 30.0)
-    {
-        m_scale += d_scale;
+    m_deltaScale = 0.15;
+    if (m_scale < 30.0) {
+        m_scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
-        float rate = 0.5*d_scale;
+        float rate = 0.5*m_deltaScale;
         float offset_x = m_rect.GetWidth()*rate;
         float offset_y = m_rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
         m_rect.setCenter(center-offset);
-    } 
+    }
 }
 
-void Screen::DecreaseScale() 
+void Screen::decreaseScale()
 { 
-    d_scale = -0.15;
-    if (m_scale > 0.3)
-    {
-        m_scale += d_scale;
+    m_deltaScale = -0.15;
+    if (m_scale > 0.3) {
+        m_scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
-        float rate = 0.5*d_scale;
+        float rate = 0.5*m_deltaScale;
         float offset_x = m_rect.GetWidth()*rate;
         float offset_y = m_rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
         
         m_rect.setCenter(center-offset);
-    } 
+    }
 }
 
 } // namespace jeti
-   
+

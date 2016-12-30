@@ -36,7 +36,7 @@ public:
     const glm::vec3& lookFrom() const { return m_lookFrom; }
     const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
-    void AddMoveSpeed(const glm::vec3&);
+    void appendSpeed(const glm::vec3&);
 
     void update(int, int);
 

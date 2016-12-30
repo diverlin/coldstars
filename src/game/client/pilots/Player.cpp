@@ -213,7 +213,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        }
 //    }
     
-    jeti::Screen::get().UpdateInSpace();
+    jeti::Screen::get().updateInSpace();
 }
              
 void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
@@ -228,7 +228,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
+    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -880,7 +880,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
     cursor.Update(this);
     //cursor.RenderFocusedObjectInfo();
-    jeti::Screen::get().Draw();
+    jeti::Screen::get().draw();
 }
 
 void Player::ForceStateMachineReset() const

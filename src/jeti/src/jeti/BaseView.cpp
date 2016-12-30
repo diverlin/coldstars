@@ -40,8 +40,8 @@ namespace jeti {
 
 namespace  view {
 
-ceti::Collector<control::Material> BaseView::s_materials;
-ceti::Collector<Mesh> BaseView::s_meshes;
+//ceti::Collector<control::Material> BaseView::s_materials;
+//ceti::Collector<Mesh> BaseView::s_meshes;
 
 namespace {
 

@@ -474,18 +474,12 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
     //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(w*scale, h*scale);
 
-    assert(m_stars.size());
     for(Star* star: m_stars) {
-        //std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
         star->draw(render);
-        //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
     }
 
-    assert(m_planets.size());
     for(Planet* planet: m_planets) {
-        //std::cout<<"-- render planet "<<planet->model()->typeInfo()<<std::endl;
         planet->draw(render);
-        //render.DrawMeshMultiTextured(planet->mesh(), planet->textureOb(), planet->actualModelMatrix());
     }
 }
 
@@ -501,7 +495,7 @@ void SpaceViewer::__render_NEW2(jeti::Renderer& render)
     float scale = jeti::Screen::get().scale();
     int w = jeti::Screen::get().width();
     int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
+    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
     
     render.clearColorAndDepthBuffers();
 
@@ -714,7 +708,7 @@ void SpaceViewer::render(Starsystem* starsystem,
     renderer.composeViewMatrix(camera.viewMatrix());
     __render_NEW(renderer);
 
-    jeti::Screen::get().Draw();
+    jeti::Screen::get().draw();
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();

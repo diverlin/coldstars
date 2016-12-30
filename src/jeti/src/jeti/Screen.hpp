@@ -32,60 +32,59 @@ namespace jeti {
 
 class Screen : public SFMLWrapper
 {
-    public:
-        static Screen& get();
- 
-        const ceti::Rect& rect() const { return m_rect; }
+public:
+    static Screen& get();
 
-        void init();
+    void init();
 
-        //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
-        //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
-        jeti::Renderer& renderer() { return m_render; }
-        Camera& camera() { return m_camera; }
-        
-        void SetBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
-        
-        glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
-        glm::vec2 GetTopRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*m_scale, m_rect.GetHeight()*m_scale)); }
-        
-        const glm::vec2& GetBottomLeft() const    { return m_rect.GetBottomLeft(); }
-        const glm::vec2& GetTopRight()    const    { return m_rect.GetTopRight(); }
-        
-        void MovingBy(const glm::vec2&);
-        void InitiateScrollTo(const glm::vec2& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
-        void UpdateInSpace();
-        
-        void Resize(int, int);   
-        void Draw();
-        
-        int GetFramesCounter() const { return frames_counter; }
-        
-        float scale() const { return m_scale; }
-        void IncreaseScale();
-        void DecreaseScale();
+    const ceti::Rect& rect() const { return m_rect; }
+    //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
+    //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
+    jeti::Renderer& renderer() { return m_render; }
+    Camera& camera() { return m_camera; }
 
-    private:
-        Screen();
-        ~Screen();
-        Screen(const Screen&) = delete;
-        Screen& operator=(const Screen&) = delete;
-        
-        jeti::Renderer m_render;
-        Camera m_camera;
-        
-        bool auto_scroll;
-        
-        int fps;
-        int frames_counter;        
-        float last_time;
-        
-        float m_scale;
-        float d_scale;
-        ceti::Rect m_rect;
-        glm::vec2 target_center;
-        
-        void DrawFps();
+    void setBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
+
+    glm::vec2 bottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
+    glm::vec2 topRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*m_scale, m_rect.GetHeight()*m_scale)); }
+
+    const glm::vec2& bottomLeft() const    { return m_rect.GetBottomLeft(); }
+    const glm::vec2& topRight()    const    { return m_rect.GetTopRight(); }
+
+    void move(const glm::vec2&);
+    void initiateScrollTo(const glm::vec2& scroll_coord) { m_targetCenter = scroll_coord; m_autoScroll = true; };
+    void updateInSpace();
+
+    void resize(int, int);
+    void draw();
+
+    int framesCounter() const { return m_framesCounter; }
+
+    float scale() const { return m_scale; }
+    void increaseScale();
+    void decreaseScale();
+
+private:
+    Screen();
+    ~Screen();
+    Screen(const Screen&) = delete;
+    Screen& operator=(const Screen&) = delete;
+
+    jeti::Renderer m_render;
+    Camera m_camera;
+
+    bool m_autoScroll;
+
+    int m_fps;
+    int m_framesCounter;
+    float m_lastTime;
+
+    float m_scale;
+    float m_deltaScale;
+    ceti::Rect m_rect;
+    glm::vec2 m_targetCenter;
+
+    void __drawFps();
 };
 
 } // namespace jeti
