@@ -17,7 +17,6 @@
 */
 
 #include <iostream>
-#include "resources/Data.hpp"
 #include <ceti/descriptor/Collector.hpp>
 
 #include "builder/world/GalaxyBuilder.hpp"
@@ -29,9 +28,8 @@
 #include <jeti/GlErrorHelper.hpp>
 
 #include "gui/UserInputManagerInSpace.hpp"
-
 #include <gui/UserInput.hpp>
-#include <gui/UserInputManagerInSpace.hpp>
+
 
 #include "gui/ButtonTrigger.hpp"
 #include "gui/GuiActions.hpp"
@@ -71,9 +69,8 @@
 
 #include <view/SpaceView.hpp>
 
-#include <types/MeshTypes.hpp>
 
-enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
+//enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
 //void render(Starsystem* starsystem, glm::vec3& center) {
 
@@ -83,19 +80,11 @@ Player* createPlayer() {
     return PlayerBuilder::Instance().createNewPlayer();
 }
 
-int main()
-{
+//{
     //runThreadTest();
-    //runSinglethread();    
+    //runSinglethread();
     //runVectorPerfomanceTest();
     //runMatrixPerfomanceTest();
-
-    client::global::get().init();
-    Data data;
-
-        
-    Player* player = createPlayer();
-    UserInputInSpace inputs;
 
 //    BaseRunScenario* run_scenario = nullptr;
 //    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
@@ -107,12 +96,21 @@ int main()
 //        default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }
 //    }
 //    run_scenario->Init(player);
-    
+//}
+
+int main()
+{
+    client::global::get().init();
+
+    UserInputInSpace& inputs_manager = client::global::get().inputsManager();
     jeti::Camera& camera = client::global::get().camera();
+
+    Player* player = createPlayer();
+
     model::World world;
     view::SpaceViewer viewer;
-    while(inputs.runSession()) {
-        inputs.update(player);
+    while(inputs_manager.runSession()) {
+        inputs_manager.update(player);
         world.update();
         viewer.render(world.activeStarsystem(), camera);
     }
