@@ -16,7 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "common.hpp"
+#include "type.hpp"
+
+namespace ceti {
+
+    Type::Type(int id, const std::string& string)
+        :
+          m_id(id)
+        , m_string(string)
+    {}
+
+} // namespace ceti
+
 
 //TYPE::GUI getGuiItemSlotType(type::entity val)
 //{

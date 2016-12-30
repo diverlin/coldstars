@@ -56,6 +56,7 @@ MdLoader::value(const std::string& key)
 ceti::descriptor::Material*
 InfoLoader::read(const std::string& path)
 {
+    std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 
