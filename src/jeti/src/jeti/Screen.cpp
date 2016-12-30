@@ -71,7 +71,7 @@ void Screen::__drawFps()
         m_framesCounter++;
     }
     
-    //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(global::get().config().GAME_SPEED);
+    //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(core::global::get().config().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     if (meti::getRandInt(30) == 0) std::cout<<"fps="<<m_fps<<std::endl;
 }
@@ -84,7 +84,7 @@ void Screen::resize(int width, int height)
     
     //wrResizeSpecific(width, height);
     
-    //if (global::get().config().MODERN_EFFECTS == true)
+    //if (core::global::get().config().MODERN_EFFECTS == true)
     //{
     //ResizePostEffects(width, height);
     //}

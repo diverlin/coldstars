@@ -45,24 +45,24 @@
 
 TEST(communication, create_ship)
 {
-    auto descriptor = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    int_t obj_id = global::get().idGenerator().nextId();
+    auto descriptor =core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+    int_t obj_id =core::global::get().idGenerator().nextId();
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
+   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-    Ship* ship = global::get().entityManager().getEntity<Ship*>(obj_id);
+    Ship* ship =core::global::get().entityManager().getEntity<Ship*>(obj_id);
     assert(ship);
     EXPECT_EQ(ship->id(), obj_id);
 }
 
 TEST(communication, create_bak)
 {
-    auto descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
-    int_t obj_id = global::get().idGenerator().nextId();
+    auto descriptor =core::global::get().descriptors().getRand(descriptor::Type::BAK);
+    int_t obj_id =core::global::get().idGenerator().nextId();
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
+   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
-    item::equipment::Bak* bak = global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
+    item::equipment::Bak* bak =core::global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
     assert(bak);
     EXPECT_EQ(bak->id(), obj_id);
 }
@@ -74,10 +74,10 @@ TEST(communication, inject_ship)
 
 //Bomb* getNewBomb(int damage, int radius)
 //{
-//    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
-//    global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
+//    const descriptor::Base& descriptor =core::global::get().descriptors().getRand(descriptor::Type::BOMB);
+//   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
-//    Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
+//    Bomb* bomb = static_cast<Bomb*>(core::global::get().entityManager().get(descriptor.id()));
 //    assert(bomb);
 //    return bomb;
 //}
@@ -85,9 +85,9 @@ TEST(communication, inject_ship)
 //Container* getNewContainer(const id_type& child_id)
 //{
 //    auto descriptor = descriptor::Container(child_id);
-//    global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
+//   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-//    Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id()));
+//    Container* container = static_cast<Container*>(core::global::get().entityManager().get(descriptor.id()));
 //    assert(container);
 //    assert(container->itemSlot());
 //    assert(container->itemSlot()->item());
@@ -97,10 +97,10 @@ TEST(communication, inject_ship)
 
 TEST(comm, new_starsystem)
 {
-//    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-//    global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
+//    const descriptor::Base& descriptor =core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+//   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
-//    Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.id()));
+//    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));
 //    assert(starsystem);
-    //Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.id());
+    //Starsystem* starsystem =core::global::get().entityManager().get<Starsystem*>(descriptor.id());
 }

@@ -121,7 +121,7 @@ int main()
     //player->GetNpc()->vehicle()->TEST_DamageAndLockRandItems(); // test
     //player->GetNpc()->vehicle()->TEST_DropRandomItemToSpace();
 
-    //Screen::Instance().Resize(global::get().config().SCREEN_WIDTH/1.5, global::get().config().SCREEN_HEIGHT);
+    //Screen::Instance().Resize(core::global::get().config().SCREEN_WIDTH/1.5,core::global::get().config().SCREEN_HEIGHT);
     
     /** */
     //ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
@@ -160,12 +160,12 @@ int main()
 //        /* client code end */
         
 //        if (TurnTimer::Instance().GetTurnEnded() == true) {
-//            global::get().entitiesManager().ClearGarbage();
+//           core::global::get().entitiesManager().ClearGarbage();
 
-//            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
-//            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
+//            bool save_event =core::global::get().entitiesManager().UpdateSaveRequest();
+//            bool load_event =core::global::get().entitiesManager().UpdateLoadRequest();
 //            if (load_event == true) {
-//                player = global::get().entitiesManager().GetPlayer();
+//                player =core::global::get().entitiesManager().GetPlayer();
 //                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
 //            }
 //            if (save_event == true) {

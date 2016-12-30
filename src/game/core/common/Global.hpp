@@ -103,6 +103,8 @@ namespace descriptor {
 class Manager;
 } // namespace descriptor
 
+namespace core {
+
 class global
 {
 public:
@@ -257,3 +259,5 @@ private:
 
     descriptor::Manager* m_descriptors = nullptr;
 };
+
+} // namespace core

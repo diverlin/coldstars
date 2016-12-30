@@ -41,7 +41,7 @@ BakBuilder::~BakBuilder()
 Bak*
 BakBuilder::getNew()
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::BAK);
     return getNew(descriptor);
 }
        
@@ -51,7 +51,7 @@ BakBuilder::getNew(const descriptor::BaseOLD& descr)
     descriptor::BaseOLD descriptor(descr.data());
     int_t id = NONE;
     if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
-        descriptor = global::get().descriptors().get(descr.descriptor());
+        descriptor =core::global::get().descriptors().get(descr.descriptor());
         id = descr.objId();
     }
 
@@ -71,10 +71,10 @@ Bak*
 BakBuilder::__createTemplate(int_t id)
 {
     if (id == NONE) {
-        id = global::get().idGenerator().nextId();
+        id =core::global::get().idGenerator().nextId();
     }
     Bak* bak = new Bak(id);
-    global::get().entityManager().reg(bak);
+   core::global::get().entityManager().reg(bak);
     return bak;
 }
 

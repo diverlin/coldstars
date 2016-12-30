@@ -41,7 +41,7 @@ Sector* SectorBuilder::createTemplate(int_t id) const
     Sector* sector = new Sector(id);
     assert(sector);
 
-    global::get().entityManager().reg(sector);
+   core::global::get().entityManager().reg(sector);
     
     return sector;
 } 
@@ -59,7 +59,7 @@ void SectorBuilder::createInternals(Sector* sector, const descriptor::Sector& de
     for(const auto& id: descriptor.starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        Starsystem* starsystem = global::get().starsystemBuilder().create(global::get().descriptors().starsystem().get(id));
+        Starsystem* starsystem =core::global::get().starsystemBuilder().create(core::global::get().descriptors().starsystem().get(id));
         sector->add(starsystem, center);
     }
 }

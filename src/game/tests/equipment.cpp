@@ -57,8 +57,8 @@ void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)
 
 TEST(creation,bak)
 {
-    const descriptor::BaseOLD& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
-    item::equipment::Bak* bak = global::get().bakBuilder().getNew( descr );
+    const descriptor::BaseOLD& descr =core::global::get().descriptors().getRand(descriptor::Type::BAK);
+    item::equipment::Bak* bak =core::global::get().bakBuilder().getNew( descr );
 
     EXPECT_EQ(descr.fuelMax(), bak->fuel());
     EXPECT_EQ(descr.fuelMax(), bak->fuelMax());
@@ -71,7 +71,7 @@ TEST(creation,bak)
 TEST(equipment, lazer)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Lazer* lazer = global::get().lazerBuilder().getNew();
+    item::equipment::Lazer* lazer =core::global::get().lazerBuilder().getNew();
 
     // initial
     EXPECT_EQ(0, ship->properties().total_damage);
@@ -94,7 +94,7 @@ TEST(equipment, lazer)
 TEST(equipment, rocket)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Rocket* rocket = global::get().rocketBuilder().getNew();
+    item::equipment::Rocket* rocket =core::global::get().rocketBuilder().getNew();
 
     // initial
     EXPECT_EQ(0, ship->properties().total_damage);
@@ -117,7 +117,7 @@ TEST(equipment, rocket)
 TEST(equipment, bak)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Bak* bak = global::get().bakBuilder().getNew();
+    item::equipment::Bak* bak =core::global::get().bakBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->driveComplex().bakSlot()->item() == nullptr);
@@ -137,7 +137,7 @@ TEST(equipment, bak)
 TEST(equipment, drive)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
+    item::equipment::Drive* drive =core::global::get().driveBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->driveComplex().driveSlot()->item() == nullptr);
@@ -157,8 +157,8 @@ TEST(equipment, drive)
 TEST(equipment, bak_and_drive)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Bak* bak = global::get().bakBuilder().getNew();
-    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
+    item::equipment::Bak* bak =core::global::get().bakBuilder().getNew();
+    item::equipment::Drive* drive =core::global::get().driveBuilder().getNew();
 
     // initial
     EXPECT_EQ(ship->properties().hyper, 0);
@@ -215,7 +215,7 @@ TEST(equipment, bak_and_drive)
 TEST(equipment, droid)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Droid* droid = global::get().droidBuilder().getNew();
+    item::equipment::Droid* droid =core::global::get().droidBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->droidSlot()->item() == nullptr);
@@ -251,7 +251,7 @@ TEST(equipment, droid)
 TEST(equipment, grapple)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Grapple* grapple = global::get().grappleBuilder().getNew();
+    item::equipment::Grapple* grapple =core::global::get().grappleBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->grappleSlot()->item() == nullptr);
@@ -293,7 +293,7 @@ TEST(equipment, grapple)
 TEST(equipment, scaner)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Scaner* scaner = global::get().scanerBuilder().getNew();
+    item::equipment::Scaner* scaner =core::global::get().scanerBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->scanerSlot()->item() == nullptr);
@@ -329,7 +329,7 @@ TEST(equipment, scaner)
 TEST(equipment, radar)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Radar* radar = global::get().radarBuilder().getNew();
+    item::equipment::Radar* radar =core::global::get().radarBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->radarSlot()->item() == nullptr);
@@ -365,7 +365,7 @@ TEST(equipment, radar)
 TEST(equipment, protector)
 {
     Ship* ship = ShipBuilder::getNew();
-    item::equipment::Protector* protector = global::get().protectorBuilder().getNew();
+    item::equipment::Protector* protector =core::global::get().protectorBuilder().getNew();
 
     // initial
     EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() == nullptr);
@@ -407,7 +407,7 @@ TEST(equipment, freespace)
     EXPECT_EQ(ship->mass(), ship->freeSpace());
 
     // event: generate and insert item list
-    std::vector<item::equipment::Protector*> items = global::get().protectorBuilder().getNew(3);
+    std::vector<item::equipment::Protector*> items =core::global::get().protectorBuilder().getNew(3);
     int weight = 0;
     for (auto item: items) {
         weight += item->mass();

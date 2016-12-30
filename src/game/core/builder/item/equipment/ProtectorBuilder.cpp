@@ -43,7 +43,7 @@ ProtectorBuilder::createTemplate(int_t id) const
     Protector* protector = new Protector(id);
     assert(protector);
 
-    global::get().entityManager().reg(protector);
+   core::global::get().entityManager().reg(protector);
     
     return protector;
 } 
@@ -61,7 +61,7 @@ ProtectorBuilder::getNew(int num) const
 Protector*
 ProtectorBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
         

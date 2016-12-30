@@ -42,14 +42,14 @@ Radar* RadarBuilder::createTemplate(int_t id) const
     Radar* radar = new Radar(id);
     assert(radar);
 
-    global::get().entityManager().reg(radar);
+   core::global::get().entityManager().reg(radar);
     
     return radar;
 } 
   
 Radar* RadarBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =  global::get().descriptors().getRand(descriptor::Type::RADAR);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
     Radar* radar = createTemplate();
     createInternals(radar, descriptor);
 

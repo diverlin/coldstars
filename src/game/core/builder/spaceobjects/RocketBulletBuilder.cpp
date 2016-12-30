@@ -32,7 +32,7 @@ RocketBullet* RocketBulletBuilder::createTemplate(int_t id) const
     RocketBullet* rocket_bullet = new RocketBullet(id);
     assert(rocket_bullet);
 
-    global::get().entityManager().reg(rocket_bullet);
+   core::global::get().entityManager().reg(rocket_bullet);
     
     return rocket_bullet;
 }

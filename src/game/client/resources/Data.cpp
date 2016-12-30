@@ -69,7 +69,7 @@ void Data::__collectMeshDescriptors()
 {        
     using namespace ceti::descriptor;
 
-//    auto& dm = global::get().descriptors();
+//    auto& dm =core::global::get().descriptors();
 //    if (!dm.mesh().loaded()) {
 //        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
 //        dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
@@ -81,7 +81,7 @@ void Data::__collectMeshDescriptors()
 //        dm.mesh().save();
 //    }
 
-//    auto& dm = global::get().descriptors();
+//    auto& dm =core::global::get().descriptors();
 //    if (!dm.mesh().loaded()) {
 //        ceti::Collector<Mesh> collector("mesh_descriptors.txt");
 
@@ -112,7 +112,7 @@ void Data::__loadImages()
     //ceti::InfoLoader il("/ramdisk/build/coldstars/src/game/client/data/ship/template.md");
     //exit(1);
 
-    auto& dm = global::get().descriptors();
+    auto& dm =core::global::get().descriptors();
     if (!dm.material().loaded()) {
         ceti::Collector<Material> collector("material_descriptors.txt");
 

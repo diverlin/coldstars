@@ -50,7 +50,7 @@ Container::~Container()
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {
-    global::get().entityManager().addToGarbage(m_itemSlot);
+   core::global::get().entityManager().addToGarbage(m_itemSlot);
 }
 
 bool
@@ -154,7 +154,7 @@ void Container::ResolveData()
 {
     LOG(" Container("+std::to_string(id())+")::ResolveData()");
     
-    //((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
+    //((Starsystem*)core::global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 }        
 
 /* virtual override final */

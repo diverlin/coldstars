@@ -57,7 +57,7 @@ Starsystem* Galaxy::activeStarsystem() const
 void Galaxy::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<m_sectors.size(); i++) {
-        global::get().entityManager().addToGarbage(m_sectors[i]);
+       core::global::get().entityManager().addToGarbage(m_sectors[i]);
     }
 }
 

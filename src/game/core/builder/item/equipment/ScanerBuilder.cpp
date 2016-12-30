@@ -44,14 +44,14 @@ Scaner* ScanerBuilder::createTemplate(int_t id) const
     Scaner* scaner = new Scaner(id);
     assert(scaner);
 
-    global::get().entityManager().reg(scaner);
+   core::global::get().entityManager().reg(scaner);
     
     return scaner;
 } 
 
 Scaner* ScanerBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::SCANER);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::SCANER);
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);
 

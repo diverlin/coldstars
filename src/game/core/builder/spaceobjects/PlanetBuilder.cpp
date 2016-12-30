@@ -42,7 +42,7 @@ Planet::__createTemplate(int_t id)
     model->setId(id);
     assert(model);
 
-    global::get().entityManager().reg(model);
+   core::global::get().entityManager().reg(model);
     
     return model;
 }
@@ -50,7 +50,7 @@ Planet::__createTemplate(int_t id)
 model::Planet*
 Planet::getNew()
 {
-    const auto& descr = global::get().descriptors().planet().random();
+    const auto& descr =core::global::get().descriptors().planet().random();
     return getNew(descr);
 } 
      

@@ -51,7 +51,7 @@ Store* StoreBuilder::createTemplate(int_t id) const
     Store* store = new Store(id);
     assert(store);
 
-    global::get().entityManager().reg(store);
+   core::global::get().entityManager().reg(store);
     
     return store;
 } 
@@ -107,45 +107,45 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->addVehicle(ShipBuilder::getNew());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->addItem(global::get().lazerBuilder().getNew());
+        store->addItem(core::global::get().lazerBuilder().getNew());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->addItem(global::get().rocketBuilder().getNew());
+        store->addItem(core::global::get().rocketBuilder().getNew());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::RADAR);
-        store->addItem(global::get().radarBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::RADAR);
+        store->addItem(core::global::get().radarBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
-        store->addItem(global::get().grappleBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+        store->addItem(core::global::get().grappleBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::DRIVE);
-        store->addItem(global::get().driveBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
+        store->addItem(core::global::get().driveBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
-        store->addItem(global::get().protectorBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+        store->addItem(core::global::get().protectorBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
-        store->addItem(global::get().bakBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::BAK);
+        store->addItem(core::global::get().bakBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::DROID);
-        store->addItem(global::get().droidBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::DROID);
+        store->addItem(core::global::get().droidBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        const auto& descr = global::get().descriptors().getRand(descriptor::Type::SCANER);
-        store->addItem(global::get().scanerBuilder().getNew(descr));
+        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::SCANER);
+        store->addItem(core::global::get().scanerBuilder().getNew(descr));
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {
-        store->AddItem(global::get().freezerBuilder().create());
+        store->AddItem(core::global::get().freezerBuilder().create());
     }
     for (unsigned int i=0; i<energyBlock_num; i++) {
-        store->AddItem(global::get().energizerBuilder().create());
+        store->AddItem(core::global::get().energizerBuilder().create());
     }
 #endif
 }

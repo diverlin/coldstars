@@ -44,14 +44,14 @@ Droid* DroidBuilder::createTemplate(int_t id) const
     Droid* droid = new Droid(id);
     assert(droid);
 
-    global::get().entityManager().reg(droid);
+   core::global::get().entityManager().reg(droid);
     
     return droid;
 } 
 
 Droid* DroidBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::DROID);
+    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::DROID);
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);
 

@@ -51,12 +51,12 @@ void Angar::putChildrenToGarbage() const
 {
     for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
     {
-        global::get().entityManager().addToGarbage(vehicle_total_slot_vec[i]);
+       core::global::get().entityManager().addToGarbage(vehicle_total_slot_vec[i]);
     }
 
     for(unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        global::get().entityManager().addToGarbage(item_slot_vec[i]);
+       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
     }
 }
 
@@ -216,7 +216,7 @@ void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Angar::ResolveData()
 {
-    ((Kosmoport*)global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
+    ((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
 }
 
 

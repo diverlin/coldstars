@@ -39,7 +39,7 @@ Kosmoport* KosmoportBuilder::createTemplate(int_t id) const
     Kosmoport* kosmoport = new Kosmoport(id);
     assert(kosmoport);
 
-    global::get().entityManager().reg(kosmoport);
+   core::global::get().entityManager().reg(kosmoport);
     
     return kosmoport;
 } 
@@ -54,10 +54,10 @@ Kosmoport* KosmoportBuilder::create() const
            
 void KosmoportBuilder::createInternals(Kosmoport* kosmoport) const
 {
-    kosmoport->BindAngar(global::get().angarBuilder().create());
-    kosmoport->BindStore(global::get().storeBuilder().create());
-    kosmoport->BindShop(global::get().shopBuilder().create());
-    kosmoport->BindGoverment(global::get().govermentBuilder().create());
+    kosmoport->BindAngar(core::global::get().angarBuilder().create());
+    kosmoport->BindStore(core::global::get().storeBuilder().create());
+    kosmoport->BindShop(core::global::get().shopBuilder().create());
+    kosmoport->BindGoverment(core::global::get().govermentBuilder().create());
 }
 
       
