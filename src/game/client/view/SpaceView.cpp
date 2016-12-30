@@ -117,16 +117,16 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
 
 namespace view {
 
-SpaceViewer::SpaceViewer()
+Space::Space()
 {
 
 }
 
-SpaceViewer::~SpaceViewer()
+Space::~Space()
 {}                                    
 
 void
-SpaceViewer::__updateVisible(Starsystem* starsystem,
+Space::__updateVisible(Starsystem* starsystem,
                       const meti::vec3& lookFrom,
                       const meti::vec3& lookTo,
                       float lookFar)
@@ -148,7 +148,7 @@ SpaceViewer::__updateVisible(Starsystem* starsystem,
     }
 }
 
-void SpaceViewer::__clear()
+void Space::__clear()
 {
     // entities
     m_stars.clear();
@@ -169,7 +169,7 @@ void SpaceViewer::__clear()
 }
 
 jeti::view::BaseView*
-SpaceViewer::__isViewExists(model::SpaceObject* model)
+Space::__isViewExists(model::SpaceObject* model)
 {
     std::map<model::SpaceObject*, jeti::view::BaseView*>::const_iterator it = m_cache.find(model);
     if (it != m_cache.end()) {
@@ -179,7 +179,7 @@ SpaceViewer::__isViewExists(model::SpaceObject* model)
     }
 }
 
-void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
+void Space::addIfVisible(model::Star* model, const VisibilityData& data)
 {
     assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
@@ -198,7 +198,7 @@ void SpaceViewer::addIfVisible(model::Star* model, const VisibilityData& data)
     //    }
 }
 
-void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
+void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
 {
     assert(model);
 
@@ -313,7 +313,7 @@ void SpaceViewer::addIfVisible(model::Planet* model, const VisibilityData& data)
 //}
 
 /// visible entities
-void SpaceViewer::__add(jeti::view::BaseView* view)
+void Space::__add(jeti::view::BaseView* view)
 {
     std::map<jeti::view::BaseView*, model::SpaceObject*>::const_iterator it = m_cache2.find(view);
     assert(it != m_cache2.end());
@@ -335,7 +335,7 @@ void SpaceViewer::__add(jeti::view::BaseView* view)
     }
 }
 
-void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view)
+void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view)
 {
     {
     jeti::Mesh* mesh = nullptr;
@@ -379,24 +379,24 @@ void SpaceViewer::__loadResourcesFor(model::SpaceObject* model, jeti::view::Base
     }
 }
 
-void SpaceViewer::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
+void Space::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
 {
     __loadResourcesFor(ob, view);
     m_cache.insert(std::make_pair(ob, view));
     m_cache2.insert(std::make_pair(view, ob));
 }
 
-void SpaceViewer::__add(Star* view)
+void Space::__add(Star* view)
 {
     m_stars.push_back(view);
 }
 
-void SpaceViewer::__add(Planet* view)
+void Space::__add(Planet* view)
 {
     m_planets.push_back(view);
 }
 
-void SpaceViewer::__add(Asteroid* view)
+void Space::__add(Asteroid* view)
 {
     m_asteroids.push_back(view);
 }
@@ -454,7 +454,7 @@ void SpaceViewer::__add(Asteroid* view)
 
 
 
-void SpaceViewer::__render_NEW(jeti::Renderer& render)
+void Space::__render_NEW(jeti::Renderer& render)
 {
 //    bool draw_background    = true;
 //    bool draw_volumetric    = true;
@@ -483,7 +483,7 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
     }
 }
 
-void SpaceViewer::__render_NEW2(jeti::Renderer& render)
+void Space::__render_NEW2(jeti::Renderer& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -695,7 +695,7 @@ void SpaceViewer::__render_NEW2(jeti::Renderer& render)
 //                         bool forceDraw_orbits,
 //                         bool forceDraw_path)
 
-void SpaceViewer::render(Starsystem* starsystem, jeti::Camera& camera)
+void Space::render(Starsystem* starsystem, jeti::Camera& camera)
 {   
     __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
 
@@ -747,7 +747,7 @@ void SpaceViewer::render(Starsystem* starsystem, jeti::Camera& camera)
     //resizeGl(w, h);
 } 
 
-void SpaceViewer::__renderCollisionRadius(const jeti::Renderer& render) const
+void Space::__renderCollisionRadius(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {   //a;pitodorender
@@ -768,7 +768,7 @@ void SpaceViewer::__renderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void SpaceViewer::__renderAxis(const jeti::Renderer& render) const
+void Space::__renderAxis(const jeti::Renderer& render) const
 {    
     //render.enable_DEPTH();
     //alpitodorender

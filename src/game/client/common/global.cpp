@@ -18,13 +18,14 @@
 
 #include "global.hpp"
 
-#include <resources/Data.hpp>
+#include <client/resources/Data.hpp>
+#include <client/gui/UserInputManagerInSpace.hpp>
+
+#include <core/types/TextureTypes.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
-
-#include <client/gui/UserInputManagerInSpace.hpp>
 
 namespace client
 {
@@ -37,7 +38,8 @@ global& global::get()
 
 global::global()
     :
-      m_screen(new jeti::Screen)
+      m_types(new type::Types)
+    , m_screen(new jeti::Screen)
     , m_render(new jeti::Renderer)
     , m_camera(new jeti::Camera)
     , m_inputsManager(new UserInputInSpace)

@@ -54,11 +54,19 @@ enum class texture: int
     ROCKET_BULLET_ID,
 };
 
-static std::map<int_t, std::string> g_typesTextureString;
-static std::map<std::string, int_t> g_typesStringTexture;
+class Types {
+public:
+    Types();
+    ~Types();
 
-void init();
-int_t toInt(const std::string& info);
+    int_t toInt(const std::string&);
+
+private:
+    std::map<int_t, std::string> m_typesTextureString;
+    std::map<std::string, int_t> m_typesStringTexture;
+
+    void __registerType(texture, const std::string&);
+};
 
 } // namespace type
 

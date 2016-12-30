@@ -87,11 +87,11 @@ struct VisibilityData
     VisibilityObserverData observer;
 };
 
-class SpaceViewer
+class Space
 {
 public:
-    SpaceViewer();
-    ~SpaceViewer();
+    Space();
+    ~Space();
 
     /// visible entities
     void addIfVisible(model::Star*, const VisibilityData&);

@@ -20,6 +20,7 @@
 #include <common/constants.hpp>
 #include <common/Config.hpp>
 #include <common/Global.hpp>
+#include <client/common/global.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
 //#include <jeti/ShaderLoader.hpp>
@@ -49,8 +50,6 @@ const std::string CONFIG_PATH  = "";
 
 Data::Data()
 {
-    type::init();
-
     __collectMeshDescriptors();
     __loadImages();
 }
@@ -100,7 +99,8 @@ namespace {
 
 void resolveId(ceti::descriptor::Material* material)
 {
-    material->setType(type::toInt(material->association().type()));
+    type::Types& types = client::global::get().types();
+    material->setType(types.toInt(material->association().type()));
 }
 
 }
