@@ -19,7 +19,7 @@
 
 #include <gui/Cursor.hpp>
 
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 
 #include <ceti/Logger.hpp>
 

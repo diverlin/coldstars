@@ -19,7 +19,7 @@
 
 #include <gui/UserInput.hpp>
 
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 #include <jeti/Screen.hpp>
 #include <iostream>
 

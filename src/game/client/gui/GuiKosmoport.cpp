@@ -24,7 +24,7 @@
 #include <jeti/Screen.hpp>
 
 #include <common/constants.hpp>
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 

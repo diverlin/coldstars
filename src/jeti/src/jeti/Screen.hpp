@@ -25,9 +25,6 @@
 #include <meti/VectorUtils.hpp>
 #include <ceti/rect.hpp>
 
-#include <Render.hpp>
-#include <Camera.hpp>
-
 namespace jeti {
 
 class Screen : public SFMLWrapper
@@ -41,7 +38,6 @@ public:
     const ceti::Rect& rect() const { return m_rect; }
     //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
     //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
-    Camera& camera() { return m_camera; }
 
     void setBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
 
@@ -65,8 +61,6 @@ public:
     void decreaseScale();
 
 private:
-    Camera m_camera;
-
     bool m_autoScroll;
 
     int m_fps;

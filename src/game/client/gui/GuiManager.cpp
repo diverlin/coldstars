@@ -21,7 +21,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include <slots/ItemSlot.hpp>
 #include <dock/Kosmoport.hpp>
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>

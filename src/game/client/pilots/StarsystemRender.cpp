@@ -29,7 +29,7 @@
 //#include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <common/TurnTimer.hpp>
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 #include <ceti/Logger.hpp>
 
 //#include <ai/Task.hpp>
@@ -421,7 +421,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
 void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = client::global::get().render();
-    jeti::Camera& camera = client::global::get().screen().camera();
+    jeti::Camera& camera = client::global::get().camera();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
     camera.update(w, h);
