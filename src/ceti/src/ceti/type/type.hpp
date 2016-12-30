@@ -23,18 +23,18 @@
 
 namespace ceti {
 
-class Type {
-public:
-    Type(int id, const std::string& string);
-    ~Type()=default;
+//class Type {
+//public:
+//    Type(int id, const std::string& string);
+//    ~Type()=default;
 
-    int id() const { return m_id; }
-    const std::string& string() const { return m_string; }
+//    int id() const { return m_id; }
+//    const std::string& string() const { return m_string; }
 
-private:
-    int m_id = -1;
-    std::string m_string = "";
-};
+//private:
+//    int m_id = -1;
+//    std::string m_string = "";
+//};
 
 } // namespace ceti
 

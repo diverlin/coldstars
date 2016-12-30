@@ -113,7 +113,7 @@ InfoLoader::read(const std::string& path)
 
     material->setAssociation(association);
 
-    assert(material->type() != -1);
+    //assert(material->type() != -1);
     return material;
 }
 

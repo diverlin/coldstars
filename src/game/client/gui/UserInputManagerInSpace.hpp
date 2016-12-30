@@ -28,7 +28,7 @@ class GuiManager;
 class UserInputInSpace
 {
     public:
-        static UserInputInSpace& get();
+        UserInputInSpace();
         ~UserInputInSpace();
         
         bool nextTurnReady() const { return m_nextTurnReady; }
@@ -37,10 +37,6 @@ class UserInputInSpace
         void update(Player*);
         
     private:
-        UserInputInSpace();
-        UserInputInSpace(const UserInputInSpace&) = delete;
-        UserInputInSpace& operator=(const UserInputInSpace&) = delete;
-
         bool m_nextTurnReady = false;
         bool m_runSession = true;
 

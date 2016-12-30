@@ -43,6 +43,9 @@ public:
     int_t id() const { return m_id; }
     int_t type() const { return m_type; }
 
+
+    void setType(int_t type) { m_type = type; }
+
     //std::string info() const = 0;
 
 private:

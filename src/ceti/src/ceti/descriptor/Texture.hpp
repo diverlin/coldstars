@@ -41,6 +41,8 @@ public:
     void setName(const std::string& name) { m_name = name; }
     void setColor(const std::string& color) { m_color = color; }
 
+    const std::string& type() const { return m_type; }
+
 private:
     std::string m_race = "";
     std::string m_type = "";
@@ -85,6 +87,7 @@ public:
     void setAutoRotated(bool auto_rotated) { m_autoRotated = auto_rotated; }
     void setBrightThreshold(float brightThreshold) { m_brightThreshold = brightThreshold; }
 
+    const Association& association() const { return m_association; }
     const std::string& path() const { return m_path; }
     bool useAlpha() const { return m_alpha; }
     bool animated() const { return (m_col !=1 || m_row != 1); }

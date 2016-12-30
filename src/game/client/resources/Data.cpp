@@ -38,6 +38,8 @@
 #include <types/MeshTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
+#include <core/types/TextureTypes.hpp>
+
 #include <string>
 
 namespace {
@@ -47,6 +49,8 @@ const std::string CONFIG_PATH  = "";
 
 Data::Data()
 {
+    type::init();
+
     __collectMeshDescriptors();
     __loadImages();
 }
@@ -92,6 +96,14 @@ void Data::__collectMeshDescriptors()
 //    }
 }
 
+namespace {
+
+void resolveId(ceti::descriptor::Material* material)
+{
+    material->setType(type::toInt(material->association().type()));
+}
+
+}
 
 void Data::__loadImages()
 {
@@ -108,6 +120,8 @@ void Data::__loadImages()
         for(const auto& filepath: result) {
             ceti::descriptor::Material* material = ceti::InfoLoader::read(filepath);
             //std::cout<<"descriptor:"<<material->data()<<std::endl;
+
+            resolveId(material);
             collector.add(material);
         }
         collector.save();

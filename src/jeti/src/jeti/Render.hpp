@@ -58,7 +58,6 @@ public:
     void deactivateFbo(int);
 
     void init(int, int);
-    void setMeshQuad(Mesh* mesh) { m_meshQuad = mesh; }
 
     void setPerspectiveProjection(float, float);
     void setOrthogonalProjection(float, float);

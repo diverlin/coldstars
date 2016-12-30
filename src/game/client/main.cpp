@@ -77,22 +77,24 @@ enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO }
 
 //}
 
+Player* createPlayer() {
+    return PlayerBuilder::Instance().createNewPlayer();
+}
 
 int main()
 {
     //runThreadTest();
     //runSinglethread();    
     //runVectorPerfomanceTest();
-    
+    //runMatrixPerfomanceTest();
+
     jeti::Screen::get().init();
     Data data;
-    jeti::Mesh* mesh = new jeti::Mesh();
-    jeti::Screen::get().renderer().setMeshQuad(mesh);
+
         
-    //runMatrixPerfomanceTest();
-        
-    Player* player = PlayerBuilder::Instance().createNewPlayer();
-    
+    Player* player = createPlayer();
+    UserInputInSpace inputs;
+
 //    BaseRunScenario* run_scenario = nullptr;
 //    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
 //    switch(scenario_type) {
@@ -106,9 +108,8 @@ int main()
     
     model::World world;
     view::SpaceViewer viewer;
-    bool runSession = true;
-    while(runSession) {
-        UserInputInSpace::get().update(player);
+    while(inputs.runSession()) {
+        inputs.update(player);
         world.update();
 
         // todo catch from player
@@ -122,7 +123,6 @@ int main()
                       lookTo,
                       radius);
 
-        runSession = UserInputInSpace::get().runSession();
     }
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
