@@ -27,12 +27,14 @@
 #include <Bloom.hpp>
 #include <Shaders.hpp>
 #include <Light.hpp>
+#include <Camera.hpp>
 
 #include <string>
 
 namespace  jeti {
 
 class Mesh;
+class Camera;
 
 namespace control {
 class Material;
@@ -133,6 +135,7 @@ private:
     int m_indexFboLastDeactivated = -1;
 
     BloomEffect m_bloom;
+    Camera m_camera;
 
     void __initPostEffects();
     void __makeShortCuts();

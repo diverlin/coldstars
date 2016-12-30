@@ -240,8 +240,8 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
         return;
     }
 
-    float ambient_factor = 0.25;       
-    const glm::vec3& eye_pos = Screen::get().camera().lookFrom();
+    float ambient_factor = 0.25;
+    const glm::vec3& eye_pos = m_camera.lookFrom();
 
     const model::Material& material = *textureOb.model();
 
@@ -285,7 +285,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
     }
 
     float ambient_factor = 0.25; 
-    const glm::vec3& eye_pos = Screen::get().camera().lookTo();
+    const glm::vec3& eye_pos = m_camera.lookTo();
    
     __useTransparentMode(textureOb.model()->use_alpha);
     	

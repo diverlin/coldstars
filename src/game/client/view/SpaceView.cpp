@@ -21,6 +21,7 @@
 
 #include <ceti/Collision.hpp>
 #include <common/constants.hpp>
+#include <common/global.hpp>
 
 #include <world/starsystem.hpp>
 #include <jeti/Screen.hpp>
@@ -463,10 +464,10 @@ void SpaceViewer::__render_NEW(jeti::Renderer& render)
 //    bool draw_shockwave     = true;
 //    bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().scale();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
-    //glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
+    float scale = client::global::get().screen().scale();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
+    //glm::vec2 world_coord(client::global::get().screen().GetBottomLeft());
 
     render.clearColorAndDepthBuffers();
 
@@ -492,10 +493,10 @@ void SpaceViewer::__render_NEW2(jeti::Renderer& render)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().scale();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
+    float scale = client::global::get().screen().scale();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
+    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
     render.clearColorAndDepthBuffers();
 
@@ -697,18 +698,18 @@ void SpaceViewer::render(Starsystem* starsystem,
 {   
     __update(starsystem, lookFrom, lookTo, lookFar);
 
-    jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().camera();
+    jeti::Renderer& renderer = client::global::get().screen().renderer();
+    jeti::Camera& camera = client::global::get().screen().camera();
 
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
 
     camera.update(w, h);
     
     renderer.composeViewMatrix(camera.viewMatrix());
     __render_NEW(renderer);
 
-    jeti::Screen::get().draw();
+    client::global::get().screen().draw();
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();

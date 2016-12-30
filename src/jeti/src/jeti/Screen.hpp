@@ -33,7 +33,8 @@ namespace jeti {
 class Screen : public SFMLWrapper
 {
 public:
-    static Screen& get();
+    Screen();
+    ~Screen();
 
     void init();
 
@@ -65,11 +66,6 @@ public:
     void decreaseScale();
 
 private:
-    Screen();
-    ~Screen();
-    Screen(const Screen&) = delete;
-    Screen& operator=(const Screen&) = delete;
-
     jeti::Renderer m_render;
     Camera m_camera;
 

@@ -29,6 +29,7 @@
 //#include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <common/TurnTimer.hpp>
+#include <common/global.hpp>
 #include <ceti/Logger.hpp>
 
 //#include <ai/Task.hpp>
@@ -99,7 +100,7 @@ void StarsystemRender::clearVisibleEntities()
 
 void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 {
-    if (ob->inRect(jeti::Screen::get().rect())) {
+    if (ob->inRect(client::global::get().screen().rect())) {
         m_objects.push_back(ob);
     }
 }
@@ -216,10 +217,10 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().scale();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
+    float scale = client::global::get().screen().scale();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
+    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -419,15 +420,15 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     
 void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().camera();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
+    jeti::Renderer& renderer = client::global::get().screen().renderer();
+    jeti::Camera& camera = client::global::get().screen().camera();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
     camera.update(w, h);
     
     renderer.composeViewMatrix(camera.viewMatrix());
 
-    //float scale = jeti::Screen::get().GetScale();
+    //float scale = client::global::get().screen().GetScale();
 
     RenderInSpace_NEW(renderer, starsystem);
 
@@ -524,14 +525,14 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
-    float scale = jeti::Screen::get().scale();
-    if (center.x < (jeti::Screen::get().bottomLeftScreenWC().x - size.x*scale))
+    float scale = client::global::get().screen().scale();
+    if (center.x < (client::global::get().screen().bottomLeftScreenWC().x - size.x*scale))
         return false;
-    if (center.x > (jeti::Screen::get().topRightScreenWC().x   + size.x*scale))
+    if (center.x > (client::global::get().screen().topRightScreenWC().x   + size.x*scale))
         return false;
-    if (center.y < (jeti::Screen::get().bottomLeftScreenWC().y - size.y*scale))
+    if (center.y < (client::global::get().screen().bottomLeftScreenWC().y - size.y*scale))
         return false;
-    if (center.y > (jeti::Screen::get().topRightScreenWC().y   + size.y*scale))
+    if (center.y > (client::global::get().screen().topRightScreenWC().y   + size.y*scale))
         return false;
     
     return true;
@@ -539,14 +540,14 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
-    float scale = jeti::Screen::get().scale();
-    if (ob_center.x < (jeti::Screen::get().bottomLeftScreenWC().x - sizeInPixels*scale))
+    float scale = client::global::get().screen().scale();
+    if (ob_center.x < (client::global::get().screen().bottomLeftScreenWC().x - sizeInPixels*scale))
         return false;
-    if (ob_center.x > (jeti::Screen::get().topRightScreenWC().x + sizeInPixels*scale))
+    if (ob_center.x > (client::global::get().screen().topRightScreenWC().x + sizeInPixels*scale))
         return false;
-    if (ob_center.y < (jeti::Screen::get().bottomLeftScreenWC().y - sizeInPixels*scale))
+    if (ob_center.y < (client::global::get().screen().bottomLeftScreenWC().y - sizeInPixels*scale))
         return false;
-    if (ob_center.y > (jeti::Screen::get().topRightScreenWC().y + sizeInPixels*scale))
+    if (ob_center.y > (client::global::get().screen().topRightScreenWC().y + sizeInPixels*scale))
         return false;
     
     return true;
@@ -554,13 +555,13 @@ bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 
 bool isPointOnScreen(const glm::vec2& p)
 {       
-    if (p.x < (jeti::Screen::get().bottomLeftScreenWC().x))
+    if (p.x < (client::global::get().screen().bottomLeftScreenWC().x))
         return false;
-    if (p.x > (jeti::Screen::get().topRightScreenWC().x))
+    if (p.x > (client::global::get().screen().topRightScreenWC().x))
         return false;
-    if (p.y < (jeti::Screen::get().bottomLeftScreenWC().y))
+    if (p.y < (client::global::get().screen().bottomLeftScreenWC().y))
         return false;
-    if (p.y > (jeti::Screen::get().topRightScreenWC().y))
+    if (p.y > (client::global::get().screen().topRightScreenWC().y))
         return false;
     
     return true;

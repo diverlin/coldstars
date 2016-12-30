@@ -23,7 +23,7 @@
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 #include <world/starsystem.hpp>
-#include <common/Global.hpp>
+#include <common/global.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <math/rand.hpp>
@@ -153,8 +153,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
     if (starsystem->id() != npc->vehicle()->starsystem()->id())
     {
-        //jeti::Screen::get().InitiateScrollTo(npc->vehicle()->center());
-        //jeti::Screen::get().GetRect().setCenter(npc->vehicle()->center());
+        //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
+        //client::global::get().screen().GetRect().setCenter(npc->vehicle()->center());
         starsystem = npc->vehicle()->starsystem();
     }
     
@@ -167,7 +167,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //jeti::Screen::get().InitiateScrollTo(npc->vehicle()->center());
+                    //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
                 //}
             //}
             
@@ -193,7 +193,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
-//                    jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                    client::global::get().screen().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                    turn_timer.NextTurn();
 //                }
 //            }
@@ -205,7 +205,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
-//                jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                client::global::get().screen().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                turn_timer.NextTurn();
 //            }
             
@@ -213,7 +213,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        }
 //    }
     
-    jeti::Screen::get().updateInSpace();
+    client::global::get().screen().updateInSpace();
 }
              
 void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
@@ -225,10 +225,10 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::get().scale();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
-    glm::vec2 world_coord(jeti::Screen::get().bottomLeft());
+    float scale = client::global::get().screen().scale();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
+    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -428,15 +428,15 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     
 void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::get().renderer();
-    jeti::Camera& camera = jeti::Screen::get().camera();
-    int w = jeti::Screen::get().width();
-    int h = jeti::Screen::get().height();
+    jeti::Renderer& renderer = client::global::get().screen().renderer();
+    jeti::Camera& camera = client::global::get().screen().camera();
+    int w = client::global::get().screen().width();
+    int h = client::global::get().screen().height();
     camera.update(w, h);
     
     renderer.composeViewMatrix(camera.viewMatrix());
 
-    //float scale = jeti::Screen::get().GetScale();
+    //float scale = client::global::get().screen().GetScale();
 
     RenderInSpace_NEW(renderer, starsystem);
 
@@ -880,7 +880,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
     cursor.Update(this);
     //cursor.RenderFocusedObjectInfo();
-    jeti::Screen::get().draw();
+    client::global::get().screen().draw();
 }
 
 void Player::ForceStateMachineReset() const
@@ -953,8 +953,8 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //{
 //    save_ptree.put(root+"unresolved.npc_id", npc->id());
 //    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
-//    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::get().GetBottomLeft().x);
-//    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::get().GetBottomLeft().y);
+//    save_ptree.put(root+"unresolved.screen_pos_x", client::global::get().screen().GetBottomLeft().x);
+//    save_ptree.put(root+"unresolved.screen_pos_y", client::global::get().screen().GetBottomLeft().y);
 //}
 
 //void Player::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -969,7 +969,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //{
 //    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
 //    starsystem = (Starsystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
-//    //jeti::Screen::get().SetBottomLeft(data_unresolved_player.screen_pos);
+//    //client::global::get().screen().SetBottomLeft(data_unresolved_player.screen_pos);
 //}
 
 

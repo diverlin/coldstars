@@ -28,12 +28,6 @@
 
 namespace jeti {
 
-Screen& Screen::get()
-{
-    static Screen screen;
-    return screen;
-}
-
 Screen::Screen()
     :
       m_fps(0),

@@ -118,7 +118,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //        render.DrawQuad(*GuiTextureObCollector::Instance().slot_mark_accept, box);
 
 //        glm::vec2 pos(box.center().x - font_size/2 + gui_offset.x, box.center().y - font_size + gui_offset.y);
-//        jeti::Screen::get().DrawText(std::to_string(locked_turns), font_size, pos);
+//        client::global::get().screen().DrawText(std::to_string(locked_turns), font_size, pos);
 //    }
 
 //    if (draw_text == true)
@@ -126,7 +126,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //        if (subTypeId() == type::entity::ROCKET_EQUIPMENT_ID)
 //        {
 //            glm::vec2 pos(box.center().x - box.size().x/2 + gui_offset.x, box.center().y + gui_offset.y);
-//            jeti::Screen::get().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
+//            client::global::get().screen().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
 //        }
 //    }
 //}

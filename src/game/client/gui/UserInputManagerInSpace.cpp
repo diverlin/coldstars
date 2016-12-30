@@ -19,6 +19,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
+#include <common/global.hpp>
 #include <common/Global.hpp>
 #include <common/Config.hpp>
 #include <jeti/Screen.hpp>
@@ -129,7 +130,7 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             { 
                 glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-                jeti::Screen::get().initiateScrollTo(player_pos2);
+                client::global::get().screen().initiateScrollTo(player_pos2);
                 break; 
             }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }
@@ -201,8 +202,8 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             
             case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::LOAD_ID); break; }
     
-            case sf::Keyboard::K: { jeti::Screen::get().increaseScale(); break; }
-            case sf::Keyboard::L: { jeti::Screen::get().decreaseScale(); break; }
+            case sf::Keyboard::K: { client::global::get().screen().increaseScale(); break; }
+            case sf::Keyboard::L: { client::global::get().screen().decreaseScale(); break; }
         }   
     }
 }
@@ -233,8 +234,8 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
     int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
     int my = player->GetCursor().GetMouseData().pos_screencoord.y;
     
-    int screen_w = jeti::Screen::get().width();
-    int screen_h = jeti::Screen::get().height();
+    int screen_w = client::global::get().screen().width();
+    int screen_h = client::global::get().screen().height();
     
     //bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
@@ -271,7 +272,7 @@ void UserInputInSpace::__scrollCamera(Player* player)
 {
     int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
-    jeti::Camera& camera = jeti::Screen::get().camera();
+    jeti::Camera& camera = client::global::get().screen().camera();
     
     // SCROLLING X AXIS
     switch (m_cameraMoveAxisX)
@@ -294,5 +295,5 @@ void UserInputInSpace::__scrollCamera(Player* player)
         break;
     }
 
-    jeti::Screen::get().move(m_scrollAccel);
+    client::global::get().screen().move(m_scrollAccel);
 }
