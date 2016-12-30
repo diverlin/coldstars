@@ -19,7 +19,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 #include <common/Global.hpp>
 #include <common/Config.hpp>
 #include <jeti/Screen.hpp>
@@ -272,7 +272,7 @@ void UserInputInSpace::__scrollCamera(Player* player)
 {
     int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
-    jeti::Camera& camera = client::global::get().screen().camera();
+    jeti::Camera& camera = client::global::get().camera();
     
     // SCROLLING X AXIS
     switch (m_cameraMoveAxisX)

@@ -18,7 +18,7 @@
 
 #include "GuiRadar.hpp"
 #include <resources/GuiTextureObCollector.hpp>
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>

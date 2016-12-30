@@ -21,6 +21,8 @@
 
 #include <jeti/Config.hpp>
 
+#include <client/common/global.hpp>
+
 #include <constants.hpp>
 #include <meti/RandUtils.hpp> // remove
 
@@ -96,7 +98,8 @@ void Screen::move(const glm::vec2& delta)
 
 void Screen::updateInSpace()
 {   
-    m_rect.SetBottomLeft(m_camera.lookTo().x, m_camera.lookTo().y);
+    jeti::Camera& camera = client::global::get().camera();
+    m_rect.SetBottomLeft(camera.lookTo().x, camera.lookTo().y);
     //if (auto_scroll == true)
     //{
     //glm::vec2 d_pos;

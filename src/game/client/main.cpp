@@ -37,7 +37,7 @@
 #include "gui/GuiActions.hpp"
 
 #include "common/TurnTimer.hpp"
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 
 
 #include "pilots/Npc.hpp"

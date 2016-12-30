@@ -21,7 +21,7 @@
 
 #include <ceti/Collision.hpp>
 #include <common/constants.hpp>
-#include <common/global.hpp>
+#include <client/common/global.hpp>
 
 #include <world/starsystem.hpp>
 #include <jeti/Screen.hpp>
@@ -699,7 +699,7 @@ void SpaceViewer::render(Starsystem* starsystem,
     __update(starsystem, lookFrom, lookTo, lookFar);
 
     jeti::Renderer& renderer = client::global::get().render();
-    jeti::Camera& camera = client::global::get().screen().camera();
+    jeti::Camera& camera = client::global::get().camera();
 
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
