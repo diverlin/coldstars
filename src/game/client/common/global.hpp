@@ -21,6 +21,10 @@
 
 class UserInputInSpace;
 
+namespace type {
+class Types;
+} // namespace type
+
 namespace jeti {
 class Screen;
 class Renderer;
@@ -36,6 +40,7 @@ public:
 
     void init();
 
+    type::Types& types() { return *m_types; }
     jeti::Screen& screen() { return *m_screen; }
     jeti::Renderer& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
@@ -48,6 +53,7 @@ private:
     ~global();
     global& operator=(const global&) = delete;
 
+    type::Types* m_types = nullptr;
     jeti::Screen* m_screen = nullptr;
     jeti::Renderer* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;

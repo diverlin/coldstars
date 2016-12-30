@@ -108,7 +108,7 @@ int main()
     Player* player = createPlayer();
 
     model::World world;
-    view::SpaceViewer viewer;
+    view::Space viewer;
     while(inputs_manager.runSession()) {
         inputs_manager.update(player);
         world.update();

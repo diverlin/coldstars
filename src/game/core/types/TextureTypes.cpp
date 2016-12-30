@@ -22,22 +22,24 @@
 
 namespace type {
 
-namespace {
-void registerType(texture id, const std::string& info) {
-    g_typesTextureString.insert(std::make_pair((int_t)id, info));
-    g_typesStringTexture.insert(std::make_pair(info, (int_t)id));
-}
-}
-
-void init() {
-    registerType(texture::STAR_ID, "star");
-    registerType(texture::PLANET_ID, "planet");
-    registerType(texture::SHIP_ID, "ship");
+Types::Types() {
+    __registerType(texture::STAR_ID, "star");
+    __registerType(texture::PLANET_ID, "planet");
+    __registerType(texture::SHIP_ID, "ship");
 }
 
-int_t toInt(const std::string& info) {
-    const auto& it = g_typesStringTexture.find(info);
-    if (it != g_typesStringTexture.end()) {
+Types::~Types() {}
+
+void
+Types::__registerType(texture id, const std::string& info) {
+    m_typesTextureString.insert(std::make_pair((int_t)id, info));
+    m_typesStringTexture.insert(std::make_pair(info, (int_t)id));
+}
+
+int_t
+Types::toInt(const std::string& info) {
+    const auto& it = m_typesStringTexture.find(info);
+    if (it != m_typesStringTexture.end()) {
         return it->second;
     }
     assert(false);
