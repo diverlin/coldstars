@@ -27,7 +27,6 @@
 #include <Bloom.hpp>
 #include <Shaders.hpp>
 #include <Light.hpp>
-#include <Camera.hpp>
 
 #include <string>
 
@@ -59,7 +58,7 @@ public:
     void activateFbo(int, int, int);
     void deactivateFbo(int);
 
-    void init(int, int);
+    void init(Camera*, int, int);
 
     void setPerspectiveProjection(float, float);
     void setOrthogonalProjection(float, float);
@@ -104,7 +103,7 @@ private:
     int m_w = 0;
     int m_h = 0;
 
-    Mesh* m_meshQuad;
+    Mesh* m_meshQuad = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;
@@ -136,7 +135,7 @@ private:
     int m_indexFboLastDeactivated = -1;
 
     BloomEffect m_bloom;
-    Camera m_camera;
+    Camera* m_camera = nullptr;
 
     void __initPostEffects();
     void __makeShortCuts();
