@@ -126,7 +126,7 @@ SpaceViewer::~SpaceViewer()
 {}                                    
 
 void
-SpaceViewer::__update(Starsystem* starsystem,
+SpaceViewer::__updateVisible(Starsystem* starsystem,
                       const meti::vec3& lookFrom,
                       const meti::vec3& lookTo,
                       float lookFar)
@@ -139,12 +139,10 @@ SpaceViewer::__update(Starsystem* starsystem,
     visibilityData.observer.center = lookFrom;
     visibilityData.observer.radius = lookFar;
 
-    assert(starsystem->stars().size());
     for(auto* star: starsystem->stars()) {
         addIfVisible(star->model(), visibilityData);
     }
 
-    assert(starsystem->planets().size());
     for(auto* planet: starsystem->planets()) {
         addIfVisible(planet->model(), visibilityData);
     }
@@ -689,18 +687,19 @@ void SpaceViewer::__render_NEW2(jeti::Renderer& render)
     //render.SetOrthogonalProjection(w, h);
 }
 
-void SpaceViewer::render(Starsystem* starsystem,
-                         const meti::vec3& lookFrom,
-                         const meti::vec3& lookTo,
-                         float lookFar,
-                         bool turn_ended,
-                         bool forceDraw_orbits,
-                         bool forceDraw_path)
+//void SpaceViewer::render(Starsystem* starsystem,
+//                         const meti::vec3& lookFrom,
+//                         const meti::vec3& lookTo,
+//                         float lookFar,
+//                         bool turn_ended,
+//                         bool forceDraw_orbits,
+//                         bool forceDraw_path)
+
+void SpaceViewer::render(Starsystem* starsystem, jeti::Camera& camera)
 {   
-    __update(starsystem, lookFrom, lookTo, lookFar);
+    __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
 
     jeti::Renderer& renderer = client::global::get().render();
-    jeti::Camera& camera = client::global::get().camera();
 
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();

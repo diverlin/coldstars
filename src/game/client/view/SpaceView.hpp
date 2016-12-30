@@ -42,6 +42,7 @@ class Base;
 } // namespace core
 
 namespace jeti {
+class Camera;
 namespace view {
 class BaseView;
 } // namespace view
@@ -109,13 +110,7 @@ public:
 //    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
-    void render(Starsystem*,
-                const meti::vec3& lookFrom,
-                const meti::vec3& lookTo,
-                float lookFar,
-                bool a = true,
-                bool b = true,
-                bool c = true);
+    void render(Starsystem*, jeti::Camera&);
 
 private:
     /// visible entities
@@ -135,7 +130,7 @@ private:
 //    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
 //    std::vector<VerticalFlowText*> m_texts;
     
-    void __update(Starsystem* starsystem,
+    void __updateVisible(Starsystem* starsystem,
                   const meti::vec3& lookFrom,
                   const meti::vec3& lookTo,
                   float lookFar);
