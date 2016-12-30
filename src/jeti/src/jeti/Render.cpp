@@ -58,8 +58,10 @@ Renderer::~Renderer()
 
 void Renderer::init(int w, int h)
 {
-    if (m_meshQuad)
-        assert(false);
+    if (m_initialized)
+        return;
+
+    glewInit();
 
     m_meshQuad = new jeti::Mesh;
 
@@ -102,6 +104,8 @@ void Renderer::init(int w, int h)
 
     __initPostEffects();
     __makeShortCuts();
+
+    m_initialized = true;
 }
 
 void Renderer::activateFbo(int index, int w, int h)

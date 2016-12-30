@@ -41,7 +41,6 @@ public:
     const ceti::Rect& rect() const { return m_rect; }
     //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
     //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
-    jeti::Renderer& renderer() { return m_render; }
     Camera& camera() { return m_camera; }
 
     void setBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
@@ -66,7 +65,6 @@ public:
     void decreaseScale();
 
 private:
-    jeti::Renderer m_render;
     Camera m_camera;
 
     bool m_autoScroll;
