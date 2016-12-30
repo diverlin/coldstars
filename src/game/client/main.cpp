@@ -108,23 +108,13 @@ int main()
 //    }
 //    run_scenario->Init(player);
     
+    jeti::Camera& camera = client::global::get().camera();
     model::World world;
     view::SpaceViewer viewer;
     while(inputs.runSession()) {
         inputs.update(player);
         world.update();
-
-        // todo catch from player
-        meti::vec3 lookFrom(0,0,0);
-        meti::vec3 lookTo(0,0,0);
-        float radius(300.0f);
-        //
-
-        viewer.render(world.activeStarsystem(),
-                      lookFrom,
-                      lookTo,
-                      radius);
-
+        viewer.render(world.activeStarsystem(), camera);
     }
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();

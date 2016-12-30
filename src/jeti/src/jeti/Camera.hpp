@@ -34,6 +34,7 @@ public:
 
     const glm::vec3& lookTo() const { return m_lookTo; }
     const glm::vec3& lookFrom() const { return m_lookFrom; }
+    float lookRadius() const { return m_lookRadius; }
     const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
     void appendSpeed(const glm::vec3&);
@@ -41,6 +42,8 @@ public:
     void update(int, int);
 
 private:
+    float m_lookRadius = 500.0;
+
     glm::vec3 m_lookFrom = glm::vec3(0.0f, 0.0f, 0.0f);
 
     glm::vec3 m_lookTo = glm::vec3(0.0f, 0.0f, 499.0f);
