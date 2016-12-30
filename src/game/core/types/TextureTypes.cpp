@@ -18,6 +18,33 @@
 
 #include "TextureTypes.hpp"
 
+#include <cassert>
+
+namespace type {
+
+namespace {
+void registerType(texture id, const std::string& info) {
+    g_typesTextureString.insert(std::make_pair((int_t)id, info));
+    g_typesStringTexture.insert(std::make_pair(info, (int_t)id));
+}
+}
+
+void init() {
+    registerType(texture::STAR_ID, "star");
+    registerType(texture::PLANET_ID, "planet");
+    registerType(texture::SHIP_ID, "ship");
+}
+
+int_t toInt(const std::string& info) {
+    const auto& it = g_typesStringTexture.find(info);
+    if (it != g_typesStringTexture.end()) {
+        return it->second;
+    }
+    assert(false);
+    return -1;
+}
+
+} // namespace type
 
 std::string str(type::texture type_id)
 {
@@ -75,9 +102,7 @@ std::string str(type::texture type_id)
         case type::texture::MODULE_ID: return "TYPE::TEXTURE::MODULE_ID";
 
         case type::texture::ROCKET_BULLET_ID: return "TYPE::TEXTURE::ROCKET_BULLET_ID";
-
-        default: return "TYPE::TEXTURE::UNKNOWN";
     }
-
+    assert(false);
 }
 

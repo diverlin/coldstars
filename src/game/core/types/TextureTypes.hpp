@@ -18,7 +18,10 @@
 
 #pragma once
 
+#include <type/IdType.hpp>
+
 #include <string>
+#include <map>
 
 namespace type
 {
@@ -51,7 +54,15 @@ enum class texture: int
     ROCKET_BULLET_ID,
 };
 
-} // namespace texture
+static std::map<int_t, std::string> g_typesTextureString;
+static std::map<std::string, int_t> g_typesStringTexture;
+
+void init();
+int_t toInt(const std::string& info);
+
+} // namespace type
+
+
 
 std::string str(type::texture);
 

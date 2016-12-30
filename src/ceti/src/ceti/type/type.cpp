@@ -20,11 +20,11 @@
 
 namespace ceti {
 
-    Type::Type(int id, const std::string& string)
-        :
-          m_id(id)
-        , m_string(string)
-    {}
+//    Type::Type(int id, const std::string& string)
+//        :
+//          m_id(id)
+//        , m_string(string)
+//    {}
 
 } // namespace ceti
 

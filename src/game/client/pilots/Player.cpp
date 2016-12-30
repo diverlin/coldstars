@@ -826,7 +826,7 @@ void Player::SessionInSpace(Starsystem* starsystem, const TurnTimer& turn_timer)
 //    }
 
     UserInput::get().update();
-    UserInputInSpace::get().update(this);
+    //UserInputInSpace::get().update(this);
 //    if (turn_timer.GetTurnEnded() == true)
 //    {
 //        GuiManager::Instance().GetGuiSpace().Update(this);

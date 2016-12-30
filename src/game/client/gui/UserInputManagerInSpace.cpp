@@ -30,12 +30,6 @@
 
 #include <gui/GuiManager.hpp>
 
-UserInputInSpace& UserInputInSpace::get()
-{
-    static UserInputInSpace instance;
-    return instance;
-}
-
 UserInputInSpace::UserInputInSpace()
 :
 m_nextTurnReady(false),
@@ -217,8 +211,7 @@ void UserInputInSpace::__mouseButtonPressed(Player* player)
 {
     for (const auto & key_code : UserInput::get().m_mousePressedCodes)   
     {
-        switch (key_code) 
-        {    
+        switch (key_code) {
             case sf::Mouse::Left:  { player->GetCursor().SetLeftMouseButtonClick(true); break; } 
             case sf::Mouse::Right: { player->GetCursor().SetRightMouseButtonClick(true); break; }
         }

@@ -51,11 +51,18 @@ Renderer::Renderer()
 }
 
 Renderer::~Renderer() 
-{}
+{
+    delete m_meshQuad;
+}
 
 
 void Renderer::init(int w, int h)
 {
+    if (m_meshQuad)
+        assert(false);
+
+    m_meshQuad = new jeti::Mesh;
+
     m_w = w;
     m_h = h;
 
