@@ -18,7 +18,7 @@
 
 #include "StarBuilder.hpp"
 #include <builder/CommonBuilderHeaders.hpp>
-#include "../../spaceobjects/Star.hpp"
+#include <core/spaceobjects/Star.hpp>
 
 #include <common/constants.hpp>
 
@@ -38,14 +38,14 @@ Star::__getNewTemplate(int_t id)
     model->setId(id);
 
     assert(model);
-   core::global::get().entityManager().reg(model);
+    core::global::get().entityManager().reg(model);
     return model;
 } 
  
 model::Star*
 Star::getNew()
 {
-    const auto& descr =core::global::get().descriptors().star().random();
+    const auto& descr = core::global::get().descriptors().star().random();
     return getNew(descr);
 } 
 
@@ -54,7 +54,7 @@ Star::getNew(const descriptor::Star& descr)
 {
     model::Star* model = __getNewTemplate();
     model->setMesh(descr.mesh());
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
+    model->setMaterial(descr.texture());
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
@@ -70,9 +70,6 @@ Star::getNew(const descriptor::Star& descr)
     data_life.armor = descr.armor();
     model->setLifeData(data_life);
 
-    //alpitodorender star->SetRenderData(mesh, texOb, scale);
-
-    // alpitodorender star->CalcColor();
     return model;
 }
           

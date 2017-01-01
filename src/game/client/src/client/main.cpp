@@ -104,6 +104,7 @@ int main()
 
     UserInputInSpace& inputs_manager = client::global::get().inputsManager();
     jeti::Camera& camera = client::global::get().camera();
+    jeti::Screen& screen = client::global::get().screen();
 
     Player* player = createPlayer();
 
@@ -113,6 +114,7 @@ int main()
         inputs_manager.update(player);
         world.update();
         viewer.render(world.activeStarsystem(), camera);
+        screen.draw();
     }
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
