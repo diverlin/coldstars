@@ -25,7 +25,7 @@
 #include <ceti/Logger.hpp>
 #include <math/rand.hpp>
 
-//#include <resources/TextureCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
 
 #include <slots/VehicleSlot.hpp>
 

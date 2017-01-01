@@ -17,7 +17,7 @@
 */
 
 #include "GuiSkills.hpp"
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 #include <common/constants.hpp>
 #include <jeti/Render.hpp>
 #include "ButtonSingle.hpp"

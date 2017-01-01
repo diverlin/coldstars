@@ -23,8 +23,8 @@
 #include <ceti/Logger.hpp>
 #include <common/Global.hpp>
 
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
+//#include <client/resources/MeshCollector.hpp>
 //#include <jeti/Material.hpp>
 
 //#include <boost/property_tree/info_parser.hpp>

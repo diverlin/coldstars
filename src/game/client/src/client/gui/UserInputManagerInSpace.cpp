@@ -28,11 +28,11 @@
 
 #include <parts/WeaponComplex.hpp>
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
 
-#include <gui/GuiManager.hpp>
+#include <client/gui/GuiManager.hpp>
 
 UserInputInSpace::UserInputInSpace()
 :

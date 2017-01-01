@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <view/VehicleDrawable.hpp>
+#include <client/view/VehicleDrawable.hpp>
 
 //class SatelliteDrawable : public VehicleDrawable
 //{

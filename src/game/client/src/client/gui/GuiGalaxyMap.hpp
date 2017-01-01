@@ -18,8 +18,8 @@
 
 
 #pragma once
-#include <gui/BaseGuiElement.hpp>
-#include <gui/MouseData.hpp>
+#include <client/gui/BaseGuiElement.hpp>
+#include <client/gui/MouseData.hpp>
 #include <jeti/PathVisual.hpp>
 
 class Galaxy;

@@ -22,7 +22,7 @@
 #include <vector>
 
 #include <common/Base.hpp>
-#include <gui/Cursor.hpp>
+#include <client/gui/Cursor.hpp>
 #include <pilots/Show.hpp>
 #include <jeti/Render.hpp>
 

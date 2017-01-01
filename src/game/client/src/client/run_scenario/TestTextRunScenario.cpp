@@ -19,7 +19,7 @@
 #include <builder/world/GalaxyBuilder.hpp>
 
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <spaceobjects/Vehicle.hpp>
 
 #include <ai/God.hpp>
@@ -29,7 +29,7 @@
 #include <common/Global.hpp>
 
 #include <descriptors/GalaxyDescriptor.hpp>
-#include <text/VerticalFlowText.hpp>
+#include <client/text/VerticalFlowText.hpp>
 
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>

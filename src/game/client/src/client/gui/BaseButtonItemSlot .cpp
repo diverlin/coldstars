@@ -21,7 +21,7 @@
 #include <slots/ItemSlot.hpp>
 #include <item/BaseItem.hpp>
 
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 #include <jeti/Render.hpp>

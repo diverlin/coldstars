@@ -25,9 +25,9 @@
 #include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 
-//#include <resources/TextureCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
 //#include <jeti/Material.hpp>
-//#include <resources/MeshCollector.hpp>
+//#include <client/resources/MeshCollector.hpp>
 
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>

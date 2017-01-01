@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <gui/BaseGuiElement.hpp>
+#include <client/gui/BaseGuiElement.hpp>
 
 class Vehicle;
 class Store;

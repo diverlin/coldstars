@@ -22,8 +22,8 @@
 #include <vector>
 
 #include <common/Base.hpp>
-//#include <gui/Cursor.hpp>
-//#include <pilots/Show.hpp>
+//#include <client/gui/Cursor.hpp>
+//#include <client/pilots/Show.hpp>
 //#include <jeti/Render.hpp>
 #include <jeti/BaseView.hpp>
 

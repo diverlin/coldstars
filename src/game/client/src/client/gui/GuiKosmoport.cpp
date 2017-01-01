@@ -20,7 +20,7 @@
 #include "ButtonSingle.hpp"
 #include "UserInput.hpp"
 
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 #include <jeti/Screen.hpp>
 
 #include <common/constants.hpp>
@@ -28,7 +28,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
@@ -44,11 +44,11 @@
 #include <dock/Angar.hpp>
 #include <dock/Goverment.hpp>
 
-#include <gui/GuiManager.hpp>
-#include <gui/GuiVehicle.hpp>
-#include <gui/GuiSkills.hpp>
-#include <gui/GuiGalaxyMap.hpp>
-#include <gui/Slider.hpp>
+#include <client/gui/GuiManager.hpp>
+#include <client/gui/GuiVehicle.hpp>
+#include <client/gui/GuiSkills.hpp>
+#include <client/gui/GuiGalaxyMap.hpp>
+#include <client/gui/Slider.hpp>
 
 GuiKosmoport::GuiKosmoport():
 init_done(false), 

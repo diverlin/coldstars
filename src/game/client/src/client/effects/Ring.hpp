@@ -20,7 +20,7 @@
 #ifndef RING_HPP
 #define RING_HPP
 
-#include <effects/BaseDecor.hpp>
+#include <client/effects/BaseDecor.hpp>
 
 class Ring : public BaseDecor
 {

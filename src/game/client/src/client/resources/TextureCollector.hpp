@@ -23,7 +23,7 @@
 #include <vector>
 #include <map>
 
-#include <resources/TextureDescriptor.hpp>
+#include <client/resources/TextureDescriptor.hpp>
 #include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>

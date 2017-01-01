@@ -17,7 +17,7 @@
 */
 
 #include "GuiRadar.hpp"
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 #include <client/common/global.hpp>
 
 #include <jeti/Screen.hpp>
@@ -26,7 +26,7 @@
 #include <spaceobjects/SpaceObject.hpp>
 #include <spaceobjects/Vehicle.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 #include <meti/VectorUtils.hpp>
 

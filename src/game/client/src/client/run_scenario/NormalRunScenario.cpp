@@ -17,14 +17,14 @@
 */
 
 
-#include <run_scenario/NormalRunScenario.hpp>
+#include <client/run_scenario/NormalRunScenario.hpp>
 
 #include <iostream>
 
 #include <builder/world/GalaxyBuilder.hpp>
 
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>

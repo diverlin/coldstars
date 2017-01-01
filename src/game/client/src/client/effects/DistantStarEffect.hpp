@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <effects/BaseBackGroundEffect.hpp>
+#include <client/effects/BaseBackGroundEffect.hpp>
 
 #include <ceti/type/IdType.hpp>
 

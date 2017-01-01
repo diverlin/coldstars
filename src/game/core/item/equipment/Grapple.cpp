@@ -28,7 +28,7 @@
 
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Vehicle.hpp>
-//#include <resources/GuiTextureObCollector.hpp>
+//#include <client/resources/GuiTextureObCollector.hpp>
 
 namespace item {
 namespace equipment {

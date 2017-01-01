@@ -23,17 +23,17 @@
 #include <slots/VehicleSlot.hpp>
 #include <slots/ItemSlot.hpp>
 #include <item/BaseItem.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
 #include <jeti/Render.hpp>
-#include <gui/GuiManager.hpp>
+#include <client/gui/GuiManager.hpp>
 
 GuiAngar::GuiAngar():angar(nullptr)
 {

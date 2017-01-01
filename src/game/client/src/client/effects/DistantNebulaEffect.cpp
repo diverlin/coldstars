@@ -22,7 +22,7 @@
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
 
-#include <resources/TextureCollector.hpp>
+#include <client/resources/TextureCollector.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <jeti/Render.hpp>

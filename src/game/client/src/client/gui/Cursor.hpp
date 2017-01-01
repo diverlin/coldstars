@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <gui/MouseData.hpp>
+#include <client/gui/MouseData.hpp>
 #include <ceti/Box2D.hpp>
 
 class ItemSlot;

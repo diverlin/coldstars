@@ -25,8 +25,8 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
+//#include <client/resources/MeshCollector.hpp>
 //#include <jeti/Material.hpp>
 
 GoodsPack::GoodsPack(int id, type::entity subtype_id)

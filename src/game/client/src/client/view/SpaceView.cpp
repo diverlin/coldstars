@@ -37,23 +37,23 @@
 #include <spaceobjects/Star.hpp>
 #include <spaceobjects/Planet.hpp>
 
-#include <view/ShipDrawable.hpp>
-#include <view/BulletDrawable.hpp>
-#include <view/ContainerDrawable.hpp>
-#include <view/Star.hpp>
-#include <view/Planet.hpp>
-#include <view/BlackHoleDrawable.hpp>
-#include <view/Asteroid.hpp>
-#include <view/SpaceStationDrawable.hpp>
-#include <view/SatelliteDrawable.hpp>
+#include <client/view/ShipDrawable.hpp>
+#include <client/view/BulletDrawable.hpp>
+#include <client/view/ContainerDrawable.hpp>
+#include <client/view/Star.hpp>
+#include <client/view/Planet.hpp>
+#include <client/view/BlackHoleDrawable.hpp>
+#include <client/view/Asteroid.hpp>
+#include <client/view/SpaceStationDrawable.hpp>
+#include <client/view/SatelliteDrawable.hpp>
 
 
 /// effects
-#include <effects/lazerTrace.hpp>
-#include <effects/ShockWaveEffect.hpp>
-#include <text/VerticalFlowText.hpp>
+#include <client/effects/lazerTrace.hpp>
+#include <client/effects/ShockWaveEffect.hpp>
+#include <client/text/VerticalFlowText.hpp>
 
-#include <resources/TextureCollector.hpp>
+#include <client/resources/TextureCollector.hpp>
 #include <ceti/descriptor/Collector.hpp>
 #include <common/Global.hpp>
 #include <descriptors/DescriptorManager.hpp>

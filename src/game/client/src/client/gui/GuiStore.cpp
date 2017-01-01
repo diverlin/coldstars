@@ -18,14 +18,14 @@
 
 #include "GuiStore.hpp"
 #include <dock/Store.hpp>
-#include <pilots/Player.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/pilots/Player.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 #include <item/BaseItem.hpp>
 #include <slots/ItemSlot.hpp>
 #include <slots/VehicleSlot.hpp>
 #include <pilots/Npc.hpp>
 #include <spaceobjects/Vehicle.hpp>
-#include <gui/GuiManager.hpp>
+#include <client/gui/GuiManager.hpp>
 
 GuiStore::GuiStore():store(nullptr)
 {}

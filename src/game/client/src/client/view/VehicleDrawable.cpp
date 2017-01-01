@@ -18,10 +18,10 @@
 
 //#include <render/VehicleDrawable.hpp>
 
-//#include <effects/Shield.hpp>
+//#include <client/effects/Shield.hpp>
 //#include <jeti/particlesystem/DriveEffect.hpp>
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
-//#include <text/VerticalFlowText.hpp>
+//#include <client/text/VerticalFlowText.hpp>
 
 //VehicleDrawable::VehicleDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
 //    :

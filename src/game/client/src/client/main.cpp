@@ -27,12 +27,12 @@
 #include <jeti/Screen.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
-#include "gui/UserInputManagerInSpace.hpp"
-#include <gui/UserInput.hpp>
+#include <client/gui/UserInputManagerInSpace.hpp>
+#include <client/gui/UserInput.hpp>
 
 
-#include "gui/ButtonTrigger.hpp"
-#include "gui/GuiActions.hpp"
+#include <client/gui/ButtonTrigger.hpp>
+#include <client/gui/GuiActions.hpp>
 
 #include "common/TurnTimer.hpp"
 #include <client/common/global.hpp>
@@ -67,7 +67,7 @@
 #include <pureTest/vectorPerfomanceTest.cpp>
 #include <pureTest/matrixPerfomanceTest.cpp>
 
-#include <view/SpaceView.hpp>
+#include <client/view/SpaceView.hpp>
 
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
