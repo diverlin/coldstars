@@ -84,7 +84,7 @@ public:
     }
 
     [[warning("make it const")]]
-    T* getByType(int type) {
+    T* getRand(int_t type) {
         T* result = nullptr;
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {

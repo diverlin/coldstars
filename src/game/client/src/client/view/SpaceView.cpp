@@ -708,9 +708,6 @@ void Space::render(Starsystem* starsystem, jeti::Camera& camera)
     
     renderer.composeViewMatrix(camera.viewMatrix());
     __render_NEW(renderer);
-
-    client::global::get().screen().draw();
-
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
     //    {
