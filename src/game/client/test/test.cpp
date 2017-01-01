@@ -18,9 +18,18 @@
 
 #include <gtest/gtest.h>
 
+#include <core/builder/spaceobjects/ALL>
+#include <core/spaceobjects/ALL>
+#include <client/view/Star.hpp>
+
 TEST(resources, viewer)
 {
-//    using namespace ceti::descriptor;
+    model::Star* model = builder::Star::getNew();
+    control::Star* control = new control::Star(model);
+    view::Star* view = new view::Star(model);
+
+    assert();
+    //    using namespace ceti::descriptor;
 
 //    MeshDescriptor descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
 //    MeshDescriptor descr2(descr);

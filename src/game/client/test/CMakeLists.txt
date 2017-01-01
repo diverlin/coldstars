@@ -22,6 +22,7 @@ include_directories(../src)
 add_executable (${PROJECT} ${${PROJECT}_SRC} ${${PROJECT}_HDR})
 target_link_libraries(${PROJECT}
     ${PROJECT_CORE}
+    ${PROJECT_CLIENT}
     ${PROJECT_JETI}
     ${GTEST_MAIN_LIBRARIES}
     ${GTEST_LIBRARIES}
