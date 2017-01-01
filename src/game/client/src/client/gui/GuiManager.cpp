@@ -33,12 +33,12 @@
 #include <item/BaseItem.hpp>
 
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
 
-#include <gui/GuiSkills.hpp>
-#include <gui/GuiGalaxyMap.hpp>
+#include <client/gui/GuiSkills.hpp>
+#include <client/gui/GuiGalaxyMap.hpp>
 
 
 GuiManager& GuiManager::Instance()

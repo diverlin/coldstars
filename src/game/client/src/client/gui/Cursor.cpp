@@ -17,7 +17,7 @@
 */
 
 
-#include <gui/Cursor.hpp>
+#include <client/gui/Cursor.hpp>
 
 #include <client/common/global.hpp>
 
@@ -36,12 +36,12 @@
 
 #include <spaceobjects/ALL>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 #include <parts/WeaponComplex.hpp>
-#include <gui/ButtonTrigger.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/gui/ButtonTrigger.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 
 Cursor::Cursor()

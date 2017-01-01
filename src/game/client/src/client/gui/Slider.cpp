@@ -19,13 +19,13 @@
 #include "Slider.hpp"
 #include <jeti/Render.hpp>
 #include <common/constants.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <gui/ButtonSingle.hpp>
-#include <gui/ButtonTrigger.hpp>
-#include <gui/MouseData.hpp>
-#include <pilots/Player.hpp>
-#include <resources/TextureCollector.hpp>
+#include <client/gui/ButtonSingle.hpp>
+#include <client/gui/ButtonTrigger.hpp>
+#include <client/gui/MouseData.hpp>
+#include <client/pilots/Player.hpp>
+#include <client/resources/TextureCollector.hpp>
 #include <jeti/Screen.hpp>
 
 #include <item/others/GoodsPack.hpp>

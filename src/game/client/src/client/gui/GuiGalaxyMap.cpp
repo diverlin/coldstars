@@ -17,8 +17,8 @@
 */
 
 
-#include <gui/GuiGalaxyMap.hpp>
-#include <gui/MouseData.hpp>
+#include <client/gui/GuiGalaxyMap.hpp>
+#include <client/gui/MouseData.hpp>
 
 #include <common/Global.hpp>
 #include <jeti/Config.hpp>
@@ -27,8 +27,8 @@
 //#include <ceti/StringUtils.hpp>
 #include <types/AiScenarioTypes.hpp>
 
-#include <resources/GuiTextureObCollector.hpp>
-#include <resources/TextureCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
+#include <client/resources/TextureCollector.hpp>
 
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
@@ -45,7 +45,7 @@
 #include <spaceobjects/Vehicle.hpp>
 
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 
 GuiGalaxyMap::GuiGalaxyMap()

@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <effects/BaseDecor.hpp>    
+#include <client/effects/BaseDecor.hpp>    
 
 class DistantNebulaEffect : public BaseDecor
 {

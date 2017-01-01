@@ -31,7 +31,7 @@
 
 //#include <jeti/Render.hpp>
 
-//#include <resources/GuiTextureObCollector.hpp>
+//#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <slots/VehicleSlot.hpp> 
 #include <slots/ItemSlot.hpp>
@@ -54,10 +54,10 @@
 #include <item/artefacts/ProtectorArtefact.hpp>
 #endif
 
-//#include <effects/Shield.hpp>
+//#include <client/effects/Shield.hpp>
 //#include <jeti/particlesystem/DriveEffect.hpp>
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
-//#include <text/VerticalFlowText.hpp>
+//#include <client/text/VerticalFlowText.hpp>
 
 #include <parts/Turrel.hpp>
 

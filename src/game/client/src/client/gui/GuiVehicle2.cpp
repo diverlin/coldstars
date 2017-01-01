@@ -20,10 +20,10 @@
 #include "ButtonItemSlot2.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 #include <spaceobjects/Vehicle.hpp>
 #include <slots/ItemSlot.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 

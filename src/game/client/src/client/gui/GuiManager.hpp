@@ -23,9 +23,9 @@
 class GuiSkill;
 class GuiGalaxyMap;
 
-#include <gui/GuiKosmoport.hpp>
-#include <gui/GuiSpace.hpp>
-#include <gui/GuiNatureLand.hpp>
+#include <client/gui/GuiKosmoport.hpp>
+#include <client/gui/GuiSpace.hpp>
+#include <client/gui/GuiNatureLand.hpp>
 
 
 class GuiManager

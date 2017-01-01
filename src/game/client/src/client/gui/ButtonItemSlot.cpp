@@ -22,7 +22,7 @@
 #include <slots/ItemSlot.hpp>
 #include <item/BaseItem.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 #include <spaceobjects/Vehicle.hpp>

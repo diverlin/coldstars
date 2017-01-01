@@ -20,10 +20,10 @@
 #include <dock/Shop.hpp>
 
 #include <ceti/rect.hpp>
-#include <gui/Cursor.hpp>
+#include <client/gui/Cursor.hpp>
 #include <jeti/Screen.hpp>
-#include <resources/GuiTextureObCollector.hpp>
-#include <gui/ButtonSingle.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
+#include <client/gui/ButtonSingle.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/constants.hpp>
 

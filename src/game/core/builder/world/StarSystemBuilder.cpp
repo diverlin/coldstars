@@ -29,8 +29,8 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-//#include <effects/DistantNebulaEffect.hpp>
-//#include <effects/DistantStarEffect.hpp>
+//#include <client/effects/DistantNebulaEffect.hpp>
+//#include <client/effects/DistantStarEffect.hpp>
 
 #include <meti/RandUtils.hpp>
 

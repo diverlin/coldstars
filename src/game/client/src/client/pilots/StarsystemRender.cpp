@@ -42,8 +42,8 @@
 
 //#include <parts/WeaponComplex.hpp>
 
-#include <effects/lazerTrace.hpp>
-#include <text/VerticalFlowText.hpp>
+#include <client/effects/lazerTrace.hpp>
+#include <client/text/VerticalFlowText.hpp>
 
 #include <spaceobjects/RocketBullet.hpp>
 #include <spaceobjects/Container.hpp>
@@ -57,13 +57,13 @@
 
 #include <pilots/Npc.hpp>
 
-//#include <gui/GuiGalaxyMap.hpp>
-//#include <gui/GuiManager.hpp>
+//#include <client/gui/GuiGalaxyMap.hpp>
+//#include <client/gui/GuiManager.hpp>
 
 //#include <slots/ItemSlot.hpp>
 
-//#include <gui/UserInput.hpp>
-//#include <gui/UserInputManagerInSpace.hpp>
+//#include <client/gui/UserInput.hpp>
+//#include <client/gui/UserInputManagerInSpace.hpp>
 
 //#include <glm/gtc/matrix_transform.hpp>
 

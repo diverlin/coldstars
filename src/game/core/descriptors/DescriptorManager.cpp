@@ -21,7 +21,7 @@
 #include <meti/RandUtils.hpp>
 
 //#hack
-//#include <resources/Data.hpp>
+//#include <client/resources/Data.hpp>
 //#hack
 
 #include <ceti/FsUtils.hpp>

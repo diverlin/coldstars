@@ -21,7 +21,7 @@
 
 #include <spaceobjects/Planet.hpp>
   
-//#include <effects/BaseDecor.hpp>
+//#include <client/effects/BaseDecor.hpp>
 
 #include <jeti/Render.hpp>
 

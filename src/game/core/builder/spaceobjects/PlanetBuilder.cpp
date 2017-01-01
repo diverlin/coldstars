@@ -25,8 +25,8 @@
 
 #include <common/constants.hpp>
 
-//#include <effects/Atmosphere.hpp>
-//#include <effects/Ring.hpp>
+//#include <client/effects/Atmosphere.hpp>
+//#include <client/effects/Ring.hpp>
 
 #include <types/MeshTypes.hpp>
 

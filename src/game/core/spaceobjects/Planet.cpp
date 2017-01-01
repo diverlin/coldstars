@@ -24,7 +24,7 @@
   
 #include <dock/Kosmoport.hpp>
 
-//#include <effects/BaseDecor.hpp>
+//#include <client/effects/BaseDecor.hpp>
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>

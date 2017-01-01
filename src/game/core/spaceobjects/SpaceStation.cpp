@@ -27,7 +27,7 @@
 
 #include <dock/Kosmoport.hpp>
 
-//#include <effects/Shield.hpp>
+//#include <client/effects/Shield.hpp>
 
 #include <slots/ItemSlot.hpp>
 

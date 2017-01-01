@@ -41,8 +41,8 @@
 #include <types/MeshTypes.hpp>
 #include <types/TextureTypes.hpp>
 
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
+//#include <client/resources/MeshCollector.hpp>
 
 namespace descriptor {
 

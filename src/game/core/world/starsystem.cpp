@@ -42,18 +42,18 @@
 
 #include <spaceobjects/ALL>
 
-//#include <pilots/Player.hpp>
+//#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
-//#include <effects/DistantNebulaEffect.hpp>
-//#include <effects/DistantStarEffect.hpp>
-//#include <effects/lazerTrace.hpp>
+//#include <client/effects/DistantNebulaEffect.hpp>
+//#include <client/effects/DistantStarEffect.hpp>
+//#include <client/effects/lazerTrace.hpp>
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
-//#include <text/VerticalFlowText.hpp>
+//#include <client/text/VerticalFlowText.hpp>
 
-//#include <gui/GuiManager.hpp>
-//#include <gui/GuiRadar.hpp>
+//#include <client/gui/GuiManager.hpp>
+//#include <client/gui/GuiRadar.hpp>
 
 #include <descriptors/RaceDescriptors.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>

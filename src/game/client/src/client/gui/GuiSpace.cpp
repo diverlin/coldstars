@@ -37,12 +37,12 @@
 
 #include <ceti/Logger.hpp>
 
-#include <resources/GuiTextureObCollector.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
 #include <world/starsystem.hpp>

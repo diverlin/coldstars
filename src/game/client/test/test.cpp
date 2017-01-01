@@ -18,22 +18,7 @@
 
 #include <gtest/gtest.h>
 
-#include <ceti/descriptor/Descriptor.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Hit.hpp>
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/ExplosionDescriptor.hpp>
-#include <descriptors/AddToStarsystemDescriptor.hpp>
-#include <descriptors/Container.hpp>
-
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
-
-#include <ceti/descriptor/Mesh.hpp>
-
-
-TEST(descriptor, mesh)
+TEST(resources, viewer)
 {
 //    using namespace ceti::descriptor;
 

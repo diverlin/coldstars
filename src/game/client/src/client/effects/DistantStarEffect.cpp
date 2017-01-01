@@ -22,7 +22,7 @@
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include <resources/TextureCollector.hpp>
+#include <client/resources/TextureCollector.hpp>
 #include <jeti/Mesh.hpp>
 
 

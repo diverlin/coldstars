@@ -8,6 +8,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../ma
 add_subdirectory(src/client)
 
 if (USE_TEST)
-    #add_subdirectory(test)
+    add_subdirectory(test)
 endif ()
 

@@ -19,7 +19,7 @@
 
 #pragma once
 
-//#include <effects/ShockWaveEffect.hpp> //depr
+//#include <client/effects/ShockWaveEffect.hpp> //depr
 #include <spaceobjects/Planetoid.hpp>
 
 namespace model {

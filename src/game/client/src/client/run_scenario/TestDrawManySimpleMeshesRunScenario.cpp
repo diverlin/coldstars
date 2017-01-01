@@ -20,7 +20,7 @@
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <pilots/Npc.hpp>
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
 

@@ -16,11 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <builder/pilots/PlayerBuilder.hpp>
+#include <client/builder/pilots/PlayerBuilder.hpp>
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/spaceobjects/ShipBuilder.hpp>
 
-#include <pilots/Player.hpp>
+#include <client/pilots/Player.hpp>
 
 #include <spaceobjects/Ship.hpp>
 

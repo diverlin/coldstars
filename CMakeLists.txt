@@ -3,7 +3,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/macros/c
 
 set(PROJECT coldstars)
 
-project (${PROJECT})
+project(${PROJECT})
 
 set(USE_TEST ON)
 

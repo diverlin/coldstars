@@ -17,7 +17,7 @@
 */
 
 
-#include <gui/UserInput.hpp>
+#include <client/gui/UserInput.hpp>
 
 #include <client/common/global.hpp>
 #include <jeti/Screen.hpp>

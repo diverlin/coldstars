@@ -20,7 +20,7 @@
 #ifndef ATMOSPHERE_HPP
 #define ATMOSPHERE_HPP
 
-#include <effects/BaseDecor.hpp>
+#include <client/effects/BaseDecor.hpp>
 
 class Atmosphere : public BaseDecor
 {
