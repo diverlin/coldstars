@@ -78,6 +78,9 @@ public:
         assert(!result.empty());
         return result;
     }
+    int size() const {
+        return m_descriptors.size();
+    }
 
 private:
     std::map<int_t, T> m_descriptors;

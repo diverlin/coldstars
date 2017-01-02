@@ -16,22 +16,29 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <gtest/gtest.h>
-
 #include <core/builder/spaceobjects/ALL>
 #include <core/spaceobjects/ALL>
+#include <core/common/Global.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/StarDescriptor.hpp>
+
 #include <client/view/Star.hpp>
+#include <client/common/global.hpp>
+
+#include <gtest/gtest.h>
 
 TEST(resources, viewer)
 {
-    model::Star* model = builder::Star::getNew();
+    client::global::get().init();
+    auto star_descr = core::global::get().descriptors().star().random();
+
+    model::Star* model = builder::Star::getNew(star_descr);
     control::Star* control = new control::Star(model);
     view::Star* view = new view::Star(model);
 
-    assert();
-    //    using namespace ceti::descriptor;
+    auto* material_descr = core::global::get().descriptors().material().get(star_descr.texture());
 
-//    MeshDescriptor descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
-//    MeshDescriptor descr2(descr);
-//    EXPECT_TRUE(descr == descr2);
+    EXPECT_NE(star_descr.texture(), -1);
+    EXPECT_NE(material_descr->path(), "");
+    EXPECT_EQ(star_descr.texture(), view->model()->material());
 }
