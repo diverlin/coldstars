@@ -36,6 +36,7 @@ TEST(resources, viewer)
     control::Star* control = new control::Star(model);
     view::Star* view = new view::Star(model);
 
+    int z = star_descr.texture();
     auto* material_descr = core::global::get().descriptors().material().get(star_descr.texture());
 
     EXPECT_NE(star_descr.texture(), -1);

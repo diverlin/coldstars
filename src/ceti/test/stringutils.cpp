@@ -31,3 +31,8 @@ TEST(string_utils, base)
     float f = -1.9991f;
     EXPECT_EQ(std::string("-1.9991"), ceti::to_string(f));
 }
+
+TEST(string_utils, replace)
+{
+    EXPECT_EQ("/path/to/file.png", ceti::replace("/path/to/file.md", ".md", ".png"));
+}

@@ -1,6 +1,7 @@
 #include "MdLoader.hpp"
 
 #include <ceti/descriptor/Texture.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -96,10 +97,14 @@ InfoLoader::read(const std::string& path)
         material->setBrightThreshold(brightThreshold.get());
     }
     if (row) {
-        material->setRow(row.get());
+        if (row.get() > 0) {
+            material->setRow(row.get());
+        }
     }
     if (col) {
-        material->setCol(col.get());
+        if (col.get() > 0) {
+            material->setCol(col.get());
+        }
     }
     if (fps) {
         material->setFps(fps.get());
@@ -112,8 +117,16 @@ InfoLoader::read(const std::string& path)
     }
 
     material->setAssociation(association);
+    std::string img_path = path;
+    img_path = ceti::replace(path, ".md", ".png");
+
+    material->setPath(img_path);
 
     //assert(material->type() != -1);
+
+    assert(material->row() != 0);
+    assert(material->col() != 0);
+
     return material;
 }
 
