@@ -38,7 +38,7 @@ set_target_properties(${PROJECT_CLIENT}_exec PROPERTIES COMPILE_FLAGS ${COMPILE_
 set_target_properties(${PROJECT_CLIENT}_exec PROPERTIES OUTPUT_NAME "${PROJECT_CLIENT}")
 
 # symlinks
-add_custom_target(symlinks
+add_custom_target(data_symlinks ALL
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/src/jeti/src/jeti/shaders ${CMAKE_CURRENT_BINARY_DIR}/shaders # inject to jeti
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/config/config.info ${CMAKE_CURRENT_BINARY_DIR}/config.info # inject to data
