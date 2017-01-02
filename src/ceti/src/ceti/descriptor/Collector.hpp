@@ -77,7 +77,9 @@ public:
             result = it->second;
         }
 #ifdef USE_FAILBACK_RESOURCES
-        result = failback();
+        else {
+            result = failback();
+        }
 #endif // USE_FAILBACK_RESOURCES
         assert(result);
         return result;
@@ -91,7 +93,7 @@ public:
             result = meti::getRand(it->second);
         }
 #ifdef USE_FAILBACK_RESOURCES
-        if (!result) {
+        else {
             result = failback();
         }
 #endif // USE_FAILBACK_RESOURCES

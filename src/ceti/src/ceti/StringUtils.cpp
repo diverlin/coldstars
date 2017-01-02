@@ -77,4 +77,15 @@ std::string join(const std::vector<std::string>& v, const std::string& delim) {
     return str;
 }
 
+std::string replace(const std::string& src, const std::string& from, const std::string& to)
+{
+    std::string result(src);
+
+    const auto it = result.find(from);
+    if (it != result.npos) {
+        result.replace(it, from.size(), to);
+    }
+    return result;
+}
+
 } // namespace ceti

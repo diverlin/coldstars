@@ -365,7 +365,7 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     if (it != m_materialCollector.end()) {
         material = it->second;
     } else {
-        auto& collector =core::global::get().descriptors().material();
+        auto& collector = core::global::get().descriptors().material();
         ceti::descriptor::Material* descriptor = collector.get(descritprorId);
         if (descriptor) {
             jeti::model::Material* model = new jeti::model::Material(descriptor);
