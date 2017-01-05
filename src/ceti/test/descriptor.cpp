@@ -87,6 +87,6 @@ TEST(descriptor, mesh)
     EXPECT_EQ(descr.id(), descr2.id());
     EXPECT_EQ(descr.type(), descr2.type());
     EXPECT_EQ(descr.modelPath(), descr2.modelPath());
-    EXPECT_EQ(descr.texture(), descr2.texture());
+    EXPECT_EQ(descr.materialPath(), descr2.materialPath());
     EXPECT_EQ(descr.orientation(), descr2.orientation());
 }

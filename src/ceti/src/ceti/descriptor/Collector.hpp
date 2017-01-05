@@ -34,19 +34,17 @@ template<typename T>
 class Collector
 {
 public:
-    Collector()
-        //:
-        //m_failback(new T)
-    {}
+    Collector() {}
+
     Collector(const std::string& fname)
         :
           m_fname(fname)
-    //, m_failback(new T)
     {
         if (ceti::filesystem::is_file_exists(m_fname)) {
             load();
         }
     }
+
     ~Collector() {}
 
     bool loaded() const { return m_loaded; }
@@ -54,7 +52,7 @@ public:
     [[warning("make it const")]]
     T* failback() {
         if (!m_failback) {
-            m_failback = new T(); // delayed init applied because we need init after ogl initialization
+            m_failback = new T; // delayed init applied because we need init after ogl initialization
         }
         assert(m_failback);
         return m_failback;

@@ -69,7 +69,7 @@ void Data::__collectMeshDescriptors()
 {        
     using namespace ceti::descriptor;
 
-//    auto& dm =core::global::get().descriptors();
+//    auto& dm = core::global::get().descriptors();
 //    if (!dm.mesh().loaded()) {
 //        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
 //        dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
@@ -81,18 +81,18 @@ void Data::__collectMeshDescriptors()
 //        dm.mesh().save();
 //    }
 
-//    auto& dm =core::global::get().descriptors();
-//    if (!dm.mesh().loaded()) {
-//        ceti::Collector<Mesh> collector("mesh_descriptors.txt");
+    auto& dm = core::global::get().descriptors();
+    if (!dm.mesh().loaded()) {
+        ceti::Collector<Mesh> collector("mesh_descriptors.txt");
 
-//        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".omd");
-//        for(const auto& filepath: result) {
-//            ceti::descriptor::Mesh* mesh = ceti::InfoLoader::read(filepath);
-//            //std::cout<<"descriptor:"<<material->data()<<std::endl;
-//            collector.add(mesh);
-//        }
-//        collector.save();
-//    }
+        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".od");
+        for(const auto& filepath: result) {
+            ceti::descriptor::Mesh* mesh = ceti::InfoLoader::readToMeshDescriptor(filepath);
+            //std::cout<<"descriptor:"<<material->data()<<std::endl;
+            collector.add(mesh);
+        }
+        collector.save();
+    }
 }
 
 namespace {
@@ -112,13 +112,13 @@ void Data::__loadImages()
     //ceti::InfoLoader il("/ramdisk/build/coldstars/src/game/client/data/ship/template.md");
     //exit(1);
 
-    auto& dm =core::global::get().descriptors();
+    auto& dm = core::global::get().descriptors();
     if (!dm.material().loaded()) {
         ceti::Collector<Material> collector("material_descriptors.txt");
 
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
         for(const auto& filepath: result) {
-            ceti::descriptor::Material* material = ceti::InfoLoader::read(filepath);
+            ceti::descriptor::Material* material = ceti::InfoLoader::readToMaterialDescriptor(filepath);
             //std::cout<<"descriptor:"<<material->data()<<std::endl;
 
             resolveId(material);

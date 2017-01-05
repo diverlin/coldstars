@@ -42,7 +42,7 @@ ContainerBuilder::~ContainerBuilder()
 Container*
 ContainerBuilder::getNew()
 {
-    const auto& descriptor =core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
+    const auto& descriptor = core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
     return getNew(descriptor);
 }
 

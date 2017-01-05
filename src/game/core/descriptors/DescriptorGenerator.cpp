@@ -123,7 +123,7 @@ Generator::getNewStarDescriptor()
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
-    //assert(descr.mesh() != -1);
+    assert(descr.mesh() != -1);
 
     return descr;
 }
@@ -149,6 +149,9 @@ Generator::getNewPlanetDescriptor()
     descr.setSize(meti::vec3(size));
     descr.setTexture(textureDescriptorIdFromType(type::texture::PLANET_ID));
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
+
+    assert(descr.texture() != -1);
+    assert(descr.mesh() != -1);
 
     return descr;
 

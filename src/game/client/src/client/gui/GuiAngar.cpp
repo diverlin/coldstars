@@ -37,8 +37,8 @@
 
 GuiAngar::GuiAngar():angar(nullptr)
 {
-    //int screen_w =core::global::get().config().SCREEN_WIDTH;
-    //int screen_h =core::global::get().config().SCREEN_HEIGHT;
+    //int screen_w = core::global::get().config().SCREEN_WIDTH;
+    //int screen_h = core::global::get().config().SCREEN_HEIGHT;
     
     //TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
     

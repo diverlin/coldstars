@@ -51,7 +51,7 @@ Scaner* ScanerBuilder::createTemplate(int_t id) const
 
 Scaner* ScanerBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::SCANER);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::SCANER);
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);
 

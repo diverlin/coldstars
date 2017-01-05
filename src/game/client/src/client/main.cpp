@@ -164,10 +164,10 @@ int main()
 //        if (TurnTimer::Instance().GetTurnEnded() == true) {
 //           core::global::get().entitiesManager().ClearGarbage();
 
-//            bool save_event =core::global::get().entitiesManager().UpdateSaveRequest();
-//            bool load_event =core::global::get().entitiesManager().UpdateLoadRequest();
+//            bool save_event = core::global::get().entitiesManager().UpdateSaveRequest();
+//            bool load_event = core::global::get().entitiesManager().UpdateLoadRequest();
 //            if (load_event == true) {
-//                player =core::global::get().entitiesManager().GetPlayer();
+//                player = core::global::get().entitiesManager().GetPlayer();
 //                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
 //            }
 //            if (save_event == true) {

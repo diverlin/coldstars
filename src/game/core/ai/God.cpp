@@ -68,7 +68,7 @@ God::~God()
 
 void God::createWorld(const descriptor::Galaxy& descriptor)
 {
-    m_galaxy =core::global::get().galaxyBuilder().create(descriptor);
+    m_galaxy = core::global::get().galaxyBuilder().create(descriptor);
     __createLife(m_galaxy, descriptor);
     if (descriptor.allow_invasion == true) {
         __createInvasion(m_galaxy, descriptor);
@@ -90,8 +90,8 @@ void God::createWorld(const descriptor::Galaxy& descriptor)
 void God::update()
 {
     // shortcuts
-    TurnTimer& turnTimer =core::global::get().turnTimer();
-    GameDate& gameDate =core::global::get().gameDate();
+    TurnTimer& turnTimer = core::global::get().turnTimer();
+    GameDate& gameDate = core::global::get().gameDate();
     // shortcuts
 
     turnTimer.update(-100);
@@ -116,10 +116,10 @@ void God::update()
     if (turnTimer.getTurnEnded() == true) {
        core::global::get().entityManager().clearGarbage();
 
-        //            bool save_event =core::global::get().entityManager().UpdateSaveRequest();
-        //            bool load_event =core::global::get().entityManager().UpdateLoadRequest();
+        //            bool save_event = core::global::get().entityManager().UpdateSaveRequest();
+        //            bool load_event = core::global::get().entityManager().UpdateLoadRequest();
         //            if (load_event == true) {
-        //                player =core::global::get().entityManager().GetPlayer();
+        //                player = core::global::get().entityManager().GetPlayer();
         //                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
         //            }
         //            if (save_event == true) {
@@ -183,8 +183,8 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 //    planet->SetPopulation(population);
     
 //    Land* land = nullptr;
-//    if (population > 0) { land =core::global::get().kosmoportBuilder().create(); }
-//    else                { land =core::global::get().natureLandBuilder().create(); }
+//    if (population > 0) { land = core::global::get().kosmoportBuilder().create(); }
+//    else                { land = core::global::get().natureLandBuilder().create(); }
         
 //    planet->BindLand(land);
 
@@ -195,7 +195,7 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 //            int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
 //            for (int j=0; j<sattelitewarriors_num; j++)
 //            {
-//                Satellite* satellite =core::global::get().satelliteBuilder().create();
+//                Satellite* satellite = core::global::get().satelliteBuilder().create();
 //               core::global::get().satelliteBuilder().equip(satellite); // improove
             
 //                {
@@ -203,7 +203,7 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 //                    type::entity npc_subtype_id    = type::entity::WARRIOR_ID;
 //                    type::entity npc_subsubtype_id = type::entity::WARRIOR_ID;
             
-//                    Npc* npc =core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//                    Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
 //                    satellite->BindOwnerNpc(npc);
 //                }
             
@@ -229,13 +229,13 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 //                type::entity npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
 //                type::entity npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                        
-//                Ship* new_ship =core::global::get().shipBuilder().create(generateVehicleDescriptor());
+//                Ship* new_ship = core::global::get().shipBuilder().create(generateVehicleDescriptor());
 //               core::global::get().shipBuilder().equip(new_ship); // improove
 //                //ShipBuilder::Instance().EquipModules(ship, tech_level);
 //                //ShipBuilder::Instance().EquipArtefacts(ship, tech_level);
 //                //ShipBuilder::Instance().EquipBomb(ship, tech_level);
             
-//                Npc* new_npc =core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//                Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
 //                new_ship->BindOwnerNpc(new_npc);
                 
 //                planet->AddVehicle(new_ship);
@@ -256,10 +256,10 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //type::entity ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        SpaceStation* spacestation =core::global::get().spaceStationBuilder().create();
+        SpaceStation* spacestation = core::global::get().spaceStationBuilder().create();
        core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
-        Npc* npc =core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         spacestation->bindNpc(npc);
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
@@ -269,10 +269,10 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         starsystem->add(spacestation, center3/*, dir*/);
         
         {  
-            Satellite* satellite =core::global::get().satelliteBuilder().create();
+            Satellite* satellite = core::global::get().satelliteBuilder().create();
            core::global::get().satelliteBuilder().equip(satellite);                   // improove
 
-            Npc* new_npc =core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+            Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
             satellite->bindNpc(new_npc);
             
             glm::vec3 center(0.0f, 0.0f, DEFAULT_ENTITY_ZPOS);
@@ -307,7 +307,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_rac
         Ship* new_ship = ShipBuilder::getNew();
         ShipBuilder::equip(new_ship); // improove
 
-        Npc* new_npc =core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->bindNpc(new_npc);
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);

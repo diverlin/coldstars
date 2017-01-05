@@ -143,7 +143,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& desc
 //    switch(type) {
 //    case type::entity::BAK_EQUIPMENT_ID:
 //    {
-//        BakEquipment* bak_equipment =core::global::get().bakBuilder().create(descriptor);
+//        BakEquipment* bak_equipment = core::global::get().bakBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(bak_equipment) == false) {
 //           core::global::get().entityManager().addToGarbage(bak_equipment);
 //        }
@@ -151,7 +151,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& desc
 //    }
 //    case type::entity::DRIVE_EQUIPMENT_ID:
 //    {
-//        DriveEquipment* bak_equipment =core::global::get().driveBuilder().create(descriptor);
+//        DriveEquipment* bak_equipment = core::global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
 //           core::global::get().entityManager().addToGarbage(drive_equipment);
 //        }
@@ -159,7 +159,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& desc
 //    }
 //    case type::entity::DROID_EQUIPMENT_ID:
 //    {
-//        DriveEquipment* bak_equipment =core::global::get().driveBuilder().create(descriptor);
+//        DriveEquipment* bak_equipment = core::global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
 //           core::global::get().entityManager().addToGarbage(drive_equipment);
 //        }

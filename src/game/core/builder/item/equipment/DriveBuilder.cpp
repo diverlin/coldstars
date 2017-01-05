@@ -49,7 +49,7 @@ Drive* DriveBuilder::createTemplate(int_t id) const
 
 Drive* DriveBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 

@@ -49,7 +49,7 @@ Grapple* GrappleBuilder::createTemplate(int_t id) const
 
 Grapple* GrappleBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
     Grapple* grapple = createTemplate();
     createInternals(grapple, descriptor);
 

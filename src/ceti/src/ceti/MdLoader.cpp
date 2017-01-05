@@ -1,5 +1,6 @@
 #include "MdLoader.hpp"
 
+#include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>
 #include <ceti/StringUtils.hpp>
 
@@ -54,8 +55,55 @@ MdLoader::value(const std::string& key)
     return m_data[key];
 }
 
+
+ceti::descriptor::Mesh*
+InfoLoader::readToMeshDescriptor(const std::string& path)
+{
+    std::cout<<path<<std::endl;
+    boost::property_tree::ptree root;
+    boost::property_tree::read_json(path, root);
+
+    ceti::descriptor::Association association;
+    ceti::descriptor::Mesh* mesh = new ceti::descriptor::Mesh;
+
+    boost::optional<std::string> name = root.get_optional<std::string>("association.name");
+    boost::optional<std::string> race = root.get_optional<std::string>("association.race");
+    boost::optional<std::string> type = root.get_optional<std::string>("association.type");
+    boost::optional<std::string> subtype = root.get_optional<std::string>("association.subtype");
+    boost::optional<std::string> color = root.get_optional<std::string>("association.color");
+
+    if (name) {
+        association.setName(name.get());
+    }
+    if (race) {
+        association.setRace(race.get());
+    }
+    if (type) {
+        association.setType(type.get());
+    }
+    if (subtype) {
+        association.setSubtype(subtype.get());
+    }
+    if (color) {
+        association.setColor(color.get());
+    }
+
+    mesh->setAssociation(association);
+    std::string mesh_path = ceti::replace(path, ".od", ".obj");
+    std::string material_path = ceti::replace(path, ".od", ".png");
+
+    mesh->setModelPath(mesh_path);
+    if (false) {
+        mesh->setMaterialPath(material_path);
+    }
+
+    //assert(material->type() != -1);
+
+    return mesh;
+}
+
 ceti::descriptor::Material*
-InfoLoader::read(const std::string& path)
+InfoLoader::readToMaterialDescriptor(const std::string& path)
 {
     std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
@@ -117,8 +165,7 @@ InfoLoader::read(const std::string& path)
     }
 
     material->setAssociation(association);
-    std::string img_path = path;
-    img_path = ceti::replace(path, ".md", ".png");
+    std::string img_path = ceti::replace(path, ".md", ".png");
 
     material->setPath(img_path);
 
