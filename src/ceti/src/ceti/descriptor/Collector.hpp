@@ -21,8 +21,9 @@
 
 #include <client/common/global.hpp>
 
-#include <core/types/MeshTypes.hpp>
-#include <core/types/TextureTypes.hpp>
+//#include <core/types/MeshTypes.hpp>
+//#include <core/types/TextureTypes.hpp>
+#include <core/types/TypesCollector.hpp>
 
 #include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>
@@ -41,7 +42,7 @@
 namespace {
 
 template<typename T>
-void resolveId(T* ob, const type::Types& types)
+void resolveId(T* ob, const type::Collector& types)
 {
     ob->setType(types.toInt(ob->association().type()));
 }
@@ -123,10 +124,10 @@ public:
         return (m_descriptors.find(id) != m_descriptors.end());
     }
 
-    void generate(const std::vector<std::string>& list, const type::Types& types) {
+    void generate(const std::vector<std::string>& list, const type::Collector& types) {
         __clear();
         for(const auto& filepath: list) {
-            T* ob = nullptr;
+            T* ob = new T;
             ceti::InfoLoader::read(filepath, ob);
 
             resolveId(ob, types);

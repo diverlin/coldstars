@@ -80,15 +80,13 @@ void ObjLoader::__readData(std::stringstream& stringstream)
 void ObjLoader::__normalizePositions()
 {
     float max_pos = 0;
-    for (const auto& position: m_positions)
-    {
+    for (const auto& position: m_positions) {
         if (max_pos < fabs(position.x)) max_pos = fabs(position.x);
         if (max_pos < fabs(position.y)) max_pos = fabs(position.y);
         if (max_pos < fabs(position.z)) max_pos = fabs(position.z);
     }
 
-    for (unsigned int i=0; i<m_positions.size(); i++)
-    {
+    for (unsigned int i=0; i<m_positions.size(); i++) {
         m_positions[i] /= max_pos;
     }
     
@@ -97,8 +95,7 @@ void ObjLoader::__normalizePositions()
 glm::vec3 ObjLoader::__boundaryBox()
 {
     glm::vec3 boundary_box;
-    for (const auto& position: m_positions)
-    {
+    for (const auto& position: m_positions) {
         if (boundary_box.x < fabs(position.x)) boundary_box.x = fabs(position.x);
         if (boundary_box.y < fabs(position.y)) boundary_box.y = fabs(position.y);
         if (boundary_box.z < fabs(position.z)) boundary_box.z = fabs(position.z);

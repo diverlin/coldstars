@@ -78,7 +78,7 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
         association.setRace(race.get());
     }
     if (type) {
-        association.setType(type.get());
+        association.setType("mesh::" + type.get());
     }
     if (subtype) {
         association.setSubtype(subtype.get());
@@ -121,7 +121,7 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
         association.setRace(race.get());
     }
     if (type) {
-        association.setType(type.get());
+        association.setType("texture::" + type.get());
     }
     if (subtype) {
         association.setSubtype(subtype.get());

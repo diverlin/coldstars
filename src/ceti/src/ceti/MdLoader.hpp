@@ -26,17 +26,12 @@ class MdLoader
 
 class InfoLoader
 {
-    public:
-        InfoLoader()=default;
-        ~InfoLoader()=default;
+public:
+    InfoLoader()=default;
+    ~InfoLoader()=default;
 
-        static void read(const std::string&, ceti::descriptor::Mesh*);
-        static void read(const std::string&, ceti::descriptor::Material*);
-        //        const std::map<std::string, std::string>& data() const { return m_data; }
-//        const std::string& value(const std::string& key);
-
-    private:
-//        std::map<std::string, std::string> m_data;
+    static void read(const std::string&, ceti::descriptor::Mesh*);
+    static void read(const std::string&, ceti::descriptor::Material*);
 };
 
 } // namespace ceti

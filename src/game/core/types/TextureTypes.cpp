@@ -22,32 +22,6 @@
 
 namespace type {
 
-Types::Types() {
-    __registerType(texture::STAR_ID, "star");
-    __registerType(texture::PLANET_ID, "planet");
-    __registerType(texture::SHIP_ID, "ship");
-}
-
-Types::~Types() {}
-
-void
-Types::__registerType(texture id, const std::string& info) {
-    m_typesTextureString.insert(std::make_pair((int_t)id, info));
-    m_typesStringTexture.insert(std::make_pair(info, (int_t)id));
-}
-
-int_t
-Types::toInt(const std::string& info) const {
-    const auto& it = m_typesStringTexture.find(info);
-    if (it != m_typesStringTexture.end()) {
-        return it->second;
-    }
-    assert(false);
-    return -1;
-}
-
-} // namespace type
-
 std::string str(type::texture type_id)
 {
     switch(type_id)
@@ -108,3 +82,4 @@ std::string str(type::texture type_id)
     assert(false);
 }
 
+} // namespace type

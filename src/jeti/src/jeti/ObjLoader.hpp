@@ -11,8 +11,7 @@ namespace jeti {
 
 class ObjLoader
 {
-    struct MeshFaceIndexesData
-    {
+    struct MeshFaceIndexesData {
         unsigned long int position_index[3];
         unsigned long int texcoord_index[3];
         unsigned long int normal_index[3];
