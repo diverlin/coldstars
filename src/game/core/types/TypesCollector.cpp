@@ -16,22 +16,38 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
-#include <string>
+#include "TypesCollector.hpp"
 
 #include <core/types/TextureTypes.hpp>
+#include <core/types/MeshTypes.hpp>
 
-namespace type
-{
-    enum class mesh : int {
-        FAILBACK = int_t(texture::LAST_ID),
+#include <cassert>
 
-        PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID,
+namespace type {
 
-        LAST_ID
-    };
-}  
+Collector::Collector() {
+    __registerType(int_t(texture::STAR_ID), "texture::star");
+    __registerType(int_t(texture::PLANET_ID), "texture::planet");
+    __registerType(int_t(texture::SHIP_ID), "texture::ship");
+    __registerType(int_t(mesh::SPHERE_ID), "mesh::sphere");
+}
 
-std::string getTypeStr(type::mesh type);
+Collector::~Collector() {}
 
+void
+Collector::__registerType(int_t id, const std::string& info) {
+    m_typesTextureString.insert(std::make_pair(id, info));
+    m_typesStringTexture.insert(std::make_pair(info, id));
+}
+
+int_t
+Collector::toInt(const std::string& info) const {
+    const auto& it = m_typesStringTexture.find(info);
+    if (it != m_typesStringTexture.end()) {
+        return it->second;
+    }
+    assert(false);
+    return -1;
+}
+
+} // namespace type

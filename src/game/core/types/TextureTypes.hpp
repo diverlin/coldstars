@@ -21,7 +21,6 @@
 #include <ceti/type/IdType.hpp>
 
 #include <string>
-#include <map>
 
 namespace type
 {
@@ -52,20 +51,8 @@ enum class texture: int
     MODULE_ID,
     
     ROCKET_BULLET_ID,
-};
 
-class Types {
-public:
-    Types();
-    ~Types();
-
-    int_t toInt(const std::string&) const;
-
-private:
-    std::map<int_t, std::string> m_typesTextureString;
-    std::map<std::string, int_t> m_typesStringTexture;
-
-    void __registerType(texture, const std::string&);
+    LAST_ID
 };
 
 } // namespace type

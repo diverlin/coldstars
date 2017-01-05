@@ -45,10 +45,6 @@
 
 #include <string>
 
-namespace {
-const std::string DATA_PATH = "data/";
-const std::string CONFIG_PATH  = "";
-} // namespace
 
 Data::Data()
 {
@@ -58,7 +54,6 @@ Data::Data()
 Data::~Data()
 {
 }
-
 
 void Data::__generate()
 {
@@ -83,7 +78,7 @@ void Data::__generateMeshDescriptors()
 
     auto& dmm = core::global::get().descriptors().mesh();
     if (!dmm.loaded()) {
-        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".od");
+        auto result = ceti::filesystem::getFilesList("data", ".od");
         dmm.generate(result, client::global::get().types());
     }
 }
@@ -98,7 +93,7 @@ void Data::__generateMaterialDescriptors()
 {
     auto& dmm = core::global::get().descriptors().material();
     if (!dmm.loaded()) {
-        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
+        auto result = ceti::filesystem::getFilesList("data", ".md");
         dmm.generate(result, client::global::get().types());
     }
 //        //############ TURREL #########

@@ -18,20 +18,30 @@
 
 #pragma once
 
-#include <string>
+#include <ceti/type/IdType.hpp>
 
-#include <core/types/TextureTypes.hpp>
+#include <string>
+#include <map>
 
 namespace type
 {
-    enum class mesh : int {
-        FAILBACK = int_t(texture::LAST_ID),
 
-        PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID,
+class Collector {
 
-        LAST_ID
-    };
-}  
+public:
+    Collector();
+    ~Collector();
 
-std::string getTypeStr(type::mesh type);
+    int_t toInt(const std::string&) const;
+
+private:
+    std::map<int_t, std::string> m_typesTextureString;
+    std::map<std::string, int_t> m_typesStringTexture;
+
+    void __registerType(int_t, const std::string&);
+};
+
+} // namespace type
+
+
 
