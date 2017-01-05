@@ -58,7 +58,7 @@ Box2D::Box2D(const Rect& rect)
 m_Angle(0.0)
 {
     setCenter(glm::vec2(rect.center().x, rect.center().y));
-    setSize(glm::vec2(rect.GetWidth(), rect.GetHeight()));
+    setSize(glm::vec2(rect.width(), rect.height()));
     SetScale(1.0, 1.0);
 }
 

@@ -67,7 +67,7 @@ void GuiRadar::UpdateUnique(Player* player)
     {
         if (data_mouse.left_press == true)
         {
-            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.center().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.center().y - screenrect.GetHeight()/2)/scale);
+            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.center().x - screenrect.width()/2)/scale, ( data_mouse.pos_screencoord.y - rect.center().y - screenrect.height()/2)/scale);
             client::global::get().screen().setBottomLeftScreenWC(new_global_coord);
         }
     }

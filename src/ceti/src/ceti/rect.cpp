@@ -37,7 +37,7 @@ Rect::Rect(const glm::vec2& bottomLeft, float width, float height)
 
 Rect::Rect(const Rect& rhs)
 {
-    set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
+    set(rhs.GetBottomLeft(), rhs.width(), rhs.height());
 }
 
 Rect::~Rect()
@@ -109,7 +109,7 @@ void Rect::set(const glm::vec2& vbl, float width, float height)
 
 void Rect::set(const Rect& rect)
 {
-    set(rect.GetBottomLeft(), rect.GetWidth(), rect.GetHeight());
+    set(rect.GetBottomLeft(), rect.width(), rect.height());
 }
 
 void Rect::setCenter(const glm::vec2& center)
