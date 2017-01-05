@@ -87,13 +87,13 @@ namespace {
 
 int_t meshDescriptorIdFromType(const type::mesh& type) {
     ceti::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
-    descriptor::Mesh* descriptor = collector.getRand(int_t(type));
+    descriptor::Mesh* descriptor = collector.random(int_t(type));
     return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const type::texture& type) {
     ceti::Collector<descriptor::Material> collector("material_descriptors.txt");
-    descriptor::Material* descriptor = collector.getRand(int_t(type));
+    descriptor::Material* descriptor = collector.random(int_t(type));
     return descriptor->id();
 }
 
@@ -123,7 +123,7 @@ Generator::getNewStarDescriptor()
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
-    assert(descr.mesh() != -1);
+    //assert(descr.mesh() != -1);
 
     return descr;
 }
@@ -151,7 +151,7 @@ Generator::getNewPlanetDescriptor()
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
-    assert(descr.mesh() != -1);
+    //assert(descr.mesh() != -1);
 
     return descr;
 

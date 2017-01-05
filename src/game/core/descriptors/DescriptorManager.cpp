@@ -44,9 +44,7 @@ Manager::Manager()
 {
     bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
-        load();
-    } else {
-        __generate();
+        __load();
     }
 }
 
@@ -102,7 +100,7 @@ Manager::get(int_t id)
 }
 
 void
-Manager::save()
+Manager::__save()
 {
     std::fstream filestream;
     filestream.open(descriptors_fname);
@@ -120,7 +118,7 @@ Manager::save()
 }
 
 void
-Manager::load()
+Manager::__load()
 {
     __clear();
 
@@ -146,10 +144,8 @@ Manager::__clear()
 }
 
 void
-Manager::__generate()
+Manager::generate()
 {
-//    Data data; // needs for descriptor (texture and mesh ids)
-
     ceti::filesystem::create_file(descriptors_fname);
 
     __clear();
@@ -194,7 +190,7 @@ Manager::__generate()
         add(Generator::getNewGalaxyDescriptor(m_sector.idList()));
     }
 
-    save();
+    __save();
 }
 
 } // namespace descriptor

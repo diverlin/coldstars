@@ -26,8 +26,9 @@ public:
 
 private:
     void __generate();
-    void __collectMeshDescriptors();
-    void __loadImages();
+    void __generateMeshDescriptors();
+    void __generateMaterialDescriptors();
+    void __generateGameObjectDescriptors();
 };
 
 

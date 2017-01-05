@@ -18,11 +18,10 @@ ObjLoader::ObjLoader(std::stringstream& stringstream)
 
 ObjLoader::ObjLoader(const std::string& fname)
 {
-    std::string path = DATA_PATH + "/obj/" + fname;
     std::ifstream filestream;
-    filestream.open(path.c_str());
+    filestream.open(fname.c_str());
     if (!filestream.is_open()) {
-        std::cout<<"FAULT: Not abe to open file:"<<path;
+        std::cout<<"FAULT: Not abe to open file:"<<fname;
         exit(EXIT_FAILURE);
     }
     std::stringstream stringstream;
@@ -44,29 +43,22 @@ void ObjLoader::__readData(std::stringstream& stringstream)
         std::string type_str;
         line_stream >> type_str;
         {
-            if (type_str == "v")
-            {
+            if (type_str == "v") {
                 glm::vec3 pos;
                 line_stream >> pos.x >> pos.z >> pos.y;
                 m_positions.push_back(pos);
             }
-
-            else if (type_str == "vt")
-            {
+            else if (type_str == "vt") {
                 glm::vec2 tex;
                 line_stream >> tex.x >> tex.y;
                 m_texcoords.push_back(tex);
             }
-
-            else if (type_str == "vn")
-            {
+            else if (type_str == "vn") {
                 glm::vec3 nor;
                 line_stream >> nor.x >> nor.z >> nor.y;
                 m_normals.push_back(nor);
             }
-
-            else if (type_str == "f")
-            {
+            else if (type_str == "f") {
                 MeshFaceIndexesData face_indexes;
                 char interupt;
                 for(int i=0; i<3; ++i)

@@ -21,7 +21,9 @@
 #include <common/Config.hpp>
 #include <common/Global.hpp>
 #include <client/common/global.hpp>
-#include <descriptors/DescriptorManager.hpp>
+
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
 
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
@@ -50,8 +52,7 @@ const std::string CONFIG_PATH  = "";
 
 Data::Data()
 {
-    __collectMeshDescriptors();
-    __loadImages();
+    __generate();
 }
 
 Data::~Data()
@@ -61,14 +62,13 @@ Data::~Data()
 
 void Data::__generate()
 {
-    __collectMeshDescriptors();
-    __loadImages();
+    __generateMeshDescriptors();
+    __generateMaterialDescriptors();
+    __generateGameObjectDescriptors();
 }
 
-void Data::__collectMeshDescriptors()
+void Data::__generateMeshDescriptors()
 {        
-    using namespace ceti::descriptor;
-
 //    auto& dm = core::global::get().descriptors();
 //    if (!dm.mesh().loaded()) {
 //        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
@@ -81,51 +81,26 @@ void Data::__collectMeshDescriptors()
 //        dm.mesh().save();
 //    }
 
-    auto& dm = core::global::get().descriptors();
-    if (!dm.mesh().loaded()) {
-        ceti::Collector<Mesh> collector("mesh_descriptors.txt");
-
+    auto& dmm = core::global::get().descriptors().mesh();
+    if (!dmm.loaded()) {
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".od");
-        for(const auto& filepath: result) {
-            ceti::descriptor::Mesh* mesh = ceti::InfoLoader::readToMeshDescriptor(filepath);
-            //std::cout<<"descriptor:"<<material->data()<<std::endl;
-            collector.add(mesh);
-        }
-        collector.save();
+        dmm.generate(result, client::global::get().types());
     }
 }
 
-namespace {
-
-void resolveId(ceti::descriptor::Material* material)
+void Data::__generateGameObjectDescriptors()
 {
-    type::Types& types = client::global::get().types();
-    material->setType(types.toInt(material->association().type()));
-}
-
-}
-
-void Data::__loadImages()
-{
-    using namespace ceti::descriptor;
-
-    //ceti::InfoLoader il("/ramdisk/build/coldstars/src/game/client/data/ship/template.md");
-    //exit(1);
-
     auto& dm = core::global::get().descriptors();
-    if (!dm.material().loaded()) {
-        ceti::Collector<Material> collector("material_descriptors.txt");
+    dm.generate();
+}
 
+void Data::__generateMaterialDescriptors()
+{
+    auto& dmm = core::global::get().descriptors().material();
+    if (!dmm.loaded()) {
         auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
-        for(const auto& filepath: result) {
-            ceti::descriptor::Material* material = ceti::InfoLoader::readToMaterialDescriptor(filepath);
-            //std::cout<<"descriptor:"<<material->data()<<std::endl;
-
-            resolveId(material);
-            collector.add(material);
-        }
-        collector.save();
-
+        dmm.generate(result, client::global::get().types());
+    }
 //        //############ TURREL #########
 //        {
 //            Material material(int(type::texture::TURREL_ID), "turrel/turrel1.png");
@@ -640,7 +615,7 @@ void Data::__loadImages()
 //            dm.add(material);
 //        }
 
-    }
+    //}
 
 ////################################# type::TEXTURE::STAR_ID ###############################
 //{

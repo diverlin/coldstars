@@ -37,7 +37,7 @@ Types::__registerType(texture id, const std::string& info) {
 }
 
 int_t
-Types::toInt(const std::string& info) {
+Types::toInt(const std::string& info) const {
     const auto& it = m_typesStringTexture.find(info);
     if (it != m_typesStringTexture.end()) {
         return it->second;

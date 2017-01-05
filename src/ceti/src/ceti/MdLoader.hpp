@@ -30,8 +30,8 @@ class InfoLoader
         InfoLoader()=default;
         ~InfoLoader()=default;
 
-        static ceti::descriptor::Mesh* readToMeshDescriptor(const std::string&);
-        static ceti::descriptor::Material* readToMaterialDescriptor(const std::string&);
+        static void read(const std::string&, ceti::descriptor::Mesh*);
+        static void read(const std::string&, ceti::descriptor::Material*);
         //        const std::map<std::string, std::string>& data() const { return m_data; }
 //        const std::string& value(const std::string& key);
 

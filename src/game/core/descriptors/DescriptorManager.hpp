@@ -96,9 +96,6 @@ public:
     BaseOLD getRand(const Type&);
     BaseOLD get(int_t);
 
-    void save();
-    void load();
-
     unsigned long int size() const { return m_descriptors.size(); }
 
     void add(const Galaxy& galaxy) {
@@ -137,6 +134,8 @@ public:
     ceti::Collector<Material>& material() { return m_material; }
     const ceti::Collector<Material>& material() const { return m_material; }
 
+    void generate();
+
 private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
@@ -150,7 +149,8 @@ private:
     std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;
 
     void __clear();
-    void __generate();
+    void __save();
+    void __load();
 }; 
 
 } // namespace descriptor
