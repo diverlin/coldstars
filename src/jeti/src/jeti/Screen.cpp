@@ -130,14 +130,14 @@ void Screen::draw()
 
 void  Screen::increaseScale()
 { 
-    m_deltaScale = 0.15;
-    if (m_scale < 30.0) {
+    m_deltaScale = SCALE_STEP;
+    if (m_scale < SCALE_MAX) {
         m_scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
-        float rate = 0.5*m_deltaScale;
-        float offset_x = m_rect.GetWidth()*rate;
-        float offset_y = m_rect.GetHeight()*rate;
+        float rate = 0.5 * m_deltaScale;
+        float offset_x = m_rect.width()*rate;
+        float offset_y = m_rect.height()*rate;
         glm::vec2 offset(offset_x, offset_y);
         m_rect.setCenter(center-offset);
     }
@@ -145,14 +145,14 @@ void  Screen::increaseScale()
 
 void Screen::decreaseScale()
 { 
-    m_deltaScale = -0.15;
-    if (m_scale > 0.3) {
+    m_deltaScale = -SCALE_STEP;
+    if (m_scale > SCALE_MIN) {
         m_scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
-        float rate = 0.5*m_deltaScale;
-        float offset_x = m_rect.GetWidth()*rate;
-        float offset_y = m_rect.GetHeight()*rate;
+        float rate = 0.5 * m_deltaScale;
+        float offset_x = m_rect.width()*rate;
+        float offset_y = m_rect.height()*rate;
         glm::vec2 offset(offset_x, offset_y);
         
         m_rect.setCenter(center-offset);

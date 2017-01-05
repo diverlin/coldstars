@@ -51,8 +51,8 @@ class Rect
         const glm::vec2& center() const     { return m_center; }
         const glm::vec2& GetBottomLeft() const { return m_bottomLeft; }
         const glm::vec2& GetTopRight() const { return m_topRight; }
-        float GetWidth() const         { return m_width; }
-        float GetHeight() const     { return m_height; }
+        float width() const         { return m_width; }
+        float height() const     { return m_height; }
         
         void setSize(float, float);
         void MovingBy(const glm::vec2&);

@@ -29,6 +29,10 @@ namespace jeti {
 
 class Screen : public SFMLWrapper
 {
+    const float SCALE_MIN = 0.2;
+    const float SCALE_MAX = 50.0;
+    const float SCALE_STEP = 0.05;
+
 public:
     Screen();
     ~Screen();
@@ -42,7 +46,7 @@ public:
     void setBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
 
     glm::vec2 bottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
-    glm::vec2 topRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*m_scale, m_rect.GetHeight()*m_scale)); }
+    glm::vec2 topRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.width()*m_scale, m_rect.height()*m_scale)); }
 
     const glm::vec2& bottomLeft() const    { return m_rect.GetBottomLeft(); }
     const glm::vec2& topRight()    const    { return m_rect.GetTopRight(); }
