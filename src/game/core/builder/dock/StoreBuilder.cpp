@@ -113,31 +113,31 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->addItem(core::global::get().rocketBuilder().getNew());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::RADAR);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
         store->addItem(core::global::get().radarBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
         store->addItem(core::global::get().grappleBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
         store->addItem(core::global::get().driveBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
         store->addItem(core::global::get().protectorBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::BAK);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::BAK);
         store->addItem(core::global::get().bakBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::DROID);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DROID);
         store->addItem(core::global::get().droidBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::SCANER);
+        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::SCANER);
         store->addItem(core::global::get().scanerBuilder().getNew(descr));
     }
 #ifdef USE_EXTRA_EQUIPMENT

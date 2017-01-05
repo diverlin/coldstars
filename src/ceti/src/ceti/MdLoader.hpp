@@ -7,6 +7,7 @@
 namespace ceti {
 
 namespace descriptor {
+class Mesh;
 class Material;
 }
 
@@ -29,8 +30,9 @@ class InfoLoader
         InfoLoader()=default;
         ~InfoLoader()=default;
 
-        static ceti::descriptor::Material* read(const std::string&);
-//        const std::map<std::string, std::string>& data() const { return m_data; }
+        static ceti::descriptor::Mesh* readToMeshDescriptor(const std::string&);
+        static ceti::descriptor::Material* readToMaterialDescriptor(const std::string&);
+        //        const std::map<std::string, std::string>& data() const { return m_data; }
 //        const std::string& value(const std::string& key);
 
     private:

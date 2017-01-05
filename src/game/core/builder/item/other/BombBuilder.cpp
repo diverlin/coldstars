@@ -40,7 +40,7 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::getNew()
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::BOMB);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
     return getNew(descriptor);
 }
 

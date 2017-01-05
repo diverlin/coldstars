@@ -61,7 +61,7 @@ ProtectorBuilder::getNew(int num) const
 Protector*
 ProtectorBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
         

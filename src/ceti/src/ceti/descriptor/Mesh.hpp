@@ -20,6 +20,7 @@
 
 #include "Base.hpp"
 
+#include <ceti/descriptor/Association.hpp>
 #include <ceti/type/IdType.hpp>
 
 #include <meti/VectorUtils.hpp>
@@ -35,7 +36,7 @@ public:
     Mesh()=default;
     Mesh(int type,
          const std::string& path,
-         const std::string& texture = "",
+         const std::string& materialPath = "",
          const meti::vec3& orientation = meti::vec3(1.0, 0.0, 0.0));
 
     Mesh(const std::string& data);
@@ -45,14 +46,20 @@ public:
 
     bool operator==(const Mesh& rhs) const;
 
+    void setModelPath(const std::string& model_path) { m_modelPath = model_path; }
+    void setMaterialPath(const std::string& material_path) { m_materialPath = material_path; }
+    void setAssociation(const Association& association) { m_association = association; }
+
     const std::string& modelPath() const { return m_modelPath; }
-    const std::string& texture() const { return m_texturePath; }
+    const std::string& materialPath() const { return m_materialPath; }
     const glm::vec3& orientation() const { return m_orientation; }
 
 private:
     std::string m_modelPath = "";
-    std::string m_texturePath = "";
+    std::string m_materialPath = "";
     meti::vec3 m_orientation = meti::vec3(1.0, 0.0, 0.0);
+
+    Association m_association;
 
 private:
     friend class boost::serialization::access;
@@ -61,8 +68,9 @@ private:
     {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_modelPath;
-        ar & m_texturePath;
+        ar & m_materialPath;
         ar & m_orientation;
+        ar & m_association;
     }
 };
 

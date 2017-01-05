@@ -17,20 +17,20 @@
 */
 
 #include "PlanetBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/Planet.hpp"
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/Planet.hpp>
 
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-#include <common/constants.hpp>
+//#include <common/constants.hpp>
 
 //#include <client/effects/Atmosphere.hpp>
 //#include <client/effects/Ring.hpp>
 
-#include <types/MeshTypes.hpp>
+//#include <types/MeshTypes.hpp>
 
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 
 namespace builder {
@@ -50,7 +50,7 @@ Planet::__createTemplate(int_t id)
 model::Planet*
 Planet::getNew()
 {
-    const auto& descr =core::global::get().descriptors().planet().random();
+    const auto& descr = core::global::get().descriptors().planet().random();
     return getNew(descr);
 } 
      
@@ -59,8 +59,14 @@ Planet::getNew(const descriptor::Planet& descr)
 {
     model::Planet* model = __createTemplate();
 
+    /// BaseView
     model->setMesh(descr.mesh());
-    //jeti::control::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+    model->setMaterial(descr.texture());
+
+    /// Base
+    LifeData life_data;
+    life_data.armor = descr.armor();
+    model->setLifeData(life_data);
 
     /// Planetoid
     model->setRadiusA(descr.radiusA());
@@ -72,16 +78,11 @@ Planet::getNew(const descriptor::Planet& descr)
     /// Orientation
     model->setSize(descr.size());
 
-    ///
-    LifeData data_life;
-    data_life.armor = descr.armor();
-    model->setLifeData(data_life);
-
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     //glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
 
-    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+    //float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender planet->SetAnimationRotation(animation_rotation);
 

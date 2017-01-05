@@ -30,7 +30,7 @@ Mesh::Mesh(int type,
     :
       Base(type)
     , m_modelPath(model)
-    , m_texturePath(texture)
+    , m_materialPath(texture)
     , m_orientation(orientation)
 {
 }

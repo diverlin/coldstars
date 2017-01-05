@@ -92,7 +92,7 @@ void Asteroid::_postDeathUniqueEvent(bool show_effect)
     int angleZ = meti::getRandInt(360);
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++) {
-//        Container* container =core::global::get().containerBuilder().create(4);
+//        Container* container = core::global::get().containerBuilder().create(4);
 
 //        glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
 //        container->addImpulse(impulse_dir, impulse_strength);
@@ -158,7 +158,7 @@ void Asteroid::_postDeathUniqueEvent(bool show_effect)
 //    int angleZ = meti::getRandInt(360);
 //    float impulse_strength = 0.5;
 //    for (int i=0; i<3; i++) {
-////        Container* container =core::global::get().containerBuilder().create(4);
+////        Container* container = core::global::get().containerBuilder().create(4);
         
 ////        glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
 ////        container->addImpulse(impulse_dir, impulse_strength);

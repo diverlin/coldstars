@@ -44,7 +44,7 @@ StarsystemBuilder::~StarsystemBuilder()
 
 Starsystem* StarsystemBuilder::create()
 {
-    const descriptor::Starsystem& descriptor =core::global::get().descriptors().starsystem().random();
+    const descriptor::Starsystem& descriptor = core::global::get().descriptors().starsystem().random();
     return create(descriptor);
 }
 

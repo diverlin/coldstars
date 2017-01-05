@@ -183,7 +183,7 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
 {
     assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-        //const descriptor::Star& descriptor =core::global::get().descriptors().star().get(star->descriptorId());
+        //const descriptor::Star& descriptor = core::global::get().descriptors().star().get(star->descriptorId());
         //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
@@ -345,7 +345,7 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     if (it != m_meshCollector.end()) {
         mesh = it->second;
     } else {
-        auto& collector =core::global::get().descriptors().mesh();
+        auto& collector = core::global::get().descriptors().mesh();
         ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
         if (descriptor) {
             mesh = new jeti::Mesh(descriptor);
@@ -463,9 +463,10 @@ void Space::__render_NEW(jeti::Renderer& render)
 //    bool draw_shockwave     = true;
 //    bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().screen().scale();
-    int w = client::global::get().screen().width();
-    int h = client::global::get().screen().height();
+    const auto& screen = client::global::get().screen();
+    float scale = screen.scale();
+    int w = screen.width();
+    int h = screen.height();
     //glm::vec2 world_coord(client::global::get().screen().GetBottomLeft());
 
     render.clearColorAndDepthBuffers();

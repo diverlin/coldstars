@@ -32,7 +32,7 @@ ShipBuilder::~ShipBuilder()
 Ship*
 ShipBuilder::getNew(bool full_equiped)
 {
-    const auto& descr =core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+    const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
     Ship* ship =  getNew(descr);
     if (full_equiped) {
         BaseVehicleBuilder::equip(ship);
@@ -46,7 +46,7 @@ ShipBuilder::getNew(const descriptor::BaseOLD& descr)
     descriptor::BaseOLD descriptor(descr.data());
     int_t id = NONE;
     if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
-        descriptor =core::global::get().descriptors().get(descr.descriptor());
+        descriptor = core::global::get().descriptors().get(descr.descriptor());
         id = descr.objId();
     }
 
@@ -65,7 +65,7 @@ Ship*
 ShipBuilder::__getNewTemplate(int_t id)
 {
     if (id == NONE) {
-        id =core::global::get().idGenerator().nextId();
+        id = core::global::get().idGenerator().nextId();
     }
     Ship* ship = new Ship(id);
    core::global::get().entityManager().reg(ship);

@@ -27,7 +27,7 @@ void AsteroidManager::Update(Starsystem* starsystem)
 {
     while (starsystem->asteroidNum() < asteroid_num) {
         starsystem->add(builder::Asteroid::getNew());
-        int current_turn_counter =core::global::get().turnTimer().getStopTurnTimer();
+        int current_turn_counter = core::global::get().turnTimer().getStopTurnTimer();
         asteroid_last_turn_created = current_turn_counter;
         if ((asteroid_last_turn_created + asteroid_delay) > current_turn_counter) {
             break;

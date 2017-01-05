@@ -46,7 +46,7 @@ void Land::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Land::ResolveData()
 {
-//    Base* owner =core::global::get().entityManager().get(data_unresolved_Land.owner_id);
+//    Base* owner = core::global::get().entityManager().get(data_unresolved_Land.owner_id);
 //    switch(owner->type())
 //    {
 //        case type::entity::PLANET_ID:

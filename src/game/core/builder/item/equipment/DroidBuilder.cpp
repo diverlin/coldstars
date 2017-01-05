@@ -51,7 +51,7 @@ Droid* DroidBuilder::createTemplate(int_t id) const
 
 Droid* DroidBuilder::getNew() const
 {
-    const descriptor::BaseOLD& descriptor =core::global::get().descriptors().getRand(descriptor::Type::DROID);
+    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DROID);
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);
 

@@ -53,8 +53,8 @@ GuiGalaxyMap::GuiGalaxyMap()
 BaseGuiElement(type::GUI::GALAXYMAP_ID, type::GUI::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
-//    int w =core::global::get().config().width;
-//    int h =core::global::get().config().height;
+//    int w = core::global::get().config().width;
+//    int h = core::global::get().config().height;
 int w = 400;
 int h = 300;
     GetBox().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);

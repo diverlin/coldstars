@@ -44,6 +44,6 @@
 
 TEST(creation, planet)
 {
-    const descriptor::Starsystem& d =core::global::get().descriptors().starsystem().random();
-    Starsystem* starsystem =core::global::get().starsystemBuilder().create( d );
+    const descriptor::Starsystem& d = core::global::get().descriptors().starsystem().random();
+    Starsystem* starsystem = core::global::get().starsystemBuilder().create( d );
 }

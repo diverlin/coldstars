@@ -240,7 +240,7 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
     int screen_w = client::global::get().screen().width();
     int screen_h = client::global::get().screen().height();
     
-    //bool mouse_camera_scroll =core::global::get().config().GetMouseCameraScroll();
+    //bool mouse_camera_scroll = core::global::get().config().GetMouseCameraScroll();
                  
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         m_cameraMoveAxisX = CAMERADIRECTION::LEFT;
@@ -273,7 +273,7 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
 
 void UserInputInSpace::__scrollCamera(Player* player)
 {
-    int SCROLL_VELOCITY_STEP =core::global::get().config().SCROLL_VELOCITY_STEP;
+    int SCROLL_VELOCITY_STEP = core::global::get().config().SCROLL_VELOCITY_STEP;
 
     jeti::Camera& camera = client::global::get().camera();
     

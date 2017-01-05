@@ -20,6 +20,8 @@
 
 #include "Base.hpp"
 
+#include <ceti/descriptor/Association.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 #include <glm/glm.hpp>
@@ -28,40 +30,6 @@
 
 namespace ceti {
 namespace descriptor {
-
-class Association {
-public:
-    Association()
-    {}
-
-public:
-    void setRace(const std::string& race) { m_race = race; }
-    void setType(const std::string& type) { m_type = type; }
-    void setSubtype(const std::string& subtype) { m_subtype = subtype; }
-    void setName(const std::string& name) { m_name = name; }
-    void setColor(const std::string& color) { m_color = color; }
-
-    const std::string& type() const { return m_type; }
-
-private:
-    std::string m_race = "";
-    std::string m_type = "";
-    std::string m_subtype = "";
-    std::string m_name = "";
-    std::string m_color = "";
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_race;
-        ar & m_type;
-        ar & m_subtype;
-        ar & m_name;
-        ar & m_color;
-    }
-};
-
 
 class Material : public Base
 {
