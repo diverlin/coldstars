@@ -19,14 +19,34 @@
 
 #pragma once
 
+#include <client/common/global.hpp>
+
+#include <core/types/MeshTypes.hpp>
+#include <core/types/TextureTypes.hpp>
+
+#include <ceti/descriptor/Mesh.hpp>
+#include <ceti/descriptor/Texture.hpp>
+
+
 #include <ceti/type/IdType.hpp>
 #include <ceti/FsUtils.hpp>
+#include <ceti/MdLoader.hpp>
 
 #include <meti/RandUtils.hpp>
 
 #include <map>
 #include <vector>
 #include <fstream>
+
+namespace {
+
+template<typename T>
+void resolveId(T* ob, const type::Types& types)
+{
+    ob->setType(types.toInt(ob->association().type()));
+}
+
+} // namespace
 
 namespace ceti {
 
@@ -41,7 +61,7 @@ public:
           m_fname(fname)
     {
         if (ceti::filesystem::is_file_exists(m_fname)) {
-            load();
+            __load();
         }
     }
 
@@ -84,7 +104,7 @@ public:
     }
 
     [[warning("make it const")]]
-    T* getRand(int_t type) {
+    T* random(int_t type) {
         T* result = nullptr;
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
@@ -99,26 +119,35 @@ public:
         return result;
     }
 
-    void save() const
-    {
-        ceti::filesystem::touch_file(m_fname);
-
-        std::fstream filestream;
-        filestream.open(m_fname);
-        if(filestream.is_open()) {
-            for(const auto& lists: m_descriptorsTypes) {
-                const auto& list = lists.second;
-                for(T* descr: list) {
-                    filestream<<descr->data()<<std::endl;
-                }
-            }
-        } else {
-            throw std::runtime_error("not able to open file="+m_fname);
-        }
-        filestream.close();
+    bool contains(int_t id) const {
+        return (m_descriptors.find(id) != m_descriptors.end());
     }
 
-    void load()
+    void generate(const std::vector<std::string>& list, const type::Types& types) {
+        __clear();
+        for(const auto& filepath: list) {
+            T* ob = nullptr;
+            ceti::InfoLoader::read(filepath, ob);
+
+            resolveId(ob, types);
+            add(ob);
+        }
+        __save();
+    }
+
+private:
+    bool m_loaded = false;
+    std::string m_fname;
+    T* m_failback = nullptr;
+    std::map<int, T*> m_descriptors;
+    std::map<int, std::vector<T*>> m_descriptorsTypes;
+
+    void __clear() {
+        m_descriptors.clear();
+        m_descriptorsTypes.clear();
+    }
+
+    void __load()
     {
         __clear();
 
@@ -137,21 +166,25 @@ public:
         m_loaded = true;
     }
 
-    bool contains(int_t id) const {
-        return (m_descriptors.find(id) != m_descriptors.end());
+    void __save() const
+    {
+        ceti::filesystem::touch_file(m_fname);
+
+        std::fstream filestream;
+        filestream.open(m_fname);
+        if(filestream.is_open()) {
+            for(const auto& lists: m_descriptorsTypes) {
+                const auto& list = lists.second;
+                for(T* descr: list) {
+                    filestream<<descr->data()<<std::endl;
+                }
+            }
+        } else {
+            throw std::runtime_error("not able to open file="+m_fname);
+        }
+        filestream.close();
     }
 
-private:
-    bool m_loaded = false;
-    std::string m_fname;
-    T* m_failback = nullptr;
-    std::map<int, T*> m_descriptors;
-    std::map<int, std::vector<T*>> m_descriptorsTypes;
-
-    void __clear() {
-        m_descriptors.clear();
-        m_descriptorsTypes.clear();
-    }
 };
 
 //} // namespace descriptor

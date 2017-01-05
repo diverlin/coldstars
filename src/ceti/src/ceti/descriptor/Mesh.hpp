@@ -54,6 +54,8 @@ public:
     const std::string& materialPath() const { return m_materialPath; }
     const glm::vec3& orientation() const { return m_orientation; }
 
+    const Association& association() const { return m_association; }
+
 private:
     std::string m_modelPath = "";
     std::string m_materialPath = "";

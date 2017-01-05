@@ -56,15 +56,14 @@ MdLoader::value(const std::string& key)
 }
 
 
-ceti::descriptor::Mesh*
-InfoLoader::readToMeshDescriptor(const std::string& path)
+void
+InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
 {
     std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 
     ceti::descriptor::Association association;
-    ceti::descriptor::Mesh* mesh = new ceti::descriptor::Mesh;
 
     boost::optional<std::string> name = root.get_optional<std::string>("association.name");
     boost::optional<std::string> race = root.get_optional<std::string>("association.race");
@@ -98,19 +97,16 @@ InfoLoader::readToMeshDescriptor(const std::string& path)
     }
 
     //assert(material->type() != -1);
-
-    return mesh;
 }
 
-ceti::descriptor::Material*
-InfoLoader::readToMaterialDescriptor(const std::string& path)
+void
+InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
 {
     std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 
     ceti::descriptor::Association association;
-    ceti::descriptor::Material* material = new ceti::descriptor::Material;
 
     boost::optional<std::string> name = root.get_optional<std::string>("association.name");
     boost::optional<std::string> race = root.get_optional<std::string>("association.race");
@@ -173,8 +169,6 @@ InfoLoader::readToMaterialDescriptor(const std::string& path)
 
     assert(material->row() != 0);
     assert(material->col() != 0);
-
-    return material;
 }
 
 } // namespace ceti

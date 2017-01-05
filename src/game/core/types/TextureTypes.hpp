@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <type/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 #include <string>
 #include <map>
@@ -59,7 +59,7 @@ public:
     Types();
     ~Types();
 
-    int_t toInt(const std::string&);
+    int_t toInt(const std::string&) const;
 
 private:
     std::map<int_t, std::string> m_typesTextureString;
