@@ -33,8 +33,9 @@ namespace descriptor {
 class Mesh : public Base
 {
 public:
-    Mesh()=default;
-    Mesh(int type,
+    Mesh(int_t type = -1);
+
+    Mesh(int_t type,
          const std::string& path,
          const std::string& materialPath = "",
          const meti::vec3& orientation = meti::vec3(1.0, 0.0, 0.0));

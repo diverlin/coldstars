@@ -34,8 +34,7 @@ namespace descriptor {
 class Base
 {
 public:
-    Base()=default;
-    Base(int_t type);
+    Base(int_t type = -1);
     ~Base()=default;
 
 //    std::string data() const;

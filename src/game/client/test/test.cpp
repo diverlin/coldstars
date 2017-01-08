@@ -33,13 +33,18 @@ TEST(resources, viewer)
     auto star_descr = core::global::get().descriptors().star().random();
 
     model::Star* model = builder::Star::getNew(star_descr);
-    control::Star* control = new control::Star(model);
+    //control::Star* control = new control::Star(model);
     view::Star* view = new view::Star(model);
 
-    int z = star_descr.texture();
-    auto* material_descr = core::global::get().descriptors().material().get(star_descr.texture());
+    descriptor::Material* material_descr = core::global::get().descriptors().material().get(star_descr.texture());
+    descriptor::Mesh* mesh_descr = core::global::get().descriptors().mesh().get(star_descr.mesh());
 
     EXPECT_NE(star_descr.texture(), -1);
     EXPECT_NE(material_descr->path(), "");
     EXPECT_EQ(star_descr.texture(), view->model()->material());
+
+    //EXPECT_NE(star_descr.mesh(), -1);
+    EXPECT_NE(mesh_descr->modelPath(), "");
+    std::cout<<mesh_descr->modelPath();
+    EXPECT_EQ(star_descr.mesh(), view->model()->mesh());
 }

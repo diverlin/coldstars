@@ -42,7 +42,7 @@
 namespace {
 
 template<typename T>
-void resolveId(T* ob, const type::Collector& types)
+void resolveTypeId(T* ob, const type::Collector& types)
 {
     ob->setType(types.toInt(ob->association().type()));
 }
@@ -80,6 +80,7 @@ public:
     }
 
     void add(T* ob) {
+        assert(ob->id() != -1);
         if (!contains(ob->id())) {
             m_descriptors.insert(std::make_pair( ob->id(), ob ));
             m_descriptorsTypes[ob->type()].push_back(ob);
@@ -130,7 +131,7 @@ public:
             T* ob = new T;
             ceti::InfoLoader::read(filepath, ob);
 
-            resolveId(ob, types);
+            resolveTypeId(ob, types);
             add(ob);
         }
         __save();
@@ -169,6 +170,7 @@ private:
 
     void __save() const
     {
+#ifdef DUMP_DESCRIPTORS
         ceti::filesystem::touch_file(m_fname);
 
         std::fstream filestream;
@@ -184,6 +186,7 @@ private:
             throw std::runtime_error("not able to open file="+m_fname);
         }
         filestream.close();
+#endif // DUMP_DESCRIPTORS
     }
 
 };

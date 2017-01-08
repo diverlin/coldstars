@@ -18,15 +18,10 @@
 
 
 #include "BaseView.hpp"
-#include <Render.hpp>
-#include <Material.hpp>
-#include <Mesh.hpp>
-
-//#include <common/Global.hpp>
-#include <descriptors/DescriptorManager.hpp> // Collector
-#include <types/MeshTypes.hpp>
-
-#include <animations/BaseAnimationRotation.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Material.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/animations/BaseAnimationRotation.hpp>
 
 #include <meti/QuaternionUtils.hpp>
 
@@ -40,28 +35,7 @@ namespace jeti {
 
 namespace  view {
 
-//ceti::Collector<control::Material> BaseView::s_materials;
-//ceti::Collector<Mesh> BaseView::s_meshes;
-
 namespace {
-
-control::Material*
-getMaterial(int_t id)
-{
-    //assert(id>0);
-    ceti::Collector<jeti::control::Material> collector;
-    jeti::control::Material* material = collector.get(id);
-    return material;
-}
-
-jeti::Mesh*
-getMesh(int_t id)
-{
-    assert(id>0);
-    ceti::Collector<jeti::Mesh> collector;
-    jeti::Mesh* mesh = collector.get(id);
-    return mesh;
-}
 
 glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
 {
@@ -88,8 +62,6 @@ BaseView::BaseView(ceti::model::BaseView* model)
     :
       m_model_base(model)
 {
-    m_material = getMaterial(model->material());
-    //m_mesh = getMesh(model->mesh());
 }
 
 BaseView::~BaseView() {
