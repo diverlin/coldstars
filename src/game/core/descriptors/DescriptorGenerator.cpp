@@ -221,7 +221,7 @@ Generator::getNewAsteroidDescriptor()
     descr.setRadiusB(orbit_radiusB);
     descr.setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Asteroid::SPEED_MIN,
-                                   descriptor::Asteroid::SPEED_MAX) / float(orbit_radiusA);
+                                   descriptor::Asteroid::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
     descr.setSpeed(speed);
     descr.setClockwise(meti::getRandBool());
 
