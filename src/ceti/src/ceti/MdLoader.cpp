@@ -96,7 +96,8 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
         mesh->setMaterialPath(material_path);
     }
 
-    //assert(material->type() != -1);
+    assert(mesh->id() != -1);
+//    assert(mesh->type() != -1);
 }
 
 void
@@ -165,10 +166,11 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
 
     material->setPath(img_path);
 
-    //assert(material->type() != -1);
-
     assert(material->row() != 0);
     assert(material->col() != 0);
+
+    assert(material->id() != -1);
+//    assert(material->type() != -1);
 }
 
 } // namespace ceti

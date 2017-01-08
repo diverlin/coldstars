@@ -6,6 +6,10 @@ set(PROJECT coldstars)
 project(${PROJECT})
 
 set(USE_TEST ON)
+set(DUMP_DESCRIPTORS OFF)
+if(DUMP_DESCRIPTORS)
+    add_definitions(-DDUMP_DESCRIPTORS)
+endif()
 
 set(GTEST_ROOT "/workspace/dist/gtest")
 set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glm-0.9.7.5/")

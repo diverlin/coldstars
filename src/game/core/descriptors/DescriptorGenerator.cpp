@@ -18,31 +18,24 @@
 
 
 #include "DescriptorGenerator.hpp"
-#include <descriptors/Base.hpp>
-
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/StarsystemDescriptor.hpp>
-
-#include <descriptors/StarDescriptor.hpp>
-#include <descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/GalaxyDescriptor.hpp>
+#include <core/descriptors/SectorDescriptor.hpp>
+#include <core/descriptors/StarsystemDescriptor.hpp>
+#include <core/descriptors/StarDescriptor.hpp>
+#include <core/descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/RaceDescriptors.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/common/Global.hpp>
+#include <core/common/constants.hpp>
+#include <core/types/MeshTypes.hpp>
+#include <core/types/TextureTypes.hpp>
+#include <core/item/BaseItem.hpp>
 
 #include <meti/RandUtils.hpp>
-#include <common/Global.hpp>
+
 #include <ceti/IdGenerator.hpp>
 
-#include <common/constants.hpp>
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <item/BaseItem.hpp>
-
-#include <common/Global.hpp>
-#include <descriptors/DescriptorManager.hpp>
-#include <types/MeshTypes.hpp>
-#include <types/TextureTypes.hpp>
-
-//#include <client/resources/TextureCollector.hpp>
-//#include <client/resources/MeshCollector.hpp>
 
 namespace descriptor {
 
@@ -86,14 +79,16 @@ Generator::getNewStarsystemDescriptor(int race)
 namespace {
 
 int_t meshDescriptorIdFromType(const type::mesh& type) {
-    ceti::Collector<descriptor::Mesh> collector("mesh_descriptors.txt");
+    auto& collector = core::global::get().descriptors().mesh();
     descriptor::Mesh* descriptor = collector.random(int_t(type));
+    assert(descriptor->id() != -1);
     return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const type::texture& type) {
-    ceti::Collector<descriptor::Material> collector("material_descriptors.txt");
+    auto& collector = core::global::get().descriptors().material();
     descriptor::Material* descriptor = collector.random(int_t(type));
+    assert(descriptor->id() != -1);
     return descriptor->id();
 }
 
@@ -123,7 +118,7 @@ Generator::getNewStarDescriptor()
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
-    //assert(descr.mesh() != -1);
+    assert(descr.mesh() != -1);
 
     return descr;
 }
@@ -151,7 +146,7 @@ Generator::getNewPlanetDescriptor()
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
-    //assert(descr.mesh() != -1);
+    assert(descr.mesh() != -1);
 
     return descr;
 
