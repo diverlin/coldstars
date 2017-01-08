@@ -53,7 +53,7 @@ void validate(const T1& descr, T2* view) {
 
 } // namespace
 
-TEST(resources, star_view)
+TEST(view, star)
 {
     client::global::get().init();
     auto descr = core::global::get().descriptors().star().random();
@@ -64,7 +64,7 @@ TEST(resources, star_view)
     validate(descr, view);
 }
 
-TEST(resources, planet_view)
+TEST(view, planet)
 {
     client::global::get().init();
     auto descr = core::global::get().descriptors().planet().random();
@@ -75,7 +75,7 @@ TEST(resources, planet_view)
     validate(descr, view);
 }
 
-TEST(resources, asteroid_view)
+TEST(view, asteroid)
 {
     client::global::get().init();
     auto descr = core::global::get().descriptors().asteroid().random();
@@ -86,7 +86,7 @@ TEST(resources, asteroid_view)
     validate(descr, view);
 }
 
-//TEST(resources, ship_view)
+//TEST(view, ship)
 //{
 //    client::global::get().init();
 ////    auto descr = core::global::get().descriptors().ship().random();
