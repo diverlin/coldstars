@@ -35,27 +35,27 @@ namespace jeti {
 
 namespace  view {
 
-namespace {
+//namespace {
 
-glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
-{
-    glm::mat4 Tm = glm::translate(center);
+//glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
+//{
+//    glm::mat4 Tm = glm::translate(center);
 
-    glm::quat Qx, Qy, Qz;
+//    glm::quat Qx, Qy, Qz;
 
-    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
-    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
+//    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
+//    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
+//    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
 
-    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
-    glm::mat4 Sm = glm::scale(size);
+//    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
+//    glm::mat4 Sm = glm::scale(size);
 
-    glm::mat4 Mm = Tm * Rm * Sm;
+//    glm::mat4 Mm = Tm * Rm * Sm;
 
-    return Mm;
-}
+//    return Mm;
+//}
 
-} // namespace
+//} // namespace
 
 
 BaseView::BaseView(ceti::model::BaseView* model)
@@ -125,7 +125,7 @@ void BaseView::validateResources() const
 
 bool BaseView::_updateFadeInEffect()
 {
-    if (m_color.a > 0.01) {
+    if (m_color.a > 0.01f) {
         m_color.a -= 0.02;
         return false;
     } else {
@@ -136,7 +136,7 @@ bool BaseView::_updateFadeInEffect()
 
 bool BaseView::_updateFadeOutEffect()
 {
-    if (m_color.a < 1.0) {
+    if (m_color.a < 1.0f) {
         m_color.a += 0.02;
         return false;
     } else {
