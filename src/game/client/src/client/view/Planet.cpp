@@ -19,7 +19,7 @@
 
 #include "Planet.hpp"
 
-#include <spaceobjects/Planet.hpp>
+#include <core/spaceobjects/Planet.hpp>
   
 //#include <client/effects/BaseDecor.hpp>
 
@@ -33,8 +33,6 @@ Planet::Planet(model::Planet* model)
     , m_model_planet(model)
 {
     setOrientationModel(model);
-//    setTexture(planet->texture());
-//    setMesh(planet->mesh());
 }
 
 /* virtual */

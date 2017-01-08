@@ -29,14 +29,16 @@ namespace view {
 
 class Asteroid : public jeti::view::BaseView
 {
-    public:
-        Asteroid(model::Asteroid*);
-        virtual ~Asteroid() override final;
+public:
+    Asteroid(model::Asteroid*);
+    virtual ~Asteroid() override final;
 
-    private:
-        model::Asteroid* model() const  { return m_model_asteroid; }
-        model::Asteroid* m_model_asteroid = nullptr;
-//        virtual void UpdateInfo() override final;
+    model::Asteroid* model() const  { return m_model_asteroid; }
+    void draw(const jeti::Renderer& render);
+
+private:
+    model::Asteroid* m_model_asteroid = nullptr;
+    //        virtual void UpdateInfo() override final;
 }; 
 
 } // namespace view

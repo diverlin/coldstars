@@ -17,18 +17,15 @@
 */
 
 #include "AsteroidBuilder.hpp"
-#include <builder/CommonBuilderHeaders.hpp>
-#include <spaceobjects/Asteroid.hpp>
-
-#include <common/constants.hpp>
-
-//#include <types/MeshTypes.hpp>
-
-#include <meti/RandUtils.hpp>
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/Asteroid.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
 namespace builder {
 
-model::Asteroid* Asteroid::__createTemplate(int_t id)
+model::Asteroid*
+Asteroid::__createTemplate(int_t id)
 { 
     model::Asteroid* model = new model::Asteroid;
     model->setId(id);
@@ -39,38 +36,66 @@ model::Asteroid* Asteroid::__createTemplate(int_t id)
     return model;
 } 
 
-model::Asteroid* Asteroid::getNew()
+model::Asteroid*
+Asteroid::getNew()
+{
+    const auto& descr = core::global::get().descriptors().asteroid().random();
+    return getNew(descr);
+}
+
+model::Asteroid*
+Asteroid::getNew(const descriptor::Asteroid& descr)
 {
     model::Asteroid* model = __createTemplate();
 
-    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    model->setRadiusA(meti::getRandInt(300, 1200));
-    model->setRadiusB(meti::getRandInt(300, 1200));
-    model->setOrbitPhi(meti::getRandInt(360));
-    model->setSpeed(0.1f);
-    model->setClockwise(meti::getRandBool());
+    /// BaseView
+    model->setMesh(descr.mesh());
+    model->setMaterial(descr.texture());
 
-    LifeData data_life;
-    data_life.armor      = 10;
-    data_life.dying_time = 50;
-    model->setLifeData(data_life);
+    /// Base
+    LifeData life_data;
+    life_data.armor = descr.armor();
+    model->setLifeData(life_data);
 
-    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
-    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    /// Planetoid
+    model->setRadiusA(descr.radiusA());
+    model->setRadiusB(descr.radiusB());
+    model->setOrbitPhi(descr.orbitPhi());
+    model->setSpeed(descr.speed());
+    model->setClockwise(descr.clockwise());
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+    /// Orientation
+    model->setSize(descr.size());
 
-    //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
-
-    float delta_angle = 0.0001*meti::getRandInt(20, 60);
-    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
-    //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
-
-    // todo
-    //model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
-        
     return model;
+
+
+//    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+//    model->setRadiusA(meti::getRandInt(300, 1200));
+//    model->setRadiusB(meti::getRandInt(300, 1200));
+//    model->setOrbitPhi(meti::getRandInt(360));
+//    model->setSpeed(0.1f);
+//    model->setClockwise(meti::getRandBool());
+
+//    LifeData data_life;
+//    data_life.armor      = 10;
+//    data_life.dying_time = 50;
+//    model->setLifeData(data_life);
+
+//    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
+//    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
+//    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+
+//    alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
+
+//    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+//    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+//    alpitodorender asteroid->SetAnimationRotation(animation_rotation);
+
+//    //todo
+//    model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 } 
            
 } // namespace builder

@@ -170,8 +170,8 @@ Manager::generate()
         add(Generator::getNewVehicleDescriptor());
         add(Generator::getNewStarDescriptor());
         add(Generator::getNewPlanetDescriptor());
+        add(Generator::getNewAsteroidDescriptor());
         add(Generator::getNewContainerDescriptor());
-        //add(generator::getNewAsteroidDescriptor());
     }
 
     // world

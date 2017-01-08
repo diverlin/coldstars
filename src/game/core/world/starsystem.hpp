@@ -210,6 +210,7 @@ public:
 
     std::vector<control::Planet*> planets() const { return m_planets; }
     std::vector<control::Star*> stars() const { return m_stars; }
+    std::vector<control::Asteroid*> asteroids() const { return m_asteroids; }
     std::vector<Vehicle*> vehicles() const { return m_vehicles; }
     std::vector<Container*> containers() const { return m_containers; }
 

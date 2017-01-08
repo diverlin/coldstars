@@ -112,13 +112,13 @@ Starsystem::star() const
 /* virtual */
 void Starsystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)        {core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
-    for(unsigned int i=0; i<m_planets.size(); i++)    {core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
-    for(unsigned int i=0; i<m_asteroids.size(); i++)  {core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
-    for(unsigned int i=0; i<m_containers.size(); i++) {core::global::get().entityManager().addToGarbage(m_containers[i]); }
-    for(unsigned int i=0; i<m_bullets.size(); i++)    {core::global::get().entityManager().addToGarbage(m_bullets[i]); }
-    for(unsigned int i=0; i<m_blackholes.size(); i++) {core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
-    for(unsigned int i=0; i<m_vehicles.size(); i++)   {core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
+    for(unsigned int i=0; i<m_stars.size(); i++)        { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
+    for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
+    for(unsigned int i=0; i<m_asteroids.size(); i++)  { core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
+    for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
+    for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
+    for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
+    for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
 }      
 
 Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
@@ -254,6 +254,7 @@ void Starsystem::add(model::Asteroid* model, const model::SpaceObject* parent, i
     model->setPlace(type::place::KOSMOS);
 
     control::Asteroid* asteroid = new control::Asteroid(model);
+    asteroid->initialize();
     m_asteroids.push_back(asteroid);
 }
 
@@ -453,18 +454,16 @@ Vehicle* Starsystem::randomVehicle(const std::vector<type::race>& races) const
 
 void Starsystem::__updateStates()
 {
-    if (m_containers.size() < 100)
-    {
-        m_asteroid_manager.Update(this);
+    if (m_containers.size() < 100) {
+        m_asteroid_manager.update(this);
     }
 
     if (core::global::get().config().GetGameMode() == GAME_MODE::CRASH_TEST)
     {
-        m_asteroid_manager.Update(this);
+        m_asteroid_manager.update(this);
         __shipManager_s(50);
         
-        if (m_blackholes.size() < 5)
-        {
+        if (m_blackholes.size() < 5) {
             glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
@@ -908,14 +907,14 @@ void Starsystem::__manageUnavaliableObjects_s()
 void Starsystem::__manageDeadObjects_s()
 {      
     for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
-        if ((*it)->isReadyForGarbage() == true) {
+        if ((*it)->isReadyForGarbage()) {
            core::global::get().entityManager().addToGarbage(*it);
             it = m_vehicles.erase(it);
         }
     }
 
     for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
-        if ((*it)->isReadyForGarbage() == true) {
+        if ((*it)->isReadyForGarbage()) {
            core::global::get().entityManager().addToGarbage(*it);
             it = m_blackholes.erase(it);
         }

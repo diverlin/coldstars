@@ -40,9 +40,14 @@
 
 namespace model {
 
-const int Asteroid::SCALE_MIN = 20;
-const int Asteroid::SCALE_MAX = 40;
-const int Asteroid::EXPIRIENCE_TO_GIVE = 100;
+//const int Asteroid::SCALE_MIN = 20;
+//const int Asteroid::SCALE_MAX = 40;
+//const int Asteroid::EXPIRIENCE_TO_GIVE = 100;
+
+Asteroid::Asteroid()
+{
+    setType(type::entity::ASTEROID_ID);
+}
 
 Asteroid::Asteroid(const std::string& data)
 {
@@ -64,10 +69,6 @@ Asteroid::Asteroid(model::Asteroid* model)
       Planetoid(model)
     , m_model_asteroid(model)
 {
-//    setId(id);
-//    setTypeId(type::entity::ASTEROID_ID);
-
-    this->model()->setMass(meti::getRandInt(10, 30));
 }
 
 Asteroid::~Asteroid()

@@ -23,13 +23,13 @@
 #include "../builder/spaceobjects/AsteroidBuilder.hpp"
 #include "../spaceobjects/Asteroid.hpp"
 
-void AsteroidManager::Update(Starsystem* starsystem)
+void AsteroidManager::update(Starsystem* starsystem)
 {
-    while (starsystem->asteroidNum() < asteroid_num) {
+    while (starsystem->asteroidNum() < m_asteroidsNum) {
         starsystem->add(builder::Asteroid::getNew());
         int current_turn_counter = core::global::get().turnTimer().getStopTurnTimer();
-        asteroid_last_turn_created = current_turn_counter;
-        if ((asteroid_last_turn_created + asteroid_delay) > current_turn_counter) {
+        m_lastTurn = current_turn_counter;
+        if ((m_lastTurn + m_delay) > current_turn_counter) {
             break;
         }
     }

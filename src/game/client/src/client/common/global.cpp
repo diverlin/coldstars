@@ -56,10 +56,13 @@ global::~global()
 
 void
 global::init() {
-    m_screen->init();
-    m_render->init(m_camera, m_screen->width(), m_screen->height());
+    if (!m_init) {
+        m_screen->init();
+        m_render->init(m_camera, m_screen->width(), m_screen->height());
 
-    Data data;
+        Data data;
+        m_init= true;
+    }
 }
 
 } // namespace client

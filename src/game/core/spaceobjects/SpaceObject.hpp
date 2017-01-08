@@ -110,10 +110,11 @@ public:
     SpaceObject(model::SpaceObject*);
     ~SpaceObject() override;
 
-    [[warning("check const")]]
-    Starsystem* starsystem();
+    //[[warning("make const, speed optimize")]]
+    Starsystem* starsystem() const  { return m_starsystem; }
 
-    model::SpaceObject* parent();
+    //[[warning("make const, speed optimize")]]
+    model::SpaceObject* parent() const { return m_parent; }
 
     void addImpulse(const glm::vec3&, float);
 
@@ -128,10 +129,11 @@ public:
 
     model::SpaceObject* model() const { return m_model_spaceobject; }
 
-protected:
+private:
     Starsystem* m_starsystem = nullptr;
     model::SpaceObject* m_parent = nullptr;
 
+protected:
     glm::vec3 externalForce;
 
     model::SpaceObject* m_model_spaceobject = nullptr;
@@ -150,6 +152,8 @@ protected:
 
     void _checkDeath(bool);
     virtual void _postDeathUniqueEvent(bool) {}
+
+    void _init();
 };
 
 } // namespace control

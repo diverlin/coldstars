@@ -163,7 +163,7 @@ private:
 
     void __clear();
 
-    jeti::view::BaseView* __isViewExists(model::SpaceObject*);
+    jeti::view::BaseView* __tryGetView(model::SpaceObject*);
 
     std::map<model::SpaceObject*, jeti::view::BaseView*> m_cache;
     [[warning("ugly, think how to make it better")]]

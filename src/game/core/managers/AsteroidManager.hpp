@@ -17,32 +17,29 @@
 */
 
 
-#ifndef ASTEROIDMANAGER_HPP
-#define ASTEROIDMANAGER_HPP
+#pragma once
 
 class Starsystem;
 
 class AsteroidManager 
 {
     public:
-        AsteroidManager():
-        asteroid_num(0),
-        asteroid_delay(0),
-        asteroid_last_turn_created(0)
-        {}
+        AsteroidManager() {}
         ~AsteroidManager() {}
         
-        void Parameterize(unsigned int asteroids_num, int asteroid_delay = 0) { this->asteroid_num = asteroid_num; this->asteroid_delay = asteroid_delay; }
+        void parameterize(unsigned int num, int delay = 0) {
+            m_asteroidsNum = num;
+            m_delay = delay;
+        }
             
-        void Update(Starsystem*);
+        void update(Starsystem*);
 
     private:                         
-        unsigned int asteroid_num;
-        int asteroid_delay;
-        int asteroid_last_turn_created;            
+        unsigned int m_asteroidsNum = 30;
+        int m_delay = 0;
+        int m_lastTurn = 0;
 };
 
-#endif 
 
 
 

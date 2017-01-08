@@ -16,37 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "AsteroidDescriptor.hpp"
 
-#pragma once
+namespace descriptor {
 
-#include <jeti/BaseView.hpp>
+const int Asteroid::ARMOR_MIN = 10;
+const int Asteroid::ARMOR_MAX = 100;
+const int Asteroid::SCALE_MIN = 50;
+const int Asteroid::SCALE_MAX = 100;
+const int Asteroid::DISTANCE_MIN = 400;
+const int Asteroid::DISTANCE_MAX = 1600;
+const int Asteroid::SPEED_MIN = 40;
+const int Asteroid::SPEED_MAX = 100;
 
-namespace model {
-class Planet;
-} // namespace model
-
-namespace view {
-
-class Planet : public jeti::view::BaseView
-{
-public:
-    Planet(model::Planet*);
-    virtual ~Planet() override final;
-
-    void draw(const jeti::Renderer&) override;
-
-    model::Planet* model() const { return m_model_planet; }
-
-private:
-    model::Planet* m_model_planet = nullptr;
-    //virtual void UpdateInfo() override final;
-}; 
-
-} // namespace view
-
-
-
-
-
-
-
+} // namespace descriptor

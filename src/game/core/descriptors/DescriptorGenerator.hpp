@@ -30,6 +30,7 @@ class Sector;
 class Starsystem;
 class Star;
 class Planet;
+class Asteroid;
 class BaseOLD;
 
 class Generator {
@@ -42,7 +43,7 @@ private:
     /* spaceobjects */
     static descriptor::Star getNewStarDescriptor();
     static descriptor::Planet getNewPlanetDescriptor();
-    static descriptor::BaseOLD getNewAsteroidDescriptor();
+    static descriptor::Asteroid getNewAsteroidDescriptor();
     static descriptor::BaseOLD getNewVehicleDescriptor();
     static descriptor::BaseOLD getNewContainerDescriptor();
 

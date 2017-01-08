@@ -18,13 +18,14 @@
 
 #pragma once
 
-#include <descriptors/Base.hpp>
+#include <core/descriptors/Base.hpp>
 
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/StarsystemDescriptor.hpp>
-#include <descriptors/StarDescriptor.hpp>
-#include <descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/GalaxyDescriptor.hpp>
+#include <core/descriptors/SectorDescriptor.hpp>
+#include <core/descriptors/StarsystemDescriptor.hpp>
+#include <core/descriptors/StarDescriptor.hpp>
+#include <core/descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/AsteroidDescriptor.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -113,6 +114,9 @@ public:
     void add(const Planet& planet) {
         m_planet.add(planet);
     }
+    void add(const Asteroid& asteroid) {
+        m_asteroid.add(asteroid);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -125,6 +129,7 @@ public:
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
+    const MManager<Asteroid>& asteroid() const { return m_asteroid; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -142,6 +147,7 @@ private:
     MManager<Starsystem> m_starsystem;
     MManager<Star> m_star;
     MManager<Planet> m_planet;
+    MManager<Asteroid> m_asteroid;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 
