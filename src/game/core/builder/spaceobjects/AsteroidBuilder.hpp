@@ -24,12 +24,18 @@ namespace model {
 class Asteroid;
 } // namespace model
 
+namespace descriptor {
+class Asteroid;
+} // namespace descriptor
+
+
 namespace builder {
 
 class Asteroid
 {
 public:
     static model::Asteroid* getNew();
+    static model::Asteroid* getNew(const descriptor::Asteroid&);
 
 private:
     static model::Asteroid* __createTemplate(int_t id = NONE);

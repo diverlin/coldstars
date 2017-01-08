@@ -17,8 +17,10 @@
 */
 
 #include "Asteroid.hpp"
-#include <spaceobjects/Asteroid.hpp>
- 
+#include <core/spaceobjects/Asteroid.hpp>
+
+#include <jeti/Render.hpp>
+
 namespace view {
 
 Asteroid::Asteroid(model::Asteroid* model)
@@ -26,9 +28,9 @@ Asteroid::Asteroid(model::Asteroid* model)
       jeti::view::BaseView(model)
     , m_model_asteroid(model)
 {   
-
+    setOrientationModel(model);
 }
-    
+
 Asteroid::~Asteroid()
 {}
 
@@ -44,5 +46,16 @@ Asteroid::~Asteroid()
 //    m_Info.addNameStr("speed x 100:"); m_Info.addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
 //    m_Info.addNameStr("pos:");         m_Info.addValueStr( str(center()) );
 //}
+
+void Asteroid::draw(const jeti::Renderer& render)
+{
+    //render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
+    render.drawMeshLight(mesh(), material(), actualModelMatrix());
+
+    //    for (BaseDecor* decor : m_Decorations) {
+//        decor->Render(render, center());
+//    }
+}
+
 
 } // namespace view

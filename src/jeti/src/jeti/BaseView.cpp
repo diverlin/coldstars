@@ -62,6 +62,7 @@ BaseView::BaseView(ceti::model::BaseView* model)
     :
       m_model_base(model)
 {
+
 }
 
 BaseView::~BaseView() {
@@ -71,6 +72,7 @@ BaseView::~BaseView() {
 
 void BaseView::setMesh(jeti::Mesh* mesh)
 {
+    assert(m_orientation);
     m_orientation->setDirection(mesh->originDirection());
     m_mesh = mesh;
 }

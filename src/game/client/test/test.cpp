@@ -21,30 +21,78 @@
 #include <core/common/Global.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 #include <core/descriptors/StarDescriptor.hpp>
+#include <core/descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/AsteroidDescriptor.hpp>
+//#include <core/descriptors/ShipDescriptor.hpp>
 
 #include <client/view/Star.hpp>
+#include <client/view/Planet.hpp>
+//#include <client/view/Ship.hpp>
+#include <client/view/Asteroid.hpp>
+
 #include <client/common/global.hpp>
 
 #include <gtest/gtest.h>
 
-TEST(resources, viewer)
+namespace {
+
+template<typename T1, typename T2>
+void validate(const T1& descr, T2* view) {
+
+    descriptor::Material* material_descr = core::global::get().descriptors().material().get(descr.texture());
+    descriptor::Mesh* mesh_descr = core::global::get().descriptors().mesh().get(descr.mesh());
+
+    EXPECT_NE(descr.texture(), -1);
+    EXPECT_NE(material_descr->path(), "");
+    EXPECT_EQ(descr.texture(), view->model()->material());
+
+    EXPECT_NE(descr.mesh(), -1);
+    EXPECT_NE(mesh_descr->modelPath(), "");
+    EXPECT_EQ(descr.mesh(), view->model()->mesh());
+}
+
+} // namespace
+
+TEST(resources, star_view)
 {
     client::global::get().init();
-    auto star_descr = core::global::get().descriptors().star().random();
+    auto descr = core::global::get().descriptors().star().random();
 
-    model::Star* model = builder::Star::getNew(star_descr);
-    //control::Star* control = new control::Star(model);
+    model::Star* model = builder::Star::getNew(descr);
     view::Star* view = new view::Star(model);
 
-    descriptor::Material* material_descr = core::global::get().descriptors().material().get(star_descr.texture());
-    descriptor::Mesh* mesh_descr = core::global::get().descriptors().mesh().get(star_descr.mesh());
-
-    EXPECT_NE(star_descr.texture(), -1);
-    EXPECT_NE(material_descr->path(), "");
-    EXPECT_EQ(star_descr.texture(), view->model()->material());
-
-    //EXPECT_NE(star_descr.mesh(), -1);
-    EXPECT_NE(mesh_descr->modelPath(), "");
-    std::cout<<mesh_descr->modelPath();
-    EXPECT_EQ(star_descr.mesh(), view->model()->mesh());
+    validate(descr, view);
 }
+
+TEST(resources, planet_view)
+{
+    client::global::get().init();
+    auto descr = core::global::get().descriptors().planet().random();
+
+    model::Planet* model = builder::Planet::getNew(descr);
+    view::Planet* view = new view::Planet(model);
+
+    validate(descr, view);
+}
+
+TEST(resources, asteroid_view)
+{
+    client::global::get().init();
+    auto descr = core::global::get().descriptors().asteroid().random();
+
+    model::Asteroid* model = builder::Asteroid::getNew(descr);
+    view::Asteroid* view = new view::Asteroid(model);
+
+    validate(descr, view);
+}
+
+//TEST(resources, ship_view)
+//{
+//    client::global::get().init();
+////    auto descr = core::global::get().descriptors().ship().random();
+
+////    model::Ship* model = builder::Ship::getNew(descr);
+////    view::Ship* view = new view::Ship(model);
+
+//    validate(descr, view);
+//}

@@ -52,29 +52,24 @@ SpaceObject::SpaceObject(model::SpaceObject* model)
       ceti::control::Orientation(model)
     , control::Base(model)
     , m_model_spaceobject(model)
-{}
+{
+    _init();
+}
 
 SpaceObject::~SpaceObject()
 {}
 
-
-Starsystem* SpaceObject::starsystem()
+void SpaceObject::_init()
 {
     if (!m_starsystem) {
         m_starsystem = static_cast<Starsystem*>(core::global::get().entityManager().getEntity(model()->starsystem()));
         assert(m_starsystem);
     }
-    return m_starsystem;
-}
 
-model::SpaceObject*
-SpaceObject::parent()
-{
-    if (!m_parent) {
+    if (!m_parent && model()->parent() != -1) {
         m_parent = static_cast<model::SpaceObject*>(core::global::get().entityManager().get(model()->parent()));
         assert(m_parent);
     }
-    return m_parent;
 }
 
 void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)

@@ -59,6 +59,8 @@ private:
     jeti::Camera* m_camera = nullptr;
 
     UserInputInSpace* m_inputsManager = nullptr;
+
+    bool m_init = false;
 };
 
 } // namespace client

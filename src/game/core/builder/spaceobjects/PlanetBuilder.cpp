@@ -19,19 +19,8 @@
 #include "PlanetBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobjects/Planet.hpp>
-
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
-
-//#include <common/constants.hpp>
-
-//#include <client/effects/Atmosphere.hpp>
-//#include <client/effects/Ring.hpp>
-
-//#include <types/MeshTypes.hpp>
-
-//#include <meti/RandUtils.hpp>
-
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
 namespace builder {
 

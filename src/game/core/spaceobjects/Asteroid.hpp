@@ -25,12 +25,12 @@ namespace model {
 
 class Asteroid : public Planetoid {
 public:
-    static const int SCALE_MIN;
-    static const int SCALE_MAX;
-    static const int EXPIRIENCE_TO_GIVE;
+//    static const int SCALE_MIN;
+//    static const int SCALE_MAX;
+//    static const int EXPIRIENCE_TO_GIVE;
 
 public:
-    Asteroid() = default;
+    Asteroid();
     ~Asteroid() = default;
     Asteroid(const std::string& data);
     std::string data() const;
@@ -38,8 +38,7 @@ public:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Planetoid>(*this);
     }
 };

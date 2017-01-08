@@ -22,28 +22,28 @@
 
 namespace descriptor {
 
-class Planet : public Planetoid
+class Asteroid : public Planetoid
 {
 
 public:
+    static const int ARMOR_MIN;
+    static const int ARMOR_MAX;
     static const int SCALE_MIN;
     static const int SCALE_MAX;
-    static const int POPULATION_MIN;
-    static const int POPULATION_MAX;
     static const int DISTANCE_MIN;
     static const int DISTANCE_MAX;
     static const int SPEED_MIN;
     static const int SPEED_MAX;
 
 public:
-    Planet() = default;
-    Planet(const std::string& data) {
+    Asteroid() = default;
+    Asteroid(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Planet() = default;
+    virtual ~Asteroid() = default;
 
     std::string info() const override final {
-        std::string result = "Planet descriptor: " + Planetoid::info();
+        std::string result = "Asteroid descriptor: " + Planetoid::info();
         return result;
     }
 

@@ -34,8 +34,8 @@ namespace builder {
 class Planet
 {
 public:
-    static model::Planet* getNew(const descriptor::Planet&);
     static model::Planet* getNew();
+    static model::Planet* getNew(const descriptor::Planet&);
 
 private:
     static model::Planet* __createTemplate(int_t id = NONE);

@@ -24,6 +24,7 @@
 #include <core/descriptors/StarsystemDescriptor.hpp>
 #include <core/descriptors/StarDescriptor.hpp>
 #include <core/descriptors/PlanetDescriptor.hpp>
+#include <core/descriptors/AsteroidDescriptor.hpp>
 #include <core/descriptors/RaceDescriptors.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
@@ -205,11 +206,35 @@ Generator::getNewPlanetDescriptor()
 
 }
 
-descriptor::BaseOLD
+descriptor::Asteroid
 Generator::getNewAsteroidDescriptor()
 {
-    descriptor::BaseOLD descriptor(descriptor::Type::ASTEROID);
-    return descriptor;
+    descriptor::Asteroid descr;
+    descr.setArmor(meti::getRandInt(descriptor::Asteroid::ARMOR_MIN,
+                                    descriptor::Asteroid::ARMOR_MAX));
+
+    int orbit_radiusA = meti::getRandInt(descriptor::Asteroid::DISTANCE_MIN,
+                                        descriptor::Asteroid::DISTANCE_MAX);
+    int orbit_radiusB = meti::getRandInt(descriptor::Asteroid::DISTANCE_MIN,
+                                        descriptor::Asteroid::DISTANCE_MAX);
+    descr.setRadiusA(orbit_radiusA);
+    descr.setRadiusB(orbit_radiusB);
+    descr.setOrbitPhi(0);
+    float speed = meti::getRandInt(descriptor::Asteroid::SPEED_MIN,
+                                   descriptor::Asteroid::SPEED_MAX) / float(orbit_radiusA);
+    descr.setSpeed(speed);
+    descr.setClockwise(meti::getRandBool());
+
+    float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
+                                  descriptor::Asteroid::SCALE_MAX);
+    descr.setSize(meti::vec3(size));
+    descr.setTexture(textureDescriptorIdFromType(type::texture::ASTEROID_ID));
+    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_DEFORMED_ID));
+
+    assert(descr.texture() != -1);
+    assert(descr.mesh() != -1);
+
+    return descr;
 }
 
 descriptor::BaseOLD

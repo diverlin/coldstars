@@ -17,25 +17,15 @@
 */
 
 #include "SpaceView.hpp"
-#include <jeti/constants.hpp>
 
-#include <ceti/Collision.hpp>
-#include <common/constants.hpp>
-#include <client/common/global.hpp>
-
-#include <world/starsystem.hpp>
-
-#include <jeti/Screen.hpp>
-#include <jeti/Mesh.hpp>
-#include <jeti/Material.hpp>
-#include <jeti/Camera.hpp>
-
-#include <spaceobjects/Star.hpp>
-#include <descriptors/Base.hpp>
-
-/// entities
-#include <spaceobjects/Star.hpp>
-#include <spaceobjects/Planet.hpp>
+#include <core/common/constants.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/spaceobjects/Star.hpp>
+#include <core/spaceobjects/Planet.hpp>
+#include <core/spaceobjects/Asteroid.hpp>
+#include <core/common/Global.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
 #include <client/view/ShipDrawable.hpp>
 #include <client/view/BulletDrawable.hpp>
@@ -47,16 +37,22 @@
 #include <client/view/SpaceStationDrawable.hpp>
 #include <client/view/SatelliteDrawable.hpp>
 
-
 /// effects
 #include <client/effects/lazerTrace.hpp>
 #include <client/effects/ShockWaveEffect.hpp>
 #include <client/text/VerticalFlowText.hpp>
-
 #include <client/resources/TextureCollector.hpp>
+#include <client/common/global.hpp>
+
+#include <jeti/constants.hpp>
+#include <jeti/Screen.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Material.hpp>
+#include <jeti/Camera.hpp>
+
+#include <ceti/Collision.hpp>
 #include <ceti/descriptor/Collector.hpp>
-#include <common/Global.hpp>
-#include <descriptors/DescriptorManager.hpp>
+
 
 namespace {
 
@@ -146,6 +142,10 @@ Space::__updateVisible(Starsystem* starsystem,
     for(auto* planet: starsystem->planets()) {
         addIfVisible(planet->model(), visibilityData);
     }
+
+    for(auto* asteroid: starsystem->asteroids()) {
+        addIfVisible(asteroid->model(), visibilityData);
+    }
 }
 
 void Space::__clear()
@@ -169,7 +169,7 @@ void Space::__clear()
 }
 
 jeti::view::BaseView*
-Space::__isViewExists(model::SpaceObject* model)
+Space::__tryGetView(model::SpaceObject* model)
 {
     std::map<model::SpaceObject*, jeti::view::BaseView*>::const_iterator it = m_cache.find(model);
     if (it != m_cache.end()) {
@@ -187,7 +187,7 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
         //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
-    jeti::view::BaseView* view = __isViewExists(model);
+    jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
         view = new view::Star(model);
         __cache(model, view);
@@ -203,7 +203,7 @@ void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
     assert(model);
 
 //    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-    jeti::view::BaseView* view = __isViewExists(model);
+    jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
         view = new view::Planet(model);
         __cache(model, view);
@@ -214,14 +214,23 @@ void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
 //    }
 }
 
-//void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
-//{
-//    if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
-//            __add(asteroid);
-//        }
-//    }
-//}
+void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
+{
+    assert(model);
+
+    //if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
+        //if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
+            jeti::view::BaseView* view = __tryGetView(model);
+            if (!view) {
+                view = new view::Asteroid(model);
+                __cache(model, view);
+            }
+            assert(view);
+
+            __add(view);
+        //}
+    //}
+}
 
 //void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
 //{
@@ -330,6 +339,12 @@ void Space::__add(jeti::view::BaseView* view)
         view::Planet* planet = static_cast<view::Planet*>(view);
         assert(planet);
         m_planets.push_back(planet);
+        break;
+    }
+    case type::entity::ASTEROID_ID: {
+        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
+        assert(asteroid);
+        m_asteroids.push_back(asteroid);
         break;
     }
     }
@@ -481,6 +496,10 @@ void Space::__render_NEW(jeti::Renderer& render)
 
     for(Planet* planet: m_planets) {
         planet->draw(render);
+    }
+
+    for(Asteroid* asteroid: m_asteroids) {
+        asteroid->draw(render);
     }
 }
 
