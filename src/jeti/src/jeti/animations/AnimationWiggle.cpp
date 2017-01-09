@@ -38,18 +38,18 @@ AnimationWiggle::~AnimationWiggle()
 void AnimationWiggle::update(glm::quat& quat, const glm::vec3& axis)
 {
     if (m_Clockwise) {
-        m_Angle += GetDeltaAngle();
-        if (m_Angle > m_Threshold) {
+        m_angle += GetDeltaAngle();
+        if (m_angle > m_Threshold) {
             m_Clockwise = false;
         }
     } else {
-        m_Angle -= GetDeltaAngle();
-        if (m_Angle < -m_Threshold) {
+        m_angle -= GetDeltaAngle();
+        if (m_angle < -m_Threshold) {
             m_Clockwise = true;
         }        
     }
     
-    meti::QuatFromAngleAndAxis(quat, m_Angle, axis);
+    meti::quatFromAngleAndAxis(quat, m_angle, axis);
 }
 
 }

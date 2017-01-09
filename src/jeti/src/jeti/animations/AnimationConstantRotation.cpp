@@ -34,18 +34,16 @@ AnimationConstantRotation::~AnimationConstantRotation()
 /* virtual */
 void AnimationConstantRotation::update(glm::quat& quat, const glm::vec3& axis)
 {
-    m_Angle += GetDeltaAngle();
-    if (m_Angle > 2*M_PI)
-    {
-        m_Angle -= 2*M_PI;
+    m_angle += GetDeltaAngle();
+    if (m_angle > 2*M_PI) {
+        m_angle -= 2*M_PI;
     }
 
-    if (m_Angle < -2*M_PI)
-    {
-        m_Angle += 2*M_PI;
+    if (m_angle < -2*M_PI) {
+        m_angle += 2*M_PI;
     }    
     
-    meti::QuatFromAngleAndAxis(quat, m_Angle, axis);
+    meti::quatFromAngleAndAxis(quat, m_angle, axis);
 }
 
 }

@@ -8,6 +8,22 @@
 
 namespace meti {
 
+const float EPSILON = 0.00001;
+
+const glm::vec3 OX = glm::vec3(1.0f, 0.0f, 0.0f);
+const glm::vec3 OY = glm::vec3(0.0f, 1.0f, 0.0f);
+const glm::vec3 OZ = glm::vec3(0.0f, 0.0f, 1.0f);
+
+template<typename T>
+bool checkEqualVec(const T& v1, const T& v2) {
+    return (glm::length(v1 - v2) < EPSILON);
+}
+
+template<typename T>
+bool checkEqual(const T& v1, const T& v2) {
+    return ((v1 - v2) < EPSILON);
+}
+
 class vec3 : public glm::vec3
 {
 public:

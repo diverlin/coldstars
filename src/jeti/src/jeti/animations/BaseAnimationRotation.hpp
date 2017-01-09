@@ -27,7 +27,7 @@ class BaseAnimationRotation
     public:
         BaseAnimationRotation(float delta_angle)
         :
-        m_Angle(0.0f),
+        m_angle(0.0f),
         m_DeltaAngle(delta_angle) 
         {}
         
@@ -37,7 +37,7 @@ class BaseAnimationRotation
     
     protected:
         float GetDeltaAngle() const { return m_DeltaAngle; }
-        float m_Angle;
+        float m_angle;
             
     private:
         float m_DeltaAngle;   

@@ -157,7 +157,7 @@ const glm::mat4& BaseView::actualModelMatrix()
     assert(m_mesh);
     assert(m_orientation);
 
-    meti::RotationBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+    meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
     if (m_animationRotation) {
         m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
     }
