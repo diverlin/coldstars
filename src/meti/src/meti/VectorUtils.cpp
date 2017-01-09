@@ -1,5 +1,7 @@
 #include "VectorUtils.hpp"
-#include <RandUtils.hpp>
+
+#include <meti/RandUtils.hpp>
+
 #include <sstream>
       
 namespace meti {

@@ -308,7 +308,7 @@ void DriveComplex::CalcPath()
 
     glm::vec3 direction = glm::normalize(m_ownerVehicle->direction());
 
-    meti::RotationBetweenVectors(target_quat, direction, target_dir);
+    meti::quatBetweenVectors(target_quat, direction, target_dir);
     glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
     while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) 
     {
