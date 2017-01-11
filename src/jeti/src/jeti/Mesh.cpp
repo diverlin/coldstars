@@ -114,6 +114,29 @@ void Mesh::fillVertices(const ObjLoader& objLoader)
     __updateVbo();
 }
 
+void Mesh::fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
+{
+    m_primitiveType = GL_LINES;
+
+    m_hasTexCoords = false;
+    m_hasNormals = false;
+    m_hasColors = true;
+    m_hasPointsSize = false;
+
+    m_vertices.clear();
+
+    for(unsigned int i=0; i<positions.size(); ++i) {
+        Vertex vertex;
+        vertex.position = positions[i];
+        vertex.color    = colors[i];
+        m_vertices.push_back(vertex);
+    }
+
+    m_vertexCount = m_vertices.size();
+
+    __updateVbo();
+}
+
 void Mesh::fillPointVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
 {
     m_primitiveType = GL_POINTS;

@@ -130,6 +130,9 @@ private:
 //    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
 //    std::vector<VerticalFlowText*> m_texts;
     
+
+    void applyConstantRotationAnimation(jeti::view::BaseView*);
+
     void __updateVisible(Starsystem* starsystem,
                   const meti::vec3& lookFrom,
                   const meti::vec3& lookTo,

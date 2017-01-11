@@ -24,27 +24,27 @@ namespace jeti {
 
 class BaseAnimationRotation
 {  
-    public:
-        BaseAnimationRotation(float delta_angle)
+public:
+    BaseAnimationRotation(float delta_angle)
         :
-        m_angle(0.0f),
-        m_DeltaAngle(delta_angle) 
-        {}
-        
-        virtual ~BaseAnimationRotation() {}
+          m_angle(0.0f),
+          m_deltaAngle(delta_angle)
+    {}
 
-        virtual void update(glm::quat&, const glm::vec3&) = 0;
+    virtual ~BaseAnimationRotation() {}
+
+    virtual void update(glm::quat&, const glm::vec3&) = 0;
     
-    protected:
-        float GetDeltaAngle() const { return m_DeltaAngle; }
-        float m_angle;
-            
-    private:
-        float m_DeltaAngle;   
-        
+protected:
+    float deltaAngle() const { return m_deltaAngle; }
+    float m_angle;
+
+private:
+    float m_deltaAngle;
+
 };
 
-}
+} // namespace jeti
 
 
 

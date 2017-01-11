@@ -54,6 +54,7 @@ Renderer::Renderer()
 Renderer::~Renderer() 
 {
     delete m_meshQuad;
+    delete m_meshAxis;
 }
 
 
@@ -66,7 +67,30 @@ void Renderer::init(Camera* camera, int w, int h)
 
     glewInit();
 
-    m_meshQuad = new jeti::Mesh;
+    m_meshQuad = new Mesh;
+
+    //
+    m_meshAxis = new Mesh;
+
+    std::vector<glm::vec3> vertices;
+    float r = 1.5;
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(r, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, r, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, r));
+
+    std::vector<glm::vec4> colors;
+    colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
+    colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
+    colors.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
+    colors.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
+    colors.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
+    colors.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
+
+    m_meshAxis->fillVertices(vertices, colors);
+    //
 
     m_w = w;
     m_h = h;
@@ -89,6 +113,7 @@ void Renderer::init(Camera* camera, int w, int h)
     setOrthogonalProjection(w, h);
 
     m_shaders.base            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
+    m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
     m_shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     m_shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
     m_shaders.volumetriclight = compile_program(SHADERS_PATH+"volumetricLight.vert",   SHADERS_PATH+"volumetricLight.frag");
@@ -221,6 +246,17 @@ void Renderer::drawQuad(const control::Material& texOb, const ceti::Box2D& box) 
     // ugly end
 
     drawMesh(*m_meshQuad, texOb, ModelMatrix);
+}
+
+void Renderer::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
+{
+    __useProgram(m_shaders.basecolor);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+        mesh.draw();
+    }
 }
 
 void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix) const
@@ -686,6 +722,16 @@ void Renderer::__useProgram(GLuint program) const
     }
 }
  
+void Renderer::enable_CULLFACE()
+{
+    glEnable(GL_CULL_FACE);
+}
+
+void Renderer::disable_CULLFACE()
+{
+    glDisable(GL_CULL_FACE);
+}
+
 void Renderer::__useTransparentMode(bool transparent_mode_on) const
 {
     if (m_transparentModeOn != transparent_mode_on) {
@@ -717,40 +763,11 @@ void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
     m_transparentModeOn = -1;
 }
        
-void Renderer::drawAxis(const glm::mat4& ModelMatrix, float width) const
+void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 {
-    //float r = 1.5f;
-    
-    //glDisable(GL_TEXTURE_2D);
-    
-    //ComposeModelMatrix(Mm); 
-    
-    //glLineWidth(width);
-
-    //// draw axis X
-    //glColor3f(1.0f, 0.0f, 0.0f);
-    //glBegin(GL_LINES);
-        //glVertex3f(0.0f, 0.0f, 0.0f);
-        //glVertex3f(r, 0.0f, 0.0f);
-    //glEnd();
-                
-    //// draw axis Y    
-    //glColor3f(0.0f, 1.0f, 0.0f);    
-    //glBegin(GL_LINES);        
-        //glVertex3f(0.0f, 0.0f, 0.0f);
-        //glVertex3f(0.0f, r, 0.0f);
-    //glEnd();
-
-    //// draw axis Z    
-    //glColor3f(0.0f, 0.0f, 1.0f);    
-    //glBegin(GL_LINES);        
-        //glVertex3f(0.0f, 0.0f, 0.0f);
-        //glVertex3f(0.0f, 0.0f, r);
-    //glEnd();
-
-    //glColor3f(1.0f, 1.0f, 1.0f);
-    
-    //glEnable(GL_TEXTURE_2D);
+    int width = 2;
+    glLineWidth(width);
+    drawMesh(*m_meshAxis, modelMatrix);
 }
       
       

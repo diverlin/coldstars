@@ -110,9 +110,9 @@ void BaseView::validateResources() const
 ////    render.DrawQuad(*texOb_collision_radius, Mm);
 //}
 
-//void BaseDrawable::RenderAxis(const Renderer& render) const
+//void BaseView::_renderAxis(const Renderer& render) const
 //{
-//    glm::mat4 Mm = getModelMatrix(m_Orientation->center(), glm::vec3(2*m_Orientation->collisionRadius()), glm::vec3(0.0f));    // angle
+//    glm::mat4 Mm = getModelMatrix(m_orientation->position(), glm::vec3(2*m_orientation->collisionRadius()), glm::vec3(0.0f));    // angle
 //    render.DrawAxis(Mm, /*width*/4);
 //    //render.DrawVector(GetDir(), center(), size().x, /*width*/6);
 //    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
@@ -150,6 +150,7 @@ bool BaseView::_updateFadeOutEffect()
 void BaseView::draw(const jeti::Renderer& render)
 {
     render.drawMesh(mesh(), material(), actualModelMatrix());
+    render.drawAxis(actualModelMatrix());
 }
 
 const glm::mat4& BaseView::actualModelMatrix()
@@ -157,14 +158,16 @@ const glm::mat4& BaseView::actualModelMatrix()
     assert(m_mesh);
     assert(m_orientation);
 
+    m_matrixTranslate = glm::translate(m_orientation->position());
+    m_matrixScale     = glm::scale(m_orientation->size());
+
     meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
     if (m_animationRotation) {
-        m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
+        m_animationRotation->update(m_quatAnimation, meti::OZ /*m_mesh->originDirection()*/);
+        m_matrixRotate = glm::toMat4(/*m_quatDirection **/ m_quatAnimation);
+    } else {
+        m_matrixRotate = glm::toMat4(m_quatDirection);
     }
-
-    m_matrixTranslate = glm::translate(m_orientation->position());
-    m_matrixRotate    = glm::toMat4(m_quatDirection * m_quatAnimation);
-    m_matrixScale     = glm::scale(m_orientation->size());
 
     m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
 
