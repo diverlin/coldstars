@@ -37,12 +37,12 @@ class AnimationEffect2D
         angle_max(angle_max),
         d_angle(d_angle),
         scale_up(true) 
-        {};
+        {}
         
-        ~AnimationEffect2D() {};
+        ~AnimationEffect2D() {}
     
-        const glm::vec3& GetScale() const { return scale; };
-        float GetAngle() const { return angle; };
+        const glm::vec3& GetScale() const { return scale; }
+        float GetAngle() const { return angle; }
         
         void Update(ceti::Box2D&);
         void Reset();

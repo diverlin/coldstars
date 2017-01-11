@@ -39,6 +39,7 @@ public:
     const glm::vec3& originDirection() const { return m_originDirection; }
 
     void fillVertices(const ObjLoader&);
+    void fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors);
     void fillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
     void fillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
 

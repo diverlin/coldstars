@@ -34,7 +34,7 @@ AnimationConstantRotation::~AnimationConstantRotation()
 /* virtual */
 void AnimationConstantRotation::update(glm::quat& quat, const glm::vec3& axis)
 {
-    m_angle += GetDeltaAngle();
+    m_angle += deltaAngle();
     if (m_angle > 2*M_PI) {
         m_angle -= 2*M_PI;
     }

@@ -38,12 +38,12 @@ AnimationWiggle::~AnimationWiggle()
 void AnimationWiggle::update(glm::quat& quat, const glm::vec3& axis)
 {
     if (m_Clockwise) {
-        m_angle += GetDeltaAngle();
+        m_angle += deltaAngle();
         if (m_angle > m_Threshold) {
             m_Clockwise = false;
         }
     } else {
-        m_angle -= GetDeltaAngle();
+        m_angle -= deltaAngle();
         if (m_angle < -m_Threshold) {
             m_Clockwise = true;
         }        

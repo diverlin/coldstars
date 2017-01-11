@@ -49,6 +49,7 @@
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/Camera.hpp>
+#include <jeti/animations/AnimationConstantRotation.hpp>
 
 #include <ceti/Collision.hpp>
 #include <ceti/descriptor/Collector.hpp>
@@ -190,6 +191,7 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
     jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
         view = new view::Star(model);
+        applyConstantRotationAnimation(view);
         __cache(model, view);
     }
     assert(view);
@@ -206,6 +208,7 @@ void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
     jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
         view = new view::Planet(model);
+        applyConstantRotationAnimation(view);
         __cache(model, view);
     }
     assert(view);
@@ -223,6 +226,7 @@ void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
             jeti::view::BaseView* view = __tryGetView(model);
             if (!view) {
                 view = new view::Asteroid(model);
+                applyConstantRotationAnimation(view);
                 __cache(model, view);
             }
             assert(view);
@@ -230,6 +234,12 @@ void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
             __add(view);
         //}
     //}
+}
+
+void Space::applyConstantRotationAnimation(jeti::view::BaseView* view)
+{
+    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
+    view->setAnimationRotation(animation);
 }
 
 //void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
@@ -490,6 +500,8 @@ void Space::__render_NEW(jeti::Renderer& render)
     //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(w*scale, h*scale);
 
+    render.enable_CULLFACE();
+
     for(Star* star: m_stars) {
         star->draw(render);
     }
@@ -501,6 +513,8 @@ void Space::__render_NEW(jeti::Renderer& render)
     for(Asteroid* asteroid: m_asteroids) {
         asteroid->draw(render);
     }
+
+    render.disable_CULLFACE();
 }
 
 void Space::__render_NEW2(jeti::Renderer& render)

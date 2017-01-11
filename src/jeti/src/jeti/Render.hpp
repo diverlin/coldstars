@@ -55,6 +55,9 @@ public:
     Renderer();
     ~Renderer();
 
+    void enable_CULLFACE();
+    void disable_CULLFACE();
+
     void activateFbo(int, int, int);
     void deactivateFbo(int);
 
@@ -72,6 +75,7 @@ public:
 
     void composeViewMatrix(const glm::mat4&);
 
+    void drawMesh                (const Mesh&, const glm::mat4&) const;
     void drawMesh                (const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLight           (const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap  (const Mesh&, const control::Material&, const glm::mat4&) const;
@@ -91,7 +95,7 @@ public:
 
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
-    void drawAxis(const glm::mat4&, float) const;
+    void drawAxis(const glm::mat4&) const;
     void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;
     void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
@@ -104,6 +108,7 @@ private:
     int m_h = 0;
 
     Mesh* m_meshQuad = nullptr;
+    Mesh* m_meshAxis = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;
