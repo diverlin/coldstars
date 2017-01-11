@@ -112,7 +112,7 @@ void Renderer::init(Camera* camera, int w, int h)
 
     setOrthogonalProjection(w, h);
 
-    m_shaders.base            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
+    m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
     m_shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     m_shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
@@ -252,8 +252,8 @@ void Renderer::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 {
     __useProgram(m_shaders.basecolor);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         mesh.draw();
     }
@@ -263,14 +263,14 @@ void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, co
 {
     __useTransparentMode(textureOb.model()->use_alpha);
  	
-    __useProgram(m_shaders.base);
+    __useProgram(m_shaders.basetexture);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 	
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
-        glUniform1i(glGetUniformLocation(m_shaders.base, "u_Texture"), 0);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
 	                        
         mesh.draw();
     }
@@ -575,14 +575,14 @@ void Renderer::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
     
             __usePostEffectMode(true);
      	
-            __useProgram(m_shaders.base);
+            __useProgram(m_shaders.basetexture);
 			{
-                glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-                glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 				
 				glActiveTexture(GL_TEXTURE0);                                
 				glBindTexture(GL_TEXTURE_2D, textures[i+j]);
-                glUniform1i(glGetUniformLocation(m_shaders.base, "u_TextureScene"), 0);
+                glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_TextureScene"), 0);
 		
                 m_meshQuad->draw();
 			}
@@ -657,14 +657,14 @@ void Renderer::drawScreenQuadTextured(GLuint texture, int w, int h) const
 
     __usePostEffectMode(true);
  	
-    __useProgram(m_shaders.base);
+    __useProgram(m_shaders.basetexture);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture); 
-        glUniform1i(glGetUniformLocation(m_shaders.base, "u_Texture"), 0);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
                     
         m_meshQuad->draw();
     }
