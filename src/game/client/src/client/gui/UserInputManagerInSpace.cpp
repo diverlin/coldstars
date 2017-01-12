@@ -207,7 +207,11 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
     
             case sf::Keyboard::K: { client::global::get().screen().increaseScale(); break; }
             case sf::Keyboard::L: { client::global::get().screen().decreaseScale(); break; }
-        }   
+
+            case sf::Keyboard::X: { client::global::get().render().showAxis(true); break; }
+            case sf::Keyboard::Z: { client::global::get().render().showAxis(false); break; }
+
+        }
     }
 }
         
