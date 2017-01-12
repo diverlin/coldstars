@@ -88,7 +88,7 @@ void GuiGalaxyMap::UnbindGalaxy()
 /* virtual override final */
 void GuiGalaxyMap::UpdateUnique(Player* player)
 {    
-    const MouseData& data_mouse = player->GetCursor().GetMouseData();
+    const MouseData& data_mouse = player->cursor().mouseData();
     
     int radius = player->GetNpc()->vehicle()->properties().hyper * m_ScaleParsecToScreenCoord;
     m_VisualHyperJumpRange.FillData(GuiTextureObCollector::Instance().dot_yellow, radius, /*dot_size=*/6);

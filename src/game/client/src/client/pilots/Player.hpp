@@ -69,7 +69,7 @@ class Player /*: public Base*/
         Show& GetShow() { return show; }
                               
         Npc* GetNpc() const { return npc; }
-        Cursor& GetCursor() { return cursor; }
+        Cursor& cursor() { return m_cursor; }
         
         void BindNpc(Npc*);        
 
@@ -89,7 +89,7 @@ class Player /*: public Base*/
     private:
         Npc* npc;
         
-        Cursor cursor;
+        Cursor m_cursor;
         
         Show show;  
         Starsystem* starsystem;

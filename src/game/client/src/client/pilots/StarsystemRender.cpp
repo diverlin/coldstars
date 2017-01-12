@@ -464,7 +464,7 @@ void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bo
             }
         }
     
-        //cursor.RenderFocusedObjectStuff();
+        //m_cursor.RenderFocusedObjectStuff();
     }
     //disable_BLEND();
     //resizeGl(w, h); 

@@ -471,7 +471,7 @@ void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDr
             }
         }
     
-        //cursor.RenderFocusedObjectStuff();
+        //m_cursor.RenderFocusedObjectStuff();
     }
     //disable_BLEND();
     //resizeGl(w, h); 
@@ -501,7 +501,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
         float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
         if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
         { 
-            cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
+            m_cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
        
 //            if (data_mouse.left_click == true)
 //            {
@@ -531,7 +531,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
         float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
         if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
         {   
-            cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
+            m_cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
                             
             if (data_mouse.left_click == true)
             {                                  
@@ -571,7 +571,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
         float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
         { 
-            cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
+            m_cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
         
             if (data_mouse.left_click == true)
             {
@@ -622,7 +622,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 //        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
 //        {
-//            cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);
+//            m_cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);
         
 ////            if (data_mouse.left_click == true)
 ////            {
@@ -651,7 +651,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
         float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
         { 
-            cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
+            m_cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);
         
             if (npc->vehicle()->id() != visible_SHIP_vec[i]->id())
             {
@@ -712,7 +712,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
         float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
         {   
-            cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
+            m_cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]);
             
             return true;
         }
@@ -728,7 +728,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
         float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
         { 
-            cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
+            m_cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]);
         
 //            if (data_mouse.left_click == true)
 //            {
@@ -778,7 +778,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 //        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
 //        {
-//            cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]);
+//            m_cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]);
   
 //            if (data_mouse.left_click == true)
 //            {
@@ -800,7 +800,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 //    {
 //        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius()) {
-//            cursor.SetFocusedSpaceObject(visible_STAR_vec[i]);
+//            m_cursor.SetFocusedSpaceObject(visible_STAR_vec[i]);
                 
 //            return true;
 //        }
@@ -831,21 +831,21 @@ void Player::SessionInSpace(Starsystem* starsystem, const TurnTimer& turn_timer)
 //    if (turn_timer.GetTurnEnded() == true)
 //    {
 //        GuiManager::Instance().GetGuiSpace().Update(this);
-//        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
+//        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(m_cursor.GetMouseData().pos_screencoord);
 //        if (gui_element == nullptr)
 //        {
 //            if ( (GuiManager::Instance().GetGuiVehicleScan()->vehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 //            {
-//                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());
+//                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(m_cursor.GetMouseData());
 //                if (mouse_interaction == false)
 //                {
-//                    MouseNavigation(cursor.GetMouseData());
+//                    MouseNavigation(m_cursor.GetMouseData());
 //                }
 //            }
 //        }
 //        else
 //        {
-//            cursor.SetFocusedGuiElement(gui_element);
+//            m_cursor.SetFocusedGuiElement(gui_element);
 //        }
 //    }
 
@@ -854,23 +854,23 @@ void Player::SessionInSpace(Starsystem* starsystem, const TurnTimer& turn_timer)
     GuiManager::Instance().UpdateSessionInSpace();
     //GuiManager::Instance().GetGuiSpace().Render(this); 
     
-    //cursor.RenderItem();
+    //m_cursor.RenderItem();
 }
 
 
 void Player::SessionInKosmoport()
 {       
-    GuiManager::Instance().RunSessionInKosmoport(cursor.GetMouseData());
+    GuiManager::Instance().RunSessionInKosmoport(m_cursor.mouseData());
 }
 
 void Player::SessionInNatureLand()
 {       
-    GuiManager::Instance().RunSessionInNatureLand(cursor.GetMouseData());        
+    GuiManager::Instance().RunSessionInNatureLand(m_cursor.mouseData());
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
-    cursor.Reset();
+    m_cursor.Reset();
     switch(npc->vehicle()->place())
     {
         case type::place::KOSMOS:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
@@ -879,8 +879,8 @@ void Player::RunSession(const TurnTimer& turn_timer)
         case type::place::LAND:      { SessionInNatureLand(); break; }
     }       
 
-    cursor.Update(this);
-    //cursor.RenderFocusedObjectInfo();
+    m_cursor.Update(this);
+    //m_cursor.RenderFocusedObjectInfo();
     client::global::get().screen().draw();
 }
 

@@ -62,7 +62,7 @@ void GuiRadar::ResetData()
 void GuiRadar::UpdateUnique(Player* player)
 {        
     screenrect.set(rect.center() + client::global::get().screen().bottomLeftScreenWC() * scale, (int)(client::global::get().screen().width() * scale), (int)(client::global::get().screen().height() * scale));
-    const MouseData& data_mouse = player->GetCursor().GetMouseData();
+    const MouseData& data_mouse = player->cursor().mouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {
         if (data_mouse.left_press == true)

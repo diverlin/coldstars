@@ -778,7 +778,7 @@ void Space::render(Starsystem* starsystem, jeti::Camera& camera)
     //            }
     //        }
     
-    //        //cursor.RenderFocusedObjectStuff();
+    //        //m_cursor.RenderFocusedObjectStuff();
     //    }
     //disable_BLEND();
     //resizeGl(w, h);

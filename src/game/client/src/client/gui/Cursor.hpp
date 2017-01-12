@@ -42,7 +42,7 @@ class Cursor
         void SetFocusedSpaceObject(SpaceObject* space_object)   { m_FocusedSpaceObject = space_object; }
         void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
                 
-        const MouseData& GetMouseData() const { return m_DataMouse; }
+        const MouseData& mouseData() const { return m_DataMouse; }
         ItemSlot* GetItemSlot() const { return m_ItemSlot; }
 
         void Reset();    

@@ -54,8 +54,8 @@ void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) 
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
     
-    if (player->GetCursor().GetItemSlot()->item() != nullptr) {
-        RenderMarkEmptySlot(render, player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->item()->parentSubtype()));
+    if (player->cursor().GetItemSlot()->item() != nullptr) {
+        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));
     }
     
 //    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)

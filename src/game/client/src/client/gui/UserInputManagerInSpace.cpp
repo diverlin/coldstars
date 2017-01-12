@@ -220,8 +220,8 @@ void UserInputInSpace::__mouseButtonPressed(Player* player)
     for (const auto & key_code : UserInput::get().m_mousePressedCodes)   
     {
         switch (key_code) {
-            case sf::Mouse::Left:  { player->GetCursor().SetLeftMouseButtonClick(true); break; } 
-            case sf::Mouse::Right: { player->GetCursor().SetRightMouseButtonClick(true); break; }
+            case sf::Mouse::Left:  { player->cursor().SetLeftMouseButtonClick(true); break; }
+            case sf::Mouse::Right: { player->cursor().SetRightMouseButtonClick(true); break; }
         }
     }
 }
@@ -238,8 +238,8 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
 { 
     //sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
        
-    int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
-    int my = player->GetCursor().GetMouseData().pos_screencoord.y;
+    int mx = player->cursor().mouseData().pos_screencoord.x;
+    int my = player->cursor().mouseData().pos_screencoord.y;
     
     int screen_w = client::global::get().screen().width();
     int screen_h = client::global::get().screen().height();
