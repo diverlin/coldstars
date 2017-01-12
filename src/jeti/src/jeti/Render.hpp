@@ -63,11 +63,13 @@ public:
 
     void init(Camera*, int, int);
 
+    void showAxis(bool flag) { m_drawAxis = flag; }
+
     void setPerspectiveProjection(float, float);
     void setOrthogonalProjection(float, float);
 
-    BloomEffect& bloom() { return m_bloom; };
-    const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; };
+    BloomEffect& bloom() { return m_bloom; }
+    const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
     const Shaders& shaders() const { return m_shaders; }
 
     void clearColorAndDepthBuffers() const
