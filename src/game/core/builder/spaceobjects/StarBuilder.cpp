@@ -65,6 +65,7 @@ Star::getNew(const descriptor::Star& descr)
 
     // Orientation
     model->setSize(descr.size());
+    model->setDirection(descr.direction());
 
     LifeData data_life;
     data_life.armor = descr.armor();

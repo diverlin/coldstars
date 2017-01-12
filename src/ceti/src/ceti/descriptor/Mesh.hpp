@@ -30,6 +30,8 @@
 namespace ceti {
 namespace descriptor {
 
+const meti::vec3 DEFAULT_DIRECTION = meti::vec3(0.0, 1.0, 0.0);
+
 class Mesh : public Base
 {
 public:
@@ -38,7 +40,7 @@ public:
     Mesh(int_t type,
          const std::string& path,
          const std::string& materialPath = "",
-         const meti::vec3& orientation = meti::vec3(1.0, 0.0, 0.0));
+         const meti::vec3& orientation = DEFAULT_DIRECTION);
 
     Mesh(const std::string& data);
     ~Mesh();
@@ -60,7 +62,7 @@ public:
 private:
     std::string m_modelPath = "";
     std::string m_materialPath = "";
-    meti::vec3 m_orientation = meti::vec3(1.0, 0.0, 0.0);
+    meti::vec3 m_orientation = DEFAULT_DIRECTION;
 
     Association m_association;
 

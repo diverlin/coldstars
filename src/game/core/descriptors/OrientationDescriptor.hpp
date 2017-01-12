@@ -41,11 +41,14 @@ public:
     }
 
     const meti::vec3& size() const { return m_size; }
+    const meti::vec3& direction() const { return m_direction; }
 
     void setSize(const meti::vec3& size) { m_size = size; }
+    void setDirection(const meti::vec3& direction) { m_direction = direction; }
 
 private:
     meti::vec3 m_size;
+    meti::vec3 m_direction;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -53,6 +56,7 @@ private:
     {
         ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_size;
+        ar & m_direction;
     }
 }; 
 

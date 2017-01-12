@@ -66,6 +66,7 @@ Planet::getNew(const descriptor::Planet& descr)
 
     /// Orientation
     model->setSize(descr.size());
+    model->setDirection(descr.direction());
 
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     //glm::vec3 scale(scale_comp, scale_comp, scale_comp);

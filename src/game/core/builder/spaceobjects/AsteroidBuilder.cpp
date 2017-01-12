@@ -66,6 +66,7 @@ Asteroid::getNew(const descriptor::Asteroid& descr)
 
     /// Orientation
     model->setSize(descr.size());
+    model->setDirection(descr.direction());
 
     return model;
 

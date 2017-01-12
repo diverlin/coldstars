@@ -40,6 +40,14 @@
 
 namespace descriptor {
 
+namespace {
+
+glm::vec3 randDirection() {
+    return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
+}
+
+} // namespace
+
 /* world */
 descriptor::Galaxy
 Generator::getNewGalaxyDescriptor(const std::vector<int_t>& sectors) {
@@ -114,6 +122,7 @@ Generator::getNewStarDescriptor()
     float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
     descr.setSize(meti::vec3(size));
+    descr.setDirection(randDirection());
 
     descr.setTexture(textureDescriptorIdFromType(type::texture::STAR_ID));
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
@@ -143,6 +152,7 @@ Generator::getNewPlanetDescriptor()
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
     descr.setSize(meti::vec3(size));
+    descr.setDirection(randDirection());
     descr.setTexture(textureDescriptorIdFromType(type::texture::PLANET_ID));
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
 
@@ -228,6 +238,7 @@ Generator::getNewAsteroidDescriptor()
     float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
     descr.setSize(meti::vec3(size));
+    descr.setDirection(randDirection());
     descr.setTexture(textureDescriptorIdFromType(type::texture::ASTEROID_ID));
     descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_DEFORMED_ID));
 

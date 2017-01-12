@@ -33,7 +33,7 @@ public:
     Planet(model::Planet*);
     virtual ~Planet() override final;
 
-    void draw(const jeti::Renderer&) override;
+    void draw(const jeti::Renderer&) const override;
 
     model::Planet* model() const { return m_model_planet; }
 
