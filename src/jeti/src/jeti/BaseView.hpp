@@ -60,38 +60,42 @@ public:
     BaseView(ceti::model::BaseView*);
     virtual ~BaseView();
 
-    void validateResources() const;
+//    void validateResources() const;
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
-    void setMesh(Mesh* mesh);
-
-    const glm::mat4& actualModelMatrix();
-    const glm::mat4& modelMatrix() const { return m_matrixModel; }
+    void setMesh(Mesh* mesh) { m_mesh = mesh; }
+    void setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
 
     //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
-    const Mesh& mesh() const     { return *m_mesh; }
 
-    const control::Material& material() const { return *m_material; }
-    bool hasMaterial() const { return (m_material != 0); }
-
-    const glm::vec4& color() const { return m_color; }
-    const glm::vec3& center() const;
-    const glm::vec3& size() const;
-
+    [[warning("todo")]]
     virtual bool inRect(const ceti::Rect&) { return true; }
     //        void RenderCollisionRadius(const Renderer&) const;
-    //        void RenderAxis(const Renderer&) const;
 
-    virtual void draw(const jeti::Renderer& render);
+    virtual void update();
+    virtual void draw(const jeti::Renderer& render) const;
 
-    void setOrientationModel(ceti::model::Orientation*);
+    void drawAxis(const jeti::Renderer& render) const;
 
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }
 
     bool _updateFadeInEffect(); // depr, move to animation program
     bool _updateFadeOutEffect(); // depr, move to animation program
+
+    const glm::mat4& _modelMatrix() const { return m_matrixModel; }
+
+    const control::Material& _material() const { return *m_material; }
+    const Mesh& _mesh() const     { return *m_mesh; }
+
+    bool _hasMaterial() const { return (m_material != 0); }
+
+    const glm::vec4& _color() const { return m_color; }
+//    const glm::vec3& _center() const;
+//    const glm::vec3& _size() const;
+
+    //void RenderAxis(const Renderer&) const;
 
 private:
     ceti::model::BaseView* m_model_base = nullptr;
@@ -119,6 +123,8 @@ private:
     //        InfoTable m_Info;
     //        virtual void UpdateInfo() {};
     virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
+
+    void __updateModelMatrix();
 };
 
 } // namepsace view

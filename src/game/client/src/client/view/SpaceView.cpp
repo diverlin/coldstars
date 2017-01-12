@@ -500,21 +500,27 @@ void Space::__render_NEW(jeti::Renderer& render)
     //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(w*scale, h*scale);
 
-    render.enable_CULLFACE();
+    //render.enable_CULLFACE();
 
     for(Star* star: m_stars) {
+        star->update();
         star->draw(render);
+        star->drawAxis(render);
     }
 
     for(Planet* planet: m_planets) {
+        planet->update();
         planet->draw(render);
+        planet->drawAxis(render);
     }
 
     for(Asteroid* asteroid: m_asteroids) {
+        asteroid->update();
         asteroid->draw(render);
+        asteroid->drawAxis(render);
     }
 
-    render.disable_CULLFACE();
+    //render.disable_CULLFACE();
 }
 
 void Space::__render_NEW2(jeti::Renderer& render)

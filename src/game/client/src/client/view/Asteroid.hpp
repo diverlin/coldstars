@@ -34,7 +34,7 @@ public:
     virtual ~Asteroid() override final;
 
     model::Asteroid* model() const  { return m_model_asteroid; }
-    void draw(const jeti::Renderer& render);
+    void draw(const jeti::Renderer& render) const;
 
 private:
     model::Asteroid* m_model_asteroid = nullptr;

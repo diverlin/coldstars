@@ -70,29 +70,18 @@ BaseView::~BaseView() {
     m_animationRotation = nullptr;
 }
 
-void BaseView::setMesh(jeti::Mesh* mesh)
-{
-    assert(m_orientation);
-    m_orientation->setDirection(mesh->originDirection());
-    m_mesh = mesh;
-}
-void BaseView::setOrientationModel(ceti::model::Orientation* model)
-{
-    m_orientation = model;
-}
+//const glm::vec3& BaseView::_center() const { return m_orientation->position(); }
+//const glm::vec3& BaseView::_size() const { return m_orientation->size(); }
 
-const glm::vec3& BaseView::center() const { return m_orientation->position(); }
-const glm::vec3& BaseView::size() const { return m_orientation->size(); }
-
-void BaseView::validateResources() const
-{
-    assert(m_material);
-    if (!m_material->isLoaded()) {
-        m_material->load();
-    }
-    assert(m_mesh);
-    // todo the same for mesh
-}
+//void BaseView::validateResources() const
+//{
+//    assert(m_material);
+//    if (!m_material->isLoaded()) {
+//        m_material->load();
+//    }
+//    assert(m_mesh);
+//    // todo the same for mesh
+//}
 
 //void BaseDrawable::BindData2D(TextureOb* textureOb)
 //{
@@ -147,13 +136,22 @@ bool BaseView::_updateFadeOutEffect()
     }
 }
 
-void BaseView::draw(const jeti::Renderer& render)
+void BaseView::update()
 {
-    render.drawMesh(mesh(), material(), actualModelMatrix());
-    render.drawAxis(actualModelMatrix());
+    __updateModelMatrix();
 }
 
-const glm::mat4& BaseView::actualModelMatrix()
+void BaseView::draw(const jeti::Renderer& render) const
+{
+    render.drawMesh(_mesh(), _material(), _modelMatrix());
+}
+
+void BaseView::drawAxis(const jeti::Renderer& render) const
+{
+    render.drawAxis(_modelMatrix());
+}
+
+void BaseView::__updateModelMatrix()
 {
     assert(m_mesh);
     assert(m_orientation);
@@ -162,16 +160,15 @@ const glm::mat4& BaseView::actualModelMatrix()
     m_matrixScale     = glm::scale(m_orientation->size());
 
     meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+
     if (m_animationRotation) {
-        m_animationRotation->update(m_quatAnimation, meti::OZ /*m_mesh->originDirection()*/);
-        m_matrixRotate = glm::toMat4(/*m_quatDirection **/ m_quatAnimation);
+        m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
+        m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
     } else {
         m_matrixRotate = glm::toMat4(m_quatDirection);
     }
 
     m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
-
-    return m_matrixModel;
 }
 
 } // namespace view

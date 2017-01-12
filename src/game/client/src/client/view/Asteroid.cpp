@@ -47,10 +47,10 @@ Asteroid::~Asteroid()
 //    m_Info.addNameStr("pos:");         m_Info.addValueStr( str(center()) );
 //}
 
-void Asteroid::draw(const jeti::Renderer& render)
+void Asteroid::draw(const jeti::Renderer& render) const
 {
     //render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
-    render.drawMeshLight(mesh(), material(), actualModelMatrix());
+    render.drawMeshLight(_mesh(), _material(), _modelMatrix());
 
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());

@@ -27,6 +27,8 @@
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
 
+#include <cstdlib>
+#include <ctime>
 namespace client
 {
 
@@ -57,6 +59,8 @@ global::~global()
 void
 global::init() {
     if (!m_init) {
+        srand(time(0));
+
         m_screen->init();
         m_render->init(m_camera, m_screen->width(), m_screen->height());
 

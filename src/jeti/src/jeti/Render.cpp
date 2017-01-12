@@ -69,28 +69,7 @@ void Renderer::init(Camera* camera, int w, int h)
 
     m_meshQuad = new Mesh;
 
-    //
-    m_meshAxis = new Mesh;
-
-    std::vector<glm::vec3> vertices;
-    float r = 1.5;
-    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
-    vertices.push_back(glm::vec3(r, 0.0, 0.0));
-    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
-    vertices.push_back(glm::vec3(0.0, r, 0.0));
-    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
-    vertices.push_back(glm::vec3(0.0, 0.0, r));
-
-    std::vector<glm::vec4> colors;
-    colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    colors.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
-    colors.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
-    colors.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
-    colors.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
-
-    m_meshAxis->fillVertices(vertices, colors);
-    //
+    __initAxisMesh();
 
     m_w = w;
     m_h = h;
@@ -134,6 +113,32 @@ void Renderer::init(Camera* camera, int w, int h)
     __makeShortCuts();
 
     m_initialized = true;
+}
+
+void Renderer::__initAxisMesh()
+{
+    m_meshAxis = new Mesh;
+
+    std::vector<glm::vec3> vertices;
+    float r = 1.5f;
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(r, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, r, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, 0.0));
+    vertices.push_back(glm::vec3(0.0, 0.0, r));
+
+    std::vector<glm::vec4> colors;
+    float m = 0.2f;
+    float s = 0.2f;
+    colors.push_back(glm::vec4(s, m, m, s));
+    colors.push_back(glm::vec4(1.0, m, m, 1.0));
+    colors.push_back(glm::vec4(m, s, m, s));
+    colors.push_back(glm::vec4(m, 1.0, m, 1.0));
+    colors.push_back(glm::vec4(m, m, s, s));
+    colors.push_back(glm::vec4(m, m, 1.0, 1.0));
+
+    m_meshAxis->fillVertices(vertices, colors);
 }
 
 void Renderer::activateFbo(int index, int w, int h)
@@ -738,11 +743,11 @@ void Renderer::__useTransparentMode(bool transparent_mode_on) const
         if (transparent_mode_on) {
 			glEnable(GL_BLEND);
 			glDepthMask(GL_FALSE); // turn off depth buffer writing
-			//glDisable(GL_CULL_FACE);					
+            glDisable(GL_CULL_FACE);
         } else {
 			glDisable(GL_BLEND);
 			glDepthMask(GL_TRUE); // turn on depth buffer writing
-			//glEnable(GL_CULL_FACE);		
+            glEnable(GL_CULL_FACE);
 		}
         m_transparentModeOn = transparent_mode_on;
 	}
@@ -765,9 +770,11 @@ void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
        
 void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 {
-    int width = 2;
-    glLineWidth(width);
-    drawMesh(*m_meshAxis, modelMatrix);
+    if (m_drawAxis) {
+        int width = 1;
+        glLineWidth(width);
+        drawMesh(*m_meshAxis, modelMatrix);
+    }
 }
       
       

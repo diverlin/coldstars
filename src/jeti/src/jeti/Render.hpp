@@ -103,6 +103,7 @@ public:
 
 private:
     bool m_initialized = false;
+    bool m_drawAxis = true;
     float m_scale = 2.5f;
     int m_w = 0;
     int m_h = 0;
@@ -142,6 +143,7 @@ private:
     BloomEffect m_bloom;
     Camera* m_camera = nullptr;
 
+    void __initAxisMesh();
     void __initPostEffects();
     void __makeShortCuts();
 
