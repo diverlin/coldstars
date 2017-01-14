@@ -165,22 +165,23 @@ void Rocket::FireEvent(float attack_rate_normalized)
         RocketBullet* rocket_bullet = core::global::get().rocketBulletBuilder().create(data_bullet);
         rocket_bullet->SetDamageRate(attack_rate_normalized);
 
-        if (slot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
-        {
-            start_pos = slot()->turrel()->position();
-            //angle_inD = item_slot->GetTurrel()->GetAngle().z;
-        }
-        else
-        {
-            start_pos = slot()->vehicleOwner()->position();
-            //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
-        }  
+        assert(false);
+//        if (slot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
+//        {
+//            start_pos = slot()->turrel()->position();
+//            //angle_inD = item_slot->GetTurrel()->GetAngle().z;
+//        }
+//        else
+//        {
+//            start_pos = slot()->vehicleOwner()->position();
+//            //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
+//        }
         
-        rocket_bullet->SetOwnerId(slot()->vehicleOwner()->id());
-        rocket_bullet->SetTarget(slot()->target());
+//        rocket_bullet->SetOwnerId(slot()->vehicleOwner()->id());
+//        rocket_bullet->SetTarget(slot()->target());
     
-        slot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
-        num++;
+//        slot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
+//        num++;
     }
         
     //if (fire_atOnce>=2)

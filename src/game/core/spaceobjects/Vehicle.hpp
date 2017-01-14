@@ -19,17 +19,17 @@
 
 #pragma once
 
-#include <spaceobjects/SpaceObject.hpp>
+#include <core/spaceobjects/SpaceObject.hpp>
 
-#include <parts/WeaponComplex.hpp>
-#include <parts/DriveComplex.hpp>
-#include <parts/ProtectionComplex.hpp>
+#include <core/parts/WeaponComplex.hpp>
+#include <core/parts/DriveComplex.hpp>
+#include <core/parts/ProtectionComplex.hpp>
 
-#include <descriptors/VehicleDescriptor.hpp>
-#include <struct/VehiclePropetries.hpp>
-#include <struct/VehicleNeeds.hpp>
+#include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/struct/VehiclePropetries.hpp>
+#include <core/struct/VehicleNeeds.hpp>
 
-#include <types/StatusTypes.hpp>
+#include <core/types/StatusTypes.hpp>
 
 class VehicleSlot;
 class Land; 
@@ -395,7 +395,7 @@ private:
 
 
 class Vehicle : public SpaceObject
-{   
+{
 public:
     Vehicle();
     virtual ~Vehicle();
