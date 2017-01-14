@@ -17,15 +17,141 @@
 */
 
 #include "Satellite.hpp"
-#include <meti/RandUtils.hpp>
-//#include <ceti/StringUtils.hpp>
-#include <ceti/Logger.hpp>
 #include "../common/Global.hpp"
 #include "../world/starsystem.hpp"
-//#include "../effects/Shield.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"
+
+#include <meti/RandUtils.hpp>
+#include <ceti/Logger.hpp>
+
+
+namespace model {
+
+Satellite::Satellite()
+{
+    setType(type::entity::VEHICLE_ID);
+    setSubType(type::entity::SATELLITE_ID);
+}
+
+Satellite::~Satellite()
+{
+
+}
+
+Satellite::Satellite(const std::string& data)
+{
+    //MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Satellite::data() const
+{
+    //MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+namespace control {
+
+Satellite::Satellite(model::Satellite* model)
+    :
+      Vehicle(model)
+    , m_model_satellite(model)
+{
+
+}
+
+/* virtual */
+Satellite::~Satellite()
+{
+    LOG("___::~Satellite("+std::to_string(model()->id())+")");
+}
+
+void Satellite::BindParent(const SpaceObject* const parent)
+{
+    assert(false);
+    //setParent(parent);
+    m_Orbit.calcPath(2*1.1*parent->collisionRadius(), 1.0, meti::getRandBool());
+}
+
+void Satellite::UpdateInSpace(int time, bool show_effect)
+{
+    _checkDeath(show_effect);
+//    UpdateRenderStuff();
+    if (time > 0)
+    {
+        m_Orbit.updatePosition();
+
+        //printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
+        //if (parent != nullptr)
+        //{
+            glm::vec3 new_pos;
+            new_pos.x = parent()->position().x + m_Orbit.position().x;
+            new_pos.y = parent()->position().y + m_Orbit.position().y;
+            new_pos.z = parent()->position().z;
+            setPosition(new_pos);
+            updateOrientation();
+        //}
+        //else
+        //{
+            //points.setCenter(orbit->getPosition());
+        //}
+
+        weaponComplex().fire(time, npc()->skills().attackNormalized(), show_effect);
+    }
+}
+
+//void Satellite::UpdateInfo()
+//{
+//    GetInfo().clear();
+
+//    GetInfo().addTitleStr("SATELLITE");
+
+//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
+//}
+
+//void Satellite::UpdateRenderStuff()
+//{
+//    GetComplexProtector().GetShieldEffect()->Update();
+//    updateOrientation();
+//}
+
+//void Satellite::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    RenderKorpus(render);
+
+//    //if (GetVehicleDescriptor().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
+
+//    //if (GetComplexProtector().GetProtectorSlot()->item() != nullptr)
+//    //{
+//        //RenderShieldEffect(1.0 - color().a);
+//        //starsystem()->RestoreSceneColor();
+//    //}
+//}
+
+//void Satellite::RenderAtPlanet(const jeti::Renderer& render)
+//{
+//    RenderKorpus(render);
+
+//    //if (GetVehicleDescriptor().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
+//}
+
+} // namespace control
+
+
+
+
 
 Satellite::Satellite(int id)
 {        
