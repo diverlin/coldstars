@@ -19,13 +19,16 @@
 
 #pragma once
 
-#include <string>
-
 #include <ceti/type/IdType.hpp>
+
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-class VehicleDescriptor
+#include <string>
+
+namespace descriptor {
+
+class Vehicle
 {
 public:
     int_t id = 0;
@@ -54,7 +57,8 @@ public:
     int slot_artefact_num = 0;
     int slot_otsec_num = 0;
 
-    VehicleDescriptor() {}
-    ~VehicleDescriptor() {}
+    Vehicle() {}
+    ~Vehicle() {}
 };
 
+} // namespace descriptor

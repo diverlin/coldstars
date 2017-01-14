@@ -58,7 +58,7 @@ void SatelliteBuilder::createInternals(Satellite* satellite) const
         //protection_rate = 1;
     //}
     
-    VehicleDescriptor data_korpus;
+    descriptor::Vehicle data_korpus;
     data_korpus.space       = 60 + meti::getRandInt(20);
     data_korpus.armor       = 10*data_korpus.space;
     data_korpus.protection  = 2*protection_rate;

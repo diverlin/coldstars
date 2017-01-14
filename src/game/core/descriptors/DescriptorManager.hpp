@@ -26,6 +26,7 @@
 #include <core/descriptors/StarDescriptor.hpp>
 #include <core/descriptors/PlanetDescriptor.hpp>
 #include <core/descriptors/AsteroidDescriptor.hpp>
+#include <core/descriptors/VehicleDescriptor.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -130,6 +131,7 @@ public:
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
     const MManager<Asteroid>& asteroid() const { return m_asteroid; }
+    const MManager<Vehicle>& vehicle() const { return m_vehicle; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -148,6 +150,7 @@ private:
     MManager<Star> m_star;
     MManager<Planet> m_planet;
     MManager<Asteroid> m_asteroid;
+    MManager<Vehicle> m_vehicle;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

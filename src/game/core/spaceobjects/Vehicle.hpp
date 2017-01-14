@@ -83,7 +83,7 @@ public:
 
     void setLand(Land* land) { m_Land = land; }
 
-    void setKorpusData(const VehicleDescriptor&);
+    void setKorpusData(const descriptor::Vehicle&);
 
     bool godMode() const { return m_godMode; }
     Land* const land() const { return m_Land; }
@@ -93,7 +93,7 @@ public:
 
     const VehiclePropetries& properties() const { return m_properties; }
     const VehicleNeeds& needs() const { return m_needs; }
-    const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
+    const descriptor::Vehicle& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
     bool isSlotTypePresent(const type::entity&) const;
@@ -276,7 +276,7 @@ private:
 
     VehiclePropetries m_properties;
     VehicleNeeds m_needs;
-    VehicleDescriptor m_vehicleDescriptor;
+    descriptor::Vehicle m_vehicleDescriptor;
 
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();

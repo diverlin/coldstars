@@ -229,7 +229,7 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 //                type::entity npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
 //                type::entity npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                        
-//                Ship* new_ship = core::global::get().shipBuilder().create(generateVehicleDescriptor());
+//                Ship* new_ship = core::global::get().shipBuilder().create(descriptor::getNewVehicle());
 //               core::global::get().shipBuilder().equip(new_ship); // improove
 //                //ShipBuilder::Instance().EquipModules(ship, tech_level);
 //                //ShipBuilder::Instance().EquipArtefacts(ship, tech_level);

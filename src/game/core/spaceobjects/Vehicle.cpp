@@ -149,7 +149,7 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
     //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
-void Vehicle::setKorpusData(const VehicleDescriptor& korpus_data)
+void Vehicle::setKorpusData(const descriptor::Vehicle& korpus_data)
 { 
     m_vehicleDescriptor = korpus_data;
     m_properties.protection = m_vehicleDescriptor.protection;

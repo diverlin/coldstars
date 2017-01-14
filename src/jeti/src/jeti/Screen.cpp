@@ -31,12 +31,6 @@
 namespace jeti {
 
 Screen::Screen()
-    :
-      m_fps(0),
-      m_framesCounter(0),
-      m_lastTime(0.0),
-      m_scale(3.0),
-      m_deltaScale(0.0)
 {}
 
 Screen::~Screen()

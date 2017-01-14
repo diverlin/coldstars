@@ -67,12 +67,12 @@ public:
 private:
     bool m_autoScroll;
 
-    int m_fps;
-    int m_framesCounter;
-    float m_lastTime;
+    int m_fps = 0;
+    int m_framesCounter = 0;
+    float m_lastTime = 0;
 
-    float m_scale;
-    float m_deltaScale;
+    float m_scale = 1.0;
+    float m_deltaScale = 0.0;
     ceti::Rect m_rect;
     glm::vec2 m_targetCenter;
 
