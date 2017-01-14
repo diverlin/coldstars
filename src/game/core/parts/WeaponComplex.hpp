@@ -19,17 +19,27 @@
 
 #pragma once
 
+#include <core/types/EntityTypes.hpp>
+
 #include <vector>
-#include <types/EntityTypes.hpp>
 
 class Vehicle;
 class ItemSlot;
+
 namespace item {
 class Base;
-}
+} // namespace item
+
 class SpaceObject;
 //class TextureOb;
 
+namespace model {
+
+} // namespace model
+
+namespace control {
+
+} // namespace control
 
 class WeaponComplex
 {

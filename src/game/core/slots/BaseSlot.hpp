@@ -56,9 +56,10 @@ class BaseSlot : public core::Base
         
         Vehicle* vehicleOwner() const {
             assert(m_owner);
-            Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
-            assert(vehicle);
-            return vehicle;
+            assert(false);
+//            Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
+//            assert(vehicle);
+//            return vehicle;
         }
 
         Base* owner() const { return m_owner; }

@@ -58,12 +58,13 @@ void Droid::updateProperties()
 /* virtual */
 void Droid::updateInStatic()
 {
-    if (isFunctioning()) {
-        if (!slot()->vehicleOwner()->isArmorFull()) {
-            slot()->vehicleOwner()->increaseArmor(m_repair);
-            deteriorationEvent();
-        }
-    }
+    assert(false);
+//    if (isFunctioning()) {
+//        if (!slot()->vehicleOwner()->isArmorFull()) {
+//            slot()->vehicleOwner()->increaseArmor(m_repair);
+//            deteriorationEvent();
+//        }
+//    }
     _updateLock();
 }
 
