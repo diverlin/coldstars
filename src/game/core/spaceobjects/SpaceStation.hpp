@@ -19,39 +19,94 @@
    
 #pragma once
 
-#include <spaceobjects/Vehicle.hpp>
-#include <dock/Land.hpp>
+#include <core/spaceobjects/Vehicle.hpp>
+#include <core/dock/Land.hpp>
    
    
+namespace model {
+
+class SpaceStation : public model::Vehicle
+{
+public:
+    SpaceStation();
+    virtual ~SpaceStation();
+    SpaceStation(const std::string& data);
+    std::string data() const;
+
+    int_t innerLand() const { return m_innerLand; }
+    void setInnerLand(int_t inner_land) { m_innerLand = inner_land; }
+
+private:
+    int_t m_innerLand = NONE;
+};
+
+
+
+} // namespace model
+
+namespace control {
+
 class SpaceStation : public Vehicle
 {
-    public:  
-        SpaceStation(int);
-        virtual ~SpaceStation();
-            
-        Land* const land() const { return m_Land; };
-        
-        void BindLand(Land* land);
-        
-        virtual void UpdateInSpace(int, bool) override final;
-        
-//        void RenderInSpace(const jeti::Renderer&, float);
-              
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-            
-    private:
-        Land* m_Land;
+public:
+    SpaceStation(model::SpaceStation*);
+    virtual ~SpaceStation();
 
-//        void UpdateRenderStuff_2D();
-//        virtual void UpdateInfo() override final;
-            
-        virtual void putChildrenToGarbage() const override final;
-            
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    [[warning("incapsulate this shit")]]
+    Land* const innerLand() const { return m_innerLand; }
+
+    void bindLand(Land* land);
+
+    virtual void UpdateInSpace(int, bool) override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+
+    model::SpaceStation* model() const { return m_model_spacestation; }
+
+private:
+    model::SpaceStation* m_model_spacestation = nullptr;
+
+    Land* m_innerLand = nullptr;
+
+    //        void UpdateRenderStuff_2D();
+    //        virtual void UpdateInfo() override final;
+
+    virtual void putChildrenToGarbage() const override final;
+};
+
+} // namespace control
+
+
+
+class SpaceStation : public Vehicle
+{
+public:
+    SpaceStation(int);
+    virtual ~SpaceStation();
+
+    Land* const land() const { return m_Land; };
+
+    void bindLand(Land* land);
+
+    virtual void UpdateInSpace(int, bool) override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+
+    virtual void Save(boost::property_tree::ptree&) const override final;
+    virtual void Load(const boost::property_tree::ptree&) override final;
+    virtual void Resolve() override final;
+
+private:
+    Land* m_Land;
+
+    //        void UpdateRenderStuff_2D();
+    //        virtual void UpdateInfo() override final;
+
+    virtual void putChildrenToGarbage() const override final;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

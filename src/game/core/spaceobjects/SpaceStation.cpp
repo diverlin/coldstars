@@ -34,6 +34,123 @@
 #include <pilots/Npc.hpp>
 
 
+namespace model {
+
+SpaceStation::SpaceStation()
+{
+    setType(type::entity::VEHICLE_ID);
+    setSubType(type::entity::SPACESTATION_ID);
+}
+
+SpaceStation::~SpaceStation()
+{
+
+}
+
+SpaceStation::SpaceStation(const std::string& data)
+{
+    //MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+SpaceStation::data() const
+{
+    //MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+
+namespace control {
+
+
+SpaceStation::SpaceStation(model::SpaceStation* model)
+    :
+      Vehicle(model)
+    , m_model_spacestation(model)
+{
+
+}
+
+/* virtual */
+SpaceStation::~SpaceStation()
+{
+    LOG("___::~SpaceStation("+std::to_string(model()->id())+")");
+}
+
+/* virtual override final */
+void SpaceStation::putChildrenToGarbage() const
+{
+    assert(false);
+//    core::global::get().entityManager().addToGarbage(m_innerLand);
+//    npc()->setAlive(false);
+//    core::global::get().entityManager().addToGarbage(npc());
+
+//    for(unsigned int i=0; i<m_slots.size(); i++) {
+//        core::global::get().entityManager().addToGarbage(m_slots[i]);
+//    }
+}
+
+void SpaceStation::bindLand(Land* land)
+{
+    m_innerLand = land;
+    assert(false);
+    //m_Land->SetOwner(this);
+}
+
+/* virtual override final */
+void SpaceStation::UpdateInSpace(int time, bool show_effect)
+{
+    _checkDeath(show_effect);
+    if (time > 0) {
+        weaponComplex().fire(time, npc()->skills().attackNormalized(), show_effect);
+    }
+}
+
+///* virtual override final */
+//void SpaceStation::UpdateInfo()
+//{
+//    GetInfo().clear();
+
+//    GetInfo().addTitleStr("StarBase" + str(subTypeId()));
+
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
+//}
+
+//void SpaceStation::UpdateRenderStuff_2D()
+//{
+//    //points.update();
+//    GetComplexProtector().GetShieldEffect()->Update();
+
+//    //if (ableTo.DRIVE == true)
+//    //{
+//        //drive_trail->update();
+//    //}
+//}
+
+//void SpaceStation::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    //UpdateRenderStuff_2D();
+
+//    RenderKorpus(render);
+
+//    //if (GetVehicleDescriptor().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
+
+//    //if (GetComplexProtector().GetProtectorSlot()->item() != nullptr)
+//    //{
+//        //RenderShieldEffect(1.0 - color().a);
+//        //starsystem()->RestoreSceneColor();
+//    //}
+//}
+
+} // namespace control
+
 
 SpaceStation::SpaceStation(int id)
 : 
@@ -62,7 +179,7 @@ void SpaceStation::putChildrenToGarbage() const
     }
 }
 
-void SpaceStation::BindLand(Land* land)               
+void SpaceStation::bindLand(Land* land)               
 {
     m_Land = land;
     // TODO
