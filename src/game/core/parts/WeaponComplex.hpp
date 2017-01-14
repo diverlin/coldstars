@@ -34,6 +34,7 @@ class SpaceObject;
 class WeaponComplex
 {
 public:
+    WeaponComplex();
     WeaponComplex(Vehicle* owner_vehicle);
     ~WeaponComplex();
 
