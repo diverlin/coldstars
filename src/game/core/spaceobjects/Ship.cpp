@@ -32,6 +32,155 @@
 #include <pilots/Npc.hpp>
 
 
+namespace model {
+
+Ship::Ship()
+{
+    setType(type::entity::VEHICLE_ID);
+    setSubType(type::entity::SHIP_ID);
+}
+
+Ship::~Ship()
+{
+
+}
+
+Ship::Ship(const std::string& data)
+{
+    //MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Ship::data() const
+{
+    //MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+namespace control {
+
+
+Ship::Ship(model::Ship* model)
+    :
+      Vehicle(model)
+    , m_model_ship(model)
+{
+
+}
+
+/* virtual override final */
+Ship::~Ship()
+{
+    LOG("___::~Ship("+std::to_string(model()->id())+")");
+}
+
+
+///* virtual override final */
+//void Ship::UpdateInfo()
+//{
+//    GetInfo().clear();
+
+//    GetInfo().addTitleStr("SHIP");
+//    if (starsystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) ); }
+//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
+//    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(textureOb().GetAssociation().race_id) );
+//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( str(subSubTypeId()) );
+//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetVehicleDescriptor().armor) );
+////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(textureOb().GetData().size_id) );
+//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().space) + "/" + std::to_string(GetProperties().free_space) );
+//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(mass()) );
+//    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
+//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(mass()*MASS_DECREASE_SPEED_RATE*100));
+//    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
+//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().temperature) );
+//    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
+//    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( std::to_string(GetProperties().protection) );
+//    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
+//    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
+//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().price) );
+//    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(center()) );
+
+//    if (GetProperties().grab_radius > 0)
+//    {
+//        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTarstr();
+//        if (grab_str.size() > 0)
+//        {
+//            GetInfo().addNameStr("grab_id:");           GetInfo().addValueStr( grab_str );
+//        }
+//    }
+
+//    //info.addNameStr("attackR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );
+//    //info.addNameStr("defenceR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );
+//}
+
+/* virtual override final */
+void Ship::UpdateInSpace(int time, bool show_effect)
+{
+    _checkDeath(show_effect);
+    //    GetComplexProtector().GetShieldEffect()->Update();
+    driveComplex().UpdatePosition(); // debug
+
+    if (time > 0) {
+        UpdateSpecialAction();
+
+        if (npc()) {
+            npc()->updateInSpace(time, show_effect);
+            weaponComplex().fire(time, npc()->skills().attackNormalized(), show_effect);
+
+            updateOrientation();
+
+            if (properties().speed > 0) {
+                driveComplex().UpdatePosition();
+            }
+
+            UpdateGrappleMicroProgram_inDynamic();
+        }
+    }
+}
+
+//void Ship::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    //if (GetProperties().grab_radius > 0)
+//    //{
+//        //RenderGrabTrail(render);
+//    //}
+
+//    RenderKorpus(render);
+
+//    //if (GetVehicleDescriptor().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
+
+//    //if (GetProperties().speed > 0)
+//    //{
+//        //RenderDriveEffect(scale , 1.0 - color().a);
+//        //starsystem()->RestoreSceneColor();
+//    //}
+
+////    if (GetProperties().shield_effect_enabled == true)
+////    {
+////        RenderShieldEffect(render, 1.0f - color().a);
+////    }
+//}
+
+//void Ship::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
+//{
+//    setCenter(center);
+//    //SetAngleZ(0);
+//    updateOrientation();
+
+//    RenderKorpus(render);
+
+//    if (GetVehicleDescriptor().draw_turrels == true)
+//    {
+//        GetComplexWeapon().RenderTurrels();
+//    }
+//}
+
+} // namespace control
+
 
 Ship::Ship(int id)
 {
