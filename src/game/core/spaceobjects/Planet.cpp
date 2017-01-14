@@ -91,14 +91,14 @@ void Planet::BindLand(Land* land)
     model()->setSubType(land->type());
 }
 
-void Planet::addVehicle(Vehicle* vehicle)
-{
-    if (!vehicle->starsystem()) {
-        vehicle->setStarSystem(starsystem());
-    }
+//void Planet::addVehicle(Vehicle* vehicle)
+//{
+//    if (!vehicle->starsystem()) {
+//        vehicle->setStarSystem(starsystem());
+//    }
         
-    land()->AddVehicle(vehicle);
-}
+//    land()->AddVehicle(vehicle);
+//}
 
 void Planet::updateInSpace(int time, bool show_effect)
 {      

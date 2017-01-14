@@ -77,7 +77,7 @@ public:
     Land* land();
 
     [[warning("check const")]]
-    void addVehicle(Vehicle*);
+//    void addVehicle(Vehicle*);
 
     void updateInSpace(int, bool);
     void updateInSpaceInStatic();

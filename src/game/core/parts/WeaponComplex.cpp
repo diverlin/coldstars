@@ -25,6 +25,13 @@
 #include <item/BaseItem.hpp>
 #include "../slots/ItemSlot.hpp"
 
+WeaponComplex::WeaponComplex()
+    :
+      owner_vehicle(nullptr)
+{
+    assert(owner_vehicle != nullptr);
+}
+
 WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)
     :
       owner_vehicle(owner_vehicle)

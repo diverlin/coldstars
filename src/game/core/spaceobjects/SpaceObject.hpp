@@ -47,6 +47,8 @@ public:
     SpaceObject(const std::string& data);
     std::string data() const;
 
+    void addArmor(int armor) { m_dataLife.armor += armor; }
+
     void setArmor(int armor) { m_dataLife.armor = armor; }
     void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
@@ -117,6 +119,9 @@ public:
     model::SpaceObject* parent() const { return m_parent; }
 
     void addImpulse(const glm::vec3&, float);
+
+    [[warning("do we need this?")]]
+    virtual int givenExpirience() const { return model()->givenExpirience(); }
 
     virtual void remeberAgressor(SpaceObject*) {}
     virtual void hit(int);
