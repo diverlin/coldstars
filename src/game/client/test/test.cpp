@@ -86,13 +86,13 @@ TEST(view, asteroid)
     validate(descr, view);
 }
 
-//TEST(view, ship)
-//{
-//    client::global::get().init();
-////    auto descr = core::global::get().descriptors().ship().random();
+TEST(view, ship)
+{
+    client::global::get().init();
+    auto descr = core::global::get().descriptors().vehicle().random();
 
-////    model::Ship* model = builder::Ship::getNew(descr);
-////    view::Ship* view = new view::Ship(model);
+//    model::Ship* model = builder::Ship::getNew(descr);
+//    view::Ship* view = new view::Ship(model);
 
 //    validate(descr, view);
-//}
+}

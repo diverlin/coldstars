@@ -104,36 +104,36 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
 
     ship->setSubSubTypeId((type::entity)descr.type());
 
-    VehicleDescriptor vehicleDescriptor;
-    vehicleDescriptor.id = descr.id();
-    vehicleDescriptor.race_id = (type::race)descr.race();
-    vehicleDescriptor.type_id = (type::entity)descr.type();
-    vehicleDescriptor.size_id = descr.size();
+    descriptor::Vehicle descr2;
+    descr2.id = descr.id();
+    descr2.race_id = (type::race)descr.race();
+    descr2.type_id = (type::entity)descr.type();
+    descr2.size_id = descr.size();
 
-    vehicleDescriptor.space = descr.space();
-    vehicleDescriptor.armor = descr.armor();
-    vehicleDescriptor.protection = descr.protection();
-    vehicleDescriptor.temperature = descr.temperature();
-    vehicleDescriptor.price = descr.price();
+    descr2.space = descr.space();
+    descr2.armor = descr.armor();
+    descr2.protection = descr.protection();
+    descr2.temperature = descr.temperature();
+    descr2.price = descr.price();
 
-    vehicleDescriptor.draw_turrels = descr.drawTurrels();
+    descr2.draw_turrels = descr.drawTurrels();
 
-    vehicleDescriptor.slot_bak_num = descr.bakSlotNum();
-    vehicleDescriptor.slot_drive_num = descr.driveSlotNum();
-    vehicleDescriptor.slot_droid_num = descr.droidSlotNum();
+    descr2.slot_bak_num = descr.bakSlotNum();
+    descr2.slot_drive_num = descr.driveSlotNum();
+    descr2.slot_droid_num = descr.droidSlotNum();
 #ifdef USE_EXTRA_EQUIPMENT
-    vehicleDescriptor.slot_energizer_num = descr.energizerSlotNum();
-    vehicleDescriptor.slot_freezer_num = descr.freezerSlotNum();
+    descr2.slot_energizer_num = descr.energizerSlotNum();
+    descr2.slot_freezer_num = descr.freezerSlotNum();
 #endif // USE_EXTRA_EQUIPMENT
-    vehicleDescriptor.slot_grapple_num = descr.grappleSlotNum();
-    vehicleDescriptor.slot_protector_num = descr.protectorSlotNum();
-    vehicleDescriptor.slot_radar_num = descr.radarSlotNum();
-    vehicleDescriptor.slot_scaner_num = descr.scanerSlotNum();
-    vehicleDescriptor.slot_weapon_num = descr.weaponSlotNum();
-    vehicleDescriptor.slot_artefact_num = descr.artefactSlotNum();
-    vehicleDescriptor.slot_otsec_num = descr.cargoSlotNum();
+    descr2.slot_grapple_num = descr.grappleSlotNum();
+    descr2.slot_protector_num = descr.protectorSlotNum();
+    descr2.slot_radar_num = descr.radarSlotNum();
+    descr2.slot_scaner_num = descr.scanerSlotNum();
+    descr2.slot_weapon_num = descr.weaponSlotNum();
+    descr2.slot_artefact_num = descr.artefactSlotNum();
+    descr2.slot_otsec_num = descr.cargoSlotNum();
 
-    ship->setKorpusData(vehicleDescriptor);
+    ship->setKorpusData(descr2);
 
 //    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
