@@ -130,5 +130,5 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     
     _createSlots(spacestation);
                 
-    spacestation->BindLand(core::global::get().kosmoportBuilder().create());
+    spacestation->bindLand(core::global::get().kosmoportBuilder().create());
 }

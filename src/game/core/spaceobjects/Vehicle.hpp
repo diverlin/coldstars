@@ -64,7 +64,7 @@ namespace model {
 
 class Vehicle : public model::SpaceObject {
 public:
-    Vehicle();
+    Vehicle()=default;
     ~Vehicle() = default;
     Vehicle(const std::string& data);
     std::string data() const;
