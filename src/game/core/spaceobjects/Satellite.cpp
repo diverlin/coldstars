@@ -17,11 +17,11 @@
 */
 
 #include "Satellite.hpp"
-#include "../common/Global.hpp"
-#include "../world/starsystem.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../parts/WeaponComplex.hpp"
-#include "../pilots/Npc.hpp"
+#include <core/common/Global.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/parts/WeaponComplex.hpp>
+#include <core/pilots/Npc.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <ceti/Logger.hpp>
