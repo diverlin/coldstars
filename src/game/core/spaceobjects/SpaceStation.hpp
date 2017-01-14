@@ -38,11 +38,20 @@ public:
 
 private:
     int_t m_innerLand = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & m_innerLand;
+    }
 };
 
-
-
 } // namespace model
+
+
 
 namespace control {
 

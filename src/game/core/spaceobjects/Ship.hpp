@@ -19,7 +19,58 @@
 
 #pragma once
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobjects/Vehicle.hpp>
+
+namespace model {
+
+class Ship : public model::Vehicle
+{
+public:
+    Ship();
+    virtual ~Ship();
+    Ship(const std::string& data);
+    std::string data() const;
+
+private:
+    // ...
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Vehicle>(*this);
+        //ar & ..;
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
+class Ship : public Vehicle
+{
+public:
+    Ship(model::Ship*);
+    virtual ~Ship();
+
+    virtual void UpdateInSpace(int, bool) override final;
+
+    //        virtual void UpdateInfo() override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+    //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
+
+    model::Ship* model() const { return m_model_ship; }
+
+private:
+    model::Ship* m_model_ship = nullptr;
+
+};
+
+} // namespace control
+
 
 class Ship : public Vehicle
 {   
