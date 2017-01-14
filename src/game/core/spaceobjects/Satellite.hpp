@@ -19,8 +19,62 @@
 
 #pragma once
 
-#include <spaceobjects/Vehicle.hpp>
-#include <parts/orbit.hpp>
+#include <core/spaceobjects/Vehicle.hpp>
+#include <core/parts/orbit.hpp>
+
+
+namespace model {
+
+class Satellite : public model::Vehicle
+{
+public:
+    Satellite();
+    virtual ~Satellite();
+    Satellite(const std::string& data);
+    std::string data() const;
+
+private:
+    // ..
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<Vehicle>(*this);
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
+class Satellite : public Vehicle
+{
+public:
+    Satellite(model::Satellite*);
+    virtual ~Satellite();
+
+    void BindParent(const SpaceObject* const);
+
+    virtual void UpdateInSpace(int, bool) override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+    //        void RenderAtPlanet(const jeti::Renderer&);
+
+    model::Satellite* model() const { return m_model_satellite; }
+private:
+    model::Satellite* m_model_satellite = nullptr;
+
+    Orbit m_Orbit;
+
+    //        virtual void UpdateInfo() override final;
+    //        void UpdateRenderStuff();
+};
+
+} // namespace control
+
 
 
 class Satellite : public Vehicle
