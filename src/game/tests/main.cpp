@@ -77,8 +77,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    Ship* ship1 = ShipBuilder::getNew();
-    Ship* ship2 = ShipBuilder::getNew();
+    model::Ship* ship1 = builder::ShipBuilder::getNew();
+    model::Ship* ship2 = builder::ShipBuilder::getNew();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -93,10 +93,11 @@ TEST(base,critical_hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    Ship* ship1 = ShipBuilder::getNew();
-    Ship* ship2 = ShipBuilder::getNew();
+    model::Ship* ship1 = builder::ShipBuilder::getNew();
+    model::Ship* ship2 = builder::ShipBuilder::getNew();
 
-    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
+    assert(false);
+    //messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
 
     messageManager.runLoop();
 

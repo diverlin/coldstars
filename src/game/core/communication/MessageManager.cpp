@@ -72,7 +72,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
-        ShipBuilder::getNew(message.data);
+        builder::ShipBuilder::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
@@ -118,8 +118,9 @@ void MessageManager::process(const Message& message)
     case TELEGRAM::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data);
         Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
-        Ship* ship = core::global::get().entityManager().getEntity<Ship*>(descriptor.object);
-        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
+        assert(false);
+//        model::Ship* ship = core::global::get().entityManager().getEntity<model::Ship*>(descriptor.object);
+//        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
         break;
     }
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {

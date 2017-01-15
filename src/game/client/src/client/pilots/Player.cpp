@@ -568,47 +568,49 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
-        { 
-            m_cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
+        assert(false);
+
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
         
-            if (data_mouse.left_click == true)
-            {
-//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//            if (data_mouse.left_click == true)
+//            {
+////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+////                {
+////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
+////                }
+////                else
+////                {
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+////                    npc->vehicle()->GetComplexDrive().UpdatePath();
+////                }
+//            }
+            
+//            if (data_mouse.right_click == true)
+//            {
+//                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
 //                {
-//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
+//                //if (pPLAYER->vehicle()->ableTo.GRAB == true)
+//                //{
+//                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+//                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
+//                //}
 //                }
 //                else
 //                {
-//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
-//                    npc->vehicle()->GetComplexDrive().UpdatePath();
-//                }
-            }
-            
-            if (data_mouse.right_click == true)
-            {
-                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-                {
-                //if (pPLAYER->vehicle()->ableTo.GRAB == true)
-                //{
-                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
-                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
-                //}
-                }
-                else
-                {
-//                    if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
-//                    {
-//                        npc->SetScanTarget(visible_SATELLITE_vec[i]);
-//                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-//                    }
+////                    if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
+////                    {
+////                        npc->SetScanTarget(visible_SATELLITE_vec[i]);
+////                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+////                    }
 
-                }
-            }
+//                }
+//            }
                         
-            return true; 
-        }
+//            return true;
+//        }
     }
         
     return false;
@@ -648,58 +650,59 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
-        { 
-            m_cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);
+        assert(false);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);
         
-            if (npc->vehicle()->id() != visible_SHIP_vec[i]->id())
-            {
-//                if (data_mouse.left_click == true)
-//                {
-//                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-//                    {
-//                        npc->vehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
-//                    }
-//                    else
-//                    {
-//                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                        npc->vehicle()->GetComplexDrive().UpdatePath();
-//                    }
-//                }
+//            if (npc->vehicle()->id() != visible_SHIP_vec[i]->id())
+//            {
+////                if (data_mouse.left_click == true)
+////                {
+////                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+////                    {
+////                        npc->vehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
+////                    }
+////                    else
+////                    {
+////                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                        npc->vehicle()->GetComplexDrive().UpdatePath();
+////                    }
+////                }
 
-                if (data_mouse.right_click == true)
-                {
-                    if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-                    {
-                        //if (npc->vehicle()->ableTo.GRAB == true)
-                           //{
-                               //if (npc->vehicle()->grappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
-                               //{
-                                   //npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
-                               //}                    
-                           //}
-                    }
-//                    else
+//                if (data_mouse.right_click == true)
+//                {
+//                    if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
 //                    {
-//                        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
-//                        {
-//                            npc->SetScanTarget(visible_SHIP_vec[i]);
-//                        }
+//                        //if (npc->vehicle()->ableTo.GRAB == true)
+//                           //{
+//                               //if (npc->vehicle()->grappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
+//                               //{
+//                                   //npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+//                               //}
+//                           //}
 //                    }
-                }
-            }
-            else
-            {
-                if (data_mouse.right_click == true)
-                {
-                    npc->setScanTarget(visible_SHIP_vec[i]);
-                    GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-                }
-            }
+////                    else
+////                    {
+////                        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
+////                        {
+////                            npc->SetScanTarget(visible_SHIP_vec[i]);
+////                        }
+////                    }
+//                }
+//            }
+//            else
+//            {
+//                if (data_mouse.right_click == true)
+//                {
+//                    npc->setScanTarget(visible_SHIP_vec[i]);
+//                    GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+//                }
+//            }
                         
-        return true; 
-        }
+//        return true;
+//        }
     }
         
     return false;

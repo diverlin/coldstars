@@ -36,7 +36,7 @@ TEST(ship, drop_item_to_space)
 {
     /* create objects */
     Starsystem* starsystem = StarsystemBuilder::create();
-    Ship* ship = ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(builder::ShipBuilder::getNew());
 
     /* equip ship */
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
@@ -45,9 +45,9 @@ TEST(ship, drop_item_to_space)
     /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->place(), type::place::NONE);
-    starsystem->add(ship, pos, dir);
-    EXPECT_EQ(ship->place(), type::place::KOSMOS);
+    EXPECT_EQ(ship->model()->place(), type::place::NONE);
+    starsystem->add(ship->model(), pos, dir);
+    EXPECT_EQ(ship->model()->place(), type::place::KOSMOS);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
@@ -64,23 +64,32 @@ TEST(ship, base_ship_shoot)
 {
     /* create objects */
     Starsystem* starsystem = StarsystemBuilder::create();
-    Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
-    Ship* ship2 = ShipBuilder::getNew(/*full_equiped=*/true);
+    model::Ship* model_ship1 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
+    model::Ship* model_ship2 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
+
+    control::Ship* ship1 = new control::Ship(model_ship1);
+    control::Ship* ship2 = new control::Ship(model_ship2);
 
     float distance = 10.0f;
 
     /* add objects */
-    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(model_ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(model_ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
     ship1->prepareWeapons();
     ship1->weaponComplex().activateWeapons();
-    ship1->setWeaponTarget(ship2);
+    ship1->setWeaponTarget(model_ship2);
     int damage = ship1->guessDamage(distance) * ship2->adjustDissipateFilter();
-    int armor_init = ship2->armor();
+    int armor_init = model_ship2->armor();
     ship1->fire(/*timer=*/0, /*rate=*/1.0);
-    EXPECT_TRUE((armor_init - damage) - ship2->armor() <= 1);
+    EXPECT_TRUE((armor_init - damage) - model_ship2->armor() <= 1);
+
+    // clean
+    delete model_ship1;
+    delete model_ship2;
+    delete ship1;
+    delete ship2;
 }
 
 
@@ -88,9 +97,16 @@ TEST(ship, base_ship_shoot)
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
-    ship1->hit(ship1->criticalDamage());
-    EXPECT_EQ(0, ship1->armor());
+    model::Ship* model1 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
+    control::Ship* ship1 = new control::Ship(model1);
+
+    assert(false);
+    //ship1->hit(model1->criticalDamage());
+    EXPECT_EQ(0, model1->armor());
+
+    // clean
+    delete model1;
+    delete ship1;
 }
 
 

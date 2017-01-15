@@ -19,14 +19,22 @@
 #pragma once
 
 
-#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
 
 #include <ceti/type/IdType.hpp>
 
 #include <string>
 
+
+namespace model {
+
 class Ship;
-class VehicleDescriptor;
+
+} // namespace model
+
+//class VehicleDescriptor;
+
+namespace builder {
 
 class ShipBuilder : public BaseVehicleBuilder
 {
@@ -34,15 +42,15 @@ public:
     ShipBuilder();
     ~ShipBuilder();
 
-    static Ship* getNew(bool full_equiped = false);
-    static Ship* getNew(const descriptor::BaseOLD&);
-    static Ship* getNew(const std::string&);
+    static model::Ship* getNew(bool full_equiped = false);
+    static model::Ship* getNew(const descriptor::BaseOLD&);
+    static model::Ship* getNew(const std::string&);
 
 private:
-    static Ship* __getNewTemplate(int_t);
-    static void __createInternals(Ship*, const descriptor::BaseOLD&);
+    static model::Ship* __getNewTemplate(int_t);
+    static void __createInternals(model::Ship*, const descriptor::BaseOLD&);
 }; 
 
-
+} // namespace builder
 
 

@@ -48,11 +48,12 @@ TEST(communication, create_ship)
     auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
     int_t obj_id = core::global::get().idGenerator().nextId();
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
-   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
+    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-    Ship* ship = core::global::get().entityManager().getEntity<Ship*>(obj_id);
-    assert(ship);
-    EXPECT_EQ(ship->id(), obj_id);
+    assert(false);
+//    model::Ship* ship = core::global::get().entityManager().getEntity<Ship*>(obj_id);
+//    assert(ship);
+//    EXPECT_EQ(ship->id(), obj_id);
 }
 
 TEST(communication, create_bak)
@@ -60,7 +61,7 @@ TEST(communication, create_bak)
     auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
     int_t obj_id = core::global::get().idGenerator().nextId();
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
-   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
+    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
     item::equipment::Bak* bak = core::global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
     assert(bak);
@@ -97,10 +98,10 @@ TEST(communication, inject_ship)
 
 TEST(comm, new_starsystem)
 {
-//    const descriptor::Base& descriptor = core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-//   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
+    //    const descriptor::Base& descriptor = core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+    //   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
-//    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));
-//    assert(starsystem);
+    //    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));
+    //    assert(starsystem);
     //Starsystem* starsystem = core::global::get().entityManager().get<Starsystem*>(descriptor.id());
 }

@@ -19,21 +19,27 @@
 
 #pragma once
 
-#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
 #include <ceti/type/IdType.hpp>
 
+namespace model {
 class Satellite;
+} // namespace model
 
+
+namespace builder {
 
 class SatelliteBuilder : public BaseVehicleBuilder
 {
-    public:
-        SatelliteBuilder();
-        ~SatelliteBuilder();
-        
-        Satellite* createTemplate(int_t id = NONE) const;
-        Satellite* create() const;
-       
-    private:
-        void createInternals(Satellite*) const;
+public:
+    SatelliteBuilder();
+    ~SatelliteBuilder();
+
+    model::Satellite* createTemplate(int_t id = NONE) const;
+    model::Satellite* create() const;
+
+private:
+    void createInternals(model::Satellite*) const;
 }; 
+
+} // namespace builder

@@ -70,7 +70,9 @@ TEST(creation,bak)
 
 TEST(equipment, lazer)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Lazer* lazer = core::global::get().lazerBuilder().getNew();
 
     // initial
@@ -87,13 +89,16 @@ TEST(equipment, lazer)
     EXPECT_EQ(lazer->radius(), ship->properties().fire_radius_max);
 
     // clean
+    delete model;
     delete ship;
     delete lazer;
 }
 
 TEST(equipment, rocket)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Rocket* rocket = core::global::get().rocketBuilder().getNew();
 
     // initial
@@ -110,13 +115,16 @@ TEST(equipment, rocket)
     EXPECT_EQ(rocket->radius(), ship->properties().fire_radius_max);
 
     // clean
+    delete model;
     delete ship;
     delete rocket;
 }
 
 TEST(equipment, bak)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Bak* bak = core::global::get().bakBuilder().getNew();
 
     // initial
@@ -130,13 +138,16 @@ TEST(equipment, bak)
     EXPECT_EQ(0, ship->properties().hyper); // no drive is set, that's why hyper is 0
 
     // clean
+    delete model;
     delete ship;
     delete bak;
 }
 
 TEST(equipment, drive)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
 
     // initial
@@ -150,13 +161,16 @@ TEST(equipment, drive)
     EXPECT_EQ(0, ship->properties().hyper); // no bak is set that's why hyper is 0
 
     // clean
+    delete model;
     delete ship;
     delete drive;
 }
 
 TEST(equipment, bak_and_drive)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Bak* bak = core::global::get().bakBuilder().getNew();
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
 
@@ -207,6 +221,7 @@ TEST(equipment, bak_and_drive)
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     // clean
+    delete model;
     delete ship;
     delete bak;
     delete drive;
@@ -214,7 +229,9 @@ TEST(equipment, bak_and_drive)
 
 TEST(equipment, droid)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Droid* droid = core::global::get().droidBuilder().getNew();
 
     // initial
@@ -244,13 +261,16 @@ TEST(equipment, droid)
     EXPECT_EQ(droid->repair(), ship->properties().repair);
 
     // clean
+    delete model;
     delete ship;
     delete droid;
 }
 
 TEST(equipment, grapple)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Grapple* grapple = core::global::get().grappleBuilder().getNew();
 
     // initial
@@ -286,13 +306,16 @@ TEST(equipment, grapple)
     EXPECT_EQ(grapple->radius(), ship->properties().grab_radius);
 
     // clean
+    delete model;
     delete ship;
     delete grapple;
 }
 
 TEST(equipment, scaner)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Scaner* scaner = core::global::get().scanerBuilder().getNew();
 
     // initial
@@ -322,13 +345,16 @@ TEST(equipment, scaner)
     EXPECT_EQ(scaner->scan(), ship->properties().scan);
 
     // clean
+    delete model;
     delete ship;
     delete scaner;
 }
 
 TEST(equipment, radar)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Radar* radar = core::global::get().radarBuilder().getNew();
 
     // initial
@@ -358,13 +384,16 @@ TEST(equipment, radar)
     EXPECT_EQ(radar->radius(), ship->properties().radar);
 
     // clean
+    delete model;
     delete ship;
     delete radar;
 }
 
 TEST(equipment, protector)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
+
     item::equipment::Protector* protector = core::global::get().protectorBuilder().getNew();
 
     // initial
@@ -395,16 +424,18 @@ TEST(equipment, protector)
     EXPECT_EQ(protection, ship->properties().protection);
 
     // clean
+    delete model;
     delete ship;
     delete protector;
 }
 
 TEST(equipment, freespace)
 {
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* model = builder::ShipBuilder::getNew();
+    control::Ship* ship = new control::Ship(model);
 
     // initial
-    EXPECT_EQ(ship->mass(), ship->freeSpace());
+    EXPECT_EQ(ship->model()->mass(), ship->freeSpace());
 
     // event: generate and insert item list
     std::vector<item::equipment::Protector*> items = core::global::get().protectorBuilder().getNew(3);
@@ -416,9 +447,10 @@ TEST(equipment, freespace)
     }
     // check space
     EXPECT_EQ(ship->space() - weight, ship->freeSpace());
-    EXPECT_EQ(weight, ship->mass());
+    EXPECT_EQ(weight, ship->model()->mass());
 
     // clean
+    delete model;
     delete ship;
     for (auto item: items) {
         delete item;

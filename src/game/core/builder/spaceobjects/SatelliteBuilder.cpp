@@ -17,11 +17,13 @@
 */
 
 #include "SatelliteBuilder.hpp"
-#include <builder/CommonBuilderHeaders.hpp>
-#include <spaceobjects/Satellite.hpp>
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/Satellite.hpp>
 
 #include <meti/RandUtils.hpp>
 
+
+namespace builder {
 
 SatelliteBuilder::SatelliteBuilder()
 {}
@@ -29,25 +31,27 @@ SatelliteBuilder::SatelliteBuilder()
 SatelliteBuilder::~SatelliteBuilder()
 {}
 
-Satellite* SatelliteBuilder::createTemplate(int_t id) const
+model::Satellite*
+SatelliteBuilder::createTemplate(int_t id) const
 {
-    Satellite* satellite = new Satellite(id);
-    assert(satellite);
+    model::Satellite* model = new model::Satellite;
+    assert(model);
 
-   core::global::get().entityManager().reg(satellite);
+    core::global::get().entityManager().reg(model);
     
-    return satellite;
+    return model;
 }
 
-Satellite* SatelliteBuilder::create() const
+model::Satellite*
+SatelliteBuilder::create() const
 {
-    Satellite* satellite = createTemplate();
+    model::Satellite* satellite = createTemplate();
     createInternals(satellite);
     
     return satellite;
 }
 
-void SatelliteBuilder::createInternals(Satellite* satellite) const
+void SatelliteBuilder::createInternals(model::Satellite* model) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
@@ -55,7 +59,7 @@ void SatelliteBuilder::createInternals(Satellite* satellite) const
     int protection_rate = 1;
     //if (subtype_id == ENTITY::WARRIOR_ID)
     //{
-        //protection_rate = 1;
+    //protection_rate = 1;
     //}
     
     descriptor::Vehicle data_korpus;
@@ -74,27 +78,30 @@ void SatelliteBuilder::createInternals(Satellite* satellite) const
     data_korpus.slot_radar_num     = 1;
     data_korpus.slot_scaner_num    = 0;
     data_korpus.slot_freezer_num   = 0;
-    data_korpus.slot_weapon_num   = 2; 
-     data_korpus.slot_artefact_num = 0;  
+    data_korpus.slot_weapon_num   = 2;
+    data_korpus.slot_artefact_num = 0;
     data_korpus.slot_otsec_num    = 1;
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
     //data_life.dying_time = 10*texOb->GetMaterial().size_id;
     
-    //int size_threshold = 2; 
-    data_korpus.draw_turrels = true;       
- 
+    //int size_threshold = 2;
+    data_korpus.draw_turrels = true;
+
     float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
-    satellite->setKorpusData(data_korpus);
-    satellite->setLifeData(data_life);
+    assert(false);
+    //model->setKorpusData(data_korpus);
+    model->setLifeData(data_life);
     //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->size());
 
-    satellite->CreateDriveComplexTextureDependedStuff();
-    satellite->CreateProtectionComplexTextureDependedStuff();
-        
-    _createSlots(satellite);
+    assert(false);
+//    satellite->CreateDriveComplexTextureDependedStuff();
+//    satellite->CreateProtectionComplexTextureDependedStuff();
+//    _createSlots(satellite);
 }
+
+} // namespace builder
