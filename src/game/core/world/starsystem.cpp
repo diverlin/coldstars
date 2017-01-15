@@ -81,12 +81,12 @@ Starsystem::Starsystem(int_t id)
 Starsystem::~Starsystem()
 {    
     // effects
-//    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)   { delete distantNebulaEffect_vec[i]; }
-//    for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)     { delete distantStarEffect_vec[i];   }
-//    for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { delete effect_LAZERTRACE_vec[i]; }
-//    for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; }
-//    for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; }
-//    for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; }
+    //    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)   { delete distantNebulaEffect_vec[i]; }
+    //    for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)     { delete distantStarEffect_vec[i];   }
+    //    for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { delete effect_LAZERTRACE_vec[i]; }
+    //    for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; }
+    //    for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; }
+    //    for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; }
 
     m_counter--;
 }      
@@ -112,13 +112,13 @@ Starsystem::star() const
 /* virtual */
 void Starsystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)        { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
+    for(unsigned int i=0; i<m_stars.size(); i++)      { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
     for(unsigned int i=0; i<m_asteroids.size(); i++)  { core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
     for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
     for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
-    for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
     assert(false);
+    //for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
     //for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
 }      
 
@@ -126,11 +126,11 @@ model::Npc*
 Starsystem::freeLeaderByRaceId(type::race race_id) const
 {
     std::vector<model::Npc*> npcs;
-    for (Vehicle* vehicle: m_vehicles) {
+    for (control::Vehicle* vehicle: m_vehicles) {
         assert(false);
-//        if (vehicle->npc()->raceId() == race_id) {
-//            npcs.push_back(vehicle->npc());
-//        }
+        //        if (vehicle->npc()->raceId() == race_id) {
+        //            npcs.push_back(vehicle->npc());
+        //        }
     }
     
     int leader_skill_max = 0;
@@ -149,11 +149,11 @@ Starsystem::freeLeaderByRaceId(type::race race_id) const
 void Starsystem::createGroupAndShareTask(model::Npc* npc_leader, Starsystem* target_starsystem, int num_max) const
 {    
     std::vector<model::Npc*> npcs;
-    for (Vehicle* vehicle: m_vehicles) {
+    for (control::Vehicle* vehicle: m_vehicles) {
         assert(false);
-//        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
-//            npcs.push_back(vehicle->npc());
-//        }
+        //        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
+        //            npcs.push_back(vehicle->npc());
+        //        }
     }
     
     int num = 0;
@@ -162,33 +162,33 @@ void Starsystem::createGroupAndShareTask(model::Npc* npc_leader, Starsystem* tar
             break;
 
         assert(false);
-//        if (npc->vehicle()->isAbleToJumpTo(target_starsystem)) {
-//            npc->cloneMacroTaskFrom(npc_leader);
-//            num++;
-//        }
+        //        if (npc->vehicle()->isAbleToJumpTo(target_starsystem)) {
+        //            npc->cloneMacroTaskFrom(npc_leader);
+        //            num++;
+        //        }
     }
 }
 
-void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
+void Starsystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
 
     assert(false);
-//    for (unsigned int i=0; i<m_vehicles.size(); i++) {
-//        if (m_vehicles[i]->id() == vehicle->id()) {
-//            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
-//            exit(1);
-//        }
-//    }
+    //    for (unsigned int i=0; i<m_vehicles.size(); i++) {
+    //        if (m_vehicles[i]->id() == vehicle->id()) {
+    //            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
+    //            exit(1);
+    //        }
+    //    }
 
-//    vehicle->setPlaceTypeId(type::place::KOSMOS);
-//    vehicle->setStarSystem(this);
+    //    vehicle->setPlaceTypeId(type::place::KOSMOS);
+    //    vehicle->setStarSystem(this);
 
-//    vehicle->setPosition(position);
-//    vehicle->setDirection(dir);
+    //    vehicle->setPosition(position);
+    //    vehicle->setDirection(dir);
     // vehicle->updateOrientation(); // remove bad logic
 
-//    alpitodorender vehicle->SetColor(color);
+    //    alpitodorender vehicle->SetColor(color);
     m_vehicles.push_back(vehicle);
 }
 
@@ -201,8 +201,8 @@ void Starsystem::add(model::Ship* ship, const glm::vec3& position, const glm::ve
 void Starsystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
     assert(false);
-//    __addVehicleCommon(satellite, position, dir);
-//    satellite->BindParent(parent);
+    //    __addVehicleCommon(satellite, position, dir);
+    //    satellite->BindParent(parent);
 }
 
 void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
@@ -270,7 +270,7 @@ void Starsystem::add(model::Asteroid* model, const model::SpaceObject* parent, i
 void Starsystem::add(Container* container, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
-        
+
     for (auto _container: m_containers) {
         if (_container->id() == container->id()) {
             //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
@@ -285,53 +285,57 @@ void Starsystem::add(Container* container, const glm::vec3& center)
     m_containers.push_back(container);
 }
 
-void Starsystem::add(BlackHole* blackhole, const glm::vec3& center)
+void Starsystem::add(model::BlackHole* model, const glm::vec3& center)
 {
-    blackhole->setStarSystem(this);
-    blackhole->setPlaceTypeId(type::place::KOSMOS);
-    blackhole->setPosition(center);
+    model->setStarSystem(id());
+    model->setPlace(type::place::KOSMOS);
+    model->setPosition(center);
+
+    control::BlackHole* blackhole = new control::BlackHole(model);
+    blackhole->initialize();
+
     m_blackholes.push_back(blackhole);
 }    
 
 void Starsystem::add(Explosion* explosion, const glm::vec3& center)
 {
     assert(false);
-//    for (Vehicle* vehicle: m_vehicles) {
-//        if (glm::length(vehicle->position() - center) < explosion->radius()) {
-//            vehicle->hit(explosion->damage());
-//        }
-//    }
+    //    for (Vehicle* vehicle: m_vehicles) {
+    //        if (glm::length(vehicle->position() - center) < explosion->radius()) {
+    //            vehicle->hit(explosion->damage());
+    //        }
+    //    }
 }
 
 void Starsystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
 { 
-//    shockwave->setCenter(center);
-//    effect_SHOCKWAVE_vec.push_back(shockwave);
+    //    shockwave->setCenter(center);
+    //    effect_SHOCKWAVE_vec.push_back(shockwave);
 }
 
 void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
 { 
-//    float radius_damage = explosion->GetRadius();
-//    float damage = 0;
-//    Add(explosion, center, damage, radius_damage);
+    //    float radius_damage = explosion->GetRadius();
+    //    float damage = 0;
+    //    Add(explosion, center, damage, radius_damage);
 }
 
 void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
 { 
-//    explosion->setCenter(center);
-//    effect_PARTICLESYSTEM_vec.push_back(explosion);
+    //    explosion->setCenter(center);
+    //    effect_PARTICLESYSTEM_vec.push_back(explosion);
     
-//    float radius_effect = explosion->GetRadius();
-//    if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
-//    {
-//        ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
-//        Add(shockwave, meti::vec2(center));
-//    }
+    //    float radius_effect = explosion->GetRadius();
+    //    if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
+    //    {
+    //        ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
+    //        Add(shockwave, meti::vec2(center));
+    //    }
     
-//    if (radius_effect > 25)
-//    {
-//        DamageEventInsideCircle(center, radius_damage, damage, true);
-//    }
+    //    if (radius_effect > 25)
+    //    {
+    //        DamageEventInsideCircle(center, radius_damage, damage, true);
+    //    }
     //explosion.play()
 }
 
@@ -397,23 +401,25 @@ Starsystem::randomPlanet() const
     return meti::getRand(m_planets)->model();
 }
 
-Vehicle* Starsystem::randomVehicle() const
+control::Vehicle*
+Starsystem::randomVehicle() const
 {
     return meti::getRand(m_vehicles);
 }
 
-Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
+control::Vehicle*
+Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
 {
-    std::vector<Vehicle*> vehicles;
-    Vehicle* result = nullptr;
+    std::vector<control::Vehicle*> vehicles;
+    control::Vehicle* result = nullptr;
     assert(false);
-//    for (Vehicle* vehicle: m_vehicles) {
-//        if (vehicle->npc()) {
-//            if (vehicle->npc()->raceId() != race_id) {
-//                vehicles.push_back(vehicle);
-//            }
-//        }
-//    }
+    //    for (Vehicle* vehicle: m_vehicles) {
+    //        if (vehicle->npc()) {
+    //            if (vehicle->npc()->raceId() != race_id) {
+    //                vehicles.push_back(vehicle);
+    //            }
+    //        }
+    //    }
     
     if (vehicles.size()) {
         result = meti::getRand(vehicles);
@@ -422,19 +428,20 @@ Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
     return result;
 }
 
-Vehicle* Starsystem::randVehicleByNpcRaceId(type::race race_id) const
+control::Vehicle*
+Starsystem::randVehicleByNpcRaceId(type::race race_id) const
 {
-    std::vector<Vehicle*> vehicles;
-    Vehicle* result = nullptr;
+    std::vector<control::Vehicle*> vehicles;
+    control::Vehicle* result = nullptr;
 
     assert(false);
-//    for (Vehicle* vehicle: m_vehicles) {
-//        if (vehicle->npc()) {
-//            if (vehicle->npc()->raceId() == race_id) {
-//                vehicles.push_back(vehicle);
-//            }
-//        }
-//    }
+    //    for (Vehicle* vehicle: m_vehicles) {
+    //        if (vehicle->npc()) {
+    //            if (vehicle->npc()->raceId() == race_id) {
+    //                vehicles.push_back(vehicle);
+    //            }
+    //        }
+    //    }
     
     if (vehicles.size()) {
         result = meti::getRand(vehicles);
@@ -443,19 +450,20 @@ Vehicle* Starsystem::randVehicleByNpcRaceId(type::race race_id) const
     return result;
 }
 
-Vehicle* Starsystem::randomVehicle(const std::vector<type::race>& races) const
+control::Vehicle*
+Starsystem::randomVehicle(const std::vector<type::race>& races) const
 {
-    std::vector<Vehicle*> vehicles;
-    Vehicle* result = nullptr;
+    std::vector<control::Vehicle*> vehicles;
+    control::Vehicle* result = nullptr;
 
     assert(false);
-//    for (const type::race& race: races) {
-//        for (Vehicle* vehicle: m_vehicles) {
-//            if (race == vehicle->npc()->raceId()) {
-//                vehicles.push_back(vehicle);
-//            }
-//        }
-//    }
+    //    for (const type::race& race: races) {
+    //        for (Vehicle* vehicle: m_vehicles) {
+    //            if (race == vehicle->npc()->raceId()) {
+    //                vehicles.push_back(vehicle);
+    //            }
+    //        }
+    //    }
     
     if (vehicles.size()) {
         result = meti::getRand(vehicles);
@@ -496,78 +504,78 @@ void Starsystem::__updateStates()
     bool enemy_is_here    = false;
     bool friendly_is_here = false;
     
-    Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
+    control::Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
     if (_vehicle_evil) {
         enemy_is_here = true;
     }
 
-    Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+    control::Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     if (_vehicle_good) {
         friendly_is_here = true;
     }
     
     switch(m_condition_id)
     {
-        case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:
-        {
-            if (enemy_is_here == true)
-            {
-                if (friendly_is_here == true)
-                {
-                    m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
-                }
-                else
-                {
-                    m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-                    if (randVehicleByNpcRaceId(type::race::R6_ID) != nullptr)
-                    {
-                        m_conqueror_race_id = type::race::R6_ID;
-                    }
-
-                    if (randVehicleByNpcRaceId(type::race::R7_ID) != nullptr)
-                    {
-                        m_conqueror_race_id = type::race::R7_ID;
-                    }
-                }
-            }
-
-            break;
-        }
-
-        case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:
+    case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:
+    {
+        if (enemy_is_here == true)
         {
             if (friendly_is_here == true)
             {
-                if (enemy_is_here == true)
-                {
-                    m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
-                }
-                else
-                {
-                    m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-                    m_conqueror_race_id = type::race::NONE_ID;
-                }
-            }
-            
-            break;
-        }
-
-        case ENTITY::STARSYSTEM::CONDITION::WAR_ID:
-        {
-            if (friendly_is_here == true)
-            {
-                if (enemy_is_here == false)
-                {
-                    m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-                }
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
             }
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-            }
+                if (randVehicleByNpcRaceId(type::race::R6_ID) != nullptr)
+                {
+                    m_conqueror_race_id = type::race::R6_ID;
+                }
 
-            break;
+                if (randVehicleByNpcRaceId(type::race::R7_ID) != nullptr)
+                {
+                    m_conqueror_race_id = type::race::R7_ID;
+                }
+            }
         }
+
+        break;
+    }
+
+    case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:
+    {
+        if (friendly_is_here == true)
+        {
+            if (enemy_is_here == true)
+            {
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
+            }
+            else
+            {
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+                m_conqueror_race_id = type::race::NONE_ID;
+            }
+        }
+
+        break;
+    }
+
+    case ENTITY::STARSYSTEM::CONDITION::WAR_ID:
+    {
+        if (friendly_is_here == true)
+        {
+            if (enemy_is_here == false)
+            {
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+            }
+        }
+        else
+        {
+            m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
+        }
+
+        break;
+    }
     }
 }
 
@@ -655,11 +663,11 @@ void Starsystem::__rocketCollision_s(bool show_effect)
                 for (unsigned int vi = 0; vi < m_vehicles.size(); vi++)
                 {
                     assert(false);
-//                    if (m_bullets[ri]->GetOwnerId() != m_vehicles[vi]->id())
-//                    {
-//                        collide = ceti::checkCollision2D(m_bullets[ri], m_vehicles[vi], show_effect);
-//                        if (collide == true) { break; }
-//                    }
+                    //                    if (m_bullets[ri]->GetOwnerId() != m_vehicles[vi]->id())
+                    //                    {
+                    //                        collide = ceti::checkCollision2D(m_bullets[ri], m_vehicles[vi], show_effect);
+                    //                        if (collide == true) { break; }
+                    //                    }
                 }
             }
             else  { continue; }
@@ -697,7 +705,7 @@ void Starsystem::__rocketCollision_s(bool show_effect)
 
 void Starsystem::__asteroidCollision_s(bool show_effect)
 {
-    bool collide = false;    
+    bool collide = false;
     for(auto asteroid: m_asteroids) {
         if (asteroid->model()->isAlive()) {
             if (!collide) {
@@ -765,11 +773,11 @@ void Starsystem::__updateEntities_s(int time, bool show_effect)
     for (unsigned int i=0; i<m_bullets.size(); i++)           { m_bullets[i]->UpdateInSpace(time, show_effect); }
     
     // effects
-//    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->Update(); }
-//    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->Update(); }
-//    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->Update(); }
-//    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->Update(); }
-//    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); }
+    //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->Update(); }
+    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->Update(); }
+    //    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->Update(); }
+    //    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->Update(); }
+    //    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); }
 }
 
 void Starsystem::loadEntitiesResource()
@@ -798,12 +806,12 @@ void Starsystem::__updateInSpaceInStatic_s()
 {
     __updateStates();
 
-    for (Vehicle* vehicle: m_vehicles) {
+    for (control::Vehicle* vehicle: m_vehicles) {
         assert(false);
-//        vehicle->npc()->updateInSpaceInStatic();
-//        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
-//            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
-//        }
+        //        vehicle->npc()->updateInSpaceInStatic();
+        //        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
+        //            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
+        //        }
     }
 
     for (auto star: m_stars) { star->updateInSpaceInStatic(); }
@@ -816,33 +824,33 @@ void Starsystem::findRenderVisibleEntities_c(Player* player)
 {
     //player->ClearVisibleEntities();
 
-//    for (unsigned int i=0; i<STAR_vec.size(); i++)             { player->addIfVisible(STAR_vec[i]); }
-//    for (unsigned int i=0; i<PLANET_vec.size(); i++)           { player->addIfVisible(PLANET_vec[i]); }
-//    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)         { player->addIfVisible(ASTEROID_vec[i]); }
-//    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)        { player->addIfVisible(CONTAINER_vec[i]); }
-//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { player->addIfVisible(VEHICLE_vec[i]); }
-//    for (unsigned int i=0; i<ROCKET_vec.size(); i++)           { player->addIfVisible(ROCKET_vec[i]); }
-//    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)        { player->addIfVisible(BLACKHOLE_vec[i]); }
+    //    for (unsigned int i=0; i<STAR_vec.size(); i++)             { player->addIfVisible(STAR_vec[i]); }
+    //    for (unsigned int i=0; i<PLANET_vec.size(); i++)           { player->addIfVisible(PLANET_vec[i]); }
+    //    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)         { player->addIfVisible(ASTEROID_vec[i]); }
+    //    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)        { player->addIfVisible(CONTAINER_vec[i]); }
+    //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { player->addIfVisible(VEHICLE_vec[i]); }
+    //    for (unsigned int i=0; i<ROCKET_vec.size(); i++)           { player->addIfVisible(ROCKET_vec[i]); }
+    //    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)        { player->addIfVisible(BLACKHOLE_vec[i]); }
 
     //effects
-//    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->addIfVisible(effect_SHOCKWAVE_vec[i]); }
-//    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->addIfVisible(effect_LAZERTRACE_vec[i]); }
-//    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->addIfVisible(effect_PARTICLESYSTEM_vec[i]); }
-//    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->addIfVisible(text_DAMAGE_vec[i]); }
+    //    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->addIfVisible(effect_SHOCKWAVE_vec[i]); }
+    //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->addIfVisible(effect_LAZERTRACE_vec[i]); }
+    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->addIfVisible(effect_PARTICLESYSTEM_vec[i]); }
+    //    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->addIfVisible(text_DAMAGE_vec[i]); }
 }
 
 void Starsystem::findRadarVisibleEntities_c(Player* player)
 {    
-//    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
-//    const Vehicle& vehicle = *player->GetNpc()->vehicle();
-//    gui_radar.ResetData();
+    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
+    //    const Vehicle& vehicle = *player->GetNpc()->vehicle();
+    //    gui_radar.ResetData();
     
-//    for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }
-//    for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); }
-//    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); }
+    //    for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }
+    //    for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); }
+    //    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); }
 
-//    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }
-//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }
+    //    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }
+    //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }
 }
 
 
@@ -914,89 +922,90 @@ void Starsystem::__shipManager_s(unsigned int num)
 
 void Starsystem::__manageUnavaliableObjects_s()
 {               
-    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+    for (std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
-//        if ((*it)->place() != type::place::KOSMOS) {
-//            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
-//            it = m_vehicles.erase(it);
-//        }
+        //        if ((*it)->place() != type::place::KOSMOS) {
+        //            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
+        //            it = m_vehicles.erase(it);
+        //        }
     }
 }
 
 void Starsystem::__manageDeadObjects_s()
 {      
-    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+    for(std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+        assert(false);
+        //        if ((*it)->isReadyForGarbage()) {
+        //           core::global::get().entityManager().addToGarbage(*it);
+        //            it = m_vehicles.erase(it);
+        //        }
+    }
+
+    for(std::vector<control::BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
-//           core::global::get().entityManager().addToGarbage(*it);
-//            it = m_vehicles.erase(it);
+//            core::global::get().entityManager().addToGarbage(*it);
+//            it = m_blackholes.erase(it);
 //        }
     }
 
-    for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
-        if ((*it)->isReadyForGarbage()) {
-           core::global::get().entityManager().addToGarbage(*it);
-            it = m_blackholes.erase(it);
-        }
-    }
-
-//    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
-//        if ((*it)->isReadyForGarbage() == true) {
-//           core::global::get().entityManager().addToGarbage(*it);
-//            it = m_asteroids.erase(it);
-//        }
-//    }
+    //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
+    //        if ((*it)->isReadyForGarbage() == true) {
+    //           core::global::get().entityManager().addToGarbage(*it);
+    //            it = m_asteroids.erase(it);
+    //        }
+    //    }
 
     for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-           core::global::get().entityManager().addToGarbage(*it);
+            core::global::get().entityManager().addToGarbage(*it);
             it = m_containers.erase(it);
         }
     }
 
     for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
         if ((*it)->isReadyForGarbage() == true) {
-           core::global::get().entityManager().addToGarbage(*it);
+            core::global::get().entityManager().addToGarbage(*it);
             it = m_bullets.erase(it);
         }
     }
 
     //effects
-//    for(std::vector<ShockWaveEffect*>::iterator it=effect_SHOCKWAVE_vec.begin(); it<effect_SHOCKWAVE_vec.end(); ++it)
-//    {
-//        if ((*it)->isAlive() == false)
-//        {
-//            garbage_effects.add(*it);
-//            it = effect_SHOCKWAVE_vec.erase(it);
-//        }
-//    }
+    //    for(std::vector<ShockWaveEffect*>::iterator it=effect_SHOCKWAVE_vec.begin(); it<effect_SHOCKWAVE_vec.end(); ++it)
+    //    {
+    //        if ((*it)->isAlive() == false)
+    //        {
+    //            garbage_effects.add(*it);
+    //            it = effect_SHOCKWAVE_vec.erase(it);
+    //        }
+    //    }
 
-//    for(std::vector<LazerTraceEffect*>::iterator it=effect_LAZERTRACE_vec.begin(); it<effect_LAZERTRACE_vec.end(); ++it)
-//    {
-//        if ((*it)->isAlive() == false)
-//        {
-//            garbage_effects.add(*it);
-//            it = effect_LAZERTRACE_vec.erase(it);
-//        }
-//    }
+    //    for(std::vector<LazerTraceEffect*>::iterator it=effect_LAZERTRACE_vec.begin(); it<effect_LAZERTRACE_vec.end(); ++it)
+    //    {
+    //        if ((*it)->isAlive() == false)
+    //        {
+    //            garbage_effects.add(*it);
+    //            it = effect_LAZERTRACE_vec.erase(it);
+    //        }
+    //    }
 
-//    for(std::vector<jeti::BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
-//    {
-//        if ((*it)->isAlive() == false)
-//        {
-//            garbage_effects.add(*it);
-//            it = effect_PARTICLESYSTEM_vec.erase(it);
-//        }
-//    }
+    //    for(std::vector<jeti::BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
+    //    {
+    //        if ((*it)->isAlive() == false)
+    //        {
+    //            garbage_effects.add(*it);
+    //            it = effect_PARTICLESYSTEM_vec.erase(it);
+    //        }
+    //    }
 
-//    for(std::vector<VerticalFlowText*>::iterator it=text_DAMAGE_vec.begin(); it<text_DAMAGE_vec.end(); ++it)
-//    {
-//        if ((*it)->isAlive() == false)
-//        {
-//            garbage_effects.add(*it);
-//            it = text_DAMAGE_vec.erase(it);
-//        }
-//    }
+    //    for(std::vector<VerticalFlowText*>::iterator it=text_DAMAGE_vec.begin(); it<text_DAMAGE_vec.end(); ++it)
+    //    {
+    //        if ((*it)->isAlive() == false)
+    //        {
+    //            garbage_effects.add(*it);
+    //            it = text_DAMAGE_vec.erase(it);
+    //        }
+    //    }
 }    
 
 
@@ -1022,11 +1031,11 @@ void Starsystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         assert(false);
-//        if ( meti::distance(m_vehicles[i]->position(), star()->position()) < radius ) {
-//            if (m_vehicles[i]->radarSlot()->item() != nullptr) {
-//                m_vehicles[i]->radarSlot()->item()->doLock(2);
-//            }
-//        }
+        //        if ( meti::distance(m_vehicles[i]->position(), star()->position()) < radius ) {
+        //            if (m_vehicles[i]->radarSlot()->item() != nullptr) {
+        //                m_vehicles[i]->radarSlot()->item()->doLock(2);
+        //            }
+        //        }
     }
 }
 
@@ -1034,9 +1043,9 @@ void Starsystem::__damageEventInsideCircle(const glm::vec3& position, float radi
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         assert(false);
-//        if ( meti::distance(m_vehicles[i]->position(), position) < radius ) {
-//            m_vehicles[i]->hit(damage);
-//        }
+        //        if ( meti::distance(m_vehicles[i]->position(), position) < radius ) {
+        //            m_vehicles[i]->hit(damage);
+        //        }
     }
 
     for (unsigned int i=0; i<m_containers.size(); i++) {
@@ -1055,13 +1064,13 @@ void Starsystem::__damageEventInsideCircle(const glm::vec3& position, float radi
 
 bool Starsystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
 {
-//    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
-//    {
-//        if (effect_PARTICLESYSTEM_vec[i]->typeId() == request_type_id)
-//        {
-//            return true;
-//        }
-//    }
+    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
+    //    {
+    //        if (effect_PARTICLESYSTEM_vec[i]->typeId() == request_type_id)
+    //        {
+    //            return true;
+    //        }
+    //    }
     
     return false;
 }
@@ -1080,15 +1089,15 @@ void Starsystem::SaveData(boost::property_tree::ptree& save_ptree, const std::st
     save_ptree.put(root+"color.b", m_color.b);
     save_ptree.put(root+"color.a", m_color.a);
 
-//    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
-//    {
-//        distantStarEffect_vec[i]->Save(save_ptree, root);
-//    }
+    //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
+    //    {
+    //        distantStarEffect_vec[i]->Save(save_ptree, root);
+    //    }
 
-//    for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
-//    {
-//        distantNebulaEffect_vec[i]->Save(save_ptree, root);
-//    }
+    //    for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
+    //    {
+    //        distantNebulaEffect_vec[i]->Save(save_ptree, root);
+    //    }
 }
 
 void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -1105,10 +1114,10 @@ void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
     {
         for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
         {
-//            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
-//            dn->Load(v.second);
-//            dn->Resolve();
-//            Add(dn);
+            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
+            //            dn->Load(v.second);
+            //            dn->Resolve();
+            //            Add(dn);
         }
     }
     
@@ -1116,10 +1125,10 @@ void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
     {
         for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
         {
-//            DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
-//            ds->Load(v.second);
-//            ds->Resolve();
-//            Add(ds);
+            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
+            //            ds->Load(v.second);
+            //            ds->Resolve();
+            //            Add(ds);
         }
     }
 }

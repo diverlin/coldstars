@@ -23,40 +23,66 @@
 #include "../world/starsystem.hpp"
 
 
+namespace model {
 
-BlackHole::BlackHole(int id)
+BlackHole::BlackHole()
 {
-    setId(id);
-    setTypeId(type::entity::BLACKHOLE_ID);
-    
-    setMass(meti::getRandInt(1000, 4000));
+    setType(type::entity::BLACKHOLE_ID);
+}
+
+BlackHole::BlackHole(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+BlackHole::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+
+namespace control {
+
+BlackHole::BlackHole(model::BlackHole* model)
+    :
+      Planetoid(model)
+    , m_model_blackhole(model)
+{
+//    setId(id);
+//    setTypeId(type::entity::BLACKHOLE_ID);
+
+//    setMass(meti::getRandInt(1000, 4000));
 }
 
 BlackHole::~BlackHole()
 {
     //delete shockwave;
 }
- 
+
 void BlackHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
-         
+
 void BlackHole::updateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
 
     if (time > 0) {
         setPosition(position()+meti::getRandXYVec3f(1, 2, 0));
-//        shockwave->setCenter(meti::vec2(center()));
-    
-        _dataLife().life_time--;
-        if (_dataLife().life_time < 0) {
-            //scale -= 0.1;
-            //if (scale < 1.0) {
-                _dataLife().is_alive = false;
-            //}
-        }
+        //        shockwave->setCenter(meti::vec2(center()));
+
+        assert(false);
+//        model()->dataLife().life_time--;
+//        if (model()->dataLife().life_time < 0) {
+//            //scale -= 0.1;
+//            //if (scale < 1.0) {
+//            model()->dataLife().is_alive = false;
+//            //}
+//        }
     }
 
-//    shockwave->Update();
+    //    shockwave->Update();
 }
 
 //void BlackHole::UpdateInfo()
@@ -69,55 +95,105 @@ void BlackHole::updateInSpace(int time, bool show_effect)
 //    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(mass()));
 //    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(center()) );
 //}
-          
-void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //LOG(" BlackHole("+std::to_string(id())+")::SaveData");
-}
 
-void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //LOG(" BlackHole("+std::to_string(id())+")::LoadData");
-}
+} // namespace control
 
-void BlackHole::ResolveData()
-{
-    //LOG(" BlackHole("+std::to_string(id())+")::ResolveData");
+
+
+//BlackHole::BlackHole(int id)
+//{
+//    setId(id);
+//    setTypeId(type::entity::BLACKHOLE_ID);
     
-    //starsystem()->add(this, data_unresolved_Orientation.center);
-}
+//    setMass(meti::getRandInt(1000, 4000));
+//}
+
+//BlackHole::~BlackHole()
+//{
+//    //delete shockwave;
+//}
  
-/*virtual*/
-void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "blackhole." + std::to_string(id())+".";
+//void BlackHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
+         
+//void BlackHole::updateInSpace(int time, bool show_effect)
+//{
+//    _checkDeath(show_effect);
 
-    Base::SaveData(save_ptree, root);
-    //Orientation::SaveData(save_ptree, root);
-//    BaseDrawable::SaveData(save_ptree, root);
-    SpaceObject::SaveData(save_ptree, root);
-    Planetoid::SaveData(save_ptree, root);
-    BlackHole::SaveData(save_ptree, root);
-}
-
-/*virtual*/
-void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
- //   Orientation::LoadData(load_ptree);
-//    BaseDrawable::LoadData(load_ptree);
-    SpaceObject::LoadData(load_ptree);
-    Planetoid::LoadData(load_ptree);
-    BlackHole::LoadData(load_ptree);
-}
+//    if (time > 0) {
+//        setPosition(position()+meti::getRandXYVec3f(1, 2, 0));
+////        shockwave->setCenter(meti::vec2(center()));
     
-/*virtual*/
-void BlackHole::Resolve()
-{
-    Base::ResolveData();
-   // Orientation::ResolveData();
-//    BaseDrawable::ResolveData();
-    SpaceObject::ResolveData();
-    Planetoid::ResolveData();
-    BlackHole::ResolveData();
-}
+//        _dataLife().life_time--;
+//        if (_dataLife().life_time < 0) {
+//            //scale -= 0.1;
+//            //if (scale < 1.0) {
+//                _dataLife().is_alive = false;
+//            //}
+//        }
+//    }
+
+////    shockwave->Update();
+//}
+
+////void BlackHole::UpdateInfo()
+////{
+////    GetInfo().clear();
+
+////    GetInfo().addTitleStr("BLACKHOLE");
+
+////    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(id()));
+////    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(mass()));
+////    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(center()) );
+////}
+          
+//void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //LOG(" BlackHole("+std::to_string(id())+")::SaveData");
+//}
+
+//void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //LOG(" BlackHole("+std::to_string(id())+")::LoadData");
+//}
+
+//void BlackHole::ResolveData()
+//{
+//    //LOG(" BlackHole("+std::to_string(id())+")::ResolveData");
+    
+//    //starsystem()->add(this, data_unresolved_Orientation.center);
+//}
+ 
+///*virtual*/
+//void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    std::string root = "blackhole." + std::to_string(id())+".";
+
+//    Base::SaveData(save_ptree, root);
+//    //Orientation::SaveData(save_ptree, root);
+////    BaseDrawable::SaveData(save_ptree, root);
+//    SpaceObject::SaveData(save_ptree, root);
+//    Planetoid::SaveData(save_ptree, root);
+//    BlackHole::SaveData(save_ptree, root);
+//}
+
+///*virtual*/
+//void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+// //   Orientation::LoadData(load_ptree);
+////    BaseDrawable::LoadData(load_ptree);
+//    SpaceObject::LoadData(load_ptree);
+//    Planetoid::LoadData(load_ptree);
+//    BlackHole::LoadData(load_ptree);
+//}
+    
+///*virtual*/
+//void BlackHole::Resolve()
+//{
+//    Base::ResolveData();
+//   // Orientation::ResolveData();
+////    BaseDrawable::ResolveData();
+//    SpaceObject::ResolveData();
+//    Planetoid::ResolveData();
+//    BlackHole::ResolveData();
+//}

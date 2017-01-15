@@ -190,7 +190,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
 void Observation::FindVisibleVehiclesInSpaceInStatic()
 {
-    const std::vector<Vehicle*>& vehicle_vec = npc_owner->starsystem()->m_vehicles;
+    const std::vector<control::Vehicle*>& vehicle_vec = npc_owner->starsystem()->m_vehicles;
 
     see.RANGER  = false;
     see.WARRIOR = false;

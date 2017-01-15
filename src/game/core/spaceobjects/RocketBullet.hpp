@@ -16,12 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#pragma once
 
-#ifndef ROCKETBULLET_HPP
-#define ROCKETBULLET_HPP
-
-#include <spaceobjects/SpaceObject.hpp>
-#include <common/BulletData.hpp>
+#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/common/BulletData.hpp>
 
 namespace jeti {
 class DriveEffect;
@@ -79,4 +77,3 @@ class RocketBullet : public SpaceObject
         void ResolveData();
 };
 
-#endif 

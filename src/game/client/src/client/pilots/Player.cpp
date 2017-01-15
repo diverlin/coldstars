@@ -311,10 +311,11 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
                         //asteroid->Render_NEW(render, world_coord);
                     }
 
-                    for(BlackHole* blackhole : visible_BLACKHOLE_vec)
-                    {
-                        //blackhole->Render_NEW(render);
-                    }
+                    assert(false);
+//                    for(BlackHole* blackhole : visible_BLACKHOLE_vec)
+//                    {
+//                        //blackhole->Render_NEW(render);
+//                    }
                 }
 
                 {
@@ -714,16 +715,16 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
-    for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
-    { 
-        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
-        {   
-            m_cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]);
+    assert(false);
+//    for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++) {
+//        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]);
             
-            return true;
-        }
-    }
+//            return true;
+//        }
+//    }
     
     return false;
 }

@@ -255,8 +255,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading blackhole...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("blackhole"))
         {
-            BlackHole* blackhole = core::global::get().blackHoleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            blackhole->Load(v.second);
+//            BlackHole* blackhole = core::global::get().blackHoleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            blackhole->Load(v.second);
         }
     }
 
