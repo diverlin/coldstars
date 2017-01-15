@@ -19,22 +19,24 @@
 
 #pragma once
 
+#include <core/types/RaceTypes.hpp>
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
 
+namespace model {
 class Npc;
-
+} // namespace model
 
 class NpcBuilder
 {
-    public:
-        NpcBuilder();
-        ~NpcBuilder();
-        
-        Npc* createTemplate(type::entity, type::entity, int_t id = NONE) const;
-        Npc* create(type::race, type::entity, type::entity) const;
-                                       
-    private:
-        void createInternals(Npc*, type::race, type::entity, type::entity) const;
+public:
+    NpcBuilder();
+    ~NpcBuilder();
+
+    model::Npc* createTemplate(type::entity, type::entity, int_t id = NONE) const;
+    model::Npc* create(type::race, type::entity, type::entity) const;
+
+private:
+    void createInternals(model::Npc*, type::race, type::entity, type::entity) const;
 }; 

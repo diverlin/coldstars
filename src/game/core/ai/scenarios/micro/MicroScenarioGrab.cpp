@@ -89,11 +89,13 @@ void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::exit(Npc* npc) const
 {
-    LOG("npc_id="+std::to_string(npc->id())+" EXIT MicroScenarioGrab");
+    assert(false);
+    //LOG("npc_id="+std::to_string(npc->id())+" EXIT MicroScenarioGrab");
 }
 
 /* virtual */
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
-    return "MicroScenarioGrab ob_id = " + std::to_string(npc->stateMachine().microTaskManager().target()->id());
+    assert(false);
+    //return "MicroScenarioGrab ob_id = " + std::to_string(npc->stateMachine().microTaskManager().target()->id());
 }

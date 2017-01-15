@@ -17,13 +17,15 @@
 */
 
 
-#ifndef OBSERVATION_HPP
-#define OBSERVATION_HPP
+#pragma once
 
 #include <vector>
 #include <types/RaceTypes.hpp>
 
+namespace control {
 class Npc; 
+} // namespace model
+
 class Galaxy;
 class Starsystem;
 class Asteroid;
@@ -74,7 +76,7 @@ class Observation
         
         const VisionStatus& GetVisionStatus() const { return see; };
         
-        void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
+        void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; };
         void ObserveAllInSpace();
         
         void FindEchievableStarSystems(Galaxy*);
@@ -92,7 +94,7 @@ class Observation
         void Sort(std::vector<OBSERVED_DATA_TYPE>&);
                    
     private:
-        Npc* npc_owner;    
+        control::Npc* npc_owner;
         
         std::vector< Pair<Starsystem*> > visible_STARSYSTEM_pair_vec; 
         std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
@@ -106,5 +108,4 @@ class Observation
     friend class Npc;
 };
 
-#endif 
      

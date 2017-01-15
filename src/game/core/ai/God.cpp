@@ -167,10 +167,11 @@ void God::__proceedInvasion(Galaxy* galaxy) const
         return;
     }
     
-    Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
+    model::Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
     assert(npc_leader);
     Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
-    npc_leader->stateMachine().setCurrentMacroTask(macrotask);
+    assert(false);
+    //npc_leader->stateMachine().setCurrentMacroTask(macrotask);
     
     int num_max= 10;
     starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
@@ -260,7 +261,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         assert(false);
         //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
-        Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        model::Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         assert(false);
         //spacestation->bindNpc(npc);
 
@@ -275,7 +276,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
             assert(false);
             //core::global::get().satelliteBuilder().equip(satellite);                   // improove
 
-            Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
             assert(false);
             //satellite->bindNpc(new_npc);
             
@@ -312,7 +313,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_rac
         assert(false);
         //builder::ShipBuilder::equip(new_ship); // improove
 
-        Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         assert(false);
         //new_ship->bindNpc(new_npc);
 

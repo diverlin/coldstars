@@ -551,8 +551,8 @@ void EntityManager::loadPass0(const std::string& filename)
             unsigned long int id = v.second.get<unsigned long int>("data_id.id");
             type::entity subtype_id = (type::entity)v.second.get<int>("data_id.subtype_id");
             type::entity subsubtype_id = (type::entity)v.second.get<int>("data_id.subsubtype_id");
-            Npc* npc = core::global::get().npcBuilder().createTemplate( subtype_id, subsubtype_id, id);
-            npc->Load(v.second);
+            model::Npc* npc = core::global::get().npcBuilder().createTemplate( subtype_id, subsubtype_id, id);
+            //npc->Load(v.second);
         }
     }
 

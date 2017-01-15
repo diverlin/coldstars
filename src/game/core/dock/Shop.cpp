@@ -87,18 +87,17 @@ bool Shop::SellGoods(Npc* npc, type::entity subtype_id, int amount)
     int sign = -1;
     int price = Deal(sign, subtype_id, amount);
     
-    if (price > 0)
-    {        
-        if (npc->withdrawCredits(price) == true)
-        {
-            GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-            goods_pack->Increase(amount);    
+    if (price > 0) {
+        assert(false);
+//        if (npc->withdrawCredits(price)) {
+//            GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+//            goods_pack->Increase(amount);
         
-            assert(false);
-            //npc->vehicle()->addItemToCargoSlot(goods_pack);
+//            assert(false);
+//            //npc->vehicle()->addItemToCargoSlot(goods_pack);
                 
-            return true;
-        }
+//            return true;
+//        }
     }      
     
     return false;

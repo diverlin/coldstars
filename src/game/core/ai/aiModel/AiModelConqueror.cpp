@@ -32,23 +32,24 @@ AiModelConqueror::~AiModelConqueror()
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-    if (npc->stateMachine().macroTaskManager().scenario() != nullptr)
-    {
-        if (npc->stateMachine().macroTaskManager().scenario()->typeId() == type::AISCENARIO::MACRO_WARRIORRECRUTE_ID) 
-        {
-            // recrute warriors able to jump into target starsystem
-            // apply macroscenario invasion for each in group
+    assert(false);
+//    if (npc->stateMachine().macroTaskManager().scenario() != nullptr)
+//    {
+//        if (npc->stateMachine().macroTaskManager().scenario()->typeId() == type::AISCENARIO::MACRO_WARRIORRECRUTE_ID)
+//        {
+//            // recrute warriors able to jump into target starsystem
+//            // apply macroscenario invasion for each in group
             
-            return;
-        }
-    }
-    else 
-    {
-        Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID, npc->starsystem()->id());
-            npc->stateMachine().setCurrentMacroTask(macrotask); 
+//            return;
+//        }
+//    }
+//    else
+//    {
+//        Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID, npc->starsystem()->id());
+//            npc->stateMachine().setCurrentMacroTask(macrotask);
             
-            return;
-    }
+//            return;
+//    }
 }
 
 std::string AiModelConqueror::GetDescription(Npc* npc) const

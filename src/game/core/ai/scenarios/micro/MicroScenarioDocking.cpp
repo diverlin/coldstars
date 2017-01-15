@@ -82,11 +82,13 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDocking::exit(Npc* npc) const 
 {
-    LOG("npc_id="+std::to_string( npc->id())+" EXIT MicroScenarioDocking");
+    assert(false);
+    //LOG("npc_id="+std::to_string( npc->id())+" EXIT MicroScenarioDocking");
 }
 
 /* virtual */
 std::string MicroScenarioDocking::GetDescription(Npc* npc) const
 {
-    return "MicroScenarioDocking to ob_id = " + std::to_string( npc->stateMachine().microTaskManager().target()->id());
+    assert(false);
+    //return "MicroScenarioDocking to ob_id = " + std::to_string( npc->stateMachine().microTaskManager().target()->id());
 }

@@ -33,12 +33,17 @@
 
 class VehicleSlot;
 class Land; 
-class Npc;
 class GoodsPack;
 class Container;
+
+namespace control {
+class Npc;
+} //namespace control
+
 namespace item {
 class Base;
-}
+} // namespace item
+
 class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
@@ -209,7 +214,7 @@ public:
     int freeSpace() const { return model()->properties().free_space; }
     int space() const { return descriptor().space; }
 
-    void bindNpc(Npc*);
+    void bindNpc(control::Npc*);
 
     bool isObjectVisible(SpaceObject*) const;
 
@@ -231,7 +236,7 @@ public:
     ItemSlot* const grappleSlot()   const { return m_grappleSlot; }
     ItemSlot* const droidSlot()     const { return m_droidSlot; }
 
-    Npc* const npc() const { return m_npc; }
+    control::Npc* const npc() const { return m_npc; }
 
     ItemSlot* const freeCargoSlot();
     GoodsPack* goodsPack() const;
@@ -338,7 +343,7 @@ private:
     bool m_godMode = false;
     VEHICLE_SPECIAL_ACTION_TYPE m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
 
-    Npc* m_npc = nullptr;
+    control::Npc* m_npc = nullptr;
 
     VehicleSlot* m_parentVehicleSlot = nullptr;
 

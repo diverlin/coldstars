@@ -122,9 +122,10 @@ void Starsystem::putChildrenToGarbage() const
     //for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
 }      
 
-Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
+model::Npc*
+Starsystem::freeLeaderByRaceId(type::race race_id) const
 {
-    std::vector<Npc*> npcs;
+    std::vector<model::Npc*> npcs;
     for (Vehicle* vehicle: m_vehicles) {
         assert(false);
 //        if (vehicle->npc()->raceId() == race_id) {
@@ -133,8 +134,8 @@ Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
     }
     
     int leader_skill_max = 0;
-    Npc* result = nullptr;
-    for (Npc* npc: npcs) {
+    model::Npc* result = nullptr;
+    for (model::Npc* npc: npcs) {
         int leader_skill = npc->skills().leader();
         if (leader_skill > leader_skill_max) {
             leader_skill_max = leader_skill;
@@ -145,9 +146,9 @@ Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
     return result;
 }
 
-void Starsystem::createGroupAndShareTask(Npc* npc_leader, Starsystem* target_starsystem, int num_max) const
+void Starsystem::createGroupAndShareTask(model::Npc* npc_leader, Starsystem* target_starsystem, int num_max) const
 {    
-    std::vector<Npc*> npcs;
+    std::vector<model::Npc*> npcs;
     for (Vehicle* vehicle: m_vehicles) {
         assert(false);
 //        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
@@ -156,7 +157,7 @@ void Starsystem::createGroupAndShareTask(Npc* npc_leader, Starsystem* target_sta
     }
     
     int num = 0;
-    for (Npc* npc: npcs) {
+    for (model::Npc* npc: npcs) {
         if (num>num_max)
             break;
 
@@ -894,7 +895,7 @@ void Starsystem::__shipManager_s(unsigned int num)
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
 
-        Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
+        model::Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
         model::Ship* new_pship = builder::ShipBuilder::getNew();
 
         assert(false);

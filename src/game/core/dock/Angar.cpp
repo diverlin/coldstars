@@ -87,28 +87,29 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
 bool Angar::RepairItem(Npc* npc, item::Base* item) const
 {
     int price = item->price() * REPAIR_ITEM_PRICE_RATE;
-    if (npc->withdrawCredits(price) == true) {
-        return item->doRepair();
-    }
+    assert(false);
+//    if (npc->withdrawCredits(price)) {
+//        return item->doRepair();
+//    }
 
     return false;
 }         
 
 bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
 {
-    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
-    int ammo_max = npc->credits() / price_for_one;
-    int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
+    assert(false);
+//    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
+//    int ammo_max = npc->credits() / price_for_one;
+//    int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
 
-    int ammo_amount = 0;
-    if (ammo_max > ammo_need) { ammo_amount = ammo_need; }
-    else                      { ammo_amount = ammo_max; }
+//    int ammo_amount = 0;
+//    if (ammo_max > ammo_need) { ammo_amount = ammo_need; }
+//    else                      { ammo_amount = ammo_max; }
     
-    if (npc->withdrawCredits(ammo_amount*price_for_one) == true)
-    {
-        rocket_equipment->SetAmmo(rocket_equipment->GetAmmo() + ammo_amount);
-        return true;
-    }
+//    if (npc->withdrawCredits(ammo_amount*price_for_one) == true) {
+//        rocket_equipment->SetAmmo(rocket_equipment->GetAmmo() + ammo_amount);
+//        return true;
+//    }
 
     return false;
 }
