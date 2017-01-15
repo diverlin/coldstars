@@ -21,18 +21,19 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace model {
 class BlackHole;
-
+} // namespace model
 
 class BlackHoleBuilder
 {
-    public:
-        BlackHoleBuilder();
-        ~BlackHoleBuilder();
+public:
+    BlackHoleBuilder();
+    ~BlackHoleBuilder();
 
-        BlackHole* createTemplate(int_t id = NONE) const;
-        BlackHole* create() const;
-                                     
-    private:
-        void createInternals(BlackHole*) const;
+    model::BlackHole* createTemplate(int_t id = NONE) const;
+    model::BlackHole* create() const;
+
+private:
+    void createInternals(model::BlackHole*) const;
 }; 

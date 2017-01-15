@@ -41,6 +41,8 @@ class Satellite;
 class SpaceStation;
 class Ship;
 class Npc;
+class Vehicle;
+class BlackHole;
 } // namespace model
 
 namespace control {
@@ -50,10 +52,11 @@ class Asteroid;
 class Satellite;
 class SpaceStation;
 class Ship;
+class Vehicle;
+class BlackHole;
 } // namespace model
 
-class BlackHole;
-class Vehicle;
+
 class Container;
 
 class Player;
@@ -173,7 +176,7 @@ public:
     void add(model::Planet*, const model::SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(Container*, const glm::vec3& = glm::vec3(0.0f));
-    void add(BlackHole*, const glm::vec3&);
+    void add(model::BlackHole*, const glm::vec3&);
 
     void add(Explosion*, const glm::vec3&);
 
@@ -214,16 +217,16 @@ public:
     std::vector<control::Planet*> planets() const { return m_planets; }
     std::vector<control::Star*> stars() const { return m_stars; }
     std::vector<control::Asteroid*> asteroids() const { return m_asteroids; }
-    std::vector<Vehicle*> vehicles() const { return m_vehicles; }
+    std::vector<control::Vehicle*> vehicles() const { return m_vehicles; }
     std::vector<Container*> containers() const { return m_containers; }
 
     model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
     model::Planet* randomInhabitedPlanet() const;
     model::Planet* randomPlanet() const;
-    Vehicle* randomVehicle() const;
-    Vehicle* randomVehicleExcludingNpcRaceId(type::race) const;
-    Vehicle* randVehicleByNpcRaceId(type::race) const;
-    Vehicle* randomVehicle(const std::vector<type::race>&) const;
+    control::Vehicle* randomVehicle() const;
+    control::Vehicle* randomVehicleExcludingNpcRaceId(type::race) const;
+    control::Vehicle* randVehicleByNpcRaceId(type::race) const;
+    control::Vehicle* randomVehicle(const std::vector<type::race>&) const;
     //
 private:
     static int m_counter;
@@ -250,9 +253,9 @@ private:
     std::vector<control::Asteroid*> m_asteroids;
     std::vector<Container*> m_containers;
     std::vector<RocketBullet*> m_bullets;
-    std::vector<BlackHole*> m_blackholes;
+    std::vector<control::BlackHole*> m_blackholes;
+    std::vector<control::Vehicle*> m_vehicles;
 
-    std::vector<Vehicle*> m_vehicles;
     HyperSpace m_hyperspace;
 
     // effects
@@ -292,7 +295,7 @@ private:
     void LoadData(const boost::property_tree::ptree&);
     void ResolveData();
 
-    void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
+    void __addVehicleCommon(control::Vehicle*, const glm::vec3&, const glm::vec3&);
 
     friend class GuiGalaxyMap;
     friend class Observation;

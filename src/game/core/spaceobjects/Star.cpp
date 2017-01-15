@@ -19,21 +19,20 @@
 #include "Star.hpp"
 
 //#include <ceti/StringUtils.hpp>
-#include <common/common.hpp>
-#include <common/constants.hpp>
-#include <math/rand.hpp>
-#include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-#include <world/starsystem.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/common/common.hpp>
+#include <core/common/constants.hpp>
+#include <core/common/Global.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/managers/EntityManager.hpp>
 
 //#include <jeti/Material.hpp>
-
 //#include <glm/gtx/transform.hpp>
 
 #include <meti/RandUtils.hpp>
-   
+
+#include <math/rand.hpp>
+
+#include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
 
 namespace model {

@@ -31,9 +31,10 @@ BlackHoleBuilder::BlackHoleBuilder()
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::createTemplate(int_t id) const
+model::BlackHole*
+BlackHoleBuilder::createTemplate(int_t id) const
 {
-    BlackHole* blackhole = new BlackHole(id);
+    model::BlackHole* blackhole = new model::BlackHole;
     assert(blackhole);
     
     int size = 4;
@@ -44,15 +45,17 @@ BlackHole* BlackHoleBuilder::createTemplate(int_t id) const
     return blackhole;
 } 
 
-BlackHole* BlackHoleBuilder::create() const
+model::BlackHole*
+BlackHoleBuilder::create() const
 {
-    BlackHole* blackhole = createTemplate();
+    model::BlackHole* blackhole = createTemplate();
     createInternals(blackhole);
 
     return blackhole;
 } 
 
-void BlackHoleBuilder::createInternals(BlackHole* blackhole) const
+void
+BlackHoleBuilder::createInternals(model::BlackHole* blackhole) const
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
