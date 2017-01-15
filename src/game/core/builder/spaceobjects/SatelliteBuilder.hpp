@@ -29,7 +29,7 @@ class Satellite;
 
 namespace builder {
 
-class Satellite : public BaseVehicleBuilder
+class Satellite : public BaseVehicle
 {
 public:
     Satellite();

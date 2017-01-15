@@ -56,10 +56,10 @@
 
 #include <descriptors/DescriptorGenerator.hpp>
 
-BaseVehicleBuilder::BaseVehicleBuilder()
+BaseVehicle::BaseVehicle()
 {}
      
-void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
+void BaseVehicle::_createSlots(Vehicle* vehicle)
 {     
     assert(false);
 //    // WEAPON SLOTS
@@ -138,7 +138,7 @@ void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
 //    }
 }
 
-void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor)
+void BaseVehicle::equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor)
 {
 //    type::entity type = (type::entity)descriptor.type();
 //    switch(type) {
@@ -169,7 +169,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& desc
 //    }
 }
 
-void BaseVehicleBuilder::equip(Vehicle* vehicle, type::tech tech_level)
+void BaseVehicle::equip(Vehicle* vehicle, type::tech tech_level)
 {
     assert(false);
 //    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
@@ -269,7 +269,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level)
 }
 #endif // USE_ARTEFACTS
 
-void BaseVehicleBuilder::equipBomb(Vehicle* vehicle, type::tech tech_level)
+void BaseVehicle::equipBomb(Vehicle* vehicle, type::tech tech_level)
 {
     for (unsigned int i=0; i<2; i++) {
         //vehicle->AddItemToCargoSlot(core::global::get().bombBuilder().create());

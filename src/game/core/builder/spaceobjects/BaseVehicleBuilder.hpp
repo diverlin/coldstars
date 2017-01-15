@@ -19,18 +19,17 @@
 
 #pragma once
 
-#include <types/TechLevelTypes.hpp>
-
-#include <descriptors/Base.hpp>
+#include <core/types/TechLevelTypes.hpp>
+#include <core/descriptors/Base.hpp>
 
 
 class Vehicle;
 
-class BaseVehicleBuilder
+class BaseVehicle
 {
 public:
-    BaseVehicleBuilder();
-    virtual ~BaseVehicleBuilder() {}
+    BaseVehicle();
+    virtual ~BaseVehicle() {}
 
     static void equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor);
     static void equip(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);

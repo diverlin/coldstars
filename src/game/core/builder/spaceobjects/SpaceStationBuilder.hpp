@@ -43,7 +43,7 @@ const int MASS_MAX = 2000;
 
 namespace builder {
 
-class SpaceStation : public BaseVehicleBuilder
+class SpaceStation : public BaseVehicle
 {
 public:
     SpaceStation();
