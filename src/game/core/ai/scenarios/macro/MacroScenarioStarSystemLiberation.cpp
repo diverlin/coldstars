@@ -67,20 +67,21 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
         {
             if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
             {
-                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
-                if (target_vehicle != nullptr) {
-                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
-                    npc->stateMachine().setCurrentMicroTask(microtask);
+                assert(false);
+//                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
+//                if (target_vehicle != nullptr) {
+//                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
+//                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
-                    return;
-                }
-                else
-                {
-                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID);
-                    npc->stateMachine().setCurrentMicroTask(microtask);
+//                    return;
+//                }
+//                else
+//                {
+//                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID);
+//                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
-                    return;
-                }
+//                    return;
+//                }
             }
         }
         //else

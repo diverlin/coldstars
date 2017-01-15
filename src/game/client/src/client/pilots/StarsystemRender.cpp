@@ -516,11 +516,12 @@ void StarsystemRender::RenderAxis(const jeti::Renderer& render) const
 
 bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->position(), effect->center());
-    if (dist < vehicle->properties().radar)
-    {
-        return true;
-    }
+    assert(false);
+//    float dist = meti::distance(vehicle->position(), effect->center());
+//    if (dist < vehicle->properties().radar)
+//    {
+//        return true;
+//    }
     
     return false;
 }
@@ -582,17 +583,18 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->position(), effect->GetStartPos());
-    if (dist < vehicle->properties().radar)
-    {
-        return true;
-    }
+    assert(false);
+//    float dist = meti::distance(vehicle->position(), effect->GetStartPos());
+//    if (dist < vehicle->properties().radar)
+//    {
+//        return true;
+//    }
     
-    dist = meti::distance(vehicle->position(), effect->GetEndPos());
-    if (dist < vehicle->properties().radar)
-    {
-        return true;
-    }
+//    dist = meti::distance(vehicle->position(), effect->GetEndPos());
+//    if (dist < vehicle->properties().radar)
+//    {
+//        return true;
+//    }
     
     return false;
 }

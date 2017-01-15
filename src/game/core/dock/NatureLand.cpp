@@ -40,9 +40,10 @@ NatureLand::~NatureLand()
 /* virtual */ 
 void NatureLand::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<VEHICLE_vec.size(); i++) {
-       core::global::get().entityManager().addToGarbage(VEHICLE_vec[i]);
-    }
+    assert(false);
+//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++) {
+//       core::global::get().entityManager().addToGarbage(VEHICLE_vec[i]);
+//    }
 
     for (unsigned int i=0; i<item_slot_vec.size(); i++) {
        core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
@@ -85,32 +86,34 @@ bool NatureLand::AddItem(item::Base* item)
 /* virtual */
 bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
-    vehicle->setPlaceTypeId(type::place::LAND); 
-    vehicle->setLand(this);
+    assert(false);
+//    vehicle->setPlaceTypeId(type::place::LAND);
+//    vehicle->setLand(this);
     
-    VEHICLE_vec.push_back(vehicle);
+//    VEHICLE_vec.push_back(vehicle);
     
-    // used if vehicle added directly after creation
-    if (!vehicle->starsystem()) {
-        // TODO
-        //vehicle->setStarSystem(m_owner->starsystem());
-    }
+//    // used if vehicle added directly after creation
+//    if (!vehicle->starsystem()) {
+//        // TODO
+//        //vehicle->setStarSystem(m_owner->starsystem());
+//    }
     return true;
 }
 
 /*virtual */
 bool NatureLand::RemoveVehicle(Vehicle* vehicle)
 {       
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 
-        {
-                if (VEHICLE_vec[i]->id() == vehicle->id())
-                {
-                        VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        return true;
-                }
-        }
-        
-        return false;
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        assert(false);
+//        if (VEHICLE_vec[i]->id() == vehicle->id())
+//        {
+//            VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
+//            return true;
+//        }
+    }
+
+    return false;
 }
 
 
@@ -128,14 +131,15 @@ void NatureLand::UpdateInStatic()
 std::string NatureLand::GetDockVehicleStr() const
 {
     std::string str;
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {
-                   str += "_" + std::to_string(VEHICLE_vec[i]->id());
-        }
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        assert(false);
+        //str += "_" + std::to_string(VEHICLE_vec[i]->id());
+    }
 
-        return str;
+    return str;
 }
-              
+
 /* virtual override final */
 void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {

@@ -41,22 +41,24 @@ VehicleSlot::~VehicleSlot()
 /* virtual */
 void VehicleSlot::putChildrenToGarbage() const
 {
-    if (m_vehicle) {
-       core::global::get().entityManager().addToGarbage(m_vehicle);
-    } 
+    assert(false);
+//    if (m_vehicle) {
+//       core::global::get().entityManager().addToGarbage(m_vehicle);
+//    }
 }
                       
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
-        m_vehicle = vehicle;
+    m_vehicle = vehicle;
 
-        //vehicle->setPlaceTypeId(data_id.type_id);
-        vehicle->SetParentVehicleSlot(this);
+    //vehicle->setPlaceTypeId(data_id.type_id);
+    assert(false);
+    //        vehicle->SetParentVehicleSlot(this);
 }
 
 void VehicleSlot::Release()
 {
-        m_vehicle = nullptr;
+    m_vehicle = nullptr;
 } 
 
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)

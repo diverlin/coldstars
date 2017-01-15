@@ -94,11 +94,12 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
 {
     if (force_full_control == false)
     {
-        if (npc->vehicle()->id() == npc->scanTarget()->id())
-        {
-            force_full_control = true;  
-            // modify full control for friend ships         
-        }
+        assert(false);
+//        if (npc->vehicle()->id() == npc->scanTarget()->id())
+//        {
+//            force_full_control = true;
+//            // modify full control for friend ships
+//        }
     }
     
     return force_full_control;
@@ -106,58 +107,60 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
           
 void Player::UpdatePostTransaction()
 {
-    switch (npc->vehicle()->place())
-    {
-        case type::place::KOSMOPORT:
-        {
-            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
-            {
-                GuiManager::Instance().EnterGuiKosmoport(); 
-            }
+    assert(false);
+//    switch (npc->vehicle()->place())
+//    {
+//        case type::place::KOSMOPORT:
+//        {
+//            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
+//            {
+//                GuiManager::Instance().EnterGuiKosmoport();
+//            }
             
-            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == true)
-            {
-                GuiManager::Instance().ExitGuiSpace();
-            }
+//            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == true)
+//            {
+//                GuiManager::Instance().ExitGuiSpace();
+//            }
             
-            break;
-        }
+//            break;
+//        }
 
-        case type::place::LAND:
-        {                       
-            break;
-        }
+//        case type::place::LAND:
+//        {
+//            break;
+//        }
         
-        case type::place::KOSMOS:
-        {
-            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
-            {
-                GuiManager::Instance().ExitGuiKosmoport(); 
-            }
+//        case type::place::KOSMOS:
+//        {
+//            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
+//            {
+//                GuiManager::Instance().ExitGuiKosmoport();
+//            }
             
-            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == false)
-            {
-                GuiManager::Instance().EnterGuiSpace();
-            }
+//            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == false)
+//            {
+//                GuiManager::Instance().EnterGuiSpace();
+//            }
             
-            break;
-        }
-    }        
+//            break;
+//        }
+//    }
 }
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
-{       
-    if (starsystem == nullptr) //hack
-    {
-        starsystem = npc->vehicle()->starsystem();
-    }
+{
+    assert(false);
+//    if (starsystem == nullptr) //hack
+//    {
+//        starsystem = npc->vehicle()->starsystem();
+//    }
     
-    if (starsystem->id() != npc->vehicle()->starsystem()->id())
-    {
-        //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
-        //client::global::get().screen().GetRect().setCenter(npc->vehicle()->center());
-        starsystem = npc->vehicle()->starsystem();
-    }
+//    if (starsystem->id() != npc->vehicle()->starsystem()->id())
+//    {
+//        //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
+//        //client::global::get().screen().GetRect().setCenter(npc->vehicle()->center());
+//        starsystem = npc->vehicle()->starsystem();
+//    }
     
 //    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
 //    switch(action_id)
@@ -465,10 +468,10 @@ void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDr
                 //npc->vehicle()->RenderRadarRange();
             }
         
-            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) && (npc->vehicle()->grappleSlot()->isSelected() == true) )
-            {
-                //npc->vehicle()->RenderGrappleRange();
-            }
+//            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) && (npc->vehicle()->grappleSlot()->isSelected() == true) )
+//            {
+//                //npc->vehicle()->RenderGrappleRange();
+//            }
         }
     
         //m_cursor.RenderFocusedObjectStuff();
@@ -875,13 +878,14 @@ void Player::SessionInNatureLand()
 void Player::RunSession(const TurnTimer& turn_timer)
 {
     m_cursor.Reset();
-    switch(npc->vehicle()->place())
-    {
-        case type::place::KOSMOS:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
-        case type::place::HYPER:     { SessionInSpace((Starsystem*)npc->vehicle()->driveComplex().target(), turn_timer); break; }
-        case type::place::KOSMOPORT:      { SessionInKosmoport(); break; }
-        case type::place::LAND:      { SessionInNatureLand(); break; }
-    }       
+    assert(false);
+//    switch(npc->vehicle()->place())
+//    {
+//        case type::place::KOSMOS:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
+//        case type::place::HYPER:     { SessionInSpace((Starsystem*)npc->vehicle()->driveComplex().target(), turn_timer); break; }
+//        case type::place::KOSMOPORT:      { SessionInKosmoport(); break; }
+//        case type::place::LAND:      { SessionInNatureLand(); break; }
+//    }
 
     m_cursor.Update(this);
     //m_cursor.RenderFocusedObjectInfo();

@@ -41,30 +41,32 @@ MicroScenarioGrab::~MicroScenarioGrab()
 /* virtual */        
 void MicroScenarioGrab::enter(Npc* npc) const
 {
-    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::COLLECTING_ID);
+        assert(false);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::COLLECTING_ID);
     
-    LOG("npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioGrab");
+//    LOG("npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioGrab");
 }
 
 /* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {   
-    // check equipment
-    STATUS equipment_status = npc->vehicle()->CheckGrabStatus();
+        assert(false);
+//    // check equipment
+//    STATUS equipment_status = npc->vehicle()->CheckGrabStatus();
     
-    if (equipment_status != STATUS::ITEM_OK)
-    {
-        return false;
-    }
+//    if (equipment_status != STATUS::ITEM_OK)
+//    {
+//        return false;
+//    }
     
-    // check target
-    SpaceObject* target = npc->stateMachine().microTaskManager().target();     // shortcut
-    STATUS target_status = npc->vehicle()->grappleSlot()->checkTargetPure(target);
+//    // check target
+//    SpaceObject* target = npc->stateMachine().microTaskManager().target();     // shortcut
+//    STATUS target_status = npc->vehicle()->grappleSlot()->checkTargetPure(target);
         
-    if ( (equipment_status == STATUS::ITEM_OK) and (target_status == STATUS::TARGET_OK) )
-    {
-        return true;
-    }
+//    if ( (equipment_status == STATUS::ITEM_OK) and (target_status == STATUS::TARGET_OK) )
+//    {
+//        return true;
+//    }
 
     return false;
 }
@@ -72,11 +74,12 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
-    SpaceObject* target = npc->stateMachine().microTaskManager().target();
-    if (npc->vehicle()->grappleSlot()->checkTarget(target) == STATUS::TARGET_OK)
-    {
-        npc->vehicle()->grappleSlot()->grappleEquipment()->AddTarget(target);
-    }
+    assert(false);
+    //    SpaceObject* target = npc->stateMachine().microTaskManager().target();
+//    if (npc->vehicle()->grappleSlot()->checkTarget(target) == STATUS::TARGET_OK)
+//    {
+//        npc->vehicle()->grappleSlot()->grappleEquipment()->AddTarget(target);
+//    }
 }
 
 /* virtual */

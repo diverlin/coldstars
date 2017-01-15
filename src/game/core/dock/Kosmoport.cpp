@@ -93,14 +93,15 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-    vehicle->setPlaceTypeId(type::place::KOSMOPORT); 
-    angar->AddVehicle(vehicle);  
+    assert(false);
+//    vehicle->setPlaceTypeId(type::place::KOSMOPORT);
+//    angar->AddVehicle(vehicle);
     
-    vehicle->setLand(this);        
-    if (!vehicle->starsystem()) {
-        // TODO
-        //vehicle->setStarSystem(m_owner->starsystem());
-    }
+//    vehicle->setLand(this);
+//    if (!vehicle->starsystem()) {
+//        // TODO
+//        //vehicle->setStarSystem(m_owner->starsystem());
+//    }
           
     return true;
 }
@@ -108,7 +109,8 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
 //* virtual */
 bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 {        
-        vehicle->parentVehicleSlot()->Release();
+    assert(false);
+//    vehicle->parentVehicleSlot()->Release();
     return true;
 }
 

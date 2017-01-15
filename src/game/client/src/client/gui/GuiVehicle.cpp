@@ -225,21 +225,22 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {
-    for (const auto itemslot : vehicle->m_slots)
-    { 
-        type::entity request_type = itemslot->subtype();
-        if ((request_type == type::entity::WEAPON_SLOT_ID) || (request_type == type::entity::CARGO_SLOT_ID) or (request_type == type::entity::ARTEFACT_SLOT_ID))
-        {
-            request_type = itemslot->subsubtype();
-        }         
+    assert(false);
+//    for (const auto itemslot : vehicle->m_slots)
+//    {
+//        type::entity request_type = itemslot->subtype();
+//        if ((request_type == type::entity::WEAPON_SLOT_ID) || (request_type == type::entity::CARGO_SLOT_ID) or (request_type == type::entity::ARTEFACT_SLOT_ID))
+//        {
+//            request_type = itemslot->subsubtype();
+//        }
     
-        BaseGuiElement* child = GetGuiElement(getGuiItemSlotType(request_type));
-        if (child)
-        {
-            child->Show();
-            ((ButtonItemSlot*)child)->SetItemSlot(itemslot);
-        }
-    }
+//        BaseGuiElement* child = GetGuiElement(getGuiItemSlotType(request_type));
+//        if (child)
+//        {
+//            child->Show();
+//            ((ButtonItemSlot*)child)->SetItemSlot(itemslot);
+//        }
+//    }
 } 
 
 /*

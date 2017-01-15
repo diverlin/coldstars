@@ -58,11 +58,12 @@ TEST(starsystem, add_objects)
     EXPECT_EQ(starsystem->vehicles().size(), 1);
 
     assert(starsystem->vehicles()[0]);
-    Vehicle* vehicle = starsystem->vehicles()[0];
     assert(false);
-    //EXPECT_EQ(vehicle, ship);
-    EXPECT_EQ(vehicle->position(), pos);
-    EXPECT_EQ(vehicle->direction(), dir);
+//    Vehicle* vehicle = starsystem->vehicles()[0];
+//    assert(false);
+//    //EXPECT_EQ(vehicle, ship);
+//    EXPECT_EQ(vehicle->position(), pos);
+//    EXPECT_EQ(vehicle->direction(), dir);
 
     // clean
     delete star;

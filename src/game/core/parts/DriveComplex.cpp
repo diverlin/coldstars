@@ -95,7 +95,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     
     UpdatePath();
 
-    LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
+    //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
 }      
                  
 void DriveComplex::SetTarget(SpaceObject* target, int action_id)
@@ -124,21 +124,23 @@ void DriveComplex::DefineDistance()
         
         case NAVIGATOR_ACTION::COLLECTING_ID:
         {
-            m_TargetDistance = m_ownerVehicle->properties().grab_radius/2; 
-            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+            assert(false);
+            //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
+            //m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
             break;            
         }
 
         case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
         {
-            int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
-            if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
-            {
-                m_TargetDistance = 150;                
-            }
+            assert(false);
+            //int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
+            //if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
+//            {
+//                m_TargetDistance = 150;
+//            }
             
-            m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_target->position().z);
+            //m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_target->position().z);
             
             break;            
         }
@@ -212,9 +214,10 @@ void DriveComplex::UpdateDynamicTargetCoord()
     {
         case type::entity::STARSYSTEM_ID:
         {
-            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
-            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
-            m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
+        assert(false);
+//            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
+//            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
+//            m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
             break;
         }
@@ -253,11 +256,12 @@ void DriveComplex::UpdateDynamicTargetCoord()
 bool DriveComplex::CheckTargetEchievement()
 {
     if (m_target != nullptr)
-    {    
-        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(m_ownerVehicle->position()), meti::vec2(m_TargetPos), m_TargetDistance) == true)
-        {
-            return true;
-        }
+    {
+        assert(false);
+//        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(m_ownerVehicle->position()), meti::vec2(m_TargetPos), m_TargetDistance) == true)
+//        {
+//            return true;
+//        }
     }
     
     return false;
@@ -299,36 +303,37 @@ void DriveComplex::CalcPath()
     int round_counter_max = 2000;//2 + 2*M_PI/angle_step;
     int round_counter = 0;
 
-    float speed_base = m_ownerVehicle->properties().speed;
+    assert(false);
+//    float speed_base = m_ownerVehicle->properties().speed;
     
-    glm::vec3 new_center(m_ownerVehicle->position());
-    glm::vec3 target_dir = glm::normalize(m_TargetPos - m_ownerVehicle->position());
+//    glm::vec3 new_center(m_ownerVehicle->position());
+//    glm::vec3 target_dir = glm::normalize(m_TargetPos - m_ownerVehicle->position());
 
-    glm::quat zero_quat;    
-    glm::quat target_quat;
+//    glm::quat zero_quat;
+//    glm::quat target_quat;
 
-    glm::vec3 direction = glm::normalize(m_ownerVehicle->direction());
+//    glm::vec3 direction = glm::normalize(m_ownerVehicle->direction());
 
-    meti::quatBetweenVectors(target_quat, direction, target_dir);
-    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
-    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) 
-    {
-        direction = interpolated_quat * direction;
+//    meti::quatBetweenVectors(target_quat, direction, target_dir);
+//    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
+//    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999)
+//    {
+//        direction = interpolated_quat * direction;
  
-        new_center += direction * speed_base/* * gravity_rate*/;
-        target_dir = glm::normalize(m_TargetPos - new_center);
+//        new_center += direction * speed_base/* * gravity_rate*/;
+//        target_dir = glm::normalize(m_TargetPos - new_center);
 
-        m_PathCenterVec.push_back(new_center);
-        m_PathDirectionVec.push_back(direction);
+//        m_PathCenterVec.push_back(new_center);
+//        m_PathDirectionVec.push_back(direction);
 
-        round_counter++;
-        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
-        {
-            //ClearPath();
-            break;
-            //return;
-        } 
-    }
+//        round_counter++;
+//        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
+//        {
+//            //ClearPath();
+//            break;
+//            //return;
+//        }
+//    }
 
     //float az = atan2(m_OwnerVehicle->direction().y, m_OwnerVehicle->direction().x);
     ////float az = acos(glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), m_OwnerVehicle->direction()));
@@ -475,8 +480,9 @@ void DriveComplex::UpdatePosition()
     {
         if (m_PathIndex < m_PathCenterVec.size())
         {
-            m_ownerVehicle->setPosition(m_PathCenterVec[m_PathIndex]);
-            m_ownerVehicle->setDirection(m_PathDirectionVec[m_PathIndex]);
+            assert(false);
+//            m_ownerVehicle->setPosition(m_PathCenterVec[m_PathIndex]);
+//            m_ownerVehicle->setDirection(m_PathDirectionVec[m_PathIndex]);
             m_PathIndex++;
         }
         else

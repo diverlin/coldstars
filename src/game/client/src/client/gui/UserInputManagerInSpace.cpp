@@ -131,9 +131,10 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
     
             case sf::Keyboard::C: 
             { 
-                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
-                glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-                client::global::get().screen().initiateScrollTo(player_pos2);
+            assert(false);
+//                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
+//                glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
+//                client::global::get().screen().initiateScrollTo(player_pos2);
                 break; 
             }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }
@@ -160,8 +161,9 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
     
             case sf::Keyboard::F1: // god mode on/off
             {    
-                std::cout<<"god_mode ="<<!player->GetNpc()->vehicle()->godMode()<<std::endl;
-                player->GetNpc()->vehicle()->setGodMode(!player->GetNpc()->vehicle()->godMode());
+            assert(false);
+//                std::cout<<"god_mode ="<<!player->GetNpc()->vehicle()->godMode()<<std::endl;
+//                player->GetNpc()->vehicle()->setGodMode(!player->GetNpc()->vehicle()->godMode());
                 break;
             }
     

@@ -36,18 +36,20 @@ MicroScenarioDocking::~MicroScenarioDocking()
 /* virtual */
 void MicroScenarioDocking::enter(Npc* npc) const
 {    
-    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::DOCKING_ID);
+    assert(false);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::DOCKING_ID);
 
-    LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
+//    LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
 }
 
 /* virtual */
 bool MicroScenarioDocking::Validate(Npc* npc) const
 {
-    if (npc->vehicle()->place() == type::place::KOSMOS)
-    {
-        return true;
-    }
+    assert(false);
+    //    if (npc->vehicle()->place() == type::place::KOSMOS)
+//    {
+//        return true;
+//    }
 
     return false;
 }
@@ -59,20 +61,22 @@ void MicroScenarioDocking::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 {
-         if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
-         {
-             if (npc->vehicle()->driveComplex().GetDockingPermission() == true)
-             {
-                 if (npc->vehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
-                 {
-                     npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID);
-                 }
-             }
-             else
-             {
-                 // wait or reset
-             }
-         }
+        assert(false);
+
+//    if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
+//    {
+//        if (npc->vehicle()->driveComplex().GetDockingPermission() == true)
+//        {
+//            if (npc->vehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
+//            {
+//                npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID);
+//            }
+//        }
+//        else
+//        {
+//            // wait or reset
+//        }
+//    }
 }
 
 /* virtual */
