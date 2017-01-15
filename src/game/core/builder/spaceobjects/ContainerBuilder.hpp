@@ -42,11 +42,11 @@ class Container;
 
 namespace builder {
 
-class ContainerBuilder
+class Container
 {
 public:
-    ContainerBuilder();
-    ~ContainerBuilder();
+    Container();
+    ~Container();
 
     static model::Container* getNew();
     static model::Container* getNew(const std::string& data);

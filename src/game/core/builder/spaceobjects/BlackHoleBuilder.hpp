@@ -27,11 +27,11 @@ class BlackHole;
 
 namespace builder {
 
-class BlackHoleBuilder
+class BlackHole
 {
 public:
-    BlackHoleBuilder();
-    ~BlackHoleBuilder();
+    BlackHole();
+    ~BlackHole();
 
     model::BlackHole* createTemplate(int_t id = NONE) const;
     model::BlackHole* create() const;

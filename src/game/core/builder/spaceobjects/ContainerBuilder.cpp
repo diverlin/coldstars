@@ -34,27 +34,27 @@
 
 namespace builder {
 
-ContainerBuilder::ContainerBuilder()
+Container::Container()
 {}
 
-ContainerBuilder::~ContainerBuilder()
+Container::~Container()
 {}
 
 model::Container*
-ContainerBuilder::getNew()
+Container::getNew()
 {
     const auto& descriptor = core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
     return getNew(descriptor);
 }
 
 model::Container*
-ContainerBuilder::getNew(const std::string& data)
+Container::getNew(const std::string& data)
 {
     return getNew(descriptor::Container(data));
 }
 
 model::Container*
-ContainerBuilder::getNew(const descriptor::BaseOLD& descriptor)
+Container::getNew(const descriptor::BaseOLD& descriptor)
 {
     model::Container* container = __getNewTemplate();
     __createInternals(container, descriptor);
@@ -62,7 +62,7 @@ ContainerBuilder::getNew(const descriptor::BaseOLD& descriptor)
 }
 
 model::Container*
-ContainerBuilder::__getNewTemplate()
+Container::__getNewTemplate()
 {
     model::Container* container = new model::Container;
     assert(container);
@@ -144,7 +144,7 @@ ContainerBuilder::__getNewTemplate()
 //}
 
 void
-ContainerBuilder::__createInternals(model::Container* container, const descriptor::BaseOLD& descriptor)
+Container::__createInternals(model::Container* container, const descriptor::BaseOLD& descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;

@@ -25,14 +25,14 @@
 
 namespace builder {
 
-SatelliteBuilder::SatelliteBuilder()
+Satellite::Satellite()
 {}
 
-SatelliteBuilder::~SatelliteBuilder()
+Satellite::~Satellite()
 {}
 
 model::Satellite*
-SatelliteBuilder::createTemplate(int_t id) const
+Satellite::createTemplate(int_t id) const
 {
     model::Satellite* model = new model::Satellite;
     assert(model);
@@ -43,7 +43,7 @@ SatelliteBuilder::createTemplate(int_t id) const
 }
 
 model::Satellite*
-SatelliteBuilder::create() const
+Satellite::create() const
 {
     model::Satellite* satellite = createTemplate();
     createInternals(satellite);
@@ -51,7 +51,7 @@ SatelliteBuilder::create() const
     return satellite;
 }
 
-void SatelliteBuilder::createInternals(model::Satellite* model) const
+void Satellite::createInternals(model::Satellite* model) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);

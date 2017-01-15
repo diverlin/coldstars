@@ -70,14 +70,10 @@
 #include <builder/slots/ItemSlotBuilder.hpp>
 #include <builder/slots/VehicleSlotBuilder.hpp>
 
-#include <builder/spaceobjects/AsteroidBuilder.hpp>
 #include <builder/spaceobjects/BlackHoleBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
-//#include <builder/spaceobjects/PlanetBuilder.hpp>
-//#include <builder/spaceobjects/StarBuilder.hpp>
 #include <builder/spaceobjects/RocketBulletBuilder.hpp>
 #include <builder/spaceobjects/SatelliteBuilder.hpp>
-#include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/spaceobjects/SpaceStationBuilder.hpp>
 
 #include <builder/world/GalaxyBuilder.hpp>
@@ -149,12 +145,12 @@ global::global()
 //    , m_itemSlotBuilder(new ItemSlotBuilder)
 //    , m_vehicleSlotBuilder(new VehicleSlotBuilder)
 //    , m_asteroidBuilder(new builder::Asteroid)
-    , m_blackHoleBuilder(new builder::BlackHoleBuilder)
-    , m_containerBuilder(new builder::ContainerBuilder)
+    , m_blackHoleBuilder(new builder::BlackHole)
+    , m_containerBuilder(new builder::Container)
     //, m_planetBuilder(new PlanetBuilder)
     //, m_starBuilder(new StarBuilder)
-    , m_rocketBulletBuilder(new builder::RocketBulletBuilder)
-    , m_satelliteBuilder(new builder::SatelliteBuilder)
+    , m_rocketBulletBuilder(new builder::Rocket)
+    , m_satelliteBuilder(new builder::Satellite)
     , m_spaceStationBuilder(new builder::SpaceStation)
     , m_galaxyBuilder(new GalaxyBuilder)
     , m_sectorBuilder(new SectorBuilder)

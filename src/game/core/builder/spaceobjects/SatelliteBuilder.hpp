@@ -29,11 +29,11 @@ class Satellite;
 
 namespace builder {
 
-class SatelliteBuilder : public BaseVehicleBuilder
+class Satellite : public BaseVehicleBuilder
 {
 public:
-    SatelliteBuilder();
-    ~SatelliteBuilder();
+    Satellite();
+    ~Satellite();
 
     model::Satellite* createTemplate(int_t id = NONE) const;
     model::Satellite* create() const;

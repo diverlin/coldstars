@@ -26,14 +26,14 @@
 
 namespace builder {
 
-BlackHoleBuilder::BlackHoleBuilder()
+BlackHole::BlackHole()
 {}
 
-BlackHoleBuilder::~BlackHoleBuilder()
+BlackHole::~BlackHole()
 {}
 
 model::BlackHole*
-BlackHoleBuilder::createTemplate(int_t id) const
+BlackHole::createTemplate(int_t id) const
 {
     model::BlackHole* blackhole = new model::BlackHole;
     assert(blackhole);
@@ -47,7 +47,7 @@ BlackHoleBuilder::createTemplate(int_t id) const
 } 
 
 model::BlackHole*
-BlackHoleBuilder::create() const
+BlackHole::create() const
 {
     model::BlackHole* blackhole = createTemplate();
     createInternals(blackhole);
@@ -56,7 +56,7 @@ BlackHoleBuilder::create() const
 } 
 
 void
-BlackHoleBuilder::createInternals(model::BlackHole* blackhole) const
+BlackHole::createInternals(model::BlackHole* blackhole) const
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
