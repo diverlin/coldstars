@@ -18,10 +18,11 @@
 
 
 #include "ShipBuilder.hpp"
-#include <builder/CommonBuilderHeaders.hpp>
-#include <spaceobjects/Ship.hpp>
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/Ship.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
-#include <descriptors/DescriptorManager.hpp>
+namespace builder {
 
 ShipBuilder::ShipBuilder()
 {}
@@ -29,18 +30,19 @@ ShipBuilder::ShipBuilder()
 ShipBuilder::~ShipBuilder()
 {}
 
-Ship*
+model::Ship*
 ShipBuilder::getNew(bool full_equiped)
 {
     const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    Ship* ship =  getNew(descr);
+    model::Ship* ship =  getNew(descr);
     if (full_equiped) {
-        BaseVehicleBuilder::equip(ship);
+        assert(false);
+        //BaseVehicleBuilder::equip(ship);
     }
     return ship;
 }
 
-Ship*
+model::Ship*
 ShipBuilder::getNew(const descriptor::BaseOLD& descr)
 {            
     descriptor::BaseOLD descriptor(descr.data());
@@ -50,30 +52,30 @@ ShipBuilder::getNew(const descriptor::BaseOLD& descr)
         id = descr.objId();
     }
 
-    Ship* ship = __getNewTemplate(id);
+    model::Ship* ship = __getNewTemplate(id);
     __createInternals(ship, descriptor);
     return ship;
 }
 
-Ship*
+model::Ship*
 ShipBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::BaseOLD(data));
 }
 
-Ship*
+model::Ship*
 ShipBuilder::__getNewTemplate(int_t id)
 {
     if (id == NONE) {
         id = core::global::get().idGenerator().nextId();
     }
-    Ship* ship = new Ship(id);
-   core::global::get().entityManager().reg(ship);
+    model::Ship* ship = new model::Ship;
+    core::global::get().entityManager().reg(ship);
     return ship;
 }
 
 void
-ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
+ShipBuilder::__createInternals(model::Ship* ship, const descriptor::BaseOLD& descr)
 {
     assert(descr.type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
@@ -102,7 +104,8 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
 //        }
 //    }
 
-    ship->setSubSubTypeId((type::entity)descr.type());
+    assert(false);
+    //ship->setSubSubTypeId((type::entity)descr.type());
 
     descriptor::Vehicle descr2;
     descr2.id = descr.id();
@@ -133,7 +136,8 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
     descr2.slot_artefact_num = descr.artefactSlotNum();
     descr2.slot_otsec_num = descr.cargoSlotNum();
 
-    ship->setKorpusData(descr2);
+    assert(false);
+    //ship->setKorpusData(descr2);
 
 //    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -152,14 +156,19 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
 
     LifeData data_life;
     data_life.armor      = descr.armor();
-    data_life.dying_time = ship->collisionRadius() * 0.1;
+    assert(false);
+//    data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->setLifeData(data_life);
     
-    ship->CreateDriveComplexTextureDependedStuff();
-    ship->CreateProtectionComplexTextureDependedStuff();
+    assert(false);
+//    ship->CreateDriveComplexTextureDependedStuff();
+//    ship->CreateProtectionComplexTextureDependedStuff();
      
     //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
     //ship->SetRenderAnimation(animation_program);
-                           
-    _createSlots(ship);
+
+    assert(false);
+    //_createSlots(ship);
 }
+
+} // namespace builder

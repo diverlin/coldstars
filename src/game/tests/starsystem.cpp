@@ -37,7 +37,7 @@ TEST(starsystem, add_objects)
 
     model::Star* star = builder::Star::getNew();
     model::Planet* planet = builder::Planet::getNew();
-    Ship* ship = ShipBuilder::getNew();
+    model::Ship* ship = builder::ShipBuilder::getNew();
 
     /* pre-add check */
     EXPECT_EQ(starsystem->stars().size(), 0);
@@ -59,7 +59,13 @@ TEST(starsystem, add_objects)
 
     assert(starsystem->vehicles()[0]);
     Vehicle* vehicle = starsystem->vehicles()[0];
-    EXPECT_EQ(vehicle, ship);
+    assert(false);
+    //EXPECT_EQ(vehicle, ship);
     EXPECT_EQ(vehicle->position(), pos);
     EXPECT_EQ(vehicle->direction(), dir);
+
+    // clean
+    delete star;
+    delete planet;
+    delete ship;
 }

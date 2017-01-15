@@ -31,7 +31,7 @@ Planet::__createTemplate(int_t id)
     model->setId(id);
     assert(model);
 
-   core::global::get().entityManager().reg(model);
+    core::global::get().entityManager().reg(model);
     
     return model;
 }
@@ -42,7 +42,7 @@ Planet::getNew()
     const auto& descr = core::global::get().descriptors().planet().random();
     return getNew(descr);
 } 
-     
+
 model::Planet*
 Planet::getNew(const descriptor::Planet& descr)
 {
@@ -84,7 +84,7 @@ Planet::getNew(const descriptor::Planet& descr)
         //alpitodorender planet->AddDecoration(atmosphere);
     }
 
-   /*
+    /*
    {
         Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 

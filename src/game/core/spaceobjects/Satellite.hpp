@@ -77,33 +77,33 @@ private:
 
 
 
-class Satellite : public Vehicle
-{
-    public:  
-        Satellite(int);
-        virtual ~Satellite();
+//class Satellite : public Vehicle
+//{
+//    public:
+//        Satellite(int);
+//        virtual ~Satellite();
 
-        void BindParent(const SpaceObject* const);
+//        void BindParent(const SpaceObject* const);
             
-        virtual void UpdateInSpace(int, bool) override final;
+//        virtual void UpdateInSpace(int, bool) override final;
         
-//        void RenderInSpace(const jeti::Renderer&, float);
-//        void RenderAtPlanet(const jeti::Renderer&);
+////        void RenderInSpace(const jeti::Renderer&, float);
+////        void RenderAtPlanet(const jeti::Renderer&);
                 
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
+//        virtual void Save(boost::property_tree::ptree&) const override final;
+//        virtual void Load(const boost::property_tree::ptree&) override final;
+//        virtual void Resolve() override final;
             
-    private:
-        Orbit m_Orbit;
+//    private:
+//        Orbit m_Orbit;
 
-//        virtual void UpdateInfo() override final;
-//        void UpdateRenderStuff();
+////        virtual void UpdateInfo() override final;
+////        void UpdateRenderStuff();
                         
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-};
+//        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//        void LoadData(const boost::property_tree::ptree&);
+//        void ResolveData();
+//};
 
 
 

@@ -186,15 +186,17 @@ void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     m_vehicles.push_back(vehicle);
 }
 
-void Starsystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
+void Starsystem::add(model::Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
-    __addVehicleCommon(ship, position, dir);
+    assert(false);
+    //__addVehicleCommon(ship, position, dir);
 }
 
-void Starsystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const SpaceObject* const parent)
+void Starsystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const SpaceObject* const parent)
 {
-    __addVehicleCommon(satellite, position, dir);
-    satellite->BindParent(parent);
+    assert(false);
+//    __addVehicleCommon(satellite, position, dir);
+//    satellite->BindParent(parent);
 }
 
 void Starsystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
@@ -880,10 +882,12 @@ void Starsystem::__shipManager_s(unsigned int num)
         int weapons_num = 7;
 
         Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        Ship* new_pship = ShipBuilder::getNew();
-        ShipBuilder::equip(new_pship);   // improove
+        model::Ship* new_pship = builder::ShipBuilder::getNew();
 
-        new_pship->bindNpc(new_pnpc);
+        assert(false);
+        //builder::ShipBuilder::equip(new_pship);   // improove
+        assert(false);
+        //new_pship->bindNpc(new_pnpc);
 
         glm::vec2 center = meti::getRandVec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);

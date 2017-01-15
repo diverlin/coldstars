@@ -37,19 +37,21 @@ namespace model {
 class Star;
 class Planet;
 class Asteroid;
+class Satellite;
+class Ship;
 } // namespace model
 
 namespace control {
 class Star;
 class Planet;
 class Asteroid;
+class Satellite;
+class Ship;
 } // namespace model
 
 class BlackHole;
 class Vehicle;
 class SpaceStation;
-class Satellite; 
-class Ship; 
 class Container;
 
 class Player;
@@ -161,9 +163,9 @@ public:
     void createGroupAndShareTask(Npc*, Starsystem*, int) const;
 
     //// TRANSITION
-    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(model::Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
+    void add(model::Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
     void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
     void add(model::Star*);

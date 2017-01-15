@@ -83,6 +83,7 @@ class NpcBuilder;
 namespace builder {
 
 class Asteroid;
+class SatelliteBuilder;
 
 } // namespace builder
 
@@ -91,7 +92,6 @@ class ContainerBuilder;
 class PlanetBuilder;
 class StarBuilder;
 class RocketBulletBuilder;
-class SatelliteBuilder;
 class ShipBuilder;
 class SpaceStationBuilder;
 
@@ -172,7 +172,7 @@ public:
 //    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
 //    StarBuilder& starBuilder() { return *m_starBuilder; }
     RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
-    SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
+    builder::SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
     SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
     GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
@@ -249,7 +249,7 @@ private:
 //    PlanetBuilder* m_planetBuilder = nullptr;
 //    StarBuilder* m_starBuilder = nullptr;
     RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
-    SatelliteBuilder* m_satelliteBuilder = nullptr;
+    builder::SatelliteBuilder* m_satelliteBuilder = nullptr;
     //ShipBuilder* m_shipBuilder = nullptr;
     SpaceStationBuilder* m_spaceStationBuilder = nullptr;
 

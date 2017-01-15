@@ -579,11 +579,12 @@ void EntityManager::loadPass0(const std::string& filename)
     if (load_ptree.get_child_optional("satellite"))
     {
         LOG("loading satellites...");
-        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
-        {
-            Satellite* satellite = core::global::get().satelliteBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            satellite->Load(v.second);
-        }
+        assert(false);
+//        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
+//        {
+//            Satellite* satellite = core::global::get().satelliteBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            satellite->Load(v.second);
+//        }
     }
 
     if (load_ptree.get_child_optional("rocketbullet"))
