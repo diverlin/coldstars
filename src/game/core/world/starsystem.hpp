@@ -43,6 +43,7 @@ class Ship;
 class Npc;
 class Vehicle;
 class BlackHole;
+class Container;
 } // namespace model
 
 namespace control {
@@ -54,10 +55,10 @@ class SpaceStation;
 class Ship;
 class Vehicle;
 class BlackHole;
+class Container;
+
 } // namespace model
 
-
-class Container;
 
 class Player;
 
@@ -175,7 +176,7 @@ public:
     void add(model::Star*);
     void add(model::Planet*, const model::SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
-    void add(Container*, const glm::vec3& = glm::vec3(0.0f));
+    void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
     void add(model::BlackHole*, const glm::vec3&);
 
     void add(Explosion*, const glm::vec3&);
@@ -193,7 +194,7 @@ public:
     //void Add(VerticalFlowText*);
     //
 
-    void bombExplosionEvent(Container*, bool);
+    void bombExplosionEvent(control::Container*, bool);
     void starSparkEvent(float) const;
 
     void findRenderVisibleEntities_c(Player*);
@@ -218,7 +219,7 @@ public:
     std::vector<control::Star*> stars() const { return m_stars; }
     std::vector<control::Asteroid*> asteroids() const { return m_asteroids; }
     std::vector<control::Vehicle*> vehicles() const { return m_vehicles; }
-    std::vector<Container*> containers() const { return m_containers; }
+    std::vector<control::Container*> containers() const { return m_containers; }
 
     model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
     model::Planet* randomInhabitedPlanet() const;
@@ -251,7 +252,7 @@ private:
     std::vector<control::Star*> m_stars;
     std::vector<control::Planet*> m_planets;
     std::vector<control::Asteroid*> m_asteroids;
-    std::vector<Container*> m_containers;
+    std::vector<control::Container*> m_containers;
     std::vector<RocketBullet*> m_bullets;
     std::vector<control::BlackHole*> m_blackholes;
     std::vector<control::Vehicle*> m_vehicles;

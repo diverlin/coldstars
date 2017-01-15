@@ -39,33 +39,33 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container*
+model::Container*
 ContainerBuilder::getNew()
 {
     const auto& descriptor = core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
     return getNew(descriptor);
 }
 
-Container*
+model::Container*
 ContainerBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::Container(data));
 }
 
-Container*
+model::Container*
 ContainerBuilder::getNew(const descriptor::BaseOLD& descriptor)
 {
-    Container* container = __getNewTemplate();
+    model::Container* container = __getNewTemplate();
     __createInternals(container, descriptor);
     return container;
 }
 
-Container*
+model::Container*
 ContainerBuilder::__getNewTemplate()
 {
-    Container* container = new Container;
+    model::Container* container = new model::Container;
     assert(container);
-   core::global::get().entityManager().reg(container);
+    core::global::get().entityManager().reg(container);
     return container;
 }
 
@@ -74,7 +74,7 @@ ContainerBuilder::__getNewTemplate()
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, textureOb, item);
-        
+
 //    return container;
 //}
 
@@ -97,25 +97,25 @@ ContainerBuilder::__getNewTemplate()
 //    assert(container);
 //    return container;
 //}
-           
+
 //void ContainerBuilder::createInternals(Container* container, jeti::control::TextureOb* textureOb, BaseItem* item) const
 //{
 //    LifeData data_life;
 //    data_life.armor = 1;
 //    data_life.dying_time = 30;
-    
+
 //    container->setLifeData(data_life);
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
- 
+
 //    float delta_angle = 0.001*meti::getRandInt(20, 60);
 //    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
 //    //alpitodorender container->SetAnimationRotation(animation_rotation);
-    
+
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
-    
+
 //    ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
-    
+
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);
 //}
@@ -143,21 +143,22 @@ ContainerBuilder::__getNewTemplate()
 //}
 
 void
-ContainerBuilder::__createInternals(Container* container, const descriptor::BaseOLD& descriptor)
+ContainerBuilder::__createInternals(model::Container* container, const descriptor::BaseOLD& descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;
     data_life.dying_time = 30;
 
-    container->setLifeData(data_life);
+    assert(false);
+//    container->setLifeData(data_life);
 
-    ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
-    container->bindItemSlot(item_slot);
+//    ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
+//    container->bindItemSlot(item_slot);
 
-//    if (descriptor.child() >= 0) {
-//        item::Base* item = static_cast<item::Base*>(core::global::get().entityManager().get(descriptor.child()));
-//        item_slot->insertItem(item);
-//    }
+    //    if (descriptor.child() >= 0) {
+    //        item::Base* item = static_cast<item::Base*>(core::global::get().entityManager().get(descriptor.child()));
+    //        item_slot->insertItem(item);
+    //    }
 }
 
 

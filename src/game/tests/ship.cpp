@@ -54,10 +54,11 @@ TEST(ship, drop_item_to_space)
     EXPECT_TRUE(ship->dropItemToSpace(type::entity::DRIVE_SLOT_ID));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
-    Container* container = starsystem->containers()[0];
-    EXPECT_EQ(container->position(), pos);
-    EXPECT_EQ(container->place(), type::place::KOSMOS);
-    EXPECT_EQ(container->itemSlot()->item(), drive);
+    assert(false);
+//    Container* container = starsystem->containers()[0];
+//    EXPECT_EQ(container->position(), pos);
+//    EXPECT_EQ(container->place(), type::place::KOSMOS);
+//    EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
 TEST(ship, base_ship_shoot)

@@ -34,9 +34,13 @@
 class VehicleSlot;
 class Land; 
 class GoodsPack;
+
+namespace model {
 class Container;
+} // namespace model
 
 namespace control {
+class Container;
 class Npc;
 } //namespace control
 
@@ -209,7 +213,7 @@ public:
     [[deprecated("move to ext")]]
     bool buyItem(item::Base*);
 
-    bool unpackContainerItemToCargoSlot(Container*);
+    bool unpackContainerItemToCargoSlot(control::Container*);
 
     int freeSpace() const { return model()->properties().free_space; }
     int space() const { return descriptor().space; }
@@ -366,7 +370,7 @@ private:
 //    void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(item::Base*);
 
-    Container* __wrapItemToContainer(item::Base*);
+    model::Container* __wrapItemToContainer(item::Base*);
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 

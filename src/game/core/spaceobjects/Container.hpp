@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <core/spaceobjects/SpaceObject.hpp>
 
-#include <spaceobjects/SpaceObject.hpp>
+#include <ceti/type/IdType.hpp>
 
 class ItemSlot;
 
@@ -29,17 +29,47 @@ namespace item {
 class Base;
 } // namespace item
 
-//namespace jeti {
-//class Renderer;
-//}
+namespace model {
+
+class Container : public SpaceObject {
+
+public:
+    Container();
+    ~Container() = default;
+    Container(const std::string& data);
+    std::string data() const;
+
+    void setTargetPos(const glm::vec3& target_pos, float velocity)
+    { m_targetPos = target_pos; m_velocity = velocity; }
+
+private:
+    int_t m_itemSlot = NONE;
+    meti::vec3 m_targetPos;
+    float m_velocity = 0.0f;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & m_itemSlot;
+        ar & m_targetPos;
+        ar & m_velocity;
+    }
+};
+
+} // namespace model
+
+
+namespace control {
 
 class Container : public SpaceObject
 {
 public:
-    Container(int_t id = NONE);
+    Container(model::Container*);
     virtual ~Container();
 
-    void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
     void bindItemSlot(ItemSlot*);
 
     ItemSlot* const itemSlot() const { return m_itemSlot; }
@@ -55,23 +85,58 @@ public:
 
     //        void Render(const jeti::Renderer&);
 
-    virtual void Save(boost::property_tree::ptree&) const override final;
-    virtual void Load(const boost::property_tree::ptree&) override final;
-    virtual void Resolve() override final;
+    model::Container* model() const { return m_model_container; }
 
 private:
+    model::Container* m_model_container = nullptr;
     ItemSlot* m_itemSlot = nullptr;
-
-    glm::vec3 m_targetPos;
-    float m_velocity = 0.0f;
 
     //        virtual void UpdateInfo() override final;
 
     virtual void putChildrenToGarbage() const override final;
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
 };
+
+} // namespace control
+
+//class Container : public SpaceObject
+//{
+//public:
+//    Container(int_t id = NONE);
+//    virtual ~Container();
+
+//    void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
+//    void bindItemSlot(ItemSlot*);
+
+//    ItemSlot* const itemSlot() const { return m_itemSlot; }
+//    bool insertItem(item::Base*);
+
+//    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
+
+//    virtual void _postDeathUniqueEvent(bool) override final;
+
+//    void updateInSpace(int, bool);
+
+//    void hit(int damage) override final;
+
+//    //        void Render(const jeti::Renderer&);
+
+//    virtual void Save(boost::property_tree::ptree&) const override final;
+//    virtual void Load(const boost::property_tree::ptree&) override final;
+//    virtual void Resolve() override final;
+
+//private:
+//    ItemSlot* m_itemSlot = nullptr;
+
+//    glm::vec3 m_targetPos;
+//    float m_velocity = 0.0f;
+
+//    //        virtual void UpdateInfo() override final;
+
+//    virtual void putChildrenToGarbage() const override final;
+
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+//};
 
 
