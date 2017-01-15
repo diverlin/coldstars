@@ -25,6 +25,8 @@ namespace model {
 class BlackHole;
 } // namespace model
 
+namespace builder {
+
 class BlackHoleBuilder
 {
 public:
@@ -37,3 +39,5 @@ public:
 private:
     void createInternals(model::BlackHole*) const;
 }; 
+
+} // namespace builder

@@ -24,6 +24,7 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace builder {
 
 BlackHoleBuilder::BlackHoleBuilder()
 {}
@@ -79,7 +80,7 @@ BlackHoleBuilder::createInternals(model::BlackHole* blackhole) const
     //blackhole->SetRenderAnimation(animation_program);
 }
 
-
+} // namespace builder
 
 
 

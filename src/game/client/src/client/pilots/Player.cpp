@@ -502,27 +502,28 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     { 
-        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->position(); // shortcut
-        float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
-        if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
-        { 
-            m_cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
+        assert(false);
+//        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->position(); // shortcut
+//        float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
+//        if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
        
-//            if (data_mouse.left_click == true)
-//            {
-//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-//                {
-//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
-//                }
-//                else
-//                {
-//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                    npc->vehicle()->GetComplexDrive().UpdatePath();
-//                }
-//            }
+////            if (data_mouse.left_click == true)
+////            {
+////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+////                {
+////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
+////                }
+////                else
+////                {
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                    npc->vehicle()->GetComplexDrive().UpdatePath();
+////                }
+////            }
                 
-            return true; 
-        }
+//            return true;
+//        }
     }
         
     return false;

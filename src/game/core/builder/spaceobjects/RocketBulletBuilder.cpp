@@ -17,9 +17,11 @@
 */
 
 #include "RocketBulletBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/RocketBullet.hpp"
 
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/RocketBullet.hpp>
+
+namespace builder {
 
 RocketBulletBuilder::RocketBulletBuilder()
 {}
@@ -27,36 +29,41 @@ RocketBulletBuilder::RocketBulletBuilder()
 RocketBulletBuilder::~RocketBulletBuilder()
 {}
 
-RocketBullet* RocketBulletBuilder::createTemplate(int_t id) const
+model::RocketBullet*
+RocketBulletBuilder::createTemplate(int_t id) const
 {
-    RocketBullet* rocket_bullet = new RocketBullet(id);
+    model::RocketBullet* rocket_bullet = new model::RocketBullet;
     assert(rocket_bullet);
 
-   core::global::get().entityManager().reg(rocket_bullet);
+    core::global::get().entityManager().reg(rocket_bullet);
     
     return rocket_bullet;
 }
 
-RocketBullet* RocketBulletBuilder::create(const BulletData& data_bullet) const
+model::RocketBullet*
+RocketBulletBuilder::create(const BulletData& data_bullet) const
 {
-    RocketBullet* rocket_bullet = createTemplate();
+    model::RocketBullet* rocket_bullet = createTemplate();
     createInternals(rocket_bullet, data_bullet);
-        
+
     return rocket_bullet;
 }
 
-void RocketBulletBuilder::createInternals(RocketBullet* rocket_bullet, const BulletData& data_bullet) const
+void RocketBulletBuilder::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 
-    LifeData data_life;    
-    data_life.armor = data_bullet.armor;        
+    LifeData data_life;
+    data_life.armor = data_bullet.armor;
 
-    rocket_bullet->SetBulletData(data_bullet);
+    rocket_bullet->setBulletData(data_bullet);
     
     rocket_bullet->setLifeData(data_life);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET_ID);
     //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->size());
 
-    rocket_bullet->CreateDriveComplexTextureDependedStuff();       
+    assert(false);
+    //rocket_bullet->CreateDriveComplexTextureDependedStuff();
 }
+
+} // namespace builder

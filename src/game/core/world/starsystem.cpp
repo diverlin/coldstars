@@ -115,8 +115,8 @@ void Starsystem::putChildrenToGarbage() const
     for(unsigned int i=0; i<m_stars.size(); i++)      { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
     for(unsigned int i=0; i<m_asteroids.size(); i++)  { core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
-    for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
     assert(false);
+    //for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
     //for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
     //for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
     //for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
@@ -211,14 +211,17 @@ void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& positio
     //__addVehicleCommon(spacestation, position, dir);
 }
 
-void Starsystem::add(RocketBullet* rocket, const glm::vec3& position, const glm::vec3& dir)
+void Starsystem::add(model::RocketBullet* model, const glm::vec3& position, const glm::vec3& dir)
 {
-    rocket->setPlaceTypeId(type::place::KOSMOS);
-    rocket->setStarSystem(this);
+    model->setPlace(type::place::KOSMOS);
+    model->setStarSystem(id());
 
-    rocket->setPosition(position);
-    rocket->setDirection(dir);
+    model->setPosition(position);
+    model->setDirection(dir);
     //rocket->updateOrientation();
+
+    control::RocketBullet* rocket = new control::RocketBullet(model);
+    //rocket->initialize();
 
     m_bullets.push_back(rocket);
 }
@@ -657,7 +660,7 @@ void Starsystem::__rocketCollision_s(bool show_effect)
     bool collide = false;
     for (unsigned int ri = 0; ri < m_bullets.size(); ri++)
     {
-        if (m_bullets[ri]->isAlive() == true)
+        if (m_bullets[ri]->model()->isAlive())
         {
             // vehicle
             if (collide == false)
@@ -966,11 +969,11 @@ void Starsystem::__manageDeadObjects_s()
 //        }
     }
 
-    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
-        if ((*it)->isReadyForGarbage() == true) {
-            core::global::get().entityManager().addToGarbage(*it);
-            it = m_bullets.erase(it);
-        }
+    for(std::vector<control::RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
+//        if ((*it)->isReadyForGarbage() == true) {
+//            core::global::get().entityManager().addToGarbage(*it);
+//            it = m_bullets.erase(it);
+//        }
     }
 
     //effects

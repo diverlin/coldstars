@@ -40,6 +40,8 @@ namespace model {
 class Container;
 }
 
+namespace builder {
+
 class ContainerBuilder
 {
 public:
@@ -59,3 +61,5 @@ private:
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 
+
+} // namespace builder

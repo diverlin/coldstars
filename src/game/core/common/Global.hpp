@@ -85,14 +85,14 @@ namespace builder {
 class Asteroid;
 class SatelliteBuilder;
 class SpaceStationBuilder;
+class RocketBulletBuilder;
+class ContainerBuilder;
+class BlackHoleBuilder;
 
 } // namespace builder
 
-class BlackHoleBuilder;
-class ContainerBuilder;
-class PlanetBuilder;
-class StarBuilder;
-class RocketBulletBuilder;
+//class PlanetBuilder;
+//class StarBuilder;
 class ShipBuilder;
 
 class GalaxyBuilder;
@@ -167,11 +167,11 @@ public:
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
 //    builder::Asteroid& asteroidBuilder() { return *m_asteroidBuilder; }
-    BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
-    ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
+    builder::BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
+    builder::ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
 //    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
 //    StarBuilder& starBuilder() { return *m_starBuilder; }
-    RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
+    builder::RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
     builder::SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
     builder::SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
@@ -244,11 +244,11 @@ private:
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
 //    builder::Asteroid* m_asteroidBuilder = nullptr;
-    BlackHoleBuilder* m_blackHoleBuilder = nullptr;
-    ContainerBuilder* m_containerBuilder = nullptr;
+    builder::BlackHoleBuilder* m_blackHoleBuilder = nullptr;
+    builder::ContainerBuilder* m_containerBuilder = nullptr;
 //    PlanetBuilder* m_planetBuilder = nullptr;
 //    StarBuilder* m_starBuilder = nullptr;
-    RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
+    builder::RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
     builder::SatelliteBuilder* m_satelliteBuilder = nullptr;
     //ShipBuilder* m_shipBuilder = nullptr;
     builder::SpaceStationBuilder* m_spaceStationBuilder = nullptr;

@@ -21,20 +21,25 @@
 
 #include <ceti/type/IdType.hpp>
 
-
+namespace model {
 class RocketBullet;
+} // namespace model
+
 class BulletData;
 
+namespace builder {
 
 class RocketBulletBuilder
 {
-    public:
-        RocketBulletBuilder();
-        ~RocketBulletBuilder();
-        
-        RocketBullet* createTemplate(int_t id = NONE) const;
-        RocketBullet* create(const BulletData&) const;
-                   
-    private:
-        void createInternals(RocketBullet*, const BulletData&) const;
+public:
+    RocketBulletBuilder();
+    ~RocketBulletBuilder();
+
+    model::RocketBullet* createTemplate(int_t id = NONE) const;
+    model::RocketBullet* create(const BulletData&) const;
+
+private:
+    void createInternals(model::RocketBullet*, const BulletData&) const;
 }; 
+
+} // namespace builder

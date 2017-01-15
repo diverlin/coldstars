@@ -68,7 +68,7 @@ void MessageManager::process(const Message& message)
     switch(message.type_id) {
     /** CREATE */
     case TELEGRAM::CREATE_STARSYSTEM: {
-       core::global::get().starsystemBuilder().create(message.data);
+        core::global::get().starsystemBuilder().create(message.data);
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
@@ -76,59 +76,59 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
-       core::global::get().bombBuilder().getNew(message.data);
+        core::global::get().bombBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_CONTAINER: {
-       core::global::get().containerBuilder().getNew(message.data);
+        core::global::get().containerBuilder().getNew(message.data);
         break;
     }
 
         // items
     case TELEGRAM::CREATE_BAK: {
-       core::global::get().bakBuilder().getNew(message.data);
+        core::global::get().bakBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {
-       core::global::get().driveBuilder().getNew(message.data);
+        core::global::get().driveBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DROID: {
-       core::global::get().droidBuilder().getNew(message.data);
+        core::global::get().droidBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {
-       core::global::get().grappleBuilder().getNew(message.data);
+        core::global::get().grappleBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_SCANER: {
-       core::global::get().scanerBuilder().getNew(message.data);
+        core::global::get().scanerBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_RADAR: {
-       core::global::get().radarBuilder().getNew(message.data);
+        core::global::get().radarBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_PROTECTOR: {
-       core::global::get().protectorBuilder().getNew(message.data);
+        core::global::get().protectorBuilder().getNew(message.data);
         break;
     }
 
-    /** STARSYSTEM ADD */
+        /** STARSYSTEM ADD */
     case TELEGRAM::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data);
         Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
         assert(false);
-//        model::Ship* ship = core::global::get().entityManager().getEntity<model::Ship*>(descriptor.object);
-//        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
+        //        model::Ship* ship = core::global::get().entityManager().getEntity<model::Ship*>(descriptor.object);
+        //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
         break;
     }
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data);
         Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
         assert(false);
-//        model::Container* container = core::global::get().entityManager().getEntity<model::Container*>(descriptor.object);
-//        starsystem->add(container, descriptor.position);
+        //        model::Container* container = core::global::get().entityManager().getEntity<model::Container*>(descriptor.object);
+        //        starsystem->add(container, descriptor.position);
         break;
     }
         /** OTHER */
