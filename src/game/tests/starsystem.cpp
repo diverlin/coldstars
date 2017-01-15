@@ -37,7 +37,7 @@ TEST(starsystem, add_objects)
 
     model::Star* star = builder::Star::getNew();
     model::Planet* planet = builder::Planet::getNew();
-    model::Ship* ship = builder::ShipBuilder::getNew();
+    model::Ship* ship = builder::Ship::getNew();
 
     /* pre-add check */
     EXPECT_EQ(starsystem->stars().size(), 0);

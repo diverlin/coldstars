@@ -36,11 +36,11 @@ class Ship;
 
 namespace builder {
 
-class ShipBuilder : public BaseVehicleBuilder
+class Ship : public BaseVehicleBuilder
 {
 public:
-    ShipBuilder();
-    ~ShipBuilder();
+    Ship();
+    ~Ship();
 
     static model::Ship* getNew(bool full_equiped = false);
     static model::Ship* getNew(const descriptor::BaseOLD&);
