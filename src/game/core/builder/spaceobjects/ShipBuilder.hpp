@@ -34,7 +34,7 @@ class Ship;
 
 namespace builder {
 
-class Ship : public BaseVehicleBuilder
+class Ship : public BaseVehicle
 {
 public:
     Ship();
