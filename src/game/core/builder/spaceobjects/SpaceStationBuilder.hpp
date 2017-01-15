@@ -43,11 +43,11 @@ const int MASS_MAX = 2000;
 
 namespace builder {
 
-class SpaceStationBuilder : public BaseVehicleBuilder
+class SpaceStation : public BaseVehicleBuilder
 {
 public:
-    SpaceStationBuilder();
-    ~SpaceStationBuilder();
+    SpaceStation();
+    ~SpaceStation();
 
     model::SpaceStation* createTemplate(int_t id = NONE) const;
     model::SpaceStation* create() const;

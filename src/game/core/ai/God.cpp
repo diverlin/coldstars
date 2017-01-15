@@ -309,7 +309,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_rac
         }
         // VERY UGLY LOGIC END
 
-        model::Ship* new_ship = builder::ShipBuilder::getNew();
+        model::Ship* new_ship = builder::Ship::getNew();
         assert(false);
         //builder::ShipBuilder::equip(new_ship); // improove
 

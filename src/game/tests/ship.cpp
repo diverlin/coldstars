@@ -36,7 +36,7 @@ TEST(ship, drop_item_to_space)
 {
     /* create objects */
     Starsystem* starsystem = StarsystemBuilder::create();
-    control::Ship* ship = new control::Ship(builder::ShipBuilder::getNew());
+    control::Ship* ship = new control::Ship(builder::Ship::getNew());
 
     /* equip ship */
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
@@ -65,8 +65,8 @@ TEST(ship, base_ship_shoot)
 {
     /* create objects */
     Starsystem* starsystem = StarsystemBuilder::create();
-    model::Ship* model_ship1 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
-    model::Ship* model_ship2 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
+    model::Ship* model_ship1 = builder::Ship::getNew(/*full_equiped=*/true);
+    model::Ship* model_ship2 = builder::Ship::getNew(/*full_equiped=*/true);
 
     control::Ship* ship1 = new control::Ship(model_ship1);
     control::Ship* ship2 = new control::Ship(model_ship2);
@@ -98,7 +98,7 @@ TEST(ship, base_ship_shoot)
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    model::Ship* model1 = builder::ShipBuilder::getNew(/*full_equiped=*/true);
+    model::Ship* model1 = builder::Ship::getNew(/*full_equiped=*/true);
     control::Ship* ship1 = new control::Ship(model1);
 
     assert(false);

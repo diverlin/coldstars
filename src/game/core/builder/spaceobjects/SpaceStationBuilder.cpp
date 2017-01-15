@@ -28,13 +28,13 @@
 
 namespace builder {
 
-SpaceStationBuilder::SpaceStationBuilder()
+SpaceStation::SpaceStation()
 {}
 
-SpaceStationBuilder::~SpaceStationBuilder() {}
+SpaceStation::~SpaceStation() {}
 
 model::SpaceStation*
-SpaceStationBuilder::createTemplate(int_t id) const
+SpaceStation::createTemplate(int_t id) const
 {           
     model::SpaceStation* spacestation = new model::SpaceStation;
     assert(spacestation);
@@ -45,7 +45,7 @@ SpaceStationBuilder::createTemplate(int_t id) const
 }
 
 model::SpaceStation*
-SpaceStationBuilder::create() const
+SpaceStation::create() const
 {
     model::SpaceStation* spacestation = createTemplate();
     createInternals(spacestation);
@@ -54,7 +54,7 @@ SpaceStationBuilder::create() const
 }
 
 void
-SpaceStationBuilder::createInternals(model::SpaceStation* spacestation) const
+SpaceStation::createInternals(model::SpaceStation* spacestation) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;
