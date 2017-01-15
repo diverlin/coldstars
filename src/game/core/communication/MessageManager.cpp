@@ -126,8 +126,9 @@ void MessageManager::process(const Message& message)
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data);
         Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
-        Container* container = core::global::get().entityManager().getEntity<Container*>(descriptor.object);
-        starsystem->add(container, descriptor.position);
+        assert(false);
+//        model::Container* container = core::global::get().entityManager().getEntity<model::Container*>(descriptor.object);
+//        starsystem->add(container, descriptor.position);
         break;
     }
         /** OTHER */

@@ -446,7 +446,8 @@ ItemSlot* const Vehicle::_cargoSlotWithGoods(type::entity requested_goods_subtyp
     return nullptr;
 }
 
-bool Vehicle::unpackContainerItemToCargoSlot(Container* container)
+bool
+Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
 {
     if (addItemToCargoSlot(container->itemSlot()->item()) == true)
     {
@@ -1405,12 +1406,13 @@ bool Vehicle::dropItemToSpace(const type::entity& type)
     for (ItemSlot* slot: m_slots) {
         if (slot->subtype() == type && slot->item()) {
             item::Base* item = slot->takeItem();
-            Container* container = __wrapItemToContainer(item);
-            //    float impulse_strength = 0.5;
-            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-            //    container->addImpulse(impulse_dir, impulse_strength);
+            assert(false);
+//            Container* container = __wrapItemToContainer(item);
+//            //    float impulse_strength = 0.5;
+//            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
+//            //    container->addImpulse(impulse_dir, impulse_strength);
 
-            starsystem()->add(container, position());
+//            starsystem()->add(container, position());
             return true;
         }
     }
@@ -1418,11 +1420,12 @@ bool Vehicle::dropItemToSpace(const type::entity& type)
     return false;
 }
 
-Container*
+model::Container*
 Vehicle::__wrapItemToContainer(item::Base* item)
 {
-    Container* container = ContainerBuilder::getNew();
-    container->insertItem(item);
+    model::Container* container = ContainerBuilder::getNew();
+    assert(false);
+    //container->insertItem(item);
 
     return container;
 }

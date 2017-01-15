@@ -23,8 +23,6 @@
 
 #include <ceti/type/IdType.hpp>
 
-class Container;
-
 namespace descriptor {
 //class Container;
 class BaseOLD;
@@ -38,22 +36,26 @@ namespace item {
 class Base;
 } // namespace item
 
+namespace model {
+class Container;
+}
+
 class ContainerBuilder
 {
 public:
     ContainerBuilder();
     ~ContainerBuilder();
 
-    static Container* getNew();
-    static Container* getNew(const std::string& data);
-    static Container* getNew(const descriptor::BaseOLD&);
+    static model::Container* getNew();
+    static model::Container* getNew(const std::string& data);
+    static model::Container* getNew(const descriptor::BaseOLD&);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::BaseItem*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
-    static Container* __getNewTemplate();
-    static void __createInternals(Container*, const descriptor::BaseOLD&);
+    static model::Container* __getNewTemplate();
+    static void __createInternals(model::Container*, const descriptor::BaseOLD&);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

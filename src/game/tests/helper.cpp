@@ -40,15 +40,17 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
-Container* getNewContainer(int_t child_id)
+model::Container*
+getNewContainer(int_t child_id)
 {
     auto descriptor = descriptor::Container(child_id);
-   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
+    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-    Container* container = core::global::get().entityManager().getEntity<Container*>(descriptor.id());
-    assert(container->itemSlot());
-    assert(container->itemSlot()->item());
-    assert(container->itemSlot()->item()->id() == child_id);
-    return container;
+    assert(false);
+//    model::Container* container = core::global::get().entityManager().getEntity<Container*>(descriptor.id());
+//    assert(container->itemSlot());
+//    assert(container->itemSlot()->item());
+//    assert(container->itemSlot()->item()->id() == child_id);
+//    return container;
 }
 

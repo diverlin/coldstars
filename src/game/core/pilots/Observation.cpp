@@ -162,7 +162,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
 
 void Observation::FindVisibleContainersInSpaceInStatic()
 {
-    const std::vector<Container*>& container_vec = npc_owner->starsystem()->m_containers;
+    const std::vector<control::Container*>& container_vec = npc_owner->starsystem()->m_containers;
     
     see.CONTAINER       = false;
     see.pickable_CONTAINER  = false;

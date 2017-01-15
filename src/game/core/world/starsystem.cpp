@@ -115,9 +115,9 @@ void Starsystem::putChildrenToGarbage() const
     for(unsigned int i=0; i<m_stars.size(); i++)      { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
     for(unsigned int i=0; i<m_asteroids.size(); i++)  { core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
-    for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
     for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
     assert(false);
+    //for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
     //for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
     //for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
 }      
@@ -267,21 +267,23 @@ void Starsystem::add(model::Asteroid* model, const model::SpaceObject* parent, i
     m_asteroids.push_back(asteroid);
 }
 
-void Starsystem::add(Container* container, const glm::vec3& center)
+void Starsystem::add(model::Container* model, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
 
     for (auto _container: m_containers) {
-        if (_container->id() == container->id()) {
+        if (_container->model()->id() == model->id()) {
             //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
             exit(1);
         }
     }
-    
-    container->setStarSystem(this);
-    container->setPlaceTypeId(type::place::KOSMOS);
-    container->setPosition(center);
-    
+
+    model->setStarSystem(this->id());
+    model->setPlace(type::place::KOSMOS);
+    model->setPosition(center);
+
+    control::Container* container = new control::Container(model);
+
     m_containers.push_back(container);
 }
 
@@ -956,11 +958,12 @@ void Starsystem::__manageDeadObjects_s()
     //        }
     //    }
 
-    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
-        if ((*it)->isReadyForGarbage() == true) {
-            core::global::get().entityManager().addToGarbage(*it);
-            it = m_containers.erase(it);
-        }
+    for(std::vector<control::Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
+        assert(false);
+//        if ((*it)->isReadyForGarbage() == true) {
+//            core::global::get().entityManager().addToGarbage(*it);
+//            it = m_containers.erase(it);
+//        }
     }
 
     for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
@@ -1017,7 +1020,7 @@ void Starsystem::__manageDeadObjects_s()
 //}
 //}        
 
-void Starsystem::bombExplosionEvent(Container* container, bool show_effect)
+void Starsystem::bombExplosionEvent(control::Container* container, bool show_effect)
 {
     float radius = container->itemSlot()->item()->radius();
     float damage = container->itemSlot()->item()->damage();

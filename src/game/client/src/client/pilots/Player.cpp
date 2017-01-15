@@ -532,37 +532,38 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     { 
-        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->position(); // shortcut
-        float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
-        if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
-        {   
-            m_cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
+        assert(false);
+//        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->position(); // shortcut
+//        float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
+//        if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
                             
-            if (data_mouse.left_click == true)
-            {                                  
-                //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
-            }
+//            if (data_mouse.left_click == true)
+//            {
+//                //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
+//            }
             
-            if (data_mouse.right_click == true)
-            {
-//                if (npc->vehicle()->properties().grab_radius > 0)
-//                {
-//                    if (npc->vehicle()->grappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
-//                    {
-//                        if (npc->vehicle()->grappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
-//                        {
-//                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
-//                        }
-//                        else
-//                        {
-//                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
-//                        }
-//                    }
-//                }
-            }
+//            if (data_mouse.right_click == true)
+//            {
+////                if (npc->vehicle()->properties().grab_radius > 0)
+////                {
+////                    if (npc->vehicle()->grappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
+////                    {
+////                        if (npc->vehicle()->grappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
+////                        {
+////                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+////                        }
+////                        else
+////                        {
+////                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
+////                        }
+////                    }
+////                }
+//            }
                 
-            return true; 
-        }
+//            return true;
+//        }
             
     }
         

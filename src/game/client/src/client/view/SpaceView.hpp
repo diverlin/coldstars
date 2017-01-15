@@ -52,7 +52,7 @@ namespace view {
 class Star;
 class Asteroid;
 class Planet;
-//class Container;
+class Container;
 } // namespace view
 
 
