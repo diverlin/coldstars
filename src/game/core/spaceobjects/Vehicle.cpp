@@ -1423,7 +1423,7 @@ bool Vehicle::dropItemToSpace(const type::entity& type)
 model::Container*
 Vehicle::__wrapItemToContainer(item::Base* item)
 {
-    model::Container* container = builder::ContainerBuilder::getNew();
+    model::Container* container = builder::Container::getNew();
     assert(false);
     //container->insertItem(item);
 

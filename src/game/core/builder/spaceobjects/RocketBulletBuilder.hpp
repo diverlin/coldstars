@@ -29,11 +29,11 @@ class BulletData;
 
 namespace builder {
 
-class RocketBulletBuilder
+class Rocket
 {
 public:
-    RocketBulletBuilder();
-    ~RocketBulletBuilder();
+    Rocket();
+    ~Rocket();
 
     model::RocketBullet* createTemplate(int_t id = NONE) const;
     model::RocketBullet* create(const BulletData&) const;

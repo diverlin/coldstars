@@ -23,14 +23,14 @@
 
 namespace builder {
 
-RocketBulletBuilder::RocketBulletBuilder()
+Rocket::Rocket()
 {}
 
-RocketBulletBuilder::~RocketBulletBuilder()
+Rocket::~Rocket()
 {}
 
 model::RocketBullet*
-RocketBulletBuilder::createTemplate(int_t id) const
+Rocket::createTemplate(int_t id) const
 {
     model::RocketBullet* rocket_bullet = new model::RocketBullet;
     assert(rocket_bullet);
@@ -41,7 +41,7 @@ RocketBulletBuilder::createTemplate(int_t id) const
 }
 
 model::RocketBullet*
-RocketBulletBuilder::create(const BulletData& data_bullet) const
+Rocket::create(const BulletData& data_bullet) const
 {
     model::RocketBullet* rocket_bullet = createTemplate();
     createInternals(rocket_bullet, data_bullet);
@@ -49,7 +49,7 @@ RocketBulletBuilder::create(const BulletData& data_bullet) const
     return rocket_bullet;
 }
 
-void RocketBulletBuilder::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
+void Rocket::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 

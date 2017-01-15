@@ -32,8 +32,6 @@ class Ship;
 
 } // namespace model
 
-//class VehicleDescriptor;
-
 namespace builder {
 
 class Ship : public BaseVehicleBuilder
