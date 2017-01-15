@@ -85,5 +85,6 @@ void MicroScenarioJump::exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioJump::GetDescription(Npc* npc) const
 {
-    return "JUMP to ss_id = " + std::to_string( npc->stateMachine().microTaskManager().target()->id());
+    assert(false);
+    //return "JUMP to ss_id = " + std::to_string( npc->stateMachine().microTaskManager().target()->id());
 }

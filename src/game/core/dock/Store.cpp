@@ -139,8 +139,9 @@ void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 //    VehicleSlot* npc_vehicle_slot = npc->vehicle()->parentVehicleSlot();
 //    npc->vehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
 //    npc_vehicle_slot->vehicle()->bindNpc(npc);
-        
-    npc->withdrawCredits(price);      
+
+    assert(false);
+//    npc->withdrawCredits(price);
 }
                 
 

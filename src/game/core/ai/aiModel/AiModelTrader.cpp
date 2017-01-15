@@ -30,11 +30,11 @@ AiModelTrader::~AiModelTrader()
 
 void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
-    if (npc->stateMachine().macroTaskManager().scenario() == nullptr)
-        {
-            Task macrotask(type::AISCENARIO::MACRO_GOODSTRADING_ID);
-            npc->stateMachine().setCurrentMacroTask(macrotask);
-        }            
+    assert(false);
+//    if (!npc->stateMachine().macroTaskManager().scenario()) {
+//        Task macrotask(type::AISCENARIO::MACRO_GOODSTRADING_ID);
+//        npc->stateMachine().setCurrentMacroTask(macrotask);
+//    }
 }
 
 std::string AiModelTrader::GetDescription(Npc* npc) const

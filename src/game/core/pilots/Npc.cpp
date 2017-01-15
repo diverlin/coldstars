@@ -44,24 +44,37 @@
 #include "../common/GameDate.hpp" 
 #include <types/RaceTypes.hpp> 
 
-Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
-    :
-      m_raceId(type::race::NONE_ID),
-      m_credits(1000),
-      m_player(nullptr),
-      m_vehicle(nullptr),
-      m_aiModel(nullptr),
-      m_scanTarget(nullptr)
-{ 
-    m_isAlive = true;
-    
-    setId(id);
-    setTypeId(type::entity::NPC_ID);
-    setSubTypeId(subtype_id);
-    setSubSubTypeId(subsubtype_id);
+namespace model {
 
-    m_observation.SetNpcOwner(this);
-    m_stateMachine.setNpc(this);
+Npc::Npc()
+{
+    setType(type::entity::NPC_ID);
+}
+
+Npc::Npc(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Npc::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+namespace control {
+
+Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
+{ 
+    assert(false);
+//    setTypeId(type::entity::NPC_ID);
+//    setSubTypeId(subtype_id);
+//    setSubSubTypeId(subsubtype_id);
+
+//    m_observation.SetNpcOwner(this);
+//    m_stateMachine.setNpc(this);
 }
 
 /* virtual */
@@ -70,9 +83,10 @@ Npc::~Npc()
 
 Starsystem* Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
 
-void Npc::cloneMacroTaskFrom(Npc* npc)
+void Npc::cloneMacroTaskFrom(model::Npc* npc)
 {
-    m_stateMachine.setCurrentMacroTask(npc->stateMachine().macroTaskManager().task());
+    assert(false);
+    //m_stateMachine.setCurrentMacroTask(npc->stateMachine().macroTaskManager().task());
 }
 
 bool Npc::withdrawCredits(unsigned long int amount)
@@ -142,7 +156,7 @@ void Npc::updateInSpaceInStatic()
 
 void Npc::addExpirience(int expirience, bool show_effect)
 {
-    m_skills.addExpirience(expirience);
+    model()->skills().addExpirience(expirience);
     
     if (show_effect == true) {
 //        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->center()), COLOR::COLOR4I_BLUE_LIGHT, 10);
@@ -150,7 +164,7 @@ void Npc::addExpirience(int expirience, bool show_effect)
     }
 }
 
-void Npc::remeberAgressor(Vehicle* agressor)
+void Npc::remeberAgressor(model::Vehicle* agressor)
 {
     assert(false);
 //    for (std::set<AgressorData>::iterator it=m_agressorsData.begin(); it!=m_agressorsData.end(); ++it)
@@ -183,22 +197,23 @@ void Npc::updateInSpace(int time, bool show_effect)
 
 void Npc::__scenarioFireVehicleAgressor()
 {
-    for (unsigned int i=0; i<m_observation.visible_VEHICLE_pair_vec.size(); i++)
-    {
-        for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
-        {
-            assert(false);
-//            if (m_observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
-//            {
-//                m_vehicle->weaponComplex().deactivateWeapons();
+    assert(false);
+//    for (unsigned int i=0; i<m_observation.visible_VEHICLE_pair_vec.size(); i++)
+//    {
+//        for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
+//        {
+//            assert(false);
+////            if (m_observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
+////            {
+////                m_vehicle->weaponComplex().deactivateWeapons();
 
-//                m_vehicle->weaponComplex().activateWeapons();
-//                m_vehicle->weaponComplex().setTarget(m_observation.visible_VEHICLE_pair_vec[i].object);
+////                m_vehicle->weaponComplex().activateWeapons();
+////                m_vehicle->weaponComplex().setTarget(m_observation.visible_VEHICLE_pair_vec[i].object);
 
-//                return;
-//            }
-        }
-    }
+////                return;
+////            }
+//        }
+//    }
 }
 
 void Npc::__scenarioFireAsteroid()
@@ -211,7 +226,7 @@ void Npc::__scenarioFireAsteroid()
 //    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
 }
 
-Planet* Npc::planetForDocking()
+model::Planet* Npc::planetForDocking()
 {
     assert(false);
     //return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
@@ -227,7 +242,7 @@ Starsystem* Npc::closestStarSystem(int requested_condition_id)
 
 
 //// *********** SCANNING ***********
-bool Npc::isAbleToScan(Vehicle* vehicle)
+bool Npc::isAbleToScan(model::Vehicle* vehicle)
 {
     assert(false);
 //    if (this->m_vehicle->id() == vehicle->id())    // selfscan is possible all time
@@ -244,7 +259,7 @@ bool Npc::isAbleToScan(Vehicle* vehicle)
 }
 
 
-void Npc::resetScanTarget() { m_scanTarget = nullptr; }
+void Npc::resetScanTarget() { assert(false); /*m_scanTarget = nullptr;*/ }
 //// *********** SCANNING ***********
 
 
@@ -299,82 +314,82 @@ bool Npc::buyGoods()
     return true;
 }
 
-void Npc::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "npc."+std::to_string(id())+".";
-    Base::SaveData(save_ptree, root);
-    Npc::SaveData(save_ptree, root);
-}        
+//void Npc::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "npc."+std::to_string(id())+".";
+////    Base::SaveData(save_ptree, root);
+////    Npc::SaveData(save_ptree, root);
+//}
 
-void Npc::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-    Npc::LoadData(load_ptree);
-}        
+//void Npc::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Npc::LoadData(load_ptree);
+//}
 
-void Npc::Resolve()
-{
-    Base::ResolveData();
-    Npc::ResolveData();
-}
+//void Npc::Resolve()
+//{
+////    Base::ResolveData();
+////    Npc::ResolveData();
+//}
 
-void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
-{
-//    save_ptree.put(root+"is_alive", m_isAlive);
-//    save_ptree.put(root+"race_id", (int)m_raceId);
-//    save_ptree.put(root+"unresolved.vehicle_id", m_vehicle->id());
-//    save_ptree.put(root+"unresolved.aiModel_id", m_aiModel->typeId());
-//    m_skills.Save(save_ptree, root);
-//    if (m_stateMachine.macroTaskManager().scenario()) {
-//        const std::string child_root = root + "macrotask.";
-//        m_stateMachine.macroTaskManager().task().save(save_ptree, child_root);
-//    }
+//void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    save_ptree.put(root+"is_alive", m_isAlive);
+////    save_ptree.put(root+"race_id", (int)m_raceId);
+////    save_ptree.put(root+"unresolved.vehicle_id", m_vehicle->id());
+////    save_ptree.put(root+"unresolved.aiModel_id", m_aiModel->typeId());
+////    m_skills.Save(save_ptree, root);
+////    if (m_stateMachine.macroTaskManager().scenario()) {
+////        const std::string child_root = root + "macrotask.";
+////        m_stateMachine.macroTaskManager().task().save(save_ptree, child_root);
+////    }
     
-//    if (m_stateMachine.microTaskManager().scenario()) {
-//        const std::string child_root = root + "microtask.";
-//        m_stateMachine.microTaskManager().task().save(save_ptree, child_root);
-//    }
-}
+////    if (m_stateMachine.microTaskManager().scenario()) {
+////        const std::string child_root = root + "microtask.";
+////        m_stateMachine.microTaskManager().task().save(save_ptree, child_root);
+////    }
+//}
 
-void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    m_isAlive = load_ptree.get<bool>("is_alive");
-    m_raceId  = (type::race)load_ptree.get<int>("race_id");
-    data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
-    data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
+//void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+////    m_isAlive = load_ptree.get<bool>("is_alive");
+////    m_raceId  = (type::race)load_ptree.get<int>("race_id");
+////    data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
+////    data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     
-    m_skills.Load(load_ptree.get_child("skill"));
+////    m_skills.Load(load_ptree.get_child("skill"));
 
-    if (load_ptree.get_child_optional("macrotask"))
-    {
-        data_unresolved_npc.macrotask.load(load_ptree.get_child("macrotask"));
-    }
+////    if (load_ptree.get_child_optional("macrotask"))
+////    {
+////        data_unresolved_npc.macrotask.load(load_ptree.get_child("macrotask"));
+////    }
     
-    if (load_ptree.get_child_optional("microtask"))
-    {
-        data_unresolved_npc.microtask.load(load_ptree.get_child("microtask"));
-    }
-}
+////    if (load_ptree.get_child_optional("microtask"))
+////    {
+////        data_unresolved_npc.microtask.load(load_ptree.get_child("microtask"));
+////    }
+//}
 
-void Npc::ResolveData()
-{
-//    applySkillsStrategy();
+//void Npc::ResolveData()
+//{
+////    applySkillsStrategy();
     
-//    ((Vehicle*)core::global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
-//    setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
+////    ((Vehicle*)core::global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
+////    setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
-//    m_skills.Resolve();
+////    m_skills.Resolve();
     
-//    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
-//    {
-//        m_stateMachine.setCurrentMacroTask(data_unresolved_npc.macrotask);
-//    }
+////    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
+////    {
+////        m_stateMachine.setCurrentMacroTask(data_unresolved_npc.macrotask);
+////    }
     
-//    if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
-//    {
-//        m_stateMachine.setCurrentMicroTask(data_unresolved_npc.microtask);
-//    }
-}
+////    if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
+////    {
+////        m_stateMachine.setCurrentMicroTask(data_unresolved_npc.microtask);
+////    }
+//}
 
 void Npc::applySkillsStrategy()
 {           /*
@@ -396,13 +411,17 @@ void Npc::applySkillsStrategy()
     skills.BindStrategy(skills_strategy);     */
 }
 
-std::string Npc::agressorSetString() const
+std::string
+Npc::agressorSetString() const
 {
     std::string str;
-    for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
-    {
-        str += std::to_string(it->npc_id) + ":" + std::to_string(it->counter) + " ";
-    }
+    assert(false);
+//    for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
+//    {
+//        str += std::to_string(it->npc_id) + ":" + std::to_string(it->counter) + " ";
+//    }
     
     return str;
 }
+
+} // namespace control

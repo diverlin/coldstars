@@ -40,6 +40,7 @@ class Asteroid;
 class Satellite;
 class SpaceStation;
 class Ship;
+class Npc;
 } // namespace model
 
 namespace control {
@@ -56,7 +57,6 @@ class Vehicle;
 class Container;
 
 class Player;
-class Npc;
 
 class Sector;
 
@@ -160,8 +160,8 @@ public:
 
     HyperSpace& hyperSpace() { return m_hyperspace; };
 
-    Npc* freeLeaderByRaceId(type::race) const;
-    void createGroupAndShareTask(Npc*, Starsystem*, int) const;
+    model::Npc* freeLeaderByRaceId(type::race) const;
+    void createGroupAndShareTask(model::Npc*, Starsystem*, int) const;
 
     //// TRANSITION
     void add(model::Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));

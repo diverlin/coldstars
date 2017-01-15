@@ -38,82 +38,92 @@ NpcBuilder::NpcBuilder()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, int_t id) const
+model::Npc*
+NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, int_t id) const
 {
-    Npc* npc = new Npc(id, subtype_id, subsubtype_id);
+    model::Npc* npc = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
     assert(npc);
 
-   core::global::get().entityManager().reg(npc);
+    core::global::get().entityManager().reg(npc);
     
     return npc;
 }
 
-Npc* NpcBuilder::create(type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
+model::Npc*
+NpcBuilder::create(type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
 {
-    Npc* npc = createTemplate(subtype_id, subsubtype_id);
+    model::Npc* npc = createTemplate(subtype_id, subsubtype_id);
     createInternals(npc, race_id, subtype_id, subsubtype_id);
     
     return npc;
 }
-            
-void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
+
+void
+NpcBuilder::createInternals(model::Npc* npc, type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
 {        
     //LifeData data_life;
     
     //TextureOb* texOb_face  = TextureCollector::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
-        
-    npc->setRaceId(race_id);
+
+    assert(false);
+//    npc->setRaceId(race_id);
+
     //npc->SetTextureOb(texOb_face);
     //npc->setSubTypeId(subtype_id);
     //npc->setSubSubTypeId(subsubtype_id);
     //npc->setLifeData(data_life);
     
-    npc->applySkillsStrategy();
-        
-       if ((race_id != type::race::R6_ID) and (race_id != type::race::R7_ID))
-       {
+    assert(false);
+//    npc->applySkillsStrategy();
+
+    if ((race_id != type::race::R6_ID) && (race_id != type::race::R7_ID))
+    {
         switch(subtype_id)
         {
-            case type::entity::RANGER_ID:
-               {
-                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));            
-                               
-                break;    
-               }
-                        
-               case type::entity::WARRIOR_ID:
-               {
-                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
-                                
-                break;    
-               }
-                       
-                  case type::entity::TRADER_ID: 
-                  {
-                      npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
-                      
-                      break;
-                  }
-                  
-                        //case ENTITY::DIPLOMAT_ID:     {}
-                  //case ENTITY::PIRAT_ID:     {}
-                        
-                  default: 
-                  {
-                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
-                                        
-                break;    
-               }
-           }
-       }
-       else
-       {
-        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
-       }
-        
-    npc->skills().addExpirience(meti::getRandInt(10000, 100000));
-    while(npc->skills().availablePoints() != 0)
+        case type::entity::RANGER_ID:
+        {
+            assert(false);
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+
+            break;
+        }
+
+        case type::entity::WARRIOR_ID:
+        {
+            assert(false);
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+
+            break;
+        }
+
+        case type::entity::TRADER_ID:
+        {
+            assert(false);
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID));
+
+            break;
+        }
+
+            //case ENTITY::DIPLOMAT_ID:     {}
+            //case ENTITY::PIRAT_ID:     {}
+
+        default:
+        {
+            assert(false);
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+
+            break;
+        }
+        }
+    }
+    else
     {
+        assert(false);
+//        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
+    }
+
+    npc->skills().addExpirience(meti::getRandInt(10000, 100000));
+    while(npc->skills().availablePoints()) {
         npc->skills().manageAccordingToStrategy();
     }
 }

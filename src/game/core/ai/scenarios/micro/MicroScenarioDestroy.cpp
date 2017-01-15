@@ -35,16 +35,15 @@ MicroScenarioDestroy::~MicroScenarioDestroy()
 
 /* virtual */    
 bool MicroScenarioDestroy::Validate(Npc* npc) const
-{    
-    if (npc->stateMachine().microTaskManager().target()->isAlive() == false)
-    {
-        return false;
-    } 
+{
+    assert(false);
+//    if (!npc->stateMachine().microTaskManager().target()->isAlive()) {
+//        return false;
+//    }
     
-    if (npc->starsystem() != npc->stateMachine().microTaskManager().target()->starsystem())
-    {
-         return false;
-    }
+//    if (npc->starsystem() != npc->stateMachine().microTaskManager().target()->starsystem()) {
+//         return false;
+//    }
     
     return true;        
 }
@@ -52,7 +51,8 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 /* virtual */                
 void MicroScenarioDestroy::enter(Npc* npc) const
 {    
-    LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
+    assert(false);
+    //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
 }
 
 /* virtual */
@@ -72,11 +72,13 @@ void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDestroy::exit(Npc* npc) const
 {
-    LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
+    assert(false);
+    //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
 }
 
 /* virtual */
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-    return "DESTROY ob_id=" + std::to_string( npc->stateMachine().microTaskManager().target()->id()) ;
+    assert(false);
+    //return "DESTROY ob_id=" + std::to_string( npc->stateMachine().microTaskManager().target()->id()) ;
 }

@@ -44,62 +44,66 @@ MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation()
 /*virtual*/
 void MacroScenarioStarSystemLiberation::enter(Npc* npc) const
 {    
-    LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
+    assert(false);
+    //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/
 void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 {
-    Starsystem* target_starsystem = npc->stateMachine().macroTaskManager().target()->starsystem();
-    if (npc->starsystem()->id() != target_starsystem->id())
-    {
-        if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_JUMP_ID)
-        {
-            Task microtask(type::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
-            npc->stateMachine().setCurrentMicroTask(microtask);
+    assert(false);
+//    Starsystem* target_starsystem = npc->stateMachine().macroTaskManager().target()->starsystem();
+//    if (npc->starsystem()->id() != target_starsystem->id())
+//    {
+//        if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_JUMP_ID)
+//        {
+//            Task microtask(type::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
+//            npc->stateMachine().setCurrentMicroTask(microtask);
             
-            return;
-        }
-    }
-    else
-    {
-        if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
-        {
-            if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
-            {
-                assert(false);
-//                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
-//                if (target_vehicle != nullptr) {
-//                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
-//                    npc->stateMachine().setCurrentMicroTask(microtask);
+//            return;
+//        }
+//    }
+//    else
+//    {
+//        if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
+//        {
+//            if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
+//            {
+//                assert(false);
+////                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
+////                if (target_vehicle != nullptr) {
+////                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
+////                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
-//                    return;
-//                }
-//                else
-//                {
-//                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID);
-//                    npc->stateMachine().setCurrentMicroTask(microtask);
+////                    return;
+////                }
+////                else
+////                {
+////                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID);
+////                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
-//                    return;
-//                }
-            }
-        }
-        //else
-        //{
-            //npc->GetStateMachine().GetTaskManager().GetTask().SetResult(SUCCESS_ID);
-            //return;
-        //}
-    }        
+////                    return;
+////                }
+//            }
+//        }
+//        //else
+//        //{
+//            //npc->GetStateMachine().GetTaskManager().GetTask().SetResult(SUCCESS_ID);
+//            //return;
+//        //}
+//    }
 }
 
 /*virtual*/
 void MacroScenarioStarSystemLiberation::exit(Npc* npc) const
 {
-    LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
+    assert(false);
+    //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/
 std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* npc) const
 {
-    return "MacroScenarioStarSystemLiberation: ss_id = " + std::to_string(npc->stateMachine().macroTaskManager().target()->id());
+    assert(false);
+    //return "MacroScenarioStarSystemLiberation: ss_id = " + std::to_string(npc->stateMachine().macroTaskManager().target()->id());
 }

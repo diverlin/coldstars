@@ -86,21 +86,17 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 /* virtual override final */
 void GuiVehicle2::UpdateUnique(Player* player)
 {
-    bool need_update = false;
-    if (m_Vehicle != nullptr)        
-    {
-        if (m_Vehicle != player->GetNpc()->vehicle())
-        {
-            need_update = true;
-        }
-    }
-    else
-    {
-        need_update = true;
-    }
+    assert(false);
+//    bool need_update = false;
+//    if (m_Vehicle) {
+//        if (m_Vehicle != player->GetNpc()->vehicle()) {
+//            need_update = true;
+//        }
+//    } else {
+//        need_update = true;
+//    }
     
-    if (need_update)
-    {
-        BindVehicle(player->GetNpc()->vehicle(), 0.6);
-    }
+//    if (need_update) {
+//        BindVehicle(player->GetNpc()->vehicle(), 0.6);
+//    }
 }

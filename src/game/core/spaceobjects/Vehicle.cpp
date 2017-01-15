@@ -100,12 +100,12 @@ namespace control {
 Vehicle::Vehicle(model::Vehicle* model)
     :
       SpaceObject(model)
-      , m_model_vehicle(model)
+    , m_model_vehicle(model)
 {
     assert(false);
-//    model()->weaponComplex()->SetOwnerVehicle(this);
-//    model()->driveComplex().SetOwnerVehicle(this);
-//    model()->protectorComplex().SetOwnerVehicle(this);
+    //    model()->weaponComplex()->SetOwnerVehicle(this);
+    //    model()->driveComplex().SetOwnerVehicle(this);
+    //    model()->protectorComplex().SetOwnerVehicle(this);
 }
 
 /* virtual */
@@ -117,11 +117,12 @@ Vehicle::~Vehicle()
 /* virtual override */
 void Vehicle::putChildrenToGarbage() const
 {
-    m_npc->setAlive(false);
-   core::global::get().entityManager().addToGarbage(m_npc);
+    assert(false);
+//    m_npc->setAlive(false);
+    core::global::get().entityManager().addToGarbage(m_npc);
 
     for(ItemSlot* slot: m_slots) {
-       core::global::get().entityManager().addToGarbage(slot);
+        core::global::get().entityManager().addToGarbage(slot);
     }
 }
 
@@ -184,7 +185,8 @@ GoodsPack* Vehicle::goodsPack() const
 /* virtual override final */
 int Vehicle::givenExpirience() const
 {
-    return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
+    assert(false);
+    //return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
 bool Vehicle::isSlotTypePresent(const type::entity& slot_subtype_id) const
@@ -296,13 +298,13 @@ bool Vehicle::checkManage(const core::Id& ident)
 
     switch(ident.type) {
     case type::entity::EQUIPMENT_ID:    { return _checkInstallEquipment(ident); break; }
-//#ifdef USE_MODULES
-//    case type::entity::MODULE_ID:       { return _checkInstallModule(type); break; }
-//#endif
-//#ifdef USE_ARTEFACTS
-//    case type::entity::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
-//#endif
-//    case type::entity::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
+        //#ifdef USE_MODULES
+        //    case type::entity::MODULE_ID:       { return _checkInstallModule(type); break; }
+        //#endif
+        //#ifdef USE_ARTEFACTS
+        //    case type::entity::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
+        //#endif
+        //    case type::entity::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
     }
     return false;
 }
@@ -560,7 +562,7 @@ bool Vehicle::__mergeIdenticalGoods(item::Base* item)
     return false;
 }
 
-void Vehicle::bindNpc(Npc* owner_npc)
+void Vehicle::bindNpc(control::Npc* owner_npc)
 {
     m_npc = owner_npc;
     assert(false);
@@ -649,8 +651,8 @@ void Vehicle::DockingEvent()
     {
     case type::entity::PLANET_ID:
     {
-//        Planet* planet = ((Planet*)model()->driveComplex().target());
-//        planet->GetLand()->AddVehicle(this);
+        //        Planet* planet = ((Planet*)model()->driveComplex().target());
+        //        planet->GetLand()->AddVehicle(this);
 
         break;
     }
@@ -686,7 +688,7 @@ void Vehicle::LaunchingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::LaunchingEvent");
 
-   /* if (m_parentVehicleSlot != nullptr)
+    /* if (m_parentVehicleSlot != nullptr)
     {
         switch(m_parentVehicleSlot->owner()->typeId())
         {
@@ -833,8 +835,8 @@ void Vehicle::CheckNeedsInStatic()
     }
 
     // check credits
-    if (m_npc->credits() < 1000)    { model()->needs().get_credits = true; }
-    else                                    { model()->needs().get_credits = false; }
+//    if (m_npc->credits() < 1000)    { model()->needs().get_credits = true; }
+//    else                            { model()->needs().get_credits = false; }
 }
 
 
@@ -853,8 +855,9 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     if ( (model()->needs().repair_equipment == true) && (result == true) ) {
         for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
             if (m_equipmentSlots[i]->item()) {
-                if (m_equipmentSlots[i]->item()->isDamaged() == true) {
-                    result = ((Angar*)m_parentVehicleSlot->owner())->RepairItem(m_npc, m_equipmentSlots[i]->item());
+                if (m_equipmentSlots[i]->item()->isDamaged()) {
+                    assert(false);
+                    //result = ((Angar*)m_parentVehicleSlot->owner())->RepairItem(m_npc, m_equipmentSlots[i]->item());
                 }
             }
         }
@@ -865,7 +868,8 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         for (ItemSlot* slot: m_equipmentSlots) {
             if (slot->item()) {
                 if (slot->item()->subtype() == type::entity::ROCKET_EQUIPMENT_ID) {
-                    result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
+                    assert(false);
+                    //result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
                 }
             }
         }
@@ -1650,7 +1654,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 //    m_npc->setAlive(false);
 //   core::global::get().entityManager().addToGarbage(m_npc);
-    
+
 //    for(ItemSlot* slot: m_slots) {
 //       core::global::get().entityManager().addToGarbage(slot);
 //    }
@@ -1765,11 +1769,11 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    if ( (slot->subtype() != type::entity::ARTEFACT_SLOT_ID) and (slot->subtype() != type::entity::CARGO_SLOT_ID) ) {
 //        m_equipmentSlots.push_back(slot);
 //    }
-    
+
 //    if (slot->subtype() == type::entity::ARTEFACT_SLOT_ID) {
 //        m_artefactSlots.push_back(slot);
 //    }
-    
+
 //    if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
 //        m_cargoSlots.push_back(slot);
 //    }
@@ -1865,7 +1869,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //            return slot->swapItem(item->slot());
 //        }
 //    }
-    
+
 //    return false;
 //}
 
@@ -1981,7 +1985,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //        return true;
 //    }
-    
+
 //    return false;
 //}
 
@@ -1993,12 +1997,12 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //            return true;
 //        }
 //    }
-    
+
 //    ItemSlot* slot = freeCargoSlot();
 //    if (slot) {
 //        return slot->insert(item);
 //    }
-    
+
 //    return false;
 //}
 
@@ -2050,12 +2054,12 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //        break;
 //    }
 //    }
-    
+
 //    if (earn_money > 0)
 //    {
 //        _decreaseMass(item_mass);
 //        m_npc->increaseCredits(earn_money);
-        
+
 //        return true;
 //    }
 //    else
@@ -2085,7 +2089,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //        // delete item; dangerrr
 //        return true;
 //    }
-    
+
 //    return false;
 //}
 
@@ -2102,7 +2106,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        return true;
 ////    }
-    
+
 ////    return false;
 //}
 
@@ -2159,9 +2163,9 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::HyperJumpEvent(Starsystem* starsystem)
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
-    
+
 //    m_weaponComplex.deactivateWeapons();
-    
+
 //    m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID;
 //    starsystem->hyperSpace().AddVehicle(this);
 //}
@@ -2213,7 +2217,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::LaunchingEvent()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::LaunchingEvent");
-    
+
 //   /* if (m_parentVehicleSlot != nullptr)
 //    {
 //        switch(m_parentVehicleSlot->owner()->typeId())
@@ -2309,7 +2313,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        //__dropRandomItemToSpace();
 ////    }
-    
+
 ////    if (show_effect == true)
 ////    {
 ////        //        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
@@ -2365,7 +2369,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::ResolveNeedsInKosmoportInStatic()
 //{
 ////    bool result = true;
-    
+
 ////    // buy repair korpus
 ////    if ( (m_needs.repair_korpus == true) and (result == true) )
 ////    {
@@ -2382,7 +2386,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////            }
 ////        }
 ////    }
-    
+
 ////    // buy ammo
 ////    if ( (m_needs.get_ammo == true) && (result == true) ) {
 ////        for (ItemSlot* slot: m_equipmentSlots) {
@@ -2393,7 +2397,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////            }
 ////        }
 ////    }
-    
+
 ////    // tank up
 ////    if ( (m_needs.get_fuel == true) and (result == true) ) {
 ////        result = ((Angar*)m_parentVehicleSlot->owner())->TankUpVehicle(this);
@@ -2422,7 +2426,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_increaseMass(int d_mass)
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
-    
+
 ////    _addMass(d_mass);
 ////    model()->properties().free_space = m_vehicleDescriptor.space - mass();
 ////    _updatePropSpeed(); // as the mass influence speed this action is necessary here
@@ -2431,7 +2435,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_decreaseMass(int d_mass)
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
-    
+
 ////    _addMass(-d_mass);
 ////    model()->properties().free_space = m_vehicleDescriptor.space - mass();
 ////    _updatePropSpeed(); // as the mass influence speed this action is necessary here
@@ -2469,7 +2473,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_updatePropFire()
 //{
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
-    
+
 ////    m_weaponComplex.updateFireAbility();
 
 ////    model()->properties().total_damage = m_weaponComplex.damage();
@@ -2480,10 +2484,10 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_updatePropRadar()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar");
-    
+
 ////    model()->properties().radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
 ////    model()->properties().equipment_radar = false;
-    
+
 ////    if (!m_radarSlot->item())
 ////        return;
 
@@ -2519,7 +2523,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_updatePropProtection()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
-    
+
 ////    model()->properties().protection = m_vehicleDescriptor.protection;
 ////    model()->properties().shield_effect_enabled = false;
 
@@ -2544,7 +2548,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_updatePropRepair()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair");
-    
+
 ////    model()->properties().repair = 0;
 
 ////    if (m_droidSlot->item() != nullptr)
@@ -2559,9 +2563,9 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::increaseArmor(int repair)
 //{
 ////    //LOG("Vehicle("+std::to_string(id())+")::IncreaseArmor");
-    
+
 ////    _dataLife().armor += repair;
-    
+
 ////    if (_dataLife().armor > m_vehicleDescriptor.armor)
 ////    {
 ////        _dataLife().armor = m_vehicleDescriptor.armor;
@@ -2572,7 +2576,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze");
-    
+
 ////    model()->properties().freeze = 0;
 
 ////    if (m_SlotFreezer->item() != nullptr)
@@ -2611,7 +2615,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::_updatePropScan()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan");
-    
+
 ////    model()->properties().scan = 0;
 
 ////    if (m_scanerSlot->item() != nullptr)
@@ -2647,10 +2651,10 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 ////#ifdef USE_ARTEFACTS
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence");
-    
+
 ////    model()->properties().artefact_gravity = 0;
 ////    model()->properties().artefact_protection = 0;
-    
+
 ////    for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
 ////    {
 ////        if (m_SlotArtef_vec[i]->item() != nullptr)
@@ -2674,12 +2678,12 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////            }
 ////        }
 ////    }
-    
+
 ////    if (model()->properties().artefact_gravity > 0)
 ////    {
 ////        UpdatePropertiesSpeed();
 ////    }
-    
+
 ////    if (model()->properties().artefact_protection > 0)
 ////    {
 ////        UpdatePropertiesProtection();
@@ -2772,7 +2776,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        return true;
 ////    }
-    
+
 ////    return false;
 //}
 
@@ -2791,7 +2795,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        return true;
 ////    }
-    
+
 ////    return false;
 //}
 
@@ -2806,13 +2810,13 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        return true;
 ////    }
-    
+
 ////    if (fuelMiss() == 0)
 ////    {
 ////        return true;
 ////    }
-    
-    
+
+
 ////    return false;
 //}
 
@@ -2824,7 +2828,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::lockRandomItem(int locked_turns)
 //{
 ////    std::vector<ItemSlot*> _equiped_slot_vec;
-    
+
 ////    for (unsigned int i=0; i<m_equipmentSlots.size(); i++)
 ////    {
 ////        if (m_equipmentSlots[i]->item() != nullptr)
@@ -2832,7 +2836,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////            _equiped_slot_vec.push_back(m_equipmentSlots[i]);
 ////        }
 ////    }
-    
+
 ////    if (_equiped_slot_vec.size() > 0)
 ////    {
 ////        unsigned int _rand = meti::getRandInt(_equiped_slot_vec.size());
@@ -2844,15 +2848,15 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")");
-    
+
 ////    if (model()->properties().energy > energy)
 ////    {
 ////        model()->properties().energy -= energy;
 ////        m_SlotEnergizer->energizerEquipment()->DecreaseEnergy(energy);
-        
+
 ////        return true;
 ////    }
-    
+
 ////    return false;
 ////#else
 ////    return true;
@@ -2863,7 +2867,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")");
-    
+
 ////    int energy_max = m_SlotEnergizer->energizerEquipment()->GetEnergyMax();
 ////    if (model()->properties().energy < energy_max)
 ////    {
@@ -2872,10 +2876,10 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////        {
 ////            energy = diff_energy;
 ////        }
-        
+
 ////        model()->properties().energy += energy;
 ////        m_SlotEnergizer->energizerEquipment()->IncreaseEnergy(energy);
-        
+
 ////        if (model()->properties().hibernate_mode_enabled == true)
 ////        {
 ////            if (model()->properties().energy > HIBERNATION_ENERGY_THRESHOLD)
@@ -2883,10 +2887,10 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////                UpdatePropertiesProtection();
 ////            }
 ////        }
-        
+
 ////        return true;
 ////    }
-    
+
 ////    return false;
 ////#else
 ////    return true;
@@ -2897,14 +2901,14 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //STATUS Vehicle::CheckGrabStatus() const
 //{
 ////    STATUS status = STATUS::ITEM_OK;
-    
+
 ////    if (m_grappleSlot->item() != nullptr)
 ////    {
 ////        if (m_grappleSlot->grappleEquipment()->isDamaged() == true)
 ////        {
 ////            status = STATUS::ITEM_DAMAGED;
 ////        }
-        
+
 ////        if (m_grappleSlot->grappleEquipment()->isLocked() != 0)
 ////        {
 ////            status = STATUS::ITEM_LOCKED;
@@ -3003,7 +3007,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 ////    if (m_Land != nullptr)  { save_ptree.put(root+"data_unresolved_Vehicle.land_id", m_Land->id()); }
 ////    else                     { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE); }
-    
+
 ////    if (m_parentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_parentVehicleSlot->id()); }
 ////    else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE); }
 
@@ -3020,7 +3024,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
 ////    //LOG(" Vehicle("+std::to_string(id())+")::LoadData");
-    
+
 ////    m_vehicleDescriptor.space       = load_ptree.get<int>("m_DataKorpus.space");
 ////    m_vehicleDescriptor.armor       = load_ptree.get<int>("m_DataKorpus.armor");
 ////    m_vehicleDescriptor.protection  = load_ptree.get<int>("m_DataKorpus.protection");
@@ -3049,7 +3053,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //void Vehicle::ResolveData()
 //{
 ////    //LOG(" Vehicle("+std::to_string(id())+")::ResolveData");
-    
+
 ////    CreateDriveComplexTextureDependedStuff();
 ////    CreateProtectionComplexTextureDependedStuff();
 
@@ -3092,7 +3096,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////        break;
 ////    }
 ////    }
-    
+
 ////    m_weaponComplex.prepareWeapons();
 //}
 
@@ -3110,7 +3114,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    {
 ////        rand_index2 = meti::getRandInt(m_equipmentSlots.size()-1);
 ////    }
-    
+
 ////    while (m_equipmentSlots[rand_index2]->item()->condition() > 0)
 ////    {
 ////        m_equipmentSlots[rand_index2]->item()->deteriorationEvent();

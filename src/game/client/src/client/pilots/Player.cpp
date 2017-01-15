@@ -86,8 +86,9 @@ Player::~Player()
                            
 void Player::BindNpc(Npc* npc)
 {
-    this->npc = npc;
-    npc->setPlayer(this);
+    assert(false);
+//    this->npc = npc;
+//    npc->setPlayer(this);
 }
 
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
