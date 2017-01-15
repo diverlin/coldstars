@@ -571,8 +571,9 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading spacestations...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
         {
-            SpaceStation* spacestation = core::global::get().spaceStationBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            spacestation->Load(v.second);
+            assert(false);
+//            SpaceStation* spacestation = core::global::get().spaceStationBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            spacestation->Load(v.second);
         }
     }
 

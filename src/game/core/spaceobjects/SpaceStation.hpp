@@ -87,36 +87,36 @@ private:
 
 
 
-class SpaceStation : public Vehicle
-{
-public:
-    SpaceStation(int);
-    virtual ~SpaceStation();
+//class SpaceStation : public Vehicle
+//{
+//public:
+//    SpaceStation(int);
+//    virtual ~SpaceStation();
 
-    Land* const land() const { return m_Land; };
+//    Land* const land() const { return m_Land; };
 
-    void bindLand(Land* land);
+//    void bindLand(Land* land);
 
-    virtual void UpdateInSpace(int, bool) override final;
+//    virtual void UpdateInSpace(int, bool) override final;
 
-    //        void RenderInSpace(const jeti::Renderer&, float);
+//    //        void RenderInSpace(const jeti::Renderer&, float);
 
-    virtual void Save(boost::property_tree::ptree&) const override final;
-    virtual void Load(const boost::property_tree::ptree&) override final;
-    virtual void Resolve() override final;
+//    virtual void Save(boost::property_tree::ptree&) const override final;
+//    virtual void Load(const boost::property_tree::ptree&) override final;
+//    virtual void Resolve() override final;
 
-private:
-    Land* m_Land;
+//private:
+//    Land* m_Land;
 
-    //        void UpdateRenderStuff_2D();
-    //        virtual void UpdateInfo() override final;
+//    //        void UpdateRenderStuff_2D();
+//    //        virtual void UpdateInfo() override final;
 
-    virtual void putChildrenToGarbage() const override final;
+//    virtual void putChildrenToGarbage() const override final;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
-};
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+//};
 
 
 

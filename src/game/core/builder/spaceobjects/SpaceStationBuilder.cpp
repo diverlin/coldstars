@@ -17,41 +17,44 @@
 */
 
 
-#include <builder/spaceobjects/SpaceStationBuilder.hpp>
-#include <builder/dock/KosmoportBuilder.hpp>
-#include <builder/CommonBuilderHeaders.hpp>
-
-#include <spaceobjects/SpaceStation.hpp>
-
-#include <dock/Kosmoport.hpp>
+#include <core/builder/spaceobjects/SpaceStationBuilder.hpp>
+#include <core/builder/dock/KosmoportBuilder.hpp>
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/SpaceStation.hpp>
+#include <core/dock/Kosmoport.hpp>
 
 #include <meti/RandUtils.hpp>
 
+
+namespace builder {
 
 SpaceStationBuilder::SpaceStationBuilder()
 {}
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::createTemplate(int_t id) const
+model::SpaceStation*
+SpaceStationBuilder::createTemplate(int_t id) const
 {           
-    SpaceStation* spacestation = new SpaceStation(id);
+    model::SpaceStation* spacestation = new model::SpaceStation;
     assert(spacestation);
 
-   core::global::get().entityManager().reg(spacestation);
+    core::global::get().entityManager().reg(spacestation);
     
     return spacestation;
 }
 
-SpaceStation* SpaceStationBuilder::create() const
+model::SpaceStation*
+SpaceStationBuilder::create() const
 {
-    SpaceStation* spacestation = createTemplate();
+    model::SpaceStation* spacestation = createTemplate();
     createInternals(spacestation);
     
     return spacestation;
 }
 
-void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
+void
+SpaceStationBuilder::createInternals(model::SpaceStation* spacestation) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;
@@ -59,14 +62,14 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
 
     if (meti::getRandInt(1))
     {
-//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-//        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
-//        size = texOb->size();
+        //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+        //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
+        //        size = texOb->size();
     }
     else
-    {    
-//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-//        texOb = mesh->textureOb();
+    {
+        //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
+        //        texOb = mesh->textureOb();
         float scale_comp = meti::getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
@@ -93,31 +96,31 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     data_korpus.slot_radar_num     = 1;
     data_korpus.slot_scaner_num    = 1;
     data_korpus.slot_freezer_num   = 0;
-    data_korpus.slot_weapon_num    = 7; 
-    data_korpus.slot_artefact_num  = 0;  
+    data_korpus.slot_weapon_num    = 7;
+    data_korpus.slot_artefact_num  = 0;
     data_korpus.slot_otsec_num     = 10;
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
     //data_life.dying_time = 10*texOb->GetMaterial().size_id;
     
-    int size_threshold = 2; 
+    int size_threshold = 2;
     //if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
-    //data_korpus.draw_turrels = false; 
+    //data_korpus.draw_turrels = false;
     //else
-    //data_korpus.draw_turrels = true; 
+    //data_korpus.draw_turrels = true;
     data_korpus.draw_turrels = true;
-//    if (texOb->GetMaterial().size_id < size_threshold)
-//        data_korpus.draw_turrels = false;
+    //    if (texOb->GetMaterial().size_id < size_threshold)
+    //        data_korpus.draw_turrels = false;
 
 
-    
-    spacestation->setSubSubTypeId(type::entity::SPACESTATION_MILITARY_ID);
-    spacestation->setKorpusData(data_korpus);
+    assert(false);
+    //spacestation->setSubSubTypeId(type::entity::SPACESTATION_MILITARY_ID);
+    //spacestation->setKorpusData(data_korpus);
     spacestation->setLifeData(data_life);
 
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
-        
+
     float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
@@ -125,10 +128,13 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     
     spacestation->setMass(meti::getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     
-    spacestation->CreateDriveComplexTextureDependedStuff();
-    spacestation->CreateProtectionComplexTextureDependedStuff();
+    assert(false);
+//    spacestation->CreateDriveComplexTextureDependedStuff();
+//    spacestation->CreateProtectionComplexTextureDependedStuff();
     
-    _createSlots(spacestation);
-                
-    spacestation->bindLand(core::global::get().kosmoportBuilder().create());
+//    _createSlots(spacestation);
+
+//    spacestation->bindLand(core::global::get().kosmoportBuilder().create());
 }
+
+} // namespace builder

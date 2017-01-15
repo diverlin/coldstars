@@ -19,34 +19,41 @@
 
 #pragma once
 
-#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
+
+#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
+
 #include <ceti/type/IdType.hpp>
 
-class SpaceStation;
 
-    
+namespace model {
+class SpaceStation;
+} // namespace model
+
 namespace ENTITY
 {
-    namespace SPACESTATION
-    {
-        const int SCALE_MIN = 200;
-        const int SCALE_MAX = 300;
-        
-        const int MASS_MIN = 1000;
-        const int MASS_MAX = 2000;
-    }
+namespace SPACESTATION
+{
+const int SCALE_MIN = 200;
+const int SCALE_MAX = 300;
+
+const int MASS_MIN = 1000;
+const int MASS_MAX = 2000;
 }
+}
+
+namespace builder {
 
 class SpaceStationBuilder : public BaseVehicleBuilder
 {
-    public:
-        SpaceStationBuilder();
-        ~SpaceStationBuilder();
-        
-        SpaceStation* createTemplate(int_t id = NONE) const;
-        SpaceStation* create() const;
-       
-    private:
-        void createInternals(SpaceStation*) const;
+public:
+    SpaceStationBuilder();
+    ~SpaceStationBuilder();
+
+    model::SpaceStation* createTemplate(int_t id = NONE) const;
+    model::SpaceStation* create() const;
+
+private:
+    void createInternals(model::SpaceStation*) const;
 }; 
 
+} // namespace builder
