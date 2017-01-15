@@ -78,6 +78,11 @@ public:
     type::place place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
+    void immidiateKill() {
+        m_dataLife.is_alive = false;
+        m_dataLife.dying_time = -1;
+    }
+
 private:
     LifeData m_dataLife;
     int_t m_parent = NONE;

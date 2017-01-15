@@ -23,8 +23,8 @@
 
 #include <descriptors/Base.hpp>
 
-class Vehicle;
 
+class Vehicle;
 
 class BaseVehicleBuilder
 {

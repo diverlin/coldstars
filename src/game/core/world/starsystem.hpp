@@ -19,19 +19,14 @@
 
 #pragma once
 
-#include <vector>
+#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/world/HyperSpace.hpp>
+#include <core/managers/AsteroidManager.hpp>
+#include <core/types/RaceTypes.hpp>
 
 #include <ceti/type/IdType.hpp>
 
-#include <spaceobjects/SpaceObject.hpp>
-
-#include <world/HyperSpace.hpp>
-#include <managers/AsteroidManager.hpp>
-#include <types/RaceTypes.hpp>
-
-class RocketBullet;
-class Planetoid;
-class Planet;
+#include <vector>
 
 namespace model {
 class Star;
@@ -44,6 +39,7 @@ class Npc;
 class Vehicle;
 class BlackHole;
 class Container;
+class RocketBullet;
 } // namespace model
 
 namespace control {
@@ -56,7 +52,7 @@ class Ship;
 class Vehicle;
 class BlackHole;
 class Container;
-
+class RocketBullet;
 } // namespace model
 
 
@@ -171,7 +167,7 @@ public:
     void add(model::Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
     void add(model::SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
     void add(model::Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
-    void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
+    void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
 
     void add(model::Star*);
     void add(model::Planet*, const model::SpaceObject* parent = nullptr);
@@ -253,7 +249,7 @@ private:
     std::vector<control::Planet*> m_planets;
     std::vector<control::Asteroid*> m_asteroids;
     std::vector<control::Container*> m_containers;
-    std::vector<RocketBullet*> m_bullets;
+    std::vector<control::RocketBullet*> m_bullets;
     std::vector<control::BlackHole*> m_blackholes;
     std::vector<control::Vehicle*> m_vehicles;
 

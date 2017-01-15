@@ -18,6 +18,7 @@
 
 
 #include "ShipBuilder.hpp"
+
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobjects/Ship.hpp>
 #include <core/descriptors/DescriptorManager.hpp>

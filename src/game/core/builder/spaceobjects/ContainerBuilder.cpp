@@ -32,6 +32,7 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace builder {
 
 ContainerBuilder::ContainerBuilder()
 {}
@@ -161,6 +162,5 @@ ContainerBuilder::__createInternals(model::Container* container, const descripto
     //    }
 }
 
-
-
+} // namespace builder
 
