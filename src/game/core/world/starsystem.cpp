@@ -192,16 +192,17 @@ void Starsystem::add(model::Ship* ship, const glm::vec3& position, const glm::ve
     //__addVehicleCommon(ship, position, dir);
 }
 
-void Starsystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const SpaceObject* const parent)
+void Starsystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
     assert(false);
 //    __addVehicleCommon(satellite, position, dir);
 //    satellite->BindParent(parent);
 }
 
-void Starsystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
+void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
-    __addVehicleCommon(spacestation, position, dir);
+    assert(false);
+    //__addVehicleCommon(spacestation, position, dir);
 }
 
 void Starsystem::add(RocketBullet* rocket, const glm::vec3& position, const glm::vec3& dir)
@@ -787,9 +788,10 @@ void Starsystem::__updateInSpaceInStatic_s()
 
     for (Vehicle* vehicle: m_vehicles) {
         vehicle->npc()->updateInSpaceInStatic();
-        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
-            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
-        }
+        assert(false);
+//        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
+//            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
+//        }
     }
 
     for (auto star: m_stars) { star->updateInSpaceInStatic(); }

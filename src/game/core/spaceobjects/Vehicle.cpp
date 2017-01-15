@@ -2189,8 +2189,9 @@ void Vehicle::DockingEvent()
         {
         case type::entity::SPACESTATION_ID:
         {
-            SpaceStation* spacestation = ((SpaceStation*)m_driveComplex.target());
-            spacestation->land()->AddVehicle(this);
+            assert(false);
+            //SpaceStation* spacestation = ((SpaceStation*)m_driveComplex.target());
+            //spacestation->land()->AddVehicle(this);
 
             break;
         }

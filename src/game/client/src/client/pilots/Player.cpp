@@ -728,47 +728,48 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
-        { 
-            m_cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]);
+        assert(false);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
+//        {
+//            m_cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]);
         
-//            if (data_mouse.left_click == true)
-//            {
-//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-//                {
-//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
-//                }
-//                else
-//                {
-//                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
-//                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
-//                    npc->vehicle()->GetComplexDrive().UpdatePath();
-//                }
-//            }
+////            if (data_mouse.left_click == true)
+////            {
+////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+////                {
+////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
+////                }
+////                else
+////                {
+////                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
+////                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
+////                    npc->vehicle()->GetComplexDrive().UpdatePath();
+////                }
+////            }
 
-            if (data_mouse.right_click == true)
-            {
-                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-                {
-                    //if (pPLAYER->vehicle()->ableTo.GRAB == true)
-                    //{
-                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
-                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
-                    //}
-                }
-//                else
+//            if (data_mouse.right_click == true)
+//            {
+//                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
 //                {
-//                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
-//                    {
-//                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-//                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-//                    }
+//                    //if (pPLAYER->vehicle()->ableTo.GRAB == true)
+//                    //{
+//                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
+//                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
+//                    //}
 //                }
-            }
+////                else
+////                {
+////                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
+////                    {
+////                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+////                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+////                    }
+////                }
+//            }
     
-            return true; 
-        }
+//            return true;
+//        }
     }
         
     return false;

@@ -256,11 +256,13 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //type::entity ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        SpaceStation* spacestation = core::global::get().spaceStationBuilder().create();
-        core::global::get().spaceStationBuilder().equip(spacestation);  // improove
+        model::SpaceStation* spacestation = core::global::get().spaceStationBuilder().create();
+        assert(false);
+        //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
         Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        spacestation->bindNpc(npc);
+        assert(false);
+        //spacestation->bindNpc(npc);
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
