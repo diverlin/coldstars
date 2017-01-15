@@ -16,30 +16,33 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef HYPERSPACE_HPP
-#define HYPERSPACE_HPP
+#pragma once
 
 #include <vector>
+
+namespace model {
 class Vehicle;
+} // namespace model
+
 class Starsystem;
 
 class HyperSpace
 {
-    public:
-        HyperSpace();
-        ~HyperSpace();
+public:
+    HyperSpace();
+    ~HyperSpace();
 
-        void AddVehicle(Vehicle*);
-        bool IsVehicleHere(int) const;
-         void PostHyperJumpEvent(Starsystem*);
-         
-         int GetQueueSize() const { return VEHICLE_vec.size(); };
- 
-        private:
-                std::vector<Vehicle*> VEHICLE_vec;
+    void AddVehicle(model::Vehicle*);
+    bool IsVehicleHere(int) const;
+    void PostHyperJumpEvent(Starsystem*);
+
+    int GetQueueSize() const { return VEHICLE_vec.size(); };
+
+private:
+    std::vector<model::Vehicle*> VEHICLE_vec;
 };
 
-#endif 
+
 
 
 

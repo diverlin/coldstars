@@ -41,11 +41,12 @@ void MicroScenarioExploration::enter(Npc* npc) const
 /* virtual */
 void MicroScenarioExploration::UpdateInStaticInSpace(Npc* npc) const
 {
-    if (npc->vehicle()->driveComplex().PathExists() == false)
-    {
-        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->vehicle()->position().z);
-        npc->vehicle()->driveComplex().SetStaticTargetCoords(target_pos);
-    }
+    assert(false);
+    //    if (npc->vehicle()->driveComplex().PathExists() == false)
+//    {
+//        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->vehicle()->position().z);
+//        npc->vehicle()->driveComplex().SetStaticTargetCoords(target_pos);
+//    }
 }
 
 /* virtual */

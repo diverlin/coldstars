@@ -94,7 +94,8 @@ bool Shop::SellGoods(Npc* npc, type::entity subtype_id, int amount)
             GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
             goods_pack->Increase(amount);    
         
-            npc->vehicle()->addItemToCargoSlot(goods_pack);
+            assert(false);
+            //npc->vehicle()->addItemToCargoSlot(goods_pack);
                 
             return true;
         }

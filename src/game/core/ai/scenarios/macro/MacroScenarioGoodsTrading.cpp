@@ -38,13 +38,14 @@ MacroScenarioGoodsTrading::~MacroScenarioGoodsTrading()
 
 bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 {
-    if (npc->vehicle()->freeSpace() > 10)
-    {
-        if (npc->credits() > 100)
-        {
-            return true;
-        }
-    }
+    assert(false);
+    //    if (npc->vehicle()->freeSpace() > 10)
+//    {
+//        if (npc->credits() > 100)
+//        {
+//            return true;
+//        }
+//    }
     
     return false;
 }
@@ -58,14 +59,15 @@ void MacroScenarioGoodsTrading::enter(Npc* npc) const
 /* virtual */
 bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 {
-    if (npc->vehicle()->goodsPack() == nullptr)
-    {
-        return IsAbleToBuyGoods(npc);
-    }
-    else
-    {
-        return true;
-    }
+    assert(false);
+//    if (npc->vehicle()->goodsPack() == nullptr)
+//    {
+//        return IsAbleToBuyGoods(npc);
+//    }
+//    else
+//    {
+//        return true;
+//    }
         
     return false;
 }
@@ -76,10 +78,11 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
     bool see_pickable_container = npc->observation().GetVisionStatus().pickable_CONTAINER;
     bool able_buy      = IsAbleToBuyGoods(npc);
     bool has_goods     = false;
-    if (npc->vehicle()->goodsPack() != nullptr)
-    {
-        has_goods = true;
-    }
+    assert(false);
+//    if (npc->vehicle()->goodsPack() != nullptr)
+//    {
+//        has_goods = true;
+//    }
     type::AISCENARIO microScenarioTypeId = npc->stateMachine().microTaskManager().task().GetScenarioTypeId();
     
     // LOGIC
@@ -89,13 +92,14 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
         if (microScenarioTypeId != type::AISCENARIO::MICRO_GRAB_ID) 
         {
             Container* container = npc->observation().GetClosestPickableContainer(); // find proper!
-            if (npc->vehicle()->freeSpace() > container->mass())
-            {
-                Task microtask(type::AISCENARIO::MICRO_GRAB_ID, container->id());
-                npc->stateMachine().setCurrentMicroTask(microtask); 
+            assert(false);
+//            if (npc->vehicle()->freeSpace() > container->mass())
+//            {
+//                Task microtask(type::AISCENARIO::MICRO_GRAB_ID, container->id());
+//                npc->stateMachine().setCurrentMicroTask(microtask);
             
-                return;
-            }
+//                return;
+//            }
         }
     }
     
@@ -141,12 +145,13 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 {
-    GoodsPack* goods_pack = npc->vehicle()->goodsPack();
-    while(goods_pack != nullptr)
-    {
-        npc->vehicle()->sellItem(goods_pack);
-        goods_pack = npc->vehicle()->goodsPack();
-    }
+    assert(false);
+//    GoodsPack* goods_pack = npc->vehicle()->goodsPack();
+//    while(goods_pack != nullptr)
+//    {
+//        npc->vehicle()->sellItem(goods_pack);
+//        goods_pack = npc->vehicle()->goodsPack();
+//    }
     
     if (IsAbleToBuyGoods(npc) == true)
     {

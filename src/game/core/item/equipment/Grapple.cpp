@@ -119,42 +119,43 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
         
         if (slot()->checkTarget(&target) == STATUS::TARGET_OK)
         {
-            glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
+            assert(false);
+//            glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
 
 
-            target.addImpulse(impulse_dir, 0.001* strength());
+//            target.addImpulse(impulse_dir, 0.001* strength());
 
-            float dist = meti::distance(vehicle.position(), target.position());
-            if (dist < 0.5*vehicle.collisionRadius())
-            {
-                switch(target.type())
-                {
-                case type::entity::CONTAINER_ID:
-                {
-                    Container* container = reinterpret_cast<Container*>(&target);
-                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)
-                    {
-                        it = m_targets.erase(it);
-                        return; // hack
-                    }
+//            float dist = meti::distance(vehicle.position(), target.position());
+//            if (dist < 0.5*vehicle.collisionRadius())
+//            {
+//                switch(target.type())
+//                {
+//                case type::entity::CONTAINER_ID:
+//                {
+//                    Container* container = reinterpret_cast<Container*>(&target);
+//                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)
+//                    {
+//                        it = m_targets.erase(it);
+//                        return; // hack
+//                    }
                     
-                    break;
-                }
+//                    break;
+//                }
                     
-                    //case ENTITY::VEHICLE_ID:
-                    //{
-                    //ItemSlot* _slot = GetEmptyOtsecSlot();
-                    //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-                    //if (_slot != nullptr)
-                    //{
-                    ////_slot->InsertItem(_vehicle);
-                    //starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
-                    //}
-                    //grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-                    //break;
-                    //}
-                }
-            }
+//                    //case ENTITY::VEHICLE_ID:
+//                    //{
+//                    //ItemSlot* _slot = GetEmptyOtsecSlot();
+//                    //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+//                    //if (_slot != nullptr)
+//                    //{
+//                    ////_slot->InsertItem(_vehicle);
+//                    //starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+//                    //}
+//                    //grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
+//                    //break;
+//                    //}
+//                }
+//            }
         }
         else
         {

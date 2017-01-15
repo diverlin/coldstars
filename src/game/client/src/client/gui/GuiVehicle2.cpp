@@ -57,29 +57,30 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 {   
     Reset();     
     int angle = 0;
-    for (unsigned int i=0; i<vehicle->m_slots.size(); i++)
-    {    
-        type::entity slot_subtype_id = vehicle->m_slots[i]->subtype();
-        if ( (slot_subtype_id != type::entity::CARGO_SLOT_ID) && (slot_subtype_id != type::entity::ARTEFACT_SLOT_ID) )
-        {  
-            type::entity entity_type_id = slot_subtype_id;
-            if (slot_subtype_id == type::entity::WEAPON_SLOT_ID)
-            {
-                entity_type_id = vehicle->m_slots[i]->subsubtype();
-            }
+    assert(false);
+//    for (unsigned int i=0; i<vehicle->m_slots.size(); i++)
+//    {
+//        type::entity slot_subtype_id = vehicle->m_slots[i]->subtype();
+//        if ( (slot_subtype_id != type::entity::CARGO_SLOT_ID) && (slot_subtype_id != type::entity::ARTEFACT_SLOT_ID) )
+//        {
+//            type::entity entity_type_id = slot_subtype_id;
+//            if (slot_subtype_id == type::entity::WEAPON_SLOT_ID)
+//            {
+//                entity_type_id = vehicle->m_slots[i]->subsubtype();
+//            }
                           
-            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), str(entity_type_id), vehicle->m_slots[i]);
+//            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
+//            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), str(entity_type_id), vehicle->m_slots[i]);
 
-            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-            button->setSize(size*scale);
+//            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+//            button->setSize(size*scale);
 
-            glm::vec2 offset = meti::genVec2f(160, angle);
-            AddChild(button, offset*scale);
+//            glm::vec2 offset = meti::genVec2f(160, angle);
+//            AddChild(button, offset*scale);
 
-            angle += 20; 
-        }
-    }        
+//            angle += 20;
+//        }
+//    }
 }    
 
 /* virtual override final */

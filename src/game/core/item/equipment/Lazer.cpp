@@ -112,44 +112,45 @@ std::string Lazer::GetRadiusStr()
 
 void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
-    {
-        if (subtarget != nullptr) // precise fire
-        {
-            if (meti::isActionShouldHappen(slot()->hitProbability()) == true) {
-                subtarget->item()->doLock(1);
-            }
-            damage_rate /= 3; // lower damage is used for precise fire
-            
-        }
-
-        target->hit(m_damage*damage_rate);
-        deteriorationEvent();
-
-        if (show_effect)
-        {
-            // LazerTraceEffect
-            //LazerTraceEffect* _lazer_trace_effect = nullptr;
-            //if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
-            //{
-            //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
-            //item_slot->GetTurrel()->pCenter(),
-            //item_slot->GetTarget()->pCenter());
-            //}
-            //else
-//            {
-//                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
-//                                                              item_slot->GetOwnerVehicle()->pCenter(),
-//                                                              item_slot->GetTarget()->pCenter());
+    assert(false);
+//    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
+//    {
+//        if (subtarget != nullptr) // precise fire
+//        {
+//            if (meti::isActionShouldHappen(slot()->hitProbability()) == true) {
+//                subtarget->item()->doLock(1);
 //            }
-//            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
+//            damage_rate /= 3; // lower damage is used for precise fire
             
-            // DamageEffect
-            //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
-            //_lazer_trace_effect->SetDamageEffect(_damage_effect);
-            //item_slot->GetOwnerVehicle()->starsystem()->Add(_damage_effect);
-        }
-    }
+//        }
+
+//        target->hit(m_damage*damage_rate);
+//        deteriorationEvent();
+
+//        if (show_effect)
+//        {
+//            // LazerTraceEffect
+//            //LazerTraceEffect* _lazer_trace_effect = nullptr;
+//            //if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
+//            //{
+//            //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+//            //item_slot->GetTurrel()->pCenter(),
+//            //item_slot->GetTarget()->pCenter());
+//            //}
+//            //else
+////            {
+////                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+////                                                              item_slot->GetOwnerVehicle()->pCenter(),
+////                                                              item_slot->GetTarget()->pCenter());
+////            }
+////            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
+            
+//            // DamageEffect
+//            //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
+//            //_lazer_trace_effect->SetDamageEffect(_damage_effect);
+//            //item_slot->GetOwnerVehicle()->starsystem()->Add(_damage_effect);
+//        }
+//    }
 } 
 
 /*virtual*/

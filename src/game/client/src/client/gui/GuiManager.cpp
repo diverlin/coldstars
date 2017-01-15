@@ -156,31 +156,32 @@ void GuiManager::UpdateSessionInSpace()
     assert(gui_player_vehicle);
     assert(gui_radar);
     assert(gui_galaxymap);
-                
-    const SpaceObject* scan_target = player->GetNpc()->scanTarget();
+
+    assert(false);
+//    const SpaceObject* scan_target = player->GetNpc()->scanTarget();
       
-    if (scan_target != nullptr)
-    {       
-        if (gui_scan_vehicle->vehicle() == nullptr)
-        {               
-            if (scan_target->type() == type::entity::VEHICLE_ID)
-            {
-                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
-                gui_scan_vehicle->Show();  
+//    if (scan_target != nullptr)
+//    {
+//        if (gui_scan_vehicle->vehicle() == nullptr)
+//        {
+//            if (scan_target->type() == type::entity::VEHICLE_ID)
+//            {
+//                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
+//                gui_scan_vehicle->Show();
                 
-                gui_player_vehicle->Hide(); 
-                gui_radar->Hide();                       
-            }
-        }
-    }
-    else
-    {
-        gui_scan_vehicle->UnbindVehicle();
-        gui_scan_vehicle->Hide();
+//                gui_player_vehicle->Hide();
+//                gui_radar->Hide();
+//            }
+//        }
+//    }
+//    else
+//    {
+//        gui_scan_vehicle->UnbindVehicle();
+//        gui_scan_vehicle->Hide();
         
-        gui_player_vehicle->Show(); 
-        gui_radar->Show();        
-    }
+//        gui_player_vehicle->Show();
+//        gui_radar->Show();
+//    }
 
     BaseGuiElement* button = GetGuiElement(type::GUI::BUTTON_GALAXYMAP_ID);
     if (button->GetPressed())

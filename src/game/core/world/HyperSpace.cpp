@@ -28,9 +28,10 @@ HyperSpace::HyperSpace()
 HyperSpace::~HyperSpace()
 {}      
 
-void HyperSpace::AddVehicle(Vehicle* vehicle)
+void HyperSpace::AddVehicle(model::Vehicle* vehicle)
 {
-    vehicle->setPlaceTypeId(type::place::HYPER);
+    assert(false);
+    //vehicle->setPlace(int_t(type::place::HYPER));
     VEHICLE_vec.push_back(vehicle);  
 }
 

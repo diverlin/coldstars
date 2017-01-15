@@ -126,9 +126,10 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
         }
     }
 
-    if (target()->isAlive() == false) {
-        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
-    }
+    assert(false);
+//    if (target()->isAlive() == false) {
+//        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
+//    }
 }
 
 bool ItemSlot::checkItemInsertion(item::Base* item) const
@@ -199,11 +200,12 @@ void ItemSlot::selectEvent()
     // make it oop
     m_selected = true;
 
-    if (owner()->type() == type::entity::VEHICLE_ID) {
-        switch(subtype()) {
-            case type::entity::DRIVE_SLOT_ID: { vehicleOwner()->_updatePropSpeed(); break; }
-        }
-    }
+    assert(false);
+//    if (owner()->type() == type::entity::VEHICLE_ID) {
+//        switch(subtype()) {
+//            case type::entity::DRIVE_SLOT_ID: { vehicleOwner()->_updatePropSpeed(); break; }
+//        }
+//    }
 }
 
 void ItemSlot::deselectEvent()
@@ -218,7 +220,8 @@ void ItemSlot::deselectEvent()
             case type::entity::WEAPON_SLOT_ID:     {     resetTarget(); break; }
             case type::entity::DRIVE_SLOT_ID:
             {
-                vehicleOwner()->_updatePropSpeed();
+                assert(false);
+//                vehicleOwner()->_updatePropSpeed();
                 //GetOwnerVehicle()->UpdatePropertiesJump();
                 break;
             }
@@ -230,35 +233,36 @@ void ItemSlot::deselectEvent()
 void ItemSlot::updateVehiclePropetries() const
 {
     // TODO: make it oop
-    if (subtype() != type::entity::CARGO_SLOT_ID)
-    {
-        switch(subtype())
-        {
-            case type::entity::WEAPON_SLOT_ID:     { vehicleOwner()->_updatePropFire(); break; }
-            case type::entity::SCANER_SLOT_ID:     { vehicleOwner()->_updatePropScan(); break; }
-            case type::entity::BAK_SLOT_ID:         {
-                vehicleOwner()->_updatePropSpeed();
-                vehicleOwner()->_updatePropJump();
+    assert(false);
+//    if (subtype() != type::entity::CARGO_SLOT_ID)
+//    {
+//        switch(subtype())
+//        {
+//            case type::entity::WEAPON_SLOT_ID:     { vehicleOwner()->_updatePropFire(); break; }
+//            case type::entity::SCANER_SLOT_ID:     { vehicleOwner()->_updatePropScan(); break; }
+//            case type::entity::BAK_SLOT_ID:         {
+//                vehicleOwner()->_updatePropSpeed();
+//                vehicleOwner()->_updatePropJump();
 
-                break;
-            }
+//                break;
+//            }
 
-            case type::entity::DRIVE_SLOT_ID:       {
-                vehicleOwner()->_updatePropSpeed();
-                vehicleOwner()->_updatePropJump();
-                break;
-            }
+//            case type::entity::DRIVE_SLOT_ID:       {
+//                vehicleOwner()->_updatePropSpeed();
+//                vehicleOwner()->_updatePropJump();
+//                break;
+//            }
                 
-            case type::entity::DROID_SLOT_ID:     { vehicleOwner()->_updatePropRepair(); break; }
-            case type::entity::ENERGIZER_SLOT_ID: { vehicleOwner()->_updatePropEnergy(); break; }
-            case type::entity::FREEZER_SLOT_ID:     { vehicleOwner()->_updatePropFreeze(); break; }
-            case type::entity::GRAPPLE_SLOT_ID:     { vehicleOwner()->_updatePropGrab(); break; }
-            case type::entity::PROTECTOR_SLOT_ID: { vehicleOwner()->_updatePropProtection(); break; }
-            case type::entity::RADAR_SLOT_ID:     { vehicleOwner()->_updatePropRadar(); break; }
+//            case type::entity::DROID_SLOT_ID:     { vehicleOwner()->_updatePropRepair(); break; }
+//            case type::entity::ENERGIZER_SLOT_ID: { vehicleOwner()->_updatePropEnergy(); break; }
+//            case type::entity::FREEZER_SLOT_ID:     { vehicleOwner()->_updatePropFreeze(); break; }
+//            case type::entity::GRAPPLE_SLOT_ID:     { vehicleOwner()->_updatePropGrab(); break; }
+//            case type::entity::PROTECTOR_SLOT_ID: { vehicleOwner()->_updatePropProtection(); break; }
+//            case type::entity::RADAR_SLOT_ID:     { vehicleOwner()->_updatePropRadar(); break; }
 
-            case type::entity::ARTEFACT_SLOT_ID: { vehicleOwner()->_updateArtefactInfluence(); break; }
-        }
-    }
+//            case type::entity::ARTEFACT_SLOT_ID: { vehicleOwner()->_updateArtefactInfluence(); break; }
+//        }
+//    }
 }
 
 ///* virtual */
@@ -463,7 +467,8 @@ bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 
 bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
 {
-    return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
+    assert(false);
+    //return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
 }                
 
 bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
@@ -473,11 +478,12 @@ bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
         return true;
     }
     
-    float dist = meti::distance(vehicleOwner()->position(), target->position());
-    if (dist < itemRadius())
-    {
-        return true;
-    }
+    assert(false);
+//    float dist = meti::distance(vehicleOwner()->position(), target->position());
+//    if (dist < itemRadius())
+//    {
+//        return true;
+//    }
 
     return false;
 }

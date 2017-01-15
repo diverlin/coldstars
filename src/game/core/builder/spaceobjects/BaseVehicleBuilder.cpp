@@ -61,80 +61,81 @@ BaseVehicleBuilder::BaseVehicleBuilder()
      
 void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
 {     
-    // WEAPON SLOTS
-    unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;
-    for (unsigned int i=0; i<slot_weapon_num; i++) {
-        ItemSlot* weapon_slot = getNewItemSlot(type::entity::WEAPON_SLOT_ID);
-        weapon_slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
-        vehicle->addItemSlot(weapon_slot);
-    }
+    assert(false);
+//    // WEAPON SLOTS
+//    unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;
+//    for (unsigned int i=0; i<slot_weapon_num; i++) {
+//        ItemSlot* weapon_slot = getNewItemSlot(type::entity::WEAPON_SLOT_ID);
+//        weapon_slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);
+//        vehicle->addItemSlot(weapon_slot);
+//    }
         
-    if (vehicle->vehicleDescriptor().slot_radar_num) {
-        ItemSlot* radar_slot = getNewItemSlot(type::entity::RADAR_SLOT_ID);
-        vehicle->addItemSlot(radar_slot);
-    }
+//    if (vehicle->vehicleDescriptor().slot_radar_num) {
+//        ItemSlot* radar_slot = getNewItemSlot(type::entity::RADAR_SLOT_ID);
+//        vehicle->addItemSlot(radar_slot);
+//    }
             
-    if (vehicle->vehicleDescriptor().slot_scaner_num) {
-        ItemSlot* scaner_slot = getNewItemSlot(type::entity::SCANER_SLOT_ID);
-        vehicle->addItemSlot(scaner_slot);
-    }
+//    if (vehicle->vehicleDescriptor().slot_scaner_num) {
+//        ItemSlot* scaner_slot = getNewItemSlot(type::entity::SCANER_SLOT_ID);
+//        vehicle->addItemSlot(scaner_slot);
+//    }
 
-    if (vehicle->vehicleDescriptor().slot_energizer_num) {
-        ItemSlot* energizer_slot = getNewItemSlot(type::entity::ENERGIZER_SLOT_ID);
-        vehicle->addItemSlot(energizer_slot);
-    }
+//    if (vehicle->vehicleDescriptor().slot_energizer_num) {
+//        ItemSlot* energizer_slot = getNewItemSlot(type::entity::ENERGIZER_SLOT_ID);
+//        vehicle->addItemSlot(energizer_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_grapple_num) {
-        ItemSlot* grapple_slot = getNewItemSlot(type::entity::GRAPPLE_SLOT_ID);
-        vehicle->addItemSlot(grapple_slot); 
-    }
+//    if (vehicle->vehicleDescriptor().slot_grapple_num) {
+//        ItemSlot* grapple_slot = getNewItemSlot(type::entity::GRAPPLE_SLOT_ID);
+//        vehicle->addItemSlot(grapple_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_droid_num) {
-        ItemSlot* droid_slot = getNewItemSlot(type::entity::DROID_SLOT_ID);
-        vehicle->addItemSlot(droid_slot); 
-    }
+//    if (vehicle->vehicleDescriptor().slot_droid_num) {
+//        ItemSlot* droid_slot = getNewItemSlot(type::entity::DROID_SLOT_ID);
+//        vehicle->addItemSlot(droid_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_freezer_num) {
-        //ItemSlot* freezer_slot = GetNewItemSlot(type::entity::FREEZER_SLOT_ID);
-        //vehicle->AddItemSlot(freezer_slot);           
-    }
+//    if (vehicle->vehicleDescriptor().slot_freezer_num) {
+//        //ItemSlot* freezer_slot = GetNewItemSlot(type::entity::FREEZER_SLOT_ID);
+//        //vehicle->AddItemSlot(freezer_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_protector_num) {
-        ItemSlot* protector_slot = getNewItemSlot(type::entity::PROTECTOR_SLOT_ID);
-        vehicle->addItemSlot(protector_slot);         
-    }
+//    if (vehicle->vehicleDescriptor().slot_protector_num) {
+//        ItemSlot* protector_slot = getNewItemSlot(type::entity::PROTECTOR_SLOT_ID);
+//        vehicle->addItemSlot(protector_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_drive_num) {
-        ItemSlot* drive_slot = getNewItemSlot(type::entity::DRIVE_SLOT_ID);
-        vehicle->addItemSlot(drive_slot);
-    }
+//    if (vehicle->vehicleDescriptor().slot_drive_num) {
+//        ItemSlot* drive_slot = getNewItemSlot(type::entity::DRIVE_SLOT_ID);
+//        vehicle->addItemSlot(drive_slot);
+//    }
     
-    if (vehicle->vehicleDescriptor().slot_bak_num) {
-        ItemSlot* bak_slot = getNewItemSlot(type::entity::BAK_SLOT_ID);
-        vehicle->addItemSlot(bak_slot);
-    }
+//    if (vehicle->vehicleDescriptor().slot_bak_num) {
+//        ItemSlot* bak_slot = getNewItemSlot(type::entity::BAK_SLOT_ID);
+//        vehicle->addItemSlot(bak_slot);
+//    }
     
-    //////////// ARTEFACT SLOT /////////////////////////
-    int artefact_num = vehicle->vehicleDescriptor().slot_artefact_num;
-    for (int i=0; i<artefact_num; i++) {
-        ItemSlot* artefact_slot = getNewItemSlot(type::entity::ARTEFACT_SLOT_ID);
-        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);  
-        vehicle->addItemSlot(artefact_slot);         
-    } 
+//    //////////// ARTEFACT SLOT /////////////////////////
+//    int artefact_num = vehicle->vehicleDescriptor().slot_artefact_num;
+//    for (int i=0; i<artefact_num; i++) {
+//        ItemSlot* artefact_slot = getNewItemSlot(type::entity::ARTEFACT_SLOT_ID);
+//        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
+//        vehicle->addItemSlot(artefact_slot);
+//    }
 
-    //////// OTSEC SLOT ////////////////////////////////
-    int otsec_num = vehicle->vehicleDescriptor().slot_otsec_num;
-    for (int i=0; i<otsec_num; i++) {
-        ItemSlot* otsec_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
-        otsec_slot->setSubSubTypeId(SLOT_CARGO_TYPES[i]);   
-        vehicle->addItemSlot(otsec_slot);         
-    }
+//    //////// OTSEC SLOT ////////////////////////////////
+//    int otsec_num = vehicle->vehicleDescriptor().slot_otsec_num;
+//    for (int i=0; i<otsec_num; i++) {
+//        ItemSlot* otsec_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
+//        otsec_slot->setSubSubTypeId(SLOT_CARGO_TYPES[i]);
+//        vehicle->addItemSlot(otsec_slot);
+//    }
 
-    // GATE SLOT
-    {
-        ItemSlot* gate_slot = getNewItemSlot(type::entity::GATE_SLOT_ID);
-        vehicle->addItemSlot(gate_slot);
-    }
+//    // GATE SLOT
+//    {
+//        ItemSlot* gate_slot = getNewItemSlot(type::entity::GATE_SLOT_ID);
+//        vehicle->addItemSlot(gate_slot);
+//    }
 }
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor)
@@ -170,55 +171,56 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& desc
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, type::tech tech_level)
 {
-    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
-    for (unsigned int i=0; i<weapons_num; i++) {
-        if (vehicle->isSlotFree(type::entity::WEAPON_SLOT_ID)) {
-            bool rand = 0; //getRandBool();
-            if (rand) {
-                vehicle->manage(core::global::get().rocketBuilder().getNew(tech_level) );
-            } else {
-                vehicle->manage(core::global::get().lazerBuilder().getNew(tech_level) );
-            }
-        }
-    }   
+    assert(false);
+//    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
+//    for (unsigned int i=0; i<weapons_num; i++) {
+//        if (vehicle->isSlotFree(type::entity::WEAPON_SLOT_ID)) {
+//            bool rand = 0; //getRandBool();
+//            if (rand) {
+//                vehicle->manage(core::global::get().rocketBuilder().getNew(tech_level) );
+//            } else {
+//                vehicle->manage(core::global::get().lazerBuilder().getNew(tech_level) );
+//            }
+//        }
+//    }
     
-    if (vehicle->isSlotFree(type::entity::RADAR_SLOT_ID)) {
-        vehicle->manage(core::global::get().radarBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::RADAR_SLOT_ID)) {
+//        vehicle->manage(core::global::get().radarBuilder().getNew());
+//    }
     
-    if (vehicle->isSlotFree(type::entity::DRIVE_SLOT_ID)) {
-        vehicle->manage(core::global::get().driveBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::DRIVE_SLOT_ID)) {
+//        vehicle->manage(core::global::get().driveBuilder().getNew());
+//    }
     
-    if (vehicle->isSlotFree(type::entity::BAK_SLOT_ID)) {
-        vehicle->manage(core::global::get().bakBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::BAK_SLOT_ID)) {
+//        vehicle->manage(core::global::get().bakBuilder().getNew());
+//    }
 
-#ifdef USE_EXTRA_EQUIPMENT
-    if (vehicle->isSlotFree(type::entity::ENERGIZER_SLOT_ID)) {
-        vehicle->manage(core::global::get().energizerBuilder().getNew());
-    }
+//#ifdef USE_EXTRA_EQUIPMENT
+//    if (vehicle->isSlotFree(type::entity::ENERGIZER_SLOT_ID)) {
+//        vehicle->manage(core::global::get().energizerBuilder().getNew());
+//    }
     
-    if (vehicle->isSlotFree(type::entity::FREEZER_SLOT_ID)) {
-        vehicle->manage(core::global::get().freezerBuilder().getNew());
-    }
-#endif
+//    if (vehicle->isSlotFree(type::entity::FREEZER_SLOT_ID)) {
+//        vehicle->manage(core::global::get().freezerBuilder().getNew());
+//    }
+//#endif
 
-    if (vehicle->isSlotFree(type::entity::PROTECTOR_SLOT_ID)) {
-        vehicle->manage(core::global::get().protectorBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::PROTECTOR_SLOT_ID)) {
+//        vehicle->manage(core::global::get().protectorBuilder().getNew());
+//    }
         
-    if (vehicle->isSlotFree(type::entity::DROID_SLOT_ID)) {
-        vehicle->manage(core::global::get().droidBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::DROID_SLOT_ID)) {
+//        vehicle->manage(core::global::get().droidBuilder().getNew());
+//    }
     
-    if (vehicle->isSlotFree(type::entity::SCANER_SLOT_ID)) {
-        vehicle->manage(core::global::get().scanerBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::SCANER_SLOT_ID)) {
+//        vehicle->manage(core::global::get().scanerBuilder().getNew());
+//    }
     
-    if (vehicle->isSlotFree(type::entity::GRAPPLE_SLOT_ID)) {
-        vehicle->manage(core::global::get().grappleBuilder().getNew());
-    }
+//    if (vehicle->isSlotFree(type::entity::GRAPPLE_SLOT_ID)) {
+//        vehicle->manage(core::global::get().grappleBuilder().getNew());
+//    }
 }
 
 #ifdef USE_MODULES

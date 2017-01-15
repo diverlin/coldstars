@@ -88,12 +88,12 @@ void GuiGalaxyMap::UnbindGalaxy()
 /* virtual override final */
 void GuiGalaxyMap::UpdateUnique(Player* player)
 {    
-    const MouseData& data_mouse = player->cursor().mouseData();
+//    const MouseData& data_mouse = player->cursor().mouseData();
     
-    int radius = player->GetNpc()->vehicle()->properties().hyper * m_ScaleParsecToScreenCoord;
-    m_VisualHyperJumpRange.FillData(GuiTextureObCollector::Instance().dot_yellow, radius, /*dot_size=*/6);
+//    int radius = player->GetNpc()->vehicle()->properties().hyper * m_ScaleParsecToScreenCoord;
+//    m_VisualHyperJumpRange.FillData(GuiTextureObCollector::Instance().dot_yellow, radius, /*dot_size=*/6);
 
-    glm::vec3 player_starsystem_pos = GetAbsoluteStarSystemPosition(*player->GetNpc()->vehicle()->starsystem());
+//    glm::vec3 player_starsystem_pos = GetAbsoluteStarSystemPosition(*player->GetNpc()->vehicle()->starsystem());
 //    if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == type::AISCENARIO::MICRO_JUMP_ID)
 //    {
 //        Starsystem* player_starsystem_target = dynamic_cast<Starsystem*>(player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget());
@@ -177,7 +177,8 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
     
     //render.enable_POINTSPRITE();
     {
-        glm::vec2 player_starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->vehicle()->starsystem()));
+        assert(false);
+//        glm::vec2 player_starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->vehicle()->starsystem()));
         
         //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         

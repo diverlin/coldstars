@@ -37,19 +37,21 @@ MicroScenarioJump::~MicroScenarioJump()
         
 /* virtual */
 void MicroScenarioJump::enter(Npc* npc) const
-{    
-    LOG("vehicle_id/npc_id="+std::to_string(npc->vehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump");
+{
+    assert(false);
+//    LOG("vehicle_id/npc_id="+std::to_string(npc->vehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump");
     
-    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
 
 /* virtual */
 bool MicroScenarioJump::Validation(Npc* npc) const
 {
-    if (npc->vehicle()->starsystem()->id() != npc->stateMachine().microTaskManager().target()->starsystem()->id())
-    {
-        return true;
-    }
+    assert(false);
+//    if (npc->vehicle()->starsystem()->id() != npc->stateMachine().microTaskManager().target()->starsystem()->id())
+//    {
+//        return true;
+//    }
     
     return false;
 }
@@ -63,20 +65,21 @@ void MicroScenarioJump::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
-         if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
-         {
-             VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
-             if ( (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID) and (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID) )
-             {
-                 npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID);
-             }
-         }
+        assert(false);
+//         if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
+//         {
+//             VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
+//             if ( (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID) and (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID) )
+//             {
+//                 npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID);
+//             }
+//         }
 }
 
 /* virtual */
 void MicroScenarioJump::exit(Npc* npc) const
 {
-    LOG("vehicle_id/npc_id="+std::to_string(npc->vehicle()->id())+"/"+std::to_string(npc->id())+" EXIT MicroScenarioJump");
+//    LOG("vehicle_id/npc_id="+std::to_string(npc->vehicle()->id())+"/"+std::to_string(npc->id())+" EXIT MicroScenarioJump");
 }
 
 /* virtual */

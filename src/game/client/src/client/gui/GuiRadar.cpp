@@ -89,10 +89,11 @@ void GuiRadar::AddIfWithinRadarRange(SpaceObject* object, const Vehicle& vehicle
 /* virtual override final */
 void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
-    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;
-    ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
+    assert(false);
+//    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;
+//    ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
     
-    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
+//    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
     
     //drawTexturedRect(textureOb_background, rect, -2.0);
     //drawTexturedRect(textureOb_bar, rect, -2.0);

@@ -158,7 +158,8 @@ void WeaponComplex::setTarget(SpaceObject* target, ItemSlot* item_slot)
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
     //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
 
-    target->remeberAgressor(owner_vehicle);
+    assert(false);
+    //target->remeberAgressor(owner_vehicle);
 
     for (ItemSlot* slot: m_slots) {
         if (slot->isSelected()) {
