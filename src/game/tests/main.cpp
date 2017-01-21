@@ -161,8 +161,8 @@ TEST(clone, galaxy)
 TEST(clone, sector)
 {
     const auto& descriptor = core::global::get().descriptors().sector().random();
-    auto s1 = core::global::get().sectorBuilder().create(descriptor);
-    auto s2 = core::global::get().sectorBuilder().create(descriptor);
+    auto s1 = builder::Sector::create(descriptor);
+    auto s2 = builder::Sector::create(descriptor);
     EXPECT_EQ(*s1, *s2);
 }
 

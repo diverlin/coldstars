@@ -30,14 +30,11 @@
 
 #include <meti/RandUtils.hpp>
 
-SectorBuilder::SectorBuilder()
-{}
 
-SectorBuilder::~SectorBuilder()
-{}
+namespace builder {
 
 model::Sector*
-SectorBuilder::createTemplate(int_t id) const
+Sector::createTemplate(int_t id)
 {   
     model::Sector* sector = new model::Sector;
     assert(sector);
@@ -48,15 +45,15 @@ SectorBuilder::createTemplate(int_t id) const
 } 
 
 model::Sector*
-SectorBuilder::create(const descriptor::Sector& descriptor) const
+Sector::create(const descriptor::Sector& descriptor)
 {
     model::Sector* sector = createTemplate();
-    createInternals(sector, descriptor);
+    Sector::createInternals(sector, descriptor);
     
     return sector;
 } 
 
-void SectorBuilder::createInternals(model::Sector* sector, const descriptor::Sector& descriptor) const
+void Sector::createInternals(model::Sector* sector, const descriptor::Sector& descriptor)
 {
     for(const auto& id: descriptor.starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
@@ -66,7 +63,7 @@ void SectorBuilder::createInternals(model::Sector* sector, const descriptor::Sec
     }
 }
 
-
+} // namespace builder
 
 
 
