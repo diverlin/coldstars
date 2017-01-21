@@ -29,19 +29,22 @@ namespace descriptor {
 class Sector;
 } // namespace descriptor
 
-class SectorBuilder
+namespace builder {
+
+class Sector
 {
 public:
-    SectorBuilder();
-    ~SectorBuilder();
+    Sector()=default;
+    ~Sector()=default;
 
-    model::Sector* createTemplate(int_t id = NONE) const;
-    model::Sector* create(const descriptor::Sector&) const;
+    static model::Sector* createTemplate(int_t id = NONE);
+    static model::Sector* create(const descriptor::Sector&);
     
 private:
-    void createInternals(model::Sector*, const descriptor::Sector&) const;
+    static void createInternals(model::Sector*, const descriptor::Sector&);
 }; 
 
+} // namespace builder
 
 
 

@@ -91,8 +91,6 @@ class BlackHole;
 } // namespace builder
 
 class GalaxyBuilder;
-class SectorBuilder;
-class StarsystemBuilder;
 
 namespace descriptor {
 class Manager;
@@ -161,18 +159,13 @@ public:
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
-//    builder::Asteroid& asteroidBuilder() { return *m_asteroidBuilder; }
     builder::BlackHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
     builder::Container& containerBuilder() { return *m_containerBuilder; }
-//    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
-//    StarBuilder& starBuilder() { return *m_starBuilder; }
     builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
     builder::Satellite& satelliteBuilder() { return *m_satelliteBuilder; }
     builder::SpaceStation& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
     GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
-    SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
-//    StarsystemBuilder& starsystemBuilder() { return *m_starsystemBuilder; }
 
     descriptor::Manager& descriptors() { return *m_descriptors; }
 
@@ -238,19 +231,13 @@ private:
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
-//    builder::Asteroid* m_asteroidBuilder = nullptr;
     builder::BlackHole* m_blackHoleBuilder = nullptr;
     builder::Container* m_containerBuilder = nullptr;
-//    PlanetBuilder* m_planetBuilder = nullptr;
-//    StarBuilder* m_starBuilder = nullptr;
     builder::Rocket* m_rocketBulletBuilder = nullptr;
     builder::Satellite* m_satelliteBuilder = nullptr;
-    //ShipBuilder* m_shipBuilder = nullptr;
     builder::SpaceStation* m_spaceStationBuilder = nullptr;
 
     GalaxyBuilder* m_galaxyBuilder = nullptr;
-    SectorBuilder* m_sectorBuilder = nullptr;
-//    StarsystemBuilder* m_starsystemBuilder = nullptr;
 
     descriptor::Manager* m_descriptors = nullptr;
 };

@@ -77,8 +77,6 @@
 #include <builder/spaceobjects/SpaceStationBuilder.hpp>
 
 #include <builder/world/GalaxyBuilder.hpp>
-#include <builder/world/SectorBuilder.hpp>
-#include <builder/world/StarSystemBuilder.hpp>
 
 namespace core {
 
@@ -142,19 +140,12 @@ global::global()
 
     , m_bombBuilder(new BombBuilder)
     , m_npcBuilder(new NpcBuilder)
-//    , m_itemSlotBuilder(new ItemSlotBuilder)
-//    , m_vehicleSlotBuilder(new VehicleSlotBuilder)
-//    , m_asteroidBuilder(new builder::Asteroid)
     , m_blackHoleBuilder(new builder::BlackHole)
     , m_containerBuilder(new builder::Container)
-    //, m_planetBuilder(new PlanetBuilder)
-    //, m_starBuilder(new StarBuilder)
     , m_rocketBulletBuilder(new builder::Rocket)
     , m_satelliteBuilder(new builder::Satellite)
     , m_spaceStationBuilder(new builder::SpaceStation)
     , m_galaxyBuilder(new GalaxyBuilder)
-    , m_sectorBuilder(new SectorBuilder)
-//    , m_starsystemBuilder(new StarsystemBuilder)
     , m_descriptors(new descriptor::Manager)
 {
 }
@@ -211,21 +202,13 @@ global::~global()
     delete m_bombBuilder;
 
     delete m_npcBuilder;
-//    delete m_itemSlotBuilder;
-//    delete m_vehicleSlotBuilder;
-
-//    delete m_asteroidBuilder;
     delete m_blackHoleBuilder;
     delete m_containerBuilder;
-//    delete m_planetBuilder;
-//    delete m_starBuilder;
     delete m_rocketBulletBuilder;
     delete m_satelliteBuilder;
     delete m_spaceStationBuilder;
 
     delete m_galaxyBuilder;
-    delete m_sectorBuilder;
-//    delete m_starsystemBuilder;
 }
 
 } // namespace core
