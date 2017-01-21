@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 namespace model {
 class BlackHole;
 } // namespace model
@@ -33,11 +31,12 @@ public:
     BlackHole();
     ~BlackHole();
 
-    model::BlackHole* createTemplate(int_t id = NONE) const;
-    model::BlackHole* create() const;
+    static model::BlackHole* create();
 
 private:
-    void createInternals(model::BlackHole*) const;
-}; 
+    static void __createInternals(model::BlackHole*);
+
+    static model::BlackHole* __createTemplate();
+};
 
 } // namespace builder

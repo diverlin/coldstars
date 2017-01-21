@@ -22,7 +22,7 @@
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
 
-#include <ceti/type/IdType.hpp>
+//#include <ceti/type/IdType.hpp>
 
 
 namespace model {
@@ -49,11 +49,11 @@ public:
     SpaceStation();
     ~SpaceStation();
 
-    model::SpaceStation* createTemplate(int_t id = NONE) const;
-    model::SpaceStation* create() const;
+    static model::SpaceStation* create();
 
 private:
-    void createInternals(model::SpaceStation*) const;
+    static void __createInternals(model::SpaceStation*);
+    static model::SpaceStation* __createTemplate();
 }; 
 
 } // namespace builder

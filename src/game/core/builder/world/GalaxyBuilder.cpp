@@ -29,15 +29,16 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace builder {
 
-GalaxyBuilder::GalaxyBuilder()
+Galaxy::Galaxy()
 {}
 
-GalaxyBuilder::~GalaxyBuilder()
+Galaxy::~Galaxy()
 {}
 
 model::Galaxy*
-GalaxyBuilder::createTemplate(int_t id) const
+Galaxy::__createTemplate()
 {
     model::Galaxy* galaxy = new model::Galaxy;
     assert(galaxy);
@@ -48,15 +49,15 @@ GalaxyBuilder::createTemplate(int_t id) const
 } 
 
 model::Galaxy*
-GalaxyBuilder::create(const descriptor::Galaxy& galaxy_descriptor) const
+Galaxy::create(const descriptor::Galaxy& galaxy_descriptor)
 {
-    model::Galaxy* galaxy = createTemplate();
+    model::Galaxy* galaxy = __createTemplate();
     __createInternals(galaxy, galaxy_descriptor);
     
     return galaxy;
 } 
 
-void GalaxyBuilder::__createInternals(model::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void Galaxy::__createInternals(model::Galaxy* galaxy, const descriptor::Galaxy& descriptor)
 {     
     assert(false);
     //    for(const auto& id: descriptor.sectors) {
@@ -66,3 +67,4 @@ void GalaxyBuilder::__createInternals(model::Galaxy* galaxy, const descriptor::G
     //    }
 }
 
+} // namespace builder

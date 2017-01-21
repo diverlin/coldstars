@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 namespace model {
 class Planet;
 } // namespace model
@@ -38,7 +36,7 @@ public:
     static model::Planet* create(const descriptor::Planet&);
 
 private:
-    static model::Planet* __createTemplate(int_t id = NONE);
+    static model::Planet* __createTemplate();
 }; 
 
 } // namespace builder

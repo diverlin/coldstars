@@ -47,13 +47,13 @@ model::Ship*
 Ship::create(const descriptor::BaseOLD& descr)
 {            
     descriptor::BaseOLD descriptor(descr.data());
-    int_t id = NONE;
-    if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
-        descriptor = core::global::get().descriptors().get(descr.descriptor());
-        id = descr.objId();
-    }
+//    int_t id = NONE;
+//    if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
+//        descriptor = core::global::get().descriptors().get(descr.descriptor());
+//        id = descr.objId();
+//    }
 
-    model::Ship* ship = __getNewTemplate(id);
+    model::Ship* ship = __getNewTemplate(/*id*/);
     __createInternals(ship, descriptor);
     return ship;
 }
@@ -65,11 +65,8 @@ Ship::create(const std::string& data)
 }
 
 model::Ship*
-Ship::__getNewTemplate(int_t id)
+Ship::__getNewTemplate()
 {
-    if (id == NONE) {
-        id = core::global::get().idGenerator().nextId();
-    }
     model::Ship* ship = new model::Ship;
     core::global::get().entityManager().reg(ship);
     return ship;

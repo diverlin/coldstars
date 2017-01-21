@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 namespace model {
 class Galaxy;
 } // namespace model
@@ -29,19 +27,22 @@ namespace descriptor {
 class Galaxy;
 }
 
-class GalaxyBuilder
+namespace builder {
+
+class Galaxy
 {
 public:
-    GalaxyBuilder();
-    ~GalaxyBuilder();
+    Galaxy();
+    ~Galaxy();
 
-    model::Galaxy* createTemplate(int_t id = NONE) const;
-    model::Galaxy* create(const descriptor::Galaxy&) const;
+    static model::Galaxy* create(const descriptor::Galaxy&);
 
 private:
-    void __createInternals(model::Galaxy*, const descriptor::Galaxy&) const;
+    static void __createInternals(model::Galaxy*, const descriptor::Galaxy&);
+    static model::Galaxy* __createTemplate();
 }; 
 
+} // namespace builder
 
 
 

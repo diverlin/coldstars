@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 namespace model {
 class Sector;
 } // namespace model
@@ -37,11 +35,11 @@ public:
     Sector()=default;
     ~Sector()=default;
 
-    static model::Sector* createTemplate(int_t id = NONE);
     static model::Sector* create(const descriptor::Sector&);
     
 private:
-    static void createInternals(model::Sector*, const descriptor::Sector&);
+    static void __createInternals(model::Sector*, const descriptor::Sector&);
+    static model::Sector* __createTemplate();
 }; 
 
 } // namespace builder

@@ -21,16 +21,10 @@
 
 #include <string>
 
-#include <ceti/type/IdType.hpp>
-
 namespace descriptor {
 //class Container;
 class BaseOLD;
 } // namespace descriptor
-
-//namespace jeti {
-//class TextureOb;
-//}
 
 namespace item {
 class Base;

@@ -34,7 +34,7 @@ SpaceStation::SpaceStation()
 SpaceStation::~SpaceStation() {}
 
 model::SpaceStation*
-SpaceStation::createTemplate(int_t id) const
+SpaceStation::__createTemplate()
 {           
     model::SpaceStation* spacestation = new model::SpaceStation;
     assert(spacestation);
@@ -45,16 +45,16 @@ SpaceStation::createTemplate(int_t id) const
 }
 
 model::SpaceStation*
-SpaceStation::create() const
+SpaceStation::create()
 {
-    model::SpaceStation* spacestation = createTemplate();
-    createInternals(spacestation);
+    model::SpaceStation* spacestation = __createTemplate();
+    __createInternals(spacestation);
     
     return spacestation;
 }
 
 void
-SpaceStation::createInternals(model::SpaceStation* spacestation) const
+SpaceStation::__createInternals(model::SpaceStation* spacestation)
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;

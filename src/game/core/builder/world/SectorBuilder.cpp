@@ -34,7 +34,7 @@
 namespace builder {
 
 model::Sector*
-Sector::createTemplate(int_t id)
+Sector::__createTemplate()
 {   
     model::Sector* sector = new model::Sector;
     assert(sector);
@@ -47,13 +47,13 @@ Sector::createTemplate(int_t id)
 model::Sector*
 Sector::create(const descriptor::Sector& descriptor)
 {
-    model::Sector* sector = createTemplate();
-    Sector::createInternals(sector, descriptor);
+    model::Sector* sector = __createTemplate();
+    Sector::__createInternals(sector, descriptor);
     
     return sector;
 } 
 
-void Sector::createInternals(model::Sector* sector, const descriptor::Sector& descriptor)
+void Sector::__createInternals(model::Sector* sector, const descriptor::Sector& descriptor)
 {
     for(const auto& id: descriptor.starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));

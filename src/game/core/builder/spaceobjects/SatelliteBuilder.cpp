@@ -32,7 +32,7 @@ Satellite::~Satellite()
 {}
 
 model::Satellite*
-Satellite::createTemplate(int_t id) const
+Satellite::__createTemplate()
 {
     model::Satellite* model = new model::Satellite;
     assert(model);
@@ -43,15 +43,15 @@ Satellite::createTemplate(int_t id) const
 }
 
 model::Satellite*
-Satellite::create() const
+Satellite::create()
 {
-    model::Satellite* satellite = createTemplate();
-    createInternals(satellite);
+    model::Satellite* satellite = __createTemplate();
+    __createInternals(satellite);
     
     return satellite;
 }
 
-void Satellite::createInternals(model::Satellite* model) const
+void Satellite::__createInternals(model::Satellite* model)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
