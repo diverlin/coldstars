@@ -19,12 +19,11 @@
 
 #pragma once
 
-//namespace jeti {
-//class Renderer;
-//}
-
 #include "Base.hpp"
-#include "../../spaceobjects/SpaceObject.hpp"
+
+namespace model {
+class SpaceObject;
+}
 
 namespace item {
 namespace equipment {
@@ -43,9 +42,9 @@ public:
     int radius()     const override final { return m_radius; }
     int speed()      const { return m_speed; }
 
-    bool CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const;
-    void AddTarget(SpaceObject*);
-    void RemoveTarget(SpaceObject*);
+    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;
+    void AddTarget(model::SpaceObject*);
+    void RemoveTarget(model::SpaceObject*);
 
     void RemoveAllTargets();
 
@@ -77,7 +76,7 @@ private:
 
     int m_free_strength;
 
-    std::vector<SpaceObject*> m_targets;
+    std::vector<model::SpaceObject*> m_targets;
 
     void virtual addUniqueInfo();
     std::string GetStrengthStr();

@@ -17,8 +17,8 @@
 */
 
 #include "Sector.hpp"
-#include "starsystem.hpp"
-#include "galaxy.hpp"
+#include <core/world/starsystem.hpp>
+#include <core/world/galaxy.hpp>
 #include <managers/EntityManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
@@ -30,16 +30,26 @@
 
 #include "../struct/StarSystemsConditionData.hpp"
 
-Sector::Sector(int id)
-    :
-      m_galaxy(nullptr)
+#include <ceti/serialization/macro.hpp>
+
+
+namespace model {
+
+Sector::Sector()
 {
-    setId(id);
-    setTypeId(type::entity::SECTOR_ID);
+    setType(type::entity::SECTOR_ID);
 }
 
-Sector::~Sector()
-{}
+Sector::Sector(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Sector::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 bool Sector::operator==(const Sector& rhs) const {
     if (m_position != rhs.m_position) {
@@ -54,71 +64,94 @@ bool Sector::operator!=(const Sector& rhs) const {
     return !(*this == rhs);
 }
 
-Starsystem* Sector::activeStarsystem() const {
-    assert(m_starsystems.size() != 0);
-    return m_starsystems[0];
+} // namespace model
+
+
+namespace control {
+
+Sector::Sector(model::Sector* model)
+    :
+      SpaceObject(model)
+    , m_model_sector(model)
+{
+}
+
+Sector::~Sector()
+{}
+
+model::Starsystem*
+Sector::activeStarsystem() const {
+    assert(false);
+//    assert(m_starsystems.size() != 0);
+//    return m_starsystems[0];
 }
 
 /* virtual */
 void Sector::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<m_starsystems.size(); i++) {
-       core::global::get().entityManager().addToGarbage(m_starsystems[i]);
-    }
+    assert(false);
+//    for (unsigned int i=0; i<m_starsystems.size(); i++) {
+//       core::global::get().entityManager().addToGarbage(m_starsystems[i]);
+//    }
 }
 
-void Sector::add(Starsystem* starsystem, const glm::vec3& center)
+void Sector::add(model::Starsystem* _model, const glm::vec3& center)
 { 
-    starsystem->setSector(this);
-    starsystem->setPosition(center);
+    _model->setSector(model()->id());
+    _model->setPosition(center);
 
+    control::Starsystem* starsystem = new control::Starsystem(_model);
     m_starsystems.push_back(starsystem);
 }
 
-Starsystem* Sector::randomStarsystem(int condition_id)
+model::Starsystem*
+Sector::randomStarsystem(int condition_id)
 {
-    Starsystem* result = nullptr;
-    if (condition_id == NONE) {
-        result = meti::getRand(m_starsystems);
-    } else {
-        std::vector<Starsystem*> ss_vec;
-        for (auto starsystem: m_starsystems) {
-            if (starsystem->conditionId() == condition_id) {
-                ss_vec.push_back(starsystem);
-            }
-        }
-        if (ss_vec.size()) {
-            result = meti::getRand(ss_vec);
-        }
-    }
+    model::Starsystem* result = nullptr;
+    assert(false);
+//    if (condition_id == NONE) {
+//        result = meti::getRand(m_starsystems)->model();
+//    } else {
+//        std::vector<model::Starsystem*> ss_vec;
+//        for (control::Starsystem* starsystem: m_starsystems) {
+//            if (starsystem->conditionId() == condition_id) {
+//                ss_vec.push_back(starsystem->model());
+//            }
+//        }
+//        if (ss_vec.size()) {
+//            result = meti::getRand(ss_vec);
+//        }
+//    }
 
     return result;
 }
 
 
 
-Starsystem* Sector::closestStarsystemTo(Starsystem* toStarsystem, int condition_id)
+model::Starsystem*
+Sector::closestStarsystemTo(model::Starsystem* toStarsystem, int condition_id)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
-    Starsystem* result = nullptr;
-    for (auto starsystem: m_starsystems) {
-        if (starsystem->id() != toStarsystem->id()) {
-            if ( (starsystem->conditionId() == condition_id) || (condition_id == NONE) ) {
-                float dist = meti::distance(starsystem->position(), toStarsystem->position());
-                if (dist < dist_min) {
-                    dist_min = dist;
-                    result = starsystem;
-                }
-            }
-        }
-    }
+    model::Starsystem* result = nullptr;
+    assert(false);
+//    for (auto starsystem: m_starsystems) {
+//        if (starsystem->id() != toStarsystem->id()) {
+//            if ( (starsystem->conditionId() == condition_id) || (condition_id == NONE) ) {
+//                float dist = meti::distance(starsystem->position(), toStarsystem->position());
+//                if (dist < dist_min) {
+//                    dist_min = dist;
+//                    result = starsystem;
+//                }
+//            }
+//        }
+//    }
 
     return result;
 }
 
 void Sector::update(int time)
 {
-    for (Starsystem* starsystem: m_starsystems) {
+    for (control::Starsystem* starsystem: m_starsystems) {
         starsystem->update(time);
     }
 }
@@ -138,41 +171,41 @@ void Sector::update(int time)
 //}
 //}
 
-void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    save_ptree.put(root+"galaxy_id", m_galaxy->id());
-}
+//void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    save_ptree.put(root+"galaxy_id", m_galaxy->id());
+//}
 
-void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    m_data_unresolved_Sector.galaxy_id = load_ptree.get<int>("galaxy_id");
-}
+//void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    m_data_unresolved_Sector.galaxy_id = load_ptree.get<int>("galaxy_id");
+//}
 
-void Sector::ResolveData()
-{
-    //((Galaxy*)core::global::get().entityManager().get(m_data_unresolved_Sector.galaxy_id))->add(this, data_unresolved_Orientation.center);
-}
+//void Sector::ResolveData()
+//{
+//    //((Galaxy*)core::global::get().entityManager().get(m_data_unresolved_Sector.galaxy_id))->add(this, data_unresolved_Orientation.center);
+//}
 
-void Sector::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "sector." + std::to_string(id())+".";
+//void Sector::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    std::string root = "sector." + std::to_string(id())+".";
 
-    Base::SaveData(save_ptree, root);
-    Sector::SaveData(save_ptree, root);
-}
+//    Base::SaveData(save_ptree, root);
+//    Sector::SaveData(save_ptree, root);
+//}
 
-void Sector::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-    Sector::LoadData(load_ptree);
-}
+//void Sector::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+//    Sector::LoadData(load_ptree);
+//}
 
-void Sector::Resolve()
-{
-    Base::ResolveData();
-    Sector::ResolveData();
-}
+//void Sector::Resolve()
+//{
+//    Base::ResolveData();
+//    Sector::ResolveData();
+//}
 
-
+} // namespace control
 
 

@@ -73,10 +73,8 @@ class BaseParticleSystem;
 class LazerTraceEffect;
 
 
-namespace ENTITY 
-{
-namespace STARSYSTEM
-{
+namespace ENTITY {
+namespace STARSYSTEM {
 const int JUMPRADIUS = 1200;
 
 const int PLANET_NUM_MIN = 3;
@@ -93,20 +91,13 @@ const int SPACESTATION_NUM_MAX = 3;
 const int DISTANT_NEBULA_MIN = 6;
 const int DISTANT_NEBULA_MAX = 8;
 
-enum CONDITION
-{
+enum CONDITION {
     WAR_ID=1, CAPTURED_ID, SAFE_ID
 };
-}
-}
-
-struct UnresolvedData
-{
-    int sector_id;
-};
+} // namespace STARSYSTEM
+} // namespace ENTITY
 
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
-
 
 class Explosion
 {
@@ -126,17 +117,93 @@ private:
     int m_radius = 0;
 };
 
-class Starsystem : public SpaceObject
+
+namespace model {
+
+//# TODO:: remove inherits from SpaceObject, do the same for Sector and Galaxy
+class Starsystem : public model::SpaceObject
+{
+public:
+    Starsystem();
+    ~Starsystem() = default;
+    Starsystem(const std::string& data);
+    std::string data() const;
+
+    bool operator==(const Starsystem& rhs) const;
+    bool operator!=(const Starsystem& rhs) const;
+
+    void setSector(int_t sector)  { m_sector = sector; }
+
+    int conditionId()     const { return m_condition_id; }
+    int raceId()          const { return m_race_id; }
+    int conquerorRaceId() const { return m_conqueror_race_id; }
+
+    int_t sector() const { return m_sector; }
+
+    void addVehicle(int_t vehicle) { m_vehicles.push_back(vehicle); }
+    void addBullet(int_t bullet) { m_bullets.push_back(bullet); }
+    void addStar(int_t star) { m_stars.push_back(star); }
+    void addPlanet(int_t planet) { m_planets.push_back(planet); }
+    void addAsteroid(int_t asteroid) { m_asteroids.push_back(asteroid); }
+    void addContainer(int_t container) { m_containers.push_back(container); }
+    void addBlackhole(int_t blackhole) { m_blackholes.push_back(blackhole); }
+
+    std::vector<int_t> planets() const { return m_planets; }
+    std::vector<int_t> stars() const { return m_stars; }
+    std::vector<int_t> asteroids() const { return m_asteroids; }
+    std::vector<int_t> vehicles() const { return m_vehicles; }
+    std::vector<int_t> containers() const { return m_containers; }
+
+private:
+    int m_race_id = NONE;
+    int m_conqueror_race_id = NONE;
+    int m_condition_id = NONE;
+
+    int_t m_sector = NONE;
+
+    std::vector<int_t> m_stars;
+    std::vector<int_t> m_planets;
+    std::vector<int_t> m_asteroids;
+    std::vector<int_t> m_containers;
+    std::vector<int_t> m_bullets;
+    std::vector<int_t> m_blackholes;
+    std::vector<int_t> m_vehicles;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        //ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & m_race_id;
+        ar & m_conqueror_race_id;
+        ar & m_condition_id;
+        ar & m_sector;
+
+//        ar & m_stars;
+//        ar & m_planets;
+//        ar & m_asteroids;
+//        ar & m_containers;
+//        ar & m_bullets;
+//        ar & m_blackholes;
+//        ar & m_vehicles;
+    }
+};
+
+} // namespace model
+
+
+namespace control {
+
+class Starsystem : public control::SpaceObject
 {
     //    using Stars = std::vector<Star*>;
     //    using Planets = std::vector<Planet*>;
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    Starsystem(int_t id = NONE);
+    Starsystem(model::Starsystem*);
     ~Starsystem();
-    bool operator==(const Starsystem& rhs) const;
-    bool operator!=(const Starsystem& rhs) const;
 
     virtual void putChildrenToGarbage() const;
 
@@ -225,8 +292,11 @@ public:
     control::Vehicle* randVehicleByNpcRaceId(type::race) const;
     control::Vehicle* randomVehicle(const std::vector<type::race>&) const;
     //
+
+    model::Starsystem* model() const { return m_model_starsystem; }
+
 private:
-    static int m_counter;
+    model::Starsystem* m_model_starsystem = nullptr;
 
     type::race m_race_id = type::race::R0_ID;
     type::race m_conqueror_race_id = type::race::NONE_ID;
@@ -266,8 +336,6 @@ private:
 
     //        GarbageEffects  garbage_effects;
 
-    UnresolvedData m_data_unresolved_StarSystem;
-
     void __launchingEvent() const;
 
     void __updateInSpaceInStatic_s();
@@ -300,7 +368,4 @@ private:
     friend class God;
 };
 
-
-
-
-
+} // namespace control

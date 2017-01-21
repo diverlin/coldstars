@@ -18,25 +18,25 @@
 
 #pragma once
 
-#include <set>
-
 #include <common/Base.hpp>
 
-#include <pilots/Skills.hpp>
-#include <ai/StateMachine.hpp>
-#include <pilots/Observation.hpp>
-#include <pilots/AgressorData.hpp>
+#include <core/pilots/Skills.hpp>
+#include <core/ai/StateMachine.hpp>
+#include <core/pilots/Observation.hpp>
+#include <core/pilots/AgressorData.hpp>
+
+#include <set>
 
 class BaseAiModel;
 
 namespace model {
 class Vehicle;
 class Planet;
+class Starsystem;
 } // namespace model
 
 class Player;
 class GoodsPack;
-class Starsystem;
 
 //struct UnresolvedDataNpc
 //{
@@ -116,7 +116,7 @@ public:
 
     StateMachine& stateMachine() { return m_stateMachine; }
 
-    Starsystem* starsystem() const;
+    model::Starsystem* starsystem() const;
 
     void increaseCredits(unsigned long int credits) { m_credits += credits; }
     bool withdrawCredits(unsigned long int);
@@ -139,7 +139,7 @@ public:
     //// scanning
 
     model::Planet* planetForDocking();
-    Starsystem* closestStarSystem(int);
+    model::Starsystem* closestStarSystem(int);
 
     void renderInfo(const glm::vec2&);
 

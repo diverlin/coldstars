@@ -21,26 +21,29 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace model {
 class Galaxy;
+} // namespace model
+
 namespace descriptor {
 class Galaxy;
 }
 
 class GalaxyBuilder
 {
-    public:
-        GalaxyBuilder();
-        ~GalaxyBuilder();
-        
-        Galaxy* createTemplate(int_t id = NONE) const;
-        Galaxy* create(const descriptor::Galaxy&) const;
-                                                
-    private:       
-        void __createInternals(Galaxy*, const descriptor::Galaxy&) const;
+public:
+    GalaxyBuilder();
+    ~GalaxyBuilder();
+
+    model::Galaxy* createTemplate(int_t id = NONE) const;
+    model::Galaxy* create(const descriptor::Galaxy&) const;
+
+private:
+    void __createInternals(model::Galaxy*, const descriptor::Galaxy&) const;
 }; 
-    
 
 
-        
+
+
 
 

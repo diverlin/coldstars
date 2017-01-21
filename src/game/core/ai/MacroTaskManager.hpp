@@ -22,29 +22,31 @@
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
 
+namespace model {
 class SpaceObject;
+} // namespace model
 
 class MacroTaskManager
 {
-    public:
-        MacroTaskManager();
-        ~MacroTaskManager();
-        
-        void setTask(const Task&);
-        
-        SpaceObject* target() const { return m_target; }
-        const Task& task() const { return m_macrotask; }
-        BaseScenario* scenario() const { return m_scenario; }
-                        
-    private:
-        Task m_macrotask;
-        BaseScenario* m_scenario = nullptr;
-        SpaceObject* m_target = nullptr;
-        
-        void __reset();
-        
+public:
+    MacroTaskManager();
+    ~MacroTaskManager();
+
+    void setTask(const Task&);
+
+    model::SpaceObject* target() const { return m_target; }
+    const Task& task() const { return m_macrotask; }
+    BaseScenario* scenario() const { return m_scenario; }
+
+private:
+    Task m_macrotask;
+    BaseScenario* m_scenario = nullptr;
+    model::SpaceObject* m_target = nullptr;
+
+    void __reset();
+
     friend class StateMachine;
 };
 
 
-     
+

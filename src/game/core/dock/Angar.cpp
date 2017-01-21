@@ -222,7 +222,7 @@ void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Angar::ResolveData()
 {
-    ((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
+    //((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
 }
 
 

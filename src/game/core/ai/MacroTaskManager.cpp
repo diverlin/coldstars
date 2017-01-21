@@ -33,7 +33,7 @@ void MacroTaskManager::setTask(const Task& macrotask)
     m_macrotask = macrotask;
     m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
     if (m_macrotask.targetId() != NONE) {
-        m_target = (SpaceObject*)core::global::get().entityManager().getEntity(macrotask.targetId()); // hack
+        m_target = (model::SpaceObject*)core::global::get().entityManager().get(macrotask.targetId()); // hack
     }
 }
 

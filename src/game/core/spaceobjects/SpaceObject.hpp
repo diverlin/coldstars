@@ -168,78 +168,78 @@ protected:
 
 } // namespace control
 
-class SpaceObject : public ceti::control::Orientation, public core::Base
-{
-public:
-    SpaceObject();
-    ~SpaceObject() override;
+//class SpaceObject : public ceti::control::Orientation, public core::Base
+//{
+//public:
+//    SpaceObject();
+//    ~SpaceObject() override;
 
-    void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
+//    void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
-    void setStarSystem(Starsystem* starsystem) { m_starsystem = starsystem; }
-    void setPlaceTypeId(type::place place_type_id) { m_placeTypeId = place_type_id;  }
-    void setMass(int mass) { m_mass = mass; }
+//    void setStarSystem(Starsystem* starsystem) { m_starsystem = starsystem; }
+//    void setPlaceTypeId(type::place place_type_id) { m_placeTypeId = place_type_id;  }
+//    void setMass(int mass) { m_mass = mass; }
 
-    void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
+//    void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
     
-    void setParent(const SpaceObject* const parent) { m_parent = parent; }
+//    void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
-    Starsystem* starsystem()  const { return m_starsystem; }
-    type::place place() const { return m_placeTypeId; }
+//    Starsystem* starsystem()  const { return m_starsystem; }
+//    type::place place() const { return m_placeTypeId; }
 
-    virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
+//    virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
 
-    bool isAlive()           const { return m_dataLife.is_alive; }
-    bool isDying()           const { return m_dataLife.is_dying; }
-    bool isReadyForGarbage() const { return m_dataLife.garbage_ready; }
+//    bool isAlive()           const { return m_dataLife.is_alive; }
+//    bool isDying()           const { return m_dataLife.is_dying; }
+//    bool isReadyForGarbage() const { return m_dataLife.garbage_ready; }
 
-    int mass()  const { return m_mass; }
-    int armor() const { return m_dataLife.armor; }
+//    int mass()  const { return m_mass; }
+//    int armor() const { return m_dataLife.armor; }
 
-    const SpaceObject* const parent() const { return m_parent; }
+//    const SpaceObject* const parent() const { return m_parent; }
 
-    void addImpulse(const glm::vec3&, float);
+//    void addImpulse(const glm::vec3&, float);
 
-    virtual void remeberAgressor(SpaceObject*) {}
-    virtual void hit(int);
-    void killSilently();
+//    virtual void remeberAgressor(SpaceObject*) {}
+//    virtual void hit(int);
+//    void killSilently();
 
-    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
-    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
-    //        void RenderInfo(const glm::vec2&);
-    //        void virtual UpdateInfo() {}
+//    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
+//    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
+//    //        void RenderInfo(const glm::vec2&);
+//    //        void virtual UpdateInfo() {}
 
-protected:
-    void _addMass(int d_mass) { m_mass += d_mass; }
+//protected:
+//    void _addMass(int d_mass) { m_mass += d_mass; }
 
-    //        InfoTable& GetInfo() { return m_Info; }
-    LifeData& _dataLife() { return m_dataLife; }
-    const LifeData& _dataLife() const { return m_dataLife; } // !!! remove
+//    //        InfoTable& GetInfo() { return m_Info; }
+//    LifeData& _dataLife() { return m_dataLife; }
+//    const LifeData& _dataLife() const { return m_dataLife; } // !!! remove
 
-    const glm::vec3& _externalForce() const { return m_externalForce; }
-    glm::vec3& _externalForce() { return m_externalForce; }     // !!! remove
+//    const glm::vec3& _externalForce() const { return m_externalForce; }
+//    glm::vec3& _externalForce() { return m_externalForce; }     // !!! remove
 
-    void _checkDeath(bool);
-    virtual void _postDeathUniqueEvent(bool) {}
+//    void _checkDeath(bool);
+//    virtual void _postDeathUniqueEvent(bool) {}
 
-    UnresolvedDataSpaceObject data_unresolved_SpaceObject;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    UnresolvedDataSpaceObject data_unresolved_SpaceObject;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
     
-private:
-    LifeData m_dataLife;
+//private:
+//    LifeData m_dataLife;
 
-    glm::vec3 m_externalForce;
+//    glm::vec3 m_externalForce;
 
-    Starsystem* m_starsystem = nullptr;
-    type::place m_placeTypeId = type::place::NONE;
+//    Starsystem* m_starsystem = nullptr;
+//    type::place m_placeTypeId = type::place::NONE;
 
-    int m_mass = 0;
-    int m_expirienceToGive = 0;
+//    int m_mass = 0;
+//    int m_expirienceToGive = 0;
 
-    const SpaceObject* m_parent = nullptr;
+//    const SpaceObject* m_parent = nullptr;
 
-    friend class BaseVehicleBuilder;
-};
+//    friend class BaseVehicleBuilder;
+//};
 

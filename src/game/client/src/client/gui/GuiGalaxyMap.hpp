@@ -18,12 +18,16 @@
 
 
 #pragma once
+
 #include <client/gui/BaseGuiElement.hpp>
 #include <client/gui/MouseData.hpp>
+
 #include <jeti/PathVisual.hpp>
 
+namespace model {
 class Galaxy;
 class Starsystem;
+} // namespace model
 
 namespace jeti {
 class Renderer;
@@ -35,15 +39,15 @@ public:
     GuiGalaxyMap();
     ~GuiGalaxyMap();
 
-    void BindGalaxy(Galaxy*);
+    void BindGalaxy(model::Galaxy*);
     void UnbindGalaxy();
 
-    Galaxy* GetGalaxy() const { return m_Galaxy; }
+    model::Galaxy* GetGalaxy() const { return m_Galaxy; }
 
 private:
     float m_ScaleParsecToScreenCoord;
 
-    Galaxy* m_Galaxy;
+    model::Galaxy* m_Galaxy;
 
     jeti::PathVisual m_VisualHyperJumpRange;
     jeti::PathVisual m_VisualHyperJumpPath;
@@ -51,6 +55,6 @@ private:
     virtual void UpdateUnique(Player*) override final;
     virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
 
-    glm::vec3 GetAbsoluteStarSystemPosition(const Starsystem&) const;
+    glm::vec3 GetAbsoluteStarSystemPosition(const model::Starsystem&) const;
 };
 

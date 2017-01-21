@@ -81,7 +81,8 @@ Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
 Npc::~Npc() 
 {}  
 
-Starsystem* Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
+model::Starsystem*
+Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
 
 void Npc::cloneMacroTaskFrom(model::Npc* npc)
 {
@@ -226,18 +227,21 @@ void Npc::__scenarioFireAsteroid()
 //    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
 }
 
-model::Planet* Npc::planetForDocking()
+model::Planet*
+Npc::planetForDocking()
 {
     assert(false);
     //return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
 }
 
-Starsystem* Npc::closestStarSystem(int requested_condition_id)
+model::Starsystem*
+Npc::closestStarSystem(int requested_condition_id)
 {
-    m_observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
+    assert(false);
+//    m_observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
     
-    Starsystem* _target_starsystem = m_observation.GetClosestStarSystem(requested_condition_id);
-    return _target_starsystem;
+//    Starsystem* _target_starsystem = m_observation.GetClosestStarSystem(requested_condition_id);
+//    return _target_starsystem;
 }
 
 

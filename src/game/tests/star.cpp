@@ -45,7 +45,7 @@
 TEST(creation, star)
 {
     const descriptor::Star& descr = core::global::get().descriptors().star().random();
-    model::Star* star = builder::Star::getNew(descr);
+    model::Star* star = builder::Star::create(descr);
 
     EXPECT_EQ(descr.armor(), star->armor());
 }

@@ -52,7 +52,7 @@ m_HasTarget(false)
 {}
 
 DriveComplex::~DriveComplex()
-{      
+{
     delete m_effectDrive;
 }
 
@@ -61,7 +61,7 @@ bool DriveComplex::PathExists() const
     if ( (m_PathEnd == true) and (m_PathCenterVec.size() == 0 ) )
     {
         return false;
-    }    
+    }
     
     return true;
 }
@@ -87,7 +87,7 @@ void DriveComplex::ResetTarget()
 }
       
 void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
-{    
+{
     ResetTarget();
     m_HasTarget = true;
     
@@ -96,13 +96,13 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     UpdatePath();
 
     //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
-}      
+}
                  
-void DriveComplex::SetTarget(SpaceObject* target, int action_id)
+void DriveComplex::SetTarget(model::SpaceObject* target, int action_id)
 {
     ResetTarget();
     
-    m_target = target;    
+    m_target = target;
     m_ActionId = action_id;
     
     m_HasTarget = true;
@@ -111,15 +111,16 @@ void DriveComplex::SetTarget(SpaceObject* target, int action_id)
 }
   
 void DriveComplex::DefineDistance()
-{       
+{
     switch(m_ActionId)
-    {    
+    {
         case NAVIGATOR_ACTION::DOCKING_ID:
         {
-            m_TargetDistance = m_target->collisionRadius()/4;
-            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
+            assert(false);
+//            m_TargetDistance = m_target->collisionRadius()/4;
+//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
             
-            break;   
+            break;
         }
         
         case NAVIGATOR_ACTION::COLLECTING_ID:
@@ -128,7 +129,7 @@ void DriveComplex::DefineDistance()
             //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
             //m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;            
+            break;
         }
 
         case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
@@ -142,31 +143,34 @@ void DriveComplex::DefineDistance()
             
             //m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_target->position().z);
             
-            break;            
+            break;
         }
                     
         case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
         {
-            m_TargetDistance = m_target->collisionRadius()*1.5;
-            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
+            assert(false);
+//            m_TargetDistance = m_target->collisionRadius()*1.5;
+//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
             
-            break;            
+            break;
         }
 
         case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
         {
-            m_TargetDistance = m_target->collisionRadius()*4;
-            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+            assert(false);
+//            m_TargetDistance = m_target->collisionRadius()*4;
+//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;            
+            break;
         }
         
         case NAVIGATOR_ACTION::KEEP_FAR_ID:
         {
-            m_TargetDistance = m_target->collisionRadius()*8;
-            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+            assert(false);
+//            m_TargetDistance = m_target->collisionRadius()*8;
+//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;    
+            break;
         }
 
     }
@@ -176,29 +180,23 @@ void DriveComplex::UpdatePath()
 {
     if (m_target != nullptr)
     {
-        if (ValidateTarget() == true)
-        {
+        if (ValidateTarget()) {
             DefineDistance();
             UpdateDynamicTargetCoord();
-        }
-        else
-        {
+        } else {
             ResetTarget();
         }
     }
     
-    if (m_HasTarget == true)
-    {
+    if (m_HasTarget) {
         CalcPath();
     }
 }
 
 bool DriveComplex::ValidateTarget() const
 {
-    if (m_target->isAlive() == true)
-    {
-        if (m_target->place() == type::place::KOSMOS)
-        {
+    if (m_target->isAlive()) {
+        if (m_target->place() == type::place::KOSMOS) {
             return true;
         }
     }
@@ -209,7 +207,7 @@ bool DriveComplex::ValidateTarget() const
 
 
 void DriveComplex::UpdateDynamicTargetCoord()
-{        
+{
     switch(m_target->type())
     {
         case type::entity::STARSYSTEM_ID:
@@ -223,29 +221,29 @@ void DriveComplex::UpdateDynamicTargetCoord()
         }
     
         case type::entity::PLANET_ID:
-        { 
-            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;             
+        {
+            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
             //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
-            break;                   
-        } 
+            break;
+        }
 
         case type::entity::ASTEROID_ID:
-        { 
+        {
         // TODO
 //            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
 //            break;
-        } 
+        }
          
         case type::entity::VEHICLE_ID:
-        { 
-            m_TargetPos = m_target->position() + m_TargetOffset;  
-            break;    
+        {
+            m_TargetPos = m_target->position() + m_TargetOffset;
+            break;
         }
 
         case type::entity::CONTAINER_ID:
-        { 
-            m_TargetPos = m_target->position() + m_TargetOffset;  
-            break;    
+        {
+            m_TargetPos = m_target->position() + m_TargetOffset;
+            break;
         }
     }
 
@@ -273,8 +271,8 @@ bool DriveComplex::GetDockingPermission()
     switch(m_target->type())
     {
         //case type::entity::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
-        case type::entity::VEHICLE_ID: 
-        { 
+        case type::entity::VEHICLE_ID:
+        {
             switch(m_target->subtype())
             {
                 assert(false);
@@ -350,7 +348,7 @@ void DriveComplex::CalcPath()
 
     //int round_counter_max = 2 + 2*M_PI/angle_step;
     //int round_counter = 0;
-    //while (std::fabs(glm::dot(direction, target_dir)) < 0.999) 
+    //while (std::fabs(glm::dot(direction, target_dir)) < 0.999)
     //{
         //if (round_counter == 0)
         //{
@@ -360,7 +358,7 @@ void DriveComplex::CalcPath()
             //glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
             //glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
             
-            //float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
+            //float prob_cosa1 = glm::dot(prob_direction1, target_dir);
             //float prob_cosa2 = glm::dot(prob_direction2, target_dir);
                     
             //if (prob_cosa1 > 0)
@@ -373,7 +371,7 @@ void DriveComplex::CalcPath()
                 //if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
                 //else                                                    { sign = -1; }
             //}
-        //}        
+        //}
     
         //az += sign * angle_step;
 
@@ -385,9 +383,9 @@ void DriveComplex::CalcPath()
         //{
             //ClearPath();
             //return;
-        //}  
+        //}
 
-        ////float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);        
+        ////float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);
         
         //new_center += direction * speed_base/* * gravity_rate*/;
 
@@ -409,7 +407,7 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
                 
         m_PathCenterVec.push_back(new_center);
         m_PathDirectionVec.push_back(direction);
-    }           
+    }
 */
 
     if (m_PathCenterVec.size() > 1)
@@ -419,15 +417,15 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
     else
     {
-        ClearPath();    
+        ClearPath();
     }
 }
 
 void DriveComplex::CalcPath_DEBUG()
-{       
+{
 
     glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
-    float alphatarget = M_PI;    
+    float alphatarget = M_PI;
     glm::vec3 target_dir = glm::normalize(glm::vec3(cos(alphatarget), sin(alphatarget), 0.0));
   
     std::cout<<target_dir.x<<" "<<target_dir.y<<std::endl;
@@ -439,7 +437,7 @@ void DriveComplex::CalcPath_DEBUG()
 
     float cosa = glm::dot(direction, target_dir);
     float a = acos(cosa);
-    for (int i=0; i<32; i++) 
+    for (int i=0; i<32; i++)
     {/*
         if (round_counter == 0)
         {
@@ -449,7 +447,7 @@ void DriveComplex::CalcPath_DEBUG()
             glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
             glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
             
-            float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
+            float prob_cosa1 = glm::dot(prob_direction1, target_dir);
             float prob_cosa2 = glm::dot(prob_direction2, target_dir);
                     
             if (prob_cosa1 > 0)
@@ -493,7 +491,7 @@ void DriveComplex::UpdatePosition()
 }
 
 void DriveComplex::UpdatePathVisualisation()
-{        
+{
 //    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
 //    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
 }

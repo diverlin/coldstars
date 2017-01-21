@@ -20,15 +20,16 @@
 
 #include <meti/VectorUtils.hpp>
 
-
+namespace model {
 class SpaceObject;
+} // namespace model
 
 namespace jeti {
 class Renderer;
 namespace control {
 class Material;
 } // namespace control
-}
+} // namespace jeti
 
 class ShieldEffect
 {  
@@ -38,7 +39,7 @@ public:
 
     void SetTextureOb(jeti::control::Material* textureOb) { this->textureOb = textureOb; };
     void SetAlpha(float alpha) { color.a = alpha; };
-    void setParent(SpaceObject*);
+    void setParent(model::SpaceObject*);
 
     void Update();
     void Render(const jeti::Renderer&, float) const;
@@ -50,8 +51,8 @@ private:
     float alpha_start;
     float d_alpha;
 
-    jeti::control::Material* textureOb;
-    SpaceObject* parent;
+    jeti::control::Material* textureOb = nullptr;
+    model::SpaceObject* parent = nullptr;
 
 };
 

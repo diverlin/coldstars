@@ -32,10 +32,10 @@ Ship::~Ship()
 {}
 
 model::Ship*
-Ship::getNew(bool full_equiped)
+Ship::create(bool full_equiped)
 {
     const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    model::Ship* ship =  getNew(descr);
+    model::Ship* ship =  create(descr);
     if (full_equiped) {
         assert(false);
         //BaseVehicleBuilder::equip(ship);
@@ -44,7 +44,7 @@ Ship::getNew(bool full_equiped)
 }
 
 model::Ship*
-Ship::getNew(const descriptor::BaseOLD& descr)
+Ship::create(const descriptor::BaseOLD& descr)
 {            
     descriptor::BaseOLD descriptor(descr.data());
     int_t id = NONE;
@@ -59,9 +59,9 @@ Ship::getNew(const descriptor::BaseOLD& descr)
 }
 
 model::Ship*
-Ship::getNew(const std::string& data)
+Ship::create(const std::string& data)
 {
-    return getNew(descriptor::BaseOLD(data));
+    return create(descriptor::BaseOLD(data));
 }
 
 model::Ship*

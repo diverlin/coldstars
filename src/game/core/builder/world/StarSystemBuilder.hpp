@@ -22,26 +22,32 @@
 
 #include <string>
 
+namespace model {
 class Starsystem;
+} // namespace model
 
 namespace descriptor {
 class Starsystem;
-}
+} // descriptor
 
-class StarsystemBuilder
+namespace builder {
+
+class Starsystem
 {
 public:
-    StarsystemBuilder();
-    ~StarsystemBuilder();
+    Starsystem();
+    ~Starsystem();
 
-    static Starsystem* create();
-    static Starsystem* create(const descriptor::Starsystem&);
-    static Starsystem* create(const std::string&);
+    static model::Starsystem* create();
+    static model::Starsystem* create(const descriptor::Starsystem&);
+    static model::Starsystem* create(const std::string&);
 
 private:
-    static void __createInternals(Starsystem*, const descriptor::Starsystem&);
+    static void __createInternals(model::Starsystem*, const descriptor::Starsystem&);
 
-    static void __createBackground(Starsystem*, int, int, int);
-    static void __createStar(Starsystem*);
-    static void __createPlanets(Starsystem*, int);
+    static void __createBackground(model::Starsystem*, int, int, int);
+    static void __createStar(model::Starsystem*);
+    static void __createPlanets(model::Starsystem*, int);
 }; 
+
+} // namespace builder

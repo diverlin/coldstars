@@ -77,8 +77,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::getNew();
-    model::Ship* ship2 = builder::Ship::getNew();
+    model::Ship* ship1 = builder::Ship::create();
+    model::Ship* ship2 = builder::Ship::create();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -93,8 +93,8 @@ TEST(base,critical_hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::getNew();
-    model::Ship* ship2 = builder::Ship::getNew();
+    model::Ship* ship1 = builder::Ship::create();
+    model::Ship* ship2 = builder::Ship::create();
 
     assert(false);
     //messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
@@ -169,14 +169,14 @@ TEST(clone, sector)
 TEST(clone, starsystem)
 {
     const auto& descriptor = core::global::get().descriptors().starsystem().random();
-    auto s1 = core::global::get().starsystemBuilder().create(descriptor);
-    auto s2 = core::global::get().starsystemBuilder().create(descriptor);
+    auto s1 = builder::Starsystem::create(descriptor);
+    auto s2 = builder::Starsystem::create(descriptor);
     EXPECT_EQ(*s1, *s2);
 }
 
 TEST(model, asteroid)
 {
-    model::Asteroid* model1 = builder::Asteroid::getNew();
+    model::Asteroid* model1 = builder::Asteroid::create();
     model::Asteroid* model2 = new model::Asteroid(model1->data());
     EXPECT_EQ(model1->data(), model2->data());
 

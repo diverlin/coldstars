@@ -63,9 +63,10 @@ TEST(communication, create_bak)
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
     core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
-    item::equipment::Bak* bak = core::global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
-    assert(bak);
-    EXPECT_EQ(bak->id(), obj_id);
+    assert(false);
+//    item::equipment::Bak* bak = core::global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
+//    assert(bak);
+//    EXPECT_EQ(bak->id(), obj_id);
 }
 
 TEST(communication, inject_ship)

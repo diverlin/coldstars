@@ -123,7 +123,7 @@ Space::~Space()
 {}                                    
 
 void
-Space::__updateVisible(Starsystem* starsystem,
+Space::__updateVisible(control::Starsystem* starsystem,
                       const meti::vec3& lookFrom,
                       const meti::vec3& lookTo,
                       float lookFar)
@@ -735,7 +735,7 @@ void Space::__render_NEW2(jeti::Renderer& render)
 //                         bool forceDraw_orbits,
 //                         bool forceDraw_path)
 
-void Space::render(Starsystem* starsystem, jeti::Camera& camera)
+void Space::render(control::Starsystem* starsystem, jeti::Camera& camera)
 {   
     __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
 

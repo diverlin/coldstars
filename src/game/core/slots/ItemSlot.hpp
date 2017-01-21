@@ -27,8 +27,11 @@
 class Turrel; 
 namespace item {
 class Base;
-}
+} // namespace item
+
+namespace model {
 class SpaceObject;
+} // namespace control
 
 namespace item {
 namespace equipment {
@@ -90,10 +93,10 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
+    void setTarget(model::SpaceObject* target, ItemSlot* subtarget = nullptr);
     void setTurrel(Turrel* turrel) { m_turrel = turrel; }
 
-    SpaceObject* target() const { return m_target; }
+    model::SpaceObject* target() const { return m_target; }
     ItemSlot* subtarget() const { return m_subtarget; }
 
     int hitProbability() const { return m_hitProbability; }
@@ -157,8 +160,8 @@ public:
     void drawRange(const glm::vec2&);
 
     bool checkSubTarget(ItemSlot*) const;
-    STATUS checkTarget(SpaceObject*) const;
-    STATUS checkTargetPure(SpaceObject*) const;
+    STATUS checkTarget(model::SpaceObject*) const;
+    STATUS checkTargetPure(model::SpaceObject*) const;
 
     void selectEvent();
     void deselectEvent();
@@ -175,17 +178,17 @@ private:
 
     item::Base* m_item = nullptr;
 
-    SpaceObject* m_target = nullptr;
+    model::SpaceObject* m_target = nullptr;
     ItemSlot* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
     bool checkItemInsertion(item::Base*) const;
 
-    bool isTargetAlive(SpaceObject*) const;
-    bool isTargetInSpace(SpaceObject*) const;
-    bool isTargetInSameStarSystem(SpaceObject*) const;
-    bool checkDistanceToTarget(SpaceObject*) const;
+    bool isTargetAlive(model::SpaceObject*) const;
+    bool isTargetInSpace(model::SpaceObject*) const;
+    bool isTargetInSameStarSystem(model::SpaceObject*) const;
+    bool checkDistanceToTarget(model::SpaceObject*) const;
 
     UnresolvedDataItemSlot m_unresolved_ItemSlot;
     void SaveData(boost::property_tree::ptree&, const std::string&) const;

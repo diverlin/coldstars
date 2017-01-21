@@ -36,30 +36,33 @@ GalaxyBuilder::GalaxyBuilder()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::createTemplate(int_t id) const
+model::Galaxy*
+GalaxyBuilder::createTemplate(int_t id) const
 {
-    Galaxy* galaxy = new Galaxy(id);
+    model::Galaxy* galaxy = new model::Galaxy;
     assert(galaxy);
 
-   core::global::get().entityManager().reg(galaxy);
+    core::global::get().entityManager().reg(galaxy);
     
     return galaxy;
 } 
 
-Galaxy* GalaxyBuilder::create(const descriptor::Galaxy& galaxy_descriptor) const
+model::Galaxy*
+GalaxyBuilder::create(const descriptor::Galaxy& galaxy_descriptor) const
 {
-    Galaxy* galaxy = createTemplate();
+    model::Galaxy* galaxy = createTemplate();
     __createInternals(galaxy, galaxy_descriptor);
     
     return galaxy;
 } 
-            
-void GalaxyBuilder::__createInternals(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+
+void GalaxyBuilder::__createInternals(model::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {     
-    for(const auto& id: descriptor.sectors) {
-        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-        Sector* sector = core::global::get().sectorBuilder().create(core::global::get().descriptors().sector().get(id));
-        galaxy->add(sector, center);
-    }
+    assert(false);
+    //    for(const auto& id: descriptor.sectors) {
+    //        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
+    //        Sector* sector = core::global::get().sectorBuilder().create(core::global::get().descriptors().sector().get(id));
+    //        galaxy->add(sector, center);
+    //    }
 }
 

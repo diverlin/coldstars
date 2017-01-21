@@ -186,15 +186,15 @@ void Base::ResolveData()
 {
     LOG(" BaseItem::ResolveData()  id=" + std::to_string(id()) + " START");
     
-    //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
+//    //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
     
-    useNormalDeterioration();
-    updateProperties(); // this function must be performed before inserting to slot!!!
+//    useNormalDeterioration();
+//    updateProperties(); // this function must be performed before inserting to slot!!!
         
-    if(m_data_unresolved_BaseItem.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
-    {
-        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_BaseItem.item_slot_id))->insert(this);
-    }
+//    if(m_data_unresolved_BaseItem.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
+//    {
+//        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_BaseItem.item_slot_id))->insert(this);
+//    }
 }
 
 } // namespace item

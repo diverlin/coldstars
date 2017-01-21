@@ -18,9 +18,9 @@
 
 #pragma once
 
-class Starsystem;
-
 namespace model {
+
+class Starsystem;
 
 class World {
 public:
@@ -28,7 +28,7 @@ public:
     ~World();
     bool operator==(const World& rhs) const;
 
-    Starsystem* activeStarsystem() const;
+    model::Starsystem* activeStarsystem() const;
 
     bool run() const;
     void update();

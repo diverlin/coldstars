@@ -40,9 +40,9 @@ public:
     Ship();
     ~Ship();
 
-    static model::Ship* getNew(bool full_equiped = false);
-    static model::Ship* getNew(const descriptor::BaseOLD&);
-    static model::Ship* getNew(const std::string&);
+    static model::Ship* create(bool full_equiped = false);
+    static model::Ship* create(const descriptor::BaseOLD&);
+    static model::Ship* create(const std::string&);
 
 private:
     static model::Ship* __getNewTemplate(int_t);

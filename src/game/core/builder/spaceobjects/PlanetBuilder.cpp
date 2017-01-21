@@ -37,14 +37,14 @@ Planet::__createTemplate(int_t id)
 }
 
 model::Planet*
-Planet::getNew()
+Planet::create()
 {
     const auto& descr = core::global::get().descriptors().planet().random();
-    return getNew(descr);
+    return create(descr);
 } 
 
 model::Planet*
-Planet::getNew(const descriptor::Planet& descr)
+Planet::create(const descriptor::Planet& descr)
 {
     model::Planet* model = __createTemplate();
 

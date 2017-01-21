@@ -113,7 +113,8 @@ int main()
     while(inputs_manager.runSession()) {
         inputs_manager.update(player);
         world.update();
-        viewer.render(world.activeStarsystem(), camera);
+        assert(false);
+        //viewer.render(world.activeStarsystem(), camera);
         screen.draw();
     }
 

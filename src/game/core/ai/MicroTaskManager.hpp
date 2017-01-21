@@ -21,7 +21,9 @@
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
 
+namespace model {
 class SpaceObject;
+} // namespace model
 
 class MicroTaskManager
 {
@@ -31,14 +33,14 @@ public:
 
     void setTask(const Task&);
 
-    SpaceObject* target() const { return m_target; }
+    model::SpaceObject* target() const { return m_target; }
     const Task& task() const { return m_microtask; }
     BaseScenario* scenario() const { return m_scenario; }
 
 private:
     Task m_microtask;
     BaseScenario* m_scenario = nullptr;
-    SpaceObject* m_target = nullptr;
+    model::SpaceObject* m_target = nullptr;
 
     void __reset();
 

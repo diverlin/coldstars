@@ -120,37 +120,37 @@ private:
 
 
 
-class Planetoid : public SpaceObject 
-{
-public:
-    Planetoid();
-    virtual ~Planetoid();
+//class Planetoid : public SpaceObject
+//{
+//public:
+//    Planetoid();
+//    virtual ~Planetoid();
 
-    //void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_planetDescriptor = planet_descriptor; }
+//    //void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_planetDescriptor = planet_descriptor; }
 
-    Orbit& orbit() { return m_orbit; }   // !!!
-    const Orbit& orbit() const { return m_orbit; }
-    //const PlanetDescriptor& planetDescriptor() const { return m_planetDescriptor; }
+//    Orbit& orbit() { return m_orbit; }   // !!!
+//    const Orbit& orbit() const { return m_orbit; }
+//    //const PlanetDescriptor& planetDescriptor() const { return m_planetDescriptor; }
 
-    void bindParent(const SpaceObject* const, int);
+//    void bindParent(const SpaceObject* const, int);
 
-    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
+//    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
 
-protected:
-    virtual void putChildrenToGarbage() const {}
+//protected:
+//    virtual void putChildrenToGarbage() const {}
 
-    virtual void _postDeathUniqueEvent(bool);
-    void _updatePosition();
+//    virtual void _postDeathUniqueEvent(bool);
+//    void _updatePosition();
 
-    UnresolvedDataPlanetoid data_unresolved_Planetoid;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    UnresolvedDataPlanetoid data_unresolved_Planetoid;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
-private:
-    descriptor::Planet m_planet_descriptor;
-    Orbit m_orbit;
+//private:
+//    descriptor::Planet m_planet_descriptor;
+//    Orbit m_orbit;
 
-    void __createOrbit();
-};
+//    void __createOrbit();
+//};
 

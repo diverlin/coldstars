@@ -28,82 +28,94 @@ namespace jeti {
 class DriveEffect;
 }
 class ItemSlot; 
-class SpaceObject;
+
+
 
 namespace jeti {
 class Renderer;
 }
 
+namespace model {
+class SpaceObject;
+} // namespace model
+
+
+namespace control {
+
+} // namespace control
+
+
 class DriveComplex
 {
-    public:
-        DriveComplex();
-        ~DriveComplex();
-        
-        void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
-        void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
-        
-        void SetDriveSlot(ItemSlot* drive_slot) { m_driveSlot = drive_slot; }
-        void SetBakSlot(ItemSlot* bak_slot)     { m_bakSlot = bak_slot; }
-        
-        void SetTarget(SpaceObject*, int);       
-        void SetStaticTargetCoords(const glm::vec3&);
+public:
+    DriveComplex();
+    ~DriveComplex();
 
-        int GetActionId() const { return m_ActionId; }
-        jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
-                                    
-        ItemSlot* driveSlot() const { return m_driveSlot; }
-        ItemSlot* bakSlot()   const { return m_bakSlot; }
-              
-        SpaceObject* target() const { return m_target; }
-                    
-        bool PathExists() const;
-        
-        bool CheckTargetEchievement();
-        bool GetDockingPermission();               
-    
-        void ResetTarget();
+    void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
+    void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
-        void UpdatePath();
-        void UpdatePosition();
+    void SetDriveSlot(ItemSlot* drive_slot) { m_driveSlot = drive_slot; }
+    void SetBakSlot(ItemSlot* bak_slot)     { m_bakSlot = bak_slot; }
 
-        void UpdatePathVisualisation();                
-        void DrawPath(const jeti::Renderer&);
-            
-    private:
-        ItemSlot* m_driveSlot = nullptr;
-        ItemSlot* m_bakSlot = nullptr;
-        
-        Vehicle* m_ownerVehicle = nullptr;
-        SpaceObject* m_target = nullptr;
+    void SetTarget(model::SpaceObject*, int);
+    void SetStaticTargetCoords(const glm::vec3&);
 
-        jeti::DriveEffect* m_effectDrive = nullptr;
+    int GetActionId() const { return m_ActionId; }
+    jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
 
-        glm::vec3 m_TargetPos;
-        
-        int m_ActionId;
-        float m_TargetDistance;   
-        glm::vec3 m_TargetOffset;
+    ItemSlot* driveSlot() const { return m_driveSlot; }
+    ItemSlot* bakSlot()   const { return m_bakSlot; }
 
-        std::vector<glm::vec3> m_PathCenterVec;
-        std::vector<glm::vec3> m_PathDirectionVec;
+    model::SpaceObject* target() const { return m_target; }
 
-        bool m_PathEnd;
-        unsigned int m_PathIndex;
-                
-        bool m_HasTarget;
-        
-//        jeti::PathVisual m_PathVisualCenter;
-//        jeti::PathVisual m_PathVisualTurn;
-        
-        void ClearPath();
-        void CalcPath();      
-        void CalcPath_DEBUG();      
+    bool PathExists() const;
 
-        bool ValidateTarget() const;
-        
-        void UpdateDynamicTargetCoord();
+    bool CheckTargetEchievement();
+    bool GetDockingPermission();
 
-        void DefineDistance();
+    void ResetTarget();
+
+    void UpdatePath();
+    void UpdatePosition();
+
+    void UpdatePathVisualisation();
+    void DrawPath(const jeti::Renderer&);
+
+private:
+    ItemSlot* m_driveSlot = nullptr;
+    ItemSlot* m_bakSlot = nullptr;
+
+    Vehicle* m_ownerVehicle = nullptr;
+    model::SpaceObject* m_target = nullptr;
+
+    jeti::DriveEffect* m_effectDrive = nullptr;
+
+    glm::vec3 m_TargetPos;
+
+    int m_ActionId;
+    float m_TargetDistance;
+    glm::vec3 m_TargetOffset;
+
+    std::vector<glm::vec3> m_PathCenterVec;
+    std::vector<glm::vec3> m_PathDirectionVec;
+
+    bool m_PathEnd;
+    unsigned int m_PathIndex;
+
+    bool m_HasTarget;
+
+    //        jeti::PathVisual m_PathVisualCenter;
+    //        jeti::PathVisual m_PathVisualTurn;
+
+    void ClearPath();
+    void CalcPath();
+    void CalcPath_DEBUG();
+
+    bool ValidateTarget() const;
+
+    void UpdateDynamicTargetCoord();
+
+    void DefineDistance();
 };
+
 

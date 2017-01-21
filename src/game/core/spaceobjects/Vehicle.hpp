@@ -37,6 +37,7 @@ class GoodsPack;
 
 namespace model {
 class Container;
+class Starsystem;
 } // namespace model
 
 namespace control {
@@ -52,15 +53,15 @@ class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 
-struct UnresolvedDataVehicle
-{
-    int drive_complex_target_id;
-    int drive_complex_action_id;
+//struct UnresolvedDataVehicle
+//{
+//    int drive_complex_target_id;
+//    int drive_complex_action_id;
 
-    int starsystem_hyper_id;
-    int parent_vehicleslot_id;
-    int land_id;
-};
+//    int starsystem_hyper_id;
+//    int parent_vehicleslot_id;
+//    int land_id;
+//};
 
 
 enum class VEHICLE_SPECIAL_ACTION_TYPE {
@@ -276,7 +277,7 @@ protected:
     friend class ItemSlot;
 public:
 
-    void HyperJumpEvent(Starsystem*);
+    void HyperJumpEvent(model::Starsystem*);
     void DockingEvent();
     void LaunchingEvent();
 
@@ -290,7 +291,7 @@ public:
     //        void RenderRadarRange();
     //        void RenderGrappleRange();
 
-    bool isAbleToJumpTo(Starsystem*) const;
+    bool isAbleToJumpTo(model::Starsystem*) const;
 
     bool isArmorFull() const;
     int armorMiss() const;

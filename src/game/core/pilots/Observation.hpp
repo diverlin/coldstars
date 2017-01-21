@@ -22,12 +22,15 @@
 #include <vector>
 #include <types/RaceTypes.hpp>
 
+namespace model {
+class Starsystem;
+} // namespace model
+
 namespace control {
 class Npc; 
 } // namespace model
 
 class Galaxy;
-class Starsystem;
 class Asteroid;
 class Container;
 class Vehicle;
@@ -35,26 +38,26 @@ class Vehicle;
 template <class TYPE>
 class Pair
 {
-    public:
-        TYPE object;
-        float dist;
-            
-        Pair(TYPE object, float dist):object(object), dist(dist) {};
-        ~Pair() {};
+public:
+    TYPE object;
+    float dist;
+
+    Pair(TYPE object, float dist):object(object), dist(dist) {};
+    ~Pair() {};
 };
 
 struct VisionStatus
 {
     VisionStatus()
-    :
-    ASTEROID(false),
-    CONTAINER(false),
-    pickable_CONTAINER(false),
-    RANGER(false),
-    WARRIOR(false),
-    TRADER(false),
-    PIRAT(false),
-    DIPLOMAT(false) {}
+        :
+          ASTEROID(false),
+          CONTAINER(false),
+          pickable_CONTAINER(false),
+          RANGER(false),
+          WARRIOR(false),
+          TRADER(false),
+          PIRAT(false),
+          DIPLOMAT(false) {}
     
     bool ASTEROID;
     bool CONTAINER;
@@ -62,7 +65,7 @@ struct VisionStatus
 
     bool RANGER;
     bool WARRIOR;
-    bool TRADER;  
+    bool TRADER;
     bool PIRAT;
     bool DIPLOMAT;
 };
@@ -70,42 +73,42 @@ struct VisionStatus
 
 class Observation 
 {
-       public:
-        Observation();
-        ~Observation();
-        
-        const VisionStatus& GetVisionStatus() const { return see; };
-        
-        void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; };
-        void ObserveAllInSpace();
-        
-        void FindEchievableStarSystems(Galaxy*);
-        Container* GetClosestPickableContainer() const;
-        Container* GetRandomPickableContainer() const;
-        Starsystem* GetClosestStarSystem(int) const;
-        Vehicle* GetClosestVisibleVehicle(const std::vector<type::race>&) const;
-        Vehicle* GetRandVisibleVehicle(const std::vector<type::race>&) const;
-        
-        void FindVisibleAsteroidsInSpaceInStatic();
-        void FindVisibleContainersInSpaceInStatic();
-        void FindVisibleVehiclesInSpaceInStatic();
-        
-        template <typename OBSERVED_DATA_TYPE>
-        void Sort(std::vector<OBSERVED_DATA_TYPE>&);
-                   
-    private:
-        control::Npc* npc_owner;
-        
-        std::vector< Pair<Starsystem*> > visible_STARSYSTEM_pair_vec; 
-        std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
-        std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
-        std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;         
-        
-        std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
-        
-        VisionStatus see;
-        
+public:
+    Observation();
+    ~Observation();
+
+    const VisionStatus& GetVisionStatus() const { return see; };
+
+    void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; };
+    void ObserveAllInSpace();
+
+    void FindEchievableStarSystems(Galaxy*);
+    Container* GetClosestPickableContainer() const;
+    Container* GetRandomPickableContainer() const;
+    model::Starsystem* GetClosestStarSystem(int) const;
+    Vehicle* GetClosestVisibleVehicle(const std::vector<type::race>&) const;
+    Vehicle* GetRandVisibleVehicle(const std::vector<type::race>&) const;
+
+    void FindVisibleAsteroidsInSpaceInStatic();
+    void FindVisibleContainersInSpaceInStatic();
+    void FindVisibleVehiclesInSpaceInStatic();
+
+    template <typename OBSERVED_DATA_TYPE>
+    void Sort(std::vector<OBSERVED_DATA_TYPE>&);
+
+private:
+    control::Npc* npc_owner;
+
+    std::vector< Pair<model::Starsystem*> > visible_STARSYSTEM_pair_vec;
+    std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;
+    std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec;
+    std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;
+
+    std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;
+
+    VisionStatus see;
+
     friend class Npc;
 };
 
-     
+

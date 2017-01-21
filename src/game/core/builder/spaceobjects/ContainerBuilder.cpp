@@ -41,20 +41,20 @@ Container::~Container()
 {}
 
 model::Container*
-Container::getNew()
+Container::create()
 {
     const auto& descriptor = core::global::get().descriptors().getRand(descriptor::Type::CONTAINER);
-    return getNew(descriptor);
+    return create(descriptor);
 }
 
 model::Container*
-Container::getNew(const std::string& data)
+Container::create(const std::string& data)
 {
-    return getNew(descriptor::Container(data));
+    return create(descriptor::Container(data));
 }
 
 model::Container*
-Container::getNew(const descriptor::BaseOLD& descriptor)
+Container::create(const descriptor::BaseOLD& descriptor)
 {
     model::Container* container = __getNewTemplate();
     __createInternals(container, descriptor);

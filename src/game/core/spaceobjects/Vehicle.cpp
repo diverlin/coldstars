@@ -611,7 +611,8 @@ void Vehicle::UpdateSpecialAction()
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            HyperJumpEvent(model()->driveComplex().target()->starsystem());
+            assert(false);
+            //HyperJumpEvent(model()->driveComplex().target()->starsystem());
         }
 
         break;
@@ -630,7 +631,7 @@ void Vehicle::UpdateSpecialAction()
 }
 
 //// ******** dock/LAUNCHING ********
-void Vehicle::HyperJumpEvent(Starsystem* starsystem)
+void Vehicle::HyperJumpEvent(model::Starsystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
@@ -1247,13 +1248,13 @@ void Vehicle::_updateArtefactInfluence()
 //    }
 //}
 
-bool Vehicle::isAbleToJumpTo(Starsystem* target_starsystem) const
+bool Vehicle::isAbleToJumpTo(model::Starsystem* target_starsystem) const
 {
-    float dist = meti::distance(starsystem()->position(), target_starsystem->position());
-    if (dist < model()->properties().hyper)
-    {
-        return true;
-    }
+    assert(false);
+//    float dist = meti::distance(starsystem()->position(), target_starsystem->position());
+//    if (dist < model()->properties().hyper) {
+//        return true;
+//    }
 
     return false;
 }
@@ -1423,7 +1424,7 @@ bool Vehicle::dropItemToSpace(const type::entity& type)
 model::Container*
 Vehicle::__wrapItemToContainer(item::Base* item)
 {
-    model::Container* container = builder::Container::getNew();
+    model::Container* container = builder::Container::create();
     assert(false);
     //container->insertItem(item);
 

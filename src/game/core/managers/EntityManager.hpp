@@ -19,13 +19,44 @@
 
 # pragma once
 
-#include <common/Base.hpp>
+#include <core/common/Base.hpp>
 
 #include <map>
 #include <cassert>
 #include <string>
 
 class Player;
+
+namespace model {
+class Starsystem;
+class Ship;
+class Container;
+class SpaceObject;
+} // namespace model
+
+namespace control {
+class Starsystem;
+class Ship;
+class Container;
+class SpaceObject;
+} // namespace control
+
+namespace model {
+
+Starsystem* getStarsystem(int_t id);
+Ship* getShip(int_t id);
+Container* getContainer(int_t id);
+SpaceObject* getSpaceObject(int_t id);
+
+} // namespace model
+
+namespace control {
+
+Starsystem* getNewStarsystem();
+Ship* getNewShip();
+Container* getNewContainer();
+
+} // namespace control
 
 class EntityManager
 {
@@ -38,16 +69,7 @@ public:
     void reg(core::Base*);
     void reg(model::Base*);
 
-    core::Base* getEntity(int_t) const;
     model::Base* get(int_t) const;
-
-    template<class T>
-    T getEntity(int_t id) const {
-        core::Base* base = getEntity(id);
-        T der = static_cast<T>(base);
-        assert(der);
-        return der;
-    }
 
     Player* player() const;
 
@@ -75,6 +97,15 @@ private:
     void saveEvent(const std::string&);
     void loadPass0(const std::string&);
     void loadPass1() const;
+
+    core::Base* getEntity(int_t) const;
+    template<class T>
+    T getEntity(int_t id) const {
+        core::Base* base = getEntity(id);
+        T der = static_cast<T>(base);
+        assert(der);
+        return der;
+    }
 };
 
 

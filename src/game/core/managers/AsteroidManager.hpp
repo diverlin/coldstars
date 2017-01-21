@@ -19,25 +19,27 @@
 
 #pragma once
 
+namespace control {
 class Starsystem;
+} // namespace control
 
 class AsteroidManager 
 {
-    public:
-        AsteroidManager() {}
-        ~AsteroidManager() {}
-        
-        void parameterize(unsigned int num, int delay = 0) {
-            m_asteroidsNum = num;
-            m_delay = delay;
-        }
-            
-        void update(Starsystem*);
+public:
+    AsteroidManager() {}
+    ~AsteroidManager() {}
 
-    private:                         
-        unsigned int m_asteroidsNum = 30;
-        int m_delay = 0;
-        int m_lastTurn = 0;
+    void parameterize(unsigned int num, int delay = 0) {
+        m_asteroidsNum = num;
+        m_delay = delay;
+    }
+
+    void update(control::Starsystem*);
+
+private:
+    unsigned int m_asteroidsNum = 30;
+    int m_delay = 0;
+    int m_lastTurn = 0;
 };
 
 

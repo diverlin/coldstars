@@ -73,7 +73,7 @@ void ItemSlot::putChildrenToGarbage() const
     }
 }
 
-void ItemSlot::setTarget(SpaceObject* target, ItemSlot* subtarget)
+void ItemSlot::setTarget(model::SpaceObject* target, ItemSlot* subtarget)
 {
     m_target    = target;
     m_subtarget = subtarget;
@@ -113,20 +113,20 @@ bool ItemSlot::checkAmmo() const
 
 void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 {
-    switch(item()->subtype())
-    {
-        case type::entity::LAZER_EQUIPMENT_ID: {
-            lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
-            break;
-        }
-
-        case type::entity::ROCKET_EQUIPMENT_ID: {
-            rocketEquipment()->FireEvent(attack_rate);
-            break;
-        }
-    }
-
     assert(false);
+//    switch(item()->subtype())
+//    {
+//        case type::entity::LAZER_EQUIPMENT_ID: {
+//            lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
+//            break;
+//        }
+
+//        case type::entity::ROCKET_EQUIPMENT_ID: {
+//            rocketEquipment()->FireEvent(attack_rate);
+//            break;
+//        }
+//    }
+
 //    if (target()->isAlive() == false) {
 //        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
 //    }
@@ -419,7 +419,7 @@ bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::checkTarget(SpaceObject* target) const
+STATUS ItemSlot::checkTarget(model::SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
@@ -440,9 +440,10 @@ STATUS ItemSlot::checkTarget(SpaceObject* target) const
     return STATUS::TARGET_OK;
 }     
 
-STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
+STATUS ItemSlot::checkTargetPure(model::SpaceObject* target) const
 {
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
+
     if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
     }
@@ -455,26 +456,25 @@ STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
     return STATUS::TARGET_OK;
 } 
 
-bool ItemSlot::isTargetAlive(SpaceObject* target) const
+bool ItemSlot::isTargetAlive(model::SpaceObject* target) const
 {
     return target->isAlive();
 }
 
-bool ItemSlot::isTargetInSpace(SpaceObject* target) const
+bool ItemSlot::isTargetInSpace(model::SpaceObject* target) const
 {
     return (target->place() == type::place::KOSMOS);
 }               
 
-bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
+bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const
 {
     assert(false);
     //return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
 }                
 
-bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
+bool ItemSlot::checkDistanceToTarget(model::SpaceObject* target) const
 {
-    if (target->type() == type::entity::STARSYSTEM_ID)
-    {
+    if (target->type() == type::entity::STARSYSTEM_ID) {
         return true;
     }
     
@@ -515,21 +515,21 @@ void ItemSlot::Resolve()
 
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
+//    LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
 
-    if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
-    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE); }
+//    if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
+//    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE); }
 
-    if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
-    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE); }
+//    if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
+//    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE); }
 }
 
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
+//    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
     
-    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
-    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
+//    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
+//    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
 }
 
 void ItemSlot::ResolveData()
@@ -556,13 +556,13 @@ void ItemSlot::ResolveData()
 
 void ItemSlot::log(const std::string& func_name) const
 {
-    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
+//    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
     
-    if (owner() != nullptr)     { str += " owner:" + owner()->dataTypeStr(); }
-    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeStr();  }
-    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
-    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
+//    if (owner() != nullptr)     { str += " owner:" + owner()->dataTypeStr(); }
+//    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeStr();  }
+//    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
+//    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
     
-    LOG(str);
+//    LOG(str);
 }
 
