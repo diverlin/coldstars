@@ -18,19 +18,26 @@
 
 #pragma once
 
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
+#include <core/types/RaceTypes.hpp>
+#include <core/types/EntityTypes.hpp>
+#include <core/common/GameDate.hpp>
+#include <core/struct/StarSystemsConditionData.hpp>
 
-#include <common/GameDate.hpp>
-#include <struct/StarSystemsConditionData.hpp>
 
-class Galaxy;
 class Starsystem;
 class Planet;
 
+namespace model {
+class Galaxy;
+} // namespace model
+
+namespace control {
+class Galaxy;
+} // namespace control
+
 namespace descriptor {
 class Galaxy;
-}
+} // namespace descriptor
 
 class StarSystemDescriptor;
 
@@ -43,7 +50,7 @@ public:
     void createWorld(const descriptor::Galaxy&);
     void update();
 
-    Galaxy* galaxy() const { return m_galaxy; }
+    control::Galaxy* galaxy() const { return m_galaxy; }
 
 private:
     GameDate m_DateLastUpdate;
@@ -55,12 +62,12 @@ private:
     void __createSpaceStations(Starsystem*, int) const;
     void __createShips(Starsystem*, int, type::race race_id = type::race::NONE_ID, type::entity subtype_id = type::entity::NONE_ID, type::entity subsubtype_id = type::entity::NONE_ID) const;
 
-    void __proceedInvasion(Galaxy*) const;
+    void __proceedInvasion(control::Galaxy*) const;
 
-    void __createLife(Galaxy*, const descriptor::Galaxy&) const;
-    void __createInvasion(Galaxy*, const descriptor::Galaxy&) const;
+    void __createLife(control::Galaxy*, const descriptor::Galaxy&) const;
+    void __createInvasion(control::Galaxy*, const descriptor::Galaxy&) const;
 
-    Galaxy* m_galaxy = nullptr;
+    control::Galaxy* m_galaxy = nullptr;
 }; 
 
 

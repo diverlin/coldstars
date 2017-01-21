@@ -68,11 +68,11 @@ void MessageManager::process(const Message& message)
     switch(message.type_id) {
     /** CREATE */
     case TELEGRAM::CREATE_STARSYSTEM: {
-        core::global::get().starsystemBuilder().create(message.data);
+        builder::Starsystem::create(message.data);
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
-        builder::Ship::getNew(message.data);
+        builder::Ship::create(message.data);
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
@@ -80,7 +80,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_CONTAINER: {
-        core::global::get().containerBuilder().getNew(message.data);
+        core::global::get().containerBuilder().create(message.data);
         break;
     }
 
@@ -117,32 +117,34 @@ void MessageManager::process(const Message& message)
         /** STARSYSTEM ADD */
     case TELEGRAM::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data);
-        Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
+        model::Starsystem* starsystem = model::getStarsystem(descriptor.owner);
+        model::Ship* ship = model::getShip(descriptor.object);
         assert(false);
-        //        model::Ship* ship = core::global::get().entityManager().getEntity<model::Ship*>(descriptor.object);
         //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
         break;
     }
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data);
-        Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.owner);
+        model::Starsystem* starsystem = model::getStarsystem(descriptor.owner);
+        model::Container* container = model::getContainer(descriptor.object);
         assert(false);
-        //        model::Container* container = core::global::get().entityManager().getEntity<model::Container*>(descriptor.object);
         //        starsystem->add(container, descriptor.position);
         break;
     }
         /** OTHER */
     case TELEGRAM::HIT: {
         descriptor::BaseOLD descriptor(message.data);
-        SpaceObject* ob = core::global::get().entityManager().getEntity<SpaceObject*>(descriptor.target());
-        ob->hit(descriptor.damage());
+        model::SpaceObject* ob = model::getSpaceObject(descriptor.target());
+        assert(false);
+        //        ob->hit(descriptor.damage());
         break;
     }
     case TELEGRAM::EXPLOSION: {
         descriptor::Explosion descriptor(message.data);
-        Starsystem* starsystem = core::global::get().entityManager().getEntity<Starsystem*>(descriptor.starsystem_id);
+        model::Starsystem* starsystem = model::getStarsystem(descriptor.starsystem_id);
         Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
-        starsystem->add(explosion, descriptor.center);
+        assert(false);
+        //        starsystem->add(explosion, descriptor.center);
         break;
     }
     default:

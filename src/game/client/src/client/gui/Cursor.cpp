@@ -100,10 +100,8 @@ void Cursor::Reset()
 
 void Cursor::Update(Player* player)
 {
-    if (m_FocusedSpaceObject != nullptr)
-    {
-        if (m_FocusedSpaceObject->isAlive() == false)
-        {
+    if (m_FocusedSpaceObject) {
+        if (!m_FocusedSpaceObject->isAlive()) {
             m_FocusedSpaceObject = nullptr;
         }
     }
@@ -112,8 +110,7 @@ void Cursor::Update(Player* player)
     
     m_Box.setCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
         
-    if (m_DataMouse.left_click == true)
-    {
+    if (m_DataMouse.left_click) {
         if (m_FocusedGuiElement != nullptr)
         {
             #if GUI_LOG_ENABLED == 1
@@ -126,8 +123,7 @@ void Cursor::Update(Player* player)
         if (m_FocusedSpaceObject != nullptr)
         {
             //..
-        }
-        
+        }        
     }
     else if (m_DataMouse.right_click == true)
     {

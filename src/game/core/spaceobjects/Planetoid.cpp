@@ -119,85 +119,85 @@ void Planetoid::_updatePosition()
 } // namespace control
 
 
-Planetoid::Planetoid()
-{}
+//Planetoid::Planetoid()
+//{}
 
-/* virtual */
-Planetoid::~Planetoid()
-{
-    LOG("___::~Planetoid("+std::to_string(id())+")");
-}
-
-void Planetoid::bindParent(const SpaceObject* const parent, int it)
-{
-    //setParent(parent);
-    __createOrbit();
-    m_orbit.setIt(it);
-    _updatePosition();
-}
-        
-void Planetoid::__createOrbit()
-{
-    m_orbit.calcPath(m_planet_descriptor.radiusA(),
-                     m_planet_descriptor.radiusB(),
-                     m_planet_descriptor.speed(),
-                     m_planet_descriptor.orbitPhi(),
-                     m_planet_descriptor.clockwise());
-}
-
-/* virtual */
-void Planetoid::_postDeathUniqueEvent(bool)
-{}
-
-void Planetoid::_updatePosition()
-{
-    m_orbit.updatePosition();
-    if (parent()) {
-        setPosition(parent()->position() + m_orbit.position());
-    } else {
-        setPosition(m_orbit.position());
-    }
-}
-
-///* virtual override final */
-//void Planetoid::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+///* virtual */
+//Planetoid::~Planetoid()
 //{
-//    m_Orbit.DrawPath(render);
+//    LOG("___::~Planetoid("+std::to_string(id())+")");
 //}
 
-void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //LOG(" Planetoid("+std::to_string(id())+")::SaveData");
-    
-//    save_ptree.put(root+"data.m_Orbit_center.x", m_PlanetDescriptor.orbit_center.x);
-//    save_ptree.put(root+"data.m_Orbit_center.y", m_PlanetDescriptor.orbit_center.y);
-//    save_ptree.put(root+"data.radius_A", m_PlanetDescriptor.radius_A);
-//    save_ptree.put(root+"data.radius_B", m_PlanetDescriptor.radius_B);
-//    save_ptree.put(root+"data.m_Orbit_phi_inD", m_PlanetDescriptor.orbit_phi_inD);
-//    save_ptree.put(root+"data.speed", m_PlanetDescriptor.speed);
-//    save_ptree.put(root+"data.clockwise", m_PlanetDescriptor.clockwise);
-    
-//    save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
-}
+//void Planetoid::bindParent(const SpaceObject* const parent, int it)
+//{
+//    //setParent(parent);
+//    __createOrbit();
+//    m_orbit.setIt(it);
+//    _updatePosition();
+//}
+        
+//void Planetoid::__createOrbit()
+//{
+//    m_orbit.calcPath(m_planet_descriptor.radiusA(),
+//                     m_planet_descriptor.radiusB(),
+//                     m_planet_descriptor.speed(),
+//                     m_planet_descriptor.orbitPhi(),
+//                     m_planet_descriptor.clockwise());
+//}
 
-void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //LOG(" Planetoid("+std::to_string(id())+")::LoadData");
-    
-//    m_PlanetDescriptor.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");
-//    m_PlanetDescriptor.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");
-//    m_PlanetDescriptor.radius_A = load_ptree.get<float>("data.radius_A");
-//    m_PlanetDescriptor.radius_B = load_ptree.get<float>("data.radius_B");
-//    m_PlanetDescriptor.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");
-//    m_PlanetDescriptor.speed = load_ptree.get<float>("data.speed");
-//    m_PlanetDescriptor.clockwise = load_ptree.get<bool>("data.clockwise");
-    
-//    data_unresolved_Planetoid.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
-}
+///* virtual */
+//void Planetoid::_postDeathUniqueEvent(bool)
+//{}
 
-void Planetoid::ResolveData()
-{
-    //LOG(" Planetoid("+std::to_string(id())+")::ResolveData");
-}
+//void Planetoid::_updatePosition()
+//{
+//    m_orbit.updatePosition();
+//    if (parent()) {
+//        setPosition(parent()->position() + m_orbit.position());
+//    } else {
+//        setPosition(m_orbit.position());
+//    }
+//}
+
+/////* virtual override final */
+////void Planetoid::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+////{
+////    m_Orbit.DrawPath(render);
+////}
+
+//void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //LOG(" Planetoid("+std::to_string(id())+")::SaveData");
+    
+////    save_ptree.put(root+"data.m_Orbit_center.x", m_PlanetDescriptor.orbit_center.x);
+////    save_ptree.put(root+"data.m_Orbit_center.y", m_PlanetDescriptor.orbit_center.y);
+////    save_ptree.put(root+"data.radius_A", m_PlanetDescriptor.radius_A);
+////    save_ptree.put(root+"data.radius_B", m_PlanetDescriptor.radius_B);
+////    save_ptree.put(root+"data.m_Orbit_phi_inD", m_PlanetDescriptor.orbit_phi_inD);
+////    save_ptree.put(root+"data.speed", m_PlanetDescriptor.speed);
+////    save_ptree.put(root+"data.clockwise", m_PlanetDescriptor.clockwise);
+    
+////    save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
+//}
+
+//void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //LOG(" Planetoid("+std::to_string(id())+")::LoadData");
+    
+////    m_PlanetDescriptor.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");
+////    m_PlanetDescriptor.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");
+////    m_PlanetDescriptor.radius_A = load_ptree.get<float>("data.radius_A");
+////    m_PlanetDescriptor.radius_B = load_ptree.get<float>("data.radius_B");
+////    m_PlanetDescriptor.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");
+////    m_PlanetDescriptor.speed = load_ptree.get<float>("data.speed");
+////    m_PlanetDescriptor.clockwise = load_ptree.get<bool>("data.clockwise");
+    
+////    data_unresolved_Planetoid.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
+//}
+
+//void Planetoid::ResolveData()
+//{
+//    //LOG(" Planetoid("+std::to_string(id())+")::ResolveData");
+//}
 
 

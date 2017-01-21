@@ -154,7 +154,7 @@ global::global()
     , m_spaceStationBuilder(new builder::SpaceStation)
     , m_galaxyBuilder(new GalaxyBuilder)
     , m_sectorBuilder(new SectorBuilder)
-    , m_starsystemBuilder(new StarsystemBuilder)
+//    , m_starsystemBuilder(new StarsystemBuilder)
     , m_descriptors(new descriptor::Manager)
 {
 }
@@ -225,7 +225,7 @@ global::~global()
 
     delete m_galaxyBuilder;
     delete m_sectorBuilder;
-    delete m_starsystemBuilder;
+//    delete m_starsystemBuilder;
 }
 
 } // namespace core

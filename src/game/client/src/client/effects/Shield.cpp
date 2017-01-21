@@ -39,12 +39,13 @@ ShieldEffect::ShieldEffect()
 ShieldEffect::~ShieldEffect()
 {}
 
-void ShieldEffect::setParent(SpaceObject* parent) 
+void ShieldEffect::setParent(model::SpaceObject* parent)
 { 
-    this->parent = parent; 
+    assert(false);
+//    this->parent = parent;
     
-    float rate = 1.3; 
-    size = glm::vec3(parent->size() * rate); 
+//    float rate = 1.3;
+//    size = glm::vec3(parent->size() * rate);
 }
 
 

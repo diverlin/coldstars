@@ -16,28 +16,31 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <core/common/Global.hpp>
+
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+
+#include <core/world/starsystem.hpp>
+
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/spaceobjects/ALL>
+
+#include <core/spaceobjects/ALL>
+
+#include <core/managers/EntityManager.hpp>
+
 #include <gtest/gtest.h>
 
-#include <common/Global.hpp>
-
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
-
-#include <world/starsystem.hpp>
-#include <builder/world/StarSystemBuilder.hpp>
-
-#include <builder/spaceobjects/ALL>
-
-#include <spaceobjects/ALL>
 
 TEST(starsystem, add_objects)
 {
     /* create opbjects */
-    Starsystem* starsystem = StarsystemBuilder::create();
+    control::Starsystem* starsystem = control::getNewStarsystem();
 
-    model::Star* star = builder::Star::getNew();
-    model::Planet* planet = builder::Planet::getNew();
-    model::Ship* ship = builder::Ship::getNew();
+    model::Star* star = builder::Star::create();
+    model::Planet* planet = builder::Planet::create();
+    model::Ship* ship = builder::Ship::create();
 
     /* pre-add check */
     EXPECT_EQ(starsystem->stars().size(), 0);

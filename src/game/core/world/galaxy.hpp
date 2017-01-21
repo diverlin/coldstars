@@ -19,49 +19,89 @@
 
 #pragma once
 
-#include <common/Base.hpp>
+#include <core/common/Base.hpp>
+
 #include <glm/glm.hpp>
 
-class Starsystem;
+namespace  model {
 class Sector;
+class Starsystem;
+} // namespace model
+
+namespace  control {
+class Sector;
+} // namespace control
+
 class StarSystemsConditionData;
+
+namespace model {
+
+class Galaxy : public model::Base {
+
+public:
+    Galaxy();
+    ~Galaxy() = default;
+    Galaxy(const std::string& data);
+    std::string data() const;
+
+    bool operator==(const Galaxy& rhs) const;
+    bool operator!=(const Galaxy& rhs) const;
+
+    void add(int_t sector) { m_sectors.push_back(sector); }
+
+private:
+    std::vector<int_t> m_sectors;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<model::Base>(*this);
+        //ar & m_sectors;
+    }
+};
+
+} // namespace model
+
+namespace control {
 
 class Galaxy : public core::Base
 {
-    public:
-        Galaxy(int);
-        ~Galaxy();
-        bool operator==(const Galaxy& rhs) const;
-        bool operator!=(const Galaxy& rhs) const;
+public:
+    Galaxy(model::Galaxy*);
+    ~Galaxy();
 
-        Starsystem* activeStarsystem() const;
+    model::Starsystem* activeStarsystem() const;
 
-        virtual void putChildrenToGarbage() const;
+    virtual void putChildrenToGarbage() const;
 
-        void add(Sector*, const glm::vec3&);
+    void add(model::Sector*, const glm::vec3&);
 
-        Sector* randomSector();
-        Sector* closestSectorTo(Sector*);
+    model::Sector* randomSector();
+    model::Sector* closestSectorTo(model::Sector*);
 
-        void update(int);
+    void update(int);
 
-        void analizeStarSystemsCondition(StarSystemsConditionData&) const;
+    void analizeStarSystemsCondition(StarSystemsConditionData&) const;
 
-        void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
-    private:
-        std::vector<Sector*> m_sectors;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+private:
+    model::Galaxy* m_model_galaxy = nullptr;
+    model::Galaxy* model() const { return m_model_galaxy; }
+    std::vector<control::Sector*> m_sectors;
 
-        // ugly
-//        friend class GuiGalaxyMap;
-//        friend class Observation;
-        friend class God;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+
+    // ugly
+    //        friend class GuiGalaxyMap;
+    //        friend class Observation;
+    friend class God;
 };
 
-
+} // namespace control

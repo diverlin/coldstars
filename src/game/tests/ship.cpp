@@ -18,25 +18,27 @@
 
 #include <gtest/gtest.h>
 
-#include <common/Global.hpp>
+#include <core/common/Global.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
-#include <builder/world/StarSystemBuilder.hpp>
-#include <builder/spaceobjects/ALL>
-#include <builder/item/equipment/ALL>
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/spaceobjects/ALL>
+#include <core/builder/item/equipment/ALL>
 
-#include <world/starsystem.hpp>
-#include <item/equipment/ALL>
-#include <spaceobjects/ALL>
-#include <slots/ItemSlot.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/item/equipment/ALL>
+#include <core/spaceobjects/ALL>
+#include <core/slots/ItemSlot.hpp>
+
+#include <core/managers/EntityManager.hpp>
 
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
-    Starsystem* starsystem = StarsystemBuilder::create();
-    control::Ship* ship = new control::Ship(builder::Ship::getNew());
+    control::Starsystem* starsystem = control::getNewStarsystem();
+    control::Ship* ship = new control::Ship(builder::Ship::create());
 
     /* equip ship */
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
@@ -64,9 +66,9 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_ship_shoot)
 {
     /* create objects */
-    Starsystem* starsystem = StarsystemBuilder::create();
-    model::Ship* model_ship1 = builder::Ship::getNew(/*full_equiped=*/true);
-    model::Ship* model_ship2 = builder::Ship::getNew(/*full_equiped=*/true);
+    control::Starsystem* starsystem = control::getNewStarsystem();
+    model::Ship* model_ship1 = builder::Ship::create(/*full_equiped=*/true);
+    model::Ship* model_ship2 = builder::Ship::create(/*full_equiped=*/true);
 
     control::Ship* ship1 = new control::Ship(model_ship1);
     control::Ship* ship2 = new control::Ship(model_ship2);
@@ -98,7 +100,7 @@ TEST(ship, base_ship_shoot)
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    model::Ship* model1 = builder::Ship::getNew(/*full_equiped=*/true);
+    model::Ship* model1 = builder::Ship::create(/*full_equiped=*/true);
     control::Ship* ship1 = new control::Ship(model1);
 
     assert(false);

@@ -61,21 +61,53 @@
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
 
-int Starsystem::m_counter = 0;
+//int Starsystem::m_counter = 0;
 
 
-Starsystem::Starsystem(int_t id)
+namespace model {
+
+Starsystem::Starsystem()
+{
+    setType(type::entity::STARSYSTEM_ID);
+    setPlace(type::place::KOSMOS);
+    m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+}
+
+Starsystem::Starsystem(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Starsystem::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+bool Starsystem::operator==(const Starsystem& rhs) const
+{
+    assert(false);
+    return true;
+}
+
+bool Starsystem::operator!=(const Starsystem& rhs) const
+{
+    return !(*this == rhs);
+}
+
+} // namespace model
+
+
+namespace control {
+
+Starsystem::Starsystem(model::Starsystem* model)
+    :
+      SpaceObject(model)
+    , m_model_starsystem(model)
 { 
-    setId(id);
-    setTypeId(type::entity::STARSYSTEM_ID);
+    //setStarSystem(this);
     
-    setPlaceTypeId(type::place::KOSMOS);
-    
-    m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-
-    setStarSystem(this);
-    
-    m_counter++;
+//    m_counter++;
 }
 
 Starsystem::~Starsystem()
@@ -87,20 +119,7 @@ Starsystem::~Starsystem()
     //    for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; }
     //    for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; }
     //    for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; }
-
-    m_counter--;
 }      
-
-bool Starsystem::operator==(const Starsystem& rhs) const
-{
-    // todo: implement
-    return true;
-}
-
-bool Starsystem::operator!=(const Starsystem& rhs) const
-{
-    return !(*this == rhs);
-}
 
 model::Star*
 Starsystem::star() const
@@ -211,92 +230,92 @@ void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& positio
     //__addVehicleCommon(spacestation, position, dir);
 }
 
-void Starsystem::add(model::RocketBullet* model, const glm::vec3& position, const glm::vec3& dir)
+void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
 {
-    model->setPlace(type::place::KOSMOS);
-    model->setStarSystem(id());
+    _model->setPlace(type::place::KOSMOS);
+    _model->setStarSystem(model()->id());
 
-    model->setPosition(position);
-    model->setDirection(dir);
+    _model->setPosition(position);
+    _model->setDirection(dir);
     //rocket->updateOrientation();
 
-    control::RocketBullet* rocket = new control::RocketBullet(model);
+    control::RocketBullet* rocket = new control::RocketBullet(_model);
     //rocket->initialize();
 
     m_bullets.push_back(rocket);
 }
 
-void Starsystem::add(model::Star* model)
+void Starsystem::add(model::Star* _model)
 {
-    model->setStarSystem(this->id());
-    model->setPlace(type::place::KOSMOS);
+    _model->setStarSystem(model()->id());
+    _model->setPlace(type::place::KOSMOS);
 
-    control::Star* star = new control::Star(model);
+    control::Star* star = new control::Star(_model);
     star->initialize();
     m_stars.push_back(star);
 }
 
-void Starsystem::add(model::Planet* model, const model::SpaceObject* parent)
+void Starsystem::add(model::Planet* _model, const model::SpaceObject* parent)
 {
     if (!parent) {
         parent = star();
     }
 
-    model->setParent(parent->id());
-    model->setStarSystem(this->id());
-    model->setPlace(type::place::KOSMOS);
+    _model->setParent(parent->id());
+    _model->setStarSystem(model()->id());
+    _model->setPlace(type::place::KOSMOS);
 
-    model->setRadiusA(model->radiusA() * (m_planets.size() + 2));
-    model->setRadiusB(model->radiusB() * (m_planets.size() + 2));
+    _model->setRadiusA(_model->radiusA() * (m_planets.size() + 2));
+    _model->setRadiusB(_model->radiusB() * (m_planets.size() + 2));
 
-    control::Planet* planet = new control::Planet(model);
+    control::Planet* planet = new control::Planet(_model);
     planet->initialize();
     m_planets.push_back(planet);
 }
 
 
-void Starsystem::add(model::Asteroid* model, const model::SpaceObject* parent, int it)
+void Starsystem::add(model::Asteroid* _model, const model::SpaceObject* parent, int it)
 {
     //asteroid->bindParent(parent, it);
     
     if (parent) {
-        model->setParent(parent->id());
+        _model->setParent(parent->id());
     }
-    model->setStarSystem(this->id());
-    model->setPlace(type::place::KOSMOS);
+    _model->setStarSystem(model()->id());
+    _model->setPlace(type::place::KOSMOS);
 
-    control::Asteroid* asteroid = new control::Asteroid(model);
+    control::Asteroid* asteroid = new control::Asteroid(_model);
     asteroid->initialize();
     m_asteroids.push_back(asteroid);
 }
 
-void Starsystem::add(model::Container* model, const glm::vec3& center)
+void Starsystem::add(model::Container* _model, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
 
     for (auto _container: m_containers) {
-        if (_container->model()->id() == model->id()) {
+        if (_container->model()->id() == _model->id()) {
             //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
             exit(1);
         }
     }
 
-    model->setStarSystem(this->id());
-    model->setPlace(type::place::KOSMOS);
-    model->setPosition(center);
+    _model->setStarSystem(model()->id());
+    _model->setPlace(type::place::KOSMOS);
+    _model->setPosition(center);
 
-    control::Container* container = new control::Container(model);
+    control::Container* container = new control::Container(_model);
 
     m_containers.push_back(container);
 }
 
-void Starsystem::add(model::BlackHole* model, const glm::vec3& center)
+void Starsystem::add(model::BlackHole* _model, const glm::vec3& center)
 {
-    model->setStarSystem(id());
-    model->setPlace(type::place::KOSMOS);
-    model->setPosition(center);
+    _model->setStarSystem(model()->id());
+    _model->setPlace(type::place::KOSMOS);
+    _model->setPosition(center);
 
-    control::BlackHole* blackhole = new control::BlackHole(model);
+    control::BlackHole* blackhole = new control::BlackHole(_model);
     blackhole->initialize();
 
     m_blackholes.push_back(blackhole);
@@ -629,7 +648,8 @@ void Starsystem::update(int time)
 
     if (time > 0) {
         if (m_unique_update_inDymanic_done == false) {
-            m_hyperspace.PostHyperJumpEvent(this);
+            assert(false);
+            //m_hyperspace.PostHyperJumpEvent(this);
             
             m_unique_update_inDymanic_done = true;
             m_unique_update_inStatic_done  = false;
@@ -909,7 +929,7 @@ void Starsystem::__shipManager_s(unsigned int num)
         int weapons_num = 7;
 
         model::Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        model::Ship* new_pship = builder::Ship::getNew();
+        model::Ship* new_pship = builder::Ship::create();
 
         assert(false);
         //builder::ShipBuilder::equip(new_pship);   // improove
@@ -1086,84 +1106,85 @@ bool Starsystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
 void Starsystem::_postDeathUniqueEvent(bool)
 {}
 
-void Starsystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    save_ptree.put(root+"sector_id", m_sector->id());
+//void Starsystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    save_ptree.put(root+"sector_id", m_sector->id());
     
-    save_ptree.put(root+"color.r", m_color.r);
-    save_ptree.put(root+"color.g", m_color.g);
-    save_ptree.put(root+"color.b", m_color.b);
-    save_ptree.put(root+"color.a", m_color.a);
+//    save_ptree.put(root+"color.r", m_color.r);
+//    save_ptree.put(root+"color.g", m_color.g);
+//    save_ptree.put(root+"color.b", m_color.b);
+//    save_ptree.put(root+"color.a", m_color.a);
 
-    //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
-    //    {
-    //        distantStarEffect_vec[i]->Save(save_ptree, root);
-    //    }
+//    //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
+//    //    {
+//    //        distantStarEffect_vec[i]->Save(save_ptree, root);
+//    //    }
 
-    //    for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
-    //    {
-    //        distantNebulaEffect_vec[i]->Save(save_ptree, root);
-    //    }
-}
+//    //    for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
+//    //    {
+//    //        distantNebulaEffect_vec[i]->Save(save_ptree, root);
+//    //    }
+//}
 
-void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    m_data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
+//void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    m_data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
     
-    m_color.r = load_ptree.get<float>("color.r");
-    m_color.g = load_ptree.get<float>("color.g");
-    m_color.b = load_ptree.get<float>("color.b");
-    m_color.a = load_ptree.get<float>("color.a");
+//    m_color.r = load_ptree.get<float>("color.r");
+//    m_color.g = load_ptree.get<float>("color.g");
+//    m_color.b = load_ptree.get<float>("color.b");
+//    m_color.a = load_ptree.get<float>("color.a");
 
-    boost::property_tree::ptree tmp_ptree = load_ptree;
-    if (tmp_ptree.get_child_optional("distant_nebula_effect"))
-    {
-        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
-        {
-            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
-            //            dn->Load(v.second);
-            //            dn->Resolve();
-            //            Add(dn);
-        }
-    }
+//    boost::property_tree::ptree tmp_ptree = load_ptree;
+//    if (tmp_ptree.get_child_optional("distant_nebula_effect"))
+//    {
+//        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
+//        {
+//            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
+//            //            dn->Load(v.second);
+//            //            dn->Resolve();
+//            //            Add(dn);
+//        }
+//    }
     
-    if (tmp_ptree.get_child_optional("distant_star_effect"))
-    {
-        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
-        {
-            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
-            //            ds->Load(v.second);
-            //            ds->Resolve();
-            //            Add(ds);
-        }
-    }
-}
+//    if (tmp_ptree.get_child_optional("distant_star_effect"))
+//    {
+//        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
+//        {
+//            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
+//            //            ds->Load(v.second);
+//            //            ds->Resolve();
+//            //            Add(ds);
+//        }
+//    }
+//}
 
-void Starsystem::ResolveData()
-{
-    //((Sector*)core::global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
-}
+//void Starsystem::ResolveData()
+//{
+//    //((Sector*)core::global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+//}
 
-void Starsystem::Save(boost::property_tree::ptree& save_ptree) const
-{
-    const std::string root = "starsystem." + std::to_string(starsystem()->id())+".";
+//void Starsystem::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    const std::string root = "starsystem." + std::to_string(starsystem()->id())+".";
 
-    Base::SaveData(save_ptree, root);
-    SpaceObject::SaveData(save_ptree, root);
-    Starsystem::SaveData(save_ptree, root);
-}
+//    Base::SaveData(save_ptree, root);
+//    SpaceObject::SaveData(save_ptree, root);
+//    Starsystem::SaveData(save_ptree, root);
+//}
 
-void Starsystem::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-    SpaceObject::LoadData(load_ptree);
-    Starsystem::LoadData(load_ptree);
-}
+//void Starsystem::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+//    SpaceObject::LoadData(load_ptree);
+//    Starsystem::LoadData(load_ptree);
+//}
 
-void Starsystem::Resolve()
-{
-    Base::ResolveData();
-    SpaceObject::ResolveData();
-    Starsystem::ResolveData();
-}        
+//void Starsystem::Resolve()
+//{
+//    Base::ResolveData();
+//    SpaceObject::ResolveData();
+//    Starsystem::ResolveData();
+//}
 
+} // namespace control

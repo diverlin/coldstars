@@ -248,8 +248,8 @@ void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Shop::ResolveData()
 {
-    UpdateAllPrices();
-    ((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
+//    UpdateAllPrices();
+//    ((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this);
 }
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const

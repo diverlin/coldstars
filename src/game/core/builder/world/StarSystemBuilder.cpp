@@ -36,33 +36,38 @@
 
 #include <managers/EntityManager.hpp>
 
-StarsystemBuilder::StarsystemBuilder()
+namespace builder {
+
+Starsystem::Starsystem()
 {}
 
-StarsystemBuilder::~StarsystemBuilder()
+Starsystem::~Starsystem()
 {}
 
-Starsystem* StarsystemBuilder::create()
+model::Starsystem*
+Starsystem::create()
 {
     const descriptor::Starsystem& descriptor = core::global::get().descriptors().starsystem().random();
     return create(descriptor);
 }
 
-Starsystem* StarsystemBuilder::create(const descriptor::Starsystem& descriptor)
+model::Starsystem*
+Starsystem::create(const descriptor::Starsystem& descriptor)
 {
-    Starsystem* starsystem = new Starsystem;
+    model::Starsystem* starsystem = new model::Starsystem;
     assert(starsystem);
-   core::global::get().entityManager().reg(starsystem);
+    core::global::get().entityManager().reg(starsystem);
     __createInternals(starsystem, descriptor);
     return starsystem;
 } 
 
-Starsystem* StarsystemBuilder::create(const std::string& data)
+model::Starsystem*
+Starsystem::create(const std::string& data)
 {
     //return getNew(descriptor::Base(data));
 }
 
-void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Starsystem& descriptor)
+void Starsystem::__createInternals(model::Starsystem* starsystem, const descriptor::Starsystem& descriptor)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     __createStar(starsystem);
@@ -73,7 +78,7 @@ void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descript
     __createPlanets(starsystem, meti::getRandInt(2,5));
 }
 
-void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)
+void Starsystem::__createBackground(model::Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)
 {
     for(int i=0; i<distNebula_num; i++) {
         //        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
@@ -86,22 +91,26 @@ void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebul
     }
 }
 
-void StarsystemBuilder::__createStar(Starsystem* starsystem)
+void Starsystem::__createStar(model::Starsystem* starsystem)
 {
-    model::Star* star = builder::Star::getNew();
-    starsystem->add(star);
+    model::Star* star = builder::Star::create();
+    assert(false);
+//    starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }
 
-void StarsystemBuilder::__createPlanets(Starsystem* starsystem, int planet_per_system)
+void Starsystem::__createPlanets(model::Starsystem* starsystem, int planet_per_system)
 {
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     
     for(int i=0; i<planet_per_system; i++) {
-        model::Planet* planet = builder::Planet::getNew();
+        model::Planet* planet = builder::Planet::create();
         //starsystem->add(planet, starsystem->star());
-        starsystem->add(planet);
+        assert(false);
+//        starsystem->add(planet);
         //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
 
 }
+
+} // namespace builder

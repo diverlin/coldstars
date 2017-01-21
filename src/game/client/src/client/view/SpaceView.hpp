@@ -110,7 +110,7 @@ public:
 //    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
-    void render(Starsystem*, jeti::Camera&);
+    void render(control::Starsystem*, jeti::Camera&);
 
 private:
     /// visible entities
@@ -133,7 +133,7 @@ private:
 
     void applyConstantRotationAnimation(jeti::view::BaseView*);
 
-    void __updateVisible(Starsystem* starsystem,
+    void __updateVisible(control::Starsystem* starsystem,
                   const meti::vec3& lookFrom,
                   const meti::vec3& lookTo,
                   float lookFar);

@@ -157,7 +157,7 @@ void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Store::ResolveData()
 {
-    ((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
+    //((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this);
 }
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const

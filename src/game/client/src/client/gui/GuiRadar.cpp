@@ -19,15 +19,15 @@
 #include "GuiRadar.hpp"
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/common/global.hpp>
+#include <client/pilots/Player.hpp>
+
+#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/spaceobjects/Vehicle.hpp>
+#include <core/pilots/Npc.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
-#include <spaceobjects/SpaceObject.hpp>
-#include <spaceobjects/Vehicle.hpp>
-
-#include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
 #include <meti/VectorUtils.hpp>
 
 GuiRadar::GuiRadar()
@@ -73,12 +73,12 @@ void GuiRadar::UpdateUnique(Player* player)
     }
 }
              
-void GuiRadar::Add(SpaceObject* object)
+void GuiRadar::Add(model::SpaceObject* object)
 {
     entity_vec.push_back(object);
 }
 
-void GuiRadar::AddIfWithinRadarRange(SpaceObject* object, const Vehicle& vehicle)
+void GuiRadar::AddIfWithinRadarRange(model::SpaceObject* object, const model::Vehicle& vehicle)
 {
 //    if (vehicle.IsObjectWithinRadarRange(object) == true)
 //    {

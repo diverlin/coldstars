@@ -30,11 +30,8 @@ namespace item {
 class Base;
 } // namespace item
 
-class SpaceObject;
-//class TextureOb;
-
 namespace model {
-
+class SpaceObject;
 } // namespace model
 
 namespace control {
@@ -58,7 +55,7 @@ public:
     
     void prepareWeapons();
 
-    void setTarget(SpaceObject*, ItemSlot* item_slot = nullptr);
+    void setTarget(model::SpaceObject*, ItemSlot* item_slot = nullptr);
 
     void fire(int, float, bool);
 

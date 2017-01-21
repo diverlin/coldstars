@@ -27,28 +27,54 @@
 
 #include "../struct/StarSystemsConditionData.hpp"
 
-Galaxy::Galaxy(int id)
+#include <ceti/serialization/macro.hpp>
+
+namespace model {
+
+Galaxy::Galaxy()
 {
-    setId(id);
-    setTypeId(type::entity::GALAXY_ID);
+    setType(type::entity::GALAXY_ID);
 }
 
-Galaxy::~Galaxy()
-{}
+Galaxy::Galaxy(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Galaxy::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 bool Galaxy::operator==(const Galaxy& rhs) const {
-    bool result = isEqual(m_sectors, rhs.m_sectors);
-    return result;
+    return isEqual(m_sectors, rhs.m_sectors);
 }
 
 bool Galaxy::operator!=(const Galaxy& rhs) const {
     return *this == rhs;
 }
 
-Starsystem* Galaxy::activeStarsystem() const
+} // namespace model
+
+
+namespace control {
+
+Galaxy::Galaxy(model::Galaxy* model)
+    :
+      m_model_galaxy(model)
+{
+}
+
+Galaxy::~Galaxy()
+{}
+
+model::Starsystem*
+Galaxy::activeStarsystem() const
 {
     assert(m_sectors.size() != 0);
-    return m_sectors[0]->activeStarsystem();
+    assert(false);
+    //    return m_sectors[0]->activeStarsystem();
 }
 
 
@@ -56,34 +82,38 @@ Starsystem* Galaxy::activeStarsystem() const
 /* virtual */
 void Galaxy::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<m_sectors.size(); i++) {
-       core::global::get().entityManager().addToGarbage(m_sectors[i]);
-    }
+    assert(false);
+//    for (unsigned int i=0; i<m_sectors.size(); i++) {
+//       core::global::get().entityManager().addToGarbage(m_sectors[i]);
+//    }
 }
 
-void Galaxy::add(Sector* sector, const glm::vec3& center)
+void Galaxy::add(model::Sector* model, const glm::vec3& center)
 { 
-    sector->setGalaxy(this);
-    sector->setPosition(center);
+    model->setGalaxy(id());
+    model->setPosition(center);
 
+    control::Sector* sector = new control::Sector(model);
     m_sectors.push_back(sector);
 }
 
-Sector* Galaxy::randomSector()
+model::Sector*
+Galaxy::randomSector()
 {
-    return meti::getRand(m_sectors);
+    return meti::getRand(m_sectors)->model();
 }
 
-Sector* Galaxy::closestSectorTo(Sector* toSector)
+model::Sector*
+Galaxy::closestSectorTo(model::Sector* toSector)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
 
-    Sector* result = nullptr;
+    model::Sector* result = nullptr;
     for (auto sector : m_sectors) {
         float dist = meti::distance(toSector->position(), sector->position());
         if (dist < dist_min) {
             dist_min = dist;
-            result = sector;
+            result = sector->model();
         }
     }
 
@@ -112,35 +142,36 @@ void Galaxy::analizeStarSystemsCondition(StarSystemsConditionData& data_starsyst
     //}
 }
 
-void Galaxy::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+//void Galaxy::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{}
 
-void Galaxy::LoadData(const boost::property_tree::ptree& load_ptree)
-{}
+//void Galaxy::LoadData(const boost::property_tree::ptree& load_ptree)
+//{}
 
-void Galaxy::ResolveData()
-{}
+//void Galaxy::ResolveData()
+//{}
 
-void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "galaxy." + std::to_string(id())+".";
+//void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    std::string root = "galaxy." + std::to_string(id())+".";
 
-    Base::SaveData(save_ptree, root);
-    Galaxy::SaveData(save_ptree, root);
-}
+//    Base::SaveData(save_ptree, root);
+//    Galaxy::SaveData(save_ptree, root);
+//}
 
-void Galaxy::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-    Galaxy::LoadData(load_ptree);
-}
+//void Galaxy::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+//    Galaxy::LoadData(load_ptree);
+//}
 
-void Galaxy::Resolve()
-{
-    Base::ResolveData();
-    Galaxy::ResolveData();
-}
+//void Galaxy::Resolve()
+//{
+//    Base::ResolveData();
+//    Galaxy::ResolveData();
+//}
 
+} // namespace control
 
 
 

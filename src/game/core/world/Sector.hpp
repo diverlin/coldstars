@@ -19,64 +19,113 @@
 
 #pragma once
 
-#include "../spaceobjects/SpaceObject.hpp"
+#include <core/spaceobjects/SpaceObject.hpp>
 #include "../common/constants.hpp"
 
 class Galaxy;
+
+namespace model {
 class Starsystem;
+} // namespace model
+
+namespace control {
+class Starsystem;
+} // namespace control
+
 class StarSystemsConditionData;
 
-struct UnresolvedDataSector
-{
-        int galaxy_id;
-};
+//struct UnresolvedDataSector
+//{
+//    int galaxy_id;
+//};
+
+namespace model {
 
 class Sector : public SpaceObject
 {
-    public:
-        Sector(int);
-        ~Sector();
-        bool operator==(const Sector& rhs) const;
-        bool operator!=(const Sector& rhs) const;
+public:
+    Sector();
+    ~Sector() = default;
+    Sector(const std::string& data);
+    std::string data() const;
 
-        Starsystem* activeStarsystem() const;
+    bool operator==(const Sector& rhs) const;
+    bool operator!=(const Sector& rhs) const;
 
-        void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
-        void setPosition(const glm::vec3& center) { m_position = center; }
+    void setGalaxy(int_t galaxy)  { m_galaxy = galaxy; }
+    void setPosition(const glm::vec3& center) { m_position = center; }
 
-        Galaxy* galaxy() const  { return m_galaxy; }
-        const glm::vec3& position() const  { return m_position; }
+    int_t galaxy() const  { return m_galaxy; }
+    const glm::vec3& position() const  { return m_position; }
 
-        virtual void putChildrenToGarbage() const;
+    void add(int_t starsystem) { m_starsystems.push_back(starsystem); }
 
-        void add(Starsystem*, const glm::vec3&);
+private:
+    int_t m_galaxy = NONE;
+    glm::vec3 m_position; // do we need this?
 
-        Starsystem* randomStarsystem(int condition_id = NONE);
-        Starsystem* closestStarsystemTo(Starsystem*, int condition_id = NONE);
+//    UnresolvedDataSector m_data_unresolved_Sector;
 
-        void update(int);
+    std::vector<int_t> m_starsystems;
 
-        //void FillStarSystemsCondition(StarSystemsConditionData&) const;
-
-        void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-
-    private:
-        Galaxy* m_galaxy;
-        glm::vec3 m_position;
-
-        UnresolvedDataSector m_data_unresolved_Sector;
-
-        std::vector<Starsystem*> m_starsystems;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-
-        friend class GuiGalaxyMap;
-        friend class Observation;
-        friend class God;
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<model::SpaceObject>(*this);
+        ar & m_galaxy;
+        assert(false);
+        //ar & m_position;
+//        ar & m_starsystems;
+    }
 };
+
+
+} // namespace model
+
+namespace control {
+
+class Sector : public control::SpaceObject
+{
+public:
+    Sector(model::Sector*);
+    ~Sector();
+
+    model::Starsystem* activeStarsystem() const;
+
+    void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
+    Galaxy* galaxy() const  { return m_galaxy; }
+
+    virtual void putChildrenToGarbage() const;
+
+    void add(model::Starsystem*, const glm::vec3&);
+
+    model::Starsystem* randomStarsystem(int condition_id = NONE);
+    model::Starsystem* closestStarsystemTo(model::Starsystem*, int condition_id = NONE);
+
+    void update(int);
+
+    //void FillStarSystemsCondition(StarSystemsConditionData&) const;
+
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
+
+    model::Sector* model() const { return m_model_sector; }
+
+private:
+    model::Sector* m_model_sector = nullptr;
+
+    Galaxy* m_galaxy = nullptr;
+
+    std::vector<control::Starsystem*> m_starsystems;
+
+//    friend class GuiGalaxyMap;
+//    friend class Observation;
+//    friend class God;
+};
+
+} // namespace control
 
 

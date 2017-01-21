@@ -23,7 +23,11 @@
 #include <ceti/Box2D.hpp>
 
 class ItemSlot;
+
+namespace model {
 class SpaceObject;
+} // namespace model
+
 class BaseGuiElement;
 class Player;
 
@@ -33,36 +37,36 @@ class Renderer;
 
 class Cursor
 {
-      public:
-        Cursor();
-        ~Cursor();        
-        
-        void SetLeftMouseButtonClick(bool left_click)         { m_DataMouse.left_click = left_click; }
-        void SetRightMouseButtonClick(bool right_click)     { m_DataMouse.right_click = right_click; }
-        void SetFocusedSpaceObject(SpaceObject* space_object)   { m_FocusedSpaceObject = space_object; }
-        void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
-                
-        const MouseData& mouseData() const { return m_DataMouse; }
-        ItemSlot* GetItemSlot() const { return m_ItemSlot; }
+public:
+    Cursor();
+    ~Cursor();
 
-        void Reset();    
-        void Update(Player*);
-        
-        void RenderFocusedObjectStuff(const jeti::Renderer&) const;
-        void RenderFocusedObjectInfo(const jeti::Renderer&) const;
-        
-        void RenderItem(const jeti::Renderer&) const;
-                
-    private:           
-        ItemSlot* m_ItemSlot;  
-        
-        MouseData m_DataMouse;
-        
-        SpaceObject* m_FocusedSpaceObject;
-        BaseGuiElement* m_FocusedGuiElement;
-        
-        ceti::Box2D m_Box;
+    void SetLeftMouseButtonClick(bool left_click)         { m_DataMouse.left_click = left_click; }
+    void SetRightMouseButtonClick(bool right_click)     { m_DataMouse.right_click = right_click; }
+    void SetFocusedSpaceObject(model::SpaceObject* space_object)   { m_FocusedSpaceObject = space_object; }
+    void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
 
-        void UpdateMouseStuff(); 
+    const MouseData& mouseData() const { return m_DataMouse; }
+    ItemSlot* GetItemSlot() const { return m_ItemSlot; }
+
+    void Reset();
+    void Update(Player*);
+
+    void RenderFocusedObjectStuff(const jeti::Renderer&) const;
+    void RenderFocusedObjectInfo(const jeti::Renderer&) const;
+
+    void RenderItem(const jeti::Renderer&) const;
+
+private:
+    ItemSlot* m_ItemSlot = nullptr;
+
+    MouseData m_DataMouse;
+
+    model::SpaceObject* m_FocusedSpaceObject = nullptr;
+    BaseGuiElement* m_FocusedGuiElement;
+
+    ceti::Box2D m_Box;
+
+    void UpdateMouseStuff();
 }; 
 

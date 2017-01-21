@@ -39,8 +39,10 @@ World::~World()
 {
 }
 
-Starsystem* World::activeStarsystem() const {
-    return core::global::get().god().galaxy()->activeStarsystem();
+model::Starsystem*
+World::activeStarsystem() const {
+    assert(false);
+//    return core::global::get().god().galaxy()->activeStarsystem();
 }
 
 bool World::operator==(const World& rhs) const {

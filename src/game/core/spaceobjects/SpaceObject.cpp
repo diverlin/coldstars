@@ -46,7 +46,6 @@ SpaceObject::data() const
 
 namespace control {
 
-
 SpaceObject::SpaceObject(model::SpaceObject* model)
     :
       ceti::control::Orientation(model)
@@ -62,7 +61,8 @@ SpaceObject::~SpaceObject()
 void SpaceObject::_init()
 {
     if (!m_starsystem) {
-        m_starsystem = static_cast<Starsystem*>(core::global::get().entityManager().getEntity(model()->starsystem()));
+        assert(false);
+        //m_starsystem = static_cast<Starsystem*>(core::global::get().entityManager().getEntity(model()->starsystem()));
         assert(m_starsystem);
     }
 
@@ -125,119 +125,135 @@ void SpaceObject::_checkDeath(bool show_effect)
 } // namespace control
 
 
-SpaceObject::SpaceObject()
-    :
-      ceti::control::Orientation(new ceti::model::Orientation)
-{}
 
-/* virtual override */
-SpaceObject::~SpaceObject()
-{
-    LOG("___::~SpaceObject("+std::to_string(id())+")");
-}
 
-void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
-{
-    m_externalForce += force_dir * strength;
-}
 
-/* virtual */
-void SpaceObject::hit(int damage)
-{
-    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
-    m_dataLife.armor -= damage;
-    if (m_dataLife.armor <= 0) {
-        m_dataLife.armor = 0;
-        m_dataLife.is_dying = true;
-    }
-    LOG(std::string("armor=") << std::to_string(m_dataLife.armor) << " is_dying=" << std::to_string(m_dataLife.is_dying) << std::endl);
-}
 
-void SpaceObject::killSilently()
-{
-    m_dataLife.is_alive      = false;
-    m_dataLife.garbage_ready = true;
-}
 
-void SpaceObject::_checkDeath(bool show_effect)
-{
-    if (m_dataLife.is_dying) {
-        m_dataLife.dying_time--;
-        if (m_dataLife.dying_time < 0) {
-            m_dataLife.is_alive = false;
-            if (!m_dataLife.garbage_ready) {
-                _postDeathUniqueEvent(show_effect);
-                m_dataLife.garbage_ready = true;
-            }
-        }
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+//SpaceObject::SpaceObject()
+//    :
+//      ceti::control::Orientation(new ceti::model::Orientation)
+//{}
+
+///* virtual override */
+//SpaceObject::~SpaceObject()
+//{
+//    LOG("___::~SpaceObject("+std::to_string(id())+")");
+//}
+
+//void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
+//{
+//    m_externalForce += force_dir * strength;
+//}
 
 ///* virtual */
-//void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+//void SpaceObject::hit(int damage)
 //{
-//    UpdateInfo(); // virtual
-//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
-//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+//    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
+//    m_dataLife.armor -= damage;
+//    if (m_dataLife.armor <= 0) {
+//        m_dataLife.armor = 0;
+//        m_dataLife.is_dying = true;
+//    }
+//    LOG(std::string("armor=") << std::to_string(m_dataLife.armor) << " is_dying=" << std::to_string(m_dataLife.is_dying) << std::endl);
 //}
 
-//void SpaceObject::RenderInfo(const glm::vec2& center)
+//void SpaceObject::killSilently()
 //{
-//    UpdateInfo(); // virtual
-//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+//    m_dataLife.is_alive      = false;
+//    m_dataLife.garbage_ready = true;
 //}
 
-void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    LOG(" SpaceObject("+std::to_string(id())+")::Save(");
+//void SpaceObject::_checkDeath(bool show_effect)
+//{
+//    if (m_dataLife.is_dying) {
+//        m_dataLife.dying_time--;
+//        if (m_dataLife.dying_time < 0) {
+//            m_dataLife.is_alive = false;
+//            if (!m_dataLife.garbage_ready) {
+//                _postDeathUniqueEvent(show_effect);
+//                m_dataLife.garbage_ready = true;
+//            }
+//        }
+//    }
+//}
+
+/////* virtual */
+////void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+////{
+////    UpdateInfo(); // virtual
+////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
+////    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+////}
+
+////void SpaceObject::RenderInfo(const glm::vec2& center)
+////{
+////    UpdateInfo(); // virtual
+////    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+////}
+
+//void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    LOG(" SpaceObject("+std::to_string(id())+")::Save(");
     
-    save_ptree.put(root+"data_life.is_alive",   m_dataLife.is_alive);
-    save_ptree.put(root+"data_life.armor",      m_dataLife.armor);
-    save_ptree.put(root+"data_life.life_time",  m_dataLife.life_time);
-    save_ptree.put(root+"data_life.dying_time", m_dataLife.dying_time);
+//    save_ptree.put(root+"data_life.is_alive",   m_dataLife.is_alive);
+//    save_ptree.put(root+"data_life.armor",      m_dataLife.armor);
+//    save_ptree.put(root+"data_life.life_time",  m_dataLife.life_time);
+//    save_ptree.put(root+"data_life.dying_time", m_dataLife.dying_time);
 
-    save_ptree.put(root+"mass", m_mass);
-
-
-    if (m_parent) save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", m_parent->id());
-    else        save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", NONE);
-
-    if (m_starsystem)    save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", m_starsystem->id());
-    else            save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", NONE);
-
-    save_ptree.put(root+"place_type_id", (int)m_placeTypeId);
-}
+//    save_ptree.put(root+"mass", m_mass);
 
 
+//    if (m_parent) save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", m_parent->id());
+//    else        save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", NONE);
 
-void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    LOG(" SpaceObject("+std::to_string(id())+")::LoadData");
+//    if (m_starsystem)    save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", m_starsystem->id());
+//    else            save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", NONE);
+
+//    save_ptree.put(root+"place_type_id", (int)m_placeTypeId);
+//}
+
+
+
+//void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    LOG(" SpaceObject("+std::to_string(id())+")::LoadData");
     
-    m_dataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
-    m_dataLife.armor      = load_ptree.get<int>("data_life.armor");
-    m_dataLife.life_time  = load_ptree.get<int>("data_life.life_time");
-    m_dataLife.dying_time = load_ptree.get<int>("data_life.dying_time");
+//    m_dataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
+//    m_dataLife.armor      = load_ptree.get<int>("data_life.armor");
+//    m_dataLife.life_time  = load_ptree.get<int>("data_life.life_time");
+//    m_dataLife.dying_time = load_ptree.get<int>("data_life.dying_time");
 
-    m_mass = load_ptree.get<int>("mass");
+//    m_mass = load_ptree.get<int>("mass");
 
-    m_placeTypeId = (type::place)load_ptree.get<int>("place_type_id");
+//    m_placeTypeId = (type::place)load_ptree.get<int>("place_type_id");
     
-    data_unresolved_SpaceObject.parent_id     = load_ptree.get<int>("data_unresolved_SpaceObject.parent_id");
-    data_unresolved_SpaceObject.starsystem_id = load_ptree.get<int>("data_unresolved_SpaceObject.starsystem_id");
-}
+//    data_unresolved_SpaceObject.parent_id     = load_ptree.get<int>("data_unresolved_SpaceObject.parent_id");
+//    data_unresolved_SpaceObject.starsystem_id = load_ptree.get<int>("data_unresolved_SpaceObject.starsystem_id");
+//}
 
-void SpaceObject::ResolveData()
-{
-    LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
+//void SpaceObject::ResolveData()
+//{
+//    LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
-    if (data_unresolved_SpaceObject.parent_id != NONE) {
-        m_parent = (SpaceObject*)core::global::get().entityManager().getEntity(data_unresolved_SpaceObject.parent_id);
-    }
-    if (data_unresolved_SpaceObject.starsystem_id != NONE) {
-        m_starsystem = (Starsystem*)core::global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id);
-    }
-}
+//    if (data_unresolved_SpaceObject.parent_id != NONE) {
+//        m_parent = (SpaceObject*)core::global::get().entityManager().getEntity(data_unresolved_SpaceObject.parent_id);
+//    }
+//    if (data_unresolved_SpaceObject.starsystem_id != NONE) {
+//        m_starsystem = (Starsystem*)core::global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id);
+//    }
+//}
 
 
 

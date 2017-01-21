@@ -34,7 +34,7 @@ void MicroTaskManager::setTask(const Task& microtask)
     m_scenario = ScenarioCollector::Instance().get(microtask.GetScenarioTypeId());
     assert(m_scenario);
     if (m_microtask.targetId() != NONE) {
-        m_target = (SpaceObject*)core::global::get().entityManager().getEntity(microtask.targetId()); // hack
+        m_target = (model::SpaceObject*)core::global::get().entityManager().get(microtask.targetId()); // hack
     }
 }
 

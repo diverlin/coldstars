@@ -68,23 +68,24 @@ God::~God()
 
 void God::createWorld(const descriptor::Galaxy& descriptor)
 {
-    m_galaxy = core::global::get().galaxyBuilder().create(descriptor);
-    __createLife(m_galaxy, descriptor);
-    if (descriptor.allow_invasion == true) {
-        __createInvasion(m_galaxy, descriptor);
-    }
+    assert(false);
+//    m_galaxy = core::global::get().galaxyBuilder().create(descriptor);
+//    __createLife(m_galaxy, descriptor);
+//    if (descriptor.allow_invasion == true) {
+//        __createInvasion(m_galaxy, descriptor);
+//    }
 
-    bool player2space = true;
-    Starsystem* const starsystem = m_galaxy->randomSector()->randomStarsystem();
-    if (player2space == true) {
-        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,0);
-        //starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
-    } else {
-        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
-    }
+//    bool player2space = true;
+//    model::Starsystem* const starsystem = m_galaxy->randomSector()->randomStarsystem();
+//    if (player2space == true) {
+//        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+//        glm::vec3 angle(0,0,0);
+//        //starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
+//    } else {
+//        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
+//    }
 
-    __createShips(starsystem, /*ships_num=*/20, type::race::R0_ID);   // fake
+//    __createShips(starsystem, /*ships_num=*/20, type::race::R0_ID);   // fake
 }
 
 void God::update()
@@ -129,7 +130,7 @@ void God::update()
 
 }
 
-void God::__createLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::__createLife(control::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
     //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
     //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
@@ -143,38 +144,40 @@ void God::__createLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) con
     //    }
 }
 
-void God::__createInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::__createInvasion(control::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
-    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-        type::race race_id = (type::race)meti::getRandInt((int)type::race::R6_ID, (int)type::race::R7_ID);
-        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        __createShips(starsystem, ship_num, race_id);
-    }
+    assert(false);
+//    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
+//        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+//        type::race race_id = (type::race)meti::getRandInt((int)type::race::R6_ID, (int)type::race::R7_ID);
+//        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+//        __createShips(starsystem, ship_num, race_id);
+//    }
 }
 
-void God::__proceedInvasion(Galaxy* galaxy) const
+void God::__proceedInvasion(control::Galaxy* galaxy) const
 {
-    std::cout<<"\nWARNING: God::ProceedInvasion is skiped\n";
-    return;
-
-    Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
-    if (!starsystem_invade_from) {
-        return;
-    }
-    Starsystem* starsystem_invade_to = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-    if (!starsystem_invade_to) {
-        return;
-    }
-    
-    model::Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
-    assert(npc_leader);
-    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
     assert(false);
-    //npc_leader->stateMachine().setCurrentMacroTask(macrotask);
+//    std::cout<<"\nWARNING: God::ProceedInvasion is skiped\n";
+//    return;
+
+//    Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+//    if (!starsystem_invade_from) {
+//        return;
+//    }
+//    Starsystem* starsystem_invade_to = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+//    if (!starsystem_invade_to) {
+//        return;
+//    }
     
-    int num_max= 10;
-    starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
+//    model::Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
+//    assert(npc_leader);
+//    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
+//    assert(false);
+//    //npc_leader->stateMachine().setCurrentMacroTask(macrotask);
+    
+//    int num_max= 10;
+//    starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
 void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
@@ -269,22 +272,23 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
         //glm::vec3 angle(0,0,meti::getRandInt(360));
 
-        starsystem->add(spacestation, center3/*, dir*/);
+        assert(false);
+//        starsystem->add(spacestation, center3/*, dir*/);
         
-        {
-            model::Satellite* satellite = core::global::get().satelliteBuilder().create();
-            assert(false);
-            //core::global::get().satelliteBuilder().equip(satellite);                   // improove
+//        {
+//            model::Satellite* satellite = core::global::get().satelliteBuilder().create();
+//            assert(false);
+//            //core::global::get().satelliteBuilder().equip(satellite);                   // improove
 
-            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-            assert(false);
-            //satellite->bindNpc(new_npc);
+//            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//            assert(false);
+//            //satellite->bindNpc(new_npc);
             
-            glm::vec3 center(0.0f, 0.0f, DEFAULT_ENTITY_ZPOS);
-            glm::vec3 dir(0.0f, 1.0f, 0.0f);
+//            glm::vec3 center(0.0f, 0.0f, DEFAULT_ENTITY_ZPOS);
+//            glm::vec3 dir(0.0f, 1.0f, 0.0f);
 
-            starsystem->add(satellite, center, dir, spacestation);
-        }
+//            starsystem->add(satellite, center, dir, spacestation);
+//        }
     }
 }
 
@@ -309,7 +313,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_rac
         }
         // VERY UGLY LOGIC END
 
-        model::Ship* new_ship = builder::Ship::getNew();
+        model::Ship* new_ship = builder::Ship::create();
         assert(false);
         //builder::ShipBuilder::equip(new_ship); // improove
 
@@ -319,6 +323,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_rac
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
         //        glm::vec3 angle(0, 0, meti::getRandInt(360));
-        starsystem->add(new_ship, center);
+        assert(false);
+//        starsystem->add(new_ship, center);
     }
 }

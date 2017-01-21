@@ -28,6 +28,7 @@
 
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobjects/SpaceObject.hpp>
 //#include <client/resources/GuiTextureObCollector.hpp>
 
 namespace item {
@@ -48,29 +49,26 @@ Grapple::Grapple(int_t id)
 Grapple::~Grapple()
 {}
 
-bool Grapple::CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const
+bool Grapple::CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const
 {
-    for (unsigned int i=0; i<m_targets.size(); i++)
-    {
-        if (m_targets[i]->id() == target->id())
-        {
-            return true;
-        }
-    }
+    assert(false);
+//    for (unsigned int i=0; i<m_targets.size(); i++) {
+//        if (m_targets[i]->id() == target->id()) {
+//            return true;
+//        }
+//    }
     
     return false;
 }
 
-void Grapple::AddTarget(SpaceObject* target)
+void Grapple::AddTarget(model::SpaceObject* target)
 {
     // avoiding dublicated items in the vector
-    if (CheckIfTargetAlreadyExistInQueue(target) == true)
-    {
+    if (CheckIfTargetAlreadyExistInQueue(target)) {
         return;
     }
 
-    if (m_free_strength > target->mass())
-    {
+    if (m_free_strength > target->mass()) {
         m_targets.push_back(target);
         m_free_strength -= target->mass();
 
@@ -78,12 +76,10 @@ void Grapple::AddTarget(SpaceObject* target)
     }
 }
 
-void Grapple::RemoveTarget(SpaceObject* target)
+void Grapple::RemoveTarget(model::SpaceObject* target)
 {
-    for (unsigned int i=0; i<m_targets.size(); i++)
-    {
-        if (m_targets[i]->id() == target->id())
-        {
+    for (unsigned int i=0; i<m_targets.size(); i++) {
+        if (m_targets[i]->id() == target->id()) {
             m_targets.erase(m_targets.begin()+i);
             m_free_strength += target->mass();
             
@@ -112,14 +108,14 @@ std::string Grapple::GetTarstr() const
 
 void Grapple::UpdateGrabScenarioProgram_inDynamic()
 {                      
-    for (std::vector<SpaceObject*>::iterator it = m_targets.begin(); it != m_targets.end(); ++it)
-    {
-        Vehicle& vehicle = *slot()->vehicleOwner(); // shortcut
-        SpaceObject& target = **it;
+        assert(false);
+//    for (std::vector<model::SpaceObject*>::iterator it = m_targets.begin(); it != m_targets.end(); ++it)
+//    {
+//        Vehicle& vehicle = *slot()->vehicleOwner(); // shortcut
+//        model::SpaceObject& target = **it;
         
-        if (slot()->checkTarget(&target) == STATUS::TARGET_OK)
-        {
-            assert(false);
+//        if (slot()->checkTarget(&target) == STATUS::TARGET_OK)
+//        {
 //            glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
 
 
@@ -156,15 +152,15 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 //                    //}
 //                }
 //            }
-        }
-        else
-        {
-            //LOG("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
+//        }
+//        else
+//        {
+//            //LOG("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
 
-            it = m_targets.erase(it);
-            return; // hack
-        }
-    }
+//            it = m_targets.erase(it);
+//            return; // hack
+//        }
+//    }
 }
 
 //void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)

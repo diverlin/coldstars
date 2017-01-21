@@ -24,16 +24,12 @@
   
 #include <dock/Kosmoport.hpp>
 
-//#include <client/effects/BaseDecor.hpp>
-
 #include <common/Global.hpp>
-#include <world/starsystem.hpp>
+#include <core/world/starsystem.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobjects/Vehicle.hpp>
 
-#include <managers/EntityManager.hpp>
-
-//#include <jeti/Render.hpp>
+#include <core/managers/EntityManager.hpp>
 
 #include <ceti/serialization/macro.hpp>
 
@@ -76,9 +72,10 @@ void Planet::putChildrenToGarbage() const
 
 Land* Planet::land()
 {
-    if (!m_land) {
-        m_land = static_cast<Land*>(core::global::get().entityManager().getEntity(model()->land()));
-    }
+    assert(false);
+//    if (!m_land) {
+//        m_land = static_cast<model::Land*>(core::global::get().entityManager().get(model()->land()));
+//    }
 
     assert(m_land);
     return m_land;

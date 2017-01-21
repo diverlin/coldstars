@@ -84,6 +84,69 @@
 
 #include <slots/ItemSlot.hpp>
 
+
+namespace model {
+
+Starsystem*
+getStarsystem(int_t id) {
+    Base* model = core::global::get().entityManager().get(id);
+    Starsystem* starsystem = static_cast<Starsystem*>(model);
+    assert(starsystem);
+    return starsystem;
+}
+
+Ship*
+getShip(int_t id) {
+    Base* model = core::global::get().entityManager().get(id);
+    Ship* ship = static_cast<Ship*>(model);
+    assert(ship);
+    return ship;
+}
+
+Container*
+getContainer(int_t id) {
+    Base* model = core::global::get().entityManager().get(id);
+    Container* container = static_cast<Container*>(model);
+    assert(container);
+    return container;
+}
+
+SpaceObject*
+getSpaceObject(int_t id) {
+    Base* model = core::global::get().entityManager().get(id);
+    SpaceObject* spaceobject = static_cast<SpaceObject*>(model);
+    assert(spaceobject);
+    return spaceobject;
+}
+
+} // namespace model
+
+namespace control {
+
+Starsystem*
+getNewStarsystem() {
+    model::Starsystem* model = builder::Starsystem::create();
+    Starsystem* starsystem = new Starsystem(model);
+    return starsystem;
+}
+
+Ship*
+getNewShip() {
+    model::Ship* model = builder::Ship::create();
+    Ship* ship = new Ship(model);
+    return ship;
+}
+
+Container*
+getNewContainer() {
+    model::Container* model = builder::Container::create();
+    Container* container = new Container(model);
+    return container;
+}
+
+} // namespace control
+
+
 void EntityManager::clear()
 {
     for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
@@ -195,8 +258,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading galaxys...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("galaxy"))
         {
-            Galaxy* galaxy = core::global::get().galaxyBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            galaxy->Load(v.second);
+//            Galaxy* galaxy = core::global::get().galaxyBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            galaxy->Load(v.second);
         }
     }
     

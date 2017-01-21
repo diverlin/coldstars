@@ -172,7 +172,7 @@ public:
 
     GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
     SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
-    StarsystemBuilder& starsystemBuilder() { return *m_starsystemBuilder; }
+//    StarsystemBuilder& starsystemBuilder() { return *m_starsystemBuilder; }
 
     descriptor::Manager& descriptors() { return *m_descriptors; }
 
@@ -250,7 +250,7 @@ private:
 
     GalaxyBuilder* m_galaxyBuilder = nullptr;
     SectorBuilder* m_sectorBuilder = nullptr;
-    StarsystemBuilder* m_starsystemBuilder = nullptr;
+//    StarsystemBuilder* m_starsystemBuilder = nullptr;
 
     descriptor::Manager* m_descriptors = nullptr;
 };

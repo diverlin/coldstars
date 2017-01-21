@@ -21,7 +21,9 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace model {
 class Sector;
+} // namespace model
 
 namespace descriptor {
 class Sector;
@@ -29,21 +31,21 @@ class Sector;
 
 class SectorBuilder
 {
-    public:
-        SectorBuilder();
-        ~SectorBuilder();
-        
-        Sector* createTemplate(int_t id = NONE) const;
-        Sector* create(const descriptor::Sector&) const;
+public:
+    SectorBuilder();
+    ~SectorBuilder();
+
+    model::Sector* createTemplate(int_t id = NONE) const;
+    model::Sector* create(const descriptor::Sector&) const;
     
-    private:
-        void createInternals(Sector*, const descriptor::Sector&) const;
+private:
+    void createInternals(model::Sector*, const descriptor::Sector&) const;
 }; 
 
 
 
-    
 
-        
+
+
 
 
