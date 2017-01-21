@@ -26,6 +26,8 @@
 
 #include <ceti/type/IdType.hpp>
 
+#include <boost/serialization/vector.hpp>
+
 #include <vector>
 
 namespace model {
@@ -180,13 +182,13 @@ private:
         ar & m_condition_id;
         ar & m_sector;
 
-//        ar & m_stars;
-//        ar & m_planets;
-//        ar & m_asteroids;
-//        ar & m_containers;
-//        ar & m_bullets;
-//        ar & m_blackholes;
-//        ar & m_vehicles;
+        ar & m_stars;
+        ar & m_planets;
+        ar & m_asteroids;
+        ar & m_containers;
+        ar & m_bullets;
+        ar & m_blackholes;
+        ar & m_vehicles;
     }
 };
 

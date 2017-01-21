@@ -22,6 +22,8 @@
 #include <core/spaceobjects/SpaceObject.hpp>
 #include "../common/constants.hpp"
 
+#include <boost/serialization/vector.hpp>
+
 class Galaxy;
 
 namespace model {
@@ -33,11 +35,6 @@ class Starsystem;
 } // namespace control
 
 class StarSystemsConditionData;
-
-//struct UnresolvedDataSector
-//{
-//    int galaxy_id;
-//};
 
 namespace model {
 
@@ -64,8 +61,6 @@ private:
     int_t m_galaxy = NONE;
     glm::vec3 m_position; // do we need this?
 
-//    UnresolvedDataSector m_data_unresolved_Sector;
-
     std::vector<int_t> m_starsystems;
 
 private:
@@ -77,7 +72,7 @@ private:
         ar & m_galaxy;
         assert(false);
         //ar & m_position;
-//        ar & m_starsystems;
+        ar & m_starsystems;
     }
 };
 
