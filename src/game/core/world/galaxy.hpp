@@ -21,6 +21,8 @@
 
 #include <core/common/Base.hpp>
 
+#include <boost/serialization/vector.hpp>
+
 #include <glm/glm.hpp>
 
 namespace  model {
@@ -58,7 +60,7 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<model::Base>(*this);
-        //ar & m_sectors;
+        ar & m_sectors;
     }
 };
 
