@@ -25,10 +25,9 @@
 namespace builder {
 
 model::Planet*
-Planet::__createTemplate(int_t id)
+Planet::__createTemplate()
 {
     model::Planet* model = new model::Planet;
-    model->setId(id);
     assert(model);
 
     core::global::get().entityManager().reg(model);

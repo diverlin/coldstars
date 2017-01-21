@@ -73,10 +73,6 @@
 #include <builder/spaceobjects/BlackHoleBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 #include <builder/spaceobjects/RocketBulletBuilder.hpp>
-#include <builder/spaceobjects/SatelliteBuilder.hpp>
-#include <builder/spaceobjects/SpaceStationBuilder.hpp>
-
-#include <builder/world/GalaxyBuilder.hpp>
 
 namespace core {
 
@@ -143,9 +139,6 @@ global::global()
     , m_blackHoleBuilder(new builder::BlackHole)
     , m_containerBuilder(new builder::Container)
     , m_rocketBulletBuilder(new builder::Rocket)
-    , m_satelliteBuilder(new builder::Satellite)
-    , m_spaceStationBuilder(new builder::SpaceStation)
-    , m_galaxyBuilder(new GalaxyBuilder)
     , m_descriptors(new descriptor::Manager)
 {
 }
@@ -205,10 +198,6 @@ global::~global()
     delete m_blackHoleBuilder;
     delete m_containerBuilder;
     delete m_rocketBulletBuilder;
-    delete m_satelliteBuilder;
-    delete m_spaceStationBuilder;
-
-    delete m_galaxyBuilder;
 }
 
 } // namespace core

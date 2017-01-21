@@ -153,8 +153,8 @@ TEST(descriptor,manager)
 TEST(clone, galaxy)
 {
     const auto& descriptor = core::global::get().descriptors().galaxy().random();
-    auto g1 = core::global::get().galaxyBuilder().create(descriptor);
-    auto g2 = core::global::get().galaxyBuilder().create(descriptor);
+    auto g1 = builder::Galaxy::create(descriptor);
+    auto g2 = builder::Galaxy::create(descriptor);
     EXPECT_EQ(*g1, *g2);
 }
 

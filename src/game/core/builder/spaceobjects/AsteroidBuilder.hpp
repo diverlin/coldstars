@@ -18,8 +18,6 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 namespace model {
 class Asteroid;
 } // namespace model
@@ -38,7 +36,7 @@ public:
     static model::Asteroid* create(const descriptor::Asteroid&);
 
 private:
-    static model::Asteroid* __createTemplate(int_t id = NONE);
+    static model::Asteroid* __createTemplate();
 }; 
 
 } // namespace builder

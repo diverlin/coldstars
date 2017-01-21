@@ -82,15 +82,11 @@ class NpcBuilder;
 
 namespace builder {
 
-class Satellite;
-class SpaceStation;
 class Rocket;
 class Container;
 class BlackHole;
 
 } // namespace builder
-
-class GalaxyBuilder;
 
 namespace descriptor {
 class Manager;
@@ -162,10 +158,6 @@ public:
     builder::BlackHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
     builder::Container& containerBuilder() { return *m_containerBuilder; }
     builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
-    builder::Satellite& satelliteBuilder() { return *m_satelliteBuilder; }
-    builder::SpaceStation& spaceStationBuilder() { return *m_spaceStationBuilder; }
-
-    GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
 
     descriptor::Manager& descriptors() { return *m_descriptors; }
 
@@ -234,10 +226,6 @@ private:
     builder::BlackHole* m_blackHoleBuilder = nullptr;
     builder::Container* m_containerBuilder = nullptr;
     builder::Rocket* m_rocketBulletBuilder = nullptr;
-    builder::Satellite* m_satelliteBuilder = nullptr;
-    builder::SpaceStation* m_spaceStationBuilder = nullptr;
-
-    GalaxyBuilder* m_galaxyBuilder = nullptr;
 
     descriptor::Manager* m_descriptors = nullptr;
 };

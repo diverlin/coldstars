@@ -20,12 +20,10 @@
 #pragma once
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <ceti/type/IdType.hpp>
 
 namespace model {
 class Satellite;
 } // namespace model
-
 
 namespace builder {
 
@@ -35,11 +33,11 @@ public:
     Satellite();
     ~Satellite();
 
-    model::Satellite* createTemplate(int_t id = NONE) const;
-    model::Satellite* create() const;
+    static model::Satellite* create();
 
 private:
-    void createInternals(model::Satellite*) const;
+    static void __createInternals(model::Satellite*);
+    static model::Satellite* __createTemplate();
 }; 
 
 } // namespace builder

@@ -25,13 +25,12 @@
 namespace builder {
 
 model::Asteroid*
-Asteroid::__createTemplate(int_t id)
+Asteroid::__createTemplate()
 { 
     model::Asteroid* model = new model::Asteroid;
-    model->setId(id);
     assert(model);
 
-   core::global::get().entityManager().reg(model);
+    core::global::get().entityManager().reg(model);
     
     return model;
 } 
@@ -71,34 +70,34 @@ Asteroid::create(const descriptor::Asteroid& descr)
     return model;
 
 
-//    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-//    model->setRadiusA(meti::getRandInt(300, 1200));
-//    model->setRadiusB(meti::getRandInt(300, 1200));
-//    model->setOrbitPhi(meti::getRandInt(360));
-//    model->setSpeed(0.1f);
-//    model->setClockwise(meti::getRandBool());
+    //    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
+    //    model->setRadiusA(meti::getRandInt(300, 1200));
+    //    model->setRadiusB(meti::getRandInt(300, 1200));
+    //    model->setOrbitPhi(meti::getRandInt(360));
+    //    model->setSpeed(0.1f);
+    //    model->setClockwise(meti::getRandBool());
 
-//    LifeData data_life;
-//    data_life.armor      = 10;
-//    data_life.dying_time = 50;
-//    model->setLifeData(data_life);
+    //    LifeData data_life;
+    //    data_life.armor      = 10;
+    //    data_life.dying_time = 50;
+    //    model->setLifeData(data_life);
 
-//    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
-//    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    //    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
+    //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
 
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
-//    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
+    //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
 
-//    alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
+    //    alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 
-//    float delta_angle = 0.0001*meti::getRandInt(20, 60);
-//    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
-//    alpitodorender asteroid->SetAnimationRotation(animation_rotation);
+    //    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+    //    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //    alpitodorender asteroid->SetAnimationRotation(animation_rotation);
 
-//    //todo
-//    model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
+    //    //todo
+    //    model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 } 
-           
+
 } // namespace builder
 
 

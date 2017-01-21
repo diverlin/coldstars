@@ -17,8 +17,8 @@
 */
 
 #include "BlackHoleBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/BlackHole.hpp"
+#include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/spaceobjects/BlackHole.hpp>
 
 #include <types/MeshTypes.hpp>
 
@@ -33,7 +33,7 @@ BlackHole::~BlackHole()
 {}
 
 model::BlackHole*
-BlackHole::createTemplate(int_t id) const
+BlackHole::__createTemplate()
 {
     model::BlackHole* blackhole = new model::BlackHole;
     assert(blackhole);
@@ -47,16 +47,16 @@ BlackHole::createTemplate(int_t id) const
 } 
 
 model::BlackHole*
-BlackHole::create() const
+BlackHole::create()
 {
-    model::BlackHole* blackhole = createTemplate();
-    createInternals(blackhole);
+    model::BlackHole* blackhole = __createTemplate();
+    __createInternals(blackhole);
 
     return blackhole;
 } 
 
 void
-BlackHole::createInternals(model::BlackHole* blackhole) const
+BlackHole::__createInternals(model::BlackHole* blackhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     

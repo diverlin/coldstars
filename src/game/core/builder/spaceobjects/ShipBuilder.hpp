@@ -21,8 +21,6 @@
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
 
-#include <ceti/type/IdType.hpp>
-
 #include <string>
 
 
@@ -45,7 +43,7 @@ public:
     static model::Ship* create(const std::string&);
 
 private:
-    static model::Ship* __getNewTemplate(int_t);
+    static model::Ship* __getNewTemplate();
     static void __createInternals(model::Ship*, const descriptor::BaseOLD&);
 }; 
 

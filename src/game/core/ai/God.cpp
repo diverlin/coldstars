@@ -260,7 +260,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //type::entity ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        model::SpaceStation* spacestation = core::global::get().spaceStationBuilder().create();
+        model::SpaceStation* spacestation = builder::SpaceStation::create();
         assert(false);
         //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
