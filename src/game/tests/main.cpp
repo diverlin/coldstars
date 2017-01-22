@@ -18,51 +18,51 @@
 
 #include <gtest/gtest.h>
 
-#include <common/Global.hpp>
-#include <world/starsystem.hpp>
-#include <item/others/Bomb.hpp>
-#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Container.hpp>
-#include <spaceobjects/Ship.hpp>
-#include <spaceobjects/Planet.hpp>
-#include <spaceobjects/Asteroid.hpp>
+#include <core/common/Global.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/item/others/Bomb.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/spaceobjects/Container.hpp>
+#include <core/spaceobjects/Ship.hpp>
+#include <core/spaceobjects/Planet.hpp>
+#include <core/spaceobjects/Asteroid.hpp>
 
-#include <builder/spaceobjects/AsteroidBuilder.hpp>
-#include <builder/spaceobjects/ShipBuilder.hpp>
-#include <builder/world/GalaxyBuilder.hpp>
-#include <builder/world/SectorBuilder.hpp>
-#include <builder/world/StarSystemBuilder.hpp>
-#include <builder/item/other/BombBuilder.hpp>
-#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/spaceobjects/AsteroidBuilder.hpp>
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/world/GalaxyBuilder.hpp>
+#include <core/builder/world/SectorBuilder.hpp>
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/item/other/BombBuilder.hpp>
+#include <core/builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Container.hpp>
-#include <descriptors/Hit.hpp>
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/ExplosionDescriptor.hpp>
-#include <descriptors/AddToStarsystemDescriptor.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/Container.hpp>
+#include <core/descriptors/Hit.hpp>
+#include <core/descriptors/GalaxyDescriptor.hpp>
+#include <core/descriptors/SectorDescriptor.hpp>
+#include <core/descriptors/ExplosionDescriptor.hpp>
+#include <core/descriptors/AddToStarsystemDescriptor.hpp>
 
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
+#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
 
-#include <communication/MessageManager.hpp>
+#include <core/communication/MessageManager.hpp>
 
-#include <ctime>
+#include <core/builder/item/equipment/ALL>
+#include <core/builder/item/modules/ALL>
+#include <core/builder/item/artefacts//ALL>
+#include <core/builder/item/other/ALL>
 
-#include <builder/item/equipment/ALL>
-#include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
-#include <builder/item/other/ALL>
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
-#include <world/starsystem.hpp>
-
-#include <item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
 #include "helper.hpp"
+
+#include <ctime>
 
 TEST(descriptor,accessors)
 {

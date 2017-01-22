@@ -16,21 +16,9 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <core/descriptors/Hit.hpp>
+
 #include <gtest/gtest.h>
-
-//#include <descriptors/Base.hpp>
-#include <descriptors/Hit.hpp>
-//#include <descriptors/GalaxyDescriptor.hpp>
-//#include <descriptors/SectorDescriptor.hpp>
-//#include <descriptors/ExplosionDescriptor.hpp>
-//#include <descriptors/AddToStarsystemDescriptor.hpp>
-//#include <descriptors/Container.hpp>
-
-//#include <descriptors/VehicleDescriptorGenerator.hpp>
-//#include <descriptors/DescriptorGenerator.hpp>
-
-
-
 
 TEST(descriptor,serialization)
 {

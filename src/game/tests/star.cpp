@@ -16,30 +16,15 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <core/common/Global.hpp>
+#include <core/spaceobjects/Star.hpp>
+
+#include <core/builder/spaceobjects/StarBuilder.hpp>
+
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+
 #include <gtest/gtest.h>
-
-#include <common/Global.hpp>
-//#include <common/constants.hpp>
-
-//#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Star.hpp>
-
-#include <builder/spaceobjects/StarBuilder.hpp>
-
-#include <descriptors/Base.hpp>
-//#include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/DescriptorManager.hpp>
-
-//#include <builder/item/equipment/ALL>
-//#include <builder/item/modules/ALL>
-//#include <builder/item/artefacts//ALL>
-//#include <builder/item/other/ALL>
-
-//#include <item/equipment/ALL>
-
-//#include "helper.hpp"
-
-//#include <fstream>
 
 
 TEST(creation, star)

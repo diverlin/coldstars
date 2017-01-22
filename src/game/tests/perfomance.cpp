@@ -16,11 +16,11 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <gtest/gtest.h>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/Hit.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/Hit.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
+#include <gtest/gtest.h>
 
 #include <ctime>
 

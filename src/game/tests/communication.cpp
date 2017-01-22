@@ -18,30 +18,32 @@
 
 #include <gtest/gtest.h>
 
-#include <common/Global.hpp>
+#include <core/common/Global.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/item/others/Bomb.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/spaceobjects/Container.hpp>
+#include <core/spaceobjects/Ship.hpp>
+
+#include <core/item/equipment/ALL>
+
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/item/other/BombBuilder.hpp>
+#include <core/builder/spaceobjects/ContainerBuilder.hpp>
+
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/Descriptor.hpp>
+#include <core/descriptors/Container.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+
+#include <core/communication/MessageManager.hpp>
+#include <core/managers/EntityManager.hpp>
+
 #include <ceti/IdGenerator.hpp>
-#include <world/starsystem.hpp>
-#include <item/others/Bomb.hpp>
-#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Container.hpp>
-#include <spaceobjects/Ship.hpp>
 
-#include <item/equipment/ALL>
-
-#include <builder/spaceobjects/ShipBuilder.hpp>
-#include <builder/world/StarSystemBuilder.hpp>
-#include <builder/item/other/BombBuilder.hpp>
-#include <builder/spaceobjects/ContainerBuilder.hpp>
-
-#include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Descriptor.hpp>
-#include <descriptors/Container.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-
-#include <communication/MessageManager.hpp>
-#include <managers/EntityManager.hpp>
 
 TEST(communication, create_ship)
 {
@@ -50,10 +52,9 @@ TEST(communication, create_ship)
     descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
     core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-    assert(false);
-//    model::Ship* ship = core::global::get().entityManager().getEntity<Ship*>(obj_id);
-//    assert(ship);
-//    EXPECT_EQ(ship->id(), obj_id);
+    model::Ship* ship = model::getShip(obj_id);
+    assert(ship);
+    EXPECT_EQ(ship->id(), obj_id);
 }
 
 TEST(communication, create_bak)

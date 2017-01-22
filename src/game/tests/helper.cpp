@@ -16,8 +16,6 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <gtest/gtest.h>
-
 #include <common/Global.hpp>
 #include <ceti/IdGenerator.hpp>
 #include <world/starsystem.hpp>
@@ -39,6 +37,8 @@
 
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
+
+#include <gtest/gtest.h>
 
 model::Container*
 getNewContainer(int_t child_id)

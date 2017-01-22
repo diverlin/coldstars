@@ -16,8 +16,6 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <gtest/gtest.h>
-
 #include <core/common/Global.hpp>
 
 #include <core/descriptors/Base.hpp>
@@ -33,6 +31,9 @@
 #include <core/slots/ItemSlot.hpp>
 
 #include <core/managers/EntityManager.hpp>
+
+#include <gtest/gtest.h>
+
 
 TEST(ship, drop_item_to_space)
 {
