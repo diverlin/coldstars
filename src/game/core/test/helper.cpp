@@ -16,7 +16,7 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <common/Global.hpp>
+#include <core/common/Global.hpp>
 #include <ceti/IdGenerator.hpp>
 #include <world/starsystem.hpp>
 #include <item/others/Bomb.hpp>
