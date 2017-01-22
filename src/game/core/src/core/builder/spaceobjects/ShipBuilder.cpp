@@ -25,17 +25,11 @@
 
 namespace builder {
 
-Ship::Ship()
-{}
-
-Ship::~Ship()
-{}
-
 model::Ship*
-Ship::create(bool full_equiped)
+Ship::getNew(bool full_equiped)
 {
-    const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    model::Ship* ship =  create(descr);
+    const auto& descr = core::global::get().descriptors().ship().random();
+    model::Ship* ship =  getNew(descr);
     if (full_equiped) {
         assert(false);
         //BaseVehicleBuilder::equip(ship);
@@ -44,9 +38,9 @@ Ship::create(bool full_equiped)
 }
 
 model::Ship*
-Ship::create(const descriptor::BaseOLD& descr)
+Ship::getNew(const descriptor::Vehicle& descriptor)
 {            
-    descriptor::BaseOLD descriptor(descr.data());
+//    descriptor::Vehicle descriptor(descr.data());
 //    int_t id = NONE;
 //    if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
 //        descriptor = core::global::get().descriptors().get(descr.descriptor());
@@ -59,9 +53,9 @@ Ship::create(const descriptor::BaseOLD& descr)
 }
 
 model::Ship*
-Ship::create(const std::string& data)
+Ship::getNew(const std::string& data)
 {
-    return create(descriptor::BaseOLD(data));
+    return getNew(descriptor::Vehicle(data));
 }
 
 model::Ship*
@@ -73,9 +67,10 @@ Ship::__getNewTemplate()
 }
 
 void
-Ship::__createInternals(model::Ship* ship, const descriptor::BaseOLD& descr)
+Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
 {
-    assert(descr.type() == (int)descriptor::Type::VEHICLE);
+    assert(false);
+    //assert(descr.type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;

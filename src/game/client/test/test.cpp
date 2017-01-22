@@ -58,7 +58,7 @@ TEST(view, star)
     client::global::get().init();
     auto descr = core::global::get().descriptors().star().random();
 
-    model::Star* model = builder::Star::create(descr);
+    model::Star* model = builder::Star::getNew(descr);
     view::Star* view = new view::Star(model);
 
     validate(descr, view);
@@ -69,7 +69,7 @@ TEST(view, planet)
     client::global::get().init();
     auto descr = core::global::get().descriptors().planet().random();
 
-    model::Planet* model = builder::Planet::create(descr);
+    model::Planet* model = builder::Planet::getNew(descr);
     view::Planet* view = new view::Planet(model);
 
     validate(descr, view);
@@ -80,7 +80,7 @@ TEST(view, asteroid)
     client::global::get().init();
     auto descr = core::global::get().descriptors().asteroid().random();
 
-    model::Asteroid* model = builder::Asteroid::create(descr);
+    model::Asteroid* model = builder::Asteroid::getNew(descr);
     view::Asteroid* view = new view::Asteroid(model);
 
     validate(descr, view);
@@ -89,7 +89,7 @@ TEST(view, asteroid)
 TEST(view, ship)
 {
     client::global::get().init();
-    auto descr = core::global::get().descriptors().vehicle().random();
+    auto descr = core::global::get().descriptors().ship().random();
 
 //    model::Ship* model = builder::Ship::getNew(descr);
 //    view::Ship* view = new view::Ship(model);

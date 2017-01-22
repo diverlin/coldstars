@@ -118,8 +118,14 @@ public:
     void add(const Asteroid& asteroid) {
         m_asteroid.add(asteroid);
     }
-    void add(const Vehicle& vehicle) {
-        m_vehicle.add(vehicle);
+    void add(const Ship& ship) {
+        m_ship.add(ship);
+    }
+    void add(const SpaceStation& spacestation) {
+        m_spacestation.add(spacestation);
+    }
+    void add(const Satellite& satellite) {
+        m_satellite.add(satellite);
     }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
@@ -134,7 +140,9 @@ public:
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
     const MManager<Asteroid>& asteroid() const { return m_asteroid; }
-    const MManager<Vehicle>& vehicle() const { return m_vehicle; }
+    const MManager<Ship>& ship() const { return m_ship; }
+    const MManager<SpaceStation>& spacestation() const { return m_spacestation; }
+    const MManager<Satellite>& satellite() const { return m_satellite; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -153,7 +161,9 @@ private:
     MManager<Star> m_star;
     MManager<Planet> m_planet;
     MManager<Asteroid> m_asteroid;
-    MManager<Vehicle> m_vehicle;
+    MManager<Ship> m_ship;
+    MManager<SpaceStation> m_spacestation;
+    MManager<Satellite> m_satellite;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

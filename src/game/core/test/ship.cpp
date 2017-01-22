@@ -20,6 +20,7 @@
 
 #include <core/descriptors/Base.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/spaceobjects/ALL>
@@ -36,7 +37,10 @@
 
 TEST(ship, create)
 {
-//    descriptor::Vehicle = /*core::global::get().driveBuilder().getNew()*/
+    descriptor::Ship descr = descriptor::getNewShip();
+    model::Ship* model = builder::Ship::getNew(descr);
+    control::Ship* control = new control::Ship(model);
+
 //    control::Ship* ship = control::getNewShip();
 }
 
@@ -73,8 +77,8 @@ TEST(ship, base_ship_shoot)
 {
     /* create objects */
     control::Starsystem* starsystem = control::getNewStarsystem();
-    model::Ship* model_ship1 = builder::Ship::create(/*full_equiped=*/true);
-    model::Ship* model_ship2 = builder::Ship::create(/*full_equiped=*/true);
+    model::Ship* model_ship1 = builder::Ship::getNew(/*full_equiped=*/true);
+    model::Ship* model_ship2 = builder::Ship::getNew(/*full_equiped=*/true);
 
     control::Ship* ship1 = new control::Ship(model_ship1);
     control::Ship* ship2 = new control::Ship(model_ship2);
@@ -106,7 +110,7 @@ TEST(ship, base_ship_shoot)
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    model::Ship* model1 = builder::Ship::create(/*full_equiped=*/true);
+    model::Ship* model1 = builder::Ship::getNew(/*full_equiped=*/true);
     control::Ship* ship1 = new control::Ship(model1);
 
     assert(false);

@@ -162,7 +162,7 @@ void Rocket::FireEvent(float attack_rate_normalized)
             
     if (fire_atOnce>=1)
     {
-        model::RocketBullet* rocket_bullet = core::global::get().rocketBulletBuilder().create(data_bullet);
+        model::RocketBullet* rocket_bullet = core::global::get().rocketBulletBuilder().getNew(data_bullet);
         rocket_bullet->setDamageRate(attack_rate_normalized);
 
         assert(false);

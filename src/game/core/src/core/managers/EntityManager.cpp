@@ -132,14 +132,14 @@ getNewStarsystem() {
 
 Ship*
 getNewShip() {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     Ship* ship = new Ship(model);
     return ship;
 }
 
 Container*
 getNewContainer() {
-    model::Container* model = builder::Container::create();
+    model::Container* model = builder::Container::getNew();
     Container* container = new Container(model);
     return container;
 }

@@ -35,11 +35,11 @@ public:
     Rocket();
     ~Rocket();
 
-    model::RocketBullet* createTemplate(int_t id = NONE) const;
-    model::RocketBullet* create(const BulletData&) const;
+    model::RocketBullet* getNew(const BulletData&) const;
 
 private:
     void createInternals(model::RocketBullet*, const BulletData&) const;
+    model::RocketBullet* __createTemplate(int_t id = NONE) const;
 }; 
 
 } // namespace builder

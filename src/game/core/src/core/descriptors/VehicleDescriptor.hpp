@@ -182,4 +182,16 @@ private:
 
 };
 
+class Ship : public Vehicle {
+
+};
+
+class SpaceStation : public Vehicle {
+
+};
+
+class Satellite : public Vehicle {
+
+};
+
 } // namespace descriptor

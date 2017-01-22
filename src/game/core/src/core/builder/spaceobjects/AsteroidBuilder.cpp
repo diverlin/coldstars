@@ -36,14 +36,14 @@ Asteroid::__createTemplate()
 } 
 
 model::Asteroid*
-Asteroid::create()
+Asteroid::getNew()
 {
     const auto& descr = core::global::get().descriptors().asteroid().random();
-    return create(descr);
+    return getNew(descr);
 }
 
 model::Asteroid*
-Asteroid::create(const descriptor::Asteroid& descr)
+Asteroid::getNew(const descriptor::Asteroid& descr)
 {
     model::Asteroid* model = __createTemplate();
 

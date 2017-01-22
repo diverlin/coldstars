@@ -42,9 +42,9 @@ public:
     Container();
     ~Container();
 
-    static model::Container* create();
-    static model::Container* create(const std::string& data);
-    static model::Container* create(const descriptor::BaseOLD&);
+    static model::Container* getNew();
+    static model::Container* getNew(const std::string& data);
+    static model::Container* getNew(const descriptor::BaseOLD&);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::BaseItem*) const;
     //        Container* create(int mineral_ammount = 0) const;

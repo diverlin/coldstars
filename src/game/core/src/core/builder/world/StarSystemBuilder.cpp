@@ -93,7 +93,7 @@ void Starsystem::__createBackground(model::Starsystem* starsystem, int distNebul
 
 void Starsystem::__createStar(model::Starsystem* starsystem)
 {
-    model::Star* star = builder::Star::create();
+    model::Star* star = builder::Star::getNew();
     assert(false);
 //    starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
@@ -104,7 +104,7 @@ void Starsystem::__createPlanets(model::Starsystem* starsystem, int planet_per_s
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     
     for(int i=0; i<planet_per_system; i++) {
-        model::Planet* planet = builder::Planet::create();
+        model::Planet* planet = builder::Planet::getNew();
         //starsystem->add(planet, starsystem->star());
         assert(false);
 //        starsystem->add(planet);

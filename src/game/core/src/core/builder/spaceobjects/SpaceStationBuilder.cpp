@@ -45,7 +45,7 @@ SpaceStation::__createTemplate()
 }
 
 model::SpaceStation*
-SpaceStation::create()
+SpaceStation::getNew()
 {
     model::SpaceStation* spacestation = __createTemplate();
     __createInternals(spacestation);

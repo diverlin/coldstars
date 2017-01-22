@@ -47,7 +47,7 @@ BlackHole::__createTemplate()
 } 
 
 model::BlackHole*
-BlackHole::create()
+BlackHole::getNew()
 {
     model::BlackHole* blackhole = __createTemplate();
     __createInternals(blackhole);
