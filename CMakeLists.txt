@@ -46,7 +46,7 @@ include_directories(src/meti)
 include_directories(src/meti/src)
 include_directories(src/ceti)
 include_directories(src/game/client/src)
-include_directories(src/game/core)
+include_directories(src/game/core/src)
 include_directories(src/game)
 
 set(PROJECT_JETI jeti)

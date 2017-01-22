@@ -19,6 +19,46 @@
 
 #pragma once
 
-#include <descriptors/VehicleDescriptor.hpp>
+#include <core/types/RaceTypes.hpp>
+#include <core/types/EntityTypes.hpp>
 
-//VehicleDescriptor generateVehicleDescriptor();
+#include <ceti/type/IdType.hpp>
+
+#include <string>
+
+namespace descriptor {
+
+class Vehicle
+{
+public:
+    int_t id = 0;
+    type::race race_id = type::race::R0_ID;
+    type::entity type_id = type::entity::WARRIOR_ID;
+    int size_id = 0;
+
+    int space = 0;
+    int armor = 0;
+    int protection = 0;
+    int temperature = 0;
+    int price = 0;
+
+    bool draw_turrels = false;
+
+    int slot_bak_num = 0;
+    int slot_drive_num = 0;
+    int slot_droid_num = 0;
+    int slot_energizer_num = 0;
+    int slot_grapple_num = 0;
+    int slot_protector_num = 0;
+    int slot_radar_num = 0;
+    int slot_scaner_num = 0;
+    int slot_freezer_num = 0;
+    int slot_weapon_num = 0;
+    int slot_artefact_num = 0;
+    int slot_otsec_num = 0;
+
+    Vehicle() {}
+    ~Vehicle() {}
+};
+
+} // namespace descriptor

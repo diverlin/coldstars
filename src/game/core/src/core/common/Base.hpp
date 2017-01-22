@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <struct/IdData.hpp>
+#include <core/struct/IdData.hpp>
 
 //#include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>

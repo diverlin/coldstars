@@ -19,10 +19,11 @@
 
 #pragma once
 
-#include <common/Base.hpp>
+#include <core/common/Base.hpp>
+#include <core/struct/LifeData.hpp>
+#include <core/types/PlaceTypes.hpp>
+
 #include <ceti/Orientation.hpp>
-#include <struct/LifeData.hpp>
-#include <types/PlaceTypes.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

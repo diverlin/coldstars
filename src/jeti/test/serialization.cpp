@@ -18,20 +18,19 @@
 
 #include <gtest/gtest.h>
 
-#include <ceti/descriptor/Descriptor.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Hit.hpp>
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/ExplosionDescriptor.hpp>
-#include <descriptors/AddToStarsystemDescriptor.hpp>
-#include <descriptors/Container.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/Hit.hpp>
+#include <core/descriptors/GalaxyDescriptor.hpp>
+#include <core/descriptors/SectorDescriptor.hpp>
+#include <core/descriptors/ExplosionDescriptor.hpp>
+#include <core/descriptors/AddToStarsystemDescriptor.hpp>
+#include <core/descriptors/Container.hpp>
 
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
+#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
 
 #include <ceti/descriptor/Mesh.hpp>
-
+#include <ceti/descriptor/Descriptor.hpp>
 
 TEST(descriptor, mesh)
 {
