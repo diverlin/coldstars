@@ -398,18 +398,18 @@ TEST(equipment, protector)
 
     // initial
     EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() == nullptr);
-    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection(), ship->properties().protection);
 
     // event: item insert
     bool ok = ship->manage(protector);
     EXPECT_TRUE(ok);
     EXPECT_EQ(protector, ship->protectorComplex().protectorSlot()->item());
-    int protection = ship->vehicleDescriptor().protection + protector->protection();
+    int protection = ship->vehicleDescriptor().protection() + protector->protection();
     EXPECT_EQ(protection, ship->properties().protection);
 
     // event: lock item
     protector->doLock();
-    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection(), ship->properties().protection);
 
     // event: unlock item
     protector->doUnlock();
@@ -417,7 +417,7 @@ TEST(equipment, protector)
 
     // event: damage item
     protector->doBreak();
-    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection(), ship->properties().protection);
 
     // event: repair item
     protector->doRepair();

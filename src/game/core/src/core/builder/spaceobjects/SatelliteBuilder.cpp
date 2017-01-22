@@ -53,55 +53,60 @@ Satellite::create()
 
 void Satellite::__createInternals(model::Satellite* model)
 {
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
-
-    int protection_rate = 1;
-    //if (subtype_id == ENTITY::WARRIOR_ID)
-    //{
-    //protection_rate = 1;
-    //}
-    
-    descriptor::Vehicle data_korpus;
-    data_korpus.space       = 60 + meti::getRandInt(20);
-    data_korpus.armor       = 10*data_korpus.space;
-    data_korpus.protection  = 2*protection_rate;
-    data_korpus.temperature = 100;
-    data_korpus.price       = 1000;
-
-    data_korpus.slot_bak_num       = 0;
-    data_korpus.slot_drive_num     = 0;
-    data_korpus.slot_droid_num     = 1;
-    data_korpus.slot_energizer_num = 1;
-    data_korpus.slot_grapple_num   = 0;
-    data_korpus.slot_protector_num = 1;
-    data_korpus.slot_radar_num     = 1;
-    data_korpus.slot_scaner_num    = 0;
-    data_korpus.slot_freezer_num   = 0;
-    data_korpus.slot_weapon_num   = 2;
-    data_korpus.slot_artefact_num = 0;
-    data_korpus.slot_otsec_num    = 1;
-    
-    LifeData data_life;
-    data_life.armor      = data_korpus.armor;
-    //data_life.dying_time = 10*texOb->GetMaterial().size_id;
-    
-    //int size_threshold = 2;
-    data_korpus.draw_turrels = true;
-
-    float delta_angle = 0.0001*meti::getRandInt(20, 60);
-    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
-    //alpitodorender satellite->SetAnimationRotation(animation_rotation);
-    
     assert(false);
-    //model->setKorpusData(data_korpus);
-    model->setLifeData(data_life);
-    //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->size());
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
 
-    assert(false);
-//    satellite->CreateDriveComplexTextureDependedStuff();
-//    satellite->CreateProtectionComplexTextureDependedStuff();
-//    _createSlots(satellite);
+//    int protection_rate = 1;
+//    //if (subtype_id == ENTITY::WARRIOR_ID)
+//    //{
+//    //protection_rate = 1;
+//    //}
+    
+//    descriptor::Vehicle data_korpus;
+//    data_korpus.setSpace(60 + meti::getRandInt(20));
+//    data_korpus.setArmor(10*data_korpus.space());
+//    data_korpus.setProtection(2*protection_rate);
+//#ifdef USE_EXTRA_EQUIPMENT
+//    data_korpus.setTemperature(100);
+//#endif // USE_EXTRA_EQUIPMENT
+//    data_korpus.setPrice(1000);
+
+//    data_korpus.setBakSlotNum(0);
+//    data_korpus.setDriveSlotNum(0);
+//    data_korpus.setDroidSlotNum(1);
+//#ifdef USE_EXTRA_EQUIPMENT
+//    data_korpus.setEnergizerSlotNum(1);
+//    data_korpus.setFreezerSlotNum(0);
+//#endif // USE_EXTRA_EQUIPMENT
+//    data_korpus.setGrappleSlotNum(0);
+//    data_korpus.setProtectorSlotNum(1);
+//    data_korpus.setRadarSlotNum(1);
+//    data_korpus.setScanerSlotNum(0);
+//    data_korpus.setWeaponSlotNum(2);
+//    data_korpus.setArtefactSlotNum(0);
+//    data_korpus.setCargoSlotNum(1);
+    
+//    LifeData data_life;
+//    data_life.armor      = data_korpus.armor();
+//    //data_life.dying_time = 10*texOb->GetMaterial().size_id;
+    
+//    //int size_threshold = 2;
+//    data_korpus.setDrawTurrels(true);
+
+//    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+//    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+//    //alpitodorender satellite->SetAnimationRotation(animation_rotation);
+    
+//    assert(false);
+//    //model->setKorpusData(data_korpus);
+//    model->setLifeData(data_life);
+//    //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->size());
+
+//    assert(false);
+////    satellite->CreateDriveComplexTextureDependedStuff();
+////    satellite->CreateProtectionComplexTextureDependedStuff();
+////    _createSlots(satellite);
 }
 
 } // namespace builder

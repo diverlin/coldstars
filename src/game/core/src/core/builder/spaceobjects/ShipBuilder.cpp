@@ -106,33 +106,34 @@ Ship::__createInternals(model::Ship* ship, const descriptor::BaseOLD& descr)
     //ship->setSubSubTypeId((type::entity)descr.type());
 
     descriptor::Vehicle descr2;
-    descr2.id = descr.id();
-    descr2.race_id = (type::race)descr.race();
-    descr2.type_id = (type::entity)descr.type();
-    descr2.size_id = descr.size();
+    assert(false);
+//    descr2.id() = descr.id();
+//    descr2.race() = (type::race)descr.race();
+//    descr2.type_id = (type::entity)descr.type();
+//    descr2.size_id = descr.size();
 
-    descr2.space = descr.space();
-    descr2.armor = descr.armor();
-    descr2.protection = descr.protection();
-    descr2.temperature = descr.temperature();
-    descr2.price = descr.price();
+//    descr2.space = descr.space();
+//    descr2.armor = descr.armor();
+//    descr2.protection = descr.protection();
+//    descr2.temperature = descr.temperature();
+//    descr2.price = descr.price();
 
-    descr2.draw_turrels = descr.drawTurrels();
+//    descr2.draw_turrels = descr.drawTurrels();
 
-    descr2.slot_bak_num = descr.bakSlotNum();
-    descr2.slot_drive_num = descr.driveSlotNum();
-    descr2.slot_droid_num = descr.droidSlotNum();
-#ifdef USE_EXTRA_EQUIPMENT
-    descr2.slot_energizer_num = descr.energizerSlotNum();
-    descr2.slot_freezer_num = descr.freezerSlotNum();
-#endif // USE_EXTRA_EQUIPMENT
-    descr2.slot_grapple_num = descr.grappleSlotNum();
-    descr2.slot_protector_num = descr.protectorSlotNum();
-    descr2.slot_radar_num = descr.radarSlotNum();
-    descr2.slot_scaner_num = descr.scanerSlotNum();
-    descr2.slot_weapon_num = descr.weaponSlotNum();
-    descr2.slot_artefact_num = descr.artefactSlotNum();
-    descr2.slot_otsec_num = descr.cargoSlotNum();
+//    descr2.slot_bak_num = descr.bakSlotNum();
+//    descr2.slot_drive_num = descr.driveSlotNum();
+//    descr2.slot_droid_num = descr.droidSlotNum();
+//#ifdef USE_EXTRA_EQUIPMENT
+//    descr2.slot_energizer_num = descr.energizerSlotNum();
+//    descr2.slot_freezer_num = descr.freezerSlotNum();
+//#endif // USE_EXTRA_EQUIPMENT
+//    descr2.slot_grapple_num = descr.grappleSlotNum();
+//    descr2.slot_protector_num = descr.protectorSlotNum();
+//    descr2.slot_radar_num = descr.radarSlotNum();
+//    descr2.slot_scaner_num = descr.scanerSlotNum();
+//    descr2.slot_weapon_num = descr.weaponSlotNum();
+//    descr2.slot_artefact_num = descr.artefactSlotNum();
+//    descr2.slot_otsec_num = descr.cargoSlotNum();
 
     assert(false);
     //ship->setKorpusData(descr2);

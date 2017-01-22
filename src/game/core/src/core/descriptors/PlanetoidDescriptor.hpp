@@ -22,23 +22,23 @@
 
 namespace descriptor {
 
-struct Planetoid : public Spaceobject
+struct Planetoid : public SpaceObject
 {
 public:
     Planetoid() {}
-    Planetoid(const std::string& data)
-    {
+    Planetoid(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
     virtual ~Planetoid() {}
 
     std::string info() const override {
-        std::string result = "Planetoid descriptor: " + Spaceobject::info();
-        result += std::string(" radiusA=") + std::to_string(m_radiusA);
-        result += std::string(" radiusB=") + std::to_string(m_radiusB);
-        result += std::string(" orbitPhi=") + std::to_string(m_orbitPhi);
-        result += std::string(" speed=") + std::to_string(m_speed);
-        result += std::string(" clockwise=") + std::to_string(m_clockwise);
+        std::string result = "Planetoid descriptor:\n";
+        result += std::string(" radiusA=") + std::to_string(m_radiusA) + "\n";
+        result += std::string(" radiusB=") + std::to_string(m_radiusB) + "\n";
+        result += std::string(" orbitPhi=") + std::to_string(m_orbitPhi) + "\n";
+        result += std::string(" speed=") + std::to_string(m_speed) + "\n";
+        result += std::string(" clockwise=") + std::to_string(m_clockwise) + "\n";
+        result += SpaceObject::info();
         return result;
     }
 
@@ -63,9 +63,8 @@ private:
 
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Spaceobject>(*this);
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_radiusA;
         ar & m_radiusB;
         ar & m_orbitPhi;

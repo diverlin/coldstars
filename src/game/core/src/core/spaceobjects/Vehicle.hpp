@@ -217,7 +217,7 @@ public:
     bool unpackContainerItemToCargoSlot(control::Container*);
 
     int freeSpace() const { return model()->properties().free_space; }
-    int space() const { return descriptor().space; }
+    int space() const { return descriptor().space(); }
 
     void bindNpc(control::Npc*);
 

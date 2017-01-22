@@ -16,21 +16,21 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+//#include <core/descriptors/Base.hpp>
+//#include <core/descriptors/Hit.hpp>
+//#include <core/descriptors/GalaxyDescriptor.hpp>
+//#include <core/descriptors/SectorDescriptor.hpp>
+//#include <core/descriptors/ExplosionDescriptor.hpp>
+//#include <core/descriptors/AddToStarsystemDescriptor.hpp>
+//#include <core/descriptors/Container.hpp>
+
+//#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+//#include <core/descriptors/DescriptorGenerator.hpp>
+
+//#include <ceti/descriptor/Mesh.hpp>
+//#include <ceti/descriptor/Descriptor.hpp>
+
 #include <gtest/gtest.h>
-
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/Hit.hpp>
-#include <core/descriptors/GalaxyDescriptor.hpp>
-#include <core/descriptors/SectorDescriptor.hpp>
-#include <core/descriptors/ExplosionDescriptor.hpp>
-#include <core/descriptors/AddToStarsystemDescriptor.hpp>
-#include <core/descriptors/Container.hpp>
-
-#include <core/descriptors/VehicleDescriptorGenerator.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
-
-#include <ceti/descriptor/Mesh.hpp>
-#include <ceti/descriptor/Descriptor.hpp>
 
 TEST(descriptor, mesh)
 {
