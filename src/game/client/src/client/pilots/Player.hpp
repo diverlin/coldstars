@@ -19,12 +19,14 @@
 
 #pragma once
 
-#include <vector>
+#include <core/common/Base.hpp>
+#include <core/pilots/Show.hpp>
 
-#include <common/Base.hpp>
 #include <client/gui/Cursor.hpp>
-#include <pilots/Show.hpp>
+
 #include <jeti/Render.hpp>
+
+#include <vector>
 
 class TurnTimer;
 

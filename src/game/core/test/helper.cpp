@@ -18,25 +18,26 @@
 
 #include <core/common/Global.hpp>
 #include <ceti/IdGenerator.hpp>
-#include <world/starsystem.hpp>
-#include <item/others/Bomb.hpp>
-#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Container.hpp>
-#include <spaceobjects/Ship.hpp>
 
-#include <builder/spaceobjects/ShipBuilder.hpp>
-#include <builder/world/StarSystemBuilder.hpp>
-#include <builder/item/other/BombBuilder.hpp>
-#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/item/others/Bomb.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/spaceobjects/Container.hpp>
+#include <core/spaceobjects/Ship.hpp>
 
-#include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Container.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/VehicleDescriptorGenerator.hpp>
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/item/other/BombBuilder.hpp>
+#include <core/builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <communication/MessageManager.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/Container.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+
+#include <core/communication/MessageManager.hpp>
+#include <core/managers/EntityManager.hpp>
 
 #include <gtest/gtest.h>
 

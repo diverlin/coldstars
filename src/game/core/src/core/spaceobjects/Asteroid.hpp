@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <spaceobjects/Planetoid.hpp>
+#include <core/spaceobjects/Planetoid.hpp>
 
 namespace model {
 
