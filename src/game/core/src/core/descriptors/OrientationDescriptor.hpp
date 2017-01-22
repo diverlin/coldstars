@@ -20,6 +20,7 @@
 
 #include <ceti/descriptor/BaseView.hpp>
 #include <ceti/serialization/macro.hpp>
+
 #include <meti/VectorUtils.hpp>
 
 namespace descriptor {
@@ -35,8 +36,10 @@ public:
     virtual ~Orientation() = default;
 
     std::string info() const override {
-        std::string result = "Orientation descriptor: " + ceti::descriptor::BaseView::info();
-        result += std::string(" size=") + meti::to_string(m_size);
+        std::string result = "Orientation descriptor:\n";
+        result += std::string(" size = ") + meti::to_string(m_size) + "\n";
+
+        result += ceti::descriptor::BaseView::info();
         return result;
     }
 

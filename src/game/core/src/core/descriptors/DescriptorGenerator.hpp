@@ -31,31 +31,32 @@ class Starsystem;
 class Star;
 class Planet;
 class Asteroid;
-class BaseOLD;
+class Vehicle;
+class BaseOLD; // TODO: remove this
 
 class Generator {
 private:
     /* world */
-    static descriptor::Galaxy getNewGalaxyDescriptor(const std::vector<int_t>&);
-    static descriptor::Sector getNewSectorDescriptor(const std::vector<int_t>&);
-    static descriptor::Starsystem getNewStarsystemDescriptor(int race = -1);
+    static descriptor::Galaxy getNewGalaxy(const std::vector<int_t>&);
+    static descriptor::Sector getNewSector(const std::vector<int_t>&);
+    static descriptor::Starsystem getNewStarsystem(int race = -1);
 
     /* spaceobjects */
-    static descriptor::Star getNewStarDescriptor();
-    static descriptor::Planet getNewPlanetDescriptor();
-    static descriptor::Asteroid getNewAsteroidDescriptor();
-    static descriptor::BaseOLD getNewVehicleDescriptor();
-    static descriptor::BaseOLD getNewContainerDescriptor();
+    static descriptor::Star getNewStar();
+    static descriptor::Planet getNewPlanet();
+    static descriptor::Asteroid getNewAsteroid();
+    static descriptor::Vehicle getNewVehicle();
+    static descriptor::BaseOLD getNewContainer();
 
     /* items */
-    static descriptor::BaseOLD getNewBakDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewDriveDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewDroidDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewGrappleDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewScanerDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewRadarDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewProtectorDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::BaseOLD getNewBombDescriptor(int damage = -1, int radius = -1);
+    static descriptor::BaseOLD getNewBak(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewDrive(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewDroid(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewGrapple(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewScaner(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewRadar(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewProtector(int race = -1, int tech_level = -1);
+    static descriptor::BaseOLD getNewBomb(int damage = -1, int radius = -1);
 
 friend class Manager;
 };

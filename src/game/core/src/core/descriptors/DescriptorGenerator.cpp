@@ -50,7 +50,7 @@ glm::vec3 randDirection() {
 
 /* world */
 descriptor::Galaxy
-Generator::getNewGalaxyDescriptor(const std::vector<int_t>& sectors) {
+Generator::getNewGalaxy(const std::vector<int_t>& sectors) {
     descriptor::Galaxy descriptor;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
@@ -60,7 +60,7 @@ Generator::getNewGalaxyDescriptor(const std::vector<int_t>& sectors) {
 }
 
 descriptor::Sector
-Generator::getNewSectorDescriptor(const std::vector<int_t>& starsystems) {
+Generator::getNewSector(const std::vector<int_t>& starsystems) {
     descriptor::Sector descriptor;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
@@ -70,7 +70,7 @@ Generator::getNewSectorDescriptor(const std::vector<int_t>& starsystems) {
 }
 
 descriptor::Starsystem
-Generator::getNewStarsystemDescriptor(int race)
+Generator::getNewStarsystem(int race)
 {
     descriptor::Starsystem descriptor;
     if (race == -1) {
@@ -104,7 +104,7 @@ int_t textureDescriptorIdFromType(const type::texture& type) {
 } // namespace
 
 descriptor::Star
-Generator::getNewStarDescriptor()
+Generator::getNewStar()
 {
     descriptor::Star descr;
     descr.setArmor(10000000);
@@ -134,7 +134,7 @@ Generator::getNewStarDescriptor()
 }
 
 descriptor::Planet
-Generator::getNewPlanetDescriptor()
+Generator::getNewPlanet()
 {
     descriptor::Planet descr;
     descr.setArmor(100000);
@@ -217,7 +217,7 @@ Generator::getNewPlanetDescriptor()
 }
 
 descriptor::Asteroid
-Generator::getNewAsteroidDescriptor()
+Generator::getNewAsteroid()
 {
     descriptor::Asteroid descr;
     descr.setArmor(meti::getRandInt(descriptor::Asteroid::ARMOR_MIN,
@@ -249,14 +249,83 @@ Generator::getNewAsteroidDescriptor()
 }
 
 descriptor::BaseOLD
-Generator::getNewContainerDescriptor()
+Generator::getNewContainer()
 {
     descriptor::BaseOLD descriptor(descriptor::Type::CONTAINER);
     return descriptor;
 }
 
-descriptor::BaseOLD
-Generator::getNewVehicleDescriptor()
+//descriptor::BaseOLD
+//Generator::getNewVehicleDescriptor()
+//{
+//    type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+//    type::entity type_id = type::entity::WARRIOR_ID;
+//    int size_id = meti::getRandInt(1, 9);
+//    int weapons_num = size_id;
+
+//    float protection_rate = 1;
+//    float otsec_rate      = 1;
+//    switch (type_id) {
+//        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
+//        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
+//    }
+
+//    int space       = size_id*100 + meti::getRandInt(100);
+//    int armor       = space;
+//    int protection  = protection_rate*meti::getRandInt(size_id);
+//    int temperature = 100;
+//    int price       = meti::getRandInt(200, 400)*size_id;
+
+//    int slot_bak_num       = 1;
+//    int slot_drive_num     = 1;
+//    int slot_droid_num     = 1;
+//#ifdef USE_EXTRA_EQUIPMENT
+//    int slot_energizer_num = 1;
+//    int slot_freezer_num   = 1;
+//#endif
+//    int slot_grapple_num   = 1;
+//    int slot_protector_num = 1;
+//    int slot_radar_num     = 1;
+//    int slot_scaner_num    = 1;
+//    int slot_weapon_num   = weapons_num;
+//    int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
+//    int slot_otsec_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+
+
+//    descriptor::BaseOLD descriptor(descriptor::Type::VEHICLE);
+//    descriptor.add(descriptor::Key::RACE, (int)race_id);
+//    descriptor.add(descriptor::Key::OBJ_TYPE, (int)type_id);
+//    descriptor.add(descriptor::Key::SIZE, size_id);
+
+//    descriptor.add(descriptor::Key::SPACE, space);
+//    descriptor.add(descriptor::Key::ARMOR, armor);
+//    descriptor.add(descriptor::Key::PROTECTION, protection);
+//    descriptor.add(descriptor::Key::TEMPERATURE, temperature);
+//    descriptor.add(descriptor::Key::PRICE, price);
+
+//    descriptor.add(descriptor::Key::BAK_SLOT_NUM, slot_bak_num);
+//    descriptor.add(descriptor::Key::DRIVE_SLOT_NUM, slot_drive_num);
+//    descriptor.add(descriptor::Key::DROID_SLOT_NUM, slot_droid_num);
+//#ifdef USE_EXTRA_EQUIPMENT
+//    descriptor.add(descriptor::Key::ENERGIZER_SLOT_NUM, slot_energizer_num);
+//    descriptor.add(descriptor::Key::FREEZER_SLOT_NUM, slot_freezer_num);
+//#endif
+//    descriptor.add(descriptor::Key::GRAPPLE_SLOT_NUM, slot_grapple_num);
+//    descriptor.add(descriptor::Key::PROTECTOR_SLOT_NUM, slot_protector_num);
+//    descriptor.add(descriptor::Key::RADAR_SLOT_NUM, slot_radar_num);
+//    descriptor.add(descriptor::Key::SCANER_SLOT_NUM, slot_scaner_num);
+//    descriptor.add(descriptor::Key::WEAPON_SLOT_NUM, slot_weapon_num);
+//    descriptor.add(descriptor::Key::ARTEFACT_SLOT_NUM, slot_artefact_num);
+//    descriptor.add(descriptor::Key::CARGO_SLOT_NUM, slot_otsec_num);
+
+//    //int size_threshold = 2;
+//    descriptor.add(descriptor::Key::DRAW_TURRELS, 0);
+
+//    return descriptor;
+//}
+
+descriptor::Vehicle
+Generator::getNewVehicle()
 {
     type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::entity type_id = type::entity::WARRIOR_ID;
@@ -289,40 +358,43 @@ Generator::getNewVehicleDescriptor()
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
     int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_otsec_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::BaseOLD descriptor(descriptor::Type::VEHICLE);
-    descriptor.add(descriptor::Key::RACE, (int)race_id);
-    descriptor.add(descriptor::Key::OBJ_TYPE, (int)type_id);
-    descriptor.add(descriptor::Key::SIZE, size_id);
+    descriptor::Vehicle descriptor;
+    descriptor.setRace(int_t(race_id));
+    //descriptor.setType(int_t(type_id));
+    descriptor.setSize(size_id);
 
-    descriptor.add(descriptor::Key::SPACE, space);
-    descriptor.add(descriptor::Key::ARMOR, armor);
-    descriptor.add(descriptor::Key::PROTECTION, protection);
-    descriptor.add(descriptor::Key::TEMPERATURE, temperature);
-    descriptor.add(descriptor::Key::PRICE, price);
-
-    descriptor.add(descriptor::Key::BAK_SLOT_NUM, slot_bak_num);
-    descriptor.add(descriptor::Key::DRIVE_SLOT_NUM, slot_drive_num);
-    descriptor.add(descriptor::Key::DROID_SLOT_NUM, slot_droid_num);
+    descriptor.setSpace(space);
+    descriptor.setArmor(armor);
+    descriptor.setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.add(descriptor::Key::ENERGIZER_SLOT_NUM, slot_energizer_num);
-    descriptor.add(descriptor::Key::FREEZER_SLOT_NUM, slot_freezer_num);
-#endif
-    descriptor.add(descriptor::Key::GRAPPLE_SLOT_NUM, slot_grapple_num);
-    descriptor.add(descriptor::Key::PROTECTOR_SLOT_NUM, slot_protector_num);
-    descriptor.add(descriptor::Key::RADAR_SLOT_NUM, slot_radar_num);
-    descriptor.add(descriptor::Key::SCANER_SLOT_NUM, slot_scaner_num);
-    descriptor.add(descriptor::Key::WEAPON_SLOT_NUM, slot_weapon_num);
-    descriptor.add(descriptor::Key::ARTEFACT_SLOT_NUM, slot_artefact_num);
-    descriptor.add(descriptor::Key::CARGO_SLOT_NUM, slot_otsec_num);
+    descriptor.setTemperature(temperature);
+#endif // USE_EXTRA_EQUIPMENT
+    descriptor.setPrice(price);
+
+    descriptor.setBakSlotNum(slot_bak_num);
+    descriptor.setDriveSlotNum(slot_drive_num);
+    descriptor.setDroidSlotNum(slot_droid_num);
+#ifdef USE_EXTRA_EQUIPMENT
+    descriptor.setEnergizerSlotNum(slot_energizer_num);
+    descriptor.setFreezerSlotNum(slot_freezer_num);
+#endif // USE_EXTRA_EQUIPMENT
+    descriptor.setGrappleSlotNum(slot_grapple_num);
+    descriptor.setProtectorSlotNum(slot_protector_num);
+    descriptor.setRadarSlotNum(slot_radar_num);
+    descriptor.setScanerSlotNum(slot_scaner_num);
+    descriptor.setWeaponSlotNum(slot_weapon_num);
+    descriptor.setArtefactSlotNum(slot_artefact_num);
+    descriptor.setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descriptor.add(descriptor::Key::DRAW_TURRELS, 0);
+    descriptor.setDrawTurrels(false);
 
     return descriptor;
 }
+
 
 /* items */
 namespace {
@@ -345,7 +417,7 @@ void addItemCommonFields(descriptor::BaseOLD& descriptor,
 } // namespace
 
 descriptor::BaseOLD
-Generator::getNewBakDescriptor(int race, int tech_level)
+Generator::getNewBak(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -374,7 +446,7 @@ Generator::getNewBakDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewDriveDescriptor(int race, int tech_level)
+Generator::getNewDrive(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -403,7 +475,7 @@ Generator::getNewDriveDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewDroidDescriptor(int race, int tech_level)
+Generator::getNewDroid(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -430,7 +502,7 @@ Generator::getNewDroidDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewGrappleDescriptor(int race, int tech_level)
+Generator::getNewGrapple(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -463,7 +535,7 @@ Generator::getNewGrappleDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewScanerDescriptor(int race, int tech_level)
+Generator::getNewScaner(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -492,7 +564,7 @@ Generator::getNewScanerDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewRadarDescriptor(int race, int tech_level)
+Generator::getNewRadar(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -521,7 +593,7 @@ Generator::getNewRadarDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewProtectorDescriptor(int race, int tech_level)
+Generator::getNewProtector(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -550,7 +622,7 @@ Generator::getNewProtectorDescriptor(int race, int tech_level)
 }
 
 descriptor::BaseOLD
-Generator::getNewBombDescriptor(int damage, int radius)
+Generator::getNewBomb(int damage, int radius)
 {
     if (damage == -1) {
          damage = meti::getRandInt(10, 100);

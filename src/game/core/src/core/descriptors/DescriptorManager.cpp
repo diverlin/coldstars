@@ -154,40 +154,40 @@ Manager::generate()
     int num = base * 20;
     for(int i=0; i<num; ++i) {
         // items
-        add(Generator::getNewBakDescriptor());
-        add(Generator::getNewDriveDescriptor());
-        add(Generator::getNewDroidDescriptor());
-        add(Generator::getNewGrappleDescriptor());
-        add(Generator::getNewScanerDescriptor());
-        add(Generator::getNewRadarDescriptor());
-        add(Generator::getNewProtectorDescriptor());
-        add(Generator::getNewBombDescriptor());
+        add(Generator::getNewBak());
+        add(Generator::getNewDrive());
+        add(Generator::getNewDroid());
+        add(Generator::getNewGrapple());
+        add(Generator::getNewScaner());
+        add(Generator::getNewRadar());
+        add(Generator::getNewProtector());
+        add(Generator::getNewBomb());
     }
 
     num = base * 10;
     for(int i=0; i<num; ++i) {
         // spaceobjects
-        add(Generator::getNewVehicleDescriptor());
-        add(Generator::getNewStarDescriptor());
-        add(Generator::getNewPlanetDescriptor());
-        add(Generator::getNewAsteroidDescriptor());
-        add(Generator::getNewContainerDescriptor());
+        add(Generator::getNewVehicle());
+        add(Generator::getNewStar());
+        add(Generator::getNewPlanet());
+        add(Generator::getNewAsteroid());
+        add(Generator::getNewContainer());
     }
 
     // world
     num = base * 10;
     for(int i=0; i<num; ++i) {
-        add(Generator::getNewStarsystemDescriptor());
+        add(Generator::getNewStarsystem());
     }
 
     num = base * 4;
     for(int i=0; i<num; ++i) {
-        add(Generator::getNewSectorDescriptor(m_starsystem.idList()));
+        add(Generator::getNewSector(m_starsystem.idList()));
     }
 
     num = base * 1;
     for(int i=0; i<num; ++i) {
-        add(Generator::getNewGalaxyDescriptor(m_sector.idList()));
+        add(Generator::getNewGalaxy(m_sector.idList()));
     }
 
     __save();

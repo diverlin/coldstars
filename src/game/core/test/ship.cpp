@@ -34,12 +34,17 @@
 
 #include <gtest/gtest.h>
 
+TEST(ship, create)
+{
+//    descriptor::Vehicle = /*core::global::get().driveBuilder().getNew()*/
+//    control::Ship* ship = control::getNewShip();
+}
 
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
     control::Starsystem* starsystem = control::getNewStarsystem();
-    control::Ship* ship = new control::Ship(builder::Ship::create());
+    control::Ship* ship = control::getNewShip();
 
     /* equip ship */
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();

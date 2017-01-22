@@ -22,18 +22,19 @@
 
 namespace descriptor {
 
-struct Spaceobject : public Orientation
+struct SpaceObject : public Orientation
 {
 public:
-    Spaceobject() = default;
-    Spaceobject(const std::string& data) {
+    SpaceObject() = default;
+    SpaceObject(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Spaceobject() = default;
+    virtual ~SpaceObject() = default;
 
     std::string info() const override {
-        std::string result = "Spaceobject descriptor: " + Orientation::info();
-        result += std::string(" armor=") + std::to_string(m_armor);
+        std::string result = "SpaceObject descriptor:\n";
+        result += std::string(" armor=") + std::to_string(m_armor) + "\n";
+        result += Orientation::info();
         return result;
     }
 

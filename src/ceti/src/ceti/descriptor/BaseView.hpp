@@ -44,10 +44,10 @@ public:
     void setTexture(int_t texture) { m_texture = texture; }
     void setMesh(int_t mesh) { m_mesh = mesh; }
     virtual std::string info() const {
-        std::string result;
-        result += std::string(" id=") + std::to_string(m_id);
-        result += std::string(" material=") + std::to_string(m_texture);
-        result += std::string(" geometry=") + std::to_string(m_mesh);
+        std::string result = "BaseView descriptor:\n";
+        result += std::string(" id = ") + std::to_string(m_id) + "\n";
+        result += std::string(" material = ") + std::to_string(m_texture) + "\n";
+        result += std::string(" geometry = ") + std::to_string(m_mesh) + "\n";
         return result;
     }
 

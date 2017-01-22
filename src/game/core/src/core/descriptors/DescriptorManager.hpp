@@ -118,6 +118,9 @@ public:
     void add(const Asteroid& asteroid) {
         m_asteroid.add(asteroid);
     }
+    void add(const Vehicle& vehicle) {
+        m_vehicle.add(vehicle);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
