@@ -20,14 +20,12 @@
 
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <core/descriptors/VehicleDescriptor.hpp>
 
 #include <string>
 
-
 namespace model {
-
 class Ship;
-
 } // namespace model
 
 namespace builder {
@@ -35,16 +33,16 @@ namespace builder {
 class Ship : public BaseVehicle
 {
 public:
-    Ship();
-    ~Ship();
-
-    static model::Ship* create(bool full_equiped = false);
-    static model::Ship* create(const descriptor::BaseOLD&);
-    static model::Ship* create(const std::string&);
+    static model::Ship* getNew(bool full_equiped = false);
+    static model::Ship* getNew(const descriptor::Vehicle&);
+    static model::Ship* getNew(const std::string&);
 
 private:
+    Ship()=default;
+    ~Ship()=default;
+
     static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, const descriptor::BaseOLD&);
+    static void __createInternals(model::Ship*, const descriptor::Vehicle&);
 }; 
 
 } // namespace builder

@@ -72,7 +72,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
-        builder::Ship::create(message.data);
+        builder::Ship::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
@@ -80,7 +80,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_CONTAINER: {
-        core::global::get().containerBuilder().create(message.data);
+        core::global::get().containerBuilder().getNew(message.data);
         break;
     }
 

@@ -33,7 +33,7 @@ public:
     Satellite();
     ~Satellite();
 
-    static model::Satellite* create();
+    static model::Satellite* getNew();
 
 private:
     static void __createInternals(model::Satellite*);

@@ -49,7 +49,7 @@ public:
     SpaceStation();
     ~SpaceStation();
 
-    static model::SpaceStation* create();
+    static model::SpaceStation* getNew();
 
 private:
     static void __createInternals(model::SpaceStation*);

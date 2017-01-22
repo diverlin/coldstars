@@ -43,7 +43,7 @@ Satellite::__createTemplate()
 }
 
 model::Satellite*
-Satellite::create()
+Satellite::getNew()
 {
     model::Satellite* satellite = __createTemplate();
     __createInternals(satellite);

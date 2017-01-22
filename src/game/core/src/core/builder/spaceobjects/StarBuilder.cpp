@@ -43,14 +43,14 @@ Star::__getNewTemplate(int_t id)
 } 
  
 model::Star*
-Star::create()
+Star::getNew()
 {
     const auto& descr = core::global::get().descriptors().star().random();
-    return create(descr);
+    return getNew(descr);
 } 
 
 model::Star*
-Star::create(const descriptor::Star& descr)
+Star::getNew(const descriptor::Star& descr)
 {
     model::Star* model = __getNewTemplate();
     model->setMesh(descr.mesh());

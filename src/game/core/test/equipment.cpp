@@ -70,7 +70,7 @@ TEST(creation,bak)
 
 TEST(equipment, lazer)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Lazer* lazer = core::global::get().lazerBuilder().getNew();
@@ -96,7 +96,7 @@ TEST(equipment, lazer)
 
 TEST(equipment, rocket)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Rocket* rocket = core::global::get().rocketBuilder().getNew();
@@ -122,7 +122,7 @@ TEST(equipment, rocket)
 
 TEST(equipment, bak)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Bak* bak = core::global::get().bakBuilder().getNew();
@@ -145,7 +145,7 @@ TEST(equipment, bak)
 
 TEST(equipment, drive)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
@@ -168,7 +168,7 @@ TEST(equipment, drive)
 
 TEST(equipment, bak_and_drive)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Bak* bak = core::global::get().bakBuilder().getNew();
@@ -229,7 +229,7 @@ TEST(equipment, bak_and_drive)
 
 TEST(equipment, droid)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Droid* droid = core::global::get().droidBuilder().getNew();
@@ -268,7 +268,7 @@ TEST(equipment, droid)
 
 TEST(equipment, grapple)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Grapple* grapple = core::global::get().grappleBuilder().getNew();
@@ -313,7 +313,7 @@ TEST(equipment, grapple)
 
 TEST(equipment, scaner)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Scaner* scaner = core::global::get().scanerBuilder().getNew();
@@ -352,7 +352,7 @@ TEST(equipment, scaner)
 
 TEST(equipment, radar)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Radar* radar = core::global::get().radarBuilder().getNew();
@@ -391,7 +391,7 @@ TEST(equipment, radar)
 
 TEST(equipment, protector)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     item::equipment::Protector* protector = core::global::get().protectorBuilder().getNew();
@@ -431,7 +431,7 @@ TEST(equipment, protector)
 
 TEST(equipment, freespace)
 {
-    model::Ship* model = builder::Ship::create();
+    model::Ship* model = builder::Ship::getNew();
     control::Ship* ship = new control::Ship(model);
 
     // initial

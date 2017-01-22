@@ -38,9 +38,9 @@ TEST(starsystem, add_objects)
     /* create opbjects */
     control::Starsystem* starsystem = control::getNewStarsystem();
 
-    model::Star* star = builder::Star::create();
-    model::Planet* planet = builder::Planet::create();
-    model::Ship* ship = builder::Ship::create();
+    model::Star* star = builder::Star::getNew();
+    model::Planet* planet = builder::Planet::getNew();
+    model::Ship* ship = builder::Ship::getNew();
 
     /* pre-add check */
     EXPECT_EQ(starsystem->stars().size(), 0);
