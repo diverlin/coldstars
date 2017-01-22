@@ -19,9 +19,10 @@
 
 #pragma once
 
+#include <core/types/RaceTypes.hpp>
+#include <core/types/TechLevelTypes.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
 
 namespace descriptor {
 class BaseOLD;

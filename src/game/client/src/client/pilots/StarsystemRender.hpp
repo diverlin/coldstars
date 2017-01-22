@@ -19,13 +19,13 @@
 
 #pragma once
 
-#include <vector>
-
-#include <common/Base.hpp>
+#include <core/common/Base.hpp>
 //#include <client/gui/m_cursor.hpp>
 //#include <client/pilots/Show.hpp>
 //#include <jeti/Render.hpp>
 #include <jeti/BaseView.hpp>
+
+#include <vector>
 
 //class TurnTimer;
 

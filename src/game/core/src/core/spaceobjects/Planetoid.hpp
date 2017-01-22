@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include <spaceobjects/SpaceObject.hpp>
-#include <parts/orbit.hpp>
-#include <descriptors/PlanetDescriptor.hpp>
+#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/parts/orbit.hpp>
+#include <core/descriptors/PlanetDescriptor.hpp>
 //#include <jeti/Render.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
