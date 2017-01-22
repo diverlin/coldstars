@@ -16,28 +16,28 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <gtest/gtest.h>
+#include <core/common/Global.hpp>
+#include <core/common/constants.hpp>
 
-#include <common/Global.hpp>
-#include <common/constants.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/spaceobjects/Ship.hpp>
 
-#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Ship.hpp>
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
 
-#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <core/descriptors/Base.hpp>
+#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <core/builder/item/equipment/ALL>
+#include <core/builder/item/modules/ALL>
+#include <core/builder/item/artefacts//ALL>
+#include <core/builder/item/other/ALL>
 
-#include <builder/item/equipment/ALL>
-#include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
-#include <builder/item/other/ALL>
-
-#include <item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
 #include "helper.hpp"
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 
