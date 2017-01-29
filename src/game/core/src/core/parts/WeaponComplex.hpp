@@ -24,7 +24,6 @@
 #include <vector>
 
 class Vehicle;
-class ItemSlot;
 
 namespace item {
 class Base;
@@ -35,7 +34,7 @@ class SpaceObject;
 } // namespace model
 
 namespace control {
-
+class ItemSlot;
 } // namespace control
 
 class WeaponComplex
@@ -49,13 +48,13 @@ public:
     int radiusMax() const { return m_radiusMax; }
     int damage() const { return m_damage; }
 
-    bool addSlot(ItemSlot*);
-    ItemSlot* freeSlot() const;
-    ItemSlot* equipedWeakestSlot() const;
+    bool addSlot(control::ItemSlot*);
+    control::ItemSlot* freeSlot() const;
+    control::ItemSlot* equipedWeakestSlot() const;
     
     void prepareWeapons();
 
-    void setTarget(model::SpaceObject*, ItemSlot* item_slot = nullptr);
+    void setTarget(model::SpaceObject*, control::ItemSlot* item_slot = nullptr);
 
     void fire(int, float, bool);
 
@@ -84,8 +83,8 @@ private:
     Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
-    std::vector<ItemSlot*> m_slots;
-    std::vector<ItemSlot*> m_slots_reloaded;
+    std::vector<control::ItemSlot*> m_slots;
+    std::vector<control::ItemSlot*> m_slots_reloaded;
 
     void __reloadAllWeapons();
     void __validateAllWeaponsTarget();

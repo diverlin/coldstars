@@ -27,26 +27,25 @@
 #include <spaceobjects/Vehicle.hpp>
 #include <client/gui/GuiManager.hpp>
 
-GuiStore::GuiStore():store(nullptr)
+GuiStore::GuiStore():m_store(nullptr)
 {}
 
 GuiStore::~GuiStore()
 {}
 
-void GuiStore::BindStore(Store* store)
+void GuiStore::bindStore(Store* store)
 {
-    this->store = store;
+    this->m_store = store;
 
     int clm = 0;
     int row = 0;
-    for (unsigned int i=0; i<store->item_slot_vec.size(); i++)
-    {
+    for (auto* slot: store->m_itemslots) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(rect, store->item_slot_vec[i]));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {
@@ -56,14 +55,13 @@ void GuiStore::BindStore(Store* store)
     }
 
 
-    for (unsigned int i=0; i<store->vehicle_slot_vec.size(); i++)
-    {
+    for (auto* slot: store->m_vehicleslots) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        rect_vehicleslot_vec.push_back(GuiPair<ceti::Rect, VehicleSlot*>(rect, store->vehicle_slot_vec[i]));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {
@@ -75,13 +73,13 @@ void GuiStore::BindStore(Store* store)
 
 void GuiStore::UnbindStore()
 {
-    store = nullptr;
+    m_store = nullptr;
 
-    rect_itemslot_vec.clear();
-    rect_vehicleslot_vec.clear();
+    m_itemslot_rects.clear();
+    m_vehicleslot_rects.clear();
 }
 
-bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
+bool GuiStore::updateMouseInteraction(const MouseData& data_mouse)
 {
     /*
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
@@ -133,7 +131,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
     return false;
 }
 
-void GuiStore::RenderSlots(int credits) const
+void GuiStore::renderSlots(int credits) const
 {      
     //glPushMatrix();
     //glTranslatef(GetOffset().x, GetOffset().y, 0);

@@ -24,7 +24,7 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-         
+
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
@@ -42,11 +42,12 @@ Radar* RadarBuilder::createTemplate(int_t id) const
     Radar* radar = new Radar(id);
     assert(radar);
 
-   core::global::get().entityManager().reg(radar);
+    assert(false);
+//    core::global::get().entityManager().reg(radar);
     
     return radar;
 } 
-  
+
 Radar* RadarBuilder::getNew() const
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
@@ -60,10 +61,10 @@ Radar* RadarBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Radar* radar = createTemplate();
     createInternals(radar, descriptor);
-        
+
     return radar;
 } 
-        
+
 void RadarBuilder::createInternals(Radar* radar, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);

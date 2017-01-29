@@ -26,7 +26,7 @@ namespace jeti {
 class Renderer;
 }
 
-class BaseDecor : public ceti::control::Orientation, public core::Base
+class BaseDecor : public ceti::control::Orientation, public control::Base
 {
 public:
     BaseDecor():

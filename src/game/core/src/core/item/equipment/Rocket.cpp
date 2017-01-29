@@ -70,9 +70,10 @@ m_ammo(0),
 m_damage_orig(0),
 m_radius_orig(0)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID); 
-    setSubTypeId(type::entity::ROCKET_EQUIPMENT_ID);     
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::ROCKET_EQUIPMENT_ID);
 
     fire_atOnce = meti::getRandInt(1, 3);
 }
@@ -211,63 +212,63 @@ void Rocket::FireEvent(float attack_rate_normalized)
 /*virtual*/
 void Rocket::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "rocket_equipment." + std::to_string(id()) + ".";
+//    std::string root = "rocket_equipment." + std::to_string(id()) + ".";
 
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Rocket::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Rocket::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Rocket::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Rocket::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Rocket::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Rocket::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Rocket::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Rocket::ResolveData();
 }
 
 void Rocket::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" RocketEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" RocketEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"ammo_max_orig", m_ammo_max_orig);
-    save_ptree.put(root+"ammo", m_ammo);
-    save_ptree.put(root+"damage_orig", m_damage_orig);
-    save_ptree.put(root+"radius_orig", m_radius_orig);
-    save_ptree.put(root+"fire_atOnce", fire_atOnce);
+//    save_ptree.put(root+"ammo_max_orig", m_ammo_max_orig);
+//    save_ptree.put(root+"ammo", m_ammo);
+//    save_ptree.put(root+"damage_orig", m_damage_orig);
+//    save_ptree.put(root+"radius_orig", m_radius_orig);
+//    save_ptree.put(root+"fire_atOnce", fire_atOnce);
     
-    data_bullet.Save(save_ptree, root);
+//    data_bullet.Save(save_ptree, root);
 }
                 
 void Rocket::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" RocketEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" RocketEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
-    m_ammo = load_ptree.get<int>("ammo"); 
-    m_damage_orig = load_ptree.get<int>("damage_orig");  
-    m_radius_orig = load_ptree.get<int>("radius_orig");   
-    fire_atOnce = load_ptree.get<int>("fire_atOnce");  
+//    m_ammo_max_orig = load_ptree.get<int>("ammo_max_orig");
+//    m_ammo = load_ptree.get<int>("ammo");
+//    m_damage_orig = load_ptree.get<int>("damage_orig");
+//    m_radius_orig = load_ptree.get<int>("radius_orig");
+//    fire_atOnce = load_ptree.get<int>("fire_atOnce");
 
-    data_bullet.Load(load_ptree.get_child("data_bullet"));
+//    data_bullet.Load(load_ptree.get_child("data_bullet"));
 }                
 
 void Rocket::ResolveData()
 {
-    LOG(" RocketEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" RocketEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
     
-    data_bullet.Resolve();
+//    data_bullet.Resolve();
 }
 
 } // namespace equipment

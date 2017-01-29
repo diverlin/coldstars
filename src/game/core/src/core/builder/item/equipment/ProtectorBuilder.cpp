@@ -43,11 +43,12 @@ ProtectorBuilder::createTemplate(int_t id) const
     Protector* protector = new Protector(id);
     assert(protector);
 
-   core::global::get().entityManager().reg(protector);
+    assert(false);
+    //core::global::get().entityManager().reg(protector);
     
     return protector;
 } 
-   
+
 std::vector<Protector*>
 ProtectorBuilder::getNew(int num) const
 {
@@ -64,7 +65,7 @@ ProtectorBuilder::getNew() const
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
-        
+
     return protector;
 } 
 
@@ -76,7 +77,7 @@ ProtectorBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 
     return protector;
 }
-         
+
 void
 ProtectorBuilder::createInternals(Protector* protector, const descriptor::BaseOLD& descriptor) const
 {     
@@ -85,7 +86,7 @@ ProtectorBuilder::createInternals(Protector* protector, const descriptor::BaseOL
     protector->SetProtectionOrig(descriptor.protection());
     protector->setParentSubTypeId(type::entity::PROTECTOR_SLOT_ID);
     protector->setItemCommonData(common_data);
-            
+
     protector->updateProperties();
     protector->CountPrice();
 }

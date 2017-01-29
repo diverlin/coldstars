@@ -31,8 +31,9 @@
 
 Store::Store(int id)
 {
-    setId(id);
-    setTypeId(type::entity::STORE_ID);
+    assert(false);
+    //    setId(id);
+    //    setTypeId(type::entity::STORE_ID);
 }
 
 Store::~Store()
@@ -40,87 +41,83 @@ Store::~Store()
 
 /* virtual */
 void Store::putChildrenToGarbage() const
-{            
-    for(unsigned int i=0; i<item_slot_vec.size(); i++)
-    {
-       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
-    }
+{
+    assert(false);
+    //    for(unsigned int i=0; i<item_slot_vec.size(); i++) {
+    //       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
+    //    }
 }
 
-void Store::addItemSlot(ItemSlot* item_slot) 
+void Store::addItemSlot(control::ItemSlot* item_slot)
 { 
-    item_slot->setOwner(this);
-    item_slot_vec.push_back(item_slot); 
+    assert(false);
+    //    item_slot->setOwner(this);
+    //    item_slot_vec.push_back(item_slot);
 };     
 
-void Store::addVehicleSlot(VehicleSlot* vehicle_slot) 
+void Store::addVehicleSlot(control::VehicleSlot* vehicle_slot)
 { 
-    vehicle_slot->setOwner(this);
-    vehicle_slot_vec.push_back(vehicle_slot); 
+    assert(false);
+    //    vehicle_slot->setOwner(this);
+    //    vehicle_slot_vec.push_back(vehicle_slot);
 }; 
-        
+
 bool Store::addItem(item::Base* item)
 {
-    ItemSlot* item_slot = freeItemSlot();
-    if (item_slot) 
-    {
-        item_slot->insert(item);
+    control::ItemSlot* slot = freeItemSlot();
+    if (slot) {
+        slot->insert(item);
         return true;
     }
-         
+
     return true;
 }
 
-bool Store::addVehicle(Vehicle* vehicle)
+bool Store::addVehicle(control::Vehicle* vehicle)
 {
-    VehicleSlot* vehicle_slot = freeVehicleSlot();
-    if (vehicle_slot) 
+    control::VehicleSlot* vehicle_slot = freeVehicleSlot();
+    if (vehicle_slot)
     {
-        //vehicle->SetLand(GetOwnerKosmoport());        
-            //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
-            //{
-                    //vehicle->setStarSystem(GetOwnerKosmoport()->GetOwner()->starsystem());
-            //}        
+        //vehicle->SetLand(GetOwnerKosmoport());
+        //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
+        //{
+        //vehicle->setStarSystem(GetOwnerKosmoport()->GetOwner()->starsystem());
+        //}
         vehicle_slot->InsertVehicle(vehicle);
         return true;
     }
-         
+
     return true;
 }
 
-ItemSlot* Store::freeItemSlot() const
+control::ItemSlot*
+Store::freeItemSlot() const
 {
-        for (unsigned int i=0; i<item_slot_vec.size(); i++)
-        {
-                if (item_slot_vec[i]->item() == nullptr)
-                {
-                        return item_slot_vec[i];
-            }
+    for (auto* slot: m_itemslots) {
+        if (!slot->item()) {
+            return slot;
         }
-      
-        return nullptr;
+    }
+    return nullptr;
 }
 
-VehicleSlot* Store::freeVehicleSlot() const
+control::VehicleSlot*
+Store::freeVehicleSlot() const
 {
-        for (unsigned int i=0; i<vehicle_slot_vec.size(); i++)
-        {
-                if (vehicle_slot_vec[i]->vehicle() == nullptr)
-                {
-                        return vehicle_slot_vec[i];
-            }
+    for (auto* slot: m_vehicleslots) {
+        if (!slot->vehicle()) {
+            return slot;
         }
-      
-        return nullptr;
+    }
+    return nullptr;
 }
 
-int Store::buyItem(item::Base* item)
+int
+Store::buyItem(item::Base* item)
 {
-    ItemSlot* item_slot = freeItemSlot();    
-    if (item_slot != nullptr)
-    {
-        if (item_slot->insert(item) == true)
-        {
+    control::ItemSlot* slot = freeItemSlot();
+    if (slot) {
+        if (slot->insert(item)) {
             return item->price();
         }
     }
@@ -128,22 +125,22 @@ int Store::buyItem(item::Base* item)
     return 0;
 }
 
-void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
+void Store::sellVehicle(Npc* npc, control::VehicleSlot* vehicle_slot, int price)
 {
     assert(false);
-//    vehicle_slot->vehicle()->grabItemsFromVehicle(npc->vehicle());
-//    vehicle_slot->vehicle()->setStarSystem(npc->vehicle()->starsystem());
-//    vehicle_slot->vehicle()->setLand(npc->vehicle()->land());
-//    vehicle_slot->vehicle()->setPlaceTypeId(type::place::KOSMOPORT);
+    //    vehicle_slot->vehicle()->grabItemsFromVehicle(npc->vehicle());
+    //    vehicle_slot->vehicle()->setStarSystem(npc->vehicle()->starsystem());
+    //    vehicle_slot->vehicle()->setLand(npc->vehicle()->land());
+    //    vehicle_slot->vehicle()->setPlaceTypeId(type::place::KOSMOPORT);
     
-//    VehicleSlot* npc_vehicle_slot = npc->vehicle()->parentVehicleSlot();
-//    npc->vehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
-//    npc_vehicle_slot->vehicle()->bindNpc(npc);
+    //    VehicleSlot* npc_vehicle_slot = npc->vehicle()->parentVehicleSlot();
+    //    npc->vehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
+    //    npc_vehicle_slot->vehicle()->bindNpc(npc);
 
     assert(false);
-//    npc->withdrawCredits(price);
+    //    npc->withdrawCredits(price);
 }
-                
+
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
@@ -162,22 +159,22 @@ void Store::ResolveData()
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "store." + std::to_string(id())+".";
-    Base::SaveData(save_ptree, root);
-    Room::SaveData(save_ptree, root);
-    Store::SaveData(save_ptree, root);
+    //    std::string root = "store." + std::to_string(id())+".";
+    //    Base::SaveData(save_ptree, root);
+    //    Room::SaveData(save_ptree, root);
+    //    Store::SaveData(save_ptree, root);
 }
 
 void Store::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Room::LoadData(load_ptree);
-    Store::LoadData(load_ptree);
+    //    Base::LoadData(load_ptree);
+    //    Room::LoadData(load_ptree);
+    //    Store::LoadData(load_ptree);
 }
 
 void Store::Resolve()
 {
-    Base::ResolveData();
-    Room::ResolveData();
-    Store::ResolveData();
+    //    Base::ResolveData();
+    //    Room::ResolveData();
+    //    Store::ResolveData();
 }

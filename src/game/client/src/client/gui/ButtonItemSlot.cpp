@@ -53,10 +53,11 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
-    
-    if (player->cursor().GetItemSlot()->item() != nullptr) {
-        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));
-    }
+
+    assert(false);
+//    if (player->cursor().GetItemSlot()->item()) {
+//        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));
+//    }
     
 //    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //    {
@@ -67,14 +68,10 @@ void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) 
 /* virtual override final */
 void ButtonItemSlot::RenderInfo(const jeti::Renderer& render) const
 {
-    if (GetItemSlot() != nullptr)
-    {
-        if (GetItemSlot()->item() != nullptr)
-        {
+    if (GetItemSlot()) {
+        if (GetItemSlot()->item()) {
             //GetItemSlot()->item()->RenderInfo(render, GetBox().center());
-        }
-        else
-        {
+        } else {
             //GetItemSlot()->RenderInfo();
         }
     }

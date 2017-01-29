@@ -88,12 +88,12 @@ void Galaxy::putChildrenToGarbage() const
 //    }
 }
 
-void Galaxy::add(model::Sector* model, const glm::vec3& center)
+void Galaxy::add(model::Sector* _model, const glm::vec3& center)
 { 
-    model->setGalaxy(id());
-    model->setPosition(center);
+    _model->setGalaxy(model()->id());
+    _model->setPosition(center);
 
-    control::Sector* sector = new control::Sector(model);
+    control::Sector* sector = new control::Sector(_model);
     m_sectors.push_back(sector);
 }
 

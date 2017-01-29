@@ -40,7 +40,7 @@ Base::Base()
 /*virtual */
 Base::~Base()
 {
-    LOG("___::~BaseEquipment("+std::to_string(id())+")");
+//    LOG("___::~BaseEquipment("+std::to_string(model()->id())+")");
 
     //delete animation_notfunctioning;
 }
@@ -134,17 +134,17 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
 }
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
 }
 
 void Base::ResolveData()
 {
-    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
 }
 
 } // namespace equipment

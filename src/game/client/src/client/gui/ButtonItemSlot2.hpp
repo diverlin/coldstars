@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONITEMSLOT2_HPP
-#define BUTTONITEMSLOT2_HPP
+#pragma once
 
 #include "BaseButtonItemSlot.hpp"
 
@@ -27,24 +26,24 @@ class Renderer;
 
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
-    public:
-        ButtonItemSlot2(type::GUI subtype_id, const std::string& info, ItemSlot* itemslot)
+public:
+    ButtonItemSlot2(type::GUI subtype_id, const std::string& info, control::ItemSlot* itemslot)
         :
-        BaseButtonItemSlot(type::GUI::BUTTON_ITEMSLOT2_ID, subtype_id, info)
-        {
-            SetItemSlot(itemslot);
-        }
-               
-        virtual ~ButtonItemSlot2() override final {};  
+          BaseButtonItemSlot(type::GUI::BUTTON_ITEMSLOT2_ID, subtype_id, info)
+    {
+        SetItemSlot(itemslot);
+    }
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void ResetState() override final;
-        virtual void UpdateUnique(Player*) override final;
-        
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
-        
-    private:
+    virtual ~ButtonItemSlot2() override final {};
+
+    virtual void OnPressEventMBL(Player*) override final;
+    virtual void ResetState() override final;
+    virtual void UpdateUnique(Player*) override final;
+
+    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+
+private:
 
 };
 
-#endif
+

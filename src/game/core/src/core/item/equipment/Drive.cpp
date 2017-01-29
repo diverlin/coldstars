@@ -27,9 +27,10 @@ namespace equipment {
 
 Drive::Drive(int_t id)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::DRIVE_EQUIPMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::DRIVE_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -94,51 +95,51 @@ std::string Drive::GetHyperStr()
 /*virtual*/
 void Drive::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "drive_equipment." + std::to_string(id()) + ".";
+//    std::string root = "drive_equipment." + std::to_string(id()) + ".";
 
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Drive::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Drive::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Drive::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Drive::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Drive::LoadData(load_ptree);
 }
 
 /*virtual*/    
 void Drive::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Drive::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Drive::ResolveData();
 }
 
 void Drive::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"speed_orig", m_speed_orig);
-    save_ptree.put(root+"hyper_orig", m_hyper_orig);
+//    save_ptree.put(root+"speed_orig", m_speed_orig);
+//    save_ptree.put(root+"hyper_orig", m_hyper_orig);
 }
 
 void Drive::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 
-    m_speed_orig = load_ptree.get<int>("speed_orig");
-    m_hyper_orig = load_ptree.get<int>("hyper_orig");
+//    m_speed_orig = load_ptree.get<int>("speed_orig");
+//    m_hyper_orig = load_ptree.get<int>("hyper_orig");
 }                
 
 void Drive::ResolveData()
 {
-    LOG(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment

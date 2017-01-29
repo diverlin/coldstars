@@ -35,11 +35,12 @@ Shop* ShopBuilder::createTemplate(int_t id) const
     Shop* shop = new Shop(id);
     assert(shop);
 
-   core::global::get().entityManager().reg(shop);
+    assert(false);
+    //core::global::get().entityManager().reg(shop);
 
     return shop;
 } 
- 
+
 Shop* ShopBuilder::create() const
 {
     Shop* shop = createTemplate();

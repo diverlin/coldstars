@@ -21,14 +21,17 @@
 
 #include "Room.hpp"
 
+namespace control {
 class ItemSlot;
+class VehicleSlot;
+class Vehicle;
+}
+
 namespace item {
 class Base;
 } // namespace item
 
 class Npc;
-class VehicleSlot;
-class Vehicle;
 
 class Store : public Room
 {
@@ -38,24 +41,24 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void addVehicleSlot(VehicleSlot*);
-    void addItemSlot(ItemSlot*);
+    void addVehicleSlot(control::VehicleSlot*);
+    void addItemSlot(control::ItemSlot*);
     bool addItem(item::Base*);
-    bool addVehicle(Vehicle*);
+    bool addVehicle(control::Vehicle*);
 
-    ItemSlot* freeItemSlot() const;
-    VehicleSlot* freeVehicleSlot() const;
+    control::ItemSlot* freeItemSlot() const;
+    control::VehicleSlot* freeVehicleSlot() const;
 
     int buyItem(item::Base*);
-    void sellVehicle(Npc*, VehicleSlot*, int);
+    void sellVehicle(Npc*, control::VehicleSlot*, int);
 
     void Save(boost::property_tree::ptree&) const;
     void Load(const boost::property_tree::ptree&);
     void Resolve();
 
 private:
-    std::vector<ItemSlot*> item_slot_vec;
-    std::vector<VehicleSlot*> vehicle_slot_vec;
+    std::vector<control::ItemSlot*> m_itemslots;
+    std::vector<control::VehicleSlot*> m_vehicleslots;
 
     void SaveData(boost::property_tree::ptree&, const std::string&) const;
     void LoadData(const boost::property_tree::ptree&);

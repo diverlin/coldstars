@@ -19,40 +19,60 @@
 
 #pragma once
 
-#include <boost/property_tree/ptree.hpp>
-#include "../slots/BaseSlot.hpp"
+#include <core/slots/BaseSlot.hpp>
 
 class Vehicle;
 
-namespace ceti {
-class Rect; // to be removed
-}
+namespace model {
 
 class VehicleSlot : public BaseSlot
 {
-    public:
-        VehicleSlot(int, type::entity);
-        ~VehicleSlot();    
-        
-        virtual void putChildrenToGarbage() const;
-        
-        Vehicle* vehicle() const { return m_vehicle; }
-        void InsertVehicle(Vehicle*);
-        void Release(); 
-        void SwapVehicle(VehicleSlot*);
-        
-        void Render(const ceti::Rect&) const;
-        
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:
-        Vehicle* m_vehicle = nullptr;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();     
+public:
+    VehicleSlot() = default;
+    ~VehicleSlot() = default;
+    VehicleSlot(const std::string& data);
+    std::string data() const;
+
+    void setVehicle(int_t vehicle) { m_vehicle = vehicle; }
+    int_t vehicle() const { return m_vehicle; }
+
+private:
+    int_t m_vehicle = NONE;
+};
+
+} // namespace model
+
+namespace control {
+
+class VehicleSlot : public BaseSlot
+{
+public:
+    VehicleSlot(int, type::entity);
+    ~VehicleSlot();
+
+    virtual void putChildrenToGarbage() const;
+
+    Vehicle* vehicle() const { return m_vehicle; }
+    void InsertVehicle(Vehicle*);
+    void Release();
+    void SwapVehicle(VehicleSlot*);
+
+//    void Render(const ceti::Rect&) const;
+
+//    virtual void Save(boost::property_tree::ptree&) const;
+//    virtual void Load(const boost::property_tree::ptree&);
+//    virtual void Resolve();
+
+    model::VehicleSlot* model() const { return m_model_vehicleslot; }
+
+private:
+    model::VehicleSlot* m_model_vehicleslot = nullptr;
+
+    Vehicle* m_vehicle = nullptr;
+
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 }; 
 
-
+} // namespace model

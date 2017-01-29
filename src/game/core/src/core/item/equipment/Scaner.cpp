@@ -32,9 +32,10 @@ Scaner::Scaner(int_t id)
     :
       m_scan_orig(0)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::SCANER_EQUIPMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::SCANER_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -88,48 +89,48 @@ std::string Scaner::str()
 /*virtual*/
 void Scaner::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "scaner_equipment." + std::to_string(id()) + ".";
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Scaner::SaveData(save_ptree, root);
+//    std::string root = "scaner_equipment." + std::to_string(id()) + ".";
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Scaner::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Scaner::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Scaner::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Scaner::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Scaner::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Scaner::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Scaner::ResolveData();
 }
 
 void Scaner::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"scan_orig", m_scan_orig);
+//    save_ptree.put(root+"scan_orig", m_scan_orig);
 }
 
 void Scaner::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_scan_orig = load_ptree.get<int>("scan_orig");
+//    m_scan_orig = load_ptree.get<int>("scan_orig");
 }                
 
 void Scaner::ResolveData()
 {
-    LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment

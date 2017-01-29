@@ -44,6 +44,25 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
+
+namespace model {
+
+ItemSlot::ItemSlot(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+ItemSlot::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
+
+
+namespace control {
+
 ItemSlot::ItemSlot(int_t id, type::entity subtype_id)
     :
       m_turrel(nullptr),
@@ -52,9 +71,10 @@ ItemSlot::ItemSlot(int_t id, type::entity subtype_id)
       m_subtarget(nullptr),
       m_hitProbability(0)
 {
-    setId(id);
-    setTypeId(type::entity::ITEM_SLOT_ID);
-    setSubTypeId(subtype_id);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::ITEM_SLOT_ID);
+//    setSubTypeId(subtype_id);
     
     m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
 }
@@ -62,15 +82,16 @@ ItemSlot::ItemSlot(int_t id, type::entity subtype_id)
 /* virtual */
 ItemSlot::~ItemSlot()
 {
-    LOG("___::~ItemSlot("+std::to_string(id())+")");
+//    LOG("___::~ItemSlot("+std::to_string(id())+")");
 }  
 
 /* virtual */  
 void ItemSlot::putChildrenToGarbage() const
 {
-    if (m_item) {
-       core::global::get().entityManager().addToGarbage(m_item);
-    }
+    assert(false);
+//    if (m_item) {
+//       core::global::get().entityManager().addToGarbage(m_item);
+//    }
 }
 
 void ItemSlot::setTarget(model::SpaceObject* target, ItemSlot* subtarget)
@@ -103,10 +124,11 @@ void ItemSlot::resetTarget()
 
 bool ItemSlot::checkAmmo() const
 {
-    switch(item()->subtype()) {
-        case type::entity::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
-        case type::entity::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
-    }
+    assert(false);
+//    switch(item()->subtype()) {
+//        case type::entity::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+//        case type::entity::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
+//    }
     
     return false;
 }
@@ -134,54 +156,56 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 
 bool ItemSlot::checkItemInsertion(item::Base* item) const
 {
-    if (subtype() == type::entity::CARGO_SLOT_ID) {
-        return true;
-    }
+    assert(false);
+//    if (subtype() == type::entity::CARGO_SLOT_ID) {
+//        return true;
+//    }
 
-    if (subtype() == item->parentSubtype()) {
-        return true;
-    }
+//    if (subtype() == item->parentSubtype()) {
+//        return true;
+//    }
     
     return false;
 }
 
 bool ItemSlot::insert(item::Base* item)
-{    
-    // make it oop
-    if (subtype() == type::entity::GATE_SLOT_ID)
-    {
-        // make a gate not be a slot
-        //m_item = item;
-        //dropItemToSpace();
-        return false;
-    }
+{
+    assert(false);
+//    // make it oop
+//    if (subtype() == type::entity::GATE_SLOT_ID)
+//    {
+//        // make a gate not be a slot
+//        //m_item = item;
+//        //dropItemToSpace();
+//        return false;
+//    }
 
-    if (subtype() == type::entity::CARGO_SLOT_ID)
-    {
-        m_item = item;
-        if (item->slot() != nullptr)
-        {
-            item->slot()->removeItem();
-        }
-        item->setSlot(this);
+//    if (subtype() == type::entity::CARGO_SLOT_ID)
+//    {
+//        m_item = item;
+//        if (item->slot() != nullptr)
+//        {
+//            item->slot()->removeItem();
+//        }
+//        item->setSlot(this);
 
-        return true;
-    }
+//        return true;
+//    }
 
-    if (subtype() == item->parentSubtype())
-    {
-        m_item = item;
-        if (item->slot() != nullptr)
-        {
-            item->slot()->removeItem();
-        }
-        item->setSlot(this);
-        updateVehiclePropetries();
+//    if (subtype() == item->parentSubtype())
+//    {
+//        m_item = item;
+//        if (item->slot() != nullptr)
+//        {
+//            item->slot()->removeItem();
+//        }
+//        item->setSlot(this);
+//        updateVehiclePropetries();
 
-        return true;
-    }
+//        return true;
+//    }
     
-    return false;
+//    return false;
 }
 
 void ItemSlot::removeItem()
@@ -190,15 +214,16 @@ void ItemSlot::removeItem()
     m_item = nullptr;
     resetTarget();
 
-    if (subtype() != type::entity::CARGO_SLOT_ID) {
-        updateVehiclePropetries();
-    }
+    assert(false);
+//    if (subtype() != type::entity::CARGO_SLOT_ID) {
+//        updateVehiclePropetries();
+//    }
 }
 
 void ItemSlot::selectEvent()
 {
     // make it oop
-    m_selected = true;
+    setSelected(true);
 
     assert(false);
 //    if (owner()->type() == type::entity::VEHICLE_ID) {
@@ -211,22 +236,23 @@ void ItemSlot::selectEvent()
 void ItemSlot::deselectEvent()
 {
     // make it oop
-    m_selected = false;
-    
-    if (owner()->type() == type::entity::VEHICLE_ID)
-    {
-        switch(subtype())
-        {
-            case type::entity::WEAPON_SLOT_ID:     {     resetTarget(); break; }
-            case type::entity::DRIVE_SLOT_ID:
-            {
-                assert(false);
-//                vehicleOwner()->_updatePropSpeed();
-                //GetOwnerVehicle()->UpdatePropertiesJump();
-                break;
-            }
-        }
-    }
+    setSelected(false);
+
+    assert(false);
+//    if (owner()->type() == type::entity::VEHICLE_ID)
+//    {
+//        switch(subtype())
+//        {
+//            case type::entity::WEAPON_SLOT_ID:     {     resetTarget(); break; }
+//            case type::entity::DRIVE_SLOT_ID:
+//            {
+//                assert(false);
+////                vehicleOwner()->_updatePropSpeed();
+//                //GetOwnerVehicle()->UpdatePropertiesJump();
+//                break;
+//            }
+//        }
+//    }
 
 }
 
@@ -392,13 +418,13 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     return false;
 }
 
-void ItemSlot::updateRange(jeti::control::Material* _texOb)
-{
-    float radius = this->itemRadius();
-    int size = 6;
+//void ItemSlot::updateRange(jeti::control::Material* _texOb)
+//{
+//    float radius = this->itemRadius();
+//    int size = 6;
     
-    //    m_VisualPath.FillData(_texOb, radius, size);
-}
+//    //    m_VisualPath.FillData(_texOb, radius, size);
+//}
 
 void ItemSlot::drawRange(const glm::vec2& offset)
 { 
@@ -442,7 +468,8 @@ STATUS ItemSlot::checkTarget(model::SpaceObject* target) const
 
 STATUS ItemSlot::checkTargetPure(model::SpaceObject* target) const
 {
-    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
+    assert(false);
+//    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
 
     if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
@@ -491,68 +518,68 @@ bool ItemSlot::checkDistanceToTarget(model::SpaceObject* target) const
 /* virtual override final */
 void ItemSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "item_slot." + std::to_string(id()) + ".";
-    Base::SaveData(save_ptree, root);
-    BaseSlot::SaveData(save_ptree, root);
-    ItemSlot::SaveData(save_ptree, root);
+//    const std::string root = "item_slot." + std::to_string(id()) + ".";
+//    Base::SaveData(save_ptree, root);
+//    BaseSlot::SaveData(save_ptree, root);
+//    ItemSlot::SaveData(save_ptree, root);
 }
 
 /* virtual override final */      
 void ItemSlot::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    BaseSlot::LoadData(load_ptree);
-    ItemSlot::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    BaseSlot::LoadData(load_ptree);
+//    ItemSlot::LoadData(load_ptree);
 }
 
 /* virtual override final */ 
 void ItemSlot::Resolve()
 {
-    Base::ResolveData();
-    BaseSlot::ResolveData();
-    ItemSlot::ResolveData();
+//    Base::ResolveData();
+//    BaseSlot::ResolveData();
+//    ItemSlot::ResolveData();
 }
 
-void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
+//void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
 
-//    if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
-//    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE); }
+////    if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
+////    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE); }
 
-//    if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
-//    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE); }
-}
+////    if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
+////    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE); }
+//}
 
-void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
+//void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+////    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
     
-//    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
-//    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
-}
+////    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
+////    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
+//}
 
-void ItemSlot::ResolveData()
-{
-    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
+//void ItemSlot::ResolveData()
+//{
+////    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
-//    if (m_unresolved_ItemSlot.target_id != NONE_ID) {
-//        m_target = (SpaceObject*)core::global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
-//    }
+////    if (m_unresolved_ItemSlot.target_id != NONE_ID) {
+////        m_target = (SpaceObject*)core::global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
+////    }
 
-//    if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
-//        m_subtarget = (ItemSlot*)core::global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
-//    }
+////    if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
+////        m_subtarget = (ItemSlot*)core::global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
+////    }
 
-//    switch(owner->typeId())
-//    {
-//        case type::entity::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
-//        case type::entity::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
-//        case type::entity::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
-//        case type::entity::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
-//            //case type::entity::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
-//    }
-}
+////    switch(owner->typeId())
+////    {
+////        case type::entity::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
+////        case type::entity::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
+////        case type::entity::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
+////        case type::entity::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
+////            //case type::entity::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
+////    }
+//}
 
 void ItemSlot::log(const std::string& func_name) const
 {
@@ -566,3 +593,4 @@ void ItemSlot::log(const std::string& func_name) const
 //    LOG(str);
 }
 
+} // naespace control

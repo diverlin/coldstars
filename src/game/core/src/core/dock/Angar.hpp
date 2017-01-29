@@ -16,23 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANGAR_H
-#define ANGAR_H
+#pragma once
 
 #include "Room.hpp"
+
+namespace control {
 class ItemSlot;
 class VehicleSlot; 
 class Vehicle;
+} // namespace control
+
 class Npc;
-namespace item {
-class Base;
-} // namespace item
 
 namespace item {
+
+class Base;
+
 namespace equipment {
 class Rocket;
-}
-}
+} // namespace equipment
+
+} // namespace item
 
 class Angar : public Room
 {
@@ -42,18 +46,18 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void AddVehicleSlot(VehicleSlot*);
-    void AddItemSlot(ItemSlot*);
+    void AddVehicleSlot(control::VehicleSlot*);
+    void AddItemSlot(control::ItemSlot*);
 
     void UpdateInStatic() const;
 
-    bool AddVehicle(Vehicle*);
+    bool AddVehicle(control::Vehicle*);
 
     bool RepairItem(Npc*, item::Base*) const;
     bool chargeRocketEquipment(Npc*, item::equipment::Rocket*) const;
 
-    bool RepairVehicle(Vehicle*) const;
-    bool TankUpVehicle(Vehicle*) const;
+    bool RepairVehicle(control::Vehicle*) const;
+    bool TankUpVehicle(control::Vehicle*) const;
 
     int GetFreeVehicleSlotTotalNum() const;
 
@@ -66,11 +70,11 @@ public:
     void Resolve();
 
 private:
-    std::vector<VehicleSlot*> vehicle_total_slot_vec;
-    std::vector<VehicleSlot*> vehicle_military_slot_vec;
-    std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
+    std::vector<control::VehicleSlot*> vehicle_total_slot_vec;
+    std::vector<control::VehicleSlot*> vehicle_military_slot_vec;
+    std::vector<control::VehicleSlot*> vehicle_visitors_slot_vec;
 
-    std::vector<ItemSlot*> item_slot_vec;
+    std::vector<control::ItemSlot*> item_slot_vec;
 
     int price_fuel;
 
@@ -81,4 +85,3 @@ private:
     friend class GuiAngar;
 };
 
-#endif 

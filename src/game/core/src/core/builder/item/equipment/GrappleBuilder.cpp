@@ -42,7 +42,8 @@ Grapple* GrappleBuilder::createTemplate(int_t id) const
     Grapple* grapple = new Grapple(id);
     assert(grapple);
 
-   core::global::get().entityManager().reg(grapple);
+    assert(false);
+//    core::global::get().entityManager().reg(grapple);
     
     return grapple;
 } 

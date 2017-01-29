@@ -32,10 +32,8 @@
     
 bool BaseButtonItemSlot::GetEquiped() const
 {
-    if (m_ItemSlot != nullptr)
-    {
-        if (m_ItemSlot->item() != nullptr)
-        {
+    if (m_itemSlot) {
+        if (m_itemSlot->item()) {
             return true;
         }
     } 
@@ -45,44 +43,45 @@ bool BaseButtonItemSlot::GetEquiped() const
 
 void BaseButtonItemSlot::UpdateAnimationProgram()
 {
-    if (m_ItemSlot != nullptr)
-    {
-        if (m_ItemSlot->subtype() != type::entity::CARGO_SLOT_ID)
-        {
-            if (m_ItemSlot->item() != nullptr)
-            {
-                if (m_ItemSlot->item()->isFunctioning() == false)
-                {
-                    if (GetAnimationProgramActive() == false)
-                    {
-                        //SetAnimationProgram(new jeti::AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
-                        return;
-                    }                    
-                } 
-                else
-                {
-                    if (GetAnimationProgramActive() == true)
-                    {
-                        DeleteAnimationProgram();
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                if (GetAnimationProgramActive() == true)
-                {
-                    DeleteAnimationProgram();
-                    return;
-                }
-            }
-        }
-    }
+    assert(false);
+//    if (m_ItemSlot != nullptr)
+//    {
+//        if (m_ItemSlot->subtype() != type::entity::CARGO_SLOT_ID)
+//        {
+//            if (m_ItemSlot->item() != nullptr)
+//            {
+//                if (m_ItemSlot->item()->isFunctioning() == false)
+//                {
+//                    if (GetAnimationProgramActive() == false)
+//                    {
+//                        //SetAnimationProgram(new jeti::AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
+//                        return;
+//                    }
+//                }
+//                else
+//                {
+//                    if (GetAnimationProgramActive() == true)
+//                    {
+//                        DeleteAnimationProgram();
+//                        return;
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                if (GetAnimationProgramActive() == true)
+//                {
+//                    DeleteAnimationProgram();
+//                    return;
+//                }
+//            }
+//        }
+//    }
 }
 
 void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, type::GUI mark_slot_subtype_id) const
 {
-    if (m_ItemSlot != nullptr)
+    if (m_itemSlot != nullptr)
     {
         if (GetEquiped() == false) 
         {
@@ -132,14 +131,12 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
 
 void BaseButtonItemSlot::RenderMarkTarget() const
 {
-    if (m_ItemSlot != nullptr)
-    {
-        if (m_ItemSlot->item() != nullptr)
-        {              
+    if (m_itemSlot) {
+        if (m_itemSlot->item()) {
             //box.SetScale(1.5, 1.5);
             //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
             //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
-            jeti::drawColoredTextWithBackground(std::to_string(m_ItemSlot->hitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
+            jeti::drawColoredTextWithBackground(std::to_string(m_itemSlot->hitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
         }
     }
 }

@@ -17,12 +17,13 @@
 */
 
 
-#ifndef BASEBUTTONITEMSLOT_HPP
-#define BASEBUTTONITEMSLOT_HPP
+#pragma once
 
 #include "BaseButton.hpp"
 
+namespace control {
 class ItemSlot;
+} // namespace control
 
 namespace jeti {
 class Renderer;
@@ -30,30 +31,28 @@ class Renderer;
 
 class BaseButtonItemSlot : public BaseButton
 {
-    public:
-        BaseButtonItemSlot(type::GUI type_id, type::GUI subtype_id, const std::string& info)
+public:
+    BaseButtonItemSlot(type::GUI type_id, type::GUI subtype_id, const std::string& info)
         :
-        BaseButton(type_id, subtype_id, info), 
-        m_ItemSlot(nullptr) 
-        {}
-               
-        virtual ~BaseButtonItemSlot() {};  
-        
-        bool GetEquiped() const;
-        
-        void SetItemSlot(ItemSlot* item_slot) { m_ItemSlot = item_slot; }
-                   
-    protected:
-        ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
+          BaseButton(type_id, subtype_id, info),
+          m_itemSlot(nullptr)
+    {}
 
-        void UpdateAnimationProgram();
+    virtual ~BaseButtonItemSlot() {};
 
-        void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, type::GUI) const;
-        void RenderMarkTarget() const;
-                        
-    private:
-        ItemSlot* m_ItemSlot;    
-    
+    bool GetEquiped() const;
+
+    void SetItemSlot(control::ItemSlot* item_slot) { m_itemSlot = item_slot; }
+
+protected:
+    control::ItemSlot* const GetItemSlot() const { return m_itemSlot; }
+
+    void UpdateAnimationProgram();
+
+    void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, type::GUI) const;
+    void RenderMarkTarget() const;
+
+private:
+    control::ItemSlot* m_itemSlot = nullptr;
 };
 
-#endif

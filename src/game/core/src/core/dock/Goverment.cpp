@@ -28,8 +28,9 @@ Goverment::Goverment(int id)
 :
 textureOb_face(nullptr)
 {
-    setId(id);
-    setTypeId(type::entity::GOVERMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::GOVERMENT_ID);
 }
 
 Goverment::~Goverment()
@@ -54,24 +55,24 @@ void Goverment::ResolveData()
 
 void Goverment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "goverment." + std::to_string(id())+".";
+//    std::string root = "goverment." + std::to_string(id())+".";
     
-    Base::SaveData(save_ptree, root);
-    Room::SaveData(save_ptree, root);
-    Goverment::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Room::SaveData(save_ptree, root);
+//    Goverment::SaveData(save_ptree, root);
 }
 
 void Goverment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Room::LoadData(load_ptree);
-    Goverment::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Room::LoadData(load_ptree);
+//    Goverment::LoadData(load_ptree);
 }
 
 void Goverment::Resolve()
 {
-    Base::ResolveData();
-    Room::ResolveData();
-    Goverment::ResolveData();
+//    Base::ResolveData();
+//    Room::ResolveData();
+//    Goverment::ResolveData();
 }
 

@@ -37,51 +37,55 @@ Angar::Angar(int id)
     :
       price_fuel(PRICE_FUEL)
 {
-    setId(id);
-    setTypeId(type::entity::ANGAR_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::ANGAR_ID);
 }
 
 Angar::~Angar()
 {        
-    LOG("___::~Angar(), id="+std::to_string(id()));
+//    LOG("___::~Angar(), id="+std::to_string(id()));
 }
 
 /* virtual */
 void Angar::putChildrenToGarbage() const
 {
-    for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
-    {
-       core::global::get().entityManager().addToGarbage(vehicle_total_slot_vec[i]);
-    }
+    assert(false);
+//    for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
+//    {
+//       core::global::get().entityManager().addToGarbage(vehicle_total_slot_vec[i]);
+//    }
 
-    for(unsigned int i=0; i<item_slot_vec.size(); i++)
-    {
-       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
-    }
+//    for(unsigned int i=0; i<item_slot_vec.size(); i++)
+//    {
+//       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
+//    }
 }
 
-void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot) 
-{ 
-    vehicle_slot->setOwner(this);
+void Angar::AddVehicleSlot(control::VehicleSlot* vehicle_slot)
+{
+    assert(false);
+//    vehicle_slot->setOwner(this);
 
-    if (vehicle_slot->subtype() == type::entity::VEHICLE_MILITARY_SLOT_ID)
-    {
-        vehicle_military_slot_vec.push_back(vehicle_slot);
-    }
+//    if (vehicle_slot->subtype() == type::entity::VEHICLE_MILITARY_SLOT_ID)
+//    {
+//        vehicle_military_slot_vec.push_back(vehicle_slot);
+//    }
 
-    if (vehicle_slot->subtype() == type::entity::VEHICLE_VISITORS_SLOT_ID)
-    {
-        vehicle_visitors_slot_vec.push_back(vehicle_slot);
-    }
+//    if (vehicle_slot->subtype() == type::entity::VEHICLE_VISITORS_SLOT_ID)
+//    {
+//        vehicle_visitors_slot_vec.push_back(vehicle_slot);
+//    }
 
-    vehicle_total_slot_vec.push_back(vehicle_slot);
+//    vehicle_total_slot_vec.push_back(vehicle_slot);
 };
 
 
-void Angar::AddItemSlot(ItemSlot* item_slot)
+void Angar::AddItemSlot(control::ItemSlot* item_slot)
 {
-    item_slot->setOwner(this);
-    item_slot_vec.push_back(item_slot);
+    assert(false);
+//    item_slot->setOwner(this);
+//    item_slot_vec.push_back(item_slot);
 }
 
 bool Angar::RepairItem(Npc* npc, item::Base* item) const
@@ -114,7 +118,7 @@ bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equi
     return false;
 }
 
-bool Angar::RepairVehicle(Vehicle* vehicle) const
+bool Angar::RepairVehicle(control::Vehicle* vehicle) const
 {
         assert(false);
 //    int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
@@ -133,7 +137,7 @@ bool Angar::RepairVehicle(Vehicle* vehicle) const
     return false;
 }
 
-bool Angar::TankUpVehicle(Vehicle* vehicle) const
+bool Angar::TankUpVehicle(control::Vehicle* vehicle) const
 {
         assert(false);
 //    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
@@ -166,15 +170,15 @@ void Angar::UpdateInStatic() const
 int Angar::GetFreeVehicleSlotTotalNum() const
 {
     int sum_free = 0;
-    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-        if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
+    for (auto* slot: vehicle_visitors_slot_vec) {
+        if (!slot->vehicle()) {
             sum_free++;
         }
     }
     return sum_free;
 }
 
-bool Angar::AddVehicle(Vehicle* vehicle)
+bool Angar::AddVehicle(control::Vehicle* vehicle)
 {
     assert(false);
 //    if (vehicle->subsubtype() == type::entity::WARRIOR_ID) {
@@ -228,24 +232,24 @@ void Angar::ResolveData()
 
 void Angar::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "angar." + std::to_string(id())+".";
+//    std::string root = "angar." + std::to_string(id())+".";
 
-    Base::SaveData(save_ptree, root);
-    Room::SaveData(save_ptree, root);
-    Angar::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Room::SaveData(save_ptree, root);
+//    Angar::SaveData(save_ptree, root);
 }
 
 void Angar::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Room::LoadData(load_ptree);
-    Angar::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Room::LoadData(load_ptree);
+//    Angar::LoadData(load_ptree);
 }
 
 void Angar::Resolve()
 {
-    Base::ResolveData();
-    Room::ResolveData();
-    Angar::ResolveData();
+//    Base::ResolveData();
+//    Room::ResolveData();
+//    Angar::ResolveData();
 }
 

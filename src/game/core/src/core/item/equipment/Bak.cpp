@@ -28,9 +28,9 @@ namespace equipment {
 
 Bak::Bak(int_t id)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::BAK_EQUIPMENT_ID);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::BAK_EQUIPMENT_ID);
 }
    
 /* virtual */
@@ -89,51 +89,51 @@ std::string Bak::getFuelStr()
 /*virtual*/
 void Bak::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "bak_equipment." + std::to_string(id()) + ".";
+//    std::string root = "bak_equipment." + std::to_string(id()) + ".";
 
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Bak::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Bak::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Bak::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Bak::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Bak::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Bak::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Bak::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Bak::ResolveData();
 }
 
 void Bak::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"fuel_max_orig", m_fuelMaxOrig);
-    save_ptree.put(root+"fuel", m_fuel);
+//    save_ptree.put(root+"fuel_max_orig", m_fuelMaxOrig);
+//    save_ptree.put(root+"fuel", m_fuel);
 }
                 
 void Bak::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_fuelMaxOrig = load_ptree.get<int>("fuel_max_orig");
-    m_fuel = load_ptree.get<int>("fuel");
+//    m_fuelMaxOrig = load_ptree.get<int>("fuel_max_orig");
+//    m_fuel = load_ptree.get<int>("fuel");
 }                
 
 void Bak::ResolveData()
 {
-    LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment

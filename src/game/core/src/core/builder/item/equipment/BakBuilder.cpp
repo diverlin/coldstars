@@ -44,7 +44,7 @@ BakBuilder::getNew()
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
     return getNew(descriptor);
 }
-       
+
 Bak*
 BakBuilder::getNew(const descriptor::BaseOLD& descr)
 {
@@ -74,7 +74,10 @@ BakBuilder::__createTemplate(int_t id)
         id = core::global::get().idGenerator().nextId();
     }
     Bak* bak = new Bak(id);
-   core::global::get().entityManager().reg(bak);
+    assert(bak);
+
+    assert(false);
+//    core::global::get().entityManager().reg(bak);
     return bak;
 }
 
@@ -89,7 +92,7 @@ BakBuilder::__createInternals(Bak* bak, const descriptor::BaseOLD& descriptor)
     bak->setFuel(descriptor.fuelMax()); // ?? max or not, second descriptor should be used
     bak->setParentSubTypeId(type::entity::BAK_SLOT_ID);
     bak->setItemCommonData(data);
-                                    
+
     bak->updateProperties();
     bak->countPrice();
 }

@@ -42,7 +42,8 @@ Drive* DriveBuilder::createTemplate(int_t id) const
     Drive* drive = new Drive(id);
     assert(drive);
 
-   core::global::get().entityManager().reg(drive);
+    assert(false);
+//    core::global::get().entityManager().reg(drive);
     
     return drive;
 } 
@@ -60,14 +61,14 @@ Drive* DriveBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);
-        
+
     return drive;
 }        
-            
+
 void DriveBuilder::createInternals(Drive* drive, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData data = extractCommonData(descriptor);
-            
+
     drive->SetSpeedOrig(descriptor.speed());
     drive->SetHyperOrig(descriptor.hyper());
     drive->setParentSubTypeId(type::entity::DRIVE_SLOT_ID);
