@@ -32,14 +32,13 @@ class ItemSlot;
 } // namespace control
 
 namespace model {
-
 namespace item {
 
 class Base : public ::model::Base
 {
 public:
-    Base();
-    virtual ~Base();
+    Base() = default;
+    ~Base() = default;
 
     void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
@@ -83,14 +82,19 @@ private:
 
     int_t m_slot = NONE;
 
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<::model::Base>(*this);
+        // ..
+    }
 };
 
 } // naemspace item
-
 } // namespace model
 
 namespace control {
-
 namespace item {
 
 //struct UnresolvedDataBaseItem
@@ -186,5 +190,4 @@ private:
 };
 
 } // namespace item
-
 } // namespace control

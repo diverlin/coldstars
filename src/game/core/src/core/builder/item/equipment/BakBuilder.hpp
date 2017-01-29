@@ -27,10 +27,16 @@ namespace descriptor {
 class BaseOLD;
 } // namespace descriptor
 
+namespace model {
 namespace item {
 namespace equipment {
-
 class Bak;
+} // namespace equipment
+} // namespace item
+} // namespace model
+
+namespace item {
+namespace equipment {
 
 class BakBuilder
 {
@@ -38,13 +44,13 @@ public:
     BakBuilder();
     ~BakBuilder();
 
-    static Bak* getNew();
-    static Bak* getNew(const descriptor::BaseOLD&);
-    static Bak* getNew(const std::string&);
+    static model::item::equipment::Bak* getNew();
+    static model::item::equipment::Bak* getNew(const descriptor::BaseOLD&);
+    static model::item::equipment::Bak* getNew(const std::string&);
 
 private:
-    static Bak* __createTemplate(int_t);
-    static void __createInternals(item::equipment::Bak*, const descriptor::BaseOLD&);
+    static model::item::equipment::Bak* __createTemplate(int_t);
+    static void __createInternals(model::item::equipment::Bak*, const descriptor::BaseOLD&);
 }; 
 
 } // namespace equipment
