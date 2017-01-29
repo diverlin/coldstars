@@ -34,8 +34,12 @@
 #include "../world/starsystem.hpp"
 
 #include <builder/item/equipment/ALL>
+#ifdef USE_MODULES
 #include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
+#endif // USE_MODULES
+#ifdef USE_ARTEFACTS
+#include <builder/item/artefacts/ALL>
+#endif // USE_ARTEFACTS
 #include <builder/item/other/ALL>
 
 #include <builder/spaceobjects/ALL>
@@ -67,12 +71,12 @@
 
 #ifdef USE_MODULES
 #include <item/modules/ALL>
-#endif
+#endif // USE_MODULES
 #include <item/others/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
 #include <item/artefacts/ALL>
-#endif
+#endif // USE_ARTEFACTS
 #include "../dock/Goverment.hpp"
 #include "../dock/NatureLand.hpp"
 #include "../dock/Kosmoport.hpp"
