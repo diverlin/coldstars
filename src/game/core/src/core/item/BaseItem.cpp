@@ -27,6 +27,8 @@
 
 #include <slots/ItemSlot.hpp>
 
+namespace control {
+
 namespace item {
 
 Base::Base()
@@ -198,3 +200,5 @@ void Base::ResolveData()
 }
 
 } // namespace item
+
+} // namespace control

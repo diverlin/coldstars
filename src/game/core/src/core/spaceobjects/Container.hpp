@@ -23,9 +23,11 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 namespace item {
 class Base;
 } // namespace item
+} // namespace control
 
 namespace model {
 
@@ -48,8 +50,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_itemSlot;
         ar & m_targetPos;
@@ -73,7 +74,7 @@ public:
     void bindItemSlot(ItemSlot*);
 
     ItemSlot* const itemSlot() const { return m_itemSlot; }
-    bool insertItem(item::Base*);
+    bool insertItem(control::item::Base*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 

@@ -24,18 +24,18 @@ namespace control {
 class ItemSlot;
 class VehicleSlot; 
 class Vehicle;
+
+namespace item {
+class Base;
+} // namespace item
 } // namespace control
 
 class Npc;
 
 namespace item {
-
-class Base;
-
 namespace equipment {
 class Rocket;
 } // namespace equipment
-
 } // namespace item
 
 class Angar : public Room
@@ -53,7 +53,7 @@ public:
 
     bool AddVehicle(control::Vehicle*);
 
-    bool RepairItem(Npc*, item::Base*) const;
+    bool RepairItem(Npc*, control::item::Base*) const;
     bool chargeRocketEquipment(Npc*, item::equipment::Rocket*) const;
 
     bool RepairVehicle(control::Vehicle*) const;
