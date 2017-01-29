@@ -77,7 +77,8 @@ Container::~Container()
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {
-   core::global::get().entityManager().addToGarbage(m_itemSlot);
+    assert(false);
+//   core::global::get().entityManager().addToGarbage(m_itemSlot);
 }
 
 bool
@@ -131,15 +132,15 @@ void Container::bindItemSlot(ItemSlot* item_slot)
 /* virtual override final */   
 void Container::_postDeathUniqueEvent(bool show_effect)
 {
-    if (m_itemSlot->item()->type() == type::entity::BOMB_ID) {
-        assert(false);
-        //starsystem()->bombExplosionEvent(this, show_effect);
-    } else {
-        if (show_effect) {
+    assert(false);
+//    if (m_itemSlot->item()->type() == type::entity::BOMB_ID) {
+//        starsystem()->bombExplosionEvent(this, show_effect);
+//    } else {
+//        if (show_effect) {
 //            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
 //            starsystem()->Add(explosion, center());
-        }
-    }
+//        }
+//    }
 }
 
 void Container::updateInSpace(int time, bool show_effect)

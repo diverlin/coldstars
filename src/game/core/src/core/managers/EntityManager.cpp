@@ -149,31 +149,32 @@ getNewContainer() {
 
 void EntityManager::clear()
 {
-    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
-    {
-        //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
-        delete iterator->second;
-    }
+    assert(false);
+//    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
+//    {
+//        //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
+//        delete iterator->second;
+//    }
 
-    m_entities_map.clear();
+//    m_entities_map.clear();
 }
 
-void EntityManager::reg(core::Base* entity)
-{   
-    assert(entity);
-    if (entity->id() == NONE) {
-        //assert(false);
-        // TODO fixme
-        entity->setId(core::global::get().idGenerator().nextId());
-    }
-    LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
+//void EntityManager::reg(core::Base* entity)
+//{
+//    assert(entity);
+//    if (entity->id() == NONE) {
+//        //assert(false);
+//        // TODO fixme
+//        entity->setId(core::global::get().idGenerator().nextId());
+//    }
+//    LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_entities_map.find(entity->id()) != m_entities_map.end()) {
-        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id()) + " which already exists, type = " + entity->dataTypeStr());
-    }
+//    if (m_entities_map.find(entity->id()) != m_entities_map.end()) {
+//        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id()) + " which already exists, type = " + entity->dataTypeStr());
+//    }
 
-    m_entities_map.insert(std::make_pair(entity->id(), entity));
-}
+//    m_entities_map.insert(std::make_pair(entity->id(), entity));
+//}
 
 void EntityManager::reg(model::Base* model)
 {
@@ -185,21 +186,22 @@ void EntityManager::reg(model::Base* model)
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_entities_map.find(model->id()) != m_entities_map.end()) {
-        //throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id) + " which already exists, type = " + entity->dataTypeStr());
-    }
+    assert(false);
+//    if (m_entities_map.find(model->id()) != m_entities_map.end()) {
+//        //throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id) + " which already exists, type = " + entity->dataTypeStr());
+//    }
 
     m_models.insert(std::make_pair(model->id(), model));
 }
 
-core::Base* EntityManager::getEntity(int_t id) const
-{
-    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, core::Base*>::const_iterator slice = m_entities_map.find(id);
-    assert(slice->second);
-    LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
-    return slice->second;
-}
+//core::Base* EntityManager::getEntity(int_t id) const
+//{
+//    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
+//    std::map<int_t, core::Base*>::const_iterator slice = m_entities_map.find(id);
+//    assert(slice->second);
+//    LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
+//    return slice->second;
+//}
 
 model::Base* EntityManager::get(int_t id) const
 {
@@ -213,34 +215,36 @@ model::Base* EntityManager::get(int_t id) const
 
 Player* EntityManager::player() const
 {
-    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
-        if (it->second->type() == type::entity::PLAYER_ID) {
-            return (Player*)it->second;
-        }
-    }
+    assert(false);
+//    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
+//        if (it->second->type() == type::entity::PLAYER_ID) {
+//            return (Player*)it->second;
+//        }
+//    }
     return nullptr;
 }
 
-void EntityManager::removeEntity(core::Base* entity)
-{    
-    //LOG("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+//void EntityManager::removeEntity(core::Base* entity)
+//{
+//    //LOG("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
 
-    if (m_entities_map.count(entity->id()) == 1) {
-        m_entities_map.erase(m_entities_map.find(entity->id()));
-    } else {
-        //LOG("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-    }
-} 
+//    if (m_entities_map.count(entity->id()) == 1) {
+//        m_entities_map.erase(m_entities_map.find(entity->id()));
+//    } else {
+//        //LOG("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+//    }
+//}
 
 
 void EntityManager::saveEvent(const std::string& filename)
 {
     boost::property_tree::ptree save_ptree;
-    
-    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
-        //LOG("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
-        iterator->second->Save(save_ptree);
-    }
+
+    assert(false);
+//    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+//        //LOG("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
+//        iterator->second->Save(save_ptree);
+//    }
     
     //write_info(filename, save_ptree);
     write_info("save/save_last.info", save_ptree);
@@ -588,10 +592,10 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading vehicle_slots...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("vehicle_slot"))
         {
-            unsigned long int id = v.second.get<unsigned long int>("data_id.id");
-            type::entity subtype_id = (type::entity)v.second.get<int>("data_id.subtype_id");
-            VehicleSlot* vehicleslot = getNewVehicleSlot(subtype_id, id);
-            vehicleslot->Load(v.second);
+//            unsigned long int id = v.second.get<unsigned long int>("data_id.id");
+//            type::entity subtype_id = (type::entity)v.second.get<int>("data_id.subtype_id");
+//            control::VehicleSlot* vehicleslot = getNewVehicleSlot(subtype_id, id);
+//            vehicleslot->Load(v.second);
         }
     }
     
@@ -727,11 +731,13 @@ void EntityManager::loadPass0(const std::string& filename)
 
 void EntityManager::loadPass1() const
 {
+    assert(false);
+
     LOG("RESOLVING DEPENDENCY START");
-    for (std::map<int_t, core::Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
-        LOG("Load() in " + iterator->second->dataTypeStr());
-        iterator->second->Resolve();
-    }
+//    for (std::map<int_t, core::Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+//        LOG("Load() in " + iterator->second->dataTypeStr());
+//        iterator->second->Resolve();
+//    }
 
     LOG("RESOLVING DEPENDENCY FINISHED");
 }
@@ -766,29 +772,30 @@ bool EntityManager::updateLoadRequest()
 }
 
 
-void EntityManager::addToGarbage(core::Base* entity)
-{
-    //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-    for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
-        if (m_entitiesGarbage[i]->id() == entity->id()) {
-            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
-            exit(1);
-        }
-    }
+//void EntityManager::addToGarbage(core::Base* entity)
+//{
+//    //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+//    for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
+//        if (m_entitiesGarbage[i]->id() == entity->id()) {
+//            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+//            exit(1);
+//        }
+//    }
 
-    m_entitiesGarbage.push_back(entity);
-    entity->putChildrenToGarbage();
-}
+//    m_entitiesGarbage.push_back(entity);
+//    entity->putChildrenToGarbage();
+//}
 
 void EntityManager::addToGarbage(model::Base* model)
 {
     //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-    for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
-        if (m_entitiesGarbage[i]->id() == model->id()) {
-            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
-            exit(1);
-        }
-    }
+    assert(false);
+//    for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
+//        if (m_entitiesGarbage[i]->id() == model->id()) {
+//            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+//            exit(1);
+//        }
+//    }
 
     m_garbage.push_back(model);
     //model->putChildrenToGarbage();
@@ -796,16 +803,17 @@ void EntityManager::addToGarbage(model::Base* model)
 
 void EntityManager::clearGarbage()
 {
-    for(unsigned int i=0; i<m_entitiesGarbage.size(); i++)
-    {
-        removeEntity(m_entitiesGarbage[i]);
-#if CREATEDESTROY_LOG_ENABLED == 1
-        LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
-#endif
-       core::global::get().idGenerator().addFreeId(m_entitiesGarbage[i]->id());
-        delete m_entitiesGarbage[i];
-    }
-    m_entitiesGarbage.clear();
+    assert(false);
+//    for(unsigned int i=0; i<m_entitiesGarbage.size(); i++)
+//    {
+//        removeEntity(m_entitiesGarbage[i]);
+//#if CREATEDESTROY_LOG_ENABLED == 1
+//        LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+//#endif
+//       core::global::get().idGenerator().addFreeId(m_entitiesGarbage[i]->id());
+//        delete m_entitiesGarbage[i];
+//    }
+//    m_entitiesGarbage.clear();
 }
 
 

@@ -46,7 +46,8 @@ NatureLand* NatureLandBuilder::createTemplate(int_t id) const
     NatureLand* natureland = new NatureLand(id);
     assert(natureland);
 
-   core::global::get().entityManager().reg(natureland);
+    assert(false);
+//    core::global::get().entityManager().reg(natureland);
     
     return natureland;
 } 
@@ -55,18 +56,17 @@ NatureLand* NatureLandBuilder::create() const
 {
     NatureLand* natureland = createTemplate();
     createInternals(natureland);
-        
+
     return natureland;
 } 
-           
+
 void NatureLandBuilder::createInternals(NatureLand* natureland) const
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID));
     
     unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
-    for (unsigned int i=0; i<item_slot_num; i++)
-    {
-        ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
+    for (unsigned int i=0; i<item_slot_num; i++) {
+        control::ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
         natureland->AddItemSlot(item_slot);
     }
     
@@ -77,20 +77,20 @@ void NatureLandBuilder::createInternals(NatureLand* natureland) const
             //int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT_ID, ENTITY::PROTECTOR_ARTEFACT_ID);
             //switch (type_id)
             //{
-                //case ENTITY::GRAVITY_ARTEFACT_ID:
-                //{
-                    //natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
-                    //break;
-                //}
-                
-                //case ENTITY::PROTECTOR_ARTEFACT_ID:
-                //{
-                    //natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
-                    //break;
-                //}
+            //case ENTITY::GRAVITY_ARTEFACT_ID:
+            //{
+            //natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+            //break;
+            //}
+
+            //case ENTITY::PROTECTOR_ARTEFACT_ID:
+            //{
+            //natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+            //break;
+            //}
             //}
         }
-    }    
+    }
 }
 
-      
+

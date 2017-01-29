@@ -44,7 +44,8 @@ Droid* DroidBuilder::createTemplate(int_t id) const
     Droid* droid = new Droid(id);
     assert(droid);
 
-   core::global::get().entityManager().reg(droid);
+    assert(false);
+    //core::global::get().entityManager().reg(droid);
     
     return droid;
 } 
@@ -62,18 +63,18 @@ Droid* DroidBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);
-        
+
     return droid;
 }  
-            
+
 void DroidBuilder::createInternals(Droid* droid, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
-   
+
     droid->SetRepairOrig(descriptor.repair());
     droid->setParentSubTypeId(type::entity::DROID_SLOT_ID);
     droid->setItemCommonData(common_data);
-            
+
     droid->updateProperties();
     droid->CountPrice();
 }

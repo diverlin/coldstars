@@ -29,8 +29,9 @@
 
 NatureLand::NatureLand(int id)
 {
-    setId(id);
-    setTypeId(type::entity::NATURELAND_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::NATURELAND_ID);
 }
 
 /* virtual */
@@ -45,18 +46,16 @@ void NatureLand::putChildrenToGarbage() const
 //       core::global::get().entityManager().addToGarbage(VEHICLE_vec[i]);
 //    }
 
-    for (unsigned int i=0; i<item_slot_vec.size(); i++) {
-       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
-    }
+//    for (unsigned int i=0; i<item_slot_vec.size(); i++) {
+//       core::global::get().entityManager().addToGarbage(item_slot_vec[i]);
+//    }
 }
 
 //// ******* TRANSITION ******* 
 bool NatureLand::CanAcceptNewItem() const
 {
-    for (unsigned int i=0; i<item_slot_vec.size(); i++)
-    {
-        if (item_slot_vec[i]->item() == nullptr)
-        {
+    for (control::ItemSlot* slot: m_itemslots) {
+        if (!slot->item()) {
             return true;
         }
     }
@@ -64,15 +63,16 @@ bool NatureLand::CanAcceptNewItem() const
     return false;
 }
                 
-void NatureLand::AddItemSlot(ItemSlot* item_slot)
+void NatureLand::AddItemSlot(control::ItemSlot* item_slot)
 {
-    item_slot->setOwner(this);
-    item_slot_vec.push_back(item_slot);
+    assert(false);
+//    item_slot->setOwner(this);
+//    item_slot_vec.push_back(item_slot);
 }
 
 bool NatureLand::AddItem(item::Base* item)
 {
-    for (ItemSlot* slot: item_slot_vec) {
+    for (control::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {
             slot->insert(item);
             slot->setPosition(glm::vec2(meti::getRandInt(100), meti::getRandInt(100)));
@@ -103,7 +103,7 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
 /*virtual */
 bool NatureLand::RemoveVehicle(Vehicle* vehicle)
 {       
-    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
         assert(false);
 //        if (VEHICLE_vec[i]->id() == vehicle->id())
@@ -131,7 +131,7 @@ void NatureLand::UpdateInStatic()
 std::string NatureLand::GetDockVehicleStr() const
 {
     std::string str;
-    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
         assert(false);
         //str += "_" + std::to_string(VEHICLE_vec[i]->id());
@@ -143,26 +143,26 @@ std::string NatureLand::GetDockVehicleStr() const
 /* virtual override final */
 void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "natureland."+std::to_string(id())+".";
-    Base::SaveData(save_ptree, root);
-    Land::SaveData(save_ptree, root);
-    NatureLand::SaveData(save_ptree, root);
+//    const std::string root = "natureland."+std::to_string(id())+".";
+//    Base::SaveData(save_ptree, root);
+//    Land::SaveData(save_ptree, root);
+//    NatureLand::SaveData(save_ptree, root);
 }
 
 /* virtual override final */
 void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Land::LoadData(load_ptree);
-    NatureLand::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Land::LoadData(load_ptree);
+//    NatureLand::LoadData(load_ptree);
 }
 
 /* virtual override final */
 void NatureLand::Resolve()
 {
-    Base::ResolveData();
-    Land::ResolveData();
-    NatureLand::ResolveData();
+//    Base::ResolveData();
+//    Land::ResolveData();
+//    NatureLand::ResolveData();
 }
 
 

@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-#include <types/StatusTypes.hpp>
+#include <core/types/StatusTypes.hpp>
+#include <core/slots/BaseSlot.hpp>
 
-#include <slots/BaseSlot.hpp>
+#include <ceti/type/IdType.hpp>
 
 class Turrel; 
 namespace item {
@@ -68,25 +68,47 @@ class GrappleModule;
 class Bomb; 
 class GoodsPack; 
 
-//namespace ceti {
-//class Box2D;
-//}
-
-//namespace jeti {
-//class Renderer;
-//}
-
-struct UnresolvedDataItemSlot
-{
-    UnresolvedDataItemSlot()
-    {}
-    
-    int_t target_id = NONE;
-    int_t subtarget_id = NONE;
-};
+namespace model {
 
 class ItemSlot : public BaseSlot
-{   
+{
+public:
+    ItemSlot() = default;
+    ~ItemSlot() = default;
+    ItemSlot(const std::string& data);
+    std::string data() const;
+
+    ItemSlot(int_t id, type::entity subtype_id);
+
+    void setTarget(int_t target) { m_target = target; }
+    void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
+
+    int_t target() const { return m_target; }
+    int_t subtarget() const { return m_subtarget; }
+    int_t item() const { return m_item; }
+
+private:
+    int_t m_item = NONE;
+    int_t m_target = NONE;
+    int_t m_subtarget = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseSlot>(*this);
+        ar & m_item;
+        ar & m_target;
+        ar & m_subtarget;
+    }
+};
+
+} // namespace model
+
+namespace control {
+
+class ItemSlot : public BaseSlot
+{
 public:
     ItemSlot(int_t id, type::entity subtype_id);
     virtual ~ItemSlot();
@@ -156,7 +178,7 @@ public:
 
     bool swapItem(ItemSlot*);
 
-    void updateRange(jeti::control::Material*);
+//    void updateRange(jeti::control::Material*);
     void drawRange(const glm::vec2&);
 
     bool checkSubTarget(ItemSlot*) const;
@@ -173,7 +195,11 @@ public:
     int itemRadius() const;
     int itemDamage() const;
 
+    model::ItemSlot* model() const { return m_model_itemslot; }
+
 private:
+    model::ItemSlot* m_model_itemslot = nullptr;
+
     Turrel* m_turrel = nullptr;          // only for weapons slot
 
     item::Base* m_item = nullptr;
@@ -190,10 +216,8 @@ private:
     bool isTargetInSameStarSystem(model::SpaceObject*) const;
     bool checkDistanceToTarget(model::SpaceObject*) const;
 
-    UnresolvedDataItemSlot m_unresolved_ItemSlot;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
-
     void log(const std::string&) const;
-}; 
+};
+
+} // namespace control
+

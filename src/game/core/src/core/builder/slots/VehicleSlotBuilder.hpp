@@ -19,12 +19,15 @@
 
 #pragma once
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <types/EntityTypes.hpp>
 
+namespace control {
 class VehicleSlot;
+} // namespace control
 
-VehicleSlot* getNewVehicleSlot(type::entity, int_t id = NONE);
+control::VehicleSlot* getNewVehicleSlot(type::entity, int_t id = NONE);
 
     
 

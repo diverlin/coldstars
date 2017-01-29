@@ -42,11 +42,6 @@ SpaceStation::SpaceStation()
     setSubType(type::entity::SPACESTATION_ID);
 }
 
-SpaceStation::~SpaceStation()
-{
-
-}
-
 SpaceStation::SpaceStation(const std::string& data)
 {
     //MACRO_READ_SERIALIZED_DATA

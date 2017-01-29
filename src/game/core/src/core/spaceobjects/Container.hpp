@@ -23,8 +23,6 @@
 
 #include <ceti/type/IdType.hpp>
 
-class ItemSlot;
-
 namespace item {
 class Base;
 } // namespace item
@@ -63,6 +61,8 @@ private:
 
 
 namespace control {
+
+class ItemSlot;
 
 class Container : public SpaceObject
 {

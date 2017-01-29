@@ -26,46 +26,65 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
-BaseSlot::BaseSlot()
-:
-m_selected(false),
-m_textureOb(nullptr),
-m_owner(nullptr)
-{}
 
-/* virtual */
-BaseSlot::~BaseSlot()
-{
-    LOG("___::~BaseSlot("+std::to_string(id())+")");
-}
+namespace model {
+
+//BaseSlot::BaseSlot(const std::string& data)
+//{
+//    MACRO_READ_SERIALIZED_DATA
+//}
+
+//std::string
+//BaseSlot::data() const
+//{
+//    MACRO_SAVE_SERIALIZED_DATA
+//}
+
+} // namespace model
+
+//BaseSlot::BaseSlot()
+//:
+//m_selected(false),
+//m_textureOb(nullptr),
+//m_owner(nullptr)
+//{}
+
+///* virtual */
+//BaseSlot::~BaseSlot()
+//{
+////    LOG("___::~BaseSlot("+std::to_string(id())+")");
+//}
                 
-void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{   
-    LOG(" BaseSlot("+std::to_string(id())+")::SaveData");
+//void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    assert(false);
+////    LOG(" BaseSlot("+std::to_string(id())+")::SaveData");
         
-    if (m_owner) { save_ptree.put(root+"unresolved.owner_id", m_owner->id()); }
-    else       { save_ptree.put(root+"unresolved.owner_id", NONE); }
+////    if (m_owner) { save_ptree.put(root+"unresolved.owner_id", m_owner->id()); }
+////    else       { save_ptree.put(root+"unresolved.owner_id", NONE); }
     
-    save_ptree.put(root+"position.x", m_position.x);
-    save_ptree.put(root+"position.y", m_position.y);
-}
+////    save_ptree.put(root+"position.x", m_position.x);
+////    save_ptree.put(root+"position.y", m_position.y);
+//}
 
-void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    LOG(" BaseSlot("+std::to_string(id())+")::LoadData");
+//void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    assert(false);
+////    LOG(" BaseSlot("+std::to_string(id())+")::LoadData");
        
-    unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
-    m_position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
+////    unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id");
+////    m_position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
 
-}
+//}
 
-void BaseSlot::ResolveData()
-{
-    LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
+//void BaseSlot::ResolveData()
+//{
+//    assert(false);
+////    LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
-    if (unresolved_BaseSlot.owner_id != NONE) {
-        //m_owner = core::global::get().entityManager().getEntity(unresolved_BaseSlot.owner_id);
-    }
-}
+////    if (unresolved_BaseSlot.owner_id != NONE) {
+////        //m_owner = core::global::get().entityManager().getEntity(unresolved_BaseSlot.owner_id);
+////    }
+//}
 
 

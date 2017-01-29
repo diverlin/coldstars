@@ -38,8 +38,9 @@ store(nullptr),
 shop(nullptr),
 goverment(nullptr)    
 {
-    setId(id);
-    setTypeId(type::entity::KOSMOPORT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::KOSMOPORT_ID);
 }
 
 /* virtual */
@@ -49,10 +50,11 @@ Kosmoport::~Kosmoport()
 /* virtual */
 void Kosmoport::putChildrenToGarbage() const
 {
-   core::global::get().entityManager().addToGarbage(angar);
-   core::global::get().entityManager().addToGarbage(store);
-   core::global::get().entityManager().addToGarbage(shop);
-   core::global::get().entityManager().addToGarbage(goverment);
+    assert(false);
+//   core::global::get().entityManager().addToGarbage(angar);
+//   core::global::get().entityManager().addToGarbage(store);
+//   core::global::get().entityManager().addToGarbage(shop);
+//   core::global::get().entityManager().addToGarbage(goverment);
 }
        
 void Kosmoport::BindAngar(Angar* angar)
@@ -140,23 +142,23 @@ void Kosmoport::ResolveData()
 
 void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "kosmoport." + std::to_string(id())+".";
+//    std::string root = "kosmoport." + std::to_string(id())+".";
 
-    Base::SaveData(save_ptree, root);
-    Land::SaveData(save_ptree, root);
-    Kosmoport::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Land::SaveData(save_ptree, root);
+//    Kosmoport::SaveData(save_ptree, root);
 }
 
 void Kosmoport::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Land::LoadData(load_ptree);
-    Kosmoport::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Land::LoadData(load_ptree);
+//    Kosmoport::LoadData(load_ptree);
 }
 
 void Kosmoport::Resolve()
 {
-    Base::ResolveData();
-    Land::ResolveData();
-    Kosmoport::ResolveData();
+//    Base::ResolveData();
+//    Land::ResolveData();
+//    Kosmoport::ResolveData();
 }

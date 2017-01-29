@@ -22,9 +22,11 @@
 #include <ceti/type/IdType.hpp>
 #include <types/EntityTypes.hpp>
 
+namespace control {
 class ItemSlot;
+} // namespace control
 
-ItemSlot* getNewItemSlot(type::entity subtype_id, int_t id = NONE);
+control::ItemSlot* getNewItemSlot(type::entity subtype_id, int_t id = NONE);
 
 
     

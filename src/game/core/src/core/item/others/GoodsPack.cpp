@@ -31,9 +31,10 @@
 
 GoodsPack::GoodsPack(int id, type::entity subtype_id)
 {
-    setId(id); 
-    setTypeId(type::entity::GOODS_ID);
-    setSubTypeId(subtype_id);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::GOODS_ID);
+//    setSubTypeId(subtype_id);
 }
 
 /* virtual */
@@ -72,10 +73,10 @@ void GoodsPack::AddCommonInfo()
 /*virtual*/
 void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "goods_pack." + std::to_string(id()) + ".";
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    GoodsPack::SaveData(save_ptree, root);
+//    std::string root = "goods_pack." + std::to_string(id()) + ".";
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    GoodsPack::SaveData(save_ptree, root);
 }
 
 /*virtual*/
@@ -96,17 +97,17 @@ void GoodsPack::Resolve()
 
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START");
 }
          
 void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START");
 }
 
 void GoodsPack::ResolveData()
 {
-    LOG(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 
@@ -117,8 +118,9 @@ GoodsPack* GetNewGoodsPack(type::entity subtype_id, int_t id)
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());
-    
-    core::global::get().entityManager().reg(goodsPack);
+
+    assert(false);
+    //core::global::get().entityManager().reg(goodsPack);
             
     return goodsPack;
 }

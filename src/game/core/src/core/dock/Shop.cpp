@@ -33,9 +33,10 @@
 
 Shop::Shop(int id)
 {
-    setId(id);
-    setTypeId(type::entity::SHOP_ID);
-    setSubTypeId(type::entity::SHOP_ID);    
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::SHOP_ID);
+//    setSubTypeId(type::entity::SHOP_ID);
     
     minerals_amount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
     food_amount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
@@ -105,16 +106,17 @@ bool Shop::SellGoods(Npc* npc, type::entity subtype_id, int amount)
     
             
 int Shop::BuyGoods(GoodsPack* goods_pack)
-{     
-    int sign = 1;    
-    int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());    
-    if (price > 0)
-    {
-        goods_pack->slot()->removeItem(); 
-       core::global::get().entityManager().addToGarbage(goods_pack);
-    }
+{
+    assert(false);
+//    int sign = 1;
+//    int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());
+//    if (price > 0)
+//    {
+//        goods_pack->slot()->removeItem();
+//       core::global::get().entityManager().addToGarbage(goods_pack);
+//    }
     
-    return price;
+//    return price;
 }
        
 int Shop::Deal(int sign, type::entity subtype_id, int amount)
@@ -254,24 +256,24 @@ void Shop::ResolveData()
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "shop." + std::to_string(id())+".";
-    Base::SaveData(save_ptree, root);
-    Room::SaveData(save_ptree, root);
-    Shop::SaveData(save_ptree, root);
+//    std::string root = "shop." + std::to_string(id())+".";
+//    Base::SaveData(save_ptree, root);
+//    Room::SaveData(save_ptree, root);
+//    Shop::SaveData(save_ptree, root);
 }
 
 void Shop::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Room::LoadData(load_ptree);
-    Shop::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Room::LoadData(load_ptree);
+//    Shop::LoadData(load_ptree);
 }
 
 void Shop::Resolve()
 {
-    Base::ResolveData();
-    Room::ResolveData();
-    Shop::ResolveData();
+//    Base::ResolveData();
+//    Room::ResolveData();
+//    Shop::ResolveData();
 }
 
 

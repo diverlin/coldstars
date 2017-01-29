@@ -133,7 +133,7 @@ void GuiKosmoport::BindKosmoport(Kosmoport* kosmoport)
         this->kosmoport = kosmoport;     
                 
     gui_angar.BindAngar(kosmoport->GetAngar());
-        gui_store.BindStore(kosmoport->GetStore());
+        gui_store.bindStore(kosmoport->GetStore());
         gui_shop.BindShop(kosmoport->GetShop()); 
         gui_goverment.BindGoverment(kosmoport->GetGoverment());
         

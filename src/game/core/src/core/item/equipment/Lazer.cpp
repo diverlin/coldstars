@@ -39,9 +39,10 @@ Lazer::Lazer(int_t id)
       m_damage_orig(0),
       m_radius_orig(0)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::LAZER_EQUIPMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::LAZER_EQUIPMENT_ID);
 
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
@@ -156,50 +157,50 @@ void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rat
 /*virtual*/
 void Lazer::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "lazer_equipment." + std::to_string(id()) + ".";
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Lazer::SaveData(save_ptree, root);
+//    std::string root = "lazer_equipment." + std::to_string(id()) + ".";
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Lazer::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Lazer::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Lazer::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Lazer::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Lazer::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Lazer::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Lazer::ResolveData();
 }
 
 void Lazer::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"damage_orig", m_damage_orig);
-    save_ptree.put(root+"radius_orig", m_radius_orig);
+//    save_ptree.put(root+"damage_orig", m_damage_orig);
+//    save_ptree.put(root+"radius_orig", m_radius_orig);
 }
 
 void Lazer::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_damage_orig = load_ptree.get<int>("damage_orig");
-    m_radius_orig = load_ptree.get<int>("radius_orig");
+//    m_damage_orig = load_ptree.get<int>("damage_orig");
+//    m_radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void Lazer::ResolveData()
 {
-    LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment

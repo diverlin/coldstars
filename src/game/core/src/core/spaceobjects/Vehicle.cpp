@@ -119,11 +119,11 @@ void Vehicle::putChildrenToGarbage() const
 {
     assert(false);
 //    m_npc->setAlive(false);
-    core::global::get().entityManager().addToGarbage(m_npc);
+//    core::global::get().entityManager().addToGarbage(m_npc);
 
-    for(ItemSlot* slot: m_slots) {
-        core::global::get().entityManager().addToGarbage(slot);
-    }
+//    for(ItemSlot* slot: m_slots) {
+//        core::global::get().entityManager().addToGarbage(slot);
+//    }
 }
 
 // weapon complex interface
@@ -172,13 +172,14 @@ void Vehicle::setKorpusData(const descriptor::Vehicle& korpus_data)
 
 GoodsPack* Vehicle::goodsPack() const
 {
-    for(ItemSlot* slot: m_cargoSlots) {
-        if (slot->item()) {
-            if (slot->item()->type() == type::entity::GOODS_ID) {
-                return slot->goodsPack();
-            }
-        }
-    }
+    assert(false);
+//    for(ItemSlot* slot: m_cargoSlots) {
+//        if (slot->item()) {
+//            if (slot->item()->type() == type::entity::GOODS_ID) {
+//                return slot->goodsPack();
+//            }
+//        }
+//    }
     return nullptr;
 }
 
@@ -191,103 +192,107 @@ int Vehicle::givenExpirience() const
 
 bool Vehicle::isSlotTypePresent(const type::entity& slot_subtype_id) const
 {
-    for (ItemSlot* slot: m_slots) {
-        if (slot->subtype() == slot_subtype_id) {
-            return true;
-        }
-    }
+    assert(false);
+//    for (ItemSlot* slot: m_slots) {
+//        if (slot->subtype() == slot_subtype_id) {
+//            return true;
+//        }
+//    }
     return false;
 }
 
 void Vehicle::addItemSlot(ItemSlot* slot)
 {
     assert(false);
-    //slot->setOwner(this);
+//    slot->setOwner(this);
 
-    switch(slot->subtype())
-    {
-    case type::entity::WEAPON_SLOT_ID:
-    {
-        float border_start = 0.2;
-        float border_end   = 0.8;
+//    switch(slot->subtype())
+//    {
+//    case type::entity::WEAPON_SLOT_ID:
+//    {
+//        float border_start = 0.2;
+//        float border_end   = 0.8;
 
-        float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
-        float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
+//        float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
+//        float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
 
-        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-        //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
-        model()->weaponComplex().addSlot(slot);
+//        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
+//        //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
+//        model()->weaponComplex().addSlot(slot);
 
-        break;
-    }
-    case type::entity::DRIVE_SLOT_ID:     { model()->driveComplex().SetDriveSlot(slot); break; }
-    case type::entity::BAK_SLOT_ID:       { model()->driveComplex().SetBakSlot(slot); break; }
-    case type::entity::PROTECTOR_SLOT_ID: { model()->protectorComplex().SetProtectorSlot(slot); break; }
-    case type::entity::RADAR_SLOT_ID:     { m_radarSlot  = slot; break; }
-    case type::entity::SCANER_SLOT_ID:    { m_scanerSlot = slot; break; }
-#ifdef USE_EXTRA_EQUIPMENT
-    case type::entity::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
-    case type::entity::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
-#endif // USE_EXTRA_EQUIPMENT
-    case type::entity::GRAPPLE_SLOT_ID:   { m_grappleSlot   = slot; break; }
-    case type::entity::DROID_SLOT_ID:     { m_droidSlot     = slot; break; }
-    }
+//        break;
+//    }
+//    case type::entity::DRIVE_SLOT_ID:     { model()->driveComplex().SetDriveSlot(slot); break; }
+//    case type::entity::BAK_SLOT_ID:       { model()->driveComplex().SetBakSlot(slot); break; }
+//    case type::entity::PROTECTOR_SLOT_ID: { model()->protectorComplex().SetProtectorSlot(slot); break; }
+//    case type::entity::RADAR_SLOT_ID:     { m_radarSlot  = slot; break; }
+//    case type::entity::SCANER_SLOT_ID:    { m_scanerSlot = slot; break; }
+//#ifdef USE_EXTRA_EQUIPMENT
+//    case type::entity::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
+//    case type::entity::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
+//#endif // USE_EXTRA_EQUIPMENT
+//    case type::entity::GRAPPLE_SLOT_ID:   { m_grappleSlot   = slot; break; }
+//    case type::entity::DROID_SLOT_ID:     { m_droidSlot     = slot; break; }
+//    }
 
-    m_slots.push_back(slot);
+//    m_slots.push_back(slot);
 
-    if ( (slot->subtype() != type::entity::ARTEFACT_SLOT_ID) and (slot->subtype() != type::entity::CARGO_SLOT_ID) ) {
-        m_equipmentSlots.push_back(slot);
-    }
+//    if ( (slot->subtype() != type::entity::ARTEFACT_SLOT_ID) and (slot->subtype() != type::entity::CARGO_SLOT_ID) ) {
+//        m_equipmentSlots.push_back(slot);
+//    }
 
-    if (slot->subtype() == type::entity::ARTEFACT_SLOT_ID) {
-        m_artefactSlots.push_back(slot);
-    }
+//    if (slot->subtype() == type::entity::ARTEFACT_SLOT_ID) {
+//        m_artefactSlots.push_back(slot);
+//    }
 
-    if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
-        m_cargoSlots.push_back(slot);
-    }
+//    if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
+//        m_cargoSlots.push_back(slot);
+//    }
 }
 
 bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
 {
     bool result = true;
-    for(ItemSlot* slot: vehicle->m_slots) {
-        if (slot->item()) {
-            if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
-                result = addItemToCargoSlot(slot->item());
-            } else {
-                result = manage(slot->item());
-            }
-        }
-    }
+    assert(false);
+//    for(ItemSlot* slot: vehicle->m_slots) {
+//        if (slot->item()) {
+//            if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
+//                result = addItemToCargoSlot(slot->item());
+//            } else {
+//                result = manage(slot->item());
+//            }
+//        }
+//    }
     return result;
 }
 
 bool Vehicle::_installItem(item::Base* item)
 {
-    switch(item->type()) {
-    case type::entity::EQUIPMENT_ID:    { return _installEquipment(item); break; }
-#ifdef USE_MODULES
-    case type::entity::MODULE_ID:       { return _installModule(item); break; }
-#endif
-#ifdef USE_ARTEFACTS
-    case type::entity::ARTEFACT_ID:     { return _installArtefact(item); break; }
-#endif
-    case type::entity::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
-    }
-    return false;
+    assert(false);
+//    switch(item->type()) {
+//    case type::entity::EQUIPMENT_ID:    { return _installEquipment(item); break; }
+//#ifdef USE_MODULES
+//    case type::entity::MODULE_ID:       { return _installModule(item); break; }
+//#endif
+//#ifdef USE_ARTEFACTS
+//    case type::entity::ARTEFACT_ID:     { return _installArtefact(item); break; }
+//#endif
+//    case type::entity::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
+//    }
+//    return false;
 }
 
 bool Vehicle::isSlotFree(const type::entity& subtype) const
 {
-    for (ItemSlot* slot: m_slots) {
-        if (slot->subtype() == subtype) {
-            if (slot->isEmpty()) {
-                return true;
-            }
-        }
-    }
-    return false;
+    assert(false);
+//    for (ItemSlot* slot: m_slots) {
+//        if (slot->subtype() == subtype) {
+//            if (slot->isEmpty()) {
+//                return true;
+//            }
+//        }
+//    }
+//    return false;
 }
 
 bool Vehicle::checkManage(const core::Id& ident)
@@ -390,24 +395,26 @@ bool Vehicle::installArtefact(item::BaseItem* item)
 ItemSlot* const
 Vehicle::_functionalSlot(const type::entity& functional_slot_subtype_id) const
 {
-    for(ItemSlot* slot: m_equipmentSlots) {
-        if (slot->subtype() == functional_slot_subtype_id) {
-            return slot;
-        }
-    }
+    assert(false);
+//    for(ItemSlot* slot: m_equipmentSlots) {
+//        if (slot->subtype() == functional_slot_subtype_id) {
+//            return slot;
+//        }
+//    }
     return nullptr;
 }
 
 ItemSlot* const
 Vehicle::_freeFunctionalSlot(const core::Id& ident) const
 {
-    for(ItemSlot* slot: m_equipmentSlots) {
-        if (slot->subtype() == ident.subtype) {
-            if (slot->isEmpty()) {
-                return slot;
-            }
-        }
-    }
+    assert(false);
+//    for(ItemSlot* slot: m_equipmentSlots) {
+//        if (slot->subtype() == ident.subtype) {
+//            if (slot->isEmpty()) {
+//                return slot;
+//            }
+//        }
+//    }
     return nullptr;
 }
 
@@ -434,15 +441,16 @@ ItemSlot* const Vehicle::freeCargoSlot()
 
 ItemSlot* const Vehicle::_cargoSlotWithGoods(type::entity requested_goods_subtype_id)
 {
-    for (ItemSlot* slot: m_cargoSlots) {
-        if (slot->item()) {
-            if (slot->item()->type() == type::entity::GOODS_ID) {
-                if (slot->item()->subtype() == requested_goods_subtype_id) {
-                    return slot;
-                }
-            }
-        }
-    }
+    assert(false);
+//    for (ItemSlot* slot: m_cargoSlots) {
+//        if (slot->item()) {
+//            if (slot->item()->type() == type::entity::GOODS_ID) {
+//                if (slot->item()->subtype() == requested_goods_subtype_id) {
+//                    return slot;
+//                }
+//            }
+//        }
+//    }
     return nullptr;
 }
 
@@ -461,17 +469,18 @@ Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
 
 bool Vehicle::addItemToCargoSlot(item::Base* item)
 {
-    _increaseMass(item->mass());
-    if (item->type() == type::entity::GOODS_ID) {
-        if (_installGoodsPack(item)) {
-            return true;
-        }
-    }
+    assert(false);
+//    _increaseMass(item->mass());
+//    if (item->type() == type::entity::GOODS_ID) {
+//        if (_installGoodsPack(item)) {
+//            return true;
+//        }
+//    }
 
-    ItemSlot* slot = freeCargoSlot();
-    if (slot) {
-        return slot->insert(item);
-    }
+//    ItemSlot* slot = freeCargoSlot();
+//    if (slot) {
+//        return slot->insert(item);
+//    }
 
     return false;
 }
@@ -510,32 +519,27 @@ bool Vehicle::sellItem(item::Base* item)
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
     int earn_money = 0;
     int item_mass = item->mass();
-    switch(item->type())
-    {
-    case type::entity::GOODS_ID:
-    {
-        earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
-        break;
-    }
+    assert(false);
+//    switch(item->type()) {
+//        case type::entity::GOODS_ID: {
+//            earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
+//            break;
+//        }
 
-    case type::entity::EQUIPMENT_ID:
-    {
-        earn_money = ((Kosmoport*)m_Land)->GetStore()->buyItem(item);
-        break;
-    }
-    }
+//        case type::entity::EQUIPMENT_ID: {
+//            earn_money = ((Kosmoport*)m_Land)->GetStore()->buyItem(item);
+//            break;
+//        }
+//    }
 
-    if (earn_money > 0)
-    {
-        _decreaseMass(item_mass);
-        m_npc->increaseCredits(earn_money);
+//    if (earn_money > 0) {
+//        _decreaseMass(item_mass);
+//        m_npc->increaseCredits(earn_money);
 
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+//        return true;
+//    } else {
+//        return false;
+//    }
 }
 
 bool Vehicle::buyItem(item::Base* item)
@@ -552,13 +556,14 @@ bool Vehicle::buyItem(item::Base* item)
 
 bool Vehicle::__mergeIdenticalGoods(item::Base* item)
 {
-    ItemSlot* item_slot = _cargoSlotWithGoods(item->subtype());
-    if (item_slot != nullptr)
-    {
-        item_slot->goodsPack()->Increase(item->mass());
-        // delete item; dangerrr
-        return true;
-    }
+    assert(false);
+//    ItemSlot* item_slot = _cargoSlotWithGoods(item->subtype());
+//    if (item_slot != nullptr)
+//    {
+//        item_slot->goodsPack()->Increase(item->mass());
+//        // delete item; dangerrr
+//        return true;
+//    }
 
     return false;
 }
@@ -816,25 +821,27 @@ void Vehicle::CheckNeedsInStatic()
 
     //check ammo
     model()->needs().get_ammo = false;
-    for (ItemSlot* slot: m_equipmentSlots) {
-        if (slot->item()) {
-            if (slot->item()->subtype() == type::entity::ROCKET_EQUIPMENT_ID) {
-                if (slot->rocketEquipment()->GetAmmo() == 0) {
-                    model()->needs().get_ammo = true;
-                }
-            }
-        }
-    }
+    assert(false);
+//    for (ItemSlot* slot: m_equipmentSlots) {
+//        if (slot->item()) {
+//            if (slot->item()->subtype() == type::entity::ROCKET_EQUIPMENT_ID) {
+//                if (slot->rocketEquipment()->GetAmmo() == 0) {
+//                    model()->needs().get_ammo = true;
+//                }
+//            }
+//        }
+//   }
 
     // check fuel
-    model()->needs().get_fuel = false;
-    if (model()->driveComplex().bakSlot()) {
-        if (model()->driveComplex().bakSlot()->item()) {
-            if (model()->driveComplex().bakSlot()->bakEquipment()->fuel() < 0.8*model()->driveComplex().bakSlot()->bakEquipment()->fuelMax()) {
-                model()->needs().get_fuel = true;
-            }
-        }
-    }
+assert(false);
+//    model()->needs().get_fuel = false;
+//    if (model()->driveComplex().bakSlot()) {
+//        if (model()->driveComplex().bakSlot()->item()) {
+//            if (model()->driveComplex().bakSlot()->bakEquipment()->fuel() < 0.8*model()->driveComplex().bakSlot()->bakEquipment()->fuelMax()) {
+//                model()->needs().get_fuel = true;
+//            }
+//        }
+//    }
 
     // check credits
 //    if (m_npc->credits() < 1000)    { model()->needs().get_credits = true; }
@@ -869,10 +876,10 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     if ( (model()->needs().get_ammo == true) && (result == true) ) {
         for (ItemSlot* slot: m_equipmentSlots) {
             if (slot->item()) {
-                if (slot->item()->subtype() == type::entity::ROCKET_EQUIPMENT_ID) {
-                    assert(false);
-                    //result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
-                }
+                assert(false);
+//                if (slot->item()->subtype() == type::entity::ROCKET_EQUIPMENT_ID) {
+//                    result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
+//                }
             }
         }
     }
@@ -924,30 +931,31 @@ void Vehicle::_decreaseMass(int d_mass)
 void Vehicle::_updatePropSpeed()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
-    model()->properties().speed = 0;
-    if (!model()->driveComplex().driveSlot())
-        return;
-    if (!model()->driveComplex().driveSlot()->item())
-        return;
-    if (!model()->driveComplex().driveSlot()->driveEquipment()->isFunctioning())
-        return;
+    assert(false);
+//    model()->properties().speed = 0;
+//    if (!model()->driveComplex().driveSlot())
+//        return;
+//    if (!model()->driveComplex().driveSlot()->item())
+//        return;
+//    if (!model()->driveComplex().driveSlot()->driveEquipment()->isFunctioning())
+//        return;
 
-    float actual_speed = (model()->driveComplex().driveSlot()->driveEquipment()->speed() - model()->mass()*MASS_DECREASE_SPEED_RATE);
-    if (actual_speed > 0) {
-        if (model()->properties().artefact_gravity > 0) {
-            model()->properties().speed = (1.0 + model()->properties().artefact_gravity/100.0)*actual_speed;
-        } else {
-            model()->properties().speed = actual_speed;
-        }
+//    float actual_speed = (model()->driveComplex().driveSlot()->driveEquipment()->speed() - model()->mass()*MASS_DECREASE_SPEED_RATE);
+//    if (actual_speed > 0) {
+//        if (model()->properties().artefact_gravity > 0) {
+//            model()->properties().speed = (1.0 + model()->properties().artefact_gravity/100.0)*actual_speed;
+//        } else {
+//            model()->properties().speed = actual_speed;
+//        }
 
-        if (model()->driveComplex().driveSlot()->isSelected() == true) {
-            model()->properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
-            model()->driveComplex().driveSlot()->item()->useOverloadDeterioration();
-        } else {
-            model()->driveComplex().driveSlot()->item()->useNormalDeterioration();
-        }
-        model()->driveComplex().UpdatePath();
-    }
+//        if (model()->driveComplex().driveSlot()->isSelected() == true) {
+//            model()->properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+//            model()->driveComplex().driveSlot()->item()->useOverloadDeterioration();
+//        } else {
+//            model()->driveComplex().driveSlot()->item()->useNormalDeterioration();
+//        }
+//        model()->driveComplex().UpdatePath();
+//    }
 }
 
 void Vehicle::_updatePropFire()
@@ -983,21 +991,22 @@ void Vehicle::_updatePropJump()
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump");
 
     model()->properties().hyper = 0;
+    assert(false);
 
-    if (!model()->driveComplex().driveSlot())
-        return;
-    if (!model()->driveComplex().driveSlot()->item())
-        return;
-    if (!model()->driveComplex().driveSlot()->driveEquipment()->isFunctioning())
-        return;
-    if (!model()->driveComplex().bakSlot())
-        return;
-    if (!model()->driveComplex().bakSlot()->item())
-        return;
-    if (!model()->driveComplex().bakSlot()->bakEquipment()->isFunctioning())
-        return;
+//    if (!model()->driveComplex().driveSlot())
+//        return;
+//    if (!model()->driveComplex().driveSlot()->item())
+//        return;
+//    if (!model()->driveComplex().driveSlot()->driveEquipment()->isFunctioning())
+//        return;
+//    if (!model()->driveComplex().bakSlot())
+//        return;
+//    if (!model()->driveComplex().bakSlot()->item())
+//        return;
+//    if (!model()->driveComplex().bakSlot()->bakEquipment()->isFunctioning())
+//        return;
 
-    model()->properties().hyper = std::min(model()->driveComplex().driveSlot()->driveEquipment()->hyper(), model()->driveComplex().bakSlot()->bakEquipment()->fuel());
+//    model()->properties().hyper = std::min(model()->driveComplex().driveSlot()->driveEquipment()->hyper(), model()->driveComplex().bakSlot()->bakEquipment()->fuel());
 }
 
 void Vehicle::_updatePropProtection()
@@ -1007,20 +1016,17 @@ void Vehicle::_updatePropProtection()
     model()->properties().protection = m_descriptor.protection();
     model()->properties().shield_effect_enabled = false;
 
-    if (model()->properties().hibernate_mode_enabled == false)
-    {
-        if (model()->protectorComplex().protectorSlot()->item() != nullptr)
-        {
-            if (model()->protectorComplex().protectorSlot()->protectorEquipment()->isFunctioning() == true)
-            {
-                model()->properties().protection += model()->protectorComplex().protectorSlot()->protectorEquipment()->protection();
-                model()->properties().shield_effect_enabled = true;
-            }
-        }
-    }
+    assert(false);
+//    if (!model()->properties().hibernate_mode_enabled) {
+//        if (model()->protectorComplex().protectorSlot()->item()) {
+//            if (model()->protectorComplex().protectorSlot()->protectorEquipment()->isFunctioning()) {
+//                model()->properties().protection += model()->protectorComplex().protectorSlot()->protectorEquipment()->protection();
+//                model()->properties().shield_effect_enabled = true;
+//            }
+//        }
+//    }
 
-    if (model()->properties().artefact_protection > 0)
-    {
+    if (model()->properties().artefact_protection > 0) {
         model()->properties().protection += model()->properties().artefact_protection;
     }
 }
@@ -1283,13 +1289,12 @@ int Vehicle::armorMiss() const
 
 bool Vehicle::isFuelFull() const
 {
-    if (model()->driveComplex().bakSlot()->item() == nullptr)
-    {
-        return true;
-    }
+    assert(false);
+//    if (!model()->driveComplex().bakSlot()->item()) {
+//        return true;
+//    }
 
-    if (fuelMiss() == 0)
-    {
+    if (fuelMiss() == 0) {
         return true;
     }
 
@@ -1299,7 +1304,8 @@ bool Vehicle::isFuelFull() const
 
 int Vehicle::fuelMiss() const
 {
-    return model()->driveComplex().bakSlot()->bakEquipment()->fuelMiss();
+    assert(false);
+//    return model()->driveComplex().bakSlot()->bakEquipment()->fuelMiss();
 }
 
 void Vehicle::lockRandomItem(int locked_turns)
@@ -1404,19 +1410,19 @@ bool Vehicle::dropItemToSpace(const type::entity& type)
     if (model()->place() != type::place::KOSMOS)
         return false;
 
-    for (ItemSlot* slot: m_slots) {
-        if (slot->subtype() == type && slot->item()) {
-            item::Base* item = slot->takeItem();
-            assert(false);
+    assert(false);
+//    for (ItemSlot* slot: m_slots) {
+//        if (slot->subtype() == type && slot->item()) {
+//            item::Base* item = slot->takeItem();
 //            Container* container = __wrapItemToContainer(item);
 //            //    float impulse_strength = 0.5;
 //            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
 //            //    container->addImpulse(impulse_dir, impulse_strength);
 
 //            starsystem()->add(container, position());
-            return true;
-        }
-    }
+//            return true;
+//        }
+//    }
 
     return false;
 }

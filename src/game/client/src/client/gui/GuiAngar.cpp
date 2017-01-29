@@ -93,7 +93,7 @@ void GuiAngar::BindAngar(Angar* angar)
     {
         ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        rect_vehicleslot_vec.push_back(GuiPair<ceti::Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
 
         column_counter++;
     }
@@ -104,7 +104,7 @@ void GuiAngar::BindAngar(Angar* angar)
     {
         ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        rect_vehicleslot_vec.push_back(GuiPair<ceti::Rect, VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
 
         column_counter++;
     }
@@ -115,7 +115,7 @@ void GuiAngar::BindAngar(Angar* angar)
     {
         ceti::Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR,
                    GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(_rect, angar->item_slot_vec[i]));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(_rect, angar->item_slot_vec[i]));
 
         row_counter++;
     }
@@ -124,14 +124,14 @@ void GuiAngar::BindAngar(Angar* angar)
         ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
                   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(rect, repair_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, repair_slot));
     }
 
     {
         ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
                   4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(rect, charge_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, charge_slot));
     }
 }
 
@@ -139,8 +139,8 @@ void GuiAngar::UnbindAngar()
 {
     angar = nullptr;
     
-    rect_vehicleslot_vec.clear();
-    rect_itemslot_vec.clear();
+    m_vehicleslot_rects.clear();
+    m_itemslot_rects.clear();
 }
 
 void GuiAngar::CheckButtonsLock()

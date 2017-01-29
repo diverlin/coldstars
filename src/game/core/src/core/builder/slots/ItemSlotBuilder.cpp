@@ -33,21 +33,24 @@
 #include <slots/ItemSlot.hpp>
 
 
-ItemSlot* getNewItemSlot(type::entity subtype_id, int_t id)
+control::ItemSlot*
+getNewItemSlot(type::entity subtype_id, int_t id)
 {  
-    ItemSlot* item_slot = new ItemSlot(id, subtype_id);
+    assert(false);
+    control::ItemSlot* item_slot = new control::ItemSlot(id, subtype_id);
     assert(item_slot);
     
     //jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == type::entity::WEAPON_SLOT_ID) {
-        Turrel* turrel = new Turrel(item_slot);
-        assert(turrel);
-//        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-//        jeti::control::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
-        // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->size());
-        item_slot->setTurrel(turrel);
+        assert(false);
+//        Turrel* turrel = new Turrel(item_slot);
+//        assert(turrel);
+////        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+////        jeti::control::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
+//        // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->size());
+//        item_slot->setTurrel(turrel);
     }
     
     return item_slot;

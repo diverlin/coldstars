@@ -96,8 +96,8 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<ceti::model::BaseView>(*this);
         ar & m_type;
         ar & m_descriptor;
         ar & m_id;
@@ -111,6 +111,8 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
+    [[depreacted("temprorary code refactor workaround")]]
+    Base() = default;
     Base(model::Base*);
     virtual ~Base();
 
@@ -125,55 +127,55 @@ private:
 
 
 
-namespace core {
+//namespace core {
 
-class Base : private NonCopyable
-{
-public:
-    Base();
-    virtual ~Base();
+//class Base : private NonCopyable
+//{
+//public:
+//    Base();
+//    virtual ~Base();
 
-    virtual void putChildrenToGarbage() const {}
-    void setSubSubTypeId(type::entity patch) { m_type.subsubtype = patch; }
+//    virtual void putChildrenToGarbage() const {}
+//    void setSubSubTypeId(type::entity patch) { m_type.subsubtype = patch; }
 
-    void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
-    void setTextureId(int texture_id) { m_texture_id = texture_id; }
+//    void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
+//    void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
-    const core::Id& ident() const { return m_type; }
-    int_t id() const { return m_id; }
-    const type::entity& type() const { return m_type.type; }
-    const type::entity& subtype() const { return m_type.subtype; }
-    const type::entity& subsubtype() const { return m_type.subsubtype; }
-    int_t descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
+//    const core::Id& ident() const { return m_type; }
+//    int_t id() const { return m_id; }
+//    const type::entity& type() const { return m_type.type; }
+//    const type::entity& subtype() const { return m_type.subtype; }
+//    const type::entity& subsubtype() const { return m_type.subsubtype; }
+//    int_t descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
 
-    std::string dataTypeStr() const;
+//    std::string dataTypeStr() const;
 
-    virtual void Save(boost::property_tree::ptree&) const {}
-    virtual void Load(const boost::property_tree::ptree&) {}
-    virtual void Resolve() {}
+//    virtual void Save(boost::property_tree::ptree&) const {}
+//    virtual void Load(const boost::property_tree::ptree&) {}
+//    virtual void Resolve() {}
 
-    void setId(int_t id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
+//    void setId(int_t id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
 
-protected:
-    void setTypeId(const type::entity& major)   { m_type.type = major; }
-    void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
+//protected:
+//    void setTypeId(const type::entity& major)   { m_type.type = major; }
+//    void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
-private:
-    core::Id m_type;
+//private:
+//    core::Id m_type;
 
-    int_t m_descriptorId = -1;
-    int_t m_id = -1;
+//    int_t m_descriptorId = -1;
+//    int_t m_id = -1;
 
-    int m_mesh_id = -1;
-    int m_texture_id = -1;
+//    int m_mesh_id = -1;
+//    int m_texture_id = -1;
 
-    friend class EntityManager;
-};
+//    friend class EntityManager;
+//};
 
-} // namespace core
+//} // namespace core
 
 

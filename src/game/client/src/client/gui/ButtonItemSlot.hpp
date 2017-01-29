@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BUTTONITEMSLOT_HPP
-#define BUTTONITEMSLOT_HPP
+#pragma once
 
 #include "BaseButtonItemSlot.hpp"
 
@@ -26,22 +25,22 @@ class Renderer;
 
 class ButtonItemSlot : public BaseButtonItemSlot
 {
-    public:
-        ButtonItemSlot(type::GUI subtype_id, const std::string& info)
+public:
+    ButtonItemSlot(type::GUI subtype_id, const std::string& info)
         :
-        BaseButtonItemSlot(type::GUI::BUTTON_ITEMSLOT_ID, subtype_id, info)
-        {}
-               
-        virtual ~ButtonItemSlot() final {};  
+          BaseButtonItemSlot(type::GUI::BUTTON_ITEMSLOT_ID, subtype_id, info)
+    {}
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void OnPressEventMBR(Player*) override final;
-                                
-    private:
-        virtual void UpdateUnique(Player*) override final;    
-        
-        virtual void RenderInfo(const jeti::Renderer&) const override final;
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+    virtual ~ButtonItemSlot() final {}
+
+    virtual void OnPressEventMBL(Player*) override final;
+    virtual void OnPressEventMBR(Player*) override final;
+
+private:
+    virtual void UpdateUnique(Player*) override final;
+
+    virtual void RenderInfo(const jeti::Renderer&) const override final;
+    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
 };
 
-#endif
+

@@ -29,7 +29,7 @@ class SpaceStation : public model::Vehicle
 {
 public:
     SpaceStation();
-    virtual ~SpaceStation();
+    ~SpaceStation();
     SpaceStation(const std::string& data);
     std::string data() const;
 
@@ -42,8 +42,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Vehicle>(*this);
         ar & m_innerLand;
     }

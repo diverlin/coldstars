@@ -83,9 +83,10 @@ Land* Planet::land()
 
 void Planet::BindLand(Land* land)
 {
-    model()->setLand(land->id());
-    land->SetOwner(model());
-    model()->setSubType(land->type());
+    assert(false);
+//    model()->setLand(land->model()->id());
+//    land->SetOwner(model());
+//    model()->setSubType(land->model()->type());
 }
 
 //void Planet::addVehicle(Vehicle* vehicle)

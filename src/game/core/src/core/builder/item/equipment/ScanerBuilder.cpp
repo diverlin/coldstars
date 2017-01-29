@@ -44,7 +44,8 @@ Scaner* ScanerBuilder::createTemplate(int_t id) const
     Scaner* scaner = new Scaner(id);
     assert(scaner);
 
-   core::global::get().entityManager().reg(scaner);
+    assert(false);
+    //core::global::get().entityManager().reg(scaner);
     
     return scaner;
 } 
@@ -62,10 +63,10 @@ Scaner* ScanerBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);
-        
+
     return scaner;
 } 
-            
+
 void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::BaseOLD& descriptor) const
 {
     ItemCommonData common_data = extractCommonData(descriptor);

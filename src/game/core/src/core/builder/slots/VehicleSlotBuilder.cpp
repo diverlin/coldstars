@@ -32,9 +32,10 @@
 #include <common/Global.hpp>
 
 
-VehicleSlot* getNewVehicleSlot(type::entity subtype_id, int_t id)
+control::VehicleSlot*
+getNewVehicleSlot(type::entity subtype_id, int_t id)
 {
-    VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
+    control::VehicleSlot* vehicle_slot = new control::VehicleSlot(id, subtype_id);
     assert(vehicle_slot);    
 
 //    jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT_ID);

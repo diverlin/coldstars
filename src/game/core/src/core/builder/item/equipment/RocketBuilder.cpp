@@ -46,7 +46,8 @@ Rocket* RocketBuilder::createTemplate(int_t id) const
     Rocket* rocket = new Rocket(id);
     assert(rocket);
 
-   core::global::get().entityManager().reg(rocket);
+    assert(false);
+    //core::global::get().entityManager().reg(rocket);
     
     return rocket;
 } 

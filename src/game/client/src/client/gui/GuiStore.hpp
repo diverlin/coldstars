@@ -20,32 +20,37 @@
 
 #include "BaseGuiElement.hpp"
 #include "GuiPair.hpp"
-class Store;
-class ItemSlot;
-class VehicleSlot;
+
 #include <ceti/rect.hpp>
 #include "MouseData.hpp"
 
+class Store;
+
+namespace control {
+class ItemSlot;
+class VehicleSlot;
+} // namespace control
+
 class GuiStore : public BaseGuiElement
 {
-    public:
-        GuiStore();
-        ~GuiStore();
-        
-        void BindStore(Store*);
-        void UnbindStore();
+public:
+    GuiStore();
+    ~GuiStore();
 
-        Store* GetStore() const { return store; };
+    void bindStore(Store*);
+    void UnbindStore();
 
-        bool UpdateMouseInteraction(const MouseData&);
+    Store* store() const { return m_store; }
 
-        void RenderSlots(int) const;
+    bool updateMouseInteraction(const MouseData&);
 
-    private:
-        Store* store;
-        
-        std::vector<GuiPair<ceti::Rect, ItemSlot*>> rect_itemslot_vec;
-        std::vector<GuiPair<ceti::Rect, VehicleSlot*>> rect_vehicleslot_vec;
+    void renderSlots(int) const;
+
+private:
+    Store* m_store = nullptr;
+
+    std::vector<GuiPair<ceti::Rect, control::ItemSlot*>> m_itemslot_rects;
+    std::vector<GuiPair<ceti::Rect, control::VehicleSlot*>> m_vehicleslot_rects;
 };
 
 

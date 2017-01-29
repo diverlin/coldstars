@@ -31,9 +31,10 @@ Protector::Protector(int_t id)
     :
       m_protection_orig(0)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::PROTECTOR_EQUIPMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -85,48 +86,48 @@ std::string Protector::GetProtectionStr()
 /*virtual*/
 void Protector::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_equipment." + std::to_string(id()) + ".";
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Protector::SaveData(save_ptree, root);
+//    std::string root = "protector_equipment." + std::to_string(id()) + ".";
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Protector::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Protector::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Protector::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Protector::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Protector::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Protector::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Protector::ResolveData();
 }
 
 void Protector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"protection_orig", m_protection_orig);
+//    save_ptree.put(root+"protection_orig", m_protection_orig);
 }
 
 void Protector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_protection_orig = load_ptree.get<int>("protection_orig");
+//    m_protection_orig = load_ptree.get<int>("protection_orig");
 }                
 
 void Protector::ResolveData()
 {
-    LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment

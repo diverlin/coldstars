@@ -27,8 +27,9 @@
 
 #include <item/ItemCommonData.hpp>
 
-
+namespace control {
 class ItemSlot; 
+} // namespace control
 
 namespace item {
 
@@ -38,7 +39,7 @@ struct UnresolvedDataBaseItem
     int_t item_slot_id;
 };
 
-class Base : public ::core::Base
+class Base : public ::control::Base
 {
 public:
     Base();
@@ -53,10 +54,10 @@ public:
         m_deterioration = data_item.deterioration;
         setCondition(data_item.condition_max);
     }
-    void setSlot(ItemSlot* slot)  { m_slot = slot; }
+    void setSlot(control::ItemSlot* slot)  { m_slot = slot; }
     void setCondition(int condition) { m_condition = condition; }
 
-    ItemSlot* slot() const { return m_slot; }
+    control::ItemSlot* slot() const { return m_slot; }
 
     virtual int radius() const { return 0; }
     virtual int damage() const { return 0; }
@@ -121,7 +122,7 @@ protected:
     void ResolveData();
 
 private:
-    ItemSlot* m_slot = nullptr;
+    control::ItemSlot* m_slot = nullptr;
 };
 
 } // namespace item

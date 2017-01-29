@@ -48,10 +48,11 @@ void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_nebula_effect."+std::to_string(id())+".";
+    assert(false);
+//    std::string droot = root + "distant_nebula_effect."+std::to_string(id())+".";
     
-    //BaseBackGroundEffect::SaveData(save_ptree, droot);
-    DistantNebulaEffect::SaveData(save_ptree, droot);
+//    //BaseBackGroundEffect::SaveData(save_ptree, droot);
+//    DistantNebulaEffect::SaveData(save_ptree, droot);
 }    
 
 void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)

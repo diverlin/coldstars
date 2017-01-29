@@ -47,7 +47,8 @@ Lazer* LazerBuilder::createTemplate(int_t id) const
     Lazer* lazer = new Lazer(id);
     assert(lazer);
 
-   core::global::get().entityManager().reg(lazer);
+    assert(false);
+    //core::global::get().entityManager().reg(lazer);
     
     return lazer;
 } 

@@ -20,59 +20,62 @@
 #pragma once
 
 #include "Land.hpp"
-class ItemSlot;
+
 namespace item {
 class Base;
 } // namespace item
 
 
-struct UnresolvedDataNatureLand
-{
-        std::string textureOb_background_path;
+namespace control {
+class ItemSlot;
+} // namespace control
+
+struct UnresolvedDataNatureLand {
+    std::string textureOb_background_path;
 };
 
 class NatureLand : public Land
 {
-    public:
-        NatureLand(int);
-        virtual ~NatureLand();
+public:
+    NatureLand(int);
+    virtual ~NatureLand();
 
-        virtual void putChildrenToGarbage() const;
-        
-        //void SetTextureObBackground(jeti::control::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-        
-        //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+    virtual void putChildrenToGarbage() const;
 
-        void AddItemSlot(ItemSlot*);
+    //void SetTextureObBackground(jeti::control::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
 
-        bool AddItem(item::Base*);
-        bool CanAcceptNewItem() const;
+    //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-        virtual bool AddVehicle(Vehicle*);
-        virtual bool RemoveVehicle(Vehicle*);
+    void AddItemSlot(control::ItemSlot*);
 
-        virtual bool GetPermissionToLand() const;
+    bool AddItem(item::Base*);
+    bool CanAcceptNewItem() const;
 
-        virtual void UpdateInStatic();
+    virtual bool AddVehicle(Vehicle*);
+    virtual bool RemoveVehicle(Vehicle*);
 
-        virtual std::string GetDockVehicleStr() const;
+    virtual bool GetPermissionToLand() const;
 
-        void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-    private:
-        //jeti::control::TextureOb* textureOb_background;
+    virtual void UpdateInStatic();
 
-        std::vector<Vehicle*> VEHICLE_vec;
-        std::vector<ItemSlot*> item_slot_vec;
+    virtual std::string GetDockVehicleStr() const;
 
-        UnresolvedDataNatureLand data_unresolved_NatureLand;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-        
-        friend class GuiNatureLand;
+    void Save(boost::property_tree::ptree&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+
+private:
+    //jeti::control::TextureOb* textureOb_background;
+
+    std::vector<Vehicle*> m_vehicles;
+    std::vector<control::ItemSlot*> m_itemslots;
+
+    UnresolvedDataNatureLand data_unresolved_NatureLand;
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
+    friend class GuiNatureLand;
 };
 
 

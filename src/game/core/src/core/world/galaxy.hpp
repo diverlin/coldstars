@@ -68,7 +68,7 @@ private:
 
 namespace control {
 
-class Galaxy : public core::Base
+class Galaxy : public Base
 {
 public:
     Galaxy(model::Galaxy*);

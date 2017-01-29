@@ -19,38 +19,43 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-class Angar;
-class ItemSlot;
-class VehicleSlot;
+
 #include "GuiPair.hpp"
 #include "MouseData.hpp"
 #include <ceti/rect.hpp>
 
+class Angar;
+
+namespace control {
+class ItemSlot;
+class VehicleSlot;
+} // namespace control
+
 class GuiAngar : public BaseGuiElement
 {
-    public:
-        GuiAngar();
-        ~GuiAngar();
-        
-        void BindAngar(Angar*);
-        void UnbindAngar();
+public:
+    GuiAngar();
+    ~GuiAngar();
 
-        Angar* GetAngar() const { return angar; };
-        
-        bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
+    void BindAngar(Angar*);
+    void UnbindAngar();
 
-        void CheckButtonsLock();
-        void ButtonsAction() const;
+    Angar* GetAngar() const { return angar; };
 
-        void RenderVehicleAndItemSlots() const;
+    bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
 
-    private:
-        Angar* angar;
+    void CheckButtonsLock();
+    void ButtonsAction() const;
 
-        ItemSlot* repair_slot;
-        ItemSlot* charge_slot;
+    void RenderVehicleAndItemSlots() const;
 
-        std::vector<GuiPair<ceti::Rect, VehicleSlot*>> rect_vehicleslot_vec;
-        std::vector<GuiPair<ceti::Rect, ItemSlot*>> rect_itemslot_vec;
+private:
+    Angar* angar = nullptr;
+
+    control::ItemSlot* repair_slot = nullptr;
+    control::ItemSlot* charge_slot = nullptr;
+
+    std::vector<GuiPair<ceti::Rect, control::VehicleSlot*>> m_vehicleslot_rects;
+    std::vector<GuiPair<ceti::Rect, control::ItemSlot*>> m_itemslot_rects;
 };
 

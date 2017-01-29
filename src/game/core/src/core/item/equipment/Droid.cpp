@@ -33,9 +33,10 @@ Droid::Droid(int_t id)
     :
       m_repair_orig(0)
 {
-    setId(id);
-    setTypeId(type::entity::EQUIPMENT_ID);
-    setSubTypeId(type::entity::DROID_EQUIPMENT_ID);
+    assert(false);
+//    setId(id);
+//    setTypeId(type::entity::EQUIPMENT_ID);
+//    setSubTypeId(type::entity::DROID_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -100,49 +101,49 @@ std::string Droid::GetRepairStr()
 /*virtual*/
 void Droid::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "droid_equipment." + std::to_string(id()) + ".";
+//    std::string root = "droid_equipment." + std::to_string(model()->id()) + ".";
 
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Base::SaveData(save_ptree, root);
-    Droid::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Base::SaveData(save_ptree, root);
+//    Droid::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Droid::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    Droid::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Droid::LoadData(load_ptree);
 }
 
 /*virtual*/
 void Droid::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    Base::ResolveData();
-    Droid::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    Droid::ResolveData();
 }
 
 void Droid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    LOG(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DroidEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
     
-    save_ptree.put(root+"repair_orig", m_repair_orig);
+//    save_ptree.put(root+"repair_orig", m_repair_orig);
 }
 
 void Droid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LOG(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    m_repair_orig = load_ptree.get<int>("repair_orig");
+//    m_repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void Droid::ResolveData()
 {
-    LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 } // namespace equipment
