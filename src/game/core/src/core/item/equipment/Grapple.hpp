@@ -28,7 +28,7 @@ class SpaceObject;
 namespace item {
 namespace equipment {
 
-class Grapple : public Base
+class Grapple : public control::item::equipment::Base
 {
 public:
     Grapple(int_t id);

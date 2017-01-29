@@ -26,7 +26,7 @@ class ItemSlot;
 namespace item {
 namespace equipment {
 
-class Lazer : public Base
+class Lazer : public control::item::equipment::Base
 {
     public:
         Lazer(int_t id);
