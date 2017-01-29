@@ -70,7 +70,7 @@ void NatureLand::AddItemSlot(control::ItemSlot* item_slot)
 //    item_slot_vec.push_back(item_slot);
 }
 
-bool NatureLand::AddItem(item::Base* item)
+bool NatureLand::AddItem(control::item::Base* item)
 {
     for (control::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {

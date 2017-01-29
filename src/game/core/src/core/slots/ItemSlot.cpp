@@ -154,7 +154,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 //    }
 }
 
-bool ItemSlot::checkItemInsertion(item::Base* item) const
+bool ItemSlot::checkItemInsertion(control::item::Base* item) const
 {
     assert(false);
 //    if (subtype() == type::entity::CARGO_SLOT_ID) {

@@ -25,13 +25,16 @@
 #include <ceti/type/IdType.hpp>
 
 class Turrel; 
+
+namespace control {
 namespace item {
 class Base;
 } // namespace item
+} // naemspace control
 
 namespace model {
 class SpaceObject;
-} // namespace control
+} // namespace model
 
 namespace item {
 namespace equipment {
@@ -128,19 +131,19 @@ public:
     item::Base* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
-    item::equipment::Rocket*    rocketEquipment()    const { return reinterpret_cast<item::equipment::Rocket*>(m_item); }
-    item::equipment::Lazer*     lazerEquipment()     const { return reinterpret_cast<item::equipment::Lazer*>(m_item); }
-    item::equipment::Radar*     radarEquipment()     const { return reinterpret_cast<item::equipment::Radar*>(m_item); }
-    item::equipment::Drive*     driveEquipment()     const { return reinterpret_cast<item::equipment::Drive*>(m_item); }
-    item::equipment::Bak*       bakEquipment()       const { return reinterpret_cast<item::equipment::Bak*>(m_item); }
+    ::item::equipment::Rocket*    rocketEquipment()    const { return reinterpret_cast<::item::equipment::Rocket*>(m_item); }
+    ::item::equipment::Lazer*     lazerEquipment()     const { return reinterpret_cast<::item::equipment::Lazer*>(m_item); }
+    ::item::equipment::Radar*     radarEquipment()     const { return reinterpret_cast<::item::equipment::Radar*>(m_item); }
+    ::item::equipment::Drive*     driveEquipment()     const { return reinterpret_cast<::item::equipment::Drive*>(m_item); }
+    ::item::equipment::Bak*       bakEquipment()       const { return reinterpret_cast<::item::equipment::Bak*>(m_item); }
 #ifdef USE_EXTRA_EQUIPMENT
-    item::equipment::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<item::equipment::EnergizerEquipment*>(m_item); }
-    item::equipment::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<item::equipment::FreezerEquipment*>(m_item); }
+    ::item::equipment::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<::item::equipment::EnergizerEquipment*>(m_item); }
+    ::item::equipment::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<::item::equipment::FreezerEquipment*>(m_item); }
 #endif
-    item::equipment::Protector* protectorEquipment() const { return reinterpret_cast<item::equipment::Protector*>(m_item); }
-    item::equipment::Droid*     droidEquipment()     const { return reinterpret_cast<item::equipment::Droid*>(m_item); }
-    item::equipment::Scaner*    scanerEquipment()    const { return reinterpret_cast<item::equipment::Scaner*>(m_item); }
-    item::equipment::Grapple*   grappleEquipment()   const { return reinterpret_cast<item::equipment::Grapple*>(m_item); }
+    ::item::equipment::Protector* protectorEquipment() const { return reinterpret_cast<::item::equipment::Protector*>(m_item); }
+    ::item::equipment::Droid*     droidEquipment()     const { return reinterpret_cast<::item::equipment::Droid*>(m_item); }
+    ::item::equipment::Scaner*    scanerEquipment()    const { return reinterpret_cast<::item::equipment::Scaner*>(m_item); }
+    ::item::equipment::Grapple*   grappleEquipment()   const { return reinterpret_cast<::item::equipment::Grapple*>(m_item); }
 
 #ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
@@ -209,7 +212,7 @@ private:
 
     int m_hitProbability = 0;
 
-    bool checkItemInsertion(item::Base*) const;
+    bool checkItemInsertion(control::item::Base*) const;
 
     bool isTargetAlive(model::SpaceObject*) const;
     bool isTargetInSpace(model::SpaceObject*) const;

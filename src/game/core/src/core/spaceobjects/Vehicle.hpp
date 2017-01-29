@@ -43,11 +43,12 @@ class Starsystem;
 namespace control {
 class Container;
 class Npc;
-} //namespace control
 
 namespace item {
 class Base;
 } // namespace item
+
+} //namespace control
 
 class BaseEquipment;
 class BaseParticleSystem;
@@ -133,8 +134,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_npc;
         ar & m_dock;
@@ -322,15 +322,15 @@ protected:
     ItemSlot* const _freeArtefactSlot() const;
     ItemSlot* const _cargoSlotWithGoods(type::entity);
 
-    bool _installItem(item::Base*);
-    bool _installEquipment(item::Base*);
+    bool _installItem(control::item::Base*);
+    bool _installEquipment(control::item::Base*);
 #ifdef USE_MODULES
-    bool installModule(item::BaseItem*);
+    bool installModule(control::item::BaseItem*);
 #endif // USE_MODULES
 #ifdef USE_ARTEFACTS
     bool installArtefact(item::BaseItem*);
 #endif // USE_ARTEFACTS
-    bool _installGoodsPack(item::Base*);
+    bool _installGoodsPack(control::item::Base*);
 
     //        virtual void UpdateInfo() = 0;
 

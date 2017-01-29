@@ -266,7 +266,7 @@ bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
     return result;
 }
 
-bool Vehicle::_installItem(item::Base* item)
+bool Vehicle::_installItem(control::item::Base* item)
 {
     assert(false);
 //    switch(item->type()) {

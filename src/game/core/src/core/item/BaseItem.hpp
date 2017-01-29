@@ -31,13 +31,73 @@ namespace control {
 class ItemSlot; 
 } // namespace control
 
+namespace model {
+
 namespace item {
 
-struct UnresolvedDataBaseItem
+class Base : public ::model::Base
 {
-    std::string textureOb_path;
-    int_t item_slot_id;
+public:
+    Base();
+    virtual ~Base();
+
+    void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setItemCommonData(const ItemCommonData& data_item)
+    {
+        m_data = data_item;
+        m_deterioration = data_item.deterioration;
+        setCondition(data_item.condition_max);
+    }
+    void setSlot(int_t slot)  { m_slot = slot; }
+    void setCondition(int condition) { m_condition = condition; }
+
+    int_t slot() const { return m_slot; }
+
+    int mass()          const { return m_data.mass; }
+    int condition()     const { return m_condition; }
+    int price()         const { return m_price; }
+    int basePrice()     const { return m_data.price; }
+    int deterioration() const { return m_data.deterioration; }
+
+    int modulesNum() const { return m_data.modules_num; }
+    int descriptorType() const { return m_data.descriptor_type; }
+
+    type::tech tech() const { return m_data.tech; }
+
+    type::entity parentSubtype() const { return m_parent_subtype_id; }
+    type::race race() const { return m_race_id; }
+
+    int lockedTurns() const { return m_locked_turns; }
+
+private:
+    type::race m_race_id = type::race::NONE_ID;
+
+    int m_locked_turns = 0;
+    int m_condition = 0;
+    int m_price = 0;
+    int m_deterioration = 0;
+
+    type::entity m_parent_subtype_id = type::entity::NONE_ID;
+
+    ItemCommonData m_data;
+
+    int_t m_slot = NONE;
+
 };
+
+} // naemspace item
+
+} // namespace model
+
+namespace control {
+
+namespace item {
+
+//struct UnresolvedDataBaseItem
+//{
+//    std::string textureOb_path;
+//    int_t item_slot_id;
+//};
 
 class Base : public ::control::Base
 {
@@ -109,7 +169,7 @@ protected:
     type::entity m_parent_subtype_id = type::entity::NONE_ID;
 
     ItemCommonData m_data;
-    UnresolvedDataBaseItem m_data_unresolved_BaseItem;
+//    UnresolvedDataBaseItem m_data_unresolved_BaseItem;
     //        InfoTable info;
 
     void _updateLock();
@@ -126,3 +186,5 @@ private:
 };
 
 } // namespace item
+
+} // namespace control
