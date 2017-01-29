@@ -38,14 +38,14 @@ BakBuilder::BakBuilder()
 BakBuilder::~BakBuilder()
 {}
 
-Bak*
+model::item::equipment::Bak*
 BakBuilder::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
     return getNew(descriptor);
 }
 
-Bak*
+model::item::equipment::Bak*
 BakBuilder::getNew(const descriptor::BaseOLD& descr)
 {
     descriptor::BaseOLD descriptor(descr.data());
@@ -55,25 +55,25 @@ BakBuilder::getNew(const descriptor::BaseOLD& descr)
         id = descr.objId();
     }
 
-    Bak* bak = __createTemplate(id);
+    model::item::equipment::Bak* bak = __createTemplate(id);
     __createInternals(bak, descriptor);
     
     return bak;
 }
 
-Bak*
+model::item::equipment::Bak*
 BakBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::BaseOLD(data));
 }
 
-Bak*
+model::item::equipment::Bak*
 BakBuilder::__createTemplate(int_t id)
 {
     if (id == NONE) {
         id = core::global::get().idGenerator().nextId();
     }
-    Bak* bak = new Bak(id);
+    model::item::equipment::Bak* bak = new model::item::equipment::Bak;
     assert(bak);
 
     assert(false);
@@ -82,7 +82,7 @@ BakBuilder::__createTemplate(int_t id)
 }
 
 void
-BakBuilder::__createInternals(Bak* bak, const descriptor::BaseOLD& descriptor)
+BakBuilder::__createInternals(model::item::equipment::Bak* bak, const descriptor::BaseOLD& descriptor)
 {
     assert(descriptor.type() == (int)descriptor::Type::BAK);
 
@@ -93,8 +93,9 @@ BakBuilder::__createInternals(Bak* bak, const descriptor::BaseOLD& descriptor)
     bak->setParentSubTypeId(type::entity::BAK_SLOT_ID);
     bak->setItemCommonData(data);
 
-    bak->updateProperties();
-    bak->countPrice();
+    assert(false);
+//    bak->updateProperties();
+//    bak->countPrice();
 }
 
 } // namespace equipment

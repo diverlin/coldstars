@@ -20,34 +20,26 @@
 
 #include <core/item/equipment/Base.hpp>
 
-class BakBuilder;
-
+namespace model {
 namespace item {
 namespace equipment {
 
-class Bak : public control::item::equipment::Base
+class Bak : public Base
 {
 public:
-    Bak(int_t id);
-    virtual ~Bak();
+    Bak();
+    ~Bak() = default;
+    Bak(const std::string& data);
+    std::string data() const;
 
     void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }
-    void setFuel(int fuel)               { m_fuel = fuel; }
-    void increaseFuel(int fuel);
-    int fuelMiss() const { return (m_fuelMax - m_fuel); }
+    void setFuelMax(int fuelMax) { m_fuelMax = fuelMax; }
+    void setFuel(int fuel) { m_fuel = fuel; }
 
-    int fuel() const    { return m_fuel; }
+    int fuelMaxOrig() const { return m_fuelMaxOrig; }
+    int fuelMaxAdd() const { return m_fuelMaxAdd; }
     int fuelMax() const { return m_fuelMax; }
-
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
-
-private:
-    void updateProperties() override final;
-    void countPrice();
-
-    friend BakBuilder;
+    int fuel() const    { return m_fuel; }
 
 private:
     int m_fuelMaxOrig = 0;
@@ -55,13 +47,57 @@ private:
     int m_fuelMax = 0;
     int m_fuel = 0;
 
-    void virtual addUniqueInfo();
-    std::string getFuelStr();
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+        ar & m_fuelMaxOrig;
+        ar & m_fuelMaxAdd;
+        ar & m_fuelMax;
+        ar & m_fuel;
+    }
 };
 
 } // namespace equipment
 } // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+namespace equipment {
+
+class Bak : public Base
+{
+public:
+    Bak(int_t id);
+    virtual ~Bak();
+
+    void increaseFuel(int fuel);
+    int fuelMiss() const { return (model()->fuelMax() - model()->fuel()); }
+
+//    virtual void Save(boost::property_tree::ptree&) const;
+//    virtual void Load(const boost::property_tree::ptree&);
+//    virtual void Resolve();
+
+private:
+    void updateProperties() override final;
+    void countPrice();
+
+    model::item::equipment::Bak* model() const { return m_model_bak; }
+
+private:
+    model::item::equipment::Bak* m_model_bak = nullptr;
+
+    void virtual addUniqueInfo();
+    std::string getFuelStr();
+
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+};
+
+} // namespace equipment
+} // namespace item
+} // namespace control
