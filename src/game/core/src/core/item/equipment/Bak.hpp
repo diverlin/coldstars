@@ -18,14 +18,14 @@
 
 #pragma once
 
-#include "Base.hpp"
+#include <core/item/equipment/Base.hpp>
 
 class BakBuilder;
 
 namespace item {
 namespace equipment {
 
-class Bak : public Base
+class Bak : public control::item::equipment::Base
 {
 public:
     Bak(int_t id);

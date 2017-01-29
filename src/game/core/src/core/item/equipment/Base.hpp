@@ -18,12 +18,39 @@
 
 #pragma once
 
-#include <item/BaseItem.hpp>
+#include <core/item/BaseItem.hpp>
 
 #ifdef USE_MODULES
-#include <item/modules/BaseModule.hpp>
+#include <core/item/modules/BaseModule.hpp>
 #endif
 
+namespace model {
+namespace item {
+namespace equipment {
+
+class Base : public model::item::Base
+{
+public:
+    Base() = default;
+    ~Base() = default;
+
+private:
+    // ..
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<model::item::Base>(*this);
+    }
+
+};
+
+} // namespace equipment
+} // namespace item
+} // namespace model
+
+namespace control {
 namespace item {
 namespace equipment {
 
@@ -47,10 +74,11 @@ protected:
 
     virtual void AddCommonInfo();
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
+} // namespace control
 } // namespace equipment
 } // namespace item

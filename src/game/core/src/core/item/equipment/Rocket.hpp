@@ -19,14 +19,15 @@
 
 #pragma once
 
+#include <core/item/equipment/Base.hpp>
+#include <core/common/BulletData.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <item/equipment/Base.hpp>
-#include <common/BulletData.hpp>
 
 namespace item {
 namespace equipment {
 
-class Rocket : public Base
+class Rocket : public control::item::equipment::Base
 { 
 public:
     Rocket(int_t id);

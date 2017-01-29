@@ -26,7 +26,7 @@ class ScanerBuilder;
 namespace item {
 namespace equipment {
 
-class Scaner : public Base
+class Scaner : public control::item::equipment::Base
 {
 public:
     Scaner(int_t id);

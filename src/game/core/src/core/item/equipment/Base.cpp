@@ -19,15 +19,14 @@
 #include "Base.hpp"
 #include "Rocket.hpp"
 
-#include "../../common/constants.hpp"
-
-#include "../../slots/ItemSlot.hpp"
+#include <core/common/constants.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/common/Global.hpp> // depr
+#include <core/managers/EntityManager.hpp> // depr
 
 #include <ceti/Logger.hpp>
 
-#include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
-
+namespace control {
 namespace item {
 namespace equipment {
 
@@ -132,20 +131,21 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //}
 
 
-void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
-}
+//void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
+//}
 
-void Base::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
-}
+//void Base::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+////    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
+//}
 
-void Base::ResolveData()
-{
-//    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
-}
+//void Base::ResolveData()
+//{
+////    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
+//}
 
 } // namespace equipment
 } // namespace item
+} // namespace control

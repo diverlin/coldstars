@@ -24,7 +24,7 @@
 namespace item {
 namespace equipment {
 
-class Protector  : public Base
+class Protector : public control::item::equipment::Base
 {
     public:
         Protector(int_t id);

@@ -24,7 +24,7 @@
 namespace item {
 namespace equipment {
 
-class Droid : public Base
+class Droid : public control::item::equipment::Base
 {
 public:
     Droid(int_t id);

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace item {
 namespace equipment {
 
-class Radar : public Base
+class Radar : public control::item::equipment::Base
 {
     public:
         Radar(int_t id);
