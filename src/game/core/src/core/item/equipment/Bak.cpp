@@ -20,10 +20,10 @@
 #include <core/common/constants.hpp>
 #ifdef USE_MODULES
 #include <core/item/modules/BakModule.hpp>
-#endif
+#endif // USE_MODULES
 
-#include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
 
 namespace model {
 namespace item {

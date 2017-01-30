@@ -17,14 +17,25 @@
 */
 
 #include "Base.hpp"
-#include "Rocket.hpp"
+#include "Rocket.hpp" // ugly
 
 #include <core/common/constants.hpp>
 #include <core/slots/ItemSlot.hpp>
 #include <core/common/Global.hpp> // depr
 #include <core/managers/EntityManager.hpp> // depr
 
+#include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
+
+namespace descriptor {
+namespace item {
+namespace equipment {
+
+} // namespace equipment
+} // namespace item
+} // namespace descriptor
+
+
 
 namespace control {
 namespace item {

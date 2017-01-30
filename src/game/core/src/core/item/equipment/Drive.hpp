@@ -19,8 +19,86 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma once
 
-#include "Base.hpp"
+#include <core/item/equipment/Base.hpp>
 
+namespace descriptor {
+namespace item {
+namespace equipment {
+
+class Drive : public Base
+{
+public:
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
+    static const int HYPER_MIN;
+    static const int HYPER_MAX;
+
+public:
+    Drive() = default;
+    Drive(const std::string& data);
+    virtual ~Drive() = default;
+    std::string data() const;
+
+    std::string info() const override final {
+        std::string result = "Drive descriptor: " + Base::info();
+        return result;
+    }
+
+private:
+    int m_speed = 0;
+    int m_hyper = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+        ar & m_speed;
+        ar & m_hyper;
+    }
+};
+
+} // namespace equipment
+} // namespace item
+} // namespace descriptor
+
+
+
+namespace model {
+namespace item {
+namespace equipment {
+
+class Drive : public Base
+{
+public:
+    Drive();
+    ~Drive() = default;
+    Drive(const std::string& data);
+    std::string data() const;
+
+    int speed() const { return m_speed; }
+    int hyper() const { return m_hyper; }
+
+private:
+    int m_speed = 0;
+    int m_hyper = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+        ar & m_speed;
+        ar & m_hyper;
+    }
+};
+
+} // namespace equipment
+} // namespace item
+} // namespace model
+
+
+namespace control {
 namespace item {
 namespace equipment {
 
@@ -30,37 +108,24 @@ public:
     Drive(int_t id);
     virtual ~Drive();
 
-    void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };
-    void SetHyperOrig(int hyper_orig) { m_hyper_orig = hyper_orig; };
-
-    int speed() const { return m_speed; };
-    int hyper() const { return m_hyper; };
-
+private:
     virtual void updateProperties();
-
     void CountPrice();
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+    model::item::equipment::Drive* model() const { return m_model_drive; }
 
 private:
-    int m_speed_orig = 0;
     int m_speed_add = 0;
-    int m_speed = 0;
-
-    int m_hyper_orig = 0;
     int m_hyper_add = 0;
-    int m_hyper = 0;
+
+    model::item::equipment::Drive* m_model_drive = nullptr;
+    descriptor::item::equipment::Drive* m_descriptor = nullptr;
 
     void virtual addUniqueInfo();
     std::string GetSpeedStr();
     std::string GetHyperStr();
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
 };
 
 } // namespace equipment
 } // namespace item
+} // namespace control
