@@ -31,6 +31,50 @@ namespace control {
 class ItemSlot; 
 } // namespace control
 
+
+namespace descriptor {
+namespace item {
+
+class Base : public ::descriptor::Base
+{
+public:
+    Base() = default;
+    ~Base() = default;
+
+private:
+    type::race m_race = type::race::R0_ID;
+    type::tech m_tech = type::tech::NONE;
+    int m_modules = 0;
+    int m_condition = 0;
+    int m_deterioration = 0;
+    int m_mass = 0;
+    int m_price = 0;
+    int m_type = 0;  // descriptor type
+
+    std::string info() const override final {
+        std::string result = "Base descriptor: " + Base::info();
+        return result;
+    }
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<::descriptor::Base>(*this);
+        ar & m_race;
+        ar & m_tech;
+        ar & m_modules;
+        ar & m_condition;
+        ar & m_deterioration;
+        ar & m_mass;
+        ar & m_price;
+        ar & m_type;  // descriptor type
+    }
+};
+
+} // namespace item
+} // namespace descriptor
+
 namespace model {
 namespace item {
 

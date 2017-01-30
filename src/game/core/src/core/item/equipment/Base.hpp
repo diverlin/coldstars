@@ -24,6 +24,37 @@
 #include <core/item/modules/BaseModule.hpp>
 #endif
 
+
+namespace descriptor {
+namespace item {
+namespace equipment {
+
+class Base : public descriptor::item::Base
+{
+public:
+    Base() = default;
+    ~Base() = default;
+
+private:
+    std::string info() const override final {
+        std::string result = "Base descriptor: " + Base::info();
+        return result;
+    }
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<descriptor::item::Base>(*this);
+    }
+};
+
+} // namespace equipment
+} // namespace item
+} // namespace descriptor
+
+
+
 namespace model {
 namespace item {
 namespace equipment {

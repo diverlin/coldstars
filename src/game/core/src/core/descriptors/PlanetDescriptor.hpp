@@ -24,7 +24,6 @@ namespace descriptor {
 
 class Planet : public Planetoid
 {
-
 public:
     static const int SCALE_MIN;
     static const int SCALE_MAX;
@@ -50,8 +49,7 @@ public:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Planetoid>(*this);
     }
 };
