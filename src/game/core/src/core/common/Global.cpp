@@ -106,19 +106,19 @@ global::global()
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
     #endif // USE_ARTEFACTS
 
-    , m_bakBuilder(new item::equipment::BakBuilder)
-//    , m_driveBuilder(new item::equipment::DriveBuilder)
-    , m_droidBuilder(new item::equipment::DroidBuilder)
+    , m_bakBuilder(new item::BakBuilder)
+//    , m_driveBuilder(new item::DriveBuilder)
+    , m_droidBuilder(new item::DroidBuilder)
     #ifdef USE_EXTRA_EQUIPMENT
-    , m_energizerBuilder(new item::equipment::EnergizerBuilder)
-    , m_freezerBuilder(new item::equipment::FreezerBuilder)
+    , m_energizerBuilder(new item::EnergizerBuilder)
+    , m_freezerBuilder(new item::FreezerBuilder)
     #endif
-    , m_grappleBuilder(new item::equipment::GrappleBuilder)
-    , m_protectorBuilder(new item::equipment::ProtectorBuilder)
-    , m_radarBuilder(new item::equipment::RadarBuilder)
-    , m_scanerBuilder(new item::equipment::ScanerBuilder)
-    , m_rocketBuilder(new item::equipment::RocketBuilder)
-    , m_lazerBuilder(new item::equipment::LazerBuilder)
+    , m_grappleBuilder(new item::GrappleBuilder)
+    , m_protectorBuilder(new item::ProtectorBuilder)
+    , m_radarBuilder(new item::RadarBuilder)
+    , m_scanerBuilder(new item::ScanerBuilder)
+    , m_rocketBuilder(new item::RocketBuilder)
+    , m_lazerBuilder(new item::LazerBuilder)
 
     #ifdef USE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)

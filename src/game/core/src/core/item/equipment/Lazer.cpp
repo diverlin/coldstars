@@ -32,7 +32,6 @@
 #include "../../parts/Turrel.hpp"
 
 namespace item {
-namespace equipment {
 
 Lazer::Lazer(int_t id)
     :
@@ -203,5 +202,4 @@ void Lazer::ResolveData()
 //    LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item

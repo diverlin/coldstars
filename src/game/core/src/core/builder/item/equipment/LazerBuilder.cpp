@@ -33,8 +33,6 @@
 #include <meti/RandUtils.hpp>
 
 namespace item {
-namespace equipment {
-
 
 LazerBuilder::LazerBuilder()
 {}
@@ -97,6 +95,5 @@ void LazerBuilder::createInternals(Lazer* lazer, type::tech tech_level, type::ra
     lazer->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item
 

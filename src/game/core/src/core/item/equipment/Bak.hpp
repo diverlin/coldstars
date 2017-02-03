@@ -22,7 +22,6 @@
 
 namespace model {
 namespace item {
-namespace equipment {
 
 class Bak : public Base
 {
@@ -59,16 +58,14 @@ private:
     }
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace model
 
 
 namespace control {
 namespace item {
-namespace equipment {
 
-class Bak : public Base
+class Bak : public BaseEquipment
 {
 public:
     Bak(int_t id);
@@ -85,10 +82,10 @@ private:
     void updateProperties() override final;
     void countPrice();
 
-    model::item::equipment::Bak* model() const { return m_model_bak; }
+    model::item::Bak* model() const { return m_model_bak; }
 
 private:
-    model::item::equipment::Bak* m_model_bak = nullptr;
+    model::item::Bak* m_model_bak = nullptr;
 
     void virtual addUniqueInfo();
     std::string getFuelStr();
@@ -98,6 +95,6 @@ private:
 //    void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace control
+

@@ -26,7 +26,6 @@
 #endif
 
 namespace item {
-namespace equipment {
 
 Scaner::Scaner(int_t id)
     :
@@ -133,6 +132,5 @@ void Scaner::ResolveData()
 //    LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item
 

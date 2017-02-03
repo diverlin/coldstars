@@ -26,7 +26,6 @@ class BaseOLD;
 } // namespace descriptor
 
 namespace item {
-namespace equipment {
 
 class Radar;
 
@@ -44,5 +43,4 @@ private:
     void createInternals(Radar*, const descriptor::BaseOLD&) const;
 }; 
 
-} // namespace equipment
 } // namespace item

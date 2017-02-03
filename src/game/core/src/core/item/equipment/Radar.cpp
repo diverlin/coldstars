@@ -26,7 +26,6 @@
 
 
 namespace item {
-namespace equipment {
 
 Radar::Radar(int_t id)
     :
@@ -133,6 +132,5 @@ void Radar::ResolveData()
 //    LOG(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item
 

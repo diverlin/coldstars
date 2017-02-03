@@ -24,9 +24,8 @@
 class ScanerBuilder;
 
 namespace item {
-namespace equipment {
 
-class Scaner : public control::item::equipment::Base
+class Scaner : public control::item::BaseEquipment
 {
 public:
     Scaner(int_t id);
@@ -60,6 +59,5 @@ private:
     void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item
 

@@ -65,7 +65,7 @@ TEST(communication, create_bak)
     core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
     assert(false);
-//    item::equipment::Bak* bak = core::global::get().entityManager().getEntity<item::equipment::Bak*>(obj_id);
+//    item::Bak* bak = core::global::get().entityManager().getEntity<item::Bak*>(obj_id);
 //    assert(bak);
 //    EXPECT_EQ(bak->id(), obj_id);
 }

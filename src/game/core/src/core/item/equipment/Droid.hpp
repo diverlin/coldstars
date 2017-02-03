@@ -22,9 +22,8 @@
 #include "Base.hpp"
 
 namespace item {
-namespace equipment {
 
-class Droid : public control::item::equipment::Base
+class Droid : public control::item::BaseEquipment
 {
 public:
     Droid(int_t id);
@@ -55,5 +54,4 @@ private:
     void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item

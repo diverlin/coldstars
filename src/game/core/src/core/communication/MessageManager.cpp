@@ -90,7 +90,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {
-        auto model = builder::item::equipment::Drive::getNew(message.data);
+        auto model = builder::item::Drive::getNew(message.data);
         assert(false);
         break;
     }

@@ -29,12 +29,11 @@
 
 namespace builder {
 namespace item {
-namespace equipment {
 
-model::item::equipment::Drive*
+model::item::Drive*
 Drive::createTemplate(int_t id)
 {
-    model::item::equipment::Drive* drive = new model::item::equipment::Drive();
+    model::item::Drive* drive = new model::item::Drive();
     assert(drive);
 
     assert(false);
@@ -43,26 +42,26 @@ Drive::createTemplate(int_t id)
     return drive;
 } 
 
-model::item::equipment::Drive*
+model::item::Drive*
 Drive::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
-    model::item::equipment::Drive* drive = createTemplate();
+    model::item::Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 
     return drive;
 }
 
-model::item::equipment::Drive*
+model::item::Drive*
 Drive::getNew(const descriptor::BaseOLD& descriptor)
 {
-    model::item::equipment::Drive* drive = createTemplate();
+    model::item::Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 
     return drive;
 }        
 
-void Drive::createInternals(model::item::equipment::Drive* drive, const descriptor::BaseOLD& descriptor)
+void Drive::createInternals(model::item::Drive* drive, const descriptor::BaseOLD& descriptor)
 {
     assert(false);
 //    ItemCommonData data = extractCommonData(descriptor);
@@ -76,6 +75,5 @@ void Drive::createInternals(model::item::equipment::Drive* drive, const descript
 //    drive->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item
 } // namespace builder

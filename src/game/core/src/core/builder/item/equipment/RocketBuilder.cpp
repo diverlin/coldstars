@@ -33,7 +33,6 @@
 #include <meti/RandUtils.hpp>
 
 namespace item {
-namespace equipment {
 
 RocketBuilder::RocketBuilder()
 {}
@@ -110,6 +109,5 @@ void RocketBuilder::createInternals(Rocket* rocket, type::tech tech_level, type:
     rocket->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item
 

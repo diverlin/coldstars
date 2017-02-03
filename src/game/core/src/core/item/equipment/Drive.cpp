@@ -28,7 +28,6 @@
 
 namespace descriptor {
 namespace item {
-namespace equipment {
 
 const int SPEED_MIN = 0;
 const int SPEED_MAX = 0;
@@ -46,7 +45,6 @@ Drive::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace equipment
 } // namespace item
 } // namespace descriptor
 
@@ -54,7 +52,6 @@ Drive::data() const
 
 namespace model {
 namespace item {
-namespace equipment {
 
 Drive::Drive()
 {
@@ -73,14 +70,12 @@ Drive::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace equipment
 } // namespace item
 } // namespace model
 
 
 namespace control {
 namespace item {
-namespace equipment {
 
 Drive::Drive(int_t id)
 {
@@ -150,7 +145,6 @@ std::string Drive::hyperStr()
     }
 }
 
-} // namespace equipment
 } // namespace item
 } // namespace control
 

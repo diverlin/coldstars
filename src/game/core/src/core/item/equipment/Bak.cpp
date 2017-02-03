@@ -27,7 +27,6 @@
 
 namespace model {
 namespace item {
-namespace equipment {
 
 Bak::Bak()
 {
@@ -46,7 +45,6 @@ Bak::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace equipment
 } // namespace item
 } // namespace model
 
@@ -54,7 +52,6 @@ Bak::data() const
 
 namespace control {
 namespace item {
-namespace equipment {
 
 Bak::Bak(int_t id)
 {
@@ -166,6 +163,5 @@ std::string Bak::getFuelStr()
 ////    LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 //}
 
-} // namespace equipment
 } // namespace item
 } // namespace control

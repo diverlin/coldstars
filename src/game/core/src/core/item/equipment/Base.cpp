@@ -29,16 +29,15 @@
 
 namespace control {
 namespace item {
-namespace equipment {
 
-Base::Base()
+BaseEquipment::BaseEquipment()
 {
     m_race_id = type::race::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
-Base::~Base()
+BaseEquipment::~BaseEquipment()
 {
 //    LOG("___::~BaseEquipment("+std::to_string(model()->id())+")");
 
@@ -46,7 +45,7 @@ Base::~Base()
 }
 
 /* virtual */
-void Base::putChildrenToGarbage() const
+void BaseEquipment::putChildrenToGarbage() const
 {
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
@@ -56,7 +55,7 @@ void Base::putChildrenToGarbage() const
 }
 
 /* virtual */
-void Base::AddCommonInfo()
+void BaseEquipment::AddCommonInfo()
 {
     //    info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
     //    info.addNameStr("modules:");   info.addValueStr( std::to_string(data_item.modules_num_max) );
@@ -132,21 +131,20 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //}
 
 
-//void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{
 ////    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-//void Base::LoadData(const boost::property_tree::ptree& load_ptree)
+//void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
 ////    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-//void Base::ResolveData()
+//void BaseEquipment::ResolveData()
 //{
 ////    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-} // namespace equipment
 } // namespace item
 } // namespace control

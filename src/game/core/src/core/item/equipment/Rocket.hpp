@@ -25,9 +25,8 @@
 #include <ceti/type/IdType.hpp>
 
 namespace item {
-namespace equipment {
 
-class Rocket : public control::item::equipment::Base
+class Rocket : public control::item::BaseEquipment
 { 
 public:
     Rocket(int_t id);
@@ -83,5 +82,4 @@ private:
     void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item

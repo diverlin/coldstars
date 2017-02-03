@@ -29,9 +29,6 @@
 #include <descriptors/DescriptorManager.hpp>
 
 namespace item {
-namespace equipment {
-
-using namespace item::equipment;
 
 DroidBuilder::DroidBuilder()
 {}
@@ -79,5 +76,4 @@ void DroidBuilder::createInternals(Droid* droid, const descriptor::BaseOLD& desc
     droid->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item

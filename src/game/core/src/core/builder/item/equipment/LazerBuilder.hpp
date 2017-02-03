@@ -29,7 +29,6 @@ class BaseOLD;
 } // namespace descriptor
 
 namespace item {
-namespace equipment {
 
 class Lazer;
 
@@ -46,6 +45,5 @@ private:
     void createInternals(Lazer*, type::tech, type::race, int, int) const;
 }; 
 
-} // namespace equipment
 } // namespace item
 

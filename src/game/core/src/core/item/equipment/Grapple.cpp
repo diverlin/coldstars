@@ -32,7 +32,6 @@
 //#include <client/resources/GuiTextureObCollector.hpp>
 
 namespace item {
-namespace equipment {
 
 Grapple::Grapple(int_t id)
     :
@@ -311,5 +310,4 @@ void Grapple::ResolveData()
 //    LOG(" GrappleEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item

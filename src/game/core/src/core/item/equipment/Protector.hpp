@@ -22,9 +22,8 @@
 #include "Base.hpp"
 
 namespace item {
-namespace equipment {
 
-class Protector : public control::item::equipment::Base
+class Protector : public control::item::BaseEquipment
 {
     public:
         Protector(int_t id);
@@ -54,5 +53,4 @@ class Protector : public control::item::equipment::Base
         void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item

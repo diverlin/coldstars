@@ -25,7 +25,6 @@
 #endif
 
 namespace item {
-namespace equipment {
 
 Protector::Protector(int_t id)
     :
@@ -130,6 +129,5 @@ void Protector::ResolveData()
 //    LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item
 

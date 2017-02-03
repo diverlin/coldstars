@@ -29,7 +29,6 @@
 #include <descriptors/DescriptorManager.hpp>
 
 namespace item {
-namespace equipment {
 
 RadarBuilder::RadarBuilder()
 {}
@@ -77,5 +76,4 @@ void RadarBuilder::createInternals(Radar* radar, const descriptor::BaseOLD& desc
     radar->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item

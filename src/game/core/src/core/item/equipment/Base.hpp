@@ -27,13 +27,12 @@
 
 namespace descriptor {
 namespace item {
-namespace equipment {
 
-class Base : public descriptor::item::Base
+class BaseEquipment : public descriptor::item::Base
 {
 public:
-    Base() = default;
-    ~Base() = default;
+    BaseEquipment() = default;
+    ~BaseEquipment() = default;
 
 protected:
     std::string info() const {
@@ -49,7 +48,6 @@ private:
     }
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace descriptor
 
@@ -57,13 +55,12 @@ private:
 
 namespace model {
 namespace item {
-namespace equipment {
 
-class Base : public model::item::Base
+class BaseEquipment : public model::item::Base
 {
 public:
-    Base() = default;
-    ~Base() = default;
+    BaseEquipment() = default;
+    ~BaseEquipment() = default;
 
 private:
     // ..
@@ -77,19 +74,17 @@ private:
 
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace model
 
 namespace control {
 namespace item {
-namespace equipment {
 
-class Base : public control::item::Base
+class BaseEquipment : public control::item::Base
 {
 public:
-    Base();
-    virtual ~Base();
+    BaseEquipment();
+    virtual ~BaseEquipment();
 
     virtual void putChildrenToGarbage() const;
 
@@ -110,6 +105,6 @@ protected:
 //    void ResolveData();
 };
 
-} // namespace control
-} // namespace equipment
 } // namespace item
+} // namespace control
+
