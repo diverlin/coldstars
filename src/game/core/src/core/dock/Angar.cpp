@@ -99,7 +99,7 @@ bool Angar::RepairItem(Npc* npc, control::item::Base* item) const
     return false;
 }         
 
-bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
+bool Angar::chargeRocketEquipment(Npc* npc, item::Rocket* rocket_equipment) const
 {
     assert(false);
 //    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;

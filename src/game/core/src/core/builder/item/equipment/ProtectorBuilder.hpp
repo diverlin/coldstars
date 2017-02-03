@@ -28,7 +28,6 @@ class BaseOLD;
 } // namespace descriptor
 
 namespace item {
-namespace equipment {
 
 class Protector;
 
@@ -39,13 +38,12 @@ public:
     ~ProtectorBuilder();
 
     std::vector<Protector*> getNew(int) const;
-    item::equipment::Protector* getNew() const;
-    item::equipment::Protector* createTemplate(int_t id = NONE) const;
-    item::equipment::Protector* getNew(const descriptor::BaseOLD&) const;
+    item::Protector* getNew() const;
+    item::Protector* createTemplate(int_t id = NONE) const;
+    item::Protector* getNew(const descriptor::BaseOLD&) const;
 
 private:
     void createInternals(Protector*, const descriptor::BaseOLD&) const;
 }; 
 
-} // namespace equipment
 } // namespace item

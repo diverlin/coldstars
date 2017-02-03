@@ -29,7 +29,6 @@
 #include <descriptors/DescriptorManager.hpp>
 
 namespace item {
-namespace equipment {
 
 ProtectorBuilder::ProtectorBuilder()
 {}
@@ -91,6 +90,5 @@ ProtectorBuilder::createInternals(Protector* protector, const descriptor::BaseOL
     protector->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item
 

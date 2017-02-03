@@ -26,9 +26,8 @@ class SpaceObject;
 }
 
 namespace item {
-namespace equipment {
 
-class Grapple : public control::item::equipment::Base
+class Grapple : public control::item::BaseEquipment
 {
 public:
     Grapple(int_t id);
@@ -88,5 +87,4 @@ private:
     void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item

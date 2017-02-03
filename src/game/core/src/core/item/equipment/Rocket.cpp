@@ -61,7 +61,6 @@ void BulletData::Resolve()
 {}
 
 namespace item {
-namespace equipment {
 
 Rocket::Rocket(int_t id)
 :
@@ -271,6 +270,5 @@ void Rocket::ResolveData()
 //    data_bullet.Resolve();
 }
 
-} // namespace equipment
 } // namespace item
 

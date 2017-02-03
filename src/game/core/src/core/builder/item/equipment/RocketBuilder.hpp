@@ -29,7 +29,6 @@ class BaseOLD;
 } // namespace descriptor
 
 namespace item {
-namespace equipment {
 
 class Rocket;
 
@@ -46,5 +45,4 @@ private:
     void createInternals(Rocket*, type::tech, type::race, int, int, int) const;
 }; 
 
-} // namespace equipment
 } // namespace item

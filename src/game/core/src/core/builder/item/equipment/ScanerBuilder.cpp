@@ -29,9 +29,6 @@
 #include <descriptors/DescriptorManager.hpp>
 
 namespace item {
-namespace equipment {
-
-using namespace item::equipment;
 
 ScanerBuilder::ScanerBuilder()
 {}
@@ -79,6 +76,5 @@ void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::BaseOLD& d
     scaner->countPrice();
 }
 
-} // namespace equipment
 } // namespace item
 

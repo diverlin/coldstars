@@ -24,9 +24,8 @@ class SpaceObject;
 class ItemSlot;
 
 namespace item {
-namespace equipment {
 
-class Lazer : public control::item::equipment::Base
+class Lazer : public control::item::BaseEquipment
 {
     public:
         Lazer(int_t id);
@@ -69,5 +68,4 @@ class Lazer : public control::item::equipment::Base
         void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item

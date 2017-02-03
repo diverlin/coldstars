@@ -27,7 +27,6 @@
 #include "../../slots/ItemSlot.hpp"
 
 namespace item {
-namespace equipment {
 
 Droid::Droid(int_t id)
     :
@@ -146,6 +145,5 @@ void Droid::ResolveData()
 //    LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
-} // namespace equipment
 } // namespace item
 

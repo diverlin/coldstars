@@ -22,9 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Base.hpp"
 
 namespace item {
-namespace equipment {
 
-class Radar : public control::item::equipment::Base
+class Radar : public control::item::BaseEquipment
 {
     public:
         Radar(int_t id);
@@ -54,7 +53,6 @@ class Radar : public control::item::equipment::Base
         void ResolveData();
 };
 
-} // namespace equipment
 } // namespace item
 
 

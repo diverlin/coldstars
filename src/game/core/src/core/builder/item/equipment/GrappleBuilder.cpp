@@ -29,7 +29,6 @@
 #include <descriptors/DescriptorManager.hpp>
 
 namespace item {
-namespace equipment {
 
 GrappleBuilder::GrappleBuilder()
 {}
@@ -80,5 +79,4 @@ void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::BaseOLD
     grapple->CountPrice();
 }
 
-} // namespace equipment
 } // namespace item

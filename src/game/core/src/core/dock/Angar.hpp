@@ -33,9 +33,7 @@ class Base;
 class Npc;
 
 namespace item {
-namespace equipment {
 class Rocket;
-} // namespace equipment
 } // namespace item
 
 class Angar : public Room
@@ -54,7 +52,7 @@ public:
     bool AddVehicle(control::Vehicle*);
 
     bool RepairItem(Npc*, control::item::Base*) const;
-    bool chargeRocketEquipment(Npc*, item::equipment::Rocket*) const;
+    bool chargeRocketEquipment(Npc*, item::Rocket*) const;
 
     bool RepairVehicle(control::Vehicle*) const;
     bool TankUpVehicle(control::Vehicle*) const;

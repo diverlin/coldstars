@@ -43,7 +43,6 @@ class ProtectorArtefactBuilder;
 #endif
 
 namespace item {
-namespace equipment {
 class BakBuilder;
 //class DriveBuilder;
 class DroidBuilder;
@@ -57,7 +56,6 @@ class RadarBuilder;
 class ScanerBuilder;
 class RocketBuilder;
 class LazerBuilder;
-} // namespace equipment
 } // namespace item
 
 #ifdef USE_MODULES
@@ -121,19 +119,19 @@ public:
     ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
 #endif // USE_ARTEFACTS
 
-    item::equipment::BakBuilder& bakBuilder() { return *m_bakBuilder; }
-//    item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
-    item::equipment::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
+    item::BakBuilder& bakBuilder() { return *m_bakBuilder; }
+//    item::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
+    item::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
 #ifdef USE_EXTRA_EQUIPMENT
-    item::equipment::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
-    item::equipment::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
+    item::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
+    item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
-    item::equipment::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
-    item::equipment::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
-    item::equipment::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
-    item::equipment::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
-    item::equipment::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
-    item::equipment::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
+    item::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
+    item::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
+    item::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
+    item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
+    item::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
+    item::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
 #ifdef USE_MODULES
     BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
@@ -189,19 +187,19 @@ private:
     ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
 #endif // USE_ARTEFACTS
 
-    item::equipment::BakBuilder* m_bakBuilder = nullptr;
-//    item::equipment::DriveBuilder* m_driveBuilder = nullptr;
-    item::equipment::DroidBuilder* m_droidBuilder = nullptr;
+    item::BakBuilder* m_bakBuilder = nullptr;
+//    item::DriveBuilder* m_driveBuilder = nullptr;
+    item::DroidBuilder* m_droidBuilder = nullptr;
 #ifdef USE_EXTRA_EQUIPMENT
-    item::equipment::EnergizerBuilder* m_energizerBuilder = nullptr;
-    item::equipment::FreezerBuilder* m_freezerBuilder = nullptr;
+    item::EnergizerBuilder* m_energizerBuilder = nullptr;
+    item::FreezerBuilder* m_freezerBuilder = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    item::equipment::GrappleBuilder* m_grappleBuilder = nullptr;
-    item::equipment::ProtectorBuilder* m_protectorBuilder = nullptr;
-    item::equipment::RadarBuilder* m_radarBuilder = nullptr;
-    item::equipment::ScanerBuilder* m_scanerBuilder = nullptr;
-    item::equipment::RocketBuilder* m_rocketBuilder = nullptr;
-    item::equipment::LazerBuilder* m_lazerBuilder = nullptr;
+    item::GrappleBuilder* m_grappleBuilder = nullptr;
+    item::ProtectorBuilder* m_protectorBuilder = nullptr;
+    item::RadarBuilder* m_radarBuilder = nullptr;
+    item::ScanerBuilder* m_scanerBuilder = nullptr;
+    item::RocketBuilder* m_rocketBuilder = nullptr;
+    item::LazerBuilder* m_lazerBuilder = nullptr;
 
 #ifdef USE_MODULES
     BakModuleBuilder* m_bakModuleBuilder = nullptr;

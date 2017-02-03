@@ -23,9 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace descriptor {
 namespace item {
-namespace equipment {
 
-class Drive : public Base
+class Drive : public BaseEquipment
 {
 public:
     static const int SPEED_MIN;
@@ -43,7 +42,7 @@ public:
     int hyper() const { return m_hyper; }
 
     std::string info() const override final {
-        std::string result = "Drive descriptor: " + descriptor::item::equipment::Base::info();
+        std::string result = "Drive descriptor: " + descriptor::item::Base::info();
         return result;
     }
 
@@ -61,7 +60,6 @@ private:
     }
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace descriptor
 
@@ -69,9 +67,8 @@ private:
 
 namespace model {
 namespace item {
-namespace equipment {
 
-class Drive : public Base
+class Drive : public BaseEquipment
 {
 public:
     Drive();
@@ -99,16 +96,14 @@ private:
     }
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace model
 
 
 namespace control {
 namespace item {
-namespace equipment {
 
-class Drive : public control::item::equipment::Base
+class Drive : public control::item::Base
 {
 public:
     Drive(int_t id);
@@ -118,21 +113,20 @@ private:
     virtual void updateProperties();
     void CountPrice();
 
-    model::item::equipment::Drive* model() const { return m_model_drive; }
-    descriptor::item::equipment::Drive* descriptor() const { return m_descriptor; }
+    model::item::Drive* model() const { return m_model_drive; }
+    descriptor::item::Drive* descriptor() const { return m_descriptor; }
 
 private:
     int m_speed_add = 0;
     int m_hyper_add = 0;
 
-    model::item::equipment::Drive* m_model_drive = nullptr;
-    descriptor::item::equipment::Drive* m_descriptor = nullptr;
+    model::item::Drive* m_model_drive = nullptr;
+    descriptor::item::Drive* m_descriptor = nullptr;
 
     void virtual addUniqueInfo();
     std::string speedStr();
     std::string hyperStr();
 };
 
-} // namespace equipment
 } // namespace item
 } // namespace control
