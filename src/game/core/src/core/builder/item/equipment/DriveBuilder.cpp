@@ -32,7 +32,7 @@ namespace item {
 namespace equipment {
 
 model::item::equipment::Drive*
-DriveBuilder::createTemplate(int_t id)
+Drive::createTemplate(int_t id)
 {
     model::item::equipment::Drive* drive = new model::item::equipment::Drive();
     assert(drive);
@@ -44,7 +44,7 @@ DriveBuilder::createTemplate(int_t id)
 } 
 
 model::item::equipment::Drive*
-DriveBuilder::getNew()
+Drive::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
     model::item::equipment::Drive* drive = createTemplate();
@@ -54,7 +54,7 @@ DriveBuilder::getNew()
 }
 
 model::item::equipment::Drive*
-DriveBuilder::getNew(const descriptor::BaseOLD& descriptor)
+Drive::getNew(const descriptor::BaseOLD& descriptor)
 {
     model::item::equipment::Drive* drive = createTemplate();
     createInternals(drive, descriptor);
@@ -62,7 +62,7 @@ DriveBuilder::getNew(const descriptor::BaseOLD& descriptor)
     return drive;
 }        
 
-void DriveBuilder::createInternals(model::item::equipment::Drive* drive, const descriptor::BaseOLD& descriptor)
+void Drive::createInternals(model::item::equipment::Drive* drive, const descriptor::BaseOLD& descriptor)
 {
     assert(false);
 //    ItemCommonData data = extractCommonData(descriptor);

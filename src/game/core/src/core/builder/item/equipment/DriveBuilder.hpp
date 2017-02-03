@@ -37,11 +37,11 @@ namespace builder {
 namespace item {
 namespace equipment {
 
-class DriveBuilder
+class Drive
 {
 public:
-    DriveBuilder()=default;
-    ~DriveBuilder()=default;
+    Drive()=default;
+    ~Drive()=default;
 
     static model::item::equipment::Drive* getNew();
     static model::item::equipment::Drive* createTemplate(int_t id = NONE);

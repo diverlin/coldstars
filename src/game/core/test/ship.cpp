@@ -51,7 +51,7 @@ TEST(ship, drop_item_to_space)
     control::Ship* ship = control::getNewShip();
 
     /* equip ship */
-    model::item::equipment::Drive* drive = builder::item::equipment::DriveBuilder::getNew();
+    model::item::equipment::Drive* drive = builder::item::equipment::Drive::getNew();
     assert(false);
 //    ship->manage(drive);
 
