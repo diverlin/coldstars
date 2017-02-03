@@ -51,8 +51,9 @@ TEST(ship, drop_item_to_space)
     control::Ship* ship = control::getNewShip();
 
     /* equip ship */
-    item::equipment::Drive* drive = core::global::get().driveBuilder().getNew();
-    ship->manage(drive);
+    model::item::equipment::Drive* drive = builder::item::equipment::DriveBuilder::getNew();
+    assert(false);
+//    ship->manage(drive);
 
     /* add ship */
     glm::vec3 pos(100.0f);

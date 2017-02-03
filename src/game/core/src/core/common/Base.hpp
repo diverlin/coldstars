@@ -23,6 +23,7 @@
 //#include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
 //#include <ceti/IdGenerator.hpp>
+#include <ceti/descriptor/BaseView.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -62,6 +63,43 @@ class EntityManager;
 //} // namespace descriptor
 
 
+namespace descriptor {
+
+class Base : public ceti::descriptor::BaseView
+{
+public:
+    Base() = default;
+    ~Base() = default;
+
+    void setType(const type::entity& major)   { m_identity.type = major; }
+    void setSubType(const type::entity& minor) { m_identity.subtype = minor; }
+    void setSubSubType(const type::entity& patch) { m_identity.subsubtype = patch; }
+
+    const core::Id& identity() const { return m_identity; }
+    const type::entity& type() const { return m_identity.type; }
+    const type::entity& subtype() const { return m_identity.subtype; }
+    const type::entity& subsubtype() const { return m_identity.subsubtype; }
+
+    std::string info() const {
+        std::string result = "fill me";
+        return result;
+    }
+
+private:
+    core::Id m_identity;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
+        ar & m_identity;
+    }
+};
+
+}
+
+
 namespace model {
 
 class Base : public ceti::model::BaseView
@@ -73,23 +111,23 @@ public:
     std::string data() const;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const type::entity& major)   { m_type.type = major; }
-    void setSubType(const type::entity& minor) { m_type.subtype = minor; }
-    void setSubSubType(const type::entity& patch) { m_type.subsubtype = patch; }
+    void setType(const type::entity& major)   { m_identity.type = major; }
+    void setSubType(const type::entity& minor) { m_identity.subtype = minor; }
+    void setSubSubType(const type::entity& patch) { m_identity.subsubtype = patch; }
 
     void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
-    const core::Id& ident() const { return m_type; }
+    const core::Id& identity() const { return m_identity; }
     int_t id() const { return m_id; }
-    const type::entity& type() const { return m_type.type; }
-    const type::entity& subtype() const { return m_type.subtype; }
-    const type::entity& subsubtype() const { return m_type.subsubtype; }
+    const type::entity& type() const { return m_identity.type; }
+    const type::entity& subtype() const { return m_identity.subtype; }
+    const type::entity& subsubtype() const { return m_identity.subsubtype; }
     int_t descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
 
     std::string typeInfo() const;
 
 private:
-    core::Id m_type;
+    core::Id m_identity;
     int_t m_descriptor = NONE;
     int_t m_id = NONE;
 
@@ -98,7 +136,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::model::BaseView>(*this);
-        ar & m_type;
+        ar & m_identity;
         ar & m_descriptor;
         ar & m_id;
     }

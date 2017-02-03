@@ -25,27 +25,35 @@ namespace descriptor {
 class BaseOLD;
 } // namespace descriptor
 
+namespace model {
 namespace item {
 namespace equipment {
-
 class Drive;
+} // namespace equipment
+} // namespace item
+} // namespace model
+
+namespace builder {
+namespace item {
+namespace equipment {
 
 class DriveBuilder
 {
 public:
-    DriveBuilder();
-    ~DriveBuilder();
+    DriveBuilder()=default;
+    ~DriveBuilder()=default;
 
-    item::equipment::Drive* getNew() const;
-    item::equipment::Drive* createTemplate(int_t id = NONE) const;
-    item::equipment::Drive* getNew(const descriptor::BaseOLD&) const;
+    static model::item::equipment::Drive* getNew();
+    static model::item::equipment::Drive* createTemplate(int_t id = NONE);
+    static model::item::equipment::Drive* getNew(const descriptor::BaseOLD&);
 
 private:
-    void createInternals(item::equipment::Drive*, const descriptor::BaseOLD&) const;
+    static void createInternals(model::item::equipment::Drive*, const descriptor::BaseOLD&);
 }; 
 
 } // namespace equipment
 } // namespace item
+} // namespace builder
 
 
 

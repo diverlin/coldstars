@@ -45,7 +45,7 @@ class ProtectorArtefactBuilder;
 namespace item {
 namespace equipment {
 class BakBuilder;
-class DriveBuilder;
+//class DriveBuilder;
 class DroidBuilder;
 #ifdef USE_EXTRA_EQUIPMENT
 class EnergizerBuilder;
@@ -122,7 +122,7 @@ public:
 #endif // USE_ARTEFACTS
 
     item::equipment::BakBuilder& bakBuilder() { return *m_bakBuilder; }
-    item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
+//    item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
     item::equipment::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
 #ifdef USE_EXTRA_EQUIPMENT
     item::equipment::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
@@ -190,7 +190,7 @@ private:
 #endif // USE_ARTEFACTS
 
     item::equipment::BakBuilder* m_bakBuilder = nullptr;
-    item::equipment::DriveBuilder* m_driveBuilder = nullptr;
+//    item::equipment::DriveBuilder* m_driveBuilder = nullptr;
     item::equipment::DroidBuilder* m_droidBuilder = nullptr;
 #ifdef USE_EXTRA_EQUIPMENT
     item::equipment::EnergizerBuilder* m_energizerBuilder = nullptr;

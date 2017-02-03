@@ -49,10 +49,10 @@ private:
     int m_deterioration = 0;
     int m_mass = 0;
     int m_price = 0;
-    int m_type = 0;  // descriptor type
 
-    std::string info() const override final {
-        std::string result = "Base descriptor: " + Base::info();
+protected:
+    std::string info() const {
+        std::string result = "::descriptor::Base: " + ::descriptor::Base::info();
         return result;
     }
 
@@ -68,7 +68,6 @@ private:
         ar & m_deterioration;
         ar & m_mass;
         ar & m_price;
-        ar & m_type;  // descriptor type
     }
 };
 
@@ -138,14 +137,10 @@ private:
 } // naemspace item
 } // namespace model
 
+
+
 namespace control {
 namespace item {
-
-//struct UnresolvedDataBaseItem
-//{
-//    std::string textureOb_path;
-//    int_t item_slot_id;
-//};
 
 class Base : public ::control::Base
 {
