@@ -27,19 +27,14 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-
+namespace builder {
 namespace item {
 namespace equipment {
 
-DriveBuilder::DriveBuilder()
-{}
-
-DriveBuilder::~DriveBuilder()
-{}
-
-Drive* DriveBuilder::createTemplate(int_t id) const
+model::item::equipment::Drive*
+DriveBuilder::createTemplate(int_t id)
 {
-    Drive* drive = new Drive(id);
+    model::item::equipment::Drive* drive = new model::item::equipment::Drive();
     assert(drive);
 
     assert(false);
@@ -48,36 +43,39 @@ Drive* DriveBuilder::createTemplate(int_t id) const
     return drive;
 } 
 
-Drive* DriveBuilder::getNew() const
+model::item::equipment::Drive*
+DriveBuilder::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
-    Drive* drive = createTemplate();
+    model::item::equipment::Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 
     return drive;
 }
 
-Drive* DriveBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+model::item::equipment::Drive*
+DriveBuilder::getNew(const descriptor::BaseOLD& descriptor)
 {
-    Drive* drive = createTemplate();
+    model::item::equipment::Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 
     return drive;
 }        
 
-void DriveBuilder::createInternals(Drive* drive, const descriptor::BaseOLD& descriptor) const
-{     
-    ItemCommonData data = extractCommonData(descriptor);
+void DriveBuilder::createInternals(model::item::equipment::Drive* drive, const descriptor::BaseOLD& descriptor)
+{
+    assert(false);
+//    ItemCommonData data = extractCommonData(descriptor);
 
-    drive->SetSpeedOrig(descriptor.speed());
-    drive->SetHyperOrig(descriptor.hyper());
-    drive->setParentSubTypeId(type::entity::DRIVE_SLOT_ID);
-    drive->setItemCommonData(data);
+//    drive->SetSpeedOrig(descriptor.speed());
+//    drive->SetHyperOrig(descriptor.hyper());
+//    drive->setParentSubTypeId(type::entity::DRIVE_SLOT_ID);
+//    drive->setItemCommonData(data);
     
-    drive->updateProperties();
-    drive->CountPrice();
+//    drive->updateProperties();
+//    drive->CountPrice();
 }
 
 } // namespace equipment
 } // namespace item
-
+} // namespace builder

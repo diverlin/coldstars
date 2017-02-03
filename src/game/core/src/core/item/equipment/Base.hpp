@@ -35,9 +35,9 @@ public:
     Base() = default;
     ~Base() = default;
 
-private:
-    std::string info() const override final {
-        std::string result = "Base descriptor: " + Base::info();
+protected:
+    std::string info() const {
+        std::string result = "descriptor::item::Base: " + descriptor::item::Base::info();
         return result;
     }
 

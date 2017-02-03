@@ -123,8 +123,9 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->addItem(core::global::get().grappleBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
-        store->addItem(core::global::get().driveBuilder().getNew(descr));
+        assert(false);
+//        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
+//        store->addItem(core::global::get().driveBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
         const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);

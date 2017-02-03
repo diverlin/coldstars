@@ -27,16 +27,6 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
-namespace descriptor {
-namespace item {
-namespace equipment {
-
-} // namespace equipment
-} // namespace item
-} // namespace descriptor
-
-
-
 namespace control {
 namespace item {
 namespace equipment {

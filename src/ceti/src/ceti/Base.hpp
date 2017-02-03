@@ -27,6 +27,40 @@
 
 namespace ceti {
 
+namespace descriptor {
+
+//class BaseView : private NonCopyable
+//{
+//public:
+//    BaseView() = default;
+//    ~BaseView() = default;
+
+//    void setMesh(int mesh) { m_mesh = mesh; }
+//    void setMaterial(int material) { m_material = material; }
+
+//    int_t mesh() const { return m_mesh; }
+//    int_t material() const { return m_material; }
+
+//    std::string info() const {
+//        std::string result = "fill me";
+//        return result;
+//    }
+
+//private:
+//    int_t m_mesh = NONE;
+//    int_t m_material = NONE;
+
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & m_mesh;
+//        ar & m_material;
+//    }
+//};
+
+} // namespace descriptor
+
 namespace model {
 
 class BaseView : private NonCopyable
@@ -50,8 +84,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & m_mesh;
         ar & m_material;
     }

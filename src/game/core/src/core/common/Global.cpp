@@ -107,7 +107,7 @@ global::global()
     #endif // USE_ARTEFACTS
 
     , m_bakBuilder(new item::equipment::BakBuilder)
-    , m_driveBuilder(new item::equipment::DriveBuilder)
+//    , m_driveBuilder(new item::equipment::DriveBuilder)
     , m_droidBuilder(new item::equipment::DroidBuilder)
     #ifdef USE_EXTRA_EQUIPMENT
     , m_energizerBuilder(new item::equipment::EnergizerBuilder)
@@ -165,7 +165,7 @@ global::~global()
 #endif // USE_ARTEFACTS
 
     delete m_bakBuilder;
-    delete m_driveBuilder;
+//    delete m_driveBuilder;
     delete m_droidBuilder;
 #ifdef USE_EXTRA_EQUIPMENT
     delete m_energizerBuilder;

@@ -39,8 +39,11 @@ public:
     virtual ~Drive() = default;
     std::string data() const;
 
+    int speed() const { return m_speed; }
+    int hyper() const { return m_hyper; }
+
     std::string info() const override final {
-        std::string result = "Drive descriptor: " + Base::info();
+        std::string result = "Drive descriptor: " + descriptor::item::equipment::Base::info();
         return result;
     }
 
@@ -75,6 +78,9 @@ public:
     ~Drive() = default;
     Drive(const std::string& data);
     std::string data() const;
+
+    void setSpeed(int speed) { m_speed = speed; }
+    void setHyper(int hyper) { m_hyper = hyper; }
 
     int speed() const { return m_speed; }
     int hyper() const { return m_hyper; }
@@ -113,6 +119,7 @@ private:
     void CountPrice();
 
     model::item::equipment::Drive* model() const { return m_model_drive; }
+    descriptor::item::equipment::Drive* descriptor() const { return m_descriptor; }
 
 private:
     int m_speed_add = 0;
@@ -122,8 +129,8 @@ private:
     descriptor::item::equipment::Drive* m_descriptor = nullptr;
 
     void virtual addUniqueInfo();
-    std::string GetSpeedStr();
-    std::string GetHyperStr();
+    std::string speedStr();
+    std::string hyperStr();
 };
 
 } // namespace equipment
