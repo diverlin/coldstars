@@ -26,7 +26,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace ceti {
-
 namespace descriptor {
 
 class BaseView
@@ -37,14 +36,13 @@ public:
     }
     ~BaseView() = default;
 
-    int_t id() const { return m_id; }
     int_t texture() const { return m_texture; }
     int_t mesh() const { return m_mesh; }
 
     void setTexture(int_t texture) { m_texture = texture; }
     void setMesh(int_t mesh) { m_mesh = mesh; }
-    virtual std::string info() const {
-        std::string result = "descriptor::BaseView: \n";
+    std::string info() const {
+        std::string result = "ceti::descriptor::BaseView: \n";
         result += std::string(" id = ") + std::to_string(m_id) + "\n";
         result += std::string(" material = ") + std::to_string(m_texture) + "\n";
         result += std::string(" geometry = ") + std::to_string(m_mesh) + "\n";
@@ -78,5 +76,4 @@ private:
 };
 
 } // namespace descriptor
-
 } // namespace ceti

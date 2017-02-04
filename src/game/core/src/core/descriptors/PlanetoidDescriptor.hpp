@@ -25,13 +25,10 @@ namespace descriptor {
 struct Planetoid : public SpaceObject
 {
 public:
-    Planetoid() {}
-    Planetoid(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    virtual ~Planetoid() {}
+    Planetoid() = default;
+    ~Planetoid() = default;
 
-    std::string info() const override {
+    std::string info() const {
         std::string result = "Planetoid descriptor:\n";
         result += std::string(" radiusA=") + std::to_string(m_radiusA) + "\n";
         result += std::string(" radiusB=") + std::to_string(m_radiusB) + "\n";

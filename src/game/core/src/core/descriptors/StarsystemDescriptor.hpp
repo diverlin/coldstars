@@ -31,10 +31,10 @@ public:
     std::vector<int_t> stars;
     std::vector<int_t> planets;
 
-    Starsystem() {}
-    ~Starsystem() {}
+    Starsystem() = default;
+    ~Starsystem() = default;
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Starsystem descriptor: " + ceti::descriptor::BaseView::info() + _str(" stars: ", stars) + _str(" planets: ", planets);
         return result;
     }

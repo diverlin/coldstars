@@ -31,7 +31,7 @@ public:
     }
     virtual ~SpaceObject() = default;
 
-    std::string info() const override {
+    std::string info() const {
         std::string result = "SpaceObject descriptor:\n";
         result += std::string(" armor=") + std::to_string(m_armor) + "\n";
         result += Orientation::info();

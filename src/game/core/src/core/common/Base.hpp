@@ -25,7 +25,7 @@
 //#include <ceti/IdGenerator.hpp>
 #include <ceti/descriptor/BaseView.hpp>
 
-#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ptree.hpp> // remove this
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -71,29 +71,37 @@ public:
     Base() = default;
     ~Base() = default;
 
-    void setType(const type::entity& major)   { m_identity.type = major; }
-    void setSubType(const type::entity& minor) { m_identity.subtype = minor; }
-    void setSubSubType(const type::entity& patch) { m_identity.subsubtype = patch; }
+    void setType(const type::entity& type)   { m_type = type; }
+    void setSubType(const type::entity& subtype) { m_subtype = subtype; }
+    void setSubSubType(const type::entity& subsubtype) { m_subsubtype = subsubtype; }
 
-    const core::Id& identity() const { return m_identity; }
-    const type::entity& type() const { return m_identity.type; }
-    const type::entity& subtype() const { return m_identity.subtype; }
-    const type::entity& subsubtype() const { return m_identity.subsubtype; }
+    int_t id() const { return m_id; }
+    const type::entity& type() const { return m_type; }
+    const type::entity& subtype() const { return m_subtype; }
+    const type::entity& subsubtype() const { return m_subsubtype; }
 
     std::string info() const {
-        std::string result = "fill me";
+        std::string result = ceti::descriptor::BaseView::info();
+        result += "::descriptor::Base: \n";
+        result += std::string(" type = ") + to_string(m_type) + "\n";
+        result += std::string(" subtype = ") + to_string(m_subtype) + "\n";
+        result += std::string(" subsubtype = ") + to_string(m_subsubtype) + "\n";
         return result;
     }
 
 private:
-    core::Id m_identity;
+    type::entity m_type = type::entity::NONE_ID;
+    type::entity m_subtype = type::entity::NONE_ID;
+    type::entity m_subsubtype = type::entity::NONE_ID;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
-        ar & m_identity;
+        ar & m_type;
+        ar & m_subtype;
+        ar & m_subsubtype;
     }
 };
 

@@ -82,17 +82,17 @@ void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree);
-    Base::LoadData(load_ptree);
-    GoodsPack::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    Base::LoadData(load_ptree);
+//    GoodsPack::LoadData(load_ptree);
 }
     
 /*virtual*/
 void GoodsPack::Resolve()
 {
-    Base::ResolveData();
-    Base::ResolveData();
-    GoodsPack::ResolveData();
+//    Base::ResolveData();
+//    Base::ResolveData();
+//    GoodsPack::ResolveData();
 }
 
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

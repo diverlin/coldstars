@@ -79,7 +79,7 @@ Container::__getNewTemplate()
 //    return container;
 //}
 
-//Container* ContainerBuilder::create(item::BaseItem* item) const
+//Container* ContainerBuilder::create(item::Base* item) const
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, item);

@@ -158,5 +158,5 @@ type::entity::GRAPPLE_MODULE_ID,
 type::entity::SCANER_MODULE_ID
 };    
 
-std::string str(type::entity);
+std::string to_string(type::entity);
 

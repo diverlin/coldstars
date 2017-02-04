@@ -25,6 +25,10 @@
 
 namespace descriptor {
 
+namespace item {
+class Drive;
+} // namespace item
+
 class Galaxy;
 class Sector;
 class Starsystem;
@@ -51,8 +55,11 @@ descriptor::Satellite getNewSatellite();
 descriptor::BaseOLD getNewContainer();
 
 /* items */
+namespace item {
+descriptor::item::Drive getNewDrive(int race = -1, int tech_level = -1);
+} // namespace item
+
 descriptor::BaseOLD getNewBak(int race = -1, int tech_level = -1);
-descriptor::BaseOLD getNewDrive(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewDroid(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewGrapple(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewScaner(int race = -1, int tech_level = -1);

@@ -38,9 +38,9 @@ public:
     Star(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Star() = default;
+    ~Star() = default;
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Star descriptor: " + Planetoid::info();
         return result;
     }

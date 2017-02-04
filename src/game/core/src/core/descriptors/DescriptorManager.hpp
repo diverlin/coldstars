@@ -27,6 +27,7 @@
 #include <core/descriptors/PlanetDescriptor.hpp>
 #include <core/descriptors/AsteroidDescriptor.hpp>
 #include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/item/equipment/Drive.hpp> // descriptor
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -38,6 +39,10 @@
 #include <string>
 
 namespace descriptor {
+
+//namespace item {
+//class Drive;
+//} // namespace item
 
 template<typename T>
 class MManager {
@@ -127,6 +132,9 @@ public:
     void add(const Satellite& satellite) {
         m_satellite.add(satellite);
     }
+    void add(const item::Drive& drive) {
+        m_drive.add(drive);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -143,6 +151,7 @@ public:
     const MManager<Ship>& ship() const { return m_ship; }
     const MManager<SpaceStation>& spacestation() const { return m_spacestation; }
     const MManager<Satellite>& satellite() const { return m_satellite; }
+    const MManager<item::Drive>& drive() const { return m_drive; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -164,6 +173,7 @@ private:
     MManager<Ship> m_ship;
     MManager<SpaceStation> m_spacestation;
     MManager<Satellite> m_satellite;
+    MManager<item::Drive> m_drive;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

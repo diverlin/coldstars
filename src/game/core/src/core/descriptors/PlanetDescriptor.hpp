@@ -39,9 +39,9 @@ public:
     Planet(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Planet() = default;
+    ~Planet() = default;
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Planet descriptor: " + Planetoid::info();
         return result;
     }

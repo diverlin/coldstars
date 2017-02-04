@@ -590,7 +590,9 @@ getNewBak(int race, int tech_level)
     return descriptor;
 }
 
-descriptor::BaseOLD
+namespace item {
+
+descriptor::item::Drive
 getNewDrive(int race, int tech_level)
 {
     if (race == -1) {
@@ -600,9 +602,9 @@ getNewDrive(int race, int tech_level)
         tech_level = int(type::tech::LEVEL0);
     }
 
-    int modules_num_max        = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-    int mass                   = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
-    int condition_max          = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX);
+    int modules       = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
+    int condition     = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
@@ -611,13 +613,24 @@ getNewDrive(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
-    descriptor::BaseOLD descriptor(descriptor::Type::DRIVE);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::SPEED, speed);
-    descriptor.add(descriptor::Key::HYPER, hyper);
-    return descriptor;
+    descriptor::item::Drive descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Drive
+    descr.setSpeed(speed);
+    descr.setHyper(hyper);
+
+    return descr;
 }
+
+} // anemspace item
 
 descriptor::BaseOLD
 getNewDroid(int race, int tech_level)

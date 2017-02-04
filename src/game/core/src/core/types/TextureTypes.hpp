@@ -59,5 +59,5 @@ enum class texture: int
 
 
 
-std::string str(type::texture);
+std::string to_string(type::texture);
 

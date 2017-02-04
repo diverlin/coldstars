@@ -28,15 +28,14 @@ enum class tech {
 };
 }
 
-const std::vector<type::tech> TECH_TYPES =
-{
+const std::vector<type::tech> TECH_TYPES = {
     type::tech::LEVEL0,
     type::tech::LEVEL1,
     type::tech::LEVEL2,
     type::tech::LEVEL3
 };
 
-std::string getTechLevelStr(type::tech); 
+std::string to_string(type::tech);
 
 
 

@@ -155,7 +155,7 @@ Manager::generate()
     for(int i=0; i<num; ++i) {
         // items
         add(getNewBak());
-        add(getNewDrive());
+        add(item::getNewDrive());
         add(getNewDroid());
         add(getNewGrapple());
         add(getNewScaner());

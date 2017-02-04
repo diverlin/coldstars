@@ -41,10 +41,23 @@ public:
     Base() = default;
     ~Base() = default;
 
+    void setRace(type::race race) { m_race = race; }
+    void setTech(type::tech tech) { m_tech = tech; }
+    void setCondition(int condition) { m_condition = condition; }
+    void setDeterioration(int deterioration) { m_deterioration = deterioration; }
+    void setMass(int mass) { m_mass = mass; }
+    void setPrice(int price) { m_price = price; }
+
+    type::race race() const { return m_race; }
+    type::tech tech() const { return m_tech; }
+    int condition() const { return m_condition; }
+    int deterioration() const { return m_deterioration; }
+    int mass() const { return m_mass; }
+    int price() const { return m_price; }
+
 private:
     type::race m_race = type::race::R0_ID;
     type::tech m_tech = type::tech::NONE;
-    int m_modules = 0;
     int m_condition = 0;
     int m_deterioration = 0;
     int m_mass = 0;
@@ -52,7 +65,14 @@ private:
 
 protected:
     std::string info() const {
-        std::string result = "::descriptor::Base: " + ::descriptor::Base::info();
+        std::string result = ::descriptor::Base::info();
+        result += "descriptor::item::Base: \n";
+        result += std::string(" race = ") + to_string(m_race) + "\n";
+        result += std::string(" tech = ") + to_string(m_tech) + "\n";
+        result += std::string(" condition = ") + std::to_string(m_condition) + "\n";
+        result += std::string(" deterioration = ") + std::to_string(m_deterioration) + "\n";
+        result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
+        result += std::string(" price = ") + std::to_string(m_price) + "\n";
         return result;
     }
 
@@ -63,7 +83,6 @@ private:
         ar & boost::serialization::base_object<::descriptor::Base>(*this);
         ar & m_race;
         ar & m_tech;
-        ar & m_modules;
         ar & m_condition;
         ar & m_deterioration;
         ar & m_mass;
@@ -212,7 +231,7 @@ protected:
     type::entity m_parent_subtype_id = type::entity::NONE_ID;
 
     ItemCommonData m_data;
-//    UnresolvedDataBaseItem m_data_unresolved_BaseItem;
+//    UnresolvedDataBase m_data_unresolved_Base;
     //        InfoTable info;
 
     void _updateLock();

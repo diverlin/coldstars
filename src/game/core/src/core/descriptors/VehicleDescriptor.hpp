@@ -90,7 +90,7 @@ public:
     void setArtefactSlotNum(int artefactSlotNum) { m_artefactSlotNum = artefactSlotNum; }
     void setCargoSlotNum(int otsecSlotNum) { m_cargoSlotNum = otsecSlotNum; }
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Vehicle descriptor:\n";
         result += std::string(" race = ") + meti::to_string(m_race) + "\n";
 
