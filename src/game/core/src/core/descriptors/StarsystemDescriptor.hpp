@@ -18,14 +18,16 @@
 
 #pragma once
 
+#include <core/common/Base.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <ceti/Base.hpp>
+//#include <ceti/Base.hpp>
 
 #include <vector>
 
 namespace descriptor {
 
-struct Starsystem : public ceti::descriptor::BaseView
+struct Starsystem : public Base
 {
 public:
     std::vector<int_t> stars;
@@ -35,7 +37,9 @@ public:
     ~Starsystem() = default;
 
     std::string info() const {
-        std::string result = "Starsystem descriptor: " + ceti::descriptor::BaseView::info() + _str(" stars: ", stars) + _str(" planets: ", planets);
+        std::string result = "descriptor::Starsyster: " + Base::info();
+        result += ceti::to_string(" stars: ", stars);
+        result += ceti::to_string(" planets: ", planets);
         return result;
     }
 }; 

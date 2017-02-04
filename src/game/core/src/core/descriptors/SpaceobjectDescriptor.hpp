@@ -26,10 +26,7 @@ struct SpaceObject : public Orientation
 {
 public:
     SpaceObject() = default;
-    SpaceObject(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    virtual ~SpaceObject() = default;
+    ~SpaceObject() = default;
 
     std::string info() const {
         std::string result = "SpaceObject descriptor:\n";
@@ -47,8 +44,7 @@ private:
 
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Orientation>(*this);
         ar & m_armor;
     }

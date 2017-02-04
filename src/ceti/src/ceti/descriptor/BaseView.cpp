@@ -19,11 +19,7 @@
 #include "BaseView.hpp"
 
 namespace ceti {
-
 namespace descriptor {
 
-IdGenerator BaseView::m_idGenerator;
-
 } // namespace descriptor
-
 } // namespace ceti

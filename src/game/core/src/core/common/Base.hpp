@@ -65,12 +65,13 @@ class EntityManager;
 
 namespace descriptor {
 
-class Base : public ceti::descriptor::BaseView
+class Base
 {
 public:
     Base() = default;
     ~Base() = default;
 
+    void setId(int_t id) { m_id = id; }
     void setType(const type::entity& type)   { m_type = type; }
     void setSubType(const type::entity& subtype) { m_subtype = subtype; }
     void setSubSubType(const type::entity& subsubtype) { m_subsubtype = subsubtype; }
@@ -81,8 +82,8 @@ public:
     const type::entity& subsubtype() const { return m_subsubtype; }
 
     std::string info() const {
-        std::string result = ceti::descriptor::BaseView::info();
-        result += "::descriptor::Base: \n";
+        std::string result = "descriptor::Base:\n";
+        result += std::string(" id = ") + std::to_string(m_id) + "\n";
         result += std::string(" type = ") + to_string(m_type) + "\n";
         result += std::string(" subtype = ") + to_string(m_subtype) + "\n";
         result += std::string(" subsubtype = ") + to_string(m_subsubtype) + "\n";
@@ -90,6 +91,7 @@ public:
     }
 
 private:
+    int_t m_id = NONE;
     type::entity m_type = type::entity::NONE_ID;
     type::entity m_subtype = type::entity::NONE_ID;
     type::entity m_subsubtype = type::entity::NONE_ID;
@@ -98,14 +100,14 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
+        ar & m_id;
         ar & m_type;
         ar & m_subtype;
         ar & m_subsubtype;
     }
 };
 
-}
+} // namespace descriptor
 
 
 namespace model {
