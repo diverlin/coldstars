@@ -24,7 +24,7 @@ std::string to_string(type::tech techlevel_id)
 {
     switch(techlevel_id)
     {
-        case type::tech::NONE: { return "TECH_NONE"; break; }
+        case type::tech::NONE: { return "NONE"; break; }
         
         case type::tech::LEVEL0: { return "TECH0"; break; }
         case type::tech::LEVEL1: { return "TECH1"; break; }
