@@ -35,7 +35,7 @@ public:
     }
     virtual ~Orientation() = default;
 
-    std::string info() const override {
+    std::string info() const {
         std::string result = "Orientation descriptor:\n";
         result += std::string(" size = ") + meti::to_string(m_size) + "\n";
 

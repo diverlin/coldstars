@@ -35,14 +35,20 @@ public:
 public:
     Drive() = default;
     Drive(const std::string& data);
-    virtual ~Drive() = default;
+    ~Drive() = default;
     std::string data() const;
+
+    void setSpeed(int speed) { m_speed = speed; }
+    void setHyper(int hyper) { m_hyper = hyper; }
 
     int speed() const { return m_speed; }
     int hyper() const { return m_hyper; }
 
-    std::string info() const override final {
-        std::string result = "Drive descriptor: " + descriptor::item::Base::info();
+    std::string info() const {
+        std::string result = descriptor::item::BaseEquipment::info();
+        result += "descriptor::item::Drive:\n";
+        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
+        result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
         return result;
     }
 
@@ -54,7 +60,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
         ar & m_speed;
         ar & m_hyper;
     }

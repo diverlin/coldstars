@@ -19,7 +19,7 @@
 
 #include "RaceTypes.hpp"
 
-std::string getRaceStr(type::race race_id) 
+std::string to_string(type::race race_id) 
 {
     switch(race_id)
     {

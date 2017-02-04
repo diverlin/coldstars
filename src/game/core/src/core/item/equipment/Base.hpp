@@ -34,17 +34,27 @@ public:
     BaseEquipment() = default;
     ~BaseEquipment() = default;
 
+    void setModules(int modules) { m_modules = modules; }
+
+    int modules() const { return m_modules; }
+
 protected:
     std::string info() const {
-        std::string result = "descriptor::item::Base: " + descriptor::item::Base::info();
+        std::string result = descriptor::item::Base::info();
+        result += "descriptor::item::BaseEquipment:\n";
+        result += std::string(" modules = ") + std::to_string(m_modules) + "\n";
         return result;
     }
+
+private:
+    int m_modules = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<descriptor::item::Base>(*this);
+        ar & m_modules;
     }
 };
 

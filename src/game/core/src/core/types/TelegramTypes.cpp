@@ -19,7 +19,7 @@
 
 #include "TelegramTypes.hpp"
 
-std::string str(const TELEGRAM& type_id)
+std::string to_string(const TELEGRAM& type_id)
 {
     switch (type_id) {
     /** CREATE */

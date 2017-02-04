@@ -31,10 +31,10 @@ struct Galaxy : public ceti::descriptor::BaseView
         bool allow_invasion = true;
         std::vector<int_t> sectors;
         
-        Galaxy() {}
-        ~Galaxy() {}
+        Galaxy() = default;
+        ~Galaxy() = default;
 
-        std::string info() const override final {
+        std::string info() const {
             std::string result = "Galaxy descriptor: " + ceti::descriptor::BaseView::info() + _str(" sectors: ", sectors);
             return result;
         }

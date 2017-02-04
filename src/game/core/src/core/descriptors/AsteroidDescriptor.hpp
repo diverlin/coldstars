@@ -40,9 +40,9 @@ public:
     Asteroid(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    virtual ~Asteroid() = default;
+    ~Asteroid() = default;
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Asteroid descriptor: " + Planetoid::info();
         return result;
     }

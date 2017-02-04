@@ -18,7 +18,7 @@
 
 #include "EntityTypes.hpp"
 
-std::string str(type::entity type_id)
+std::string to_string(type::entity type_id)
 {
     switch(type_id)
     {

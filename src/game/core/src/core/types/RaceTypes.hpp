@@ -35,7 +35,7 @@ namespace type
     };
 }
 
-std::string getRaceStr(type::race); 
+std::string to_string(type::race);
 
 
 

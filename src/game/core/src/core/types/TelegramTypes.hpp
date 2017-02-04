@@ -51,7 +51,7 @@ enum class TELEGRAM : int
     EXPLOSION
 };
 
-std::string str(const TELEGRAM&);
+std::string to_string(const TELEGRAM&);
 
 
 

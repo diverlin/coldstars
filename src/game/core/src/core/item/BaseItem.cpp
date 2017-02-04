@@ -37,12 +37,12 @@ Base::Base()
 /* virtual */
 Base::~Base()
 {
-//    LOG("___::~BaseItem("+std::to_string(id())+")");
+//    LOG("___::~Base("+std::to_string(id())+")");
 }
 
 void Base::doLock(int lock)
 {
-    LOG("BaseItem::LockEvent");
+    LOG("Base::LockEvent");
     
     bool was_working = false;
     if (m_locked_turns == 0) {
@@ -73,7 +73,7 @@ void Base::useOverloadDeterioration()
  
 void Base::doBreak()
 {
-    LOG("BaseItem::broken");
+    LOG("Base::broken");
     m_condition = 0;
     m_slot->updateVehiclePropetries();
 }
@@ -104,7 +104,7 @@ void Base::_updateLock()
     }
 }     
 
-//void BaseItem::UpdateInfo()
+//void Base::UpdateInfo()
 //{
 ////    info.clear();
 
@@ -112,7 +112,7 @@ void Base::_updateLock()
 //    AddCommonInfo();
 //}
 
-//void BaseItem::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
+//void Base::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
 //{
 //    UpdateInfo();
     
@@ -122,12 +122,12 @@ void Base::_updateLock()
 //}
 
 ///* virtual */
-//void BaseItem::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+//void Base::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 //{
 //    RenderKorpus(render, box);
 //}
 
-//void BaseItem::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
+//void Base::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
 //{
 //    glm::vec2 v(0.0);
 //    glm::vec4 c(1.0, 1.0, 1.0, 1.0);
@@ -140,7 +140,7 @@ void Base::_updateLock()
 
 void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-//    LOG(" BaseItem::SaveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" Base::SaveData()  id=" + std::to_string(id()) + " START");
     
 //    save_ptree.put(root+"price", m_price);
 //    save_ptree.put(root+"condition", m_condition);
@@ -165,7 +165,7 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-//    LOG(" BaseItem::LoadData()  id=" + std::to_string(id()) + " START");
+//    LOG(" Base::LoadData()  id=" + std::to_string(id()) + " START");
     
 //    m_price             = load_ptree.get<int>("price");
 //    m_condition         = load_ptree.get<int>("condition");
@@ -180,22 +180,22 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 //    m_data.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
 //    m_data.mass                 = load_ptree.get<int>("data_item.mass");
                     
-//    m_data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
-//    m_data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
+//    m_data_unresolved_Base.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
+//    m_data_unresolved_Base.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
 }
                 
 void Base::ResolveData()
 {
-//    LOG(" BaseItem::ResolveData()  id=" + std::to_string(id()) + " START");
+//    LOG(" Base::ResolveData()  id=" + std::to_string(id()) + " START");
     
-//    //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
+//    //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_Base.textureOb_path));
     
 //    useNormalDeterioration();
 //    updateProperties(); // this function must be performed before inserting to slot!!!
         
-//    if(m_data_unresolved_BaseItem.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
+//    if(m_data_unresolved_Base.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
 //    {
-//        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_BaseItem.item_slot_id))->insert(this);
+//        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_Base.item_slot_id))->insert(this);
 //    }
 }
 

@@ -68,11 +68,11 @@ WeaponComplex::equipedWeakestSlot() const
     control::ItemSlot* result = nullptr;
     for(control::ItemSlot* slot: m_slots) {
         if (slot->item()) {
-            int price = slot->item()->price();
-            if ((price_min > price) || (price_min == 0)) {
-                price_min = price;
-                result = slot;
-            }
+//            int price = slot->item()->price();
+//            if ((price_min > price) || (price_min == 0)) {
+//                price_min = price;
+//                result = slot;
+//            }
         }
     }
 

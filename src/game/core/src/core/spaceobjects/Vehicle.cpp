@@ -367,7 +367,7 @@ bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 }
 
 #ifdef USE_MODULES
-bool Vehicle::installModule(item::BaseItem* item)
+bool Vehicle::installModule(item::Base* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
         if (m_SlotFunct_vec[i]->item()) {
@@ -381,7 +381,7 @@ bool Vehicle::installModule(item::BaseItem* item)
 #endif
 
 #ifdef EANBLE_ARTEFACTS
-bool Vehicle::installArtefact(item::BaseItem* item)
+bool Vehicle::installArtefact(item::Base* item)
 {
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
     if (artef_slot) {
@@ -1903,7 +1903,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //}
 
 //#ifdef USE_MODULES
-//bool Vehicle::installModule(item::BaseItem* item)
+//bool Vehicle::installModule(item::Base* item)
 //{
 //    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
 //        if (m_SlotFunct_vec[i]->item()) {
@@ -1917,7 +1917,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //#endif
 
 //#ifdef EANBLE_ARTEFACTS
-//bool Vehicle::installArtefact(item::BaseItem* item)
+//bool Vehicle::installArtefact(item::Base* item)
 //{
 //    ItemSlot* artef_slot = GetEmptyArtefactSlot();
 //    if (artef_slot) {

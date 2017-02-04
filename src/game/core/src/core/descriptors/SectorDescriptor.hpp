@@ -33,7 +33,7 @@ public:
     Sector() {}
     ~Sector() {}
 
-    std::string info() const override final {
+    std::string info() const {
         std::string result = "Sector descriptor: " + ceti::descriptor::BaseView::info() + _str(" starsystems:", starsystems);
         return result;
     }

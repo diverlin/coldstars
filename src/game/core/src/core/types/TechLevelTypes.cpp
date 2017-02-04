@@ -20,7 +20,7 @@
 #include "TechLevelTypes.hpp"
 
 
-std::string getTechLevelStr(type::tech techlevel_id) 
+std::string to_string(type::tech techlevel_id) 
 {
     switch(techlevel_id)
     {

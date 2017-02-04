@@ -46,7 +46,7 @@ public:
     static model::Container* getNew(const std::string& data);
     static model::Container* getNew(const descriptor::BaseOLD&);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
-    //        Container* create(item::BaseItem*) const;
+    //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:

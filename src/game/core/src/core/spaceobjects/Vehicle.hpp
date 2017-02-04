@@ -325,10 +325,10 @@ protected:
     bool _installItem(control::item::Base*);
     bool _installEquipment(control::item::Base*);
 #ifdef USE_MODULES
-    bool installModule(control::item::BaseItem*);
+    bool installModule(control::item::Base*);
 #endif // USE_MODULES
 #ifdef USE_ARTEFACTS
-    bool installArtefact(item::BaseItem*);
+    bool installArtefact(item::Base*);
 #endif // USE_ARTEFACTS
     bool _installGoodsPack(control::item::Base*);
 
@@ -566,10 +566,10 @@ private:
 //    bool _installItem(item::Base*);
 //    bool _installEquipment(item::Base*);
 //#ifdef USE_MODULES
-//    bool installModule(item::BaseItem*);
+//    bool installModule(item::Base*);
 //#endif // USE_MODULES
 //#ifdef USE_ARTEFACTS
-//    bool installArtefact(item::BaseItem*);
+//    bool installArtefact(item::Base*);
 //#endif // USE_ARTEFACTS
 //    bool _installGoodsPack(item::Base*);
 
