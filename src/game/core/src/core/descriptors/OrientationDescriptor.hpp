@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <core/common/Base.hpp>
+
 #include <ceti/descriptor/BaseView.hpp>
 #include <ceti/serialization/macro.hpp>
 
@@ -25,21 +27,17 @@
 
 namespace descriptor {
 
-struct Orientation : public ceti::descriptor::BaseView
+struct Orientation : public Base, public ceti::descriptor::BaseView
 {
 public:
     Orientation() = default;
-    Orientation(const std::string& data)
-    {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    virtual ~Orientation() = default;
+    ~Orientation() = default;
 
     std::string info() const {
         std::string result = "Orientation descriptor:\n";
         result += std::string(" size = ") + meti::to_string(m_size) + "\n";
-
         result += ceti::descriptor::BaseView::info();
+        result += Base::info();
         return result;
     }
 
@@ -55,8 +53,8 @@ private:
 
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
         ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_size;
         ar & m_direction;

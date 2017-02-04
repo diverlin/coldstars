@@ -18,14 +18,16 @@
 
 #pragma once
 
-#include <ceti/descriptor/BaseView.hpp>
+#include <core/common/Base.hpp>
+
+#include <ceti/StringUtils.hpp>
 //#include <ceti/type/IdType.hpp>
 
 #include <vector>
 
 namespace descriptor {
 
-struct Galaxy : public ceti::descriptor::BaseView
+struct Galaxy : public Base
 {
     public:
         bool allow_invasion = true;
@@ -35,7 +37,7 @@ struct Galaxy : public ceti::descriptor::BaseView
         ~Galaxy() = default;
 
         std::string info() const {
-            std::string result = "Galaxy descriptor: " + ceti::descriptor::BaseView::info() + _str(" sectors: ", sectors);
+            std::string result = "Galaxy descriptor: " + descriptor::Base::info() + ceti::to_string(" sectors: ", sectors);
             return result;
         }
 }; 

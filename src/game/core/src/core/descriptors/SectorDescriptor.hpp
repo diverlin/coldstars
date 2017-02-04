@@ -18,23 +18,25 @@
 
 #pragma once
 
+#include <core/common/Base.hpp>
+
+#include <ceti/StringUtils.hpp>
 #include <ceti/type/IdType.hpp>
-#include <ceti/descriptor/BaseView.hpp>
 
 #include <vector>
 
 namespace descriptor {
 
-struct Sector : public ceti::descriptor::BaseView
+struct Sector : public Base
 {
 public:
     std::vector<int_t> starsystems;
 
-    Sector() {}
-    ~Sector() {}
+    Sector() = default;
+    ~Sector() = default;
 
     std::string info() const {
-        std::string result = "Sector descriptor: " + ceti::descriptor::BaseView::info() + _str(" starsystems:", starsystems);
+        std::string result = "Sector descriptor: " + Base::info() + ceti::to_string(" starsystems:", starsystems);
         return result;
     }
 }; 

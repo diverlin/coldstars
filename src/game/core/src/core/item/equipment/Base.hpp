@@ -40,9 +40,9 @@ public:
 
 protected:
     std::string info() const {
-        std::string result = descriptor::item::Base::info();
-        result += "descriptor::item::BaseEquipment:\n";
+        std::string result = "descriptor::item::BaseEquipment:\n";
         result += std::string(" modules = ") + std::to_string(m_modules) + "\n";
+        result += descriptor::item::Base::info();
         return result;
     }
 

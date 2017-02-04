@@ -35,7 +35,7 @@ class ItemSlot;
 namespace descriptor {
 namespace item {
 
-class Base : public ::descriptor::Base
+class Base : public ::descriptor::Base, public ceti::descriptor::BaseView
 {
 public:
     Base() = default;
@@ -65,14 +65,15 @@ private:
 
 protected:
     std::string info() const {
-        std::string result = ::descriptor::Base::info();
-        result += "descriptor::item::Base: \n";
+        std::string result = "descriptor::item::Base:\n";
         result += std::string(" race = ") + to_string(m_race) + "\n";
         result += std::string(" tech = ") + to_string(m_tech) + "\n";
         result += std::string(" condition = ") + std::to_string(m_condition) + "\n";
         result += std::string(" deterioration = ") + std::to_string(m_deterioration) + "\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
         result += std::string(" price = ") + std::to_string(m_price) + "\n";
+        result += ceti::descriptor::BaseView::info();
+        result += ::descriptor::Base::info();
         return result;
     }
 
@@ -81,6 +82,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<::descriptor::Base>(*this);
+        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_race;
         ar & m_tech;
         ar & m_condition;

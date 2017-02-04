@@ -45,10 +45,10 @@ public:
     int hyper() const { return m_hyper; }
 
     std::string info() const {
-        std::string result = descriptor::item::BaseEquipment::info();
-        result += "descriptor::item::Drive:\n";
+        std::string result = "descriptor::item::Drive:\n";
         result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
         result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
+        result += descriptor::item::BaseEquipment::info();
         return result;
     }
 
