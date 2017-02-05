@@ -124,8 +124,8 @@ getNewStar()
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
 
-    descr.setTexture(textureDescriptorIdFromType(type::texture::STAR_ID));
-    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
+    descr.setTexture(textureDescriptorIdFromType (type::texture::STAR_ID));
+    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -153,8 +153,8 @@ getNewPlanet()
                                   descriptor::Planet::SCALE_MAX);
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType(type::texture::PLANET_ID));
-    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_ID));
+    descr.setTexture(textureDescriptorIdFromType (type::texture::PLANET_ID));
+    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -239,8 +239,8 @@ getNewAsteroid()
                                   descriptor::Asteroid::SCALE_MAX);
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType(type::texture::ASTEROID_ID));
-    descr.setMesh(meshDescriptorIdFromType(type::mesh::SPHERE_DEFORMED_ID));
+    descr.setTexture(textureDescriptorIdFromType (type::texture::ASTEROID_ID));
+    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_DEFORMED_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -329,7 +329,7 @@ getNewContainer()
 descriptor::Ship
 getNewShip()
 {
-    type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::entity type_id = type::entity::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -401,7 +401,7 @@ getNewShip()
 descriptor::SpaceStation
 getNewSpaceStation()
 {
-    type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::entity type_id = type::entity::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -472,7 +472,7 @@ getNewSpaceStation()
 descriptor::Satellite
 getNewSatellite()
 {
-    type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::entity type_id = type::entity::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -565,10 +565,10 @@ descriptor::BaseOLD
 getNewBak(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int (type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int (type::tech::LEVEL0);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
@@ -596,10 +596,10 @@ descriptor::item::Drive
 getNewDrive(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int (type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int (type::tech::LEVEL0);
     }
 
     int modules       = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);

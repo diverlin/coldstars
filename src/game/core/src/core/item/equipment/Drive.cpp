@@ -34,6 +34,11 @@ const int SPEED_MAX = 0;
 const int HYPER_MIN = 0;
 const int HYPER_MAX = 0;
 
+Drive::Drive()
+{
+    setDescriptor(descriptor::type::DRIVE_EQUIPMENT);
+}
+
 Drive::Drive(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
