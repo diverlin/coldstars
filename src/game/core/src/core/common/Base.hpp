@@ -19,6 +19,7 @@
 #pragma once
 
 #include <core/struct/IdData.hpp>
+#include <core/types/DescriptorTypes.hpp>
 
 //#include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
@@ -77,6 +78,7 @@ public:
     void setSubSubType(const type::entity& subsubtype) { m_subsubtype = subsubtype; }
 
     int_t id() const { return m_id; }
+    descriptor::type descriptor() const { return m_descriptor; }
     const type::entity& type() const { return m_type; }
     const type::entity& subtype() const { return m_subtype; }
     const type::entity& subsubtype() const { return m_subsubtype; }
@@ -90,8 +92,12 @@ public:
         return result;
     }
 
+protected:
+    void setDescriptor(descriptor::type descriptor) { m_descriptor = descriptor; }
+
 private:
     int_t m_id = NONE;
+    descriptor::type m_descriptor = NONE;
     type::entity m_type = type::entity::NONE_ID;
     type::entity m_subtype = type::entity::NONE_ID;
     type::entity m_subsubtype = type::entity::NONE_ID;
@@ -101,6 +107,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_id;
+        ar & m_descriptor;
         ar & m_type;
         ar & m_subtype;
         ar & m_subsubtype;

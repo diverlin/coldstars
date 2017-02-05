@@ -33,7 +33,7 @@ public:
     static const int HYPER_MAX;
 
 public:
-    Drive() = default;
+    Drive();
     Drive(const std::string& data);
     ~Drive() = default;
     std::string data() const;
