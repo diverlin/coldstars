@@ -29,7 +29,7 @@ class Renderer;
 class BaseButton : public BaseGuiElement
 {
     public:
-        BaseButton(type::GUI, type::GUI, const std::string&,void (*pAction)(Player*) = nullptr, jeti::control::Material* textureOb = nullptr);
+        BaseButton(gui::type, gui::type, const std::string&,void (*pAction)(Player*) = nullptr, jeti::control::Material* textureOb = nullptr);
         virtual ~BaseButton();  
         
         void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }

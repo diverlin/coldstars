@@ -32,7 +32,7 @@ namespace item {
 
 BaseEquipment::BaseEquipment()
 {
-    m_race_id = type::race::R0_ID;
+    m_race_id = race::type::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
@@ -122,7 +122,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 //    if (draw_text == true)
 //    {
-//        if (subTypeId() == type::entity::ROCKET_EQUIPMENT_ID)
+//        if (subTypeId() == entity::Type::ROCKET_EQUIPMENT_ID)
 //        {
 //            glm::vec2 pos(box.center().x - box.size().x/2 + gui_offset.x, box.center().y + gui_offset.y);
 //            client::global::get().screen().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);

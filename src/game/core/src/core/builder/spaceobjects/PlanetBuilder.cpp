@@ -85,7 +85,7 @@ Planet::getNew(const descriptor::Planet& descr)
 
     /*
    {
-        Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+        Mesh* mesh_plane = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 
         TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
         Ring* ring = new Ring();

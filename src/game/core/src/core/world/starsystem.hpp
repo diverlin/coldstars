@@ -217,8 +217,8 @@ public:
     const glm::vec4& color() const { return m_color; }
     //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
     int conditionId()     const { return m_condition_id; }
-    type::race raceId()          const { return m_race_id; }
-    type::race conquerorRaceId() const { return m_conqueror_race_id; }
+    race::type raceId()          const { return m_race_id; }
+    race::type conquerorRaceId() const { return m_conqueror_race_id; }
     model::Star* star() const;
     Sector* sector()      const { return m_sector; }
     //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
@@ -229,7 +229,7 @@ public:
 
     HyperSpace& hyperSpace() { return m_hyperspace; };
 
-    model::Npc* freeLeaderByRaceId(type::race) const;
+    model::Npc* freeLeaderByRaceId(race::type) const;
     void createGroupAndShareTask(model::Npc*, Starsystem*, int) const;
 
     //// TRANSITION
@@ -290,9 +290,9 @@ public:
     model::Planet* randomInhabitedPlanet() const;
     model::Planet* randomPlanet() const;
     control::Vehicle* randomVehicle() const;
-    control::Vehicle* randomVehicleExcludingNpcRaceId(type::race) const;
-    control::Vehicle* randVehicleByNpcRaceId(type::race) const;
-    control::Vehicle* randomVehicle(const std::vector<type::race>&) const;
+    control::Vehicle* randomVehicleExcludingNpcRaceId(race::type) const;
+    control::Vehicle* randVehicleByNpcRaceId(race::type) const;
+    control::Vehicle* randomVehicle(const std::vector<race::type>&) const;
     //
 
     model::Starsystem* model() const { return m_model_starsystem; }
@@ -300,8 +300,8 @@ public:
 private:
     model::Starsystem* m_model_starsystem = nullptr;
 
-    type::race m_race_id = type::race::R0_ID;
-    type::race m_conqueror_race_id = type::race::NONE_ID;
+    race::type m_race_id = race::type::R0_ID;
+    race::type m_conqueror_race_id = race::type::NONE_ID;
 
     bool m_unique_update_inDymanic_done = false;
     bool m_unique_update_inStatic_done = false;

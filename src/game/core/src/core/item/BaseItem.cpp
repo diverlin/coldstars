@@ -170,10 +170,10 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 //    m_price             = load_ptree.get<int>("price");
 //    m_condition         = load_ptree.get<int>("condition");
 //    m_locked_turns      = load_ptree.get<int>("locked_turns");
-//    m_race_id           = (type::race)load_ptree.get<int>("race_id");
-//    m_parent_subtype_id = (type::entity)load_ptree.get<int>("parent_subtype_id");
+//    m_race_id           = (race::type)load_ptree.get<int>("race_id");
+//    m_parent_subtype_id = (entity::Type)load_ptree.get<int>("parent_subtype_id");
 
-//    m_data.tech           = (type::tech)load_ptree.get<int>("data_item.tech_level");
+//    m_data.tech           = (tech::type)load_ptree.get<int>("data_item.tech_level");
 //    //m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
 //    m_data.condition_max        = load_ptree.get<int>("data_item.condition_max");
 //    m_data.deterioration = load_ptree.get<int>("data_item.deterioration_normal");

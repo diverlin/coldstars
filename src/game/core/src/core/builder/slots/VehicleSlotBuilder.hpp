@@ -27,7 +27,7 @@ namespace control {
 class VehicleSlot;
 } // namespace control
 
-control::VehicleSlot* getNewVehicleSlot(type::entity, int_t id = NONE);
+control::VehicleSlot* getNewVehicleSlot(entity::type, int_t id = NONE);
 
     
 

@@ -58,7 +58,7 @@ BlackHole::getNew()
 void
 BlackHole::__createInternals(model::BlackHole* blackhole)
 {           
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_ID);
     
     LifeData data_life;
     data_life.is_alive   = true;

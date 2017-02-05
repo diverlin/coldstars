@@ -25,10 +25,10 @@
 #include <jeti/AnimationEffect2D.hpp>
 
 
-std::map<type::GUI, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
+std::map<gui::type, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
    
-BaseGuiElement::BaseGuiElement(type::GUI type_id, type::GUI subtype_id, const std::string& info, jeti::control::Material* textureOb)
+BaseGuiElement::BaseGuiElement(gui::type type_id, gui::type subtype_id, const std::string& info, jeti::control::Material* textureOb)
 :
 m_Type_id(type_id),
 m_Subtype_id(subtype_id),
@@ -62,9 +62,9 @@ void BaseGuiElement::DeleteAnimationProgram()
 }
 
           
-BaseGuiElement* BaseGuiElement::GetGuiElement(type::GUI request_subtype_id) const
+BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_subtype_id) const
 {
-    std::map<type::GUI, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
+    std::map<gui::type, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
     if (it != static_gui_element_map.cend())
     {
         return it->second;
@@ -73,7 +73,7 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(type::GUI request_subtype_id) cons
     return nullptr;
 }   
     
-void BaseGuiElement::PressEventMBL_onGuiElement(type::GUI subtype_id, Player* player)
+void BaseGuiElement::PressEventMBL_onGuiElement(gui::type subtype_id, Player* player)
 {
     BaseGuiElement* button = GetGuiElement(subtype_id);
     if (button != nullptr)
@@ -82,7 +82,7 @@ void BaseGuiElement::PressEventMBL_onGuiElement(type::GUI subtype_id, Player* pl
     }
 }    
 
-void BaseGuiElement::ResetStateEventOnGuiElement(type::GUI subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(gui::type subtype_id)
 {
     BaseGuiElement* button = GetGuiElement(subtype_id);
     if (button != nullptr)

@@ -22,16 +22,20 @@
 
 #include <core/types/TextureTypes.hpp>
 
-namespace type
-{
-    enum class mesh : int {
-        FAILBACK = int_t(texture::LAST_ID),
+namespace mesh {
 
-        PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID,
+enum class type : int {
+    FAILBACK = int(texture::type::LAST_ID),
+    //
+    PLANE_ID,
+    SPHERE_ID,
+    SPHERE_DEFORMED_ID,
+    SPACESTATION_ID,
+    //
+    LAST_ID
+};
 
-        LAST_ID
-    };
-}  
+} // namespace mesh
 
-std::string getTypeStr(type::mesh type);
+std::string getTypeStr(mesh::type place);
 

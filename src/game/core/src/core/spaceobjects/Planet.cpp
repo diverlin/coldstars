@@ -37,7 +37,7 @@ namespace model {
 
 Planet::Planet()
 {
-    setType(type::entity::PLANET_ID);
+    setType(entity::type::PLANET_ID);
 }
 
 Planet::Planet(const std::string& data)
@@ -136,7 +136,7 @@ void Planet::_postDeathUniqueEvent(bool)
 //Planet::Planet(int id)
 //{
 //    setId(id);
-//    setTypeId(type::entity::PLANET_ID);
+//    setTypeId(entity::Type::PLANET_ID);
 //}
 
 //Planet::~Planet()

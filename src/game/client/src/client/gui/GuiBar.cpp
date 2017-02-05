@@ -23,7 +23,7 @@
 
 GuiBar::GuiBar(jeti::control::Material* textureOb)
 :
-BaseGuiElement(type::GUI::NONE_ID, type::GUI::NONE_ID, "", textureOb)
+BaseGuiElement(gui::type::NONE_ID, gui::type::NONE_ID, "", textureOb)
 {}
 
 /* virtual */

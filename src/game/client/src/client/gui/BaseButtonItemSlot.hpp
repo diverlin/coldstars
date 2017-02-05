@@ -32,7 +32,7 @@ class Renderer;
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(type::GUI type_id, type::GUI subtype_id, const std::string& info)
+    BaseButtonItemSlot(gui::type type_id, gui::type subtype_id, const std::string& info)
         :
           BaseButton(type_id, subtype_id, info),
           m_itemSlot(nullptr)
@@ -49,7 +49,7 @@ protected:
 
     void UpdateAnimationProgram();
 
-    void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, type::GUI) const;
+    void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, gui::type) const;
     void RenderMarkTarget() const;
 
 private:

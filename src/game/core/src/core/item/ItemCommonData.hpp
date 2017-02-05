@@ -31,8 +31,8 @@ struct ItemCommonData
     ItemCommonData()
     {}
 
-    type::race race = type::race::R0_ID;
-    type::tech tech = type::tech::NONE;
+    race::type race = race::type::R0_ID;
+    tech::type tech = tech::type::NONE;
     int modules_num = 0;
     int condition_max = 0;
     int deterioration = 0;

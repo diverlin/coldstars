@@ -39,7 +39,7 @@ NpcBuilder::~NpcBuilder()
 {}
 
 model::Npc*
-NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, int_t id) const
+NpcBuilder::createTemplate(entity::type subtype_id, entity::type subsubtype_id, int_t id) const
 {
     model::Npc* npc = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
     assert(npc);
@@ -50,7 +50,7 @@ NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, 
 }
 
 model::Npc*
-NpcBuilder::create(type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
+NpcBuilder::create(race::type race_id, entity::type subtype_id, entity::type subsubtype_id) const
 {
     model::Npc* npc = createTemplate(subtype_id, subsubtype_id);
     createInternals(npc, race_id, subtype_id, subsubtype_id);
@@ -59,7 +59,7 @@ NpcBuilder::create(type::race race_id, type::entity subtype_id, type::entity sub
 }
 
 void
-NpcBuilder::createInternals(model::Npc* npc, type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
+NpcBuilder::createInternals(model::Npc* npc, race::type race_id, entity::type subtype_id, entity::type subsubtype_id) const
 {        
     //LifeData data_life;
     
@@ -76,11 +76,11 @@ NpcBuilder::createInternals(model::Npc* npc, type::race race_id, type::entity su
     assert(false);
 //    npc->applySkillsStrategy();
 
-    if ((race_id != type::race::R6_ID) && (race_id != type::race::R7_ID))
+    if ((race_id != race::type::R6_ID) && (race_id != race::type::R7_ID))
     {
         switch(subtype_id)
         {
-        case type::entity::RANGER_ID:
+        case entity::type::RANGER_ID:
         {
             assert(false);
 //            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
@@ -88,7 +88,7 @@ NpcBuilder::createInternals(model::Npc* npc, type::race race_id, type::entity su
             break;
         }
 
-        case type::entity::WARRIOR_ID:
+        case entity::type::WARRIOR_ID:
         {
             assert(false);
 //            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
@@ -96,7 +96,7 @@ NpcBuilder::createInternals(model::Npc* npc, type::race race_id, type::entity su
             break;
         }
 
-        case type::entity::TRADER_ID:
+        case entity::type::TRADER_ID:
         {
             assert(false);
 //            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID));

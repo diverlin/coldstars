@@ -38,8 +38,8 @@ namespace model {
 
 SpaceStation::SpaceStation()
 {
-    setType(type::entity::VEHICLE_ID);
-    setSubType(type::entity::SPACESTATION_ID);
+    setType(entity::type::VEHICLE_ID);
+    setSubType(entity::type::SPACESTATION_ID);
 }
 
 SpaceStation::SpaceStation(const std::string& data)
@@ -152,8 +152,8 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 //m_Land(nullptr)
 //{
 //    setId(id);
-//    setTypeId(type::entity::VEHICLE_ID);
-//    setSubTypeId(type::entity::SPACESTATION_ID);
+//    setTypeId(entity::Type::VEHICLE_ID);
+//    setSubTypeId(entity::Type::SPACESTATION_ID);
 //}
 
 ///* virtual */

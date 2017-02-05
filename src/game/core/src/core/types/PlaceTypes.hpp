@@ -21,10 +21,17 @@
 
 #include <string>
 
-namespace type {
-enum class place {
-    NONE, KOSMOS, HYPER, KOSMOPORT, LAND
-};
-} // namespace type
+namespace place {
 
-std::string getPlaceStr(type::place);
+enum class type {
+    NONE,
+    //
+    KOSMOS,
+    HYPER,
+    KOSMOPORT,
+    LAND
+};
+
+} // namespace place
+
+std::string getPlaceStr(place::type);

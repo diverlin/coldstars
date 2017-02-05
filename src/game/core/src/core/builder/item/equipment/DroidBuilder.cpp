@@ -69,7 +69,7 @@ void DroidBuilder::createInternals(Droid* droid, const descriptor::BaseOLD& desc
     ItemCommonData common_data = extractCommonData(descriptor);
 
     droid->SetRepairOrig(descriptor.repair());
-    droid->setParentSubTypeId(type::entity::DROID_SLOT_ID);
+    droid->setParentSubTypeId(entity::type::DROID_SLOT_ID);
     droid->setItemCommonData(common_data);
 
     droid->updateProperties();

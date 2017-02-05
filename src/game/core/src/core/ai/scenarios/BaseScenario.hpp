@@ -18,8 +18,9 @@
 
 #pragma once
 
-#include <string>
 #include <types/AiScenarioTypes.hpp>
+
+#include <string>
 
 class Npc;
 
@@ -29,8 +30,8 @@ public:
     BaseScenario() {}
     virtual ~BaseScenario() {}
 
-    void setTypeId(type::AISCENARIO typeId) { m_typeId = typeId; }
-    type::AISCENARIO typeId() const { return m_typeId; }
+    void setTypeId(ai::type type) { m_type = type; }
+    ai::type typeId() const { return m_type; }
 
     virtual void enter(Npc*) const {}
     virtual bool Validate(Npc*) const { return true; }
@@ -43,6 +44,6 @@ public:
     virtual std::string GetDescription(Npc*) const { return "_"; }
 
 private:
-    type::AISCENARIO m_typeId = type::AISCENARIO::NONE_ID;
+    ai::type m_type = ai::type::NONE_ID;
 }; 
 

@@ -60,7 +60,7 @@ private:
     void __createLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
 
     void __createSpaceStations(Starsystem*, int) const;
-    void __createShips(Starsystem*, int, type::race race_id = type::race::NONE_ID, type::entity subtype_id = type::entity::NONE_ID, type::entity subsubtype_id = type::entity::NONE_ID) const;
+    void __createShips(Starsystem*, int, race::type race_id = race::type::NONE_ID, entity::type subtype_id = entity::type::NONE_ID, entity::type subsubtype_id = entity::type::NONE_ID) const;
 
     void __proceedInvasion(control::Galaxy*) const;
 

@@ -33,8 +33,8 @@ Radar::Radar(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::RADAR_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::RADAR_EQUIPMENT_ID);
 }
 
 /* virtual */

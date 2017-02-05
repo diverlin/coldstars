@@ -34,7 +34,7 @@
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
-    setTypeId(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID);
+    setTypeId(ai::type::MACRO_STARSYSTEMLIBERATION_ID);
 }
 
 /*virtual*/

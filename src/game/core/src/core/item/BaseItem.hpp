@@ -41,23 +41,23 @@ public:
     Base() = default;
     ~Base() = default;
 
-    void setRace(type::race race) { m_race = race; }
-    void setTech(type::tech tech) { m_tech = tech; }
+    void setRace(race::type race) { m_race = race; }
+    void setTech(tech::type tech) { m_tech = tech; }
     void setCondition(int condition) { m_condition = condition; }
     void setDeterioration(int deterioration) { m_deterioration = deterioration; }
     void setMass(int mass) { m_mass = mass; }
     void setPrice(int price) { m_price = price; }
 
-    type::race race() const { return m_race; }
-    type::tech tech() const { return m_tech; }
+    race::type race() const { return m_race; }
+    tech::type tech() const { return m_tech; }
     int condition() const { return m_condition; }
     int deterioration() const { return m_deterioration; }
     int mass() const { return m_mass; }
     int price() const { return m_price; }
 
 private:
-    type::race m_race = type::race::R0_ID;
-    type::tech m_tech = type::tech::NONE;
+    race::type m_race = race::type::R0_ID;
+    tech::type m_tech = tech::type::NONE;
     int m_condition = 0;
     int m_deterioration = 0;
     int m_mass = 0;
@@ -104,7 +104,7 @@ public:
     Base() = default;
     ~Base() = default;
 
-    void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
     {
         m_data = data_item;
@@ -125,22 +125,22 @@ public:
     int modulesNum() const { return m_data.modules_num; }
     int descriptorType() const { return m_data.descriptor_type; }
 
-    type::tech tech() const { return m_data.tech; }
+    tech::type tech() const { return m_data.tech; }
 
-    type::entity parentSubtype() const { return m_parent_subtype_id; }
-    type::race race() const { return m_race_id; }
+    entity::type parentSubtype() const { return m_parent_subtype_id; }
+    race::type race() const { return m_race_id; }
 
     int lockedTurns() const { return m_locked_turns; }
 
 private:
-    type::race m_race_id = type::race::NONE_ID;
+    race::type m_race_id = race::type::NONE_ID;
 
     int m_locked_turns = 0;
     int m_condition = 0;
     int m_price = 0;
     int m_deterioration = 0;
 
-    type::entity m_parent_subtype_id = type::entity::NONE_ID;
+    entity::type m_parent_subtype_id = entity::type::NONE_ID;
 
     ItemCommonData m_data;
 
@@ -171,7 +171,7 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
     {
         m_data = data_item;
@@ -195,10 +195,10 @@ public:
     int modulesNum() const { return m_data.modules_num; }
     int descriptorType() const { return m_data.descriptor_type; }
 
-    type::tech tech() const { return m_data.tech; }
+    tech::type tech() const { return m_data.tech; }
 
-    type::entity parentSubtype() const { return m_parent_subtype_id; }
-    type::race race() const { return m_race_id; }
+    entity::type parentSubtype() const { return m_parent_subtype_id; }
+    race::type race() const { return m_race_id; }
 
     bool isDamaged()    const { return (m_condition <= 0); }
     bool isLocked()     const { return (m_locked_turns > 0); }
@@ -223,14 +223,14 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-    type::race m_race_id = type::race::NONE_ID;
+    race::type m_race_id = race::type::NONE_ID;
 
     int m_locked_turns = 0;
     int m_condition = 0;
     int m_price = 0;
     int m_deterioration = 0;
 
-    type::entity m_parent_subtype_id = type::entity::NONE_ID;
+    entity::type m_parent_subtype_id = entity::type::NONE_ID;
 
     ItemCommonData m_data;
 //    UnresolvedDataBase m_data_unresolved_Base;

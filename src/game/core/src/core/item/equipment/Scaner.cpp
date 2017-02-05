@@ -33,8 +33,8 @@ Scaner::Scaner(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::SCANER_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::SCANER_EQUIPMENT_ID);
 }
 
 /* virtual */

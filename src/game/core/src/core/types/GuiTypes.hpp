@@ -24,9 +24,9 @@
 #include <types/EntityTypes.hpp>
 
 
-namespace type
+namespace gui
 { 
-    enum class GUI
+    enum class type
     {
         NONE_ID = 0,
         
@@ -77,10 +77,10 @@ namespace type
     };
 }
 
-std::string getGuiTypeStr(type::GUI);
+std::string getGuiTypeStr(gui::type);
 
-type::GUI getGuiItemSlotType(type::entity);
-type::GUI getGuiItemSlotSelectorType(type::entity);
+gui::type getGuiItemSlotType(entity::type);
+gui::type getGuiItemSlotSelectorType(entity::type);
 
 #endif
 

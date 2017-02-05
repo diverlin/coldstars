@@ -36,8 +36,8 @@ namespace model {
 
 Ship::Ship()
 {
-    setType(type::entity::VEHICLE_ID);
-    setSubType(type::entity::SHIP_ID);
+    setType(entity::type::VEHICLE_ID);
+    setSubType(entity::type::SHIP_ID);
 }
 
 Ship::~Ship()
@@ -187,8 +187,8 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 //Ship::Ship(int id)
 //{
 //    setId(id);
-//    setTypeId(type::entity::VEHICLE_ID);
-//    setSubTypeId(type::entity::SHIP_ID);
+//    setTypeId(entity::Type::VEHICLE_ID);
+//    setSubTypeId(entity::Type::SHIP_ID);
 //}
 
 ///* virtual override final */

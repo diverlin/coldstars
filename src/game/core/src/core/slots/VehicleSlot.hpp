@@ -47,7 +47,7 @@ namespace control {
 class VehicleSlot : public BaseSlot
 {
 public:
-    VehicleSlot(int, type::entity);
+    VehicleSlot(int, entity::type);
     ~VehicleSlot();
 
     virtual void putChildrenToGarbage() const;

@@ -25,7 +25,7 @@
 
 MicroScenarioExploration::MicroScenarioExploration()
 {
-    setTypeId(type::AISCENARIO::MICRO_EXPLORATION_ID);
+    setTypeId(ai::type::MICRO_EXPLORATION_ID);
 }
 
 /* virtual */

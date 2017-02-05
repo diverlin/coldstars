@@ -45,27 +45,27 @@ void initGameStuff()
     srand(time(0));
     //GameDate::Instance().SetDate(1,1,4000);
     
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R0_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R1_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R2_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R3_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R4_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R6_ID);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R7_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R0_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R1_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R2_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R3_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R4_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R6_ID);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R7_ID);
     
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(TYPE::RACE::R0_ID);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(TYPE::RACE::R1_ID);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(TYPE::RACE::R2_ID);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(TYPE::RACE::R3_ID);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(TYPE::RACE::R4_ID);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R0_ID);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R1_ID);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R2_ID);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R3_ID);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R4_ID);
     
-//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R6_ID);
-//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R7_ID);
+//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::type::R6_ID);
+//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::type::R7_ID);
     
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::WARRIOR_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::PIRAT_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::TRADER_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::DIPLOMAT_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::WARRIOR_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::PIRAT_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::TRADER_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::DIPLOMAT_ID);
 
     /* create Macro Scenaries */
     ScenarioCollector::Instance().add(new MacroScenarioGoodsTrading());

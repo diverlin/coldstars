@@ -41,8 +41,8 @@ Grapple::Grapple(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::GRAPPLE_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::GRAPPLE_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -126,7 +126,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 //            {
 //                switch(target.type())
 //                {
-//                case type::entity::CONTAINER_ID:
+//                case entity::Type::CONTAINER_ID:
 //                {
 //                    Container* container = reinterpret_cast<Container*>(&target);
 //                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)

@@ -29,11 +29,11 @@
 //#include <client/resources/MeshCollector.hpp>
 //#include <jeti/Material.hpp>
 
-GoodsPack::GoodsPack(int id, type::entity subtype_id)
+GoodsPack::GoodsPack(int id, entity::type subtype_id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::GOODS_ID);
+//    setTypeId(entity::Type::GOODS_ID);
 //    setSubTypeId(subtype_id);
 }
 
@@ -52,12 +52,12 @@ void GoodsPack::addUniqueInfo()
 //    info.addTitleStr("GOODS");
 //    switch(subTypeId())
 //    {
-//        case type::entity::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case type::entity::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case type::entity::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case type::entity::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case type::entity::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case type::entity::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         
 //        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
 //    }
@@ -111,9 +111,9 @@ void GoodsPack::ResolveData()
 }
 
 
-GoodsPack* GetNewGoodsPack(type::entity subtype_id, int_t id)
+GoodsPack* GetNewGoodsPack(entity::type subtype_id, int_t id)
 {
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);

@@ -75,7 +75,7 @@ Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
     //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;
     if (true) {
-//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//        mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 //        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
 //        assert(mesh);
 //        assert(texOb);
@@ -83,7 +83,7 @@ Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
 //        size = glm::vec3(scale_comp, scale_comp, 1.0);
         //size = texOb->size();
     } else {
-//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
+//        mesh = MeshCollector::Instance().getMesh(mesh::type::SPACESTATION_ID);
 //        texOb = mesh->textureOb();
 //        assert(mesh);
 //        assert(texOb);
@@ -98,13 +98,13 @@ Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
 //    }
 
     assert(false);
-    //ship->setSubSubTypeId((type::entity)descr.type());
+    //ship->setSubSubTypeId((entity::Type)descr.type());
 
     descriptor::Vehicle descr2;
     assert(false);
 //    descr2.id() = descr.id();
-//    descr2.race() = (type::race)descr.race();
-//    descr2.type_id = (type::entity)descr.type();
+//    descr2.race() = (race::type)descr.race();
+//    descr2.type_id = (entity::Type)descr.type();
 //    descr2.size_id = descr.size();
 
 //    descr2.space = descr.space();

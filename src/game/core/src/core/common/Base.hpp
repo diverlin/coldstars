@@ -73,15 +73,15 @@ public:
     ~Base() = default;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const type::entity& type)   { m_type = type; }
-    void setSubType(const type::entity& subtype) { m_subtype = subtype; }
-    void setSubSubType(const type::entity& subsubtype) { m_subsubtype = subsubtype; }
+    void setType(const entity::type& type)   { m_type = type; }
+    void setSubType(const entity::type& subtype) { m_subtype = subtype; }
+    void setSubSubType(const entity::type& subsubtype) { m_subsubtype = subsubtype; }
 
     int_t id() const { return m_id; }
     descriptor::type descriptor() const { return m_descriptor; }
-    const type::entity& type() const { return m_type; }
-    const type::entity& subtype() const { return m_subtype; }
-    const type::entity& subsubtype() const { return m_subsubtype; }
+    const entity::type& type() const { return m_type; }
+    const entity::type& subtype() const { return m_subtype; }
+    const entity::type& subsubtype() const { return m_subsubtype; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
@@ -97,10 +97,10 @@ protected:
 
 private:
     int_t m_id = NONE;
-    descriptor::type m_descriptor = NONE;
-    type::entity m_type = type::entity::NONE_ID;
-    type::entity m_subtype = type::entity::NONE_ID;
-    type::entity m_subsubtype = type::entity::NONE_ID;
+    descriptor::type m_descriptor = descriptor::type::NONE;
+    entity::type m_type = entity::type::NONE_ID;
+    entity::type m_subtype = entity::type::NONE_ID;
+    entity::type m_subsubtype = entity::type::NONE_ID;
 
 private:
     friend class boost::serialization::access;
@@ -128,17 +128,17 @@ public:
     std::string data() const;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const type::entity& major)   { m_identity.type = major; }
-    void setSubType(const type::entity& minor) { m_identity.subtype = minor; }
-    void setSubSubType(const type::entity& patch) { m_identity.subsubtype = patch; }
+    void setType(const entity::type& major)   { m_identity.type = major; }
+    void setSubType(const entity::type& minor) { m_identity.subtype = minor; }
+    void setSubSubType(const entity::type& patch) { m_identity.subsubtype = patch; }
 
     void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
     const core::Id& identity() const { return m_identity; }
     int_t id() const { return m_id; }
-    const type::entity& type() const { return m_identity.type; }
-    const type::entity& subtype() const { return m_identity.subtype; }
-    const type::entity& subsubtype() const { return m_identity.subsubtype; }
+    const entity::type& type() const { return m_identity.type; }
+    const entity::type& subtype() const { return m_identity.subtype; }
+    const entity::type& subsubtype() const { return m_identity.subsubtype; }
     int_t descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
 
     std::string typeInfo() const;
@@ -191,16 +191,16 @@ private:
 //    virtual ~Base();
 
 //    virtual void putChildrenToGarbage() const {}
-//    void setSubSubTypeId(type::entity patch) { m_type.subsubtype = patch; }
+//    void setSubSubTypeId(entity::Type patch) { m_type.subsubtype = patch; }
 
 //    void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
 //    void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
 //    const core::Id& ident() const { return m_type; }
 //    int_t id() const { return m_id; }
-//    const type::entity& type() const { return m_type.type; }
-//    const type::entity& subtype() const { return m_type.subtype; }
-//    const type::entity& subsubtype() const { return m_type.subsubtype; }
+//    const entity::Type& type() const { return m_type.type; }
+//    const entity::Type& subtype() const { return m_type.subtype; }
+//    const entity::Type& subsubtype() const { return m_type.subsubtype; }
 //    int_t descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
 
 //    std::string dataTypeStr() const;
@@ -212,8 +212,8 @@ private:
 //    void setId(int_t id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
 
 //protected:
-//    void setTypeId(const type::entity& major)   { m_type.type = major; }
-//    void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
+//    void setTypeId(const entity::Type& major)   { m_type.type = major; }
+//    void setSubTypeId(const entity::Type& minor) { m_type.subtype = minor; }
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

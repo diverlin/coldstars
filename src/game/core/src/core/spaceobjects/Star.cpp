@@ -39,7 +39,7 @@ namespace model {
 
 Star::Star()
 {
-    setType(type::entity::STAR_ID);
+    setType(entity::type::STAR_ID);
 }
 
 Star::Star(const std::string& data)
@@ -64,7 +64,7 @@ Star::Star(model::Star* model)
 , m_model_star(model)
 {
 //    setId(id);
-//    setTypeId(type::entity::STAR_ID);
+//    setTypeId(entity::Type::STAR_ID);
 
 //    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
@@ -157,7 +157,7 @@ void Star::_postDeathUniqueEvent(bool)
 //m_TurnSinceLastSparkCounter(0)
 //{
 //    setId(id);
-//    setTypeId(type::entity::STAR_ID);
+//    setTypeId(entity::Type::STAR_ID);
 
 //    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 //}

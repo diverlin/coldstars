@@ -46,7 +46,7 @@ namespace model {
 
 Asteroid::Asteroid()
 {
-    setType(type::entity::ASTEROID_ID);
+    setType(entity::type::ASTEROID_ID);
 }
 
 Asteroid::Asteroid(const std::string& data)
@@ -129,7 +129,7 @@ void Asteroid::_postDeathUniqueEvent(bool show_effect)
 //Asteroid::Asteroid(int id)
 //{
 //    setId(id);
-//    setTypeId(type::entity::ASTEROID_ID);
+//    setTypeId(entity::Type::ASTEROID_ID);
     
 //    setMass(meti::getRandInt(10, 30));
 //}

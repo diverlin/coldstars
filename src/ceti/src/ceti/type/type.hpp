@@ -41,6 +41,6 @@ namespace ceti {
 //#include <types/EntityTypes.hpp>
 //#include <types/GuiTypes.hpp>
      
-//TYPE::GUI getGuiItemSlotType(type::entity);
-//TYPE::GUI getGuiItemSlotSelectorType(type::entity);
+//TYPE::GUI getGuiItemSlotType(entity::Type);
+//TYPE::GUI getGuiItemSlotSelectorType(entity::Type);
        

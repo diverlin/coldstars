@@ -74,7 +74,7 @@ getNewStarsystem(int race)
 {
     descriptor::Starsystem descriptor;
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
 
 //    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
@@ -87,14 +87,14 @@ getNewStarsystem(int race)
 
 namespace {
 
-int_t meshDescriptorIdFromType(const type::mesh& type) {
+int_t meshDescriptorIdFromType(const mesh::type& type) {
     auto& collector = core::global::get().descriptors().mesh();
     descriptor::Mesh* descriptor = collector.random(int_t(type));
     assert(descriptor->id() != -1);
     return descriptor->id();
 }
 
-int_t textureDescriptorIdFromType(const type::texture& type) {
+int_t textureDescriptorIdFromType(const texture::type& type) {
     auto& collector = core::global::get().descriptors().material();
     descriptor::Material* descriptor = collector.random(int_t(type));
     assert(descriptor->id() != -1);
@@ -124,8 +124,8 @@ getNewStar()
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
 
-    descr.setTexture(textureDescriptorIdFromType (type::texture::STAR_ID));
-    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_ID));
+    descr.setTexture(textureDescriptorIdFromType (texture::type::STAR_ID));
+    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -153,8 +153,8 @@ getNewPlanet()
                                   descriptor::Planet::SCALE_MAX);
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType (type::texture::PLANET_ID));
-    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_ID));
+    descr.setTexture(textureDescriptorIdFromType (texture::type::PLANET_ID));
+    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -168,7 +168,7 @@ getNewPlanet()
     //{
     //    model::Planet* model = __createTemplate();
 
-    //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_ID);
     //    //jeti::control::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
 
     //    int orbit_radius = 1000; // hack
@@ -201,7 +201,7 @@ getNewPlanet()
 
     //   /*
     //   {
-    //        Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //        Mesh* mesh_plane = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 
     //        TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
     //        Ring* ring = new Ring();
@@ -239,8 +239,8 @@ getNewAsteroid()
                                   descriptor::Asteroid::SCALE_MAX);
     descr.setSize(meti::vec3(size));
     descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType (type::texture::ASTEROID_ID));
-    descr.setMesh(meshDescriptorIdFromType (type::mesh::SPHERE_DEFORMED_ID));
+    descr.setTexture(textureDescriptorIdFromType (texture::type::ASTEROID_ID));
+    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED_ID));
 
     assert(descr.texture() != -1);
     assert(descr.mesh() != -1);
@@ -258,16 +258,16 @@ getNewContainer()
 //descriptor::BaseOLD
 //getNewVehicleDescriptor()
 //{
-//    type::race race_id = (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-//    type::entity type_id = type::entity::WARRIOR_ID;
+//    race::type race_id = (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+//    entity::Type type_id = entity::Type::WARRIOR_ID;
 //    int size_id = meti::getRandInt(1, 9);
 //    int weapons_num = size_id;
 
 //    float protection_rate = 1;
 //    float otsec_rate      = 1;
 //    switch (type_id) {
-//        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
-//        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
+//        case entity::Type::WARRIOR_ID: { protection_rate = 2; break; }
+//        case entity::Type::TRADER_ID:  { otsec_rate = 1.5; break; }
 //    }
 
 //    int space       = size_id*100 + meti::getRandInt(100);
@@ -329,16 +329,16 @@ getNewContainer()
 descriptor::Ship
 getNewShip()
 {
-    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    type::entity type_id = type::entity::WARRIOR_ID;
+    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    entity::type type_id = entity::type::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
-        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
+        case entity::type::WARRIOR_ID: { protection_rate = 2; break; }
+        case entity::type::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);
@@ -401,16 +401,16 @@ getNewShip()
 descriptor::SpaceStation
 getNewSpaceStation()
 {
-    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    type::entity type_id = type::entity::WARRIOR_ID;
+    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    entity::type type_id = entity::type::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
-        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
+        case entity::type::WARRIOR_ID: { protection_rate = 2; break; }
+        case entity::type::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);
@@ -472,16 +472,16 @@ getNewSpaceStation()
 descriptor::Satellite
 getNewSatellite()
 {
-    type::race race_id =  (type::race)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    type::entity type_id = type::entity::WARRIOR_ID;
+    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    entity::type type_id = entity::type::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
-        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
+        case entity::type::WARRIOR_ID: { protection_rate = 2; break; }
+        case entity::type::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);
@@ -565,10 +565,10 @@ descriptor::BaseOLD
 getNewBak(int race, int tech_level)
 {
     if (race == -1) {
-        race = int (type::race::R0_ID);
+        race = int (race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int (type::tech::LEVEL0);
+        tech_level = int (tech::type::LEVEL0);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
@@ -579,7 +579,7 @@ getNewBak(int race, int tech_level)
 
     int fuel_max_orig = meti::getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECH_RATE * (int)tech_level);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
@@ -596,10 +596,10 @@ descriptor::item::Drive
 getNewDrive(int race, int tech_level)
 {
     if (race == -1) {
-        race = int (type::race::R0_ID);
+        race = int (race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int (type::tech::LEVEL0);
+        tech_level = int (tech::type::LEVEL0);
     }
 
     int modules       = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
@@ -610,7 +610,7 @@ getNewDrive(int race, int tech_level)
 
     int speed = meti::getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECH_RATE * (int)tech_level);
     int hyper = meti::getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECH_RATE * (int)tech_level);
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
     descriptor::item::Drive descr;
@@ -636,10 +636,10 @@ descriptor::BaseOLD
 getNewDroid(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int(tech::type::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
@@ -649,7 +649,7 @@ getNewDroid(int race, int tech_level)
     int price = meti::getRandInt(100, 1000);
 
     int repair = meti::getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX) * (1 + EQUIPMENT::DROID::REPAIR_TECH_RATE*(int)tech_level);
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
     descriptor::BaseOLD descriptor(descriptor::Type::DROID);
@@ -663,10 +663,10 @@ descriptor::BaseOLD
 getNewGrapple(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int(tech::type::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
@@ -675,7 +675,7 @@ getNewGrapple(int race, int tech_level)
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
 
     int strength   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECH_RATE * (int)tech_level);
@@ -696,10 +696,10 @@ descriptor::BaseOLD
 getNewScaner(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int(tech::type::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
@@ -708,7 +708,7 @@ getNewScaner(int race, int tech_level)
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
 
     int scan = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
@@ -725,10 +725,10 @@ descriptor::BaseOLD
 getNewRadar(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int(tech::type::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
@@ -737,7 +737,7 @@ getNewRadar(int race, int tech_level)
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
 
     int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
@@ -754,10 +754,10 @@ descriptor::BaseOLD
 getNewProtector(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::race::R0_ID);
+        race = int(race::type::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::tech::LEVEL0);
+        tech_level = int(tech::type::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
@@ -766,7 +766,7 @@ getNewProtector(int race, int tech_level)
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
 
     int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);

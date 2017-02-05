@@ -86,8 +86,8 @@ public:
     Container* GetClosestPickableContainer() const;
     Container* GetRandomPickableContainer() const;
     model::Starsystem* GetClosestStarSystem(int) const;
-    Vehicle* GetClosestVisibleVehicle(const std::vector<type::race>&) const;
-    Vehicle* GetRandVisibleVehicle(const std::vector<type::race>&) const;
+    Vehicle* GetClosestVisibleVehicle(const std::vector<race::type>&) const;
+    Vehicle* GetRandVisibleVehicle(const std::vector<race::type>&) const;
 
     void FindVisibleAsteroidsInSpaceInStatic();
     void FindVisibleContainersInSpaceInStatic();

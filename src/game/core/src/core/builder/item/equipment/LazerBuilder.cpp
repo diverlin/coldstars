@@ -51,7 +51,7 @@ Lazer* LazerBuilder::createTemplate(int_t id) const
     return lazer;
 } 
 
-Lazer* LazerBuilder::getNew(type::tech tech_level, type::race race_id, int damage_orig, int radius_orig) const
+Lazer* LazerBuilder::getNew(tech::type tech_level, race::type race_id, int damage_orig, int radius_orig) const
 {
     Lazer* lazer = createTemplate();
     createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
@@ -59,17 +59,17 @@ Lazer* LazerBuilder::getNew(type::tech tech_level, type::race race_id, int damag
     return lazer;
 } 
 
-void LazerBuilder::createInternals(Lazer* lazer, type::tech tech_level, type::race race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(Lazer* lazer, tech::type tech_level, race::type race_id, int damage_orig, int radius_orig) const
 {     
-    if (race_id == type::race::NONE_ID) {
-        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+    if (race_id == race::type::NONE_ID) {
+        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
     }
     
-    if (tech_level == type::tech::NONE) {
-        tech_level = type::tech::LEVEL0;
+    if (tech_level == tech::type::NONE) {
+        tech_level = tech::type::LEVEL0;
     }
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
@@ -88,7 +88,7 @@ void LazerBuilder::createInternals(Lazer* lazer, type::tech tech_level, type::ra
     lazer->SetDamageOrig(damage_orig);
     lazer->SetRadiusOrig(radius_orig);
     //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-    lazer->setParentSubTypeId(type::entity::WEAPON_SLOT_ID);
+    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
     lazer->setItemCommonData(common_data);
 
     lazer->updateProperties();

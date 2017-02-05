@@ -19,8 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma once
 
-#include <map>
 #include "BaseScenario.hpp"
+
+#include <map>
 
 class ScenarioCollector
 {
@@ -29,10 +30,10 @@ public:
     ~ScenarioCollector();
 
     void add(BaseScenario*);
-    BaseScenario* get(type::AISCENARIO) const;
+    BaseScenario* get(ai::type) const;
 
 private:
-    std::map<type::AISCENARIO, BaseScenario*> m_scenarios;
+    std::map<ai::type, BaseScenario*> m_scenarios;
 
     ScenarioCollector() {}
     ScenarioCollector(const ScenarioCollector&) = delete;

@@ -38,8 +38,8 @@ namespace model {
 
 RocketBullet::RocketBullet()
 {
-    setType(type::entity::BULLET_ID);
-    setSubType(type::entity::ROCKETBULLET_ID);
+    setType(entity::type::BULLET_ID);
+    setSubType(entity::type::ROCKETBULLET_ID);
 }
 
 RocketBullet::RocketBullet(const std::string& data)
@@ -185,8 +185,8 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //m_EffectDrive(nullptr)
 //{
 //    setId(id);
-//    setTypeId(type::entity::BULLET_ID);
-//    setSubTypeId(type::entity::ROCKETBULLET_ID);
+//    setTypeId(entity::Type::BULLET_ID);
+//    setSubTypeId(entity::Type::ROCKETBULLET_ID);
 //}
 
 ///* virtual */
