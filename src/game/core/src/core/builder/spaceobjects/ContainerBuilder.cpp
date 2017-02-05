@@ -90,7 +90,7 @@ Container::__getNewTemplate()
 //Container* ContainerBuilder::create(int mineral_ammount) const
 //{
 //    //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
-//    GoodsPack* goods_pack = GetNewGoodsPack(type::entity::MINERALS_ID);
+//    GoodsPack* goods_pack = GetNewGoodsPack(entity::Type::MINERALS_ID);
 //    goods_pack->Increase(mineral_ammount);
 
 //    //Container* container = GetNewContainer(textureOb, goods_pack);
@@ -106,7 +106,7 @@ Container::__getNewTemplate()
 //    data_life.dying_time = 30;
 
 //    container->setLifeData(data_life);
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 //    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
 
 //    float delta_angle = 0.001*meti::getRandInt(20, 60);
@@ -115,7 +115,7 @@ Container::__getNewTemplate()
 
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
-//    ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT_ID);
 
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);
@@ -128,7 +128,7 @@ Container::__getNewTemplate()
 //    data_life.dying_time = 30;
 
 //    container->setLifeData(data_life);
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 //    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
 
 //    float delta_angle = 0.001*meti::getRandInt(20, 60);
@@ -137,7 +137,7 @@ Container::__getNewTemplate()
 
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
-//    ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT_ID);
 
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);
@@ -153,7 +153,7 @@ Container::__createInternals(model::Container* container, const descriptor::Base
     assert(false);
 //    container->setLifeData(data_life);
 
-//    ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = getNewItemSlot(entity::Type::CARGO_SLOT_ID);
 //    container->bindItemSlot(item_slot);
 
     //    if (descriptor.child() >= 0) {

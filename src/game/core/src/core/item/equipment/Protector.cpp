@@ -32,8 +32,8 @@ Protector::Protector(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::PROTECTOR_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */

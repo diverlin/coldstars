@@ -25,7 +25,7 @@
 
 MicroScenarioLaunching::MicroScenarioLaunching()
 {
-    setTypeId(type::AISCENARIO::MICRO_LAUNCHING_ID);
+    setTypeId(ai::type::MICRO_LAUNCHING_ID);
 }
 
 /* virtual */

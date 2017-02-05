@@ -60,8 +60,8 @@ namespace item {
 
 Drive::Drive()
 {
-    setType(type::entity::EQUIPMENT_ID);
-    setSubType(type::entity::DRIVE_EQUIPMENT_ID);
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::DRIVE_EQUIPMENT_ID);
 }
 
 Drive::Drive(const std::string& data)
@@ -86,8 +86,8 @@ Drive::Drive(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::DRIVE_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::DRIVE_EQUIPMENT_ID);
 }
 
 /* virtual */

@@ -48,7 +48,7 @@ namespace model {
 
 Npc::Npc()
 {
-    setType(type::entity::NPC_ID);
+    setType(entity::type::NPC_ID);
 }
 
 Npc::Npc(const std::string& data)
@@ -66,10 +66,10 @@ Npc::data() const
 
 namespace control {
 
-Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
+Npc::Npc(int id, entity::type subtype_id, entity::type subsubtype_id)
 { 
     assert(false);
-//    setTypeId(type::entity::NPC_ID);
+//    setTypeId(entity::Type::NPC_ID);
 //    setSubTypeId(subtype_id);
 //    setSubSubTypeId(subsubtype_id);
 
@@ -302,7 +302,7 @@ bool Npc::buyGoods()
 {
     assert(false);
 //    Shop* shop = ((Kosmoport*)m_vehicle->land())->GetShop();
-//    type::entity subtype_id = (type::entity)meti::getRandInt((int)type::entity::MINERALS_ID, (int)type::entity::EXCLUSIVE_ID);
+//    entity::Type subtype_id = (entity::Type)meti::getRandInt((int)entity::Type::MINERALS_ID, (int)entity::Type::EXCLUSIVE_ID);
 
 //    // hard coded logic
 //    int amount_to_hold      = 0.8*m_vehicle->freeSpace();
@@ -358,7 +358,7 @@ bool Npc::buyGoods()
 //void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
 ////    m_isAlive = load_ptree.get<bool>("is_alive");
-////    m_raceId  = (type::race)load_ptree.get<int>("race_id");
+////    m_raceId  = (race::type)load_ptree.get<int>("race_id");
 ////    data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 ////    data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     
@@ -397,8 +397,8 @@ bool Npc::buyGoods()
 
 void Npc::applySkillsStrategy()
 {           /*
-    type::entity class_type_id = data_id.subtype_id;
-    if (data_id.subtype_id == type::entity::RANGER_ID)
+    entity::Type class_type_id = data_id.subtype_id;
+    if (data_id.subtype_id == entity::Type::RANGER_ID)
     {
             class_type_id = data_id.subsubtype_id;
     }

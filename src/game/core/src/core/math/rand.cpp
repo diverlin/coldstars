@@ -27,10 +27,11 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
-type::entity getRandNpcSubTypeId(type::race race_id, const std::vector<type::entity>& subtypes)
+entity::type
+getRandNpcSubTypeId(race::type race_id, const std::vector<entity::type>& subtypes)
 {
-    std::vector<type::entity> allowed_subtypes;
-    const std::vector<type::entity>& allowed_race_subtypes = core::global::get().raceDescriptors().getSubTypes(race_id);
+    std::vector<entity::type> allowed_subtypes;
+    const std::vector<entity::type>& allowed_race_subtypes = core::global::get().raceDescriptors().getSubTypes(race_id);
     assert(!allowed_race_subtypes.empty());
 
     for (unsigned int i=0; i<subtypes.size(); i++) {
@@ -44,15 +45,17 @@ type::entity getRandNpcSubTypeId(type::race race_id, const std::vector<type::ent
     return meti::getRand(allowed_subtypes);
 }
 
-type::entity getRandNpcSubTypeId(type::race race_id)
+entity::type
+getRandNpcSubTypeId(race::type race_id)
 {
     assert(!core::global::get().raceDescriptors().getSubTypes(race_id).empty());
     return meti::getRand(core::global::get().raceDescriptors().getSubTypes(race_id));
 }
 
-type::entity getRandNpcSubSubTypeId(type::entity subtype_id)
+entity::type
+getRandNpcSubSubTypeId(entity::type subtype_id)
 {
-//    if (subtype_id == type::entity::RANGER_ID) {
+//    if (subtype_id == entity::Type::RANGER_ID) {
 //        return meti::getRand(core::global::get().raceDescriptors().getSubSubTypes());
 //    } else {
         return subtype_id;

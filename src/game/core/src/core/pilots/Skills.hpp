@@ -95,7 +95,7 @@ private:
 };
 
 const int* getArrayDependingOnClassTypeId(int);
-const int* getArrayDependingOnRaceId(type::race);
+const int* getArrayDependingOnRaceId(race::type);
 
 
 

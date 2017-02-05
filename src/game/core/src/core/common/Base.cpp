@@ -94,9 +94,9 @@ Base::~Base()
 //    LOG(" Base("+std::to_string(id())+")::LoadDataUniqueBase");
     
 ////    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-////    m_data_id.type_id         = (type::entity)load_ptree.get<int>("data_id.type_id");
-////    m_data_id.subtype_id      = (type::entity)load_ptree.get<int>("data_id.subtype_id");
-////    m_data_id.subsubtype_id   = (type::entity)load_ptree.get<int>("data_id.subsubtype_id");
+////    m_data_id.type_id         = (entity::Type)load_ptree.get<int>("data_id.type_id");
+////    m_data_id.subtype_id      = (entity::Type)load_ptree.get<int>("data_id.subtype_id");
+////    m_data_id.subsubtype_id   = (entity::Type)load_ptree.get<int>("data_id.subsubtype_id");
 //}
 
 //void Base::ResolveData()
@@ -143,9 +143,9 @@ Base::~Base()
 //    LOG(" Base("+std::to_string(id())+")::LoadDataUniqueBase");
 
 ////    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-////    m_data_id.type_id         = (type::entity)load_ptree.get<int>("data_id.type_id");
-////    m_data_id.subtype_id      = (type::entity)load_ptree.get<int>("data_id.subtype_id");
-////    m_data_id.subsubtype_id   = (type::entity)load_ptree.get<int>("data_id.subsubtype_id");
+////    m_data_id.type_id         = (entity::Type)load_ptree.get<int>("data_id.type_id");
+////    m_data_id.subtype_id      = (entity::Type)load_ptree.get<int>("data_id.subtype_id");
+////    m_data_id.subsubtype_id   = (entity::Type)load_ptree.get<int>("data_id.subsubtype_id");
 //}
 
 //void Base::ResolveData()

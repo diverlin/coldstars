@@ -192,7 +192,7 @@ public:
     const descriptor::Vehicle& vehicleDescriptor() const { return m_descriptor; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotTypePresent(const type::entity&) const;
+    bool isSlotTypePresent(const entity::type&) const;
 
     void addItemSlot(ItemSlot*);
 
@@ -202,7 +202,7 @@ public:
     bool addItemToCargoSlot(item::Base*);
     bool manage(item::Base*);
 
-    bool isSlotFree(const type::entity&) const;
+    bool isSlotFree(const place::type&) const;
     bool checkManage(const core::Id&);
 
     void manageItemsInCargo();
@@ -258,7 +258,7 @@ public:
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
 
-    bool dropItemToSpace(const type::entity&);
+    bool dropItemToSpace(const entity::type&);
 
 protected:
     void _increaseMass(int);
@@ -318,9 +318,9 @@ protected:
     [[warning("make it private")]]
     std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const _functionalSlot(const type::entity&) const;
+    ItemSlot* const _functionalSlot(const entity::type&) const;
     ItemSlot* const _freeArtefactSlot() const;
-    ItemSlot* const _cargoSlotWithGoods(type::entity);
+    ItemSlot* const _cargoSlotWithGoods(place::type);
 
     bool _installItem(control::item::Base*);
     bool _installEquipment(control::item::Base*);
@@ -441,7 +441,7 @@ private:
 //    const descriptor::Vehicle& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
 //    virtual int givenExpirience() const override final;
-//    bool isSlotTypePresent(const type::entity&) const;
+//    bool isSlotTypePresent(const entity::Type&) const;
 
 //    void addItemSlot(ItemSlot*);
 
@@ -451,7 +451,7 @@ private:
 //    bool addItemToCargoSlot(item::Base*);
 //    bool manage(item::Base*);
 
-//    bool isSlotFree(const type::entity&) const;
+//    bool isSlotFree(const entity::Type&) const;
 //    bool checkManage(const core::Id&);
 
 //    void manageItemsInCargo();
@@ -503,7 +503,7 @@ private:
 //    void ResolveNeedsInKosmoportInStatic();
 //    void UpdateAllFunctionalItemsInStatic();
 
-//    bool dropItemToSpace(const type::entity&);
+//    bool dropItemToSpace(const entity::Type&);
 
 //protected:
 //    void _increaseMass(int);
@@ -559,9 +559,9 @@ private:
 //protected:
 //    std::vector<ItemSlot*> m_slots;
 
-//    ItemSlot* const _functionalSlot(const type::entity&) const;
+//    ItemSlot* const _functionalSlot(const entity::Type&) const;
 //    ItemSlot* const _freeArtefactSlot() const;
-//    ItemSlot* const _cargoSlotWithGoods(type::entity);
+//    ItemSlot* const _cargoSlotWithGoods(entity::Type);
 
 //    bool _installItem(item::Base*);
 //    bool _installEquipment(item::Base*);

@@ -147,10 +147,10 @@ void GuiManager::ExitGuiSpace()
              
 void GuiManager::UpdateSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(type::GUI::SCAN_VEHICLE_ID);
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(type::GUI::PLAYER_VEHICLE_ID);
-    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(type::GUI::GUI_RADAR_ID);
-    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(type::GUI::GALAXYMAP_ID);
+    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(gui::type::SCAN_VEHICLE_ID);
+    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(gui::type::PLAYER_VEHICLE_ID);
+    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(gui::type::GUI_RADAR_ID);
+    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(gui::type::GALAXYMAP_ID);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -164,7 +164,7 @@ void GuiManager::UpdateSessionInSpace()
 //    {
 //        if (gui_scan_vehicle->vehicle() == nullptr)
 //        {
-//            if (scan_target->type() == type::entity::VEHICLE_ID)
+//            if (scan_target->type() == entity::Type::VEHICLE_ID)
 //            {
 //                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
 //                gui_scan_vehicle->Show();
@@ -183,7 +183,7 @@ void GuiManager::UpdateSessionInSpace()
 //        gui_radar->Show();
 //    }
 
-    BaseGuiElement* button = GetGuiElement(type::GUI::BUTTON_GALAXYMAP_ID);
+    BaseGuiElement* button = GetGuiElement(gui::type::BUTTON_GALAXYMAP_ID);
     if (button->GetPressed())
     {
         //player->GetNpc()->ResetScanTarget();
@@ -249,17 +249,17 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::PressEventMBL_onGuiElement(type::GUI subtype_id)
+void GuiManager::PressEventMBL_onGuiElement(gui::type subtype_id)
 {
     gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
 }    
 
-void GuiManager::ResetEventOnGuiElement(type::GUI subtype_id)
+void GuiManager::ResetEventOnGuiElement(gui::type subtype_id)
 {
     gui_space.ResetStateEventOnGuiElement(subtype_id);
 }    
 
-BaseGuiElement* GuiManager::GetGuiElement(type::GUI request_subtype_id) const
+BaseGuiElement* GuiManager::GetGuiElement(gui::type request_subtype_id) const
 {
     return gui_space.GetGuiElement(request_subtype_id);
 }

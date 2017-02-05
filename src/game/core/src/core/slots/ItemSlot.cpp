@@ -63,7 +63,7 @@ ItemSlot::data() const
 
 namespace control {
 
-ItemSlot::ItemSlot(int_t id, type::entity subtype_id)
+ItemSlot::ItemSlot(int_t id, entity::type subtype_id)
     :
       m_turrel(nullptr),
       m_item(nullptr),
@@ -73,7 +73,7 @@ ItemSlot::ItemSlot(int_t id, type::entity subtype_id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::ITEM_SLOT_ID);
+//    setTypeId(entity::Type::ITEM_SLOT_ID);
 //    setSubTypeId(subtype_id);
     
     m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
@@ -126,8 +126,8 @@ bool ItemSlot::checkAmmo() const
 {
     assert(false);
 //    switch(item()->subtype()) {
-//        case type::entity::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
-//        case type::entity::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
+//        case entity::Type::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+//        case entity::Type::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
 //    }
     
     return false;
@@ -138,12 +138,12 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
     assert(false);
 //    switch(item()->subtype())
 //    {
-//        case type::entity::LAZER_EQUIPMENT_ID: {
+//        case entity::Type::LAZER_EQUIPMENT_ID: {
 //            lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
 //            break;
 //        }
 
-//        case type::entity::ROCKET_EQUIPMENT_ID: {
+//        case entity::Type::ROCKET_EQUIPMENT_ID: {
 //            rocketEquipment()->FireEvent(attack_rate);
 //            break;
 //        }
@@ -157,7 +157,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 bool ItemSlot::checkItemInsertion(control::item::Base* item) const
 {
     assert(false);
-//    if (subtype() == type::entity::CARGO_SLOT_ID) {
+//    if (subtype() == entity::Type::CARGO_SLOT_ID) {
 //        return true;
 //    }
 
@@ -172,7 +172,7 @@ bool ItemSlot::insert(item::Base* item)
 {
     assert(false);
 //    // make it oop
-//    if (subtype() == type::entity::GATE_SLOT_ID)
+//    if (subtype() == entity::Type::GATE_SLOT_ID)
 //    {
 //        // make a gate not be a slot
 //        //m_item = item;
@@ -180,7 +180,7 @@ bool ItemSlot::insert(item::Base* item)
 //        return false;
 //    }
 
-//    if (subtype() == type::entity::CARGO_SLOT_ID)
+//    if (subtype() == entity::Type::CARGO_SLOT_ID)
 //    {
 //        m_item = item;
 //        if (item->slot() != nullptr)
@@ -215,7 +215,7 @@ void ItemSlot::removeItem()
     resetTarget();
 
     assert(false);
-//    if (subtype() != type::entity::CARGO_SLOT_ID) {
+//    if (subtype() != entity::Type::CARGO_SLOT_ID) {
 //        updateVehiclePropetries();
 //    }
 }
@@ -226,9 +226,9 @@ void ItemSlot::selectEvent()
     setSelected(true);
 
     assert(false);
-//    if (owner()->type() == type::entity::VEHICLE_ID) {
+//    if (owner()->type() == entity::Type::VEHICLE_ID) {
 //        switch(subtype()) {
-//            case type::entity::DRIVE_SLOT_ID: { vehicleOwner()->_updatePropSpeed(); break; }
+//            case entity::Type::DRIVE_SLOT_ID: { vehicleOwner()->_updatePropSpeed(); break; }
 //        }
 //    }
 }
@@ -239,12 +239,12 @@ void ItemSlot::deselectEvent()
     setSelected(false);
 
     assert(false);
-//    if (owner()->type() == type::entity::VEHICLE_ID)
+//    if (owner()->type() == entity::Type::VEHICLE_ID)
 //    {
 //        switch(subtype())
 //        {
-//            case type::entity::WEAPON_SLOT_ID:     {     resetTarget(); break; }
-//            case type::entity::DRIVE_SLOT_ID:
+//            case entity::Type::WEAPON_SLOT_ID:     {     resetTarget(); break; }
+//            case entity::Type::DRIVE_SLOT_ID:
 //            {
 //                assert(false);
 ////                vehicleOwner()->_updatePropSpeed();
@@ -260,33 +260,33 @@ void ItemSlot::updateVehiclePropetries() const
 {
     // TODO: make it oop
     assert(false);
-//    if (subtype() != type::entity::CARGO_SLOT_ID)
+//    if (subtype() != entity::Type::CARGO_SLOT_ID)
 //    {
 //        switch(subtype())
 //        {
-//            case type::entity::WEAPON_SLOT_ID:     { vehicleOwner()->_updatePropFire(); break; }
-//            case type::entity::SCANER_SLOT_ID:     { vehicleOwner()->_updatePropScan(); break; }
-//            case type::entity::BAK_SLOT_ID:         {
+//            case entity::Type::WEAPON_SLOT_ID:     { vehicleOwner()->_updatePropFire(); break; }
+//            case entity::Type::SCANER_SLOT_ID:     { vehicleOwner()->_updatePropScan(); break; }
+//            case entity::Type::BAK_SLOT_ID:         {
 //                vehicleOwner()->_updatePropSpeed();
 //                vehicleOwner()->_updatePropJump();
 
 //                break;
 //            }
 
-//            case type::entity::DRIVE_SLOT_ID:       {
+//            case entity::Type::DRIVE_SLOT_ID:       {
 //                vehicleOwner()->_updatePropSpeed();
 //                vehicleOwner()->_updatePropJump();
 //                break;
 //            }
                 
-//            case type::entity::DROID_SLOT_ID:     { vehicleOwner()->_updatePropRepair(); break; }
-//            case type::entity::ENERGIZER_SLOT_ID: { vehicleOwner()->_updatePropEnergy(); break; }
-//            case type::entity::FREEZER_SLOT_ID:     { vehicleOwner()->_updatePropFreeze(); break; }
-//            case type::entity::GRAPPLE_SLOT_ID:     { vehicleOwner()->_updatePropGrab(); break; }
-//            case type::entity::PROTECTOR_SLOT_ID: { vehicleOwner()->_updatePropProtection(); break; }
-//            case type::entity::RADAR_SLOT_ID:     { vehicleOwner()->_updatePropRadar(); break; }
+//            case entity::Type::DROID_SLOT_ID:     { vehicleOwner()->_updatePropRepair(); break; }
+//            case entity::Type::ENERGIZER_SLOT_ID: { vehicleOwner()->_updatePropEnergy(); break; }
+//            case entity::Type::FREEZER_SLOT_ID:     { vehicleOwner()->_updatePropFreeze(); break; }
+//            case entity::Type::GRAPPLE_SLOT_ID:     { vehicleOwner()->_updatePropGrab(); break; }
+//            case entity::Type::PROTECTOR_SLOT_ID: { vehicleOwner()->_updatePropProtection(); break; }
+//            case entity::Type::RADAR_SLOT_ID:     { vehicleOwner()->_updatePropRadar(); break; }
 
-//            case type::entity::ARTEFACT_SLOT_ID: { vehicleOwner()->_updateArtefactInfluence(); break; }
+//            case entity::Type::ARTEFACT_SLOT_ID: { vehicleOwner()->_updateArtefactInfluence(); break; }
 //        }
 //    }
 }
@@ -320,21 +320,21 @@ int ItemSlot::itemRadius() const
 {       
 //    switch(m_item->typeId())
 //    {
-//        case type::entity::EQUIPMENT_ID:
+//        case entity::Type::EQUIPMENT_ID:
 //        {
 //            switch (m_item->subTypeId())
 //            {
-//                case type::entity::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->radius();  break; };
-//                case type::entity::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->radius(); break; };
+//                case entity::Type::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->radius();  break; };
+//                case entity::Type::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->radius(); break; };
 
-//                case type::entity::GRAPPLE_EQUIPMENT_ID: { return grappleEquipment()->radius(); break; };
-//                case type::entity::RADAR_EQUIPMENT_ID:   { return radarEquipment()->radius();   break; };
+//                case entity::Type::GRAPPLE_EQUIPMENT_ID: { return grappleEquipment()->radius(); break; };
+//                case entity::Type::RADAR_EQUIPMENT_ID:   { return radarEquipment()->radius();   break; };
 //            }
             
 //            break;
 //        }
 
-//        case type::entity::BOMB_ID:
+//        case entity::Type::BOMB_ID:
 //        {
 //            return bomb()->radius();   break;
 //        }
@@ -350,18 +350,18 @@ int ItemSlot::itemDamage() const
 {       
 //    switch(m_item->typeId())
 //    {
-//        case type::entity::EQUIPMENT_ID:
+//        case entity::Type::EQUIPMENT_ID:
 //        {
 //            switch (m_item->subTypeId())
 //            {
-//                case type::entity::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->damage();  break; };
-//                case type::entity::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->damage(); break; };
+//                case entity::Type::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->damage();  break; };
+//                case entity::Type::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->damage(); break; };
 //            }
             
 //            break;
 //        }
             
-//        case type::entity::BOMB_ID:
+//        case entity::Type::BOMB_ID:
 //        {
 //            return bomb()->damage();   break;
 //        }
@@ -407,7 +407,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
         }
 
 #ifdef USE_MODULES
-        if ( (m_item->typeId() == type::entity::MODULE_ID) && (slot->item()->typeId() == type::entity::EQUIPMENT_ID) ) {
+        if ( (m_item->typeId() == entity::Type::MODULE_ID) && (slot->item()->typeId() == entity::Type::EQUIPMENT_ID) ) {
             if (((BaseEquipment*)slot->item())->InsertModule((BaseModule*)m_item) == true) {
                 return true;
             }
@@ -490,7 +490,7 @@ bool ItemSlot::isTargetAlive(model::SpaceObject* target) const
 
 bool ItemSlot::isTargetInSpace(model::SpaceObject* target) const
 {
-    return (target->place() == type::place::KOSMOS);
+    return (target->place() == place::type::KOSMOS);
 }               
 
 bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const
@@ -501,7 +501,7 @@ bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const
 
 bool ItemSlot::checkDistanceToTarget(model::SpaceObject* target) const
 {
-    if (target->type() == type::entity::STARSYSTEM_ID) {
+    if (target->type() == entity::type::STARSYSTEM_ID) {
         return true;
     }
     
@@ -573,11 +573,11 @@ void ItemSlot::Resolve()
 
 ////    switch(owner->typeId())
 ////    {
-////        case type::entity::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
-////        case type::entity::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
-////        case type::entity::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
-////        case type::entity::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
-////            //case type::entity::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
+////        case entity::Type::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
+////        case entity::Type::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
+////        case entity::Type::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
+////        case entity::Type::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
+////            //case entity::Type::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
 ////    }
 //}
 

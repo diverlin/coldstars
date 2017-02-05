@@ -75,7 +75,7 @@ npc(nullptr),
 starsystem(nullptr)     
 { 
 //    setId(id);
-//    setTypeId(type::entity::PLAYER_ID);
+//    setTypeId(entity::Type::PLAYER_ID);
     
     GuiManager::Instance().SetPlayer(this);
 }

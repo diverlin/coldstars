@@ -31,8 +31,8 @@ namespace model {
 
 Satellite::Satellite()
 {
-    setType(type::entity::VEHICLE_ID);
-    setSubType(type::entity::SATELLITE_ID);
+    setType(entity::type::VEHICLE_ID);
+    setSubType(entity::type::SATELLITE_ID);
 }
 
 Satellite::~Satellite()
@@ -156,8 +156,8 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 //Satellite::Satellite(int id)
 //{
 //    setId(id);
-//    setTypeId(type::entity::VEHICLE_ID);
-//    setSubTypeId(type::entity::SATELLITE_ID);
+//    setTypeId(entity::Type::VEHICLE_ID);
+//    setSubTypeId(entity::Type::SATELLITE_ID);
     
 //    setMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
 //}

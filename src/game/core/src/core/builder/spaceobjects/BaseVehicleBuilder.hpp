@@ -32,10 +32,10 @@ public:
     virtual ~BaseVehicle() {}
 
     static void equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor);
-    static void equip(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
-    static void equipModules(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
-    static void equipArtefacts(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
-    static void equipBomb(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
+    static void equip(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
+    static void equipModules(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
+    static void equipArtefacts(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
+    static void equipBomb(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
 
 protected:
     static void _createSlots(Vehicle*);

@@ -34,7 +34,7 @@
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {
-    setTypeId(type::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID);
+    setTypeId(ai::type::MACRO_STARSYSTEMDEFENCE_ID);
 }
 
 /*virtual*/

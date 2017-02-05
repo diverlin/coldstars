@@ -196,7 +196,7 @@ void DriveComplex::UpdatePath()
 bool DriveComplex::ValidateTarget() const
 {
     if (m_target->isAlive()) {
-        if (m_target->place() == type::place::KOSMOS) {
+        if (m_target->place() == place::type::KOSMOS) {
             return true;
         }
     }
@@ -210,7 +210,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 {
     switch(m_target->type())
     {
-        case type::entity::STARSYSTEM_ID:
+        case entity::type::STARSYSTEM_ID:
         {
         assert(false);
 //            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
@@ -220,27 +220,27 @@ void DriveComplex::UpdateDynamicTargetCoord()
             break;
         }
     
-        case type::entity::PLANET_ID:
+        case entity::type::PLANET_ID:
         {
             //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
             //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
             break;
         }
 
-        case type::entity::ASTEROID_ID:
+        case entity::type::ASTEROID_ID:
         {
         // TODO
 //            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
 //            break;
         }
          
-        case type::entity::VEHICLE_ID:
+        case entity::type::VEHICLE_ID:
         {
             m_TargetPos = m_target->position() + m_TargetOffset;
             break;
         }
 
-        case type::entity::CONTAINER_ID:
+        case entity::type::CONTAINER_ID:
         {
             m_TargetPos = m_target->position() + m_TargetOffset;
             break;
@@ -270,13 +270,13 @@ bool DriveComplex::GetDockingPermission()
 {
     switch(m_target->type())
     {
-        //case type::entity::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
-        case type::entity::VEHICLE_ID:
+        //case entity::Type::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
+        case entity::type::VEHICLE_ID:
         {
             switch(m_target->subtype())
             {
                 assert(false);
-                //case type::entity::SPACESTATION_ID: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
+                //case entity::Type::SPACESTATION_ID: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
                 //case SHIP_ID:   { return targetOb->vehicle()->getPermissionToLand(); break; }
             }
             break;

@@ -30,8 +30,8 @@ namespace item {
 
 Bak::Bak()
 {
-    setType(type::entity::EQUIPMENT_ID);
-    setSubType(type::entity::BAK_EQUIPMENT_ID);
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::BAK_EQUIPMENT_ID);
 }
 
 Bak::Bak(const std::string& data)

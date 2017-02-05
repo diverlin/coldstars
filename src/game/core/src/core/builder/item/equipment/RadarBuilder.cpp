@@ -69,7 +69,7 @@ void RadarBuilder::createInternals(Radar* radar, const descriptor::BaseOLD& desc
     ItemCommonData common_data = extractCommonData(descriptor);
 
     radar->SetRadiusOrig(descriptor.radius());
-    radar->setParentSubTypeId(type::entity::RADAR_SLOT_ID);
+    radar->setParentSubTypeId(entity::type::RADAR_SLOT_ID);
     radar->setItemCommonData(common_data);
 
     radar->updateProperties();

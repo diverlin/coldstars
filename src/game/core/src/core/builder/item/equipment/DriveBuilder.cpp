@@ -68,7 +68,7 @@ void Drive::createInternals(model::item::Drive* drive, const descriptor::BaseOLD
 
 //    drive->SetSpeedOrig(descriptor.speed());
 //    drive->SetHyperOrig(descriptor.hyper());
-//    drive->setParentSubTypeId(type::entity::DRIVE_SLOT_ID);
+//    drive->setParentSubTypeId(entity::Type::DRIVE_SLOT_ID);
 //    drive->setItemCommonData(data);
     
 //    drive->updateProperties();

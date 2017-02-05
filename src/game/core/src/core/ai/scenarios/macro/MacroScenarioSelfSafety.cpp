@@ -25,7 +25,7 @@
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {
-    setTypeId(type::AISCENARIO::MACRO_SELFSAFETY_ID);
+    setTypeId(ai::type::MACRO_SELFSAFETY_ID);
 }
 
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
@@ -36,7 +36,7 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
     assert(false);
 //    if (npc->starsystem()->conditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
 //    {
-//        if (npc->stateMachine().macroTaskManager().target()->type() != type::entity::PLANET_ID)
+//        if (npc->stateMachine().macroTaskManager().target()->type() != entity::Type::PLANET_ID)
 //        {
 ////            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->planetForDocking()->id());
 ////            npc->stateMachine().setCurrentMicroTask(microtask);
@@ -44,7 +44,7 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 //    }
 //    else
 //    {
-//        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != type::entity::STARSYSTEM_ID)
+//        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != entity::Type::STARSYSTEM_ID)
 //        //{
 //            //if (npc->vehicle()->GetFailBackStarSystem() != nullptr)
 //            //{

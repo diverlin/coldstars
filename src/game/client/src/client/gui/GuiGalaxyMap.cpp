@@ -50,7 +50,7 @@
 
 GuiGalaxyMap::GuiGalaxyMap()
 :
-BaseGuiElement(type::GUI::GALAXYMAP_ID, type::GUI::GALAXYMAP_ID),
+BaseGuiElement(gui::type::GALAXYMAP_ID, gui::type::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
 //    int w = core::global::get().config().width;
@@ -157,7 +157,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 //            {
 //                //drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
                 
-//                if (starsystem.GetConquerorRaceId() != type::RACE::NONE_ID)
+//                if (starsystem.GetConquerorRaceId() != race::type::NONE_ID)
 //                {
 //                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
 //                }

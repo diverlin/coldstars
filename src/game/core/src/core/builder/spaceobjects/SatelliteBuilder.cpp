@@ -54,7 +54,7 @@ Satellite::getNew()
 void Satellite::__createInternals(model::Satellite* model)
 {
     assert(false);
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 //    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
 
 //    int protection_rate = 1;

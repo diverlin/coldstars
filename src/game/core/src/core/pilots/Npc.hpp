@@ -57,7 +57,7 @@ public:
     Npc(const std::string& data);
     std::string data() const;
 
-    //    void setRaceId(type::race race_id)            { m_raceId = race_id; }
+    //    void setRaceId(race::type race_id)            { m_raceId = race_id; }
     //    void setAiModel(BaseAiModel* ai_model)        { m_aiModel = ai_model; }
     //    void setAlive(bool is_alive)            { m_isAlive = is_alive; }
     //    void setScanTarget(Vehicle* target)    { m_scanTarget = target; }
@@ -105,7 +105,7 @@ namespace control {
 class Npc : public model::Base
 {
 public:
-    Npc(int, type::entity, type::entity);
+    Npc(int, entity::type, entity::type);
     virtual ~Npc();
 
     virtual void putChildrenToGarbage() const {}
@@ -183,19 +183,19 @@ private:
 //class Npc : public model::Base
 //{
 //public:
-//    Npc(int, type::entity, type::entity);
+//    Npc(int, entity::Type, entity::Type);
 //    virtual ~Npc();
 
 //    virtual void putChildrenToGarbage() const {}
 
-//    void setRaceId(type::race race_id)            { m_raceId = race_id; }
+//    void setRaceId(race::type race_id)            { m_raceId = race_id; }
 //    void setAiModel(BaseAiModel* ai_model)        { m_aiModel = ai_model; }
 //    void setAlive(bool is_alive)            { m_isAlive = is_alive; }
 //    void setScanTarget(Vehicle* target)    { m_scanTarget = target; }
 //    void setPlayer(Player* player) { m_player = player; }
 //    void setVehicle(Vehicle* vehicle)         { m_vehicle = vehicle; }
 
-//    type::race raceId() const { return m_raceId; }
+//    race::type raceId() const { return m_raceId; }
 
 //    Player* player() const { return m_player; }
 //    Vehicle* vehicle() const { return m_vehicle; }
@@ -245,7 +245,7 @@ private:
 
 //private:
 //    bool m_isAlive;
-//    type::race m_raceId;
+//    race::type m_raceId;
 //    unsigned long int m_credits;
 
 //    Player* m_player;

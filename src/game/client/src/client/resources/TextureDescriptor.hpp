@@ -30,17 +30,17 @@
 
 struct TextureDescriptor
 {
-    type::texture type_id;
-    type::entity subtype_id;   //# warrior/trader and so on
-    type::race race_id;
-    type::tech tech_level_id;
+    texture::type type_id;
+    entity::type subtype_id;   //# warrior/trader and so on
+    race::type race_id;
+    tech::type tech_level_id;
 
     TextureDescriptor()
     :
-    type_id(type::texture::FAILBACK),
-    subtype_id(type::entity::NONE_ID),
-    race_id(type::race::NONE_ID),
-    tech_level_id(type::tech::NONE)
+    type_id(texture::type::FAILBACK),
+    subtype_id(entity::type::NONE_ID),
+    race_id(race::type::NONE_ID),
+    tech_level_id(tech::type::NONE)
     {}
 
     bool operator==(const TextureDescriptor& rhs) const

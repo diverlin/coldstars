@@ -26,7 +26,7 @@
 
 MicroScenarioDocking::MicroScenarioDocking()
 {
-    setTypeId(type::AISCENARIO::MICRO_DOCKING_ID);
+    setTypeId(ai::type::MICRO_DOCKING_ID);
 }
 
 /* virtual */

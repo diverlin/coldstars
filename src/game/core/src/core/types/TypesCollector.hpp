@@ -23,11 +23,9 @@
 #include <string>
 #include <map>
 
-namespace type
-{
+namespace type {
 
 class Collector {
-
 public:
     Collector();
     ~Collector();
@@ -42,6 +40,5 @@ private:
 };
 
 } // namespace type
-
 
 

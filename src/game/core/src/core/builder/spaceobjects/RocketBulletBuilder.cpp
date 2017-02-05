@@ -51,7 +51,7 @@ Rocket::getNew(const BulletData& data_bullet) const
 
 void Rocket::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
 
     LifeData data_life;
     data_life.armor = data_bullet.armor;

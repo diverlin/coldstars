@@ -58,13 +58,13 @@ TEST(ship, drop_item_to_space)
     /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->model()->place(), type::place::NONE);
+    EXPECT_EQ(ship->model()->place(), place::type::NONE);
     starsystem->add(ship->model(), pos, dir);
-    EXPECT_EQ(ship->model()->place(), type::place::KOSMOS);
+    EXPECT_EQ(ship->model()->place(), place::type::KOSMOS);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_TRUE(ship->dropItemToSpace(type::entity::DRIVE_SLOT_ID));
+    EXPECT_TRUE(ship->dropItemToSpace(entity::type::DRIVE_SLOT_ID));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
     assert(false);

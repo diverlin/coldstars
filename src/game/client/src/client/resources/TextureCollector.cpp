@@ -77,7 +77,7 @@ jeti::control::Material* TextureCollector::get(int id)
     return requested;
 }
 
-jeti::control::Material* TextureCollector::getTextureByTypeId(type::texture type_id)
+jeti::control::Material* TextureCollector::getTextureByTypeId(texture::type type_id)
 {
     jeti::control::Material* requested = nullptr;
     if (hasTypeId(type_id)) {
@@ -88,7 +88,7 @@ jeti::control::Material* TextureCollector::getTextureByTypeId(type::texture type
     return requested;
 }
 
-jeti::control::Material* TextureCollector::getTextureByColorId(type::texture type_id, int color_id)
+jeti::control::Material* TextureCollector::getTextureByColorId(texture::type type_id, int color_id)
 {
     jeti::control::Material* requested = nullptr;
     if (hasTypeId(type_id)) {
@@ -104,7 +104,7 @@ jeti::control::Material* TextureCollector::getTextureByColorId(type::texture typ
     return requested;
 }
 
-jeti::control::Material* TextureCollector::getTextureByRaceId(type::texture type_id, type::race race_id)
+jeti::control::Material* TextureCollector::getTextureByRaceId(texture::type type_id, race::type race_id)
 {
     jeti::control::Material* requested = nullptr;
     if (hasTypeId(type_id)) {
@@ -158,7 +158,7 @@ bool TextureCollector::hasId(int id) const
     }
 }
 
-bool TextureCollector::hasTypeId(type::texture type_id) const
+bool TextureCollector::hasTypeId(texture::type type_id) const
 {
     if (m_typesTextures.find(type_id) != m_typesTextures.end()) {
         return true;

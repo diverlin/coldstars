@@ -16,12 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef AISCENARIOTYPES_HPP
-#define AISCENARIOTYPES_HPP
+#pragma once
 
-namespace type
+namespace ai
 {
-    enum class AISCENARIO
+    enum class type
     {
         NONE_ID = 0,
         
@@ -37,9 +36,8 @@ namespace type
         MICRO_GRAB_ID,
         MICRO_JUMP_ID,
         MICRO_EXPLORATION_ID
-    };
-    
-} 
+    };    
+} // namespace ai
 
-#endif
+
 

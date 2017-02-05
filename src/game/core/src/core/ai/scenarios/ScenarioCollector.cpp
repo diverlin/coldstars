@@ -32,10 +32,10 @@ void ScenarioCollector::add(BaseScenario* scenario)
     m_scenarios.insert(std::make_pair(scenario->typeId(), scenario));
 }
           
-BaseScenario* ScenarioCollector::get(type::AISCENARIO type_id) const
+BaseScenario* ScenarioCollector::get(ai::type type) const
 {
-    if (type_id != type::AISCENARIO::NONE_ID) {
-        return (m_scenarios.find(type_id))->second;
+    if (type != ai::type::NONE_ID) {
+        return (m_scenarios.find(type))->second;
     }
     return nullptr;
 }

@@ -21,21 +21,32 @@
 
 #include <string>
 
-
-namespace type
+namespace race
 {
-    enum class race : int
+    enum class type : int
     {
-        NONE_ID=0, R0_ID, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID, LAST_ID
+        NONE_ID=0,
+        //
+        R0_ID,
+        R1_ID,
+        R2_ID,
+        R3_ID,
+        R4_ID,
+        R6_ID,
+        R7_ID,
+        //
+        LAST_ID
     };
 
     enum class KIND : int
     {
-        EVIL, GOOD, ALL
+        EVIL,
+        GOOD,
+        ALL
     };
 }
 
-std::string to_string(type::race);
+std::string to_string(race::type);
 
 
 

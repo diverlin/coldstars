@@ -89,7 +89,7 @@ BakBuilder::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& 
 
     bak->setFuelMaxOrig(descriptor.fuelMax());
     bak->setFuel(descriptor.fuelMax()); // ?? max or not, second descriptor should be used
-    bak->setParentSubTypeId(type::entity::BAK_SLOT_ID);
+    bak->setParentSubTypeId(entity::type::BAK_SLOT_ID);
     bak->setItemCommonData(data);
 
     assert(false);

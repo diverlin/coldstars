@@ -26,7 +26,7 @@
 class Task
 {
     public:
-        Task(type::AISCENARIO scenario_type_id = type::AISCENARIO::NONE_ID, int_t target_id = NONE, int reward = 0, int expiriance = 0):
+        Task(ai::type scenario_type_id = ai::type::NONE_ID, int_t target_id = NONE, int reward = 0, int expiriance = 0):
         m_reward(reward),
         m_expiriance(expiriance),
         m_scenario_type_id(scenario_type_id),
@@ -37,7 +37,7 @@ class Task
 
         void SetResult(int result)  { m_result = result; }
                 
-        type::AISCENARIO GetScenarioTypeId() const { return m_scenario_type_id; }
+        ai::type GetScenarioTypeId() const { return m_scenario_type_id; }
         int_t targetId() const { return m_target_id; }
                 
         int result() const { return m_result; }
@@ -53,7 +53,7 @@ class Task
         int m_reward = 0;
         int m_expiriance = 0;
         
-        type::AISCENARIO m_scenario_type_id;
+        ai::type m_scenario_type_id = ai::type::NONE_ID;
         int_t m_target_id = 0;
 };
 

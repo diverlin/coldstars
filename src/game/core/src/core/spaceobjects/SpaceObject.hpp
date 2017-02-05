@@ -54,7 +54,7 @@ public:
     void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
     void setStarSystem(int_t starsystem) { m_starsystem = starsystem; }
-    void setPlace(type::place place) { m_place = place;  }
+    void setPlace(place::type place) { m_place = place;  }
     void setMass(int mass) { m_mass = mass; }
 
     void setIsAlive(bool is_alive) { m_dataLife.is_alive = is_alive; }
@@ -76,7 +76,7 @@ public:
 
     int mass()  const { return m_mass; }
     int armor() const { return m_dataLife.armor; }
-    type::place place() const { return m_place; }
+    place::type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
     void immidiateKill() {
@@ -88,7 +88,7 @@ private:
     LifeData m_dataLife;
     int_t m_parent = NONE;
     int_t m_starsystem = NONE;
-    type::place m_place = type::place::NONE;
+    place::type m_place = place::type::NONE;
     int m_mass = 0;
     int m_expirienceToGive = 0;
 
@@ -178,7 +178,7 @@ protected:
 //    void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
 //    void setStarSystem(Starsystem* starsystem) { m_starsystem = starsystem; }
-//    void setPlaceTypeId(type::place place_type_id) { m_placeTypeId = place_type_id;  }
+//    void setPlaceTypeId(place::type place_type_id) { m_placeTypeId = place_type_id;  }
 //    void setMass(int mass) { m_mass = mass; }
 
 //    void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
@@ -186,7 +186,7 @@ protected:
 //    void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
 //    Starsystem* starsystem()  const { return m_starsystem; }
-//    type::place place() const { return m_placeTypeId; }
+//    place::type place() const { return m_placeTypeId; }
 
 //    virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
 
@@ -234,7 +234,7 @@ protected:
 //    glm::vec3 m_externalForce;
 
 //    Starsystem* m_starsystem = nullptr;
-//    type::place m_placeTypeId = type::place::NONE;
+//    place::type m_placeTypeId = type::place::NONE;
 
 //    int m_mass = 0;
 //    int m_expirienceToGive = 0;

@@ -51,7 +51,7 @@ Rocket* RocketBuilder::createTemplate(int_t id) const
     return rocket;
 } 
 
-Rocket* RocketBuilder::getNew(type::tech tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+Rocket* RocketBuilder::getNew(tech::type tech_level, race::type race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     Rocket* rocket = createTemplate();
     createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -59,17 +59,17 @@ Rocket* RocketBuilder::getNew(type::tech tech_level, type::race race_id, int amm
     return rocket;
 } 
 
-void RocketBuilder::createInternals(Rocket* rocket, type::tech tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(Rocket* rocket, tech::type tech_level, race::type race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
-    if (race_id == type::race::NONE_ID) {
-        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+    if (race_id == race::type::NONE_ID) {
+        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
     }
     
-    if (tech_level == type::tech::NONE) {
-        tech_level = type::tech::LEVEL0;
+    if (tech_level == tech::type::NONE) {
+        tech_level = tech::type::LEVEL0;
     }
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)
     
@@ -102,7 +102,7 @@ void RocketBuilder::createInternals(Rocket* rocket, type::tech tech_level, type:
     rocket->SetBulletData(data_bullet);
     rocket->SetAmmo(ammo_max_orig*0.6);
     //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-    rocket->setParentSubTypeId(type::entity::WEAPON_SLOT_ID);
+    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
     rocket->setItemCommonData(common_data);
     
     rocket->updateProperties();

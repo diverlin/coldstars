@@ -68,8 +68,10 @@ namespace model {
 
 Starsystem::Starsystem()
 {
-    setType(type::entity::STARSYSTEM_ID);
-    setPlace(type::place::KOSMOS);
+    setType(entity::type::STARSYSTEM_ID);
+
+    setPlace(place::type::KOSMOS);
+
     m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
 }
 
@@ -142,7 +144,7 @@ void Starsystem::putChildrenToGarbage() const
 }      
 
 model::Npc*
-Starsystem::freeLeaderByRaceId(type::race race_id) const
+Starsystem::freeLeaderByRaceId(race::type race_id) const
 {
     std::vector<model::Npc*> npcs;
     for (control::Vehicle* vehicle: m_vehicles) {
@@ -232,7 +234,7 @@ void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& positio
 
 void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
 {
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
     _model->setStarSystem(model()->id());
 
     _model->setPosition(position);
@@ -248,7 +250,7 @@ void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, con
 void Starsystem::add(model::Star* _model)
 {
     _model->setStarSystem(model()->id());
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
 
     control::Star* star = new control::Star(_model);
     star->initialize();
@@ -263,7 +265,7 @@ void Starsystem::add(model::Planet* _model, const model::SpaceObject* parent)
 
     _model->setParent(parent->id());
     _model->setStarSystem(model()->id());
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
 
     _model->setRadiusA(_model->radiusA() * (m_planets.size() + 2));
     _model->setRadiusB(_model->radiusB() * (m_planets.size() + 2));
@@ -282,7 +284,7 @@ void Starsystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
         _model->setParent(parent->id());
     }
     _model->setStarSystem(model()->id());
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
 
     control::Asteroid* asteroid = new control::Asteroid(_model);
     asteroid->initialize();
@@ -301,7 +303,7 @@ void Starsystem::add(model::Container* _model, const glm::vec3& center)
     }
 
     _model->setStarSystem(model()->id());
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
     control::Container* container = new control::Container(_model);
@@ -312,7 +314,7 @@ void Starsystem::add(model::Container* _model, const glm::vec3& center)
 void Starsystem::add(model::BlackHole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
-    _model->setPlace(type::place::KOSMOS);
+    _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
     control::BlackHole* blackhole = new control::BlackHole(_model);
@@ -432,7 +434,7 @@ Starsystem::randomVehicle() const
 }
 
 control::Vehicle*
-Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
+Starsystem::randomVehicleExcludingNpcRaceId(race::type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -453,7 +455,7 @@ Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
 }
 
 control::Vehicle*
-Starsystem::randVehicleByNpcRaceId(type::race race_id) const
+Starsystem::randVehicleByNpcRaceId(race::type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -475,13 +477,13 @@ Starsystem::randVehicleByNpcRaceId(type::race race_id) const
 }
 
 control::Vehicle*
-Starsystem::randomVehicle(const std::vector<type::race>& races) const
+Starsystem::randomVehicle(const std::vector<race::type>& races) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
 
     assert(false);
-    //    for (const type::race& race: races) {
+    //    for (const race::type& race: races) {
     //        for (Vehicle* vehicle: m_vehicles) {
     //            if (race == vehicle->npc()->raceId()) {
     //                vehicles.push_back(vehicle);
@@ -528,12 +530,12 @@ void Starsystem::__updateStates()
     bool enemy_is_here    = false;
     bool friendly_is_here = false;
     
-    control::Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
+    control::Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::EVIL));
     if (_vehicle_evil) {
         enemy_is_here = true;
     }
 
-    control::Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+    control::Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
     if (_vehicle_good) {
         friendly_is_here = true;
     }
@@ -551,14 +553,14 @@ void Starsystem::__updateStates()
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-                if (randVehicleByNpcRaceId(type::race::R6_ID) != nullptr)
+                if (randVehicleByNpcRaceId(race::type::R6_ID) != nullptr)
                 {
-                    m_conqueror_race_id = type::race::R6_ID;
+                    m_conqueror_race_id = race::type::R6_ID;
                 }
 
-                if (randVehicleByNpcRaceId(type::race::R7_ID) != nullptr)
+                if (randVehicleByNpcRaceId(race::type::R7_ID) != nullptr)
                 {
-                    m_conqueror_race_id = type::race::R7_ID;
+                    m_conqueror_race_id = race::type::R7_ID;
                 }
             }
         }
@@ -577,7 +579,7 @@ void Starsystem::__updateStates()
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-                m_conqueror_race_id = type::race::NONE_ID;
+                m_conqueror_race_id = race::type::NONE_ID;
             }
         }
 
@@ -834,7 +836,7 @@ void Starsystem::__updateInSpaceInStatic_s()
     for (control::Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        vehicle->npc()->updateInSpaceInStatic();
-        //        if (vehicle->subtype() == type::entity::SPACESTATION_ID) {
+        //        if (vehicle->subtype() == entity::Type::SPACESTATION_ID) {
         //            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
         //        }
     }
@@ -866,7 +868,7 @@ void Starsystem::findRenderVisibleEntities_c(Player* player)
 
 void Starsystem::findRadarVisibleEntities_c(Player* player)
 {    
-    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
+    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(gui::type::GUI_RADAR_ID);
     //    const Vehicle& vehicle = *player->GetNpc()->vehicle();
     //    gui_radar.ResetData();
     
@@ -918,13 +920,13 @@ void Starsystem::__shipManager_s(unsigned int num)
 {
     while (m_vehicles.size() < num)
     {
-        type::race prace_id = type::race::R0_ID;
+        race::type prace_id = race::type::R0_ID;
         if (meti::getRandBool()) {
-            prace_id = type::race::R6_ID;
+            prace_id = race::type::R6_ID;
         }
         
-        type::entity psubtype_id    = type::entity::WARRIOR_ID;
-        type::entity psubsubtype_id = type::entity::WARRIOR_ID;
+        entity::type psubtype_id    = entity::type::WARRIOR_ID;
+        entity::type psubsubtype_id = entity::type::WARRIOR_ID;
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
 

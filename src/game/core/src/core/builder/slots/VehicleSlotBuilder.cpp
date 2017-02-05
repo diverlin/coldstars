@@ -33,7 +33,7 @@
 
 
 control::VehicleSlot*
-getNewVehicleSlot(type::entity subtype_id, int_t id)
+getNewVehicleSlot(entity::type subtype_id, int_t id)
 {
     control::VehicleSlot* vehicle_slot = new control::VehicleSlot(id, subtype_id);
     assert(vehicle_slot);    

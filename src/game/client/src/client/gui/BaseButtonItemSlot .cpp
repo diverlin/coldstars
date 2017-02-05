@@ -46,7 +46,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     assert(false);
 //    if (m_ItemSlot != nullptr)
 //    {
-//        if (m_ItemSlot->subtype() != type::entity::CARGO_SLOT_ID)
+//        if (m_ItemSlot->subtype() != entity::Type::CARGO_SLOT_ID)
 //        {
 //            if (m_ItemSlot->item() != nullptr)
 //            {
@@ -79,41 +79,41 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 //    }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, type::GUI mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_subtype_id) const
 {
     if (m_itemSlot != nullptr)
     {
         if (GetEquiped() == false) 
         {
-            type::GUI buton_subtype_id = subTypeId();
-            for (type::entity type : SLOT_WEAPON_TYPES)
+            gui::type buton_subtype_id = subTypeId();
+            for (entity::type type: SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = type::GUI::WEAPON_SLOT_ID;
+                   buton_subtype_id = gui::type::WEAPON_SLOT_ID;
                    break;
                 }
             }
-            for (type::entity type : SLOT_CARGO_TYPES)
+            for (entity::type type: SLOT_CARGO_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = type::GUI::CARGO_SLOT_ID;
+                   buton_subtype_id = gui::type::CARGO_SLOT_ID;
                    break;
                 }
             }
-            for (type::entity type : SLOT_ARTEFACT_TYPES)
+            for (entity::type type: SLOT_ARTEFACT_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = type::GUI::ARTEFACT_SLOT_ID;
+                   buton_subtype_id = gui::type::ARTEFACT_SLOT_ID;
                    break;
                 }
             }
                                 
-            if (buton_subtype_id != type::GUI::GATE_SLOT_ID)
+            if (buton_subtype_id != gui::type::GATE_SLOT_ID)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == type::GUI::CARGO_SLOT_ID))
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == gui::type::CARGO_SLOT_ID))
                 {
                    //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }

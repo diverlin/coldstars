@@ -21,9 +21,9 @@
 #include <vector>
 #include <string>
 
-namespace type 
+namespace entity
 {
-    enum class entity
+    enum class type
     {
         NONE_ID=0,
         /** */
@@ -85,78 +85,78 @@ namespace type
     };
 }
  
-const std::vector<type::entity> SLOT_WEAPON_TYPES = 
+const std::vector<entity::type> SLOT_WEAPON_TYPES =
 { 
-type::entity::WEAPON_SLOT1_ID, 
-type::entity::WEAPON_SLOT2_ID, 
-type::entity::WEAPON_SLOT3_ID, 
-type::entity::WEAPON_SLOT4_ID, 
-type::entity::WEAPON_SLOT5_ID, 
-type::entity::WEAPON_SLOT6_ID, 
-type::entity::WEAPON_SLOT7_ID, 
-type::entity::WEAPON_SLOT8_ID, 
-type::entity::WEAPON_SLOT9_ID
+entity::type::WEAPON_SLOT1_ID,
+entity::type::WEAPON_SLOT2_ID,
+entity::type::WEAPON_SLOT3_ID,
+entity::type::WEAPON_SLOT4_ID,
+entity::type::WEAPON_SLOT5_ID,
+entity::type::WEAPON_SLOT6_ID,
+entity::type::WEAPON_SLOT7_ID,
+entity::type::WEAPON_SLOT8_ID,
+entity::type::WEAPON_SLOT9_ID
 };
    
-const std::vector<type::entity> SLOT_CARGO_TYPES = 
+const std::vector<entity::type> SLOT_CARGO_TYPES =
 { 
-type::entity::CARGO_SLOT1_ID, 
-type::entity::CARGO_SLOT2_ID, 
-type::entity::CARGO_SLOT3_ID, 
-type::entity::CARGO_SLOT4_ID, 
-type::entity::CARGO_SLOT5_ID, 
-type::entity::CARGO_SLOT6_ID, 
-type::entity::CARGO_SLOT7_ID, 
-type::entity::CARGO_SLOT8_ID, 
-type::entity::CARGO_SLOT9_ID,
-type::entity::CARGO_SLOT10_ID,
-//type::entity::CARGO_SLOT11_ID,
-//type::entity::CARGO_SLOT12_ID,
-//type::entity::CARGO_SLOT13_ID,
-//type::entity::CARGO_SLOT14_ID,
-//type::entity::CARGO_SLOT15_ID,
-//type::entity::CARGO_SLOT16_ID,
-//type::entity::CARGO_SLOT17_ID,
-//type::entity::CARGO_SLOT18_ID
+entity::type::CARGO_SLOT1_ID,
+entity::type::CARGO_SLOT2_ID,
+entity::type::CARGO_SLOT3_ID,
+entity::type::CARGO_SLOT4_ID,
+entity::type::CARGO_SLOT5_ID,
+entity::type::CARGO_SLOT6_ID,
+entity::type::CARGO_SLOT7_ID,
+entity::type::CARGO_SLOT8_ID,
+entity::type::CARGO_SLOT9_ID,
+entity::type::CARGO_SLOT10_ID,
+//entity::Type::CARGO_SLOT11_ID,
+//entity::Type::CARGO_SLOT12_ID,
+//entity::Type::CARGO_SLOT13_ID,
+//entity::Type::CARGO_SLOT14_ID,
+//entity::Type::CARGO_SLOT15_ID,
+//entity::Type::CARGO_SLOT16_ID,
+//entity::Type::CARGO_SLOT17_ID,
+//entity::Type::CARGO_SLOT18_ID
 };
 
-const std::vector<type::entity> SLOT_ARTEFACT_TYPES = 
+const std::vector<entity::type> SLOT_ARTEFACT_TYPES =
 { 
-type::entity::ARTEFACT_SLOT1_ID, 
-type::entity::ARTEFACT_SLOT2_ID, 
-type::entity::ARTEFACT_SLOT3_ID, 
-type::entity::ARTEFACT_SLOT4_ID, 
+entity::type::ARTEFACT_SLOT1_ID,
+entity::type::ARTEFACT_SLOT2_ID,
+entity::type::ARTEFACT_SLOT3_ID,
+entity::type::ARTEFACT_SLOT4_ID,
 };
 
-const std::vector<type::entity> EQUIPMENT_TYPES = 
+const std::vector<entity::type> EQUIPMENT_TYPES =
 { 
-type::entity::LAZER_EQUIPMENT_ID, 
-type::entity::ROCKET_EQUIPMENT_ID, 
-type::entity::DRIVE_EQUIPMENT_ID, 
-type::entity::RADAR_EQUIPMENT_ID,
-type::entity::BAK_EQUIPMENT_ID, 
-type::entity::ENERGIZER_EQUIPMENT_ID, 
-type::entity::PROTECTOR_EQUIPMENT_ID, 
-type::entity::DROID_EQUIPMENT_ID, 
-type::entity::FREEZER_EQUIPMENT_ID, 
-type::entity::GRAPPLE_EQUIPMENT_ID, 
-type::entity::SCANER_EQUIPMENT_ID  
+entity::type::LAZER_EQUIPMENT_ID,
+entity::type::ROCKET_EQUIPMENT_ID,
+entity::type::DRIVE_EQUIPMENT_ID,
+entity::type::RADAR_EQUIPMENT_ID,
+entity::type::BAK_EQUIPMENT_ID,
+entity::type::ENERGIZER_EQUIPMENT_ID,
+entity::type::PROTECTOR_EQUIPMENT_ID,
+entity::type::DROID_EQUIPMENT_ID,
+entity::type::FREEZER_EQUIPMENT_ID,
+entity::type::GRAPPLE_EQUIPMENT_ID,
+entity::type::SCANER_EQUIPMENT_ID
 };
 
-const std::vector<type::entity> MODULE_TYPES = 
+const std::vector<entity::type> MODULE_TYPES =
 { 
-type::entity::LAZER_MODULE_ID,
-type::entity::ROCKET_MODULE_ID, 
-type::entity::DRIVE_MODULE_ID, 
-type::entity::RADAR_MODULE_ID, 
-type::entity::BAK_MODULE_ID, 
-type::entity::ENERGIZER_MODULE_ID, 
-type::entity::PROTECTOR_MODULE_ID, 
-type::entity::DROID_MODULE_ID, 
-type::entity::FREEZER_MODULE_ID, 
-type::entity::GRAPPLE_MODULE_ID, 
-type::entity::SCANER_MODULE_ID
+entity::type::LAZER_MODULE_ID,
+entity::type::ROCKET_MODULE_ID,
+entity::type::DRIVE_MODULE_ID,
+entity::type::RADAR_MODULE_ID,
+entity::type::BAK_MODULE_ID,
+entity::type::ENERGIZER_MODULE_ID,
+entity::type::PROTECTOR_MODULE_ID,
+entity::type::DROID_MODULE_ID,
+entity::type::FREEZER_MODULE_ID,
+entity::type::GRAPPLE_MODULE_ID,
+entity::type::SCANER_MODULE_ID
 };    
 
-std::string to_string(type::entity);
+std::string to_string(entity::type);
 

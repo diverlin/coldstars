@@ -79,7 +79,7 @@ public:
     ItemSlot(const std::string& data);
     std::string data() const;
 
-    ItemSlot(int_t id, type::entity subtype_id);
+    ItemSlot(int_t id, entity::type subtype_id);
 
     void setTarget(int_t target) { m_target = target; }
     void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
@@ -111,7 +111,7 @@ namespace control {
 class ItemSlot : public BaseSlot
 {
 public:
-    ItemSlot(int_t id, type::entity subtype_id);
+    ItemSlot(int_t id, entity::type subtype_id);
     virtual ~ItemSlot();
 
     virtual void putChildrenToGarbage() const;

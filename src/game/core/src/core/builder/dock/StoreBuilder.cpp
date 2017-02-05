@@ -70,13 +70,13 @@ void StoreBuilder::createInternals(Store* store) const
 {
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
     {
-        control::ItemSlot* item_slot = getNewItemSlot(type::entity::CARGO_SLOT_ID);
+        control::ItemSlot* item_slot = getNewItemSlot(entity::type::CARGO_SLOT_ID);
         store->addItemSlot(item_slot);
     }
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
     {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(type::entity::NONE_ID);
+        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::type::NONE_ID);
         store->addVehicleSlot(vehicle_slot);
     }
 

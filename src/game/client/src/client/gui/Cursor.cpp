@@ -49,7 +49,7 @@ Cursor::Cursor()
 m_FocusedSpaceObject(nullptr),
 m_FocusedGuiElement(nullptr)
 {
-    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(type::entity::CARGO_SLOT_ID);
+    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(entity::Type::CARGO_SLOT_ID);
     
     m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
@@ -173,7 +173,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         
         if (m_FocusedGuiElement != nullptr)
         {
-            if (m_FocusedGuiElement->typeId() == type::GUI::BUTTON_ITEMSLOT_ID)
+            if (m_FocusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT_ID)
             {
                 ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);

@@ -71,8 +71,8 @@ m_radius_orig(0)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::EQUIPMENT_ID);
-//    setSubTypeId(type::entity::ROCKET_EQUIPMENT_ID);
+//    setTypeId(entity::Type::EQUIPMENT_ID);
+//    setSubTypeId(entity::Type::ROCKET_EQUIPMENT_ID);
 
     fire_atOnce = meti::getRandInt(1, 3);
 }

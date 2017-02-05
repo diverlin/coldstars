@@ -32,7 +32,7 @@
 
 Kosmoport::Kosmoport(int id)
 :
-race_id(type::race::R0_ID), //wrong
+race_id(race::type::R0_ID), //wrong
 angar(nullptr),
 store(nullptr),
 shop(nullptr),
@@ -40,7 +40,7 @@ goverment(nullptr)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(type::entity::KOSMOPORT_ID);
+//    setTypeId(entity::Type::KOSMOPORT_ID);
 }
 
 /* virtual */

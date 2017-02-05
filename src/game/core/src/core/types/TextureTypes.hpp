@@ -22,9 +22,9 @@
 
 #include <string>
 
-namespace type
+namespace texture
 {
-enum class texture: int
+enum class type: int
 {
     FAILBACK=0,
 
@@ -55,9 +55,9 @@ enum class texture: int
     LAST_ID
 };
 
-} // namespace type
+} // namespace texture
 
 
 
-std::string to_string(type::texture);
+std::string to_string(texture::type);
 

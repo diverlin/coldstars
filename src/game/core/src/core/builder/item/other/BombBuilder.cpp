@@ -59,13 +59,13 @@ Bomb* BombBuilder::getNew(const descriptor::BaseOLD& descriptor)
 
 void BombBuilder::__createInternals(Bomb* bomb, const descriptor::BaseOLD& descriptor)
 {     
-    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
     bomb->setDamage(descriptor.damage());
     bomb->setRadius(descriptor.radius());
-    bomb->setParentSubTypeId(type::entity::CARGO_SLOT_ID);
+    bomb->setParentSubTypeId(entity::type::CARGO_SLOT_ID);
 }
 
 //void BombBuilder::write(const std::string& fpath, Bomb* bomb)

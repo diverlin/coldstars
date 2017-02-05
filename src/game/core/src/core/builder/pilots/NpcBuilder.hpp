@@ -34,9 +34,9 @@ public:
     NpcBuilder();
     ~NpcBuilder();
 
-    model::Npc* createTemplate(type::entity, type::entity, int_t id = NONE) const;
-    model::Npc* create(type::race, type::entity, type::entity) const;
+    model::Npc* createTemplate(entity::type, entity::type, int_t id = NONE) const;
+    model::Npc* create(race::type, entity::type, entity::type) const;
 
 private:
-    void createInternals(model::Npc*, type::race, type::entity, type::entity) const;
+    void createInternals(model::Npc*, race::type, entity::type, entity::type) const;
 }; 

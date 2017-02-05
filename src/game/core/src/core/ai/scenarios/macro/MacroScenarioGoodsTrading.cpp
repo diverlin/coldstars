@@ -30,7 +30,7 @@
 
 MacroScenarioGoodsTrading::MacroScenarioGoodsTrading() 
 {
-    setTypeId(type::AISCENARIO::MACRO_GOODSTRADING_ID);
+    setTypeId(ai::type::MACRO_GOODSTRADING_ID);
 }
 
 MacroScenarioGoodsTrading::~MacroScenarioGoodsTrading() 

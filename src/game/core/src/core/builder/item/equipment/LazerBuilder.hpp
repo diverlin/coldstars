@@ -39,10 +39,10 @@ public:
     ~LazerBuilder();
 
     Lazer* createTemplate(int_t id = NONE) const;
-    Lazer* getNew(type::tech tech_level = type::tech::NONE, type::race race_id = type::race::NONE_ID, int damage_orig = NONE, int radius_orig = NONE) const;
+    Lazer* getNew(tech::type tech_level = tech::type::NONE, race::type race_id = race::type::NONE_ID, int damage_orig = NONE, int radius_orig = NONE) const;
 
 private:
-    void createInternals(Lazer*, type::tech, type::race, int, int) const;
+    void createInternals(Lazer*, tech::type, race::type, int, int) const;
 }; 
 
 } // namespace item

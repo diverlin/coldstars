@@ -22,20 +22,25 @@
 #include <string>
 #include <vector>
 
-namespace type {
-enum class tech {
-    NONE=0, LEVEL0, LEVEL1, LEVEL2, LEVEL3
+namespace tech {
+enum class type {
+    NONE=0,
+    //
+    LEVEL0,
+    LEVEL1,
+    LEVEL2,
+    LEVEL3
 };
-}
+} // namespace tech
 
-const std::vector<type::tech> TECH_TYPES = {
-    type::tech::LEVEL0,
-    type::tech::LEVEL1,
-    type::tech::LEVEL2,
-    type::tech::LEVEL3
+const std::vector<tech::type> TECH_TYPES = {
+    tech::type::LEVEL0,
+    tech::type::LEVEL1,
+    tech::type::LEVEL2,
+    tech::type::LEVEL3
 };
 
-std::string to_string(type::tech);
+std::string to_string(tech::type);
 
 
 
