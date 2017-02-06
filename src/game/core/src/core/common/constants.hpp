@@ -375,31 +375,31 @@ namespace EQUIPMENT
         const float MODULES_NUM_WEIGHT = 0.4;
     }
 
-    namespace DRIVE
-    {
-        const float OVERLOAD_RATE = 1.5f;
-        const float OVERLOAD_DETERIORATION_RATE = 4.0f;
+//    namespace DRIVE
+//    {
+//        const float OVERLOAD_RATE = 1.5f;
+//        const float OVERLOAD_DETERIORATION_RATE = 4.0f;
                                 
-        const float SPEED_MIN = 3.0;   
-        const float SPEED_MAX = 4.0; 
-        const float SPEED_TECH_RATE = 0.1f;
+//        const float SPEED_MIN = 3.0;
+//        const float SPEED_MAX = 4.0;
+//        const float SPEED_TECH_RATE = 0.1f;
                 
-        const int HYPER_MIN = 7;
-        const int HYPER_MAX = 20;
-        const float HYPER_TECH_RATE = 0.1f;
+//        const int HYPER_MIN = 7;
+//        const int HYPER_MAX = 20;
+//        const float HYPER_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int MASS_MIN = 20;
-        const int MASS_MAX = 70;
-        const int CONDITION_MIN = 500;
-        const int CONDITION_MAX = 2000;
+//        const int MASS_MIN = 20;
+//        const int MASS_MAX = 70;
+//        const int CONDITION_MIN = 500;
+//        const int CONDITION_MAX = 2000;
         
-        const float SPEED_WEIGHT = 0.4;
-        const float HYPER_WEIGHT = 0.4;
-        const float MODULES_NUM_WEIGHT = 0.2;
-    }
+//        const float SPEED_WEIGHT = 0.4;
+//        const float HYPER_WEIGHT = 0.4;
+//        const float MODULES_NUM_WEIGHT = 0.2;
+//    }
 
     namespace PROTECTOR
     {
@@ -419,23 +419,23 @@ namespace EQUIPMENT
         const float MODULES_NUM_WEIGHT = 0.2;
     }
 
-    namespace BAK
-    {
-        const int FUEL_MIN = 10;    
-        const int FUEL_MAX = 30;
-        const float FUEL_TECH_RATE = 0.1f;
+//    namespace BAK
+//    {
+//        const int FUEL_MIN = 10;
+//        const int FUEL_MAX = 30;
+//        const float FUEL_TECH_RATE = 0.1f;
                     
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int MASS_MIN = 10;
-        const int MASS_MAX = 40;
-        const int CONDITION_MIN = 30;
-        const int CONDITION_MAX = 100;
+//        const int MASS_MIN = 10;
+//        const int MASS_MAX = 40;
+//        const int CONDITION_MIN = 30;
+//        const int CONDITION_MAX = 100;
         
-        const float FUEL_WEIGHT = 0.7;
-        const float MODULES_NUM_WEIGHT = 0.3;
-    }
+//        const float FUEL_WEIGHT = 0.7;
+//        const float MODULES_NUM_WEIGHT = 0.3;
+//    }
 
     namespace DROID
     {

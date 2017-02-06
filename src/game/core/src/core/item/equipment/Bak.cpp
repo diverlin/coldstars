@@ -25,6 +25,45 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+
+namespace descriptor {
+namespace item {
+
+const int Bak::FUEL_MIN = 10;
+const int Bak::FUEL_MAX = 30;
+const float Bak::FUEL_TECH_RATE = 0.1f;
+
+const int Bak::MODULES_NUM_MIN = 0;
+const int Bak::MODULES_NUM_MAX = 2;
+
+const int Bak::MASS_MIN = 10;
+const int Bak::MASS_MAX = 40;
+const int Bak::CONDITION_MIN = 30;
+const int Bak::CONDITION_MAX = 100;
+
+const float Bak::FUEL_WEIGHT = 0.7;
+const float Bak::MODULES_NUM_WEIGHT = 0.3;
+
+Bak::Bak()
+{
+    setDescriptor(descriptor::type::BAK_EQUIPMENT);
+}
+
+Bak::Bak(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Bak::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace descriptor
+
+
 namespace model {
 namespace item {
 
@@ -53,20 +92,17 @@ Bak::data() const
 namespace control {
 namespace item {
 
-Bak::Bak(int_t id)
+int
+Bak::fuelMiss() const
 {
-//    setId(id);
+    return (m_fuelMax - model()->fuel());
 }
-   
-/* virtual */
-Bak::~Bak()
-{}
-        
+
 void Bak::increaseFuel(int fuel)
 {
     fuel += model()->fuel();
-    if (fuel > model()->fuelMax()) {
-        fuel = model()->fuelMax();
+    if (fuel > m_fuelMax) {
+        fuel = m_fuelMax;
     }
     model()->setFuel(fuel);
 }    
@@ -74,24 +110,24 @@ void Bak::increaseFuel(int fuel)
 /* virtual */            
 void Bak::updateProperties()
 {
-    int fuelMaxAdd = 0;
+    int m_fuelMax_add = 0;
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
-        fuelMaxAdd += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
+        m_fuel_add += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
     }
 #endif
-    model()->setFuelMax(model()->fuelMaxOrig() + fuelMaxAdd);
+    m_fuelMax = descriptor()->fuel() + m_fuelMax_add;
 }
 
 void Bak::countPrice()
 {
-    float fuel_rate          = (float)model()->fuelMaxOrig() / EQUIPMENT::BAK::FUEL_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::BAK::MODULES_NUM_MAX;
+    float fuel_rate          = (float)descriptor()->fuel() / descriptor::item::Bak::FUEL_MIN;
+    float modules_num_rate   = (float)modulesNum() / descriptor::item::Bak::MODULES_NUM_MAX;
     
-    float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
-                               EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Bak::FUEL_WEIGHT * fuel_rate +
+                               descriptor::item::Bak::MODULES_NUM_WEIGHT * modules_num_rate;
     
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::BAK::MASS_MIN;
+    float mass_rate          = (float)m_data.mass / descriptor::item::Bak::MASS_MIN;
     float condition_rate     = (float)m_condition / m_data.condition_max;
     
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -106,62 +142,12 @@ void Bak::addUniqueInfo()
 
 std::string Bak::getFuelStr()
 {
-    if (model()->fuelMaxAdd()) {
-        return std::to_string(model()->fuelMaxOrig()) + "+" + std::to_string(model()->fuelMaxAdd()) + "/" + std::to_string(model()->fuel());
+    if (m_fuelMaxAdd) {
+        return std::to_string(descriptor()->fuel()) + "/" + std::to_string(model()->fuel());
     } else {
-        return std::to_string(model()->fuelMaxOrig()) + "/" + std::to_string(model()->fuel());
+        return std::to_string(descriptor()->fuel()) + "+" + std::to_string(m_fuelMaxAdd) + "/" + std::to_string(model()->fuel());
     }
 }
-
-///*virtual*/
-//void Bak::Save(boost::property_tree::ptree& save_ptree) const
-//{
-////    std::string root = "bak_equipment." + std::to_string(id()) + ".";
-
-////    Base::SaveData(save_ptree, root);
-////    Base::SaveData(save_ptree, root);
-////    Base::SaveData(save_ptree, root);
-////    Bak::SaveData(save_ptree, root);
-//}
-
-///*virtual*/
-//void Bak::Load(const boost::property_tree::ptree& load_ptree)
-//{
-////    Base::LoadData(load_ptree);
-////    Base::LoadData(load_ptree);
-////    Base::LoadData(load_ptree);
-////    Bak::LoadData(load_ptree);
-//}
-
-///*virtual*/
-//void Bak::Resolve()
-//{
-////    Base::ResolveData();
-////    Base::ResolveData();
-////    Base::ResolveData();
-////    Bak::ResolveData();
-//}
-
-//void Bak::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-////    LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
-    
-////    save_ptree.put(root+"fuel_max_orig", m_fuelMaxOrig);
-////    save_ptree.put(root+"fuel", m_fuel);
-//}
-                
-//void Bak::LoadData(const boost::property_tree::ptree& load_ptree)
-//{
-////    LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-////    m_fuelMaxOrig = load_ptree.get<int>("fuel_max_orig");
-////    m_fuel = load_ptree.get<int>("fuel");
-//}
-
-//void Bak::ResolveData()
-//{
-////    LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
-//}
 
 } // namespace item
 } // namespace control

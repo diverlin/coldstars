@@ -83,16 +83,16 @@ BakBuilder::__createTemplate(int_t id)
 void
 BakBuilder::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& descriptor)
 {
-    assert(descriptor.type() == (int)descriptor::Type::BAK);
-
-    ItemCommonData data = extractCommonData(descriptor);
-
-    bak->setFuelMaxOrig(descriptor.fuelMax());
-    bak->setFuel(descriptor.fuelMax()); // ?? max or not, second descriptor should be used
-    bak->setParentSubTypeId(entity::type::BAK_SLOT_ID);
-    bak->setItemCommonData(data);
-
     assert(false);
+//    assert(descriptor.type() == (int)descriptor::Type::BAK);
+
+//    ItemCommonData data = extractCommonData(descriptor);
+
+//    bak->setFuelMaxOrig(descriptor.fuelMax());
+//    bak->setFuel(descriptor.fuelMax()); // ?? max or not, second descriptor should be used
+//    bak->setParentSubTypeId(entity::type::BAK_SLOT_ID);
+//    bak->setItemCommonData(data);
+
 //    bak->updateProperties();
 //    bak->countPrice();
 }

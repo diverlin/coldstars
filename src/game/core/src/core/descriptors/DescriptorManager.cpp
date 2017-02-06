@@ -154,7 +154,7 @@ Manager::generate()
     int num = base * 20;
     for(int i=0; i<num; ++i) {
         // items
-        add(getNewBak());
+        add(item::getNewBak());
         add(item::getNewDrive());
         add(getNewDroid());
         add(getNewGrapple());

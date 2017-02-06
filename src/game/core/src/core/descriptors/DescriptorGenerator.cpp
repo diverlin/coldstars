@@ -561,7 +561,10 @@ void addItemCommonFields(descriptor::BaseOLD& descriptor,
 }
 } // namespace
 
-descriptor::BaseOLD
+
+namespace item {
+
+descriptor::item::Bak
 getNewBak(int race, int tech_level)
 {
     if (race == -1) {
@@ -571,26 +574,34 @@ getNewBak(int race, int tech_level)
         tech_level = int (tech::type::LEVEL0);
     }
 
-    int modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
-    int mass                   = meti::getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
-    int condition_max          = meti::getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
+    int modules       = meti::getRandInt(descriptor::item::Bak::MODULES_NUM_MIN, descriptor::item::Bak::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(descriptor::item::Bak::MASS_MIN, descriptor::item::Bak::MASS_MAX);
+    int condition     = meti::getRandInt(descriptor::item::Bak::CONDITION_MIN, descriptor::item::Bak::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    int fuel_max_orig = meti::getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECH_RATE * (int)tech_level);
+    int fuel = meti::getRandInt(descriptor::item::Bak::FUEL_MIN, descriptor::item::Bak::FUEL_MAX) * (1 + descriptor::item::Bak::FUEL_TECH_RATE * (int)tech_level);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
-    descriptor::BaseOLD descriptor(descriptor::Type::BAK);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::FUEL_MAX, fuel_max_orig);
-    return descriptor;
+    descriptor::item::Bak descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Drive
+    descr.setFuel(fuel);
+
+    return descr;
 }
 
-namespace item {
 
 descriptor::item::Drive
 getNewDrive(int race, int tech_level)
@@ -602,14 +613,14 @@ getNewDrive(int race, int tech_level)
         tech_level = int (tech::type::LEVEL0);
     }
 
-    int modules       = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-    int mass          = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
-    int condition     = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX);
+    int modules       = meti::getRandInt(descriptor::item::Drive::MODULES_NUM_MIN, descriptor::item::Drive::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(descriptor::item::Drive::MASS_MIN, descriptor::item::Drive::MASS_MAX);
+    int condition     = meti::getRandInt(descriptor::item::Drive::CONDITION_MIN, descriptor::item::Drive::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    int speed = meti::getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECH_RATE * (int)tech_level);
-    int hyper = meti::getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECH_RATE * (int)tech_level);
+    int speed = meti::getRandInt(descriptor::item::Drive::SPEED_MIN, descriptor::item::Drive::SPEED_MAX) * (1 + descriptor::item::Drive::SPEED_TECH_RATE * (int)tech_level);
+    int hyper = meti::getRandInt(descriptor::item::Drive::HYPER_MIN, descriptor::item::Drive::HYPER_MAX) * (1 + descriptor::item::Drive::HYPER_TECH_RATE * (int)tech_level);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
