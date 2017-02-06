@@ -41,11 +41,10 @@
 
 //#include <fstream>
 
+namespace {
 
-TEST(descriptor, drive) {
-    descriptor::item::Drive descr = descriptor::item::getNewDrive();
-    descriptor::item::Drive descr_copy(descr.data());
-
+void compareBaseEquipmentDescriptors(const descriptor::item::BaseEquipment& descr, const descriptor::item::BaseEquipment& descr_copy)
+{
     // descriptor::Base
     EXPECT_EQ(descr.id(), descr_copy.id());
     EXPECT_EQ(descr.descriptor(), descr_copy.descriptor());
@@ -67,6 +66,31 @@ TEST(descriptor, drive) {
 
     // descriptor::item::BaseEquipment
     EXPECT_EQ(descr.modules(), descr_copy.modules());
+}
+
+} // namespace
+
+TEST(descriptor, bak) {
+    descriptor::item::Bak descr = descriptor::item::getNewBak();
+    descriptor::item::Bak descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Bak
+    EXPECT_EQ(descr.fuel(), descr_copy.fuel());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+
+    //std::cout<<descr.info();
+}
+
+TEST(descriptor, drive) {
+    descriptor::item::Drive descr = descriptor::item::getNewDrive();
+    descriptor::item::Drive descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Drive
     EXPECT_EQ(descr.speed(), descr_copy.speed());
@@ -76,7 +100,7 @@ TEST(descriptor, drive) {
     EXPECT_EQ(descr.data(), descr_copy.data());
     EXPECT_EQ(descr.info(), descr_copy.info());
 
-    std::cout<<descr.info();
+    //std::cout<<descr.info();
 }
 
 //void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)

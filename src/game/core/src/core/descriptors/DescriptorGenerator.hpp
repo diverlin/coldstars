@@ -26,6 +26,7 @@
 namespace descriptor {
 
 namespace item {
+class Bak;
 class Drive;
 } // namespace item
 
@@ -56,10 +57,11 @@ descriptor::BaseOLD getNewContainer();
 
 /* items */
 namespace item {
+descriptor::item::Bak getNewBak(int race = -1, int tech_level = -1);
 descriptor::item::Drive getNewDrive(int race = -1, int tech_level = -1);
 } // namespace item
 
-descriptor::BaseOLD getNewBak(int race = -1, int tech_level = -1);
+
 descriptor::BaseOLD getNewDroid(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewGrapple(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewScaner(int race = -1, int tech_level = -1);

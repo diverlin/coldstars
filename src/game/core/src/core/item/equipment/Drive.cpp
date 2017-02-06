@@ -29,10 +29,29 @@
 namespace descriptor {
 namespace item {
 
-const int SPEED_MIN = 0;
-const int SPEED_MAX = 0;
-const int HYPER_MIN = 0;
-const int HYPER_MAX = 0;
+const float Drive::OVERLOAD_RATE = 1.5f;
+const float Drive::OVERLOAD_DETERIORATION_RATE = 4.0f;
+
+const float Drive::SPEED_MIN = 3.0;
+const float Drive::SPEED_MAX = 4.0;
+const float Drive::SPEED_TECH_RATE = 0.1f;
+
+const int Drive::HYPER_MIN = 7;
+const int Drive::HYPER_MAX = 20;
+const float Drive::HYPER_TECH_RATE = 0.1f;
+
+const int Drive::MODULES_NUM_MIN = 0;
+const int Drive::MODULES_NUM_MAX = 2;
+
+const int Drive::MASS_MIN = 20;
+const int Drive::MASS_MAX = 70;
+const int Drive::CONDITION_MIN = 500;
+const int Drive::CONDITION_MAX = 2000;
+
+const float Drive::SPEED_WEIGHT = 0.4;
+const float Drive::HYPER_WEIGHT = 0.4;
+const float Drive::MODULES_NUM_WEIGHT = 0.2;
+
 
 Drive::Drive()
 {
@@ -82,18 +101,6 @@ Drive::data() const
 namespace control {
 namespace item {
 
-Drive::Drive(int_t id)
-{
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::DRIVE_EQUIPMENT_ID);
-}
-
-/* virtual */
-Drive::~Drive()
-{}
-
 /* virtual */
 void Drive::updateProperties()
 {     
@@ -111,15 +118,15 @@ void Drive::updateProperties()
 
 void Drive::CountPrice()
 {
-    float speed_rate         = (float)descriptor()->speed() / EQUIPMENT::DRIVE::SPEED_MIN;
-    float hyper_rate         = (float)descriptor()->hyper() / EQUIPMENT::DRIVE::HYPER_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
+    float speed_rate         = (float)descriptor()->speed() / descriptor::item::Drive::SPEED_MIN;
+    float hyper_rate         = (float)descriptor()->hyper() / descriptor::item::Drive::HYPER_MIN;
+    float modules_num_rate   = (float)modulesNum() / descriptor::item::Drive::MODULES_NUM_MAX;
 
-    float effectiveness_rate = EQUIPMENT::DRIVE::SPEED_WEIGHT * speed_rate +
-            EQUIPMENT::DRIVE::HYPER_WEIGHT * hyper_rate +
-            EQUIPMENT::DRIVE::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Drive::SPEED_WEIGHT * speed_rate +
+            descriptor::item::Drive::HYPER_WEIGHT * hyper_rate +
+            descriptor::item::Drive::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::DRIVE::MASS_MIN;
+    float mass_rate          = (float)m_data.mass / descriptor::item::Drive::MASS_MIN;
     float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;

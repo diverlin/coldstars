@@ -20,10 +20,65 @@
 
 #include <core/item/equipment/Base.hpp>
 
+
+namespace descriptor {
+namespace item {
+
+class Bak : public BaseEquipment
+{
+public:
+    static const int FUEL_MIN;
+    static const int FUEL_MAX;
+    static const float FUEL_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float FUEL_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
+public:
+    Bak();
+    ~Bak() = default;
+    Bak(const std::string& data);
+    std::string data() const;
+
+    void setFuel(int fuel) { m_fuel = fuel; }
+
+    int fuel() const { return m_fuel; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Bak:\n";
+        result += std::string(" fuel = ") + std::to_string(m_fuel) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_fuel = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_fuel;
+    }
+};
+
+} // namespace item
+} // namespace descriptor
+
+
 namespace model {
 namespace item {
 
-class Bak : public Base
+class Bak : public BaseEquipment
 {
 public:
     Bak();
@@ -31,29 +86,18 @@ public:
     Bak(const std::string& data);
     std::string data() const;
 
-    void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }
-    void setFuelMax(int fuelMax) { m_fuelMax = fuelMax; }
     void setFuel(int fuel) { m_fuel = fuel; }
 
-    int fuelMaxOrig() const { return m_fuelMaxOrig; }
-    int fuelMaxAdd() const { return m_fuelMaxAdd; }
-    int fuelMax() const { return m_fuelMax; }
     int fuel() const    { return m_fuel; }
 
 private:
-    int m_fuelMaxOrig = 0;
-    int m_fuelMaxAdd = 0;
-    int m_fuelMax = 0;
     int m_fuel = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_fuelMaxOrig;
-        ar & m_fuelMaxAdd;
-        ar & m_fuelMax;
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
         ar & m_fuel;
     }
 };
@@ -68,31 +112,28 @@ namespace item {
 class Bak : public BaseEquipment
 {
 public:
-    Bak(int_t id);
-    virtual ~Bak();
+    Bak() = default;
+    virtual ~Bak() = default;
 
     void increaseFuel(int fuel);
-    int fuelMiss() const { return (model()->fuelMax() - model()->fuel()); }
-
-//    virtual void Save(boost::property_tree::ptree&) const;
-//    virtual void Load(const boost::property_tree::ptree&);
-//    virtual void Resolve();
+    int fuelMiss() const;
 
 private:
     void updateProperties() override final;
     void countPrice();
 
     model::item::Bak* model() const { return m_model_bak; }
+    descriptor::item::Bak* descriptor() const { return m_descriptor_bak; }
 
 private:
+    int m_fuelMaxAdd = 0;
+    int m_fuelMax = 0;
+
     model::item::Bak* m_model_bak = nullptr;
+    descriptor::item::Bak* m_descriptor_bak = nullptr;
 
     void virtual addUniqueInfo();
     std::string getFuelStr();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
 };
 
 } // namespace item
