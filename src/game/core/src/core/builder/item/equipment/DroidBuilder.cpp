@@ -18,15 +18,10 @@
 
 
 #include "DroidBuilder.hpp"
-#include <item/equipment/Droid.hpp>
-#include <managers/EntityManager.hpp>
-
-//#include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <core/item/equipment/Droid.hpp>
+#include <core/managers/EntityManager.hpp>
+#include <core/common/Global.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 
 namespace builder {
 namespace item {
@@ -46,27 +41,35 @@ Droid::__createTemplate()
 model::item::Droid*
 Droid::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DROID);
+    const descriptor::item::Droid& descr = core::global::get().descriptors().droid().random();
     model::item::Droid* droid = __createTemplate();
-    __createInternals(droid, descriptor);
+    __createInternals(droid, descr);
 
     return droid;
 }
 
 model::item::Droid*
-Droid::getNew(const descriptor::BaseOLD& descriptor)
+Droid::getNew(const std::string& data)
+{
+    descriptor::item::Droid descr(data);
+    assert(descr.descriptor() != descriptor::type::DROID_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Droid*
+Droid::getNew(const descriptor::item::Droid& descr)
 {
     model::item::Droid* droid = __createTemplate();
-    __createInternals(droid, descriptor);
+    __createInternals(droid, descr);
 
     return droid;
 }  
 
-void Droid::__createInternals(model::item::Droid* droid, const descriptor::BaseOLD& descriptor)
+void Droid::__createInternals(model::item::Droid* droid, const descriptor::item::Droid& descr)
 {     
-    ItemCommonData common_data = extractCommonData(descriptor);
-
     assert(false);
+//    ItemCommonData common_data = extractCommonData(descr);
+
 //    droid->SetRepairOrig(descriptor.repair());
 //    droid->setParentSubTypeId(entity::type::DROID_SLOT_ID);
 //    droid->setItemCommonData(common_data);

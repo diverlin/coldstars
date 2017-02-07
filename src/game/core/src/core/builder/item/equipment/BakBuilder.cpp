@@ -18,15 +18,10 @@
 
 
 #include "BakBuilder.hpp"
-#include <item/equipment/Bak.hpp>
-#include <managers/EntityManager.hpp>
-
-#include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Base.hpp>
-
-//#include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
+#include <core/item/equipment/Bak.hpp>
+#include <core/managers/EntityManager.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/common/Global.hpp>
 
 namespace builder {
 namespace item {
@@ -34,24 +29,25 @@ namespace item {
 model::item::Bak*
 Bak::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
-    return getNew(descriptor);
-}
-
-model::item::Bak*
-Bak::getNew(const descriptor::BaseOLD& descr)
-{
-    descriptor::BaseOLD descriptor(descr.data());
-    model::item::Bak* bak = __createTemplate();
-    __createInternals(bak, descriptor);
-    
-    return bak;
+    const descriptor::item::Bak& descr = core::global::get().descriptors().bak().random();
+    return getNew(descr);
 }
 
 model::item::Bak*
 Bak::getNew(const std::string& data)
 {
-    return getNew(descriptor::BaseOLD(data));
+    descriptor::item::Bak descr(data);
+    assert(descr.descriptor() != descriptor::type::BAK_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Bak*
+Bak::getNew(const descriptor::item::Bak& descr)
+{
+    model::item::Bak* bak = __createTemplate();
+    __createInternals(bak, descr);
+    
+    return bak;
 }
 
 model::item::Bak*
@@ -66,7 +62,7 @@ Bak::__createTemplate()
 }
 
 void
-Bak::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& descriptor)
+Bak::__createInternals(model::item::Bak* bak, const descriptor::item::Bak& descriptor)
 {
     assert(false);
 //    assert(descriptor.type() == (int)descriptor::Type::BAK);
