@@ -25,23 +25,29 @@ namespace descriptor {
 class BaseOLD;
 } // namespace descriptor
 
+namespace model {
+namespace item {
+class Droid;
+} // namespace item
+} // namespace model
+
+namespace builder {
 namespace item {
 
-class Droid;
-
-class DroidBuilder
+class Droid
 {
 public:
-    DroidBuilder();
-    ~DroidBuilder();
+    Droid() = default;
+    ~Droid() = default;
 
-    Droid* getNew() const;
-    Droid* createTemplate(int_t id = NONE) const;
-    Droid* getNew(const descriptor::BaseOLD&) const;
+    static model::item::Droid* getNew();
+    static model::item::Droid* getNew(const descriptor::BaseOLD&);
 
 private:
-    void createInternals(Droid*, const descriptor::BaseOLD&) const;
+    static model::item::Droid* __createTemplate();
+    static void __createInternals(model::item::Droid*, const descriptor::BaseOLD&);
 }; 
 
 } // namespace item
+} // namespace builder
 

@@ -21,37 +21,119 @@
 
 #include "Base.hpp"
 
+
+namespace descriptor {
+namespace item {
+
+class Droid : public BaseEquipment
+{
+public:
+    static const int REPAIR_MIN;
+    static const int REPAIR_MAX;
+    static const float FUEL_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float FUEL_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
+public:
+    Droid();
+    ~Droid() = default;
+    Droid(const std::string& data);
+    std::string data() const;
+
+    void setRepair(int repair) { m_repair = repair; }
+
+    int repair() const { return m_repair; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Droid:\n";
+        result += std::string(" repair = ") + std::to_string(m_repair) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_repair = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_repair;
+    }
+};
+
+} // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Droid : public BaseEquipment
+{
+public:
+    Droid();
+    ~Droid() = default;
+    Droid(const std::string& data);
+    std::string data() const;
+
+    void setRepair(int repair) { m_repair = repair; }
+
+    int repair() const { return m_repair; }
+
+private:
+    int m_repair = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_repair;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
 namespace item {
 
 class Droid : public control::item::BaseEquipment
 {
 public:
-    Droid(int_t id);
+    Droid();
     virtual ~Droid();
 
-    void SetRepairOrig(int repair_orig) { m_repair_orig = repair_orig; }
-    int repair() const { return m_repair; }
-
+private:
     virtual void updateProperties();
     virtual void updateInStatic();
 
     void CountPrice();
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+    model::item::Droid* model() const { return m_model_droid; }
+    descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
 
 private:
-    int m_repair_orig;
     int m_repair_add;
-    int m_repair;
+
+    model::item::Droid* m_model_droid = nullptr;
+    descriptor::item::Droid* m_descriptor_droid = nullptr;
 
     void virtual addUniqueInfo();
     std::string GetRepairStr();
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
 };
 
 } // namespace item
+} // namespace control

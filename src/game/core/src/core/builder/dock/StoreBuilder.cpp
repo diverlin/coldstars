@@ -137,8 +137,9 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 //        store->addItem(core::global::get().bakBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DROID);
-        store->addItem(core::global::get().droidBuilder().getNew(descr));
+        assert(false);
+//        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::DROID);
+//        store->addItem(core::global::get().droidBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
         const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::SCANER);

@@ -33,24 +33,26 @@ class Bak;
 } // namespace item
 } // namespace model
 
+namespace builder {
 namespace item {
 
-class BakBuilder
+class Bak
 {
 public:
-    BakBuilder();
-    ~BakBuilder();
+    Bak() = default;
+    ~Bak() = default;
 
     static model::item::Bak* getNew();
     static model::item::Bak* getNew(const descriptor::BaseOLD&);
     static model::item::Bak* getNew(const std::string&);
 
 private:
-    static model::item::Bak* __createTemplate(int_t);
+    static model::item::Bak* __createTemplate();
     static void __createInternals(model::item::Bak*, const descriptor::BaseOLD&);
 }; 
 
 } // namespace item
+} // namespace builder
 
 
 

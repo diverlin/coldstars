@@ -28,17 +28,13 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
+namespace builder {
 namespace item {
 
-DroidBuilder::DroidBuilder()
-{}
-
-DroidBuilder::~DroidBuilder()
-{}
-
-Droid* DroidBuilder::createTemplate(int_t id) const
+model::item::Droid*
+Droid::__createTemplate()
 {
-    Droid* droid = new Droid(id);
+    model::item::Droid* droid = new model::item::Droid;
     assert(droid);
 
     assert(false);
@@ -47,33 +43,37 @@ Droid* DroidBuilder::createTemplate(int_t id) const
     return droid;
 } 
 
-Droid* DroidBuilder::getNew() const
+model::item::Droid*
+Droid::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DROID);
-    Droid* droid = createTemplate();
-    createInternals(droid, descriptor);
+    model::item::Droid* droid = __createTemplate();
+    __createInternals(droid, descriptor);
 
     return droid;
 }
 
-Droid* DroidBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+model::item::Droid*
+Droid::getNew(const descriptor::BaseOLD& descriptor)
 {
-    Droid* droid = createTemplate();
-    createInternals(droid, descriptor);
+    model::item::Droid* droid = __createTemplate();
+    __createInternals(droid, descriptor);
 
     return droid;
 }  
 
-void DroidBuilder::createInternals(Droid* droid, const descriptor::BaseOLD& descriptor) const
+void Droid::__createInternals(model::item::Droid* droid, const descriptor::BaseOLD& descriptor)
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 
-    droid->SetRepairOrig(descriptor.repair());
-    droid->setParentSubTypeId(entity::type::DROID_SLOT_ID);
-    droid->setItemCommonData(common_data);
+    assert(false);
+//    droid->SetRepairOrig(descriptor.repair());
+//    droid->setParentSubTypeId(entity::type::DROID_SLOT_ID);
+//    droid->setItemCommonData(common_data);
 
-    droid->updateProperties();
-    droid->CountPrice();
+//    droid->updateProperties();
+//    droid->CountPrice();
 }
 
 } // namespace item
+} // namespace builder

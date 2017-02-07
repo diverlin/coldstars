@@ -88,7 +88,7 @@ public:
 
     void setFuel(int fuel) { m_fuel = fuel; }
 
-    int fuel() const    { return m_fuel; }
+    int fuel() const { return m_fuel; }
 
 private:
     int m_fuel = 0;
