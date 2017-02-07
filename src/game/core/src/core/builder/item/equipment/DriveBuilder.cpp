@@ -17,23 +17,20 @@
 */
 
 #include "DriveBuilder.hpp"
-#include <item/equipment/Drive.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/item/equipment/Drive.hpp>
+#include <core/managers/EntityManager.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/common/Global.hpp>
 
-#include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+//#include <ceti/Logger.hpp>
 
 namespace builder {
 namespace item {
 
 model::item::Drive*
-Drive::createTemplate(int_t id)
+Drive::__createTemplate()
 {
-    model::item::Drive* drive = new model::item::Drive();
+    model::item::Drive* drive = new model::item::Drive;
     assert(drive);
 
     assert(false);
@@ -45,23 +42,31 @@ Drive::createTemplate(int_t id)
 model::item::Drive*
 Drive::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::DRIVE);
-    model::item::Drive* drive = createTemplate();
-    createInternals(drive, descriptor);
+    const descriptor::item::Drive& descr = core::global::get().descriptors().drive().random();
+    model::item::Drive* drive = __createTemplate();
+    __createInternals(drive, descr);
 
     return drive;
 }
 
 model::item::Drive*
-Drive::getNew(const descriptor::BaseOLD& descriptor)
+Drive::getNew(const std::string& data)
 {
-    model::item::Drive* drive = createTemplate();
-    createInternals(drive, descriptor);
+    descriptor::item::Drive descr(data);
+    assert(descr.descriptor() != descriptor::type::DRIVE_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Drive*
+Drive::getNew(const descriptor::item::Drive& descr)
+{
+    model::item::Drive* drive = __createTemplate();
+    __createInternals(drive, descr);
 
     return drive;
 }        
 
-void Drive::createInternals(model::item::Drive* drive, const descriptor::BaseOLD& descriptor)
+void Drive::__createInternals(model::item::Drive* drive, const descriptor::item::Drive& descr)
 {
     assert(false);
 //    ItemCommonData data = extractCommonData(descriptor);

@@ -27,8 +27,10 @@
 #include <core/descriptors/PlanetDescriptor.hpp>
 #include <core/descriptors/AsteroidDescriptor.hpp>
 #include <core/descriptors/VehicleDescriptor.hpp>
+
 #include <core/item/equipment/Bak.hpp> // descriptor
 #include <core/item/equipment/Drive.hpp> // descriptor
+#include <core/item/equipment/Droid.hpp> // descriptor
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -139,6 +141,9 @@ public:
     void add(const item::Bak& bak) {
         m_bak.add(bak);
     }
+    void add(const item::Droid& droid) {
+        m_droid.add(droid);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -157,6 +162,7 @@ public:
     const MManager<Satellite>& satellite() const { return m_satellite; }
     const MManager<item::Drive>& drive() const { return m_drive; }
     const MManager<item::Bak>& bak() const { return m_bak; }
+    const MManager<item::Droid>& droid() const { return m_droid; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -180,6 +186,7 @@ private:
     MManager<Satellite> m_satellite;
     MManager<item::Bak> m_bak;
     MManager<item::Drive> m_drive;
+    MManager<item::Droid> m_droid;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

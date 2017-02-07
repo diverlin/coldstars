@@ -19,10 +19,12 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Droid;
+} // namespace item
 } // namespace descriptor
 
 namespace model {
@@ -41,11 +43,12 @@ public:
     ~Droid() = default;
 
     static model::item::Droid* getNew();
-    static model::item::Droid* getNew(const descriptor::BaseOLD&);
+    static model::item::Droid* getNew(const std::string&);
+    static model::item::Droid* getNew(const descriptor::item::Droid&);
 
 private:
     static model::item::Droid* __createTemplate();
-    static void __createInternals(model::item::Droid*, const descriptor::BaseOLD&);
+    static void __createInternals(model::item::Droid*, const descriptor::item::Droid&);
 }; 
 
 } // namespace item

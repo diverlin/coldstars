@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 #include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Bak;
+} // namespace item
 } // namespace descriptor
 
 namespace model {
@@ -43,12 +43,12 @@ public:
     ~Bak() = default;
 
     static model::item::Bak* getNew();
-    static model::item::Bak* getNew(const descriptor::BaseOLD&);
     static model::item::Bak* getNew(const std::string&);
+    static model::item::Bak* getNew(const descriptor::item::Bak&);
 
 private:
     static model::item::Bak* __createTemplate();
-    static void __createInternals(model::item::Bak*, const descriptor::BaseOLD&);
+    static void __createInternals(model::item::Bak*, const descriptor::item::Bak&);
 }; 
 
 } // namespace item
