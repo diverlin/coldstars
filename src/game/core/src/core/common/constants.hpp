@@ -437,23 +437,23 @@ namespace EQUIPMENT
 //        const float MODULES_NUM_WEIGHT = 0.3;
 //    }
 
-    namespace DROID
-    {
-        const int REPAIR_MIN = 1;
-        const int REPAIR_MAX = 15;
-        const float REPAIR_TECH_RATE = 0.1f;
+//    namespace DROID
+//    {
+//        const int REPAIR_MIN = 1;
+//        const int REPAIR_MAX = 15;
+//        const float REPAIR_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int MASS_MIN = 10;
-        const int MASS_MAX = 50;
-        const int CONDITION_MIN = 300;
-        const int CONDITION_MAX = 2000;
+//        const int MASS_MIN = 10;
+//        const int MASS_MAX = 50;
+//        const int CONDITION_MIN = 300;
+//        const int CONDITION_MAX = 2000;
         
-        const float REPAIR_WEIGHT = 0.8;
-        const float MODULES_NUM_WEIGHT = 0.2;
-    }
+//        const float REPAIR_WEIGHT = 0.8;
+//        const float MODULES_NUM_WEIGHT = 0.2;
+//    }
 
     namespace SCANER
     {

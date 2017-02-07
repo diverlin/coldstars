@@ -82,8 +82,6 @@ TEST(descriptor, bak) {
     // general
     EXPECT_EQ(descr.data(), descr_copy.data());
     EXPECT_EQ(descr.info(), descr_copy.info());
-
-    //std::cout<<descr.info();
 }
 
 TEST(descriptor, drive) {
@@ -99,8 +97,20 @@ TEST(descriptor, drive) {
     // general
     EXPECT_EQ(descr.data(), descr_copy.data());
     EXPECT_EQ(descr.info(), descr_copy.info());
+}
 
-    //std::cout<<descr.info();
+TEST(descriptor, droid) {
+    descriptor::item::Droid descr = descriptor::item::getNewDroid();
+    descriptor::item::Droid descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Droid
+    EXPECT_EQ(descr.repair(), descr_copy.repair());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
 }
 
 //void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)

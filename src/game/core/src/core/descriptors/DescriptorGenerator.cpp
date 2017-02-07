@@ -641,9 +641,7 @@ getNewDrive(int race, int tech_level)
     return descr;
 }
 
-} // anemspace item
-
-descriptor::BaseOLD
+descriptor::item::Droid
 getNewDroid(int race, int tech_level)
 {
     if (race == -1) {
@@ -653,22 +651,34 @@ getNewDroid(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules_num_max = meti::getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
-    int mass            = meti::getRandInt(EQUIPMENT::DROID::MASS_MIN,        EQUIPMENT::DROID::MASS_MAX);
-    int condition_max   = meti::getRandInt(EQUIPMENT::DROID::CONDITION_MIN,   EQUIPMENT::DROID::CONDITION_MAX);
+    int modules       = meti::getRandInt(descriptor::item::Droid::MODULES_NUM_MIN, descriptor::item::Droid::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(descriptor::item::Droid::MASS_MIN,        descriptor::item::Droid::MASS_MAX);
+    int condition     = meti::getRandInt(descriptor::item::Droid::CONDITION_MIN,   descriptor::item::Droid::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    int repair = meti::getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX) * (1 + EQUIPMENT::DROID::REPAIR_TECH_RATE*(int)tech_level);
+    int repair = meti::getRandInt(descriptor::item::Droid::REPAIR_MIN, descriptor::item::Droid::REPAIR_MAX) * (1 + descriptor::item::Droid::REPAIR_TECH_RATE*(int)tech_level);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
-    descriptor::BaseOLD descriptor(descriptor::Type::DROID);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::REPAIR, repair);
-    return descriptor;
+    descriptor::item::Droid descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Drive
+    descr.setRepair(repair);
+
+    return descr;
 }
+
+} // anemspace item
+
 
 descriptor::BaseOLD
 getNewGrapple(int race, int tech_level)
