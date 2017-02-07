@@ -30,7 +30,7 @@ class Droid : public BaseEquipment
 public:
     static const int REPAIR_MIN;
     static const int REPAIR_MAX;
-    static const float FUEL_TECH_RATE;
+    static const float REPAIR_TECH_RATE;
 
     static const int MODULES_NUM_MIN;
     static const int MODULES_NUM_MAX;
@@ -40,7 +40,7 @@ public:
     static const int CONDITION_MIN;
     static const int CONDITION_MAX;
 
-    static const float FUEL_WEIGHT;
+    static const float REPAIR_WEIGHT;
     static const float MODULES_NUM_WEIGHT;
 
 public:

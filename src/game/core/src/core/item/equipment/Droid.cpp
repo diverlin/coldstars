@@ -30,20 +30,20 @@
 namespace descriptor {
 namespace item {
 
-//const int Bak::FUEL_MIN = 10;
-//const int Bak::FUEL_MAX = 30;
-//const float Bak::FUEL_TECH_RATE = 0.1f;
+const int Droid::REPAIR_MIN = 1;
+const int Droid::REPAIR_MAX = 15;
+const float Droid::REPAIR_TECH_RATE = 0.1f;
 
-//const int Bak::MODULES_NUM_MIN = 0;
-//const int Bak::MODULES_NUM_MAX = 2;
+const int Droid::MODULES_NUM_MIN = 0;
+const int Droid::MODULES_NUM_MAX = 2;
 
-//const int Bak::MASS_MIN = 10;
-//const int Bak::MASS_MAX = 40;
-//const int Bak::CONDITION_MIN = 30;
-//const int Bak::CONDITION_MAX = 100;
+const int Droid::MASS_MIN = 10;
+const int Droid::MASS_MAX = 50;
+const int Droid::CONDITION_MIN = 300;
+const int Droid::CONDITION_MAX = 2000;
 
-//const float Bak::FUEL_WEIGHT = 0.7;
-//const float Bak::MODULES_NUM_WEIGHT = 0.3;
+const float Droid::REPAIR_WEIGHT = 0.8f;
+const float Droid::MODULES_NUM_WEIGHT = 0.2f;
 
 Droid::Droid()
 {
@@ -127,13 +127,13 @@ void Droid::updateInStatic()
 
 void Droid::CountPrice()
 {
-    float repair_rate        = (float)descriptor()->repair() / EQUIPMENT::DROID::REPAIR_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DROID::MODULES_NUM_MAX;
+    float repair_rate        = (float)descriptor()->repair() / descriptor::item::Droid::REPAIR_MIN;
+    float modules_num_rate   = (float)modulesNum() / descriptor::item::Droid::MODULES_NUM_MAX;
 
-    float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate +
-            EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Droid::REPAIR_WEIGHT * repair_rate +
+            descriptor::item::Droid::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::DROID::MASS_MIN;
+    float mass_rate          = (float)m_data.mass / descriptor::item::Droid::MASS_MIN;
     float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
