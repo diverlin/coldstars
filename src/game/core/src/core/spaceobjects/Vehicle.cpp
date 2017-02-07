@@ -1039,9 +1039,10 @@ void Vehicle::_updatePropRepair()
 
     if (m_droidSlot->item() != nullptr)
     {
-        if (m_droidSlot->droidEquipment()->isFunctioning() == true) {
-            model()->properties().repair = m_droidSlot->droidEquipment()->repair();
-        }
+        assert(false);
+//        if (m_droidSlot->droidEquipment()->isFunctioning() == true) {
+//            model()->properties().repair = m_droidSlot->droidEquipment()->model()->repair();
+//        }
     }
 }
 

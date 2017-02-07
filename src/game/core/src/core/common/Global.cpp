@@ -106,9 +106,6 @@ global::global()
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
     #endif // USE_ARTEFACTS
 
-    , m_bakBuilder(new item::BakBuilder)
-//    , m_driveBuilder(new item::DriveBuilder)
-    , m_droidBuilder(new item::DroidBuilder)
     #ifdef USE_EXTRA_EQUIPMENT
     , m_energizerBuilder(new item::EnergizerBuilder)
     , m_freezerBuilder(new item::FreezerBuilder)
@@ -164,9 +161,6 @@ global::~global()
     delete m_protectorArtefactBuilder;
 #endif // USE_ARTEFACTS
 
-    delete m_bakBuilder;
-//    delete m_driveBuilder;
-    delete m_droidBuilder;
 #ifdef USE_EXTRA_EQUIPMENT
     delete m_energizerBuilder;
     delete m_freezerBuilder;

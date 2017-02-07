@@ -28,50 +28,35 @@
 
 #include <common/Global.hpp>
 
+namespace builder {
 namespace item {
 
-BakBuilder::BakBuilder()
-{
-}
-
-BakBuilder::~BakBuilder()
-{}
-
 model::item::Bak*
-BakBuilder::getNew()
+Bak::getNew()
 {
     const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
     return getNew(descriptor);
 }
 
 model::item::Bak*
-BakBuilder::getNew(const descriptor::BaseOLD& descr)
+Bak::getNew(const descriptor::BaseOLD& descr)
 {
     descriptor::BaseOLD descriptor(descr.data());
-    int_t id = NONE;
-    if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
-        descriptor = core::global::get().descriptors().get(descr.descriptor());
-        id = descr.objId();
-    }
-
-    model::item::Bak* bak = __createTemplate(id);
+    model::item::Bak* bak = __createTemplate();
     __createInternals(bak, descriptor);
     
     return bak;
 }
 
 model::item::Bak*
-BakBuilder::getNew(const std::string& data)
+Bak::getNew(const std::string& data)
 {
     return getNew(descriptor::BaseOLD(data));
 }
 
 model::item::Bak*
-BakBuilder::__createTemplate(int_t id)
+Bak::__createTemplate()
 {
-    if (id == NONE) {
-        id = core::global::get().idGenerator().nextId();
-    }
     model::item::Bak* bak = new model::item::Bak;
     assert(bak);
 
@@ -81,7 +66,7 @@ BakBuilder::__createTemplate(int_t id)
 }
 
 void
-BakBuilder::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& descriptor)
+Bak::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& descriptor)
 {
     assert(false);
 //    assert(descriptor.type() == (int)descriptor::Type::BAK);
@@ -98,4 +83,4 @@ BakBuilder::__createInternals(model::item::Bak* bak, const descriptor::BaseOLD& 
 }
 
 } // namespace item
-
+} // namespace builder

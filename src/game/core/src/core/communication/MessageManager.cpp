@@ -86,7 +86,7 @@ void MessageManager::process(const Message& message)
 
         // items
     case TELEGRAM::CREATE_BAK: {
-        core::global::get().bakBuilder().getNew(message.data);
+        builder::item::Bak().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {
@@ -95,7 +95,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_DROID: {
-        core::global::get().droidBuilder().getNew(message.data);
+        builder::item::Droid().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {

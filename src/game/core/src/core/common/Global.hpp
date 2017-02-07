@@ -119,9 +119,6 @@ public:
     ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
 #endif // USE_ARTEFACTS
 
-    item::BakBuilder& bakBuilder() { return *m_bakBuilder; }
-//    item::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
-    item::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
 #ifdef USE_EXTRA_EQUIPMENT
     item::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
     item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
@@ -187,9 +184,6 @@ private:
     ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
 #endif // USE_ARTEFACTS
 
-    item::BakBuilder* m_bakBuilder = nullptr;
-//    item::DriveBuilder* m_driveBuilder = nullptr;
-    item::DroidBuilder* m_droidBuilder = nullptr;
 #ifdef USE_EXTRA_EQUIPMENT
     item::EnergizerBuilder* m_energizerBuilder = nullptr;
     item::FreezerBuilder* m_freezerBuilder = nullptr;

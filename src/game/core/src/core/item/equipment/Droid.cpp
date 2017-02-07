@@ -26,17 +26,75 @@
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../slots/ItemSlot.hpp"
 
+
+namespace descriptor {
 namespace item {
 
-Droid::Droid(int_t id)
-    :
-      m_repair_orig(0)
+//const int Bak::FUEL_MIN = 10;
+//const int Bak::FUEL_MAX = 30;
+//const float Bak::FUEL_TECH_RATE = 0.1f;
+
+//const int Bak::MODULES_NUM_MIN = 0;
+//const int Bak::MODULES_NUM_MAX = 2;
+
+//const int Bak::MASS_MIN = 10;
+//const int Bak::MASS_MAX = 40;
+//const int Bak::CONDITION_MIN = 30;
+//const int Bak::CONDITION_MAX = 100;
+
+//const float Bak::FUEL_WEIGHT = 0.7;
+//const float Bak::MODULES_NUM_WEIGHT = 0.3;
+
+Droid::Droid()
 {
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::DROID_EQUIPMENT_ID);
+    setDescriptor(descriptor::type::DROID_EQUIPMENT);
 }
+
+Droid::Droid(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Droid::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+Droid::Droid()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::DROID_EQUIPMENT_ID);
+}
+
+Droid::Droid(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Droid::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace model
+
+
+
+namespace control {
+namespace item {
+
+Droid::Droid()
+{}
 
 /* virtual */
 Droid::~Droid()
@@ -47,12 +105,11 @@ void Droid::updateProperties()
 {
     m_repair_add = 0;
 #ifdef USE_MODULES
-    for (unsigned int i = 0; i < modules_vec.size(); i++)
-    {
+    for (unsigned int i = 0; i < modules_vec.size(); i++) {
         repair_add += ((DroidModule*)modules_vec[i])->GetRepairAdd();
     }
 #endif
-    m_repair = m_repair_orig + m_repair_add;
+    model()->setRepair(descriptor()->repair() + m_repair_add);
 }
 
 /* virtual */
@@ -70,7 +127,7 @@ void Droid::updateInStatic()
 
 void Droid::CountPrice()
 {
-    float repair_rate        = (float)m_repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
+    float repair_rate        = (float)descriptor()->repair() / EQUIPMENT::DROID::REPAIR_MIN;
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate +
@@ -91,59 +148,12 @@ void Droid::addUniqueInfo()
 
 std::string Droid::GetRepairStr()
 {
-    if (m_repair_add == 0)
-        return std::to_string(m_repair_orig);
-    else
-        return std::to_string(m_repair_orig) + "+" + std::to_string(m_repair_add);
-}
-
-/*virtual*/
-void Droid::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "droid_equipment." + std::to_string(model()->id()) + ".";
-
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Droid::SaveData(save_ptree, root);
-}
-
-/*virtual*/
-void Droid::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Droid::LoadData(load_ptree);
-}
-
-/*virtual*/
-void Droid::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Droid::ResolveData();
-}
-
-void Droid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" DroidEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
-    
-//    save_ptree.put(root+"repair_orig", m_repair_orig);
-}
-
-void Droid::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-//    m_repair_orig = load_ptree.get<int>("repair_orig");
-}                
-
-void Droid::ResolveData()
-{
-//    LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+    if (m_repair_add) {
+        return std::to_string(descriptor()->repair()) + "+" + std::to_string(m_repair_add);
+    } else {
+        return std::to_string(descriptor()->repair());
+    }
 }
 
 } // namespace item
-
+} // namespace control
