@@ -21,33 +21,136 @@
 
 #include "Base.hpp"
 
-namespace model {
-class SpaceObject;
-}
 
+namespace descriptor {
 namespace item {
 
-class Grapple : public control::item::BaseEquipment
+class Grapple : public BaseEquipment
 {
 public:
-    Grapple(int_t id);
-    virtual ~Grapple();
+    static const int STRENGTH_MIN;
+    static const int STRENGTH_MAX;
+    static const float STRENGTH_TECH_RATE;
 
-    void SetStrengthOrig(int strength_orig)     { m_strength_orig   = strength_orig; }
-    void SetRadiusOrig(int radius_orig)         { m_radius_orig     = radius_orig; }
-    void SetSpeedOrig(int speed_orig)           { m_speed_orig      = speed_orig; }
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
 
-    int strength()   const { return m_strength; }
-    int radius()     const override final { return m_radius; }
-    int speed()      const { return m_speed; }
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
+    static const float SPEED_TECH_RATE;
 
-    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;
-    void AddTarget(model::SpaceObject*);
-    void RemoveTarget(model::SpaceObject*);
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
 
-    void RemoveAllTargets();
+    static const float STRENGTH_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float SPEED_WEIGHT;
+    static const float MAXNUMITEM_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
 
-    std::string GetTarstr() const;
+public:
+    Grapple();
+    ~Grapple() = default;
+    Grapple(const std::string& data);
+    std::string data() const;
+
+    void setStrength(int strength)     { m_strength = strength; }
+    void setRadius(int radius)         { m_radius = radius; }
+    void setSpeed(int speed)           { m_speed = speed; }
+
+    int strength() const { return m_strength; }
+    int radius() const { return m_radius; }
+    int speed() const { return m_speed; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Grapple:\n";
+        result += std::string(" strength = ") + std::to_string(m_strength) + "\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_strength = 0;
+    int m_radius = 0;
+    int m_speed = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_strength;
+        ar & m_radius;
+        ar & m_speed;
+    }
+};
+
+} // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Grapple : public BaseEquipment
+{
+public:
+    Grapple();
+    ~Grapple() = default;
+    Grapple(const std::string& data);
+    std::string data() const;
+
+    void setStrength(int strength)     { m_strength = strength; }
+    void setRadius(int radius)         { m_radius = radius; }
+    void setSpeed(int speed)           { m_speed = speed; }
+
+    int strength() const { return m_strength; }
+    int radius() const { return m_radius; }
+    int speed() const { return m_speed; }
+
+private:
+    int m_strength = 0;
+    int m_radius = 0;
+    int m_speed = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_strength;
+        ar & m_radius;
+        ar & m_speed;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Grapple : public BaseEquipment
+{
+public:
+    Grapple(model::item::Grapple*);
+    virtual ~Grapple() = default;
+
+//    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;
+//    void AddTarget(model::SpaceObject*);
+//    void RemoveTarget(model::SpaceObject*);
+
+//    void RemoveAllTargets();
+
+//    std::string GetTarstr() const;
 
     void UpdateGrabScenarioProgram_inDynamic();
     //        void RenderGrabTrail(const jeti::Renderer&);
@@ -56,35 +159,26 @@ public:
 
     void CountPrice();
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+    model::item::Grapple* model() const { return m_model_grapple; }
+    descriptor::item::Grapple* descriptor() const { return m_descriptor_grapple; }
 
 private:
-    int m_strength_orig;
-    int m_strength_add;
-    int m_strength;
+    int m_strength_add = 0;
+    int m_radius_add = 0;
+    int m_speed_add = 0;
 
-    int m_radius_orig;
-    int m_radius_add;
-    int m_radius;
+    int m_free_strength = 0;
 
-    int m_speed_orig;
-    int m_speed_add;
-    int m_speed;
+    model::item::Grapple* m_model_grapple = nullptr;
+    descriptor::item::Grapple* m_descriptor_grapple = nullptr;
 
-    int m_free_strength;
-
-    std::vector<model::SpaceObject*> m_targets;
+//    std::vector<model::SpaceObject*> m_targets;
 
     void virtual addUniqueInfo();
-    std::string GetStrengthStr();
-    std::string GetRadiusStr();
-    std::string GetSpeedStr();
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+    std::string strengthStr();
+    std::string radiusStr();
+    std::string speedStr();
 };
 
 } // namespace item
+} // namespace control

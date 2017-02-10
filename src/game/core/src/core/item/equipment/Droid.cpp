@@ -128,13 +128,13 @@ void Droid::updateInStatic()
 void Droid::CountPrice()
 {
     float repair_rate        = (float)descriptor()->repair() / descriptor::item::Droid::REPAIR_MIN;
-    float modules_num_rate   = (float)modulesNum() / descriptor::item::Droid::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Droid::MODULES_NUM_MAX;
 
     float effectiveness_rate = descriptor::item::Droid::REPAIR_WEIGHT * repair_rate +
             descriptor::item::Droid::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / descriptor::item::Droid::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data.condition_max;
+    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Droid::MASS_MIN;
+    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Droid::CONDITION_MIN;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

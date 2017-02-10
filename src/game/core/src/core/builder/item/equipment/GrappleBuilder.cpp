@@ -28,17 +28,13 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
+namespace builder {
 namespace item {
 
-GrappleBuilder::GrappleBuilder()
-{}
-
-GrappleBuilder::~GrappleBuilder()
-{}
-
-Grapple* GrappleBuilder::createTemplate(int_t id) const
+model::item::Grapple*
+Grapple::__createTemplate()
 {
-    Grapple* grapple = new Grapple(id);
+    model::item::Grapple* grapple = new model::item::Grapple;
     assert(grapple);
 
     assert(false);
@@ -47,36 +43,46 @@ Grapple* GrappleBuilder::createTemplate(int_t id) const
     return grapple;
 } 
 
-Grapple* GrappleBuilder::getNew() const
+model::item::Grapple*
+Grapple::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
-    Grapple* grapple = createTemplate();
-    createInternals(grapple, descriptor);
-
-    return grapple;
+    const descriptor::item::Grapple& descr = core::global::get().descriptors().grapple().random();
+    return getNew(descr);
 }
 
-Grapple* GrappleBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+model::item::Grapple*
+Grapple::getNew(const std::string& data)
 {
-    Grapple* grapple = createTemplate();
-    createInternals(grapple, descriptor);
+    descriptor::item::Grapple descr(data);
+    assert(descr.descriptor() != descriptor::type::GRAPPLE_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Grapple*
+Grapple::getNew(const descriptor::item::Grapple& descr)
+{
+    model::item::Grapple* grapple = __createTemplate();
+    __createInternals(grapple, descr);
 
     return grapple;
 } 
 
-void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::BaseOLD& descriptor) const
+void
+Grapple::__createInternals(model::item::Grapple* grapple, const descriptor::item::Grapple& descr)
 {
-    ItemCommonData data = extractCommonData(descriptor);
+    assert(false);
+//    ItemCommonData data = extractCommonData(descriptor);
 
-    grapple->SetStrengthOrig(descriptor.strength());
-    grapple->SetRadiusOrig(descriptor.radius());
-    grapple->SetSpeedOrig(descriptor.speed());
+//    grapple->SetStrengthOrig(descriptor.strength());
+//    grapple->SetRadiusOrig(descriptor.radius());
+//    grapple->SetSpeedOrig(descriptor.speed());
 
-    grapple->setParentSubTypeId(entity::type::GRAPPLE_SLOT_ID);
-    grapple->setItemCommonData(data);
+//    grapple->setParentSubTypeId(entity::type::GRAPPLE_SLOT_ID);
+//    grapple->setItemCommonData(data);
     
-    grapple->updateProperties();
-    grapple->CountPrice();
+//    grapple->updateProperties();
+//    grapple->CountPrice();
 }
 
 } // namespace item
+} // namespace builder
