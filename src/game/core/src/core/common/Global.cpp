@@ -110,7 +110,6 @@ global::global()
     , m_energizerBuilder(new item::EnergizerBuilder)
     , m_freezerBuilder(new item::FreezerBuilder)
     #endif
-    , m_grappleBuilder(new item::GrappleBuilder)
     , m_protectorBuilder(new item::ProtectorBuilder)
     , m_radarBuilder(new item::RadarBuilder)
     , m_scanerBuilder(new item::ScanerBuilder)
@@ -165,7 +164,6 @@ global::~global()
     delete m_energizerBuilder;
     delete m_freezerBuilder;
 #endif // USE_EXTRA_EQUIPMENT
-    delete m_grappleBuilder;
     delete m_protectorBuilder;
     delete m_radarBuilder;
     delete m_scanerBuilder;

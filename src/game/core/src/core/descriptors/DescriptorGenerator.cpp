@@ -677,10 +677,8 @@ getNewDroid(int race, int tech_level)
     return descr;
 }
 
-} // anemspace item
 
-
-descriptor::BaseOLD
+descriptor::item::Grapple
 getNewGrapple(int race, int tech_level)
 {
     if (race == -1) {
@@ -690,28 +688,41 @@ getNewGrapple(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
-    int mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
-    int condition_max   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
+    int modules = meti::getRandInt(descriptor::item::Grapple::MODULES_NUM_MIN, descriptor::item::Grapple::MODULES_NUM_MAX);
+    int mass = meti::getRandInt(descriptor::item::Grapple::MASS_MIN,        descriptor::item::Grapple::MASS_MAX);
+    int condition = meti::getRandInt(descriptor::item::Grapple::CONDITION_MIN,   descriptor::item::Grapple::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
 
-    int strength   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECH_RATE * (int)tech_level);
-    int radius     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECH_RATE * (int)tech_level);
-    int speed      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
+    int strength   = meti::getRandInt(descriptor::item::Grapple::STRENGTH_MIN, descriptor::item::Grapple::STRENGTH_MAX) * (1 + descriptor::item::Grapple::STRENGTH_TECH_RATE * (int)tech_level);
+    int radius     = meti::getRandInt(descriptor::item::Grapple::RADIUS_MIN,   descriptor::item::Grapple::RADIUS_MAX)   * (1 + descriptor::item::Grapple::RADIUS_TECH_RATE * (int)tech_level);
+    int speed      = meti::getRandInt(descriptor::item::Grapple::SPEED_MIN,    descriptor::item::Grapple::SPEED_MAX)    * (1 + descriptor::item::Grapple::SPEED_TECH_RATE * (int)tech_level);
 
-    descriptor::BaseOLD descriptor(descriptor::Type::GRAPPLE);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::STRENGTH, strength);
-    descriptor.add(descriptor::Key::RADIUS, radius);
-    descriptor.add(descriptor::Key::SPEED, speed);
+    descriptor::item::Grapple descr;
 
-    return descriptor;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Grapple
+    descr.setStrength(strength);
+    descr.setRadius(radius);
+    descr.setSpeed(speed);
+
+    return descr;
 }
+
+
+} // anemspace item
+
 
 descriptor::BaseOLD
 getNewScaner(int race, int tech_level)

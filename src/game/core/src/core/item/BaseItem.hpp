@@ -122,6 +122,7 @@ public:
     int basePrice()     const { return m_data.price; }
     int deterioration() const { return m_data.deterioration; }
 
+    [[deprecated("remove")]]
     int modulesNum() const { return m_data.modules_num; }
     int descriptorType() const { return m_data.descriptor_type; }
 
@@ -192,6 +193,7 @@ public:
     int basePrice()     const { return m_data.price; }
     int deterioration() const { return m_data.deterioration; }
 
+    [[deprecated("remove")]]
     int modulesNum() const { return m_data.modules_num; }
     int descriptorType() const { return m_data.descriptor_type; }
 

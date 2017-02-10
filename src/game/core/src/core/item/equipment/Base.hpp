@@ -28,7 +28,7 @@
 namespace descriptor {
 namespace item {
 
-class BaseEquipment : public descriptor::item::Base
+class BaseEquipment : public Base
 {
 public:
     BaseEquipment() = default;

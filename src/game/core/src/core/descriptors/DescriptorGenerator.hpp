@@ -29,6 +29,7 @@ namespace item {
 class Bak;
 class Drive;
 class Droid;
+class Grapple;
 } // namespace item
 
 class Galaxy;
@@ -61,10 +62,10 @@ namespace item {
 descriptor::item::Bak getNewBak(int race = -1, int tech_level = -1);
 descriptor::item::Drive getNewDrive(int race = -1, int tech_level = -1);
 descriptor::item::Droid getNewDroid(int race = -1, int tech_level = -1);
+descriptor::item::Grapple getNewGrapple(int race = -1, int tech_level = -1);
 } // namespace item
 
 
-descriptor::BaseOLD getNewGrapple(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewScaner(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewRadar(int race = -1, int tech_level = -1);
 descriptor::BaseOLD getNewProtector(int race = -1, int tech_level = -1);

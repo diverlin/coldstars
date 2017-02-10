@@ -19,28 +19,38 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Grapple;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
+namespace item {
+class Grapple;
+} // namespace item
+} // namespace model
+
+namespace builder {
 namespace item {
 
-class Grapple;
-
-class GrappleBuilder
+class Grapple
 {
 public:
-    GrappleBuilder();
-    ~GrappleBuilder();
+    Grapple() = default;
+    ~Grapple() = default;
 
-    Grapple* getNew() const;
-    Grapple* createTemplate(int_t id = NONE) const;
-    Grapple* getNew(const descriptor::BaseOLD&) const;
+    static model::item::Grapple* getNew();
+    static model::item::Grapple* getNew(const std::string&);
+    static model::item::Grapple* getNew(const descriptor::item::Grapple&);
 
 private:
-    void createInternals(Grapple*, const descriptor::BaseOLD&) const;
+    static model::item::Grapple* __createTemplate();
+
+    static void __createInternals(model::item::Grapple*, const descriptor::item::Grapple&);
 }; 
 
 } // namespace item
+} // namespace builder

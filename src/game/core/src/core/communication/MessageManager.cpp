@@ -99,7 +99,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {
-        core::global::get().grappleBuilder().getNew(message.data);
+        builder::item::Grapple::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_SCANER: {

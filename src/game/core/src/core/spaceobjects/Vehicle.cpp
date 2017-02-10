@@ -1124,11 +1124,12 @@ void Vehicle::_updatePropGrab()
     {
         if (m_grappleSlot->item() != nullptr)
         {
-            if (m_grappleSlot->grappleEquipment()->isFunctioning() == true)
-            {
-                model()->properties().grab_strength = m_grappleSlot->grappleEquipment()->strength();
-                model()->properties().grab_radius = m_grappleSlot->grappleEquipment()->radius();
-            }
+            assert(false);
+//            if (m_grappleSlot->grappleEquipment()->isFunctioning() == true)
+//            {
+//                model()->properties().grab_strength = m_grappleSlot->grappleEquipment()->strength();
+//                model()->properties().grab_radius = m_grappleSlot->grappleEquipment()->radius();
+//            }
         }
     }
 }
@@ -1388,15 +1389,16 @@ STATUS Vehicle::CheckGrabStatus() const
 
     if (m_grappleSlot->item() != nullptr)
     {
-        if (m_grappleSlot->grappleEquipment()->isDamaged() == true)
-        {
-            status = STATUS::ITEM_DAMAGED;
-        }
+        assert(false);
+//        if (m_grappleSlot->grappleEquipment()->isDamaged() == true)
+//        {
+//            status = STATUS::ITEM_DAMAGED;
+//        }
 
-        if (m_grappleSlot->grappleEquipment()->isLocked() != 0)
-        {
-            status = STATUS::ITEM_LOCKED;
-        }
+//        if (m_grappleSlot->grappleEquipment()->isLocked() != 0)
+//        {
+//            status = STATUS::ITEM_LOCKED;
+//        }
     }
     else
     {
@@ -1453,9 +1455,10 @@ Vehicle::__wrapItemToContainer(item::Base* item)
 
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
-    if (model()->properties().grab_radius > 0) {
-        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
-    }
+    assert(false);
+//    if (model()->properties().grab_radius > 0) {
+//        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
+//    }
 }
 
 //void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -329,34 +329,6 @@ namespace EQUIPMENT
         const float MODULES_NUM_WEIGHT = 0.5;
     }
 
-    namespace GRAPPLE
-    {
-        const int STRENGTH_MIN = 6;
-        const int STRENGTH_MAX = 50;
-        const float STRENGTH_TECH_RATE = 0.1f;
-        
-        const int RADIUS_MIN = 100;
-        const int RADIUS_MAX = 200;
-        const float RADIUS_TECH_RATE = 0.1f;
-                
-        const int SPEED_MIN = 100;
-        const int SPEED_MAX = 170;
-        const float SPEED_TECH_RATE = 0.1f;
-        
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
-        const int MASS_MIN = 10;
-        const int MASS_MAX = 40;
-        const int CONDITION_MIN = 100;
-        const int CONDITION_MAX = 1000;
-        
-        const float STRENGTH_WEIGHT = 0.4;
-        const float RADIUS_WEIGHT = 0.3;
-        const float SPEED_WEIGHT = 0.2;
-        const float MAXNUMITEM_WEIGHT = 0.1;
-        const float MODULES_NUM_WEIGHT = 0.1;
-    }
-
     namespace RADAR
     {
         const int RADIUS_MIN = 700;

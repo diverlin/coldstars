@@ -157,7 +157,7 @@ Manager::generate()
         add(item::getNewBak());
         add(item::getNewDrive());
         add(item::getNewDroid());
-        add(getNewGrapple());
+        add(item::getNewGrapple());
         add(getNewScaner());
         add(getNewRadar());
         add(getNewProtector());

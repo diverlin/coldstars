@@ -50,7 +50,6 @@ class DroidBuilder;
 class EnergizerBuilder;
 class FreezerBuilder;
 #endif
-class GrappleBuilder;
 class ProtectorBuilder;
 class RadarBuilder;
 class ScanerBuilder;
@@ -123,7 +122,6 @@ public:
     item::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
     item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
-    item::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
     item::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
     item::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
     item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
@@ -188,7 +186,6 @@ private:
     item::EnergizerBuilder* m_energizerBuilder = nullptr;
     item::FreezerBuilder* m_freezerBuilder = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    item::GrappleBuilder* m_grappleBuilder = nullptr;
     item::ProtectorBuilder* m_protectorBuilder = nullptr;
     item::RadarBuilder* m_radarBuilder = nullptr;
     item::ScanerBuilder* m_scanerBuilder = nullptr;
