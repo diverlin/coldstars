@@ -37,15 +37,28 @@ void compareBaseEquipmentDescriptors(const descriptor::item::Equipment& descr, c
     EXPECT_EQ(descr.texture(), descr_copy.texture());
     EXPECT_EQ(descr.mesh(), descr_copy.mesh());
 
-    // descriptor::item::Base
+    // descriptor::Item
     EXPECT_EQ(descr.race(), descr_copy.race());
     EXPECT_EQ(descr.tech(), descr_copy.tech());
+    EXPECT_EQ(descr.slotType(), descr_copy.slotType());
     EXPECT_EQ(descr.condition(), descr_copy.condition());
     EXPECT_EQ(descr.deterioration(), descr_copy.deterioration());
     EXPECT_EQ(descr.mass(), descr_copy.mass());
     EXPECT_EQ(descr.price(), descr_copy.price());
 
-    // descriptor::item::BaseEquipment
+
+//    race::type m_race = race::type::NONE;
+//    tech::type m_tech = tech::type::NONE;
+//    entity::type m_slotType = entity::type::NONE;
+//    int_t m_slot = NONE;
+
+//    int m_lockedTurns = 0;
+//    int m_condition = 0;
+//    int m_price = 0;
+//    int m_mass = 0;
+//    int m_deterioration = 0;
+
+    // descriptor::item::Equipment
     EXPECT_EQ(descr.modules(), descr_copy.modules());
 }
 
