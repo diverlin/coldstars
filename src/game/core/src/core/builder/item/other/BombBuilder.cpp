@@ -29,8 +29,8 @@
 
 //#include <boost/property_tree/info_parser.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/Base.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 BombBuilder::BombBuilder()
 {}

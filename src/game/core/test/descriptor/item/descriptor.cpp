@@ -17,7 +17,7 @@
 //*/
 
 
-#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/item/equipment/ALL>
 

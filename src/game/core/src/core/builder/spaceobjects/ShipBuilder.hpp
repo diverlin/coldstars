@@ -20,7 +20,7 @@
 
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/descriptor/VehicleDescriptor.hpp>
 
 #include <string>
 

@@ -20,7 +20,7 @@
 #pragma once
 
 #include <core/types/TechLevelTypes.hpp>
-#include <core/descriptors/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 
 class Vehicle;

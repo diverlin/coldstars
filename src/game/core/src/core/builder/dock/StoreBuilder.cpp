@@ -37,8 +37,8 @@
 
 #include <common/constants.hpp>
 
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/VehicleDescriptorGenerator.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 StoreBuilder::StoreBuilder()
 {}

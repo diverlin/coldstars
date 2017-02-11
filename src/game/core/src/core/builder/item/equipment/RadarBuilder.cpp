@@ -19,7 +19,7 @@
 
 #include "RadarBuilder.hpp"
 #include <core/item/equipment/Radar.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <common/Global.hpp>
 
 namespace builder {

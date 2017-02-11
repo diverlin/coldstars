@@ -30,7 +30,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptor/GalaxyDescriptor.hpp>
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>

@@ -28,7 +28,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptor/GalaxyDescriptor.hpp>
 #include <client/text/VerticalFlowText.hpp>
 
 #include <math/rand.hpp>

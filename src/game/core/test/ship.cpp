@@ -18,9 +18,9 @@
 
 #include <core/common/Global.hpp>
 
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/spaceobjects/ALL>

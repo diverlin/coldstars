@@ -19,6 +19,6 @@
 
 #pragma once
 
-#include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/descriptor/VehicleDescriptor.hpp>
 
 //VehicleDescriptor generateVehicleDescriptor();

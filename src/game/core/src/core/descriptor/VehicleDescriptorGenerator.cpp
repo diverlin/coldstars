@@ -22,7 +22,7 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
+#include <descriptor/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>

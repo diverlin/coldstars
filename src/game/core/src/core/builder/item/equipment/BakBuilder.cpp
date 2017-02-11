@@ -19,7 +19,7 @@
 
 #include "BakBuilder.hpp"
 #include <core/item/equipment/Bak.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 
 namespace builder {

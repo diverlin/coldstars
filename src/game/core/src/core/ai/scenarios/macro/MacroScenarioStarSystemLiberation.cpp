@@ -28,7 +28,7 @@
 #include "../../../ai/Task.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
 
-#include <descriptors/RaceDescriptors.hpp>
+#include <descriptor/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
 

@@ -22,8 +22,8 @@
 #include <common/Global.hpp>
 #include <client/common/global.hpp>
 
-#include <core/descriptors/DescriptorManager.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
 
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>

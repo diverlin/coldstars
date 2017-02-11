@@ -18,15 +18,15 @@
 
 #pragma once
 
-#include <core/descriptors/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
-#include <core/descriptors/GalaxyDescriptor.hpp>
-#include <core/descriptors/SectorDescriptor.hpp>
-#include <core/descriptors/StarsystemDescriptor.hpp>
-#include <core/descriptors/StarDescriptor.hpp>
-#include <core/descriptors/PlanetDescriptor.hpp>
-#include <core/descriptors/AsteroidDescriptor.hpp>
-#include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/StarDescriptor.hpp>
+#include <core/descriptor/PlanetDescriptor.hpp>
+#include <core/descriptor/AsteroidDescriptor.hpp>
+#include <core/descriptor/VehicleDescriptor.hpp>
 
 #include <core/item/equipment/Bak.hpp> // descriptor
 #include <core/item/equipment/Drive.hpp> // descriptor

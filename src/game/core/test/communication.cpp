@@ -32,12 +32,12 @@
 #include <core/builder/item/other/BombBuilder.hpp>
 #include <core/builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <core/descriptors/DescriptorManager.hpp>
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/Descriptor.hpp>
-#include <core/descriptors/Container.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
-#include <core/descriptors/VehicleDescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/Descriptor.hpp>
+#include <core/descriptor/Container.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/descriptor/VehicleDescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>
 #include <core/managers/EntityManager.hpp>

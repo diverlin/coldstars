@@ -17,7 +17,7 @@
 */
 
 #include "DescriptorManager.hpp"
-#include <descriptors/DescriptorGenerator.hpp>
+#include <descriptor/DescriptorGenerator.hpp>
 #include <meti/RandUtils.hpp>
 
 #include <ceti/FsUtils.hpp>

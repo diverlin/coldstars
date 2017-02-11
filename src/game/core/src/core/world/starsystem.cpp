@@ -55,8 +55,8 @@
 //#include <client/gui/GuiManager.hpp>
 //#include <client/gui/GuiRadar.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
-#include <descriptors/VehicleDescriptorGenerator.hpp>
+#include <descriptor/RaceDescriptors.hpp>
+#include <descriptor/VehicleDescriptorGenerator.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>

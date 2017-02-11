@@ -53,8 +53,8 @@
 #include <Game.hpp>
 #include <ai/God.hpp>
 
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/GalaxyDescriptor.hpp>
+#include <descriptor/DescriptorManager.hpp>
 #include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"

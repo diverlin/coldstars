@@ -20,12 +20,12 @@
 
 #include <core/common/constants.hpp>
 #include <core/world/starsystem.hpp>
-#include <core/descriptors/Base.hpp>
+#include <core/descriptor/Base.hpp>
 #include <core/spaceobjects/Star.hpp>
 #include <core/spaceobjects/Planet.hpp>
 #include <core/spaceobjects/Asteroid.hpp>
 #include <core/common/Global.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 #include <client/view/ShipDrawable.hpp>
 #include <client/view/BulletDrawable.hpp>

@@ -21,7 +21,7 @@
 
 #include "../../parts/WeaponComplex.hpp"
 
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 #include <item/equipment/ALL>
 
@@ -54,7 +54,7 @@
 
 #include <types/TechLevelTypes.hpp>
 
-#include <descriptors/DescriptorGenerator.hpp>
+#include <descriptor/DescriptorGenerator.hpp>
 
 BaseVehicle::BaseVehicle()
 {}

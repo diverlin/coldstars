@@ -22,8 +22,8 @@
 
 #include <common/constants.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/Base.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 #include <types/MeshTypes.hpp>
     

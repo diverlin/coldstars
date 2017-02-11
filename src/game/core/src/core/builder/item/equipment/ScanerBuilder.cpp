@@ -25,8 +25,8 @@
 
 #include <common/Global.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/Base.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 namespace builder {
 namespace item {
