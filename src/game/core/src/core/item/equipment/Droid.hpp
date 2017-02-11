@@ -21,60 +21,11 @@
 
 #include "Base.hpp"
 
-
 namespace descriptor {
 namespace item {
-
-class Droid : public BaseEquipment
-{
-public:
-    static const int REPAIR_MIN;
-    static const int REPAIR_MAX;
-    static const float REPAIR_TECH_RATE;
-
-    static const int MODULES_NUM_MIN;
-    static const int MODULES_NUM_MAX;
-
-    static const int MASS_MIN;
-    static const int MASS_MAX;
-    static const int CONDITION_MIN;
-    static const int CONDITION_MAX;
-
-    static const float REPAIR_WEIGHT;
-    static const float MODULES_NUM_WEIGHT;
-
-public:
-    Droid();
-    ~Droid() = default;
-    Droid(const std::string& data);
-    std::string data() const;
-
-    void setRepair(int repair) { m_repair = repair; }
-
-    int repair() const { return m_repair; }
-
-    std::string info() const {
-        std::string result = "descriptor::item::Droid:\n";
-        result += std::string(" repair = ") + std::to_string(m_repair) + "\n";
-        result += descriptor::item::BaseEquipment::info();
-        return result;
-    }
-
-private:
-    int m_repair = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_repair;
-    }
-};
-
+class Droid;
 } // namespace item
 } // namespace descriptor
-
 
 namespace model {
 namespace item {

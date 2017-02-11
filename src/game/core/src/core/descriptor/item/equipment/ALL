@@ -1,0 +1,14 @@
+#include "Bak.hpp"
+#include "Drive.hpp"
+#include "Droid.hpp"
+#include "Grapple.hpp"
+#include "Lazer.hpp"
+#include "Protector.hpp"
+#include "Radar.hpp"
+#include "Rocket.hpp"
+#include "Scaner.hpp"
+
+#ifdef USE_EXTRA_EQUIPMENT
+#include "Energizer.hpp"
+#include "Freezer.hpp"
+#endif // USE_EXTRA_EQUIPMENT

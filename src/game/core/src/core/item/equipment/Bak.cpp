@@ -17,6 +17,7 @@
 */
 
 #include "Bak.hpp"
+#include <core/descriptor/item/equipment/Bak.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/BakModule.hpp>
@@ -24,45 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-
-namespace descriptor {
-namespace item {
-
-const int Bak::FUEL_MIN = 10;
-const int Bak::FUEL_MAX = 30;
-const float Bak::FUEL_TECH_RATE = 0.1f;
-
-const int Bak::MODULES_NUM_MIN = 0;
-const int Bak::MODULES_NUM_MAX = 2;
-
-const int Bak::MASS_MIN = 10;
-const int Bak::MASS_MAX = 40;
-const int Bak::CONDITION_MIN = 30;
-const int Bak::CONDITION_MAX = 100;
-
-const float Bak::FUEL_WEIGHT = 0.7f;
-const float Bak::MODULES_NUM_WEIGHT = 0.3f;
-
-Bak::Bak()
-{
-    setDescriptor(descriptor::type::BAK_EQUIPMENT);
-}
-
-Bak::Bak(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Bak::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace descriptor
-
 
 namespace model {
 namespace item {

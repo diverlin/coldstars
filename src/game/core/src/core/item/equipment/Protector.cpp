@@ -17,6 +17,7 @@
 */
 
 #include "Protector.hpp"
+#include <core/descriptor/item/equipment/Protector.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/ProtectorModule.hpp>
@@ -24,44 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace descriptor {
-namespace item {
-
-const int Protector::PROTECTION_MIN = 3;
-const int Protector::PROTECTION_MAX = 30;
-const float Protector::PROTECTION_TECH_RATE = 0.1f;
-
-const int Protector::MODULES_NUM_MIN = 0;
-const int Protector::MODULES_NUM_MAX = 2;
-
-const int Protector::CONDITION_MIN = 2000;
-const int Protector::CONDITION_MAX = 10000;
-const int Protector::MASS_MIN = 20;
-const int Protector::MASS_MAX = 80;
-
-const float Protector::PROTECTION_WEIGHT = 0.8f;
-const float Protector::MODULES_NUM_WEIGHT = 0.2f;
-
-Protector::Protector()
-{
-    setDescriptor(descriptor::type::PROTECTOR_EQUIPMENT);
-}
-
-Protector::Protector(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Protector::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespce item
-} // namespace descriptor
-
 
 namespace model {
 namespace item {

@@ -18,8 +18,7 @@
 
 
 #include <core/descriptor/DescriptorGenerator.hpp>
-
-#include <core/item/equipment/ALL>
+#include <core/descriptor/item/equipment/ALL>
 
 #include <gtest/gtest.h>
 

@@ -21,18 +21,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Base.hpp"
 
-
 namespace descriptor {
-namespace item {
-class Radar;
-} // namespace item
-} // namespace descriptor
-
-namespace model {
 namespace item {
 
 class Radar : public BaseEquipment
 {
+public:
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
 public:
     Radar();
     ~Radar() = default;
@@ -42,6 +51,13 @@ public:
     void setRadius(int radius) { m_radius = radius; }
 
     int radius() const { return m_radius; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Radar:\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_radius = 0;
@@ -56,45 +72,5 @@ private:
 };
 
 } // namespace item
-} // namespace model
-
-
-namespace control {
-namespace item {
-
-class Radar : public BaseEquipment
-{
-public:
-    Radar(model::item::Radar*);
-    virtual ~Radar() = default;
-
-    virtual void updateProperties();
-
-    void countPrice();
-
-protected:
-    model::item::Radar* model() const { return m_model_radar; }
-    descriptor::item::Radar* descriptor() const { return m_descriptor_radar; }
-
-private:
-    model::item::Radar* m_model_radar = nullptr;
-    descriptor::item::Radar* m_descriptor_radar = nullptr;
-
-    int m_radius_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string radiusStr();
-};
-
-} // namespace item
-} // namespace control
-
-
-
-
-
-
-
-
-
+} // namespace descriptor
 

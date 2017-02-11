@@ -23,54 +23,7 @@
 
 namespace descriptor {
 namespace item {
-
-class Bak : public BaseEquipment
-{
-public:
-    static const int FUEL_MIN;
-    static const int FUEL_MAX;
-    static const float FUEL_TECH_RATE;
-
-    static const int MODULES_NUM_MIN;
-    static const int MODULES_NUM_MAX;
-
-    static const int MASS_MIN;
-    static const int MASS_MAX;
-    static const int CONDITION_MIN;
-    static const int CONDITION_MAX;
-
-    static const float FUEL_WEIGHT;
-    static const float MODULES_NUM_WEIGHT;
-
-public:
-    Bak();
-    ~Bak() = default;
-    Bak(const std::string& data);
-    std::string data() const;
-
-    void setFuel(int fuel) { m_fuel = fuel; }
-
-    int fuel() const { return m_fuel; }
-
-    std::string info() const {
-        std::string result = "descriptor::item::Bak:\n";
-        result += std::string(" fuel = ") + std::to_string(m_fuel) + "\n";
-        result += descriptor::item::BaseEquipment::info();
-        return result;
-    }
-
-private:
-    int m_fuel = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_fuel;
-    }
-};
-
+class Bak;
 } // namespace item
 } // namespace descriptor
 

@@ -28,15 +28,7 @@
 #include <core/descriptor/AsteroidDescriptor.hpp>
 #include <core/descriptor/VehicleDescriptor.hpp>
 
-#include <core/item/equipment/Bak.hpp> // descriptor
-#include <core/item/equipment/Drive.hpp> // descriptor
-#include <core/item/equipment/Droid.hpp> // descriptor
-#include <core/item/equipment/Grapple.hpp> // descriptor
-#include <core/item/equipment/Lazer.hpp> // descriptor
-#include <core/item/equipment/Protector.hpp> // descriptor
-#include <core/item/equipment/Radar.hpp> // descriptor
-#include <core/item/equipment/Rocket.hpp> // descriptor
-#include <core/item/equipment/Scaner.hpp> // descriptor
+#include <core/descriptor/item/equipment/ALL>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>

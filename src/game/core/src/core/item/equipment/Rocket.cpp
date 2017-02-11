@@ -17,6 +17,7 @@
 */
 
 #include "Rocket.hpp"
+#include <core/descriptor/item/equipment/Rocket.hpp>
 
 #ifdef USE_MODULES
 #include <item/modules/RocketModule.hpp>
@@ -24,55 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-
-namespace descriptor {
-namespace item {
-
-const int Rocket::AMMO_MIN = 20;
-const int Rocket::AMMO_MAX = 40;
-const float Rocket::AMMO_TECH_RATE = 0.1f;
-
-const int Rocket::RADIUS_MIN = 350;
-const int Rocket::RADIUS_MAX = 550;
-const float Rocket::RADIUS_TECH_RATE = 0.1f;
-
-const int Rocket::DAMAGE_MIN = 10;
-const int Rocket::DAMAGE_MAX = 20;
-const float Rocket::DAMAGE_TECH_RATE = 0.1f;
-
-const int Rocket::MODULES_NUM_MIN = 0;
-const int Rocket::MODULES_NUM_MAX = 2;
-
-const int Rocket::MASS_MIN = 30;
-const int Rocket::MASS_MAX = 60;
-const int Rocket::CONDITION_MIN = 100;
-const int Rocket::CONDITION_MAX = 900;
-
-const float Rocket::AMMO_WEIGHT = 0.3f;
-const float Rocket::DAMAGE_WEIGHT = 0.3f;
-const float Rocket::RADIUS_WEIGHT = 0.2f;
-const float Rocket::MODULES_NUM_WEIGHT = 0.2f;
-
-Rocket::Rocket()
-{
-    setDescriptor(descriptor::type::ROCKET_EQUIPMENT);
-}
-
-Rocket::Rocket(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Rocket::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespce item
-} // namespace descriptor
-
 
 namespace model {
 namespace item {

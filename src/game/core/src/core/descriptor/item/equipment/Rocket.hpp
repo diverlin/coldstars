@@ -23,15 +23,35 @@
 
 namespace descriptor {
 namespace item {
-class Rocket;
-} // namespace item
-} // namespace descriptor
-
-namespace model {
-namespace item {
 
 class Rocket : public BaseEquipment
 {
+public:
+    static const int AMMO_MIN;
+    static const int AMMO_MAX;
+    static const float AMMO_TECH_RATE;
+
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
+
+    static const int DAMAGE_MIN;
+    static const int DAMAGE_MAX;
+    static const float DAMAGE_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float AMMO_WEIGHT;
+    static const float DAMAGE_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
 public:
     Rocket();
     ~Rocket() = default;
@@ -45,6 +65,15 @@ public:
     int radius() const { return m_radius; }
     int damage() const { return m_damage; }
     int ammo() const { return m_ammo; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Radar:\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_radius = 0;
@@ -63,48 +92,5 @@ private:
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
-
-namespace control {
-namespace item {
-
-class Rocket : public BaseEquipment
-{ 
-public:
-    Rocket(model::item::Rocket*);
-    virtual ~Rocket() = default;
-
-//    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
-
-//    void FireEvent(float);
-
-    virtual void updateProperties();
-
-    void countPrice();
-
-protected:
-    model::item::Rocket* model() const { return m_model_rocket; }
-    descriptor::item::Rocket* descriptor() const { return m_descriptor_rocket; }
-
-private:
-    model::item::Rocket* m_model_rocket = nullptr;
-    descriptor::item::Rocket* m_descriptor_rocket = nullptr;
-
-    int m_ammo_add = 0;
-    int m_damage_add = 0;
-    int m_radius_add = 0;
-
-//    int fire_atOnce;
-
-//    BulletData data_bullet;
-
-    void virtual addUniqueInfo();
-
-    std::string ammoStr();
-    std::string damageStr();
-    std::string radiusStr();
-};
-
-} // namespace item
-} // namespace control
