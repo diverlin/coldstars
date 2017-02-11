@@ -28,18 +28,13 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
+namespace builder {
 namespace item {
 
-ProtectorBuilder::ProtectorBuilder()
-{}
-
-ProtectorBuilder::~ProtectorBuilder()
-{}
-
-Protector*
-ProtectorBuilder::createTemplate(int_t id) const
+model::item::Protector*
+Protector::createTemplate()
 {
-    Protector* protector = new Protector(id);
+    model::item::Protector* protector = new model::item::Protector;
     assert(protector);
 
     assert(false);
@@ -48,47 +43,56 @@ ProtectorBuilder::createTemplate(int_t id) const
     return protector;
 } 
 
-std::vector<Protector*>
-ProtectorBuilder::getNew(int num) const
+std::vector<model::item::Protector*>
+Protector::getNew(int num)
 {
-    std::vector<Protector*> result;
+    std::vector<model::item::Protector*> result;
     for (int i=0; i<num; ++i) {
         result.push_back(getNew());
     }
     return result;
 }
 
-Protector*
-ProtectorBuilder::getNew() const
+model::item::Protector*
+Protector::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
-    Protector* protector = createTemplate();
-    createInternals(protector, descriptor);
+    const descriptor::item::Protector& descr = core::global::get().descriptors().protector().random();
+    model::item::Protector* protector = createTemplate();
+    createInternals(protector, descr);
 
     return protector;
 } 
 
-Protector*
-ProtectorBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+model::item::Protector*
+Protector::getNew(const std::string& data)
 {
-    Protector* protector = createTemplate();
-    createInternals(protector, descriptor);
+    descriptor::item::Protector descr(data);
+    assert(descr.descriptor() != descriptor::type::PROTECTOR_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Protector*
+Protector::getNew(const descriptor::item::Protector& descr)
+{
+    model::item::Protector* protector = createTemplate();
+    createInternals(protector, descr);
 
     return protector;
 }
 
 void
-ProtectorBuilder::createInternals(Protector* protector, const descriptor::BaseOLD& descriptor) const
+Protector::createInternals(model::item::Protector* protector, const descriptor::item::Protector& descr)
 {     
-    ItemCommonData common_data = extractCommonData(descriptor);
+    assert(false);
+//    ItemCommonData common_data = extractCommonData(descriptor);
 
-    protector->SetProtectionOrig(descriptor.protection());
-    protector->setParentSubTypeId(entity::type::PROTECTOR_SLOT_ID);
-    protector->setItemCommonData(common_data);
+//    protector->SetProtectionOrig(descriptor.protection());
+//    protector->setParentSubTypeId(entity::type::PROTECTOR_SLOT_ID);
+//    protector->setItemCommonData(common_data);
 
-    protector->updateProperties();
-    protector->CountPrice();
+//    protector->updateProperties();
+//    protector->CountPrice();
 }
 
 } // namespace item
-
+} // namespace builder

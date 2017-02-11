@@ -122,8 +122,6 @@ public:
     item::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
     item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
-    item::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
-    item::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
     item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
     item::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
 
@@ -185,8 +183,6 @@ private:
     item::EnergizerBuilder* m_energizerBuilder = nullptr;
     item::FreezerBuilder* m_freezerBuilder = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    item::ProtectorBuilder* m_protectorBuilder = nullptr;
-    item::RadarBuilder* m_radarBuilder = nullptr;
     item::ScanerBuilder* m_scanerBuilder = nullptr;
     item::RocketBuilder* m_rocketBuilder = nullptr;
 

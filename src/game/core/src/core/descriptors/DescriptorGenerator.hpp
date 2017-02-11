@@ -31,6 +31,8 @@ class Drive;
 class Droid;
 class Grapple;
 class Lazer;
+class Protector;
+class Radar;
 } // namespace item
 
 class Galaxy;
@@ -65,12 +67,12 @@ descriptor::item::Drive getNewDrive(int race = NONE, int tech_level = NONE);
 descriptor::item::Droid getNewDroid(int race = NONE, int tech_level = NONE);
 descriptor::item::Grapple getNewGrapple(int race = NONE, int tech_level = NONE);
 descriptor::item::Lazer getNewLazer(int race = NONE, int tech_level = NONE);
+descriptor::item::Protector getNewProtector(int race = NONE, int tech_level = NONE);
+descriptor::item::Radar getNewRadar(int race = NONE, int tech_level = NONE);
 } // namespace item
 
 
 descriptor::BaseOLD getNewScaner(int race = NONE, int tech_level = NONE);
-descriptor::BaseOLD getNewRadar(int race = NONE, int tech_level = NONE);
-descriptor::BaseOLD getNewProtector(int race = NONE, int tech_level = NONE);
 descriptor::BaseOLD getNewBomb(int damage = NONE, int radius = NONE);
 
 } // namespace descriptor

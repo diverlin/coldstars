@@ -19,31 +19,39 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
 #include <vector>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Protector;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
+namespace item {
+class Protector;
+} // namespace item
+} // namespace model
+
+namespace builder {
 namespace item {
 
-class Protector;
-
-class ProtectorBuilder
+class Protector
 {
 public:
-    ProtectorBuilder();
-    ~ProtectorBuilder();
+    Protector() = default;
+    ~Protector() = default;
 
-    std::vector<Protector*> getNew(int) const;
-    item::Protector* getNew() const;
-    item::Protector* createTemplate(int_t id = NONE) const;
-    item::Protector* getNew(const descriptor::BaseOLD&) const;
+    static std::vector<model::item::Protector*> getNew(int);
+    static model::item::Protector* getNew();
+    static model::item::Protector* getNew(const std::string&);
+    static model::item::Protector* getNew(const descriptor::item::Protector&);
 
 private:
-    void createInternals(Protector*, const descriptor::BaseOLD&) const;
+    static model::item::Protector* createTemplate();
+    static void createInternals(model::item::Protector*, const descriptor::item::Protector&);
 }; 
 
 } // namespace item
+} // namespace builder

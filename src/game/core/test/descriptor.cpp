@@ -135,7 +135,7 @@ TEST(descriptor, lazer) {
 
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
-    // descriptor::item::Grapple
+    // descriptor::item::Lazer
     EXPECT_EQ(descr.damage(), descr_copy.damage());
     EXPECT_EQ(descr.radius(), descr_copy.radius());
 
@@ -144,6 +144,33 @@ TEST(descriptor, lazer) {
     EXPECT_EQ(descr.info(), descr_copy.info());
 }
 
+TEST(descriptor, protector) {
+    descriptor::item::Protector descr = descriptor::item::getNewProtector();
+    descriptor::item::Protector descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Protector
+    EXPECT_EQ(descr.protection(), descr_copy.protection());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
+
+TEST(descriptor, radar) {
+    descriptor::item::Radar descr = descriptor::item::getNewRadar();
+    descriptor::item::Radar descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Radar
+    EXPECT_EQ(descr.radius(), descr_copy.radius());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
 
 //void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)
 //{

@@ -17,31 +17,84 @@
 */
 
 #include "Radar.hpp"
+
 #ifdef USE_MODULES
 #include <item/modules/RadarModule.hpp>
 #endif
-#include "../../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
+
+#include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
 
+namespace descriptor {
 namespace item {
 
-Radar::Radar(int_t id)
-    :
-      m_radius_orig(0)
+const int Radar::RADIUS_MIN = 200;
+const int Radar::RADIUS_MAX = 400;
+const float Radar::RADIUS_TECH_RATE = 0.1f;
+
+const int Radar::MODULES_NUM_MIN = 0;
+const int Radar::MODULES_NUM_MAX = 2;
+
+const int Radar::MASS_MIN = 10;
+const int Radar::MASS_MAX = 40;
+const int Radar::CONDITION_MIN = 100;
+const int Radar::CONDITION_MAX = 1000;
+
+const float Radar::RADIUS_WEIGHT = 0.6f;
+const float Radar::MODULES_NUM_WEIGHT = 0.4f;
+
+Radar::Radar()
 {
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::RADAR_EQUIPMENT_ID);
+    setDescriptor(descriptor::type::RADAR_EQUIPMENT);
 }
 
-/* virtual */
-Radar::~Radar()
+Radar::Radar(const std::string& data)
 {
-//    LOG("___::~RadarEquipment("+std::to_string(id())+")");
+    MACRO_READ_SERIALIZED_DATA
 }
+
+std::string
+Radar::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespce item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+Radar::Radar()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::RADAR_EQUIPMENT_ID);
+}
+
+Radar::Radar(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Radar::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+Radar::Radar(model::item::Radar* model)
+    :
+      m_model_radar(model)
+{}
 
 /* virtual */
 void Radar::updateProperties()
@@ -53,19 +106,19 @@ void Radar::updateProperties()
         radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();
     }
 #endif
-    m_radius = m_radius_orig + m_radius_add;
+    model()->setRadius(descriptor()->radius() + m_radius_add);
 }
 
-void Radar::CountPrice()
+void Radar::countPrice()
 {
-    float radius_rate         = (float)m_radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
+    float radius_rate         = (float)descriptor()->radius() / descriptor::item::Radar::RADIUS_MIN;
 
-    float modules_num_rate    = (float)modulesNum() / EQUIPMENT::RADAR::MODULES_NUM_MAX;
+    float modules_num_rate    = (float)descriptor()->modules() / descriptor::item::Radar::MODULES_NUM_MAX;
 
-    float effectiveness_rate  = EQUIPMENT::RADAR::RADIUS_WEIGHT * radius_rate + EQUIPMENT::RADAR::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate  = descriptor::item::Radar::RADIUS_WEIGHT * radius_rate + descriptor::item::Radar::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate           = (float)m_data.mass / EQUIPMENT::RADAR::MASS_MIN;
-    float condition_rate      = (float)m_condition / m_data.condition_max;
+    float mass_rate           = (float)descriptor()->mass() / descriptor::item::Radar::MASS_MIN;
+    float condition_rate      = (float)descriptor()->condition() / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -76,61 +129,14 @@ void Radar::addUniqueInfo()
     //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
-std::string Radar::GetRadiusStr()
+std::string Radar::radiusStr()
 {
-    if (m_radius_add == 0)
-        return std::to_string(m_radius_orig);
-    else
-        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
-}
-
-/*virtual*/
-void Radar::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "radar_equipment." + std::to_string(id()) + ".";
-
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Radar::SaveData(save_ptree, root);
-}
-
-/*virtual*/
-void Radar::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Radar::LoadData(load_ptree);
-}
-
-/*virtual*/
-void Radar::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Radar::ResolveData();
-}
-
-void Radar::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" RadarEquipment::SaveData()  id=" + std::to_string(id()) + " START");
-    
-//    save_ptree.put(root+"radius_orig", m_radius_orig);
-}
-
-void Radar::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-//    m_radius_orig = load_ptree.get<int>("radius_orig");
-}                
-
-void Radar::ResolveData()
-{
-//    LOG(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+    if (m_radius_add) {
+        return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
+    } else {
+        return std::to_string(descriptor()->radius());
+    }
 }
 
 } // namespace item
-
+} // namespace control

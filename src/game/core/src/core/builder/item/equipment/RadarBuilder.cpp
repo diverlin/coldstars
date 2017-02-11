@@ -17,28 +17,18 @@
 */
 
 
-#include <builder/item/equipment/RadarBuilder.hpp>
-#include <item/equipment/Radar.hpp>
-#include <managers/EntityManager.hpp>
-
-#include <ceti/Logger.hpp>
-
+#include "RadarBuilder.hpp"
+#include <core/item/equipment/Radar.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
 #include <common/Global.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/DescriptorManager.hpp>
-
+namespace builder {
 namespace item {
 
-RadarBuilder::RadarBuilder()
-{}
-
-RadarBuilder::~RadarBuilder()
-{}
-
-Radar* RadarBuilder::createTemplate(int_t id) const
+model::item::Radar*
+Radar::createTemplate()
 {
-    Radar* radar = new Radar(id);
+    model::item::Radar* radar = new model::item::Radar;
     assert(radar);
 
     assert(false);
@@ -47,33 +37,46 @@ Radar* RadarBuilder::createTemplate(int_t id) const
     return radar;
 } 
 
-Radar* RadarBuilder::getNew() const
+model::item::Radar*
+Radar::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
-    Radar* radar = createTemplate();
-    createInternals(radar, descriptor);
+    const descriptor::item::Radar& descr = core::global::get().descriptors().radar().random();
+    model::item::Radar* radar = createTemplate();
+    createInternals(radar, descr);
 
     return radar;
 }
 
-Radar* RadarBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+model::item::Radar*
+Radar::getNew(const std::string& data)
 {
-    Radar* radar = createTemplate();
-    createInternals(radar, descriptor);
+    descriptor::item::Radar descr(data);
+    assert(descr.descriptor() != descriptor::type::RADAR_EQUIPMENT);
+    return getNew(descr);
+}
+
+
+model::item::Radar*
+Radar::getNew(const descriptor::item::Radar& descr)
+{
+    model::item::Radar* radar = createTemplate();
+    createInternals(radar, descr);
 
     return radar;
 } 
 
-void RadarBuilder::createInternals(Radar* radar, const descriptor::BaseOLD& descriptor) const
-{     
-    ItemCommonData common_data = extractCommonData(descriptor);
+void Radar::createInternals(model::item::Radar* radar, const descriptor::item::Radar& descr)
+{
+    assert(false);
+//    ItemCommonData common_data = extractCommonData(descriptor);
 
-    radar->SetRadiusOrig(descriptor.radius());
-    radar->setParentSubTypeId(entity::type::RADAR_SLOT_ID);
-    radar->setItemCommonData(common_data);
+//    radar->SetRadiusOrig(descriptor.radius());
+//    radar->setParentSubTypeId(entity::type::RADAR_SLOT_ID);
+//    radar->setItemCommonData(common_data);
 
-    radar->updateProperties();
-    radar->CountPrice();
+//    radar->updateProperties();
+//    radar->CountPrice();
 }
 
 } // namespace item
+} // namespace builder

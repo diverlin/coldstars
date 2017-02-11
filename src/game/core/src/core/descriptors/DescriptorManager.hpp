@@ -33,6 +33,8 @@
 #include <core/item/equipment/Droid.hpp> // descriptor
 #include <core/item/equipment/Grapple.hpp> // descriptor
 #include <core/item/equipment/Lazer.hpp> // descriptor
+#include <core/item/equipment/Protector.hpp> // descriptor
+#include <core/item/equipment/Radar.hpp> // descriptor
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -148,6 +150,12 @@ public:
     void add(const item::Lazer& lazer) {
         m_lazer.add(lazer);
     }
+    void add(const item::Protector& protector) {
+        m_protector.add(protector);
+    }
+    void add(const item::Radar& radar) {
+        m_radar.add(radar);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -169,6 +177,8 @@ public:
     const MManager<item::Droid>& droid() const { return m_droid; }
     const MManager<item::Grapple>& grapple() const { return m_grapple; }
     const MManager<item::Lazer>& lazer() const { return m_lazer; }
+    const MManager<item::Protector>& protector() const { return m_protector; }
+    const MManager<item::Radar>& radar() const { return m_radar; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -195,6 +205,8 @@ private:
     MManager<item::Droid> m_droid;
     MManager<item::Grapple> m_grapple;
     MManager<item::Lazer> m_lazer;
+    MManager<item::Protector> m_protector;
+    MManager<item::Radar> m_radar;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

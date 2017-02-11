@@ -17,15 +17,13 @@
 */
 
 #include "Droid.hpp"
-#include "../../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
-#include <ceti/Logger.hpp>
-#ifdef USE_MODULES
-#include <item/modules/DroidModule.hpp>
-#endif
-#include "../../spaceobjects/Vehicle.hpp"
-#include "../../slots/ItemSlot.hpp"
 
+#ifdef USE_MODULES
+#include <core/item/modules/DroidModule.hpp>
+#endif
+
+#include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
 
 namespace descriptor {
 namespace item {

@@ -21,36 +21,119 @@
 
 #include "Base.hpp"
 
+
+namespace descriptor {
 namespace item {
 
-class Protector : public control::item::BaseEquipment
+class Protector : public BaseEquipment
 {
-    public:
-        Protector(int_t id);
-        virtual ~Protector();
+public:
+    static const int PROTECTION_MIN;
+    static const int PROTECTION_MAX;
+    static const float PROTECTION_TECH_RATE;
 
-        void SetProtectionOrig(int protection_orig) { m_protection_orig = protection_orig; }
-        int protection() const { return m_protection; }
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
 
-        virtual void updateProperties();
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
 
-        void CountPrice();
+    static const float PROTECTION_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
 
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:
-        int m_protection_orig;
-        int m_protection_add;
-        int m_protection;
+public:
+    Protector();
+    ~Protector() = default;
+    Protector(const std::string& data);
+    std::string data() const;
 
-        void virtual addUniqueInfo();
-        std::string GetProtectionStr();
+    void setProtection(int protection) { m_protection = protection; }
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    int protection() const { return m_protection; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Protector:\n";
+        result += std::string(" protection = ") + std::to_string(m_protection) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_protection = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_protection;
+    }
 };
 
 } // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Protector : public BaseEquipment
+{
+public:
+    Protector();
+    ~Protector() = default;
+    Protector(const std::string& data);
+    std::string data() const;
+
+    void setProtection(int protection) { m_protection = protection; }
+
+    int protection() const { return m_protection; }
+
+private:
+    int m_protection = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_protection;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Protector : public BaseEquipment
+{
+public:
+    Protector(model::item::Protector*);
+    virtual ~Protector() = default;
+
+    virtual void updateProperties();
+
+    void CountPrice();
+
+
+protected:
+    model::item::Protector* model() const { return m_model_protector; }
+    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
+
+private:
+    model::item::Protector* m_model_protector = nullptr;
+    descriptor::item::Protector* m_descriptor_protector = nullptr;
+
+    int m_protection_add = 0;
+
+    void virtual addUniqueInfo();
+    std::string protectionStr();
+};
+
+} // namespace item
+} // namespace control

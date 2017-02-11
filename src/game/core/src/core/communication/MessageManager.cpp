@@ -102,16 +102,16 @@ void MessageManager::process(const Message& message)
         builder::item::Grapple::getNew(message.data);
         break;
     }
+    case TELEGRAM::CREATE_PROTECTOR: {
+        builder::item::Protector::getNew(message.data);
+        break;
+    }
     case TELEGRAM::CREATE_SCANER: {
         core::global::get().scanerBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_RADAR: {
-        core::global::get().radarBuilder().getNew(message.data);
-        break;
-    }
-    case TELEGRAM::CREATE_PROTECTOR: {
-        core::global::get().protectorBuilder().getNew(message.data);
+        builder::item::Radar::getNew(message.data);
         break;
     }
 
