@@ -42,10 +42,7 @@ public:
     Scaner(model::item::Scaner*);
     virtual ~Scaner() = default;
 
-    int scan() const { return m_scan; }
-
 private:
-    void setScanOrig(int scan_orig)  { m_scan_orig = scan_orig; }
     virtual void updateProperties();
     void countPrice();
 
@@ -57,9 +54,7 @@ private:
     model::item::Scaner* m_model_scaner = nullptr;
     descriptor::item::Scaner* m_descriptor_scaner = nullptr;
 
-    int m_scan_orig = 0;
     int m_scan_add = 0;
-    int m_scan = 0;
 
     void virtual addUniqueInfo();
 

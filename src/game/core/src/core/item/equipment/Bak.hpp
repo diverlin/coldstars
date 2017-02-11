@@ -53,14 +53,14 @@ private:
     descriptor::item::Bak* descriptor() const { return m_descriptor_bak; }
 
 private:
-    int m_fuelMaxAdd = 0;
+    int m_fuelMax_add = 0;
     int m_fuelMax = 0;
 
     model::item::Bak* m_model_bak = nullptr;
     descriptor::item::Bak* m_descriptor_bak = nullptr;
 
     void virtual addUniqueInfo();
-    std::string getFuelStr();
+    std::string fuelStr();
 };
 
 } // namespace item
