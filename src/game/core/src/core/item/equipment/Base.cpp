@@ -30,14 +30,14 @@
 namespace control {
 namespace item {
 
-BaseEquipment::BaseEquipment()
+Equipment::Equipment()
 {
     m_race_id = race::type::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
-BaseEquipment::~BaseEquipment()
+Equipment::~Equipment()
 {
 //    LOG("___::~BaseEquipment("+std::to_string(model()->id())+")");
 
@@ -45,7 +45,7 @@ BaseEquipment::~BaseEquipment()
 }
 
 /* virtual */
-void BaseEquipment::putChildrenToGarbage() const
+void Equipment::putChildrenToGarbage() const
 {
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
@@ -55,7 +55,7 @@ void BaseEquipment::putChildrenToGarbage() const
 }
 
 /* virtual */
-void BaseEquipment::AddCommonInfo()
+void Equipment::AddCommonInfo()
 {
     //    info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
     //    info.addNameStr("modules:");   info.addValueStr( std::to_string(data_item.modules_num_max) );

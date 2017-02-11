@@ -23,11 +23,11 @@
 namespace model {
 namespace item {
 
-class BaseEquipment : public model::item::Base
+class Equipment : public model::item::Base
 {
 public:
-    BaseEquipment() = default;
-    ~BaseEquipment() = default;
+    Equipment() = default;
+    ~Equipment() = default;
 
 private:
     // ..

@@ -25,7 +25,7 @@
 namespace descriptor {
 namespace item {
 
-class Scaner : public BaseEquipment
+class Scaner : public Equipment
 {
 public:
 
@@ -57,7 +57,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Scaner:\n";
         result += std::string(" scan = ") + std::to_string(m_scan) + "\n";
-        result += descriptor::item::BaseEquipment::info();
+        result += descriptor::item::Equipment::info();
         return result;
     }
 
@@ -68,7 +68,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_scan;
     }
 };

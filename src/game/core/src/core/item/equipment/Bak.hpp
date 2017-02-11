@@ -36,7 +36,7 @@ class Bak;
 namespace control {
 namespace item {
 
-class Bak : public BaseEquipment
+class Bak : public Equipment
 {
 public:
     Bak(model::item::Bak*);

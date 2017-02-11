@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace descriptor {
 namespace item {
 
-class Radar : public BaseEquipment
+class Radar : public Equipment
 {
 public:
     static const int RADIUS_MIN;
@@ -55,7 +55,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Radar:\n";
         result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += descriptor::item::BaseEquipment::info();
+        result += descriptor::item::Equipment::info();
         return result;
     }
 
@@ -66,7 +66,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_radius;
     }
 };

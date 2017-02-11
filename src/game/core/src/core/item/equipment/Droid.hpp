@@ -36,7 +36,7 @@ class Droid;
 namespace control {
 namespace item {
 
-class Droid : public control::item::BaseEquipment
+class Droid : public control::item::Equipment
 {
 public:
     Droid(model::item::Droid*);

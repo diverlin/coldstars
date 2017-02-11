@@ -36,7 +36,7 @@ class Scaner;
 namespace control {
 namespace item {
 
-class Scaner : public BaseEquipment
+class Scaner : public Equipment
 {
 public:
     Scaner(model::item::Scaner*);
