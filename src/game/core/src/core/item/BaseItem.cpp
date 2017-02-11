@@ -31,15 +31,6 @@ namespace control {
 
 namespace item {
 
-Base::Base()
-{}
-
-/* virtual */
-Base::~Base()
-{
-//    LOG("___::~Base("+std::to_string(id())+")");
-}
-
 void Base::doLock(int lock)
 {
     LOG("Base::LockEvent");

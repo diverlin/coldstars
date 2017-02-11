@@ -18,30 +18,23 @@
 
 #pragma once
 
-#include <common/Base.hpp>
-#include <ceti/Orientation.hpp>
+#include <core/common/Base.hpp>
+#include <core/types/TechLevelTypes.hpp>
+#include <core/types/RaceTypes.hpp>
 
 #include <ceti/type/IdType.hpp>
-#include <types/TechLevelTypes.hpp>
-#include <types/RaceTypes.hpp>
 
-#include <item/ItemCommonData.hpp>
+//to be removed
+#include <core/item/ItemCommonData.hpp>
 
-namespace control {
-class ItemSlot; 
-} // namespace control
-
-
-namespace control {
+namespace model {
 namespace item {
 
-class Base : public ::control::Base
+class Base : public ::model::Base
 {
 public:
     Base() = default;
-    virtual ~Base() = default;
-
-    virtual void putChildrenToGarbage() const {}
+    ~Base() = default;
 
     void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
@@ -50,13 +43,10 @@ public:
         m_deterioration = data_item.deterioration;
         setCondition(data_item.condition_max);
     }
-    void setSlot(control::ItemSlot* slot)  { m_slot = slot; }
+    void setSlot(int_t slot)  { m_slot = slot; }
     void setCondition(int condition) { m_condition = condition; }
 
-    control::ItemSlot* slot() const { return m_slot; }
-
-    virtual int radius() const { return 0; }
-    virtual int damage() const { return 0; }
+    int_t slot() const { return m_slot; }
 
     int mass()          const { return m_data.mass; }
     int condition()     const { return m_condition; }
@@ -73,29 +63,9 @@ public:
     entity::type parentSubtype() const { return m_parent_subtype_id; }
     race::type race() const { return m_race_id; }
 
-    bool isDamaged()    const { return (m_condition <= 0); }
-    bool isLocked()     const { return (m_locked_turns > 0); }
-    int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
+    int lockedTurns() const { return m_locked_turns; }
 
-    void useNormalDeterioration();
-    void useOverloadDeterioration();
-
-    void doBreak();
-    void deteriorationEvent();
-    void doLock(int lock = 1);
-    void doUnlock();
-    bool doRepair();
-
-    virtual void updateProperties() {}
-    virtual void updateInStatic() { _updateLock(); }
-
-    //        void UpdateInfo();
-
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-    //        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
-    //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
-
-protected:
+private:
     race::type m_race_id = race::type::NONE_ID;
 
     int m_locked_turns = 0;
@@ -106,21 +76,19 @@ protected:
     entity::type m_parent_subtype_id = entity::type::NONE_ID;
 
     ItemCommonData m_data;
-//    UnresolvedDataBase m_data_unresolved_Base;
-    //        InfoTable info;
 
-    void _updateLock();
-
-    virtual void AddCommonInfo()=0;
-    virtual void addUniqueInfo()=0;
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+    int_t m_slot = NONE;
 
 private:
-    control::ItemSlot* m_slot = nullptr;
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<::model::Base>(*this);
+        // ..
+    }
 };
 
-} // namespace item
-} // namespace control
+} // naemspace item
+} // namespace model
+
+
