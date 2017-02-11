@@ -84,12 +84,12 @@ void Bak::addUniqueInfo()
 }
 
 
-std::string Bak::getFuelStr()
+std::string Bak::fuelStr()
 {
-    if (m_fuelMaxAdd) {
+    if (m_fuelMax_add) {
         return std::to_string(descriptor()->fuel()) + "/" + std::to_string(model()->fuel());
     } else {
-        return std::to_string(descriptor()->fuel()) + "+" + std::to_string(m_fuelMaxAdd) + "/" + std::to_string(model()->fuel());
+        return std::to_string(descriptor()->fuel()) + "+" + std::to_string(m_fuelMax_add) + "/" + std::to_string(model()->fuel());
     }
 }
 

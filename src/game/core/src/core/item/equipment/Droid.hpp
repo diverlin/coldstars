@@ -52,7 +52,7 @@ private:
     descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
 
 private:
-    int m_repair_add;
+    int m_repair_add = 0;
 
     model::item::Droid* m_model_droid = nullptr;
     descriptor::item::Droid* m_descriptor_droid = nullptr;
