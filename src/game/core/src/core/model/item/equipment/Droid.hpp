@@ -24,7 +24,7 @@
 namespace model {
 namespace item {
 
-class Droid : public BaseEquipment
+class Droid : public Equipment
 {
 public:
     Droid();
@@ -43,7 +43,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_repair;
     }
 };

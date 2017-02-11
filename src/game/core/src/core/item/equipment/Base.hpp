@@ -27,11 +27,11 @@
 namespace control {
 namespace item {
 
-class BaseEquipment : public control::item::Base
+class Equipment : public control::item::Base
 {
 public:
-    BaseEquipment();
-    virtual ~BaseEquipment();
+    Equipment();
+    virtual ~Equipment();
 
     virtual void putChildrenToGarbage() const;
 

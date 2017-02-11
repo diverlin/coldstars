@@ -36,7 +36,7 @@ class Rocket;
 namespace control {
 namespace item {
 
-class Rocket : public BaseEquipment
+class Rocket : public Equipment
 { 
 public:
     Rocket(model::item::Rocket*);

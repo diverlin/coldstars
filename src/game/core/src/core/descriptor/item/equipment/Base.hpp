@@ -23,11 +23,11 @@
 namespace descriptor {
 namespace item {
 
-class BaseEquipment : public Base
+class Equipment : public Base
 {
 public:
-    BaseEquipment() = default;
-    ~BaseEquipment() = default;
+    Equipment() = default;
+    ~Equipment() = default;
 
     void setModules(int modules) { m_modules = modules; }
 

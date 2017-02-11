@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace model {
 namespace item {
 
-class Radar : public BaseEquipment
+class Radar : public Equipment
 {
 public:
     Radar();
@@ -43,7 +43,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_radius;
     }
 };

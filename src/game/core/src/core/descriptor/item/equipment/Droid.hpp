@@ -25,7 +25,7 @@
 namespace descriptor {
 namespace item {
 
-class Droid : public BaseEquipment
+class Droid : public Equipment
 {
 public:
     static const int REPAIR_MIN;
@@ -56,7 +56,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Droid:\n";
         result += std::string(" repair = ") + std::to_string(m_repair) + "\n";
-        result += descriptor::item::BaseEquipment::info();
+        result += descriptor::item::Equipment::info();
         return result;
     }
 
@@ -67,7 +67,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_repair;
     }
 };

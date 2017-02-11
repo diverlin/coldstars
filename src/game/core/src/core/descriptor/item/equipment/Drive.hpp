@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace descriptor {
 namespace item {
 
-class Drive : public BaseEquipment
+class Drive : public Equipment
 {
 public:
     static const float OVERLOAD_RATE;
@@ -67,7 +67,7 @@ public:
         std::string result = "descriptor::item::Drive:\n";
         result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
         result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
-        result += descriptor::item::BaseEquipment::info();
+        result += descriptor::item::Equipment::info();
         return result;
     }
 
@@ -79,7 +79,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_speed;
         ar & m_hyper;
     }

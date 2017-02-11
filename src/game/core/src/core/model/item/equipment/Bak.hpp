@@ -23,7 +23,7 @@
 namespace model {
 namespace item {
 
-class Bak : public BaseEquipment
+class Bak : public Equipment
 {
 public:
     Bak();
@@ -42,7 +42,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
         ar & m_fuel;
     }
 };

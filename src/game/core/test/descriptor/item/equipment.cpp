@@ -24,7 +24,7 @@
 
 namespace {
 
-void compareBaseEquipmentDescriptors(const descriptor::item::BaseEquipment& descr, const descriptor::item::BaseEquipment& descr_copy)
+void compareBaseEquipmentDescriptors(const descriptor::item::Equipment& descr, const descriptor::item::Equipment& descr_copy)
 {
     // descriptor::Base
     EXPECT_EQ(descr.id(), descr_copy.id());

@@ -36,7 +36,7 @@ class Protector;
 namespace control {
 namespace item {
 
-class Protector : public BaseEquipment
+class Protector : public Equipment
 {
 public:
     Protector(model::item::Protector*);

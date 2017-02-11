@@ -36,7 +36,7 @@ class Grapple;
 namespace control {
 namespace item {
 
-class Grapple : public BaseEquipment
+class Grapple : public Equipment
 {
 public:
     Grapple(model::item::Grapple*);

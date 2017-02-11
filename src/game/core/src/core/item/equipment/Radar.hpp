@@ -37,7 +37,7 @@ class Radar;
 namespace control {
 namespace item {
 
-class Radar : public BaseEquipment
+class Radar : public Equipment
 {
 public:
     Radar(model::item::Radar*);

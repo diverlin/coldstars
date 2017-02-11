@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace model {
 namespace item {
 
-class Drive : public BaseEquipment
+class Drive : public Equipment
 {
 public:
     Drive();

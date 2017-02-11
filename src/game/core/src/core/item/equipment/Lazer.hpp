@@ -35,7 +35,7 @@ class Lazer;
 namespace control {
 namespace item {
 
-class Lazer : public BaseEquipment
+class Lazer : public Equipment
 {
 public:
     Lazer(model::item::Lazer*);
