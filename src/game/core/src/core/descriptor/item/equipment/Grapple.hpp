@@ -21,17 +21,38 @@
 
 #include "Base.hpp"
 
-namespace descriptor {
-namespace item {
-class Grapple;
-} // namespace item
-} // namespace descriptor
 
-namespace model {
+namespace descriptor {
 namespace item {
 
 class Grapple : public BaseEquipment
 {
+public:
+    static const int STRENGTH_MIN;
+    static const int STRENGTH_MAX;
+    static const float STRENGTH_TECH_RATE;
+
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
+
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
+    static const float SPEED_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float STRENGTH_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float SPEED_WEIGHT;
+    static const float MAXNUMITEM_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
 public:
     Grapple();
     ~Grapple() = default;
@@ -45,6 +66,15 @@ public:
     int strength() const { return m_strength; }
     int radius() const { return m_radius; }
     int speed() const { return m_speed; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Grapple:\n";
+        result += std::string(" strength = ") + std::to_string(m_strength) + "\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_strength = 0;
@@ -63,53 +93,5 @@ private:
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
-
-namespace control {
-namespace item {
-
-class Grapple : public BaseEquipment
-{
-public:
-    Grapple(model::item::Grapple*);
-    virtual ~Grapple() = default;
-
-//    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;
-//    void AddTarget(model::SpaceObject*);
-//    void RemoveTarget(model::SpaceObject*);
-
-//    void RemoveAllTargets();
-
-//    std::string GetTarstr() const;
-
-    void UpdateGrabScenarioProgram_inDynamic();
-    //        void RenderGrabTrail(const jeti::Renderer&);
-
-    virtual void updateProperties();
-
-    void CountPrice();
-
-    model::item::Grapple* model() const { return m_model_grapple; }
-    descriptor::item::Grapple* descriptor() const { return m_descriptor_grapple; }
-
-private:
-    int m_strength_add = 0;
-    int m_radius_add = 0;
-    int m_speed_add = 0;
-
-    int m_free_strength = 0;
-
-    model::item::Grapple* m_model_grapple = nullptr;
-    descriptor::item::Grapple* m_descriptor_grapple = nullptr;
-
-//    std::vector<model::SpaceObject*> m_targets;
-
-    void virtual addUniqueInfo();
-    std::string strengthStr();
-    std::string radiusStr();
-    std::string speedStr();
-};
-
-} // namespace item
-} // namespace control

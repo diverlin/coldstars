@@ -16,75 +16,61 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
 #include "Base.hpp"
 
+
 namespace descriptor {
 namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
 
-namespace model {
-namespace item {
-
-class Protector : public BaseEquipment
+class Bak : public BaseEquipment
 {
 public:
-    Protector();
-    ~Protector() = default;
-    Protector(const std::string& data);
+    static const int FUEL_MIN;
+    static const int FUEL_MAX;
+    static const float FUEL_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float FUEL_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
+public:
+    Bak();
+    ~Bak() = default;
+    Bak(const std::string& data);
     std::string data() const;
 
-    void setProtection(int protection) { m_protection = protection; }
+    void setFuel(int fuel) { m_fuel = fuel; }
 
-    int protection() const { return m_protection; }
+    int fuel() const { return m_fuel; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Bak:\n";
+        result += std::string(" fuel = ") + std::to_string(m_fuel) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
-    int m_protection = 0;
+    int m_fuel = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_protection;
+        ar & m_fuel;
     }
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
-
-namespace control {
-namespace item {
-
-class Protector : public BaseEquipment
-{
-public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
-
-    virtual void updateProperties();
-
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
-
-private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
-
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
-};
-
-} // namespace item
-} // namespace control

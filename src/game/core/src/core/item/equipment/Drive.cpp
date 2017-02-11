@@ -17,6 +17,7 @@
 */
 
 #include "Drive.hpp"
+#include <core/descriptor/item/equipment/Drive.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/DriveModule.hpp>
@@ -24,55 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-
-namespace descriptor {
-namespace item {
-
-const float Drive::OVERLOAD_RATE = 1.5f;
-const float Drive::OVERLOAD_DETERIORATION_RATE = 4.0f;
-
-const float Drive::SPEED_MIN = 3.0;
-const float Drive::SPEED_MAX = 4.0;
-const float Drive::SPEED_TECH_RATE = 0.1f;
-
-const int Drive::HYPER_MIN = 7;
-const int Drive::HYPER_MAX = 20;
-const float Drive::HYPER_TECH_RATE = 0.1f;
-
-const int Drive::MODULES_NUM_MIN = 0;
-const int Drive::MODULES_NUM_MAX = 2;
-
-const int Drive::MASS_MIN = 20;
-const int Drive::MASS_MAX = 70;
-const int Drive::CONDITION_MIN = 500;
-const int Drive::CONDITION_MAX = 2000;
-
-const float Drive::SPEED_WEIGHT = 0.4;
-const float Drive::HYPER_WEIGHT = 0.4;
-const float Drive::MODULES_NUM_WEIGHT = 0.2;
-
-
-Drive::Drive()
-{
-    setDescriptor(descriptor::type::DRIVE_EQUIPMENT);
-}
-
-Drive::Drive(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Drive::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace descriptor
-
-
 
 namespace model {
 namespace item {

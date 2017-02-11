@@ -17,6 +17,7 @@
 */
 
 #include "Grapple.hpp"
+#include <core/descriptor/item/equipment/Grapple.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/GrappleModule.hpp>
@@ -24,54 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace descriptor {
-namespace item {
-
-const int Grapple::STRENGTH_MIN = 6;
-const int Grapple::STRENGTH_MAX = 50;
-const float Grapple::STRENGTH_TECH_RATE = 0.1f;
-
-const int Grapple::RADIUS_MIN = 100;
-const int Grapple::RADIUS_MAX = 200;
-const float Grapple::RADIUS_TECH_RATE = 0.1f;
-
-const int Grapple::SPEED_MIN = 100;
-const int Grapple::SPEED_MAX = 170;
-const float Grapple::SPEED_TECH_RATE = 0.1f;
-
-const int Grapple::MODULES_NUM_MIN = 0;
-const int Grapple::MODULES_NUM_MAX = 2;
-const int Grapple::MASS_MIN = 10;
-const int Grapple::MASS_MAX = 40;
-const int Grapple::CONDITION_MIN = 100;
-const int Grapple::CONDITION_MAX = 1000;
-
-const float Grapple::STRENGTH_WEIGHT = 0.4f;
-const float Grapple::RADIUS_WEIGHT = 0.3f;
-const float Grapple::SPEED_WEIGHT = 0.2f;
-const float Grapple::MAXNUMITEM_WEIGHT = 0.1f;
-const float Grapple::MODULES_NUM_WEIGHT = 0.1f;
-
-Grapple::Grapple()
-{
-    setDescriptor(descriptor::type::GRAPPLE_EQUIPMENT);
-}
-
-Grapple::Grapple(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Grapple::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace descriptor
-
 
 namespace model {
 namespace item {

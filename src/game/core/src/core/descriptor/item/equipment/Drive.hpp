@@ -19,23 +19,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma once
 
-#include <core/item/equipment/Base.hpp>
+#include "Base.hpp"
 
 namespace descriptor {
-namespace item {
-class Drive;
-} // namespace item
-} // namespace descriptor
-
-namespace model {
 namespace item {
 
 class Drive : public BaseEquipment
 {
 public:
+    static const float OVERLOAD_RATE;
+    static const float OVERLOAD_DETERIORATION_RATE;
+
+    static const float SPEED_MIN;
+    static const float SPEED_MAX;
+    static const float SPEED_TECH_RATE;
+
+    static const int HYPER_MIN;
+    static const int HYPER_MAX;
+    static const float HYPER_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float SPEED_WEIGHT;
+    static const float HYPER_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
+
+public:
     Drive();
-    ~Drive() = default;
     Drive(const std::string& data);
+    ~Drive() = default;
     std::string data() const;
 
     void setSpeed(int speed) { m_speed = speed; }
@@ -43,6 +62,14 @@ public:
 
     int speed() const { return m_speed; }
     int hyper() const { return m_hyper; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Drive:\n";
+        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
+        result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_speed = 0;
@@ -52,43 +79,13 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
         ar & m_speed;
         ar & m_hyper;
     }
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
 
-namespace control {
-namespace item {
-
-class Drive : public control::item::Base
-{
-public:
-    Drive(model::item::Drive*);
-    virtual ~Drive() = default;
-
-private:
-    virtual void updateProperties();
-    void CountPrice();
-
-    model::item::Drive* model() const { return m_model_drive; }
-    descriptor::item::Drive* descriptor() const { return m_descriptor_drive; }
-
-private:
-    int m_speed_add = 0;
-    int m_hyper_add = 0;
-
-    model::item::Drive* m_model_drive = nullptr;
-    descriptor::item::Drive* m_descriptor_drive = nullptr;
-
-    void virtual addUniqueInfo();
-    std::string speedStr();
-    std::string hyperStr();
-};
-
-} // namespace item
-} // namespace control

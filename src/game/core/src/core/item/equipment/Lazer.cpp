@@ -17,6 +17,7 @@
 */
 
 #include "Lazer.hpp"
+#include <core/descriptor/item/equipment/Lazer.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/LazerModule.hpp>
@@ -24,49 +25,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace descriptor {
-namespace item {
-
-const int Lazer::RADIUS_MIN = 200;
-const int Lazer::RADIUS_MAX = 400;
-const float Lazer::RADIUS_TECH_RATE = 0.1f;
-
-const int Lazer::DAMAGE_MIN = 40;
-const int Lazer::DAMAGE_MAX = 200;
-const float Lazer::DAMAGE_TECH_RATE = 0.1f;
-
-const int Lazer::MODULES_NUM_MIN = 0;
-const int Lazer::MODULES_NUM_MAX = 2;
-
-const int Lazer::MASS_MIN = 10;
-const int Lazer::MASS_MAX = 40;
-const int Lazer::CONDITION_MIN = 100;
-const int Lazer::CONDITION_MAX = 1000;
-
-const float Lazer::DAMAGE_WEIGHT = 0.4f;
-const float Lazer::RADIUS_WEIGHT = 0.4f;
-const float Lazer::MODULES_NUM_WEIGHT = 0.2f;
-
-Lazer::Lazer()
-{
-    setDescriptor(descriptor::type::LAZER_EQUIPMENT);
-}
-
-Lazer::Lazer(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Lazer::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespce item
-} // namespace descriptor
-
 
 namespace model {
 namespace item {

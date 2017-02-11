@@ -22,15 +22,30 @@
 
 namespace descriptor {
 namespace item {
-class Lazer;
-} // namespace item
-} // namespace descriptor
-
-namespace model {
-namespace item {
 
 class Lazer : public BaseEquipment
 {
+public:
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
+
+    static const int DAMAGE_MIN;
+    static const int DAMAGE_MAX;
+    static const float DAMAGE_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float DAMAGE_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
 public:
     Lazer();
     ~Lazer() = default;
@@ -42,6 +57,14 @@ public:
 
     int damage() const { return m_damage; }
     int radius() const { return m_radius; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Lazer:\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_damage = 0;
@@ -58,42 +81,5 @@ private:
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
-
-namespace control {
-namespace item {
-
-class Lazer : public BaseEquipment
-{
-public:
-    Lazer(model::item::Lazer*);
-    virtual ~Lazer() = default;
-
-    //void FireEvent(SpaceObject*, ItemSlot*, float, bool);
-
-    virtual void updateProperties();
-
-    void countPrice();
-
-protected:
-    model::item::Lazer* model() const { return m_model_lazer; }
-    descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
-
-private:
-    model::item::Lazer* m_model_lazer = nullptr;
-    descriptor::item::Lazer* m_descriptor_lazer = nullptr;
-
-    int m_damage_add = 0;
-    int m_radius_add = 0;
-
-    //              jeti::control::TextureOb* texOb_turrel;
-    //              jeti::control::TextureOb* texOb_lazerEffect;
-
-    void virtual addUniqueInfo();
-    std::string damageStr();
-    std::string radiusStr();
-};
-
-} // namespace item
-} // namespace control

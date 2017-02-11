@@ -23,15 +23,25 @@
 
 namespace descriptor {
 namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
-
-namespace model {
-namespace item {
 
 class Protector : public BaseEquipment
 {
+public:
+    static const int PROTECTION_MIN;
+    static const int PROTECTION_MAX;
+    static const float PROTECTION_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float PROTECTION_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
 public:
     Protector();
     ~Protector() = default;
@@ -41,6 +51,13 @@ public:
     void setProtection(int protection) { m_protection = protection; }
 
     int protection() const { return m_protection; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Protector:\n";
+        result += std::string(" protection = ") + std::to_string(m_protection) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
     int m_protection = 0;
@@ -55,36 +72,5 @@ private:
 };
 
 } // namespace item
-} // namespace model
+} // namespace descriptor
 
-
-namespace control {
-namespace item {
-
-class Protector : public BaseEquipment
-{
-public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
-
-    virtual void updateProperties();
-
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
-
-private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
-
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
-};
-
-} // namespace item
-} // namespace control

@@ -17,53 +17,14 @@
 */
 
 #include "Scaner.hpp"
+#include <core/descriptor/item/equipment/Scaner.hpp>
 
-#include <ceti/Logger.hpp>
 #ifdef USE_MODULES
 #include <item/modules/ScanerModule.hpp>
 #endif
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-
-namespace descriptor {
-namespace item {
-
-const int Scaner::SCAN_MIN = 2;
-const int Scaner::SCAN_MAX = 40;
-const float Scaner::SCAN_TECH_RATE = 0.1f;
-
-const int Scaner::MODULES_NUM_MIN = 0;
-const int Scaner::MODULES_NUM_MAX = 2;
-
-const int Scaner::MASS_MIN = 7;
-const int Scaner::MASS_MAX = 38;
-const int Scaner::CONDITION_MIN = 30;
-const int Scaner::CONDITION_MAX = 100;
-
-const float Scaner::SCAN_WEIGHT = 0.7f;
-const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
-
-
-Scaner::Scaner()
-{
-    setDescriptor(descriptor::type::SCANER_EQUIPMENT);
-}
-
-Scaner::Scaner(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Scaner::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespce item
-} // namespace descriptor
 
 
 namespace model {
