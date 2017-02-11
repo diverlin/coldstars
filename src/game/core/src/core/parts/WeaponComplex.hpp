@@ -25,10 +25,6 @@
 
 class Vehicle;
 
-namespace item {
-class Item;
-} // namespace item
-
 namespace model {
 class SpaceObject;
 } // namespace model

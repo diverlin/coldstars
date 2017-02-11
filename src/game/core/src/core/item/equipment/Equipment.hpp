@@ -27,7 +27,7 @@
 namespace control {
 namespace item {
 
-class Equipment : public Item
+class Equipment : public ::control::Item
 {
 public:
     Equipment();

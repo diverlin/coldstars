@@ -23,7 +23,6 @@
 #include <core/types/RaceTypes.hpp>
 
 namespace descriptor {
-namespace item {
 
 class Item : public ::descriptor::Base, public ceti::descriptor::BaseView
 {
@@ -87,5 +86,4 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor

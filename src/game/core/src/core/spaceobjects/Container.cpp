@@ -82,7 +82,7 @@ void Container::putChildrenToGarbage() const
 }
 
 bool
-Container::insertItem(control::item::Item* item)
+Container::insertItem(control::Item* item)
 {
     return m_itemSlot->insert(item);
 }

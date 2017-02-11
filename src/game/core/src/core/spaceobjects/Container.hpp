@@ -24,9 +24,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace control {
-namespace item {
 class Item;
-} // namespace item
 } // namespace control
 
 namespace model {
@@ -74,7 +72,7 @@ public:
     void bindItemSlot(ItemSlot*);
 
     ItemSlot* const itemSlot() const { return m_itemSlot; }
-    bool insertItem(control::item::Item*);
+    bool insertItem(Item*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 

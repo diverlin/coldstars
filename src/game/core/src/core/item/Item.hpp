@@ -33,7 +33,6 @@ class ItemSlot;
 
 
 namespace control {
-namespace item {
 
 class Item : public ::control::Base
 {
@@ -122,5 +121,4 @@ private:
     control::ItemSlot* m_slot = nullptr;
 };
 
-} // namespace item
 } // namespace control
