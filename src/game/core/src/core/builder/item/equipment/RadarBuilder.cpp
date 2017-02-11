@@ -26,23 +26,11 @@ namespace builder {
 namespace item {
 
 model::item::Radar*
-Radar::createTemplate()
-{
-    model::item::Radar* radar = new model::item::Radar;
-    assert(radar);
-
-    assert(false);
-//    core::global::get().entityManager().reg(radar);
-    
-    return radar;
-} 
-
-model::item::Radar*
 Radar::getNew()
 {
     const descriptor::item::Radar& descr = core::global::get().descriptors().radar().random();
-    model::item::Radar* radar = createTemplate();
-    createInternals(radar, descr);
+    model::item::Radar* radar = __createTemplate();
+    __createInternals(radar, descr);
 
     return radar;
 }
@@ -55,17 +43,28 @@ Radar::getNew(const std::string& data)
     return getNew(descr);
 }
 
-
 model::item::Radar*
 Radar::getNew(const descriptor::item::Radar& descr)
 {
-    model::item::Radar* radar = createTemplate();
-    createInternals(radar, descr);
+    model::item::Radar* radar = __createTemplate();
+    __createInternals(radar, descr);
 
     return radar;
 } 
 
-void Radar::createInternals(model::item::Radar* radar, const descriptor::item::Radar& descr)
+model::item::Radar*
+Radar::__createTemplate()
+{
+    model::item::Radar* radar = new model::item::Radar;
+    assert(radar);
+
+    assert(false);
+//    core::global::get().entityManager().reg(radar);
+
+    return radar;
+}
+
+void Radar::__createInternals(model::item::Radar* radar, const descriptor::item::Radar& descr)
 {
     assert(false);
 //    ItemCommonData common_data = extractCommonData(descriptor);

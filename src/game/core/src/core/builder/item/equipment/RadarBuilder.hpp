@@ -47,8 +47,8 @@ public:
     static model::item::Radar* getNew(const descriptor::item::Radar&);
 
 private:
-    static model::item::Radar* createTemplate();
-    static void createInternals(model::item::Radar*, const descriptor::item::Radar&);
+    static model::item::Radar* __createTemplate();
+    static void __createInternals(model::item::Radar*, const descriptor::item::Radar&);
 }; 
 
 } // namespace item

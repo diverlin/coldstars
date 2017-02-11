@@ -77,6 +77,7 @@ TEST(descriptor, bak) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Bak
+    EXPECT_EQ(descr.descriptor(), descriptor::type::BAK_EQUIPMENT);
     EXPECT_EQ(descr.fuel(), descr_copy.fuel());
 
     // general
@@ -91,6 +92,7 @@ TEST(descriptor, drive) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Drive
+    EXPECT_EQ(descr.descriptor(), descriptor::type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr.speed(), descr_copy.speed());
     EXPECT_EQ(descr.hyper(), descr_copy.hyper());
 
@@ -106,6 +108,7 @@ TEST(descriptor, droid) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Droid
+    EXPECT_EQ(descr.descriptor(), descriptor::type::DROID_EQUIPMENT);
     EXPECT_EQ(descr.repair(), descr_copy.repair());
 
     // general
@@ -120,6 +123,7 @@ TEST(descriptor, grapple) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Grapple
+    EXPECT_EQ(descr.descriptor(), descriptor::type::GRAPPLE_EQUIPMENT);
     EXPECT_EQ(descr.strength(), descr_copy.strength());
     EXPECT_EQ(descr.radius(), descr_copy.radius());
     EXPECT_EQ(descr.speed(), descr_copy.speed());
@@ -136,6 +140,7 @@ TEST(descriptor, lazer) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Lazer
+    EXPECT_EQ(descr.descriptor(), descriptor::type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr.damage(), descr_copy.damage());
     EXPECT_EQ(descr.radius(), descr_copy.radius());
 
@@ -151,6 +156,7 @@ TEST(descriptor, protector) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Protector
+    EXPECT_EQ(descr.descriptor(), descriptor::type::PROTECTOR_EQUIPMENT);
     EXPECT_EQ(descr.protection(), descr_copy.protection());
 
     // general
@@ -165,6 +171,7 @@ TEST(descriptor, radar) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Radar
+    EXPECT_EQ(descr.descriptor(), descriptor::type::RADAR_EQUIPMENT);
     EXPECT_EQ(descr.radius(), descr_copy.radius());
 
     // general
@@ -179,9 +186,25 @@ TEST(descriptor, rocket) {
     compareBaseEquipmentDescriptors(descr, descr_copy);
 
     // descriptor::item::Rocket
+    EXPECT_EQ(descr.descriptor(), descriptor::type::ROCKET_EQUIPMENT);
     EXPECT_EQ(descr.ammo(), descr_copy.ammo());
     EXPECT_EQ(descr.damage(), descr_copy.damage());
     EXPECT_EQ(descr.radius(), descr_copy.radius());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
+
+TEST(descriptor, scaner) {
+    descriptor::item::Scaner descr = descriptor::item::getNewScaner();
+    descriptor::item::Scaner descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Scaner
+    EXPECT_EQ(descr.descriptor(), descriptor::type::SCANER_EQUIPMENT);
+    EXPECT_EQ(descr.scan(), descr_copy.scan());
 
     // general
     EXPECT_EQ(descr.data(), descr_copy.data());

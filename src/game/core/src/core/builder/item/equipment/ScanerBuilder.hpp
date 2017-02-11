@@ -19,29 +19,37 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Scaner;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
 namespace item {
-
 class Scaner;
+} // namespace item
+} // namespace model
+
+namespace builder {
+namespace item {
 
 class ScanerBuilder
 {
 public:
-    ScanerBuilder();
-    ~ScanerBuilder();
+    ScanerBuilder() = default;
+    ~ScanerBuilder() = default;
 
-    Scaner* getNew() const;
-    Scaner* createTemplate(int_t id = NONE) const;
-    Scaner* getNew(const descriptor::BaseOLD&) const;
+    static model::item::Scaner* getNew();
+    static model::item::Scaner* getNew(const std::string&);
+    static model::item::Scaner* getNew(const descriptor::item::Scaner&);
 
 private:
-    void createInternals(Scaner*, const descriptor::BaseOLD&) const;
+    static model::item::Scaner* __createTemplate();
+    static void __createInternals(model::item::Scaner*, const descriptor::item::Scaner&);
 }; 
 
 } // namespace item
-
+} // namespace builder

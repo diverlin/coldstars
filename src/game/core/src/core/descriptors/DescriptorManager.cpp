@@ -20,10 +20,6 @@
 #include <descriptors/DescriptorGenerator.hpp>
 #include <meti/RandUtils.hpp>
 
-//#hack
-//#include <client/resources/Data.hpp>
-//#hack
-
 #include <ceti/FsUtils.hpp>
 
 #include <fstream>
@@ -160,7 +156,7 @@ Manager::generate()
         add(item::getNewGrapple());
         add(item::getNewProtector());
         add(item::getNewRadar());
-        add(getNewScaner());
+        add(item::getNewScaner());
         add(getNewBomb());
     }
 
