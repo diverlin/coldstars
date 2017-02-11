@@ -25,7 +25,7 @@ namespace control {
 class ItemSlot;
 
 namespace item {
-class Base;
+class Item;
 } // namespace item
 
 } // namespace control
@@ -48,7 +48,7 @@ public:
 
     void AddItemSlot(control::ItemSlot*);
 
-    bool AddItem(control::item::Base*);
+    bool AddItem(control::item::Item*);
     bool CanAcceptNewItem() const;
 
     virtual bool AddVehicle(Vehicle*);

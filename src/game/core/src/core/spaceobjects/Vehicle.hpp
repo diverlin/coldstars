@@ -45,7 +45,7 @@ class Container;
 class Npc;
 
 namespace item {
-class Base;
+class Item;
 } // namespace item
 
 } //namespace control
@@ -199,8 +199,8 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
-    bool addItemToCargoSlot(item::Base*);
-    bool manage(item::Base*);
+    bool addItemToCargoSlot(item::Item*);
+    bool manage(item::Item*);
 
     bool isSlotFree(const place::type&) const;
     bool checkManage(const core::Id&);
@@ -210,9 +210,9 @@ public:
     void sellItemsInCargo();
 
     [[deprecated("move to ext")]]
-    bool sellItem(item::Base*);
+    bool sellItem(item::Item*);
     [[deprecated("move to ext")]]
-    bool buyItem(item::Base*);
+    bool buyItem(item::Item*);
 
     bool unpackContainerItemToCargoSlot(control::Container*);
 
@@ -322,15 +322,15 @@ protected:
     ItemSlot* const _freeArtefactSlot() const;
     ItemSlot* const _cargoSlotWithGoods(place::type);
 
-    bool _installItem(control::item::Base*);
-    bool _installEquipment(control::item::Base*);
+    bool _installItem(control::item::Item*);
+    bool _installEquipment(control::item::Item*);
 #ifdef USE_MODULES
-    bool installModule(control::item::Base*);
+    bool installModule(control::item::Item*);
 #endif // USE_MODULES
 #ifdef USE_ARTEFACTS
     bool installArtefact(item::Base*);
 #endif // USE_ARTEFACTS
-    bool _installGoodsPack(control::item::Base*);
+    bool _installGoodsPack(control::item::Item*);
 
     //        virtual void UpdateInfo() = 0;
 
@@ -369,9 +369,9 @@ private:
 
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();
-    bool __mergeIdenticalGoods(item::Base*);
+    bool __mergeIdenticalGoods(item::Item*);
 
-    model::Container* __wrapItemToContainer(item::Base*);
+    model::Container* __wrapItemToContainer(item::Item*);
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 

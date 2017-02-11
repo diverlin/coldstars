@@ -23,14 +23,14 @@
 
 #include <item/BaseItem.hpp>
 
-class Bomb : public control::item::Base
+class Bomb : public control::item::Item
 {
 public:
     Bomb(int_t id = NONE);
     virtual ~Bomb();
 
-    void setDamage(int damage) { this->m_damage = damage; }
-    void setRadius(int radius) { this->m_radius = radius; }
+    void setDamage(int damage) { m_damage = damage; }
+    void setRadius(int radius) { m_radius = radius; }
 
     int damage() const override final { return m_damage; }
     int radius() const override final { return m_radius; }

@@ -23,7 +23,7 @@
 namespace model {
 namespace item {
 
-class Equipment : public model::item::Base
+class Equipment : public Item
 {
 public:
     Equipment() = default;
@@ -36,7 +36,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::item::Base>(*this);
+        ar & boost::serialization::base_object<Item>(*this);
     }
 
 };

@@ -25,11 +25,11 @@
 namespace descriptor {
 namespace item {
 
-class Base : public ::descriptor::Base, public ceti::descriptor::BaseView
+class Item : public ::descriptor::Base, public ceti::descriptor::BaseView
 {
 public:
-    Base() = default;
-    ~Base() = default;
+    Item() = default;
+    ~Item() = default;
 
     void setRace(race::type race) { m_race = race; }
     void setTech(tech::type tech) { m_tech = tech; }

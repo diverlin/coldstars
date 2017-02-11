@@ -26,7 +26,7 @@ class VehicleSlot;
 class Vehicle;
 
 namespace item {
-class Base;
+class Item;
 } // namespace item
 } // namespace control
 
@@ -51,7 +51,7 @@ public:
 
     bool AddVehicle(control::Vehicle*);
 
-    bool RepairItem(Npc*, control::item::Base*) const;
+    bool RepairItem(Npc*, control::item::Item*) const;
     bool chargeRocketEquipment(Npc*, item::Rocket*) const;
 
     bool RepairVehicle(control::Vehicle*) const;

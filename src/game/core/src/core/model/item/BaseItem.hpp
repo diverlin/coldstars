@@ -30,11 +30,11 @@
 namespace model {
 namespace item {
 
-class Base : public ::model::Base
+class Item : public ::model::Base
 {
 public:
-    Base() = default;
-    ~Base() = default;
+    Item() = default;
+    ~Item() = default;
 
     void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
