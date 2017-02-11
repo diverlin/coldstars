@@ -23,7 +23,7 @@ std::string to_string(race::type race_id)
 {
     switch(race_id)
     {
-        case race::type::NONE_ID: { return "RACE_NONE"; break; }
+        case race::type::NONE: { return "RACE_NONE"; break; }
         
         case race::type::R0_ID: { return "RACE0"; break; }
         case race::type::R1_ID:    { return "RACE1"; break; }

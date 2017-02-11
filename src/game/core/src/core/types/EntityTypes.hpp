@@ -25,7 +25,7 @@ namespace entity
 {
     enum class type
     {
-        NONE_ID=0,
+        NONE=0,
         /** */
 
         GALAXY_ID, SECTOR_ID, STARSYSTEM_ID, STAR_ID, ASTEROID_ID, 

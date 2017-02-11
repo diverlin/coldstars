@@ -38,8 +38,8 @@ struct TextureDescriptor
     TextureDescriptor()
     :
     type_id(texture::type::FAILBACK),
-    subtype_id(entity::type::NONE_ID),
-    race_id(race::type::NONE_ID),
+    subtype_id(entity::type::NONE),
+    race_id(race::type::NONE),
     tech_level_id(tech::type::NONE)
     {}
 

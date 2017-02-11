@@ -98,9 +98,9 @@ protected:
 private:
     int_t m_id = NONE;
     descriptor::type m_descriptor = descriptor::type::NONE;
-    entity::type m_type = entity::type::NONE_ID;
-    entity::type m_subtype = entity::type::NONE_ID;
-    entity::type m_subsubtype = entity::type::NONE_ID;
+    entity::type m_type = entity::type::NONE;
+    entity::type m_subtype = entity::type::NONE;
+    entity::type m_subsubtype = entity::type::NONE;
 
 private:
     friend class boost::serialization::access;

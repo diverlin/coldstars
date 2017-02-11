@@ -301,7 +301,7 @@ private:
     model::Starsystem* m_model_starsystem = nullptr;
 
     race::type m_race_id = race::type::R0_ID;
-    race::type m_conqueror_race_id = race::type::NONE_ID;
+    race::type m_conqueror_race_id = race::type::NONE;
 
     bool m_unique_update_inDymanic_done = false;
     bool m_unique_update_inStatic_done = false;

@@ -579,7 +579,7 @@ void Starsystem::__updateStates()
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-                m_conqueror_race_id = race::type::NONE_ID;
+                m_conqueror_race_id = race::type::NONE;
             }
         }
 

@@ -96,14 +96,14 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-    race::type m_race_id = race::type::NONE_ID;
+    race::type m_race_id = race::type::NONE;
 
     int m_locked_turns = 0;
     int m_condition = 0;
     int m_price = 0;
     int m_deterioration = 0;
 
-    entity::type m_parent_subtype_id = entity::type::NONE_ID;
+    entity::type m_parent_subtype_id = entity::type::NONE;
 
     ItemCommonData m_data;
 //    UnresolvedDataBase m_data_unresolved_Base;

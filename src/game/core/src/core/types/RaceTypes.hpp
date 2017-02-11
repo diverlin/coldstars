@@ -25,7 +25,7 @@ namespace race
 {
     enum class type : int
     {
-        NONE_ID=0,
+        NONE=0,
         //
         R0_ID,
         R1_ID,
