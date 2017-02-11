@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Base.hpp"
+#include "Equipment.hpp"
 
 
 namespace descriptor {
