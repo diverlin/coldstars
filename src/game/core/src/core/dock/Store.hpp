@@ -26,7 +26,7 @@ class ItemSlot;
 class VehicleSlot;
 class Vehicle;
 namespace item {
-class Base;
+class Item;
 } // namespace item
 }
 
@@ -42,13 +42,13 @@ public:
 
     void addVehicleSlot(control::VehicleSlot*);
     void addItemSlot(control::ItemSlot*);
-    bool addItem(control::item::Base*);
+    bool addItem(control::item::Item*);
     bool addVehicle(control::Vehicle*);
 
     control::ItemSlot* freeItemSlot() const;
     control::VehicleSlot* freeVehicleSlot() const;
 
-    int buyItem(control::item::Base*);
+    int buyItem(control::item::Item*);
     void sellVehicle(Npc*, control::VehicleSlot*, int);
 
     void Save(boost::property_tree::ptree&) const;

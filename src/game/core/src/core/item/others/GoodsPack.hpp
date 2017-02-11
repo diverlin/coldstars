@@ -21,7 +21,7 @@
 #include <item/BaseItem.hpp>
 #include <common/constants.hpp>
 
-class GoodsPack : public control::item::Base
+class GoodsPack : public control::item::Item
 {
     public:                  
         GoodsPack(int, entity::type);

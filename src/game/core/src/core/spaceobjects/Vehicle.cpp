@@ -266,7 +266,7 @@ bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
     return result;
 }
 
-bool Vehicle::_installItem(control::item::Base* item)
+bool Vehicle::_installItem(control::item::Item* item)
 {
     assert(false);
 //    switch(item->type()) {
@@ -314,12 +314,12 @@ bool Vehicle::checkManage(const core::Id& ident)
     return false;
 }
 
-bool Vehicle::_installGoodsPack(item::Base* item)
+bool Vehicle::_installGoodsPack(item::Item* item)
 {
     return __mergeIdenticalGoods(item);
 }
 
-bool Vehicle::_installEquipment(item::Base* item)
+bool Vehicle::_installEquipment(item::Item* item)
 {
     if (item->parentSubtype() == entity::type::WEAPON_SLOT_ID) {
         ItemSlot* slot = model()->weaponComplex().freeSlot();
@@ -467,7 +467,7 @@ Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
     return false;
 }
 
-bool Vehicle::addItemToCargoSlot(item::Base* item)
+bool Vehicle::addItemToCargoSlot(item::Item* item)
 {
     assert(false);
 //    _increaseMass(item->mass());
@@ -486,7 +486,7 @@ bool Vehicle::addItemToCargoSlot(item::Base* item)
 }
 
 bool
-Vehicle::manage(item::Base* item)
+Vehicle::manage(item::Item* item)
 {
     if (addItemToCargoSlot(item)) {
         _installItem(item);
@@ -513,7 +513,7 @@ void Vehicle::sellItemsInCargo()
     }
 }
 
-bool Vehicle::sellItem(item::Base* item)
+bool Vehicle::sellItem(item::Item* item)
 {
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
@@ -542,7 +542,7 @@ bool Vehicle::sellItem(item::Base* item)
 //    }
 }
 
-bool Vehicle::buyItem(item::Base* item)
+bool Vehicle::buyItem(item::Item* item)
 {
     if (addItemToCargoSlot(item) == true)
     {
@@ -554,7 +554,7 @@ bool Vehicle::buyItem(item::Base* item)
     return false;
 }
 
-bool Vehicle::__mergeIdenticalGoods(item::Base* item)
+bool Vehicle::__mergeIdenticalGoods(item::Item* item)
 {
     assert(false);
 //    ItemSlot* item_slot = _cargoSlotWithGoods(item->subtype());
@@ -1433,7 +1433,7 @@ bool Vehicle::dropItemToSpace(const entity::type& type)
 }
 
 model::Container*
-Vehicle::__wrapItemToContainer(item::Base* item)
+Vehicle::__wrapItemToContainer(item::Item* item)
 {
     model::Container* container = builder::Container::getNew();
     assert(false);

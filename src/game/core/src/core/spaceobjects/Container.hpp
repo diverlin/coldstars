@@ -25,7 +25,7 @@
 
 namespace control {
 namespace item {
-class Base;
+class Item;
 } // namespace item
 } // namespace control
 
@@ -74,7 +74,7 @@ public:
     void bindItemSlot(ItemSlot*);
 
     ItemSlot* const itemSlot() const { return m_itemSlot; }
-    bool insertItem(control::item::Base*);
+    bool insertItem(control::item::Item*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 

@@ -35,11 +35,11 @@ class ItemSlot;
 namespace control {
 namespace item {
 
-class Base : public ::control::Base
+class Item : public ::control::Base
 {
 public:
-    Base() = default;
-    virtual ~Base() = default;
+    Item() = default;
+    virtual ~Item() = default;
 
     virtual void putChildrenToGarbage() const {}
 

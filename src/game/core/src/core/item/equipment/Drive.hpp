@@ -36,7 +36,7 @@ class Drive;
 namespace control {
 namespace item {
 
-class Drive : public control::item::Base
+class Drive : public Equipment
 {
 public:
     Drive(model::item::Drive*);

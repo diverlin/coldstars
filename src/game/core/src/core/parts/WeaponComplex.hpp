@@ -26,7 +26,7 @@
 class Vehicle;
 
 namespace item {
-class Base;
+class Item;
 } // namespace item
 
 namespace model {

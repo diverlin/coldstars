@@ -154,7 +154,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 //    }
 }
 
-bool ItemSlot::checkItemInsertion(control::item::Base* item) const
+bool ItemSlot::checkItemInsertion(control::item::Item* item) const
 {
     assert(false);
 //    if (subtype() == entity::Type::CARGO_SLOT_ID) {
@@ -168,7 +168,7 @@ bool ItemSlot::checkItemInsertion(control::item::Base* item) const
     return false;
 }
 
-bool ItemSlot::insert(item::Base* item)
+bool ItemSlot::insert(item::Item* item)
 {
     assert(false);
 //    // make it oop
@@ -373,10 +373,10 @@ int ItemSlot::itemDamage() const
     return 0;
 }
 
-item::Base*
+item::Item*
 ItemSlot::takeItem()
 {
-    item::Base* item = m_item;
+    item::Item* item = m_item;
     removeItem();
     return item;
 }
@@ -397,7 +397,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     }
 
     if ( (m_item != nullptr) && (slot->item() != nullptr) ) {
-        item::Base* tmp_item = slot->item();
+        item::Item* tmp_item = slot->item();
         if ( (slot->checkItemInsertion(m_item) == true) && (checkItemInsertion(tmp_item) == true) ) {
             slot->insert(m_item);
             tmp_item->setSlot(nullptr);
