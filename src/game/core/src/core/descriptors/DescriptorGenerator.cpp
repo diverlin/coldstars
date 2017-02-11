@@ -768,16 +768,16 @@ getNewProtector(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
-    int mass    = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
-    int condition = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
+    int modules = meti::getRandInt(descriptor::item::Protector::MODULES_NUM_MIN, descriptor::item::Protector::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(descriptor::item::Protector::MASS_MIN,        descriptor::item::Protector::MASS_MAX);
+    int condition = meti::getRandInt(descriptor::item::Protector::CONDITION_MIN, descriptor::item::Protector::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
 
-    int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
+    int protection = meti::getRandInt(descriptor::item::Protector::PROTECTION_MIN, descriptor::item::Protector::PROTECTION_MAX);
 
     descriptor::item::Protector descr;
     // descriptor::item::Base
@@ -805,16 +805,16 @@ getNewRadar(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    int mass    = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    int condition = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
+    int modules = meti::getRandInt(descriptor::item::Radar::MODULES_NUM_MIN, descriptor::item::Radar::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(descriptor::item::Radar::MASS_MIN,        descriptor::item::Radar::MASS_MAX);
+    int condition = meti::getRandInt(descriptor::item::Radar::CONDITION_MIN, descriptor::item::Radar::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
 
-    int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
+    int radius = meti::getRandInt(descriptor::item::Radar::RADIUS_MIN, descriptor::item::Radar::RADIUS_MAX);
 
     descriptor::item::Radar descr;
     // descriptor::item::Base
@@ -827,6 +827,47 @@ getNewRadar(int race, int tech_level)
     descr.setModules(modules);
 
     // descriptor::Radar
+    descr.setRadius(radius);
+
+    return descr;
+}
+
+descriptor::item::Rocket
+getNewRocket(int race, int tech_level)
+{
+    if (race == NONE) {
+        race = int(race::type::R0_ID);
+    }
+    if (tech_level == NONE) {
+        tech_level = int(tech::type::LEVEL0);
+    }
+
+    int modules = meti::getRandInt(descriptor::item::Rocket::MODULES_NUM_MIN, descriptor::item::Rocket::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(descriptor::item::Rocket::MASS_MIN,        descriptor::item::Rocket::MASS_MAX);
+    int condition = meti::getRandInt(descriptor::item::Rocket::CONDITION_MIN, descriptor::item::Rocket::CONDITION_MAX);
+    int deterioration = 1;
+    int price = meti::getRandInt(100, 1000);
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
+
+    int ammo = meti::getRandInt(descriptor::item::Rocket::AMMO_MIN, descriptor::item::Rocket::AMMO_MAX);
+    int damage = meti::getRandInt(descriptor::item::Rocket::DAMAGE_MIN, descriptor::item::Rocket::DAMAGE_MAX);
+    int radius = meti::getRandInt(descriptor::item::Rocket::RADIUS_MIN, descriptor::item::Rocket::RADIUS_MAX);
+
+    descriptor::item::Rocket descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Radar
+    descr.setAmmo(ammo);
+    descr.setDamage(damage);
     descr.setRadius(radius);
 
     return descr;

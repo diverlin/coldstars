@@ -123,7 +123,6 @@ public:
     item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
     item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
-    item::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
 
 #ifdef USE_MODULES
     BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
@@ -184,7 +183,6 @@ private:
     item::FreezerBuilder* m_freezerBuilder = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
     item::ScanerBuilder* m_scanerBuilder = nullptr;
-    item::RocketBuilder* m_rocketBuilder = nullptr;
 
 #ifdef USE_MODULES
     BakModuleBuilder* m_bakModuleBuilder = nullptr;

@@ -329,23 +329,23 @@ namespace EQUIPMENT
         const float MODULES_NUM_WEIGHT = 0.5;
     }
 
-    namespace RADAR
-    {
-        const int RADIUS_MIN = 700;
-        const int RADIUS_MAX = 1500;
-        const float RADIUS_TECH_RATE = 0.1f;
+//    namespace RADAR
+//    {
+//        const int RADIUS_MIN = 700;
+//        const int RADIUS_MAX = 1500;
+//        const float RADIUS_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
                 
-        const int MASS_MIN = 10;
-        const int MASS_MAX = 50;
-        const int CONDITION_MIN = 2000;
-        const int CONDITION_MAX = 10000;
+//        const int MASS_MIN = 10;
+//        const int MASS_MAX = 50;
+//        const int CONDITION_MIN = 2000;
+//        const int CONDITION_MAX = 10000;
         
-        const float RADIUS_WEIGHT = 0.6;
-        const float MODULES_NUM_WEIGHT = 0.4;
-    }
+//        const float RADIUS_WEIGHT = 0.6;
+//        const float MODULES_NUM_WEIGHT = 0.4;
+//    }
 
 //    namespace DRIVE
 //    {
@@ -373,23 +373,23 @@ namespace EQUIPMENT
 //        const float MODULES_NUM_WEIGHT = 0.2;
 //    }
 
-    namespace PROTECTOR
-    {
-        const int PROTECTION_MIN = 3;
-        const int PROTECTION_MAX = 30;
-        const float PROTECTION_TECH_RATE = 0.1f;
+//    namespace PROTECTOR
+//    {
+//        const int PROTECTION_MIN = 3;
+//        const int PROTECTION_MAX = 30;
+//        const float PROTECTION_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int CONDITION_MIN = 2000;
-        const int CONDITION_MAX = 10000;
-        const int MASS_MIN = 20;
-        const int MASS_MAX = 80;
+//        const int CONDITION_MIN = 2000;
+//        const int CONDITION_MAX = 10000;
+//        const int MASS_MIN = 20;
+//        const int MASS_MAX = 80;
         
-        const float PROTECTION_WEIGHT = 0.8;
-        const float MODULES_NUM_WEIGHT = 0.2;
-    }
+//        const float PROTECTION_WEIGHT = 0.8;
+//        const float MODULES_NUM_WEIGHT = 0.2;
+//    }
 
 //    namespace BAK
 //    {
@@ -468,33 +468,33 @@ namespace EQUIPMENT
 //        const float MODULES_NUM_WEIGHT = 0.2;
 //    }
 
-    namespace ROCKET
-    {
-        const int AMMO_MIN = 20;
-        const int AMMO_MAX = 40;
-        const float AMMO_TECH_RATE = 0.1f;
-                
-        const int RADIUS_MIN = 350;
-        const int RADIUS_MAX = 550;
-        const float RADIUS_TECH_RATE = 0.1f;
-                
-        const int DAMAGE_MIN = 10;
-        const int DAMAGE_MAX = 20;
-        const float DAMAGE_TECH_RATE = 0.1f;
-                
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
-        
-        const int MASS_MIN = 30;
-        const int MASS_MAX = 60;
-        const int CONDITION_MIN = 100;
-        const int CONDITION_MAX = 900;
-        
-        const float AMMO_WEIGHT = 0.3;
-        const float DAMAGE_WEIGHT = 0.3;
-        const float RADIUS_WEIGHT = 0.2;
-        const float MODULES_NUM_WEIGHT = 0.2;
-    }
+//    namespace ROCKET
+//    {
+//    const int AMMO_MIN = 20;
+//    const int AMMO_MAX = 40;
+//    const float AMMO_TECH_RATE = 0.1f;
+
+//    const int RADIUS_MIN = 350;
+//    const int RADIUS_MAX = 550;
+//    const float RADIUS_TECH_RATE = 0.1f;
+
+//    const int DAMAGE_MIN = 10;
+//    const int DAMAGE_MAX = 20;
+//    const float DAMAGE_TECH_RATE = 0.1f;
+
+//    const int MODULES_NUM_MIN = 0;
+//    const int MODULES_NUM_MAX = 2;
+
+//    const int MASS_MIN = 30;
+//    const int MASS_MAX = 60;
+//    const int CONDITION_MIN = 100;
+//    const int CONDITION_MAX = 900;
+
+//    const float AMMO_WEIGHT = 0.3;
+//    const float DAMAGE_WEIGHT = 0.3;
+//    const float RADIUS_WEIGHT = 0.2;
+//    const float MODULES_NUM_WEIGHT = 0.2;
+//    }
 }
 
 namespace MODULE

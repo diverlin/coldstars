@@ -132,8 +132,8 @@ void Lazer::countPrice()
             descriptor::item::Lazer::RADIUS_WEIGHT * radius_rate +
             descriptor::item::Lazer::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Lazer::MASS_MIN;
-    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Lazer::CONDITION_MIN;
+    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Lazer::MASS_MIN;
+    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Lazer::CONDITION_MIN;
 
     m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

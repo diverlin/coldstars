@@ -172,6 +172,22 @@ TEST(descriptor, radar) {
     EXPECT_EQ(descr.info(), descr_copy.info());
 }
 
+TEST(descriptor, rocket) {
+    descriptor::item::Rocket descr = descriptor::item::getNewRocket();
+    descriptor::item::Rocket descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Rocket
+    EXPECT_EQ(descr.ammo(), descr_copy.ammo());
+    EXPECT_EQ(descr.damage(), descr_copy.damage());
+    EXPECT_EQ(descr.radius(), descr_copy.radius());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
+
 //void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)
 //{
 //    //EXPECT_EQ(descr.id(), item->id()); // wrong

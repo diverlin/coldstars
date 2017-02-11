@@ -28,20 +28,20 @@
 namespace descriptor {
 namespace item {
 
-const int Protector::PROTECTION_MIN = 200;
-const int Protector::PROTECTION_MAX = 400;
+const int Protector::PROTECTION_MIN = 3;
+const int Protector::PROTECTION_MAX = 30;
 const float Protector::PROTECTION_TECH_RATE = 0.1f;
 
 const int Protector::MODULES_NUM_MIN = 0;
 const int Protector::MODULES_NUM_MAX = 2;
 
-const int Protector::MASS_MIN = 10;
-const int Protector::MASS_MAX = 40;
-const int Protector::CONDITION_MIN = 100;
-const int Protector::CONDITION_MAX = 1000;
+const int Protector::CONDITION_MIN = 2000;
+const int Protector::CONDITION_MAX = 10000;
+const int Protector::MASS_MIN = 20;
+const int Protector::MASS_MAX = 80;
 
-const float Protector::PROTECTION_WEIGHT = 0.6f;
-const float Protector::MODULES_NUM_WEIGHT = 0.4f;
+const float Protector::PROTECTION_WEIGHT = 0.8f;
+const float Protector::MODULES_NUM_WEIGHT = 0.2f;
 
 Protector::Protector()
 {
@@ -118,8 +118,8 @@ void Protector::CountPrice()
     float effectiveness_rate = descriptor::item::Protector::PROTECTION_WEIGHT * protection_rate +
             descriptor::item::Protector::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Protector::MASS_MIN;
-    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Protector::CONDITION_MIN;
+    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Protector::MASS_MIN;
+    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Protector::CONDITION_MIN;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

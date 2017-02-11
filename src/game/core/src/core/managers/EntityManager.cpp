@@ -544,8 +544,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading rocket_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_equipment"))
         {
-            item::Rocket* rocket_equipment = core::global::get().rocketBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            rocket_equipment->Load(v.second);
+//            item::Rocket* rocket_equipment = core::global::get().rocketBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            rocket_equipment->Load(v.second);
         }
     }
 
