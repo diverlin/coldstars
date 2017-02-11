@@ -33,6 +33,7 @@ public:
 
     void setRace(race::type race) { m_race = race; }
     void setTech(tech::type tech) { m_tech = tech; }
+    void setSlotType(entity::type slotType) { m_slotType = slotType; }
     void setCondition(int condition) { m_condition = condition; }
     void setDeterioration(int deterioration) { m_deterioration = deterioration; }
     void setMass(int mass) { m_mass = mass; }
@@ -40,14 +41,16 @@ public:
 
     race::type race() const { return m_race; }
     tech::type tech() const { return m_tech; }
+    entity::type slotType() const { return m_slotType; }
     int condition() const { return m_condition; }
     int deterioration() const { return m_deterioration; }
     int mass() const { return m_mass; }
     int price() const { return m_price; }
 
 private:
-    race::type m_race = race::type::R0_ID;
+    race::type m_race = race::type::NONE;
     tech::type m_tech = tech::type::NONE;
+    entity::type m_slotType = entity::type::NONE;
     int m_condition = 0;
     int m_deterioration = 0;
     int m_mass = 0;
@@ -55,9 +58,10 @@ private:
 
 protected:
     std::string info() const {
-        std::string result = "descriptor::item::Base:\n";
+        std::string result = "descriptor::Item:\n";
         result += std::string(" race = ") + to_string(m_race) + "\n";
         result += std::string(" tech = ") + to_string(m_tech) + "\n";
+        result += std::string(" slotType = ") + to_string(m_slotType) + "\n";
         result += std::string(" condition = ") + std::to_string(m_condition) + "\n";
         result += std::string(" deterioration = ") + std::to_string(m_deterioration) + "\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
@@ -75,6 +79,7 @@ private:
         ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_race;
         ar & m_tech;
+        ar & m_slotType;
         ar & m_condition;
         ar & m_deterioration;
         ar & m_mass;
