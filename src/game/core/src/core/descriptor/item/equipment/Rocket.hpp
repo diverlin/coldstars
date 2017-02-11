@@ -71,7 +71,7 @@ public:
         result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
         result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
         result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

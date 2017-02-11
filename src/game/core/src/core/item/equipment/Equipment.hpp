@@ -25,9 +25,8 @@
 #endif
 
 namespace control {
-namespace item {
 
-class Equipment : public ::control::Item
+class Equipment : public Item
 {
 public:
     Equipment();
@@ -52,6 +51,5 @@ protected:
 //    void ResolveData();
 };
 
-} // namespace item
 } // namespace control
 

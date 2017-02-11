@@ -19,17 +19,12 @@
 #pragma once
 
 #include <core/common/Base.hpp>
-#include <core/types/TechLevelTypes.hpp>
-#include <core/types/RaceTypes.hpp>
 
 #include <ceti/type/IdType.hpp>
 
-//to be removed
-#include <core/item/ItemCommonData.hpp>
-
 namespace model {
 
-class Item : public ::model::Base
+class Item : public Base
 {
 public:
     Item() = default;

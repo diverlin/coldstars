@@ -24,7 +24,7 @@
 
 namespace {
 
-void compareBaseEquipmentDescriptors(const descriptor::item::Equipment& descr, const descriptor::item::Equipment& descr_copy)
+void compareBaseEquipmentDescriptors(const descriptor::Equipment& descr, const descriptor::Equipment& descr_copy)
 {
     // descriptor::Base
     EXPECT_EQ(descr.id(), descr_copy.id());
@@ -58,7 +58,7 @@ void compareBaseEquipmentDescriptors(const descriptor::item::Equipment& descr, c
 //    int m_mass = 0;
 //    int m_deterioration = 0;
 
-    // descriptor::item::Equipment
+    // descriptor::Equipment
     EXPECT_EQ(descr.modules(), descr_copy.modules());
 }
 
