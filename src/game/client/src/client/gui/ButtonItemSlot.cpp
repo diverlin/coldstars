@@ -20,7 +20,7 @@
 #include "ButtonItemSlot.hpp"
 
 #include <slots/ItemSlot.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 #include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>

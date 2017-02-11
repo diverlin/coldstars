@@ -19,7 +19,7 @@
              
 #include "BaseButtonItemSlot.hpp"
 #include <slots/ItemSlot.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 #include <client/resources/GuiTextureObCollector.hpp>
 

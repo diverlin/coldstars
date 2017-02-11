@@ -20,7 +20,7 @@
 #include <dock/Store.hpp>
 #include <client/pilots/Player.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 #include <slots/ItemSlot.hpp>
 #include <slots/VehicleSlot.hpp>
 #include <pilots/Npc.hpp>

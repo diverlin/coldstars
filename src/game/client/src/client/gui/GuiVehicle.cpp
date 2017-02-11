@@ -21,7 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include <dock/Kosmoport.hpp>
 #include <jeti/Render.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 #include <slots/ItemSlot.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>

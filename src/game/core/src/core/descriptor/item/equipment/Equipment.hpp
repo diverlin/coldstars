@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/descriptor/item/BaseItem.hpp>
+#include <core/descriptor/item/Item.hpp>
 
 namespace descriptor {
 namespace item {

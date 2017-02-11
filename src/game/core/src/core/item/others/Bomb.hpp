@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 class Bomb : public control::item::Item
 {
