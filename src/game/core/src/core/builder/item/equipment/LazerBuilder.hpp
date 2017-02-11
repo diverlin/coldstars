@@ -36,11 +36,11 @@ class Lazer;
 namespace builder {
 namespace item {
 
-class LazerBuilder
+class Lazer
 {
 public:
-    LazerBuilder() = default;
-    ~LazerBuilder() = default;
+    Lazer() = default;
+    ~Lazer() = default;
 
     static model::item::Lazer* getNew();
     static model::item::Lazer* getNew(const std::string&);
