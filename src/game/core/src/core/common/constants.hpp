@@ -445,28 +445,28 @@ namespace EQUIPMENT
         const float MODULES_NUM_WEIGHT = 0.3;
     }
 
-    namespace LAZER
-    {
-        const int RADIUS_MIN = 200;
-        const int RADIUS_MAX = 400;
-        const float RADIUS_TECH_RATE = 0.1f;
+//    namespace LAZER
+//    {
+//        const int RADIUS_MIN = 200;
+//        const int RADIUS_MAX = 400;
+//        const float RADIUS_TECH_RATE = 0.1f;
                 
-        const int DAMAGE_MIN = 40;
-        const int DAMAGE_MAX = 200;
-        const float DAMAGE_TECH_RATE = 0.1f;
+//        const int DAMAGE_MIN = 40;
+//        const int DAMAGE_MAX = 200;
+//        const float DAMAGE_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int MASS_MIN = 10;
-        const int MASS_MAX = 40;
-        const int CONDITION_MIN = 100;
-        const int CONDITION_MAX = 1000;
+//        const int MASS_MIN = 10;
+//        const int MASS_MAX = 40;
+//        const int CONDITION_MIN = 100;
+//        const int CONDITION_MAX = 1000;
         
-        const float DAMAGE_WEIGHT = 0.4;
-        const float RADIUS_WEIGHT = 0.4;
-        const float MODULES_NUM_WEIGHT = 0.2;
-    }
+//        const float DAMAGE_WEIGHT = 0.4;
+//        const float RADIUS_WEIGHT = 0.4;
+//        const float MODULES_NUM_WEIGHT = 0.2;
+//    }
 
     namespace ROCKET
     {

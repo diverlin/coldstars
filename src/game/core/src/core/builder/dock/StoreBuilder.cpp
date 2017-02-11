@@ -109,7 +109,8 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         //store->addVehicle(ShipBuilder::getNew());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->addItem(core::global::get().lazerBuilder().getNew());
+        assert(false);
+//        store->addItem(core::global::get().lazerBuilder().getNew());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
         store->addItem(core::global::get().rocketBuilder().getNew());

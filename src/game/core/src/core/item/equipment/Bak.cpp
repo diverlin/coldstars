@@ -92,6 +92,13 @@ Bak::data() const
 namespace control {
 namespace item {
 
+Bak::Bak(model::item::Bak* model)
+    :
+      m_model_bak(model)
+{
+
+}
+
 int
 Bak::fuelMiss() const
 {

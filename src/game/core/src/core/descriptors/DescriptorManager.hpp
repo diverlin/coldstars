@@ -32,6 +32,7 @@
 #include <core/item/equipment/Drive.hpp> // descriptor
 #include <core/item/equipment/Droid.hpp> // descriptor
 #include <core/item/equipment/Grapple.hpp> // descriptor
+#include <core/item/equipment/Lazer.hpp> // descriptor
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -43,10 +44,6 @@
 #include <string>
 
 namespace descriptor {
-
-//namespace item {
-//class Drive;
-//} // namespace item
 
 template<typename T>
 class MManager {
@@ -148,6 +145,9 @@ public:
     void add(const item::Grapple& grapple) {
         m_grapple.add(grapple);
     }
+    void add(const item::Lazer& lazer) {
+        m_lazer.add(lazer);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -168,6 +168,7 @@ public:
     const MManager<item::Bak>& bak() const { return m_bak; }
     const MManager<item::Droid>& droid() const { return m_droid; }
     const MManager<item::Grapple>& grapple() const { return m_grapple; }
+    const MManager<item::Lazer>& lazer() const { return m_lazer; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -193,6 +194,7 @@ private:
     MManager<item::Drive> m_drive;
     MManager<item::Droid> m_droid;
     MManager<item::Grapple> m_grapple;
+    MManager<item::Lazer> m_lazer;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

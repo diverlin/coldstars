@@ -31,32 +31,91 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
+
+namespace descriptor {
 namespace item {
 
-Lazer::Lazer(int_t id)
-    :
-      m_damage_orig(0),
-      m_radius_orig(0)
-{
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::LAZER_EQUIPMENT_ID);
+const int Lazer::RADIUS_MIN = 200;
+const int Lazer::RADIUS_MAX = 400;
+const float Lazer::RADIUS_TECH_RATE = 0.1f;
 
+const int Lazer::DAMAGE_MIN = 40;
+const int Lazer::DAMAGE_MAX = 200;
+const float Lazer::DAMAGE_TECH_RATE = 0.1f;
+
+const int Lazer::MODULES_NUM_MIN = 0;
+const int Lazer::MODULES_NUM_MAX = 2;
+
+const int Lazer::MASS_MIN = 10;
+const int Lazer::MASS_MAX = 40;
+const int Lazer::CONDITION_MIN = 100;
+const int Lazer::CONDITION_MAX = 1000;
+
+const float Lazer::DAMAGE_WEIGHT = 0.4f;
+const float Lazer::RADIUS_WEIGHT = 0.4f;
+const float Lazer::MODULES_NUM_WEIGHT = 0.2f;
+
+Lazer::Lazer()
+{
+    setDescriptor(descriptor::type::LAZER_EQUIPMENT);
+}
+
+Lazer::Lazer(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Lazer::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespce item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+Lazer::Lazer()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::LAZER_EQUIPMENT_ID);
+}
+
+Lazer::Lazer(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Lazer::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+Lazer::Lazer(model::item::Lazer* model)
+    :
+      m_model_lazer(model)
+{
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
 //    texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT_ID);
 }
 
 /* virtual */
-Lazer::~Lazer()
-{}
-
-/* virtual */
 void Lazer::updateProperties()
 {
-    m_damage_add  = 0;
-    m_radius_add  = 0;
+    m_damage_add = 0;
+    m_radius_add = 0;
 
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
@@ -66,22 +125,22 @@ void Lazer::updateProperties()
     }
 #endif
 
-    m_damage = m_damage_orig + m_damage_add;
-    m_radius = m_radius_orig + m_radius_add;
+    model()->setDamage(descriptor()->damage() + m_damage_add);
+    model()->setRadius(descriptor()->radius() + m_radius_add);
 } 
 
-void Lazer::CountPrice()
+void Lazer::countPrice()
 {
-    float damage_rate        = (float)m_damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
-    float radius_rate        = (float)m_radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::LAZER::MODULES_NUM_MAX;
+    float damage_rate        = (float)descriptor()->damage() / descriptor::item::Lazer::DAMAGE_MIN;
+    float radius_rate        = (float)descriptor()->radius() / descriptor::item::Lazer::RADIUS_MIN;
+    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Lazer::MODULES_NUM_MAX;
 
-    float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate +
-            EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate +
-            EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Lazer::DAMAGE_WEIGHT * damage_rate +
+            descriptor::item::Lazer::RADIUS_WEIGHT * radius_rate +
+            descriptor::item::Lazer::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::LAZER::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data.condition_max;
+    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Lazer::MASS_MIN;
+    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Lazer::CONDITION_MIN;
 
     m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -94,112 +153,66 @@ void Lazer::addUniqueInfo()
 //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
-std::string Lazer::GetDamageStr()
+std::string Lazer::damageStr()
 {
-    if (m_damage_add == 0)
-        return std::to_string(m_damage_orig);
-    else
-        return std::to_string(m_damage_orig) + "+" + std::to_string(m_damage_add);
+    if (m_damage_add) {
+        return std::to_string(descriptor()->damage()) + "+" + std::to_string(m_damage_add);
+    } else {
+        return std::to_string(descriptor()->damage());
+    }
 }
 
-std::string Lazer::GetRadiusStr()
+std::string Lazer::radiusStr()
 {
-    if (m_radius_add == 0)
-        return std::to_string(m_radius_orig);
-    else
-        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
+    if (m_radius_add == 0) {
+        return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
+    } else {
+        return std::to_string(descriptor()->radius());
+    }
 }
 
-void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
-{ 
-    assert(false);
-//    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
-//    {
-//        if (subtarget != nullptr) // precise fire
-//        {
-//            if (meti::isActionShouldHappen(slot()->hitProbability()) == true) {
-//                subtarget->item()->doLock(1);
-//            }
-//            damage_rate /= 3; // lower damage is used for precise fire
-            
-//        }
-
-//        target->hit(m_damage*damage_rate);
-//        deteriorationEvent();
-
-//        if (show_effect)
-//        {
-//            // LazerTraceEffect
-//            //LazerTraceEffect* _lazer_trace_effect = nullptr;
-//            //if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
-//            //{
-//            //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
-//            //item_slot->GetTurrel()->pCenter(),
-//            //item_slot->GetTarget()->pCenter());
-//            //}
-//            //else
-////            {
-////                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
-////                                                              item_slot->GetOwnerVehicle()->pCenter(),
-////                                                              item_slot->GetTarget()->pCenter());
+//void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
+//{
+//    assert(false);
+////    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
+////    {
+////        if (subtarget != nullptr) // precise fire
+////        {
+////            if (meti::isActionShouldHappen(slot()->hitProbability()) == true) {
+////                subtarget->item()->doLock(1);
 ////            }
-////            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
+////            damage_rate /= 3; // lower damage is used for precise fire
             
-//            // DamageEffect
-//            //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
-//            //_lazer_trace_effect->SetDamageEffect(_damage_effect);
-//            //item_slot->GetOwnerVehicle()->starsystem()->Add(_damage_effect);
-//        }
-//    }
-} 
+////        }
 
-/*virtual*/
-void Lazer::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "lazer_equipment." + std::to_string(id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Lazer::SaveData(save_ptree, root);
-}
+////        target->hit(m_damage*damage_rate);
+////        deteriorationEvent();
 
-/*virtual*/
-void Lazer::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Lazer::LoadData(load_ptree);
-}
-
-/*virtual*/
-void Lazer::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Lazer::ResolveData();
-}
-
-void Lazer::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
-    
-//    save_ptree.put(root+"damage_orig", m_damage_orig);
-//    save_ptree.put(root+"radius_orig", m_radius_orig);
-}
-
-void Lazer::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-//    m_damage_orig = load_ptree.get<int>("damage_orig");
-//    m_radius_orig = load_ptree.get<int>("radius_orig");
-}                
-
-void Lazer::ResolveData()
-{
-//    LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
-}
+////        if (show_effect)
+////        {
+////            // LazerTraceEffect
+////            //LazerTraceEffect* _lazer_trace_effect = nullptr;
+////            //if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
+////            //{
+////            //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+////            //item_slot->GetTurrel()->pCenter(),
+////            //item_slot->GetTarget()->pCenter());
+////            //}
+////            //else
+//////            {
+//////                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+//////                                                              item_slot->GetOwnerVehicle()->pCenter(),
+//////                                                              item_slot->GetTarget()->pCenter());
+//////            }
+//////            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
+            
+////            // DamageEffect
+////            //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
+////            //_lazer_trace_effect->SetDamageEffect(_damage_effect);
+////            //item_slot->GetOwnerVehicle()->starsystem()->Add(_damage_effect);
+////        }
+////    }
+//}
 
 } // namespace item
+} // namespace control

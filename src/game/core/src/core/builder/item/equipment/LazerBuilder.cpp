@@ -16,33 +16,42 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "LazerBuilder.hpp"
+#include <core/item/equipment/Lazer.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/common/Global.hpp>
 
-#include <builder/item/equipment/LazerBuilder.hpp>
-#include <item/equipment/Lazer.hpp>
-#include <managers/EntityManager.hpp>
-
-#include <ceti/IdGenerator.hpp>
-#include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptors/Base.hpp>
-#include <descriptors/RaceDescriptors.hpp>
-#include <meti/RandUtils.hpp>
-
+namespace builder {
 namespace item {
 
-LazerBuilder::LazerBuilder()
-{}
+model::item::Lazer*
+LazerBuilder::getNew()
+{
+    const descriptor::item::Lazer& descr = core::global::get().descriptors().lazer().random();
+    return getNew(descr);
+}
 
-LazerBuilder::~LazerBuilder()
-{}
+model::item::Lazer*
+LazerBuilder::getNew(const std::string& data)
+{
+    descriptor::item::Lazer descr(data);
+    assert(descr.descriptor() != descriptor::type::LAZER_EQUIPMENT);
+    return getNew(descr);
+}
 
-Lazer* LazerBuilder::createTemplate(int_t id) const
+model::item::Lazer*
+LazerBuilder::getNew(const descriptor::item::Lazer& descr)
+{
+    model::item::Lazer* lazer = createTemplate();
+    createInternals(lazer, descr);
+
+    return lazer;
+}
+
+model::item::Lazer*
+LazerBuilder::createTemplate()
 { 
-    Lazer* lazer = new Lazer(id);
+    model::item::Lazer* lazer = new model::item::Lazer;
     assert(lazer);
 
     assert(false);
@@ -51,49 +60,43 @@ Lazer* LazerBuilder::createTemplate(int_t id) const
     return lazer;
 } 
 
-Lazer* LazerBuilder::getNew(tech::type tech_level, race::type race_id, int damage_orig, int radius_orig) const
-{
-    Lazer* lazer = createTemplate();
-    createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
-
-    return lazer;
-} 
-
-void LazerBuilder::createInternals(Lazer* lazer, tech::type tech_level, race::type race_id, int damage_orig, int radius_orig) const
+void
+LazerBuilder::createInternals(model::item::Lazer* lazer, const descriptor::item::Lazer& descr)
 {     
-    if (race_id == race::type::NONE_ID) {
-        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
-    }
+    assert(false);
+//    if (race_id == race::type::NONE_ID) {
+//        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+//    }
     
-    if (tech_level == tech::type::NONE) {
-        tech_level = tech::type::LEVEL0;
-    }
+//    if (tech_level == tech::type::NONE) {
+//        tech_level = tech::type::LEVEL0;
+//    }
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
+//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
-    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECH_RATE * (int)tech_level);
-    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECH_RATE * (int)tech_level);
+//    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECH_RATE * (int)tech_level);
+//    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECH_RATE * (int)tech_level);
     
-    ItemCommonData common_data;
-    common_data.tech         = tech_level;
-#ifdef USE_MODULES
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
-#endif
-    common_data.mass            = meti::getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
-    common_data.deterioration = 1;
+//    ItemCommonData common_data;
+//    common_data.tech         = tech_level;
+//#ifdef USE_MODULES
+//    common_data.modules_num = meti::getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
+//#endif
+//    common_data.mass            = meti::getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
+//    common_data.condition_max   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
+//    common_data.deterioration = 1;
 
-    lazer->SetDamageOrig(damage_orig);
-    lazer->SetRadiusOrig(radius_orig);
-    //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
-    lazer->setItemCommonData(common_data);
+//    lazer->SetDamageOrig(damage_orig);
+//    lazer->SetRadiusOrig(radius_orig);
+//    //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
+//    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
+//    lazer->setItemCommonData(common_data);
 
-    lazer->updateProperties();
-    lazer->CountPrice();
+//    lazer->updateProperties();
+//    lazer->countPrice();
 }
 
 } // namespace item
-
+} // namespace builder

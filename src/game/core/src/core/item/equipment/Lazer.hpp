@@ -20,52 +20,139 @@
 
 #include "Base.hpp"
 
-class SpaceObject;
-class ItemSlot;
-
+namespace descriptor {
 namespace item {
 
-class Lazer : public control::item::BaseEquipment
+class Lazer : public BaseEquipment
 {
-    public:
-        Lazer(int_t id);
-        virtual ~Lazer();
+public:
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
 
-        void SetDamageOrig(int damage_orig) { m_damage_orig = damage_orig; }
-        void SetRadiusOrig(int radius_orig) { m_radius_orig = radius_orig; }
+    static const int DAMAGE_MIN;
+    static const int DAMAGE_MAX;
+    static const float DAMAGE_TECH_RATE;
 
-        int damage() const override final { return m_damage; }
-        int radius() const override final { return m_radius; }
-        
-        void FireEvent(SpaceObject*, ItemSlot*, float, bool);
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
 
-        virtual void updateProperties();
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
 
-        void CountPrice();
+    static const float DAMAGE_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
 
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:
-        int m_damage_orig;
-        int m_damage_add;
-        int m_damage;
+public:
+    Lazer();
+    ~Lazer() = default;
+    Lazer(const std::string& data);
+    std::string data() const;
 
-        int m_radius_orig;
-        int m_radius_add;
-        int m_radius;
+    void setDamage(int damage) { m_damage = damage; }
+    void setRadius(int radius) { m_radius = radius; }
 
-        //              jeti::control::TextureOb* texOb_turrel;
-        //              jeti::control::TextureOb* texOb_lazerEffect;
+    int damage() const { return m_damage; }
+    int radius() const { return m_radius; }
 
-        void virtual addUniqueInfo();
-        std::string GetDamageStr();
-        std::string GetRadiusStr();
+    std::string info() const {
+        std::string result = "descriptor::item::Lazer:\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+private:
+    int m_damage = 0;
+    int m_radius = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_damage;
+        ar & m_radius;
+    }
 };
 
 } // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Lazer : public BaseEquipment
+{
+public:
+    Lazer();
+    ~Lazer() = default;
+    Lazer(const std::string& data);
+    std::string data() const;
+
+    void setDamage(int damage) { m_damage = damage; }
+    void setRadius(int radius) { m_radius = radius; }
+
+    int damage() const { return m_damage; }
+    int radius() const { return m_radius; }
+
+private:
+    int m_damage = 0;
+    int m_radius = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_damage;
+        ar & m_radius;
+    }
+};
+
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Lazer : public BaseEquipment
+{
+public:
+    Lazer(model::item::Lazer*);
+    virtual ~Lazer() = default;
+
+    //void FireEvent(SpaceObject*, ItemSlot*, float, bool);
+
+    virtual void updateProperties();
+
+    void countPrice();
+
+protected:
+    model::item::Lazer* model() const { return m_model_lazer; }
+    descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
+
+private:
+    model::item::Lazer* m_model_lazer = nullptr;
+    descriptor::item::Lazer* m_descriptor_lazer = nullptr;
+
+    int m_damage_add = 0;
+    int m_radius_add = 0;
+
+    //              jeti::control::TextureOb* texOb_turrel;
+    //              jeti::control::TextureOb* texOb_lazerEffect;
+
+    void virtual addUniqueInfo();
+    std::string damageStr();
+    std::string radiusStr();
+};
+
+} // namespace item
+} // namespace control

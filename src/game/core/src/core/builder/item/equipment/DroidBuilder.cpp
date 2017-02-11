@@ -19,7 +19,6 @@
 
 #include "DroidBuilder.hpp"
 #include <core/item/equipment/Droid.hpp>
-#include <core/managers/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 
