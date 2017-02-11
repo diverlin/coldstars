@@ -73,7 +73,7 @@ descriptor::Starsystem
 getNewStarsystem(int race)
 {
     descriptor::Starsystem descriptor;
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
 
@@ -90,14 +90,14 @@ namespace {
 int_t meshDescriptorIdFromType(const mesh::type& type) {
     auto& collector = core::global::get().descriptors().mesh();
     descriptor::Mesh* descriptor = collector.random(int_t(type));
-    assert(descriptor->id() != -1);
+    assert(descriptor->id() != NONE);
     return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const texture::type& type) {
     auto& collector = core::global::get().descriptors().material();
     descriptor::Material* descriptor = collector.random(int_t(type));
-    assert(descriptor->id() != -1);
+    assert(descriptor->id() != NONE);
     return descriptor->id();
 }
 
@@ -127,8 +127,8 @@ getNewStar()
     descr.setTexture(textureDescriptorIdFromType (texture::type::STAR_ID));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_ID));
 
-    assert(descr.texture() != -1);
-    assert(descr.mesh() != -1);
+    assert(descr.texture() != NONE);
+    assert(descr.mesh() != NONE);
 
     return descr;
 }
@@ -156,8 +156,8 @@ getNewPlanet()
     descr.setTexture(textureDescriptorIdFromType (texture::type::PLANET_ID));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_ID));
 
-    assert(descr.texture() != -1);
-    assert(descr.mesh() != -1);
+    assert(descr.texture() != NONE);
+    assert(descr.mesh() != NONE);
 
     return descr;
 
@@ -242,8 +242,8 @@ getNewAsteroid()
     descr.setTexture(textureDescriptorIdFromType (texture::type::ASTEROID_ID));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED_ID));
 
-    assert(descr.texture() != -1);
-    assert(descr.mesh() != -1);
+    assert(descr.texture() != NONE);
+    assert(descr.mesh() != NONE);
 
     return descr;
 }
@@ -567,10 +567,10 @@ namespace item {
 descriptor::item::Bak
 getNewBak(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int (race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int (tech::type::LEVEL0);
     }
 
@@ -606,10 +606,10 @@ getNewBak(int race, int tech_level)
 descriptor::item::Drive
 getNewDrive(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int (race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int (tech::type::LEVEL0);
     }
 
@@ -644,10 +644,10 @@ getNewDrive(int race, int tech_level)
 descriptor::item::Droid
 getNewDroid(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
     }
 
@@ -671,7 +671,7 @@ getNewDroid(int race, int tech_level)
     // descriptor::item::BaseEquipment
     descr.setModules(modules);
 
-    // descriptor::Drive
+    // descriptor::Droid
     descr.setRepair(repair);
 
     return descr;
@@ -681,10 +681,10 @@ getNewDroid(int race, int tech_level)
 descriptor::item::Grapple
 getNewGrapple(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
     }
 
@@ -720,6 +720,44 @@ getNewGrapple(int race, int tech_level)
     return descr;
 }
 
+descriptor::item::Lazer
+getNewLazer(int race, int tech_level)
+{
+    if (race == NONE) {
+        race = int(race::type::R0_ID);
+    }
+    if (tech_level == NONE) {
+        tech_level = int(tech::type::LEVEL0);
+    }
+
+    int modules       = meti::getRandInt(descriptor::item::Lazer::MODULES_NUM_MIN, descriptor::item::Lazer::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(descriptor::item::Lazer::MASS_MIN,        descriptor::item::Lazer::MASS_MAX);
+    int condition     = meti::getRandInt(descriptor::item::Lazer::CONDITION_MIN,   descriptor::item::Lazer::CONDITION_MAX);
+    int deterioration = 1;
+    int price = meti::getRandInt(100, 1000);
+
+    int damage = meti::getRandInt(descriptor::item::Lazer::DAMAGE_MIN, descriptor::item::Lazer::DAMAGE_MAX) * (1 + descriptor::item::Lazer::DAMAGE_TECH_RATE*(int)tech_level);
+    int radius = meti::getRandInt(descriptor::item::Lazer::RADIUS_MIN, descriptor::item::Lazer::RADIUS_MAX) * (1 + descriptor::item::Lazer::RADIUS_TECH_RATE*(int)tech_level);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
+
+    descriptor::item::Lazer descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Lazer
+    descr.setDamage(damage);
+    descr.setRadius(radius);
+
+    return descr;
+}
+
 
 } // anemspace item
 
@@ -727,10 +765,10 @@ getNewGrapple(int race, int tech_level)
 descriptor::BaseOLD
 getNewScaner(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
     }
 
@@ -756,10 +794,10 @@ getNewScaner(int race, int tech_level)
 descriptor::BaseOLD
 getNewRadar(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
     }
 
@@ -785,10 +823,10 @@ getNewRadar(int race, int tech_level)
 descriptor::BaseOLD
 getNewProtector(int race, int tech_level)
 {
-    if (race == -1) {
+    if (race == NONE) {
         race = int(race::type::R0_ID);
     }
-    if (tech_level == -1) {
+    if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
     }
 
@@ -814,10 +852,10 @@ getNewProtector(int race, int tech_level)
 descriptor::BaseOLD
 getNewBomb(int damage, int radius)
 {
-    if (damage == -1) {
+    if (damage == NONE) {
          damage = meti::getRandInt(10, 100);
     }
-    if (radius == -1) {
+    if (radius == NONE) {
         radius = meti::getRandInt(100, 300);
     }
 

@@ -30,6 +30,7 @@ class Bak;
 class Drive;
 class Droid;
 class Grapple;
+class Lazer;
 } // namespace item
 
 class Galaxy;
@@ -46,7 +47,7 @@ class BaseOLD; // TODO: remove this
 /* world */
 descriptor::Galaxy getNewGalaxy(const std::vector<int_t>&);
 descriptor::Sector getNewSector(const std::vector<int_t>&);
-descriptor::Starsystem getNewStarsystem(int race = -1);
+descriptor::Starsystem getNewStarsystem(int race = NONE);
 
 /* spaceobjects */
 descriptor::Star getNewStar();
@@ -59,16 +60,17 @@ descriptor::BaseOLD getNewContainer();
 
 /* items */
 namespace item {
-descriptor::item::Bak getNewBak(int race = -1, int tech_level = -1);
-descriptor::item::Drive getNewDrive(int race = -1, int tech_level = -1);
-descriptor::item::Droid getNewDroid(int race = -1, int tech_level = -1);
-descriptor::item::Grapple getNewGrapple(int race = -1, int tech_level = -1);
+descriptor::item::Bak getNewBak(int race = NONE, int tech_level = NONE);
+descriptor::item::Drive getNewDrive(int race = NONE, int tech_level = NONE);
+descriptor::item::Droid getNewDroid(int race = NONE, int tech_level = NONE);
+descriptor::item::Grapple getNewGrapple(int race = NONE, int tech_level = NONE);
+descriptor::item::Lazer getNewLazer(int race = NONE, int tech_level = NONE);
 } // namespace item
 
 
-descriptor::BaseOLD getNewScaner(int race = -1, int tech_level = -1);
-descriptor::BaseOLD getNewRadar(int race = -1, int tech_level = -1);
-descriptor::BaseOLD getNewProtector(int race = -1, int tech_level = -1);
-descriptor::BaseOLD getNewBomb(int damage = -1, int radius = -1);
+descriptor::BaseOLD getNewScaner(int race = NONE, int tech_level = NONE);
+descriptor::BaseOLD getNewRadar(int race = NONE, int tech_level = NONE);
+descriptor::BaseOLD getNewProtector(int race = NONE, int tech_level = NONE);
+descriptor::BaseOLD getNewBomb(int damage = NONE, int radius = NONE);
 
 } // namespace descriptor

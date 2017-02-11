@@ -113,6 +113,38 @@ TEST(descriptor, droid) {
     EXPECT_EQ(descr.info(), descr_copy.info());
 }
 
+TEST(descriptor, grapple) {
+    descriptor::item::Grapple descr = descriptor::item::getNewGrapple();
+    descriptor::item::Grapple descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Grapple
+    EXPECT_EQ(descr.strength(), descr_copy.strength());
+    EXPECT_EQ(descr.radius(), descr_copy.radius());
+    EXPECT_EQ(descr.speed(), descr_copy.speed());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
+
+TEST(descriptor, lazer) {
+    descriptor::item::Lazer descr = descriptor::item::getNewLazer();
+    descriptor::item::Lazer descr_copy(descr.data());
+
+    compareBaseEquipmentDescriptors(descr, descr_copy);
+
+    // descriptor::item::Grapple
+    EXPECT_EQ(descr.damage(), descr_copy.damage());
+    EXPECT_EQ(descr.radius(), descr_copy.radius());
+
+    // general
+    EXPECT_EQ(descr.data(), descr_copy.data());
+    EXPECT_EQ(descr.info(), descr_copy.info());
+}
+
+
 //void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)
 //{
 //    //EXPECT_EQ(descr.id(), item->id()); // wrong
