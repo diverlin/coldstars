@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/item/BaseItem.hpp>
+#include <core/model/item/BaseItem.hpp>
 
 namespace model {
 namespace item {
