@@ -67,7 +67,7 @@ public:
         std::string result = "descriptor::item::Drive:\n";
         result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
         result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

@@ -62,7 +62,7 @@ public:
         std::string result = "descriptor::item::Lazer:\n";
         result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
         result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

@@ -72,7 +72,7 @@ public:
         result += std::string(" strength = ") + std::to_string(m_strength) + "\n";
         result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
         result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

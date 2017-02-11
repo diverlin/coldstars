@@ -28,7 +28,6 @@
 #include <ceti/Logger.hpp>
 
 namespace control {
-namespace item {
 
 Equipment::Equipment()
 {
@@ -146,5 +145,4 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 ////    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-} // namespace item
 } // namespace control

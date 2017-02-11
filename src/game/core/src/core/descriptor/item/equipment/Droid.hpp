@@ -56,7 +56,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Droid:\n";
         result += std::string(" repair = ") + std::to_string(m_repair) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

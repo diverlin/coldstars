@@ -21,7 +21,6 @@
 #include <core/descriptor/item/Item.hpp>
 
 namespace descriptor {
-namespace item {
 
 class Equipment : public Item
 {
@@ -35,7 +34,7 @@ public:
 
 protected:
     std::string info() const {
-        std::string result = "descriptor::item::BaseEquipment:\n";
+        std::string result = "descriptor::Equipment:\n";
         result += std::string(" modules = ") + std::to_string(m_modules) + "\n";
         result += Item::info();
         return result;
@@ -53,7 +52,6 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 
 

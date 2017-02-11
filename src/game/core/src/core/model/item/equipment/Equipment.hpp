@@ -21,7 +21,6 @@
 #include <core/model/item/Item.hpp>
 
 namespace model {
-namespace item {
 
 class Equipment : public Item
 {
@@ -41,5 +40,4 @@ private:
 
 };
 
-} // namespace item
 } // namespace model

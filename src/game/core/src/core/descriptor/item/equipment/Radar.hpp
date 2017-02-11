@@ -55,7 +55,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Radar:\n";
         result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 

@@ -57,7 +57,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::item::Scaner:\n";
         result += std::string(" scan = ") + std::to_string(m_scan) + "\n";
-        result += descriptor::item::Equipment::info();
+        result += descriptor::Equipment::info();
         return result;
     }
 
