@@ -294,19 +294,19 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
 
 void God::__createShips(Starsystem* starsystem, int ship_num, race::type npc_race_id, entity::type subtype_id, entity::type subsubtype_id) const
 {
-    entity::type npc_subtype_id = entity::type::NONE_ID;
-    entity::type npc_subsubtype_id = entity::type::NONE_ID;
+    entity::type npc_subtype_id = entity::type::NONE;
+    entity::type npc_subsubtype_id = entity::type::NONE;
 
     for (int i=0; i<ship_num; i++)
     {
         // VERY UGLY LOGIC START (TODO)
-        if (subtype_id == entity::type::NONE_ID) {
+        if (subtype_id == entity::type::NONE) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
         } else {
             npc_subtype_id    = subtype_id;
         }
 
-        if (subsubtype_id == entity::type::NONE_ID) {
+        if (subsubtype_id == entity::type::NONE) {
             npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
         } else {
             npc_subsubtype_id = subsubtype_id;

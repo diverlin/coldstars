@@ -22,7 +22,7 @@ std::string to_string(entity::type type_id)
 {
     switch(type_id)
     {
-        case entity::type::NONE_ID: { return "entity::type::NONE_ID"; break; }
+        case entity::type::NONE: { return "entity::type::NONE_ID"; break; }
             
         case entity::type::VEHICLE_ID:         { return "entity::type::VEHICLE_ID"; break; }
         case entity::type::SHIP_ID:         { return "entity::type::SHIP_ID"; break; }

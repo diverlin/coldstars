@@ -76,7 +76,7 @@ void StoreBuilder::createInternals(Store* store) const
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
     {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::type::NONE_ID);
+        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::type::NONE);
         store->addVehicleSlot(vehicle_slot);
     }
 
