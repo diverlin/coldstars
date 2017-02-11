@@ -979,11 +979,12 @@ void Vehicle::_updatePropRadar()
     if (!m_radarSlot->item())
         return;
 
-    if (!m_radarSlot->radarEquipment()->isFunctioning())
-        return;
+    assert(false);
+//    if (!m_radarSlot->radarEquipment()->isFunctioning())
+//        return;
 
-    model()->properties().radar = m_radarSlot->radarEquipment()->radius();
-    model()->properties().equipment_radar = true;
+//    model()->properties().radar = m_radarSlot->radarEquipment()->radius();
+//    model()->properties().equipment_radar = true;
 }
 
 void Vehicle::_updatePropJump()

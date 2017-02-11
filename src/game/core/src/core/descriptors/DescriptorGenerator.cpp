@@ -758,6 +758,79 @@ getNewLazer(int race, int tech_level)
     return descr;
 }
 
+descriptor::item::Protector
+getNewProtector(int race, int tech_level)
+{
+    if (race == NONE) {
+        race = int(race::type::R0_ID);
+    }
+    if (tech_level == NONE) {
+        tech_level = int(tech::type::LEVEL0);
+    }
+
+    int modules = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
+    int condition = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
+    int deterioration = 1;
+    int price = meti::getRandInt(100, 1000);
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
+
+    int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
+
+    descriptor::item::Protector descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Protector
+    descr.setProtection(protection);
+
+    return descr;
+}
+
+descriptor::item::Radar
+getNewRadar(int race, int tech_level)
+{
+    if (race == NONE) {
+        race = int(race::type::R0_ID);
+    }
+    if (tech_level == NONE) {
+        tech_level = int(tech::type::LEVEL0);
+    }
+
+    int modules = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
+    int condition = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
+    int deterioration = 1;
+    int price = meti::getRandInt(100, 1000);
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
+
+    int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
+
+    descriptor::item::Radar descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
+
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Radar
+    descr.setRadius(radius);
+
+    return descr;
+}
 
 } // anemspace item
 
@@ -787,64 +860,6 @@ getNewScaner(int race, int tech_level)
     addItemCommonFields(descriptor,
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::SCAN, scan);
-
-    return descriptor;
-}
-
-descriptor::BaseOLD
-getNewRadar(int race, int tech_level)
-{
-    if (race == NONE) {
-        race = int(race::type::R0_ID);
-    }
-    if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
-    }
-
-    int modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    int mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    int condition_max   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
-    int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
-
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
-
-    int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
-
-    descriptor::BaseOLD descriptor(descriptor::Type::RADAR);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::RADIUS, radius);
-
-    return descriptor;
-}
-
-descriptor::BaseOLD
-getNewProtector(int race, int tech_level)
-{
-    if (race == NONE) {
-        race = int(race::type::R0_ID);
-    }
-    if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
-    }
-
-    int modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
-    int mass            = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
-    int condition_max   = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
-    int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
-
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
-
-    int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
-
-    descriptor::BaseOLD descriptor(descriptor::Type::PROTECTOR);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::PROTECTION, protection);
 
     return descriptor;
 }

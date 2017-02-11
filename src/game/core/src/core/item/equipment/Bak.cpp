@@ -17,7 +17,7 @@
 */
 
 #include "Bak.hpp"
-#include <core/common/constants.hpp>
+
 #ifdef USE_MODULES
 #include <core/item/modules/BakModule.hpp>
 #endif // USE_MODULES
@@ -41,8 +41,8 @@ const int Bak::MASS_MAX = 40;
 const int Bak::CONDITION_MIN = 30;
 const int Bak::CONDITION_MAX = 100;
 
-const float Bak::FUEL_WEIGHT = 0.7;
-const float Bak::MODULES_NUM_WEIGHT = 0.3;
+const float Bak::FUEL_WEIGHT = 0.7f;
+const float Bak::MODULES_NUM_WEIGHT = 0.3f;
 
 Bak::Bak()
 {

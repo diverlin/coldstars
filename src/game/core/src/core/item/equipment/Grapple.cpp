@@ -16,21 +16,14 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#include <jeti/Render.hpp>
 #include "Grapple.hpp"
+
 #ifdef USE_MODULES
-#include <item/modules/GrappleModule.hpp>
+#include <core/item/modules/GrappleModule.hpp>
 #endif
 
-#include <common/constants.hpp>
-//#include <ceti/StringUtils.hpp>
+#include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-#include <slots/ItemSlot.hpp>
-#include <spaceobjects/Vehicle.hpp>
-#include <core/spaceobjects/SpaceObject.hpp>
-//#include <client/resources/GuiTextureObCollector.hpp>
-
 
 namespace descriptor {
 namespace item {

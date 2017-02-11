@@ -21,39 +21,120 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Base.hpp"
 
+namespace descriptor {
 namespace item {
 
-class Radar : public control::item::BaseEquipment
+class Radar : public BaseEquipment
 {
-    public:
-        Radar(int_t id);
-        virtual ~Radar();
+public:
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
 
-        void SetRadiusOrig(int radius_orig)   { m_radius_orig = radius_orig; }
-        int radius() const override final { return m_radius; }
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
 
-        virtual void updateProperties();
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
 
-        void CountPrice();
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
 
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
+public:
+    Radar();
+    ~Radar() = default;
+    Radar(const std::string& data);
+    std::string data() const;
 
-    private:
-        int m_radius_orig;
-        int m_radius_add;
-        int m_radius;
+    void setRadius(int radius) { m_radius = radius; }
 
-        void virtual addUniqueInfo();
-        std::string GetRadiusStr();
+    int radius() const { return m_radius; }
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    std::string info() const {
+        std::string result = "descriptor::item::Radar:\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_radius = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+    }
 };
 
 } // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Radar : public BaseEquipment
+{
+public:
+    Radar();
+    ~Radar() = default;
+    Radar(const std::string& data);
+    std::string data() const;
+
+    void setRadius(int radius) { m_radius = radius; }
+
+    int radius() const { return m_radius; }
+
+private:
+    int m_radius = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Radar : public BaseEquipment
+{
+public:
+    Radar(model::item::Radar*);
+    virtual ~Radar() = default;
+
+    virtual void updateProperties();
+
+    void countPrice();
+
+protected:
+    model::item::Radar* model() const { return m_model_radar; }
+    descriptor::item::Radar* descriptor() const { return m_descriptor_radar; }
+
+private:
+    model::item::Radar* m_model_radar = nullptr;
+    descriptor::item::Radar* m_descriptor_radar = nullptr;
+
+    int m_radius_add = 0;
+
+    void virtual addUniqueInfo();
+    std::string radiusStr();
+};
+
+} // namespace item
+} // namespace control
 
 
 

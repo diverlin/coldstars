@@ -19,28 +19,37 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Radar;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
+namespace item {
+class Radar;
+} // namespace item
+} // namespace model
+
+namespace builder {
 namespace item {
 
-class Radar;
-
-class RadarBuilder
+class Radar
 {
 public:
-    RadarBuilder();
-    ~RadarBuilder();
+    Radar() = default;
+    ~Radar() = default;
 
-    Radar* getNew() const;
-    Radar* createTemplate(int_t id = NONE) const;
-    Radar* getNew(const descriptor::BaseOLD&) const;
+    static model::item::Radar* getNew();
+    static model::item::Radar* getNew(const std::string&);
+    static model::item::Radar* getNew(const descriptor::item::Radar&);
 
 private:
-    void createInternals(Radar*, const descriptor::BaseOLD&) const;
+    static model::item::Radar* createTemplate();
+    static void createInternals(model::item::Radar*, const descriptor::item::Radar&);
 }; 
 
 } // namespace item
+} // namespace builder

@@ -17,13 +17,13 @@
 */
 
 #include "Drive.hpp"
-#include <core/common/constants.hpp>
+
 #ifdef USE_MODULES
-#include <item/modules/DriveModule.hpp>
+#include <core/item/modules/DriveModule.hpp>
 #endif // USE_MODULES
 
-#include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
 
 
 namespace descriptor {

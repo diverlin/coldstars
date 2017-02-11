@@ -115,7 +115,6 @@ private:
     }
 };
 
-
 } // namespace item
 } // namespace model
 

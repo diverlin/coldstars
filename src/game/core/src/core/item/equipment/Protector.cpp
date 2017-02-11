@@ -17,28 +17,84 @@
 */
 
 #include "Protector.hpp"
-#include "../../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
-#include <ceti/Logger.hpp>
+
 #ifdef USE_MODULES
-#include <item/modules/ProtectorModule.hpp>
+#include <core/item/modules/ProtectorModule.hpp>
 #endif
 
+#include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
+
+namespace descriptor {
 namespace item {
 
-Protector::Protector(int_t id)
-    :
-      m_protection_orig(0)
+const int Protector::PROTECTION_MIN = 200;
+const int Protector::PROTECTION_MAX = 400;
+const float Protector::PROTECTION_TECH_RATE = 0.1f;
+
+const int Protector::MODULES_NUM_MIN = 0;
+const int Protector::MODULES_NUM_MAX = 2;
+
+const int Protector::MASS_MIN = 10;
+const int Protector::MASS_MAX = 40;
+const int Protector::CONDITION_MIN = 100;
+const int Protector::CONDITION_MAX = 1000;
+
+const float Protector::PROTECTION_WEIGHT = 0.6f;
+const float Protector::MODULES_NUM_WEIGHT = 0.4f;
+
+Protector::Protector()
 {
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::PROTECTOR_EQUIPMENT_ID);
+    setDescriptor(descriptor::type::PROTECTOR_EQUIPMENT);
 }
 
-/* virtual */
-Protector::~Protector()
-{}
+Protector::Protector(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Protector::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespce item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+Protector::Protector()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::PROTECTOR_EQUIPMENT_ID);
+}
+
+Protector::Protector(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Protector::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+Protector::Protector(model::item::Protector* model)
+    :
+      m_model_protector(model)
+{
+}
 
 /* virtual */
 void Protector::updateProperties()
@@ -51,19 +107,19 @@ void Protector::updateProperties()
     }
 #endif
 
-    m_protection = m_protection_orig + m_protection_add;
+    model()->setProtection(descriptor()->protection() + m_protection_add);
 }
 
 void Protector::CountPrice()
 {
-    float protection_rate    = (float)m_protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
+    float protection_rate    = (float)descriptor()->protection() / descriptor::item::Protector::PROTECTION_MIN;
+    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Protector::MODULES_NUM_MAX;
 
-    float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate +
-            EQUIPMENT::PROTECTOR::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Protector::PROTECTION_WEIGHT * protection_rate +
+            descriptor::item::Protector::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::PROTECTOR::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data.condition_max;
+    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Protector::MASS_MIN;
+    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Protector::CONDITION_MIN;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -74,60 +130,14 @@ void Protector::addUniqueInfo()
     //        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
 }
 
-std::string Protector::GetProtectionStr()
+std::string Protector::protectionStr()
 {
-    if (m_protection_add == 0)
-        return std::to_string(m_protection_orig);
-    else
-        return std::to_string(m_protection_orig) + "+" + std::to_string(m_protection_add);
-}
-
-/*virtual*/
-void Protector::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "protector_equipment." + std::to_string(id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Protector::SaveData(save_ptree, root);
-}
-
-/*virtual*/
-void Protector::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Protector::LoadData(load_ptree);
-}
-
-/*virtual*/
-void Protector::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Protector::ResolveData();
-}
-
-void Protector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
-    
-//    save_ptree.put(root+"protection_orig", m_protection_orig);
-}
-
-void Protector::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-//    m_protection_orig = load_ptree.get<int>("protection_orig");
-}                
-
-void Protector::ResolveData()
-{
-//    LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
+    if (m_protection_add) {
+        return std::to_string(descriptor()->protection()) + "+" + std::to_string(m_protection_add); }
+    else {
+        return std::to_string(descriptor()->protection());
+    }
 }
 
 } // namespace item
-
+} // namespace control

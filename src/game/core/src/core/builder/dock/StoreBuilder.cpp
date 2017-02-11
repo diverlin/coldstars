@@ -116,8 +116,9 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->addItem(core::global::get().rocketBuilder().getNew());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
-        store->addItem(core::global::get().radarBuilder().getNew(descr));
+        assert(false);
+//        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::RADAR);
+//        store->addItem(core::global::get().radarBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
         assert(false);
@@ -130,8 +131,9 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 //        store->addItem(core::global::get().driveBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
-        store->addItem(core::global::get().protectorBuilder().getNew(descr));
+        assert(false);
+//        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+//        store->addItem(core::global::get().protectorBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<bak_num; i++) {
         assert(false);

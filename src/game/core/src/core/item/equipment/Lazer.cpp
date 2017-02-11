@@ -18,19 +18,12 @@
 
 #include "Lazer.hpp"
 
-#include <common/constants.hpp>
-#include <ceti/Logger.hpp>
-
-#include <meti/RandUtils.hpp>
-
 #ifdef USE_MODULES
-#include <item/modules/LazerModule.hpp>
+#include <core/item/modules/LazerModule.hpp>
 #endif
-#include "../../slots/ItemSlot.hpp"
-#include "../../spaceobjects/Vehicle.hpp"
-#include "../../world/starsystem.hpp"
-#include "../../parts/Turrel.hpp"
 
+#include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
 
 namespace descriptor {
 namespace item {

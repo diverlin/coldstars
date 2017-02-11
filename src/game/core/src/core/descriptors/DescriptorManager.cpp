@@ -158,9 +158,9 @@ Manager::generate()
         add(item::getNewDrive());
         add(item::getNewDroid());
         add(item::getNewGrapple());
+        add(item::getNewProtector());
+        add(item::getNewRadar());
         add(getNewScaner());
-        add(getNewRadar());
-        add(getNewProtector());
         add(getNewBomb());
     }
 
