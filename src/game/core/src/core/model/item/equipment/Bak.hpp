@@ -16,50 +16,39 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
 #include "Base.hpp"
 
-namespace descriptor {
-namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
-
 namespace model {
 namespace item {
-class Protector;
-} // namespace item
-} // namespace model
 
-namespace control {
-namespace item {
-
-class Protector : public BaseEquipment
+class Bak : public BaseEquipment
 {
 public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
+    Bak();
+    ~Bak() = default;
+    Bak(const std::string& data);
+    std::string data() const;
 
-    virtual void updateProperties();
+    void setFuel(int fuel) { m_fuel = fuel; }
 
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
+    int fuel() const { return m_fuel; }
 
 private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
+    int m_fuel = 0;
 
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_fuel;
+    }
 };
 
 } // namespace item
-} // namespace control
+} // namespace model
+
+
+

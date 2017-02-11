@@ -18,6 +18,7 @@
 
 #include "Protector.hpp"
 #include <core/descriptor/item/equipment/Protector.hpp>
+#include <core/model/item/equipment/Protector.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/ProtectorModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Protector::Protector()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::PROTECTOR_EQUIPMENT_ID);
-}
-
-Protector::Protector(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Protector::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

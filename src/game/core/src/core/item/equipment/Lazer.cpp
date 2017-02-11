@@ -18,6 +18,7 @@
 
 #include "Lazer.hpp"
 #include <core/descriptor/item/equipment/Lazer.hpp>
+#include <core/model/item/equipment/Lazer.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/LazerModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Lazer::Lazer()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::LAZER_EQUIPMENT_ID);
-}
-
-Lazer::Lazer(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Lazer::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

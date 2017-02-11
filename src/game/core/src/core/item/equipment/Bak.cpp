@@ -18,6 +18,7 @@
 
 #include "Bak.hpp"
 #include <core/descriptor/item/equipment/Bak.hpp>
+#include <core/model/item/equipment/Bak.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/BakModule.hpp>
@@ -26,30 +27,6 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
-namespace model {
-namespace item {
-
-Bak::Bak()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::BAK_EQUIPMENT_ID);
-}
-
-Bak::Bak(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Bak::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
-
 
 namespace control {
 namespace item {
@@ -57,9 +34,7 @@ namespace item {
 Bak::Bak(model::item::Bak* model)
     :
       m_model_bak(model)
-{
-
-}
+{}
 
 int
 Bak::fuelMiss() const

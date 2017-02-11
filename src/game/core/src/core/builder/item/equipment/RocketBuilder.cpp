@@ -17,7 +17,8 @@
 */
 
 #include "RocketBuilder.hpp"
-#include <core/item/equipment/Rocket.hpp>
+#include <core/model/item/equipment/Rocket.hpp>
+#include <core/descriptor/item/equipment/Rocket.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 

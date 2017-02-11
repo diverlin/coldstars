@@ -29,34 +29,9 @@ class Scaner;
 
 namespace model {
 namespace item {
-
-class Scaner : public BaseEquipment
-{
-public:
-    Scaner();
-    ~Scaner() = default;
-    Scaner(const std::string& data);
-    std::string data() const;
-
-    void setScan(int scan) { m_scan = scan; }
-
-    int scan() const { return m_scan; }
-
-private:
-    int m_scan = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_scan;
-    }
-};
-
+class Scaner;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

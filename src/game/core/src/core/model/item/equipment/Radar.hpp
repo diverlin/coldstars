@@ -21,55 +21,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Base.hpp"
 
-
-namespace descriptor {
-namespace item {
-class Radar;
-} // namespace item
-} // namespace descriptor
-
 namespace model {
-namespace item {
-class Radar;
-} // namespace item
-} // namespace model
-
-namespace control {
 namespace item {
 
 class Radar : public BaseEquipment
 {
 public:
-    Radar(model::item::Radar*);
-    virtual ~Radar() = default;
+    Radar();
+    ~Radar() = default;
+    Radar(const std::string& data);
+    std::string data() const;
 
-    virtual void updateProperties();
+    void setRadius(int radius) { m_radius = radius; }
 
-    void countPrice();
-
-protected:
-    model::item::Radar* model() const { return m_model_radar; }
-    descriptor::item::Radar* descriptor() const { return m_descriptor_radar; }
+    int radius() const { return m_radius; }
 
 private:
-    model::item::Radar* m_model_radar = nullptr;
-    descriptor::item::Radar* m_descriptor_radar = nullptr;
+    int m_radius = 0;
 
-    int m_radius_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string radiusStr();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+    }
 };
 
 } // namespace item
-} // namespace control
-
-
-
-
-
-
-
-
-
+} // namespace model
 

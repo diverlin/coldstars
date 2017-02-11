@@ -18,6 +18,7 @@
 
 #include "Rocket.hpp"
 #include <core/descriptor/item/equipment/Rocket.hpp>
+#include <core/model/item/equipment/Rocket.hpp>
 
 #ifdef USE_MODULES
 #include <item/modules/RocketModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Rocket::Rocket()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::ROCKET_EQUIPMENT_ID);
-}
-
-Rocket::Rocket(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Rocket::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

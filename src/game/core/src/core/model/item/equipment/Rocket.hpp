@@ -16,42 +16,46 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
-#include <core/item/BaseItem.hpp>
+#include "Base.hpp"
 
-#ifdef USE_MODULES
-#include <core/item/modules/BaseModule.hpp>
-#endif
-
-namespace control {
+namespace model {
 namespace item {
 
-class BaseEquipment : public control::item::Base
+class Rocket : public BaseEquipment
 {
 public:
-    BaseEquipment();
-    virtual ~BaseEquipment();
+    Rocket();
+    ~Rocket() = default;
+    Rocket(const std::string& data);
+    std::string data() const;
 
-    virtual void putChildrenToGarbage() const;
+    void setRadius(int radius) { m_radius = radius; }
+    void setDamage(int damage) { m_damage = damage; }
+    void setAmmo(int ammo) { m_ammo = ammo; }
 
-#ifdef USE_MODULES
-    bool InsertModule(BaseModule*);
-#endif
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+    int radius() const { return m_radius; }
+    int damage() const { return m_damage; }
+    int ammo() const { return m_ammo; }
 
-protected:
-#ifdef USE_MODULES
-    std::vector<BaseModule*> modules_vec;
-#endif
+private:
+    int m_radius = 0;
+    int m_damage = 0;
+    int m_ammo = 0;
 
-    virtual void AddCommonInfo();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+        ar & m_damage;
+        ar & m_ammo;
+    }
 };
 
 } // namespace item
-} // namespace control
+} // namespace model
 

@@ -18,7 +18,7 @@
 
 
 #include "DroidBuilder.hpp"
-#include <core/item/equipment/Droid.hpp>
+#include <core/model/item/equipment/Droid.hpp>
 #include <core/common/Global.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 

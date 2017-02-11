@@ -16,42 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Rocket.hpp"
 
-#include <core/item/BaseItem.hpp>
+#include <ceti/serialization/macro.hpp>
 
-#ifdef USE_MODULES
-#include <core/item/modules/BaseModule.hpp>
-#endif
 
-namespace control {
+namespace model {
 namespace item {
 
-class BaseEquipment : public control::item::Base
+Rocket::Rocket()
 {
-public:
-    BaseEquipment();
-    virtual ~BaseEquipment();
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::ROCKET_EQUIPMENT_ID);
+}
 
-    virtual void putChildrenToGarbage() const;
+Rocket::Rocket(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-#ifdef USE_MODULES
-    bool InsertModule(BaseModule*);
-#endif
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-
-protected:
-#ifdef USE_MODULES
-    std::vector<BaseModule*> modules_vec;
-#endif
-
-    virtual void AddCommonInfo();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
-};
+std::string
+Rocket::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace item
-} // namespace control
+} // namespace model
 

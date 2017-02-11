@@ -29,38 +29,9 @@ class Drive;
 
 namespace model {
 namespace item {
-
-class Drive : public BaseEquipment
-{
-public:
-    Drive();
-    ~Drive() = default;
-    Drive(const std::string& data);
-    std::string data() const;
-
-    void setSpeed(int speed) { m_speed = speed; }
-    void setHyper(int hyper) { m_hyper = hyper; }
-
-    int speed() const { return m_speed; }
-    int hyper() const { return m_hyper; }
-
-private:
-    int m_speed = 0;
-    int m_hyper = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_speed;
-        ar & m_hyper;
-    }
-};
-
+class Drive;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

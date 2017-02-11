@@ -18,6 +18,7 @@
 
 #include "Drive.hpp"
 #include <core/descriptor/item/equipment/Drive.hpp>
+#include <core/model/item/equipment/Drive.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/DriveModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Drive::Drive()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::DRIVE_EQUIPMENT_ID);
-}
-
-Drive::Drive(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Drive::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

@@ -29,42 +29,9 @@ class Rocket;
 
 namespace model {
 namespace item {
-
-class Rocket : public BaseEquipment
-{
-public:
-    Rocket();
-    ~Rocket() = default;
-    Rocket(const std::string& data);
-    std::string data() const;
-
-    void setRadius(int radius) { m_radius = radius; }
-    void setDamage(int damage) { m_damage = damage; }
-    void setAmmo(int ammo) { m_ammo = ammo; }
-
-    int radius() const { return m_radius; }
-    int damage() const { return m_damage; }
-    int ammo() const { return m_ammo; }
-
-private:
-    int m_radius = 0;
-    int m_damage = 0;
-    int m_ammo = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_radius;
-        ar & m_damage;
-        ar & m_ammo;
-    }
-};
-
+class Rocket;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

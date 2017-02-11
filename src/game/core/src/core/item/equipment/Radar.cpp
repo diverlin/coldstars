@@ -18,6 +18,7 @@
 
 #include "Radar.hpp"
 #include <core/descriptor/item/equipment/Radar.hpp>
+#include <core/model/item/equipment/Radar.hpp>
 
 #ifdef USE_MODULES
 #include <item/modules/RadarModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Radar::Radar()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::RADAR_EQUIPMENT_ID);
-}
-
-Radar::Radar(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Radar::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {
