@@ -16,50 +16,31 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Droid.hpp"
 
-#pragma once
-
-#include "Base.hpp"
-
-namespace descriptor {
-namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
 namespace item {
-class Protector;
+
+Droid::Droid()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::DROID_EQUIPMENT_ID);
+}
+
+Droid::Droid(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Droid::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace item
 } // namespace model
 
-namespace control {
-namespace item {
 
-class Protector : public BaseEquipment
-{
-public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
-
-    virtual void updateProperties();
-
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
-
-private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
-
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
-};
-
-} // namespace item
-} // namespace control

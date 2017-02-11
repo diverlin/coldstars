@@ -18,6 +18,7 @@
 
 #include "Droid.hpp"
 #include <core/descriptor/item/equipment/Droid.hpp>
+#include <core/model/item/equipment/Droid.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/DroidModule.hpp>
@@ -25,31 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Droid::Droid()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::DROID_EQUIPMENT_ID);
-}
-
-Droid::Droid(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Droid::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
-
 
 namespace control {
 namespace item {

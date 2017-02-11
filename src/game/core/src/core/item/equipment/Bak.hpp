@@ -27,37 +27,11 @@ class Bak;
 } // namespace item
 } // namespace descriptor
 
-
 namespace model {
 namespace item {
-
-class Bak : public BaseEquipment
-{
-public:
-    Bak();
-    ~Bak() = default;
-    Bak(const std::string& data);
-    std::string data() const;
-
-    void setFuel(int fuel) { m_fuel = fuel; }
-
-    int fuel() const { return m_fuel; }
-
-private:
-    int m_fuel = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_fuel;
-    }
-};
-
+class Bak;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

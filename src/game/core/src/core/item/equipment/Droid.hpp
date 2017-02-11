@@ -29,34 +29,9 @@ class Droid;
 
 namespace model {
 namespace item {
-
-class Droid : public BaseEquipment
-{
-public:
-    Droid();
-    ~Droid() = default;
-    Droid(const std::string& data);
-    std::string data() const;
-
-    void setRepair(int repair) { m_repair = repair; }
-
-    int repair() const { return m_repair; }
-
-private:
-    int m_repair = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_repair;
-    }
-};
-
+class Droid;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

@@ -18,15 +18,14 @@
 
 
 #include "ScanerBuilder.hpp"
-#include <item/equipment/Scaner.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/descriptor/item/equipment/Scaner.hpp>
+#include <core/model/item/equipment/Scaner.hpp>
+//#include <core/managers/EntityManager.hpp>
+
+#include <core/common/Global.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 #include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
 
 namespace builder {
 namespace item {

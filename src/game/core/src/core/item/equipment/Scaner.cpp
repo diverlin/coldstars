@@ -18,6 +18,7 @@
 
 #include "Scaner.hpp"
 #include <core/descriptor/item/equipment/Scaner.hpp>
+#include <core/model/item/equipment/Scaner.hpp>
 
 #ifdef USE_MODULES
 #include <item/modules/ScanerModule.hpp>
@@ -25,31 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-
-namespace model {
-namespace item {
-
-Scaner::Scaner()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::SCANER_EQUIPMENT_ID);
-}
-
-Scaner::Scaner(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Scaner::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

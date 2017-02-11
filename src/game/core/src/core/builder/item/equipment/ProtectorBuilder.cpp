@@ -17,16 +17,14 @@
 */
 
 
-#include <builder/item/equipment/ProtectorBuilder.hpp>
-#include <item/equipment/Protector.hpp>
-#include <managers/EntityManager.hpp>
+#include "ProtectorBuilder.hpp"
+#include <core/model/item/equipment/Protector.hpp>
+#include <core/descriptor/item/equipment/Protector.hpp>
+#include <core/managers/EntityManager.hpp>
+#include <core/common/Global.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 #include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
 
 namespace builder {
 namespace item {

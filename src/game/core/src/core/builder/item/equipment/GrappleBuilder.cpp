@@ -18,7 +18,7 @@
 
 
 #include "GrappleBuilder.hpp"
-#include <core/item/equipment/Grapple.hpp>
+#include <core/model/item/equipment/Grapple.hpp>
 #include <core/common/Global.hpp>
 #include <descriptor/DescriptorManager.hpp>
 

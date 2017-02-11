@@ -20,38 +20,26 @@
 
 #include <core/item/BaseItem.hpp>
 
-#ifdef USE_MODULES
-#include <core/item/modules/BaseModule.hpp>
-#endif
-
-namespace control {
+namespace model {
 namespace item {
 
-class BaseEquipment : public control::item::Base
+class BaseEquipment : public model::item::Base
 {
 public:
-    BaseEquipment();
-    virtual ~BaseEquipment();
+    BaseEquipment() = default;
+    ~BaseEquipment() = default;
 
-    virtual void putChildrenToGarbage() const;
+private:
+    // ..
 
-#ifdef USE_MODULES
-    bool InsertModule(BaseModule*);
-#endif
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<model::item::Base>(*this);
+    }
 
-protected:
-#ifdef USE_MODULES
-    std::vector<BaseModule*> modules_vec;
-#endif
-
-    virtual void AddCommonInfo();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
 };
 
 } // namespace item
-} // namespace control
-
+} // namespace model

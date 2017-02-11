@@ -21,45 +21,41 @@
 
 #include "Base.hpp"
 
-namespace descriptor {
-namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
-
 namespace model {
 namespace item {
-class Protector;
-} // namespace item
-} // namespace model
 
-namespace control {
-namespace item {
-
-class Protector : public BaseEquipment
+class Grapple : public BaseEquipment
 {
 public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
+    Grapple();
+    ~Grapple() = default;
+    Grapple(const std::string& data);
+    std::string data() const;
 
-    virtual void updateProperties();
+    void setStrength(int strength)     { m_strength = strength; }
+    void setRadius(int radius)         { m_radius = radius; }
+    void setSpeed(int speed)           { m_speed = speed; }
 
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
+    int strength() const { return m_strength; }
+    int radius() const { return m_radius; }
+    int speed() const { return m_speed; }
 
 private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
+    int m_strength = 0;
+    int m_radius = 0;
+    int m_speed = 0;
 
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_strength;
+        ar & m_radius;
+        ar & m_speed;
+    }
 };
 
 } // namespace item
-} // namespace control
+} // namespace model
+

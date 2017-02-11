@@ -29,42 +29,9 @@ class Grapple;
 
 namespace model {
 namespace item {
-
-class Grapple : public BaseEquipment
-{
-public:
-    Grapple();
-    ~Grapple() = default;
-    Grapple(const std::string& data);
-    std::string data() const;
-
-    void setStrength(int strength)     { m_strength = strength; }
-    void setRadius(int radius)         { m_radius = radius; }
-    void setSpeed(int speed)           { m_speed = speed; }
-
-    int strength() const { return m_strength; }
-    int radius() const { return m_radius; }
-    int speed() const { return m_speed; }
-
-private:
-    int m_strength = 0;
-    int m_radius = 0;
-    int m_speed = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseEquipment>(*this);
-        ar & m_strength;
-        ar & m_radius;
-        ar & m_speed;
-    }
-};
-
+class Grapple;
 } // namespace item
 } // namespace model
-
 
 namespace control {
 namespace item {

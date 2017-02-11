@@ -18,6 +18,7 @@
 
 #include "Grapple.hpp"
 #include <core/descriptor/item/equipment/Grapple.hpp>
+#include <core/model/item/equipment/Grapple.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/GrappleModule.hpp>
@@ -25,30 +26,6 @@
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
-
-namespace model {
-namespace item {
-
-Grapple::Grapple()
-{
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::GRAPPLE_EQUIPMENT_ID);
-}
-
-Grapple::Grapple(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Grapple::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace item
-} // namespace model
-
 
 namespace control {
 namespace item {

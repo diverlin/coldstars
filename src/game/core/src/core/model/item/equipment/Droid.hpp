@@ -21,45 +21,33 @@
 
 #include "Base.hpp"
 
-namespace descriptor {
-namespace item {
-class Protector;
-} // namespace item
-} // namespace descriptor
-
 namespace model {
 namespace item {
-class Protector;
-} // namespace item
-} // namespace model
 
-namespace control {
-namespace item {
-
-class Protector : public BaseEquipment
+class Droid : public BaseEquipment
 {
 public:
-    Protector(model::item::Protector*);
-    virtual ~Protector() = default;
+    Droid();
+    ~Droid() = default;
+    Droid(const std::string& data);
+    std::string data() const;
 
-    virtual void updateProperties();
+    void setRepair(int repair) { m_repair = repair; }
 
-    void CountPrice();
-
-
-protected:
-    model::item::Protector* model() const { return m_model_protector; }
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
+    int repair() const { return m_repair; }
 
 private:
-    model::item::Protector* m_model_protector = nullptr;
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
+    int m_repair = 0;
 
-    int m_protection_add = 0;
-
-    void virtual addUniqueInfo();
-    std::string protectionStr();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_repair;
+    }
 };
 
 } // namespace item
-} // namespace control
+} // namespace model
+
