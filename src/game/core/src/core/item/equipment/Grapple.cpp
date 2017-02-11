@@ -279,8 +279,8 @@ void Grapple::CountPrice()
             descriptor::item::Grapple::SPEED_WEIGHT * speed_rate +
             descriptor::item::Grapple::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Grapple::MASS_MIN;
-    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Grapple::CONDITION_MIN;
+    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Grapple::MASS_MIN;
+    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Grapple::CONDITION_MIN;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

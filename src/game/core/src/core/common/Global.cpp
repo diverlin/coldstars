@@ -108,7 +108,6 @@ global::global()
     , m_freezerBuilder(new item::FreezerBuilder)
     #endif
     , m_scanerBuilder(new item::ScanerBuilder)
-    , m_rocketBuilder(new item::RocketBuilder)
 
     #ifdef USE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)
@@ -159,7 +158,6 @@ global::~global()
     delete m_freezerBuilder;
 #endif // USE_EXTRA_EQUIPMENT
     delete m_scanerBuilder;
-    delete m_rocketBuilder;
 
 #ifdef USE_MODULES
     delete m_bakModuleBuilder;

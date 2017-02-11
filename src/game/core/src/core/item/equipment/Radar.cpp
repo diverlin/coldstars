@@ -29,20 +29,20 @@
 namespace descriptor {
 namespace item {
 
-const int Radar::RADIUS_MIN = 200;
-const int Radar::RADIUS_MAX = 400;
+const int Radar::RADIUS_MIN = 700;
+const int Radar::RADIUS_MAX = 1500;
 const float Radar::RADIUS_TECH_RATE = 0.1f;
 
 const int Radar::MODULES_NUM_MIN = 0;
 const int Radar::MODULES_NUM_MAX = 2;
 
 const int Radar::MASS_MIN = 10;
-const int Radar::MASS_MAX = 40;
-const int Radar::CONDITION_MIN = 100;
-const int Radar::CONDITION_MAX = 1000;
+const int Radar::MASS_MAX = 50;
+const int Radar::CONDITION_MIN = 2000;
+const int Radar::CONDITION_MAX = 10000;
 
-const float Radar::RADIUS_WEIGHT = 0.6f;
-const float Radar::MODULES_NUM_WEIGHT = 0.4f;
+const float Radar::RADIUS_WEIGHT = 0.6;
+const float Radar::MODULES_NUM_WEIGHT = 0.4;
 
 Radar::Radar()
 {
@@ -117,8 +117,8 @@ void Radar::countPrice()
 
     float effectiveness_rate  = descriptor::item::Radar::RADIUS_WEIGHT * radius_rate + descriptor::item::Radar::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate           = (float)descriptor()->mass() / descriptor::item::Radar::MASS_MIN;
-    float condition_rate      = (float)descriptor()->condition() / m_data.condition_max;
+    float mass_rate           = float(descriptor()->mass()) / descriptor::item::Radar::MASS_MIN;
+    float condition_rate      = float(descriptor()->condition()) / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

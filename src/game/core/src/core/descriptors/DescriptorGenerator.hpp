@@ -33,6 +33,7 @@ class Grapple;
 class Lazer;
 class Protector;
 class Radar;
+class Rocket;
 } // namespace item
 
 class Galaxy;
@@ -69,6 +70,7 @@ descriptor::item::Grapple getNewGrapple(int race = NONE, int tech_level = NONE);
 descriptor::item::Lazer getNewLazer(int race = NONE, int tech_level = NONE);
 descriptor::item::Protector getNewProtector(int race = NONE, int tech_level = NONE);
 descriptor::item::Radar getNewRadar(int race = NONE, int tech_level = NONE);
+descriptor::item::Rocket getNewRocket(int race = NONE, int tech_level = NONE);
 } // namespace item
 
 

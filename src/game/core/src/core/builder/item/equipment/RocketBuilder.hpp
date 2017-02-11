@@ -19,18 +19,22 @@
 
 #pragma once
 
-#include <core/types/RaceTypes.hpp>
-#include <core/types/TechLevelTypes.hpp>
-
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Rocket;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
 namespace item {
-
 class Rocket;
+} // namespace item
+} // namespace model
+
+namespace builder {
+namespace item {
 
 class RocketBuilder
 {
@@ -38,11 +42,14 @@ public:
     RocketBuilder();
     ~RocketBuilder();
 
-    Rocket* createTemplate(int_t id = NONE) const;
-    Rocket* getNew(tech::type tech_level = tech::type::NONE, race::type race_id = race::type::NONE_ID, int ammo_max_orig = NONE, int damage_orig = NONE, int radius_orig = NONE) const;
+    static model::item::Rocket* getNew();
+    static model::item::Rocket* getNew(const std::string&);
+    static model::item::Rocket* getNew(const descriptor::item::Rocket&);
 
 private:
-    void createInternals(Rocket*, tech::type, race::type, int, int, int) const;
+    static model::item::Rocket* __createTemplate();
+    static void __createInternals(model::item::Rocket*, const descriptor::item::Rocket&);
 }; 
 
 } // namespace item
+} // namespace builder

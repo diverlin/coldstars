@@ -19,67 +19,161 @@
 
 #pragma once
 
-#include <core/item/equipment/Base.hpp>
-#include <core/common/BulletData.hpp>
+#include "Base.hpp"
+//#include <core/common/BulletData.hpp>
 
-#include <ceti/type/IdType.hpp>
-
+namespace descriptor {
 namespace item {
 
-class Rocket : public control::item::BaseEquipment
-{ 
+class Rocket : public BaseEquipment
+{
 public:
-    Rocket(int_t id);
-    virtual ~Rocket();
+    static const int AMMO_MIN;
+    static const int AMMO_MAX;
+    static const float AMMO_TECH_RATE;
 
-    void SetAmmoMaxOrig(int ammo_max_orig) { m_ammo_max_orig = ammo_max_orig; }
-    void SetDamageOrig(int damage_orig)    { m_damage_orig   = damage_orig; }
-    void SetRadiusOrig(int radius_orig)    { m_radius_orig   = radius_orig; }
-    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
+    static const int RADIUS_MIN;
+    static const int RADIUS_MAX;
+    static const float RADIUS_TECH_RATE;
 
-    void SetAmmo(int ammo) { m_ammo = ammo; }
+    static const int DAMAGE_MIN;
+    static const int DAMAGE_MAX;
+    static const float DAMAGE_TECH_RATE;
 
-    int GetAmmoMax() const { return m_ammo_max; }
-    int GetAmmo()   const { return m_ammo; }
-    int damage() const override final { return m_damage; }
-    int radius() const override final { return m_radius; }
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
 
-    void FireEvent(float);
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
 
-    virtual void updateProperties();
+    static const float AMMO_WEIGHT;
+    static const float DAMAGE_WEIGHT;
+    static const float RADIUS_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
 
-    void CountPrice();
+public:
+    Rocket();
+    ~Rocket() = default;
+    Rocket(const std::string& data);
+    std::string data() const;
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+    void setRadius(int radius) { m_radius = radius; }
+    void setDamage(int damage) { m_damage = damage; }
+    void setAmmo(int ammo) { m_ammo = ammo; }
+
+    int radius() const { return m_radius; }
+    int damage() const { return m_damage; }
+    int ammo() const { return m_ammo; }
+
+    std::string info() const {
+        std::string result = "descriptor::item::Radar:\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
 
 private:
-    int m_ammo_max_orig;
-    int m_ammo_max_add;
-    int m_ammo;
-    int m_ammo_max;
+    int m_radius = 0;
+    int m_damage = 0;
+    int m_ammo = 0;
 
-    int m_damage_orig;
-    int m_damage_add;
-    int m_damage;
-
-    int m_radius_orig;
-    int m_radius_add;
-    int m_radius;
-
-    int fire_atOnce;
-
-    BulletData data_bullet;
-
-    void virtual addUniqueInfo();
-    std::string GetAmmoStr();
-    std::string GetDamageStr();
-    std::string GetRadiusStr();
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+        ar & m_damage;
+        ar & m_ammo;
+    }
 };
 
 } // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Rocket : public BaseEquipment
+{
+public:
+    Rocket();
+    ~Rocket() = default;
+    Rocket(const std::string& data);
+    std::string data() const;
+
+    void setRadius(int radius) { m_radius = radius; }
+    void setDamage(int damage) { m_damage = damage; }
+    void setAmmo(int ammo) { m_ammo = ammo; }
+
+    int radius() const { return m_radius; }
+    int damage() const { return m_damage; }
+    int ammo() const { return m_ammo; }
+
+private:
+    int m_radius = 0;
+    int m_damage = 0;
+    int m_ammo = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_radius;
+        ar & m_damage;
+        ar & m_ammo;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Rocket : public BaseEquipment
+{ 
+public:
+    Rocket(model::item::Rocket*);
+    virtual ~Rocket() = default;
+
+//    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
+
+//    void FireEvent(float);
+
+    virtual void updateProperties();
+
+    void countPrice();
+
+protected:
+    model::item::Rocket* model() const { return m_model_rocket; }
+    descriptor::item::Rocket* descriptor() const { return m_descriptor_rocket; }
+
+private:
+    model::item::Rocket* m_model_rocket = nullptr;
+    descriptor::item::Rocket* m_descriptor_rocket = nullptr;
+
+    int m_ammo_add = 0;
+    int m_damage_add = 0;
+    int m_radius_add = 0;
+
+//    int fire_atOnce;
+
+//    BulletData data_bullet;
+
+    void virtual addUniqueInfo();
+
+    std::string ammoStr();
+    std::string damageStr();
+    std::string radiusStr();
+};
+
+} // namespace item
+} // namespace control

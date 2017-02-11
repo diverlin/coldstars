@@ -113,7 +113,8 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 //        store->addItem(core::global::get().lazerBuilder().getNew());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->addItem(core::global::get().rocketBuilder().getNew());
+        assert(false);
+//        store->addItem(core::global::get().rocketBuilder().getNew());
     }
     for (unsigned int i=0; i<radar_num; i++) {
         assert(false);

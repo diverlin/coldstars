@@ -17,97 +17,112 @@
 */
 
 #include "RocketBuilder.hpp"
-#include <item/equipment/Rocket.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/item/equipment/Rocket.hpp>
+//#include <managers/EntityManager.hpp>
 
-#include <ceti/IdGenerator.hpp>
-#include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
+//#include <ceti/IdGenerator.hpp>
+//#include <ceti/Logger.hpp>
+//#include <math/rand.hpp>
+//#include <common/constants.hpp>
+#include <core/descriptors/DescriptorManager.hpp>
+#include <core/common/Global.hpp>
 
-#include <common/Global.hpp>
+//#include <descriptors/Base.hpp>
+//#include <descriptors/RaceDescriptors.hpp>
 
-#include <descriptors/Base.hpp>
-#include <descriptors/RaceDescriptors.hpp>
+//#include <meti/RandUtils.hpp>
 
-#include <meti/RandUtils.hpp>
-
+namespace builder {
 namespace item {
 
-RocketBuilder::RocketBuilder()
-{}
-
-RocketBuilder::~RocketBuilder()
-{}
-
-Rocket* RocketBuilder::createTemplate(int_t id) const
+model::item::Rocket*
+RocketBuilder::getNew()
 {
-    Rocket* rocket = new Rocket(id);
-    assert(rocket);
+    const descriptor::item::Rocket& descr = core::global::get().descriptors().rocket().random();
+    return getNew(descr);
+}
+
+model::item::Rocket*
+RocketBuilder::getNew(const std::string& data)
+{
+    descriptor::item::Rocket descr(data);
+    assert(descr.descriptor() != descriptor::type::ROCKET_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Rocket*
+RocketBuilder::getNew(const descriptor::item::Rocket& descr)
+{
+    model::item::Rocket* model = __createTemplate();
+    __createInternals(model, descr);
+
+    return model;
+}
+
+
+model::item::Rocket*
+RocketBuilder::__createTemplate()
+{
+    model::item::Rocket* model = new model::item::Rocket;
+    assert(model);
 
     assert(false);
     //core::global::get().entityManager().reg(rocket);
-    
-    return rocket;
-} 
 
-Rocket* RocketBuilder::getNew(tech::type tech_level, race::type race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
-{
-    Rocket* rocket = createTemplate();
-    createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
+    return model;
+}
 
-    return rocket;
-} 
-
-void RocketBuilder::createInternals(Rocket* rocket, tech::type tech_level, race::type race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void
+RocketBuilder::__createInternals(model::item::Rocket* model, const descriptor::item::Rocket& descr)
 {     
-    if (race_id == race::type::NONE_ID) {
-        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
-    }
+    assert(false);
+//    if (race_id == race::type::NONE_ID) {
+//        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+//    }
     
-    if (tech_level == tech::type::NONE) {
-        tech_level = tech::type::LEVEL0;
-    }
+//    if (tech_level == tech::type::NONE) {
+//        tech_level = tech::type::LEVEL0;
+//    }
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
+//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)
     
-    ammo_max_orig = meti::getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECH_RATE * (int)tech_level);
-    damage_orig   = meti::getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECH_RATE * (int)tech_level);
-    radius_orig   = meti::getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECH_RATE * (int)tech_level);
+//    ammo_max_orig = meti::getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECH_RATE * (int)tech_level);
+//    damage_orig   = meti::getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECH_RATE * (int)tech_level);
+//    radius_orig   = meti::getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECH_RATE * (int)tech_level);
     
-    ItemCommonData common_data;
-    common_data.tech         = tech_level;
-#ifdef USE_MODULES
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
-#endif
-    common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
+//    ItemCommonData common_data;
+//    common_data.tech         = tech_level;
+//#ifdef USE_MODULES
+//    common_data.modules_num = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
+//#endif
+//    common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
+//    common_data.condition_max   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     
-    common_data.deterioration = 1;
+//    common_data.deterioration = 1;
     
-    BulletData data_bullet;
-    data_bullet.damage        = damage_orig;
-    data_bullet.armor         = ENTITY::ROCKET::ARMOR;
-    data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
-    data_bullet.speed_max     = ENTITY::ROCKET::SPEED_MAX;
-    data_bullet.d_speed       = ENTITY::ROCKET::DELTA_SPEED;
-    data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
-    data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
+//    BulletData data_bullet;
+//    data_bullet.damage        = damage_orig;
+//    data_bullet.armor         = ENTITY::ROCKET::ARMOR;
+//    data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
+//    data_bullet.speed_max     = ENTITY::ROCKET::SPEED_MAX;
+//    data_bullet.d_speed       = ENTITY::ROCKET::DELTA_SPEED;
+//    data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
+//    data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
     
-    rocket->SetAmmoMaxOrig(ammo_max_orig);
-    rocket->SetDamageOrig(damage_orig);
-    rocket->SetRadiusOrig(radius_orig);
-    rocket->SetBulletData(data_bullet);
-    rocket->SetAmmo(ammo_max_orig*0.6);
-    //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
-    rocket->setItemCommonData(common_data);
+//    rocket->SetAmmoMaxOrig(ammo_max_orig);
+//    rocket->SetDamageOrig(damage_orig);
+//    rocket->SetRadiusOrig(radius_orig);
+//    rocket->SetBulletData(data_bullet);
+//    rocket->SetAmmo(ammo_max_orig*0.6);
+//    //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
+//    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
+//    rocket->setItemCommonData(common_data);
     
-    rocket->updateProperties();
-    rocket->CountPrice();
+//    rocket->updateProperties();
+//    rocket->countPrice();
 }
 
 } // namespace item
-
+} // namespace builder
