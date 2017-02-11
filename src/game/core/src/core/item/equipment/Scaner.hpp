@@ -21,43 +21,125 @@
 
 #include "Base.hpp"
 
-class ScanerBuilder;
 
+namespace descriptor {
 namespace item {
 
-class Scaner : public control::item::BaseEquipment
+class Scaner : public BaseEquipment
 {
 public:
-    Scaner(int_t id);
-    virtual ~Scaner();
+
+    static const int SCAN_MIN;
+    static const int SCAN_MAX;
+    static const float SCAN_TECH_RATE;
+
+    static const int MODULES_NUM_MIN;
+    static const int MODULES_NUM_MAX;
+
+    static const int MASS_MIN;
+    static const int MASS_MAX;
+    static const int CONDITION_MIN;
+    static const int CONDITION_MAX;
+
+    static const float SCAN_WEIGHT;
+    static const float MODULES_NUM_WEIGHT;
+
+
+    Scaner();
+    ~Scaner() = default;
+    Scaner(const std::string& data);
+    std::string data() const;
+
+    void setScan(int scan) { m_scan = scan; }
 
     int scan() const { return m_scan; }
 
-    [[deprecated("move out")]]
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+    std::string info() const {
+        std::string result = "descriptor::item::Scaner:\n";
+        result += std::string(" scan = ") + std::to_string(m_scan) + "\n";
+        result += descriptor::item::BaseEquipment::info();
+        return result;
+    }
+
+private:
+    int m_scan = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_scan;
+    }
+};
+
+} // namespace item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+class Scaner : public BaseEquipment
+{
+public:
+    Scaner();
+    ~Scaner() = default;
+    Scaner(const std::string& data);
+    std::string data() const;
+
+    void setScan(int scan) { m_scan = scan; }
+
+    int scan() const { return m_scan; }
+
+private:
+    int m_scan = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseEquipment>(*this);
+        ar & m_scan;
+    }
+};
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+class Scaner : public BaseEquipment
+{
+public:
+    Scaner(model::item::Scaner*);
+    virtual ~Scaner() = default;
+
+    int scan() const { return m_scan; }
 
 private:
     void setScanOrig(int scan_orig)  { m_scan_orig = scan_orig; }
     virtual void updateProperties();
     void countPrice();
 
-    friend ScanerBuilder;
+protected:
+    model::item::Scaner* model() const { return m_model_scaner; }
+    descriptor::item::Scaner* descriptor() const { return m_descriptor_scaner; }
 
 private:
+    model::item::Scaner* m_model_scaner = nullptr;
+    descriptor::item::Scaner* m_descriptor_scaner = nullptr;
+
     int m_scan_orig = 0;
     int m_scan_add = 0;
     int m_scan = 0;
 
     void virtual addUniqueInfo();
-    std::string str();
 
-    [[deprecated("move out")]]
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+    std::string scanStr();
 };
 
 } // namespace item
-
+} // namespace control

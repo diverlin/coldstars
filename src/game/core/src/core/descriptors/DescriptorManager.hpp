@@ -36,6 +36,7 @@
 #include <core/item/equipment/Protector.hpp> // descriptor
 #include <core/item/equipment/Radar.hpp> // descriptor
 #include <core/item/equipment/Rocket.hpp> // descriptor
+#include <core/item/equipment/Scaner.hpp> // descriptor
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -160,6 +161,9 @@ public:
     void add(const item::Rocket& rocket) {
         m_rocket.add(rocket);
     }
+    void add(const item::Scaner& scaner) {
+        m_scaner.add(scaner);
+    }
     void add(Mesh* mesh) {
         m_mesh.add(mesh);
     }
@@ -184,6 +188,7 @@ public:
     const MManager<item::Protector>& protector() const { return m_protector; }
     const MManager<item::Radar>& radar() const { return m_radar; }
     const MManager<item::Rocket>& rocket() const { return m_rocket; }
+    const MManager<item::Scaner>& scaner() const { return m_scaner; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -213,6 +218,7 @@ private:
     MManager<item::Protector> m_protector;
     MManager<item::Radar> m_radar;
     MManager<item::Rocket> m_rocket;
+    MManager<item::Scaner> m_scaner;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

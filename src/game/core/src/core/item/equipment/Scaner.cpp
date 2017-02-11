@@ -17,28 +17,85 @@
 */
 
 #include "Scaner.hpp"
-//[[deprecated("remove")]]
-#include <common/constants.hpp>
 
 #include <ceti/Logger.hpp>
 #ifdef USE_MODULES
 #include <item/modules/ScanerModule.hpp>
 #endif
 
+#include <ceti/serialization/macro.hpp>
+#include <ceti/Logger.hpp>
+
+
+namespace descriptor {
 namespace item {
 
-Scaner::Scaner(int_t id)
-    :
-      m_scan_orig(0)
+const int Scaner::SCAN_MIN = 2;
+const int Scaner::SCAN_MAX = 40;
+const float Scaner::SCAN_TECH_RATE = 0.1f;
+
+const int Scaner::MODULES_NUM_MIN = 0;
+const int Scaner::MODULES_NUM_MAX = 2;
+
+const int Scaner::MASS_MIN = 7;
+const int Scaner::MASS_MAX = 38;
+const int Scaner::CONDITION_MIN = 30;
+const int Scaner::CONDITION_MAX = 100;
+
+const float Scaner::SCAN_WEIGHT = 0.7f;
+const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
+
+
+Scaner::Scaner()
 {
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::EQUIPMENT_ID);
-//    setSubTypeId(entity::Type::SCANER_EQUIPMENT_ID);
+    setDescriptor(descriptor::type::SCANER_EQUIPMENT);
 }
 
-/* virtual */
-Scaner::~Scaner()
+Scaner::Scaner(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Scaner::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespce item
+} // namespace descriptor
+
+
+namespace model {
+namespace item {
+
+Scaner::Scaner()
+{
+    setType(entity::type::EQUIPMENT_ID);
+    setSubType(entity::type::SCANER_EQUIPMENT_ID);
+}
+
+Scaner::Scaner(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Scaner::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace item
+} // namespace model
+
+
+namespace control {
+namespace item {
+
+Scaner::Scaner(model::item::Scaner* model)
+    :
+      m_model_scaner(model)
 {}
 
 /* virtual */
@@ -47,26 +104,25 @@ void Scaner::updateProperties()
     m_scan_add = 0;
 
 #ifdef USE_MODULES
-    for (unsigned int i = 0; i < modules_vec.size(); i++)
-    {
+    for (unsigned int i = 0; i < modules_vec.size(); i++) {
         scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();
     }
 #endif
-    m_scan = m_scan_orig + m_scan_add;
+    model()->setScan(descriptor()->scan() + m_scan_add);
 }
 
 void Scaner::countPrice()
 {
-    float scan_rate          = (float)m_scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
-    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::SCANER::MODULES_NUM_MAX;
+    float scan_rate          = float(descriptor()->scan()) / descriptor::item::Scaner::SCAN_MIN;
+    float modules_num_rate   = float(descriptor()->modules()) / descriptor::item::Scaner::MODULES_NUM_MAX;
 
-    float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate +
-            EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = descriptor::item::Scaner::SCAN_WEIGHT * scan_rate +
+            descriptor::item::Scaner::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / EQUIPMENT::SCANER::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data.condition_max;
+    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Scaner::MASS_MIN;
+    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Scaner::CONDITION_MIN;
 
-    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 
@@ -76,61 +132,15 @@ void Scaner::addUniqueInfo()
     //    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
 }
 
-std::string Scaner::str()
+std::string Scaner::scanStr()
 {
-    if (m_scan_add == 0)
-        return std::to_string(m_scan_orig);
-    else
-        return std::to_string(m_scan_orig) + "+" + std::to_string(m_scan_add);
+    if (m_scan_add) {
+        return std::to_string(descriptor()->scan()) + "+" + std::to_string(m_scan_add);
+    } else {
+        return std::to_string(descriptor()->scan());
+    }
 }
 
-
-/*virtual*/
-void Scaner::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "scaner_equipment." + std::to_string(id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Scaner::SaveData(save_ptree, root);
-}
-
-/*virtual*/
-void Scaner::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    Scaner::LoadData(load_ptree);
-}
-
-/*virtual*/
-void Scaner::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Scaner::ResolveData();
-}
-
-void Scaner::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
-    
-//    save_ptree.put(root+"scan_orig", m_scan_orig);
-}
-
-void Scaner::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
-    
-//    m_scan_orig = load_ptree.get<int>("scan_orig");
-}                
-
-void Scaner::ResolveData()
-{
-//    LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
-}
 
 } // namespace item
-
+} // namespace control

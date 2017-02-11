@@ -427,23 +427,23 @@ namespace EQUIPMENT
 //        const float MODULES_NUM_WEIGHT = 0.2;
 //    }
 
-    namespace SCANER
-    {
-        const int SCAN_MIN = 2;
-        const int SCAN_MAX = 40;
-        const float SCAN_TECH_RATE = 0.1f;
+//    namespace SCANER
+//    {
+//        const int SCAN_MIN = 2;
+//        const int SCAN_MAX = 40;
+//        const float SCAN_TECH_RATE = 0.1f;
                 
-        const int MODULES_NUM_MIN = 0;
-        const int MODULES_NUM_MAX = 2;
+//        const int MODULES_NUM_MIN = 0;
+//        const int MODULES_NUM_MAX = 2;
         
-        const int MASS_MIN = 7;
-        const int MASS_MAX = 38;
-        const int CONDITION_MIN = 30;
-        const int CONDITION_MAX = 100;
+//        const int MASS_MIN = 7;
+//        const int MASS_MAX = 38;
+//        const int CONDITION_MIN = 30;
+//        const int CONDITION_MAX = 100;
         
-        const float SCAN_WEIGHT = 0.7;
-        const float MODULES_NUM_WEIGHT = 0.3;
-    }
+//        const float SCAN_WEIGHT = 0.7;
+//        const float MODULES_NUM_WEIGHT = 0.3;
+//    }
 
 //    namespace LAZER
 //    {

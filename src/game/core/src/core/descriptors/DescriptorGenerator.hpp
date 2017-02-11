@@ -34,6 +34,7 @@ class Lazer;
 class Protector;
 class Radar;
 class Rocket;
+class Scaner;
 } // namespace item
 
 class Galaxy;
@@ -71,10 +72,9 @@ descriptor::item::Lazer getNewLazer(int race = NONE, int tech_level = NONE);
 descriptor::item::Protector getNewProtector(int race = NONE, int tech_level = NONE);
 descriptor::item::Radar getNewRadar(int race = NONE, int tech_level = NONE);
 descriptor::item::Rocket getNewRocket(int race = NONE, int tech_level = NONE);
+descriptor::item::Scaner getNewScaner(int race = NONE, int tech_level = NONE);
 } // namespace item
 
-
-descriptor::BaseOLD getNewScaner(int race = NONE, int tech_level = NONE);
 descriptor::BaseOLD getNewBomb(int damage = NONE, int radius = NONE);
 
 } // namespace descriptor

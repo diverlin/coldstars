@@ -873,10 +873,7 @@ getNewRocket(int race, int tech_level)
     return descr;
 }
 
-} // anemspace item
-
-
-descriptor::BaseOLD
+descriptor::item::Scaner
 getNewScaner(int race, int tech_level)
 {
     if (race == NONE) {
@@ -886,24 +883,35 @@ getNewScaner(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
-    int mass            = meti::getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
-    int condition_max   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
+    int modules = meti::getRandInt(descriptor::item::Scaner::MODULES_NUM_MIN, descriptor::item::Scaner::MODULES_NUM_MAX);
+    int mass = meti::getRandInt(descriptor::item::Scaner::MASS_MIN,        descriptor::item::Scaner::MASS_MAX);
+    int condition = meti::getRandInt(descriptor::item::Scaner::CONDITION_MIN,   descriptor::item::Scaner::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
 
-    int scan = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
+    int scan = meti::getRandInt(descriptor::item::Scaner::SCAN_MIN, descriptor::item::Scaner::SCAN_MAX) * (1 + descriptor::item::Scaner::SCAN_TECH_RATE * int(tech_level));
 
-    descriptor::BaseOLD descriptor(descriptor::Type::SCANER);
-    addItemCommonFields(descriptor,
-                        race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::SCAN, scan);
+    descriptor::item::Scaner descr;
+    // descriptor::item::Base
+    descr.setMass(mass);
+    descr.setCondition(condition);
+    descr.setDeterioration(deterioration);
+    descr.setPrice(price);
 
-    return descriptor;
+    // descriptor::item::BaseEquipment
+    descr.setModules(modules);
+
+    // descriptor::Radar
+    descr.setScan(scan);
+
+    return descr;
 }
+
+} // anemspace item
+
 
 descriptor::BaseOLD
 getNewBomb(int damage, int radius)

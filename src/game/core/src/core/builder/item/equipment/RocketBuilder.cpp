@@ -18,19 +18,8 @@
 
 #include "RocketBuilder.hpp"
 #include <core/item/equipment/Rocket.hpp>
-//#include <managers/EntityManager.hpp>
-
-//#include <ceti/IdGenerator.hpp>
-//#include <ceti/Logger.hpp>
-//#include <math/rand.hpp>
-//#include <common/constants.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
-
-//#include <descriptors/Base.hpp>
-//#include <descriptors/RaceDescriptors.hpp>
-
-//#include <meti/RandUtils.hpp>
 
 namespace builder {
 namespace item {

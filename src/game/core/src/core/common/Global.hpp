@@ -122,7 +122,6 @@ public:
     item::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
     item::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
-    item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
 
 #ifdef USE_MODULES
     BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
@@ -182,7 +181,6 @@ private:
     item::EnergizerBuilder* m_energizerBuilder = nullptr;
     item::FreezerBuilder* m_freezerBuilder = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    item::ScanerBuilder* m_scanerBuilder = nullptr;
 
 #ifdef USE_MODULES
     BakModuleBuilder* m_bakModuleBuilder = nullptr;

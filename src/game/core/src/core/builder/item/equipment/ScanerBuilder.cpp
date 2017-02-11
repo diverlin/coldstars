@@ -28,53 +28,61 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
+namespace builder {
 namespace item {
 
-ScanerBuilder::ScanerBuilder()
-{}
-
-ScanerBuilder::~ScanerBuilder()
-{}
-
-Scaner* ScanerBuilder::createTemplate(int_t id) const
+model::item::Scaner*
+ScanerBuilder::getNew()
 {
-    Scaner* scaner = new Scaner(id);
-    assert(scaner);
+    const descriptor::item::Scaner& descr = core::global::get().descriptors().scaner().random();
+    model::item::Scaner* model = __createTemplate();
+    __createInternals(model, descr);
+
+    return model;
+}
+
+model::item::Scaner*
+ScanerBuilder::getNew(const std::string& data)
+{
+    descriptor::item::Scaner descr(data);
+    assert(descr.descriptor() != descriptor::type::SCANER_EQUIPMENT);
+    return getNew(descr);
+}
+
+model::item::Scaner*
+ScanerBuilder::getNew(const descriptor::item::Scaner& descr)
+{
+    model::item::Scaner* model = __createTemplate();
+    __createInternals(model, descr);
+
+    return model;
+} 
+
+model::item::Scaner*
+ScanerBuilder::__createTemplate()
+{
+    model::item::Scaner* model = new model::item::Scaner;
+    assert(model);
 
     assert(false);
     //core::global::get().entityManager().reg(scaner);
-    
-    return scaner;
-} 
 
-Scaner* ScanerBuilder::getNew() const
-{
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::SCANER);
-    Scaner* scaner = createTemplate();
-    createInternals(scaner, descriptor);
-
-    return scaner;
+    return model;
 }
 
-Scaner* ScanerBuilder::getNew(const descriptor::BaseOLD& descriptor) const
+void
+ScanerBuilder::__createInternals(model::item::Scaner* model, const descriptor::item::Scaner& descr)
 {
-    Scaner* scaner = createTemplate();
-    createInternals(scaner, descriptor);
-
-    return scaner;
-} 
-
-void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::BaseOLD& descriptor) const
-{
-    ItemCommonData common_data = extractCommonData(descriptor);
+    assert(false);
+//    ItemCommonData common_data = extractCommonData(descriptor);
     
-    scaner->setScanOrig(descriptor.scan());
-    scaner->setParentSubTypeId(entity::type::SCANER_SLOT_ID);
-    scaner->setItemCommonData(common_data);
+//    scaner->setScanOrig(descriptor.scan());
+//    scaner->setParentSubTypeId(entity::type::SCANER_SLOT_ID);
+//    scaner->setItemCommonData(common_data);
 
-    scaner->updateProperties();
-    scaner->countPrice();
+//    scaner->updateProperties();
+//    scaner->countPrice();
 }
 
 } // namespace item
-
+} // namespace builder

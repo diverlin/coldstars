@@ -147,8 +147,9 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 //        store->addItem(core::global::get().droidBuilder().getNew(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::SCANER);
-        store->addItem(core::global::get().scanerBuilder().getNew(descr));
+        assert(false);
+//        const auto& descr = core::global::get().descriptors().getRand(descriptor::Type::SCANER);
+//        store->addItem(core::global::get().scanerBuilder().getNew(descr));
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

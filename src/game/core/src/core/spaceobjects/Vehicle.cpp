@@ -1107,10 +1107,11 @@ void Vehicle::_updatePropScan()
 
     if (m_scanerSlot->item() != nullptr)
     {
-        if (m_scanerSlot->scanerEquipment()->isFunctioning() == true)
-        {
-            model()->properties().scan = m_scanerSlot->scanerEquipment()->scan();
-        }
+        assert(false);
+//        if (m_scanerSlot->scanerEquipment()->isFunctioning() == true)
+//        {
+//            model()->properties().scan = m_scanerSlot->scanerEquipment()->scan();
+//        }
     }
 }
 
