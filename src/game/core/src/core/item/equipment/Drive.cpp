@@ -101,6 +101,13 @@ Drive::data() const
 namespace control {
 namespace item {
 
+Drive::Drive(model::item::Drive* model)
+    :
+      m_model_drive(model)
+{
+
+}
+
 /* virtual */
 void Drive::updateProperties()
 {     

@@ -19,7 +19,6 @@
 
 #include "BakBuilder.hpp"
 #include <core/item/equipment/Bak.hpp>
-#include <core/managers/EntityManager.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 

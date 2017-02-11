@@ -34,22 +34,19 @@
 #include <builder/dock/ShopBuilder.hpp>
 #include <builder/dock/GovermentBuilder.hpp>
 
+#ifdef USE_ARTEFACTS
 #include <builder/item/artefacts/GravityArtefactBuilder.hpp>
 #include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
+#endif // USE_ARTEFACTS
 
-#include <builder/item/equipment/BakBuilder.hpp>
-#include <builder/item/equipment/DriveBuilder.hpp>
-#include <builder/item/equipment/DroidBuilder.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
 #include <builder/item/equipment/EnergizerBuilder.hpp>
 #include <builder/item/equipment/FreezerBuilder.hpp>
-#endif
-#include <builder/item/equipment/GrappleBuilder.hpp>
+#endif // USE_EXTRA_EQUIPMENT
 #include <builder/item/equipment/ProtectorBuilder.hpp>
 #include <builder/item/equipment/RadarBuilder.hpp>
 #include <builder/item/equipment/ScanerBuilder.hpp>
 #include <builder/item/equipment/RocketBuilder.hpp>
-#include <builder/item/equipment/LazerBuilder.hpp>
 
 #ifdef USE_MODULES
 #include <builder/item/modules/BakModuleBuilder.hpp>
@@ -114,7 +111,6 @@ global::global()
     , m_radarBuilder(new item::RadarBuilder)
     , m_scanerBuilder(new item::ScanerBuilder)
     , m_rocketBuilder(new item::RocketBuilder)
-    , m_lazerBuilder(new item::LazerBuilder)
 
     #ifdef USE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)
@@ -168,7 +164,6 @@ global::~global()
     delete m_radarBuilder;
     delete m_scanerBuilder;
     delete m_rocketBuilder;
-    delete m_lazerBuilder;
 
 #ifdef USE_MODULES
     delete m_bakModuleBuilder;

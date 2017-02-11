@@ -113,8 +113,8 @@ namespace item {
 class Droid : public control::item::BaseEquipment
 {
 public:
-    Droid();
-    virtual ~Droid();
+    Droid(model::item::Droid*);
+    virtual ~Droid() = default;
 
 private:
     virtual void updateProperties();

@@ -93,11 +93,9 @@ Droid::data() const
 namespace control {
 namespace item {
 
-Droid::Droid()
-{}
-
-/* virtual */
-Droid::~Droid()
+Droid::Droid(model::item::Droid* model)
+    :
+      m_model_droid(model)
 {}
 
 /* virtual */

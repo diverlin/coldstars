@@ -131,7 +131,7 @@ namespace item {
 class Drive : public control::item::Base
 {
 public:
-    Drive() = default;
+    Drive(model::item::Drive*);
     virtual ~Drive() = default;
 
 private:

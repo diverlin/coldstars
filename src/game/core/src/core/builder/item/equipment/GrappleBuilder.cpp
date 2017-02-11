@@ -18,14 +18,8 @@
 
 
 #include "GrappleBuilder.hpp"
-#include <item/equipment/Grapple.hpp>
-#include <managers/EntityManager.hpp>
-
-#include <ceti/Logger.hpp>
-
-#include <common/Global.hpp>
-
-#include <descriptors/Base.hpp>
+#include <core/item/equipment/Grapple.hpp>
+#include <core/common/Global.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
 namespace builder {

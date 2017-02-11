@@ -19,31 +19,38 @@
 
 #pragma once
 
-#include <core/types/RaceTypes.hpp>
-#include <core/types/TechLevelTypes.hpp>
-
-#include <ceti/type/IdType.hpp>
+#include <string>
 
 namespace descriptor {
-class BaseOLD;
+namespace item {
+class Lazer;
+} // namespace item
 } // namespace descriptor
 
+namespace model {
 namespace item {
-
 class Lazer;
+} // namespace item
+} // namespace model
+
+namespace builder {
+namespace item {
 
 class LazerBuilder
 {
 public:
-    LazerBuilder();
-    ~LazerBuilder();
+    LazerBuilder() = default;
+    ~LazerBuilder() = default;
 
-    Lazer* createTemplate(int_t id = NONE) const;
-    Lazer* getNew(tech::type tech_level = tech::type::NONE, race::type race_id = race::type::NONE_ID, int damage_orig = NONE, int radius_orig = NONE) const;
+    static model::item::Lazer* getNew();
+    static model::item::Lazer* getNew(const std::string&);
+    static model::item::Lazer* getNew(const descriptor::item::Lazer&);
 
 private:
-    void createInternals(Lazer*, tech::type, race::type, int, int) const;
+    static model::item::Lazer* createTemplate();
+    static void createInternals(model::item::Lazer*, const descriptor::item::Lazer&);
 }; 
 
 } // namespace item
+} // namespace builder
 

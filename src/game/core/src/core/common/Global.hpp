@@ -126,7 +126,6 @@ public:
     item::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
     item::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
     item::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
-    item::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
 #ifdef USE_MODULES
     BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
@@ -190,7 +189,6 @@ private:
     item::RadarBuilder* m_radarBuilder = nullptr;
     item::ScanerBuilder* m_scanerBuilder = nullptr;
     item::RocketBuilder* m_rocketBuilder = nullptr;
-    item::LazerBuilder* m_lazerBuilder = nullptr;
 
 #ifdef USE_MODULES
     BakModuleBuilder* m_bakModuleBuilder = nullptr;

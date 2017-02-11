@@ -18,11 +18,8 @@
 
 #include "DriveBuilder.hpp"
 #include <core/item/equipment/Drive.hpp>
-#include <core/managers/EntityManager.hpp>
 #include <core/descriptors/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
-
-//#include <ceti/Logger.hpp>
 
 namespace builder {
 namespace item {
