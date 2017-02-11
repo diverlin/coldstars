@@ -27,9 +27,7 @@
 class Turrel; 
 
 namespace control {
-namespace item {
 class Item;
-} // namespace item
 } // naemspace control
 
 namespace model {
@@ -126,7 +124,7 @@ public:
 
     Turrel* turrel() const { return m_turrel; }
 
-    item::Item* item() const { return m_item; }
+    Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
     ::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<::item::Rocket*>(m_item); }
@@ -160,7 +158,7 @@ public:
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
-    bool insert(item::Item*);
+    bool insert(Item*);
     void removeItem();
 
     STATUS validateTarget();
@@ -175,7 +173,7 @@ public:
     //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*) const;
     //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*, jeti::control::TextureOb*) const;
 
-    item::Item* takeItem();
+    Item* takeItem();
 
     bool swapItem(ItemSlot*);
 
@@ -203,14 +201,14 @@ private:
 
     Turrel* m_turrel = nullptr;          // only for weapons slot
 
-    item::Item* m_item = nullptr;
+    Item* m_item = nullptr;
 
     model::SpaceObject* m_target = nullptr;
     ItemSlot* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
-    bool checkItemInsertion(control::item::Item*) const;
+    bool checkItemInsertion(Item*) const;
 
     bool isTargetAlive(model::SpaceObject*) const;
     bool isTargetInSpace(model::SpaceObject*) const;

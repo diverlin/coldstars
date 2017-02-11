@@ -62,7 +62,7 @@ void Store::addVehicleSlot(control::VehicleSlot* vehicle_slot)
     //    vehicle_slot_vec.push_back(vehicle_slot);
 }; 
 
-bool Store::addItem(control::item::Item* item)
+bool Store::addItem(control::Item* item)
 {
     control::ItemSlot* slot = freeItemSlot();
     if (slot) {
@@ -113,7 +113,7 @@ Store::freeVehicleSlot() const
 }
 
 int
-Store::buyItem(control::item::Item* item)
+Store::buyItem(control::Item* item)
 {
     control::ItemSlot* slot = freeItemSlot();
     if (slot) {

@@ -29,8 +29,6 @@
 
 namespace control {
 
-namespace item {
-
 void Item::doLock(int lock)
 {
     LOG("Base::LockEvent");
@@ -189,7 +187,5 @@ void Item::ResolveData()
 //        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_Base.item_slot_id))->insert(this);
 //    }
 }
-
-} // namespace item
 
 } // namespace control

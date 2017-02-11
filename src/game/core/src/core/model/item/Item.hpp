@@ -28,7 +28,6 @@
 #include <core/item/ItemCommonData.hpp>
 
 namespace model {
-namespace item {
 
 class Item : public ::model::Base
 {
@@ -60,7 +59,6 @@ private:
     }
 };
 
-} // naemspace item
 } // namespace model
 
 

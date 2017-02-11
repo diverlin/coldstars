@@ -43,11 +43,7 @@ class Starsystem;
 namespace control {
 class Container;
 class Npc;
-
-namespace item {
 class Item;
-} // namespace item
-
 } //namespace control
 
 class BaseEquipment;
@@ -199,8 +195,8 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
-    bool addItemToCargoSlot(item::Item*);
-    bool manage(item::Item*);
+    bool addItemToCargoSlot(Item*);
+    bool manage(Item*);
 
     bool isSlotFree(const place::type&) const;
     bool checkManage(const core::Id&);
@@ -210,9 +206,9 @@ public:
     void sellItemsInCargo();
 
     [[deprecated("move to ext")]]
-    bool sellItem(item::Item*);
+    bool sellItem(Item*);
     [[deprecated("move to ext")]]
-    bool buyItem(item::Item*);
+    bool buyItem(Item*);
 
     bool unpackContainerItemToCargoSlot(control::Container*);
 
@@ -322,15 +318,15 @@ protected:
     ItemSlot* const _freeArtefactSlot() const;
     ItemSlot* const _cargoSlotWithGoods(place::type);
 
-    bool _installItem(control::item::Item*);
-    bool _installEquipment(control::item::Item*);
+    bool _installItem(Item*);
+    bool _installEquipment(Item*);
 #ifdef USE_MODULES
-    bool installModule(control::item::Item*);
+    bool installModule(Item*);
 #endif // USE_MODULES
 #ifdef USE_ARTEFACTS
-    bool installArtefact(item::Base*);
+    bool installArtefact(Item*);
 #endif // USE_ARTEFACTS
-    bool _installGoodsPack(control::item::Item*);
+    bool _installGoodsPack(Item*);
 
     //        virtual void UpdateInfo() = 0;
 
@@ -369,9 +365,9 @@ private:
 
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();
-    bool __mergeIdenticalGoods(item::Item*);
+    bool __mergeIdenticalGoods(Item*);
 
-    model::Container* __wrapItemToContainer(item::Item*);
+    model::Container* __wrapItemToContainer(Item*);
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 

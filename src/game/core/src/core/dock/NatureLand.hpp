@@ -23,11 +23,7 @@
 
 namespace control {
 class ItemSlot;
-
-namespace item {
 class Item;
-} // namespace item
-
 } // namespace control
 
 struct UnresolvedDataNatureLand {
@@ -48,7 +44,7 @@ public:
 
     void AddItemSlot(control::ItemSlot*);
 
-    bool AddItem(control::item::Item*);
+    bool AddItem(control::Item*);
     bool CanAcceptNewItem() const;
 
     virtual bool AddVehicle(Vehicle*);
