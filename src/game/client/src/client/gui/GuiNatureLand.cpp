@@ -21,7 +21,7 @@
 #include <common/Global.hpp>
 #include <jeti/Config.hpp>
 #include <slots/ItemSlot.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 #include <math/rand.hpp>

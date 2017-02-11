@@ -18,7 +18,7 @@
     
 #pragma once
 
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 #include <common/constants.hpp>
 
 class GoodsPack : public control::item::Item

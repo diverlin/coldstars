@@ -32,7 +32,7 @@
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <slots/ItemSlot.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 #include <ceti/serialization/macro.hpp>
 

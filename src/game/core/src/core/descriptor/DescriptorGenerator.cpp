@@ -31,7 +31,7 @@
 #include <core/common/constants.hpp>
 #include <core/types/MeshTypes.hpp>
 #include <core/types/TextureTypes.hpp>
-#include <core/item/BaseItem.hpp>
+#include <core/item/Item.hpp>
 
 #include <meti/RandUtils.hpp>
 

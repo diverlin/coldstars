@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/item/BaseItem.hpp>
+#include <core/item/Item.hpp>
 
 #ifdef USE_MODULES
 #include <core/item/modules/BaseModule.hpp>

@@ -37,7 +37,7 @@
 
 #include <dock/Kosmoport.hpp>
 #include <slots/ItemSlot.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 #include <jeti/Render.hpp>
 

@@ -22,7 +22,7 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 #include "../slots/ItemSlot.hpp"
 
 WeaponComplex::WeaponComplex()

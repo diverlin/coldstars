@@ -30,7 +30,7 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 #include <parts/WeaponComplex.hpp>
-#include <item/BaseItem.hpp>
+#include <item/Item.hpp>
 
 #include <pilots/Npc.hpp>
 #include <client/pilots/Player.hpp>
