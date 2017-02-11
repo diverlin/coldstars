@@ -18,7 +18,7 @@
 
 #include "LazerBuilder.hpp"
 #include <core/item/equipment/Lazer.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 
 namespace builder {

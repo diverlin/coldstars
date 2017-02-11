@@ -24,8 +24,8 @@
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 #include <ceti/IdGenerator.hpp>
-#include <descriptors/RaceDescriptors.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/RaceDescriptors.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 #include <builder/dock/KosmoportBuilder.hpp>
 #include <builder/dock/NatureLandBuilder.hpp>

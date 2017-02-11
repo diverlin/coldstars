@@ -24,7 +24,7 @@
 
 #include <common/constants.hpp>
 #include <ceti/type/IdType.hpp>
-#include <descriptors/RaceDescriptors.hpp>
+#include <descriptor/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
 entity::type

@@ -19,8 +19,8 @@
 #include "PlanetBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobjects/Planet.hpp>
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 namespace builder {
 

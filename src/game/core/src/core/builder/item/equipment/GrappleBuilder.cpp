@@ -20,7 +20,7 @@
 #include "GrappleBuilder.hpp"
 #include <core/item/equipment/Grapple.hpp>
 #include <core/common/Global.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 namespace builder {
 namespace item {

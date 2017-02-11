@@ -21,8 +21,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include <world/Sector.hpp>
 
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/DescriptorManager.hpp>
+#include <descriptor/SectorDescriptor.hpp>
+#include <descriptor/DescriptorManager.hpp>
 
 #include <world/starsystem.hpp>
 

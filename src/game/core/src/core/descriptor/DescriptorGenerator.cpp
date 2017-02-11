@@ -18,15 +18,15 @@
 
 
 #include "DescriptorGenerator.hpp"
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/GalaxyDescriptor.hpp>
-#include <core/descriptors/SectorDescriptor.hpp>
-#include <core/descriptors/StarsystemDescriptor.hpp>
-#include <core/descriptors/StarDescriptor.hpp>
-#include <core/descriptors/PlanetDescriptor.hpp>
-#include <core/descriptors/AsteroidDescriptor.hpp>
-#include <core/descriptors/RaceDescriptors.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/StarDescriptor.hpp>
+#include <core/descriptor/PlanetDescriptor.hpp>
+#include <core/descriptor/AsteroidDescriptor.hpp>
+#include <core/descriptor/RaceDescriptors.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/common/constants.hpp>
 #include <core/types/MeshTypes.hpp>

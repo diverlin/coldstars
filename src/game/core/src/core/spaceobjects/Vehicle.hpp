@@ -25,7 +25,7 @@
 #include <core/parts/DriveComplex.hpp>
 #include <core/parts/ProtectionComplex.hpp>
 
-#include <core/descriptors/VehicleDescriptor.hpp>
+#include <core/descriptor/VehicleDescriptor.hpp>
 #include <core/struct/VehiclePropetries.hpp>
 #include <core/struct/VehicleNeeds.hpp>
 

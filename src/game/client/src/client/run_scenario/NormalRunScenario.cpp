@@ -35,7 +35,7 @@
 #include <spaceobjects/Planet.hpp>
 #include <dock/Land.hpp>
 
-#include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptor/GalaxyDescriptor.hpp>
 
 
 /* virtual */

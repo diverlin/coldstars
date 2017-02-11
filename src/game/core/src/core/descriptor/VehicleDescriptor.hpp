@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <core/descriptors/SpaceobjectDescriptor.hpp>
+#include <core/descriptor/SpaceobjectDescriptor.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

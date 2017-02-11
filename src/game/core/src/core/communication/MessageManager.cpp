@@ -7,14 +7,14 @@
 
 #include <types/EntityTypes.hpp> // test
 
-#include <descriptors/DescriptorManager.hpp>
-#include <descriptors/VehicleDescriptor.hpp>
-#include <descriptors/Base.hpp>
-#include <descriptors/Descriptor.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/Container.hpp> // ??
-#include <descriptors/ExplosionDescriptor.hpp>
-#include <descriptors/AddToStarsystemDescriptor.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/VehicleDescriptor.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/Descriptor.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/descriptor/Container.hpp> // ??
+#include <core/descriptor/ExplosionDescriptor.hpp>
+#include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
 #include <spaceobjects/ALL>
 #include <world/starsystem.hpp>

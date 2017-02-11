@@ -19,11 +19,11 @@
 #include <core/builder/spaceobjects/ALL>
 #include <core/spaceobjects/ALL>
 #include <core/common/Global.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
-#include <core/descriptors/StarDescriptor.hpp>
-#include <core/descriptors/PlanetDescriptor.hpp>
-#include <core/descriptors/AsteroidDescriptor.hpp>
-//#include <core/descriptors/ShipDescriptor.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/StarDescriptor.hpp>
+#include <core/descriptor/PlanetDescriptor.hpp>
+#include <core/descriptor/AsteroidDescriptor.hpp>
+//#include <core/descriptor/ShipDescriptor.hpp>
 
 #include <client/view/Star.hpp>
 #include <client/view/Planet.hpp>

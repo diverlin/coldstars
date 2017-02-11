@@ -24,9 +24,9 @@
 
 //#include <core/builder/spaceobjects/ShipBuilder.hpp>
 
-//#include <core/descriptors/Base.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
-//#include <core/descriptors/DescriptorManager.hpp>
+//#include <core/descriptor/Base.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
+//#include <core/descriptor/DescriptorManager.hpp>
 
 //#include <core/builder/item/equipment/ALL>
 //#include <core/builder/item/modules/ALL>

@@ -26,7 +26,7 @@ namespace descriptor {
 class BaseOLD;
 }
 
-struct ItemCommonData 
+struct ItemCommonData
 {
     ItemCommonData()
     {}

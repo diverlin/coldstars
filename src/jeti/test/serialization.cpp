@@ -16,16 +16,16 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#include <core/descriptors/Base.hpp>
-//#include <core/descriptors/Hit.hpp>
-//#include <core/descriptors/GalaxyDescriptor.hpp>
-//#include <core/descriptors/SectorDescriptor.hpp>
-//#include <core/descriptors/ExplosionDescriptor.hpp>
-//#include <core/descriptors/AddToStarsystemDescriptor.hpp>
-//#include <core/descriptors/Container.hpp>
+//#include <core/descriptor/Base.hpp>
+//#include <core/descriptor/Hit.hpp>
+//#include <core/descriptor/GalaxyDescriptor.hpp>
+//#include <core/descriptor/SectorDescriptor.hpp>
+//#include <core/descriptor/ExplosionDescriptor.hpp>
+//#include <core/descriptor/AddToStarsystemDescriptor.hpp>
+//#include <core/descriptor/Container.hpp>
 
-//#include <core/descriptors/VehicleDescriptorGenerator.hpp>
-//#include <core/descriptors/DescriptorGenerator.hpp>
+//#include <core/descriptor/VehicleDescriptorGenerator.hpp>
+//#include <core/descriptor/DescriptorGenerator.hpp>
 
 //#include <ceti/descriptor/Mesh.hpp>
 //#include <ceti/descriptor/Descriptor.hpp>

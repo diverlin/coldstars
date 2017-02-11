@@ -21,8 +21,8 @@
 
 #include <core/builder/spaceobjects/StarBuilder.hpp>
 
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 #include <gtest/gtest.h>
 

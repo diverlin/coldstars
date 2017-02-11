@@ -35,17 +35,17 @@
 #include <core/builder/item/other/BombBuilder.hpp>
 #include <core/builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <core/descriptors/DescriptorManager.hpp>
-#include <core/descriptors/Base.hpp>
-#include <core/descriptors/Container.hpp>
-#include <core/descriptors/Hit.hpp>
-#include <core/descriptors/GalaxyDescriptor.hpp>
-#include <core/descriptors/SectorDescriptor.hpp>
-#include <core/descriptors/ExplosionDescriptor.hpp>
-#include <core/descriptors/AddToStarsystemDescriptor.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/Container.hpp>
+#include <core/descriptor/Hit.hpp>
+#include <core/descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/ExplosionDescriptor.hpp>
+#include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
-#include <core/descriptors/VehicleDescriptorGenerator.hpp>
-#include <core/descriptors/DescriptorGenerator.hpp>
+#include <core/descriptor/VehicleDescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>
 

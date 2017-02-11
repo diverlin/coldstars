@@ -19,7 +19,7 @@
 
 #include "ItemCommonData.hpp"
 
-#include <descriptors/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 ItemCommonData extractCommonData(const descriptor::BaseOLD& descriptor)
 {
