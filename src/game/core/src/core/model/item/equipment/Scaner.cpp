@@ -23,8 +23,9 @@
 namespace model {
 namespace item {
 
-Scaner::Scaner()
+Scaner::Scaner(int_t descriptor)
 {
+    setDescriptor(descriptor);
     setType(entity::type::EQUIPMENT_ID);
     setSubType(entity::type::SCANER_EQUIPMENT_ID);
 }
