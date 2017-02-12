@@ -19,6 +19,10 @@
 
 #pragma once
 
+#include "EquipmentBuilder.hpp"
+
+#include <ceti/type/IdType.hpp>
+
 #include <vector>
 #include <string>
 
@@ -37,20 +41,20 @@ class Protector;
 namespace builder {
 namespace item {
 
-class Protector
+class Protector : public Equipment
 {
 public:
-    Protector() = default;
-    ~Protector() = default;
-
-    static std::vector<model::item::Protector*> getNew(int);
     static model::item::Protector* getNew();
+    static std::vector<model::item::Protector*> getNew(int);
     static model::item::Protector* getNew(const std::string&);
     static model::item::Protector* getNew(const descriptor::item::Protector&);
 
 private:
-    static model::item::Protector* createTemplate();
-    static void createInternals(model::item::Protector*, const descriptor::item::Protector&);
+    Protector() = delete;
+    ~Protector() = delete;
+
+    static model::item::Protector* __createTemplate(int_t);
+    static void __createInternals(model::item::Protector*, const descriptor::item::Protector&);
 }; 
 
 } // namespace item

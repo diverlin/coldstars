@@ -27,7 +27,7 @@ namespace item {
 class Protector : public Equipment
 {
 public:
-    Protector();
+    Protector(int_t);
     ~Protector() = default;
     Protector(const std::string& data);
     std::string data() const;

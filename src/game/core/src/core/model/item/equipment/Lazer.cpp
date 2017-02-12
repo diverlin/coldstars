@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Lazer::Lazer()
+Lazer::Lazer(int_t descriptor_id)
 {
+    setDescriptor(descriptor_id);
     setType(entity::type::EQUIPMENT_ID);
     setSubType(entity::type::LAZER_EQUIPMENT_ID);
 }
