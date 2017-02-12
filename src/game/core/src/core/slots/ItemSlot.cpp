@@ -339,10 +339,11 @@ int ItemSlot::itemRadius() const
 //            return bomb()->radius();   break;
 //        }
 //    }
-    
-    if (item()) {
-        return item()->radius();
-    }
+
+assert(false);
+//    if (item()) {
+//        return item()->radius();
+//    }
     return 0;
 }
 
@@ -366,10 +367,11 @@ int ItemSlot::itemDamage() const
 //            return bomb()->damage();   break;
 //        }
 //    }
-    
-    if (item()) {
-        return item()->damage();
-    }
+
+assert(false);
+//    if (item()) {
+//        return item()->damage();
+//    }
     return 0;
 }
 

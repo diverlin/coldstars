@@ -17,13 +17,14 @@
 */
 
 #include "GoodsPack.hpp"
-#include "../../common/constants.hpp"
+//#include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
-#include <ceti/IdGenerator.hpp>
+//#include <ceti/IdGenerator.hpp>
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
+#include <core/model/item/Item.hpp>
 
 //#include <client/resources/TextureCollector.hpp>
 //#include <client/resources/MeshCollector.hpp>
@@ -40,6 +41,9 @@ GoodsPack::GoodsPack(int id, entity::type subtype_id)
 /* virtual */
 GoodsPack::~GoodsPack() 
 {}
+
+void GoodsPack::Increase(int amount) { model()->setMass(model()->mass() + amount); }
+void GoodsPack::Decrease(int amount) { model()->setMass(model()->mass() - amount); }
 
            
 /* virtual */

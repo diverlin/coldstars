@@ -54,18 +54,18 @@ void Drive::updateProperties()
 
 void Drive::CountPrice()
 {
-    float speed_rate         = (float)descriptor()->speed() / descriptor::item::Drive::SPEED_MIN;
-    float hyper_rate         = (float)descriptor()->hyper() / descriptor::item::Drive::HYPER_MIN;
-    float modules_num_rate   = (float)modulesNum() / descriptor::item::Drive::MODULES_NUM_MAX;
+//    float speed_rate         = (float)descriptor()->speed() / descriptor::item::Drive::SPEED_MIN;
+//    float hyper_rate         = (float)descriptor()->hyper() / descriptor::item::Drive::HYPER_MIN;
+//    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Drive::MODULES_NUM_MAX;
 
-    float effectiveness_rate = descriptor::item::Drive::SPEED_WEIGHT * speed_rate +
-            descriptor::item::Drive::HYPER_WEIGHT * hyper_rate +
-            descriptor::item::Drive::MODULES_NUM_WEIGHT * modules_num_rate;
+//    float effectiveness_rate = descriptor::item::Drive::SPEED_WEIGHT * speed_rate +
+//            descriptor::item::Drive::HYPER_WEIGHT * hyper_rate +
+//            descriptor::item::Drive::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data.mass / descriptor::item::Drive::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data.condition_max;
+//    float mass_rate          = (float)descriptor()->mass() / descriptor::item::Drive::MASS_MIN;
+//    float condition_rate     = (float)descriptor()->condition() / descriptor::item::Drive::CONDITION_MIN;
 
-    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+//    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void Drive::addUniqueInfo()

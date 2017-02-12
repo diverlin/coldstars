@@ -33,6 +33,8 @@
 #include <item/equipment/Bak.hpp>
 #include <item/equipment/Rocket.hpp>
 
+#include <core/descriptor/item/Item.hpp>
+
 Angar::Angar(int id)
     :
       price_fuel(PRICE_FUEL)
@@ -90,7 +92,7 @@ void Angar::AddItemSlot(control::ItemSlot* item_slot)
 
 bool Angar::RepairItem(Npc* npc, control::Item* item) const
 {
-    int price = item->price() * REPAIR_ITEM_PRICE_RATE;
+    int price = item->descriptor()->price() * REPAIR_ITEM_PRICE_RATE;
     assert(false);
 //    if (npc->withdrawCredits(price)) {
 //        return item->doRepair();

@@ -32,8 +32,8 @@ public:
     void setDamage(int damage) { m_damage = damage; }
     void setRadius(int radius) { m_radius = radius; }
 
-    int damage() const override final { return m_damage; }
-    int radius() const override final { return m_radius; }
+    int damage() const { return m_damage; }
+    int radius() const { return m_radius; }
 
     virtual void UpdateOwnerAbilities();
 
