@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.83, 2017-02-12T10:56:52. -->
+<!-- Written by QtCreator 4.0.83, 2017-02-12T18:44:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -434,7 +434,7 @@
      <value type="int">14</value>
     </valuelist>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">coldstars_tests</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">--gtest_filter=descriptor.*</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">--gtest_filter=model.*</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/ramdisk/build/coldstars/src/game/core/test</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
