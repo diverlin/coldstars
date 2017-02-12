@@ -25,8 +25,6 @@
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/managers/EntityManager.hpp>
 
-//#include <ceti/Logger.hpp>
-
 namespace builder {
 namespace item {
 
@@ -61,8 +59,6 @@ model::item::Scaner*
 Scaner::__createTemplate(int_t descriptor_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descriptor_id);
-    assert(model);
-
     core::global::get().entityManager().reg(model);
 
     return model;
@@ -71,19 +67,9 @@ Scaner::__createTemplate(int_t descriptor_id)
 void
 Scaner::__createInternals(model::item::Scaner* model, const descriptor::item::Scaner& descr)
 {
-    descriptor::item::Scaner copy(descr);
-
-    Item::_createInternals(model, &copy);
-    Equipment::_createInternals(model, &copy);
-    assert(false);
-//    ItemCommonData common_data = extractCommonData(descriptor);
-    
-//    scaner->setScanOrig(descriptor.scan());
-//    scaner->setParentSubTypeId(entity::type::SCANER_SLOT_ID);
-//    scaner->setItemCommonData(common_data);
-
-//    scaner->updateProperties();
-//    scaner->countPrice();
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setScan(descr.scan());
 }
 
 } // namespace item

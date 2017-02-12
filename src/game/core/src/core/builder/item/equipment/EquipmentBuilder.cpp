@@ -24,7 +24,7 @@
 
 namespace builder {
 
-void Equipment::_createInternals(model::Equipment* model, descriptor::Equipment* descr)
+void Equipment::_createInternals(model::Equipment* model, const descriptor::Equipment& descr)
 {
 //    model->setCondition(descr->condition());
 }
