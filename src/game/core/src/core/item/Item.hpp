@@ -25,8 +25,6 @@
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
-#include <item/ItemCommonData.hpp>
-
 namespace descriptor {
 class Item;
 } // namespace descriptor

@@ -587,7 +587,7 @@ getNewBak(int race, int tech_level)
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
     descriptor::item::Bak descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -596,7 +596,7 @@ getNewBak(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Drive
+    // descriptor::item::Bak
     descr.setFuel(fuel);
 
     return descr;
@@ -625,7 +625,7 @@ getNewDrive(int race, int tech_level)
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
     descriptor::item::Drive descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -634,7 +634,7 @@ getNewDrive(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Drive
+    // descriptor::item::Drive
     descr.setSpeed(speed);
     descr.setHyper(hyper);
 
@@ -662,7 +662,7 @@ getNewDroid(int race, int tech_level)
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
     descriptor::item::Droid descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -671,7 +671,7 @@ getNewDroid(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Droid
+    // descriptor::item::Droid
     descr.setRepair(repair);
 
     return descr;
@@ -703,7 +703,7 @@ getNewGrapple(int race, int tech_level)
 
     descriptor::item::Grapple descr;
 
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -712,7 +712,7 @@ getNewGrapple(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Grapple
+    // descriptor::item::Grapple
     descr.setStrength(strength);
     descr.setRadius(radius);
     descr.setSpeed(speed);
@@ -742,7 +742,7 @@ getNewLazer(int race, int tech_level)
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
     descriptor::item::Lazer descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -751,7 +751,7 @@ getNewLazer(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Lazer
+    // descriptor::item::Lazer
     descr.setDamage(damage);
     descr.setRadius(radius);
 
@@ -780,7 +780,7 @@ getNewProtector(int race, int tech_level)
     int protection = meti::getRandInt(descriptor::item::Protector::PROTECTION_MIN, descriptor::item::Protector::PROTECTION_MAX);
 
     descriptor::item::Protector descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -789,7 +789,7 @@ getNewProtector(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Protector
+    // descriptor::item::Protector
     descr.setProtection(protection);
 
     return descr;
@@ -817,7 +817,7 @@ getNewRadar(int race, int tech_level)
     int radius = meti::getRandInt(descriptor::item::Radar::RADIUS_MIN, descriptor::item::Radar::RADIUS_MAX);
 
     descriptor::item::Radar descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -826,7 +826,7 @@ getNewRadar(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Radar
+    // descriptor::item::Radar
     descr.setRadius(radius);
 
     return descr;
@@ -856,7 +856,7 @@ getNewRocket(int race, int tech_level)
     int radius = meti::getRandInt(descriptor::item::Rocket::RADIUS_MIN, descriptor::item::Rocket::RADIUS_MAX);
 
     descriptor::item::Rocket descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -865,7 +865,7 @@ getNewRocket(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Radar
+    // descriptor::item::Rocket
     descr.setAmmo(ammo);
     descr.setDamage(damage);
     descr.setRadius(radius);
@@ -895,7 +895,7 @@ getNewScaner(int race, int tech_level)
     int scan = meti::getRandInt(descriptor::item::Scaner::SCAN_MIN, descriptor::item::Scaner::SCAN_MAX) * (1 + descriptor::item::Scaner::SCAN_TECH_RATE * int(tech_level));
 
     descriptor::item::Scaner descr;
-    // descriptor::item::Base
+    // descriptor::Item
     descr.setMass(mass);
     descr.setCondition(condition);
     descr.setDeterioration(deterioration);
@@ -904,7 +904,7 @@ getNewScaner(int race, int tech_level)
     // descriptor::Equipment
     descr.setModules(modules);
 
-    // descriptor::Radar
+    // descriptor::item::Radar
     descr.setScan(scan);
 
     return descr;
