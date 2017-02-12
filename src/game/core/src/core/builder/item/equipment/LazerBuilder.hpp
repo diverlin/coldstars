@@ -19,6 +19,10 @@
 
 #pragma once
 
+#include "EquipmentBuilder.hpp"
+
+#include <ceti/type/IdType.hpp>
+
 #include <string>
 
 namespace descriptor {
@@ -36,19 +40,19 @@ class Lazer;
 namespace builder {
 namespace item {
 
-class Lazer
+class Lazer : public Equipment
 {
 public:
-    Lazer() = default;
-    ~Lazer() = default;
-
     static model::item::Lazer* getNew();
     static model::item::Lazer* getNew(const std::string&);
     static model::item::Lazer* getNew(const descriptor::item::Lazer&);
 
 private:
-    static model::item::Lazer* createTemplate();
-    static void createInternals(model::item::Lazer*, const descriptor::item::Lazer&);
+    Lazer() = delete;
+    ~Lazer() = delete;
+
+    static model::item::Lazer* __createTemplate(int_t);
+    static void __createInternals(model::item::Lazer*, const descriptor::item::Lazer&);
 }; 
 
 } // namespace item

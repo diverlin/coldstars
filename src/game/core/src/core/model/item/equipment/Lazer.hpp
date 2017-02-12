@@ -26,7 +26,7 @@ namespace item {
 class Lazer : public Equipment
 {
 public:
-    Lazer();
+    Lazer(int_t);
     ~Lazer() = default;
     Lazer(const std::string& data);
     std::string data() const;

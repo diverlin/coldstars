@@ -20,6 +20,7 @@
 #include <core/model/item/equipment/Lazer.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/managers/EntityManager.hpp>
 
 namespace builder {
 namespace item {
@@ -42,27 +43,27 @@ Lazer::getNew(const std::string& data)
 model::item::Lazer*
 Lazer::getNew(const descriptor::item::Lazer& descr)
 {
-    model::item::Lazer* lazer = createTemplate();
-    createInternals(lazer, descr);
-
-    return lazer;
+    model::item::Lazer* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }
 
 model::item::Lazer*
-Lazer::createTemplate()
+Lazer::__createTemplate(int_t descriptor_id)
 { 
-    model::item::Lazer* lazer = new model::item::Lazer;
-    assert(lazer);
-
-    assert(false);
-    //core::global::get().entityManager().reg(lazer);
-    
-    return lazer;
+    model::item::Lazer* model = new model::item::Lazer(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
 } 
 
 void
-Lazer::createInternals(model::item::Lazer* lazer, const descriptor::item::Lazer& descr)
+Lazer::__createInternals(model::item::Lazer* model, const descriptor::item::Lazer& descr)
 {     
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setDamage(descr.damage());
+    model->setRadius(descr.radius());
+
     assert(false);
 //    if (race_id == race::type::NONE_ID) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));

@@ -30,15 +30,12 @@ namespace builder {
 namespace item {
 
 model::item::Protector*
-Protector::createTemplate()
+Protector::getNew()
 {
-    model::item::Protector* protector = new model::item::Protector;
-    assert(protector);
-
-    assert(false);
-    //core::global::get().entityManager().reg(protector);
-    
-    return protector;
+    const descriptor::item::Protector& descr = core::global::get().descriptors().protector().random();
+    model::item::Protector* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 } 
 
 std::vector<model::item::Protector*>
@@ -52,16 +49,6 @@ Protector::getNew(int num)
 }
 
 model::item::Protector*
-Protector::getNew()
-{
-    const descriptor::item::Protector& descr = core::global::get().descriptors().protector().random();
-    model::item::Protector* protector = createTemplate();
-    createInternals(protector, descr);
-
-    return protector;
-} 
-
-model::item::Protector*
 Protector::getNew(const std::string& data)
 {
     descriptor::item::Protector descr(data);
@@ -72,15 +59,26 @@ Protector::getNew(const std::string& data)
 model::item::Protector*
 Protector::getNew(const descriptor::item::Protector& descr)
 {
-    model::item::Protector* protector = createTemplate();
-    createInternals(protector, descr);
+    model::item::Protector* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
+}
 
-    return protector;
+model::item::Protector*
+Protector::__createTemplate(int_t descriptor_id)
+{
+    model::item::Protector* model = new model::item::Protector(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
 }
 
 void
-Protector::createInternals(model::item::Protector* protector, const descriptor::item::Protector& descr)
+Protector::__createInternals(model::item::Protector* model, const descriptor::item::Protector& descr)
 {     
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setProtection(descr.protection());
+
     assert(false);
 //    ItemCommonData common_data = extractCommonData(descriptor);
 
