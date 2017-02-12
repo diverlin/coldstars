@@ -42,7 +42,9 @@ Manager::Manager()
     bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
         __load();
-    }
+    } /*else {
+       generate();
+    }*/
 }
 
 void Manager::add(Galaxy* galaxy) {
