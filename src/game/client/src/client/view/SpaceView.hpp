@@ -70,6 +70,9 @@ class BaseParticleSystem;
 }
 class VerticalFlowText;
 
+namespace descriptor{
+class BaseView;
+} // namespace descriptor
 
 namespace view {
 
@@ -161,8 +164,8 @@ private:
     void __add(jeti::BaseParticleSystem*);
     void __add(VerticalFlowText*);
 
-    void __loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view);
-    void __cache(model::SpaceObject*, jeti::view::BaseView*);
+    void __loadResourcesFor(model::SpaceObject* model, descriptor::BaseView*, jeti::view::BaseView* view);
+    void __cache(model::SpaceObject*, descriptor::BaseView*, jeti::view::BaseView*);
 
     void __clear();
 

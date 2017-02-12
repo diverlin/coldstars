@@ -36,6 +36,10 @@ class Orientation;
 } // namespace control
 
 namespace model {
+class Base;
+} // namespace model
+
+namespace descriptor {
 class BaseView;
 } // namespace model
 
@@ -57,7 +61,7 @@ namespace view {
 class BaseView
 {
 public:
-    BaseView(ceti::model::BaseView*);
+    BaseView(ceti::model::Base*);
     virtual ~BaseView();
 
 //    void validateResources() const;
@@ -98,8 +102,10 @@ protected:
     //void RenderAxis(const Renderer&) const;
 
 private:
-    ceti::model::BaseView* m_model_base = nullptr;
-    ceti::model::BaseView* model() const { return m_model_base; }
+    ceti::descriptor::BaseView* m_descriptor_view = nullptr;
+    ceti::model::Base* m_model_base = nullptr;
+    ceti::descriptor::BaseView* descriptor() const { return m_descriptor_view; }
+    ceti::model::Base* model() const { return m_model_base; }
 
     glm::vec4 m_color;
 

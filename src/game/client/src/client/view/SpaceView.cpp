@@ -27,6 +27,10 @@
 #include <core/common/Global.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 
+#include <core/descriptor/StarDescriptor.hpp>
+#include <core/descriptor/PlanetDescriptor.hpp>
+#include <core/descriptor/AsteroidDescriptor.hpp>
+
 #include <client/view/ShipDrawable.hpp>
 #include <client/view/BulletDrawable.hpp>
 #include <client/view/ContainerDrawable.hpp>
@@ -190,9 +194,11 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
     jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
-        view = new view::Star(model);
+        assert(false);
+        auto descr = new descriptor::Star;
+        view = new view::Star(model, descr);
         applyConstantRotationAnimation(view);
-        __cache(model, view);
+        __cache(model, descr, view);
     }
     assert(view);
 
@@ -207,9 +213,11 @@ void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
 //    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
     jeti::view::BaseView* view = __tryGetView(model);
     if (!view) {
-        view = new view::Planet(model);
+        assert(false);
+        auto descr = new descriptor::Planet;
+        view = new view::Planet(model, descr);
         applyConstantRotationAnimation(view);
-        __cache(model, view);
+        __cache(model, descr, view);
     }
     assert(view);
 
@@ -225,9 +233,11 @@ void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
         //if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
             jeti::view::BaseView* view = __tryGetView(model);
             if (!view) {
-                view = new view::Asteroid(model);
+                assert(false);
+                auto descr = new descriptor::Asteroid;
+                view = new view::Asteroid(model, descr);
                 applyConstantRotationAnimation(view);
-                __cache(model, view);
+                __cache(model, descr, view);
             }
             assert(view);
 
@@ -365,7 +375,7 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     {
     jeti::Mesh* mesh = nullptr;
 
-    int_t descritprorId = model->mesh();
+    int_t descritprorId = view->mesh();
     auto it = m_meshCollector.find(descritprorId);
     if (it != m_meshCollector.end()) {
         mesh = it->second;
@@ -404,9 +414,9 @@ void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* 
     }
 }
 
-void Space::__cache(model::SpaceObject* ob, jeti::view::BaseView* view)
+void Space::__cache(model::SpaceObject* ob, descriptor::BaseView* descr, jeti::view::BaseView* view)
 {
-    __loadResourcesFor(ob, view);
+    __loadResourcesFor(ob, descr, view);
     m_cache.insert(std::make_pair(ob, view));
     m_cache2.insert(std::make_pair(view, ob));
 }

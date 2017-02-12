@@ -27,7 +27,7 @@
 
 namespace ceti {
 
-namespace descriptor {
+//namespace descriptor {
 
 //class BaseView : private NonCopyable
 //{
@@ -59,37 +59,37 @@ namespace descriptor {
 //    }
 //};
 
-} // namespace descriptor
+//} // namespace descriptor
 
-namespace model {
+//namespace model {
 
-class BaseView : private NonCopyable
-{
-public:
-    BaseView() = default;
-    ~BaseView() = default;
-    BaseView(const std::string& data);
-    std::string data() const;
+//class BaseView : private NonCopyable
+//{
+//public:
+//    BaseView() = default;
+//    ~BaseView() = default;
+//    BaseView(const std::string& data);
+//    std::string data() const;
 
-    void setMesh(int mesh) { m_mesh = mesh; }
-    void setMaterial(int material) { m_material = material; }
+//    void setMesh(int mesh) { m_mesh = mesh; }
+//    void setMaterial(int material) { m_material = material; }
 
-    int_t mesh() const { return m_mesh; }
-    int_t material() const { return m_material; }
+//    int_t mesh() const { return m_mesh; }
+//    int_t material() const { return m_material; }
 
-private:
-    int_t m_mesh = NONE;
-    int_t m_material = NONE;
+//private:
+//    int_t m_mesh = NONE;
+//    int_t m_material = NONE;
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_mesh;
-        ar & m_material;
-    }
-};
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & m_mesh;
+//        ar & m_material;
+//    }
+//};
 
-} // namespace model
+//} // namespace model
 
 } // namespace ceti

@@ -47,10 +47,6 @@ Planet::getNew(descriptor::Planet* descr)
 {
     model::Planet* model = __createTemplate();
 
-    /// BaseView
-    model->setMesh(descr->mesh());
-    model->setMaterial(descr->texture());
-
     /// Base
     LifeData life_data;
     life_data.armor = descr->armor();

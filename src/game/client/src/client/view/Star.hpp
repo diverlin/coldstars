@@ -20,6 +20,10 @@
 
 #include <jeti/BaseView.hpp>
 
+namespace descriptor {
+class Star;
+} // namespace descriptor
+
 namespace model {
 class Star;
 } // namespace model
@@ -29,14 +33,16 @@ namespace view {
 class Star : public jeti::view::BaseView
 {
 public:
-    Star(model::Star*);
+    Star(model::Star*, descriptor::Star*);
     virtual ~Star() override final;
 
     //        void draw(const jeti::Renderer& render) override final;
     model::Star* model() const { return m_model_star; }
+    descriptor::Star* descriptor() const { return m_descriptor_star; }
 
 private:
     model::Star* m_model_star = nullptr;
+    descriptor::Star* m_descriptor_star = nullptr;
 }; 
 
 } // namespace view

@@ -47,10 +47,6 @@ Asteroid::getNew(descriptor::Asteroid* descr)
 {
     model::Asteroid* model = __createTemplate();
 
-    /// BaseView
-    model->setMesh(descr->mesh());
-    model->setMaterial(descr->texture());
-
     /// Base
     LifeData life_data;
     life_data.armor = descr->armor();

@@ -23,10 +23,11 @@
 
 namespace view {
 
-Asteroid::Asteroid(model::Asteroid* model)
+Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
     :
       jeti::view::BaseView(model)
     , m_model_asteroid(model)
+    , m_descriptor_asteroid(descr)
 {   
     setOrientationModel(model);
 }
