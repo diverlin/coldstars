@@ -86,7 +86,7 @@ void MessageManager::process(const Message& message)
 
         // items
     case TELEGRAM::CREATE_BAK: {
-        builder::item::Bak().getNew(message.data);
+        builder::item::Bak::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {

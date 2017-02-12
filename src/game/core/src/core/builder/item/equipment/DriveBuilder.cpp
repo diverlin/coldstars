@@ -20,30 +20,18 @@
 #include <core/model/item/equipment/Drive.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/managers/EntityManager.hpp>
 
 namespace builder {
 namespace item {
 
 model::item::Drive*
-Drive::__createTemplate()
-{
-    model::item::Drive* drive = new model::item::Drive;
-    assert(drive);
-
-    assert(false);
-//    core::global::get().entityManager().reg(drive);
-    
-    return drive;
-} 
-
-model::item::Drive*
 Drive::getNew()
 {
     const descriptor::item::Drive& descr = core::global::get().descriptors().drive().random();
-    model::item::Drive* drive = __createTemplate();
-    __createInternals(drive, descr);
-
-    return drive;
+    model::item::Drive* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }
 
 model::item::Drive*
@@ -57,24 +45,25 @@ Drive::getNew(const std::string& data)
 model::item::Drive*
 Drive::getNew(const descriptor::item::Drive& descr)
 {
-    model::item::Drive* drive = __createTemplate();
-    __createInternals(drive, descr);
-
-    return drive;
+    model::item::Drive* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }        
 
-void Drive::__createInternals(model::item::Drive* drive, const descriptor::item::Drive& descr)
+model::item::Drive*
+Drive::__createTemplate(int_t descriptor_id)
 {
-    assert(false);
-//    ItemCommonData data = extractCommonData(descriptor);
+    model::item::Drive* model = new model::item::Drive(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
+}
 
-//    drive->SetSpeedOrig(descriptor.speed());
-//    drive->SetHyperOrig(descriptor.hyper());
-//    drive->setParentSubTypeId(entity::Type::DRIVE_SLOT_ID);
-//    drive->setItemCommonData(data);
-    
-//    drive->updateProperties();
-//    drive->CountPrice();
+void Drive::__createInternals(model::item::Drive* model, const descriptor::item::Drive& descr)
+{
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setSpeed(descr.speed());
+    model->setHyper(descr.hyper());
 }
 
 } // namespace item

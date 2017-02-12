@@ -61,15 +61,9 @@ Droid::__createTemplate(int_t descriptor_id)
 
 void Droid::__createInternals(model::item::Droid* model, const descriptor::item::Droid& descr)
 {     
-    assert(false);
-//    ItemCommonData common_data = extractCommonData(descr);
-
-//    droid->SetRepairOrig(descriptor.repair());
-//    droid->setParentSubTypeId(entity::type::DROID_SLOT_ID);
-//    droid->setItemCommonData(common_data);
-
-//    droid->updateProperties();
-//    droid->CountPrice();
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setRepair(descr.repair());
 }
 
 } // namespace item

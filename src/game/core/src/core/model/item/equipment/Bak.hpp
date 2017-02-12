@@ -26,7 +26,7 @@ namespace item {
 class Bak : public Equipment
 {
 public:
-    Bak();
+    Bak(int_t);
     ~Bak() = default;
     Bak(const std::string& data);
     std::string data() const;
