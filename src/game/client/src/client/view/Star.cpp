@@ -22,10 +22,11 @@
 
 namespace view {
 
-Star::Star(model::Star* model)
+Star::Star(model::Star* model, descriptor::Star* descr)
     :
       BaseView(model)
     , m_model_star(model)
+    , m_descriptor_star(descr)
 {
     setOrientationModel(model);
 }

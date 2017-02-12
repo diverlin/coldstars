@@ -20,24 +20,30 @@
 
 #include <jeti/BaseView.hpp>
 
-
 namespace model {
 class Asteroid;
 } // namespace model
+
+namespace descriptor {
+class Asteroid;
+} // namespace descriptor
 
 namespace view {
 
 class Asteroid : public jeti::view::BaseView
 {
 public:
-    Asteroid(model::Asteroid*);
+    Asteroid(model::Asteroid*, descriptor::Asteroid*);
     virtual ~Asteroid() override final;
 
     model::Asteroid* model() const  { return m_model_asteroid; }
+    descriptor::Asteroid* descriptor() const  { return m_descriptor_asteroid; }
+
     void draw(const jeti::Renderer& render) const;
 
 private:
     model::Asteroid* m_model_asteroid = nullptr;
+    descriptor::Asteroid* m_descriptor_asteroid = nullptr;
     //        virtual void UpdateInfo() override final;
 }; 
 

@@ -54,8 +54,8 @@ private:
     }
 
 private:
-    int_t m_texture = -1;
-    int_t m_mesh = -1;
+    int_t m_texture = NONE;
+    int_t m_mesh = NONE;
 };
 
 } // namespace descriptor

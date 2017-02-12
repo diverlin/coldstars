@@ -21,7 +21,7 @@
 #include <core/struct/IdData.hpp>
 #include <core/types/DescriptorTypes.hpp>
 
-//#include <ceti/NonCopyable.hpp>
+#include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
 //#include <ceti/IdGenerator.hpp>
 #include <ceti/descriptor/BaseView.hpp>
@@ -119,7 +119,7 @@ private:
 
 namespace model {
 
-class Base : public ceti::model::BaseView
+class Base : public NonCopyable
 {
 public:
     Base() = default;
@@ -152,7 +152,6 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::model::BaseView>(*this);
         ar & m_identity;
         ar & m_descriptor;
         ar & m_id;

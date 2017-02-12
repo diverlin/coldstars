@@ -27,10 +27,11 @@
 
 namespace view {
 
-Planet::Planet(model::Planet* model)
+Planet::Planet(model::Planet* model, descriptor::Planet* descr)
     :
       jeti::view::BaseView(model)
     , m_model_planet(model)
+    , m_descriptor_planet(descr)
 {
     setOrientationModel(model);
 }

@@ -40,7 +40,7 @@ struct UnresolvedDataSpaceObject
 
 namespace model {
 
-class SpaceObject : public ceti::model::Orientation, public model::Base
+class SpaceObject : public ceti::model::Orientation, public Base
 {
 public:
     SpaceObject() = default;

@@ -53,8 +53,6 @@ model::Star*
 Star::getNew(descriptor::Star* descr)
 {
     model::Star* model = __getNewTemplate();
-    model->setMesh(descr->mesh());
-    model->setMaterial(descr->texture());
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));

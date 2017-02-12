@@ -25,20 +25,26 @@ namespace model {
 class Planet;
 } // namespace model
 
+namespace descriptor {
+class Planet;
+} // namespace descriptor
+
 namespace view {
 
 class Planet : public jeti::view::BaseView
 {
 public:
-    Planet(model::Planet*);
+    Planet(model::Planet*, descriptor::Planet*);
     virtual ~Planet() override final;
 
     void draw(const jeti::Renderer&) const override;
 
     model::Planet* model() const { return m_model_planet; }
+    descriptor::Planet* descriptor() const { return m_descriptor_planet; }
 
 private:
     model::Planet* m_model_planet = nullptr;
+    descriptor::Planet* m_descriptor_planet = nullptr;
     //virtual void UpdateInfo() override final;
 }; 
 
