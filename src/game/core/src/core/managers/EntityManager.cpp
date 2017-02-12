@@ -184,8 +184,6 @@ void EntityManager::reg(model::Base* model)
 {
     assert(model);
     if (model->id() == NONE) {
-        //assert(false);
-        // TODO fixme
         model->setId(core::global::get().idGenerator().nextId());
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);

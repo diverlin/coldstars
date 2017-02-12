@@ -20,28 +20,28 @@
 #include "ScanerBuilder.hpp"
 #include <core/descriptor/item/equipment/Scaner.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
-//#include <core/managers/EntityManager.hpp>
 
 #include <core/common/Global.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
+#include <core/managers/EntityManager.hpp>
 
-#include <ceti/Logger.hpp>
+//#include <ceti/Logger.hpp>
 
 namespace builder {
 namespace item {
 
 model::item::Scaner*
-ScanerBuilder::getNew()
+Scaner::getNew()
 {
     const descriptor::item::Scaner& descr = core::global::get().descriptors().scaner().random();
-    model::item::Scaner* model = __createTemplate();
+    model::item::Scaner* model = __createTemplate(descr.id());
     __createInternals(model, descr);
 
     return model;
 }
 
 model::item::Scaner*
-ScanerBuilder::getNew(const std::string& data)
+Scaner::getNew(const std::string& data)
 {
     descriptor::item::Scaner descr(data);
     assert(descr.descriptor() != descriptor::type::SCANER_EQUIPMENT);
@@ -49,29 +49,32 @@ ScanerBuilder::getNew(const std::string& data)
 }
 
 model::item::Scaner*
-ScanerBuilder::getNew(const descriptor::item::Scaner& descr)
+Scaner::getNew(const descriptor::item::Scaner& descr)
 {
-    model::item::Scaner* model = __createTemplate();
+    model::item::Scaner* model = __createTemplate(descr.id());
     __createInternals(model, descr);
 
     return model;
 } 
 
 model::item::Scaner*
-ScanerBuilder::__createTemplate()
+Scaner::__createTemplate(int_t descriptor_id)
 {
-    model::item::Scaner* model = new model::item::Scaner;
+    model::item::Scaner* model = new model::item::Scaner(descriptor_id);
     assert(model);
 
-    assert(false);
-    //core::global::get().entityManager().reg(scaner);
+    core::global::get().entityManager().reg(model);
 
     return model;
 }
 
 void
-ScanerBuilder::__createInternals(model::item::Scaner* model, const descriptor::item::Scaner& descr)
+Scaner::__createInternals(model::item::Scaner* model, const descriptor::item::Scaner& descr)
 {
+    descriptor::item::Scaner copy(descr);
+
+    Item::_createInternals(model, &copy);
+    Equipment::_createInternals(model, &copy);
     assert(false);
 //    ItemCommonData common_data = extractCommonData(descriptor);
     

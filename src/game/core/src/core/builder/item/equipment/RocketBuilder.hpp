@@ -36,11 +36,11 @@ class Rocket;
 namespace builder {
 namespace item {
 
-class RocketBuilder
+class Rocket
 {
 public:
-    RocketBuilder();
-    ~RocketBuilder();
+    Rocket();
+    ~Rocket();
 
     static model::item::Rocket* getNew();
     static model::item::Rocket* getNew(const std::string&);

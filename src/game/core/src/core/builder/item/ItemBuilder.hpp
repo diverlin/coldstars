@@ -16,44 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include "EquipmentBuilder.hpp"
-
-#include <ceti/type/IdType.hpp>
-
-#include <string>
-
 namespace descriptor {
-namespace item {
-class Scaner;
-} // namespace item
+class Item;
 } // namespace descriptor
 
 namespace model {
-namespace item {
-class Scaner;
-} // namespace item
+class Item;
 } // namespace model
 
+
 namespace builder {
-namespace item {
 
-class Scaner : public Equipment
+class Item
 {
-public:
-    Scaner() = default;
-    ~Scaner() = default;
-
-    static model::item::Scaner* getNew();
-    static model::item::Scaner* getNew(const std::string&);
-    static model::item::Scaner* getNew(const descriptor::item::Scaner&);
+protected:
+    static void _createInternals(model::Item*, descriptor::Item*);
 
 private:
-    static model::item::Scaner* __createTemplate(int_t);
-    static void __createInternals(model::item::Scaner*, const descriptor::item::Scaner&);
-}; 
+    Item() = delete;
+    ~Item() = delete;
+};
 
-} // namespace item
 } // namespace builder

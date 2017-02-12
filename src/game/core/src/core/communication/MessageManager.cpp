@@ -107,7 +107,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_SCANER: {
-        builder::item::ScanerBuilder::getNew(message.data);
+        builder::item::Scaner::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_RADAR: {

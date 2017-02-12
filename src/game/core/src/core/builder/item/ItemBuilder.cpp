@@ -17,37 +17,16 @@
 */
 
 
-#pragma once
+#include "ItemBuilder.hpp"
 
-#include "Equipment.hpp"
+#include <model/item/Item.hpp>
+#include <descriptor/item/Item.hpp>
 
-namespace model {
-namespace item {
+namespace builder {
 
-class Scaner : public Equipment
+void Item::_createInternals(model::Item* model, descriptor::Item* descr)
 {
-public:
-    Scaner(int_t);
-    ~Scaner() = default;
-    Scaner(const std::string& data);
-    std::string data() const;
+    model->setCondition(descr->condition());
+}
 
-    void setScan(int scan) { m_scan = scan; }
-
-    int scan() const { return m_scan; }
-
-private:
-    int m_scan = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
-        ar & m_scan;
-    }
-};
-
-} // namespace item
-} // namespace model
-
+} // namespace builder
