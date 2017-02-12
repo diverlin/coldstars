@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Radar::Radar()
+Radar::Radar(int_t descriptor_id)
 {
+    setDescriptor(descriptor_id);
     setType(entity::type::EQUIPMENT_ID);
     setSubType(entity::type::RADAR_EQUIPMENT_ID);
 }
