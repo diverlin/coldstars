@@ -21,6 +21,7 @@
 #include <core/model/item/equipment/Bak.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/managers/EntityManager.hpp>
 
 namespace builder {
 namespace item {
@@ -43,38 +44,25 @@ Bak::getNew(const std::string& data)
 model::item::Bak*
 Bak::getNew(const descriptor::item::Bak& descr)
 {
-    model::item::Bak* bak = __createTemplate();
-    __createInternals(bak, descr);
-    
-    return bak;
+    model::item::Bak* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }
 
 model::item::Bak*
-Bak::__createTemplate()
+Bak::__createTemplate(int_t descriptor_id)
 {
-    model::item::Bak* bak = new model::item::Bak;
-    assert(bak);
-
-    assert(false);
-//    core::global::get().entityManager().reg(bak);
-    return bak;
+    model::item::Bak* model = new model::item::Bak(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
 }
 
 void
-Bak::__createInternals(model::item::Bak* bak, const descriptor::item::Bak& descriptor)
+Bak::__createInternals(model::item::Bak* model, const descriptor::item::Bak& descr)
 {
-    assert(false);
-//    assert(descriptor.type() == (int)descriptor::Type::BAK);
-
-//    ItemCommonData data = extractCommonData(descriptor);
-
-//    bak->setFuelMaxOrig(descriptor.fuelMax());
-//    bak->setFuel(descriptor.fuelMax()); // ?? max or not, second descriptor should be used
-//    bak->setParentSubTypeId(entity::type::BAK_SLOT_ID);
-//    bak->setItemCommonData(data);
-
-//    bak->updateProperties();
-//    bak->countPrice();
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setFuel(descr.fuel());
 }
 
 } // namespace item

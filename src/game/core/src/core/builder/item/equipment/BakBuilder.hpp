@@ -19,6 +19,10 @@
 
 #pragma once
 
+#include "EquipmentBuilder.hpp"
+
+#include <ceti/type/IdType.hpp>
+
 #include <string>
 
 namespace descriptor {
@@ -36,18 +40,18 @@ class Bak;
 namespace builder {
 namespace item {
 
-class Bak
+class Bak : public Equipment
 {
 public:
-    Bak() = default;
-    ~Bak() = default;
-
     static model::item::Bak* getNew();
     static model::item::Bak* getNew(const std::string&);
     static model::item::Bak* getNew(const descriptor::item::Bak&);
 
 private:
-    static model::item::Bak* __createTemplate();
+    Bak() = delete;
+    ~Bak() = delete;
+
+    static model::item::Bak* __createTemplate(int_t);
     static void __createInternals(model::item::Bak*, const descriptor::item::Bak&);
 }; 
 
