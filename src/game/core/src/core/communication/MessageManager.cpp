@@ -95,7 +95,7 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_DROID: {
-        builder::item::Droid().getNew(message.data);
+        builder::item::Droid::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {

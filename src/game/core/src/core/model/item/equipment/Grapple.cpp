@@ -23,8 +23,9 @@
 namespace model {
 namespace item {
 
-Grapple::Grapple()
+Grapple::Grapple(int_t descriptor_id)
 {
+    setDescriptor(descriptor_id);
     setType(entity::type::EQUIPMENT_ID);
     setSubType(entity::type::GRAPPLE_EQUIPMENT_ID);
 }
