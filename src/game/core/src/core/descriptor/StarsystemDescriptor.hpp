@@ -37,7 +37,7 @@ public:
     ~Starsystem() = default;
 
     std::string info() const {
-        std::string result = "descriptor::Starsyster: " + Base::info();
+        std::string result = "descriptor::Starsystem: " + Base::info();
         result += ceti::to_string(" stars: ", stars);
         result += ceti::to_string(" planets: ", planets);
         return result;

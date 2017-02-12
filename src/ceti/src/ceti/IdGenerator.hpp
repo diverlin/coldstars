@@ -26,14 +26,14 @@
 
 class IdGenerator
 {
-    public:
-        IdGenerator() {}
-        ~IdGenerator() {}
-        
-        int_t nextId();
-        void addFreeId(int_t free_id) { free_ids.push_back(free_id); }
-            
-    private:
-        int_t last_incremented_id = 0;
-        std::vector<int_t> free_ids;
+public:
+    IdGenerator() = default;
+    ~IdGenerator() = default;
+
+    int_t nextId();
+    void addFreeId(int_t free_id) { free_ids.push_back(free_id); }
+
+private:
+    int_t last_incremented_id = 0;
+    std::vector<int_t> free_ids;
 };

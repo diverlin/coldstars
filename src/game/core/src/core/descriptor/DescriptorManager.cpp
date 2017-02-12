@@ -17,13 +17,14 @@
 */
 
 #include "DescriptorManager.hpp"
-#include <descriptor/DescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/common/Global.hpp>
+
 #include <meti/RandUtils.hpp>
 
 #include <ceti/FsUtils.hpp>
 
 #include <fstream>
-
 
 namespace descriptor {
 
@@ -44,8 +45,67 @@ Manager::Manager()
     }
 }
 
-Manager::~Manager()
-{}
+void Manager::add(const Galaxy& galaxy) {
+    m_galaxy.add(galaxy);
+}
+void Manager::add(const Sector& sector) {
+    m_sector.add(sector);
+}
+void Manager::add(const Starsystem& starsystem) {
+    m_starsystem.add(starsystem);
+}
+void Manager::add(const Star& star) {
+    m_star.add(star);
+}
+void Manager::add(const Planet& planet) {
+    m_planet.add(planet);
+}
+void Manager::add(const Asteroid& asteroid) {
+    m_asteroid.add(asteroid);
+}
+void Manager::add(const Ship& ship) {
+    m_ship.add(ship);
+}
+void Manager::add(const SpaceStation& spacestation) {
+    m_spacestation.add(spacestation);
+}
+void Manager::add(const Satellite& satellite) {
+    m_satellite.add(satellite);
+}
+void Manager::add(const item::Drive& drive) {
+    m_drive.add(drive);
+}
+void Manager::add(const item::Bak& bak) {
+    m_bak.add(bak);
+}
+void Manager::add(const item::Droid& droid) {
+    m_droid.add(droid);
+}
+void Manager::add(const item::Grapple& grapple) {
+    m_grapple.add(grapple);
+}
+void Manager::add(const item::Lazer& lazer) {
+    m_lazer.add(lazer);
+}
+void Manager::add(const item::Protector& protector) {
+    m_protector.add(protector);
+}
+void Manager::add(const item::Radar& radar) {
+    m_radar.add(radar);
+}
+void Manager::add(const item::Rocket& rocket) {
+    m_rocket.add(rocket);
+}
+void Manager::add(const item::Scaner& scaner) {
+    m_scaner.add(scaner);
+}
+void Manager::add(Mesh* mesh) {
+    m_mesh.add(mesh);
+}
+void Manager::add(Material* texture) {
+    m_material.add(texture);
+}
+
 
 void
 Manager::add(const BaseOLD& descriptor)

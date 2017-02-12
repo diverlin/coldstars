@@ -94,7 +94,7 @@ class Manager
 {
 public:
     Manager();
-    ~Manager();
+    ~Manager() = default;
 
     void add(const BaseOLD&);
     BaseOLD getRand(const Type&);
@@ -102,66 +102,26 @@ public:
 
     unsigned long int size() const { return m_descriptors.size(); }
 
-    void add(const Galaxy& galaxy) {
-        m_galaxy.add(galaxy);
-    }
-    void add(const Sector& sector) {
-        m_sector.add(sector);
-    }
-    void add(const Starsystem& starsystem) {
-        m_starsystem.add(starsystem);
-    }
-    void add(const Star& star) {
-        m_star.add(star);
-    }
-    void add(const Planet& planet) {
-        m_planet.add(planet);
-    }
-    void add(const Asteroid& asteroid) {
-        m_asteroid.add(asteroid);
-    }
-    void add(const Ship& ship) {
-        m_ship.add(ship);
-    }
-    void add(const SpaceStation& spacestation) {
-        m_spacestation.add(spacestation);
-    }
-    void add(const Satellite& satellite) {
-        m_satellite.add(satellite);
-    }
-    void add(const item::Drive& drive) {
-        m_drive.add(drive);
-    }
-    void add(const item::Bak& bak) {
-        m_bak.add(bak);
-    }
-    void add(const item::Droid& droid) {
-        m_droid.add(droid);
-    }
-    void add(const item::Grapple& grapple) {
-        m_grapple.add(grapple);
-    }
-    void add(const item::Lazer& lazer) {
-        m_lazer.add(lazer);
-    }
-    void add(const item::Protector& protector) {
-        m_protector.add(protector);
-    }
-    void add(const item::Radar& radar) {
-        m_radar.add(radar);
-    }
-    void add(const item::Rocket& rocket) {
-        m_rocket.add(rocket);
-    }
-    void add(const item::Scaner& scaner) {
-        m_scaner.add(scaner);
-    }
-    void add(Mesh* mesh) {
-        m_mesh.add(mesh);
-    }
-    void add(Material* texture) {
-        m_material.add(texture);
-    }
+    void add(const Galaxy&);
+    void add(const Sector&);
+    void add(const Starsystem&);
+    void add(const Star&);
+    void add(const Planet&);
+    void add(const Asteroid&);
+    void add(const Ship&);
+    void add(const SpaceStation&);
+    void add(const Satellite&);
+    void add(const item::Drive&);
+    void add(const item::Bak&);
+    void add(const item::Droid&);
+    void add(const item::Grapple&);
+    void add(const item::Lazer&);
+    void add(const item::Protector&);
+    void add(const item::Radar&);
+    void add(const item::Rocket&);
+    void add(const item::Scaner&);
+    void add(Mesh*);
+    void add(Material*);
 
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }

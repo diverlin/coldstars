@@ -46,33 +46,43 @@ glm::vec3 randDirection() {
     return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
 }
 
+void resolveId(descriptor::Base& descr) {
+    if (descr.id() == NONE) {
+        int_t id = core::global::get().idGenerator().nextId();
+        descr.setId(id);
+    }
+}
+
 } // namespace
 
 /* world */
 descriptor::Galaxy
 getNewGalaxy(const std::vector<int_t>& sectors) {
-    descriptor::Galaxy descriptor;
+    descriptor::Galaxy descr;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
-        descriptor.sectors.push_back(meti::getRand(sectors));
+        descr.sectors.push_back(meti::getRand(sectors));
     }
-    return descriptor;
+    resolveId(descr);
+    return descr;
 }
 
 descriptor::Sector
 getNewSector(const std::vector<int_t>& starsystems) {
-    descriptor::Sector descriptor;
+    descriptor::Sector descr;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
-        descriptor.starsystems.push_back(meti::getRand(starsystems));
+        descr.starsystems.push_back(meti::getRand(starsystems));
     }
-    return descriptor;
+
+    resolveId(descr);
+    return descr;
 }
 
 descriptor::Starsystem
 getNewStarsystem(int race)
 {
-    descriptor::Starsystem descriptor;
+    descriptor::Starsystem descr;
     if (race == NONE) {
         race = int(race::type::R0);
     }
@@ -80,7 +90,8 @@ getNewStarsystem(int race)
 //    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
 //    descriptor.add(descriptor::Key::RACE, race);
 
-    return descriptor;
+    resolveId(descr);
+    return descr;
 }
 
 /* spaceobjects */
@@ -127,6 +138,8 @@ getNewStar()
     descr.setTexture(textureDescriptorIdFromType (texture::type::STAR));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
 
+    resolveId(descr);
+
     assert(descr.texture() != NONE);
     assert(descr.mesh() != NONE);
 
@@ -155,6 +168,8 @@ getNewPlanet()
     descr.setDirection(randDirection());
     descr.setTexture(textureDescriptorIdFromType (texture::type::PLANET));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
+
+    resolveId(descr);
 
     assert(descr.texture() != NONE);
     assert(descr.mesh() != NONE);
@@ -241,6 +256,8 @@ getNewAsteroid()
     descr.setDirection(randDirection());
     descr.setTexture(textureDescriptorIdFromType (texture::type::ASTEROID));
     descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED));
+
+    resolveId(descr);
 
     assert(descr.texture() != NONE);
     assert(descr.mesh() != NONE);
@@ -363,38 +380,41 @@ getNewShip()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::Ship descriptor;
-    descriptor.setRace(int_t(race_id));
-    //descriptor.setType(int_t(type_id));
-    descriptor.setSize(size_id);
+    descriptor::Ship descr;
+    descr.setRace(int_t(race_id));
+    //descr.setType(int_t(type_id));
+    descr.setSize(size_id);
 
-    descriptor.setSpace(space);
-    descriptor.setArmor(armor);
-    descriptor.setProtection(protection);
+    descr.setSpace(space);
+    descr.setArmor(armor);
+    descr.setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setTemperature(temperature);
+    descr.setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setPrice(price);
+    descr.setPrice(price);
 
-    descriptor.setBakSlotNum(slot_bak_num);
-    descriptor.setDriveSlotNum(slot_drive_num);
-    descriptor.setDroidSlotNum(slot_droid_num);
+    descr.setBakSlotNum(slot_bak_num);
+    descr.setDriveSlotNum(slot_drive_num);
+    descr.setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setEnergizerSlotNum(slot_energizer_num);
-    descriptor.setFreezerSlotNum(slot_freezer_num);
+    descr.setEnergizerSlotNum(slot_energizer_num);
+    descr.setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setGrappleSlotNum(slot_grapple_num);
-    descriptor.setProtectorSlotNum(slot_protector_num);
-    descriptor.setRadarSlotNum(slot_radar_num);
-    descriptor.setScanerSlotNum(slot_scaner_num);
-    descriptor.setWeaponSlotNum(slot_weapon_num);
-    descriptor.setArtefactSlotNum(slot_artefact_num);
-    descriptor.setCargoSlotNum(slot_cargo_num);
+    descr.setGrappleSlotNum(slot_grapple_num);
+    descr.setProtectorSlotNum(slot_protector_num);
+    descr.setRadarSlotNum(slot_radar_num);
+    descr.setScanerSlotNum(slot_scaner_num);
+    descr.setWeaponSlotNum(slot_weapon_num);
+    descr.setArtefactSlotNum(slot_artefact_num);
+    descr.setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descriptor.setDrawTurrels(false);
+    descr.setDrawTurrels(false);
 
-    return descriptor;
+    resolveId(descr);
+
+
+    return descr;
 }
 
 
@@ -435,38 +455,41 @@ getNewSpaceStation()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::SpaceStation descriptor;
-    descriptor.setRace(int_t(race_id));
-    //descriptor.setType(int_t(type_id));
-    descriptor.setSize(size_id);
+    descriptor::SpaceStation descr;
+    descr.setRace(int_t(race_id));
+    //descr.setType(int_t(type_id));
+    descr.setSize(size_id);
 
-    descriptor.setSpace(space);
-    descriptor.setArmor(armor);
-    descriptor.setProtection(protection);
+    descr.setSpace(space);
+    descr.setArmor(armor);
+    descr.setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setTemperature(temperature);
+    descr.setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setPrice(price);
+    descr.setPrice(price);
 
-    descriptor.setBakSlotNum(slot_bak_num);
-    descriptor.setDriveSlotNum(slot_drive_num);
-    descriptor.setDroidSlotNum(slot_droid_num);
+    descr.setBakSlotNum(slot_bak_num);
+    descr.setDriveSlotNum(slot_drive_num);
+    descr.setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setEnergizerSlotNum(slot_energizer_num);
-    descriptor.setFreezerSlotNum(slot_freezer_num);
+    descr.setEnergizerSlotNum(slot_energizer_num);
+    descr.setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setGrappleSlotNum(slot_grapple_num);
-    descriptor.setProtectorSlotNum(slot_protector_num);
-    descriptor.setRadarSlotNum(slot_radar_num);
-    descriptor.setScanerSlotNum(slot_scaner_num);
-    descriptor.setWeaponSlotNum(slot_weapon_num);
-    descriptor.setArtefactSlotNum(slot_artefact_num);
-    descriptor.setCargoSlotNum(slot_cargo_num);
+    descr.setGrappleSlotNum(slot_grapple_num);
+    descr.setProtectorSlotNum(slot_protector_num);
+    descr.setRadarSlotNum(slot_radar_num);
+    descr.setScanerSlotNum(slot_scaner_num);
+    descr.setWeaponSlotNum(slot_weapon_num);
+    descr.setArtefactSlotNum(slot_artefact_num);
+    descr.setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descriptor.setDrawTurrels(false);
+    descr.setDrawTurrels(false);
 
-    return descriptor;
+    resolveId(descr);
+
+
+    return descr;
 }
 
 descriptor::Satellite
@@ -506,44 +529,47 @@ getNewSatellite()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::Satellite descriptor;
-    descriptor.setRace(int_t(race_id));
-    //descriptor.setType(int_t(type_id));
-    descriptor.setSize(size_id);
+    descriptor::Satellite descr;
+    descr.setRace(int_t(race_id));
+    //descr.setType(int_t(type_id));
+    descr.setSize(size_id);
 
-    descriptor.setSpace(space);
-    descriptor.setArmor(armor);
-    descriptor.setProtection(protection);
+    descr.setSpace(space);
+    descr.setArmor(armor);
+    descr.setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setTemperature(temperature);
+    descr.setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setPrice(price);
+    descr.setPrice(price);
 
-    descriptor.setBakSlotNum(slot_bak_num);
-    descriptor.setDriveSlotNum(slot_drive_num);
-    descriptor.setDroidSlotNum(slot_droid_num);
+    descr.setBakSlotNum(slot_bak_num);
+    descr.setDriveSlotNum(slot_drive_num);
+    descr.setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descriptor.setEnergizerSlotNum(slot_energizer_num);
-    descriptor.setFreezerSlotNum(slot_freezer_num);
+    descr.setEnergizerSlotNum(slot_energizer_num);
+    descr.setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descriptor.setGrappleSlotNum(slot_grapple_num);
-    descriptor.setProtectorSlotNum(slot_protector_num);
-    descriptor.setRadarSlotNum(slot_radar_num);
-    descriptor.setScanerSlotNum(slot_scaner_num);
-    descriptor.setWeaponSlotNum(slot_weapon_num);
-    descriptor.setArtefactSlotNum(slot_artefact_num);
-    descriptor.setCargoSlotNum(slot_cargo_num);
+    descr.setGrappleSlotNum(slot_grapple_num);
+    descr.setProtectorSlotNum(slot_protector_num);
+    descr.setRadarSlotNum(slot_radar_num);
+    descr.setScanerSlotNum(slot_scaner_num);
+    descr.setWeaponSlotNum(slot_weapon_num);
+    descr.setArtefactSlotNum(slot_artefact_num);
+    descr.setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descriptor.setDrawTurrels(false);
+    descr.setDrawTurrels(false);
 
-    return descriptor;
+    resolveId(descr);
+
+
+    return descr;
 }
 
 
 /* items */
 namespace {
-void addItemCommonFields(descriptor::BaseOLD& descriptor,
+void addItemCommonFields(descriptor::BaseOLD& descr,
                          int race,
                          int tech_level,
                          int modules_num_max,
@@ -551,13 +577,13 @@ void addItemCommonFields(descriptor::BaseOLD& descriptor,
                          int condition_max,
                          int deterioration,
                          int price) {
-    descriptor.add(descriptor::Key::RACE, race);
-    descriptor.add(descriptor::Key::TECH, tech_level);
-    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Key::MASS, mass);
-    descriptor.add(descriptor::Key::CONDITION_MAX, condition_max);
-    descriptor.add(descriptor::Key::DETERIORATION, deterioration);
-    descriptor.add(descriptor::Key::PRICE, price);
+    descr.add(descriptor::Key::RACE, race);
+    descr.add(descriptor::Key::TECH, tech_level);
+    descr.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descr.add(descriptor::Key::MASS, mass);
+    descr.add(descriptor::Key::CONDITION_MAX, condition_max);
+    descr.add(descriptor::Key::DETERIORATION, deterioration);
+    descr.add(descriptor::Key::PRICE, price);
 }
 } // namespace
 
@@ -599,6 +625,9 @@ getNewBak(int race, int tech_level)
     // descriptor::item::Bak
     descr.setFuel(fuel);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -638,6 +667,9 @@ getNewDrive(int race, int tech_level)
     descr.setSpeed(speed);
     descr.setHyper(hyper);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -673,6 +705,9 @@ getNewDroid(int race, int tech_level)
 
     // descriptor::item::Droid
     descr.setRepair(repair);
+
+    resolveId(descr);
+
 
     return descr;
 }
@@ -717,6 +752,9 @@ getNewGrapple(int race, int tech_level)
     descr.setRadius(radius);
     descr.setSpeed(speed);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -755,6 +793,9 @@ getNewLazer(int race, int tech_level)
     descr.setDamage(damage);
     descr.setRadius(radius);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -792,6 +833,9 @@ getNewProtector(int race, int tech_level)
     // descriptor::item::Protector
     descr.setProtection(protection);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -828,6 +872,9 @@ getNewRadar(int race, int tech_level)
 
     // descriptor::item::Radar
     descr.setRadius(radius);
+
+    resolveId(descr);
+
 
     return descr;
 }
@@ -870,6 +917,9 @@ getNewRocket(int race, int tech_level)
     descr.setDamage(damage);
     descr.setRadius(radius);
 
+    resolveId(descr);
+
+
     return descr;
 }
 
@@ -906,6 +956,9 @@ getNewScaner(int race, int tech_level)
 
     // descriptor::item::Radar
     descr.setScan(scan);
+
+    resolveId(descr);
+
 
     return descr;
 }
