@@ -41,6 +41,7 @@ const float Bak::MODULES_NUM_WEIGHT = 0.3f;
 Bak::Bak()
 {
     setDescriptor(descriptor::type::BAK_EQUIPMENT);
+    setSlotType(entity::type::BAK_SLOT_ID);
 }
 
 Bak::Bak(const std::string& data)

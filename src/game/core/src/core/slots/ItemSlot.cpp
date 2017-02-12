@@ -410,7 +410,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 
 #ifdef USE_MODULES
         if ( (m_item->typeId() == entity::Type::MODULE_ID) && (slot->item()->typeId() == entity::Type::EQUIPMENT_ID) ) {
-            if (((BaseEquipment*)slot->item())->InsertModule((BaseModule*)m_item) == true) {
+            if (((Equipment*)slot->item())->InsertModule((BaseModule*)m_item) == true) {
                 return true;
             }
         }

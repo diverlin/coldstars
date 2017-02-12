@@ -42,8 +42,8 @@ GoodsPack::GoodsPack(int id, entity::type subtype_id)
 GoodsPack::~GoodsPack() 
 {}
 
-void GoodsPack::Increase(int amount) { model()->setMass(model()->mass() + amount); }
-void GoodsPack::Decrease(int amount) { model()->setMass(model()->mass() - amount); }
+void GoodsPack::Increase(int amount) { m_mass += amount; }
+void GoodsPack::Decrease(int amount) { m_mass -= amount; }
 
            
 /* virtual */

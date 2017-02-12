@@ -51,6 +51,7 @@ const float Rocket::MODULES_NUM_WEIGHT = 0.2f;
 Rocket::Rocket()
 {
     setDescriptor(descriptor::type::ROCKET_EQUIPMENT);
+    setSlotType(entity::type::WEAPON_SLOT_ID);
 }
 
 Rocket::Rocket(const std::string& data)

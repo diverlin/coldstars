@@ -43,6 +43,7 @@ const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
 Scaner::Scaner()
 {
     setDescriptor(descriptor::type::SCANER_EQUIPMENT);
+    setSlotType(entity::type::SCANER_SLOT_ID);
 }
 
 Scaner::Scaner(const std::string& data)

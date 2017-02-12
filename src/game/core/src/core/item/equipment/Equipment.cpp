@@ -37,7 +37,7 @@ Equipment::Equipment()
 /*virtual */
 Equipment::~Equipment()
 {
-//    LOG("___::~BaseEquipment("+std::to_string(model()->id())+")");
+//    LOG("___::~Equipment("+std::to_string(model()->id())+")");
 
     //delete animation_notfunctioning;
 }
@@ -66,7 +66,7 @@ void Equipment::AddCommonInfo()
 }
 
 #ifdef USE_MODULES
-bool BaseEquipment::InsertModule(BaseModule* module)
+bool Equipment::InsertModule(BaseModule* module)
 {
     if (module->parentSubTypeId() == subTypeId())
     {
@@ -92,7 +92,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 #endif
 
 ///* virtual */
-//void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+//void Equipment::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 //{
 //    RenderKorpus(render, box);
 
@@ -129,19 +129,19 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //}
 
 
-//void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//void Equipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{
-////    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
+////    LOG(" Equipment::SaveData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-//void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+//void Equipment::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
-////    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
+////    LOG(" Equipment::LoadData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
-//void BaseEquipment::ResolveData()
+//void Equipment::ResolveData()
 //{
-////    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
+////    LOG(" Equipment::ResolveData()  id=" + std::to_string(model()->id()) + " START");
 //}
 
 } // namespace control

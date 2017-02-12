@@ -19,7 +19,6 @@
 #pragma once
 
 #include <item/Item.hpp>
-//#include <common/constants.hpp>
 
 class GoodsPack : public control::Item
 {
@@ -37,6 +36,8 @@ public:
     virtual void Resolve();
 
 private:
+    int m_mass = 0;
+
     virtual void AddCommonInfo();
     virtual void addUniqueInfo();
 
