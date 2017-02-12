@@ -40,7 +40,7 @@ class Renderer;
 class BaseGuiElement
 {
     public:
-        BaseGuiElement(gui::type type_id=gui::type::NONE_ID, gui::type subtype_id=gui::type::NONE_ID, const std::string& info="", jeti::control::Material* textureOb=nullptr);
+        BaseGuiElement(gui::type type_id=gui::type::NONE, gui::type subtype_id=gui::type::NONE, const std::string& info="", jeti::control::Material* textureOb=nullptr);
         virtual ~BaseGuiElement();
         
         void SetLabel(const std::string& label) { m_Label = label; }

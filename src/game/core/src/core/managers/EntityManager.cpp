@@ -219,7 +219,7 @@ Player* EntityManager::player() const
 {
     assert(false);
 //    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
-//        if (it->second->type() == entity::Type::PLAYER_ID) {
+//        if (it->second->type() == entity::Type::PLAYER) {
 //            return (Player*)it->second;
 //        }
 //    }

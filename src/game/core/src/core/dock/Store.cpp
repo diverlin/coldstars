@@ -35,7 +35,7 @@ Store::Store(int id)
 {
     assert(false);
     //    setId(id);
-    //    setTypeId(entity::Type::STORE_ID);
+    //    setTypeId(entity::Type::STORE);
 }
 
 Store::~Store()

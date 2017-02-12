@@ -28,7 +28,7 @@
 
 MicroScenarioJump::MicroScenarioJump()
 {
-    setTypeId(ai::type::MICRO_JUMP_ID);
+    setTypeId(ai::type::MICRO_JUMP);
 }
 
 /* virtual */
@@ -41,7 +41,7 @@ void MicroScenarioJump::enter(Npc* npc) const
     assert(false);
 //    LOG("vehicle_id/npc_id="+std::to_string(npc->vehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump");
     
-//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE);
 }
 
 /* virtual */
@@ -69,9 +69,9 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 //         if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
 //         {
 //             VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
-//             if ( (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID) and (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID) )
+//             if ( (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN) and (action_id != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT) )
 //             {
-//                 npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID);
+//                 npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN);
 //             }
 //         }
 }

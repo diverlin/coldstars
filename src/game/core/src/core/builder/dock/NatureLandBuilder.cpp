@@ -64,11 +64,11 @@ NatureLand* NatureLandBuilder::create() const
 
 void NatureLandBuilder::createInternals(NatureLand* natureland) const
 {
-    //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID));
+    //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
     
     unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++) {
-        control::ItemSlot* item_slot = getNewItemSlot(entity::type::CARGO_SLOT_ID);
+        control::ItemSlot* item_slot = getNewItemSlot(entity::type::CARGO_SLOT);
         natureland->AddItemSlot(item_slot);
     }
     
@@ -76,16 +76,16 @@ void NatureLandBuilder::createInternals(NatureLand* natureland) const
     {
         if (natureland->CanAcceptNewItem() == true)
         {
-            //int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT_ID, ENTITY::PROTECTOR_ARTEFACT_ID);
+            //int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT, ENTITY::PROTECTOR_ARTEFACT);
             //switch (type_id)
             //{
-            //case ENTITY::GRAVITY_ARTEFACT_ID:
+            //case ENTITY::GRAVITY_ARTEFACT:
             //{
             //natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
             //break;
             //}
 
-            //case ENTITY::PROTECTOR_ARTEFACT_ID:
+            //case ENTITY::PROTECTOR_ARTEFACT:
             //{
             //natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
             //break;

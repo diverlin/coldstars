@@ -34,7 +34,7 @@ void ScenarioCollector::add(BaseScenario* scenario)
           
 BaseScenario* ScenarioCollector::get(ai::type type) const
 {
-    if (type != ai::type::NONE_ID) {
+    if (type != ai::type::NONE) {
         return (m_scenarios.find(type))->second;
     }
     return nullptr;

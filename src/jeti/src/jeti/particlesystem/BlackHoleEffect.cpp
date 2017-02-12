@@ -18,7 +18,7 @@
 
 //BlackHoleEffect :: BlackHoleEffect()
 //{  
-    ////subtype_id = BLACKHOLE_EFFECT_ID;
+    ////subtype_id = BLACKHOLE_EFFECT;
 //}
  
 ///* virtual */
@@ -103,7 +103,7 @@
         ////particles_num = getRandInt(10 * obSize, 15 * obSize);    
         ////data_particle.size_start  = 25 * obSize;                                 
 
-        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED_ID);
+        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED);
 
         ////blackholeEffect = new BlackHoleEffect(texOb_particle, _center_pos, data_particle, particles_num);
         ////_starsystem->addToSpace(blackholeEffect);
@@ -113,7 +113,7 @@
         ////particles_num = 40;
         ////data_particle.size_start  = 25 * obSize;
 
-        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED_ID);
+        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED);
         
         ////blackholeEffect = new BlackHoleEffect(texOb_particle, _center_pos, data_particle, particles_num);
         ////_starsystem->addToSpace(blackholeEffect);
@@ -122,7 +122,7 @@
         ////particles_num = 50;
         ////data_particle.size_start  = 25 * (obSize-1);
 
-        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::YELLOW_ID);
+        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::YELLOW);
         
         ////blackholeEffect = new BlackHoleEffect(texOb_particle, _center_pos, data_particle, particles_num);
         ////_starsystem->addToSpace(blackholeEffect);
@@ -130,7 +130,7 @@
         ////particles_num = 100;                              
         ////data_particle.size_start  = 25 * (obSize-2);
 
-        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED_ID);
+        ////texOb_particle = TextureCollector::Instance().getParticleTexObByColorId(COLOR::RED);
         
         ////blackholeEffect = new BlackHoleEffect(texOb_particle, _center_pos, data_particle, particles_num);
         ////_starsystem->addToSpace(blackholeEffect);

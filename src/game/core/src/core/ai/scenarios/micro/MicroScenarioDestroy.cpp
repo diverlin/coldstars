@@ -26,7 +26,7 @@
 
 MicroScenarioDestroy::MicroScenarioDestroy()
 {
-    setTypeId(ai::type::MICRO_DESTROY_ID);
+    setTypeId(ai::type::MICRO_DESTROY);
 }
 
 /* virtual */
@@ -62,7 +62,7 @@ void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 //    npc->vehicle()->weaponComplex().activateWeapons();
 //    npc->stateMachine().microTaskManager().target()->id();
 //    npc->vehicle()->weaponComplex().setTarget(npc->stateMachine().microTaskManager().target());
-//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE);
 }
 
 /* virtual */

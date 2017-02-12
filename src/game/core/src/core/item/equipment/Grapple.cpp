@@ -116,7 +116,7 @@ Grapple::Grapple(model::item::Grapple* model)
 ////            {
 ////                switch(target.type())
 ////                {
-////                case entity::Type::CONTAINER_ID:
+////                case entity::Type::CONTAINER:
 ////                {
 ////                    Container* container = reinterpret_cast<Container*>(&target);
 ////                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)
@@ -128,7 +128,7 @@ Grapple::Grapple(model::item::Grapple* model)
 ////                    break;
 ////                }
                     
-////                    //case ENTITY::VEHICLE_ID:
+////                    //case ENTITY::VEHICLE:
 ////                    //{
 ////                    //ItemSlot* _slot = GetEmptyOtsecSlot();
 ////                    //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];

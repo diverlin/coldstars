@@ -71,10 +71,10 @@ Player* PlayerBuilder::createNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-    race::type prace_id         = race::type::R0_ID;
-    entity::type psubtype_id    = entity::type::RANGER_ID;
-    entity::type psubsubtype_id = entity::type::WARRIOR_ID;
-    int size_id        = SIZE_4_ID;
+    race::type prace_id         = race::type::R0;
+    entity::type psubtype_id    = entity::type::RANGER;
+    entity::type psubsubtype_id = entity::type::WARRIOR;
+    int size_id        = SIZE_4;
     int weapons_num    = 6;
     tech::type tech = tech::type::LEVEL3;
     

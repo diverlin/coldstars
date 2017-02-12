@@ -76,41 +76,41 @@ NpcBuilder::createInternals(model::Npc* npc, race::type race_id, entity::type su
     assert(false);
 //    npc->applySkillsStrategy();
 
-    if ((race_id != race::type::R6_ID) && (race_id != race::type::R7_ID))
+    if ((race_id != race::type::R6) && (race_id != race::type::R7))
     {
         switch(subtype_id)
         {
-        case entity::type::RANGER_ID:
+        case entity::type::RANGER:
         {
             assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
             break;
         }
 
-        case entity::type::WARRIOR_ID:
+        case entity::type::WARRIOR:
         {
             assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
             break;
         }
 
-        case entity::type::TRADER_ID:
+        case entity::type::TRADER:
         {
             assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID));
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER));
 
             break;
         }
 
-            //case ENTITY::DIPLOMAT_ID:     {}
-            //case ENTITY::PIRAT_ID:     {}
+            //case ENTITY::DIPLOMAT:     {}
+            //case ENTITY::PIRAT:     {}
 
         default:
         {
             assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));
+//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
             break;
         }
@@ -119,7 +119,7 @@ NpcBuilder::createInternals(model::Npc* npc, race::type race_id, entity::type su
     else
     {
         assert(false);
-//        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
+//        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR));
     }
 
     npc->skills().addExpirience(meti::getRandInt(10000, 100000));

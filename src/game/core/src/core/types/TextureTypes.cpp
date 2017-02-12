@@ -28,56 +28,56 @@ std::string str(texture::type type_id)
     {
         case texture::type::FAILBACK: return "TYPE::TEXTURE::FAILBACK";
 
-        case texture::type::ANGAR_BACKGROUND_ID: return "TYPE::TEXTURE::ANGAR_BACKGROUND_ID";
-        case texture::type::STORE_BACKGROUND_ID: return "TYPE::TEXTURE::STORE_BACKGROUND_ID";
-        case texture::type::SHOP_BACKGROUND_ID: return "TYPE::TEXTURE::SHOP_BACKGROUND_ID";
-        case texture::type::GOVERMENT_BACKGROUND_ID: return "TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID";
+        case texture::type::ANGAR_BACKGROUND: return "TYPE::TEXTURE::ANGAR_BACKGROUND";
+        case texture::type::STORE_BACKGROUND: return "TYPE::TEXTURE::STORE_BACKGROUND";
+        case texture::type::SHOP_BACKGROUND: return "TYPE::TEXTURE::SHOP_BACKGROUND";
+        case texture::type::GOVERMENT_BACKGROUND: return "TYPE::TEXTURE::GOVERMENT_BACKGROUND";
 
-        case texture::type::NATURELAND_BACKGROUND_ID: return "TYPE::TEXTURE::NATURELAND_BACKGROUND_ID";
+        case texture::type::NATURELAND_BACKGROUND: return "TYPE::TEXTURE::NATURELAND_BACKGROUND";
 
-        case texture::type::NEBULA_BACKGROUND_ID: return "TYPE::TEXTURE::NEBULA_BACKGROUND_ID";
-        case texture::type::DISTANTSTAR_ID: return "TYPE::TEXTURE::DISTANTSTAR_ID";
+        case texture::type::NEBULA_BACKGROUND: return "TYPE::TEXTURE::NEBULA_BACKGROUND";
+        case texture::type::DISTANTSTAR: return "TYPE::TEXTURE::DISTANTSTAR";
 
-        case texture::type::FACE_ID: return "TYPE::TEXTURE::FACE_ID";
+        case texture::type::FACE: return "TYPE::TEXTURE::FACE";
 
-        case texture::type::VEHICLE_SLOT_ID: return "TYPE::TEXTURE::VEHICLE_SLOT_ID";
-        case texture::type::ITEM_SLOT_ID: return "TYPE::TEXTURE::ITEM_SLOT_ID";
-        case texture::type::TURREL_ID: return "TYPE::TEXTURE::TURREL_ID";
+        case texture::type::VEHICLE_SLOT: return "TYPE::TEXTURE::VEHICLE_SLOT";
+        case texture::type::ITEM_SLOT: return "TYPE::TEXTURE::ITEM_SLOT";
+        case texture::type::TURREL: return "TYPE::TEXTURE::TURREL";
 
-        case texture::type::SPACESTATION_ID: return "TYPE::TEXTURE::SPACESTATION_ID";
-        case texture::type::SATELLITE_ID: return "TYPE::TEXTURE::SATELLITE_ID";
-        case texture::type::SHIP_ID: return "TYPE::TEXTURE::SHIP_ID";
-        case texture::type::STAR_ID: return "TYPE::TEXTURE::STAR_ID";
-        case texture::type::PLANET_ID: return "TYPE::TEXTURE::PLANET_ID";
+        case texture::type::SPACESTATION: return "TYPE::TEXTURE::SPACESTATION";
+        case texture::type::SATELLITE: return "TYPE::TEXTURE::SATELLITE";
+        case texture::type::SHIP: return "TYPE::TEXTURE::SHIP";
+        case texture::type::STAR: return "TYPE::TEXTURE::STAR";
+        case texture::type::PLANET: return "TYPE::TEXTURE::PLANET";
 
-        case texture::type::ATMOSPHERE_ID: return "TYPE::TEXTURE::ATMOSPHERE_ID";
-        case texture::type::RING_ID: return "TYPE::TEXTURE::RING_ID";
+        case texture::type::ATMOSPHERE: return "TYPE::TEXTURE::ATMOSPHERE";
+        case texture::type::RING: return "TYPE::TEXTURE::RING";
 
-        case texture::type::ASTEROID_ID: return "TYPE::TEXTURE::ASTEROID_ID";
-        case texture::type::MINERAL_ID: return "TYPE::TEXTURE::MINERAL_ID";
-        case texture::type::CONTAINER_ID: return "TYPE::TEXTURE::CONTAINER_ID";
-        case texture::type::BOMB_ID: return "TYPE::TEXTURE::BOMB_ID";
-        case texture::type::BLACKHOLE_ID: return "TYPE::TEXTURE::BLACKHOLE_ID";
+        case texture::type::ASTEROID: return "TYPE::TEXTURE::ASTEROID";
+        case texture::type::MINERAL: return "TYPE::TEXTURE::MINERAL";
+        case texture::type::CONTAINER: return "TYPE::TEXTURE::CONTAINER";
+        case texture::type::BOMB: return "TYPE::TEXTURE::BOMB";
+        case texture::type::BLACKHOLE: return "TYPE::TEXTURE::BLACKHOLE";
 
-        case texture::type::PARTICLE_EFFECT_ID: return "TYPE::TEXTURE::PARTICLE_EFFECT_ID";
-        case texture::type::LAZER_EFFECT_ID: return "TYPE::TEXTURE::LAZER_EFFECT_ID";
-        case texture::type::SHIELD_EFFECT_ID: return "TYPE::TEXTURE::SHIELD_EFFECT_ID";
+        case texture::type::PARTICLE_EFFECT: return "TYPE::TEXTURE::PARTICLE_EFFECT";
+        case texture::type::LAZER_EFFECT: return "TYPE::TEXTURE::LAZER_EFFECT";
+        case texture::type::SHIELD_EFFECT: return "TYPE::TEXTURE::SHIELD_EFFECT";
 
-        case texture::type::DRIVE_EQUIPMENT_ID: return "TYPE::TEXTURE::DRIVE_EQUIPMENT_ID";
-        case texture::type::LAZER_EQUIPMENT_ID: return "TYPE::TEXTURE::LAZER_EQUIPMENT_ID";
-        case texture::type::ROCKET_EQUIPMENT_ID: return "TYPE::TEXTURE::ROCKET_EQUIPMENT_ID";
-        case texture::type::PROTECTOR_EQUIPMENT_ID: return "TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID";
-        case texture::type::DROID_EQUIPMENT_ID: return "TYPE::TEXTURE::DROID_EQUIPMENT_ID";
-        case texture::type::GRAPPLE_EQUIPMENT_ID: return "TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID";
-        case texture::type::BAK_EQUIPMENT_ID: return "TYPE::TEXTURE::BAK_EQUIPMENT_ID";
-        case texture::type::ENERGIZER_EQUIPMENT_ID: return "TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID";
-        case texture::type::FREEZER_EQUIPMENT_ID: return "TYPE::TEXTURE::FREEZER_EQUIPMENT_ID";
-        case texture::type::RADAR_EQUIPMENT_ID: return "TYPE::TEXTURE::RADAR_EQUIPMENT_ID";
-        case texture::type::SCANER_EQUIPMENT_ID: return "TYPE::TEXTURE::SCANER_EQUIPMENT_ID";
+        case texture::type::DRIVE_EQUIPMENT: return "TYPE::TEXTURE::DRIVE_EQUIPMENT";
+        case texture::type::LAZER_EQUIPMENT: return "TYPE::TEXTURE::LAZER_EQUIPMENT";
+        case texture::type::ROCKET_EQUIPMENT: return "TYPE::TEXTURE::ROCKET_EQUIPMENT";
+        case texture::type::PROTECTOR_EQUIPMENT: return "TYPE::TEXTURE::PROTECTOR_EQUIPMENT";
+        case texture::type::DROID_EQUIPMENT: return "TYPE::TEXTURE::DROID_EQUIPMENT";
+        case texture::type::GRAPPLE_EQUIPMENT: return "TYPE::TEXTURE::GRAPPLE_EQUIPMENT";
+        case texture::type::BAK_EQUIPMENT: return "TYPE::TEXTURE::BAK_EQUIPMENT";
+        case texture::type::ENERGIZER_EQUIPMENT: return "TYPE::TEXTURE::ENERGIZER_EQUIPMENT";
+        case texture::type::FREEZER_EQUIPMENT: return "TYPE::TEXTURE::FREEZER_EQUIPMENT";
+        case texture::type::RADAR_EQUIPMENT: return "TYPE::TEXTURE::RADAR_EQUIPMENT";
+        case texture::type::SCANER_EQUIPMENT: return "TYPE::TEXTURE::SCANER_EQUIPMENT";
 
-        case texture::type::MODULE_ID: return "TYPE::TEXTURE::MODULE_ID";
+        case texture::type::MODULE: return "TYPE::TEXTURE::MODULE";
 
-        case texture::type::ROCKET_BULLET_ID: return "TYPE::TEXTURE::ROCKET_BULLET_ID";
+        case texture::type::ROCKET_BULLET: return "TYPE::TEXTURE::ROCKET_BULLET";
     }
     assert(false);
 }

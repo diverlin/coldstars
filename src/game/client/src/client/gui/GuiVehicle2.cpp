@@ -29,7 +29,7 @@
 
 GuiVehicle2::GuiVehicle2()
 :
-BaseGuiElement(gui::type::PLAYER_VEHICLE_ID, gui::type::PLAYER_VEHICLE_ID),
+BaseGuiElement(gui::type::PLAYER_VEHICLE, gui::type::PLAYER_VEHICLE),
 m_Vehicle(nullptr) 
 {
 
@@ -61,10 +61,10 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 //    for (unsigned int i=0; i<vehicle->m_slots.size(); i++)
 //    {
 //        entity::Type slot_subtype_id = vehicle->m_slots[i]->subtype();
-//        if ( (slot_subtype_id != entity::Type::CARGO_SLOT_ID) && (slot_subtype_id != entity::Type::ARTEFACT_SLOT_ID) )
+//        if ( (slot_subtype_id != entity::Type::CARGO_SLOT) && (slot_subtype_id != entity::Type::ARTEFACT_SLOT) )
 //        {
 //            entity::Type entity_type_id = slot_subtype_id;
-//            if (slot_subtype_id == entity::Type::WEAPON_SLOT_ID)
+//            if (slot_subtype_id == entity::Type::WEAPON_SLOT)
 //            {
 //                entity_type_id = vehicle->m_slots[i]->subsubtype();
 //            }

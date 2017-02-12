@@ -22,7 +22,7 @@
 
 AiModelTrader::AiModelTrader() 
 {
-    type_id = AIMODEL::TRADER_ID;
+    type_id = AIMODEL::TRADER;
 }
 
 AiModelTrader::~AiModelTrader() 
@@ -32,7 +32,7 @@ void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
     assert(false);
 //    if (!npc->stateMachine().macroTaskManager().scenario()) {
-//        Task macrotask(type::AISCENARIO::MACRO_GOODSTRADING_ID);
+//        Task macrotask(type::AISCENARIO::MACRO_GOODSTRADING);
 //        npc->stateMachine().setCurrentMacroTask(macrotask);
 //    }
 }

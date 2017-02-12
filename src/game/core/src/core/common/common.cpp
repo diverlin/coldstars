@@ -26,18 +26,18 @@
 int getObjectSize(int w, int h)
 {
     int area = w*h;
-    if(area < SIZE_1_AREA) return SIZE_1_ID;
-    if(area < SIZE_2_AREA) return SIZE_2_ID;
-    if(area < SIZE_3_AREA) return SIZE_3_ID;
-    if(area < SIZE_4_AREA) return SIZE_4_ID;
-    if(area < SIZE_5_AREA) return SIZE_5_ID;
-    if(area < SIZE_6_AREA) return SIZE_6_ID;
-    if(area < SIZE_7_AREA) return SIZE_7_ID;
-    if(area < SIZE_8_AREA) return SIZE_8_ID;
-    if(area < SIZE_9_AREA) return SIZE_9_ID;
-    if(area >= SIZE_9_AREA) return SIZE_10_ID;
+    if(area < SIZE_1_AREA) return SIZE_1;
+    if(area < SIZE_2_AREA) return SIZE_2;
+    if(area < SIZE_3_AREA) return SIZE_3;
+    if(area < SIZE_4_AREA) return SIZE_4;
+    if(area < SIZE_5_AREA) return SIZE_5;
+    if(area < SIZE_6_AREA) return SIZE_6;
+    if(area < SIZE_7_AREA) return SIZE_7;
+    if(area < SIZE_8_AREA) return SIZE_8;
+    if(area < SIZE_9_AREA) return SIZE_9;
+    if(area >= SIZE_9_AREA) return SIZE_10;
     
-    return SIZE_10_ID;
+    return SIZE_10;
 }
 
 
@@ -80,7 +80,7 @@ glm::vec4 getColor4fById(int color_id)
     glm::vec4 color;
     switch(color_id)
     {
-        case COLOR::YELLOW_ID:
+        case COLOR::YELLOW:
         {
             color.r = 255/255.0;
             color.g = 255/255.0;
@@ -90,7 +90,7 @@ glm::vec4 getColor4fById(int color_id)
             break;
         }
 
-        case COLOR::BLUE_ID:
+        case COLOR::BLUE:
         {
             color.r = 220/255.0; // 220
             color.g = 255/255.0;

@@ -26,10 +26,10 @@ std::string getTypeStr(mesh::type type)
     {
         case mesh::type::FAILBACK:            { return "FAILBACK"; break; }
 
-        case mesh::type::PLANE_ID:            { return "PLANE_ID"; break; }
-        case mesh::type::SPHERE_ID:           { return "SPHERE_ID"; break; }
-        case mesh::type::SPHERE_DEFORMED_ID:  { return "SPHERE_DEFORMED_ID"; break; }
-        case mesh::type::SPACESTATION_ID:     { return "SPACESTATION_ID"; break; }
+        case mesh::type::PLANE:            { return "PLANE"; break; }
+        case mesh::type::SPHERE:           { return "SPHERE"; break; }
+        case mesh::type::SPHERE_DEFORMED:  { return "SPHERE_DEFORMED"; break; }
+        case mesh::type::SPACESTATION:     { return "SPACESTATION"; break; }
 
         default: { return "UKNOWN MESH TYPE"; break; }
     }

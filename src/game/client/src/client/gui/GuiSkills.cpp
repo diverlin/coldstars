@@ -43,111 +43,111 @@ diplomat_undo(0)
     //float zsize = 1;
     
     {
-        //ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, "increment attack");  
+        //ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK, "increment attack");  
         //glm::vec3 center(0, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_attack_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK_ID, Increment_attack_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK, Increment_attack_button));
     }
     
     {
-        //ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK_ID, "decrement attack");  
+        //ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK, "decrement attack");  
         //glm::vec3 center(0, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_attack_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_ATTACK_ID, Decrement_attack_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_ATTACK, Decrement_attack_button));
     }
      
     {            
-        //ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE_ID, "increment defence");  
+        //ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE, "increment defence");  
         //glm::vec3 center(button_w, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_defence_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DEFENCE_ID, Increment_defence_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DEFENCE, Increment_defence_button));
     }
     
     {
-        //ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE_ID, "decrement defence");  
+        //ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE, "decrement defence");  
         //glm::vec3 center(button_w, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_defence_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DEFENCE_ID, Decrement_defence_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DEFENCE, Decrement_defence_button));
     }     
     
     {        
-        //ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER_ID, "increment leader");  
+        //ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER, "increment leader");  
         //glm::vec3 center(2*button_w, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_leader_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_LEADER_ID, Increment_leader_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_LEADER, Increment_leader_button));
     }
     
     {
-        //ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER_ID, "decrement leader"); 
+        //ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER, "decrement leader"); 
         //glm::vec3 center(2*button_w, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_leader_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_LEADER_ID, Decrement_leader_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_LEADER, Decrement_leader_button));
     }
      
     {     
-        //ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER_ID, "increment trader");  
+        //ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER, "increment trader");  
         //glm::vec3 center(3*button_w, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_trader_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TRADER_ID, Increment_trader_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TRADER, Increment_trader_button));
     }
     
     {
-        //ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER_ID, "decrement trader"); 
+        //ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER, "decrement trader"); 
         //glm::vec3 center(3*button_w, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_trader_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TRADER_ID, Decrement_trader_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TRADER, Decrement_trader_button));
     }
     
     {
-        //ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC_ID, "increment technic");  
+        //ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC, "increment technic");  
         //glm::vec3 center(4*button_w, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_technic_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TECHNIC_ID, Increment_technic_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TECHNIC, Increment_technic_button));
     }
     
     {
-        //ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC_ID, "decrement technic"); 
+        //ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC, "decrement technic"); 
         //glm::vec3 center(4*button_w, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_technic_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TECHNIC_ID, Decrement_technic_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TECHNIC, Decrement_technic_button));
     }
     
     {
-        //ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT_ID, "increment diplomat");  
+        //ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT, "increment diplomat");  
         //glm::vec3 center(5*button_w, -button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_diplomat_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DIPLOMAT_ID, Increment_diplomat_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DIPLOMAT, Increment_diplomat_button));
     }
     
     {
-        //ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT_ID, "decrement diplomat");
+        //ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT, "decrement diplomat");
         //glm::vec3 center(5*button_w, -2*button_h, zpos);
         //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_diplomat_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
+        //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT, Decrement_diplomat_button));    
     }
     
     //background_rect.Set(0, 0, 6*button_w, SKILLS::ATTACK_MAX*button_h);    
@@ -176,7 +176,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
         //{
                 //switch(button->subTypeId())
                 //{
-                    //case GUI::BUTTON::INCREMENT_ATTACK_ID:   
+                    //case GUI::BUTTON::INCREMENT_ATTACK:   
                                 //{
                                         //if (skills.IncrementAttack() == true) 
                                         //{
@@ -185,7 +185,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                                                         
                                         //break; 
                                 //}                    
-                                //case GUI::BUTTON::DECREMENT_ATTACK_ID:   
+                                //case GUI::BUTTON::DECREMENT_ATTACK:   
                                 //{       
                                         //if (attack_undo > 0)
                                         //{
@@ -196,7 +196,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         //break; 
                                 //}
                                     
-                    //case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
+                    //case GUI::BUTTON::INCREMENT_DEFENCE:  
                                 //{ 
                                         //if (skills.IncrementDefence() == true) 
                                         //{
@@ -205,7 +205,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         
                                         //break; 
                                 //}                                
-                    //case GUI::BUTTON::DECREMENT_DEFENCE_ID:  
+                    //case GUI::BUTTON::DECREMENT_DEFENCE:  
                                 //{ 
                                         //if (defence_undo > 0)
                                         //{
@@ -216,7 +216,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         //break; 
                                 //}
                                    
-                    //case GUI::BUTTON::INCREMENT_LEADER_ID:   
+                    //case GUI::BUTTON::INCREMENT_LEADER:   
                                 //{ 
                                         //if (skills.IncrementLeader() == true) 
                                         //{
@@ -225,7 +225,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         
                                         //break; 
                                 //}                                
-                    //case GUI::BUTTON::DECREMENT_LEADER_ID:   
+                    //case GUI::BUTTON::DECREMENT_LEADER:   
                                 //{ 
                                         //if (leader_undo > 0)
                                         //{
@@ -236,7 +236,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         //break; 
                                 //}
                                     
-                    //case GUI::BUTTON::INCREMENT_TRADER_ID:   
+                    //case GUI::BUTTON::INCREMENT_TRADER:   
                                 //{ 
                                         //if (skills.IncrementTrader() == true)
                                         //{
@@ -245,7 +245,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         
                                         //break; 
                                 //}
-                    //case GUI::BUTTON::DECREMENT_TRADER_ID:   
+                    //case GUI::BUTTON::DECREMENT_TRADER:   
                                 //{ 
                                         //if (trader_undo > 0)
                                         //{
@@ -256,7 +256,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         //break; 
                                 //}
 
-                    //case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
+                    //case GUI::BUTTON::INCREMENT_TECHNIC:  
                                 //{ 
                                     //if (skills.IncrementTechnic() == true) 
                                         //{
@@ -265,7 +265,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         
                                         //break; 
                                 //}
-                                //case GUI::BUTTON::DECREMENT_TECHNIC_ID:  
+                                //case GUI::BUTTON::DECREMENT_TECHNIC:  
                                 //{
                                         //if (technic_undo > 0) 
                                         //{
@@ -276,7 +276,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         //break; 
                                 //}
                                     
-                    //case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
+                    //case GUI::BUTTON::INCREMENT_DIPLOMAT: 
                                 //{ 
                                         //if (skills.IncrementDiplomat() == true) 
                                         //{
@@ -285,7 +285,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
                                         
                                         //break; 
                                 //}
-                    //case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: 
+                    //case GUI::BUTTON::DECREMENT_DIPLOMAT: 
                                 //{
                                         //if (diplomat_undo > 0)
                                         //{
@@ -312,7 +312,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
             //BaseButton* button = iterator->second;
             //switch(button->subTypeId())
             //{
-                //case GUI::BUTTON::INCREMENT_ATTACK_ID:
+                //case GUI::BUTTON::INCREMENT_ATTACK:
                 //{              
                          //for (int i=0; i<SKILLS::ATTACK_MAX; i++) 
                          //{ 
@@ -327,7 +327,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                      //break;
                 //}
             
-                //case GUI::BUTTON::INCREMENT_DEFENCE_ID:
+                //case GUI::BUTTON::INCREMENT_DEFENCE:
                 //{
                          //for (int i=0; i<SKILLS::DEFENCE_MAX; i++) 
                          //{         
@@ -341,7 +341,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                     //break;
                 //}
 
-                //case GUI::BUTTON::INCREMENT_LEADER_ID:
+                //case GUI::BUTTON::INCREMENT_LEADER:
                 //{
                             //for (int i=0; i<SKILLS::LEADER_MAX; i++) 
                          //{ 
@@ -355,7 +355,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                     //break;
                    //}
 
-                   //case GUI::BUTTON::INCREMENT_TRADER_ID:
+                   //case GUI::BUTTON::INCREMENT_TRADER:
                    //{
                             //for (int i=0; i<SKILLS::TRADER_MAX; i++) 
                          //{ 
@@ -369,7 +369,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                     //break;
                       //}
             
-                   //case GUI::BUTTON::INCREMENT_TECHNIC_ID:
+                   //case GUI::BUTTON::INCREMENT_TECHNIC:
                    //{
                             //for (int i=0; i<SKILLS::TECHNIC_MAX; i++) 
                          //{ 
@@ -382,7 +382,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                        //break;
                    //}
 
-                   //case GUI::BUTTON::INCREMENT_DIPLOMAT_ID:
+                   //case GUI::BUTTON::INCREMENT_DIPLOMAT:
                    //{
                        //for (int i=0; i<SKILLS::DIPLOMAT_MAX; i++) 
                          //{ 

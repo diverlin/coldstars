@@ -27,8 +27,8 @@ namespace descriptor {
 IdGenerator BaseOLD::m_idGenerator;
 
 namespace {
-const std::string KEY_STR_ID = "id";
-const std::string KEY_STR_OBJ_ID = "obj_id";
+const std::string KEY_STR = "id";
+const std::string KEY_STR_OBJ = "obj_id";
 const std::string KEY_STR_TYPE = "type";
 const std::string KEY_STR_OBJ_TYPE = "obj_type";
 const std::string KEY_STR_DESCRIPTOR = "descr";
@@ -78,8 +78,8 @@ const std::string KEY_STR_TARGET = "target";
 std::string keyStr(const Key& key) {
     switch(key) {
     // const
-    case Key::ID: return KEY_STR_ID; break;
-    case Key::OBJ_ID: return KEY_STR_OBJ_ID; break;
+    case Key::ID: return KEY_STR; break;
+    case Key::OBJ: return KEY_STR_OBJ; break;
     case Key::TYPE: return KEY_STR_TYPE; break;
     case Key::OBJ_TYPE: return KEY_STR_OBJ_TYPE; break;
     case Key::DESCRIPTOR: return KEY_STR_DESCRIPTOR; break;
@@ -188,7 +188,7 @@ BaseOLD::add(const Key& key, int_t value)
 }
 
 int_t BaseOLD::id() const { return __getOrDie(Key::ID); }
-int_t BaseOLD::objId() const { return __get(Key::OBJ_ID); }
+int_t BaseOLD::objId() const { return __get(Key::OBJ); }
 int_t BaseOLD::type() const { return __getOrDie(Key::TYPE); }
 int_t BaseOLD::objType() const { return __getOrDie(Key::OBJ_TYPE); }
 int_t BaseOLD::descriptor() const { return __getOrDie(Key::DESCRIPTOR); }

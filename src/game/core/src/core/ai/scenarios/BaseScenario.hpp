@@ -44,6 +44,6 @@ public:
     virtual std::string GetDescription(Npc*) const { return "_"; }
 
 private:
-    ai::type m_type = ai::type::NONE_ID;
+    ai::type m_type = ai::type::NONE;
 }; 
 

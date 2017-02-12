@@ -36,8 +36,8 @@ Rocket::Rocket(model::item::Rocket* model)
 {
     assert(false);
     //    setId(id);
-    //    setTypeId(entity::Type::EQUIPMENT_ID);
-    //    setSubTypeId(entity::Type::ROCKET_EQUIPMENT_ID);
+    //    setTypeId(entity::Type::EQUIPMENT);
+    //    setSubTypeId(entity::Type::ROCKET_EQUIPMENT);
 
 //    fire_atOnce = meti::getRandInt(1, 3);
 }

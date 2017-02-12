@@ -26,8 +26,8 @@ namespace item {
 Droid::Droid(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::DROID_EQUIPMENT_ID);
+    setType(entity::type::EQUIPMENT);
+    setSubType(entity::type::DROID_EQUIPMENT);
 }
 
 Droid::Droid(const std::string& data)

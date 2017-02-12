@@ -48,7 +48,7 @@ namespace model {
 
 Npc::Npc()
 {
-    setType(entity::type::NPC_ID);
+    setType(entity::type::NPC);
 }
 
 Npc::Npc(const std::string& data)
@@ -69,7 +69,7 @@ namespace control {
 Npc::Npc(int id, entity::type subtype_id, entity::type subsubtype_id)
 { 
     assert(false);
-//    setTypeId(entity::Type::NPC_ID);
+//    setTypeId(entity::Type::NPC);
 //    setSubTypeId(subtype_id);
 //    setSubSubTypeId(subsubtype_id);
 
@@ -302,7 +302,7 @@ bool Npc::buyGoods()
 {
     assert(false);
 //    Shop* shop = ((Kosmoport*)m_vehicle->land())->GetShop();
-//    entity::Type subtype_id = (entity::Type)meti::getRandInt((int)entity::Type::MINERALS_ID, (int)entity::Type::EXCLUSIVE_ID);
+//    entity::Type subtype_id = (entity::Type)meti::getRandInt((int)entity::Type::MINERALS, (int)entity::Type::EXCLUSIVE);
 
 //    // hard coded logic
 //    int amount_to_hold      = 0.8*m_vehicle->freeSpace();
@@ -384,12 +384,12 @@ bool Npc::buyGoods()
 
 ////    m_skills.Resolve();
     
-////    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
+////    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE)
 ////    {
 ////        m_stateMachine.setCurrentMacroTask(data_unresolved_npc.macrotask);
 ////    }
     
-////    if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
+////    if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE)
 ////    {
 ////        m_stateMachine.setCurrentMicroTask(data_unresolved_npc.microtask);
 ////    }
@@ -398,7 +398,7 @@ bool Npc::buyGoods()
 void Npc::applySkillsStrategy()
 {           /*
     entity::Type class_type_id = data_id.subtype_id;
-    if (data_id.subtype_id == entity::Type::RANGER_ID)
+    if (data_id.subtype_id == entity::Type::RANGER)
     {
             class_type_id = data_id.subsubtype_id;
     }

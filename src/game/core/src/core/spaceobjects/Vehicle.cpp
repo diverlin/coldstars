@@ -177,7 +177,7 @@ GoodsPack* Vehicle::goodsPack() const
     assert(false);
 //    for(ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
-//            if (slot->item()->type() == entity::Type::GOODS_ID) {
+//            if (slot->item()->type() == entity::Type::GOODS) {
 //                return slot->goodsPack();
 //            }
 //        }
@@ -210,7 +210,7 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 
 //    switch(slot->subtype())
 //    {
-//    case entity::Type::WEAPON_SLOT_ID:
+//    case entity::Type::WEAPON_SLOT:
 //    {
 //        float border_start = 0.2;
 //        float border_end   = 0.8;
@@ -224,30 +224,30 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 
 //        break;
 //    }
-//    case entity::Type::DRIVE_SLOT_ID:     { model()->driveComplex().SetDriveSlot(slot); break; }
-//    case entity::Type::BAK_SLOT_ID:       { model()->driveComplex().SetBakSlot(slot); break; }
-//    case entity::Type::PROTECTOR_SLOT_ID: { model()->protectorComplex().SetProtectorSlot(slot); break; }
-//    case entity::Type::RADAR_SLOT_ID:     { m_radarSlot  = slot; break; }
-//    case entity::Type::SCANER_SLOT_ID:    { m_scanerSlot = slot; break; }
+//    case entity::Type::DRIVE_SLOT:     { model()->driveComplex().SetDriveSlot(slot); break; }
+//    case entity::Type::BAK_SLOT:       { model()->driveComplex().SetBakSlot(slot); break; }
+//    case entity::Type::PROTECTOR_SLOT: { model()->protectorComplex().SetProtectorSlot(slot); break; }
+//    case entity::Type::RADAR_SLOT:     { m_radarSlot  = slot; break; }
+//    case entity::Type::SCANER_SLOT:    { m_scanerSlot = slot; break; }
 //#ifdef USE_EXTRA_EQUIPMENT
-//    case entity::Type::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
-//    case entity::Type::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
+//    case entity::Type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
+//    case entity::Type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
 //#endif // USE_EXTRA_EQUIPMENT
-//    case entity::Type::GRAPPLE_SLOT_ID:   { m_grappleSlot   = slot; break; }
-//    case entity::Type::DROID_SLOT_ID:     { m_droidSlot     = slot; break; }
+//    case entity::Type::GRAPPLE_SLOT:   { m_grappleSlot   = slot; break; }
+//    case entity::Type::DROID_SLOT:     { m_droidSlot     = slot; break; }
 //    }
 
 //    m_slots.push_back(slot);
 
-//    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT_ID) and (slot->subtype() != entity::Type::CARGO_SLOT_ID) ) {
+//    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT) and (slot->subtype() != entity::Type::CARGO_SLOT) ) {
 //        m_equipmentSlots.push_back(slot);
 //    }
 
-//    if (slot->subtype() == entity::Type::ARTEFACT_SLOT_ID) {
+//    if (slot->subtype() == entity::Type::ARTEFACT_SLOT) {
 //        m_artefactSlots.push_back(slot);
 //    }
 
-//    if (slot->subtype() == entity::Type::CARGO_SLOT_ID) {
+//    if (slot->subtype() == entity::Type::CARGO_SLOT) {
 //        m_cargoSlots.push_back(slot);
 //    }
 }
@@ -258,7 +258,7 @@ bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
     assert(false);
 //    for(ItemSlot* slot: vehicle->m_slots) {
 //        if (slot->item()) {
-//            if (slot->subtype() == entity::Type::CARGO_SLOT_ID) {
+//            if (slot->subtype() == entity::Type::CARGO_SLOT) {
 //                result = addItemToCargoSlot(slot->item());
 //            } else {
 //                result = manage(slot->item());
@@ -272,14 +272,14 @@ bool Vehicle::_installItem(control::Item* item)
 {
     assert(false);
 //    switch(item->type()) {
-//    case entity::Type::EQUIPMENT_ID:    { return _installEquipment(item); break; }
+//    case entity::Type::EQUIPMENT:    { return _installEquipment(item); break; }
 //#ifdef USE_MODULES
-//    case entity::Type::MODULE_ID:       { return _installModule(item); break; }
+//    case entity::Type::MODULE:       { return _installModule(item); break; }
 //#endif
 //#ifdef USE_ARTEFACTS
-//    case entity::Type::ARTEFACT_ID:     { return _installArtefact(item); break; }
+//    case entity::Type::ARTEFACT:     { return _installArtefact(item); break; }
 //#endif
-//    case entity::Type::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
+//    case entity::Type::GOODS:        { return _installGoodsPack(item); break; } // what??
 //    }
 //    return false;
 }
@@ -304,14 +304,14 @@ bool Vehicle::checkManage(const core::Id& ident)
     }
 
     switch(ident.type) {
-    case entity::type::EQUIPMENT_ID:    { return _checkInstallEquipment(ident); break; }
+    case entity::type::EQUIPMENT:    { return _checkInstallEquipment(ident); break; }
         //#ifdef USE_MODULES
-        //    case entity::Type::MODULE_ID:       { return _checkInstallModule(type); break; }
+        //    case entity::Type::MODULE:       { return _checkInstallModule(type); break; }
         //#endif
         //#ifdef USE_ARTEFACTS
-        //    case entity::Type::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
+        //    case entity::Type::ARTEFACT:     { return _checkInstallArtefact(type); break; }
         //#endif
-        //    case entity::Type::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
+        //    case entity::Type::GOODS:        { return _checkInstallGoodsPack(type); break; }
     }
     return false;
 }
@@ -323,7 +323,7 @@ bool Vehicle::_installGoodsPack(Item* item)
 
 bool Vehicle::_installEquipment(Item* item)
 {
-    if (item->descriptor()->slotType() == entity::type::WEAPON_SLOT_ID) {
+    if (item->descriptor()->slotType() == entity::type::WEAPON_SLOT) {
         ItemSlot* slot = model()->weaponComplex().freeSlot();
         if (slot) {
             return slot->swapItem(item->slot());
@@ -351,7 +351,7 @@ bool Vehicle::_installEquipment(Item* item)
 
 bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
-    if (ident.type == entity::type::WEAPON_SLOT_ID) {
+    if (ident.type == entity::type::WEAPON_SLOT) {
         if (model()->weaponComplex().freeSlot()) {
             return true;
         }
@@ -446,7 +446,7 @@ ItemSlot* const Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype
     assert(false);
 //    for (ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
-//            if (slot->item()->type() == entity::Type::GOODS_ID) {
+//            if (slot->item()->type() == entity::Type::GOODS) {
 //                if (slot->item()->subtype() == requested_goods_subtype_id) {
 //                    return slot;
 //                }
@@ -473,7 +473,7 @@ bool Vehicle::addItemToCargoSlot(Item* item)
 {
     assert(false);
 //    _increaseMass(item->mass());
-//    if (item->type() == entity::Type::GOODS_ID) {
+//    if (item->type() == entity::Type::GOODS) {
 //        if (_installGoodsPack(item)) {
 //            return true;
 //        }
@@ -523,12 +523,12 @@ bool Vehicle::sellItem(Item* item)
     int item_mass = item->descriptor()->mass();
     assert(false);
 //    switch(item->type()) {
-//        case entity::Type::GOODS_ID: {
+//        case entity::Type::GOODS: {
 //            earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
 //            break;
 //        }
 
-//        case entity::Type::EQUIPMENT_ID: {
+//        case entity::Type::EQUIPMENT: {
 //            earn_money = ((Kosmoport*)m_Land)->GetStore()->buyItem(item);
 //            break;
 //        }
@@ -591,30 +591,30 @@ void Vehicle::UpdateSpecialAction()
 {
     switch(m_specialActionId)
     {
-    case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID: { break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::NONE: { break; }
 
-    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING:
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
             DockingEvent();
-            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
         break;
     }
 
-    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING:
     {
         // alpitodorender if (UpdateFadeOutEffect() == true)
         {
-            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
         break;
     }
 
-    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN:
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
@@ -625,11 +625,11 @@ void Vehicle::UpdateSpecialAction()
         break;
     }
 
-    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT:
     {
         // alpitodorender if (UpdateFadeOutEffect() == true)
         {
-            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
         break;
@@ -644,7 +644,7 @@ void Vehicle::HyperJumpEvent(model::Starsystem* starsystem)
 
     model()->weaponComplex().deactivateWeapons();
 
-    m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID;
+    m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
     assert(false);
     //starsystem->hyperSpace().AddVehicle(this);
 }
@@ -658,7 +658,7 @@ void Vehicle::DockingEvent()
 
     switch(model()->driveComplex().target()->type())
     {
-    case entity::type::PLANET_ID:
+    case entity::type::PLANET:
     {
         //        Planet* planet = ((Planet*)model()->driveComplex().target());
         //        planet->GetLand()->AddVehicle(this);
@@ -666,11 +666,11 @@ void Vehicle::DockingEvent()
         break;
     }
 
-    case entity::type::VEHICLE_ID:
+    case entity::type::VEHICLE:
     {
         switch(model()->driveComplex().target()->subtype())
         {
-        case entity::type::SPACESTATION_ID:
+        case entity::type::SPACESTATION:
         {
             SpaceStation* spacestation = ((SpaceStation*)model()->driveComplex().target());
             assert(false);
@@ -679,7 +679,7 @@ void Vehicle::DockingEvent()
             break;
         }
 
-        case entity::type::SHIP_ID:
+        case entity::type::SHIP:
         {
             //..
             break;
@@ -701,7 +701,7 @@ void Vehicle::LaunchingEvent()
     {
         switch(m_parentVehicleSlot->owner()->typeId())
         {
-        case entity::Type::ANGAR_ID:
+        case entity::Type::ANGAR:
         {
             int angleInD = meti::getRandInt(360);
             glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
@@ -713,7 +713,7 @@ void Vehicle::LaunchingEvent()
             break;
         }
 
-        case entity::Type::VEHICLE_ID:
+        case entity::Type::VEHICLE:
         {
             //..
             break;
@@ -730,7 +730,7 @@ void Vehicle::LaunchingEvent()
         m_Land->RemoveVehicle(this);
     }
 
-    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID);
+    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING);
     // alpitodorender SetTransparency(0.1);*/
 }
 
@@ -826,7 +826,7 @@ void Vehicle::CheckNeedsInStatic()
     assert(false);
 //    for (ItemSlot* slot: m_equipmentSlots) {
 //        if (slot->item()) {
-//            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT_ID) {
+//            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
 //                if (slot->rocketEquipment()->GetAmmo() == 0) {
 //                    model()->needs().get_ammo = true;
 //                }
@@ -879,7 +879,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         for (ItemSlot* slot: m_equipmentSlots) {
             if (slot->item()) {
                 assert(false);
-//                if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT_ID) {
+//                if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
 //                    result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
 //                }
             }
@@ -1154,13 +1154,13 @@ void Vehicle::_updateArtefactInfluence()
             {
                 switch(m_SlotArtef_vec[i]->item()->subTypeId())
                 {
-                case entity::Type::GRAVITY_ARTEFACT_ID:
+                case entity::Type::GRAVITY_ARTEFACT:
                 {
                     model()->properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
                     break;
                 }
 
-                case entity::Type::PROTECTOR_ARTEFACT_ID:
+                case entity::Type::PROTECTOR_ARTEFACT:
                 {
                     model()->properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
                     break;
@@ -1643,7 +1643,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //Vehicle::Vehicle()
 //    :
 //      m_godMode(false),
-//      m_specialActionId(VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID),
+//      m_specialActionId(VEHICLE_SPECIAL_ACTION_TYPE::NONE),
 //      m_npc(nullptr),
 //      m_parentVehicleSlot(nullptr),
 //      m_Land(nullptr),
@@ -1725,7 +1725,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 //    for(ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
-//            if (slot->item()->type() == entity::Type::GOODS_ID) {
+//            if (slot->item()->type() == entity::Type::GOODS) {
 //                return slot->goodsPack();
 //            }
 //        }
@@ -1755,7 +1755,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //    switch(slot->subtype())
 //    {
-//    case entity::Type::WEAPON_SLOT_ID:
+//    case entity::Type::WEAPON_SLOT:
 //    {
 //        float border_start = 0.2;
 //        float border_end   = 0.8;
@@ -1769,30 +1769,30 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //        break;
 //    }
-//    case entity::Type::DRIVE_SLOT_ID:     { m_driveComplex.SetDriveSlot(slot); break; }
-//    case entity::Type::BAK_SLOT_ID:       { m_driveComplex.SetBakSlot(slot); break; }
-//    case entity::Type::PROTECTOR_SLOT_ID: { m_protectorComplex.SetProtectorSlot(slot); break; }
-//    case entity::Type::RADAR_SLOT_ID:     { m_radarSlot  = slot; break; }
-//    case entity::Type::SCANER_SLOT_ID:    { m_scanerSlot = slot; break; }
+//    case entity::Type::DRIVE_SLOT:     { m_driveComplex.SetDriveSlot(slot); break; }
+//    case entity::Type::BAK_SLOT:       { m_driveComplex.SetBakSlot(slot); break; }
+//    case entity::Type::PROTECTOR_SLOT: { m_protectorComplex.SetProtectorSlot(slot); break; }
+//    case entity::Type::RADAR_SLOT:     { m_radarSlot  = slot; break; }
+//    case entity::Type::SCANER_SLOT:    { m_scanerSlot = slot; break; }
 //#ifdef USE_EXTRA_EQUIPMENT
-//    case entity::Type::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
-//    case entity::Type::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
+//    case entity::Type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
+//    case entity::Type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
 //#endif // USE_EXTRA_EQUIPMENT
-//    case entity::Type::GRAPPLE_SLOT_ID:   { m_grappleSlot   = slot; break; }
-//    case entity::Type::DROID_SLOT_ID:     { m_droidSlot     = slot; break; }
+//    case entity::Type::GRAPPLE_SLOT:   { m_grappleSlot   = slot; break; }
+//    case entity::Type::DROID_SLOT:     { m_droidSlot     = slot; break; }
 //    }
 
 //    m_slots.push_back(slot);
 
-//    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT_ID) and (slot->subtype() != entity::Type::CARGO_SLOT_ID) ) {
+//    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT) and (slot->subtype() != entity::Type::CARGO_SLOT) ) {
 //        m_equipmentSlots.push_back(slot);
 //    }
 
-//    if (slot->subtype() == entity::Type::ARTEFACT_SLOT_ID) {
+//    if (slot->subtype() == entity::Type::ARTEFACT_SLOT) {
 //        m_artefactSlots.push_back(slot);
 //    }
 
-//    if (slot->subtype() == entity::Type::CARGO_SLOT_ID) {
+//    if (slot->subtype() == entity::Type::CARGO_SLOT) {
 //        m_cargoSlots.push_back(slot);
 //    }
 //}
@@ -1802,7 +1802,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    bool result = true;
 //    for(ItemSlot* slot: vehicle->m_slots) {
 //        if (slot->item()) {
-//            if (slot->subtype() == entity::Type::CARGO_SLOT_ID) {
+//            if (slot->subtype() == entity::Type::CARGO_SLOT) {
 //                result = addItemToCargoSlot(slot->item());
 //            } else {
 //                result = manage(slot->item());
@@ -1815,14 +1815,14 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //bool Vehicle::_installItem(item::Base* item)
 //{
 //    switch(item->type()) {
-//    case entity::Type::EQUIPMENT_ID:    { return _installEquipment(item); break; }
+//    case entity::Type::EQUIPMENT:    { return _installEquipment(item); break; }
 //#ifdef USE_MODULES
-//    case entity::Type::MODULE_ID:       { return _installModule(item); break; }
+//    case entity::Type::MODULE:       { return _installModule(item); break; }
 //#endif
 //#ifdef USE_ARTEFACTS
-//    case entity::Type::ARTEFACT_ID:     { return _installArtefact(item); break; }
+//    case entity::Type::ARTEFACT:     { return _installArtefact(item); break; }
 //#endif
-//    case entity::Type::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
+//    case entity::Type::GOODS:        { return _installGoodsPack(item); break; } // what??
 //    }
 //    return false;
 //}
@@ -1846,14 +1846,14 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    }
 
 //    switch(ident.type) {
-//    case entity::Type::EQUIPMENT_ID:    { return _checkInstallEquipment(ident); break; }
+//    case entity::Type::EQUIPMENT:    { return _checkInstallEquipment(ident); break; }
 ////#ifdef USE_MODULES
-////    case entity::Type::MODULE_ID:       { return _checkInstallModule(type); break; }
+////    case entity::Type::MODULE:       { return _checkInstallModule(type); break; }
 ////#endif
 ////#ifdef USE_ARTEFACTS
-////    case entity::Type::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
+////    case entity::Type::ARTEFACT:     { return _checkInstallArtefact(type); break; }
 ////#endif
-////    case entity::Type::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
+////    case entity::Type::GOODS:        { return _checkInstallGoodsPack(type); break; }
 //    }
 //    return false;
 //}
@@ -1865,7 +1865,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //bool Vehicle::_installEquipment(item::Base* item)
 //{
-//    if (item->parentSubtype() == entity::Type::WEAPON_SLOT_ID) {
+//    if (item->parentSubtype() == entity::Type::WEAPON_SLOT) {
 //        ItemSlot* slot = m_weaponComplex.freeSlot();
 //        if (slot) {
 //            return slot->swapItem(item->slot());
@@ -1893,7 +1893,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 //{
-//    if (ident.type == entity::Type::WEAPON_SLOT_ID) {
+//    if (ident.type == entity::Type::WEAPON_SLOT) {
 //        if (m_weaponComplex.freeSlot()) {
 //            return true;
 //        }
@@ -1985,7 +1985,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 //    for (ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
-//            if (slot->item()->type() == entity::Type::GOODS_ID) {
+//            if (slot->item()->type() == entity::Type::GOODS) {
 //                if (slot->item()->subtype() == requested_goods_subtype_id) {
 //                    return slot;
 //                }
@@ -2010,7 +2010,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //bool Vehicle::addItemToCargoSlot(item::Base* item)
 //{
 //    _increaseMass(item->mass());
-//    if (item->type() == entity::Type::GOODS_ID) {
+//    if (item->type() == entity::Type::GOODS) {
 //        if (_installGoodsPack(item)) {
 //            return true;
 //        }
@@ -2060,13 +2060,13 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    int item_mass = item->mass();
 //    switch(item->type())
 //    {
-//    case entity::Type::GOODS_ID:
+//    case entity::Type::GOODS:
 //    {
 //        earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
 //        break;
 //    }
 
-//    case entity::Type::EQUIPMENT_ID:
+//    case entity::Type::EQUIPMENT:
 //    {
 //        earn_money = ((Kosmoport*)m_Land)->GetStore()->buyItem(item);
 //        break;
@@ -2132,30 +2132,30 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 //    switch(m_specialActionId)
 //    {
-//    case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID: { break; }
+//    case VEHICLE_SPECIAL_ACTION_TYPE::NONE: { break; }
 
-//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING:
 //    {
 //        // alpitodorender if (UpdateFadeInEffect() == true)
 //        {
 //            DockingEvent();
-//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
 //        }
 
 //        break;
 //    }
 
-//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING:
 //    {
 //        // alpitodorender if (UpdateFadeOutEffect() == true)
 //        {
-//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
 //        }
 
 //        break;
 //    }
 
-//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
+//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN:
 //    {
 //        // alpitodorender if (UpdateFadeInEffect() == true)
 //        {
@@ -2165,11 +2165,11 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //        break;
 //    }
 
-//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
+//    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT:
 //    {
 //        // alpitodorender if (UpdateFadeOutEffect() == true)
 //        {
-//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
+//            m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
 //        }
 
 //        break;
@@ -2184,7 +2184,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //    m_weaponComplex.deactivateWeapons();
 
-//    m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID;
+//    m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
 //    starsystem->hyperSpace().AddVehicle(this);
 //}
 
@@ -2197,7 +2197,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 //    switch(m_driveComplex.target()->type())
 //    {
-//    case entity::Type::PLANET_ID:
+//    case entity::Type::PLANET:
 //    {
 ////        Planet* planet = ((Planet*)m_driveComplex.target());
 ////        planet->GetLand()->AddVehicle(this);
@@ -2205,11 +2205,11 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //        break;
 //    }
 
-//    case entity::Type::VEHICLE_ID:
+//    case entity::Type::VEHICLE:
 //    {
 //        switch(m_driveComplex.target()->subtype())
 //        {
-//        case entity::Type::SPACESTATION_ID:
+//        case entity::Type::SPACESTATION:
 //        {
 //            assert(false);
 //            //SpaceStation* spacestation = ((SpaceStation*)m_driveComplex.target());
@@ -2218,7 +2218,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //            break;
 //        }
 
-//        case entity::Type::SHIP_ID:
+//        case entity::Type::SHIP:
 //        {
 //            //..
 //            break;
@@ -2240,7 +2240,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    {
 //        switch(m_parentVehicleSlot->owner()->typeId())
 //        {
-//        case entity::Type::ANGAR_ID:
+//        case entity::Type::ANGAR:
 //        {
 //            int angleInD = meti::getRandInt(360);
 //            glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
@@ -2252,7 +2252,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //            break;
 //        }
 
-//        case entity::Type::VEHICLE_ID:
+//        case entity::Type::VEHICLE:
 //        {
 //            //..
 //            break;
@@ -2269,7 +2269,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //        m_Land->RemoveVehicle(this);
 //    }
 
-//    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID);
+//    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING);
 //    // alpitodorender SetTransparency(0.1);*/
 //}
 
@@ -2360,7 +2360,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    m_needs.get_ammo = false;
 ////    for (ItemSlot* slot: m_equipmentSlots) {
 ////        if (slot->item()) {
-////            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT_ID) {
+////            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
 ////                if (slot->rocketEquipment()->GetAmmo() == 0) {
 ////                    m_needs.get_ammo = true;
 ////                }
@@ -2409,7 +2409,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////    if ( (m_needs.get_ammo == true) && (result == true) ) {
 ////        for (ItemSlot* slot: m_equipmentSlots) {
 ////            if (slot->item()) {
-////                if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT_ID) {
+////                if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
 ////                    result = ((Angar*)m_parentVehicleSlot->owner())->chargeRocketEquipment(m_npc, slot->rocketEquipment());
 ////                }
 ////            }
@@ -2681,13 +2681,13 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 ////            {
 ////                switch(m_SlotArtef_vec[i]->item()->subTypeId())
 ////                {
-////                case entity::Type::GRAVITY_ARTEFACT_ID:
+////                case entity::Type::GRAVITY_ARTEFACT:
 ////                {
 ////                    model()->properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
 ////                    break;
 ////                }
 
-////                case entity::Type::PROTECTOR_ARTEFACT_ID:
+////                case entity::Type::PROTECTOR_ARTEFACT:
 ////                {
 ////                    model()->properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
 ////                    break;
@@ -3143,11 +3143,11 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
 ////    switch(type_id)
 ////    {
-////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:     { return "INITIATE_DOCKING_ID"; break; }
-////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:    { return "INITIATE_LAUNCHING_ID"; break; }
-////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:        { return "INITIATE_JUMPIN_ID"; break; }
-////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:        { return "INITIATE_JUMPOUT_ID"; break; }
-////    case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID:                    { return "NONE_ID"; break; }
+////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING:     { return "INITIATE_DOCKING"; break; }
+////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING:    { return "INITIATE_LAUNCHING"; break; }
+////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN:        { return "INITIATE_JUMPIN"; break; }
+////    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT:        { return "INITIATE_JUMPOUT"; break; }
+////    case VEHICLE_SPECIAL_ACTION_TYPE::NONE:                    { return "NONE"; break; }
 
 ////    default: { return "UKNOWN id_type"; break; }
 ////    }

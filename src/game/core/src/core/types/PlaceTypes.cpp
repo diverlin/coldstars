@@ -26,10 +26,10 @@ std::string getPlaceStr(place::type place_id)
     {
         case place::type::NONE:             { return "PLACE_NONE"; break; }
         
-        case place::type::KOSMOS:         { return "SPACE_ID"; break; }
-        case place::type::HYPER:    { return "HYPER_SPACE_ID"; break; }
-        case place::type::KOSMOPORT:        { return "KOSMOPORT_ID"; break; }
-        case place::type::LAND:    { return "NATURELAND_ID"; break; }
+        case place::type::KOSMOS:         { return "SPACE"; break; }
+        case place::type::HYPER:    { return "HYPER_SPACE"; break; }
+        case place::type::KOSMOPORT:        { return "KOSMOPORT"; break; }
+        case place::type::LAND:    { return "NATURELAND"; break; }
 
         default: { return "PLACE_UKNOWN"; break; }    
     }

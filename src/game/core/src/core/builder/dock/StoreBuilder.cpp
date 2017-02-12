@@ -70,7 +70,7 @@ void StoreBuilder::createInternals(Store* store) const
 {
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
     {
-        control::ItemSlot* item_slot = getNewItemSlot(entity::type::CARGO_SLOT_ID);
+        control::ItemSlot* item_slot = getNewItemSlot(entity::type::CARGO_SLOT);
         store->addItemSlot(item_slot);
     }
 
@@ -80,7 +80,7 @@ void StoreBuilder::createInternals(Store* store) const
         store->addVehicleSlot(vehicle_slot);
     }
 
-    //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND_ID));
+    //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND));
 }
 
 

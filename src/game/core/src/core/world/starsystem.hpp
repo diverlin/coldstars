@@ -94,7 +94,7 @@ const int DISTANT_NEBULA_MIN = 6;
 const int DISTANT_NEBULA_MAX = 8;
 
 enum CONDITION {
-    WAR_ID=1, CAPTURED_ID, SAFE_ID
+    WAR=1, CAPTURED, SAFE
 };
 } // namespace STARSYSTEM
 } // namespace ENTITY
@@ -300,7 +300,7 @@ public:
 private:
     model::Starsystem* m_model_starsystem = nullptr;
 
-    race::type m_race_id = race::type::R0_ID;
+    race::type m_race_id = race::type::R0;
     race::type m_conqueror_race_id = race::type::NONE;
 
     bool m_unique_update_inDymanic_done = false;

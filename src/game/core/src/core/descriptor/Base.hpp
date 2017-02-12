@@ -74,7 +74,7 @@ enum class Key: int {
     CARGO_SLOT_NUM,
     // dynamic
     ID,
-    OBJ_ID,
+    OBJ,
     OWNER,
     CHILD,
     TARGET
@@ -124,7 +124,7 @@ enum Code {
     CARGO_SLOT_NUM,
     // dynamic
     ID,
-    OBJ_ID,
+    OBJ,
     OWNER,
     CHILD,
     TARGET,
@@ -333,7 +333,7 @@ private:
 //const Id cargoSlotNumId( CARGO_SLOT_NUM, "cargo_slot_num" );
 //// dynamic
 //const Id idId( ID, "id" );
-//const Id objIdId( OBJ_ID, "obj_id" );
+//const Id objIdId( OBJ, "obj_id" );
 //const Id ownerId( OWNER, "owner" );
 //const Id childId( CHILD, "child" );
 //const Id targetId( TARGET, "target" );
@@ -383,7 +383,7 @@ const std::map<int, Id> IDs = {
     , { CARGO_SLOT_NUM, Id( CARGO_SLOT_NUM, "cargo_slot_num" ) }
     // dynamic
     , { ID, Id( ID, "id" ) }
-    , { OBJ_ID, Id( OBJ_ID, "obj_id" ) }
+    , { OBJ, Id( OBJ, "obj_id" ) }
     , { OWNER, Id( OWNER, "owner" ) }
     , { CHILD, Id( CHILD, "child" ) }
     , { TARGET, Id( TARGET, "target" ) }

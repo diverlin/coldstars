@@ -77,7 +77,7 @@ Planet::getNew(const descriptor::Planet& descr)
 
     //if (getRandBool())
     {
-        //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
+        //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE);
         //Atmosphere* atmosphere = new Atmosphere();
         //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         //alpitodorender planet->AddDecoration(atmosphere);
@@ -85,9 +85,9 @@ Planet::getNew(const descriptor::Planet& descr)
 
     /*
    {
-        Mesh* mesh_plane = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+        Mesh* mesh_plane = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 
-        TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
+        TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING);
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
         //ring->setDirection(glm::normalize(glm::vec3(1.0f)));

@@ -27,7 +27,7 @@ namespace model {
 
 BlackHole::BlackHole()
 {
-    setType(entity::type::BLACKHOLE_ID);
+    setType(entity::type::BLACKHOLE);
 }
 
 BlackHole::BlackHole(const std::string& data)
@@ -52,7 +52,7 @@ BlackHole::BlackHole(model::BlackHole* model)
     , m_model_blackhole(model)
 {
 //    setId(id);
-//    setTypeId(entity::Type::BLACKHOLE_ID);
+//    setTypeId(entity::Type::BLACKHOLE);
 
 //    setMass(meti::getRandInt(1000, 4000));
 }
@@ -103,7 +103,7 @@ void BlackHole::updateInSpace(int time, bool show_effect)
 //BlackHole::BlackHole(int id)
 //{
 //    setId(id);
-//    setTypeId(entity::Type::BLACKHOLE_ID);
+//    setTypeId(entity::Type::BLACKHOLE);
     
 //    setMass(meti::getRandInt(1000, 4000));
 //}

@@ -32,7 +32,7 @@
 
 GuiRadar::GuiRadar()
 {
-    setSubTypeId(gui::type::GUI_RADAR_ID);
+    setSubTypeId(gui::type::GUI_RADAR);
     
     textureOb_background        = GuiTextureObCollector::Instance().radar_background;
     textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
@@ -107,31 +107,31 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
         {
             switch(entity_vec[i]->type())
             {
-                case entity::type::STAR_ID:
+                case entity::type::STAR:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->model()->texture);
                     size = 2*size_base;
                     break;
                 }
-                case entity::type::PLANET_ID:
+                case entity::type::PLANET:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case entity::type::ASTEROID_ID:
+                case entity::type::ASTEROID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->model()->texture);
                     size = 1.25*size_base;
                     break;                
                 }
-                case entity::type::BLACKHOLE_ID:
+                case entity::type::BLACKHOLE:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case entity::type::VEHICLE_ID:
+                case entity::type::VEHICLE:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->model()->texture);
                     size = 1*size_base;

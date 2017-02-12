@@ -49,24 +49,24 @@ Cursor::Cursor()
 m_FocusedSpaceObject(nullptr),
 m_FocusedGuiElement(nullptr)
 {
-    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(entity::Type::CARGO_SLOT_ID);
+    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(entity::Type::CARGO_SLOT);
     
     m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
-    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK, "attack");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));
     
-    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK, "presize_attack");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));
     
-    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN, "scan");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));
     
-    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB, "grab");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));                
     
-    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW, "follow");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));
         
     //int angle = 0;
@@ -173,7 +173,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         
         if (m_FocusedGuiElement != nullptr)
         {
-            if (m_FocusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT_ID)
+            if (m_FocusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT)
             {
                 ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);

@@ -40,7 +40,7 @@ namespace model {
 
 Container::Container()
 {
-    setType(entity::type::CONTAINER_ID);
+    setType(entity::type::CONTAINER);
 }
 
 Container::Container(const std::string& data)
@@ -65,7 +65,7 @@ Container::Container(model::Container* model)
     , m_model_container(model)
 {
 //    setId(id);
-//    setTypeId(entity::Type::CONTAINER_ID);
+//    setTypeId(entity::Type::CONTAINER);
 }
 
 /* virtual */   
@@ -93,7 +93,7 @@ void Container::hit(int damage) {
     assert(false);
 //    if (model()->dataLife().is_dying) {
 //        if (m_itemSlot->item()) {
-//            if (m_itemSlot->item()->subtype() == entity::Type::BOMB_ID) {
+//            if (m_itemSlot->item()->subtype() == entity::Type::BOMB) {
 //                // send explosion event
 //            }
 //        }
@@ -133,7 +133,7 @@ void Container::bindItemSlot(ItemSlot* item_slot)
 void Container::_postDeathUniqueEvent(bool show_effect)
 {
     assert(false);
-//    if (m_itemSlot->item()->type() == entity::Type::BOMB_ID) {
+//    if (m_itemSlot->item()->type() == entity::Type::BOMB) {
 //        starsystem()->bombExplosionEvent(this, show_effect);
 //    } else {
 //        if (show_effect) {
@@ -164,7 +164,7 @@ void Container::updateInSpace(int time, bool show_effect)
 //Container::Container(int_t id)
 //{
 //    setId(id);
-//    setTypeId(entity::Type::CONTAINER_ID);
+//    setTypeId(entity::Type::CONTAINER);
 //}
 
 ///* virtual */
@@ -190,7 +190,7 @@ void Container::updateInSpace(int time, bool show_effect)
 //    SpaceObject::hit(damage);
 //    if (_dataLife().is_dying) {
 //        if (m_itemSlot->item()) {
-//            if (m_itemSlot->item()->subtype() == entity::Type::BOMB_ID) {
+//            if (m_itemSlot->item()->subtype() == entity::Type::BOMB) {
 //                // send explosion event
 //            }
 //        }
@@ -228,7 +228,7 @@ void Container::updateInSpace(int time, bool show_effect)
 ///* virtual override final */
 //void Container::_postDeathUniqueEvent(bool show_effect)
 //{
-//    if (m_itemSlot->item()->type() == entity::Type::BOMB_ID)
+//    if (m_itemSlot->item()->type() == entity::Type::BOMB)
 //    {
 //        starsystem()->bombExplosionEvent(this, show_effect);
 //    }

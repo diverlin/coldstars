@@ -27,8 +27,8 @@ namespace item {
 Radar::Radar(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-    setType(entity::type::EQUIPMENT_ID);
-    setSubType(entity::type::RADAR_EQUIPMENT_ID);
+    setType(entity::type::EQUIPMENT);
+    setSubType(entity::type::RADAR_EQUIPMENT);
 }
 
 Radar::Radar(const std::string& data)

@@ -45,7 +45,7 @@ m_bakSlot(nullptr),
 m_ownerVehicle(nullptr),
 m_target(nullptr),
 m_effectDrive(nullptr),
-m_ActionId(NAVIGATOR_ACTION::NONE_ID),
+m_ActionId(NAVIGATOR_ACTION::NONE),
 m_TargetDistance(0.0f),
 m_PathEnd(true),
 m_HasTarget(false)
@@ -80,7 +80,7 @@ void DriveComplex::ResetTarget()
     m_TargetOffset = glm::vec3(0.0);
     m_TargetPos   = glm::vec3(0.0);
     
-    m_ActionId = NAVIGATOR_ACTION::NONE_ID;
+    m_ActionId = NAVIGATOR_ACTION::NONE;
     
     m_HasTarget = false;
     m_PathEnd = true;
@@ -114,7 +114,7 @@ void DriveComplex::DefineDistance()
 {
     switch(m_ActionId)
     {
-        case NAVIGATOR_ACTION::DOCKING_ID:
+        case NAVIGATOR_ACTION::DOCKING:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()/4;
@@ -123,7 +123,7 @@ void DriveComplex::DefineDistance()
             break;
         }
         
-        case NAVIGATOR_ACTION::COLLECTING_ID:
+        case NAVIGATOR_ACTION::COLLECTING:
         {
             assert(false);
             //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
@@ -132,7 +132,7 @@ void DriveComplex::DefineDistance()
             break;
         }
 
-        case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
+        case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE:
         {
             assert(false);
             //int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
@@ -146,7 +146,7 @@ void DriveComplex::DefineDistance()
             break;
         }
                     
-        case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
+        case NAVIGATOR_ACTION::KEEP_CLOSE:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*1.5;
@@ -155,7 +155,7 @@ void DriveComplex::DefineDistance()
             break;
         }
 
-        case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
+        case NAVIGATOR_ACTION::KEEP_MIDDLE:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*4;
@@ -164,7 +164,7 @@ void DriveComplex::DefineDistance()
             break;
         }
         
-        case NAVIGATOR_ACTION::KEEP_FAR_ID:
+        case NAVIGATOR_ACTION::KEEP_FAR:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*8;
@@ -210,7 +210,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 {
     switch(m_target->type())
     {
-        case entity::type::STARSYSTEM_ID:
+        case entity::type::STARSYSTEM:
         {
         assert(false);
 //            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
@@ -220,27 +220,27 @@ void DriveComplex::UpdateDynamicTargetCoord()
             break;
         }
     
-        case entity::type::PLANET_ID:
+        case entity::type::PLANET:
         {
             //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
             //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
             break;
         }
 
-        case entity::type::ASTEROID_ID:
+        case entity::type::ASTEROID:
         {
         // TODO
 //            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
 //            break;
         }
          
-        case entity::type::VEHICLE_ID:
+        case entity::type::VEHICLE:
         {
             m_TargetPos = m_target->position() + m_TargetOffset;
             break;
         }
 
-        case entity::type::CONTAINER_ID:
+        case entity::type::CONTAINER:
         {
             m_TargetPos = m_target->position() + m_TargetOffset;
             break;
@@ -270,14 +270,14 @@ bool DriveComplex::GetDockingPermission()
 {
     switch(m_target->type())
     {
-        //case entity::Type::PLANET_ID:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
-        case entity::type::VEHICLE_ID:
+        //case entity::Type::PLANET:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
+        case entity::type::VEHICLE:
         {
             switch(m_target->subtype())
             {
                 assert(false);
-                //case entity::Type::SPACESTATION_ID: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
-                //case SHIP_ID:   { return targetOb->vehicle()->getPermissionToLand(); break; }
+                //case entity::Type::SPACESTATION: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
+                //case SHIP:   { return targetOb->vehicle()->getPermissionToLand(); break; }
             }
             break;
         }

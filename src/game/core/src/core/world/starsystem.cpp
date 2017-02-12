@@ -68,11 +68,11 @@ namespace model {
 
 Starsystem::Starsystem()
 {
-    setType(entity::type::STARSYSTEM_ID);
+    setType(entity::type::STARSYSTEM);
 
     setPlace(place::type::KOSMOS);
 
-    m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
 
 Starsystem::Starsystem(const std::string& data)
@@ -542,25 +542,25 @@ void Starsystem::__updateStates()
     
     switch(m_condition_id)
     {
-    case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:
+    case ENTITY::STARSYSTEM::CONDITION::SAFE:
     {
         if (enemy_is_here == true)
         {
             if (friendly_is_here == true)
             {
-                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR;
             }
             else
             {
-                m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-                if (randVehicleByNpcRaceId(race::type::R6_ID) != nullptr)
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED;
+                if (randVehicleByNpcRaceId(race::type::R6) != nullptr)
                 {
-                    m_conqueror_race_id = race::type::R6_ID;
+                    m_conqueror_race_id = race::type::R6;
                 }
 
-                if (randVehicleByNpcRaceId(race::type::R7_ID) != nullptr)
+                if (randVehicleByNpcRaceId(race::type::R7) != nullptr)
                 {
-                    m_conqueror_race_id = race::type::R7_ID;
+                    m_conqueror_race_id = race::type::R7;
                 }
             }
         }
@@ -568,17 +568,17 @@ void Starsystem::__updateStates()
         break;
     }
 
-    case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:
+    case ENTITY::STARSYSTEM::CONDITION::CAPTURED:
     {
         if (friendly_is_here == true)
         {
             if (enemy_is_here == true)
             {
-                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR;
             }
             else
             {
-                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE;
                 m_conqueror_race_id = race::type::NONE;
             }
         }
@@ -586,18 +586,18 @@ void Starsystem::__updateStates()
         break;
     }
 
-    case ENTITY::STARSYSTEM::CONDITION::WAR_ID:
+    case ENTITY::STARSYSTEM::CONDITION::WAR:
     {
         if (friendly_is_here == true)
         {
             if (enemy_is_here == false)
             {
-                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+                m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE;
             }
         }
         else
         {
-            m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
+            m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED;
         }
 
         break;
@@ -836,7 +836,7 @@ void Starsystem::__updateInSpaceInStatic_s()
     for (control::Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        vehicle->npc()->updateInSpaceInStatic();
-        //        if (vehicle->subtype() == entity::Type::SPACESTATION_ID) {
+        //        if (vehicle->subtype() == entity::Type::SPACESTATION) {
         //            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
         //        }
     }
@@ -868,7 +868,7 @@ void Starsystem::findRenderVisibleEntities_c(Player* player)
 
 void Starsystem::findRadarVisibleEntities_c(Player* player)
 {    
-    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(gui::type::GUI_RADAR_ID);
+    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(gui::type::GUI_RADAR);
     //    const Vehicle& vehicle = *player->GetNpc()->vehicle();
     //    gui_radar.ResetData();
     
@@ -920,14 +920,14 @@ void Starsystem::__shipManager_s(unsigned int num)
 {
     while (m_vehicles.size() < num)
     {
-        race::type prace_id = race::type::R0_ID;
+        race::type prace_id = race::type::R0;
         if (meti::getRandBool()) {
-            prace_id = race::type::R6_ID;
+            prace_id = race::type::R6;
         }
         
-        entity::type psubtype_id    = entity::type::WARRIOR_ID;
-        entity::type psubsubtype_id = entity::type::WARRIOR_ID;
-        int size_id     = SIZE_4_ID;
+        entity::type psubtype_id    = entity::type::WARRIOR;
+        entity::type psubsubtype_id = entity::type::WARRIOR;
+        int size_id     = SIZE_4;
         int weapons_num = 7;
 
         model::Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
@@ -1143,7 +1143,7 @@ void Starsystem::_postDeathUniqueEvent(bool)
 //    {
 //        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
 //        {
-//            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
+//            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE);
 //            //            dn->Load(v.second);
 //            //            dn->Resolve();
 //            //            Add(dn);
@@ -1154,7 +1154,7 @@ void Starsystem::_postDeathUniqueEvent(bool)
 //    {
 //        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
 //        {
-//            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
+//            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE);
 //            //            ds->Load(v.second);
 //            //            ds->Resolve();
 //            //            Add(ds);

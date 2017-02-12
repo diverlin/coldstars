@@ -34,20 +34,20 @@
 
 Slider::Slider()
 {
-    //type_id = GUI::TYPE::SLIDER_ID;
-    //subtype_id = GUI::TYPE::NONE_ID;
+    //type_id = GUI::TYPE::SLIDER;
+    //subtype_id = GUI::TYPE::NONE;
     
     textureOb = GuiTextureObCollector::Instance().text_background;
-    textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::type::LAZER_EFFECT_ID);
+    textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::type::LAZER_EFFECT);
     
-    //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE_ID, "slide");  
-    //button_map.insert(std::make_pair(GUI::BUTTON::SLIDE_ID, slide_button));
+    //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE, "slide");  
+    //button_map.insert(std::make_pair(GUI::BUTTON::SLIDE, slide_button));
     
-    //ButtonTrigger* accept_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACCEPT_ID, "accept");  
-    //button_map.insert(std::make_pair(GUI::BUTTON::ACCEPT_ID, accept_button));
+    //ButtonTrigger* accept_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACCEPT, "accept");  
+    //button_map.insert(std::make_pair(GUI::BUTTON::ACCEPT, accept_button));
     
-    //ButtonTrigger* decline_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::DECLINE_ID, "decline");  
-    //button_map.insert(std::make_pair(GUI::BUTTON::DECLINE_ID, decline_button));
+    //ButtonTrigger* decline_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::DECLINE, "decline");  
+    //button_map.insert(std::make_pair(GUI::BUTTON::DECLINE, decline_button));
 }
 
 Slider::~Slider()
@@ -66,14 +66,14 @@ void Slider::Configure(int ammount_total, int price_for_one)
     rect.set(0, 0, GUI::SLIDER_WIDTH, 3*GUI::ICON_SIZE);
     rect_slide.set(0, rect.center().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
     
-    //GetButton(GUI::BUTTON::SLIDE_ID)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
-    //GetButton(GUI::BUTTON::ACCEPT_ID)->GetRect().Set(0, 0, 20, 20);
-    //GetButton(GUI::BUTTON::DECLINE_ID)->GetRect().Set(rect.GetWidth() - GUI::ICON_SIZE, 0, GUI::ICON_SIZE, GUI::ICON_SIZE);
+    //GetButton(GUI::BUTTON::SLIDE)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
+    //GetButton(GUI::BUTTON::ACCEPT)->GetRect().Set(0, 0, 20, 20);
+    //GetButton(GUI::BUTTON::DECLINE)->GetRect().Set(rect.GetWidth() - GUI::ICON_SIZE, 0, GUI::ICON_SIZE, GUI::ICON_SIZE);
 }
 
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 {      /*
-    ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::TYPE::SLIDER_ID);
+    ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::TYPE::SLIDER);
     if (rect_slide.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
     {
         if (data_mouse.left_press == true)
@@ -97,30 +97,30 @@ void Slider::ButtonsAction(Shop* shop)
             //{
                     //switch(button->subTypeId())
                     //{
-                        //case GUI::BUTTON::ACCEPT_ID: 
+                        //case GUI::BUTTON::ACCEPT: 
                         //{ 
                             //int goods_subtype_id;
                             //switch(subtype_id)
                             //{
-                                //case GUI::BUTTON::MINERALS_ID:         { goods_subtype_id = ENTITY::MINERALS_ID; break; }
-                                //case GUI::BUTTON::FOOD_ID:         { goods_subtype_id = ENTITY::FOOD_ID; break; }
-                                //case GUI::BUTTON::MEDICINE_ID:         { goods_subtype_id = ENTITY::MEDICINE_ID; break; }
-                                //case GUI::BUTTON::MILITARY_ID:         { goods_subtype_id = ENTITY::MILITARY_ID; break; }
-                                //case GUI::BUTTON::DRUG_ID:         { goods_subtype_id = ENTITY::DRUG_ID; break; }
-                                //case GUI::BUTTON::EXCLUSIVE_ID:     { goods_subtype_id = ENTITY::EXCLUSIVE_ID; break; }
+                                //case GUI::BUTTON::MINERALS:         { goods_subtype_id = ENTITY::MINERALS; break; }
+                                //case GUI::BUTTON::FOOD:         { goods_subtype_id = ENTITY::FOOD; break; }
+                                //case GUI::BUTTON::MEDICINE:         { goods_subtype_id = ENTITY::MEDICINE; break; }
+                                //case GUI::BUTTON::MILITARY:         { goods_subtype_id = ENTITY::MILITARY; break; }
+                                //case GUI::BUTTON::DRUG:         { goods_subtype_id = ENTITY::DRUG; break; }
+                                //case GUI::BUTTON::EXCLUSIVE:     { goods_subtype_id = ENTITY::EXCLUSIVE; break; }
                             //}
                             
                             
                         //shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
                         
-                            //setSubTypeId(NONE_ID);
+                            //setSubTypeId(NONE);
                             //button->Reset(); //untrigger                        
                             //break; 
                         //}
 
-                        //case GUI::BUTTON::DECLINE_ID: 
+                        //case GUI::BUTTON::DECLINE: 
                         //{     
-                            //setSubTypeId(NONE_ID);  
+                            //setSubTypeId(NONE);  
                             //button->Reset(); //untrigger                        
                             //break; 
                         //}
@@ -132,8 +132,8 @@ void Slider::ButtonsAction(Shop* shop)
            
 void Slider::CheckButtonsLock()
 {               
-    //if (player->GetNpc()->GetCredits() < price_selected)     { GetButton(GUI::BUTTON::ACCEPT_ID)->LockOn(); }
-    //else                            { GetButton(GUI::BUTTON::ACCEPT_ID)->LockOff(); }
+    //if (player->GetNpc()->GetCredits() < price_selected)     { GetButton(GUI::BUTTON::ACCEPT)->LockOn(); }
+    //else                            { GetButton(GUI::BUTTON::ACCEPT)->LockOff(); }
 }
               
 void Slider::Render() const

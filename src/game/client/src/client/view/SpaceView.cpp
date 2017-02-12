@@ -339,19 +339,19 @@ void Space::__add(jeti::view::BaseView* view)
     model::SpaceObject* ob = it->second;
 
     switch(ob->type()) {
-    case entity::type::STAR_ID: {
+    case entity::type::STAR: {
         view::Star* star = static_cast<view::Star*>(view);
         assert(star);
         m_stars.push_back(star);
         break;
     }
-    case entity::type::PLANET_ID: {
+    case entity::type::PLANET: {
         view::Planet* planet = static_cast<view::Planet*>(view);
         assert(planet);
         m_planets.push_back(planet);
         break;
     }
-    case entity::type::ASTEROID_ID: {
+    case entity::type::ASTEROID: {
         view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
         assert(asteroid);
         m_asteroids.push_back(asteroid);

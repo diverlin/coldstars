@@ -26,12 +26,12 @@
 namespace type {
 
 Collector::Collector() {
-    __registerType(int_t(texture::type::STAR_ID), "texture::star");
-    __registerType(int_t(texture::type::PLANET_ID), "texture::planet");
-    __registerType(int_t(texture::type::ASTEROID_ID), "texture::asteroid");
-    __registerType(int_t(texture::type::SHIP_ID), "texture::ship");
-    __registerType(int_t(mesh::type::SPHERE_ID), "mesh::sphere");
-    __registerType(int_t(mesh::type::SPHERE_DEFORMED_ID), "mesh::sphere_deformed");
+    __registerType(int_t(texture::type::STAR), "texture::star");
+    __registerType(int_t(texture::type::PLANET), "texture::planet");
+    __registerType(int_t(texture::type::ASTEROID), "texture::asteroid");
+    __registerType(int_t(texture::type::SHIP), "texture::ship");
+    __registerType(int_t(mesh::type::SPHERE), "mesh::sphere");
+    __registerType(int_t(mesh::type::SPHERE_DEFORMED), "mesh::sphere_deformed");
 }
 
 Collector::~Collector() {}

@@ -37,7 +37,7 @@ namespace model {
 
 Sector::Sector()
 {
-    setType(entity::type::SECTOR_ID);
+    setType(entity::type::SECTOR);
 }
 
 Sector::Sector(const std::string& data)
@@ -164,9 +164,9 @@ void Sector::update(int time)
 //{
 //switch (STARSYSTEM_vec[i]->GetConditionId())
 //{
-//case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
-//case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
-//case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
+//case ENTITY::STARSYSTEM::CONDITION::SAFE:         { data_starsystems_condition.safe_num++; break; }
+//case ENTITY::STARSYSTEM::CONDITION::WAR:         { data_starsystems_condition.war_num++; break; }
+//case ENTITY::STARSYSTEM::CONDITION::CAPTURED:     { data_starsystems_condition.captured_num++; break; }
 //}
 //}
 //}

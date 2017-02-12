@@ -163,9 +163,9 @@ void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 //        //if (isObjectWithinRange(npc->vehicle()->center(), vehicle->center(), radius)) {
 //            switch(vehicle->subTypeId())
 //            {
-//                case entity::Type::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-//                case entity::Type::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-//                case entity::Type::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+//                case entity::Type::SHIP:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+//                case entity::Type::SATELLITE:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+//                case entity::Type::SPACESTATION:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
 //            }
 ////        }
 ////    }

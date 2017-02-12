@@ -22,7 +22,7 @@
         
 void Task::reset()
 {
-    m_scenario_type_id = ai::type::NONE_ID;
+    m_scenario_type_id = ai::type::NONE;
     m_target_id = NONE;
     m_reward = 0;
     m_expiriance = 0;
