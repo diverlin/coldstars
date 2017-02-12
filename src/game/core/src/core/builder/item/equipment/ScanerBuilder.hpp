@@ -43,14 +43,14 @@ namespace item {
 class Scaner : public Equipment
 {
 public:
-    Scaner() = default;
-    ~Scaner() = default;
-
     static model::item::Scaner* getNew();
     static model::item::Scaner* getNew(const std::string&);
     static model::item::Scaner* getNew(const descriptor::item::Scaner&);
 
 private:
+    Scaner() = delete;
+    ~Scaner() = delete;
+
     static model::item::Scaner* __createTemplate(int_t);
     static void __createInternals(model::item::Scaner*, const descriptor::item::Scaner&);
 }; 

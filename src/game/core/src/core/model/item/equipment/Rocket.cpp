@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Rocket::Rocket()
+Rocket::Rocket(int_t descriptor_id)
 {
+    setDescriptor(descriptor_id);
     setType(entity::type::EQUIPMENT_ID);
     setSubType(entity::type::ROCKET_EQUIPMENT_ID);
 }

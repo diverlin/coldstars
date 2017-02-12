@@ -20,6 +20,7 @@
 #include <core/model/item/equipment/Rocket.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
+#include <core/managers/EntityManager.hpp>
 #include <core/common/Global.hpp>
 
 namespace builder {
@@ -43,28 +44,29 @@ Rocket::getNew(const std::string& data)
 model::item::Rocket*
 Rocket::getNew(const descriptor::item::Rocket& descr)
 {
-    model::item::Rocket* model = __createTemplate();
+    model::item::Rocket* model = __createTemplate(descr.id());
     __createInternals(model, descr);
-
     return model;
 }
 
 
 model::item::Rocket*
-Rocket::__createTemplate()
+Rocket::__createTemplate(int_t descriptor_id)
 {
-    model::item::Rocket* model = new model::item::Rocket;
-    assert(model);
-
-    assert(false);
-    //core::global::get().entityManager().reg(rocket);
-
+    model::item::Rocket* model = new model::item::Rocket(descriptor_id);
+    core::global::get().entityManager().reg(model);
     return model;
 }
 
 void
 Rocket::__createInternals(model::item::Rocket* model, const descriptor::item::Rocket& descr)
 {     
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setAmmo(descr.ammo());
+    model->setDamage(descr.damage());
+    model->setRadius(descr.radius());
+
     assert(false);
 //    if (race_id == race::type::NONE_ID) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));

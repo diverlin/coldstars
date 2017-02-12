@@ -19,6 +19,10 @@
 
 #pragma once
 
+#include "EquipmentBuilder.hpp"
+
+#include <ceti/type/IdType.hpp>
+
 #include <string>
 
 namespace descriptor {
@@ -36,18 +40,18 @@ class Rocket;
 namespace builder {
 namespace item {
 
-class Rocket
+class Rocket : public Equipment
 {
 public:
-    Rocket();
-    ~Rocket();
-
     static model::item::Rocket* getNew();
     static model::item::Rocket* getNew(const std::string&);
     static model::item::Rocket* getNew(const descriptor::item::Rocket&);
 
 private:
-    static model::item::Rocket* __createTemplate();
+    Rocket() = delete;
+    ~Rocket() = delete;
+
+    static model::item::Rocket* __createTemplate(int_t);
     static void __createInternals(model::item::Rocket*, const descriptor::item::Rocket&);
 }; 
 

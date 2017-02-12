@@ -34,7 +34,7 @@ namespace builder {
 class Equipment : public Item
 {
 protected:
-    static void _createInternals(model::Equipment*, descriptor::Equipment*);
+    static void _createInternals(model::Equipment*, const descriptor::Equipment&);
 
 private:
     Equipment() = delete;

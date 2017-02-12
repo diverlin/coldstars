@@ -27,7 +27,7 @@ namespace item {
 class Rocket : public Equipment
 {
 public:
-    Rocket();
+    Rocket(int_t);
     ~Rocket() = default;
     Rocket(const std::string& data);
     std::string data() const;
