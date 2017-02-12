@@ -56,7 +56,7 @@ TEST(descriptor, bak) {
     descriptor::item::Bak descr = descriptor::item::getNewBak();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::BAK_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::BAK_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::BAK_SLOT);
 
     descriptor::item::Bak copy(descr.data());
 
@@ -74,7 +74,7 @@ TEST(descriptor, drive) {
     descriptor::item::Drive descr = descriptor::item::getNewDrive();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::DRIVE_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::DRIVE_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::DRIVE_SLOT);
 
     descriptor::item::Drive copy(descr.data());
 
@@ -93,7 +93,7 @@ TEST(descriptor, droid) {
     descriptor::item::Droid descr = descriptor::item::getNewDroid();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::DROID_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::DROID_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::DROID_SLOT);
 
     descriptor::item::Droid copy(descr.data());
 
@@ -111,7 +111,7 @@ TEST(descriptor, grapple) {
     descriptor::item::Grapple descr = descriptor::item::getNewGrapple();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::GRAPPLE_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::GRAPPLE_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::GRAPPLE_SLOT);
 
     descriptor::item::Grapple copy(descr.data());
 
@@ -131,7 +131,7 @@ TEST(descriptor, lazer) {
     descriptor::item::Lazer descr = descriptor::item::getNewLazer();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::LAZER_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::WEAPON_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::WEAPON_SLOT);
 
     descriptor::item::Lazer copy(descr.data());
 
@@ -150,7 +150,7 @@ TEST(descriptor, protector) {
     descriptor::item::Protector descr = descriptor::item::getNewProtector();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::PROTECTOR_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::PROTECTOR_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::PROTECTOR_SLOT);
 
     descriptor::item::Protector copy(descr.data());
 
@@ -168,7 +168,7 @@ TEST(descriptor, radar) {
     descriptor::item::Radar descr = descriptor::item::getNewRadar();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::RADAR_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::RADAR_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::RADAR_SLOT);
 
     descriptor::item::Radar copy(descr.data());
 
@@ -186,7 +186,7 @@ TEST(descriptor, rocket) {
     descriptor::item::Rocket descr = descriptor::item::getNewRocket();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::ROCKET_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::WEAPON_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::WEAPON_SLOT);
 
     descriptor::item::Rocket copy(descr.data());
 
@@ -206,7 +206,7 @@ TEST(descriptor, scaner) {
     descriptor::item::Scaner descr = descriptor::item::getNewScaner();
 
     EXPECT_EQ(descr.descriptor(), descriptor::type::SCANER_EQUIPMENT);
-    EXPECT_EQ(descr.slotType(), entity::type::SCANER_SLOT_ID);
+    EXPECT_EQ(descr.slotType(), entity::type::SCANER_SLOT);
 
     descriptor::item::Scaner copy(descr.data());
 

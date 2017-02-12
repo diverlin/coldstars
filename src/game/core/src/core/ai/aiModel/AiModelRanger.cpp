@@ -24,7 +24,7 @@
 
 AiModelRanger::AiModelRanger() 
 {
-    type_id = AIMODEL::RANGER_ID;
+    type_id = AIMODEL::RANGER;
 }
 
 AiModelRanger::~AiModelRanger() 
@@ -36,15 +36,15 @@ void AiModelRanger::UpdateInStatic(Npc* npc) const
 //    if (npc->stateMachine().macroTaskManager().scenario() == nullptr)
 //    {
 //        Starsystem* target_starsystem = nullptr;
-//        target_starsystem = npc->closestStarSystem(ENTITY::STARSYSTEM::CONDITION::WAR_ID);
+//        target_starsystem = npc->closestStarSystem(ENTITY::STARSYSTEM::CONDITION::WAR);
 //        if (target_starsystem == nullptr)
 //        {
-//            target_starsystem = npc->closestStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+//            target_starsystem = npc->closestStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED);
 //        }
 
 //        if (target_starsystem != nullptr)
 //        {
-//            Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, target_starsystem->id());
+//            Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION, target_starsystem->id());
 //            npc->stateMachine().setCurrentMacroTask(macrotask);
 //        }
 //    }

@@ -25,7 +25,7 @@
 
 MicroScenarioLaunching::MicroScenarioLaunching()
 {
-    setTypeId(ai::type::MICRO_LAUNCHING_ID);
+    setTypeId(ai::type::MICRO_LAUNCHING);
 }
 
 /* virtual */
@@ -62,7 +62,7 @@ void MicroScenarioLaunching::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 {
     //npc->vehicle()->LaunchingEvent();
-    //npc->vehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
+    //npc->vehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING);
 }
 
 /* virtual */

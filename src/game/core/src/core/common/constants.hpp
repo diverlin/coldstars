@@ -190,22 +190,22 @@ const int SIZE_9_AREA = 240*240;
 
 enum SIZE
 {
-        SIZE_1_ID=1, SIZE_2_ID, SIZE_3_ID, SIZE_4_ID, SIZE_5_ID, SIZE_6_ID, SIZE_7_ID, SIZE_8_ID, SIZE_9_ID, SIZE_10_ID 
+        SIZE_1=1, SIZE_2, SIZE_3, SIZE_4, SIZE_5, SIZE_6, SIZE_7, SIZE_8, SIZE_9, SIZE_10 
 };
 
 const float INCREDIBLY_MAX_FLOAT = 1e10; 
 
-const int FAIL_ID = 1;
-const int SUCCESS_ID = 2;
-const int PERFORM_ID = 3;
+const int FAIL = 1;
+const int SUCCESS = 2;
+const int PERFORM = 3;
 
 namespace AIMODEL
 {
-    enum TYPE_ID
+    enum TYPE
     {
-        CONQUEROR_ID=1,
-        RANGER_ID,
-        TRADER_ID
+        CONQUEROR=1,
+        RANGER,
+        TRADER
     };
 }
 
@@ -234,7 +234,7 @@ namespace COLOR
 {
     enum id_type
     {
-        RED_ID=1, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
+        RED=1, GREEN, BLUE, YELLOW, GREY
     };
     
     const glm::vec4 COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
@@ -249,7 +249,7 @@ namespace EFFECT
 {
     enum TYPE
     {
-        EXPLOSION_ID
+        EXPLOSION
     };
 }
 
@@ -600,7 +600,7 @@ namespace NAVIGATOR_ACTION
 {
     enum TYPE
     {
-        NONE_ID=0, DOCKING_ID=1, COLLECTING_ID, KEEP_FIRE_DISTANCE_ID, KEEP_CLOSE_ID, KEEP_MIDDLE_ID, KEEP_FAR_ID 
+        NONE=0, DOCKING=1, COLLECTING, KEEP_FIRE_DISTANCE, KEEP_CLOSE, KEEP_MIDDLE, KEEP_FAR 
     };
 }
 
@@ -623,7 +623,7 @@ namespace GUI
     {
         enum TYPE
         {
-            ANGAR_ID=1, STORE_ID, SHOP_ID, GALAXYMAP_ID, GOVERMENT_ID, LAUNCHING_ID
+            ANGAR=1, STORE, SHOP, GALAXYMAP, GOVERMENT, LAUNCHING
         };
     }
     

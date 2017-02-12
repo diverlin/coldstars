@@ -54,11 +54,11 @@ Satellite::getNew()
 void Satellite::__createInternals(model::Satellite* model)
 {
     assert(false);
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-//    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+//    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE);
 
 //    int protection_rate = 1;
-//    //if (subtype_id == ENTITY::WARRIOR_ID)
+//    //if (subtype_id == ENTITY::WARRIOR)
 //    //{
 //    //protection_rate = 1;
 //    //}

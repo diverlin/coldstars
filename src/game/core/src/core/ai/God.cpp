@@ -85,7 +85,7 @@ void God::createWorld(const descriptor::Galaxy& descriptor)
 //        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
 //    }
 
-//    __createShips(starsystem, /*ships_num=*/20, race::type::R0_ID);   // fake
+//    __createShips(starsystem, /*ships_num=*/20, race::type::R0);   // fake
 }
 
 void God::update()
@@ -148,8 +148,8 @@ void God::__createInvasion(control::Galaxy* galaxy, const descriptor::Galaxy& de
 {
     assert(false);
 //    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-//        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-//        race::type race_id = (race::type)meti::getRandInt((int)race::type::R6_ID, (int)race::type::R7_ID);
+//        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
+//        race::type race_id = (race::type)meti::getRandInt((int)race::type::R6, (int)race::type::R7);
 //        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
 //        __createShips(starsystem, ship_num, race_id);
 //    }
@@ -161,18 +161,18 @@ void God::__proceedInvasion(control::Galaxy* galaxy) const
 //    std::cout<<"\nWARNING: God::ProceedInvasion is skiped\n";
 //    return;
 
-//    Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+//    Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED);
 //    if (!starsystem_invade_from) {
 //        return;
 //    }
-//    Starsystem* starsystem_invade_to = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+//    Starsystem* starsystem_invade_to = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE);
 //    if (!starsystem_invade_to) {
 //        return;
 //    }
     
 //    model::Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
 //    assert(npc_leader);
-//    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
+//    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION, starsystem_invade_to->id());
 //    assert(false);
 //    //npc_leader->stateMachine().setCurrentMacroTask(macrotask);
     
@@ -204,8 +204,8 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
 
     //                {
     //                    race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
-    //                    entity::Type npc_subtype_id    = entity::Type::WARRIOR_ID;
-    //                    entity::Type npc_subsubtype_id = entity::Type::WARRIOR_ID;
+    //                    entity::Type npc_subtype_id    = entity::Type::WARRIOR;
+    //                    entity::Type npc_subsubtype_id = entity::Type::WARRIOR;
 
     //                    Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
     //                    satellite->BindOwnerNpc(npc);
@@ -220,11 +220,11 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
     //        if (starsystem_descriptor.allow_ships == true)
     //        {
     //            std::vector<entity::Type> allowed_subtypes;
-    //            if (starsystem_descriptor.allow_ship_ranger == true)      { allowed_subtypes.push_back(entity::Type::RANGER_ID); }
-    //            if (starsystem_descriptor.allow_ship_warrior == true)     { allowed_subtypes.push_back(entity::Type::WARRIOR_ID); }
-    //            if (starsystem_descriptor.allow_ship_trader == true)      { allowed_subtypes.push_back(entity::Type::TRADER_ID); }
-    //            if (starsystem_descriptor.allow_ship_pirat == true)       { allowed_subtypes.push_back(entity::Type::PIRAT_ID); }
-    //            if (starsystem_descriptor.allow_ship_diplomat == true)    { allowed_subtypes.push_back(entity::Type::DIPLOMAT_ID); }
+    //            if (starsystem_descriptor.allow_ship_ranger == true)      { allowed_subtypes.push_back(entity::Type::RANGER); }
+    //            if (starsystem_descriptor.allow_ship_warrior == true)     { allowed_subtypes.push_back(entity::Type::WARRIOR); }
+    //            if (starsystem_descriptor.allow_ship_trader == true)      { allowed_subtypes.push_back(entity::Type::TRADER); }
+    //            if (starsystem_descriptor.allow_ship_pirat == true)       { allowed_subtypes.push_back(entity::Type::PIRAT); }
+    //            if (starsystem_descriptor.allow_ship_diplomat == true)    { allowed_subtypes.push_back(entity::Type::DIPLOMAT); }
 
     //            int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
     //            for (int j=0; j<ship_num; j++)
@@ -253,8 +253,8 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
     for (int i=0; i<spacestation_per_system; i++)
     {
         race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
-        entity::type npc_subtype_id    = entity::type::WARRIOR_ID;
-        entity::type npc_subsubtype_id = entity::type::WARRIOR_ID;
+        entity::type npc_subtype_id    = entity::type::WARRIOR;
+        entity::type npc_subsubtype_id = entity::type::WARRIOR;
 
         //race::type ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
         //entity::Type ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];

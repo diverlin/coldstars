@@ -31,7 +31,7 @@
 
 MicroScenarioGrab::MicroScenarioGrab()
 {
-    setTypeId(ai::type::MICRO_GRAB_ID);
+    setTypeId(ai::type::MICRO_GRAB);
 }
 
 /* virtual */
@@ -42,7 +42,7 @@ MicroScenarioGrab::~MicroScenarioGrab()
 void MicroScenarioGrab::enter(Npc* npc) const
 {
         assert(false);
-//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::COLLECTING_ID);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::COLLECTING);
     
 //    LOG("npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioGrab");
 }

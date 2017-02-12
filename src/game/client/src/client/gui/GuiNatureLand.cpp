@@ -45,12 +45,12 @@ GuiNatureLand::GuiNatureLand():natureland(nullptr)
     //float zsize = 1;    
     
     {           
-        //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
+        //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH, "launch");
         //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);
         //launch_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH, launch_button));
     }
 }
 
@@ -88,7 +88,7 @@ void GuiNatureLand::ButtonsAction() const
         //{
             //switch(button->subTypeId())               
             //{                   
-                   //case GUI::BUTTON::GETLAUNCH_ID:
+                   //case GUI::BUTTON::GETLAUNCH:
                    //{                          
                            //player->GetNpc()->vehicle()->LaunchingEvent();
                               //return; 

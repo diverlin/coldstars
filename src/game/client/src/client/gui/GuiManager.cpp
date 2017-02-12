@@ -147,10 +147,10 @@ void GuiManager::ExitGuiSpace()
              
 void GuiManager::UpdateSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(gui::type::SCAN_VEHICLE_ID);
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(gui::type::PLAYER_VEHICLE_ID);
-    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(gui::type::GUI_RADAR_ID);
-    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(gui::type::GALAXYMAP_ID);
+    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(gui::type::SCAN_VEHICLE);
+    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(gui::type::PLAYER_VEHICLE);
+    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(gui::type::GUI_RADAR);
+    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(gui::type::GALAXYMAP);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -164,7 +164,7 @@ void GuiManager::UpdateSessionInSpace()
 //    {
 //        if (gui_scan_vehicle->vehicle() == nullptr)
 //        {
-//            if (scan_target->type() == entity::Type::VEHICLE_ID)
+//            if (scan_target->type() == entity::Type::VEHICLE)
 //            {
 //                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
 //                gui_scan_vehicle->Show();
@@ -183,7 +183,7 @@ void GuiManager::UpdateSessionInSpace()
 //        gui_radar->Show();
 //    }
 
-    BaseGuiElement* button = GetGuiElement(gui::type::BUTTON_GALAXYMAP_ID);
+    BaseGuiElement* button = GetGuiElement(gui::type::BUTTON_GALAXYMAP);
     if (button->GetPressed())
     {
         //player->GetNpc()->ResetScanTarget();

@@ -26,7 +26,7 @@
 
 MicroScenarioDocking::MicroScenarioDocking()
 {
-    setTypeId(ai::type::MICRO_DOCKING_ID);
+    setTypeId(ai::type::MICRO_DOCKING);
 }
 
 /* virtual */
@@ -37,7 +37,7 @@ MicroScenarioDocking::~MicroScenarioDocking()
 void MicroScenarioDocking::enter(Npc* npc) const
 {    
     assert(false);
-//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::DOCKING_ID);
+//    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::DOCKING);
 
 //    LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
 }
@@ -67,9 +67,9 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 //    {
 //        if (npc->vehicle()->driveComplex().GetDockingPermission() == true)
 //        {
-//            if (npc->vehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
+//            if (npc->vehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING)
 //            {
-//                npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID);
+//                npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING);
 //            }
 //        }
 //        else

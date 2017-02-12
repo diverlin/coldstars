@@ -64,20 +64,20 @@ SpaceStation::__createInternals(model::SpaceStation* spacestation)
 
 //    if (meti::getRandInt(1))
 //    {
-//        //        mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-//        //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
+//        //        mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+//        //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION);
 //        //        size = texOb->size();
 //    }
 //    else
 //    {
-//        //        mesh = MeshCollector::Instance().getMesh(mesh::type::SPACESTATION_ID);
+//        //        mesh = MeshCollector::Instance().getMesh(mesh::type::SPACESTATION);
 //        //        texOb = mesh->textureOb();
 //        float scale_comp = meti::getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
 //        size = glm::vec3(scale_comp, scale_comp, scale_comp);
 //    }
     
 //    int protection_rate = 50;
-//    //if (subtype_id == ENTITY::WARRIOR_ID)
+//    //if (subtype_id == ENTITY::WARRIOR)
 //    //{
 //    //protection_rate = 5;
 //    //}
@@ -121,7 +121,7 @@ SpaceStation::__createInternals(model::SpaceStation* spacestation)
 
 
 //    assert(false);
-//    //spacestation->setSubSubTypeId(entity::Type::SPACESTATION_MILITARY_ID);
+//    //spacestation->setSubSubTypeId(entity::Type::SPACESTATION_MILITARY);
 //    //spacestation->setKorpusData(data_korpus);
 //    spacestation->setLifeData(data_life);
 

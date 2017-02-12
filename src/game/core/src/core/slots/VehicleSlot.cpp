@@ -50,7 +50,7 @@ VehicleSlot::VehicleSlot(int id, entity::type subtype_id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(entity::Type::VEHICLE_SLOT_ID);
+//    setTypeId(entity::Type::VEHICLE_SLOT);
 //    setSubTypeId(subtype_id);
 }
    
@@ -139,10 +139,10 @@ void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 
 ////    switch(owner()->type())
 ////    {
-////        //case ENTITY::VEHICLE_ID:     { ((Vehicle*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-////        //case ENTITY::CONTAINER_ID:     { ((Container*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-////        case entity::Type::STORE_ID:           { ((Store*)owner())->addVehicleSlot(this); break; }
-////        case entity::Type::ANGAR_ID:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
+////        //case ENTITY::VEHICLE:     { ((Vehicle*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+////        //case ENTITY::CONTAINER:     { ((Container*)core::global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+////        case entity::Type::STORE:           { ((Store*)owner())->addVehicleSlot(this); break; }
+////        case entity::Type::ANGAR:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
 ////    }
 //}
 

@@ -67,48 +67,48 @@ slider_shared(nullptr)
     //float zsize = 1;
     
     {
-        //ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
+        //ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR, "angar"); 
         //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
         //Box box(center, size);        
         //angar_screen_button->SetBox(box);                         
-        //button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::ANGAR, angar_screen_button));
     }
     
     {
-        //ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
+        //ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE, "store");
         //glm::vec3 center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);    
         //Box box(center, size);        
         //store_screen_button->SetBox(box);         
-        //button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::STORE, store_screen_button));
     }
         
     {                        
-        //ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
+        //ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP, "shop");
         //glm::vec3 center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //shop_screen_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::SHOP, shop_screen_button));
     }
     
     {                     
-        //ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
+        //ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP, "galaxymap");
         //glm::vec3 center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //galaxymap_screen_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP, galaxymap_screen_button));
     }
     
     {                     
-        //ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
+        //ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT, "goverment");
         //glm::vec3 center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //goverment_screen_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT, goverment_screen_button));
     }
 }
 
@@ -209,7 +209,7 @@ void GuiKosmoport::EnterGuiAngarScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiAngarScreen", GUI_LOG_DIP);
     #endif    
       
-        active_screen_id = GUI::SCREEN::ANGAR_ID;
+        active_screen_id = GUI::SCREEN::ANGAR;
 }
 
 void GuiKosmoport::ExitGuiAngarScreen()
@@ -241,7 +241,7 @@ void GuiKosmoport::EnterGuiStoreScreen()
     //bool lock_gui_scan_vehicle = true;
     //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->vehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
     
-    //active_screen_id = GUI::SCREEN::STORE_ID;
+    //active_screen_id = GUI::SCREEN::STORE;
 }
 
 void GuiKosmoport::ExitGuiStoreScreen()
@@ -259,7 +259,7 @@ void GuiKosmoport::EnterGuiShopScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiShopScreen", GUI_LOG_DIP);
     #endif    
       
-        active_screen_id = GUI::SCREEN::SHOP_ID;
+        active_screen_id = GUI::SCREEN::SHOP;
 }
 
 void GuiKosmoport::ExitGuiShopScreen()
@@ -275,7 +275,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiGalaxyMapScreen", GUI_LOG_DIP);
     #endif    
     
-        //active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
+        //active_screen_id = GUI::SCREEN::GALAXYMAP;        
         //gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy());
 }
 
@@ -294,7 +294,7 @@ void GuiKosmoport::EnterGuiGovermentScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiGovermentScreen", GUI_LOG_DIP);
     #endif
     
-        active_screen_id = GUI::SCREEN::GOVERMENT_ID;
+        active_screen_id = GUI::SCREEN::GOVERMENT;
 }
 
 void GuiKosmoport::ExitGuiGovermentScreen()
@@ -308,11 +308,11 @@ void GuiKosmoport::ExitCurrentScreen()
 {
     switch (active_screen_id)
     {
-        case GUI::SCREEN::ANGAR_ID: { ExitGuiAngarScreen(); break; }
-        case GUI::SCREEN::STORE_ID: { ExitGuiStoreScreen(); break; }
-        case GUI::SCREEN::SHOP_ID:  { ExitGuiShopScreen(); break; }
-        case GUI::SCREEN::GALAXYMAP_ID: { ExitGuiGalaxyMapScreen(); break; }
-        case GUI::SCREEN::GOVERMENT_ID: { ExitGuiGovermentScreen(); break; }
+        case GUI::SCREEN::ANGAR: { ExitGuiAngarScreen(); break; }
+        case GUI::SCREEN::STORE: { ExitGuiStoreScreen(); break; }
+        case GUI::SCREEN::SHOP:  { ExitGuiShopScreen(); break; }
+        case GUI::SCREEN::GALAXYMAP: { ExitGuiGalaxyMapScreen(); break; }
+        case GUI::SCREEN::GOVERMENT: { ExitGuiGovermentScreen(); break; }
     }
 }
 
@@ -326,7 +326,7 @@ void GuiKosmoport::ButtonsAction()
         //{
             //switch(button->subTypeId())
                //{
-                   //case GUI::BUTTON::ANGAR_ID: 
+                   //case GUI::BUTTON::ANGAR: 
                    //{
                              ////button->OnPressEventMBL(player);   
                                         ////ExitCurrentScreen();
@@ -335,7 +335,7 @@ void GuiKosmoport::ButtonsAction()
                        //return; break;
                    //}
 
-                   //case GUI::BUTTON::STORE_ID: 
+                   //case GUI::BUTTON::STORE: 
                    //{
                              ////button->OnPressEventMBL(player);
                                         ////ExitCurrentScreen();
@@ -344,7 +344,7 @@ void GuiKosmoport::ButtonsAction()
                        //return; break;
                    //}
 
-                   //case GUI::BUTTON::SHOP_ID: 
+                   //case GUI::BUTTON::SHOP: 
                    //{
                              ////button->OnPressEventMBL(player);
                                         ////ExitCurrentScreen();
@@ -353,7 +353,7 @@ void GuiKosmoport::ButtonsAction()
                        //return; break;
                    //}
 
-                   //case GUI::BUTTON::GALAXYMAP_ID: 
+                   //case GUI::BUTTON::GALAXYMAP: 
                    //{
                              ////button->OnPressEventMBL(player);
                                         ////ExitCurrentScreen();                                                                                
@@ -362,7 +362,7 @@ void GuiKosmoport::ButtonsAction()
                        //return; break;
                    //}
 
-                   //case GUI::BUTTON::GOVERMENT_ID: 
+                   //case GUI::BUTTON::GOVERMENT: 
                    //{
                              ////button->OnPressEventMBL(player);
                                         ////ExitCurrentScreen();
@@ -387,7 +387,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 
     switch(active_screen_id)
     {
-        case GUI::SCREEN::ANGAR_ID:
+        case GUI::SCREEN::ANGAR:
         {
             gui_angar.CheckButtonsLock();
             if (interaction == false)
@@ -411,7 +411,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::STORE_ID:
+        case GUI::SCREEN::STORE:
         {
             if (interaction == false)
             {
@@ -425,11 +425,11 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::SHOP_ID:
+        case GUI::SCREEN::SHOP:
         {
             gui_shop.UpdateLables();
             gui_shop.ButtonsAction(*slider_shared);
-            if (slider_shared->subTypeId() != GUI::TYPE::NONE_ID)
+            if (slider_shared->subTypeId() != GUI::TYPE::NONE)
             {
                 slider_shared->CheckButtonsLock();
                 slider_shared->ButtonsAction(gui_shop.GetShop());
@@ -440,7 +440,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
                 interaction = gui_shop.UpdateMouseInteraction(data_mouse.pos_screencoord);
                 if (interaction == false)
                 {
-                    if (slider_shared->subTypeId() != GUI::TYPE::NONE_ID)
+                    if (slider_shared->subTypeId() != GUI::TYPE::NONE)
                     {
                         slider_shared->UpdateSlidePosition(data_mouse);
                         interaction = slider_shared->UpdateMouseInteraction(data_mouse.pos_screencoord);
@@ -451,7 +451,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::GALAXYMAP_ID:
+        case GUI::SCREEN::GALAXYMAP:
         {
             //update
             if ( interaction == false)
@@ -462,7 +462,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::GOVERMENT_ID:
+        case GUI::SCREEN::GOVERMENT:
         {
             //update
             if (interaction == false)
@@ -484,7 +484,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 
     switch(active_screen_id)
     {
-        case GUI::SCREEN::ANGAR_ID:
+        case GUI::SCREEN::ANGAR:
         {
             resetRenderTransformation();
             gui_angar.GetAngar()->RenderBackground(screen_rect);
@@ -505,7 +505,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::STORE_ID:
+        case GUI::SCREEN::STORE:
         {
             resetRenderTransformation();
             gui_store.GetStore()->RenderBackground(screen_rect);
@@ -524,14 +524,14 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::SHOP_ID:
+        case GUI::SCREEN::SHOP:
         {
             resetRenderTransformation();
             gui_shop.GetShop()->RenderBackground(screen_rect);
             enable_BLEND();   
                 //gui_shop.RenderButtons();
                 
-                if (slider_shared->subTypeId() != NONE_ID)
+                if (slider_shared->subTypeId() != NONE)
                 {
                     slider_shared->Render();
                 }
@@ -544,7 +544,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::GALAXYMAP_ID:
+        case GUI::SCREEN::GALAXYMAP:
         {
             clearScreen(); //becase there is no background
                 resetRenderTransformation();
@@ -559,7 +559,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             break;
         }
 
-        case GUI::SCREEN::GOVERMENT_ID:
+        case GUI::SCREEN::GOVERMENT:
         {
                 resetRenderTransformation();
             gui_goverment.GetGoverment()->RenderBackground(screen_rect);

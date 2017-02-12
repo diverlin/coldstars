@@ -75,7 +75,7 @@ Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
     //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;
     if (true) {
-//        mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+//        mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 //        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
 //        assert(mesh);
 //        assert(texOb);
@@ -83,7 +83,7 @@ Ship::__createInternals(model::Ship* ship, const descriptor::Vehicle& descr)
 //        size = glm::vec3(scale_comp, scale_comp, 1.0);
         //size = texOb->size();
     } else {
-//        mesh = MeshCollector::Instance().getMesh(mesh::type::SPACESTATION_ID);
+//        mesh = MeshCollector::Instance().getMesh(mesh::type::SPACESTATION);
 //        texOb = mesh->textureOb();
 //        assert(mesh);
 //        assert(texOb);

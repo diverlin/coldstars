@@ -41,7 +41,7 @@ const float Protector::MODULES_NUM_WEIGHT = 0.2f;
 Protector::Protector()
 {
     setDescriptor(descriptor::type::PROTECTOR_EQUIPMENT);
-    setSlotType(entity::type::PROTECTOR_SLOT_ID);
+    setSlotType(entity::type::PROTECTOR_SLOT);
 }
 
 Protector::Protector(const std::string& data)

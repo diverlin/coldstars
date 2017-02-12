@@ -25,7 +25,7 @@ Bomb::Bomb(int_t id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(entity::Type::BOMB_ID);
+//    setTypeId(entity::Type::BOMB);
 }
 
 /* virtual */

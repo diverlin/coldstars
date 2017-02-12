@@ -25,14 +25,14 @@
 namespace mesh {
 
 enum class type : int {
-    FAILBACK = int(texture::type::LAST_ID),
+    FAILBACK = int(texture::type::LAST),
     //
-    PLANE_ID,
-    SPHERE_ID,
-    SPHERE_DEFORMED_ID,
-    SPACESTATION_ID,
+    PLANE,
+    SPHERE,
+    SPHERE_DEFORMED,
+    SPACESTATION,
     //
-    LAST_ID
+    LAST
 };
 
 } // namespace mesh

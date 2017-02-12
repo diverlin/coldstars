@@ -34,7 +34,7 @@ GoodsPack::GoodsPack(int id, entity::type subtype_id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(entity::Type::GOODS_ID);
+//    setTypeId(entity::Type::GOODS);
 //    setSubTypeId(subtype_id);
 }
 
@@ -56,12 +56,12 @@ void GoodsPack::addUniqueInfo()
 //    info.addTitleStr("GOODS");
 //    switch(subTypeId())
 //    {
-//        case entity::Type::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case entity::Type::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case entity::Type::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case entity::Type::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case entity::Type::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case entity::Type::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MINERALS:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::FOOD:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MEDICINE:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::MILITARY:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::DRUG:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case entity::Type::EXCLUSIVE:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         
 //        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
 //    }
@@ -117,8 +117,8 @@ void GoodsPack::ResolveData()
 
 GoodsPack* GetNewGoodsPack(entity::type subtype_id, int_t id)
 {
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-//    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+//    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER);
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());

@@ -51,7 +51,7 @@ Rocket::getNew(const BulletData& data_bullet) const
 
 void Rocket::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 
     LifeData data_life;
     data_life.armor = data_bullet.armor;
@@ -59,7 +59,7 @@ void Rocket::createInternals(model::RocketBullet* rocket_bullet, const BulletDat
     rocket_bullet->setBulletData(data_bullet);
     
     rocket_bullet->setLifeData(data_life);
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET);
     //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->size());
 
     assert(false);

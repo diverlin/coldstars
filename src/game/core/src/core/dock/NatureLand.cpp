@@ -31,7 +31,7 @@ NatureLand::NatureLand(int id)
 {
     assert(false);
 //    setId(id);
-//    setTypeId(entity::Type::NATURELAND_ID);
+//    setTypeId(entity::Type::NATURELAND);
 }
 
 /* virtual */

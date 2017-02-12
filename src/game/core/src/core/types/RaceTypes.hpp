@@ -27,15 +27,15 @@ namespace race
     {
         NONE=0,
         //
-        R0_ID,
-        R1_ID,
-        R2_ID,
-        R3_ID,
-        R4_ID,
-        R6_ID,
-        R7_ID,
+        R0,
+        R1,
+        R2,
+        R3,
+        R4,
+        R6,
+        R7,
         //
-        LAST_ID
+        LAST
     };
 
     enum class KIND : int

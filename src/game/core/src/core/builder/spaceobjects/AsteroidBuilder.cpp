@@ -85,8 +85,8 @@ Asteroid::getNew(const descriptor::Asteroid& descr)
     //    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
     //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
 
-    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_DEFORMED_ID);
-    //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_DEFORMED);
+    //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID);
 
     //    alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 

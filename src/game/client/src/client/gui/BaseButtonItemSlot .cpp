@@ -46,7 +46,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     assert(false);
 //    if (m_ItemSlot != nullptr)
 //    {
-//        if (m_ItemSlot->subtype() != entity::Type::CARGO_SLOT_ID)
+//        if (m_ItemSlot->subtype() != entity::Type::CARGO_SLOT)
 //        {
 //            if (m_ItemSlot->item() != nullptr)
 //            {
@@ -90,7 +90,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::WEAPON_SLOT_ID;
+                   buton_subtype_id = gui::type::WEAPON_SLOT;
                    break;
                 }
             }
@@ -98,7 +98,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::CARGO_SLOT_ID;
+                   buton_subtype_id = gui::type::CARGO_SLOT;
                    break;
                 }
             }
@@ -106,14 +106,14 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::ARTEFACT_SLOT_ID;
+                   buton_subtype_id = gui::type::ARTEFACT_SLOT;
                    break;
                 }
             }
                                 
-            if (buton_subtype_id != gui::type::GATE_SLOT_ID)
+            if (buton_subtype_id != gui::type::GATE_SLOT)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == gui::type::CARGO_SLOT_ID))
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == gui::type::CARGO_SLOT))
                 {
                    //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }

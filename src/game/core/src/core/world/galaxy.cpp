@@ -33,7 +33,7 @@ namespace model {
 
 Galaxy::Galaxy()
 {
-    setType(entity::type::GALAXY_ID);
+    setType(entity::type::GALAXY);
 }
 
 Galaxy::Galaxy(const std::string& data)
@@ -135,9 +135,9 @@ void Galaxy::analizeStarSystemsCondition(StarSystemsConditionData& data_starsyst
     //{
     //switch (STARSYSTEM_vec[i]->GetConditionId())
     //{
-    //case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
-    //case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
-    //case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
+    //case ENTITY::STARSYSTEM::CONDITION::SAFE:         { data_starsystems_condition.safe_num++; break; }
+    //case ENTITY::STARSYSTEM::CONDITION::WAR:         { data_starsystems_condition.war_num++; break; }
+    //case ENTITY::STARSYSTEM::CONDITION::CAPTURED:     { data_starsystems_condition.captured_num++; break; }
     //}
     //}
 }

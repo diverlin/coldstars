@@ -58,7 +58,7 @@ BlackHole::getNew()
 void
 BlackHole::__createInternals(model::BlackHole* blackhole)
 {           
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     
     LifeData data_life;
     data_life.is_alive   = true;
@@ -67,7 +67,7 @@ BlackHole::__createInternals(model::BlackHole* blackhole)
     data_life.life_time = meti::getRandInt(250, 500);
     data_life.dying_time = 2;
 
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);
+    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE);
 
     blackhole->setLifeData(data_life);
     

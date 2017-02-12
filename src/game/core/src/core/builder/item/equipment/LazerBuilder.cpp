@@ -65,7 +65,7 @@ Lazer::__createInternals(model::item::Lazer* model, const descriptor::item::Laze
     model->setRadius(descr.radius());
 
     assert(false);
-//    if (race_id == race::type::NONE_ID) {
+//    if (race_id == race::type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
 //    }
     
@@ -73,9 +73,9 @@ Lazer::__createInternals(model::item::Lazer* model, const descriptor::item::Laze
 //        tech_level = tech::type::LEVEL0;
 //    }
 
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
-//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT, revision_id)
+//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT);
 
 //    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECH_RATE * (int)tech_level);
 //    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECH_RATE * (int)tech_level);
@@ -92,7 +92,7 @@ Lazer::__createInternals(model::item::Lazer* model, const descriptor::item::Laze
 //    lazer->SetDamageOrig(damage_orig);
 //    lazer->SetRadiusOrig(radius_orig);
 //    //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-//    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
+//    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT);
 //    lazer->setItemCommonData(common_data);
 
 //    lazer->updateProperties();

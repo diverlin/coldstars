@@ -34,7 +34,7 @@
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
-    setTypeId(ai::type::MACRO_STARSYSTEMLIBERATION_ID);
+    setTypeId(ai::type::MACRO_STARSYSTEMLIBERATION);
 }
 
 /*virtual*/
@@ -55,9 +55,9 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 //    Starsystem* target_starsystem = npc->stateMachine().macroTaskManager().target()->starsystem();
 //    if (npc->starsystem()->id() != target_starsystem->id())
 //    {
-//        if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_JUMP_ID)
+//        if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_JUMP)
 //        {
-//            Task microtask(type::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
+//            Task microtask(type::AISCENARIO::MICRO_JUMP, target_starsystem->id());
 //            npc->stateMachine().setCurrentMicroTask(microtask);
             
 //            return;
@@ -65,21 +65,21 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 //    }
 //    else
 //    {
-//        if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
+//        if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE)
 //        {
-//            if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
+//            if (npc->stateMachine().microTaskManager().task().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY)
 //            {
 //                assert(false);
 ////                Vehicle* target_vehicle = npc->observation().GetRandVisibleVehicle(core::global::get().raceDescriptors().getRaces(type::KIND::EVIL));
 ////                if (target_vehicle != nullptr) {
-////                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
+////                    Task microtask(type::AISCENARIO::MICRO_DESTROY, target_vehicle->id());
 ////                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
 ////                    return;
 ////                }
 ////                else
 ////                {
-////                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID);
+////                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION);
 ////                    npc->stateMachine().setCurrentMicroTask(microtask);
                     
 ////                    return;
@@ -88,7 +88,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 //        }
 //        //else
 //        //{
-//            //npc->GetStateMachine().GetTaskManager().GetTask().SetResult(SUCCESS_ID);
+//            //npc->GetStateMachine().GetTaskManager().GetTask().SetResult(SUCCESS);
 //            //return;
 //        //}
 //    }

@@ -46,34 +46,34 @@ GuiAngar::GuiAngar():angar(nullptr)
     //float zsize = 1;
     
     {
-        //ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
+        //ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR, "buy_repair");
         //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);
         //repair_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR, repair_button));
     }
     
     {
-        //ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");
+        //ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL, "buy fuel");
         //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);
         //fuel_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL, fuel_button));
     }
 
     {
-        //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
+        //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH, "launch");
         //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);
         //launch_button->SetBox(box);
-        //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
+        //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH, launch_button));
     }
     
-//    repair_slot = GetNewItemSlotWithoutSaveAbility(entity::Type::REPAIR_SLOT_ID);
-//    charge_slot = GetNewItemSlotWithoutSaveAbility(entity::Type::CHARGE_SLOT_ID);
+//    repair_slot = GetNewItemSlotWithoutSaveAbility(entity::Type::REPAIR_SLOT);
+//    charge_slot = GetNewItemSlotWithoutSaveAbility(entity::Type::CHARGE_SLOT);
 }
 
 
@@ -145,11 +145,11 @@ void GuiAngar::UnbindAngar()
 
 void GuiAngar::CheckButtonsLock()
 {               
-    //if (player->GetNpc()->vehicle()->IsFuelFull() == true)     { GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOn(); }
-    //else                                { GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOff(); }
+    //if (player->GetNpc()->vehicle()->IsFuelFull() == true)     { GetButton(GUI::BUTTON::BUYFUEL)->LockOn(); }
+    //else                                { GetButton(GUI::BUTTON::BUYFUEL)->LockOff(); }
 
-    //if (player->GetNpc()->vehicle()->IsArmorFull() == true)     { GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOn(); }
-    //else                                { GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOff(); }
+    //if (player->GetNpc()->vehicle()->IsArmorFull() == true)     { GetButton(GUI::BUTTON::BUYARMOR)->LockOn(); }
+    //else                                { GetButton(GUI::BUTTON::BUYARMOR)->LockOff(); }
 }
 
 void GuiAngar::ButtonsAction() const     
@@ -161,7 +161,7 @@ void GuiAngar::ButtonsAction() const
     //{
     //switch(button->subTypeId())
     //{
-    //case GUI::BUTTON::BUYARMOR_ID:
+    //case GUI::BUTTON::BUYARMOR:
     //{
     //if (button->GetLock() == false)
     //{
@@ -174,7 +174,7 @@ void GuiAngar::ButtonsAction() const
     //break;
     //}
 
-    //case GUI::BUTTON::BUYFUEL_ID:
+    //case GUI::BUTTON::BUYFUEL:
     //{
     //if (button->GetLock() == false)
     //{
@@ -187,7 +187,7 @@ void GuiAngar::ButtonsAction() const
     //break;
     //}
 
-    //case GUI::BUTTON::GETLAUNCH_ID:
+    //case GUI::BUTTON::GETLAUNCH:
     //{
     //player->GetNpc()->vehicle()->LaunchingEvent();
 
@@ -230,7 +230,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         {
                         switch (rect_itemslot_vec[i].second->subTypeId())
                                 {
-                                        case entity::Type::REPAIR_SLOT_ID:
+                                        case entity::Type::REPAIR_SLOT:
                                         {
                                                 if (m_Player->GetCursor().GetItemSlot()->item() != nullptr)
                                                 {
@@ -240,13 +240,13 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                                 break;
                                         }
                                         
-                                        case entity::Type::CHARGE_SLOT_ID:
+                                        case entity::Type::CHARGE_SLOT:
                                         {
                                                 if (m_Player->GetCursor().GetItemSlot()->item() != nullptr)
                                                 {
                                                         switch (m_Player->GetCursor().GetItemSlot()->item()->subTypeId())
                                                         {
-                                                                case entity::Type::ROCKET_EQUIPMENT_ID:
+                                                                case entity::Type::ROCKET_EQUIPMENT:
                                                                 {
                                                                         angar->ChargeRocketEquipment(m_Player->GetNpc(), (RocketEquipment*)m_Player->GetCursor().GetItemSlot()->item());
                                                                         

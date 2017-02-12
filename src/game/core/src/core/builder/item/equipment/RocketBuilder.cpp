@@ -68,7 +68,7 @@ Rocket::__createInternals(model::item::Rocket* model, const descriptor::item::Ro
     model->setRadius(descr.radius());
 
     assert(false);
-//    if (race_id == race::type::NONE_ID) {
+//    if (race_id == race::type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
 //    }
     
@@ -76,9 +76,9 @@ Rocket::__createInternals(model::item::Rocket* model, const descriptor::item::Ro
 //        tech_level = tech::type::LEVEL0;
 //    }
 
-//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE_ID);
-//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
-//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+//    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT);
+//    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT, revision_id)
     
 //    ammo_max_orig = meti::getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECH_RATE * (int)tech_level);
 //    damage_orig   = meti::getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECH_RATE * (int)tech_level);
@@ -109,7 +109,7 @@ Rocket::__createInternals(model::item::Rocket* model, const descriptor::item::Ro
 //    rocket->SetBulletData(data_bullet);
 //    rocket->SetAmmo(ammo_max_orig*0.6);
 //    //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-//    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT_ID);
+//    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT);
 //    rocket->setItemCommonData(common_data);
     
 //    rocket->updateProperties();

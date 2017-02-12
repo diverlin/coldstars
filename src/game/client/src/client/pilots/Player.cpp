@@ -75,7 +75,7 @@ npc(nullptr),
 starsystem(nullptr)     
 { 
 //    setId(id);
-//    setTypeId(entity::Type::PLAYER_ID);
+//    setTypeId(entity::Type::PLAYER);
     
     GuiManager::Instance().SetPlayer(this);
 }
@@ -166,9 +166,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
 //    switch(action_id)
 //    {
-        //case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
+        //case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN:
         //{
-            //if (npc->vehicle()->placeTypeId() == ENTITY::SPACE_ID)
+            //if (npc->vehicle()->placeTypeId() == ENTITY::SPACE)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
@@ -179,9 +179,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //break;
         //}
         
-//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT:
 //        {
-//            if (npc->vehicle()->placeTypeId() == type::place::HYPER_SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == type::place::HYPER_SPACE)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
@@ -192,9 +192,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            break;
 //        }
 
-//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING:
 //        {
-//            if (npc->vehicle()->placeTypeId() == type::place::SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == type::place::SPACE)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
@@ -206,7 +206,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            break;
 //        }
     
-//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING:
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
@@ -517,7 +517,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 ////                }
 ////                else
 ////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
 ////                    npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                }
 ////            }
@@ -590,7 +590,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 ////                }
 ////                else
 ////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);   // make it like a ai scenario (follow obj)
 ////                    npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                }
 //            }
@@ -641,7 +641,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 ////                }
 ////                else
 ////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
 ////                    npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                }
 ////            }
@@ -673,7 +673,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 ////                    }
 ////                    else
 ////                    {
-////                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+////                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
 ////                        npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                    }
 ////                }
@@ -749,7 +749,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 ////                }
 ////                else
 ////                {
-////                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
+////                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING, visible_SPACESTATION_vec[i]->id());
 ////                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
 ////                    npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                }
@@ -793,7 +793,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
   
 //            if (data_mouse.left_click == true)
 //            {
-//                Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
+//                Task microtask(type::AISCENARIO::MICRO_DOCKING, visible_PLANET_vec[i]->id());
 ////                npc->GetStateMachine().SetCurrentMicroTask(microtask);
 ////                npc->vehicle()->GetComplexDrive().UpdatePath();
 //            }

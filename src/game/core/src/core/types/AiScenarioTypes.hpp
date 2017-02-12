@@ -22,20 +22,20 @@ namespace ai
 {
     enum class type
     {
-        NONE_ID = 0,
+        NONE = 0,
         
-        MACRO_WARRIORRECRUTE_ID, 
-        MACRO_STARSYSTEMDEFENCE_ID, 
-        MACRO_STARSYSTEMLIBERATION_ID, 
-        MACRO_SELFSAFETY_ID, // replace selfsafety to survival        
-        MACRO_GOODSTRADING_ID,
+        MACRO_WARRIORRECRUTE, 
+        MACRO_STARSYSTEMDEFENCE, 
+        MACRO_STARSYSTEMLIBERATION, 
+        MACRO_SELFSAFETY, // replace selfsafety to survival        
+        MACRO_GOODSTRADING,
         
-        MICRO_DESTROY_ID,
-        MICRO_DOCKING_ID,        
-        MICRO_LAUNCHING_ID,
-        MICRO_GRAB_ID,
-        MICRO_JUMP_ID,
-        MICRO_EXPLORATION_ID
+        MICRO_DESTROY,
+        MICRO_DOCKING,        
+        MICRO_LAUNCHING,
+        MICRO_GRAB,
+        MICRO_JUMP,
+        MICRO_EXPLORATION
     };    
 } // namespace ai
 

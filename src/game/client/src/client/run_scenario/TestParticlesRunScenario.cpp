@@ -109,7 +109,7 @@ void TestParticlesRunScenario::Update_inDynamic(Player* player)
 {
 //    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
             
-//    if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION_ID) == false)
+//    if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION) == false)
 //    {
 //        float offset = 0;
 //        for (int i=0; i<10; i++)

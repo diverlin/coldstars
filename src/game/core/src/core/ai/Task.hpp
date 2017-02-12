@@ -26,7 +26,7 @@
 class Task
 {
     public:
-        Task(ai::type scenario_type_id = ai::type::NONE_ID, int_t target_id = NONE, int reward = 0, int expiriance = 0):
+        Task(ai::type scenario_type_id = ai::type::NONE, int_t target_id = NONE, int reward = 0, int expiriance = 0):
         m_reward(reward),
         m_expiriance(expiriance),
         m_scenario_type_id(scenario_type_id),
@@ -53,7 +53,7 @@ class Task
         int m_reward = 0;
         int m_expiriance = 0;
         
-        ai::type m_scenario_type_id = ai::type::NONE_ID;
+        ai::type m_scenario_type_id = ai::type::NONE;
         int_t m_target_id = 0;
 };
 
