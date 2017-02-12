@@ -24,7 +24,7 @@
 
 namespace {
 
-void compareEquipmentDescriptors(const descriptor::Equipment& descr, const descriptor::Equipment& copy)
+void compareEquipment(const descriptor::Equipment& descr, const descriptor::Equipment& copy)
 {
     // descriptor::Base
     EXPECT_EQ(descr.id(), copy.id());
@@ -60,7 +60,7 @@ TEST(descriptor, bak) {
 
     descriptor::item::Bak copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Bak
     EXPECT_EQ(descr.fuel(), copy.fuel());
@@ -78,7 +78,7 @@ TEST(descriptor, drive) {
 
     descriptor::item::Drive copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Drive
     EXPECT_EQ(descr.speed(), copy.speed());
@@ -97,7 +97,7 @@ TEST(descriptor, droid) {
 
     descriptor::item::Droid copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Droid
     EXPECT_EQ(descr.repair(), copy.repair());
@@ -115,7 +115,7 @@ TEST(descriptor, grapple) {
 
     descriptor::item::Grapple copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Grapple
     EXPECT_EQ(descr.strength(), copy.strength());
@@ -135,7 +135,7 @@ TEST(descriptor, lazer) {
 
     descriptor::item::Lazer copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Lazer
     EXPECT_EQ(descr.damage(), copy.damage());
@@ -154,7 +154,7 @@ TEST(descriptor, protector) {
 
     descriptor::item::Protector copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Protector
     EXPECT_EQ(descr.protection(), copy.protection());
@@ -172,7 +172,7 @@ TEST(descriptor, radar) {
 
     descriptor::item::Radar copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Radar
     EXPECT_EQ(descr.radius(), copy.radius());
@@ -190,7 +190,7 @@ TEST(descriptor, rocket) {
 
     descriptor::item::Rocket copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Rocket
     EXPECT_EQ(descr.ammo(), copy.ammo());
@@ -210,7 +210,7 @@ TEST(descriptor, scaner) {
 
     descriptor::item::Scaner copy(descr.data());
 
-    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(descr, copy);
 
     // descriptor::item::Scaner
     EXPECT_EQ(descr.scan(), copy.scan());

@@ -174,12 +174,12 @@ TEST(clone, starsystem)
     EXPECT_EQ(*s1, *s2);
 }
 
-TEST(model, asteroid)
-{
-    model::Asteroid* model1 = builder::Asteroid::getNew();
-    model::Asteroid* model2 = new model::Asteroid(model1->data());
-    EXPECT_EQ(model1->data(), model2->data());
+//TEST(model, asteroid)
+//{
+//    model::Asteroid* model1 = builder::Asteroid::getNew();
+//    model::Asteroid* model2 = new model::Asteroid(model1->data());
+//    EXPECT_EQ(model1->data(), model2->data());
 
-    delete model1;
-    delete model2;
-}
+//    delete model1;
+//    delete model2;
+//}
