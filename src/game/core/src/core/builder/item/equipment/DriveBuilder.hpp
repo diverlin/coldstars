@@ -44,15 +44,15 @@ class Drive : public Equipment
 {
 public:
     static model::item::Drive* getNew();
-    static model::item::Drive* getNew(const std::string&);
-    static model::item::Drive* getNew(const descriptor::item::Drive&);
+//    static model::item::Drive* getNew(const std::string&);
+    static model::item::Drive* getNew(descriptor::item::Drive*);
 
 private:
     Drive() = delete;
     ~Drive() = delete;
 
     static model::item::Drive* __createTemplate(int_t);
-    static void __createInternals(model::item::Drive*, const descriptor::item::Drive&);
+    static void __createInternals(model::item::Drive*, descriptor::item::Drive*);
 }; 
 
 } // namespace item

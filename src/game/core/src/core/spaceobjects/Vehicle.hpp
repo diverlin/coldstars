@@ -173,7 +173,7 @@ public:
 
     void setLand(Land* land) { m_Land = land; }
 
-    void setKorpusData(const descriptor::Vehicle&);
+    void setKorpusData(descriptor::Vehicle*);
 
     bool godMode() const { return m_godMode; }
     Land* const land() const { return m_Land; }
@@ -183,9 +183,7 @@ public:
 
     const VehiclePropetries& properties() const { return model()->properties(); }
     const VehicleNeeds& needs() const { return model()->needs(); }
-    const descriptor::Vehicle& descriptor() const { return m_descriptor; }
-    [[warning("remove this, added for compatibility")]]
-    const descriptor::Vehicle& vehicleDescriptor() const { return m_descriptor; }
+    descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
 
     virtual int givenExpirience() const override final;
     bool isSlotTypePresent(const entity::type&) const;
@@ -213,7 +211,7 @@ public:
     bool unpackContainerItemToCargoSlot(control::Container*);
 
     int freeSpace() const { return model()->properties().free_space; }
-    int space() const { return descriptor().space(); }
+    int space() const { return descriptor()->space(); }
 
     void bindNpc(control::Npc*);
 
@@ -371,7 +369,7 @@ private:
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 
-    descriptor::Vehicle m_descriptor;
+    descriptor::Vehicle* m_descriptor_vehicle = nullptr;
 };
 
 
@@ -424,7 +422,7 @@ private:
 
 //    void setLand(Land* land) { m_Land = land; }
 
-//    void setKorpusData(const descriptor::Vehicle&);
+//    void setKorpusData(descriptor::Vehicle*);
 
 //    bool godMode() const { return m_godMode; }
 //    Land* const land() const { return m_Land; }
@@ -434,7 +432,7 @@ private:
 
 //    const VehiclePropetries& properties() const { return m_properties; }
 //    const VehicleNeeds& needs() const { return m_needs; }
-//    const descriptor::Vehicle& vehicleDescriptor() const { return m_vehicleDescriptor; }
+//    descriptor::Vehicle* vehicleDescriptor() const { return m_vehicleDescriptor; }
 
 //    virtual int givenExpirience() const override final;
 //    bool isSlotTypePresent(const entity::Type&) const;

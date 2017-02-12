@@ -32,8 +32,8 @@ namespace item {
 model::item::Protector*
 Protector::getNew()
 {
-    const descriptor::item::Protector& descr = core::global::get().descriptors().protector().random();
-    model::item::Protector* model = __createTemplate(descr.id());
+    descriptor::item::Protector* descr = core::global::get().descriptors().protector().random();
+    model::item::Protector* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
@@ -48,18 +48,18 @@ Protector::getNew(int num)
     return result;
 }
 
-model::item::Protector*
-Protector::getNew(const std::string& data)
-{
-    descriptor::item::Protector descr(data);
-    assert(descr.descriptor() != descriptor::type::PROTECTOR_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Protector*
+//Protector::getNew(const std::string& data)
+//{
+//    descriptor::item::Protector descr(data);
+//    assert(descr->descriptor() != descriptor::type::PROTECTOR_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Protector*
-Protector::getNew(const descriptor::item::Protector& descr)
+Protector::getNew(descriptor::item::Protector* descr)
 {
-    model::item::Protector* model = __createTemplate(descr.id());
+    model::item::Protector* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -73,11 +73,11 @@ Protector::__createTemplate(int_t descriptor_id)
 }
 
 void
-Protector::__createInternals(model::item::Protector* model, const descriptor::item::Protector& descr)
+Protector::__createInternals(model::item::Protector* model, descriptor::item::Protector* descr)
 {     
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setProtection(descr.protection());
+    model->setProtection(descr->protection());
 }
 
 } // namespace item

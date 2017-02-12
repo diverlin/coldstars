@@ -66,7 +66,7 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld(const descriptor::Galaxy& descriptor)
+void God::createWorld(descriptor::Galaxy* descriptor)
 {
     assert(false);
 //    m_galaxy = core::global::get().galaxyBuilder().create(descriptor);
@@ -130,7 +130,7 @@ void God::update()
 
 }
 
-void God::__createLife(control::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
 {
     //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
     //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
@@ -144,7 +144,7 @@ void God::__createLife(control::Galaxy* galaxy, const descriptor::Galaxy& descri
     //    }
 }
 
-void God::__createInvasion(control::Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
 {
     assert(false);
 //    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {

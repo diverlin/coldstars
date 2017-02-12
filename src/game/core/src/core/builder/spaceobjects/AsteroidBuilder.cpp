@@ -43,29 +43,29 @@ Asteroid::getNew()
 }
 
 model::Asteroid*
-Asteroid::getNew(const descriptor::Asteroid& descr)
+Asteroid::getNew(descriptor::Asteroid* descr)
 {
     model::Asteroid* model = __createTemplate();
 
     /// BaseView
-    model->setMesh(descr.mesh());
-    model->setMaterial(descr.texture());
+    model->setMesh(descr->mesh());
+    model->setMaterial(descr->texture());
 
     /// Base
     LifeData life_data;
-    life_data.armor = descr.armor();
+    life_data.armor = descr->armor();
     model->setLifeData(life_data);
 
     /// Planetoid
-    model->setRadiusA(descr.radiusA());
-    model->setRadiusB(descr.radiusB());
-    model->setOrbitPhi(descr.orbitPhi());
-    model->setSpeed(descr.speed());
-    model->setClockwise(descr.clockwise());
+    model->setRadiusA(descr->radiusA());
+    model->setRadiusB(descr->radiusB());
+    model->setOrbitPhi(descr->orbitPhi());
+    model->setSpeed(descr->speed());
+    model->setClockwise(descr->clockwise());
 
     /// Orientation
-    model->setSize(descr.size());
-    model->setDirection(descr.direction());
+    model->setSize(descr->size());
+    model->setDirection(descr->direction());
 
     return model;
 

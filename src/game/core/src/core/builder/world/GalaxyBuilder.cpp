@@ -31,12 +31,6 @@
 
 namespace builder {
 
-Galaxy::Galaxy()
-{}
-
-Galaxy::~Galaxy()
-{}
-
 model::Galaxy*
 Galaxy::__createTemplate()
 {
@@ -49,15 +43,14 @@ Galaxy::__createTemplate()
 } 
 
 model::Galaxy*
-Galaxy::create(const descriptor::Galaxy& galaxy_descriptor)
+Galaxy::create(descriptor::Galaxy* descr)
 {
-    model::Galaxy* galaxy = __createTemplate();
-    __createInternals(galaxy, galaxy_descriptor);
-    
-    return galaxy;
+    model::Galaxy* model = __createTemplate();
+    __createInternals(model, descr);
+    return model;
 } 
 
-void Galaxy::__createInternals(model::Galaxy* galaxy, const descriptor::Galaxy& descriptor)
+void Galaxy::__createInternals(model::Galaxy* model, descriptor::Galaxy* descr)
 {     
     assert(false);
     //    for(const auto& id: descriptor.sectors) {

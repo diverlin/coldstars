@@ -39,7 +39,7 @@ public:
     ~Star();
 
     static model::Star* getNew();
-    static model::Star* getNew(const descriptor::Star&);
+    static model::Star* getNew(descriptor::Star*);
 
 private:
     static model::Star* __getNewTemplate(int_t id = NONE);

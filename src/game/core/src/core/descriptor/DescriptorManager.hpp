@@ -44,20 +44,20 @@ namespace descriptor {
 template<typename T>
 class MManager {
 public:
-    MManager() {}
-    ~MManager() {}
+    MManager() = default;
+    ~MManager() = default;
 
-    void add(const T& descriptor) {
-        std::cout<<"MManager add"<<std::endl<<descriptor.info()<<std::endl;
-        const auto it = m_descriptors.find(descriptor.id());
+    void add(T* descr) {
+        std::cout<<"MManager add"<<std::endl<<descr->info()<<std::endl;
+        const auto it = m_descriptors.find(descr->id());
         if (it == m_descriptors.end()) {
-            m_descriptors.insert(std::make_pair(descriptor.id(), descriptor));
+            m_descriptors.insert(std::make_pair(descr->id(), descr));
         } else {
             throw std::runtime_error("descriptor with that id already exist");
         }
     }
 
-    const T& get(int_t id) const {
+    T* get(int_t id) const {
         std::cout<<"MManager get(descriptor.id="<<id<<")"<<std::endl;
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
@@ -67,7 +67,7 @@ public:
         }
     }
 
-    const T& random() const {
+    T* random() const {
         int_t key = meti::getRand(idList());
         auto it = m_descriptors.find(key);
         assert(it != m_descriptors.end());
@@ -87,7 +87,7 @@ public:
     }
 
 private:
-    std::map<int_t, T> m_descriptors;
+    std::map<int_t, T*> m_descriptors;
 };
 
 class Manager
@@ -96,30 +96,30 @@ public:
     Manager();
     ~Manager() = default;
 
-    void add(const BaseOLD&);
-    BaseOLD getRand(const Type&);
-    BaseOLD get(int_t);
+    void add(BaseOLD*);
+    BaseOLD* getRand(const Type&);
+    BaseOLD* get(int_t);
 
     unsigned long int size() const { return m_descriptors.size(); }
 
-    void add(const Galaxy&);
-    void add(const Sector&);
-    void add(const Starsystem&);
-    void add(const Star&);
-    void add(const Planet&);
-    void add(const Asteroid&);
-    void add(const Ship&);
-    void add(const SpaceStation&);
-    void add(const Satellite&);
-    void add(const item::Drive&);
-    void add(const item::Bak&);
-    void add(const item::Droid&);
-    void add(const item::Grapple&);
-    void add(const item::Lazer&);
-    void add(const item::Protector&);
-    void add(const item::Radar&);
-    void add(const item::Rocket&);
-    void add(const item::Scaner&);
+    void add(Galaxy*);
+    void add(Sector*);
+    void add(Starsystem*);
+    void add(Star*);
+    void add(Planet*);
+    void add(Asteroid*);
+    void add(Ship*);
+    void add(SpaceStation*);
+    void add(Satellite*);
+    void add(item::Drive*);
+    void add(item::Bak*);
+    void add(item::Droid*);
+    void add(item::Grapple*);
+    void add(item::Lazer*);
+    void add(item::Protector*);
+    void add(item::Radar*);
+    void add(item::Rocket*);
+    void add(item::Scaner*);
     void add(Mesh*);
     void add(Material*);
 
@@ -174,8 +174,8 @@ private:
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 
-    std::map<int_t, BaseOLD> m_descriptors;
-    std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;
+    std::map<int_t, BaseOLD*> m_descriptors;
+    std::map<int, std::vector<BaseOLD*>> m_descriptorsTypes;
 
     void __clear();
     void __save();

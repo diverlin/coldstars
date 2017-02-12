@@ -61,12 +61,6 @@ Planetoid::~Planetoid()
 //    }
 //}
 
-const descriptor::Planet&
-Planetoid::descriptor() const
-{
-    return m_descriptor;
-}
-
 //void Planetoid::bindParent(const SpaceObject* const parent, int it)
 //{
 //    //setParent(parent);
@@ -77,11 +71,11 @@ Planetoid::descriptor() const
 
 void Planetoid::__createOrbit()
 {
-    m_orbit.calcPath(descriptor().radiusA(),
-                     descriptor().radiusB(),
-                     descriptor().speed(),
-                     descriptor().orbitPhi(),
-                     descriptor().clockwise());
+    m_orbit.calcPath(descriptor()->radiusA(),
+                     descriptor()->radiusB(),
+                     descriptor()->speed(),
+                     descriptor()->orbitPhi(),
+                     descriptor()->clockwise());
 }
 
 /* virtual */

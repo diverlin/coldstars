@@ -44,15 +44,15 @@ class Droid : public Equipment
 {
 public:
     static model::item::Droid* getNew();
-    static model::item::Droid* getNew(const std::string&);
-    static model::item::Droid* getNew(const descriptor::item::Droid&);
+//    static model::item::Droid* getNew(const std::string&);
+    static model::item::Droid* getNew(descriptor::item::Droid*);
 
 private:
     Droid() = delete;
     ~Droid() = delete;
 
     static model::item::Droid* __createTemplate(int_t);
-    static void __createInternals(model::item::Droid*, const descriptor::item::Droid&);
+    static void __createInternals(model::item::Droid*, descriptor::item::Droid*);
 }; 
 
 } // namespace item

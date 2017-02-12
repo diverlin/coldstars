@@ -46,15 +46,15 @@ class Protector : public Equipment
 public:
     static model::item::Protector* getNew();
     static std::vector<model::item::Protector*> getNew(int);
-    static model::item::Protector* getNew(const std::string&);
-    static model::item::Protector* getNew(const descriptor::item::Protector&);
+//    static model::item::Protector* getNew(const std::string&);
+    static model::item::Protector* getNew(descriptor::item::Protector*);
 
 private:
     Protector() = delete;
     ~Protector() = delete;
 
     static model::item::Protector* __createTemplate(int_t);
-    static void __createInternals(model::item::Protector*, const descriptor::item::Protector&);
+    static void __createInternals(model::item::Protector*, descriptor::item::Protector*);
 }; 
 
 } // namespace item

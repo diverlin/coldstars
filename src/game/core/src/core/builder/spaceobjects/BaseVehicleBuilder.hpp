@@ -28,10 +28,7 @@ class Vehicle;
 class BaseVehicle
 {
 public:
-    BaseVehicle();
-    virtual ~BaseVehicle() {}
-
-    static void equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor);
+    static void equip(Vehicle* vehicle, descriptor::BaseOLD* descriptor);
     static void equip(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
     static void equipModules(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
     static void equipArtefacts(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);

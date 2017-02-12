@@ -95,7 +95,7 @@ public:
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
-    const descriptor::Planet& descriptor() const;
+    descriptor::Planet* descriptor() const { return m_descriptor_planetoid; }
 
     void initialize();
     //void bindParent(const SpaceObject* const, int);
@@ -109,7 +109,7 @@ protected:
 private:
     model::Planetoid* m_model_planetoid = nullptr;
     Orbit m_orbit;
-    descriptor::Planet m_descriptor;
+    descriptor::Planet* m_descriptor_planetoid = nullptr;
 
     model::Planetoid* model() const { return m_model_planetoid; }
 

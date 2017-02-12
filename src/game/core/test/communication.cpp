@@ -49,7 +49,7 @@ TEST(communication, create_ship)
 {
     auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
     int_t obj_id = core::global::get().idGenerator().nextId();
-    descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
+    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
     core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
     model::Ship* ship = model::getShip(obj_id);
@@ -61,7 +61,7 @@ TEST(communication, create_bak)
 {
     auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
     int_t obj_id = core::global::get().idGenerator().nextId();
-    descriptor::DescriptorOLD descriptor2(descriptor.id(), obj_id);
+    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
     core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
     assert(false);
@@ -77,8 +77,8 @@ TEST(communication, inject_ship)
 
 //Bomb* getNewBomb(int damage, int radius)
 //{
-//    const descriptor::Base& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
-//   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
+//    descriptor::Base* descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
+//    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
 //    Bomb* bomb = static_cast<Bomb*>(core::global::get().entityManager().get(descriptor.id()));
 //    assert(bomb);
@@ -100,8 +100,8 @@ TEST(communication, inject_ship)
 
 TEST(comm, new_starsystem)
 {
-    //    const descriptor::Base& descriptor = core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-    //   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
+    //    descriptor::Base* descriptor = core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+    //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     //    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));
     //    assert(starsystem);

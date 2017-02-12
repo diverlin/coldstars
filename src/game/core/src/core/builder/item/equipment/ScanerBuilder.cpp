@@ -30,25 +30,25 @@ namespace item {
 model::item::Scaner*
 Scaner::getNew()
 {
-    const descriptor::item::Scaner& descr = core::global::get().descriptors().scaner().random();
-    model::item::Scaner* model = __createTemplate(descr.id());
+    descriptor::item::Scaner* descr = core::global::get().descriptors().scaner().random();
+    model::item::Scaner* model = __createTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
 }
 
-model::item::Scaner*
-Scaner::getNew(const std::string& data)
-{
-    descriptor::item::Scaner descr(data);
-    assert(descr.descriptor() != descriptor::type::SCANER_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Scaner*
+//Scaner::getNew(const std::string& data)
+//{
+//    descriptor::item::Scaner descr(data);
+//    assert(descr->descriptor() != descriptor::type::SCANER_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Scaner*
-Scaner::getNew(const descriptor::item::Scaner& descr)
+Scaner::getNew(descriptor::item::Scaner* descr)
 {
-    model::item::Scaner* model = __createTemplate(descr.id());
+    model::item::Scaner* model = __createTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
@@ -64,11 +64,11 @@ Scaner::__createTemplate(int_t descriptor_id)
 }
 
 void
-Scaner::__createInternals(model::item::Scaner* model, const descriptor::item::Scaner& descr)
+Scaner::__createInternals(model::item::Scaner* model, descriptor::item::Scaner* descr)
 {
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setScan(descr.scan());
+    model->setScan(descr->scan());
 }
 
 } // namespace item

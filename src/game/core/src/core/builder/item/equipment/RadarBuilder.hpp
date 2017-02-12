@@ -44,15 +44,15 @@ class Radar : public Equipment
 {
 public:
     static model::item::Radar* getNew();
-    static model::item::Radar* getNew(const std::string&);
-    static model::item::Radar* getNew(const descriptor::item::Radar&);
+//    static model::item::Radar* getNew(const std::string&);
+    static model::item::Radar* getNew(descriptor::item::Radar*);
 
 private:
     Radar() = delete;
     ~Radar() = delete;
 
     static model::item::Radar* __createTemplate(int_t);
-    static void __createInternals(model::item::Radar*, const descriptor::item::Radar&);
+    static void __createInternals(model::item::Radar*, descriptor::item::Radar*);
 }; 
 
 } // namespace item

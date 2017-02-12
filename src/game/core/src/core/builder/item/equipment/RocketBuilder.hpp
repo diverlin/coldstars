@@ -44,15 +44,15 @@ class Rocket : public Equipment
 {
 public:
     static model::item::Rocket* getNew();
-    static model::item::Rocket* getNew(const std::string&);
-    static model::item::Rocket* getNew(const descriptor::item::Rocket&);
+//    static model::item::Rocket* getNew(const std::string&);
+    static model::item::Rocket* getNew(descriptor::item::Rocket*);
 
 private:
     Rocket() = delete;
     ~Rocket() = delete;
 
     static model::item::Rocket* __createTemplate(int_t);
-    static void __createInternals(model::item::Rocket*, const descriptor::item::Rocket&);
+    static void __createInternals(model::item::Rocket*, descriptor::item::Rocket*);
 }; 
 
 } // namespace item

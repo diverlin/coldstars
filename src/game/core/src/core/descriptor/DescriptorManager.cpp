@@ -45,58 +45,58 @@ Manager::Manager()
     }
 }
 
-void Manager::add(const Galaxy& galaxy) {
+void Manager::add(Galaxy* galaxy) {
     m_galaxy.add(galaxy);
 }
-void Manager::add(const Sector& sector) {
+void Manager::add(Sector* sector) {
     m_sector.add(sector);
 }
-void Manager::add(const Starsystem& starsystem) {
+void Manager::add(Starsystem* starsystem) {
     m_starsystem.add(starsystem);
 }
-void Manager::add(const Star& star) {
+void Manager::add(Star* star) {
     m_star.add(star);
 }
-void Manager::add(const Planet& planet) {
+void Manager::add(Planet* planet) {
     m_planet.add(planet);
 }
-void Manager::add(const Asteroid& asteroid) {
+void Manager::add(Asteroid* asteroid) {
     m_asteroid.add(asteroid);
 }
-void Manager::add(const Ship& ship) {
+void Manager::add(Ship* ship) {
     m_ship.add(ship);
 }
-void Manager::add(const SpaceStation& spacestation) {
+void Manager::add(SpaceStation* spacestation) {
     m_spacestation.add(spacestation);
 }
-void Manager::add(const Satellite& satellite) {
+void Manager::add( Satellite* satellite) {
     m_satellite.add(satellite);
 }
-void Manager::add(const item::Drive& drive) {
+void Manager::add(item::Drive* drive) {
     m_drive.add(drive);
 }
-void Manager::add(const item::Bak& bak) {
+void Manager::add(item::Bak* bak) {
     m_bak.add(bak);
 }
-void Manager::add(const item::Droid& droid) {
+void Manager::add(item::Droid* droid) {
     m_droid.add(droid);
 }
-void Manager::add(const item::Grapple& grapple) {
+void Manager::add(item::Grapple* grapple) {
     m_grapple.add(grapple);
 }
-void Manager::add(const item::Lazer& lazer) {
+void Manager::add(item::Lazer* lazer) {
     m_lazer.add(lazer);
 }
-void Manager::add(const item::Protector& protector) {
+void Manager::add(item::Protector* protector) {
     m_protector.add(protector);
 }
-void Manager::add(const item::Radar& radar) {
+void Manager::add(item::Radar* radar) {
     m_radar.add(radar);
 }
-void Manager::add(const item::Rocket& rocket) {
+void Manager::add(item::Rocket* rocket) {
     m_rocket.add(rocket);
 }
-void Manager::add(const item::Scaner& scaner) {
+void Manager::add(item::Scaner* scaner) {
     m_scaner.add(scaner);
 }
 void Manager::add(Mesh* mesh) {
@@ -108,44 +108,44 @@ void Manager::add(Material* texture) {
 
 
 void
-Manager::add(const BaseOLD& descriptor)
+Manager::add(BaseOLD* descr)
 {
     //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
-    const int_t id = descriptor.id();
-    int type = descriptor.type();
+    const int_t id = descr->id();
+    int type = descr->type();
 
     {
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
             throw std::runtime_error("descriptor with that id already exist");
         }
-        m_descriptors.insert(std::make_pair(id, descriptor));
+        m_descriptors.insert(std::make_pair(id, descr));
     }
 
     {
         const auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
-            it->second.push_back(descriptor);
+            it->second.push_back(descr);
         } else {
-            std::vector<BaseOLD> vector;
-            vector.push_back(descriptor);
+            std::vector<BaseOLD*> vector;
+            vector.push_back(descr);
             m_descriptorsTypes[type] = vector;
         }
     }
 }
 
-BaseOLD
+BaseOLD*
 Manager::getRand(const Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
-        const std::vector<BaseOLD> descriptors = it->second;
+        const std::vector<BaseOLD*> descriptors = it->second;
         return meti::getRand(descriptors);
     }
     throw std::runtime_error("descriptor type doesn't contain any descriptors, " + typeStr(type));
 }
 
-BaseOLD
+BaseOLD*
 Manager::get(int_t id)
 {
     const auto it = m_descriptors.find(id);
@@ -163,8 +163,8 @@ Manager::__save()
     if(filestream.is_open()) {
         for(const auto& lists: m_descriptorsTypes) {
             const auto& list = lists.second;
-            for(const BaseOLD& descr: list) {
-                filestream<<descr.data()<<std::endl;
+            for(BaseOLD* descr: list) {
+                filestream<<descr->data()<<std::endl;
             }
         }
     } else {
@@ -184,7 +184,7 @@ Manager::__load()
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
-                const BaseOLD& descr = BaseOLD(line);
+                BaseOLD* descr = new BaseOLD(line);
                 add(descr);
             }
         }

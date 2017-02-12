@@ -29,22 +29,22 @@ namespace item {
 model::item::Bak*
 Bak::getNew()
 {
-    const descriptor::item::Bak& descr = core::global::get().descriptors().bak().random();
+    descriptor::item::Bak* descr = core::global::get().descriptors().bak().random();
     return getNew(descr);
 }
 
-model::item::Bak*
-Bak::getNew(const std::string& data)
-{
-    descriptor::item::Bak descr(data);
-    assert(descr.descriptor() != descriptor::type::BAK_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Bak*
+//Bak::getNew(const std::string& data)
+//{
+//    descriptor::item::Bak descr(data);
+//    assert(descr->descriptor() != descriptor::type::BAK_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Bak*
-Bak::getNew(const descriptor::item::Bak& descr)
+Bak::getNew(descriptor::item::Bak* descr)
 {
-    model::item::Bak* model = __createTemplate(descr.id());
+    model::item::Bak* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -58,11 +58,11 @@ Bak::__createTemplate(int_t descriptor_id)
 }
 
 void
-Bak::__createInternals(model::item::Bak* model, const descriptor::item::Bak& descr)
+Bak::__createInternals(model::item::Bak* model, descriptor::item::Bak* descr)
 {
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setFuel(descr.fuel());
+    model->setFuel(descr->fuel());
 }
 
 } // namespace item

@@ -45,20 +45,19 @@ Sector::__createTemplate()
 } 
 
 model::Sector*
-Sector::create(const descriptor::Sector& descriptor)
+Sector::create(descriptor::Sector* descr)
 {
-    model::Sector* sector = __createTemplate();
-    Sector::__createInternals(sector, descriptor);
-    
-    return sector;
+    model::Sector* model = __createTemplate();
+    Sector::__createInternals(model, descr);
+    return model;
 } 
 
-void Sector::__createInternals(model::Sector* sector, const descriptor::Sector& descriptor)
+void Sector::__createInternals(model::Sector* model, descriptor::Sector* descr)
 {
-    for(const auto& id: descriptor.starsystems) {
+    for(const auto& id: descr->starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        model::Starsystem* starsystem = builder::Starsystem::create(core::global::get().descriptors().starsystem().get(id));
+        model::Starsystem* model = builder::Starsystem::create(core::global::get().descriptors().starsystem().get(id));
 //        sector->add(starsystem, center);
     }
 }

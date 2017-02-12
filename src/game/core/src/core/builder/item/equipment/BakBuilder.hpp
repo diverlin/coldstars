@@ -44,15 +44,15 @@ class Bak : public Equipment
 {
 public:
     static model::item::Bak* getNew();
-    static model::item::Bak* getNew(const std::string&);
-    static model::item::Bak* getNew(const descriptor::item::Bak&);
+//    static model::item::Bak* getNew(const std::string&);
+    static model::item::Bak* getNew(descriptor::item::Bak*);
 
 private:
     Bak() = delete;
     ~Bak() = delete;
 
     static model::item::Bak* __createTemplate(int_t);
-    static void __createInternals(model::item::Bak*, const descriptor::item::Bak&);
+    static void __createInternals(model::item::Bak*, descriptor::item::Bak*);
 }; 
 
 } // namespace item

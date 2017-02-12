@@ -28,24 +28,24 @@ namespace item {
 model::item::Drive*
 Drive::getNew()
 {
-    const descriptor::item::Drive& descr = core::global::get().descriptors().drive().random();
-    model::item::Drive* model = __createTemplate(descr.id());
+    descriptor::item::Drive* descr = core::global::get().descriptors().drive().random();
+    model::item::Drive* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
-model::item::Drive*
-Drive::getNew(const std::string& data)
-{
-    descriptor::item::Drive descr(data);
-    assert(descr.descriptor() != descriptor::type::DRIVE_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Drive*
+//Drive::getNew(const std::string& data)
+//{
+//    descriptor::item::Drive* descr(data);
+//    assert(descr.descriptor() != descriptor::type::DRIVE_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Drive*
-Drive::getNew(const descriptor::item::Drive& descr)
+Drive::getNew(descriptor::item::Drive* descr)
 {
-    model::item::Drive* model = __createTemplate(descr.id());
+    model::item::Drive* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }        
@@ -58,12 +58,12 @@ Drive::__createTemplate(int_t descriptor_id)
     return model;
 }
 
-void Drive::__createInternals(model::item::Drive* model, const descriptor::item::Drive& descr)
+void Drive::__createInternals(model::item::Drive* model, descriptor::item::Drive* descr)
 {
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setSpeed(descr.speed());
-    model->setHyper(descr.hyper());
+    model->setSpeed(descr->speed());
+    model->setHyper(descr->hyper());
 }
 
 } // namespace item

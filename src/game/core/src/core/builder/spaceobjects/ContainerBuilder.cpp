@@ -47,14 +47,14 @@ Container::getNew()
     return getNew(descriptor);
 }
 
-model::Container*
-Container::getNew(const std::string& data)
-{
-    return getNew(descriptor::Container(data));
-}
+//model::Container*
+//Container::getNew(const std::string& data)
+//{
+//    return getNew(descriptor::Container(data));
+//}
 
 model::Container*
-Container::getNew(const descriptor::BaseOLD& descriptor)
+Container::getNew(descriptor::BaseOLD* descriptor)
 {
     model::Container* container = __getNewTemplate();
     __createInternals(container, descriptor);
@@ -144,7 +144,7 @@ Container::__getNewTemplate()
 //}
 
 void
-Container::__createInternals(model::Container* container, const descriptor::BaseOLD& descriptor)
+Container::__createInternals(model::Container* container, descriptor::BaseOLD* descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;

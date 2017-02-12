@@ -29,22 +29,22 @@ namespace item {
 model::item::Rocket*
 Rocket::getNew()
 {
-    const descriptor::item::Rocket& descr = core::global::get().descriptors().rocket().random();
+    descriptor::item::Rocket* descr = core::global::get().descriptors().rocket().random();
     return getNew(descr);
 }
 
-model::item::Rocket*
-Rocket::getNew(const std::string& data)
-{
-    descriptor::item::Rocket descr(data);
-    assert(descr.descriptor() != descriptor::type::ROCKET_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Rocket*
+//Rocket::getNew(const std::string& data)
+//{
+//    descriptor::item::Rocket descr(data);
+//    assert(descr->descriptor() != descriptor::type::ROCKET_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Rocket*
-Rocket::getNew(const descriptor::item::Rocket& descr)
+Rocket::getNew(descriptor::item::Rocket* descr)
 {
-    model::item::Rocket* model = __createTemplate(descr.id());
+    model::item::Rocket* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -59,13 +59,13 @@ Rocket::__createTemplate(int_t descriptor_id)
 }
 
 void
-Rocket::__createInternals(model::item::Rocket* model, const descriptor::item::Rocket& descr)
+Rocket::__createInternals(model::item::Rocket* model, descriptor::item::Rocket* descr)
 {     
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setAmmo(descr.ammo());
-    model->setDamage(descr.damage());
-    model->setRadius(descr.radius());
+    model->setAmmo(descr->ammo());
+    model->setDamage(descr->damage());
+    model->setRadius(descr->radius());
 
     assert(false);
 //    if (race_id == race::type::NONE) {
