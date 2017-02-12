@@ -52,16 +52,16 @@ void Protector::updateProperties()
 
 void Protector::CountPrice()
 {
-    float protection_rate    = (float)descriptor()->protection() / descriptor::item::Protector::PROTECTION_MIN;
-    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Protector::MODULES_NUM_MAX;
+//    float protection_rate    = (float)descriptor()->protection() / descriptor::item::Protector::PROTECTION_MIN;
+//    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Protector::MODULES_NUM_MAX;
 
-    float effectiveness_rate = descriptor::item::Protector::PROTECTION_WEIGHT * protection_rate +
-            descriptor::item::Protector::MODULES_NUM_WEIGHT * modules_num_rate;
+//    float effectiveness_rate = descriptor::item::Protector::PROTECTION_WEIGHT * protection_rate +
+//            descriptor::item::Protector::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Protector::MASS_MIN;
-    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Protector::CONDITION_MIN;
+//    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Protector::MASS_MIN;
+//    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Protector::CONDITION_MIN;
 
-    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+//    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void Protector::addUniqueInfo()

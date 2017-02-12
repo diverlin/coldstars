@@ -29,6 +29,8 @@
 
 #include <managers/EntityManager.hpp>
 
+#include <core/descriptor/item/Item.hpp>
+
 Store::Store(int id)
 {
     assert(false);
@@ -118,7 +120,7 @@ Store::buyItem(control::Item* item)
     control::ItemSlot* slot = freeItemSlot();
     if (slot) {
         if (slot->insert(item)) {
-            return item->price();
+            return item->descriptor()->price();
         }
     }
 

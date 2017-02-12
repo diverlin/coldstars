@@ -63,6 +63,8 @@
 
 #include <pilots/Npc.hpp>
 
+#include <core/descriptor/item/Item.hpp>
+
 #include <dock/Kosmoport.hpp>
 #include <dock/Angar.hpp>
 #include <dock/Shop.hpp>
@@ -321,22 +323,22 @@ bool Vehicle::_installGoodsPack(Item* item)
 
 bool Vehicle::_installEquipment(Item* item)
 {
-    if (item->parentSubtype() == entity::type::WEAPON_SLOT_ID) {
+    if (item->descriptor()->slotType() == entity::type::WEAPON_SLOT_ID) {
         ItemSlot* slot = model()->weaponComplex().freeSlot();
         if (slot) {
             return slot->swapItem(item->slot());
         } else {
             ItemSlot* slot = model()->weaponComplex().equipedWeakestSlot();
             if (slot) {
-                if (item->price() > slot->item()->price()) {
+                if (item->descriptor()->price() > slot->item()->descriptor()->price()) {
                     return slot->swapItem(item->slot());
                 }
             }
         }
     } else {
-        ItemSlot* slot = _functionalSlot(item->parentSubtype());
+        ItemSlot* slot = _functionalSlot(item->descriptor()->slotType());
         if (slot->item()) {
-            if (item->price() > slot->item()->price()) {
+            if (item->descriptor()->price() > slot->item()->descriptor()->price()) {
                 return slot->swapItem(item->slot());
             }
         } else {
@@ -518,7 +520,7 @@ bool Vehicle::sellItem(Item* item)
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
     int earn_money = 0;
-    int item_mass = item->mass();
+    int item_mass = item->descriptor()->mass();
     assert(false);
 //    switch(item->type()) {
 //        case entity::Type::GOODS_ID: {
@@ -546,7 +548,7 @@ bool Vehicle::buyItem(Item* item)
 {
     if (addItemToCargoSlot(item) == true)
     {
-        m_npc->increaseCredits(-item->price());
+        m_npc->increaseCredits(-item->descriptor()->price());
 
         return true;
     }

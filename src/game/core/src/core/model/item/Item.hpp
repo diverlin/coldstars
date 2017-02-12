@@ -33,15 +33,18 @@ public:
     void setSlot(int_t slot)  { m_slot = slot; }
     void setLockedTurns(int lockedTurns) { m_lockedTurns = lockedTurns; }
     void setCondition(int condition) { m_condition = condition; }
+    void setMass(int mass) { m_mass = mass; }
 
     int_t slot() const { return m_slot; }
     int lockedTurns() const { return m_lockedTurns; }
     int condition() const { return m_condition; }
+    int mass() const { return m_mass; }
 
 private:
     int_t m_slot = NONE;
     int m_lockedTurns = 0;
     int m_condition = 0;
+    int m_mass = 0;
 
 private:
     friend class boost::serialization::access;
@@ -51,6 +54,7 @@ private:
         ar & m_slot;
         ar & m_lockedTurns;
         ar & m_condition;
+        ar & m_mass;
     }
 };
 

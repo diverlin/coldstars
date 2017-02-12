@@ -1047,8 +1047,9 @@ void Starsystem::__manageDeadObjects_s()
 
 void Starsystem::bombExplosionEvent(control::Container* container, bool show_effect)
 {
-    float radius = container->itemSlot()->item()->radius();
-    float damage = container->itemSlot()->item()->damage();
+    assert(false);
+//    float radius = container->itemSlot()->item()->radius();
+//    float damage = container->itemSlot()->item()->damage();
     glm::vec3 center(container->position());
     
     //jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);

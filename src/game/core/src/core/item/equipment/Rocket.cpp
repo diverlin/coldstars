@@ -65,20 +65,20 @@ void Rocket::updateProperties()
 
 void Rocket::countPrice()
 {
-    float ammo_rate     = float(descriptor()->ammo()) / descriptor::item::Rocket::AMMO_MIN;
-    float damage_rate   = float(descriptor()->damage()) / descriptor::item::Rocket::DAMAGE_MIN;
-    float radius_rate   = float(descriptor()->radius()) / descriptor::item::Rocket::RADIUS_MIN;
-    float modules_num_rate   = float(descriptor()->modules()) / descriptor::item::Rocket::MODULES_NUM_MAX;
+//    float ammo_rate     = float(descriptor()->ammo()) / descriptor::item::Rocket::AMMO_MIN;
+//    float damage_rate   = float(descriptor()->damage()) / descriptor::item::Rocket::DAMAGE_MIN;
+//    float radius_rate   = float(descriptor()->radius()) / descriptor::item::Rocket::RADIUS_MIN;
+//    float modules_num_rate   = float(descriptor()->modules()) / descriptor::item::Rocket::MODULES_NUM_MAX;
 
-    float effectiveness_rate = descriptor::item::Rocket::AMMO_WEIGHT * ammo_rate +
-            descriptor::item::Rocket::DAMAGE_WEIGHT * damage_rate +
-            descriptor::item::Rocket::RADIUS_WEIGHT * radius_rate +
-            descriptor::item::Rocket::MODULES_NUM_WEIGHT * modules_num_rate;
+//    float effectiveness_rate = descriptor::item::Rocket::AMMO_WEIGHT * ammo_rate +
+//            descriptor::item::Rocket::DAMAGE_WEIGHT * damage_rate +
+//            descriptor::item::Rocket::RADIUS_WEIGHT * radius_rate +
+//            descriptor::item::Rocket::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Rocket::MASS_MIN;
-    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Rocket::CONDITION_MIN;
+//    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Rocket::MASS_MIN;
+//    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Rocket::CONDITION_MIN;
 
-    m_price = int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+//    m_price = int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void Rocket::addUniqueInfo()

@@ -187,11 +187,12 @@ void WeaponComplex::setTarget(model::SpaceObject* target, control::ItemSlot* ite
 int WeaponComplex::guessDamage(int dist)
 {
     int damage = 0;
-    for (control::ItemSlot* slot: m_slots_reloaded) {
-        if (slot->item()->radius() >= dist) {
-            damage += slot->item()->damage();
-        }
-    }
+    assert(false);
+//    for (control::ItemSlot* slot: m_slots_reloaded) {
+//        if (slot->item()->radius() >= dist) {
+//            damage += slot->item()->damage();
+//        }
+//    }
     return damage;
 }
 

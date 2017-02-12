@@ -198,21 +198,21 @@ void Grapple::updateProperties()
 
 void Grapple::CountPrice()
 {
-    float strength_rate      = (float)descriptor()->strength() / descriptor::item::Grapple::STRENGTH_MIN;
-    float radius_rate        = (float)descriptor()->radius() / descriptor::item::Grapple::RADIUS_MIN;
-    float speed_rate         = (float)descriptor()->speed() / descriptor::item::Grapple::SPEED_MIN;
+//    float strength_rate      = (float)descriptor()->strength() / descriptor::item::Grapple::STRENGTH_MIN;
+//    float radius_rate        = (float)descriptor()->radius() / descriptor::item::Grapple::RADIUS_MIN;
+//    float speed_rate         = (float)descriptor()->speed() / descriptor::item::Grapple::SPEED_MIN;
 
-    float modules_num_rate   = (float)modulesNum() / descriptor::item::Grapple::MODULES_NUM_MAX;
+//    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Grapple::MODULES_NUM_MAX;
 
-    float effectiveness_rate = descriptor::item::Grapple::STRENGTH_WEIGHT * strength_rate +
-            descriptor::item::Grapple::RADIUS_WEIGHT * radius_rate +
-            descriptor::item::Grapple::SPEED_WEIGHT * speed_rate +
-            descriptor::item::Grapple::MODULES_NUM_WEIGHT * modules_num_rate;
+//    float effectiveness_rate = descriptor::item::Grapple::STRENGTH_WEIGHT * strength_rate +
+//            descriptor::item::Grapple::RADIUS_WEIGHT * radius_rate +
+//            descriptor::item::Grapple::SPEED_WEIGHT * speed_rate +
+//            descriptor::item::Grapple::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Grapple::MASS_MIN;
-    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Grapple::CONDITION_MIN;
+//    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Grapple::MASS_MIN;
+//    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Grapple::CONDITION_MIN;
 
-    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+//    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void Grapple::addUniqueInfo()

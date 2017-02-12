@@ -27,6 +27,14 @@
 
 #include <item/ItemCommonData.hpp>
 
+namespace descriptor {
+class Item;
+} // namespace descriptor
+
+namespace model {
+class Item;
+} // namespace model
+
 namespace control {
 class ItemSlot; 
 } // namespace control
@@ -34,7 +42,7 @@ class ItemSlot;
 
 namespace control {
 
-class Item : public ::control::Base
+class Item : public Base
 {
 public:
     Item() = default;
@@ -42,39 +50,39 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
-    void setItemCommonData(const ItemCommonData& data_item)
-    {
-        m_data = data_item;
-        m_deterioration = data_item.deterioration;
-        setCondition(data_item.condition_max);
-    }
+//    void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+//    void setItemCommonData(const ItemCommonData& data_item)
+//    {
+//        m_data = data_item;
+//        m_deterioration = data_item.deterioration;
+//        setCondition(data_item.condition_max);
+//    }
     void setSlot(control::ItemSlot* slot)  { m_slot = slot; }
-    void setCondition(int condition) { m_condition = condition; }
+//    void setCondition(int condition) { m_condition = condition; }
 
     control::ItemSlot* slot() const { return m_slot; }
 
-    virtual int radius() const { return 0; }
-    virtual int damage() const { return 0; }
+//    virtual int radius() const { return 0; }
+//    virtual int damage() const { return 0; }
 
-    int mass()          const { return m_data.mass; }
-    int condition()     const { return m_condition; }
-    int price()         const { return m_price; }
-    int basePrice()     const { return m_data.price; }
-    int deterioration() const { return m_data.deterioration; }
+//    int mass()          const { return m_data.mass; }
+//    int condition()     const { return m_condition; }
+//    int price()         const { return m_price; }
+//    int basePrice()     const { return m_data.price; }
+//    int deterioration() const { return m_data.deterioration; }
 
-    [[deprecated("remove")]]
-    int modulesNum() const { return m_data.modules_num; }
-    int descriptorType() const { return m_data.descriptor_type; }
+//    [[deprecated("remove")]]
+//    int modulesNum() const { return m_data.modules_num; }
+//    int descriptorType() const { return m_data.descriptor_type; }
 
-    tech::type tech() const { return m_data.tech; }
+//    tech::type tech() const { return m_data.tech; }
 
-    entity::type parentSubtype() const { return m_parent_subtype_id; }
-    race::type race() const { return m_race_id; }
+//    entity::type parentSubtype() const { return m_parent_subtype_id; }
+//    race::type race() const { return m_race_id; }
 
-    bool isDamaged()    const { return (m_condition <= 0); }
-    bool isLocked()     const { return (m_locked_turns > 0); }
-    int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
+    bool isDamaged() const;
+    bool isLocked() const;
+    int isFunctioning() const;
 
     void useNormalDeterioration();
     void useOverloadDeterioration();
@@ -95,16 +103,16 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-    race::type m_race_id = race::type::NONE;
+//    race::type m_race_id = race::type::NONE;
 
-    int m_locked_turns = 0;
-    int m_condition = 0;
-    int m_price = 0;
-    int m_deterioration = 0;
+//    int m_locked_turns = 0;
+//    int m_condition = 0;
+//    int m_price = 0;
+//    int m_deterioration = 0;
 
-    entity::type m_parent_subtype_id = entity::type::NONE;
+//    entity::type m_parent_subtype_id = entity::type::NONE;
 
-    ItemCommonData m_data;
+//    ItemCommonData m_data;
 //    UnresolvedDataBase m_data_unresolved_Base;
     //        InfoTable info;
 
@@ -113,11 +121,18 @@ protected:
     virtual void AddCommonInfo()=0;
     virtual void addUniqueInfo()=0;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
+
+public:
+    model::Item* model() const { return m_model_item; }
+    descriptor::Item* descriptor() const { return m_descriptor_item; }
 
 private:
+    model::Item* m_model_item = nullptr;
+    descriptor::Item* m_descriptor_item = nullptr;
+
     control::ItemSlot* m_slot = nullptr;
 };
 

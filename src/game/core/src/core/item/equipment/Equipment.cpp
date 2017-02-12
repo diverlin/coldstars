@@ -31,7 +31,6 @@ namespace control {
 
 Equipment::Equipment()
 {
-    m_race_id = race::type::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 

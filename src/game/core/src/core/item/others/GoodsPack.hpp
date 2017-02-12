@@ -15,35 +15,35 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-    
+
 #pragma once
 
 #include <item/Item.hpp>
-#include <common/constants.hpp>
+//#include <common/constants.hpp>
 
 class GoodsPack : public control::Item
 {
-    public:                  
-        GoodsPack(int, entity::type);
-        virtual ~GoodsPack();
-        
-        void Increase(unsigned int amount) { m_data.mass += amount; }
-        void Decrease(unsigned int amount) { m_data.mass -= amount; }
+public:
+    GoodsPack(int, entity::type);
+    virtual ~GoodsPack();
 
-        virtual void UpdateOwnerAbilities();
-        
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:
-        virtual void AddCommonInfo();
-         virtual void addUniqueInfo();   
-         
-         void SaveData(boost::property_tree::ptree&, const std::string&) const;
-         void LoadData(const boost::property_tree::ptree& load_ptree);
-         void ResolveData();
-         
+    void Increase(int amount);
+    void Decrease(int amount);
+
+    virtual void UpdateOwnerAbilities();
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    virtual void AddCommonInfo();
+    virtual void addUniqueInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree& load_ptree);
+    void ResolveData();
+
 };
 
 GoodsPack* GetNewGoodsPack(entity::type, int_t id = NONE);
