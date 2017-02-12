@@ -27,7 +27,7 @@ namespace item {
 class Radar : public Equipment
 {
 public:
-    Radar();
+    Radar(int_t);
     ~Radar() = default;
     Radar(const std::string& data);
     std::string data() const;
