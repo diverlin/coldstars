@@ -21,21 +21,10 @@
 #include <core/model/item/equipment/Grapple.hpp>
 #include <core/common/Global.hpp>
 #include <descriptor/DescriptorManager.hpp>
+#include <core/managers/EntityManager.hpp>
 
 namespace builder {
 namespace item {
-
-model::item::Grapple*
-Grapple::__createTemplate()
-{
-    model::item::Grapple* grapple = new model::item::Grapple;
-    assert(grapple);
-
-    assert(false);
-//    core::global::get().entityManager().reg(grapple);
-    
-    return grapple;
-} 
 
 model::item::Grapple*
 Grapple::getNew()
@@ -55,27 +44,27 @@ Grapple::getNew(const std::string& data)
 model::item::Grapple*
 Grapple::getNew(const descriptor::item::Grapple& descr)
 {
-    model::item::Grapple* grapple = __createTemplate();
-    __createInternals(grapple, descr);
-
-    return grapple;
+    model::item::Grapple* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 } 
 
-void
-Grapple::__createInternals(model::item::Grapple* grapple, const descriptor::item::Grapple& descr)
+model::item::Grapple*
+Grapple::__createTemplate(int_t descriptor_id)
 {
-    assert(false);
-//    ItemCommonData data = extractCommonData(descriptor);
+    model::item::Grapple* model = new model::item::Grapple(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
+}
 
-//    grapple->SetStrengthOrig(descriptor.strength());
-//    grapple->SetRadiusOrig(descriptor.radius());
-//    grapple->SetSpeedOrig(descriptor.speed());
-
-//    grapple->setParentSubTypeId(entity::type::GRAPPLE_SLOT_ID);
-//    grapple->setItemCommonData(data);
-    
-//    grapple->updateProperties();
-//    grapple->CountPrice();
+void
+Grapple::__createInternals(model::item::Grapple* model, const descriptor::item::Grapple& descr)
+{
+    Item::_createInternals(model, descr);
+    Equipment::_createInternals(model, descr);
+    model->setStrength(descr.strength());
+    model->setRadius(descr.radius());
+    model->setSpeed(descr.speed());
 }
 
 } // namespace item

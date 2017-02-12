@@ -27,7 +27,7 @@ namespace item {
 class Grapple : public Equipment
 {
 public:
-    Grapple();
+    Grapple(int_t);
     ~Grapple() = default;
     Grapple(const std::string& data);
     std::string data() const;

@@ -67,16 +67,6 @@ Radar::__createInternals(model::item::Radar* model, const descriptor::item::Rada
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
     model->setRadius(descr.radius());
-
-    assert(false);
-//    ItemCommonData common_data = extractCommonData(descriptor);
-
-//    radar->SetRadiusOrig(descriptor.radius());
-//    radar->setParentSubTypeId(entity::type::RADAR_SLOT_ID);
-//    radar->setItemCommonData(common_data);
-
-//    radar->updateProperties();
-//    radar->CountPrice();
 }
 
 } // namespace item

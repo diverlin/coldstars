@@ -78,16 +78,6 @@ Protector::__createInternals(model::item::Protector* model, const descriptor::it
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
     model->setProtection(descr.protection());
-
-    assert(false);
-//    ItemCommonData common_data = extractCommonData(descriptor);
-
-//    protector->SetProtectionOrig(descriptor.protection());
-//    protector->setParentSubTypeId(entity::type::PROTECTOR_SLOT_ID);
-//    protector->setItemCommonData(common_data);
-
-//    protector->updateProperties();
-//    protector->CountPrice();
 }
 
 } // namespace item

@@ -21,30 +21,18 @@
 #include <core/model/item/equipment/Droid.hpp>
 #include <core/common/Global.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
+#include <core/managers/EntityManager.hpp>
 
 namespace builder {
 namespace item {
 
 model::item::Droid*
-Droid::__createTemplate()
-{
-    model::item::Droid* droid = new model::item::Droid;
-    assert(droid);
-
-    assert(false);
-    //core::global::get().entityManager().reg(droid);
-    
-    return droid;
-} 
-
-model::item::Droid*
 Droid::getNew()
 {
     const descriptor::item::Droid& descr = core::global::get().descriptors().droid().random();
-    model::item::Droid* droid = __createTemplate();
-    __createInternals(droid, descr);
-
-    return droid;
+    model::item::Droid* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }
 
 model::item::Droid*
@@ -58,13 +46,20 @@ Droid::getNew(const std::string& data)
 model::item::Droid*
 Droid::getNew(const descriptor::item::Droid& descr)
 {
-    model::item::Droid* droid = __createTemplate();
-    __createInternals(droid, descr);
-
-    return droid;
+    model::item::Droid* model = __createTemplate(descr.id());
+    __createInternals(model, descr);
+    return model;
 }  
 
-void Droid::__createInternals(model::item::Droid* droid, const descriptor::item::Droid& descr)
+model::item::Droid*
+Droid::__createTemplate(int_t descriptor_id)
+{
+    model::item::Droid* model = new model::item::Droid(descriptor_id);
+    core::global::get().entityManager().reg(model);
+    return model;
+}
+
+void Droid::__createInternals(model::item::Droid* model, const descriptor::item::Droid& descr)
 {     
     assert(false);
 //    ItemCommonData common_data = extractCommonData(descr);
