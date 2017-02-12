@@ -34,15 +34,15 @@ class Ship : public BaseVehicle
 {
 public:
     static model::Ship* getNew(bool full_equiped = false);
-    static model::Ship* getNew(const descriptor::Vehicle&);
-    static model::Ship* getNew(const std::string&);
+//    static model::Ship* getNew(const std::string&);
+    static model::Ship* getNew(descriptor::Vehicle*);
 
 private:
-    Ship()=default;
-    ~Ship()=default;
+    Ship()=delete;
+    ~Ship()=delete;
 
     static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, const descriptor::Vehicle&);
+    static void __createInternals(model::Ship*, descriptor::Vehicle*);
 }; 
 
 } // namespace builder

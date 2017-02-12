@@ -43,15 +43,15 @@ public:
     ~Container();
 
     static model::Container* getNew();
-    static model::Container* getNew(const std::string& data);
-    static model::Container* getNew(const descriptor::BaseOLD&);
+//    static model::Container* getNew(const std::string& data);
+    static model::Container* getNew(descriptor::BaseOLD*);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
     static model::Container* __getNewTemplate();
-    static void __createInternals(model::Container*, const descriptor::BaseOLD&);
+    static void __createInternals(model::Container*, descriptor::BaseOLD*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

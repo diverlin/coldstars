@@ -32,13 +32,13 @@ namespace builder {
 class Sector
 {
 public:
-    Sector()=default;
-    ~Sector()=default;
-
-    static model::Sector* create(const descriptor::Sector&);
+    static model::Sector* create(descriptor::Sector*);
     
 private:
-    static void __createInternals(model::Sector*, const descriptor::Sector&);
+    Sector()=delete;
+    ~Sector()=delete;
+
+    static void __createInternals(model::Sector*, descriptor::Sector*);
     static model::Sector* __createTemplate();
 }; 
 

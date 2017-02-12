@@ -166,10 +166,10 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
     //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
-void Vehicle::setKorpusData(const descriptor::Vehicle& korpus_data)
+void Vehicle::setKorpusData(descriptor::Vehicle* korpus_data)
 {
-    m_descriptor = korpus_data;
-    model()->properties().protection = m_descriptor.protection();
+    m_descriptor_vehicle = korpus_data;
+    model()->properties().protection = m_descriptor_vehicle->protection();
 }
 
 GoodsPack* Vehicle::goodsPack() const
@@ -805,7 +805,7 @@ void Vehicle::_postDeathUniqueEvent(bool show_effect)
 void Vehicle::CheckNeedsInStatic()
 {
     // check armor
-    if (model()->armor() < 0.5*descriptor().armor()) {
+    if (model()->armor() < 0.5*descriptor()->armor()) {
         model()->needs().repair_korpus = true;
     } else {
         model()->needs().repair_korpus = false;
@@ -917,7 +917,7 @@ void Vehicle::_increaseMass(int d_mass)
     //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
 
     _addMass(d_mass);
-    model()->properties().free_space = m_descriptor.space() - model()->mass();
+    model()->properties().free_space = descriptor()->space() - model()->mass();
     _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -926,7 +926,7 @@ void Vehicle::_decreaseMass(int d_mass)
     //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
 
     _addMass(-d_mass);
-    model()->properties().free_space = m_descriptor.space() - model()->mass();
+    model()->properties().free_space = descriptor()->space() - model()->mass();
     _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -1016,7 +1016,7 @@ void Vehicle::_updatePropProtection()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
 
-    model()->properties().protection = m_descriptor.protection();
+    model()->properties().protection = descriptor()->protection();
     model()->properties().shield_effect_enabled = false;
 
     assert(false);
@@ -1056,8 +1056,8 @@ void Vehicle::increaseArmor(int repair)
 
     model()->addArmor(repair);
 
-    if (model()->armor() > m_descriptor.armor()) {
-        model()->setArmor(m_descriptor.armor());
+    if (model()->armor() > descriptor()->armor()) {
+        model()->setArmor(descriptor()->armor());
     }
 }
 
@@ -1124,7 +1124,7 @@ void Vehicle::_updatePropGrab()
     model()->properties().grab_strength = 0;
     model()->properties().grab_radius = 0;
 
-    if (m_descriptor.grappleSlotNum() != 0)
+    if (descriptor()->grappleSlotNum() != 0)
     {
         if (m_grappleSlot->item() != nullptr)
         {
@@ -1274,14 +1274,14 @@ bool Vehicle::isAbleToJumpTo(model::Starsystem* target_starsystem) const
 void Vehicle::repairKorpus(int amount)
 {
     model()->addArmor(amount);
-    if (model()->armor() > m_descriptor.armor()) {
-        model()->setArmor(m_descriptor.armor());
+    if (model()->armor() > descriptor()->armor()) {
+        model()->setArmor(descriptor()->armor());
     }
 }
 
 bool Vehicle::isArmorFull() const
 {
-    if (model()->armor() == m_descriptor.armor()) {
+    if (model()->armor() == descriptor()->armor()) {
         return true;
     }
 
@@ -1290,7 +1290,7 @@ bool Vehicle::isArmorFull() const
 
 int Vehicle::armorMiss() const
 {
-    return (m_descriptor.armor() - model()->armor());
+    return (descriptor()->armor() - model()->armor());
 }
 
 bool Vehicle::isFuelFull() const
@@ -1715,7 +1715,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 //}
 
-//void Vehicle::setKorpusData(const descriptor::Vehicle& korpus_data)
+//void Vehicle::setKorpusData(descriptor::Vehicle* korpus_data)
 //{
 //    m_vehicleDescriptor = korpus_data;
 //    m_properties.protection = m_vehicleDescriptor.protection;

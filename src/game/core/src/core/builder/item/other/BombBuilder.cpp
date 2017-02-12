@@ -38,13 +38,15 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::getNew()
+Bomb*
+BombBuilder::getNew()
 {
-    const descriptor::BaseOLD& descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
+    descriptor::BaseOLD* descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
     return getNew(descriptor);
 }
 
-Bomb* BombBuilder::getNew(const descriptor::BaseOLD& descriptor)
+Bomb*
+BombBuilder::getNew(descriptor::BaseOLD* descriptor)
 {
     Bomb* bomb = new Bomb;
     assert(bomb);
@@ -57,14 +59,15 @@ Bomb* BombBuilder::getNew(const descriptor::BaseOLD& descriptor)
     return bomb;
 } 
 
-void BombBuilder::__createInternals(Bomb* bomb, const descriptor::BaseOLD& descriptor)
+void
+BombBuilder::__createInternals(Bomb* bomb, descriptor::BaseOLD* descr)
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->setDamage(descriptor.damage());
-    bomb->setRadius(descriptor.radius());
+    bomb->setDamage(descr->damage());
+    bomb->setRadius(descr->radius());
     assert(false);
 //    bomb->setParentSubTypeId(entity::type::CARGO_SLOT);
 }

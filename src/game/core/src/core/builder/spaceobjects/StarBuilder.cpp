@@ -50,25 +50,25 @@ Star::getNew()
 } 
 
 model::Star*
-Star::getNew(const descriptor::Star& descr)
+Star::getNew(descriptor::Star* descr)
 {
     model::Star* model = __getNewTemplate();
-    model->setMesh(descr.mesh());
-    model->setMaterial(descr.texture());
+    model->setMesh(descr->mesh());
+    model->setMaterial(descr->texture());
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    model->setRadiusA(descr.radiusA());
-    model->setRadiusB(descr.radiusB());
-    model->setOrbitPhi(descr.orbitPhi());
-    model->setSpeed(descr.speed());
+    model->setRadiusA(descr->radiusA());
+    model->setRadiusB(descr->radiusB());
+    model->setOrbitPhi(descr->orbitPhi());
+    model->setSpeed(descr->speed());
 
     // Orientation
-    model->setSize(descr.size());
-    model->setDirection(descr.direction());
+    model->setSize(descr->size());
+    model->setDirection(descr->direction());
 
     LifeData data_life;
-    data_life.armor = descr.armor();
+    data_life.armor = descr->armor();
     model->setLifeData(data_life);
 
     return model;

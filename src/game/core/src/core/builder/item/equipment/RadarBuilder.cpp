@@ -30,25 +30,25 @@ namespace item {
 model::item::Radar*
 Radar::getNew()
 {
-    const descriptor::item::Radar& descr = core::global::get().descriptors().radar().random();
-    model::item::Radar* model = __createTemplate(descr.id());
+    descriptor::item::Radar* descr = core::global::get().descriptors().radar().random();
+    model::item::Radar* model = __createTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
 }
 
-model::item::Radar*
-Radar::getNew(const std::string& data)
-{
-    descriptor::item::Radar descr(data);
-    assert(descr.descriptor() != descriptor::type::RADAR_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Radar*
+//Radar::getNew(const std::string& data)
+//{
+//    descriptor::item::Radar descr(data);
+//    assert(descr->descriptor() != descriptor::type::RADAR_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Radar*
-Radar::getNew(const descriptor::item::Radar& descr)
+Radar::getNew(descriptor::item::Radar* descr)
 {
-    model::item::Radar* model = __createTemplate(descr.id());
+    model::item::Radar* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
@@ -62,11 +62,11 @@ Radar::__createTemplate(int_t descriptor_id)
 }
 
 void
-Radar::__createInternals(model::item::Radar* model, const descriptor::item::Radar& descr)
+Radar::__createInternals(model::item::Radar* model, descriptor::item::Radar* descr)
 {
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setRadius(descr.radius());
+    model->setRadius(descr->radius());
 }
 
 } // namespace item

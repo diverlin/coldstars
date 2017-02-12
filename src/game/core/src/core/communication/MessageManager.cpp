@@ -72,46 +72,55 @@ void MessageManager::process(const Message& message)
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
-        builder::Ship::getNew(message.data);
+        assert(false);
+//        builder::Ship::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
-        core::global::get().bombBuilder().getNew(message.data);
+        assert(false);
+//        core::global::get().bombBuilder().getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_CONTAINER: {
-        core::global::get().containerBuilder().getNew(message.data);
+        assert(false);
+//        core::global::get().containerBuilder().getNew(message.data);
         break;
     }
 
         // items
     case TELEGRAM::CREATE_BAK: {
-        builder::item::Bak::getNew(message.data);
+        assert(false);
+//        builder::item::Bak::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {
-        auto model = builder::item::Drive::getNew(message.data);
         assert(false);
+//        auto model = builder::item::Drive::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_DROID: {
-        builder::item::Droid::getNew(message.data);
+        assert(false);
+//        builder::item::Droid::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {
-        builder::item::Grapple::getNew(message.data);
+        assert(false);
+//        builder::item::Grapple::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_PROTECTOR: {
-        builder::item::Protector::getNew(message.data);
+        assert(false);
+//        builder::item::Protector::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_SCANER: {
-        builder::item::Scaner::getNew(message.data);
+        assert(false);
+//        builder::item::Scaner::getNew(message.data);
         break;
     }
     case TELEGRAM::CREATE_RADAR: {
-        builder::item::Radar::getNew(message.data);
+        assert(false);
+//        builder::item::Radar::getNew(message.data);
         break;
     }
 

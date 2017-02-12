@@ -44,15 +44,15 @@ class Grapple : public Equipment
 {
 public:
     static model::item::Grapple* getNew();
-    static model::item::Grapple* getNew(const std::string&);
-    static model::item::Grapple* getNew(const descriptor::item::Grapple&);
+//    static model::item::Grapple* getNew(const std::string&);
+    static model::item::Grapple* getNew(descriptor::item::Grapple*);
 
 private:
     Grapple() = delete;
     ~Grapple() = delete;
 
     static model::item::Grapple* __createTemplate(int_t);
-    static void __createInternals(model::item::Grapple*, const descriptor::item::Grapple&);
+    static void __createInternals(model::item::Grapple*, descriptor::item::Grapple*);
 }; 
 
 } // namespace item

@@ -184,7 +184,7 @@ void Space::addIfVisible(model::Star* model, const VisibilityData& data)
 {
     assert(model);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-        //const descriptor::Star& descriptor = core::global::get().descriptors().star().get(star->descriptorId());
+        //descriptor::Star* descriptor = core::global::get().descriptors().star().get(star->descriptorId());
         //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());

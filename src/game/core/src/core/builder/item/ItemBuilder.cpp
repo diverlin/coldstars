@@ -24,9 +24,9 @@
 
 namespace builder {
 
-void Item::_createInternals(model::Item* model, const descriptor::Item& descr)
+void Item::_createInternals(model::Item* model, descriptor::Item* descr)
 {
-    model->setCondition(descr.condition());
+    model->setCondition(descr->condition());
 }
 
 } // namespace builder

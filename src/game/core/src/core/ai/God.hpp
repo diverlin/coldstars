@@ -47,7 +47,7 @@ public:
     God();
     ~God();
 
-    void createWorld(const descriptor::Galaxy&);
+    void createWorld(descriptor::Galaxy*);
     void update();
 
     control::Galaxy* galaxy() const { return m_galaxy; }
@@ -64,8 +64,8 @@ private:
 
     void __proceedInvasion(control::Galaxy*) const;
 
-    void __createLife(control::Galaxy*, const descriptor::Galaxy&) const;
-    void __createInvasion(control::Galaxy*, const descriptor::Galaxy&) const;
+    void __createLife(control::Galaxy*, descriptor::Galaxy*) const;
+    void __createInvasion(control::Galaxy*, descriptor::Galaxy*) const;
 
     control::Galaxy* m_galaxy = nullptr;
 }; 

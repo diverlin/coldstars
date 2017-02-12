@@ -37,7 +37,7 @@
 
 TEST(ship, create)
 {
-    descriptor::Ship descr = descriptor::getNewShip();
+    descriptor::Ship* descr = descriptor::getNewShip();
     model::Ship* model = builder::Ship::getNew(descr);
     control::Ship* control = new control::Ship(model);
 

@@ -46,43 +46,43 @@ glm::vec3 randDirection() {
     return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
 }
 
-void resolveId(descriptor::Base& descr) {
-    if (descr.id() == NONE) {
+void resolveId(descriptor::Base* descr) {
+    if (descr->id() == NONE) {
         int_t id = core::global::get().idGenerator().nextId();
-        descr.setId(id);
+        descr->setId(id);
     }
 }
 
 } // namespace
 
 /* world */
-descriptor::Galaxy
+descriptor::Galaxy*
 getNewGalaxy(const std::vector<int_t>& sectors) {
-    descriptor::Galaxy descr;
+    descriptor::Galaxy* descr = new descriptor::Galaxy;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
-        descr.sectors.push_back(meti::getRand(sectors));
+        descr->sectors.push_back(meti::getRand(sectors));
     }
     resolveId(descr);
     return descr;
 }
 
-descriptor::Sector
+descriptor::Sector*
 getNewSector(const std::vector<int_t>& starsystems) {
-    descriptor::Sector descr;
+    descriptor::Sector* descr = new descriptor::Sector;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
-        descr.starsystems.push_back(meti::getRand(starsystems));
+        descr->starsystems.push_back(meti::getRand(starsystems));
     }
 
     resolveId(descr);
     return descr;
 }
 
-descriptor::Starsystem
+descriptor::Starsystem*
 getNewStarsystem(int race)
 {
-    descriptor::Starsystem descr;
+    descriptor::Starsystem* descr = new descriptor::Starsystem;
     if (race == NONE) {
         race = int(race::type::R0);
     }
@@ -114,72 +114,72 @@ int_t textureDescriptorIdFromType(const texture::type& type) {
 
 } // namespace
 
-descriptor::Star
+descriptor::Star*
 getNewStar()
 {
-    descriptor::Star descr;
-    descr.setArmor(10000000);
+    descriptor::Star* descr = new descriptor::Star;
+    descr->setArmor(10000000);
 
     int orbit_radius = meti::getRandInt(descriptor::Star::DISTANCE_MIN,
                                         descriptor::Star::DISTANCE_MAX);
-    descr.setRadiusA(orbit_radius);
-    descr.setRadiusB(orbit_radius);
-    descr.setOrbitPhi(0);
+    descr->setRadiusA(orbit_radius);
+    descr->setRadiusB(orbit_radius);
+    descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Star::SPEED_MIN,
                                    descriptor::Star::SPEED_MAX) / float(orbit_radius);
-    descr.setSpeed(speed);
-    descr.setClockwise(meti::getRandBool());
+    descr->setSpeed(speed);
+    descr->setClockwise(meti::getRandBool());
 
     float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
-    descr.setSize(meti::vec3(size));
-    descr.setDirection(randDirection());
+    descr->setSize(meti::vec3(size));
+    descr->setDirection(randDirection());
 
-    descr.setTexture(textureDescriptorIdFromType (texture::type::STAR));
-    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
+    descr->setTexture(textureDescriptorIdFromType (texture::type::STAR));
+    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
 
     resolveId(descr);
 
-    assert(descr.texture() != NONE);
-    assert(descr.mesh() != NONE);
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
 
     return descr;
 }
 
-descriptor::Planet
+descriptor::Planet*
 getNewPlanet()
 {
-    descriptor::Planet descr;
-    descr.setArmor(100000);
+    descriptor::Planet* descr = new descriptor::Planet;
+    descr->setArmor(100000);
 
     int orbit_radius = meti::getRandInt(descriptor::Planet::DISTANCE_MIN,
                                         descriptor::Planet::DISTANCE_MAX);
-    descr.setRadiusA(orbit_radius);
-    descr.setRadiusB(orbit_radius);
-    descr.setOrbitPhi(0);
+    descr->setRadiusA(orbit_radius);
+    descr->setRadiusB(orbit_radius);
+    descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Planet::SPEED_MIN,
                                    descriptor::Planet::SPEED_MAX) / float(orbit_radius);
-    descr.setSpeed(speed);
-    descr.setClockwise(meti::getRandBool());
+    descr->setSpeed(speed);
+    descr->setClockwise(meti::getRandBool());
 
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
-    descr.setSize(meti::vec3(size));
-    descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType (texture::type::PLANET));
-    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
+    descr->setSize(meti::vec3(size));
+    descr->setDirection(randDirection());
+    descr->setTexture(textureDescriptorIdFromType (texture::type::PLANET));
+    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
 
     resolveId(descr);
 
-    assert(descr.texture() != NONE);
-    assert(descr.mesh() != NONE);
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
 
     return descr;
 
 
 
     //model::Planet*
-    //Planet::getNew(const descriptor::BaseOLD& descr)
+    //Planet::getNew(descriptor::BaseOLD* descr)
     //{
     //    model::Planet* model = __createTemplate();
 
@@ -231,45 +231,45 @@ getNewPlanet()
 
 }
 
-descriptor::Asteroid
+descriptor::Asteroid*
 getNewAsteroid()
 {
-    descriptor::Asteroid descr;
-    descr.setArmor(meti::getRandInt(descriptor::Asteroid::ARMOR_MIN,
+    descriptor::Asteroid* descr = new descriptor::Asteroid;
+    descr->setArmor(meti::getRandInt(descriptor::Asteroid::ARMOR_MIN,
                                     descriptor::Asteroid::ARMOR_MAX));
 
     int orbit_radiusA = meti::getRandInt(descriptor::Asteroid::DISTANCE_MIN,
                                         descriptor::Asteroid::DISTANCE_MAX);
     int orbit_radiusB = meti::getRandInt(descriptor::Asteroid::DISTANCE_MIN,
                                         descriptor::Asteroid::DISTANCE_MAX);
-    descr.setRadiusA(orbit_radiusA);
-    descr.setRadiusB(orbit_radiusB);
-    descr.setOrbitPhi(0);
+    descr->setRadiusA(orbit_radiusA);
+    descr->setRadiusB(orbit_radiusB);
+    descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Asteroid::SPEED_MIN,
                                    descriptor::Asteroid::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
-    descr.setSpeed(speed);
-    descr.setClockwise(meti::getRandBool());
+    descr->setSpeed(speed);
+    descr->setClockwise(meti::getRandBool());
 
     float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
-    descr.setSize(meti::vec3(size));
-    descr.setDirection(randDirection());
-    descr.setTexture(textureDescriptorIdFromType (texture::type::ASTEROID));
-    descr.setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED));
+    descr->setSize(meti::vec3(size));
+    descr->setDirection(randDirection());
+    descr->setTexture(textureDescriptorIdFromType (texture::type::ASTEROID));
+    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED));
 
     resolveId(descr);
 
-    assert(descr.texture() != NONE);
-    assert(descr.mesh() != NONE);
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
 
     return descr;
 }
 
-descriptor::BaseOLD
+descriptor::BaseOLD*
 getNewContainer()
 {
-    descriptor::BaseOLD descriptor(descriptor::Type::CONTAINER);
-    return descriptor;
+    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::Type::CONTAINER);
+    return descr;
 }
 
 //descriptor::BaseOLD
@@ -343,7 +343,7 @@ getNewContainer()
 
 
 
-descriptor::Ship
+descriptor::Ship*
 getNewShip()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -380,45 +380,44 @@ getNewShip()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::Ship descr;
-    descr.setRace(int_t(race_id));
+    descriptor::Ship* descr = new descriptor::Ship;
+    descr->setRace(int_t(race_id));
     //descr.setType(int_t(type_id));
-    descr.setSize(size_id);
+    descr->setSize(size_id);
 
-    descr.setSpace(space);
-    descr.setArmor(armor);
-    descr.setProtection(protection);
+    descr->setSpace(space);
+    descr->setArmor(armor);
+    descr->setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setTemperature(temperature);
+    descr->setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setPrice(price);
+    descr->setPrice(price);
 
-    descr.setBakSlotNum(slot_bak_num);
-    descr.setDriveSlotNum(slot_drive_num);
-    descr.setDroidSlotNum(slot_droid_num);
+    descr->setBakSlotNum(slot_bak_num);
+    descr->setDriveSlotNum(slot_drive_num);
+    descr->setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setEnergizerSlotNum(slot_energizer_num);
-    descr.setFreezerSlotNum(slot_freezer_num);
+    descr->setEnergizerSlotNum(slot_energizer_num);
+    descr->setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setGrappleSlotNum(slot_grapple_num);
-    descr.setProtectorSlotNum(slot_protector_num);
-    descr.setRadarSlotNum(slot_radar_num);
-    descr.setScanerSlotNum(slot_scaner_num);
-    descr.setWeaponSlotNum(slot_weapon_num);
-    descr.setArtefactSlotNum(slot_artefact_num);
-    descr.setCargoSlotNum(slot_cargo_num);
+    descr->setGrappleSlotNum(slot_grapple_num);
+    descr->setProtectorSlotNum(slot_protector_num);
+    descr->setRadarSlotNum(slot_radar_num);
+    descr->setScanerSlotNum(slot_scaner_num);
+    descr->setWeaponSlotNum(slot_weapon_num);
+    descr->setArtefactSlotNum(slot_artefact_num);
+    descr->setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descr.setDrawTurrels(false);
+    descr->setDrawTurrels(false);
 
     resolveId(descr);
-
 
     return descr;
 }
 
 
-descriptor::SpaceStation
+descriptor::SpaceStation*
 getNewSpaceStation()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -455,44 +454,43 @@ getNewSpaceStation()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::SpaceStation descr;
-    descr.setRace(int_t(race_id));
-    //descr.setType(int_t(type_id));
-    descr.setSize(size_id);
+    descriptor::SpaceStation* descr = new descriptor::SpaceStation;
+    descr->setRace(int_t(race_id));
+    //descr->setType(int_t(type_id));
+    descr->setSize(size_id);
 
-    descr.setSpace(space);
-    descr.setArmor(armor);
-    descr.setProtection(protection);
+    descr->setSpace(space);
+    descr->setArmor(armor);
+    descr->setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setTemperature(temperature);
+    descr->setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setPrice(price);
+    descr->setPrice(price);
 
-    descr.setBakSlotNum(slot_bak_num);
-    descr.setDriveSlotNum(slot_drive_num);
-    descr.setDroidSlotNum(slot_droid_num);
+    descr->setBakSlotNum(slot_bak_num);
+    descr->setDriveSlotNum(slot_drive_num);
+    descr->setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setEnergizerSlotNum(slot_energizer_num);
-    descr.setFreezerSlotNum(slot_freezer_num);
+    descr->setEnergizerSlotNum(slot_energizer_num);
+    descr->setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setGrappleSlotNum(slot_grapple_num);
-    descr.setProtectorSlotNum(slot_protector_num);
-    descr.setRadarSlotNum(slot_radar_num);
-    descr.setScanerSlotNum(slot_scaner_num);
-    descr.setWeaponSlotNum(slot_weapon_num);
-    descr.setArtefactSlotNum(slot_artefact_num);
-    descr.setCargoSlotNum(slot_cargo_num);
+    descr->setGrappleSlotNum(slot_grapple_num);
+    descr->setProtectorSlotNum(slot_protector_num);
+    descr->setRadarSlotNum(slot_radar_num);
+    descr->setScanerSlotNum(slot_scaner_num);
+    descr->setWeaponSlotNum(slot_weapon_num);
+    descr->setArtefactSlotNum(slot_artefact_num);
+    descr->setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descr.setDrawTurrels(false);
+    descr->setDrawTurrels(false);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::Satellite
+descriptor::Satellite*
 getNewSatellite()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -529,39 +527,38 @@ getNewSatellite()
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
 
-    descriptor::Satellite descr;
-    descr.setRace(int_t(race_id));
-    //descr.setType(int_t(type_id));
-    descr.setSize(size_id);
+    descriptor::Satellite* descr = new descriptor::Satellite;
+    descr->setRace(int_t(race_id));
+    //descr->setType(int_t(type_id));
+    descr->setSize(size_id);
 
-    descr.setSpace(space);
-    descr.setArmor(armor);
-    descr.setProtection(protection);
+    descr->setSpace(space);
+    descr->setArmor(armor);
+    descr->setProtection(protection);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setTemperature(temperature);
+    descr->setTemperature(temperature);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setPrice(price);
+    descr->setPrice(price);
 
-    descr.setBakSlotNum(slot_bak_num);
-    descr.setDriveSlotNum(slot_drive_num);
-    descr.setDroidSlotNum(slot_droid_num);
+    descr->setBakSlotNum(slot_bak_num);
+    descr->setDriveSlotNum(slot_drive_num);
+    descr->setDroidSlotNum(slot_droid_num);
 #ifdef USE_EXTRA_EQUIPMENT
-    descr.setEnergizerSlotNum(slot_energizer_num);
-    descr.setFreezerSlotNum(slot_freezer_num);
+    descr->setEnergizerSlotNum(slot_energizer_num);
+    descr->setFreezerSlotNum(slot_freezer_num);
 #endif // USE_EXTRA_EQUIPMENT
-    descr.setGrappleSlotNum(slot_grapple_num);
-    descr.setProtectorSlotNum(slot_protector_num);
-    descr.setRadarSlotNum(slot_radar_num);
-    descr.setScanerSlotNum(slot_scaner_num);
-    descr.setWeaponSlotNum(slot_weapon_num);
-    descr.setArtefactSlotNum(slot_artefact_num);
-    descr.setCargoSlotNum(slot_cargo_num);
+    descr->setGrappleSlotNum(slot_grapple_num);
+    descr->setProtectorSlotNum(slot_protector_num);
+    descr->setRadarSlotNum(slot_radar_num);
+    descr->setScanerSlotNum(slot_scaner_num);
+    descr->setWeaponSlotNum(slot_weapon_num);
+    descr->setArtefactSlotNum(slot_artefact_num);
+    descr->setCargoSlotNum(slot_cargo_num);
 
     //int size_threshold = 2;
-    descr.setDrawTurrels(false);
+    descr->setDrawTurrels(false);
 
     resolveId(descr);
-
 
     return descr;
 }
@@ -569,7 +566,7 @@ getNewSatellite()
 
 /* items */
 namespace {
-void addItemCommonFields(descriptor::BaseOLD& descr,
+void addItemCommonFields(descriptor::BaseOLD* descr,
                          int race,
                          int tech_level,
                          int modules_num_max,
@@ -577,20 +574,20 @@ void addItemCommonFields(descriptor::BaseOLD& descr,
                          int condition_max,
                          int deterioration,
                          int price) {
-    descr.add(descriptor::Key::RACE, race);
-    descr.add(descriptor::Key::TECH, tech_level);
-    descr.add(descriptor::Key::MODULES_NUM, modules_num_max);
-    descr.add(descriptor::Key::MASS, mass);
-    descr.add(descriptor::Key::CONDITION_MAX, condition_max);
-    descr.add(descriptor::Key::DETERIORATION, deterioration);
-    descr.add(descriptor::Key::PRICE, price);
+    descr->add(descriptor::Key::RACE, race);
+    descr->add(descriptor::Key::TECH, tech_level);
+    descr->add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descr->add(descriptor::Key::MASS, mass);
+    descr->add(descriptor::Key::CONDITION_MAX, condition_max);
+    descr->add(descriptor::Key::DETERIORATION, deterioration);
+    descr->add(descriptor::Key::PRICE, price);
 }
 } // namespace
 
 
 namespace item {
 
-descriptor::item::Bak
+descriptor::item::Bak*
 getNewBak(int race, int tech_level)
 {
     if (race == NONE) {
@@ -612,27 +609,26 @@ getNewBak(int race, int tech_level)
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT, revision_id)
 
-    descriptor::item::Bak descr;
+    descriptor::item::Bak* descr = new descriptor::item::Bak;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Bak
-    descr.setFuel(fuel);
+    descr->setFuel(fuel);
 
     resolveId(descr);
-
 
     return descr;
 }
 
 
-descriptor::item::Drive
+descriptor::item::Drive*
 getNewDrive(int race, int tech_level)
 {
     if (race == NONE) {
@@ -653,27 +649,26 @@ getNewDrive(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT);
 
-    descriptor::item::Drive descr;
+    descriptor::item::Drive* descr = new descriptor::item::Drive;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Drive
-    descr.setSpeed(speed);
-    descr.setHyper(hyper);
+    descr->setSpeed(speed);
+    descr->setHyper(hyper);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Droid
+descriptor::item::Droid*
 getNewDroid(int race, int tech_level)
 {
     if (race == NONE) {
@@ -693,27 +688,26 @@ getNewDroid(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
-    descriptor::item::Droid descr;
+    descriptor::item::Droid* descr = new descriptor::item::Droid;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Droid
-    descr.setRepair(repair);
+    descr->setRepair(repair);
 
     resolveId(descr);
-
 
     return descr;
 }
 
 
-descriptor::item::Grapple
+descriptor::item::Grapple*
 getNewGrapple(int race, int tech_level)
 {
     if (race == NONE) {
@@ -736,29 +730,28 @@ getNewGrapple(int race, int tech_level)
     int radius     = meti::getRandInt(descriptor::item::Grapple::RADIUS_MIN,   descriptor::item::Grapple::RADIUS_MAX)   * (1 + descriptor::item::Grapple::RADIUS_TECH_RATE * (int)tech_level);
     int speed      = meti::getRandInt(descriptor::item::Grapple::SPEED_MIN,    descriptor::item::Grapple::SPEED_MAX)    * (1 + descriptor::item::Grapple::SPEED_TECH_RATE * (int)tech_level);
 
-    descriptor::item::Grapple descr;
+    descriptor::item::Grapple* descr = new descriptor::item::Grapple;
 
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Grapple
-    descr.setStrength(strength);
-    descr.setRadius(radius);
-    descr.setSpeed(speed);
+    descr->setStrength(strength);
+    descr->setRadius(radius);
+    descr->setSpeed(speed);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Lazer
+descriptor::item::Lazer*
 getNewLazer(int race, int tech_level)
 {
     if (race == NONE) {
@@ -779,27 +772,26 @@ getNewLazer(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
-    descriptor::item::Lazer descr;
+    descriptor::item::Lazer* descr = new descriptor::item::Lazer;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Lazer
-    descr.setDamage(damage);
-    descr.setRadius(radius);
+    descr->setDamage(damage);
+    descr->setRadius(radius);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Protector
+descriptor::item::Protector*
 getNewProtector(int race, int tech_level)
 {
     if (race == NONE) {
@@ -820,26 +812,25 @@ getNewProtector(int race, int tech_level)
 
     int protection = meti::getRandInt(descriptor::item::Protector::PROTECTION_MIN, descriptor::item::Protector::PROTECTION_MAX);
 
-    descriptor::item::Protector descr;
+    descriptor::item::Protector* descr = new descriptor::item::Protector;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Protector
-    descr.setProtection(protection);
+    descr->setProtection(protection);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Radar
+descriptor::item::Radar*
 getNewRadar(int race, int tech_level)
 {
     if (race == NONE) {
@@ -860,26 +851,25 @@ getNewRadar(int race, int tech_level)
 
     int radius = meti::getRandInt(descriptor::item::Radar::RADIUS_MIN, descriptor::item::Radar::RADIUS_MAX);
 
-    descriptor::item::Radar descr;
+    descriptor::item::Radar* descr = new descriptor::item::Radar;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Radar
-    descr.setRadius(radius);
+    descr->setRadius(radius);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Rocket
+descriptor::item::Rocket*
 getNewRocket(int race, int tech_level)
 {
     if (race == NONE) {
@@ -902,28 +892,27 @@ getNewRocket(int race, int tech_level)
     int damage = meti::getRandInt(descriptor::item::Rocket::DAMAGE_MIN, descriptor::item::Rocket::DAMAGE_MAX);
     int radius = meti::getRandInt(descriptor::item::Rocket::RADIUS_MIN, descriptor::item::Rocket::RADIUS_MAX);
 
-    descriptor::item::Rocket descr;
+    descriptor::item::Rocket* descr = new descriptor::item::Rocket;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Rocket
-    descr.setAmmo(ammo);
-    descr.setDamage(damage);
-    descr.setRadius(radius);
+    descr->setAmmo(ammo);
+    descr->setDamage(damage);
+    descr->setRadius(radius);
 
     resolveId(descr);
-
 
     return descr;
 }
 
-descriptor::item::Scaner
+descriptor::item::Scaner*
 getNewScaner(int race, int tech_level)
 {
     if (race == NONE) {
@@ -944,21 +933,20 @@ getNewScaner(int race, int tech_level)
 
     int scan = meti::getRandInt(descriptor::item::Scaner::SCAN_MIN, descriptor::item::Scaner::SCAN_MAX) * (1 + descriptor::item::Scaner::SCAN_TECH_RATE * int(tech_level));
 
-    descriptor::item::Scaner descr;
+    descriptor::item::Scaner* descr = new descriptor::item::Scaner;
     // descriptor::Item
-    descr.setMass(mass);
-    descr.setCondition(condition);
-    descr.setDeterioration(deterioration);
-    descr.setPrice(price);
+    descr->setMass(mass);
+    descr->setCondition(condition);
+    descr->setDeterioration(deterioration);
+    descr->setPrice(price);
 
     // descriptor::Equipment
-    descr.setModules(modules);
+    descr->setModules(modules);
 
     // descriptor::item::Radar
-    descr.setScan(scan);
+    descr->setScan(scan);
 
     resolveId(descr);
-
 
     return descr;
 }
@@ -966,7 +954,7 @@ getNewScaner(int race, int tech_level)
 } // anemspace item
 
 
-descriptor::BaseOLD
+descriptor::BaseOLD*
 getNewBomb(int damage, int radius)
 {
     if (damage == NONE) {
@@ -976,11 +964,11 @@ getNewBomb(int damage, int radius)
         radius = meti::getRandInt(100, 300);
     }
 
-    descriptor::BaseOLD descriptor(descriptor::Type::BOMB);
-    descriptor.add(descriptor::Key::DAMAGE, damage);
-    descriptor.add(descriptor::Key::RADIUS, radius);
+    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::Type::BOMB);
+    descr->add(descriptor::Key::DAMAGE, damage);
+    descr->add(descriptor::Key::RADIUS, radius);
 
-    return descriptor;
+    return descr;
 }
 
 } // namespace descriptor

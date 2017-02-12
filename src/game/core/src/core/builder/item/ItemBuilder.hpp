@@ -32,7 +32,7 @@ namespace builder {
 class Item
 {
 protected:
-    static void _createInternals(model::Item*, const descriptor::Item&);
+    static void _createInternals(model::Item*, descriptor::Item*);
 
 private:
     Item() = delete;

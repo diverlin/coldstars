@@ -28,22 +28,22 @@ namespace item {
 model::item::Lazer*
 Lazer::getNew()
 {
-    const descriptor::item::Lazer& descr = core::global::get().descriptors().lazer().random();
+    descriptor::item::Lazer* descr = core::global::get().descriptors().lazer().random();
     return getNew(descr);
 }
 
-model::item::Lazer*
-Lazer::getNew(const std::string& data)
-{
-    descriptor::item::Lazer descr(data);
-    assert(descr.descriptor() != descriptor::type::LAZER_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Lazer*
+//Lazer::getNew(const std::string& data)
+//{
+//    descriptor::item::Lazer descr(data);
+//    assert(descr->descriptor() != descriptor::type::LAZER_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Lazer*
-Lazer::getNew(const descriptor::item::Lazer& descr)
+Lazer::getNew(descriptor::item::Lazer* descr)
 {
-    model::item::Lazer* model = __createTemplate(descr.id());
+    model::item::Lazer* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -57,12 +57,12 @@ Lazer::__createTemplate(int_t descriptor_id)
 } 
 
 void
-Lazer::__createInternals(model::item::Lazer* model, const descriptor::item::Lazer& descr)
+Lazer::__createInternals(model::item::Lazer* model, descriptor::item::Lazer* descr)
 {     
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setDamage(descr.damage());
-    model->setRadius(descr.radius());
+    model->setDamage(descr->damage());
+    model->setRadius(descr->radius());
 
     assert(false);
 //    if (race_id == race::type::NONE) {

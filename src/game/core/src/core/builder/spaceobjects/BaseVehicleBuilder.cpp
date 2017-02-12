@@ -56,9 +56,6 @@
 
 #include <descriptor/DescriptorGenerator.hpp>
 
-BaseVehicle::BaseVehicle()
-{}
-     
 void BaseVehicle::_createSlots(Vehicle* vehicle)
 {     
     assert(false);
@@ -138,7 +135,7 @@ void BaseVehicle::_createSlots(Vehicle* vehicle)
 //    }
 }
 
-void BaseVehicle::equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor)
+void BaseVehicle::equip(Vehicle* vehicle, descriptor::BaseOLD* descriptor)
 {
 //    entity::Type type = (entity::Type)descriptor.type();
 //    switch(type) {

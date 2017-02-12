@@ -44,15 +44,15 @@ class Lazer : public Equipment
 {
 public:
     static model::item::Lazer* getNew();
-    static model::item::Lazer* getNew(const std::string&);
-    static model::item::Lazer* getNew(const descriptor::item::Lazer&);
+//    static model::item::Lazer* getNew(const std::string&);
+    static model::item::Lazer* getNew(descriptor::item::Lazer*);
 
 private:
     Lazer() = delete;
     ~Lazer() = delete;
 
     static model::item::Lazer* __createTemplate(int_t);
-    static void __createInternals(model::item::Lazer*, const descriptor::item::Lazer&);
+    static void __createInternals(model::item::Lazer*, descriptor::item::Lazer*);
 }; 
 
 } // namespace item

@@ -29,24 +29,24 @@ namespace item {
 model::item::Droid*
 Droid::getNew()
 {
-    const descriptor::item::Droid& descr = core::global::get().descriptors().droid().random();
-    model::item::Droid* model = __createTemplate(descr.id());
+    descriptor::item::Droid* descr = core::global::get().descriptors().droid().random();
+    model::item::Droid* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
-model::item::Droid*
-Droid::getNew(const std::string& data)
-{
-    descriptor::item::Droid descr(data);
-    assert(descr.descriptor() != descriptor::type::DROID_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Droid*
+//Droid::getNew(const std::string& data)
+//{
+//    descriptor::item::Droid descr(data);
+//    assert(descr->descriptor() != descriptor::type::DROID_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Droid*
-Droid::getNew(const descriptor::item::Droid& descr)
+Droid::getNew(descriptor::item::Droid* descr)
 {
-    model::item::Droid* model = __createTemplate(descr.id());
+    model::item::Droid* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }  
@@ -59,11 +59,11 @@ Droid::__createTemplate(int_t descriptor_id)
     return model;
 }
 
-void Droid::__createInternals(model::item::Droid* model, const descriptor::item::Droid& descr)
+void Droid::__createInternals(model::item::Droid* model, descriptor::item::Droid* descr)
 {     
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setRepair(descr.repair());
+    model->setRepair(descr->repair());
 }
 
 } // namespace item

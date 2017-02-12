@@ -39,16 +39,16 @@ namespace {
 template<typename T1, typename T2>
 void validate(const T1& descr, T2* view) {
 
-    descriptor::Material* material_descr = core::global::get().descriptors().material().get(descr.texture());
-    descriptor::Mesh* mesh_descr = core::global::get().descriptors().mesh().get(descr.mesh());
+    descriptor::Material* material_descr = core::global::get().descriptors().material().get(descr->texture());
+    descriptor::Mesh* mesh_descr = core::global::get().descriptors().mesh().get(descr->mesh());
 
-    EXPECT_NE(descr.texture(), -1);
+    EXPECT_NE(descr->texture(), -1);
     EXPECT_NE(material_descr->path(), "");
-    EXPECT_EQ(descr.texture(), view->model()->material());
+    EXPECT_EQ(descr->texture(), view->model()->material());
 
-    EXPECT_NE(descr.mesh(), -1);
+    EXPECT_NE(descr->mesh(), -1);
     EXPECT_NE(mesh_descr->modelPath(), "");
-    EXPECT_EQ(descr.mesh(), view->model()->mesh());
+    EXPECT_EQ(descr->mesh(), view->model()->mesh());
 }
 
 } // namespace

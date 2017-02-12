@@ -34,10 +34,10 @@ public:
     ~BombBuilder();
 
     static Bomb* getNew();
-    static Bomb* getNew(const descriptor::BaseOLD&);
+    static Bomb* getNew(descriptor::BaseOLD*);
 
 private:
-    static void __createInternals(Bomb*, const descriptor::BaseOLD&);
+    static void __createInternals(Bomb*, descriptor::BaseOLD*);
 }; 
 
 

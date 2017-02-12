@@ -35,15 +35,15 @@ namespace builder {
 class Starsystem
 {
 public:
-    Starsystem();
-    ~Starsystem();
-
     static model::Starsystem* create();
-    static model::Starsystem* create(const descriptor::Starsystem&);
+    static model::Starsystem* create(descriptor::Starsystem*);
     static model::Starsystem* create(const std::string&);
 
 private:
-    static void __createInternals(model::Starsystem*, const descriptor::Starsystem&);
+    Starsystem()=delete;
+    ~Starsystem()=delete;
+
+    static void __createInternals(model::Starsystem*, descriptor::Starsystem*);
 
     static void __createBackground(model::Starsystem*, int, int, int);
     static void __createStar(model::Starsystem*);

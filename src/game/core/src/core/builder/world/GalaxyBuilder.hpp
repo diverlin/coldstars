@@ -32,13 +32,13 @@ namespace builder {
 class Galaxy
 {
 public:
-    Galaxy();
-    ~Galaxy();
-
-    static model::Galaxy* create(const descriptor::Galaxy&);
+    static model::Galaxy* create(descriptor::Galaxy*);
 
 private:
-    static void __createInternals(model::Galaxy*, const descriptor::Galaxy&);
+    Galaxy() = delete;
+    ~Galaxy() = delete;
+
+    static void __createInternals(model::Galaxy*, descriptor::Galaxy*);
     static model::Galaxy* __createTemplate();
 }; 
 

@@ -29,22 +29,22 @@ namespace item {
 model::item::Grapple*
 Grapple::getNew()
 {
-    const descriptor::item::Grapple& descr = core::global::get().descriptors().grapple().random();
+    descriptor::item::Grapple* descr = core::global::get().descriptors().grapple().random();
     return getNew(descr);
 }
 
-model::item::Grapple*
-Grapple::getNew(const std::string& data)
-{
-    descriptor::item::Grapple descr(data);
-    assert(descr.descriptor() != descriptor::type::GRAPPLE_EQUIPMENT);
-    return getNew(descr);
-}
+//model::item::Grapple*
+//Grapple::getNew(const std::string& data)
+//{
+//    descriptor::item::Grapple descr(data);
+//    assert(descr->descriptor() != descriptor::type::GRAPPLE_EQUIPMENT);
+//    return getNew(descr);
+//}
 
 model::item::Grapple*
-Grapple::getNew(const descriptor::item::Grapple& descr)
+Grapple::getNew(descriptor::item::Grapple* descr)
 {
-    model::item::Grapple* model = __createTemplate(descr.id());
+    model::item::Grapple* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
@@ -58,13 +58,13 @@ Grapple::__createTemplate(int_t descriptor_id)
 }
 
 void
-Grapple::__createInternals(model::item::Grapple* model, const descriptor::item::Grapple& descr)
+Grapple::__createInternals(model::item::Grapple* model, descriptor::item::Grapple* descr)
 {
     Item::_createInternals(model, descr);
     Equipment::_createInternals(model, descr);
-    model->setStrength(descr.strength());
-    model->setRadius(descr.radius());
-    model->setSpeed(descr.speed());
+    model->setStrength(descr->strength());
+    model->setRadius(descr->radius());
+    model->setSpeed(descr->speed());
 }
 
 } // namespace item
