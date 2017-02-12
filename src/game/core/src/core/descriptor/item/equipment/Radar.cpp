@@ -42,6 +42,7 @@ const float Radar::MODULES_NUM_WEIGHT = 0.4;
 Radar::Radar()
 {
     setDescriptor(descriptor::type::RADAR_EQUIPMENT);
+    setSlotType(entity::type::RADAR_SLOT_ID);
 }
 
 Radar::Radar(const std::string& data)

@@ -593,7 +593,7 @@ getNewBak(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Drive
@@ -631,7 +631,7 @@ getNewDrive(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Drive
@@ -668,7 +668,7 @@ getNewDroid(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Droid
@@ -709,7 +709,7 @@ getNewGrapple(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Grapple
@@ -748,7 +748,7 @@ getNewLazer(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Lazer
@@ -786,7 +786,7 @@ getNewProtector(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Protector
@@ -823,7 +823,7 @@ getNewRadar(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Radar
@@ -862,7 +862,7 @@ getNewRocket(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Radar
@@ -901,7 +901,7 @@ getNewScaner(int race, int tech_level)
     descr.setDeterioration(deterioration);
     descr.setPrice(price);
 
-    // descriptor::item::BaseEquipment
+    // descriptor::Equipment
     descr.setModules(modules);
 
     // descriptor::Radar

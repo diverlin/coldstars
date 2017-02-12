@@ -46,7 +46,7 @@ class Npc;
 class Item;
 } //namespace control
 
-class BaseEquipment;
+class Equipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 

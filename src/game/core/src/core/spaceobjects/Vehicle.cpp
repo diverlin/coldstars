@@ -374,7 +374,7 @@ bool Vehicle::installModule(item::Base* item)
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
         if (m_SlotFunct_vec[i]->item()) {
             if (m_SlotFunct_vec[i]->item()->subTypeId() == item->parentSubTypeId()) {
-                return ((BaseEquipment*)m_SlotFunct_vec[i]->item())->InsertModule((BaseModule*)item);
+                return ((Equipment*)m_SlotFunct_vec[i]->item())->InsertModule((BaseModule*)item);
             }
         }
     }
@@ -1916,7 +1916,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
 //        if (m_SlotFunct_vec[i]->item()) {
 //            if (m_SlotFunct_vec[i]->item()->subTypeId() == item->parentSubTypeId()) {
-//                return ((BaseEquipment*)m_SlotFunct_vec[i]->item())->InsertModule((BaseModule*)item);
+//                return ((Equipment*)m_SlotFunct_vec[i]->item())->InsertModule((BaseModule*)item);
 //            }
 //        }
 //    }
