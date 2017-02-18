@@ -18,26 +18,29 @@
 
 #pragma once
 
-class Vehicle;
+//namespace control {
+//class Vehicle;
+//} // namespace control
+
 class ItemSlot; 
 
 class ProtectionComplex
 {
-    public:
-        ProtectionComplex();
-        ~ProtectionComplex();
+public:
+    ProtectionComplex();
+    ~ProtectionComplex();
 
-        void SetOwnerVehicle(Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
-        void SetProtectorSlot(ItemSlot* protector_slot) { m_protector_slot = protector_slot; }
+//    void setOwnerVehicle(control::Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
+    void SetProtectorSlot(ItemSlot* protector_slot) { m_protector_slot = protector_slot; }
 
-        ItemSlot* protectorSlot()    const { return m_protector_slot; }
-//        ShieldEffect* GetShieldEffect() const { return shield_effect; }
+    ItemSlot* protectorSlot()    const { return m_protector_slot; }
+    //        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
-    private:
-        Vehicle* m_owner_vehicle;
+private:
+//    control::Vehicle* m_owner_vehicle = nullptr;
 
-        ItemSlot* m_protector_slot;
-        //            ShieldEffect* shield_effect;
+    ItemSlot* m_protector_slot = nullptr;
+    //            ShieldEffect* shield_effect;
 };
 
 
