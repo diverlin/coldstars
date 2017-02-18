@@ -23,7 +23,10 @@
 
 #include <vector>
 
+namespace control {
 class Vehicle;
+} // namespace control
+
 namespace jeti {
 class DriveEffect;
 }
@@ -48,7 +51,7 @@ public:
     DriveComplex();
     ~DriveComplex();
 
-    void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
+    void setOwnerVehicle(control::Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
     void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
     void SetDriveSlot(control::ItemSlot* drive_slot) { m_driveSlot = drive_slot; }
@@ -82,7 +85,7 @@ private:
     control::ItemSlot* m_driveSlot = nullptr;
     control::ItemSlot* m_bakSlot = nullptr;
 
-    Vehicle* m_ownerVehicle = nullptr;
+    control::Vehicle* m_ownerVehicle = nullptr;
     model::SpaceObject* m_target = nullptr;
 
     jeti::DriveEffect* m_effectDrive = nullptr;

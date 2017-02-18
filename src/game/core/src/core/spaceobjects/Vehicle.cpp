@@ -86,10 +86,9 @@ Vehicle::Vehicle(model::Vehicle* model)
       SpaceObject(model)
     , m_model_vehicle(model)
 {
-    assert(false);
-    //    model()->weaponComplex()->SetOwnerVehicle(this);
-    //    model()->driveComplex().SetOwnerVehicle(this);
-    //    model()->protectorComplex().SetOwnerVehicle(this);
+//    weaponComplex().setOwnerVehicle(this);
+    driveComplex().setOwnerVehicle(this);
+//    protectorComplex().setOwnerVehicle(this);
 }
 
 /* virtual */
