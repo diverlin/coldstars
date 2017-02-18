@@ -73,22 +73,23 @@ public:
     ~Base() = default;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const entity::type& type)   { m_type = type; }
-    void setSubType(const entity::type& subtype) { m_subtype = subtype; }
-    void setSubSubType(const entity::type& subsubtype) { m_subsubtype = subsubtype; }
+    void setType(const entity::type& type)   { m_obType = type; }
+    void setSubType(const entity::type& subtype) { m_obSubtype = subtype; }
+    void setSubSubType(const entity::type& subsubtype) { m_obSubsubtype = subsubtype; }
 
     int_t id() const { return m_id; }
     descriptor::type descriptor() const { return m_descriptorType; }
-    const entity::type& type() const { return m_type; }
-    const entity::type& subtype() const { return m_subtype; }
-    const entity::type& subsubtype() const { return m_subsubtype; }
+    const entity::type& obType() const { return m_obType; }
+    const entity::type& obSubtype() const { return m_obSubtype; }
+    const entity::type& obSubsubtype() const { return m_obSubsubtype; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
         result += std::string(" id = ") + std::to_string(m_id) + "\n";
-        result += std::string(" type = ") + to_string(m_type) + "\n";
-        result += std::string(" subtype = ") + to_string(m_subtype) + "\n";
-        result += std::string(" subsubtype = ") + to_string(m_subsubtype) + "\n";
+        result += std::string(" type = ") + to_string(m_descriptorType) + "\n";
+        result += std::string(" obType = ") + to_string(m_obType) + "\n";
+        result += std::string(" obSubtype = ") + to_string(m_obSubtype) + "\n";
+        result += std::string(" obSubsubtype = ") + to_string(m_obSubsubtype) + "\n";
         return result;
     }
 
@@ -98,9 +99,9 @@ protected:
 private:
     int_t m_id = NONE;
     descriptor::type m_descriptorType = descriptor::type::NONE;
-    entity::type m_type = entity::type::NONE;
-    entity::type m_subtype = entity::type::NONE;
-    entity::type m_subsubtype = entity::type::NONE;
+    entity::type m_obType = entity::type::NONE;
+    entity::type m_obSubtype = entity::type::NONE;
+    entity::type m_obSubsubtype = entity::type::NONE;
 
 private:
     friend class boost::serialization::access;
@@ -108,9 +109,9 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_id;
         ar & m_descriptorType;
-        ar & m_type;
-        ar & m_subtype;
-        ar & m_subsubtype;
+        ar & m_obType;
+        ar & m_obSubtype;
+        ar & m_obSubsubtype;
     }
 };
 
