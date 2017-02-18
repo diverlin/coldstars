@@ -63,26 +63,11 @@ void Bak::updateProperties()
     m_fuelMax = descriptor()->fuel() + m_fuelMax_add;
 }
 
-void Bak::countPrice()
-{
-//    float fuel_rate          = (float)descriptor()->fuel() / descriptor::item::Bak::FUEL_MIN;
-//    float modules_num_rate   = (float)modulesNum() / descriptor::item::Bak::MODULES_NUM_MAX;
-    
-//    float effectiveness_rate = descriptor::item::Bak::FUEL_WEIGHT * fuel_rate +
-//                               descriptor::item::Bak::MODULES_NUM_WEIGHT * modules_num_rate;
-    
-//    float mass_rate          = (float)m_data.mass / descriptor::item::Bak::MASS_MIN;
-//    float condition_rate     = (float)m_condition / m_data.condition_max;
-    
-//    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
-}
-
 void Bak::addUniqueInfo()
 {
 //    info.addTitleStr("BAK");
 //    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
-
 
 std::string Bak::fuelStr()
 {
