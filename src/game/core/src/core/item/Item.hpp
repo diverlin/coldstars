@@ -18,12 +18,7 @@
 
 #pragma once
 
-#include <common/Base.hpp>
-#include <ceti/Orientation.hpp>
-
-#include <ceti/type/IdType.hpp>
-#include <types/TechLevelTypes.hpp>
-#include <types/RaceTypes.hpp>
+#include <core/common/Base.hpp>
 
 namespace descriptor {
 class Item;
@@ -48,35 +43,9 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-//    void setParentSubTypeId(entity::type parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
-//    void setItemCommonData(const ItemCommonData& data_item)
-//    {
-//        m_data = data_item;
-//        m_deterioration = data_item.deterioration;
-//        setCondition(data_item.condition_max);
-//    }
     void setSlot(control::ItemSlot* slot)  { m_slot = slot; }
-//    void setCondition(int condition) { m_condition = condition; }
 
     control::ItemSlot* slot() const { return m_slot; }
-
-//    virtual int radius() const { return 0; }
-//    virtual int damage() const { return 0; }
-
-//    int mass()          const { return m_data.mass; }
-//    int condition()     const { return m_condition; }
-//    int price()         const { return m_price; }
-//    int basePrice()     const { return m_data.price; }
-//    int deterioration() const { return m_data.deterioration; }
-
-//    [[deprecated("remove")]]
-//    int modulesNum() const { return m_data.modules_num; }
-//    int descriptor() const { return m_data.descriptor_type; }
-
-//    tech::type tech() const { return m_data.tech; }
-
-//    entity::type parentSubtype() const { return m_parent_subtype_id; }
-//    race::type race() const { return m_race_id; }
 
     bool isDamaged() const;
     bool isLocked() const;
@@ -101,27 +70,10 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-//    race::type m_race_id = race::type::NONE;
-
-//    int m_locked_turns = 0;
-//    int m_condition = 0;
-//    int m_price = 0;
-//    int m_deterioration = 0;
-
-//    entity::type m_parent_subtype_id = entity::type::NONE;
-
-//    ItemCommonData m_data;
-//    UnresolvedDataBase m_data_unresolved_Base;
-    //        InfoTable info;
-
     void _updateLock();
 
     virtual void AddCommonInfo()=0;
     virtual void addUniqueInfo()=0;
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
 
 public:
     model::Item* model() const { return m_model_item; }

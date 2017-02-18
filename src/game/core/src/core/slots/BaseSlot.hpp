@@ -18,27 +18,43 @@
 
 #pragma once
 
-#include <common/Base.hpp>
+#include <core/common/Base.hpp>
 
 #include <ceti/type/IdType.hpp>
 
 #include <glm/glm.hpp>
 
-//#include <spaceobjects/Vehicle.hpp>
-
 namespace control {
 class Vehicle;
 } // namespace control
 
-namespace model {
 
-class BaseSlot : public model::Base
+namespace descriptor {
+
+class BaseSlot : public Base
 {
 public:
     BaseSlot() = default;
     ~BaseSlot() = default;
-//    BaseSlot(const std::string& data);
-//    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+    }
+};
+
+} // namespace descriptor
+
+
+namespace model {
+
+class BaseSlot : public Base
+{
+public:
+    BaseSlot() = default;
+    ~BaseSlot() = default;
 
     void setOwner(int_t owner) { m_owner = owner; }
 
@@ -60,7 +76,7 @@ private:
 
 namespace control {
 
-class BaseSlot : public control::Base
+class BaseSlot : public Base
 {
 public:
     [[depreacted("temprorary code refactor workaround")]]
@@ -70,7 +86,7 @@ public:
 
 //    void setOwner(Base* owner) { m_owner = owner; }
     void setPosition(const glm::vec2& position) { m_position = position; }
-    void setSelected(bool selected) { m_selected = selected; m_selected; }
+    void setSelected(bool selected) { m_selected = selected; }
     void selectEvent() { m_selected = true; }
     void deselectEvent() { m_selected = false; }
 

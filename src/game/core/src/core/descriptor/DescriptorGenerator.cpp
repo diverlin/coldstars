@@ -1054,7 +1054,7 @@ getNewScaner(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT);
 
-    int scan = meti::getRandInt(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + Scaner::SCAN_TECH_RATE * int(tech_level));
+    int scan = meti::getRandInt(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + int(Scaner::SCAN_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int scan, int modules, int mass, int condition) {
         float scan_rate          = float(scan) / Scaner::SCAN_MIN;

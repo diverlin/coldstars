@@ -44,6 +44,21 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
+namespace descriptor {
+
+
+ItemSlot::ItemSlot(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+ItemSlot::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace descriptor
 
 namespace model {
 

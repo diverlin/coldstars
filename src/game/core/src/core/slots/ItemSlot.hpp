@@ -62,10 +62,32 @@ class FreezerModule;
 class ScanerModule;
 class DriveModule; 
 class GrappleModule; 
-#endif
+#endif // USE_MODULES
 
 class Bomb; 
 class GoodsPack; 
+
+
+namespace descriptor {
+
+class ItemSlot : public BaseSlot
+{
+public:
+    ItemSlot() = default;
+    ~ItemSlot() = default;
+    ItemSlot(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseSlot>(*this);
+    }
+};
+
+} // namespace descriptor
+
 
 namespace model {
 
@@ -82,9 +104,9 @@ public:
     void setTarget(int_t target) { m_target = target; }
     void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
 
+    int_t item() const { return m_item; }
     int_t target() const { return m_target; }
     int_t subtarget() const { return m_subtarget; }
-    int_t item() const { return m_item; }
 
 private:
     int_t m_item = NONE;
