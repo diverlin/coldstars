@@ -190,7 +190,7 @@ void EntityManager::reg(model::Base* model)
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
     if (m_models.find(model->id()) != m_models.end()) {
-        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(model->id()) + " which already exists, type = " + model->typeInfo());
+        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(model->id()) + " which already exists, descriptor = " + std::to_string(model->descriptor()));
     }
 
     m_models.insert(std::make_pair(model->id(), model));

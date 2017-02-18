@@ -31,8 +31,8 @@ namespace model {
 
 Satellite::Satellite()
 {
-    setType(entity::type::VEHICLE);
-    setSubType(entity::type::SATELLITE);
+//    setType(entity::type::VEHICLE);
+//    setSubType(entity::type::SATELLITE);
 }
 
 Satellite::~Satellite()

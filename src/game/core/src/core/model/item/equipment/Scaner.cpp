@@ -26,8 +26,8 @@ namespace item {
 Scaner::Scaner(int_t descriptor)
 {
     setDescriptor(descriptor);
-    setType(entity::type::EQUIPMENT);
-    setSubType(entity::type::SCANER_EQUIPMENT);
+//    setType(entity::type::EQUIPMENT);
+//    setSubType(entity::type::SCANER_EQUIPMENT);
 }
 
 Scaner::Scaner(const std::string& data)

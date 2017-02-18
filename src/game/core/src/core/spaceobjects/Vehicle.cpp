@@ -656,39 +656,40 @@ void Vehicle::DockingEvent()
 
     model()->weaponComplex().deactivateWeapons();
 
-    switch(model()->driveComplex().target()->type())
-    {
-    case entity::type::PLANET:
-    {
-        //        Planet* planet = ((Planet*)model()->driveComplex().target());
-        //        planet->GetLand()->AddVehicle(this);
+    assert(false);
+//    switch(model()->driveComplex().target()->type())
+//    {
+//    case entity::type::PLANET:
+//    {
+//        //        Planet* planet = ((Planet*)model()->driveComplex().target());
+//        //        planet->GetLand()->AddVehicle(this);
 
-        break;
-    }
+//        break;
+//    }
 
-    case entity::type::VEHICLE:
-    {
-        switch(model()->driveComplex().target()->subtype())
-        {
-        case entity::type::SPACESTATION:
-        {
-            SpaceStation* spacestation = ((SpaceStation*)model()->driveComplex().target());
-            assert(false);
-            //spacestation->land()->AddVehicle(this);
+//    case entity::type::VEHICLE:
+//    {
+//        switch(model()->driveComplex().target()->subtype())
+//        {
+//        case entity::type::SPACESTATION:
+//        {
+//            SpaceStation* spacestation = ((SpaceStation*)model()->driveComplex().target());
+//            assert(false);
+//            //spacestation->land()->AddVehicle(this);
 
-            break;
-        }
+//            break;
+//        }
 
-        case entity::type::SHIP:
-        {
-            //..
-            break;
-        }
-        }
+//        case entity::type::SHIP:
+//        {
+//            //..
+//            break;
+//        }
+//        }
 
-        break;
-    }
-    }
+//        break;
+//    }
+//    }
 
     model()->driveComplex().ResetTarget();
 }

@@ -56,15 +56,15 @@ Base::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-std::string Base::typeInfo() const
-{
-    std::string text;
-    text += "id = (" + std::to_string(id());
-    text += " | " + to_string(type());
-    text += " | " + to_string(subtype());
-    text += " | " + to_string(subsubtype()) + " )";
-    return text;
-}
+//std::string Base::typeInfo() const
+//{
+//    std::string text;
+//    text += "id = (" + std::to_string(id());
+//    text += " | " + to_string(type());
+//    text += " | " + to_string(subtype());
+//    text += " | " + to_string(subsubtype()) + " )";
+//    return text;
+//}
 
 
 } // namespace model

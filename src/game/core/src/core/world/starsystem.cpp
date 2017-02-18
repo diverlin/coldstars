@@ -68,7 +68,7 @@ namespace model {
 
 Starsystem::Starsystem()
 {
-    setType(entity::type::STARSYSTEM);
+//    setType(entity::type::STARSYSTEM);
 
     setPlace(place::type::KOSMOS);
 

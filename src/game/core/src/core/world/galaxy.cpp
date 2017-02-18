@@ -33,7 +33,7 @@ namespace model {
 
 Galaxy::Galaxy()
 {
-    setType(entity::type::GALAXY);
+//    setType(entity::type::GALAXY);
 }
 
 Galaxy::Galaxy(const std::string& data)

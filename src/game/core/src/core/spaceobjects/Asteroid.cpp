@@ -46,7 +46,7 @@ namespace model {
 
 Asteroid::Asteroid()
 {
-    setType(entity::type::ASTEROID);
+//    setType(entity::type::ASTEROID);
 }
 
 Asteroid::Asteroid(const std::string& data)

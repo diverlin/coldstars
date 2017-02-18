@@ -39,7 +39,7 @@ namespace model {
 
 Star::Star()
 {
-    setType(entity::type::STAR);
+//    setType(entity::type::STAR);
 }
 
 Star::Star(const std::string& data)

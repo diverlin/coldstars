@@ -27,8 +27,8 @@ namespace item {
 Lazer::Lazer(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-    setType(entity::type::EQUIPMENT);
-    setSubType(entity::type::LAZER_EQUIPMENT);
+//    setType(entity::type::EQUIPMENT);
+//    setSubType(entity::type::LAZER_EQUIPMENT);
 }
 
 Lazer::Lazer(const std::string& data)

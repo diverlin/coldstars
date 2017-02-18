@@ -36,8 +36,8 @@ namespace model {
 
 Ship::Ship()
 {
-    setType(entity::type::VEHICLE);
-    setSubType(entity::type::SHIP);
+//    setType(entity::type::VEHICLE);
+//    setSubType(entity::type::SHIP);
 }
 
 Ship::~Ship()

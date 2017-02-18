@@ -38,8 +38,8 @@ namespace model {
 
 SpaceStation::SpaceStation()
 {
-    setType(entity::type::VEHICLE);
-    setSubType(entity::type::SPACESTATION);
+//    setType(entity::type::VEHICLE);
+//    setSubType(entity::type::SPACESTATION);
 }
 
 SpaceStation::SpaceStation(const std::string& data)
