@@ -44,9 +44,6 @@ public:
 
     virtual void updateProperties();
 
-    void CountPrice();
-
-
 protected:
     model::item::Protector* model() const { return m_model_protector; }
     descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }

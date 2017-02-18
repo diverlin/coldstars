@@ -44,7 +44,6 @@ public:
 
 private:
     virtual void updateProperties();
-    void countPrice();
 
 protected:
     model::item::Scaner* model() const { return m_model_scaner; }

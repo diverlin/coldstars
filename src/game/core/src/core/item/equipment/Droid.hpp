@@ -46,8 +46,6 @@ private:
     virtual void updateProperties();
     virtual void updateInStatic();
 
-    void CountPrice();
-
     model::item::Droid* model() const { return m_model_droid; }
     descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
 

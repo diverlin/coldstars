@@ -48,20 +48,6 @@ void Radar::updateProperties()
     model()->setRadius(descriptor()->radius() + m_radius_add);
 }
 
-void Radar::countPrice()
-{
-//    float radius_rate         = (float)descriptor()->radius() / descriptor::item::Radar::RADIUS_MIN;
-
-//    float modules_num_rate    = (float)descriptor()->modules() / descriptor::item::Radar::MODULES_NUM_MAX;
-
-//    float effectiveness_rate  = descriptor::item::Radar::RADIUS_WEIGHT * radius_rate + descriptor::item::Radar::MODULES_NUM_WEIGHT * modules_num_rate;
-
-//    float mass_rate           = float(descriptor()->mass()) / descriptor::item::Radar::MASS_MIN;
-//    float condition_rate      = float(descriptor()->condition()) / m_data.condition_max;
-
-//    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
-}
-
 void Radar::addUniqueInfo()
 {
     //    info.addTitleStr("RADAR");

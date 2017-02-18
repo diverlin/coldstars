@@ -45,8 +45,6 @@ public:
 
     virtual void updateProperties();
 
-    void countPrice();
-
 protected:
     model::item::Radar* model() const { return m_model_radar; }
     descriptor::item::Radar* descriptor() const { return m_descriptor_radar; }
