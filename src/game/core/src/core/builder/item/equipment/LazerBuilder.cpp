@@ -64,7 +64,6 @@ Lazer::__createInternals(model::item::Lazer* model, descriptor::item::Lazer* des
     model->setDamage(descr->damage());
     model->setRadius(descr->radius());
 
-    assert(false);
 //    if (race_id == race::type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
 //    }
