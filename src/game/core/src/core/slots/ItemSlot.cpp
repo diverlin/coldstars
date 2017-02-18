@@ -503,11 +503,11 @@ bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const
 
 bool ItemSlot::checkDistanceToTarget(model::SpaceObject* target) const
 {
-    if (target->type() == entity::type::STARSYSTEM) {
-        return true;
-    }
-    
     assert(false);
+//    if (target->type() == entity::type::STARSYSTEM) {
+//        return true;
+//    }
+    
 //    float dist = meti::distance(vehicleOwner()->position(), target->position());
 //    if (dist < itemRadius())
 //    {

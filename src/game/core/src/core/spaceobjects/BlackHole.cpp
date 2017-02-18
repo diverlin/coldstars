@@ -27,7 +27,7 @@ namespace model {
 
 BlackHole::BlackHole()
 {
-    setType(entity::type::BLACKHOLE);
+//    setType(entity::type::BLACKHOLE);
 }
 
 BlackHole::BlackHole(const std::string& data)

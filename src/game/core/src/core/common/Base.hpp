@@ -128,33 +128,21 @@ public:
     std::string data() const;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const entity::type& major)   { m_identity.type = major; }
-    void setSubType(const entity::type& minor) { m_identity.subtype = minor; }
-    void setSubSubType(const entity::type& patch) { m_identity.subsubtype = patch; }
-
     void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
-    const core::Id& identity() const { return m_identity; }
     int_t id() const { return m_id; }
-    const entity::type& type() const { return m_identity.type; }
-    const entity::type& subtype() const { return m_identity.subtype; }
-    const entity::type& subsubtype() const { return m_identity.subsubtype; }
-    int_t descriptor() const { assert(m_descriptor != -1); return m_descriptor; }
+    int_t descriptor() const { return m_descriptor; }
 
-    std::string typeInfo() const;
-
-private:
-    core::Id m_identity;
-    int_t m_descriptor = NONE;
+ private:
     int_t m_id = NONE;
+    int_t m_descriptor = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_identity;
-        ar & m_descriptor;
         ar & m_id;
+        ar & m_descriptor;
     }
 };
 

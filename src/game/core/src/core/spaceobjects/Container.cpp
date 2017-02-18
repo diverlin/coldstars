@@ -40,7 +40,7 @@ namespace model {
 
 Container::Container()
 {
-    setType(entity::type::CONTAINER);
+//    setType(entity::type::CONTAINER);
 }
 
 Container::Container(const std::string& data)

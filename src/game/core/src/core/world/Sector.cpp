@@ -37,7 +37,7 @@ namespace model {
 
 Sector::Sector()
 {
-    setType(entity::type::SECTOR);
+//    setType(entity::type::SECTOR);
 }
 
 Sector::Sector(const std::string& data)

@@ -208,44 +208,45 @@ bool DriveComplex::ValidateTarget() const
 
 void DriveComplex::UpdateDynamicTargetCoord()
 {
-    switch(m_target->type())
-    {
-        case entity::type::STARSYSTEM:
-        {
-        assert(false);
-//            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
-//            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
-//            m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
+    assert(false);
+//    switch(m_target->descriptor()->type())
+//    {
+//        case entity::type::STARSYSTEM:
+//        {
+//        assert(false);
+////            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
+////            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
+////            m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
-            break;
-        }
-    
-        case entity::type::PLANET:
-        {
-            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
-            //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
-            break;
-        }
-
-        case entity::type::ASTEROID:
-        {
-        // TODO
-//            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
 //            break;
-        }
-         
-        case entity::type::VEHICLE:
-        {
-            m_TargetPos = m_target->position() + m_TargetOffset;
-            break;
-        }
+//        }
+    
+//        case entity::type::PLANET:
+//        {
+//            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
+//            //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
+//            break;
+//        }
 
-        case entity::type::CONTAINER:
-        {
-            m_TargetPos = m_target->position() + m_TargetOffset;
-            break;
-        }
-    }
+//        case entity::type::ASTEROID:
+//        {
+//        // TODO
+////            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
+////            break;
+//        }
+         
+//        case entity::type::VEHICLE:
+//        {
+//            m_TargetPos = m_target->position() + m_TargetOffset;
+//            break;
+//        }
+
+//        case entity::type::CONTAINER:
+//        {
+//            m_TargetPos = m_target->position() + m_TargetOffset;
+//            break;
+//        }
+//    }
 
     //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->center()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
 }
@@ -268,20 +269,21 @@ bool DriveComplex::CheckTargetEchievement()
 
 bool DriveComplex::GetDockingPermission()
 {
-    switch(m_target->type())
-    {
-        //case entity::Type::PLANET:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
-        case entity::type::VEHICLE:
-        {
-            switch(m_target->subtype())
-            {
-                assert(false);
-                //case entity::Type::SPACESTATION: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
-                //case SHIP:   { return targetOb->vehicle()->getPermissionToLand(); break; }
-            }
-            break;
-        }
-    }
+    assert(false);
+//    switch(m_target->type())
+//    {
+//        //case entity::Type::PLANET:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
+//        case entity::type::VEHICLE:
+//        {
+//            switch(m_target->subtype())
+//            {
+//                assert(false);
+//                //case entity::Type::SPACESTATION: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
+//                //case SHIP:   { return targetOb->vehicle()->getPermissionToLand(); break; }
+//            }
+//            break;
+//        }
+//    }
     
     return false;
 }

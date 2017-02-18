@@ -37,7 +37,7 @@ namespace model {
 
 Planet::Planet()
 {
-    setType(entity::type::PLANET);
+//    setType(entity::type::PLANET);
 }
 
 Planet::Planet(const std::string& data)

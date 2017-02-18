@@ -38,8 +38,8 @@ namespace model {
 
 RocketBullet::RocketBullet()
 {
-    setType(entity::type::BULLET);
-    setSubType(entity::type::ROCKETBULLET);
+//    setType(entity::type::BULLET);
+//    setSubType(entity::type::ROCKETBULLET);
 }
 
 RocketBullet::RocketBullet(const std::string& data)
