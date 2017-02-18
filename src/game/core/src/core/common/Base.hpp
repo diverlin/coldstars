@@ -78,7 +78,7 @@ public:
     void setSubSubType(const entity::type& subsubtype) { m_subsubtype = subsubtype; }
 
     int_t id() const { return m_id; }
-    descriptor::type descriptor() const { return m_descriptor; }
+    descriptor::type descriptor() const { return m_descriptorType; }
     const entity::type& type() const { return m_type; }
     const entity::type& subtype() const { return m_subtype; }
     const entity::type& subsubtype() const { return m_subsubtype; }
@@ -93,11 +93,11 @@ public:
     }
 
 protected:
-    void setDescriptor(descriptor::type descriptor) { m_descriptor = descriptor; }
+    void setDescriptor(descriptor::type descriptor) { m_descriptorType = descriptor; }
 
 private:
     int_t m_id = NONE;
-    descriptor::type m_descriptor = descriptor::type::NONE;
+    descriptor::type m_descriptorType = descriptor::type::NONE;
     entity::type m_type = entity::type::NONE;
     entity::type m_subtype = entity::type::NONE;
     entity::type m_subsubtype = entity::type::NONE;
@@ -107,7 +107,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_id;
-        ar & m_descriptor;
+        ar & m_descriptorType;
         ar & m_type;
         ar & m_subtype;
         ar & m_subsubtype;

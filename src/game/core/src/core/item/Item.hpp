@@ -71,7 +71,7 @@ public:
 
 //    [[deprecated("remove")]]
 //    int modulesNum() const { return m_data.modules_num; }
-//    int descriptorType() const { return m_data.descriptor_type; }
+//    int descriptor() const { return m_data.descriptor_type; }
 
 //    tech::type tech() const { return m_data.tech; }
 
