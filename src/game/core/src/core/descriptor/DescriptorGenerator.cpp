@@ -587,7 +587,7 @@ void addItemCommonFields(descriptor::BaseOLD* descr,
 
 namespace item {
 
-descriptor::item::Bak*
+Bak*
 getNewBak(int race, int tech_level)
 {
     if (race == NONE) {
@@ -597,19 +597,32 @@ getNewBak(int race, int tech_level)
         tech_level = int (tech::type::LEVEL0);
     }
 
-    int modules       = meti::getRandInt(descriptor::item::Bak::MODULES_NUM_MIN, descriptor::item::Bak::MODULES_NUM_MAX);
-    int mass          = meti::getRandInt(descriptor::item::Bak::MASS_MIN, descriptor::item::Bak::MASS_MAX);
-    int condition     = meti::getRandInt(descriptor::item::Bak::CONDITION_MIN, descriptor::item::Bak::CONDITION_MAX);
+    int modules       = meti::getRandInt(Bak::MODULES_NUM_MIN, Bak::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(Bak::MASS_MIN, Bak::MASS_MAX);
+    int condition     = meti::getRandInt(Bak::CONDITION_MIN, Bak::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
-    int fuel = meti::getRandInt(descriptor::item::Bak::FUEL_MIN, descriptor::item::Bak::FUEL_MAX) * (1 + descriptor::item::Bak::FUEL_TECH_RATE * (int)tech_level);
+    int fuel = meti::getRandInt(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + Bak::FUEL_TECH_RATE * (int)tech_level);
+
+    auto funcCountPrice = [](int fuel, int modules, int mass, int condition) {
+        float fuel_rate          = (float)fuel / Bak::FUEL_MIN;
+        float modules_num_rate   = (float)modules / Bak::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Bak::FUEL_WEIGHT * fuel_rate +
+                Bak::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate          = (float)mass / Bak::MASS_MIN;
+        float condition_rate     = (float)condition / Bak::CONDITION_MAX;
+
+        return (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(fuel, modules, mass, condition);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT, revision_id)
 
-    descriptor::item::Bak* descr = new descriptor::item::Bak;
+    Bak* descr = new Bak;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -628,7 +641,7 @@ getNewBak(int race, int tech_level)
 }
 
 
-descriptor::item::Drive*
+Drive*
 getNewDrive(int race, int tech_level)
 {
     if (race == NONE) {
@@ -638,18 +651,34 @@ getNewDrive(int race, int tech_level)
         tech_level = int (tech::type::LEVEL0);
     }
 
-    int modules       = meti::getRandInt(descriptor::item::Drive::MODULES_NUM_MIN, descriptor::item::Drive::MODULES_NUM_MAX);
-    int mass          = meti::getRandInt(descriptor::item::Drive::MASS_MIN, descriptor::item::Drive::MASS_MAX);
-    int condition     = meti::getRandInt(descriptor::item::Drive::CONDITION_MIN, descriptor::item::Drive::CONDITION_MAX);
+    int modules       = meti::getRandInt(Drive::MODULES_NUM_MIN, Drive::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(Drive::MASS_MIN, Drive::MASS_MAX);
+    int condition     = meti::getRandInt(Drive::CONDITION_MIN, Drive::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
-    int speed = meti::getRandInt(descriptor::item::Drive::SPEED_MIN, descriptor::item::Drive::SPEED_MAX) * (1 + descriptor::item::Drive::SPEED_TECH_RATE * (int)tech_level);
-    int hyper = meti::getRandInt(descriptor::item::Drive::HYPER_MIN, descriptor::item::Drive::HYPER_MAX) * (1 + descriptor::item::Drive::HYPER_TECH_RATE * (int)tech_level);
+    int speed = meti::getRandInt(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + Drive::SPEED_TECH_RATE * (int)tech_level);
+    int hyper = meti::getRandInt(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + Drive::HYPER_TECH_RATE * (int)tech_level);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT);
 
-    descriptor::item::Drive* descr = new descriptor::item::Drive;
+    auto funcCountPrice = [](int speed, int hyper, int modules, int mass, int condition) {
+        float speed_rate         = (float)speed / Drive::SPEED_MIN;
+        float hyper_rate         = (float)hyper / Drive::HYPER_MIN;
+        float modules_num_rate   = (float)modules / Drive::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Drive::SPEED_WEIGHT * speed_rate +
+                Drive::HYPER_WEIGHT * hyper_rate +
+                Drive::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate          = (float)mass / descriptor::item::Drive::MASS_MIN;
+        float condition_rate     = (float)condition / descriptor::item::Drive::CONDITION_MIN;
+
+        return (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(speed, hyper, modules, mass, condition);
+
+
+    Drive* descr = new Drive;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -668,7 +697,7 @@ getNewDrive(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Droid*
+Droid*
 getNewDroid(int race, int tech_level)
 {
     if (race == NONE) {
@@ -678,17 +707,17 @@ getNewDroid(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules       = meti::getRandInt(descriptor::item::Droid::MODULES_NUM_MIN, descriptor::item::Droid::MODULES_NUM_MAX);
-    int mass          = meti::getRandInt(descriptor::item::Droid::MASS_MIN,        descriptor::item::Droid::MASS_MAX);
-    int condition     = meti::getRandInt(descriptor::item::Droid::CONDITION_MIN,   descriptor::item::Droid::CONDITION_MAX);
+    int modules       = meti::getRandInt(Droid::MODULES_NUM_MIN, Droid::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(Droid::MASS_MIN,        Droid::MASS_MAX);
+    int condition     = meti::getRandInt(Droid::CONDITION_MIN,   Droid::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    int repair = meti::getRandInt(descriptor::item::Droid::REPAIR_MIN, descriptor::item::Droid::REPAIR_MAX) * (1 + descriptor::item::Droid::REPAIR_TECH_RATE*(int)tech_level);
+    int repair = meti::getRandInt(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + Droid::REPAIR_TECH_RATE*(int)tech_level);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
-    descriptor::item::Droid* descr = new descriptor::item::Droid;
+    Droid* descr = new Droid;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -707,7 +736,7 @@ getNewDroid(int race, int tech_level)
 }
 
 
-descriptor::item::Grapple*
+Grapple*
 getNewGrapple(int race, int tech_level)
 {
     if (race == NONE) {
@@ -717,20 +746,20 @@ getNewGrapple(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(descriptor::item::Grapple::MODULES_NUM_MIN, descriptor::item::Grapple::MODULES_NUM_MAX);
-    int mass = meti::getRandInt(descriptor::item::Grapple::MASS_MIN,        descriptor::item::Grapple::MASS_MAX);
-    int condition = meti::getRandInt(descriptor::item::Grapple::CONDITION_MIN,   descriptor::item::Grapple::CONDITION_MAX);
+    int modules = meti::getRandInt(Grapple::MODULES_NUM_MIN, Grapple::MODULES_NUM_MAX);
+    int mass = meti::getRandInt(Grapple::MASS_MIN,        Grapple::MASS_MAX);
+    int condition = meti::getRandInt(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT);
 
-    int strength   = meti::getRandInt(descriptor::item::Grapple::STRENGTH_MIN, descriptor::item::Grapple::STRENGTH_MAX) * (1 + descriptor::item::Grapple::STRENGTH_TECH_RATE * (int)tech_level);
-    int radius     = meti::getRandInt(descriptor::item::Grapple::RADIUS_MIN,   descriptor::item::Grapple::RADIUS_MAX)   * (1 + descriptor::item::Grapple::RADIUS_TECH_RATE * (int)tech_level);
-    int speed      = meti::getRandInt(descriptor::item::Grapple::SPEED_MIN,    descriptor::item::Grapple::SPEED_MAX)    * (1 + descriptor::item::Grapple::SPEED_TECH_RATE * (int)tech_level);
+    int strength   = meti::getRandInt(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + Grapple::STRENGTH_TECH_RATE * (int)tech_level);
+    int radius     = meti::getRandInt(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + Grapple::RADIUS_TECH_RATE * (int)tech_level);
+    int speed      = meti::getRandInt(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + Grapple::SPEED_TECH_RATE * (int)tech_level);
 
-    descriptor::item::Grapple* descr = new descriptor::item::Grapple;
+    Grapple* descr = new Grapple;
 
     // descriptor::Item
     descr->setMass(mass);
@@ -751,7 +780,7 @@ getNewGrapple(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Lazer*
+Lazer*
 getNewLazer(int race, int tech_level)
 {
     if (race == NONE) {
@@ -761,18 +790,18 @@ getNewLazer(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules       = meti::getRandInt(descriptor::item::Lazer::MODULES_NUM_MIN, descriptor::item::Lazer::MODULES_NUM_MAX);
-    int mass          = meti::getRandInt(descriptor::item::Lazer::MASS_MIN,        descriptor::item::Lazer::MASS_MAX);
-    int condition     = meti::getRandInt(descriptor::item::Lazer::CONDITION_MIN,   descriptor::item::Lazer::CONDITION_MAX);
+    int modules       = meti::getRandInt(Lazer::MODULES_NUM_MIN, Lazer::MODULES_NUM_MAX);
+    int mass          = meti::getRandInt(Lazer::MASS_MIN,        Lazer::MASS_MAX);
+    int condition     = meti::getRandInt(Lazer::CONDITION_MIN,   Lazer::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
-    int damage = meti::getRandInt(descriptor::item::Lazer::DAMAGE_MIN, descriptor::item::Lazer::DAMAGE_MAX) * (1 + descriptor::item::Lazer::DAMAGE_TECH_RATE*(int)tech_level);
-    int radius = meti::getRandInt(descriptor::item::Lazer::RADIUS_MIN, descriptor::item::Lazer::RADIUS_MAX) * (1 + descriptor::item::Lazer::RADIUS_TECH_RATE*(int)tech_level);
+    int damage = meti::getRandInt(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + Lazer::DAMAGE_TECH_RATE*(int)tech_level);
+    int radius = meti::getRandInt(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + Lazer::RADIUS_TECH_RATE*(int)tech_level);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
-    descriptor::item::Lazer* descr = new descriptor::item::Lazer;
+    Lazer* descr = new Lazer;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -791,7 +820,7 @@ getNewLazer(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Protector*
+Protector*
 getNewProtector(int race, int tech_level)
 {
     if (race == NONE) {
@@ -801,18 +830,18 @@ getNewProtector(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(descriptor::item::Protector::MODULES_NUM_MIN, descriptor::item::Protector::MODULES_NUM_MAX);
-    int mass    = meti::getRandInt(descriptor::item::Protector::MASS_MIN,        descriptor::item::Protector::MASS_MAX);
-    int condition = meti::getRandInt(descriptor::item::Protector::CONDITION_MIN, descriptor::item::Protector::CONDITION_MAX);
+    int modules = meti::getRandInt(Protector::MODULES_NUM_MIN, Protector::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(Protector::MASS_MIN,        Protector::MASS_MAX);
+    int condition = meti::getRandInt(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT);
 
-    int protection = meti::getRandInt(descriptor::item::Protector::PROTECTION_MIN, descriptor::item::Protector::PROTECTION_MAX);
+    int protection = meti::getRandInt(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
 
-    descriptor::item::Protector* descr = new descriptor::item::Protector;
+    Protector* descr = new Protector;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -830,7 +859,7 @@ getNewProtector(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Radar*
+Radar*
 getNewRadar(int race, int tech_level)
 {
     if (race == NONE) {
@@ -840,18 +869,18 @@ getNewRadar(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(descriptor::item::Radar::MODULES_NUM_MIN, descriptor::item::Radar::MODULES_NUM_MAX);
-    int mass    = meti::getRandInt(descriptor::item::Radar::MASS_MIN,        descriptor::item::Radar::MASS_MAX);
-    int condition = meti::getRandInt(descriptor::item::Radar::CONDITION_MIN, descriptor::item::Radar::CONDITION_MAX);
+    int modules = meti::getRandInt(Radar::MODULES_NUM_MIN, Radar::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(Radar::MASS_MIN,        Radar::MASS_MAX);
+    int condition = meti::getRandInt(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
-    int radius = meti::getRandInt(descriptor::item::Radar::RADIUS_MIN, descriptor::item::Radar::RADIUS_MAX);
+    int radius = meti::getRandInt(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
 
-    descriptor::item::Radar* descr = new descriptor::item::Radar;
+    Radar* descr = new Radar;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -869,7 +898,7 @@ getNewRadar(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Rocket*
+Rocket*
 getNewRocket(int race, int tech_level)
 {
     if (race == NONE) {
@@ -879,20 +908,20 @@ getNewRocket(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(descriptor::item::Rocket::MODULES_NUM_MIN, descriptor::item::Rocket::MODULES_NUM_MAX);
-    int mass    = meti::getRandInt(descriptor::item::Rocket::MASS_MIN,        descriptor::item::Rocket::MASS_MAX);
-    int condition = meti::getRandInt(descriptor::item::Rocket::CONDITION_MIN, descriptor::item::Rocket::CONDITION_MAX);
+    int modules = meti::getRandInt(Rocket::MODULES_NUM_MIN, Rocket::MODULES_NUM_MAX);
+    int mass    = meti::getRandInt(Rocket::MASS_MIN,        Rocket::MASS_MAX);
+    int condition = meti::getRandInt(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
-    int ammo = meti::getRandInt(descriptor::item::Rocket::AMMO_MIN, descriptor::item::Rocket::AMMO_MAX);
-    int damage = meti::getRandInt(descriptor::item::Rocket::DAMAGE_MIN, descriptor::item::Rocket::DAMAGE_MAX);
-    int radius = meti::getRandInt(descriptor::item::Rocket::RADIUS_MIN, descriptor::item::Rocket::RADIUS_MAX);
+    int ammo = meti::getRandInt(Rocket::AMMO_MIN, Rocket::AMMO_MAX);
+    int damage = meti::getRandInt(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
+    int radius = meti::getRandInt(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
 
-    descriptor::item::Rocket* descr = new descriptor::item::Rocket;
+    Rocket* descr = new Rocket;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -912,7 +941,7 @@ getNewRocket(int race, int tech_level)
     return descr;
 }
 
-descriptor::item::Scaner*
+Scaner*
 getNewScaner(int race, int tech_level)
 {
     if (race == NONE) {
@@ -922,18 +951,18 @@ getNewScaner(int race, int tech_level)
         tech_level = int(tech::type::LEVEL0);
     }
 
-    int modules = meti::getRandInt(descriptor::item::Scaner::MODULES_NUM_MIN, descriptor::item::Scaner::MODULES_NUM_MAX);
-    int mass = meti::getRandInt(descriptor::item::Scaner::MASS_MIN,        descriptor::item::Scaner::MASS_MAX);
-    int condition = meti::getRandInt(descriptor::item::Scaner::CONDITION_MIN,   descriptor::item::Scaner::CONDITION_MAX);
+    int modules = meti::getRandInt(Scaner::MODULES_NUM_MIN, Scaner::MODULES_NUM_MAX);
+    int mass = meti::getRandInt(Scaner::MASS_MIN,        Scaner::MASS_MAX);
+    int condition = meti::getRandInt(Scaner::CONDITION_MIN,   Scaner::CONDITION_MAX);
     int deterioration = 1;
     int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT);
 
-    int scan = meti::getRandInt(descriptor::item::Scaner::SCAN_MIN, descriptor::item::Scaner::SCAN_MAX) * (1 + descriptor::item::Scaner::SCAN_TECH_RATE * int(tech_level));
+    int scan = meti::getRandInt(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + Scaner::SCAN_TECH_RATE * int(tech_level));
 
-    descriptor::item::Scaner* descr = new descriptor::item::Scaner;
+    Scaner* descr = new Scaner;
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);

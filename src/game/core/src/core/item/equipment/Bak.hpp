@@ -47,7 +47,6 @@ public:
 
 private:
     void updateProperties() override final;
-    void countPrice();
 
     model::item::Bak* model() const { return m_model_bak; }
     descriptor::item::Bak* descriptor() const { return m_descriptor_bak; }
