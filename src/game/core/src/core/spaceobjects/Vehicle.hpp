@@ -140,7 +140,7 @@ namespace control {
 class Vehicle : public SpaceObject
 {
 public:
-    Vehicle(model::Vehicle*);
+    Vehicle(model::Vehicle*, descriptor::Vehicle*);
     virtual ~Vehicle();
 
     void createSlots();

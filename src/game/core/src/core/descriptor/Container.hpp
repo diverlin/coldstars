@@ -19,18 +19,31 @@
 
 #pragma once
 
-#include "Base.hpp"
+#include <core/descriptor/SpaceobjectDescriptor.hpp>
 
 #include <string>
 
 namespace descriptor {
 
-class Container : public BaseOLD
+class Container : public SpaceObject
 {
 public:
-    Container(int_t child_id);
+    Container();
     Container(const std::string& data);
-    ~Container() {}
+    ~Container() = default;
+    std::string data() const;
+
+    std::string info() const {
+        std::string result = "SpaceObject descriptor: " + SpaceObject::info();
+        return result;
+    }
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
+    }
 };
 
 } // namespace descriptor

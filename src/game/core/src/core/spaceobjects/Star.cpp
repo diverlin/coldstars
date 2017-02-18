@@ -35,6 +35,7 @@
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
 
+
 namespace model {
 
 Star::Star()
@@ -58,10 +59,11 @@ Star::data() const
 
 namespace control {
 
-Star::Star(model::Star* model)
-:
-  Planetoid(model)
-, m_model_star(model)
+Star::Star(model::Star* model, descriptor::Star* descr)
+    :
+      Planetoid(model, descr)
+    , m_model_star(model)
+    , m_descriptor_star(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::STAR);

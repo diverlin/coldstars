@@ -27,6 +27,7 @@
 #include <core/descriptor/PlanetDescriptor.hpp>
 #include <core/descriptor/AsteroidDescriptor.hpp>
 #include <core/descriptor/VehicleDescriptor.hpp>
+#include <core/descriptor/Container.hpp>
 
 #include <core/descriptor/item/equipment/ALL>
 
@@ -111,6 +112,7 @@ public:
     void add(Ship*);
     void add(SpaceStation*);
     void add(Satellite*);
+    void add(Container*);
     void add(item::Drive*);
     void add(item::Bak*);
     void add(item::Droid*);
@@ -162,6 +164,7 @@ private:
     MManager<Ship> m_ship;
     MManager<SpaceStation> m_spacestation;
     MManager<Satellite> m_satellite;
+    MManager<Container> m_container;
     MManager<item::Bak> m_bak;
     MManager<item::Drive> m_drive;
     MManager<item::Droid> m_droid;

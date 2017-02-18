@@ -22,6 +22,26 @@
 //#include <client/effects/ShockWaveEffect.hpp> //depr
 #include <core/spaceobjects/Planetoid.hpp>
 
+
+namespace descriptor {
+
+class BlackHole : public Planetoid {
+public:
+    BlackHole();
+    ~BlackHole() = default;
+    BlackHole(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+    }
+};
+
+} // namespace descriptor
+
 namespace model {
 
 class BlackHole : public Planetoid {
@@ -47,7 +67,7 @@ namespace control {
 class BlackHole : public Planetoid
 {
 public:
-    BlackHole(model::BlackHole*);
+    BlackHole(model::BlackHole*, descriptor::BlackHole*);
     virtual ~BlackHole();
 
     //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
@@ -59,9 +79,11 @@ public:
     void updateInSpace(int, bool);
 
     model::BlackHole* model() const { return m_model_blackhole; }
+    descriptor::BlackHole* descriptor() const { return m_descriptor_blackhole; }
 
 private:
     model::BlackHole* m_model_blackhole = nullptr;
+    descriptor::BlackHole* m_descriptor_blackhole = nullptr;
 
     //        virtual void UpdateInfo() override final;
 };

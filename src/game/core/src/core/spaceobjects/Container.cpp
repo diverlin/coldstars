@@ -36,6 +36,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
+
 namespace model {
 
 Container::Container()
@@ -59,10 +60,11 @@ Container::data() const
 
 namespace control {
 
-Container::Container(model::Container* model)
+Container::Container(model::Container* model, descriptor::Container* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_container(model)
+    , m_descriptor_container(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::CONTAINER);

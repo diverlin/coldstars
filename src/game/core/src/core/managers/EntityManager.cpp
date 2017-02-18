@@ -86,6 +86,8 @@
 #include <common/Global.hpp>
 #include <common/TurnTimer.hpp>
 
+#include <core/descriptor/DescriptorGenerator.hpp>
+
 #include <slots/ItemSlot.hpp>
 
 
@@ -137,14 +139,16 @@ getNewStarsystem() {
 Ship*
 getNewShip() {
     model::Ship* model = builder::Ship::getNew();
-    Ship* ship = new Ship(model);
+    descriptor::Ship* descr = descriptor::getNewShip();
+    Ship* ship = new Ship(model, descr);
     return ship;
 }
 
 Container*
 getNewContainer() {
     model::Container* model = builder::Container::getNew();
-    Container* container = new Container(model);
+    descriptor::Container* descr = descriptor::getNewContainer();
+    Container* container = new Container(model, descr);
     return container;
 }
 

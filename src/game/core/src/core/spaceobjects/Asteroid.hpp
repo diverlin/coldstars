@@ -21,13 +21,15 @@
 
 #include <core/spaceobjects/Planetoid.hpp>
 
+#include <core/descriptor/AsteroidDescriptor.hpp>
+
 namespace model {
 
 class Asteroid : public Planetoid {
 public:
-//    static const int SCALE_MIN;
-//    static const int SCALE_MAX;
-//    static const int EXPIRIENCE_TO_GIVE;
+    //    static const int SCALE_MIN;
+    //    static const int SCALE_MAX;
+    //    static const int EXPIRIENCE_TO_GIVE;
 
 public:
     Asteroid();
@@ -50,23 +52,25 @@ namespace control {
 
 class Asteroid : public Planetoid
 {
-    public:
-        Asteroid(model::Asteroid*);
-        virtual ~Asteroid();
+public:
+    Asteroid(model::Asteroid*, descriptor::Asteroid*);
+    virtual ~Asteroid();
 
-        int damage() const { return model()->mass()*10; }
+    int damage() const { return model()->mass()*10; }
 
-        void updateInSpace(int, bool);
-        void collisionEvent(bool);
+    void updateInSpace(int, bool);
+    void collisionEvent(bool);
 
-        model::Asteroid* model() const { return m_model_asteroid; }
+    model::Asteroid* model() const { return m_model_asteroid; }
+    descriptor::Asteroid* descriptor() const { return m_descriptor_asteroid; }
 
-    private:
-        void _postDeathUniqueEvent(bool);
+private:
+    void _postDeathUniqueEvent(bool);
 
-        model::Asteroid* m_model_asteroid = nullptr;
+    model::Asteroid* m_model_asteroid = nullptr;
+    descriptor::Asteroid* m_descriptor_asteroid = nullptr;
 
-//        virtual void UpdateInfo() override final;
+    //        virtual void UpdateInfo() override final;
 };
 
 } // namespace control
@@ -85,12 +89,12 @@ class Asteroid : public Planetoid
 //        virtual void Save(boost::property_tree::ptree&) const override final;
 //        virtual void Load(const boost::property_tree::ptree&) override final;
 //        virtual void Resolve() override final;
-        
+
 //    private:
 //        void _postDeathUniqueEvent(bool);
 
 ////        virtual void UpdateInfo() override final;
-        
+
 //        void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //        void LoadData(const boost::property_tree::ptree&);
 //        void ResolveData();

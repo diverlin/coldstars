@@ -62,12 +62,14 @@ Asteroid::data() const
 
 } // namespace model
 
+
 namespace control {
 
-Asteroid::Asteroid(model::Asteroid* model)
+Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
     :
-      Planetoid(model)
+      Planetoid(model, descr)
     , m_model_asteroid(model)
+    , m_descriptor_asteroid(descr)
 {
 }
 

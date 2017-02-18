@@ -46,6 +46,7 @@ class Asteroid;
 class Ship;
 class SpaceStation;
 class Satellite;
+class Container;
 class BaseOLD; // TODO: remove this
 
 /* world */
@@ -60,7 +61,7 @@ descriptor::Asteroid* getNewAsteroid();
 descriptor::Ship* getNewShip();
 descriptor::SpaceStation* getNewSpaceStation();
 descriptor::Satellite* getNewSatellite();
-descriptor::BaseOLD* getNewContainer();
+descriptor::Container* getNewContainer();
 
 /* items */
 namespace item {

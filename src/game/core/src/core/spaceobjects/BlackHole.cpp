@@ -23,6 +23,27 @@
 #include "../world/starsystem.hpp"
 
 
+namespace descriptor {
+
+BlackHole::BlackHole()
+{
+//    setType(entity::type::BLACKHOLE);
+}
+
+BlackHole::BlackHole(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+BlackHole::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace descriptor
+
+
 namespace model {
 
 BlackHole::BlackHole()
@@ -46,10 +67,11 @@ BlackHole::data() const
 
 namespace control {
 
-BlackHole::BlackHole(model::BlackHole* model)
+BlackHole::BlackHole(model::BlackHole* model, descriptor::BlackHole* descr)
     :
-      Planetoid(model)
+      Planetoid(model, descr)
     , m_model_blackhole(model)
+    , m_descriptor_blackhole(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::BLACKHOLE);

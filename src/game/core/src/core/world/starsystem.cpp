@@ -102,10 +102,11 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
 
 namespace control {
 
-Starsystem::Starsystem(model::Starsystem* model)
+Starsystem::Starsystem(model::Starsystem* model, descriptor::Starsystem* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_starsystem(model)
+    , m_descriptor_starsystem(descr)
 { 
     //setStarSystem(this);
     

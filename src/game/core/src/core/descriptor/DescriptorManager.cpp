@@ -74,6 +74,9 @@ void Manager::add(SpaceStation* spacestation) {
 void Manager::add( Satellite* satellite) {
     m_satellite.add(satellite);
 }
+void Manager::add( Container* container) {
+    m_container.add(container);
+}
 void Manager::add(item::Drive* drive) {
     m_drive.add(drive);
 }

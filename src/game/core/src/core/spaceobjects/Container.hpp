@@ -21,11 +21,14 @@
 
 #include <core/spaceobjects/SpaceObject.hpp>
 
+#include <core/descriptor/Container.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 namespace control {
 class Item;
 } // namespace control
+
 
 namespace model {
 
@@ -66,7 +69,7 @@ class ItemSlot;
 class Container : public SpaceObject
 {
 public:
-    Container(model::Container*);
+    Container(model::Container*, descriptor::Container*);
     virtual ~Container();
 
     void bindItemSlot(ItemSlot*);
@@ -85,9 +88,12 @@ public:
     //        void Render(const jeti::Renderer&);
 
     model::Container* model() const { return m_model_container; }
+    descriptor::Container* descriptor() const { return m_descriptor_container; }
 
 private:
     model::Container* m_model_container = nullptr;
+    descriptor::Container* m_descriptor_container = nullptr;
+
     ItemSlot* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;

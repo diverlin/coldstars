@@ -21,6 +21,8 @@
 
 #include <core/spaceobjects/Planetoid.hpp>
 
+#include <core/descriptor/StarDescriptor.hpp>
+
 namespace model {
 
 class Star : public Planetoid {
@@ -43,8 +45,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Planetoid>(*this);
         ar & m_turnSinceLastSparkCounter;
         ar & m_turnSparkThreshold;
@@ -59,7 +60,7 @@ namespace control {
 class Star : public Planetoid
 {
 public:
-    Star(model::Star*);
+    Star(model::Star*, descriptor::Star*);
     virtual ~Star();
 
     void hit(int) {}
@@ -75,9 +76,11 @@ public:
     void updateInSpace(int, bool);
 
     model::Star* model() const { return m_model_star; }
+    descriptor::Star* descriptor() const { return m_descriptor_star; }
 
 private:
     model::Star* m_model_star = nullptr;
+    descriptor::Star* m_descriptor_star = nullptr;
 
     float m_deltaColor = 0.0f;
     bool m_sparkActive = false;

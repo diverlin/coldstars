@@ -28,25 +28,9 @@
 //#include <math/rand.hpp>
 
 
-namespace model {
-
-SpaceObject::SpaceObject(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-SpaceObject::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
-
 namespace control {
 
-SpaceObject::SpaceObject(model::SpaceObject* model)
+SpaceObject::SpaceObject(model::SpaceObject* model, descriptor::SpaceObject* descr)
     :
       ceti::control::Orientation(model)
     , control::Base(model)

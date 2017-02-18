@@ -52,7 +52,7 @@ namespace control {
 class Ship : public Vehicle
 {
 public:
-    Ship(model::Ship*);
+    Ship(model::Ship*, descriptor::Ship*);
     virtual ~Ship();
 
     virtual void UpdateInSpace(int, bool) override final;
@@ -64,9 +64,12 @@ public:
 
     model::Ship* model() const { return m_model_ship; }
 
+protected:
+    descriptor::Ship* descriptor() const { return m_descriptor_ship; }
+
 private:
     model::Ship* m_model_ship = nullptr;
-
+    descriptor::Ship* m_descriptor_ship = nullptr;
 };
 
 } // namespace control

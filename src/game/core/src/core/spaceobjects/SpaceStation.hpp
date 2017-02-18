@@ -57,7 +57,7 @@ namespace control {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation(model::SpaceStation*);
+    SpaceStation(model::SpaceStation*, descriptor::SpaceStation*);
     virtual ~SpaceStation();
 
     [[warning("incapsulate this shit")]]
@@ -71,8 +71,12 @@ public:
 
     model::SpaceStation* model() const { return m_model_spacestation; }
 
+protected:
+    descriptor::SpaceStation* descriptor() const { return m_descriptor_spacestation; }
+
 private:
     model::SpaceStation* m_model_spacestation = nullptr;
+    descriptor::SpaceStation* m_descriptor_spacestation = nullptr;
 
     Land* m_innerLand = nullptr;
 
