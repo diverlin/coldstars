@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.83, 2017-02-13T01:22:12. -->
+<!-- Written by QtCreator 4.0.83, 2017-02-18T20:12:25. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -434,7 +434,7 @@
      <value type="int">14</value>
     </valuelist>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">coldstars_tests</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">--gtest_filter=model.*</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">--gtest_filter=ship.create</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/ramdisk/build/coldstars/src/game/core/test</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
@@ -592,7 +592,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/ramdisk/build/coldstars/src/game/client/test</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">client_test</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">client_test (disabled)</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.client_test</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
@@ -643,7 +643,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/ramdisk/build/coldstars/src/game/client/src/client</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">coldstars_client_exec</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">coldstars_client_exec (disabled)</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.coldstars_client_exec</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>

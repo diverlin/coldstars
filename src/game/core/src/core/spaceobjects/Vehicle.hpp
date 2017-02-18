@@ -38,6 +38,7 @@ class GoodsPack;
 namespace model {
 class Container;
 class Starsystem;
+class Item;
 } // namespace model
 
 namespace control {
@@ -69,12 +70,10 @@ enum class VEHICLE_SPECIAL_ACTION_TYPE {
 
 namespace model {
 
-class Vehicle : public model::SpaceObject {
+class Vehicle : public SpaceObject {
 public:
     Vehicle()=default;
     ~Vehicle() = default;
-    Vehicle(const std::string& data);
-    std::string data() const;
 
     int_t npc() const { return m_npc; }
     int_t dock() const { return m_dock; }
@@ -90,10 +89,6 @@ public:
 //#endif // USE_EXTRA_EQUIPMENT
 //    int_t grappleSlot() const { return m_grapple_slot; }
 //    int_t droidSlot() const { return m_droid_slot; }
-
-    WeaponComplex& weaponComplex() { return m_weapon_complex; }
-    DriveComplex& driveComplex() { return m_drive_complex; }
-    ProtectionComplex& protectorComplex() { return m_protector_complex; }
 
     VehiclePropetries& properties() { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
@@ -119,10 +114,6 @@ private:
 //    std::vector<int_t> m_artefact_slots;
 //    std::vector<int_t> m_cargo_slots;
 
-    WeaponComplex     m_weapon_complex;
-    DriveComplex      m_drive_complex;
-    ProtectionComplex m_protector_complex;
-
     VehiclePropetries m_properties;
     VehicleNeeds m_needs;
     int_t m_descriptor;
@@ -135,9 +126,6 @@ private:
         ar & m_npc;
         ar & m_dock;
         ar & m_land;
-//        ar & m_weapon_complex;
-//        ar & m_drive_complex;
-//        ar & m_protector_complex;
 //        ar & m_properties;
 //        ar & m_needs;
         ar & m_descriptor;
@@ -149,11 +137,18 @@ private:
 
 namespace control {
 
-class Vehicle : public control::SpaceObject
+class Vehicle : public SpaceObject
 {
 public:
     Vehicle(model::Vehicle*);
     virtual ~Vehicle();
+
+    void createSlots();
+
+
+    WeaponComplex& weaponComplex() { return m_weapon_complex; }
+    DriveComplex& driveComplex() { return m_drive_complex; }
+    ProtectionComplex& protectorComplex() { return m_protector_complex; }
 
     // wepon complex interface
     void fire(int, float);
@@ -216,15 +211,6 @@ public:
     void bindNpc(control::Npc*);
 
     bool isObjectVisible(SpaceObject*) const;
-
-    [[warning("incapsulate this")]]
-    WeaponComplex& weaponComplex() { return model()->weaponComplex(); }   // !!!
-    [[warning("incapsulate this")]]
-    const WeaponComplex& weaponComplex() const { return model()->weaponComplex(); }
-    [[warning("incapsulate this")]]
-    DriveComplex& driveComplex()   { return model()->driveComplex(); }
-    [[warning("incapsulate this")]]
-    ProtectionComplex& protectorComplex() { return model()->protectorComplex(); }
 
     ItemSlot* const radarSlot()     const { return m_radarSlot; }
     ItemSlot* const scanerSlot()    const { return m_scanerSlot; }
@@ -307,6 +293,7 @@ public:
 
 protected:
     model::Vehicle* m_model_vehicle = nullptr;
+    descriptor::Vehicle* m_descriptor_vehicle = nullptr;
     model::Vehicle* model() const { return m_model_vehicle; }
 
     [[warning("make it private")]]
@@ -361,6 +348,10 @@ private:
     std::vector<ItemSlot*> m_artefactSlots;
     std::vector<ItemSlot*> m_cargoSlots;
 
+    WeaponComplex     m_weapon_complex;
+    DriveComplex      m_drive_complex;
+    ProtectionComplex m_protector_complex;
+
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(Item*);
@@ -368,8 +359,6 @@ private:
     model::Container* __wrapItemToContainer(Item*);
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
-
-    descriptor::Vehicle* m_descriptor_vehicle = nullptr;
 };
 
 

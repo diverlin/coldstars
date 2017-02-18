@@ -36,7 +36,7 @@
 control::ItemSlot*
 getNewItemSlot(entity::type subtype_id, int_t id)
 {  
-    assert(false);
+//    assert(false);
     control::ItemSlot* item_slot = new control::ItemSlot(id, subtype_id);
     assert(item_slot);
     
@@ -44,7 +44,7 @@ getNewItemSlot(entity::type subtype_id, int_t id)
 //    item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == entity::type::WEAPON_SLOT) {
-        assert(false);
+//        assert(false);
 //        Turrel* turrel = new Turrel(item_slot);
 //        assert(turrel);
 ////        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
