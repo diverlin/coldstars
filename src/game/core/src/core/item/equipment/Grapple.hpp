@@ -55,8 +55,6 @@ public:
 
     virtual void updateProperties();
 
-    void CountPrice();
-
     model::item::Grapple* model() const { return m_model_grapple; }
     descriptor::item::Grapple* descriptor() const { return m_descriptor_grapple; }
 

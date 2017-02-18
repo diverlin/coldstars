@@ -30,8 +30,8 @@ public:
     static const float OVERLOAD_RATE;
     static const float OVERLOAD_DETERIORATION_RATE;
 
-    static const float SPEED_MIN;
-    static const float SPEED_MAX;
+    static const int SPEED_MIN;
+    static const int SPEED_MAX;
     static const float SPEED_TECH_RATE;
 
     static const int HYPER_MIN;

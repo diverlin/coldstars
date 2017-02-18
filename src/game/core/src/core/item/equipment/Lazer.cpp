@@ -57,22 +57,6 @@ void Lazer::updateProperties()
     model()->setRadius(descriptor()->radius() + m_radius_add);
 } 
 
-void Lazer::countPrice()
-{
-//    float damage_rate        = (float)descriptor()->damage() / descriptor::item::Lazer::DAMAGE_MIN;
-//    float radius_rate        = (float)descriptor()->radius() / descriptor::item::Lazer::RADIUS_MIN;
-//    float modules_num_rate   = (float)descriptor()->modules() / descriptor::item::Lazer::MODULES_NUM_MAX;
-
-//    float effectiveness_rate = descriptor::item::Lazer::DAMAGE_WEIGHT * damage_rate +
-//            descriptor::item::Lazer::RADIUS_WEIGHT * radius_rate +
-//            descriptor::item::Lazer::MODULES_NUM_WEIGHT * modules_num_rate;
-
-//    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Lazer::MASS_MIN;
-//    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Lazer::CONDITION_MIN;
-
-//    m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
-}
-
 void Lazer::addUniqueInfo()
 {
 //    info.addTitleStr("LAZER");

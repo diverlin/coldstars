@@ -45,8 +45,6 @@ public:
 
     virtual void updateProperties();
 
-    void countPrice();
-
 protected:
     model::item::Lazer* model() const { return m_model_lazer; }
     descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }

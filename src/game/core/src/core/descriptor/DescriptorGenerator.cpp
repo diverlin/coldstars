@@ -602,19 +602,19 @@ getNewBak(int race, int tech_level)
     int condition     = meti::getRandInt(Bak::CONDITION_MIN, Bak::CONDITION_MAX);
     int deterioration = 1;
 
-    int fuel = meti::getRandInt(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + Bak::FUEL_TECH_RATE * (int)tech_level);
+    int fuel = meti::getRandInt(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + int(Bak::FUEL_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int fuel, int modules, int mass, int condition) {
-        float fuel_rate          = (float)fuel / Bak::FUEL_MIN;
-        float modules_num_rate   = (float)modules / Bak::MODULES_NUM_MAX;
+        float fuel_rate          = float(fuel) / Bak::FUEL_MIN;
+        float modules_num_rate   = float(modules) / Bak::MODULES_NUM_MAX;
 
         float effectiveness_rate = Bak::FUEL_WEIGHT * fuel_rate +
                 Bak::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = (float)mass / Bak::MASS_MIN;
-        float condition_rate     = (float)condition / Bak::CONDITION_MAX;
+        float mass_rate          = float(mass) / Bak::MASS_MIN;
+        float condition_rate     = float(condition) / Bak::CONDITION_MAX;
 
-        return (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(fuel, modules, mass, condition);
 
@@ -623,6 +623,7 @@ getNewBak(int race, int tech_level)
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT, revision_id)
 
     Bak* descr = new Bak;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -656,29 +657,30 @@ getNewDrive(int race, int tech_level)
     int condition     = meti::getRandInt(Drive::CONDITION_MIN, Drive::CONDITION_MAX);
     int deterioration = 1;
 
-    int speed = meti::getRandInt(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + Drive::SPEED_TECH_RATE * (int)tech_level);
-    int hyper = meti::getRandInt(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + Drive::HYPER_TECH_RATE * (int)tech_level);
+    int speed = meti::getRandInt(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + int(Drive::SPEED_TECH_RATE * tech_level));
+    int hyper = meti::getRandInt(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + int(Drive::HYPER_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT);
 
     auto funcCountPrice = [](int speed, int hyper, int modules, int mass, int condition) {
-        float speed_rate         = (float)speed / Drive::SPEED_MIN;
-        float hyper_rate         = (float)hyper / Drive::HYPER_MIN;
-        float modules_num_rate   = (float)modules / Drive::MODULES_NUM_MAX;
+        float speed_rate         = float(speed) / Drive::SPEED_MIN;
+        float hyper_rate         = float(hyper) / Drive::HYPER_MIN;
+        float modules_num_rate   = float(modules) / Drive::MODULES_NUM_MAX;
 
         float effectiveness_rate = Drive::SPEED_WEIGHT * speed_rate +
                 Drive::HYPER_WEIGHT * hyper_rate +
                 Drive::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = (float)mass / descriptor::item::Drive::MASS_MIN;
-        float condition_rate     = (float)condition / descriptor::item::Drive::CONDITION_MIN;
+        float mass_rate          = float(mass) / Drive::MASS_MIN;
+        float condition_rate     = float(condition) / Drive::CONDITION_MAX;
 
-        return (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(speed, hyper, modules, mass, condition);
 
 
     Drive* descr = new Drive;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -711,13 +713,27 @@ getNewDroid(int race, int tech_level)
     int mass          = meti::getRandInt(Droid::MASS_MIN,        Droid::MASS_MAX);
     int condition     = meti::getRandInt(Droid::CONDITION_MIN,   Droid::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
-    int repair = meti::getRandInt(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + Droid::REPAIR_TECH_RATE*(int)tech_level);
+    int repair = meti::getRandInt(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + int(Droid::REPAIR_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
+    auto funcCountPrice = [](int repair, int modules, int mass, int condition) {
+        float repair_rate        = float(repair) / Droid::REPAIR_MIN;
+        float modules_num_rate   = float(modules) / Droid::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Droid::REPAIR_WEIGHT * repair_rate +
+                Droid::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate          = float(mass) / descriptor::item::Droid::MASS_MIN;
+        float condition_rate     = float(condition) / descriptor::item::Droid::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(repair, modules, mass, condition);
+
     Droid* descr = new Droid;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -750,14 +766,32 @@ getNewGrapple(int race, int tech_level)
     int mass = meti::getRandInt(Grapple::MASS_MIN,        Grapple::MASS_MAX);
     int condition = meti::getRandInt(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT);
 
-    int strength   = meti::getRandInt(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + Grapple::STRENGTH_TECH_RATE * (int)tech_level);
-    int radius     = meti::getRandInt(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + Grapple::RADIUS_TECH_RATE * (int)tech_level);
-    int speed      = meti::getRandInt(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + Grapple::SPEED_TECH_RATE * (int)tech_level);
+    int strength   = meti::getRandInt(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + int(Grapple::STRENGTH_TECH_RATE * tech_level));
+    int radius     = meti::getRandInt(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + int(Grapple::RADIUS_TECH_RATE * tech_level));
+    int speed      = meti::getRandInt(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + int(Grapple::SPEED_TECH_RATE * tech_level));
+
+    auto funcCountPrice = [](int strength, int radius, int speed, int modules, int mass, int condition) {
+        float strength_rate      = float(strength) / Grapple::STRENGTH_MIN;
+        float radius_rate        = float(radius) / Grapple::RADIUS_MIN;
+        float speed_rate         = float(speed) / Grapple::SPEED_MIN;
+
+        float modules_num_rate   = float(modules) / Grapple::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Grapple::STRENGTH_WEIGHT * strength_rate +
+                Grapple::RADIUS_WEIGHT * radius_rate +
+                Grapple::SPEED_WEIGHT * speed_rate +
+                Grapple::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate          = float(mass) / Grapple::MASS_MIN;
+        float condition_rate     = float(condition) / Grapple::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(strength, radius, speed, modules, mass, condition);
 
     Grapple* descr = new Grapple;
 
@@ -794,14 +828,30 @@ getNewLazer(int race, int tech_level)
     int mass          = meti::getRandInt(Lazer::MASS_MIN,        Lazer::MASS_MAX);
     int condition     = meti::getRandInt(Lazer::CONDITION_MIN,   Lazer::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
-    int damage = meti::getRandInt(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + Lazer::DAMAGE_TECH_RATE*(int)tech_level);
-    int radius = meti::getRandInt(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + Lazer::RADIUS_TECH_RATE*(int)tech_level);
+    int damage = meti::getRandInt(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + int(Lazer::DAMAGE_TECH_RATE * tech_level));
+    int radius = meti::getRandInt(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + int(Lazer::RADIUS_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
+    auto funcCountPrice = [](int damage, int radius, int modules, int mass, int condition) {
+        float damage_rate        = float(damage) / Lazer::DAMAGE_MIN;
+        float radius_rate        = float(radius) / Lazer::RADIUS_MIN;
+        float modules_num_rate   = float(modules) / Lazer::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Lazer::DAMAGE_WEIGHT * damage_rate +
+                Lazer::RADIUS_WEIGHT * radius_rate +
+                Lazer::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate      = float(mass) / Lazer::MASS_MIN;
+        float condition_rate = float(condition) / Lazer::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(damage, radius, modules, mass, condition);
+
     Lazer* descr = new Lazer;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -834,14 +884,28 @@ getNewProtector(int race, int tech_level)
     int mass    = meti::getRandInt(Protector::MASS_MIN,        Protector::MASS_MAX);
     int condition = meti::getRandInt(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT);
 
     int protection = meti::getRandInt(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
 
+    auto funcCountPrice = [](int protection, int modules, int mass, int condition) {
+        float protection_rate    = float(protection) / Protector::PROTECTION_MIN;
+        float modules_num_rate   = float(modules) / Protector::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Protector::PROTECTION_WEIGHT * protection_rate +
+                Protector::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate      = float(mass) / Protector::MASS_MIN;
+        float condition_rate = float(condition) / Protector::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(protection, modules, mass, condition);
+
     Protector* descr = new Protector;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -873,14 +937,27 @@ getNewRadar(int race, int tech_level)
     int mass    = meti::getRandInt(Radar::MASS_MIN,        Radar::MASS_MAX);
     int condition = meti::getRandInt(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
     int radius = meti::getRandInt(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
 
+    auto funcCountPrice = [](int radius, int modules, int mass, int condition) {
+        float radius_rate      = float(radius) / Radar::RADIUS_MIN;
+        float modules_num_rate = float(modules) / Radar::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Radar::RADIUS_WEIGHT * radius_rate + Radar::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate      = float(mass) / Radar::MASS_MIN;
+        float condition_rate = float(condition) / Radar::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(radius, modules, mass, condition);
+
     Radar* descr = new Radar;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -912,7 +989,6 @@ getNewRocket(int race, int tech_level)
     int mass    = meti::getRandInt(Rocket::MASS_MIN,        Rocket::MASS_MAX);
     int condition = meti::getRandInt(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
@@ -921,7 +997,26 @@ getNewRocket(int race, int tech_level)
     int damage = meti::getRandInt(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
     int radius = meti::getRandInt(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
 
+    auto funcCountPrice = [](int ammo, int damage, int radius, int modules, int mass, int condition) {
+        float ammo_rate     = float(ammo) / Rocket::AMMO_MIN;
+        float damage_rate   = float(damage) / Rocket::DAMAGE_MIN;
+        float radius_rate   = float(radius) / Rocket::RADIUS_MIN;
+        float modules_num_rate   = float(modules) / Rocket::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Rocket::AMMO_WEIGHT * ammo_rate +
+                Rocket::DAMAGE_WEIGHT * damage_rate +
+                Rocket::RADIUS_WEIGHT * radius_rate +
+                Rocket::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate      = float(mass) / Rocket::MASS_MIN;
+        float condition_rate = float(condition) / Rocket::CONDITION_MAX;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(ammo, damage, radius, modules, mass, condition);
+
     Rocket* descr = new Rocket;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);
@@ -955,14 +1050,28 @@ getNewScaner(int race, int tech_level)
     int mass = meti::getRandInt(Scaner::MASS_MIN,        Scaner::MASS_MAX);
     int condition = meti::getRandInt(Scaner::CONDITION_MIN,   Scaner::CONDITION_MAX);
     int deterioration = 1;
-    int price = meti::getRandInt(100, 1000);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT);
 
     int scan = meti::getRandInt(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + Scaner::SCAN_TECH_RATE * int(tech_level));
 
+    auto funcCountPrice = [](int scan, int modules, int mass, int condition) {
+        float scan_rate          = float(scan) / Scaner::SCAN_MIN;
+        float modules_num_rate   = float(modules) / Scaner::MODULES_NUM_MAX;
+
+        float effectiveness_rate = Scaner::SCAN_WEIGHT * scan_rate +
+                Scaner::MODULES_NUM_WEIGHT * modules_num_rate;
+
+        float mass_rate          = float(mass) / Scaner::MASS_MIN;
+        float condition_rate     = float(condition) / Scaner::CONDITION_MIN;
+
+        return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    };
+    int price = funcCountPrice(scan, modules, mass, condition);
+
     Scaner* descr = new Scaner;
+
     // descriptor::Item
     descr->setMass(mass);
     descr->setCondition(condition);

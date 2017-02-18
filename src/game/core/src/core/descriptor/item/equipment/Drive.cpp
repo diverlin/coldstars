@@ -28,8 +28,8 @@ namespace item {
 const float Drive::OVERLOAD_RATE = 1.5f;
 const float Drive::OVERLOAD_DETERIORATION_RATE = 4.0f;
 
-const float Drive::SPEED_MIN = 3.0;
-const float Drive::SPEED_MAX = 4.0;
+const int Drive::SPEED_MIN = 3;
+const int Drive::SPEED_MAX = 4;
 const float Drive::SPEED_TECH_RATE = 0.1f;
 
 const int Drive::HYPER_MIN = 7;
@@ -44,9 +44,9 @@ const int Drive::MASS_MAX = 70;
 const int Drive::CONDITION_MIN = 500;
 const int Drive::CONDITION_MAX = 2000;
 
-const float Drive::SPEED_WEIGHT = 0.4;
-const float Drive::HYPER_WEIGHT = 0.4;
-const float Drive::MODULES_NUM_WEIGHT = 0.2;
+const float Drive::SPEED_WEIGHT = 0.4f;
+const float Drive::HYPER_WEIGHT = 0.4f;
+const float Drive::MODULES_NUM_WEIGHT = 0.2f;
 
 
 Drive::Drive()

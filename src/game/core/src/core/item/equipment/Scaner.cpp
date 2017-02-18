@@ -48,21 +48,6 @@ void Scaner::updateProperties()
     model()->setScan(descriptor()->scan() + m_scan_add);
 }
 
-void Scaner::countPrice()
-{
-//    float scan_rate          = float(descriptor()->scan()) / descriptor::item::Scaner::SCAN_MIN;
-//    float modules_num_rate   = float(descriptor()->modules()) / descriptor::item::Scaner::MODULES_NUM_MAX;
-
-//    float effectiveness_rate = descriptor::item::Scaner::SCAN_WEIGHT * scan_rate +
-//            descriptor::item::Scaner::MODULES_NUM_WEIGHT * modules_num_rate;
-
-//    float mass_rate          = float(descriptor()->mass()) / descriptor::item::Scaner::MASS_MIN;
-//    float condition_rate     = float(descriptor()->condition()) / descriptor::item::Scaner::CONDITION_MIN;
-
-//    m_price = int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
-}
-
-
 void Scaner::addUniqueInfo()
 {
     //    info.addTitleStr("SCANER");

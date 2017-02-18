@@ -64,15 +64,15 @@ descriptor::BaseOLD* getNewContainer();
 
 /* items */
 namespace item {
-descriptor::item::Bak* getNewBak(int race = NONE, int tech_level = NONE);
-descriptor::item::Drive* getNewDrive(int race = NONE, int tech_level = NONE);
-descriptor::item::Droid* getNewDroid(int race = NONE, int tech_level = NONE);
-descriptor::item::Grapple* getNewGrapple(int race = NONE, int tech_level = NONE);
-descriptor::item::Lazer* getNewLazer(int race = NONE, int tech_level = NONE);
-descriptor::item::Protector* getNewProtector(int race = NONE, int tech_level = NONE);
-descriptor::item::Radar* getNewRadar(int race = NONE, int tech_level = NONE);
-descriptor::item::Rocket* getNewRocket(int race = NONE, int tech_level = NONE);
-descriptor::item::Scaner* getNewScaner(int race = NONE, int tech_level = NONE);
+Bak* getNewBak(int race = NONE, int tech_level = NONE);
+Drive* getNewDrive(int race = NONE, int tech_level = NONE);
+Droid* getNewDroid(int race = NONE, int tech_level = NONE);
+Grapple* getNewGrapple(int race = NONE, int tech_level = NONE);
+Lazer* getNewLazer(int race = NONE, int tech_level = NONE);
+Protector* getNewProtector(int race = NONE, int tech_level = NONE);
+Radar* getNewRadar(int race = NONE, int tech_level = NONE);
+Rocket* getNewRocket(int race = NONE, int tech_level = NONE);
+Scaner* getNewScaner(int race = NONE, int tech_level = NONE);
 } // namespace item
 
 descriptor::BaseOLD* getNewBomb(int damage = NONE, int radius = NONE);

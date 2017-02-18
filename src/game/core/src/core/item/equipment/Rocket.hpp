@@ -48,8 +48,6 @@ public:
 
     virtual void updateProperties();
 
-    void countPrice();
-
 protected:
     model::item::Rocket* model() const { return m_model_rocket; }
     descriptor::item::Rocket* descriptor() const { return m_descriptor_rocket; }
