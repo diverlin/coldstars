@@ -123,7 +123,8 @@
 TEST(equipment, bak)
 {
     model::Ship* ship_model = builder::Ship::getNew();
-    control::Ship* ship_control = new control::Ship(ship_model);
+    descriptor::Ship* ship_descr = descriptor::getNewShip();
+    control::Ship* ship_control = new control::Ship(ship_model, ship_descr);
 
     model::item::Bak* bak_model = builder::item::Bak::getNew();
     control::item::Bak* bak_control = new control::item::Bak(bak_model);

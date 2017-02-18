@@ -19,7 +19,11 @@
 
 #pragma once
 
-#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/common/Base.hpp>
+
+#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/SectorDescriptor.hpp>
+
 #include "../common/constants.hpp"
 
 #include <boost/serialization/vector.hpp>
@@ -37,30 +41,9 @@ class Starsystem;
 class StarSystemsConditionData;
 
 
-namespace descriptor {
-
-class Sector : public SpaceObject
-{
-public:
-    Sector();
-    ~Sector() = default;
-    Sector(const std::string& data);
-    std::string data() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::SpaceObject>(*this);
-    }
-};
-
-} // namespace descriptor
-
-
 namespace model {
 
-class Sector : public SpaceObject
+class Sector : public Base
 {
 public:
     Sector();
@@ -89,7 +72,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::SpaceObject>(*this);
+        ar & boost::serialization::base_object<Base>(*this);
         ar & m_galaxy;
         assert(false);
         //ar & m_position;
@@ -102,7 +85,7 @@ private:
 
 namespace control {
 
-class Sector : public control::SpaceObject
+class Sector : public Base
 {
 public:
     Sector(model::Sector*, descriptor::Sector*);
@@ -115,7 +98,7 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(model::Starsystem*, const glm::vec3&);
+    void add(model::Starsystem*, descriptor::Starsystem*, const glm::vec3&);
 
     model::Starsystem* randomStarsystem(int condition_id = NONE);
     model::Starsystem* closestStarsystemTo(model::Starsystem*, int condition_id = NONE);

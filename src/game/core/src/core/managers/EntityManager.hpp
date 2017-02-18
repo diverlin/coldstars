@@ -53,7 +53,6 @@ SpaceObject* getSpaceObject(int_t id);
 namespace control {
 
 Starsystem* getNewStarsystem();
-Ship* getNewShip();
 Container* getNewContainer();
 
 } // namespace control

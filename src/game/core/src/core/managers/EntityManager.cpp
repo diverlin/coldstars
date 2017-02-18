@@ -131,23 +131,16 @@ namespace control {
 
 Starsystem*
 getNewStarsystem() {
-    model::Starsystem* model = builder::Starsystem::create();
-    Starsystem* starsystem = new Starsystem(model);
+    descriptor::Starsystem* descr = descriptor::getNewStarsystem();
+    model::Starsystem* model = builder::Starsystem::create(descr);
+    Starsystem* starsystem = new Starsystem(model, descr);
     return starsystem;
-}
-
-Ship*
-getNewShip() {
-    model::Ship* model = builder::Ship::getNew();
-    descriptor::Ship* descr = descriptor::getNewShip();
-    Ship* ship = new Ship(model, descr);
-    return ship;
 }
 
 Container*
 getNewContainer() {
-    model::Container* model = builder::Container::getNew();
     descriptor::Container* descr = descriptor::getNewContainer();
+    model::Container* model = builder::Container::getNew(/*descr*/);
     Container* container = new Container(model, descr);
     return container;
 }
