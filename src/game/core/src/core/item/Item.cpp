@@ -21,7 +21,6 @@
 #include <common/constants.hpp>
 
 #include <core/common/Global.hpp>
-//#include <managers/EntityManager.hpp>
 
 #include <core/slots/ItemSlot.hpp>
 
