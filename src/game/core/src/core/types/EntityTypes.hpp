@@ -23,6 +23,15 @@
 
 namespace entity
 {
+
+    enum class category {
+        NONE=0,
+        /** */
+
+        /** */
+        ANY
+    };
+
     enum class type
     {
         NONE=0,
