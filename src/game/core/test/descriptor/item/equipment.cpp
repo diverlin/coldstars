@@ -29,9 +29,9 @@ void compareEquipment(const descriptor::Equipment& descr, const descriptor::Equi
     // descriptor::Base
     EXPECT_EQ(descr.id(), copy.id());
     EXPECT_EQ(descr.descriptor(), copy.descriptor());
-    EXPECT_EQ(descr.type(), copy.type());
-    EXPECT_EQ(descr.subtype(), copy.subtype());
-    EXPECT_EQ(descr.subsubtype(), copy.subsubtype());
+    EXPECT_EQ(descr.obType(), copy.obType());
+    EXPECT_EQ(descr.obSubtype(), copy.obSubtype());
+    EXPECT_EQ(descr.obSubsubtype(), copy.obSubsubtype());
 
     // ceti::descriptor::BaseView
     EXPECT_EQ(descr.texture(), copy.texture());
