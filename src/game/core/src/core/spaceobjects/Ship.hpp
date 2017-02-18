@@ -63,8 +63,6 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
 
     model::Ship* model() const { return m_model_ship; }
-
-protected:
     descriptor::Ship* descriptor() const { return m_descriptor_ship; }
 
 private:

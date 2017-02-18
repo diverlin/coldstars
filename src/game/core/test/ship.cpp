@@ -35,22 +35,43 @@
 
 #include <gtest/gtest.h>
 
+namespace {
+namespace test {
+
+class Ship {
+public:
+    Ship() {
+        descriptor::Ship* descr = descriptor::getNewShip();
+        model::Ship* model = builder::Ship::getNew(descr);
+        m_control = new control::Ship(model, descr);
+    }
+    ~Ship() {
+        delete m_control->descriptor();
+        delete m_control->model();
+        delete m_control;
+    }
+
+    descriptor::Ship* descriptor() const { return m_control->descriptor(); }
+    model::Ship* model() const { return m_control->model(); }
+    control::Ship* control() const { return m_control; }
+
+private:
+    control::Ship* m_control = nullptr;
+};
+
+} // namespace test
+} // namespace
+
 TEST(ship, create)
 {
-    descriptor::Ship* descr = descriptor::getNewShip();
-    model::Ship* model = builder::Ship::getNew(descr);
-    control::Ship* control = new control::Ship(model);
-
-    delete descr;
-    delete model;
-    delete control;
+    test::Ship ship;
 }
 
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
     control::Starsystem* starsystem = control::getNewStarsystem();
-    control::Ship* ship = control::getNewShip();
+    test::Ship ship;
 
     /* equip ship */
     model::item::Drive* drive = builder::item::Drive::getNew();
@@ -60,13 +81,13 @@ TEST(ship, drop_item_to_space)
     /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->model()->place(), place::type::NONE);
-    starsystem->add(ship->model(), pos, dir);
-    EXPECT_EQ(ship->model()->place(), place::type::KOSMOS);
+    EXPECT_EQ(ship.model()->place(), place::type::NONE);
+    starsystem->add(ship.model(), pos, dir);
+    EXPECT_EQ(ship.model()->place(), place::type::KOSMOS);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_TRUE(ship->dropItemToSpace(entity::type::DRIVE_SLOT));
+    EXPECT_TRUE(ship.control()->dropItemToSpace(entity::type::DRIVE_SLOT));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
     assert(false);
@@ -80,49 +101,32 @@ TEST(ship, base_ship_shoot)
 {
     /* create objects */
     control::Starsystem* starsystem = control::getNewStarsystem();
-    model::Ship* model_ship1 = builder::Ship::getNew(/*full_equiped=*/true);
-    model::Ship* model_ship2 = builder::Ship::getNew(/*full_equiped=*/true);
-
-    control::Ship* ship1 = new control::Ship(model_ship1);
-    control::Ship* ship2 = new control::Ship(model_ship2);
+    test::Ship ship1;
+    test::Ship ship2;
 
     float distance = 10.0f;
 
     /* add objects */
-    starsystem->add(model_ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(model_ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship1.model(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2.model(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
-    ship1->prepareWeapons();
-    ship1->weaponComplex().activateWeapons();
-    ship1->setWeaponTarget(model_ship2);
-    int damage = ship1->guessDamage(distance) * ship2->adjustDissipateFilter();
-    int armor_init = model_ship2->armor();
-    ship1->fire(/*timer=*/0, /*rate=*/1.0);
-    EXPECT_TRUE((armor_init - damage) - model_ship2->armor() <= 1);
-
-    // clean
-    delete model_ship1;
-    delete model_ship2;
-    delete ship1;
-    delete ship2;
+    ship1.control()->prepareWeapons();
+    ship1.control()->weaponComplex().activateWeapons();
+    ship1.control()->setWeaponTarget(ship2.model());
+    int damage = ship1.control()->guessDamage(distance) * ship2.control()->adjustDissipateFilter();
+    int armor_init = ship2.model()->armor();
+    ship1.control()->fire(/*timer=*/0, /*rate=*/1.0);
+    EXPECT_TRUE((armor_init - damage) - ship2.model()->armor() <= 1);
 }
-
-
 
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    model::Ship* model1 = builder::Ship::getNew(/*full_equiped=*/true);
-    control::Ship* ship1 = new control::Ship(model1);
+    test::Ship ship;
 
-    assert(false);
-    //ship1->hit(model1->criticalDamage());
-    EXPECT_EQ(0, model1->armor());
-
-    // clean
-    delete model1;
-    delete ship1;
+    ship.control()->hit(ship.control()->criticalDamage());
+    EXPECT_EQ(0, ship.model()->armor());
 }
 
 

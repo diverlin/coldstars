@@ -126,7 +126,7 @@ private:
 namespace model {
 
 //# TODO:: remove inherits from SpaceObject, do the same for Sector and Galaxy
-class Starsystem : public model::SpaceObject
+class Starsystem : public Base
 {
 public:
     Starsystem();
@@ -179,7 +179,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        //ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<Base>(*this);
         ar & m_race_id;
         ar & m_conqueror_race_id;
         ar & m_condition_id;
@@ -200,14 +200,14 @@ private:
 
 namespace control {
 
-class Starsystem : public control::SpaceObject
+class Starsystem : public Base
 {
     //    using Stars = std::vector<Star*>;
     //    using Planets = std::vector<Planet*>;
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    Starsystem(model::Starsystem*);
+    Starsystem(model::Starsystem*, descriptor::Starsystem*);
     ~Starsystem();
 
     virtual void putChildrenToGarbage() const;

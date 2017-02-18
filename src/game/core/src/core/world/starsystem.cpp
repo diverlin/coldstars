@@ -70,7 +70,7 @@ Starsystem::Starsystem()
 {
 //    setType(entity::type::STARSYSTEM);
 
-    setPlace(place::type::KOSMOS);
+//    setPlace(place::type::KOSMOS);
 
     m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
@@ -104,7 +104,7 @@ namespace control {
 
 Starsystem::Starsystem(model::Starsystem* model, descriptor::Starsystem* descr)
     :
-      SpaceObject(model, descr)
+      Base(model)
     , m_model_starsystem(model)
     , m_descriptor_starsystem(descr)
 { 
@@ -242,7 +242,9 @@ void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, con
     _model->setDirection(dir);
     //rocket->updateOrientation();
 
-    control::RocketBullet* rocket = new control::RocketBullet(_model);
+    assert(false);
+    descriptor::RocketBullet* _descr = nullptr;
+    control::RocketBullet* rocket = new control::RocketBullet(_model, _descr);
     //rocket->initialize();
 
     m_bullets.push_back(rocket);
@@ -253,7 +255,9 @@ void Starsystem::add(model::Star* _model)
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
 
-    control::Star* star = new control::Star(_model);
+    assert(false);
+    descriptor::Star* _descr = nullptr;
+    control::Star* star = new control::Star(_model, _descr);
     star->initialize();
     m_stars.push_back(star);
 }
@@ -271,7 +275,9 @@ void Starsystem::add(model::Planet* _model, const model::SpaceObject* parent)
     _model->setRadiusA(_model->radiusA() * (m_planets.size() + 2));
     _model->setRadiusB(_model->radiusB() * (m_planets.size() + 2));
 
-    control::Planet* planet = new control::Planet(_model);
+    assert(false);
+    descriptor::Planet* _descr = nullptr;
+    control::Planet* planet = new control::Planet(_model, _descr);
     planet->initialize();
     m_planets.push_back(planet);
 }
@@ -287,7 +293,9 @@ void Starsystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
 
-    control::Asteroid* asteroid = new control::Asteroid(_model);
+    assert(false);
+    descriptor::Asteroid* _descr = nullptr;
+    control::Asteroid* asteroid = new control::Asteroid(_model, _descr);
     asteroid->initialize();
     m_asteroids.push_back(asteroid);
 }
@@ -307,7 +315,9 @@ void Starsystem::add(model::Container* _model, const glm::vec3& center)
     _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
-    control::Container* container = new control::Container(_model);
+    assert(false);
+    descriptor::Container* _descr = nullptr;
+    control::Container* container = new control::Container(_model, _descr);
 
     m_containers.push_back(container);
 }
@@ -318,7 +328,9 @@ void Starsystem::add(model::BlackHole* _model, const glm::vec3& center)
     _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
-    control::BlackHole* blackhole = new control::BlackHole(_model);
+    assert(false);
+    descriptor::BlackHole* _descr = nullptr;
+    control::BlackHole* blackhole = new control::BlackHole(_model, _descr);
     blackhole->initialize();
 
     m_blackholes.push_back(blackhole);

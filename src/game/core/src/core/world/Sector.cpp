@@ -33,27 +33,6 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace descriptor {
-
-Sector::Sector()
-{
-//    setType(entity::type::SECTOR);
-}
-
-Sector::Sector(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Sector::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace descriptor
-
-
 namespace model {
 
 Sector::Sector()
@@ -92,7 +71,7 @@ namespace control {
 
 Sector::Sector(model::Sector* model, descriptor::Sector* descr)
     :
-      SpaceObject(model, descr)
+      Base(model)
     , m_model_sector(model)
     , m_descriptor_sector(descr)
 {
@@ -117,12 +96,13 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-void Sector::add(model::Starsystem* _model, const glm::vec3& center)
+void Sector::add(model::Starsystem* _model, descriptor::Starsystem* descr, const glm::vec3& center)
 { 
     _model->setSector(model()->id());
-    _model->setPosition(center);
+assert(false);
+    //    _model->setPosition(center);
 
-    control::Starsystem* starsystem = new control::Starsystem(_model);
+    control::Starsystem* starsystem = new control::Starsystem(_model, descr);
     m_starsystems.push_back(starsystem);
 }
 
