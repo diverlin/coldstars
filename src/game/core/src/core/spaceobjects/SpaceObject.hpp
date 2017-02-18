@@ -23,6 +23,8 @@
 #include <core/struct/LifeData.hpp>
 #include <core/types/PlaceTypes.hpp>
 
+#include <core/descriptor/SpaceobjectDescriptor.hpp>
+
 #include <ceti/Orientation.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
@@ -37,6 +39,26 @@ struct UnresolvedDataSpaceObject
     int starsystem_id;
 }; 
 
+//namespace descriptor {
+
+//class SpaceObject : public Base
+//{
+//public:
+//    SpaceObject() = default;
+//    ~SpaceObject() = default;
+
+//private:
+
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & boost::serialization::base_object<Base>(*this);
+//    }
+//};
+
+//} // namespace descriptor
+
 
 namespace model {
 
@@ -45,8 +67,6 @@ class SpaceObject : public ceti::model::Orientation, public Base
 public:
     SpaceObject() = default;
     ~SpaceObject() = default;
-    SpaceObject(const std::string& data);
-    std::string data() const;
 
     void addArmor(int armor) { m_dataLife.armor += armor; }
 
@@ -95,10 +115,9 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::model::Orientation>(*this);
-        ar & boost::serialization::base_object<model::Base>(*this);
+        ar & boost::serialization::base_object<Base>(*this);
         ar & m_dataLife;
         ar & m_parent;
         ar & m_starsystem;
@@ -115,7 +134,7 @@ namespace control {
 class SpaceObject : public ceti::control::Orientation, public control::Base
 {
 public:
-    SpaceObject(model::SpaceObject*);
+    SpaceObject(model::SpaceObject*, descriptor::SpaceObject*);
     ~SpaceObject() override;
 
     //[[warning("make const, speed optimize")]]
@@ -138,8 +157,6 @@ public:
     //        void RenderInfo(const glm::vec2&);
     //        void virtual UpdateInfo() {}
 
-    model::SpaceObject* model() const { return m_model_spaceobject; }
-
 private:
     Starsystem* m_starsystem = nullptr;
     model::SpaceObject* m_parent = nullptr;
@@ -148,6 +165,10 @@ protected:
     glm::vec3 externalForce;
 
     model::SpaceObject* m_model_spaceobject = nullptr;
+    descriptor::SpaceObject* m_descriptor_spaceobject = nullptr;
+
+    model::SpaceObject* model() const { return m_model_spaceobject; }
+    descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
 
     void _addMass(int d_mass) { model()->setMass(model()->mass() + d_mass); }
 

@@ -93,7 +93,7 @@ void Galaxy::add(model::Sector* _model, const glm::vec3& center)
     _model->setGalaxy(model()->id());
     _model->setPosition(center);
 
-    control::Sector* sector = new control::Sector(_model);
+    control::Sector* sector = new control::Sector(_model, nullptr);
     m_sectors.push_back(sector);
 }
 

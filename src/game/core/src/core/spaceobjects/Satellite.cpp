@@ -55,10 +55,11 @@ Satellite::data() const
 
 namespace control {
 
-Satellite::Satellite(model::Satellite* model)
+Satellite::Satellite(model::Satellite* model, descriptor::Satellite* descr)
     :
-      Vehicle(model)
+      Vehicle(model, descr)
     , m_model_satellite(model)
+    , m_descriptor_satellite(descr)
 {
 
 }

@@ -36,6 +36,28 @@ class Starsystem;
 
 class StarSystemsConditionData;
 
+
+namespace descriptor {
+
+class Sector : public SpaceObject
+{
+public:
+    Sector();
+    ~Sector() = default;
+    Sector(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<model::SpaceObject>(*this);
+    }
+};
+
+} // namespace descriptor
+
+
 namespace model {
 
 class Sector : public SpaceObject
@@ -66,8 +88,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<model::SpaceObject>(*this);
         ar & m_galaxy;
         assert(false);
@@ -84,7 +105,7 @@ namespace control {
 class Sector : public control::SpaceObject
 {
 public:
-    Sector(model::Sector*);
+    Sector(model::Sector*, descriptor::Sector*);
     ~Sector();
 
     model::Starsystem* activeStarsystem() const;
@@ -108,9 +129,11 @@ public:
 //    void Resolve();
 
     model::Sector* model() const { return m_model_sector; }
+    descriptor::Sector* descriptor() const { return m_descriptor_sector; }
 
 private:
     model::Sector* m_model_sector = nullptr;
+    descriptor::Sector* m_descriptor_sector = nullptr;
 
     Galaxy* m_galaxy = nullptr;
 

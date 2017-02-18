@@ -25,6 +25,27 @@
 //class DriveEffect;
 //}
 
+namespace descriptor {
+
+class RocketBullet : public SpaceObject {
+
+public:
+    RocketBullet();
+    ~RocketBullet() = default;
+    RocketBullet(const std::string& data);
+    std::string data() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
+    }
+};
+
+} // namespace descriptor
+
+
 
 namespace model {
 
@@ -79,7 +100,7 @@ namespace control {
 class RocketBullet : public SpaceObject
 {
 public:
-    RocketBullet(model::RocketBullet*);
+    RocketBullet(model::RocketBullet*, descriptor::RocketBullet*);
     virtual ~RocketBullet();
 
     void CreateDriveComplexTextureDependedStuff();
@@ -93,9 +114,12 @@ public:
     //void RenderInSpace(const Renderer&, float);
 
     model::RocketBullet* model() const { return m_model_rocket; }
+    descriptor::RocketBullet* descriptor() const { return m_descriptor_rocket; }
 
 private:
     model::RocketBullet* m_model_rocket = nullptr;
+    descriptor::RocketBullet* m_descriptor_rocket = nullptr;
+
     model::SpaceObject* m_target = nullptr;
 
 //    jeti::DriveEffect* m_EffectDrive;

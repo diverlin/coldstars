@@ -25,6 +25,8 @@
 #include <core/descriptor/StarDescriptor.hpp>
 #include <core/descriptor/PlanetDescriptor.hpp>
 #include <core/descriptor/AsteroidDescriptor.hpp>
+#include <core/descriptor/Container.hpp>
+
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
@@ -265,10 +267,10 @@ getNewAsteroid()
     return descr;
 }
 
-descriptor::BaseOLD*
+descriptor::Container*
 getNewContainer()
 {
-    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::Type::CONTAINER);
+    descriptor::Container* descr = new descriptor::Container;
     return descr;
 }
 

@@ -57,10 +57,11 @@ RocketBullet::data() const
 
 namespace control {
 
-RocketBullet::RocketBullet(model::RocketBullet* model)
+RocketBullet::RocketBullet(model::RocketBullet* model, descriptor::RocketBullet* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_rocket(model)
+    , m_descriptor_rocket(descr)
 {
 }
 

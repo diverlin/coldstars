@@ -20,8 +20,7 @@
 
 #include <core/common/Base.hpp>
 
-#include <ceti/type/IdType.hpp>
-//#include <ceti/Base.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <vector>
 

@@ -33,6 +33,27 @@
 #include <ceti/serialization/macro.hpp>
 
 
+namespace descriptor {
+
+Sector::Sector()
+{
+//    setType(entity::type::SECTOR);
+}
+
+Sector::Sector(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Sector::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace descriptor
+
+
 namespace model {
 
 Sector::Sector()
@@ -69,10 +90,11 @@ bool Sector::operator!=(const Sector& rhs) const {
 
 namespace control {
 
-Sector::Sector(model::Sector* model)
+Sector::Sector(model::Sector* model, descriptor::Sector* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_sector(model)
+    , m_descriptor_sector(descr)
 {
 }
 

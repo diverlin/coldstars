@@ -21,18 +21,20 @@
 
 namespace descriptor {
 
-Container::Container(int_t child_id)
-    :
-      BaseOLD(Type::CONTAINER)
+Container::Container()
 {
-    add(Key::CHILD, child_id);
+    setType(descriptor::type::CONTAINER);
 }
 
 Container::Container(const std::string& data)
-    :
-      BaseOLD(data)
 {
+    MACRO_READ_SERIALIZED_DATA
+}
 
+std::string
+Container::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace descriptor

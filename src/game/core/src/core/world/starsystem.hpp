@@ -24,6 +24,8 @@
 #include <core/managers/AsteroidManager.hpp>
 #include <core/types/RaceTypes.hpp>
 
+#include <core/descriptor/StarsystemDescriptor.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 #include <boost/serialization/vector.hpp>
@@ -118,6 +120,7 @@ private:
     int m_damage = 0;
     int m_radius = 0;
 };
+
 
 
 namespace model {
@@ -296,9 +299,11 @@ public:
     //
 
     model::Starsystem* model() const { return m_model_starsystem; }
+    descriptor::Starsystem* descriptor() const { return m_descriptor_starsystem; }
 
 private:
     model::Starsystem* m_model_starsystem = nullptr;
+    descriptor::Starsystem* m_descriptor_starsystem = nullptr;
 
     race::type m_race_id = race::type::R0;
     race::type m_conqueror_race_id = race::type::NONE;

@@ -88,14 +88,13 @@ namespace control {
 class Planetoid : public SpaceObject
 {
 public:
-    Planetoid(model::Planetoid* model);
+    Planetoid(model::Planetoid*, descriptor::Planetoid*);
     virtual ~Planetoid();
 
     void setPlanetDescriptor(int_t descriptor);
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
-    descriptor::Planet* descriptor() const { return m_descriptor_planetoid; }
 
     void initialize();
     //void bindParent(const SpaceObject* const, int);
@@ -107,11 +106,13 @@ protected:
     void _updatePosition();
 
 private:
-    model::Planetoid* m_model_planetoid = nullptr;
     Orbit m_orbit;
-    descriptor::Planet* m_descriptor_planetoid = nullptr;
+
+    model::Planetoid* m_model_planetoid = nullptr;
+    descriptor::Planetoid* m_descriptor_planetoid = nullptr;
 
     model::Planetoid* model() const { return m_model_planetoid; }
+    descriptor::Planetoid* descriptor() const { return m_descriptor_planetoid; }
 
     void __createOrbit();
 };

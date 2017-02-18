@@ -43,10 +43,11 @@ Planetoid::data() const
 
 namespace control {
 
-Planetoid::Planetoid(model::Planetoid* model)
+Planetoid::Planetoid(model::Planetoid* model, descriptor::Planetoid* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_planetoid(model)
+    , m_descriptor_planetoid(descr)
 {}
 
 Planetoid::~Planetoid()

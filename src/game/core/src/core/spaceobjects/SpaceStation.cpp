@@ -59,10 +59,11 @@ SpaceStation::data() const
 namespace control {
 
 
-SpaceStation::SpaceStation(model::SpaceStation* model)
+SpaceStation::SpaceStation(model::SpaceStation* model, descriptor::SpaceStation* descr)
     :
-      Vehicle(model)
+      Vehicle(model, descr)
     , m_model_spacestation(model)
+    , m_descriptor_spacestation(descr)
 {
 
 }

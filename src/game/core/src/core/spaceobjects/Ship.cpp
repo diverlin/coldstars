@@ -60,11 +60,11 @@ Ship::data() const
 
 namespace control {
 
-
-Ship::Ship(model::Ship* model)
+Ship::Ship(model::Ship* model, descriptor::Ship* descr)
     :
-      Vehicle(model)
+      Vehicle(model, descr)
     , m_model_ship(model)
+    , m_descriptor_ship(descr)
 {
 
 }

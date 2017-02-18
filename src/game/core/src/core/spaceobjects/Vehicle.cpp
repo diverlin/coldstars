@@ -81,10 +81,11 @@
 namespace control {
 
 
-Vehicle::Vehicle(model::Vehicle* model)
+Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     :
-      SpaceObject(model)
+      SpaceObject(model, descr)
     , m_model_vehicle(model)
+    , m_descriptor_vehicle(descr)
 {
 //    weaponComplex().setOwnerVehicle(this);
     driveComplex().setOwnerVehicle(this);
