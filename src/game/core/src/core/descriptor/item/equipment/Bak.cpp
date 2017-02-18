@@ -18,6 +18,8 @@
 
 #include "Bak.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -40,7 +42,9 @@ const float Bak::MODULES_NUM_WEIGHT = 0.3f;
 
 Bak::Bak()
 {
-    setDescriptor(descriptor::type::BAK_EQUIPMENT);
+    setType(descriptor::type::BAK_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::BAK_EQUIPMENT);
     setSlotType(entity::type::BAK_SLOT);
 }
 

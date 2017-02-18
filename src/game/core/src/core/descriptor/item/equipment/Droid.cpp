@@ -40,7 +40,9 @@ const float Droid::MODULES_NUM_WEIGHT = 0.2f;
 
 Droid::Droid()
 {
-    setDescriptor(descriptor::type::DROID_EQUIPMENT);
+    setType(descriptor::type::DROID_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::DROID_EQUIPMENT);
     setSlotType(entity::type::DROID_SLOT);
 }
 

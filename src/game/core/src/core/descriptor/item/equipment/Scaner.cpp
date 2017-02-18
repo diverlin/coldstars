@@ -18,6 +18,8 @@
 
 #include "Scaner.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 
@@ -42,7 +44,9 @@ const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
 
 Scaner::Scaner()
 {
-    setDescriptor(descriptor::type::SCANER_EQUIPMENT);
+    setType(descriptor::type::SCANER_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::SCANER_EQUIPMENT);
     setSlotType(entity::type::SCANER_SLOT);
 }
 

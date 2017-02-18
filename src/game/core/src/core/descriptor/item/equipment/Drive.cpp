@@ -18,6 +18,8 @@
 
 #include "Drive.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -49,7 +51,9 @@ const float Drive::MODULES_NUM_WEIGHT = 0.2;
 
 Drive::Drive()
 {
-    setDescriptor(descriptor::type::DRIVE_EQUIPMENT);
+    setType(descriptor::type::DRIVE_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::DRIVE_EQUIPMENT);
     setSlotType(entity::type::DRIVE_SLOT);
 }
 

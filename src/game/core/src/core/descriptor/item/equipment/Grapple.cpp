@@ -18,6 +18,8 @@
 
 #include "Grapple.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -50,7 +52,9 @@ const float Grapple::MODULES_NUM_WEIGHT = 0.1f;
 
 Grapple::Grapple()
 {
-    setDescriptor(descriptor::type::GRAPPLE_EQUIPMENT);
+    setType(descriptor::type::GRAPPLE_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::GRAPPLE_EQUIPMENT);
     setSlotType(entity::type::GRAPPLE_SLOT);
 }
 
