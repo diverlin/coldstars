@@ -219,6 +219,8 @@ Manager::generate()
         add(item::getNewProtector());
         add(item::getNewRadar());
         add(item::getNewScaner());
+        add(item::getNewLazer());
+        add(item::getNewRocket());
         add(getNewBomb());
     }
 

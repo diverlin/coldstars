@@ -37,9 +37,6 @@ void compareEquipment(model::Equipment* model, model::Equipment* copy)
     // model::Base
     EXPECT_EQ(model->id(), copy->id());
     EXPECT_EQ(model->descriptor(), copy->descriptor());
-//    EXPECT_EQ(model->type(), copy->type());
-//    EXPECT_EQ(model->subtype(), copy->subtype());
-//    EXPECT_EQ(model->subsubtype(), copy->subsubtype());
 
     // model::Item
     EXPECT_EQ(model->condition(), copy->condition());
@@ -54,10 +51,6 @@ TEST(model, bak) {
     init();
 
     model::item::Bak* model = builder::item::Bak::getNew();
-
-//    EXPECT_EQ(model->type(), entity::type::EQUIPMENT);
-//    EXPECT_EQ(model->subtype(), entity::type::BAK_EQUIPMENT);
-
     model::item::Bak* copy = new model::item::Bak(model->data());
 
     compareEquipment(model, copy);
@@ -68,16 +61,13 @@ TEST(model, bak) {
     // general
     EXPECT_EQ(model->data(), copy->data());
 
+    // clean
     delete model;
     delete copy;
 }
 
 TEST(model, drive) {
     model::item::Drive* model = builder::item::Drive::getNew();
-
-//    EXPECT_EQ(model->type(), entity::type::EQUIPMENT);
-//    EXPECT_EQ(model->subtype(), entity::type::DRIVE_EQUIPMENT);
-
     model::item::Drive* copy = new model::item::Drive(model->data());
 
     compareEquipment(model, copy);
@@ -88,136 +78,133 @@ TEST(model, drive) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
+
+    // clean
+    delete model;
+    delete copy;
 }
 
-//TEST(model, droid) {
-//    model::item::Droid descr = model::item::getNewDroid();
+TEST(model, droid) {
+    model::item::Droid* model = builder::item::Droid::getNew();
+    model::item::Droid* copy = new model::item::Droid(model->data());
 
-//    EXPECT_EQ(model->descriptor(), model::type::DROID_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::DROID_SLOT);
+    compareEquipment(model, copy);
 
-//    model::item::Droid copy(model->data());
+    // model::item::Droid
+    EXPECT_EQ(model->repair(), copy->repair());
 
-//    compareEquipmentDescriptors(descr, copy);
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    // model::item::Droid
-//    EXPECT_EQ(model->repair(), copy->repair());
+    // clean
+    delete model;
+    delete copy;
+}
 
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+TEST(model, grapple) {
+    model::item::Grapple* model = builder::item::Grapple::getNew();
+    model::item::Grapple* copy = new model::item::Grapple(model->data());
 
-//TEST(model, grapple) {
-//    model::item::Grapple descr = model::item::getNewGrapple();
+    compareEquipment(model, copy);
 
-//    EXPECT_EQ(model->descriptor(), model::type::GRAPPLE_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::GRAPPLE_SLOT);
+    // model::item::Grapple
+    EXPECT_EQ(model->strength(), copy->strength());
+    EXPECT_EQ(model->radius(), copy->radius());
+    EXPECT_EQ(model->speed(), copy->speed());
 
-//    model::item::Grapple copy(model->data());
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    compareEquipmentDescriptors(descr, copy);
+    // clean
+    delete model;
+    delete copy;
+}
 
-//    // model::item::Grapple
-//    EXPECT_EQ(model->strength(), copy->strength());
-//    EXPECT_EQ(model->radius(), copy->radius());
-//    EXPECT_EQ(model->speed(), copy->speed());
+TEST(model, lazer) {
+    model::item::Lazer* model = builder::item::Lazer::getNew();
+    model::item::Lazer* copy = new model::item::Lazer(model->data());
 
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+    compareEquipment(model, copy);
 
-//TEST(model, lazer) {
-//    model::item::Lazer descr = model::item::getNewLazer();
+    // model::item::Lazer
+    EXPECT_EQ(model->damage(), copy->damage());
+    EXPECT_EQ(model->radius(), copy->radius());
 
-//    EXPECT_EQ(model->descriptor(), model::type::LAZER_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::WEAPON_SLOT);
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    model::item::Lazer copy(model->data());
+    // clean
+    delete model;
+    delete copy;
+}
 
-//    compareEquipmentDescriptors(descr, copy);
+TEST(model, protector) {
+    model::item::Protector* model = builder::item::Protector::getNew();
+    model::item::Protector* copy = new model::item::Protector(model->data());
 
-//    // model::item::Lazer
-//    EXPECT_EQ(model->damage(), copy->damage());
-//    EXPECT_EQ(model->radius(), copy->radius());
+    compareEquipment(model, copy);
 
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+    // model::item::Protector
+    EXPECT_EQ(model->protection(), copy->protection());
 
-//TEST(model, protector) {
-//    model::item::Protector descr = model::item::getNewProtector();
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    EXPECT_EQ(model->descriptor(), model::type::PROTECTOR_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::PROTECTOR_SLOT);
+    // clean
+    delete model;
+    delete copy;
+}
 
-//    model::item::Protector copy(model->data());
+TEST(model, radar) {
+    model::item::Radar* model = builder::item::Radar::getNew();
+    model::item::Radar* copy = new model::item::Radar(model->data());
 
-//    compareEquipmentDescriptors(descr, copy);
+    compareEquipment(model, copy);
 
-//    // model::item::Protector
-//    EXPECT_EQ(model->protection(), copy->protection());
+    // model::item::Radar
+    EXPECT_EQ(model->radius(), copy->radius());
 
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//TEST(model, radar) {
-//    model::item::Radar descr = model::item::getNewRadar();
+    // clean
+    delete model;
+    delete copy;
+}
 
-//    EXPECT_EQ(model->descriptor(), model::type::RADAR_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::RADAR_SLOT);
+TEST(model, rocket) {
+    model::item::Rocket* model = builder::item::Rocket::getNew();
+    model::item::Rocket* copy = new model::item::Rocket(model->data());
 
-//    model::item::Radar copy(model->data());
+    compareEquipment(model, copy);
 
-//    compareEquipmentDescriptors(descr, copy);
+    // model::item::Rocket
+    EXPECT_EQ(model->ammo(), copy->ammo());
+    EXPECT_EQ(model->damage(), copy->damage());
+    EXPECT_EQ(model->radius(), copy->radius());
 
-//    // model::item::Radar
-//    EXPECT_EQ(model->radius(), copy->radius());
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+    // clean
+    delete model;
+    delete copy;
+}
 
-//TEST(model, rocket) {
-//    model::item::Rocket descr = model::item::getNewRocket();
+TEST(model, scaner) {
+    model::item::Scaner* model = builder::item::Scaner::getNew();
+    model::item::Scaner* copy = new model::item::Scaner(model->data());
 
-//    EXPECT_EQ(model->descriptor(), model::type::ROCKET_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::WEAPON_SLOT);
+    compareEquipment(model, copy);
 
-//    model::item::Rocket copy(model->data());
+    // model::item::Scaner
+    EXPECT_EQ(model->scan(), copy->scan());
 
-//    compareEquipmentDescriptors(descr, copy);
+    // general
+    EXPECT_EQ(model->data(), copy->data());
 
-//    // model::item::Rocket
-//    EXPECT_EQ(model->ammo(), copy->ammo());
-//    EXPECT_EQ(model->damage(), copy->damage());
-//    EXPECT_EQ(model->radius(), copy->radius());
-
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
-
-//TEST(model, scaner) {
-//    model::item::Scaner descr = model::item::getNewScaner();
-
-//    EXPECT_EQ(model->descriptor(), model::type::SCANER_EQUIPMENT);
-//    EXPECT_EQ(model->slotType(), entity::type::SCANER_SLOT);
-
-//    model::item::Scaner copy(model->data());
-
-//    compareEquipmentDescriptors(descr, copy);
-
-//    // model::item::Scaner
-//    EXPECT_EQ(model->scan(), copy->scan());
-
-//    // general
-//    EXPECT_EQ(model->data(), copy->data());
-//    EXPECT_EQ(model->info(), copy->info());
-//}
+    // clean
+    delete model;
+    delete copy;
+}
 

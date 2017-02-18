@@ -81,8 +81,8 @@ public:
     int_t id() const { return m_id; }
     descriptor::type type() const { return m_type; }
     const entity::type& obType() const { return m_obType; }
-    const entity::type& obSubtype() const { return m_obSubType; }
-    const entity::type& obSubsubtype() const { return m_obSubSubType; }
+    const entity::type& obSubType() const { return m_obSubType; }
+    const entity::type& obSubSubType() const { return m_obSubSubType; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
