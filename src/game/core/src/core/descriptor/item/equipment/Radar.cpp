@@ -18,6 +18,8 @@
 
 #include "Radar.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 
@@ -41,7 +43,9 @@ const float Radar::MODULES_NUM_WEIGHT = 0.4;
 
 Radar::Radar()
 {
-    setDescriptor(descriptor::type::RADAR_EQUIPMENT);
+    setType(descriptor::type::RADAR_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::RADAR_EQUIPMENT);
     setSlotType(entity::type::RADAR_SLOT);
 }
 

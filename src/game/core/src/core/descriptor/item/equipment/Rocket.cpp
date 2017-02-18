@@ -18,6 +18,8 @@
 
 #include "Rocket.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -50,7 +52,9 @@ const float Rocket::MODULES_NUM_WEIGHT = 0.2f;
 
 Rocket::Rocket()
 {
-    setDescriptor(descriptor::type::ROCKET_EQUIPMENT);
+    setType(descriptor::type::ROCKET_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::ROCKET_EQUIPMENT);
     setSlotType(entity::type::WEAPON_SLOT);
 }
 

@@ -29,24 +29,24 @@ namespace descriptor {
 
 struct Galaxy : public Base
 {
-    public:
-        bool allow_invasion = true;
-        std::vector<int_t> sectors;
-        
-        Galaxy() = default;
-        ~Galaxy() = default;
+public:
+    bool allow_invasion = true;
+    std::vector<int_t> sectors;
 
-        std::string info() const {
-            std::string result = "Galaxy descriptor: " + descriptor::Base::info() + ceti::to_string(" sectors: ", sectors);
-            return result;
-        }
+    Galaxy() = default;
+    ~Galaxy() = default;
+
+    std::string info() const {
+        std::string result = "Galaxy descriptor: " + descriptor::Base::info() + ceti::to_string(" sectors: ", sectors);
+        return result;
+    }
 }; 
 
 } // namespace descriptor
 
 
-    
 
-        
+
+
 
 

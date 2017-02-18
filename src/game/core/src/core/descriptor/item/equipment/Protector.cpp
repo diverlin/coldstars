@@ -18,6 +18,8 @@
 
 #include "Protector.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -40,7 +42,9 @@ const float Protector::MODULES_NUM_WEIGHT = 0.2f;
 
 Protector::Protector()
 {
-    setDescriptor(descriptor::type::PROTECTOR_EQUIPMENT);
+    setType(descriptor::type::PROTECTOR_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::PROTECTOR_EQUIPMENT);
     setSlotType(entity::type::PROTECTOR_SLOT);
 }
 

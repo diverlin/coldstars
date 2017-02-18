@@ -18,6 +18,8 @@
 
 #include "Lazer.hpp"
 
+#include <core/types/EntityTypes.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -45,7 +47,9 @@ const float Lazer::MODULES_NUM_WEIGHT = 0.2f;
 
 Lazer::Lazer()
 {
-    setDescriptor(descriptor::type::LAZER_EQUIPMENT);
+    setType(descriptor::type::LAZER_EQUIPMENT);
+    setObType(entity::type::EQUIPMENT);
+    setObSubType(entity::type::LAZER_EQUIPMENT);
     setSlotType(entity::type::WEAPON_SLOT);
 }
 
