@@ -25,20 +25,6 @@
 #include <item/Item.hpp>
 #include "../slots/ItemSlot.hpp"
 
-WeaponComplex::WeaponComplex()
-    :
-      owner_vehicle(nullptr)
-{
-    assert(owner_vehicle != nullptr);
-}
-
-WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)
-    :
-      owner_vehicle(owner_vehicle)
-{}
-
-WeaponComplex::~WeaponComplex()
-{}
 
 bool
 WeaponComplex::addSlot(control::ItemSlot* slot)

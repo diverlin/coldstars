@@ -41,7 +41,9 @@ TEST(ship, create)
     model::Ship* model = builder::Ship::getNew(descr);
     control::Ship* control = new control::Ship(model);
 
-//    control::Ship* ship = control::getNewShip();
+    delete descr;
+    delete model;
+    delete control;
 }
 
 TEST(ship, drop_item_to_space)

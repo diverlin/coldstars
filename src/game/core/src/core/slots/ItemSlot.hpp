@@ -68,63 +68,63 @@ class Bomb;
 class GoodsPack; 
 
 
-namespace descriptor {
+//namespace descriptor {
 
-class ItemSlot : public BaseSlot
-{
-public:
-    ItemSlot() = default;
-    ~ItemSlot() = default;
-    ItemSlot(const std::string& data);
-    std::string data() const;
+//class ItemSlot : public BaseSlot
+//{
+//public:
+//    ItemSlot() = default;
+//    ~ItemSlot() = default;
+//    ItemSlot(const std::string& data);
+//    std::string data() const;
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseSlot>(*this);
-    }
-};
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & boost::serialization::base_object<BaseSlot>(*this);
+//    }
+//};
 
-} // namespace descriptor
+//} // namespace descriptor
 
 
-namespace model {
+//namespace model {
 
-class ItemSlot : public BaseSlot
-{
-public:
-    ItemSlot() = default;
-    ~ItemSlot() = default;
-    ItemSlot(const std::string& data);
-    std::string data() const;
+//class ItemSlot : public BaseSlot
+//{
+//public:
+//    ItemSlot() = default;
+//    ~ItemSlot() = default;
+//    ItemSlot(const std::string& data);
+//    std::string data() const;
 
-    ItemSlot(int_t id, entity::type subtype_id);
+//    ItemSlot(int_t id, entity::type subtype_id);
 
-    void setTarget(int_t target) { m_target = target; }
-    void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
+//    void setTarget(int_t target) { m_target = target; }
+//    void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
 
-    int_t item() const { return m_item; }
-    int_t target() const { return m_target; }
-    int_t subtarget() const { return m_subtarget; }
+//    int_t item() const { return m_item; }
+//    int_t target() const { return m_target; }
+//    int_t subtarget() const { return m_subtarget; }
 
-private:
-    int_t m_item = NONE;
-    int_t m_target = NONE;
-    int_t m_subtarget = NONE;
+//private:
+//    int_t m_item = NONE;
+//    int_t m_target = NONE;
+//    int_t m_subtarget = NONE;
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<BaseSlot>(*this);
-        ar & m_item;
-        ar & m_target;
-        ar & m_subtarget;
-    }
-};
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version) {
+//        ar & boost::serialization::base_object<BaseSlot>(*this);
+//        ar & m_item;
+//        ar & m_target;
+//        ar & m_subtarget;
+//    }
+//};
 
-} // namespace model
+//} // namespace model
 
 namespace control {
 
@@ -216,10 +216,10 @@ public:
     int itemRadius() const;
     int itemDamage() const;
 
-    model::ItemSlot* model() const { return m_model_itemslot; }
+//    model::ItemSlot* model() const { return m_model_itemslot; }
 
 private:
-    model::ItemSlot* m_model_itemslot = nullptr;
+//    model::ItemSlot* m_model_itemslot = nullptr;
 
     Turrel* m_turrel = nullptr;          // only for weapons slot
 

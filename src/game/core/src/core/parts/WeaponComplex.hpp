@@ -23,7 +23,7 @@
 
 #include <vector>
 
-class Vehicle;
+//class Vehicle;
 
 namespace model {
 class SpaceObject;
@@ -36,9 +36,8 @@ class ItemSlot;
 class WeaponComplex
 {
 public:
-    WeaponComplex();
-    WeaponComplex(Vehicle* owner_vehicle);
-    ~WeaponComplex();
+    WeaponComplex() = default;
+    ~WeaponComplex() = default;
 
     int radiusMin() const { return m_radiusMin; }
     int radiusMax() const { return m_radiusMax; }
@@ -76,7 +75,7 @@ private:
     int m_radiusMax = 0;
     int m_radiusMin = 0;
 
-    Vehicle* owner_vehicle = nullptr;
+//    Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
     std::vector<control::ItemSlot*> m_slots;

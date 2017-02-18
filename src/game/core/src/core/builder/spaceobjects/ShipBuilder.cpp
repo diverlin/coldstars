@@ -69,7 +69,7 @@ Ship::__getNewTemplate()
 void
 Ship::__createInternals(model::Ship* ship, descriptor::Vehicle* descr)
 {
-    assert(false);
+//    assert(false);
     //assert(descr->type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;
@@ -97,41 +97,8 @@ Ship::__createInternals(model::Ship* ship, descriptor::Vehicle* descr)
 //        }
 //    }
 
-    assert(false);
+//    assert(false);
     //ship->setSubSubTypeId((entity::Type)descr->type());
-
-    descriptor::Vehicle descr2;
-    assert(false);
-//    descr2.id() = descr->id();
-//    descr2.race() = (race::type)descr->race();
-//    descr2.type_id = (entity::Type)descr->type();
-//    descr2.size_id = descr->size();
-
-//    descr2.space = descr->space();
-//    descr2.armor = descr->armor();
-//    descr2.protection = descr->protection();
-//    descr2.temperature = descr->temperature();
-//    descr2.price = descr->price();
-
-//    descr2.draw_turrels = descr->drawTurrels();
-
-//    descr2.slot_bak_num = descr->bakSlotNum();
-//    descr2.slot_drive_num = descr->driveSlotNum();
-//    descr2.slot_droid_num = descr->droidSlotNum();
-//#ifdef USE_EXTRA_EQUIPMENT
-//    descr2.slot_energizer_num = descr->energizerSlotNum();
-//    descr2.slot_freezer_num = descr->freezerSlotNum();
-//#endif // USE_EXTRA_EQUIPMENT
-//    descr2.slot_grapple_num = descr->grappleSlotNum();
-//    descr2.slot_protector_num = descr->protectorSlotNum();
-//    descr2.slot_radar_num = descr->radarSlotNum();
-//    descr2.slot_scaner_num = descr->scanerSlotNum();
-//    descr2.slot_weapon_num = descr->weaponSlotNum();
-//    descr2.slot_artefact_num = descr->artefactSlotNum();
-//    descr2.slot_otsec_num = descr->cargoSlotNum();
-
-    assert(false);
-    //ship->setKorpusData(descr2);
 
 //    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -150,19 +117,18 @@ Ship::__createInternals(model::Ship* ship, descriptor::Vehicle* descr)
 
     LifeData data_life;
     data_life.armor      = descr->armor();
-    assert(false);
+//    assert(false);
 //    data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->setLifeData(data_life);
     
-    assert(false);
+//    assert(false);
 //    ship->CreateDriveComplexTextureDependedStuff();
 //    ship->CreateProtectionComplexTextureDependedStuff();
      
     //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
     //ship->SetRenderAnimation(animation_program);
 
-    assert(false);
-    //_createSlots(ship);
+//    _createSlots(ship);
 }
 
 } // namespace builder

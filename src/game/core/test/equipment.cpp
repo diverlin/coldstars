@@ -1,45 +1,45 @@
-///*
-//     Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+/*
+     Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
-//     This program is free software; you can redistribute it and/or
-//     modify it under the terms of the GNU General Public License
-//     as published by the Free Software Foundation; either version 2
-//     of the License, or (at your option) any later version.
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
 
-//     This program is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
 
-//     You should have received a copy of the GNU General Public License
-//     along with this program; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-//*/
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 
-//#include <core/common/Global.hpp>
-//#include <core/common/constants.hpp>
+#include <core/common/Global.hpp>
+#include <core/common/constants.hpp>
 
-//#include <core/slots/ItemSlot.hpp>
-//#include <core/spaceobjects/Ship.hpp>
+#include <core/slots/ItemSlot.hpp>
+#include <core/spaceobjects/Ship.hpp>
 
-//#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
 
-//#include <core/descriptor/Base.hpp>
-//#include <core/descriptor/DescriptorGenerator.hpp>
-//#include <core/descriptor/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
-//#include <core/builder/item/equipment/ALL>
-//#include <core/builder/item/modules/ALL>
-//#include <core/builder/item/artefacts//ALL>
-//#include <core/builder/item/other/ALL>
+#include <core/builder/item/equipment/ALL>
+#include <core/builder/item/modules/ALL>
+#include <core/builder/item/artefacts//ALL>
+#include <core/builder/item/other/ALL>
 
-//#include <core/item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
-//#include "helper.hpp"
+#include "helper.hpp"
 
-//#include <gtest/gtest.h>
+#include <gtest/gtest.h>
 
-//#include <fstream>
+#include <fstream>
 
 //void commonDataItemCheck(descriptor::BaseOLD* descr, item::Base* item)
 //{
@@ -120,28 +120,30 @@
 //    delete rocket;
 //}
 
-//TEST(equipment, bak)
-//{
-//    model::Ship* model = builder::Ship::getNew();
-//    control::Ship* ship = new control::Ship(model);
+TEST(equipment, bak)
+{
+    model::Ship* ship_model = builder::Ship::getNew();
+    control::Ship* ship_control = new control::Ship(ship_model);
 
-//    item::Bak* bak = core::global::get().bakBuilder().getNew();
+    model::item::Bak* bak_model = builder::item::Bak::getNew();
+    control::item::Bak* bak_control = new control::item::Bak(bak_model);
 
-//    // initial
-//    EXPECT_TRUE(ship->driveComplex().bakSlot()->item() == nullptr);
-//    EXPECT_EQ(0, ship->properties().hyper);
+    // initial
+    EXPECT_TRUE(ship_control->driveComplex().bakSlot()->item() == nullptr);
+    EXPECT_EQ(0, ship_control->properties().hyper);
 
-//    // event: insert item
-//    bool ok = ship->manage(bak);
-//    EXPECT_TRUE(ok);
-//    EXPECT_EQ(bak, ship->driveComplex().bakSlot()->item());
-//    EXPECT_EQ(0, ship->properties().hyper); // no drive is set, that's why hyper is 0
+    // event: insert item
+    bool ok = ship_control->manage(bak_control);
+    EXPECT_TRUE(ok);
+    EXPECT_EQ(bak_control, ship_control->driveComplex().bakSlot()->item());
+    EXPECT_EQ(0, ship_control->properties().hyper); // no drive is set, that's why hyper is 0
 
-//    // clean
-//    delete model;
-//    delete ship;
-//    delete bak;
-//}
+    // clean
+    delete ship_model;
+    delete ship_control;
+    delete bak_model;
+    delete bak_control;
+}
 
 //TEST(equipment, drive)
 //{

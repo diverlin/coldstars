@@ -21,7 +21,8 @@
 #include <spaceobjects/SpaceStation.hpp>
 #include <spaceobjects/Container.hpp>
 
-#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/slots/ItemSlotBuilder.hpp>
 
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
@@ -77,25 +78,6 @@
 #include <meti/RandUtils.hpp>
 
 
-namespace model {
-
-Vehicle::Vehicle(const std::string& data)
-{
-    //MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Vehicle::data() const
-{
-    //MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
-
-
-
-
 namespace control {
 
 
@@ -114,6 +96,90 @@ Vehicle::Vehicle(model::Vehicle* model)
 Vehicle::~Vehicle()
 {
     //LOG("___::~Vehicle("+std::to_string(model()->id())+")");
+}
+
+void
+Vehicle::createSlots()
+{
+    assert(descriptor());
+    assert(m_slots.size()==0);
+
+    // WEAPON SLOTS
+    for (int i=0; i<descriptor()->weaponSlotNum(); ++i) {
+        ItemSlot* slot = getNewItemSlot(entity::type::WEAPON_SLOT);
+        //slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->radarSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::RADAR_SLOT);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->scanerSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::SCANER_SLOT);
+        addItemSlot(slot);
+    }
+
+
+    if (descriptor()->grappleSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::GRAPPLE_SLOT);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->droidSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::DROID_SLOT);
+        addItemSlot(slot);
+    }
+
+    #ifdef USE_EXTRA_EQUIPMENT
+    if (descriptor()->enrgizerSlotNum) {
+        ItemSlot* slot = getNewItemSlot(entity::type::ENERGIZER_SLOT);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->freezerSlotNum()) {
+        ItemSlot* slot = GetNewItemSlot(entity::type::FREEZER_SLOT);
+        AddItemSlot(slot);
+    }
+#endif // USE_EXTRA_EQUIPMENT
+
+    if (descriptor()->protectorSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::PROTECTOR_SLOT);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->driveSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::DRIVE_SLOT);
+        addItemSlot(slot);
+    }
+
+    if (descriptor()->bakSlotNum()) {
+        ItemSlot* slot = getNewItemSlot(entity::type::BAK_SLOT);
+        addItemSlot(slot);
+    }
+
+#ifdef USE_ARTEFACTS
+    //////////// ARTEFACT SLOT /////////////////////////
+    for (int i=0; i<descriptor()->artefactSlotNum(); i++) {
+        ItemSlot* slot = getNewItemSlot(entity::type::ARTEFACT_SLOT);
+        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
+        addItemSlot(slot);
+    }
+#endif
+
+    //////// OTSEC SLOT ////////////////////////////////
+    for (int i=0; i<10; i++) {
+        ItemSlot* slot = getNewItemSlot(entity::type::CARGO_SLOT);
+        //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
+        addItemSlot(slot);
+    }
+
+    // GATE SLOT
+    {
+        ItemSlot* slot = getNewItemSlot(entity::type::GATE_SLOT);
+        addItemSlot(slot);
+    }
 }
 
 /* virtual override */
@@ -142,12 +208,12 @@ void Vehicle::setWeaponTarget(model::SpaceObject* object, ItemSlot* slot)
 
 void Vehicle::prepareWeapons()
 {
-    model()->weaponComplex().prepareWeapons();
+    weaponComplex().prepareWeapons();
 }
 
 int Vehicle::guessDamage(int dist)
 {
-    return model()->weaponComplex().guessDamage(dist);
+    return weaponComplex().guessDamage(dist);
 }
 
 //\ weapon complex interface
@@ -324,11 +390,11 @@ bool Vehicle::_installGoodsPack(Item* item)
 bool Vehicle::_installEquipment(Item* item)
 {
     if (item->descriptor()->slotType() == entity::type::WEAPON_SLOT) {
-        ItemSlot* slot = model()->weaponComplex().freeSlot();
+        ItemSlot* slot = weaponComplex().freeSlot();
         if (slot) {
             return slot->swapItem(item->slot());
         } else {
-            ItemSlot* slot = model()->weaponComplex().equipedWeakestSlot();
+            ItemSlot* slot = weaponComplex().equipedWeakestSlot();
             if (slot) {
                 if (item->descriptor()->price() > slot->item()->descriptor()->price()) {
                     return slot->swapItem(item->slot());
@@ -352,7 +418,7 @@ bool Vehicle::_installEquipment(Item* item)
 bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
     if (ident.type == entity::type::WEAPON_SLOT) {
-        if (model()->weaponComplex().freeSlot()) {
+        if (weaponComplex().freeSlot()) {
             return true;
         }
     } else {
@@ -490,11 +556,12 @@ bool Vehicle::addItemToCargoSlot(Item* item)
 bool
 Vehicle::manage(Item* item)
 {
-    if (addItemToCargoSlot(item)) {
-        _installItem(item);
-        return true;
-    }
-    return false;
+    assert(false);
+//    if (addItemToCargoSlot(item)) {
+//        _installItem(item);
+//        return true;
+//    }
+//    return false;
 }
 
 void Vehicle::manageItemsInCargo()
@@ -642,7 +709,7 @@ void Vehicle::HyperJumpEvent(model::Starsystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
-    model()->weaponComplex().deactivateWeapons();
+    weaponComplex().deactivateWeapons();
 
     m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
     assert(false);
@@ -654,7 +721,7 @@ void Vehicle::DockingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::DockingEvent");
 
-    model()->weaponComplex().deactivateWeapons();
+    weaponComplex().deactivateWeapons();
 
     assert(false);
 //    switch(model()->driveComplex().target()->type())
@@ -691,7 +758,7 @@ void Vehicle::DockingEvent()
 //    }
 //    }
 
-    model()->driveComplex().ResetTarget();
+    driveComplex().ResetTarget();
 }
 
 void Vehicle::LaunchingEvent()
@@ -965,11 +1032,11 @@ void Vehicle::_updatePropFire()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
 
-    model()->weaponComplex().updateFireAbility();
+    weaponComplex().updateFireAbility();
 
-    model()->properties().total_damage = model()->weaponComplex().damage();
-    model()->properties().fire_radius_min = model()->weaponComplex().radiusMin();
-    model()->properties().fire_radius_max = model()->weaponComplex().radiusMax();
+    model()->properties().total_damage = weaponComplex().damage();
+    model()->properties().fire_radius_min = weaponComplex().radiusMin();
+    model()->properties().fire_radius_max = weaponComplex().radiusMax();
 }
 
 void Vehicle::_updatePropRadar()

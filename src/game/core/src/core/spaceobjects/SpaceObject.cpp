@@ -60,13 +60,13 @@ SpaceObject::~SpaceObject()
 
 void SpaceObject::_init()
 {
-    if (!m_starsystem) {
+    if (!m_starsystem && model()->starsystem() != NONE) {
         assert(false);
         //m_starsystem = static_cast<Starsystem*>(core::global::get().entityManager().getEntity(model()->starsystem()));
         assert(m_starsystem);
     }
 
-    if (!m_parent && model()->parent() != -1) {
+    if (!m_parent && model()->parent() != NONE) {
         m_parent = static_cast<model::SpaceObject*>(core::global::get().entityManager().get(model()->parent()));
         assert(m_parent);
     }
