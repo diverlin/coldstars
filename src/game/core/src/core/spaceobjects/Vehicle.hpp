@@ -212,14 +212,17 @@ public:
 
     bool isObjectVisible(SpaceObject*) const;
 
-    ItemSlot* const radarSlot()     const { return m_radarSlot; }
-    ItemSlot* const scanerSlot()    const { return m_scanerSlot; }
-#ifdef USE_EXTRA_EQUIPMENT
-    ItemSlot* const energizerSlot() const { return m_energizerSlot; }
-    ItemSlot* const freezerSlot()   const { return m_freezerSlot; }
-#endif // USE_EXTRA_EQUIPMENT
-    ItemSlot* const grappleSlot()   const { return m_grappleSlot; }
-    ItemSlot* const droidSlot()     const { return m_droidSlot; }
+//    ItemSlot* const bakSlot() const { return m_drive_complex.bakSlot(); }
+//    ItemSlot* const driveSlot() const { return m_drive_complex.driveSlot(); }
+
+    //ItemSlot* const radarSlot()     const { return m_radarSlot; }
+    //ItemSlot* const scanerSlot()    const { return m_scanerSlot; }
+//#ifdef USE_EXTRA_EQUIPMENT
+//    ItemSlot* const energizerSlot() const { return m_energizerSlot; }
+//    ItemSlot* const freezerSlot()   const { return m_freezerSlot; }
+//#endif // USE_EXTRA_EQUIPMENT
+//    ItemSlot* const grappleSlot()   const { return m_grappleSlot; }
+//    ItemSlot* const droidSlot()     const { return m_droidSlot; }
 
     control::Npc* const npc() const { return m_npc; }
 

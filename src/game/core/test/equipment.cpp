@@ -16,6 +16,9 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+//#include "helper.hpp"
+#include "helper2.hpp"
+
 #include <core/common/Global.hpp>
 #include <core/common/constants.hpp>
 
@@ -34,8 +37,6 @@
 #include <core/builder/item/other/ALL>
 
 #include <core/item/equipment/ALL>
-
-#include "helper.hpp"
 
 #include <gtest/gtest.h>
 
@@ -122,28 +123,18 @@
 
 TEST(equipment, bak)
 {
-    model::Ship* ship_model = builder::Ship::getNew();
-    descriptor::Ship* ship_descr = descriptor::getNewShip();
-    control::Ship* ship_control = new control::Ship(ship_model, ship_descr);
-
-    model::item::Bak* bak_model = builder::item::Bak::getNew();
-    control::item::Bak* bak_control = new control::item::Bak(bak_model);
+    test::Ship ship;
+    test::item::Bak bak;
 
     // initial
-    EXPECT_TRUE(ship_control->driveComplex().bakSlot()->item() == nullptr);
-    EXPECT_EQ(0, ship_control->properties().hyper);
+    EXPECT_TRUE(ship.control()->driveComplex().bakSlot()->item() == nullptr);
+    EXPECT_EQ(0, ship.control()->properties().hyper);
 
     // event: insert item
-    bool ok = ship_control->manage(bak_control);
+    bool ok = ship.control()->manage(bak.control());
     EXPECT_TRUE(ok);
-    EXPECT_EQ(bak_control, ship_control->driveComplex().bakSlot()->item());
-    EXPECT_EQ(0, ship_control->properties().hyper); // no drive is set, that's why hyper is 0
-
-    // clean
-    delete ship_model;
-    delete ship_control;
-    delete bak_model;
-    delete bak_control;
+    EXPECT_EQ(bak.control(), ship.control()->driveComplex().bakSlot()->item());
+    EXPECT_EQ(0, ship.control()->properties().hyper); // no drive is set, that's why hyper is 0
 }
 
 //TEST(equipment, drive)

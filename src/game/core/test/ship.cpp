@@ -16,6 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "helper2.hpp"
+
 #include <core/common/Global.hpp>
 
 #include <core/descriptor/Base.hpp>
@@ -35,34 +37,24 @@
 
 #include <gtest/gtest.h>
 
-namespace {
-namespace test {
-
-class Ship {
-public:
-    Ship() {
-        descriptor::Ship* descr = descriptor::getNewShip();
-        model::Ship* model = builder::Ship::getNew(descr);
-        m_control = new control::Ship(model, descr);
-    }
-    ~Ship() {
-        delete m_control->descriptor();
-        delete m_control->model();
-        delete m_control;
-    }
-
-    descriptor::Ship* descriptor() const { return m_control->descriptor(); }
-    model::Ship* model() const { return m_control->model(); }
-    control::Ship* control() const { return m_control; }
-
-private:
-    control::Ship* m_control = nullptr;
-};
-
-} // namespace test
-} // namespace
-
 TEST(ship, create)
+{
+    test::Ship ship;
+
+//    if (ship.descriptor()->bakSlotNum()) {
+//        EXPECT_TRUE(ship.control()->bakSlot());
+//    } else {
+//        EXPECT_FALSE(ship.control()->bakSlot());
+//    }
+
+//    if (ship.descriptor()->driveSlotNum()) {
+//        EXPECT_TRUE(ship.control()->driveSlot());
+//    } else {
+//        EXPECT_FALSE(ship.control()->driveSlot());
+//    }
+}
+
+TEST(ship, equip)
 {
     test::Ship ship;
 }
