@@ -39,17 +39,18 @@ namespace item {
 class Bak : public Equipment
 {
 public:
-    Bak(model::item::Bak*);
+    Bak(model::item::Bak*, descriptor::item::Bak*);
     virtual ~Bak() = default;
 
     void increaseFuel(int fuel);
     int fuelMiss() const;
 
-private:
-    void updateProperties() override final;
-
+public:
     model::item::Bak* model() const { return m_model_bak; }
     descriptor::item::Bak* descriptor() const { return m_descriptor_bak; }
+
+private:
+    void updateProperties() override final;
 
 private:
     int m_fuelMax_add = 0;
