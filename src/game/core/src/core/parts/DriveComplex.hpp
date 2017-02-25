@@ -54,8 +54,8 @@ public:
     void setOwnerVehicle(control::Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
     void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
-    void SetDriveSlot(control::ItemSlot* drive_slot) { m_driveSlot = drive_slot; }
-    void SetBakSlot(control::ItemSlot* bak_slot)     { m_bakSlot = bak_slot; }
+    void addDriveSlot(control::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
+    void addBakSlot(control::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
     void SetTarget(model::SpaceObject*, int);
     void SetStaticTargetCoords(const glm::vec3&);
@@ -63,8 +63,8 @@ public:
     int GetActionId() const { return m_ActionId; }
     jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
 
-    control::ItemSlot* driveSlot() const { return m_driveSlot; }
-    control::ItemSlot* bakSlot()   const { return m_bakSlot; }
+    std::vector<control::ItemSlot*> driveSlots() const { return m_driveSlots; }
+    std::vector<control::ItemSlot*> bakSlots() const { return m_bakSlots; }
 
     model::SpaceObject* target() const { return m_target; }
 
@@ -82,8 +82,8 @@ public:
     void DrawPath(const jeti::Renderer&);
 
 private:
-    control::ItemSlot* m_driveSlot = nullptr;
-    control::ItemSlot* m_bakSlot = nullptr;
+    std::vector<control::ItemSlot*> m_driveSlots;
+    std::vector<control::ItemSlot*> m_bakSlots;
 
     control::Vehicle* m_ownerVehicle = nullptr;
     model::SpaceObject* m_target = nullptr;

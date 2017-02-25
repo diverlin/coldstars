@@ -43,6 +43,8 @@ public:
     int radiusMax() const { return m_radiusMax; }
     int damage() const { return m_damage; }
 
+    std::vector<control::ItemSlot*> weaponSlots() const { return m_slots; }
+
     bool addSlot(control::ItemSlot*);
     control::ItemSlot* freeSlot() const;
     control::ItemSlot* equipedWeakestSlot() const;

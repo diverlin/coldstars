@@ -42,13 +42,18 @@
 #include <item/equipment/EnergizerEquipment.hpp>
 #include <item/equipment/FreezerEquipment.hpp>
 #endif
-#include <item/equipment/Radar.hpp>
+#include <core/model/item/equipment/Radar.hpp>
+#include <core/model/item/equipment/Droid.hpp>
+#include <core/model/item/equipment/Scaner.hpp>
+#include <core/model/item/equipment/Grapple.hpp>
+
+#include <core/item/equipment/Radar.hpp>
 #include <item/equipment/Bak.hpp>
 #include <item/equipment/Protector.hpp>
-#include <item/equipment/Droid.hpp>
+#include <core/item/equipment/Droid.hpp>
 #include <item/equipment/Drive.hpp>
-#include <item/equipment/Scaner.hpp>
-#include <item/equipment/Grapple.hpp>
+#include <core/item/equipment/Scaner.hpp>
+#include <core/item/equipment/Grapple.hpp>
 #include <item/others/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
 #include <item/artefacts/GravityArtefact.hpp>
@@ -90,78 +95,84 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 //    weaponComplex().setOwnerVehicle(this);
     driveComplex().setOwnerVehicle(this);
 //    protectorComplex().setOwnerVehicle(this);
+
+    __createSlots(descr);
 }
 
 /* virtual */
 Vehicle::~Vehicle()
 {
-    //LOG("___::~Vehicle("+std::to_string(model()->id())+")");
+    for(ItemSlot* slot: m_slots) {
+        delete slot;
+    }
+    m_slots.clear();
 }
 
 void
-Vehicle::createSlots()
+Vehicle::__createSlots(descriptor::Vehicle* descr)
 {
-    assert(descriptor());
     assert(m_slots.size()==0);
 
+    int offset = 0;
+
     // WEAPON SLOTS
-    for (int i=0; i<descriptor()->weaponSlotNum(); ++i) {
+    for (int i=0; i<descr->weaponSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::WEAPON_SLOT);
-        //slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);
+        //slot->setSubSubType(SLOT_WEAPON_TYPES[i]);
         addItemSlot(slot);
     }
 
-    if (descriptor()->radarSlotNum()) {
+    for (int i=0; i<descr->radarSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::RADAR_SLOT);
         addItemSlot(slot);
     }
 
-    if (descriptor()->scanerSlotNum()) {
+    for (int i=0; i<descr->scanerSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::SCANER_SLOT);
         addItemSlot(slot);
     }
 
 
-    if (descriptor()->grappleSlotNum()) {
+    for (int i=0; i<descr->grappleSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::GRAPPLE_SLOT);
         addItemSlot(slot);
     }
 
-    if (descriptor()->droidSlotNum()) {
+    for (int i=0; i<descr->droidSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::DROID_SLOT);
         addItemSlot(slot);
     }
 
-    #ifdef USE_EXTRA_EQUIPMENT
-    if (descriptor()->enrgizerSlotNum) {
+#ifdef USE_EXTRA_EQUIPMENT
+    for (int i=0; i<descr->energizerSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::ENERGIZER_SLOT);
         addItemSlot(slot);
     }
 
-    if (descriptor()->freezerSlotNum()) {
+    for (int i=0; i<descr->freezerSlotNum(); ++i) {
         ItemSlot* slot = GetNewItemSlot(entity::type::FREEZER_SLOT);
         AddItemSlot(slot);
     }
 #endif // USE_EXTRA_EQUIPMENT
 
-    if (descriptor()->protectorSlotNum()) {
+    for (int i=0; i<descr->protectorSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::PROTECTOR_SLOT);
         addItemSlot(slot);
     }
 
-    if (descriptor()->driveSlotNum()) {
+    for (int i=0; i<descr->driveSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::DRIVE_SLOT);
         addItemSlot(slot);
     }
 
-    if (descriptor()->bakSlotNum()) {
+    for (int i=0; i<descr->bakSlotNum(); ++i) {
         ItemSlot* slot = getNewItemSlot(entity::type::BAK_SLOT);
         addItemSlot(slot);
     }
 
 #ifdef USE_ARTEFACTS
     //////////// ARTEFACT SLOT /////////////////////////
-    for (int i=0; i<descriptor()->artefactSlotNum(); i++) {
+    for (int i=0; i<descr->artefactSlotNum(); i++) {
         ItemSlot* slot = getNewItemSlot(entity::type::ARTEFACT_SLOT);
         artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
         addItemSlot(slot);
@@ -169,17 +180,18 @@ Vehicle::createSlots()
 #endif
 
     //////// OTSEC SLOT ////////////////////////////////
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<descr->cargoSlotNum(); i++) {
         ItemSlot* slot = getNewItemSlot(entity::type::CARGO_SLOT);
         //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
         addItemSlot(slot);
     }
 
-    // GATE SLOT
-    {
-        ItemSlot* slot = getNewItemSlot(entity::type::GATE_SLOT);
-        addItemSlot(slot);
-    }
+    // it's GUI!!!
+//    // GATE SLOT
+//    {
+//        ItemSlot* slot = getNewItemSlot(entity::type::GATE_SLOT);
+//        addItemSlot(slot);
+//    }
 }
 
 /* virtual override */
@@ -271,13 +283,13 @@ bool Vehicle::isSlotTypePresent(const entity::type& slot_subtype_id) const
 
 void Vehicle::addItemSlot(ItemSlot* slot)
 {
-    assert(false);
+//    assert(false);
 //    slot->setOwner(this);
 
-//    switch(slot->subtype())
-//    {
-//    case entity::Type::WEAPON_SLOT:
-//    {
+    switch(slot->subtype())
+    {
+    case entity::type::WEAPON_SLOT:
+    {
 //        float border_start = 0.2;
 //        float border_end   = 0.8;
 
@@ -285,37 +297,38 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 //        float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
 
 //        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-//        //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
-//        model()->weaponComplex().addSlot(slot);
+        //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
+        weaponComplex().addSlot(slot);
 
-//        break;
-//    }
-//    case entity::Type::DRIVE_SLOT:     { model()->driveComplex().SetDriveSlot(slot); break; }
-//    case entity::Type::BAK_SLOT:       { model()->driveComplex().SetBakSlot(slot); break; }
-//    case entity::Type::PROTECTOR_SLOT: { model()->protectorComplex().SetProtectorSlot(slot); break; }
-//    case entity::Type::RADAR_SLOT:     { m_radarSlot  = slot; break; }
-//    case entity::Type::SCANER_SLOT:    { m_scanerSlot = slot; break; }
-//#ifdef USE_EXTRA_EQUIPMENT
-//    case entity::Type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
-//    case entity::Type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
-//#endif // USE_EXTRA_EQUIPMENT
-//    case entity::Type::GRAPPLE_SLOT:   { m_grappleSlot   = slot; break; }
-//    case entity::Type::DROID_SLOT:     { m_droidSlot     = slot; break; }
-//    }
+        break;
+    }
+    case entity::type::DRIVE_SLOT:     { driveComplex().addDriveSlot(slot); break; }
+    case entity::type::BAK_SLOT:       { driveComplex().addBakSlot(slot); break; }
+    case entity::type::PROTECTOR_SLOT: { protectorComplex().addProtectorSlot(slot); break; }
+    case entity::type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
+    case entity::type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
+#ifdef USE_EXTRA_EQUIPMENT
+    case entity::type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
+    case entity::type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
+#endif // USE_EXTRA_EQUIPMENT
+    case entity::type::GRAPPLE_SLOT:   { m_grappleSlots.push_back(slot); break; }
+    case entity::type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
+    }
 
-//    m_slots.push_back(slot);
+    if ( (slot->subtype() != entity::type::ARTEFACT_SLOT) && (slot->subtype() != entity::type::CARGO_SLOT) ) {
+        m_equipmentSlots.push_back(slot);
+    }
 
-//    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT) and (slot->subtype() != entity::Type::CARGO_SLOT) ) {
-//        m_equipmentSlots.push_back(slot);
-//    }
+    if (slot->subtype() == entity::type::ARTEFACT_SLOT) {
+        m_artefactSlots.push_back(slot);
+    }
 
-//    if (slot->subtype() == entity::Type::ARTEFACT_SLOT) {
-//        m_artefactSlots.push_back(slot);
-//    }
+    if (slot->subtype() == entity::type::CARGO_SLOT) {
+        m_cargoSlots.push_back(slot);
+    }
 
-//    if (slot->subtype() == entity::Type::CARGO_SLOT) {
-//        m_cargoSlots.push_back(slot);
-//    }
+    m_slots.push_back(slot);
+    slot->setOffset(m_slots.size());
 }
 
 bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
@@ -1042,19 +1055,16 @@ void Vehicle::_updatePropFire()
 void Vehicle::_updatePropRadar()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar");
+    int radius = 0;
+    bool equipment_radar = false;
 
-    model()->properties().radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
-    model()->properties().equipment_radar = false;
+    std::vector<ItemSlot*> slots = __equipedAndFunctionalSlots(m_radarSlots);
+    for(ItemSlot* slot: slots) {
+        radius += slot->radarEquipment()->model()->radius();
+    }
 
-    if (!m_radarSlot->item())
-        return;
-
-    assert(false);
-//    if (!m_radarSlot->radarEquipment()->isFunctioning())
-//        return;
-
-//    model()->properties().radar = m_radarSlot->radarEquipment()->radius();
-//    model()->properties().equipment_radar = true;
+    model()->properties().radar = std::max(VISIBLE_DISTANCE_WITHOUT_RADAR, radius);
+    model()->properties().equipment_radar = equipment_radar;
 }
 
 void Vehicle::_updatePropJump()
@@ -1106,15 +1116,14 @@ void Vehicle::_updatePropRepair()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair");
 
-    model()->properties().repair = 0;
+    int repair = 0;
 
-    if (m_droidSlot->item() != nullptr)
-    {
-        assert(false);
-//        if (m_droidSlot->droidEquipment()->isFunctioning() == true) {
-//            model()->properties().repair = m_droidSlot->droidEquipment()->model()->repair();
-//        }
+    std::vector<ItemSlot*> slots = __equipedAndFunctionalSlots(m_droidSlots);
+    for(ItemSlot* slot: slots) {
+        repair = slot->droidEquipment()->model()->repair();
     }
+
+    model()->properties().repair = 0;
 }
 
 
@@ -1173,37 +1182,31 @@ void Vehicle::_updatePropScan()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan");
 
-    model()->properties().scan = 0;
+    int scan = 0;
 
-    if (m_scanerSlot->item() != nullptr)
-    {
-        assert(false);
-//        if (m_scanerSlot->scanerEquipment()->isFunctioning() == true)
-//        {
-//            model()->properties().scan = m_scanerSlot->scanerEquipment()->scan();
-//        }
+    std::vector<ItemSlot*> slots = __equipedAndFunctionalSlots(m_scanerSlots);
+    for(ItemSlot* slot: slots) {
+        scan += slot->scanerEquipment()->model()->scan();
     }
+
+    model()->properties().scan = scan;
 }
 
 void Vehicle::_updatePropGrab()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab");
 
-    model()->properties().grab_strength = 0;
-    model()->properties().grab_radius = 0;
+    int strength = 0;
+    int radius = 0;
 
-    if (descriptor()->grappleSlotNum() != 0)
-    {
-        if (m_grappleSlot->item() != nullptr)
-        {
-            assert(false);
-//            if (m_grappleSlot->grappleEquipment()->isFunctioning() == true)
-//            {
-//                model()->properties().grab_strength = m_grappleSlot->grappleEquipment()->strength();
-//                model()->properties().grab_radius = m_grappleSlot->grappleEquipment()->radius();
-//            }
-        }
+    std::vector<ItemSlot*> slots = __equipedAndFunctionalSlots(m_grappleSlots);
+    for (ItemSlot* slot: slots) {
+        strength += slot->grappleEquipment()->model()->strength();
+        radius += slot->grappleEquipment()->model()->radius();
     }
+
+    model()->properties().grab_strength = strength;
+    model()->properties().grab_radius = radius;
 }
 
 void Vehicle::_updateArtefactInfluence()
@@ -1459,22 +1462,19 @@ STATUS Vehicle::CheckGrabStatus() const
 {
     STATUS status = STATUS::ITEM_OK;
 
-    if (m_grappleSlot->item() != nullptr)
-    {
-        assert(false);
-//        if (m_grappleSlot->grappleEquipment()->isDamaged() == true)
-//        {
-//            status = STATUS::ITEM_DAMAGED;
-//        }
+    for(ItemSlot* slot: m_grappleSlots) {
+        if (slot->item()) {
+            assert(false);
+    //        if (m_grappleSlot->grappleEquipment()->isDamaged() == true) {
+    //            status = STATUS::ITEM_DAMAGED;
+    //        }
 
-//        if (m_grappleSlot->grappleEquipment()->isLocked() != 0)
-//        {
-//            status = STATUS::ITEM_LOCKED;
-//        }
-    }
-    else
-    {
-        status = STATUS::ITEMSLOT_EMPTY;
+    //        if (m_grappleSlot->grappleEquipment()->isLocked() != 0) {
+    //            status = STATUS::ITEM_LOCKED;
+    //        }
+        } else {
+            status = STATUS::ITEMSLOT_EMPTY;
+        }
     }
 
     return status;
@@ -1531,6 +1531,21 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //    if (model()->properties().grab_radius > 0) {
 //        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
 //    }
+}
+
+
+std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<ItemSlot*>& slots)
+{
+    std::vector<ItemSlot*> result;
+    for(ItemSlot* slot: slots) {
+        if (slot->item()) {
+            if (slot->item()->isFunctioning()) {
+                result.push_back(slot);
+            }
+        }
+    }
+
+    return slots;
 }
 
 //void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

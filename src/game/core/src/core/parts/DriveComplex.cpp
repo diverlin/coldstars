@@ -39,16 +39,14 @@
 #include <meti/QuaternionUtils.hpp>
 
 DriveComplex::DriveComplex()
-:
-m_driveSlot(nullptr),
-m_bakSlot(nullptr),
-m_ownerVehicle(nullptr),
-m_target(nullptr),
-m_effectDrive(nullptr),
-m_ActionId(NAVIGATOR_ACTION::NONE),
-m_TargetDistance(0.0f),
-m_PathEnd(true),
-m_HasTarget(false)
+    :
+      m_ownerVehicle(nullptr),
+      m_target(nullptr),
+      m_effectDrive(nullptr),
+      m_ActionId(NAVIGATOR_ACTION::NONE),
+      m_TargetDistance(0.0f),
+      m_PathEnd(true),
+      m_HasTarget(false)
 {}
 
 DriveComplex::~DriveComplex()

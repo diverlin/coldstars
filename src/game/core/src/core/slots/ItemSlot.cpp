@@ -78,7 +78,7 @@
 
 namespace control {
 
-ItemSlot::ItemSlot(int_t id, entity::type subtype_id)
+ItemSlot::ItemSlot(entity::type subtype)
     :
       m_turrel(nullptr),
       m_item(nullptr),
@@ -86,10 +86,8 @@ ItemSlot::ItemSlot(int_t id, entity::type subtype_id)
       m_subtarget(nullptr),
       m_hitProbability(0)
 {
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::ITEM_SLOT);
-//    setSubTypeId(subtype_id);
+    setType(entity::type::ITEM_SLOT);
+    setSubType(subtype);
     
     m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
 }

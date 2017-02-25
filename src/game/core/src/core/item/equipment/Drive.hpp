@@ -39,14 +39,15 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    Drive(model::item::Drive*);
+    Drive(model::item::Drive*, descriptor::item::Drive*);
     virtual ~Drive() = default;
+
+public:
+    model::item::Drive* model() const { return m_model_drive; }
+    descriptor::item::Drive* descriptor() const { return m_descriptor_drive; }
 
 private:
     virtual void updateProperties();
-
-    model::item::Drive* model() const { return m_model_drive; }
-    descriptor::item::Drive* descriptor() const { return m_descriptor_drive; }
 
 private:
     int m_speed_add = 0;

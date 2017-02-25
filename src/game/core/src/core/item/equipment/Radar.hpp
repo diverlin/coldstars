@@ -45,7 +45,7 @@ public:
 
     virtual void updateProperties();
 
-protected:
+public:
     model::item::Radar* model() const { return m_model_radar; }
     descriptor::item::Radar* descriptor() const { return m_descriptor_radar; }
 

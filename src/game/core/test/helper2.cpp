@@ -22,10 +22,17 @@
 #include <core/builder/spaceobjects/ShipBuilder.hpp>
 #include <core/spaceobjects/Ship.hpp>
 
+// Bak
 #include <core/builder/item/equipment/BakBuilder.hpp>
 #include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/model/item/equipment/Bak.hpp>
 #include <core/item/equipment/Bak.hpp>
+
+// Drive
+#include <core/builder/item/equipment/DriveBuilder.hpp>
+#include <core/descriptor/item/equipment/Drive.hpp>
+#include <core/model/item/equipment/Drive.hpp>
+#include <core/item/equipment/Drive.hpp>
 
 #include <gtest/gtest.h>
 
@@ -60,6 +67,21 @@ Bak::~Bak() {
 
 descriptor::item::Bak* Bak::descriptor() const { return m_control->descriptor(); }
 model::item::Bak* Bak::model() const { return m_control->model(); }
+
+
+Drive::Drive() {
+    descriptor::item::Drive* descr = descriptor::item::getNewDrive();
+    model::item::Drive* model = builder::item::Drive::getNew(descr);
+    m_control = new control::item::Drive(model, descr);
+}
+Drive::~Drive() {
+    delete m_control->descriptor();
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::item::Drive* Drive::descriptor() const { return m_control->descriptor(); }
+model::item::Drive* Drive::model() const { return m_control->model(); }
 
 } // namespace item
 

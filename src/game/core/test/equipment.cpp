@@ -19,6 +19,19 @@
 //#include "helper.hpp"
 #include "helper2.hpp"
 
+// Bak
+#include <core/builder/item/equipment/BakBuilder.hpp>
+#include <core/descriptor/item/equipment/Bak.hpp>
+#include <core/model/item/equipment/Bak.hpp>
+#include <core/item/equipment/Bak.hpp>
+
+// Drive
+#include <core/builder/item/equipment/DriveBuilder.hpp>
+#include <core/descriptor/item/equipment/Drive.hpp>
+#include <core/model/item/equipment/Drive.hpp>
+#include <core/item/equipment/Drive.hpp>
+
+
 #include <core/common/Global.hpp>
 #include <core/common/constants.hpp>
 
@@ -126,59 +139,45 @@ TEST(equipment, bak)
     test::Ship ship;
     test::item::Bak bak;
 
-    // initial
-    EXPECT_TRUE(ship.control()->driveComplex().bakSlot()->item() == nullptr);
+    // init
     EXPECT_EQ(0, ship.control()->properties().hyper);
 
-    // event: insert item
-    bool ok = ship.control()->manage(bak.control());
-    EXPECT_TRUE(ok);
-    EXPECT_EQ(bak.control(), ship.control()->driveComplex().bakSlot()->item());
+    // event
+    EXPECT_TRUE( ship.control()->manage(bak.control()) );
+
+    // post
     EXPECT_EQ(0, ship.control()->properties().hyper); // no drive is set, that's why hyper is 0
 }
 
-//TEST(equipment, drive)
-//{
-//    model::Ship* model = builder::Ship::getNew();
-//    control::Ship* ship = new control::Ship(model);
+TEST(equipment, drive)
+{
+    test::Ship ship;
+    test::item::Drive drive;
 
-//    item::Drive* drive = core::global::get().driveBuilder().getNew();
+    // init
+    EXPECT_EQ(0, ship.control()->properties().hyper);
 
-//    // initial
-//    EXPECT_TRUE(ship->driveComplex().driveSlot()->item() == nullptr);
-//    EXPECT_EQ(0, ship->properties().hyper);
+    // event
+    EXPECT_TRUE( ship.control()->manage(drive.control()) );
 
-//    // event: insert item
-//    bool ok = ship->manage(drive);
-//    EXPECT_TRUE(ok);
-//    EXPECT_EQ(drive, ship->driveComplex().driveSlot()->item());
-//    EXPECT_EQ(0, ship->properties().hyper); // no bak is set that's why hyper is 0
+    // post
+    EXPECT_EQ(0, ship.control()->properties().hyper); // no bak is set that's why hyper is 0
+}
 
-//    // clean
-//    delete model;
-//    delete ship;
-//    delete drive;
-//}
+TEST(equipment, bak_and_drive)
+{
+    test::Ship ship;
+    test::item::Bak bak;
+    test::item::Drive drive;
 
-//TEST(equipment, bak_and_drive)
-//{
-//    model::Ship* model = builder::Ship::getNew();
-//    control::Ship* ship = new control::Ship(model);
+    // init
+    EXPECT_EQ(ship.control()->properties().hyper, 0);
 
-//    item::Bak* bak = core::global::get().bakBuilder().getNew();
-//    item::Drive* drive = core::global::get().driveBuilder().getNew();
-
-//    // initial
-//    EXPECT_EQ(ship->properties().hyper, 0);
-
-//    // event: insert items
-//    bool ok1 = ship->manage(bak);
-//    bool ok2 = ship->manage(drive);
-//    // check
-//    EXPECT_TRUE(ok1);
-//    EXPECT_TRUE(ok2);
-//    int hyper = std::min(bak->fuel(), drive->hyper());
-//    EXPECT_EQ(hyper, ship->properties().hyper);
+    // event
+    EXPECT_TRUE( ship.control()->manage(bak.control()) );
+    EXPECT_TRUE( ship.control()->manage(drive.control()) );
+    int hyper = std::min(bak.model()->fuel(), drive.model()->hyper());
+    EXPECT_EQ(hyper, ship.control()->properties().hyper);
 
 //    /// bak
 //    // event: lock item
@@ -219,7 +218,7 @@ TEST(equipment, bak)
 //    delete ship;
 //    delete bak;
 //    delete drive;
-//}
+}
 
 //TEST(equipment, droid)
 //{

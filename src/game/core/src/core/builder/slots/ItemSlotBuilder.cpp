@@ -34,10 +34,10 @@
 
 
 control::ItemSlot*
-getNewItemSlot(entity::type subtype_id, int_t id)
+getNewItemSlot(entity::type subtype_id)
 {  
 //    assert(false);
-    control::ItemSlot* item_slot = new control::ItemSlot(id, subtype_id);
+    control::ItemSlot* item_slot = new control::ItemSlot(subtype_id);
     assert(item_slot);
     
     //jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT);
