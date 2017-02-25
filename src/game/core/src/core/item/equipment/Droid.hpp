@@ -42,12 +42,12 @@ public:
     Droid(model::item::Droid*);
     virtual ~Droid() = default;
 
+    model::item::Droid* model() const { return m_model_droid; }
+    descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
+
 private:
     virtual void updateProperties();
     virtual void updateInStatic();
-
-    model::item::Droid* model() const { return m_model_droid; }
-    descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
 
 private:
     int m_repair_add = 0;

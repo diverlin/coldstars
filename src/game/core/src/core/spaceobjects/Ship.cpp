@@ -41,9 +41,7 @@ Ship::Ship()
 }
 
 Ship::~Ship()
-{
-
-}
+{}
 
 Ship::Ship(const std::string& data)
 {
@@ -71,9 +69,7 @@ Ship::Ship(model::Ship* model, descriptor::Ship* descr)
 
 /* virtual override final */
 Ship::~Ship()
-{
-    LOG("___::~Ship("+std::to_string(model()->id())+")");
-}
+{}
 
 
 ///* virtual override final */

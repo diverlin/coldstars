@@ -45,7 +45,7 @@ public:
 private:
     virtual void updateProperties();
 
-protected:
+public:
     model::item::Scaner* model() const { return m_model_scaner; }
     descriptor::item::Scaner* descriptor() const { return m_descriptor_scaner; }
 

@@ -23,6 +23,7 @@ class Ship;
 
 namespace item {
 class Bak;
+class Drive;
 } // namespace item
 
 } // namespace descriptor
@@ -32,6 +33,7 @@ class Ship;
 
 namespace item {
 class Bak;
+class Drive;
 } // namespace item
 
 } // namespace model
@@ -41,6 +43,7 @@ class Ship;
 
 namespace item {
 class Bak;
+class Drive;
 } // namespace item
 
 } // namespce control
@@ -75,6 +78,19 @@ public:
 
 private:
     control::item::Bak* m_control = nullptr;
+};
+
+class Drive {
+public:
+    Drive();
+    ~Drive();
+
+    descriptor::item::Drive* descriptor() const;
+    model::item::Drive* model() const;
+    control::item::Drive* control() const { return m_control; }
+
+private:
+    control::item::Drive* m_control = nullptr;
 };
 
 } // namespace item

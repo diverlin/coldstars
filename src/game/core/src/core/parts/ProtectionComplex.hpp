@@ -22,7 +22,11 @@
 //class Vehicle;
 //} // namespace control
 
+#include <vector>
+
+namespace control {
 class ItemSlot; 
+} // namespace control
 
 class ProtectionComplex
 {
@@ -31,15 +35,15 @@ public:
     ~ProtectionComplex();
 
 //    void setOwnerVehicle(control::Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
-    void SetProtectorSlot(ItemSlot* protector_slot) { m_protector_slot = protector_slot; }
+    void addProtectorSlot(control::ItemSlot* slot) { m_protectorSlots.push_back(slot); }
 
-    ItemSlot* protectorSlot()    const { return m_protector_slot; }
+    std::vector<control::ItemSlot*> protectorSlots() const { return m_protectorSlots; }
     //        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
 private:
 //    control::Vehicle* m_owner_vehicle = nullptr;
 
-    ItemSlot* m_protector_slot = nullptr;
+    std::vector<control::ItemSlot*> m_protectorSlots;
     //            ShieldEffect* shield_effect;
 };
 

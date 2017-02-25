@@ -28,20 +28,15 @@ class Turrel;
 
 namespace control {
 class Item;
-} // naemspace control
-
-namespace model {
-class SpaceObject;
-} // namespace model
 
 namespace item {
+class Radar;
 class Rocket;
 class Lazer;
-class Radar;
 class Bak;
 #ifdef USE_EXTRA_EQUIPMENT
 class FreezerEquipment;
-class EnergizerEquipment; 
+class EnergizerEquipment;
 #endif
 class Protector;
 class Droid;
@@ -49,6 +44,12 @@ class Scaner;
 class Drive;
 class Grapple;
 } // namespace item
+
+} // naemspace control
+
+namespace model {
+class SpaceObject;
+} // namespace model
 
 #ifdef USE_MODULES
 class RocketModule;
@@ -131,8 +132,16 @@ namespace control {
 class ItemSlot : public BaseSlot
 {
 public:
-    ItemSlot(int_t id, entity::type subtype_id);
+    ItemSlot(entity::type subtype_id);
     virtual ~ItemSlot();
+
+    void setOffset(int offset) { m_offset = offset; }
+    void setType(entity::type type) { m_type = type; }
+    void setSubType(entity::type subtype) { m_subtype = subtype; }
+
+    int offset() const { return m_offset; }
+    entity::type type() const { return m_type; }
+    entity::type subtype() const { return m_subtype; }
 
     virtual void putChildrenToGarbage() const;
 
@@ -149,19 +158,19 @@ public:
     Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
-    ::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<::item::Rocket*>(m_item); }
-    ::item::Lazer*     lazerEquipment()     const { return reinterpret_cast<::item::Lazer*>(m_item); }
-    ::item::Radar*     radarEquipment()     const { return reinterpret_cast<::item::Radar*>(m_item); }
-    ::item::Drive*     driveEquipment()     const { return reinterpret_cast<::item::Drive*>(m_item); }
-    ::item::Bak*       bakEquipment()       const { return reinterpret_cast<::item::Bak*>(m_item); }
+    item::Rocket*    rocketEquipment()    const { return reinterpret_cast<item::Rocket*>(m_item); }
+    item::Lazer*     lazerEquipment()     const { return reinterpret_cast<item::Lazer*>(m_item); }
+    item::Radar*     radarEquipment()     const { return reinterpret_cast<item::Radar*>(m_item); }
+    item::Drive*     driveEquipment()     const { return reinterpret_cast<item::Drive*>(m_item); }
+    item::Bak*       bakEquipment()       const { return reinterpret_cast<item::Bak*>(m_item); }
 #ifdef USE_EXTRA_EQUIPMENT
-    ::item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<::item::EnergizerEquipment*>(m_item); }
-    ::item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<::item::FreezerEquipment*>(m_item); }
+    item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<item::EnergizerEquipment*>(m_item); }
+    item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<item::FreezerEquipment*>(m_item); }
 #endif
-    ::item::Protector* protectorEquipment() const { return reinterpret_cast<::item::Protector*>(m_item); }
-    ::item::Droid*     droidEquipment()     const { return reinterpret_cast<::item::Droid*>(m_item); }
-    ::item::Scaner*    scanerEquipment()    const { return reinterpret_cast<::item::Scaner*>(m_item); }
-    ::item::Grapple*   grappleEquipment()   const { return reinterpret_cast<::item::Grapple*>(m_item); }
+    item::Protector* protectorEquipment() const { return reinterpret_cast<item::Protector*>(m_item); }
+    item::Droid*     droidEquipment()     const { return reinterpret_cast<item::Droid*>(m_item); }
+    item::Scaner*    scanerEquipment()    const { return reinterpret_cast<item::Scaner*>(m_item); }
+    item::Grapple*   grappleEquipment()   const { return reinterpret_cast<item::Grapple*>(m_item); }
 
 #ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
@@ -238,6 +247,11 @@ private:
     bool checkDistanceToTarget(model::SpaceObject*) const;
 
     void log(const std::string&) const;
+
+    int m_offset = NONE;
+    entity::type m_type = entity::type::NONE;
+    entity::type m_subtype = entity::type::NONE;
+
 };
 
 } // namespace control

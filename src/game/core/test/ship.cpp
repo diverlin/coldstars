@@ -41,17 +41,15 @@ TEST(ship, create)
 {
     test::Ship ship;
 
-//    if (ship.descriptor()->bakSlotNum()) {
-//        EXPECT_TRUE(ship.control()->bakSlot());
-//    } else {
-//        EXPECT_FALSE(ship.control()->bakSlot());
-//    }
-
-//    if (ship.descriptor()->driveSlotNum()) {
-//        EXPECT_TRUE(ship.control()->driveSlot());
-//    } else {
-//        EXPECT_FALSE(ship.control()->driveSlot());
-//    }
+    EXPECT_EQ(ship.descriptor()->bakSlotNum(), ship.control()->bakSlots().size());
+    EXPECT_EQ(ship.descriptor()->driveSlotNum(), ship.control()->driveSlots().size());
+    EXPECT_EQ(ship.descriptor()->radarSlotNum(), ship.control()->radarSlots().size());
+    EXPECT_EQ(ship.descriptor()->scanerSlotNum(), ship.control()->scanerSlots().size());
+    EXPECT_EQ(ship.descriptor()->grappleSlotNum(), ship.control()->grappleSlots().size());
+    EXPECT_EQ(ship.descriptor()->droidSlotNum(), ship.control()->droidSlots().size());
+    EXPECT_EQ(ship.descriptor()->protectorSlotNum(), ship.control()->protectorSlots().size());
+    EXPECT_EQ(ship.descriptor()->weaponSlotNum(), ship.control()->weaponSlots().size());
+    EXPECT_EQ(ship.descriptor()->cargoSlotNum(), ship.control()->cargoSlots().size());
 }
 
 TEST(ship, equip)

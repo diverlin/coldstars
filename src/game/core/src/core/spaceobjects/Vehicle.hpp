@@ -143,12 +143,10 @@ public:
     Vehicle(model::Vehicle*, descriptor::Vehicle*);
     virtual ~Vehicle();
 
-    void createSlots();
-
-
     WeaponComplex& weaponComplex() { return m_weapon_complex; }
     DriveComplex& driveComplex() { return m_drive_complex; }
     ProtectionComplex& protectorComplex() { return m_protector_complex; }
+    const ProtectionComplex& protectorComplex() const { return m_protector_complex; }
 
     // wepon complex interface
     void fire(int, float);
@@ -212,18 +210,24 @@ public:
 
     bool isObjectVisible(SpaceObject*) const;
 
-//    ItemSlot* const bakSlot() const { return m_drive_complex.bakSlot(); }
-//    ItemSlot* const driveSlot() const { return m_drive_complex.driveSlot(); }
-
-    //ItemSlot* const radarSlot()     const { return m_radarSlot; }
-    //ItemSlot* const scanerSlot()    const { return m_scanerSlot; }
+public:
+    [[warning("used only for tests")]]
+    std::vector<ItemSlot*> bakSlots() const { return m_drive_complex.bakSlots(); }
+    std::vector<ItemSlot*> driveSlots() const { return m_drive_complex.driveSlots(); }
+    std::vector<ItemSlot*> radarSlots() const { return m_radarSlots; }
+    std::vector<ItemSlot*> scanerSlots() const { return m_scanerSlots; }
 //#ifdef USE_EXTRA_EQUIPMENT
 //    ItemSlot* const energizerSlot() const { return m_energizerSlot; }
 //    ItemSlot* const freezerSlot()   const { return m_freezerSlot; }
 //#endif // USE_EXTRA_EQUIPMENT
-//    ItemSlot* const grappleSlot()   const { return m_grappleSlot; }
-//    ItemSlot* const droidSlot()     const { return m_droidSlot; }
+    std::vector<ItemSlot*> grappleSlots() const { return m_grappleSlots; }
+    std::vector<ItemSlot*> droidSlots() const { return m_droidSlots; }
+    std::vector<ItemSlot*> protectorSlots() const { return protectorComplex().protectorSlots(); }
 
+    std::vector<ItemSlot*> weaponSlots() const { return m_weapon_complex.weaponSlots(); }
+    std::vector<ItemSlot*> cargoSlots() const { return m_cargoSlots; }
+
+public:
     control::Npc* const npc() const { return m_npc; }
 
     ItemSlot* const freeCargoSlot();
@@ -338,14 +342,14 @@ private:
 
     Land* m_Land = nullptr;
 
-    ItemSlot* m_radarSlot = nullptr;
-    ItemSlot* m_scanerSlot = nullptr;
+    std::vector<ItemSlot*> m_radarSlots;
+    std::vector<ItemSlot*> m_scanerSlots;
 #ifdef USE_EXTRA_EQUIPMENT
     ItemSlot* m_energizerSlot = nullptr;
     ItemSlot* m_freezerSlot = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    ItemSlot* m_grappleSlot = nullptr;
-    ItemSlot* m_droidSlot = nullptr;
+    std::vector<ItemSlot*> m_grappleSlots;
+    std::vector<ItemSlot*> m_droidSlots;
 
     std::vector<ItemSlot*> m_equipmentSlots;
     std::vector<ItemSlot*> m_artefactSlots;
@@ -362,6 +366,9 @@ private:
     model::Container* __wrapItemToContainer(Item*);
     bool _checkInstallEquipment(const core::Id&);
     ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
+
+    std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);
+    void __createSlots(descriptor::Vehicle*);
 };
 
 

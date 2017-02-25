@@ -30,9 +30,10 @@
 namespace control {
 namespace item {
 
-Drive::Drive(model::item::Drive* model)
+Drive::Drive(model::item::Drive* model, descriptor::item::Drive* descr)
     :
       m_model_drive(model)
+    , m_descriptor_drive(descr)
 {
 
 }
