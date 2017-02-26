@@ -30,15 +30,12 @@
 namespace control {
 namespace item {
 
-Rocket::Rocket(model::item::Rocket* model)
+Rocket::Rocket(model::item::Rocket* model, descriptor::item::Rocket* descr)
     :
-      m_model_rocket(model)
+      Equipment(model, descr)
+    , m_model_rocket(model)
+    , m_descriptor_rocket(descr)
 {
-    assert(false);
-    //    setId(id);
-    //    setTypeId(entity::Type::EQUIPMENT);
-    //    setSubTypeId(entity::Type::ROCKET_EQUIPMENT);
-
 //    fire_atOnce = meti::getRandInt(1, 3);
 }
 

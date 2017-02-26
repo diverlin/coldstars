@@ -29,17 +29,11 @@
 
 namespace control {
 
-Equipment::Equipment()
+Equipment::Equipment(model::Item* model, descriptor::Item* descr)
+    :
+      control::Item(model, descr)
 {
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
-}
-
-/*virtual */
-Equipment::~Equipment()
-{
-//    LOG("___::~Equipment("+std::to_string(model()->id())+")");
-
-    //delete animation_notfunctioning;
 }
 
 /* virtual */

@@ -186,7 +186,7 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
-    bool addItemToCargoSlot(Item*);
+    bool addItemToCargo(Item*);
     bool manage(Item*);
 
     bool isSlotFree(const place::type&) const;
@@ -216,10 +216,10 @@ public:
     std::vector<ItemSlot*> driveSlots() const { return m_drive_complex.driveSlots(); }
     std::vector<ItemSlot*> radarSlots() const { return m_radarSlots; }
     std::vector<ItemSlot*> scanerSlots() const { return m_scanerSlots; }
-//#ifdef USE_EXTRA_EQUIPMENT
-//    ItemSlot* const energizerSlot() const { return m_energizerSlot; }
-//    ItemSlot* const freezerSlot()   const { return m_freezerSlot; }
-//#endif // USE_EXTRA_EQUIPMENT
+#ifdef USE_EXTRA_EQUIPMENT
+//    ItemSlot* energizerSlot() const { return m_energizerSlot; }
+//    ItemSlot* freezerSlot()   const { return m_freezerSlot; }
+#endif // USE_EXTRA_EQUIPMENT
     std::vector<ItemSlot*> grappleSlots() const { return m_grappleSlots; }
     std::vector<ItemSlot*> droidSlots() const { return m_droidSlots; }
     std::vector<ItemSlot*> protectorSlots() const { return protectorComplex().protectorSlots(); }
@@ -298,6 +298,11 @@ public:
     float adjustDissipateFilter() const;
     int criticalDamage() const;
 
+private:
+    bool __installItem(Item*);
+    bool __installEquipment(Item*);
+    ItemSlot* __freeFunctionalSlot(const entity::type&) const;
+
 protected:
     model::Vehicle* m_model_vehicle = nullptr;
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
@@ -306,12 +311,9 @@ protected:
     [[warning("make it private")]]
     std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const _functionalSlot(const entity::type&) const;
-    ItemSlot* const _freeArtefactSlot() const;
-    ItemSlot* const _cargoSlotWithGoods(place::type);
+    ItemSlot* _freeArtefactSlot() const;
+    ItemSlot* _cargoSlotWithGoods(place::type);
 
-    bool _installItem(Item*);
-    bool _installEquipment(Item*);
 #ifdef USE_MODULES
     bool installModule(Item*);
 #endif // USE_MODULES

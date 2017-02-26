@@ -30,9 +30,11 @@
 namespace control {
 namespace item {
 
-Grapple::Grapple(model::item::Grapple* model)
+Grapple::Grapple(model::item::Grapple* model, descriptor::item::Grapple* descr)
     :
-      m_model_grapple(model)
+      Equipment(model, descr)
+    , m_model_grapple(model)
+    , m_descriptor_grapple(descr)
 {}
 
 ///* virtual */

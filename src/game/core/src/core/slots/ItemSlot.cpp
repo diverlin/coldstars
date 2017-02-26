@@ -19,6 +19,8 @@
 
 #include "ItemSlot.hpp"
 
+#include <descriptor/item/Item.hpp>
+
 #include "../builder/spaceobjects/ContainerBuilder.hpp"
 
 #include "../spaceobjects/Vehicle.hpp"
@@ -183,7 +185,6 @@ bool ItemSlot::checkItemInsertion(control::Item* item) const
 
 bool ItemSlot::insert(Item* item)
 {
-    assert(false);
 //    // make it oop
 //    if (subtype() == entity::Type::GATE_SLOT)
 //    {
@@ -193,32 +194,30 @@ bool ItemSlot::insert(Item* item)
 //        return false;
 //    }
 
-//    if (subtype() == entity::Type::CARGO_SLOT)
-//    {
-//        m_item = item;
-//        if (item->slot() != nullptr)
-//        {
-//            item->slot()->removeItem();
-//        }
-//        item->setSlot(this);
+    // cargo slot
+    if (subtype() == entity::type::CARGO_SLOT) {
+        m_item = item;
+        if (item->slot()) {
+            item->slot()->removeItem();
+        }
+        item->setSlot(this);
 
-//        return true;
-//    }
+        return true;
+    }
 
-//    if (subtype() == item->parentSubtype())
-//    {
-//        m_item = item;
-//        if (item->slot() != nullptr)
-//        {
-//            item->slot()->removeItem();
-//        }
-//        item->setSlot(this);
-//        updateVehiclePropetries();
+    // functional slot
+    if (subtype() == item->descriptor()->slotType()) {
+        m_item = item;
+        if (item->slot()) {
+            item->slot()->removeItem();
+        }
+        item->setSlot(this);
+        updateVehiclePropetries();
 
-//        return true;
-//    }
+        return true;
+    }
     
-//    return false;
+    return false;
 }
 
 void ItemSlot::removeItem()
@@ -272,36 +271,40 @@ void ItemSlot::deselectEvent()
 void ItemSlot::updateVehiclePropetries() const
 {
     // TODO: make it oop
-    assert(false);
-//    if (subtype() != entity::Type::CARGO_SLOT)
-//    {
-//        switch(subtype())
-//        {
-//            case entity::Type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
-//            case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
-//            case entity::Type::BAK_SLOT:         {
-//                vehicleOwner()->_updatePropSpeed();
-//                vehicleOwner()->_updatePropJump();
+    assert(vehicleOwner());
 
-//                break;
-//            }
+    if (subtype() == entity::type::CARGO_SLOT) {
+        return;
+    }
 
-//            case entity::Type::DRIVE_SLOT:       {
-//                vehicleOwner()->_updatePropSpeed();
-//                vehicleOwner()->_updatePropJump();
-//                break;
-//            }
-                
-//            case entity::Type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
-//            case entity::Type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
-//            case entity::Type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
-//            case entity::Type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
-//            case entity::Type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
-//            case entity::Type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
+    switch(subtype())
+    {
+    case entity::type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
+    case entity::type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
+    case entity::type::BAK_SLOT:         {
+        vehicleOwner()->_updatePropSpeed();
+        vehicleOwner()->_updatePropJump();
 
-//            case entity::Type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
-//        }
-//    }
+        break;
+    }
+
+    case entity::type::DRIVE_SLOT:       {
+        vehicleOwner()->_updatePropSpeed();
+        vehicleOwner()->_updatePropJump();
+        break;
+    }
+
+    case entity::type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
+#ifdef USE_EXTRA_EQUIPMENT
+    case entity::type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
+    case entity::type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
+#endif // USE_EXTRA_EQUIPMENT
+    case entity::type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
+    case entity::type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
+    case entity::type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
+
+    case entity::type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
+    }
 }
 
 ///* virtual */

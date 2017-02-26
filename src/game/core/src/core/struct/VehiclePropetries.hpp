@@ -50,6 +50,7 @@ struct VehiclePropetries
     int fire_radius_max = 0;
 
     bool equipment_radar = 0;
+    [[deprecated("deprecated")]]
     bool shield_effect_enabled = 0;
     bool hibernate_mode_enabled = 0;
 

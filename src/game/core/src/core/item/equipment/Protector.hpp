@@ -39,12 +39,11 @@ namespace item {
 class Protector : public Equipment
 {
 public:
-    Protector(model::item::Protector*);
+    Protector(model::item::Protector*, descriptor::item::Protector*);
     virtual ~Protector() = default;
 
     virtual void updateProperties();
 
-protected:
     model::item::Protector* model() const { return m_model_protector; }
     descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
 

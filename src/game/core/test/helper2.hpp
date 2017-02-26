@@ -24,6 +24,13 @@ class Ship;
 namespace item {
 class Bak;
 class Drive;
+class Droid;
+class Grapple;
+class Lazer;
+class Protector;
+class Radar;
+class Rocket;
+class Scaner;
 } // namespace item
 
 } // namespace descriptor
@@ -34,6 +41,13 @@ class Ship;
 namespace item {
 class Bak;
 class Drive;
+class Droid;
+class Grapple;
+class Lazer;
+class Protector;
+class Radar;
+class Rocket;
+class Scaner;
 } // namespace item
 
 } // namespace model
@@ -44,6 +58,13 @@ class Ship;
 namespace item {
 class Bak;
 class Drive;
+class Droid;
+class Grapple;
+class Lazer;
+class Protector;
+class Radar;
+class Rocket;
+class Scaner;
 } // namespace item
 
 } // namespce control
@@ -91,6 +112,97 @@ public:
 
 private:
     control::item::Drive* m_control = nullptr;
+};
+
+class Droid {
+public:
+    Droid();
+    ~Droid();
+
+    descriptor::item::Droid* descriptor() const;
+    model::item::Droid* model() const;
+    control::item::Droid* control() const { return m_control; }
+
+private:
+    control::item::Droid* m_control = nullptr;
+};
+
+class Grapple {
+public:
+    Grapple();
+    ~Grapple();
+
+    descriptor::item::Grapple* descriptor() const;
+    model::item::Grapple* model() const;
+    control::item::Grapple* control() const { return m_control; }
+
+private:
+    control::item::Grapple* m_control = nullptr;
+};
+
+class Lazer {
+public:
+    Lazer();
+    ~Lazer();
+
+    descriptor::item::Lazer* descriptor() const;
+    model::item::Lazer* model() const;
+    control::item::Lazer* control() const { return m_control; }
+
+private:
+    control::item::Lazer* m_control = nullptr;
+};
+
+class Protector {
+public:
+    Protector();
+    ~Protector();
+
+    descriptor::item::Protector* descriptor() const;
+    model::item::Protector* model() const;
+    control::item::Protector* control() const { return m_control; }
+
+private:
+    control::item::Protector* m_control = nullptr;
+};
+
+class Radar {
+public:
+    Radar();
+    ~Radar();
+
+    descriptor::item::Radar* descriptor() const;
+    model::item::Radar* model() const;
+    control::item::Radar* control() const { return m_control; }
+
+private:
+    control::item::Radar* m_control = nullptr;
+};
+
+class Rocket {
+public:
+    Rocket();
+    ~Rocket();
+
+    descriptor::item::Rocket* descriptor() const;
+    model::item::Rocket* model() const;
+    control::item::Rocket* control() const { return m_control; }
+
+private:
+    control::item::Rocket* m_control = nullptr;
+};
+
+class Scaner {
+public:
+    Scaner();
+    ~Scaner();
+
+    descriptor::item::Scaner* descriptor() const;
+    model::item::Scaner* model() const;
+    control::item::Scaner* control() const { return m_control; }
+
+private:
+    control::item::Scaner* m_control = nullptr;
 };
 
 } // namespace item
