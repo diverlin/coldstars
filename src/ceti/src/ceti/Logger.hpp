@@ -21,10 +21,10 @@
 #include <fstream>
 #include <iostream>
 
-#ifdef DEBUG
-    #define LOGs( ... )     std::cout  << __VA_ARGS__ << " "
-    #define LOG( ... )      std::cout  << __VA_ARGS__ << std::endl
-#define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
+#ifdef USE_LOG
+    #define LOGs( ... )         std::cout  << __VA_ARGS__ << " "
+    #define LOG( ... )          std::cout  << __VA_ARGS__ << std::endl
+    #define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
 #else
     #define LOG( ... )
     #define LOG_ERROR( ... )

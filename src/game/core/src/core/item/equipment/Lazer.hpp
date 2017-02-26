@@ -38,14 +38,13 @@ namespace item {
 class Lazer : public Equipment
 {
 public:
-    Lazer(model::item::Lazer*);
+    Lazer(model::item::Lazer*, descriptor::item::Lazer*);
     virtual ~Lazer() = default;
 
     //void FireEvent(SpaceObject*, ItemSlot*, float, bool);
 
     virtual void updateProperties();
 
-protected:
     model::item::Lazer* model() const { return m_model_lazer; }
     descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
 

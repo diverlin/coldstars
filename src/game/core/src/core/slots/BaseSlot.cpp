@@ -24,7 +24,7 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobjects/Vehicle.hpp>
 
 
 namespace model {
@@ -41,6 +41,17 @@ namespace model {
 //}
 
 } // namespace model
+
+namespace control {
+
+control::Vehicle*
+BaseSlot::vehicleOwner() const {
+    Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
+    assert(vehicle);
+    return vehicle;
+}
+
+} // namespace control
 
 //BaseSlot::BaseSlot()
 //:

@@ -32,6 +32,14 @@
 
 namespace control {
 
+Item::Item(model::Item* model, descriptor::Item* descr)
+    :
+      m_model_item(model)
+    , m_descriptor_item(descr)
+{
+
+}
+
 bool Item::isDamaged() const { return (model()->condition() <= 0); }
 bool Item::isLocked() const { return (model()->lockedTurns() > 0); }
 int Item::isFunctioning() const { return ( !isDamaged() && !isLocked() ); }

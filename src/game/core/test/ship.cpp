@@ -55,6 +55,25 @@ TEST(ship, create)
 TEST(ship, equip)
 {
     test::Ship ship;
+
+    test::item::Bak bak;
+    test::item::Drive drive;
+    test::item::Droid droid;
+    test::item::Grapple grapple;
+    test::item::Lazer lazer;
+    test::item::Protector protector;
+    test::item::Radar radar;
+    test::item::Rocket rocket;
+    test::item::Scaner scaner;
+
+    ship.control()->manage(bak.control());
+    ship.control()->manage(drive.control());
+    ship.control()->manage(droid.control());
+    ship.control()->manage(grapple.control());
+    ship.control()->manage(lazer.control());
+    ship.control()->manage(protector.control());
+    ship.control()->manage(rocket.control());
+    ship.control()->manage(scaner.control());
 }
 
 TEST(ship, drop_item_to_space)

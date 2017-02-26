@@ -164,7 +164,7 @@ public:
 
 private:
     model::Base* m_model_base = nullptr;
-    //model::Base* model() const { return m_model_base; }
+    model::Base* model() const { return m_model_base; }
 };
 
 } // namespace control

@@ -38,14 +38,14 @@ namespace control {
 class Item : public Base
 {
 public:
-    Item() = default;
+    Item(model::Item*, descriptor::Item*);
     virtual ~Item() = default;
 
     virtual void putChildrenToGarbage() const {}
 
-    void setSlot(control::ItemSlot* slot)  { m_slot = slot; }
+    void setSlot(ItemSlot* slot)  { m_slot = slot; }
 
-    control::ItemSlot* slot() const { return m_slot; }
+    ItemSlot* slot() const { return m_slot; }
 
     bool isDamaged() const;
     bool isLocked() const;
@@ -83,7 +83,7 @@ private:
     model::Item* m_model_item = nullptr;
     descriptor::Item* m_descriptor_item = nullptr;
 
-    control::ItemSlot* m_slot = nullptr;
+    ItemSlot* m_slot = nullptr;
 };
 
 } // namespace control

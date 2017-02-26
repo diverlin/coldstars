@@ -31,6 +31,8 @@
 //#include <jeti/Material.hpp>
 
 GoodsPack::GoodsPack(int id, entity::type subtype_id)
+    :
+      control::Item(nullptr, nullptr)
 {
     assert(false);
 //    setId(id);

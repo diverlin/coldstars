@@ -84,7 +84,7 @@ public:
     BaseSlot(model::BaseSlot*);
     virtual ~BaseSlot() = default;
 
-//    void setOwner(Base* owner) { m_owner = owner; }
+    void setOwner(Base* owner) { m_owner = owner; }
     void setPosition(const glm::vec2& position) { m_position = position; }
     void setSelected(bool selected) { m_selected = selected; }
     void selectEvent() { m_selected = true; }
@@ -94,15 +94,9 @@ public:
 
     const glm::vec2& position() const { return m_position; }
 
-    control::Vehicle* vehicleOwner() const {
-        assert(m_owner);
-        assert(false);
-        //            Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
-        //            assert(vehicle);
-        //            return vehicle;
-    }
+    Vehicle* vehicleOwner() const;
 
-    control::Base* owner() const { return m_owner; }
+    Base* owner() const { return m_owner; }
 
     model::BaseSlot* model() const { return m_model_baseslot; }
 
@@ -111,7 +105,7 @@ private:
 
     bool m_selected = false;
 
-    control::Base* m_owner = nullptr;
+    Base* m_owner = nullptr;
 
     glm::vec2 m_position;
 };

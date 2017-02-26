@@ -22,6 +22,8 @@
 #include <ceti/Logger.hpp>
 
 Bomb::Bomb(int_t id)
+    :
+      control::Item(nullptr, nullptr)
 {
     assert(false);
 //    setId(id);

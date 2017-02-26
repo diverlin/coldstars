@@ -29,8 +29,8 @@ namespace control {
 class Equipment : public Item
 {
 public:
-    Equipment();
-    virtual ~Equipment();
+    Equipment(model::Item*, descriptor::Item*);
+    virtual ~Equipment() = default;
 
     virtual void putChildrenToGarbage() const;
 

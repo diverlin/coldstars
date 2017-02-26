@@ -39,7 +39,7 @@ namespace item {
 class Rocket : public Equipment
 { 
 public:
-    Rocket(model::item::Rocket*);
+    Rocket(model::item::Rocket*, descriptor::item::Rocket*);
     virtual ~Rocket() = default;
 
 //    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
@@ -48,7 +48,6 @@ public:
 
     virtual void updateProperties();
 
-protected:
     model::item::Rocket* model() const { return m_model_rocket; }
     descriptor::item::Rocket* descriptor() const { return m_descriptor_rocket; }
 

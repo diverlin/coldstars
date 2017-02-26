@@ -30,9 +30,11 @@
 namespace control {
 namespace item {
 
-Protector::Protector(model::item::Protector* model)
+Protector::Protector(model::item::Protector* model, descriptor::item::Protector* descr)
     :
-      m_model_protector(model)
+      Equipment(model, descr)
+    , m_model_protector(model)
+    , m_descriptor_protector(descr)
 {
 }
 
