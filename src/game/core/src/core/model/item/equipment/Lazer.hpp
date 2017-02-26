@@ -18,12 +18,12 @@
 
 #pragma once
 
-#include "Equipment.hpp"
+#include "Weapon.hpp"
 
 namespace model {
 namespace item {
 
-class Lazer : public Equipment
+class Lazer : public Weapon
 {
 public:
     Lazer(int_t);
@@ -31,23 +31,14 @@ public:
     Lazer(const std::string& data);
     std::string data() const;
 
-    void setDamage(int damage) { m_damage = damage; }
-    void setRadius(int radius) { m_radius = radius; }
-
-    int damage() const { return m_damage; }
-    int radius() const { return m_radius; }
-
 private:
-    int m_damage = 0;
-    int m_radius = 0;
+    // ..
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
-        ar & m_damage;
-        ar & m_radius;
+        ar & boost::serialization::base_object<Weapon>(*this);
     }
 };
 

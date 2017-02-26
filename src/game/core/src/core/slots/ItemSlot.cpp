@@ -30,10 +30,15 @@
 #include "../world/starsystem.hpp"
 #include "../parts/Turrel.hpp"
 
-#include <item/equipment/Rocket.hpp>
-#include <item/equipment/Lazer.hpp>
-#include <item/equipment/Radar.hpp>
-#include <item/equipment/Grapple.hpp>
+#include <core/item/equipment/Rocket.hpp>
+#include <core/item/equipment/Lazer.hpp>
+#include <core/item/equipment/Radar.hpp>
+#include <core/item/equipment/Grapple.hpp>
+
+#include <core/model/item/equipment/Rocket.hpp>
+#include <core/model/item/equipment/Lazer.hpp>
+#include <core/model/item/equipment/Radar.hpp>
+#include <core/model/item/equipment/Grapple.hpp>
 
 #include <item/others/Bomb.hpp>
 
@@ -334,29 +339,30 @@ void ItemSlot::updateVehiclePropetries() const
 
 int ItemSlot::itemRadius() const
 {       
-//    switch(m_item->typeId())
-//    {
-//        case entity::Type::EQUIPMENT:
-//        {
-//            switch (m_item->subTypeId())
-//            {
-//                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->radius();  break; };
-//                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->radius(); break; };
+    switch(m_item->descriptor()->obType())
+    {
+        case entity::type::EQUIPMENT:
+        {
+            switch (m_item->descriptor()->obSubType())
+            {
+                case entity::type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->radius();  break; };
+                case entity::type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->radius(); break; };
 
-//                case entity::Type::GRAPPLE_EQUIPMENT: { return grappleEquipment()->radius(); break; };
-//                case entity::Type::RADAR_EQUIPMENT:   { return radarEquipment()->radius();   break; };
-//            }
+                case entity::type::GRAPPLE_EQUIPMENT: { return grappleEquipment()->model()->radius(); break; };
+                case entity::type::RADAR_EQUIPMENT:   { return radarEquipment()->model()->radius();   break; };
+            }
             
-//            break;
-//        }
+            break;
+        }
 
-//        case entity::Type::BOMB:
-//        {
-//            return bomb()->radius();   break;
-//        }
-//    }
+        case entity::type::BOMB:
+        {
+            assert(false);
+            //return bomb()->radius();   break;
+        }
+    }
 
-assert(false);
+    assert(false);
 //    if (item()) {
 //        return item()->radius();
 //    }
@@ -365,24 +371,25 @@ assert(false);
 
 int ItemSlot::itemDamage() const
 {       
-//    switch(m_item->typeId())
-//    {
-//        case entity::Type::EQUIPMENT:
-//        {
-//            switch (m_item->subTypeId())
-//            {
-//                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->damage();  break; };
-//                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->damage(); break; };
-//            }
+    switch(m_item->descriptor()->obType())
+    {
+        case entity::type::EQUIPMENT:
+        {
+            switch (m_item->descriptor()->obSubType())
+            {
+                case entity::type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->damage();  break; };
+                case entity::type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->damage(); break; };
+            }
             
-//            break;
-//        }
+            break;
+        }
             
-//        case entity::Type::BOMB:
-//        {
-//            return bomb()->damage();   break;
-//        }
-//    }
+        case entity::type::BOMB:
+        {
+            assert(false);
+            //return bomb()->damage();   break;
+        }
+    }
 
 assert(false);
 //    if (item()) {

@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include "Equipment.hpp"
+#include "Weapon.hpp"
 
 namespace descriptor {
 namespace item {
 
-class Rocket : public Equipment
+class Rocket : public Weapon
 {
 public:
     static const int AMMO_MIN;
@@ -58,35 +58,25 @@ public:
     Rocket(const std::string& data);
     std::string data() const;
 
-    void setRadius(int radius) { m_radius = radius; }
-    void setDamage(int damage) { m_damage = damage; }
     void setAmmo(int ammo) { m_ammo = ammo; }
 
-    int radius() const { return m_radius; }
-    int damage() const { return m_damage; }
     int ammo() const { return m_ammo; }
 
     std::string info() const {
-        std::string result = "descriptor::item::Radar:\n";
-        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        std::string result = "descriptor::item::Rocket:\n";
         result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
-        result += descriptor::Equipment::info();
+        result += Weapon::info();
         return result;
     }
 
 private:
-    int m_radius = 0;
-    int m_damage = 0;
     int m_ammo = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
-        ar & m_radius;
-        ar & m_damage;
+        ar & boost::serialization::base_object<Weapon>(*this);
         ar & m_ammo;
     }
 };

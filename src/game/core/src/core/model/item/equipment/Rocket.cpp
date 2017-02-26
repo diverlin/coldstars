@@ -27,8 +27,6 @@ namespace item {
 Rocket::Rocket(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-//    setType(entity::type::EQUIPMENT);
-//    setSubType(entity::type::ROCKET_EQUIPMENT);
 }
 
 Rocket::Rocket(const std::string& data)
