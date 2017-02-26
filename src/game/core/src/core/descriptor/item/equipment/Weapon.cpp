@@ -16,38 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#pragma once
-
 #include "Weapon.hpp"
 
-namespace model {
+#include <core/types/EntityTypes.hpp>
+
+namespace descriptor {
 namespace item {
 
-class Rocket : public Weapon
+Weapon::Weapon()
 {
-public:
-    Rocket(int_t);
-    ~Rocket() = default;
-    Rocket(const std::string& data);
-    std::string data() const;
+    setSlotType(entity::type::WEAPON_SLOT);
+}
 
-    void setAmmo(int ammo) { m_ammo = ammo; }
-
-    int ammo() const { return m_ammo; }
-
-private:
-    int m_ammo = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
-        ar & m_ammo;
-    }
-};
-
-} // namespace item
-} // namespace model
+} // namespce item
+} // namespace descriptor
 

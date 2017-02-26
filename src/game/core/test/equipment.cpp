@@ -25,6 +25,12 @@
 #include <core/model/item/equipment/Lazer.hpp>
 #include <core/item/equipment/Lazer.hpp>
 
+// Rocket
+#include <core/builder/item/equipment/RocketBuilder.hpp>
+#include <core/descriptor/item/equipment/Rocket.hpp>
+#include <core/model/item/equipment/Rocket.hpp>
+#include <core/item/equipment/Rocket.hpp>
+
 // Bak
 #include <core/builder/item/equipment/BakBuilder.hpp>
 #include <core/descriptor/item/equipment/Bak.hpp>
@@ -98,7 +104,8 @@ TEST(equipment, lazer)
 
     assert(ship.control()->weaponSlots()[0]);
 
-    // initial
+    // init
+    EXPECT_EQ(nullptr, ship.control()->weaponSlots()[0]->item());
     EXPECT_EQ(0, ship.control()->properties().total_damage);
     EXPECT_EQ(0, ship.control()->properties().fire_radius_min);
     EXPECT_EQ(0, ship.control()->properties().fire_radius_max);
@@ -111,31 +118,26 @@ TEST(equipment, lazer)
     EXPECT_EQ(lazer.model()->radius(), ship.control()->properties().fire_radius_max);
 }
 
-//TEST(equipment, rocket)
-//{
-//    model::Ship* model = builder::Ship::getNew();
-//    control::Ship* ship = new control::Ship(model);
+TEST(equipment, rocket)
+{
+    test::Ship ship;
+    test::item::Rocket rocket;
 
-//    item::Rocket* rocket = core::global::get().rocketBuilder().getNew();
+    assert(ship.control()->weaponSlots()[0]);
 
-//    // initial
-//    EXPECT_EQ(0, ship->properties().total_damage);
-//    EXPECT_EQ(0, ship->properties().fire_radius_min);
-//    EXPECT_EQ(0, ship->properties().fire_radius_max);
+    // init
+    EXPECT_EQ(nullptr, ship.control()->weaponSlots()[0]->item());
+    EXPECT_EQ(0, ship.control()->properties().total_damage);
+    EXPECT_EQ(0, ship.control()->properties().fire_radius_min);
+    EXPECT_EQ(0, ship.control()->properties().fire_radius_max);
 
-//    // event: insert item
-//    bool ok = ship->manage(rocket);
-//    EXPECT_TRUE(ok);
-//    EXPECT_EQ(rocket, ship->weaponComplex().equipedWeakestSlot()->item());
-//    EXPECT_EQ(rocket->damage(), ship->properties().total_damage);
-//    EXPECT_EQ(rocket->radius(), ship->properties().fire_radius_min);
-//    EXPECT_EQ(rocket->radius(), ship->properties().fire_radius_max);
-
-//    // clean
-//    delete model;
-//    delete ship;
-//    delete rocket;
-//}
+    // event: insert item
+    EXPECT_TRUE(ship.control()->manage(rocket.control()));
+    EXPECT_EQ(rocket.control(), ship.control()->weaponSlots()[0]->item());
+    EXPECT_EQ(rocket.model()->damage(), ship.control()->properties().total_damage);
+    EXPECT_EQ(rocket.model()->radius(), ship.control()->properties().fire_radius_min);
+    EXPECT_EQ(rocket.model()->radius(), ship.control()->properties().fire_radius_max);
+}
 
 TEST(equipment, bak)
 {

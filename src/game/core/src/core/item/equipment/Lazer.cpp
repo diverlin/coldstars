@@ -32,7 +32,7 @@ namespace item {
 
 Lazer::Lazer(model::item::Lazer* model, descriptor::item::Lazer* descr)
     :
-      Equipment(model, descr)
+      Weapon(model, descr)
     , m_model_lazer(model)
     , m_descriptor_lazer(descr)
 {
@@ -41,48 +41,12 @@ Lazer::Lazer(model::item::Lazer* model, descriptor::item::Lazer* descr)
 //    texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT);
 }
 
-/* virtual */
-void Lazer::updateProperties()
-{
-    m_damage_add = 0;
-    m_radius_add = 0;
-
-#ifdef USE_MODULES
-    for (unsigned int i = 0; i < modules_vec.size(); i++)
-    {
-        m_damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
-        m_radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();
-    }
-#endif
-
-    model()->setDamage(descriptor()->damage() + m_damage_add);
-    model()->setRadius(descriptor()->radius() + m_radius_add);
-} 
-
 void Lazer::addUniqueInfo()
 {
 //    info.addTitleStr("LAZER");
 
 //    info.addNameStr("damage:");     info.addValueStr(GetDamageStr());
 //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
-}
-
-std::string Lazer::damageStr()
-{
-    if (m_damage_add) {
-        return std::to_string(descriptor()->damage()) + "+" + std::to_string(m_damage_add);
-    } else {
-        return std::to_string(descriptor()->damage());
-    }
-}
-
-std::string Lazer::radiusStr()
-{
-    if (m_radius_add == 0) {
-        return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
-    } else {
-        return std::to_string(descriptor()->radius());
-    }
 }
 
 //void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)

@@ -16,56 +16,45 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
-#include "Weapon.hpp"
+#include "Equipment.hpp"
 
 namespace descriptor {
 namespace item {
 
-class Lazer : public Weapon
+class Weapon : public Equipment
 {
 public:
-    static const int RADIUS_MIN;
-    static const int RADIUS_MAX;
-    static const float RADIUS_TECH_RATE;
+    Weapon();
+    ~Weapon() = default;
 
-    static const int DAMAGE_MIN;
-    static const int DAMAGE_MAX;
-    static const float DAMAGE_TECH_RATE;
+    void setRadius(int radius) { m_radius = radius; }
+    void setDamage(int damage) { m_damage = damage; }
 
-    static const int MODULES_NUM_MIN;
-    static const int MODULES_NUM_MAX;
-
-    static const int MASS_MIN;
-    static const int MASS_MAX;
-    static const int CONDITION_MIN;
-    static const int CONDITION_MAX;
-
-    static const float DAMAGE_WEIGHT;
-    static const float RADIUS_WEIGHT;
-    static const float MODULES_NUM_WEIGHT;
-
-public:
-    Lazer();
-    ~Lazer() = default;
-    Lazer(const std::string& data);
-    std::string data() const;
+    int radius() const { return m_radius; }
+    int damage() const { return m_damage; }
 
     std::string info() const {
-        std::string result = "descriptor::item::Lazer:\n";
-        result += Weapon::info();
+        std::string result = "descriptor::item::Weapon:\n";
+        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += descriptor::Equipment::info();
         return result;
     }
 
 private:
-    // ..
+    int m_radius = 0;
+    int m_damage = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
+        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & m_radius;
+        ar & m_damage;
     }
 };
 

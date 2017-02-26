@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "Equipment.hpp"
+#include "Weapon.hpp"
 
 namespace descriptor {
 namespace item {
@@ -36,7 +36,7 @@ class Rocket;
 namespace control {
 namespace item {
 
-class Rocket : public Equipment
+class Rocket : public Weapon
 { 
 public:
     Rocket(model::item::Rocket*, descriptor::item::Rocket*);
@@ -56,8 +56,6 @@ private:
     descriptor::item::Rocket* m_descriptor_rocket = nullptr;
 
     int m_ammo_add = 0;
-    int m_damage_add = 0;
-    int m_radius_add = 0;
 
 //    int fire_atOnce;
 
@@ -66,8 +64,6 @@ private:
     void virtual addUniqueInfo();
 
     std::string ammoStr();
-    std::string damageStr();
-    std::string radiusStr();
 };
 
 } // namespace item

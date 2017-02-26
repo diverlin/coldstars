@@ -16,44 +16,57 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
-#include "Weapon.hpp"
+#include "Equipment.hpp"
 
 namespace descriptor {
 namespace item {
-class Lazer;
+class Weapon;
 } // namespace item
 } // namespace descriptor
 
 namespace model {
 namespace item {
-class Lazer;
+class Weapon;
 } // namespace item
 } // namespace model
 
 namespace control {
 namespace item {
 
-class Lazer : public Weapon
-{
+class Weapon : public Equipment
+{ 
 public:
-    Lazer(model::item::Lazer*, descriptor::item::Lazer*);
-    virtual ~Lazer() = default;
+    Weapon(model::item::Weapon*, descriptor::item::Weapon*);
+    virtual ~Weapon() = default;
 
-    //void FireEvent(SpaceObject*, ItemSlot*, float, bool);
+//    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
 
-    model::item::Lazer* model() const { return m_model_lazer; }
-    descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
+//    void FireEvent(float);
+
+    virtual void updateProperties();
 
 private:
-    model::item::Lazer* m_model_lazer = nullptr;
-    descriptor::item::Lazer* m_descriptor_lazer = nullptr;
+    model::item::Weapon* model() const { return m_model_weapon; }
+    descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
 
-    //              jeti::control::TextureOb* texOb_turrel;
-    //              jeti::control::TextureOb* texOb_lazerEffect;
+private:
+    model::item::Weapon* m_model_weapon = nullptr;
+    descriptor::item::Weapon* m_descriptor_weapon = nullptr;
+
+    int m_damage_add = 0;
+    int m_radius_add = 0;
+
+//    int fire_atOnce;
+
+//    BulletData data_bullet;
 
     void virtual addUniqueInfo();
+
+    std::string damageStr();
+    std::string radiusStr();
 };
 
 } // namespace item

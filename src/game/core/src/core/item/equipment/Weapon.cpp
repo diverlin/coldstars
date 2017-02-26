@@ -16,44 +16,45 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Rocket.hpp"
-#include <core/descriptor/item/equipment/Rocket.hpp>
-#include <core/model/item/equipment/Rocket.hpp>
+#include "Weapon.hpp"
+#include <core/descriptor/item/equipment/Weapon.hpp>
+#include <core/model/item/equipment/Weapon.hpp>
 
-#ifdef USE_MODULES
-#include <item/modules/RocketModule.hpp>
-#endif
-
-#include <ceti/serialization/macro.hpp>
+//#include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
 namespace control {
 namespace item {
 
-Rocket::Rocket(model::item::Rocket* model, descriptor::item::Rocket* descr)
+Weapon::Weapon(model::item::Weapon* model, descriptor::item::Weapon* descr)
     :
-      Weapon(model, descr)
-    , m_model_rocket(model)
-    , m_descriptor_rocket(descr)
+      Equipment(model, descr)
+    , m_model_weapon(model)
+    , m_descriptor_weapon(descr)
 {
 //    fire_atOnce = meti::getRandInt(1, 3);
 }
 
 /* virtual */
-void Rocket::updateProperties()
+void Weapon::updateProperties()
 {
-    m_ammo_add = 0;
+    m_damage_add   = 0;
+    m_radius_add   = 0;
     
 #ifdef USE_MODULES
+    // todo implement weapon module class
     for (unsigned int i = 0; i < modules_vec.size(); i++) {
-        ammo_add += ((RocketModule*)modules_vec[i])->GetAmmoMaxAdd();
+        damage_add   += ((RocketModule*)modules_vec[i])->GetDamageAdd();
+        radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();
     }
 #endif
 
-    model()->setAmmo(descriptor()->ammo() + m_ammo_add);
+    model()->setDamage(descriptor()->damage() + m_damage_add);
+    model()->setRadius(descriptor()->radius() + m_radius_add);
 }
 
-void Rocket::addUniqueInfo()
+void
+Weapon::addUniqueInfo()
 {
     //    info.addTitleStr("ROCKET");
     
@@ -63,12 +64,22 @@ void Rocket::addUniqueInfo()
 }
 
 std::string
-Rocket::ammoStr()
+Weapon::damageStr()
 {
-    if (m_ammo_add) {
-         return std::to_string(descriptor()->ammo()) + "+" + std::to_string(m_ammo_add) + "/" + std::to_string(model()->ammo());
+    if (m_damage_add) {
+        return std::to_string(descriptor()->damage()) + "+" + std::to_string(m_damage_add);
     } else {
-        return std::to_string(descriptor()->ammo()) + "/" + std::to_string(model()->ammo());
+        return std::to_string(descriptor()->damage());
+    }
+}
+
+std::string
+Weapon::radiusStr()
+{
+    if (m_radius_add) {
+        return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
+    } else {
+        return std::to_string(descriptor()->radius());
     }
 }
 
