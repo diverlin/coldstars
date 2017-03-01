@@ -427,7 +427,7 @@ TEST(equipment, freespace)
 
     // event: generate and insert item list
     int taken_mass = 0;
-    std::vector<test::item::Bak*> items;
+    test::pVector<test::item::Bak*> items;
     int cargo_num = 1/*ship.descriptor()->cargoSlotNum()*/;
     for (int i=0; i<cargo_num; ++i) {
         test::item::Bak* item = new test::item::Bak;
@@ -437,10 +437,5 @@ TEST(equipment, freespace)
         EXPECT_EQ(ship.control()->space() - taken_mass, ship.control()->freeSpace());
         EXPECT_EQ(taken_mass, ship.model()->mass());
     }
-
-    for(test::item::Bak* item: items) {
-        delete item;
-    }
-    items.clear();
 }
 
