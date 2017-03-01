@@ -17,6 +17,7 @@
 */
 #pragma once
 
+#include <vector>
 
 namespace descriptor {
 class Ship;
@@ -214,6 +215,19 @@ private:
 };
 
 } // namespace item
+
+
+template<typename T>
+class pVector : public std::vector<T> {
+public:
+    pVector() = default;
+    ~pVector() {
+        for(T e: *this) {
+            delete e;
+        }
+        this->clear();
+    }
+};
 
 } // namespace test
 
