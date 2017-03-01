@@ -111,7 +111,7 @@ TEST(equipment, lazer)
     EXPECT_EQ(0, ship.control()->properties().fire_radius_max);
 
     // event: insert item
-    EXPECT_TRUE(ship.control()->manage(lazer.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(lazer.control()));
     EXPECT_EQ(lazer.control(), ship.control()->weaponSlots()[0]->item());
     EXPECT_EQ(lazer.model()->damage(), ship.control()->properties().total_damage);
     EXPECT_EQ(lazer.model()->radius(), ship.control()->properties().fire_radius_min);
@@ -132,7 +132,7 @@ TEST(equipment, rocket)
     EXPECT_EQ(0, ship.control()->properties().fire_radius_max);
 
     // event: insert item
-    EXPECT_TRUE(ship.control()->manage(rocket.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(rocket.control()));
     EXPECT_EQ(rocket.control(), ship.control()->weaponSlots()[0]->item());
     EXPECT_EQ(rocket.model()->damage(), ship.control()->properties().total_damage);
     EXPECT_EQ(rocket.model()->radius(), ship.control()->properties().fire_radius_min);
@@ -151,7 +151,7 @@ TEST(equipment, bak)
     EXPECT_EQ(0, ship.control()->properties().hyper);
 
     // insert
-    EXPECT_TRUE(ship.control()->manage(bak.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(bak.control()));
     EXPECT_EQ(bak.control(), ship.control()->bakSlots()[0]->item());
 
     // post
@@ -170,7 +170,7 @@ TEST(equipment, drive)
     EXPECT_EQ(0, ship.control()->properties().hyper);
 
     // insert
-    EXPECT_TRUE(ship.control()->manage(drive.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(drive.control()));
     EXPECT_EQ(drive.control(), ship.control()->driveSlots()[0]->item());
 
     // post
@@ -190,8 +190,8 @@ TEST(equipment, bak_and_drive)
     EXPECT_EQ(0, ship.control()->properties().hyper);
 
     // insert
-    EXPECT_TRUE(ship.control()->manage(bak.control()));
-    EXPECT_TRUE(ship.control()->manage(drive.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(bak.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(drive.control()));
     int hyper = std::min(bak.model()->fuel(), drive.model()->hyper());
     EXPECT_EQ(hyper, ship.control()->properties().hyper);
 
@@ -242,7 +242,7 @@ TEST(equipment, droid)
     EXPECT_EQ(0, ship.control()->properties().repair);
 
     // event: item insert
-    EXPECT_TRUE(ship.control()->manage(droid.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(droid.control()));
     EXPECT_EQ(droid.model()->repair(), ship.control()->properties().repair);
     EXPECT_EQ(droid.control(), ship.control()->droidSlots()[0]->item());
 
@@ -276,7 +276,7 @@ TEST(equipment, grapple)
     EXPECT_EQ(0, ship.control()->properties().grab_radius);
 
     // event: item insert
-    EXPECT_TRUE(ship.control()->manage(grapple.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(grapple.control()));
     EXPECT_EQ(grapple.control(), ship.control()->grappleSlots()[0]->item());
     EXPECT_EQ(grapple.model()->strength(), ship.control()->properties().grab_strength);
     EXPECT_EQ(grapple.model()->radius(), ship.control()->properties().grab_radius);
@@ -314,7 +314,7 @@ TEST(equipment, scaner)
     EXPECT_EQ(0, ship.control()->properties().scan);
 
     // item insert
-    EXPECT_TRUE(ship.control()->manage(scaner.control()));
+    EXPECT_TRUE(ship.control()->loadAndManage(scaner.control()));
     EXPECT_EQ(scaner.control(), ship.control()->scanerSlots()[0]->item());
     EXPECT_EQ(scaner.model()->scan(), ship.control()->properties().scan);
 
@@ -347,7 +347,7 @@ TEST(equipment, radar)
     EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship.control()->properties().radar);
 
     // event: item insert
-    EXPECT_TRUE(ship.control()->manage(radar.control()) );
+    EXPECT_TRUE(ship.control()->loadAndManage(radar.control()) );
     EXPECT_EQ(radar.control(), ship.control()->radarSlots()[0]->item());
     EXPECT_EQ(radar.model()->radius(), ship.control()->properties().radar);
 
@@ -380,7 +380,7 @@ TEST(equipment, protector)
     EXPECT_EQ(ship.descriptor()->protection(), ship.control()->properties().protection);
 
     // event: item insert
-    EXPECT_TRUE(ship.control()->manage(protector.control()) );
+    EXPECT_TRUE(ship.control()->loadAndManage(protector.control()) );
     EXPECT_EQ(protector.control(), ship.control()->protectorSlots()[0]->item());
     int protection = ship.descriptor()->protection() + protector.model()->protection();
     EXPECT_EQ(protection, ship.control()->properties().protection);
@@ -402,31 +402,45 @@ TEST(equipment, protector)
     EXPECT_EQ(protection, ship.control()->properties().protection);
 }
 
-//TEST(equipment, freespace)
-//{
-//    model::Ship* model = builder::Ship::getNew();
-//    control::Ship* ship = new control::Ship(model);
+TEST(equipment, cargo_load)
+{
+    test::Ship ship;
 
-//    // initial
-//    EXPECT_EQ(ship->model()->mass(), ship->freeSpace());
+    int cargo_num = ship.descriptor()->cargoSlotNum();
+    for(int i=0; i<cargo_num; ++i) {
+        test::item::Scaner item;
+        EXPECT_TRUE(ship.control()->load(item.control()));
+    }
 
-//    // event: generate and insert item list
-//    std::vector<item::Protector*> items = core::global::get().protectorBuilder().getNew(3);
-//    int weight = 0;
-//    for (auto item: items) {
-//        weight += item->mass();
-//        bool ok = ship->manage(item);
-//        EXPECT_TRUE(ok);
-//    }
-//    // check space
-//    EXPECT_EQ(ship->space() - weight, ship->freeSpace());
-//    EXPECT_EQ(weight, ship->model()->mass());
+    test::item::Scaner item;
+    EXPECT_FALSE(ship.control()->load(item.control()));
 
-//    // clean
-//    delete model;
-//    delete ship;
-//    for (auto item: items) {
-//        delete item;
-//    }
-//}
+    EXPECT_EQ(0, ship.control()->properties().scan);
+}
+
+TEST(equipment, freespace)
+{
+    test::Ship ship;
+
+    // init
+    EXPECT_EQ(ship.descriptor()->space(), ship.control()->freeSpace());
+
+    // event: generate and insert item list
+    int taken_mass = 0;
+    std::vector<test::item::Bak*> items;
+    int cargo_num = 1/*ship.descriptor()->cargoSlotNum()*/;
+    for (int i=0; i<cargo_num; ++i) {
+        test::item::Bak* item = new test::item::Bak;
+        items.push_back(item);
+        taken_mass += item->descriptor()->mass();
+        EXPECT_TRUE(ship.control()->loadAndManage(item->control()));
+        EXPECT_EQ(ship.control()->space() - taken_mass, ship.control()->freeSpace());
+        EXPECT_EQ(taken_mass, ship.model()->mass());
+    }
+
+    for(test::item::Bak* item: items) {
+        delete item;
+    }
+    items.clear();
+}
 

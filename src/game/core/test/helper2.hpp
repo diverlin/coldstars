@@ -98,6 +98,7 @@ public:
     control::item::Bak* control() const { return m_control; }
 
 private:
+    Bak(const Bak&) = delete;
     control::item::Bak* m_control = nullptr;
 };
 
@@ -111,6 +112,7 @@ public:
     control::item::Drive* control() const { return m_control; }
 
 private:
+    Drive(const Drive&) = delete;
     control::item::Drive* m_control = nullptr;
 };
 
@@ -124,6 +126,7 @@ public:
     control::item::Droid* control() const { return m_control; }
 
 private:
+    Droid(const Droid&) = delete;
     control::item::Droid* m_control = nullptr;
 };
 
@@ -150,6 +153,7 @@ public:
     control::item::Lazer* control() const { return m_control; }
 
 private:
+    Lazer(const Lazer&) = delete;
     control::item::Lazer* m_control = nullptr;
 };
 
@@ -163,6 +167,7 @@ public:
     control::item::Protector* control() const { return m_control; }
 
 private:
+    Protector(const Protector&) = delete;
     control::item::Protector* m_control = nullptr;
 };
 
@@ -176,6 +181,7 @@ public:
     control::item::Radar* control() const { return m_control; }
 
 private:
+    Radar(const Radar&) = delete;
     control::item::Radar* m_control = nullptr;
 };
 
@@ -189,6 +195,7 @@ public:
     control::item::Rocket* control() const { return m_control; }
 
 private:
+    Rocket(const Rocket&) = delete;
     control::item::Rocket* m_control = nullptr;
 };
 
@@ -202,6 +209,7 @@ public:
     control::item::Scaner* control() const { return m_control; }
 
 private:
+    Scaner(const Scaner&) = delete;
     control::item::Scaner* m_control = nullptr;
 };
 

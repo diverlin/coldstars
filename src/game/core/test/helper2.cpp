@@ -86,7 +86,7 @@ Ship::Ship() {
     m_control = new control::Ship(model, descr);
 }
 Ship::~Ship() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -103,7 +103,7 @@ Bak::Bak() {
     m_control = new control::item::Bak(model, descr);
 }
 Bak::~Bak() {
-    delete m_control->descriptor();
+    //delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -118,7 +118,7 @@ Drive::Drive() {
     m_control = new control::item::Drive(model, descr);
 }
 Drive::~Drive() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -133,7 +133,7 @@ Droid::Droid() {
     m_control = new control::item::Droid(model, descr);
 }
 Droid::~Droid() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -148,7 +148,7 @@ Grapple::Grapple() {
     m_control = new control::item::Grapple(model, descr);
 }
 Grapple::~Grapple() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -163,9 +163,9 @@ Lazer::Lazer() {
     m_control = new control::item::Lazer(model, descr);
 }
 Lazer::~Lazer() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
-    //delete m_control; // cause a bug, don't know why
+    delete m_control;
 }
 
 descriptor::item::Lazer* Lazer::descriptor() const { return m_control->descriptor(); }
@@ -178,7 +178,7 @@ Protector::Protector() {
     m_control = new control::item::Protector(model, descr);
 }
 Protector::~Protector() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -193,7 +193,7 @@ Radar::Radar() {
     m_control = new control::item::Radar(model, descr);
 }
 Radar::~Radar() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -208,7 +208,7 @@ Rocket::Rocket() {
     m_control = new control::item::Rocket(model, descr);
 }
 Rocket::~Rocket() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -223,7 +223,7 @@ Scaner::Scaner() {
     m_control = new control::item::Scaner(model, descr);
 }
 Scaner::~Scaner() {
-    delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }

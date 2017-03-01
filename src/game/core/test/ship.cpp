@@ -66,14 +66,14 @@ TEST(ship, equip)
     test::item::Rocket rocket;
     test::item::Scaner scaner;
 
-    ship.control()->manage(bak.control());
-    ship.control()->manage(drive.control());
-    ship.control()->manage(droid.control());
-    ship.control()->manage(grapple.control());
-    ship.control()->manage(lazer.control());
-    ship.control()->manage(protector.control());
-    ship.control()->manage(rocket.control());
-    ship.control()->manage(scaner.control());
+    ship.control()->loadAndManage(bak.control());
+    ship.control()->loadAndManage(drive.control());
+    ship.control()->loadAndManage(droid.control());
+    ship.control()->loadAndManage(grapple.control());
+    ship.control()->loadAndManage(lazer.control());
+    ship.control()->loadAndManage(protector.control());
+    ship.control()->loadAndManage(rocket.control());
+    ship.control()->loadAndManage(scaner.control());
 }
 
 TEST(ship, drop_item_to_space)

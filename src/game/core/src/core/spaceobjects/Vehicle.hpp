@@ -186,8 +186,8 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
-    bool addItemToCargo(Item*);
-    bool manage(Item*);
+    bool load(Item*);
+    bool loadAndManage(Item*);
 
     bool isSlotFree(const place::type&) const;
     bool checkManage(const core::Id&);
@@ -302,6 +302,10 @@ private:
     bool __installItem(Item*);
     bool __installEquipment(Item*);
     ItemSlot* __freeFunctionalSlot(const entity::type&) const;
+
+
+    void __updateFreeSpace();
+    bool __addItemToCargo(Item*);
 
 protected:
     model::Vehicle* m_model_vehicle = nullptr;
