@@ -102,6 +102,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     __createSlots(descr);
 
     _updatePropProtection();
+    __updateFreeSpace();
 }
 
 /* virtual */
@@ -409,7 +410,10 @@ bool Vehicle::__installEquipment(Item* item)
     // todo simplify logic
 
     ItemSlot* slot = __freeFunctionalSlot(item->descriptor()->slotType());
-    return slot->insert(item);
+    if (slot) {
+        return slot->insert(item);
+    }
+    return false;
 
 //    if (item->descriptor()->slotType() == entity::type::WEAPON_SLOT) {
 //        ItemSlot* slot = weaponComplex().freeSlot();
@@ -548,7 +552,7 @@ ItemSlot* Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype_id)
 bool
 Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
 {
-    if (addItemToCargo(container->itemSlot()->item()) == true)
+    if (load(container->itemSlot()->item()) == true)
     {
         container->killSilently();
 
@@ -559,34 +563,49 @@ Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
 }
 
 bool
-Vehicle::addItemToCargo(Item* item)
+Vehicle::load(Item* item)
 {
-    _increaseMass(item->descriptor()->mass());
-    if (item->descriptor()->obType() == entity::type::GOODS) {
-        if (_installGoodsPack(item)) {
-            return true;
-        }
+    bool added = __addItemToCargo(item);
+    if (added) {
+        _increaseMass(item->descriptor()->mass());
     }
 
-    ItemSlot* slot = freeCargoSlot();
-    if (slot) {
-        return slot->insert(item);
-    }
-
-    return false;
+    return added;
 }
 
 bool
-Vehicle::manage(Item* item)
+Vehicle::__addItemToCargo(Item* item)
 {
-    if (__installItem(item)) {
-        return true;
-    }
-    if (addItemToCargo(item)) {
-        return true;
+    bool added = false;
+
+    if (item->descriptor()->obType() == entity::type::GOODS) {
+        added = _installGoodsPack(item);
     }
 
-    return false;
+    if (!added) {
+        ItemSlot* slot = freeCargoSlot();
+        if (slot) {
+            added = slot->insert(item);
+        }
+    }
+
+    return added;
+}
+
+bool
+Vehicle::loadAndManage(Item* item)
+{
+    bool added = __installItem(item);
+
+    if (!added) {
+        added = __addItemToCargo(item);
+    }
+
+    if (added) {
+        _increaseMass(item->descriptor()->mass());
+    }
+
+    return added;
 }
 
 void Vehicle::manageItemsInCargo()
@@ -638,7 +657,7 @@ bool Vehicle::sellItem(Item* item)
 
 bool Vehicle::buyItem(Item* item)
 {
-    if (addItemToCargo(item) == true)
+    if (load(item) == true)
     {
         m_npc->increaseCredits(-item->descriptor()->price());
 
@@ -1005,12 +1024,17 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
     }
 }
 
+void
+Vehicle::__updateFreeSpace() {
+    model()->properties().free_space = descriptor()->space() - model()->mass();
+}
+
 void Vehicle::_increaseMass(int d_mass)
 {
     //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
 
     _addMass(d_mass);
-    model()->properties().free_space = descriptor()->space() - model()->mass();
+    __updateFreeSpace();
     _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
