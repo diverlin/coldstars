@@ -80,6 +80,8 @@ public:
     [[warning("do we need this? using dock will be sufficient probably")]]
     int_t land() const { return m_land; }
 
+    std::vector<int_t> items() const { return m_items; }
+
 //    int_t radarSlot() const { return m_radar_slot; }
 //    int_t scanerSlot() const { return m_scaner_slot; }
 
@@ -100,6 +102,8 @@ private:
     int_t m_npc = NONE;
     int_t m_dock = NONE;
     int_t m_land = NONE;
+
+    std::vector<int_t> m_items;
 
 //    int_t m_radar_slot = NONE;
 //    int_t m_scaner_slot = NONE;
@@ -126,6 +130,7 @@ private:
         ar & m_npc;
         ar & m_dock;
         ar & m_land;
+        ar $ m_items;
 //        ar & m_properties;
 //        ar & m_needs;
         ar & m_descriptor;

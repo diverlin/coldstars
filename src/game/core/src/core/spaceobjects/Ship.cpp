@@ -35,23 +35,20 @@
 namespace model {
 
 Ship::Ship()
-{
-//    setType(entity::type::VEHICLE);
-//    setSubType(entity::type::SHIP);
-}
+{}
 
 Ship::~Ship()
 {}
 
 Ship::Ship(const std::string& data)
 {
-    //MACRO_READ_SERIALIZED_DATA
+    MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
 Ship::data() const
 {
-    //MACRO_SAVE_SERIALIZED_DATA
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace model
