@@ -138,5 +138,16 @@ TEST(ship, criticalDamage)
     EXPECT_EQ(0, ship.model()->armor());
 }
 
+TEST(ship, clone)
+{
+    test::Ship ship;
+    test::item::Bak bak;
+
+    ship.control()->load(bak.control());
+
+    model::Ship* model = new model::Ship(ship.model()->data());
+    EXPECT_EQ(ship.model()->data(), model->data());
+
+}
 
 

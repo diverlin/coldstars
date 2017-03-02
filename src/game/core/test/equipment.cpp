@@ -428,7 +428,7 @@ TEST(equipment, freespace)
     // event: generate and insert item list
     int taken_mass = 0;
     test::pVector<test::item::Bak*> items;
-    int cargo_num = 1/*ship.descriptor()->cargoSlotNum()*/;
+    int cargo_num = ship.descriptor()->cargoSlotNum();
     for (int i=0; i<cargo_num; ++i) {
         test::item::Bak* item = new test::item::Bak;
         items.push_back(item);

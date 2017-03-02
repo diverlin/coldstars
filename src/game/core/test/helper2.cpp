@@ -103,7 +103,7 @@ Bak::Bak() {
     m_control = new control::item::Bak(model, descr);
 }
 Bak::~Bak() {
-    //delete m_control->descriptor();
+//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
