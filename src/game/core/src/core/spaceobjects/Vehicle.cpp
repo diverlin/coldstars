@@ -593,7 +593,7 @@ Vehicle::__addItemToCargo(Item* item)
 }
 
 bool
-Vehicle::loadAndManage(Item* item)
+Vehicle::manage(Item* item)
 {
     bool added = __installItem(item);
 
