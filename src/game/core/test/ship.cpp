@@ -66,14 +66,14 @@ TEST(ship, equip)
     test::item::Rocket rocket;
     test::item::Scaner scaner;
 
-    ship.control()->loadAndManage(bak.control());
-    ship.control()->loadAndManage(drive.control());
-    ship.control()->loadAndManage(droid.control());
-    ship.control()->loadAndManage(grapple.control());
-    ship.control()->loadAndManage(lazer.control());
-    ship.control()->loadAndManage(protector.control());
-    ship.control()->loadAndManage(rocket.control());
-    ship.control()->loadAndManage(scaner.control());
+    ship.control()->manage(bak.control());
+    ship.control()->manage(drive.control());
+    ship.control()->manage(droid.control());
+    ship.control()->manage(grapple.control());
+    ship.control()->manage(lazer.control());
+    ship.control()->manage(protector.control());
+    ship.control()->manage(rocket.control());
+    ship.control()->manage(scaner.control());
 }
 
 TEST(ship, drop_item_to_space)
@@ -141,13 +141,18 @@ TEST(ship, criticalDamage)
 TEST(ship, clone)
 {
     test::Ship ship;
-    test::item::Bak bak;
+    test::item::Scaner item;
 
-    ship.control()->load(bak.control());
+    ship.control()->manage(item.control());
 
     model::Ship* model = new model::Ship(ship.model()->data());
-    EXPECT_EQ(ship.model()->data(), model->data());
+    control::Ship* control = new control::Ship(model, ship.descriptor());
 
+    EXPECT_EQ(ship.model()->data(), model->data());
+    EXPECT_EQ(ship.model()->items(), model->items());
+
+    EXPECT_EQ(ship.control()->properties().scan, item.descriptor()->scan());
+    EXPECT_EQ(ship.control()->properties().scan, control->properties().scan);
 }
 
 

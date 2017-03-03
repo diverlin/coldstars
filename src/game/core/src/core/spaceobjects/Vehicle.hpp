@@ -31,6 +31,8 @@
 
 #include <core/types/StatusTypes.hpp>
 
+//#include <boost/serialization/vector.hpp>
+
 class VehicleSlot;
 class Land; 
 class GoodsPack;
@@ -130,7 +132,7 @@ private:
         ar & m_npc;
         ar & m_dock;
         ar & m_land;
-        ar $ m_items;
+        ar & m_items;
 //        ar & m_properties;
 //        ar & m_needs;
         ar & m_descriptor;
@@ -192,7 +194,7 @@ public:
     bool grabItemsFromVehicle(Vehicle*);
 
     bool load(Item*);
-    bool loadAndManage(Item*);
+    bool manage(Item*);
 
     bool isSlotFree(const place::type&) const;
     bool checkManage(const core::Id&);
