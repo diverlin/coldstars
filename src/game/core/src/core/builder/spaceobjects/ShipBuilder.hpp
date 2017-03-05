@@ -25,7 +25,7 @@
 #include <string>
 
 namespace descriptor {
-class Vehicle;
+class Ship;
 } // namespace model
 
 namespace model {
@@ -39,14 +39,14 @@ class Ship : public BaseVehicle
 public:
     static model::Ship* getNew(bool full_equiped = false);
 //    static model::Ship* getNew(const std::string&);
-    static model::Ship* getNew(descriptor::Vehicle*);
+    static model::Ship* getNew(descriptor::Ship*);
 
 private:
     Ship()=delete;
     ~Ship()=delete;
 
     static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, descriptor::Vehicle*);
+    static void __createInternals(model::Ship*, descriptor::Ship*);
 }; 
 
 } // namespace builder

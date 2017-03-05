@@ -23,6 +23,8 @@
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 
+#include <core/descriptor/spaceobject/Ship.hpp>
+
 namespace builder {
 
 model::Ship*
@@ -38,7 +40,7 @@ Ship::getNew(bool full_equiped)
 }
 
 model::Ship*
-Ship::getNew(descriptor::Vehicle* descriptor)
+Ship::getNew(descriptor::Ship* descriptor)
 {            
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
@@ -67,7 +69,7 @@ Ship::__getNewTemplate()
 }
 
 void
-Ship::__createInternals(model::Ship* ship, descriptor::Vehicle* descr)
+Ship::__createInternals(model::Ship* ship, descriptor::Ship* descr)
 {
 //    assert(false);
     //assert(descr->type() == (int)descriptor::Type::VEHICLE);
