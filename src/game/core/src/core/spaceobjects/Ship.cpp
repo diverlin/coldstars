@@ -31,27 +31,9 @@
 
 #include <pilots/Npc.hpp>
 
+#include <core/model/spaceobject/Ship.hpp>
 
-namespace model {
-
-Ship::Ship()
-{}
-
-Ship::~Ship()
-{}
-
-Ship::Ship(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Ship::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
+#include <core/descriptor/spaceobject/Ship.hpp>
 
 namespace control {
 

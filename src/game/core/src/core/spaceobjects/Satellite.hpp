@@ -19,34 +19,18 @@
 
 #pragma once
 
+#include <core/descriptor/spaceobject/Vehicle.hpp>
+#include <core/model/spaceobject/Vehicle.hpp>
 #include <core/spaceobjects/Vehicle.hpp>
 #include <core/parts/orbit.hpp>
 
+namespace descriptor {
+class Satellite;
+} // namespace descriptor
 
 namespace model {
-
-class Satellite : public model::Vehicle
-{
-public:
-    Satellite();
-    virtual ~Satellite();
-    Satellite(const std::string& data);
-    std::string data() const;
-
-private:
-    // ..
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Vehicle>(*this);
-    }
-};
-
+class Satellite;
 } // namespace model
-
 
 namespace control {
 

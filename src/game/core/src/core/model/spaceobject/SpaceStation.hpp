@@ -16,39 +16,39 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
+#include <core/model/spaceobject/Vehicle.hpp>
 
-#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <core/descriptor/VehicleDescriptor.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 #include <string>
 
-namespace descriptor {
-class Vehicle;
-} // namespace model
-
 namespace model {
-class Ship;
-} // namespace model
 
-namespace builder {
-
-class Ship : public BaseVehicle
+class SpaceStation : public Vehicle
 {
 public:
-    static model::Ship* getNew(bool full_equiped = false);
-//    static model::Ship* getNew(const std::string&);
-    static model::Ship* getNew(descriptor::Vehicle*);
+    SpaceStation() = default;
+    ~SpaceStation() = default;
+    SpaceStation(const std::string& data);
+    std::string data() const;
+
+    int_t innerLand() const { return m_innerLand; }
+    void setInnerLand(int_t inner_land) { m_innerLand = inner_land; }
 
 private:
-    Ship()=delete;
-    ~Ship()=delete;
+    int_t m_innerLand = NONE;
 
-    static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, descriptor::Vehicle*);
-}; 
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & m_innerLand;
+    }
+};
 
-} // namespace builder
-
-
+} // namespace model

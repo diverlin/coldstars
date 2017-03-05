@@ -29,6 +29,10 @@
 #include <core/descriptor/VehicleDescriptor.hpp>
 #include <core/descriptor/Container.hpp>
 
+#include <core/descriptor/spaceobject/Ship.hpp>
+#include <core/descriptor/spaceobject/Satellite.hpp>
+#include <core/descriptor/spaceobject/SpaceStation.hpp>
+
 #include <core/descriptor/item/equipment/ALL>
 
 #include <ceti/descriptor/Collector.hpp>
@@ -41,6 +45,10 @@
 #include <string>
 
 namespace descriptor {
+
+class Ship;
+class SpaceStation;
+class Satellite;
 
 template<typename T>
 class MManager {

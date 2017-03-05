@@ -20,7 +20,7 @@
 #include <core/builder/spaceobjects/SpaceStationBuilder.hpp>
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/SpaceStation.hpp>
+#include <core/model/spaceobject/SpaceStation.hpp>
 #include <core/dock/Kosmoport.hpp>
 
 #include <meti/RandUtils.hpp>

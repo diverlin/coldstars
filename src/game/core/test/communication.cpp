@@ -25,6 +25,8 @@
 #include <core/spaceobjects/Container.hpp>
 #include <core/spaceobjects/Ship.hpp>
 
+#include <core/model/spaceobject/Ship.hpp>
+
 #include <core/item/equipment/ALL>
 
 #include <core/builder/spaceobjects/ShipBuilder.hpp>

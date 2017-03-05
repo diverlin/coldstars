@@ -26,32 +26,8 @@
 #include <meti/RandUtils.hpp>
 #include <ceti/Logger.hpp>
 
-
-namespace model {
-
-Satellite::Satellite()
-{
-//    setType(entity::type::VEHICLE);
-//    setSubType(entity::type::SATELLITE);
-}
-
-Satellite::~Satellite()
-{
-
-}
-
-Satellite::Satellite(const std::string& data)
-{
-    //MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Satellite::data() const
-{
-    //MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
+#include <core/model/spaceobject/Satellite.hpp>
+#include <core/descriptor/spaceobject/Satellite.hpp>
 
 namespace control {
 

@@ -27,6 +27,10 @@
 #include <core/descriptor/AsteroidDescriptor.hpp>
 #include <core/descriptor/Container.hpp>
 
+#include <core/descriptor/spaceobject/Ship.hpp>
+#include <core/descriptor/spaceobject/SpaceStation.hpp>
+#include <core/descriptor/spaceobject/Satellite.hpp>
+
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/common/Global.hpp>

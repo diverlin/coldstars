@@ -16,39 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
 
+#include "Ship.hpp"
 
-#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <core/descriptor/VehicleDescriptor.hpp>
-
-#include <string>
-
-namespace descriptor {
-class Vehicle;
-} // namespace model
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
-class Ship;
+
+Ship::Ship(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Ship::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace model
 
-namespace builder {
-
-class Ship : public BaseVehicle
-{
-public:
-    static model::Ship* getNew(bool full_equiped = false);
-//    static model::Ship* getNew(const std::string&);
-    static model::Ship* getNew(descriptor::Vehicle*);
-
-private:
-    Ship()=delete;
-    ~Ship()=delete;
-
-    static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, descriptor::Vehicle*);
-}; 
-
-} // namespace builder
 
 

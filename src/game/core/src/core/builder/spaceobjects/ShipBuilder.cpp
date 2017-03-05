@@ -20,7 +20,7 @@
 #include "ShipBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/Ship.hpp>
+#include <core/model/spaceobject/Ship.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 
 namespace builder {

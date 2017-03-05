@@ -90,6 +90,8 @@
 
 #include <slots/ItemSlot.hpp>
 
+#include <core/model/spaceobject/Ship.hpp>
+
 
 namespace model {
 
