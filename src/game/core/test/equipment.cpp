@@ -16,86 +16,22 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#include "helper.hpp"
 #include "helper2.hpp"
 
-// Lazer
-#include <core/builder/item/equipment/LazerBuilder.hpp>
-#include <core/descriptor/item/equipment/Lazer.hpp>
-#include <core/model/item/equipment/Lazer.hpp>
-#include <core/item/equipment/Lazer.hpp>
-
-// Rocket
-#include <core/builder/item/equipment/RocketBuilder.hpp>
-#include <core/descriptor/item/equipment/Rocket.hpp>
-#include <core/model/item/equipment/Rocket.hpp>
-#include <core/item/equipment/Rocket.hpp>
-
-// Bak
-#include <core/builder/item/equipment/BakBuilder.hpp>
-#include <core/descriptor/item/equipment/Bak.hpp>
-#include <core/model/item/equipment/Bak.hpp>
-#include <core/item/equipment/Bak.hpp>
-
-// Drive
-#include <core/builder/item/equipment/DriveBuilder.hpp>
-#include <core/descriptor/item/equipment/Drive.hpp>
-#include <core/model/item/equipment/Drive.hpp>
-#include <core/item/equipment/Drive.hpp>
-
-// Droid
-#include <core/builder/item/equipment/DroidBuilder.hpp>
-#include <core/descriptor/item/equipment/Droid.hpp>
-#include <core/model/item/equipment/Droid.hpp>
-#include <core/item/equipment/Droid.hpp>
-
-// Grapple
-#include <core/builder/item/equipment/GrappleBuilder.hpp>
-#include <core/descriptor/item/equipment/Grapple.hpp>
-#include <core/model/item/equipment/Grapple.hpp>
-#include <core/item/equipment/Grapple.hpp>
-
-// Scaner
-#include <core/builder/item/equipment/ScanerBuilder.hpp>
-#include <core/descriptor/item/equipment/Scaner.hpp>
-#include <core/model/item/equipment/Scaner.hpp>
-#include <core/item/equipment/Scaner.hpp>
-
-// Radar
-#include <core/builder/item/equipment/RadarBuilder.hpp>
-#include <core/descriptor/item/equipment/Radar.hpp>
-#include <core/model/item/equipment/Radar.hpp>
-#include <core/item/equipment/Radar.hpp>
-
-// Protector
-#include <core/builder/item/equipment/ProtectorBuilder.hpp>
-#include <core/descriptor/item/equipment/Protector.hpp>
-#include <core/model/item/equipment/Protector.hpp>
-#include <core/item/equipment/Protector.hpp>
-
-
-#include <core/common/Global.hpp>
-#include <core/common/constants.hpp>
-
-#include <core/slots/ItemSlot.hpp>
+#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/descriptor/spaceobject/Ship.hpp>
+#include <core/model/spaceobject/Ship.hpp>
 #include <core/spaceobjects/Ship.hpp>
 
-#include <core/builder/spaceobjects/ShipBuilder.hpp>
-
-#include <core/descriptor/Base.hpp>
-#include <core/descriptor/DescriptorGenerator.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
-
 #include <core/builder/item/equipment/ALL>
-#include <core/builder/item/modules/ALL>
-#include <core/builder/item/artefacts//ALL>
-#include <core/builder/item/other/ALL>
-
+#include <core/descriptor/item/equipment/ALL>
+#include <core/model/item/equipment/ALL>
 #include <core/item/equipment/ALL>
+
+#include <core/slots/ItemSlot.hpp>
 
 #include <gtest/gtest.h>
 
-#include <fstream>
 
 TEST(equipment, lazer)
 {

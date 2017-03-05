@@ -18,7 +18,8 @@
 
 #include "SatelliteBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/Satellite.hpp>
+//#include <core/spaceobjects/Satellite.hpp>
+#include <core/model/spaceobject/Satellite.hpp>
 
 #include <meti/RandUtils.hpp>
 

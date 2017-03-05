@@ -37,6 +37,9 @@
 #include <slots/VehicleSlot.hpp> 
 #include <slots/ItemSlot.hpp>
 
+#include <core/descriptor/spaceobject/Vehicle.hpp>
+
+#include <core/model/spaceobject/Vehicle.hpp>
 #include <item/equipment/Rocket.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
 #include <item/equipment/EnergizerEquipment.hpp>
@@ -112,6 +115,29 @@ Vehicle::~Vehicle()
         delete slot;
     }
     m_slots.clear();
+}
+
+
+const VehiclePropetries&
+Vehicle::properties() const
+{
+    return model()->properties();
+}
+
+const VehicleNeeds&
+Vehicle::needs() const
+{
+    return model()->needs();
+}
+
+int Vehicle::freeSpace() const
+{
+    return model()->properties().free_space;
+}
+
+int Vehicle::space() const
+{
+    return descriptor()->space();
 }
 
 void

@@ -33,6 +33,8 @@
 #include <core/spaceobjects/ALL>
 #include <core/slots/ItemSlot.hpp>
 
+#include <core/model/spaceobject/Ship.hpp>
+
 #include <core/managers/EntityManager.hpp>
 
 #include <gtest/gtest.h>

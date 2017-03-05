@@ -19,39 +19,21 @@
    
 #pragma once
 
+namespace descriptor {
+class SpaceStation;
+} // namespace descriptor
+
+namespace model {
+class SpaceStation;
+} // namespace descriptor
+
+//#include <core/descriptor/SpaceStationDescriptor.hpp>
+#include <core/model/spaceobject/Vehicle.hpp>
+
 #include <core/spaceobjects/Vehicle.hpp>
 #include <core/dock/Land.hpp>
    
    
-namespace model {
-
-class SpaceStation : public model::Vehicle
-{
-public:
-    SpaceStation();
-    ~SpaceStation();
-    SpaceStation(const std::string& data);
-    std::string data() const;
-
-    int_t innerLand() const { return m_innerLand; }
-    void setInnerLand(int_t inner_land) { m_innerLand = inner_land; }
-
-private:
-    int_t m_innerLand = NONE;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Vehicle>(*this);
-        ar & m_innerLand;
-    }
-};
-
-} // namespace model
-
-
-
 namespace control {
 
 class SpaceStation : public Vehicle

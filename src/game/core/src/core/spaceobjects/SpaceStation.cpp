@@ -33,28 +33,9 @@
 
 #include <pilots/Npc.hpp>
 
+#include <core/model/spaceobject/SpaceStation.hpp>
 
-namespace model {
-
-SpaceStation::SpaceStation()
-{
-//    setType(entity::type::VEHICLE);
-//    setSubType(entity::type::SPACESTATION);
-}
-
-SpaceStation::SpaceStation(const std::string& data)
-{
-    //MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-SpaceStation::data() const
-{
-    //MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
+#include <core/descriptor/spaceobject/SpaceStation.hpp>
 
 namespace control {
 

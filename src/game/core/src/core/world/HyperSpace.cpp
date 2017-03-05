@@ -20,6 +20,9 @@
 #include "starsystem.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
+
+#include <core/model/spaceobject/Vehicle.hpp>
+
 #include <meti/RandUtils.hpp>
 
 HyperSpace::HyperSpace()

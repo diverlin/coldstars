@@ -21,31 +21,13 @@
 
 #include <core/spaceobjects/Vehicle.hpp>
 
+namespace descriptor {
+class Ship;
+} // namespace descriptor
+
 namespace model {
-
-class Ship : public model::Vehicle
-{
-public:
-    Ship();
-    virtual ~Ship();
-    Ship(const std::string& data);
-    std::string data() const;
-
-private:
-    // ...
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Vehicle>(*this);
-        //ar & ..;
-    }
-};
-
+class Ship;
 } // namespace model
-
 
 namespace control {
 

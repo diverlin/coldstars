@@ -27,6 +27,8 @@
 #include <core/spaceobjects/Planet.hpp>
 #include <core/spaceobjects/Asteroid.hpp>
 
+#include <core/model/spaceobject/Ship.hpp>
+
 #include <core/builder/spaceobjects/AsteroidBuilder.hpp>
 #include <core/builder/spaceobjects/ShipBuilder.hpp>
 #include <core/builder/world/GalaxyBuilder.hpp>

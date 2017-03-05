@@ -16,39 +16,35 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
+#include "Vehicle.hpp"
 
-#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <core/descriptor/VehicleDescriptor.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 #include <string>
 
-namespace descriptor {
-class Vehicle;
-} // namespace model
-
 namespace model {
-class Ship;
-} // namespace model
 
-namespace builder {
-
-class Ship : public BaseVehicle
+class Satellite : public Vehicle
 {
 public:
-    static model::Ship* getNew(bool full_equiped = false);
-//    static model::Ship* getNew(const std::string&);
-    static model::Ship* getNew(descriptor::Vehicle*);
+    Satellite() = default;
+    ~Satellite() = default;
+    Satellite(const std::string& data);
+    std::string data() const;
 
 private:
-    Ship()=delete;
-    ~Ship()=delete;
+    // ..
 
-    static model::Ship* __getNewTemplate();
-    static void __createInternals(model::Ship*, descriptor::Vehicle*);
-}; 
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Vehicle>(*this);
+    }
+};
 
-} // namespace builder
-
-
+} // namespace model
