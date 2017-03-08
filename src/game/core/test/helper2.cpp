@@ -103,7 +103,6 @@ Bak::Bak() {
     m_control = new control::item::Bak(model);
 }
 Bak::~Bak() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -117,7 +116,6 @@ Drive::Drive() {
     m_control = new control::item::Drive(model);
 }
 Drive::~Drive() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -131,7 +129,6 @@ Droid::Droid() {
     m_control = new control::item::Droid(model);
 }
 Droid::~Droid() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -145,7 +142,6 @@ Grapple::Grapple() {
     m_control = new control::item::Grapple(model);
 }
 Grapple::~Grapple() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -159,7 +155,6 @@ Lazer::Lazer() {
     m_control = new control::item::Lazer(model);
 }
 Lazer::~Lazer() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -173,7 +168,6 @@ Protector::Protector() {
     m_control = new control::item::Protector(model);
 }
 Protector::~Protector() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -187,7 +181,6 @@ Radar::Radar() {
     m_control = new control::item::Radar(model);
 }
 Radar::~Radar() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -201,7 +194,6 @@ Rocket::Rocket() {
     m_control = new control::item::Rocket(model);
 }
 Rocket::~Rocket() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
@@ -215,7 +207,6 @@ Scaner::Scaner() {
     m_control = new control::item::Scaner(model);
 }
 Scaner::~Scaner() {
-//    delete m_control->descriptor();
     delete m_control->model();
     delete m_control;
 }
