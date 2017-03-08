@@ -41,8 +41,9 @@ BombBuilder::~BombBuilder()
 Bomb*
 BombBuilder::getNew()
 {
-    descriptor::BaseOLD* descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
-    return getNew(descriptor);
+    assert(false);
+    //    descriptor::BaseOLD* descriptor = core::global::get().descriptors().getRand(descriptor::TypeOLD::BOMB);
+    //    return getNew(descriptor);
 }
 
 Bomb*

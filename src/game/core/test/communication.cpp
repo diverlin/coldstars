@@ -49,22 +49,24 @@
 
 TEST(communication, create_ship)
 {
-    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    int_t obj_id = core::global::get().idGenerator().nextId();
-    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
-    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
+    assert(false);
+//    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+//    int_t obj_id = core::global::get().idGenerator().nextId();
+//    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
+//    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-    model::Ship* ship = model::getShip(obj_id);
-    assert(ship);
-    EXPECT_EQ(ship->id(), obj_id);
+//    model::Ship* ship = model::getShip(obj_id);
+//    assert(ship);
+//    EXPECT_EQ(ship->id(), obj_id);
 }
 
 TEST(communication, create_bak)
 {
-    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
-    int_t obj_id = core::global::get().idGenerator().nextId();
-    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
-    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
+    assert(false);
+//    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
+//    int_t obj_id = core::global::get().idGenerator().nextId();
+//    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
+//    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
     assert(false);
 //    item::Bak* bak = core::global::get().entityManager().getEntity<item::Bak*>(obj_id);

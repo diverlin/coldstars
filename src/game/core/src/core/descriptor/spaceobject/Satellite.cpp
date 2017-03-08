@@ -24,7 +24,7 @@ namespace descriptor {
 
 Satellite::Satellite()
 {
-    setType(descriptor::type::SATELLITE);
+    setType(descriptor::Type::SATELLITE);
 }
 
 Satellite::Satellite(const std::string& data)

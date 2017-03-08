@@ -73,13 +73,13 @@ public:
     ~Base() = default;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const descriptor::type& type)   { m_type = type; }
+    void setType(const descriptor::Type& type)   { m_type = type; }
     void setObType(const entity::type& obType)   { m_obType = obType; }
     void setObSubType(const entity::type& obSubType) { m_obSubType = obSubType; }
     void setObSubSubType(const entity::type& obSubSubType) { m_obSubSubType = obSubSubType; }
 
     int_t id() const { return m_id; }
-    descriptor::type type() const { return m_type; }
+    descriptor::Type type() const { return m_type; }
     const entity::type& obType() const { return m_obType; }
     const entity::type& obSubType() const { return m_obSubType; }
     const entity::type& obSubSubType() const { return m_obSubSubType; }
@@ -95,11 +95,11 @@ public:
     }
 
 protected:
-    void setObType(descriptor::type type) { m_type = type; }
+    void setObType(descriptor::Type type) { m_type = type; }
 
 private:
     int_t m_id = NONE;
-    descriptor::type m_type = descriptor::type::NONE;
+    descriptor::Type m_type = descriptor::Type::NONE;
     entity::type m_obType = entity::type::NONE;
     entity::type m_obSubType = entity::type::NONE;
     entity::type m_obSubSubType = entity::type::NONE;

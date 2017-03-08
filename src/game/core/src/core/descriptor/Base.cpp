@@ -128,32 +128,32 @@ std::string keyStr(const Key& key) {
     }
 }
 
-std::string typeStr(const Type& type) {
+std::string typeStr(const TypeOLD& type) {
     switch(type) {
-    case Type::DESCRIPTOR: return "Type::DESCRIPTOR"; break;
-    case Type::HIT: return "Type::HIT"; break;
-    case Type::CONTAINER: return "Type::CONTAINER"; break;
-    case Type::BOMB: return "Type::BOMB"; break;
-    case Type::STARSYSTEM: return "Type::STARSYSTEM"; break;
-    case Type::STAR: return "Type::STAR"; break;
-    case Type::PLANET: return "Type::PLANET"; break;
-    case Type::ASTEROID: return "Type::ASTEROID"; break;
-    case Type::BAK: return "Type::BAK"; break;
-    case Type::DRIVE: return "Type::DRIVE"; break;
-    case Type::DROID: return "Type::DROID"; break;
-    case Type::GRAPPLE: return "Type::GRAPPLE"; break;
-    case Type::SCANER: return "Type::SCANER"; break;
-    case Type::RADAR: return "Type::RADAR"; break;
-    case Type::PROTECTOR: return "Type::PROTECTOR"; break;
-    case Type::VEHICLE: return "Type::VEHICLE"; break;
-//    case Type::SHIP: return "Type::VEHICLE"; break;
-//    case Type::SATELLITE: return "Type::SATELLITE"; break;
-//    case Type::STARBASE: return "Type::STARBASE"; break;
+    case TypeOLD::DESCRIPTOR: return "Type::DESCRIPTOR"; break;
+    case TypeOLD::HIT: return "Type::HIT"; break;
+    case TypeOLD::CONTAINER: return "Type::CONTAINER"; break;
+    case TypeOLD::BOMB: return "Type::BOMB"; break;
+    case TypeOLD::STARSYSTEM: return "Type::STARSYSTEM"; break;
+    case TypeOLD::STAR: return "Type::STAR"; break;
+    case TypeOLD::PLANET: return "Type::PLANET"; break;
+    case TypeOLD::ASTEROID: return "Type::ASTEROID"; break;
+    case TypeOLD::BAK: return "Type::BAK"; break;
+    case TypeOLD::DRIVE: return "Type::DRIVE"; break;
+    case TypeOLD::DROID: return "Type::DROID"; break;
+    case TypeOLD::GRAPPLE: return "Type::GRAPPLE"; break;
+    case TypeOLD::SCANER: return "Type::SCANER"; break;
+    case TypeOLD::RADAR: return "Type::RADAR"; break;
+    case TypeOLD::PROTECTOR: return "Type::PROTECTOR"; break;
+    case TypeOLD::VEHICLE: return "Type::VEHICLE"; break;
+//    case TypeOLD::SHIP: return "Type::VEHICLE"; break;
+//    case TypeOLD::SATELLITE: return "Type::SATELLITE"; break;
+//    case TypeOLD::STARBASE: return "Type::STARBASE"; break;
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
 
-BaseOLD::BaseOLD(const Type& type, bool generate_id)
+BaseOLD::BaseOLD(const TypeOLD& type, bool generate_id)
 {
     if (generate_id) {
         add(Key::ID, m_idGenerator.nextId());

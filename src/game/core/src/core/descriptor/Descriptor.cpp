@@ -3,7 +3,7 @@
 namespace descriptor {
 
 DescriptorOLD::DescriptorOLD(int_t descriptor, int_t obj_id)
-    : BaseOLD(Type::DESCRIPTOR, /*generate_id=*/false)
+    : BaseOLD(TypeOLD::DESCRIPTOR, /*generate_id=*/false)
 {
     add(Key::DESCRIPTOR, descriptor);
     add(Key::OBJ, obj_id);

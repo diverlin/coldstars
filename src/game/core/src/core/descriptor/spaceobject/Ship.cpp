@@ -24,7 +24,7 @@ namespace descriptor {
 
 Ship::Ship()
 {
-    setType(descriptor::type::SHIP);
+    setType(descriptor::Type::SHIP);
 }
 
 Ship::Ship(const std::string& data)

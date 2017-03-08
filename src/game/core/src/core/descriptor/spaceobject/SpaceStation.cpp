@@ -24,7 +24,7 @@ namespace descriptor {
 
 SpaceStation::SpaceStation()
 {
-    setType(descriptor::type::SPACESTATION);
+    setType(descriptor::Type::SPACESTATION);
 }
 
 SpaceStation::SpaceStation(const std::string& data)

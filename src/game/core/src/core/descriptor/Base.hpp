@@ -133,7 +133,7 @@ enum Code {
     IDLIST
 };
 
-enum class Type: int {
+enum class TypeOLD: int {
     DESCRIPTOR,
     HIT,
     CONTAINER,
@@ -157,7 +157,7 @@ enum class Type: int {
 };
 
 std::string keyStr(const Key&);
-std::string typeStr(const Type&);
+std::string typeStr(const TypeOLD&);
 
 //class BBase
 //{
@@ -210,7 +210,7 @@ std::string typeStr(const Type&);
 class BaseOLD
 {
 public:
-    BaseOLD(const Type&, bool generate_id = true);
+    BaseOLD(const TypeOLD&, bool generate_id = true);
     BaseOLD(const std::string& data);
     ~BaseOLD();
 

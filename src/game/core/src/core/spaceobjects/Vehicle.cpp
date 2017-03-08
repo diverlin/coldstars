@@ -108,7 +108,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 
     for(int_t id: model->items()) {
         model::Base* item_base_model = core::global::get().entityManager().get(id);
-        descriptor::Base* item_base_descriptor =
+//        descriptor::Base* item_base_descriptor = core::global::get().descriptors().
 
     }
 

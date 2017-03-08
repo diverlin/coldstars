@@ -23,7 +23,7 @@
 
 namespace descriptor {
 
-enum class type {
+enum class Type {
     NONE=0,
     /** */
 
@@ -81,5 +81,5 @@ enum class type {
 
 } // namespace descriptor
 
-std::string to_string(descriptor::type);
+std::string to_string(descriptor::Type);
 
