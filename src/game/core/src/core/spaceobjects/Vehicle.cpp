@@ -107,8 +107,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     __createSlots(descr);
 
     for(int_t id: model->items()) {
-        model::Base* base_model = core::global::get().entityManager().get(id);
-        model::item::Scaner* model_scaner = static_cast<model::item::Scaner*>(base_model);
+        model::item::Scaner* model_scaner = core::global::get().entityManager().scaner(id);
         control::item::Scaner* scaner = new control::item::Scaner(model_scaner);
 
         __manage(scaner);

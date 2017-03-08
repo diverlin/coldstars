@@ -92,6 +92,7 @@
 
 #include <core/model/spaceobject/Ship.hpp>
 
+#include <core/model/item/equipment/ALL>
 
 namespace model {
 
@@ -204,7 +205,8 @@ void EntityManager::reg(model::Base* model)
 //    return slice->second;
 //}
 
-model::Base* EntityManager::get(int_t id) const
+model::Base*
+EntityManager::get(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
     std::map<int_t, model::Base*>::const_iterator slice = m_models.find(id);
@@ -212,6 +214,14 @@ model::Base* EntityManager::get(int_t id) const
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return slice->second;
+}
+
+model::item::Scaner*
+EntityManager::scaner(int_t id) const {
+    model::Base* base = get(id);
+    model::item::Scaner* scaner = static_cast<model::item::Scaner*>(base);
+    assert(scaner);
+    return scaner;
 }
 
 Player* EntityManager::player() const
