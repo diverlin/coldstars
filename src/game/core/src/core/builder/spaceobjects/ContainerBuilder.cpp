@@ -43,7 +43,7 @@ Container::~Container()
 model::Container*
 Container::getNew()
 {
-    const auto& descriptor = descriptor::Manager::get().getRand(descriptor::Type::CONTAINER);
+    const auto& descriptor = descriptor::Manager::get().getRandOLD(descriptor::Type::CONTAINER);
     return getNew(descriptor);
 }
 

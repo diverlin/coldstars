@@ -45,7 +45,15 @@ namespace model {
 
 namespace item {
 class Scaner;
-}
+class Drive;
+class Bak;
+class Droid;
+class Grapple;
+class Lazer;
+class Protector;
+class Radar;
+class Rocket;
+} // namespace item
 
 Starsystem* getStarsystem(int_t id);
 Ship* getShip(int_t id);
@@ -73,7 +81,16 @@ public:
     void reg(model::Base*);
 
     model::Base* get(int_t) const;
+
     model::item::Scaner* scaner(int_t) const;
+    model::item::Drive* drive(int_t) const;
+    model::item::Bak* bak(int_t) const;
+    model::item::Droid* droid(int_t) const;
+    model::item::Grapple* grapple(int_t) const;
+    model::item::Lazer* lazer(int_t) const;
+    model::item::Protector* protector(int_t) const;
+    model::item::Radar* radar(int_t) const;
+    model::item::Rocket* rocket(int_t) const;
 
     Player* player() const;
 

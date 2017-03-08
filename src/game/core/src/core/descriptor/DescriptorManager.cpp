@@ -165,7 +165,7 @@ Manager::get(int_t id) const
 }
 
 BaseOLD*
-Manager::getRand(const Type& type)
+Manager::getRandOLD(const Type& type)
 {
     const auto it = m_descriptorsTypesOLD.find(int(type));
     if (it != m_descriptorsTypesOLD.end()) {
@@ -176,7 +176,7 @@ Manager::getRand(const Type& type)
 }
 
 BaseOLD*
-Manager::get(int_t id)
+Manager::getOLD(int_t id)
 {
     const auto it = m_descriptorsOLD.find(id);
     if (it != m_descriptorsOLD.end()) {

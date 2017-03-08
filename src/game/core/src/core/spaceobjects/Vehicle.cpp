@@ -60,6 +60,7 @@
 #include <core/item/equipment/Drive.hpp>
 #include <core/item/equipment/Scaner.hpp>
 #include <core/item/equipment/Grapple.hpp>
+#include <core/item/equipment/Lazer.hpp>
 #include <item/others/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
 #include <item/artefacts/GravityArtefact.hpp>
@@ -100,18 +101,11 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     , m_model_vehicle(model)
     , m_descriptor_vehicle(descr)
 {
-//    weaponComplex().setOwnerVehicle(this);
     driveComplex().setOwnerVehicle(this);
-//    protectorComplex().setOwnerVehicle(this);
 
     __createSlots(descr);
 
-    for(int_t id: model->items()) {
-        model::item::Scaner* model_scaner = core::global::get().entityManager().scaner(id);
-        control::item::Scaner* scaner = new control::item::Scaner(model_scaner);
-
-        __manage(scaner);
-    }
+    __actualizeItems();
 
     _updatePropProtection();
     __updateFreeSpace();
@@ -126,6 +120,68 @@ Vehicle::~Vehicle()
     m_slots.clear();
 }
 
+void
+Vehicle::__actualizeItems()
+{
+    // we must not call this function if at least 1 item already inserted, wrong usage
+    for(ItemSlot* slot: m_slots) {
+        assert(!slot->item());
+    }
+
+    for(int_t id: model()->items()) {
+        model::Base* model_base = core::global::get().entityManager().get(id);
+        descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor());
+        assert(descriptor_base->obType() == entity::type::EQUIPMENT);
+        switch(descriptor_base->obSubType()) {
+        case entity::type::SCANER_EQUIPMENT: {
+            control::item::Scaner* item = new control::item::Scaner(core::global::get().entityManager().scaner(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::DRIVE_EQUIPMENT: {
+            control::item::Drive* item = new control::item::Drive(core::global::get().entityManager().drive(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::BAK_EQUIPMENT: {
+            control::item::Bak* item = new control::item::Bak(core::global::get().entityManager().bak(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::DROID_EQUIPMENT: {
+            control::item::Droid* item = new control::item::Droid(core::global::get().entityManager().droid(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::GRAPPLE_EQUIPMENT: {
+            control::item::Grapple* item = new control::item::Grapple(core::global::get().entityManager().grapple(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::LAZER_EQUIPMENT: {
+            control::item::Lazer* item = new control::item::Lazer(core::global::get().entityManager().lazer(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::PROTECTOR_EQUIPMENT: {
+            control::item::Protector* item = new control::item::Protector(core::global::get().entityManager().protector(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::RADAR_EQUIPMENT: {
+            control::item::Radar* item = new control::item::Radar(core::global::get().entityManager().radar(id));
+            __manage(item);
+            break;
+        }
+        case entity::type::ROCKET_EQUIPMENT: {
+            control::item::Rocket* item = new control::item::Rocket(core::global::get().entityManager().rocket(id));
+            __manage(item);
+            break;
+        }
+        }
+
+    }
+}
 
 int Vehicle::freeSpace() const
 {
