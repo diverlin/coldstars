@@ -175,9 +175,33 @@ void compareShipModels(model::Ship* m1, model::Ship* m2)
     compareVehileModels(m1, m2);
 }
 
+void compareVehicleControls(control::Vehicle* c1, control::Vehicle* c2)
+{
+    EXPECT_EQ(c1->properties().free_space, c2->properties().free_space);
+    EXPECT_EQ(c1->properties().protection, c2->properties().protection);
+    EXPECT_EQ(c1->properties().radar, c2->properties().radar);
+    EXPECT_EQ(c1->properties().speed, c2->properties().speed);
+    EXPECT_EQ(c1->properties().energy, c2->properties().energy);
+    EXPECT_EQ(c1->properties().hyper, c2->properties().hyper);
+    EXPECT_EQ(c1->properties().repair, c2->properties().repair);
+    EXPECT_EQ(c1->properties().freeze, c2->properties().freeze);
+    EXPECT_EQ(c1->properties().scan, c2->properties().scan);
+    EXPECT_EQ(c1->properties().grab_strength, c2->properties().grab_strength);
+    EXPECT_EQ(c1->properties().grab_radius, c2->properties().grab_radius);
+    EXPECT_EQ(c1->properties().temperature, c2->properties().temperature);
+    EXPECT_EQ(c1->properties().artefact_gravity, c2->properties().artefact_gravity);
+    EXPECT_EQ(c1->properties().artefact_protection, c2->properties().artefact_protection);
+    EXPECT_EQ(c1->properties().total_damage, c2->properties().total_damage);
+    EXPECT_EQ(c1->properties().fire_radius_min, c2->properties().fire_radius_min);
+    EXPECT_EQ(c1->properties().fire_radius_max, c2->properties().fire_radius_max);
+    EXPECT_EQ(c1->properties().equipment_radar, c2->properties().equipment_radar);
+    EXPECT_EQ(c1->properties().shield_effect_enabled, c2->properties().shield_effect_enabled);
+    EXPECT_EQ(c1->properties().hibernate_mode_enabled, c2->properties().hibernate_mode_enabled);
+}
+
 void compareShipControls(control::Ship* c1, control::Ship* c2)
 {
-    EXPECT_EQ(c1->properties().scan, c2->properties().scan);
+    compareVehicleControls(c1, c2);
 }
 
 } // namespace
@@ -194,16 +218,24 @@ void testShipClone(const test::Ship& ship)
 
 TEST(ship, clone)
 {
-    test::Ship ship;
-    test::item::Scaner item;
-    test::item::Scaner item2;
+    // items
+    test::item::Bak bak;
+    test::item::Drive drive;
+    test::item::Scaner scaner;
+    test::item::Droid droid;
+    test::item::Radar radar;
+    test::item::Protector protector;
 
-    ship.control()->manage(item.control());
-    ship.control()->load(item2.control());
+    test::Ship ship;
+    ship.control()->manage(bak.control());
+    ship.control()->manage(drive.control());
+    ship.control()->manage(scaner.control());
+    ship.control()->manage(droid.control());
+    ship.control()->manage(radar.control());
+    ship.control()->manage(protector.control());
 
     testShipClone(ship);
-
-    EXPECT_EQ(ship.control()->properties().scan, item.descriptor()->scan());
 }
+
 
 

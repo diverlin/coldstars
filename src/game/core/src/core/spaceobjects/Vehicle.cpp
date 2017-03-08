@@ -127,21 +127,9 @@ Vehicle::~Vehicle()
 }
 
 
-const VehiclePropetries&
-Vehicle::properties() const
-{
-    return model()->properties();
-}
-
-const VehicleNeeds&
-Vehicle::needs() const
-{
-    return model()->needs();
-}
-
 int Vehicle::freeSpace() const
 {
-    return model()->properties().free_space;
+    return properties().free_space;
 }
 
 int Vehicle::space() const
@@ -288,7 +276,7 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
 void Vehicle::setKorpusData(descriptor::Vehicle* korpus_data)
 {
     m_descriptor_vehicle = korpus_data;
-    model()->properties().protection = m_descriptor_vehicle->protection();
+    properties().protection = m_descriptor_vehicle->protection();
 }
 
 GoodsPack* Vehicle::goodsPack() const
@@ -735,7 +723,7 @@ void Vehicle::bindNpc(control::Npc* owner_npc)
 bool Vehicle::isObjectVisible(SpaceObject* object) const
 {
     float dist = meti::distance(position(), object->position());
-    if (dist < model()->properties().radar) {
+    if (dist < properties().radar) {
         return true;
     }
 
@@ -900,7 +888,7 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 
 float Vehicle::adjustDissipateFilter() const
 {
-    float rate = 1.0f - model()->properties().protection*0.01f;
+    float rate = 1.0f - properties().protection*0.01f;
     //    if (m_npc) {
     //        rate *= m_npc->GetSkills().GetDefenceNormalized();
     //    }
@@ -921,8 +909,8 @@ void Vehicle::hit(int damage)
         return;
 
 #ifdef USE_EXTRA_EQUIPMENT
-    if (model()->properties().energy < damage) {
-        model()->properties().hibernate_mode_enabled = true;
+    if (properties().energy < damage) {
+        properties().hibernate_mode_enabled = true;
         _updatePropProtection();
     }
 #endif
@@ -962,29 +950,29 @@ void Vehicle::CheckNeedsInStatic()
 {
     // check armor
     if (model()->armor() < 0.5*descriptor()->armor()) {
-        model()->needs().repair_korpus = true;
+        needs().repair_korpus = true;
     } else {
-        model()->needs().repair_korpus = false;
+        needs().repair_korpus = false;
     }
 
     //check item damages
-    model()->needs().repair_equipment = false;
+    needs().repair_equipment = false;
     for (ItemSlot* slot: m_equipmentSlots) {
         if (slot->item()) {
             if (slot->item()->isDamaged()) {
-                model()->needs().repair_equipment = true;
+                needs().repair_equipment = true;
             }
         }
     }
 
     //check ammo
-    model()->needs().get_ammo = false;
+    needs().get_ammo = false;
     assert(false);
 //    for (ItemSlot* slot: m_equipmentSlots) {
 //        if (slot->item()) {
 //            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
 //                if (slot->rocketEquipment()->GetAmmo() == 0) {
-//                    model()->needs().get_ammo = true;
+//                    needs().get_ammo = true;
 //                }
 //            }
 //        }
@@ -992,18 +980,18 @@ void Vehicle::CheckNeedsInStatic()
 
     // check fuel
 assert(false);
-//    model()->needs().get_fuel = false;
+//    needs().get_fuel = false;
 //    if (model()->driveComplex().bakSlot()) {
 //        if (model()->driveComplex().bakSlot()->item()) {
 //            if (model()->driveComplex().bakSlot()->bakEquipment()->fuel() < 0.8*model()->driveComplex().bakSlot()->bakEquipment()->fuelMax()) {
-//                model()->needs().get_fuel = true;
+//                needs().get_fuel = true;
 //            }
 //        }
 //    }
 
     // check credits
-//    if (m_npc->credits() < 1000)    { model()->needs().get_credits = true; }
-//    else                            { model()->needs().get_credits = false; }
+//    if (m_npc->credits() < 1000)    { needs().get_credits = true; }
+//    else                            { needs().get_credits = false; }
 }
 
 
@@ -1012,14 +1000,14 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     bool result = true;
 
     // buy repair korpus
-    if ( (model()->needs().repair_korpus == true) and (result == true) )
+    if ( (needs().repair_korpus == true) and (result == true) )
     {
         assert(false);
         //result = ((Angar*)m_parentVehicleSlot->owner())->RepairVehicle(this);
     }
 
     // repair equipment
-    if ( (model()->needs().repair_equipment == true) && (result == true) ) {
+    if ( (needs().repair_equipment == true) && (result == true) ) {
         for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
             if (m_equipmentSlots[i]->item()) {
                 if (m_equipmentSlots[i]->item()->isDamaged()) {
@@ -1031,7 +1019,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     }
 
     // buy ammo
-    if ( (model()->needs().get_ammo == true) && (result == true) ) {
+    if ( (needs().get_ammo == true) && (result == true) ) {
         for (ItemSlot* slot: m_equipmentSlots) {
             if (slot->item()) {
                 assert(false);
@@ -1043,14 +1031,14 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     }
 
     // tank up
-    if ( (model()->needs().get_fuel == true) and (result == true) ) {
+    if ( (needs().get_fuel == true) and (result == true) ) {
         assert(false);
         //result = ((Angar*)m_parentVehicleSlot->owner())->TankUpVehicle(this);
     }
 
     //// check credits
-    //if (m_OwnerNpc->GetCredits() < 1000) { model()->needs().get_credits = true; }
-    //else                                { model()->needs().get_credits = false; }
+    //if (m_OwnerNpc->GetCredits() < 1000) { needs().get_credits = true; }
+    //else                                { needs().get_credits = false; }
 }
 
 void Vehicle::UpdateAllFunctionalItemsInStatic()
@@ -1070,7 +1058,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 void
 Vehicle::__updateFreeSpace() {
-    model()->properties().free_space = descriptor()->space() - mass();
+    properties().free_space = descriptor()->space() - mass();
 }
 
 void Vehicle::_increaseMass(int d_mass)
@@ -1087,7 +1075,7 @@ void Vehicle::_decreaseMass(int d_mass)
     //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
 
     _addMass(-d_mass);
-    model()->properties().free_space = descriptor()->space() - mass();
+    properties().free_space = descriptor()->space() - mass();
     _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -1104,14 +1092,14 @@ void Vehicle::_updatePropSpeed()
 
     actual_speed -= mass() * MASS_DECREASE_SPEED_RATE;
     if (actual_speed > 0) {
-        if (model()->properties().artefact_gravity > 0) {
-            speed = (1.0 + model()->properties().artefact_gravity/100.0)*actual_speed;
+        if (properties().artefact_gravity > 0) {
+            speed = (1.0 + properties().artefact_gravity/100.0)*actual_speed;
         } else {
             speed = actual_speed;
         }
 
 //        if (driveComplex().driveSlots()->isSelected() == true) {
-//            model()->properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+//            properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
 //            driveComplex().driveSlots()->item()->useOverloadDeterioration();
 //        } else {
 //            driveComplex().driveSlots()->item()->useNormalDeterioration();
@@ -1119,7 +1107,7 @@ void Vehicle::_updatePropSpeed()
         driveComplex().UpdatePath();
     }
 
-    model()->properties().speed = speed;
+    properties().speed = speed;
 }
 
 void Vehicle::_updatePropFire()
@@ -1128,9 +1116,9 @@ void Vehicle::_updatePropFire()
 
     weaponComplex().updateFireAbility();
 
-    model()->properties().total_damage = weaponComplex().damage();
-    model()->properties().fire_radius_min = weaponComplex().radiusMin();
-    model()->properties().fire_radius_max = weaponComplex().radiusMax();
+    properties().total_damage = weaponComplex().damage();
+    properties().fire_radius_min = weaponComplex().radiusMin();
+    properties().fire_radius_max = weaponComplex().radiusMax();
 }
 
 void Vehicle::_updatePropRadar()
@@ -1144,8 +1132,8 @@ void Vehicle::_updatePropRadar()
         radius += slot->radarEquipment()->model()->radius();
     }
 
-    model()->properties().radar = std::max(VISIBLE_DISTANCE_WITHOUT_RADAR, radius);
-    model()->properties().equipment_radar = equipment_radar;
+    properties().radar = std::max(VISIBLE_DISTANCE_WITHOUT_RADAR, radius);
+    properties().equipment_radar = equipment_radar;
 }
 
 void Vehicle::_updatePropJump()
@@ -1165,7 +1153,7 @@ void Vehicle::_updatePropJump()
         fuel += slot->bakEquipment()->model()->fuel();
     }
 
-    model()->properties().hyper = std::min(hyper, fuel);
+    properties().hyper = std::min(hyper, fuel);
 }
 
 void Vehicle::_updatePropProtection()
@@ -1173,21 +1161,21 @@ void Vehicle::_updatePropProtection()
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
 
     int protection = descriptor()->protection();
-    //model()->properties().shield_effect_enabled = false;
+    //properties().shield_effect_enabled = false;
 
-    //    if (!model()->properties().hibernate_mode_enabled) {
+    //    if (!properties().hibernate_mode_enabled) {
     std::vector<ItemSlot*> slots = __equipedAndFunctionalSlots(protectorComplex().protectorSlots());
     for(ItemSlot* slot: slots) {
         protection += slot->protectorEquipment()->model()->protection();
-        // model()->properties().shield_effect_enabled = true;
+        // properties().shield_effect_enabled = true;
     }
     // }
 
-    if (model()->properties().artefact_protection > 0) {
-        protection += model()->properties().artefact_protection;
+    if (properties().artefact_protection > 0) {
+        protection += properties().artefact_protection;
     }
 
-    model()->properties().protection = protection;
+    properties().protection = protection;
 }
 
 void Vehicle::_updatePropRepair()
@@ -1201,7 +1189,7 @@ void Vehicle::_updatePropRepair()
         repair = slot->droidEquipment()->model()->repair();
     }
 
-    model()->properties().repair = repair;
+    properties().repair = repair;
 }
 
 
@@ -1221,13 +1209,13 @@ void Vehicle::_updatePropFreeze()
 #ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze");
 
-    model()->properties().freeze = 0;
+    properties().freeze = 0;
 
     if (m_SlotFreezer->item() != nullptr)
     {
         if (m_SlotFreezer->freezerEquipment()->isFunctioning() == true)
         {
-            model()->properties().freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
+            properties().freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
         }
     }
 #endif
@@ -1238,15 +1226,15 @@ void Vehicle::_updatePropEnergy()
 #ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy");
 
-    model()->properties().energy = 0;
-    model()->properties().hibernate_mode_enabled = true;
+    properties().energy = 0;
+    properties().hibernate_mode_enabled = true;
 
     if (m_SlotEnergizer->item() != nullptr)
     {
         if (m_SlotEnergizer->energizerEquipment()->isFunctioning() == true)
         {
-            model()->properties().energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
-            model()->properties().hibernate_mode_enabled = false;
+            properties().energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
+            properties().hibernate_mode_enabled = false;
         }
     }
 
@@ -1267,7 +1255,7 @@ void Vehicle::_updatePropScan()
         scan += slot->scanerEquipment()->model()->scan();
     }
 
-    model()->properties().scan = scan;
+    properties().scan = scan;
 }
 
 void Vehicle::_updatePropGrab()
@@ -1283,8 +1271,8 @@ void Vehicle::_updatePropGrab()
         radius += slot->grappleEquipment()->model()->radius();
     }
 
-    model()->properties().grab_strength = strength;
-    model()->properties().grab_radius = radius;
+    properties().grab_strength = strength;
+    properties().grab_radius = radius;
 }
 
 void Vehicle::_updateArtefactInfluence()
@@ -1292,8 +1280,8 @@ void Vehicle::_updateArtefactInfluence()
 #ifdef USE_ARTEFACTS
     //LOG("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence");
 
-    model()->properties().artefact_gravity = 0;
-    model()->properties().artefact_protection = 0;
+    properties().artefact_gravity = 0;
+    properties().artefact_protection = 0;
 
     for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
     {
@@ -1305,13 +1293,13 @@ void Vehicle::_updateArtefactInfluence()
                 {
                 case entity::Type::GRAVITY_ARTEFACT:
                 {
-                    model()->properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
+                    properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
                     break;
                 }
 
                 case entity::Type::PROTECTOR_ARTEFACT:
                 {
-                    model()->properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
+                    properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
                     break;
                 }
                 }
@@ -1319,12 +1307,12 @@ void Vehicle::_updateArtefactInfluence()
         }
     }
 
-    if (model()->properties().artefact_gravity > 0)
+    if (properties().artefact_gravity > 0)
     {
         UpdatePropertiesSpeed();
     }
 
-    if (model()->properties().artefact_protection > 0)
+    if (properties().artefact_protection > 0)
     {
         UpdatePropertiesProtection();
     }
@@ -1393,7 +1381,7 @@ void Vehicle::_updateArtefactInfluence()
 
 //void Vehicle::RenderRadarRange()
 //{
-//    if (model()->properties().radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
+//    if (properties().radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 //    {
 //        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
 //        m_SlotRadar->DrawRange(meti::vec2(center()));
@@ -1402,7 +1390,7 @@ void Vehicle::_updateArtefactInfluence()
 
 //void Vehicle::RenderGrappleRange()
 //{
-//    if (model()->properties().grab_radius > 0)
+//    if (properties().grab_radius > 0)
 //    {
 //        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
 //        m_SlotGrapple->DrawRange(meti::vec2(center()));
@@ -1413,7 +1401,7 @@ bool Vehicle::isAbleToJumpTo(model::Starsystem* target_starsystem) const
 {
     assert(false);
 //    float dist = meti::distance(starsystem()->position(), target_starsystem->position());
-//    if (dist < model()->properties().hyper) {
+//    if (dist < properties().hyper) {
 //        return true;
 //    }
 
@@ -1487,9 +1475,9 @@ bool Vehicle::tryConsumeEnergy(int energy)
 #ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")");
 
-    if (model()->properties().energy > energy)
+    if (properties().energy > energy)
     {
-        model()->properties().energy -= energy;
+        properties().energy -= energy;
         m_SlotEnergizer->energizerEquipment()->DecreaseEnergy(energy);
 
         return true;
@@ -1507,20 +1495,20 @@ bool Vehicle::tryGenerateEnergy(int energy)
     //LOG("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")");
 
     int energy_max = m_SlotEnergizer->energizerEquipment()->GetEnergyMax();
-    if (model()->properties().energy < energy_max)
+    if (properties().energy < energy_max)
     {
-        int diff_energy = energy_max - model()->properties().energy;
+        int diff_energy = energy_max - properties().energy;
         if ( diff_energy < energy)
         {
             energy = diff_energy;
         }
 
-        model()->properties().energy += energy;
+        properties().energy += energy;
         m_SlotEnergizer->energizerEquipment()->IncreaseEnergy(energy);
 
-        if (model()->properties().hibernate_mode_enabled == true)
+        if (properties().hibernate_mode_enabled == true)
         {
-            if (model()->properties().energy > HIBERNATION_ENERGY_THRESHOLD)
+            if (properties().energy > HIBERNATION_ENERGY_THRESHOLD)
             {
                 UpdatePropertiesProtection();
             }
@@ -1606,7 +1594,7 @@ Vehicle::__wrapItemToContainer(Item* item)
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
     assert(false);
-//    if (model()->properties().grab_radius > 0) {
+//    if (properties().grab_radius > 0) {
 //        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
 //    }
 }
@@ -2281,7 +2269,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //bool Vehicle::isObjectVisible(SpaceObject* object) const
 //{
 ////    float dist = meti::distance(position(), object->position());
-////    if (dist < model()->properties().radar)
+////    if (dist < properties().radar)
 ////    {
 ////        return true;
 ////    }
@@ -2443,7 +2431,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 //float Vehicle::adjustDissipateFilter() const
 //{
-////    float rate = 1.0f - model()->properties().protection*0.01f;
+////    float rate = 1.0f - properties().protection*0.01f;
 ////    //    if (m_npc) {
 ////    //        rate *= m_npc->GetSkills().GetDefenceNormalized();
 ////    //    }
@@ -2464,8 +2452,8 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////        return;
 
 ////#ifdef USE_EXTRA_EQUIPMENT
-////    if (model()->properties().energy < damage) {
-////        model()->properties().hibernate_mode_enabled = true;
+////    if (properties().energy < damage) {
+////        properties().hibernate_mode_enabled = true;
 ////        _updatePropProtection();
 ////    }
 ////#endif
@@ -2607,7 +2595,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
 
 ////    _addMass(d_mass);
-////    model()->properties().free_space = m_vehicleDescriptor.space - mass();
+////    properties().free_space = m_vehicleDescriptor.space - mass();
 ////    _updatePropSpeed(); // as the mass influence speed this action is necessary here
 //}
 
@@ -2616,14 +2604,14 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
 
 ////    _addMass(-d_mass);
-////    model()->properties().free_space = m_vehicleDescriptor.space - mass();
+////    properties().free_space = m_vehicleDescriptor.space - mass();
 ////    _updatePropSpeed(); // as the mass influence speed this action is necessary here
 //}
 
 //void Vehicle::_updatePropSpeed()
 //{
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
-////    model()->properties().speed = 0;
+////    properties().speed = 0;
 ////    if (!m_driveComplex.driveSlot())
 ////        return;
 ////    if (!m_driveComplex.driveSlot()->item())
@@ -2633,14 +2621,14 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    float actual_speed = (m_driveComplex.driveSlot()->driveEquipment()->speed() - mass()*MASS_DECREASE_SPEED_RATE);
 ////    if (actual_speed > 0) {
-////        if (model()->properties().artefact_gravity > 0) {
-////            model()->properties().speed = (1.0 + model()->properties().artefact_gravity/100.0)*actual_speed;
+////        if (properties().artefact_gravity > 0) {
+////            properties().speed = (1.0 + properties().artefact_gravity/100.0)*actual_speed;
 ////        } else {
-////            model()->properties().speed = actual_speed;
+////            properties().speed = actual_speed;
 ////        }
 
 ////        if (m_driveComplex.driveSlot()->isSelected() == true) {
-////            model()->properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+////            properties().speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
 ////            m_driveComplex.driveSlot()->item()->useOverloadDeterioration();
 ////        } else {
 ////            m_driveComplex.driveSlot()->item()->useNormalDeterioration();
@@ -2655,17 +2643,17 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    m_weaponComplex.updateFireAbility();
 
-////    model()->properties().total_damage = m_weaponComplex.damage();
-////    model()->properties().fire_radius_min = m_weaponComplex.radiusMin();
-////    model()->properties().fire_radius_max = m_weaponComplex.radiusMax();
+////    properties().total_damage = m_weaponComplex.damage();
+////    properties().fire_radius_min = m_weaponComplex.radiusMin();
+////    properties().fire_radius_max = m_weaponComplex.radiusMax();
 //}
 
 //void Vehicle::_updatePropRadar()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar");
 
-////    model()->properties().radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
-////    model()->properties().equipment_radar = false;
+////    properties().radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+////    properties().equipment_radar = false;
 
 ////    if (!m_radarSlot->item())
 ////        return;
@@ -2673,15 +2661,15 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////    if (!m_radarSlot->radarEquipment()->isFunctioning())
 ////        return;
 
-////    model()->properties().radar = m_radarSlot->radarEquipment()->radius();
-////    model()->properties().equipment_radar = true;
+////    properties().radar = m_radarSlot->radarEquipment()->radius();
+////    properties().equipment_radar = true;
 //}
 
 //void Vehicle::_updatePropJump()
 //{
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump");
 
-////    model()->properties().hyper = 0;
+////    properties().hyper = 0;
 
 ////    if (!m_driveComplex.driveSlot())
 ////        return;
@@ -2696,31 +2684,31 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////    if (!m_driveComplex.bakSlot()->bakEquipment()->isFunctioning())
 ////        return;
 
-////    model()->properties().hyper = std::min(m_driveComplex.driveSlot()->driveEquipment()->hyper(), m_driveComplex.bakSlot()->bakEquipment()->fuel());
+////    properties().hyper = std::min(m_driveComplex.driveSlot()->driveEquipment()->hyper(), m_driveComplex.bakSlot()->bakEquipment()->fuel());
 //}
 
 //void Vehicle::_updatePropProtection()
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
 
-////    model()->properties().protection = m_vehicleDescriptor.protection;
-////    model()->properties().shield_effect_enabled = false;
+////    properties().protection = m_vehicleDescriptor.protection;
+////    properties().shield_effect_enabled = false;
 
-////    if (model()->properties().hibernate_mode_enabled == false)
+////    if (properties().hibernate_mode_enabled == false)
 ////    {
 ////        if (m_protectorComplex.protectorSlot()->item() != nullptr)
 ////        {
 ////            if (m_protectorComplex.protectorSlot()->protectorEquipment()->isFunctioning() == true)
 ////            {
-////                model()->properties().protection += m_protectorComplex.protectorSlot()->protectorEquipment()->protection();
-////                model()->properties().shield_effect_enabled = true;
+////                properties().protection += m_protectorComplex.protectorSlot()->protectorEquipment()->protection();
+////                properties().shield_effect_enabled = true;
 ////            }
 ////        }
 ////    }
 
-////    if (model()->properties().artefact_protection > 0)
+////    if (properties().artefact_protection > 0)
 ////    {
-////        model()->properties().protection += model()->properties().artefact_protection;
+////        properties().protection += properties().artefact_protection;
 ////    }
 //}
 
@@ -2728,12 +2716,12 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair");
 
-////    model()->properties().repair = 0;
+////    properties().repair = 0;
 
 ////    if (m_droidSlot->item() != nullptr)
 ////    {
 ////        if (m_droidSlot->droidEquipment()->isFunctioning() == true) {
-////            model()->properties().repair = m_droidSlot->droidEquipment()->repair();
+////            properties().repair = m_droidSlot->droidEquipment()->repair();
 ////        }
 ////    }
 //}
@@ -2756,13 +2744,13 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze");
 
-////    model()->properties().freeze = 0;
+////    properties().freeze = 0;
 
 ////    if (m_SlotFreezer->item() != nullptr)
 ////    {
 ////        if (m_SlotFreezer->freezerEquipment()->isFunctioning() == true)
 ////        {
-////            model()->properties().freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
+////            properties().freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
 ////        }
 ////    }
 ////#endif
@@ -2773,15 +2761,15 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy");
 
-////    model()->properties().energy = 0;
-////    model()->properties().hibernate_mode_enabled = true;
+////    properties().energy = 0;
+////    properties().hibernate_mode_enabled = true;
 
 ////    if (m_SlotEnergizer->item() != nullptr)
 ////    {
 ////        if (m_SlotEnergizer->energizerEquipment()->isFunctioning() == true)
 ////        {
-////            model()->properties().energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
-////            model()->properties().hibernate_mode_enabled = false;
+////            properties().energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
+////            properties().hibernate_mode_enabled = false;
 ////        }
 ////    }
 
@@ -2795,13 +2783,13 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan");
 
-////    model()->properties().scan = 0;
+////    properties().scan = 0;
 
 ////    if (m_scanerSlot->item() != nullptr)
 ////    {
 ////        if (m_scanerSlot->scanerEquipment()->isFunctioning() == true)
 ////        {
-////            model()->properties().scan = m_scanerSlot->scanerEquipment()->scan();
+////            properties().scan = m_scanerSlot->scanerEquipment()->scan();
 ////        }
 ////    }
 //}
@@ -2810,8 +2798,8 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //{
 //    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab");
 
-////    model()->properties().grab_strength = 0;
-////    model()->properties().grab_radius = 0;
+////    properties().grab_strength = 0;
+////    properties().grab_radius = 0;
 
 ////    if (m_vehicleDescriptor.slot_grapple_num != 0)
 ////    {
@@ -2819,8 +2807,8 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////        {
 ////            if (m_grappleSlot->grappleEquipment()->isFunctioning() == true)
 ////            {
-////                model()->properties().grab_strength = m_grappleSlot->grappleEquipment()->strength();
-////                model()->properties().grab_radius = m_grappleSlot->grappleEquipment()->radius();
+////                properties().grab_strength = m_grappleSlot->grappleEquipment()->strength();
+////                properties().grab_radius = m_grappleSlot->grappleEquipment()->radius();
 ////            }
 ////        }
 ////    }
@@ -2831,8 +2819,8 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////#ifdef USE_ARTEFACTS
 ////    //LOG("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence");
 
-////    model()->properties().artefact_gravity = 0;
-////    model()->properties().artefact_protection = 0;
+////    properties().artefact_gravity = 0;
+////    properties().artefact_protection = 0;
 
 ////    for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
 ////    {
@@ -2844,13 +2832,13 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////                {
 ////                case entity::Type::GRAVITY_ARTEFACT:
 ////                {
-////                    model()->properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
+////                    properties().artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
 ////                    break;
 ////                }
 
 ////                case entity::Type::PROTECTOR_ARTEFACT:
 ////                {
-////                    model()->properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
+////                    properties().artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
 ////                    break;
 ////                }
 ////                }
@@ -2858,12 +2846,12 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////        }
 ////    }
 
-////    if (model()->properties().artefact_gravity > 0)
+////    if (properties().artefact_gravity > 0)
 ////    {
 ////        UpdatePropertiesSpeed();
 ////    }
 
-////    if (model()->properties().artefact_protection > 0)
+////    if (properties().artefact_protection > 0)
 ////    {
 ////        UpdatePropertiesProtection();
 ////    }
@@ -2932,7 +2920,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////void Vehicle::RenderRadarRange()
 ////{
-////    if (model()->properties().radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
+////    if (properties().radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 ////    {
 ////        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
 ////        m_SlotRadar->DrawRange(meti::vec2(center()));
@@ -2941,7 +2929,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////void Vehicle::RenderGrappleRange()
 ////{
-////    if (model()->properties().grab_radius > 0)
+////    if (properties().grab_radius > 0)
 ////    {
 ////        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
 ////        m_SlotGrapple->DrawRange(meti::vec2(center()));
@@ -2951,7 +2939,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //bool Vehicle::isAbleToJumpTo(Starsystem* target_starsystem) const
 //{
 ////    float dist = meti::distance(starsystem()->position(), target_starsystem->position());
-////    if (dist < model()->properties().hyper)
+////    if (dist < properties().hyper)
 ////    {
 ////        return true;
 ////    }
@@ -3028,9 +3016,9 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////#ifdef USE_EXTRA_EQUIPMENT
 ////    //LOG("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")");
 
-////    if (model()->properties().energy > energy)
+////    if (properties().energy > energy)
 ////    {
-////        model()->properties().energy -= energy;
+////        properties().energy -= energy;
 ////        m_SlotEnergizer->energizerEquipment()->DecreaseEnergy(energy);
 
 ////        return true;
@@ -3048,20 +3036,20 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 ////    //LOG("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")");
 
 ////    int energy_max = m_SlotEnergizer->energizerEquipment()->GetEnergyMax();
-////    if (model()->properties().energy < energy_max)
+////    if (properties().energy < energy_max)
 ////    {
-////        int diff_energy = energy_max - model()->properties().energy;
+////        int diff_energy = energy_max - properties().energy;
 ////        if ( diff_energy < energy)
 ////        {
 ////            energy = diff_energy;
 ////        }
 
-////        model()->properties().energy += energy;
+////        properties().energy += energy;
 ////        m_SlotEnergizer->energizerEquipment()->IncreaseEnergy(energy);
 
-////        if (model()->properties().hibernate_mode_enabled == true)
+////        if (properties().hibernate_mode_enabled == true)
 ////        {
-////            if (model()->properties().energy > HIBERNATION_ENERGY_THRESHOLD)
+////            if (properties().energy > HIBERNATION_ENERGY_THRESHOLD)
 ////            {
 ////                UpdatePropertiesProtection();
 ////            }
@@ -3146,7 +3134,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 //void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 //{
-////    if (model()->properties().grab_radius > 0)
+////    if (properties().grab_radius > 0)
 ////    {
 ////        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
 ////    }

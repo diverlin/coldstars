@@ -112,8 +112,10 @@ public:
 
     VehicleSlot* const parentVehicleSlot() const { return m_parentVehicleSlot; }
 
-    const VehiclePropetries& properties() const;
-    const VehicleNeeds& needs() const;
+    [[warning("remove this ugly non const")]]
+    VehiclePropetries& properties() { return m_properties; }
+    const VehiclePropetries& properties() const { return m_properties; }
+    VehicleNeeds& needs() { return m_needs; }
     descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
 
     virtual int givenExpirience() const override final;
@@ -299,6 +301,8 @@ private:
     std::vector<ItemSlot*> m_artefactSlots;
     std::vector<ItemSlot*> m_cargoSlots;
 
+    VehiclePropetries m_properties;
+    VehicleNeeds m_needs;
     WeaponComplex     m_weapon_complex;
     DriveComplex      m_drive_complex;
     ProtectionComplex m_protector_complex;
