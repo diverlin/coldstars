@@ -30,7 +30,7 @@ public:
     Item() = default;
     ~Item() = default;
 
-    void setSlot(int_t slot)  { m_slot = slot; }
+    void setSlot(int slot)  { m_slot = slot; }
     void setLockedTurns(int lockedTurns) { m_lockedTurns = lockedTurns; }
     void setCondition(int condition) { m_condition = condition; }
 
@@ -39,7 +39,7 @@ public:
     int condition() const { return m_condition; }
 
 private:
-    int_t m_slot = NONE;
+    int m_slot = NONE;
     int m_lockedTurns = 0;
     int m_condition = 0;
 
