@@ -146,9 +146,13 @@ Manager::add(BaseOLD* descr)
 }
 
 void
-Manager::add(Base* descr)
+Manager::reg(Base* descr)
 {
     //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
+    if (descr->id() == NONE) {
+        descr->setId(m_idGenerator.nextId());
+    }
+
     const int_t id = descr->id();
     descriptor::Type type = descr->type();
 
@@ -294,23 +298,23 @@ Manager::generate()
 
     int base = 1;
     int num = base * 20;
+    // items
     for(int i=0; i<num; ++i) {
-        // items
-        add(item::getNewBak());
-        add(item::getNewDrive());
-        add(item::getNewDroid());
-        add(item::getNewGrapple());
-        add(item::getNewProtector());
-        add(item::getNewRadar());
+        item::genBak();
+        item::genDrive();
+        item::genDroid();
+        item::genGrapple();
+        item::genProtector();
+        item::genRadar();
         item::genScaner();
-        add(item::getNewLazer());
-        add(item::getNewRocket());
+        item::genLazer();
+        item::genRocket();
         add(getNewBomb());
     }
 
     num = base * 10;
+    // spaceobjects
     for(int i=0; i<num; ++i) {
-        // spaceobjects
         add(getNewShip());
         add(getNewSpaceStation());
         add(getNewSatellite());

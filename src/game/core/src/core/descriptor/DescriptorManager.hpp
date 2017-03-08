@@ -110,7 +110,7 @@ class Manager
 public:
     static Manager& get();
 
-    void add(Base*);
+    void reg(Base*);
     Base* get(int_t) const;
     Base* rand(Type) const;
 
