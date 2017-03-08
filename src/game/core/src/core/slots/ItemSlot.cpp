@@ -199,29 +199,20 @@ bool ItemSlot::insert(Item* item)
 //        return false;
 //    }
 
-    // cargo slot
-    if (subtype() == entity::Type::CARGO_SLOT) {
+    if ((subtype() == entity::Type::CARGO_SLOT) || (subtype() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->removeItem();
         }
         item->setSlot(this);
+        item->model()->setSlot(offset());
 
-        return true;
-    }
-
-    // functional slot
-    if (subtype() == item->descriptor()->slotType()) {
-        m_item = item;
-        if (item->slot()) {
-            item->slot()->removeItem();
+        if (subtype() == item->descriptor()->slotType()) {
+            updateVehiclePropetries();
         }
-        item->setSlot(this);
-        updateVehiclePropetries();
-
         return true;
     }
-    
+
     return false;
 }
 

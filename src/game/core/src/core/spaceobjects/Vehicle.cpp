@@ -392,8 +392,8 @@ void Vehicle::addItemSlot(ItemSlot* slot)
     case entity::Type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
     case entity::Type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
 #ifdef USE_EXTRA_EQUIPMENT
-    case entity::type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
-    case entity::type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
+    case entity::type::ENERGIZER_SLOT: { m_energizerSlots.push_back(slot); break; }
+    case entity::type::FREEZER_SLOT:   { m_freezerSlots.push_back(slot); break; }
 #endif // USE_EXTRA_EQUIPMENT
     case entity::Type::GRAPPLE_SLOT:   { m_grappleSlots.push_back(slot); break; }
     case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
