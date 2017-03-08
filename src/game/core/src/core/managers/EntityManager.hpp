@@ -43,6 +43,10 @@ class SpaceObject;
 
 namespace model {
 
+namespace item {
+class Scaner;
+}
+
 Starsystem* getStarsystem(int_t id);
 Ship* getShip(int_t id);
 Container* getContainer(int_t id);
@@ -69,6 +73,7 @@ public:
     void reg(model::Base*);
 
     model::Base* get(int_t) const;
+    model::item::Scaner* scaner(int_t) const;
 
     Player* player() const;
 
