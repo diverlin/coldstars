@@ -105,7 +105,7 @@ namespace control {
 class Npc : public model::Base
 {
 public:
-    Npc(int, entity::type, entity::type);
+    Npc(int, entity::Type, entity::Type);
     virtual ~Npc();
 
     virtual void putChildrenToGarbage() const {}

@@ -73,15 +73,15 @@ public:
 
     void setId(int_t id) { m_id = id; }
     void setType(const descriptor::Type& type)   { m_type = type; }
-    void setObType(const entity::type& obType)   { m_obType = obType; }
-    void setObSubType(const entity::type& obSubType) { m_obSubType = obSubType; }
-    void setObSubSubType(const entity::type& obSubSubType) { m_obSubSubType = obSubSubType; }
+    void setObType(const entity::Type& obType)   { m_obType = obType; }
+    void setObSubType(const entity::Type& obSubType) { m_obSubType = obSubType; }
+    void setObSubSubType(const entity::Type& obSubSubType) { m_obSubSubType = obSubSubType; }
 
     int_t id() const { return m_id; }
     descriptor::Type type() const { return m_type; }
-    const entity::type& obType() const { return m_obType; }
-    const entity::type& obSubType() const { return m_obSubType; }
-    const entity::type& obSubSubType() const { return m_obSubSubType; }
+    const entity::Type& obType() const { return m_obType; }
+    const entity::Type& obSubType() const { return m_obSubType; }
+    const entity::Type& obSubSubType() const { return m_obSubSubType; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
@@ -99,9 +99,9 @@ protected:
 private:
     int_t m_id = NONE;
     descriptor::Type m_type = descriptor::Type::NONE;
-    entity::type m_obType = entity::type::NONE;
-    entity::type m_obSubType = entity::type::NONE;
-    entity::type m_obSubSubType = entity::type::NONE;
+    entity::Type m_obType = entity::Type::NONE;
+    entity::Type m_obSubType = entity::Type::NONE;
+    entity::Type m_obSubSubType = entity::Type::NONE;
 
 private:
     friend class boost::serialization::access;

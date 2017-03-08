@@ -52,9 +52,9 @@ const float Drive::MODULES_NUM_WEIGHT = 0.2f;
 Drive::Drive()
 {
     setType(descriptor::Type::DRIVE_EQUIPMENT);
-    setObType(entity::type::EQUIPMENT);
-    setObSubType(entity::type::DRIVE_EQUIPMENT);
-    setSlotType(entity::type::DRIVE_SLOT);
+    setObType(entity::Type::EQUIPMENT);
+    setObSubType(entity::Type::DRIVE_EQUIPMENT);
+    setSlotType(entity::Type::DRIVE_SLOT);
 }
 
 Drive::Drive(const std::string& data)

@@ -44,9 +44,9 @@ const float Radar::MODULES_NUM_WEIGHT = 0.4;
 Radar::Radar()
 {
     setType(descriptor::Type::RADAR_EQUIPMENT);
-    setObType(entity::type::EQUIPMENT);
-    setObSubType(entity::type::RADAR_EQUIPMENT);
-    setSlotType(entity::type::RADAR_SLOT);
+    setObType(entity::Type::EQUIPMENT);
+    setObSubType(entity::Type::RADAR_EQUIPMENT);
+    setSlotType(entity::Type::RADAR_SLOT);
 }
 
 Radar::Radar(const std::string& data)

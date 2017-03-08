@@ -53,9 +53,9 @@ const float Grapple::MODULES_NUM_WEIGHT = 0.1f;
 Grapple::Grapple()
 {
     setType(descriptor::Type::GRAPPLE_EQUIPMENT);
-    setObType(entity::type::EQUIPMENT);
-    setObSubType(entity::type::GRAPPLE_EQUIPMENT);
-    setSlotType(entity::type::GRAPPLE_SLOT);
+    setObType(entity::Type::EQUIPMENT);
+    setObSubType(entity::Type::GRAPPLE_EQUIPMENT);
+    setSlotType(entity::Type::GRAPPLE_SLOT);
 }
 
 Grapple::Grapple(const std::string& data)

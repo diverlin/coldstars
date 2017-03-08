@@ -32,7 +32,7 @@ public:
 
     void setRace(race::type race) { m_race = race; }
     void setTech(tech::type tech) { m_tech = tech; }
-    void setSlotType(entity::type slotType) { m_slotType = slotType; }
+    void setSlotType(entity::Type slotType) { m_slotType = slotType; }
     void setCondition(int condition) { m_condition = condition; }
     void setDeterioration(int deterioration) { m_deterioration = deterioration; }
     void setMass(int mass) { m_mass = mass; }
@@ -40,7 +40,7 @@ public:
 
     race::type race() const { return m_race; }
     tech::type tech() const { return m_tech; }
-    entity::type slotType() const { return m_slotType; }
+    entity::Type slotType() const { return m_slotType; }
     int condition() const { return m_condition; }
     int deterioration() const { return m_deterioration; }
     int mass() const { return m_mass; }
@@ -49,7 +49,7 @@ public:
 private:
     race::type m_race = race::type::NONE;
     tech::type m_tech = tech::type::NONE;
-    entity::type m_slotType = entity::type::NONE;
+    entity::Type m_slotType = entity::Type::NONE;
     int m_condition = 0;
     int m_deterioration = 0;
     int m_mass = 0;

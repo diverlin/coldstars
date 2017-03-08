@@ -28,9 +28,9 @@
 namespace core {
 
 struct Id {
-    entity::type type = entity::type::NONE;
-    entity::type subtype = entity::type::NONE;
-    entity::type subsubtype = entity::type::NONE;
+    entity::Type type = entity::Type::NONE;
+    entity::Type subtype = entity::Type::NONE;
+    entity::Type subsubtype = entity::Type::NONE;
 
     friend class boost::serialization::access;
     template<class Archive>

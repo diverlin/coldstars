@@ -66,7 +66,7 @@ Npc::data() const
 
 namespace control {
 
-Npc::Npc(int id, entity::type subtype_id, entity::type subsubtype_id)
+Npc::Npc(int id, entity::Type subtype_id, entity::Type subsubtype_id)
 { 
     assert(false);
 //    setTypeId(entity::Type::NPC);

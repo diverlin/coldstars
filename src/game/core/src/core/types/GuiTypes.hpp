@@ -79,8 +79,8 @@ namespace gui
 
 std::string getGuiTypeStr(gui::type);
 
-gui::type getGuiItemSlotType(entity::type);
-gui::type getGuiItemSlotSelectorType(entity::type);
+gui::type getGuiItemSlotType(entity::Type);
+gui::type getGuiItemSlotSelectorType(entity::Type);
 
 #endif
 

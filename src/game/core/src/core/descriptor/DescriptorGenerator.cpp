@@ -355,15 +355,15 @@ descriptor::Ship*
 getNewShip()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    entity::type type_id = entity::type::WARRIOR;
+    entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::type::WARRIOR: { protection_rate = 2; break; }
-        case entity::type::TRADER:  { otsec_rate = 1.5; break; }
+        case entity::Type::WARRIOR: { protection_rate = 2; break; }
+        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);
@@ -429,15 +429,15 @@ descriptor::SpaceStation*
 getNewSpaceStation()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    entity::type type_id = entity::type::WARRIOR;
+    entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::type::WARRIOR: { protection_rate = 2; break; }
-        case entity::type::TRADER:  { otsec_rate = 1.5; break; }
+        case entity::Type::WARRIOR: { protection_rate = 2; break; }
+        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);
@@ -502,15 +502,15 @@ descriptor::Satellite*
 getNewSatellite()
 {
     race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    entity::type type_id = entity::type::WARRIOR;
+    entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::type::WARRIOR: { protection_rate = 2; break; }
-        case entity::type::TRADER:  { otsec_rate = 1.5; break; }
+        case entity::Type::WARRIOR: { protection_rate = 2; break; }
+        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(100);

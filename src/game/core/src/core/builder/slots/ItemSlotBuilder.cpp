@@ -34,7 +34,7 @@
 
 
 control::ItemSlot*
-getNewItemSlot(entity::type subtype_id)
+getNewItemSlot(entity::Type subtype_id)
 {  
 //    assert(false);
     control::ItemSlot* item_slot = new control::ItemSlot(subtype_id);
@@ -43,7 +43,7 @@ getNewItemSlot(entity::type subtype_id)
     //jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT);
 //    item_slot->SetTextureOb(texOb_slot);
     
-    if (subtype_id == entity::type::WEAPON_SLOT) {
+    if (subtype_id == entity::Type::WEAPON_SLOT) {
 //        assert(false);
 //        Turrel* turrel = new Turrel(item_slot);
 //        assert(turrel);

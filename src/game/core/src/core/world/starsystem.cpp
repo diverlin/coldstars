@@ -938,8 +938,8 @@ void Starsystem::__shipManager_s(unsigned int num)
             prace_id = race::type::R6;
         }
         
-        entity::type psubtype_id    = entity::type::WARRIOR;
-        entity::type psubsubtype_id = entity::type::WARRIOR;
+        entity::Type psubtype_id    = entity::Type::WARRIOR;
+        entity::Type psubsubtype_id = entity::Type::WARRIOR;
         int size_id     = SIZE_4;
         int weapons_num = 7;
 

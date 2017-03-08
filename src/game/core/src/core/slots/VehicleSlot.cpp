@@ -46,7 +46,7 @@ VehicleSlot::data() const
 
 namespace control {
 
-VehicleSlot::VehicleSlot(int id, entity::type subtype_id)
+VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)
 {
     assert(false);
 //    setId(id);

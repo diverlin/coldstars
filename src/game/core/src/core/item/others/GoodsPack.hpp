@@ -23,7 +23,7 @@
 class GoodsPack : public control::Item
 {
 public:
-    GoodsPack(int, entity::type);
+    GoodsPack(int, entity::Type);
     virtual ~GoodsPack();
 
     void Increase(int amount);
@@ -47,5 +47,5 @@ private:
 
 };
 
-GoodsPack* GetNewGoodsPack(entity::type, int_t id = NONE);
+GoodsPack* GetNewGoodsPack(entity::Type, int_t id = NONE);
 

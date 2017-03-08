@@ -253,8 +253,8 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
     for (int i=0; i<spacestation_per_system; i++)
     {
         race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
-        entity::type npc_subtype_id    = entity::type::WARRIOR;
-        entity::type npc_subsubtype_id = entity::type::WARRIOR;
+        entity::Type npc_subtype_id    = entity::Type::WARRIOR;
+        entity::Type npc_subsubtype_id = entity::Type::WARRIOR;
 
         //race::type ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
         //entity::Type ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
@@ -292,21 +292,21 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
     }
 }
 
-void God::__createShips(Starsystem* starsystem, int ship_num, race::type npc_race_id, entity::type subtype_id, entity::type subsubtype_id) const
+void God::__createShips(Starsystem* starsystem, int ship_num, race::type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
 {
-    entity::type npc_subtype_id = entity::type::NONE;
-    entity::type npc_subsubtype_id = entity::type::NONE;
+    entity::Type npc_subtype_id = entity::Type::NONE;
+    entity::Type npc_subsubtype_id = entity::Type::NONE;
 
     for (int i=0; i<ship_num; i++)
     {
         // VERY UGLY LOGIC START (TODO)
-        if (subtype_id == entity::type::NONE) {
+        if (subtype_id == entity::Type::NONE) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
         } else {
             npc_subtype_id    = subtype_id;
         }
 
-        if (subsubtype_id == entity::type::NONE) {
+        if (subsubtype_id == entity::Type::NONE) {
             npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
         } else {
             npc_subsubtype_id = subsubtype_id;
