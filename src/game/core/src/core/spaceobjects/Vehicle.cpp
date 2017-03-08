@@ -88,6 +88,8 @@
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
+#include <core/managers/EntityManager.hpp>
+
 
 namespace control {
 
@@ -103,6 +105,13 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 //    protectorComplex().setOwnerVehicle(this);
 
     __createSlots(descr);
+
+    for(int_t id: model->items()) {
+        model::Base* item_base_model = core::global::get().entityManager().get(id);
+        descriptor::Base* item_base_descriptor =
+
+    }
+
 
     _updatePropProtection();
     __updateFreeSpace();
