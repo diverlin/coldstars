@@ -39,7 +39,7 @@ namespace item {
 class Grapple : public Equipment
 {
 public:
-    Grapple(model::item::Grapple*, descriptor::item::Grapple*);
+    Grapple(model::item::Grapple*);
     virtual ~Grapple() = default;
 
 //    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;

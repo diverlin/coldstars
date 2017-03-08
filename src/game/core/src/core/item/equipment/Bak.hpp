@@ -39,7 +39,7 @@ namespace item {
 class Bak : public Equipment
 {
 public:
-    Bak(model::item::Bak*, descriptor::item::Bak*);
+    Bak(model::item::Bak*);
     virtual ~Bak() = default;
 
     void increaseFuel(int fuel);

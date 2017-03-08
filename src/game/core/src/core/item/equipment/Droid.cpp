@@ -18,6 +18,7 @@
 
 #include "Droid.hpp"
 #include <core/descriptor/item/equipment/Droid.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Droid.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +31,11 @@
 namespace control {
 namespace item {
 
-Droid::Droid(model::item::Droid* model, descriptor::item::Droid* descr)
+Droid::Droid(model::item::Droid* model)
     :
-      Equipment(model, descr)
+      Equipment(model, descriptor::Manager::get().droid(model->descriptor()))
     , m_model_droid(model)
-    , m_descriptor_droid(descr)
+    , m_descriptor_droid(descriptor::Manager::get().droid(model->descriptor()))
 {}
 
 /* virtual */

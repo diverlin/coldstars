@@ -38,7 +38,7 @@ namespace item {
 class Lazer : public Weapon
 {
 public:
-    Lazer(model::item::Lazer*, descriptor::item::Lazer*);
+    Lazer(model::item::Lazer*);
     virtual ~Lazer() = default;
 
     //void FireEvent(SpaceObject*, ItemSlot*, float, bool);

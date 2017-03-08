@@ -39,7 +39,7 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    Drive(model::item::Drive*, descriptor::item::Drive*);
+    Drive(model::item::Drive*);
     virtual ~Drive() = default;
 
 public:

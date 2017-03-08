@@ -18,6 +18,7 @@
 
 #include "Lazer.hpp"
 #include <core/descriptor/item/equipment/Lazer.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Lazer.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +31,11 @@
 namespace control {
 namespace item {
 
-Lazer::Lazer(model::item::Lazer* model, descriptor::item::Lazer* descr)
+Lazer::Lazer(model::item::Lazer* model)
     :
-      Weapon(model, descr)
+      Weapon(model, descriptor::Manager::get().lazer(model->descriptor()))
     , m_model_lazer(model)
-    , m_descriptor_lazer(descr)
+    , m_descriptor_lazer(descriptor::Manager::get().lazer(model->descriptor()))
 {
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL);

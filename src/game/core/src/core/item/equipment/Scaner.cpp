@@ -17,7 +17,6 @@
 */
 
 #include "Scaner.hpp"
-
 #include <core/descriptor/item/equipment/Scaner.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>

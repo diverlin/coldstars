@@ -39,7 +39,7 @@ namespace item {
 class Droid : public Equipment
 {
 public:
-    Droid(model::item::Droid*, descriptor::item::Droid*);
+    Droid(model::item::Droid*);
     virtual ~Droid() = default;
 
     model::item::Droid* model() const { return m_model_droid; }
