@@ -1108,7 +1108,7 @@ getNewBomb(int damage, int radius)
         radius = meti::getRandInt(100, 300);
     }
 
-    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::Type::BOMB);
+    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::TypeOLD::BOMB);
     descr->add(descriptor::Key::DAMAGE, damage);
     descr->add(descriptor::Key::RADIUS, radius);
 

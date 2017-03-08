@@ -3,7 +3,7 @@
 namespace descriptor {
 
 Hit::Hit(int_t owner, int_t target, int damage)
-    : BaseOLD(Type::HIT)
+    : BaseOLD(TypeOLD::HIT)
 {
     add(Key::OWNER, owner);
     add(Key::TARGET, target);

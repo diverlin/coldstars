@@ -47,7 +47,7 @@ const float Lazer::MODULES_NUM_WEIGHT = 0.2f;
 
 Lazer::Lazer()
 {
-    setType(descriptor::type::LAZER_EQUIPMENT);
+    setType(descriptor::Type::LAZER_EQUIPMENT);
     setObType(entity::type::EQUIPMENT);
     setObSubType(entity::type::LAZER_EQUIPMENT);
     setSlotType(entity::type::WEAPON_SLOT);

@@ -105,11 +105,16 @@ public:
     Manager();
     ~Manager() = default;
 
+    void add(Base*);
+    Base* rand(Type) const;
+
+    item::Scaner* randScaner() const;
+
     void add(BaseOLD*);
     BaseOLD* getRand(const Type&);
     BaseOLD* get(int_t);
 
-    unsigned long int size() const { return m_descriptors.size(); }
+    unsigned long int size() const { return m_descriptorsOLD.size(); }
 
     void add(Galaxy*);
     void add(Sector*);
@@ -129,7 +134,7 @@ public:
     void add(item::Protector*);
     void add(item::Radar*);
     void add(item::Rocket*);
-    void add(item::Scaner*);
+//    void add(item::Scaner*);
     void add(Mesh*);
     void add(Material*);
 
@@ -150,7 +155,6 @@ public:
     const MManager<item::Protector>& protector() const { return m_protector; }
     const MManager<item::Radar>& radar() const { return m_radar; }
     const MManager<item::Rocket>& rocket() const { return m_rocket; }
-    const MManager<item::Scaner>& scaner() const { return m_scaner; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -185,8 +189,11 @@ private:
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 
-    std::map<int_t, BaseOLD*> m_descriptors;
-    std::map<int, std::vector<BaseOLD*>> m_descriptorsTypes;
+    std::map<int_t, Base*> m_descriptors;
+    std::map<Type, std::vector<Base*>> m_descriptorsTypes;
+
+    std::map<int_t, BaseOLD*> m_descriptorsOLD;
+    std::map<int, std::vector<BaseOLD*>> m_descriptorsTypesOLD;
 
     void __clear();
     void __save();

@@ -101,9 +101,6 @@ void Manager::add(item::Radar* radar) {
 void Manager::add(item::Rocket* rocket) {
     m_rocket.add(rocket);
 }
-void Manager::add(item::Scaner* scaner) {
-    m_scaner.add(scaner);
-}
 void Manager::add(Mesh* mesh) {
     m_mesh.add(mesh);
 }
@@ -120,6 +117,33 @@ Manager::add(BaseOLD* descr)
     int type = descr->type();
 
     {
+        const auto it = m_descriptorsOLD.find(id);
+        if (it != m_descriptorsOLD.end()) {
+            throw std::runtime_error("descriptor with that id already exist");
+        }
+        m_descriptorsOLD.insert(std::make_pair(id, descr));
+    }
+
+    {
+        const auto it = m_descriptorsTypesOLD.find(type);
+        if (it != m_descriptorsTypesOLD.end()) {
+            it->second.push_back(descr);
+        } else {
+            std::vector<BaseOLD*> vector;
+            vector.push_back(descr);
+            m_descriptorsTypesOLD[type] = vector;
+        }
+    }
+}
+
+void
+Manager::add(Base* descr)
+{
+    //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
+    const int_t id = descr->id();
+    descriptor::Type type = descr->type();
+
+    {
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
             throw std::runtime_error("descriptor with that id already exist");
@@ -132,7 +156,7 @@ Manager::add(BaseOLD* descr)
         if (it != m_descriptorsTypes.end()) {
             it->second.push_back(descr);
         } else {
-            std::vector<BaseOLD*> vector;
+            std::vector<Base*> vector;
             vector.push_back(descr);
             m_descriptorsTypes[type] = vector;
         }
@@ -142,22 +166,42 @@ Manager::add(BaseOLD* descr)
 BaseOLD*
 Manager::getRand(const Type& type)
 {
-    const auto it = m_descriptorsTypes.find(int(type));
-    if (it != m_descriptorsTypes.end()) {
+    const auto it = m_descriptorsTypesOLD.find(int(type));
+    if (it != m_descriptorsTypesOLD.end()) {
         const std::vector<BaseOLD*> descriptors = it->second;
         return meti::getRand(descriptors);
     }
-    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + typeStr(type));
+    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + to_string(type));
 }
 
 BaseOLD*
 Manager::get(int_t id)
 {
-    const auto it = m_descriptors.find(id);
-    if (it != m_descriptors.end()) {
+    const auto it = m_descriptorsOLD.find(id);
+    if (it != m_descriptorsOLD.end()) {
         return it->second;
     }
     throw std::runtime_error("descriptor id doesn't exist");
+}
+
+Base*
+Manager::rand(Type type) const
+{
+    std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
+    if (it == m_descriptorsTypes.end()) {
+        throw std::runtime_error("descriptor id doesn't exist");
+    }
+    Base* descr = meti::getRand(it->second);
+    assert(descr);
+    return descr;
+}
+
+item::Scaner*
+Manager::randScaner() const
+{
+    item::Scaner* descr = static_cast<item::Scaner*>(rand(Type::SCANER_EQUIPMENT));
+    assert(descr);
+    return descr;
 }
 
 void
@@ -166,7 +210,7 @@ Manager::__save()
     std::fstream filestream;
     filestream.open(descriptors_fname);
     if(filestream.is_open()) {
-        for(const auto& lists: m_descriptorsTypes) {
+        for(const auto& lists: m_descriptorsTypesOLD) {
             const auto& list = lists.second;
             for(BaseOLD* descr: list) {
                 filestream<<descr->data()<<std::endl;
@@ -200,8 +244,8 @@ Manager::__load()
 void
 Manager::__clear()
 {
-    m_descriptors.clear();
-    m_descriptorsTypes.clear();
+    m_descriptorsOLD.clear();
+    m_descriptorsTypesOLD.clear();
 }
 
 void
