@@ -175,24 +175,35 @@ void compareShipModels(model::Ship* m1, model::Ship* m2)
     compareVehileModels(m1, m2);
 }
 
+void compareShipControls(control::Ship* c1, control::Ship* c2)
+{
+    EXPECT_EQ(c1->properties().scan, c2->properties().scan);
+}
+
 } // namespace
 
-TEST(ship, clone)
+
+void testShipClone(const test::Ship& ship)
 {
-    descriptor::Manager::get().generate();
-
-    test::Ship ship;
-    test::item::Scaner item;
-
-    ship.control()->manage(item.control());
-
     model::Ship* model = new model::Ship(ship.model()->data());
     control::Ship* control = new control::Ship(model, ship.descriptor());
 
     compareShipModels(ship.model(), model);
+    compareShipControls(ship.control(), control);
+}
+
+TEST(ship, clone)
+{
+    test::Ship ship;
+    test::item::Scaner item;
+    test::item::Scaner item2;
+
+    ship.control()->manage(item.control());
+    ship.control()->load(item2.control());
+
+    testShipClone(ship);
 
     EXPECT_EQ(ship.control()->properties().scan, item.descriptor()->scan());
-    EXPECT_EQ(ship.control()->properties().scan, control->properties().scan);
 }
 
 
