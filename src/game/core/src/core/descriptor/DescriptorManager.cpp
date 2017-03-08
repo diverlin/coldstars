@@ -86,30 +86,6 @@ void Manager::add(Satellite* satellite) {
 void Manager::add(Container* container) {
     m_container.add(container);
 }
-void Manager::add(item::Drive* drive) {
-    m_drive.add(drive);
-}
-void Manager::add(item::Bak* bak) {
-    m_bak.add(bak);
-}
-void Manager::add(item::Droid* droid) {
-    m_droid.add(droid);
-}
-void Manager::add(item::Grapple* grapple) {
-    m_grapple.add(grapple);
-}
-void Manager::add(item::Lazer* lazer) {
-    m_lazer.add(lazer);
-}
-void Manager::add(item::Protector* protector) {
-    m_protector.add(protector);
-}
-void Manager::add(item::Radar* radar) {
-    m_radar.add(radar);
-}
-void Manager::add(item::Rocket* rocket) {
-    m_rocket.add(rocket);
-}
 void Manager::add(Mesh* mesh) {
     m_mesh.add(mesh);
 }
@@ -229,15 +205,141 @@ Manager::randScaner() const
     return descr;
 }
 
-item::Scaner*
-Manager::scaner(int_t id) const
+item::Drive*
+Manager::randDrive() const
 {
-    Base* base = get(id);
-    item::Scaner* descr = static_cast<item::Scaner*>(base);
+    item::Drive* descr = static_cast<item::Drive*>(rand(Type::DRIVE_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
+item::Bak*
+Manager::randBak() const
+{
+    item::Bak* descr = static_cast<item::Bak*>(rand(Type::BAK_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Droid*
+Manager::randDroid() const
+{
+    item::Droid* descr = static_cast<item::Droid*>(rand(Type::DROID_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Grapple*
+Manager::randGrapple() const
+{
+    item::Grapple* descr = static_cast<item::Grapple*>(rand(Type::GRAPPLE_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Lazer*
+Manager::randLazer() const
+{
+    item::Lazer* descr = static_cast<item::Lazer*>(rand(Type::LAZER_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Protector*
+Manager::randProtector() const
+{
+    item::Protector* descr = static_cast<item::Protector*>(rand(Type::PROTECTOR_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Radar*
+Manager::randRadar() const
+{
+    item::Radar* descr = static_cast<item::Radar*>(rand(Type::RADAR_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Rocket*
+Manager::randRocket() const
+{
+    item::Rocket* descr = static_cast<item::Rocket*>(rand(Type::ROCKET_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+item::Scaner*
+Manager::scaner(int_t id) const
+{
+    item::Scaner* descr = static_cast<item::Scaner*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Drive*
+Manager::drive(int_t id) const
+{
+    item::Drive* descr = static_cast<item::Drive*>(get(id));
+    assert(descr);
+    return descr;
+}
+item::Bak*
+Manager::bak(int_t id) const
+{
+    item::Bak* descr = static_cast<item::Bak*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Droid*
+Manager::droid(int_t id) const
+{
+    Base* base = get(id);
+    item::Droid* descr = static_cast<item::Droid*>(base);
+    assert(descr);
+    return descr;
+}
+
+item::Grapple*
+Manager::grapple(int_t id) const
+{
+    item::Grapple* descr = static_cast<item::Grapple*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Lazer*
+Manager::lazer(int_t id) const
+{
+    item::Lazer* descr = static_cast<item::Lazer*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Protector*
+Manager::protector(int_t id) const
+{
+    item::Protector* descr = static_cast<item::Protector*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Radar*
+Manager::radar(int_t id) const
+{
+    item::Radar* descr = static_cast<item::Radar*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+item::Rocket*
+Manager::rocket(int_t id) const
+{
+    item::Rocket* descr = static_cast<item::Rocket*>(get(id));
+    assert(descr);
+    return descr;
+}
 
 void
 Manager::__save()

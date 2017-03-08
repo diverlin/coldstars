@@ -115,7 +115,24 @@ public:
     Base* rand(Type) const;
 
     item::Scaner* randScaner() const;
+    item::Drive* randDrive() const;
+    item::Bak* randBak() const;
+    item::Droid* randDroid() const;
+    item::Grapple* randGrapple() const;
+    item::Lazer* randLazer() const;
+    item::Protector* randProtector() const;
+    item::Radar* randRadar() const;
+    item::Rocket* randRocket() const;
+
     item::Scaner* scaner(int_t) const;
+    item::Drive* drive(int_t) const;
+    item::Bak* bak(int_t) const;
+    item::Droid* droid(int_t) const;
+    item::Grapple* grapple(int_t) const;
+    item::Lazer* lazer(int_t) const;
+    item::Protector* protector(int_t) const;
+    item::Radar* radar(int_t) const;
+    item::Rocket* rocket(int_t) const;
 
     void add(BaseOLD*);
     BaseOLD* getRand(const Type&);
@@ -133,14 +150,7 @@ public:
     void add(SpaceStation*);
     void add(Satellite*);
     void add(Container*);
-    void add(item::Drive*);
-    void add(item::Bak*);
-    void add(item::Droid*);
-    void add(item::Grapple*);
-    void add(item::Lazer*);
-    void add(item::Protector*);
-    void add(item::Radar*);
-    void add(item::Rocket*);
+
     void add(Mesh*);
     void add(Material*);
 
@@ -153,14 +163,6 @@ public:
     const MManager<Ship>& ship() const { return m_ship; }
     const MManager<SpaceStation>& spacestation() const { return m_spacestation; }
     const MManager<Satellite>& satellite() const { return m_satellite; }
-    const MManager<item::Drive>& drive() const { return m_drive; }
-    const MManager<item::Bak>& bak() const { return m_bak; }
-    const MManager<item::Droid>& droid() const { return m_droid; }
-    const MManager<item::Grapple>& grapple() const { return m_grapple; }
-    const MManager<item::Lazer>& lazer() const { return m_lazer; }
-    const MManager<item::Protector>& protector() const { return m_protector; }
-    const MManager<item::Radar>& radar() const { return m_radar; }
-    const MManager<item::Rocket>& rocket() const { return m_rocket; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -185,14 +187,7 @@ private:
     MManager<SpaceStation> m_spacestation;
     MManager<Satellite> m_satellite;
     MManager<Container> m_container;
-    MManager<item::Bak> m_bak;
-    MManager<item::Drive> m_drive;
-    MManager<item::Droid> m_droid;
-    MManager<item::Grapple> m_grapple;
-    MManager<item::Lazer> m_lazer;
-    MManager<item::Protector> m_protector;
-    MManager<item::Radar> m_radar;
-    MManager<item::Rocket> m_rocket;
+
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 

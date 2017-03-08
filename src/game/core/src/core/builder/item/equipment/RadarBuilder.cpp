@@ -30,7 +30,7 @@ namespace item {
 model::item::Radar*
 Radar::getNew()
 {
-    descriptor::item::Radar* descr = descriptor::Manager::get().radar().random();
+    descriptor::item::Radar* descr = descriptor::Manager::get().randRadar();
     model::item::Radar* model = __createTemplate(descr->id());
     __createInternals(model, descr);
 

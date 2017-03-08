@@ -28,7 +28,7 @@ namespace item {
 model::item::Lazer*
 Lazer::getNew()
 {
-    descriptor::item::Lazer* descr = descriptor::Manager::get().lazer().random();
+    descriptor::item::Lazer* descr = descriptor::Manager::get().randLazer();
     return getNew(descr);
 }
 
