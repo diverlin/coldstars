@@ -187,8 +187,9 @@ public:
 
     bool dropItemToSpace(const entity::Type&);
 
+private:
+    void __increaseMass(int);
 protected:
-    void _increaseMass(int);
     void _decreaseMass(int);
     void _updatePropEnergy();
     void _updatePropFreeze();
@@ -304,7 +305,7 @@ private:
     DriveComplex      m_drive_complex;
     ProtectionComplex m_protector_complex;
 
-    std::vector<ItemSlot*> m_slots;
+    std::map<int, ItemSlot*> m_slots;
 
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();
@@ -318,6 +319,13 @@ private:
     void __createSlots(descriptor::Vehicle*);
 
     bool __manage(Item*);
+    bool __insertItem(ItemSlot*, Item*);
+    ItemSlot* __itemSlot(int) const;
+
+    bool m_blockModel = false;
+    void __blockModel() { m_blockModel = true; }
+    void __releaseModel() { m_blockModel = false; }
+    bool __modelBlocked() const { return m_blockModel; }
 
     void __actualizeItems();
 };

@@ -52,6 +52,8 @@
 #include <core/model/item/equipment/Drive.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 #include <core/model/item/equipment/Grapple.hpp>
+#include <core/model/item/equipment/Lazer.hpp>
+#include <core/model/item/equipment/Rocket.hpp>
 
 #include <core/item/equipment/Radar.hpp>
 #include <core/item/equipment/Bak.hpp>
@@ -114,8 +116,8 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 /* virtual */
 Vehicle::~Vehicle()
 {
-    for(ItemSlot* slot: m_slots) {
-        delete slot;
+    for(auto& it: m_slots) {
+        delete it.second;
     }
     m_slots.clear();
 }
@@ -123,9 +125,10 @@ Vehicle::~Vehicle()
 void
 Vehicle::__actualizeItems()
 {
+    __blockModel();
     // we must not call this function if at least 1 item already inserted, wrong usage
-    for(ItemSlot* slot: m_slots) {
-        assert(!slot->item());
+    for(auto& it: m_slots) {
+        assert(!it.second->item());
     }
 
     for(int_t id: model()->items()) {
@@ -135,52 +138,53 @@ Vehicle::__actualizeItems()
         switch(descriptor_base->obSubType()) {
         case entity::Type::SCANER_EQUIPMENT: {
             control::item::Scaner* item = new control::item::Scaner(core::global::get().entityManager().scaner(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
             control::item::Drive* item = new control::item::Drive(core::global::get().entityManager().drive(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
             control::item::Bak* item = new control::item::Bak(core::global::get().entityManager().bak(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
             control::item::Droid* item = new control::item::Droid(core::global::get().entityManager().droid(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
             control::item::Grapple* item = new control::item::Grapple(core::global::get().entityManager().grapple(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
             control::item::Lazer* item = new control::item::Lazer(core::global::get().entityManager().lazer(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
             control::item::Protector* item = new control::item::Protector(core::global::get().entityManager().protector(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
             control::item::Radar* item = new control::item::Radar(core::global::get().entityManager().radar(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
             control::item::Rocket* item = new control::item::Rocket(core::global::get().entityManager().rocket(id));
-            __manage(item);
+            __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         }
 
     }
+    __releaseModel();
 }
 
 int Vehicle::freeSpace() const
@@ -411,8 +415,9 @@ void Vehicle::addItemSlot(ItemSlot* slot)
         m_cargoSlots.push_back(slot);
     }
 
-    m_slots.push_back(slot);
-    slot->setOffset(m_slots.size());
+    int offset = m_slots.size();
+    m_slots.insert(std::make_pair(offset, slot));
+    slot->setOffset(offset);
 }
 
 bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
@@ -631,10 +636,8 @@ ItemSlot* Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype_id)
 bool
 Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
 {
-    if (load(container->itemSlot()->item()) == true)
-    {
+    if (load(container->itemSlot()->item())) {
         container->killSilently();
-
         return true;
     }
 
@@ -646,7 +649,7 @@ Vehicle::load(Item* item)
 {
     bool added = __addItemToCargo(item);
     if (added) {
-        _increaseMass(item->descriptor()->mass());
+        __increaseMass(item->descriptor()->mass());
     }
 
     return added;
@@ -671,29 +674,48 @@ Vehicle::__addItemToCargo(Item* item)
     return added;
 }
 
-bool
-Vehicle::__manage(Item* item)
+ItemSlot*
+Vehicle::__itemSlot(int id) const
 {
-    bool added = __installItem(item);
-    if (!added) {
-        added = __addItemToCargo(item);
-    }
-    if (added) {
-        _increaseMass(item->descriptor()->mass());
+    std::map<int, ItemSlot*>::const_iterator it = m_slots.find(id);
+    if (it != m_slots.end()) {
+        return it->second;
     }
 
-    return added;
+    assert(false);
+    return nullptr;
+}
+
+bool
+Vehicle::__insertItem(ItemSlot* slot, Item* item)
+{
+    if (!slot) {
+        return false;
+    }
+
+    if (slot->insert(item)) {
+        __increaseMass(item->descriptor()->mass());
+        if (!__modelBlocked()) {
+            model()->addItem(item->model()->id());
+        }
+        return true;
+    }
+
+    return false;
 }
 
 bool
 Vehicle::manage(Item* item)
 {
-    if (__manage(item)) {
-        model()->addItem(item->model()->id());
-        return true;
+    ItemSlot* slot = nullptr;
+    if (item->descriptor()->obType() == entity::Type::EQUIPMENT) {
+        slot = __freeFunctionalSlot(item->descriptor()->slotType());
+    }
+    if (!slot) {
+        slot = freeCargoSlot();
     }
 
-    return false;
+    return __insertItem(slot, item);
 }
 
 void Vehicle::manageItemsInCargo()
@@ -1117,7 +1139,7 @@ Vehicle::__updateFreeSpace() {
     properties().free_space = descriptor()->space() - mass();
 }
 
-void Vehicle::_increaseMass(int d_mass)
+void Vehicle::__increaseMass(int d_mass)
 {
     //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
 
