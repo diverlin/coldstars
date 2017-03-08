@@ -20,7 +20,6 @@
 
 
 namespace ceti {
-
 namespace descriptor {
 
 IdGenerator Base::m_idGenerator;

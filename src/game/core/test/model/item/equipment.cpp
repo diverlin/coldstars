@@ -29,7 +29,7 @@ namespace {
 
 void init()
 {
-    core::global::get().descriptors().generate();
+    descriptor::Manager::get().generate();
 }
 
 void compareEquipment(model::Equipment* model, model::Equipment* copy)

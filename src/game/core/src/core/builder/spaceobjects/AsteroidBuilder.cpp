@@ -38,7 +38,7 @@ Asteroid::__createTemplate()
 model::Asteroid*
 Asteroid::getNew()
 {
-    const auto& descr = core::global::get().descriptors().asteroid().random();
+    const auto& descr = descriptor::Manager::get().asteroid().random();
     return getNew(descr);
 }
 

@@ -32,7 +32,7 @@ namespace item {
 model::item::Protector*
 Protector::getNew()
 {
-    descriptor::item::Protector* descr = core::global::get().descriptors().protector().random();
+    descriptor::item::Protector* descr = descriptor::Manager::get().protector().random();
     model::item::Protector* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;

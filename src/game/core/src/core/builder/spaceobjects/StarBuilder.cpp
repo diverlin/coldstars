@@ -45,7 +45,7 @@ Star::__getNewTemplate(int_t id)
 model::Star*
 Star::getNew()
 {
-    const auto& descr = core::global::get().descriptors().star().random();
+    const auto& descr = descriptor::Manager::get().star().random();
     return getNew(descr);
 } 
 

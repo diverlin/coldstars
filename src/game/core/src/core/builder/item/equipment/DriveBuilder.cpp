@@ -28,7 +28,7 @@ namespace item {
 model::item::Drive*
 Drive::getNew()
 {
-    descriptor::item::Drive* descr = core::global::get().descriptors().drive().random();
+    descriptor::item::Drive* descr = descriptor::Manager::get().drive().random();
     model::item::Drive* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;

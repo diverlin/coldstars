@@ -219,7 +219,7 @@ TEST(descriptor, rocket) {
 }
 
 TEST(descriptor, scaner) {
-    descriptor::item::Scaner descr = *descriptor::item::getNewScaner();
+    descriptor::item::Scaner descr = *descriptor::item::genScaner();
 
     EXPECT_EQ(descr.type(), descriptor::Type::SCANER_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);

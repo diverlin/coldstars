@@ -154,7 +154,7 @@ TEST(descriptor,manager)
 
 TEST(clone, galaxy)
 {
-    const auto& descriptor = core::global::get().descriptors().galaxy().random();
+    const auto& descriptor = descriptor::Manager::get().galaxy().random();
     auto g1 = builder::Galaxy::create(descriptor);
     auto g2 = builder::Galaxy::create(descriptor);
     EXPECT_EQ(*g1, *g2);
@@ -162,7 +162,7 @@ TEST(clone, galaxy)
 
 TEST(clone, sector)
 {
-    const auto& descriptor = core::global::get().descriptors().sector().random();
+    const auto& descriptor = descriptor::Manager::get().sector().random();
     auto s1 = builder::Sector::create(descriptor);
     auto s2 = builder::Sector::create(descriptor);
     EXPECT_EQ(*s1, *s2);
@@ -170,7 +170,7 @@ TEST(clone, sector)
 
 TEST(clone, starsystem)
 {
-    const auto& descriptor = core::global::get().descriptors().starsystem().random();
+    const auto& descriptor = descriptor::Manager::get().starsystem().random();
     auto s1 = builder::Starsystem::create(descriptor);
     auto s2 = builder::Starsystem::create(descriptor);
     EXPECT_EQ(*s1, *s2);

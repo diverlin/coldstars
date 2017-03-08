@@ -38,7 +38,7 @@ Planet::__createTemplate()
 model::Planet*
 Planet::getNew()
 {
-    const auto& descr = core::global::get().descriptors().planet().random();
+    const auto& descr = descriptor::Manager::get().planet().random();
     return getNew(descr);
 } 
 

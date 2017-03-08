@@ -42,7 +42,7 @@ Bomb*
 BombBuilder::getNew()
 {
     assert(false);
-    //    descriptor::BaseOLD* descriptor = core::global::get().descriptors().getRand(descriptor::TypeOLD::BOMB);
+    //    descriptor::BaseOLD* descriptor = descriptor::Manager::get().getRand(descriptor::TypeOLD::BOMB);
     //    return getNew(descriptor);
 }
 

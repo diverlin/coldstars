@@ -313,6 +313,8 @@ private:
 
     std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);
     void __createSlots(descriptor::Vehicle*);
+
+    bool __manage(Item*);
 };
 
 

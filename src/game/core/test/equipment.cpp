@@ -371,7 +371,7 @@ TEST(equipment, freespace)
         taken_mass += item->descriptor()->mass();
         EXPECT_TRUE(ship.control()->manage(item->control()));
         EXPECT_EQ(ship.control()->space() - taken_mass, ship.control()->freeSpace());
-        EXPECT_EQ(taken_mass, ship.model()->mass());
+        EXPECT_EQ(taken_mass, ship.control()->mass());
     }
 }
 

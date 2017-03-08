@@ -55,7 +55,7 @@ void Galaxy::__createInternals(model::Galaxy* model, descriptor::Galaxy* descr)
     assert(false);
     //    for(const auto& id: descriptor.sectors) {
     //        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-    //        Sector* sector = core::global::get().sectorBuilder().create(core::global::get().descriptors().sector().get(id));
+    //        Sector* sector = core::global::get().sectorBuilder().create(descriptor::Manager::get().sector().get(id));
     //        galaxy->add(sector, center);
     //    }
 }

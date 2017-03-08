@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <ceti/serialization/macro.hpp>
 #include <ceti/type/IdType.hpp>
 #include <ceti/IdGenerator.hpp>
+#include <ceti/serialization/macro.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -30,22 +30,24 @@
 namespace ceti {
 namespace descriptor {
 
-
 class Base
 {
 public:
     Base(int_t type = -1);
     ~Base()=default;
 
-//    std::string data() const;
-
     int_t id() const { return m_id; }
     int_t type() const { return m_type; }
-
 
     void setType(int_t type) { m_type = type; }
 
     //std::string info() const = 0;
+
+private:
+    int_t m_id = -1;
+    int_t m_type = -1;
+
+    static IdGenerator m_idGenerator;
 
 private:
     friend class boost::serialization::access;
@@ -54,10 +56,6 @@ private:
         ar & m_id;
         ar & m_type;
     }
-
-    int_t m_id = -1;
-    int_t m_type = -1;
-    static IdGenerator m_idGenerator;
 };
 
 

@@ -29,7 +29,7 @@ namespace item {
 model::item::Droid*
 Droid::getNew()
 {
-    descriptor::item::Droid* descr = core::global::get().descriptors().droid().random();
+    descriptor::item::Droid* descr = descriptor::Manager::get().droid().random();
     model::item::Droid* model = __createTemplate(descr->id());
     __createInternals(model, descr);
     return model;

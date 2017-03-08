@@ -29,7 +29,7 @@ namespace item {
 model::item::Bak*
 Bak::getNew()
 {
-    descriptor::item::Bak* descr = core::global::get().descriptors().bak().random();
+    descriptor::item::Bak* descr = descriptor::Manager::get().bak().random();
     return getNew(descr);
 }
 

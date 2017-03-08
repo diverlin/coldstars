@@ -41,7 +41,7 @@ namespace builder {
 model::Starsystem*
 Starsystem::create()
 {
-    descriptor::Starsystem* descr = core::global::get().descriptors().starsystem().random();
+    descriptor::Starsystem* descr = descriptor::Manager::get().starsystem().random();
     return create(descr);
 }
 

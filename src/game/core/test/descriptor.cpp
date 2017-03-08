@@ -57,7 +57,7 @@
 
 //TEST(creation,bak)
 //{
-//    descriptor::BaseOLD* descr = core::global::get().descriptors().getRand(descriptor::Type::BAK);
+//    descriptor::BaseOLD* descr = descriptor::Manager::get().getRand(descriptor::Type::BAK);
 //    item::Bak* bak = core::global::get().bakBuilder().getNew( descr );
 
 //    EXPECT_EQ(descr.fuelMax(), bak->fuel());

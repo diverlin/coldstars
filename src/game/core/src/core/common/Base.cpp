@@ -17,15 +17,13 @@
 */
 
 #include "Base.hpp"
+
 #include <ceti/Logger.hpp>
 #include <ceti/StringUtils.hpp>
 
 #include <ceti/serialization/macro.hpp>
 
-//namespace descriptor {
-
-//IdGenerator Base::m_idGenerator;
-
+namespace descriptor {
 
 //Base::Base(int_t type, int_t id)
 //    :
@@ -40,8 +38,7 @@
 //Base::~Base()
 //{}
 
-//} // namespace descriptor
-
+} // namespace descriptor
 
 namespace model {
 

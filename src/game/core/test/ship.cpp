@@ -140,8 +140,47 @@ TEST(ship, criticalDamage)
     EXPECT_EQ(0, ship.model()->armor());
 }
 
+namespace {
+
+void compareSpaceObjectModels(model::SpaceObject* m1, model::SpaceObject* m2)
+{
+    EXPECT_EQ(m1->armor(), m2->armor());
+    EXPECT_EQ(m1->parent(), m2->parent());
+    EXPECT_EQ(m1->starsystem(), m2->starsystem());
+    EXPECT_EQ(m1->place(), m2->place());
+    //EXPECT_EQ(m1->mass(), m2->mass());
+    EXPECT_EQ(m1->givenExpirience(), m2->givenExpirience());
+
+//    EXPECT_EQ(m1->properties(), m2->properties());
+//    EXPECT_EQ(m1->needs(), m2->needs());
+}
+
+void compareVehileModels(model::Vehicle* m1, model::Vehicle* m2)
+{
+    EXPECT_EQ(m1->npc(), m2->npc());
+    EXPECT_EQ(m1->dock(), m2->dock());
+    EXPECT_EQ(m1->land(), m2->land());
+    EXPECT_EQ(m1->items(), m2->items());
+
+//    EXPECT_EQ(m1->properties(), m2->properties());
+//    EXPECT_EQ(m1->needs(), m2->needs());
+
+    compareSpaceObjectModels(m1, m2);
+}
+
+void compareShipModels(model::Ship* m1, model::Ship* m2)
+{
+    EXPECT_EQ(m1->data(), m2->data());
+
+    compareVehileModels(m1, m2);
+}
+
+} // namespace
+
 TEST(ship, clone)
 {
+    descriptor::Manager::get().generate();
+
     test::Ship ship;
     test::item::Scaner item;
 
@@ -150,8 +189,7 @@ TEST(ship, clone)
     model::Ship* model = new model::Ship(ship.model()->data());
     control::Ship* control = new control::Ship(model, ship.descriptor());
 
-    EXPECT_EQ(ship.model()->data(), model->data());
-    EXPECT_EQ(ship.model()->items(), model->items());
+    compareShipModels(ship.model(), model);
 
     EXPECT_EQ(ship.control()->properties().scan, item.descriptor()->scan());
     EXPECT_EQ(ship.control()->properties().scan, control->properties().scan);

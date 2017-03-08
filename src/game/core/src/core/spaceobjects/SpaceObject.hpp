@@ -76,7 +76,7 @@ public:
 
     void setStarSystem(int_t starsystem) { m_starsystem = starsystem; }
     void setPlace(place::type place) { m_place = place;  }
-    void setMass(int mass) { m_mass = mass; }
+//    void setMass(int mass) { m_mass = mass; }
 
     void setIsAlive(bool is_alive) { m_dataLife.is_alive = is_alive; }
     void setIsDying(bool is_dying) { m_dataLife.is_dying = is_dying; }
@@ -95,7 +95,7 @@ public:
     int_t starsystem() const { return m_starsystem; }
     int_t parent() const { return m_parent; }
 
-    int mass()  const { return m_mass; }
+//    int mass()  const { return m_mass; }
     int armor() const { return m_dataLife.armor; }
     place::type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
@@ -110,7 +110,7 @@ private:
     int_t m_parent = NONE;
     int_t m_starsystem = NONE;
     place::type m_place = place::type::NONE;
-    int m_mass = 0;
+//    int m_mass = 0;
     int m_expirienceToGive = 0;
 
 private:
@@ -123,7 +123,7 @@ private:
         ar & m_parent;
         ar & m_starsystem;
         ar & m_place;
-        ar & m_mass;
+//        ar & m_mass;
         ar & m_expirienceToGive;
     }
 };
@@ -153,6 +153,8 @@ public:
     virtual void hit(int);
     void killSilently();
 
+    int mass() const { return m_mass; }
+
     //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
     //        void RenderInfo(const glm::vec2&);
@@ -161,6 +163,7 @@ public:
 private:
     Starsystem* m_starsystem = nullptr;
     model::SpaceObject* m_parent = nullptr;
+    int m_mass = 0;
 
 protected:
     glm::vec3 externalForce;
@@ -171,7 +174,7 @@ protected:
     model::SpaceObject* model() const { return m_model_spaceobject; }
     descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
 
-    void _addMass(int d_mass) { model()->setMass(model()->mass() + d_mass); }
+    void _addMass(int d_mass) { m_mass += d_mass; }
 
     //        InfoTable& GetInfo() { return m_Info; }
 //    [[deprecated("!!! why we need this?")]]
