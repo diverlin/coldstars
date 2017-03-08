@@ -225,6 +225,9 @@ TEST(ship, clone)
     test::item::Droid droid;
     test::item::Radar radar;
     test::item::Protector protector;
+    test::item::Protector protector2;
+    test::item::Lazer lazer;
+    //test::item::Rocket rocket;
 
     test::Ship ship;
     ship.control()->manage(bak.control());
@@ -233,6 +236,9 @@ TEST(ship, clone)
     ship.control()->manage(droid.control());
     ship.control()->manage(radar.control());
     ship.control()->manage(protector.control());
+    ship.control()->load(protector2.control());
+    ship.control()->load(lazer.control());
+    //ship.control()->load(rocket.control());
 
     testShipClone(ship);
 }
