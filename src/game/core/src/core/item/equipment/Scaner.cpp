@@ -17,7 +17,9 @@
 */
 
 #include "Scaner.hpp"
+
 #include <core/descriptor/item/equipment/Scaner.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +32,11 @@
 namespace control {
 namespace item {
 
-Scaner::Scaner(model::item::Scaner* model, descriptor::item::Scaner* descr)
+Scaner::Scaner(model::item::Scaner* model)
     :
-      Equipment(model, descr)
+      Equipment(model, descriptor::Manager::get().scaner(model->descriptor()))
     , m_model_scaner(model)
-    , m_descriptor_scaner(descr)
+    , m_descriptor_scaner(descriptor::Manager::get().scaner(model->descriptor()))
 {}
 
 /* virtual */

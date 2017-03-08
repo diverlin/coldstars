@@ -220,7 +220,7 @@ model::item::Rocket* Rocket::model() const { return m_control->model(); }
 Scaner::Scaner() {
     descriptor::item::Scaner* descr = descriptor::item::genScaner();
     model::item::Scaner* model = builder::item::Scaner::getNew(descr);
-    m_control = new control::item::Scaner(model, descr);
+    m_control = new control::item::Scaner(model);
 }
 Scaner::~Scaner() {
 //    delete m_control->descriptor();
