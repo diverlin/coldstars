@@ -109,8 +109,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     for(int_t id: model->items()) {
         model::Base* base_model = core::global::get().entityManager().get(id);
         model::item::Scaner* model_scaner = static_cast<model::item::Scaner*>(base_model);
-        descriptor::item::Scaner* scaner_descriptor = descriptor::Manager::get().scaner(base_model->descriptor());
-        control::item::Scaner* scaner = new control::item::Scaner(model_scaner, scaner_descriptor);
+        control::item::Scaner* scaner = new control::item::Scaner(model_scaner);
 
         __manage(scaner);
     }
