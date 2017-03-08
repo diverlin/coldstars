@@ -319,6 +319,8 @@ private:
     void __createSlots(descriptor::Vehicle*);
 
     bool __manage(Item*);
+
+    void __actualizeItems();
 };
 
 

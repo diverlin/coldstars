@@ -135,8 +135,8 @@ public:
     item::Rocket* rocket(int_t) const;
 
     void add(BaseOLD*);
-    BaseOLD* getRand(const Type&);
-    BaseOLD* get(int_t);
+    BaseOLD* getRandOLD(const Type&);
+    BaseOLD* getOLD(int_t);
 
     unsigned long int size() const { return m_descriptorsOLD.size(); }
 

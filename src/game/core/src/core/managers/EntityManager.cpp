@@ -216,13 +216,79 @@ EntityManager::get(int_t id) const
     return slice->second;
 }
 
+
 model::item::Scaner*
-EntityManager::scaner(int_t id) const {
-    model::Base* base = get(id);
-    model::item::Scaner* scaner = static_cast<model::item::Scaner*>(base);
-    assert(scaner);
-    return scaner;
+EntityManager::scaner(int_t id) const
+{
+    model::item::Scaner* item = static_cast<model::item::Scaner*>(get(id));
+    assert(item);
+    return item;
 }
+
+model::item::Drive*
+EntityManager::drive(int_t id) const
+{
+    model::item::Drive* item = static_cast<model::item::Drive*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Bak*
+EntityManager::bak(int_t id) const
+{
+    model::item::Bak* item = static_cast<model::item::Bak*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Droid*
+EntityManager::droid(int_t id) const
+{
+    model::item::Droid* item = static_cast<model::item::Droid*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Grapple*
+EntityManager::grapple(int_t id) const
+{
+    model::item::Grapple* item = static_cast<model::item::Grapple*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Lazer*
+EntityManager::lazer(int_t id) const
+{
+    model::item::Lazer* item = static_cast<model::item::Lazer*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Protector*
+EntityManager::protector(int_t id) const
+{
+    model::item::Protector* item = static_cast<model::item::Protector*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Radar*
+EntityManager::radar(int_t id) const
+{
+    model::item::Radar* item = static_cast<model::item::Radar*>(get(id));
+    assert(item);
+    return item;
+}
+
+model::item::Rocket*
+EntityManager::rocket(int_t id) const
+{
+    model::item::Rocket* item = static_cast<model::item::Rocket*>(get(id));
+    assert(item);
+    return item;
+}
+
 
 Player* EntityManager::player() const
 {
