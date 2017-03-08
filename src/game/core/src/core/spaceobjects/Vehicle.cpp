@@ -633,11 +633,9 @@ bool
 Vehicle::__manage(Item* item)
 {
     bool added = __installItem(item);
-
     if (!added) {
         added = __addItemToCargo(item);
     }
-
     if (added) {
         _increaseMass(item->descriptor()->mass());
     }
