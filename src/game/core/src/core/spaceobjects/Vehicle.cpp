@@ -447,7 +447,7 @@ bool Vehicle::__installItem(Item* item)
 #ifdef USE_ARTEFACTS
     case entity::type::ARTEFACT:     { return _installArtefact(item); break; }
 #endif
-    case entity::Type::GOODS:        { return _installGoodsPack(item); break; } // what??
+    case entity::Type::GOODS:        { return _installGoodsPack(item); break; }
     }
     return false;
 }
@@ -534,12 +534,12 @@ bool Vehicle::_checkInstallEquipment(const core::Id& ident)
             return true;
         }
     } else {
-        if (_freeFunctionalSlot(ident)) {
+        if (__freeFunctionalSlot(ident.subtype)) {
             return true;
         }
     }
 
-    if (freeCargoSlot()) {
+    if (__freeCargoSlot()) {
         return true;
     }
 
@@ -583,20 +583,6 @@ Vehicle::__freeFunctionalSlot(const entity::Type& function) const
     return nullptr;
 }
 
-ItemSlot* const
-Vehicle::_freeFunctionalSlot(const core::Id& ident) const
-{
-    assert(false);
-//    for(ItemSlot* slot: m_equipmentSlots) {
-//        if (slot->subtype() == ident.subtype) {
-//            if (slot->isEmpty()) {
-//                return slot;
-//            }
-//        }
-//    }
-    return nullptr;
-}
-
 ItemSlot*
 Vehicle::_freeArtefactSlot() const
 {
@@ -608,7 +594,7 @@ Vehicle::_freeArtefactSlot() const
     return nullptr;
 }
 
-ItemSlot* const Vehicle::freeCargoSlot()
+ItemSlot* Vehicle::__freeCargoSlot()
 {
     for (ItemSlot* slot: m_cargoSlots) {
         if (!slot->item()) {
@@ -633,46 +619,35 @@ ItemSlot* Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype_id)
     return nullptr;
 }
 
-bool
-Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
-{
-    if (load(container->itemSlot()->item())) {
-        container->killSilently();
-        return true;
-    }
+//bool
+//Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
+//{
+//    if (load(container->itemSlot()->item())) {
+//        container->killSilently();
+//        return true;
+//    }
 
-    return false;
-}
+//    return false;
+//}
 
-bool
-Vehicle::load(Item* item)
-{
-    bool added = __addItemToCargo(item);
-    if (added) {
-        __increaseMass(item->descriptor()->mass());
-    }
+//bool
+//Vehicle::__addItemToCargo(Item* item)
+//{
+//    bool added = false;
 
-    return added;
-}
+//    if (item->descriptor()->obType() == entity::Type::GOODS) {
+//        added = _installGoodsPack(item);
+//    }
 
-bool
-Vehicle::__addItemToCargo(Item* item)
-{
-    bool added = false;
+//    if (!added) {
+//        ItemSlot* slot = freeCargoSlot();
+//        if (slot) {
+//            added = slot->insert(item);
+//        }
+//    }
 
-    if (item->descriptor()->obType() == entity::Type::GOODS) {
-        added = _installGoodsPack(item);
-    }
-
-    if (!added) {
-        ItemSlot* slot = freeCargoSlot();
-        if (slot) {
-            added = slot->insert(item);
-        }
-    }
-
-    return added;
-}
+//    return added;
+//}
 
 ItemSlot*
 Vehicle::__itemSlot(int id) const
@@ -705,33 +680,48 @@ Vehicle::__insertItem(ItemSlot* slot, Item* item)
 }
 
 bool
+Vehicle::install(Item* item)
+{
+    if (item->descriptor()->obType() == entity::Type::EQUIPMENT) {
+        ItemSlot* slot = __freeFunctionalSlot(item->descriptor()->slotType());
+        return __insertItem(slot, item);
+    }
+    return false;
+}
+
+bool
+Vehicle::load(Item* item)
+{
+    ItemSlot* slot = __freeCargoSlot();
+    return __insertItem(slot, item);
+}
+
+bool
 Vehicle::manage(Item* item)
 {
-    ItemSlot* slot = nullptr;
-    if (item->descriptor()->obType() == entity::Type::EQUIPMENT) {
-        slot = __freeFunctionalSlot(item->descriptor()->slotType());
+    if (install(item)) {
+        return true;
     }
-    if (!slot) {
-        slot = freeCargoSlot();
+    if (load(item)) {
+        return true;
     }
-
-    return __insertItem(slot, item);
+    return false;
 }
 
 void Vehicle::manageItemsInCargo()
 {
-    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
-        if (m_cargoSlots[i]->item()) {
-            __installItem(m_cargoSlots[i]->item());
+    for (ItemSlot* slot: m_cargoSlots) {
+        if (slot->item()) {
+            __installItem(slot->item());
         }
     }
 }
 
 void Vehicle::sellItemsInCargo()
 {
-    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
-        if (m_cargoSlots[i]->item()) {
-            sellItem(m_cargoSlots[i]->item());
+    for (ItemSlot* slot: m_cargoSlots) {
+        if (slot->item()) {
+            sellItem(slot->item());
         }
     }
 }
@@ -767,13 +757,10 @@ bool Vehicle::sellItem(Item* item)
 
 bool Vehicle::buyItem(Item* item)
 {
-    if (load(item) == true)
-    {
+    if (load(item)) {
         m_npc->increaseCredits(-item->descriptor()->price());
-
         return true;
     }
-
     return false;
 }
 

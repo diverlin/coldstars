@@ -126,6 +126,7 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
+    bool install(Item*);
     bool load(Item*);
     bool manage(Item*);
 
@@ -141,7 +142,7 @@ public:
     [[deprecated("move to ext")]]
     bool buyItem(Item*);
 
-    bool unpackContainerItemToCargoSlot(control::Container*);
+    //bool unpackContainerItemToCargoSlot(control::Container*);
 
     int freeSpace() const;
     int space() const;
@@ -168,9 +169,8 @@ public:
     std::vector<ItemSlot*> cargoSlots() const { return m_cargoSlots; }
 
 public:
-    control::Npc* const npc() const { return m_npc; }
+    control::Npc* npc() const { return m_npc; }
 
-    ItemSlot* const freeCargoSlot();
     GoodsPack* goodsPack() const;
 
     void UpdateSpecialAction();
@@ -240,13 +240,8 @@ public:
     int criticalDamage() const;
 
 private:
-    bool __installItem(Item*);
-    bool __installEquipment(Item*);
-    ItemSlot* __freeFunctionalSlot(const entity::Type&) const;
-
-
     void __updateFreeSpace();
-    bool __addItemToCargo(Item*);
+//    bool __addItemToCargo(Item*);
 
 protected:
     model::Vehicle* m_model_vehicle = nullptr;
@@ -313,7 +308,6 @@ private:
 
     model::Container* __wrapItemToContainer(Item*);
     bool _checkInstallEquipment(const core::Id&);
-    ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 
     std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);
     void __createSlots(descriptor::Vehicle*);
@@ -321,6 +315,11 @@ private:
     bool __manage(Item*);
     bool __insertItem(ItemSlot*, Item*);
     ItemSlot* __itemSlot(int) const;
+    ItemSlot* __freeCargoSlot();
+
+    bool __installItem(Item*);
+    bool __installEquipment(Item*);
+    ItemSlot* __freeFunctionalSlot(const entity::Type&) const;
 
     bool m_blockModel = false;
     void __blockModel() { m_blockModel = true; }
