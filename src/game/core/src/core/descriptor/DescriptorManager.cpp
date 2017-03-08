@@ -34,6 +34,15 @@ const std::string descriptor_meshes_fname = "mesh_descriptors.txt";
 const std::string descriptor_materials_fname = "material_descriptors.txt";
 } // namespace
 
+IdGenerator Manager::m_idGenerator;
+
+Manager&
+Manager::get()
+{
+    static Manager instance;
+    return instance;
+}
+
 Manager::Manager()
     :
       m_mesh(ceti::Collector<Mesh>(descriptor_meshes_fname))
@@ -71,10 +80,10 @@ void Manager::add(Ship* ship) {
 void Manager::add(SpaceStation* spacestation) {
     m_spacestation.add(spacestation);
 }
-void Manager::add( Satellite* satellite) {
+void Manager::add(Satellite* satellite) {
     m_satellite.add(satellite);
 }
-void Manager::add( Container* container) {
+void Manager::add(Container* container) {
     m_container.add(container);
 }
 void Manager::add(item::Drive* drive) {
@@ -119,7 +128,7 @@ Manager::add(BaseOLD* descr)
     {
         const auto it = m_descriptorsOLD.find(id);
         if (it != m_descriptorsOLD.end()) {
-            throw std::runtime_error("descriptor with that id already exist");
+            throw std::runtime_error("descriptorOLD with that id already exist");
         }
         m_descriptorsOLD.insert(std::make_pair(id, descr));
     }
@@ -146,6 +155,7 @@ Manager::add(Base* descr)
     {
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
+            assert(false);
             throw std::runtime_error("descriptor with that id already exist");
         }
         m_descriptors.insert(std::make_pair(id, descr));
@@ -161,6 +171,17 @@ Manager::add(Base* descr)
             m_descriptorsTypes[type] = vector;
         }
     }
+}
+
+Base*
+Manager::get(int_t id) const
+{
+    const auto it = m_descriptors.find(id);
+    if (it == m_descriptors.end()) {
+        assert(false);
+        throw std::runtime_error("Base* Manager::get descriptor id doesn't exist");
+    }
+    return it->second;
 }
 
 BaseOLD*
@@ -181,7 +202,7 @@ Manager::get(int_t id)
     if (it != m_descriptorsOLD.end()) {
         return it->second;
     }
-    throw std::runtime_error("descriptor id doesn't exist");
+    throw std::runtime_error("BaseOLD* Manager::get descriptor id doesn't exist");
 }
 
 Base*
@@ -189,7 +210,7 @@ Manager::rand(Type type) const
 {
     std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
     if (it == m_descriptorsTypes.end()) {
-        throw std::runtime_error("descriptor id doesn't exist");
+        throw std::runtime_error("Base* Manager::randdescriptor type doesn't exist");
     }
     Base* descr = meti::getRand(it->second);
     assert(descr);
@@ -203,6 +224,16 @@ Manager::randScaner() const
     assert(descr);
     return descr;
 }
+
+item::Scaner*
+Manager::scaner(int_t id) const
+{
+    Base* base = get(id);
+    item::Scaner* descr = static_cast<item::Scaner*>(base);
+    assert(descr);
+    return descr;
+}
+
 
 void
 Manager::__save()
@@ -248,6 +279,12 @@ Manager::__clear()
     m_descriptorsTypesOLD.clear();
 }
 
+int_t
+Manager::nextId() const
+{
+    return m_idGenerator.nextId();
+}
+
 void
 Manager::generate()
 {
@@ -265,7 +302,7 @@ Manager::generate()
         add(item::getNewGrapple());
         add(item::getNewProtector());
         add(item::getNewRadar());
-        add(item::getNewScaner());
+        item::genScaner();
         add(item::getNewLazer());
         add(item::getNewRocket());
         add(getNewBomb());
@@ -280,7 +317,7 @@ Manager::generate()
         add(getNewStar());
         add(getNewPlanet());
         add(getNewAsteroid());
-        add(getNewContainer());
+        //add(getNewContainer());
     }
 
     // world

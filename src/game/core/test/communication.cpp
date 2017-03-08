@@ -50,7 +50,7 @@
 TEST(communication, create_ship)
 {
     assert(false);
-//    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+//    auto descriptor = descriptor::Manager::get().getRand(descriptor::Type::VEHICLE);
 //    int_t obj_id = core::global::get().idGenerator().nextId();
 //    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
@@ -63,7 +63,7 @@ TEST(communication, create_ship)
 TEST(communication, create_bak)
 {
     assert(false);
-//    auto descriptor = core::global::get().descriptors().getRand(descriptor::Type::BAK);
+//    auto descriptor = descriptor::Manager::get().getRand(descriptor::Type::BAK);
 //    int_t obj_id = core::global::get().idGenerator().nextId();
 //    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
@@ -81,7 +81,7 @@ TEST(communication, inject_ship)
 
 //Bomb* getNewBomb(int damage, int radius)
 //{
-//    descriptor::Base* descriptor = core::global::get().descriptors().getRand(descriptor::Type::BOMB);
+//    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::BOMB);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
 //    Bomb* bomb = static_cast<Bomb*>(core::global::get().entityManager().get(descriptor.id()));
@@ -104,7 +104,7 @@ TEST(communication, inject_ship)
 
 TEST(comm, new_starsystem)
 {
-    //    descriptor::Base* descriptor = core::global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+    //    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::STARSYSTEM);
     //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     //    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));

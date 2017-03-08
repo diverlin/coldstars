@@ -39,6 +39,8 @@
 #include <core/types/TextureTypes.hpp>
 #include <core/item/Item.hpp>
 
+#include <core/descriptor/DescriptorManager.hpp>
+
 #include <meti/RandUtils.hpp>
 
 #include <ceti/IdGenerator.hpp>
@@ -52,10 +54,10 @@ glm::vec3 randDirection() {
     return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
 }
 
+// why we need this, it's ugly
 void resolveId(descriptor::Base* descr) {
     if (descr->id() == NONE) {
-        int_t id = core::global::get().idGenerator().nextId();
-        descr->setId(id);
+        descr->setId(descriptor::Manager::get().nextId());
     }
 }
 
@@ -105,14 +107,14 @@ getNewStarsystem(int race)
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::type& type) {
-    auto& collector = core::global::get().descriptors().mesh();
+    auto& collector = descriptor::Manager::get().mesh();
     descriptor::Mesh* descriptor = collector.random(int_t(type));
     assert(descriptor->id() != NONE);
     return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const texture::type& type) {
-    auto& collector = core::global::get().descriptors().material();
+    auto& collector = descriptor::Manager::get().material();
     descriptor::Material* descriptor = collector.random(int_t(type));
     assert(descriptor->id() != NONE);
     return descriptor->id();
@@ -1043,7 +1045,7 @@ getNewRocket(int race, int tech_level)
 }
 
 Scaner*
-getNewScaner(int race, int tech_level)
+genScaner(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -1091,6 +1093,8 @@ getNewScaner(int race, int tech_level)
     descr->setScan(scan);
 
     resolveId(descr);
+
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }

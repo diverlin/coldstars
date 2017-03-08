@@ -89,7 +89,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <core/managers/EntityManager.hpp>
-
+#include <core/descriptor/DescriptorManager.hpp>
 
 namespace control {
 
@@ -107,11 +107,13 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
     __createSlots(descr);
 
     for(int_t id: model->items()) {
-        model::Base* item_base_model = core::global::get().entityManager().get(id);
-//        descriptor::Base* item_base_descriptor = core::global::get().descriptors().
+        model::Base* base_model = core::global::get().entityManager().get(id);
+        model::item::Scaner* model_scaner = static_cast<model::item::Scaner*>(base_model);
+        descriptor::item::Scaner* scaner_descriptor = descriptor::Manager::get().scaner(base_model->descriptor());
+        control::item::Scaner* scaner = new control::item::Scaner(model_scaner, scaner_descriptor);
 
+        __manage(scaner);
     }
-
 
     _updatePropProtection();
     __updateFreeSpace();
@@ -628,7 +630,7 @@ Vehicle::__addItemToCargo(Item* item)
 }
 
 bool
-Vehicle::manage(Item* item)
+Vehicle::__manage(Item* item)
 {
     bool added = __installItem(item);
 
@@ -641,6 +643,17 @@ Vehicle::manage(Item* item)
     }
 
     return added;
+}
+
+bool
+Vehicle::manage(Item* item)
+{
+    if (__manage(item)) {
+        model()->addItem(item->model()->id());
+        return true;
+    }
+
+    return false;
 }
 
 void Vehicle::manageItemsInCargo()
@@ -1061,7 +1074,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 void
 Vehicle::__updateFreeSpace() {
-    model()->properties().free_space = descriptor()->space() - model()->mass();
+    model()->properties().free_space = descriptor()->space() - mass();
 }
 
 void Vehicle::_increaseMass(int d_mass)
@@ -1078,7 +1091,7 @@ void Vehicle::_decreaseMass(int d_mass)
     //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
 
     _addMass(-d_mass);
-    model()->properties().free_space = descriptor()->space() - model()->mass();
+    model()->properties().free_space = descriptor()->space() - mass();
     _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -1093,7 +1106,7 @@ void Vehicle::_updatePropSpeed()
         actual_speed += slot->driveEquipment()->model()->speed();
     }
 
-    actual_speed -= model()->mass() * MASS_DECREASE_SPEED_RATE;
+    actual_speed -= mass() * MASS_DECREASE_SPEED_RATE;
     if (actual_speed > 0) {
         if (model()->properties().artefact_gravity > 0) {
             speed = (1.0 + model()->properties().artefact_gravity/100.0)*actual_speed;

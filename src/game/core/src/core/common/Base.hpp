@@ -23,7 +23,6 @@
 
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
-//#include <ceti/IdGenerator.hpp>
 #include <ceti/descriptor/BaseView.hpp>
 
 #include <boost/property_tree/ptree.hpp> // remove this

@@ -29,6 +29,6 @@
 
 TEST(creation, planet)
 {
-    descriptor::Starsystem* descr = core::global::get().descriptors().starsystem().random();
+    descriptor::Starsystem* descr = descriptor::Manager::get().starsystem().random();
     model::Starsystem* model = builder::Starsystem::create(descr);
 }

@@ -25,7 +25,7 @@
 
 namespace model {
 
-class Ship : public model::Vehicle
+class Ship : public Vehicle
 {
 public:
     Ship() = default;
@@ -33,14 +33,19 @@ public:
     Ship(const std::string& data);
     std::string data() const;
 
+//    std::string info() const {
+//        std::string result = "Ship descriptor:\n";
+//        result += Vehicle::info();
+//        return result;
+//    }
+
 private:
     // ...
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Vehicle>(*this);
         //ar & ..;
     }

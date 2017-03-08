@@ -33,6 +33,12 @@ public:
     ~Ship() = default;
     std::string data() const;
 
+    std::string info() const {
+        std::string result = "Ship descriptor:\n";
+        result += Vehicle::info();
+        return result;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

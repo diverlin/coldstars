@@ -30,7 +30,7 @@ namespace item {
 model::item::Scaner*
 Scaner::getNew()
 {
-    descriptor::item::Scaner* descr = core::global::get().descriptors().randScaner();
+    descriptor::item::Scaner* descr = descriptor::Manager::get().randScaner();
     model::item::Scaner* model = __createTemplate(descr->id());
     __createInternals(model, descr);
 

@@ -126,9 +126,7 @@ global::global()
     , m_npcBuilder(new NpcBuilder)
     , m_blackHoleBuilder(new builder::BlackHole)
     , m_containerBuilder(new builder::Container)
-    , m_rocketBulletBuilder(new builder::Rocket)
-    , m_descriptors(new descriptor::Manager)
-{
+    , m_rocketBulletBuilder(new builder::Rocket){
 }
 
 global::~global()

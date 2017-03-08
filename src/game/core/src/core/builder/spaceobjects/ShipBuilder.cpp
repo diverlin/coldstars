@@ -30,7 +30,7 @@ namespace builder {
 model::Ship*
 Ship::getNew(bool full_equiped)
 {
-    const auto& descr = core::global::get().descriptors().ship().random();
+    const auto& descr = descriptor::Manager::get().ship().random();
     model::Ship* ship =  getNew(descr);
     if (full_equiped) {
         assert(false);
@@ -45,7 +45,7 @@ Ship::getNew(descriptor::Ship* descriptor)
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
 //    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
-//        descriptor = core::global::get().descriptors().get(descr->descriptor());
+//        descriptor = descriptor::Manager::get().get(descr->descriptor());
 //        id = descr->objId();
 //    }
 

@@ -73,6 +73,7 @@ public:
     [[warning("do we need this? using dock will be sufficient probably")]]
     int_t land() const { return m_land; }
 
+    void addItem(int_t id) { m_items.push_back(id); }
     std::vector<int_t> items() const { return m_items; }
 
 //    int_t radarSlot() const { return m_radar_slot; }
@@ -88,8 +89,17 @@ public:
     VehiclePropetries& properties() { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
 
-    [[warning("move out to control::")]]
-    int_t descriptor() { return m_descriptor; }
+//    std::string info() const {
+//        std::string result = "Vehicle descriptor:\n";
+//        result += std::string(" npc=") + std::to_string(int(m_npc)) + "\n";
+//        result += std::string(" dock=") + std::to_string(int(m_dock)) + "\n";
+//        result += std::string(" land=") + std::to_string(int(m_land)) + "\n";
+//        result += std::string(" items=") + std::to_string(m_items) + "\n";
+
+//        result += SpaceObject::info();
+
+//        return result;
+//    }
 
 private:
     int_t m_npc = NONE;
@@ -113,7 +123,6 @@ private:
 
     VehiclePropetries m_properties;
     VehicleNeeds m_needs;
-    int_t m_descriptor;
 
 private:
     friend class boost::serialization::access;
@@ -126,7 +135,6 @@ private:
         ar & m_items;
 //        ar & m_properties;
 //        ar & m_needs;
-        ar & m_descriptor;
     }
 };
 

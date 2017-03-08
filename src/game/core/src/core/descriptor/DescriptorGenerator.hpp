@@ -73,7 +73,7 @@ Lazer* getNewLazer(int race = NONE, int tech_level = NONE);
 Protector* getNewProtector(int race = NONE, int tech_level = NONE);
 Radar* getNewRadar(int race = NONE, int tech_level = NONE);
 Rocket* getNewRocket(int race = NONE, int tech_level = NONE);
-Scaner* getNewScaner(int race = NONE, int tech_level = NONE);
+Scaner* genScaner(int race = NONE, int tech_level = NONE);
 } // namespace item
 
 descriptor::BaseOLD* getNewBomb(int damage = NONE, int radius = NONE);

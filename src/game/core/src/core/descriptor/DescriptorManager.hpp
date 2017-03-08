@@ -62,7 +62,7 @@ public:
         if (it == m_descriptors.end()) {
             m_descriptors.insert(std::make_pair(descr->id(), descr));
         } else {
-            throw std::runtime_error("descriptor with that id already exist");
+            throw std::runtime_error("MManager descriptor with that id already exist");
         }
     }
 
@@ -72,7 +72,7 @@ public:
         if (it != m_descriptors.end()) {
             return it->second;
         } else {
-            throw std::runtime_error("descriptor id doesn't exist");
+            throw std::runtime_error("T* get descriptor id doesn't exist");
         }
     }
 
@@ -99,16 +99,23 @@ private:
     std::map<int_t, T*> m_descriptors;
 };
 
+
 class Manager
 {
-public:
     Manager();
+    Manager(const Manager&) = delete;
     ~Manager() = default;
+    Manager& operator=(const Manager&) = delete;
+
+public:
+    static Manager& get();
 
     void add(Base*);
+    Base* get(int_t) const;
     Base* rand(Type) const;
 
     item::Scaner* randScaner() const;
+    item::Scaner* scaner(int_t) const;
 
     void add(BaseOLD*);
     BaseOLD* getRand(const Type&);
@@ -134,7 +141,6 @@ public:
     void add(item::Protector*);
     void add(item::Radar*);
     void add(item::Rocket*);
-//    void add(item::Scaner*);
     void add(Mesh*);
     void add(Material*);
 
@@ -165,6 +171,8 @@ public:
     const ceti::Collector<Material>& material() const { return m_material; }
 
     void generate();
+    [[warning("remove")]]
+    int_t nextId() const;
 
 private:
     MManager<Galaxy> m_galaxy;
@@ -185,7 +193,6 @@ private:
     MManager<item::Protector> m_protector;
     MManager<item::Radar> m_radar;
     MManager<item::Rocket> m_rocket;
-    MManager<item::Scaner> m_scaner;
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 
@@ -198,6 +205,8 @@ private:
     void __clear();
     void __save();
     void __load();
+
+    static IdGenerator m_idGenerator;
 }; 
 
 } // namespace descriptor

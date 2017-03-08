@@ -31,8 +31,8 @@ namespace model {
 
 World::World()
 {
-    auto descriptor = core::global::get().descriptors().galaxy().random();
-   core::global::get().god().createWorld(descriptor);
+    auto descriptor = descriptor::Manager::get().galaxy().random();
+    core::global::get().god().createWorld(descriptor);
 }
 
 World::~World()

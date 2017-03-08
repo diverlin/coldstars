@@ -147,8 +147,6 @@ public:
     builder::Container& containerBuilder() { return *m_containerBuilder; }
     builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
 
-    descriptor::Manager& descriptors() { return *m_descriptors; }
-
 private:
     global();
     global(const global&) = delete;
@@ -205,8 +203,6 @@ private:
     builder::BlackHole* m_blackHoleBuilder = nullptr;
     builder::Container* m_containerBuilder = nullptr;
     builder::Rocket* m_rocketBulletBuilder = nullptr;
-
-    descriptor::Manager* m_descriptors = nullptr;
 };
 
 } // namespace core
