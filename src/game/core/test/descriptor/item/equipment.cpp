@@ -53,7 +53,7 @@ void compareEquipment(const descriptor::Equipment& descr, const descriptor::Equi
 } // namespace
 
 TEST(descriptor, bak) {
-    descriptor::item::Bak descr = *descriptor::item::getNewBak();
+    descriptor::item::Bak descr = *descriptor::item::genBak();
 
     EXPECT_EQ(descr.type(), descriptor::Type::BAK_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -73,7 +73,7 @@ TEST(descriptor, bak) {
 }
 
 TEST(descriptor, drive) {
-    descriptor::item::Drive descr = *descriptor::item::getNewDrive();
+    descriptor::item::Drive descr = *descriptor::item::genDrive();
 
     EXPECT_EQ(descr.type(), descriptor::Type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -94,7 +94,7 @@ TEST(descriptor, drive) {
 }
 
 TEST(descriptor, droid) {
-    descriptor::item::Droid descr = *descriptor::item::getNewDroid();
+    descriptor::item::Droid descr = *descriptor::item::genDroid();
 
     EXPECT_EQ(descr.type(), descriptor::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -114,7 +114,7 @@ TEST(descriptor, droid) {
 }
 
 TEST(descriptor, grapple) {
-    descriptor::item::Grapple descr = *descriptor::item::getNewGrapple();
+    descriptor::item::Grapple descr = *descriptor::item::genGrapple();
 
     EXPECT_EQ(descr.type(), descriptor::Type::GRAPPLE_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -136,7 +136,7 @@ TEST(descriptor, grapple) {
 }
 
 TEST(descriptor, lazer) {
-    descriptor::item::Lazer descr = *descriptor::item::getNewLazer();
+    descriptor::item::Lazer descr = *descriptor::item::genLazer();
 
     EXPECT_EQ(descr.type(), descriptor::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -157,7 +157,7 @@ TEST(descriptor, lazer) {
 }
 
 TEST(descriptor, protector) {
-    descriptor::item::Protector descr = *descriptor::item::getNewProtector();
+    descriptor::item::Protector descr = *descriptor::item::genProtector();
 
     EXPECT_EQ(descr.type(), descriptor::Type::PROTECTOR_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -177,7 +177,7 @@ TEST(descriptor, protector) {
 }
 
 TEST(descriptor, radar) {
-    descriptor::item::Radar descr = *descriptor::item::getNewRadar();
+    descriptor::item::Radar descr = *descriptor::item::genRadar();
 
     EXPECT_EQ(descr.type(), descriptor::Type::RADAR_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);
@@ -197,7 +197,7 @@ TEST(descriptor, radar) {
 }
 
 TEST(descriptor, rocket) {
-    descriptor::item::Rocket descr = *descriptor::item::getNewRocket();
+    descriptor::item::Rocket descr = *descriptor::item::genRocket();
 
     EXPECT_EQ(descr.type(), descriptor::Type::ROCKET_EQUIPMENT);
     EXPECT_EQ(descr.obType(), entity::type::EQUIPMENT);

@@ -596,7 +596,7 @@ void addItemCommonFields(descriptor::BaseOLD* descr,
 namespace item {
 
 Bak*
-getNewBak(int race, int tech_level)
+genBak(int race, int tech_level)
 {
     if (race == NONE) {
         race = int (race::type::R0);
@@ -644,14 +644,14 @@ getNewBak(int race, int tech_level)
     // descriptor::item::Bak
     descr->setFuel(fuel);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 
 Drive*
-getNewDrive(int race, int tech_level)
+genDrive(int race, int tech_level)
 {
     if (race == NONE) {
         race = int (race::type::R0);
@@ -702,13 +702,13 @@ getNewDrive(int race, int tech_level)
     descr->setSpeed(speed);
     descr->setHyper(hyper);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 Droid*
-getNewDroid(int race, int tech_level)
+genDroid(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -754,14 +754,14 @@ getNewDroid(int race, int tech_level)
     // descriptor::item::Droid
     descr->setRepair(repair);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 
 Grapple*
-getNewGrapple(int race, int tech_level)
+genGrapple(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -817,13 +817,13 @@ getNewGrapple(int race, int tech_level)
     descr->setRadius(radius);
     descr->setSpeed(speed);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 Lazer*
-getNewLazer(int race, int tech_level)
+genLazer(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -873,13 +873,13 @@ getNewLazer(int race, int tech_level)
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 Protector*
-getNewProtector(int race, int tech_level)
+genProtector(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -926,13 +926,13 @@ getNewProtector(int race, int tech_level)
     // descriptor::item::Protector
     descr->setProtection(protection);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 Radar*
-getNewRadar(int race, int tech_level)
+genRadar(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -978,13 +978,13 @@ getNewRadar(int race, int tech_level)
     // descriptor::item::Radar
     descr->setRadius(radius);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 Rocket*
-getNewRocket(int race, int tech_level)
+genRocket(int race, int tech_level)
 {
     if (race == NONE) {
         race = int(race::type::R0);
@@ -1039,7 +1039,7 @@ getNewRocket(int race, int tech_level)
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
@@ -1094,7 +1094,7 @@ genScaner(int race, int tech_level)
 
     resolveId(descr);
 
-    descriptor::Manager::get().add(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }

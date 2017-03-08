@@ -98,7 +98,7 @@ namespace item {
 
 //////
 Bak::Bak() {
-    descriptor::item::Bak* descr = descriptor::item::getNewBak();
+    descriptor::item::Bak* descr = descriptor::item::genBak();
     model::item::Bak* model = builder::item::Bak::getNew(descr);
     m_control = new control::item::Bak(model, descr);
 }
@@ -113,7 +113,7 @@ model::item::Bak* Bak::model() const { return m_control->model(); }
 
 //////
 Drive::Drive() {
-    descriptor::item::Drive* descr = descriptor::item::getNewDrive();
+    descriptor::item::Drive* descr = descriptor::item::genDrive();
     model::item::Drive* model = builder::item::Drive::getNew(descr);
     m_control = new control::item::Drive(model, descr);
 }
@@ -128,7 +128,7 @@ model::item::Drive* Drive::model() const { return m_control->model(); }
 
 //////
 Droid::Droid() {
-    descriptor::item::Droid* descr = descriptor::item::getNewDroid();
+    descriptor::item::Droid* descr = descriptor::item::genDroid();
     model::item::Droid* model = builder::item::Droid::getNew(descr);
     m_control = new control::item::Droid(model, descr);
 }
@@ -143,7 +143,7 @@ model::item::Droid* Droid::model() const { return m_control->model(); }
 
 //////
 Grapple::Grapple() {
-    descriptor::item::Grapple* descr = descriptor::item::getNewGrapple();
+    descriptor::item::Grapple* descr = descriptor::item::genGrapple();
     model::item::Grapple* model = builder::item::Grapple::getNew(descr);
     m_control = new control::item::Grapple(model, descr);
 }
@@ -158,7 +158,7 @@ model::item::Grapple* Grapple::model() const { return m_control->model(); }
 
 //////
 Lazer::Lazer() {
-    descriptor::item::Lazer* descr = descriptor::item::getNewLazer();
+    descriptor::item::Lazer* descr = descriptor::item::genLazer();
     model::item::Lazer* model = builder::item::Lazer::getNew(descr);
     m_control = new control::item::Lazer(model, descr);
 }
@@ -173,7 +173,7 @@ model::item::Lazer* Lazer::model() const { return m_control->model(); }
 
 //////
 Protector::Protector() {
-    descriptor::item::Protector* descr = descriptor::item::getNewProtector();
+    descriptor::item::Protector* descr = descriptor::item::genProtector();
     model::item::Protector* model = builder::item::Protector::getNew(descr);
     m_control = new control::item::Protector(model, descr);
 }
@@ -188,7 +188,7 @@ model::item::Protector* Protector::model() const { return m_control->model(); }
 
 //////
 Radar::Radar() {
-    descriptor::item::Radar* descr = descriptor::item::getNewRadar();
+    descriptor::item::Radar* descr = descriptor::item::genRadar();
     model::item::Radar* model = builder::item::Radar::getNew(descr);
     m_control = new control::item::Radar(model, descr);
 }
@@ -203,7 +203,7 @@ model::item::Radar* Radar::model() const { return m_control->model(); }
 
 //////
 Rocket::Rocket() {
-    descriptor::item::Rocket* descr = descriptor::item::getNewRocket();
+    descriptor::item::Rocket* descr = descriptor::item::genRocket();
     model::item::Rocket* model = builder::item::Rocket::getNew(descr);
     m_control = new control::item::Rocket(model, descr);
 }

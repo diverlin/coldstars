@@ -65,14 +65,14 @@ descriptor::Container* getNewContainer();
 
 /* items */
 namespace item {
-Bak* getNewBak(int race = NONE, int tech_level = NONE);
-Drive* getNewDrive(int race = NONE, int tech_level = NONE);
-Droid* getNewDroid(int race = NONE, int tech_level = NONE);
-Grapple* getNewGrapple(int race = NONE, int tech_level = NONE);
-Lazer* getNewLazer(int race = NONE, int tech_level = NONE);
-Protector* getNewProtector(int race = NONE, int tech_level = NONE);
-Radar* getNewRadar(int race = NONE, int tech_level = NONE);
-Rocket* getNewRocket(int race = NONE, int tech_level = NONE);
+Bak* genBak(int race = NONE, int tech_level = NONE);
+Drive* genDrive(int race = NONE, int tech_level = NONE);
+Droid* genDroid(int race = NONE, int tech_level = NONE);
+Grapple* genGrapple(int race = NONE, int tech_level = NONE);
+Lazer* genLazer(int race = NONE, int tech_level = NONE);
+Protector* genProtector(int race = NONE, int tech_level = NONE);
+Radar* genRadar(int race = NONE, int tech_level = NONE);
+Rocket* genRocket(int race = NONE, int tech_level = NONE);
 Scaner* genScaner(int race = NONE, int tech_level = NONE);
 } // namespace item
 
