@@ -252,9 +252,6 @@ protected:
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
     model::Vehicle* model() const { return m_model_vehicle; }
 
-    [[warning("make it private")]]
-    std::vector<ItemSlot*> m_slots;
-
     ItemSlot* _freeArtefactSlot() const;
     ItemSlot* _cargoSlotWithGoods(place::type);
 
@@ -306,6 +303,8 @@ private:
     WeaponComplex     m_weapon_complex;
     DriveComplex      m_drive_complex;
     ProtectionComplex m_protector_complex;
+
+    std::vector<ItemSlot*> m_slots;
 
     [[deprecated("use predetermentistic way")]]
 //    void __dropRandomItemToSpace();
