@@ -21,46 +21,6 @@
 
 #include <core/spaceobjects/SpaceObject.hpp>
 
-#include <core/parts/WeaponComplex.hpp>
-#include <core/parts/DriveComplex.hpp>
-#include <core/parts/ProtectionComplex.hpp>
-
-#include <core/descriptor/VehicleDescriptor.hpp>
-#include <core/struct/VehiclePropetries.hpp>
-#include <core/struct/VehicleNeeds.hpp>
-
-#include <core/types/StatusTypes.hpp>
-
-class VehicleSlot;
-class Land; 
-class GoodsPack;
-
-namespace model {
-class Container;
-class Starsystem;
-class Item;
-} // namespace model
-
-namespace control {
-class Container;
-class Npc;
-class Item;
-} //namespace control
-
-class Equipment;
-class BaseParticleSystem;
-class ShockWaveEffect;
-
-//struct UnresolvedDataVehicle
-//{
-//    int drive_complex_target_id;
-//    int drive_complex_action_id;
-
-//    int starsystem_hyper_id;
-//    int parent_vehicleslot_id;
-//    int land_id;
-//};
-
 namespace model {
 
 class Vehicle : public SpaceObject {
@@ -76,53 +36,12 @@ public:
     void addItem(int_t id) { m_items.push_back(id); }
     std::vector<int_t> items() const { return m_items; }
 
-//    int_t radarSlot() const { return m_radar_slot; }
-//    int_t scanerSlot() const { return m_scaner_slot; }
-
-//#ifdef USE_EXTRA_EQUIPMENT
-//    int_t energizerSlot() const { return m_energizer_slot; }
-//    int_t freezerSlot() const { return m_freezer_slot; }
-//#endif // USE_EXTRA_EQUIPMENT
-//    int_t grappleSlot() const { return m_grapple_slot; }
-//    int_t droidSlot() const { return m_droid_slot; }
-
-    VehiclePropetries& properties() { return m_properties; }
-    VehicleNeeds& needs() { return m_needs; }
-
-//    std::string info() const {
-//        std::string result = "Vehicle descriptor:\n";
-//        result += std::string(" npc=") + std::to_string(int(m_npc)) + "\n";
-//        result += std::string(" dock=") + std::to_string(int(m_dock)) + "\n";
-//        result += std::string(" land=") + std::to_string(int(m_land)) + "\n";
-//        result += std::string(" items=") + std::to_string(m_items) + "\n";
-
-//        result += SpaceObject::info();
-
-//        return result;
-//    }
-
 private:
     int_t m_npc = NONE;
     int_t m_dock = NONE;
     int_t m_land = NONE;
 
     std::vector<int_t> m_items;
-
-//    int_t m_radar_slot = NONE;
-//    int_t m_scaner_slot = NONE;
-//#ifdef USE_EXTRA_EQUIPMENT
-//    int_t m_energizer_slot = NONE;
-//    int_t m_freezer_slot = NONE;
-//#endif // USE_EXTRA_EQUIPMENT
-//    int_t m_grapple_slot = NONE;
-//    int_t m_droid_slot = NONE;
-
-//    std::vector<int_t> m_equipment_slots;
-//    std::vector<int_t> m_artefact_slots;
-//    std::vector<int_t> m_cargo_slots;
-
-    VehiclePropetries m_properties;
-    VehicleNeeds m_needs;
 
 private:
     friend class boost::serialization::access;
@@ -133,8 +52,6 @@ private:
         ar & m_dock;
         ar & m_land;
         ar & m_items;
-//        ar & m_properties;
-//        ar & m_needs;
     }
 };
 
