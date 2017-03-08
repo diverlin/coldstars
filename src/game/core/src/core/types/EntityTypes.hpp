@@ -24,7 +24,7 @@
 namespace entity
 {
 
-    enum class category {
+    enum class Category {
         NONE=0,
         /** */
 
