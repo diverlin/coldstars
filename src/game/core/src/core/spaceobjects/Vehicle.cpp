@@ -131,49 +131,49 @@ Vehicle::__actualizeItems()
     for(int_t id: model()->items()) {
         model::Base* model_base = core::global::get().entityManager().get(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor());
-        assert(descriptor_base->obType() == entity::type::EQUIPMENT);
+        assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obSubType()) {
-        case entity::type::SCANER_EQUIPMENT: {
+        case entity::Type::SCANER_EQUIPMENT: {
             control::item::Scaner* item = new control::item::Scaner(core::global::get().entityManager().scaner(id));
             __manage(item);
             break;
         }
-        case entity::type::DRIVE_EQUIPMENT: {
+        case entity::Type::DRIVE_EQUIPMENT: {
             control::item::Drive* item = new control::item::Drive(core::global::get().entityManager().drive(id));
             __manage(item);
             break;
         }
-        case entity::type::BAK_EQUIPMENT: {
+        case entity::Type::BAK_EQUIPMENT: {
             control::item::Bak* item = new control::item::Bak(core::global::get().entityManager().bak(id));
             __manage(item);
             break;
         }
-        case entity::type::DROID_EQUIPMENT: {
+        case entity::Type::DROID_EQUIPMENT: {
             control::item::Droid* item = new control::item::Droid(core::global::get().entityManager().droid(id));
             __manage(item);
             break;
         }
-        case entity::type::GRAPPLE_EQUIPMENT: {
+        case entity::Type::GRAPPLE_EQUIPMENT: {
             control::item::Grapple* item = new control::item::Grapple(core::global::get().entityManager().grapple(id));
             __manage(item);
             break;
         }
-        case entity::type::LAZER_EQUIPMENT: {
+        case entity::Type::LAZER_EQUIPMENT: {
             control::item::Lazer* item = new control::item::Lazer(core::global::get().entityManager().lazer(id));
             __manage(item);
             break;
         }
-        case entity::type::PROTECTOR_EQUIPMENT: {
+        case entity::Type::PROTECTOR_EQUIPMENT: {
             control::item::Protector* item = new control::item::Protector(core::global::get().entityManager().protector(id));
             __manage(item);
             break;
         }
-        case entity::type::RADAR_EQUIPMENT: {
+        case entity::Type::RADAR_EQUIPMENT: {
             control::item::Radar* item = new control::item::Radar(core::global::get().entityManager().radar(id));
             __manage(item);
             break;
         }
-        case entity::type::ROCKET_EQUIPMENT: {
+        case entity::Type::ROCKET_EQUIPMENT: {
             control::item::Rocket* item = new control::item::Rocket(core::global::get().entityManager().rocket(id));
             __manage(item);
             break;
@@ -202,29 +202,29 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     // WEAPON SLOTS
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::WEAPON_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::WEAPON_SLOT);
         //slot->setSubSubType(SLOT_WEAPON_TYPES[i]);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->radarSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::RADAR_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::RADAR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->scanerSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::SCANER_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::SCANER_SLOT);
         addItemSlot(slot);
     }
 
 
     for (int i=0; i<descr->grappleSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::GRAPPLE_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::GRAPPLE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->droidSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::DROID_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::DROID_SLOT);
         addItemSlot(slot);
     }
 
@@ -241,17 +241,17 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 #endif // USE_EXTRA_EQUIPMENT
 
     for (int i=0; i<descr->protectorSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::PROTECTOR_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::PROTECTOR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->driveSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::DRIVE_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::DRIVE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->bakSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::BAK_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::BAK_SLOT);
         addItemSlot(slot);
     }
 
@@ -266,7 +266,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     //////// OTSEC SLOT ////////////////////////////////
     for (int i=0; i<descr->cargoSlotNum(); i++) {
-        ItemSlot* slot = getNewItemSlot(entity::type::CARGO_SLOT);
+        ItemSlot* slot = getNewItemSlot(entity::Type::CARGO_SLOT);
         //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
         addItemSlot(slot);
     }
@@ -355,7 +355,7 @@ int Vehicle::givenExpirience() const
     //return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
-bool Vehicle::isSlotTypePresent(const entity::type& slot_subtype_id) const
+bool Vehicle::isSlotTypePresent(const entity::Type& slot_subtype_id) const
 {
     assert(false);
 //    for (ItemSlot* slot: m_slots) {
@@ -372,7 +372,7 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 
     switch(slot->subtype())
     {
-    case entity::type::WEAPON_SLOT:
+    case entity::Type::WEAPON_SLOT:
     {
 //        float border_start = 0.2;
 //        float border_end   = 0.8;
@@ -386,28 +386,28 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 
         break;
     }
-    case entity::type::DRIVE_SLOT:     { driveComplex().addDriveSlot(slot); break; }
-    case entity::type::BAK_SLOT:       { driveComplex().addBakSlot(slot); break; }
-    case entity::type::PROTECTOR_SLOT: { protectorComplex().addProtectorSlot(slot); break; }
-    case entity::type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
-    case entity::type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
+    case entity::Type::DRIVE_SLOT:     { driveComplex().addDriveSlot(slot); break; }
+    case entity::Type::BAK_SLOT:       { driveComplex().addBakSlot(slot); break; }
+    case entity::Type::PROTECTOR_SLOT: { protectorComplex().addProtectorSlot(slot); break; }
+    case entity::Type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
+    case entity::Type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
 #ifdef USE_EXTRA_EQUIPMENT
     case entity::type::ENERGIZER_SLOT: { m_energizerSlot = slot; break; }
     case entity::type::FREEZER_SLOT:   { m_freezerSlot   = slot; break; }
 #endif // USE_EXTRA_EQUIPMENT
-    case entity::type::GRAPPLE_SLOT:   { m_grappleSlots.push_back(slot); break; }
-    case entity::type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
+    case entity::Type::GRAPPLE_SLOT:   { m_grappleSlots.push_back(slot); break; }
+    case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
     }
 
-    if ( (slot->subtype() != entity::type::ARTEFACT_SLOT) && (slot->subtype() != entity::type::CARGO_SLOT) ) {
+    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT) && (slot->subtype() != entity::Type::CARGO_SLOT) ) {
         m_equipmentSlots.push_back(slot);
     }
 
-    if (slot->subtype() == entity::type::ARTEFACT_SLOT) {
+    if (slot->subtype() == entity::Type::ARTEFACT_SLOT) {
         m_artefactSlots.push_back(slot);
     }
 
-    if (slot->subtype() == entity::type::CARGO_SLOT) {
+    if (slot->subtype() == entity::Type::CARGO_SLOT) {
         m_cargoSlots.push_back(slot);
     }
 
@@ -435,14 +435,14 @@ bool Vehicle::__installItem(Item* item)
 {
     assert(item->descriptor());
     switch(item->descriptor()->obType()) {
-    case entity::type::EQUIPMENT:    { return __installEquipment(item); break; }
+    case entity::Type::EQUIPMENT:    { return __installEquipment(item); break; }
 #ifdef USE_MODULES
     case entity::type::MODULE:       { return _installModule(item); break; }
 #endif
 #ifdef USE_ARTEFACTS
     case entity::type::ARTEFACT:     { return _installArtefact(item); break; }
 #endif
-    case entity::type::GOODS:        { return _installGoodsPack(item); break; } // what??
+    case entity::Type::GOODS:        { return _installGoodsPack(item); break; } // what??
     }
     return false;
 }
@@ -467,7 +467,7 @@ bool Vehicle::checkManage(const core::Id& ident)
     }
 
     switch(ident.type) {
-    case entity::type::EQUIPMENT:    { return _checkInstallEquipment(ident); break; }
+    case entity::Type::EQUIPMENT:    { return _checkInstallEquipment(ident); break; }
         //#ifdef USE_MODULES
         //    case entity::Type::MODULE:       { return _checkInstallModule(type); break; }
         //#endif
@@ -524,7 +524,7 @@ bool Vehicle::__installEquipment(Item* item)
 
 bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
-    if (ident.type == entity::type::WEAPON_SLOT) {
+    if (ident.type == entity::Type::WEAPON_SLOT) {
         if (weaponComplex().freeSlot()) {
             return true;
         }
@@ -568,7 +568,7 @@ bool Vehicle::installArtefact(item::Base* item)
 #endif
 
 ItemSlot*
-Vehicle::__freeFunctionalSlot(const entity::type& function) const
+Vehicle::__freeFunctionalSlot(const entity::Type& function) const
 {
     for(ItemSlot* slot: m_equipmentSlots) {
         if ( slot->subtype() == function && !slot->item() ) {
@@ -657,7 +657,7 @@ Vehicle::__addItemToCargo(Item* item)
 {
     bool added = false;
 
-    if (item->descriptor()->obType() == entity::type::GOODS) {
+    if (item->descriptor()->obType() == entity::Type::GOODS) {
         added = _installGoodsPack(item);
     }
 
@@ -1602,7 +1602,7 @@ STATUS Vehicle::CheckGrabStatus() const
     return status;
 }
 
-bool Vehicle::dropItemToSpace(const entity::type& type)
+bool Vehicle::dropItemToSpace(const entity::Type& type)
 {
     if (model()->place() != place::type::KOSMOS)
         return false;

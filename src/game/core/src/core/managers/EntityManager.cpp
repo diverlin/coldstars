@@ -693,8 +693,8 @@ void EntityManager::loadPass0(const std::string& filename)
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
         {
             unsigned long int id = v.second.get<unsigned long int>("data_id.id");
-            entity::type subtype_id = (entity::type)v.second.get<int>("data_id.subtype_id");
-            entity::type subsubtype_id = (entity::type)v.second.get<int>("data_id.subsubtype_id");
+            entity::Type subtype_id = (entity::Type)v.second.get<int>("data_id.subtype_id");
+            entity::Type subsubtype_id = (entity::Type)v.second.get<int>("data_id.subsubtype_id");
             model::Npc* npc = core::global::get().npcBuilder().createTemplate( subtype_id, subsubtype_id, id);
             //npc->Load(v.second);
         }

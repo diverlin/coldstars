@@ -30,7 +30,7 @@
 //#include <client/resources/MeshCollector.hpp>
 //#include <jeti/Material.hpp>
 
-GoodsPack::GoodsPack(int id, entity::type subtype_id)
+GoodsPack::GoodsPack(int id, entity::Type subtype_id)
     :
       control::Item(nullptr, nullptr)
 {
@@ -117,7 +117,7 @@ void GoodsPack::ResolveData()
 }
 
 
-GoodsPack* GetNewGoodsPack(entity::type subtype_id, int_t id)
+GoodsPack* GetNewGoodsPack(entity::Type subtype_id, int_t id)
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER);

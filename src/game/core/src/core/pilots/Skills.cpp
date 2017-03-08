@@ -257,14 +257,14 @@ int Skills::__skillDependingOnArrayIndex(int i)
     return 0;
 }   
 
-const int* getArrayDependingOnClassTypeId(entity::type class_type_id)
+const int* getArrayDependingOnClassTypeId(entity::Type class_type_id)
 {
     switch(class_type_id)
     {
-    case entity::type::WARRIOR:   { return SKILLS_STRATEGY_WARRIOR; break; }
-    case entity::type::PIRAT:     { return SKILLS_STRATEGY_PIRAT; break; }
-    case entity::type::TRADER:    { return SKILLS_STRATEGY_TRADER; break; }
-    case entity::type::DIPLOMAT:  { return SKILLS_STRATEGY_DIPLOMAT; break; }
+    case entity::Type::WARRIOR:   { return SKILLS_STRATEGY_WARRIOR; break; }
+    case entity::Type::PIRAT:     { return SKILLS_STRATEGY_PIRAT; break; }
+    case entity::Type::TRADER:    { return SKILLS_STRATEGY_TRADER; break; }
+    case entity::Type::DIPLOMAT:  { return SKILLS_STRATEGY_DIPLOMAT; break; }
     }
 
     return nullptr;

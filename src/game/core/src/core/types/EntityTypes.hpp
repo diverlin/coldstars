@@ -32,7 +32,7 @@ namespace entity
         ANY
     };
 
-    enum class type
+    enum class Type
     {
         NONE=0,
         /** */
@@ -94,31 +94,31 @@ namespace entity
     };
 }
  
-const std::vector<entity::type> SLOT_WEAPON_TYPES =
+const std::vector<entity::Type> SLOT_WEAPON_TYPES =
 { 
-entity::type::WEAPON_SLOT1,
-entity::type::WEAPON_SLOT2,
-entity::type::WEAPON_SLOT3,
-entity::type::WEAPON_SLOT4,
-entity::type::WEAPON_SLOT5,
-entity::type::WEAPON_SLOT6,
-entity::type::WEAPON_SLOT7,
-entity::type::WEAPON_SLOT8,
-entity::type::WEAPON_SLOT9
+entity::Type::WEAPON_SLOT1,
+entity::Type::WEAPON_SLOT2,
+entity::Type::WEAPON_SLOT3,
+entity::Type::WEAPON_SLOT4,
+entity::Type::WEAPON_SLOT5,
+entity::Type::WEAPON_SLOT6,
+entity::Type::WEAPON_SLOT7,
+entity::Type::WEAPON_SLOT8,
+entity::Type::WEAPON_SLOT9
 };
    
-const std::vector<entity::type> SLOT_CARGO_TYPES =
+const std::vector<entity::Type> SLOT_CARGO_TYPES =
 { 
-entity::type::CARGO_SLOT1,
-entity::type::CARGO_SLOT2,
-entity::type::CARGO_SLOT3,
-entity::type::CARGO_SLOT4,
-entity::type::CARGO_SLOT5,
-entity::type::CARGO_SLOT6,
-entity::type::CARGO_SLOT7,
-entity::type::CARGO_SLOT8,
-entity::type::CARGO_SLOT9,
-entity::type::CARGO_SLOT10,
+entity::Type::CARGO_SLOT1,
+entity::Type::CARGO_SLOT2,
+entity::Type::CARGO_SLOT3,
+entity::Type::CARGO_SLOT4,
+entity::Type::CARGO_SLOT5,
+entity::Type::CARGO_SLOT6,
+entity::Type::CARGO_SLOT7,
+entity::Type::CARGO_SLOT8,
+entity::Type::CARGO_SLOT9,
+entity::Type::CARGO_SLOT10,
 //entity::Type::CARGO_SLOT11,
 //entity::Type::CARGO_SLOT12,
 //entity::Type::CARGO_SLOT13,
@@ -129,43 +129,43 @@ entity::type::CARGO_SLOT10,
 //entity::Type::CARGO_SLOT18
 };
 
-const std::vector<entity::type> SLOT_ARTEFACT_TYPES =
+const std::vector<entity::Type> SLOT_ARTEFACT_TYPES =
 { 
-entity::type::ARTEFACT_SLOT1,
-entity::type::ARTEFACT_SLOT2,
-entity::type::ARTEFACT_SLOT3,
-entity::type::ARTEFACT_SLOT4,
+entity::Type::ARTEFACT_SLOT1,
+entity::Type::ARTEFACT_SLOT2,
+entity::Type::ARTEFACT_SLOT3,
+entity::Type::ARTEFACT_SLOT4,
 };
 
-const std::vector<entity::type> EQUIPMENT_TYPES =
+const std::vector<entity::Type> EQUIPMENT_TYPES =
 { 
-entity::type::LAZER_EQUIPMENT,
-entity::type::ROCKET_EQUIPMENT,
-entity::type::DRIVE_EQUIPMENT,
-entity::type::RADAR_EQUIPMENT,
-entity::type::BAK_EQUIPMENT,
-entity::type::ENERGIZER_EQUIPMENT,
-entity::type::PROTECTOR_EQUIPMENT,
-entity::type::DROID_EQUIPMENT,
-entity::type::FREEZER_EQUIPMENT,
-entity::type::GRAPPLE_EQUIPMENT,
-entity::type::SCANER_EQUIPMENT
+entity::Type::LAZER_EQUIPMENT,
+entity::Type::ROCKET_EQUIPMENT,
+entity::Type::DRIVE_EQUIPMENT,
+entity::Type::RADAR_EQUIPMENT,
+entity::Type::BAK_EQUIPMENT,
+entity::Type::ENERGIZER_EQUIPMENT,
+entity::Type::PROTECTOR_EQUIPMENT,
+entity::Type::DROID_EQUIPMENT,
+entity::Type::FREEZER_EQUIPMENT,
+entity::Type::GRAPPLE_EQUIPMENT,
+entity::Type::SCANER_EQUIPMENT
 };
 
-const std::vector<entity::type> MODULE_TYPES =
+const std::vector<entity::Type> MODULE_TYPES =
 { 
-entity::type::LAZER_MODULE,
-entity::type::ROCKET_MODULE,
-entity::type::DRIVE_MODULE,
-entity::type::RADAR_MODULE,
-entity::type::BAK_MODULE,
-entity::type::ENERGIZER_MODULE,
-entity::type::PROTECTOR_MODULE,
-entity::type::DROID_MODULE,
-entity::type::FREEZER_MODULE,
-entity::type::GRAPPLE_MODULE,
-entity::type::SCANER_MODULE
+entity::Type::LAZER_MODULE,
+entity::Type::ROCKET_MODULE,
+entity::Type::DRIVE_MODULE,
+entity::Type::RADAR_MODULE,
+entity::Type::BAK_MODULE,
+entity::Type::ENERGIZER_MODULE,
+entity::Type::PROTECTOR_MODULE,
+entity::Type::DROID_MODULE,
+entity::Type::FREEZER_MODULE,
+entity::Type::GRAPPLE_MODULE,
+entity::Type::SCANER_MODULE
 };    
 
-std::string to_string(entity::type);
+std::string to_string(entity::Type);
 

@@ -85,7 +85,7 @@
 
 namespace control {
 
-ItemSlot::ItemSlot(entity::type subtype)
+ItemSlot::ItemSlot(entity::Type subtype)
     :
       m_turrel(nullptr),
       m_item(nullptr),
@@ -93,7 +93,7 @@ ItemSlot::ItemSlot(entity::type subtype)
       m_subtarget(nullptr),
       m_hitProbability(0)
 {
-    setType(entity::type::ITEM_SLOT);
+    setType(entity::Type::ITEM_SLOT);
     setSubType(subtype);
     
     m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
@@ -200,7 +200,7 @@ bool ItemSlot::insert(Item* item)
 //    }
 
     // cargo slot
-    if (subtype() == entity::type::CARGO_SLOT) {
+    if (subtype() == entity::Type::CARGO_SLOT) {
         m_item = item;
         if (item->slot()) {
             item->slot()->removeItem();
@@ -278,37 +278,37 @@ void ItemSlot::updateVehiclePropetries() const
     // TODO: make it oop
     assert(vehicleOwner());
 
-    if (subtype() == entity::type::CARGO_SLOT) {
+    if (subtype() == entity::Type::CARGO_SLOT) {
         return;
     }
 
     switch(subtype())
     {
-    case entity::type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
-    case entity::type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
-    case entity::type::BAK_SLOT:         {
+    case entity::Type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
+    case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
+    case entity::Type::BAK_SLOT:         {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
 
         break;
     }
 
-    case entity::type::DRIVE_SLOT:       {
+    case entity::Type::DRIVE_SLOT:       {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
         break;
     }
 
-    case entity::type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
+    case entity::Type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
 #ifdef USE_EXTRA_EQUIPMENT
     case entity::type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
     case entity::type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
 #endif // USE_EXTRA_EQUIPMENT
-    case entity::type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
-    case entity::type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
-    case entity::type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
+    case entity::Type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
+    case entity::Type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
+    case entity::Type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
 
-    case entity::type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
+    case entity::Type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
     }
 }
 
@@ -341,21 +341,21 @@ int ItemSlot::itemRadius() const
 {       
     switch(m_item->descriptor()->obType())
     {
-        case entity::type::EQUIPMENT:
+        case entity::Type::EQUIPMENT:
         {
             switch (m_item->descriptor()->obSubType())
             {
-                case entity::type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->radius();  break; };
-                case entity::type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->radius(); break; };
+                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->radius();  break; };
+                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->radius(); break; };
 
-                case entity::type::GRAPPLE_EQUIPMENT: { return grappleEquipment()->model()->radius(); break; };
-                case entity::type::RADAR_EQUIPMENT:   { return radarEquipment()->model()->radius();   break; };
+                case entity::Type::GRAPPLE_EQUIPMENT: { return grappleEquipment()->model()->radius(); break; };
+                case entity::Type::RADAR_EQUIPMENT:   { return radarEquipment()->model()->radius();   break; };
             }
             
             break;
         }
 
-        case entity::type::BOMB:
+        case entity::Type::BOMB:
         {
             assert(false);
             //return bomb()->radius();   break;
@@ -373,18 +373,18 @@ int ItemSlot::itemDamage() const
 {       
     switch(m_item->descriptor()->obType())
     {
-        case entity::type::EQUIPMENT:
+        case entity::Type::EQUIPMENT:
         {
             switch (m_item->descriptor()->obSubType())
             {
-                case entity::type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->damage();  break; };
-                case entity::type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->damage(); break; };
+                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->damage();  break; };
+                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->damage(); break; };
             }
             
             break;
         }
             
-        case entity::type::BOMB:
+        case entity::Type::BOMB:
         {
             assert(false);
             //return bomb()->damage();   break;

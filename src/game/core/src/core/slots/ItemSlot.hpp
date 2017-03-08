@@ -132,16 +132,16 @@ namespace control {
 class ItemSlot : public BaseSlot
 {
 public:
-    ItemSlot(entity::type subtype_id);
+    ItemSlot(entity::Type subtype_id);
     virtual ~ItemSlot();
 
     void setOffset(int offset) { m_offset = offset; }
-    void setType(entity::type type) { m_type = type; }
-    void setSubType(entity::type subtype) { m_subtype = subtype; }
+    void setType(entity::Type type) { m_type = type; }
+    void setSubType(entity::Type subtype) { m_subtype = subtype; }
 
     int offset() const { return m_offset; }
-    entity::type type() const { return m_type; }
-    entity::type subtype() const { return m_subtype; }
+    entity::Type type() const { return m_type; }
+    entity::Type subtype() const { return m_subtype; }
 
     virtual void putChildrenToGarbage() const;
 
@@ -249,8 +249,8 @@ private:
     void log(const std::string&) const;
 
     int m_offset = NONE;
-    entity::type m_type = entity::type::NONE;
-    entity::type m_subtype = entity::type::NONE;
+    entity::Type m_type = entity::Type::NONE;
+    entity::Type m_subtype = entity::Type::NONE;
 
 };
 

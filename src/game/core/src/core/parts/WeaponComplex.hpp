@@ -57,8 +57,8 @@ public:
 
     void activateWeapons();
     void deactivateWeapons();
-    void activateWeapons(const entity::type&);
-    void deactivateWeapons(const entity::type&);
+    void activateWeapons(const entity::Type&);
+    void deactivateWeapons(const entity::Type&);
 
     bool isAnyWeaponSelected() const;
 //    int itemsNum() const;

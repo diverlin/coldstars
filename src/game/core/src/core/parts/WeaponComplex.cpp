@@ -103,7 +103,7 @@ void WeaponComplex::deactivateWeapons()
     }
 }
 
-void WeaponComplex::activateWeapons(const entity::type& weapon_subtype_id)
+void WeaponComplex::activateWeapons(const entity::Type& weapon_subtype_id)
 {
     assert(false);
 //    for (ItemSlot* slot: m_slots_reloaded) {
@@ -113,7 +113,7 @@ void WeaponComplex::activateWeapons(const entity::type& weapon_subtype_id)
 //    }
 }
 
-void WeaponComplex::deactivateWeapons(const entity::type& weapon_subtype_id)
+void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
 {
     assert(false);
 //    for (ItemSlot* slot: m_slots_reloaded) {

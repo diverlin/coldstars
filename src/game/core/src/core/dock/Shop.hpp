@@ -43,10 +43,10 @@ public:
     int GetDrugPrice()         const { return drug_price; }
     int GetExclusivePrice()        const { return exclusive_price; }
 
-    int GetAmount(entity::type) const;
-    int GetPrice(entity::type) const;
+    int GetAmount(entity::Type) const;
+    int GetPrice(entity::Type) const;
 
-    bool SellGoods(Npc*, entity::type, int);
+    bool SellGoods(Npc*, entity::Type, int);
     int BuyGoods(GoodsPack*);
 
     void Save(boost::property_tree::ptree&) const;
@@ -68,7 +68,7 @@ private:
     int drug_price;
     int exclusive_price;
 
-    int Deal(int, entity::type, int);
+    int Deal(int, entity::Type, int);
 
     void UpdateAllPrices();
     void UpdateMineralPrice();

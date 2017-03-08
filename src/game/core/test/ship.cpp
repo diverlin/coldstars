@@ -98,7 +98,7 @@ TEST(ship, drop_item_to_space)
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_TRUE(ship.control()->dropItemToSpace(entity::type::DRIVE_SLOT));
+    EXPECT_TRUE(ship.control()->dropItemToSpace(entity::Type::DRIVE_SLOT));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
     assert(false);

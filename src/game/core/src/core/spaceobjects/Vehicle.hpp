@@ -119,7 +119,7 @@ public:
     descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotTypePresent(const entity::type&) const;
+    bool isSlotTypePresent(const entity::Type&) const;
 
     void addItemSlot(ItemSlot*);
 
@@ -185,7 +185,7 @@ public:
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
 
-    bool dropItemToSpace(const entity::type&);
+    bool dropItemToSpace(const entity::Type&);
 
 protected:
     void _increaseMass(int);
@@ -241,7 +241,7 @@ public:
 private:
     bool __installItem(Item*);
     bool __installEquipment(Item*);
-    ItemSlot* __freeFunctionalSlot(const entity::type&) const;
+    ItemSlot* __freeFunctionalSlot(const entity::Type&) const;
 
 
     void __updateFreeSpace();
