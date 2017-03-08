@@ -29,7 +29,7 @@ namespace item {
 model::item::Grapple*
 Grapple::getNew()
 {
-    descriptor::item::Grapple* descr = descriptor::Manager::get().grapple().random();
+    descriptor::item::Grapple* descr = descriptor::Manager::get().randGrapple();
     return getNew(descr);
 }
 

@@ -29,7 +29,7 @@ namespace item {
 model::item::Rocket*
 Rocket::getNew()
 {
-    descriptor::item::Rocket* descr = descriptor::Manager::get().rocket().random();
+    descriptor::item::Rocket* descr = descriptor::Manager::get().randRocket();
     return getNew(descr);
 }
 
