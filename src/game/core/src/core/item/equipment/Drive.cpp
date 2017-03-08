@@ -18,6 +18,7 @@
 
 #include "Drive.hpp"
 #include <core/descriptor/item/equipment/Drive.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Drive.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +31,11 @@
 namespace control {
 namespace item {
 
-Drive::Drive(model::item::Drive* model, descriptor::item::Drive* descr)
+Drive::Drive(model::item::Drive* model)
     :
-      Equipment(model, descr)
+      Equipment(model, descriptor::Manager::get().drive(model->descriptor()))
     , m_model_drive(model)
-    , m_descriptor_drive(descr)
+    , m_descriptor_drive(descriptor::Manager::get().drive(model->descriptor()))
 {
 
 }

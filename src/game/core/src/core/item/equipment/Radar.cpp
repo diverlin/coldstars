@@ -18,6 +18,7 @@
 
 #include "Radar.hpp"
 #include <core/descriptor/item/equipment/Radar.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Radar.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +31,11 @@
 namespace control {
 namespace item {
 
-Radar::Radar(model::item::Radar* model, descriptor::item::Radar* descr)
+Radar::Radar(model::item::Radar* model)
     :
-      Equipment(model, descr)
+      Equipment(model, descriptor::Manager::get().radar(model->descriptor()))
     , m_model_radar(model)
-    , m_descriptor_radar(descr)
+    , m_descriptor_radar(descriptor::Manager::get().radar(model->descriptor()))
 {}
 
 /* virtual */

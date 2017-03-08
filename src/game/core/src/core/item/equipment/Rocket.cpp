@@ -18,6 +18,7 @@
 
 #include "Rocket.hpp"
 #include <core/descriptor/item/equipment/Rocket.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Rocket.hpp>
 
 #ifdef USE_MODULES
@@ -30,11 +31,11 @@
 namespace control {
 namespace item {
 
-Rocket::Rocket(model::item::Rocket* model, descriptor::item::Rocket* descr)
+Rocket::Rocket(model::item::Rocket* model)
     :
-      Weapon(model, descr)
+      Weapon(model, descriptor::Manager::get().rocket(model->descriptor()))
     , m_model_rocket(model)
-    , m_descriptor_rocket(descr)
+    , m_descriptor_rocket(descriptor::Manager::get().rocket(model->descriptor()))
 {
 //    fire_atOnce = meti::getRandInt(1, 3);
 }

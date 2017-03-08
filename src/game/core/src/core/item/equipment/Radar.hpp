@@ -40,7 +40,7 @@ namespace item {
 class Radar : public Equipment
 {
 public:
-    Radar(model::item::Radar*, descriptor::item::Radar*);
+    Radar(model::item::Radar*);
     virtual ~Radar() = default;
 
     virtual void updateProperties();
