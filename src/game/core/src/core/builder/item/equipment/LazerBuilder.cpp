@@ -26,22 +26,22 @@ namespace builder {
 namespace item {
 
 model::item::Lazer*
-Lazer::getNew()
+Lazer::gen()
 {
     descriptor::item::Lazer* descr = descriptor::Manager::get().randLazer();
-    return getNew(descr);
+    return gen(descr);
 }
 
 //model::item::Lazer*
-//Lazer::getNew(const std::string& data)
+//Lazer::gen(const std::string& data)
 //{
 //    descriptor::item::Lazer descr(data);
 //    assert(descr->descriptor() != descriptor::type::LAZER_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Lazer*
-Lazer::getNew(descriptor::item::Lazer* descr)
+Lazer::gen(descriptor::item::Lazer* descr)
 {
     model::item::Lazer* model = __genTemplate(descr->id());
     __createInternals(model, descr);

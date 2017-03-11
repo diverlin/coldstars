@@ -44,10 +44,10 @@ namespace item {
 class Protector : public Equipment
 {
 public:
-    static model::item::Protector* getNew();
-    static std::vector<model::item::Protector*> getNew(int);
-//    static model::item::Protector* getNew(const std::string&);
-    static model::item::Protector* getNew(descriptor::item::Protector*);
+    static model::item::Protector* gen();
+    static std::vector<model::item::Protector*> gen(int);
+//    static model::item::Protector* gen(const std::string&);
+    static model::item::Protector* gen(descriptor::item::Protector*);
 
 private:
     Protector() = delete;

@@ -39,15 +39,15 @@ BombBuilder::~BombBuilder()
 {}
 
 Bomb*
-BombBuilder::getNew()
+BombBuilder::gen()
 {
     assert(false);
     //    descriptor::BaseOLD* descriptor = descriptor::Manager::get().getRand(descriptor::TypeOLD::BOMB);
-    //    return getNew(descriptor);
+    //    return gen(descriptor);
 }
 
 Bomb*
-BombBuilder::getNew(descriptor::BaseOLD* descriptor)
+BombBuilder::gen(descriptor::BaseOLD* descriptor)
 {
     Bomb* bomb = new Bomb;
     assert(bomb);

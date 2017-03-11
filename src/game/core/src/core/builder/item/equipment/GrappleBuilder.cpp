@@ -27,22 +27,22 @@ namespace builder {
 namespace item {
 
 model::item::Grapple*
-Grapple::getNew()
+Grapple::gen()
 {
     descriptor::item::Grapple* descr = descriptor::Manager::get().randGrapple();
-    return getNew(descr);
+    return gen(descr);
 }
 
 //model::item::Grapple*
-//Grapple::getNew(const std::string& data)
+//Grapple::gen(const std::string& data)
 //{
 //    descriptor::item::Grapple descr(data);
 //    assert(descr->descriptor() != descriptor::type::GRAPPLE_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Grapple*
-Grapple::getNew(descriptor::item::Grapple* descr)
+Grapple::gen(descriptor::item::Grapple* descr)
 {
     model::item::Grapple* model = __genTemplate(descr->id());
     __createInternals(model, descr);

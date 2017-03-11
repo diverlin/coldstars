@@ -174,49 +174,49 @@ void BaseVehicle::equip(Vehicle* vehicle, tech::type tech_level)
 //        if (vehicle->isSlotFree(entity::Type::WEAPON_SLOT)) {
 //            bool rand = 0; //getRandBool();
 //            if (rand) {
-//                vehicle->manage(core::global::get().rocketBuilder().getNew(tech_level) );
+//                vehicle->manage(core::global::get().rocketBuilder().gen(tech_level) );
 //            } else {
-//                vehicle->manage(core::global::get().lazerBuilder().getNew(tech_level) );
+//                vehicle->manage(core::global::get().lazerBuilder().gen(tech_level) );
 //            }
 //        }
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::RADAR_SLOT)) {
-//        vehicle->manage(core::global::get().radarBuilder().getNew());
+//        vehicle->manage(core::global::get().radarBuilder().gen());
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::DRIVE_SLOT)) {
-//        vehicle->manage(core::global::get().driveBuilder().getNew());
+//        vehicle->manage(core::global::get().driveBuilder().gen());
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::BAK_SLOT)) {
-//        vehicle->manage(core::global::get().bakBuilder().getNew());
+//        vehicle->manage(core::global::get().bakBuilder().gen());
 //    }
 
 //#ifdef USE_EXTRA_EQUIPMENT
 //    if (vehicle->isSlotFree(entity::Type::ENERGIZER_SLOT)) {
-//        vehicle->manage(core::global::get().energizerBuilder().getNew());
+//        vehicle->manage(core::global::get().energizerBuilder().gen());
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::FREEZER_SLOT)) {
-//        vehicle->manage(core::global::get().freezerBuilder().getNew());
+//        vehicle->manage(core::global::get().freezerBuilder().gen());
 //    }
 //#endif
 
 //    if (vehicle->isSlotFree(entity::Type::PROTECTOR_SLOT)) {
-//        vehicle->manage(core::global::get().protectorBuilder().getNew());
+//        vehicle->manage(core::global::get().protectorBuilder().gen());
 //    }
         
 //    if (vehicle->isSlotFree(entity::Type::DROID_SLOT)) {
-//        vehicle->manage(core::global::get().droidBuilder().getNew());
+//        vehicle->manage(core::global::get().droidBuilder().gen());
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::SCANER_SLOT)) {
-//        vehicle->manage(core::global::get().scanerBuilder().getNew());
+//        vehicle->manage(core::global::get().scanerBuilder().gen());
 //    }
     
 //    if (vehicle->isSlotFree(entity::Type::GRAPPLE_SLOT)) {
-//        vehicle->manage(core::global::get().grappleBuilder().getNew());
+//        vehicle->manage(core::global::get().grappleBuilder().gen());
 //    }
 }
 

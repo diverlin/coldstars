@@ -38,8 +38,8 @@ public:
     Star();
     ~Star();
 
-    static model::Star* getNew();
-    static model::Star* getNew(descriptor::Star*);
+    static model::Star* gen();
+    static model::Star* gen(descriptor::Star*);
 
 private:
     static model::Star* __genTemplate(int_t id = NONE);

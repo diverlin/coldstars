@@ -34,8 +34,8 @@ namespace builder {
 class Satellite : public BaseVehicle
 {
 public:
-    static model::Satellite* getNew();
-    static model::Satellite* getNew(descriptor::Satellite*);
+    static model::Satellite* gen();
+    static model::Satellite* gen(descriptor::Satellite*);
 
 private:
     Satellite() = default;

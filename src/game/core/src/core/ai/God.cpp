@@ -259,7 +259,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //entity::Type ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        model::SpaceStation* spacestation = builder::SpaceStation::getNew();
+        model::SpaceStation* spacestation = builder::SpaceStation::gen();
         assert(false);
         //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
@@ -312,7 +312,7 @@ void God::__createShips(Starsystem* starsystem, int ship_num, race::Type npc_rac
         }
         // VERY UGLY LOGIC END
 
-        model::Ship* new_ship = builder::Ship::getNew();
+        model::Ship* new_ship = builder::Ship::gen();
         assert(false);
         //builder::ShipBuilder::equip(new_ship); // improove
 

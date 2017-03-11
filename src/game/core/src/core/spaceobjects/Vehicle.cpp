@@ -1636,7 +1636,7 @@ bool Vehicle::dropItemToSpace(const entity::Type& type)
 model::Container*
 Vehicle::__wrapItemToContainer(Item* item)
 {
-    model::Container* container = builder::Container::getNew();
+    model::Container* container = builder::Container::gen();
     assert(false);
     //container->insertItem(item);
 
@@ -3178,7 +3178,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //Container*
 //Vehicle::__wrapItemToContainer(item::Base* item)
 //{
-////    Container* container = ContainerBuilder::getNew();
+////    Container* container = ContainerBuilder::gen();
 ////    container->insertItem(item);
 
 ////    return container;

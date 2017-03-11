@@ -36,14 +36,14 @@ Planet::__genTemplate()
 }
 
 model::Planet*
-Planet::getNew()
+Planet::gen()
 {
     const auto& descr = descriptor::Manager::get().planet().random();
-    return getNew(descr);
+    return gen(descr);
 } 
 
 model::Planet*
-Planet::getNew(descriptor::Planet* descr)
+Planet::gen(descriptor::Planet* descr)
 {
     model::Planet* model = __genTemplate();
 

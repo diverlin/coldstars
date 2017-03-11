@@ -27,22 +27,22 @@ namespace builder {
 namespace item {
 
 model::item::Rocket*
-Rocket::getNew()
+Rocket::gen()
 {
     descriptor::item::Rocket* descr = descriptor::Manager::get().randRocket();
-    return getNew(descr);
+    return gen(descr);
 }
 
 //model::item::Rocket*
-//Rocket::getNew(const std::string& data)
+//Rocket::gen(const std::string& data)
 //{
 //    descriptor::item::Rocket descr(data);
 //    assert(descr->descriptor() != descriptor::type::ROCKET_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Rocket*
-Rocket::getNew(descriptor::item::Rocket* descr)
+Rocket::gen(descriptor::item::Rocket* descr)
 {
     model::item::Rocket* model = __genTemplate(descr->id());
     __createInternals(model, descr);

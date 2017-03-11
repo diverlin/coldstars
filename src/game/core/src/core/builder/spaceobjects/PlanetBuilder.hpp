@@ -32,8 +32,8 @@ namespace builder {
 class Planet
 {
 public:
-    static model::Planet* getNew();
-    static model::Planet* getNew(descriptor::Planet*);
+    static model::Planet* gen();
+    static model::Planet* gen(descriptor::Planet*);
 
 private:
     static model::Planet* __genTemplate();

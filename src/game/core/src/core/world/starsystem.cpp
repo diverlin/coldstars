@@ -526,7 +526,7 @@ void Starsystem::__updateStates()
             glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-            add(core::global::get().blackHoleBuilder().getNew(), center3);
+            add(core::global::get().blackHoleBuilder().gen(), center3);
         }
     }
     
@@ -943,7 +943,7 @@ void Starsystem::__shipManager_s(unsigned int num)
         int weapons_num = 7;
 
         model::Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        model::Ship* new_pship = builder::Ship::getNew();
+        model::Ship* new_pship = builder::Ship::gen();
 
         assert(false);
         //builder::ShipBuilder::equip(new_pship);   // improove

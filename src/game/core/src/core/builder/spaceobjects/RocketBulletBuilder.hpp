@@ -35,7 +35,7 @@ public:
     Rocket();
     ~Rocket();
 
-    model::RocketBullet* getNew(const BulletData&) const;
+    model::RocketBullet* gen(const BulletData&) const;
 
 private:
     void createInternals(model::RocketBullet*, const BulletData&) const;

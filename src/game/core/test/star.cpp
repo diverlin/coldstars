@@ -30,7 +30,7 @@
 TEST(creation, star)
 {
     descriptor::Star* descr = descriptor::Manager::get().star().random();
-    model::Star* model = builder::Star::getNew(descr);
+    model::Star* model = builder::Star::gen(descr);
 
     EXPECT_EQ(descr->armor(), model->armor());
 }

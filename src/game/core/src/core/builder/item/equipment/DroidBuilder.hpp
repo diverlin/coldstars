@@ -43,9 +43,9 @@ namespace item {
 class Droid : public Equipment
 {
 public:
-    static model::item::Droid* getNew();
-//    static model::item::Droid* getNew(const std::string&);
-    static model::item::Droid* getNew(descriptor::item::Droid*);
+    static model::item::Droid* gen();
+//    static model::item::Droid* gen(const std::string&);
+    static model::item::Droid* gen(descriptor::item::Droid*);
 
 private:
     Droid() = delete;

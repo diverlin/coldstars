@@ -84,7 +84,7 @@ namespace test {
 
 Ship::Ship() {
     descriptor::genShip();
-    model::Ship* model = builder::Ship::getNew();
+    model::Ship* model = builder::Ship::gen();
     m_control = new control::Ship(model);
 }
 Ship::~Ship() {
@@ -100,7 +100,7 @@ namespace item {
 //////
 Bak::Bak() {
     descriptor::item::genBak();
-    model::item::Bak* model = builder::item::Bak::getNew();
+    model::item::Bak* model = builder::item::Bak::gen();
     m_control = new control::item::Bak(model);
 }
 Bak::~Bak() {
@@ -114,7 +114,7 @@ model::item::Bak* Bak::model() const { return m_control->model(); }
 //////
 Drive::Drive() {
     descriptor::item::genDrive();
-    model::item::Drive* model = builder::item::Drive::getNew();
+    model::item::Drive* model = builder::item::Drive::gen();
     m_control = new control::item::Drive(model);
 }
 Drive::~Drive() {
@@ -128,7 +128,7 @@ model::item::Drive* Drive::model() const { return m_control->model(); }
 //////
 Droid::Droid() {
     descriptor::item::genDroid();
-    model::item::Droid* model = builder::item::Droid::getNew();
+    model::item::Droid* model = builder::item::Droid::gen();
     m_control = new control::item::Droid(model);
 }
 Droid::~Droid() {
@@ -142,7 +142,7 @@ model::item::Droid* Droid::model() const { return m_control->model(); }
 //////
 Grapple::Grapple() {
     descriptor::item::genGrapple();
-    model::item::Grapple* model = builder::item::Grapple::getNew();
+    model::item::Grapple* model = builder::item::Grapple::gen();
     m_control = new control::item::Grapple(model);
 }
 Grapple::~Grapple() {
@@ -156,7 +156,7 @@ model::item::Grapple* Grapple::model() const { return m_control->model(); }
 //////
 Lazer::Lazer() {
     descriptor::item::genLazer();
-    model::item::Lazer* model = builder::item::Lazer::getNew();
+    model::item::Lazer* model = builder::item::Lazer::gen();
     m_control = new control::item::Lazer(model);
 }
 Lazer::~Lazer() {
@@ -170,7 +170,7 @@ model::item::Lazer* Lazer::model() const { return m_control->model(); }
 //////
 Protector::Protector() {
     descriptor::item::genProtector();
-    model::item::Protector* model = builder::item::Protector::getNew();
+    model::item::Protector* model = builder::item::Protector::gen();
     m_control = new control::item::Protector(model);
 }
 Protector::~Protector() {
@@ -184,7 +184,7 @@ model::item::Protector* Protector::model() const { return m_control->model(); }
 //////
 Radar::Radar() {
     descriptor::item::genRadar();
-    model::item::Radar* model = builder::item::Radar::getNew();
+    model::item::Radar* model = builder::item::Radar::gen();
     m_control = new control::item::Radar(model);
 }
 Radar::~Radar() {
@@ -198,7 +198,7 @@ model::item::Radar* Radar::model() const { return m_control->model(); }
 //////
 Rocket::Rocket() {
     descriptor::item::genRocket();
-    model::item::Rocket* model = builder::item::Rocket::getNew();
+    model::item::Rocket* model = builder::item::Rocket::gen();
     m_control = new control::item::Rocket(model);
 }
 Rocket::~Rocket() {
@@ -212,7 +212,7 @@ model::item::Rocket* Rocket::model() const { return m_control->model(); }
 //////
 Scaner::Scaner() {
     descriptor::item::genScaner();
-    model::item::Scaner* model = builder::item::Scaner::getNew();
+    model::item::Scaner* model = builder::item::Scaner::gen();
     m_control = new control::item::Scaner(model);
 }
 Scaner::~Scaner() {

@@ -58,7 +58,7 @@ Starsystem::create(descriptor::Starsystem* descr)
 model::Starsystem*
 Starsystem::create(const std::string& data)
 {
-    //return getNew(descriptor::Base(data));
+    //return gen(descriptor::Base(data));
 }
 
 void Starsystem::__createInternals(model::Starsystem* model, descriptor::Starsystem* descr)
@@ -87,7 +87,7 @@ void Starsystem::__createBackground(model::Starsystem* starsystem, int distNebul
 
 void Starsystem::__createStar(model::Starsystem* starsystem)
 {
-    model::Star* star = builder::Star::getNew();
+    model::Star* star = builder::Star::gen();
     assert(false);
 //    starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
@@ -98,7 +98,7 @@ void Starsystem::__createPlanets(model::Starsystem* starsystem, int planet_per_s
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     
     for(int i=0; i<planet_per_system; i++) {
-        model::Planet* planet = builder::Planet::getNew();
+        model::Planet* planet = builder::Planet::gen();
         //starsystem->add(planet, starsystem->star());
         assert(false);
 //        starsystem->add(planet);

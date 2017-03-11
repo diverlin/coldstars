@@ -143,7 +143,7 @@ getNewStarsystem() {
 Container*
 getNewContainer() {
     descriptor::Container* descr = descriptor::getNewContainer();
-    model::Container* model = builder::Container::getNew(/*descr*/);
+    model::Container* model = builder::Container::gen(/*descr*/);
     Container* container = new Container(model, descr);
     return container;
 }

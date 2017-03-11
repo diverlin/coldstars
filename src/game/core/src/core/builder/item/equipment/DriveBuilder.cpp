@@ -26,7 +26,7 @@ namespace builder {
 namespace item {
 
 model::item::Drive*
-Drive::getNew()
+Drive::gen()
 {
     descriptor::item::Drive* descr = descriptor::Manager::get().randDrive();
     model::item::Drive* model = __genTemplate(descr->id());
@@ -35,15 +35,15 @@ Drive::getNew()
 }
 
 //model::item::Drive*
-//Drive::getNew(const std::string& data)
+//Drive::gen(const std::string& data)
 //{
 //    descriptor::item::Drive* descr(data);
 //    assert(descr.descriptor() != descriptor::type::DRIVE_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Drive*
-Drive::getNew(descriptor::item::Drive* descr)
+Drive::gen(descriptor::item::Drive* descr)
 {
     model::item::Drive* model = __genTemplate(descr->id());
     __createInternals(model, descr);

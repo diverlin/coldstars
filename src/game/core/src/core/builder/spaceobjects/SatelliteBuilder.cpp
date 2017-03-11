@@ -39,7 +39,7 @@ Satellite::__genTemplate(int_t descriptor_id)
 }
 
 model::Satellite*
-Satellite::getNew(descriptor::Satellite* descr)
+Satellite::gen(descriptor::Satellite* descr)
 {
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
@@ -54,7 +54,7 @@ Satellite::getNew(descriptor::Satellite* descr)
 }
 
 model::Satellite*
-Satellite::getNew()
+Satellite::gen()
 {
     const auto& descr = descriptor::Manager::get().randSatellite();
     model::Satellite* satellite = __genTemplate(descr->id());
