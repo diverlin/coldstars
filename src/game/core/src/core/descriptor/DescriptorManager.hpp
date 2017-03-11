@@ -26,7 +26,6 @@
 #include <core/descriptor/StarDescriptor.hpp>
 #include <core/descriptor/PlanetDescriptor.hpp>
 #include <core/descriptor/AsteroidDescriptor.hpp>
-#include <core/descriptor/VehicleDescriptor.hpp>
 #include <core/descriptor/Container.hpp>
 
 #include <core/descriptor/spaceobject/Ship.hpp>

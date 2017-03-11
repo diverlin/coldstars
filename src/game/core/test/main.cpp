@@ -46,7 +46,6 @@
 #include <core/descriptor/ExplosionDescriptor.hpp>
 #include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
-#include <core/descriptor/VehicleDescriptorGenerator.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>

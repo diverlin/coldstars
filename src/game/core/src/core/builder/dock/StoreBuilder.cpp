@@ -33,11 +33,8 @@
 
 #include <spaceobjects/Ship.hpp>
 
-#include <item/equipment/ALL>
-
 #include <common/constants.hpp>
 
-#include <descriptor/VehicleDescriptorGenerator.hpp>
 #include <descriptor/DescriptorManager.hpp>
 
 StoreBuilder::StoreBuilder()
