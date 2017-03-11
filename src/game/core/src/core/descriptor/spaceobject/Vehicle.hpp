@@ -25,6 +25,7 @@
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
 
 namespace descriptor {
 
@@ -120,6 +121,9 @@ public:
 
 private:
     race::Type m_race = race::Type::NONE;
+    std::vector<meti::vec3> m_turrelPoints;
+    std::vector<meti::vec3> m_drivePoints;
+    std::vector<meti::vec3> m_protectorPoints;
 
     int m_space = 0;
     int m_protection = 0;
@@ -151,6 +155,10 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_race;
+
+        ar & m_turrelPoints;
+        ar & m_drivePoints;
+        ar & m_protectorPoints;
 
         ar & m_space;
         ar & m_protection;
