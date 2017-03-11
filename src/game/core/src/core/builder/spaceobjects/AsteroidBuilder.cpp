@@ -36,14 +36,14 @@ Asteroid::__genTemplate()
 } 
 
 model::Asteroid*
-Asteroid::getNew()
+Asteroid::gen()
 {
     const auto& descr = descriptor::Manager::get().asteroid().random();
-    return getNew(descr);
+    return gen(descr);
 }
 
 model::Asteroid*
-Asteroid::getNew(descriptor::Asteroid* descr)
+Asteroid::gen(descriptor::Asteroid* descr)
 {
     model::Asteroid* model = __genTemplate();
 

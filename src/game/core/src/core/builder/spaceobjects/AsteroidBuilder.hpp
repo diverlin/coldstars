@@ -32,8 +32,8 @@ namespace builder {
 class Asteroid
 {
 public:
-    static model::Asteroid* getNew();
-    static model::Asteroid* getNew(descriptor::Asteroid*);
+    static model::Asteroid* gen();
+    static model::Asteroid* gen(descriptor::Asteroid*);
 
 private:
     static model::Asteroid* __genTemplate();

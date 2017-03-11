@@ -41,7 +41,7 @@ Rocket::__genTemplate(int_t id) const
 }
 
 model::RocketBullet*
-Rocket::getNew(const BulletData& data_bullet) const
+Rocket::gen(const BulletData& data_bullet) const
 {
     model::RocketBullet* rocket_bullet = __genTemplate();
     createInternals(rocket_bullet, data_bullet);

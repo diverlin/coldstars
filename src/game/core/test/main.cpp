@@ -78,8 +78,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::getNew();
-    model::Ship* ship2 = builder::Ship::getNew();
+    model::Ship* ship1 = builder::Ship::gen();
+    model::Ship* ship2 = builder::Ship::gen();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -94,8 +94,8 @@ TEST(base,critical_hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::getNew();
-    model::Ship* ship2 = builder::Ship::getNew();
+    model::Ship* ship1 = builder::Ship::gen();
+    model::Ship* ship2 = builder::Ship::gen();
 
     assert(false);
     //messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
@@ -109,9 +109,9 @@ TEST(base,bomb)
 {
 //    MessageManager& messageManager = core::global::get().messageManager();
 
-//    Starsystem* starsystem = StarsystemBuilder::getNew();
-//    Ship* ship = ShipBuilder::getNew();
-//    Bomb* bomb = BombBuilder::getNew(); //getNewBomb(1000, 1000);
+//    Starsystem* starsystem = StarsystemBuilder::gen();
+//    Ship* ship = ShipBuilder::gen();
+//    Bomb* bomb = BombBuilder::gen(); //getNewBomb(1000, 1000);
 //    Container* container = getNewContainer(bomb->id());
 
 //    const glm::vec3 ship_pos = glm::vec3(200, 200, 0);
@@ -177,7 +177,7 @@ TEST(clone, starsystem)
 
 //TEST(model, asteroid)
 //{
-//    model::Asteroid* model1 = builder::Asteroid::getNew();
+//    model::Asteroid* model1 = builder::Asteroid::gen();
 //    model::Asteroid* model2 = new model::Asteroid(model1->data());
 //    EXPECT_EQ(model1->data(), model2->data());
 

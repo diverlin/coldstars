@@ -43,9 +43,9 @@ namespace item {
 class Grapple : public Equipment
 {
 public:
-    static model::item::Grapple* getNew();
-//    static model::item::Grapple* getNew(const std::string&);
-    static model::item::Grapple* getNew(descriptor::item::Grapple*);
+    static model::item::Grapple* gen();
+//    static model::item::Grapple* gen(const std::string&);
+    static model::item::Grapple* gen(descriptor::item::Grapple*);
 
 private:
     Grapple() = delete;

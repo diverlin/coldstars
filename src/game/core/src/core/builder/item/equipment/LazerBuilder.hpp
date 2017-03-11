@@ -43,9 +43,9 @@ namespace item {
 class Lazer : public Equipment
 {
 public:
-    static model::item::Lazer* getNew();
-//    static model::item::Lazer* getNew(const std::string&);
-    static model::item::Lazer* getNew(descriptor::item::Lazer*);
+    static model::item::Lazer* gen();
+//    static model::item::Lazer* gen(const std::string&);
+    static model::item::Lazer* gen(descriptor::item::Lazer*);
 
 private:
     Lazer() = delete;

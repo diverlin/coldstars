@@ -28,7 +28,7 @@ namespace builder {
 namespace item {
 
 model::item::Scaner*
-Scaner::getNew()
+Scaner::gen()
 {
     descriptor::item::Scaner* descr = descriptor::Manager::get().randScaner();
     model::item::Scaner* model = __genTemplate(descr->id());
@@ -38,15 +38,15 @@ Scaner::getNew()
 }
 
 //model::item::Scaner*
-//Scaner::getNew(const std::string& data)
+//Scaner::gen(const std::string& data)
 //{
 //    descriptor::item::Scaner descr(data);
 //    assert(descr->descriptor() != descriptor::type::SCANER_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Scaner*
-Scaner::getNew(descriptor::item::Scaner* descr)
+Scaner::gen(descriptor::item::Scaner* descr)
 {
     model::item::Scaner* model = __genTemplate(descr->id());
     __createInternals(model, descr);

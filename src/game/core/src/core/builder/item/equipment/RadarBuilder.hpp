@@ -43,9 +43,9 @@ namespace item {
 class Radar : public Equipment
 {
 public:
-    static model::item::Radar* getNew();
-//    static model::item::Radar* getNew(const std::string&);
-    static model::item::Radar* getNew(descriptor::item::Radar*);
+    static model::item::Radar* gen();
+//    static model::item::Radar* gen(const std::string&);
+    static model::item::Radar* gen(descriptor::item::Radar*);
 
 private:
     Radar() = delete;

@@ -27,7 +27,7 @@ namespace builder {
 namespace item {
 
 model::item::Droid*
-Droid::getNew()
+Droid::gen()
 {
     descriptor::item::Droid* descr = descriptor::Manager::get().randDroid();
     model::item::Droid* model = __genTemplate(descr->id());
@@ -36,15 +36,15 @@ Droid::getNew()
 }
 
 //model::item::Droid*
-//Droid::getNew(const std::string& data)
+//Droid::gen(const std::string& data)
 //{
 //    descriptor::item::Droid descr(data);
 //    assert(descr->descriptor() != descriptor::type::DROID_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Droid*
-Droid::getNew(descriptor::item::Droid* descr)
+Droid::gen(descriptor::item::Droid* descr)
 {
     model::item::Droid* model = __genTemplate(descr->id());
     __createInternals(model, descr);

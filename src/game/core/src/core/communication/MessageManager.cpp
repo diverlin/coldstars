@@ -72,54 +72,54 @@ void MessageManager::process(const Message& message)
     }
     case TELEGRAM::CREATE_SHIP: {
         assert(false);
-//        builder::Ship::getNew(message.data);
+//        builder::Ship::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_BOMB: {
         assert(false);
-//        core::global::get().bombBuilder().getNew(message.data);
+//        core::global::get().bombBuilder().gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_CONTAINER: {
         assert(false);
-//        core::global::get().containerBuilder().getNew(message.data);
+//        core::global::get().containerBuilder().gen(message.data);
         break;
     }
 
         // items
     case TELEGRAM::CREATE_BAK: {
         assert(false);
-//        builder::item::Bak::getNew(message.data);
+//        builder::item::Bak::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_DRIVE: {
         assert(false);
-//        auto model = builder::item::Drive::getNew(message.data);
+//        auto model = builder::item::Drive::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_DROID: {
         assert(false);
-//        builder::item::Droid::getNew(message.data);
+//        builder::item::Droid::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_GRAPPLE: {
         assert(false);
-//        builder::item::Grapple::getNew(message.data);
+//        builder::item::Grapple::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_PROTECTOR: {
         assert(false);
-//        builder::item::Protector::getNew(message.data);
+//        builder::item::Protector::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_SCANER: {
         assert(false);
-//        builder::item::Scaner::getNew(message.data);
+//        builder::item::Scaner::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_RADAR: {
         assert(false);
-//        builder::item::Radar::getNew(message.data);
+//        builder::item::Radar::gen(message.data);
         break;
     }
 

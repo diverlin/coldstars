@@ -187,7 +187,7 @@ getNewPlanet()
 
 
     //model::Planet*
-    //Planet::getNew(descriptor::BaseOLD* descr)
+    //Planet::gen(descriptor::BaseOLD* descr)
     //{
     //    model::Planet* model = __genTemplate();
 

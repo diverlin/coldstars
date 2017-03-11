@@ -103,50 +103,50 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 
     for (unsigned int i=0; i<vehicle_num; i++) {
         assert(false);
-        //store->addVehicle(ShipBuilder::getNew());
+        //store->addVehicle(ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
         assert(false);
-//        store->addItem(core::global::get().lazerBuilder().getNew());
+//        store->addItem(core::global::get().lazerBuilder().gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
         assert(false);
-//        store->addItem(core::global::get().rocketBuilder().getNew());
+//        store->addItem(core::global::get().rocketBuilder().gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::RADAR);
-//        store->addItem(core::global::get().radarBuilder().getNew(descr));
+//        store->addItem(core::global::get().radarBuilder().gen(descr));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::GRAPPLE);
-//        store->addItem(core::global::get().grappleBuilder().getNew(descr));
+//        store->addItem(core::global::get().grappleBuilder().gen(descr));
     }
     for (unsigned int i=0; i<drive_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::DRIVE);
-//        store->addItem(core::global::get().driveBuilder().getNew(descr));
+//        store->addItem(core::global::get().driveBuilder().gen(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::PROTECTOR);
-//        store->addItem(core::global::get().protectorBuilder().getNew(descr));
+//        store->addItem(core::global::get().protectorBuilder().gen(descr));
     }
     for (unsigned int i=0; i<bak_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::BAK);
-//        store->addItem(core::global::get().bakBuilder().getNew(descr));
+//        store->addItem(core::global::get().bakBuilder().gen(descr));
     }
     for (unsigned int i=0; i<droid_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::DROID);
-//        store->addItem(core::global::get().droidBuilder().getNew(descr));
+//        store->addItem(core::global::get().droidBuilder().gen(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
         assert(false);
 //        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::SCANER);
-//        store->addItem(core::global::get().scanerBuilder().getNew(descr));
+//        store->addItem(core::global::get().scanerBuilder().gen(descr));
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

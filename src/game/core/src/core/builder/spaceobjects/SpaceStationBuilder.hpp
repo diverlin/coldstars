@@ -49,8 +49,8 @@ namespace builder {
 class SpaceStation : public BaseVehicle
 {
 public:
-    static model::SpaceStation* getNew();
-    static model::SpaceStation* getNew(descriptor::SpaceStation*);
+    static model::SpaceStation* gen();
+    static model::SpaceStation* gen(descriptor::SpaceStation*);
 
 private:
     SpaceStation() = default;

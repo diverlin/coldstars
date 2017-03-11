@@ -27,22 +27,22 @@ namespace builder {
 namespace item {
 
 model::item::Bak*
-Bak::getNew()
+Bak::gen()
 {
     descriptor::item::Bak* descr = descriptor::Manager::get().randBak();
-    return getNew(descr);
+    return gen(descr);
 }
 
 //model::item::Bak*
-//Bak::getNew(const std::string& data)
+//Bak::gen(const std::string& data)
 //{
 //    descriptor::item::Bak descr(data);
 //    assert(descr->descriptor() != descriptor::type::BAK_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Bak*
-Bak::getNew(descriptor::item::Bak* descr)
+Bak::gen(descriptor::item::Bak* descr)
 {
     model::item::Bak* model = __genTemplate(descr->id());
     __createInternals(model, descr);

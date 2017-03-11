@@ -28,7 +28,7 @@ namespace builder {
 namespace item {
 
 model::item::Radar*
-Radar::getNew()
+Radar::gen()
 {
     descriptor::item::Radar* descr = descriptor::Manager::get().randRadar();
     model::item::Radar* model = __genTemplate(descr->id());
@@ -38,15 +38,15 @@ Radar::getNew()
 }
 
 //model::item::Radar*
-//Radar::getNew(const std::string& data)
+//Radar::gen(const std::string& data)
 //{
 //    descriptor::item::Radar descr(data);
 //    assert(descr->descriptor() != descriptor::type::RADAR_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Radar*
-Radar::getNew(descriptor::item::Radar* descr)
+Radar::gen(descriptor::item::Radar* descr)
 {
     model::item::Radar* model = __genTemplate(descr->id());
     __createInternals(model, descr);

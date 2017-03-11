@@ -31,7 +31,7 @@ public:
     BlackHole();
     ~BlackHole();
 
-    static model::BlackHole* getNew();
+    static model::BlackHole* gen();
 
 private:
     static void __createInternals(model::BlackHole*);

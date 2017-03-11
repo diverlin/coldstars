@@ -85,7 +85,7 @@ TEST(ship, drop_item_to_space)
     test::Ship ship;
 
     /* equip ship */
-    model::item::Drive* drive = builder::item::Drive::getNew();
+    model::item::Drive* drive = builder::item::Drive::gen();
     assert(false);
 //    ship->manage(drive);
 

@@ -36,7 +36,7 @@ Ship::__genTemplate(int_t descriptor_id)
 }
 
 model::Ship*
-Ship::getNew(descriptor::Ship* descr)
+Ship::gen(descriptor::Ship* descr)
 {
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
@@ -51,10 +51,10 @@ Ship::getNew(descriptor::Ship* descr)
 }
 
 model::Ship*
-Ship::getNew(bool full_equiped)
+Ship::gen(bool full_equiped)
 {
     const auto& descr = descriptor::Manager::get().randShip();
-    model::Ship* model = getNew(descr);
+    model::Ship* model = gen(descr);
     if (full_equiped) {
         assert(false);
         //BaseVehicleBuilder::equip(ship);
@@ -63,9 +63,9 @@ Ship::getNew(bool full_equiped)
 }
 
 //model::Ship*
-//Ship::getNew(const std::string& data)
+//Ship::gen(const std::string& data)
 //{
-//    return getNew(descriptor::Vehicle(data));
+//    return gen(descriptor::Vehicle(data));
 //}
 
 void

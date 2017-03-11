@@ -30,7 +30,7 @@ namespace builder {
 namespace item {
 
 model::item::Protector*
-Protector::getNew()
+Protector::gen()
 {
     descriptor::item::Protector* descr = descriptor::Manager::get().randProtector();
     model::item::Protector* model = __genTemplate(descr->id());
@@ -39,25 +39,25 @@ Protector::getNew()
 } 
 
 std::vector<model::item::Protector*>
-Protector::getNew(int num)
+Protector::gen(int num)
 {
     std::vector<model::item::Protector*> result;
     for (int i=0; i<num; ++i) {
-        result.push_back(getNew());
+        result.push_back(gen());
     }
     return result;
 }
 
 //model::item::Protector*
-//Protector::getNew(const std::string& data)
+//Protector::gen(const std::string& data)
 //{
 //    descriptor::item::Protector descr(data);
 //    assert(descr->descriptor() != descriptor::type::PROTECTOR_EQUIPMENT);
-//    return getNew(descr);
+//    return gen(descr);
 //}
 
 model::item::Protector*
-Protector::getNew(descriptor::item::Protector* descr)
+Protector::gen(descriptor::item::Protector* descr)
 {
     model::item::Protector* model = __genTemplate(descr->id());
     __createInternals(model, descr);

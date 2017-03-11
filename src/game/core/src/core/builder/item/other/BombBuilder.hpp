@@ -33,8 +33,8 @@ public:
     BombBuilder();
     ~BombBuilder();
 
-    static Bomb* getNew();
-    static Bomb* getNew(descriptor::BaseOLD*);
+    static Bomb* gen();
+    static Bomb* gen(descriptor::BaseOLD*);
 
 private:
     static void __createInternals(Bomb*, descriptor::BaseOLD*);

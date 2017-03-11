@@ -43,9 +43,9 @@ namespace item {
 class Scaner : public Equipment
 {
 public:
-    static model::item::Scaner* getNew();
-//    static model::item::Scaner* getNew(const std::string&);
-    static model::item::Scaner* getNew(descriptor::item::Scaner*);
+    static model::item::Scaner* gen();
+//    static model::item::Scaner* gen(const std::string&);
+    static model::item::Scaner* gen(descriptor::item::Scaner*);
 
 private:
     Scaner() = delete;

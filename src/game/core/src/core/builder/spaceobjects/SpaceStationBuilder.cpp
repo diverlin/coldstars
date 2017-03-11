@@ -42,7 +42,7 @@ SpaceStation::__genTemplate(int_t descriptor_id)
 }
 
 model::SpaceStation*
-SpaceStation::getNew(descriptor::SpaceStation* descr)
+SpaceStation::gen(descriptor::SpaceStation* descr)
 {
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
@@ -57,7 +57,7 @@ SpaceStation::getNew(descriptor::SpaceStation* descr)
 }
 
 model::SpaceStation*
-SpaceStation::getNew()
+SpaceStation::gen()
 {
     descriptor::SpaceStation* descr = descriptor::Manager::get().randSpaceStation();
     model::SpaceStation* spacestation = __genTemplate(descr->id());

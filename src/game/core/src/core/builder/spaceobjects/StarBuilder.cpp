@@ -43,14 +43,14 @@ Star::__genTemplate(int_t id)
 } 
  
 model::Star*
-Star::getNew()
+Star::gen()
 {
     const auto& descr = descriptor::Manager::get().star().random();
-    return getNew(descr);
+    return gen(descr);
 } 
 
 model::Star*
-Star::getNew(descriptor::Star* descr)
+Star::gen(descriptor::Star* descr)
 {
     model::Star* model = __genTemplate();
 
