@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <core/types/RaceTypes.hpp>
 
 #include <core/descriptor/SpaceobjectDescriptor.hpp>
 
@@ -35,7 +35,7 @@ public:
     Vehicle() = default;
     virtual ~Vehicle() = default;
 
-    int_t race() const { return m_race; }
+    race::Type race() const { return m_race; }
 
     int space() const { return m_space; }
     int protection() const { return m_protection; }
@@ -62,7 +62,7 @@ public:
     int cargoSlotNum() const { return m_cargoSlotNum; }
 
 
-    void setRace(int_t race) { m_race = race; }
+    void setRace(race::Type race) { m_race = race; }
 
     void setSpace(int space) { m_space = space; }
     void setProtection(int protection) { m_protection = protection; }
@@ -89,7 +89,7 @@ public:
 
     std::string info() const {
         std::string result = "Vehicle descriptor:\n";
-        result += std::string(" race = ") + meti::to_string(m_race) + "\n";
+        result += std::string(" race = ") + to_string(m_race) + "\n";
 
         result += std::string(" space = ") + meti::to_string(m_space) + "\n";
         result += std::string(" protection = ") + meti::to_string(m_protection) + "\n";
@@ -119,7 +119,7 @@ public:
     }
 
 private:
-    int_t m_race = 0;
+    race::Type m_race = race::Type::NONE;
 
     int m_space = 0;
     int m_protection = 0;

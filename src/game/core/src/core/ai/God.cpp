@@ -251,7 +251,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {
-        race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+        race::Type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
         entity::Type npc_subtype_id    = entity::Type::WARRIOR;
         entity::Type npc_subsubtype_id = entity::Type::WARRIOR;
 
@@ -291,7 +291,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
     }
 }
 
-void God::__createShips(Starsystem* starsystem, int ship_num, race::type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
+void God::__createShips(Starsystem* starsystem, int ship_num, race::Type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
 {
     entity::Type npc_subtype_id = entity::Type::NONE;
     entity::Type npc_subsubtype_id = entity::Type::NONE;
