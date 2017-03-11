@@ -30,7 +30,7 @@ namespace builder {
 model::Ship*
 Ship::getNew(bool full_equiped)
 {
-    const auto& descr = descriptor::Manager::get().ship().random();
+    const auto& descr = descriptor::Manager::get().randShip();
     model::Ship* ship =  getNew(descr);
     if (full_equiped) {
         assert(false);
@@ -49,7 +49,7 @@ Ship::getNew(descriptor::Ship* descriptor)
 //        id = descr->objId();
 //    }
 
-    model::Ship* ship = __getNewTemplate(/*id*/);
+    model::Ship* ship = __getNewTemplate();
     __createInternals(ship, descriptor);
     return ship;
 }

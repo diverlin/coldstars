@@ -64,7 +64,7 @@ void compareVehicle(const descriptor::Vehicle& descr, const descriptor::Vehicle&
 } // namespace
 
 TEST(descriptor, ship) {
-    descriptor::Ship descr = *descriptor::getNewShip();
+    descriptor::Ship descr = *descriptor::genShip();
     descriptor::Ship copy(descr.data());
 
     EXPECT_EQ(descr.type(), descriptor::Type::SHIP);
@@ -74,7 +74,7 @@ TEST(descriptor, ship) {
 }
 
 TEST(descriptor, satellite) {
-    descriptor::Satellite descr = *descriptor::getNewSatellite();
+    descriptor::Satellite descr = *descriptor::genSatellite();
     descriptor::Satellite copy(descr.data());
 
     EXPECT_EQ(descr.type(), descriptor::Type::SATELLITE);
@@ -84,7 +84,7 @@ TEST(descriptor, satellite) {
 }
 
 TEST(descriptor, spacestation) {
-    descriptor::SpaceStation descr = *descriptor::getNewSpaceStation();
+    descriptor::SpaceStation descr = *descriptor::genSpaceStation();
     descriptor::SpaceStation copy(descr.data());
 
     EXPECT_EQ(descr.type(), descriptor::Type::SPACESTATION);

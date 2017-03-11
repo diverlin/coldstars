@@ -74,15 +74,6 @@ void Manager::add(Planet* planet) {
 void Manager::add(Asteroid* asteroid) {
     m_asteroid.add(asteroid);
 }
-void Manager::add(Ship* ship) {
-    m_ship.add(ship);
-}
-void Manager::add(SpaceStation* spacestation) {
-    m_spacestation.add(spacestation);
-}
-void Manager::add(Satellite* satellite) {
-    m_satellite.add(satellite);
-}
 void Manager::add(Container* container) {
     m_container.add(container);
 }
@@ -197,6 +188,28 @@ Manager::rand(Type type) const
     return descr;
 }
 
+Ship*
+Manager::randShip() const
+{
+    Ship* descr = static_cast<Ship*>(rand(Type::SHIP));
+    assert(descr);
+    return descr;
+}
+Satellite*
+Manager::randSatellite() const
+{
+    Satellite* descr = static_cast<Satellite*>(rand(Type::SATELLITE));
+    assert(descr);
+    return descr;
+}
+SpaceStation*
+Manager::randSpaceStation() const
+{
+    SpaceStation* descr = static_cast<SpaceStation*>(rand(Type::SPACESTATION));
+    assert(descr);
+    return descr;
+}
+
 item::Scaner*
 Manager::randScaner() const
 {
@@ -265,6 +278,28 @@ item::Rocket*
 Manager::randRocket() const
 {
     item::Rocket* descr = static_cast<item::Rocket*>(rand(Type::ROCKET_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+Ship*
+Manager::ship(int_t id) const
+{
+    Ship* descr = static_cast<Ship*>(get(id));
+    assert(descr);
+    return descr;
+}
+Satellite*
+Manager::satellite(int_t id) const
+{
+    Satellite* descr = static_cast<Satellite*>(get(id));
+    assert(descr);
+    return descr;
+}
+SpaceStation*
+Manager::spaceStation(int_t id) const
+{
+    SpaceStation* descr = static_cast<SpaceStation*>(get(id));
     assert(descr);
     return descr;
 }
@@ -417,9 +452,9 @@ Manager::generate()
     num = base * 10;
     // spaceobjects
     for(int i=0; i<num; ++i) {
-        add(getNewShip());
-        add(getNewSpaceStation());
-        add(getNewSatellite());
+        genShip();
+        genSpaceStation();
+        genSatellite();
         add(getNewStar());
         add(getNewPlanet());
         add(getNewAsteroid());

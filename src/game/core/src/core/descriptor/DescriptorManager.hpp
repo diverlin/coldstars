@@ -113,6 +113,10 @@ public:
     Base* get(int_t) const;
     Base* rand(Type) const;
 
+    Ship* randShip() const;
+    Satellite* randSatellite() const;
+    SpaceStation* randSpaceStation() const;
+
     item::Scaner* randScaner() const;
     item::Drive* randDrive() const;
     item::Bak* randBak() const;
@@ -122,6 +126,10 @@ public:
     item::Protector* randProtector() const;
     item::Radar* randRadar() const;
     item::Rocket* randRocket() const;
+
+    Ship* ship(int_t) const;
+    Satellite* satellite(int_t) const;
+    SpaceStation* spaceStation(int_t) const;
 
     item::Scaner* scaner(int_t) const;
     item::Drive* drive(int_t) const;
@@ -145,9 +153,6 @@ public:
     void add(Star*);
     void add(Planet*);
     void add(Asteroid*);
-    void add(Ship*);
-    void add(SpaceStation*);
-    void add(Satellite*);
     void add(Container*);
 
     void add(Mesh*);
@@ -159,9 +164,6 @@ public:
     const MManager<Star>& star() const { return m_star; }
     const MManager<Planet>& planet() const { return m_planet; }
     const MManager<Asteroid>& asteroid() const { return m_asteroid; }
-    const MManager<Ship>& ship() const { return m_ship; }
-    const MManager<SpaceStation>& spacestation() const { return m_spacestation; }
-    const MManager<Satellite>& satellite() const { return m_satellite; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -182,9 +184,6 @@ private:
     MManager<Star> m_star;
     MManager<Planet> m_planet;
     MManager<Asteroid> m_asteroid;
-    MManager<Ship> m_ship;
-    MManager<SpaceStation> m_spacestation;
-    MManager<Satellite> m_satellite;
     MManager<Container> m_container;
 
     ceti::Collector<Mesh> m_mesh;

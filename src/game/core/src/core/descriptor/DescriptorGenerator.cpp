@@ -281,7 +281,7 @@ getNewContainer()
 }
 
 descriptor::Ship*
-getNewShip()
+genShip()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
@@ -361,14 +361,14 @@ getNewShip()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 
 descriptor::SpaceStation*
-getNewSpaceStation()
+genSpaceStation()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
@@ -448,13 +448,13 @@ getNewSpaceStation()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }
 
 descriptor::Satellite*
-getNewSatellite()
+genSatellite()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
@@ -534,7 +534,7 @@ getNewSatellite()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     return descr;
 }

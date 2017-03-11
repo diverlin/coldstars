@@ -58,9 +58,9 @@ descriptor::Starsystem* getNewStarsystem(int race = NONE);
 descriptor::Star* getNewStar();
 descriptor::Planet* getNewPlanet();
 descriptor::Asteroid* getNewAsteroid();
-descriptor::Ship* getNewShip();
-descriptor::SpaceStation* getNewSpaceStation();
-descriptor::Satellite* getNewSatellite();
+descriptor::Ship* genShip();
+descriptor::SpaceStation* genSpaceStation();
+descriptor::Satellite* genSatellite();
 descriptor::Container* getNewContainer();
 
 /* items */

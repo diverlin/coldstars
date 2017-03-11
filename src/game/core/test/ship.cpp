@@ -210,7 +210,7 @@ void compareShipControls(control::Ship* c1, control::Ship* c2)
 void testShipClone(const test::Ship& ship)
 {
     model::Ship* model = new model::Ship(ship.model()->data());
-    control::Ship* control = new control::Ship(model, ship.descriptor());
+    control::Ship* control = new control::Ship(model);
 
     compareShipModels(ship.model(), model);
     compareShipControls(ship.control(), control);
