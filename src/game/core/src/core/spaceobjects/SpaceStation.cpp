@@ -36,15 +36,16 @@
 #include <core/model/spaceobject/SpaceStation.hpp>
 
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 namespace control {
 
 
-SpaceStation::SpaceStation(model::SpaceStation* model, descriptor::SpaceStation* descr)
+SpaceStation::SpaceStation(model::SpaceStation* model)
     :
-      Vehicle(model, descr)
+      Vehicle(model, descriptor::Manager::get().spaceStation(model->descriptor()))
     , m_model_spacestation(model)
-    , m_descriptor_spacestation(descr)
+    , m_descriptor_spacestation(descriptor::Manager::get().spaceStation(model->descriptor()))
 {
 
 }

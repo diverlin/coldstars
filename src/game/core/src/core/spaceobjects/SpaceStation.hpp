@@ -27,7 +27,6 @@ namespace model {
 class SpaceStation;
 } // namespace descriptor
 
-//#include <core/descriptor/SpaceStationDescriptor.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 
 #include <core/spaceobjects/Vehicle.hpp>
@@ -39,7 +38,7 @@ namespace control {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation(model::SpaceStation*, descriptor::SpaceStation*);
+    SpaceStation(model::SpaceStation*);
     virtual ~SpaceStation();
 
     [[warning("incapsulate this shit")]]

@@ -37,7 +37,7 @@ namespace control {
 class Satellite : public Vehicle
 {
 public:
-    Satellite(model::Satellite*, descriptor::Satellite*);
+    Satellite(model::Satellite*);
     virtual ~Satellite();
 
     void BindParent(const SpaceObject* const);
