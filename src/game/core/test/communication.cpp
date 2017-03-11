@@ -39,7 +39,6 @@
 #include <core/descriptor/Descriptor.hpp>
 #include <core/descriptor/Container.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
-#include <core/descriptor/VehicleDescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>
 #include <core/managers/EntityManager.hpp>

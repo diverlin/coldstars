@@ -46,7 +46,6 @@
 
 #include <core/descriptor/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
-#include <core/descriptor/VehicleDescriptorGenerator.hpp>
 
 #include <math/rand.hpp>
 

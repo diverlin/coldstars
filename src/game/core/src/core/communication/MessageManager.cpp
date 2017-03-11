@@ -8,7 +8,6 @@
 #include <types/EntityTypes.hpp> // test
 
 #include <core/descriptor/DescriptorManager.hpp>
-#include <core/descriptor/VehicleDescriptor.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/Descriptor.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
