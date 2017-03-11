@@ -44,13 +44,13 @@ Grapple::getNew()
 model::item::Grapple*
 Grapple::getNew(descriptor::item::Grapple* descr)
 {
-    model::item::Grapple* model = __createTemplate(descr->id());
+    model::item::Grapple* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
 
 model::item::Grapple*
-Grapple::__createTemplate(int_t descriptor_id)
+Grapple::__genTemplate(int_t descriptor_id)
 {
     model::item::Grapple* model = new model::item::Grapple(descriptor_id);
     core::global::get().entityManager().reg(model);

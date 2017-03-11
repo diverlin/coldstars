@@ -24,6 +24,9 @@
 
 //#include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class SpaceStation;
+} // namespace descriptor
 
 namespace model {
 class SpaceStation;
@@ -46,14 +49,15 @@ namespace builder {
 class SpaceStation : public BaseVehicle
 {
 public:
-    SpaceStation();
-    ~SpaceStation();
-
     static model::SpaceStation* getNew();
+    static model::SpaceStation* getNew(descriptor::SpaceStation*);
 
 private:
-    static void __createInternals(model::SpaceStation*);
-    static model::SpaceStation* __createTemplate();
+    SpaceStation() = default;
+    ~SpaceStation() = default;
+
+    static void __createInternals(model::SpaceStation*, descriptor::SpaceStation*);
+    static model::SpaceStation* __genTemplate(int_t);
 }; 
 
 } // namespace builder

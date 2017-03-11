@@ -31,7 +31,7 @@ model::item::Radar*
 Radar::getNew()
 {
     descriptor::item::Radar* descr = descriptor::Manager::get().randRadar();
-    model::item::Radar* model = __createTemplate(descr->id());
+    model::item::Radar* model = __genTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
@@ -48,13 +48,13 @@ Radar::getNew()
 model::item::Radar*
 Radar::getNew(descriptor::item::Radar* descr)
 {
-    model::item::Radar* model = __createTemplate(descr->id());
+    model::item::Radar* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
 
 model::item::Radar*
-Radar::__createTemplate(int_t descriptor_id)
+Radar::__genTemplate(int_t descriptor_id)
 {
     model::item::Radar* model = new model::item::Radar(descriptor_id);
     core::global::get().entityManager().reg(model);

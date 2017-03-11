@@ -23,6 +23,11 @@
 
 namespace model {
 
+Ship::Ship(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
 Ship::Ship(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

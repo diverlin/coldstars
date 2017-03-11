@@ -51,7 +51,7 @@ private:
     Drive() = delete;
     ~Drive() = delete;
 
-    static model::item::Drive* __createTemplate(int_t);
+    static model::item::Drive* __genTemplate(int_t);
     static void __createInternals(model::item::Drive*, descriptor::item::Drive*);
 }; 
 

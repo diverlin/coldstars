@@ -189,7 +189,7 @@ getNewPlanet()
     //model::Planet*
     //Planet::getNew(descriptor::BaseOLD* descr)
     //{
-    //    model::Planet* model = __createTemplate();
+    //    model::Planet* model = __genTemplate();
 
     //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     //    //jeti::control::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET);

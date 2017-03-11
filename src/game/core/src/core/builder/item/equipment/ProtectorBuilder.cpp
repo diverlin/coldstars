@@ -33,7 +33,7 @@ model::item::Protector*
 Protector::getNew()
 {
     descriptor::item::Protector* descr = descriptor::Manager::get().randProtector();
-    model::item::Protector* model = __createTemplate(descr->id());
+    model::item::Protector* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 } 
@@ -59,13 +59,13 @@ Protector::getNew(int num)
 model::item::Protector*
 Protector::getNew(descriptor::item::Protector* descr)
 {
-    model::item::Protector* model = __createTemplate(descr->id());
+    model::item::Protector* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
 model::item::Protector*
-Protector::__createTemplate(int_t descriptor_id)
+Protector::__genTemplate(int_t descriptor_id)
 {
     model::item::Protector* model = new model::item::Protector(descriptor_id);
     core::global::get().entityManager().reg(model);

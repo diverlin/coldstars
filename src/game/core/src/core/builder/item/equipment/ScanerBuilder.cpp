@@ -31,7 +31,7 @@ model::item::Scaner*
 Scaner::getNew()
 {
     descriptor::item::Scaner* descr = descriptor::Manager::get().randScaner();
-    model::item::Scaner* model = __createTemplate(descr->id());
+    model::item::Scaner* model = __genTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
@@ -48,14 +48,14 @@ Scaner::getNew()
 model::item::Scaner*
 Scaner::getNew(descriptor::item::Scaner* descr)
 {
-    model::item::Scaner* model = __createTemplate(descr->id());
+    model::item::Scaner* model = __genTemplate(descr->id());
     __createInternals(model, descr);
 
     return model;
 } 
 
 model::item::Scaner*
-Scaner::__createTemplate(int_t descriptor_id)
+Scaner::__genTemplate(int_t descriptor_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descriptor_id);
     core::global::get().entityManager().reg(model);

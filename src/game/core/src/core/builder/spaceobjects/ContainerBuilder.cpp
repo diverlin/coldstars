@@ -56,13 +56,13 @@ Container::getNew()
 model::Container*
 Container::getNew(descriptor::BaseOLD* descriptor)
 {
-    model::Container* container = __getNewTemplate();
+    model::Container* container = __genTemplate();
     __createInternals(container, descriptor);
     return container;
 }
 
 model::Container*
-Container::__getNewTemplate()
+Container::__genTemplate()
 {
     model::Container* container = new model::Container;
     assert(container);

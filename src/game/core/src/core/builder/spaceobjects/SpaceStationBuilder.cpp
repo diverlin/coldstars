@@ -21,6 +21,8 @@
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/SpaceStation.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
+
 #include <core/dock/Kosmoport.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -28,15 +30,10 @@
 
 namespace builder {
 
-SpaceStation::SpaceStation()
-{}
-
-SpaceStation::~SpaceStation() {}
-
 model::SpaceStation*
-SpaceStation::__createTemplate()
+SpaceStation::__genTemplate(int_t descriptor_id)
 {           
-    model::SpaceStation* spacestation = new model::SpaceStation;
+    model::SpaceStation* spacestation = new model::SpaceStation(descriptor_id);
     assert(spacestation);
 
     core::global::get().entityManager().reg(spacestation);
@@ -45,16 +42,32 @@ SpaceStation::__createTemplate()
 }
 
 model::SpaceStation*
+SpaceStation::getNew(descriptor::SpaceStation* descr)
+{
+//    descriptor::Vehicle descriptor(descr->data());
+//    int_t id = NONE;
+//    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
+//        descriptor = descriptor::Manager::get().get(descr->descriptor());
+//        id = descr->objId();
+//    }
+
+    model::SpaceStation* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+}
+
+model::SpaceStation*
 SpaceStation::getNew()
 {
-    model::SpaceStation* spacestation = __createTemplate();
-    __createInternals(spacestation);
+    descriptor::SpaceStation* descr = descriptor::Manager::get().randSpaceStation();
+    model::SpaceStation* spacestation = __genTemplate(descr->id());
+    __createInternals(spacestation, descr);
     
     return spacestation;
 }
 
 void
-SpaceStation::__createInternals(model::SpaceStation* spacestation)
+SpaceStation::__createInternals(model::SpaceStation* model, descriptor::SpaceStation* descr)
 {
     assert(false);
 

@@ -32,7 +32,7 @@
 namespace builder {
 
 model::Star*
-Star::__getNewTemplate(int_t id)
+Star::__genTemplate(int_t id)
 { 
     model::Star* model = new model::Star;
     model->setId(id);
@@ -52,7 +52,7 @@ Star::getNew()
 model::Star*
 Star::getNew(descriptor::Star* descr)
 {
-    model::Star* model = __getNewTemplate();
+    model::Star* model = __genTemplate();
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));

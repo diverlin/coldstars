@@ -42,7 +42,7 @@ public:
     static model::Star* getNew(descriptor::Star*);
 
 private:
-    static model::Star* __getNewTemplate(int_t id = NONE);
+    static model::Star* __genTemplate(int_t id = NONE);
 };
 
 } // namespace builder

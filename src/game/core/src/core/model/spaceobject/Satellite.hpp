@@ -31,7 +31,7 @@ namespace model {
 class Satellite : public Vehicle
 {
 public:
-    Satellite() = default;
+    Satellite(int_t);
     ~Satellite() = default;
     Satellite(const std::string& data);
     std::string data() const;

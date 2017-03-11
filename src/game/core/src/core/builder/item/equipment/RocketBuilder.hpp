@@ -51,7 +51,7 @@ private:
     Rocket() = delete;
     ~Rocket() = delete;
 
-    static model::item::Rocket* __createTemplate(int_t);
+    static model::item::Rocket* __genTemplate(int_t);
     static void __createInternals(model::item::Rocket*, descriptor::item::Rocket*);
 }; 
 

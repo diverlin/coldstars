@@ -23,6 +23,11 @@
 
 namespace model {
 
+Satellite::Satellite(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
 Satellite::Satellite(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

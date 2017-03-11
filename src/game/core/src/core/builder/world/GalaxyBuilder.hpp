@@ -39,7 +39,7 @@ private:
     ~Galaxy() = delete;
 
     static void __createInternals(model::Galaxy*, descriptor::Galaxy*);
-    static model::Galaxy* __createTemplate();
+    static model::Galaxy* __genTemplate();
 }; 
 
 } // namespace builder

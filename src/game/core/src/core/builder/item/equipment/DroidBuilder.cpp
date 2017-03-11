@@ -30,7 +30,7 @@ model::item::Droid*
 Droid::getNew()
 {
     descriptor::item::Droid* descr = descriptor::Manager::get().randDroid();
-    model::item::Droid* model = __createTemplate(descr->id());
+    model::item::Droid* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -46,13 +46,13 @@ Droid::getNew()
 model::item::Droid*
 Droid::getNew(descriptor::item::Droid* descr)
 {
-    model::item::Droid* model = __createTemplate(descr->id());
+    model::item::Droid* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }  
 
 model::item::Droid*
-Droid::__createTemplate(int_t descriptor_id)
+Droid::__genTemplate(int_t descriptor_id)
 {
     model::item::Droid* model = new model::item::Droid(descriptor_id);
     core::global::get().entityManager().reg(model);

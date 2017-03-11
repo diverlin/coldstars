@@ -26,8 +26,6 @@ namespace item {
 Bak::Bak(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-//    setType(entity::type::EQUIPMENT);
-//    setSubType(entity::type::BAK_EQUIPMENT);
 }
 
 Bak::Bak(const std::string& data)

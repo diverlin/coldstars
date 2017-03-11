@@ -50,7 +50,7 @@ public:
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
-    static model::Container* __getNewTemplate();
+    static model::Container* __genTemplate();
     static void __createInternals(model::Container*, descriptor::BaseOLD*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;

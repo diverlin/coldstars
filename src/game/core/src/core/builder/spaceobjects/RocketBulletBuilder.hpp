@@ -39,7 +39,7 @@ public:
 
 private:
     void createInternals(model::RocketBullet*, const BulletData&) const;
-    model::RocketBullet* __createTemplate(int_t id = NONE) const;
+    model::RocketBullet* __genTemplate(int_t id = NONE) const;
 }; 
 
 } // namespace builder

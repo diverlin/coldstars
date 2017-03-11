@@ -20,22 +20,17 @@
 #include <core/builder/CommonBuilderHeaders.hpp>
 //#include <core/spaceobjects/Satellite.hpp>
 #include <core/model/spaceobject/Satellite.hpp>
+#include <core/descriptor/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
 
 
 namespace builder {
 
-Satellite::Satellite()
-{}
-
-Satellite::~Satellite()
-{}
-
 model::Satellite*
-Satellite::__createTemplate()
+Satellite::__genTemplate(int_t descriptor_id)
 {
-    model::Satellite* model = new model::Satellite;
+    model::Satellite* model = new model::Satellite(descriptor_id);
     assert(model);
 
     core::global::get().entityManager().reg(model);
@@ -44,15 +39,31 @@ Satellite::__createTemplate()
 }
 
 model::Satellite*
+Satellite::getNew(descriptor::Satellite* descr)
+{
+//    descriptor::Vehicle descriptor(descr->data());
+//    int_t id = NONE;
+//    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
+//        descriptor = descriptor::Manager::get().get(descr->descriptor());
+//        id = descr->objId();
+//    }
+
+    model::Satellite* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+}
+
+model::Satellite*
 Satellite::getNew()
 {
-    model::Satellite* satellite = __createTemplate();
-    __createInternals(satellite);
+    const auto& descr = descriptor::Manager::get().randSatellite();
+    model::Satellite* satellite = __genTemplate(descr->id());
+    __createInternals(satellite, descr);
     
     return satellite;
 }
 
-void Satellite::__createInternals(model::Satellite* model)
+void Satellite::__createInternals(model::Satellite* model, descriptor::Satellite* descr)
 {
     assert(false);
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);

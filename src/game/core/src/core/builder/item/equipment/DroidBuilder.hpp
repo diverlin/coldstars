@@ -51,7 +51,7 @@ private:
     Droid() = delete;
     ~Droid() = delete;
 
-    static model::item::Droid* __createTemplate(int_t);
+    static model::item::Droid* __genTemplate(int_t);
     static void __createInternals(model::item::Droid*, descriptor::item::Droid*);
 }; 
 

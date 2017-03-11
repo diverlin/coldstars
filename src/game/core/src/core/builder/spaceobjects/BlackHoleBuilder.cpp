@@ -33,7 +33,7 @@ BlackHole::~BlackHole()
 {}
 
 model::BlackHole*
-BlackHole::__createTemplate()
+BlackHole::__genTemplate()
 {
     model::BlackHole* blackhole = new model::BlackHole;
     assert(blackhole);
@@ -49,7 +49,7 @@ BlackHole::__createTemplate()
 model::BlackHole*
 BlackHole::getNew()
 {
-    model::BlackHole* blackhole = __createTemplate();
+    model::BlackHole* blackhole = __genTemplate();
     __createInternals(blackhole);
 
     return blackhole;

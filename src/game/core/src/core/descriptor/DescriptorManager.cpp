@@ -148,11 +148,11 @@ Base*
 Manager::get(int_t id) const
 {
     const auto it = m_descriptors.find(id);
-    if (it == m_descriptors.end()) {
-        assert(false);
-        throw std::runtime_error("Base* Manager::get descriptor id doesn't exist");
+    if (it != m_descriptors.end()) {
+        return it->second;
     }
-    return it->second;
+    assert(false);
+    throw std::runtime_error("Base* Manager::get descriptor id doesn't exist");
 }
 
 BaseOLD*
@@ -181,7 +181,7 @@ Manager::rand(Type type) const
 {
     std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
     if (it == m_descriptorsTypes.end()) {
-        throw std::runtime_error("Base* Manager::randdescriptor type doesn't exist");
+        throw std::runtime_error("Base* Manager::randdescriptor type = " + to_string(type) + " doesn't exist");
     }
     Base* descr = meti::getRand(it->second);
     assert(descr);
