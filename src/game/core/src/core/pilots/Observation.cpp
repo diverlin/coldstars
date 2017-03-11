@@ -79,9 +79,9 @@ Observation::GetClosestStarSystem(int requested_consdition_id) const
 }        
 
 
-Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<race::type>& races) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<race::Type>& races) const
 {
-    for (const race::type& race: races) {
+    for (const race::Type& race: races) {
         for (auto pair: visible_VEHICLE_pair_vec) {
             assert(false);
 //            if (race == pair.object->npc()->raceId()) {
@@ -93,10 +93,10 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<race::type>& ra
     return nullptr;
 }
 
-Vehicle* Observation::GetRandVisibleVehicle(const std::vector<race::type>& races) const
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<race::Type>& races) const
 {
     std::vector<Vehicle*> vehicles;
-    for (const race::type& race: races) {
+    for (const race::Type& race: races) {
         for (auto pair: visible_VEHICLE_pair_vec) {
             assert(false);
 //            if (race == pair.object->npc()->raceId()) {

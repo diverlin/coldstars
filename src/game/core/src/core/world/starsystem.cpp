@@ -144,7 +144,7 @@ void Starsystem::putChildrenToGarbage() const
 }      
 
 model::Npc*
-Starsystem::freeLeaderByRaceId(race::type race_id) const
+Starsystem::freeLeaderByRaceId(race::Type race_id) const
 {
     std::vector<model::Npc*> npcs;
     for (control::Vehicle* vehicle: m_vehicles) {
@@ -446,7 +446,7 @@ Starsystem::randomVehicle() const
 }
 
 control::Vehicle*
-Starsystem::randomVehicleExcludingNpcRaceId(race::type race_id) const
+Starsystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -467,7 +467,7 @@ Starsystem::randomVehicleExcludingNpcRaceId(race::type race_id) const
 }
 
 control::Vehicle*
-Starsystem::randVehicleByNpcRaceId(race::type race_id) const
+Starsystem::randVehicleByNpcRaceId(race::Type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -489,7 +489,7 @@ Starsystem::randVehicleByNpcRaceId(race::type race_id) const
 }
 
 control::Vehicle*
-Starsystem::randomVehicle(const std::vector<race::type>& races) const
+Starsystem::randomVehicle(const std::vector<race::Type>& races) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -565,14 +565,14 @@ void Starsystem::__updateStates()
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED;
-                if (randVehicleByNpcRaceId(race::type::R6) != nullptr)
+                if (randVehicleByNpcRaceId(race::Type::R6) != nullptr)
                 {
-                    m_conqueror_race_id = race::type::R6;
+                    m_conqueror_race_id = race::Type::R6;
                 }
 
-                if (randVehicleByNpcRaceId(race::type::R7) != nullptr)
+                if (randVehicleByNpcRaceId(race::Type::R7) != nullptr)
                 {
-                    m_conqueror_race_id = race::type::R7;
+                    m_conqueror_race_id = race::Type::R7;
                 }
             }
         }
@@ -591,7 +591,7 @@ void Starsystem::__updateStates()
             else
             {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE;
-                m_conqueror_race_id = race::type::NONE;
+                m_conqueror_race_id = race::Type::NONE;
             }
         }
 
@@ -932,9 +932,9 @@ void Starsystem::__shipManager_s(unsigned int num)
 {
     while (m_vehicles.size() < num)
     {
-        race::type prace_id = race::type::R0;
+        race::Type prace_id = race::Type::R0;
         if (meti::getRandBool()) {
-            prace_id = race::type::R6;
+            prace_id = race::Type::R6;
         }
         
         entity::Type psubtype_id    = entity::Type::WARRIOR;

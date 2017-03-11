@@ -23,8 +23,8 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-entity::Type getRandNpcSubTypeId(race::type, const std::vector<entity::Type>&);
-entity::Type getRandNpcSubTypeId(race::type);
+entity::Type getRandNpcSubTypeId(race::Type, const std::vector<entity::Type>&);
+entity::Type getRandNpcSubTypeId(race::Type);
 entity::Type getRandNpcSubSubTypeId(entity::Type);
 
 

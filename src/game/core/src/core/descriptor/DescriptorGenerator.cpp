@@ -92,7 +92,7 @@ getNewStarsystem(int race)
 {
     descriptor::Starsystem* descr = new descriptor::Starsystem;
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
 
 //    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
@@ -354,7 +354,7 @@ getNewContainer()
 descriptor::Ship*
 getNewShip()
 {
-    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -389,7 +389,7 @@ getNewShip()
 
 
     descriptor::Ship* descr = new descriptor::Ship;
-    descr->setRace(int_t(race_id));
+    descr->setRace(race_id);
     //descr.setType(int_t(type_id));
     descr->setSize(size_id);
 
@@ -428,7 +428,7 @@ getNewShip()
 descriptor::SpaceStation*
 getNewSpaceStation()
 {
-    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -463,7 +463,7 @@ getNewSpaceStation()
 
 
     descriptor::SpaceStation* descr = new descriptor::SpaceStation;
-    descr->setRace(int_t(race_id));
+    descr->setRace(race_id);
     //descr->setType(int_t(type_id));
     descr->setSize(size_id);
 
@@ -501,7 +501,7 @@ getNewSpaceStation()
 descriptor::Satellite*
 getNewSatellite()
 {
-    race::type race_id =  (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -536,7 +536,7 @@ getNewSatellite()
 
 
     descriptor::Satellite* descr = new descriptor::Satellite;
-    descr->setRace(int_t(race_id));
+    descr->setRace(race_id);
     //descr->setType(int_t(type_id));
     descr->setSize(size_id);
 
@@ -599,7 +599,7 @@ Bak*
 genBak(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int (race::type::R0);
+        race = int (race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int (tech::type::LEVEL0);
@@ -654,7 +654,7 @@ Drive*
 genDrive(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int (race::type::R0);
+        race = int (race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int (tech::type::LEVEL0);
@@ -711,7 +711,7 @@ Droid*
 genDroid(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -764,7 +764,7 @@ Grapple*
 genGrapple(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -826,7 +826,7 @@ Lazer*
 genLazer(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -882,7 +882,7 @@ Protector*
 genProtector(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -935,7 +935,7 @@ Radar*
 genRadar(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -987,7 +987,7 @@ Rocket*
 genRocket(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);
@@ -1048,7 +1048,7 @@ Scaner*
 genScaner(int race, int tech_level)
 {
     if (race == NONE) {
-        race = int(race::type::R0);
+        race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
         tech_level = int(tech::type::LEVEL0);

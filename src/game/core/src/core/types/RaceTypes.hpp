@@ -23,7 +23,7 @@
 
 namespace race
 {
-    enum class type : int
+    enum class Type : int
     {
         NONE=0,
         //
@@ -46,7 +46,7 @@ namespace race
     };
 }
 
-std::string to_string(race::type);
+std::string to_string(race::Type);
 
 
 

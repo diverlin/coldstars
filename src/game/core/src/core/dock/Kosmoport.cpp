@@ -32,7 +32,7 @@
 
 Kosmoport::Kosmoport(int id)
 :
-race_id(race::type::R0), //wrong
+race_id(race::Type::R0), //wrong
 angar(nullptr),
 store(nullptr),
 shop(nullptr),
