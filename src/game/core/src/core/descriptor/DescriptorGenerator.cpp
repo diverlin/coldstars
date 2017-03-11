@@ -280,77 +280,6 @@ getNewContainer()
     return descr;
 }
 
-//descriptor::BaseOLD
-//getNewVehicleDescriptor()
-//{
-//    race::type race_id = (race::type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-//    entity::Type type_id = entity::Type::WARRIOR;
-//    int size_id = meti::getRandInt(1, 9);
-//    int weapons_num = size_id;
-
-//    float protection_rate = 1;
-//    float otsec_rate      = 1;
-//    switch (type_id) {
-//        case entity::Type::WARRIOR: { protection_rate = 2; break; }
-//        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
-//    }
-
-//    int space       = size_id*100 + meti::getRandInt(100);
-//    int armor       = space;
-//    int protection  = protection_rate*meti::getRandInt(size_id);
-//    int temperature = 100;
-//    int price       = meti::getRandInt(200, 400)*size_id;
-
-//    int slot_bak_num       = 1;
-//    int slot_drive_num     = 1;
-//    int slot_droid_num     = 1;
-//#ifdef USE_EXTRA_EQUIPMENT
-//    int slot_energizer_num = 1;
-//    int slot_freezer_num   = 1;
-//#endif
-//    int slot_grapple_num   = 1;
-//    int slot_protector_num = 1;
-//    int slot_radar_num     = 1;
-//    int slot_scaner_num    = 1;
-//    int slot_weapon_num   = weapons_num;
-//    int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
-//    int slot_otsec_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
-
-
-//    descriptor::BaseOLD descriptor(descriptor::Type::VEHICLE);
-//    descriptor.add(descriptor::Key::RACE, (int)race_id);
-//    descriptor.add(descriptor::Key::OBJ_TYPE, (int)type_id);
-//    descriptor.add(descriptor::Key::SIZE, size_id);
-
-//    descriptor.add(descriptor::Key::SPACE, space);
-//    descriptor.add(descriptor::Key::ARMOR, armor);
-//    descriptor.add(descriptor::Key::PROTECTION, protection);
-//    descriptor.add(descriptor::Key::TEMPERATURE, temperature);
-//    descriptor.add(descriptor::Key::PRICE, price);
-
-//    descriptor.add(descriptor::Key::BAK_SLOT_NUM, slot_bak_num);
-//    descriptor.add(descriptor::Key::DRIVE_SLOT_NUM, slot_drive_num);
-//    descriptor.add(descriptor::Key::DROID_SLOT_NUM, slot_droid_num);
-//#ifdef USE_EXTRA_EQUIPMENT
-//    descriptor.add(descriptor::Key::ENERGIZER_SLOT_NUM, slot_energizer_num);
-//    descriptor.add(descriptor::Key::FREEZER_SLOT_NUM, slot_freezer_num);
-//#endif
-//    descriptor.add(descriptor::Key::GRAPPLE_SLOT_NUM, slot_grapple_num);
-//    descriptor.add(descriptor::Key::PROTECTOR_SLOT_NUM, slot_protector_num);
-//    descriptor.add(descriptor::Key::RADAR_SLOT_NUM, slot_radar_num);
-//    descriptor.add(descriptor::Key::SCANER_SLOT_NUM, slot_scaner_num);
-//    descriptor.add(descriptor::Key::WEAPON_SLOT_NUM, slot_weapon_num);
-//    descriptor.add(descriptor::Key::ARTEFACT_SLOT_NUM, slot_artefact_num);
-//    descriptor.add(descriptor::Key::CARGO_SLOT_NUM, slot_otsec_num);
-
-//    //int size_threshold = 2;
-//    descriptor.add(descriptor::Key::DRAW_TURRELS, 0);
-
-//    return descriptor;
-//}
-
-
-
 descriptor::Ship*
 getNewShip()
 {
@@ -387,10 +316,23 @@ getNewShip()
     int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
-
     descriptor::Ship* descr = new descriptor::Ship;
     descr->setRace(race_id);
-    //descr.setType(int_t(type_id));
+    for(int i=0; i<slot_weapon_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addTurrelPoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_drive_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addDrivePoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_protector_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addProtectorPoint(meti::genVec3f(length, angle));
+    }
     descr->setSize(size_id);
 
     descr->setSpace(space);
@@ -461,10 +403,23 @@ getNewSpaceStation()
     int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
-
     descriptor::SpaceStation* descr = new descriptor::SpaceStation;
     descr->setRace(race_id);
-    //descr->setType(int_t(type_id));
+    for(int i=0; i<slot_weapon_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addTurrelPoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_drive_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addDrivePoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_protector_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addProtectorPoint(meti::genVec3f(length, angle));
+    }
     descr->setSize(size_id);
 
     descr->setSpace(space);
@@ -534,10 +489,23 @@ getNewSatellite()
     int slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
     int slot_cargo_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
-
     descriptor::Satellite* descr = new descriptor::Satellite;
     descr->setRace(race_id);
-    //descr->setType(int_t(type_id));
+    for(int i=0; i<slot_weapon_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addTurrelPoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_drive_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addDrivePoint(meti::genVec3f(length, angle));
+    }
+    for(int i=0; i<slot_protector_num; ++i) {
+        int length = meti::getRandInt(100);
+        float angle = meti::getRandAngle();
+        descr->addProtectorPoint(meti::genVec3f(length, angle));
+    }
     descr->setSize(size_id);
 
     descr->setSpace(space);
