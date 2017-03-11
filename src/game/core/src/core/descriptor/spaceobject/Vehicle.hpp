@@ -38,6 +38,10 @@ public:
 
     race::Type race() const { return m_race; }
 
+    const std::vector<meti::vec3>& turrelPoints() const { return m_turrelPoints; }
+    const std::vector<meti::vec3>& drivePoints() const { return m_drivePoints; }
+    const std::vector<meti::vec3>& protectorPoints() const { return m_protectorPoints; }
+
     int space() const { return m_space; }
     int protection() const { return m_protection; }
 #ifdef USE_EXTRA_EQUIPMENT
@@ -64,6 +68,10 @@ public:
 
 
     void setRace(race::Type race) { m_race = race; }
+
+    void addTurrelPoint(const meti::vec3& p) { m_turrelPoints.push_back(p); }
+    void addDrivePoint(const meti::vec3& p) { m_drivePoints.push_back(p); }
+    void addProtectorPoint(const meti::vec3& p) { m_protectorPoints.push_back(p); }
 
     void setSpace(int space) { m_space = space; }
     void setProtection(int protection) { m_protection = protection; }
