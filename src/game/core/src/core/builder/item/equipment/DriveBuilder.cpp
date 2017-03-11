@@ -29,7 +29,7 @@ model::item::Drive*
 Drive::getNew()
 {
     descriptor::item::Drive* descr = descriptor::Manager::get().randDrive();
-    model::item::Drive* model = __createTemplate(descr->id());
+    model::item::Drive* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
@@ -45,13 +45,13 @@ Drive::getNew()
 model::item::Drive*
 Drive::getNew(descriptor::item::Drive* descr)
 {
-    model::item::Drive* model = __createTemplate(descr->id());
+    model::item::Drive* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }        
 
 model::item::Drive*
-Drive::__createTemplate(int_t descriptor_id)
+Drive::__genTemplate(int_t descriptor_id)
 {
     model::item::Drive* model = new model::item::Drive(descriptor_id);
     core::global::get().entityManager().reg(model);

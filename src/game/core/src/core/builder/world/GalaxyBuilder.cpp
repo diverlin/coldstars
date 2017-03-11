@@ -32,7 +32,7 @@
 namespace builder {
 
 model::Galaxy*
-Galaxy::__createTemplate()
+Galaxy::__genTemplate()
 {
     model::Galaxy* galaxy = new model::Galaxy;
     assert(galaxy);
@@ -45,7 +45,7 @@ Galaxy::__createTemplate()
 model::Galaxy*
 Galaxy::create(descriptor::Galaxy* descr)
 {
-    model::Galaxy* model = __createTemplate();
+    model::Galaxy* model = __genTemplate();
     __createInternals(model, descr);
     return model;
 } 

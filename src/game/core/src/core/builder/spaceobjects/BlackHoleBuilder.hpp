@@ -36,7 +36,7 @@ public:
 private:
     static void __createInternals(model::BlackHole*);
 
-    static model::BlackHole* __createTemplate();
+    static model::BlackHole* __genTemplate();
 };
 
 } // namespace builder

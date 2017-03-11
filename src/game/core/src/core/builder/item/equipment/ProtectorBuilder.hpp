@@ -53,7 +53,7 @@ private:
     Protector() = delete;
     ~Protector() = delete;
 
-    static model::item::Protector* __createTemplate(int_t);
+    static model::item::Protector* __genTemplate(int_t);
     static void __createInternals(model::item::Protector*, descriptor::item::Protector*);
 }; 
 

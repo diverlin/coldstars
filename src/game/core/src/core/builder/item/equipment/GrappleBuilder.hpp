@@ -51,7 +51,7 @@ private:
     Grapple() = delete;
     ~Grapple() = delete;
 
-    static model::item::Grapple* __createTemplate(int_t);
+    static model::item::Grapple* __genTemplate(int_t);
     static void __createInternals(model::item::Grapple*, descriptor::item::Grapple*);
 }; 
 

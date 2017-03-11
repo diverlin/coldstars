@@ -25,7 +25,7 @@
 namespace builder {
 
 model::Asteroid*
-Asteroid::__createTemplate()
+Asteroid::__genTemplate()
 { 
     model::Asteroid* model = new model::Asteroid;
     assert(model);
@@ -45,7 +45,7 @@ Asteroid::getNew()
 model::Asteroid*
 Asteroid::getNew(descriptor::Asteroid* descr)
 {
-    model::Asteroid* model = __createTemplate();
+    model::Asteroid* model = __genTemplate();
 
     /// Base
     LifeData life_data;

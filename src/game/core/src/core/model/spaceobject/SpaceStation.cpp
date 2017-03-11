@@ -23,6 +23,11 @@
 
 namespace model {
 
+SpaceStation::SpaceStation(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
 SpaceStation::SpaceStation(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

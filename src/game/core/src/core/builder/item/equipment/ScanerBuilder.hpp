@@ -51,7 +51,7 @@ private:
     Scaner() = delete;
     ~Scaner() = delete;
 
-    static model::item::Scaner* __createTemplate(int_t);
+    static model::item::Scaner* __genTemplate(int_t);
     static void __createInternals(model::item::Scaner*, descriptor::item::Scaner*);
 }; 
 

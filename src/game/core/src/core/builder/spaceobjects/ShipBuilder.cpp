@@ -28,20 +28,16 @@
 namespace builder {
 
 model::Ship*
-Ship::getNew(bool full_equiped)
+Ship::__genTemplate(int_t descriptor_id)
 {
-    const auto& descr = descriptor::Manager::get().randShip();
-    model::Ship* ship =  getNew(descr);
-    if (full_equiped) {
-        assert(false);
-        //BaseVehicleBuilder::equip(ship);
-    }
+    model::Ship* ship = new model::Ship(descriptor_id);
+    core::global::get().entityManager().reg(ship);
     return ship;
 }
 
 model::Ship*
-Ship::getNew(descriptor::Ship* descriptor)
-{            
+Ship::getNew(descriptor::Ship* descr)
+{
 //    descriptor::Vehicle descriptor(descr->data());
 //    int_t id = NONE;
 //    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
@@ -49,9 +45,21 @@ Ship::getNew(descriptor::Ship* descriptor)
 //        id = descr->objId();
 //    }
 
-    model::Ship* ship = __getNewTemplate();
-    __createInternals(ship, descriptor);
-    return ship;
+    model::Ship* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+}
+
+model::Ship*
+Ship::getNew(bool full_equiped)
+{
+    const auto& descr = descriptor::Manager::get().randShip();
+    model::Ship* model = getNew(descr);
+    if (full_equiped) {
+        assert(false);
+        //BaseVehicleBuilder::equip(ship);
+    }
+    return model;
 }
 
 //model::Ship*
@@ -59,14 +67,6 @@ Ship::getNew(descriptor::Ship* descriptor)
 //{
 //    return getNew(descriptor::Vehicle(data));
 //}
-
-model::Ship*
-Ship::__getNewTemplate()
-{
-    model::Ship* ship = new model::Ship;
-    core::global::get().entityManager().reg(ship);
-    return ship;
-}
 
 void
 Ship::__createInternals(model::Ship* ship, descriptor::Ship* descr)

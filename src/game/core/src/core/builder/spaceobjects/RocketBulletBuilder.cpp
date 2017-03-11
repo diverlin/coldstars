@@ -30,7 +30,7 @@ Rocket::~Rocket()
 {}
 
 model::RocketBullet*
-Rocket::__createTemplate(int_t id) const
+Rocket::__genTemplate(int_t id) const
 {
     model::RocketBullet* rocket_bullet = new model::RocketBullet;
     assert(rocket_bullet);
@@ -43,7 +43,7 @@ Rocket::__createTemplate(int_t id) const
 model::RocketBullet*
 Rocket::getNew(const BulletData& data_bullet) const
 {
-    model::RocketBullet* rocket_bullet = __createTemplate();
+    model::RocketBullet* rocket_bullet = __genTemplate();
     createInternals(rocket_bullet, data_bullet);
 
     return rocket_bullet;

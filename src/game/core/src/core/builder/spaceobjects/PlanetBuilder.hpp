@@ -36,7 +36,7 @@ public:
     static model::Planet* getNew(descriptor::Planet*);
 
 private:
-    static model::Planet* __createTemplate();
+    static model::Planet* __genTemplate();
 }; 
 
 } // namespace builder

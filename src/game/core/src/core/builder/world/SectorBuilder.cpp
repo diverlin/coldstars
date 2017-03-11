@@ -34,7 +34,7 @@
 namespace builder {
 
 model::Sector*
-Sector::__createTemplate()
+Sector::__genTemplate()
 {   
     model::Sector* sector = new model::Sector;
     assert(sector);
@@ -47,7 +47,7 @@ Sector::__createTemplate()
 model::Sector*
 Sector::create(descriptor::Sector* descr)
 {
-    model::Sector* model = __createTemplate();
+    model::Sector* model = __genTemplate();
     Sector::__createInternals(model, descr);
     return model;
 } 

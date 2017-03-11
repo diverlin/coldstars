@@ -28,7 +28,7 @@ namespace model {
 class Ship : public Vehicle
 {
 public:
-    Ship() = default;
+    Ship(int_t);
     ~Ship() = default;
     Ship(const std::string& data);
     std::string data() const;

@@ -31,7 +31,7 @@ namespace model {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation() = default;
+    SpaceStation(int_t);
     ~SpaceStation() = default;
     SpaceStation(const std::string& data);
     std::string data() const;

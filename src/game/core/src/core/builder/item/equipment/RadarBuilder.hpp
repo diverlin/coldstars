@@ -51,7 +51,7 @@ private:
     Radar() = delete;
     ~Radar() = delete;
 
-    static model::item::Radar* __createTemplate(int_t);
+    static model::item::Radar* __genTemplate(int_t);
     static void __createInternals(model::item::Radar*, descriptor::item::Radar*);
 }; 
 

@@ -27,8 +27,6 @@ namespace item {
 Protector::Protector(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-//    setType(entity::type::EQUIPMENT);
-//    setSubType(entity::type::PROTECTOR_EQUIPMENT);
 }
 
 Protector::Protector(const std::string& data)

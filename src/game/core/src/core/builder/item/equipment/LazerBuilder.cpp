@@ -43,13 +43,13 @@ Lazer::getNew()
 model::item::Lazer*
 Lazer::getNew(descriptor::item::Lazer* descr)
 {
-    model::item::Lazer* model = __createTemplate(descr->id());
+    model::item::Lazer* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
 model::item::Lazer*
-Lazer::__createTemplate(int_t descriptor_id)
+Lazer::__genTemplate(int_t descriptor_id)
 { 
     model::item::Lazer* model = new model::item::Lazer(descriptor_id);
     core::global::get().entityManager().reg(model);

@@ -36,7 +36,7 @@ public:
     static model::Asteroid* getNew(descriptor::Asteroid*);
 
 private:
-    static model::Asteroid* __createTemplate();
+    static model::Asteroid* __genTemplate();
 }; 
 
 } // namespace builder

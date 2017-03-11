@@ -21,6 +21,10 @@
 
 #include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
 
+namespace descriptor {
+class Satellite;
+} // namespace descriptor
+
 namespace model {
 class Satellite;
 } // namespace model
@@ -30,14 +34,15 @@ namespace builder {
 class Satellite : public BaseVehicle
 {
 public:
-    Satellite();
-    ~Satellite();
-
     static model::Satellite* getNew();
+    static model::Satellite* getNew(descriptor::Satellite*);
 
 private:
-    static void __createInternals(model::Satellite*);
-    static model::Satellite* __createTemplate();
+    Satellite() = default;
+    ~Satellite() = default;
+
+    static void __createInternals(model::Satellite*, descriptor::Satellite*);
+    static model::Satellite* __genTemplate(int_t);
 }; 
 
 } // namespace builder

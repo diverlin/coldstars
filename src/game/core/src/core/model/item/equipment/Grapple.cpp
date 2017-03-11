@@ -26,8 +26,6 @@ namespace item {
 Grapple::Grapple(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-//    setType(entity::type::EQUIPMENT);
-//    setSubType(entity::type::GRAPPLE_EQUIPMENT);
 }
 
 Grapple::Grapple(const std::string& data)

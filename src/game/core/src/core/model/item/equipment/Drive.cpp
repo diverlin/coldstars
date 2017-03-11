@@ -27,8 +27,6 @@ namespace item {
 Drive::Drive(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
-//    setType(entity::type::EQUIPMENT);
-//    setSubType(entity::type::DRIVE_EQUIPMENT);
 }
 
 Drive::Drive(const std::string& data)

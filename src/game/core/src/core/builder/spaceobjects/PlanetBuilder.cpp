@@ -25,7 +25,7 @@
 namespace builder {
 
 model::Planet*
-Planet::__createTemplate()
+Planet::__genTemplate()
 {
     model::Planet* model = new model::Planet;
     assert(model);
@@ -45,7 +45,7 @@ Planet::getNew()
 model::Planet*
 Planet::getNew(descriptor::Planet* descr)
 {
-    model::Planet* model = __createTemplate();
+    model::Planet* model = __genTemplate();
 
     /// Base
     LifeData life_data;

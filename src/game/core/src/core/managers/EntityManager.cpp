@@ -369,7 +369,7 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading stars...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("star"))
         {
-            //Star* star = core::global::get().starBuilder().__getNewTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //Star* star = core::global::get().starBuilder().__genTemplate(v.second.get<unsigned long int>("data_id.id"));
             //star->Load(v.second);
         }
     }
@@ -525,7 +525,7 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading bak_equipments...");
 //        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
 //        {
-//            item::Bak* bak_equipment = core::global::get().bakBuilder().__createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            item::Bak* bak_equipment = core::global::get().bakBuilder().__genTemplate(v.second.get<unsigned long int>("data_id.id"));
 //            bak_equipment->Load(v.second);
 //        }
     }

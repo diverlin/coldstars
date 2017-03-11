@@ -51,7 +51,7 @@ private:
     Lazer() = delete;
     ~Lazer() = delete;
 
-    static model::item::Lazer* __createTemplate(int_t);
+    static model::item::Lazer* __genTemplate(int_t);
     static void __createInternals(model::item::Lazer*, descriptor::item::Lazer*);
 }; 
 

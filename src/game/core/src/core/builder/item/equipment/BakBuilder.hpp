@@ -51,7 +51,7 @@ private:
     Bak() = delete;
     ~Bak() = delete;
 
-    static model::item::Bak* __createTemplate(int_t);
+    static model::item::Bak* __genTemplate(int_t);
     static void __createInternals(model::item::Bak*, descriptor::item::Bak*);
 }; 
 

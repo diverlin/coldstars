@@ -44,14 +44,14 @@ Rocket::getNew()
 model::item::Rocket*
 Rocket::getNew(descriptor::item::Rocket* descr)
 {
-    model::item::Rocket* model = __createTemplate(descr->id());
+    model::item::Rocket* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
 
 model::item::Rocket*
-Rocket::__createTemplate(int_t descriptor_id)
+Rocket::__genTemplate(int_t descriptor_id)
 {
     model::item::Rocket* model = new model::item::Rocket(descriptor_id);
     core::global::get().entityManager().reg(model);

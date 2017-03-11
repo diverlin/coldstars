@@ -39,7 +39,7 @@ private:
     ~Sector()=delete;
 
     static void __createInternals(model::Sector*, descriptor::Sector*);
-    static model::Sector* __createTemplate();
+    static model::Sector* __genTemplate();
 }; 
 
 } // namespace builder

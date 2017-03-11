@@ -44,13 +44,13 @@ Bak::getNew()
 model::item::Bak*
 Bak::getNew(descriptor::item::Bak* descr)
 {
-    model::item::Bak* model = __createTemplate(descr->id());
+    model::item::Bak* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
 model::item::Bak*
-Bak::__createTemplate(int_t descriptor_id)
+Bak::__genTemplate(int_t descriptor_id)
 {
     model::item::Bak* model = new model::item::Bak(descriptor_id);
     core::global::get().entityManager().reg(model);
