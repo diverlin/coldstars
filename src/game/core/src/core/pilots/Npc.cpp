@@ -37,7 +37,7 @@
 
 #include "../parts/WeaponComplex.hpp"
 
-#include <item/others/GoodsPack.hpp>
+#include <core/item/others/GoodsPack.hpp>
 
 #include "../dock/Shop.hpp"
 

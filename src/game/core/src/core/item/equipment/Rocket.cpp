@@ -22,7 +22,7 @@
 #include <core/model/item/equipment/Rocket.hpp>
 
 #ifdef USE_MODULES
-#include <item/modules/RocketModule.hpp>
+#include <core/item/modules/RocketModule.hpp>
 #endif
 
 #include <ceti/serialization/macro.hpp>

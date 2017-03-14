@@ -40,10 +40,10 @@
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 
 #include <core/model/spaceobject/Vehicle.hpp>
-#include <item/equipment/Rocket.hpp>
+#include <core/item/equipment/Rocket.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
-#include <item/equipment/EnergizerEquipment.hpp>
-#include <item/equipment/FreezerEquipment.hpp>
+#include <core/item/equipment/EnergizerEquipment.hpp>
+#include <core/item/equipment/FreezerEquipment.hpp>
 #endif
 #include <core/model/item/equipment/Radar.hpp>
 #include <core/model/item/equipment/Bak.hpp>
@@ -63,10 +63,10 @@
 #include <core/item/equipment/Scaner.hpp>
 #include <core/item/equipment/Grapple.hpp>
 #include <core/item/equipment/Lazer.hpp>
-#include <item/others/GoodsPack.hpp>
+#include <core/item/others/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
-#include <item/artefacts/GravityArtefact.hpp>
-#include <item/artefacts/ProtectorArtefact.hpp>
+#include <core/item/artefacts/GravityArtefact.hpp>
+#include <core/item/artefacts/ProtectorArtefact.hpp>
 #endif
 
 //#include <client/effects/Shield.hpp>
