@@ -44,7 +44,7 @@
 
 #include <builder/spaceobjects/ALL>
 
-#include <core/item/others/ALL>
+#include <core/item/other/ALL>
 
 #include "../builder/slots/ItemSlotBuilder.hpp"
 #include "../builder/slots/VehicleSlotBuilder.hpp"
@@ -72,7 +72,7 @@
 #ifdef USE_MODULES
 #include <core/item/modules/ALL>
 #endif // USE_MODULES
-#include <core/item/others/Bomb.hpp>
+#include <core/item/other/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/ALL>

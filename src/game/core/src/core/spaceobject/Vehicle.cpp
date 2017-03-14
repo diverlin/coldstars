@@ -63,7 +63,7 @@
 #include <core/item/equipment/Scaner.hpp>
 #include <core/item/equipment/Grapple.hpp>
 #include <core/item/equipment/Lazer.hpp>
-#include <core/item/others/GoodsPack.hpp>
+#include <core/item/other/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/GravityArtefact.hpp>
 #include <core/item/artefacts/ProtectorArtefact.hpp>

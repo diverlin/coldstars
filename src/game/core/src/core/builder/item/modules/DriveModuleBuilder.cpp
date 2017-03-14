@@ -17,7 +17,7 @@
 */
 
 #include "DriveModuleBuilder.hpp"
-#include <items/modules/DriveModule.hpp>
+#include <core/item/module/DriveModule.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

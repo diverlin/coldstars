@@ -40,7 +40,7 @@
 #include <core/model/item/equipment/Radar.hpp>
 #include <core/model/item/equipment/Grapple.hpp>
 
-#include <core/item/others/Bomb.hpp>
+#include <core/item/other/Bomb.hpp>
 
 #include "../dock/Store.hpp"
 #include "../dock/Angar.hpp"
