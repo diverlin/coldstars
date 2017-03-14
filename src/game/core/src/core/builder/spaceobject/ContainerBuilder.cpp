@@ -24,7 +24,7 @@
 
 #include <descriptor/Base.hpp>
 #include <descriptor/DescriptorManager.hpp>
-#include <descriptor/Container.hpp>
+#include <descriptor/spaceobject/Container.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 
