@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Planetoid.hpp>
 
-#include <core/descriptor/AsteroidDescriptor.hpp>
+#include <core/descriptor/spaceobject/Asteroid.hpp>
 
 namespace model {
 

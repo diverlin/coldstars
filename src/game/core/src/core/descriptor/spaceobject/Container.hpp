@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/descriptor/SpaceobjectDescriptor.hpp>
+#include "SpaceObject.hpp"
 
 #include <string>
 

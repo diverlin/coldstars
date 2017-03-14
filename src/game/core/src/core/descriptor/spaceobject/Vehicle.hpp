@@ -21,7 +21,7 @@
 
 #include <core/type/RaceTypes.hpp>
 
-#include <core/descriptor/SpaceobjectDescriptor.hpp>
+#include <core/descriptor/spaceobject/SpaceObject.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

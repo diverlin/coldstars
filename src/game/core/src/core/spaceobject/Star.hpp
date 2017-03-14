@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Planetoid.hpp>
 
-#include <core/descriptor/StarDescriptor.hpp>
+#include <core/descriptor/spaceobject/Star.hpp>
 
 namespace model {
 

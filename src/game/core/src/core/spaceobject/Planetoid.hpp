@@ -22,7 +22,7 @@
 #include <core/spaceobject/SpaceObject.hpp>
 
 #include <core/part/orbit.hpp>
-#include <core/descriptor/PlanetDescriptor.hpp>
+#include <core/descriptor/spaceobject/Planet.hpp>
 //#include <jeti/Render.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
