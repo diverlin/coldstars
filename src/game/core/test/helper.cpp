@@ -32,7 +32,7 @@
 
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/Container.hpp>
+#include <core/descriptor/spaceobject/Container.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>

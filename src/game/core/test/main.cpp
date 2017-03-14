@@ -39,7 +39,7 @@
 
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/Container.hpp>
+#include <core/descriptor/spaceobject/Container.hpp>
 #include <core/descriptor/Hit.hpp>
 #include <core/descriptor/GalaxyDescriptor.hpp>
 #include <core/descriptor/SectorDescriptor.hpp>
