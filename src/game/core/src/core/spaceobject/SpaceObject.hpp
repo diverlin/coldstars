@@ -23,7 +23,7 @@
 #include <core/struct/LifeData.hpp>
 #include <core/type/PlaceTypes.hpp>
 
-#include <core/descriptor/SpaceobjectDescriptor.hpp>
+#include <core/descriptor/spaceobject/SpaceObject.hpp>
 
 #include <ceti/Orientation.hpp>
 

@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
-#include <core/descriptor/Container.hpp>
+#include <core/descriptor/spaceobject/Container.hpp>
 
 #include <ceti/type/IdType.hpp>
 

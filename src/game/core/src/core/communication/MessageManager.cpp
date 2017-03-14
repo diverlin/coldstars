@@ -11,7 +11,7 @@
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/Descriptor.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
-#include <core/descriptor/Container.hpp> // ??
+#include <core/descriptor/spaceobject/Container.hpp> // ??
 #include <core/descriptor/ExplosionDescriptor.hpp>
 #include <core/descriptor/AddToStarsystemDescriptor.hpp>
 

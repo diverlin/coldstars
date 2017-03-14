@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "SpaceobjectDescriptor.hpp"
+#include "SpaceObject.hpp"
 
 namespace descriptor {
 
