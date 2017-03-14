@@ -29,7 +29,7 @@
 #include <core/item/modules/ALL>
 #endif
 
-#include <core/item/others/Bomb.hpp>
+#include <core/item/other/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/ALL>

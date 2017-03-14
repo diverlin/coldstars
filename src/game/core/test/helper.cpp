@@ -20,7 +20,7 @@
 #include <ceti/IdGenerator.hpp>
 
 #include <core/world/starsystem.hpp>
-#include <core/item/others/Bomb.hpp>
+#include <core/item/other/Bomb.hpp>
 #include <core/slots/ItemSlot.hpp>
 #include <core/spaceobject/Container.hpp>
 #include <core/spaceobject/Ship.hpp>

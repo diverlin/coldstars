@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <item/BaseItem.hpp>
+#include <core/item/Item.hpp>
 
 #include <ceti/type/IdType.hpp>
 
