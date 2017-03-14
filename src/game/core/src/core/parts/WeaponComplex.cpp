@@ -20,7 +20,7 @@
 #include "WeaponComplex.hpp"
 #include <ceti/Logger.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <item/Item.hpp>
 #include "../slots/ItemSlot.hpp"

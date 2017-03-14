@@ -31,7 +31,7 @@
 
 #include <dock/Store.hpp>
 
-#include <spaceobjects/Ship.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <common/constants.hpp>
 

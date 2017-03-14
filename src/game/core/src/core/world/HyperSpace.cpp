@@ -18,7 +18,7 @@
 
 #include "HyperSpace.hpp"
 #include "starsystem.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 #include "../common/constants.hpp"
 
 #include <core/model/spaceobject/Vehicle.hpp>

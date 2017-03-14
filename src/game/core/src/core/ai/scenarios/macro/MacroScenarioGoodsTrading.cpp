@@ -18,9 +18,9 @@
 
 #include "MacroScenarioGoodsTrading.hpp"
 #include "../../../pilots/Npc.hpp"
-#include "../../../spaceobjects/Vehicle.hpp"
-#include "../../../spaceobjects/Planet.hpp"
-#include "../../../spaceobjects/Container.hpp"
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/Container.hpp>
 #include "../../../common/constants.hpp"
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>

@@ -17,7 +17,7 @@
 */
 
 #include "Kosmoport.hpp" 
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 //#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
 #include <common/Global.hpp>

@@ -19,7 +19,7 @@
 #include "RocketBulletBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/RocketBullet.hpp>
+#include <core/spaceobject/RocketBullet.hpp>
 
 namespace builder {
 

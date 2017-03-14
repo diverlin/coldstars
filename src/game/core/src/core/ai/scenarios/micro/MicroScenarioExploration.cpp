@@ -21,7 +21,7 @@
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
-#include "../../../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 
 MicroScenarioExploration::MicroScenarioExploration()
 {

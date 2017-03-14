@@ -18,10 +18,11 @@
 
 #include "MacroScenarioSelfSafety.hpp"
 #include "../../../world/starsystem.hpp"
-#include "../../../spaceobjects/Planet.hpp"
 #include "../../../ai/StateMachine.hpp"
 #include "../../../ai/Task.hpp"
-#include "../../../spaceobjects/Vehicle.hpp"
+
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Planet.hpp>
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {

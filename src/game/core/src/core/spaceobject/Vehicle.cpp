@@ -16,10 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <spaceobjects/Vehicle.hpp>
-#include <spaceobjects/Planet.hpp>
-#include <spaceobjects/SpaceStation.hpp>
-#include <spaceobjects/Container.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/SpaceStation.hpp>
+#include <core/spaceobject/Container.hpp>
 
 #include <core/builder/spaceobjects/ContainerBuilder.hpp>
 #include <core/builder/slots/ItemSlotBuilder.hpp>

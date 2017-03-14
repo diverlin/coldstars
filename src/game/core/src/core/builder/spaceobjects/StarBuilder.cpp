@@ -18,7 +18,7 @@
 
 #include "StarBuilder.hpp"
 #include <builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/Star.hpp>
+#include <core/spaceobject/Star.hpp>
 
 #include <common/constants.hpp>
 

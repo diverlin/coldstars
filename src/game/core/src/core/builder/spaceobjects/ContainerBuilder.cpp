@@ -20,7 +20,7 @@
 #include <builder/slots/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <spaceobjects/Container.hpp>
+#include <core/spaceobject/Container.hpp>
 
 #include <descriptor/Base.hpp>
 #include <descriptor/DescriptorManager.hpp>

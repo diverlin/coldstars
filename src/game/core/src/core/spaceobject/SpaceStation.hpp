@@ -29,7 +29,7 @@ class SpaceStation;
 
 #include <core/model/spaceobject/Vehicle.hpp>
 
-#include <core/spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 #include <core/dock/Land.hpp>
    
    

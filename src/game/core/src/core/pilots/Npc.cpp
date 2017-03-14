@@ -17,7 +17,9 @@
 */
 
 #include "Npc.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Asteroid.hpp>
+
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
 #include <managers/EntityManager.hpp>
@@ -33,8 +35,6 @@
 #include "../ai/aiModel/BaseAiModel.hpp"
 #include "../pilots/Skills.hpp"
 
-#include "../spaceobjects/Vehicle.hpp"
-#include "../spaceobjects/Asteroid.hpp"
 #include "../parts/WeaponComplex.hpp"
 
 #include <item/others/GoodsPack.hpp>

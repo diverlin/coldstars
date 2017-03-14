@@ -21,7 +21,7 @@
 
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
-#include <core/spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 #include <core/parts/orbit.hpp>
 
 namespace descriptor {

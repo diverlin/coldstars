@@ -20,7 +20,7 @@
 //#include <core/common/constants.hpp>
 
 //#include <core/slots/ItemSlot.hpp>
-//#include <core/spaceobjects/Ship.hpp>
+//#include <core/spaceobject/Ship.hpp>
 
 //#include <core/builder/spaceobjects/ShipBuilder.hpp>
 

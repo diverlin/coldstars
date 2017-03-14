@@ -40,7 +40,7 @@
 #include <slots/ItemSlot.hpp>
 #include <item/others/Bomb.hpp>
 
-#include <spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 
 //#include <client/pilots/Player.hpp>
 #include <pilots/Npc.hpp>

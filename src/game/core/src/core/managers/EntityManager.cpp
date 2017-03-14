@@ -25,7 +25,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/IdGenerator.hpp>
 
-#include <spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 
 //#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"

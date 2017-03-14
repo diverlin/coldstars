@@ -27,7 +27,7 @@
 #include <common/Global.hpp>
 #include <core/world/starsystem.hpp>
 
-#include <core/spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <core/managers/EntityManager.hpp>
 

@@ -18,7 +18,7 @@
 
 #include "SatelliteBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-//#include <core/spaceobjects/Satellite.hpp>
+//#include <core/spaceobject/Satellite.hpp>
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 

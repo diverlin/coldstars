@@ -17,7 +17,7 @@
 */
 
 #include <core/common/Global.hpp>
-#include <core/spaceobjects/Star.hpp>
+#include <core/spaceobject/Star.hpp>
 
 #include <core/builder/spaceobjects/StarBuilder.hpp>
 

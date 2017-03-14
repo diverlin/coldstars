@@ -17,8 +17,8 @@
 */
 
 #include "VehicleSlot.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "../spaceobjects/Ship.hpp"
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <ceti/Logger.hpp>
 

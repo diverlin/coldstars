@@ -17,7 +17,7 @@
 */
 
 #include "Task.hpp"
-#include "../spaceobjects/SpaceObject.hpp"
+#include <core/spaceobject/SpaceObject.hpp>
 #include "../common/Global.hpp"
         
 void Task::reset()

@@ -31,7 +31,7 @@
 
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
-#include <spaceobjects/Container.hpp>
+#include <core/spaceobject/Container.hpp>
 
 #include <meti/RandUtils.hpp>
 
