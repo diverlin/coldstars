@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <item/Item.hpp>
+#include <core/item/Item.hpp>
 
 class GoodsPack : public control::Item
 {

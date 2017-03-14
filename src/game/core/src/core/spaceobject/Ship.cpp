@@ -24,7 +24,7 @@
 
 #include <world/starsystem.hpp>
 
-#include <item/equipment/Grapple.hpp>
+#include <core/item/equipment/Grapple.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <slots/VehicleSlot.hpp>

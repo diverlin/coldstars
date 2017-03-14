@@ -22,7 +22,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <item/Item.hpp>
+#include <core/item/Item.hpp>
 #include "../slots/ItemSlot.hpp"
 
 

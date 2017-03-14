@@ -22,7 +22,7 @@
 #include <core/model/item/equipment/Scaner.hpp>
 
 #ifdef USE_MODULES
-#include <item/modules/ScanerModule.hpp>
+#include <core/item/modules/ScanerModule.hpp>
 #endif
 
 #include <ceti/serialization/macro.hpp>

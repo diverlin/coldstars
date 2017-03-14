@@ -28,7 +28,7 @@
 
 #include <slots/ItemSlot.hpp>
 
-#include <item/others/GoodsPack.hpp>
+#include <core/item/others/GoodsPack.hpp>
 
 #include <meti/RandUtils.hpp>
 

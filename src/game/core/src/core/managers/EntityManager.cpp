@@ -44,7 +44,7 @@
 
 #include <builder/spaceobjects/ALL>
 
-#include <item/others/ALL>
+#include <core/item/others/ALL>
 
 #include "../builder/slots/ItemSlotBuilder.hpp"
 #include "../builder/slots/VehicleSlotBuilder.hpp"
@@ -67,15 +67,15 @@
 #include "../dock/Shop.hpp"
 #include "../dock/Goverment.hpp"
 
-#include <item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
 #ifdef USE_MODULES
-#include <item/modules/ALL>
+#include <core/item/modules/ALL>
 #endif // USE_MODULES
-#include <item/others/Bomb.hpp>
+#include <core/item/others/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
-#include <item/artefacts/ALL>
+#include <core/item/artefacts/ALL>
 #endif // USE_ARTEFACTS
 #include "../dock/Goverment.hpp"
 #include "../dock/NatureLand.hpp"

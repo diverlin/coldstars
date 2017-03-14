@@ -22,7 +22,7 @@
 #include <core/model/item/equipment/Radar.hpp>
 
 #ifdef USE_MODULES
-#include <item/modules/RadarModule.hpp>
+#include <core/item/modules/RadarModule.hpp>
 #endif
 
 #include <ceti/serialization/macro.hpp>

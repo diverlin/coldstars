@@ -29,9 +29,9 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
-#include <item/Item.hpp>
-#include <item/equipment/Bak.hpp>
-#include <item/equipment/Rocket.hpp>
+#include <core/item/Item.hpp>
+#include <core/item/equipment/Bak.hpp>
+#include <core/item/equipment/Rocket.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 

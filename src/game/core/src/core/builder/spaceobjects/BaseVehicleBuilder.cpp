@@ -23,16 +23,16 @@
 
 #include <descriptor/DescriptorManager.hpp>
 
-#include <item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
 #ifdef USE_MODULES
-#include <item/modules/ALL>
+#include <core/item/modules/ALL>
 #endif
 
-#include <item/others/Bomb.hpp>
+#include <core/item/others/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
-#include <item/artefacts/ALL>
+#include <core/item/artefacts/ALL>
 #endif
 
 #include <builder/item/equipment/ALL>

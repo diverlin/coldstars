@@ -26,8 +26,8 @@
 #include <builder/CommonBuilderHeaders.hpp>
 
 #ifdef USE_ARTEFACTS
-#include <item/artefacts/GravityArtefact.hpp>
-#include <item/artefacts/ProtectorArtefact.hpp>
+#include <core/item/artefacts/GravityArtefact.hpp>
+#include <core/item/artefacts/ProtectorArtefact.hpp>
 #endif // USE_ARTEFACTS
 
 #include <dock/NatureLand.hpp>
