@@ -17,27 +17,27 @@
 */
 
 
-#ifndef MICROSCENARIOGRAB_HPP
-#define MICROSCENARIOGRAB_HPP
+#pragma once
 
-#include <ai/scenarios/BaseScenario.hpp>
+#include <core/ai/scenary/BaseScenario.hpp>
+
 class Npc; 
 
 
 class MicroScenarioGrab : public BaseScenario
 {
-    public:
-        MicroScenarioGrab();
-        virtual ~MicroScenarioGrab();
-        
-        virtual void enter(Npc*) const;
-        virtual bool Validate(Npc* npc) const;
-        virtual void UpdateInStaticInSpace(Npc*) const;
-        virtual void UpdateInDynamicInSpace(Npc*) const;
-        virtual void exit(Npc*) const;
-        
-        virtual std::string GetDescription(Npc*) const;
+public:
+    MicroScenarioGrab();
+    virtual ~MicroScenarioGrab();
+
+    virtual void enter(Npc*) const;
+    virtual bool Validate(Npc* npc) const;
+    virtual void UpdateInStaticInSpace(Npc*) const;
+    virtual void UpdateInDynamicInSpace(Npc*) const;
+    virtual void exit(Npc*) const;
+
+    virtual std::string GetDescription(Npc*) const;
 };
 
-#endif 
-     
+
+
