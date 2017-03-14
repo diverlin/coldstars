@@ -18,10 +18,11 @@
 
 #pragma once
 
-#include <boost/property_tree/ptree.hpp>
+#include <core/type/AiScenarioTypes.hpp>
 
 #include <ceti/type/IdType.hpp>
-#include <types/AiScenarioTypes.hpp>
+
+#include <boost/property_tree/ptree.hpp>
 
 class Task
 {

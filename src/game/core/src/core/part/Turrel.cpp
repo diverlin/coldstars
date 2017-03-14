@@ -18,7 +18,7 @@
 
 #include "Turrel.hpp"
 
-#include "../slots/ItemSlot.hpp"
+#include <core/slot/ItemSlot.hpp>
 //#include <jeti/Render.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 

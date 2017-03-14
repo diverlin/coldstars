@@ -20,9 +20,9 @@
 #ifndef GUITYPES_HPP
 #define GUITYPES_HPP
 
-#include <string>
-#include <types/EntityTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 
+#include <string>
 
 namespace gui
 { 

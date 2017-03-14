@@ -18,8 +18,8 @@
 
 
 #include <builder/world/StarSystemBuilder.hpp>
-#include <builder/spaceobjects/ALL>
-#include <builder/pilots/NpcBuilder.hpp>
+#include <core/builder/spaceobject/ALL>
+#include <core/builder/pilot/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <core/spaceobject/ALL>
@@ -34,7 +34,7 @@
 
 #include <meti/RandUtils.hpp>
 
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 namespace builder {
 

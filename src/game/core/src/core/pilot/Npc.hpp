@@ -20,10 +20,11 @@
 
 #include <common/Base.hpp>
 
-#include <core/pilots/Skills.hpp>
+#include <core/pilot/Skills.hpp>
+#include <core/pilot/Observation.hpp>
+#include <core/pilot/AgressorData.hpp>
+
 #include <core/ai/StateMachine.hpp>
-#include <core/pilots/Observation.hpp>
-#include <core/pilots/AgressorData.hpp>
 
 #include <set>
 

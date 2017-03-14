@@ -19,7 +19,7 @@
 #pragma once
 
 #include "../BaseScenario.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 class MacroScenarioGoodsTrading : public BaseScenario
 {

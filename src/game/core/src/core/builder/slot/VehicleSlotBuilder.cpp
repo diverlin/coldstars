@@ -17,8 +17,12 @@
 */
 
 
-#include <builder/slots/VehicleSlotBuilder.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
+#include <core/manager/EntityManager.hpp>
+
+#include <core/slot/VehicleSlot.hpp>
+
+#include <common/Global.hpp>
 
 #include <ceti/IdGenerator.hpp>
 
@@ -26,11 +30,6 @@
 #include <math/rand.hpp>
 
 //#include <client/resources/TextureCollector.hpp>
-
-#include <slots/VehicleSlot.hpp>
-
-#include <common/Global.hpp>
-
 
 control::VehicleSlot*
 getNewVehicleSlot(entity::Type subtype_id, int_t id)

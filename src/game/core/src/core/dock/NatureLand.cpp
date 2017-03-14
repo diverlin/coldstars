@@ -22,10 +22,10 @@
 
 #include <meti/RandUtils.hpp>
 
-#include "../slots/ItemSlot.hpp"
+#include <core/slot/ItemSlot.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 NatureLand::NatureLand(int id)
 {

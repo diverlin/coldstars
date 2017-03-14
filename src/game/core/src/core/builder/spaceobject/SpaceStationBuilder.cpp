@@ -17,7 +17,7 @@
 */
 
 
-#include <core/builder/spaceobjects/SpaceStationBuilder.hpp>
+#include <core/builder/spaceobject/SpaceStationBuilder.hpp>
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/SpaceStation.hpp>

@@ -1,11 +1,11 @@
 #include "MessageManager.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <common/constants.hpp>
 
-#include <types/EntityTypes.hpp> // test
+#include <core/type/EntityTypes.hpp> // test
 
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
@@ -19,16 +19,20 @@
 
 #include <world/starsystem.hpp>
 
-#include <builder/spaceobjects/ALL>
+#include <core/builder/spaceobject/ALL>
 
-#include <builder/item/equipment/ALL>
-#include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
-#include <builder/item/other/ALL>
+#include <core/builder/item/equipment/ALL>
+#ifdef USE_MODULES
+#include <core/builder/item/module/ALL>
+#endif // USE_MODULES
+#ifdef USE_ARTEFACTS
+#include <core/builder/item/artefact/ALL>
+#endif // USE_ARTEFACTS
+#include <core/builder/item/other/ALL>
 
-#include <builder/world/StarSystemBuilder.hpp>
+#include <core/builder/world/StarSystemBuilder.hpp>
 
-#include <world/starsystem.hpp>
+#include <core/world/starsystem.hpp>
 
 void MessageManager::add(Message&& message)
 {

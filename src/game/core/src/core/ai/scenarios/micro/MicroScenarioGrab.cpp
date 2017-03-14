@@ -24,8 +24,8 @@
 #include "../../../ai/StateMachine.hpp"
 
 #include "../../../item/equipment/Grapple.hpp"
-#include "../../../slots/ItemSlot.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/slot/ItemSlot.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include "../../../world/starsystem.hpp"
 

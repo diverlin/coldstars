@@ -17,7 +17,7 @@
 */
 
 #include "MacroScenarioGoodsTrading.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Planet.hpp>
 #include <core/spaceobject/Container.hpp>

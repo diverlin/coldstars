@@ -21,7 +21,7 @@
 
 #include <core/common/Base.hpp>
 #include <core/struct/LifeData.hpp>
-#include <core/types/PlaceTypes.hpp>
+#include <core/type/PlaceTypes.hpp>
 
 #include <core/descriptor/SpaceobjectDescriptor.hpp>
 

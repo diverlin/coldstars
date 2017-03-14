@@ -25,9 +25,9 @@
  
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
-#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
 
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 

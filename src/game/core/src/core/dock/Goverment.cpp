@@ -22,7 +22,7 @@
 #include "../common/constants.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 Goverment::Goverment(int id)
 :

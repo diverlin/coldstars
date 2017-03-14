@@ -17,8 +17,8 @@
 */
 
 
-#include <builder/slots/ItemSlotBuilder.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
@@ -29,8 +29,8 @@
 
 #include <common/Global.hpp>
 
-#include <parts/Turrel.hpp>
-#include <slots/ItemSlot.hpp>
+#include <core/part/Turrel.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 
 control::ItemSlot*

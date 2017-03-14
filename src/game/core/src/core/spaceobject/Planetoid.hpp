@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
-#include <core/parts/orbit.hpp>
+#include <core/part/orbit.hpp>
 #include <core/descriptor/PlanetDescriptor.hpp>
 //#include <jeti/Render.hpp>
 

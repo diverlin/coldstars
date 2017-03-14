@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <builder/pilots/NpcBuilder.hpp>
+#include <core/builder/pilot/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <ceti/IdGenerator.hpp>
@@ -24,7 +24,7 @@
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <ai/aiModel/AiModelCollector.hpp>
 #include <ai/aiModel/AiModelConqueror.hpp>

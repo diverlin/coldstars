@@ -19,8 +19,9 @@
 
 #pragma once
 
+#include <core/type/EntityTypes.hpp>
+
 #include <ceti/type/IdType.hpp>
-#include <types/EntityTypes.hpp>
 
 namespace control {
 class ItemSlot;

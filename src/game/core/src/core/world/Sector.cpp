@@ -19,14 +19,14 @@
 #include "Sector.hpp"
 #include <core/world/starsystem.hpp>
 #include <core/world/galaxy.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
 #include <common/common.hpp>
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 #include "../struct/StarSystemsConditionData.hpp"
 

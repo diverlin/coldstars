@@ -22,7 +22,7 @@
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 #include <core/common/Global.hpp>
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 namespace builder {
 namespace item {

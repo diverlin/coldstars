@@ -18,7 +18,7 @@
 
 #include "Global.hpp"
 #include <ai/God.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <communication/MessageManager.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
@@ -62,14 +62,14 @@
 
 #include <builder/item/other/BombBuilder.hpp>
 
-#include <builder/pilots/NpcBuilder.hpp>
+#include <core/builder/pilot/NpcBuilder.hpp>
 
-#include <builder/slots/ItemSlotBuilder.hpp>
-#include <builder/slots/VehicleSlotBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
-#include <builder/spaceobjects/BlackHoleBuilder.hpp>
-#include <builder/spaceobjects/ContainerBuilder.hpp>
-#include <builder/spaceobjects/RocketBulletBuilder.hpp>
+#include <core/builder/spaceobject/BlackHoleBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
+#include <core/builder/spaceobject/RocketBulletBuilder.hpp>
 
 namespace core {
 

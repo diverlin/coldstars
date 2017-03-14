@@ -22,7 +22,7 @@
 
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
@@ -33,16 +33,16 @@
 #include "../dock/Kosmoport.hpp"
 
 #include "../ai/aiModel/BaseAiModel.hpp"
-#include "../pilots/Skills.hpp"
+#include <core/pilot/Skills.hpp>
 
-#include "../parts/WeaponComplex.hpp"
+#include <core/part/WeaponComplex.hpp>
 
 #include <core/item/other/GoodsPack.hpp>
 
 #include "../dock/Shop.hpp"
 
 #include "../common/GameDate.hpp" 
-#include <types/RaceTypes.hpp> 
+#include <core/type/RaceTypes.hpp>
 
 namespace model {
 

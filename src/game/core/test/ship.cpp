@@ -25,17 +25,17 @@
 #include <core/descriptor/DescriptorGenerator.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
-#include <core/builder/spaceobjects/ALL>
+#include <core/builder/spaceobject/ALL>
 #include <core/builder/item/equipment/ALL>
 
 #include <core/world/starsystem.hpp>
 #include <core/item/equipment/ALL>
 #include <core/spaceobject/ALL>
-#include <core/slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
 
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <gtest/gtest.h>
 

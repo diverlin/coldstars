@@ -21,7 +21,7 @@
 #include <core/common/Global.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/item/other/Bomb.hpp>
-#include <core/slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 #include <core/spaceobject/Container.hpp>
 #include <core/spaceobject/Ship.hpp>
 #include <core/spaceobject/Planet.hpp>
@@ -29,13 +29,13 @@
 
 #include <core/model/spaceobject/Ship.hpp>
 
-#include <core/builder/spaceobjects/AsteroidBuilder.hpp>
-#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/spaceobject/AsteroidBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/builder/world/GalaxyBuilder.hpp>
 #include <core/builder/world/SectorBuilder.hpp>
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/item/other/BombBuilder.hpp>
-#include <core/builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
 
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
@@ -51,8 +51,12 @@
 #include <core/communication/MessageManager.hpp>
 
 #include <core/builder/item/equipment/ALL>
-#include <core/builder/item/modules/ALL>
-#include <core/builder/item/artefacts//ALL>
+#ifdef USE_MODULES
+#include <core/builder/item/module/ALL>
+#endif
+#ifdef USE_ARTEFACTS
+#include <core/builder/item/artefacts/ALL>
+#endif
 #include <core/builder/item/other/ALL>
 
 #include <core/world/galaxy.hpp>

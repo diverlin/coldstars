@@ -24,12 +24,12 @@
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/item/other/GoodsPack.hpp>
-#include "../slots/ItemSlot.hpp"
-#include "../pilots/Npc.hpp"
+#include <core/slot/ItemSlot.hpp>
+#include <core/pilot/Npc.hpp>
 
 Shop::Shop(int id)
 {

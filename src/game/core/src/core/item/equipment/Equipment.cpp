@@ -20,9 +20,9 @@
 #include "Rocket.hpp" // ugly
 
 #include <core/common/constants.hpp>
-#include <core/slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 #include <core/common/Global.hpp> // depr
-#include <core/managers/EntityManager.hpp> // depr
+#include <core/manager/EntityManager.hpp> // depr
 
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>

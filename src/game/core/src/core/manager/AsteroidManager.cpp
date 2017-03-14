@@ -20,7 +20,7 @@
 #include <common/Global.hpp>
 #include <common/TurnTimer.hpp>
 #include <world/starsystem.hpp>
-#include "../builder/spaceobjects/AsteroidBuilder.hpp"
+#include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 
 void AsteroidManager::update(control::Starsystem* starsystem)

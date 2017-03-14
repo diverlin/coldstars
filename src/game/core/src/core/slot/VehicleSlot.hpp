@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/slots/BaseSlot.hpp>
+#include <core/slot/BaseSlot.hpp>
 
 class Vehicle;
 

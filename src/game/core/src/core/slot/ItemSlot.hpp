@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include <core/types/StatusTypes.hpp>
-#include <core/slots/BaseSlot.hpp>
+#include <core/type/StatusTypes.hpp>
+#include <core/slot/BaseSlot.hpp>
 
 #include <ceti/type/IdType.hpp>
 

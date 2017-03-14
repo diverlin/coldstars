@@ -20,7 +20,7 @@
 #include <core/model/item/equipment/Rocket.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 
 namespace builder {

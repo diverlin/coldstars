@@ -22,7 +22,7 @@
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/SpaceStation.hpp>
 
-#include "../slots/ItemSlot.hpp"
+#include <core/slot/ItemSlot.hpp>
 
 #include <meti/VectorUtils.hpp>
 #include <meti/RandUtils.hpp>

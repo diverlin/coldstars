@@ -21,7 +21,7 @@
 #include <common/constants.hpp>
 #include <common/Global.hpp>
 #include <common/common.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <meti/RandUtils.hpp>
 

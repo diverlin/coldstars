@@ -24,32 +24,32 @@
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
-#include <world/starsystem.hpp>
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 
-#include <builder/dock/KosmoportBuilder.hpp>
-#include <builder/dock/NatureLandBuilder.hpp>
-#include <builder/pilots/NpcBuilder.hpp>
-#include <builder/spaceobjects/ShipBuilder.hpp>
-#include <builder/spaceobjects/SpaceStationBuilder.hpp>
-#include <builder/spaceobjects/SatelliteBuilder.hpp>
-#include <builder/world/GalaxyBuilder.hpp>
+#include <core/builder/dock/KosmoportBuilder.hpp>
+#include <core/builder/dock/NatureLandBuilder.hpp>
+#include <core/builder/pilot/NpcBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
+#include <core/builder/spaceobject/SpaceStationBuilder.hpp>
+#include <core/builder/spaceobject/SatelliteBuilder.hpp>
+#include <core/builder/world/GalaxyBuilder.hpp>
 
 #include <core/spaceobject/ALL>
 
-#include <dock/Kosmoport.hpp>
-#include <dock/NatureLand.hpp>
+#include <core/dock/Kosmoport.hpp>
+#include <core/dock/NatureLand.hpp>
 
-#include <ai/Task.hpp>
-#include <pilots/Npc.hpp>
+#include <core/ai/Task.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <core/descriptor/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
 
 #include <math/rand.hpp>
 
-#include <managers/EntityManager.hpp> // garbage
+#include <core/manager/EntityManager.hpp> // garbage
 
 #include <meti/RandUtils.hpp>
 #include <meti/RandUtils.hpp>

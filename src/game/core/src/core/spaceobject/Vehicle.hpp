@@ -21,14 +21,14 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
-#include <core/parts/WeaponComplex.hpp>
-#include <core/parts/DriveComplex.hpp>
-#include <core/parts/ProtectionComplex.hpp>
+#include <core/part/WeaponComplex.hpp>
+#include <core/part/DriveComplex.hpp>
+#include <core/part/ProtectionComplex.hpp>
 
 #include <core/struct/VehiclePropetries.hpp>
 #include <core/struct/VehicleNeeds.hpp>
 
-#include <core/types/StatusTypes.hpp>
+#include <core/type/StatusTypes.hpp>
 
 //#include <boost/serialization/vector.hpp>
 

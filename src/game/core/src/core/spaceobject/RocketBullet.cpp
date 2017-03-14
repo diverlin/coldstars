@@ -19,12 +19,10 @@
 #include "RocketBullet.hpp"
 
 #include <common/common.hpp>
-//#include <ceti/StringUtils.hpp>
-#include <ceti/Logger.hpp>
 #include <common/constants.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/particlesystem/DriveEffect.hpp>
@@ -32,6 +30,8 @@
 
 //#include <client/text/VerticalFlowText.hpp>
 
+//#include <ceti/StringUtils.hpp>
+#include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
 
 namespace model {

@@ -21,7 +21,8 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include "../common/constants.hpp"
-#include <types/RaceTypes.hpp>
+
+#include <core/type/RaceTypes.hpp>
 
 class Skills
 { 

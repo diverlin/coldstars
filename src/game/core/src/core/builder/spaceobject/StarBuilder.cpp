@@ -25,7 +25,7 @@
 #include <descriptor/Base.hpp>
 #include <descriptor/DescriptorManager.hpp>
 
-#include <types/MeshTypes.hpp>
+#include <core/type/MeshTypes.hpp>
     
 #include <meti/RandUtils.hpp>
 

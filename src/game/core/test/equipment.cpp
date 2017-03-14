@@ -18,7 +18,7 @@
 
 #include "helper2.hpp"
 
-#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/descriptor/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/spaceobject/Ship.hpp>
@@ -28,7 +28,7 @@
 #include <core/model/item/equipment/ALL>
 #include <core/item/equipment/ALL>
 
-#include <core/slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <gtest/gtest.h>
 

@@ -28,7 +28,7 @@
 #include <core/spaceobject/ALL>
 
 //#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 #include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"
@@ -42,18 +42,18 @@
 #endif // USE_ARTEFACTS
 #include <builder/item/other/ALL>
 
-#include <builder/spaceobjects/ALL>
+#include <core/builder/spaceobject/ALL>
 
 #include <core/item/other/ALL>
 
-#include "../builder/slots/ItemSlotBuilder.hpp"
-#include "../builder/slots/VehicleSlotBuilder.hpp"
+#include <core/builder/slot/ItemSlotBuilder.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
 #include "../builder/world/GalaxyBuilder.hpp"
 #include "../builder/world/StarSystemBuilder.hpp"
 
-//#include "../builder/pilots/PlayerBuilder.hpp"
-#include "../builder/pilots/NpcBuilder.hpp"
+//#include "../builder/pilot/PlayerBuilder.hpp"
+#include <core/builder/pilot/NpcBuilder.hpp>
 
 #include "../builder/dock/NatureLandBuilder.hpp"
 #include "../builder/dock/KosmoportBuilder.hpp"
@@ -81,14 +81,14 @@
 #include "../dock/NatureLand.hpp"
 #include "../dock/Kosmoport.hpp"
 
-#include "../slots/VehicleSlot.hpp"
+#include <core/slot/VehicleSlot.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/Global.hpp>
 #include <common/TurnTimer.hpp>
 
 #include <core/descriptor/DescriptorGenerator.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
 

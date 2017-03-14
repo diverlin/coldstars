@@ -17,27 +17,25 @@
 */
 
 
-#ifndef MICROSCENARIODESTROY_H
-#define MICROSCENARIODESTROY_H
+#pragma once
 
 #include "../BaseScenario.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 class MicroScenarioDestroy : public BaseScenario
 {
-    public:
-        MicroScenarioDestroy();
-        virtual ~MicroScenarioDestroy();
-        
-        virtual bool Validate(Npc*) const;
-                
-        virtual void enter(Npc*) const;
-        virtual void UpdateInStaticInSpace(Npc*) const;
-        virtual void UpdateInDynamicInSpace(Npc*) const;    
-        virtual void exit(Npc*) const;
-        
-        virtual std::string GetDescription(Npc*) const;
+public:
+    MicroScenarioDestroy();
+    virtual ~MicroScenarioDestroy();
+
+    virtual bool Validate(Npc*) const;
+
+    virtual void enter(Npc*) const;
+    virtual void UpdateInStaticInSpace(Npc*) const;
+    virtual void UpdateInDynamicInSpace(Npc*) const;
+    virtual void exit(Npc*) const;
+
+    virtual std::string GetDescription(Npc*) const;
 };
 
-#endif 
-     
+

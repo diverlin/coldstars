@@ -18,11 +18,11 @@
 
 
 #include <builder/dock/AngarBuilder.hpp>
-#include <builder/slots/VehicleSlotBuilder.hpp>
-#include <builder/slots/ItemSlotBuilder.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <slots/VehicleSlot.hpp>
+#include <core/slot/VehicleSlot.hpp>
 
 #include <dock/Angar.hpp>
 

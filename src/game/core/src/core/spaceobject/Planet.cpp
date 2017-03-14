@@ -29,7 +29,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <ceti/serialization/macro.hpp>
 

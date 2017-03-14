@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/types/TechLevelTypes.hpp>
+#include <core/type/TechLevelTypes.hpp>
 #include <core/descriptor/Base.hpp>
 
 

@@ -29,8 +29,8 @@ class SpaceObject;
 class MacroTaskManager
 {
 public:
-    MacroTaskManager();
-    ~MacroTaskManager();
+    MacroTaskManager() = default;
+    ~MacroTaskManager() = default;
 
     void setTask(const Task&);
 

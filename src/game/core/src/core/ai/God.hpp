@@ -18,8 +18,8 @@
 
 #pragma once
 
-#include <core/types/RaceTypes.hpp>
-#include <core/types/EntityTypes.hpp>
+#include <core/type/RaceTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 #include <core/common/GameDate.hpp>
 #include <core/struct/StarSystemsConditionData.hpp>
 

@@ -20,7 +20,7 @@
 #include "ProtectorBuilder.hpp"
 #include <core/model/item/equipment/Protector.hpp>
 #include <core/descriptor/item/equipment/Protector.hpp>
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 

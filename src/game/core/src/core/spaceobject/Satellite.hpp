@@ -22,7 +22,7 @@
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Vehicle.hpp>
-#include <core/parts/orbit.hpp>
+#include <core/part/orbit.hpp>
 
 namespace descriptor {
 class Satellite;
