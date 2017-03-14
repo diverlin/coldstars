@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include <string>
-#include <cstdint>
 #include <meti/VectorUtils.hpp>
-#include <vector>
-#include <types/EntityTypes.hpp>
-#include <types/GuiTypes.hpp>
+#include <core/type/EntityTypes.hpp>
+#include <core/type/GuiTypes.hpp>
 #include "Converter.hpp"
 
+#include <vector>
+#include <string>
+#include <cstdint>
 
 namespace CONVERTER
 {

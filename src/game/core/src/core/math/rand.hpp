@@ -18,10 +18,10 @@
 
 #pragma once
 
-#include <vector>
+#include <core/type/RaceTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
+#include <vector>
 
 entity::Type getRandNpcSubTypeId(race::Type, const std::vector<entity::Type>&);
 entity::Type getRandNpcSubTypeId(race::Type);

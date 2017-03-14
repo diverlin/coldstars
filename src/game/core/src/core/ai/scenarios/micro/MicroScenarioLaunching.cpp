@@ -21,7 +21,7 @@
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <core/spaceobject/Vehicle.hpp>
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 MicroScenarioLaunching::MicroScenarioLaunching()
 {

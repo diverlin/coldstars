@@ -22,16 +22,16 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
 #include <dock/Kosmoport.hpp>
 
 //#include <client/effects/Shield.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <core/model/spaceobject/SpaceStation.hpp>
 

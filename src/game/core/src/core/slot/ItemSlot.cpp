@@ -21,14 +21,14 @@
 
 #include <descriptor/item/Item.hpp>
 
-#include "../builder/spaceobjects/ContainerBuilder.hpp"
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Container.hpp>
-#include "../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 #include "../world/starsystem.hpp"
-#include "../parts/Turrel.hpp"
+#include <core/part/Turrel.hpp>
 
 #include <core/item/equipment/Rocket.hpp>
 #include <core/item/equipment/Lazer.hpp>
@@ -49,7 +49,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 //namespace descriptor {
 

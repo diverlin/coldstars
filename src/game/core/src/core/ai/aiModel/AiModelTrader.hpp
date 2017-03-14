@@ -17,21 +17,20 @@
 */
 
 
-#ifndef AIMODELTRADER_H
-#define AIMODELTRADER_H
+#pragma once
 
 #include "BaseAiModel.hpp"
-#include "../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 class AiModelTrader : public BaseAiModel
 {
-    public:
-        AiModelTrader();
-        virtual ~AiModelTrader();
-        
-        virtual void UpdateInStatic(Npc*) const;
-        virtual std::string GetDescription(Npc*) const;
+public:
+    AiModelTrader();
+    virtual ~AiModelTrader();
+
+    virtual void UpdateInStatic(Npc*) const;
+    virtual std::string GetDescription(Npc*) const;
 };
 
-#endif 
-     
+
+

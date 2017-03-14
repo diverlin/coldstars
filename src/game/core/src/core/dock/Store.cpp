@@ -23,11 +23,11 @@
 #include "../common/Global.hpp"
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/item/Item.hpp>
-#include "../slots/ItemSlot.hpp"
-#include "../slots/VehicleSlot.hpp"
-#include "../pilots/Npc.hpp"
+#include <core/slot/ItemSlot.hpp>
+#include <core/slot/VehicleSlot.hpp>
+#include <core/pilot/Npc.hpp>
 
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 

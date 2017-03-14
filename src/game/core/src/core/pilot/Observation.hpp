@@ -19,8 +19,9 @@
 
 #pragma once
 
+#include <core/type/RaceTypes.hpp>
+
 #include <vector>
-#include <types/RaceTypes.hpp>
 
 namespace model {
 class Starsystem;

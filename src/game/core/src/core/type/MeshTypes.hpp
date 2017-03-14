@@ -20,7 +20,7 @@
 
 #include <string>
 
-#include <core/types/TextureTypes.hpp>
+#include <core/type/TextureTypes.hpp>
 
 namespace mesh {
 

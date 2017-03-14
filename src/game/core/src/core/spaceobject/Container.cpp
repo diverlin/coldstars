@@ -24,14 +24,14 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/Render.hpp>
 
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
 
 #include <ceti/serialization/macro.hpp>

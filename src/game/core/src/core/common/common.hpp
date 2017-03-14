@@ -23,8 +23,8 @@
 
 #include <meti/VectorUtils.hpp>
 
-#include <types/EntityTypes.hpp>
-#include <types/GuiTypes.hpp>     
+#include <core/type/EntityTypes.hpp>
+#include <core/type/GuiTypes.hpp>
 
 int getObjectSize(int w, int h); 
 

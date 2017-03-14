@@ -21,12 +21,12 @@
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/spaceobject/Container.hpp>
 
-#include <core/builder/spaceobjects/ContainerBuilder.hpp>
-#include <core/builder/slots/ItemSlotBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
 
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
 
@@ -34,8 +34,8 @@
 
 //#include <client/resources/GuiTextureObCollector.hpp>
 
-#include <slots/VehicleSlot.hpp> 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/VehicleSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 
@@ -74,9 +74,9 @@
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 //#include <client/text/VerticalFlowText.hpp>
 
-#include <parts/Turrel.hpp>
+#include <core/part/Turrel.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 
@@ -91,7 +91,7 @@
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 
 namespace control {

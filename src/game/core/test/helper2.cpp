@@ -19,7 +19,7 @@
 #include "helper2.hpp"
 
 #include <core/descriptor/DescriptorGenerator.hpp>
-#include <core/builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/spaceobject/Ship.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>

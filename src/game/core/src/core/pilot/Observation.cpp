@@ -20,7 +20,7 @@
 #include "../world/galaxy.hpp"
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
-#include "../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 #include "../world/starsystem.hpp"
 
 #include <core/spaceobject/Asteroid.hpp>

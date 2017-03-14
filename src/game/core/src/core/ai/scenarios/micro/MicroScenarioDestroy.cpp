@@ -22,7 +22,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 #include "../../../ai/StateMachine.hpp"
-#include "../../../parts/WeaponComplex.hpp"
+#include <core/part/WeaponComplex.hpp>
 
 MicroScenarioDestroy::MicroScenarioDestroy()
 {

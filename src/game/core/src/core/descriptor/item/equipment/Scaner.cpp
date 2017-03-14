@@ -18,7 +18,7 @@
 
 #include "Scaner.hpp"
 
-#include <core/types/EntityTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 
 #include <ceti/serialization/macro.hpp>
 

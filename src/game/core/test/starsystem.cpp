@@ -24,11 +24,11 @@
 #include <core/world/starsystem.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
-#include <core/builder/spaceobjects/ALL>
+#include <core/builder/spaceobject/ALL>
 
 #include <core/spaceobject/ALL>
 
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <gtest/gtest.h>
 

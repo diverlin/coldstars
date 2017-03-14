@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/types/RaceTypes.hpp>
+#include <core/type/RaceTypes.hpp>
 
 #include <core/descriptor/SpaceobjectDescriptor.hpp>
 

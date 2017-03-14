@@ -22,9 +22,9 @@
 
 #include <meti/VectorUtils.hpp>
 
-#include <builder/spaceobjects/BlackHoleBuilder.hpp>
-#include <builder/spaceobjects/ShipBuilder.hpp>
-#include <builder/pilots/NpcBuilder.hpp>
+#include <core/builder/spaceobject/BlackHoleBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
+#include <core/builder/pilot/NpcBuilder.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
@@ -32,18 +32,18 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 #include <common/Config.hpp>
 
 //#include <jeti/Render.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 #include <core/item/other/Bomb.hpp>
 
 #include <core/spaceobject/ALL>
 
 //#include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 //#include <client/effects/DistantNebulaEffect.hpp>
 //#include <client/effects/DistantStarEffect.hpp>

@@ -19,25 +19,26 @@
 
 #pragma once
 
+#include <core/type/RaceTypes.hpp>
+#include <core/type/EntityTypes.hpp>
+
 #include <vector>
 #include <map>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
 
 class RaceDescriptors
 {
-    public:
-        RaceDescriptors();
-        ~RaceDescriptors();
+public:
+    RaceDescriptors();
+    ~RaceDescriptors();
 
-        const std::vector<race::Type>& getRaces(race::KIND) const;
-        const std::vector<entity::Type>& getSubTypes(race::Type) const;
+    const std::vector<race::Type>& getRaces(race::KIND) const;
+    const std::vector<entity::Type>& getSubTypes(race::Type) const;
 
-        bool isGood(race::Type) const;
+    bool isGood(race::Type) const;
 
-    private:
-        std::map<race::KIND, std::vector<race::Type>> m_races;
-        std::map<race::Type, std::vector<entity::Type>> m_subtypes;
+private:
+    std::map<race::KIND, std::vector<race::Type>> m_races;
+    std::map<race::Type, std::vector<entity::Type>> m_subtypes;
 }; 
 
 

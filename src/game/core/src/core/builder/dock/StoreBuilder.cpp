@@ -18,15 +18,19 @@
 
 
 #include <builder/dock/StoreBuilder.hpp>
-#include <builder/slots/ItemSlotBuilder.hpp>
-#include <builder/slots/VehicleSlotBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
-#include <builder/item/equipment/ALL>
-#include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
-#include <builder/item/other/ALL>
+#include <core/builder/item/equipment/ALL>
+#ifdef USE_MODULES
+#include <core/builder/item/module/ALL>
+#endif
+#ifdef USE_ARTEFACTS
+#include <core/builder/item/artefact/ALL>
+#endif
+#include <core/builder/item/other/ALL>
 
-#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <dock/Store.hpp>

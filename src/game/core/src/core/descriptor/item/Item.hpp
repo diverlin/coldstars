@@ -19,8 +19,8 @@
 #pragma once
 
 #include <core/common/Base.hpp>
-#include <core/types/TechLevelTypes.hpp>
-#include <core/types/RaceTypes.hpp>
+#include <core/type/TechLevelTypes.hpp>
+#include <core/type/RaceTypes.hpp>
 
 namespace descriptor {
 

@@ -23,7 +23,7 @@
 #include <core/spaceobject/Vehicle.hpp>
 
 #include <core/item/Item.hpp>
-#include "../slots/ItemSlot.hpp"
+#include <core/slot/ItemSlot.hpp>
 
 
 bool

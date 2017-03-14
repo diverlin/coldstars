@@ -20,13 +20,7 @@
 #include "scenarios/ScenarioCollector.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
-
-MacroTaskManager::MacroTaskManager()
-{}
-
-MacroTaskManager::~MacroTaskManager()
-{}
+#include <core/manager/EntityManager.hpp>
 
 void MacroTaskManager::setTask(const Task& macrotask)
 {

@@ -18,13 +18,14 @@
 
 #include "MicroScenarioJump.hpp"
 #include "../../../common/constants.hpp"
-#include <ceti/Logger.hpp>
-//#include <ceti/StringUtils.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
+
+#include <ceti/Logger.hpp>
+//#include <ceti/StringUtils.hpp>
 
 MicroScenarioJump::MicroScenarioJump()
 {

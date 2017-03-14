@@ -18,7 +18,7 @@
 
 #include "Weapon.hpp"
 
-#include <core/types/EntityTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 
 namespace descriptor {
 namespace item {

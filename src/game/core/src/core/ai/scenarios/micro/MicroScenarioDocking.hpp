@@ -21,7 +21,7 @@
 #define MICROSCENARIODOCKING_H
 
 #include "../BaseScenario.hpp"
-class Npc; //#include "../../../pilots/Npc.hpp"
+class Npc; //#include <core/pilot/Npc.hpp>
 
 class MicroScenarioDocking : public BaseScenario
 {

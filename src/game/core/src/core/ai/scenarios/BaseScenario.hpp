@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <types/AiScenarioTypes.hpp>
+#include <core/type/AiScenarioTypes.hpp>
 
 #include <string>
 

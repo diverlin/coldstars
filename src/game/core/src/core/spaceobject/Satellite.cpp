@@ -19,9 +19,9 @@
 #include "Satellite.hpp"
 #include <core/common/Global.hpp>
 #include <core/world/starsystem.hpp>
-#include <core/slots/ItemSlot.hpp>
-#include <core/parts/WeaponComplex.hpp>
-#include <core/pilots/Npc.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/part/WeaponComplex.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <ceti/Logger.hpp>

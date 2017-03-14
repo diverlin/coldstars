@@ -22,7 +22,7 @@
 
 #include <core/common/Global.hpp>
 
-#include <core/slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 #include <core/model/item/Item.hpp>

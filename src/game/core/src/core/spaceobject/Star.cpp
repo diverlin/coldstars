@@ -23,7 +23,7 @@
 #include <core/common/constants.hpp>
 #include <core/common/Global.hpp>
 #include <core/world/starsystem.hpp>
-#include <core/managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 //#include <jeti/Material.hpp>
 //#include <glm/gtx/transform.hpp>

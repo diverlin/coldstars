@@ -21,8 +21,8 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 #include <core/world/HyperSpace.hpp>
-#include <core/managers/AsteroidManager.hpp>
-#include <core/types/RaceTypes.hpp>
+#include <core/manager/AsteroidManager.hpp>
+#include <core/type/RaceTypes.hpp>
 
 #include <core/descriptor/StarsystemDescriptor.hpp>
 

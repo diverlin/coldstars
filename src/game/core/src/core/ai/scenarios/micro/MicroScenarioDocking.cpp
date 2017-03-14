@@ -22,7 +22,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 #include "../../../ai/StateMachine.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 
 MicroScenarioDocking::MicroScenarioDocking()
 {

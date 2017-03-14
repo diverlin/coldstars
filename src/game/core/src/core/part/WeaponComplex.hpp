@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/types/EntityTypes.hpp>
+#include <core/type/EntityTypes.hpp>
 
 #include <vector>
 

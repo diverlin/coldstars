@@ -20,7 +20,7 @@
 #pragma once
 
 
-#include <core/builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <core/builder/spaceobject/BaseVehicleBuilder.hpp>
 
 //#include <ceti/type/IdType.hpp>
 

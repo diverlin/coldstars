@@ -20,7 +20,7 @@
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobject/BlackHole.hpp>
 
-#include <types/MeshTypes.hpp>
+#include <core/type/MeshTypes.hpp>
 
 #include <meti/RandUtils.hpp>
 

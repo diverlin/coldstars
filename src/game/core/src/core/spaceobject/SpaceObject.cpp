@@ -18,10 +18,9 @@
 
 #include "SpaceObject.hpp"
 
-
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>

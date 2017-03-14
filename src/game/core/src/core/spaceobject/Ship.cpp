@@ -26,10 +26,10 @@
 
 #include <core/item/equipment/Grapple.hpp>
 
-#include <slots/ItemSlot.hpp>
-#include <slots/VehicleSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/slot/VehicleSlot.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
 

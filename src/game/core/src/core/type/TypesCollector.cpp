@@ -18,8 +18,8 @@
 
 #include "TypesCollector.hpp"
 
-#include <core/types/TextureTypes.hpp>
-#include <core/types/MeshTypes.hpp>
+#include <core/type/TextureTypes.hpp>
+#include <core/type/MeshTypes.hpp>
 
 #include <cassert>
 

@@ -17,7 +17,7 @@
 */
 
 #include "MacroScenarioStarSystemDefence.hpp"
-#include "../../../pilots/Npc.hpp"
+#include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
 #include "../../../common/constants.hpp"

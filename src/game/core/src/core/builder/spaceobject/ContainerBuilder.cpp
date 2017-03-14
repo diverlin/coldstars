@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <builder/spaceobjects/ContainerBuilder.hpp>
-#include <builder/slots/ItemSlotBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <core/spaceobject/Container.hpp>
@@ -26,7 +26,7 @@
 #include <descriptor/DescriptorManager.hpp>
 #include <descriptor/Container.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/item/other/GoodsPack.hpp>
 

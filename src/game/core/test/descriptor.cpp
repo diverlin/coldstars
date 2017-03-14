@@ -19,10 +19,10 @@
 //#include <core/common/Global.hpp>
 //#include <core/common/constants.hpp>
 
-//#include <core/slots/ItemSlot.hpp>
+//#include <core/slot/ItemSlot.hpp>
 //#include <core/spaceobject/Ship.hpp>
 
-//#include <core/builder/spaceobjects/ShipBuilder.hpp>
+//#include <core/builder/spaceobject/ShipBuilder.hpp>
 
 //#include <core/descriptor/Base.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>

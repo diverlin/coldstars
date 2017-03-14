@@ -21,9 +21,9 @@
 
 #include <client/common/global.hpp>
 
-//#include <core/types/MeshTypes.hpp>
-//#include <core/types/TextureTypes.hpp>
-#include <core/types/TypesCollector.hpp>
+//#include <core/type/MeshTypes.hpp>
+//#include <core/type/TextureTypes.hpp>
+#include <core/type/TypesCollector.hpp>
 
 #include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>

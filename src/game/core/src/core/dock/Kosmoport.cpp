@@ -21,14 +21,14 @@
 //#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include "../dock/Angar.hpp"
 #include "../dock/Store.hpp"
 #include "../dock/Shop.hpp"
 #include "../dock/Goverment.hpp"
 
-#include "../slots/VehicleSlot.hpp"
+#include <core/slot/VehicleSlot.hpp>
 
 Kosmoport::Kosmoport(int id)
 :

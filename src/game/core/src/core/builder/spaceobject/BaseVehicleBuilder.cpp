@@ -19,7 +19,7 @@
 #include "BaseVehicleBuilder.hpp"
 #include <core/spaceobject/Vehicle.hpp>
 
-#include "../../parts/WeaponComplex.hpp"
+#include <core/part/WeaponComplex.hpp>
 
 #include <descriptor/DescriptorManager.hpp>
 
@@ -27,32 +27,37 @@
 
 #ifdef USE_MODULES
 #include <core/item/modules/ALL>
-#endif
+#endif // USE_MODULES
 
 #include <core/item/other/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/ALL>
-#endif
+#endif // USE_ARTEFACTS
 
-#include <builder/item/equipment/ALL>
-#include <builder/item/modules/ALL>
-#include <builder/item/artefacts//ALL>
-#include <builder/item/other/ALL>
+#include <core/builder/item/equipment/ALL>
+#ifdef USE_MODULES
+#include <core/builder/item/module/ALL>
+#endif // USE_MODULES
+
+#ifdef USE_ARTEFACTS
+#include <core/builder/item/artefact/ALL>
+#endif // USE_ARTEFACTS
+#include <core/builder/item/other/ALL>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
-#include <builder/slots/ItemSlotBuilder.hpp>
+#include <core/builder/slot/ItemSlotBuilder.hpp>
 
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
 //#include <jeti/particlesystem/DriveEffect.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
-#include <types/TechLevelTypes.hpp>
+#include <core/type/TechLevelTypes.hpp>
 
 #include <descriptor/DescriptorGenerator.hpp>
 

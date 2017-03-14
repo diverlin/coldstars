@@ -19,7 +19,7 @@
 #include <core/common/Global.hpp>
 #include <core/spaceobject/Star.hpp>
 
-#include <core/builder/spaceobjects/StarBuilder.hpp>
+#include <core/builder/spaceobject/StarBuilder.hpp>
 
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
