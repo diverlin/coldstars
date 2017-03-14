@@ -20,7 +20,8 @@
 #pragma once
 
 #include "Task.hpp"
-#include "scenarios/BaseScenario.hpp"
+
+#include <core/ai/scenary/BaseScenario.hpp>
 
 namespace model {
 class SpaceObject;

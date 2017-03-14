@@ -18,24 +18,24 @@
 
 #include "init.hpp"
 
-#include <ai/aiModel/AiModelCollector.hpp>
-#include <ai/aiModel/AiModelRanger.hpp>
-#include <ai/aiModel/AiModelConqueror.hpp>
-#include <ai/aiModel/AiModelTrader.hpp>
+#include <core/ai/aiModel/AiModelCollector.hpp>
+#include <core/ai/aiModel/AiModelRanger.hpp>
+#include <core/ai/aiModel/AiModelConqueror.hpp>
+#include <core/ai/aiModel/AiModelTrader.hpp>
 
-#include <ai/scenarios/ScenarioCollector.hpp>
+#include <core/ai/scenary/ScenarioCollector.hpp>
 
-#include <ai/scenarios/macro/MacroScenarioGoodsTrading.hpp>
-#include <ai/scenarios/macro/MacroScenarioStarSystemLiberation.hpp>
-#include <ai/scenarios/macro/MacroScenarioStarSystemDefence.hpp>
-#include <ai/scenarios/macro/MacroScenarioSelfSafety.hpp>
+#include <core/ai/scenary/macro/MacroScenarioGoodsTrading.hpp>
+#include <core/ai/scenary/macro/MacroScenarioStarSystemLiberation.hpp>
+#include <core/ai/scenary/macro/MacroScenarioStarSystemDefence.hpp>
+#include <core/ai/scenary/macro/MacroScenarioSelfSafety.hpp>
 
-#include <ai/scenarios/micro/MicroScenarioDestroy.hpp>
-#include <ai/scenarios/micro/MicroScenarioGrab.hpp>
-#include <ai/scenarios/micro/MicroScenarioJump.hpp>
-#include <ai/scenarios/micro/MicroScenarioDocking.hpp>
-#include <ai/scenarios/micro/MicroScenarioLaunching.hpp>
-#include <ai/scenarios/micro/MicroScenarioExploration.hpp>
+#include <core/ai/scenary/micro/MicroScenarioDestroy.hpp>
+#include <core/ai/scenary/micro/MicroScenarioGrab.hpp>
+#include <core/ai/scenary/micro/MicroScenarioJump.hpp>
+#include <core/ai/scenary/micro/MicroScenarioDocking.hpp>
+#include <core/ai/scenary/micro/MicroScenarioLaunching.hpp>
+#include <core/ai/scenary/micro/MicroScenarioExploration.hpp>
 
 #include <common/TurnTimer.hpp>
 #include <descriptor/RaceDescriptors.hpp>

@@ -17,7 +17,7 @@
 */
 
 #include "MicroTaskManager.hpp"
-#include "scenarios/ScenarioCollector.hpp"
+#include <core/ai/scenary/ScenarioCollector.hpp>
 
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
