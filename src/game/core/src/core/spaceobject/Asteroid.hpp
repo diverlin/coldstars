@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/spaceobjects/Planetoid.hpp>
+#include <core/spaceobject/Planetoid.hpp>
 
 #include <core/descriptor/AsteroidDescriptor.hpp>
 

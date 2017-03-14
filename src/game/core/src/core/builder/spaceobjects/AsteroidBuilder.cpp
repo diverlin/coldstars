@@ -18,7 +18,7 @@
 
 #include "AsteroidBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/Asteroid.hpp>
+#include <core/spaceobject/Asteroid.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 

@@ -26,7 +26,7 @@
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/spaceobjects/ALL>
 
-#include <core/spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 
 #include <core/managers/EntityManager.hpp>
 

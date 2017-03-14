@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/spaceobject/SpaceObject.hpp>
 #include <core/world/HyperSpace.hpp>
 #include <core/managers/AsteroidManager.hpp>
 #include <core/types/RaceTypes.hpp>

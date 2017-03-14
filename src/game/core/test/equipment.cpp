@@ -21,7 +21,7 @@
 #include <core/builder/spaceobjects/ShipBuilder.hpp>
 #include <core/descriptor/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
-#include <core/spaceobjects/Ship.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <core/builder/item/equipment/ALL>
 #include <core/descriptor/item/equipment/ALL>

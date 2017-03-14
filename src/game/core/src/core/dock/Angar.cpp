@@ -24,7 +24,7 @@
 
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 #include "../slots/VehicleSlot.hpp" 
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"

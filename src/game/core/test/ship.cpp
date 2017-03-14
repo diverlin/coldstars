@@ -30,7 +30,7 @@
 
 #include <core/world/starsystem.hpp>
 #include <core/item/equipment/ALL>
-#include <core/spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 #include <core/slots/ItemSlot.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>

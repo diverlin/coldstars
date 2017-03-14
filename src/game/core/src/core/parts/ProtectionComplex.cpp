@@ -17,7 +17,7 @@
 */
 
 #include "ProtectionComplex.hpp"
-//#include "../spaceobjects/Vehicle.hpp"
+//#include <core/spaceobject/Vehicle.hpp>
 //#include "../resources/TextureCollector.hpp"
 //#include "../effects/Shield.hpp"
 #include "../common/constants.hpp"

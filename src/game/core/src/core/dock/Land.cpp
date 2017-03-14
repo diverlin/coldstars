@@ -22,9 +22,9 @@
 #include <managers/EntityManager.hpp>
 
 #include "../common/constants.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/SpaceObject.hpp"
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/SpaceStation.hpp>
+#include <core/spaceobject/SpaceObject.hpp>
 
 Land::Land():m_owner(nullptr)
 {}

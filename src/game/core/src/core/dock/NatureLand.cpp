@@ -17,7 +17,7 @@
 */
 
 #include "NatureLand.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 #include "../common/constants.hpp"
 
 #include <meti/RandUtils.hpp>

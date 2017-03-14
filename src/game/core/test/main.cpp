@@ -22,10 +22,10 @@
 #include <core/world/starsystem.hpp>
 #include <core/item/others/Bomb.hpp>
 #include <core/slots/ItemSlot.hpp>
-#include <core/spaceobjects/Container.hpp>
-#include <core/spaceobjects/Ship.hpp>
-#include <core/spaceobjects/Planet.hpp>
-#include <core/spaceobjects/Asteroid.hpp>
+#include <core/spaceobject/Container.hpp>
+#include <core/spaceobject/Ship.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/Asteroid.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
 

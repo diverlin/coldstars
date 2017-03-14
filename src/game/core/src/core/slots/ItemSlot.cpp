@@ -23,8 +23,8 @@
 
 #include "../builder/spaceobjects/ContainerBuilder.hpp"
 
-#include "../spaceobjects/Vehicle.hpp"
-#include "../spaceobjects/Container.hpp"
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Container.hpp>
 #include "../pilots/Npc.hpp"
 
 #include "../world/starsystem.hpp"

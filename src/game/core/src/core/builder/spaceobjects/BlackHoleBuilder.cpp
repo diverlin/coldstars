@@ -18,7 +18,7 @@
 
 #include "BlackHoleBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobjects/BlackHole.hpp>
+#include <core/spaceobject/BlackHole.hpp>
 
 #include <types/MeshTypes.hpp>
 

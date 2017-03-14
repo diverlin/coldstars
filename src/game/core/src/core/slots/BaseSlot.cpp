@@ -24,7 +24,7 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <core/spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 
 namespace model {

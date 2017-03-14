@@ -22,8 +22,8 @@
 #include <core/world/starsystem.hpp>
 #include <core/item/others/Bomb.hpp>
 #include <core/slots/ItemSlot.hpp>
-#include <core/spaceobjects/Container.hpp>
-#include <core/spaceobjects/Ship.hpp>
+#include <core/spaceobject/Container.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <core/builder/spaceobjects/ShipBuilder.hpp>
 #include <core/builder/world/StarSystemBuilder.hpp>

@@ -17,10 +17,10 @@
 */
 
 #include "DriveComplex.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/Asteroid.hpp>
+#include <core/spaceobject/SpaceStation.hpp>
 
 #include "../slots/ItemSlot.hpp"
 

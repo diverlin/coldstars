@@ -26,7 +26,7 @@
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
 #include "../../../ai/Task.hpp"
-#include "../../../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <descriptor/RaceDescriptors.hpp>
 #include <common/Global.hpp>

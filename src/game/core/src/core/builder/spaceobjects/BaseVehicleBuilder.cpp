@@ -17,7 +17,7 @@
 */
 
 #include "BaseVehicleBuilder.hpp"
-#include "../../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 
 #include "../../parts/WeaponComplex.hpp"
 

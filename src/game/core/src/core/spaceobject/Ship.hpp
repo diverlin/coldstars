@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 namespace descriptor {
 class Ship;

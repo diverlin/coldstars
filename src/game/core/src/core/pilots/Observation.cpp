@@ -23,9 +23,9 @@
 #include "../pilots/Npc.hpp"
 #include "../world/starsystem.hpp"
 
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "../spaceobjects/Container.hpp"
+#include <core/spaceobject/Asteroid.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Container.hpp>
 
 Observation::Observation():npc_owner(nullptr)
 {}

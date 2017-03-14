@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/spaceobject/SpaceObject.hpp>
 #include <core/common/BulletData.hpp>
 
 //namespace jeti {

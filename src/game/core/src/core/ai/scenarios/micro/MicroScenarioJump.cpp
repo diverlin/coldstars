@@ -20,7 +20,7 @@
 #include "../../../common/constants.hpp"
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../../../spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Vehicle.hpp>
 
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"

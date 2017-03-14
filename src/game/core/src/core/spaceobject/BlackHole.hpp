@@ -20,7 +20,7 @@
 #pragma once
 
 //#include <client/effects/ShockWaveEffect.hpp> //depr
-#include <core/spaceobjects/Planetoid.hpp>
+#include <core/spaceobject/Planetoid.hpp>
 
 
 namespace descriptor {

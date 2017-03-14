@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/spaceobjects/SpaceObject.hpp>
+#include <core/spaceobject/SpaceObject.hpp>
 
 #include <core/descriptor/Container.hpp>
 

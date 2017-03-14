@@ -22,7 +22,7 @@
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 
 #include <world/starsystem.hpp>
 
