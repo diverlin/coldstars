@@ -60,56 +60,6 @@ class Radar;
 class Rocket;
 } // namespace item
 
-template<typename T>
-class MManager {
-public:
-    MManager() = default;
-    ~MManager() = default;
-
-    void add(T* descr) {
-        std::cout<<"MManager add"<<std::endl<<descr->info()<<std::endl;
-        const auto it = m_descriptors.find(descr->id());
-        if (it == m_descriptors.end()) {
-            m_descriptors.insert(std::make_pair(descr->id(), descr));
-        } else {
-            throw std::runtime_error("MManager descriptor with that id already exist");
-        }
-    }
-
-    T* get(int_t id) const {
-        std::cout<<"MManager get(descriptor.id="<<id<<")"<<std::endl;
-        const auto it = m_descriptors.find(id);
-        if (it != m_descriptors.end()) {
-            return it->second;
-        } else {
-            throw std::runtime_error("T* get descriptor id doesn't exist");
-        }
-    }
-
-    T* random() const {
-        int_t key = meti::getRand(idList());
-        auto it = m_descriptors.find(key);
-        assert(it != m_descriptors.end());
-        return it->second;
-    }
-
-    std::vector<int_t> idList() const {
-        std::vector<int_t> result;
-        for (auto it: m_descriptors) {
-            result.push_back(it.first);
-        }
-        assert(!result.empty());
-        return result;
-    }
-    int size() const {
-        return m_descriptors.size();
-    }
-
-private:
-    std::map<int_t, T*> m_descriptors;
-};
-
-
 class Manager
 {
     Manager();
