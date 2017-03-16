@@ -70,32 +70,33 @@ void resolveId(descriptor::Base* descr) {
 
 /* world */
 descriptor::Galaxy*
-getNewGalaxy(const std::vector<int_t>& sectors) {
+genGalaxy(const std::vector<int_t>& sectors) {
     descriptor::Galaxy* descr = new descriptor::Galaxy;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::getRand(sectors));
     }
-    resolveId(descr);
+
+    descriptor::Manager::get().reg(descr);
     return descr;
 }
 
 descriptor::Sector*
-getNewSector(const std::vector<int_t>& starsystems) {
+genSector(const std::vector<int_t>& starsystems) {
     descriptor::Sector* descr = new descriptor::Sector;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::getRand(starsystems));
     }
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
     return descr;
 }
 
-descriptor::Starsystem*
-getNewStarsystem(int race)
+descriptor::StarSystem*
+genStarSystem(int race)
 {
-    descriptor::Starsystem* descr = new descriptor::Starsystem;
+    descriptor::StarSystem* descr = new descriptor::StarSystem;
     if (race == NONE) {
         race = int(race::Type::R0);
     }
@@ -103,7 +104,7 @@ getNewStarsystem(int race)
 //    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
 //    descriptor.add(descriptor::Key::RACE, race);
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
     return descr;
 }
 

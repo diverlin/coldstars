@@ -39,7 +39,7 @@ class Scaner;
 
 class Galaxy;
 class Sector;
-class Starsystem;
+class StarSystem;
 class Star;
 class Planet;
 class Asteroid;
@@ -50,9 +50,9 @@ class Container;
 class BaseOLD; // TODO: remove this
 
 /* world */
-descriptor::Galaxy* getNewGalaxy(const std::vector<int_t>&);
-descriptor::Sector* getNewSector(const std::vector<int_t>&);
-descriptor::Starsystem* getNewStarsystem(int race = NONE);
+descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
+descriptor::Sector* genSector(const std::vector<int_t>&);
+descriptor::StarSystem* genStarSystem(int race = NONE);
 
 /* spaceobjects */
 descriptor::Star* genStar();

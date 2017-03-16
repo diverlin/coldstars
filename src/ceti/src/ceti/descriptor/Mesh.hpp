@@ -69,8 +69,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_modelPath;
         ar & m_materialPath;

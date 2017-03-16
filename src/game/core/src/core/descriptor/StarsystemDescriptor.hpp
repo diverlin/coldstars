@@ -26,17 +26,17 @@
 
 namespace descriptor {
 
-struct Starsystem : public Base
+struct StarSystem : public Base
 {
 public:
     std::vector<int_t> stars;
     std::vector<int_t> planets;
 
-    Starsystem() = default;
-    ~Starsystem() = default;
+    StarSystem() = default;
+    ~StarSystem() = default;
 
     std::string info() const {
-        std::string result = "descriptor::Starsystem: " + Base::info();
+        std::string result = "descriptor::StarSystem: " + Base::info();
         result += ceti::to_string(" stars: ", stars);
         result += ceti::to_string(" planets: ", planets);
         return result;

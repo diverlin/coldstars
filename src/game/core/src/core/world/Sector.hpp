@@ -98,7 +98,7 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(model::Starsystem*, descriptor::Starsystem*, const glm::vec3&);
+    void add(model::Starsystem*, descriptor::StarSystem*, const glm::vec3&);
 
     model::Starsystem* randomStarsystem(int condition_id = NONE);
     model::Starsystem* closestStarsystemTo(model::Starsystem*, int condition_id = NONE);

@@ -20,6 +20,11 @@
 #include <core/descriptor/DescriptorGenerator.hpp>
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
+
+#include <core/descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/StarsystemDescriptor.hpp>
+
 #include <core/common/Global.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -58,18 +63,6 @@ Manager::Manager()
     }*/
 }
 
-void Manager::add(Galaxy* galaxy) {
-    m_galaxy.add(galaxy);
-}
-void Manager::add(Sector* sector) {
-    m_sector.add(sector);
-}
-void Manager::add(Starsystem* starsystem) {
-    m_starsystem.add(starsystem);
-}
-void Manager::add(Container* container) {
-    m_container.add(container);
-}
 void Manager::add(Mesh* mesh) {
     m_mesh.add(mesh);
 }
@@ -181,6 +174,28 @@ Manager::rand(Type type) const
     return descr;
 }
 
+Galaxy*
+Manager::randGalaxy() const
+{
+    Galaxy* descr = static_cast<Galaxy*>(rand(Type::GALAXY));
+    assert(descr);
+    return descr;
+}
+Sector*
+Manager::randSector() const
+{
+    Sector* descr = static_cast<Sector*>(rand(Type::SECTOR));
+    assert(descr);
+    return descr;
+}
+StarSystem*
+Manager::randStarSystem() const
+{
+    StarSystem* descr = static_cast<StarSystem*>(rand(Type::STARSYSTEM));
+    assert(descr);
+    return descr;
+}
+
 Star*
 Manager::randStar() const
 {
@@ -199,6 +214,13 @@ Asteroid*
 Manager::randAsteroid() const
 {
     Asteroid* descr = static_cast<Asteroid*>(rand(Type::ASTEROID));
+    assert(descr);
+    return descr;
+}
+Container*
+Manager::randContainer() const
+{
+    Container* descr = static_cast<Container*>(rand(Type::CONTAINER));
     assert(descr);
     return descr;
 }
@@ -297,6 +319,28 @@ Manager::randRocket() const
     return descr;
 }
 
+Galaxy*
+Manager::galaxy(int_t id) const
+{
+    Galaxy* descr = static_cast<Galaxy*>(get(id));
+    assert(descr);
+    return descr;
+}
+Sector*
+Manager::sector(int_t id) const
+{
+    Sector* descr = static_cast<Sector*>(get(id));
+    assert(descr);
+    return descr;
+}
+StarSystem*
+Manager::starSystem(int_t id) const
+{
+    StarSystem* descr = static_cast<StarSystem*>(get(id));
+    assert(descr);
+    return descr;
+}
+
 Star*
 Manager::star(int_t id) const
 {
@@ -315,6 +359,13 @@ Asteroid*
 Manager::asteroid(int_t id) const
 {
     Asteroid* descr = static_cast<Asteroid*>(get(id));
+    assert(descr);
+    return descr;
+}
+Container*
+Manager::container(int_t id) const
+{
+    Container* descr = static_cast<Container*>(get(id));
     assert(descr);
     return descr;
 }
@@ -501,18 +552,18 @@ Manager::generate()
     // world
     num = base * 10;
     for(int i=0; i<num; ++i) {
-        add(getNewStarsystem());
+        genStarSystem();
     }
 
-    num = base * 4;
-    for(int i=0; i<num; ++i) {
-        add(getNewSector(m_starsystem.idList()));
-    }
+//    num = base * 4;
+//    for(int i=0; i<num; ++i) {
+//        genSector(m_starsystem.idList());
+//    }
 
-    num = base * 1;
-    for(int i=0; i<num; ++i) {
-        add(getNewGalaxy(m_sector.idList()));
-    }
+//    num = base * 1;
+//    for(int i=0; i<num; ++i) {
+//        genGalaxy(m_sector.idList());
+//    }
 
     __save();
 }

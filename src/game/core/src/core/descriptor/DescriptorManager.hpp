@@ -37,9 +37,13 @@
 
 namespace descriptor {
 
+class Galaxy;
+class Sector;
+class StarSystem;
 class Star;
 class Planet;
 class Asteroid;
+class Container;
 class Ship;
 class SpaceStation;
 class Satellite;
@@ -120,9 +124,14 @@ public:
     Base* get(int_t) const;
     Base* rand(Type) const;
 
+    Galaxy* randGalaxy() const;
+    Sector* randSector() const;
+    StarSystem* randStarSystem() const;
+
     Star* randStar() const;
     Planet* randPlanet() const;
     Asteroid* randAsteroid() const;
+    Container* randContainer() const;
     Ship* randShip() const;
     Satellite* randSatellite() const;
     SpaceStation* randSpaceStation() const;
@@ -137,9 +146,14 @@ public:
     item::Radar* randRadar() const;
     item::Rocket* randRocket() const;
 
+    Galaxy* galaxy(int_t) const;
+    Sector* sector(int_t) const;
+    StarSystem* starSystem(int_t) const;
+
     Star* star(int_t) const;
     Planet* planet(int_t) const;
     Asteroid* asteroid(int_t) const;
+    Container* container(int_t) const;
     Ship* ship(int_t) const;
     Satellite* satellite(int_t) const;
     SpaceStation* spaceStation(int_t) const;
@@ -160,17 +174,8 @@ public:
 
     unsigned long int size() const { return m_descriptorsOLD.size(); }
 
-    void add(Galaxy*);
-    void add(Sector*);
-    void add(Starsystem*);
-    void add(Container*);
-
     void add(Mesh*);
     void add(Material*);
-
-    const MManager<Galaxy>& galaxy() const { return m_galaxy; }
-    const MManager<Sector>& sector() const { return m_sector; }
-    const MManager<Starsystem>& starsystem() const { return m_starsystem; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -185,11 +190,6 @@ public:
     int_t nextId() const;
 
 private:
-    MManager<Galaxy> m_galaxy;
-    MManager<Sector> m_sector;
-    MManager<Starsystem> m_starsystem;
-    MManager<Container> m_container;
-
     ceti::Collector<Mesh> m_mesh;
     ceti::Collector<Material> m_material;
 
