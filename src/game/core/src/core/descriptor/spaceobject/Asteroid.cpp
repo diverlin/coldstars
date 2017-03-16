@@ -29,4 +29,9 @@ const int Asteroid::DISTANCE_MAX = 1600;
 const int Asteroid::SPEED_MIN = 40;
 const int Asteroid::SPEED_MAX = 100;
 
+Asteroid::Asteroid()
+{
+    setType(Type::ASTEROID);
+}
+
 } // namespace descriptor

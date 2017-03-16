@@ -45,7 +45,7 @@ Star::__genTemplate(int_t id)
 model::Star*
 Star::gen()
 {
-    const auto& descr = descriptor::Manager::get().star().random();
+    const auto& descr = descriptor::Manager::get().randStar();
     return gen(descr);
 } 
 

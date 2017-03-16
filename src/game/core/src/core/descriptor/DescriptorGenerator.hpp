@@ -55,9 +55,9 @@ descriptor::Sector* getNewSector(const std::vector<int_t>&);
 descriptor::Starsystem* getNewStarsystem(int race = NONE);
 
 /* spaceobjects */
-descriptor::Star* getNewStar();
-descriptor::Planet* getNewPlanet();
-descriptor::Asteroid* getNewAsteroid();
+descriptor::Star* genStar();
+descriptor::Planet* genPlanet();
+descriptor::Asteroid* genAsteroid();
 
 descriptor::Ship* genShip();
 descriptor::SpaceStation* genSpaceStation();

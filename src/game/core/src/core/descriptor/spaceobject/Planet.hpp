@@ -35,7 +35,7 @@ public:
     static const int SPEED_MAX;
 
 public:
-    Planet() = default;
+    Planet();
     Planet(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }

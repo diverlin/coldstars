@@ -19,9 +19,10 @@
 
 #include "DroidBuilder.hpp"
 #include <core/model/item/equipment/Droid.hpp>
-#include <core/common/Global.hpp>
+#include <core/descriptor/item/equipment/Droid.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/common/Global.hpp>
 
 namespace builder {
 namespace item {

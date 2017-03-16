@@ -38,7 +38,7 @@ Planet::__genTemplate()
 model::Planet*
 Planet::gen()
 {
-    const auto& descr = descriptor::Manager::get().planet().random();
+    const auto& descr = descriptor::Manager::get().randPlanet();
     return gen(descr);
 } 
 

@@ -34,6 +34,7 @@
 #include <core/slot/ItemSlot.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/descriptor/spaceobject/Ship.hpp>
 
 #include <core/manager/EntityManager.hpp>
 

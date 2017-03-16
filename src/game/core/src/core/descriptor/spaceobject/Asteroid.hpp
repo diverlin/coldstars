@@ -36,7 +36,7 @@ public:
     static const int SPEED_MAX;
 
 public:
-    Asteroid() = default;
+    Asteroid();
     Asteroid(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
