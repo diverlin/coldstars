@@ -23,16 +23,8 @@
 #include <core/descriptor/GalaxyDescriptor.hpp>
 #include <core/descriptor/SectorDescriptor.hpp>
 #include <core/descriptor/StarsystemDescriptor.hpp>
-#include <core/descriptor/spaceobject/Star.hpp>
-#include <core/descriptor/spaceobject/Planet.hpp>
-#include <core/descriptor/spaceobject/Asteroid.hpp>
+
 #include <core/descriptor/spaceobject/Container.hpp>
-
-#include <core/descriptor/spaceobject/Ship.hpp>
-#include <core/descriptor/spaceobject/Satellite.hpp>
-#include <core/descriptor/spaceobject/SpaceStation.hpp>
-
-#include <core/descriptor/item/equipment/ALL>
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
@@ -45,9 +37,24 @@
 
 namespace descriptor {
 
+class Star;
+class Planet;
+class Asteroid;
 class Ship;
 class SpaceStation;
 class Satellite;
+
+namespace item {
+class Scaner;
+class Drive;
+class Bak;
+class Droid;
+class Grapple;
+class Lazer;
+class Protector;
+class Radar;
+class Rocket;
+} // namespace item
 
 template<typename T>
 class MManager {
@@ -113,6 +120,9 @@ public:
     Base* get(int_t) const;
     Base* rand(Type) const;
 
+    Star* randStar() const;
+    Planet* randPlanet() const;
+    Asteroid* randAsteroid() const;
     Ship* randShip() const;
     Satellite* randSatellite() const;
     SpaceStation* randSpaceStation() const;
@@ -127,6 +137,9 @@ public:
     item::Radar* randRadar() const;
     item::Rocket* randRocket() const;
 
+    Star* star(int_t) const;
+    Planet* planet(int_t) const;
+    Asteroid* asteroid(int_t) const;
     Ship* ship(int_t) const;
     Satellite* satellite(int_t) const;
     SpaceStation* spaceStation(int_t) const;
@@ -150,9 +163,6 @@ public:
     void add(Galaxy*);
     void add(Sector*);
     void add(Starsystem*);
-    void add(Star*);
-    void add(Planet*);
-    void add(Asteroid*);
     void add(Container*);
 
     void add(Mesh*);
@@ -161,9 +171,6 @@ public:
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
-    const MManager<Star>& star() const { return m_star; }
-    const MManager<Planet>& planet() const { return m_planet; }
-    const MManager<Asteroid>& asteroid() const { return m_asteroid; }
 
     [[warning("replace this with const")]]
     ceti::Collector<Mesh>& mesh() { return m_mesh; }
@@ -181,9 +188,6 @@ private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
     MManager<Starsystem> m_starsystem;
-    MManager<Star> m_star;
-    MManager<Planet> m_planet;
-    MManager<Asteroid> m_asteroid;
     MManager<Container> m_container;
 
     ceti::Collector<Mesh> m_mesh;

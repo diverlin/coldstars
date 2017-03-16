@@ -22,14 +22,19 @@
 #include <core/descriptor/GalaxyDescriptor.hpp>
 #include <core/descriptor/SectorDescriptor.hpp>
 #include <core/descriptor/StarsystemDescriptor.hpp>
-#include <core/descriptor/spaceobject/Star.hpp>
-#include <core/descriptor/spaceobject/Planet.hpp>
-#include <core/descriptor/spaceobject/Asteroid.hpp>
-#include <core/descriptor/spaceobject/Container.hpp>
 
-#include <core/descriptor/spaceobject/Ship.hpp>
-#include <core/descriptor/spaceobject/SpaceStation.hpp>
-#include <core/descriptor/spaceobject/Satellite.hpp>
+
+#include <core/descriptor/item/equipment/ALL>
+#include <core/descriptor/spaceobject/ALL>
+
+//#include <core/descriptor/spaceobject/Star.hpp>
+//#include <core/descriptor/spaceobject/Planet.hpp>
+//#include <core/descriptor/spaceobject/Asteroid.hpp>
+//#include <core/descriptor/spaceobject/Container.hpp>
+
+//#include <core/descriptor/spaceobject/Ship.hpp>
+//#include <core/descriptor/spaceobject/SpaceStation.hpp>
+//#include <core/descriptor/spaceobject/Satellite.hpp>
 
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
@@ -123,7 +128,7 @@ int_t textureDescriptorIdFromType(const texture::type& type) {
 } // namespace
 
 descriptor::Star*
-getNewStar()
+genStar()
 {
     descriptor::Star* descr = new descriptor::Star;
     descr->setArmor(10000000);
@@ -146,7 +151,7 @@ getNewStar()
     descr->setTexture(textureDescriptorIdFromType (texture::type::STAR));
     descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -155,7 +160,7 @@ getNewStar()
 }
 
 descriptor::Planet*
-getNewPlanet()
+genPlanet()
 {
     descriptor::Planet* descr = new descriptor::Planet;
     descr->setArmor(100000);
@@ -177,7 +182,7 @@ getNewPlanet()
     descr->setTexture(textureDescriptorIdFromType (texture::type::PLANET));
     descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -240,7 +245,7 @@ getNewPlanet()
 }
 
 descriptor::Asteroid*
-getNewAsteroid()
+genAsteroid()
 {
     descriptor::Asteroid* descr = new descriptor::Asteroid;
     descr->setArmor(meti::getRandInt(descriptor::Asteroid::ARMOR_MIN,
@@ -265,7 +270,7 @@ getNewAsteroid()
     descr->setTexture(textureDescriptorIdFromType (texture::type::ASTEROID));
     descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED));
 
-    resolveId(descr);
+    descriptor::Manager::get().reg(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);

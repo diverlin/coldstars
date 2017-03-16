@@ -18,6 +18,8 @@
 
 #include "DescriptorManager.hpp"
 #include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/descriptor/item/equipment/ALL>
+#include <core/descriptor/spaceobject/ALL>
 #include <core/common/Global.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -64,15 +66,6 @@ void Manager::add(Sector* sector) {
 }
 void Manager::add(Starsystem* starsystem) {
     m_starsystem.add(starsystem);
-}
-void Manager::add(Star* star) {
-    m_star.add(star);
-}
-void Manager::add(Planet* planet) {
-    m_planet.add(planet);
-}
-void Manager::add(Asteroid* asteroid) {
-    m_asteroid.add(asteroid);
 }
 void Manager::add(Container* container) {
     m_container.add(container);
@@ -188,6 +181,28 @@ Manager::rand(Type type) const
     return descr;
 }
 
+Star*
+Manager::randStar() const
+{
+    Star* descr = static_cast<Star*>(rand(Type::STAR));
+    assert(descr);
+    return descr;
+}
+Planet*
+Manager::randPlanet() const
+{
+    Planet* descr = static_cast<Planet*>(rand(Type::PLANET));
+    assert(descr);
+    return descr;
+}
+Asteroid*
+Manager::randAsteroid() const
+{
+    Asteroid* descr = static_cast<Asteroid*>(rand(Type::ASTEROID));
+    assert(descr);
+    return descr;
+}
+
 Ship*
 Manager::randShip() const
 {
@@ -278,6 +293,28 @@ item::Rocket*
 Manager::randRocket() const
 {
     item::Rocket* descr = static_cast<item::Rocket*>(rand(Type::ROCKET_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+Star*
+Manager::star(int_t id) const
+{
+    Star* descr = static_cast<Star*>(get(id));
+    assert(descr);
+    return descr;
+}
+Planet*
+Manager::planet(int_t id) const
+{
+    Planet* descr = static_cast<Planet*>(get(id));
+    assert(descr);
+    return descr;
+}
+Asteroid*
+Manager::asteroid(int_t id) const
+{
+    Asteroid* descr = static_cast<Asteroid*>(get(id));
     assert(descr);
     return descr;
 }
@@ -455,9 +492,9 @@ Manager::generate()
         genShip();
         genSpaceStation();
         genSatellite();
-        add(getNewStar());
-        add(getNewPlanet());
-        add(getNewAsteroid());
+        genStar();
+        genPlanet();
+        genAsteroid();
         //add(getNewContainer());
     }
 

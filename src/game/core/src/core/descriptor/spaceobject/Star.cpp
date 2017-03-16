@@ -27,4 +27,9 @@ const int Star::DISTANCE_MAX = 100;
 const int Star::SPEED_MIN = 5;
 const int Star::SPEED_MAX = 10;
 
+Star::Star()
+{
+    setType(Type::STAR);
+}
+
 } // namespace descriptor

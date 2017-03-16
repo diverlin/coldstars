@@ -29,4 +29,9 @@ const int Planet::DISTANCE_MAX = 500;
 const int Planet::SPEED_MIN = 40;
 const int Planet::SPEED_MAX = 50;
 
+Planet::Planet()
+{
+    setType(Type::PLANET);
+}
+
 } // namespace descriptor

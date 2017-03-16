@@ -21,6 +21,7 @@
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/SpaceStation.hpp>
+#include <core/descriptor/spaceobject/SpaceStation.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 
 #include <core/dock/Kosmoport.hpp>
