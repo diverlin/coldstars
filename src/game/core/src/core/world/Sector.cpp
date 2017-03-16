@@ -96,7 +96,7 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-void Sector::add(model::Starsystem* _model, descriptor::Starsystem* descr, const glm::vec3& center)
+void Sector::add(model::Starsystem* _model, descriptor::StarSystem* descr, const glm::vec3& center)
 { 
     _model->setSector(model()->id());
 assert(false);

@@ -134,7 +134,7 @@ namespace control {
 
 Starsystem*
 getNewStarsystem() {
-    descriptor::Starsystem* descr = descriptor::getNewStarsystem();
+    descriptor::StarSystem* descr = descriptor::genStarSystem();
     model::Starsystem* model = builder::Starsystem::create(descr);
     Starsystem* starsystem = new Starsystem(model, descr);
     return starsystem;

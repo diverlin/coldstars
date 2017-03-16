@@ -27,7 +27,7 @@ class Starsystem;
 } // namespace model
 
 namespace descriptor {
-class Starsystem;
+class StarSystem;
 } // descriptor
 
 namespace builder {
@@ -36,14 +36,14 @@ class Starsystem
 {
 public:
     static model::Starsystem* create();
-    static model::Starsystem* create(descriptor::Starsystem*);
+    static model::Starsystem* create(descriptor::StarSystem*);
     static model::Starsystem* create(const std::string&);
 
 private:
     Starsystem()=delete;
     ~Starsystem()=delete;
 
-    static void __createInternals(model::Starsystem*, descriptor::Starsystem*);
+    static void __createInternals(model::Starsystem*, descriptor::StarSystem*);
 
     static void __createBackground(model::Starsystem*, int, int, int);
     static void __createStar(model::Starsystem*);

@@ -41,12 +41,12 @@ namespace builder {
 model::Starsystem*
 Starsystem::create()
 {
-    descriptor::Starsystem* descr = descriptor::Manager::get().starsystem().random();
+    descriptor::StarSystem* descr = descriptor::Manager::get().randStarSystem();
     return create(descr);
 }
 
 model::Starsystem*
-Starsystem::create(descriptor::Starsystem* descr)
+Starsystem::create(descriptor::StarSystem* descr)
 {
     model::Starsystem* model = new model::Starsystem;
     assert(model);
@@ -61,7 +61,7 @@ Starsystem::create(const std::string& data)
     //return gen(descriptor::Base(data));
 }
 
-void Starsystem::__createInternals(model::Starsystem* model, descriptor::Starsystem* descr)
+void Starsystem::__createInternals(model::Starsystem* model, descriptor::StarSystem* descr)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     __createStar(model);

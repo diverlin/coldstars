@@ -101,7 +101,7 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
 
 namespace control {
 
-Starsystem::Starsystem(model::Starsystem* model, descriptor::Starsystem* descr)
+Starsystem::Starsystem(model::Starsystem* model, descriptor::StarSystem* descr)
     :
       Base(model)
     , m_model_starsystem(model)
