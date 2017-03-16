@@ -122,10 +122,8 @@ global::global()
     , m_lazerModuleBuilder(new LazerModuleBuilder)
     #endif // USE_MODULES
 
-    , m_bombBuilder(new BombBuilder)
     , m_npcBuilder(new NpcBuilder)
     , m_blackHoleBuilder(new builder::BlackHole)
-    , m_containerBuilder(new builder::Container)
     , m_rocketBulletBuilder(new builder::Rocket){
 }
 
@@ -169,11 +167,8 @@ global::~global()
     delete m_lazerModuleBuilder;
 #endif // USE_MODULES
 
-    delete m_bombBuilder;
-
     delete m_npcBuilder;
     delete m_blackHoleBuilder;
-    delete m_containerBuilder;
     delete m_rocketBulletBuilder;
 }
 

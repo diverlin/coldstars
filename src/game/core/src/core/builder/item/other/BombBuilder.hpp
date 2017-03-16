@@ -30,13 +30,13 @@ class BaseOLD;
 class BombBuilder
 {
 public:
-    BombBuilder();
-    ~BombBuilder();
-
     static Bomb* gen();
     static Bomb* gen(descriptor::BaseOLD*);
 
 private:
+    BombBuilder() = default;
+    ~BombBuilder() = default;
+
     static void __createInternals(Bomb*, descriptor::BaseOLD*);
 }; 
 

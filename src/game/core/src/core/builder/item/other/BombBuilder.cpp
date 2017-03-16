@@ -32,12 +32,6 @@
 #include <descriptor/Base.hpp>
 #include <descriptor/DescriptorManager.hpp>
 
-BombBuilder::BombBuilder()
-{}
-
-BombBuilder::~BombBuilder()
-{}
-
 Bomb*
 BombBuilder::gen()
 {

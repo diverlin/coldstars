@@ -22,36 +22,35 @@
 #include <string>
 
 namespace descriptor {
-//class Container;
-class BaseOLD;
+class Container;
 } // namespace descriptor
-
-namespace item {
-class Base;
-} // namespace item
 
 namespace model {
 class Container;
 }
+
+namespace item {
+class Base;
+} // namespace item
 
 namespace builder {
 
 class Container
 {
 public:
-    Container();
-    ~Container();
-
     static model::Container* gen();
 //    static model::Container* gen(const std::string& data);
-    static model::Container* gen(descriptor::BaseOLD*);
+    static model::Container* gen(descriptor::Container*);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
+    Container() = default;
+    ~Container() = default;
+
     static model::Container* __genTemplate();
-    static void __createInternals(model::Container*, descriptor::BaseOLD*);
+    static void __createInternals(model::Container*, descriptor::Container*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

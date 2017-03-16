@@ -137,14 +137,11 @@ public:
     LazerModuleBuilder& lazerModuleBuilder() { return *m_lazerModuleBuilder; }
 #endif // USE_MODULES
 
-    BombBuilder& bombBuilder() { return *m_bombBuilder; }
-
     NpcBuilder& npcBuilder() { return *m_npcBuilder; }
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
     builder::BlackHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
-    builder::Container& containerBuilder() { return *m_containerBuilder; }
     builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
 
 private:
@@ -194,14 +191,11 @@ private:
     LazerModuleBuilder* m_lazerModuleBuilder = nullptr;
 #endif // USE_MODULES
 
-    BombBuilder* m_bombBuilder = nullptr;
-
     NpcBuilder* m_npcBuilder = nullptr;
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
     builder::BlackHole* m_blackHoleBuilder = nullptr;
-    builder::Container* m_containerBuilder = nullptr;
     builder::Rocket* m_rocketBulletBuilder = nullptr;
 };
 

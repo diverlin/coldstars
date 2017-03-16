@@ -34,16 +34,10 @@
 
 namespace builder {
 
-Container::Container()
-{}
-
-Container::~Container()
-{}
-
 model::Container*
 Container::gen()
 {
-    const auto& descriptor = descriptor::Manager::get().getRandOLD(descriptor::Type::CONTAINER);
+    const auto& descriptor = descriptor::Manager::get().randContainer();
     return gen(descriptor);
 }
 
@@ -54,7 +48,7 @@ Container::gen()
 //}
 
 model::Container*
-Container::gen(descriptor::BaseOLD* descriptor)
+Container::gen(descriptor::Container* descriptor)
 {
     model::Container* container = __genTemplate();
     __createInternals(container, descriptor);
@@ -144,7 +138,7 @@ Container::__genTemplate()
 //}
 
 void
-Container::__createInternals(model::Container* container, descriptor::BaseOLD* descriptor)
+Container::__createInternals(model::Container* container, descriptor::Container* descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;
