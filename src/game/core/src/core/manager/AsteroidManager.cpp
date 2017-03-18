@@ -23,7 +23,7 @@
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 
-void AsteroidManager::update(control::Starsystem* starsystem)
+void AsteroidManager::update(control::StarSystem* starsystem)
 {
     while (starsystem->asteroidNum() < m_asteroidsNum) {
         starsystem->add(builder::Asteroid::gen());

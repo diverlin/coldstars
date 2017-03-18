@@ -20,6 +20,10 @@
 #include <vector>
 
 namespace descriptor {
+class StarSystem;
+
+class Star;
+class Planet;
 class Ship;
 
 namespace item {
@@ -37,6 +41,10 @@ class Scaner;
 } // namespace descriptor
 
 namespace model {
+class StarSystem;
+
+class Star;
+class Planet;
 class Ship;
 
 namespace item {
@@ -54,6 +62,10 @@ class Scaner;
 } // namespace model
 
 namespace control {
+class StarSystem;
+
+class Star;
+class Planet;
 class Ship;
 
 namespace item {
@@ -73,6 +85,45 @@ class Scaner;
 
 
 namespace test {
+
+class StarSystem {
+public:
+    StarSystem();
+    ~StarSystem();
+
+    descriptor::StarSystem* descriptor() const;
+    model::StarSystem* model() const;
+    control::StarSystem* control() const { return m_control; }
+
+private:
+    control::StarSystem* m_control = nullptr;
+};
+
+class Star {
+public:
+    Star();
+    ~Star();
+
+    descriptor::Star* descriptor() const;
+    model::Star* model() const;
+    control::Star* control() const { return m_control; }
+
+private:
+    control::Star* m_control = nullptr;
+};
+
+class Planet {
+public:
+    Planet();
+    ~Planet();
+
+    descriptor::Planet* descriptor() const;
+    model::Planet* model() const;
+    control::Planet* control() const { return m_control; }
+
+private:
+    control::Planet* m_control = nullptr;
+};
 
 class Ship {
 public:

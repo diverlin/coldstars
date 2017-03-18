@@ -57,7 +57,7 @@ void Sector::__createInternals(model::Sector* model, descriptor::Sector* descr)
     for(const auto& id: descr->starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        model::Starsystem* model = builder::Starsystem::create(descriptor::Manager::get().starSystem(id));
+        model::Starsystem* model = builder::Starsystem::gen(descriptor::Manager::get().starSystem(id));
 //        sector->add(starsystem, center);
     }
 }

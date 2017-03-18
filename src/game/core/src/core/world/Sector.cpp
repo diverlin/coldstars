@@ -96,13 +96,13 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-void Sector::add(model::Starsystem* _model, descriptor::StarSystem* descr, const glm::vec3& center)
+void Sector::add(model::Starsystem* _model, const glm::vec3& center)
 { 
     _model->setSector(model()->id());
 assert(false);
     //    _model->setPosition(center);
 
-    control::Starsystem* starsystem = new control::Starsystem(_model, descr);
+    control::StarSystem* starsystem = new control::StarSystem(_model);
     m_starsystems.push_back(starsystem);
 }
 
@@ -153,7 +153,7 @@ Sector::closestStarsystemTo(model::Starsystem* toStarsystem, int condition_id)
 
 void Sector::update(int time)
 {
-    for (control::Starsystem* starsystem: m_starsystems) {
+    for (control::StarSystem* starsystem: m_starsystems) {
         starsystem->update(time);
     }
 }

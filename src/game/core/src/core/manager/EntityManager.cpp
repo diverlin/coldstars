@@ -132,11 +132,10 @@ getSpaceObject(int_t id) {
 
 namespace control {
 
-Starsystem*
+StarSystem*
 getNewStarsystem() {
-    descriptor::StarSystem* descr = descriptor::genStarSystem();
-    model::Starsystem* model = builder::Starsystem::create(descr);
-    Starsystem* starsystem = new Starsystem(model, descr);
+    model::Starsystem* model = builder::Starsystem::gen();
+    StarSystem* starsystem = new StarSystem(model);
     return starsystem;
 }
 

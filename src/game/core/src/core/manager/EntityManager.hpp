@@ -35,7 +35,7 @@ class SpaceObject;
 } // namespace model
 
 namespace control {
-class Starsystem;
+class StarSystem;
 class Ship;
 class Container;
 class SpaceObject;
@@ -64,7 +64,7 @@ SpaceObject* getSpaceObject(int_t id);
 
 namespace control {
 
-Starsystem* getNewStarsystem();
+StarSystem* getNewStarsystem();
 Container* getNewContainer();
 
 } // namespace control

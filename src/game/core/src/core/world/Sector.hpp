@@ -35,7 +35,7 @@ class Starsystem;
 } // namespace model
 
 namespace control {
-class Starsystem;
+class StarSystem;
 } // namespace control
 
 class StarSystemsConditionData;
@@ -98,7 +98,7 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(model::Starsystem*, descriptor::StarSystem*, const glm::vec3&);
+    void add(model::Starsystem*, const glm::vec3&);
 
     model::Starsystem* randomStarsystem(int condition_id = NONE);
     model::Starsystem* closestStarsystemTo(model::Starsystem*, int condition_id = NONE);
@@ -120,7 +120,7 @@ private:
 
     Galaxy* m_galaxy = nullptr;
 
-    std::vector<control::Starsystem*> m_starsystems;
+    std::vector<control::StarSystem*> m_starsystems;
 
 //    friend class GuiGalaxyMap;
 //    friend class Observation;

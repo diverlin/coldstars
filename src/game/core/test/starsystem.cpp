@@ -16,6 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "helper.hpp"
+
 #include <core/common/Global.hpp>
 
 #include <core/descriptor/Base.hpp>
@@ -36,31 +38,30 @@
 TEST(starsystem, add_objects)
 {
     /* create opbjects */
-    control::Starsystem* starsystem = control::getNewStarsystem();
-
-    model::Star* star = builder::Star::gen();
-    model::Planet* planet = builder::Planet::gen();
-    model::Ship* ship = builder::Ship::gen();
+    test::StarSystem starsystem;
+    test::Star star;
+    test::Planet planet;
+    test::Ship ship;
 
     /* pre-add check */
-    EXPECT_EQ(starsystem->stars().size(), 0);
-    EXPECT_EQ(starsystem->planets().size(), 0);
-    EXPECT_EQ(starsystem->vehicles().size(), 0);
+    EXPECT_EQ(starsystem.control()->stars().size(), 0);
+    EXPECT_EQ(starsystem.control()->planets().size(), 0);
+    EXPECT_EQ(starsystem.control()->vehicles().size(), 0);
 
     /* add objects */
-    starsystem->add(star);
-    starsystem->add(planet);
+    starsystem.control()->add(star);
+    starsystem.control()->add(planet);
 
     glm::vec3 pos(0.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    starsystem->add(ship, pos, dir);
+    starsystem.control()->add(ship, pos, dir);
 
     /* post-add check */
-    EXPECT_EQ(starsystem->stars().size(), 1);
-    EXPECT_EQ(starsystem->planets().size(), 1);
-    EXPECT_EQ(starsystem->vehicles().size(), 1);
+    EXPECT_EQ(starsystem.control()->stars().size(), 1);
+    EXPECT_EQ(starsystem.control()->planets().size(), 1);
+    EXPECT_EQ(starsystem.control()->vehicles().size(), 1);
 
-    assert(starsystem->vehicles()[0]);
+    assert(starsystem.control()->vehicles()[0]);
     assert(false);
 //    Vehicle* vehicle = starsystem->vehicles()[0];
 //    assert(false);
