@@ -88,7 +88,6 @@ namespace test {
 
 
 StarSystem::StarSystem() {
-    descriptor::genStarSystem();
     model::StarSystem* model = builder::StarSystem::gen();
     m_control = new control::StarSystem(model);
 }
@@ -103,7 +102,6 @@ model::StarSystem* StarSystem::model() const { return m_control->model(); }
 
 
 Star::Star() {
-    descriptor::genStar();
     model::Star* model = builder::Star::gen();
     m_control = new control::Star(model);
 }
@@ -117,7 +115,6 @@ model::Star* Star::model() const { return m_control->model(); }
 
 
 Planet::Planet() {
-    descriptor::genPlanet();
     model::Planet* model = builder::Planet::gen();
     m_control = new control::Planet(model);
 }
@@ -131,7 +128,6 @@ model::Planet* Planet::model() const { return m_control->model(); }
 
 
 Ship::Ship() {
-    descriptor::genShip();
     model::Ship* model = builder::Ship::gen();
     m_control = new control::Ship(model);
 }
@@ -147,7 +143,6 @@ namespace item {
 
 //////
 Bak::Bak() {
-    descriptor::item::genBak();
     model::item::Bak* model = builder::item::Bak::gen();
     m_control = new control::item::Bak(model);
 }
@@ -161,7 +156,6 @@ model::item::Bak* Bak::model() const { return m_control->model(); }
 
 //////
 Drive::Drive() {
-    descriptor::item::genDrive();
     model::item::Drive* model = builder::item::Drive::gen();
     m_control = new control::item::Drive(model);
 }
@@ -175,7 +169,6 @@ model::item::Drive* Drive::model() const { return m_control->model(); }
 
 //////
 Droid::Droid() {
-    descriptor::item::genDroid();
     model::item::Droid* model = builder::item::Droid::gen();
     m_control = new control::item::Droid(model);
 }
@@ -189,7 +182,6 @@ model::item::Droid* Droid::model() const { return m_control->model(); }
 
 //////
 Grapple::Grapple() {
-    descriptor::item::genGrapple();
     model::item::Grapple* model = builder::item::Grapple::gen();
     m_control = new control::item::Grapple(model);
 }
@@ -203,7 +195,6 @@ model::item::Grapple* Grapple::model() const { return m_control->model(); }
 
 //////
 Lazer::Lazer() {
-    descriptor::item::genLazer();
     model::item::Lazer* model = builder::item::Lazer::gen();
     m_control = new control::item::Lazer(model);
 }
@@ -217,7 +208,6 @@ model::item::Lazer* Lazer::model() const { return m_control->model(); }
 
 //////
 Protector::Protector() {
-    descriptor::item::genProtector();
     model::item::Protector* model = builder::item::Protector::gen();
     m_control = new control::item::Protector(model);
 }
@@ -231,7 +221,6 @@ model::item::Protector* Protector::model() const { return m_control->model(); }
 
 //////
 Radar::Radar() {
-    descriptor::item::genRadar();
     model::item::Radar* model = builder::item::Radar::gen();
     m_control = new control::item::Radar(model);
 }
@@ -245,7 +234,6 @@ model::item::Radar* Radar::model() const { return m_control->model(); }
 
 //////
 Rocket::Rocket() {
-    descriptor::item::genRocket();
     model::item::Rocket* model = builder::item::Rocket::gen();
     m_control = new control::item::Rocket(model);
 }
@@ -259,7 +247,6 @@ model::item::Rocket* Rocket::model() const { return m_control->model(); }
 
 //////
 Scaner::Scaner() {
-    descriptor::item::genScaner();
     model::item::Scaner* model = builder::item::Scaner::gen();
     m_control = new control::item::Scaner(model);
 }

@@ -275,7 +275,7 @@ genAsteroid()
 }
 
 descriptor::Container*
-getNewContainer()
+genContainer()
 {
     descriptor::Container* descr = new descriptor::Container;
     return descr;

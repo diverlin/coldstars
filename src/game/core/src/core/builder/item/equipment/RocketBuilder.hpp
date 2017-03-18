@@ -44,7 +44,6 @@ class Rocket : public Equipment
 {
 public:
     static model::item::Rocket* gen();
-//    static model::item::Rocket* gen(const std::string&);
     static model::item::Rocket* gen(descriptor::item::Rocket*);
 
 private:

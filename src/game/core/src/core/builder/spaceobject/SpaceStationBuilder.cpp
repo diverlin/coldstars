@@ -23,6 +23,7 @@
 #include <core/model/spaceobject/SpaceStation.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/dock/Kosmoport.hpp>
 
@@ -45,13 +46,6 @@ SpaceStation::__genTemplate(int_t descriptor_id)
 model::SpaceStation*
 SpaceStation::gen(descriptor::SpaceStation* descr)
 {
-//    descriptor::Vehicle descriptor(descr->data());
-//    int_t id = NONE;
-//    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
-//        descriptor = descriptor::Manager::get().get(descr->descriptor());
-//        id = descr->objId();
-//    }
-
     model::SpaceStation* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
@@ -60,11 +54,14 @@ SpaceStation::gen(descriptor::SpaceStation* descr)
 model::SpaceStation*
 SpaceStation::gen()
 {
-    descriptor::SpaceStation* descr = descriptor::Manager::get().randSpaceStation();
-    model::SpaceStation* spacestation = __genTemplate(descr->id());
-    __createInternals(spacestation, descr);
-    
-    return spacestation;
+    descriptor::SpaceStation* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::SPACESTATION)) {
+        descr = descriptor::genSpaceStation();
+    } else {
+        descr = descriptor::Manager::get().randSpaceStation();
+    }
+    assert(descr);
+    return gen(descr);
 }
 
 void

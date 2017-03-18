@@ -23,6 +23,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -30,19 +31,15 @@ namespace item {
 model::item::Droid*
 Droid::gen()
 {
-    descriptor::item::Droid* descr = descriptor::Manager::get().randDroid();
-    model::item::Droid* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    descriptor::item::Droid* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::DROID_EQUIPMENT)) {
+        descr = descriptor::item::genDroid();
+    } else {
+        descr = descriptor::Manager::get().randDroid();
+    }
+    assert(descr);
+    return gen(descr);
 }
-
-//model::item::Droid*
-//Droid::gen(const std::string& data)
-//{
-//    descriptor::item::Droid descr(data);
-//    assert(descr->descriptor() != descriptor::Type::DROID_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Droid*
 Droid::gen(descriptor::item::Droid* descr)

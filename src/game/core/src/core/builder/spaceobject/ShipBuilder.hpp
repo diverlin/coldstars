@@ -36,7 +36,7 @@ namespace builder {
 class Ship : public BaseVehicle
 {
 public:
-    static model::Ship* gen(bool full_equiped = false);
+    static model::Ship* gen();
     static model::Ship* gen(descriptor::Ship*);
 
 private:

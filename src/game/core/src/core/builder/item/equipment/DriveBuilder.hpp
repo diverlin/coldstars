@@ -44,7 +44,6 @@ class Drive : public Equipment
 {
 public:
     static model::item::Drive* gen();
-//    static model::item::Drive* gen(const std::string&);
     static model::item::Drive* gen(descriptor::item::Drive*);
 
 private:

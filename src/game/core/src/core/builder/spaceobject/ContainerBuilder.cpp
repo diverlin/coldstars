@@ -26,6 +26,8 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <descriptor/spaceobject/Container.hpp>
 
+#include <core/generator/DescriptorGenerator.hpp>
+
 #include <core/slot/ItemSlot.hpp>
 
 #include <core/item/other/GoodsPack.hpp>
@@ -37,8 +39,14 @@ namespace builder {
 model::Container*
 Container::gen()
 {
-    const auto& descriptor = descriptor::Manager::get().randContainer();
-    return gen(descriptor);
+    descriptor::Container* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::CONTAINER)) {
+        descr = descriptor::genContainer();
+    } else {
+        descr = descriptor::Manager::get().randContainer();
+    }
+    assert(descr);
+    return gen(descr);
 }
 
 //model::Container*

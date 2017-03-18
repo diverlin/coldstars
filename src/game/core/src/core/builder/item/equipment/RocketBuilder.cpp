@@ -22,6 +22,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -29,17 +30,15 @@ namespace item {
 model::item::Rocket*
 Rocket::gen()
 {
-    descriptor::item::Rocket* descr = descriptor::Manager::get().randRocket();
+    descriptor::item::Rocket* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::ROCKET_EQUIPMENT)) {
+        descr = descriptor::item::genRocket();
+    } else {
+        descr = descriptor::Manager::get().randRocket();
+    }
+    assert(descr);
     return gen(descr);
 }
-
-//model::item::Rocket*
-//Rocket::gen(const std::string& data)
-//{
-//    descriptor::item::Rocket descr(data);
-//    assert(descr->descriptor() != descriptor::Type::ROCKET_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Rocket*
 Rocket::gen(descriptor::item::Rocket* descr)

@@ -23,6 +23,7 @@
 #include <core/model/item/equipment/Radar.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -30,20 +31,15 @@ namespace item {
 model::item::Radar*
 Radar::gen()
 {
-    descriptor::item::Radar* descr = descriptor::Manager::get().randRadar();
-    model::item::Radar* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-
-    return model;
+    descriptor::item::Radar* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::RADAR_EQUIPMENT)) {
+        descr = descriptor::item::genRadar();
+    } else {
+        descr = descriptor::Manager::get().randRadar();
+    }
+    assert(descr);
+    return gen(descr);
 }
-
-//model::item::Radar*
-//Radar::gen(const std::string& data)
-//{
-//    descriptor::item::Radar descr(data);
-//    assert(descr->descriptor() != descriptor::Type::RADAR_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Radar*
 Radar::gen(descriptor::item::Radar* descr)

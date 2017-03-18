@@ -92,6 +92,13 @@ Manager::reg(Base* descr)
     }
 }
 
+bool
+Manager::hasType(Type type) const
+{
+    std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
+    return (it != m_descriptorsTypes.end());
+}
+
 Base*
 Manager::get(int_t id) const
 {

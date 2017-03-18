@@ -23,6 +23,7 @@
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -30,17 +31,15 @@ namespace item {
 model::item::Grapple*
 Grapple::gen()
 {
-    descriptor::item::Grapple* descr = descriptor::Manager::get().randGrapple();
+    descriptor::item::Grapple* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::GRAPPLE_EQUIPMENT)) {
+        descr = descriptor::item::genGrapple();
+    } else {
+        descr = descriptor::Manager::get().randGrapple();
+    }
+    assert(descr);
     return gen(descr);
 }
-
-//model::item::Grapple*
-//Grapple::gen(const std::string& data)
-//{
-//    descriptor::item::Grapple descr(data);
-//    assert(descr->descriptor() != descriptor::Type::GRAPPLE_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Grapple*
 Grapple::gen(descriptor::item::Grapple* descr)

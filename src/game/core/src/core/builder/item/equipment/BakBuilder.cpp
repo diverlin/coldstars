@@ -23,6 +23,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -30,17 +31,15 @@ namespace item {
 model::item::Bak*
 Bak::gen()
 {
-    descriptor::item::Bak* descr = descriptor::Manager::get().randBak();
+    descriptor::item::Bak* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::BAK_EQUIPMENT)) {
+        descr = descriptor::item::genBak();
+    } else {
+        descr = descriptor::Manager::get().randBak();
+    }
+    assert(descr);
     return gen(descr);
 }
-
-//model::item::Bak*
-//Bak::gen(const std::string& data)
-//{
-//    descriptor::item::Bak descr(data);
-//    assert(descr->descriptor() != descriptor::Type::BAK_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Bak*
 Bak::gen(descriptor::item::Bak* descr)

@@ -62,7 +62,7 @@ descriptor::Ship* genShip();
 descriptor::SpaceStation* genSpaceStation();
 descriptor::Satellite* genSatellite();
 
-descriptor::Container* getNewContainer();
+descriptor::Container* genContainer();
 
 /* items */
 namespace item {

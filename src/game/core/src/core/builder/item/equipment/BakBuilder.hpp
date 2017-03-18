@@ -44,7 +44,6 @@ class Bak : public Equipment
 {
 public:
     static model::item::Bak* gen();
-    //    static model::item::Bak* gen(const std::string&);
     static model::item::Bak* gen(descriptor::item::Bak*);
 
 private:

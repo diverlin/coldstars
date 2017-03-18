@@ -25,6 +25,8 @@
 #include <descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+#include <core/generator/DescriptorGenerator.hpp>
+
 #include <core/type/MeshTypes.hpp>
     
 #include <meti/RandUtils.hpp>
@@ -45,7 +47,13 @@ Star::__genTemplate(int_t id)
 model::Star*
 Star::gen()
 {
-    const auto& descr = descriptor::Manager::get().randStar();
+    descriptor::Star* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::STAR)) {
+        descr = descriptor::genStar();
+    } else {
+        descr = descriptor::Manager::get().randStar();
+    }
+    assert(descr);
     return gen(descr);
 } 
 
