@@ -16,10 +16,9 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#include "vehicle.hpp"
-#include "spaceobject.hpp"
-#include <descriptor/base.hpp>
+#include <test/descriptor/spaceobject/vehicle.hpp>
+#include <test/descriptor/spaceobject/spaceobject.hpp>
+#include <test/descriptor/base.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
@@ -43,6 +42,7 @@ TEST(descriptor, clone_spacestation) {
     testSpaceStationEquality(descr, copy);
     testVehicleEquality(descr, copy);
     testSpaceObjectEquality(descr, copy);
+    testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
     delete descr;
