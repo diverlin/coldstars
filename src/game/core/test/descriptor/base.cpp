@@ -17,36 +17,19 @@
 */
 
 
-#include "vehicle.hpp"
-#include "spaceobject.hpp"
-#include <descriptor/base.hpp>
-
-#include <core/generator/DescriptorGenerator.hpp>
-#include <core/descriptor/spaceobject/Satellite.hpp>
+#include <core/descriptor/Base.hpp>
 
 #include <gtest/gtest.h>
 
-namespace test {
+namespace  test {
 
-namespace {
-void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SATELLITE);
-}
-} // namespace
-
-TEST(descriptor, clone_satellite) {
-    descriptor::Satellite* descr = descriptor::genSatellite();
-    descriptor::Satellite* copy = new descriptor::Satellite(descr->data());
-
-    testSatelliteEquality(descr, copy);
-    testVehicleEquality(descr, copy);
-    testSpaceObjectEquality(descr, copy);
-    testBaseEquality(descr, copy);
-
-    delete descr;
-    delete copy;
+void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy)
+{
+    EXPECT_EQ(descr->id(), copy->id());
+    EXPECT_EQ(descr->type(), copy->type());
+    EXPECT_EQ(descr->obType(), copy->obType());
+    EXPECT_EQ(descr->obSubType(), copy->obSubType());
+    EXPECT_EQ(descr->obSubSubType(), copy->obSubSubType());
 }
 
 } // namespace test
