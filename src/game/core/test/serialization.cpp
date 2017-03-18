@@ -24,5 +24,6 @@ TEST(descriptor,serialization)
 {
     descriptor::Hit descriptor(11, 22, 33);
     descriptor::Hit descriptor2(descriptor.data());
-    EXPECT_TRUE(descriptor == descriptor2);
+    assert(false);
+    //    EXPECT_TRUE(descriptor == descriptor2);
 }

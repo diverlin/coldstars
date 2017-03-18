@@ -56,16 +56,12 @@ class Collector
 {
 public:
     Collector() {}
-
     Collector(const std::string& fname)
-        :
-          m_fname(fname)
-    {
+        : m_fname(fname) {
         if (ceti::filesystem::is_file_exists(m_fname)) {
             __load();
         }
     }
-
     ~Collector() {}
 
     bool loaded() const { return m_loaded; }

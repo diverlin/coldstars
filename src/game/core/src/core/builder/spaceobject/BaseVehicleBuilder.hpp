@@ -20,15 +20,14 @@
 #pragma once
 
 #include <core/type/TechLevelTypes.hpp>
-#include <core/descriptor/Base.hpp>
-
+#include <core/descriptor/spaceobject/Vehicle.hpp>
 
 class Vehicle;
 
 class BaseVehicle
 {
 public:
-    static void equip(Vehicle* vehicle, descriptor::BaseOLD* descriptor);
+    static void equip(Vehicle* vehicle, descriptor::Vehicle* descriptor);
     static void equip(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
     static void equipModules(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
     static void equipArtefacts(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);

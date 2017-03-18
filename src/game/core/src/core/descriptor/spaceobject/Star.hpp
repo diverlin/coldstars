@@ -35,9 +35,7 @@ public:
 
 public:
     Star();
-    Star(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
+    Star(const std::string&);
     ~Star() = default;
 
     std::string info() const {

@@ -51,9 +51,6 @@ Manager::get()
 }
 
 Manager::Manager()
-    :
-      m_mesh(ceti::Collector<Mesh>(descriptor_meshes_fname))
-    , m_material(ceti::Collector<Material>(descriptor_materials_fname))
 {
     bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
@@ -61,41 +58,6 @@ Manager::Manager()
     } /*else {
        generate();
     }*/
-}
-
-void Manager::add(Mesh* mesh) {
-    m_mesh.add(mesh);
-}
-void Manager::add(Material* texture) {
-    m_material.add(texture);
-}
-
-
-void
-Manager::add(BaseOLD* descr)
-{
-    //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
-    const int_t id = descr->id();
-    int type = descr->type();
-
-    {
-        const auto it = m_descriptorsOLD.find(id);
-        if (it != m_descriptorsOLD.end()) {
-            throw std::runtime_error("descriptorOLD with that id already exist");
-        }
-        m_descriptorsOLD.insert(std::make_pair(id, descr));
-    }
-
-    {
-        const auto it = m_descriptorsTypesOLD.find(type);
-        if (it != m_descriptorsTypesOLD.end()) {
-            it->second.push_back(descr);
-        } else {
-            std::vector<BaseOLD*> vector;
-            vector.push_back(descr);
-            m_descriptorsTypesOLD[type] = vector;
-        }
-    }
 }
 
 void
@@ -139,27 +101,6 @@ Manager::get(int_t id) const
     }
     assert(false);
     throw std::runtime_error("Base* Manager::get descriptor id doesn't exist");
-}
-
-BaseOLD*
-Manager::getRandOLD(const Type& type)
-{
-    const auto it = m_descriptorsTypesOLD.find(int(type));
-    if (it != m_descriptorsTypesOLD.end()) {
-        const std::vector<BaseOLD*> descriptors = it->second;
-        return meti::getRand(descriptors);
-    }
-    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + to_string(type));
-}
-
-BaseOLD*
-Manager::getOLD(int_t id)
-{
-    const auto it = m_descriptorsOLD.find(id);
-    if (it != m_descriptorsOLD.end()) {
-        return it->second;
-    }
-    throw std::runtime_error("BaseOLD* Manager::get descriptor id doesn't exist");
 }
 
 Base*
@@ -467,45 +408,47 @@ Manager::rocket(int_t id) const
 void
 Manager::__save()
 {
-    std::fstream filestream;
-    filestream.open(descriptors_fname);
-    if(filestream.is_open()) {
-        for(const auto& lists: m_descriptorsTypesOLD) {
-            const auto& list = lists.second;
-            for(BaseOLD* descr: list) {
-                filestream<<descr->data()<<std::endl;
-            }
-        }
-    } else {
-        throw std::runtime_error("not able to open file="+descriptors_fname);
-    }
-    filestream.close();
+    assert(false);
+//    std::fstream filestream;
+//    filestream.open(descriptors_fname);
+//    if(filestream.is_open()) {
+//        for(const auto& lists: m_descriptorsTypesOLD) {
+//            const auto& list = lists.second;
+//            for(BaseOLD* descr: list) {
+//                filestream<<descr->data()<<std::endl;
+//            }
+//        }
+//    } else {
+//        throw std::runtime_error("not able to open file="+descriptors_fname);
+//    }
+//    filestream.close();
 }
 
 void
 Manager::__load()
 {
-    __clear();
+    assert(false);
+//    __clear();
 
-    std::fstream filestream;
-    std::string line;
-    filestream.open(descriptors_fname);
-    if(filestream.is_open()) {
-        while(std::getline(filestream, line)) {
-            if (!line.empty()) {
-                BaseOLD* descr = new BaseOLD(line);
-                add(descr);
-            }
-        }
-    }
-    filestream.close();
+//    std::fstream filestream;
+//    std::string line;
+//    filestream.open(descriptors_fname);
+//    if(filestream.is_open()) {
+//        while(std::getline(filestream, line)) {
+//            if (!line.empty()) {
+//                BaseOLD* descr = new BaseOLD(line);
+//                add(descr);
+//            }
+//        }
+//    }
+//    filestream.close();
 }
 
 void
 Manager::__clear()
 {
-    m_descriptorsOLD.clear();
-    m_descriptorsTypesOLD.clear();
+    m_descriptors.clear();
+    m_descriptorsTypes.clear();
 }
 
 int_t
@@ -534,7 +477,7 @@ Manager::generate()
         item::genScaner();
         item::genLazer();
         item::genRocket();
-        add(getNewBomb());
+//        add(getNewBomb());
     }
 
     num = base * 10;

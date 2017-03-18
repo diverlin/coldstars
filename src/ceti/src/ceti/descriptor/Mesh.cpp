@@ -50,17 +50,5 @@ Mesh::Mesh(const std::string& data)
 Mesh::~Mesh()
 {}
 
-bool
-Mesh::operator==(const Mesh& rhs) const
-{
-    return data() == rhs.data();
-}
-
-std::string
-Mesh::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
 } // namespace descriptor
 } // namespace ceti

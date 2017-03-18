@@ -16,24 +16,46 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Star.hpp"
+#include "Mesh.hpp"
+
+#include <sstream>
 
 namespace descriptor {
 
-const int Star::SCALE_MIN = 200;
-const int Star::SCALE_MAX = 300;
-const int Star::DISTANCE_MIN = 50;
-const int Star::DISTANCE_MAX = 100;
-const int Star::SPEED_MIN = 5;
-const int Star::SPEED_MAX = 10;
+//Mesh::Mesh(int_t type)
+//    :
+//      Base(type)
+//{}
 
-Star::Star()
+//Mesh::Mesh(int_t type,
+//           const std::string& model,
+//           const std::string& texture,
+//           const meti::vec3& orientation)
+//    :
+//      Base(type)
+//    , m_modelPath(model)
+//    , m_materialPath(texture)
+//    , m_orientation(orientation)
+//{
+//}
+
+Mesh::Mesh(const std::string& data)
+    //:
+      //ceti::descriptor::Mesh()
 {
-    setType(Type::STAR);
+    MACRO_READ_SERIALIZED_DATA
 }
 
-Star::Star(const std::string& data) {
-    MACRO_READ_SERIALIZED_DATA
+bool
+Mesh::operator==(const Mesh& rhs) const
+{
+    return data() == rhs.data();
+}
+
+std::string
+Mesh::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace descriptor

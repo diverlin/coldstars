@@ -36,7 +36,6 @@
 
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/Descriptor.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
 

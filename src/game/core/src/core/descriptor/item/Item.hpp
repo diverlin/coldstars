@@ -18,13 +18,15 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/descriptor/Base.hpp>
+#include <ceti/descriptor/BaseView.hpp>
+
 #include <core/type/TechLevelTypes.hpp>
 #include <core/type/RaceTypes.hpp>
 
 namespace descriptor {
 
-class Item : public ::descriptor::Base, public ceti::descriptor::BaseView
+class Item : public Base, public ceti::descriptor::BaseView
 {
 public:
     Item() = default;

@@ -7,9 +7,9 @@
 
 #include <core/type/EntityTypes.hpp> // test
 
+#include <core/descriptor/Hit.hpp>
 #include <core/descriptor/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/Descriptor.hpp>
 #include <core/descriptor/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Container.hpp> // ??
 #include <core/descriptor/ExplosionDescriptor.hpp>
@@ -147,8 +147,8 @@ void MessageManager::process(const Message& message)
     }
         /** OTHER */
     case TELEGRAM::HIT: {
-        descriptor::BaseOLD descriptor(message.data);
-        model::SpaceObject* ob = model::getSpaceObject(descriptor.target());
+        descriptor::Hit descr(message.data);
+        model::SpaceObject* ob = model::getSpaceObject(descr.target());
         assert(false);
         //        ob->hit(descriptor.damage());
         break;

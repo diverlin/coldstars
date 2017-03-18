@@ -72,6 +72,9 @@ std::string to_string(descriptor::Type type)
         case descriptor::Type::GRAVITY_ARTEFACT:     { return "descriptor::type::GRAVITY_ARTEFACT"; break; }
         case descriptor::Type::PROTECTOR_ARTEFACT:     { return "descriptor::type::PROTECTOR_ARTEFACT"; break; }
 
+        // other
+        case descriptor::Type::HIT:     { return "descriptor::type::HIT"; break; }
+
         default: { return "descriptor::type is unknown, fixme"; break; }
     }
 }

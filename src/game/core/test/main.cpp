@@ -75,7 +75,6 @@ TEST(descriptor,accessors)
     EXPECT_EQ(descriptor.owner(), 22);
     EXPECT_EQ(descriptor.target(), 33);
     EXPECT_EQ(descriptor.damage(), 44);
-    ASSERT_THROW(descriptor.radius(), std::runtime_error);
 }
 
 TEST(base,hit)

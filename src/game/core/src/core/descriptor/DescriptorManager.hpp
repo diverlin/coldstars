@@ -118,36 +118,27 @@ public:
     item::Radar* radar(int_t) const;
     item::Rocket* rocket(int_t) const;
 
-    void add(BaseOLD*);
-    BaseOLD* getRandOLD(const Type&);
-    BaseOLD* getOLD(int_t);
+//    void add(Mesh*);
+//    void add(Material*);
 
-    unsigned long int size() const { return m_descriptorsOLD.size(); }
+//    [[warning("replace this with const")]]
+//    ceti::Collector<Mesh>& mesh() { return m_mesh; }
+//    const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
 
-    void add(Mesh*);
-    void add(Material*);
-
-    [[warning("replace this with const")]]
-    ceti::Collector<Mesh>& mesh() { return m_mesh; }
-    const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
-
-    [[warning("replace this with const")]]
-    ceti::Collector<Material>& material() { return m_material; }
-    const ceti::Collector<Material>& material() const { return m_material; }
+//    [[warning("replace this with const")]]
+//    ceti::Collector<Material>& material() { return m_material; }
+//    const ceti::Collector<Material>& material() const { return m_material; }
 
     void generate();
     [[warning("remove")]]
     int_t nextId() const;
 
 private:
-    ceti::Collector<Mesh> m_mesh;
-    ceti::Collector<Material> m_material;
+//    ceti::Collector<Mesh> m_mesh;
+//    ceti::Collector<Material> m_material;
 
     std::map<int_t, Base*> m_descriptors;
     std::map<Type, std::vector<Base*>> m_descriptorsTypes;
-
-    std::map<int_t, BaseOLD*> m_descriptorsOLD;
-    std::map<int, std::vector<BaseOLD*>> m_descriptorsTypesOLD;
 
     void __clear();
     void __save();

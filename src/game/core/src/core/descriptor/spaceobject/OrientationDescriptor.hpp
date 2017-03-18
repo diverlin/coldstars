@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 #include <ceti/descriptor/BaseView.hpp>
 #include <ceti/serialization/macro.hpp>

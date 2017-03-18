@@ -75,6 +75,9 @@ enum class Type {
     GRAVITY_ARTEFACT,
     PROTECTOR_ARTEFACT,
 
+    // other
+    HIT,
+
     /** */
     ANY
 };

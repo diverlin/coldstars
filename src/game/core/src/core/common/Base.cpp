@@ -23,23 +23,6 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
-
-//Base::Base(int_t type, int_t id)
-//    :
-//      m_type(type)
-//    , m_id(id)
-//{
-//    if (id == -1) {
-//        m_id = m_idGenerator.nextId();
-//    }
-//}
-
-//Base::~Base()
-//{}
-
-} // namespace descriptor
-
 namespace model {
 
 Base::Base(const std::string& data)

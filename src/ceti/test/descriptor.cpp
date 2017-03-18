@@ -82,7 +82,8 @@ TEST(descriptor, mesh)
 {
     Mesh descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", meti::vec3(1.0f, 1.0f, 1.0f));
     Mesh descr2(descr);
-    EXPECT_TRUE(descr == descr2);
+    assert(false);
+    //    EXPECT_EQ(descr, descr2);
 
     EXPECT_EQ(descr.id(), descr2.id());
     EXPECT_EQ(descr.type(), descr2.type());
