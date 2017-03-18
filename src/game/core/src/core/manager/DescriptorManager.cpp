@@ -21,9 +21,9 @@
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
 
-#include <core/descriptor/GalaxyDescriptor.hpp>
-#include <core/descriptor/SectorDescriptor.hpp>
-#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/SectorDescriptor.hpp>
+#include <core/descriptor/world/StarSystemDescriptor.hpp>
 
 #include <core/common/Global.hpp>
 

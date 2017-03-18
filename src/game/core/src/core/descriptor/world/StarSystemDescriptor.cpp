@@ -18,32 +18,31 @@
 
 #pragma once
 
-#include <core/descriptor/Base.hpp>
+#include "StarSystemDescriptor.hpp"
 
-#include <ceti/StringUtils.hpp>
-
-#include <vector>
+#include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 
-struct StarSystem : public Base
+StarSystem::StarSystem()
 {
-public:
-    std::vector<int_t> stars;
-    std::vector<int_t> planets;
+    setType(Type::STARSYSTEM);
+}
 
-    StarSystem() = default;
-    ~StarSystem() = default;
+StarSystem::StarSystem(const std::string& data) {
+    MACRO_READ_SERIALIZED_DATA
+}
 
-    std::string info() const {
-        std::string result = "descriptor::StarSystem: " + Base::info();
-        result += ceti::to_string(" stars: ", stars);
-        result += ceti::to_string(" planets: ", planets);
-        return result;
-    }
-}; 
+std::string
+StarSystem::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace descriptor
+
+
+
 
 
 

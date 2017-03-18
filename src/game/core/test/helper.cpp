@@ -20,7 +20,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/world/StarSystemDescriptor.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/builder/world/StarSystemBuilder.hpp>
 

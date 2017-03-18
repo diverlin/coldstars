@@ -41,8 +41,8 @@
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 #include <core/descriptor/Hit.hpp>
-#include <core/descriptor/GalaxyDescriptor.hpp>
-#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/ExplosionDescriptor.hpp>
 #include <core/descriptor/AddToStarsystemDescriptor.hpp>
 

@@ -20,9 +20,9 @@
 
 #include <core/descriptor/Base.hpp>
 
-#include <core/descriptor/GalaxyDescriptor.hpp>
-#include <core/descriptor/SectorDescriptor.hpp>
-#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/SectorDescriptor.hpp>
+#include <core/descriptor/world/StarSystemDescriptor.hpp>
 
 #include <core/descriptor/spaceobject/Container.hpp>
 

@@ -24,7 +24,7 @@
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
 
-#include <descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
