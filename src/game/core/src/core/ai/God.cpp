@@ -44,7 +44,7 @@
 #include <core/ai/Task.hpp>
 #include <core/pilot/Npc.hpp>
 
-#include <core/descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
 
 #include <math/rand.hpp>

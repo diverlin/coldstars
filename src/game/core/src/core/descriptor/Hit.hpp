@@ -9,6 +9,7 @@ public:
     Hit(int_t agressor, int_t victim, int damage);
     Hit(const std::string&);
     std::string data() const;
+    ~Hit() = default;
 
     int_t owner() const { return m_owner; }
     int_t target() const { return m_target; }

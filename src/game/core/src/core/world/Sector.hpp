@@ -21,8 +21,8 @@
 
 #include <core/common/Base.hpp>
 
-#include <core/descriptor/StarsystemDescriptor.hpp>
-#include <core/descriptor/SectorDescriptor.hpp>
+#include <core/descriptor/world/StarSystemDescriptor.hpp>
+#include <core/descriptor/world/SectorDescriptor.hpp>
 
 #include "../common/constants.hpp"
 

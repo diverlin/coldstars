@@ -24,7 +24,7 @@
 #include <core/manager/AsteroidManager.hpp>
 #include <core/type/RaceTypes.hpp>
 
-#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/descriptor/world/StarSystemDescriptor.hpp>
 
 #include <ceti/type/IdType.hpp>
 
