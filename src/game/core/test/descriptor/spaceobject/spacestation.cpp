@@ -19,6 +19,7 @@
 
 #include "vehicle.hpp"
 #include "spaceobject.hpp"
+#include <descriptor/base.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
@@ -27,16 +28,25 @@
 
 namespace test {
 
-TEST(descriptor, spacestation) {
-    descriptor::SpaceStation* descr = descriptor::genSpaceStation();
-    descriptor::SpaceStation* copy = new descriptor::SpaceStation(descr->data());
-
+namespace {
+void testSpaceStationEquality(descriptor::SpaceStation* descr, descriptor::SpaceStation* copy) {
     EXPECT_EQ(descr->type(), descriptor::Type::SPACESTATION);
     EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
     EXPECT_EQ(descr->obSubType(), entity::Type::SPACESTATION);
+}
+} // namespace
 
+TEST(descriptor, clone_spacestation) {
+    descriptor::SpaceStation* descr = descriptor::genSpaceStation();
+    descriptor::SpaceStation* copy = new descriptor::SpaceStation(descr->data());
+
+    testSpaceStationEquality(descr, copy);
     testVehicleEquality(descr, copy);
     testSpaceObjectEquality(descr, copy);
+    testBaseEquality(descr, copy);
+
+    delete descr;
+    delete copy;
 }
 
 } // namespace test

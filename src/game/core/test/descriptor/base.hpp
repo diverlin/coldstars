@@ -17,36 +17,14 @@
 */
 
 
-#include "vehicle.hpp"
-#include "spaceobject.hpp"
-#include <descriptor/base.hpp>
+namespace descriptor {
 
-#include <core/generator/DescriptorGenerator.hpp>
-#include <core/descriptor/spaceobject/Ship.hpp>
+class Base;
 
-#include <gtest/gtest.h>
+} // namespace descriptor
 
-namespace test {
+namespace  test {
 
-namespace {
-void testShipEquality(descriptor::Ship* descr, descriptor::Ship* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SHIP);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SHIP);
-}
-} // namespace
-
-TEST(descriptor, clone_ship) {
-    descriptor::Ship* descr = descriptor::genShip();
-    descriptor::Ship* copy = new descriptor::Ship(descr->data());
-
-    testShipEquality(descr, copy);
-    testVehicleEquality(descr, copy);
-    testSpaceObjectEquality(descr, copy);
-    testBaseEquality(descr, copy);
-
-    delete descr;
-    delete copy;
-}
+void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy);
 
 } // namespace test
