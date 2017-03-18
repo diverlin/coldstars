@@ -25,7 +25,7 @@
 #include <common/GameDate.hpp>
 #include <ceti/IdGenerator.hpp>
 #include <descriptor/RaceDescriptors.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <builder/dock/KosmoportBuilder.hpp>
 #include <builder/dock/NatureLandBuilder.hpp>

@@ -23,7 +23,7 @@
 #include <common/constants.hpp>
 
 #include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <core/type/MeshTypes.hpp>
     

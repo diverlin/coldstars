@@ -27,7 +27,7 @@
 #include <world/starsystem.hpp>
 
 #include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 //#include <client/effects/DistantNebulaEffect.hpp>
 //#include <client/effects/DistantStarEffect.hpp>

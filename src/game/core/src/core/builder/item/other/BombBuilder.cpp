@@ -30,7 +30,7 @@
 //#include <boost/property_tree/info_parser.hpp>
 
 #include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 Bomb*
 BombBuilder::gen()

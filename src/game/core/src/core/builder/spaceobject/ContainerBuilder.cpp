@@ -23,7 +23,7 @@
 #include <core/spaceobject/Container.hpp>
 
 #include <descriptor/Base.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <descriptor/spaceobject/Container.hpp>
 
 #include <core/slot/ItemSlot.hpp>
