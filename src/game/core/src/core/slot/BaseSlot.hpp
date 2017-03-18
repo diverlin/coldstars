@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <core/descriptor/Base.hpp>
 #include <core/common/Base.hpp>
 
 #include <ceti/type/IdType.hpp>

@@ -1,18 +1,26 @@
 #include "Hit.hpp"
 
+#include <ceti/serialization/macro.hpp>
+
 namespace descriptor {
 
 Hit::Hit(int_t owner, int_t target, int damage)
-    : BaseOLD(TypeOLD::HIT)
+    :
+      m_owner(owner)
+    , m_target(target)
+    , m_damage(damage)
 {
-    add(Key::OWNER, owner);
-    add(Key::TARGET, target);
-    add(Key::DAMAGE, damage);
+    setType(Type::HIT);
 }
 
-Hit::Hit(const std::string& data)
-    : BaseOLD(data)
+Hit::Hit(const std::string& data) {
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Hit::data() const
 {
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace descriptor

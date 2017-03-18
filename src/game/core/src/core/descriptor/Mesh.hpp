@@ -16,24 +16,32 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Star.hpp"
+#pragma once
+
+#include <ceti/descriptor/Mesh.hpp>
 
 namespace descriptor {
 
-const int Star::SCALE_MIN = 200;
-const int Star::SCALE_MAX = 300;
-const int Star::DISTANCE_MIN = 50;
-const int Star::DISTANCE_MAX = 100;
-const int Star::SPEED_MIN = 5;
-const int Star::SPEED_MAX = 10;
-
-Star::Star()
+class Mesh : public ceti::descriptor::Mesh
 {
-    setType(Type::STAR);
-}
+public:
+    Mesh() = default;
+//    Mesh(int_t type = -1);
+    Mesh(const std::string& data);
+    ~Mesh() = default;
 
-Star::Star(const std::string& data) {
-    MACRO_READ_SERIALIZED_DATA
-}
+    std::string data() const;
+
+    bool operator==(const Mesh& rhs) const;
+
+private:
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<ceti::descriptor::Mesh>(*this);
+    }
+};
 
 } // namespace descriptor

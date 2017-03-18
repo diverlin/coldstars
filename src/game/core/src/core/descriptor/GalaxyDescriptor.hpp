@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 #include <ceti/StringUtils.hpp>
 
@@ -36,7 +36,7 @@ public:
     ~Galaxy() = default;
 
     std::string info() const {
-        std::string result = "Galaxy descriptor: " + descriptor::Base::info() + ceti::to_string(" sectors: ", sectors);
+        std::string result = "Galaxy descriptor: " + Base::info() + ceti::to_string(" sectors: ", sectors);
         return result;
     }
 }; 

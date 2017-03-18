@@ -140,7 +140,7 @@
 ////    }
 //}
 
-void BaseVehicle::equip(Vehicle* vehicle, descriptor::BaseOLD* descriptor)
+void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 {
 //    entity::Type type = (entity::Type)descriptor.type();
 //    switch(type) {

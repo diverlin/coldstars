@@ -113,17 +113,19 @@ genStarSystem(int race)
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::type& type) {
-    auto& collector = descriptor::Manager::get().mesh();
-    descriptor::Mesh* descriptor = collector.random(int_t(type));
-    assert(descriptor->id() != NONE);
-    return descriptor->id();
+    assert(false);
+//    auto& collector = descriptor::Manager::get().mesh();
+//    descriptor::Mesh* descriptor = collector.random(int_t(type));
+//    assert(descriptor->id() != NONE);
+//    return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const texture::type& type) {
-    auto& collector = descriptor::Manager::get().material();
-    descriptor::Material* descriptor = collector.random(int_t(type));
-    assert(descriptor->id() != NONE);
-    return descriptor->id();
+    assert(false);
+//    auto& collector = descriptor::Manager::get().material();
+//    descriptor::Material* descriptor = collector.random(int_t(type));
+//    assert(descriptor->id() != NONE);
+//    return descriptor->id();
 }
 
 } // namespace
@@ -544,27 +546,6 @@ genSatellite()
 
     return descr;
 }
-
-
-/* items */
-namespace {
-void addItemCommonFields(descriptor::BaseOLD* descr,
-                         int race,
-                         int tech_level,
-                         int modules_num_max,
-                         int mass,
-                         int condition_max,
-                         int deterioration,
-                         int price) {
-    descr->add(descriptor::Key::RACE, race);
-    descr->add(descriptor::Key::TECH, tech_level);
-    descr->add(descriptor::Key::MODULES_NUM, modules_num_max);
-    descr->add(descriptor::Key::MASS, mass);
-    descr->add(descriptor::Key::CONDITION_MAX, condition_max);
-    descr->add(descriptor::Key::DETERIORATION, deterioration);
-    descr->add(descriptor::Key::PRICE, price);
-}
-} // namespace
 
 
 namespace item {
@@ -1076,21 +1057,21 @@ genScaner(int race, int tech_level)
 } // anemspace item
 
 
-descriptor::BaseOLD*
-getNewBomb(int damage, int radius)
-{
-    if (damage == NONE) {
-         damage = meti::getRandInt(10, 100);
-    }
-    if (radius == NONE) {
-        radius = meti::getRandInt(100, 300);
-    }
+//descriptor::BaseOLD*
+//getNewBomb(int damage, int radius)
+//{
+//    if (damage == NONE) {
+//         damage = meti::getRandInt(10, 100);
+//    }
+//    if (radius == NONE) {
+//        radius = meti::getRandInt(100, 300);
+//    }
 
-    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::TypeOLD::BOMB);
-    descr->add(descriptor::Key::DAMAGE, damage);
-    descr->add(descriptor::Key::RADIUS, radius);
+//    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::TypeOLD::BOMB);
+//    descr->add(descriptor::Key::DAMAGE, damage);
+//    descr->add(descriptor::Key::RADIUS, radius);
 
-    return descr;
-}
+//    return descr;
+//}
 
 } // namespace descriptor

@@ -16,24 +16,40 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Star.hpp"
+#include "Texture.hpp"
 
+#include <sstream>
+
+namespace ceti {
 namespace descriptor {
 
-const int Star::SCALE_MIN = 200;
-const int Star::SCALE_MAX = 300;
-const int Star::DISTANCE_MIN = 50;
-const int Star::DISTANCE_MAX = 100;
-const int Star::SPEED_MIN = 5;
-const int Star::SPEED_MAX = 10;
-
-Star::Star()
+Material::Material(int_t type)
+    :
+      Base(type)
 {
-    setType(Type::STAR);
 }
 
-Star::Star(const std::string& data) {
+Material::Material(const std::string& data)
+    :
+      Base()
+{
     MACRO_READ_SERIALIZED_DATA
 }
 
+Material::~Material()
+{}
+
+bool
+Material::operator==(const Material& rhs) const
+{
+    return data() == rhs.data();
+}
+
+std::string
+Material::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace descriptor
+} // namespace ceti

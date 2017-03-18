@@ -61,9 +61,9 @@ BombBuilder::__createInternals(Bomb* bomb, descriptor::BaseOLD* descr)
     //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->setDamage(descr->damage());
-    bomb->setRadius(descr->radius());
     assert(false);
+    //    bomb->setDamage(descr->damage());
+//    bomb->setRadius(descr->radius());
 //    bomb->setParentSubTypeId(entity::type::CARGO_SLOT);
 }
 

@@ -47,7 +47,6 @@ class Ship;
 class SpaceStation;
 class Satellite;
 class Container;
-class BaseOLD; // TODO: remove this
 
 /* world */
 descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
@@ -78,6 +77,6 @@ Rocket* genRocket(int race = NONE, int tech_level = NONE);
 Scaner* genScaner(int race = NONE, int tech_level = NONE);
 } // namespace item
 
-descriptor::BaseOLD* getNewBomb(int damage = NONE, int radius = NONE);
+//descriptor::BaseOLD* getNewBomb(int damage = NONE, int radius = NONE);
 
 } // namespace descriptor

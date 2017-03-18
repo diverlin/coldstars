@@ -45,10 +45,6 @@ public:
     Mesh(const std::string& data);
     ~Mesh();
 
-    std::string data() const;
-
-    bool operator==(const Mesh& rhs) const;
-
     void setModelPath(const std::string& model_path) { m_modelPath = model_path; }
     void setMaterialPath(const std::string& material_path) { m_materialPath = material_path; }
     void setAssociation(const Association& association) { m_association = association; }
