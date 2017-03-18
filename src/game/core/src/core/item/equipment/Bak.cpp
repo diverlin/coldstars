@@ -18,7 +18,7 @@
 
 #include "Bak.hpp"
 #include <core/descriptor/item/equipment/Bak.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Bak.hpp>
 
 #ifdef USE_MODULES

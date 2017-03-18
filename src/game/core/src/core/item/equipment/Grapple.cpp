@@ -18,7 +18,7 @@
 
 #include "Grapple.hpp"
 #include <core/descriptor/item/equipment/Grapple.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Grapple.hpp>
 
 #ifdef USE_MODULES

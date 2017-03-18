@@ -28,7 +28,7 @@
 
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 

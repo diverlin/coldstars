@@ -21,7 +21,7 @@
 
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/Ship.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <core/descriptor/spaceobject/Ship.hpp>
 

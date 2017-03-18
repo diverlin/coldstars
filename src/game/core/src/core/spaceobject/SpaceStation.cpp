@@ -36,7 +36,7 @@
 #include <core/model/spaceobject/SpaceStation.hpp>
 
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 

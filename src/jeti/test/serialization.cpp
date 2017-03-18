@@ -25,7 +25,7 @@
 //#include <core/descriptor/Container.hpp>
 
 //#include <core/descriptor/VehicleDescriptorGenerator.hpp>
-//#include <core/descriptor/DescriptorGenerator.hpp>
+//#include <core/generator/DescriptorGenerator.hpp>
 
 //#include <ceti/descriptor/Mesh.hpp>
 //#include <ceti/descriptor/Descriptor.hpp>

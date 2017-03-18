@@ -34,7 +34,7 @@
 #include <core/model/spaceobject/Ship.hpp>
 
 #include <core/descriptor/spaceobject/Ship.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 

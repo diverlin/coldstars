@@ -18,7 +18,7 @@
 
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/Hit.hpp>
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <gtest/gtest.h>
 

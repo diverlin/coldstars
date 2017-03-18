@@ -86,7 +86,7 @@
 #include <common/Global.hpp>
 #include <common/TurnTimer.hpp>
 
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 

@@ -19,7 +19,7 @@
 
 #include "RadarBuilder.hpp"
 #include <core/descriptor/item/equipment/Radar.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Radar.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>

@@ -18,7 +18,7 @@
 
 #include "Lazer.hpp"
 #include <core/descriptor/item/equipment/Lazer.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Lazer.hpp>
 
 #ifdef USE_MODULES

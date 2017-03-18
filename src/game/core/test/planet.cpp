@@ -23,7 +23,7 @@
 #include <core/builder/world/StarSystemBuilder.hpp>
 
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <gtest/gtest.h>
 

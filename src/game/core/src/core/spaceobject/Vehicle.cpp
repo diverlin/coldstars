@@ -92,7 +92,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <core/manager/EntityManager.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 
