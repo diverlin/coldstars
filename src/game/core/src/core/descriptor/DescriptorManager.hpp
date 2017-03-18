@@ -118,25 +118,9 @@ public:
     item::Radar* radar(int_t) const;
     item::Rocket* rocket(int_t) const;
 
-//    void add(Mesh*);
-//    void add(Material*);
-
-//    [[warning("replace this with const")]]
-//    ceti::Collector<Mesh>& mesh() { return m_mesh; }
-//    const ceti::Collector<Mesh>& mesh() const { return m_mesh; }
-
-//    [[warning("replace this with const")]]
-//    ceti::Collector<Material>& material() { return m_material; }
-//    const ceti::Collector<Material>& material() const { return m_material; }
-
     void generate();
-    [[warning("remove")]]
-    int_t nextId() const;
 
 private:
-//    ceti::Collector<Mesh> m_mesh;
-//    ceti::Collector<Material> m_material;
-
     std::map<int_t, Base*> m_descriptors;
     std::map<Type, std::vector<Base*>> m_descriptorsTypes;
 

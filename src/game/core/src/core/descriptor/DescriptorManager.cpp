@@ -451,12 +451,6 @@ Manager::__clear()
     m_descriptorsTypes.clear();
 }
 
-int_t
-Manager::nextId() const
-{
-    return m_idGenerator.nextId();
-}
-
 void
 Manager::generate()
 {
