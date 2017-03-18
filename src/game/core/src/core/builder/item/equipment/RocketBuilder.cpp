@@ -37,7 +37,7 @@ Rocket::gen()
 //Rocket::gen(const std::string& data)
 //{
 //    descriptor::item::Rocket descr(data);
-//    assert(descr->descriptor() != descriptor::type::ROCKET_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::ROCKET_EQUIPMENT);
 //    return gen(descr);
 //}
 

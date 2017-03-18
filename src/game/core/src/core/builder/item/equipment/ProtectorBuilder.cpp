@@ -52,7 +52,7 @@ Protector::gen(int num)
 //Protector::gen(const std::string& data)
 //{
 //    descriptor::item::Protector descr(data);
-//    assert(descr->descriptor() != descriptor::type::PROTECTOR_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::PROTECTOR_EQUIPMENT);
 //    return gen(descr);
 //}
 

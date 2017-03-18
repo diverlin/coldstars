@@ -38,7 +38,7 @@ Bak::gen()
 //Bak::gen(const std::string& data)
 //{
 //    descriptor::item::Bak descr(data);
-//    assert(descr->descriptor() != descriptor::type::BAK_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::BAK_EQUIPMENT);
 //    return gen(descr);
 //}
 

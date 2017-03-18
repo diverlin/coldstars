@@ -40,7 +40,7 @@ Droid::gen()
 //Droid::gen(const std::string& data)
 //{
 //    descriptor::item::Droid descr(data);
-//    assert(descr->descriptor() != descriptor::type::DROID_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::DROID_EQUIPMENT);
 //    return gen(descr);
 //}
 

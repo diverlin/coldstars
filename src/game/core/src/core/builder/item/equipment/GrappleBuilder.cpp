@@ -38,7 +38,7 @@ Grapple::gen()
 //Grapple::gen(const std::string& data)
 //{
 //    descriptor::item::Grapple descr(data);
-//    assert(descr->descriptor() != descriptor::type::GRAPPLE_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::GRAPPLE_EQUIPMENT);
 //    return gen(descr);
 //}
 
