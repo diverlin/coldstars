@@ -16,79 +16,41 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#include <core/descriptor/DescriptorGenerator.hpp>
-#include <core/descriptor/spaceobject/ALL>
+#include "vehicle.hpp"
+#include <core/descriptor/spaceobject/Vehicle.hpp>
 
 #include <gtest/gtest.h>
 
-namespace {
+namespace test {
 
-void compareSpaceObject(const descriptor::SpaceObject& descr, const descriptor::SpaceObject& copy)
+void testVehicleEquality(descriptor::Vehicle* descr, descriptor::Vehicle* copy)
 {
-    // todo: implement
-}
-
-void compareVehicle(const descriptor::Vehicle& descr, const descriptor::Vehicle& copy)
-{
-    EXPECT_EQ(descr.race(), copy.race());
-    EXPECT_EQ(descr.turrelPoints(), copy.turrelPoints());
-    EXPECT_EQ(descr.drivePoints(), copy.drivePoints());
-    EXPECT_EQ(descr.protectorPoints(), copy.protectorPoints());
-    EXPECT_EQ(descr.space(), copy.space());
-    EXPECT_EQ(descr.protection(), copy.protection());
+    EXPECT_EQ(descr->race(), copy->race());
+    EXPECT_EQ(descr->turrelPoints(), copy->turrelPoints());
+    EXPECT_EQ(descr->drivePoints(), copy->drivePoints());
+    EXPECT_EQ(descr->protectorPoints(), copy->protectorPoints());
+    EXPECT_EQ(descr->space(), copy->space());
+    EXPECT_EQ(descr->protection(), copy->protection());
 #ifdef USE_EXTRA_EQUIPMENT
-    EXPECT_EQ(descr.temperature(), copy.temperature());
+    EXPECT_EQ(descr->temperature(), copy->temperature());
 #endif // USE_EXTRA_EQUIPMENT
-    EXPECT_EQ(descr.price(), copy.price());
-    EXPECT_EQ(descr.drawTurrels(), copy.drawTurrels());
-    EXPECT_EQ(descr.bakSlotNum(), copy.bakSlotNum());
+    EXPECT_EQ(descr->price(), copy->price());
+    EXPECT_EQ(descr->drawTurrels(), copy->drawTurrels());
+    EXPECT_EQ(descr->bakSlotNum(), copy->bakSlotNum());
 
-    EXPECT_EQ(descr.driveSlotNum(), copy.driveSlotNum());
-    EXPECT_EQ(descr.droidSlotNum(), copy.droidSlotNum());
+    EXPECT_EQ(descr->driveSlotNum(), copy->driveSlotNum());
+    EXPECT_EQ(descr->droidSlotNum(), copy->droidSlotNum());
 #ifdef USE_EXTRA_EQUIPMENT
-    EXPECT_EQ(descr.energizerSlotNum(), copy.energizerSlotNum());
-    EXPECT_EQ(descr.freezerSlotNum(), copy.freezerSlotNum());
+    EXPECT_EQ(descr->energizerSlotNum(), copy->energizerSlotNum());
+    EXPECT_EQ(descr->freezerSlotNum(), copy->freezerSlotNum());
 #endif // USE_EXTRA_EQUIPMENT
-    EXPECT_EQ(descr.grappleSlotNum(), copy.grappleSlotNum());
-    EXPECT_EQ(descr.protectorSlotNum(), copy.protectorSlotNum());
-    EXPECT_EQ(descr.radarSlotNum(), copy.radarSlotNum());
-    EXPECT_EQ(descr.scanerSlotNum(), copy.scanerSlotNum());
-    EXPECT_EQ(descr.weaponSlotNum(), copy.weaponSlotNum());
-    EXPECT_EQ(descr.artefactSlotNum(), copy.artefactSlotNum());
-    EXPECT_EQ(descr.cargoSlotNum(), copy.cargoSlotNum());
-
-    compareSpaceObject(descr, copy);
+    EXPECT_EQ(descr->grappleSlotNum(), copy->grappleSlotNum());
+    EXPECT_EQ(descr->protectorSlotNum(), copy->protectorSlotNum());
+    EXPECT_EQ(descr->radarSlotNum(), copy->radarSlotNum());
+    EXPECT_EQ(descr->scanerSlotNum(), copy->scanerSlotNum());
+    EXPECT_EQ(descr->weaponSlotNum(), copy->weaponSlotNum());
+    EXPECT_EQ(descr->artefactSlotNum(), copy->artefactSlotNum());
+    EXPECT_EQ(descr->cargoSlotNum(), copy->cargoSlotNum());
 }
 
-} // namespace
-
-TEST(descriptor, ship) {
-    descriptor::Ship descr = *descriptor::genShip();
-    descriptor::Ship copy(descr.data());
-
-    EXPECT_EQ(descr.type(), descriptor::Type::SHIP);
-    EXPECT_EQ(descr.obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr.obSubType(), entity::Type::SHIP);
-    compareVehicle(descr, copy);
-}
-
-TEST(descriptor, satellite) {
-    descriptor::Satellite descr = *descriptor::genSatellite();
-    descriptor::Satellite copy(descr.data());
-
-    EXPECT_EQ(descr.type(), descriptor::Type::SATELLITE);
-    EXPECT_EQ(descr.obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr.obSubType(), entity::Type::SATELLITE);
-    compareVehicle(descr, copy);
-}
-
-TEST(descriptor, spacestation) {
-    descriptor::SpaceStation descr = *descriptor::genSpaceStation();
-    descriptor::SpaceStation copy(descr.data());
-
-    EXPECT_EQ(descr.type(), descriptor::Type::SPACESTATION);
-    EXPECT_EQ(descr.obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr.obSubType(), entity::Type::SPACESTATION);
-    compareVehicle(descr, copy);
-}
+} // namespace test
