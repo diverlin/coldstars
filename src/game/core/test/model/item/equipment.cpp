@@ -21,7 +21,7 @@
 #include <core/model/item/equipment/ALL>
 
 #include <core/common/Global.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <gtest/gtest.h>
 

@@ -18,7 +18,7 @@
 
 #include "Drive.hpp"
 #include <core/descriptor/item/equipment/Drive.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Drive.hpp>
 
 #ifdef USE_MODULES

@@ -17,7 +17,7 @@
 */
 
 
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/ALL>
 
 #include <gtest/gtest.h>

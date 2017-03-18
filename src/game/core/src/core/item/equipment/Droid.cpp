@@ -18,7 +18,7 @@
 
 #include "Droid.hpp"
 #include <core/descriptor/item/equipment/Droid.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Droid.hpp>
 
 #ifdef USE_MODULES

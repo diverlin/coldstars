@@ -37,14 +37,14 @@
 //#include <core/descriptor/spaceobject/Satellite.hpp>
 
 #include <core/descriptor/RaceDescriptors.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/common/constants.hpp>
 #include <core/type/MeshTypes.hpp>
 #include <core/type/TextureTypes.hpp>
 #include <core/item/Item.hpp>
 
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
 

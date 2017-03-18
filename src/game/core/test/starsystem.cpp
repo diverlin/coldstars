@@ -19,7 +19,7 @@
 #include <core/common/Global.hpp>
 
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <core/world/starsystem.hpp>
 

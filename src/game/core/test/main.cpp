@@ -37,7 +37,7 @@
 #include <core/builder/item/other/BombBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 #include <core/descriptor/Hit.hpp>
@@ -46,7 +46,7 @@
 #include <core/descriptor/ExplosionDescriptor.hpp>
 #include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>
 

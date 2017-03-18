@@ -20,7 +20,7 @@
 #include "vehicle.hpp"
 #include "spaceobject.hpp"
 
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
 
 #include <gtest/gtest.h>

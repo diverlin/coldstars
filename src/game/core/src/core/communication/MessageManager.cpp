@@ -8,9 +8,9 @@
 #include <core/type/EntityTypes.hpp> // test
 
 #include <core/descriptor/Hit.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Container.hpp> // ??
 #include <core/descriptor/ExplosionDescriptor.hpp>
 #include <core/descriptor/AddToStarsystemDescriptor.hpp>

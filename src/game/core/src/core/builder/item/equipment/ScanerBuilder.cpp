@@ -19,7 +19,7 @@
 
 #include "ScanerBuilder.hpp"
 #include <core/descriptor/item/equipment/Scaner.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>

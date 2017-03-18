@@ -20,7 +20,7 @@
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace builder {
 

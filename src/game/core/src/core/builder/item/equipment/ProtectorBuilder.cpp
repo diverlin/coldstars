@@ -22,7 +22,7 @@
 #include <core/descriptor/item/equipment/Protector.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <ceti/Logger.hpp>
 
