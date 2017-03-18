@@ -17,9 +17,9 @@
 */
 
 
-#include "vehicle.hpp"
-#include "spaceobject.hpp"
-#include <descriptor/base.hpp>
+#include <test/descriptor/spaceobject/vehicle.hpp>
+#include <test/descriptor/spaceobject/spaceobject.hpp>
+#include <test/descriptor/base.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Ship.hpp>
@@ -43,6 +43,7 @@ TEST(descriptor, clone_ship) {
     testShipEquality(descr, copy);
     testVehicleEquality(descr, copy);
     testSpaceObjectEquality(descr, copy);
+    testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
     delete descr;

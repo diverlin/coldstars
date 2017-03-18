@@ -16,32 +16,35 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <test/descriptor/spaceobject/vehicle.hpp>
-#include <test/descriptor/spaceobject/spaceobject.hpp>
 #include <test/descriptor/base.hpp>
+#include <test/descriptor/item/item.hpp>
+#include <test/descriptor/item/equipment/equipment.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
-#include <core/descriptor/spaceobject/Satellite.hpp>
+#include <core/descriptor/item/equipment/Rocket.hpp>
 
 #include <gtest/gtest.h>
 
 namespace test {
 
-namespace {
-void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SATELLITE);
-}
-} // namespace
+TEST(descriptor, clone_rocket) {
+    descriptor::item::Rocket* descr = descriptor::item::genRocket();
+    descriptor::item::Rocket* copy = new descriptor::item::Rocket(descr->data());
 
-TEST(descriptor, clone_satellite) {
-    descriptor::Satellite* descr = descriptor::genSatellite();
-    descriptor::Satellite* copy = new descriptor::Satellite(descr->data());
+    EXPECT_EQ(descr->type(), descriptor::Type::ROCKET_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
+    EXPECT_EQ(descr->obSubType(), entity::Type::ROCKET_EQUIPMENT);
+    EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);
 
-    testSatelliteEquality(descr, copy);
-    testVehicleEquality(descr, copy);
-    testSpaceObjectEquality(descr, copy);
+    EXPECT_EQ(descr->ammo(), copy->ammo());
+    EXPECT_EQ(descr->damage(), copy->damage());
+    EXPECT_EQ(descr->radius(), copy->radius());
+
+    EXPECT_EQ(descr->data(), copy->data());
+    EXPECT_EQ(descr->info(), copy->info());
+
+    testEquipmentEquality(descr, copy);
+    testItemEquality(descr, copy);
     testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 

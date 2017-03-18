@@ -16,32 +16,33 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <test/descriptor/spaceobject/vehicle.hpp>
-#include <test/descriptor/spaceobject/spaceobject.hpp>
 #include <test/descriptor/base.hpp>
+#include <test/descriptor/item/item.hpp>
+#include <test/descriptor/item/equipment/equipment.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
-#include <core/descriptor/spaceobject/Satellite.hpp>
+#include <core/descriptor/item/equipment/Bak.hpp>
 
 #include <gtest/gtest.h>
 
 namespace test {
 
-namespace {
-void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SATELLITE);
-}
-} // namespace
+TEST(descriptor, clone_bak) {
+    descriptor::item::Bak* descr = descriptor::item::genBak();
+    descriptor::item::Bak* copy = new descriptor::item::Bak(descr->data());
 
-TEST(descriptor, clone_satellite) {
-    descriptor::Satellite* descr = descriptor::genSatellite();
-    descriptor::Satellite* copy = new descriptor::Satellite(descr->data());
+    EXPECT_EQ(descr->type(), descriptor::Type::BAK_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
+    EXPECT_EQ(descr->obSubType(), entity::Type::BAK_EQUIPMENT);
+    EXPECT_EQ(descr->slotType(), entity::Type::BAK_SLOT);
 
-    testSatelliteEquality(descr, copy);
-    testVehicleEquality(descr, copy);
-    testSpaceObjectEquality(descr, copy);
+    EXPECT_EQ(descr->fuel(), copy->fuel());
+
+    EXPECT_EQ(descr->data(), copy->data());
+    EXPECT_EQ(descr->info(), copy->info());
+
+    testEquipmentEquality(descr, copy);
+    testItemEquality(descr, copy);
     testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 

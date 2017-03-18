@@ -17,27 +17,21 @@
 */
 
 
-#include <core/descriptor/Base.hpp>
-#include <ceti/descriptor/BaseView.hpp>
+#include <core/descriptor/item/Item.hpp>
 
 #include <gtest/gtest.h>
 
-namespace  test {
+namespace test {
 
-void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy)
+void testItemEquality(descriptor::Item* descr, descriptor::Item* copy)
 {
-    EXPECT_EQ(descr->id(), copy->id());
-    EXPECT_EQ(descr->type(), copy->type());
-    EXPECT_EQ(descr->obType(), copy->obType());
-    EXPECT_EQ(descr->obSubType(), copy->obSubType());
-    EXPECT_EQ(descr->obSubSubType(), copy->obSubSubType());
+    EXPECT_EQ(descr->race(), copy->race());
+    EXPECT_EQ(descr->tech(), copy->tech());
+    EXPECT_EQ(descr->slotType(), copy->slotType());
+    EXPECT_EQ(descr->condition(), copy->condition());
+    EXPECT_EQ(descr->deterioration(), copy->deterioration());
+    EXPECT_EQ(descr->mass(), copy->mass());
+    EXPECT_EQ(descr->price(), copy->price());
 }
-
-void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy)
-{
-    EXPECT_EQ(descr->texture(), copy->texture());
-    EXPECT_EQ(descr->mesh(), copy->mesh());
-}
-
 
 } // namespace test

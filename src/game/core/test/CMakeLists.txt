@@ -5,7 +5,7 @@ set(PROJECT ${PROJECT_TESTS})
 file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 if (NOT COMPILE_FLAGS)
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")

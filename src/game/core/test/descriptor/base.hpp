@@ -16,15 +16,19 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 namespace descriptor {
-
 class Base;
-
 } // namespace descriptor
+
+namespace ceti {
+namespace descriptor {
+class BaseView;
+} // namespace descriptor
+} // namespace ceti
 
 namespace  test {
 
 void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy);
+void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy);
 
 } // namespace test
