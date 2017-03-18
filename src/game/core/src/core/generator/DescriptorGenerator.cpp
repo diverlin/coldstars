@@ -1045,24 +1045,24 @@ genScaner(int race, int tech_level)
     return descr;
 }
 
-} // anemspace item
-
-
-//descriptor::BaseOLD*
-//getNewBomb(int damage, int radius)
+//Bomb*
+//genBomb(int damage, int radius)
 //{
 //    if (damage == NONE) {
-//         damage = meti::getRandInt(10, 100);
+//        damage = meti::getRandInt(10, 100);
 //    }
 //    if (radius == NONE) {
 //        radius = meti::getRandInt(100, 300);
 //    }
 
-//    descriptor::BaseOLD* descr = new descriptor::BaseOLD(descriptor::TypeOLD::BOMB);
-//    descr->add(descriptor::Key::DAMAGE, damage);
-//    descr->add(descriptor::Key::RADIUS, radius);
+//    Bomb* descr = new Bomb;
+//    descr->setDamage(damage);
+//    descr->setRadius(radius);
+
+//    descriptor::Manager::get().reg(descr);
 
 //    return descr;
 //}
 
+} // anemspace item
 } // namespace descriptor

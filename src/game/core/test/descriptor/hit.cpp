@@ -20,10 +20,16 @@
 
 #include <gtest/gtest.h>
 
-TEST(descriptor,serialization)
+TEST(descriptor, clone_hit)
 {
-    descriptor::Hit descriptor(11, 22, 33);
-    descriptor::Hit descriptor2(descriptor.data());
-    assert(false);
-    //    EXPECT_TRUE(descriptor == descriptor2);
+    descriptor::Hit descr(11, 22, 33);
+    descriptor::Hit copy(descr.data());
+
+    EXPECT_EQ(11, copy.owner());
+    EXPECT_EQ(22, copy.target());
+    EXPECT_EQ(33, copy.damage());
+
+    EXPECT_EQ(descr.owner(), copy.owner());
+    EXPECT_EQ(descr.target(), copy.target());
+    EXPECT_EQ(descr.damage(), copy.damage());
 }

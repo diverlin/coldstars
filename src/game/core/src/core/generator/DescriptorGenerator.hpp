@@ -75,8 +75,7 @@ Protector* genProtector(int race = NONE, int tech_level = NONE);
 Radar* genRadar(int race = NONE, int tech_level = NONE);
 Rocket* genRocket(int race = NONE, int tech_level = NONE);
 Scaner* genScaner(int race = NONE, int tech_level = NONE);
+//Bomb* genBomb(int damage = NONE, int radius = NONE);
 } // namespace item
-
-//descriptor::BaseOLD* getNewBomb(int damage = NONE, int radius = NONE);
 
 } // namespace descriptor

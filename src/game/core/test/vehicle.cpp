@@ -33,7 +33,7 @@
 #include <gtest/gtest.h>
 
 
-TEST(equipment, lazer)
+TEST(vehicle, item_lazer)
 {
     test::Ship ship;
     test::item::Lazer lazer;
@@ -54,7 +54,7 @@ TEST(equipment, lazer)
     EXPECT_EQ(lazer.model()->radius(), ship.control()->properties().fire_radius_max);
 }
 
-TEST(equipment, rocket)
+TEST(vehicle, item_rocket)
 {
     test::Ship ship;
     test::item::Rocket rocket;
@@ -75,7 +75,7 @@ TEST(equipment, rocket)
     EXPECT_EQ(rocket.model()->radius(), ship.control()->properties().fire_radius_max);
 }
 
-TEST(equipment, bak)
+TEST(vehicle, item_bak)
 {
     test::Ship ship;
     test::item::Bak bak;
@@ -94,7 +94,7 @@ TEST(equipment, bak)
     EXPECT_EQ(0, ship.control()->properties().hyper); // no drive is set, that's why hyper is 0
 }
 
-TEST(equipment, drive)
+TEST(vehicle, item_drive)
 {
     test::Ship ship;
     test::item::Drive drive;
@@ -113,7 +113,7 @@ TEST(equipment, drive)
     EXPECT_EQ(0, ship.control()->properties().hyper); // no bak is set that's why hyper is 0
 }
 
-TEST(equipment, bak_and_drive)
+TEST(vehicle, item_bak_and_drive)
 {
     test::Ship ship;
     test::item::Bak bak;
@@ -166,7 +166,7 @@ TEST(equipment, bak_and_drive)
     EXPECT_EQ(hyper, ship.control()->properties().hyper);
 }
 
-TEST(equipment, droid)
+TEST(vehicle, item_droid)
 {
     test::Ship ship;
     test::item::Droid droid;
@@ -199,7 +199,7 @@ TEST(equipment, droid)
     EXPECT_EQ(droid.model()->repair(), ship.control()->properties().repair);
 }
 
-TEST(equipment, grapple)
+TEST(vehicle, item_grapple)
 {
     test::Ship ship;
     test::item::Grapple grapple;
@@ -238,7 +238,7 @@ TEST(equipment, grapple)
     EXPECT_EQ(grapple.model()->radius(), ship.control()->properties().grab_radius);
 }
 
-TEST(equipment, scaner)
+TEST(vehicle, item_scaner)
 {
     test::Ship ship;
     test::item::Scaner scaner;
@@ -271,7 +271,7 @@ TEST(equipment, scaner)
     EXPECT_EQ(scaner.model()->scan(), ship.control()->properties().scan);
 }
 
-TEST(equipment, radar)
+TEST(vehicle, item_radar)
 {
     test::Ship ship;
     test::item::Radar radar;
@@ -304,7 +304,7 @@ TEST(equipment, radar)
     EXPECT_EQ(radar.model()->radius(), ship.control()->properties().radar);
 }
 
-TEST(equipment, protector)
+TEST(vehicle, item_protector)
 {
     test::Ship ship;
     test::item::Protector protector;
@@ -338,7 +338,7 @@ TEST(equipment, protector)
     EXPECT_EQ(protection, ship.control()->properties().protection);
 }
 
-TEST(equipment, cargo_load)
+TEST(vehicle, cargo_load)
 {
     test::Ship ship;
 
@@ -354,7 +354,7 @@ TEST(equipment, cargo_load)
     EXPECT_EQ(0, ship.control()->properties().scan);
 }
 
-TEST(equipment, freespace)
+TEST(vehicle, freespace)
 {
     test::Ship ship;
 
