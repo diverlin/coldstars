@@ -22,7 +22,7 @@
 #include <world/Sector.hpp>
 
 #include <descriptor/SectorDescriptor.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <world/starsystem.hpp>
 

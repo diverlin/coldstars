@@ -25,7 +25,7 @@
 #include <world/galaxy.hpp>
 
 #include <descriptor/GalaxyDescriptor.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace model {
 

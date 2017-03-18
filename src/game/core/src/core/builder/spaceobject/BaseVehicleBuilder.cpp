@@ -21,7 +21,7 @@
 
 #include <core/part/WeaponComplex.hpp>
 
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <core/item/equipment/ALL>
 
@@ -59,7 +59,7 @@
 
 #include <core/type/TechLevelTypes.hpp>
 
-#include <descriptor/DescriptorGenerator.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 //void BaseVehicle::_createSlots(Vehicle* vehicle)
 //{

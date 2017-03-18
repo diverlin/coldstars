@@ -39,7 +39,7 @@
 
 #include <common/constants.hpp>
 
-#include <descriptor/DescriptorManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 StoreBuilder::StoreBuilder()
 {}
