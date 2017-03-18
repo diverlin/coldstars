@@ -141,7 +141,7 @@ getNewStarsystem() {
 
 Container*
 getNewContainer() {
-    descriptor::Container* descr = descriptor::getNewContainer();
+    descriptor::Container* descr = descriptor::genContainer();
     model::Container* model = builder::Container::gen(/*descr*/);
     Container* container = new Container(model, descr);
     return container;

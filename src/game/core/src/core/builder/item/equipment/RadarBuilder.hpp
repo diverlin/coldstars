@@ -44,7 +44,6 @@ class Radar : public Equipment
 {
 public:
     static model::item::Radar* gen();
-//    static model::item::Radar* gen(const std::string&);
     static model::item::Radar* gen(descriptor::item::Radar*);
 
 private:

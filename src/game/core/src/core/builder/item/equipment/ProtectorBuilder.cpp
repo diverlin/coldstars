@@ -23,6 +23,7 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <ceti/Logger.hpp>
 
@@ -32,10 +33,14 @@ namespace item {
 model::item::Protector*
 Protector::gen()
 {
-    descriptor::item::Protector* descr = descriptor::Manager::get().randProtector();
-    model::item::Protector* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    descriptor::item::Protector* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
+        descr = descriptor::item::genProtector();
+    } else {
+        descr = descriptor::Manager::get().randProtector();
+    }
+    assert(descr);
+    return gen(descr);
 } 
 
 std::vector<model::item::Protector*>
@@ -47,14 +52,6 @@ Protector::gen(int num)
     }
     return result;
 }
-
-//model::item::Protector*
-//Protector::gen(const std::string& data)
-//{
-//    descriptor::item::Protector descr(data);
-//    assert(descr->descriptor() != descriptor::Type::PROTECTOR_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Protector*
 Protector::gen(descriptor::item::Protector* descr)

@@ -22,6 +22,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -29,19 +30,15 @@ namespace item {
 model::item::Drive*
 Drive::gen()
 {
-    descriptor::item::Drive* descr = descriptor::Manager::get().randDrive();
-    model::item::Drive* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    descriptor::item::Drive* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
+        descr = descriptor::item::genDrive();
+    } else {
+        descr = descriptor::Manager::get().randDrive();
+    }
+    assert(descr);
+    return gen(descr);
 }
-
-//model::item::Drive*
-//Drive::gen(const std::string& data)
-//{
-//    descriptor::item::Drive* descr(data);
-//    assert(descr.descriptor() != descriptor::Type::DRIVE_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Drive*
 Drive::gen(descriptor::item::Drive* descr)

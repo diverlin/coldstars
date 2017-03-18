@@ -44,7 +44,6 @@ class Lazer : public Equipment
 {
 public:
     static model::item::Lazer* gen();
-//    static model::item::Lazer* gen(const std::string&);
     static model::item::Lazer* gen(descriptor::item::Lazer*);
 
 private:

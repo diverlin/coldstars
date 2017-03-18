@@ -29,6 +29,8 @@
 #include <descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+#include <core/generator/DescriptorGenerator.hpp>
+
 //#include <client/effects/DistantNebulaEffect.hpp>
 //#include <client/effects/DistantStarEffect.hpp>
 
@@ -41,7 +43,13 @@ namespace builder {
 model::StarSystem*
 StarSystem::gen()
 {
-    descriptor::StarSystem* descr = descriptor::Manager::get().randStarSystem();
+    descriptor::StarSystem* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::STARSYSTEM)) {
+        descr = descriptor::genStarSystem();
+    } else {
+        descr = descriptor::Manager::get().randStarSystem();
+    }
+    assert(descr);
     return gen(descr);
 }
 

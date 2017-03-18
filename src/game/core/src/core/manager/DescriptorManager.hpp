@@ -73,6 +73,7 @@ public:
     void reg(Base*);
     Base* get(int_t) const;
     Base* rand(Type) const;
+    bool hasType(Type) const;
 
     Galaxy* randGalaxy() const;
     Sector* randSector() const;

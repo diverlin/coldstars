@@ -22,6 +22,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 namespace item {
@@ -29,17 +30,15 @@ namespace item {
 model::item::Lazer*
 Lazer::gen()
 {
-    descriptor::item::Lazer* descr = descriptor::Manager::get().randLazer();
+    descriptor::item::Lazer* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::LAZER_EQUIPMENT)) {
+        descr = descriptor::item::genLazer();
+    } else {
+        descr = descriptor::Manager::get().randLazer();
+    }
+    assert(descr);
     return gen(descr);
 }
-
-//model::item::Lazer*
-//Lazer::gen(const std::string& data)
-//{
-//    descriptor::item::Lazer descr(data);
-//    assert(descr->descriptor() != descriptor::Type::LAZER_EQUIPMENT);
-//    return gen(descr);
-//}
 
 model::item::Lazer*
 Lazer::gen(descriptor::item::Lazer* descr)

@@ -46,7 +46,6 @@ class Protector : public Equipment
 public:
     static model::item::Protector* gen();
     static std::vector<model::item::Protector*> gen(int);
-//    static model::item::Protector* gen(const std::string&);
     static model::item::Protector* gen(descriptor::item::Protector*);
 
 private:

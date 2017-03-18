@@ -21,6 +21,7 @@
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -41,13 +42,6 @@ Satellite::__genTemplate(int_t descriptor_id)
 model::Satellite*
 Satellite::gen(descriptor::Satellite* descr)
 {
-//    descriptor::Vehicle descriptor(descr->data());
-//    int_t id = NONE;
-//    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
-//        descriptor = descriptor::Manager::get().get(descr->descriptor());
-//        id = descr->objId();
-//    }
-
     model::Satellite* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
@@ -56,11 +50,14 @@ Satellite::gen(descriptor::Satellite* descr)
 model::Satellite*
 Satellite::gen()
 {
-    const auto& descr = descriptor::Manager::get().randSatellite();
-    model::Satellite* satellite = __genTemplate(descr->id());
-    __createInternals(satellite, descr);
-    
-    return satellite;
+    descriptor::Satellite* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::SATELLITE)) {
+        descr = descriptor::genSatellite();
+    } else {
+        descr = descriptor::Manager::get().randSatellite();
+    }
+    assert(descr);
+    return gen(descr);
 }
 
 void Satellite::__createInternals(model::Satellite* model, descriptor::Satellite* descr)

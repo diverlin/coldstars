@@ -21,6 +21,7 @@
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
@@ -38,7 +39,13 @@ Asteroid::__genTemplate()
 model::Asteroid*
 Asteroid::gen()
 {
-    const auto& descr = descriptor::Manager::get().randAsteroid();
+    descriptor::Asteroid* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::ASTEROID)) {
+        descr = descriptor::genAsteroid();
+    } else {
+        descr = descriptor::Manager::get().randAsteroid();
+    }
+    assert(descr);
     return gen(descr);
 }
 

@@ -21,6 +21,7 @@
 #include <core/spaceobject/Planet.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
@@ -38,7 +39,13 @@ Planet::__genTemplate()
 model::Planet*
 Planet::gen()
 {
-    const auto& descr = descriptor::Manager::get().randPlanet();
+    descriptor::Planet* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::PLANET)) {
+        descr = descriptor::genPlanet();
+    } else {
+        descr = descriptor::Manager::get().randPlanet();
+    }
+    assert(descr);
     return gen(descr);
 } 
 

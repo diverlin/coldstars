@@ -23,6 +23,8 @@
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+#include <core/generator/DescriptorGenerator.hpp>
+
 #include <core/descriptor/spaceobject/Ship.hpp>
 
 namespace builder {
@@ -38,28 +40,22 @@ Ship::__genTemplate(int_t descriptor_id)
 model::Ship*
 Ship::gen(descriptor::Ship* descr)
 {
-//    descriptor::Vehicle descriptor(descr->data());
-//    int_t id = NONE;
-//    if (descr->type() == (int_t)descriptor::Type::DESCRIPTOR) {
-//        descriptor = descriptor::Manager::get().get(descr->descriptor());
-//        id = descr->objId();
-//    }
-
     model::Ship* model = __genTemplate(descr->id());
     __createInternals(model, descr);
     return model;
 }
 
 model::Ship*
-Ship::gen(bool full_equiped)
+Ship::gen()
 {
-    const auto& descr = descriptor::Manager::get().randShip();
-    model::Ship* model = gen(descr);
-    if (full_equiped) {
-        assert(false);
-        //BaseVehicleBuilder::equip(ship);
+    descriptor::Ship* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::SHIP)) {
+        descr = descriptor::genShip();
+    } else {
+        descr = descriptor::Manager::get().randShip();
     }
-    return model;
+    assert(descr);
+    return gen(descr);
 }
 
 //model::Ship*
