@@ -59,13 +59,6 @@ glm::vec3 randDirection() {
     return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
 }
 
-// why we need this, it's ugly
-void resolveId(descriptor::Base* descr) {
-    if (descr->id() == NONE) {
-        descr->setId(descriptor::Manager::get().nextId());
-    }
-}
-
 } // namespace
 
 /* world */
@@ -1046,8 +1039,6 @@ genScaner(int race, int tech_level)
 
     // descriptor::item::Radar
     descr->setScan(scan);
-
-    resolveId(descr);
 
     descriptor::Manager::get().reg(descr);
 
