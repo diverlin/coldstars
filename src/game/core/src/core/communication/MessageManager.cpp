@@ -72,7 +72,7 @@ void MessageManager::process(const Message& message)
     switch(message.type_id) {
     /** CREATE */
     case TELEGRAM::CREATE_STARSYSTEM: {
-        builder::Starsystem::create(message.data);
+        builder::Starsystem::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_SHIP: {

@@ -56,6 +56,7 @@
 //#include <client/gui/GuiRadar.hpp>
 
 #include <descriptor/RaceDescriptors.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
@@ -101,18 +102,18 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
 
 namespace control {
 
-Starsystem::Starsystem(model::Starsystem* model, descriptor::StarSystem* descr)
+StarSystem::StarSystem(model::Starsystem* model)
     :
       Base(model)
     , m_model_starsystem(model)
-    , m_descriptor_starsystem(descr)
+    , m_descriptor_starsystem(descriptor::Manager::get().starSystem(model->descriptor()))
 { 
     //setStarSystem(this);
     
 //    m_counter++;
 }
 
-Starsystem::~Starsystem()
+StarSystem::~StarSystem()
 {    
     // effects
     //    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)   { delete distantNebulaEffect_vec[i]; }
@@ -124,14 +125,14 @@ Starsystem::~Starsystem()
 }      
 
 model::Star*
-Starsystem::star() const
+StarSystem::star() const
 {
     assert(!m_stars.empty());
     return m_stars[0]->model();
 }
 
 /* virtual */
-void Starsystem::putChildrenToGarbage() const
+void StarSystem::putChildrenToGarbage() const
 {    
     for(unsigned int i=0; i<m_stars.size(); i++)      { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
     for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
@@ -144,7 +145,7 @@ void Starsystem::putChildrenToGarbage() const
 }      
 
 model::Npc*
-Starsystem::freeLeaderByRaceId(race::Type race_id) const
+StarSystem::freeLeaderByRaceId(race::Type race_id) const
 {
     std::vector<model::Npc*> npcs;
     for (control::Vehicle* vehicle: m_vehicles) {
@@ -167,7 +168,7 @@ Starsystem::freeLeaderByRaceId(race::Type race_id) const
     return result;
 }
 
-void Starsystem::createGroupAndShareTask(model::Npc* npc_leader, Starsystem* target_starsystem, int num_max) const
+void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* target_starsystem, int num_max) const
 {    
     std::vector<model::Npc*> npcs;
     for (control::Vehicle* vehicle: m_vehicles) {
@@ -190,7 +191,7 @@ void Starsystem::createGroupAndShareTask(model::Npc* npc_leader, Starsystem* tar
     }
 }
 
-void Starsystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
 
@@ -213,26 +214,26 @@ void Starsystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& 
     m_vehicles.push_back(vehicle);
 }
 
-void Starsystem::add(model::Ship* ship, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::add(model::Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
     assert(false);
     //__addVehicleCommon(ship, position, dir);
 }
 
-void Starsystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
+void StarSystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
     assert(false);
     //    __addVehicleCommon(satellite, position, dir);
     //    satellite->BindParent(parent);
 }
 
-void Starsystem::add(model::SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::add(model::SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
     assert(false);
     //__addVehicleCommon(spacestation, position, dir);
 }
 
-void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
 {
     _model->setPlace(place::type::KOSMOS);
     _model->setStarSystem(model()->id());
@@ -249,19 +250,18 @@ void Starsystem::add(model::RocketBullet* _model, const glm::vec3& position, con
     m_bullets.push_back(rocket);
 }
 
-void Starsystem::add(model::Star* _model)
+void StarSystem::add(model::Star* _model)
 {
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
 
     assert(false);
-    descriptor::Star* _descr = nullptr;
-    control::Star* star = new control::Star(_model, _descr);
+    control::Star* star = new control::Star(_model);
     star->initialize();
     m_stars.push_back(star);
 }
 
-void Starsystem::add(model::Planet* _model, const model::SpaceObject* parent)
+void StarSystem::add(model::Planet* _model, const model::SpaceObject* parent)
 {
     if (!parent) {
         parent = star();
@@ -275,14 +275,13 @@ void Starsystem::add(model::Planet* _model, const model::SpaceObject* parent)
     _model->setRadiusB(_model->radiusB() * (m_planets.size() + 2));
 
     assert(false);
-    descriptor::Planet* _descr = nullptr;
-    control::Planet* planet = new control::Planet(_model, _descr);
+    control::Planet* planet = new control::Planet(_model);
     planet->initialize();
     m_planets.push_back(planet);
 }
 
 
-void Starsystem::add(model::Asteroid* _model, const model::SpaceObject* parent, int it)
+void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, int it)
 {
     //asteroid->bindParent(parent, it);
     
@@ -299,7 +298,7 @@ void Starsystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
     m_asteroids.push_back(asteroid);
 }
 
-void Starsystem::add(model::Container* _model, const glm::vec3& center)
+void StarSystem::add(model::Container* _model, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
 
@@ -321,7 +320,7 @@ void Starsystem::add(model::Container* _model, const glm::vec3& center)
     m_containers.push_back(container);
 }
 
-void Starsystem::add(model::BlackHole* _model, const glm::vec3& center)
+void StarSystem::add(model::BlackHole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
@@ -335,7 +334,7 @@ void Starsystem::add(model::BlackHole* _model, const glm::vec3& center)
     m_blackholes.push_back(blackhole);
 }    
 
-void Starsystem::add(Explosion* explosion, const glm::vec3& center)
+void StarSystem::add(Explosion* explosion, const glm::vec3& center)
 {
     assert(false);
     //    for (Vehicle* vehicle: m_vehicles) {
@@ -345,20 +344,20 @@ void Starsystem::add(Explosion* explosion, const glm::vec3& center)
     //    }
 }
 
-void Starsystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
+void StarSystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
 { 
     //    shockwave->setCenter(center);
     //    effect_SHOCKWAVE_vec.push_back(shockwave);
 }
 
-void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
+void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
 { 
     //    float radius_damage = explosion->GetRadius();
     //    float damage = 0;
     //    Add(explosion, center, damage, radius_damage);
 }
 
-void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
+void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
 { 
     //    explosion->setCenter(center);
     //    effect_PARTICLESYSTEM_vec.push_back(explosion);
@@ -386,7 +385,7 @@ void Starsystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
 
 // poor                
 model::Planet*
-Starsystem::closestInhabitedPlanet(const glm::vec2& _pos) const
+StarSystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 {        
     control::Planet* requested_planet = nullptr;
     
@@ -415,7 +414,7 @@ Starsystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 }
 
 model::Planet*
-Starsystem::randomInhabitedPlanet() const
+StarSystem::randomInhabitedPlanet() const
 {
     control::Planet* requested_planet = nullptr;
 
@@ -434,19 +433,19 @@ Starsystem::randomInhabitedPlanet() const
 }
 
 model::Planet*
-Starsystem::randomPlanet() const
+StarSystem::randomPlanet() const
 {
     return meti::getRand(m_planets)->model();
 }
 
 control::Vehicle*
-Starsystem::randomVehicle() const
+StarSystem::randomVehicle() const
 {
     return meti::getRand(m_vehicles);
 }
 
 control::Vehicle*
-Starsystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
+StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -467,7 +466,7 @@ Starsystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
 }
 
 control::Vehicle*
-Starsystem::randVehicleByNpcRaceId(race::Type race_id) const
+StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -489,7 +488,7 @@ Starsystem::randVehicleByNpcRaceId(race::Type race_id) const
 }
 
 control::Vehicle*
-Starsystem::randomVehicle(const std::vector<race::Type>& races) const
+StarSystem::randomVehicle(const std::vector<race::Type>& races) const
 {
     std::vector<control::Vehicle*> vehicles;
     control::Vehicle* result = nullptr;
@@ -511,7 +510,7 @@ Starsystem::randomVehicle(const std::vector<race::Type>& races) const
 }
 
 
-void Starsystem::__updateStates()
+void StarSystem::__updateStates()
 {
     if (m_containers.size() < 100) {
         m_asteroid_manager.update(this);
@@ -617,7 +616,7 @@ void Starsystem::__updateStates()
     }
 }
 
-float Starsystem::calcResultGravityForce(const glm::vec3& center, const glm::vec3& orient, float mass) const
+float StarSystem::calcResultGravityForce(const glm::vec3& center, const glm::vec3& orient, float mass) const
 {
     float rate = 1;
     for (unsigned int i=0; i<m_stars.size(); i++)
@@ -652,7 +651,7 @@ float Starsystem::calcResultGravityForce(const glm::vec3& center, const glm::vec
 }
 
 
-void Starsystem::update(int time)
+void StarSystem::update(int time)
 {                
     bool detalied_simulation = true;
 
@@ -689,7 +688,7 @@ void Starsystem::update(int time)
     }
 }
 
-void Starsystem::__rocketCollision_s(bool show_effect)
+void StarSystem::__rocketCollision_s(bool show_effect)
 {
     bool collide = false;
     for (unsigned int ri = 0; ri < m_bullets.size(); ri++)
@@ -742,7 +741,7 @@ void Starsystem::__rocketCollision_s(bool show_effect)
 
 
 
-void Starsystem::__asteroidCollision_s(bool show_effect)
+void StarSystem::__asteroidCollision_s(bool show_effect)
 {
     bool collide = false;
     for(auto asteroid: m_asteroids) {
@@ -783,7 +782,7 @@ void Starsystem::__asteroidCollision_s(bool show_effect)
     }
 }
 
-void Starsystem::__externalForcesAffection_s(bool detalied_simulation)
+void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
 {
     //for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
     //{
@@ -797,7 +796,7 @@ void Starsystem::__externalForcesAffection_s(bool detalied_simulation)
 
 }
 
-void Starsystem::__updateEntities_s(int time, bool show_effect)
+void StarSystem::__updateEntities_s(int time, bool show_effect)
 {
     loadEntitiesResource(); // hack for speed run
 
@@ -819,7 +818,7 @@ void Starsystem::__updateEntities_s(int time, bool show_effect)
     //    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); }
 }
 
-void Starsystem::loadEntitiesResource()
+void StarSystem::loadEntitiesResource()
 {
     // alpitodorender
     //    for (unsigned int i=0; i<STAR_vec.size(); i++)      { STAR_vec[i]->ValidateResources();  }
@@ -841,7 +840,7 @@ void Starsystem::loadEntitiesResource()
 
 }
 
-void Starsystem::__updateInSpaceInStatic_s()
+void StarSystem::__updateInSpaceInStatic_s()
 {
     __updateStates();
 
@@ -859,7 +858,7 @@ void Starsystem::__updateInSpaceInStatic_s()
     //garbage_effects.clear();
 }      
 
-void Starsystem::findRenderVisibleEntities_c(Player* player)
+void StarSystem::findRenderVisibleEntities_c(Player* player)
 {
     //player->ClearVisibleEntities();
 
@@ -878,7 +877,7 @@ void Starsystem::findRenderVisibleEntities_c(Player* player)
     //    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->addIfVisible(text_DAMAGE_vec[i]); }
 }
 
-void Starsystem::findRadarVisibleEntities_c(Player* player)
+void StarSystem::findRadarVisibleEntities_c(Player* player)
 {    
     //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(gui::type::GUI_RADAR);
     //    const Vehicle& vehicle = *player->GetNpc()->vehicle();
@@ -928,7 +927,7 @@ void Starsystem::findRadarVisibleEntities_c(Player* player)
 //    }
 //}
 
-void Starsystem::__shipManager_s(unsigned int num)
+void StarSystem::__shipManager_s(unsigned int num)
 {
     while (m_vehicles.size() < num)
     {
@@ -959,7 +958,7 @@ void Starsystem::__shipManager_s(unsigned int num)
 }
 
 
-void Starsystem::__manageUnavaliableObjects_s()
+void StarSystem::__manageUnavaliableObjects_s()
 {               
     for (std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
@@ -970,7 +969,7 @@ void Starsystem::__manageUnavaliableObjects_s()
     }
 }
 
-void Starsystem::__manageDeadObjects_s()
+void StarSystem::__manageDeadObjects_s()
 {      
     for(std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
@@ -1057,7 +1056,7 @@ void Starsystem::__manageDeadObjects_s()
 //}
 //}        
 
-void Starsystem::bombExplosionEvent(control::Container* container, bool show_effect)
+void StarSystem::bombExplosionEvent(control::Container* container, bool show_effect)
 {
     assert(false);
 //    float radius = container->itemSlot()->item()->radius();
@@ -1068,7 +1067,7 @@ void Starsystem::bombExplosionEvent(control::Container* container, bool show_eff
     //Add(explosion, center, radius, damage);
 }
 
-void Starsystem::starSparkEvent(float radius) const
+void StarSystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         assert(false);
@@ -1080,7 +1079,7 @@ void Starsystem::starSparkEvent(float radius) const
     }
 }
 
-void Starsystem::__damageEventInsideCircle(const glm::vec3& position, float radius, int damage, bool show_effect)
+void StarSystem::__damageEventInsideCircle(const glm::vec3& position, float radius, int damage, bool show_effect)
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         assert(false);
@@ -1103,7 +1102,7 @@ void Starsystem::__damageEventInsideCircle(const glm::vec3& position, float radi
 
 }
 
-bool Starsystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
+bool StarSystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
 {
     //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
     //    {
@@ -1118,7 +1117,7 @@ bool Starsystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
 
 
 /*virtual */
-void Starsystem::_postDeathUniqueEvent(bool)
+void StarSystem::_postDeathUniqueEvent(bool)
 {}
 
 //void Starsystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

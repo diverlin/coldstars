@@ -67,7 +67,7 @@ namespace control {
 class Planet : public Planetoid
 {
 public:
-    Planet(model::Planet*, descriptor::Planet*);
+    Planet(model::Planet*);
     virtual ~Planet();
 
     void BindLand(Land*);

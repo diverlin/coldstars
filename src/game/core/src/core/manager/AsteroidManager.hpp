@@ -20,7 +20,7 @@
 #pragma once
 
 namespace control {
-class Starsystem;
+class StarSystem;
 } // namespace control
 
 class AsteroidManager 
@@ -34,7 +34,7 @@ public:
         m_delay = delay;
     }
 
-    void update(control::Starsystem*);
+    void update(control::StarSystem*);
 
 private:
     unsigned int m_asteroidsNum = 30;

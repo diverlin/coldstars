@@ -18,15 +18,13 @@
 
 #include "Star.hpp"
 
-//#include <ceti/StringUtils.hpp>
 #include <core/common/common.hpp>
 #include <core/common/constants.hpp>
 #include <core/common/Global.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/manager/EntityManager.hpp>
 
-//#include <jeti/Material.hpp>
-//#include <glm/gtx/transform.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -39,9 +37,7 @@
 namespace model {
 
 Star::Star()
-{
-//    setType(entity::type::STAR);
-}
+{}
 
 Star::Star(const std::string& data)
 {
@@ -59,11 +55,11 @@ Star::data() const
 
 namespace control {
 
-Star::Star(model::Star* model, descriptor::Star* descr)
+Star::Star(model::Star* model)
     :
-      Planetoid(model, descr)
+      Planetoid(model, descriptor::Manager::get().star(model->descriptor()))
     , m_model_star(model)
-    , m_descriptor_star(descr)
+    , m_descriptor_star(descriptor::Manager::get().star(model->descriptor()))
 {
 //    setId(id);
 //    setTypeId(entity::Type::STAR);

@@ -39,14 +39,14 @@
 namespace builder {
 
 model::Starsystem*
-Starsystem::create()
+Starsystem::gen()
 {
     descriptor::StarSystem* descr = descriptor::Manager::get().randStarSystem();
-    return create(descr);
+    return gen(descr);
 }
 
 model::Starsystem*
-Starsystem::create(descriptor::StarSystem* descr)
+Starsystem::gen(descriptor::StarSystem* descr)
 {
     model::Starsystem* model = new model::Starsystem;
     assert(model);
@@ -56,7 +56,7 @@ Starsystem::create(descriptor::StarSystem* descr)
 } 
 
 model::Starsystem*
-Starsystem::create(const std::string& data)
+Starsystem::gen(const std::string& data)
 {
     //return gen(descriptor::Base(data));
 }

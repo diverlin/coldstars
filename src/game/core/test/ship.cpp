@@ -82,7 +82,7 @@ TEST(ship, equip)
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
-    control::Starsystem* starsystem = control::getNewStarsystem();
+    control::StarSystem* starsystem = control::getNewStarsystem();
     test::Ship ship;
 
     /* equip ship */
@@ -112,7 +112,7 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_ship_shoot)
 {
     /* create objects */
-    control::Starsystem* starsystem = control::getNewStarsystem();
+    control::StarSystem* starsystem = control::getNewStarsystem();
     test::Ship ship1;
     test::Ship ship2;
 

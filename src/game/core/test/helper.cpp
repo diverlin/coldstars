@@ -19,10 +19,13 @@
 #include "helper.hpp"
 
 #include <core/generator/DescriptorGenerator.hpp>
-#include <core/builder/spaceobject/ShipBuilder.hpp>
-#include <core/spaceobject/Ship.hpp>
 
-#include <core/model/spaceobject/Ship.hpp>
+#include <core/descriptor/StarsystemDescriptor.hpp>
+#include <core/world/starsystem.hpp>
+
+#include <core/spaceobject/ALL>
+#include <core/builder/spaceobject/ALL>
+#include <core/model/spaceobject/ALL>
 
 // Bak
 #include <core/builder/item/equipment/BakBuilder.hpp>
@@ -81,6 +84,50 @@
 #include <gtest/gtest.h>
 
 namespace test {
+
+
+StarSystem::StarSystem() {
+    descriptor::genStarSystem();
+    model::StarSystem* model = builder::StarSystem::gen();
+    m_control = new control::StarSystem(model);
+}
+StarSystem::~StarSystem() {
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::StarSystem* StarSystem::descriptor() const { return m_control->descriptor(); }
+model::StarSystem* StarSystem::model() const { return m_control->model(); }
+
+
+
+Star::Star() {
+    descriptor::genStar();
+    model::Star* model = builder::Star::gen();
+    m_control = new control::Star(model);
+}
+Star::~Star() {
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::Star* Star::descriptor() const { return m_control->descriptor(); }
+model::Star* Star::model() const { return m_control->model(); }
+
+
+Planet::Planet() {
+    descriptor::genPlanet();
+    model::Planet* model = builder::Planet::gen();
+    m_control = new control::Planet(model);
+}
+Planet::~Planet() {
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::Planet* Planet::descriptor() const { return m_control->descriptor(); }
+model::Planet* Planet::model() const { return m_control->model(); }
+
 
 Ship::Ship() {
     descriptor::genShip();

@@ -22,22 +22,22 @@
 
 #include <string>
 
-namespace model {
-class Starsystem;
-} // namespace model
-
 namespace descriptor {
 class StarSystem;
 } // descriptor
+
+namespace model {
+class Starsystem;
+} // namespace model
 
 namespace builder {
 
 class Starsystem
 {
 public:
-    static model::Starsystem* create();
-    static model::Starsystem* create(descriptor::StarSystem*);
-    static model::Starsystem* create(const std::string&);
+    static model::Starsystem* gen();
+    static model::Starsystem* gen(descriptor::StarSystem*);
+    static model::Starsystem* gen(const std::string&);
 
 private:
     Starsystem()=delete;

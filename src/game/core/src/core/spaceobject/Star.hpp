@@ -60,7 +60,7 @@ namespace control {
 class Star : public Planetoid
 {
 public:
-    Star(model::Star*, descriptor::Star*);
+    Star(model::Star*);
     virtual ~Star();
 
     void hit(int) {}

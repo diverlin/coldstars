@@ -31,6 +31,8 @@
 
 #include <core/manager/EntityManager.hpp>
 
+#include <core/manager/DescriptorManager.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
@@ -55,11 +57,11 @@ Planet::data() const
 
 namespace control {
 
-Planet::Planet(model::Planet* model, descriptor::Planet* descr)
+Planet::Planet(model::Planet* model)
     :
-      Planetoid(model, descr)
+      Planetoid(model, descriptor::Manager::get().planet(model->descriptor()))
     , m_model_planet(model)
-    , m_descriptor_planet(descr)
+    , m_descriptor_planet(descriptor::Manager::get().planet(model->descriptor()))
 {}
 
 Planet::~Planet()

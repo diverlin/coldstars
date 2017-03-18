@@ -177,8 +177,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_race_id;
         ar & m_conqueror_race_id;
@@ -200,15 +199,15 @@ private:
 
 namespace control {
 
-class Starsystem : public Base
+class StarSystem : public Base
 {
     //    using Stars = std::vector<Star*>;
     //    using Planets = std::vector<Planet*>;
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    Starsystem(model::Starsystem*, descriptor::StarSystem*);
-    ~Starsystem();
+    StarSystem(model::Starsystem*);
+    ~StarSystem();
 
     virtual void putChildrenToGarbage() const;
 
@@ -233,7 +232,7 @@ public:
     HyperSpace& hyperSpace() { return m_hyperspace; };
 
     model::Npc* freeLeaderByRaceId(race::Type) const;
-    void createGroupAndShareTask(model::Npc*, Starsystem*, int) const;
+    void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
 
     //// TRANSITION
     void add(model::Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
