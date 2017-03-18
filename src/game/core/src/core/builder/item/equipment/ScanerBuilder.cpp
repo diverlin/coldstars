@@ -41,7 +41,7 @@ Scaner::gen()
 //Scaner::gen(const std::string& data)
 //{
 //    descriptor::item::Scaner descr(data);
-//    assert(descr->descriptor() != descriptor::type::SCANER_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::SCANER_EQUIPMENT);
 //    return gen(descr);
 //}
 

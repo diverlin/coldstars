@@ -37,7 +37,7 @@ Lazer::gen()
 //Lazer::gen(const std::string& data)
 //{
 //    descriptor::item::Lazer descr(data);
-//    assert(descr->descriptor() != descriptor::type::LAZER_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::LAZER_EQUIPMENT);
 //    return gen(descr);
 //}
 

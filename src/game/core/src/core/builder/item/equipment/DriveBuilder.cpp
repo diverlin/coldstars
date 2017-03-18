@@ -39,7 +39,7 @@ Drive::gen()
 //Drive::gen(const std::string& data)
 //{
 //    descriptor::item::Drive* descr(data);
-//    assert(descr.descriptor() != descriptor::type::DRIVE_EQUIPMENT);
+//    assert(descr.descriptor() != descriptor::Type::DRIVE_EQUIPMENT);
 //    return gen(descr);
 //}
 

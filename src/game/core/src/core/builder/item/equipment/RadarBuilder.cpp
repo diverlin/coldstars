@@ -41,7 +41,7 @@ Radar::gen()
 //Radar::gen(const std::string& data)
 //{
 //    descriptor::item::Radar descr(data);
-//    assert(descr->descriptor() != descriptor::type::RADAR_EQUIPMENT);
+//    assert(descr->descriptor() != descriptor::Type::RADAR_EQUIPMENT);
 //    return gen(descr);
 //}
 
