@@ -173,8 +173,8 @@ TEST(clone, sector)
 TEST(clone, starsystem)
 {
     const auto& descriptor = descriptor::Manager::get().randStarSystem();
-    auto s1 = builder::Starsystem::gen(descriptor);
-    auto s2 = builder::Starsystem::gen(descriptor);
+    auto s1 = builder::StarSystem::gen(descriptor);
+    auto s2 = builder::StarSystem::gen(descriptor);
     EXPECT_EQ(*s1, *s2);
 }
 

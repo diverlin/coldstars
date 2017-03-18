@@ -27,27 +27,27 @@ class StarSystem;
 } // descriptor
 
 namespace model {
-class Starsystem;
+class StarSystem;
 } // namespace model
 
 namespace builder {
 
-class Starsystem
+class StarSystem
 {
 public:
-    static model::Starsystem* gen();
-    static model::Starsystem* gen(descriptor::StarSystem*);
-    static model::Starsystem* gen(const std::string&);
+    static model::StarSystem* gen();
+    static model::StarSystem* gen(descriptor::StarSystem*);
+    static model::StarSystem* gen(const std::string&);
 
 private:
-    Starsystem()=delete;
-    ~Starsystem()=delete;
+    StarSystem()=delete;
+    ~StarSystem()=delete;
 
-    static void __createInternals(model::Starsystem*, descriptor::StarSystem*);
+    static void __createInternals(model::StarSystem*, descriptor::StarSystem*);
 
-    static void __createBackground(model::Starsystem*, int, int, int);
-    static void __createStar(model::Starsystem*);
-    static void __createPlanets(model::Starsystem*, int);
+    static void __createBackground(model::StarSystem*, int, int, int);
+    static void __createStar(model::StarSystem*);
+    static void __createPlanets(model::StarSystem*, int);
 }; 
 
 } // namespace builder

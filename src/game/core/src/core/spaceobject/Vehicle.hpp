@@ -43,7 +43,7 @@ class Vehicle;
 namespace model {
 class Vehicle;
 class Container;
-class Starsystem;
+class StarSystem;
 class Item;
 } // namespace model
 
@@ -205,7 +205,7 @@ protected:
     friend class ItemSlot;
 public:
 
-    void HyperJumpEvent(model::Starsystem*);
+    void HyperJumpEvent(model::StarSystem*);
     void DockingEvent();
     void LaunchingEvent();
 
@@ -219,7 +219,7 @@ public:
     //        void RenderRadarRange();
     //        void RenderGrappleRange();
 
-    bool isAbleToJumpTo(model::Starsystem*) const;
+    bool isAbleToJumpTo(model::StarSystem*) const;
 
     bool isArmorFull() const;
     int armorMiss() const;

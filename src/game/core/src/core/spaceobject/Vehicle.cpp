@@ -846,7 +846,7 @@ void Vehicle::UpdateSpecialAction()
 }
 
 //// ******** dock/LAUNCHING ********
-void Vehicle::HyperJumpEvent(model::Starsystem* starsystem)
+void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
@@ -1462,7 +1462,7 @@ void Vehicle::_updateArtefactInfluence()
 //    }
 //}
 
-bool Vehicle::isAbleToJumpTo(model::Starsystem* target_starsystem) const
+bool Vehicle::isAbleToJumpTo(model::StarSystem* target_starsystem) const
 {
     assert(false);
 //    float dist = meti::distance(starsystem()->position(), target_starsystem->position());

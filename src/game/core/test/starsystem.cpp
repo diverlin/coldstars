@@ -49,12 +49,12 @@ TEST(starsystem, add_objects)
     EXPECT_EQ(starsystem.control()->vehicles().size(), 0);
 
     /* add objects */
-    starsystem.control()->add(star);
-    starsystem.control()->add(planet);
+    starsystem.control()->add(star.control());
+    starsystem.control()->add(planet.control());
 
     glm::vec3 pos(0.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    starsystem.control()->add(ship, pos, dir);
+    starsystem.control()->add(ship.control(), pos, dir);
 
     /* post-add check */
     EXPECT_EQ(starsystem.control()->stars().size(), 1);
@@ -68,9 +68,4 @@ TEST(starsystem, add_objects)
 //    //EXPECT_EQ(vehicle, ship);
 //    EXPECT_EQ(vehicle->position(), pos);
 //    EXPECT_EQ(vehicle->direction(), dir);
-
-    // clean
-    delete star;
-    delete planet;
-    delete ship;
 }

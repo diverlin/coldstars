@@ -160,6 +160,8 @@ public:
     //        void RenderInfo(const glm::vec2&);
     //        void virtual UpdateInfo() {}
 
+    model::SpaceObject* model() const { return m_model_spaceobject; }
+
 private:
     Starsystem* m_starsystem = nullptr;
     model::SpaceObject* m_parent = nullptr;
@@ -171,7 +173,6 @@ protected:
     model::SpaceObject* m_model_spaceobject = nullptr;
     descriptor::SpaceObject* m_descriptor_spaceobject = nullptr;
 
-    model::SpaceObject* model() const { return m_model_spaceobject; }
     descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
 
     void _addMass(int d_mass) { m_mass += d_mass; }

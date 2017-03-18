@@ -24,7 +24,7 @@
 #include <vector>
 
 namespace model {
-class Starsystem;
+class StarSystem;
 } // namespace model
 
 namespace control {
@@ -86,7 +86,7 @@ public:
     void FindEchievableStarSystems(Galaxy*);
     Container* GetClosestPickableContainer() const;
     Container* GetRandomPickableContainer() const;
-    model::Starsystem* GetClosestStarSystem(int) const;
+    model::StarSystem* GetClosestStarSystem(int) const;
     Vehicle* GetClosestVisibleVehicle(const std::vector<race::Type>&) const;
     Vehicle* GetRandVisibleVehicle(const std::vector<race::Type>&) const;
 
@@ -100,7 +100,7 @@ public:
 private:
     control::Npc* npc_owner;
 
-    std::vector< Pair<model::Starsystem*> > visible_STARSYSTEM_pair_vec;
+    std::vector< Pair<model::StarSystem*> > visible_STARSYSTEM_pair_vec;
     std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;
     std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec;
     std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;

@@ -28,7 +28,7 @@
 class Player;
 
 namespace model {
-class Starsystem;
+class StarSystem;
 class Ship;
 class Container;
 class SpaceObject;
@@ -55,7 +55,7 @@ class Radar;
 class Rocket;
 } // namespace item
 
-Starsystem* getStarsystem(int_t id);
+StarSystem* getStarsystem(int_t id);
 Ship* getShip(int_t id);
 Container* getContainer(int_t id);
 SpaceObject* getSpaceObject(int_t id);

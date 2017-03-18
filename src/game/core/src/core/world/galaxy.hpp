@@ -27,7 +27,7 @@
 
 namespace  model {
 class Sector;
-class Starsystem;
+class StarSystem;
 } // namespace model
 
 namespace  control {
@@ -74,7 +74,7 @@ public:
     Galaxy(model::Galaxy*);
     ~Galaxy();
 
-    model::Starsystem* activeStarsystem() const;
+    model::StarSystem* activeStarsystem() const;
 
     virtual void putChildrenToGarbage() const;
 

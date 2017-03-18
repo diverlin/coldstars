@@ -94,7 +94,7 @@ TEST(ship, drop_item_to_space)
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     EXPECT_EQ(ship.model()->place(), place::type::NONE);
-    starsystem->add(ship.model(), pos, dir);
+    starsystem->add(ship.control(), pos, dir);
     EXPECT_EQ(ship.model()->place(), place::type::KOSMOS);
 
     /* drop item to space */
@@ -119,8 +119,8 @@ TEST(ship, base_ship_shoot)
     float distance = 10.0f;
 
     /* add objects */
-    starsystem->add(ship1.model(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(ship2.model(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship1.control(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2.control(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
     ship1.control()->prepareWeapons();

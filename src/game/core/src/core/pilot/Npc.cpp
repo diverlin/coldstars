@@ -81,7 +81,7 @@ Npc::Npc(int id, entity::Type subtype_id, entity::Type subsubtype_id)
 Npc::~Npc() 
 {}  
 
-model::Starsystem*
+model::StarSystem*
 Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
 
 void Npc::cloneMacroTaskFrom(model::Npc* npc)
@@ -234,7 +234,7 @@ Npc::planetForDocking()
     //return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
 }
 
-model::Starsystem*
+model::StarSystem*
 Npc::closestStarSystem(int requested_condition_id)
 {
     assert(false);

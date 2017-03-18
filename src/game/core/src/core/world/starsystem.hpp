@@ -126,16 +126,16 @@ private:
 namespace model {
 
 //# TODO:: remove inherits from SpaceObject, do the same for Sector and Galaxy
-class Starsystem : public Base
+class StarSystem : public Base
 {
 public:
-    Starsystem();
-    ~Starsystem() = default;
-    Starsystem(const std::string& data);
+    StarSystem();
+    ~StarSystem() = default;
+    StarSystem(const std::string& data);
     std::string data() const;
 
-    bool operator==(const Starsystem& rhs) const;
-    bool operator!=(const Starsystem& rhs) const;
+    bool operator==(const StarSystem& rhs) const;
+    bool operator!=(const StarSystem& rhs) const;
 
     void setSector(int_t sector)  { m_sector = sector; }
 
@@ -206,7 +206,7 @@ class StarSystem : public Base
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    StarSystem(model::Starsystem*);
+    StarSystem(model::StarSystem*);
     ~StarSystem();
 
     virtual void putChildrenToGarbage() const;
@@ -221,7 +221,7 @@ public:
     int conditionId()     const { return m_condition_id; }
     race::Type raceId()          const { return m_race_id; }
     race::Type conquerorRaceId() const { return m_conqueror_race_id; }
-    model::Star* star() const;
+    Star* star() const;
     Sector* sector()      const { return m_sector; }
     //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
     unsigned int asteroidNum()     const { return m_asteroids.size(); }
@@ -235,13 +235,13 @@ public:
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
 
     //// TRANSITION
-    void add(model::Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-    void add(model::SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-    void add(model::Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
+    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
     void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
 
-    void add(model::Star*);
-    void add(model::Planet*, const model::SpaceObject* parent = nullptr);
+    void add(Star*);
+    void add(Planet*, const SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
     void add(model::BlackHole*, const glm::vec3&);
@@ -297,11 +297,11 @@ public:
     control::Vehicle* randomVehicle(const std::vector<race::Type>&) const;
     //
 
-    model::Starsystem* model() const { return m_model_starsystem; }
+    model::StarSystem* model() const { return m_model_starsystem; }
     descriptor::StarSystem* descriptor() const { return m_descriptor_starsystem; }
 
 private:
-    model::Starsystem* m_model_starsystem = nullptr;
+    model::StarSystem* m_model_starsystem = nullptr;
     descriptor::StarSystem* m_descriptor_starsystem = nullptr;
 
     race::Type m_race_id = race::Type::R0;

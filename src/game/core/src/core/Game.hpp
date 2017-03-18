@@ -20,7 +20,7 @@
 
 namespace model {
 
-class Starsystem;
+class StarSystem;
 
 class World {
 public:
@@ -28,7 +28,7 @@ public:
     ~World();
     bool operator==(const World& rhs) const;
 
-    model::Starsystem* activeStarsystem() const;
+    model::StarSystem* activeStarsystem() const;
 
     bool run() const;
     void update();

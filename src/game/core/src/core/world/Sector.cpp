@@ -80,7 +80,7 @@ Sector::Sector(model::Sector* model, descriptor::Sector* descr)
 Sector::~Sector()
 {}
 
-model::Starsystem*
+model::StarSystem*
 Sector::activeStarsystem() const {
     assert(false);
 //    assert(m_starsystems.size() != 0);
@@ -96,7 +96,7 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-void Sector::add(model::Starsystem* _model, const glm::vec3& center)
+void Sector::add(model::StarSystem* _model, const glm::vec3& center)
 { 
     _model->setSector(model()->id());
 assert(false);
@@ -106,10 +106,10 @@ assert(false);
     m_starsystems.push_back(starsystem);
 }
 
-model::Starsystem*
+model::StarSystem*
 Sector::randomStarsystem(int condition_id)
 {
-    model::Starsystem* result = nullptr;
+    model::StarSystem* result = nullptr;
     assert(false);
 //    if (condition_id == NONE) {
 //        result = meti::getRand(m_starsystems)->model();
@@ -130,11 +130,11 @@ Sector::randomStarsystem(int condition_id)
 
 
 
-model::Starsystem*
-Sector::closestStarsystemTo(model::Starsystem* toStarsystem, int condition_id)
+model::StarSystem*
+Sector::closestStarsystemTo(model::StarSystem* toStarsystem, int condition_id)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
-    model::Starsystem* result = nullptr;
+    model::StarSystem* result = nullptr;
     assert(false);
 //    for (auto starsystem: m_starsystems) {
 //        if (starsystem->id() != toStarsystem->id()) {
