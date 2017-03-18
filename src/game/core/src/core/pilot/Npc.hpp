@@ -33,7 +33,7 @@ class BaseAiModel;
 namespace model {
 class Vehicle;
 class Planet;
-class Starsystem;
+class StarSystem;
 } // namespace model
 
 class Player;
@@ -117,7 +117,7 @@ public:
 
     StateMachine& stateMachine() { return m_stateMachine; }
 
-    model::Starsystem* starsystem() const;
+    model::StarSystem* starsystem() const;
 
     void increaseCredits(unsigned long int credits) { m_credits += credits; }
     bool withdrawCredits(unsigned long int);
@@ -140,7 +140,7 @@ public:
     //// scanning
 
     model::Planet* planetForDocking();
-    model::Starsystem* closestStarSystem(int);
+    model::StarSystem* closestStarSystem(int);
 
     void renderInfo(const glm::vec2&);
 

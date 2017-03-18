@@ -22,6 +22,7 @@
 
 #include <core/descriptor/StarsystemDescriptor.hpp>
 #include <core/world/starsystem.hpp>
+#include <core/builder/world/StarSystemBuilder.hpp>
 
 #include <core/spaceobject/ALL>
 #include <core/builder/spaceobject/ALL>

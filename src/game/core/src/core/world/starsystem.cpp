@@ -66,7 +66,7 @@
 
 namespace model {
 
-Starsystem::Starsystem()
+StarSystem::StarSystem()
 {
 //    setType(entity::type::STARSYSTEM);
 
@@ -75,24 +75,24 @@ Starsystem::Starsystem()
     m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
 
-Starsystem::Starsystem(const std::string& data)
+StarSystem::StarSystem(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Starsystem::data() const
+StarSystem::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-bool Starsystem::operator==(const Starsystem& rhs) const
+bool StarSystem::operator==(const StarSystem& rhs) const
 {
     assert(false);
     return true;
 }
 
-bool Starsystem::operator!=(const Starsystem& rhs) const
+bool StarSystem::operator!=(const StarSystem& rhs) const
 {
     return !(*this == rhs);
 }
@@ -102,7 +102,7 @@ bool Starsystem::operator!=(const Starsystem& rhs) const
 
 namespace control {
 
-StarSystem::StarSystem(model::Starsystem* model)
+StarSystem::StarSystem(model::StarSystem* model)
     :
       Base(model)
     , m_model_starsystem(model)
@@ -124,11 +124,11 @@ StarSystem::~StarSystem()
     //    for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; }
 }      
 
-model::Star*
+Star*
 StarSystem::star() const
 {
     assert(!m_stars.empty());
-    return m_stars[0]->model();
+    return m_stars[0];
 }
 
 /* virtual */
@@ -214,23 +214,21 @@ void StarSystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& 
     m_vehicles.push_back(vehicle);
 }
 
-void StarSystem::add(model::Ship* ship, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
-    assert(false);
-    //__addVehicleCommon(ship, position, dir);
+    __addVehicleCommon(ship, position, dir);
 }
 
-void StarSystem::add(model::Satellite* model, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
+void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
+    __addVehicleCommon(satellite, position, dir);
     assert(false);
-    //    __addVehicleCommon(satellite, position, dir);
-    //    satellite->BindParent(parent);
+    //satellite->BindParent(parent);
 }
 
-void StarSystem::add(model::SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
-    assert(false);
-    //__addVehicleCommon(spacestation, position, dir);
+    __addVehicleCommon(spacestation, position, dir);
 }
 
 void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
@@ -250,32 +248,28 @@ void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, con
     m_bullets.push_back(rocket);
 }
 
-void StarSystem::add(model::Star* _model)
+void StarSystem::add(Star* star)
 {
-    _model->setStarSystem(model()->id());
-    _model->setPlace(place::type::KOSMOS);
+    star->model()->setStarSystem(model()->id());
+    star->model()->setPlace(place::type::KOSMOS);
 
-    assert(false);
-    control::Star* star = new control::Star(_model);
     star->initialize();
     m_stars.push_back(star);
 }
 
-void StarSystem::add(model::Planet* _model, const model::SpaceObject* parent)
+void StarSystem::add(Planet* planet, const SpaceObject* parent)
 {
     if (!parent) {
         parent = star();
     }
 
-    _model->setParent(parent->id());
-    _model->setStarSystem(model()->id());
-    _model->setPlace(place::type::KOSMOS);
+    planet->model()->setParent(parent->model()->id());
+    planet->model()->setStarSystem(model()->id());
+    planet->model()->setPlace(place::type::KOSMOS);
 
-    _model->setRadiusA(_model->radiusA() * (m_planets.size() + 2));
-    _model->setRadiusB(_model->radiusB() * (m_planets.size() + 2));
+    planet->model()->setRadiusA(planet->model()->radiusA() * (m_planets.size() + 2));
+    planet->model()->setRadiusB(planet->model()->radiusB() * (m_planets.size() + 2));
 
-    assert(false);
-    control::Planet* planet = new control::Planet(_model);
     planet->initialize();
     m_planets.push_back(planet);
 }
@@ -953,7 +947,8 @@ void StarSystem::__shipManager_s(unsigned int num)
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,meti::getRandInt(360));
         
-        add(new_pship, center3, angle);
+        assert(false);
+        //add(new_pship, center3, angle);
     }
 }
 

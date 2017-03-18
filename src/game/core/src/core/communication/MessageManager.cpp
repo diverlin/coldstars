@@ -72,7 +72,7 @@ void MessageManager::process(const Message& message)
     switch(message.type_id) {
     /** CREATE */
     case TELEGRAM::CREATE_STARSYSTEM: {
-        builder::Starsystem::gen(message.data);
+        builder::StarSystem::gen(message.data);
         break;
     }
     case TELEGRAM::CREATE_SHIP: {
@@ -131,7 +131,7 @@ void MessageManager::process(const Message& message)
         /** STARSYSTEM ADD */
     case TELEGRAM::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data);
-        model::Starsystem* starsystem = model::getStarsystem(descriptor.owner);
+        model::StarSystem* starsystem = model::getStarsystem(descriptor.owner);
         model::Ship* ship = model::getShip(descriptor.object);
         assert(false);
         //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
@@ -139,7 +139,7 @@ void MessageManager::process(const Message& message)
     }
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data);
-        model::Starsystem* starsystem = model::getStarsystem(descriptor.owner);
+        model::StarSystem* starsystem = model::getStarsystem(descriptor.owner);
         model::Container* container = model::getContainer(descriptor.object);
         assert(false);
         //        starsystem->add(container, descriptor.position);
@@ -155,7 +155,7 @@ void MessageManager::process(const Message& message)
     }
     case TELEGRAM::EXPLOSION: {
         descriptor::Explosion descriptor(message.data);
-        model::Starsystem* starsystem = model::getStarsystem(descriptor.starsystem_id);
+        model::StarSystem* starsystem = model::getStarsystem(descriptor.starsystem_id);
         Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
         assert(false);
         //        starsystem->add(explosion, descriptor.center);

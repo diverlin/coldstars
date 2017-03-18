@@ -38,30 +38,30 @@
 
 namespace builder {
 
-model::Starsystem*
-Starsystem::gen()
+model::StarSystem*
+StarSystem::gen()
 {
     descriptor::StarSystem* descr = descriptor::Manager::get().randStarSystem();
     return gen(descr);
 }
 
-model::Starsystem*
-Starsystem::gen(descriptor::StarSystem* descr)
+model::StarSystem*
+StarSystem::gen(descriptor::StarSystem* descr)
 {
-    model::Starsystem* model = new model::Starsystem;
+    model::StarSystem* model = new model::StarSystem;
     assert(model);
     core::global::get().entityManager().reg(model);
     __createInternals(model, descr);
     return model;
 } 
 
-model::Starsystem*
-Starsystem::gen(const std::string& data)
+model::StarSystem*
+StarSystem::gen(const std::string& data)
 {
     //return gen(descriptor::Base(data));
 }
 
-void Starsystem::__createInternals(model::Starsystem* model, descriptor::StarSystem* descr)
+void StarSystem::__createInternals(model::StarSystem* model, descriptor::StarSystem* descr)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     __createStar(model);
@@ -72,7 +72,7 @@ void Starsystem::__createInternals(model::Starsystem* model, descriptor::StarSys
     __createPlanets(model, meti::getRandInt(2,5));
 }
 
-void Starsystem::__createBackground(model::Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)
+void StarSystem::__createBackground(model::StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id)
 {
     for(int i=0; i<distNebula_num; i++) {
         //        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
@@ -85,7 +85,7 @@ void Starsystem::__createBackground(model::Starsystem* starsystem, int distNebul
     }
 }
 
-void Starsystem::__createStar(model::Starsystem* starsystem)
+void StarSystem::__createStar(model::StarSystem* starsystem)
 {
     model::Star* star = builder::Star::gen();
     assert(false);
@@ -93,7 +93,7 @@ void Starsystem::__createStar(model::Starsystem* starsystem)
     //alpitodorender starsystem->SetColor(star->color());
 }
 
-void Starsystem::__createPlanets(model::Starsystem* starsystem, int planet_per_system)
+void StarSystem::__createPlanets(model::StarSystem* starsystem, int planet_per_system)
 {
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     

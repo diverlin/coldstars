@@ -96,10 +96,10 @@
 
 namespace model {
 
-Starsystem*
+StarSystem*
 getStarsystem(int_t id) {
     Base* model = core::global::get().entityManager().get(id);
-    Starsystem* starsystem = static_cast<Starsystem*>(model);
+    StarSystem* starsystem = static_cast<StarSystem*>(model);
     assert(starsystem);
     return starsystem;
 }
@@ -134,7 +134,7 @@ namespace control {
 
 StarSystem*
 getNewStarsystem() {
-    model::Starsystem* model = builder::Starsystem::gen();
+    model::StarSystem* model = builder::StarSystem::gen();
     StarSystem* starsystem = new StarSystem(model);
     return starsystem;
 }

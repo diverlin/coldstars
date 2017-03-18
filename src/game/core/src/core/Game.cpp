@@ -39,7 +39,7 @@ World::~World()
 {
 }
 
-model::Starsystem*
+model::StarSystem*
 World::activeStarsystem() const {
     assert(false);
 //    return core::global::get().god().galaxy()->activeStarsystem();

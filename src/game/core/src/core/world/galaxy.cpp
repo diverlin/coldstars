@@ -69,7 +69,7 @@ Galaxy::Galaxy(model::Galaxy* model)
 Galaxy::~Galaxy()
 {}
 
-model::Starsystem*
+model::StarSystem*
 Galaxy::activeStarsystem() const
 {
     assert(m_sectors.size() != 0);
