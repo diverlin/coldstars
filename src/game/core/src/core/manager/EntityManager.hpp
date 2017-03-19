@@ -34,12 +34,12 @@ class Container;
 class SpaceObject;
 } // namespace model
 
-namespace control {
-class StarSystem;
-class Ship;
-class Container;
-class SpaceObject;
-} // namespace control
+//namespace control {
+//class StarSystem;
+//class Ship;
+//class Container;
+//class SpaceObject;
+//} // namespace control
 
 namespace model {
 
@@ -55,19 +55,8 @@ class Radar;
 class Rocket;
 } // namespace item
 
-StarSystem* getStarsystem(int_t id);
-Ship* getShip(int_t id);
-Container* getContainer(int_t id);
-SpaceObject* getSpaceObject(int_t id);
-
 } // namespace model
 
-namespace control {
-
-StarSystem* getNewStarsystem();
-Container* getNewContainer();
-
-} // namespace control
 
 class EntityManager
 {
@@ -80,6 +69,11 @@ public:
     void reg(model::Base*);
 
     model::Base* get(int_t) const;
+
+    model::StarSystem* starsystem(int_t id) const;
+    model::Ship* ship(int_t id) const;
+    model::Container* container(int_t id) const;
+    model::SpaceObject* spaceObject(int_t id) const;
 
     model::item::Scaner* scaner(int_t) const;
     model::item::Drive* drive(int_t) const;
@@ -111,6 +105,8 @@ private:
     void saveEvent(const std::string&);
     void loadPass0(const std::string&);
     void loadPass1() const;
+
+    static IdGenerator m_idGenerator;
 };
 
 
