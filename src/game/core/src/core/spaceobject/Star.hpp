@@ -24,36 +24,8 @@
 #include <core/descriptor/spaceobject/Star.hpp>
 
 namespace model {
-
-class Star : public Planetoid {
-
-public:
-    Star();
-    ~Star() = default;
-    Star(const std::string& data);
-    std::string data() const;
-
-    void setTurnSinceLastSparkCounter(int turnSinceLastSparkCounter) { m_turnSinceLastSparkCounter = turnSinceLastSparkCounter; }
-
-    int turnSinceLastSparkCounter() const { return m_turnSinceLastSparkCounter; }
-    int turnSparkThreshold() const { return m_turnSparkThreshold; }
-
-private:
-    int m_turnSinceLastSparkCounter = 0;
-    int m_turnSparkThreshold = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-        ar & m_turnSinceLastSparkCounter;
-        ar & m_turnSparkThreshold;
-    }
-};
-
+class Star;
 } // namespace model
-
 
 namespace control {
 

@@ -24,6 +24,8 @@
 #include <core/world/starsystem.hpp>
 #include <core/manager/EntityManager.hpp>
 
+#include <core/model/spaceobject/Star.hpp>
+
 #include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -32,26 +34,6 @@
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
-
-
-namespace model {
-
-Star::Star()
-{}
-
-Star::Star(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Star::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
 
 namespace control {
 

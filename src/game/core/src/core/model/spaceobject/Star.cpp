@@ -16,34 +16,41 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Star.hpp"
 
-#pragma once
+#include <core/common/common.hpp>
+#include <core/common/constants.hpp>
+#include <core/common/Global.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/manager/EntityManager.hpp>
 
-#include <ceti/type/IdType.hpp>
+#include <core/manager/DescriptorManager.hpp>
+
+#include <meti/RandUtils.hpp>
+
+#include <math/rand.hpp>
+
+#include <ceti/Logger.hpp>
+#include <ceti/serialization/macro.hpp>
 
 
 namespace model {
-class Star;
-} // namespace model
 
-namespace descriptor {
-class Star;
-} // namespace descriptor
-
-namespace builder {
-
-class Star
+Star::Star(int_t descriptor_id)
 {
-public:
-    Star();
-    ~Star();
+    setDescriptor(descriptor_id);
+}
 
-    static model::Star* gen();
-    static model::Star* gen(descriptor::Star*);
+Star::Star(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-private:
-    static model::Star* __genTemplate(int_t id);
-};
+std::string
+Star::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
-} // namespace builder
+} // namespace model
 

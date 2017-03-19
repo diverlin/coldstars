@@ -33,6 +33,8 @@
 #include <vector>
 
 namespace model {
+class StarSystem;
+
 class Star;
 class Planet;
 class Asteroid;
@@ -77,30 +79,6 @@ class BaseParticleSystem;
 class LazerTraceEffect;
 
 
-namespace ENTITY {
-namespace STARSYSTEM {
-//const int JUMPRADIUS = 1200;
-
-//const int PLANET_NUM_MIN = 3;
-//const int PLANET_NUM_MAX = 5;
-
-//const int SHIP_INIT_MIN = 4;
-//const int SHIP_INIT_MAX = 7;
-//const int SHIPENEMY_INIT_MIN = 50;
-//const int SHIPENEMY_INIT_MAX = 100;
-
-//const int SPACESTATION_NUM_MIN = 1;
-//const int SPACESTATION_NUM_MAX = 3;
-
-//const int DISTANT_NEBULA_MIN = 6;
-//const int DISTANT_NEBULA_MAX = 8;
-
-enum CONDITION {
-    WAR=1, CAPTURED, SAFE
-};
-} // namespace STARSYSTEM
-} // namespace ENTITY
-
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
 class Explosion
@@ -120,82 +98,6 @@ private:
     int m_damage = 0;
     int m_radius = 0;
 };
-
-
-
-namespace model {
-
-//# TODO:: remove inherits from SpaceObject, do the same for Sector and Galaxy
-class StarSystem : public Base
-{
-public:
-    StarSystem();
-    ~StarSystem() = default;
-    StarSystem(const std::string& data);
-    std::string data() const;
-
-    bool operator==(const StarSystem& rhs) const;
-    bool operator!=(const StarSystem& rhs) const;
-
-    void setSector(int_t sector)  { m_sector = sector; }
-
-    int conditionId()     const { return m_condition_id; }
-    int raceId()          const { return m_race_id; }
-    int conquerorRaceId() const { return m_conqueror_race_id; }
-
-    int_t sector() const { return m_sector; }
-
-    void addVehicle(int_t vehicle) { m_vehicles.push_back(vehicle); }
-    void addBullet(int_t bullet) { m_bullets.push_back(bullet); }
-    void addStar(int_t star) { m_stars.push_back(star); }
-    void addPlanet(int_t planet) { m_planets.push_back(planet); }
-    void addAsteroid(int_t asteroid) { m_asteroids.push_back(asteroid); }
-    void addContainer(int_t container) { m_containers.push_back(container); }
-    void addBlackhole(int_t blackhole) { m_blackholes.push_back(blackhole); }
-
-    std::vector<int_t> planets() const { return m_planets; }
-    std::vector<int_t> stars() const { return m_stars; }
-    std::vector<int_t> asteroids() const { return m_asteroids; }
-    std::vector<int_t> vehicles() const { return m_vehicles; }
-    std::vector<int_t> containers() const { return m_containers; }
-
-private:
-    int m_race_id = NONE;
-    int m_conqueror_race_id = NONE;
-    int m_condition_id = NONE;
-
-    int_t m_sector = NONE;
-
-    std::vector<int_t> m_stars;
-    std::vector<int_t> m_planets;
-    std::vector<int_t> m_asteroids;
-    std::vector<int_t> m_containers;
-    std::vector<int_t> m_bullets;
-    std::vector<int_t> m_blackholes;
-    std::vector<int_t> m_vehicles;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_race_id;
-        ar & m_conqueror_race_id;
-        ar & m_condition_id;
-        ar & m_sector;
-
-        ar & m_stars;
-        ar & m_planets;
-        ar & m_asteroids;
-        ar & m_containers;
-        ar & m_bullets;
-        ar & m_blackholes;
-        ar & m_vehicles;
-    }
-};
-
-} // namespace model
-
 
 namespace control {
 

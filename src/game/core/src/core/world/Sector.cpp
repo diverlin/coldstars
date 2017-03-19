@@ -30,6 +30,8 @@
 
 #include "../struct/StarSystemsConditionData.hpp"
 
+#include <core/model/world/starsystem.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 

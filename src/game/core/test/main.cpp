@@ -28,6 +28,7 @@
 #include <core/spaceobject/Asteroid.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/model/world/starsystem.hpp>
 
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>

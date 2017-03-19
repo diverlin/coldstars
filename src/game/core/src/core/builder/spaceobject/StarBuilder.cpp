@@ -22,7 +22,8 @@
 
 #include <common/constants.hpp>
 
-#include <descriptor/Base.hpp>
+#include <core/model/spaceobject/Star.hpp>
+#include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
@@ -34,10 +35,9 @@
 namespace builder {
 
 model::Star*
-Star::__genTemplate(int_t id)
+Star::__genTemplate(int_t descriptor_id)
 { 
-    model::Star* model = new model::Star;
-    model->setId(id);
+    model::Star* model = new model::Star(descriptor_id);
 
     assert(model);
     EntityManager::get().reg(model);
@@ -60,7 +60,7 @@ Star::gen()
 model::Star*
 Star::gen(descriptor::Star* descr)
 {
-    model::Star* model = __genTemplate();
+    model::Star* model = __genTemplate(descr->id());
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));

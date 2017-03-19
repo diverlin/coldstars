@@ -28,6 +28,7 @@
 
 #include <descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/model/world/starsystem.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -56,7 +57,7 @@ StarSystem::gen()
 model::StarSystem*
 StarSystem::gen(descriptor::StarSystem* descr)
 {
-    model::StarSystem* model = new model::StarSystem;
+    model::StarSystem* model = new model::StarSystem(descr->id());
     assert(model);
     EntityManager::get().reg(model);
     __createInternals(model, descr);
