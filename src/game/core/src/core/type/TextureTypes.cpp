@@ -22,62 +22,62 @@
 
 namespace texture {
 
-std::string str(texture::type type_id)
+std::string str(Type type_id)
 {
     switch(type_id)
     {
-        case texture::type::FAILBACK: return "TYPE::TEXTURE::FAILBACK";
+        case Type::FAILBACK: return "texture::Type::FAILBACK";
 
-        case texture::type::ANGAR_BACKGROUND: return "TYPE::TEXTURE::ANGAR_BACKGROUND";
-        case texture::type::STORE_BACKGROUND: return "TYPE::TEXTURE::STORE_BACKGROUND";
-        case texture::type::SHOP_BACKGROUND: return "TYPE::TEXTURE::SHOP_BACKGROUND";
-        case texture::type::GOVERMENT_BACKGROUND: return "TYPE::TEXTURE::GOVERMENT_BACKGROUND";
+        case Type::ANGAR_BACKGROUND: return "texture::Type::ANGAR_BACKGROUND";
+        case Type::STORE_BACKGROUND: return "texture::Type::STORE_BACKGROUND";
+        case Type::SHOP_BACKGROUND: return "texture::Type::SHOP_BACKGROUND";
+        case Type::GOVERMENT_BACKGROUND: return "texture::Type::GOVERMENT_BACKGROUND";
 
-        case texture::type::NATURELAND_BACKGROUND: return "TYPE::TEXTURE::NATURELAND_BACKGROUND";
+        case Type::NATURELAND_BACKGROUND: return "texture::Type::NATURELAND_BACKGROUND";
 
-        case texture::type::NEBULA_BACKGROUND: return "TYPE::TEXTURE::NEBULA_BACKGROUND";
-        case texture::type::DISTANTSTAR: return "TYPE::TEXTURE::DISTANTSTAR";
+        case Type::NEBULA_BACKGROUND: return "texture::Type::NEBULA_BACKGROUND";
+        case Type::DISTANTSTAR: return "texture::Type::DISTANTSTAR";
 
-        case texture::type::FACE: return "TYPE::TEXTURE::FACE";
+        case Type::FACE: return "texture::Type::FACE";
 
-        case texture::type::VEHICLE_SLOT: return "TYPE::TEXTURE::VEHICLE_SLOT";
-        case texture::type::ITEM_SLOT: return "TYPE::TEXTURE::ITEM_SLOT";
-        case texture::type::TURREL: return "TYPE::TEXTURE::TURREL";
+        case Type::VEHICLE_SLOT: return "texture::Type::VEHICLE_SLOT";
+        case Type::ITEM_SLOT: return "texture::Type::ITEM_SLOT";
+        case Type::TURREL: return "texture::Type::TURREL";
 
-        case texture::type::SPACESTATION: return "TYPE::TEXTURE::SPACESTATION";
-        case texture::type::SATELLITE: return "TYPE::TEXTURE::SATELLITE";
-        case texture::type::SHIP: return "TYPE::TEXTURE::SHIP";
-        case texture::type::STAR: return "TYPE::TEXTURE::STAR";
-        case texture::type::PLANET: return "TYPE::TEXTURE::PLANET";
+        case Type::SPACESTATION: return "texture::Type::SPACESTATION";
+        case Type::SATELLITE: return "texture::Type::SATELLITE";
+        case Type::SHIP: return "texture::Type::SHIP";
+        case Type::STAR: return "texture::Type::STAR";
+        case Type::PLANET: return "texture::Type::PLANET";
 
-        case texture::type::ATMOSPHERE: return "TYPE::TEXTURE::ATMOSPHERE";
-        case texture::type::RING: return "TYPE::TEXTURE::RING";
+        case Type::ATMOSPHERE: return "texture::Type::ATMOSPHERE";
+        case Type::RING: return "texture::Type::RING";
 
-        case texture::type::ASTEROID: return "TYPE::TEXTURE::ASTEROID";
-        case texture::type::MINERAL: return "TYPE::TEXTURE::MINERAL";
-        case texture::type::CONTAINER: return "TYPE::TEXTURE::CONTAINER";
-        case texture::type::BOMB: return "TYPE::TEXTURE::BOMB";
-        case texture::type::BLACKHOLE: return "TYPE::TEXTURE::BLACKHOLE";
+        case Type::ASTEROID: return "texture::Type::ASTEROID";
+        case Type::MINERAL: return "texture::Type::MINERAL";
+        case Type::CONTAINER: return "texture::Type::CONTAINER";
+        case Type::BOMB: return "texture::Type::BOMB";
+        case Type::BLACKHOLE: return "texture::Type::BLACKHOLE";
 
-        case texture::type::PARTICLE_EFFECT: return "TYPE::TEXTURE::PARTICLE_EFFECT";
-        case texture::type::LAZER_EFFECT: return "TYPE::TEXTURE::LAZER_EFFECT";
-        case texture::type::SHIELD_EFFECT: return "TYPE::TEXTURE::SHIELD_EFFECT";
+        case Type::PARTICLE_EFFECT: return "texture::Type::PARTICLE_EFFECT";
+        case Type::LAZER_EFFECT: return "texture::Type::LAZER_EFFECT";
+        case Type::SHIELD_EFFECT: return "texture::Type::SHIELD_EFFECT";
 
-        case texture::type::DRIVE_EQUIPMENT: return "TYPE::TEXTURE::DRIVE_EQUIPMENT";
-        case texture::type::LAZER_EQUIPMENT: return "TYPE::TEXTURE::LAZER_EQUIPMENT";
-        case texture::type::ROCKET_EQUIPMENT: return "TYPE::TEXTURE::ROCKET_EQUIPMENT";
-        case texture::type::PROTECTOR_EQUIPMENT: return "TYPE::TEXTURE::PROTECTOR_EQUIPMENT";
-        case texture::type::DROID_EQUIPMENT: return "TYPE::TEXTURE::DROID_EQUIPMENT";
-        case texture::type::GRAPPLE_EQUIPMENT: return "TYPE::TEXTURE::GRAPPLE_EQUIPMENT";
-        case texture::type::BAK_EQUIPMENT: return "TYPE::TEXTURE::BAK_EQUIPMENT";
-        case texture::type::ENERGIZER_EQUIPMENT: return "TYPE::TEXTURE::ENERGIZER_EQUIPMENT";
-        case texture::type::FREEZER_EQUIPMENT: return "TYPE::TEXTURE::FREEZER_EQUIPMENT";
-        case texture::type::RADAR_EQUIPMENT: return "TYPE::TEXTURE::RADAR_EQUIPMENT";
-        case texture::type::SCANER_EQUIPMENT: return "TYPE::TEXTURE::SCANER_EQUIPMENT";
+        case Type::DRIVE_EQUIPMENT: return "texture::Type::DRIVE_EQUIPMENT";
+        case Type::LAZER_EQUIPMENT: return "texture::Type::LAZER_EQUIPMENT";
+        case Type::ROCKET_EQUIPMENT: return "texture::Type::ROCKET_EQUIPMENT";
+        case Type::PROTECTOR_EQUIPMENT: return "texture::Type::PROTECTOR_EQUIPMENT";
+        case Type::DROID_EQUIPMENT: return "texture::Type::DROID_EQUIPMENT";
+        case Type::GRAPPLE_EQUIPMENT: return "texture::Type::GRAPPLE_EQUIPMENT";
+        case Type::BAK_EQUIPMENT: return "texture::Type::BAK_EQUIPMENT";
+        case Type::ENERGIZER_EQUIPMENT: return "texture::Type::ENERGIZER_EQUIPMENT";
+        case Type::FREEZER_EQUIPMENT: return "texture::Type::FREEZER_EQUIPMENT";
+        case Type::RADAR_EQUIPMENT: return "texture::Type::RADAR_EQUIPMENT";
+        case Type::SCANER_EQUIPMENT: return "texture::Type::SCANER_EQUIPMENT";
 
-        case texture::type::MODULE: return "TYPE::TEXTURE::MODULE";
+        case Type::MODULE: return "texture::Type::MODULE";
 
-        case texture::type::ROCKET_BULLET: return "TYPE::TEXTURE::ROCKET_BULLET";
+        case Type::ROCKET_BULLET: return "texture::Type::ROCKET_BULLET";
     }
     assert(false);
 }

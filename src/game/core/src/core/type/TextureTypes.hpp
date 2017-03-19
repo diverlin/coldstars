@@ -24,7 +24,7 @@
 
 namespace texture
 {
-enum class type: int
+enum class Type: int
 {
     FAILBACK=0,
 
@@ -59,5 +59,5 @@ enum class type: int
 
 
 
-std::string to_string(texture::type);
+std::string to_string(texture::Type);
 

@@ -16,22 +16,23 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
 #include "MeshTypes.hpp"
 
-std::string getTypeStr(mesh::type type)
+#include <cassert>
+
+std::string getTypeStr(mesh::Type type)
 {
     switch(type)
     {
-        case mesh::type::FAILBACK:            { return "FAILBACK"; break; }
+        case mesh::Type::FAILBACK:            { return "mesh::Type::FAILBACK"; break; }
 
-        case mesh::type::PLANE:            { return "PLANE"; break; }
-        case mesh::type::SPHERE:           { return "SPHERE"; break; }
-        case mesh::type::SPHERE_DEFORMED:  { return "SPHERE_DEFORMED"; break; }
-        case mesh::type::SPACESTATION:     { return "SPACESTATION"; break; }
+        case mesh::Type::PLANE:            { return "mesh::Type::PLANE"; break; }
+        case mesh::Type::SPHERE:           { return "mesh::Type::SPHERE"; break; }
+        case mesh::Type::SPHERE_DEFORMED:  { return "mesh::Type::SPHERE_DEFORMED"; break; }
+        case mesh::Type::SPACESTATION:     { return "mesh::Type::SPACESTATION"; break; }
 
         default: { return "UKNOWN MESH TYPE"; break; }
     }
+    assert(false);
 }
 

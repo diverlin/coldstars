@@ -105,7 +105,7 @@ genStarSystem(int race)
 
 namespace {
 
-int_t meshDescriptorIdFromType(const mesh::type& type) {
+int_t meshDescriptorIdFromType(const mesh::Type& type) {
     assert(false);
 //    auto& collector = descriptor::Manager::get().mesh();
 //    descriptor::Mesh* descriptor = collector.random(int_t(type));
@@ -113,7 +113,7 @@ int_t meshDescriptorIdFromType(const mesh::type& type) {
 //    return descriptor->id();
 }
 
-int_t textureDescriptorIdFromType(const texture::type& type) {
+int_t textureDescriptorIdFromType(const texture::Type& type) {
     assert(false);
 //    auto& collector = descriptor::Manager::get().material();
 //    descriptor::Material* descriptor = collector.random(int_t(type));
@@ -144,8 +144,8 @@ genStar()
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
 
-    descr->setTexture(textureDescriptorIdFromType (texture::type::STAR));
-    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
+    descr->setTexture(textureDescriptorIdFromType (texture::Type::STAR));
+    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE));
 
     descriptor::Manager::get().reg(descr);
 
@@ -175,8 +175,8 @@ genPlanet()
                                   descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
-    descr->setTexture(textureDescriptorIdFromType (texture::type::PLANET));
-    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE));
+    descr->setTexture(textureDescriptorIdFromType (texture::Type::PLANET));
+    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE));
 
     descriptor::Manager::get().reg(descr);
 
@@ -263,8 +263,8 @@ genAsteroid()
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
-    descr->setTexture(textureDescriptorIdFromType (texture::type::ASTEROID));
-    descr->setMesh(meshDescriptorIdFromType (mesh::type::SPHERE_DEFORMED));
+    descr->setTexture(textureDescriptorIdFromType (texture::Type::ASTEROID));
+    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE_DEFORMED));
 
     descriptor::Manager::get().reg(descr);
 
