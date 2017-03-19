@@ -96,19 +96,17 @@ genStarSystem(int race)
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::Type& type) {
-    assert(false);
-//    auto& collector = descriptor::Manager::get().mesh();
-//    descriptor::Mesh* descriptor = collector.random(int_t(type));
-//    assert(descriptor->id() != NONE);
-//    return descriptor->id();
+    auto& collector = descriptor::Manager::get().mesh();
+    descriptor::Mesh* descriptor = collector.random(int_t(type));
+    assert(descriptor->id() != NONE);
+    return descriptor->id();
 }
 
 int_t textureDescriptorIdFromType(const texture::Type& type) {
-    assert(false);
-//    auto& collector = descriptor::Manager::get().material();
-//    descriptor::Material* descriptor = collector.random(int_t(type));
-//    assert(descriptor->id() != NONE);
-//    return descriptor->id();
+    auto& collector = descriptor::Manager::get().material();
+    descriptor::Material* descriptor = collector.random(int_t(type));
+    assert(descriptor->id() != NONE);
+    return descriptor->id();
 }
 
 } // namespace
