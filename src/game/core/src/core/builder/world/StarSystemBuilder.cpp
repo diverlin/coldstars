@@ -72,16 +72,17 @@ StarSystem::gen(const std::string& data)
 
 void StarSystem::__createInternals(model::StarSystem* model, descriptor::StarSystem* descr)
 {
+    control::StarSystem starsystem(model);
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
-    __createStar(model);
+    __createStar(starsystem);
     
     //    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     //    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
 
-    __createPlanets(model, meti::getRandInt(2,5));
+    __createPlanets(starsystem, meti::getRandInt(2,5));
 }
 
-void StarSystem::__createBackground(model::StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id)
+void StarSystem::__createBackground(control::StarSystem& starsystem, int distNebula_num, int distStar_num, int color_id)
 {
     for(int i=0; i<distNebula_num; i++) {
         //        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
@@ -94,25 +95,21 @@ void StarSystem::__createBackground(model::StarSystem* starsystem, int distNebul
     }
 }
 
-void StarSystem::__createStar(model::StarSystem* model)
+void StarSystem::__createStar(control::StarSystem& starsystem)
 {
-    control::StarSystem starsystem(model);
     model::Star* model_star = builder::Star::gen();
     starsystem.add(model_star);
     //alpitodorender starsystem->SetColor(star->color());
 }
 
-void StarSystem::__createPlanets(model::StarSystem* model, int planet_per_system)
+void StarSystem::__createPlanets(control::StarSystem& starsystem, int planet_per_system)
 {
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
-    control::StarSystem starsystem(model);
-
     for(int i=0; i<planet_per_system; i++) {
         model::Planet* planet = builder::Planet::gen();
         starsystem.add(planet, starsystem.star());
         //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
-
 }
 
 } // namespace builder

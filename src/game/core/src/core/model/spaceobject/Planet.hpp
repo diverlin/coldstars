@@ -16,42 +16,45 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include <core/spaceobject/Planetoid.hpp>
 
-#include <string>
+#include <type/IdType.hpp>
 
-namespace descriptor {
-class StarSystem;
-} // namespace descriptor
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 namespace model {
-class StarSystem;
-} // namespace model
 
-namespace control {
-class StarSystem;
-} // namespace control
+class Planet : public Planetoid {
 
-namespace builder {
-
-class StarSystem
-{
 public:
-    static model::StarSystem* gen();
-    static model::StarSystem* gen(descriptor::StarSystem*);
-    static model::StarSystem* gen(const std::string&);
+    Planet(int_t);
+    ~Planet() = default;
+    Planet(const std::string& data);
+    std::string data() const;
+
+    void setPopulation(int_t population)  { m_population = population; }
+    void setLand(int_t land)  { m_land = land; }
+
+    int_t population() const { return m_population; }
+    int_t land() const { return m_land; }
 
 private:
-    StarSystem()=delete;
-    ~StarSystem()=delete;
+    int_t m_land = NONE;
+    int_t m_population = NONE;
 
-    static void __createInternals(model::StarSystem*, descriptor::StarSystem*);
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & m_land;
+        ar & m_population;
+    }
+};
 
-    static void __createBackground(control::StarSystem&, int, int, int);
-    static void __createStar(control::StarSystem&);
-    static void __createPlanets(control::StarSystem&, int);
-}; 
+} // namespace model
 
-} // namespace builder
