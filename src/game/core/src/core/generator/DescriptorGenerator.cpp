@@ -30,8 +30,8 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/common/constants.hpp>
-#include <core/type/MeshTypes.hpp>
-#include <core/type/TextureTypes.hpp>
+#include <core/type/MeshType.hpp>
+#include <core/type/TextureType.hpp>
 #include <core/item/Item.hpp>
 
 #include <core/manager/DescriptorManager.hpp>

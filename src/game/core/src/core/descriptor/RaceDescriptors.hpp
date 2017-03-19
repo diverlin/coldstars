@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include <core/type/RaceTypes.hpp>
-#include <core/type/EntityTypes.hpp>
+#include <core/type/RaceType.hpp>
+#include <core/type/EntityType.hpp>
 
 #include <vector>
 #include <map>

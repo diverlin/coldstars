@@ -42,7 +42,7 @@
 #include "../dock/Shop.hpp"
 
 #include "../common/GameDate.hpp" 
-#include <core/type/RaceTypes.hpp>
+#include <core/type/RaceType.hpp>
 
 namespace model {
 

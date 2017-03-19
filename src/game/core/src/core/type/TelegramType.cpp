@@ -17,7 +17,7 @@
 */
 
 
-#include "TelegramTypes.hpp"
+#include "TelegramType.hpp"
 
 std::string to_string(const TELEGRAM& type_id)
 {

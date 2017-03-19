@@ -17,7 +17,7 @@
 */
 
 #include "Texture.hpp"
-#include <core/type/DescriptorTypes.hpp>
+#include <core/type/DescriptorType.hpp>
 
 #include <sstream>
 

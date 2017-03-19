@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/type/RaceTypes.hpp>
+#include <core/type/RaceType.hpp>
 
 #include <vector>
 

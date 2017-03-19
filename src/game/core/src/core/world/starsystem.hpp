@@ -22,7 +22,7 @@
 #include <core/spaceobject/SpaceObject.hpp>
 #include <core/world/HyperSpace.hpp>
 #include <core/manager/AsteroidManager.hpp>
-#include <core/type/RaceTypes.hpp>
+#include <core/type/RaceType.hpp>
 
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 

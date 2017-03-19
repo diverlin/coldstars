@@ -20,7 +20,7 @@
 #ifndef GUITYPES_HPP
 #define GUITYPES_HPP
 
-#include <core/type/EntityTypes.hpp>
+#include <core/type/EntityType.hpp>
 
 #include <string>
 

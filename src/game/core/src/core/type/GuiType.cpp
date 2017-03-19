@@ -17,7 +17,7 @@
 */
 
 
-#include "GuiTypes.hpp"
+#include "GuiType.hpp"
 
 
 std::string getGuiTypeStr(gui::type type_id)

@@ -21,8 +21,8 @@
 #include <core/descriptor/Base.hpp>
 #include <ceti/descriptor/BaseView.hpp>
 
-#include <core/type/TechLevelTypes.hpp>
-#include <core/type/RaceTypes.hpp>
+#include <core/type/TechLevelType.hpp>
+#include <core/type/RaceType.hpp>
 
 namespace descriptor {
 

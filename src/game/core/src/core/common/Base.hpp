@@ -19,7 +19,7 @@
 #pragma once
 
 #include <core/struct/IdData.hpp>
-#include <core/type/DescriptorTypes.hpp>
+#include <core/type/DescriptorType.hpp>
 
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/type/TelegramTypes.hpp>
+#include <core/type/TelegramType.hpp>
 
 #include <ceti/type/IdType.hpp>
 

@@ -16,26 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
 
-#include <string>
+#include "RaceType.hpp"
 
-#include <core/type/TextureTypes.hpp>
+std::string to_string(race::Type race_id)
+{
+    switch(race_id)
+    {
+        case race::Type::NONE: { return "RACE_NONE"; break; }
+        
+        case race::Type::R0: { return "RACE0"; break; }
+        case race::Type::R1:    { return "RACE1"; break; }
+        case race::Type::R2:    { return "RACE2"; break; }
+        case race::Type::R3:    { return "RACE3"; break; }
+        case race::Type::R4:    { return "RACE4"; break; }
 
-namespace mesh {
+        case race::Type::R6:    { return "RACE6"; break; }
+        case race::Type::R7:    { return "RACE7"; break; }
 
-enum class Type : int {
-    FAILBACK = int(texture::Type::LAST),
-    //
-    PLANE,
-    SPHERE,
-    SPHERE_DEFORMED,
-    SPACESTATION,
-    //
-    LAST
-};
-
-} // namespace mesh
-
-std::string getTypeStr(mesh::Type place);
+        default: { return "RACE_UKNOWN"; break; }    
+    }
+}
 

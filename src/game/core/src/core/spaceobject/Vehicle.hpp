@@ -28,7 +28,7 @@
 #include <core/struct/VehiclePropetries.hpp>
 #include <core/struct/VehicleNeeds.hpp>
 
-#include <core/type/StatusTypes.hpp>
+#include <core/type/StatusType.hpp>
 
 //#include <boost/serialization/vector.hpp>
 

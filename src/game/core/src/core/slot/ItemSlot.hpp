@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/type/StatusTypes.hpp>
+#include <core/type/StatusType.hpp>
 #include <core/slot/BaseSlot.hpp>
 
 #include <ceti/type/IdType.hpp>

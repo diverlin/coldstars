@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "DescriptorTypes.hpp"
+#include "DescriptorType.hpp"
 
 std::string to_string(descriptor::Type type)
 {
