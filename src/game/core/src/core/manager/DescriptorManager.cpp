@@ -25,6 +25,9 @@
 #include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 
+#include <core/descriptor/Mesh.hpp>
+#include <core/descriptor/Texture.hpp>
+
 #include <core/common/Global.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -410,6 +413,24 @@ Manager::rocket(int_t id) const
     item::Rocket* descr = static_cast<item::Rocket*>(get(id));
     assert(descr);
     return descr;
+}
+
+Mesh*
+Manager::randMesh(mesh::Type type) const
+{
+    ceti::descriptor::Base* base = m_meshes.random(int_t(type));
+    Mesh* mesh = static_cast<Mesh*>(base);
+    assert(mesh);
+    return mesh;
+}
+
+Material*
+Manager::randMaterial(texture::Type type) const
+{
+    ceti::descriptor::Base* base = m_materials.random(int_t(type));
+    Material* material = static_cast<Material*>(base);
+    assert(material);
+    return material;
 }
 
 void

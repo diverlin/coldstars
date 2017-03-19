@@ -26,8 +26,13 @@
 
 #include <core/descriptor/spaceobject/Container.hpp>
 
-#include <ceti/descriptor/Mesh.hpp>
-#include <ceti/descriptor/Texture.hpp>
+#include <core/descriptor/Mesh.hpp>
+#include <core/descriptor/Texture.hpp>
+#include <core/resource/Collector.hpp>
+#include <core/type/MeshTypes.hpp>
+#include <core/type/TextureTypes.hpp>
+
+#include <ceti/descriptor/Base.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -118,9 +123,15 @@ public:
     item::Radar* radar(int_t) const;
     item::Rocket* rocket(int_t) const;
 
+    Mesh* randMesh(mesh::Type) const;
+    Material* randMaterial(texture::Type) const;
+
     void generate();
 
 private:
+    Collector<ceti::descriptor::Base> m_materials;
+    Collector<ceti::descriptor::Base> m_meshes;
+
     std::map<int_t, Base*> m_descriptors;
     std::map<Type, std::vector<Base*>> m_descriptorsTypes;
 
