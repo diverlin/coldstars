@@ -54,6 +54,9 @@ Manager::get()
 }
 
 Manager::Manager()
+    :
+      m_meshes(new Collector<Mesh>(""))
+    , m_materials(new Collector<Material>(""))
 {
     bool regenerate = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
@@ -61,15 +64,17 @@ Manager::Manager()
     } /*else {
        generate();
     }*/
+
+#ifdef USE_FAILBACK_RESOURCES
+    __resolveId(m_meshes->failback());
+    __resolveId(m_materials->failback());
+#endif // USE_FAILBACK_RESOURCES
 }
 
 void
 Manager::reg(Base* descr)
 {
-    //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
-    if (descr->id() == NONE) {
-        descr->setId(m_idGenerator.nextId());
-    }
+    __resolveId(descr);
 
     const int_t id = descr->id();
     descriptor::Type type = descr->type();
@@ -93,6 +98,20 @@ Manager::reg(Base* descr)
             m_descriptorsTypes[type] = vector;
         }
     }
+}
+
+void
+Manager::reg(Mesh* descr)
+{
+    __resolveId(descr);
+    m_meshes->add(descr);
+}
+
+void
+Manager::reg(Material* descr)
+{
+    __resolveId(descr);
+    m_materials->add(descr);
 }
 
 bool
@@ -418,8 +437,7 @@ Manager::rocket(int_t id) const
 Mesh*
 Manager::randMesh(mesh::Type type) const
 {
-    ceti::descriptor::Base* base = m_meshes.random(int_t(type));
-    Mesh* mesh = static_cast<Mesh*>(base);
+    Mesh* mesh = m_meshes->random(int_t(type));
     assert(mesh);
     return mesh;
 }
@@ -427,8 +445,7 @@ Manager::randMesh(mesh::Type type) const
 Material*
 Manager::randMaterial(texture::Type type) const
 {
-    ceti::descriptor::Base* base = m_materials.random(int_t(type));
-    Material* material = static_cast<Material*>(base);
+    Material* material = m_materials->random(int_t(type));
     assert(material);
     return material;
 }
@@ -531,6 +548,20 @@ Manager::generate()
 //    }
 
     __save();
+}
+
+void
+Manager::__resolveId(Base* descr) {
+    if (descr->id() == NONE) {
+        descr->setId(m_idGenerator.nextId());
+    }
+}
+
+void
+Manager::__resolveId(ceti::descriptor::Base* descr) {
+    if (descr->id() == NONE) {
+        descr->setId(m_idGenerator.nextId());
+    }
 }
 
 } // namespace descriptor

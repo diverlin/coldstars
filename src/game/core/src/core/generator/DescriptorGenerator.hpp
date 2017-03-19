@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <core/type/RaceTypes.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 #include <vector>
@@ -51,7 +53,7 @@ class Container;
 /* world */
 descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
 descriptor::Sector* genSector(const std::vector<int_t>&);
-descriptor::StarSystem* genStarSystem(int race = NONE);
+descriptor::StarSystem* genStarSystem(race::Type race = race::Type::NONE);
 
 /* spaceobjects */
 descriptor::Star* genStar();

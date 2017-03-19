@@ -75,6 +75,9 @@ public:
     static Manager& get();
 
     void reg(Base*);
+    void reg(Mesh*);
+    void reg(Material*);
+
     Base* get(int_t) const;
     Base* rand(Type) const;
     bool hasType(Type) const;
@@ -129,8 +132,8 @@ public:
     void generate();
 
 private:
-    Collector<ceti::descriptor::Base> m_materials;
-    Collector<ceti::descriptor::Base> m_meshes;
+    Collector<Mesh>* m_meshes = nullptr;
+    Collector<Material>* m_materials = nullptr;
 
     std::map<int_t, Base*> m_descriptors;
     std::map<Type, std::vector<Base*>> m_descriptorsTypes;
@@ -138,6 +141,9 @@ private:
     void __clear();
     void __save();
     void __load();
+
+    void __resolveId(Base*);
+    void __resolveId(ceti::descriptor::Base*);
 
     static IdGenerator m_idGenerator;
 }; 

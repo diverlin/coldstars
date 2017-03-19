@@ -77,15 +77,14 @@ genSector(const std::vector<int_t>& starsystems) {
 }
 
 descriptor::StarSystem*
-genStarSystem(int race)
+genStarSystem(race::Type race)
 {
     descriptor::StarSystem* descr = new descriptor::StarSystem;
-    if (race == NONE) {
-        race = int(race::Type::R0);
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
     }
 
-//    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
-//    descriptor.add(descriptor::Key::RACE, race);
+    descr->setRace(race);
 
     descriptor::Manager::get().reg(descr);
     return descr;

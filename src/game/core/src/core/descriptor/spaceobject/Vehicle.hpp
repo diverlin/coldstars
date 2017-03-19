@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <core/type/RaceTypes.hpp>
-
 #include <core/descriptor/spaceobject/SpaceObject.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
@@ -35,8 +33,6 @@ class Vehicle : public SpaceObject
 public:
     Vehicle() = default;
     virtual ~Vehicle() = default;
-
-    race::Type race() const { return m_race; }
 
     const std::vector<meti::vec3>& turrelPoints() const { return m_turrelPoints; }
     const std::vector<meti::vec3>& drivePoints() const { return m_drivePoints; }
@@ -65,9 +61,6 @@ public:
     int weaponSlotNum() const { return m_weaponSlotNum; }
     int artefactSlotNum() const { return m_artefactSlotNum; }
     int cargoSlotNum() const { return m_cargoSlotNum; }
-
-
-    void setRace(race::Type race) { m_race = race; }
 
     void addTurrelPoint(const meti::vec3& p) { m_turrelPoints.push_back(p); }
     void addDrivePoint(const meti::vec3& p) { m_drivePoints.push_back(p); }
@@ -98,7 +91,6 @@ public:
 
     std::string info() const {
         std::string result = "Vehicle descriptor:\n";
-        result += std::string(" race = ") + to_string(m_race) + "\n";
 
         result += std::string(" space = ") + meti::to_string(m_space) + "\n";
         result += std::string(" protection = ") + meti::to_string(m_protection) + "\n";
@@ -128,7 +120,6 @@ public:
     }
 
 private:
-    race::Type m_race = race::Type::NONE;
     std::vector<meti::vec3> m_turrelPoints;
     std::vector<meti::vec3> m_drivePoints;
     std::vector<meti::vec3> m_protectorPoints;
@@ -162,7 +153,6 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_race;
 
         ar & m_turrelPoints;
         ar & m_drivePoints;

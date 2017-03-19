@@ -79,21 +79,21 @@ class LazerTraceEffect;
 
 namespace ENTITY {
 namespace STARSYSTEM {
-const int JUMPRADIUS = 1200;
+//const int JUMPRADIUS = 1200;
 
-const int PLANET_NUM_MIN = 3;
-const int PLANET_NUM_MAX = 5;
+//const int PLANET_NUM_MIN = 3;
+//const int PLANET_NUM_MAX = 5;
 
-const int SHIP_INIT_MIN = 4;
-const int SHIP_INIT_MAX = 7;
-const int SHIPENEMY_INIT_MIN = 50;
-const int SHIPENEMY_INIT_MAX = 100;
+//const int SHIP_INIT_MIN = 4;
+//const int SHIP_INIT_MAX = 7;
+//const int SHIPENEMY_INIT_MIN = 50;
+//const int SHIPENEMY_INIT_MAX = 100;
 
-const int SPACESTATION_NUM_MIN = 1;
-const int SPACESTATION_NUM_MAX = 3;
+//const int SPACESTATION_NUM_MIN = 1;
+//const int SPACESTATION_NUM_MAX = 3;
 
-const int DISTANT_NEBULA_MIN = 6;
-const int DISTANT_NEBULA_MAX = 8;
+//const int DISTANT_NEBULA_MIN = 6;
+//const int DISTANT_NEBULA_MAX = 8;
 
 enum CONDITION {
     WAR=1, CAPTURED, SAFE
@@ -240,8 +240,10 @@ public:
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
     void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
 
+    void add(model::Star*);
     void add(Star*);
-    void add(Planet*, const SpaceObject* parent = nullptr);
+    void add(model::Planet*, SpaceObject* parent = nullptr);
+    void add(Planet*, SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
     void add(model::BlackHole*, const glm::vec3&);
