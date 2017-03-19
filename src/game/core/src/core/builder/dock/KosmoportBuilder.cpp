@@ -40,7 +40,7 @@ Kosmoport* KosmoportBuilder::createTemplate(int_t id) const
     assert(kosmoport);
 
     assert(false);
-//    core::global::get().entityManager().reg(kosmoport);
+//    EntityManager::get().reg(kosmoport);
     
     return kosmoport;
 } 

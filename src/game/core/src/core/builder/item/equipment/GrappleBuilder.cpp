@@ -53,7 +53,7 @@ model::item::Grapple*
 Grapple::__genTemplate(int_t descriptor_id)
 {
     model::item::Grapple* model = new model::item::Grapple(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

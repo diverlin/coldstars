@@ -41,7 +41,7 @@ BlackHole::__genTemplate()
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-   core::global::get().entityManager().reg(blackhole);
+   EntityManager::get().reg(blackhole);
     
     return blackhole;
 } 

@@ -53,7 +53,7 @@ model::item::Radar*
 Radar::__genTemplate(int_t descriptor_id)
 {
     model::item::Radar* model = new model::item::Radar(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

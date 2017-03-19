@@ -51,10 +51,10 @@ Kosmoport::~Kosmoport()
 void Kosmoport::putChildrenToGarbage() const
 {
     assert(false);
-//   core::global::get().entityManager().addToGarbage(angar);
-//   core::global::get().entityManager().addToGarbage(store);
-//   core::global::get().entityManager().addToGarbage(shop);
-//   core::global::get().entityManager().addToGarbage(goverment);
+//   EntityManager::get().addToGarbage(angar);
+//   EntityManager::get().addToGarbage(store);
+//   EntityManager::get().addToGarbage(shop);
+//   EntityManager::get().addToGarbage(goverment);
 }
        
 void Kosmoport::BindAngar(Angar* angar)

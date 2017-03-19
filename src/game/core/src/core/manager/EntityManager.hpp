@@ -60,8 +60,14 @@ class Rocket;
 
 class EntityManager
 {
+private:
+    EntityManager() = default;
+    EntityManager(const EntityManager&) = delete;
+    ~EntityManager() = default;
+    EntityManager& operator=(const EntityManager&) = delete;
+
 public:
-    EntityManager() {}
+    static EntityManager& get();
 
     void saveRequest() { m_save_request = true; }
     void loadRequest() { m_load_request = true; }

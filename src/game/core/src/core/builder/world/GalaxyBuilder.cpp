@@ -37,7 +37,7 @@ Galaxy::__genTemplate()
     model::Galaxy* galaxy = new model::Galaxy;
     assert(galaxy);
 
-    core::global::get().entityManager().reg(galaxy);
+    EntityManager::get().reg(galaxy);
     
     return galaxy;
 } 

@@ -68,7 +68,7 @@ Container::__genTemplate()
 {
     model::Container* container = new model::Container;
     assert(container);
-    core::global::get().entityManager().reg(container);
+    EntityManager::get().reg(container);
     return container;
 }
 
@@ -159,7 +159,7 @@ Container::__createInternals(model::Container* container, descriptor::Container*
 //    container->bindItemSlot(item_slot);
 
     //    if (descriptor.child() >= 0) {
-    //        item::Base* item = static_cast<item::Base*>(core::global::get().entityManager().get(descriptor.child()));
+    //        item::Base* item = static_cast<item::Base*>(EntityManager::get().get(descriptor.child()));
     //        item_slot->insertItem(item);
     //    }
 }

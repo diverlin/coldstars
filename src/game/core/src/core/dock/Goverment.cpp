@@ -50,7 +50,7 @@ void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Goverment::ResolveData()
 {
-    //((Kosmoport*)core::global::get().entityManager().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
+    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
 }
 
 void Goverment::Save(boost::property_tree::ptree& save_ptree) const

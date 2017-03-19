@@ -110,7 +110,7 @@ void ItemSlot::putChildrenToGarbage() const
 {
     assert(false);
 //    if (m_item) {
-//       core::global::get().entityManager().addToGarbage(m_item);
+//       EntityManager::get().addToGarbage(m_item);
 //    }
 }
 
@@ -580,11 +580,11 @@ void ItemSlot::Resolve()
 ////    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
 ////    if (m_unresolved_ItemSlot.target_id != NONE) {
-////        m_target = (SpaceObject*)core::global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
+////        m_target = (SpaceObject*)EntityManager::get().get(m_unresolved_ItemSlot.target_id);
 ////    }
 
 ////    if (m_unresolved_ItemSlot.subtarget_id != NONE) {
-////        m_subtarget = (ItemSlot*)core::global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
+////        m_subtarget = (ItemSlot*)EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
 ////    }
 
 ////    switch(owner->typeId())

@@ -35,7 +35,7 @@ Rocket::__genTemplate(int_t id) const
     model::RocketBullet* rocket_bullet = new model::RocketBullet;
     assert(rocket_bullet);
 
-    core::global::get().entityManager().reg(rocket_bullet);
+    EntityManager::get().reg(rocket_bullet);
     
     return rocket_bullet;
 }

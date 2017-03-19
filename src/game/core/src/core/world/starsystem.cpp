@@ -130,14 +130,14 @@ StarSystem::star() const
 /* virtual */
 void StarSystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)      { core::global::get().entityManager().addToGarbage(m_stars[i]->model()); }
-    for(unsigned int i=0; i<m_planets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_planets[i]->model()); }
-    for(unsigned int i=0; i<m_asteroids.size(); i++)  { core::global::get().entityManager().addToGarbage(m_asteroids[i]->model()); }
+    for(unsigned int i=0; i<m_stars.size(); i++)      { EntityManager::get().addToGarbage(m_stars[i]->model()); }
+    for(unsigned int i=0; i<m_planets.size(); i++)    { EntityManager::get().addToGarbage(m_planets[i]->model()); }
+    for(unsigned int i=0; i<m_asteroids.size(); i++)  { EntityManager::get().addToGarbage(m_asteroids[i]->model()); }
     assert(false);
-    //for(unsigned int i=0; i<m_bullets.size(); i++)    { core::global::get().entityManager().addToGarbage(m_bullets[i]); }
-    //for(unsigned int i=0; i<m_containers.size(); i++) { core::global::get().entityManager().addToGarbage(m_containers[i]); }
-    //for(unsigned int i=0; i<m_blackholes.size(); i++) { core::global::get().entityManager().addToGarbage(m_blackholes[i]); }
-    //for(unsigned int i=0; i<m_vehicles.size(); i++)   { core::global::get().entityManager().addToGarbage(m_vehicles[i]); }
+    //for(unsigned int i=0; i<m_bullets.size(); i++)    { EntityManager::get().addToGarbage(m_bullets[i]); }
+    //for(unsigned int i=0; i<m_containers.size(); i++) { EntityManager::get().addToGarbage(m_containers[i]); }
+    //for(unsigned int i=0; i<m_blackholes.size(); i++) { EntityManager::get().addToGarbage(m_blackholes[i]); }
+    //for(unsigned int i=0; i<m_vehicles.size(); i++)   { EntityManager::get().addToGarbage(m_vehicles[i]); }
 }      
 
 model::Npc*
@@ -977,7 +977,7 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
         //        if ((*it)->isReadyForGarbage()) {
-        //           core::global::get().entityManager().addToGarbage(*it);
+        //           EntityManager::get().addToGarbage(*it);
         //            it = m_vehicles.erase(it);
         //        }
     }
@@ -985,14 +985,14 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<control::BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
-//            core::global::get().entityManager().addToGarbage(*it);
+//            EntityManager::get().addToGarbage(*it);
 //            it = m_blackholes.erase(it);
 //        }
     }
 
     //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
     //        if ((*it)->isReadyForGarbage() == true) {
-    //           core::global::get().entityManager().addToGarbage(*it);
+    //           EntityManager::get().addToGarbage(*it);
     //            it = m_asteroids.erase(it);
     //        }
     //    }
@@ -1000,14 +1000,14 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<control::Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage() == true) {
-//            core::global::get().entityManager().addToGarbage(*it);
+//            EntityManager::get().addToGarbage(*it);
 //            it = m_containers.erase(it);
 //        }
     }
 
     for(std::vector<control::RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
 //        if ((*it)->isReadyForGarbage() == true) {
-//            core::global::get().entityManager().addToGarbage(*it);
+//            EntityManager::get().addToGarbage(*it);
 //            it = m_bullets.erase(it);
 //        }
     }
@@ -1178,7 +1178,7 @@ void StarSystem::_postDeathUniqueEvent(bool)
 
 //void Starsystem::ResolveData()
 //{
-//    //((Sector*)core::global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+//    //((Sector*)EntityManager::get().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
 //}
 
 //void Starsystem::Save(boost::property_tree::ptree& save_ptree) const

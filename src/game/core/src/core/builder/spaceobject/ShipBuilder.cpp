@@ -33,7 +33,7 @@ model::Ship*
 Ship::__genTemplate(int_t descriptor_id)
 {
     model::Ship* ship = new model::Ship(descriptor_id);
-    core::global::get().entityManager().reg(ship);
+    EntityManager::get().reg(ship);
     return ship;
 }
 

@@ -67,7 +67,7 @@ TEST(communication, create_bak)
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 
     assert(false);
-//    item::Bak* bak = core::global::get().entityManager().getEntity<item::Bak*>(obj_id);
+//    item::Bak* bak = EntityManager::get().getEntity<item::Bak*>(obj_id);
 //    assert(bak);
 //    EXPECT_EQ(bak->id(), obj_id);
 }
@@ -82,7 +82,7 @@ TEST(communication, inject_ship)
 //    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::BOMB);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
-//    Bomb* bomb = static_cast<Bomb*>(core::global::get().entityManager().get(descriptor.id()));
+//    Bomb* bomb = static_cast<Bomb*>(EntityManager::get().get(descriptor.id()));
 //    assert(bomb);
 //    return bomb;
 //}
@@ -92,7 +92,7 @@ TEST(communication, inject_ship)
 //    auto descriptor = descriptor::Container(child_id);
 //   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-//    Container* container = static_cast<Container*>(core::global::get().entityManager().get(descriptor.id()));
+//    Container* container = static_cast<Container*>(EntityManager::get().get(descriptor.id()));
 //    assert(container);
 //    assert(container->itemSlot());
 //    assert(container->itemSlot()->item());
@@ -105,7 +105,7 @@ TEST(comm, new_starsystem)
     //    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::STARSYSTEM);
     //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
-    //    Starsystem* starsystem = static_cast<Starsystem*>(core::global::get().entityManager().get(descriptor.id()));
+    //    Starsystem* starsystem = static_cast<Starsystem*>(EntityManager::get().get(descriptor.id()));
     //    assert(starsystem);
-    //Starsystem* starsystem = core::global::get().entityManager().get<Starsystem*>(descriptor.id());
+    //Starsystem* starsystem = EntityManager::get().get<Starsystem*>(descriptor.id());
 }

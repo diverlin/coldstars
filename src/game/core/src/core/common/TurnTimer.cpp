@@ -29,12 +29,12 @@ void TurnTimer::nextTurn()
 {
 //    if (core::global::get().config().GetAutoSaveMode() == true) {
 //        LOG("*** AUTO (SaveRequest)");
-//       core::global::get().entityManager().SaveRequest();
+//       EntityManager::get().SaveRequest();
 //    }
 
 //    if (core::global::get().config().GetAutoLoadMode() == true) {
 //        LOG("*** AUTO (LoadRequest)");
-//       core::global::get().entityManager().LoadRequest();
+//       EntityManager::get().LoadRequest();
 //    }
                 
     m_stopTurnTimer = TURN_TIME;

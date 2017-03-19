@@ -84,7 +84,6 @@ global::global()
       m_idGenerator(new IdGenerator)
     , m_textureIdGenerator(new IdGenerator)
     , m_god(new God)
-    , m_entityManager(new EntityManager)
     , m_messageManager(new MessageManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
@@ -130,7 +129,6 @@ global::global()
 global::~global()
 {
     delete m_god;
-    delete m_entityManager;
     delete m_config;
     delete m_turnTimer;
     delete m_gameDate;

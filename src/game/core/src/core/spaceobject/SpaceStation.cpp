@@ -60,12 +60,12 @@ SpaceStation::~SpaceStation()
 void SpaceStation::putChildrenToGarbage() const
 {
     assert(false);
-//    core::global::get().entityManager().addToGarbage(m_innerLand);
+//    EntityManager::get().addToGarbage(m_innerLand);
 //    npc()->setAlive(false);
-//    core::global::get().entityManager().addToGarbage(npc());
+//    EntityManager::get().addToGarbage(npc());
 
 //    for(unsigned int i=0; i<m_slots.size(); i++) {
-//        core::global::get().entityManager().addToGarbage(m_slots[i]);
+//        EntityManager::get().addToGarbage(m_slots[i]);
 //    }
 }
 
@@ -148,12 +148,12 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 ///* virtual override final */
 //void SpaceStation::putChildrenToGarbage() const
 //{
-//    core::global::get().entityManager().addToGarbage(m_Land);
+//    EntityManager::get().addToGarbage(m_Land);
 //    npc()->setAlive(false);
-//    core::global::get().entityManager().addToGarbage(npc());
+//    EntityManager::get().addToGarbage(npc());
     
 //    for(unsigned int i=0; i<m_slots.size(); i++) {
-//        core::global::get().entityManager().addToGarbage(m_slots[i]);
+//        EntityManager::get().addToGarbage(m_slots[i]);
 //    }
 //}
 

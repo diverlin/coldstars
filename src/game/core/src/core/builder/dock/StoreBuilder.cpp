@@ -53,7 +53,7 @@ Store* StoreBuilder::createTemplate(int_t id) const
     assert(store);
 
     assert(false);
-//    core::global::get().entityManager().reg(store);
+//    EntityManager::get().reg(store);
     
     return store;
 } 

@@ -65,7 +65,7 @@ model::item::Protector*
 Protector::__genTemplate(int_t descriptor_id)
 {
     model::item::Protector* model = new model::item::Protector(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

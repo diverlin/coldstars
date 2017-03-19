@@ -39,7 +39,7 @@ Sector::__genTemplate()
     model::Sector* sector = new model::Sector;
     assert(sector);
 
-    core::global::get().entityManager().reg(sector);
+    EntityManager::get().reg(sector);
     
     return sector;
 } 

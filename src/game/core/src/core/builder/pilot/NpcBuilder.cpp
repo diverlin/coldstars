@@ -44,7 +44,7 @@ NpcBuilder::createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, 
     model::Npc* npc = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
     assert(npc);
 
-    core::global::get().entityManager().reg(npc);
+    EntityManager::get().reg(npc);
     
     return npc;
 }

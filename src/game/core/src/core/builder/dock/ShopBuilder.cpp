@@ -36,7 +36,7 @@ Shop* ShopBuilder::createTemplate(int_t id) const
     assert(shop);
 
     assert(false);
-    //core::global::get().entityManager().reg(shop);
+    //EntityManager::get().reg(shop);
 
     return shop;
 } 

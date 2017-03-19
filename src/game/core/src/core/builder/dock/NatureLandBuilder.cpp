@@ -49,7 +49,7 @@ NatureLand* NatureLandBuilder::createTemplate(int_t id) const
     assert(natureland);
 
     assert(false);
-//    core::global::get().entityManager().reg(natureland);
+//    EntityManager::get().reg(natureland);
     
     return natureland;
 } 

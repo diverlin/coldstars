@@ -52,7 +52,7 @@ model::item::Lazer*
 Lazer::__genTemplate(int_t descriptor_id)
 { 
     model::item::Lazer* model = new model::item::Lazer(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 } 
 
