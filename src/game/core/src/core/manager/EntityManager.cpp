@@ -94,61 +94,7 @@
 
 #include <core/model/item/equipment/ALL>
 
-namespace model {
-
-StarSystem*
-getStarsystem(int_t id) {
-    Base* model = core::global::get().entityManager().get(id);
-    StarSystem* starsystem = static_cast<StarSystem*>(model);
-    assert(starsystem);
-    return starsystem;
-}
-
-Ship*
-getShip(int_t id) {
-    Base* model = core::global::get().entityManager().get(id);
-    Ship* ship = static_cast<Ship*>(model);
-    assert(ship);
-    return ship;
-}
-
-Container*
-getContainer(int_t id) {
-    Base* model = core::global::get().entityManager().get(id);
-    Container* container = static_cast<Container*>(model);
-    assert(container);
-    return container;
-}
-
-SpaceObject*
-getSpaceObject(int_t id) {
-    Base* model = core::global::get().entityManager().get(id);
-    SpaceObject* spaceobject = static_cast<SpaceObject*>(model);
-    assert(spaceobject);
-    return spaceobject;
-}
-
-} // namespace model
-
-namespace control {
-
-StarSystem*
-getNewStarsystem() {
-    model::StarSystem* model = builder::StarSystem::gen();
-    StarSystem* starsystem = new StarSystem(model);
-    return starsystem;
-}
-
-Container*
-getNewContainer() {
-    descriptor::Container* descr = descriptor::genContainer();
-    model::Container* model = builder::Container::gen(/*descr*/);
-    Container* container = new Container(model, descr);
-    return container;
-}
-
-} // namespace control
-
+IdGenerator EntityManager::m_idGenerator;
 
 void EntityManager::clear()
 {
@@ -183,8 +129,7 @@ void EntityManager::reg(model::Base* model)
 {
     assert(model);
     if (model->id() == NONE) {
-        int_t id = core::global::get().idGenerator().nextId();
-        model->setId(id);
+        model->setId(m_idGenerator.nextId());
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
@@ -215,6 +160,34 @@ EntityManager::get(int_t id) const
     return slice->second;
 }
 
+
+model::StarSystem*
+EntityManager::starsystem(int_t id) const {
+    model::StarSystem* starsystem = static_cast<model::StarSystem*>(get(id));
+    assert(starsystem);
+    return starsystem;
+}
+
+model::Ship*
+EntityManager::ship(int_t id) const {
+    model::Ship* ship = static_cast<model::Ship*>(get(id));
+    assert(ship);
+    return ship;
+}
+
+model::Container*
+EntityManager::container(int_t id) const {
+    model::Container* container = static_cast<model::Container*>(get(id));
+    assert(container);
+    return container;
+}
+
+model::SpaceObject*
+EntityManager::spaceObject(int_t id) const {
+    model::SpaceObject* spaceobject = static_cast<model::SpaceObject*>(get(id));
+    assert(spaceobject);
+    return spaceobject;
+}
 
 model::item::Scaner*
 EntityManager::scaner(int_t id) const

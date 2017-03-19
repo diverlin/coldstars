@@ -124,6 +124,7 @@ Manager::hasType(Type type) const
 Base*
 Manager::get(int_t id) const
 {
+    assert(id != NONE);
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {
         return it->second;
