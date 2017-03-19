@@ -22,7 +22,6 @@
 class IdGenerator;
 class TextureIdGenerator;
 class God;
-class EntityManager;
 class MessageManager;
 class Config;
 class TurnTimer;
@@ -99,7 +98,6 @@ public:
     IdGenerator& idGenerator() { return *m_idGenerator; }
     IdGenerator& textureIdGenerator() { return *m_textureIdGenerator; }
     God& god() { return *m_god; }
-    EntityManager& entityManager() { return *m_entityManager; }
     MessageManager& messageManager() { return *m_messageManager; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
@@ -153,7 +151,6 @@ private:
     IdGenerator* m_idGenerator = nullptr;
     IdGenerator* m_textureIdGenerator = nullptr;
     God* m_god = nullptr;
-    EntityManager* m_entityManager = nullptr;
     MessageManager* m_messageManager = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;

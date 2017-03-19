@@ -131,16 +131,16 @@ void MessageManager::process(const Message& message)
         /** STARSYSTEM ADD */
     case TELEGRAM::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data);
-        model::StarSystem* starsystem = model::getStarsystem(descriptor.owner);
-        model::Ship* ship = model::getShip(descriptor.object);
+        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+        model::Ship* ship = EntityManager::get().ship(descriptor.object);
         assert(false);
         //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
         break;
     }
     case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data);
-        model::StarSystem* starsystem = model::getStarsystem(descriptor.owner);
-        model::Container* container = model::getContainer(descriptor.object);
+        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+        model::Container* container = EntityManager::get().container(descriptor.object);
         assert(false);
         //        starsystem->add(container, descriptor.position);
         break;
@@ -148,14 +148,14 @@ void MessageManager::process(const Message& message)
         /** OTHER */
     case TELEGRAM::HIT: {
         descriptor::Hit descr(message.data);
-        model::SpaceObject* ob = model::getSpaceObject(descr.target());
+        model::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
         assert(false);
         //        ob->hit(descriptor.damage());
         break;
     }
     case TELEGRAM::EXPLOSION: {
         descriptor::Explosion descriptor(message.data);
-        model::StarSystem* starsystem = model::getStarsystem(descriptor.starsystem_id);
+        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
         Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
         assert(false);
         //        starsystem->add(explosion, descriptor.center);

@@ -47,7 +47,7 @@ BombBuilder::gen(descriptor::BaseOLD* descriptor)
     assert(bomb);
 
     assert(false);
-//    core::global::get().entityManager().reg(bomb);
+//    EntityManager::get().reg(bomb);
 
     __createInternals(bomb, descriptor);
 

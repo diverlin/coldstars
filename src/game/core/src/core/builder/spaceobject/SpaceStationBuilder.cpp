@@ -38,7 +38,7 @@ SpaceStation::__genTemplate(int_t descriptor_id)
     model::SpaceStation* spacestation = new model::SpaceStation(descriptor_id);
     assert(spacestation);
 
-    core::global::get().entityManager().reg(spacestation);
+    EntityManager::get().reg(spacestation);
     
     return spacestation;
 }

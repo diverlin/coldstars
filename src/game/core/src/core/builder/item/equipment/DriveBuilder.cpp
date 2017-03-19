@@ -52,7 +52,7 @@ model::item::Drive*
 Drive::__genTemplate(int_t descriptor_id)
 {
     model::item::Drive* model = new model::item::Drive(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

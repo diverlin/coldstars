@@ -132,52 +132,52 @@ Vehicle::__actualizeItems()
     }
 
     for(int_t id: model()->items()) {
-        model::Base* model_base = core::global::get().entityManager().get(id);
+        model::Base* model_base = EntityManager::get().get(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obSubType()) {
         case entity::Type::SCANER_EQUIPMENT: {
-            control::item::Scaner* item = new control::item::Scaner(core::global::get().entityManager().scaner(id));
+            control::item::Scaner* item = new control::item::Scaner(EntityManager::get().scaner(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
-            control::item::Drive* item = new control::item::Drive(core::global::get().entityManager().drive(id));
+            control::item::Drive* item = new control::item::Drive(EntityManager::get().drive(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
-            control::item::Bak* item = new control::item::Bak(core::global::get().entityManager().bak(id));
+            control::item::Bak* item = new control::item::Bak(EntityManager::get().bak(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
-            control::item::Droid* item = new control::item::Droid(core::global::get().entityManager().droid(id));
+            control::item::Droid* item = new control::item::Droid(EntityManager::get().droid(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
-            control::item::Grapple* item = new control::item::Grapple(core::global::get().entityManager().grapple(id));
+            control::item::Grapple* item = new control::item::Grapple(EntityManager::get().grapple(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
-            control::item::Lazer* item = new control::item::Lazer(core::global::get().entityManager().lazer(id));
+            control::item::Lazer* item = new control::item::Lazer(EntityManager::get().lazer(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
-            control::item::Protector* item = new control::item::Protector(core::global::get().entityManager().protector(id));
+            control::item::Protector* item = new control::item::Protector(EntityManager::get().protector(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
-            control::item::Radar* item = new control::item::Radar(core::global::get().entityManager().radar(id));
+            control::item::Radar* item = new control::item::Radar(EntityManager::get().radar(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
-            control::item::Rocket* item = new control::item::Rocket(core::global::get().entityManager().rocket(id));
+            control::item::Rocket* item = new control::item::Rocket(EntityManager::get().rocket(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
@@ -288,10 +288,10 @@ void Vehicle::putChildrenToGarbage() const
 {
     assert(false);
 //    m_npc->setAlive(false);
-//    core::global::get().entityManager().addToGarbage(m_npc);
+//    EntityManager::get().addToGarbage(m_npc);
 
 //    for(ItemSlot* slot: m_slots) {
-//        core::global::get().entityManager().addToGarbage(slot);
+//        EntityManager::get().addToGarbage(slot);
 //    }
 }
 
@@ -1765,12 +1765,12 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 //    if (data_unresolved_Vehicle.drive_complex_target_id != NONE)
 //    {
-//        m_driveComplex.SetTarget((SpaceObject*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
+//        m_driveComplex.SetTarget((SpaceObject*)EntityManager::get().getEntity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
 //    }
 
 //    if (data_unresolved_Vehicle.land_id != NONE)
 //    {
-//        setLand( (Land*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.land_id) );
+//        setLand( (Land*)EntityManager::get().getEntity(data_unresolved_Vehicle.land_id) );
 //    }
 
 //    switch(place())
@@ -1783,14 +1783,14 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 //    case type::place::KOSMOPORT:
 //    {
-//        ((VehicleSlot*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
+//        ((VehicleSlot*)EntityManager::get().getEntity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
 //        break;
 //    }
 
 //    case type::place::HYPER:
 //    {
 //        //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-//        ((Starsystem*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
+//        ((Starsystem*)EntityManager::get().getEntity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
 //        //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 
 //        break;
@@ -1798,7 +1798,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 //    case type::place::LAND:
 //    {
-//        ((NatureLand*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
+//        ((NatureLand*)EntityManager::get().getEntity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
 //        break;
 //    }
 //    }
@@ -1885,10 +1885,10 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //void Vehicle::putChildrenToGarbage() const
 //{
 //    m_npc->setAlive(false);
-//   core::global::get().entityManager().addToGarbage(m_npc);
+//   EntityManager::get().addToGarbage(m_npc);
 
 //    for(ItemSlot* slot: m_slots) {
-//       core::global::get().entityManager().addToGarbage(slot);
+//       EntityManager::get().addToGarbage(slot);
 //    }
 //}
 
@@ -3291,12 +3291,12 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    if (data_unresolved_Vehicle.drive_complex_target_id != NONE)
 ////    {
-////        m_driveComplex.SetTarget((SpaceObject*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
+////        m_driveComplex.SetTarget((SpaceObject*)EntityManager::get().getEntity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
 ////    }
 
 ////    if (data_unresolved_Vehicle.land_id != NONE)
 ////    {
-////        setLand( (Land*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.land_id) );
+////        setLand( (Land*)EntityManager::get().getEntity(data_unresolved_Vehicle.land_id) );
 ////    }
 
 ////    switch(place())
@@ -3309,14 +3309,14 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    case type::place::KOSMOPORT:
 ////    {
-////        ((VehicleSlot*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
+////        ((VehicleSlot*)EntityManager::get().getEntity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
 ////        break;
 ////    }
 
 ////    case type::place::HYPER:
 ////    {
 ////        //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-////        ((Starsystem*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
+////        ((Starsystem*)EntityManager::get().getEntity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
 ////        //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 
 ////        break;
@@ -3324,7 +3324,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    case type::place::LAND:
 ////    {
-////        ((NatureLand*)core::global::get().entityManager().getEntity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
+////        ((NatureLand*)EntityManager::get().getEntity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
 ////        break;
 ////    }
 ////    }

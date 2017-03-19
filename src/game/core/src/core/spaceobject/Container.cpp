@@ -80,7 +80,7 @@ Container::~Container()
 void Container::putChildrenToGarbage() const
 {
     assert(false);
-//   core::global::get().entityManager().addToGarbage(m_itemSlot);
+//   EntityManager::get().addToGarbage(m_itemSlot);
 }
 
 bool
@@ -178,7 +178,7 @@ void Container::updateInSpace(int time, bool show_effect)
 ///* virtual override final */
 //void Container::putChildrenToGarbage() const
 //{
-//   core::global::get().entityManager().addToGarbage(m_itemSlot);
+//   EntityManager::get().addToGarbage(m_itemSlot);
 //}
 
 //bool
@@ -282,7 +282,7 @@ void Container::updateInSpace(int time, bool show_effect)
 //{
 //    LOG(" Container("+std::to_string(id())+")::ResolveData()");
 
-//    //((Starsystem*)core::global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
+//    //((Starsystem*)EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 //}
 
 ///* virtual override final */

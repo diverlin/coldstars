@@ -31,7 +31,7 @@ Asteroid::__genTemplate()
     model::Asteroid* model = new model::Asteroid;
     assert(model);
 
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     
     return model;
 } 

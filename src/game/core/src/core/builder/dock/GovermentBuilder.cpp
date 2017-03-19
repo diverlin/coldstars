@@ -35,7 +35,7 @@ Goverment* GovermentBuilder::createTemplate(int_t id) const
     assert(goverment);
 
     assert(false);
-//    core::global::get().entityManager().reg(goverment);
+//    EntityManager::get().reg(goverment);
     
     return goverment;
 } 

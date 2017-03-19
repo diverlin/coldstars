@@ -379,7 +379,7 @@ bool Npc::buyGoods()
 //{
 ////    applySkillsStrategy();
     
-////    ((Vehicle*)core::global::get().entityManager().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
+////    ((Vehicle*)EntityManager::get().getEntity(data_unresolved_npc.vehicle_id))->bindNpc(this);
 ////    setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
 ////    m_skills.Resolve();

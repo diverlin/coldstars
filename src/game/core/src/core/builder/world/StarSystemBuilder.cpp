@@ -58,7 +58,7 @@ StarSystem::gen(descriptor::StarSystem* descr)
 {
     model::StarSystem* model = new model::StarSystem;
     assert(model);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     __createInternals(model, descr);
     return model;
 } 

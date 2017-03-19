@@ -53,7 +53,7 @@ model::item::Droid*
 Droid::__genTemplate(int_t descriptor_id)
 {
     model::item::Droid* model = new model::item::Droid(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

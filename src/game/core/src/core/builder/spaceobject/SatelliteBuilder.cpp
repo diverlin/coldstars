@@ -34,7 +34,7 @@ Satellite::__genTemplate(int_t descriptor_id)
     model::Satellite* model = new model::Satellite(descriptor_id);
     assert(model);
 
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     
     return model;
 }

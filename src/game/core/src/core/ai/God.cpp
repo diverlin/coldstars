@@ -114,12 +114,12 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded() == true) {
-        core::global::get().entityManager().clearGarbage();
+        EntityManager::get().clearGarbage();
 
-        //            bool save_event = core::global::get().entityManager().UpdateSaveRequest();
-        //            bool load_event = core::global::get().entityManager().UpdateLoadRequest();
+        //            bool save_event = EntityManager::get().UpdateSaveRequest();
+        //            bool load_event = EntityManager::get().UpdateLoadRequest();
         //            if (load_event == true) {
-        //                player = core::global::get().entityManager().GetPlayer();
+        //                player = EntityManager::get().GetPlayer();
         //                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
         //            }
         //            if (save_event == true) {

@@ -66,6 +66,7 @@ class Rocket;
 
 class Manager
 {
+private:
     Manager();
     Manager(const Manager&) = delete;
     ~Manager() = default;

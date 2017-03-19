@@ -77,7 +77,7 @@ Land* Planet::land()
 {
     assert(false);
 //    if (!m_land) {
-//        m_land = static_cast<model::Land*>(core::global::get().entityManager().get(model()->land()));
+//        m_land = static_cast<model::Land*>(EntityManager::get().get(model()->land()));
 //    }
 
     assert(m_land);
@@ -212,7 +212,7 @@ void Planet::_postDeathUniqueEvent(bool)
 //{
 //    LOG(" Planet("+std::to_string(id())+")::ResolveData");
 
-//    ((Starsystem*)core::global::get().entityManager().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
+//    ((Starsystem*)EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
 //}
 
 ///* virtual override final */

@@ -84,7 +84,7 @@ void Galaxy::putChildrenToGarbage() const
 {
     assert(false);
 //    for (unsigned int i=0; i<m_sectors.size(); i++) {
-//       core::global::get().entityManager().addToGarbage(m_sectors[i]);
+//       EntityManager::get().addToGarbage(m_sectors[i]);
 //    }
 }
 

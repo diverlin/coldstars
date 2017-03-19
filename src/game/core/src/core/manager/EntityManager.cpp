@@ -96,6 +96,13 @@
 
 IdGenerator EntityManager::m_idGenerator;
 
+EntityManager&
+EntityManager::get()
+{
+    static EntityManager instance;
+    return instance;
+}
+
 void EntityManager::clear()
 {
     assert(false);

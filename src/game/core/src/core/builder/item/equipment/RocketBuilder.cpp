@@ -53,7 +53,7 @@ model::item::Rocket*
 Rocket::__genTemplate(int_t descriptor_id)
 {
     model::item::Rocket* model = new model::item::Rocket(descriptor_id);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 }
 

@@ -40,7 +40,7 @@ Star::__genTemplate(int_t id)
     model->setId(id);
 
     assert(model);
-    core::global::get().entityManager().reg(model);
+    EntityManager::get().reg(model);
     return model;
 } 
  

@@ -201,7 +201,7 @@ void Item::_updateLock()
         
 ////    if(m_data_unresolved_Base.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
 ////    {
-////        ((ItemSlot*)core::global::get().entityManager().getEntity(m_data_unresolved_Base.item_slot_id))->insert(this);
+////        ((ItemSlot*)EntityManager::get().getEntity(m_data_unresolved_Base.item_slot_id))->insert(this);
 ////    }
 //}
 
