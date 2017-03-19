@@ -23,18 +23,8 @@
 #include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 
-
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
-
-//#include <core/descriptor/spaceobject/Star.hpp>
-//#include <core/descriptor/spaceobject/Planet.hpp>
-//#include <core/descriptor/spaceobject/Asteroid.hpp>
-//#include <core/descriptor/spaceobject/Container.hpp>
-
-//#include <core/descriptor/spaceobject/Ship.hpp>
-//#include <core/descriptor/spaceobject/SpaceStation.hpp>
-//#include <core/descriptor/spaceobject/Satellite.hpp>
 
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
