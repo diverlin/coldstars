@@ -16,42 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
 
-#include <ceti/type/IdType.hpp>
+#include "Planet.hpp"
 
-#include <string>
-
-namespace descriptor {
-class StarSystem;
-} // namespace descriptor
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
-class StarSystem;
+
+Planet::Planet(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
+Planet::Planet(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Planet::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace model
 
-namespace control {
-class StarSystem;
-} // namespace control
-
-namespace builder {
-
-class StarSystem
-{
-public:
-    static model::StarSystem* gen();
-    static model::StarSystem* gen(descriptor::StarSystem*);
-    static model::StarSystem* gen(const std::string&);
-
-private:
-    StarSystem()=delete;
-    ~StarSystem()=delete;
-
-    static void __createInternals(model::StarSystem*, descriptor::StarSystem*);
-
-    static void __createBackground(control::StarSystem&, int, int, int);
-    static void __createStar(control::StarSystem&);
-    static void __createPlanets(control::StarSystem&, int);
-}; 
-
-} // namespace builder

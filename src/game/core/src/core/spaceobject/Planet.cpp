@@ -27,33 +27,13 @@
 #include <common/Global.hpp>
 #include <core/world/starsystem.hpp>
 
+#include <core/model/spaceobject/Planet.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
 #include <core/manager/EntityManager.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
 
-#include <ceti/serialization/macro.hpp>
-
-namespace model {
-
-Planet::Planet()
-{
-//    setType(entity::type::PLANET);
-}
-
-Planet::Planet(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Planet::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
 
 namespace control {
 

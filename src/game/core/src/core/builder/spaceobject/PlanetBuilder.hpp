@@ -19,14 +19,16 @@
 
 #pragma once
 
-namespace model {
-class Planet;
-} // namespace model
+#include <ceti/type/IdType.hpp>
 
 namespace descriptor {
 class Planet;
 } // namespace descriptor
-    
+
+namespace model {
+class Planet;
+} // namespace model
+
 namespace builder {
 
 class Planet
@@ -36,7 +38,7 @@ public:
     static model::Planet* gen(descriptor::Planet*);
 
 private:
-    static model::Planet* __genTemplate();
+    static model::Planet* __genTemplate(int_t);
 }; 
 
 } // namespace builder

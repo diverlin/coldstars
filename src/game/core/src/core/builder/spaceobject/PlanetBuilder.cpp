@@ -19,6 +19,7 @@
 #include "PlanetBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobject/Planet.hpp>
+#include <core/model/spaceobject/Planet.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -26,9 +27,9 @@
 namespace builder {
 
 model::Planet*
-Planet::__genTemplate()
+Planet::__genTemplate(int_t descriptor_id)
 {
-    model::Planet* model = new model::Planet;
+    model::Planet* model = new model::Planet(descriptor_id);
     assert(model);
 
     EntityManager::get().reg(model);
@@ -52,7 +53,7 @@ Planet::gen()
 model::Planet*
 Planet::gen(descriptor::Planet* descr)
 {
-    model::Planet* model = __genTemplate();
+    model::Planet* model = __genTemplate(descr->id());
 
     /// Base
     LifeData life_data;

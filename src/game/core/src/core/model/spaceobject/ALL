@@ -1,4 +1,7 @@
+#include "Star.hpp"
+#include "Planet.hpp"
+
 #include "Satellite.hpp"
 #include "Ship.hpp"
 #include "SpaceStation.hpp"
-#include "Star.hpp"
+
