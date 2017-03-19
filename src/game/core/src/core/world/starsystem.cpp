@@ -45,6 +45,9 @@
 //#include <client/pilots/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
+#include <core/model/spaceobject/ALL>
+#include <core/model/world/starsystem.hpp>
+
 //#include <client/effects/DistantNebulaEffect.hpp>
 //#include <client/effects/DistantStarEffect.hpp>
 //#include <client/effects/lazerTrace.hpp>
@@ -62,42 +65,6 @@
 #include <meti/RandUtils.hpp>
 
 //int Starsystem::m_counter = 0;
-
-
-namespace model {
-
-StarSystem::StarSystem()
-{
-//    setType(entity::type::STARSYSTEM);
-
-//    setPlace(place::type::KOSMOS);
-
-    m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
-}
-
-StarSystem::StarSystem(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-StarSystem::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-bool StarSystem::operator==(const StarSystem& rhs) const
-{
-    assert(false);
-    return true;
-}
-
-bool StarSystem::operator!=(const StarSystem& rhs) const
-{
-    return !(*this == rhs);
-}
-
-} // namespace model
 
 
 namespace control {

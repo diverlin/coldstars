@@ -92,6 +92,8 @@
 
 #include <core/model/spaceobject/Ship.hpp>
 
+#include <core/model/world/starsystem.hpp>
+
 #include <core/model/item/equipment/ALL>
 
 IdGenerator EntityManager::m_idGenerator;

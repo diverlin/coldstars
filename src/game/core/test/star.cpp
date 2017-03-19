@@ -16,8 +16,7 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <core/common/Global.hpp>
-#include <core/spaceobject/Star.hpp>
+#include <core/model/spaceobject/Star.hpp>
 
 #include <core/builder/spaceobject/StarBuilder.hpp>
 
