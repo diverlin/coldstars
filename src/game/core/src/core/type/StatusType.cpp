@@ -17,7 +17,7 @@
 */
 
 
-#include "StatusTypes.hpp"
+#include "StatusType.hpp"
 
 
 std::string getTargetStatusStr(STATUS status)

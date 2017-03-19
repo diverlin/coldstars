@@ -5,7 +5,7 @@
 
 #include <common/constants.hpp>
 
-#include <core/type/EntityTypes.hpp> // test
+#include <core/type/EntityType.hpp> // test
 
 #include <core/descriptor/Hit.hpp>
 #include <core/manager/DescriptorManager.hpp>

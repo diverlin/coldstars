@@ -20,8 +20,8 @@
 #pragma once
 
 #include <meti/VectorUtils.hpp>
-#include <core/type/EntityTypes.hpp>
-#include <core/type/GuiTypes.hpp>
+#include <core/type/EntityType.hpp>
+#include <core/type/GuiType.hpp>
 #include "Converter.hpp"
 
 #include <vector>

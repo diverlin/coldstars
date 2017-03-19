@@ -19,7 +19,7 @@
 #pragma once
 
 #include <core/dock/Land.hpp>
-#include <core/type/RaceTypes.hpp>
+#include <core/type/RaceType.hpp>
 
 class Angar; 
 class Store; 

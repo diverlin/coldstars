@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <core/type/EntityTypes.hpp>
-#include <core/type/DescriptorTypes.hpp>
-#include <core/type/RaceTypes.hpp>
+#include <core/type/EntityType.hpp>
+#include <core/type/DescriptorType.hpp>
+#include <core/type/RaceType.hpp>
 
 #include <ceti/type/IdType.hpp>
 

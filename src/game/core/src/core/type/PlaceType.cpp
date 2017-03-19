@@ -17,24 +17,21 @@
 */
 
 
-#include "RaceTypes.hpp"
+#include "PlaceType.hpp"
 
-std::string to_string(race::Type race_id)
+
+std::string getPlaceStr(place::type place_id) 
 {
-    switch(race_id)
+    switch(place_id)
     {
-        case race::Type::NONE: { return "RACE_NONE"; break; }
+        case place::type::NONE:             { return "PLACE_NONE"; break; }
         
-        case race::Type::R0: { return "RACE0"; break; }
-        case race::Type::R1:    { return "RACE1"; break; }
-        case race::Type::R2:    { return "RACE2"; break; }
-        case race::Type::R3:    { return "RACE3"; break; }
-        case race::Type::R4:    { return "RACE4"; break; }
+        case place::type::KOSMOS:         { return "SPACE"; break; }
+        case place::type::HYPER:    { return "HYPER_SPACE"; break; }
+        case place::type::KOSMOPORT:        { return "KOSMOPORT"; break; }
+        case place::type::LAND:    { return "NATURELAND"; break; }
 
-        case race::Type::R6:    { return "RACE6"; break; }
-        case race::Type::R7:    { return "RACE7"; break; }
-
-        default: { return "RACE_UKNOWN"; break; }    
+        default: { return "PLACE_UKNOWN"; break; }    
     }
-}
+} 
 

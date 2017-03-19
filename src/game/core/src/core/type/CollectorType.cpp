@@ -16,10 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "TypesCollector.hpp"
+#include "CollectorType.hpp"
 
-#include <core/type/TextureTypes.hpp>
-#include <core/type/MeshTypes.hpp>
+#include <core/type/TextureType.hpp>
+#include <core/type/MeshType.hpp>
 
 #include <cassert>
 

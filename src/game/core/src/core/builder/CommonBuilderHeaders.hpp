@@ -18,7 +18,7 @@
 
 #pragma once
 
-//#include <types/MeshTypes.hpp>
+//#include <types/MeshType.hpp>
 
 #include <common/common.hpp>
 #include <math/rand.hpp>

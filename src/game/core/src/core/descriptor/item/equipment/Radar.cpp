@@ -18,7 +18,7 @@
 
 #include "Radar.hpp"
 
-#include <core/type/EntityTypes.hpp>
+#include <core/type/EntityType.hpp>
 
 #include <ceti/serialization/macro.hpp>
 

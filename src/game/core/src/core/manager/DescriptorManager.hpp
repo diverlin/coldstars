@@ -29,8 +29,8 @@
 #include <core/descriptor/Mesh.hpp>
 #include <core/descriptor/Texture.hpp>
 #include <core/resource/Collector.hpp>
-#include <core/type/MeshTypes.hpp>
-#include <core/type/TextureTypes.hpp>
+#include <core/type/MeshType.hpp>
+#include <core/type/TextureType.hpp>
 
 #include <ceti/descriptor/Base.hpp>
 

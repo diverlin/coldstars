@@ -28,7 +28,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/type/MeshTypes.hpp>
+#include <core/type/MeshType.hpp>
     
 #include <meti/RandUtils.hpp>
 

@@ -21,12 +21,11 @@
 
 #include <client/common/global.hpp>
 
-#include <core/type/TypesCollector.hpp>
+#include <core/type/CollectorType.hpp>
 #include <core/resource/MdLoader.hpp>
 
 #include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>
-
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/FsUtils.hpp>

@@ -16,22 +16,26 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#pragma once
 
-#include "PlaceTypes.hpp"
+#include <string>
 
+#include <core/type/TextureType.hpp>
 
-std::string getPlaceStr(place::type place_id) 
-{
-    switch(place_id)
-    {
-        case place::type::NONE:             { return "PLACE_NONE"; break; }
-        
-        case place::type::KOSMOS:         { return "SPACE"; break; }
-        case place::type::HYPER:    { return "HYPER_SPACE"; break; }
-        case place::type::KOSMOPORT:        { return "KOSMOPORT"; break; }
-        case place::type::LAND:    { return "NATURELAND"; break; }
+namespace mesh {
 
-        default: { return "PLACE_UKNOWN"; break; }    
-    }
-} 
+enum class Type : int {
+    FAILBACK = int(texture::Type::LAST),
+    //
+    PLANE,
+    SPHERE,
+    SPHERE_DEFORMED,
+    SPACESTATION,
+    //
+    LAST
+};
+
+} // namespace mesh
+
+std::string getTypeStr(mesh::Type place);
 

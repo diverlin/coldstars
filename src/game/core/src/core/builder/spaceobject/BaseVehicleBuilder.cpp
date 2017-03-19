@@ -57,7 +57,7 @@
 
 #include <core/slot/ItemSlot.hpp>
 
-#include <core/type/TechLevelTypes.hpp>
+#include <core/type/TechLevelType.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 

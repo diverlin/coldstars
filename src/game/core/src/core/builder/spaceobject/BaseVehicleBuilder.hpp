@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/type/TechLevelTypes.hpp>
+#include <core/type/TechLevelType.hpp>
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 
 class Vehicle;

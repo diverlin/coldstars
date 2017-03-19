@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/type/AiScenarioTypes.hpp>
+#include <core/type/AiScenarioType.hpp>
 
 #include <ceti/type/IdType.hpp>
 
