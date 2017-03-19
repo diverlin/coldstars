@@ -24,8 +24,8 @@
 
 namespace mesh {
 
-enum class type : int {
-    FAILBACK = int(texture::type::LAST),
+enum class Type : int {
+    FAILBACK = int(texture::Type::LAST),
     //
     PLANE,
     SPHERE,
@@ -37,5 +37,5 @@ enum class type : int {
 
 } // namespace mesh
 
-std::string getTypeStr(mesh::type place);
+std::string getTypeStr(mesh::Type place);
 
