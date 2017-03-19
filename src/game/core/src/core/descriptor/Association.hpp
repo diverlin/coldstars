@@ -18,59 +18,44 @@
 
 #pragma once
 
-#include "Base.hpp"
-#include "Id.hpp"
-#include "Property.hpp"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
-#include <meti/VectorUtils.hpp>
+#include <string>
 
-#include <boost/serialization/map.hpp>
-
-namespace ceti {
 namespace descriptor {
 
-
-class Descriptor : public Base
-{
+class Association {
 public:
-    Descriptor(int_t type);
-    Descriptor(const std::string& data);
-    ~Descriptor();
+    Association()
+    {}
 
-    std::string data() const;
+public:
+    void setRace(const std::string& race) { m_race = race; }
+//    void setType(const std::string& type) { m_type = type; }
+//    void setSubtype(const std::string& subtype) { m_subtype = subtype; }
+    void setName(const std::string& name) { m_name = name; }
+    void setColor(const std::string& color) { m_color = color; }
 
-    bool operator==(const Descriptor& rhs) const;
+//    const std::string& type() const { return m_type; }
 
-    int_t get_i(int) const;
-    float get_f(int) const;
-    const std::string& get_s(int) const;
-    const meti::vec3& get_v3(int) const;
-
-    void add(const Property&);
-    void add(const std::vector<Property>&);
-
-    std::string info() const;
+private:
+    std::string m_race = "";
+//    std::string m_type = "";
+//    std::string m_subtype = "";
+    std::string m_name = "";
+    std::string m_color = "";
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_intValues;
-        ar & m_floatValues;
-        ar & m_strValues;
-        ar & m_vec3Values;
+        ar & m_race;
+//        ar & m_type;
+//        ar & m_subtype;
+        ar & m_name;
+        ar & m_color;
     }
-
-    std::map<int, int_t> m_intValues;
-    std::map<int, float> m_floatValues;
-    std::map<int, std::string> m_strValues;
-    std::map<int, meti::vec3> m_vec3Values;
-
-public:
-    static std::map<int, Id> m_ids;
 };
 
-
 } // namespace descriptor
-} // namespace ceti

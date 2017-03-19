@@ -26,7 +26,6 @@
 
 #include <core/descriptor/spaceobject/Container.hpp>
 
-#include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>
 

@@ -20,24 +20,18 @@
 
 #include <sstream>
 
-namespace ceti {
 namespace descriptor {
 
 Material::Material(int_t type)
-    :
-      Base(type)
 {
+    assert(false);
+    //setType(Type::TEXTURE);
 }
 
 Material::Material(const std::string& data)
-    :
-      Base()
 {
     MACRO_READ_SERIALIZED_DATA
 }
-
-Material::~Material()
-{}
 
 bool
 Material::operator==(const Material& rhs) const
@@ -52,4 +46,3 @@ Material::data() const
 }
 
 } // namespace descriptor
-} // namespace ceti

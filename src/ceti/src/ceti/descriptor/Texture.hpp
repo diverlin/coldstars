@@ -20,8 +20,6 @@
 
 #include "Base.hpp"
 
-#include <ceti/descriptor/Association.hpp>
-
 #include <ceti/type/IdType.hpp>
 
 #include <glm/glm.hpp>
@@ -34,19 +32,9 @@ namespace descriptor {
 class Material : public Base
 {
 public:
-//    Material(int type,
-//            const std::string& path,
-//            bool alpha = true);
+    Material() = default;
+    ~Material() = default;
 
-    Material(int_t type = -1);
-    Material(const std::string& data);
-    ~Material();
-
-    std::string data() const;
-
-    bool operator==(const Material& rhs) const;
-
-    void setAssociation(const Association& association) { m_association = association; }
     void setPath(const std::string& path) { m_path = path; }
     void setAlpha(bool alpha) { m_alpha = alpha; }
     void setCol(int col) { m_col = col; }
@@ -55,7 +43,6 @@ public:
     void setAutoRotated(bool auto_rotated) { m_autoRotated = auto_rotated; }
     void setBrightThreshold(float brightThreshold) { m_brightThreshold = brightThreshold; }
 
-    const Association& association() const { return m_association; }
     const std::string& path() const { return m_path; }
     bool useAlpha() const { return m_alpha; }
     bool animated() const { return (m_col !=1 || m_row != 1); }
@@ -73,13 +60,11 @@ private:
     float m_fps = 1.0f;
     bool m_autoRotated = false;
     float m_brightThreshold = 1.0f;
-    Association m_association;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_path;
         ar & m_alpha;
@@ -88,7 +73,6 @@ private:
         ar & m_fps;
         ar & m_autoRotated;
         ar & m_brightThreshold;
-        ar & m_association;
     }
 };
 

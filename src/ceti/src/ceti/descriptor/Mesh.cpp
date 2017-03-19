@@ -23,32 +23,15 @@
 namespace ceti {
 namespace descriptor {
 
-Mesh::Mesh(int_t type)
-    :
-      Base(type)
-{}
-
-Mesh::Mesh(int_t type,
-           const std::string& model,
-           const std::string& texture,
-           const meti::vec3& orientation)
-    :
-      Base(type)
-    , m_modelPath(model)
-    , m_materialPath(texture)
-    , m_orientation(orientation)
-{
-}
-
-Mesh::Mesh(const std::string& data)
-    :
-      Base()
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-Mesh::~Mesh()
-{}
+//Mesh::Mesh(int_t type,
+//           const std::string& model,
+//           const std::string& texture,
+//           const meti::vec3& orientation)
+//    : m_modelPath(model)
+//    , m_materialPath(texture)
+//    , m_orientation(orientation)
+//{
+//}
 
 } // namespace descriptor
 } // namespace ceti

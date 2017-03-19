@@ -24,7 +24,6 @@
 #include <ceti/type/IdType.hpp>
 #include <ceti/Orientation.hpp>
 #include <ceti/rect.hpp>
-#include <ceti/descriptor/Collector.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
