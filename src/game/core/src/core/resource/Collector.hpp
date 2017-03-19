@@ -21,8 +21,6 @@
 
 #include <client/common/global.hpp>
 
-//#include <core/type/MeshTypes.hpp>
-//#include <core/type/TextureTypes.hpp>
 #include <core/type/TypesCollector.hpp>
 #include <core/resource/MdLoader.hpp>
 
@@ -53,28 +51,19 @@ template<typename T>
 class Collector
 {
 public:
-    Collector() {}
     Collector(const std::string& fname)
-        : m_fname(fname) {
+        : m_fname(fname), m_failback(new T) {
         if (ceti::filesystem::is_file_exists(m_fname)) {
             __load();
         }
     }
-    ~Collector() {}
+    ~Collector() = default;
 
     bool loaded() const { return m_loaded; }
-
-    [[warning("make it const")]]
-    T* failback() {
-        if (!m_failback) {
-            m_failback = new T; // delayed init applied because we need init after ogl initialization
-        }
-        assert(m_failback);
-        return m_failback;
-    }
+    T* failback() const { return m_failback; }
 
     void add(T* ob) {
-        assert(ob->id() != -1);
+        assert(ob->id() != NONE);
         if (!contains(ob->id())) {
             m_descriptors.insert(std::make_pair( ob->id(), ob ));
             m_descriptorsTypes[ob->type()].push_back(ob);
@@ -83,8 +72,7 @@ public:
         }
     }
 
-    [[warning("make it const")]]
-    T* get(int_t id) {
+    T* get(int_t id) const {
         T* result = nullptr;
         auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
@@ -99,18 +87,17 @@ public:
         return result;
     }
 
-//    [[warning("make it const")]]
     T* random(int_t type) const {
         T* result = nullptr;
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
             result = meti::getRand(it->second);
         }
-//#ifdef USE_FAILBACK_RESOURCES
-//        else {
-//            result = failback();
-//        }
-//#endif // USE_FAILBACK_RESOURCES
+#ifdef USE_FAILBACK_RESOURCES
+        else {
+            result = failback();
+        }
+#endif // USE_FAILBACK_RESOURCES
         assert(result);
         return result;
     }

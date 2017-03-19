@@ -78,6 +78,10 @@ enum class Type {
     // other
     HIT,
 
+    // resources
+    MESH,
+    MATERIAL,
+
     /** */
     ANY
 };

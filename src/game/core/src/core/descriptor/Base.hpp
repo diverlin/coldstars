@@ -20,6 +20,7 @@
 
 #include <core/type/EntityTypes.hpp>
 #include <core/type/DescriptorTypes.hpp>
+#include <core/type/RaceTypes.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -39,12 +40,14 @@ public:
     void setObType(const entity::Type& obType)   { m_obType = obType; }
     void setObSubType(const entity::Type& obSubType) { m_obSubType = obSubType; }
     void setObSubSubType(const entity::Type& obSubSubType) { m_obSubSubType = obSubSubType; }
+    void setRace(race::Type race) { m_race = race; }
 
     int_t id() const { return m_id; }
     descriptor::Type type() const { return m_type; }
     const entity::Type& obType() const { return m_obType; }
     const entity::Type& obSubType() const { return m_obSubType; }
     const entity::Type& obSubSubType() const { return m_obSubSubType; }
+    race::Type race() const { return m_race; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
@@ -53,6 +56,7 @@ public:
         result += std::string(" obType = ") + to_string(m_obType) + "\n";
         result += std::string(" obSubtype = ") + to_string(m_obSubType) + "\n";
         result += std::string(" obSubsubtype = ") + to_string(m_obSubSubType) + "\n";
+        result += std::string(" race = ") + to_string(m_race) + "\n";
         return result;
     }
 
@@ -65,6 +69,7 @@ private:
     entity::Type m_obType = entity::Type::NONE;
     entity::Type m_obSubType = entity::Type::NONE;
     entity::Type m_obSubSubType = entity::Type::NONE;
+    race::Type m_race = race::Type::NONE;
 
 private:
     friend class boost::serialization::access;
@@ -75,6 +80,7 @@ private:
         ar & m_obType;
         ar & m_obSubType;
         ar & m_obSubSubType;
+        ar & m_race;
     }
 };
 

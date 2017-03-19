@@ -107,11 +107,7 @@ StarSystem::StarSystem(model::StarSystem* model)
       Base(model)
     , m_model_starsystem(model)
     , m_descriptor_starsystem(descriptor::Manager::get().starSystem(model->descriptor()))
-{ 
-    //setStarSystem(this);
-    
-//    m_counter++;
-}
+{}
 
 StarSystem::~StarSystem()
 {    
@@ -248,6 +244,12 @@ void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, con
     m_bullets.push_back(rocket);
 }
 
+void StarSystem::add(model::Star* model)
+{
+    Star* star = new Star(model);
+    add(star);
+}
+
 void StarSystem::add(Star* star)
 {
     star->model()->setStarSystem(model()->id());
@@ -257,7 +259,13 @@ void StarSystem::add(Star* star)
     m_stars.push_back(star);
 }
 
-void StarSystem::add(Planet* planet, const SpaceObject* parent)
+void StarSystem::add(model::Planet* model, control::SpaceObject* parent)
+{
+    Planet* planet = new Planet(model);
+    add(planet, parent);
+}
+
+void StarSystem::add(Planet* planet, SpaceObject* parent)
 {
     if (!parent) {
         parent = star();

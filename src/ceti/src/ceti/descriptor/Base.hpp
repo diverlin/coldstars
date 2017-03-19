@@ -30,17 +30,21 @@ namespace descriptor {
 class Base
 {
 public:
-    Base()=default;
-    ~Base()=default;
+    Base() = default;
+    ~Base() = default;
 
     int_t id() const { return m_id; }
     int_t type() const { return m_type; }
+    int_t obType() const { return m_obType; }
 
+    void setId(int_t id) { m_id = id; }
     void setType(int_t type) { m_type = type; }
+    void setObType(int_t obType) { m_obType = obType; }
 
 private:
     int_t m_id = NONE;
     int_t m_type = NONE;
+    int_t m_obType = NONE;
 
 private:
     friend class boost::serialization::access;
@@ -48,6 +52,7 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_id;
         ar & m_type;
+        ar & m_obType;
     }
 };
 

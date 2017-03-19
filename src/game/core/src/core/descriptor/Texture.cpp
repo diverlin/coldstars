@@ -17,6 +17,7 @@
 */
 
 #include "Texture.hpp"
+#include <core/type/DescriptorTypes.hpp>
 
 #include <sstream>
 
@@ -24,8 +25,8 @@ namespace descriptor {
 
 Material::Material(int_t type)
 {
-    assert(false);
-    //setType(Type::TEXTURE);
+    setType(int_t(Type::MATERIAL));
+    setObType(type);
 }
 
 Material::Material(const std::string& data)
