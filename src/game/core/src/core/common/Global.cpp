@@ -23,7 +23,6 @@
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
-#include <ceti/IdGenerator.hpp>
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
@@ -81,9 +80,7 @@ global& global::get()
 
 global::global()
     :
-      m_idGenerator(new IdGenerator)
-    , m_textureIdGenerator(new IdGenerator)
-    , m_god(new God)
+      m_god(new God)
     , m_messageManager(new MessageManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)

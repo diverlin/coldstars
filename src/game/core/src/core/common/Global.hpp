@@ -19,8 +19,6 @@
 
 #pragma once
 
-class IdGenerator;
-class TextureIdGenerator;
 class God;
 class MessageManager;
 class Config;
@@ -95,8 +93,6 @@ class global
 public:
     static global& get();
 
-    IdGenerator& idGenerator() { return *m_idGenerator; }
-    IdGenerator& textureIdGenerator() { return *m_textureIdGenerator; }
     God& god() { return *m_god; }
     MessageManager& messageManager() { return *m_messageManager; }
     Config& config() { return *m_config; }
@@ -148,8 +144,6 @@ private:
     ~global();
     global& operator=(const global&) = delete;
 
-    IdGenerator* m_idGenerator = nullptr;
-    IdGenerator* m_textureIdGenerator = nullptr;
     God* m_god = nullptr;
     MessageManager* m_messageManager = nullptr;
     Config* m_config = nullptr;
