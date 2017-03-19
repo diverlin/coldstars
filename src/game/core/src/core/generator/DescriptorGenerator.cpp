@@ -144,8 +144,8 @@ genStar()
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
 
-    descr->setTexture(textureDescriptorIdFromType (texture::Type::STAR));
-    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE));
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::STAR));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
     descriptor::Manager::get().reg(descr);
 
@@ -175,8 +175,8 @@ genPlanet()
                                   descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
-    descr->setTexture(textureDescriptorIdFromType (texture::Type::PLANET));
-    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE));
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
     descriptor::Manager::get().reg(descr);
 
@@ -263,8 +263,8 @@ genAsteroid()
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randDirection());
-    descr->setTexture(textureDescriptorIdFromType (texture::Type::ASTEROID));
-    descr->setMesh(meshDescriptorIdFromType (mesh::Type::SPHERE_DEFORMED));
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::ASTEROID));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE_DEFORMED));
 
     descriptor::Manager::get().reg(descr);
 
