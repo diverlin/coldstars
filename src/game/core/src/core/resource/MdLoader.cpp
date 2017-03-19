@@ -1,7 +1,8 @@
 #include "MdLoader.hpp"
 
-#include <ceti/descriptor/Mesh.hpp>
-#include <ceti/descriptor/Texture.hpp>
+#include <core/descriptor/Mesh.hpp>
+#include <core/descriptor/Texture.hpp>
+
 #include <ceti/StringUtils.hpp>
 
 #include <boost/property_tree/ptree.hpp>
@@ -12,7 +13,6 @@
 #include <fstream>
 #include <cassert>
 
-namespace ceti {
 
 MdLoader::MdLoader(const std::string& filepath)
 {
@@ -57,13 +57,11 @@ MdLoader::value(const std::string& key)
 
 
 void
-InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
+InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
 {
     std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
-
-    ceti::descriptor::Association association;
 
     boost::optional<std::string> name = root.get_optional<std::string>("association.name");
     boost::optional<std::string> race = root.get_optional<std::string>("association.race");
@@ -72,22 +70,21 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
     boost::optional<std::string> color = root.get_optional<std::string>("association.color");
 
     if (name) {
-        association.setName(name.get());
+        mesh->setName(name.get());
     }
     if (race) {
-        association.setRace(race.get());
+        mesh->setRace(race.get());
     }
-    if (type) {
-        association.setType("mesh::" + type.get());
-    }
-    if (subtype) {
-        association.setSubtype(subtype.get());
-    }
+//    if (type) {
+//        mesh->setType("mesh::" + type.get());
+//    }
+//    if (subtype) {
+//        mesh->setSubtype(subtype.get());
+//    }
     if (color) {
-        association.setColor(color.get());
+        mesh->setColor(color.get());
     }
 
-    mesh->setAssociation(association);
     std::string mesh_path = ceti::replace(path, ".od", ".obj");
     std::string material_path = ceti::replace(path, ".od", ".png");
 
@@ -96,18 +93,16 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Mesh* mesh)
         mesh->setMaterialPath(material_path);
     }
 
-    assert(mesh->id() != -1);
-//    assert(mesh->type() != -1);
+    assert(mesh->id() != NONE);
+//    assert(mesh->type() != NONE);
 }
 
 void
-InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
+InfoLoader::read(const std::string& path, descriptor::Material* material)
 {
     std::cout<<path<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
-
-    ceti::descriptor::Association association;
 
     boost::optional<std::string> name = root.get_optional<std::string>("association.name");
     boost::optional<std::string> race = root.get_optional<std::string>("association.race");
@@ -116,19 +111,19 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
     boost::optional<std::string> color = root.get_optional<std::string>("association.color");
 
     if (name) {
-        association.setName(name.get());
+        material->setName(name.get());
     }
     if (race) {
-        association.setRace(race.get());
+        material->setRace(race.get());
     }
-    if (type) {
-        association.setType("texture::" + type.get());
-    }
-    if (subtype) {
-        association.setSubtype(subtype.get());
-    }
+//    if (type) {
+//        material->setType("texture::" + type.get());
+//    }
+//    if (subtype) {
+//        material->setSubtype(subtype.get());
+//    }
     if (color) {
-        association.setColor(color.get());
+        material->setColor(color.get());
     }
 
     boost::optional<float> brightThreshold = root.get_optional<float>("material.brightThreshold");
@@ -161,7 +156,6 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
         material->setAutoRotated(auto_rotated.get());
     }
 
-    material->setAssociation(association);
     std::string img_path = ceti::replace(path, ".md", ".png");
 
     material->setPath(img_path);
@@ -169,8 +163,7 @@ InfoLoader::read(const std::string& path, ceti::descriptor::Material* material)
     assert(material->row() != 0);
     assert(material->col() != 0);
 
-    assert(material->id() != -1);
-//    assert(material->type() != -1);
+    assert(material->id() != NONE);
+//    assert(material->type() != NONE);
 }
 
-} // namespace ceti

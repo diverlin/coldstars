@@ -40,8 +40,6 @@ namespace descriptor {
 //}
 
 Mesh::Mesh(const std::string& data)
-    //:
-      //ceti::descriptor::Mesh()
 {
     MACRO_READ_SERIALIZED_DATA
 }

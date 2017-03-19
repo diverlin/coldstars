@@ -18,11 +18,12 @@
 
 #pragma once
 
+#include "Association.hpp"
 #include <ceti/descriptor/Mesh.hpp>
 
 namespace descriptor {
 
-class Mesh : public ceti::descriptor::Mesh
+class Mesh : public ceti::descriptor::Mesh, public Association
 {
 public:
     Mesh() = default;
@@ -35,12 +36,11 @@ public:
     bool operator==(const Mesh& rhs) const;
 
 private:
-
-private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::descriptor::Mesh>(*this);
+        ar & boost::serialization::base_object<Association>(*this);
     }
 };
 
