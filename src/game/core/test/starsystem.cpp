@@ -41,18 +41,18 @@ TEST(starsystem, add_remove_objects)
     /* create opbjects */
     test::StarSystem starsystem;
 
-    int init_stars = starsystem.model()->stars().size();
-    int init_planets = starsystem.model()->planets().size();
-    int init_spacestations = starsystem.model()->spacestations().size();
-    int init_ships = starsystem.model()->ships().size();
-    int init_satellites = starsystem.model()->satellites().size();
+    std::vector<int_t> init_stars = starsystem.model()->stars();
+    std::vector<int_t> init_planets = starsystem.model()->planets();
+    std::vector<int_t> init_spacestations = starsystem.model()->spacestations();
+    std::vector<int_t> init_ships = starsystem.model()->ships();
+    std::vector<int_t> init_satellites = starsystem.model()->satellites();
 
     /* pre-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), init_stars);
-    EXPECT_EQ(starsystem.control()->planets().size(), init_planets);
-    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations);
-    EXPECT_EQ(starsystem.control()->ships().size(), init_ships);
-    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites);
+    EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size());
+    EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size());
+    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size());
+    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());
+    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size());
 
     test::Star star;
     test::Planet planet;
@@ -68,11 +68,11 @@ TEST(starsystem, add_remove_objects)
 //    starsystem.control()->add(satellite.model());
 
     /* post-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), init_stars + 1);
-    EXPECT_EQ(starsystem.control()->planets().size(), init_planets + 1);
-//    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations + 1);
-    EXPECT_EQ(starsystem.control()->ships().size(), init_ships + 1);
-//    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites + 1);
+    EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size() + 1);
+    EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size() + 1);
+//    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size() + 1);
+    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size() + 1);
+//    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size() + 1);
 
     assert(false);
     // TODO: implement removing
