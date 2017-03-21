@@ -127,6 +127,19 @@ descriptor::Planet* Planet::descriptor() const { return m_control->descriptor();
 model::Planet* Planet::model() const { return m_control->model(); }
 
 
+SpaceStation::SpaceStation() {
+    model::SpaceStation* model = builder::SpaceStation::gen();
+    m_control = new control::SpaceStation(model);
+}
+SpaceStation::~SpaceStation() {
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::SpaceStation* SpaceStation::descriptor() const { return m_control->descriptor(); }
+model::SpaceStation* SpaceStation::model() const { return m_control->model(); }
+
+
 Ship::Ship() {
     model::Ship* model = builder::Ship::gen();
     m_control = new control::Ship(model);
@@ -138,6 +151,20 @@ Ship::~Ship() {
 
 descriptor::Ship* Ship::descriptor() const { return m_control->descriptor(); }
 model::Ship* Ship::model() const { return m_control->model(); }
+
+
+Satellite::Satellite() {
+    model::Satellite* model = builder::Satellite::gen();
+    m_control = new control::Satellite(model);
+}
+Satellite::~Satellite() {
+    delete m_control->model();
+    delete m_control;
+}
+
+descriptor::Satellite* Satellite::descriptor() const { return m_control->descriptor(); }
+model::Satellite* Satellite::model() const { return m_control->model(); }
+
 
 namespace item {
 

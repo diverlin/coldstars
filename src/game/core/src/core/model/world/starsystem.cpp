@@ -87,8 +87,7 @@ StarSystem::data() const
 
 bool StarSystem::operator==(const StarSystem& rhs) const
 {
-    assert(false);
-    return true;
+    return (data() == rhs.data());
 }
 
 bool StarSystem::operator!=(const StarSystem& rhs) const

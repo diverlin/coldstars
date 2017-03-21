@@ -239,6 +239,8 @@ public:
     float adjustDissipateFilter() const;
     int criticalDamage() const;
 
+    model::Vehicle* model() const { return m_model_vehicle; }
+
 private:
     void __updateFreeSpace();
 //    bool __addItemToCargo(Item*);
@@ -246,7 +248,6 @@ private:
 protected:
     model::Vehicle* m_model_vehicle = nullptr;
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
-    model::Vehicle* model() const { return m_model_vehicle; }
 
     ItemSlot* _freeArtefactSlot() const;
     ItemSlot* _cargoSlotWithGoods(place::type);

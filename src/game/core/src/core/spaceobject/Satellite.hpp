@@ -48,8 +48,6 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&);
 
     model::Satellite* model() const { return m_model_satellite; }
-
-protected:
     descriptor::Satellite* descriptor() const { return m_descriptor_satellite; }
 
 private:

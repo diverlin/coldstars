@@ -23,6 +23,7 @@
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+#include <core/model/world/starsystem.hpp>
 #include <core/world/starsystem.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
@@ -35,37 +36,44 @@
 #include <gtest/gtest.h>
 
 
-TEST(starsystem, add_objects)
+TEST(starsystem, add_remove_objects)
 {
     /* create opbjects */
     test::StarSystem starsystem;
-    test::Star star;
-    test::Planet planet;
-    test::Ship ship;
+
+    int init_stars = starsystem.model()->stars().size();
+    int init_planets = starsystem.model()->planets().size();
+    int init_spacestations = starsystem.model()->spacestations().size();
+    int init_ships = starsystem.model()->ships().size();
+    int init_satellites = starsystem.model()->satellites().size();
 
     /* pre-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), 0);
-    EXPECT_EQ(starsystem.control()->planets().size(), 0);
-    EXPECT_EQ(starsystem.control()->vehicles().size(), 0);
+    EXPECT_EQ(starsystem.control()->stars().size(), init_stars);
+    EXPECT_EQ(starsystem.control()->planets().size(), init_planets);
+    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations);
+    EXPECT_EQ(starsystem.control()->ships().size(), init_ships);
+    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites);
+
+    test::Star star;
+    test::Planet planet;
+//    test::SpaceStation spacestation;
+    test::Ship ship;
+//    test::Satellite satellite;
 
     /* add objects */
-    starsystem.control()->add(star.control());
-    starsystem.control()->add(planet.control());
-
-    glm::vec3 pos(0.0f);
-    glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    starsystem.control()->add(ship.control(), pos, dir);
+    starsystem.control()->add(star.model());
+    starsystem.control()->add(planet.model());
+//    starsystem.control()->add(spacestation.model());
+    starsystem.control()->add(ship.model());
+//    starsystem.control()->add(satellite.model());
 
     /* post-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), 1);
-    EXPECT_EQ(starsystem.control()->planets().size(), 1);
-    EXPECT_EQ(starsystem.control()->vehicles().size(), 1);
+    EXPECT_EQ(starsystem.control()->stars().size(), init_stars + 1);
+    EXPECT_EQ(starsystem.control()->planets().size(), init_planets + 1);
+//    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations + 1);
+    EXPECT_EQ(starsystem.control()->ships().size(), init_ships + 1);
+//    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites + 1);
 
-    assert(starsystem.control()->vehicles()[0]);
     assert(false);
-//    Vehicle* vehicle = starsystem->vehicles()[0];
-//    assert(false);
-//    //EXPECT_EQ(vehicle, ship);
-//    EXPECT_EQ(vehicle->position(), pos);
-//    EXPECT_EQ(vehicle->direction(), dir);
+    // TODO: implement removing
 }

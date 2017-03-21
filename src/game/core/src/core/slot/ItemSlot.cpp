@@ -87,11 +87,7 @@ namespace control {
 
 ItemSlot::ItemSlot(entity::Type subtype)
     :
-      m_turrel(nullptr),
-      m_item(nullptr),
-      m_target(nullptr),
-      m_subtarget(nullptr),
-      m_hitProbability(0)
+      BaseSlot()
 {
     setType(entity::Type::ITEM_SLOT);
     setSubType(subtype);
