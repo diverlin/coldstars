@@ -48,7 +48,13 @@ public:
     int_t id() const { return m_id; }
     int_t descriptor() const { return m_descriptor; }
 
- private:
+    void setWritable(bool writable) { m_writable = writable; }
+
+protected:
+    bool _isWritable() const { return m_writable; }
+
+private:
+    bool m_writable = true;
     int_t m_id = NONE;
     int_t m_descriptor = NONE;
 
@@ -75,7 +81,13 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
+    bool actualizeModel() const { return m_actualizeModel; }
+
+    void setActualizeModel() { m_actualizeModel = true; }
+
 private:
+    bool m_actualizeModel = false;
+
     model::Base* m_model_base = nullptr;
     model::Base* model() const { return m_model_base; }
 };

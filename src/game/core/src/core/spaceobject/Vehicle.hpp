@@ -321,11 +321,7 @@ private:
     bool __installEquipment(Item*);
     ItemSlot* __freeFunctionalSlot(const entity::Type&) const;
 
-    bool m_blockModel = false;
-    void __blockModel() { m_blockModel = true; }
-    void __releaseModel() { m_blockModel = false; }
-    bool __modelBlocked() const { return m_blockModel; }
-
+    void __actualizeModel();
     void __actualizeItems();
 };
 

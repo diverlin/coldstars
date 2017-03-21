@@ -33,7 +33,7 @@ public:
     [[warning("do we need this? using dock will be sufficient probably")]]
     int_t land() const { return m_land; }
 
-    void addItem(int_t id) { m_items.push_back(id); }
+    void addItem(int_t id) { if (_isWritable()) m_items.push_back(id); }
     std::vector<int_t> items() const { return m_items; }
 
 private:
