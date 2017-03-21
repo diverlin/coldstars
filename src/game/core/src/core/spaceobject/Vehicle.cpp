@@ -107,7 +107,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 
     __createSlots(descr);
 
-    __actualizeItems();
+    __actualizeModel();
 
     _updatePropProtection();
     __updateFreeSpace();
@@ -123,14 +123,23 @@ Vehicle::~Vehicle()
 }
 
 void
+Vehicle::__actualizeModel()
+{
+    if (actualizeModel())
+        assert(false);
+        return;
+
+    model()->setWritable(false);
+
+    __actualizeItems();
+
+    model()->setWritable(true);
+    setActualizeModel();
+}
+
+void
 Vehicle::__actualizeItems()
 {
-    __blockModel();
-    // we must not call this function if at least 1 item already inserted, wrong usage
-    for(auto& it: m_slots) {
-        assert(!it.second->item());
-    }
-
     for(int_t id: model()->items()) {
         model::Base* model_base = EntityManager::get().get(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor());
@@ -182,9 +191,7 @@ Vehicle::__actualizeItems()
             break;
         }
         }
-
     }
-    __releaseModel();
 }
 
 int Vehicle::freeSpace() const
@@ -670,9 +677,7 @@ Vehicle::__insertItem(ItemSlot* slot, Item* item)
 
     if (slot->insert(item)) {
         __increaseMass(item->descriptor()->mass());
-        if (!__modelBlocked()) {
-            model()->addItem(item->model()->id());
-        }
+        model()->addItem(item->model()->id());
         return true;
     }
 

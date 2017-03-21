@@ -272,6 +272,8 @@ private:
 
     void __addVehicleCommon(control::Vehicle*, const glm::vec3&, const glm::vec3&);
 
+    void __actualizeModel();
+
     friend class GuiGalaxyMap;
     friend class Observation;
     friend class Player;

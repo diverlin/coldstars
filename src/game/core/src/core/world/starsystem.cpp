@@ -87,6 +87,20 @@ StarSystem::~StarSystem()
     //    for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; }
 }      
 
+void
+StarSystem::__actualizeModel()
+{
+    if (actualizeModel())
+        return;
+
+    model()->setWritable(false);
+
+//    __actualizeItems();
+
+    model()->setWritable(true);
+    setActualizeModel();
+}
+
 Star*
 StarSystem::star() const
 {
