@@ -109,19 +109,25 @@ public:
 
     int_t sector() const { return m_sector; }
 
-    void addVehicle(int_t vehicle) { m_vehicles.push_back(vehicle); }
-    void addBullet(int_t bullet) { m_bullets.push_back(bullet); }
-    void addStar(int_t star) { m_stars.push_back(star); }
-    void addPlanet(int_t planet) { m_planets.push_back(planet); }
-    void addAsteroid(int_t asteroid) { m_asteroids.push_back(asteroid); }
-    void addContainer(int_t container) { m_containers.push_back(container); }
-    void addBlackhole(int_t blackhole) { m_blackholes.push_back(blackhole); }
+    void addBullet(int_t bullet) { if (_isWritable()) m_bullets.push_back(bullet); }
+    void addStar(int_t star) { if (_isWritable()) m_stars.push_back(star); }
+    void addPlanet(int_t planet) { if (_isWritable()) m_planets.push_back(planet); }
+    void addAsteroid(int_t asteroid) { if (_isWritable()) m_asteroids.push_back(asteroid); }
+    void addContainer(int_t container) { if (_isWritable()) m_containers.push_back(container); }
+    void addBlackhole(int_t blackhole) { if (_isWritable()) m_blackholes.push_back(blackhole); }
+
+    void addSpaceStation(int_t spacestation) { if (_isWritable()) m_spacestations.push_back(spacestation); }
+    void addShip(int_t ship) { if (_isWritable()) m_ships.push_back(ship); }
+    void addSatellite(int_t satellite) { if (_isWritable()) m_satellites.push_back(satellite); }
 
     std::vector<int_t> planets() const { return m_planets; }
     std::vector<int_t> stars() const { return m_stars; }
     std::vector<int_t> asteroids() const { return m_asteroids; }
-    std::vector<int_t> vehicles() const { return m_vehicles; }
     std::vector<int_t> containers() const { return m_containers; }
+
+    std::vector<int_t> spacestations() const { return m_spacestations; }
+    std::vector<int_t> ships() const { return m_ships; }
+    std::vector<int_t> satellites() const { return m_satellites; }
 
 private:
     int m_race_id = NONE;
@@ -136,7 +142,10 @@ private:
     std::vector<int_t> m_containers;
     std::vector<int_t> m_bullets;
     std::vector<int_t> m_blackholes;
-    std::vector<int_t> m_vehicles;
+
+    std::vector<int_t> m_spacestations;
+    std::vector<int_t> m_ships;
+    std::vector<int_t> m_satellites;
 
 private:
     friend class boost::serialization::access;
@@ -154,7 +163,10 @@ private:
         ar & m_containers;
         ar & m_bullets;
         ar & m_blackholes;
-        ar & m_vehicles;
+
+        ar & m_spacestations;
+        ar & m_ships;
+        ar & m_satellites;
     }
 };
 

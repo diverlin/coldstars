@@ -74,12 +74,12 @@ void StarSystem::__createInternals(model::StarSystem* model, descriptor::StarSys
 {
     control::StarSystem starsystem(model);
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
-    __createStar(starsystem);
+    //__createStar(starsystem);
     
     //    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     //    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
 
-    __createPlanets(starsystem, meti::getRandInt(2,5));
+    //__createPlanets(starsystem, meti::getRandInt(2,5));
 }
 
 void StarSystem::__createBackground(control::StarSystem& starsystem, int distNebula_num, int distStar_num, int color_id)
@@ -107,7 +107,7 @@ void StarSystem::__createPlanets(control::StarSystem& starsystem, int planet_per
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     for(int i=0; i<planet_per_system; i++) {
         model::Planet* planet = builder::Planet::gen();
-        starsystem.add(planet, starsystem.star());
+        starsystem.add(planet);
         //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
 }

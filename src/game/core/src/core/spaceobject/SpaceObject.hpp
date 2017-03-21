@@ -32,35 +32,6 @@
 #include <boost/serialization/vector.hpp>
 
 
-class Starsystem;
-
-struct UnresolvedDataSpaceObject
-{
-    int parent_id;
-    int starsystem_id;
-}; 
-
-//namespace descriptor {
-
-//class SpaceObject : public Base
-//{
-//public:
-//    SpaceObject() = default;
-//    ~SpaceObject() = default;
-
-//private:
-
-//private:
-//    friend class boost::serialization::access;
-//    template<class Archive>
-//    void serialize(Archive & ar, const unsigned int version) {
-//        ar & boost::serialization::base_object<Base>(*this);
-//    }
-//};
-
-//} // namespace descriptor
-
-
 namespace model {
 
 class SpaceObject : public ceti::model::Orientation, public Base
@@ -130,6 +101,10 @@ private:
 
 } // namespace model
 
+namespace model {
+class StarSystem;
+} // namespace model
+
 namespace control {
 
 class SpaceObject : public ceti::control::Orientation, public control::Base
@@ -139,7 +114,9 @@ public:
     ~SpaceObject() override;
 
     //[[warning("make const, speed optimize")]]
-    Starsystem* starsystem() const  { return m_starsystem; }
+    model::StarSystem* starsystem() const  { return m_starsystem; }
+
+    void setStarSystem(model::StarSystem* starsystem) { m_starsystem = starsystem; }
 
     //[[warning("make const, speed optimize")]]
     model::SpaceObject* parent() const { return m_parent; }
@@ -163,7 +140,7 @@ public:
     model::SpaceObject* model() const { return m_model_spaceobject; }
 
 private:
-    Starsystem* m_starsystem = nullptr;
+    model::StarSystem* m_starsystem = nullptr;
     model::SpaceObject* m_parent = nullptr;
     int m_mass = 0;
 

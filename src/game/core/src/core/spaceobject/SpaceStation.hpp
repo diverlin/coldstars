@@ -51,8 +51,6 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
 
     model::SpaceStation* model() const { return m_model_spacestation; }
-
-protected:
     descriptor::SpaceStation* descriptor() const { return m_descriptor_spacestation; }
 
 private:

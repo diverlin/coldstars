@@ -74,16 +74,15 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
-    [[depreacted("temprorary code refactor workaround")]]
-    Base() = default;
+    Base() = default; // needed because we have some control:: without models, such a slots
     Base(model::Base*);
     virtual ~Base();
 
-    virtual void putChildrenToGarbage() const {}
+    void setActualizeModel() { m_actualizeModel = true; }
 
     bool actualizeModel() const { return m_actualizeModel; }
 
-    void setActualizeModel() { m_actualizeModel = true; }
+    virtual void putChildrenToGarbage() const {}
 
 private:
     bool m_actualizeModel = false;

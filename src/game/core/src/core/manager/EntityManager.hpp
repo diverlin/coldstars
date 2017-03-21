@@ -28,20 +28,18 @@
 class Player;
 
 namespace model {
+
 class StarSystem;
+
+class Star;
+class Planet;
+class Asteroid;
+
+class SpaceStation;
 class Ship;
+class Satellite;
 class Container;
 class SpaceObject;
-} // namespace model
-
-//namespace control {
-//class StarSystem;
-//class Ship;
-//class Container;
-//class SpaceObject;
-//} // namespace control
-
-namespace model {
 
 namespace item {
 class Scaner;
@@ -77,7 +75,14 @@ public:
     model::Base* get(int_t) const;
 
     model::StarSystem* starsystem(int_t id) const;
+
+    model::Star* star(int_t id) const;
+    model::Planet* planet(int_t id) const;
+    model::Asteroid* asteroid(int_t id) const;
+
+    model::SpaceStation* spacestation(int_t id) const;
     model::Ship* ship(int_t id) const;
+    model::Satellite* satellite(int_t id) const;
     model::Container* container(int_t id) const;
     model::SpaceObject* spaceObject(int_t id) const;
 

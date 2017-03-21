@@ -90,7 +90,7 @@
 
 #include <core/slot/ItemSlot.hpp>
 
-#include <core/model/spaceobject/Ship.hpp>
+#include <core/model/spaceobject/ALL>
 
 #include <core/model/world/starsystem.hpp>
 
@@ -172,102 +172,137 @@ EntityManager::get(int_t id) const
 
 model::StarSystem*
 EntityManager::starsystem(int_t id) const {
-    model::StarSystem* starsystem = static_cast<model::StarSystem*>(get(id));
-    assert(starsystem);
-    return starsystem;
+    model::StarSystem* model = static_cast<model::StarSystem*>(get(id));
+    assert(model);
+    return model;
+}
+
+model::Star*
+EntityManager::star(int_t id) const {
+    model::Star* model = static_cast<model::Star*>(get(id));
+    assert(model);
+    return model;
+}
+
+model::Planet*
+EntityManager::planet(int_t id) const {
+    model::Planet* model = static_cast<model::Planet*>(get(id));
+    assert(model);
+    return model;
+}
+
+model::Asteroid*
+EntityManager::asteroid(int_t id) const {
+    model::Asteroid* model = static_cast<model::Asteroid*>(get(id));
+    assert(model);
+    return model;
+}
+
+model::SpaceStation*
+EntityManager::spacestation(int_t id) const {
+    model::SpaceStation* model = static_cast<model::SpaceStation*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::Ship*
 EntityManager::ship(int_t id) const {
-    model::Ship* ship = static_cast<model::Ship*>(get(id));
-    assert(ship);
-    return ship;
+    model::Ship* model = static_cast<model::Ship*>(get(id));
+    assert(model);
+    return model;
+}
+
+model::Satellite*
+EntityManager::satellite(int_t id) const {
+    model::Satellite* model = static_cast<model::Satellite*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::Container*
 EntityManager::container(int_t id) const {
-    model::Container* container = static_cast<model::Container*>(get(id));
-    assert(container);
-    return container;
+    model::Container* model = static_cast<model::Container*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::SpaceObject*
 EntityManager::spaceObject(int_t id) const {
-    model::SpaceObject* spaceobject = static_cast<model::SpaceObject*>(get(id));
-    assert(spaceobject);
-    return spaceobject;
+    model::SpaceObject* model = static_cast<model::SpaceObject*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Scaner*
 EntityManager::scaner(int_t id) const
 {
-    model::item::Scaner* item = static_cast<model::item::Scaner*>(get(id));
-    assert(item);
-    return item;
+    model::item::Scaner* model = static_cast<model::item::Scaner*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Drive*
 EntityManager::drive(int_t id) const
 {
-    model::item::Drive* item = static_cast<model::item::Drive*>(get(id));
-    assert(item);
-    return item;
+    model::item::Drive* model = static_cast<model::item::Drive*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Bak*
 EntityManager::bak(int_t id) const
 {
-    model::item::Bak* item = static_cast<model::item::Bak*>(get(id));
-    assert(item);
-    return item;
+    model::item::Bak* model = static_cast<model::item::Bak*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Droid*
 EntityManager::droid(int_t id) const
 {
-    model::item::Droid* item = static_cast<model::item::Droid*>(get(id));
-    assert(item);
-    return item;
+    model::item::Droid* model = static_cast<model::item::Droid*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Grapple*
 EntityManager::grapple(int_t id) const
 {
-    model::item::Grapple* item = static_cast<model::item::Grapple*>(get(id));
-    assert(item);
-    return item;
+    model::item::Grapple* model = static_cast<model::item::Grapple*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Lazer*
 EntityManager::lazer(int_t id) const
 {
-    model::item::Lazer* item = static_cast<model::item::Lazer*>(get(id));
-    assert(item);
-    return item;
+    model::item::Lazer* model = static_cast<model::item::Lazer*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Protector*
 EntityManager::protector(int_t id) const
 {
-    model::item::Protector* item = static_cast<model::item::Protector*>(get(id));
-    assert(item);
-    return item;
+    model::item::Protector* model = static_cast<model::item::Protector*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Radar*
 EntityManager::radar(int_t id) const
 {
-    model::item::Radar* item = static_cast<model::item::Radar*>(get(id));
-    assert(item);
-    return item;
+    model::item::Radar* model = static_cast<model::item::Radar*>(get(id));
+    assert(model);
+    return model;
 }
 
 model::item::Rocket*
 EntityManager::rocket(int_t id) const
 {
-    model::item::Rocket* item = static_cast<model::item::Rocket*>(get(id));
-    assert(item);
-    return item;
+    model::item::Rocket* model = static_cast<model::item::Rocket*>(get(id));
+    assert(model);
+    return model;
 }
 
 

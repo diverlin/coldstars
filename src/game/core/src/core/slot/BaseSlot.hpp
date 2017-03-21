@@ -80,9 +80,7 @@ namespace control {
 class BaseSlot : public Base
 {
 public:
-    [[depreacted("temprorary code refactor workaround")]]
     BaseSlot() = default;
-    BaseSlot(model::BaseSlot*);
     virtual ~BaseSlot() = default;
 
     void setOwner(Base* owner) { m_owner = owner; }

@@ -137,14 +137,18 @@ public:
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
 
     //// TRANSITION
-    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(model::SpaceStation*);
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(model::Ship*);
+    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(model::Satellite*);
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
+
     void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
 
     void add(model::Star*);
     void add(Star*);
-    void add(model::Planet*, SpaceObject* parent = nullptr);
+    void add(model::Planet*);
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
@@ -190,6 +194,10 @@ public:
     std::vector<control::Star*> stars() const { return m_stars; }
     std::vector<control::Asteroid*> asteroids() const { return m_asteroids; }
     std::vector<control::Vehicle*> vehicles() const { return m_vehicles; }
+    std::vector<control::SpaceStation*> spacestations() const { return m_spacestations; }
+    std::vector<control::Ship*> ships() const { return m_ships; }
+    std::vector<control::Satellite*> satellites() const { return m_satellites; }
+
     std::vector<control::Container*> containers() const { return m_containers; }
 
     model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
@@ -232,6 +240,9 @@ private:
     std::vector<control::RocketBullet*> m_bullets;
     std::vector<control::BlackHole*> m_blackholes;
     std::vector<control::Vehicle*> m_vehicles;
+    std::vector<control::SpaceStation*> m_spacestations;
+    std::vector<control::Ship*> m_ships;
+    std::vector<control::Satellite*> m_satellites;
 
     HyperSpace m_hyperspace;
 

@@ -74,7 +74,9 @@ StarSystem::StarSystem(model::StarSystem* model)
       Base(model)
     , m_model_starsystem(model)
     , m_descriptor_starsystem(descriptor::Manager::get().starSystem(model->descriptor()))
-{}
+{
+    __actualizeModel();
+}
 
 StarSystem::~StarSystem()
 {    
@@ -94,6 +96,39 @@ StarSystem::__actualizeModel()
         return;
 
     model()->setWritable(false);
+
+
+//    std::vector<int_t> planets() const { return m_planets; }
+
+    for(int_t id: model()->stars()) {
+        model::Star* _model = EntityManager::get().star(id);
+        add(_model);
+    }
+    for(int_t id: model()->planets()) {
+        model::Planet* _model = EntityManager::get().planet(id);
+        add(_model);
+    }
+    for(int_t id: model()->asteroids()) {
+        model::Asteroid* _model = EntityManager::get().asteroid(id);
+        add(_model);
+    }
+
+    for(int_t id: model()->ships()) {
+        model::Ship* _model = EntityManager::get().ship(id);
+        add(_model);
+    }
+    for(int_t id: model()->satellites()) {
+        model::Satellite* _model = EntityManager::get().satellite(id);
+        add(_model);
+    }
+    for(int_t id: model()->spacestations()) {
+        model::SpaceStation* _model = EntityManager::get().spacestation(id);
+        add(_model);
+    }
+    for(int_t id: model()->containers()) {
+        model::Container* _model = EntityManager::get().container(id);
+        add(_model);
+    }
 
 //    __actualizeItems();
 
@@ -168,32 +203,58 @@ void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* tar
     }
 }
 
-void StarSystem::__addVehicleCommon(control::Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
 
-    assert(false);
-    //    for (unsigned int i=0; i<m_vehicles.size(); i++) {
-    //        if (m_vehicles[i]->id() == vehicle->id()) {
-    //            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
-    //            exit(1);
-    //        }
-    //    }
+    for (Vehicle* _vehicle: m_vehicles) {
+        if (_vehicle->model()->id() == vehicle->model()->id()) {
+            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
+            exit(1);
+        }
+    }
 
-    //    vehicle->setPlaceTypeId(type::place::KOSMOS);
-    //    vehicle->setStarSystem(this);
+    vehicle->model()->setPlace(place::type::KOSMOS);
+    vehicle->setStarSystem(model());
 
-    //    vehicle->setPosition(position);
-    //    vehicle->setDirection(dir);
-    // vehicle->updateOrientation(); // remove bad logic
+    vehicle->setPosition(position);
+    vehicle->setDirection(dir);
+    vehicle->updateOrientation(); // remove bad logic
 
     //    alpitodorender vehicle->SetColor(color);
     m_vehicles.push_back(vehicle);
 }
 
+void StarSystem::add(model::SpaceStation* _model)
+{
+    auto spacestation = new control::SpaceStation(_model);
+    add(spacestation, _model->position(), _model->direction());
+}
+
+void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
+{
+    __addVehicleCommon(spacestation, position, dir);
+    model()->addSpaceStation(spacestation->model()->id());
+    m_spacestations.push_back(spacestation);
+}
+
+void StarSystem::add(model::Ship* _model)
+{
+    auto ship = new control::Ship(_model);
+    add(ship, _model->position(), _model->direction());
+}
+
 void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
     __addVehicleCommon(ship, position, dir);
+    model()->addShip(ship->model()->id());
+    m_ships.push_back(ship);
+}
+
+void StarSystem::add(model::Satellite* _model)
+{
+    auto satellite = new control::Satellite(_model);
+    add(satellite, _model->position(), _model->direction());
 }
 
 void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
@@ -201,11 +262,8 @@ void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm:
     __addVehicleCommon(satellite, position, dir);
     assert(false);
     //satellite->BindParent(parent);
-}
-
-void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
-{
-    __addVehicleCommon(spacestation, position, dir);
+    model()->addSatellite(satellite->model()->id());
+    m_satellites.push_back(satellite);
 }
 
 void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
@@ -238,12 +296,14 @@ void StarSystem::add(Star* star)
 
     star->initialize();
     m_stars.push_back(star);
+
+    model()->addStar(star->model()->id());
 }
 
-void StarSystem::add(model::Planet* model, control::SpaceObject* parent)
+void StarSystem::add(model::Planet* model)
 {
     Planet* planet = new Planet(model);
-    add(planet, parent);
+    add(planet);
 }
 
 void StarSystem::add(Planet* planet, SpaceObject* parent)
@@ -261,6 +321,8 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
 
     planet->initialize();
     m_planets.push_back(planet);
+
+    model()->addPlanet(planet->model()->id());
 }
 
 

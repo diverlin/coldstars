@@ -24,7 +24,9 @@ class StarSystem;
 
 class Star;
 class Planet;
+class SpaceStation;
 class Ship;
+class Satellite;
 
 namespace item {
 class Bak;
@@ -45,7 +47,9 @@ class StarSystem;
 
 class Star;
 class Planet;
+class SpaceStation;
 class Ship;
+class Satellite;
 
 namespace item {
 class Bak;
@@ -66,7 +70,9 @@ class StarSystem;
 
 class Star;
 class Planet;
+class SpaceStation;
 class Ship;
+class Satellite;
 
 namespace item {
 class Bak;
@@ -125,6 +131,18 @@ private:
     control::Planet* m_control = nullptr;
 };
 
+class SpaceStation {
+public:
+    SpaceStation();
+    ~SpaceStation();
+
+    descriptor::SpaceStation* descriptor() const;
+    model::SpaceStation* model() const;
+    control::SpaceStation* control() const { return m_control; }
+
+private:
+    control::SpaceStation* m_control = nullptr;
+};
 class Ship {
 public:
     Ship();
@@ -136,6 +154,18 @@ public:
 
 private:
     control::Ship* m_control = nullptr;
+};
+class Satellite {
+public:
+    Satellite();
+    ~Satellite();
+
+    descriptor::Satellite* descriptor() const;
+    model::Satellite* model() const;
+    control::Satellite* control() const { return m_control; }
+
+private:
+    control::Satellite* m_control = nullptr;
 };
 
 namespace item {
