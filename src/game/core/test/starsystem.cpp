@@ -30,8 +30,11 @@
 #include <core/builder/spaceobject/ALL>
 
 #include <core/spaceobject/ALL>
+#include <core/model/spaceobject/ALL>
 
 #include <core/manager/EntityManager.hpp>
+
+#include <ceti/Pack.hpp>
 
 #include <gtest/gtest.h>
 
@@ -42,18 +45,18 @@ TEST(starsystem, add_remove_objects)
     /* create opbjects */
     StarSystem starsystem;
 
-    std::vector<int_t> init_stars = starsystem.model()->stars();
-    std::vector<int_t> init_planets = starsystem.model()->planets();
-    std::vector<int_t> init_spacestations = starsystem.model()->spacestations();
-    std::vector<int_t> init_ships = starsystem.model()->ships();
-    std::vector<int_t> init_satellites = starsystem.model()->satellites();
+    ceti::pack<int_t> star_ids = starsystem.model()->stars();
+    ceti::pack<int_t> planet_ids = starsystem.model()->planets();
+    ceti::pack<int_t> spacestation_init = starsystem.model()->spacestations();
+    ceti::pack<int_t> ship_ids = starsystem.model()->ships();
+    ceti::pack<int_t> satellite_ids = starsystem.model()->satellites();
 
     /* pre-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size());
-    EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size());
-    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size());
-    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());
-    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size());
+    EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
+    EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
+    EXPECT_EQ(starsystem.control()->spacestations().size(), spacestation_init.size());
+    EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
+    EXPECT_EQ(starsystem.control()->satellites().size(), satellite_ids.size());
 
     for(int i=1; i<5; ++i) {
         Star star;
@@ -70,19 +73,24 @@ TEST(starsystem, add_remove_objects)
         //    starsystem.control()->add(satellite.model());
 
         /* post-add check */
-        EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size() + i);
-        EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size() + i);
+        ship_ids.add(ship.model()->id());
+
+        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size() + i);
+        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size() + i);
         //    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size() + i);
-        EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size() + i);
+        EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
+        EXPECT_EQ(starsystem.model()->ships(), ship_ids);
+
         //    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size() + i);
     }
 
-    init_ships = starsystem.model()->ships();
-    int i = 1;
     for(control::Ship* ship: starsystem.control()->ships()) {
         starsystem.control()->remove(ship->model());
-        EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size()-i);
-        ++i;
+
+        ship_ids.take(ship->model()->id());
+
+        EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
+        EXPECT_EQ(starsystem.model()->ships(), ship_ids);
     }
 //    starsystem.control()->remove(ship.model());
 //    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());

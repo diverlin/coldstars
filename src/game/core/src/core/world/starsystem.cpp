@@ -451,7 +451,17 @@ StarSystem::remove(model::Ship* _model)
 void
 StarSystem::remove(Ship* ship)
 {
-    remove(ship->model());
+    m_ships.take(ship);
+
+    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
+        if ((*it)->model()->id() == ship->model()->id()) {
+            it = m_vehicles.erase(it);
+        }
+    }
+
+    model()->removeShip(ship->model()->id());
+
+    delete ship;
 }
 
 //

@@ -19,25 +19,52 @@
 #pragma once
 
 #include <vector>   
+#include <set>
+#include <algorithm>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 namespace ceti {
 
 template<typename T>
-class container : public std::vector<T>
+class pack : public std::vector<T>
 {
 public:
-    container() = default;
-    ~container() = default;
+    pack() = default;
+    ~pack() = default;
 
-    void erase(T element) {
+    void add(T element) {
+        this->push_back(element);
+    }
+
+    T take(T element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             // swap the one to be removed with the last element
             // and remove the item at the end of the container
             // to prevent moving all items after '5' by one
-            swap(*it, this->back());
+            std::swap(*it, this->back());
             this->pop_back();
+            return *it;
         }
+    }
+
+    bool operator==(const pack& rhs) {
+        if (this->size() != rhs.size()) {
+            return false;
+        }
+
+        std::set<T> set1(this->begin(), this->end());
+        std::set<T> set2(rhs.begin(), rhs.end());
+        return (set1 == set2);
+    }
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<std::vector<T>>(*this);
     }
 };
 
