@@ -120,6 +120,15 @@ public:
     void addShip(int_t ship) { if (_isWritable()) m_ships.push_back(ship); }
     void addSatellite(int_t satellite) { if (_isWritable()) m_satellites.push_back(satellite); }
 
+    void removeShip(int_t id) {
+        for(std::vector<int_t>::iterator it = m_ships.begin(); it < m_ships.end(); ++it) {
+            if (*it == id) {
+                it = m_ships.erase(it);
+                break;
+            }
+        }
+    }
+
     std::vector<int_t> planets() const { return m_planets; }
     std::vector<int_t> stars() const { return m_stars; }
     std::vector<int_t> asteroids() const { return m_asteroids; }

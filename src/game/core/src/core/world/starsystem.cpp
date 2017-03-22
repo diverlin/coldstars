@@ -160,7 +160,7 @@ model::Npc*
 StarSystem::freeLeaderByRaceId(race::Type race_id) const
 {
     std::vector<model::Npc*> npcs;
-    for (control::Vehicle* vehicle: m_vehicles) {
+    for (Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        if (vehicle->npc()->raceId() == race_id) {
         //            npcs.push_back(vehicle->npc());
@@ -183,7 +183,7 @@ StarSystem::freeLeaderByRaceId(race::Type race_id) const
 void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* target_starsystem, int num_max) const
 {    
     std::vector<model::Npc*> npcs;
-    for (control::Vehicle* vehicle: m_vehicles) {
+    for (Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
         //            npcs.push_back(vehicle->npc());
@@ -227,7 +227,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
 
 void StarSystem::add(model::SpaceStation* _model)
 {
-    auto spacestation = new control::SpaceStation(_model);
+    auto spacestation = new SpaceStation(_model);
     add(spacestation, _model->position(), _model->direction());
 }
 
@@ -240,7 +240,7 @@ void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, cons
 
 void StarSystem::add(model::Ship* _model)
 {
-    auto ship = new control::Ship(_model);
+    auto ship = new Ship(_model);
     add(ship, _model->position(), _model->direction());
 }
 
@@ -253,7 +253,7 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
 
 void StarSystem::add(model::Satellite* _model)
 {
-    auto satellite = new control::Satellite(_model);
+    auto satellite = new Satellite(_model);
     add(satellite, _model->position(), _model->direction());
 }
 
@@ -277,7 +277,7 @@ void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, con
 
     assert(false);
     descriptor::RocketBullet* _descr = nullptr;
-    control::RocketBullet* rocket = new control::RocketBullet(_model, _descr);
+    RocketBullet* rocket = new RocketBullet(_model, _descr);
     //rocket->initialize();
 
     m_bullets.push_back(rocket);
@@ -338,7 +338,7 @@ void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
 
     assert(false);
     descriptor::Asteroid* _descr = nullptr;
-    control::Asteroid* asteroid = new control::Asteroid(_model, _descr);
+    Asteroid* asteroid = new Asteroid(_model, _descr);
     asteroid->initialize();
     m_asteroids.push_back(asteroid);
 }
@@ -360,7 +360,7 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
 
     assert(false);
     descriptor::Container* _descr = nullptr;
-    control::Container* container = new control::Container(_model, _descr);
+    Container* container = new Container(_model, _descr);
 
     m_containers.push_back(container);
 }
@@ -373,7 +373,7 @@ void StarSystem::add(model::BlackHole* _model, const glm::vec3& center)
 
     assert(false);
     descriptor::BlackHole* _descr = nullptr;
-    control::BlackHole* blackhole = new control::BlackHole(_model, _descr);
+    BlackHole* blackhole = new BlackHole(_model, _descr);
     blackhole->initialize();
 
     m_blackholes.push_back(blackhole);
@@ -428,13 +428,41 @@ void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
 //void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
 //// ******* TRANSITION ******* 
 
+
+// remove
+void
+StarSystem::remove(model::Ship* _model)
+{
+    for(std::vector<Ship*>::iterator it = m_ships.begin(); it < m_ships.end(); ++it) {
+        if ((*it)->model() == _model) {
+            it = m_ships.erase(it);
+        }
+    }
+
+    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
+        if ((*it)->model()->id() == _model->id()) {
+            it = m_vehicles.erase(it);
+        }
+    }
+
+    model()->removeShip(_model->id());
+}
+
+void
+StarSystem::remove(Ship* ship)
+{
+    remove(ship->model());
+}
+
+//
+
 // poor                
 model::Planet*
 StarSystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 {        
-    control::Planet* requested_planet = nullptr;
+    Planet* requested_planet = nullptr;
     
-    std::vector<control::Planet*> tmp_planet_vec;
+    std::vector<Planet*> tmp_planet_vec;
     for(auto planet: m_planets) {
         if (planet->model()->population() > 0) {
             tmp_planet_vec.push_back(planet);
@@ -461,9 +489,9 @@ StarSystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 model::Planet*
 StarSystem::randomInhabitedPlanet() const
 {
-    control::Planet* requested_planet = nullptr;
+    Planet* requested_planet = nullptr;
 
-    std::vector<control::Planet*> tmp_planet_vec;
+    std::vector<Planet*> tmp_planet_vec;
     for(auto planet: m_planets) {
         if (planet->model()->population() > 0) {
             tmp_planet_vec.push_back(planet);
@@ -483,17 +511,17 @@ StarSystem::randomPlanet() const
     return meti::getRand(m_planets)->model();
 }
 
-control::Vehicle*
+Vehicle*
 StarSystem::randomVehicle() const
 {
     return meti::getRand(m_vehicles);
 }
 
-control::Vehicle*
+Vehicle*
 StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
 {
-    std::vector<control::Vehicle*> vehicles;
-    control::Vehicle* result = nullptr;
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
     assert(false);
     //    for (Vehicle* vehicle: m_vehicles) {
     //        if (vehicle->npc()) {
@@ -510,11 +538,11 @@ StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
     return result;
 }
 
-control::Vehicle*
+Vehicle*
 StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
 {
-    std::vector<control::Vehicle*> vehicles;
-    control::Vehicle* result = nullptr;
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
 
     assert(false);
     //    for (Vehicle* vehicle: m_vehicles) {
@@ -532,11 +560,11 @@ StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
     return result;
 }
 
-control::Vehicle*
+Vehicle*
 StarSystem::randomVehicle(const std::vector<race::Type>& races) const
 {
-    std::vector<control::Vehicle*> vehicles;
-    control::Vehicle* result = nullptr;
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
 
     assert(false);
     //    for (const race::type& race: races) {
@@ -586,12 +614,12 @@ void StarSystem::__updateStates()
     bool enemy_is_here    = false;
     bool friendly_is_here = false;
     
-    control::Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::EVIL));
+    Vehicle* _vehicle_evil = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::EVIL));
     if (_vehicle_evil) {
         enemy_is_here = true;
     }
 
-    control::Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+    Vehicle* _vehicle_good = randomVehicle(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
     if (_vehicle_good) {
         friendly_is_here = true;
     }
@@ -889,7 +917,7 @@ void StarSystem::__updateInSpaceInStatic_s()
 {
     __updateStates();
 
-    for (control::Vehicle* vehicle: m_vehicles) {
+    for (Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        vehicle->npc()->updateInSpaceInStatic();
         //        if (vehicle->subtype() == entity::Type::SPACESTATION) {
@@ -1006,7 +1034,7 @@ void StarSystem::__shipManager_s(unsigned int num)
 
 void StarSystem::__manageUnavaliableObjects_s()
 {               
-    for (std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
         //        if ((*it)->place() != type::place::KOSMOS) {
         //            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
@@ -1017,7 +1045,7 @@ void StarSystem::__manageUnavaliableObjects_s()
 
 void StarSystem::__manageDeadObjects_s()
 {      
-    for(std::vector<control::Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
         //        if ((*it)->isReadyForGarbage()) {
         //           EntityManager::get().addToGarbage(*it);
@@ -1025,7 +1053,7 @@ void StarSystem::__manageDeadObjects_s()
         //        }
     }
 
-    for(std::vector<control::BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
+    for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
 //            EntityManager::get().addToGarbage(*it);
@@ -1040,7 +1068,7 @@ void StarSystem::__manageDeadObjects_s()
     //        }
     //    }
 
-    for(std::vector<control::Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
+    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage() == true) {
 //            EntityManager::get().addToGarbage(*it);
@@ -1048,7 +1076,7 @@ void StarSystem::__manageDeadObjects_s()
 //        }
     }
 
-    for(std::vector<control::RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
+    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
 //        if ((*it)->isReadyForGarbage() == true) {
 //            EntityManager::get().addToGarbage(*it);
 //            it = m_bullets.erase(it);
@@ -1102,7 +1130,7 @@ void StarSystem::__manageDeadObjects_s()
 //}
 //}        
 
-void StarSystem::bombExplosionEvent(control::Container* container, bool show_effect)
+void StarSystem::bombExplosionEvent(Container* container, bool show_effect)
 {
     assert(false);
 //    float radius = container->itemSlot()->item()->radius();
