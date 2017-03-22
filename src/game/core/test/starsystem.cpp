@@ -35,11 +35,12 @@
 
 #include <gtest/gtest.h>
 
+namespace test {
 
 TEST(starsystem, add_remove_objects)
 {
     /* create opbjects */
-    test::StarSystem starsystem;
+    StarSystem starsystem;
 
     std::vector<int_t> init_stars = starsystem.model()->stars();
     std::vector<int_t> init_planets = starsystem.model()->planets();
@@ -54,26 +55,41 @@ TEST(starsystem, add_remove_objects)
     EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());
     EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size());
 
-    test::Star star;
-    test::Planet planet;
-//    test::SpaceStation spacestation;
-    test::Ship ship;
-//    test::Satellite satellite;
+    for(int i=1; i<5; ++i) {
+        Star star;
+        Planet planet;
+        //    test::SpaceStation spacestation;
+        Ship ship;
+        //    test::Satellite satellite;
 
-    /* add objects */
-    starsystem.control()->add(star.model());
-    starsystem.control()->add(planet.model());
-//    starsystem.control()->add(spacestation.model());
-    starsystem.control()->add(ship.model());
-//    starsystem.control()->add(satellite.model());
+        /* add objects */
+        starsystem.control()->add(star.model());
+        starsystem.control()->add(planet.model());
+        //    starsystem.control()->add(spacestation.model());
+        starsystem.control()->add(ship.model());
+        //    starsystem.control()->add(satellite.model());
 
-    /* post-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size() + 1);
-    EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size() + 1);
-//    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size() + 1);
-    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size() + 1);
-//    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size() + 1);
+        /* post-add check */
+        EXPECT_EQ(starsystem.control()->stars().size(), init_stars.size() + i);
+        EXPECT_EQ(starsystem.control()->planets().size(), init_planets.size() + i);
+        //    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size() + i);
+        EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size() + i);
+        //    EXPECT_EQ(starsystem.control()->satellites().size(), init_satellites.size() + i);
+    }
 
-    assert(false);
+    init_ships = starsystem.model()->ships();
+    int i = 1;
+    for(control::Ship* ship: starsystem.control()->ships()) {
+        starsystem.control()->remove(ship->model());
+        EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size()-i);
+        ++i;
+    }
+//    starsystem.control()->remove(ship.model());
+//    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());
+//    EXPECT_EQ(starsystem.model()->ships(), init_ships);
+
+    //assert(false);
     // TODO: implement removing
 }
+
+} // namespace test

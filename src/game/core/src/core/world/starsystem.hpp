@@ -27,6 +27,7 @@
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/Container.hpp>
 
 #include <boost/serialization/vector.hpp>
 
@@ -77,7 +78,6 @@ class BaseParticleSystem;
 }
 
 class LazerTraceEffect;
-
 
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
@@ -136,6 +136,7 @@ public:
     model::Npc* freeLeaderByRaceId(race::Type) const;
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
 
+
     //// TRANSITION
     void add(model::SpaceStation*);
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
@@ -169,7 +170,12 @@ public:
     //void Add(VerticalFlowText*);
     //
 
-    void bombExplosionEvent(control::Container*, bool);
+    // remove
+    void remove(model::Ship*);
+    void remove(Ship*);
+    //
+
+    void bombExplosionEvent(Container*, bool);
     void starSparkEvent(float) const;
 
     void findRenderVisibleEntities_c(Player*);
@@ -190,23 +196,23 @@ public:
 
     // poor
 
-    std::vector<control::Planet*> planets() const { return m_planets; }
-    std::vector<control::Star*> stars() const { return m_stars; }
-    std::vector<control::Asteroid*> asteroids() const { return m_asteroids; }
-    std::vector<control::Vehicle*> vehicles() const { return m_vehicles; }
-    std::vector<control::SpaceStation*> spacestations() const { return m_spacestations; }
-    std::vector<control::Ship*> ships() const { return m_ships; }
-    std::vector<control::Satellite*> satellites() const { return m_satellites; }
+    std::vector<Planet*> planets() const { return m_planets; }
+    std::vector<Star*> stars() const { return m_stars; }
+    std::vector<Asteroid*> asteroids() const { return m_asteroids; }
+    std::vector<Vehicle*> vehicles() const { return m_vehicles; }
+    std::vector<SpaceStation*> spacestations() const { return m_spacestations; }
+    std::vector<Ship*> ships() const { return m_ships; }
+    std::vector<Satellite*> satellites() const { return m_satellites; }
 
-    std::vector<control::Container*> containers() const { return m_containers; }
+    std::vector<Container*> containers() const { return m_containers; }
 
     model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
     model::Planet* randomInhabitedPlanet() const;
     model::Planet* randomPlanet() const;
-    control::Vehicle* randomVehicle() const;
-    control::Vehicle* randomVehicleExcludingNpcRaceId(race::Type) const;
-    control::Vehicle* randVehicleByNpcRaceId(race::Type) const;
-    control::Vehicle* randomVehicle(const std::vector<race::Type>&) const;
+    Vehicle* randomVehicle() const;
+    Vehicle* randomVehicleExcludingNpcRaceId(race::Type) const;
+    Vehicle* randVehicleByNpcRaceId(race::Type) const;
+    Vehicle* randomVehicle(const std::vector<race::Type>&) const;
     //
 
     model::StarSystem* model() const { return m_model_starsystem; }
@@ -233,16 +239,16 @@ private:
     // ENTITY VECTORS
     //std::vector<Player*>        PLAYER_vec;
 
-    std::vector<control::Star*> m_stars;
-    std::vector<control::Planet*> m_planets;
-    std::vector<control::Asteroid*> m_asteroids;
-    std::vector<control::Container*> m_containers;
-    std::vector<control::RocketBullet*> m_bullets;
-    std::vector<control::BlackHole*> m_blackholes;
-    std::vector<control::Vehicle*> m_vehicles;
-    std::vector<control::SpaceStation*> m_spacestations;
-    std::vector<control::Ship*> m_ships;
-    std::vector<control::Satellite*> m_satellites;
+    std::vector<Star*> m_stars;
+    std::vector<Planet*> m_planets;
+    std::vector<Asteroid*> m_asteroids;
+    std::vector<Container*> m_containers;
+    std::vector<RocketBullet*> m_bullets;
+    std::vector<BlackHole*> m_blackholes;
+    std::vector<Vehicle*> m_vehicles;
+    std::vector<SpaceStation*> m_spacestations;
+    std::vector<Ship*> m_ships;
+    std::vector<Satellite*> m_satellites;
 
     HyperSpace m_hyperspace;
 
@@ -281,7 +287,7 @@ private:
     void LoadData(const boost::property_tree::ptree&);
     void ResolveData();
 
-    void __addVehicleCommon(control::Vehicle*, const glm::vec3&, const glm::vec3&);
+    void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
 
     void __actualizeModel();
 

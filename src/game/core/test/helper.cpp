@@ -92,8 +92,8 @@ StarSystem::StarSystem() {
     m_control = new control::StarSystem(model);
 }
 StarSystem::~StarSystem() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::StarSystem* StarSystem::descriptor() const { return m_control->descriptor(); }
@@ -106,8 +106,8 @@ Star::Star() {
     m_control = new control::Star(model);
 }
 Star::~Star() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::Star* Star::descriptor() const { return m_control->descriptor(); }
@@ -119,8 +119,8 @@ Planet::Planet() {
     m_control = new control::Planet(model);
 }
 Planet::~Planet() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::Planet* Planet::descriptor() const { return m_control->descriptor(); }
@@ -132,8 +132,8 @@ SpaceStation::SpaceStation() {
     m_control = new control::SpaceStation(model);
 }
 SpaceStation::~SpaceStation() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::SpaceStation* SpaceStation::descriptor() const { return m_control->descriptor(); }
@@ -145,8 +145,8 @@ Ship::Ship() {
     m_control = new control::Ship(model);
 }
 Ship::~Ship() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::Ship* Ship::descriptor() const { return m_control->descriptor(); }
@@ -158,8 +158,8 @@ Satellite::Satellite() {
     m_control = new control::Satellite(model);
 }
 Satellite::~Satellite() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::Satellite* Satellite::descriptor() const { return m_control->descriptor(); }
@@ -174,8 +174,8 @@ Bak::Bak() {
     m_control = new control::item::Bak(model);
 }
 Bak::~Bak() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Bak* Bak::descriptor() const { return m_control->descriptor(); }
@@ -187,8 +187,8 @@ Drive::Drive() {
     m_control = new control::item::Drive(model);
 }
 Drive::~Drive() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Drive* Drive::descriptor() const { return m_control->descriptor(); }
@@ -200,8 +200,8 @@ Droid::Droid() {
     m_control = new control::item::Droid(model);
 }
 Droid::~Droid() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Droid* Droid::descriptor() const { return m_control->descriptor(); }
@@ -213,8 +213,8 @@ Grapple::Grapple() {
     m_control = new control::item::Grapple(model);
 }
 Grapple::~Grapple() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Grapple* Grapple::descriptor() const { return m_control->descriptor(); }
@@ -226,8 +226,8 @@ Lazer::Lazer() {
     m_control = new control::item::Lazer(model);
 }
 Lazer::~Lazer() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Lazer* Lazer::descriptor() const { return m_control->descriptor(); }
@@ -239,8 +239,8 @@ Protector::Protector() {
     m_control = new control::item::Protector(model);
 }
 Protector::~Protector() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Protector* Protector::descriptor() const { return m_control->descriptor(); }
@@ -252,8 +252,8 @@ Radar::Radar() {
     m_control = new control::item::Radar(model);
 }
 Radar::~Radar() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Radar* Radar::descriptor() const { return m_control->descriptor(); }
@@ -265,8 +265,8 @@ Rocket::Rocket() {
     m_control = new control::item::Rocket(model);
 }
 Rocket::~Rocket() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Rocket* Rocket::descriptor() const { return m_control->descriptor(); }
@@ -278,8 +278,8 @@ Scaner::Scaner() {
     m_control = new control::item::Scaner(model);
 }
 Scaner::~Scaner() {
-    delete m_control->model();
-    delete m_control;
+//    delete m_control->model();
+//    delete m_control;
 }
 
 descriptor::item::Scaner* Scaner::descriptor() const { return m_control->descriptor(); }
