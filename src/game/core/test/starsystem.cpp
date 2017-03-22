@@ -67,17 +67,25 @@ TEST(starsystem, add_remove_objects)
 
         /* add objects */
         starsystem.control()->add(star.model());
+        star_ids.add(star.model()->id());
+
         starsystem.control()->add(planet.model());
+        planet_ids.add(planet.model()->id());
+
         //    starsystem.control()->add(spacestation.model());
         starsystem.control()->add(ship.model());
+        ship_ids.add(ship.model()->id());
         //    starsystem.control()->add(satellite.model());
 
         /* post-add check */
-        ship_ids.add(ship.model()->id());
+        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
+        EXPECT_EQ(starsystem.model()->stars(), star_ids);
 
-        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size() + i);
-        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size() + i);
+        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
+        EXPECT_EQ(starsystem.model()->planets(), planet_ids);
+
         //    EXPECT_EQ(starsystem.control()->spacestations().size(), init_spacestations.size() + i);
+
         EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
         EXPECT_EQ(starsystem.model()->ships(), ship_ids);
 
@@ -85,19 +93,35 @@ TEST(starsystem, add_remove_objects)
     }
 
     for(control::Ship* ship: starsystem.control()->ships()) {
-        starsystem.control()->remove(ship->model());
-
+        starsystem.control()->remove(ship);
         ship_ids.remove(ship->model()->id());
 
         EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
         EXPECT_EQ(starsystem.model()->ships(), ship_ids);
     }
-//    starsystem.control()->remove(ship.model());
-//    EXPECT_EQ(starsystem.control()->ships().size(), init_ships.size());
-//    EXPECT_EQ(starsystem.model()->ships(), init_ships);
+    for(control::Star* star: starsystem.control()->stars()) {
+        starsystem.control()->remove(star);
+        star_ids.remove(star->model()->id());
 
-    //assert(false);
-    // TODO: implement removing
+        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
+        EXPECT_EQ(starsystem.model()->stars(), star_ids);
+        return;
+    }
+    for(control::Planet* planet: starsystem.control()->planets()) {
+        starsystem.control()->remove(planet);
+        planet_ids.remove(planet->model()->id());
+
+        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
+        EXPECT_EQ(starsystem.model()->planets(), planet_ids);
+    }
+//    for(control::Asteroid* asteroid: starsystem.control()->asteroids()) {
+//        starsystem.control()->remove(asteroid);
+
+//        asteroid_ids.remove(asteroid->model()->id());
+
+//        EXPECT_EQ(starsystem.control()->asteroids().size(), asteroid_ids.size());
+//        EXPECT_EQ(starsystem.model()->asteroids(), asteroid_ids);
+//    }
 }
 
 } // namespace test
