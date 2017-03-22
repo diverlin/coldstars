@@ -27,7 +27,7 @@
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 
 #include <ceti/type/IdType.hpp>
-#include <ceti/Container.hpp>
+#include <ceti/Pack.hpp>
 
 #include <boost/serialization/vector.hpp>
 
@@ -201,7 +201,7 @@ public:
     std::vector<Asteroid*> asteroids() const { return m_asteroids; }
     std::vector<Vehicle*> vehicles() const { return m_vehicles; }
     std::vector<SpaceStation*> spacestations() const { return m_spacestations; }
-    std::vector<Ship*> ships() const { return m_ships; }
+    ceti::pack<Ship*> ships() const { return m_ships; }
     std::vector<Satellite*> satellites() const { return m_satellites; }
 
     std::vector<Container*> containers() const { return m_containers; }
@@ -247,7 +247,7 @@ private:
     std::vector<BlackHole*> m_blackholes;
     std::vector<Vehicle*> m_vehicles;
     std::vector<SpaceStation*> m_spacestations;
-    std::vector<Ship*> m_ships;
+    ceti::pack<Ship*> m_ships;
     std::vector<Satellite*> m_satellites;
 
     HyperSpace m_hyperspace;
