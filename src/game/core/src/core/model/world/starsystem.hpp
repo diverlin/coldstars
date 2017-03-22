@@ -121,16 +121,16 @@ public:
     void addShip(int_t ship) { if (_isWritable()) m_ships.add(ship); }
     void addSatellite(int_t satellite) { if (_isWritable()) m_satellites.add(satellite); }
 
-    void removeBullet(int_t id) { m_bullets.take(id); }
-    void removeStar(int_t id) { m_stars.take(id); }
-    void removePlanet(int_t id) { m_planets.take(id); }
-    void removeAsteroid(int_t id) { m_asteroids.take(id); }
-    void removeContainer(int_t id) { m_containers.take(id); }
-    void removeBlackHole(int_t id) { m_blackholes.take(id); }
+    void removeBullet(int_t id) { m_bullets.remove(id); }
+    void removeStar(int_t id) { m_stars.remove(id); }
+    void removePlanet(int_t id) { m_planets.remove(id); }
+    void removeAsteroid(int_t id) { m_asteroids.remove(id); }
+    void removeContainer(int_t id) { m_containers.remove(id); }
+    void removeBlackHole(int_t id) { m_blackholes.remove(id); }
 
-    void removeSpaceStation(int_t id) { m_spacestations.take(id); }
-    void removeShip(int_t id) { m_ships.take(id); }
-    void removeSatellite(int_t id) { m_satellites.take(id); }
+    void removeSpaceStation(int_t id) { m_spacestations.remove(id); }
+    void removeShip(int_t id) { m_ships.remove(id); }
+    void removeSatellite(int_t id) { m_satellites.remove(id); }
 
     ceti::pack<int_t> planets() const { return m_planets; }
     ceti::pack<int_t> stars() const { return m_stars; }

@@ -87,7 +87,7 @@ TEST(starsystem, add_remove_objects)
     for(control::Ship* ship: starsystem.control()->ships()) {
         starsystem.control()->remove(ship->model());
 
-        ship_ids.take(ship->model()->id());
+        ship_ids.remove(ship->model()->id());
 
         EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
         EXPECT_EQ(starsystem.model()->ships(), ship_ids);

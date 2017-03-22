@@ -38,6 +38,17 @@ public:
         this->push_back(element);
     }
 
+    T remove(T element) {
+        auto it = std::find(this->begin(), this->end(), element);
+        if (it != this->end()) {
+            // swap the one to be removed with the last element
+            // and remove the item at the end of the container
+            // to prevent moving all items after '5' by one
+            std::swap(*it, this->back());
+            this->pop_back();
+        }
+    }
+
     T take(T element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
@@ -48,6 +59,7 @@ public:
             this->pop_back();
             return *it;
         }
+        assert(false);
     }
 
     bool operator==(const pack& rhs) {
