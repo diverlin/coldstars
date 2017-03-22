@@ -431,22 +431,65 @@ void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
 
 // remove
 void
-StarSystem::remove(model::Ship* _model)
+StarSystem::remove(Star* star)
 {
-    for(std::vector<Ship*>::iterator it = m_ships.begin(); it < m_ships.end(); ++it) {
-        if ((*it)->model() == _model) {
-            it = m_ships.erase(it);
-        }
-    }
+    m_stars.remove(star);
+    model()->removeStar(star->model()->id());
+
+    delete star;
+}
+
+void
+StarSystem::remove(Planet* planet)
+{
+    m_planets.remove(planet);
+    model()->removePlanet(planet->model()->id());
+
+    delete planet;
+}
+
+void
+StarSystem::remove(Asteroid* asteroid)
+{
+    m_asteroids.remove(asteroid);
+    model()->removeAsteroid(asteroid->model()->id());
+
+    delete asteroid;
+}
+
+void
+StarSystem::remove(SpaceStation* spacestation)
+{
+    m_spacestations.remove(spacestation);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->model()->id() == _model->id()) {
+        if ((*it)->model()->id() == spacestation->model()->id()) {
             it = m_vehicles.erase(it);
         }
     }
 
-    model()->removeShip(_model->id());
+    model()->removeSpaceStation(spacestation->model()->id());
+
+    delete spacestation;
 }
+
+//void
+//StarSystem::remove(model::Ship* _model)
+//{
+//    for(std::vector<Ship*>::iterator it = m_ships.begin(); it < m_ships.end(); ++it) {
+//        if ((*it)->model() == _model) {
+//            it = m_ships.erase(it);
+//        }
+//    }
+
+//    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
+//        if ((*it)->model()->id() == _model->id()) {
+//            it = m_vehicles.erase(it);
+//        }
+//    }
+
+//    model()->removeShip(_model->id());
+//}
 
 void
 StarSystem::remove(Ship* ship)
@@ -462,6 +505,22 @@ StarSystem::remove(Ship* ship)
     model()->removeShip(ship->model()->id());
 
     delete ship;
+}
+
+void
+StarSystem::remove(Satellite* satellite)
+{
+    m_satellites.remove(satellite);
+
+    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
+        if ((*it)->model()->id() == satellite->model()->id()) {
+            it = m_vehicles.erase(it);
+        }
+    }
+
+    model()->removeSatellite(satellite->model()->id());
+
+    delete satellite;
 }
 
 //

@@ -171,8 +171,13 @@ public:
     //
 
     // remove
-    void remove(model::Ship*);
+    void remove(Star*);
+    void remove(Planet*);
+    void remove(Asteroid*);
+    void remove(SpaceStation*);
+    //    void remove(model::Ship*);
     void remove(Ship*);
+    void remove(Satellite*);
     //
 
     void bombExplosionEvent(Container*, bool);
@@ -196,13 +201,13 @@ public:
 
     // poor
 
-    std::vector<Planet*> planets() const { return m_planets; }
-    std::vector<Star*> stars() const { return m_stars; }
-    std::vector<Asteroid*> asteroids() const { return m_asteroids; }
-    std::vector<Vehicle*> vehicles() const { return m_vehicles; }
-    std::vector<SpaceStation*> spacestations() const { return m_spacestations; }
+    ceti::pack<Star*> stars() const { return m_stars; }
+    ceti::pack<Planet*> planets() const { return m_planets; }
+    ceti::pack<Asteroid*> asteroids() const { return m_asteroids; }
+    ceti::pack<Vehicle*> vehicles() const { return m_vehicles; }
+    ceti::pack<SpaceStation*> spacestations() const { return m_spacestations; }
     ceti::pack<Ship*> ships() const { return m_ships; }
-    std::vector<Satellite*> satellites() const { return m_satellites; }
+    ceti::pack<Satellite*> satellites() const { return m_satellites; }
 
     std::vector<Container*> containers() const { return m_containers; }
 
@@ -239,16 +244,16 @@ private:
     // ENTITY VECTORS
     //std::vector<Player*>        PLAYER_vec;
 
-    std::vector<Star*> m_stars;
-    std::vector<Planet*> m_planets;
-    std::vector<Asteroid*> m_asteroids;
-    std::vector<Container*> m_containers;
-    std::vector<RocketBullet*> m_bullets;
-    std::vector<BlackHole*> m_blackholes;
-    std::vector<Vehicle*> m_vehicles;
-    std::vector<SpaceStation*> m_spacestations;
+    ceti::pack<Star*> m_stars;
+    ceti::pack<Planet*> m_planets;
+    ceti::pack<Asteroid*> m_asteroids;
+    ceti::pack<Container*> m_containers;
+    ceti::pack<RocketBullet*> m_bullets;
+    ceti::pack<BlackHole*> m_blackholes;
+    ceti::pack<Vehicle*> m_vehicles;
+    ceti::pack<SpaceStation*> m_spacestations;
     ceti::pack<Ship*> m_ships;
-    std::vector<Satellite*> m_satellites;
+    ceti::pack<Satellite*> m_satellites;
 
     HyperSpace m_hyperspace;
 

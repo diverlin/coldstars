@@ -60,6 +60,7 @@ public:
             return *it;
         }
         assert(false);
+        return nullptr;
     }
 
     bool operator==(const pack& rhs) {
