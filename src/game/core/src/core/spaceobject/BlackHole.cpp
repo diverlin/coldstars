@@ -25,18 +25,18 @@
 
 namespace descriptor {
 
-BlackHole::BlackHole()
+Wormhole::Wormhole()
 {
 //    setType(entity::type::BLACKHOLE);
 }
 
-BlackHole::BlackHole(const std::string& data)
+Wormhole::Wormhole(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-BlackHole::data() const
+Wormhole::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
@@ -46,18 +46,18 @@ BlackHole::data() const
 
 namespace model {
 
-BlackHole::BlackHole()
+Wormhole::Wormhole()
 {
 //    setType(entity::type::BLACKHOLE);
 }
 
-BlackHole::BlackHole(const std::string& data)
+Wormhole::Wormhole(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-BlackHole::data() const
+Wormhole::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
@@ -67,11 +67,11 @@ BlackHole::data() const
 
 namespace control {
 
-BlackHole::BlackHole(model::BlackHole* model, descriptor::BlackHole* descr)
+Wormhole::Wormhole(model::Wormhole* model, descriptor::Wormhole* descr)
     :
       Planetoid(model, descr)
-    , m_model_blackhole(model)
-    , m_descriptor_blackhole(descr)
+    , m_model_wormhole(model)
+    , m_descriptor_wormhole(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::BLACKHOLE);
@@ -79,14 +79,14 @@ BlackHole::BlackHole(model::BlackHole* model, descriptor::BlackHole* descr)
 //    setMass(meti::getRandInt(1000, 4000));
 }
 
-BlackHole::~BlackHole()
+Wormhole::~Wormhole()
 {
     //delete shockwave;
 }
 
-void BlackHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
+void Wormhole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
 
-void BlackHole::updateInSpace(int time, bool show_effect)
+void Wormhole::updateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
 

@@ -32,10 +32,10 @@ BlackHole::BlackHole()
 BlackHole::~BlackHole()
 {}
 
-model::BlackHole*
+model::Wormhole*
 BlackHole::__genTemplate()
 {
-    model::BlackHole* blackhole = new model::BlackHole;
+    model::Wormhole* blackhole = new model::Wormhole;
     assert(blackhole);
     
     int size = 4;
@@ -46,17 +46,17 @@ BlackHole::__genTemplate()
     return blackhole;
 } 
 
-model::BlackHole*
+model::Wormhole*
 BlackHole::gen()
 {
-    model::BlackHole* blackhole = __genTemplate();
+    model::Wormhole* blackhole = __genTemplate();
     __createInternals(blackhole);
 
     return blackhole;
 } 
 
 void
-BlackHole::__createInternals(model::BlackHole* blackhole)
+BlackHole::__createInternals(model::Wormhole* blackhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     

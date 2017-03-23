@@ -42,7 +42,7 @@ class SpaceStation;
 class Ship;
 class Npc;
 class Vehicle;
-class BlackHole;
+class Wormhole;
 class Container;
 class RocketBullet;
 } // namespace model
@@ -55,7 +55,7 @@ class Satellite;
 class SpaceStation;
 class Ship;
 class Vehicle;
-class BlackHole;
+class Wormhole;
 class Container;
 class RocketBullet;
 } // namespace model
@@ -110,32 +110,34 @@ public:
 
     int_t sector() const { return m_sector; }
 
-    void addBullet(int_t bullet) { if (_isWritable()) m_bullets.add(bullet); }
     void addStar(int_t star) { if (_isWritable()) m_stars.add(star); }
     void addPlanet(int_t planet) { if (_isWritable()) m_planets.add(planet); }
+    void addWormhole(int_t wormhole) { if (_isWritable()) m_wormholes.add(wormhole); }
     void addAsteroid(int_t asteroid) { if (_isWritable()) m_asteroids.add(asteroid); }
     void addContainer(int_t container) { if (_isWritable()) m_containers.add(container); }
-    void addBlackhole(int_t blackhole) { if (_isWritable()) m_blackholes.add(blackhole); }
+    void addBullet(int_t bullet) { if (_isWritable()) m_bullets.add(bullet); }
 
     void addSpaceStation(int_t spacestation) { if (_isWritable()) m_spacestations.add(spacestation); }
     void addShip(int_t ship) { if (_isWritable()) m_ships.add(ship); }
     void addSatellite(int_t satellite) { if (_isWritable()) m_satellites.add(satellite); }
 
-    void removeBullet(int_t id) { m_bullets.remove(id); }
     void removeStar(int_t id) { m_stars.remove(id); }
     void removePlanet(int_t id) { m_planets.remove(id); }
+    void removeWormhole(int_t id) { m_wormholes.remove(id); }
     void removeAsteroid(int_t id) { m_asteroids.remove(id); }
     void removeContainer(int_t id) { m_containers.remove(id); }
-    void removeBlackHole(int_t id) { m_blackholes.remove(id); }
+    void removeBullet(int_t id) { m_bullets.remove(id); }
 
     void removeSpaceStation(int_t id) { m_spacestations.remove(id); }
     void removeShip(int_t id) { m_ships.remove(id); }
     void removeSatellite(int_t id) { m_satellites.remove(id); }
 
-    ceti::pack<int_t> planets() const { return m_planets; }
     ceti::pack<int_t> stars() const { return m_stars; }
+    ceti::pack<int_t> planets() const { return m_planets; }
+    ceti::pack<int_t> wormholes() const { return m_wormholes; }
     ceti::pack<int_t> asteroids() const { return m_asteroids; }
     ceti::pack<int_t> containers() const { return m_containers; }
+    ceti::pack<int_t> bullets() const { return m_bullets; }
 
     ceti::pack<int_t> spacestations() const { return m_spacestations; }
     ceti::pack<int_t> ships() const { return m_ships; }
@@ -150,10 +152,10 @@ private:
 
     ceti::pack<int_t> m_stars;
     ceti::pack<int_t> m_planets;
+    ceti::pack<int_t> m_wormholes;
     ceti::pack<int_t> m_asteroids;
     ceti::pack<int_t> m_containers;
     ceti::pack<int_t> m_bullets;
-    ceti::pack<int_t> m_blackholes;
 
     ceti::pack<int_t> m_spacestations;
     ceti::pack<int_t> m_ships;
@@ -171,10 +173,10 @@ private:
 
         ar & m_stars;
         ar & m_planets;
+        ar & m_wormholes;
         ar & m_asteroids;
         ar & m_containers;
         ar & m_bullets;
-        ar & m_blackholes;
 
         ar & m_spacestations;
         ar & m_ships;

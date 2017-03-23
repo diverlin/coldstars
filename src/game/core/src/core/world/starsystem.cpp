@@ -365,18 +365,18 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
     m_containers.push_back(container);
 }
 
-void StarSystem::add(model::BlackHole* _model, const glm::vec3& center)
+void StarSystem::add(model::Wormhole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
     assert(false);
-    descriptor::BlackHole* _descr = nullptr;
-    BlackHole* blackhole = new BlackHole(_model, _descr);
+    descriptor::Wormhole* _descr = nullptr;
+    Wormhole* blackhole = new Wormhole(_model, _descr);
     blackhole->initialize();
 
-    m_blackholes.push_back(blackhole);
+    m_wormholes.push_back(blackhole);
 }    
 
 void StarSystem::add(Explosion* explosion, const glm::vec3& center)
@@ -663,7 +663,7 @@ void StarSystem::__updateStates()
         m_asteroid_manager.update(this);
         __shipManager_s(50);
         
-        if (m_blackholes.size() < 5) {
+        if (m_wormholes.size() < 5) {
             glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
@@ -944,7 +944,7 @@ void StarSystem::__updateEntities_s(int time, bool show_effect)
 
     for (auto star: m_stars) { star->updateInSpace(time, show_effect);  }
     for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_blackholes.size(); i++)        { m_blackholes[i]->updateInSpace(time, show_effect); }
+    for (unsigned int i=0; i<m_wormholes.size(); i++)        { m_wormholes[i]->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
     for (auto asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
     
@@ -1122,7 +1122,7 @@ void StarSystem::__manageDeadObjects_s()
         //        }
     }
 
-    for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
+    for(std::vector<Wormhole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
 //            EntityManager::get().addToGarbage(*it);

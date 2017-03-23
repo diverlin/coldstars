@@ -25,11 +25,11 @@
 
 namespace descriptor {
 
-class BlackHole : public Planetoid {
+class Wormhole : public Planetoid {
 public:
-    BlackHole();
-    ~BlackHole() = default;
-    BlackHole(const std::string& data);
+    Wormhole();
+    ~Wormhole() = default;
+    Wormhole(const std::string& data);
     std::string data() const;
 
 private:
@@ -44,11 +44,11 @@ private:
 
 namespace model {
 
-class BlackHole : public Planetoid {
+class Wormhole : public Planetoid {
 public:
-    BlackHole();
-    ~BlackHole() = default;
-    BlackHole(const std::string& data);
+    Wormhole();
+    ~Wormhole() = default;
+    Wormhole(const std::string& data);
     std::string data() const;
 
 private:
@@ -64,11 +64,11 @@ private:
 
 namespace control {
 
-class BlackHole : public Planetoid
+class Wormhole : public Planetoid
 {
 public:
-    BlackHole(model::BlackHole*, descriptor::BlackHole*);
-    virtual ~BlackHole();
+    Wormhole(model::Wormhole*, descriptor::Wormhole*);
+    virtual ~Wormhole();
 
     //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
 
@@ -78,12 +78,12 @@ public:
 
     void updateInSpace(int, bool);
 
-    model::BlackHole* model() const { return m_model_blackhole; }
-    descriptor::BlackHole* descriptor() const { return m_descriptor_blackhole; }
+    model::Wormhole* model() const { return m_model_wormhole; }
+    descriptor::Wormhole* descriptor() const { return m_descriptor_wormhole; }
 
 private:
-    model::BlackHole* m_model_blackhole = nullptr;
-    descriptor::BlackHole* m_descriptor_blackhole = nullptr;
+    model::Wormhole* m_model_wormhole = nullptr;
+    descriptor::Wormhole* m_descriptor_wormhole = nullptr;
 
     //        virtual void UpdateInfo() override final;
 };
