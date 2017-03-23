@@ -95,32 +95,20 @@ class Scaner;
 
 namespace test {
 
-class StarSystem {
-public:
-    StarSystem();
-    ~StarSystem();
-
-    descriptor::StarSystem* descriptor() const;
-    model::StarSystem* model() const;
-    control::StarSystem* control() const { return m_control; }
-
-private:
-    control::StarSystem* m_control = nullptr;
-};
-
-//class Star {
+//class StarSystem {
 //public:
-//    Star();
-//    ~Star();
+//    StarSystem();
+//    ~StarSystem();
 
-//    descriptor::Star* descriptor() const;
-//    model::Star* model() const;
-//    control::Star* control() const { return m_control; }
+//    descriptor::StarSystem* descriptor() const;
+//    model::StarSystem* model() const;
+//    control::StarSystem* control() const { return m_control; }
 
 //private:
-//    control::Star* m_control = nullptr;
+//    control::StarSystem* m_control = nullptr;
 //};
 
+control::StarSystem* genStarSystem();
 control::Star* genStar();
 control::Planet* genPlanet();
 control::WormHole* genWormHole();

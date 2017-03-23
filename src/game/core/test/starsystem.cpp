@@ -43,26 +43,26 @@ namespace test {
 TEST(starsystem, add_remove_objects)
 {
     /* create opbjects */
-    StarSystem starsystem;
+    control::StarSystem* starsystem = genStarSystem();
 
-    ceti::pack<int_t> star_ids = starsystem.model()->stars();
-    ceti::pack<int_t> planet_ids = starsystem.model()->planets();
-    ceti::pack<int_t> asteroid_ids = starsystem.model()->asteroids();
-    ceti::pack<int_t> wormhole_ids = starsystem.model()->wormholes();
-    ceti::pack<int_t> spacestation_ids= starsystem.model()->spacestations();
-    ceti::pack<int_t> ship_ids = starsystem.model()->ships();
-    ceti::pack<int_t> satellite_ids = starsystem.model()->satellites();
-    ceti::pack<int_t> container_ids = starsystem.model()->containers();
+    ceti::pack<int_t> star_ids = starsystem->model()->stars();
+    ceti::pack<int_t> planet_ids = starsystem->model()->planets();
+    ceti::pack<int_t> asteroid_ids = starsystem->model()->asteroids();
+    ceti::pack<int_t> wormhole_ids = starsystem->model()->wormholes();
+    ceti::pack<int_t> spacestation_ids= starsystem->model()->spacestations();
+    ceti::pack<int_t> ship_ids = starsystem->model()->ships();
+    ceti::pack<int_t> satellite_ids = starsystem->model()->satellites();
+    ceti::pack<int_t> container_ids = starsystem->model()->containers();
 
     /* pre-add check */
-    EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
-    EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
-    EXPECT_EQ(starsystem.control()->asteroids().size(), asteroid_ids.size());
-    EXPECT_EQ(starsystem.control()->wormholes().size(), wormhole_ids.size());
-    EXPECT_EQ(starsystem.control()->spacestations().size(), spacestation_ids.size());
-    EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
-    EXPECT_EQ(starsystem.control()->satellites().size(), satellite_ids.size());
-    EXPECT_EQ(starsystem.control()->containers().size(), container_ids.size());
+    EXPECT_EQ(starsystem->stars().size(), star_ids.size());
+    EXPECT_EQ(starsystem->planets().size(), planet_ids.size());
+    EXPECT_EQ(starsystem->asteroids().size(), asteroid_ids.size());
+    EXPECT_EQ(starsystem->wormholes().size(), wormhole_ids.size());
+    EXPECT_EQ(starsystem->spacestations().size(), spacestation_ids.size());
+    EXPECT_EQ(starsystem->ships().size(), ship_ids.size());
+    EXPECT_EQ(starsystem->satellites().size(), satellite_ids.size());
+    EXPECT_EQ(starsystem->containers().size(), container_ids.size());
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
@@ -76,106 +76,106 @@ TEST(starsystem, add_remove_objects)
         control::Container* container = genContainer();
 
         /* add objects */
-        starsystem.control()->add(star->model());
+        starsystem->add(star->model());
         star_ids.add(star->model()->id());
 
-        starsystem.control()->add(planet->model());
+        starsystem->add(planet->model());
         planet_ids.add(planet->model()->id());
 
-        starsystem.control()->add(asteroid->model());
+        starsystem->add(asteroid->model());
         asteroid_ids.add(asteroid->model()->id());
 
-        starsystem.control()->add(spacestation.model());
+        starsystem->add(spacestation.model());
         spacestation_ids.add(spacestation.model()->id());
 
-        starsystem.control()->add(ship.model());
+        starsystem->add(ship.model());
         ship_ids.add(ship.model()->id());
 
-        starsystem.control()->add(satellite.model());
+        starsystem->add(satellite.model());
         satellite_ids.add(satellite.model()->id());
 
-        starsystem.control()->add(container->model());
+        starsystem->add(container->model());
         container_ids.add(container->model()->id());
 
         /* post-add check */
-        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
-        EXPECT_EQ(starsystem.model()->stars(), star_ids);
+        EXPECT_EQ(starsystem->stars().size(), star_ids.size());
+        EXPECT_EQ(starsystem->model()->stars(), star_ids);
 
-        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
-        EXPECT_EQ(starsystem.model()->planets(), planet_ids);
+        EXPECT_EQ(starsystem->planets().size(), planet_ids.size());
+        EXPECT_EQ(starsystem->model()->planets(), planet_ids);
 
-        EXPECT_EQ(starsystem.control()->asteroids().size(), asteroid_ids.size());
-        EXPECT_EQ(starsystem.model()->asteroids(), asteroid_ids);
+        EXPECT_EQ(starsystem->asteroids().size(), asteroid_ids.size());
+        EXPECT_EQ(starsystem->model()->asteroids(), asteroid_ids);
 
-        EXPECT_EQ(starsystem.control()->wormholes().size(), wormhole_ids.size());
-        EXPECT_EQ(starsystem.model()->wormholes(), wormhole_ids);
+        EXPECT_EQ(starsystem->wormholes().size(), wormhole_ids.size());
+        EXPECT_EQ(starsystem->model()->wormholes(), wormhole_ids);
 
-        EXPECT_EQ(starsystem.control()->spacestations().size(), spacestation_ids.size());
-        EXPECT_EQ(starsystem.model()->spacestations(), spacestation_ids);
+        EXPECT_EQ(starsystem->spacestations().size(), spacestation_ids.size());
+        EXPECT_EQ(starsystem->model()->spacestations(), spacestation_ids);
 
-        EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
-        EXPECT_EQ(starsystem.model()->ships(), ship_ids);
+        EXPECT_EQ(starsystem->ships().size(), ship_ids.size());
+        EXPECT_EQ(starsystem->model()->ships(), ship_ids);
 
-        EXPECT_EQ(starsystem.control()->containers().size(), container_ids.size());
-        EXPECT_EQ(starsystem.model()->containers(), container_ids);
+        EXPECT_EQ(starsystem->containers().size(), container_ids.size());
+        EXPECT_EQ(starsystem->model()->containers(), container_ids);
     }
 
-    for(control::Star* star: starsystem.control()->stars()) {
-        starsystem.control()->remove(star);
+    for(control::Star* star: starsystem->stars()) {
+        starsystem->remove(star);
         star_ids.remove(star->model()->id());
 
-        EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
-        EXPECT_EQ(starsystem.model()->stars(), star_ids);
+        EXPECT_EQ(starsystem->stars().size(), star_ids.size());
+        EXPECT_EQ(starsystem->model()->stars(), star_ids);
         return;
     }
-    for(control::Planet* planet: starsystem.control()->planets()) {
-        starsystem.control()->remove(planet);
+    for(control::Planet* planet: starsystem->planets()) {
+        starsystem->remove(planet);
         planet_ids.remove(planet->model()->id());
 
-        EXPECT_EQ(starsystem.control()->planets().size(), planet_ids.size());
-        EXPECT_EQ(starsystem.model()->planets(), planet_ids);
+        EXPECT_EQ(starsystem->planets().size(), planet_ids.size());
+        EXPECT_EQ(starsystem->model()->planets(), planet_ids);
     }
-    for(control::Asteroid* asteroid: starsystem.control()->asteroids()) {
-        starsystem.control()->remove(asteroid);
+    for(control::Asteroid* asteroid: starsystem->asteroids()) {
+        starsystem->remove(asteroid);
         asteroid_ids.remove(asteroid->model()->id());
 
-        EXPECT_EQ(starsystem.control()->asteroids().size(), asteroid_ids.size());
-        EXPECT_EQ(starsystem.model()->asteroids(), asteroid_ids);
+        EXPECT_EQ(starsystem->asteroids().size(), asteroid_ids.size());
+        EXPECT_EQ(starsystem->model()->asteroids(), asteroid_ids);
     }
-    for(control::WormHole* wormhole: starsystem.control()->wormholes()) {
-        starsystem.control()->remove(wormhole);
+    for(control::WormHole* wormhole: starsystem->wormholes()) {
+        starsystem->remove(wormhole);
         asteroid_ids.remove(wormhole->model()->id());
 
-        EXPECT_EQ(starsystem.control()->wormholes().size(), wormhole_ids.size());
-        EXPECT_EQ(starsystem.model()->wormholes(), wormhole_ids);
+        EXPECT_EQ(starsystem->wormholes().size(), wormhole_ids.size());
+        EXPECT_EQ(starsystem->model()->wormholes(), wormhole_ids);
     }
-    for(control::SpaceStation* spacestation: starsystem.control()->spacestations()) {
-        starsystem.control()->remove(spacestation);
+    for(control::SpaceStation* spacestation: starsystem->spacestations()) {
+        starsystem->remove(spacestation);
         spacestation_ids.remove(spacestation->model()->id());
 
-        EXPECT_EQ(starsystem.control()->spacestations().size(), spacestation_ids.size());
-        EXPECT_EQ(starsystem.model()->spacestations(), spacestation_ids);
+        EXPECT_EQ(starsystem->spacestations().size(), spacestation_ids.size());
+        EXPECT_EQ(starsystem->model()->spacestations(), spacestation_ids);
     }
-    for(control::Ship* ship: starsystem.control()->ships()) {
-        starsystem.control()->remove(ship);
+    for(control::Ship* ship: starsystem->ships()) {
+        starsystem->remove(ship);
         ship_ids.remove(ship->model()->id());
 
-        EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
-        EXPECT_EQ(starsystem.model()->ships(), ship_ids);
+        EXPECT_EQ(starsystem->ships().size(), ship_ids.size());
+        EXPECT_EQ(starsystem->model()->ships(), ship_ids);
     }
-    for(control::Satellite* satellite: starsystem.control()->satellites()) {
-        starsystem.control()->remove(satellite);
+    for(control::Satellite* satellite: starsystem->satellites()) {
+        starsystem->remove(satellite);
         satellite_ids.remove(satellite->model()->id());
 
-        EXPECT_EQ(starsystem.control()->satellites().size(), satellite_ids.size());
-        EXPECT_EQ(starsystem.model()->satellites(), satellite_ids);
+        EXPECT_EQ(starsystem->satellites().size(), satellite_ids.size());
+        EXPECT_EQ(starsystem->model()->satellites(), satellite_ids);
     }
-    for(control::Container* container: starsystem.control()->containers()) {
-        starsystem.control()->remove(container);
+    for(control::Container* container: starsystem->containers()) {
+        starsystem->remove(container);
         satellite_ids.remove(container->model()->id());
 
-        EXPECT_EQ(starsystem.control()->containers().size(), container_ids.size());
-        EXPECT_EQ(starsystem.model()->containers(), container_ids);
+        EXPECT_EQ(starsystem->containers().size(), container_ids.size());
+        EXPECT_EQ(starsystem->model()->containers(), container_ids);
     }
 }
 
