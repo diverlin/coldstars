@@ -59,24 +59,25 @@ TEST(ship, equip)
 {
     control::Ship* ship = test::genShip();
 
-    test::item::Bak bak;
-    test::item::Drive drive;
-    test::item::Droid droid;
-    test::item::Grapple grapple;
-    test::item::Lazer lazer;
-    test::item::Protector protector;
-    test::item::Radar radar;
-    test::item::Rocket rocket;
-    test::item::Scaner scaner;
+    auto bak = test::item::genBak();
+    auto drive = test::item::genDrive();
+    auto droid = test::item::genDroid();
+    auto grapple = test::item::genGrapple();
+    auto lazer = test::item::genLazer();
+    auto protector = test::item::genProtector();
+    auto radar = test::item::genRadar();
+    auto rocket = test::item::genRocket();
+    auto scaner = test::item::genScaner();
 
-    ship->manage(bak.control());
-    ship->manage(drive.control());
-    ship->manage(droid.control());
-    ship->manage(grapple.control());
-    ship->manage(lazer.control());
-    ship->manage(protector.control());
-    ship->manage(rocket.control());
-    ship->manage(scaner.control());
+    ship->manage(bak);
+    ship->manage(drive);
+    ship->manage(droid);
+    ship->manage(grapple);
+    ship->manage(lazer);
+    ship->manage(protector);
+    ship->manage(radar);
+    ship->manage(rocket);
+    ship->manage(scaner);
 }
 
 TEST(ship, drop_item_to_space)
@@ -220,26 +221,26 @@ void testShipClone(control::Ship* ship)
 TEST(ship, clone)
 {
     // items
-    test::item::Bak bak;
-    test::item::Drive drive;
-    test::item::Scaner scaner;
-    test::item::Droid droid;
-    test::item::Radar radar;
-    test::item::Protector protector;
-    test::item::Protector protector2;
-    test::item::Lazer lazer;
-    //test::item::Rocket rocket;
+    auto bak = test::item::genBak();
+    auto drive = test::item::genDrive();
+    auto scaner = test::item::genScaner();
+    auto droid = test::item::genDroid();
+    auto radar = test::item::genRadar();
+    auto protector = test::item::genProtector();
+    auto protector2 = test::item::genProtector();
+    auto lazer = test::item::genLazer();
+    //auto rocket = test::item::genRocket();
 
     control::Ship* ship = test::genShip();
-    ship->manage(bak.control());
-    ship->manage(drive.control());
-    ship->manage(scaner.control());
-    ship->manage(droid.control());
-    ship->manage(radar.control());
-    ship->manage(protector.control());
-    ship->load(protector2.control());
-    ship->load(lazer.control());
-    //ship->load(rocket.control());
+    ship->manage(bak);
+    ship->manage(drive);
+    ship->manage(scaner);
+    ship->manage(droid);
+    ship->manage(radar);
+    ship->manage(protector);
+    ship->load(protector2);
+    ship->load(lazer);
+    //ship->load(rocket);
 
     testShipClone(ship);
 }

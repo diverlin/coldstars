@@ -160,122 +160,77 @@ genSatellite() {
 
 namespace item {
 
-//////
-Bak::Bak() {
+control::item::Bak*
+genBak() {
     model::item::Bak* model = builder::item::Bak::gen();
-    m_control = new control::item::Bak(model);
-}
-Bak::~Bak() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Bak* bak = new control::item::Bak(model);
+    assert(bak);
+    return bak;
 }
 
-descriptor::item::Bak* Bak::descriptor() const { return m_control->descriptor(); }
-model::item::Bak* Bak::model() const { return m_control->model(); }
-
-//////
-Drive::Drive() {
+control::item::Drive*
+genDrive() {
     model::item::Drive* model = builder::item::Drive::gen();
-    m_control = new control::item::Drive(model);
-}
-Drive::~Drive() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Drive* drive = new control::item::Drive(model);
+    assert(drive);
+    return drive;
 }
 
-descriptor::item::Drive* Drive::descriptor() const { return m_control->descriptor(); }
-model::item::Drive* Drive::model() const { return m_control->model(); }
-
-//////
-Droid::Droid() {
+control::item::Droid*
+genDroid() {
     model::item::Droid* model = builder::item::Droid::gen();
-    m_control = new control::item::Droid(model);
-}
-Droid::~Droid() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Droid* droid = new control::item::Droid(model);
+    assert(droid);
+    return droid;
 }
 
-descriptor::item::Droid* Droid::descriptor() const { return m_control->descriptor(); }
-model::item::Droid* Droid::model() const { return m_control->model(); }
-
-//////
-Grapple::Grapple() {
+control::item::Grapple*
+genGrapple() {
     model::item::Grapple* model = builder::item::Grapple::gen();
-    m_control = new control::item::Grapple(model);
-}
-Grapple::~Grapple() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Grapple* grapple = new control::item::Grapple(model);
+    assert(grapple);
+    return grapple;
 }
 
-descriptor::item::Grapple* Grapple::descriptor() const { return m_control->descriptor(); }
-model::item::Grapple* Grapple::model() const { return m_control->model(); }
-
-//////
-Lazer::Lazer() {
+control::item::Lazer*
+genLazer() {
     model::item::Lazer* model = builder::item::Lazer::gen();
-    m_control = new control::item::Lazer(model);
-}
-Lazer::~Lazer() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Lazer* lazer = new control::item::Lazer(model);
+    assert(lazer);
+    return lazer;
 }
 
-descriptor::item::Lazer* Lazer::descriptor() const { return m_control->descriptor(); }
-model::item::Lazer* Lazer::model() const { return m_control->model(); }
-
-//////
-Protector::Protector() {
+control::item::Protector*
+genProtector() {
     model::item::Protector* model = builder::item::Protector::gen();
-    m_control = new control::item::Protector(model);
-}
-Protector::~Protector() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Protector* protector = new control::item::Protector(model);
+    assert(protector);
+    return protector;
 }
 
-descriptor::item::Protector* Protector::descriptor() const { return m_control->descriptor(); }
-model::item::Protector* Protector::model() const { return m_control->model(); }
-
-//////
-Radar::Radar() {
+control::item::Radar*
+genRadar() {
     model::item::Radar* model = builder::item::Radar::gen();
-    m_control = new control::item::Radar(model);
-}
-Radar::~Radar() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Radar* radar = new control::item::Radar(model);
+    assert(radar);
+    return radar;
 }
 
-descriptor::item::Radar* Radar::descriptor() const { return m_control->descriptor(); }
-model::item::Radar* Radar::model() const { return m_control->model(); }
-
-//////
-Rocket::Rocket() {
+control::item::Rocket*
+genRocket() {
     model::item::Rocket* model = builder::item::Rocket::gen();
-    m_control = new control::item::Rocket(model);
-}
-Rocket::~Rocket() {
-//    delete m_control->model();
-//    delete m_control;
+    control::item::Rocket* rocket = new control::item::Rocket(model);
+    assert(rocket);
+    return rocket;
 }
 
-descriptor::item::Rocket* Rocket::descriptor() const { return m_control->descriptor(); }
-model::item::Rocket* Rocket::model() const { return m_control->model(); }
-
-//////
-Scaner::Scaner() {
+control::item::Scaner*
+genScaner() {
     model::item::Scaner* model = builder::item::Scaner::gen();
-    m_control = new control::item::Scaner(model);
+    control::item::Scaner* scaner = new control::item::Scaner(model);
+    assert(scaner);
+    return scaner;
 }
-Scaner::~Scaner() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::item::Scaner* Scaner::descriptor() const { return m_control->descriptor(); }
-model::item::Scaner* Scaner::model() const { return m_control->model(); }
 
 } // namespace item
 
