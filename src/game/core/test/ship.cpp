@@ -82,7 +82,7 @@ TEST(ship, equip)
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
-    test::StarSystem starsystem;
+    control::StarSystem* starsystem = test::genStarSystem();
     test::Ship ship;
 
     /* equip ship */
@@ -94,14 +94,14 @@ TEST(ship, drop_item_to_space)
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     EXPECT_EQ(ship.model()->place(), place::type::NONE);
-    starsystem.control()->add(ship.control(), pos, dir);
+    starsystem->add(ship.control(), pos, dir);
     EXPECT_EQ(ship.model()->place(), place::type::KOSMOS);
 
     /* drop item to space */
-    EXPECT_EQ(starsystem.control()->containers().size(), 0);
+    EXPECT_EQ(starsystem->containers().size(), 0);
     EXPECT_TRUE(ship.control()->dropItemToSpace(entity::Type::DRIVE_SLOT));
-    EXPECT_EQ(starsystem.control()->containers().size(), 1);
-    assert(starsystem.control()->containers()[0]);
+    EXPECT_EQ(starsystem->containers().size(), 1);
+    assert(starsystem->containers()[0]);
     assert(false);
 //    Container* container = starsystem->containers()[0];
 //    EXPECT_EQ(container->position(), pos);
@@ -112,15 +112,15 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_ship_shoot)
 {
     /* create objects */
-    test::StarSystem starsystem;
+    control::StarSystem* starsystem = test::genStarSystem();
     test::Ship ship1;
     test::Ship ship2;
 
     float distance = 10.0f;
 
     /* add objects */
-    starsystem.control()->add(ship1.control(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem.control()->add(ship2.control(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship1.control(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2.control(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
     ship1.control()->prepareWeapons();

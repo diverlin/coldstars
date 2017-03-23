@@ -86,31 +86,13 @@
 
 namespace test {
 
-StarSystem::StarSystem() {
+control::StarSystem*
+genStarSystem() {
     model::StarSystem* model = builder::StarSystem::gen();
-    m_control = new control::StarSystem(model);
+    control::StarSystem* starsystem = new control::StarSystem(model);
+    assert(starsystem);
+    return starsystem;
 }
-StarSystem::~StarSystem() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::StarSystem* StarSystem::descriptor() const { return m_control->descriptor(); }
-model::StarSystem* StarSystem::model() const { return m_control->model(); }
-
-
-
-//Star::Star() {
-//    model::Star* model = builder::Star::gen();
-//    m_control = new control::Star(model);
-//}
-//Star::~Star() {
-////    delete m_control->model();
-////    delete m_control;
-//}
-
-//descriptor::Star* Star::descriptor() const { return m_control->descriptor(); }
-//model::Star* Star::model() const { return m_control->model(); }
 
 control::Star*
 genStar() {
