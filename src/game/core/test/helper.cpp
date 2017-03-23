@@ -146,19 +146,13 @@ SpaceStation::~SpaceStation() {
 descriptor::SpaceStation* SpaceStation::descriptor() const { return m_control->descriptor(); }
 model::SpaceStation* SpaceStation::model() const { return m_control->model(); }
 
-
-Ship::Ship() {
+control::Ship*
+genShip() {
     model::Ship* model = builder::Ship::gen();
-    m_control = new control::Ship(model);
+    control::Ship* ship = new control::Ship(model);
+    assert(ship);
+    return ship;
 }
-Ship::~Ship() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::Ship* Ship::descriptor() const { return m_control->descriptor(); }
-model::Ship* Ship::model() const { return m_control->model(); }
-
 
 Satellite::Satellite() {
     model::Satellite* model = builder::Satellite::gen();

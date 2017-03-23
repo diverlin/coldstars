@@ -71,7 +71,7 @@ TEST(starsystem, add_remove_objects)
         control::Asteroid* asteroid = genAsteroid();
         control::WormHole* wormhole = genWormHole();
         SpaceStation spacestation;
-        Ship ship;
+        control::Ship* ship = genShip();
         Satellite satellite;
         control::Container* container = genContainer();
 
@@ -88,8 +88,8 @@ TEST(starsystem, add_remove_objects)
         starsystem->add(spacestation.model());
         spacestation_ids.add(spacestation.model()->id());
 
-        starsystem->add(ship.model());
-        ship_ids.add(ship.model()->id());
+        starsystem->add(ship->model());
+        ship_ids.add(ship->model()->id());
 
         starsystem->add(satellite.model());
         satellite_ids.add(satellite.model()->id());
