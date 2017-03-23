@@ -134,17 +134,13 @@ genContainer() {
     return container;
 }
 
-SpaceStation::SpaceStation() {
+control::SpaceStation*
+genSpaceStation() {
     model::SpaceStation* model = builder::SpaceStation::gen();
-    m_control = new control::SpaceStation(model);
+    control::SpaceStation* spacestation = new control::SpaceStation(model);
+    assert(spacestation);
+    return spacestation;
 }
-SpaceStation::~SpaceStation() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::SpaceStation* SpaceStation::descriptor() const { return m_control->descriptor(); }
-model::SpaceStation* SpaceStation::model() const { return m_control->model(); }
 
 control::Ship*
 genShip() {
@@ -154,18 +150,13 @@ genShip() {
     return ship;
 }
 
-Satellite::Satellite() {
+control::Satellite*
+genSatellite() {
     model::Satellite* model = builder::Satellite::gen();
-    m_control = new control::Satellite(model);
+    control::Satellite* satellite = new control::Satellite(model);
+    assert(satellite);
+    return satellite;
 }
-Satellite::~Satellite() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::Satellite* Satellite::descriptor() const { return m_control->descriptor(); }
-model::Satellite* Satellite::model() const { return m_control->model(); }
-
 
 namespace item {
 
