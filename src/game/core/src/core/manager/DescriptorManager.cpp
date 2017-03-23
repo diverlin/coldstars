@@ -181,6 +181,13 @@ Manager::randPlanet() const
     assert(descr);
     return descr;
 }
+WormHole*
+Manager::randWormHole() const
+{
+    WormHole* descr = static_cast<WormHole*>(rand(Type::WORMHOLE));
+    assert(descr);
+    return descr;
+}
 Asteroid*
 Manager::randAsteroid() const
 {
@@ -323,6 +330,13 @@ Planet*
 Manager::planet(int_t id) const
 {
     Planet* descr = static_cast<Planet*>(get(id));
+    assert(descr);
+    return descr;
+}
+WormHole*
+Manager::wormHole(int_t id) const
+{
+    WormHole* descr = static_cast<WormHole*>(get(id));
     assert(descr);
     return descr;
 }

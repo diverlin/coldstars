@@ -70,6 +70,9 @@ class StarSystem;
 
 class Star;
 class Planet;
+class WormHole;
+class Asteroid;
+class Container;
 class SpaceStation;
 class Ship;
 class Satellite;
@@ -130,6 +133,10 @@ public:
 private:
     control::Planet* m_control = nullptr;
 };
+
+control::WormHole* genWormHole();
+control::Asteroid* genAsteroid();
+control::Container* genContainer();
 
 class SpaceStation {
 public:

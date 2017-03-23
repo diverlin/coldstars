@@ -16,29 +16,41 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
+
+#include <core/spaceobject/SpaceObject.hpp>
 
 #include <ceti/type/IdType.hpp>
 
 namespace model {
-class Asteroid;
-} // namespace model
 
-namespace descriptor {
-class Asteroid;
-} // namespace descriptor
+class Container : public SpaceObject {
 
-
-namespace builder {
-
-class Asteroid
-{
 public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
+    Container(int_t);
+    ~Container() = default;
+    Container(const std::string& data);
+    std::string data() const;
+
+    void setTargetPos(const glm::vec3& target_pos, float velocity)
+    { m_targetPos = target_pos; m_velocity = velocity; }
 
 private:
-    static model::Asteroid* __genTemplate(int_t);
-}; 
+    int_t m_itemSlot = NONE;
+    meti::vec3 m_targetPos;
+    float m_velocity = 0.0f;
 
-} // namespace builder
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & m_itemSlot;
+        ar & m_targetPos;
+        ar & m_velocity;
+    }
+};
+
+} // namespace model
+

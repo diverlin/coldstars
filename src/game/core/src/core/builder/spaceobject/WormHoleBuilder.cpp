@@ -16,47 +16,54 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BlackHoleBuilder.hpp"
+#include "WormHoleBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobject/BlackHole.hpp>
+#include <core/spaceobject/WormHole.hpp>
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/type/MeshType.hpp>
+//#include <core/type/MeshType.hpp>
 
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 namespace builder {
 
-BlackHole::BlackHole()
-{}
-
-BlackHole::~BlackHole()
-{}
-
-model::Wormhole*
-BlackHole::__genTemplate()
+model::WormHole*
+WormHole::__genTemplate(int_t descriptor_id)
 {
-    model::Wormhole* blackhole = new model::Wormhole;
-    assert(blackhole);
+    model::WormHole* model = new model::WormHole(descriptor_id);
+    assert(model);
     
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-   EntityManager::get().reg(blackhole);
+    EntityManager::get().reg(model);
     
-    return blackhole;
+    return model;
 } 
 
-model::Wormhole*
-BlackHole::gen()
+model::WormHole*
+WormHole::gen()
 {
-    model::Wormhole* blackhole = __genTemplate();
-    __createInternals(blackhole);
+    descriptor::WormHole* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::WORMHOLE)) {
+        descr = descriptor::genWormHole();
+    } else {
+        descr = descriptor::Manager::get().randWormHole();
+    }
 
-    return blackhole;
+    return gen(descr);
 } 
+
+model::WormHole*
+WormHole::gen(descriptor::WormHole* descr)
+{
+    model::WormHole* model = __genTemplate(descr->id());
+    return model;
+}
 
 void
-BlackHole::__createInternals(model::Wormhole* blackhole)
+WormHole::__createInternals(model::WormHole* blackhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     

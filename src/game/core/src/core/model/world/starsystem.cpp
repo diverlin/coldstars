@@ -22,7 +22,7 @@
 
 #include <meti/VectorUtils.hpp>
 
-#include <core/builder/spaceobject/BlackHoleBuilder.hpp>
+#include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/builder/pilot/NpcBuilder.hpp>
 

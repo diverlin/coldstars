@@ -27,6 +27,18 @@
 
 namespace descriptor {
 
+class Galaxy;
+class Sector;
+class StarSystem;
+class Star;
+class Planet;
+class WormHole;
+class Asteroid;
+class Ship;
+class SpaceStation;
+class Satellite;
+class Container;
+
 namespace item {
 class Bak;
 class Drive;
@@ -39,17 +51,6 @@ class Rocket;
 class Scaner;
 } // namespace item
 
-class Galaxy;
-class Sector;
-class StarSystem;
-class Star;
-class Planet;
-class Asteroid;
-class Ship;
-class SpaceStation;
-class Satellite;
-class Container;
-
 /* world */
 descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
 descriptor::Sector* genSector(const std::vector<int_t>&);
@@ -58,6 +59,7 @@ descriptor::StarSystem* genStarSystem(race::Type race = race::Type::NONE);
 /* spaceobjects */
 descriptor::Star* genStar();
 descriptor::Planet* genPlanet();
+descriptor::WormHole* genWormHole();
 descriptor::Asteroid* genAsteroid();
 
 descriptor::Ship* genShip();

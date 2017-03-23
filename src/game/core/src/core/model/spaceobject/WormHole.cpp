@@ -16,29 +16,30 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "WormHole.hpp"
+//#include <core/manager/DescriptorManager.hpp>
 
-#include <ceti/type/IdType.hpp>
+//#include <meti/RandUtils.hpp>
+//#include <ceti/Logger.hpp>
+//#include "../world/starsystem.hpp"
 
 namespace model {
-class Asteroid;
+
+WormHole::WormHole(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
+WormHole::WormHole(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+WormHole::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace model
 
-namespace descriptor {
-class Asteroid;
-} // namespace descriptor
-
-
-namespace builder {
-
-class Asteroid
-{
-public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
-
-private:
-    static model::Asteroid* __genTemplate(int_t);
-}; 
-
-} // namespace builder

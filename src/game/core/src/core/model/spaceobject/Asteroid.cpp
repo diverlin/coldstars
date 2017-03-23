@@ -16,29 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Asteroid.hpp"
 
-#include <ceti/type/IdType.hpp>
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
-class Asteroid;
+
+Asteroid::Asteroid(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
+Asteroid::Asteroid(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Asteroid::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace model
 
-namespace descriptor {
-class Asteroid;
-} // namespace descriptor
-
-
-namespace builder {
-
-class Asteroid
-{
-public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
-
-private:
-    static model::Asteroid* __genTemplate(int_t);
-}; 
-
-} // namespace builder

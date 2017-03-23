@@ -16,29 +16,26 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-
-namespace model {
-class Asteroid;
-} // namespace model
+#include <core/spaceobject/Planetoid.hpp>
 
 namespace descriptor {
-class Asteroid;
-} // namespace descriptor
 
-
-namespace builder {
-
-class Asteroid
-{
+class WormHole : public Planetoid {
 public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
+    WormHole();
+    ~WormHole() = default;
+    WormHole(const std::string& data);
+    std::string data() const;
 
 private:
-    static model::Asteroid* __genTemplate(int_t);
-}; 
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Planetoid>(*this);
+    }
+};
 
-} // namespace builder
+} // namespace descriptor

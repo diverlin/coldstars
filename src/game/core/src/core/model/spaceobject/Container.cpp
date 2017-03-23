@@ -16,27 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Container.hpp"
 
-#pragma once
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
-class Wormhole;
+
+Container::Container(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+
+Container::Container(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Container::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace model
 
-namespace builder {
-
-class BlackHole
-{
-public:
-    BlackHole();
-    ~BlackHole();
-
-    static model::Wormhole* gen();
-
-private:
-    static void __createInternals(model::Wormhole*);
-
-    static model::Wormhole* __genTemplate();
-};
-
-} // namespace builder

@@ -39,7 +39,7 @@ enum class Type {
     STAR,
     ASTEROID,
     PLANET,
-    BLACKHOLE,
+    WORMHOLE,
     SHIP,
     SPACESTATION,
     SATELLITE,

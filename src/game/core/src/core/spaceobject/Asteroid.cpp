@@ -31,45 +31,24 @@
 
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
+#include <core/model/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/Container.hpp>
 
-#include <meti/RandUtils.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
-#include <ceti/serialization/macro.hpp>
-
-
-namespace model {
-
-//const int Asteroid::SCALE_MIN = 20;
-//const int Asteroid::SCALE_MAX = 40;
-//const int Asteroid::EXPIRIENCE_TO_GIVE = 100;
-
-Asteroid::Asteroid()
-{
-//    setType(entity::type::ASTEROID);
+namespace {
+descriptor::Asteroid* getDescriptor(model::Asteroid* model) {
+    return descriptor::Manager::get().asteroid(model->descriptor());
 }
-
-Asteroid::Asteroid(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Asteroid::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
+} // namespace
 
 namespace control {
 
-Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
+Asteroid::Asteroid(model::Asteroid* model)
     :
-      Planetoid(model, descr)
+      Planetoid(model, getDescriptor(model))
     , m_model_asteroid(model)
-    , m_descriptor_asteroid(descr)
+    , m_descriptor_asteroid(getDescriptor(model))
 {
 }
 

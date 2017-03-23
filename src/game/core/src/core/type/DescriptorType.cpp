@@ -36,7 +36,7 @@ std::string to_string(descriptor::Type type)
         case descriptor::Type::STAR:         { return "descriptor::Type::STAR"; break; }
         case descriptor::Type::ASTEROID:     { return "descriptor::Type::ASTEROID"; break; }
         case descriptor::Type::PLANET:         { return "descriptor::Type::PLANET"; break; }
-        case descriptor::Type::BLACKHOLE:     { return "descriptor::Type::BLACKHOLE"; break; }
+        case descriptor::Type::WORMHOLE:     { return "descriptor::Type::BLACKHOLE"; break; }
         case descriptor::Type::SHIP:         { return "descriptor::Type::SHIP"; break; }
         case descriptor::Type::SPACESTATION: { return "descriptor::Type::SPACESTATION"; break; }
         case descriptor::Type::SATELLITE:     { return "descriptor::Type::SATELLITE"; break; }

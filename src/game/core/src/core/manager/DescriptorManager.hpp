@@ -46,10 +46,11 @@ class Sector;
 class StarSystem;
 class Star;
 class Planet;
+class WormHole;
 class Asteroid;
 class Container;
-class Ship;
 class SpaceStation;
+class Ship;
 class Satellite;
 
 namespace item {
@@ -89,6 +90,7 @@ public:
 
     Star* randStar() const;
     Planet* randPlanet() const;
+    WormHole* randWormHole() const;
     Asteroid* randAsteroid() const;
     Container* randContainer() const;
     Ship* randShip() const;
@@ -111,6 +113,7 @@ public:
 
     Star* star(int_t) const;
     Planet* planet(int_t) const;
+    WormHole* wormHole(int_t) const;
     Asteroid* asteroid(int_t) const;
     Container* container(int_t) const;
     Ship* ship(int_t) const;

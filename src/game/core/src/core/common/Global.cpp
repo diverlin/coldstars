@@ -66,7 +66,7 @@
 #include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <core/builder/slot/VehicleSlotBuilder.hpp>
 
-#include <core/builder/spaceobject/BlackHoleBuilder.hpp>
+#include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 #include <core/builder/spaceobject/RocketBulletBuilder.hpp>
 
@@ -119,7 +119,7 @@ global::global()
     #endif // USE_MODULES
 
     , m_npcBuilder(new NpcBuilder)
-    , m_blackHoleBuilder(new builder::BlackHole)
+    , m_blackHoleBuilder(new builder::WormHole)
     , m_rocketBulletBuilder(new builder::Rocket){
 }
 

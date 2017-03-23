@@ -78,7 +78,7 @@ namespace builder {
 
 class Rocket;
 class Container;
-class BlackHole;
+class WormHole;
 
 } // namespace builder
 
@@ -135,7 +135,7 @@ public:
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
-    builder::BlackHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
+    builder::WormHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
     builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
 
 private:
@@ -186,7 +186,7 @@ private:
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
-    builder::BlackHole* m_blackHoleBuilder = nullptr;
+    builder::WormHole* m_blackHoleBuilder = nullptr;
     builder::Rocket* m_rocketBulletBuilder = nullptr;
 };
 

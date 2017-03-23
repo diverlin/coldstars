@@ -42,7 +42,7 @@ class SpaceStation;
 class Ship;
 class Npc;
 class Vehicle;
-class Wormhole;
+class WormHole;
 class Container;
 class RocketBullet;
 } // namespace model
@@ -55,7 +55,7 @@ class Satellite;
 class SpaceStation;
 class Ship;
 class Vehicle;
-class Wormhole;
+class WormHole;
 class Container;
 class RocketBullet;
 } // namespace model
@@ -123,7 +123,7 @@ public:
 
     void removeStar(int_t id) { m_stars.remove(id); }
     void removePlanet(int_t id) { m_planets.remove(id); }
-    void removeWormhole(int_t id) { m_wormholes.remove(id); }
+    void removeWormHole(int_t id) { m_wormholes.remove(id); }
     void removeAsteroid(int_t id) { m_asteroids.remove(id); }
     void removeContainer(int_t id) { m_containers.remove(id); }
     void removeBullet(int_t id) { m_bullets.remove(id); }

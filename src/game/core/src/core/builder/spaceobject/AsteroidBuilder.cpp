@@ -18,17 +18,17 @@
 
 #include "AsteroidBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobject/Asteroid.hpp>
-#include <core/descriptor/Base.hpp>
+#include <core/model/spaceobject/Asteroid.hpp>
+#include <core/descriptor/spaceobject/Asteroid.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 model::Asteroid*
-Asteroid::__genTemplate()
+Asteroid::__genTemplate(int_t descriptor_id)
 { 
-    model::Asteroid* model = new model::Asteroid;
+    model::Asteroid* model = new model::Asteroid(descriptor_id);
     assert(model);
 
     EntityManager::get().reg(model);
@@ -52,7 +52,7 @@ Asteroid::gen()
 model::Asteroid*
 Asteroid::gen(descriptor::Asteroid* descr)
 {
-    model::Asteroid* model = __genTemplate();
+    model::Asteroid* model = __genTemplate(descr->id());
 
     /// Base
     LifeData life_data;

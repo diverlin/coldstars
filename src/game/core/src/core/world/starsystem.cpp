@@ -22,7 +22,7 @@
 
 #include <meti/VectorUtils.hpp>
 
-#include <core/builder/spaceobject/BlackHoleBuilder.hpp>
+#include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/builder/pilot/NpcBuilder.hpp>
 
@@ -336,9 +336,7 @@ void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
 
-    assert(false);
-    descriptor::Asteroid* _descr = nullptr;
-    Asteroid* asteroid = new Asteroid(_model, _descr);
+    Asteroid* asteroid = new Asteroid(_model);
     asteroid->initialize();
     m_asteroids.push_back(asteroid);
 }
@@ -358,22 +356,18 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
     _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
-    assert(false);
-    descriptor::Container* _descr = nullptr;
-    Container* container = new Container(_model, _descr);
+    Container* container = new Container(_model);
 
     m_containers.push_back(container);
 }
 
-void StarSystem::add(model::Wormhole* _model, const glm::vec3& center)
+void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
     _model->setPlace(place::type::KOSMOS);
     _model->setPosition(center);
 
-    assert(false);
-    descriptor::Wormhole* _descr = nullptr;
-    Wormhole* blackhole = new Wormhole(_model, _descr);
+    WormHole* blackhole = new WormHole(_model);
     blackhole->initialize();
 
     m_wormholes.push_back(blackhole);
@@ -433,6 +427,7 @@ void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
 void
 StarSystem::remove(Star* star)
 {
+    assert(star);
     m_stars.remove(star);
     model()->removeStar(star->model()->id());
 
@@ -442,6 +437,7 @@ StarSystem::remove(Star* star)
 void
 StarSystem::remove(Planet* planet)
 {
+    assert(planet);
     m_planets.remove(planet);
     model()->removePlanet(planet->model()->id());
 
@@ -449,8 +445,19 @@ StarSystem::remove(Planet* planet)
 }
 
 void
+StarSystem::remove(WormHole* wormhole)
+{
+    assert(wormhole);
+    m_wormholes.remove(wormhole);
+    model()->removeWormHole(wormhole->model()->id());
+
+    delete wormhole;
+}
+
+void
 StarSystem::remove(Asteroid* asteroid)
 {
+    assert(asteroid);
     m_asteroids.remove(asteroid);
     model()->removeAsteroid(asteroid->model()->id());
 
@@ -458,8 +465,19 @@ StarSystem::remove(Asteroid* asteroid)
 }
 
 void
+StarSystem::remove(Container* container)
+{
+    assert(container);
+    m_containers.remove(container);
+    model()->removeContainer(container->model()->id());
+
+    delete container;
+}
+
+void
 StarSystem::remove(SpaceStation* spacestation)
 {
+    assert(spacestation);
     m_spacestations.remove(spacestation);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
@@ -473,27 +491,10 @@ StarSystem::remove(SpaceStation* spacestation)
     delete spacestation;
 }
 
-//void
-//StarSystem::remove(model::Ship* _model)
-//{
-//    for(std::vector<Ship*>::iterator it = m_ships.begin(); it < m_ships.end(); ++it) {
-//        if ((*it)->model() == _model) {
-//            it = m_ships.erase(it);
-//        }
-//    }
-
-//    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-//        if ((*it)->model()->id() == _model->id()) {
-//            it = m_vehicles.erase(it);
-//        }
-//    }
-
-//    model()->removeShip(_model->id());
-//}
-
 void
 StarSystem::remove(Ship* ship)
 {
+    assert(ship);
     m_ships.remove(ship);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
@@ -510,6 +511,7 @@ StarSystem::remove(Ship* ship)
 void
 StarSystem::remove(Satellite* satellite)
 {
+    assert(satellite);
     m_satellites.remove(satellite);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
@@ -1122,7 +1124,7 @@ void StarSystem::__manageDeadObjects_s()
         //        }
     }
 
-    for(std::vector<Wormhole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
+    for(std::vector<WormHole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
 //            EntityManager::get().addToGarbage(*it);

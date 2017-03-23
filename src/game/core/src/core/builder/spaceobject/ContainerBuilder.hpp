@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <ceti/type/IdType.hpp>
+
 #include <string>
 
 namespace descriptor {
@@ -49,7 +51,7 @@ private:
     Container() = default;
     ~Container() = default;
 
-    static model::Container* __genTemplate();
+    static model::Container* __genTemplate(int_t);
     static void __createInternals(model::Container*, descriptor::Container*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;

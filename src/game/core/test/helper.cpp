@@ -86,7 +86,6 @@
 
 namespace test {
 
-
 StarSystem::StarSystem() {
     model::StarSystem* model = builder::StarSystem::gen();
     m_control = new control::StarSystem(model);
@@ -126,6 +125,24 @@ Planet::~Planet() {
 descriptor::Planet* Planet::descriptor() const { return m_control->descriptor(); }
 model::Planet* Planet::model() const { return m_control->model(); }
 
+
+control::WormHole*
+genWormHole() {
+    model::WormHole* model = builder::WormHole::gen();
+    return new control::WormHole(model);
+}
+
+control::Asteroid*
+genAsteroid() {
+    model::Asteroid* model = builder::Asteroid::gen();
+    return new control::Asteroid(model);
+}
+
+control::Container*
+genContainer() {
+    model::Container* model = builder::Container::gen();
+    return new control::Container(model);
+}
 
 SpaceStation::SpaceStation() {
     model::SpaceStation* model = builder::SpaceStation::gen();
