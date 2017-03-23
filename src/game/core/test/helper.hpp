@@ -101,34 +101,9 @@ control::Planet* genPlanet();
 control::WormHole* genWormHole();
 control::Asteroid* genAsteroid();
 control::Container* genContainer();
-
-class SpaceStation {
-public:
-    SpaceStation();
-    ~SpaceStation();
-
-    descriptor::SpaceStation* descriptor() const;
-    model::SpaceStation* model() const;
-    control::SpaceStation* control() const { return m_control; }
-
-private:
-    control::SpaceStation* m_control = nullptr;
-};
-
+control::SpaceStation* genSpaceStation();
 control::Ship* genShip();
-
-class Satellite {
-public:
-    Satellite();
-    ~Satellite();
-
-    descriptor::Satellite* descriptor() const;
-    model::Satellite* model() const;
-    control::Satellite* control() const { return m_control; }
-
-private:
-    control::Satellite* m_control = nullptr;
-};
+control::Satellite* genSatellite();
 
 namespace item {
 
