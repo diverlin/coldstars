@@ -42,22 +42,22 @@
 
 TEST(ship, create)
 {
-    test::Ship ship;
+    control::Ship* ship = test::genShip();
 
-    EXPECT_EQ(ship.descriptor()->bakSlotNum(), ship.control()->bakSlots().size());
-    EXPECT_EQ(ship.descriptor()->driveSlotNum(), ship.control()->driveSlots().size());
-    EXPECT_EQ(ship.descriptor()->radarSlotNum(), ship.control()->radarSlots().size());
-    EXPECT_EQ(ship.descriptor()->scanerSlotNum(), ship.control()->scanerSlots().size());
-    EXPECT_EQ(ship.descriptor()->grappleSlotNum(), ship.control()->grappleSlots().size());
-    EXPECT_EQ(ship.descriptor()->droidSlotNum(), ship.control()->droidSlots().size());
-    EXPECT_EQ(ship.descriptor()->protectorSlotNum(), ship.control()->protectorSlots().size());
-    EXPECT_EQ(ship.descriptor()->weaponSlotNum(), ship.control()->weaponSlots().size());
-    EXPECT_EQ(ship.descriptor()->cargoSlotNum(), ship.control()->cargoSlots().size());
+    EXPECT_EQ(ship->descriptor()->bakSlotNum(), ship->bakSlots().size());
+    EXPECT_EQ(ship->descriptor()->driveSlotNum(), ship->driveSlots().size());
+    EXPECT_EQ(ship->descriptor()->radarSlotNum(), ship->radarSlots().size());
+    EXPECT_EQ(ship->descriptor()->scanerSlotNum(), ship->scanerSlots().size());
+    EXPECT_EQ(ship->descriptor()->grappleSlotNum(), ship->grappleSlots().size());
+    EXPECT_EQ(ship->descriptor()->droidSlotNum(), ship->droidSlots().size());
+    EXPECT_EQ(ship->descriptor()->protectorSlotNum(), ship->protectorSlots().size());
+    EXPECT_EQ(ship->descriptor()->weaponSlotNum(), ship->weaponSlots().size());
+    EXPECT_EQ(ship->descriptor()->cargoSlotNum(), ship->cargoSlots().size());
 }
 
 TEST(ship, equip)
 {
-    test::Ship ship;
+    control::Ship* ship = test::genShip();
 
     test::item::Bak bak;
     test::item::Drive drive;
@@ -69,21 +69,21 @@ TEST(ship, equip)
     test::item::Rocket rocket;
     test::item::Scaner scaner;
 
-    ship.control()->manage(bak.control());
-    ship.control()->manage(drive.control());
-    ship.control()->manage(droid.control());
-    ship.control()->manage(grapple.control());
-    ship.control()->manage(lazer.control());
-    ship.control()->manage(protector.control());
-    ship.control()->manage(rocket.control());
-    ship.control()->manage(scaner.control());
+    ship->manage(bak.control());
+    ship->manage(drive.control());
+    ship->manage(droid.control());
+    ship->manage(grapple.control());
+    ship->manage(lazer.control());
+    ship->manage(protector.control());
+    ship->manage(rocket.control());
+    ship->manage(scaner.control());
 }
 
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
     control::StarSystem* starsystem = test::genStarSystem();
-    test::Ship ship;
+    control::Ship* ship = test::genShip();
 
     /* equip ship */
     model::item::Drive* drive = builder::item::Drive::gen();
@@ -93,13 +93,13 @@ TEST(ship, drop_item_to_space)
     /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship.model()->place(), place::type::NONE);
-    starsystem->add(ship.control(), pos, dir);
-    EXPECT_EQ(ship.model()->place(), place::type::KOSMOS);
+    EXPECT_EQ(ship->model()->place(), place::type::NONE);
+    starsystem->add(ship, pos, dir);
+    EXPECT_EQ(ship->model()->place(), place::type::KOSMOS);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_TRUE(ship.control()->dropItemToSpace(entity::Type::DRIVE_SLOT));
+    EXPECT_TRUE(ship->dropItemToSpace(entity::Type::DRIVE_SLOT));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
     assert(false);
@@ -113,32 +113,32 @@ TEST(ship, base_ship_shoot)
 {
     /* create objects */
     control::StarSystem* starsystem = test::genStarSystem();
-    test::Ship ship1;
-    test::Ship ship2;
+    control::Ship* ship1 = test::genShip();
+    control::Ship* ship2 = test::genShip();
 
     float distance = 10.0f;
 
     /* add objects */
-    starsystem->add(ship1.control(), /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(ship2.control(), /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
-    ship1.control()->prepareWeapons();
-    ship1.control()->weaponComplex().activateWeapons();
-    ship1.control()->setWeaponTarget(ship2.model());
-    int damage = ship1.control()->guessDamage(distance) * ship2.control()->adjustDissipateFilter();
-    int armor_init = ship2.model()->armor();
-    ship1.control()->fire(/*timer=*/0, /*rate=*/1.0);
-    EXPECT_TRUE((armor_init - damage) - ship2.model()->armor() <= 1);
+    ship1->prepareWeapons();
+    ship1->weaponComplex().activateWeapons();
+    ship1->setWeaponTarget(ship2->model());
+    int damage = ship1->guessDamage(distance) * ship2->adjustDissipateFilter();
+    int armor_init = ship2->model()->armor();
+    ship1->fire(/*timer=*/0, /*rate=*/1.0);
+    EXPECT_TRUE((armor_init - damage) - ship2->model()->armor() <= 1);
 }
 
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    test::Ship ship;
+    control::Ship* ship = test::genShip();
 
-    ship.control()->hit(ship.control()->criticalDamage());
-    EXPECT_EQ(0, ship.model()->armor());
+    ship->hit(ship->criticalDamage());
+    EXPECT_EQ(0, ship->model()->armor());
 }
 
 namespace {
@@ -208,13 +208,13 @@ void compareShipControls(control::Ship* c1, control::Ship* c2)
 } // namespace
 
 
-void testShipClone(const test::Ship& ship)
+void testShipClone(control::Ship* ship)
 {
-    model::Ship* model = new model::Ship(ship.model()->data());
-    control::Ship* control = new control::Ship(model);
+    model::Ship* model = new model::Ship(ship->model()->data());
+    control::Ship* clone = new control::Ship(model);
 
-    compareShipModels(ship.model(), model);
-    compareShipControls(ship.control(), control);
+    compareShipModels(ship->model(), model);
+    compareShipControls(ship, clone);
 }
 
 TEST(ship, clone)
@@ -230,16 +230,16 @@ TEST(ship, clone)
     test::item::Lazer lazer;
     //test::item::Rocket rocket;
 
-    test::Ship ship;
-    ship.control()->manage(bak.control());
-    ship.control()->manage(drive.control());
-    ship.control()->manage(scaner.control());
-    ship.control()->manage(droid.control());
-    ship.control()->manage(radar.control());
-    ship.control()->manage(protector.control());
-    ship.control()->load(protector2.control());
-    ship.control()->load(lazer.control());
-    //ship.control()->load(rocket.control());
+    control::Ship* ship = test::genShip();
+    ship->manage(bak.control());
+    ship->manage(drive.control());
+    ship->manage(scaner.control());
+    ship->manage(droid.control());
+    ship->manage(radar.control());
+    ship->manage(protector.control());
+    ship->load(protector2.control());
+    ship->load(lazer.control());
+    //ship->load(rocket.control());
 
     testShipClone(ship);
 }

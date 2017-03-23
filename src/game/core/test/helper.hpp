@@ -95,19 +95,6 @@ class Scaner;
 
 namespace test {
 
-//class StarSystem {
-//public:
-//    StarSystem();
-//    ~StarSystem();
-
-//    descriptor::StarSystem* descriptor() const;
-//    model::StarSystem* model() const;
-//    control::StarSystem* control() const { return m_control; }
-
-//private:
-//    control::StarSystem* m_control = nullptr;
-//};
-
 control::StarSystem* genStarSystem();
 control::Star* genStar();
 control::Planet* genPlanet();
@@ -127,18 +114,9 @@ public:
 private:
     control::SpaceStation* m_control = nullptr;
 };
-class Ship {
-public:
-    Ship();
-    ~Ship();
 
-    descriptor::Ship* descriptor() const;
-    model::Ship* model() const;
-    control::Ship* control() const { return m_control; }
+control::Ship* genShip();
 
-private:
-    control::Ship* m_control = nullptr;
-};
 class Satellite {
 public:
     Satellite();
