@@ -66,8 +66,8 @@ TEST(starsystem, add_remove_objects)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        Star star;
-        Planet planet;
+        control::Star* star = genStar();
+        control::Planet* planet = genPlanet();
         control::Asteroid* asteroid = genAsteroid();
         control::WormHole* wormhole = genWormHole();
         SpaceStation spacestation;
@@ -76,11 +76,11 @@ TEST(starsystem, add_remove_objects)
         control::Container* container = genContainer();
 
         /* add objects */
-        starsystem.control()->add(star.model());
-        star_ids.add(star.model()->id());
+        starsystem.control()->add(star->model());
+        star_ids.add(star->model()->id());
 
-        starsystem.control()->add(planet.model());
-        planet_ids.add(planet.model()->id());
+        starsystem.control()->add(planet->model());
+        planet_ids.add(planet->model()->id());
 
         starsystem.control()->add(asteroid->model());
         asteroid_ids.add(asteroid->model()->id());

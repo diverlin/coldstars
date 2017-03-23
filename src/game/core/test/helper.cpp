@@ -100,48 +100,56 @@ model::StarSystem* StarSystem::model() const { return m_control->model(); }
 
 
 
-Star::Star() {
+//Star::Star() {
+//    model::Star* model = builder::Star::gen();
+//    m_control = new control::Star(model);
+//}
+//Star::~Star() {
+////    delete m_control->model();
+////    delete m_control;
+//}
+
+//descriptor::Star* Star::descriptor() const { return m_control->descriptor(); }
+//model::Star* Star::model() const { return m_control->model(); }
+
+control::Star*
+genStar() {
     model::Star* model = builder::Star::gen();
-    m_control = new control::Star(model);
-}
-Star::~Star() {
-//    delete m_control->model();
-//    delete m_control;
+    control::Star* star = new control::Star(model);
+    assert(star);
+    return star;
 }
 
-descriptor::Star* Star::descriptor() const { return m_control->descriptor(); }
-model::Star* Star::model() const { return m_control->model(); }
-
-
-Planet::Planet() {
+control::Planet*
+genPlanet() {
     model::Planet* model = builder::Planet::gen();
-    m_control = new control::Planet(model);
+    control::Planet* planet = new control::Planet(model);
+    assert(planet);
+    return planet;
 }
-Planet::~Planet() {
-//    delete m_control->model();
-//    delete m_control;
-}
-
-descriptor::Planet* Planet::descriptor() const { return m_control->descriptor(); }
-model::Planet* Planet::model() const { return m_control->model(); }
-
 
 control::WormHole*
 genWormHole() {
     model::WormHole* model = builder::WormHole::gen();
-    return new control::WormHole(model);
+    control::WormHole* wormhole = new control::WormHole(model);
+    assert(wormhole);
+    return wormhole;
 }
 
 control::Asteroid*
 genAsteroid() {
     model::Asteroid* model = builder::Asteroid::gen();
-    return new control::Asteroid(model);
+    control::Asteroid* asteroid = new control::Asteroid(model);
+    assert(asteroid);
+    return asteroid;
 }
 
 control::Container*
 genContainer() {
     model::Container* model = builder::Container::gen();
-    return new control::Container(model);
+    control::Container* container = new control::Container(model);
+    assert(container);
+    return container;
 }
 
 SpaceStation::SpaceStation() {
