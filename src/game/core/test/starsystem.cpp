@@ -68,12 +68,12 @@ TEST(starsystem, add_remove_objects)
     for(int i=1; i<iterations; ++i) {
         Star star;
         Planet planet;
-        Asteroid asteroid;
-        Wormhole wormhole;
+        control::Asteroid* asteroid = genAsteroid();
+        control::WormHole* wormhole = genWormHole();
         SpaceStation spacestation;
         Ship ship;
         Satellite satellite;
-        Container container;
+        control::Container* container = genContainer();
 
         /* add objects */
         starsystem.control()->add(star.model());
@@ -82,8 +82,8 @@ TEST(starsystem, add_remove_objects)
         starsystem.control()->add(planet.model());
         planet_ids.add(planet.model()->id());
 
-        starsystem.control()->add(asteroid.model());
-        asteroid_ids.add(asteroid.model()->id());
+        starsystem.control()->add(asteroid->model());
+        asteroid_ids.add(asteroid->model()->id());
 
         starsystem.control()->add(spacestation.model());
         spacestation_ids.add(spacestation.model()->id());
@@ -94,8 +94,8 @@ TEST(starsystem, add_remove_objects)
         starsystem.control()->add(satellite.model());
         satellite_ids.add(satellite.model()->id());
 
-        starsystem.control()->add(container.model());
-        container_ids.add(container.model()->id());
+        starsystem.control()->add(container->model());
+        container_ids.add(container->model()->id());
 
         /* post-add check */
         EXPECT_EQ(starsystem.control()->stars().size(), star_ids.size());
@@ -110,8 +110,8 @@ TEST(starsystem, add_remove_objects)
         EXPECT_EQ(starsystem.control()->wormholes().size(), wormhole_ids.size());
         EXPECT_EQ(starsystem.model()->wormholes(), wormhole_ids);
 
-        EXPECT_EQ(starsystem.control()->spacestations().size(), spacestations_ids.size());
-        EXPECT_EQ(starsystem.model()->spacestations(), spacestations_ids);
+        EXPECT_EQ(starsystem.control()->spacestations().size(), spacestation_ids.size());
+        EXPECT_EQ(starsystem.model()->spacestations(), spacestation_ids);
 
         EXPECT_EQ(starsystem.control()->ships().size(), ship_ids.size());
         EXPECT_EQ(starsystem.model()->ships(), ship_ids);
@@ -142,7 +142,7 @@ TEST(starsystem, add_remove_objects)
         EXPECT_EQ(starsystem.control()->asteroids().size(), asteroid_ids.size());
         EXPECT_EQ(starsystem.model()->asteroids(), asteroid_ids);
     }
-    for(control::Wormhole* wormhole: starsystem.control()->wormholes()) {
+    for(control::WormHole* wormhole: starsystem.control()->wormholes()) {
         starsystem.control()->remove(wormhole);
         asteroid_ids.remove(wormhole->model()->id());
 

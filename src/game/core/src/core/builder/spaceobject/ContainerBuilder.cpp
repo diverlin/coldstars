@@ -24,7 +24,8 @@
 
 #include <descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
-#include <descriptor/spaceobject/Container.hpp>
+#include <core/descriptor/spaceobject/Container.hpp>
+#include <core/model/spaceobject/Container.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -56,20 +57,20 @@ Container::gen()
 //}
 
 model::Container*
-Container::gen(descriptor::Container* descriptor)
+Container::gen(descriptor::Container* descr)
 {
-    model::Container* container = __genTemplate();
-    __createInternals(container, descriptor);
-    return container;
+    model::Container* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
 }
 
 model::Container*
-Container::__genTemplate()
+Container::__genTemplate(int_t descriptor_id)
 {
-    model::Container* container = new model::Container;
-    assert(container);
-    EntityManager::get().reg(container);
-    return container;
+    model::Container* model = new model::Container(descriptor_id);
+    assert(model);
+    EntityManager::get().reg(model);
+    return model;
 }
 
 //Container*

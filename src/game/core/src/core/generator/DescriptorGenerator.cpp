@@ -259,10 +259,21 @@ genAsteroid()
     return descr;
 }
 
+descriptor::WormHole*
+genWormHole()
+{
+    descriptor::WormHole* descr = new descriptor::WormHole;
+
+    descriptor::Manager::get().reg(descr);
+    return descr;
+}
+
 descriptor::Container*
 genContainer()
 {
     descriptor::Container* descr = new descriptor::Container;
+
+    descriptor::Manager::get().reg(descr);
     return descr;
 }
 

@@ -16,62 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BlackHole.hpp"
+#include "WormHole.hpp"
 #include "../common/constants.hpp"
+#include <core/manager/DescriptorManager.hpp>
+
 #include <meti/RandUtils.hpp>
 #include <ceti/Logger.hpp>
 #include "../world/starsystem.hpp"
 
-
-namespace descriptor {
-
-Wormhole::Wormhole()
-{
-//    setType(entity::type::BLACKHOLE);
+namespace {
+descriptor::WormHole* getDescriptor(model::WormHole* model) {
+    return descriptor::Manager::get().wormHole(model->descriptor());
 }
-
-Wormhole::Wormhole(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Wormhole::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace descriptor
-
-
-namespace model {
-
-Wormhole::Wormhole()
-{
-//    setType(entity::type::BLACKHOLE);
-}
-
-Wormhole::Wormhole(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Wormhole::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
+} // namespace
 
 namespace control {
 
-Wormhole::Wormhole(model::Wormhole* model, descriptor::Wormhole* descr)
+WormHole::WormHole(model::WormHole* model)
     :
-      Planetoid(model, descr)
+      Planetoid(model, getDescriptor(model))
     , m_model_wormhole(model)
-    , m_descriptor_wormhole(descr)
+    , m_descriptor_wormhole(getDescriptor(model))
 {
 //    setId(id);
 //    setTypeId(entity::Type::BLACKHOLE);
@@ -79,14 +44,14 @@ Wormhole::Wormhole(model::Wormhole* model, descriptor::Wormhole* descr)
 //    setMass(meti::getRandInt(1000, 4000));
 }
 
-Wormhole::~Wormhole()
+WormHole::~WormHole()
 {
     //delete shockwave;
 }
 
-void Wormhole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
+void WormHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
 
-void Wormhole::updateInSpace(int time, bool show_effect)
+void WormHole::updateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
 

@@ -25,42 +25,13 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace model {
+class Container;
+} // namespace model
+
 namespace control {
 class Item;
 } // namespace control
-
-
-namespace model {
-
-class Container : public SpaceObject {
-
-public:
-    Container();
-    ~Container() = default;
-    Container(const std::string& data);
-    std::string data() const;
-
-    void setTargetPos(const glm::vec3& target_pos, float velocity)
-    { m_targetPos = target_pos; m_velocity = velocity; }
-
-private:
-    int_t m_itemSlot = NONE;
-    meti::vec3 m_targetPos;
-    float m_velocity = 0.0f;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_itemSlot;
-        ar & m_targetPos;
-        ar & m_velocity;
-    }
-};
-
-} // namespace model
-
 
 namespace control {
 
@@ -69,7 +40,7 @@ class ItemSlot;
 class Container : public SpaceObject
 {
 public:
-    Container(model::Container*, descriptor::Container*);
+    Container(model::Container*);
     virtual ~Container();
 
     void bindItemSlot(ItemSlot*);

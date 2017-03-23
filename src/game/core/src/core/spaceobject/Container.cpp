@@ -24,7 +24,9 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
+#include <core/model/spaceobject/Container.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/Render.hpp>
@@ -34,37 +36,19 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
 
-#include <ceti/serialization/macro.hpp>
-
-
-namespace model {
-
-Container::Container()
-{
-//    setType(entity::type::CONTAINER);
+namespace {
+descriptor::Container* getDescriptor(model::Container* model) {
+    return descriptor::Manager::get().container(model->descriptor());
 }
-
-Container::Container(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Container::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
+} // namespace
 
 namespace control {
 
-Container::Container(model::Container* model, descriptor::Container* descr)
+Container::Container(model::Container* model)
     :
-      SpaceObject(model, descr)
+      SpaceObject(model, getDescriptor(model))
     , m_model_container(model)
-    , m_descriptor_container(descr)
+    , m_descriptor_container(getDescriptor(model))
 {
 //    setId(id);
 //    setTypeId(entity::Type::CONTAINER);

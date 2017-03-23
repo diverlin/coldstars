@@ -16,29 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
-#include <ceti/type/IdType.hpp>
-
-namespace model {
-class Asteroid;
-} // namespace model
+#include "WormHole.hpp"
 
 namespace descriptor {
-class Asteroid;
+
+WormHole::WormHole()
+{
+    setType(descriptor::Type::WORMHOLE);
+}
+
+WormHole::WormHole(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+WormHole::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace descriptor
 
-
-namespace builder {
-
-class Asteroid
-{
-public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
-
-private:
-    static model::Asteroid* __genTemplate(int_t);
-}; 
-
-} // namespace builder

@@ -22,53 +22,16 @@
 //#include <client/effects/ShockWaveEffect.hpp> //depr
 #include <core/spaceobject/Planetoid.hpp>
 
-
-namespace descriptor {
-
-class Wormhole : public Planetoid {
-public:
-    Wormhole();
-    ~Wormhole() = default;
-    Wormhole(const std::string& data);
-    std::string data() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-    }
-};
-
-} // namespace descriptor
-
-namespace model {
-
-class Wormhole : public Planetoid {
-public:
-    Wormhole();
-    ~Wormhole() = default;
-    Wormhole(const std::string& data);
-    std::string data() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-    }
-};
-
-} // namespace model
-
+#include <core/descriptor/spaceobject/WormHole.hpp>
+#include <core/model/spaceobject/WormHole.hpp>
 
 namespace control {
 
-class Wormhole : public Planetoid
+class WormHole : public Planetoid
 {
 public:
-    Wormhole(model::Wormhole*, descriptor::Wormhole*);
-    virtual ~Wormhole();
+    WormHole(model::WormHole*);
+    virtual ~WormHole();
 
     //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
 
@@ -78,12 +41,12 @@ public:
 
     void updateInSpace(int, bool);
 
-    model::Wormhole* model() const { return m_model_wormhole; }
-    descriptor::Wormhole* descriptor() const { return m_descriptor_wormhole; }
+    model::WormHole* model() const { return m_model_wormhole; }
+    descriptor::WormHole* descriptor() const { return m_descriptor_wormhole; }
 
 private:
-    model::Wormhole* m_model_wormhole = nullptr;
-    descriptor::Wormhole* m_descriptor_wormhole = nullptr;
+    model::WormHole* m_model_wormhole = nullptr;
+    descriptor::WormHole* m_descriptor_wormhole = nullptr;
 
     //        virtual void UpdateInfo() override final;
 };

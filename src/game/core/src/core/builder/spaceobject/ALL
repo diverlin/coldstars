@@ -1,7 +1,7 @@
 #include "StarBuilder.hpp"
 #include "PlanetBuilder.hpp"
 #include "AsteroidBuilder.hpp"
-#include "BlackHoleBuilder.hpp"
+#include "WormHoleBuilder.hpp"
 
 #include "SpaceStationBuilder.hpp"
 #include "SatelliteBuilder.hpp"

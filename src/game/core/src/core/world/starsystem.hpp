@@ -39,7 +39,7 @@ class StarSystem;
 class Star;
 class Planet;
 class Asteroid;
-class Wormhole;
+class WormHole;
 class Container;
 class RocketBullet;
 class Vehicle;
@@ -53,7 +53,7 @@ namespace control {
 class Star;
 class Planet;
 class Asteroid;
-class Wormhole;
+class WormHole;
 class Container;
 class RocketBullet;
 class SpaceStation;
@@ -153,7 +153,7 @@ public:
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
-    void add(model::Wormhole*, const glm::vec3&);
+    void add(model::WormHole*, const glm::vec3&);
 
     void add(Explosion*, const glm::vec3&);
 
@@ -173,9 +173,10 @@ public:
     // remove
     void remove(Star*);
     void remove(Planet*);
+    void remove(WormHole*);
     void remove(Asteroid*);
+    void remove(Container*);
     void remove(SpaceStation*);
-    //    void remove(model::Ship*);
     void remove(Ship*);
     void remove(Satellite*);
     //
@@ -203,7 +204,7 @@ public:
 
     ceti::pack<Star*> stars() const { return m_stars; }
     ceti::pack<Planet*> planets() const { return m_planets; }
-    ceti::pack<Wormhole*> wormholes() const { return m_wormholes; }
+    ceti::pack<WormHole*> wormholes() const { return m_wormholes; }
     ceti::pack<Asteroid*> asteroids() const { return m_asteroids; }
     ceti::pack<Container*> containers() const { return m_containers; }
     ceti::pack<RocketBullet*> bullets() const { return m_bullets; }
@@ -251,7 +252,7 @@ private:
     ceti::pack<Asteroid*> m_asteroids;
     ceti::pack<Container*> m_containers;
     ceti::pack<RocketBullet*> m_bullets;
-    ceti::pack<Wormhole*> m_wormholes;
+    ceti::pack<WormHole*> m_wormholes;
     ceti::pack<Vehicle*> m_vehicles;
     ceti::pack<SpaceStation*> m_spacestations;
     ceti::pack<Ship*> m_ships;

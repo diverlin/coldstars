@@ -1,7 +1,9 @@
 #include "Star.hpp"
 #include "Planet.hpp"
+#include "WormHole.hpp"
+#include "Asteroid.hpp"
+#include "Container.hpp"
 
-#include "Satellite.hpp"
-#include "Ship.hpp"
 #include "SpaceStation.hpp"
-
+#include "Ship.hpp"
+#include "Satellite.hpp"
