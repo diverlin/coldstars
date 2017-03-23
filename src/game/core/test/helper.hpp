@@ -108,32 +108,21 @@ private:
     control::StarSystem* m_control = nullptr;
 };
 
-class Star {
-public:
-    Star();
-    ~Star();
+//class Star {
+//public:
+//    Star();
+//    ~Star();
 
-    descriptor::Star* descriptor() const;
-    model::Star* model() const;
-    control::Star* control() const { return m_control; }
+//    descriptor::Star* descriptor() const;
+//    model::Star* model() const;
+//    control::Star* control() const { return m_control; }
 
-private:
-    control::Star* m_control = nullptr;
-};
+//private:
+//    control::Star* m_control = nullptr;
+//};
 
-class Planet {
-public:
-    Planet();
-    ~Planet();
-
-    descriptor::Planet* descriptor() const;
-    model::Planet* model() const;
-    control::Planet* control() const { return m_control; }
-
-private:
-    control::Planet* m_control = nullptr;
-};
-
+control::Star* genStar();
+control::Planet* genPlanet();
 control::WormHole* genWormHole();
 control::Asteroid* genAsteroid();
 control::Container* genContainer();
