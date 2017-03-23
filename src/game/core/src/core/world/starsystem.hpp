@@ -39,27 +39,27 @@ class StarSystem;
 class Star;
 class Planet;
 class Asteroid;
-class Satellite;
-class SpaceStation;
-class Ship;
-class Npc;
-class Vehicle;
-class BlackHole;
+class Wormhole;
 class Container;
 class RocketBullet;
+class Vehicle;
+class SpaceStation;
+class Ship;
+class Satellite;
+class Npc;
 } // namespace model
 
 namespace control {
 class Star;
 class Planet;
 class Asteroid;
-class Satellite;
-class SpaceStation;
-class Ship;
-class Vehicle;
-class BlackHole;
+class Wormhole;
 class Container;
 class RocketBullet;
+class SpaceStation;
+class Ship;
+class Satellite;
+class Vehicle;
 } // namespace model
 
 
@@ -153,7 +153,7 @@ public:
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
-    void add(model::BlackHole*, const glm::vec3&);
+    void add(model::Wormhole*, const glm::vec3&);
 
     void add(Explosion*, const glm::vec3&);
 
@@ -203,13 +203,15 @@ public:
 
     ceti::pack<Star*> stars() const { return m_stars; }
     ceti::pack<Planet*> planets() const { return m_planets; }
+    ceti::pack<Wormhole*> wormholes() const { return m_wormholes; }
     ceti::pack<Asteroid*> asteroids() const { return m_asteroids; }
+    ceti::pack<Container*> containers() const { return m_containers; }
+    ceti::pack<RocketBullet*> bullets() const { return m_bullets; }
+
     ceti::pack<Vehicle*> vehicles() const { return m_vehicles; }
     ceti::pack<SpaceStation*> spacestations() const { return m_spacestations; }
     ceti::pack<Ship*> ships() const { return m_ships; }
     ceti::pack<Satellite*> satellites() const { return m_satellites; }
-
-    std::vector<Container*> containers() const { return m_containers; }
 
     model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
     model::Planet* randomInhabitedPlanet() const;
@@ -249,7 +251,7 @@ private:
     ceti::pack<Asteroid*> m_asteroids;
     ceti::pack<Container*> m_containers;
     ceti::pack<RocketBullet*> m_bullets;
-    ceti::pack<BlackHole*> m_blackholes;
+    ceti::pack<Wormhole*> m_wormholes;
     ceti::pack<Vehicle*> m_vehicles;
     ceti::pack<SpaceStation*> m_spacestations;
     ceti::pack<Ship*> m_ships;

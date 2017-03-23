@@ -20,7 +20,7 @@
 #pragma once
 
 namespace model {
-class BlackHole;
+class Wormhole;
 } // namespace model
 
 namespace builder {
@@ -31,12 +31,12 @@ public:
     BlackHole();
     ~BlackHole();
 
-    static model::BlackHole* gen();
+    static model::Wormhole* gen();
 
 private:
-    static void __createInternals(model::BlackHole*);
+    static void __createInternals(model::Wormhole*);
 
-    static model::BlackHole* __genTemplate();
+    static model::Wormhole* __genTemplate();
 };
 
 } // namespace builder
