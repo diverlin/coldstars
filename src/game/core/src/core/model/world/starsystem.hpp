@@ -94,7 +94,7 @@ namespace model {
 class StarSystem : public Base
 {
 public:
-    StarSystem(int_t);
+    StarSystem(int_t, int_t ob_id = NONE);
     ~StarSystem() = default;
     StarSystem(const std::string& data);
     std::string data() const;

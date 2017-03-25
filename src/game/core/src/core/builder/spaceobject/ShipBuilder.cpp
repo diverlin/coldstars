@@ -30,17 +30,18 @@
 namespace builder {
 
 model::Ship*
-Ship::__genTemplate(int_t descriptor_id)
-{
-    model::Ship* ship = new model::Ship(descriptor_id);
-    EntityManager::get().reg(ship);
-    return ship;
-}
-
-model::Ship*
 Ship::gen(descriptor::Ship* descr)
 {
     model::Ship* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+}
+
+model::Ship*
+Ship::gen(int_t descriptor_id, int_t ob_id)
+{
+    model::Ship* model = __genTemplate(descriptor_id, ob_id);
+    descriptor::Ship* descr = descriptor::Manager::get().ship(descriptor_id);
     __createInternals(model, descr);
     return model;
 }
@@ -58,11 +59,14 @@ Ship::gen()
     return gen(descr);
 }
 
-//model::Ship*
-//Ship::gen(const std::string& data)
-//{
-//    return gen(descriptor::Vehicle(data));
-//}
+model::Ship*
+Ship::__genTemplate(int_t descriptor_id, int_t ob_id)
+{
+    model::Ship* ship = new model::Ship(descriptor_id, ob_id);
+    EntityManager::get().reg(ship);
+    return ship;
+}
+
 
 void
 Ship::__createInternals(model::Ship* ship, descriptor::Ship* descr)

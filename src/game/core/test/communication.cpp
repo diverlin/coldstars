@@ -27,6 +27,9 @@
 
 #include <core/model/spaceobject/Ship.hpp>
 
+#include <core/model/item/equipment/ALL>
+#include <core/model/world/starsystem.hpp>
+
 #include <core/item/equipment/ALL>
 
 #include <core/builder/spaceobject/ShipBuilder.hpp>
@@ -36,7 +39,11 @@
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/descriptor/spaceobject/Container.hpp>
+#include <core/descriptor/spaceobject/ALL>
+#include <core/descriptor/item/equipment/ALL>
+
+#include <core/descriptor/comm/Creation.hpp>
+
 #include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/communication/MessageManager.hpp>
@@ -45,31 +52,43 @@
 #include <ceti/IdGenerator.hpp>
 
 
+TEST(communication, create_starsystem)
+{
+    int_t ob_id = EntityManager::get().genId();
+
+    descriptor::StarSystem* descriptor = descriptor::genStarSystem();
+    descriptor::comm::Creation creation(ob_id, descriptor->id());
+
+    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_STARSYSTEM, creation.data()));
+
+    model::StarSystem* starsystem = EntityManager::get().starsystem(ob_id);
+    EXPECT_EQ(descriptor->id(), starsystem->descriptor());
+}
+
 TEST(communication, create_ship)
 {
-    assert(false);
-//    auto descriptor = descriptor::Manager::get().getRand(descriptor::Type::VEHICLE);
-//    int_t obj_id = core::global::get().idGenerator().nextId();
-//    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
-//    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
+    int_t ob_id = EntityManager::get().genId();
 
-//    model::Ship* ship = model::getShip(obj_id);
-//    assert(ship);
-//    EXPECT_EQ(ship->id(), obj_id);
+    descriptor::Ship* descriptor = descriptor::genShip();
+    descriptor::comm::Creation creation(ob_id, descriptor->id());
+
+    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_SHIP, creation.data()));
+
+    model::Ship* ship = EntityManager::get().ship(ob_id);
+    EXPECT_EQ(descriptor->id(), ship->descriptor());
 }
 
 TEST(communication, create_bak)
 {
-    assert(false);
-//    auto descriptor = descriptor::Manager::get().getRand(descriptor::Type::BAK);
-//    int_t obj_id = core::global::get().idGenerator().nextId();
-//    descriptor::DescriptorOLD descriptor2(descriptor->id(), obj_id);
-//    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
+    int_t ob_id = EntityManager::get().genId();
 
-    assert(false);
-//    item::Bak* bak = EntityManager::get().getEntity<item::Bak*>(obj_id);
-//    assert(bak);
-//    EXPECT_EQ(bak->id(), obj_id);
+    descriptor::item::Bak* descriptor = descriptor::item::genBak();
+    descriptor::comm::Creation creation(ob_id, descriptor->id());
+
+    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_BAK, creation.data()));
+
+    model::item::Bak* bak = EntityManager::get().bak(ob_id);
+    EXPECT_EQ(descriptor->id(), bak->descriptor());
 }
 
 TEST(communication, inject_ship)
@@ -99,13 +118,3 @@ TEST(communication, inject_ship)
 //    assert(container->itemSlot()->item()->id() == child_id);
 //    return container;
 //}
-
-TEST(comm, new_starsystem)
-{
-    //    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::STARSYSTEM);
-    //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
-
-    //    Starsystem* starsystem = static_cast<Starsystem*>(EntityManager::get().get(descriptor.id()));
-    //    assert(starsystem);
-    //Starsystem* starsystem = EntityManager::get().get<Starsystem*>(descriptor.id());
-}

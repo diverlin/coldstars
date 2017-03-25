@@ -107,6 +107,8 @@ public:
     void addToGarbage(model::Base*);
     void clearGarbage();
 
+    int_t genId();
+
 private:
     bool m_save_request = false;
     bool m_load_request = false;

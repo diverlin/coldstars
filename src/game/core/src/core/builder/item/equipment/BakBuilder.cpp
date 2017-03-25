@@ -29,6 +29,23 @@ namespace builder {
 namespace item {
 
 model::item::Bak*
+Bak::gen(descriptor::item::Bak* descr)
+{
+    model::item::Bak* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+}
+
+model::item::Bak*
+Bak::gen(int_t descriptor_id, int_t ob_id)
+{
+    model::item::Bak* model = __genTemplate(descriptor_id, ob_id);
+    descriptor::item::Bak* descr = descriptor::Manager::get().bak(descriptor_id);
+    __createInternals(model, descr);
+    return model;
+}
+
+model::item::Bak*
 Bak::gen()
 {
     descriptor::item::Bak* descr = nullptr;
@@ -41,18 +58,11 @@ Bak::gen()
     return gen(descr);
 }
 
-model::item::Bak*
-Bak::gen(descriptor::item::Bak* descr)
-{
-    model::item::Bak* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
-}
 
 model::item::Bak*
-Bak::__genTemplate(int_t descriptor_id)
+Bak::__genTemplate(int_t descriptor_id, int_t ob_id)
 {
-    model::item::Bak* model = new model::item::Bak(descriptor_id);
+    model::item::Bak* model = new model::item::Bak(descriptor_id, ob_id);
     EntityManager::get().reg(model);
     return model;
 }

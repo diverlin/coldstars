@@ -105,7 +105,13 @@ EntityManager::get()
     return instance;
 }
 
-void EntityManager::clear()
+int_t
+EntityManager::genId() {
+    return m_idGenerator.nextId();
+}
+
+void
+EntityManager::clear()
 {
     assert(false);
 //    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)

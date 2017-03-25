@@ -4,15 +4,18 @@
 
 #include <assert.h>
 
-Message::Message(TELEGRAM type_id, const std::string& data, double delay)
+namespace comm {
+
+Message::Message(Type type, const std::string& data, double delay)
     :
-      type_id(type_id)
-    , data(data)
-    , delay(delay)
+      m_type(type)
+    , m_data(data)
+    , m_delay(delay)
 {}
 
 bool Message::operator<(const Message& rhs) const
 {
-    return (dispatch_time < rhs.dispatch_time);
+    return (m_dispatchTime < rhs.dispatchTime());
 }
 
+} // namespace comm

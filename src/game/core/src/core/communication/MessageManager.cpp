@@ -10,6 +10,8 @@
 #include <core/descriptor/Hit.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
+#include <core/descriptor/comm/Creation.hpp>
+
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Container.hpp> // ??
 #include <core/descriptor/ExplosionDescriptor.hpp>
@@ -34,12 +36,12 @@
 
 #include <core/world/starsystem.hpp>
 
-void MessageManager::add(Message&& message)
+void MessageManager::add(comm::Message&& message)
 {
-    if (message.delay < 0) {
+    if (message.delay() < 0) {
         process(message);
     } else {
-        message.dispatch_time = currentTime() + message.delay;
+        message.setDispatchTime(currentTime() + message.delay());
         m_messages_queue.insert(message);
     }
 }
@@ -59,86 +61,87 @@ void MessageManager::runLoop()
 void MessageManager::update()
 { 
     for ( auto it = m_messages_queue.begin(); it != m_messages_queue.end(); ++it ) {
-        const Message& message = *it;
-        if (message.dispatch_time < currentTime()) {
+        const comm::Message& message = *it;
+        if (message.dispatchTime() < currentTime()) {
             process(message);
             m_messages_queue.erase(it);
         }
     }
 }
 
-void MessageManager::process(const Message& message)
+void MessageManager::process(const comm::Message& message)
 {
-    switch(message.type_id) {
+    switch(message.type()) {
     /** CREATE */
-    case TELEGRAM::CREATE_STARSYSTEM: {
-        builder::StarSystem::gen(message.data);
+    case comm::Message::Type::CREATE_STARSYSTEM: {
+        descriptor::comm::Creation data(message.data());
+        builder::StarSystem::gen(data.obDescriptor(), data.obId());
         break;
     }
-    case TELEGRAM::CREATE_SHIP: {
-        assert(false);
-//        builder::Ship::gen(message.data);
+    case comm::Message::Type::CREATE_SHIP: {
+        descriptor::comm::Creation data(message.data());
+        builder::Ship::gen(data.obDescriptor(), data.obId());
         break;
     }
-    case TELEGRAM::CREATE_BOMB: {
+    case comm::Message::Type::CREATE_BOMB: {
         assert(false);
 //        core::global::get().bombBuilder().gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_CONTAINER: {
+    case comm::Message::Type::CREATE_CONTAINER: {
         assert(false);
 //        core::global::get().containerBuilder().gen(message.data);
         break;
     }
 
         // items
-    case TELEGRAM::CREATE_BAK: {
-        assert(false);
-//        builder::item::Bak::gen(message.data);
+    case comm::Message::Type::CREATE_BAK: {
+        descriptor::comm::Creation data(message.data());
+        builder::item::Bak::gen(data.obDescriptor(), data.obId());
         break;
     }
-    case TELEGRAM::CREATE_DRIVE: {
+    case comm::Message::Type::CREATE_DRIVE: {
         assert(false);
 //        auto model = builder::item::Drive::gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_DROID: {
+    case comm::Message::Type::CREATE_DROID: {
         assert(false);
 //        builder::item::Droid::gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_GRAPPLE: {
+    case comm::Message::Type::CREATE_GRAPPLE: {
         assert(false);
 //        builder::item::Grapple::gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_PROTECTOR: {
+    case comm::Message::Type::CREATE_PROTECTOR: {
         assert(false);
 //        builder::item::Protector::gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_SCANER: {
+    case comm::Message::Type::CREATE_SCANER: {
         assert(false);
 //        builder::item::Scaner::gen(message.data);
         break;
     }
-    case TELEGRAM::CREATE_RADAR: {
+    case comm::Message::Type::CREATE_RADAR: {
         assert(false);
 //        builder::item::Radar::gen(message.data);
         break;
     }
 
         /** STARSYSTEM ADD */
-    case TELEGRAM::STARSYSTEM_ADD_SHIP: {
-        AddToStarsystemDescriptor descriptor(message.data);
+    case comm::Message::Type::STARSYSTEM_ADD_SHIP: {
+        AddToStarsystemDescriptor descriptor(message.data());
         model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
         model::Ship* ship = EntityManager::get().ship(descriptor.object);
         assert(false);
         //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
         break;
     }
-    case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
-        AddToStarsystemDescriptor descriptor(message.data);
+    case comm::Message::Type::STARSYSTEM_ADD_CONTAINER: {
+        AddToStarsystemDescriptor descriptor(message.data());
         model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
         model::Container* container = EntityManager::get().container(descriptor.object);
         assert(false);
@@ -146,15 +149,15 @@ void MessageManager::process(const Message& message)
         break;
     }
         /** OTHER */
-    case TELEGRAM::HIT: {
-        descriptor::Hit descr(message.data);
+    case comm::Message::Type::HIT: {
+        descriptor::Hit descr(message.data());
         model::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
         assert(false);
         //        ob->hit(descriptor.damage());
         break;
     }
-    case TELEGRAM::EXPLOSION: {
-        descriptor::Explosion descriptor(message.data);
+    case comm::Message::Type::EXPLOSION: {
+        descriptor::Explosion descriptor(message.data());
         model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
         Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
         assert(false);

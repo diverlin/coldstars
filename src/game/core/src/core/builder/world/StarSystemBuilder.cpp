@@ -38,8 +38,26 @@
 #include <meti/RandUtils.hpp>
 
 #include <core/manager/EntityManager.hpp>
+#include <core/descriptor/comm/Creation.hpp>
 
 namespace builder {
+
+model::StarSystem*
+StarSystem::gen(descriptor::StarSystem* descr)
+{
+    model::StarSystem* model = __genTemplate(descr->id());
+    __createInternals(model, descr);
+    return model;
+} 
+
+model::StarSystem*
+StarSystem::gen(int_t descriptor_id, int_t ob_id)
+{
+    model::StarSystem* model = __genTemplate(descriptor_id, ob_id);
+    descriptor::StarSystem* descr = descriptor::Manager::get().starSystem(descriptor_id);
+    __createInternals(model, descr);
+    return model;
+}
 
 model::StarSystem*
 StarSystem::gen()
@@ -55,20 +73,13 @@ StarSystem::gen()
 }
 
 model::StarSystem*
-StarSystem::gen(descriptor::StarSystem* descr)
+StarSystem::__genTemplate(int_t descriptor_id, int_t ob_id)
 {
-    model::StarSystem* model = new model::StarSystem(descr->id());
-    assert(model);
+    model::StarSystem* model = new model::StarSystem(descriptor_id, ob_id);
     EntityManager::get().reg(model);
-    __createInternals(model, descr);
     return model;
-} 
-
-model::StarSystem*
-StarSystem::gen(const std::string& data)
-{
-    //return gen(descriptor::Base(data));
 }
+
 
 void StarSystem::__createInternals(model::StarSystem* model, descriptor::StarSystem* descr)
 {

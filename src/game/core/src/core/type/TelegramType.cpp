@@ -19,36 +19,38 @@
 
 #include "TelegramType.hpp"
 
-std::string to_string(const TELEGRAM& type_id)
+std::string to_string(comm::Message::Type type_id)
 {
     switch (type_id) {
     /** CREATE */
-    case TELEGRAM::CREATE_STARSYSTEM:  { return "TELEGRAM::CREATE_STARSYSTEM"; break; }
-    case TELEGRAM::CREATE_SHIP:  { return "TELEGRAM::CREATE_SHIP"; break; }
-    case TELEGRAM::CREATE_CONTAINER:  { return "TELEGRAM::CREATE_CONTAINER"; break; }
+    case comm::Message::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
+    case comm::Message::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
+    case comm::Message::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
 
     // items
-    case TELEGRAM::CREATE_BAK:  { return "TELEGRAM::CREATE_BAK"; break; }
-    case TELEGRAM::CREATE_DRIVE:  { return "TELEGRAM::CREATE_DRIVE"; break; }
-    case TELEGRAM::CREATE_DROID:  { return "TELEGRAM::CREATE_DROID"; break; }
-    case TELEGRAM::CREATE_GRAPPLE:  { return "TELEGRAM::CREATE_GRAPPLE"; break; }
-    case TELEGRAM::CREATE_SCANER:  { return "TELEGRAM::CREATE_SCANER"; break; }
-    case TELEGRAM::CREATE_RADAR:  { return "TELEGRAM::CREATE_RADAR"; break; }
-    case TELEGRAM::CREATE_PROTECTOR:  { return "TELEGRAM::CREATE_PROTECTOR"; break; }
+    case comm::Message::Type::CREATE_BAK:  { return "comm::Message::Type::CREATE_BAK"; }
+    case comm::Message::Type::CREATE_DRIVE:  { return "comm::Message::Type::CREATE_DRIVE"; }
+    case comm::Message::Type::CREATE_DROID:  { return "comm::Message::Type::CREATE_DROID"; }
+    case comm::Message::Type::CREATE_GRAPPLE:  { return "comm::Message::Type::CREATE_GRAPPLE"; }
+    case comm::Message::Type::CREATE_SCANER:  { return "comm::Message::Type::CREATE_SCANER"; }
+    case comm::Message::Type::CREATE_RADAR:  { return "comm::Message::Type::CREATE_RADAR"; }
+    case comm::Message::Type::CREATE_PROTECTOR:  { return "comm::Message::Type::CREATE_PROTECTOR"; }
     /** */
 
     /** TRANSITION */
-    case TELEGRAM::STARSYSTEM_ADD_SHIP: { return "TELEGRAM::STARSYSTEM_ADD_SHIP"; break; }
-    case TELEGRAM::STARSYSTEM_ADD_CONTAINER: { return "TELEGRAM::STARSYSTEM_ADD_CONTAINER"; break; }
-    case TELEGRAM::INSERT:  { return "TELEGRAM::INSERT"; break; }
-    case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
-    case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }
+    case comm::Message::Type::STARSYSTEM_ADD_SHIP: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
+    case comm::Message::Type::STARSYSTEM_ADD_CONTAINER: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
+    case comm::Message::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
+    case comm::Message::Type::REMOVE:  { return "comm::Message::Type::REMOVE"; }
+    case comm::Message::Type::DELETE:  { return "comm::Message::Type::DELETE"; }
     /** */
 
-    case TELEGRAM::HIT:     { return "TELEGRAM::HIT"; break; }
-    case TELEGRAM::EXPLOSION: { return "TELEGRAM::EXPLOSION"; break; }
+    case comm::Message::Type::HIT:     { return "comm::Message::Type::HIT"; }
+    case comm::Message::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
-    default: return "TELEGRAM::UKNOWN"; break;
     }
+
+    return "comm::Message::Type::UKNOWN";
 }
+
 

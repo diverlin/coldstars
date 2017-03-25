@@ -66,10 +66,10 @@
 
 namespace model {
 
-StarSystem::StarSystem(int_t descriptor_id)
+StarSystem::StarSystem(int_t descriptor_id, int_t ob_id)
 {
+    setId(ob_id);
     setDescriptor(descriptor_id);
-//    setPlace(place::type::KOSMOS);
 
     m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
