@@ -97,7 +97,6 @@ public:
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
 
-    void initialize();
     //void bindParent(const SpaceObject* const, int);
 
 protected:

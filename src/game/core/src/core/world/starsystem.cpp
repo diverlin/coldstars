@@ -260,8 +260,6 @@ void StarSystem::add(model::Satellite* _model)
 void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
     __addVehicleCommon(satellite, position, dir);
-    assert(false);
-    //satellite->BindParent(parent);
     model()->addSatellite(satellite->model()->id());
     m_satellites.push_back(satellite);
 }
@@ -294,7 +292,6 @@ void StarSystem::add(Star* star)
     star->model()->setStarSystem(model()->id());
     star->model()->setPlace(place::type::KOSMOS);
 
-    star->initialize();
     m_stars.push_back(star);
 
     model()->addStar(star->model()->id());
@@ -319,7 +316,6 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
     planet->model()->setRadiusA(planet->model()->radiusA() * (m_planets.size() + 2));
     planet->model()->setRadiusB(planet->model()->radiusB() * (m_planets.size() + 2));
 
-    planet->initialize();
     m_planets.push_back(planet);
 
     model()->addPlanet(planet->model()->id());
@@ -337,8 +333,9 @@ void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
     _model->setPlace(place::type::KOSMOS);
 
     Asteroid* asteroid = new Asteroid(_model);
-    asteroid->initialize();
+
     m_asteroids.push_back(asteroid);
+    model()->addAsteroid(_model->id());
 }
 
 void StarSystem::add(model::Container* _model, const glm::vec3& center)
@@ -357,7 +354,7 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
     _model->setPosition(center);
 
     Container* container = new Container(_model);
-
+    model()->addContainer(_model->id());
     m_containers.push_back(container);
 }
 
@@ -368,9 +365,10 @@ void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
     _model->setPosition(center);
 
     WormHole* blackhole = new WormHole(_model);
-    blackhole->initialize();
 
     m_wormholes.push_back(blackhole);
+
+    model()->addWormhole(_model->id());
 }    
 
 void StarSystem::add(Explosion* explosion, const glm::vec3& center)
