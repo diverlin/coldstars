@@ -23,8 +23,9 @@
 
 namespace model {
 
-Ship::Ship(int_t descriptor_id)
+Ship::Ship(int_t descriptor_id, int_t ob_id)
 {
+    setId(ob_id);
     setDescriptor(descriptor_id);
 }
 

@@ -23,8 +23,9 @@
 namespace model {
 namespace item {
 
-Bak::Bak(int_t descriptor_id)
+Bak::Bak(int_t descriptor_id, int_t ob_id)
 {
+    setId(ob_id);
     setDescriptor(descriptor_id);
 }
 

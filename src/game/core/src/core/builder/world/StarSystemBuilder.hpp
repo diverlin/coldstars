@@ -39,9 +39,9 @@ namespace builder {
 class StarSystem
 {
 public:
-    static model::StarSystem* gen();
     static model::StarSystem* gen(descriptor::StarSystem*);
-    static model::StarSystem* gen(const std::string&);
+    static model::StarSystem* gen(int_t, int_t ob_id = NONE);
+    static model::StarSystem* gen();
 
 private:
     StarSystem()=delete;
@@ -52,6 +52,8 @@ private:
     static void __createBackground(control::StarSystem&, int, int, int);
     static void __createStar(control::StarSystem&);
     static void __createPlanets(control::StarSystem&, int);
+
+    static model::StarSystem* __genTemplate(int_t, int_t ob_id = NONE);
 }; 
 
 } // namespace builder

@@ -18,8 +18,9 @@
 
 #pragma once
 
-
 #include <core/builder/spaceobject/BaseVehicleBuilder.hpp>
+
+#include <ceti/type/IdType.hpp>
 
 #include <string>
 
@@ -36,17 +37,16 @@ namespace builder {
 class Ship : public BaseVehicle
 {
 public:
-    static model::Ship* gen();
     static model::Ship* gen(descriptor::Ship*);
+    static model::Ship* gen(int_t, int_t ob_id = NONE);
+    static model::Ship* gen();
 
 private:
     Ship()=delete;
     ~Ship()=delete;
 
-    static model::Ship* __genTemplate(int_t);
+    static model::Ship* __genTemplate(int_t, int_t ob_id = NONE);
     static void __createInternals(model::Ship*, descriptor::Ship*);
 }; 
 
 } // namespace builder
-
-

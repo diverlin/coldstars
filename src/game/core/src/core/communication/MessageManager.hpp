@@ -19,16 +19,16 @@ class MessageManager
 {
 public:
     MessageManager() {}
-    void add(Message&& message);
+    void add(comm::Message&& message);
 
     void runLoop();
     void update();
 
 private:
     sf::Clock m_clock;
-    std::set<Message> m_messages_queue;
+    std::set<comm::Message> m_messages_queue;
 
     double currentTime() const;
-    void process(const Message& message);
+    void process(const comm::Message& message);
 };
 

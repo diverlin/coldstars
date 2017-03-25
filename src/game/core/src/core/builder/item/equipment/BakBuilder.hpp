@@ -43,14 +43,15 @@ namespace item {
 class Bak : public Equipment
 {
 public:
-    static model::item::Bak* gen();
     static model::item::Bak* gen(descriptor::item::Bak*);
+    static model::item::Bak* gen(int_t, int_t ob_id = NONE);
+    static model::item::Bak* gen();
 
 private:
     Bak() = delete;
     ~Bak() = delete;
 
-    static model::item::Bak* __genTemplate(int_t);
+    static model::item::Bak* __genTemplate(int_t, int_t ob_id = NONE);
     static void __createInternals(model::item::Bak*, descriptor::item::Bak*);
 }; 
 

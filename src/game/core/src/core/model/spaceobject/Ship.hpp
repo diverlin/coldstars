@@ -21,6 +21,8 @@
 
 #include <core/model/spaceobject/Vehicle.hpp>
 
+#include <ceti/type/IdType.hpp>
+
 #include <string>
 
 namespace model {
@@ -28,7 +30,7 @@ namespace model {
 class Ship : public Vehicle
 {
 public:
-    Ship(int_t);
+    Ship(int_t, int_t ob_id = NONE);
     ~Ship() = default;
     Ship(const std::string& data);
     std::string data() const;
