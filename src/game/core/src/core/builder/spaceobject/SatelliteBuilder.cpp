@@ -62,7 +62,6 @@ Satellite::gen()
 
 void Satellite::__createInternals(model::Satellite* model, descriptor::Satellite* descr)
 {
-    assert(false);
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 //    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE);
 

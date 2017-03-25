@@ -147,22 +147,13 @@ Container::__genTemplate(int_t descriptor_id)
 //}
 
 void
-Container::__createInternals(model::Container* container, descriptor::Container* descriptor)
+Container::__createInternals(model::Container* container, descriptor::Container* desr)
 {
     LifeData data_life;
     data_life.armor = 1;
     data_life.dying_time = 30;
 
-    assert(false);
-//    container->setLifeData(data_life);
-
-//    ItemSlot* item_slot = getNewItemSlot(entity::Type::CARGO_SLOT);
-//    container->bindItemSlot(item_slot);
-
-    //    if (descriptor.child() >= 0) {
-    //        item::Base* item = static_cast<item::Base*>(EntityManager::get().get(descriptor.child()));
-    //        item_slot->insertItem(item);
-    //    }
+    container->setLifeData(data_life);
 }
 
 } // namespace builder

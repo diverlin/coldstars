@@ -162,13 +162,25 @@ model::Base*
 EntityManager::get(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, model::Base*>::const_iterator slice = m_models.find(id);
-    assert(slice->second);
+    std::map<int_t, model::Base*>::const_iterator it = m_models.find(id);
+    assert(it->second);
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
-    return slice->second;
+    return it->second;
 }
 
+model::Item*
+EntityManager::getItemBase(int_t id) const
+{
+    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
+    std::map<int_t, model::Base*>::const_iterator it = m_models.find(id);
+    assert(it->second);
+    model::Item* item = static_cast<model::Item*>(it->second);
+    assert(item);
+    // TODO
+    //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
+    return item;
+}
 
 model::StarSystem*
 EntityManager::starsystem(int_t id) const {

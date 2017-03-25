@@ -27,7 +27,7 @@ namespace control {
 class ItemSlot;
 } // namespace control
 
-control::ItemSlot* getNewItemSlot(entity::Type subtype_id);
+control::ItemSlot* genItemSlot(entity::Type subtype_id);
 
 
     
