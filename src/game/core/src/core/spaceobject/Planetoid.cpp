@@ -48,7 +48,9 @@ Planetoid::Planetoid(model::Planetoid* model, descriptor::Planetoid* descr)
       SpaceObject(model, descr)
     , m_model_planetoid(model)
     , m_descriptor_planetoid(descr)
-{}
+{
+    __createOrbit();
+}
 
 Planetoid::~Planetoid()
 {}
@@ -72,19 +74,6 @@ Planetoid::~Planetoid()
 
 void Planetoid::__createOrbit()
 {
-    m_orbit.calcPath(descriptor()->radiusA(),
-                     descriptor()->radiusB(),
-                     descriptor()->speed(),
-                     descriptor()->orbitPhi(),
-                     descriptor()->clockwise());
-}
-
-/* virtual */
-void Planetoid::_postDeathUniqueEvent(bool)
-{}
-
-void Planetoid::initialize()
-{
     if (!m_orbit.initialized()) {
         m_orbit.calcPath(
                     model()->radiusA(),
@@ -94,6 +83,10 @@ void Planetoid::initialize()
                     model()->clockwise());
     }
 }
+
+/* virtual */
+void Planetoid::_postDeathUniqueEvent(bool)
+{}
 
 void Planetoid::_updatePosition()
 {

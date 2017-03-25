@@ -144,9 +144,8 @@ void Container::hit(int damage) {
             
 void Container::bindItemSlot(ItemSlot* item_slot) 
 {
-    assert(false);
-//    m_itemSlot = item_slot;
-//    m_itemSlot->setOwner(this);
+    m_itemSlot = item_slot;
+    m_itemSlot->setOwner(this);
 }
 
 ///* virtual override final */
