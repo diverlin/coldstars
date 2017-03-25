@@ -34,8 +34,8 @@
 
 
 control::ItemSlot*
-getNewItemSlot(entity::Type subtype_id)
-{  
+genItemSlot(entity::Type subtype_id)
+{
 //    assert(false);
     control::ItemSlot* item_slot = new control::ItemSlot(subtype_id);
     assert(item_slot);
@@ -43,7 +43,7 @@ getNewItemSlot(entity::Type subtype_id)
     //jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT);
 //    item_slot->SetTextureOb(texOb_slot);
     
-    if (subtype_id == entity::Type::WEAPON_SLOT) {
+//    if (subtype_id == entity::Type::WEAPON_SLOT) {
 //        assert(false);
 //        Turrel* turrel = new Turrel(item_slot);
 //        assert(turrel);
@@ -51,7 +51,7 @@ getNewItemSlot(entity::Type subtype_id)
 ////        jeti::control::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL);
 //        // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->size());
 //        item_slot->setTurrel(turrel);
-    }
+//    }
     
     return item_slot;
 }

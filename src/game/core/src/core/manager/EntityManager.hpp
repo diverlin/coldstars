@@ -41,6 +41,8 @@ class Satellite;
 class Container;
 class SpaceObject;
 
+class Item;
+
 namespace item {
 class Scaner;
 class Drive;
@@ -73,6 +75,7 @@ public:
     void reg(model::Base*);
 
     model::Base* get(int_t) const;
+    model::Item* getItemBase(int_t) const;
 
     model::StarSystem* starsystem(int_t id) const;
 

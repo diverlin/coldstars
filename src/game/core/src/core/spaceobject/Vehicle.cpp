@@ -146,47 +146,47 @@ Vehicle::__actualizeItems()
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obSubType()) {
         case entity::Type::SCANER_EQUIPMENT: {
-            control::item::Scaner* item = new control::item::Scaner(EntityManager::get().scaner(id));
+            item::Scaner* item = new item::Scaner(EntityManager::get().scaner(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
-            control::item::Drive* item = new control::item::Drive(EntityManager::get().drive(id));
+            item::Drive* item = new item::Drive(EntityManager::get().drive(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
-            control::item::Bak* item = new control::item::Bak(EntityManager::get().bak(id));
+            item::Bak* item = new item::Bak(EntityManager::get().bak(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
-            control::item::Droid* item = new control::item::Droid(EntityManager::get().droid(id));
+            item::Droid* item = new item::Droid(EntityManager::get().droid(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
-            control::item::Grapple* item = new control::item::Grapple(EntityManager::get().grapple(id));
+            item::Grapple* item = new item::Grapple(EntityManager::get().grapple(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
-            control::item::Lazer* item = new control::item::Lazer(EntityManager::get().lazer(id));
+            item::Lazer* item = new item::Lazer(EntityManager::get().lazer(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
-            control::item::Protector* item = new control::item::Protector(EntityManager::get().protector(id));
+            item::Protector* item = new item::Protector(EntityManager::get().protector(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
-            control::item::Radar* item = new control::item::Radar(EntityManager::get().radar(id));
+            item::Radar* item = new item::Radar(EntityManager::get().radar(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
-            control::item::Rocket* item = new control::item::Rocket(EntityManager::get().rocket(id));
+            item::Rocket* item = new item::Rocket(EntityManager::get().rocket(id));
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
@@ -213,29 +213,29 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     // WEAPON SLOTS
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::WEAPON_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::WEAPON_SLOT);
         //slot->setSubSubType(SLOT_WEAPON_TYPES[i]);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->radarSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::RADAR_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::RADAR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->scanerSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::SCANER_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::SCANER_SLOT);
         addItemSlot(slot);
     }
 
 
     for (int i=0; i<descr->grappleSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::GRAPPLE_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::GRAPPLE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->droidSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::DROID_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::DROID_SLOT);
         addItemSlot(slot);
     }
 
@@ -252,17 +252,17 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 #endif // USE_EXTRA_EQUIPMENT
 
     for (int i=0; i<descr->protectorSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::PROTECTOR_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::PROTECTOR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->driveSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::DRIVE_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::DRIVE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->bakSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::BAK_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::BAK_SLOT);
         addItemSlot(slot);
     }
 
@@ -277,7 +277,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     //////// OTSEC SLOT ////////////////////////////////
     for (int i=0; i<descr->cargoSlotNum(); i++) {
-        ItemSlot* slot = getNewItemSlot(entity::Type::CARGO_SLOT);
+        ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);
         //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
         addItemSlot(slot);
     }
@@ -627,7 +627,7 @@ ItemSlot* Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype_id)
 }
 
 //bool
-//Vehicle::unpackContainerItemToCargoSlot(control::Container* container)
+//Vehicle::unpackContainerItemToCargoSlot(Container* container)
 //{
 //    if (load(container->itemSlot()->item())) {
 //        container->killSilently();

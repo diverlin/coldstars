@@ -67,8 +67,6 @@ SpaceStation::gen()
 void
 SpaceStation::__createInternals(model::SpaceStation* model, descriptor::SpaceStation* descr)
 {
-    assert(false);
-
 //    //jeti::Mesh* mesh = nullptr;
 //    //jeti::control::TextureOb* texOb = nullptr;
 //    glm::vec3 size;

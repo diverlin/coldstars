@@ -68,7 +68,7 @@ void AngarBuilder::createInternals(Angar* angar) const
 
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
     {
-        control::ItemSlot* cargo_slot = getNewItemSlot(entity::Type::CARGO_SLOT);
+        control::ItemSlot* cargo_slot = genItemSlot(entity::Type::CARGO_SLOT);
         assert(false);
 //        angar->AddItemSlot(cargo_slot);
     }

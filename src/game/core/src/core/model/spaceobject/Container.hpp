@@ -33,11 +33,13 @@ public:
     Container(const std::string& data);
     std::string data() const;
 
+    int_t item() const { return m_item; }
+    void setItem(int_t item) { m_item = item; }
     void setTargetPos(const glm::vec3& target_pos, float velocity)
     { m_targetPos = target_pos; m_velocity = velocity; }
 
 private:
-    int_t m_itemSlot = NONE;
+    int_t m_item = NONE;
     meti::vec3 m_targetPos;
     float m_velocity = 0.0f;
 
@@ -46,7 +48,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_itemSlot;
+        ar & m_item;
         ar & m_targetPos;
         ar & m_velocity;
     }

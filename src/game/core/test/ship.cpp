@@ -87,9 +87,8 @@ TEST(ship, drop_item_to_space)
     control::Ship* ship = test::genShip();
 
     /* equip ship */
-    model::item::Drive* drive = builder::item::Drive::gen();
-    assert(false);
-//    ship->manage(drive);
+    control::item::Drive* drive = test::item::genDrive();
+    ship->manage(drive);
 
     /* add ship */
     glm::vec3 pos(100.0f);
