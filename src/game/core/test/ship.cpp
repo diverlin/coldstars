@@ -18,6 +18,7 @@
 
 #include "helper.hpp"
 
+#include <core/type/PlaceType.hpp>
 #include <core/common/Global.hpp>
 
 #include <core/descriptor/Base.hpp>
@@ -34,6 +35,7 @@
 #include <core/slot/ItemSlot.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/model/spaceobject/Container.hpp>
 #include <core/descriptor/spaceobject/Ship.hpp>
 
 #include <core/manager/EntityManager.hpp>
@@ -93,20 +95,20 @@ TEST(ship, drop_item_to_space)
     /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->model()->place(), place::type::NONE);
+    EXPECT_EQ(ship->model()->place(), place::Type::NONE);
     starsystem->add(ship, pos, dir);
-    EXPECT_EQ(ship->model()->place(), place::type::KOSMOS);
+    EXPECT_EQ(ship->model()->place(), place::Type::KOSMOS);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
     EXPECT_TRUE(ship->dropItemToSpace(entity::Type::DRIVE_SLOT));
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers()[0]);
-    assert(false);
-//    Container* container = starsystem->containers()[0];
-//    EXPECT_EQ(container->position(), pos);
-//    EXPECT_EQ(container->place(), type::place::KOSMOS);
-//    EXPECT_EQ(container->itemSlot()->item(), drive);
+
+    control::Container* container = starsystem->containers()[0];
+    EXPECT_EQ(container->position(), pos);
+    EXPECT_EQ(container->model()->place(), place::Type::KOSMOS);
+    EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
 TEST(ship, base_ship_shoot)

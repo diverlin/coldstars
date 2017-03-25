@@ -214,7 +214,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
         }
     }
 
-    vehicle->model()->setPlace(place::type::KOSMOS);
+    vehicle->model()->setPlace(place::Type::KOSMOS);
     vehicle->setStarSystem(model());
 
     vehicle->setPosition(position);
@@ -266,7 +266,7 @@ void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm:
 
 void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
 {
-    _model->setPlace(place::type::KOSMOS);
+    _model->setPlace(place::Type::KOSMOS);
     _model->setStarSystem(model()->id());
 
     _model->setPosition(position);
@@ -290,7 +290,7 @@ void StarSystem::add(model::Star* model)
 void StarSystem::add(Star* star)
 {
     star->model()->setStarSystem(model()->id());
-    star->model()->setPlace(place::type::KOSMOS);
+    star->model()->setPlace(place::Type::KOSMOS);
 
     m_stars.push_back(star);
 
@@ -311,7 +311,7 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
 
     planet->model()->setParent(parent->model()->id());
     planet->model()->setStarSystem(model()->id());
-    planet->model()->setPlace(place::type::KOSMOS);
+    planet->model()->setPlace(place::Type::KOSMOS);
 
     planet->model()->setRadiusA(planet->model()->radiusA() * (m_planets.size() + 2));
     planet->model()->setRadiusB(planet->model()->radiusB() * (m_planets.size() + 2));
@@ -330,7 +330,7 @@ void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
         _model->setParent(parent->id());
     }
     _model->setStarSystem(model()->id());
-    _model->setPlace(place::type::KOSMOS);
+    _model->setPlace(place::Type::KOSMOS);
 
     Asteroid* asteroid = new Asteroid(_model);
 
@@ -350,7 +350,7 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
     }
 
     _model->setStarSystem(model()->id());
-    _model->setPlace(place::type::KOSMOS);
+    _model->setPlace(place::Type::KOSMOS);
     _model->setPosition(center);
 
     Container* container = new Container(_model);
@@ -361,7 +361,7 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
 void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
-    _model->setPlace(place::type::KOSMOS);
+    _model->setPlace(place::Type::KOSMOS);
     _model->setPosition(center);
 
     WormHole* blackhole = new WormHole(_model);

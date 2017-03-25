@@ -130,7 +130,7 @@ public:
     bool load(Item*);
     bool manage(Item*);
 
-    bool isSlotFree(const place::type&) const;
+    bool isSlotFree(const place::Type&) const;
     bool checkManage(const core::Id&);
 
     void manageItemsInCargo();
@@ -250,7 +250,7 @@ protected:
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
 
     ItemSlot* _freeArtefactSlot() const;
-    ItemSlot* _cargoSlotWithGoods(place::type);
+    ItemSlot* _cargoSlotWithGoods(place::Type);
 
 #ifdef USE_MODULES
     bool installModule(Item*);
