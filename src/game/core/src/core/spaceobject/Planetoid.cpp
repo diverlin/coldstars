@@ -74,14 +74,12 @@ Planetoid::~Planetoid()
 
 void Planetoid::__createOrbit()
 {
-    if (!m_orbit.initialized()) {
-        m_orbit.calcPath(
-                    model()->radiusA(),
-                    model()->radiusB(),
-                    model()->speed(),
-                    model()->orbitPhi(),
-                    model()->clockwise());
-    }
+    m_orbit.calcPath(
+                model()->radiusA(),
+                model()->radiusB(),
+                model()->speed(),
+                model()->orbitPhi(),
+                model()->clockwise());
 }
 
 /* virtual */
