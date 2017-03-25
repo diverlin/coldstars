@@ -29,7 +29,6 @@ public:
     Orbit();
     ~Orbit();
 
-    bool initialized() const { return m_initialized; }
     void setIt(int it) { m_it = it; }
 
     const glm::vec3& position() const;
@@ -47,7 +46,6 @@ private:
     //        jeti::PathVisual m_VisualOrbitPath;
     //        jeti::PathVisual m_VisualOrbitTurn;
 
-    bool m_initialized = false;
     std::vector<glm::vec3> m_coordinates;
     int m_length = -1;
     int m_it = -1;
