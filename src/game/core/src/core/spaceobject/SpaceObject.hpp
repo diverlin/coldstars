@@ -46,7 +46,7 @@ public:
     void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
     void setStarSystem(int_t starsystem) { m_starsystem = starsystem; }
-    void setPlace(place::type place) { m_place = place;  }
+    void setPlace(place::Type place) { m_place = place;  }
 //    void setMass(int mass) { m_mass = mass; }
 
     void setIsAlive(bool is_alive) { m_dataLife.is_alive = is_alive; }
@@ -68,7 +68,7 @@ public:
 
 //    int mass()  const { return m_mass; }
     int armor() const { return m_dataLife.armor; }
-    place::type place() const { return m_place; }
+    place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
     void immidiateKill() {
@@ -80,7 +80,7 @@ private:
     LifeData m_dataLife;
     int_t m_parent = NONE;
     int_t m_starsystem = NONE;
-    place::type m_place = place::type::NONE;
+    place::Type m_place = place::Type::NONE;
 //    int m_mass = 0;
     int m_expirienceToGive = 0;
 

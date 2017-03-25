@@ -502,7 +502,7 @@ bool ItemSlot::isTargetAlive(model::SpaceObject* target) const
 
 bool ItemSlot::isTargetInSpace(model::SpaceObject* target) const
 {
-    return (target->place() == place::type::KOSMOS);
+    return (target->place() == place::Type::KOSMOS);
 }               
 
 bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const

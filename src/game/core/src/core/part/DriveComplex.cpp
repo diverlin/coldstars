@@ -194,7 +194,7 @@ void DriveComplex::UpdatePath()
 bool DriveComplex::ValidateTarget() const
 {
     if (m_target->isAlive()) {
-        if (m_target->place() == place::type::KOSMOS) {
+        if (m_target->place() == place::Type::KOSMOS) {
             return true;
         }
     }

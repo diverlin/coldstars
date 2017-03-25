@@ -23,7 +23,7 @@
 
 namespace place {
 
-enum class type {
+enum class Type {
     NONE,
     //
     KOSMOS,
@@ -34,4 +34,4 @@ enum class type {
 
 } // namespace place
 
-std::string getPlaceStr(place::type);
+std::string getPlaceStr(place::Type);

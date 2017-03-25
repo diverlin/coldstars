@@ -459,7 +459,7 @@ bool Vehicle::__installItem(Item* item)
     return false;
 }
 
-bool Vehicle::isSlotFree(const place::type& subtype) const
+bool Vehicle::isSlotFree(const place::Type& subtype) const
 {
     assert(false);
 //    for (ItemSlot* slot: m_slots) {
@@ -611,7 +611,7 @@ ItemSlot* Vehicle::__freeCargoSlot()
     return nullptr;
 }
 
-ItemSlot* Vehicle::_cargoSlotWithGoods(place::type requested_goods_subtype_id)
+ItemSlot* Vehicle::_cargoSlotWithGoods(place::Type requested_goods_subtype_id)
 {
     assert(false);
 //    for (ItemSlot* slot: m_cargoSlots) {
@@ -1618,7 +1618,7 @@ STATUS Vehicle::CheckGrabStatus() const
 
 bool Vehicle::dropItemToSpace(const entity::Type& type)
 {
-    if (model()->place() != place::type::KOSMOS)
+    if (model()->place() != place::Type::KOSMOS)
         return false;
 
     assert(false);
