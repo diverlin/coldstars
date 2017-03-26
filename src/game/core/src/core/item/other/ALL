@@ -1,0 +1,2 @@
+#include "Bomb.hpp"
+#include "GoodsPack.hpp"

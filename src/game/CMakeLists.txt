@@ -1,29 +1,30 @@
 cmake_minimum_required (VERSION 2.8)
 
-file(GLOB_RECURSE COLDSTARS_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-file(GLOB_RECURSE COLDSTARS_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
+set(USE_MODULES OFF)
+set(USE_ARTEFACTS OFF)
+set(USE_EXTRA_EQUIPMENT OFF)
 
-add_executable (${PROJECT} ${COLDSTARS_SOURCE} ${COLDSTARS_HEADER})
-target_link_libraries(${PROJECT} ${SFML_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} boost_system freetyperender ${FREETYPE_LIBRARIES})
-#SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
-#SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
-SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
-   
-# deploy
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ${DEPLOY_DIR}
-)
+set(PROJECT_CORE     ${PROJECT}_core)
+set(PROJECT_SERVER   ${PROJECT}_server)
+set(PROJECT_CLIENT   ${PROJECT}_client)
+set(PROJECT_TESTS    ${PROJECT}_tests)
 
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/data ${DEPLOY_DIR}/data
-)
+set(GLM_ROOT_DIR "../../../dependencies/glm-0.9.7.5/")
+find_package(GLM REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+add_definitions(-DGLM_FORCE_RADIANS)
 
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
-)
+if (USE_MODULES)
+    add_definitions(-DUSE_MODULES)
+endif()
+if (USE_ARTEFACTS)
+    add_definitions(-DUSE_ARTEFACTS)
+endif()
+if (USE_EXTRA_EQUIPMENT)
+    add_definitions(-DUSE_EXTRA_EQUIPMENT)
+endif()
+
+add_subdirectory(core)
+add_subdirectory(server)
+#add_subdirectory(client)
+add_subdirectory(demo)
