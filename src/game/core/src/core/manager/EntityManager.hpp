@@ -119,8 +119,7 @@ private:
     void clear();
 
     void saveEvent(const std::string&);
-    void loadPass0(const std::string&);
-    void loadPass1() const;
+    void loadEvent(const std::string&);
 
     static IdGenerator m_idGenerator;
 };

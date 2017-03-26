@@ -153,7 +153,7 @@ void MessageManager::process(const comm::Message& message)
         descriptor::Hit descr(message.data());
         model::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
         assert(false);
-        //        ob->hit(descriptor.damage());
+        //ob->hit(descr.damage());
         break;
     }
     case comm::Message::Type::EXPLOSION: {
