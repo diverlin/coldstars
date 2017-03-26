@@ -1,0 +1,11 @@
+#ifdef USE_MODULES
+#include "BakModule.hpp"
+#include "DriveModule.hpp"
+#include "DroidModule.hpp"
+#include "GrappleModule.hpp"
+#include "LazerModule.hpp"
+#include "ProtectorModule.hpp"
+#include "RadarModule.hpp"
+#include "RocketModule.hpp"
+#include "ScanerModule.hpp"
+#endif // USE_MODULES
