@@ -32,11 +32,11 @@ class Protector;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Protector;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -44,16 +44,16 @@ namespace item {
 class Protector : public Equipment
 {
 public:
-    static model::item::Protector* gen();
-    static std::vector<model::item::Protector*> gen(int);
-    static model::item::Protector* gen(descriptor::item::Protector*);
+    static control::item::Protector* gen();
+    static std::vector<control::item::Protector*> gen(int);
+    static control::item::Protector* gen(descriptor::item::Protector*);
 
 private:
     Protector() = delete;
     ~Protector() = delete;
 
-    static model::item::Protector* __genTemplate(int_t);
-    static void __createInternals(model::item::Protector*, descriptor::item::Protector*);
+    static control::item::Protector* __genTemplate(int_t);
+    static void __createInternals(control::item::Protector*, descriptor::item::Protector*);
 }; 
 
 } // namespace item

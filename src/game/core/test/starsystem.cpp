@@ -43,7 +43,7 @@ namespace test {
 TEST(starsystem, add_remove_objects)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = genStarSystem();
+    control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> star_ids = starsystem->model()->stars();
     ceti::pack<int_t> planet_ids = starsystem->model()->planets();
@@ -66,14 +66,14 @@ TEST(starsystem, add_remove_objects)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Star* star = genStar();
-        control::Planet* planet = genPlanet();
-        control::Asteroid* asteroid = genAsteroid();
-        control::WormHole* wormhole = genWormHole();
-        control::SpaceStation* spacestation = genSpaceStation();
-        control::Ship* ship = genShip();
-        control::Satellite* satellite = genSatellite();
-        control::Container* container = genContainer();
+        control::Star* star = builder::Star::gen();
+        control::Planet* planet = builder::Planet::gen();
+        control::Asteroid* asteroid = builder::Asteroid::gen();
+        control::WormHole* wormhole = builder::WormHole::gen();
+        control::SpaceStation* spacestation = builder::SpaceStation::gen();
+        control::Ship* ship = builder::Ship::gen();
+        control::Satellite* satellite = builder::Satellite::gen();
+        control::Container* container = builder::Container::gen();
 
         /* add objects */
         starsystem->add(star->model());
@@ -88,8 +88,8 @@ TEST(starsystem, add_remove_objects)
         starsystem->add(spacestation->model());
         spacestation_ids.add(spacestation->model()->id());
 
-        starsystem->add(ship->model());
-        ship_ids.add(ship->model()->id());
+        starsystem->add(ship);
+        ship_ids.add(ship->id());
 
         starsystem->add(satellite->model());
         satellite_ids.add(satellite->model()->id());

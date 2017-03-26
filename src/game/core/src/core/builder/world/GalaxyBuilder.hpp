@@ -19,27 +19,27 @@
 
 #pragma once
 
-namespace model {
-class Galaxy;
-} // namespace model
-
 namespace descriptor {
 class Galaxy;
-}
+} // namespace descriptor
+
+namespace control {
+class Galaxy;
+} // namespace control
 
 namespace builder {
 
 class Galaxy
 {
 public:
-    static model::Galaxy* create(descriptor::Galaxy*);
+    static control::Galaxy* create(descriptor::Galaxy*);
 
 private:
     Galaxy() = delete;
     ~Galaxy() = delete;
 
-    static void __createInternals(model::Galaxy*, descriptor::Galaxy*);
-    static model::Galaxy* __genTemplate();
+    static void __createInternals(control::Galaxy*, descriptor::Galaxy*);
+    static control::Galaxy* __genTemplate();
 }; 
 
 } // namespace builder

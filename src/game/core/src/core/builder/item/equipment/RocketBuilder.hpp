@@ -31,11 +31,11 @@ class Rocket;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Rocket;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Rocket : public Equipment
 {
 public:
-    static model::item::Rocket* gen();
-    static model::item::Rocket* gen(descriptor::item::Rocket*);
+    static control::item::Rocket* gen();
+    static control::item::Rocket* gen(descriptor::item::Rocket*);
 
 private:
     Rocket() = delete;
     ~Rocket() = delete;
 
-    static model::item::Rocket* __genTemplate(int_t);
-    static void __createInternals(model::item::Rocket*, descriptor::item::Rocket*);
+    static control::item::Rocket* __genTemplate(int_t);
+    static void __createInternals(control::item::Rocket*, descriptor::item::Rocket*);
 }; 
 
 } // namespace item

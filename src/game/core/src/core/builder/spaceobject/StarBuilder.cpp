@@ -23,6 +23,7 @@
 #include <common/constants.hpp>
 
 #include <core/model/spaceobject/Star.hpp>
+#include <core/spaceobject/Star.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
@@ -34,17 +35,19 @@
 
 namespace builder {
 
-model::Star*
+control::Star*
 Star::__genTemplate(int_t descriptor_id)
 { 
     model::Star* model = new model::Star(descriptor_id);
-
     assert(model);
-    EntityManager::get().reg(model);
-    return model;
+    control::Star* star = new control::Star(model);
+    assert(star);
+
+    EntityManager::get().reg(star);
+    return star;
 } 
  
-model::Star*
+control::Star*
 Star::gen()
 {
     descriptor::Star* descr = nullptr;
@@ -57,27 +60,27 @@ Star::gen()
     return gen(descr);
 } 
 
-model::Star*
+control::Star*
 Star::gen(descriptor::Star* descr)
 {
-    model::Star* model = __genTemplate(descr->id());
+    control::Star* star = __genTemplate(descr->id());
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    model->setRadiusA(descr->radiusA());
-    model->setRadiusB(descr->radiusB());
-    model->setOrbitPhi(descr->orbitPhi());
-    model->setSpeed(descr->speed());
+    star->model()->setRadiusA(descr->radiusA());
+    star->model()->setRadiusB(descr->radiusB());
+    star->model()->setOrbitPhi(descr->orbitPhi());
+    star->model()->setSpeed(descr->speed());
 
     // Orientation
-    model->setSize(descr->size());
-    model->setDirection(descr->direction());
+    star->model()->setSize(descr->size());
+    star->model()->setDirection(descr->direction());
 
     LifeData data_life;
     data_life.armor = descr->armor();
-    model->setLifeData(data_life);
+    star->model()->setLifeData(data_life);
 
-    return model;
+    return star;
 }
           
 } // namespace builder

@@ -101,33 +101,26 @@ StarSystem::__actualizeModel()
 //    std::vector<int_t> planets() const { return m_planets; }
 
     for(int_t id: model()->stars()) {
-        model::Star* _model = EntityManager::get().star(id);
-        add(_model);
+        add(EntityManager::get().star(id));
     }
     for(int_t id: model()->planets()) {
-        model::Planet* _model = EntityManager::get().planet(id);
-        add(_model);
+        add(EntityManager::get().planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        model::Asteroid* _model = EntityManager::get().asteroid(id);
-        add(_model);
+        add(EntityManager::get().asteroid(id));
     }
 
     for(int_t id: model()->ships()) {
-        model::Ship* _model = EntityManager::get().ship(id);
-        add(_model);
+        add(EntityManager::get().ship(id));
     }
     for(int_t id: model()->satellites()) {
-        model::Satellite* _model = EntityManager::get().satellite(id);
-        add(_model);
+        add(EntityManager::get().satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        model::SpaceStation* _model = EntityManager::get().spacestation(id);
-        add(_model);
+        add(EntityManager::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        model::Container* _model = EntityManager::get().container(id);
-        add(_model);
+        add(EntityManager::get().container(id));
     }
 
 //    __actualizeItems();
@@ -146,10 +139,10 @@ StarSystem::star() const
 /* virtual */
 void StarSystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<m_stars.size(); i++)      { EntityManager::get().addToGarbage(m_stars[i]->model()); }
-    for(unsigned int i=0; i<m_planets.size(); i++)    { EntityManager::get().addToGarbage(m_planets[i]->model()); }
-    for(unsigned int i=0; i<m_asteroids.size(); i++)  { EntityManager::get().addToGarbage(m_asteroids[i]->model()); }
     assert(false);
+    //    for(unsigned int i=0; i<m_stars.size(); i++)      { EntityManager::get().addToGarbage(m_stars[i]->model()); }
+//    for(unsigned int i=0; i<m_planets.size(); i++)    { EntityManager::get().addToGarbage(m_planets[i]->model()); }
+//    for(unsigned int i=0; i<m_asteroids.size(); i++)  { EntityManager::get().addToGarbage(m_asteroids[i]->model()); }
     //for(unsigned int i=0; i<m_bullets.size(); i++)    { EntityManager::get().addToGarbage(m_bullets[i]); }
     //for(unsigned int i=0; i<m_containers.size(); i++) { EntityManager::get().addToGarbage(m_containers[i]); }
     //for(unsigned int i=0; i<m_blackholes.size(); i++) { EntityManager::get().addToGarbage(m_blackholes[i]); }
@@ -215,7 +208,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     }
 
     vehicle->model()->setPlace(place::Type::KOSMOS);
-    vehicle->setStarSystem(model());
+    vehicle->setStarSystem(this);
 
     vehicle->setPosition(position);
     vehicle->setDirection(dir);
@@ -238,11 +231,11 @@ void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, cons
     m_spacestations.push_back(spacestation);
 }
 
-void StarSystem::add(model::Ship* _model)
-{
-    auto ship = new Ship(_model);
-    add(ship, _model->position(), _model->direction());
-}
+//void StarSystem::add(model::Ship* _model)
+//{
+//    auto ship = new Ship(_model);
+//    add(ship, _model->position(), _model->direction());
+//}
 
 void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
@@ -338,6 +331,22 @@ void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, 
     model()->addAsteroid(_model->id());
 }
 
+void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
+{
+    assert(false);
+//    if (parent) {
+//        asteroid->setParent(parent);
+//    }
+//    if (it) {
+//        asteroid->setIt(it);
+//    }
+    asteroid->model()->setStarSystem(model()->id());
+    asteroid->model()->setPlace(place::Type::KOSMOS);
+
+    m_asteroids.push_back(asteroid);
+    model()->addAsteroid(asteroid->id());
+}
+
 void StarSystem::add(model::Container* _model, const glm::vec3& center)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
@@ -358,6 +367,22 @@ void StarSystem::add(model::Container* _model, const glm::vec3& center)
     m_containers.push_back(container);
 }
 
+void StarSystem::add(Container* container, const glm::vec3& center)
+{
+    container->model()->setPosition(center);
+    add(container);
+
+}
+
+void StarSystem::add(Container* container)
+{
+    container->setStarSystem(this);
+    container->model()->setPlace(place::Type::KOSMOS);
+
+    model()->addContainer(container->id());
+    m_containers.push_back(container);
+}
+
 void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
 {
     _model->setStarSystem(model()->id());
@@ -370,6 +395,22 @@ void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
 
     model()->addWormhole(_model->id());
 }    
+
+void StarSystem::add(WormHole* wormhole, const glm::vec3& center)
+{
+    wormhole->model()->setPosition(center);
+    add(wormhole);
+}
+
+void StarSystem::add(WormHole* wormhole)
+{
+    wormhole->setStarSystem(this);
+    wormhole->model()->setPlace(place::Type::KOSMOS);
+
+    m_wormholes.push_back(wormhole);
+    model()->addWormhole(wormhole->id());
+}
+
 
 void StarSystem::add(Explosion* explosion, const glm::vec3& center)
 {
@@ -1083,8 +1124,8 @@ void StarSystem::__shipManager_s(unsigned int num)
         int size_id     = SIZE_4;
         int weapons_num = 7;
 
-        model::Npc* new_pnpc = core::global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        model::Ship* new_pship = builder::Ship::gen();
+        control::Npc* new_npc = builder::Npc::gen(prace_id, psubtype_id, psubsubtype_id);
+        control::Ship* new_pship = builder::Ship::gen();
 
         assert(false);
         //builder::ShipBuilder::equip(new_pship);   // improove

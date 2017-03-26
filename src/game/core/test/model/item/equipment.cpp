@@ -19,6 +19,7 @@
 
 #include <core/builder/item/equipment/ALL>
 #include <core/model/item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -48,9 +49,7 @@ void compareEquipment(model::Equipment* model, model::Equipment* copy)
 } // namespace
 
 TEST(model, bak) {
-    init();
-
-    model::item::Bak* model = builder::item::Bak::gen();
+    model::item::Bak* model = builder::item::Bak::gen()->model();
     model::item::Bak* copy = new model::item::Bak(model->data());
 
     compareEquipment(model, copy);
@@ -60,14 +59,10 @@ TEST(model, bak) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, drive) {
-    model::item::Drive* model = builder::item::Drive::gen();
+    model::item::Drive* model = builder::item::Drive::gen()->model();
     model::item::Drive* copy = new model::item::Drive(model->data());
 
     compareEquipment(model, copy);
@@ -78,14 +73,10 @@ TEST(model, drive) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, droid) {
-    model::item::Droid* model = builder::item::Droid::gen();
+    model::item::Droid* model = builder::item::Droid::gen()->model();
     model::item::Droid* copy = new model::item::Droid(model->data());
 
     compareEquipment(model, copy);
@@ -95,14 +86,10 @@ TEST(model, droid) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, grapple) {
-    model::item::Grapple* model = builder::item::Grapple::gen();
+    model::item::Grapple* model = builder::item::Grapple::gen()->model();
     model::item::Grapple* copy = new model::item::Grapple(model->data());
 
     compareEquipment(model, copy);
@@ -114,14 +101,10 @@ TEST(model, grapple) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, lazer) {
-    model::item::Lazer* model = builder::item::Lazer::gen();
+    model::item::Lazer* model = builder::item::Lazer::gen()->model();
     model::item::Lazer* copy = new model::item::Lazer(model->data());
 
     compareEquipment(model, copy);
@@ -132,14 +115,10 @@ TEST(model, lazer) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, protector) {
-    model::item::Protector* model = builder::item::Protector::gen();
+    model::item::Protector* model = builder::item::Protector::gen()->model();
     model::item::Protector* copy = new model::item::Protector(model->data());
 
     compareEquipment(model, copy);
@@ -149,14 +128,10 @@ TEST(model, protector) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, radar) {
-    model::item::Radar* model = builder::item::Radar::gen();
+    model::item::Radar* model = builder::item::Radar::gen()->model();
     model::item::Radar* copy = new model::item::Radar(model->data());
 
     compareEquipment(model, copy);
@@ -166,14 +141,10 @@ TEST(model, radar) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, rocket) {
-    model::item::Rocket* model = builder::item::Rocket::gen();
+    model::item::Rocket* model = builder::item::Rocket::gen()->model();
     model::item::Rocket* copy = new model::item::Rocket(model->data());
 
     compareEquipment(model, copy);
@@ -185,14 +156,10 @@ TEST(model, rocket) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 
 TEST(model, scaner) {
-    model::item::Scaner* model = builder::item::Scaner::gen();
+    model::item::Scaner* model = builder::item::Scaner::gen()->model();
     model::item::Scaner* copy = new model::item::Scaner(model->data());
 
     compareEquipment(model, copy);
@@ -202,9 +169,5 @@ TEST(model, scaner) {
 
     // general
     EXPECT_EQ(model->data(), copy->data());
-
-    // clean
-    delete model;
-    delete copy;
 }
 

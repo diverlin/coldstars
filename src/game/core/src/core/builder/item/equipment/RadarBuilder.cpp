@@ -18,9 +18,11 @@
 
 
 #include "RadarBuilder.hpp"
+
 #include <core/descriptor/item/equipment/Radar.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Radar.hpp>
+#include <core/item/equipment/Radar.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -28,7 +30,7 @@
 namespace builder {
 namespace item {
 
-model::item::Radar*
+control::item::Radar*
 Radar::gen()
 {
     descriptor::item::Radar* descr = nullptr;
@@ -41,28 +43,29 @@ Radar::gen()
     return gen(descr);
 }
 
-model::item::Radar*
+control::item::Radar*
 Radar::gen(descriptor::item::Radar* descr)
 {
-    model::item::Radar* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Radar* radar = __genTemplate(descr->id());
+    __createInternals(radar, descr);
+    return radar;
 } 
 
-model::item::Radar*
+control::item::Radar*
 Radar::__genTemplate(int_t descriptor_id)
 {
     model::item::Radar* model = new model::item::Radar(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Radar* radar = new control::item::Radar(model);
+    EntityManager::get().reg(radar);
+    return radar;
 }
 
 void
-Radar::__createInternals(model::item::Radar* model, descriptor::item::Radar* descr)
+Radar::__createInternals(control::item::Radar* radar, descriptor::item::Radar* descr)
 {
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setRadius(descr->radius());
+    Item::_createInternals(radar, descr);
+    Equipment::_createInternals(radar, descr);
+    radar->model()->setRadius(descr->radius());
 }
 
 } // namespace item

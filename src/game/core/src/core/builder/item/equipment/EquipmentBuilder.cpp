@@ -19,14 +19,14 @@
 
 #include "EquipmentBuilder.hpp"
 
-#include <model/item/equipment/Equipment.hpp>
+#include <core/item/equipment/Equipment.hpp>
+#include <core/model/item/equipment/Equipment.hpp>
 #include <descriptor/item/equipment/Equipment.hpp>
 
 namespace builder {
 
-void Equipment::_createInternals(model::Equipment* model, descriptor::Equipment* descr)
+void Equipment::_createInternals(control::Equipment* equipment, descriptor::Equipment* descr)
 {
-//    model->setCondition(descr->condition());
 }
 
 } // namespace builder

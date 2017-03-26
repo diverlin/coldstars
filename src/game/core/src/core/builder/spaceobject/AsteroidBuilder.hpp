@@ -20,25 +20,24 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
-class Asteroid;
-} // namespace model
-
 namespace descriptor {
 class Asteroid;
 } // namespace descriptor
 
+namespace control {
+class Asteroid;
+} // namespace control
 
 namespace builder {
 
 class Asteroid
 {
 public:
-    static model::Asteroid* gen();
-    static model::Asteroid* gen(descriptor::Asteroid*);
+    static control::Asteroid* gen();
+    static control::Asteroid* gen(descriptor::Asteroid*);
 
 private:
-    static model::Asteroid* __genTemplate(int_t);
+    static control::Asteroid* __genTemplate(int_t);
 }; 
 
 } // namespace builder

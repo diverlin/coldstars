@@ -21,9 +21,9 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
+namespace control {
 class RocketBullet;
-} // namespace model
+} // namespace control
 
 class BulletData;
 
@@ -32,14 +32,14 @@ namespace builder {
 class Rocket
 {
 public:
-    Rocket();
-    ~Rocket();
-
-    model::RocketBullet* gen(const BulletData&) const;
+    static control::RocketBullet* gen(const BulletData&);
 
 private:
-    void createInternals(model::RocketBullet*, const BulletData&) const;
-    model::RocketBullet* __genTemplate(int_t id = NONE) const;
+    Rocket() = delete;
+    ~Rocket() = delete;
+
+    static void createInternals(control::RocketBullet*, const BulletData&);
+    static control::RocketBullet* __genTemplate(int_t id = NONE);
 }; 
 
 } // namespace builder

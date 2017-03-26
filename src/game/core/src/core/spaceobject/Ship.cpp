@@ -34,15 +34,14 @@
 #include <core/model/spaceobject/Ship.hpp>
 
 #include <core/descriptor/spaceobject/Ship.hpp>
-#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 
-Ship::Ship(model::Ship* model)
+Ship::Ship(model::Ship* model, descriptor::Ship* descr)
     :
-      Vehicle(model, descriptor::Manager::get().ship(model->descriptor()))
+      Vehicle(model, descr)
     , m_model_ship(model)
-    , m_descriptor_ship(descriptor::Manager::get().ship(model->descriptor()))
+    , m_descriptor_ship(descr)
 {
 
 }

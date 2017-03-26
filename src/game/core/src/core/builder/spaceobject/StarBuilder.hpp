@@ -21,14 +21,13 @@
 
 #include <ceti/type/IdType.hpp>
 
-
-namespace model {
-class Star;
-} // namespace model
-
 namespace descriptor {
 class Star;
 } // namespace descriptor
+
+namespace control {
+class Star;
+} // namespace control
 
 namespace builder {
 
@@ -38,11 +37,11 @@ public:
     Star();
     ~Star();
 
-    static model::Star* gen();
-    static model::Star* gen(descriptor::Star*);
+    static control::Star* gen();
+    static control::Star* gen(descriptor::Star*);
 
 private:
-    static model::Star* __genTemplate(int_t id);
+    static control::Star* __genTemplate(int_t id);
 };
 
 } // namespace builder

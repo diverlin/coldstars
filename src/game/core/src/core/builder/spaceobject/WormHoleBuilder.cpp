@@ -28,21 +28,24 @@
 
 namespace builder {
 
-model::WormHole*
+control::WormHole*
 WormHole::__genTemplate(int_t descriptor_id)
 {
     model::WormHole* model = new model::WormHole(descriptor_id);
     assert(model);
-    
+
+    control::WormHole* wormhole = new control::WormHole(model);
+    assert(wormhole);
+
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-    EntityManager::get().reg(model);
+    EntityManager::get().reg(wormhole);
     
-    return model;
+    return wormhole;
 } 
 
-model::WormHole*
+control::WormHole*
 WormHole::gen()
 {
     descriptor::WormHole* descr = nullptr;
@@ -55,15 +58,15 @@ WormHole::gen()
     return gen(descr);
 } 
 
-model::WormHole*
+control::WormHole*
 WormHole::gen(descriptor::WormHole* descr)
 {
-    model::WormHole* model = __genTemplate(descr->id());
-    return model;
+    control::WormHole* wormhole = __genTemplate(descr->id());
+    return wormhole;
 }
 
 void
-WormHole::__createInternals(model::WormHole* blackhole)
+WormHole::__createInternals(control::WormHole* wormhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     
@@ -76,7 +79,7 @@ WormHole::__createInternals(model::WormHole* blackhole)
 
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE);
 
-    blackhole->setLifeData(data_life);
+    wormhole->model()->setLifeData(data_life);
     
     float scale_comp = 30;
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);

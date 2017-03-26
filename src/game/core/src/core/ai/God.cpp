@@ -259,11 +259,11 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //entity::Type ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        model::SpaceStation* spacestation = builder::SpaceStation::gen();
+        control::SpaceStation* spacestation = builder::SpaceStation::gen();
         assert(false);
         //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
 
-        model::Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        control::Npc* npc = builder::Npc::gen(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         assert(false);
         //spacestation->bindNpc(npc);
 
@@ -312,11 +312,11 @@ void God::__createShips(Starsystem* starsystem, int ship_num, race::Type npc_rac
         }
         // VERY UGLY LOGIC END
 
-        model::Ship* new_ship = builder::Ship::gen();
+        control::Ship* new_ship = builder::Ship::gen();
         assert(false);
         //builder::ShipBuilder::equip(new_ship); // improove
 
-        model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        control::Npc* new_npc = builder::Npc::gen(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         assert(false);
         //new_ship->bindNpc(new_npc);
 

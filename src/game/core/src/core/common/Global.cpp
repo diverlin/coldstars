@@ -118,9 +118,8 @@ global::global()
     , m_lazerModuleBuilder(new LazerModuleBuilder)
     #endif // USE_MODULES
 
-    , m_npcBuilder(new NpcBuilder)
     , m_blackHoleBuilder(new builder::WormHole)
-    , m_rocketBulletBuilder(new builder::Rocket){
+{
 }
 
 global::~global()
@@ -162,9 +161,7 @@ global::~global()
     delete m_lazerModuleBuilder;
 #endif // USE_MODULES
 
-    delete m_npcBuilder;
     delete m_blackHoleBuilder;
-    delete m_rocketBulletBuilder;
 }
 
 } // namespace core

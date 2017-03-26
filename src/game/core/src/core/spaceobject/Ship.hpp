@@ -34,7 +34,7 @@ namespace control {
 class Ship : public Vehicle
 {
 public:
-    Ship(model::Ship*);
+    Ship(model::Ship*, descriptor::Ship*);
     virtual ~Ship();
 
     virtual void UpdateInSpace(int, bool) override final;

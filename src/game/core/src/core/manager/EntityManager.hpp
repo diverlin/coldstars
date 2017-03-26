@@ -27,7 +27,7 @@
 
 class Player;
 
-namespace model {
+namespace control {
 
 class StarSystem;
 
@@ -55,7 +55,7 @@ class Radar;
 class Rocket;
 } // namespace item
 
-} // namespace model
+} // namespace control
 
 
 class EntityManager
@@ -72,39 +72,39 @@ public:
     void saveRequest() { m_save_request = true; }
     void loadRequest() { m_load_request = true; }
 
-    void reg(model::Base*);
+    void reg(control::Base*);
 
-    model::Base* get(int_t) const;
-    model::Item* getItemBase(int_t) const;
+    control::Base* get(int_t) const;
+    control::Item* getItemBase(int_t) const;
 
-    model::StarSystem* starsystem(int_t id) const;
+    control::StarSystem* starsystem(int_t id) const;
 
-    model::Star* star(int_t id) const;
-    model::Planet* planet(int_t id) const;
-    model::Asteroid* asteroid(int_t id) const;
+    control::Star* star(int_t id) const;
+    control::Planet* planet(int_t id) const;
+    control::Asteroid* asteroid(int_t id) const;
 
-    model::SpaceStation* spacestation(int_t id) const;
-    model::Ship* ship(int_t id) const;
-    model::Satellite* satellite(int_t id) const;
-    model::Container* container(int_t id) const;
-    model::SpaceObject* spaceObject(int_t id) const;
+    control::SpaceStation* spacestation(int_t id) const;
+    control::Ship* ship(int_t id) const;
+    control::Satellite* satellite(int_t id) const;
+    control::Container* container(int_t id) const;
+    control::SpaceObject* spaceObject(int_t id) const;
 
-    model::item::Scaner* scaner(int_t) const;
-    model::item::Drive* drive(int_t) const;
-    model::item::Bak* bak(int_t) const;
-    model::item::Droid* droid(int_t) const;
-    model::item::Grapple* grapple(int_t) const;
-    model::item::Lazer* lazer(int_t) const;
-    model::item::Protector* protector(int_t) const;
-    model::item::Radar* radar(int_t) const;
-    model::item::Rocket* rocket(int_t) const;
+    control::item::Scaner* scaner(int_t) const;
+    control::item::Drive* drive(int_t) const;
+    control::item::Bak* bak(int_t) const;
+    control::item::Droid* droid(int_t) const;
+    control::item::Grapple* grapple(int_t) const;
+    control::item::Lazer* lazer(int_t) const;
+    control::item::Protector* protector(int_t) const;
+    control::item::Radar* radar(int_t) const;
+    control::item::Rocket* rocket(int_t) const;
 
     Player* player() const;
 
     bool updateSaveRequest();
     bool updateLoadRequest();
 
-    void addToGarbage(model::Base*);
+    void addToGarbage(control::Base*);
     void clearGarbage();
 
     int_t genId();
@@ -113,8 +113,8 @@ private:
     bool m_save_request = false;
     bool m_load_request = false;
 
-    std::map<int_t, model::Base*> m_models;
-    std::vector<model::Base*> m_garbage;
+    std::map<int_t, control::Base*> m_models;
+    std::vector<control::Base*> m_garbage;
 
     void clear();
 

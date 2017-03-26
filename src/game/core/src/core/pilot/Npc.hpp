@@ -103,7 +103,7 @@ private:
 
 namespace control {
 
-class Npc : public model::Base
+class Npc : public Base
 {
 public:
     Npc(int, entity::Type, entity::Type);

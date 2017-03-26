@@ -21,6 +21,7 @@
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/SpaceStation.hpp>
+#include <core/spaceobject/SpaceStation.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -32,10 +33,12 @@
 
 namespace builder {
 
-model::SpaceStation*
+control::SpaceStation*
 SpaceStation::__genTemplate(int_t descriptor_id)
 {           
-    model::SpaceStation* spacestation = new model::SpaceStation(descriptor_id);
+    model::SpaceStation* model = new model::SpaceStation(descriptor_id);
+    control::SpaceStation* spacestation = new control::SpaceStation(model);
+    assert(model);
     assert(spacestation);
 
     EntityManager::get().reg(spacestation);
@@ -43,15 +46,15 @@ SpaceStation::__genTemplate(int_t descriptor_id)
     return spacestation;
 }
 
-model::SpaceStation*
+control::SpaceStation*
 SpaceStation::gen(descriptor::SpaceStation* descr)
 {
-    model::SpaceStation* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::SpaceStation* spacestation = __genTemplate(descr->id());
+    __createInternals(spacestation, descr);
+    return spacestation;
 }
 
-model::SpaceStation*
+control::SpaceStation*
 SpaceStation::gen()
 {
     descriptor::SpaceStation* descr = nullptr;
@@ -65,7 +68,7 @@ SpaceStation::gen()
 }
 
 void
-SpaceStation::__createInternals(model::SpaceStation* model, descriptor::SpaceStation* descr)
+SpaceStation::__createInternals(control::SpaceStation* model, descriptor::SpaceStation* descr)
 {
 //    //jeti::Mesh* mesh = nullptr;
 //    //jeti::control::TextureOb* texOb = nullptr;

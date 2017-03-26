@@ -141,52 +141,52 @@ void
 Vehicle::__actualizeItems()
 {
     for(int_t id: model()->items()) {
-        model::Base* model_base = EntityManager::get().get(id);
+        control::Base* model_base = EntityManager::get().get(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obSubType()) {
         case entity::Type::SCANER_EQUIPMENT: {
-            item::Scaner* item = new item::Scaner(EntityManager::get().scaner(id));
+            item::Scaner* item = EntityManager::get().scaner(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
-            item::Drive* item = new item::Drive(EntityManager::get().drive(id));
+            item::Drive* item = EntityManager::get().drive(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
-            item::Bak* item = new item::Bak(EntityManager::get().bak(id));
+            item::Bak* item = EntityManager::get().bak(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
-            item::Droid* item = new item::Droid(EntityManager::get().droid(id));
+            item::Droid* item = EntityManager::get().droid(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
-            item::Grapple* item = new item::Grapple(EntityManager::get().grapple(id));
+            item::Grapple* item = EntityManager::get().grapple(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
-            item::Lazer* item = new item::Lazer(EntityManager::get().lazer(id));
+            item::Lazer* item = EntityManager::get().lazer(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
-            item::Protector* item = new item::Protector(EntityManager::get().protector(id));
+            item::Protector* item = EntityManager::get().protector(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
-            item::Radar* item = new item::Radar(EntityManager::get().radar(id));
+            item::Radar* item = EntityManager::get().radar(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
-            item::Rocket* item = new item::Rocket(EntityManager::get().rocket(id));
+            item::Rocket* item = EntityManager::get().rocket(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
@@ -1638,13 +1638,11 @@ bool Vehicle::dropItemToSpace(const entity::Type& type)
     return false;
 }
 
-model::Container*
+Container*
 Vehicle::__wrapItemToContainer(Item* item)
 {
-    model::Container* container = builder::Container::gen();
-    assert(false);
-    //container->insertItem(item);
-
+    Container* container = builder::Container::gen();
+    container->insert(item);
     return container;
 }
 

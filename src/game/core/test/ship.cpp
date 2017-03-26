@@ -44,7 +44,7 @@
 
 TEST(ship, create)
 {
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
 
     EXPECT_EQ(ship->descriptor()->bakSlotNum(), ship->bakSlots().size());
     EXPECT_EQ(ship->descriptor()->driveSlotNum(), ship->driveSlots().size());
@@ -59,17 +59,17 @@ TEST(ship, create)
 
 TEST(ship, equip)
 {
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
 
-    auto bak = test::item::genBak();
-    auto drive = test::item::genDrive();
-    auto droid = test::item::genDroid();
-    auto grapple = test::item::genGrapple();
-    auto lazer = test::item::genLazer();
-    auto protector = test::item::genProtector();
-    auto radar = test::item::genRadar();
-    auto rocket = test::item::genRocket();
-    auto scaner = test::item::genScaner();
+    control::item::Bak* bak = builder::item::Bak::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    control::item::Droid* droid = builder::item::Droid::gen();
+    control::item::Grapple* grapple = builder::item::Grapple::gen();
+    control::item::Lazer* lazer = builder::item::Lazer::gen();
+    control::item::Protector* protector = builder::item::Protector::gen();
+    control::item::Radar* radar = builder::item::Radar::gen();
+    control::item::Rocket* rocket = builder::item::Rocket::gen();
+    control::item::Scaner* scaner = builder::item::Scaner::gen();
 
     ship->manage(bak);
     ship->manage(drive);
@@ -85,11 +85,11 @@ TEST(ship, equip)
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
-    control::StarSystem* starsystem = test::genStarSystem();
-    control::Ship* ship = test::genShip();
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Ship* ship = builder::Ship::gen();
 
     /* equip ship */
-    control::item::Drive* drive = test::item::genDrive();
+    control::item::Drive* drive = builder::item::Drive::gen();
     ship->manage(drive);
 
     /* add ship */
@@ -114,9 +114,9 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_ship_shoot)
 {
     /* create objects */
-    control::StarSystem* starsystem = test::genStarSystem();
-    control::Ship* ship1 = test::genShip();
-    control::Ship* ship2 = test::genShip();
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Ship* ship1 = builder::Ship::gen();
+    control::Ship* ship2 = builder::Ship::gen();
 
     float distance = 10.0f;
 
@@ -137,7 +137,7 @@ TEST(ship, base_ship_shoot)
 TEST(ship, criticalDamage)
 {
     /* create objects */
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
 
     ship->hit(ship->criticalDamage());
     EXPECT_EQ(0, ship->model()->armor());
@@ -213,7 +213,7 @@ void compareShipControls(control::Ship* c1, control::Ship* c2)
 void testShipClone(control::Ship* ship)
 {
     model::Ship* model = new model::Ship(ship->model()->data());
-    control::Ship* clone = new control::Ship(model);
+    control::Ship* clone = new control::Ship(model, ship->descriptor());
 
     compareShipModels(ship->model(), model);
     compareShipControls(ship, clone);
@@ -222,17 +222,17 @@ void testShipClone(control::Ship* ship)
 TEST(ship, clone)
 {
     // items
-    auto bak = test::item::genBak();
-    auto drive = test::item::genDrive();
-    auto scaner = test::item::genScaner();
-    auto droid = test::item::genDroid();
-    auto radar = test::item::genRadar();
-    auto protector = test::item::genProtector();
-    auto protector2 = test::item::genProtector();
-    auto lazer = test::item::genLazer();
-    //auto rocket = test::item::genRocket();
+    control::item::Bak* bak = builder::item::Bak::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    control::item::Scaner* scaner = builder::item::Scaner::gen();
+    control::item::Droid* droid = builder::item::Droid::gen();
+    control::item::Radar* radar = builder::item::Radar::gen();
+    control::item::Protector* protector = builder::item::Protector::gen();
+    control::item::Protector* protector2 = builder::item::Protector::gen();
+    control::item::Lazer* lazer = builder::item::Lazer::gen();
+    //control::item::Rocket* rocket = builder::item::Rocket::gen();
 
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
     ship->manage(bak);
     ship->manage(drive);
     ship->manage(scaner);

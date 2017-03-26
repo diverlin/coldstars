@@ -19,24 +19,27 @@
 #include "AsteroidBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/Asteroid.hpp>
+#include <core/spaceobject/Asteroid.hpp>
 #include <core/descriptor/spaceobject/Asteroid.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
-model::Asteroid*
+control::Asteroid*
 Asteroid::__genTemplate(int_t descriptor_id)
 { 
     model::Asteroid* model = new model::Asteroid(descriptor_id);
+    control::Asteroid* asteroid = new control::Asteroid(model);
     assert(model);
+    assert(asteroid);
 
-    EntityManager::get().reg(model);
+    EntityManager::get().reg(asteroid);
     
-    return model;
+    return asteroid;
 } 
 
-model::Asteroid*
+control::Asteroid*
 Asteroid::gen()
 {
     descriptor::Asteroid* descr = nullptr;
@@ -49,28 +52,28 @@ Asteroid::gen()
     return gen(descr);
 }
 
-model::Asteroid*
+control::Asteroid*
 Asteroid::gen(descriptor::Asteroid* descr)
 {
-    model::Asteroid* model = __genTemplate(descr->id());
+    control::Asteroid* asteroid = __genTemplate(descr->id());
 
     /// Base
     LifeData life_data;
     life_data.armor = descr->armor();
-    model->setLifeData(life_data);
+    asteroid->model()->setLifeData(life_data);
 
     /// Planetoid
-    model->setRadiusA(descr->radiusA());
-    model->setRadiusB(descr->radiusB());
-    model->setOrbitPhi(descr->orbitPhi());
-    model->setSpeed(descr->speed());
-    model->setClockwise(descr->clockwise());
+    asteroid->model()->setRadiusA(descr->radiusA());
+    asteroid->model()->setRadiusB(descr->radiusB());
+    asteroid->model()->setOrbitPhi(descr->orbitPhi());
+    asteroid->model()->setSpeed(descr->speed());
+    asteroid->model()->setClockwise(descr->clockwise());
 
     /// Orientation
-    model->setSize(descr->size());
-    model->setDirection(descr->direction());
+    asteroid->model()->setSize(descr->size());
+    asteroid->model()->setDirection(descr->direction());
 
-    return model;
+    return asteroid;
 
 
     //    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));

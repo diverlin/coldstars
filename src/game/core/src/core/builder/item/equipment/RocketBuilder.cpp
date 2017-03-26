@@ -18,6 +18,7 @@
 
 #include "RocketBuilder.hpp"
 #include <core/model/item/equipment/Rocket.hpp>
+#include <core/item/equipment/Rocket.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -27,7 +28,7 @@
 namespace builder {
 namespace item {
 
-model::item::Rocket*
+control::item::Rocket*
 Rocket::gen()
 {
     descriptor::item::Rocket* descr = nullptr;
@@ -40,31 +41,32 @@ Rocket::gen()
     return gen(descr);
 }
 
-model::item::Rocket*
+control::item::Rocket*
 Rocket::gen(descriptor::item::Rocket* descr)
 {
-    model::item::Rocket* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Rocket* rocket = __genTemplate(descr->id());
+    __createInternals(rocket, descr);
+    return rocket;
 }
 
 
-model::item::Rocket*
+control::item::Rocket*
 Rocket::__genTemplate(int_t descriptor_id)
 {
     model::item::Rocket* model = new model::item::Rocket(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Rocket* rocket = new control::item::Rocket(model);
+    EntityManager::get().reg(rocket);
+    return rocket;
 }
 
 void
-Rocket::__createInternals(model::item::Rocket* model, descriptor::item::Rocket* descr)
+Rocket::__createInternals(control::item::Rocket* rocket, descriptor::item::Rocket* descr)
 {     
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setAmmo(descr->ammo());
-    model->setDamage(descr->damage());
-    model->setRadius(descr->radius());
+    Item::_createInternals(rocket, descr);
+    Equipment::_createInternals(rocket, descr);
+    rocket->model()->setAmmo(descr->ammo());
+    rocket->model()->setDamage(descr->damage());
+    rocket->model()->setRadius(descr->radius());
 
 //    if (race_id == race::type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));

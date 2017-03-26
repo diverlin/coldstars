@@ -26,10 +26,6 @@ namespace descriptor {
 class StarSystem;
 } // namespace descriptor
 
-namespace model {
-class StarSystem;
-} // namespace model
-
 namespace control {
 class StarSystem;
 } // namespace control
@@ -39,21 +35,21 @@ namespace builder {
 class StarSystem
 {
 public:
-    static model::StarSystem* gen(descriptor::StarSystem*);
-    static model::StarSystem* gen(int_t, int_t ob_id = NONE);
-    static model::StarSystem* gen();
+    static control::StarSystem* gen(descriptor::StarSystem*);
+    static control::StarSystem* gen(int_t, int_t ob_id = NONE);
+    static control::StarSystem* gen();
 
 private:
     StarSystem()=delete;
     ~StarSystem()=delete;
 
-    static void __createInternals(model::StarSystem*, descriptor::StarSystem*);
+    static void __createInternals(control::StarSystem*, descriptor::StarSystem*);
 
     static void __createBackground(control::StarSystem&, int, int, int);
     static void __createStar(control::StarSystem&);
     static void __createPlanets(control::StarSystem&, int);
 
-    static model::StarSystem* __genTemplate(int_t, int_t ob_id = NONE);
+    static control::StarSystem* __genTemplate(int_t, int_t ob_id = NONE);
 }; 
 
 } // namespace builder

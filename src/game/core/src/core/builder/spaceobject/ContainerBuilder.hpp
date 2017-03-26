@@ -27,9 +27,9 @@ namespace descriptor {
 class Container;
 } // namespace descriptor
 
-namespace model {
+namespace control {
 class Container;
-}
+} // namespace control
 
 namespace item {
 class Base;
@@ -40,9 +40,9 @@ namespace builder {
 class Container
 {
 public:
-    static model::Container* gen();
+    static control::Container* gen();
 //    static model::Container* gen(const std::string& data);
-    static model::Container* gen(descriptor::Container*);
+    static control::Container* gen(descriptor::Container*);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
@@ -51,8 +51,8 @@ private:
     Container() = default;
     ~Container() = default;
 
-    static model::Container* __genTemplate(int_t);
-    static void __createInternals(model::Container*, descriptor::Container*);
+    static control::Container* __genTemplate(int_t);
+    static void __createInternals(control::Container*, descriptor::Container*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

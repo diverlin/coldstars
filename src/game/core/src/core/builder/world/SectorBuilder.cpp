@@ -33,10 +33,16 @@
 
 namespace builder {
 
-model::Sector*
+control::Sector*
 Sector::__genTemplate()
 {   
-    model::Sector* sector = new model::Sector;
+    model::Sector* model = new model::Sector;
+    assert(model);
+
+    descriptor::Sector* descr = nullptr;
+    assert(descr);
+
+    control::Sector* sector = new control::Sector(model, descr);
     assert(sector);
 
     EntityManager::get().reg(sector);
@@ -44,20 +50,21 @@ Sector::__genTemplate()
     return sector;
 } 
 
-model::Sector*
+control::Sector*
 Sector::create(descriptor::Sector* descr)
 {
-    model::Sector* model = __genTemplate();
-    Sector::__createInternals(model, descr);
-    return model;
+    control::Sector* sector = __genTemplate();
+    Sector::__createInternals(sector, descr);
+    return sector;
 } 
 
-void Sector::__createInternals(model::Sector* model, descriptor::Sector* descr)
+void
+Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
 {
     for(const auto& id: descr->starsystems) {
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        model::StarSystem* model = builder::StarSystem::gen(descriptor::Manager::get().starSystem(id));
+        control::StarSystem* starsystem = builder::StarSystem::gen(descriptor::Manager::get().starSystem(id));
 //        sector->add(starsystem, center);
     }
 }

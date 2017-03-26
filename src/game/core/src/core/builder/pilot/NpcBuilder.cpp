@@ -31,35 +31,33 @@
 #include <ai/aiModel/AiModelRanger.hpp>
 #include <ai/aiModel/AiModelTrader.hpp>
 
+namespace builder {
 
-NpcBuilder::NpcBuilder()
-{}
-
-NpcBuilder::~NpcBuilder()
-{}
-
-model::Npc*
-NpcBuilder::createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, int_t id) const
+control::Npc*
+Npc::gen(race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id)
 {
-    model::Npc* npc = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
-    assert(npc);
-
-    EntityManager::get().reg(npc);
+    control::Npc* npc = __createTemplate(subtype_id, subsubtype_id);
+    __createInternals(npc, race_id, subtype_id, subsubtype_id);
     
     return npc;
 }
 
-model::Npc*
-NpcBuilder::create(race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
+control::Npc*
+Npc::__createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, int_t id)
 {
-    model::Npc* npc = createTemplate(subtype_id, subsubtype_id);
-    createInternals(npc, race_id, subtype_id, subsubtype_id);
-    
+    model::Npc* model = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
+    assert(false);
+    //control::Npc* npc = new control::Npc(model);
+    control::Npc* npc = new control::Npc(id, subtype_id, subsubtype_id);
+    assert(npc);
+
+    EntityManager::get().reg(npc);
+
     return npc;
 }
 
 void
-NpcBuilder::createInternals(model::Npc* npc, race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
+Npc::__createInternals(control::Npc* npc, race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id)
 {        
     //LifeData data_life;
     
@@ -122,8 +120,10 @@ NpcBuilder::createInternals(model::Npc* npc, race::Type race_id, entity::Type su
 //        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR));
     }
 
-    npc->skills().addExpirience(meti::getRandInt(10000, 100000));
-    while(npc->skills().availablePoints()) {
-        npc->skills().manageAccordingToStrategy();
+    npc->model()->skills().addExpirience(meti::getRandInt(10000, 100000));
+    while(npc->model()->skills().availablePoints()) {
+        npc->model()->skills().manageAccordingToStrategy();
     }
 }
+
+} // namespace builder

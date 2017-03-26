@@ -19,6 +19,7 @@
 
 #include "DroidBuilder.hpp"
 #include <core/model/item/equipment/Droid.hpp>
+#include <core/item/equipment/Droid.hpp>
 #include <core/descriptor/item/equipment/Droid.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -28,7 +29,7 @@
 namespace builder {
 namespace item {
 
-model::item::Droid*
+control::item::Droid*
 Droid::gen()
 {
     descriptor::item::Droid* descr = nullptr;
@@ -41,27 +42,28 @@ Droid::gen()
     return gen(descr);
 }
 
-model::item::Droid*
+control::item::Droid*
 Droid::gen(descriptor::item::Droid* descr)
 {
-    model::item::Droid* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Droid* droid = __genTemplate(descr->id());
+    __createInternals(droid, descr);
+    return droid;
 }  
 
-model::item::Droid*
+control::item::Droid*
 Droid::__genTemplate(int_t descriptor_id)
 {
     model::item::Droid* model = new model::item::Droid(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Droid* droid = new control::item::Droid(model);
+    EntityManager::get().reg(droid);
+    return droid;
 }
 
-void Droid::__createInternals(model::item::Droid* model, descriptor::item::Droid* descr)
+void Droid::__createInternals(control::item::Droid* droid, descriptor::item::Droid* descr)
 {     
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setRepair(descr->repair());
+    Item::_createInternals(droid, descr);
+    Equipment::_createInternals(droid, descr);
+    droid->model()->setRepair(descr->repair());
 }
 
 } // namespace item

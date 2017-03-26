@@ -84,154 +84,153 @@
 
 #include <gtest/gtest.h>
 
-namespace test {
+//namespace test {
 
-control::StarSystem*
-genStarSystem() {
-    model::StarSystem* model = builder::StarSystem::gen();
-    control::StarSystem* starsystem = new control::StarSystem(model);
-    assert(starsystem);
-    return starsystem;
-}
+//control::StarSystem*
+//genStarSystem() {
+//    control::StarSystem* starsystem = builder::StarSystem::gen();
+//    assert(starsystem);
+//    return starsystem;
+//}
 
-control::Star*
-genStar() {
-    model::Star* model = builder::Star::gen();
-    control::Star* star = new control::Star(model);
-    assert(star);
-    return star;
-}
+//control::Star*
+//genStar() {
+//    model::Star* model = builder::Star::gen();
+//    control::Star* star = new control::Star(model);
+//    assert(star);
+//    return star;
+//}
 
-control::Planet*
-genPlanet() {
-    model::Planet* model = builder::Planet::gen();
-    control::Planet* planet = new control::Planet(model);
-    assert(planet);
-    return planet;
-}
+//control::Planet*
+//genPlanet() {
+//    model::Planet* model = builder::Planet::gen();
+//    control::Planet* planet = new control::Planet(model);
+//    assert(planet);
+//    return planet;
+//}
 
-control::WormHole*
-genWormHole() {
-    model::WormHole* model = builder::WormHole::gen();
-    control::WormHole* wormhole = new control::WormHole(model);
-    assert(wormhole);
-    return wormhole;
-}
+//control::WormHole*
+//genWormHole() {
+//    model::WormHole* model = builder::WormHole::gen();
+//    control::WormHole* wormhole = new control::WormHole(model);
+//    assert(wormhole);
+//    return wormhole;
+//}
 
-control::Asteroid*
-genAsteroid() {
-    model::Asteroid* model = builder::Asteroid::gen();
-    control::Asteroid* asteroid = new control::Asteroid(model);
-    assert(asteroid);
-    return asteroid;
-}
+//control::Asteroid*
+//genAsteroid() {
+//    model::Asteroid* model = builder::Asteroid::gen();
+//    control::Asteroid* asteroid = new control::Asteroid(model);
+//    assert(asteroid);
+//    return asteroid;
+//}
 
-control::Container*
-genContainer() {
-    model::Container* model = builder::Container::gen();
-    control::Container* container = new control::Container(model);
-    assert(container);
-    return container;
-}
+//control::Container*
+//genContainer() {
+//    model::Container* model = builder::Container::gen();
+//    control::Container* container = new control::Container(model);
+//    assert(container);
+//    return container;
+//}
 
-control::SpaceStation*
-genSpaceStation() {
-    model::SpaceStation* model = builder::SpaceStation::gen();
-    control::SpaceStation* spacestation = new control::SpaceStation(model);
-    assert(spacestation);
-    return spacestation;
-}
+//control::SpaceStation*
+//genSpaceStation() {
+//    model::SpaceStation* model = builder::SpaceStation::gen();
+//    control::SpaceStation* spacestation = new control::SpaceStation(model);
+//    assert(spacestation);
+//    return spacestation;
+//}
 
-control::Ship*
-genShip() {
-    model::Ship* model = builder::Ship::gen();
-    control::Ship* ship = new control::Ship(model);
-    assert(ship);
-    return ship;
-}
+//control::Ship*
+//genShip() {
+//    model::Ship* model = builder::Ship::gen();
+//    control::Ship* ship = new control::Ship(model);
+//    assert(ship);
+//    return ship;
+//}
 
-control::Satellite*
-genSatellite() {
-    model::Satellite* model = builder::Satellite::gen();
-    control::Satellite* satellite = new control::Satellite(model);
-    assert(satellite);
-    return satellite;
-}
+//control::Satellite*
+//genSatellite() {
+//    model::Satellite* model = builder::Satellite::gen();
+//    control::Satellite* satellite = new control::Satellite(model);
+//    assert(satellite);
+//    return satellite;
+//}
 
-namespace item {
+//namespace item {
 
-control::item::Bak*
-genBak() {
-    model::item::Bak* model = builder::item::Bak::gen();
-    control::item::Bak* bak = new control::item::Bak(model);
-    assert(bak);
-    return bak;
-}
+//control::item::Bak*
+//genBak() {
+//    model::item::Bak* model = builder::item::Bak::gen();
+//    control::item::Bak* bak = new control::item::Bak(model);
+//    assert(bak);
+//    return bak;
+//}
 
-control::item::Drive*
-genDrive() {
-    model::item::Drive* model = builder::item::Drive::gen();
-    control::item::Drive* drive = new control::item::Drive(model);
-    assert(drive);
-    return drive;
-}
+//control::item::Drive*
+//genDrive() {
+//    model::item::Drive* model = builder::item::Drive::gen();
+//    control::item::Drive* drive = new control::item::Drive(model);
+//    assert(drive);
+//    return drive;
+//}
 
-control::item::Droid*
-genDroid() {
-    model::item::Droid* model = builder::item::Droid::gen();
-    control::item::Droid* droid = new control::item::Droid(model);
-    assert(droid);
-    return droid;
-}
+//control::item::Droid*
+//genDroid() {
+//    model::item::Droid* model = builder::item::Droid::gen();
+//    control::item::Droid* droid = new control::item::Droid(model);
+//    assert(droid);
+//    return droid;
+//}
 
-control::item::Grapple*
-genGrapple() {
-    model::item::Grapple* model = builder::item::Grapple::gen();
-    control::item::Grapple* grapple = new control::item::Grapple(model);
-    assert(grapple);
-    return grapple;
-}
+//control::item::Grapple*
+//genGrapple() {
+//    model::item::Grapple* model = builder::item::Grapple::gen();
+//    control::item::Grapple* grapple = new control::item::Grapple(model);
+//    assert(grapple);
+//    return grapple;
+//}
 
-control::item::Lazer*
-genLazer() {
-    model::item::Lazer* model = builder::item::Lazer::gen();
-    control::item::Lazer* lazer = new control::item::Lazer(model);
-    assert(lazer);
-    return lazer;
-}
+//control::item::Lazer*
+//genLazer() {
+//    model::item::Lazer* model = builder::item::Lazer::gen();
+//    control::item::Lazer* lazer = new control::item::Lazer(model);
+//    assert(lazer);
+//    return lazer;
+//}
 
-control::item::Protector*
-genProtector() {
-    model::item::Protector* model = builder::item::Protector::gen();
-    control::item::Protector* protector = new control::item::Protector(model);
-    assert(protector);
-    return protector;
-}
+//control::item::Protector*
+//genProtector() {
+//    model::item::Protector* model = builder::item::Protector::gen();
+//    control::item::Protector* protector = new control::item::Protector(model);
+//    assert(protector);
+//    return protector;
+//}
 
-control::item::Radar*
-genRadar() {
-    model::item::Radar* model = builder::item::Radar::gen();
-    control::item::Radar* radar = new control::item::Radar(model);
-    assert(radar);
-    return radar;
-}
+//control::item::Radar*
+//genRadar() {
+//    model::item::Radar* model = builder::item::Radar::gen();
+//    control::item::Radar* radar = new control::item::Radar(model);
+//    assert(radar);
+//    return radar;
+//}
 
-control::item::Rocket*
-genRocket() {
-    model::item::Rocket* model = builder::item::Rocket::gen();
-    control::item::Rocket* rocket = new control::item::Rocket(model);
-    assert(rocket);
-    return rocket;
-}
+//control::item::Rocket*
+//genRocket() {
+//    model::item::Rocket* model = builder::item::Rocket::gen();
+//    control::item::Rocket* rocket = new control::item::Rocket(model);
+//    assert(rocket);
+//    return rocket;
+//}
 
-control::item::Scaner*
-genScaner() {
-    model::item::Scaner* model = builder::item::Scaner::gen();
-    control::item::Scaner* scaner = new control::item::Scaner(model);
-    assert(scaner);
-    return scaner;
-}
+//control::item::Scaner*
+//genScaner() {
+//    model::item::Scaner* model = builder::item::Scaner::gen();
+//    control::item::Scaner* scaner = new control::item::Scaner(model);
+//    assert(scaner);
+//    return scaner;
+//}
 
-} // namespace item
+//} // namespace item
 
-} // namespace test
+//} // namespace test

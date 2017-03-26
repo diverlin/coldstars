@@ -31,11 +31,11 @@ class Grapple;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Grapple;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Grapple : public Equipment
 {
 public:
-    static model::item::Grapple* gen();
-    static model::item::Grapple* gen(descriptor::item::Grapple*);
+    static control::item::Grapple* gen();
+    static control::item::Grapple* gen(descriptor::item::Grapple*);
 
 private:
     Grapple() = delete;
     ~Grapple() = delete;
 
-    static model::item::Grapple* __genTemplate(int_t);
-    static void __createInternals(model::item::Grapple*, descriptor::item::Grapple*);
+    static control::item::Grapple* __genTemplate(int_t);
+    static void __createInternals(control::item::Grapple*, descriptor::item::Grapple*);
 }; 
 
 } // namespace item

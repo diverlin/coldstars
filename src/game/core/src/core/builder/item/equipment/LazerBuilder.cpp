@@ -18,6 +18,7 @@
 
 #include "LazerBuilder.hpp"
 #include <core/model/item/equipment/Lazer.hpp>
+#include <core/item/equipment/Lazer.hpp>
 #include <core/descriptor/item/equipment/Lazer.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
@@ -27,7 +28,7 @@
 namespace builder {
 namespace item {
 
-model::item::Lazer*
+control::item::Lazer*
 Lazer::gen()
 {
     descriptor::item::Lazer* descr = nullptr;
@@ -40,29 +41,30 @@ Lazer::gen()
     return gen(descr);
 }
 
-model::item::Lazer*
+control::item::Lazer*
 Lazer::gen(descriptor::item::Lazer* descr)
 {
-    model::item::Lazer* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Lazer* lazer = __genTemplate(descr->id());
+    __createInternals(lazer, descr);
+    return lazer;
 }
 
-model::item::Lazer*
+control::item::Lazer*
 Lazer::__genTemplate(int_t descriptor_id)
 { 
     model::item::Lazer* model = new model::item::Lazer(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Lazer* lazer = new control::item::Lazer(model);
+    EntityManager::get().reg(lazer);
+    return lazer;
 } 
 
 void
-Lazer::__createInternals(model::item::Lazer* model, descriptor::item::Lazer* descr)
+Lazer::__createInternals(control::item::Lazer* lazer, descriptor::item::Lazer* descr)
 {     
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setDamage(descr->damage());
-    model->setRadius(descr->radius());
+    Item::_createInternals(lazer, descr);
+    Equipment::_createInternals(lazer, descr);
+    lazer->model()->setDamage(descr->damage());
+    lazer->model()->setRadius(descr->radius());
 
 //    if (race_id == race::type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));

@@ -140,7 +140,7 @@ public:
     //// TRANSITION
     void add(model::SpaceStation*);
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-    void add(model::Ship*);
+//    void add(model::Ship*);
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
     void add(model::Satellite*);
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
@@ -152,8 +152,13 @@ public:
     void add(model::Planet*);
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
+    void add(Asteroid*, SpaceObject* parent = nullptr, int it = 0);
     void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
+    void add(Container*);
+    void add(Container*, const glm::vec3&);
     void add(model::WormHole*, const glm::vec3&);
+    void add(WormHole*);
+    void add(WormHole*, const glm::vec3&);
 
     void add(Explosion*, const glm::vec3&);
 

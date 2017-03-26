@@ -134,31 +134,29 @@ void MessageManager::process(const comm::Message& message)
         /** STARSYSTEM ADD */
     case comm::Message::Type::STARSYSTEM_ADD_SHIP: {
         AddToStarsystemDescriptor descriptor(message.data());
-        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
-        model::Ship* ship = EntityManager::get().ship(descriptor.object);
-        assert(false);
-        //        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
+        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+        control::Ship* ship = EntityManager::get().ship(descriptor.object);
+        starsystem->add(ship);
         break;
     }
     case comm::Message::Type::STARSYSTEM_ADD_CONTAINER: {
         AddToStarsystemDescriptor descriptor(message.data());
-        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
-        model::Container* container = EntityManager::get().container(descriptor.object);
+        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+        control::Container* container = EntityManager::get().container(descriptor.object);
         assert(false);
-        //        starsystem->add(container, descriptor.position);
+        //starsystem->add(container);
         break;
     }
         /** OTHER */
     case comm::Message::Type::HIT: {
         descriptor::Hit descr(message.data());
-        model::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
-        assert(false);
-        //ob->hit(descr.damage());
+        control::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
+        ob->hit(descr.damage());
         break;
     }
     case comm::Message::Type::EXPLOSION: {
         descriptor::Explosion descriptor(message.data());
-        model::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
+        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
         Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
         assert(false);
         //        starsystem->add(explosion, descriptor.center);

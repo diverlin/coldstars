@@ -26,6 +26,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 #include <core/model/spaceobject/Container.hpp>
+#include <core/spaceobject/Container.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -37,7 +38,7 @@
 
 namespace builder {
 
-model::Container*
+control::Container*
 Container::gen()
 {
     descriptor::Container* descr = nullptr;
@@ -50,27 +51,24 @@ Container::gen()
     return gen(descr);
 }
 
-//model::Container*
-//Container::gen(const std::string& data)
-//{
-//    return gen(descriptor::Container(data));
-//}
-
-model::Container*
+control::Container*
 Container::gen(descriptor::Container* descr)
 {
-    model::Container* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::Container* container = __genTemplate(descr->id());
+    __createInternals(container, descr);
+    return container;
 }
 
-model::Container*
+control::Container*
 Container::__genTemplate(int_t descriptor_id)
 {
     model::Container* model = new model::Container(descriptor_id);
+    control::Container* container = new control::Container(model);
     assert(model);
-    EntityManager::get().reg(model);
-    return model;
+    assert(container);
+
+    EntityManager::get().reg(container);
+    return container;
 }
 
 //Container*
@@ -147,13 +145,13 @@ Container::__genTemplate(int_t descriptor_id)
 //}
 
 void
-Container::__createInternals(model::Container* container, descriptor::Container* desr)
+Container::__createInternals(control::Container* container, descriptor::Container* desr)
 {
     LifeData data_life;
     data_life.armor = 1;
     data_life.dying_time = 30;
 
-    container->setLifeData(data_life);
+    container->model()->setLifeData(data_life);
 }
 
 } // namespace builder

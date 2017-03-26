@@ -22,17 +22,16 @@ namespace descriptor {
 class Item;
 } // namespace descriptor
 
-namespace model {
+namespace control {
 class Item;
-} // namespace model
-
+} // namespace control
 
 namespace builder {
 
 class Item
 {
 protected:
-    static void _createInternals(model::Item*, descriptor::Item*);
+    static void _createInternals(control::Item*, descriptor::Item*);
 
 private:
     Item() = delete;

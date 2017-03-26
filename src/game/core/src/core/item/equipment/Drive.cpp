@@ -31,11 +31,11 @@
 namespace control {
 namespace item {
 
-Drive::Drive(model::item::Drive* model)
+Drive::Drive(model::item::Drive* model, descriptor::item::Drive* descr)
     :
-      Equipment(model, descriptor::Manager::get().drive(model->descriptor()))
+      Equipment(model, descr)
     , m_model_drive(model)
-    , m_descriptor_drive(descriptor::Manager::get().drive(model->descriptor()))
+    , m_descriptor_drive(descr)
 {
 
 }

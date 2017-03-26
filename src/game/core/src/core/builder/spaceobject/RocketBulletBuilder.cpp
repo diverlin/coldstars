@@ -23,42 +23,40 @@
 
 namespace builder {
 
-Rocket::Rocket()
-{}
-
-Rocket::~Rocket()
-{}
-
-model::RocketBullet*
-Rocket::__genTemplate(int_t id) const
+control::RocketBullet*
+Rocket::gen(const BulletData& data_bullet)
 {
-    model::RocketBullet* rocket_bullet = new model::RocketBullet;
-    assert(rocket_bullet);
-
-    EntityManager::get().reg(rocket_bullet);
-    
-    return rocket_bullet;
-}
-
-model::RocketBullet*
-Rocket::gen(const BulletData& data_bullet) const
-{
-    model::RocketBullet* rocket_bullet = __genTemplate();
+    control::RocketBullet* rocket_bullet = __genTemplate();
     createInternals(rocket_bullet, data_bullet);
 
     return rocket_bullet;
 }
 
-void Rocket::createInternals(model::RocketBullet* rocket_bullet, const BulletData& data_bullet) const
+control::RocketBullet*
+Rocket::__genTemplate(int_t id)
+{
+    model::RocketBullet* model = new model::RocketBullet;
+    descriptor::RocketBullet* descr = nullptr;
+    assert(descr);
+    control::RocketBullet* rocket_bullet = new control::RocketBullet(model, descr);
+    assert(rocket_bullet);
+
+    EntityManager::get().reg(rocket_bullet);
+
+    return rocket_bullet;
+}
+
+void
+Rocket::createInternals(control::RocketBullet* rocket_bullet, const BulletData& data_bullet)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 
     LifeData data_life;
     data_life.armor = data_bullet.armor;
 
-    rocket_bullet->setBulletData(data_bullet);
+    rocket_bullet->model()->setBulletData(data_bullet);
     
-    rocket_bullet->setLifeData(data_life);
+    rocket_bullet->model()->setLifeData(data_life);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET);
     //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->size());
 

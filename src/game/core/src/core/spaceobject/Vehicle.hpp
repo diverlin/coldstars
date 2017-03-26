@@ -307,7 +307,7 @@ private:
 //    void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(Item*);
 
-    model::Container* __wrapItemToContainer(Item*);
+    Container* __wrapItemToContainer(Item*);
     bool _checkInstallEquipment(const core::Id&);
 
     std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);

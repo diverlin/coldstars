@@ -25,20 +25,20 @@ namespace descriptor {
 class Planet;
 } // namespace descriptor
 
-namespace model {
+namespace control {
 class Planet;
-} // namespace model
+} // namespace control
 
 namespace builder {
 
 class Planet
 {
 public:
-    static model::Planet* gen();
-    static model::Planet* gen(descriptor::Planet*);
+    static control::Planet* gen();
+    static control::Planet* gen(descriptor::Planet*);
 
 private:
-    static model::Planet* __genTemplate(int_t);
+    static control::Planet* __genTemplate(int_t);
 }; 
 
 } // namespace builder

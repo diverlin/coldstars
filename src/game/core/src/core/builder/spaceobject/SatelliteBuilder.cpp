@@ -19,6 +19,7 @@
 #include "SatelliteBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/Satellite.hpp>
+#include <core/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -28,26 +29,28 @@
 
 namespace builder {
 
-model::Satellite*
+control::Satellite*
 Satellite::__genTemplate(int_t descriptor_id)
 {
     model::Satellite* model = new model::Satellite(descriptor_id);
     assert(model);
+    control::Satellite* satellite = new control::Satellite(model);
+    assert(satellite);
 
-    EntityManager::get().reg(model);
+    EntityManager::get().reg(satellite);
     
-    return model;
+    return satellite;
 }
 
-model::Satellite*
+control::Satellite*
 Satellite::gen(descriptor::Satellite* descr)
 {
-    model::Satellite* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::Satellite* satellite = __genTemplate(descr->id());
+    __createInternals(satellite, descr);
+    return satellite;
 }
 
-model::Satellite*
+control::Satellite*
 Satellite::gen()
 {
     descriptor::Satellite* descr = nullptr;
@@ -60,7 +63,7 @@ Satellite::gen()
     return gen(descr);
 }
 
-void Satellite::__createInternals(model::Satellite* model, descriptor::Satellite* descr)
+void Satellite::__createInternals(control::Satellite* satellite, descriptor::Satellite* descr)
 {
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 //    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE);
