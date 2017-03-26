@@ -17,6 +17,7 @@
 */
 
 #include <core/model/spaceobject/Star.hpp>
+#include <core/spaceobject/Star.hpp>
 
 #include <core/builder/spaceobject/StarBuilder.hpp>
 
@@ -29,7 +30,7 @@
 TEST(creation, star)
 {
     descriptor::Star* descr = descriptor::Manager::get().randStar();
-    model::Star* model = builder::Star::gen(descr);
+    control::Star* star = builder::Star::gen(descr);
 
-    EXPECT_EQ(descr->armor(), model->armor());
+    EXPECT_EQ(descr->armor(), star->model()->armor());
 }

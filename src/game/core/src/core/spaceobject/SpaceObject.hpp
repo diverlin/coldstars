@@ -101,11 +101,9 @@ private:
 
 } // namespace model
 
-namespace model {
-class StarSystem;
-} // namespace model
-
 namespace control {
+
+class StarSystem;
 
 class SpaceObject : public ceti::control::Orientation, public control::Base
 {
@@ -113,13 +111,10 @@ public:
     SpaceObject(model::SpaceObject*, descriptor::SpaceObject*);
     ~SpaceObject() override;
 
-    //[[warning("make const, speed optimize")]]
-    model::StarSystem* starsystem() const  { return m_starsystem; }
+    StarSystem* starsystem() const  { return m_starsystem; }
+    SpaceObject* parent() const { return m_parent; }
 
-    void setStarSystem(model::StarSystem* starsystem) { m_starsystem = starsystem; }
-
-    //[[warning("make const, speed optimize")]]
-    model::SpaceObject* parent() const { return m_parent; }
+    void setStarSystem(StarSystem* starsystem) { m_starsystem = starsystem; }
 
     void addImpulse(const glm::vec3&, float);
 
@@ -140,8 +135,8 @@ public:
     model::SpaceObject* model() const { return m_model_spaceobject; }
 
 private:
-    model::StarSystem* m_starsystem = nullptr;
-    model::SpaceObject* m_parent = nullptr;
+    StarSystem* m_starsystem = nullptr;
+    SpaceObject* m_parent = nullptr;
     int m_mass = 0;
 
 protected:

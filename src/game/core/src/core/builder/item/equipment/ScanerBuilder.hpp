@@ -31,11 +31,11 @@ class Scaner;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Scaner;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Scaner : public Equipment
 {
 public:
-    static model::item::Scaner* gen();
-    static model::item::Scaner* gen(descriptor::item::Scaner*);
+    static control::item::Scaner* gen();
+    static control::item::Scaner* gen(descriptor::item::Scaner*);
 
 private:
     Scaner() = delete;
     ~Scaner() = delete;
 
-    static model::item::Scaner* __genTemplate(int_t);
-    static void __createInternals(model::item::Scaner*, descriptor::item::Scaner*);
+    static control::item::Scaner* __genTemplate(int_t);
+    static void __createInternals(control::item::Scaner*, descriptor::item::Scaner*);
 }; 
 
 } // namespace item

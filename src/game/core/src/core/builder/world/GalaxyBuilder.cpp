@@ -31,10 +31,13 @@
 
 namespace builder {
 
-model::Galaxy*
+control::Galaxy*
 Galaxy::__genTemplate()
 {
-    model::Galaxy* galaxy = new model::Galaxy;
+    model::Galaxy* model = new model::Galaxy;
+    assert(model);
+
+    control::Galaxy* galaxy = new control::Galaxy(model);
     assert(galaxy);
 
     EntityManager::get().reg(galaxy);
@@ -42,15 +45,15 @@ Galaxy::__genTemplate()
     return galaxy;
 } 
 
-model::Galaxy*
+control::Galaxy*
 Galaxy::create(descriptor::Galaxy* descr)
 {
-    model::Galaxy* model = __genTemplate();
-    __createInternals(model, descr);
-    return model;
+    control::Galaxy* galaxy = __genTemplate();
+    __createInternals(galaxy, descr);
+    return galaxy;
 } 
 
-void Galaxy::__createInternals(model::Galaxy* model, descriptor::Galaxy* descr)
+void Galaxy::__createInternals(control::Galaxy* model, descriptor::Galaxy* descr)
 {     
     assert(false);
     //    for(const auto& id: descriptor.sectors) {

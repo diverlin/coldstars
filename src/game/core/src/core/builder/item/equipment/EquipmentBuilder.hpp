@@ -24,9 +24,9 @@ namespace descriptor {
 class Equipment;
 } // namespace descriptor
 
-namespace model {
+namespace control {
 class Equipment;
-} // namespace model
+} // namespace control
 
 
 namespace builder {
@@ -34,7 +34,7 @@ namespace builder {
 class Equipment : public Item
 {
 protected:
-    static void _createInternals(model::Equipment*, descriptor::Equipment*);
+    static void _createInternals(control::Equipment*, descriptor::Equipment*);
 
 private:
     Equipment() = delete;

@@ -19,6 +19,7 @@
 
 #include "BakBuilder.hpp"
 #include <core/model/item/equipment/Bak.hpp>
+#include <core/item/equipment/Bak.hpp>
 #include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
@@ -28,24 +29,24 @@
 namespace builder {
 namespace item {
 
-model::item::Bak*
+control::item::Bak*
 Bak::gen(descriptor::item::Bak* descr)
 {
-    model::item::Bak* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Bak* bak = __genTemplate(descr->id());
+    __createInternals(bak, descr);
+    return bak;
 }
 
-model::item::Bak*
+control::item::Bak*
 Bak::gen(int_t descriptor_id, int_t ob_id)
 {
-    model::item::Bak* model = __genTemplate(descriptor_id, ob_id);
+    control::item::Bak* bak = __genTemplate(descriptor_id, ob_id);
     descriptor::item::Bak* descr = descriptor::Manager::get().bak(descriptor_id);
-    __createInternals(model, descr);
-    return model;
+    __createInternals(bak, descr);
+    return bak;
 }
 
-model::item::Bak*
+control::item::Bak*
 Bak::gen()
 {
     descriptor::item::Bak* descr = nullptr;
@@ -59,20 +60,21 @@ Bak::gen()
 }
 
 
-model::item::Bak*
+control::item::Bak*
 Bak::__genTemplate(int_t descriptor_id, int_t ob_id)
 {
     model::item::Bak* model = new model::item::Bak(descriptor_id, ob_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Bak* bak = new control::item::Bak(model);
+    EntityManager::get().reg(bak);
+    return bak;
 }
 
 void
-Bak::__createInternals(model::item::Bak* model, descriptor::item::Bak* descr)
+Bak::__createInternals(control::item::Bak* bak, descriptor::item::Bak* descr)
 {
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setFuel(descr->fuel());
+    Item::_createInternals(bak, descr);
+    Equipment::_createInternals(bak, descr);
+    bak->model()->setFuel(descr->fuel());
 }
 
 } // namespace item

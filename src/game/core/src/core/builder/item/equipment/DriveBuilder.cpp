@@ -18,6 +18,7 @@
 
 #include "DriveBuilder.hpp"
 #include <core/model/item/equipment/Drive.hpp>
+#include <core/item/equipment/Drive.hpp>
 #include <core/descriptor/item/equipment/Drive.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
@@ -27,7 +28,7 @@
 namespace builder {
 namespace item {
 
-model::item::Drive*
+control::item::Drive*
 Drive::gen()
 {
     descriptor::item::Drive* descr = nullptr;
@@ -40,28 +41,29 @@ Drive::gen()
     return gen(descr);
 }
 
-model::item::Drive*
+control::item::Drive*
 Drive::gen(descriptor::item::Drive* descr)
 {
-    model::item::Drive* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Drive* drive = __genTemplate(descr);
+    __createInternals(drive, descr);
+    return drive;
 }        
 
-model::item::Drive*
-Drive::__genTemplate(int_t descriptor_id)
+control::item::Drive*
+Drive::__genTemplate(descriptor::item::Drive* descr)
 {
-    model::item::Drive* model = new model::item::Drive(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    model::item::Drive* model = new model::item::Drive(descr->id());
+    control::item::Drive* drive = new control::item::Drive(model, descr);
+    EntityManager::get().reg(drive);
+    return drive;
 }
 
-void Drive::__createInternals(model::item::Drive* model, descriptor::item::Drive* descr)
+void Drive::__createInternals(control::item::Drive* drive, descriptor::item::Drive* descr)
 {
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setSpeed(descr->speed());
-    model->setHyper(descr->hyper());
+    Item::_createInternals(drive, descr);
+    Equipment::_createInternals(drive, descr);
+    drive->model()->setSpeed(descr->speed());
+    drive->model()->setHyper(descr->hyper());
 }
 
 } // namespace item

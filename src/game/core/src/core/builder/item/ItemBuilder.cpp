@@ -19,14 +19,16 @@
 
 #include "ItemBuilder.hpp"
 
-#include <model/item/Item.hpp>
+#include <core/item/Item.hpp>
+#include <core/model/item/Item.hpp>
+
 #include <descriptor/item/Item.hpp>
 
 namespace builder {
 
-void Item::_createInternals(model::Item* model, descriptor::Item* descr)
+void Item::_createInternals(control::Item* item, descriptor::Item* descr)
 {
-    model->setCondition(descr->condition());
+    item->model()->setCondition(descr->condition());
 }
 
 } // namespace builder

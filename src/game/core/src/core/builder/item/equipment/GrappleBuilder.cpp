@@ -19,6 +19,7 @@
 
 #include "GrappleBuilder.hpp"
 #include <core/model/item/equipment/Grapple.hpp>
+#include <core/item/equipment/Grapple.hpp>
 #include <core/descriptor/item/equipment/Grapple.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -28,7 +29,7 @@
 namespace builder {
 namespace item {
 
-model::item::Grapple*
+control::item::Grapple*
 Grapple::gen()
 {
     descriptor::item::Grapple* descr = nullptr;
@@ -41,30 +42,31 @@ Grapple::gen()
     return gen(descr);
 }
 
-model::item::Grapple*
+control::item::Grapple*
 Grapple::gen(descriptor::item::Grapple* descr)
 {
-    model::item::Grapple* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Grapple* grapple = __genTemplate(descr->id());
+    __createInternals(grapple, descr);
+    return grapple;
 } 
 
-model::item::Grapple*
+control::item::Grapple*
 Grapple::__genTemplate(int_t descriptor_id)
 {
     model::item::Grapple* model = new model::item::Grapple(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Grapple* grapple = new control::item::Grapple(model);
+    EntityManager::get().reg(grapple);
+    return grapple;
 }
 
 void
-Grapple::__createInternals(model::item::Grapple* model, descriptor::item::Grapple* descr)
+Grapple::__createInternals(control::item::Grapple* grapple, descriptor::item::Grapple* descr)
 {
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setStrength(descr->strength());
-    model->setRadius(descr->radius());
-    model->setSpeed(descr->speed());
+    Item::_createInternals(grapple, descr);
+    Equipment::_createInternals(grapple, descr);
+    grapple->model()->setStrength(descr->strength());
+    grapple->model()->setRadius(descr->radius());
+    grapple->model()->setSpeed(descr->speed());
 }
 
 } // namespace item

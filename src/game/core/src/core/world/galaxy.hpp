@@ -91,9 +91,10 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
+    model::Galaxy* model() const { return m_model_galaxy; }
+
 private:
     model::Galaxy* m_model_galaxy = nullptr;
-    model::Galaxy* model() const { return m_model_galaxy; }
     std::vector<control::Sector*> m_sectors;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

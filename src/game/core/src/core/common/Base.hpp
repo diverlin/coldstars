@@ -78,7 +78,11 @@ public:
     Base(model::Base*);
     virtual ~Base();
 
+    void setId(int_t id) { m_model_base->setId(id); }
     void setActualizeModel() { m_actualizeModel = true; }
+
+    int_t id() { return model()->id(); }
+    int_t descriptor() { return model()->descriptor(); }
 
     bool actualizeModel() const { return m_actualizeModel; }
 

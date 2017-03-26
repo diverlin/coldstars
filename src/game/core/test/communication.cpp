@@ -61,8 +61,8 @@ TEST(communication, create_starsystem)
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_STARSYSTEM, creation.data()));
 
-    model::StarSystem* starsystem = EntityManager::get().starsystem(ob_id);
-    EXPECT_EQ(descriptor->id(), starsystem->descriptor());
+    control::StarSystem* starsystem = EntityManager::get().starsystem(ob_id);
+    EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
 }
 
 TEST(communication, create_ship)
@@ -74,8 +74,8 @@ TEST(communication, create_ship)
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_SHIP, creation.data()));
 
-    model::Ship* ship = EntityManager::get().ship(ob_id);
-    EXPECT_EQ(descriptor->id(), ship->descriptor());
+    control::Ship* ship = EntityManager::get().ship(ob_id);
+    EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
 }
 
 TEST(communication, create_bak)
@@ -87,8 +87,8 @@ TEST(communication, create_bak)
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_BAK, creation.data()));
 
-    model::item::Bak* bak = EntityManager::get().bak(ob_id);
-    EXPECT_EQ(descriptor->id(), bak->descriptor());
+    control::item::Bak* bak = EntityManager::get().bak(ob_id);
+    EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
 }
 
 TEST(communication, inject_ship)

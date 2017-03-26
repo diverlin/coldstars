@@ -17,60 +17,60 @@
 */
 #pragma once
 
-#include <vector>
+//#include <vector>
 
-namespace control {
-class StarSystem;
+//namespace control {
+//class StarSystem;
 
-class Star;
-class Planet;
-class WormHole;
-class Asteroid;
-class Container;
-class SpaceStation;
-class Ship;
-class Satellite;
+//class Star;
+//class Planet;
+//class WormHole;
+//class Asteroid;
+//class Container;
+//class SpaceStation;
+//class Ship;
+//class Satellite;
 
-namespace item {
-class Bak;
-class Drive;
-class Droid;
-class Grapple;
-class Lazer;
-class Protector;
-class Radar;
-class Rocket;
-class Scaner;
-} // namespace item
+//namespace item {
+//class Bak;
+//class Drive;
+//class Droid;
+//class Grapple;
+//class Lazer;
+//class Protector;
+//class Radar;
+//class Rocket;
+//class Scaner;
+//} // namespace item
 
-} // namespce control
+//} // namespce control
 
 
-namespace test {
+//namespace test {
 
-control::StarSystem* genStarSystem();
-control::Star* genStar();
-control::Planet* genPlanet();
-control::WormHole* genWormHole();
-control::Asteroid* genAsteroid();
-control::Container* genContainer();
-control::SpaceStation* genSpaceStation();
-control::Ship* genShip();
-control::Satellite* genSatellite();
+//control::StarSystem* genStarSystem();
+//control::Star* genStar();
+//control::Planet* genPlanet();
+//control::WormHole* genWormHole();
+//control::Asteroid* genAsteroid();
+//control::Container* genContainer();
+//control::SpaceStation* genSpaceStation();
+//control::Ship* genShip();
+//control::Satellite* genSatellite();
 
-namespace item {
+//namespace item {
 
-control::item::Bak* genBak();
-control::item::Drive* genDrive();
-control::item::Droid* genDroid();
-control::item::Grapple* genGrapple();
-control::item::Lazer* genLazer();
-control::item::Protector* genProtector();
-control::item::Radar* genRadar();
-control::item::Rocket* genRocket();
-control::item::Scaner* genScaner();
+//control::item::Bak* genBak();
+//control::item::Drive* genDrive();
+//control::item::Droid* genDroid();
+//control::item::Grapple* genGrapple();
+//control::item::Lazer* genLazer();
+//control::item::Protector* genProtector();
+//control::item::Radar* genRadar();
+//control::item::Rocket* genRocket();
+//control::item::Scaner* genScaner();
 
-} // namespace item
+//} // namespace item
 
-} // namespace test
+//} // namespace test
 

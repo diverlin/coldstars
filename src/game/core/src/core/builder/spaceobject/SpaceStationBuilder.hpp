@@ -28,7 +28,7 @@ namespace descriptor {
 class SpaceStation;
 } // namespace descriptor
 
-namespace model {
+namespace control {
 class SpaceStation;
 } // namespace model
 
@@ -49,15 +49,15 @@ namespace builder {
 class SpaceStation : public BaseVehicle
 {
 public:
-    static model::SpaceStation* gen();
-    static model::SpaceStation* gen(descriptor::SpaceStation*);
+    static control::SpaceStation* gen();
+    static control::SpaceStation* gen(descriptor::SpaceStation*);
 
 private:
     SpaceStation() = default;
     ~SpaceStation() = default;
 
-    static void __createInternals(model::SpaceStation*, descriptor::SpaceStation*);
-    static model::SpaceStation* __genTemplate(int_t);
+    static void __createInternals(control::SpaceStation*, descriptor::SpaceStation*);
+    static control::SpaceStation* __genTemplate(int_t);
 }; 
 
 } // namespace builder

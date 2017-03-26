@@ -46,7 +46,7 @@ public:
     void bindItemSlot(ItemSlot*);
 
     ItemSlot* const itemSlot() const { return m_itemSlot; }
-    bool insertItem(Item*);
+    bool insert(Item*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 

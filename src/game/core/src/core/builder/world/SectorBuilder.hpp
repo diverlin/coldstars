@@ -19,27 +19,27 @@
 
 #pragma once
 
-namespace model {
-class Sector;
-} // namespace model
-
 namespace descriptor {
 class Sector;
 } // namespace descriptor
+
+namespace control {
+class Sector;
+} // namespace control
 
 namespace builder {
 
 class Sector
 {
 public:
-    static model::Sector* create(descriptor::Sector*);
+    static control::Sector* create(descriptor::Sector*);
     
 private:
     Sector()=delete;
     ~Sector()=delete;
 
-    static void __createInternals(model::Sector*, descriptor::Sector*);
-    static model::Sector* __genTemplate();
+    static void __createInternals(control::Sector*, descriptor::Sector*);
+    static control::Sector* __genTemplate();
 }; 
 
 } // namespace builder

@@ -42,24 +42,24 @@
 
 namespace builder {
 
-model::StarSystem*
+control::StarSystem*
 StarSystem::gen(descriptor::StarSystem* descr)
 {
-    model::StarSystem* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::StarSystem* starsystem = __genTemplate(descr->id());
+    __createInternals(starsystem, descr);
+    return starsystem;
 } 
 
-model::StarSystem*
+control::StarSystem*
 StarSystem::gen(int_t descriptor_id, int_t ob_id)
 {
-    model::StarSystem* model = __genTemplate(descriptor_id, ob_id);
+    control::StarSystem* starsystem = __genTemplate(descriptor_id, ob_id);
     descriptor::StarSystem* descr = descriptor::Manager::get().starSystem(descriptor_id);
-    __createInternals(model, descr);
-    return model;
+    __createInternals(starsystem, descr);
+    return starsystem;
 }
 
-model::StarSystem*
+control::StarSystem*
 StarSystem::gen()
 {
     descriptor::StarSystem* descr = nullptr;
@@ -72,18 +72,22 @@ StarSystem::gen()
     return gen(descr);
 }
 
-model::StarSystem*
+control::StarSystem*
 StarSystem::__genTemplate(int_t descriptor_id, int_t ob_id)
 {
     model::StarSystem* model = new model::StarSystem(descriptor_id, ob_id);
-    EntityManager::get().reg(model);
-    return model;
+    assert(model);
+
+    control::StarSystem* starsystem = new control::StarSystem(model);
+    assert(starsystem);
+
+    EntityManager::get().reg(starsystem);
+    return starsystem;
 }
 
 
-void StarSystem::__createInternals(model::StarSystem* model, descriptor::StarSystem* descr)
+void StarSystem::__createInternals(control::StarSystem* starsystem, descriptor::StarSystem* descr)
 {
-    control::StarSystem starsystem(model);
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     //__createStar(starsystem);
     
@@ -108,7 +112,7 @@ void StarSystem::__createBackground(control::StarSystem& starsystem, int distNeb
 
 void StarSystem::__createStar(control::StarSystem& starsystem)
 {
-    model::Star* model_star = builder::Star::gen();
+    control::Star* model_star = builder::Star::gen();
     starsystem.add(model_star);
     //alpitodorender starsystem->SetColor(star->color());
 }
@@ -117,7 +121,7 @@ void StarSystem::__createPlanets(control::StarSystem& starsystem, int planet_per
 {
     //int orbit_radius = meti::getRandInt(2 * model::Planet::DISTANCE_MIN, 2 * model::Planet::DISTANCE_MAX);
     for(int i=0; i<planet_per_system; i++) {
-        model::Planet* planet = builder::Planet::gen();
+        control::Planet* planet = builder::Planet::gen();
         starsystem.add(planet);
         //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }

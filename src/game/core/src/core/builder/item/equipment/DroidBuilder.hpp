@@ -31,11 +31,11 @@ class Droid;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Droid;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Droid : public Equipment
 {
 public:
-    static model::item::Droid* gen();
-    static model::item::Droid* gen(descriptor::item::Droid*);
+    static control::item::Droid* gen();
+    static control::item::Droid* gen(descriptor::item::Droid*);
 
 private:
     Droid() = delete;
     ~Droid() = delete;
 
-    static model::item::Droid* __genTemplate(int_t);
-    static void __createInternals(model::item::Droid*, descriptor::item::Droid*);
+    static control::item::Droid* __genTemplate(int_t);
+    static void __createInternals(control::item::Droid*, descriptor::item::Droid*);
 }; 
 
 } // namespace item

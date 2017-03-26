@@ -31,11 +31,11 @@ class Lazer;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Lazer;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Lazer : public Equipment
 {
 public:
-    static model::item::Lazer* gen();
-    static model::item::Lazer* gen(descriptor::item::Lazer*);
+    static control::item::Lazer* gen();
+    static control::item::Lazer* gen(descriptor::item::Lazer*);
 
 private:
     Lazer() = delete;
     ~Lazer() = delete;
 
-    static model::item::Lazer* __genTemplate(int_t);
-    static void __createInternals(model::item::Lazer*, descriptor::item::Lazer*);
+    static control::item::Lazer* __genTemplate(int_t);
+    static void __createInternals(control::item::Lazer*, descriptor::item::Lazer*);
 }; 
 
 } // namespace item

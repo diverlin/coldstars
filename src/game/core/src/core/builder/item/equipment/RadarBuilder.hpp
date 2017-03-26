@@ -31,11 +31,11 @@ class Radar;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Radar;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Radar : public Equipment
 {
 public:
-    static model::item::Radar* gen();
-    static model::item::Radar* gen(descriptor::item::Radar*);
+    static control::item::Radar* gen();
+    static control::item::Radar* gen(descriptor::item::Radar*);
 
 private:
     Radar() = delete;
     ~Radar() = delete;
 
-    static model::item::Radar* __genTemplate(int_t);
-    static void __createInternals(model::item::Radar*, descriptor::item::Radar*);
+    static control::item::Radar* __genTemplate(int_t);
+    static void __createInternals(control::item::Radar*, descriptor::item::Radar*);
 }; 
 
 } // namespace item

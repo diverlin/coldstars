@@ -140,19 +140,19 @@ EntityManager::clear()
 //    m_entities_map.insert(std::make_pair(entity->id(), entity));
 //}
 
-void EntityManager::reg(model::Base* model)
+void EntityManager::reg(control::Base* control)
 {
-    assert(model);
-    if (model->id() == NONE) {
-        model->setId(m_idGenerator.nextId());
+    assert(control);
+    if (control->id() == NONE) {
+        control->setId(m_idGenerator.nextId());
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_models.find(model->id()) != m_models.end()) {
-        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(model->id()) + " which already exists, descriptor = " + std::to_string(model->descriptor()));
+    if (m_models.find(control->id()) != m_models.end()) {
+        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(control->id()) + " which already exists, descriptor = " + std::to_string(control->descriptor()));
     }
 
-    m_models.insert(std::make_pair(model->id(), model));
+    m_models.insert(std::make_pair(control->id(), control));
 }
 
 //core::Base* EntityManager::getEntity(int_t id) const
@@ -164,161 +164,161 @@ void EntityManager::reg(model::Base* model)
 //    return slice->second;
 //}
 
-model::Base*
+control::Base*
 EntityManager::get(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, model::Base*>::const_iterator it = m_models.find(id);
+    std::map<int_t, control::Base*>::const_iterator it = m_models.find(id);
     assert(it->second);
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return it->second;
 }
 
-model::Item*
+control::Item*
 EntityManager::getItemBase(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, model::Base*>::const_iterator it = m_models.find(id);
+    std::map<int_t, control::Base*>::const_iterator it = m_models.find(id);
     assert(it->second);
-    model::Item* item = static_cast<model::Item*>(it->second);
+    control::Item* item = static_cast<control::Item*>(it->second);
     assert(item);
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return item;
 }
 
-model::StarSystem*
+control::StarSystem*
 EntityManager::starsystem(int_t id) const {
-    model::StarSystem* model = static_cast<model::StarSystem*>(get(id));
+    control::StarSystem* model = static_cast<control::StarSystem*>(get(id));
     assert(model);
     return model;
 }
 
-model::Star*
+control::Star*
 EntityManager::star(int_t id) const {
-    model::Star* model = static_cast<model::Star*>(get(id));
+    control::Star* model = static_cast<control::Star*>(get(id));
     assert(model);
     return model;
 }
 
-model::Planet*
+control::Planet*
 EntityManager::planet(int_t id) const {
-    model::Planet* model = static_cast<model::Planet*>(get(id));
+    control::Planet* model = static_cast<control::Planet*>(get(id));
     assert(model);
     return model;
 }
 
-model::Asteroid*
+control::Asteroid*
 EntityManager::asteroid(int_t id) const {
-    model::Asteroid* model = static_cast<model::Asteroid*>(get(id));
+    control::Asteroid* model = static_cast<control::Asteroid*>(get(id));
     assert(model);
     return model;
 }
 
-model::SpaceStation*
+control::SpaceStation*
 EntityManager::spacestation(int_t id) const {
-    model::SpaceStation* model = static_cast<model::SpaceStation*>(get(id));
+    control::SpaceStation* model = static_cast<control::SpaceStation*>(get(id));
     assert(model);
     return model;
 }
 
-model::Ship*
+control::Ship*
 EntityManager::ship(int_t id) const {
-    model::Ship* model = static_cast<model::Ship*>(get(id));
+    control::Ship* model = static_cast<control::Ship*>(get(id));
     assert(model);
     return model;
 }
 
-model::Satellite*
+control::Satellite*
 EntityManager::satellite(int_t id) const {
-    model::Satellite* model = static_cast<model::Satellite*>(get(id));
+    control::Satellite* model = static_cast<control::Satellite*>(get(id));
     assert(model);
     return model;
 }
 
-model::Container*
+control::Container*
 EntityManager::container(int_t id) const {
-    model::Container* model = static_cast<model::Container*>(get(id));
+    control::Container* model = static_cast<control::Container*>(get(id));
     assert(model);
     return model;
 }
 
-model::SpaceObject*
+control::SpaceObject*
 EntityManager::spaceObject(int_t id) const {
-    model::SpaceObject* model = static_cast<model::SpaceObject*>(get(id));
+    control::SpaceObject* model = static_cast<control::SpaceObject*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Scaner*
+control::item::Scaner*
 EntityManager::scaner(int_t id) const
 {
-    model::item::Scaner* model = static_cast<model::item::Scaner*>(get(id));
+    control::item::Scaner* model = static_cast<control::item::Scaner*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Drive*
+control::item::Drive*
 EntityManager::drive(int_t id) const
 {
-    model::item::Drive* model = static_cast<model::item::Drive*>(get(id));
+    control::item::Drive* model = static_cast<control::item::Drive*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Bak*
+control::item::Bak*
 EntityManager::bak(int_t id) const
 {
-    model::item::Bak* model = static_cast<model::item::Bak*>(get(id));
+    control::item::Bak* model = static_cast<control::item::Bak*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Droid*
+control::item::Droid*
 EntityManager::droid(int_t id) const
 {
-    model::item::Droid* model = static_cast<model::item::Droid*>(get(id));
+    control::item::Droid* model = static_cast<control::item::Droid*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Grapple*
+control::item::Grapple*
 EntityManager::grapple(int_t id) const
 {
-    model::item::Grapple* model = static_cast<model::item::Grapple*>(get(id));
+    control::item::Grapple* model = static_cast<control::item::Grapple*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Lazer*
+control::item::Lazer*
 EntityManager::lazer(int_t id) const
 {
-    model::item::Lazer* model = static_cast<model::item::Lazer*>(get(id));
+    control::item::Lazer* model = static_cast<control::item::Lazer*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Protector*
+control::item::Protector*
 EntityManager::protector(int_t id) const
 {
-    model::item::Protector* model = static_cast<model::item::Protector*>(get(id));
+    control::item::Protector* model = static_cast<control::item::Protector*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Radar*
+control::item::Radar*
 EntityManager::radar(int_t id) const
 {
-    model::item::Radar* model = static_cast<model::item::Radar*>(get(id));
+    control::item::Radar* model = static_cast<control::item::Radar*>(get(id));
     assert(model);
     return model;
 }
 
-model::item::Rocket*
+control::item::Rocket*
 EntityManager::rocket(int_t id) const
 {
-    model::item::Rocket* model = static_cast<model::item::Rocket*>(get(id));
+    control::item::Rocket* model = static_cast<control::item::Rocket*>(get(id));
     assert(model);
     return model;
 }
@@ -417,7 +417,7 @@ bool EntityManager::updateLoadRequest()
 //    entity->putChildrenToGarbage();
 //}
 
-void EntityManager::addToGarbage(model::Base* model)
+void EntityManager::addToGarbage(control::Base* model)
 {
     //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     assert(false);

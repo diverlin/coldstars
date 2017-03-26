@@ -19,6 +19,8 @@
 #include "MacroTaskManager.hpp"
 #include <core/ai/scenary/ScenarioCollector.hpp>
 
+#include <core/spaceobject/SpaceObject.hpp>
+
 #include <core/manager/EntityManager.hpp>
 
 void MacroTaskManager::setTask(const Task& macrotask)
@@ -26,7 +28,7 @@ void MacroTaskManager::setTask(const Task& macrotask)
     m_macrotask = macrotask;
     m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
     if (m_macrotask.targetId() != NONE) {
-        m_target = EntityManager::get().spaceObject(macrotask.targetId());
+        m_target = EntityManager::get().spaceObject(macrotask.targetId())->model();
     }
 }
 

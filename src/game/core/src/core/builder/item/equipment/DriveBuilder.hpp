@@ -31,11 +31,11 @@ class Drive;
 } // namespace item
 } // namespace descriptor
 
-namespace model {
+namespace control {
 namespace item {
 class Drive;
 } // namespace item
-} // namespace model
+} // namespace control
 
 namespace builder {
 namespace item {
@@ -43,15 +43,15 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    static model::item::Drive* gen();
-    static model::item::Drive* gen(descriptor::item::Drive*);
+    static control::item::Drive* gen();
+    static control::item::Drive* gen(descriptor::item::Drive*);
 
 private:
     Drive() = delete;
     ~Drive() = delete;
 
-    static model::item::Drive* __genTemplate(int_t);
-    static void __createInternals(model::item::Drive*, descriptor::item::Drive*);
+    static control::item::Drive* __genTemplate(descriptor::item::Drive*);
+    static void __createInternals(control::item::Drive*, descriptor::item::Drive*);
 }; 
 
 } // namespace item

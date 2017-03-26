@@ -19,6 +19,7 @@
 
 #include "ScanerBuilder.hpp"
 #include <core/descriptor/item/equipment/Scaner.hpp>
+#include <core/item/equipment/Scaner.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 #include <core/common/Global.hpp>
@@ -28,7 +29,7 @@
 namespace builder {
 namespace item {
 
-model::item::Scaner*
+control::item::Scaner*
 Scaner::gen()
 {
     descriptor::item::Scaner* descr = nullptr;
@@ -41,30 +42,29 @@ Scaner::gen()
     return gen(descr);
 }
 
-model::item::Scaner*
+control::item::Scaner*
 Scaner::gen(descriptor::item::Scaner* descr)
 {
-    model::item::Scaner* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-
-    return model;
+    control::item::Scaner* scaner = __genTemplate(descr->id());
+    __createInternals(scaner, descr);
+    return scaner;
 } 
 
-model::item::Scaner*
+control::item::Scaner*
 Scaner::__genTemplate(int_t descriptor_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descriptor_id);
-    EntityManager::get().reg(model);
-
-    return model;
+    control::item::Scaner* scaner = new control::item::Scaner(model);
+    EntityManager::get().reg(scaner);
+    return scaner;
 }
 
 void
-Scaner::__createInternals(model::item::Scaner* model, descriptor::item::Scaner* descr)
+Scaner::__createInternals(control::item::Scaner* scaner, descriptor::item::Scaner* descr)
 {
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setScan(descr->scan());
+    Item::_createInternals(scaner, descr);
+    Equipment::_createInternals(scaner, descr);
+    scaner->model()->setScan(descr->scan());
 }
 
 } // namespace item

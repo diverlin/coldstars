@@ -19,6 +19,7 @@
 
 #include "ProtectorBuilder.hpp"
 #include <core/model/item/equipment/Protector.hpp>
+#include <core/item/equipment/Protector.hpp>
 #include <core/descriptor/item/equipment/Protector.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
@@ -30,7 +31,7 @@
 namespace builder {
 namespace item {
 
-model::item::Protector*
+control::item::Protector*
 Protector::gen()
 {
     descriptor::item::Protector* descr = nullptr;
@@ -43,38 +44,39 @@ Protector::gen()
     return gen(descr);
 } 
 
-std::vector<model::item::Protector*>
+std::vector<control::item::Protector*>
 Protector::gen(int num)
 {
-    std::vector<model::item::Protector*> result;
+    std::vector<control::item::Protector*> result;
     for (int i=0; i<num; ++i) {
         result.push_back(gen());
     }
     return result;
 }
 
-model::item::Protector*
+control::item::Protector*
 Protector::gen(descriptor::item::Protector* descr)
 {
-    model::item::Protector* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::item::Protector* protector = __genTemplate(descr->id());
+    __createInternals(protector, descr);
+    return protector;
 }
 
-model::item::Protector*
+control::item::Protector*
 Protector::__genTemplate(int_t descriptor_id)
 {
     model::item::Protector* model = new model::item::Protector(descriptor_id);
-    EntityManager::get().reg(model);
-    return model;
+    control::item::Protector* protector = new control::item::Protector(model);
+    EntityManager::get().reg(protector);
+    return protector;
 }
 
 void
-Protector::__createInternals(model::item::Protector* model, descriptor::item::Protector* descr)
+Protector::__createInternals(control::item::Protector* protector, descriptor::item::Protector* descr)
 {     
-    Item::_createInternals(model, descr);
-    Equipment::_createInternals(model, descr);
-    model->setProtection(descr->protection());
+    Item::_createInternals(protector, descr);
+    Equipment::_createInternals(protector, descr);
+    protector->model()->setProtection(descr->protection());
 }
 
 } // namespace item

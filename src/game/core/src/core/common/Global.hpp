@@ -131,7 +131,6 @@ public:
     LazerModuleBuilder& lazerModuleBuilder() { return *m_lazerModuleBuilder; }
 #endif // USE_MODULES
 
-    NpcBuilder& npcBuilder() { return *m_npcBuilder; }
     //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
@@ -181,8 +180,6 @@ private:
     RocketModuleBuilder* m_rocketModuleBuilder = nullptr;
     LazerModuleBuilder* m_lazerModuleBuilder = nullptr;
 #endif // USE_MODULES
-
-    NpcBuilder* m_npcBuilder = nullptr;
     //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 

@@ -35,8 +35,8 @@
 
 TEST(vehicle, item_lazer)
 {
-    control::Ship* ship = test::genShip();
-    control::item::Lazer* lazer = test::item::genLazer();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Lazer* lazer = builder::item::Lazer::gen();
 
     assert(ship->weaponSlots()[0]);
 
@@ -56,8 +56,8 @@ TEST(vehicle, item_lazer)
 
 TEST(vehicle, item_rocket)
 {
-    control::Ship* ship = test::genShip();
-    control::item::Rocket* rocket = test::item::genRocket();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Rocket* rocket = builder::item::Rocket::gen();
 
     assert(ship->weaponSlots()[0]);
 
@@ -77,8 +77,8 @@ TEST(vehicle, item_rocket)
 
 TEST(vehicle, item_bak)
 {
-    control::Ship* ship = test::genShip();
-    control::item::Bak* bak = test::item::genBak();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Bak* bak = builder::item::Bak::gen();
 
     assert(ship->bakSlots()[0]);
 
@@ -96,8 +96,8 @@ TEST(vehicle, item_bak)
 
 TEST(vehicle, item_drive)
 {
-    control::Ship* ship = test::genShip();
-    control::item::Drive* drive = test::item::genDrive();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
 
     assert(ship->driveSlots()[0]);
 
@@ -115,9 +115,9 @@ TEST(vehicle, item_drive)
 
 TEST(vehicle, item_bak_and_drive)
 {
-    auto ship = test::genShip();
-    auto bak = test::item::genBak();
-    auto drive = test::item::genDrive();
+    auto ship = builder::Ship::gen();
+    auto bak = builder::item::Bak::gen();
+    auto drive = builder::item::Drive::gen();
 
     assert(ship->bakSlots()[0]);
     assert(ship->driveSlots()[0]);
@@ -168,8 +168,8 @@ TEST(vehicle, item_bak_and_drive)
 
 TEST(vehicle, item_droid)
 {
-    auto ship = test::genShip();
-    auto droid = test::item::genDroid();
+    auto ship = builder::Ship::gen();
+    auto droid = builder::item::Droid::gen();
 
     assert(ship->droidSlots()[0]);
 
@@ -201,8 +201,8 @@ TEST(vehicle, item_droid)
 
 TEST(vehicle, item_grapple)
 {
-    auto ship = test::genShip();
-    auto grapple = test::item::genGrapple();
+    auto ship = builder::Ship::gen();
+    auto grapple = builder::item::Grapple::gen();
 
     assert(ship->grappleSlots()[0]);
 
@@ -240,8 +240,8 @@ TEST(vehicle, item_grapple)
 
 TEST(vehicle, item_scaner)
 {
-    auto ship = test::genShip();
-    auto scaner = test::item::genScaner();
+    auto ship = builder::Ship::gen();
+    auto scaner = builder::item::Scaner::gen();
 
     assert(ship->scanerSlots()[0]);
 
@@ -273,8 +273,8 @@ TEST(vehicle, item_scaner)
 
 TEST(vehicle, item_radar)
 {
-    auto ship = test::genShip();
-    auto radar = test::item::genRadar();
+    auto ship = builder::Ship::gen();
+    auto radar = builder::item::Radar::gen();
 
     assert(ship->radarSlots()[0]);
 
@@ -306,8 +306,8 @@ TEST(vehicle, item_radar)
 
 TEST(vehicle, item_protector)
 {
-    auto ship = test::genShip();
-    auto protector = test::item::genProtector();
+    auto ship = builder::Ship::gen();
+    auto protector = builder::item::Protector::gen();
 
     assert(ship->protectorSlots()[0]);
 
@@ -340,15 +340,15 @@ TEST(vehicle, item_protector)
 
 TEST(vehicle, cargo_load)
 {
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
 
     int cargo_num = ship->descriptor()->cargoSlotNum();
     for(int i=0; i<cargo_num; ++i) {
-        auto item = test::item::genScaner();
+        auto item = builder::item::Scaner::gen();
         EXPECT_TRUE(ship->load(item));
     }
 
-    auto item = test::item::genScaner();
+    auto item = builder::item::Scaner::gen();
     EXPECT_FALSE(ship->load(item));
 
     EXPECT_EQ(0, ship->properties().scan);
@@ -356,7 +356,7 @@ TEST(vehicle, cargo_load)
 
 TEST(vehicle, freespace)
 {
-    control::Ship* ship = test::genShip();
+    control::Ship* ship = builder::Ship::gen();
 
     // init
     EXPECT_EQ(ship->descriptor()->space(), ship->freeSpace());
@@ -365,7 +365,7 @@ TEST(vehicle, freespace)
     int taken_mass = 0;
     int cargo_num = ship->descriptor()->cargoSlotNum();
     for (int i=0; i<cargo_num; ++i) {
-        control::item::Bak* item = test::item::genBak();
+        control::item::Bak* item = builder::item::Bak::gen();
         taken_mass += item->descriptor()->mass();
         EXPECT_TRUE(ship->manage(item));
         EXPECT_EQ(ship->space() - taken_mass, ship->freeSpace());

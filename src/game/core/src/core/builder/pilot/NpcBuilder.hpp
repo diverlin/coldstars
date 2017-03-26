@@ -24,19 +24,23 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
+namespace control {
 class Npc;
-} // namespace model
+} // namespace control
 
-class NpcBuilder
+namespace builder {
+
+class Npc
 {
 public:
-    NpcBuilder();
-    ~NpcBuilder();
-
-    model::Npc* createTemplate(entity::Type, entity::Type, int_t id = NONE) const;
-    model::Npc* create(race::Type, entity::Type, entity::Type) const;
+    static control::Npc* gen(race::Type, entity::Type, entity::Type);
 
 private:
-    void createInternals(model::Npc*, race::Type, entity::Type, entity::Type) const;
+    Npc() = delete;
+    ~Npc() = delete;
+
+    static control::Npc* __createTemplate(entity::Type, entity::Type, int_t id = NONE);
+    static void __createInternals(control::Npc*, race::Type, entity::Type, entity::Type);
 }; 
+
+} // namespace builder

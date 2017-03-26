@@ -82,8 +82,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::gen();
-    model::Ship* ship2 = builder::Ship::gen();
+    control::Ship* ship1 = builder::Ship::gen();
+    control::Ship* ship2 = builder::Ship::gen();
 
     messageManager.add(comm::Message(comm::Message::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(comm::Message(comm::Message::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -91,20 +91,20 @@ TEST(base,hit)
 
     messageManager.runLoop();
 
-    EXPECT_FALSE(ship2->isDying());
+    EXPECT_FALSE(ship2->model()->isDying());
 }
 
 TEST(base,critical_hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
-    model::Ship* ship1 = builder::Ship::gen();
-    model::Ship* ship2 = builder::Ship::gen();
+    control::Ship* ship1 = builder::Ship::gen();
+    control::Ship* ship2 = builder::Ship::gen();
 
     messageManager.add(comm::Message(comm::Message::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
     messageManager.runLoop();
 
-    EXPECT_TRUE(ship2->isDying());
+    EXPECT_TRUE(ship2->model()->isDying());
 }
 
 TEST(base,bomb)
@@ -156,25 +156,25 @@ TEST(descriptor,manager)
 TEST(clone, galaxy)
 {
     const auto& descriptor = descriptor::Manager::get().randGalaxy();
-    model::Galaxy* galaxy1 = builder::Galaxy::create(descriptor);
-    model::Galaxy* galaxy2 = builder::Galaxy::create(descriptor);
-    EXPECT_EQ(galaxy1->data(), galaxy2->data());
+    control::Galaxy* galaxy1 = builder::Galaxy::create(descriptor);
+    control::Galaxy* galaxy2 = builder::Galaxy::create(descriptor);
+    EXPECT_EQ(galaxy1->model()->data(), galaxy2->model()->data());
 }
 
 TEST(clone, sector)
 {
     const auto& descriptor = descriptor::Manager::get().randSector();
-    model::Sector* sector1 = builder::Sector::create(descriptor);
-    model::Sector* sector2 = builder::Sector::create(descriptor);
-    EXPECT_EQ(sector1->data(), sector2->data());
+    control::Sector* sector1 = builder::Sector::create(descriptor);
+    control::Sector* sector2 = builder::Sector::create(descriptor);
+    EXPECT_EQ(sector1->model()->data(), sector2->model()->data());
 }
 
 TEST(clone, starsystem)
 {
     const auto& descriptor = descriptor::Manager::get().randStarSystem();
-    model::StarSystem* starsystem1 = builder::StarSystem::gen(descriptor);
-    model::StarSystem* starsystem2 = builder::StarSystem::gen(descriptor);
-    EXPECT_EQ(starsystem1->data(), starsystem2->data());
+    control::StarSystem* starsystem1 = builder::StarSystem::gen(descriptor);
+    control::StarSystem* starsystem2 = builder::StarSystem::gen(descriptor);
+    EXPECT_EQ(starsystem1->model()->data(), starsystem2->model()->data());
 }
 
 //TEST(model, asteroid)
@@ -182,7 +182,4 @@ TEST(clone, starsystem)
 //    model::Asteroid* model1 = builder::Asteroid::gen();
 //    model::Asteroid* model2 = new model::Asteroid(model1->data());
 //    EXPECT_EQ(model1->data(), model2->data());
-
-//    delete model1;
-//    delete model2;
 //}

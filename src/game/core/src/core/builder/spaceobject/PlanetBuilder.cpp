@@ -20,24 +20,27 @@
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
+#include <core/spaceobject/Planet.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
-model::Planet*
+control::Planet*
 Planet::__genTemplate(int_t descriptor_id)
 {
     model::Planet* model = new model::Planet(descriptor_id);
+    control::Planet* planet = new control::Planet(model);
     assert(model);
+    assert(planet);
 
-    EntityManager::get().reg(model);
+    EntityManager::get().reg(planet);
     
-    return model;
+    return planet;
 }
 
-model::Planet*
+control::Planet*
 Planet::gen()
 {
     descriptor::Planet* descr = nullptr;
@@ -50,26 +53,26 @@ Planet::gen()
     return gen(descr);
 } 
 
-model::Planet*
+control::Planet*
 Planet::gen(descriptor::Planet* descr)
 {
-    model::Planet* model = __genTemplate(descr->id());
+    control::Planet* planet = __genTemplate(descr->id());
 
     /// Base
     LifeData life_data;
     life_data.armor = descr->armor();
-    model->setLifeData(life_data);
+    planet->model()->setLifeData(life_data);
 
     /// Planetoid
-    model->setRadiusA(descr->radiusA());
-    model->setRadiusB(descr->radiusB());
-    model->setOrbitPhi(descr->orbitPhi());
-    model->setSpeed(descr->speed());
-    model->setClockwise(descr->clockwise());
+    planet->model()->setRadiusA(descr->radiusA());
+    planet->model()->setRadiusB(descr->radiusB());
+    planet->model()->setOrbitPhi(descr->orbitPhi());
+    planet->model()->setSpeed(descr->speed());
+    planet->model()->setClockwise(descr->clockwise());
 
     /// Orientation
-    model->setSize(descr->size());
-    model->setDirection(descr->direction());
+    planet->model()->setSize(descr->size());
+    planet->model()->setDirection(descr->direction());
 
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     //glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -99,7 +102,7 @@ Planet::gen(descriptor::Planet* descr)
         planet->AddDecoration(ring);
     }
     */
-    return model;
+    return planet;
 }
 
 } // namespace builder

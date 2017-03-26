@@ -21,6 +21,7 @@
 
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/spaceobject/Ship.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
@@ -29,24 +30,24 @@
 
 namespace builder {
 
-model::Ship*
+control::Ship*
 Ship::gen(descriptor::Ship* descr)
 {
-    model::Ship* model = __genTemplate(descr->id());
-    __createInternals(model, descr);
-    return model;
+    control::Ship* ship = __genTemplate(descr);
+    __createInternals(ship, descr);
+    return ship;
 }
 
-model::Ship*
+control::Ship*
 Ship::gen(int_t descriptor_id, int_t ob_id)
 {
-    model::Ship* model = __genTemplate(descriptor_id, ob_id);
     descriptor::Ship* descr = descriptor::Manager::get().ship(descriptor_id);
-    __createInternals(model, descr);
-    return model;
+    control::Ship* ship = __genTemplate(descr, ob_id);
+    __createInternals(ship, descr);
+    return ship;
 }
 
-model::Ship*
+control::Ship*
 Ship::gen()
 {
     descriptor::Ship* descr = nullptr;
@@ -59,17 +60,18 @@ Ship::gen()
     return gen(descr);
 }
 
-model::Ship*
-Ship::__genTemplate(int_t descriptor_id, int_t ob_id)
+control::Ship*
+Ship::__genTemplate(descriptor::Ship* descr, int_t ob_id)
 {
-    model::Ship* ship = new model::Ship(descriptor_id, ob_id);
+    model::Ship* model = new model::Ship(descr->id(), ob_id);
+    control::Ship* ship = new control::Ship(model, descr);
     EntityManager::get().reg(ship);
     return ship;
 }
 
 
 void
-Ship::__createInternals(model::Ship* ship, descriptor::Ship* descr)
+Ship::__createInternals(control::Ship* ship, descriptor::Ship* descr)
 {
 //    assert(false);
     //assert(descr->type() == (int)descriptor::Type::VEHICLE);
@@ -121,7 +123,7 @@ Ship::__createInternals(model::Ship* ship, descriptor::Ship* descr)
     data_life.armor      = descr->armor();
 //    assert(false);
 //    data_life.dying_time = ship->collisionRadius() * 0.1;
-    ship->setLifeData(data_life);
+    ship->model()->setLifeData(data_life);
     
 //    assert(false);
 //    ship->CreateDriveComplexTextureDependedStuff();
