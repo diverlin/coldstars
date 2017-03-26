@@ -1,0 +1,30 @@
+cmake_minimum_required (VERSION 2.8)
+
+set(USE_MODULES OFF)
+set(USE_ARTEFACTS OFF)
+set(USE_EXTRA_EQUIPMENT OFF)
+
+set(PROJECT_CORE     ${PROJECT}_core)
+set(PROJECT_SERVER   ${PROJECT}_server)
+set(PROJECT_CLIENT   ${PROJECT}_client)
+set(PROJECT_TESTS    ${PROJECT}_tests)
+
+set(GLM_ROOT_DIR "../../../dependencies/glm-0.9.7.5/")
+find_package(GLM REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+add_definitions(-DGLM_FORCE_RADIANS)
+
+if (USE_MODULES)
+    add_definitions(-DUSE_MODULES)
+endif()
+if (USE_ARTEFACTS)
+    add_definitions(-DUSE_ARTEFACTS)
+endif()
+if (USE_EXTRA_EQUIPMENT)
+    add_definitions(-DUSE_EXTRA_EQUIPMENT)
+endif()
+
+add_subdirectory(core)
+add_subdirectory(server)
+#add_subdirectory(client)
+add_subdirectory(demo)
