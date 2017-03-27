@@ -36,18 +36,6 @@
 namespace builder {
 
 control::Star*
-Star::__genTemplate(int_t descriptor_id)
-{ 
-    model::Star* model = new model::Star(descriptor_id);
-    assert(model);
-    control::Star* star = new control::Star(model);
-    assert(star);
-
-    EntityManager::get().reg(star);
-    return star;
-} 
- 
-control::Star*
 Star::gen()
 {
     descriptor::Star* descr = nullptr;
@@ -63,7 +51,7 @@ Star::gen()
 control::Star*
 Star::gen(descriptor::Star* descr)
 {
-    control::Star* star = __genTemplate(descr->id());
+    control::Star* star = __genTemplate(descr);
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
@@ -82,7 +70,20 @@ Star::gen(descriptor::Star* descr)
 
     return star;
 }
-          
+
+control::Star*
+Star::__genTemplate(descriptor::Star* descr)
+{
+    model::Star* model = new model::Star(descr->id());
+    assert(model);
+
+    control::Star* star = new control::Star(model, descr);
+    assert(star);
+
+    EntityManager::get().reg(star);
+    return star;
+}
+
 } // namespace builder
 
 

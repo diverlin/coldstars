@@ -26,8 +26,6 @@
 
 #include <core/model/spaceobject/Star.hpp>
 
-#include <core/manager/DescriptorManager.hpp>
-
 #include <meti/RandUtils.hpp>
 
 #include <math/rand.hpp>
@@ -37,11 +35,11 @@
 
 namespace control {
 
-Star::Star(model::Star* model)
+Star::Star(model::Star* model, descriptor::Star* descr)
     :
-      Planetoid(model, descriptor::Manager::get().star(model->descriptor()))
+      Planetoid(model, descr)
     , m_model_star(model)
-    , m_descriptor_star(descriptor::Manager::get().star(model->descriptor()))
+    , m_descriptor_star(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::STAR);

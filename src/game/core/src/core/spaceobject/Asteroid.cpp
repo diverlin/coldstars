@@ -34,21 +34,13 @@
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/Container.hpp>
 
-#include <core/manager/DescriptorManager.hpp>
-
-namespace {
-descriptor::Asteroid* getDescriptor(model::Asteroid* model) {
-    return descriptor::Manager::get().asteroid(model->descriptor());
-}
-} // namespace
-
 namespace control {
 
-Asteroid::Asteroid(model::Asteroid* model)
+Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
     :
-      Planetoid(model, getDescriptor(model))
+      Planetoid(model, descr)
     , m_model_asteroid(model)
-    , m_descriptor_asteroid(getDescriptor(model))
+    , m_descriptor_asteroid(descr)
 {
 }
 
@@ -71,7 +63,7 @@ void Asteroid::collisionEvent(bool show_effect)
 
 void Asteroid::_postDeathUniqueEvent(bool show_effect)
 {
-    int angleZ = meti::getRandInt(360);
+    int angleZ = 0; //meti::getRandInt(360);
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++) {
 //        Container* container = core::global::get().containerBuilder().create(4);

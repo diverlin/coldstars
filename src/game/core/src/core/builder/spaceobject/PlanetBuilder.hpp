@@ -38,7 +38,7 @@ public:
     static control::Planet* gen(descriptor::Planet*);
 
 private:
-    static control::Planet* __genTemplate(int_t);
+    static control::Planet* __genTemplate(descriptor::Planet*);
 }; 
 
 } // namespace builder

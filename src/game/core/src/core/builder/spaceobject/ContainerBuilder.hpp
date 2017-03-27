@@ -51,7 +51,7 @@ private:
     Container() = default;
     ~Container() = default;
 
-    static control::Container* __genTemplate(int_t);
+    static control::Container* __genTemplate(descriptor::Container*);
     static void __createInternals(control::Container*, descriptor::Container*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;

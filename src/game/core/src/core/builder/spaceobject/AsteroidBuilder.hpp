@@ -37,7 +37,7 @@ public:
     static control::Asteroid* gen(descriptor::Asteroid*);
 
 private:
-    static control::Asteroid* __genTemplate(int_t);
+    static control::Asteroid* __genTemplate(descriptor::Asteroid*);
 }; 
 
 } // namespace builder

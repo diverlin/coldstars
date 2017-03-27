@@ -42,7 +42,7 @@ private:
     ~Satellite() = default;
 
     static void __createInternals(control::Satellite*, descriptor::Satellite*);
-    static control::Satellite* __genTemplate(int_t);
+    static control::Satellite* __genTemplate(descriptor::Satellite*);
 }; 
 
 } // namespace builder

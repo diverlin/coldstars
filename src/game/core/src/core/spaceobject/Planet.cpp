@@ -32,16 +32,14 @@
 
 #include <core/manager/EntityManager.hpp>
 
-#include <core/manager/DescriptorManager.hpp>
-
 
 namespace control {
 
-Planet::Planet(model::Planet* model)
+Planet::Planet(model::Planet* model, descriptor::Planet* descr)
     :
-      Planetoid(model, descriptor::Manager::get().planet(model->descriptor()))
+      Planetoid(model, descr)
     , m_model_planet(model)
-    , m_descriptor_planet(descriptor::Manager::get().planet(model->descriptor()))
+    , m_descriptor_planet(descr)
 {}
 
 Planet::~Planet()

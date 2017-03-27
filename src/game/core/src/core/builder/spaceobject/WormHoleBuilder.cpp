@@ -29,12 +29,12 @@
 namespace builder {
 
 control::WormHole*
-WormHole::__genTemplate(int_t descriptor_id)
+WormHole::__genTemplate(descriptor::WormHole* descr)
 {
-    model::WormHole* model = new model::WormHole(descriptor_id);
+    model::WormHole* model = new model::WormHole(descr->id());
     assert(model);
 
-    control::WormHole* wormhole = new control::WormHole(model);
+    control::WormHole* wormhole = new control::WormHole(model, descr);
     assert(wormhole);
 
     int size = 4;
@@ -61,7 +61,7 @@ WormHole::gen()
 control::WormHole*
 WormHole::gen(descriptor::WormHole* descr)
 {
-    control::WormHole* wormhole = __genTemplate(descr->id());
+    control::WormHole* wormhole = __genTemplate(descr);
     return wormhole;
 }
 

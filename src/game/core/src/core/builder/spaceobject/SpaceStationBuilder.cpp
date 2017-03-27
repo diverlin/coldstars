@@ -34,22 +34,9 @@
 namespace builder {
 
 control::SpaceStation*
-SpaceStation::__genTemplate(int_t descriptor_id)
-{           
-    model::SpaceStation* model = new model::SpaceStation(descriptor_id);
-    control::SpaceStation* spacestation = new control::SpaceStation(model);
-    assert(model);
-    assert(spacestation);
-
-    EntityManager::get().reg(spacestation);
-    
-    return spacestation;
-}
-
-control::SpaceStation*
 SpaceStation::gen(descriptor::SpaceStation* descr)
 {
-    control::SpaceStation* spacestation = __genTemplate(descr->id());
+    control::SpaceStation* spacestation = __genTemplate(descr);
     __createInternals(spacestation, descr);
     return spacestation;
 }
@@ -153,6 +140,20 @@ SpaceStation::__createInternals(control::SpaceStation* model, descriptor::SpaceS
 ////    _createSlots(spacestation);
 
 ////    spacestation->bindLand(core::global::get().kosmoportBuilder().create());
+}
+
+control::SpaceStation*
+SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
+{
+    model::SpaceStation* model = new model::SpaceStation(descr->id());
+    assert(model);
+
+    control::SpaceStation* spacestation = new control::SpaceStation(model, descr);
+    assert(spacestation);
+
+    EntityManager::get().reg(spacestation);
+
+    return spacestation;
 }
 
 } // namespace builder

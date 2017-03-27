@@ -30,7 +30,7 @@ namespace control {
 class WormHole : public Planetoid
 {
 public:
-    WormHole(model::WormHole*);
+    WormHole(model::WormHole*, descriptor::WormHole*);
     virtual ~WormHole();
 
     //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };

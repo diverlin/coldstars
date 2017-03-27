@@ -30,11 +30,12 @@
 namespace builder {
 
 control::Satellite*
-Satellite::__genTemplate(int_t descriptor_id)
+Satellite::__genTemplate(descriptor::Satellite* descr)
 {
-    model::Satellite* model = new model::Satellite(descriptor_id);
+    model::Satellite* model = new model::Satellite(descr->id());
     assert(model);
-    control::Satellite* satellite = new control::Satellite(model);
+
+    control::Satellite* satellite = new control::Satellite(model, descr);
     assert(satellite);
 
     EntityManager::get().reg(satellite);
@@ -45,7 +46,7 @@ Satellite::__genTemplate(int_t descriptor_id)
 control::Satellite*
 Satellite::gen(descriptor::Satellite* descr)
 {
-    control::Satellite* satellite = __genTemplate(descr->id());
+    control::Satellite* satellite = __genTemplate(descr);
     __createInternals(satellite, descr);
     return satellite;
 }

@@ -57,7 +57,7 @@ private:
     ~SpaceStation() = default;
 
     static void __createInternals(control::SpaceStation*, descriptor::SpaceStation*);
-    static control::SpaceStation* __genTemplate(int_t);
+    static control::SpaceStation* __genTemplate(descriptor::SpaceStation*);
 }; 
 
 } // namespace builder

@@ -76,25 +76,25 @@ TEST(starsystem, add_remove_objects)
         control::Container* container = builder::Container::gen();
 
         /* add objects */
-        starsystem->add(star->model());
+        starsystem->add(star);
         star_ids.add(star->model()->id());
 
-        starsystem->add(planet->model());
+        starsystem->add(planet);
         planet_ids.add(planet->model()->id());
 
-        starsystem->add(asteroid->model());
+        starsystem->add(asteroid);
         asteroid_ids.add(asteroid->model()->id());
 
-        starsystem->add(spacestation->model());
+        starsystem->add(spacestation);
         spacestation_ids.add(spacestation->model()->id());
 
         starsystem->add(ship);
         ship_ids.add(ship->id());
 
-        starsystem->add(satellite->model());
+        starsystem->add(satellite);
         satellite_ids.add(satellite->model()->id());
 
-        starsystem->add(container->model());
+        starsystem->add(container);
         container_ids.add(container->model()->id());
 
         /* post-add check */

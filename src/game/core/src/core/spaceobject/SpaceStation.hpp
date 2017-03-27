@@ -38,7 +38,7 @@ namespace control {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation(model::SpaceStation*);
+    SpaceStation(model::SpaceStation*, descriptor::SpaceStation*);
     virtual ~SpaceStation();
 
     [[warning("incapsulate this shit")]]
