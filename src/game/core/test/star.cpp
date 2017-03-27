@@ -27,7 +27,7 @@
 #include <gtest/gtest.h>
 
 
-TEST(creation, star)
+TEST(star, create)
 {
     descriptor::Star* descr = descriptor::Manager::get().randStar();
     control::Star* star = builder::Star::gen(descr);
