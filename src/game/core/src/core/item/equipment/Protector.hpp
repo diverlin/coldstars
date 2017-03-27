@@ -39,7 +39,7 @@ namespace item {
 class Protector : public Equipment
 {
 public:
-    Protector(model::item::Protector*);
+    Protector(model::item::Protector*, descriptor::item::Protector*);
     virtual ~Protector() = default;
 
     virtual void updateProperties();

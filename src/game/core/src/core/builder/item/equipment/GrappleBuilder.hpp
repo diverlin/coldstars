@@ -50,7 +50,7 @@ private:
     Grapple() = delete;
     ~Grapple() = delete;
 
-    static control::item::Grapple* __genTemplate(int_t);
+    static control::item::Grapple* __genTemplate(descriptor::item::Grapple*);
     static void __createInternals(control::item::Grapple*, descriptor::item::Grapple*);
 }; 
 

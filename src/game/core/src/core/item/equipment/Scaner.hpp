@@ -39,7 +39,7 @@ namespace item {
 class Scaner : public Equipment
 {
 public:
-    Scaner(model::item::Scaner*);
+    Scaner(model::item::Scaner*, descriptor::item::Scaner*);
     virtual ~Scaner() = default;
 
 private:

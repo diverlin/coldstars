@@ -50,7 +50,7 @@ private:
     Droid() = delete;
     ~Droid() = delete;
 
-    static control::item::Droid* __genTemplate(int_t);
+    static control::item::Droid* __genTemplate(descriptor::item::Droid*);
     static void __createInternals(control::item::Droid*, descriptor::item::Droid*);
 }; 
 

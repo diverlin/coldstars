@@ -45,16 +45,16 @@ Scaner::gen()
 control::item::Scaner*
 Scaner::gen(descriptor::item::Scaner* descr)
 {
-    control::item::Scaner* scaner = __genTemplate(descr->id());
+    control::item::Scaner* scaner = __genTemplate(descr);
     __createInternals(scaner, descr);
     return scaner;
 } 
 
 control::item::Scaner*
-Scaner::__genTemplate(int_t descriptor_id)
+Scaner::__genTemplate(descriptor::item::Scaner* descr)
 {
-    model::item::Scaner* model = new model::item::Scaner(descriptor_id);
-    control::item::Scaner* scaner = new control::item::Scaner(model);
+    model::item::Scaner* model = new model::item::Scaner(descr->id());
+    control::item::Scaner* scaner = new control::item::Scaner(model, descr);
     EntityManager::get().reg(scaner);
     return scaner;
 }

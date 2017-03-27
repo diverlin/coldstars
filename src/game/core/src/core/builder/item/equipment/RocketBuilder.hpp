@@ -50,7 +50,7 @@ private:
     Rocket() = delete;
     ~Rocket() = delete;
 
-    static control::item::Rocket* __genTemplate(int_t);
+    static control::item::Rocket* __genTemplate(descriptor::item::Rocket*);
     static void __createInternals(control::item::Rocket*, descriptor::item::Rocket*);
 }; 
 

@@ -50,7 +50,7 @@ private:
     Radar() = delete;
     ~Radar() = delete;
 
-    static control::item::Radar* __genTemplate(int_t);
+    static control::item::Radar* __genTemplate(descriptor::item::Radar*);
     static void __createInternals(control::item::Radar*, descriptor::item::Radar*);
 }; 
 
