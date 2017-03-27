@@ -310,8 +310,7 @@ void Vehicle::fire(int timer, float attack_rate)
 
 void Vehicle::setWeaponTarget(model::SpaceObject* object, ItemSlot* slot)
 {
-    assert(false);
-    //model()->weaponComplex().setTarget(object, slot);
+    weaponComplex().setTarget(object, slot);
 }
 
 void Vehicle::prepareWeapons()
@@ -1616,24 +1615,40 @@ STATUS Vehicle::CheckGrabStatus() const
     return status;
 }
 
-bool Vehicle::dropItemToSpace(const entity::Type& type)
+std::vector<ItemSlot*>
+Vehicle::__equipedSlotsByType(const entity::Type& type) {
+    std::vector<ItemSlot*> result;
+    for(ItemSlot* slot: m_equipmentSlots) {
+        if (slot->subtype() == type && slot->item()) {
+            result.push_back(slot);
+        }
+    }
+    for(ItemSlot* slot: m_cargoSlots) {
+        if (slot->item()) {
+            result.push_back(slot);
+        }
+    }
+    return result;
+}
+
+bool
+Vehicle::dropItemToSpace(const entity::Type& type)
 {
     if (model()->place() != place::Type::KOSMOS)
         return false;
 
-    assert(false);
-//    for (ItemSlot* slot: m_slots) {
-//        if (slot->subtype() == type && slot->item()) {
-//            item::Base* item = slot->takeItem();
-//            Container* container = __wrapItemToContainer(item);
-//            //    float impulse_strength = 0.5;
-//            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-//            //    container->addImpulse(impulse_dir, impulse_strength);
+    for (ItemSlot* slot: __equipedSlotsByType(type)) {
+        if (slot->subtype() == type && slot->item()) {
+            Item* item = slot->takeItem();
+            Container* container = __wrapItemToContainer(item);
+            //    float impulse_strength = 0.5;
+            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
+            //    container->addImpulse(impulse_dir, impulse_strength);
 
-//            starsystem()->add(container, position());
-//            return true;
-//        }
-//    }
+            starsystem()->add(container, position());
+            return true;
+        }
+    }
 
     return false;
 }

@@ -218,10 +218,9 @@ void ItemSlot::removeItem()
     m_item = nullptr;
     resetTarget();
 
-    assert(false);
-//    if (subtype() != entity::Type::CARGO_SLOT) {
-//        updateVehiclePropetries();
-//    }
+    if (subtype() != entity::Type::CARGO_SLOT) {
+        updateVehiclePropetries();
+    }
 }
 
 void ItemSlot::selectEvent()

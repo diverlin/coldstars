@@ -322,6 +322,8 @@ private:
     bool __installEquipment(Item*);
     ItemSlot* __freeFunctionalSlot(const entity::Type&) const;
 
+    std::vector<ItemSlot*> __equipedSlotsByType(const entity::Type&);
+
     void __actualizeModel();
     void __actualizeItems();
 };
