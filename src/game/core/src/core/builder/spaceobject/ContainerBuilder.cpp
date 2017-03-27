@@ -54,17 +54,18 @@ Container::gen()
 control::Container*
 Container::gen(descriptor::Container* descr)
 {
-    control::Container* container = __genTemplate(descr->id());
+    control::Container* container = __genTemplate(descr);
     __createInternals(container, descr);
     return container;
 }
 
 control::Container*
-Container::__genTemplate(int_t descriptor_id)
+Container::__genTemplate(descriptor::Container* descr)
 {
-    model::Container* model = new model::Container(descriptor_id);
-    control::Container* container = new control::Container(model);
+    model::Container* model = new model::Container(descr->id());
     assert(model);
+
+    control::Container* container = new control::Container(model, descr);
     assert(container);
 
     EntityManager::get().reg(container);

@@ -32,7 +32,7 @@ namespace control {
 class Star : public Planetoid
 {
 public:
-    Star(model::Star*);
+    Star(model::Star*, descriptor::Star*);
     virtual ~Star();
 
     void hit(int) {}

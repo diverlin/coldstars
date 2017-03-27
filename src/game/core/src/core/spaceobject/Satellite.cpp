@@ -28,15 +28,14 @@
 
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
-#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 
-Satellite::Satellite(model::Satellite* model)
+Satellite::Satellite(model::Satellite* model, descriptor::Satellite* descr)
     :
-      Vehicle(model, descriptor::Manager::get().satellite(model->descriptor()))
+      Vehicle(model, descr)
     , m_model_satellite(model)
-    , m_descriptor_satellite(descriptor::Manager::get().satellite(model->descriptor()))
+    , m_descriptor_satellite(descr)
 {
 
 }

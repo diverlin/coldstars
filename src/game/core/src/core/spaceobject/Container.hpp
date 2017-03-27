@@ -40,7 +40,7 @@ class ItemSlot;
 class Container : public SpaceObject
 {
 public:
-    Container(model::Container*);
+    Container(model::Container*, descriptor::Container*);
     virtual ~Container();
 
     void bindItemSlot(ItemSlot*);

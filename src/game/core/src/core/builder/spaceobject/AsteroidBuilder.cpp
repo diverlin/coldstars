@@ -27,19 +27,6 @@
 namespace builder {
 
 control::Asteroid*
-Asteroid::__genTemplate(int_t descriptor_id)
-{ 
-    model::Asteroid* model = new model::Asteroid(descriptor_id);
-    control::Asteroid* asteroid = new control::Asteroid(model);
-    assert(model);
-    assert(asteroid);
-
-    EntityManager::get().reg(asteroid);
-    
-    return asteroid;
-} 
-
-control::Asteroid*
 Asteroid::gen()
 {
     descriptor::Asteroid* descr = nullptr;
@@ -55,7 +42,7 @@ Asteroid::gen()
 control::Asteroid*
 Asteroid::gen(descriptor::Asteroid* descr)
 {
-    control::Asteroid* asteroid = __genTemplate(descr->id());
+    control::Asteroid* asteroid = __genTemplate(descr);
 
     /// Base
     LifeData life_data;
@@ -103,6 +90,20 @@ Asteroid::gen(descriptor::Asteroid* descr)
     //    //todo
     //    model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 } 
+
+control::Asteroid*
+Asteroid::__genTemplate(descriptor::Asteroid* descr)
+{
+    model::Asteroid* model = new model::Asteroid(descr->id());
+    control::Asteroid* asteroid = new control::Asteroid(model, descr);
+    assert(model);
+    assert(asteroid);
+
+    EntityManager::get().reg(asteroid);
+
+    return asteroid;
+}
+
 
 } // namespace builder
 

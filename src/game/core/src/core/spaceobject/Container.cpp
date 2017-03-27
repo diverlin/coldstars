@@ -26,7 +26,7 @@
 #include <common/Global.hpp>
 #include <core/model/spaceobject/Container.hpp>
 #include <core/manager/EntityManager.hpp>
-#include <core/manager/DescriptorManager.hpp>
+
 #include <world/starsystem.hpp>
 
 #include <core/builder/slot/ItemSlotBuilder.hpp>
@@ -39,15 +39,9 @@
 #include <core/item/Item.hpp>
 #include <core/item/equipment/ALL>
 
-namespace {
-descriptor::Container* getDescriptor(model::Container* model) {
-    return descriptor::Manager::get().container(model->descriptor());
-}
-
-} // namespace
+#include <core/manager/DescriptorManager.hpp>
 
 namespace control {
-
 namespace {
 
 bool itemInsertHelper(ItemSlot* slot, int_t id) {
@@ -95,11 +89,11 @@ bool itemInsertHelper(ItemSlot* slot, int_t id) {
 }
 } // namespace
 
-Container::Container(model::Container* _model)
+Container::Container(model::Container* _model, descriptor::Container* descr)
     :
-      SpaceObject(_model, getDescriptor(_model))
+      SpaceObject(_model, descr)
     , m_model_container(_model)
-    , m_descriptor_container(getDescriptor(_model))
+    , m_descriptor_container(descr)
 {
 
     ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);

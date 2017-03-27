@@ -28,19 +28,6 @@
 namespace builder {
 
 control::Planet*
-Planet::__genTemplate(int_t descriptor_id)
-{
-    model::Planet* model = new model::Planet(descriptor_id);
-    control::Planet* planet = new control::Planet(model);
-    assert(model);
-    assert(planet);
-
-    EntityManager::get().reg(planet);
-    
-    return planet;
-}
-
-control::Planet*
 Planet::gen()
 {
     descriptor::Planet* descr = nullptr;
@@ -56,7 +43,7 @@ Planet::gen()
 control::Planet*
 Planet::gen(descriptor::Planet* descr)
 {
-    control::Planet* planet = __genTemplate(descr->id());
+    control::Planet* planet = __genTemplate(descr);
 
     /// Base
     LifeData life_data;
@@ -102,6 +89,19 @@ Planet::gen(descriptor::Planet* descr)
         planet->AddDecoration(ring);
     }
     */
+    return planet;
+}
+
+control::Planet*
+Planet::__genTemplate(descriptor::Planet* descr)
+{
+    model::Planet* model = new model::Planet(descr->id());
+    control::Planet* planet = new control::Planet(model, descr);
+    assert(model);
+    assert(planet);
+
+    EntityManager::get().reg(planet);
+
     return planet;
 }
 

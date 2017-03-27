@@ -218,11 +218,11 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     m_vehicles.push_back(vehicle);
 }
 
-void StarSystem::add(model::SpaceStation* _model)
-{
-    auto spacestation = new SpaceStation(_model);
-    add(spacestation, _model->position(), _model->direction());
-}
+//void StarSystem::add(model::SpaceStation* _model)
+//{
+//    auto spacestation = new SpaceStation(_model);
+//    add(spacestation, _model->position(), _model->direction());
+//}
 
 void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
@@ -244,11 +244,11 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
     m_ships.push_back(ship);
 }
 
-void StarSystem::add(model::Satellite* _model)
-{
-    auto satellite = new Satellite(_model);
-    add(satellite, _model->position(), _model->direction());
-}
+//void StarSystem::add(model::Satellite* _model)
+//{
+//    auto satellite = new Satellite(_model);
+//    add(satellite, _model->position(), _model->direction());
+//}
 
 void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
@@ -257,28 +257,28 @@ void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm:
     m_satellites.push_back(satellite);
 }
 
-void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
-{
-    _model->setPlace(place::Type::KOSMOS);
-    _model->setStarSystem(model()->id());
+//void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
+//{
+//    _model->setPlace(place::Type::KOSMOS);
+//    _model->setStarSystem(model()->id());
 
-    _model->setPosition(position);
-    _model->setDirection(dir);
-    //rocket->updateOrientation();
+//    _model->setPosition(position);
+//    _model->setDirection(dir);
+//    //rocket->updateOrientation();
 
-    assert(false);
-    descriptor::RocketBullet* _descr = nullptr;
-    RocketBullet* rocket = new RocketBullet(_model, _descr);
-    //rocket->initialize();
+//    assert(false);
+//    descriptor::RocketBullet* _descr = nullptr;
+//    RocketBullet* rocket = new RocketBullet(_model, _descr);
+//    //rocket->initialize();
 
-    m_bullets.push_back(rocket);
-}
+//    m_bullets.push_back(rocket);
+//}
 
-void StarSystem::add(model::Star* model)
-{
-    Star* star = new Star(model);
-    add(star);
-}
+//void StarSystem::add(model::Star* model)
+//{
+//    Star* star = new Star(model);
+//    add(star);
+//}
 
 void StarSystem::add(Star* star)
 {
@@ -290,11 +290,11 @@ void StarSystem::add(Star* star)
     model()->addStar(star->model()->id());
 }
 
-void StarSystem::add(model::Planet* model)
-{
-    Planet* planet = new Planet(model);
-    add(planet);
-}
+//void StarSystem::add(model::Planet* model)
+//{
+//    Planet* planet = new Planet(model);
+//    add(planet);
+//}
 
 void StarSystem::add(Planet* planet, SpaceObject* parent)
 {
@@ -315,21 +315,21 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
 }
 
 
-void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, int it)
-{
-    //asteroid->bindParent(parent, it);
+//void StarSystem::add(model::Asteroid* _model, const model::SpaceObject* parent, int it)
+//{
+//    //asteroid->bindParent(parent, it);
     
-    if (parent) {
-        _model->setParent(parent->id());
-    }
-    _model->setStarSystem(model()->id());
-    _model->setPlace(place::Type::KOSMOS);
+//    if (parent) {
+//        _model->setParent(parent->id());
+//    }
+//    _model->setStarSystem(model()->id());
+//    _model->setPlace(place::Type::KOSMOS);
 
-    Asteroid* asteroid = new Asteroid(_model);
+//    Asteroid* asteroid = new Asteroid(_model);
 
-    m_asteroids.push_back(asteroid);
-    model()->addAsteroid(_model->id());
-}
+//    m_asteroids.push_back(asteroid);
+//    model()->addAsteroid(_model->id());
+//}
 
 void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
 {
@@ -347,25 +347,25 @@ void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
     model()->addAsteroid(asteroid->id());
 }
 
-void StarSystem::add(model::Container* _model, const glm::vec3& center)
-{
-    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
+//void StarSystem::add(model::Container* _model, const glm::vec3& center)
+//{
+//    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
 
-    for (auto _container: m_containers) {
-        if (_container->model()->id() == _model->id()) {
-            //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
-            exit(1);
-        }
-    }
+//    for (auto _container: m_containers) {
+//        if (_container->model()->id() == _model->id()) {
+//            //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
+//            exit(1);
+//        }
+//    }
 
-    _model->setStarSystem(model()->id());
-    _model->setPlace(place::Type::KOSMOS);
-    _model->setPosition(center);
+//    _model->setStarSystem(model()->id());
+//    _model->setPlace(place::Type::KOSMOS);
+//    _model->setPosition(center);
 
-    Container* container = new Container(_model);
-    model()->addContainer(_model->id());
-    m_containers.push_back(container);
-}
+//    Container* container = new Container(_model);
+//    model()->addContainer(_model->id());
+//    m_containers.push_back(container);
+//}
 
 void StarSystem::add(Container* container, const glm::vec3& center)
 {
@@ -383,18 +383,18 @@ void StarSystem::add(Container* container)
     m_containers.push_back(container);
 }
 
-void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
-{
-    _model->setStarSystem(model()->id());
-    _model->setPlace(place::Type::KOSMOS);
-    _model->setPosition(center);
+//void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
+//{
+//    _model->setStarSystem(model()->id());
+//    _model->setPlace(place::Type::KOSMOS);
+//    _model->setPosition(center);
 
-    WormHole* blackhole = new WormHole(_model);
+//    WormHole* blackhole = new WormHole(_model);
 
-    m_wormholes.push_back(blackhole);
+//    m_wormholes.push_back(blackhole);
 
-    model()->addWormhole(_model->id());
-}    
+//    model()->addWormhole(_model->id());
+//}
 
 void StarSystem::add(WormHole* wormhole, const glm::vec3& center)
 {
@@ -469,8 +469,6 @@ StarSystem::remove(Star* star)
     assert(star);
     m_stars.remove(star);
     model()->removeStar(star->model()->id());
-
-    delete star;
 }
 
 void
@@ -479,8 +477,6 @@ StarSystem::remove(Planet* planet)
     assert(planet);
     m_planets.remove(planet);
     model()->removePlanet(planet->model()->id());
-
-    delete planet;
 }
 
 void
@@ -489,8 +485,6 @@ StarSystem::remove(WormHole* wormhole)
     assert(wormhole);
     m_wormholes.remove(wormhole);
     model()->removeWormHole(wormhole->model()->id());
-
-    delete wormhole;
 }
 
 void
@@ -499,8 +493,6 @@ StarSystem::remove(Asteroid* asteroid)
     assert(asteroid);
     m_asteroids.remove(asteroid);
     model()->removeAsteroid(asteroid->model()->id());
-
-    delete asteroid;
 }
 
 void
@@ -509,8 +501,6 @@ StarSystem::remove(Container* container)
     assert(container);
     m_containers.remove(container);
     model()->removeContainer(container->model()->id());
-
-    delete container;
 }
 
 void
@@ -526,8 +516,6 @@ StarSystem::remove(SpaceStation* spacestation)
     }
 
     model()->removeSpaceStation(spacestation->model()->id());
-
-    delete spacestation;
 }
 
 void
@@ -543,8 +531,6 @@ StarSystem::remove(Ship* ship)
     }
 
     model()->removeShip(ship->model()->id());
-
-    delete ship;
 }
 
 void
@@ -560,8 +546,6 @@ StarSystem::remove(Satellite* satellite)
     }
 
     model()->removeSatellite(satellite->model()->id());
-
-    delete satellite;
 }
 
 //

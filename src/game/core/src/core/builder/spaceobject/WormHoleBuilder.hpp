@@ -42,7 +42,7 @@ public:
 
 private:
     static void __createInternals(control::WormHole*);
-    static control::WormHole* __genTemplate(int_t);
+    static control::WormHole* __genTemplate(descriptor::WormHole*);
 };
 
 } // namespace builder

@@ -18,25 +18,18 @@
 
 #include "WormHole.hpp"
 #include "../common/constants.hpp"
-#include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <ceti/Logger.hpp>
 #include "../world/starsystem.hpp"
 
-namespace {
-descriptor::WormHole* getDescriptor(model::WormHole* model) {
-    return descriptor::Manager::get().wormHole(model->descriptor());
-}
-} // namespace
-
 namespace control {
 
-WormHole::WormHole(model::WormHole* model)
+WormHole::WormHole(model::WormHole* model, descriptor::WormHole* descr)
     :
-      Planetoid(model, getDescriptor(model))
+      Planetoid(model, descr)
     , m_model_wormhole(model)
-    , m_descriptor_wormhole(getDescriptor(model))
+    , m_descriptor_wormhole(descr)
 {
 //    setId(id);
 //    setTypeId(entity::Type::BLACKHOLE);

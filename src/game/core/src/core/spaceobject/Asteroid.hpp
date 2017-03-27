@@ -32,7 +32,7 @@ namespace control {
 class Asteroid : public Planetoid
 {
 public:
-    Asteroid(model::Asteroid*);
+    Asteroid(model::Asteroid*, descriptor::Asteroid*);
     virtual ~Asteroid();
 
     int damage() const { return mass()*10; }
@@ -54,28 +54,4 @@ private:
 
 } // namespace control
 
-//class Asteroid : public Planetoid
-//{
-//    public:
-//        Asteroid(int);
-//        virtual ~Asteroid();
-
-//        int damage() const { return mass()*10; };
-
-//        void updateInSpace(int, bool);
-//        void collisionEvent(bool);
-
-//        virtual void Save(boost::property_tree::ptree&) const override final;
-//        virtual void Load(const boost::property_tree::ptree&) override final;
-//        virtual void Resolve() override final;
-
-//    private:
-//        void _postDeathUniqueEvent(bool);
-
-////        virtual void UpdateInfo() override final;
-
-//        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//        void LoadData(const boost::property_tree::ptree&);
-//        void ResolveData();
-//};
 
