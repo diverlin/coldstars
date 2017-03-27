@@ -18,7 +18,6 @@
 
 #include "Protector.hpp"
 #include <core/descriptor/item/equipment/Protector.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Protector.hpp>
 
 #ifdef USE_MODULES
@@ -31,11 +30,11 @@
 namespace control {
 namespace item {
 
-Protector::Protector(model::item::Protector* model)
+Protector::Protector(model::item::Protector* model, descriptor::item::Protector* descr)
     :
-      Equipment(model, descriptor::Manager::get().protector(model->descriptor()))
+      Equipment(model, descr)
     , m_model_protector(model)
-    , m_descriptor_protector(descriptor::Manager::get().protector(model->descriptor()))
+    , m_descriptor_protector(descr)
 {
 }
 

@@ -18,7 +18,6 @@
 
 #include "Bak.hpp"
 #include <core/descriptor/item/equipment/Bak.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Bak.hpp>
 
 #ifdef USE_MODULES
@@ -32,11 +31,11 @@
 namespace control {
 namespace item {
 
-Bak::Bak(model::item::Bak* model)
+Bak::Bak(model::item::Bak* model, descriptor::item::Bak* descr)
     :
-      Equipment(model, descriptor::Manager::get().bak(model->descriptor()))
+      Equipment(model, descr)
     , m_model_bak(model)
-    , m_descriptor_bak(descriptor::Manager::get().bak(model->descriptor()))
+    , m_descriptor_bak(descr)
 {}
 
 int

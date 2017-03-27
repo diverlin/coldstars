@@ -50,7 +50,7 @@ private:
     Lazer() = delete;
     ~Lazer() = delete;
 
-    static control::item::Lazer* __genTemplate(int_t);
+    static control::item::Lazer* __genTemplate(descriptor::item::Lazer*);
     static void __createInternals(control::item::Lazer*, descriptor::item::Lazer*);
 }; 
 

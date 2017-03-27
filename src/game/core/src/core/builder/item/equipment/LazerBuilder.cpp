@@ -44,16 +44,16 @@ Lazer::gen()
 control::item::Lazer*
 Lazer::gen(descriptor::item::Lazer* descr)
 {
-    control::item::Lazer* lazer = __genTemplate(descr->id());
+    control::item::Lazer* lazer = __genTemplate(descr);
     __createInternals(lazer, descr);
     return lazer;
 }
 
 control::item::Lazer*
-Lazer::__genTemplate(int_t descriptor_id)
+Lazer::__genTemplate(descriptor::item::Lazer* descr)
 { 
-    model::item::Lazer* model = new model::item::Lazer(descriptor_id);
-    control::item::Lazer* lazer = new control::item::Lazer(model);
+    model::item::Lazer* model = new model::item::Lazer(descr->id());
+    control::item::Lazer* lazer = new control::item::Lazer(model, descr);
     EntityManager::get().reg(lazer);
     return lazer;
 } 

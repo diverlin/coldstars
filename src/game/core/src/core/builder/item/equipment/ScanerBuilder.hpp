@@ -50,7 +50,7 @@ private:
     Scaner() = delete;
     ~Scaner() = delete;
 
-    static control::item::Scaner* __genTemplate(int_t);
+    static control::item::Scaner* __genTemplate(descriptor::item::Scaner*);
     static void __createInternals(control::item::Scaner*, descriptor::item::Scaner*);
 }; 
 

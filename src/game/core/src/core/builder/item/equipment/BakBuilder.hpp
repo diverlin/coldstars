@@ -51,7 +51,7 @@ private:
     Bak() = delete;
     ~Bak() = delete;
 
-    static control::item::Bak* __genTemplate(int_t, int_t ob_id = NONE);
+    static control::item::Bak* __genTemplate(descriptor::item::Bak*, int_t ob_id = NONE);
     static void __createInternals(control::item::Bak*, descriptor::item::Bak*);
 }; 
 

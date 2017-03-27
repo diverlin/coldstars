@@ -18,7 +18,6 @@
 
 #include "Grapple.hpp"
 #include <core/descriptor/item/equipment/Grapple.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Grapple.hpp>
 
 #ifdef USE_MODULES
@@ -31,11 +30,11 @@
 namespace control {
 namespace item {
 
-Grapple::Grapple(model::item::Grapple* model)
+Grapple::Grapple(model::item::Grapple* model, descriptor::item::Grapple* descr)
     :
-      Equipment(model, descriptor::Manager::get().grapple(model->descriptor()))
+      Equipment(model, descr)
     , m_model_grapple(model)
-    , m_descriptor_grapple(descriptor::Manager::get().grapple(model->descriptor()))
+    , m_descriptor_grapple(descr)
 {}
 
 ///* virtual */

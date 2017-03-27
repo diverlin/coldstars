@@ -52,7 +52,7 @@ private:
     Protector() = delete;
     ~Protector() = delete;
 
-    static control::item::Protector* __genTemplate(int_t);
+    static control::item::Protector* __genTemplate(descriptor::item::Protector*);
     static void __createInternals(control::item::Protector*, descriptor::item::Protector*);
 }; 
 

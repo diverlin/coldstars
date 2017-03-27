@@ -32,7 +32,7 @@ namespace item {
 control::item::Bak*
 Bak::gen(descriptor::item::Bak* descr)
 {
-    control::item::Bak* bak = __genTemplate(descr->id());
+    control::item::Bak* bak = __genTemplate(descr);
     __createInternals(bak, descr);
     return bak;
 }
@@ -40,8 +40,8 @@ Bak::gen(descriptor::item::Bak* descr)
 control::item::Bak*
 Bak::gen(int_t descriptor_id, int_t ob_id)
 {
-    control::item::Bak* bak = __genTemplate(descriptor_id, ob_id);
     descriptor::item::Bak* descr = descriptor::Manager::get().bak(descriptor_id);
+    control::item::Bak* bak = __genTemplate(descr, ob_id);
     __createInternals(bak, descr);
     return bak;
 }
@@ -61,10 +61,10 @@ Bak::gen()
 
 
 control::item::Bak*
-Bak::__genTemplate(int_t descriptor_id, int_t ob_id)
+Bak::__genTemplate(descriptor::item::Bak* descr, int_t ob_id)
 {
-    model::item::Bak* model = new model::item::Bak(descriptor_id, ob_id);
-    control::item::Bak* bak = new control::item::Bak(model);
+    model::item::Bak* model = new model::item::Bak(descr->id(), ob_id);
+    control::item::Bak* bak = new control::item::Bak(model, descr);
     EntityManager::get().reg(bak);
     return bak;
 }

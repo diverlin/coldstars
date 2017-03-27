@@ -31,11 +31,11 @@
 namespace control {
 namespace item {
 
-Scaner::Scaner(model::item::Scaner* model)
+Scaner::Scaner(model::item::Scaner* model, descriptor::item::Scaner* descr)
     :
-      Equipment(model, descriptor::Manager::get().scaner(model->descriptor()))
+      Equipment(model, descr)
     , m_model_scaner(model)
-    , m_descriptor_scaner(descriptor::Manager::get().scaner(model->descriptor()))
+    , m_descriptor_scaner(descr)
 {}
 
 /* virtual */
