@@ -25,33 +25,25 @@
 
 #include <meti/RandUtils.hpp>
 
-HyperSpace::HyperSpace()
-{}
+namespace control {
 
-HyperSpace::~HyperSpace()
-{}      
-
-void HyperSpace::AddVehicle(model::Vehicle* vehicle)
+void HyperSpace::add(Vehicle* vehicle)
 {
-    assert(false);
-    //vehicle->setPlace(int_t(type::place::HYPER));
-    VEHICLE_vec.push_back(vehicle);  
+    vehicle->model()->setPlace(place::Type::HYPER);
+    m_vehicles.push_back(vehicle);
 }
 
-bool HyperSpace::IsVehicleHere(int id) const
+bool HyperSpace::isHere(int id) const
 {
-    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-    {               
-        if (VEHICLE_vec[i]->id() == id)
-        {
+    for (Vehicle* vehicle: m_vehicles) {
+        if (vehicle->id() == id) {
             return true;
         }
-    }
-        
+    }        
     return false;
 }    
 
-void HyperSpace::PostHyperJumpEvent(Starsystem* starsystem)
+void HyperSpace::postHyperJumpEvent(Starsystem* starsystem)
 {
 //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
 //    {
@@ -64,3 +56,5 @@ void HyperSpace::PostHyperJumpEvent(Starsystem* starsystem)
           
 //    VEHICLE_vec.clear();
 }
+
+} // namespace control
