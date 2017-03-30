@@ -22,6 +22,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/model/item/equipment/Weapon.hpp>
+#include <core/descriptor/item/Item.hpp>
 
 #include <core/item/Item.hpp>
 #include <core/slot/ItemSlot.hpp>
@@ -69,11 +70,11 @@ WeaponComplex::equipedWeakestSlot() const
 void WeaponComplex::prepareWeapons()
 {       
     // used once at the begining of turn
-    __reloadAllWeapons();
-    __validateAllWeaponsTarget();
+    __reload();
+    __validateTargets();
 }
 
-void WeaponComplex::__reloadAllWeapons()
+void WeaponComplex::__reload()
 {
     m_slots_reloaded.clear();
     for (control::ItemSlot* slot: m_slots) {
@@ -90,7 +91,7 @@ void WeaponComplex::__reloadAllWeapons()
 //    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
 }
 
-void WeaponComplex::activateWeapons()
+void WeaponComplex::selectAllWeapons()
 {
     for (control::ItemSlot* slot: m_slots_reloaded) {
         slot->selectEvent();
@@ -104,14 +105,13 @@ void WeaponComplex::deactivateWeapons()
     }
 }
 
-void WeaponComplex::activateWeapons(const entity::Type& weapon_subtype_id)
+void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
 {
-    assert(false);
-//    for (ItemSlot* slot: m_slots_reloaded) {
-//        if (slot->item()->model()->subtype() == weapon_subtype_id) {
-//            slot->selectEvent();
-//        }
-//    }
+    for (control::ItemSlot* slot: m_slots_reloaded) {
+        if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
+            slot->selectEvent();
+        }
+    }
 }
 
 void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
@@ -170,7 +170,7 @@ void WeaponComplex::setTarget(control::SpaceObject* target, control::ItemSlot* i
     }
 }
 
-int WeaponComplex::guessDamage(int dist)
+int WeaponComplex::guessDamage(int dist = 0)
 {
     int damage = 0;
     for (control::ItemSlot* slot: m_slots_reloaded) {
@@ -204,7 +204,7 @@ void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
     //}
 }
 
-void WeaponComplex::__validateAllWeaponsTarget()
+void WeaponComplex::__validateTargets()
 {
     for (control::ItemSlot* slot: m_slots) {
         if (slot->target()) {

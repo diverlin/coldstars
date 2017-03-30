@@ -506,7 +506,7 @@ bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 
 bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
 {
-    return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
+    return (target->starsystem() == vehicleOwner()->starsystem());
 }                
 
 bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const

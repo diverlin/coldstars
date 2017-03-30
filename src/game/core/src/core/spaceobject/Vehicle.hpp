@@ -90,7 +90,8 @@ public:
     void fire(int, float);
     void setWeaponTarget(SpaceObject* object, ItemSlot* slot = nullptr);
     void prepareWeapons();
-    int guessDamage(int dist);
+    void selectAllWeapons();
+    int guessDamage(int dist = 0);
     //\ weapon complex interface
 
     [[deprecated("move to gui")]]
@@ -237,7 +238,6 @@ public:
     STATUS CheckGrabStatus() const;
 
     float adjustDissipateFilter() const;
-    int criticalDamage() const;
 
     model::Vehicle* model() const { return m_model_vehicle; }
 
@@ -504,7 +504,6 @@ private:
 //    STATUS CheckGrabStatus() const;
 
 //    float adjustDissipateFilter() const;
-//    int criticalDamage() const;
 
 //protected:
 //    std::vector<ItemSlot*> m_slots;

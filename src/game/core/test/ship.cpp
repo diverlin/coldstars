@@ -90,32 +90,33 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_shoot_to_ship)
 {
     /* create objects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+//    control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    float distance = 10.0f;
-
     /* add objects */
-    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f, 0.0f, 0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(ship2, /*pos=*/glm::vec3(distance, 0.0f, 0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+//    starsystem->add(ship1);
+//    starsystem->add(ship2);
 
     /* initiate shoot */
     ship1->prepareWeapons();
-    ship1->weaponComplex().activateWeapons();
+    ship1->selectAllWeapons();
     ship1->setWeaponTarget(ship2);
-    int damage = ship1->guessDamage(distance) * ship2->adjustDissipateFilter();
+
+    int actual_damage = ship1->guessDamage() * ship2->adjustDissipateFilter();
     int armor_init = ship2->model()->armor();
+
     ship1->fire(/*timer=*/0, /*rate=*/1.0);
-    EXPECT_TRUE((armor_init - damage) - ship2->model()->armor() <= 1);
+
+    EXPECT_TRUE((armor_init - actual_damage) - ship2->model()->armor() <= 1);
 }
 
-TEST(ship, criticalDamage)
+TEST(ship, kill)
 {
     /* create objects */
     control::Ship* ship = builder::Ship::gen();
 
-    ship->hit(ship->criticalDamage());
+    ship->hit(100000);
     EXPECT_EQ(0, ship->model()->armor());
 }
 

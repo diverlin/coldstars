@@ -56,9 +56,9 @@ public:
 
     void fire(int, float, bool);
 
-    void activateWeapons();
+    void selectAllWeapons();
     void deactivateWeapons();
-    void activateWeapons(const entity::Type&);
+    void selectAllWeapons(const entity::Type&);
     void deactivateWeapons(const entity::Type&);
 
     bool isAnyWeaponSelected() const;
@@ -84,8 +84,8 @@ private:
     std::vector<control::ItemSlot*> m_slots;
     std::vector<control::ItemSlot*> m_slots_reloaded;
 
-    void __reloadAllWeapons();
-    void __validateAllWeaponsTarget();
+    void __reload();
+    void __validateTargets();
 };
 
 
