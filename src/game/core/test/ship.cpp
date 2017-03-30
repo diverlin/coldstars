@@ -90,13 +90,8 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_shoot_to_ship)
 {
     /* create objects */
-//    control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
-
-    /* add objects */
-//    starsystem->add(ship1);
-//    starsystem->add(ship2);
 
     /* initiate shoot */
     ship1->prepareWeapons();

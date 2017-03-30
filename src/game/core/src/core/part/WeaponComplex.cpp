@@ -116,12 +116,11 @@ void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
 
 void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
 {
-    assert(false);
-//    for (ItemSlot* slot: m_slots_reloaded) {
-//        if (slot->item()->model()->subtype() == weapon_subtype_id) {
-//            slot->deselectEvent();
-//        }
-//    }
+    for (control::ItemSlot* slot: m_slots_reloaded) {
+        if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
+            slot->deselectEvent();
+        }
+    }
 }
 
 bool WeaponComplex::isAnyWeaponSelected() const
