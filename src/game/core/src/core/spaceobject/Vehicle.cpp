@@ -319,6 +319,11 @@ void Vehicle::prepareWeapons()
     weaponComplex().prepareWeapons();
 }
 
+void Vehicle::selectAllWeapons()
+{
+    weaponComplex().selectAllWeapons();
+}
+
 int Vehicle::guessDamage(int dist)
 {
     return weaponComplex().guessDamage(dist);
@@ -965,10 +970,6 @@ float Vehicle::adjustDissipateFilter() const
     //std::cout<<"---rate="<<rate<<std::endl;
     assert(rate > 0 && rate <= 1.0f);
     return rate;
-}
-
-int Vehicle::criticalDamage() const {
-    return 2*model()->armor();
 }
 
 /* virtual */
