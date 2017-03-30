@@ -133,6 +133,7 @@ public:
     //        void virtual UpdateInfo() {}
 
     model::SpaceObject* model() const { return m_model_spaceobject; }
+    descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
 
 private:
     StarSystem* m_starsystem = nullptr;
@@ -144,8 +145,6 @@ protected:
 
     model::SpaceObject* m_model_spaceobject = nullptr;
     descriptor::SpaceObject* m_descriptor_spaceobject = nullptr;
-
-    descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
 
     void _addMass(int d_mass) { m_mass += d_mass; }
 

@@ -79,17 +79,17 @@ public:
     virtual ~Base();
 
     void setId(int_t id) { m_model_base->setId(id); }
-    void setActualizeModel() { m_actualizeModel = true; }
+    void setInitialized() { m_initialized = true; }
 
     int_t id() { return model()->id(); }
     int_t descriptor() { return model()->descriptor(); }
 
-    bool actualizeModel() const { return m_actualizeModel; }
+    bool isInitialized() const { return m_initialized; }
 
     virtual void putChildrenToGarbage() const {}
 
 private:
-    bool m_actualizeModel = false;
+    bool m_initialized = false;
 
     model::Base* m_model_base = nullptr;
     model::Base* model() const { return m_model_base; }

@@ -88,7 +88,7 @@ public:
 
     // wepon complex interface
     void fire(int, float);
-    void setWeaponTarget(model::SpaceObject* object, ItemSlot* slot = nullptr);
+    void setWeaponTarget(SpaceObject* object, ItemSlot* slot = nullptr);
     void prepareWeapons();
     int guessDamage(int dist);
     //\ weapon complex interface

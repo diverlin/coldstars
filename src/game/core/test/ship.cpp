@@ -20,6 +20,7 @@
 
 #include <core/type/PlaceType.hpp>
 #include <core/common/Global.hpp>
+#include <core/struct/VehiclePropetries.hpp>
 
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -111,7 +112,7 @@ TEST(ship, drop_item_to_space)
     EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
-TEST(ship, base_ship_shoot)
+TEST(ship, base_shoot_to_ship)
 {
     /* create objects */
     control::StarSystem* starsystem = builder::StarSystem::gen();
@@ -121,13 +122,13 @@ TEST(ship, base_ship_shoot)
     float distance = 10.0f;
 
     /* add objects */
-    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-    starsystem->add(ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f, 0.0f, 0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2, /*pos=*/glm::vec3(distance, 0.0f, 0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
 
     /* initiate shoot */
     ship1->prepareWeapons();
     ship1->weaponComplex().activateWeapons();
-    ship1->setWeaponTarget(ship2->model());
+    ship1->setWeaponTarget(ship2);
     int damage = ship1->guessDamage(distance) * ship2->adjustDissipateFilter();
     int armor_init = ship2->model()->armor();
     ship1->fire(/*timer=*/0, /*rate=*/1.0);
@@ -178,33 +179,28 @@ void compareShipModels(model::Ship* m1, model::Ship* m2)
     compareVehileModels(m1, m2);
 }
 
-void compareVehicleControls(control::Vehicle* c1, control::Vehicle* c2)
+void compareVehicleProperties(const VehiclePropetries& origin, const VehiclePropetries& clone)
 {
-    EXPECT_EQ(c1->properties().free_space, c2->properties().free_space);
-    EXPECT_EQ(c1->properties().protection, c2->properties().protection);
-    EXPECT_EQ(c1->properties().radar, c2->properties().radar);
-    EXPECT_EQ(c1->properties().speed, c2->properties().speed);
-    EXPECT_EQ(c1->properties().energy, c2->properties().energy);
-    EXPECT_EQ(c1->properties().hyper, c2->properties().hyper);
-    EXPECT_EQ(c1->properties().repair, c2->properties().repair);
-    EXPECT_EQ(c1->properties().freeze, c2->properties().freeze);
-    EXPECT_EQ(c1->properties().scan, c2->properties().scan);
-    EXPECT_EQ(c1->properties().grab_strength, c2->properties().grab_strength);
-    EXPECT_EQ(c1->properties().grab_radius, c2->properties().grab_radius);
-    EXPECT_EQ(c1->properties().temperature, c2->properties().temperature);
-    EXPECT_EQ(c1->properties().artefact_gravity, c2->properties().artefact_gravity);
-    EXPECT_EQ(c1->properties().artefact_protection, c2->properties().artefact_protection);
-    EXPECT_EQ(c1->properties().total_damage, c2->properties().total_damage);
-    EXPECT_EQ(c1->properties().fire_radius_min, c2->properties().fire_radius_min);
-    EXPECT_EQ(c1->properties().fire_radius_max, c2->properties().fire_radius_max);
-    EXPECT_EQ(c1->properties().equipment_radar, c2->properties().equipment_radar);
-    EXPECT_EQ(c1->properties().shield_effect_enabled, c2->properties().shield_effect_enabled);
-    EXPECT_EQ(c1->properties().hibernate_mode_enabled, c2->properties().hibernate_mode_enabled);
-}
-
-void compareShipControls(control::Ship* c1, control::Ship* c2)
-{
-    compareVehicleControls(c1, c2);
+    EXPECT_EQ(origin.free_space, clone.free_space);
+    EXPECT_EQ(origin.protection, clone.protection);
+    EXPECT_EQ(origin.radar, clone.radar);
+    EXPECT_EQ(origin.speed, clone.speed);
+    EXPECT_EQ(origin.energy, clone.energy);
+    EXPECT_EQ(origin.hyper, clone.hyper);
+    EXPECT_EQ(origin.repair, clone.repair);
+    EXPECT_EQ(origin.freeze, clone.freeze);
+    EXPECT_EQ(origin.scan, clone.scan);
+    EXPECT_EQ(origin.grab_strength, clone.grab_strength);
+    EXPECT_EQ(origin.grab_radius, clone.grab_radius);
+    EXPECT_EQ(origin.temperature, clone.temperature);
+    EXPECT_EQ(origin.artefact_gravity, clone.artefact_gravity);
+    EXPECT_EQ(origin.artefact_protection, clone.artefact_protection);
+    EXPECT_EQ(origin.total_damage, clone.total_damage);
+    EXPECT_EQ(origin.fire_radius_min, clone.fire_radius_min);
+    EXPECT_EQ(origin.fire_radius_max, clone.fire_radius_max);
+    EXPECT_EQ(origin.equipment_radar, clone.equipment_radar);
+    EXPECT_EQ(origin.shield_effect_enabled, clone.shield_effect_enabled);
+    EXPECT_EQ(origin.hibernate_mode_enabled, clone.hibernate_mode_enabled);
 }
 
 } // namespace
@@ -212,11 +208,13 @@ void compareShipControls(control::Ship* c1, control::Ship* c2)
 
 void testShipClone(control::Ship* ship)
 {
+    VehiclePropetries properties = ship->properties(); // we need copy, not reference
+
     model::Ship* model = new model::Ship(ship->model()->data());
     control::Ship* clone = new control::Ship(model, ship->descriptor());
 
     compareShipModels(ship->model(), model);
-    compareShipControls(ship, clone);
+    compareVehicleProperties(properties, clone->properties());
 }
 
 TEST(ship, clone)

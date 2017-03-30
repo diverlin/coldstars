@@ -21,6 +21,7 @@
 #include <ceti/Logger.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
+#include <core/model/item/equipment/Weapon.hpp>
 
 #include <core/item/Item.hpp>
 #include <core/slot/ItemSlot.hpp>
@@ -144,12 +145,11 @@ bool WeaponComplex::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-void WeaponComplex::setTarget(model::SpaceObject* target, control::ItemSlot* item_slot)
+void WeaponComplex::setTarget(control::SpaceObject* target, control::ItemSlot* item_slot)
 {                 
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
     //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
 
-    assert(false);
     //target->remeberAgressor(owner_vehicle);
 
     for (control::ItemSlot* slot: m_slots) {
@@ -173,12 +173,11 @@ void WeaponComplex::setTarget(model::SpaceObject* target, control::ItemSlot* ite
 int WeaponComplex::guessDamage(int dist)
 {
     int damage = 0;
-    assert(false);
-//    for (control::ItemSlot* slot: m_slots_reloaded) {
-//        if (slot->item()->radius() >= dist) {
-//            damage += slot->item()->damage();
-//        }
-//    }
+    for (control::ItemSlot* slot: m_slots_reloaded) {
+        if (slot->weapon()->model()->radius() >= dist) {
+            damage += slot->weapon()->model()->damage();
+        }
+    }
     return damage;
 }
 

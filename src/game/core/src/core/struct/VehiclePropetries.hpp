@@ -22,7 +22,7 @@
 
 /* this data is changed during game play, the propetries depends on many factors */
 struct VehiclePropetries
-{    
+{
     int free_space = 0;
 
     int protection = 0;
@@ -38,9 +38,9 @@ struct VehiclePropetries
 
     int grab_strength = 0;
     int grab_radius = 0;
-        
+
     int temperature = 0;
-    
+
     int artefact_gravity = 0;
     int artefact_protection = 0;
 
