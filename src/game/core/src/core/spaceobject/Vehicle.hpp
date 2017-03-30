@@ -25,7 +25,6 @@
 #include <core/part/DriveComplex.hpp>
 #include <core/part/ProtectionComplex.hpp>
 
-#include <core/struct/VehiclePropetries.hpp>
 #include <core/struct/VehicleNeeds.hpp>
 
 #include <core/type/StatusType.hpp>
@@ -72,11 +71,47 @@ enum class VEHICLE_SPECIAL_ACTION_TYPE {
     NONE=0, INITIATE_DOCKING, INITIATE_LAUNCHING, INITIATE_JUMPIN, INITIATE_JUMPOUT
 };
 
+const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
 namespace control {
 
 class Vehicle : public SpaceObject
 {
+public:
+    struct Propetries
+    {
+        int free_space = 0;
+
+        int protection = 0;
+        int radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+        float speed = 0;  // depends on mass and drive
+
+        int energy = 0;
+        int hyper = 0;  // depends on drive and bak
+        //int fuel = 0;   // depends on bak
+        int repair = 0; // depends on droid
+        int freeze = 0; // depends on freezer
+        int scan = 0;   // depends on scaner
+
+        int grab_strength = 0;
+        int grab_radius = 0;
+
+        int temperature = 0;
+
+        int artefact_gravity = 0;
+        int artefact_protection = 0;
+
+        // simplification
+        int total_damage = 0;
+        int fire_radius_min = 0;
+        int fire_radius_max = 0;
+
+        bool equipment_radar = 0;
+        [[deprecated("deprecated")]]
+        bool shield_effect_enabled = 0;
+        bool hibernate_mode_enabled = 0;
+    };
+
 public:
     Vehicle(model::Vehicle*, descriptor::Vehicle*);
     virtual ~Vehicle();
@@ -114,8 +149,8 @@ public:
     VehicleSlot* const parentVehicleSlot() const { return m_parentVehicleSlot; }
 
     [[warning("remove this ugly non const")]]
-    VehiclePropetries& properties() { return m_properties; }
-    const VehiclePropetries& properties() const { return m_properties; }
+    Propetries& properties() { return m_properties; }
+    const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
     descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
 
@@ -295,7 +330,7 @@ private:
     std::vector<ItemSlot*> m_artefactSlots;
     std::vector<ItemSlot*> m_cargoSlots;
 
-    VehiclePropetries m_properties;
+    Propetries m_properties;
     VehicleNeeds m_needs;
     WeaponComplex     m_weapon_complex;
     DriveComplex      m_drive_complex;

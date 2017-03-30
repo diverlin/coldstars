@@ -20,7 +20,6 @@
 
 #include <core/type/PlaceType.hpp>
 #include <core/common/Global.hpp>
-#include <core/struct/VehiclePropetries.hpp>
 
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -150,7 +149,7 @@ void compareShipModels(model::Ship* m1, model::Ship* m2)
     compareVehileModels(m1, m2);
 }
 
-void compareVehicleProperties(const VehiclePropetries& origin, const VehiclePropetries& clone)
+void compareVehicleProperties(const control::Vehicle::Propetries& origin, const control::Vehicle::Propetries& clone)
 {
     EXPECT_EQ(origin.free_space, clone.free_space);
     EXPECT_EQ(origin.protection, clone.protection);
@@ -179,7 +178,7 @@ void compareVehicleProperties(const VehiclePropetries& origin, const VehicleProp
 
 void testShipCloneScenario(control::Ship* ship)
 {
-    VehiclePropetries properties = ship->properties(); // we need copy, not reference
+    control::Vehicle::Propetries properties = ship->properties(); // we need copy, not reference
 
     model::Ship* model = new model::Ship(ship->model()->data());
     control::Ship* clone = new control::Ship(model, ship->descriptor());
