@@ -27,7 +27,7 @@ namespace item {
 class Scaner : public Equipment
 {
 public:
-    Scaner(int_t);
+    Scaner(int_t, int_t);
     ~Scaner() = default;
     Scaner(const std::string& data);
     std::string data() const;

@@ -43,6 +43,15 @@ Grapple::gen()
 }
 
 control::item::Grapple*
+Grapple::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Grapple* descr = descriptor::Manager::get().grapple(descriptor_id);
+    control::item::Grapple* grapple = __genTemplate(descr, ob_id);
+    __createInternals(grapple, descr);
+    return grapple;
+}
+
+control::item::Grapple*
 Grapple::gen(descriptor::item::Grapple* descr)
 {
     control::item::Grapple* grapple = __genTemplate(descr);
@@ -51,9 +60,9 @@ Grapple::gen(descriptor::item::Grapple* descr)
 } 
 
 control::item::Grapple*
-Grapple::__genTemplate(descriptor::item::Grapple* descr)
+Grapple::__genTemplate(descriptor::item::Grapple* descr, int_t ob_id)
 {
-    model::item::Grapple* model = new model::item::Grapple(descr->id());
+    model::item::Grapple* model = new model::item::Grapple(descr->id(), ob_id);
     control::item::Grapple* grapple = new control::item::Grapple(model, descr);
     EntityManager::get().reg(grapple);
     return grapple;

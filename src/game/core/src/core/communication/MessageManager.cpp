@@ -69,103 +69,114 @@ void MessageManager::update()
     }
 }
 
+namespace {
+
+void createStarSystemEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::StarSystem::gen(data.obDescriptor(), data.obId());
+}
+
+void createShipEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::Ship::gen(data.obDescriptor(), data.obId());
+}
+
+void createBombEvent(const comm::Message& message) {
+    assert(false);
+//        core::global::get().bombBuilder().gen(message.data);
+}
+
+void createContainerEvent(const comm::Message& message) {
+    assert(false);
+//        core::global::get().containerBuilder().gen(message.data);
+}
+
+// items
+void createBakEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Bak::gen(data.obDescriptor(), data.obId());
+}
+
+// items
+void createDriveEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Drive::gen(data.obDescriptor(), data.obId());
+}
+void createDroidEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Droid::gen(data.obDescriptor(), data.obId());
+}
+void createGrappleEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Grapple::gen(data.obDescriptor(), data.obId());
+}
+void createProtectorEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Protector::gen(data.obDescriptor(), data.obId());
+}
+void createScanerEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Scaner::gen(data.obDescriptor(), data.obId());
+}
+void createRadarEvent(const comm::Message& message) {
+    descriptor::comm::Creation data(message.data());
+    builder::item::Radar::gen(data.obDescriptor(), data.obId());
+}
+// item
+
+void addShipToStarSystemEvent(const comm::Message& message) {
+    AddToStarsystemDescriptor descriptor(message.data());
+    control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+    control::Ship* ship = EntityManager::get().ship(descriptor.object);
+    starsystem->add(ship);
+}
+void addContainerToStarSystemEvent(const comm::Message& message) {
+    AddToStarsystemDescriptor descriptor(message.data());
+    control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+    control::Container* container = EntityManager::get().container(descriptor.object);
+    starsystem->add(container);
+}
+
+void hitEvent(const comm::Message& message) {
+    descriptor::Hit descr(message.data());
+    control::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
+    ob->hit(descr.damage());
+}
+void explosionEvent(const comm::Message& message) {
+    descriptor::Explosion descriptor(message.data());
+    control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
+    Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
+    assert(false);
+    //        starsystem->add(explosion, descriptor.center);
+}
+
+} // namespace
+
 void MessageManager::process(const comm::Message& message)
 {
     switch(message.type()) {
     /** CREATE */
-    case comm::Message::Type::CREATE_STARSYSTEM: {
-        descriptor::comm::Creation data(message.data());
-        builder::StarSystem::gen(data.obDescriptor(), data.obId());
-        break;
-    }
-    case comm::Message::Type::CREATE_SHIP: {
-        descriptor::comm::Creation data(message.data());
-        builder::Ship::gen(data.obDescriptor(), data.obId());
-        break;
-    }
-    case comm::Message::Type::CREATE_BOMB: {
-        assert(false);
-//        core::global::get().bombBuilder().gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_CONTAINER: {
-        assert(false);
-//        core::global::get().containerBuilder().gen(message.data);
-        break;
-    }
+    case comm::Message::Type::CREATE_STARSYSTEM: createStarSystemEvent(message); break;
+    case comm::Message::Type::CREATE_SHIP: createShipEvent(message); break;
+    case comm::Message::Type::CREATE_BOMB: createBombEvent(message); break;
+    case comm::Message::Type::CREATE_CONTAINER: createContainerEvent(message); break;
+    // items
+    case comm::Message::Type::CREATE_BAK: createBakEvent(message); break;
+    case comm::Message::Type::CREATE_DRIVE: createDriveEvent(message); break;
+    case comm::Message::Type::CREATE_DROID: createDroidEvent(message); break;
+    case comm::Message::Type::CREATE_GRAPPLE: createGrappleEvent(message); break;
+    case comm::Message::Type::CREATE_PROTECTOR: createProtectorEvent(message); break;
+    case comm::Message::Type::CREATE_SCANER: createScanerEvent(message); break;
+    case comm::Message::Type::CREATE_RADAR: createRadarEvent(message); break;
 
-        // items
-    case comm::Message::Type::CREATE_BAK: {
-        descriptor::comm::Creation data(message.data());
-        builder::item::Bak::gen(data.obDescriptor(), data.obId());
-        break;
-    }
-    case comm::Message::Type::CREATE_DRIVE: {
-        assert(false);
-//        auto model = builder::item::Drive::gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_DROID: {
-        assert(false);
-//        builder::item::Droid::gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_GRAPPLE: {
-        assert(false);
-//        builder::item::Grapple::gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_PROTECTOR: {
-        assert(false);
-//        builder::item::Protector::gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_SCANER: {
-        assert(false);
-//        builder::item::Scaner::gen(message.data);
-        break;
-    }
-    case comm::Message::Type::CREATE_RADAR: {
-        assert(false);
-//        builder::item::Radar::gen(message.data);
-        break;
-    }
+    /** ADD TO STARSYSTEM */
+    case comm::Message::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(message); break;
+    case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
 
-        /** STARSYSTEM ADD */
-    case comm::Message::Type::STARSYSTEM_ADD_SHIP: {
-        AddToStarsystemDescriptor descriptor(message.data());
-        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
-        control::Ship* ship = EntityManager::get().ship(descriptor.object);
-        starsystem->add(ship);
-        break;
-    }
-    case comm::Message::Type::STARSYSTEM_ADD_CONTAINER: {
-        AddToStarsystemDescriptor descriptor(message.data());
-        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
-        control::Container* container = EntityManager::get().container(descriptor.object);
-        assert(false);
-        //starsystem->add(container);
-        break;
-    }
-        /** OTHER */
-    case comm::Message::Type::HIT: {
-        descriptor::Hit descr(message.data());
-        control::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
-        ob->hit(descr.damage());
-        break;
-    }
-    case comm::Message::Type::EXPLOSION: {
-        descriptor::Explosion descriptor(message.data());
-        control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.starsystem_id);
-        Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
-        assert(false);
-        //        starsystem->add(explosion, descriptor.center);
-        break;
-    }
-    default:
-    {
-        break;
-    }
+
+    /** OTHER */
+    case comm::Message::Type::HIT: hitEvent(message); break;
+    case comm::Message::Type::EXPLOSION: explosionEvent(message); break;
     }
 }
 

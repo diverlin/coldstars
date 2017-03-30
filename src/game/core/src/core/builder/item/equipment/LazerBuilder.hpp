@@ -44,13 +44,14 @@ class Lazer : public Equipment
 {
 public:
     static control::item::Lazer* gen();
+    static control::item::Lazer* gen(int_t, int_t ob_id = NONE);
     static control::item::Lazer* gen(descriptor::item::Lazer*);
 
 private:
     Lazer() = delete;
     ~Lazer() = delete;
 
-    static control::item::Lazer* __genTemplate(descriptor::item::Lazer*);
+    static control::item::Lazer* __genTemplate(descriptor::item::Lazer*, int_t ob_id = NONE);
     static void __createInternals(control::item::Lazer*, descriptor::item::Lazer*);
 }; 
 

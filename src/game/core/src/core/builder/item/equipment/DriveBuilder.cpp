@@ -42,6 +42,15 @@ Drive::gen()
 }
 
 control::item::Drive*
+Drive::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Drive* descr = descriptor::Manager::get().drive(descriptor_id);
+    control::item::Drive* drive = __genTemplate(descr, ob_id);
+    __createInternals(drive, descr);
+    return drive;
+}
+
+control::item::Drive*
 Drive::gen(descriptor::item::Drive* descr)
 {
     control::item::Drive* drive = __genTemplate(descr);
@@ -50,9 +59,9 @@ Drive::gen(descriptor::item::Drive* descr)
 }        
 
 control::item::Drive*
-Drive::__genTemplate(descriptor::item::Drive* descr)
+Drive::__genTemplate(descriptor::item::Drive* descr, int_t ob_id)
 {
-    model::item::Drive* model = new model::item::Drive(descr->id());
+    model::item::Drive* model = new model::item::Drive(descr->id(), ob_id);
     control::item::Drive* drive = new control::item::Drive(model, descr);
     EntityManager::get().reg(drive);
     return drive;

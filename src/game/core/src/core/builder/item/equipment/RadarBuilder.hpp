@@ -44,13 +44,14 @@ class Radar : public Equipment
 {
 public:
     static control::item::Radar* gen();
+    static control::item::Radar* gen(int_t, int_t ob_id = NONE);
     static control::item::Radar* gen(descriptor::item::Radar*);
 
 private:
     Radar() = delete;
     ~Radar() = delete;
 
-    static control::item::Radar* __genTemplate(descriptor::item::Radar*);
+    static control::item::Radar* __genTemplate(descriptor::item::Radar*, int_t ob_id = NONE);
     static void __createInternals(control::item::Radar*, descriptor::item::Radar*);
 }; 
 

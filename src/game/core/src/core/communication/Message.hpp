@@ -29,8 +29,8 @@ public:
         /** */
 
         /** TRANSITION */
-        STARSYSTEM_ADD_SHIP,
-        STARSYSTEM_ADD_CONTAINER,
+        ADD_SHIP_TO_STARSYSTEM,
+        ADD_CONTAINER_TO_STARSYSTEM,
         INSERT,
         REMOVE,
         DELETE,

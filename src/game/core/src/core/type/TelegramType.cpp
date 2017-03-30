@@ -38,8 +38,8 @@ std::string to_string(comm::Message::Type type_id)
     /** */
 
     /** TRANSITION */
-    case comm::Message::Type::STARSYSTEM_ADD_SHIP: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
-    case comm::Message::Type::STARSYSTEM_ADD_CONTAINER: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
+    case comm::Message::Type::ADD_SHIP_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
+    case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
     case comm::Message::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
     case comm::Message::Type::REMOVE:  { return "comm::Message::Type::REMOVE"; }
     case comm::Message::Type::DELETE:  { return "comm::Message::Type::DELETE"; }

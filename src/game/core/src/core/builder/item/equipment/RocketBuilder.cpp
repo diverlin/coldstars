@@ -42,6 +42,15 @@ Rocket::gen()
 }
 
 control::item::Rocket*
+Rocket::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Rocket* descr = descriptor::Manager::get().rocket(descriptor_id);
+    control::item::Rocket* rocket = __genTemplate(descr, ob_id);
+    __createInternals(rocket, descr);
+    return rocket;
+}
+
+control::item::Rocket*
 Rocket::gen(descriptor::item::Rocket* descr)
 {
     control::item::Rocket* rocket = __genTemplate(descr);
@@ -51,9 +60,9 @@ Rocket::gen(descriptor::item::Rocket* descr)
 
 
 control::item::Rocket*
-Rocket::__genTemplate(descriptor::item::Rocket* descr)
+Rocket::__genTemplate(descriptor::item::Rocket* descr, int_t ob_id)
 {
-    model::item::Rocket* model = new model::item::Rocket(descr->id());
+    model::item::Rocket* model = new model::item::Rocket(descr->id(), ob_id);
     control::item::Rocket* rocket = new control::item::Rocket(model, descr);
     EntityManager::get().reg(rocket);
     return rocket;

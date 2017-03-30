@@ -44,6 +44,15 @@ Radar::gen()
 }
 
 control::item::Radar*
+Radar::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Radar* descr = descriptor::Manager::get().radar(descriptor_id);
+    control::item::Radar* radar = __genTemplate(descr, ob_id);
+    __createInternals(radar, descr);
+    return radar;
+}
+
+control::item::Radar*
 Radar::gen(descriptor::item::Radar* descr)
 {
     control::item::Radar* radar = __genTemplate(descr);
@@ -52,9 +61,9 @@ Radar::gen(descriptor::item::Radar* descr)
 } 
 
 control::item::Radar*
-Radar::__genTemplate(descriptor::item::Radar* descr)
+Radar::__genTemplate(descriptor::item::Radar* descr, int_t ob_id)
 {
-    model::item::Radar* model = new model::item::Radar(descr->id());
+    model::item::Radar* model = new model::item::Radar(descr->id(), ob_id);
     control::item::Radar* radar = new control::item::Radar(model, descr);
     EntityManager::get().reg(radar);
     return radar;

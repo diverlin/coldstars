@@ -27,7 +27,7 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    Drive(int_t);
+    Drive(int_t, int_t);
     ~Drive() = default;
     Drive(const std::string& data);
     std::string data() const;

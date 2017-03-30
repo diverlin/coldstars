@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Rocket::Rocket(int_t descriptor_id)
+Rocket::Rocket(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 

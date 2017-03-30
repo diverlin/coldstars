@@ -44,13 +44,14 @@ class Droid : public Equipment
 {
 public:
     static control::item::Droid* gen();
+    static control::item::Droid* gen(int_t, int_t ob_id = NONE);
     static control::item::Droid* gen(descriptor::item::Droid*);
 
 private:
     Droid() = delete;
     ~Droid() = delete;
 
-    static control::item::Droid* __genTemplate(descriptor::item::Droid*);
+    static control::item::Droid* __genTemplate(descriptor::item::Droid*, int ob_id = NONE);
     static void __createInternals(control::item::Droid*, descriptor::item::Droid*);
 }; 
 

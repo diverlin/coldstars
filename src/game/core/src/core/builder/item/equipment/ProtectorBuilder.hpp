@@ -46,13 +46,14 @@ class Protector : public Equipment
 public:
     static control::item::Protector* gen();
     static std::vector<control::item::Protector*> gen(int);
+    static control::item::Protector* gen(int_t, int_t ob_id = NONE);
     static control::item::Protector* gen(descriptor::item::Protector*);
 
 private:
     Protector() = delete;
     ~Protector() = delete;
 
-    static control::item::Protector* __genTemplate(descriptor::item::Protector*);
+    static control::item::Protector* __genTemplate(descriptor::item::Protector*, int_t ob_id = NONE);
     static void __createInternals(control::item::Protector*, descriptor::item::Protector*);
 }; 
 
