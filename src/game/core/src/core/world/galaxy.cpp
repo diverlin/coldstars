@@ -110,12 +110,11 @@ Galaxy::closestSectorTo(model::Sector* toSector)
 
     model::Sector* result = nullptr;
     for (auto sector : m_sectors) {
-        assert(false);
-//        float dist = meti::distance(toSector->position(), sector->position());
-//        if (dist < dist_min) {
-//            dist_min = dist;
-//            result = sector->model();
-//        }
+        float dist = meti::distance(toSector->position(), sector->model()->position());
+        if (dist < dist_min) {
+            dist_min = dist;
+            result = sector->model();
+        }
     }
 
     return result;

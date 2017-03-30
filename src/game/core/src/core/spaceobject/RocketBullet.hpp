@@ -111,6 +111,7 @@ public:
     virtual void hit(int) override final;
     virtual void _postDeathUniqueEvent(bool) override final;
 
+    int damage() const { return model()->damage(); }
     //void RenderInSpace(const Renderer&, float);
 
     model::RocketBullet* model() const { return m_model_rocket; }

@@ -20,29 +20,28 @@
 
 #include <vector>
 
-namespace model {
-class Vehicle;
-} // namespace model
+namespace control {
 
+class Vehicle;
 class Starsystem;
 
 class HyperSpace
 {
 public:
-    HyperSpace();
-    ~HyperSpace();
+    HyperSpace() = default;
+    ~HyperSpace() = default;
 
-    void AddVehicle(model::Vehicle*);
-    bool IsVehicleHere(int) const;
-    void PostHyperJumpEvent(Starsystem*);
+    void add(Vehicle*);
+    bool isHere(int) const;
+    void postHyperJumpEvent(Starsystem*);
 
-    int GetQueueSize() const { return VEHICLE_vec.size(); };
+    int queueSize() const { return m_vehicles.size(); }
 
 private:
-    std::vector<model::Vehicle*> VEHICLE_vec;
+    std::vector<Vehicle*> m_vehicles;
 };
 
-
+} // namespace control
 
 
 
