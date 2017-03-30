@@ -43,6 +43,15 @@ Droid::gen()
 }
 
 control::item::Droid*
+Droid::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Droid* descr = descriptor::Manager::get().droid(descriptor_id);
+    control::item::Droid* droid = __genTemplate(descr, ob_id);
+    __createInternals(droid, descr);
+    return droid;
+}
+
+control::item::Droid*
 Droid::gen(descriptor::item::Droid* descr)
 {
     control::item::Droid* droid = __genTemplate(descr);
@@ -51,9 +60,9 @@ Droid::gen(descriptor::item::Droid* descr)
 }  
 
 control::item::Droid*
-Droid::__genTemplate(descriptor::item::Droid* descr)
+Droid::__genTemplate(descriptor::item::Droid* descr, int ob_id)
 {
-    model::item::Droid* model = new model::item::Droid(descr->id());
+    model::item::Droid* model = new model::item::Droid(descr->id(), ob_id);
     control::item::Droid* droid = new control::item::Droid(model, descr);
     EntityManager::get().reg(droid);
     return droid;

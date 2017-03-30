@@ -44,13 +44,14 @@ class Scaner : public Equipment
 {
 public:
     static control::item::Scaner* gen();
+    static control::item::Scaner* gen(int_t, int_t ob_id = NONE);
     static control::item::Scaner* gen(descriptor::item::Scaner*);
 
 private:
     Scaner() = delete;
     ~Scaner() = delete;
 
-    static control::item::Scaner* __genTemplate(descriptor::item::Scaner*);
+    static control::item::Scaner* __genTemplate(descriptor::item::Scaner*, int_t ob_id = NONE);
     static void __createInternals(control::item::Scaner*, descriptor::item::Scaner*);
 }; 
 

@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Protector::Protector(int_t descriptor_id)
+Protector::Protector(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 

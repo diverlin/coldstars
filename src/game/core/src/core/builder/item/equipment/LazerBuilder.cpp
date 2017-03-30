@@ -42,6 +42,15 @@ Lazer::gen()
 }
 
 control::item::Lazer*
+Lazer::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Lazer* descr = descriptor::Manager::get().lazer(descriptor_id);
+    control::item::Lazer* lazer = __genTemplate(descr, ob_id);
+    __createInternals(lazer, descr);
+    return lazer;
+}
+
+control::item::Lazer*
 Lazer::gen(descriptor::item::Lazer* descr)
 {
     control::item::Lazer* lazer = __genTemplate(descr);
@@ -50,9 +59,9 @@ Lazer::gen(descriptor::item::Lazer* descr)
 }
 
 control::item::Lazer*
-Lazer::__genTemplate(descriptor::item::Lazer* descr)
+Lazer::__genTemplate(descriptor::item::Lazer* descr, int_t ob_id)
 { 
-    model::item::Lazer* model = new model::item::Lazer(descr->id());
+    model::item::Lazer* model = new model::item::Lazer(descr->id(), ob_id);
     control::item::Lazer* lazer = new control::item::Lazer(model, descr);
     EntityManager::get().reg(lazer);
     return lazer;

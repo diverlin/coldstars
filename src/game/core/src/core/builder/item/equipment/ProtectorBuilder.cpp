@@ -55,6 +55,15 @@ Protector::gen(int num)
 }
 
 control::item::Protector*
+Protector::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::item::Protector* descr = descriptor::Manager::get().protector(descriptor_id);
+    control::item::Protector* protector = __genTemplate(descr, ob_id);
+    __createInternals(protector, descr);
+    return protector;
+}
+
+control::item::Protector*
 Protector::gen(descriptor::item::Protector* descr)
 {
     control::item::Protector* protector = __genTemplate(descr);
@@ -63,9 +72,9 @@ Protector::gen(descriptor::item::Protector* descr)
 }
 
 control::item::Protector*
-Protector::__genTemplate(descriptor::item::Protector* descr)
+Protector::__genTemplate(descriptor::item::Protector* descr, int_t ob_id)
 {
-    model::item::Protector* model = new model::item::Protector(descr->id());
+    model::item::Protector* model = new model::item::Protector(descr->id(), ob_id);
     control::item::Protector* protector = new control::item::Protector(model, descr);
     EntityManager::get().reg(protector);
     return protector;

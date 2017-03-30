@@ -24,8 +24,9 @@
 namespace model {
 namespace item {
 
-Radar::Radar(int_t descriptor_id)
+Radar::Radar(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 

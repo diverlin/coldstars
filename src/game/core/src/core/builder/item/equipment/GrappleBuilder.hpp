@@ -44,13 +44,14 @@ class Grapple : public Equipment
 {
 public:
     static control::item::Grapple* gen();
+    static control::item::Grapple* gen(int_t, int_t ob_id = NONE);
     static control::item::Grapple* gen(descriptor::item::Grapple*);
 
 private:
     Grapple() = delete;
     ~Grapple() = delete;
 
-    static control::item::Grapple* __genTemplate(descriptor::item::Grapple*);
+    static control::item::Grapple* __genTemplate(descriptor::item::Grapple*, int_t ob_id = NONE);
     static void __createInternals(control::item::Grapple*, descriptor::item::Grapple*);
 }; 
 

@@ -23,8 +23,9 @@
 namespace model {
 namespace item {
 
-Scaner::Scaner(int_t descriptor)
+Scaner::Scaner(int_t descriptor, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor);
 }
 

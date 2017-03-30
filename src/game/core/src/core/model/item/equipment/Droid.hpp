@@ -27,7 +27,7 @@ namespace item {
 class Droid : public Equipment
 {
 public:
-    Droid(int_t);
+    Droid(int_t, int_t);
     ~Droid() = default;
     Droid(const std::string& data);
     std::string data() const;
