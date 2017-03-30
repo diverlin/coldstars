@@ -324,8 +324,8 @@ private:
 
     std::vector<ItemSlot*> __equipedSlotsByType(const entity::Type&);
 
-    void __actualizeModel();
-    void __actualizeItems();
+    void __loadModel();
+    void __loadItemsFromModel();
 };
 
 

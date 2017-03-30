@@ -58,31 +58,6 @@ TEST(ship, create)
     EXPECT_EQ(ship->descriptor()->cargoSlotNum(), ship->cargoSlots().size());
 }
 
-TEST(ship, equip)
-{
-    control::Ship* ship = builder::Ship::gen();
-
-    control::item::Bak* bak = builder::item::Bak::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
-    control::item::Droid* droid = builder::item::Droid::gen();
-    control::item::Grapple* grapple = builder::item::Grapple::gen();
-    control::item::Lazer* lazer = builder::item::Lazer::gen();
-    control::item::Protector* protector = builder::item::Protector::gen();
-    control::item::Radar* radar = builder::item::Radar::gen();
-    control::item::Rocket* rocket = builder::item::Rocket::gen();
-    control::item::Scaner* scaner = builder::item::Scaner::gen();
-
-    ship->manage(bak);
-    ship->manage(drive);
-    ship->manage(droid);
-    ship->manage(grapple);
-    ship->manage(lazer);
-    ship->manage(protector);
-    ship->manage(radar);
-    ship->manage(rocket);
-    ship->manage(scaner);
-}
-
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
@@ -206,7 +181,7 @@ void compareVehicleProperties(const VehiclePropetries& origin, const VehicleProp
 } // namespace
 
 
-void testShipClone(control::Ship* ship)
+void testShipCloneScenario(control::Ship* ship)
 {
     VehiclePropetries properties = ship->properties(); // we need copy, not reference
 
@@ -217,31 +192,20 @@ void testShipClone(control::Ship* ship)
     compareVehicleProperties(properties, clone->properties());
 }
 
-TEST(ship, clone)
+TEST(ship, equip_and_clone)
 {
-    // items
-    control::item::Bak* bak = builder::item::Bak::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
-    control::item::Scaner* scaner = builder::item::Scaner::gen();
-    control::item::Droid* droid = builder::item::Droid::gen();
-    control::item::Radar* radar = builder::item::Radar::gen();
-    control::item::Protector* protector = builder::item::Protector::gen();
-    control::item::Protector* protector2 = builder::item::Protector::gen();
-    control::item::Lazer* lazer = builder::item::Lazer::gen();
-    //control::item::Rocket* rocket = builder::item::Rocket::gen();
-
     control::Ship* ship = builder::Ship::gen();
-    ship->manage(bak);
-    ship->manage(drive);
-    ship->manage(scaner);
-    ship->manage(droid);
-    ship->manage(radar);
-    ship->manage(protector);
-    ship->load(protector2);
-    ship->load(lazer);
-    //ship->load(rocket);
+    ship->manage( builder::item::Bak::gen() );
+    ship->manage( builder::item::Drive::gen() );
+    ship->manage( builder::item::Scaner::gen() );
+    ship->manage( builder::item::Droid::gen() );
+    ship->manage( builder::item::Radar::gen() );
+    ship->manage( builder::item::Protector::gen() );
+    ship->load( builder::item::Protector::gen() );
+    ship->load( builder::item::Lazer::gen() );
+    ship->load( builder::item::Rocket::gen() );
 
-    testShipClone(ship);
+    testShipCloneScenario(ship);
 }
 
 

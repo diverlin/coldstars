@@ -107,7 +107,7 @@ Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
 
     __createSlots(descr);
 
-    __actualizeModel();
+    __loadModel();
 
     _updatePropProtection();
     __updateFreeSpace();
@@ -123,7 +123,7 @@ Vehicle::~Vehicle()
 }
 
 void
-Vehicle::__actualizeModel()
+Vehicle::__loadModel()
 {
     if (isInitialized()) {
         assert(false);
@@ -132,14 +132,14 @@ Vehicle::__actualizeModel()
 
     model()->setWritable(false);
 
-    __actualizeItems();
+    __loadItemsFromModel();
 
     model()->setWritable(true);
     setInitialized();
 }
 
 void
-Vehicle::__actualizeItems()
+Vehicle::__loadItemsFromModel()
 {
     for(int_t id: model()->items()) {
         control::Base* model_base = EntityManager::get().get(id);
