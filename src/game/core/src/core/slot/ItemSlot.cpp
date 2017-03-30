@@ -23,6 +23,7 @@
 
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
+#include <core/model/spaceobject/Vehicle.hpp> // depr
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Container.hpp>
 #include <core/pilot/Npc.hpp>
@@ -506,7 +507,7 @@ bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 
 bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
 {
-    return (target->starsystem() == vehicleOwner()->starsystem());
+    return (target->model()->starsystem() == vehicleOwner()->model()->starsystem());
 }                
 
 bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
