@@ -21,6 +21,7 @@
 #include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <core/builder/slot/VehicleSlotBuilder.hpp>
 
+#include <core/item/equipment/ALL>
 #include <core/builder/item/equipment/ALL>
 #ifdef USE_MODULES
 #include <core/builder/item/module/ALL>
@@ -69,19 +70,7 @@ Store* StoreBuilder::create() const
 
 void StoreBuilder::createInternals(Store* store) const
 {
-    for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
-    {
-        control::ItemSlot* item_slot = genItemSlot(entity::Type::CARGO_SLOT);
-        store->addItemSlot(item_slot);
-    }
 
-    for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
-    {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
-        store->addVehicleSlot(vehicle_slot);
-    }
-
-    //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND));
 }
 
 
@@ -106,51 +95,34 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        assert(false);
-        //store->addVehicle(ShipBuilder::gen());
+        store->add(builder::Ship::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        assert(false);
-//        store->addItem(core::global::get().lazerBuilder().gen());
+        store->add(builder::item::Lazer::gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        assert(false);
-//        store->addItem(core::global::get().rocketBuilder().gen());
+        store->add(builder::item::Rocket::gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::RADAR);
-//        store->addItem(core::global::get().radarBuilder().gen(descr));
+        store->add(builder::item::Radar::gen());
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::GRAPPLE);
-//        store->addItem(core::global::get().grappleBuilder().gen(descr));
+        store->add(builder::item::Grapple::gen());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::DRIVE);
-//        store->addItem(core::global::get().driveBuilder().gen(descr));
+        store->add(builder::item::Drive::gen());
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::PROTECTOR);
-//        store->addItem(core::global::get().protectorBuilder().gen(descr));
+        store->add(builder::item::Protector::gen());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::BAK);
-//        store->addItem(core::global::get().bakBuilder().gen(descr));
+        store->add(builder::item::Bak::gen());
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::DROID);
-//        store->addItem(core::global::get().droidBuilder().gen(descr));
+        store->add(builder::item::Droid::gen());
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        assert(false);
-//        const auto& descr = descriptor::Manager::get().getRand(descriptor::Type::SCANER);
-//        store->addItem(core::global::get().scanerBuilder().gen(descr));
+        store->add(builder::item::Scaner::gen());
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

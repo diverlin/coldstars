@@ -38,10 +38,8 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void addVehicleSlot(control::VehicleSlot*);
-    void addItemSlot(control::ItemSlot*);
-    bool addItem(control::Item*);
-    bool addVehicle(control::Vehicle*);
+    bool add(control::Item*);
+    bool add(control::Vehicle*);
 
     control::ItemSlot* freeItemSlot() const;
     control::VehicleSlot* freeVehicleSlot() const;
@@ -49,19 +47,22 @@ public:
     int buyItem(control::Item*);
     void sellVehicle(Npc*, control::VehicleSlot*, int);
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
 private:
-    std::vector<control::ItemSlot*> m_itemslots;
-    std::vector<control::VehicleSlot*> m_vehicleslots;
+    std::vector<control::ItemSlot*> m_item_slots;
+    std::vector<control::VehicleSlot*> m_vehicle_slots;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
-    friend class GuiStore;
+//    friend class GuiStore;
+
+    void __add(control::VehicleSlot*);
+    void __add(control::ItemSlot*);
 };
 
 

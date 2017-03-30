@@ -28,6 +28,7 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/manager/EntityManager.hpp>
+#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 
@@ -36,6 +37,19 @@ Store::Store(int id)
     assert(false);
     //    setId(id);
     //    setTypeId(entity::Type::STORE);
+
+    for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++) {
+        control::ItemSlot* item_slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
+        __add(item_slot);
+    }
+
+    for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++) {
+        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
+        __add(vehicle_slot);
+    }
+
+    //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND));
+
 }
 
 Store::~Store()
@@ -50,21 +64,19 @@ void Store::putChildrenToGarbage() const
     //    }
 }
 
-void Store::addItemSlot(control::ItemSlot* item_slot)
+void Store::__add(control::ItemSlot* item_slot)
 { 
-    assert(false);
-    //    item_slot->setOwner(this);
-    //    item_slot_vec.push_back(item_slot);
-};     
+    item_slot->setOwner(this);
+    m_item_slots.push_back(item_slot);
+}
 
-void Store::addVehicleSlot(control::VehicleSlot* vehicle_slot)
+void Store::__add(control::VehicleSlot* vehicle_slot)
 { 
-    assert(false);
-    //    vehicle_slot->setOwner(this);
-    //    vehicle_slot_vec.push_back(vehicle_slot);
-}; 
+    vehicle_slot->setOwner(this);
+    m_vehicle_slots.push_back(vehicle_slot);
+}
 
-bool Store::addItem(control::Item* item)
+bool Store::add(control::Item* item)
 {
     control::ItemSlot* slot = freeItemSlot();
     if (slot) {
@@ -72,14 +84,13 @@ bool Store::addItem(control::Item* item)
         return true;
     }
 
-    return true;
+    return false;
 }
 
-bool Store::addVehicle(control::Vehicle* vehicle)
+bool Store::add(control::Vehicle* vehicle)
 {
     control::VehicleSlot* vehicle_slot = freeVehicleSlot();
-    if (vehicle_slot)
-    {
+    if (vehicle_slot) {
         //vehicle->SetLand(GetOwnerKosmoport());
         //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
         //{
@@ -95,7 +106,7 @@ bool Store::addVehicle(control::Vehicle* vehicle)
 control::ItemSlot*
 Store::freeItemSlot() const
 {
-    for (auto* slot: m_itemslots) {
+    for (auto* slot: m_item_slots) {
         if (!slot->item()) {
             return slot;
         }
@@ -106,7 +117,7 @@ Store::freeItemSlot() const
 control::VehicleSlot*
 Store::freeVehicleSlot() const
 {
-    for (auto* slot: m_vehicleslots) {
+    for (auto* slot: m_vehicle_slots) {
         if (!slot->vehicle()) {
             return slot;
         }
@@ -144,39 +155,39 @@ void Store::sellVehicle(Npc* npc, control::VehicleSlot* vehicle_slot, int price)
 }
 
 
-void Store::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //save_ptree.put(root+"unresolved.angar_id",     angar->id());
-}
+//void Store::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //save_ptree.put(root+"unresolved.angar_id",     angar->id());
+//}
 
-void Store::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-}
+//void Store::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
+//}
 
-void Store::ResolveData()
-{
-    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this);
-}
+//void Store::ResolveData()
+//{
+//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this);
+//}
 
-void Store::Save(boost::property_tree::ptree& save_ptree) const
-{
-    //    std::string root = "store." + std::to_string(id())+".";
-    //    Base::SaveData(save_ptree, root);
-    //    Room::SaveData(save_ptree, root);
-    //    Store::SaveData(save_ptree, root);
-}
+//void Store::Save(boost::property_tree::ptree& save_ptree) const
+//{
+//    //    std::string root = "store." + std::to_string(id())+".";
+//    //    Base::SaveData(save_ptree, root);
+//    //    Room::SaveData(save_ptree, root);
+//    //    Store::SaveData(save_ptree, root);
+//}
 
-void Store::Load(const boost::property_tree::ptree& load_ptree)
-{
-    //    Base::LoadData(load_ptree);
-    //    Room::LoadData(load_ptree);
-    //    Store::LoadData(load_ptree);
-}
+//void Store::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    //    Base::LoadData(load_ptree);
+//    //    Room::LoadData(load_ptree);
+//    //    Store::LoadData(load_ptree);
+//}
 
-void Store::Resolve()
-{
-    //    Base::ResolveData();
-    //    Room::ResolveData();
-    //    Store::ResolveData();
-}
+//void Store::Resolve()
+//{
+//    //    Base::ResolveData();
+//    //    Room::ResolveData();
+//    //    Store::ResolveData();
+//}

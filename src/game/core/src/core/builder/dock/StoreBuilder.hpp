@@ -23,17 +23,16 @@
 
 class Store;
 
-
 class StoreBuilder
 {
-    public:
-        StoreBuilder();
-        ~StoreBuilder();
+public:
+    StoreBuilder();
+    ~StoreBuilder();
 
-        Store* createTemplate(int_t id = NONE) const;
-        Store* create() const;
-                                                                    
-    private: 
-        void createInternals(Store*) const;
-        void PutRandomEquipment(Store*) const;
+    Store* createTemplate(int_t id = NONE) const;
+    Store* create() const;
+
+private:
+    void createInternals(Store*) const;
+    void PutRandomEquipment(Store*) const;
 }; 
