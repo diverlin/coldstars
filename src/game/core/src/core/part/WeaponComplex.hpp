@@ -30,6 +30,7 @@ class SpaceObject;
 } // namespace model
 
 namespace control {
+class SpaceObject;
 class ItemSlot;
 } // namespace control
 
@@ -51,7 +52,7 @@ public:
     
     void prepareWeapons();
 
-    void setTarget(model::SpaceObject*, control::ItemSlot* item_slot = nullptr);
+    void setTarget(control::SpaceObject*, control::ItemSlot* item_slot = nullptr);
 
     void fire(int, float, bool);
 

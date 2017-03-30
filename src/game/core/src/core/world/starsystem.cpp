@@ -92,7 +92,7 @@ StarSystem::~StarSystem()
 void
 StarSystem::__actualizeModel()
 {
-    if (actualizeModel())
+    if (isInitialized())
         return;
 
     model()->setWritable(false);
@@ -126,7 +126,7 @@ StarSystem::__actualizeModel()
 //    __actualizeItems();
 
     model()->setWritable(true);
-    setActualizeModel();
+    setInitialized();
 }
 
 Star*

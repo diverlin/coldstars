@@ -21,6 +21,7 @@
 
 #include <core/type/StatusType.hpp>
 #include <core/slot/BaseSlot.hpp>
+#include <core/item/equipment/Weapon.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -47,9 +48,9 @@ class Grapple;
 
 } // naemspace control
 
-namespace model {
+namespace control {
 class SpaceObject;
-} // namespace model
+} // namespace control
 
 #ifdef USE_MODULES
 class RocketModule;
@@ -145,16 +146,17 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void setTarget(model::SpaceObject* target, ItemSlot* subtarget = nullptr);
+    void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
     void setTurrel(Turrel* turrel) { m_turrel = turrel; }
 
-    model::SpaceObject* target() const { return m_target; }
+    SpaceObject* target() const { return m_target; }
     ItemSlot* subtarget() const { return m_subtarget; }
 
     int hitProbability() const { return m_hitProbability; }
 
     Turrel* turrel() const { return m_turrel; }
 
+    item::Weapon* weapon() const { return static_cast<item::Weapon*>(m_item); }
     Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
@@ -212,8 +214,8 @@ public:
     void drawRange(const glm::vec2&);
 
     bool checkSubTarget(ItemSlot*) const;
-    STATUS checkTarget(model::SpaceObject*) const;
-    STATUS checkTargetPure(model::SpaceObject*) const;
+    STATUS checkTarget(SpaceObject*) const;
+    STATUS checkTargetPure(SpaceObject*) const;
 
     void selectEvent();
     void deselectEvent();
@@ -234,17 +236,17 @@ private:
 
     Item* m_item = nullptr;
 
-    model::SpaceObject* m_target = nullptr;
+    SpaceObject* m_target = nullptr;
     ItemSlot* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
     bool checkItemInsertion(Item*) const;
 
-    bool isTargetAlive(model::SpaceObject*) const;
-    bool isTargetInSpace(model::SpaceObject*) const;
-    bool isTargetInSameStarSystem(model::SpaceObject*) const;
-    bool checkDistanceToTarget(model::SpaceObject*) const;
+    bool isTargetAlive(SpaceObject*) const;
+    bool isTargetInSpace(SpaceObject*) const;
+    bool isTargetInSameStarSystem(SpaceObject*) const;
+    bool checkDistanceToTarget(SpaceObject*) const;
 
     void log(const std::string&) const;
 

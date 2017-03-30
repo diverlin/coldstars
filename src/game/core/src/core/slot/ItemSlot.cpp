@@ -110,7 +110,7 @@ void ItemSlot::putChildrenToGarbage() const
 //    }
 }
 
-void ItemSlot::setTarget(model::SpaceObject* target, ItemSlot* subtarget)
+void ItemSlot::setTarget(SpaceObject* target, ItemSlot* subtarget)
 {
     m_target    = target;
     m_subtarget = subtarget;
@@ -456,7 +456,7 @@ bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::checkTarget(model::SpaceObject* target) const
+STATUS ItemSlot::checkTarget(SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
@@ -477,7 +477,7 @@ STATUS ItemSlot::checkTarget(model::SpaceObject* target) const
     return STATUS::TARGET_OK;
 }     
 
-STATUS ItemSlot::checkTargetPure(model::SpaceObject* target) const
+STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
 {
     assert(false);
 //    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
@@ -494,34 +494,32 @@ STATUS ItemSlot::checkTargetPure(model::SpaceObject* target) const
     return STATUS::TARGET_OK;
 } 
 
-bool ItemSlot::isTargetAlive(model::SpaceObject* target) const
+bool ItemSlot::isTargetAlive(SpaceObject* target) const
 {
-    return target->isAlive();
+    return target->model()->isAlive();
 }
 
-bool ItemSlot::isTargetInSpace(model::SpaceObject* target) const
+bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 {
-    return (target->place() == place::Type::KOSMOS);
+    return (target->model()->place() == place::Type::KOSMOS);
 }               
 
-bool ItemSlot::isTargetInSameStarSystem(model::SpaceObject* target) const
+bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
 {
-    assert(false);
-    //return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
+    return (target->starsystem()->id() == vehicleOwner()->starsystem()->id());
 }                
 
-bool ItemSlot::checkDistanceToTarget(model::SpaceObject* target) const
+bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
 {
-    assert(false);
-//    if (target->type() == entity::type::STARSYSTEM) {
-//        return true;
-//    }
+    if (target->descriptor()->obType() == entity::Type::STARSYSTEM) {
+        return true;
+    }
     
-//    float dist = meti::distance(vehicleOwner()->position(), target->position());
-//    if (dist < itemRadius())
-//    {
-//        return true;
-//    }
+    float dist = meti::distance(vehicleOwner()->position(), target->position());
+    if (dist < itemRadius())
+    {
+        return true;
+    }
 
     return false;
 }

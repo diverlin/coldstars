@@ -48,7 +48,7 @@ public:
 
     virtual void updateProperties();
 
-private:
+public:
     model::item::Weapon* model() const { return m_model_weapon; }
     descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
 

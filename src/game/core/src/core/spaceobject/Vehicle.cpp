@@ -125,16 +125,17 @@ Vehicle::~Vehicle()
 void
 Vehicle::__actualizeModel()
 {
-    if (actualizeModel())
+    if (isInitialized()) {
         assert(false);
         return;
+    }
 
     model()->setWritable(false);
 
     __actualizeItems();
 
     model()->setWritable(true);
-    setActualizeModel();
+    setInitialized();
 }
 
 void
@@ -308,7 +309,7 @@ void Vehicle::fire(int timer, float attack_rate)
     weaponComplex().fire(timer, attack_rate, false);
 }
 
-void Vehicle::setWeaponTarget(model::SpaceObject* object, ItemSlot* slot)
+void Vehicle::setWeaponTarget(SpaceObject* object, ItemSlot* slot)
 {
     weaponComplex().setTarget(object, slot);
 }
