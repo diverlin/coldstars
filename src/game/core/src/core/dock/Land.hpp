@@ -37,14 +37,14 @@ public:
     void setOwner(SpaceObject* owner)  { m_owner = owner; }
 
     SpaceObject* owner() const { return m_owner; }
-    virtual bool GetPermissionToLand() const = 0;
+    virtual bool isAllowedToLand() const = 0;
 
     virtual bool add(Vehicle*) = 0;
     virtual bool remove(Vehicle*) = 0;
 
-    virtual void UpdateInStatic() = 0;
+    virtual void updateInStatic() = 0;
 
-    virtual std::string GetDockVehicleStr() const = 0;
+    virtual std::string vehiclesStr() const = 0;
 
 protected:
     SpaceObject* m_owner = nullptr;

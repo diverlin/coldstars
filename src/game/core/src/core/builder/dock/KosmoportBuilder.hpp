@@ -27,14 +27,14 @@ class Kosmoport;
 
 namespace builder {
 
-class KosmoportBuilder
+class Kosmoport
 {
 public:
     static control::Kosmoport* gen();
 
 private:
-    KosmoportBuilder() = delete;
-    ~KosmoportBuilder() = delete;
+    Kosmoport() = delete;
+    ~Kosmoport() = delete;
 
     static control::Kosmoport* __createTemplate(int_t id = NONE);
     static void __createInternals(control::Kosmoport*);

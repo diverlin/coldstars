@@ -26,14 +26,14 @@ class Goverment;
 
 namespace builder {
 
-class GovermentBuilder
+class Goverment
 {
 public:
     static control::Goverment* gen();
 
 private:
-    GovermentBuilder() = delete;
-    ~GovermentBuilder() = delete;
+    Goverment() = delete;
+    ~Goverment() = delete;
 
     static control::Goverment* __createTemplate(int_t id = NONE);
     static void __createInternals(control::Goverment*);

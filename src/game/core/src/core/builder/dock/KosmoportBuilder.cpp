@@ -29,7 +29,7 @@
 namespace builder {
 
 control::Kosmoport*
-KosmoportBuilder::gen()
+Kosmoport::gen()
 {
     control::Kosmoport* kosmoport = __createTemplate();
     __createInternals(kosmoport);
@@ -38,7 +38,7 @@ KosmoportBuilder::gen()
 } 
 
 control::Kosmoport*
-KosmoportBuilder::__createTemplate(int_t id)
+Kosmoport::__createTemplate(int_t id)
 {
     control::Kosmoport* kosmoport = new control::Kosmoport(id);
     assert(kosmoport);
@@ -48,12 +48,12 @@ KosmoportBuilder::__createTemplate(int_t id)
 }
 
 void
-KosmoportBuilder::__createInternals(control::Kosmoport* kosmoport)
+Kosmoport::__createInternals(control::Kosmoport* kosmoport)
 {
-    kosmoport->bindAngar(builder::AngarBuilder::gen());
-    kosmoport->bindStore(builder::StoreBuilder::gen());
-    kosmoport->bindShop(builder::ShopBuilder::gen());
-    kosmoport->bindGoverment(builder::GovermentBuilder::gen());
+    kosmoport->bindAngar(builder::Angar::gen());
+    kosmoport->bindStore(builder::Store::gen());
+    kosmoport->bindShop(builder::Shop::gen());
+    kosmoport->bindGoverment(builder::Goverment::gen());
 }
 
 } // namespace builder

@@ -32,14 +32,14 @@ const unsigned int ANGAR_VEHICLE_SLOTS_NUM = ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NU
 
 namespace builder {
 
-class AngarBuilder
+class Angar
 {
 public:
     static control::Angar* gen();
 
 private:
-    AngarBuilder() = delete;
-    ~AngarBuilder() = delete;
+    Angar() = delete;
+    ~Angar() = delete;
 
     static void __createInternals(control::Angar*);
     static control::Angar* __createTemplate(int_t id = NONE);

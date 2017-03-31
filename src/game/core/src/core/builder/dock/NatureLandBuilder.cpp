@@ -39,7 +39,7 @@
 namespace builder {
 
 control::NatureLand*
-NatureLandBuilder::gen()
+NatureLand::gen()
 {
     control::NatureLand* natureland = __createTemplate();
     __createInternals(natureland);
@@ -48,7 +48,7 @@ NatureLandBuilder::gen()
 } 
 
 control::NatureLand*
-NatureLandBuilder::__createTemplate(int_t id)
+NatureLand::__createTemplate(int_t id)
 {
     control::NatureLand* natureland = new control::NatureLand(id);
     assert(natureland);
@@ -59,19 +59,19 @@ NatureLandBuilder::__createTemplate(int_t id)
 }
 
 void
-NatureLandBuilder::__createInternals(control::NatureLand* natureland)
+NatureLand::__createInternals(control::NatureLand* natureland)
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
     
     unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++) {
         control::ItemSlot* item_slot = genItemSlot(entity::Type::CARGO_SLOT);
-        natureland->AddItemSlot(item_slot);
+        natureland->add(item_slot);
     }
     
     for (unsigned int i=0; i<item_slot_num; i++)
     {
-        if (natureland->CanAcceptNewItem() == true)
+        if (natureland->canAcceptNewItem() == true)
         {
             //int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT, ENTITY::PROTECTOR_ARTEFACT);
             //switch (type_id)

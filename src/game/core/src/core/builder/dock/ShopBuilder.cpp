@@ -25,7 +25,7 @@
 namespace builder {
 
 control::Shop*
-ShopBuilder::gen()
+Shop::gen()
 {
     control::Shop* shop = __createTemplate();
     __createInternals(shop);
@@ -34,7 +34,7 @@ ShopBuilder::gen()
 }
 
 control::Shop*
-ShopBuilder::__createTemplate(int_t id)
+Shop::__createTemplate(int_t id)
 {
     control::Shop* shop = new control::Shop(id);
     assert(shop);
@@ -44,7 +44,7 @@ ShopBuilder::__createTemplate(int_t id)
 } 
 
 void
-ShopBuilder::__createInternals(control::Shop* shop)
+Shop::__createInternals(control::Shop* shop)
 {    
     //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND);
     //shop->SetTextureObBackground(textureOb_background);

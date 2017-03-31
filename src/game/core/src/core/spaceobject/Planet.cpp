@@ -46,12 +46,14 @@ Planet::~Planet()
 {}
 
 /* virtual override final */
-void Planet::putChildrenToGarbage() const
+void
+Planet::putChildrenToGarbage() const
 {
     //global::get().entityManager().addToGarbage(m_model->land);
 }
 
-Land* Planet::land()
+Land*
+Planet::land()
 {
     assert(false);
 //    if (!m_land) {
@@ -62,12 +64,15 @@ Land* Planet::land()
     return m_land;
 }
 
-void Planet::BindLand(Land* land)
+void
+Planet::bindLand(Land* land)
 {
+    m_land = land;
+    model()->setLand(land->id());
+    //model()->setSubType(land->model()->type());
     assert(false);
-//    model()->setLand(land->model()->id());
-//    land->SetOwner(model());
-//    model()->setSubType(land->model()->type());
+    //land->setOwner(model());
+
 }
 
 //void Planet::addVehicle(Vehicle* vehicle)

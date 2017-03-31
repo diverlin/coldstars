@@ -29,7 +29,7 @@
 namespace builder {
 
 control::Angar*
-AngarBuilder::gen()
+Angar::gen()
 {
     control::Angar* angar = __createTemplate();
     __createInternals(angar);
@@ -38,7 +38,7 @@ AngarBuilder::gen()
 } 
 
 control::Angar*
-AngarBuilder::__createTemplate(int_t id)
+Angar::__createTemplate(int_t id)
 {
     control::Angar* angar = new control::Angar(id);
     assert(angar);
@@ -49,7 +49,7 @@ AngarBuilder::__createTemplate(int_t id)
 }
 
 void
-AngarBuilder::__createInternals(control::Angar* angar)
+Angar::__createInternals(control::Angar* angar)
 { 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
     {

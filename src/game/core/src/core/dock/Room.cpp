@@ -23,19 +23,12 @@
  
 //#include <jeti/Material.hpp>
 
-namespace control {
+namespace control {    
 
-Room::Room()
-{    
-}
-
-Room::~Room()
-{}            
-
-void Room::RenderBackground(const ceti::Rect& rect) const
-{
-    //drawTexturedRect(textureOb_background, rect, -2);
-}
+//void Room::RenderBackground(const ceti::Rect& rect) const
+//{
+//    //drawTexturedRect(textureOb_background, rect, -2);
+//}
 
 } // namespace control
 
