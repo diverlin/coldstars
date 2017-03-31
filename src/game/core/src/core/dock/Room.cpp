@@ -23,10 +23,10 @@
  
 //#include <jeti/Material.hpp>
 
+namespace control {
+
 Room::Room()
 {    
-    owner_kosmoport = nullptr;
-    textureOb_background = nullptr;
 }
 
 Room::~Room()
@@ -34,23 +34,25 @@ Room::~Room()
 
 void Room::RenderBackground(const ceti::Rect& rect) const
 {
-    //drawTexturedRect(textureOb_background, rect, -2);  
-}
-           
-void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
-//    save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->id());
+    //drawTexturedRect(textureOb_background, rect, -2);
 }
 
-void Room::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    data_unresolved_Room.textureOb_background_path = load_ptree.get<std::string>("unresolved.textureOb_background_path");
-    data_unresolved_Room.owner_kosmoport_id = load_ptree.get<int>("unresolved.owner_kosmoport_id");
-}
+} // namespace control
 
-void Room::ResolveData()
-{
-    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
-}
+//void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
+////    save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->id());
+//}
+
+//void Room::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    data_unresolved_Room.textureOb_background_path = load_ptree.get<std::string>("unresolved.textureOb_background_path");
+//    data_unresolved_Room.owner_kosmoport_id = load_ptree.get<int>("unresolved.owner_kosmoport_id");
+//}
+
+//void Room::ResolveData()
+//{
+//    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
+//}
 

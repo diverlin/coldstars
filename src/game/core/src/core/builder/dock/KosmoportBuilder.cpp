@@ -17,48 +17,43 @@
 */
 
 
-#include <builder/dock/KosmoportBuilder.hpp>
-#include <builder/dock/AngarBuilder.hpp>
-#include <builder/dock/StoreBuilder.hpp>
-#include <builder/dock/ShopBuilder.hpp>
-#include <builder/dock/GovermentBuilder.hpp>
-#include <builder/CommonBuilderHeaders.hpp>
+#include <core/builder/dock/KosmoportBuilder.hpp>
+#include <core/builder/dock/AngarBuilder.hpp>
+#include <core/builder/dock/StoreBuilder.hpp>
+#include <core/builder/dock/ShopBuilder.hpp>
+#include <core/builder/dock/GovermentBuilder.hpp>
+#include <core/builder/CommonBuilderHeaders.hpp>
 
-#include <dock/Kosmoport.hpp>
+#include <core/dock/Kosmoport.hpp>
 
+namespace builder {
 
-KosmoportBuilder::KosmoportBuilder()
+control::Kosmoport*
+KosmoportBuilder::gen()
 {
-}
+    control::Kosmoport* kosmoport = __createTemplate();
+    __createInternals(kosmoport);
 
-KosmoportBuilder::~KosmoportBuilder()
-{}
+    return kosmoport;
+} 
 
-Kosmoport* KosmoportBuilder::createTemplate(int_t id) const
+control::Kosmoport*
+KosmoportBuilder::__createTemplate(int_t id)
 {
-    Kosmoport* kosmoport = new Kosmoport(id);
+    control::Kosmoport* kosmoport = new control::Kosmoport(id);
     assert(kosmoport);
 
-    assert(false);
-//    EntityManager::get().reg(kosmoport);
-    
+    EntityManager::get().reg(kosmoport);
     return kosmoport;
-} 
-
-Kosmoport* KosmoportBuilder::create() const
-{
-    Kosmoport* kosmoport = createTemplate();
-    createInternals(kosmoport);
-
-    return kosmoport;
-} 
-
-void KosmoportBuilder::createInternals(Kosmoport* kosmoport) const
-{
-    kosmoport->BindAngar(core::global::get().angarBuilder().create());
-    kosmoport->BindStore(core::global::get().storeBuilder().create());
-    kosmoport->BindShop(core::global::get().shopBuilder().create());
-    kosmoport->BindGoverment(core::global::get().govermentBuilder().create());
 }
 
+void
+KosmoportBuilder::__createInternals(control::Kosmoport* kosmoport)
+{
+    kosmoport->bindAngar(builder::AngarBuilder::gen());
+    kosmoport->bindStore(builder::StoreBuilder::gen());
+    kosmoport->bindShop(builder::ShopBuilder::gen());
+    kosmoport->bindGoverment(builder::GovermentBuilder::gen());
+}
 
+} // namespace builder

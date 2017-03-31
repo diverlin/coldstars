@@ -34,6 +34,7 @@
 #include <core/spaceobject/ALL>
 #include <core/slot/ItemSlot.hpp>
 
+#include <core/model/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Container.hpp>
 #include <core/descriptor/spaceobject/Ship.hpp>
@@ -72,7 +73,7 @@ TEST(ship, drop_item_to_space)
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     EXPECT_EQ(ship->model()->place(), place::Type::NONE);
     starsystem->add(ship, pos, dir);
-    EXPECT_EQ(ship->model()->place(), place::Type::KOSMOS);
+    EXPECT_EQ(ship->model()->place(), place::Type::SPACE);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
@@ -82,7 +83,7 @@ TEST(ship, drop_item_to_space)
 
     control::Container* container = starsystem->containers()[0];
     EXPECT_EQ(container->position(), pos);
-    EXPECT_EQ(container->model()->place(), place::Type::KOSMOS);
+    EXPECT_EQ(container->model()->place(), place::Type::SPACE);
     EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
@@ -203,5 +204,18 @@ TEST(ship, equip_and_clone)
     testShipCloneScenario(ship);
 }
 
+TEST(ship, dockingEvent)
+{
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Star* star = builder::Star::gen();
+    control::Planet* planet = builder::Planet::gen();
+    control::Ship* ship = builder::Ship::gen();
 
+    starsystem->add(star);
+    starsystem->add(planet);
+    starsystem->add(ship, planet->position());
+
+    EXPECT_EQ(ship->position(), planet->position());
+    ship->land();
+}
 

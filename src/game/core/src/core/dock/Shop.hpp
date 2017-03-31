@@ -23,6 +23,8 @@
 class Npc; 
 class GoodsPack; 
 
+namespace control {
+
 class Shop : public Room
 {
 public:
@@ -49,9 +51,9 @@ public:
     bool SellGoods(Npc*, entity::Type, int);
     int BuyGoods(GoodsPack*);
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
 private:
     int minerals_amount;
@@ -78,10 +80,10 @@ private:
     void UpdateDrugPrice();
     void UpdateExclusivePrice();
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
 };
 
-
+} // namespace control

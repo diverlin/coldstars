@@ -21,10 +21,12 @@
 #include <core/dock/Land.hpp>
 #include <core/type/RaceType.hpp>
 
-class Angar; 
-class Store; 
-class Shop; 
-class Goverment; 
+namespace control {
+
+class Angar;
+class Store;
+class Shop;
+class Goverment;
 
 class Kosmoport : public Land
 {
@@ -32,42 +34,43 @@ public:
     Kosmoport(int);
     virtual ~Kosmoport();
 
-    Angar*         GetAngar()        const { return angar; };
-    Store*        GetStore()        const { return store; };
-    Shop*          GetShop()          const { return shop; };
-    Goverment*     GetGoverment()     const { return goverment; };
+    Angar* angar() const { return m_angar; }
+    Store* store() const { return m_store; }
+    Shop* shop() const { return m_shop; }
+    Goverment* goverment() const { return m_goverment; }
 
-    void BindAngar(Angar* angar);
-    void BindStore(Store* store);
-    void BindShop(Shop* shop);
-    void BindGoverment(Goverment* goverment);
+    void bindAngar(Angar* m_angar);
+    void bindStore(Store* m_store);
+    void bindShop(Shop* m_shop);
+    void bindGoverment(Goverment* m_goverment);
 
     virtual bool GetPermissionToLand() const;
 
-    virtual bool AddVehicle(Vehicle*);
-    virtual bool RemoveVehicle(Vehicle*);
+    virtual bool add(Vehicle*);
+    virtual bool remove(Vehicle*);
 
     virtual void UpdateInStatic();
 
     virtual std::string GetDockVehicleStr() const;
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
 private:
-    race::Type race_id;
+    race::Type m_race = race::Type::NONE;
 
-    Angar*     angar;
-    Store*     store;
-    Shop*      shop;
-    Goverment* goverment;
+    Angar* m_angar = nullptr;
+    Store* m_store = nullptr;
+    Shop* m_shop = nullptr;
+    Goverment* m_goverment = nullptr;
 
     virtual void putChildrenToGarbage() const;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
+} // namespace control
 

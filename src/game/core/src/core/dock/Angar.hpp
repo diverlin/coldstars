@@ -20,18 +20,17 @@
 
 #include "Room.hpp"
 
-namespace control {
-class ItemSlot;
-class VehicleSlot; 
-class Vehicle;
-class Item;
-} // namespace control
-
-class Npc;
-
 namespace item {
 class Rocket;
 } // namespace item
+
+namespace control {
+
+class ItemSlot;
+class VehicleSlot;
+class Vehicle;
+class Item;
+class Npc;
 
 class Angar : public Room
 {
@@ -41,18 +40,18 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void AddVehicleSlot(control::VehicleSlot*);
-    void AddItemSlot(control::ItemSlot*);
+    void AddVehicleSlot(VehicleSlot*);
+    void AddItemSlot(ItemSlot*);
 
     void UpdateInStatic() const;
 
-    bool AddVehicle(control::Vehicle*);
+    bool AddVehicle(Vehicle*);
 
-    bool RepairItem(Npc*, control::Item*) const;
+    bool RepairItem(Npc*, Item*) const;
     bool chargeRocketEquipment(Npc*, item::Rocket*) const;
 
-    bool RepairVehicle(control::Vehicle*) const;
-    bool TankUpVehicle(control::Vehicle*) const;
+    bool RepairVehicle(Vehicle*) const;
+    bool TankUpVehicle(Vehicle*) const;
 
     int GetFreeVehicleSlotTotalNum() const;
 
@@ -60,23 +59,24 @@ public:
 
     std::string GetDockVehicleStr() const;
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
 private:
-    std::vector<control::VehicleSlot*> vehicle_total_slot_vec;
-    std::vector<control::VehicleSlot*> vehicle_military_slot_vec;
-    std::vector<control::VehicleSlot*> vehicle_visitors_slot_vec;
+    std::vector<VehicleSlot*> vehicle_total_slot_vec;
+    std::vector<VehicleSlot*> vehicle_military_slot_vec;
+    std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
 
-    std::vector<control::ItemSlot*> item_slot_vec;
+    std::vector<ItemSlot*> item_slot_vec;
 
     int price_fuel;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
-    friend class GuiAngar;
+//    friend class GuiAngar;
 };
 
+} // namespace control

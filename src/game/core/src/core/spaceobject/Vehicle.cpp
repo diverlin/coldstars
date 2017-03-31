@@ -80,11 +80,12 @@
 
 #include <core/descriptor/item/Item.hpp>
 
-#include <dock/Kosmoport.hpp>
-#include <dock/Angar.hpp>
-#include <dock/Shop.hpp>
-#include <dock/Store.hpp>
-#include <dock/NatureLand.hpp>
+#include <core/dock/Kosmoport.hpp>
+#include <core/dock/Angar.hpp>
+#include <core/dock/Shop.hpp>
+#include <core/dock/Store.hpp>
+#include <core/dock/NatureLand.hpp>
+#include <core/dock/Land.hpp>
 
 //#include <jeti/Render.hpp>
 
@@ -815,7 +816,7 @@ void Vehicle::UpdateSpecialAction()
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            DockingEvent();
+            dockingEvent();
             m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
@@ -868,48 +869,46 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 }
 
 
-void Vehicle::DockingEvent()
+void Vehicle::dockingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::DockingEvent");
 
     weaponComplex().deactivateWeapons();
 
-    assert(false);
-//    switch(model()->driveComplex().target()->type())
-//    {
-//    case entity::type::PLANET:
-//    {
-//        //        Planet* planet = ((Planet*)model()->driveComplex().target());
-//        //        planet->GetLand()->AddVehicle(this);
+    switch(driveComplex().target()->descriptor()->obType())
+    {
+    case entity::Type::PLANET:
+    {
+        Planet* planet = static_cast<Planet*>(driveComplex().target());
+        assert(planet);
+        planet->land()->add(this);
+        break;
+    }
 
-//        break;
-//    }
+    case entity::Type::VEHICLE:
+    {
+        switch(driveComplex().target()->descriptor()->obSubType())
+        {
+        case entity::Type::SPACESTATION:
+        {
+            SpaceStation* spacestation = static_cast<SpaceStation*>(driveComplex().target());
+            assert(spacestation);
+            spacestation->land()->add(this);
+            break;
+        }
 
-//    case entity::type::VEHICLE:
-//    {
-//        switch(model()->driveComplex().target()->subtype())
-//        {
-//        case entity::type::SPACESTATION:
-//        {
-//            SpaceStation* spacestation = ((SpaceStation*)model()->driveComplex().target());
-//            assert(false);
-//            //spacestation->land()->AddVehicle(this);
+        case entity::Type::SHIP:
+        {
+            //..
+            break;
+        }
+        }
 
-//            break;
-//        }
+        break;
+    }
+    }
 
-//        case entity::type::SHIP:
-//        {
-//            //..
-//            break;
-//        }
-//        }
-
-//        break;
-//    }
-//    }
-
-    driveComplex().ResetTarget();
+    driveComplex().resetTarget();
 }
 
 void Vehicle::LaunchingEvent()
@@ -1636,7 +1635,7 @@ Vehicle::__equipedSlotsByType(const entity::Type& type) {
 bool
 Vehicle::dropItemToSpace(const entity::Type& type)
 {
-    if (model()->place() != place::Type::KOSMOS)
+    if (model()->place() != place::Type::SPACE)
         return false;
 
     for (ItemSlot* slot: __equipedSlotsByType(type)) {

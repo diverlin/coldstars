@@ -114,7 +114,8 @@ public:
     StarSystem* starsystem() const  { return m_starsystem; }
     SpaceObject* parent() const { return m_parent; }
 
-    void setStarSystem(StarSystem* starsystem) { m_starsystem = starsystem; }
+    void setStarSystem(StarSystem* starsystem);
+    void setParent(SpaceObject* parent);
 
     void addImpulse(const glm::vec3&, float);
 

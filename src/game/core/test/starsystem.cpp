@@ -179,4 +179,17 @@ TEST(starsystem, add_remove_objects)
     }
 }
 
+TEST(starsystem, add_planet)
+{
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Star* star = builder::Star::gen();
+    control::Planet* planet = builder::Planet::gen();
+
+    starsystem->add(star);
+    starsystem->add(planet);
+
+    EXPECT_EQ(planet->model()->radiusA(), planet->model()->radiusB());
+    EXPECT_TRUE((planet->model()->radiusA() - planet->model()->position().length()) <= 1);
+}
+
 } // namespace test

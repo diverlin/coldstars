@@ -69,8 +69,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         //ar & m_orbitCenter;
         ar & m_orbitPhi;
@@ -92,12 +91,12 @@ public:
     Planetoid(model::Planetoid*, descriptor::Planetoid*);
     virtual ~Planetoid();
 
-    void setPlanetDescriptor(int_t descriptor);
+    void calibrateOrbit(float offset_radius = 0);
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
 
-    //void bindParent(const SpaceObject* const, int);
+    void initOrbit(int it=0);
 
 protected:
     virtual void putChildrenToGarbage() const {}

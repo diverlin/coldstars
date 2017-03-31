@@ -23,8 +23,6 @@
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
-//#include <math/rand.hpp>
-
 
 namespace control {
 
@@ -48,6 +46,20 @@ void SpaceObject::_init()
     if (!m_parent && model()->parent() != NONE) {
         m_parent = EntityManager::get().spaceObject(model()->parent());
     }
+}
+
+void SpaceObject::setStarSystem(StarSystem* starsystem)
+{
+    model()->setPlace(place::Type::SPACE);
+
+    m_starsystem = starsystem;
+    model()->setStarSystem(starsystem->id());
+}
+
+void SpaceObject::setParent(SpaceObject* parent)
+{
+    m_parent = parent;
+    model()->setParent(parent->id());
 }
 
 void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)

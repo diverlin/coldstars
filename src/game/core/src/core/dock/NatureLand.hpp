@@ -22,13 +22,13 @@
 #include "Land.hpp"
 
 namespace control {
+
 class ItemSlot;
 class Item;
-} // namespace control
 
-struct UnresolvedDataNatureLand {
-    std::string textureOb_background_path;
-};
+//struct UnresolvedDataNatureLand {
+//    std::string textureOb_background_path;
+//};
 
 class NatureLand : public Land
 {
@@ -47,8 +47,8 @@ public:
     bool AddItem(control::Item*);
     bool CanAcceptNewItem() const;
 
-    virtual bool AddVehicle(Vehicle*);
-    virtual bool RemoveVehicle(Vehicle*);
+    virtual bool add(Vehicle*);
+    virtual bool remove(Vehicle*);
 
     virtual bool GetPermissionToLand() const;
 
@@ -56,22 +56,22 @@ public:
 
     virtual std::string GetDockVehicleStr() const;
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
 private:
     //jeti::control::TextureOb* textureOb_background;
 
     std::vector<Vehicle*> m_vehicles;
-    std::vector<control::ItemSlot*> m_itemslots;
+    std::vector<ItemSlot*> m_itemslots;
 
-    UnresolvedDataNatureLand data_unresolved_NatureLand;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    UnresolvedDataNatureLand data_unresolved_NatureLand;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
     friend class GuiNatureLand;
 };
 
-
+} // namespace control

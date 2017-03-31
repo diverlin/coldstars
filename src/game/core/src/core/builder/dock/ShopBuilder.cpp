@@ -22,37 +22,32 @@
 
 #include <dock/Shop.hpp>
 
+namespace builder {
 
-ShopBuilder::ShopBuilder()
+control::Shop*
+ShopBuilder::gen()
 {
+    control::Shop* shop = __createTemplate();
+    __createInternals(shop);
+
+    return shop;
 }
 
-ShopBuilder::~ShopBuilder()
-{}
-
-Shop* ShopBuilder::createTemplate(int_t id) const
+control::Shop*
+ShopBuilder::__createTemplate(int_t id)
 {
-    Shop* shop = new Shop(id);
+    control::Shop* shop = new control::Shop(id);
     assert(shop);
 
-    assert(false);
-    //EntityManager::get().reg(shop);
-
+    EntityManager::get().reg(shop);
     return shop;
 } 
 
-Shop* ShopBuilder::create() const
-{
-    Shop* shop = createTemplate();
-    createInternals(shop);
-
-    return shop;
-} 
-
-void ShopBuilder::createInternals(Shop* shop) const
+void
+ShopBuilder::__createInternals(control::Shop* shop)
 {    
     //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND);
     //shop->SetTextureObBackground(textureOb_background);
 }
 
-
+} // namespace builder

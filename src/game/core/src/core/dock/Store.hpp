@@ -22,12 +22,11 @@
 #include "Room.hpp"
 
 namespace control {
+
 class ItemSlot;
 class VehicleSlot;
 class Vehicle;
 class Item;
-} // namespace control
-
 class Npc;
 
 class Store : public Room
@@ -65,7 +64,7 @@ private:
     void __add(control::ItemSlot*);
 };
 
-
+} // namespace control
 
 
 

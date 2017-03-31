@@ -86,14 +86,6 @@ global::global()
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
     , m_raceDescriptors(new RaceDescriptors)
-
-    , m_kosmoportBuilder(new KosmoportBuilder)
-    , m_natureLandBuilder(new NatureLandBuilder)
-    , m_angarBuilder(new AngarBuilder)
-    , m_storeBuilder(new StoreBuilder)
-    , m_shopBuilder(new ShopBuilder)
-    , m_govermentBuilder(new GovermentBuilder)
-
     #ifdef USE_ARTEFACTS
     , m_gravityArtefactBuilder(new GravityArtefactBuilder)
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)

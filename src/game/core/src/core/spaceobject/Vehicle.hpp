@@ -31,8 +31,6 @@
 
 //#include <boost/serialization/vector.hpp>
 
-class VehicleSlot;
-class Land; 
 class GoodsPack;
 
 namespace descriptor {
@@ -50,6 +48,8 @@ namespace control {
 class Container;
 class Npc;
 class Item;
+class VehicleSlot;
+class Land;
 } //namespace control
 
 class Equipment;
@@ -242,7 +242,7 @@ protected:
 public:
 
     void HyperJumpEvent(model::StarSystem*);
-    void DockingEvent();
+    void dockingEvent();
     void LaunchingEvent();
 
     void UpdateSpecialEffect();

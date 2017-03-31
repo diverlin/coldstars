@@ -26,12 +26,14 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-class Land;
-class Vehicle;
-
 namespace model {
 class Planet;
 } // namespace model
+
+namespace control {
+class Land;
+class Vehicle;
+} // namespace control
 
 namespace control {
 

@@ -21,30 +21,34 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 class Angar;
+} // namespace control
 
 const unsigned int ANGAR_ITEM_SLOTS_NUM = 10;
 const unsigned int ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM = 6;
 const unsigned int ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM = 6;
 const unsigned int ANGAR_VEHICLE_SLOTS_NUM = ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM + ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM;
 
+namespace builder {
 
 class AngarBuilder
 {
-    public:
-        AngarBuilder();
-        ~AngarBuilder();
+public:
+    static control::Angar* gen();
 
-        Angar* createTemplate(int_t id = NONE) const;
-        Angar* create() const;
+private:
+    AngarBuilder() = delete;
+    ~AngarBuilder() = delete;
 
-    private:
-        void createInternals(Angar*) const;
+    static void __createInternals(control::Angar*);
+    static control::Angar* __createTemplate(int_t id = NONE);
 }; 
 
+} // namespace builder
 
-    
 
-        
+
+
 
 

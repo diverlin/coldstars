@@ -30,17 +30,13 @@
 
 #include <core/slot/VehicleSlot.hpp>
 
+namespace control {
+
 Kosmoport::Kosmoport(int id)
-:
-race_id(race::Type::R0), //wrong
-angar(nullptr),
-store(nullptr),
-shop(nullptr),
-goverment(nullptr)    
 {
     assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::KOSMOPORT);
+    //    setId(id);
+    //    setTypeId(entity::Type::KOSMOPORT);
 }
 
 /* virtual */
@@ -51,68 +47,67 @@ Kosmoport::~Kosmoport()
 void Kosmoport::putChildrenToGarbage() const
 {
     assert(false);
-//   EntityManager::get().addToGarbage(angar);
-//   EntityManager::get().addToGarbage(store);
-//   EntityManager::get().addToGarbage(shop);
-//   EntityManager::get().addToGarbage(goverment);
-}
-       
-void Kosmoport::BindAngar(Angar* angar)
-{ 
-    this->angar= angar; 
-    this->angar->SetOwnerKosmoport(this);
+    //   EntityManager::get().addToGarbage(angar);
+    //   EntityManager::get().addToGarbage(store);
+    //   EntityManager::get().addToGarbage(shop);
+    //   EntityManager::get().addToGarbage(goverment);
 }
 
-void Kosmoport::BindStore(Store* store)             
+void Kosmoport::bindAngar(Angar* angar)
 { 
-    this->store = store; 
-    this->store->SetOwnerKosmoport(this);    
+    m_angar= angar;
+    m_angar->setKosmoport(this);
 }
 
-void Kosmoport::BindShop(Shop* shop)                    
+void Kosmoport::bindStore(Store* store)
 { 
-    this->shop = shop; 
-    this->shop->SetOwnerKosmoport(this);
+    m_store = store;
+    m_store->setKosmoport(this);
 }
 
-void Kosmoport::BindGoverment(Goverment* goverment)     
+void Kosmoport::bindShop(Shop* shop)
 { 
-    this->goverment= goverment; 
-    this->goverment->SetOwnerKosmoport(this);
+    m_shop = shop;
+    m_shop->setKosmoport(this);
 }
-                    
+
+void Kosmoport::bindGoverment(Goverment* goverment)
+{ 
+    m_goverment= goverment;
+    m_goverment->setKosmoport(this);
+}
+
 /* virtual */
 bool Kosmoport::GetPermissionToLand() const
 {
-          if (angar->GetFreeVehicleSlotTotalNum() > 0) 
-        { 
-            return true; 
-        }
-        
-        return false;
+    if (m_angar->GetFreeVehicleSlotTotalNum() > 0) {
+        return true;
+    }
+
+    return false;
 }
-                
+
 /* virtual */
-bool Kosmoport::AddVehicle(Vehicle* vehicle)
+bool Kosmoport::add(Vehicle* vehicle)
 {        
     assert(false);
-//    vehicle->setPlaceTypeId(type::place::KOSMOPORT);
-//    angar->AddVehicle(vehicle);
+    //    vehicle->setPlaceTypeId(type::place::KOSMOPORT);
+    //    angar->AddVehicle(vehicle);
     
-//    vehicle->setLand(this);
-//    if (!vehicle->starsystem()) {
-//        // TODO
-//        //vehicle->setStarSystem(m_owner->starsystem());
-//    }
-          
+    //    vehicle->setLand(this);
+    //    if (!vehicle->starsystem()) {
+    //        // TODO
+    //        //vehicle->setStarSystem(m_owner->starsystem());
+    //    }
+
     return true;
 }
 
 //* virtual */
-bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
+bool Kosmoport::remove(Vehicle* vehicle)
 {        
     assert(false);
-//    vehicle->parentVehicleSlot()->Release();
+    //    vehicle->parentVehicleSlot()->Release();
     return true;
 }
 
@@ -120,45 +115,47 @@ bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 /* virtual */
 void Kosmoport::UpdateInStatic()
 {
-    angar->UpdateInStatic();
+    m_angar->UpdateInStatic();
 }
 
 /* virtual */
 std::string Kosmoport::GetDockVehicleStr() const
 {
-    return angar->GetDockVehicleStr();
+    return m_angar->GetDockVehicleStr();
 }                
 
 
-void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+//void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{}
 
-void Kosmoport::LoadData(const boost::property_tree::ptree& load_ptree)
-{}
+//void Kosmoport::LoadData(const boost::property_tree::ptree& load_ptree)
+//{}
 
-void Kosmoport::ResolveData()
-{}
+//void Kosmoport::ResolveData()
+//{}
 
 
-void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "kosmoport." + std::to_string(id())+".";
+//void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "kosmoport." + std::to_string(id())+".";
 
-//    Base::SaveData(save_ptree, root);
-//    Land::SaveData(save_ptree, root);
-//    Kosmoport::SaveData(save_ptree, root);
-}
+////    Base::SaveData(save_ptree, root);
+////    Land::SaveData(save_ptree, root);
+////    Kosmoport::SaveData(save_ptree, root);
+//}
 
-void Kosmoport::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Land::LoadData(load_ptree);
-//    Kosmoport::LoadData(load_ptree);
-}
+//void Kosmoport::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Land::LoadData(load_ptree);
+////    Kosmoport::LoadData(load_ptree);
+//}
 
-void Kosmoport::Resolve()
-{
-//    Base::ResolveData();
-//    Land::ResolveData();
-//    Kosmoport::ResolveData();
-}
+//void Kosmoport::Resolve()
+//{
+////    Base::ResolveData();
+////    Land::ResolveData();
+////    Kosmoport::ResolveData();
+//}
+
+} // namespace control

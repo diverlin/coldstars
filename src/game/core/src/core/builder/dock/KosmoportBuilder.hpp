@@ -21,24 +21,28 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 class Kosmoport;
+} // namespace control
 
+namespace builder {
 
 class KosmoportBuilder
 {
-    public:
-        KosmoportBuilder();
-        ~KosmoportBuilder();
+public:
+    static control::Kosmoport* gen();
 
-        Kosmoport* createTemplate(int_t id = NONE) const;
-        Kosmoport* create() const;
-                                                    
-    private:
-        void createInternals(Kosmoport*) const;
+private:
+    KosmoportBuilder() = delete;
+    ~KosmoportBuilder() = delete;
+
+    static control::Kosmoport* __createTemplate(int_t id = NONE);
+    static void __createInternals(control::Kosmoport*);
 }; 
 
-    
+} // namespace builder
 
-        
+
+
 
 

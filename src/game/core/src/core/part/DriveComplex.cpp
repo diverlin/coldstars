@@ -64,7 +64,7 @@ bool DriveComplex::PathExists() const
     return true;
 }
 
-void DriveComplex::ResetTarget()
+void DriveComplex::resetTarget()
 {
 //    if (!m_Target)
 //        LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget");
@@ -86,7 +86,7 @@ void DriveComplex::ResetTarget()
       
 void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
 {
-    ResetTarget();
+    resetTarget();
     m_HasTarget = true;
     
     m_TargetPos = target_pos;
@@ -96,9 +96,9 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
 }
                  
-void DriveComplex::SetTarget(model::SpaceObject* target, int action_id)
+void DriveComplex::SetTarget(control::SpaceObject* target, int action_id)
 {
-    ResetTarget();
+    resetTarget();
     
     m_target = target;
     m_ActionId = action_id;
@@ -182,7 +182,7 @@ void DriveComplex::UpdatePath()
             DefineDistance();
             UpdateDynamicTargetCoord();
         } else {
-            ResetTarget();
+            resetTarget();
         }
     }
     
@@ -193,8 +193,8 @@ void DriveComplex::UpdatePath()
 
 bool DriveComplex::ValidateTarget() const
 {
-    if (m_target->isAlive()) {
-        if (m_target->place() == place::Type::KOSMOS) {
+    if (m_target->model()->isAlive()) {
+        if (m_target->model()->place() == place::Type::SPACE) {
             return true;
         }
     }

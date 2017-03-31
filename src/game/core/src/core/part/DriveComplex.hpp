@@ -35,12 +35,9 @@ namespace jeti {
 class Renderer;
 }
 
-namespace model {
-class SpaceObject;
-} // namespace model
-
 
 namespace control {
+class SpaceObject;
 class ItemSlot;
 } // namespace control
 
@@ -57,7 +54,7 @@ public:
     void addDriveSlot(control::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
     void addBakSlot(control::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
-    void SetTarget(model::SpaceObject*, int);
+    void SetTarget(control::SpaceObject*, int);
     void SetStaticTargetCoords(const glm::vec3&);
 
     int GetActionId() const { return m_ActionId; }
@@ -66,14 +63,14 @@ public:
     std::vector<control::ItemSlot*> driveSlots() const { return m_driveSlots; }
     std::vector<control::ItemSlot*> bakSlots() const { return m_bakSlots; }
 
-    model::SpaceObject* target() const { return m_target; }
+    control::SpaceObject* target() const { return m_target; }
 
     bool PathExists() const;
 
     bool CheckTargetEchievement();
     bool GetDockingPermission();
 
-    void ResetTarget();
+    void resetTarget();
 
     void UpdatePath();
     void UpdatePosition();
@@ -86,7 +83,7 @@ private:
     std::vector<control::ItemSlot*> m_bakSlots;
 
     control::Vehicle* m_ownerVehicle = nullptr;
-    model::SpaceObject* m_target = nullptr;
+    control::SpaceObject* m_target = nullptr;
 
     jeti::DriveEffect* m_effectDrive = nullptr;
 
