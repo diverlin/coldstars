@@ -32,54 +32,54 @@ public:
     Shop(int id);
     ~Shop();
 
-    int GetMineralsAmount()     const { return minerals_amount; }
-    int GetFoodAmount()        const { return food_amount; }
-    int GetMedicineAmount()     const { return medicine_amount; }
-    int GetMilitaryAmount()        const { return military_amount; }
-    int GetDrugAmount()        const { return drug_amount; }
-    int GetExclusiveAmount()     const { return exclusive_amount; }
+    int mineralsAmount()     const { return m_mineralsAmount; }
+    int foodAmount()        const { return m_foodAmount; }
+    int medicineAmount()     const { return m_medicineAmount; }
+    int militaryAmount()        const { return m_militaryAmount; }
+    int drugAmount()        const { return m_drugAmount; }
+    int exclusiveAmount()     const { return m_exclusiveAmount; }
 
-    int GetMineralsPrice()         const { return minerals_price; }
-    int GetFoodPrice()         const { return food_price; }
-    int GetMedicinePrice()         const { return medicine_price; }
-    int GetMilitaryPrice()        const { return military_price; }
-    int GetDrugPrice()         const { return drug_price; }
-    int GetExclusivePrice()        const { return exclusive_price; }
+    int mineralsPrice()         const { return m_mineralsPrice; }
+    int foodPrice()         const { return m_foodPrice; }
+    int medicinePrice()         const { return m_medicinePrice; }
+    int militaryPrice()        const { return m_militaryPrice; }
+    int drugPrice()         const { return m_drugPrice; }
+    int exclusivePrice()        const { return m_exclusivePrice; }
 
-    int GetAmount(entity::Type) const;
-    int GetPrice(entity::Type) const;
+    int amount(entity::Type) const;
+    int price(entity::Type) const;
 
-    bool SellGoods(Npc*, entity::Type, int);
-    int BuyGoods(GoodsPack*);
+    bool sellGoods(Npc*, entity::Type, int);
+    int buyGoods(GoodsPack*);
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
 private:
-    int minerals_amount;
-    int food_amount;
-    int medicine_amount;
-    int military_amount;
-    int drug_amount;
-    int exclusive_amount;
+    int m_mineralsAmount = 0;
+    int m_foodAmount = 0;
+    int m_medicineAmount = 0;
+    int m_militaryAmount = 0;
+    int m_drugAmount = 0;
+    int m_exclusiveAmount = 0;
 
-    int minerals_price;
-    int food_price;
-    int medicine_price;
-    int military_price;
-    int drug_price;
-    int exclusive_price;
+    int m_mineralsPrice = 0;
+    int m_foodPrice = 0;
+    int m_medicinePrice = 0;
+    int m_militaryPrice = 0;
+    int m_drugPrice = 0;
+    int m_exclusivePrice = 0;
 
-    int Deal(int, entity::Type, int);
+    int __deal(int, entity::Type, int);
 
-    void UpdateAllPrices();
-    void UpdateMineralPrice();
-    void UpdateFoodPrice();
-    void UpdateMedicinePrice();
-    void UpdateMilitaryPrice();
-    void UpdateDrugPrice();
-    void UpdateExclusivePrice();
+    void __updateAllPrices();
+    void __updateMineralPrice();
+    void __updateFoodPrice();
+    void __updateMedicinePrice();
+    void __updateMilitaryPrice();
+    void __updateDrugPrice();
+    void __updateExclusivePrice();
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
