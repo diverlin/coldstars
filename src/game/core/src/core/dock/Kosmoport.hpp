@@ -44,14 +44,14 @@ public:
     void bindShop(Shop* m_shop);
     void bindGoverment(Goverment* m_goverment);
 
-    virtual bool GetPermissionToLand() const;
+    virtual bool isAllowedToLand() const;
 
     virtual bool add(Vehicle*);
     virtual bool remove(Vehicle*);
 
-    virtual void UpdateInStatic();
+    virtual void updateInStatic();
 
-    virtual std::string GetDockVehicleStr() const;
+    virtual std::string vehiclesStr() const;
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);

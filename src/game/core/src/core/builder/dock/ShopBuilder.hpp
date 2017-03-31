@@ -27,14 +27,14 @@ class Shop;
 
 namespace builder {
 
-class ShopBuilder
+class Shop
 {
 public:
     static control::Shop* gen();
 
 private:
-    ShopBuilder() = delete;
-    ~ShopBuilder() = delete;
+    Shop() = delete;
+    ~Shop() = delete;
 
     static control::Shop* __createTemplate(int_t id = NONE);
     static void __createInternals(control::Shop*);

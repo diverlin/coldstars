@@ -45,7 +45,7 @@
 namespace builder {
 
 control::Store*
-StoreBuilder::gen()
+Store::gen()
 {
     control::Store* store = __createTemplate();
     __createInternals(store);
@@ -55,25 +55,24 @@ StoreBuilder::gen()
 } 
 
 control::Store*
-StoreBuilder::__createTemplate(int_t id)
+Store::__createTemplate(int_t id)
 {
     control::Store* store = new control::Store(id);
     assert(store);
 
-    assert(false);
-//    EntityManager::get().reg(store);
+    EntityManager::get().reg(store);
 
     return store;
 }
 
 void
-StoreBuilder::__createInternals(control::Store* store)
+Store::__createInternals(control::Store* store)
 {
 
 }
 
 void
-StoreBuilder::__putRandomEquipment(control::Store* store)
+Store::__putRandomEquipment(control::Store* store)
 {
     //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
     //int revision_id = 0;

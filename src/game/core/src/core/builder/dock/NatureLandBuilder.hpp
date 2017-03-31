@@ -27,14 +27,14 @@ class NatureLand;
 
 namespace builder {
 
-class NatureLandBuilder
+class NatureLand
 {
 public:
     static control::NatureLand* gen();
 
 private:
-    NatureLandBuilder() = delete;
-    ~NatureLandBuilder() = delete;
+    NatureLand() = delete;
+    ~NatureLand() = delete;
 
     static control::NatureLand* __createTemplate(int_t id = NONE);
     static void __createInternals(control::NatureLand*);

@@ -28,8 +28,6 @@
 namespace control {
 
 Goverment::Goverment(int id)
-:
-textureOb_face(nullptr)
 {
     assert(false);
 //    setId(id);

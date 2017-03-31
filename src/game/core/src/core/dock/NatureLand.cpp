@@ -54,7 +54,7 @@ void NatureLand::putChildrenToGarbage() const
 }
 
 //// ******* TRANSITION ******* 
-bool NatureLand::CanAcceptNewItem() const
+bool NatureLand::canAcceptNewItem() const
 {
     for (control::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {
@@ -65,14 +65,14 @@ bool NatureLand::CanAcceptNewItem() const
     return false;
 }
                 
-void NatureLand::AddItemSlot(control::ItemSlot* item_slot)
+void NatureLand::add(control::ItemSlot* item_slot)
 {
     assert(false);
 //    item_slot->setOwner(this);
 //    item_slot_vec.push_back(item_slot);
 }
 
-bool NatureLand::AddItem(control::Item* item)
+bool NatureLand::add(control::Item* item)
 {
     for (control::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {
@@ -120,17 +120,17 @@ bool NatureLand::remove(Vehicle* vehicle)
 
 
 /* virtual */
-bool NatureLand::GetPermissionToLand() const
+bool NatureLand::isAllowedToLand() const
 {
            return true;
 }
 
 /* virtual */
-void NatureLand::UpdateInStatic()
+void NatureLand::updateInStatic()
 {}  
 
 /*virtual*/
-std::string NatureLand::GetDockVehicleStr() const
+std::string NatureLand::vehiclesStr() const
 {
     std::string str;
     for (unsigned int i=0; i<m_vehicles.size(); i++)

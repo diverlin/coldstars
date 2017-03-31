@@ -25,7 +25,7 @@
 namespace builder {
 
 control::Goverment*
-GovermentBuilder::gen()
+Goverment::gen()
 {
     control::Goverment* goverment = __createTemplate();
     __createInternals(goverment);
@@ -34,7 +34,7 @@ GovermentBuilder::gen()
 } 
 
 control::Goverment*
-GovermentBuilder::__createTemplate(int_t id)
+Goverment::__createTemplate(int_t id)
 {
     control::Goverment* goverment = new control::Goverment(id);
     assert(goverment);
@@ -45,7 +45,7 @@ GovermentBuilder::__createTemplate(int_t id)
 }
 
 void
-GovermentBuilder::__createInternals(control::Goverment* goverment)
+Goverment::__createInternals(control::Goverment* goverment)
 {
     //jeti::control::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND);
     //goverment->SetTextureObFace(textureOb_face);

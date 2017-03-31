@@ -43,7 +43,7 @@ public:
     Planet(model::Planet*, descriptor::Planet*);
     virtual ~Planet();
 
-    void BindLand(Land*);
+    void bindLand(Land*);
 
     [[warning("check const")]]
     Land* land();

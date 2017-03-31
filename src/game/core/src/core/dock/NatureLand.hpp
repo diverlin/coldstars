@@ -42,19 +42,19 @@ public:
 
     //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-    void AddItemSlot(control::ItemSlot*);
+    void add(control::ItemSlot*);
 
-    bool AddItem(control::Item*);
-    bool CanAcceptNewItem() const;
+    bool add(control::Item*);
+    bool canAcceptNewItem() const;
 
     virtual bool add(Vehicle*);
     virtual bool remove(Vehicle*);
 
-    virtual bool GetPermissionToLand() const;
+    virtual bool isAllowedToLand() const;
 
-    virtual void UpdateInStatic();
+    virtual void updateInStatic();
 
-    virtual std::string GetDockVehicleStr() const;
+    virtual std::string vehiclesStr() const;
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
@@ -71,7 +71,7 @@ private:
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
 
-    friend class GuiNatureLand;
+//    friend class GuiNatureLand;
 };
 
 } // namespace control

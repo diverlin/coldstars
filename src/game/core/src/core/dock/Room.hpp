@@ -20,13 +20,13 @@
 #pragma once
 
 #include "../common/Base.hpp"
-#include <ceti/rect.hpp>
+//#include <ceti/rect.hpp>
 
-namespace jeti {
-namespace control {
-class Material;
-} // namespace control
-}
+//namespace jeti {
+//namespace control {
+//class Material;
+//} // namespace control
+//}
 
 //struct UnresolvedDataRoom
 //{
@@ -41,22 +41,22 @@ class Kosmoport;
 class Room : public Base
 {
 public:
-    Room();
-    ~Room();
+    Room() = default;
+    ~Room() = default;
 
     virtual void putChildrenToGarbage() const {}
 
     void setKosmoport(Kosmoport* kosmoport) { m_kosmoport = kosmoport; }
-    void setTextureObBackground(jeti::control::Material* textureOb_background) { m_textureOb_background = textureOb_background; }
+//    void setTextureObBackground(jeti::control::Material* textureOb_background) { m_textureOb_background = textureOb_background; }
 
     Kosmoport* const GetOwnerKosmoport() { return m_kosmoport; }
-    jeti::control::Material* GetBackgroundTextureOb() const { return m_textureOb_background; }
+//    jeti::control::Material* GetBackgroundTextureOb() const { return m_textureOb_background; }
 
-    void RenderBackground(const ceti::Rect&) const;
+//    void RenderBackground(const ceti::Rect&) const;
 
 protected:
     Kosmoport* m_kosmoport = nullptr;
-    jeti::control::Material* m_textureOb_background = nullptr;
+//    jeti::control::Material* m_textureOb_background = nullptr;
 
 //    UnresolvedDataRoom data_unresolved_Room;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
