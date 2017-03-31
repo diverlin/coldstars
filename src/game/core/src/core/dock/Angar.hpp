@@ -20,11 +20,11 @@
 
 #include "Room.hpp"
 
+namespace control {
+
 namespace item {
 class Rocket;
 } // namespace item
-
-namespace control {
 
 class ItemSlot;
 class VehicleSlot;
