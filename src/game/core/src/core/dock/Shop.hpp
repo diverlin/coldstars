@@ -20,10 +20,11 @@
 
 #include "Room.hpp"
 
-class Npc; 
 class GoodsPack; 
 
 namespace control {
+
+class Npc;
 
 class Shop : public Room
 {
