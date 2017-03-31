@@ -54,19 +54,19 @@ Angar::__createInternals(control::Angar* angar)
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
     {
         control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_MILITARY_SLOT);
-        angar->AddVehicleSlot(vehicle_slot);
+        angar->add(vehicle_slot);
     }
 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
     {
         control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_VISITORS_SLOT);
-        angar->AddVehicleSlot(vehicle_slot);
+        angar->add(vehicle_slot);
     }
 
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
     {
         control::ItemSlot* cargo_slot = genItemSlot(entity::Type::CARGO_SLOT);
-        angar->AddItemSlot(cargo_slot);
+        angar->add(cargo_slot);
     }
     
     //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND));

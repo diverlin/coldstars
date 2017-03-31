@@ -39,7 +39,7 @@ namespace control {
 
 Angar::Angar(int id)
     :
-      price_fuel(PRICE_FUEL)
+      m_fuelPrice(PRICE_FUEL)
 {
     assert(false);
 //    setId(id);
@@ -66,7 +66,7 @@ void Angar::putChildrenToGarbage() const
 //    }
 }
 
-void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
+void Angar::add(VehicleSlot* vehicle_slot)
 {
     assert(false);
 //    vehicle_slot->setOwner(this);
@@ -85,14 +85,14 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
 };
 
 
-void Angar::AddItemSlot(ItemSlot* item_slot)
+void Angar::add(ItemSlot* item_slot)
 {
     assert(false);
 //    item_slot->setOwner(this);
 //    item_slot_vec.push_back(item_slot);
 }
 
-bool Angar::RepairItem(Npc* npc, Item* item) const
+bool Angar::repairItem(Npc* npc, Item* item) const
 {
     int price = item->descriptor()->price() * REPAIR_ITEM_PRICE_RATE;
     assert(false);
@@ -122,7 +122,7 @@ bool Angar::chargeRocketEquipment(Npc* npc, item::Rocket* rocket_equipment) cons
     return false;
 }
 
-bool Angar::RepairVehicle(Vehicle* vehicle) const
+bool Angar::repairVehicle(Vehicle* vehicle) const
 {
         assert(false);
 //    int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
@@ -141,7 +141,7 @@ bool Angar::RepairVehicle(Vehicle* vehicle) const
     return false;
 }
 
-bool Angar::TankUpVehicle(Vehicle* vehicle) const
+bool Angar::tankUpVehicle(Vehicle* vehicle) const
 {
         assert(false);
 //    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
@@ -159,9 +159,9 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
     return false;
 }
 
-void Angar::UpdateInStatic() const
+void Angar::updateInStatic() const
 {
-    for (auto slot: vehicle_visitors_slot_vec) {
+    for (auto slot: m_vehicle_visitors_slots) {
         assert(false);
 //        if (slot->vehicle() != nullptr)  {
 //            if (slot->vehicle()->npc() != nullptr) {
@@ -171,10 +171,10 @@ void Angar::UpdateInStatic() const
     }
 }
 
-int Angar::GetFreeVehicleSlotTotalNum() const
+int Angar::freeVehicleSlotTotalNum() const
 {
     int sum_free = 0;
-    for (auto* slot: vehicle_visitors_slot_vec) {
+    for (auto* slot: m_vehicle_visitors_slots) {
         if (!slot->vehicle()) {
             sum_free++;
         }
@@ -182,7 +182,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
     return sum_free;
 }
 
-bool Angar::AddVehicle(Vehicle* vehicle)
+bool Angar::add(Vehicle* vehicle)
 {
     assert(false);
 //    if (vehicle->subsubtype() == entity::Type::WARRIOR) {
@@ -204,7 +204,7 @@ bool Angar::AddVehicle(Vehicle* vehicle)
     return false;
 }
 
-std::string Angar::GetDockVehicleStr() const
+std::string Angar::vehiclesStr() const
 {
     std::string str;
     assert(false);
