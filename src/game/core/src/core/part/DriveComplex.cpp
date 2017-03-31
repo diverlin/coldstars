@@ -43,7 +43,6 @@ DriveComplex::DriveComplex()
       m_ownerVehicle(nullptr),
       m_target(nullptr),
       m_effectDrive(nullptr),
-      m_ActionId(NAVIGATOR_ACTION::NONE),
       m_TargetDistance(0.0f),
       m_PathEnd(true),
       m_HasTarget(false)
@@ -56,8 +55,7 @@ DriveComplex::~DriveComplex()
 
 bool DriveComplex::PathExists() const
 {
-    if ( (m_PathEnd == true) and (m_PathCenterVec.size() == 0 ) )
-    {
+    if ( (m_PathEnd == true) and (m_PathCenterVec.size() == 0 ) ) {
         return false;
     }
     
@@ -78,7 +76,7 @@ void DriveComplex::resetTarget()
     m_TargetOffset = glm::vec3(0.0);
     m_TargetPos   = glm::vec3(0.0);
     
-    m_ActionId = NAVIGATOR_ACTION::NONE;
+    m_action = Action::NONE;
     
     m_HasTarget = false;
     m_PathEnd = true;
@@ -96,12 +94,12 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
 }
                  
-void DriveComplex::SetTarget(control::SpaceObject* target, int action_id)
+void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
 {
     resetTarget();
     
     m_target = target;
-    m_ActionId = action_id;
+    m_action = action_id;
     
     m_HasTarget = true;
         
@@ -110,9 +108,9 @@ void DriveComplex::SetTarget(control::SpaceObject* target, int action_id)
   
 void DriveComplex::DefineDistance()
 {
-    switch(m_ActionId)
+    switch(m_action)
     {
-        case NAVIGATOR_ACTION::DOCKING:
+        case Action::DOCKING:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()/4;
@@ -121,7 +119,7 @@ void DriveComplex::DefineDistance()
             break;
         }
         
-        case NAVIGATOR_ACTION::COLLECTING:
+        case Action::COLLECTING:
         {
             assert(false);
             //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
@@ -130,7 +128,7 @@ void DriveComplex::DefineDistance()
             break;
         }
 
-        case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE:
+        case Action::KEEP_FIRE_DISTANCE:
         {
             assert(false);
             //int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
@@ -144,7 +142,7 @@ void DriveComplex::DefineDistance()
             break;
         }
                     
-        case NAVIGATOR_ACTION::KEEP_CLOSE:
+        case Action::KEEP_CLOSE:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*1.5;
@@ -153,7 +151,7 @@ void DriveComplex::DefineDistance()
             break;
         }
 
-        case NAVIGATOR_ACTION::KEEP_MIDDLE:
+        case Action::KEEP_MIDDLE:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*4;
@@ -162,7 +160,7 @@ void DriveComplex::DefineDistance()
             break;
         }
         
-        case NAVIGATOR_ACTION::KEEP_FAR:
+        case Action::KEEP_FAR:
         {
             assert(false);
 //            m_TargetDistance = m_target->collisionRadius()*8;

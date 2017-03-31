@@ -45,6 +45,10 @@ class ItemSlot;
 class DriveComplex
 {
 public:
+    enum class Action : int {
+        NONE=0, DOCKING, COLLECTING, KEEP_FIRE_DISTANCE, KEEP_CLOSE, KEEP_MIDDLE, KEEP_FAR
+    };
+public:
     DriveComplex();
     ~DriveComplex();
 
@@ -54,16 +58,17 @@ public:
     void addDriveSlot(control::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
     void addBakSlot(control::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
-    void SetTarget(control::SpaceObject*, int);
+    void setTarget(control::SpaceObject*, Action);
     void SetStaticTargetCoords(const glm::vec3&);
 
-    int GetActionId() const { return m_ActionId; }
+    Action GetActionId() const { return m_action; }
     jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
 
     std::vector<control::ItemSlot*> driveSlots() const { return m_driveSlots; }
     std::vector<control::ItemSlot*> bakSlots() const { return m_bakSlots; }
 
     control::SpaceObject* target() const { return m_target; }
+    Action action() const { return m_action; }
 
     bool PathExists() const;
 
@@ -89,7 +94,7 @@ private:
 
     glm::vec3 m_TargetPos;
 
-    int m_ActionId;
+    Action m_action = Action::NONE;
     float m_TargetDistance;
     glm::vec3 m_TargetOffset;
 

@@ -116,6 +116,9 @@ public:
     Vehicle(model::Vehicle*, descriptor::Vehicle*);
     virtual ~Vehicle();
 
+    void dock(SpaceObject*);
+    void follow(SpaceObject*);
+
     WeaponComplex& weaponComplex() { return m_weapon_complex; }
     DriveComplex& driveComplex() { return m_drive_complex; }
     ProtectionComplex& protectorComplex() { return m_protector_complex; }
@@ -238,11 +241,16 @@ protected:
     void _updatePropScan();
     void _updatePropGrab();
     void _updateArtefactInfluence();
+
     friend class ItemSlot;
+
+protected:
+    void _dockingEvent();
+
 public:
+    void process();
 
     void HyperJumpEvent(model::StarSystem*);
-    void dockingEvent();
     void LaunchingEvent();
 
     void UpdateSpecialEffect();

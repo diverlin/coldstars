@@ -31,6 +31,7 @@ SpaceObject::SpaceObject(model::SpaceObject* model, descriptor::SpaceObject* des
       ceti::control::Orientation(model)
     , control::Base(model)
     , m_model_spaceobject(model)
+    , m_descriptor_spaceobject(descr)
 {
     _init();
 }

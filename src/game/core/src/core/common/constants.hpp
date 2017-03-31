@@ -595,14 +595,6 @@ namespace ARTEFACT
     }
 }
 
-namespace NAVIGATOR_ACTION
-{
-    enum TYPE
-    {
-        NONE=0, DOCKING=1, COLLECTING, KEEP_FIRE_DISTANCE, KEEP_CLOSE, KEEP_MIDDLE, KEEP_FAR 
-    };
-}
-
 namespace GUI
 { 
     const int BAR_HEIGHT = 30;

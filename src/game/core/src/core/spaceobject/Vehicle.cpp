@@ -124,6 +124,23 @@ Vehicle::~Vehicle()
 }
 
 void
+Vehicle::dock(SpaceObject* target) {
+    driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
+}
+
+void
+Vehicle::follow(SpaceObject* target) {
+    driveComplex().setTarget(target, DriveComplex::Action::KEEP_MIDDLE);
+}
+
+void
+Vehicle::process() {
+    if (driveComplex().action() == DriveComplex::Action::DOCKING) {
+        _dockingEvent();
+    }
+}
+
+void
 Vehicle::__loadModel()
 {
     if (isInitialized()) {
@@ -816,7 +833,7 @@ void Vehicle::UpdateSpecialAction()
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            dockingEvent();
+            _dockingEvent();
             m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
@@ -869,9 +886,11 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 }
 
 
-void Vehicle::dockingEvent()
+void Vehicle::_dockingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::DockingEvent");
+
+    assert(driveComplex().target());
 
     weaponComplex().deactivateWeapons();
 
