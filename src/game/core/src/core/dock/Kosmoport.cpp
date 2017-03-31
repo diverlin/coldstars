@@ -80,7 +80,7 @@ void Kosmoport::bindGoverment(Goverment* goverment)
 /* virtual */
 bool Kosmoport::isAllowedToLand() const
 {
-    if (m_angar->GetFreeVehicleSlotTotalNum() > 0) {
+    if (m_angar->freeVehicleSlotTotalNum() > 0) {
         return true;
     }
 
@@ -115,13 +115,13 @@ bool Kosmoport::remove(Vehicle* vehicle)
 /* virtual */
 void Kosmoport::updateInStatic()
 {
-    m_angar->UpdateInStatic();
+    m_angar->updateInStatic();
 }
 
 /* virtual */
 std::string Kosmoport::vehiclesStr() const
 {
-    return m_angar->GetDockVehicleStr();
+    return m_angar->vehiclesStr();
 }                
 
 

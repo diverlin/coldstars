@@ -40,37 +40,37 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void AddVehicleSlot(VehicleSlot*);
-    void AddItemSlot(ItemSlot*);
+    void add(VehicleSlot*);
+    void add(ItemSlot*);
 
-    void UpdateInStatic() const;
+    void updateInStatic() const;
 
-    bool AddVehicle(Vehicle*);
+    bool add(Vehicle*);
 
-    bool RepairItem(Npc*, Item*) const;
+    bool repairItem(Npc*, Item*) const;
     bool chargeRocketEquipment(Npc*, item::Rocket*) const;
 
-    bool RepairVehicle(Vehicle*) const;
-    bool TankUpVehicle(Vehicle*) const;
+    bool repairVehicle(Vehicle*) const;
+    bool tankUpVehicle(Vehicle*) const;
 
-    int GetFreeVehicleSlotTotalNum() const;
+    int freeVehicleSlotTotalNum() const;
 
-    int GetPriceFuel() const { return price_fuel; };
+    int fuelPrice() const { return m_fuelPrice; }
 
-    std::string GetDockVehicleStr() const;
+    std::string vehiclesStr() const;
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
 private:
-    std::vector<VehicleSlot*> vehicle_total_slot_vec;
-    std::vector<VehicleSlot*> vehicle_military_slot_vec;
-    std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
+    std::vector<VehicleSlot*> m_vehicle_total_slots;
+    std::vector<VehicleSlot*> m_vehicle_military_slots;
+    std::vector<VehicleSlot*> m_vehicle_visitors_slots;
 
-    std::vector<ItemSlot*> item_slot_vec;
+    std::vector<ItemSlot*> m_item_slots;
 
-    int price_fuel;
+    int m_fuelPrice;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
