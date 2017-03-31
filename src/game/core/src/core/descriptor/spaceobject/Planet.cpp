@@ -31,6 +31,7 @@ const int Planet::SPEED_MAX = 50;
 
 Planet::Planet()
 {
+    setObType(entity::Type::PLANET);
     setType(Type::PLANET);
 }
 
