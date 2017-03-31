@@ -20,24 +20,28 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 class Goverment;
+} // namespace control
 
+namespace builder {
 
 class GovermentBuilder
 {
-    public:
-        GovermentBuilder();
-        ~GovermentBuilder();
-        
-        Goverment* createTemplate(int_t id = NONE) const;
-        Goverment* create() const;
-                                                    
-    private:
-        void createInternals(Goverment*) const;
-}; 
-   
-    
+public:
+    static control::Goverment* gen();
 
-        
+private:
+    GovermentBuilder() = delete;
+    ~GovermentBuilder() = delete;
+
+    static control::Goverment* __createTemplate(int_t id = NONE);
+    static void __createInternals(control::Goverment*);
+}; 
+
+} // namespace builder
+
+
+
 
 

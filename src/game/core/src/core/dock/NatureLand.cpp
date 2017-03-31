@@ -27,6 +27,8 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
+namespace control {
+
 NatureLand::NatureLand(int id)
 {
     assert(false);
@@ -84,7 +86,7 @@ bool NatureLand::AddItem(control::Item* item)
 
 
 /* virtual */
-bool NatureLand::AddVehicle(Vehicle* vehicle)
+bool NatureLand::add(Vehicle* vehicle)
 {
     assert(false);
 //    vehicle->setPlaceTypeId(type::place::LAND);
@@ -101,7 +103,7 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
 }
 
 /*virtual */
-bool NatureLand::RemoveVehicle(Vehicle* vehicle)
+bool NatureLand::remove(Vehicle* vehicle)
 {       
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
@@ -140,43 +142,45 @@ std::string NatureLand::GetDockVehicleStr() const
     return str;
 }
 
-/* virtual override final */
-void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    const std::string root = "natureland."+std::to_string(id())+".";
-//    Base::SaveData(save_ptree, root);
-//    Land::SaveData(save_ptree, root);
-//    NatureLand::SaveData(save_ptree, root);
-}
+///* virtual override final */
+//void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    const std::string root = "natureland."+std::to_string(id())+".";
+////    Base::SaveData(save_ptree, root);
+////    Land::SaveData(save_ptree, root);
+////    NatureLand::SaveData(save_ptree, root);
+//}
 
-/* virtual override final */
-void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Land::LoadData(load_ptree);
-//    NatureLand::LoadData(load_ptree);
-}
+///* virtual override final */
+//void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Land::LoadData(load_ptree);
+////    NatureLand::LoadData(load_ptree);
+//}
 
-/* virtual override final */
-void NatureLand::Resolve()
-{
-//    Base::ResolveData();
-//    Land::ResolveData();
-//    NatureLand::ResolveData();
-}
+///* virtual override final */
+//void NatureLand::Resolve()
+//{
+////    Base::ResolveData();
+////    Land::ResolveData();
+////    NatureLand::ResolveData();
+//}
 
 
-void NatureLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
-}
+//void NatureLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
+//}
 
-void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
-}
+//void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
+//}
 
-void NatureLand::ResolveData()
-{
-    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
-}
+//void NatureLand::ResolveData()
+//{
+//    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
+//}
+
+} // namespace control

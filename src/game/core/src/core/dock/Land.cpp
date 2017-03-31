@@ -26,6 +26,8 @@
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 
+namespace control {
+
 Land::Land():m_owner(nullptr)
 {}
 
@@ -33,35 +35,36 @@ Land::Land():m_owner(nullptr)
 Land::~Land()
 {}
 
+} // namespace control
 
-void Land::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    save_ptree.put(root+"data_unresolved_Land.owner_id", m_owner->id());
-}
+//void Land::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    save_ptree.put(root+"data_unresolved_Land.owner_id", m_owner->id());
+//}
 
-void Land::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    data_unresolved_Land.owner_id = load_ptree.get<int>("data_unresolved_Land.owner_id");
-}
+//void Land::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    data_unresolved_Land.owner_id = load_ptree.get<int>("data_unresolved_Land.owner_id");
+//}
 
-void Land::ResolveData()
-{
-//    Base* owner = EntityManager::get().get(data_unresolved_Land.owner_id);
-//    switch(owner->type())
-//    {
-//        case entity::Type::PLANET:
-//        {
-//            ((control::Planet*)owner)->BindLand(this);
-//            break;
-//        }
+//void Land::ResolveData()
+//{
+////    Base* owner = EntityManager::get().get(data_unresolved_Land.owner_id);
+////    switch(owner->type())
+////    {
+////        case entity::Type::PLANET:
+////        {
+////            ((control::Planet*)owner)->BindLand(this);
+////            break;
+////        }
 
-//        case entity::Type::VEHICLE:
-//        {
-//            if (owner->subtype() == entity::Type::SPACESTATION)
-//            {
-//                ((SpaceStation*)owner)->BindLand(this);
-//            }
-//            break;
-//        }
-//    }
-}
+////        case entity::Type::VEHICLE:
+////        {
+////            if (owner->subtype() == entity::Type::SPACESTATION)
+////            {
+////                ((SpaceStation*)owner)->BindLand(this);
+////            }
+////            break;
+////        }
+////    }
+//}

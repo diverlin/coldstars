@@ -26,7 +26,7 @@ std::string getPlaceStr(place::Type place_id)
     {
         case place::Type::NONE: { return "PLACE_NONE"; }
         
-        case place::Type::KOSMOS: { return "SPACE"; }
+        case place::Type::SPACE: { return "SPACE"; }
         case place::Type::HYPER: { return "HYPER_SPACE"; }
         case place::Type::KOSMOPORT: { return "KOSMOPORT"; }
         case place::Type::LAND: { return "NATURELAND"; }

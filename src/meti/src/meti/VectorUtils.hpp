@@ -32,6 +32,10 @@ public:
     vec3(glm::vec3 v):glm::vec3(v) {}
     vec3():glm::vec3() {}
 
+    float length() const {
+        return glm::length(glm::vec3(x,y,z));
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

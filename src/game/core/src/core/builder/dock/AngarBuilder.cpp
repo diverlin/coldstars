@@ -26,33 +26,30 @@
 
 #include <dock/Angar.hpp>
 
+namespace builder {
 
-AngarBuilder::AngarBuilder()
-{}
-
-AngarBuilder::~AngarBuilder()
-{}
-
-Angar* AngarBuilder::createTemplate(int_t id) const
+control::Angar*
+AngarBuilder::gen()
 {
-    Angar* angar = new Angar(id);
+    control::Angar* angar = __createTemplate();
+    __createInternals(angar);
+
+    return angar;
+} 
+
+control::Angar*
+AngarBuilder::__createTemplate(int_t id)
+{
+    control::Angar* angar = new control::Angar(id);
     assert(angar);
 
-    assert(false);
-//    EntityManager::get().reg(angar);
+    EntityManager::get().reg(angar);
 
     return angar;
-} 
+}
 
-Angar* AngarBuilder::create() const
-{
-    Angar* angar = createTemplate();
-    createInternals(angar);
-
-    return angar;
-} 
-
-void AngarBuilder::createInternals(Angar* angar) const
+void
+AngarBuilder::__createInternals(control::Angar* angar)
 { 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
     {
@@ -69,11 +66,10 @@ void AngarBuilder::createInternals(Angar* angar) const
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
     {
         control::ItemSlot* cargo_slot = genItemSlot(entity::Type::CARGO_SLOT);
-        assert(false);
-//        angar->AddItemSlot(cargo_slot);
+        angar->AddItemSlot(cargo_slot);
     }
     
     //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND));
 }
 
-
+} // namespace builder

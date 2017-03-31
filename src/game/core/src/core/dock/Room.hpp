@@ -28,15 +28,17 @@ class Material;
 } // namespace control
 }
 
+//struct UnresolvedDataRoom
+//{
+//    std::string textureOb_background_path;
+//    int owner_kosmoport_id;
+//};
+
+namespace control {
+
 class Kosmoport;
 
-struct UnresolvedDataRoom
-{
-    std::string textureOb_background_path;
-    int owner_kosmoport_id;
-};
-
-class Room : public control::Base
+class Room : public Base
 {
 public:
     Room();
@@ -44,22 +46,23 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
-    void SetTextureObBackground(jeti::control::Material* textureOb_background) { this->textureOb_background = textureOb_background; }
+    void setKosmoport(Kosmoport* kosmoport) { m_kosmoport = kosmoport; }
+    void setTextureObBackground(jeti::control::Material* textureOb_background) { m_textureOb_background = textureOb_background; }
 
-    Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; }
-    jeti::control::Material* GetBackgroundTextureOb() const { return textureOb_background; }
+    Kosmoport* const GetOwnerKosmoport() { return m_kosmoport; }
+    jeti::control::Material* GetBackgroundTextureOb() const { return m_textureOb_background; }
 
     void RenderBackground(const ceti::Rect&) const;
 
 protected:
-    Kosmoport* owner_kosmoport;
-    jeti::control::Material* textureOb_background;
+    Kosmoport* m_kosmoport = nullptr;
+    jeti::control::Material* m_textureOb_background = nullptr;
 
-    UnresolvedDataRoom data_unresolved_Room;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    UnresolvedDataRoom data_unresolved_Room;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
+} // namespace control
 

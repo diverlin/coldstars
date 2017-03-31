@@ -26,7 +26,7 @@ namespace place {
 enum class Type {
     NONE,
     //
-    KOSMOS,
+    SPACE,
     HYPER,
     KOSMOPORT,
     LAND

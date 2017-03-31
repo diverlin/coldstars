@@ -32,6 +32,8 @@
 
 #include <core/descriptor/item/Item.hpp>
 
+namespace control {
+
 Store::Store(int id)
 {
     assert(false);
@@ -191,3 +193,5 @@ void Store::sellVehicle(Npc* npc, control::VehicleSlot* vehicle_slot, int price)
 //    //    Room::ResolveData();
 //    //    Store::ResolveData();
 //}
+
+} // namespace control

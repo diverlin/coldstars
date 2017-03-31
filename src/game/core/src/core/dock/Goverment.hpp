@@ -16,29 +16,30 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GOVERMENT_HPP
-#define GOVERMENT_HPP
+#pragma once
 
 #include "Room.hpp"
 
+namespace control {
+
 class Goverment : public Room
 {
-    public:
-        Goverment(int);
-        ~Goverment();
+public:
+    Goverment(int);
+    ~Goverment();
 
-        void SetTextureObFace(jeti::control::Material* textureOb_face) { this->textureOb_face = textureOb_face; };
+    void SetTextureObFace(jeti::control::Material* textureOb_face) { this->textureOb_face = textureOb_face; };
 
-        void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-    private:
-        jeti::control::Material* textureOb_face;
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+private:
+    jeti::control::Material* textureOb_face;
+
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
-#endif
+} // namespace control

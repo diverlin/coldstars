@@ -36,33 +36,30 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace builder {
 
-NatureLandBuilder::NatureLandBuilder()
-{}
-
-NatureLandBuilder::~NatureLandBuilder()
-{}
-
-NatureLand* NatureLandBuilder::createTemplate(int_t id) const
+control::NatureLand*
+NatureLandBuilder::gen()
 {
-    NatureLand* natureland = new NatureLand(id);
+    control::NatureLand* natureland = __createTemplate();
+    __createInternals(natureland);
+
+    return natureland;
+} 
+
+control::NatureLand*
+NatureLandBuilder::__createTemplate(int_t id)
+{
+    control::NatureLand* natureland = new control::NatureLand(id);
     assert(natureland);
 
-    assert(false);
-//    EntityManager::get().reg(natureland);
-    
-    return natureland;
-} 
-
-NatureLand* NatureLandBuilder::create() const
-{
-    NatureLand* natureland = createTemplate();
-    createInternals(natureland);
+    EntityManager::get().reg(natureland);
 
     return natureland;
-} 
+}
 
-void NatureLandBuilder::createInternals(NatureLand* natureland) const
+void
+NatureLandBuilder::__createInternals(control::NatureLand* natureland)
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
     
@@ -95,4 +92,5 @@ void NatureLandBuilder::createInternals(NatureLand* natureland) const
     }
 }
 
+} // namespace builder
 

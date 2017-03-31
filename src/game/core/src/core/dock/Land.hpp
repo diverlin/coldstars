@@ -18,45 +18,41 @@
 
 #pragma once
 
-#include <vector>
-#include <string>
 #include <common/Base.hpp>
 
-namespace model {
-class SpaceObject;
-} // namespace model
+#include <vector>
+#include <string>
 
+namespace control {
+
+class SpaceObject;
 class Vehicle;
 
-struct UnresolvedDataLand
-{
-    int owner_id;
-};
-
-class Land : public control::Base
+class Land : public Base
 {
 public:
     Land();
     virtual ~Land();
 
-    void SetOwner(model::SpaceObject* owner)  { this->m_owner = owner; }
+    void setOwner(SpaceObject* owner)  { m_owner = owner; }
 
-    model::SpaceObject* GetOwner() const { return m_owner; };
+    SpaceObject* owner() const { return m_owner; }
     virtual bool GetPermissionToLand() const = 0;
 
-    virtual bool AddVehicle(Vehicle*) = 0;
-    virtual bool RemoveVehicle(Vehicle*) = 0;
+    virtual bool add(Vehicle*) = 0;
+    virtual bool remove(Vehicle*) = 0;
 
     virtual void UpdateInStatic() = 0;
 
     virtual std::string GetDockVehicleStr() const = 0;
 
 protected:
-    model::SpaceObject* m_owner = nullptr;
+    SpaceObject* m_owner = nullptr;
 
-    UnresolvedDataLand data_unresolved_Land;
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    UnresolvedDataLand data_unresolved_Land;
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
+} // namespace control

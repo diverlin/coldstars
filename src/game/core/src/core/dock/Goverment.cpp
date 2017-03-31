@@ -24,6 +24,9 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
+
+namespace control {
+
 Goverment::Goverment(int id)
 :
 textureOb_face(nullptr)
@@ -36,43 +39,44 @@ textureOb_face(nullptr)
 Goverment::~Goverment()
 {}
 
+} // namespace control
 
-void Goverment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //save_ptree.put(root+"unresolved.angar_id",     angar->id());
+//void Goverment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //save_ptree.put(root+"unresolved.angar_id",     angar->id());
 
-}
+//}
 
-void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-}
+//void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
+//}
 
-void Goverment::ResolveData()
-{
-    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
-}
+//void Goverment::ResolveData()
+//{
+//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
+//}
 
-void Goverment::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "goverment." + std::to_string(id())+".";
+//void Goverment::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "goverment." + std::to_string(id())+".";
     
-//    Base::SaveData(save_ptree, root);
-//    Room::SaveData(save_ptree, root);
-//    Goverment::SaveData(save_ptree, root);
-}
+////    Base::SaveData(save_ptree, root);
+////    Room::SaveData(save_ptree, root);
+////    Goverment::SaveData(save_ptree, root);
+//}
 
-void Goverment::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Room::LoadData(load_ptree);
-//    Goverment::LoadData(load_ptree);
-}
+//void Goverment::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Room::LoadData(load_ptree);
+////    Goverment::LoadData(load_ptree);
+//}
 
-void Goverment::Resolve()
-{
-//    Base::ResolveData();
-//    Room::ResolveData();
-//    Goverment::ResolveData();
-}
+//void Goverment::Resolve()
+//{
+////    Base::ResolveData();
+////    Room::ResolveData();
+////    Goverment::ResolveData();
+//}
 

@@ -31,6 +31,8 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/pilot/Npc.hpp>
 
+namespace control {
+
 Shop::Shop(int id)
 {
     assert(false);
@@ -228,53 +230,53 @@ void Shop::UpdateExclusivePrice()
         exclusive_price = PRICE::EXCLUSIVE_MAX * (1.0 - atan((float)exclusive_amount/EXCLUSIVE_AMOUNT_MAX)/1.6);   
 }            
 
-void Shop::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    save_ptree.put(root+"minerals_amount", minerals_amount);
-    save_ptree.put(root+"food_amount",     food_amount);
-    save_ptree.put(root+"medicine_amount", medicine_amount);
-    save_ptree.put(root+"military_amount", military_amount);
-    save_ptree.put(root+"drug_amount",     drug_amount);
-    save_ptree.put(root+"exclusive_amount", exclusive_amount);
-}
+//void Shop::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    save_ptree.put(root+"minerals_amount", minerals_amount);
+//    save_ptree.put(root+"food_amount",     food_amount);
+//    save_ptree.put(root+"medicine_amount", medicine_amount);
+//    save_ptree.put(root+"military_amount", military_amount);
+//    save_ptree.put(root+"drug_amount",     drug_amount);
+//    save_ptree.put(root+"exclusive_amount", exclusive_amount);
+//}
 
-void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    minerals_amount = load_ptree.get<int>("minerals_amount");
-    food_amount     = load_ptree.get<int>("food_amount");
-    medicine_amount = load_ptree.get<int>("medicine_amount");
-    military_amount = load_ptree.get<int>("military_amount");
-    drug_amount      = load_ptree.get<int>("drug_amount");
-    exclusive_amount = load_ptree.get<int>("exclusive_amount");
-}
+//void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    minerals_amount = load_ptree.get<int>("minerals_amount");
+//    food_amount     = load_ptree.get<int>("food_amount");
+//    medicine_amount = load_ptree.get<int>("medicine_amount");
+//    military_amount = load_ptree.get<int>("military_amount");
+//    drug_amount      = load_ptree.get<int>("drug_amount");
+//    exclusive_amount = load_ptree.get<int>("exclusive_amount");
+//}
 
-void Shop::ResolveData()
-{
-//    UpdateAllPrices();
-//    ((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this);
-}
+//void Shop::ResolveData()
+//{
+////    UpdateAllPrices();
+////    ((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this);
+//}
 
-void Shop::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "shop." + std::to_string(id())+".";
-//    Base::SaveData(save_ptree, root);
-//    Room::SaveData(save_ptree, root);
-//    Shop::SaveData(save_ptree, root);
-}
+//void Shop::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "shop." + std::to_string(id())+".";
+////    Base::SaveData(save_ptree, root);
+////    Room::SaveData(save_ptree, root);
+////    Shop::SaveData(save_ptree, root);
+//}
 
-void Shop::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Room::LoadData(load_ptree);
-//    Shop::LoadData(load_ptree);
-}
+//void Shop::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Room::LoadData(load_ptree);
+////    Shop::LoadData(load_ptree);
+//}
 
-void Shop::Resolve()
-{
-//    Base::ResolveData();
-//    Room::ResolveData();
-//    Shop::ResolveData();
-}
+//void Shop::Resolve()
+//{
+////    Base::ResolveData();
+////    Room::ResolveData();
+////    Shop::ResolveData();
+//}
 
-
+} // namespace control
 

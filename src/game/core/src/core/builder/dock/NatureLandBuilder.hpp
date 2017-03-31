@@ -21,23 +21,27 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 class NatureLand;
+} // namespace control
+
+namespace builder {
 
 class NatureLandBuilder
 {
-    public:
-        NatureLandBuilder();
-        ~NatureLandBuilder();
+public:
+    static control::NatureLand* gen();
 
-        NatureLand* createTemplate(int_t id = NONE) const;
-        NatureLand* create() const;
-                                                    
-    private:
-        void createInternals(NatureLand*) const;
+private:
+    NatureLandBuilder() = delete;
+    ~NatureLandBuilder() = delete;
+
+    static control::NatureLand* __createTemplate(int_t id = NONE);
+    static void __createInternals(control::NatureLand*);
 }; 
 
-    
+} // namespace builder
 
-        
+
 
 

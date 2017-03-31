@@ -55,22 +55,19 @@ Planetoid::Planetoid(model::Planetoid* model, descriptor::Planetoid* descr)
 Planetoid::~Planetoid()
 {}
 
-//void Planetoid::setPlanetDescriptor(int_t descriptor)
-//{
-//    model()->setDescriptor(descriptor);
-//    if (!m_descriptor) {
-//        //m_descriptor = getDescriptor(descriptor) ... ;
-//        assert(m_descriptor);
-//    }
-//}
+void
+Planetoid::calibrateOrbit(float offset_radius)
+{
+    model()->setRadiusA(model()->radiusA() + offset_radius);
+    model()->setRadiusB(model()->radiusB() + offset_radius);
+}
 
-//void Planetoid::bindParent(const SpaceObject* const parent, int it)
-//{
-//    //setParent(parent);
-//    __createOrbit();
-//    m_orbit.setIt(it);
-//    _updatePosition();
-//}
+void Planetoid::initOrbit(int it)
+{
+    __createOrbit();
+    m_orbit.setIt(it);
+    _updatePosition();
+}
 
 void Planetoid::__createOrbit()
 {

@@ -22,33 +22,30 @@
 
 #include <dock/Goverment.hpp>
 
+namespace builder {
 
-GovermentBuilder::GovermentBuilder()
-{}
-
-GovermentBuilder::~GovermentBuilder()
-{}
-
-Goverment* GovermentBuilder::createTemplate(int_t id) const
+control::Goverment*
+GovermentBuilder::gen()
 {
-    Goverment* goverment = new Goverment(id);
+    control::Goverment* goverment = __createTemplate();
+    __createInternals(goverment);
+
+    return goverment;
+} 
+
+control::Goverment*
+GovermentBuilder::__createTemplate(int_t id)
+{
+    control::Goverment* goverment = new control::Goverment(id);
     assert(goverment);
 
-    assert(false);
-//    EntityManager::get().reg(goverment);
-    
-    return goverment;
-} 
-
-Goverment* GovermentBuilder::create() const
-{
-    Goverment* goverment = createTemplate();
-    createInternals(goverment);
+    EntityManager::get().reg(goverment);
 
     return goverment;
-} 
+}
 
-void GovermentBuilder::createInternals(Goverment* goverment) const
+void
+GovermentBuilder::__createInternals(control::Goverment* goverment)
 {
     //jeti::control::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND);
     //goverment->SetTextureObFace(textureOb_face);
@@ -58,3 +55,4 @@ void GovermentBuilder::createInternals(Goverment* goverment) const
 
 }
 
+} // namespace builder

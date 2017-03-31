@@ -21,18 +21,23 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace control {
 class Shop;
+} // namespace control
 
+namespace builder {
 
 class ShopBuilder
 {
-    public:
-        ShopBuilder();
-        ~ShopBuilder();
+public:
+    static control::Shop* gen();
 
-        Shop* createTemplate(int_t id = NONE) const;
-        Shop* create() const;
-                                                    
-    private: 
-        void createInternals(Shop*) const;
+private:
+    ShopBuilder() = delete;
+    ~ShopBuilder() = delete;
+
+    static control::Shop* __createTemplate(int_t id = NONE);
+    static void __createInternals(control::Shop*);
 }; 
+
+} // namespace builder

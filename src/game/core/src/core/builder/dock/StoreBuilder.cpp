@@ -42,39 +42,38 @@
 
 #include <core/manager/DescriptorManager.hpp>
 
-StoreBuilder::StoreBuilder()
-{}
+namespace builder {
 
-StoreBuilder::~StoreBuilder()
-{}
-
-Store* StoreBuilder::createTemplate(int_t id) const
+control::Store*
+StoreBuilder::gen()
 {
-    Store* store = new Store(id);
+    control::Store* store = __createTemplate();
+    __createInternals(store);
+    __putRandomEquipment(store);
+
+    return store;
+} 
+
+control::Store*
+StoreBuilder::__createTemplate(int_t id)
+{
+    control::Store* store = new control::Store(id);
     assert(store);
 
     assert(false);
 //    EntityManager::get().reg(store);
-    
-    return store;
-} 
-
-Store* StoreBuilder::create() const
-{
-    Store* store = createTemplate();
-    createInternals(store);
-    PutRandomEquipment(store);
 
     return store;
-} 
+}
 
-void StoreBuilder::createInternals(Store* store) const
+void
+StoreBuilder::__createInternals(control::Store* store)
 {
 
 }
 
-
-void StoreBuilder::PutRandomEquipment(Store* store) const
+void
+StoreBuilder::__putRandomEquipment(control::Store* store)
 {
     //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
     //int revision_id = 0;
@@ -133,3 +132,5 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     }
 #endif
 }
+
+} // namespace builder

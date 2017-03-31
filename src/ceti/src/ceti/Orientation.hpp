@@ -98,7 +98,7 @@ public:
     [[deprecated("depr")]]
     void updateOrientation();
 
-    void setDirection(const meti::vec3& direction)   { assert(int(direction.length()) != 1); model()->setDirection(meti::normalize(direction)); m_isUpdated = false; }
+    void setDirection(const meti::vec3& direction)   { model()->setDirection(meti::normalize(direction)); m_isUpdated = false; }
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
     model::Orientation* model() const { return m_model_orientation; }

@@ -35,6 +35,8 @@
 
 #include <core/descriptor/item/Item.hpp>
 
+namespace control {
+
 Angar::Angar(int id)
     :
       price_fuel(PRICE_FUEL)
@@ -64,7 +66,7 @@ void Angar::putChildrenToGarbage() const
 //    }
 }
 
-void Angar::AddVehicleSlot(control::VehicleSlot* vehicle_slot)
+void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
 {
     assert(false);
 //    vehicle_slot->setOwner(this);
@@ -83,14 +85,14 @@ void Angar::AddVehicleSlot(control::VehicleSlot* vehicle_slot)
 };
 
 
-void Angar::AddItemSlot(control::ItemSlot* item_slot)
+void Angar::AddItemSlot(ItemSlot* item_slot)
 {
     assert(false);
 //    item_slot->setOwner(this);
 //    item_slot_vec.push_back(item_slot);
 }
 
-bool Angar::RepairItem(Npc* npc, control::Item* item) const
+bool Angar::RepairItem(Npc* npc, Item* item) const
 {
     int price = item->descriptor()->price() * REPAIR_ITEM_PRICE_RATE;
     assert(false);
@@ -120,7 +122,7 @@ bool Angar::chargeRocketEquipment(Npc* npc, item::Rocket* rocket_equipment) cons
     return false;
 }
 
-bool Angar::RepairVehicle(control::Vehicle* vehicle) const
+bool Angar::RepairVehicle(Vehicle* vehicle) const
 {
         assert(false);
 //    int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
@@ -139,7 +141,7 @@ bool Angar::RepairVehicle(control::Vehicle* vehicle) const
     return false;
 }
 
-bool Angar::TankUpVehicle(control::Vehicle* vehicle) const
+bool Angar::TankUpVehicle(Vehicle* vehicle) const
 {
         assert(false);
 //    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
@@ -180,7 +182,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
     return sum_free;
 }
 
-bool Angar::AddVehicle(control::Vehicle* vehicle)
+bool Angar::AddVehicle(Vehicle* vehicle)
 {
     assert(false);
 //    if (vehicle->subsubtype() == entity::Type::WARRIOR) {
@@ -220,38 +222,39 @@ std::string Angar::GetDockVehicleStr() const
 }
 
 
-void Angar::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+//void Angar::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{}
 
-void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
-{}
+//void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
+//{}
 
-void Angar::ResolveData()
-{
-    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
-}
+//void Angar::ResolveData()
+//{
+//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
+//}
 
 
-void Angar::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "angar." + std::to_string(id())+".";
+//void Angar::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "angar." + std::to_string(id())+".";
 
-//    Base::SaveData(save_ptree, root);
-//    Room::SaveData(save_ptree, root);
-//    Angar::SaveData(save_ptree, root);
-}
+////    Base::SaveData(save_ptree, root);
+////    Room::SaveData(save_ptree, root);
+////    Angar::SaveData(save_ptree, root);
+//}
 
-void Angar::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Room::LoadData(load_ptree);
-//    Angar::LoadData(load_ptree);
-}
+//void Angar::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Room::LoadData(load_ptree);
+////    Angar::LoadData(load_ptree);
+//}
 
-void Angar::Resolve()
-{
-//    Base::ResolveData();
-//    Room::ResolveData();
-//    Angar::ResolveData();
-}
+//void Angar::Resolve()
+//{
+////    Base::ResolveData();
+////    Room::ResolveData();
+////    Angar::ResolveData();
+//}
 
+} // namespace control
