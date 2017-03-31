@@ -36,198 +36,200 @@ namespace control {
 Shop::Shop(int id)
 {
     assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::SHOP);
-//    setSubTypeId(entity::Type::SHOP);
+    //    setId(id);
+    //    setTypeId(entity::Type::SHOP);
+    //    setSubTypeId(entity::Type::SHOP);
     
-    minerals_amount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
-    food_amount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
-    medicine_amount  = meti::getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
-    military_amount  = meti::getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
-    drug_amount      = meti::getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
-    exclusive_amount = meti::getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
+    m_mineralsAmount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
+    m_foodAmount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
+    m_medicineAmount  = meti::getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
+    m_militaryAmount  = meti::getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
+    m_drugAmount      = meti::getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
+    m_exclusiveAmount = meti::getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
     
-    UpdateAllPrices();
+    __updateAllPrices();
 }
 
 Shop::~Shop()
 {}                
 
 
-int Shop::GetAmount(entity::Type subtype_id) const
+int Shop::amount(entity::Type subtype_id) const
 {
     switch(subtype_id)
     {
-        case entity::Type::MINERALS:     { return minerals_amount; break; }
-        case entity::Type::FOOD:         { return food_amount; break; }
-        case entity::Type::MEDICINE:     { return medicine_amount; break; }
-        case entity::Type::MILITARY:     { return military_amount; break; }
-        case entity::Type::DRUG:        { return drug_amount; break; }
-        case entity::Type::EXCLUSIVE:     { return exclusive_amount; break; }
+    case entity::Type::MINERALS:     { return m_mineralsAmount; break; }
+    case entity::Type::FOOD:         { return m_foodAmount; break; }
+    case entity::Type::MEDICINE:     { return m_medicineAmount; break; }
+    case entity::Type::MILITARY:     { return m_militaryAmount; break; }
+    case entity::Type::DRUG:         { return m_drugAmount; break; }
+    case entity::Type::EXCLUSIVE:    { return m_exclusiveAmount; break; }
     }
     
     return 0;
 }    
-                
-int Shop::GetPrice(entity::Type subtype_id) const
+
+int Shop::price(entity::Type subtype_id) const
 {
     switch(subtype_id)
     {
-        case entity::Type::MINERALS:     { return minerals_price; break; }
-        case entity::Type::FOOD:         { return food_price; break; }
-        case entity::Type::MEDICINE:     { return medicine_price; break; }
-        case entity::Type::MILITARY:     { return military_price; break; }
-        case entity::Type::DRUG:            { return drug_price; break; }
-        case entity::Type::EXCLUSIVE:     { return exclusive_price; break; }
+    case entity::Type::MINERALS:     { return m_mineralsPrice; break; }
+    case entity::Type::FOOD:         { return m_foodPrice; break; }
+    case entity::Type::MEDICINE:     { return m_medicinePrice; break; }
+    case entity::Type::MILITARY:     { return m_militaryPrice; break; }
+    case entity::Type::DRUG:         { return m_drugPrice; break; }
+    case entity::Type::EXCLUSIVE:    { return m_exclusivePrice; break; }
     }
     
     return 0;
 }
 
-                
-bool Shop::SellGoods(Npc* npc, entity::Type subtype_id, int amount)
+
+bool Shop::sellGoods(Npc* npc, entity::Type subtype_id, int amount)
 {    
     int sign = -1;
-    int price = Deal(sign, subtype_id, amount);
+    int price = __deal(sign, subtype_id, amount);
     
     if (price > 0) {
         assert(false);
-//        if (npc->withdrawCredits(price)) {
-//            GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-//            goods_pack->Increase(amount);
+        //        if (npc->withdrawCredits(price)) {
+        //            GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+        //            goods_pack->Increase(amount);
         
-//            assert(false);
-//            //npc->vehicle()->addItemToCargoSlot(goods_pack);
-                
-//            return true;
-//        }
-    }      
+        //            assert(false);
+        //            //npc->vehicle()->addItemToCargoSlot(goods_pack);
+
+        //            return true;
+        //        }
+    }
     
     return false;
 }
-    
-            
-int Shop::BuyGoods(GoodsPack* goods_pack)
+
+
+int
+Shop::buyGoods(GoodsPack* goods_pack)
 {
     assert(false);
-//    int sign = 1;
-//    int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());
-//    if (price > 0)
-//    {
-//        goods_pack->slot()->removeItem();
-//       EntityManager::get().addToGarbage(goods_pack);
-//    }
+    //    int sign = 1;
+    //    int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());
+    //    if (price > 0)
+    //    {
+    //        goods_pack->slot()->removeItem();
+    //       EntityManager::get().addToGarbage(goods_pack);
+    //    }
     
-//    return price;
+    //    return price;
 }
-       
-int Shop::Deal(int sign, entity::Type subtype_id, int amount)
+
+int
+Shop::__deal(int sign, entity::Type subtype_id, int amount)
 {
     int money = 0;
     switch(subtype_id)
     {
-        case entity::Type::MINERALS:
-        {        
-            minerals_amount += sign*amount;
-            money = amount*minerals_price;
-            
-            UpdateMineralPrice();
-            
-            break;
-        }
+    case entity::Type::MINERALS:
+    {
+        m_mineralsAmount += sign*amount;
+        money = amount*m_mineralsPrice;
 
-        case entity::Type::FOOD:
-        {                            
-            food_amount += sign*amount;
-            money = amount*food_price;
-                        
-            UpdateFoodPrice();
-            
-            break;
-        }
+        __updateMineralPrice();
 
-        case entity::Type::MEDICINE:
-        {                            
-            medicine_amount += sign*amount;
-            money = amount*medicine_price;
-            
-            UpdateMedicinePrice();
-            
-            break;
-        }            
+        break;
+    }
 
-        case entity::Type::MILITARY:
-        {                            
-            military_amount += sign*amount;
-            money = amount*military_price;    
+    case entity::Type::FOOD:
+    {
+        m_foodAmount += sign*amount;
+        money = amount*m_foodPrice;
+
+        __updateFoodPrice();
+
+        break;
+    }
+
+    case entity::Type::MEDICINE:
+    {
+        m_medicineAmount += sign*amount;
+        money = amount*m_medicinePrice;
+
+        __updateMedicinePrice();
+
+        break;
+    }
+
+    case entity::Type::MILITARY:
+    {
+        m_militaryAmount += sign*amount;
+        money = amount*m_militaryPrice;
         
-            UpdateMilitaryPrice();
-            
-            break;
-        }    
+        __updateMilitaryPrice();
 
-        case entity::Type::DRUG:
-        {                            
-            drug_amount += sign*amount;
-            money = amount*drug_price;    
-                        
-            UpdateDrugPrice();
-            
-            break;
-        }    
+        break;
+    }
 
-        case entity::Type::EXCLUSIVE:
-        {                            
-            exclusive_amount += sign*amount;
-            money = amount*exclusive_price;
-                        
-            UpdateExclusivePrice();
-            
-            break;
-        }    
+    case entity::Type::DRUG:
+    {
+        m_drugAmount += sign*amount;
+        money = amount*m_drugPrice;
+
+        __updateDrugPrice();
+
+        break;
+    }
+
+    case entity::Type::EXCLUSIVE:
+    {
+        m_exclusiveAmount += sign*amount;
+        money = amount*m_exclusivePrice;
+
+        __updateExclusivePrice();
+
+        break;
+    }
     }
     
     return money;
 }
-            
-void Shop::UpdateAllPrices()
+
+void Shop::__updateAllPrices()
 {
-        UpdateMineralPrice();
-        UpdateFoodPrice();
-        UpdateMedicinePrice();
-        UpdateMilitaryPrice();
-        UpdateDrugPrice();
-        UpdateExclusivePrice();
+    __updateMineralPrice();
+    __updateFoodPrice();
+    __updateMedicinePrice();
+    __updateMilitaryPrice();
+    __updateDrugPrice();
+    __updateExclusivePrice();
 }
 
-void Shop::UpdateMineralPrice()
+void Shop::__updateMineralPrice()
 {
-    minerals_price = PRICE::MINERALS_MAX * (1.0 - atan((float)minerals_amount/MINERALS_AMOUNT_MAX)/1.6);
-}
- 
-void Shop::UpdateFoodPrice()
-{
-        food_price = PRICE::FOOD_MAX * (1.0 - atan((float)food_amount/FOOD_AMOUNT_MAX)/1.6);    
+    m_mineralsPrice = PRICE::MINERALS_MAX * (1.0 - atan((float)m_mineralsAmount/MINERALS_AMOUNT_MAX)/1.6);
 }
 
-void Shop::UpdateMedicinePrice()
+void Shop::__updateFoodPrice()
 {
-        medicine_price    = PRICE::MEDICINE_MAX  * (1.0 - atan((float)medicine_amount/MEDICINE_AMOUNT_MAX)/1.6); 
+    m_foodPrice = PRICE::FOOD_MAX * (1.0 - atan((float)m_foodAmount/FOOD_AMOUNT_MAX)/1.6);
 }
 
-void Shop::UpdateMilitaryPrice()
+void Shop::__updateMedicinePrice()
 {
-        military_price  = PRICE::MILITARY_MAX * (1.0 - atan((float)military_amount/MILITARY_AMOUNT_MAX)/1.6);   
+    m_medicinePrice    = PRICE::MEDICINE_MAX  * (1.0 - atan((float)m_medicineAmount/MEDICINE_AMOUNT_MAX)/1.6);
 }
 
-void Shop::UpdateDrugPrice()
+void Shop::__updateMilitaryPrice()
 {
-        drug_price = PRICE::DRUG_MAX * (1.0 - atan((float)drug_amount/DRUG_AMOUNT_MAX)/1.6);  
+    m_militaryPrice  = PRICE::MILITARY_MAX * (1.0 - atan((float)m_militaryAmount/MILITARY_AMOUNT_MAX)/1.6);
 }
 
-void Shop::UpdateExclusivePrice()
+void Shop::__updateDrugPrice()
 {
-        exclusive_price = PRICE::EXCLUSIVE_MAX * (1.0 - atan((float)exclusive_amount/EXCLUSIVE_AMOUNT_MAX)/1.6);   
+    m_drugPrice = PRICE::DRUG_MAX * (1.0 - atan((float)m_drugAmount/DRUG_AMOUNT_MAX)/1.6);
+}
+
+void Shop::__updateExclusivePrice()
+{
+    m_exclusivePrice = PRICE::EXCLUSIVE_MAX * (1.0 - atan((float)m_exclusiveAmount/EXCLUSIVE_AMOUNT_MAX)/1.6);
 }            
 
 //void Shop::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

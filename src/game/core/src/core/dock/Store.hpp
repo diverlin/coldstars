@@ -37,22 +37,22 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    bool add(control::Item*);
-    bool add(control::Vehicle*);
+    bool add(Item*);
+    bool add(Vehicle*);
 
-    control::ItemSlot* freeItemSlot() const;
-    control::VehicleSlot* freeVehicleSlot() const;
+    ItemSlot* freeItemSlot() const;
+    VehicleSlot* freeVehicleSlot() const;
 
-    int buyItem(control::Item*);
-    void sellVehicle(Npc*, control::VehicleSlot*, int);
+    int buyItem(Item*);
+    void sellVehicle(Npc*, VehicleSlot*, int);
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
 private:
-    std::vector<control::ItemSlot*> m_item_slots;
-    std::vector<control::VehicleSlot*> m_vehicle_slots;
+    std::vector<ItemSlot*> m_item_slots;
+    std::vector<VehicleSlot*> m_vehicle_slots;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
@@ -60,8 +60,8 @@ private:
 
 //    friend class GuiStore;
 
-    void __add(control::VehicleSlot*);
-    void __add(control::ItemSlot*);
+    void __add(VehicleSlot*);
+    void __add(ItemSlot*);
 };
 
 } // namespace control

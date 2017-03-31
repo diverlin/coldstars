@@ -41,12 +41,12 @@ Store::Store(int id)
     //    setTypeId(entity::Type::STORE);
 
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++) {
-        control::ItemSlot* item_slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
+        ItemSlot* item_slot = new ItemSlot(entity::Type::CARGO_SLOT);
         __add(item_slot);
     }
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++) {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
+        VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
         __add(vehicle_slot);
     }
 
@@ -66,21 +66,21 @@ void Store::putChildrenToGarbage() const
     //    }
 }
 
-void Store::__add(control::ItemSlot* item_slot)
+void Store::__add(ItemSlot* item_slot)
 { 
     item_slot->setOwner(this);
     m_item_slots.push_back(item_slot);
 }
 
-void Store::__add(control::VehicleSlot* vehicle_slot)
+void Store::__add(VehicleSlot* vehicle_slot)
 { 
     vehicle_slot->setOwner(this);
     m_vehicle_slots.push_back(vehicle_slot);
 }
 
-bool Store::add(control::Item* item)
+bool Store::add(Item* item)
 {
-    control::ItemSlot* slot = freeItemSlot();
+    ItemSlot* slot = freeItemSlot();
     if (slot) {
         slot->insert(item);
         return true;
@@ -89,9 +89,9 @@ bool Store::add(control::Item* item)
     return false;
 }
 
-bool Store::add(control::Vehicle* vehicle)
+bool Store::add(Vehicle* vehicle)
 {
-    control::VehicleSlot* vehicle_slot = freeVehicleSlot();
+    VehicleSlot* vehicle_slot = freeVehicleSlot();
     if (vehicle_slot) {
         //vehicle->SetLand(GetOwnerKosmoport());
         //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
@@ -105,7 +105,7 @@ bool Store::add(control::Vehicle* vehicle)
     return true;
 }
 
-control::ItemSlot*
+ItemSlot*
 Store::freeItemSlot() const
 {
     for (auto* slot: m_item_slots) {
@@ -116,7 +116,7 @@ Store::freeItemSlot() const
     return nullptr;
 }
 
-control::VehicleSlot*
+VehicleSlot*
 Store::freeVehicleSlot() const
 {
     for (auto* slot: m_vehicle_slots) {
@@ -128,9 +128,9 @@ Store::freeVehicleSlot() const
 }
 
 int
-Store::buyItem(control::Item* item)
+Store::buyItem(Item* item)
 {
-    control::ItemSlot* slot = freeItemSlot();
+    ItemSlot* slot = freeItemSlot();
     if (slot) {
         if (slot->insert(item)) {
             return item->descriptor()->price();
@@ -140,7 +140,7 @@ Store::buyItem(control::Item* item)
     return 0;
 }
 
-void Store::sellVehicle(Npc* npc, control::VehicleSlot* vehicle_slot, int price)
+void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
     assert(false);
     //    vehicle_slot->vehicle()->grabItemsFromVehicle(npc->vehicle());
