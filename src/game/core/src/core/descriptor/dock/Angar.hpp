@@ -18,21 +18,26 @@
 
 #pragma once
 
+#include "Room.hpp"
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
+#include <ceti/Pack.hpp>
 
-#include <sstream>
+namespace descriptor {
 
-#define MACRO_READ_SERIALIZED_DATA \
-    std::stringstream ss; \
-    ss << data; \
-    boost::archive::text_iarchive ia(ss); \
-    ia >> *this;
+class Angar : public Room {
+public:
+    Angar() = default;
+    ~Angar() = default;
+    Angar(const std::string& data);
+    std::string data() const;
 
-#define MACRO_SAVE_SERIALIZED_DATA \
-    std::stringstream ss; \
-    boost::archive::text_oarchive oa(ss); \
-    oa << *this; \
-    return ss.str();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Room>(*this);
+    }
+};
+
+} // namespace descriptor
+
