@@ -39,6 +39,10 @@ class SpaceStation;
 class Satellite;
 class Container;
 
+// dock
+class Kosmoport;
+class NatureLand;
+
 namespace item {
 class Bak;
 class Drive;
@@ -67,6 +71,10 @@ descriptor::SpaceStation* genSpaceStation();
 descriptor::Satellite* genSatellite();
 
 descriptor::Container* genContainer();
+
+// dock
+Kosmoport* genKosmoport(race::Type race = race::Type::NONE);
+NatureLand* genNatureLand();
 
 /* items */
 namespace item {

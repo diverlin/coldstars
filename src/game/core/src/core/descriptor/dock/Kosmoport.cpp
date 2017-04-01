@@ -22,6 +22,11 @@
 
 namespace descriptor {
 
+Kosmoport::Kosmoport()
+{
+    setObType(entity::Type::KOSMOPORT);
+}
+
 Kosmoport::Kosmoport(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

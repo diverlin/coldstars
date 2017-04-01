@@ -108,7 +108,7 @@ class StarSystem : public Base
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    StarSystem(model::StarSystem*);
+    StarSystem(model::StarSystem*, descriptor::StarSystem*);
     ~StarSystem();
 
     virtual void putChildrenToGarbage() const;

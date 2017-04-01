@@ -30,14 +30,17 @@
 
 #include <core/slot/VehicleSlot.hpp>
 
+#include <core/descriptor/dock/Kosmoport.hpp>
+#include <core/model/dock/Kosmoport.hpp>
+
 namespace control {
 
-Kosmoport::Kosmoport(int id)
-{
-    assert(false);
-    //    setId(id);
-    //    setTypeId(entity::Type::KOSMOPORT);
-}
+Kosmoport::Kosmoport(model::Kosmoport* model, descriptor::Kosmoport* descr)
+    :
+      Land(model, descr)
+    , m_model_kosmoport(model)
+    , m_descriptor_kosmoport(descr)
+{}
 
 /* virtual */
 Kosmoport::~Kosmoport()

@@ -22,6 +22,12 @@
 
 namespace descriptor {
 
+NatureLand::NatureLand()
+{
+    setType(descriptor::Type::NATURELAND);
+    setObType(entity::Type::NATURELAND);
+}
+
 NatureLand::NatureLand(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

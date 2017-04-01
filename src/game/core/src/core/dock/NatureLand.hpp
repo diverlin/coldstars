@@ -21,6 +21,14 @@
 
 #include "Land.hpp"
 
+namespace descriptor {
+class NatureLand;
+} // namespace descriptor
+
+namespace model {
+class NatureLand;
+} // namespace model
+
 namespace control {
 
 class ItemSlot;
@@ -33,7 +41,7 @@ class Item;
 class NatureLand : public Land
 {
 public:
-    NatureLand(int);
+    NatureLand(model::NatureLand*, descriptor::NatureLand*);
     virtual ~NatureLand();
 
     virtual void putChildrenToGarbage() const;
@@ -60,11 +68,17 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
+    model::NatureLand* model() const { return m_model_natureland; }
+    descriptor::NatureLand* descriptor() const { return m_descriptor_natureland; }
+
 private:
     //jeti::control::TextureOb* textureOb_background;
 
     std::vector<Vehicle*> m_vehicles;
     std::vector<ItemSlot*> m_itemslots;
+
+    model::NatureLand* m_model_natureland = nullptr;
+    descriptor::NatureLand* m_descriptor_natureland = nullptr;
 
 //    UnresolvedDataNatureLand data_unresolved_NatureLand;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

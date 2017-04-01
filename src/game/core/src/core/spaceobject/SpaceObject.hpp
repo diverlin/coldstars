@@ -105,7 +105,7 @@ namespace control {
 
 class StarSystem;
 
-class SpaceObject : public ceti::control::Orientation, public control::Base
+class SpaceObject : public ceti::control::Orientation, public Base
 {
 public:
     SpaceObject(model::SpaceObject*, descriptor::SpaceObject*);

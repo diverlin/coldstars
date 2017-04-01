@@ -49,7 +49,7 @@ private:
     static void __createStar(control::StarSystem&);
     static void __createPlanets(control::StarSystem&, int);
 
-    static control::StarSystem* __genTemplate(int_t, int_t ob_id = NONE);
+    static control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t ob_id = NONE);
 }; 
 
 } // namespace builder

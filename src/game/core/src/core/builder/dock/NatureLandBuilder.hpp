@@ -21,6 +21,10 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class NatureLand;
+} // namespace descriptor
+
 namespace control {
 class NatureLand;
 } // namespace control
@@ -31,12 +35,13 @@ class NatureLand
 {
 public:
     static control::NatureLand* gen();
+    static control::NatureLand* gen(descriptor::NatureLand*);
 
 private:
     NatureLand() = delete;
     ~NatureLand() = delete;
 
-    static control::NatureLand* __createTemplate(int_t id = NONE);
+    static control::NatureLand* __createTemplate(descriptor::NatureLand*);
     static void __createInternals(control::NatureLand*);
 }; 
 

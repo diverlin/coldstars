@@ -26,7 +26,7 @@ namespace descriptor {
 class NatureLand : public Land
 {
 public:
-    NatureLand() = default;
+    NatureLand();
     ~NatureLand() = default;
     NatureLand(const std::string& data);
     std::string data() const;

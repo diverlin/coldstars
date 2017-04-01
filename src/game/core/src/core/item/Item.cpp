@@ -34,7 +34,7 @@ namespace control {
 
 Item::Item(model::Item* model, descriptor::Item* descr)
     :
-      Base(model)
+      Base(model, descr)
     , m_model_item(model)
     , m_descriptor_item(descr)
 {

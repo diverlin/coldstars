@@ -23,12 +23,16 @@
 
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
-#include <ceti/descriptor/BaseView.hpp>
+//#include <ceti/descriptor/BaseView.hpp>
 
 #include <boost/property_tree/ptree.hpp> // remove this
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 class EntityManager;
 
@@ -75,24 +79,26 @@ class Base : private NonCopyable
 {
 public:
     Base() = default; // needed because we have some control:: without models, such a slots
-    Base(model::Base*);
+    Base(model::Base*, descriptor::Base*);
     virtual ~Base();
 
     void setId(int_t id) { m_model_base->setId(id); }
     void setInitialized() { m_initialized = true; }
 
     int_t id() { return model()->id(); }
-    int_t descriptor() { return model()->descriptor(); }
 
     bool isInitialized() const { return m_initialized; }
 
     virtual void putChildrenToGarbage() const {}
 
+    model::Base* model() const { return m_model_base; }
+    descriptor::Base* descriptor() const { return m_descriptor_base; }
+
 private:
     bool m_initialized = false;
 
     model::Base* m_model_base = nullptr;
-    model::Base* model() const { return m_model_base; }
+    descriptor::Base* m_descriptor_base = nullptr;
 };
 
 } // namespace control

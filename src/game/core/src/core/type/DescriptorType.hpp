@@ -71,6 +71,10 @@ enum class Type {
     GRAPPLE_MODULE,
     SCANER_MODULE,
     
+    // dock
+    KOSMOPORT,
+    NATURELAND,
+
     // artefact
     GRAVITY_ARTEFACT,
     PROTECTOR_ARTEFACT,

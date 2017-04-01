@@ -73,7 +73,7 @@ namespace control {
 
 Sector::Sector(model::Sector* model, descriptor::Sector* descr)
     :
-      Base(model)
+      Base(model, descr)
     , m_model_sector(model)
     , m_descriptor_sector(descr)
 {
@@ -98,15 +98,15 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-void Sector::add(model::StarSystem* _model, const glm::vec3& center)
-{ 
-    _model->setSector(model()->id());
-assert(false);
-    //    _model->setPosition(center);
+//void Sector::add(model::StarSystem* _model, const glm::vec3& center)
+//{
+//    _model->setSector(model()->id());
+//assert(false);
+//    //    _model->setPosition(center);
 
-    control::StarSystem* starsystem = new control::StarSystem(_model);
-    m_starsystems.push_back(starsystem);
-}
+//    control::StarSystem* starsystem = new control::StarSystem(_model);
+//    m_starsystems.push_back(starsystem);
+//}
 
 model::StarSystem*
 Sector::randomStarsystem(int condition_id)

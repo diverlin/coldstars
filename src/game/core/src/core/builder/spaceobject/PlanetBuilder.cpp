@@ -18,10 +18,15 @@
 
 #include "PlanetBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
+
+#include <core/builder/dock/KosmoportBuilder.hpp>
+#include <core/builder/dock/NatureLandBuilder.hpp>
+
+#include <core/dock/Kosmoport.hpp>
+
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
-#include <core/spaceobject/Planet.hpp>
-#include <core/descriptor/Base.hpp>
+
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -59,6 +64,9 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
     /// Orientation
     planet->model()->setSize(descr->size());
     planet->model()->setDirection(descr->direction());
+
+    control::Kosmoport* kosmoport = builder::Kosmoport::gen();
+    planet->bindLand(kosmoport);
 
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
     //glm::vec3 scale(scale_comp, scale_comp, scale_comp);

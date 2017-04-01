@@ -21,6 +21,10 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class Kosmoport;
+} // namespace descriptor
+
 namespace control {
 class Kosmoport;
 } // namespace control
@@ -31,13 +35,14 @@ class Kosmoport
 {
 public:
     static control::Kosmoport* gen();
+    static control::Kosmoport* gen(descriptor::Kosmoport*);
 
 private:
     Kosmoport() = delete;
     ~Kosmoport() = delete;
 
-    static control::Kosmoport* __createTemplate(int_t id = NONE);
-    static void __createInternals(control::Kosmoport*);
+    static control::Kosmoport* __createTemplate(descriptor::Kosmoport*);
+    static void __createInternals(control::Kosmoport*, descriptor::Kosmoport*);
 }; 
 
 } // namespace builder
