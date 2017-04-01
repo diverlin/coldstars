@@ -55,10 +55,6 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
     life_data.armor = descr->armor();
     planet->model()->setLifeData(life_data);
 
-    /// Planetoid
-    planet->model()->setRadius(descr->radius());
-    planet->model()->setRadiusB(descr->radiusB());
-
     /// Orientation
     planet->model()->setSize(descr->size());
     planet->model()->setDirection(descr->direction());

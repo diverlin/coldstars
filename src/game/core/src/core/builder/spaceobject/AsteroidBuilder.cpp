@@ -49,10 +49,6 @@ Asteroid::gen(descriptor::Asteroid* descr)
     life_data.armor = descr->armor();
     asteroid->model()->setLifeData(life_data);
 
-    /// Planetoid
-    asteroid->model()->setRadius(descr->radius());
-    asteroid->model()->setRadiusB(descr->radiusB());
-
     /// Orientation
     asteroid->model()->setSize(descr->size());
     asteroid->model()->setDirection(descr->direction());
