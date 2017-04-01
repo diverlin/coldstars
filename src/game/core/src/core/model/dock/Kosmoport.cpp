@@ -16,23 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Kosmoport.hpp" 
 
+#include <ceti/serialization/macro.hpp>
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
+namespace model {
 
-#include <sstream>
+Kosmoport::Kosmoport(int_t descriptor_id)
+{
+    setDescriptor(descriptor_id);
+}
+Kosmoport::Kosmoport(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-#define MACRO_READ_SERIALIZED_DATA \
-    std::stringstream ss; \
-    ss << data; \
-    boost::archive::text_iarchive ia(ss); \
-    ia >> *this;
+std::string
+Kosmoport::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
-#define MACRO_SAVE_SERIALIZED_DATA \
-    std::stringstream ss; \
-    boost::archive::text_oarchive oa(ss); \
-    oa << *this; \
-    return ss.str();
+} // namespace model

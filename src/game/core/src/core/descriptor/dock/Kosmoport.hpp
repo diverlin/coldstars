@@ -18,21 +18,31 @@
 
 #pragma once
 
+#include "Land.hpp"
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
+#include <core/type/RaceType.hpp>
 
-#include <sstream>
+namespace descriptor {
 
-#define MACRO_READ_SERIALIZED_DATA \
-    std::stringstream ss; \
-    ss << data; \
-    boost::archive::text_iarchive ia(ss); \
-    ia >> *this;
+class Kosmoport : public Land
+{
+public:
+    Kosmoport() = default;
+    ~Kosmoport() = default;
+    Kosmoport(const std::string& data);
+    std::string data() const;
 
-#define MACRO_SAVE_SERIALIZED_DATA \
-    std::stringstream ss; \
-    boost::archive::text_oarchive oa(ss); \
-    oa << *this; \
-    return ss.str();
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Land>(*this);
+        ar & m_race;
+    }
+
+private:
+    race::Type m_race = race::Type::NONE;
+};
+
+} // namespace model
+
