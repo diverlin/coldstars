@@ -39,6 +39,7 @@ public:
 
 private:
     static control::Planet* __genTemplate(descriptor::Planet*);
+    static void __createInternals(control::Planet*, descriptor::Planet*);
 }; 
 
 } // namespace builder

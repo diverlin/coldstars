@@ -188,8 +188,8 @@ TEST(starsystem, add_planet)
     starsystem->add(star);
     starsystem->add(planet);
 
-    EXPECT_EQ(planet->model()->radiusA(), planet->model()->radiusB());
-    EXPECT_TRUE((planet->model()->radiusA() - planet->model()->position().length()) <= 1);
+    EXPECT_EQ(planet->model()->radius(), planet->model()->radiusB());
+    EXPECT_TRUE((planet->model()->radius() - planet->model()->position().length()) <= 1);
 }
 
 } // namespace test

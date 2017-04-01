@@ -111,6 +111,8 @@ public:
     SpaceObject(model::SpaceObject*, descriptor::SpaceObject*);
     ~SpaceObject() override;
 
+    place::Type place() const { return model()->place(); }
+
     StarSystem* starsystem() const  { return m_starsystem; }
     SpaceObject* parent() const { return m_parent; }
 

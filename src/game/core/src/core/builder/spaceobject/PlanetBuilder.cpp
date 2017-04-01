@@ -44,18 +44,20 @@ control::Planet*
 Planet::gen(descriptor::Planet* descr)
 {
     control::Planet* planet = __genTemplate(descr);
+    __createInternals(planet, descr);
+}
 
+void
+Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
+{
     /// Base
     LifeData life_data;
     life_data.armor = descr->armor();
     planet->model()->setLifeData(life_data);
 
     /// Planetoid
-    planet->model()->setRadiusA(descr->radiusA());
+    planet->model()->setRadius(descr->radius());
     planet->model()->setRadiusB(descr->radiusB());
-    planet->model()->setOrbitPhi(descr->orbitPhi());
-    planet->model()->setSpeed(descr->speed());
-    planet->model()->setClockwise(descr->clockwise());
 
     /// Orientation
     planet->model()->setSize(descr->size());
@@ -89,15 +91,15 @@ Planet::gen(descriptor::Planet* descr)
         planet->AddDecoration(ring);
     }
     */
-    return planet;
 }
 
 control::Planet*
 Planet::__genTemplate(descriptor::Planet* descr)
 {
     model::Planet* model = new model::Planet(descr->id());
-    control::Planet* planet = new control::Planet(model, descr);
     assert(model);
+
+    control::Planet* planet = new control::Planet(model, descr);
     assert(planet);
 
     EntityManager::get().reg(planet);

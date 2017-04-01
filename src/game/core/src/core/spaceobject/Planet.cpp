@@ -52,16 +52,10 @@ Planet::putChildrenToGarbage() const
     //global::get().entityManager().addToGarbage(m_model->land);
 }
 
-Land*
-Planet::land()
+int
+Planet::radius() const
 {
-    assert(false);
-//    if (!m_land) {
-//        m_land = static_cast<model::Land*>(EntityManager::get().get(model()->land()));
-//    }
-
-    assert(m_land);
-    return m_land;
+    return model()->radius();
 }
 
 void
@@ -69,10 +63,6 @@ Planet::bindLand(Land* land)
 {
     m_land = land;
     model()->setLand(land->id());
-    //model()->setSubType(land->model()->type());
-    assert(false);
-    //land->setOwner(model());
-
 }
 
 //void Planet::addVehicle(Vehicle* vehicle)

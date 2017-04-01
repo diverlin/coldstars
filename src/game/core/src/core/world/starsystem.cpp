@@ -132,8 +132,11 @@ StarSystem::__actualizeModel()
 Star*
 StarSystem::star() const
 {
-    assert(!m_stars.empty());
-    return m_stars[0];
+    Star* star = nullptr;
+    if (!m_stars.empty()) {
+        star = m_stars.front();
+    }
+    return star;
 }
 
 /* virtual */
@@ -300,12 +303,14 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
         parent = star();
     }
 
-    planet->setParent(parent);
+    if (parent) {
+        planet->setParent(parent);
+    }
     planet->setStarSystem(this);
 
     float offset_radius = 0;
     if (m_planets.size()) {
-        offset_radius = m_planets.back()->model()->radiusA();
+        offset_radius = m_planets.back()->model()->radius();
     }
     planet->calibrateOrbit(offset_radius);
     planet->initOrbit();
