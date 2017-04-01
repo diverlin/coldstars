@@ -53,8 +53,7 @@ private:
 
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & m_position;
         ar & m_size;
         ar & m_direction;
@@ -80,10 +79,9 @@ public:
     void setSize(float x, float y, float z) { model()->setSize(meti::vec3(x, y, z)); m_isUpdated = false; }
     void setSize(const meti::vec3& size) { model()->setSize(size); m_isUpdated = false; }
 
-    const glm::vec3& direction() const { return model()->direction(); }
-
-    const glm::vec3& position() const { return model()->position(); }
-    const glm::vec3& size()  const { return model()->size(); }
+    const meti::vec3& direction() const { return model()->direction(); }
+    const meti::vec3& position() const { return model()->position(); }
+    const meti::vec3& size() const { return model()->size(); }
 
     [[deprecated("depr")]]
     //glm::vec3* pPosition() { return &model()->position(); }

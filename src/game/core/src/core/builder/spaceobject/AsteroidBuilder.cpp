@@ -50,11 +50,8 @@ Asteroid::gen(descriptor::Asteroid* descr)
     asteroid->model()->setLifeData(life_data);
 
     /// Planetoid
-    asteroid->model()->setRadiusA(descr->radiusA());
+    asteroid->model()->setRadius(descr->radius());
     asteroid->model()->setRadiusB(descr->radiusB());
-    asteroid->model()->setOrbitPhi(descr->orbitPhi());
-    asteroid->model()->setSpeed(descr->speed());
-    asteroid->model()->setClockwise(descr->clockwise());
 
     /// Orientation
     asteroid->model()->setSize(descr->size());

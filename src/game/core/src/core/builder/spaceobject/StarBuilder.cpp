@@ -55,10 +55,8 @@ Star::gen(descriptor::Star* descr)
 
     // Planetoid
     //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    star->model()->setRadiusA(descr->radiusA());
+    star->model()->setRadius(descr->radius());
     star->model()->setRadiusB(descr->radiusB());
-    star->model()->setOrbitPhi(descr->orbitPhi());
-    star->model()->setSpeed(descr->speed());
 
     // Orientation
     star->model()->setSize(descr->size());

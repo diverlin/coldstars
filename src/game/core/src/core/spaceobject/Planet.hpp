@@ -45,8 +45,9 @@ public:
 
     void bindLand(Land*);
 
-    [[warning("check const")]]
-    Land* land();
+    int radius() const;
+
+    Land* land() const { return m_land; }
 
     [[warning("check const")]]
 //    void addVehicle(Vehicle*);

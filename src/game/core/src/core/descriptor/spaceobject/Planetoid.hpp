@@ -30,7 +30,7 @@ public:
 
     std::string info() const {
         std::string result = "Planetoid descriptor:\n";
-        result += std::string(" radiusA=") + std::to_string(m_radiusA) + "\n";
+        result += std::string(" radius=") + std::to_string(m_radius) + "\n";
         result += std::string(" radiusB=") + std::to_string(m_radiusB) + "\n";
         result += std::string(" orbitPhi=") + std::to_string(m_orbitPhi) + "\n";
         result += std::string(" speed=") + std::to_string(m_speed) + "\n";
@@ -39,20 +39,20 @@ public:
         return result;
     }
 
-    int radiusA() const { return m_radiusA; }
+    int radius() const { return m_radius; }
     int radiusB() const { return m_radiusB; }
     int orbitPhi() const { return m_orbitPhi; }
     float speed() const { return m_speed; }
     bool clockwise() const { return m_clockwise; }
 
-    void setRadiusA(int radiusA) { m_radiusA = radiusA; }
+    void setRadius(int radius) { m_radius = radius; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
     void setOrbitPhi(int orbitPhi) { m_orbitPhi = orbitPhi; }
     void setSpeed(float speed) { m_speed = speed; }
     void setClockwise(int clockwise) { m_clockwise = clockwise; }
 
 private:
-    int m_radiusA = 0;
+    int m_radius = 0;
     int m_radiusB = 0;
     int m_orbitPhi = 0;
     float m_speed = 0.0f;
@@ -62,7 +62,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_radiusA;
+        ar & m_radius;
         ar & m_radiusB;
         ar & m_orbitPhi;
         ar & m_speed;

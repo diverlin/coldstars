@@ -19,16 +19,35 @@
 #include <core/common/Global.hpp>
 
 #include <core/world/starsystem.hpp>
+#include <core/spaceobject/Planet.hpp>
 
 #include <core/builder/world/StarSystemBuilder.hpp>
-
-#include <core/descriptor/Base.hpp>
-#include <core/manager/DescriptorManager.hpp>
+#include <core/builder/spaceobject/PlanetBuilder.hpp>
 
 #include <gtest/gtest.h>
 
-TEST(creation, planet)
+
+TEST(planet, create)
 {
-    descriptor::StarSystem* descr = descriptor::Manager::get().randStarSystem();
-    control::StarSystem* starsystem = builder::StarSystem::gen(descr);
+    control::Planet* planet = builder::Planet::gen();
+    assert(planet->land());
 }
+
+TEST(planet, add_to_starsystem)
+{
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Planet* planet = builder::Planet::gen();
+
+    EXPECT_EQ(nullptr, planet->starsystem());
+    EXPECT_EQ(place::Type::NONE, planet->place());
+    EXPECT_EQ(0, planet->position().length());
+    EXPECT_EQ(0, starsystem->planets().size());
+
+    starsystem->add(planet);
+
+    EXPECT_EQ(starsystem, planet->starsystem());
+    EXPECT_EQ(place::Type::SPACE, planet->place());
+    EXPECT_EQ(planet->radius(), planet->position().length());
+    EXPECT_EQ(1, starsystem->planets().size());
+}
+

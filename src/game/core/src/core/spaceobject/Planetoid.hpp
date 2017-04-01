@@ -44,39 +44,23 @@ public:
     Planetoid(const std::string& data);
     std::string data() const;
 
-    //void setOrbitCenter(const meti::vec3& orbitCenter) { m_orbitCenter = orbitCenter; }
-    void setOrbitPhi(float orbitPhi) { m_orbitPhi = orbitPhi; }
-    void setRadiusA(int radiusA) { m_radiusA = radiusA; }
+    void setRadius(int radius) { m_radius = radius; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
-    void setSpeed(float speed) { m_speed = speed; }
-    void setClockwise(bool clockwise) { m_clockwise = clockwise; }
 
-    //const meti::vec3& orbitCenter() const { return m_orbitCenter; }
-    float orbitPhi() const { return m_orbitPhi; }
-    int radiusA() const { return m_radiusA; }
+    int radius() const { return m_radius; }
     int radiusB() const { return m_radiusB; }
-    float speed() const { return m_speed; }
-    bool clockwise() const { return m_clockwise; }
 
 private:
-    //meti::vec3 m_orbitCenter;
-    float m_orbitPhi = 0.0f;
-    int m_radiusA = 0;
+    int m_radius = 0;
     int m_radiusB = 0;
-    float m_speed = 0.0f;
-    bool m_clockwise = false;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        //ar & m_orbitCenter;
-        ar & m_orbitPhi;
-        ar & m_radiusA;
+        ar & m_radius;
         ar & m_radiusB;
-        ar & m_speed;
-        ar & m_clockwise;
     }
 };
 

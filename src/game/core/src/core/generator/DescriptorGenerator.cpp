@@ -116,7 +116,7 @@ genStar()
 
     int orbit_radius = meti::getRandInt(descriptor::Star::DISTANCE_MIN,
                                         descriptor::Star::DISTANCE_MAX);
-    descr->setRadiusA(orbit_radius);
+    descr->setRadius(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Star::SPEED_MIN,
@@ -148,7 +148,7 @@ genPlanet()
 
     int orbit_radius = meti::getRandInt(descriptor::Planet::DISTANCE_MIN,
                                         descriptor::Planet::DISTANCE_MAX);
-    descr->setRadiusA(orbit_radius);
+    descr->setRadius(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Planet::SPEED_MIN,
@@ -236,7 +236,7 @@ genAsteroid()
                                         descriptor::Asteroid::DISTANCE_MAX);
     int orbit_radiusB = meti::getRandInt(descriptor::Asteroid::DISTANCE_MIN,
                                         descriptor::Asteroid::DISTANCE_MAX);
-    descr->setRadiusA(orbit_radiusA);
+    descr->setRadius(orbit_radiusA);
     descr->setRadiusB(orbit_radiusB);
     descr->setOrbitPhi(0);
     float speed = meti::getRandInt(descriptor::Asteroid::SPEED_MIN,
