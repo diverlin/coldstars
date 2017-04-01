@@ -45,6 +45,7 @@ Planet::gen(descriptor::Planet* descr)
 {
     control::Planet* planet = __genTemplate(descr);
     __createInternals(planet, descr);
+    return planet;
 }
 
 void
