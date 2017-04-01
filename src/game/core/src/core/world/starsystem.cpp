@@ -69,11 +69,11 @@
 
 namespace control {
 
-StarSystem::StarSystem(model::StarSystem* model)
+StarSystem::StarSystem(model::StarSystem* model, descriptor::StarSystem* descr)
     :
-      Base(model)
+      Base(model, descr)
     , m_model_starsystem(model)
-    , m_descriptor_starsystem(descriptor::Manager::get().starSystem(model->descriptor()))
+    , m_descriptor_starsystem(descr)
 {
     __actualizeModel();
 }

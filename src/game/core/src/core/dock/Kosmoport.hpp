@@ -18,8 +18,15 @@
 
 #pragma once
 
-#include <core/dock/Land.hpp>
-#include <core/type/RaceType.hpp>
+#include "Land.hpp"
+
+namespace descriptor {
+class Kosmoport;
+} // namespace descriptor
+
+namespace model {
+class Kosmoport;
+} // namespace model
 
 namespace control {
 
@@ -31,7 +38,7 @@ class Goverment;
 class Kosmoport : public Land
 {
 public:
-    Kosmoport(int);
+    Kosmoport(model::Kosmoport*, descriptor::Kosmoport*);
     virtual ~Kosmoport();
 
     Angar* angar() const { return m_angar; }
@@ -39,10 +46,10 @@ public:
     Shop* shop() const { return m_shop; }
     Goverment* goverment() const { return m_goverment; }
 
-    void bindAngar(Angar* m_angar);
-    void bindStore(Store* m_store);
-    void bindShop(Shop* m_shop);
-    void bindGoverment(Goverment* m_goverment);
+    void bindAngar(Angar*);
+    void bindStore(Store*);
+    void bindShop(Shop*);
+    void bindGoverment(Goverment*);
 
     virtual bool isAllowedToLand() const;
 
@@ -57,13 +64,17 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-private:
-    race::Type m_race = race::Type::NONE;
+    model::Kosmoport* model() const { return m_model_kosmoport; }
+    descriptor::Kosmoport* descriptor() const { return m_descriptor_kosmoport; }
 
+private:
     Angar* m_angar = nullptr;
     Store* m_store = nullptr;
     Shop* m_shop = nullptr;
     Goverment* m_goverment = nullptr;
+
+    model::Kosmoport* m_model_kosmoport = nullptr;
+    descriptor::Kosmoport* m_descriptor_kosmoport = nullptr;
 
     virtual void putChildrenToGarbage() const;
 

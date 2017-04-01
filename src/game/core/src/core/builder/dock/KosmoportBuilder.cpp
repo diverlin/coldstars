@@ -24,23 +24,43 @@
 #include <core/builder/dock/GovermentBuilder.hpp>
 #include <core/builder/CommonBuilderHeaders.hpp>
 
+#include <core/descriptor/dock/Kosmoport.hpp>
+#include <core/model/dock/Kosmoport.hpp>
 #include <core/dock/Kosmoport.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Kosmoport*
 Kosmoport::gen()
 {
-    control::Kosmoport* kosmoport = __createTemplate();
-    __createInternals(kosmoport);
-
-    return kosmoport;
+    descriptor::Kosmoport* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::KOSMOPORT)) {
+        descr = descriptor::genKosmoport();
+    } else {
+        descr = descriptor::Manager::get().randKosmoport();
+    }
+    assert(descr);
+    return gen(descr);
 } 
 
 control::Kosmoport*
-Kosmoport::__createTemplate(int_t id)
+Kosmoport::gen(descriptor::Kosmoport* descr)
 {
-    control::Kosmoport* kosmoport = new control::Kosmoport(id);
+    control::Kosmoport* kosmoport = __createTemplate(descr);
+    __createInternals(kosmoport, descr);
+    return kosmoport;
+}
+
+control::Kosmoport*
+Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
+{
+    model::Kosmoport* model = new model::Kosmoport(descr->id());
+    assert(model);
+
+    control::Kosmoport* kosmoport = new control::Kosmoport(model, descr);
     assert(kosmoport);
 
     EntityManager::get().reg(kosmoport);
@@ -48,7 +68,7 @@ Kosmoport::__createTemplate(int_t id)
 }
 
 void
-Kosmoport::__createInternals(control::Kosmoport* kosmoport)
+Kosmoport::__createInternals(control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
 {
     kosmoport->bindAngar(builder::Angar::gen());
     kosmoport->bindStore(builder::Store::gen());

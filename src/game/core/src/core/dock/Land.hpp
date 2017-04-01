@@ -23,6 +23,14 @@
 #include <vector>
 #include <string>
 
+namespace descriptor {
+class Land;
+} // namespace descriptor
+
+namespace model {
+class Land;
+} // namespace model
+
 namespace control {
 
 class SpaceObject;
@@ -31,7 +39,7 @@ class Vehicle;
 class Land : public Base
 {
 public:
-    Land();
+    Land(model::Land*, descriptor::Land*);
     virtual ~Land();
 
     void setOwner(SpaceObject* owner)  { m_owner = owner; }
@@ -46,8 +54,14 @@ public:
 
     virtual std::string vehiclesStr() const = 0;
 
-protected:
+    model::Land* model() const { return m_model_land; }
+    descriptor::Land* descriptor() const { return m_descriptor_land; }
+
+private:
     SpaceObject* m_owner = nullptr;
+
+    model::Land* m_model_land = nullptr;
+    descriptor::Land* m_descriptor_land = nullptr;
 
 //    UnresolvedDataLand data_unresolved_Land;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

@@ -26,9 +26,16 @@
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 
+#include <core/descriptor/dock/Land.hpp>
+#include <core/model/dock/Land.hpp>
+
 namespace control {
 
-Land::Land():m_owner(nullptr)
+Land::Land(model::Land* model, descriptor::Land* descr)
+    :
+      Base(model, descr)
+    , m_model_land(model)
+    , m_descriptor_land(descr)
 {}
 
 /* virtual */

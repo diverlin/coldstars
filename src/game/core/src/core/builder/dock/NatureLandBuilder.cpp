@@ -30,27 +30,48 @@
 #include <core/item/artefacts/ProtectorArtefact.hpp>
 #endif // USE_ARTEFACTS
 
-#include <dock/NatureLand.hpp>
+#include <core/descriptor/dock/NatureLand.hpp>
+#include <core/model/dock/NatureLand.hpp>
+#include <core/dock/NatureLand.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <common/constants.hpp>
 
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 namespace builder {
 
 control::NatureLand*
 NatureLand::gen()
 {
-    control::NatureLand* natureland = __createTemplate();
-    __createInternals(natureland);
-
-    return natureland;
+    descriptor::NatureLand* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::NATURELAND)) {
+        descr = descriptor::genNatureLand();
+    } else {
+        descr = descriptor::Manager::get().randNatureLand();
+    }
+    assert(descr);
+    return gen(descr);
 } 
 
 control::NatureLand*
-NatureLand::__createTemplate(int_t id)
+NatureLand::gen(descriptor::NatureLand* descr)
 {
-    control::NatureLand* natureland = new control::NatureLand(id);
+    control::NatureLand* natureland = __createTemplate(descr);
+    __createInternals(natureland);
+
+    return natureland;
+}
+
+control::NatureLand*
+NatureLand::__createTemplate(descriptor::NatureLand* descr)
+{
+    model::NatureLand* model = new model::NatureLand(descr->id());
+    assert(model);
+
+    control::NatureLand* natureland = new control::NatureLand(model, descr);
     assert(natureland);
 
     EntityManager::get().reg(natureland);

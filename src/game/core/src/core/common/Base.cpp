@@ -51,9 +51,10 @@ Base::data() const
 
 namespace control {
 
-Base::Base(model::Base* model)
+Base::Base(model::Base* model, descriptor::Base* descr)
     :
       m_model_base(model)
+    , m_descriptor_base(descr)
 {}
 
 Base::~Base()

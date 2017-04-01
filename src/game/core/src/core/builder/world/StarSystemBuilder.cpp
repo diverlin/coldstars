@@ -43,23 +43,6 @@
 namespace builder {
 
 control::StarSystem*
-StarSystem::gen(descriptor::StarSystem* descr)
-{
-    control::StarSystem* starsystem = __genTemplate(descr->id());
-    __createInternals(starsystem, descr);
-    return starsystem;
-} 
-
-control::StarSystem*
-StarSystem::gen(int_t descriptor_id, int_t ob_id)
-{
-    control::StarSystem* starsystem = __genTemplate(descriptor_id, ob_id);
-    descriptor::StarSystem* descr = descriptor::Manager::get().starSystem(descriptor_id);
-    __createInternals(starsystem, descr);
-    return starsystem;
-}
-
-control::StarSystem*
 StarSystem::gen()
 {
     descriptor::StarSystem* descr = nullptr;
@@ -73,12 +56,29 @@ StarSystem::gen()
 }
 
 control::StarSystem*
-StarSystem::__genTemplate(int_t descriptor_id, int_t ob_id)
+StarSystem::gen(descriptor::StarSystem* descr)
 {
-    model::StarSystem* model = new model::StarSystem(descriptor_id, ob_id);
+    control::StarSystem* starsystem = __genTemplate(descr);
+    __createInternals(starsystem, descr);
+    return starsystem;
+} 
+
+control::StarSystem*
+StarSystem::gen(int_t descriptor_id, int_t ob_id)
+{
+    descriptor::StarSystem* descr = descriptor::Manager::get().starSystem(descriptor_id);
+    control::StarSystem* starsystem = __genTemplate(descr, ob_id);
+    __createInternals(starsystem, descr);
+    return starsystem;
+}
+
+control::StarSystem*
+StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
+{
+    model::StarSystem* model = new model::StarSystem(descr->id(), ob_id);
     assert(model);
 
-    control::StarSystem* starsystem = new control::StarSystem(model);
+    control::StarSystem* starsystem = new control::StarSystem(model, descr);
     assert(starsystem);
 
     EntityManager::get().reg(starsystem);

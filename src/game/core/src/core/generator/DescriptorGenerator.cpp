@@ -25,6 +25,7 @@
 
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
+#include <core/descriptor/dock/ALL>
 
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -169,8 +170,6 @@ genPlanet()
     assert(descr->mesh() != NONE);
 
     return descr;
-
-
 
     //model::Planet*
     //Planet::gen(descriptor::BaseOLD* descr)
@@ -535,6 +534,34 @@ genSatellite()
 
     return descr;
 }
+
+
+// dock
+Kosmoport*
+genKosmoport(race::Type race)
+{
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
+    }
+
+    Kosmoport* descr = new Kosmoport;
+    descr->setRace(race);
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
+NatureLand*
+genNatureLand()
+{
+    NatureLand* descr = new NatureLand;
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
 
 
 namespace item {
@@ -1061,4 +1088,7 @@ genScaner(int race, int tech_level)
 //}
 
 } // anemspace item
+
 } // namespace descriptor
+
+

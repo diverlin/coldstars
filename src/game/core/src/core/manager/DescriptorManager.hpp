@@ -53,6 +53,10 @@ class SpaceStation;
 class Ship;
 class Satellite;
 
+// dock
+class Kosmoport;
+class NatureLand;
+
 namespace item {
 class Scaner;
 class Drive;
@@ -97,6 +101,10 @@ public:
     Satellite* randSatellite() const;
     SpaceStation* randSpaceStation() const;
 
+    // dock
+    Kosmoport* randKosmoport() const;
+    NatureLand* randNatureLand() const;
+
     item::Scaner* randScaner() const;
     item::Drive* randDrive() const;
     item::Bak* randBak() const;
@@ -119,6 +127,10 @@ public:
     Ship* ship(int_t) const;
     Satellite* satellite(int_t) const;
     SpaceStation* spaceStation(int_t) const;
+
+    // dock
+    Kosmoport* kosmoport(int_t) const;
+    NatureLand* natureLand(int_t) const;
 
     item::Scaner* scaner(int_t) const;
     item::Drive* drive(int_t) const;

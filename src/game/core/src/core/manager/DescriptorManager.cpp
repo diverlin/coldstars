@@ -20,6 +20,7 @@
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
+#include <core/descriptor/dock/ALL>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/world/SectorDescriptor.hpp>
@@ -225,6 +226,23 @@ Manager::randSpaceStation() const
     return descr;
 }
 
+// dock
+Kosmoport*
+Manager::randKosmoport() const
+{
+    Kosmoport* descr = static_cast<Kosmoport*>(rand(Type::KOSMOPORT));
+    assert(descr);
+    return descr;
+}
+NatureLand*
+Manager::randNatureLand() const
+{
+    NatureLand* descr = static_cast<NatureLand*>(rand(Type::NATURELAND));
+    assert(descr);
+    return descr;
+}
+
+// items
 item::Scaner*
 Manager::randScaner() const
 {
@@ -377,6 +395,23 @@ Manager::spaceStation(int_t id) const
     return descr;
 }
 
+// dock
+Kosmoport*
+Manager::kosmoport(int_t id) const
+{
+    Kosmoport* descr = static_cast<Kosmoport*>(get(id));
+    assert(descr);
+    return descr;
+}
+NatureLand*
+Manager::natureLand(int_t id) const
+{
+    NatureLand* descr = static_cast<NatureLand*>(get(id));
+    assert(descr);
+    return descr;
+}
+
+// items
 item::Scaner*
 Manager::scaner(int_t id) const
 {

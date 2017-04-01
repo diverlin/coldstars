@@ -27,14 +27,18 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
+#include <core/descriptor/dock/NatureLand.hpp>
+#include <core/model/dock/NatureLand.hpp>
+
 namespace control {
 
-NatureLand::NatureLand(int id)
-{
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::NATURELAND);
-}
+NatureLand::NatureLand(model::NatureLand* model, descriptor::NatureLand* descr)
+    :
+      Land(model, descr)
+    , m_model_natureland(model)
+    , m_descriptor_natureland(descr)
+
+{}
 
 /* virtual */
 NatureLand::~NatureLand()

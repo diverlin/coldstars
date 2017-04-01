@@ -27,7 +27,7 @@ namespace descriptor {
 class Kosmoport : public Land
 {
 public:
-    Kosmoport() = default;
+    Kosmoport();
     ~Kosmoport() = default;
     Kosmoport(const std::string& data);
     std::string data() const;
