@@ -40,14 +40,14 @@ TEST(planet, add_to_starsystem)
 
     EXPECT_EQ(nullptr, planet->starsystem());
     EXPECT_EQ(place::Type::NONE, planet->place());
-    EXPECT_EQ(0, planet->position().length());
+    EXPECT_EQ(0, int(planet->position().length()));
     EXPECT_EQ(0, starsystem->planets().size());
 
     starsystem->add(planet);
 
     EXPECT_EQ(starsystem, planet->starsystem());
     EXPECT_EQ(place::Type::SPACE, planet->place());
-    EXPECT_EQ(planet->radius(), planet->position().length());
+    EXPECT_EQ(int(planet->radius()), int(planet->position().length()));
     EXPECT_EQ(1, starsystem->planets().size());
 }
 
