@@ -29,11 +29,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 
-struct UnresolvedDataPlanetoid
-{
-    int orbit_it;
-};
-
 namespace model {
 
 class Planetoid : public SpaceObject
@@ -45,14 +40,11 @@ public:
     std::string data() const;
 
     void setRadius(int radius) { m_radius = radius; }
-    void setRadiusB(int radiusB) { m_radiusB = radiusB; }
 
     int radius() const { return m_radius; }
-    int radiusB() const { return m_radiusB; }
 
 private:
     int m_radius = 0;
-    int m_radiusB = 0;
 
 private:
     friend class boost::serialization::access;
@@ -60,7 +52,6 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_radius;
-        ar & m_radiusB;
     }
 };
 

@@ -53,11 +53,6 @@ Star::gen(descriptor::Star* descr)
 {
     control::Star* star = __genTemplate(descr);
 
-    // Planetoid
-    //model->setOrbitCenter(meti::vec3(0, 0, DEFAULT_ENTITY_ZPOS));
-    star->model()->setRadius(descr->radius());
-    star->model()->setRadiusB(descr->radiusB());
-
     // Orientation
     star->model()->setSize(descr->size());
     star->model()->setDirection(descr->direction());
