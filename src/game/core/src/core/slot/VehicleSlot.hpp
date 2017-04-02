@@ -30,15 +30,15 @@ namespace slot {
 class Vehicle : public control::BaseSlot
 {
 public:
-    Vehicle(int, entity::Type);
+    Vehicle(int);
     ~Vehicle();
 
     virtual void putChildrenToGarbage() const;
 
     control::Vehicle* vehicle() const { return m_vehicle; }
     void insert(control::Vehicle*);
-    void Release();
-    void SwapVehicle(Vehicle*);
+    void release();
+    void swapVehicle(Vehicle*);
 
 //    void Render(const ceti::Rect&) const;
 

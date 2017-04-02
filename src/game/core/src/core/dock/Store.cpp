@@ -28,7 +28,6 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/manager/EntityManager.hpp>
-#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
 #include <core/descriptor/item/Item.hpp>
 
@@ -49,7 +48,7 @@ Store::Store(descriptor::Store* descr, model::Store* model)
     }
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++) {
-        slot::Vehicle* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
+        slot::Vehicle* vehicle_slot = new slot::Vehicle(i);
         __add(vehicle_slot);
     }
 
