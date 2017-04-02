@@ -64,7 +64,6 @@
 #include <core/builder/pilot/NpcBuilder.hpp>
 
 #include <core/builder/slot/ItemSlotBuilder.hpp>
-#include <core/builder/slot/VehicleSlotBuilder.hpp>
 
 #include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>

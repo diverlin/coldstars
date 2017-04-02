@@ -31,13 +31,10 @@
 
 namespace slot {
 
-Vehicle::Vehicle(int id, entity::Type subtype_id)
+Vehicle::Vehicle(int offset)
     : BaseSlot()
 {
-//    DANGER //assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::VEHICLE_SLOT);
-//    setSubTypeId(subtype_id);
+    setId(offset);
 }
    
 Vehicle::~Vehicle()
@@ -60,12 +57,12 @@ void Vehicle::insert(control::Vehicle* vehicle)
     vehicle->setParentVehicleSlot(this);
 }
 
-void Vehicle::Release()
+void Vehicle::release()
 {
     m_vehicle = nullptr;
 } 
 
-void Vehicle::SwapVehicle(Vehicle* vehicle_slot)
+void Vehicle::swapVehicle(Vehicle* vehicle_slot)
 {
     control::Vehicle* tmp_vehicle = vehicle_slot->vehicle();
     vehicle_slot->insert(m_vehicle);

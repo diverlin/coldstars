@@ -18,7 +18,6 @@
 
 
 #include <builder/dock/AngarBuilder.hpp>
-#include <core/builder/slot/VehicleSlotBuilder.hpp>
 #include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
@@ -70,14 +69,14 @@ Angar::__createTemplate(descriptor::Angar* descr)
 void
 Angar::__createInternals(control::Angar* angar)
 { 
-    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
-        slot::Vehicle* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_VISITORS_SLOT);
-        angar->add(vehicle_slot);
+    for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
+        slot::Vehicle* slot = new slot::Vehicle(i);
+        angar->add(slot);
     }
 
-    for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
-        control::ItemSlot* cargo_slot = genItemSlot(entity::Type::CARGO_SLOT);
-        angar->add(cargo_slot);
+    for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
+        control::ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);
+        angar->add(slot);
     }
     
     //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND));
