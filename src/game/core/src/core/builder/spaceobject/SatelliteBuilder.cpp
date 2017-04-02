@@ -35,7 +35,7 @@ Satellite::__genTemplate(descriptor::Satellite* descr)
     model::Satellite* model = new model::Satellite(descr->id());
     assert(model);
 
-    control::Satellite* satellite = new control::Satellite(model, descr);
+    control::Satellite* satellite = new control::Satellite(descr, model);
     assert(satellite);
 
     EntityManager::get().reg(satellite);

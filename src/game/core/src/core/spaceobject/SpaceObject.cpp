@@ -26,10 +26,10 @@
 
 namespace control {
 
-SpaceObject::SpaceObject(model::SpaceObject* model, descriptor::SpaceObject* descr)
+SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* model)
     :
       ceti::control::Orientation(model)
-    , Base(model, descr)
+    , Base(descr, model)
     , m_model_spaceobject(model)
     , m_descriptor_spaceobject(descr)
 {

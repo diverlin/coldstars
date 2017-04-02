@@ -42,7 +42,7 @@ namespace control {
 class Container : public SpaceObject
 {
 public:
-    Container(model::Container*, descriptor::Container*);
+    Container(descriptor::Container*, model::Container*);
     virtual ~Container();
 
     void bindItemSlot(slot::Item*);
@@ -60,12 +60,12 @@ public:
 
     //        void Render(const jeti::Renderer&);
 
-    model::Container* model() const { return m_model_container; }
     descriptor::Container* descriptor() const { return m_descriptor_container; }
+    model::Container* model() const { return m_model_container; }
 
 private:
-    model::Container* m_model_container = nullptr;
     descriptor::Container* m_descriptor_container = nullptr;
+    model::Container* m_model_container = nullptr;
 
     slot::Item* m_itemSlot = nullptr;
 

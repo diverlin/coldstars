@@ -34,7 +34,7 @@ namespace control {
 class Ship : public Vehicle
 {
 public:
-    Ship(model::Ship*, descriptor::Ship*);
+    Ship(descriptor::Ship*, model::Ship*);
     virtual ~Ship();
 
     virtual void UpdateInSpace(int, bool) override final;
@@ -44,12 +44,12 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
 
-    model::Ship* model() const { return m_model_ship; }
     descriptor::Ship* descriptor() const { return m_descriptor_ship; }
+    model::Ship* model() const { return m_model_ship; }
 
 private:
-    model::Ship* m_model_ship = nullptr;
     descriptor::Ship* m_descriptor_ship = nullptr;
+    model::Ship* m_model_ship = nullptr;
 };
 
 } // namespace control

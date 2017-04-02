@@ -30,11 +30,11 @@
 namespace control {
 namespace item {
 
-Droid::Droid(model::item::Droid* model, descriptor::item::Droid* descr)
+Droid::Droid(descriptor::item::Droid* descr, model::item::Droid* model)
     :
-      Equipment(model, descr)
-    , m_model_droid(model)
+      Equipment(descr, model)
     , m_descriptor_droid(descr)
+    , m_model_droid(model)
 {}
 
 /* virtual */

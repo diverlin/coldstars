@@ -60,7 +60,7 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
     model::Kosmoport* model = new model::Kosmoport(descr->id());
     assert(model);
 
-    control::Kosmoport* kosmoport = new control::Kosmoport(model, descr);
+    control::Kosmoport* kosmoport = new control::Kosmoport(descr, model);
     assert(kosmoport);
 
     EntityManager::get().reg(kosmoport);

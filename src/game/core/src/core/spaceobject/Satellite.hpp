@@ -37,7 +37,7 @@ namespace control {
 class Satellite : public Vehicle
 {
 public:
-    Satellite(model::Satellite*, descriptor::Satellite*);
+    Satellite(descriptor::Satellite*, model::Satellite*);
     virtual ~Satellite();
 
     void BindParent(const SpaceObject* const);
@@ -47,12 +47,12 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&);
 
-    model::Satellite* model() const { return m_model_satellite; }
     descriptor::Satellite* descriptor() const { return m_descriptor_satellite; }
+    model::Satellite* model() const { return m_model_satellite; }
 
 private:
-    model::Satellite* m_model_satellite = nullptr;
     descriptor::Satellite* m_descriptor_satellite = nullptr;
+    model::Satellite* m_model_satellite = nullptr;
 
     Orbit m_Orbit;
 

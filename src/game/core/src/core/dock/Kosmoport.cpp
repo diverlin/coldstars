@@ -35,11 +35,11 @@
 
 namespace control {
 
-Kosmoport::Kosmoport(model::Kosmoport* model, descriptor::Kosmoport* descr)
+Kosmoport::Kosmoport(descriptor::Kosmoport* descr, model::Kosmoport* model)
     :
-      Land(model, descr)
-    , m_model_kosmoport(model)
+      Land(descr, model)
     , m_descriptor_kosmoport(descr)
+    , m_model_kosmoport(model)
 {}
 
 /* virtual */

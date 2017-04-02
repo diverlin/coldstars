@@ -100,7 +100,7 @@ namespace control {
 class RocketBullet : public SpaceObject
 {
 public:
-    RocketBullet(model::RocketBullet*, descriptor::RocketBullet*);
+    RocketBullet(descriptor::RocketBullet*, model::RocketBullet*);
     virtual ~RocketBullet();
 
     void CreateDriveComplexTextureDependedStuff();
@@ -114,12 +114,12 @@ public:
     int damage() const { return model()->damage(); }
     //void RenderInSpace(const Renderer&, float);
 
-    model::RocketBullet* model() const { return m_model_rocket; }
     descriptor::RocketBullet* descriptor() const { return m_descriptor_rocket; }
+    model::RocketBullet* model() const { return m_model_rocket; }
 
 private:
-    model::RocketBullet* m_model_rocket = nullptr;
     descriptor::RocketBullet* m_descriptor_rocket = nullptr;
+    model::RocketBullet* m_model_rocket = nullptr;
 
     model::SpaceObject* m_target = nullptr;
 

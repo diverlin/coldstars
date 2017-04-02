@@ -36,11 +36,11 @@
 
 namespace control {
 
-Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
+Asteroid::Asteroid(descriptor::Asteroid* descr, model::Asteroid* model)
     :
-      Planetoid(model, descr)
-    , m_model_asteroid(model)
+      Planetoid(descr, model)
     , m_descriptor_asteroid(descr)
+    , m_model_asteroid(model)
 {
 }
 

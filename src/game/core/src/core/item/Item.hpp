@@ -38,7 +38,7 @@ namespace control {
 class Item : public Base
 {
 public:
-    Item(model::Item*, descriptor::Item*);
+    Item(descriptor::Item*, model::Item*);
     virtual ~Item() = default;
 
     virtual void putChildrenToGarbage() const {}
@@ -76,12 +76,12 @@ protected:
     virtual void addUniqueInfo()=0;
 
 public:
-    model::Item* model() const { return m_model_item; }
     descriptor::Item* descriptor() const { return m_descriptor_item; }
+    model::Item* model() const { return m_model_item; }
 
 private:
-    model::Item* m_model_item = nullptr;
     descriptor::Item* m_descriptor_item = nullptr;
+    model::Item* m_model_item = nullptr;
 
     slot::Item* m_slot = nullptr;
 };

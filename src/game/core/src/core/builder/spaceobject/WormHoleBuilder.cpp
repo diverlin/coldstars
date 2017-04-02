@@ -34,7 +34,7 @@ WormHole::__genTemplate(descriptor::WormHole* descr)
     model::WormHole* model = new model::WormHole(descr->id());
     assert(model);
 
-    control::WormHole* wormhole = new control::WormHole(model, descr);
+    control::WormHole* wormhole = new control::WormHole(descr, model);
     assert(wormhole);
 
     int size = 4;

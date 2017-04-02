@@ -32,13 +32,12 @@
 
 namespace control {
 
-Item::Item(model::Item* model, descriptor::Item* descr)
+Item::Item(descriptor::Item* descr, model::Item* model)
     :
-      Base(model, descr)
-    , m_model_item(model)
+      Base(descr, model)
     , m_descriptor_item(descr)
+    , m_model_item(model)
 {
-
 }
 
 bool Item::isDamaged() const { return (model()->condition() <= 0); }

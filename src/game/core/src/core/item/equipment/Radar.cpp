@@ -30,11 +30,11 @@
 namespace control {
 namespace item {
 
-Radar::Radar(model::item::Radar* model, descriptor::item::Radar* descr)
+Radar::Radar(descriptor::item::Radar* descr, model::item::Radar* model)
     :
-      Equipment(model, descr)
-    , m_model_radar(model)
+      Equipment(descr, model)
     , m_descriptor_radar(descr)
+    , m_model_radar(model)
 {}
 
 /* virtual */

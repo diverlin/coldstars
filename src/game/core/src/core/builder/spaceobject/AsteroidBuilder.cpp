@@ -88,8 +88,9 @@ control::Asteroid*
 Asteroid::__genTemplate(descriptor::Asteroid* descr)
 {
     model::Asteroid* model = new model::Asteroid(descr->id());
-    control::Asteroid* asteroid = new control::Asteroid(model, descr);
     assert(model);
+
+    control::Asteroid* asteroid = new control::Asteroid(descr, model);
     assert(asteroid);
 
     EntityManager::get().reg(asteroid);

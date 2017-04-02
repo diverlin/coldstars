@@ -72,7 +72,7 @@ NatureLand::__createTemplate(descriptor::NatureLand* descr)
     model::NatureLand* model = new model::NatureLand(descr->id());
     assert(model);
 
-    control::NatureLand* natureland = new control::NatureLand(model, descr);
+    control::NatureLand* natureland = new control::NatureLand(descr, model);
     assert(natureland);
 
     EntityManager::get().reg(natureland);

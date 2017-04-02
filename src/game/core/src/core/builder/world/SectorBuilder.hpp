@@ -32,14 +32,15 @@ namespace builder {
 class Sector
 {
 public:
-    static control::Sector* create(descriptor::Sector*);
+    static control::Sector* gen();
+    static control::Sector* gen(descriptor::Sector*);
     
 private:
     Sector()=delete;
     ~Sector()=delete;
 
     static void __createInternals(control::Sector*, descriptor::Sector*);
-    static control::Sector* __genTemplate();
+    static control::Sector* __genTemplate(descriptor::Sector*);
 }; 
 
 } // namespace builder

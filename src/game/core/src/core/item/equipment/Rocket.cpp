@@ -31,11 +31,11 @@
 namespace control {
 namespace item {
 
-Rocket::Rocket(model::item::Rocket* model, descriptor::item::Rocket* descr)
+Rocket::Rocket(descriptor::item::Rocket* descr, model::item::Rocket* model)
     :
-      Weapon(model, descr)
-    , m_model_rocket(model)
+      Weapon(descr, model)
     , m_descriptor_rocket(descr)
+    , m_model_rocket(model)
 {
 //    fire_atOnce = meti::getRandInt(1, 3);
 }

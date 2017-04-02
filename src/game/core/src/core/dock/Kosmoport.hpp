@@ -38,7 +38,7 @@ class Goverment;
 class Kosmoport : public Land
 {
 public:
-    Kosmoport(model::Kosmoport*, descriptor::Kosmoport*);
+    Kosmoport(descriptor::Kosmoport*, model::Kosmoport*);
     virtual ~Kosmoport();
 
     Angar* angar() const { return m_angar; }
@@ -64,8 +64,8 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    model::Kosmoport* model() const { return m_model_kosmoport; }
     descriptor::Kosmoport* descriptor() const { return m_descriptor_kosmoport; }
+    model::Kosmoport* model() const { return m_model_kosmoport; }
 
 private:
     Angar* m_angar = nullptr;
@@ -73,8 +73,8 @@ private:
     Shop* m_shop = nullptr;
     Goverment* m_goverment = nullptr;
 
-    model::Kosmoport* m_model_kosmoport = nullptr;
     descriptor::Kosmoport* m_descriptor_kosmoport = nullptr;
+    model::Kosmoport* m_model_kosmoport = nullptr;
 
     virtual void putChildrenToGarbage() const;
 

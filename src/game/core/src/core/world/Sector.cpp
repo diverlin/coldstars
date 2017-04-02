@@ -37,9 +37,9 @@
 
 namespace model {
 
-Sector::Sector()
+Sector::Sector(int_t descriptor_id)
 {
-//    setType(entity::type::SECTOR);
+    setDescriptor(descriptor_id);
 }
 
 Sector::Sector(const std::string& data)
@@ -71,11 +71,11 @@ bool Sector::operator!=(const Sector& rhs) const {
 
 namespace control {
 
-Sector::Sector(model::Sector* model, descriptor::Sector* descr)
+Sector::Sector(descriptor::Sector* descr, model::Sector* model)
     :
-      Base(model, descr)
-    , m_model_sector(model)
+      Base(descr, model)
     , m_descriptor_sector(descr)
+    , m_model_sector(model)
 {
 }
 

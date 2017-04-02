@@ -30,11 +30,11 @@
 namespace control {
 namespace item {
 
-Lazer::Lazer(model::item::Lazer* model, descriptor::item::Lazer* descr)
+Lazer::Lazer(descriptor::item::Lazer* descr, model::item::Lazer* model)
     :
-      Weapon(model, descr)
-    , m_model_lazer(model)
+      Weapon(descr, model)
     , m_descriptor_lazer(descr)
+    , m_model_lazer(model)
 {
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL);

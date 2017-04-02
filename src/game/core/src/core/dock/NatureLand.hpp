@@ -40,7 +40,7 @@ class Item;
 class NatureLand : public Land
 {
 public:
-    NatureLand(model::NatureLand*, descriptor::NatureLand*);
+    NatureLand(descriptor::NatureLand*, model::NatureLand*);
     virtual ~NatureLand();
 
     virtual void putChildrenToGarbage() const;
@@ -67,17 +67,17 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    model::NatureLand* model() const { return m_model_natureland; }
     descriptor::NatureLand* descriptor() const { return m_descriptor_natureland; }
+    model::NatureLand* model() const { return m_model_natureland; }
 
 private:
+    descriptor::NatureLand* m_descriptor_natureland = nullptr;
+    model::NatureLand* m_model_natureland = nullptr;
+
     //jeti::control::TextureOb* textureOb_background;
 
     std::vector<Vehicle*> m_vehicles;
     std::vector<slot::Item*> m_itemslots;
-
-    model::NatureLand* m_model_natureland = nullptr;
-    descriptor::NatureLand* m_descriptor_natureland = nullptr;
 
 //    UnresolvedDataNatureLand data_unresolved_NatureLand;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

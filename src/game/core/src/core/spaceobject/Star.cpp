@@ -35,11 +35,11 @@
 
 namespace control {
 
-Star::Star(model::Star* model, descriptor::Star* descr)
+Star::Star(descriptor::Star* descr, model::Star* model)
     :
-      Planetoid(model, descr)
-    , m_model_star(model)
+      Planetoid(descr, model)
     , m_descriptor_star(descr)
+    , m_model_star(model)
 {
 //    setId(id);
 //    setTypeId(entity::Type::STAR);

@@ -37,11 +37,11 @@
 
 namespace control {
 
-Ship::Ship(model::Ship* model, descriptor::Ship* descr)
+Ship::Ship(descriptor::Ship* descr, model::Ship* model)
     :
-      Vehicle(model, descr)
-    , m_model_ship(model)
+      Vehicle(descr, model)
     , m_descriptor_ship(descr)
+    , m_model_ship(model)
 {
 
 }

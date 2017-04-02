@@ -39,7 +39,7 @@ namespace item {
 class Weapon : public Equipment
 { 
 public:
-    Weapon(model::item::Weapon*, descriptor::item::Weapon*);
+    Weapon(descriptor::item::Weapon*, model::item::Weapon*);
     virtual ~Weapon() = default;
 
 //    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
@@ -49,12 +49,12 @@ public:
     virtual void updateProperties();
 
 public:
-    model::item::Weapon* model() const { return m_model_weapon; }
     descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
+    model::item::Weapon* model() const { return m_model_weapon; }
 
 private:
-    model::item::Weapon* m_model_weapon = nullptr;
     descriptor::item::Weapon* m_descriptor_weapon = nullptr;
+    model::item::Weapon* m_model_weapon = nullptr;
 
     int m_damage_add = 0;
     int m_radius_add = 0;

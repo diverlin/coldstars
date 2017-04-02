@@ -78,26 +78,21 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
-    Base(model::Base*, descriptor::Base*);
+    Base(descriptor::Base*, model::Base*);
     virtual ~Base();
 
     void setId(int_t id) { m_model_base->setId(id); }
-    void setInitialized() { m_initialized = true; }
 
     int_t id() { return model()->id(); }
 
-    bool isInitialized() const { return m_initialized; }
-
     virtual void putChildrenToGarbage() const {}
 
-    model::Base* model() const { return m_model_base; }
     descriptor::Base* descriptor() const { return m_descriptor_base; }
+    model::Base* model() const { return m_model_base; }
 
 private:
-    bool m_initialized = false;
-
-    model::Base* m_model_base = nullptr;
     descriptor::Base* m_descriptor_base = nullptr;
+    model::Base* m_model_base = nullptr;
 };
 
 } // namespace control

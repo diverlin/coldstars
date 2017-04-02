@@ -31,11 +31,11 @@
 
 namespace control {
 
-Land::Land(model::Land* model, descriptor::Land* descr)
+Land::Land(descriptor::Land* descr, model::Land* model)
     :
-      Base(model, descr)
-    , m_model_land(model)
+      Base(descr, model)
     , m_descriptor_land(descr)
+    , m_model_land(model)
 {}
 
 /* virtual */

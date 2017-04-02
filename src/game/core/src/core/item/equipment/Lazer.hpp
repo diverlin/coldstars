@@ -38,17 +38,17 @@ namespace item {
 class Lazer : public Weapon
 {
 public:
-    Lazer(model::item::Lazer*, descriptor::item::Lazer*);
+    Lazer(descriptor::item::Lazer*, model::item::Lazer*);
     virtual ~Lazer() = default;
 
     //void FireEvent(SpaceObject*, slot::ItemSlot*, float, bool);
 
-    model::item::Lazer* model() const { return m_model_lazer; }
     descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
+    model::item::Lazer* model() const { return m_model_lazer; }
 
 private:
-    model::item::Lazer* m_model_lazer = nullptr;
     descriptor::item::Lazer* m_descriptor_lazer = nullptr;
+    model::item::Lazer* m_model_lazer = nullptr;
 
     //              jeti::control::TextureOb* texOb_turrel;
     //              jeti::control::TextureOb* texOb_lazerEffect;

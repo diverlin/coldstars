@@ -22,7 +22,9 @@
 #include <world/Sector.hpp>
 
 #include <core/descriptor/world/SectorDescriptor.hpp>
+
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <world/starsystem.hpp>
 
@@ -34,29 +36,38 @@
 namespace builder {
 
 control::Sector*
-Sector::__genTemplate()
-{   
-    model::Sector* model = new model::Sector;
-    assert(model);
-
+Sector::gen()
+{
     descriptor::Sector* descr = nullptr;
-    assert(descr);
+    if (!descriptor::Manager::get().hasType(descriptor::Type::SECTOR)) {
+        descr = descriptor::genSector({0});
+    } else {
+        descr = descriptor::Manager::get().randSector();
+    }
+    return gen(descr);
+}
 
-    control::Sector* sector = new control::Sector(model, descr);
-    assert(sector);
-
-    EntityManager::get().reg(sector);
-    
+control::Sector*
+Sector::gen(descriptor::Sector* descr)
+{
+    control::Sector* sector = __genTemplate(descr);
+    __createInternals(sector, descr);
     return sector;
 } 
 
 control::Sector*
-Sector::create(descriptor::Sector* descr)
+Sector::__genTemplate(descriptor::Sector* descr)
 {
-    control::Sector* sector = __genTemplate();
-    Sector::__createInternals(sector, descr);
+    model::Sector* model = new model::Sector(descr->id());
+    assert(model);
+
+    control::Sector* sector = new control::Sector(descr, model);
+    assert(sector);
+
+    EntityManager::get().reg(sector);
+
     return sector;
-} 
+}
 
 void
 Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)

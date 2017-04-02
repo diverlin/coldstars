@@ -40,7 +40,7 @@ namespace control {
 class Planet : public Planetoid
 {
 public:
-    Planet(model::Planet*, descriptor::Planet*);
+    Planet(descriptor::Planet*, model::Planet*);
     virtual ~Planet();
 
     void bindLand(Land*);
@@ -55,12 +55,12 @@ public:
     void updateInSpace(int, bool);
     void updateInSpaceInStatic();
 
-    model::Planet* model() const { return m_model_planet; }
     descriptor::Planet* descriptor() const { return m_descriptor_planet; }
+    model::Planet* model() const { return m_model_planet; }
 
 private:
-    model::Planet* m_model_planet = nullptr;
     descriptor::Planet* m_descriptor_planet = nullptr;
+    model::Planet* m_model_planet = nullptr;
 
     Land* m_land = nullptr;
 

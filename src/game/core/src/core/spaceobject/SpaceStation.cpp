@@ -40,13 +40,12 @@
 namespace control {
 
 
-SpaceStation::SpaceStation(model::SpaceStation* model, descriptor::SpaceStation* descr)
+SpaceStation::SpaceStation(descriptor::SpaceStation* descr, model::SpaceStation* model)
     :
-      Vehicle(model, descr)
-    , m_model_spacestation(model)
+      Vehicle(descr, model)
     , m_descriptor_spacestation(descr)
+    , m_model_spacestation(model)
 {
-
 }
 
 /* virtual */

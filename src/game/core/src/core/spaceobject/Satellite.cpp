@@ -31,11 +31,11 @@
 
 namespace control {
 
-Satellite::Satellite(model::Satellite* model, descriptor::Satellite* descr)
+Satellite::Satellite(descriptor::Satellite* descr, model::Satellite* model)
     :
-      Vehicle(model, descr)
-    , m_model_satellite(model)
+      Vehicle(descr, model)
     , m_descriptor_satellite(descr)
+    , m_model_satellite(model)
 {
 
 }

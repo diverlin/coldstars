@@ -87,18 +87,18 @@ bool itemInsertHelper(slot::Item* slot, int_t id) {
 }
 } // namespace
 
-Container::Container(model::Container* _model, descriptor::Container* descr)
+Container::Container(descriptor::Container* descr, model::Container* model)
     :
-      SpaceObject(_model, descr)
-    , m_model_container(_model)
+      SpaceObject(descr, model)
     , m_descriptor_container(descr)
+    , m_model_container(model)
 {
 
     slot::Item* slot = new slot::Item(entity::Type::CARGO_SLOT);
     bindItemSlot(slot);
 
-    if (model()->item() != NONE) {
-        itemInsertHelper(slot, model()->item());
+    if (m_model_container->item() != NONE) {
+        itemInsertHelper(slot, m_model_container->item());
     }
 }
 

@@ -32,11 +32,11 @@
 
 namespace control {
 
-NatureLand::NatureLand(model::NatureLand* model, descriptor::NatureLand* descr)
+NatureLand::NatureLand(descriptor::NatureLand* descr, model::NatureLand* model)
     :
-      Land(model, descr)
-    , m_model_natureland(model)
+      Land(descr, model)
     , m_descriptor_natureland(descr)
+    , m_model_natureland(model)
 
 {}
 
@@ -81,7 +81,7 @@ bool NatureLand::add(control::Item* item)
     for (slot::Item* slot: m_itemslots) {
         if (!slot->item()) {
             slot->insert(item);
-            slot->setPosition(glm::vec2(meti::getRandInt(100), meti::getRandInt(100)));
+            //slot->setPosition(glm::vec2(meti::getRandInt(100), meti::getRandInt(100)));
             return true;
         }
     }    

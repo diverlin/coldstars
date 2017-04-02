@@ -25,11 +25,11 @@
 
 namespace control {
 
-WormHole::WormHole(model::WormHole* model, descriptor::WormHole* descr)
+WormHole::WormHole(descriptor::WormHole* descr, model::WormHole* model)
     :
-      Planetoid(model, descr)
-    , m_model_wormhole(model)
+      Planetoid(descr, model)
     , m_descriptor_wormhole(descr)
+    , m_model_wormhole(model)
 {
 //    setId(id);
 //    setTypeId(entity::Type::BLACKHOLE);
