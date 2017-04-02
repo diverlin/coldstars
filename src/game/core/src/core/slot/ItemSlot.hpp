@@ -130,7 +130,7 @@ class GoodsPack;
 
 namespace control {
 
-class ItemSlot : public BaseSlot
+class ItemSlot : public slot::BaseSlot
 {
 public:
     ItemSlot(entity::Type subtype_id);

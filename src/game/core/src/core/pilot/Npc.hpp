@@ -50,7 +50,7 @@ class GoodsPack;
 
 namespace model {
 
-class Npc : public model::Base {
+class Npc : public Base {
 
 public:
     Npc();

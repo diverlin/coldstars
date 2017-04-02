@@ -27,31 +27,16 @@
 #include <core/spaceobject/Vehicle.hpp>
 
 
-namespace model {
-
-//BaseSlot::BaseSlot(const std::string& data)
-//{
-//    MACRO_READ_SERIALIZED_DATA
-//}
-
-//std::string
-//BaseSlot::data() const
-//{
-//    MACRO_SAVE_SERIALIZED_DATA
-//}
-
-} // namespace model
-
-namespace control {
+namespace slot {
 
 control::Vehicle*
 BaseSlot::vehicleOwner() const {
-    Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
+    control::Vehicle* vehicle = static_cast<control::Vehicle*>(m_owner);
     assert(vehicle);
     return vehicle;
 }
 
-} // namespace control
+} // namespace slot
 
 //BaseSlot::BaseSlot()
 //:
