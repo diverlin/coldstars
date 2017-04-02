@@ -17,7 +17,6 @@
 */
 
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
-#include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <core/spaceobject/Container.hpp>

@@ -46,8 +46,6 @@
 
 #include <core/item/other/ALL>
 
-#include <core/builder/slot/ItemSlotBuilder.hpp>
-
 #include "../builder/world/GalaxyBuilder.hpp"
 #include "../builder/world/StarSystemBuilder.hpp"
 

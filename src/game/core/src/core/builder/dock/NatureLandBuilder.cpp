@@ -18,7 +18,6 @@
 
 
 #include <builder/dock/NatureLandBuilder.hpp>
-#include <core/builder/slot/ItemSlotBuilder.hpp>
 #ifdef USE_ARTEFACTS
 #include <builder/item/artefacts/GravityArtefactBuilder.hpp>
 #include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
@@ -33,6 +32,8 @@
 #include <core/descriptor/dock/NatureLand.hpp>
 #include <core/model/dock/NatureLand.hpp>
 #include <core/dock/NatureLand.hpp>
+
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -86,7 +87,7 @@ NatureLand::__createInternals(control::NatureLand* natureland)
     
     unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++) {
-        control::ItemSlot* item_slot = genItemSlot(entity::Type::CARGO_SLOT);
+        control::ItemSlot* item_slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
         natureland->add(item_slot);
     }
     
