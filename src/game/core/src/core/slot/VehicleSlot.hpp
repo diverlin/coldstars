@@ -27,18 +27,18 @@ class Vehicle;
 
 namespace slot {
 
-class VehicleSlot : public control::BaseSlot
+class Vehicle : public control::BaseSlot
 {
 public:
-    VehicleSlot(int, entity::Type);
-    ~VehicleSlot();
+    Vehicle(int, entity::Type);
+    ~Vehicle();
 
     virtual void putChildrenToGarbage() const;
 
     control::Vehicle* vehicle() const { return m_vehicle; }
     void insert(control::Vehicle*);
     void Release();
-    void SwapVehicle(VehicleSlot*);
+    void SwapVehicle(Vehicle*);
 
 //    void Render(const ceti::Rect&) const;
 

@@ -30,7 +30,7 @@ class Store;
 } // namespace model
 
 namespace slot {
-class VehicleSlot;
+class Vehicle;
 } // namespace slot
 
 namespace control {
@@ -52,10 +52,10 @@ public:
     bool add(Vehicle*);
 
     ItemSlot* freeItemSlot() const;
-    slot::VehicleSlot* freeVehicleSlot() const;
+    slot::Vehicle* freeVehicleSlot() const;
 
     int buyItem(Item*);
-    void sellVehicle(Npc*, slot::VehicleSlot*, int);
+    void sellVehicle(Npc*, slot::Vehicle*, int);
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
@@ -63,7 +63,7 @@ public:
 
 private:
     std::vector<ItemSlot*> m_item_slots;
-    std::vector<slot::VehicleSlot*> m_vehicle_slots;
+    std::vector<slot::Vehicle*> m_vehicle_slots;
 
     descriptor::Store* m_descriptor_store = nullptr;
     model::Store* m_model_store = nullptr;
@@ -77,7 +77,7 @@ private:
 
 //    friend class GuiStore;
 
-    void __add(slot::VehicleSlot*);
+    void __add(slot::Vehicle*);
     void __add(ItemSlot*);
 };
 

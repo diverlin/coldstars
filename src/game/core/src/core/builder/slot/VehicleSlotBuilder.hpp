@@ -24,10 +24,10 @@
 #include <ceti/type/IdType.hpp>
 
 namespace slot {
-class VehicleSlot;
+class Vehicle;
 } // namespace slot
 
-slot::VehicleSlot* getNewVehicleSlot(entity::Type, int_t id = NONE);
+slot::Vehicle* getNewVehicleSlot(entity::Type, int_t id = NONE);
 
     
 

@@ -31,10 +31,10 @@
 
 //#include <client/resources/TextureCollector.hpp>
 
-slot::VehicleSlot*
+slot::Vehicle*
 getNewVehicleSlot(entity::Type subtype_id, int_t id)
 {
-    slot::VehicleSlot* slot = new slot::VehicleSlot(id, subtype_id);
+    slot::Vehicle* slot = new slot::Vehicle(id, subtype_id);
     assert(slot);
 
 //    jeti::control::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT);

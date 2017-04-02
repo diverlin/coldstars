@@ -31,7 +31,7 @@
 
 namespace slot {
 
-VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)
+Vehicle::Vehicle(int id, entity::Type subtype_id)
     : BaseSlot()
 {
 //    DANGER //assert(false);
@@ -40,11 +40,11 @@ VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)
 //    setSubTypeId(subtype_id);
 }
    
-VehicleSlot::~VehicleSlot()
+Vehicle::~Vehicle()
 {}
       
 /* virtual */
-void VehicleSlot::putChildrenToGarbage() const
+void Vehicle::putChildrenToGarbage() const
 {
     assert(false);
 //    if (m_vehicle) {
@@ -52,7 +52,7 @@ void VehicleSlot::putChildrenToGarbage() const
 //    }
 }
                       
-void VehicleSlot::insert(control::Vehicle* vehicle)
+void Vehicle::insert(control::Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
@@ -60,12 +60,12 @@ void VehicleSlot::insert(control::Vehicle* vehicle)
     vehicle->setParentVehicleSlot(this);
 }
 
-void VehicleSlot::Release()
+void Vehicle::Release()
 {
     m_vehicle = nullptr;
 } 
 
-void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
+void Vehicle::SwapVehicle(Vehicle* vehicle_slot)
 {
     control::Vehicle* tmp_vehicle = vehicle_slot->vehicle();
     vehicle_slot->insert(m_vehicle);
