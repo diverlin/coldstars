@@ -53,7 +53,7 @@ public:
     virtual void putChildrenToGarbage() const;
 
     Vehicle* vehicle() const { return m_vehicle; }
-    void InsertVehicle(Vehicle*);
+    void insert(Vehicle*);
     void Release();
     void SwapVehicle(VehicleSlot*);
 

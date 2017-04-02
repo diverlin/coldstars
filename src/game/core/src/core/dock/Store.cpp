@@ -43,10 +43,6 @@ Store::Store(descriptor::Store* descr, model::Store* model)
     , m_descriptor_store(descr)
     , m_model_store(model)
 {
-    assert(false);
-    //    setId(id);
-    //    setTypeId(entity::Type::STORE);
-
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++) {
         ItemSlot* item_slot = new ItemSlot(entity::Type::CARGO_SLOT);
         __add(item_slot);
@@ -105,7 +101,7 @@ bool Store::add(Vehicle* vehicle)
         //{
         //vehicle->setStarSystem(GetOwnerKosmoport()->GetOwner()->starsystem());
         //}
-        vehicle_slot->InsertVehicle(vehicle);
+        vehicle_slot->insert(vehicle);
         return true;
     }
 

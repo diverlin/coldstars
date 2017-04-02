@@ -23,6 +23,12 @@
 
 namespace descriptor {
 
+Goverment::Goverment()
+{
+    setType(Type::GOVERMENT);
+    setObType(entity::Type::GOVERMENT);
+}
+
 Goverment::Goverment(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

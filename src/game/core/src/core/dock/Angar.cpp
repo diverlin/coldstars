@@ -68,30 +68,17 @@ void Angar::putChildrenToGarbage() const
     //    }
 }
 
-void Angar::add(VehicleSlot* vehicle_slot)
+void Angar::add(VehicleSlot* slot)
 {
-    assert(false);
-    //    vehicle_slot->setOwner(this);
-
-    //    if (vehicle_slot->subtype() == entity::Type::VEHICLE_MILITARY_SLOT)
-    //    {
-    //        vehicle_military_slot_vec.push_back(vehicle_slot);
-    //    }
-
-    //    if (vehicle_slot->subtype() == entity::Type::VEHICLE_VISITORS_SLOT)
-    //    {
-    //        vehicle_visitors_slot_vec.push_back(vehicle_slot);
-    //    }
-
-    //    vehicle_total_slot_vec.push_back(vehicle_slot);
+    slot->setOwner(this);
+    m_vehicle_slots.push_back(slot);
 };
 
 
-void Angar::add(ItemSlot* item_slot)
+void Angar::add(ItemSlot* slot)
 {
-    assert(false);
-    //    item_slot->setOwner(this);
-    //    item_slot_vec.push_back(item_slot);
+    slot->setOwner(this);
+    m_item_slots.push_back(slot);
 }
 
 bool Angar::repairItem(Npc* npc, Item* item) const
@@ -163,20 +150,19 @@ bool Angar::tankUpVehicle(Vehicle* vehicle) const
 
 void Angar::updateInStatic() const
 {
-    for (auto slot: m_vehicle_visitors_slots) {
-        assert(false);
-        //        if (slot->vehicle() != nullptr)  {
-        //            if (slot->vehicle()->npc() != nullptr) {
-        //                slot->vehicle()->npc()->updateInKosmoportInStatic();
-        //            }
-        //        }
+    for (auto slot: m_vehicle_slots) {
+        if (slot->vehicle() != nullptr)  {
+            if (slot->vehicle()->npc() != nullptr) {
+                slot->vehicle()->npc()->updateInKosmoportInStatic();
+            }
+        }
     }
 }
 
 int Angar::freeVehicleSlotTotalNum() const
 {
     int sum_free = 0;
-    for (auto* slot: m_vehicle_visitors_slots) {
+    for (auto* slot: m_vehicle_slots) {
         if (!slot->vehicle()) {
             sum_free++;
         }

@@ -42,11 +42,6 @@ Shop::Shop(descriptor::Shop* descr, model::Shop* model)
     , m_descriptor_shop(descr)
     , m_model_shop(model)
 {
-    assert(false);
-    //    setId(id);
-    //    setTypeId(entity::Type::SHOP);
-    //    setSubTypeId(entity::Type::SHOP);
-    
     m_mineralsAmount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
     m_foodAmount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
     m_medicineAmount  = meti::getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
