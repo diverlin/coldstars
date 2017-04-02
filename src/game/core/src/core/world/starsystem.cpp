@@ -209,6 +209,8 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     vehicle->model()->setPlace(place::Type::SPACE);
     vehicle->setStarSystem(this);
 
+    vehicle->model()->setPlace(place::Type::SPACE);
+
     vehicle->setPosition(position);
     vehicle->setDirection(dir);
     vehicle->updateOrientation(); // remove bad logic
@@ -283,6 +285,8 @@ void StarSystem::add(Star* star)
 {
     star->setStarSystem(this);
 
+    star->model()->setPlace(place::Type::SPACE);
+
     m_stars.push_back(star);
     model()->addStar(star->id());
 }
@@ -303,6 +307,8 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
         planet->setParent(parent);
     }
     planet->setStarSystem(this);
+
+    planet->model()->setPlace(place::Type::SPACE);
 
     float offset_radius = 0;
     if (m_planets.size()) {
@@ -341,6 +347,8 @@ void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
     asteroid->setParent(parent);
     asteroid->setStarSystem(this);
 
+    asteroid->model()->setPlace(place::Type::SPACE);
+
     asteroid->calibrateOrbit();
     asteroid->initOrbit();
 
@@ -372,7 +380,6 @@ void StarSystem::add(Container* container, const glm::vec3& center)
 {
     container->model()->setPosition(center);
     add(container);
-
 }
 
 void StarSystem::add(Container* container)

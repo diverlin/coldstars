@@ -39,23 +39,16 @@
 #include <meti/QuaternionUtils.hpp>
 
 DriveComplex::DriveComplex()
-    :
-      m_ownerVehicle(nullptr),
-      m_target(nullptr),
-      m_effectDrive(nullptr),
-      m_TargetDistance(0.0f),
-      m_PathEnd(true),
-      m_HasTarget(false)
 {}
 
 DriveComplex::~DriveComplex()
 {
-    delete m_effectDrive;
+//    delete m_effectDrive;
 }
 
-bool DriveComplex::PathExists() const
+bool DriveComplex::pathExists() const
 {
-    if ( (m_PathEnd == true) and (m_PathCenterVec.size() == 0 ) ) {
+    if ( (m_pathEnd == true) and (m_pathCenterVec.size() == 0 ) ) {
         return false;
     }
     
@@ -64,32 +57,26 @@ bool DriveComplex::PathExists() const
 
 void DriveComplex::resetTarget()
 {
-//    if (!m_Target)
-//        LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget");
-//    else
-//        LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget" + getBaseInfoStr(target));
-
-    
     m_target = nullptr;
             
-    m_TargetDistance = 0.0;
-    m_TargetOffset = glm::vec3(0.0);
-    m_TargetPos   = glm::vec3(0.0);
+    m_targetDistance = 0.0;
+    m_targetOffset = glm::vec3(0.0);
+    m_targetPos = glm::vec3(0.0);
     
     m_action = Action::NONE;
     
-    m_HasTarget = false;
-    m_PathEnd = true;
+    m_hasTarget = false;
+    m_pathEnd = true;
 }
       
-void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
+void DriveComplex::setCoords(const glm::vec3& target_pos)
 {
     resetTarget();
-    m_HasTarget = true;
+    m_hasTarget = true;
     
-    m_TargetPos = target_pos;
+    m_targetPos = target_pos;
     
-    UpdatePath();
+    updatePath();
 
     //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
 }
@@ -101,12 +88,12 @@ void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
     m_target = target;
     m_action = action_id;
     
-    m_HasTarget = true;
+    m_hasTarget = true;
         
     //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId));
 }
   
-void DriveComplex::DefineDistance()
+void DriveComplex::__defineDistance()
 {
     switch(m_action)
     {
@@ -172,24 +159,24 @@ void DriveComplex::DefineDistance()
     }
 }
                   
-void DriveComplex::UpdatePath()
+void DriveComplex::updatePath()
 {
     if (m_target != nullptr)
     {
-        if (ValidateTarget()) {
-            DefineDistance();
-            UpdateDynamicTargetCoord();
+        if (__validateTarget()) {
+            __defineDistance();
+            __updateDynamicTargetCoord();
         } else {
             resetTarget();
         }
     }
     
-    if (m_HasTarget) {
-        CalcPath();
+    if (m_hasTarget) {
+        __calcPath();
     }
 }
 
-bool DriveComplex::ValidateTarget() const
+bool DriveComplex::__validateTarget() const
 {
     if (m_target->model()->isAlive()) {
         if (m_target->model()->place() == place::Type::SPACE) {
@@ -202,7 +189,7 @@ bool DriveComplex::ValidateTarget() const
 
 
 
-void DriveComplex::UpdateDynamicTargetCoord()
+void DriveComplex::__updateDynamicTargetCoord()
 {
     assert(false);
 //    switch(m_target->descriptor()->type())
@@ -248,22 +235,22 @@ void DriveComplex::UpdateDynamicTargetCoord()
 }
 
 
-bool DriveComplex::CheckTargetEchievement()
+bool DriveComplex::checkTargetEchievement(const meti::vec3& pos)
 {
-    if (m_target != nullptr)
-    {
-        assert(false);
-//        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(m_ownerVehicle->position()), meti::vec2(m_TargetPos), m_TargetDistance) == true)
-//        {
-//            return true;
-//        }
+    if (m_target) {
+        bool result = ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(pos),
+                                                              meti::vec2(m_targetPos),
+                                                              m_targetDistance);
+        if (result) {
+            return true;
+        }
     }
     
     return false;
 }
 
 
-bool DriveComplex::GetDockingPermission()
+bool DriveComplex::getDockingPermission()
 {
     assert(false);
 //    switch(m_target->type())
@@ -284,17 +271,17 @@ bool DriveComplex::GetDockingPermission()
     return false;
 }
 
-void DriveComplex::ClearPath()
+void DriveComplex::__clearPath()
 {
-    m_PathCenterVec.clear();
-    m_PathDirectionVec.clear();
+    m_pathCenterVec.clear();
+    m_pathDirectionVec.clear();
 }
 
-void DriveComplex::CalcPath()
+void DriveComplex::__calcPath()
 {
     //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     
-    ClearPath();
+    __clearPath();
 
     int round_counter_max = 2000;//2 + 2*M_PI/angle_step;
     int round_counter = 0;
@@ -408,18 +395,18 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 */
 
-    if (m_PathCenterVec.size() > 1)
+    if (m_pathCenterVec.size() > 1)
     {
-        m_PathEnd = false;
-        m_PathIndex = 0;
+        m_pathEnd = false;
+        m_pathIndex = 0;
     }
     else
     {
-        ClearPath();
+        __clearPath();
     }
 }
 
-void DriveComplex::CalcPath_DEBUG()
+void DriveComplex::__calcPath_DEBUG()
 {
 
     glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
@@ -470,37 +457,37 @@ void DriveComplex::CalcPath_DEBUG()
     }
 }
 
-void DriveComplex::UpdatePosition()
+void DriveComplex::updatePosition()
 {
-    if (m_PathEnd == false)
+    if (m_pathEnd == false)
     {
-        if (m_PathIndex < m_PathCenterVec.size())
+        if (m_pathIndex < m_pathCenterVec.size())
         {
             assert(false);
 //            m_ownerVehicle->setPosition(m_PathCenterVec[m_PathIndex]);
 //            m_ownerVehicle->setDirection(m_PathDirectionVec[m_PathIndex]);
-            m_PathIndex++;
+            m_pathIndex++;
         }
         else
         {
-            m_PathEnd = true;
+            m_pathEnd = true;
         }
     }
 }
 
-void DriveComplex::UpdatePathVisualisation()
-{
-//    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
-//    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
-}
+//void DriveComplex::updatePathVisualisation()
+//{
+////    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
+////    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
+//}
 
-void DriveComplex::DrawPath(const jeti::Renderer& render)
-{
-    if (m_PathEnd == false)
-    {
-        UpdatePathVisualisation();
-//        m_PathVisualCenter.Draw(render);
-//        m_PathVisualTurn.Draw(render);
-    }
-}
+//void DriveComplex::drawPath(const jeti::Renderer& render)
+//{
+//    if (m_pathEnd == false)
+//    {
+//        updatePathVisualisation();
+////        m_PathVisualCenter.Draw(render);
+////        m_PathVisualTurn.Draw(render);
+//    }
+//}
 

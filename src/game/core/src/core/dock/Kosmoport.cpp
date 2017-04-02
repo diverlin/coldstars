@@ -93,15 +93,12 @@ bool Kosmoport::isAllowedToLand() const
 /* virtual */
 bool Kosmoport::add(Vehicle* vehicle)
 {        
-    assert(false);
-    //    vehicle->setPlaceTypeId(type::place::KOSMOPORT);
-    //    angar->AddVehicle(vehicle);
+    m_angar->add(vehicle);
     
-    //    vehicle->setLand(this);
-    //    if (!vehicle->starsystem()) {
-    //        // TODO
-    //        //vehicle->setStarSystem(m_owner->starsystem());
-    //    }
+    vehicle->setLand(this);
+    if (!vehicle->starsystem()) {
+        vehicle->setStarSystem(owner()->starsystem());
+    }
 
     return true;
 }

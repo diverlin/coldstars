@@ -31,19 +31,17 @@ namespace slot {
 class Item;
 } // namespace slot
 
-namespace jeti {
-class DriveEffect;
-}
+//namespace jeti {
+//class DriveEffect;
+//}
 
-namespace jeti {
-class Renderer;
-}
-
+//namespace jeti {
+//class Renderer;
+//}
 
 namespace control {
 class SpaceObject;
 } // namespace control
-
 
 class DriveComplex
 {
@@ -56,35 +54,34 @@ public:
     ~DriveComplex();
 
     void setOwnerVehicle(control::Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
-    void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
+//    void setDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
     void addDriveSlot(slot::Item* drive_slot) { m_driveSlots.push_back(drive_slot); }
     void addBakSlot(slot::Item* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
     void setTarget(control::SpaceObject*, Action);
-    void SetStaticTargetCoords(const glm::vec3&);
+    void setCoords(const glm::vec3&);
 
-    Action GetActionId() const { return m_action; }
-    jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
+    Action action() const { return m_action; }
+//    jeti::DriveEffect* driveEffect() const { return m_effectDrive; }
 
     std::vector<slot::Item*> driveSlots() const { return m_driveSlots; }
     std::vector<slot::Item*> bakSlots() const { return m_bakSlots; }
 
     control::SpaceObject* target() const { return m_target; }
-    Action action() const { return m_action; }
 
-    bool PathExists() const;
+    bool pathExists() const;
 
-    bool CheckTargetEchievement();
-    bool GetDockingPermission();
+    bool checkTargetEchievement(const meti::vec3&);
+    bool getDockingPermission();
 
     void resetTarget();
 
-    void UpdatePath();
-    void UpdatePosition();
+    void updatePath();
+    void updatePosition();
 
-    void UpdatePathVisualisation();
-    void DrawPath(const jeti::Renderer&);
+//    void updatePathVisualisation();
+//    void drawPath(const jeti::Renderer&);
 
 private:
     std::vector<slot::Item*> m_driveSlots;
@@ -93,34 +90,33 @@ private:
     control::Vehicle* m_ownerVehicle = nullptr;
     control::SpaceObject* m_target = nullptr;
 
-    jeti::DriveEffect* m_effectDrive = nullptr;
+//    jeti::DriveEffect* m_effectDrive = nullptr;
 
-    glm::vec3 m_TargetPos;
+    glm::vec3 m_targetPos;
 
     Action m_action = Action::NONE;
-    float m_TargetDistance;
-    glm::vec3 m_TargetOffset;
+    float m_targetDistance = 0.0f;
+    glm::vec3 m_targetOffset;
 
-    std::vector<glm::vec3> m_PathCenterVec;
-    std::vector<glm::vec3> m_PathDirectionVec;
+    std::vector<glm::vec3> m_pathCenterVec;
+    std::vector<glm::vec3> m_pathDirectionVec;
 
-    bool m_PathEnd;
-    unsigned int m_PathIndex;
-
-    bool m_HasTarget;
+    bool m_pathEnd = true;
+    unsigned int m_pathIndex = 0;
+    bool m_hasTarget = false;
 
     //        jeti::PathVisual m_PathVisualCenter;
     //        jeti::PathVisual m_PathVisualTurn;
 
-    void ClearPath();
-    void CalcPath();
-    void CalcPath_DEBUG();
+    void __clearPath();
+    void __calcPath();
+    void __calcPath_DEBUG();
 
-    bool ValidateTarget() const;
+    bool __validateTarget() const;
 
-    void UpdateDynamicTargetCoord();
+    void __updateDynamicTargetCoord();
 
-    void DefineDistance();
+    void __defineDistance();
 };
 
 

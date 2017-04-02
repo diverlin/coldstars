@@ -170,25 +170,23 @@ int Angar::freeVehicleSlotTotalNum() const
     return sum_free;
 }
 
+slot::Vehicle*
+Angar::__freeSlot() const
+{
+    for (slot::Vehicle* slot: m_vehicle_slots) {
+        if (!slot->vehicle()) {
+            return slot;
+        }
+    }
+    return nullptr;
+}
+
 bool Angar::add(Vehicle* vehicle)
 {
-    assert(false);
-    //    if (vehicle->subsubtype() == entity::Type::WARRIOR) {
-    //        for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
-    //            if (vehicle_military_slot_vec[i]->vehicle() == nullptr) {
-    //                vehicle_military_slot_vec[i]->InsertVehicle(vehicle);
-    //                return true;
-    //            }
-    //        }
-    //    } else {
-    //        for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-    //            if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
-    //                vehicle_visitors_slot_vec[i]->InsertVehicle(vehicle);
-    //                return true;
-    //            }
-    //        }
-    //    }
-
+    slot::Vehicle* slot = __freeSlot();
+    if (slot) {
+        return slot->insert(vehicle);
+    }
     return false;
 }
 

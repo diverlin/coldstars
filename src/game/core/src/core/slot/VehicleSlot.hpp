@@ -36,7 +36,7 @@ public:
     virtual void putChildrenToGarbage() const;
 
     control::Vehicle* vehicle() const { return m_vehicle; }
-    void insert(control::Vehicle*);
+    bool insert(control::Vehicle*);
     void release();
     void swapVehicle(Vehicle*);
 

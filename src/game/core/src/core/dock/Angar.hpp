@@ -74,17 +74,19 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
+    descriptor::Angar* desriptor() const { return m_descriptor_angar; }
+    model::Angar* model() const { return m_model_angar; }
+
 private:
+    descriptor::Angar* m_descriptor_angar = nullptr;
+    model::Angar* m_model_angar = nullptr;
+
     std::vector<slot::Vehicle*> m_vehicle_slots;
     std::vector<slot::Item*> m_item_slots;
 
     int m_fuelPrice;
 
-    descriptor::Angar* m_descriptor_angar = nullptr;
-    model::Angar* m_model_angar = nullptr;
-
-    descriptor::Angar* desriptor() const { return m_descriptor_angar; }
-    model::Angar* model() const { return m_model_angar; }
+    slot::Vehicle* __freeSlot() const;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

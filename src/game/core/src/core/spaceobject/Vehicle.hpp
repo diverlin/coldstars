@@ -119,7 +119,7 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     virtual ~Vehicle();
 
-    void dock(SpaceObject*);
+    void setDockTarget(SpaceObject*);
     void follow(SpaceObject*);
 
     WeaponComplex& weaponComplex() { return m_weapon_complex; }

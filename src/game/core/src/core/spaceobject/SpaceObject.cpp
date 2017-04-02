@@ -51,8 +51,6 @@ void SpaceObject::_init()
 
 void SpaceObject::setStarSystem(StarSystem* starsystem)
 {
-    model()->setPlace(place::Type::SPACE);
-
     m_starsystem = starsystem;
     model()->setStarSystem(starsystem->id());
 }
