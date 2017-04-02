@@ -136,13 +136,13 @@ public:
     Item(entity::Type subtype_id);
     virtual ~Item();
 
-    void setOffset(int offset) { m_offset = offset; }
     void setType(entity::Type type) { m_type = type; }
     void setSubType(entity::Type subtype) { m_subtype = subtype; }
+    void setPosition(int position) { m_position = position; }
 
-    int offset() const { return m_offset; }
     entity::Type type() const { return m_type; }
     entity::Type subtype() const { return m_subtype; }
+    int position() const { return m_position; }
 
     virtual void putChildrenToGarbage() const;
 
@@ -250,7 +250,7 @@ private:
 
     void log(const std::string&) const;
 
-    int m_offset = NONE;
+    int m_position = NONE;
     entity::Type m_type = entity::Type::NONE;
     entity::Type m_subtype = entity::Type::NONE;
 };

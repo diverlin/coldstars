@@ -200,7 +200,7 @@ bool Item::insert(control::Item* item)
             item->slot()->removeItem();
         }
         item->setSlot(this);
-        item->model()->setSlot(offset());
+        item->model()->setSlot(position());
 
         if (subtype() == item->descriptor()->slotType()) {
             updateVehiclePropetries();
