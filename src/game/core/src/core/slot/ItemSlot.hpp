@@ -128,9 +128,9 @@ class GoodsPack;
 
 //} // namespace model
 
-namespace control {
+namespace slot {
 
-class ItemSlot : public slot::Base
+class ItemSlot : public Base
 {
 public:
     ItemSlot(entity::Type subtype_id);
@@ -146,33 +146,33 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
+    void setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget = nullptr);
     void setTurrel(Turrel* turrel) { m_turrel = turrel; }
 
-    SpaceObject* target() const { return m_target; }
-    ItemSlot* subtarget() const { return m_subtarget; }
+    control::SpaceObject* target() const { return m_target; }
+    slot::ItemSlot* subtarget() const { return m_subtarget; }
 
     int hitProbability() const { return m_hitProbability; }
 
     Turrel* turrel() const { return m_turrel; }
 
-    item::Weapon* weapon() const { return static_cast<item::Weapon*>(m_item); }
-    Item* item() const { return m_item; }
+    control::item::Weapon* weapon() const { return static_cast<control::item::Weapon*>(m_item); }
+    control::Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
-    item::Rocket*    rocketEquipment()    const { return reinterpret_cast<item::Rocket*>(m_item); }
-    item::Lazer*     lazerEquipment()     const { return reinterpret_cast<item::Lazer*>(m_item); }
-    item::Radar*     radarEquipment()     const { return reinterpret_cast<item::Radar*>(m_item); }
-    item::Drive*     driveEquipment()     const { return reinterpret_cast<item::Drive*>(m_item); }
-    item::Bak*       bakEquipment()       const { return reinterpret_cast<item::Bak*>(m_item); }
+    control::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<control::item::Rocket*>(m_item); }
+    control::item::Lazer*     lazerEquipment()     const { return reinterpret_cast<control::item::Lazer*>(m_item); }
+    control::item::Radar*     radarEquipment()     const { return reinterpret_cast<control::item::Radar*>(m_item); }
+    control::item::Drive*     driveEquipment()     const { return reinterpret_cast<control::item::Drive*>(m_item); }
+    control::item::Bak*       bakEquipment()       const { return reinterpret_cast<control::item::Bak*>(m_item); }
 #ifdef USE_EXTRA_EQUIPMENT
-    item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<item::EnergizerEquipment*>(m_item); }
-    item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<item::FreezerEquipment*>(m_item); }
+    control::item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<control::item::EnergizerEquipment*>(m_item); }
+    control::item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<control::item::FreezerEquipment*>(m_item); }
 #endif
-    item::Protector* protectorEquipment() const { return reinterpret_cast<item::Protector*>(m_item); }
-    item::Droid*     droidEquipment()     const { return reinterpret_cast<item::Droid*>(m_item); }
-    item::Scaner*    scanerEquipment()    const { return reinterpret_cast<item::Scaner*>(m_item); }
-    item::Grapple*   grappleEquipment()   const { return reinterpret_cast<item::Grapple*>(m_item); }
+    control::item::Protector* protectorEquipment() const { return reinterpret_cast<control::item::Protector*>(m_item); }
+    control::item::Droid*     droidEquipment()     const { return reinterpret_cast<control::item::Droid*>(m_item); }
+    control::item::Scaner*    scanerEquipment()    const { return reinterpret_cast<control::item::Scaner*>(m_item); }
+    control::item::Grapple*   grappleEquipment()   const { return reinterpret_cast<control::item::Grapple*>(m_item); }
 
 #ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
@@ -191,7 +191,7 @@ public:
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
-    bool insert(Item*);
+    bool insert(control::Item*);
     void removeItem();
 
     STATUS validateTarget();
@@ -206,16 +206,16 @@ public:
     //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*) const;
     //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*, jeti::control::TextureOb*) const;
 
-    Item* takeItem();
+    control::Item* takeItem();
 
-    bool swapItem(ItemSlot*);
+    bool swapItem(slot::ItemSlot*);
 
 //    void updateRange(jeti::control::Material*);
     void drawRange(const glm::vec2&);
 
-    bool checkSubTarget(ItemSlot*) const;
-    STATUS checkTarget(SpaceObject*) const;
-    STATUS checkTargetPure(SpaceObject*) const;
+    bool checkSubTarget(slot::ItemSlot*) const;
+    STATUS checkTarget(control::SpaceObject*) const;
+    STATUS checkTargetPure(control::SpaceObject*) const;
 
     void selectEvent();
     void deselectEvent();
@@ -234,27 +234,26 @@ private:
 
     Turrel* m_turrel = nullptr;          // only for weapons slot
 
-    Item* m_item = nullptr;
+    control::Item* m_item = nullptr;
 
-    SpaceObject* m_target = nullptr;
-    ItemSlot* m_subtarget = nullptr;
+    control::SpaceObject* m_target = nullptr;
+    slot::ItemSlot* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
-    bool checkItemInsertion(Item*) const;
+    bool checkItemInsertion(control::Item*) const;
 
-    bool isTargetAlive(SpaceObject*) const;
-    bool isTargetInSpace(SpaceObject*) const;
-    bool isTargetInSameStarSystem(SpaceObject*) const;
-    bool checkDistanceToTarget(SpaceObject*) const;
+    bool isTargetAlive(control::SpaceObject*) const;
+    bool isTargetInSpace(control::SpaceObject*) const;
+    bool isTargetInSameStarSystem(control::SpaceObject*) const;
+    bool checkDistanceToTarget(control::SpaceObject*) const;
 
     void log(const std::string&) const;
 
     int m_offset = NONE;
     entity::Type m_type = entity::Type::NONE;
     entity::Type m_subtype = entity::Type::NONE;
-
 };
 
-} // namespace control
+} // namespace slot
 

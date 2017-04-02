@@ -24,7 +24,7 @@
 
 #include <ceti/Logger.hpp>
 
-Turrel::Turrel(ItemSlot* slot)
+Turrel::Turrel(slot::ItemSlot* slot)
     :
       ceti::control::Orientation(new ceti::model::Orientation)
 {

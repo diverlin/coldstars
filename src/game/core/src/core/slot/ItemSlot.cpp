@@ -84,11 +84,9 @@
 //} // namespace model
 
 
-namespace control {
+namespace slot {
 
 ItemSlot::ItemSlot(entity::Type subtype)
-    :
-      Base()
 {
     setType(entity::Type::ITEM_SLOT);
     setSubType(subtype);
@@ -111,7 +109,7 @@ void ItemSlot::putChildrenToGarbage() const
 //    }
 }
 
-void ItemSlot::setTarget(SpaceObject* target, ItemSlot* subtarget)
+void ItemSlot::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
 {
     m_target    = target;
     m_subtarget = subtarget;
@@ -185,7 +183,7 @@ bool ItemSlot::checkItemInsertion(control::Item* item) const
     return false;
 }
 
-bool ItemSlot::insert(Item* item)
+bool ItemSlot::insert(control::Item* item)
 {
 //    // make it oop
 //    if (subtype() == entity::Type::GATE_SLOT)
@@ -385,15 +383,15 @@ assert(false);
     return 0;
 }
 
-Item*
+control::Item*
 ItemSlot::takeItem()
 {
-    Item* item = m_item;
+    control::Item* item = m_item;
     removeItem();
     return item;
 }
 
-bool ItemSlot::swapItem(ItemSlot* slot)
+bool ItemSlot::swapItem(slot::ItemSlot* slot)
 {
     assert(slot);
     if ( (m_item == nullptr) && (slot->item() != nullptr) ) {
@@ -409,7 +407,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     }
 
     if ( (m_item != nullptr) && (slot->item() != nullptr) ) {
-        Item* tmp_item = slot->item();
+        control::Item* tmp_item = slot->item();
         if ( (slot->checkItemInsertion(m_item) == true) && (checkItemInsertion(tmp_item) == true) ) {
             slot->insert(m_item);
             tmp_item->setSlot(nullptr);
@@ -443,7 +441,7 @@ void ItemSlot::drawRange(const glm::vec2& offset)
     //m_VisualPath.Draw(offset);
 }
 
-bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
+bool ItemSlot::checkSubTarget(slot::ItemSlot* subtarget) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckSubTarget");
@@ -457,7 +455,7 @@ bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::checkTarget(SpaceObject* target) const
+STATUS ItemSlot::checkTarget(control::SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
@@ -478,11 +476,8 @@ STATUS ItemSlot::checkTarget(SpaceObject* target) const
     return STATUS::TARGET_OK;
 }     
 
-STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
+STATUS ItemSlot::checkTargetPure(control::SpaceObject* target) const
 {
-    assert(false);
-//    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
-
     if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
     }
@@ -495,22 +490,22 @@ STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
     return STATUS::TARGET_OK;
 } 
 
-bool ItemSlot::isTargetAlive(SpaceObject* target) const
+bool ItemSlot::isTargetAlive(control::SpaceObject* target) const
 {
     return target->model()->isAlive();
 }
 
-bool ItemSlot::isTargetInSpace(SpaceObject* target) const
+bool ItemSlot::isTargetInSpace(control::SpaceObject* target) const
 {
     return (target->model()->place() == place::Type::SPACE);
 }               
 
-bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
+bool ItemSlot::isTargetInSameStarSystem(control::SpaceObject* target) const
 {
     return (target->model()->starsystem() == vehicleOwner()->model()->starsystem());
 }                
 
-bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
+bool ItemSlot::checkDistanceToTarget(control::SpaceObject* target) const
 {
     if (target->descriptor()->obType() == entity::Type::STARSYSTEM) {
         return true;
@@ -578,7 +573,7 @@ void ItemSlot::Resolve()
 ////    }
 
 ////    if (m_unresolved_ItemSlot.subtarget_id != NONE) {
-////        m_subtarget = (ItemSlot*)EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
+////        m_subtarget = (slot::ItemSlot*)EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
 ////    }
 
 ////    switch(owner->typeId())
@@ -603,4 +598,4 @@ void ItemSlot::log(const std::string& func_name) const
 //    LOG(str);
 }
 
-} // naespace control
+} // naespace slot

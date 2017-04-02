@@ -116,7 +116,7 @@ Container::__genTemplate(descriptor::Container* descr)
 
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
-//    ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT);
+//    slot::ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT);
 
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);
@@ -138,7 +138,7 @@ Container::__genTemplate(descriptor::Container* descr)
 
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
-//    ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT);
+//    slot::ItemSlot* item_slot = GetNewItemSlot(entity::Type::CARGO_SLOT);
 
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);

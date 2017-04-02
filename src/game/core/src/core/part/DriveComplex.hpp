@@ -27,6 +27,10 @@ namespace control {
 class Vehicle;
 } // namespace control
 
+namespace slot {
+class ItemSlot;
+} // namespace slot
+
 namespace jeti {
 class DriveEffect;
 }
@@ -38,7 +42,6 @@ class Renderer;
 
 namespace control {
 class SpaceObject;
-class ItemSlot;
 } // namespace control
 
 
@@ -55,8 +58,8 @@ public:
     void setOwnerVehicle(control::Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
     void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
-    void addDriveSlot(control::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
-    void addBakSlot(control::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
+    void addDriveSlot(slot::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
+    void addBakSlot(slot::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
     void setTarget(control::SpaceObject*, Action);
     void SetStaticTargetCoords(const glm::vec3&);
@@ -64,8 +67,8 @@ public:
     Action GetActionId() const { return m_action; }
     jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
 
-    std::vector<control::ItemSlot*> driveSlots() const { return m_driveSlots; }
-    std::vector<control::ItemSlot*> bakSlots() const { return m_bakSlots; }
+    std::vector<slot::ItemSlot*> driveSlots() const { return m_driveSlots; }
+    std::vector<slot::ItemSlot*> bakSlots() const { return m_bakSlots; }
 
     control::SpaceObject* target() const { return m_target; }
     Action action() const { return m_action; }
@@ -84,8 +87,8 @@ public:
     void DrawPath(const jeti::Renderer&);
 
 private:
-    std::vector<control::ItemSlot*> m_driveSlots;
-    std::vector<control::ItemSlot*> m_bakSlots;
+    std::vector<slot::ItemSlot*> m_driveSlots;
+    std::vector<slot::ItemSlot*> m_bakSlots;
 
     control::Vehicle* m_ownerVehicle = nullptr;
     control::SpaceObject* m_target = nullptr;

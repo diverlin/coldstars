@@ -29,7 +29,7 @@
 
 
 bool
-WeaponComplex::addSlot(control::ItemSlot* slot)
+WeaponComplex::addSlot(slot::ItemSlot* slot)
 {
     assert(slot);
     m_slots.push_back(slot);
@@ -37,10 +37,10 @@ WeaponComplex::addSlot(control::ItemSlot* slot)
 }
 
 
-control::ItemSlot*
+slot::ItemSlot*
 WeaponComplex::freeSlot() const
 {
-    for(control::ItemSlot* slot: m_slots) {
+    for(slot::ItemSlot* slot: m_slots) {
         if (!slot->item()) {
             return slot;
         }
@@ -49,12 +49,12 @@ WeaponComplex::freeSlot() const
     return nullptr;
 }
 
-control::ItemSlot*
+slot::ItemSlot*
 WeaponComplex::equipedWeakestSlot() const
 {
     int price_min = 0;
-    control::ItemSlot* result = nullptr;
-    for(control::ItemSlot* slot: m_slots) {
+    slot::ItemSlot* result = nullptr;
+    for(slot::ItemSlot* slot: m_slots) {
         if (slot->item()) {
 //            int price = slot->item()->price();
 //            if ((price_min > price) || (price_min == 0)) {
@@ -77,7 +77,7 @@ void WeaponComplex::prepareWeapons()
 void WeaponComplex::__reload()
 {
     m_slots_reloaded.clear();
-    for (control::ItemSlot* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->item()) {
             if (slot->item()->isFunctioning()) {
                 if (slot->checkAmmo()) {
@@ -93,21 +93,21 @@ void WeaponComplex::__reload()
 
 void WeaponComplex::selectAllWeapons()
 {
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         slot->selectEvent();
     }
 }
 
 void WeaponComplex::deactivateWeapons()
 {
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         slot->deselectEvent();
     }
 }
 
 void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
 {
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
             slot->selectEvent();
         }
@@ -116,7 +116,7 @@ void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
 
 void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
 {
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
             slot->deselectEvent();
         }
@@ -125,7 +125,7 @@ void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
 
 bool WeaponComplex::isAnyWeaponSelected() const
 {
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->isSelected() == true) {
             return true;
         }
@@ -136,7 +136,7 @@ bool WeaponComplex::isAnyWeaponSelected() const
 //int WeaponComplex::itemsNum() const
 //{
 //    int itemsNum = 0;
-//    for (ItemSlot* slot: m_slots) {
+//    for (slot::ItemSlot* slot: m_slots) {
 //        if (slot->item()) {
 //            itemsNum++;
 //        }
@@ -144,14 +144,14 @@ bool WeaponComplex::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-void WeaponComplex::setTarget(control::SpaceObject* target, control::ItemSlot* item_slot)
+void WeaponComplex::setTarget(control::SpaceObject* target, slot::ItemSlot* item_slot)
 {                 
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
     //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
 
     //target->remeberAgressor(owner_vehicle);
 
-    for (control::ItemSlot* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->isSelected()) {
             if (slot->item()) {
                 if (slot->item()->isFunctioning()) {
@@ -172,7 +172,7 @@ void WeaponComplex::setTarget(control::SpaceObject* target, control::ItemSlot* i
 int WeaponComplex::guessDamage(int dist = 0)
 {
     int damage = 0;
-    for (control::ItemSlot* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->weapon()->model()->radius() >= dist) {
             damage += slot->weapon()->model()->damage();
         }
@@ -183,9 +183,9 @@ int WeaponComplex::guessDamage(int dist = 0)
 void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
 {
     //if (timer < TURN_TIME - fire_delay) {
-    std::vector<control::ItemSlot*>::iterator it=m_slots_reloaded.begin();
+    std::vector<slot::ItemSlot*>::iterator it=m_slots_reloaded.begin();
         while(it!=m_slots_reloaded.end()) {
-            control::ItemSlot& slot = **it; // shortcut
+            slot::ItemSlot& slot = **it; // shortcut
             if (slot.target()) {
                 if (slot.validateTarget() == STATUS::TARGET_OK) {
                     slot.fireEvent(attack_rate, show_effect);
@@ -205,7 +205,7 @@ void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
 
 void WeaponComplex::__validateTargets()
 {
-    for (control::ItemSlot* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->target()) {
             if (slot->validateTarget() != STATUS::TARGET_OK) {
                 slot->resetTarget();
@@ -219,7 +219,7 @@ void WeaponComplex::updateFireAbility()
     m_damage = 0;
     m_radiusMax = 0;
     m_radiusMin = 0;
-    for (control::ItemSlot* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->item()) {
             if (slot->item()->isFunctioning()) {
                 int radius = slot->itemRadius();
@@ -250,7 +250,7 @@ void WeaponComplex::updateFireAbility()
 
 //void WeaponComplex::RenderWeaponsRange()
 //{
-//    for (ItemSlot* slot: m_slots_reloaded) {
+//    for (slot::ItemSlot* slot: m_slots_reloaded) {
 //        if (slot->isSelected()) {
 //            //slot->UpdateRange(GuiTextureObCollector::Instance().dot_red);
 //            //slot->drawRange(meti::vec2(owner_vehicle->center()));
