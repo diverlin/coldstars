@@ -68,7 +68,7 @@ void Angar::putChildrenToGarbage() const
     //    }
 }
 
-void Angar::add(slot::VehicleSlot* slot)
+void Angar::add(slot::Vehicle* slot)
 {
     slot->setOwner(this);
     m_vehicle_slots.push_back(slot);
