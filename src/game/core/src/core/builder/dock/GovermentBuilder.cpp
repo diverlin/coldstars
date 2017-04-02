@@ -20,23 +20,43 @@
 #include <builder/dock/GovermentBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <dock/Goverment.hpp>
+#include <core/descriptor/dock/Goverment.hpp>
+#include <core/model/dock/Goverment.hpp>
+#include <core/dock/Goverment.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Goverment*
 Goverment::gen()
 {
-    control::Goverment* goverment = __createTemplate();
+    descriptor::Goverment* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::GOVERMENT)) {
+        descr = descriptor::genGoverment();
+    } else {
+        descr = descriptor::Manager::get().randGoverment();
+    }
+    return gen(descr);
+}
+
+control::Goverment*
+Goverment::gen(descriptor::Goverment* descr)
+{
+    control::Goverment* goverment = __createTemplate(descr);
     __createInternals(goverment);
 
     return goverment;
 } 
 
 control::Goverment*
-Goverment::__createTemplate(int_t id)
+Goverment::__createTemplate(descriptor::Goverment* descr)
 {
-    control::Goverment* goverment = new control::Goverment(id);
+    model::Goverment* model = new model::Goverment(descr->id());
+    assert(model);
+
+    control::Goverment* goverment = new control::Goverment(descr, model);
     assert(goverment);
 
     EntityManager::get().reg(goverment);

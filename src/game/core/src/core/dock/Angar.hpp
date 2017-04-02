@@ -20,6 +20,14 @@
 
 #include "Room.hpp"
 
+namespace descriptor {
+class Angar;
+} // namespace descriptor
+
+namespace model {
+class Angar;
+} // namespace model
+
 namespace control {
 
 namespace item {
@@ -35,7 +43,7 @@ class Npc;
 class Angar : public Room
 {
 public:
-    Angar(int id);
+    Angar(descriptor::Angar*, model::Angar*);
     ~Angar();
 
     virtual void putChildrenToGarbage() const;
@@ -71,6 +79,12 @@ private:
     std::vector<ItemSlot*> m_item_slots;
 
     int m_fuelPrice;
+
+    descriptor::Angar* m_descriptor_angar = nullptr;
+    model::Angar* m_model_angar = nullptr;
+
+    descriptor::Angar* desriptor() const { return m_descriptor_angar; }
+    model::Angar* model() const { return m_model_angar; }
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

@@ -42,6 +42,10 @@ class Container;
 // dock
 class Kosmoport;
 class NatureLand;
+class Angar;
+class Store;
+class Shop;
+class Goverment;
 
 namespace item {
 class Bak;
@@ -75,6 +79,10 @@ descriptor::Container* genContainer();
 // dock
 Kosmoport* genKosmoport(race::Type race = race::Type::NONE);
 NatureLand* genNatureLand();
+Angar* genAngar(race::Type race = race::Type::NONE);
+Store* genStore(race::Type race = race::Type::NONE);
+Shop* genShop(race::Type race = race::Type::NONE);
+Goverment* genGoverment(race::Type race = race::Type::NONE);
 
 /* items */
 namespace item {

@@ -24,14 +24,20 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
+#include <core/descriptor/dock/Goverment.hpp>
+#include <core/model/dock/Goverment.hpp>
 
 namespace control {
 
-Goverment::Goverment(int id)
+Goverment::Goverment(descriptor::Goverment* descr, model::Goverment* model)
+    :
+      Room(descr, model)
+    , m_descriptor_goverment(descr)
+    , m_model_goverment(model)
 {
     assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::GOVERMENT);
+    //    setId(id);
+    //    setTypeId(entity::Type::GOVERMENT);
 }
 
 Goverment::~Goverment()
@@ -58,7 +64,7 @@ Goverment::~Goverment()
 //void Goverment::Save(boost::property_tree::ptree& save_ptree) const
 //{
 ////    std::string root = "goverment." + std::to_string(id())+".";
-    
+
 ////    Base::SaveData(save_ptree, root);
 ////    Room::SaveData(save_ptree, root);
 ////    Goverment::SaveData(save_ptree, root);

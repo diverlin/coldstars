@@ -56,6 +56,10 @@ class Satellite;
 // dock
 class Kosmoport;
 class NatureLand;
+class Angar;
+class Store;
+class Shop;
+class Goverment;
 
 namespace item {
 class Scaner;
@@ -104,6 +108,10 @@ public:
     // dock
     Kosmoport* randKosmoport() const;
     NatureLand* randNatureLand() const;
+    Angar* randAngar() const;
+    Store* randStore() const;
+    Shop* randShop() const;
+    Goverment* randGoverment() const;
 
     item::Scaner* randScaner() const;
     item::Drive* randDrive() const;
@@ -131,6 +139,10 @@ public:
     // dock
     Kosmoport* kosmoport(int_t) const;
     NatureLand* natureLand(int_t) const;
+    Angar* angar(int_t) const;
+    Store* store(int_t) const;
+    Shop* shop(int_t) const;
+    Goverment* goverment(int_t) const;
 
     item::Scaner* scaner(int_t) const;
     item::Drive* drive(int_t) const;

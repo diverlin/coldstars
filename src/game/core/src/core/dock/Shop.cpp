@@ -31,9 +31,16 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/pilot/Npc.hpp>
 
+#include <core/descriptor/dock/Shop.hpp>
+#include <core/model/dock/Shop.hpp>
+
 namespace control {
 
-Shop::Shop(int id)
+Shop::Shop(descriptor::Shop* descr, model::Shop* model)
+    :
+      Room(descr, model)
+    , m_descriptor_shop(descr)
+    , m_model_shop(model)
 {
     assert(false);
     //    setId(id);

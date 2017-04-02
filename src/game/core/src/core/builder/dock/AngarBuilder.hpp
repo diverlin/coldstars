@@ -21,6 +21,10 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class Angar;
+} // namespace descriptor
+
 namespace control {
 class Angar;
 } // namespace control
@@ -36,13 +40,14 @@ class Angar
 {
 public:
     static control::Angar* gen();
+    static control::Angar* gen(descriptor::Angar*);
 
 private:
     Angar() = delete;
     ~Angar() = delete;
 
     static void __createInternals(control::Angar*);
-    static control::Angar* __createTemplate(int_t id = NONE);
+    static control::Angar* __createTemplate(descriptor::Angar*);
 }; 
 
 } // namespace builder

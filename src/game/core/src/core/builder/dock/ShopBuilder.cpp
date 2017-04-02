@@ -20,23 +20,43 @@
 #include <builder/dock/ShopBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <dock/Shop.hpp>
+#include <core/descriptor/dock/Shop.hpp>
+#include <core/model/dock/Shop.hpp>
+#include <core/dock/Shop.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Shop*
 Shop::gen()
 {
-    control::Shop* shop = __createTemplate();
+    descriptor::Shop* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::SHOP)) {
+        descr = descriptor::genShop();
+    } else {
+        descr = descriptor::Manager::get().randShop();
+    }
+    return gen(descr);
+}
+
+control::Shop*
+Shop::gen(descriptor::Shop* descr)
+{
+    control::Shop* shop = __createTemplate(descr);
     __createInternals(shop);
 
     return shop;
 }
 
 control::Shop*
-Shop::__createTemplate(int_t id)
+Shop::__createTemplate(descriptor::Shop* descr)
 {
-    control::Shop* shop = new control::Shop(id);
+    model::Shop* model = new model::Shop(descr->id());
+    assert(model);
+
+    control::Shop* shop = new control::Shop(descr, model);
     assert(shop);
 
     EntityManager::get().reg(shop);
