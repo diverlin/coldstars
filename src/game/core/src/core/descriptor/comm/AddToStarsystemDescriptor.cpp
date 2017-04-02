@@ -4,8 +4,8 @@
 
 AddToStarsystemDescriptor::AddToStarsystemDescriptor(int_t owner,
                                                      int_t object,
-                                                     const glm::vec3& position,
-                                                     const glm::vec3& angle)
+                                                     const meti::vec3& position,
+                                                     const meti::vec3& angle)
     :
       owner(owner)
     , object(object)

@@ -886,9 +886,9 @@ void Vehicle::_dockingEvent()
     const auto& target = driveComplex().target();
     assert(target);
 
-    if ((position() - target->position()).length() > 50) {
-        return;
-    }
+//    if ((position() - target->position()).length() > 50) {
+//        return;
+//    }
 
     weaponComplex().deactivateWeapons();
     driveComplex().resetTarget();
