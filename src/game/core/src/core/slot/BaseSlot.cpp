@@ -30,7 +30,7 @@
 namespace slot {
 
 control::Vehicle*
-BaseSlot::vehicleOwner() const {
+Base::vehicleOwner() const {
     control::Vehicle* vehicle = static_cast<control::Vehicle*>(m_owner);
     assert(vehicle);
     return vehicle;

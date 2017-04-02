@@ -88,7 +88,7 @@ namespace control {
 
 ItemSlot::ItemSlot(entity::Type subtype)
     :
-      BaseSlot()
+      Base()
 {
     setType(entity::Type::ITEM_SLOT);
     setSubType(subtype);
