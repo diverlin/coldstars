@@ -62,7 +62,9 @@ namespace control {
 
 Galaxy::Galaxy(model::Galaxy* model)
     :
-      m_model_galaxy(model)
+    Base(model, nullptr)
+    , m_model_galaxy(model)
+
 {
 }
 

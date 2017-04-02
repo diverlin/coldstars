@@ -29,61 +29,15 @@ namespace control {
 class Vehicle;
 } // namespace control
 
+namespace slot {
 
-namespace descriptor {
-
-class BaseSlot : public Base
-{
-public:
-    BaseSlot() = default;
-    ~BaseSlot() = default;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-    }
-};
-
-} // namespace descriptor
-
-
-namespace model {
-
-class BaseSlot : public Base
-{
-public:
-    BaseSlot() = default;
-    ~BaseSlot() = default;
-
-    void setOwner(int_t owner) { m_owner = owner; }
-
-    int_t owner() const { return m_owner; }
-
-private:
-    int_t m_owner = 0;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_owner;
-    }
-};
-
-} // namespace model
-
-namespace control {
-
-class BaseSlot : public Base
+class BaseSlot : public ::Base
 {
 public:
     BaseSlot() = default;
     virtual ~BaseSlot() = default;
 
-    void setOwner(Base* owner) { m_owner = owner; }
+    void setOwner(control::Base* owner) { m_owner = owner; }
     void setPosition(const glm::vec2& position) { m_position = position; }
     void setSelected(bool selected) { m_selected = selected; }
     void selectEvent() { m_selected = true; }
@@ -93,24 +47,19 @@ public:
 
     const glm::vec2& position() const { return m_position; }
 
-    Vehicle* vehicleOwner() const;
+    control::Vehicle* vehicleOwner() const;
 
-    Base* owner() const { return m_owner; }
-
-    model::BaseSlot* model() const { return m_model_baseslot; }
+    control::Base* owner() const { return m_owner; }
 
 private:
-    model::BaseSlot* m_model_baseslot = nullptr;
-
     bool m_selected = false;
 
-    Base* m_owner = nullptr;
+    control::Base* m_owner = nullptr;
 
     glm::vec2 m_position;
 };
 
-
-} // namespace control
+} // namespace slot
 
 //class BaseSlot : public ::control::Base
 //{

@@ -78,7 +78,6 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
-    Base() = default; // needed because we have some control:: without models, such a slots
     Base(model::Base*, descriptor::Base*);
     virtual ~Base();
 
@@ -104,6 +103,19 @@ private:
 } // namespace control
 
 
+class Base : private NonCopyable
+{
+public:
+    Base() = default;
+    virtual ~Base() = default;
+
+    void setId(int_t id) { m_id = id; }
+
+    int_t id() { return m_id; }
+
+private:
+    int_t m_id = NONE;
+};
 
 //namespace core {
 

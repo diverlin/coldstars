@@ -27,7 +27,7 @@ class Vehicle;
 
 namespace slot {
 
-class Vehicle : public control::BaseSlot
+class Vehicle : public BaseSlot
 {
 public:
     Vehicle(int);
