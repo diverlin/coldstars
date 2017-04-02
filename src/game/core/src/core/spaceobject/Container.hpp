@@ -33,9 +33,11 @@ namespace control {
 class Item;
 } // namespace control
 
-namespace control {
-
+namespace slot {
 class ItemSlot;
+} // namespace slot
+
+namespace control {
 
 class Container : public SpaceObject
 {
@@ -43,9 +45,9 @@ public:
     Container(model::Container*, descriptor::Container*);
     virtual ~Container();
 
-    void bindItemSlot(ItemSlot*);
+    void bindItemSlot(slot::ItemSlot*);
 
-    ItemSlot* const itemSlot() const { return m_itemSlot; }
+    slot::ItemSlot* const itemSlot() const { return m_itemSlot; }
     bool insert(Item*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
@@ -65,7 +67,7 @@ private:
     model::Container* m_model_container = nullptr;
     descriptor::Container* m_descriptor_container = nullptr;
 
-    ItemSlot* m_itemSlot = nullptr;
+    slot::ItemSlot* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;
 
@@ -81,9 +83,9 @@ private:
 //    virtual ~Container();
 
 //    void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
-//    void bindItemSlot(ItemSlot*);
+//    void bindItemSlot(slot::ItemSlot*);
 
-//    ItemSlot* const itemSlot() const { return m_itemSlot; }
+//    slot::ItemSlot* const itemSlot() const { return m_itemSlot; }
 //    bool insertItem(item::Base*);
 
 //    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
@@ -101,7 +103,7 @@ private:
 //    virtual void Resolve() override final;
 
 //private:
-//    ItemSlot* m_itemSlot = nullptr;
+//    slot::ItemSlot* m_itemSlot = nullptr;
 
 //    glm::vec3 m_targetPos;
 //    float m_velocity = 0.0f;

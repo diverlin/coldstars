@@ -18,8 +18,11 @@
 
 #pragma once
 
-class ItemSlot; 
-class SpaceObject; 
+namespace slot {
+class ItemSlot;
+} // namespace slot
+
+class SpaceObject;
 //class TextureOb;
 
 #include <ceti/points.hpp>
@@ -29,7 +32,7 @@ class SpaceObject;
 class Turrel : public ceti::control::Orientation
 {
     public:
-        Turrel(ItemSlot*);
+        Turrel(slot::ItemSlot*);
         ~Turrel();
         
         void Render(float);                 
@@ -41,7 +44,7 @@ class Turrel : public ceti::control::Orientation
 //        virtual void Resolve() {}
            
     private:                       
-        ItemSlot* m_slot = nullptr;
+        slot::ItemSlot* m_slot = nullptr;
 }; 
 
 
