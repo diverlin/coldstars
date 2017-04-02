@@ -40,6 +40,7 @@
 #include <core/descriptor/spaceobject/Ship.hpp>
 
 #include <core/manager/EntityManager.hpp>
+#include <core/communication/MessageManager.hpp>
 
 #include <gtest/gtest.h>
 
@@ -218,20 +219,22 @@ TEST(ship, dockingEvent)
     EXPECT_EQ(1, starsystem->ships().size());
     EXPECT_EQ(ship->position(), planet->position());
     EXPECT_EQ(0, int(ship->position().length()));
+    EXPECT_EQ(place::Type::SPACE, ship->place());
+    EXPECT_EQ(nullptr, ship->land());
 
     EXPECT_EQ(ship->driveComplex().target(), nullptr);
     EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::NONE);
 
-    ship->setDockTarget(planet);
+    ship->dock(planet);
 
     EXPECT_EQ(ship->driveComplex().target(), planet);
     EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::DOCKING);
 
-    ship->process();
+    dockShipEvent(ship->id(), planet->land()->id());
 
     EXPECT_EQ(0, starsystem->ships().size());
     EXPECT_EQ(0, int(ship->position().length()));
-
-
+    EXPECT_EQ(place::Type::KOSMOPORT, ship->place());
+    EXPECT_EQ(planet->land(), ship->land());
 }
 

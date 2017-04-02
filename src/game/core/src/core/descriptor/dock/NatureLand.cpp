@@ -18,6 +18,8 @@
 
 #include "NatureLand.hpp"
 
+#include <core/type/PlaceType.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
@@ -26,6 +28,7 @@ NatureLand::NatureLand()
 {
     setType(descriptor::Type::NATURELAND);
     setObType(entity::Type::NATURELAND);
+    setPlace(place::Type::NATURELAND);
 }
 
 NatureLand::NatureLand(const std::string& data)

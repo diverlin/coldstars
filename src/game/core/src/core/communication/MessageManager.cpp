@@ -8,6 +8,7 @@
 #include <core/type/EntityType.hpp> // test
 
 #include <core/descriptor/comm/Hit.hpp>
+#include <core/descriptor/comm/Dock.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
@@ -74,12 +75,12 @@ namespace {
 
 void createStarSystemEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::StarSystem::gen(data.obDescriptor(), data.obId());
+    builder::StarSystem::gen(data.descriptor(), data.object());
 }
 
 void createShipEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::Ship::gen(data.obDescriptor(), data.obId());
+    builder::Ship::gen(data.descriptor(), data.object());
 }
 
 void createBombEvent(const comm::Message& message) {
@@ -95,33 +96,33 @@ void createContainerEvent(const comm::Message& message) {
 // items
 void createBakEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Bak::gen(data.obDescriptor(), data.obId());
+    builder::item::Bak::gen(data.descriptor(), data.object());
 }
 
 // items
 void createDriveEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Drive::gen(data.obDescriptor(), data.obId());
+    builder::item::Drive::gen(data.descriptor(), data.object());
 }
 void createDroidEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Droid::gen(data.obDescriptor(), data.obId());
+    builder::item::Droid::gen(data.descriptor(), data.object());
 }
 void createGrappleEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Grapple::gen(data.obDescriptor(), data.obId());
+    builder::item::Grapple::gen(data.descriptor(), data.object());
 }
 void createProtectorEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Protector::gen(data.obDescriptor(), data.obId());
+    builder::item::Protector::gen(data.descriptor(), data.object());
 }
 void createScanerEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Scaner::gen(data.obDescriptor(), data.obId());
+    builder::item::Scaner::gen(data.descriptor(), data.object());
 }
 void createRadarEvent(const comm::Message& message) {
     descriptor::comm::Creation data(message.data());
-    builder::item::Radar::gen(data.obDescriptor(), data.obId());
+    builder::item::Radar::gen(data.descriptor(), data.object());
 }
 // item
 
@@ -140,56 +141,10 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
 }
 
 /** DOCK */
-void dockShipEvent(const comm::Message& message) {
-    AddToStarsystemDescriptor descriptor(message.data());
-//    control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
-
-    control::Ship* ship = EntityManager::get().ship(descriptor.object);
-
-    control::StarSystem* starsystem = ship->starsystem();
-    assert(starsystem);
-
-    const auto& target = ship->driveComplex().target();
-    assert(target);
-
-    // move inside!!!
-    ship->weaponComplex().deactivateWeapons();
-    ship->driveComplex().resetTarget();
-
-    control::Land* land = nullptr;
-    switch(target->descriptor()->obType()) {
-    case entity::Type::PLANET: {
-        control::Planet* planet = static_cast<control::Planet*>(target);
-        assert(planet);
-        land = planet->land();
-        break;
-    }
-
-    case entity::Type::VEHICLE: {
-        switch(target->descriptor()->obSubType()) {
-        case entity::Type::SPACESTATION:
-        {
-            control::SpaceStation* spacestation = static_cast<control::SpaceStation*>(target);
-            assert(spacestation);
-            land = spacestation->land();
-            break;
-        }
-
-        case entity::Type::SHIP: {
-            //..
-            break;
-        }
-        }
-
-        break;
-    }
-    }
-
-    starsystem->remove(ship);
-    assert(land);
-    land->add(ship);
+void _dockShipEvent(const comm::Message& message) {
+    descriptor::comm::Dock descr(message.data());
+    dockShipEvent(descr.object(), descr.dock());
 }
-
 /** */
 void hitEvent(const comm::Message& message) {
     descriptor::Hit descr(message.data());
@@ -205,6 +160,21 @@ void explosionEvent(const comm::Message& message) {
 }
 
 } // namespace
+
+
+/** DOCK */
+void dockShipEvent(int_t object, int_t dock) {
+    control::Ship* ship = EntityManager::get().ship(object);
+
+    control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
+    starsystem->remove(ship);
+
+    control::Land* land = EntityManager::get().land(dock);
+    assert(land);
+    land->add(ship);
+}
+/** */
 
 void MessageManager::process(const comm::Message& message)
 {
@@ -228,7 +198,7 @@ void MessageManager::process(const comm::Message& message)
     case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
 
     /** DOCK */
-    case comm::Message::Type::DOCK_SHIP: dockShipEvent(message); break;
+    case comm::Message::Type::DOCK_SHIP: _dockShipEvent(message); break;
 
     /** OTHER */
     case comm::Message::Type::HIT: hitEvent(message); break;

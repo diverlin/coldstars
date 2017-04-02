@@ -29,7 +29,7 @@ enum class Type {
     SPACE,
     HYPER,
     KOSMOPORT,
-    LAND
+    NATURELAND
 };
 
 } // namespace place
