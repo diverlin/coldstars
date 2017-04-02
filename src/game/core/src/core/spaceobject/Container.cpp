@@ -42,7 +42,7 @@
 namespace control {
 namespace {
 
-bool itemInsertHelper(slot::ItemSlot* slot, int_t id) {
+bool itemInsertHelper(slot::Item* slot, int_t id) {
     control::Base* model_base = EntityManager::get().get(id);
     descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
@@ -94,7 +94,7 @@ Container::Container(model::Container* _model, descriptor::Container* descr)
     , m_descriptor_container(descr)
 {
 
-    slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::CARGO_SLOT);
+    slot::Item* slot = new slot::Item(entity::Type::CARGO_SLOT);
     bindItemSlot(slot);
 
     if (model()->item() != NONE) {
@@ -134,7 +134,7 @@ void Container::hit(int damage) {
 //    }
 }
             
-void Container::bindItemSlot(slot::ItemSlot* item_slot)
+void Container::bindItemSlot(slot::Item* item_slot)
 {
     m_itemSlot = item_slot;
     m_itemSlot->setOwner(this);

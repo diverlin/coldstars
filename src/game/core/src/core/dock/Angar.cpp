@@ -75,7 +75,7 @@ void Angar::add(slot::Vehicle* slot)
 };
 
 
-void Angar::add(slot::ItemSlot* slot)
+void Angar::add(slot::Item* slot)
 {
     slot->setOwner(this);
     m_item_slots.push_back(slot);

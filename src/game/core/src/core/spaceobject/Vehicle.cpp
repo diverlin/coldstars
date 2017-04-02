@@ -231,29 +231,29 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     // WEAPON SLOTS
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::WEAPON_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::WEAPON_SLOT);
         //slot->setSubSubType(SLOT_WEAPON_TYPES[i]);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->radarSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::RADAR_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::RADAR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->scanerSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::SCANER_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::SCANER_SLOT);
         addItemSlot(slot);
     }
 
 
     for (int i=0; i<descr->grappleSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::GRAPPLE_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::GRAPPLE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->droidSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::DROID_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::DROID_SLOT);
         addItemSlot(slot);
     }
 
@@ -270,17 +270,17 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 #endif // USE_EXTRA_EQUIPMENT
 
     for (int i=0; i<descr->protectorSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::PROTECTOR_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::PROTECTOR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->driveSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::DRIVE_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::DRIVE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->bakSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::BAK_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::BAK_SLOT);
         addItemSlot(slot);
     }
 
@@ -295,7 +295,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     //////// OTSEC SLOT ////////////////////////////////
     for (int i=0; i<descr->cargoSlotNum(); i++) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Type::CARGO_SLOT);
+        slot::Item* slot = new slot::Item(entity::Type::CARGO_SLOT);
         //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
         addItemSlot(slot);
     }
@@ -326,7 +326,7 @@ void Vehicle::fire(int timer, float attack_rate)
     weaponComplex().fire(timer, attack_rate, false);
 }
 
-void Vehicle::setWeaponTarget(SpaceObject* object, slot::ItemSlot* slot)
+void Vehicle::setWeaponTarget(SpaceObject* object, slot::Item* slot)
 {
     weaponComplex().setTarget(object, slot);
 }
@@ -399,7 +399,7 @@ bool Vehicle::isSlotTypePresent(const entity::Type& slot_subtype_id) const
     return false;
 }
 
-void Vehicle::addItemSlot(slot::ItemSlot* slot)
+void Vehicle::addItemSlot(slot::Item* slot)
 {
     slot->setOwner(this);
 
@@ -522,7 +522,7 @@ bool Vehicle::__installEquipment(Item* item)
 {
     // todo simplify logic
 
-    slot::ItemSlot* slot = __freeFunctionalSlot(item->descriptor()->slotType());
+    slot::Item* slot = __freeFunctionalSlot(item->descriptor()->slotType());
     if (slot) {
         return slot->insert(item);
     }
@@ -601,10 +601,10 @@ bool Vehicle::installArtefact(item::Base* item)
 }
 #endif
 
-slot::ItemSlot*
+slot::Item*
 Vehicle::__freeFunctionalSlot(const entity::Type& function) const
 {
-    for(slot::ItemSlot* slot: m_equipmentSlots) {
+    for(slot::Item* slot: m_equipmentSlots) {
         if ( slot->subtype() == function && !slot->item() ) {
             return slot;
         }
@@ -612,10 +612,10 @@ Vehicle::__freeFunctionalSlot(const entity::Type& function) const
     return nullptr;
 }
 
-slot::ItemSlot*
+slot::Item*
 Vehicle::_freeArtefactSlot() const
 {
-    for(slot::ItemSlot* slot: m_artefactSlots) {
+    for(slot::Item* slot: m_artefactSlots) {
         if (!slot->item()) {
             return slot;
         }
@@ -623,10 +623,10 @@ Vehicle::_freeArtefactSlot() const
     return nullptr;
 }
 
-slot::ItemSlot*
+slot::Item*
 Vehicle::__freeCargoSlot()
 {
-    for (slot::ItemSlot* slot: m_cargoSlots) {
+    for (slot::Item* slot: m_cargoSlots) {
         if (!slot->item()) {
             return slot;
         }
@@ -634,7 +634,7 @@ Vehicle::__freeCargoSlot()
     return nullptr;
 }
 
-slot::ItemSlot*
+slot::Item*
 Vehicle::_cargoSlotWithGoods(place::Type requested_goods_subtype_id)
 {
     assert(false);
@@ -680,10 +680,10 @@ Vehicle::_cargoSlotWithGoods(place::Type requested_goods_subtype_id)
 //    return added;
 //}
 
-slot::ItemSlot*
+slot::Item*
 Vehicle::__itemSlot(int id) const
 {
-    std::map<int, slot::ItemSlot*>::const_iterator it = m_slots.find(id);
+    std::map<int, slot::Item*>::const_iterator it = m_slots.find(id);
     if (it != m_slots.end()) {
         return it->second;
     }
@@ -693,7 +693,7 @@ Vehicle::__itemSlot(int id) const
 }
 
 bool
-Vehicle::__insertItem(slot::ItemSlot* slot, Item* item)
+Vehicle::__insertItem(slot::Item* slot, Item* item)
 {
     if (!slot) {
         return false;
@@ -712,7 +712,7 @@ bool
 Vehicle::install(Item* item)
 {
     if (item->descriptor()->obType() == entity::Type::EQUIPMENT) {
-        slot::ItemSlot* slot = __freeFunctionalSlot(item->descriptor()->slotType());
+        slot::Item* slot = __freeFunctionalSlot(item->descriptor()->slotType());
         return __insertItem(slot, item);
     }
     return false;
@@ -721,7 +721,7 @@ Vehicle::install(Item* item)
 bool
 Vehicle::load(Item* item)
 {
-    slot::ItemSlot* slot = __freeCargoSlot();
+    slot::Item* slot = __freeCargoSlot();
     return __insertItem(slot, item);
 }
 
@@ -739,7 +739,7 @@ Vehicle::manage(Item* item)
 
 void Vehicle::manageItemsInCargo()
 {
-    for (slot::ItemSlot* slot: m_cargoSlots) {
+    for (slot::Item* slot: m_cargoSlots) {
         if (slot->item()) {
             __installItem(slot->item());
         }
@@ -748,7 +748,7 @@ void Vehicle::manageItemsInCargo()
 
 void Vehicle::sellItemsInCargo()
 {
-    for (slot::ItemSlot* slot: m_cargoSlots) {
+    for (slot::Item* slot: m_cargoSlots) {
         if (slot->item()) {
             sellItem(slot->item());
         }
@@ -1047,7 +1047,7 @@ void Vehicle::CheckNeedsInStatic()
 
     //check item damages
     needs().repair_equipment = false;
-    for (slot::ItemSlot* slot: m_equipmentSlots) {
+    for (slot::Item* slot: m_equipmentSlots) {
         if (slot->item()) {
             if (slot->item()->isDamaged()) {
                 needs().repair_equipment = true;
@@ -1110,7 +1110,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
 
     // buy ammo
     if ( (needs().get_ammo == true) && (result == true) ) {
-        for (slot::ItemSlot* slot: m_equipmentSlots) {
+        for (slot::Item* slot: m_equipmentSlots) {
             if (slot->item()) {
                 assert(false);
 //                if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
@@ -1174,9 +1174,9 @@ void Vehicle::_updatePropSpeed()
     LOG("Vehicle("+std::to_string(model()->id())+")::UpdatePropertiesSpeed");
     float speed = 0.0f;
 
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
     float actual_speed = 0.0f;
-    for (slot::ItemSlot* slot: slots) {
+    for (slot::Item* slot: slots) {
         actual_speed += slot->driveEquipment()->model()->speed();
     }
 
@@ -1217,8 +1217,8 @@ void Vehicle::_updatePropRadar()
     int radius = 0;
     bool equipment_radar = false;
 
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(m_radarSlots);
-    for(slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_radarSlots);
+    for(slot::Item* slot: slots) {
         radius += slot->radarEquipment()->model()->radius();
     }
 
@@ -1233,13 +1233,13 @@ void Vehicle::_updatePropJump()
     int hyper = 0;
     int fuel = 0;
 
-    std::vector<slot::ItemSlot*> drive_slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
-    for(slot::ItemSlot* slot: drive_slots) {
+    std::vector<slot::Item*> drive_slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
+    for(slot::Item* slot: drive_slots) {
         hyper += slot->driveEquipment()->model()->hyper();
     }
 
-    std::vector<slot::ItemSlot*> bak_slots = __equipedAndFunctionalSlots(driveComplex().bakSlots());
-    for(slot::ItemSlot* slot: bak_slots) {
+    std::vector<slot::Item*> bak_slots = __equipedAndFunctionalSlots(driveComplex().bakSlots());
+    for(slot::Item* slot: bak_slots) {
         fuel += slot->bakEquipment()->model()->fuel();
     }
 
@@ -1254,8 +1254,8 @@ void Vehicle::_updatePropProtection()
     //properties().shield_effect_enabled = false;
 
     //    if (!properties().hibernate_mode_enabled) {
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(protectorComplex().protectorSlots());
-    for(slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(protectorComplex().protectorSlots());
+    for(slot::Item* slot: slots) {
         protection += slot->protectorEquipment()->model()->protection();
         // properties().shield_effect_enabled = true;
     }
@@ -1274,8 +1274,8 @@ void Vehicle::_updatePropRepair()
 
     int repair = 0;
 
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(m_droidSlots);
-    for(slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_droidSlots);
+    for(slot::Item* slot: slots) {
         repair = slot->droidEquipment()->model()->repair();
     }
 
@@ -1340,8 +1340,8 @@ void Vehicle::_updatePropScan()
 
     int scan = 0;
 
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(m_scanerSlots);
-    for(slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_scanerSlots);
+    for(slot::Item* slot: slots) {
         scan += slot->scanerEquipment()->model()->scan();
     }
 
@@ -1355,8 +1355,8 @@ void Vehicle::_updatePropGrab()
     int strength = 0;
     int radius = 0;
 
-    std::vector<slot::ItemSlot*> slots = __equipedAndFunctionalSlots(m_grappleSlots);
-    for (slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_grappleSlots);
+    for (slot::Item* slot: slots) {
         strength += slot->grappleEquipment()->model()->strength();
         radius += slot->grappleEquipment()->model()->radius();
     }
@@ -1543,7 +1543,7 @@ int Vehicle::fuelMiss() const
 
 void Vehicle::lockRandomItem(int locked_turns)
 {
-    std::vector<slot::ItemSlot*> _equiped_slot_vec;
+    std::vector<slot::Item*> _equiped_slot_vec;
 
     for (unsigned int i=0; i<m_equipmentSlots.size(); i++)
     {
@@ -1618,7 +1618,7 @@ STATUS Vehicle::CheckGrabStatus() const
 {
     STATUS status = STATUS::ITEM_OK;
 
-    for(slot::ItemSlot* slot: m_grappleSlots) {
+    for(slot::Item* slot: m_grappleSlots) {
         if (slot->item()) {
             assert(false);
     //        if (m_grappleSlot->grappleEquipment()->isDamaged() == true) {
@@ -1636,15 +1636,15 @@ STATUS Vehicle::CheckGrabStatus() const
     return status;
 }
 
-std::vector<slot::ItemSlot*>
+std::vector<slot::Item*>
 Vehicle::__equipedSlotsByType(const entity::Type& type) {
-    std::vector<slot::ItemSlot*> result;
-    for(slot::ItemSlot* slot: m_equipmentSlots) {
+    std::vector<slot::Item*> result;
+    for(slot::Item* slot: m_equipmentSlots) {
         if (slot->subtype() == type && slot->item()) {
             result.push_back(slot);
         }
     }
-    for(slot::ItemSlot* slot: m_cargoSlots) {
+    for(slot::Item* slot: m_cargoSlots) {
         if (slot->item()) {
             result.push_back(slot);
         }
@@ -1658,7 +1658,7 @@ Vehicle::dropItemToSpace(const entity::Type& type)
     if (model()->place() != place::Type::SPACE)
         return false;
 
-    for (slot::ItemSlot* slot: __equipedSlotsByType(type)) {
+    for (slot::Item* slot: __equipedSlotsByType(type)) {
         if (slot->subtype() == type && slot->item()) {
             Item* item = slot->takeItem();
             Container* container = __wrapItemToContainer(item);
@@ -1704,10 +1704,10 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 }
 
 
-std::vector<slot::ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<slot::ItemSlot*>& slots)
+std::vector<slot::Item*> Vehicle::__equipedAndFunctionalSlots(const std::vector<slot::Item*>& slots)
 {
-    std::vector<slot::ItemSlot*> result;
-    for(slot::ItemSlot* slot: slots) {
+    std::vector<slot::Item*> result;
+    for(slot::Item* slot: slots) {
         if (slot->item()) {
             if (slot->item()->isFunctioning()) {
                 result.push_back(slot);

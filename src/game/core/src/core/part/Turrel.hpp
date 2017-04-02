@@ -19,7 +19,7 @@
 #pragma once
 
 namespace slot {
-class ItemSlot;
+class Item;
 } // namespace slot
 
 class SpaceObject;
@@ -32,7 +32,7 @@ class SpaceObject;
 class Turrel : public ceti::control::Orientation
 {
     public:
-        Turrel(slot::ItemSlot*);
+        Turrel(slot::Item*);
         ~Turrel();
         
         void Render(float);                 
@@ -44,7 +44,7 @@ class Turrel : public ceti::control::Orientation
 //        virtual void Resolve() {}
            
     private:                       
-        slot::ItemSlot* m_slot = nullptr;
+        slot::Item* m_slot = nullptr;
 }; 
 
 

@@ -87,7 +87,7 @@ NatureLand::__createInternals(control::NatureLand* natureland)
     
     unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++) {
-        slot::ItemSlot* item_slot = new slot::ItemSlot(entity::Type::CARGO_SLOT);
+        slot::Item* item_slot = new slot::Item(entity::Type::CARGO_SLOT);
         natureland->add(item_slot);
     }
     

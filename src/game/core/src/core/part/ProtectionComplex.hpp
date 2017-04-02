@@ -25,7 +25,7 @@
 #include <vector>
 
 namespace slot {
-class ItemSlot; 
+class Item;
 } // namespace slot
 
 class ProtectionComplex
@@ -35,15 +35,15 @@ public:
     ~ProtectionComplex();
 
 //    void setOwnerVehicle(control::Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
-    void addProtectorSlot(slot::ItemSlot* slot) { m_protectorSlots.push_back(slot); }
+    void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
 
-    std::vector<slot::ItemSlot*> protectorSlots() const { return m_protectorSlots; }
+    std::vector<slot::Item*> protectorSlots() const { return m_protectorSlots; }
     //        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
 private:
 //    control::Vehicle* m_owner_vehicle = nullptr;
 
-    std::vector<slot::ItemSlot*> m_protectorSlots;
+    std::vector<slot::Item*> m_protectorSlots;
     //            ShieldEffect* shield_effect;
 };
 

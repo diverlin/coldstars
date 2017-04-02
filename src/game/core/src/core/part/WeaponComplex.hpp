@@ -34,7 +34,7 @@ class SpaceObject;
 } // namespace control
 
 namespace slot {
-class ItemSlot;
+class Item;
 } // namespace slot
 
 class WeaponComplex
@@ -47,15 +47,15 @@ public:
     int radiusMax() const { return m_radiusMax; }
     int damage() const { return m_damage; }
 
-    std::vector<slot::ItemSlot*> weaponSlots() const { return m_slots; }
+    std::vector<slot::Item*> weaponSlots() const { return m_slots; }
 
-    bool addSlot(slot::ItemSlot*);
-    slot::ItemSlot* freeSlot() const;
-    slot::ItemSlot* equipedWeakestSlot() const;
+    bool addSlot(slot::Item*);
+    slot::Item* freeSlot() const;
+    slot::Item* equipedWeakestSlot() const;
     
     void prepareWeapons();
 
-    void setTarget(control::SpaceObject*, slot::ItemSlot* item_slot = nullptr);
+    void setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
 
     void fire(int, float, bool);
 
@@ -84,8 +84,8 @@ private:
 //    Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
-    std::vector<slot::ItemSlot*> m_slots;
-    std::vector<slot::ItemSlot*> m_slots_reloaded;
+    std::vector<slot::Item*> m_slots;
+    std::vector<slot::Item*> m_slots_reloaded;
 
     void __reload();
     void __validateTargets();

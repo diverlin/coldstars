@@ -30,7 +30,7 @@ class NatureLand;
 } // namespace model
 
 namespace slot {
-class ItemSlot;
+class Item;
 } // namespace slot
 
 namespace control {
@@ -49,7 +49,7 @@ public:
 
     //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-    void add(slot::ItemSlot*);
+    void add(slot::Item*);
 
     bool add(control::Item*);
     bool canAcceptNewItem() const;
@@ -74,7 +74,7 @@ private:
     //jeti::control::TextureOb* textureOb_background;
 
     std::vector<Vehicle*> m_vehicles;
-    std::vector<slot::ItemSlot*> m_itemslots;
+    std::vector<slot::Item*> m_itemslots;
 
     model::NatureLand* m_model_natureland = nullptr;
     descriptor::NatureLand* m_descriptor_natureland = nullptr;

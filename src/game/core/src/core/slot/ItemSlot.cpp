@@ -86,7 +86,7 @@
 
 namespace slot {
 
-ItemSlot::ItemSlot(entity::Type subtype)
+Item::Item(entity::Type subtype)
 {
     setType(entity::Type::ITEM_SLOT);
     setSubType(subtype);
@@ -95,13 +95,13 @@ ItemSlot::ItemSlot(entity::Type subtype)
 }
 
 /* virtual */
-ItemSlot::~ItemSlot()
+Item::~Item()
 {
 //    LOG("___::~ItemSlot("+std::to_string(id())+")");
 }  
 
 /* virtual */  
-void ItemSlot::putChildrenToGarbage() const
+void Item::putChildrenToGarbage() const
 {
     assert(false);
 //    if (m_item) {
@@ -109,13 +109,13 @@ void ItemSlot::putChildrenToGarbage() const
 //    }
 }
 
-void ItemSlot::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
+void Item::setTarget(control::SpaceObject* target, slot::Item* subtarget)
 {
     m_target    = target;
     m_subtarget = subtarget;
 }
 
-STATUS ItemSlot::validateTarget()
+STATUS Item::validateTarget()
 {       
     if (m_subtarget) {
         if (!checkSubTarget(m_subtarget)) {
@@ -131,13 +131,13 @@ STATUS ItemSlot::validateTarget()
     return status;
 }
 
-void ItemSlot::resetTarget()
+void Item::resetTarget()
 { 
     m_target    = nullptr;
     m_subtarget = nullptr;
 }
 
-bool ItemSlot::checkAmmo() const
+bool Item::checkAmmo() const
 {
     assert(false);
 //    switch(item()->subtype()) {
@@ -148,7 +148,7 @@ bool ItemSlot::checkAmmo() const
     return false;
 }
 
-void ItemSlot::fireEvent(float attack_rate, bool show_effect)
+void Item::fireEvent(float attack_rate, bool show_effect)
 {
     assert(false);
 //    switch(item()->subtype())
@@ -169,7 +169,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 //    }
 }
 
-bool ItemSlot::checkItemInsertion(control::Item* item) const
+bool Item::checkItemInsertion(control::Item* item) const
 {
     assert(false);
 //    if (subtype() == entity::Type::CARGO_SLOT) {
@@ -183,7 +183,7 @@ bool ItemSlot::checkItemInsertion(control::Item* item) const
     return false;
 }
 
-bool ItemSlot::insert(control::Item* item)
+bool Item::insert(control::Item* item)
 {
 //    // make it oop
 //    if (subtype() == entity::Type::GATE_SLOT)
@@ -211,7 +211,7 @@ bool ItemSlot::insert(control::Item* item)
     return false;
 }
 
-void ItemSlot::removeItem()
+void Item::removeItem()
 {    
     // make it oop
     m_item = nullptr;
@@ -222,7 +222,7 @@ void ItemSlot::removeItem()
     }
 }
 
-void ItemSlot::selectEvent()
+void Item::selectEvent()
 {
     // make it oop
     setSelected(true);
@@ -235,7 +235,7 @@ void ItemSlot::selectEvent()
 //    }
 }
 
-void ItemSlot::deselectEvent()
+void Item::deselectEvent()
 {
     // make it oop
     setSelected(false);
@@ -258,7 +258,7 @@ void ItemSlot::deselectEvent()
 
 }
 
-void ItemSlot::updateVehiclePropetries() const
+void Item::updateVehiclePropetries() const
 {
     // TODO: make it oop
     assert(vehicleOwner());
@@ -322,7 +322,7 @@ void ItemSlot::updateVehiclePropetries() const
 //    render.DrawQuad(*textureOb_mask, box);
 //}
 
-int ItemSlot::itemRadius() const
+int Item::itemRadius() const
 {       
     switch(m_item->descriptor()->obType())
     {
@@ -354,7 +354,7 @@ int ItemSlot::itemRadius() const
     return 0;
 }
 
-int ItemSlot::itemDamage() const
+int Item::itemDamage() const
 {       
     switch(m_item->descriptor()->obType())
     {
@@ -384,14 +384,14 @@ assert(false);
 }
 
 control::Item*
-ItemSlot::takeItem()
+Item::takeItem()
 {
     control::Item* item = m_item;
     removeItem();
     return item;
 }
 
-bool ItemSlot::swapItem(slot::ItemSlot* slot)
+bool Item::swapItem(slot::Item* slot)
 {
     assert(slot);
     if ( (m_item == nullptr) && (slot->item() != nullptr) ) {
@@ -436,12 +436,12 @@ bool ItemSlot::swapItem(slot::ItemSlot* slot)
 //    //    m_VisualPath.FillData(_texOb, radius, size);
 //}
 
-void ItemSlot::drawRange(const glm::vec2& offset)
+void Item::drawRange(const glm::vec2& offset)
 { 
     //m_VisualPath.Draw(offset);
 }
 
-bool ItemSlot::checkSubTarget(slot::ItemSlot* subtarget) const
+bool Item::checkSubTarget(slot::Item* subtarget) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckSubTarget");
@@ -455,7 +455,7 @@ bool ItemSlot::checkSubTarget(slot::ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::checkTarget(control::SpaceObject* target) const
+STATUS Item::checkTarget(control::SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
@@ -476,7 +476,7 @@ STATUS ItemSlot::checkTarget(control::SpaceObject* target) const
     return STATUS::TARGET_OK;
 }     
 
-STATUS ItemSlot::checkTargetPure(control::SpaceObject* target) const
+STATUS Item::checkTargetPure(control::SpaceObject* target) const
 {
     if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
@@ -490,22 +490,22 @@ STATUS ItemSlot::checkTargetPure(control::SpaceObject* target) const
     return STATUS::TARGET_OK;
 } 
 
-bool ItemSlot::isTargetAlive(control::SpaceObject* target) const
+bool Item::isTargetAlive(control::SpaceObject* target) const
 {
     return target->model()->isAlive();
 }
 
-bool ItemSlot::isTargetInSpace(control::SpaceObject* target) const
+bool Item::isTargetInSpace(control::SpaceObject* target) const
 {
     return (target->model()->place() == place::Type::SPACE);
 }               
 
-bool ItemSlot::isTargetInSameStarSystem(control::SpaceObject* target) const
+bool Item::isTargetInSameStarSystem(control::SpaceObject* target) const
 {
     return (target->model()->starsystem() == vehicleOwner()->model()->starsystem());
 }                
 
-bool ItemSlot::checkDistanceToTarget(control::SpaceObject* target) const
+bool Item::checkDistanceToTarget(control::SpaceObject* target) const
 {
     if (target->descriptor()->obType() == entity::Type::STARSYSTEM) {
         return true;
@@ -521,7 +521,7 @@ bool ItemSlot::checkDistanceToTarget(control::SpaceObject* target) const
 }
 
 /* virtual override final */
-void ItemSlot::Save(boost::property_tree::ptree& save_ptree) const
+void Item::Save(boost::property_tree::ptree& save_ptree) const
 {
 //    const std::string root = "item_slot." + std::to_string(id()) + ".";
 //    Base::SaveData(save_ptree, root);
@@ -530,7 +530,7 @@ void ItemSlot::Save(boost::property_tree::ptree& save_ptree) const
 }
 
 /* virtual override final */      
-void ItemSlot::Load(const boost::property_tree::ptree& load_ptree)
+void Item::Load(const boost::property_tree::ptree& load_ptree)
 {
 //    Base::LoadData(load_ptree);
 //    BaseSlot::LoadData(load_ptree);
@@ -538,7 +538,7 @@ void ItemSlot::Load(const boost::property_tree::ptree& load_ptree)
 }
 
 /* virtual override final */ 
-void ItemSlot::Resolve()
+void Item::Resolve()
 {
 //    Base::ResolveData();
 //    BaseSlot::ResolveData();
@@ -586,7 +586,7 @@ void ItemSlot::Resolve()
 ////    }
 //}
 
-void ItemSlot::log(const std::string& func_name) const
+void Item::log(const std::string& func_name) const
 {
 //    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
     

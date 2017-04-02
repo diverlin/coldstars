@@ -31,7 +31,7 @@ class Store;
 
 namespace slot {
 class Vehicle;
-class ItemSlot;
+class Item;
 } // namespace slot
 
 namespace control {
@@ -51,7 +51,7 @@ public:
     bool add(Item*);
     bool add(Vehicle*);
 
-    slot::ItemSlot* freeItemSlot() const;
+    slot::Item* freeItemSlot() const;
     slot::Vehicle* freeVehicleSlot() const;
 
     int buyItem(Item*);
@@ -62,7 +62,7 @@ public:
 //    void Resolve();
 
 private:
-    std::vector<slot::ItemSlot*> m_item_slots;
+    std::vector<slot::Item*> m_item_slots;
     std::vector<slot::Vehicle*> m_vehicle_slots;
 
     descriptor::Store* m_descriptor_store = nullptr;
@@ -78,7 +78,7 @@ private:
 //    friend class GuiStore;
 
     void __add(slot::Vehicle*);
-    void __add(slot::ItemSlot*);
+    void __add(slot::Item*);
 };
 
 } // namespace control

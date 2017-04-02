@@ -130,11 +130,11 @@ class GoodsPack;
 
 namespace slot {
 
-class ItemSlot : public Base
+class Item : public Base
 {
 public:
-    ItemSlot(entity::Type subtype_id);
-    virtual ~ItemSlot();
+    Item(entity::Type subtype_id);
+    virtual ~Item();
 
     void setOffset(int offset) { m_offset = offset; }
     void setType(entity::Type type) { m_type = type; }
@@ -146,11 +146,11 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget = nullptr);
+    void setTarget(control::SpaceObject* target, slot::Item* subtarget = nullptr);
     void setTurrel(Turrel* turrel) { m_turrel = turrel; }
 
     control::SpaceObject* target() const { return m_target; }
-    slot::ItemSlot* subtarget() const { return m_subtarget; }
+    slot::Item* subtarget() const { return m_subtarget; }
 
     int hitProbability() const { return m_hitProbability; }
 
@@ -208,12 +208,12 @@ public:
 
     control::Item* takeItem();
 
-    bool swapItem(slot::ItemSlot*);
+    bool swapItem(slot::Item*);
 
 //    void updateRange(jeti::control::Material*);
     void drawRange(const glm::vec2&);
 
-    bool checkSubTarget(slot::ItemSlot*) const;
+    bool checkSubTarget(slot::Item*) const;
     STATUS checkTarget(control::SpaceObject*) const;
     STATUS checkTargetPure(control::SpaceObject*) const;
 
@@ -237,7 +237,7 @@ private:
     control::Item* m_item = nullptr;
 
     control::SpaceObject* m_target = nullptr;
-    slot::ItemSlot* m_subtarget = nullptr;
+    slot::Item* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
