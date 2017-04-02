@@ -24,6 +24,7 @@ namespace model {
 
 class Goverment : public Room
 {
+public:
     Goverment(int_t);
     ~Goverment() = default;
     Goverment(const std::string& data);

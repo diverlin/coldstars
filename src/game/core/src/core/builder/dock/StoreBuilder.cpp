@@ -34,30 +34,48 @@
 #include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <dock/Store.hpp>
+#include <core/descriptor/dock/Store.hpp>
+#include <core/model/dock/Store.hpp>
+#include <core/dock/Store.hpp>
 
 #include <core/spaceobject/Ship.hpp>
 
 #include <common/constants.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Store*
 Store::gen()
 {
-    control::Store* store = __createTemplate();
+    descriptor::Store* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::STORE)) {
+        descr = descriptor::genStore();
+    } else {
+        descr = descriptor::Manager::get().randStore();
+    }
+    return gen(descr);
+} 
+
+control::Store*
+Store::gen(descriptor::Store* descr)
+{
+    control::Store* store = __createTemplate(descr);
     __createInternals(store);
     __putRandomEquipment(store);
 
     return store;
-} 
+}
 
 control::Store*
-Store::__createTemplate(int_t id)
+Store::__createTemplate(descriptor::Store* descr)
 {
-    control::Store* store = new control::Store(id);
+    model::Store* model = new model::Store(descr->id());
+    assert(model);
+
+    control::Store* store = new control::Store(descr, model);
     assert(store);
 
     EntityManager::get().reg(store);

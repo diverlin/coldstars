@@ -241,6 +241,34 @@ Manager::randNatureLand() const
     assert(descr);
     return descr;
 }
+Angar*
+Manager::randAngar() const
+{
+    Angar* descr = static_cast<Angar*>(rand(Type::ANGAR));
+    assert(descr);
+    return descr;
+}
+Store*
+Manager::randStore() const
+{
+    Store* descr = static_cast<Store*>(rand(Type::STORE));
+    assert(descr);
+    return descr;
+}
+Shop*
+Manager::randShop() const
+{
+    Shop* descr = static_cast<Shop*>(rand(Type::SHOP));
+    assert(descr);
+    return descr;
+}
+Goverment*
+Manager::randGoverment() const
+{
+    Goverment* descr = static_cast<Goverment*>(rand(Type::GOVERMENT));
+    assert(descr);
+    return descr;
+}
 
 // items
 item::Scaner*
@@ -410,6 +438,35 @@ Manager::natureLand(int_t id) const
     assert(descr);
     return descr;
 }
+Angar*
+Manager::angar(int_t id) const
+{
+    Angar* descr = static_cast<Angar*>(get(id));
+    assert(descr);
+    return descr;
+}
+Store*
+Manager::store(int_t id) const
+{
+    Store* descr = static_cast<Store*>(get(id));
+    assert(descr);
+    return descr;
+}
+Shop*
+Manager::shop(int_t id) const
+{
+    Shop* descr = static_cast<Shop*>(get(id));
+    assert(descr);
+    return descr;
+}
+Goverment*
+Manager::goverment(int_t id) const
+{
+    Goverment* descr = static_cast<Goverment*>(get(id));
+    assert(descr);
+    return descr;
+}
+
 
 // items
 item::Scaner*

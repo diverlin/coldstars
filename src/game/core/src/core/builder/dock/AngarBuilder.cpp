@@ -24,23 +24,42 @@
 
 #include <core/slot/VehicleSlot.hpp>
 
-#include <dock/Angar.hpp>
+#include <core/descriptor/dock/Angar.hpp>
+#include <core/model/dock/Angar.hpp>
+#include <core/dock/Angar.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Angar*
 Angar::gen()
 {
-    control::Angar* angar = __createTemplate();
-    __createInternals(angar);
-
-    return angar;
+    descriptor::Angar* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::ANGAR)) {
+        descr = descriptor::genAngar();
+    } else {
+        descr = descriptor::Manager::get().randAngar();
+    }
+    return gen(descr);
 } 
 
 control::Angar*
-Angar::__createTemplate(int_t id)
+Angar::gen(descriptor::Angar* descr)
 {
-    control::Angar* angar = new control::Angar(id);
+    control::Angar* angar = __createTemplate(descr);
+    __createInternals(angar);
+    return angar;
+}
+
+control::Angar*
+Angar::__createTemplate(descriptor::Angar* descr)
+{
+    model::Angar* model = new model::Angar(descr->id());
+    assert(model);
+
+    control::Angar* angar = new control::Angar(descr, model);
     assert(angar);
 
     EntityManager::get().reg(angar);

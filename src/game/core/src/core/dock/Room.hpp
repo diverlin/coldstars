@@ -20,19 +20,14 @@
 #pragma once
 
 #include "../common/Base.hpp"
-//#include <ceti/rect.hpp>
 
-//namespace jeti {
-//namespace control {
-//class Material;
-//} // namespace control
-//}
+namespace descriptor {
+class Room;
+} // namespace descriptor
 
-//struct UnresolvedDataRoom
-//{
-//    std::string textureOb_background_path;
-//    int owner_kosmoport_id;
-//};
+namespace model {
+class Room;
+} // model descriptor
 
 namespace control {
 
@@ -41,7 +36,7 @@ class Kosmoport;
 class Room : public Base
 {
 public:
-    Room() = default;
+    Room(descriptor::Room*, model::Room*);
     ~Room() = default;
 
     virtual void putChildrenToGarbage() const {}
@@ -56,6 +51,12 @@ public:
 
 protected:
     Kosmoport* m_kosmoport = nullptr;
+
+    descriptor::Room* m_descriptor_room = nullptr;
+    model::Room* m_model_room = nullptr;
+
+    descriptor::Room* descriptor() const { return m_descriptor_room; }
+    model::Room* model() const { return m_model_room; }
 //    jeti::control::Material* m_textureOb_background = nullptr;
 
 //    UnresolvedDataRoom data_unresolved_Room;

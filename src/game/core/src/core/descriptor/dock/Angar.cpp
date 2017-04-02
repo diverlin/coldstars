@@ -22,6 +22,12 @@
 
 namespace descriptor {
 
+Angar::Angar()
+{
+    setType(Type::ANGAR);
+    setObType(entity::Type::ANGAR);
+}
+
 Angar::Angar(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

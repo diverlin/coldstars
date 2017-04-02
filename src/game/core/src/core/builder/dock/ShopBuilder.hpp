@@ -21,6 +21,10 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class Shop;
+} // namespace descriptor
+
 namespace control {
 class Shop;
 } // namespace control
@@ -31,12 +35,13 @@ class Shop
 {
 public:
     static control::Shop* gen();
+    static control::Shop* gen(descriptor::Shop*);
 
 private:
     Shop() = delete;
     ~Shop() = delete;
 
-    static control::Shop* __createTemplate(int_t id = NONE);
+    static control::Shop* __createTemplate(descriptor::Shop*);
     static void __createInternals(control::Shop*);
 }; 
 

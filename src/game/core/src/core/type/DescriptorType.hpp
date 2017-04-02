@@ -74,6 +74,10 @@ enum class Type {
     // dock
     KOSMOPORT,
     NATURELAND,
+    ANGAR,
+    SHOP,
+    STORE,
+    GOVERMENT,
 
     // artefact
     GRAVITY_ARTEFACT,

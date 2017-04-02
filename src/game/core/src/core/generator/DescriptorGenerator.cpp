@@ -563,6 +563,67 @@ genNatureLand()
 }
 
 
+Angar*
+genAngar(race::Type race)
+{
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
+    }
+
+    Angar* descr = new Angar;
+    descr->setRace(race);
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
+Store*
+genStore(race::Type race)
+{
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
+    }
+
+    Store* descr = new Store;
+    descr->setRace(race);
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
+Shop*
+genShop(race::Type race)
+{
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
+    }
+
+    Shop* descr = new Shop;
+    descr->setRace(race);
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
+Goverment*
+genGoverment(race::Type race)
+{
+    if (race == race::Type::NONE) {
+        race = race::Type::R0;
+    }
+
+    Goverment* descr = new Goverment;
+    descr->setRace(race);
+
+    descriptor::Manager::get().reg(descr);
+
+    return descr;
+}
+
+
 
 namespace item {
 

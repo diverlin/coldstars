@@ -35,70 +35,72 @@
 
 #include <core/descriptor/item/Item.hpp>
 
+#include <core/descriptor/dock/Angar.hpp>
+#include <core/model/dock/Angar.hpp>
+
 namespace control {
 
-Angar::Angar(int id)
+Angar::Angar(descriptor::Angar* descr, model::Angar* model)
     :
-      m_fuelPrice(PRICE_FUEL)
-{
-    assert(false);
-//    setId(id);
-//    setTypeId(entity::Type::ANGAR);
-}
+      Room(descr, model)
+    , m_descriptor_angar(descr)
+    , m_model_angar(model)
+    , m_fuelPrice(PRICE_FUEL)
+{}
 
 Angar::~Angar()
 {        
-//    LOG("___::~Angar(), id="+std::to_string(id()));
+    //    LOG("___::~Angar(), id="+std::to_string(id()));
 }
 
 /* virtual */
 void Angar::putChildrenToGarbage() const
 {
     assert(false);
-//    for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
-//    {
-//       EntityManager::get().addToGarbage(vehicle_total_slot_vec[i]);
-//    }
+    //    for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
+    //    {
+    //       EntityManager::get().addToGarbage(vehicle_total_slot_vec[i]);
+    //    }
 
-//    for(unsigned int i=0; i<item_slot_vec.size(); i++)
-//    {
-//       EntityManager::get().addToGarbage(item_slot_vec[i]);
-//    }
+    //    for(unsigned int i=0; i<item_slot_vec.size(); i++)
+    //    {
+    //       EntityManager::get().addToGarbage(item_slot_vec[i]);
+    //    }
 }
 
 void Angar::add(VehicleSlot* vehicle_slot)
 {
     assert(false);
-//    vehicle_slot->setOwner(this);
+    //    vehicle_slot->setOwner(this);
 
-//    if (vehicle_slot->subtype() == entity::Type::VEHICLE_MILITARY_SLOT)
-//    {
-//        vehicle_military_slot_vec.push_back(vehicle_slot);
-//    }
+    //    if (vehicle_slot->subtype() == entity::Type::VEHICLE_MILITARY_SLOT)
+    //    {
+    //        vehicle_military_slot_vec.push_back(vehicle_slot);
+    //    }
 
-//    if (vehicle_slot->subtype() == entity::Type::VEHICLE_VISITORS_SLOT)
-//    {
-//        vehicle_visitors_slot_vec.push_back(vehicle_slot);
-//    }
+    //    if (vehicle_slot->subtype() == entity::Type::VEHICLE_VISITORS_SLOT)
+    //    {
+    //        vehicle_visitors_slot_vec.push_back(vehicle_slot);
+    //    }
 
-//    vehicle_total_slot_vec.push_back(vehicle_slot);
+    //    vehicle_total_slot_vec.push_back(vehicle_slot);
 };
 
 
 void Angar::add(ItemSlot* item_slot)
 {
     assert(false);
-//    item_slot->setOwner(this);
-//    item_slot_vec.push_back(item_slot);
+    //    item_slot->setOwner(this);
+    //    item_slot_vec.push_back(item_slot);
 }
 
 bool Angar::repairItem(Npc* npc, Item* item) const
 {
     int price = item->descriptor()->price() * REPAIR_ITEM_PRICE_RATE;
     assert(false);
-//    if (npc->withdrawCredits(price)) {
-//        return item->doRepair();
-//    }
+    //    if (npc->withdrawCredits(price)) {
+    //        return item->doRepair();
+    //    }
 
     return false;
 }         
@@ -106,55 +108,55 @@ bool Angar::repairItem(Npc* npc, Item* item) const
 bool Angar::chargeRocketEquipment(Npc* npc, item::Rocket* rocket_equipment) const
 {
     assert(false);
-//    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
-//    int ammo_max = npc->credits() / price_for_one;
-//    int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
+    //    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
+    //    int ammo_max = npc->credits() / price_for_one;
+    //    int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
 
-//    int ammo_amount = 0;
-//    if (ammo_max > ammo_need) { ammo_amount = ammo_need; }
-//    else                      { ammo_amount = ammo_max; }
+    //    int ammo_amount = 0;
+    //    if (ammo_max > ammo_need) { ammo_amount = ammo_need; }
+    //    else                      { ammo_amount = ammo_max; }
     
-//    if (npc->withdrawCredits(ammo_amount*price_for_one) == true) {
-//        rocket_equipment->SetAmmo(rocket_equipment->GetAmmo() + ammo_amount);
-//        return true;
-//    }
+    //    if (npc->withdrawCredits(ammo_amount*price_for_one) == true) {
+    //        rocket_equipment->SetAmmo(rocket_equipment->GetAmmo() + ammo_amount);
+    //        return true;
+    //    }
 
     return false;
 }
 
 bool Angar::repairVehicle(Vehicle* vehicle) const
 {
-        assert(false);
-//    int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
-//    int repair_max =  vehicle->npc()->credits() / price_for_one;
-//    int repair_need = vehicle->vehicleDescriptor().armor - vehicle->armor();
+    assert(false);
+    //    int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
+    //    int repair_max =  vehicle->npc()->credits() / price_for_one;
+    //    int repair_need = vehicle->vehicleDescriptor().armor - vehicle->armor();
     
-//    int repair_amount = 0;
-//    if (repair_max > repair_need) { repair_amount = repair_need; }
-//    else                          { repair_amount = repair_max; }
+    //    int repair_amount = 0;
+    //    if (repair_max > repair_need) { repair_amount = repair_need; }
+    //    else                          { repair_amount = repair_max; }
     
-//    if (vehicle->npc()->withdrawCredits(repair_amount*price_for_one) == true) {
-//        vehicle->repairKorpus(repair_amount);
-//        return true;
-//    }
+    //    if (vehicle->npc()->withdrawCredits(repair_amount*price_for_one) == true) {
+    //        vehicle->repairKorpus(repair_amount);
+    //        return true;
+    //    }
     
     return false;
 }
 
 bool Angar::tankUpVehicle(Vehicle* vehicle) const
 {
-        assert(false);
-//    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
-//    int fuel_to_buy_need = vehicle->fuelMiss();
+    assert(false);
+    //    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
+    //    int fuel_to_buy_need = vehicle->fuelMiss();
     
-//    int fuel = 0;
-//    if (fuel_to_buy_max > fuel_to_buy_need) { fuel = fuel_to_buy_need; }
-//    else                                    { fuel = fuel_to_buy_max; }
+    //    int fuel = 0;
+    //    if (fuel_to_buy_max > fuel_to_buy_need) { fuel = fuel_to_buy_need; }
+    //    else                                    { fuel = fuel_to_buy_max; }
 
-//    if (vehicle->npc()->withdrawCredits(fuel*price_fuel) == true) {
-//        vehicle->driveComplex().bakSlot()->bakEquipment()->increaseFuel(fuel);
-//        return true;
-//    }
+    //    if (vehicle->npc()->withdrawCredits(fuel*price_fuel) == true) {
+    //        vehicle->driveComplex().bakSlot()->bakEquipment()->increaseFuel(fuel);
+    //        return true;
+    //    }
 
     return false;
 }
@@ -163,11 +165,11 @@ void Angar::updateInStatic() const
 {
     for (auto slot: m_vehicle_visitors_slots) {
         assert(false);
-//        if (slot->vehicle() != nullptr)  {
-//            if (slot->vehicle()->npc() != nullptr) {
-//                slot->vehicle()->npc()->updateInKosmoportInStatic();
-//            }
-//        }
+        //        if (slot->vehicle() != nullptr)  {
+        //            if (slot->vehicle()->npc() != nullptr) {
+        //                slot->vehicle()->npc()->updateInKosmoportInStatic();
+        //            }
+        //        }
     }
 }
 
@@ -185,21 +187,21 @@ int Angar::freeVehicleSlotTotalNum() const
 bool Angar::add(Vehicle* vehicle)
 {
     assert(false);
-//    if (vehicle->subsubtype() == entity::Type::WARRIOR) {
-//        for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
-//            if (vehicle_military_slot_vec[i]->vehicle() == nullptr) {
-//                vehicle_military_slot_vec[i]->InsertVehicle(vehicle);
-//                return true;
-//            }
-//        }
-//    } else {
-//        for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-//            if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
-//                vehicle_visitors_slot_vec[i]->InsertVehicle(vehicle);
-//                return true;
-//            }
-//        }
-//    }
+    //    if (vehicle->subsubtype() == entity::Type::WARRIOR) {
+    //        for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
+    //            if (vehicle_military_slot_vec[i]->vehicle() == nullptr) {
+    //                vehicle_military_slot_vec[i]->InsertVehicle(vehicle);
+    //                return true;
+    //            }
+    //        }
+    //    } else {
+    //        for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
+    //            if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
+    //                vehicle_visitors_slot_vec[i]->InsertVehicle(vehicle);
+    //                return true;
+    //            }
+    //        }
+    //    }
 
     return false;
 }
@@ -208,16 +210,16 @@ std::string Angar::vehiclesStr() const
 {
     std::string str;
     assert(false);
-//    for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
-//        if (vehicle_military_slot_vec[i]->vehicle() != nullptr) {
-//            str += "_m" + std::to_string(vehicle_military_slot_vec[i]->vehicle()->id());
-//        }
-//    }
-//    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-//        if (vehicle_visitors_slot_vec[i]->vehicle() != nullptr) {
-//            str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->vehicle()->id());
-//        }
-//    }
+    //    for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
+    //        if (vehicle_military_slot_vec[i]->vehicle() != nullptr) {
+    //            str += "_m" + std::to_string(vehicle_military_slot_vec[i]->vehicle()->id());
+    //        }
+    //    }
+    //    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
+    //        if (vehicle_visitors_slot_vec[i]->vehicle() != nullptr) {
+    //            str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->vehicle()->id());
+    //        }
+    //    }
     return str;
 }
 

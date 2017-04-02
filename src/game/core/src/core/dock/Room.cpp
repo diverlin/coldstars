@@ -22,9 +22,21 @@
 //#include "../resources/TextureCollector.hpp"
  
 //#include <jeti/Material.hpp>
+#include <core/model/dock/Room.hpp>
+
+#include <core/descriptor/dock/Room.hpp>
+#include <core/model/dock/Room.hpp>
 
 namespace control {    
 
+Room::Room(descriptor::Room* descr, model::Room* model)
+    :
+      Base(model, descr)
+    , m_descriptor_room(descr)
+    , m_model_room(model)
+{
+
+}
 //void Room::RenderBackground(const ceti::Rect& rect) const
 //{
 //    //drawTexturedRect(textureOb_background, rect, -2);

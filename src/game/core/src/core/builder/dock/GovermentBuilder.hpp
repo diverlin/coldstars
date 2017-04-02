@@ -20,6 +20,10 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace descriptor {
+class Goverment;
+} // namespace descriptor
+
 namespace control {
 class Goverment;
 } // namespace control
@@ -30,12 +34,13 @@ class Goverment
 {
 public:
     static control::Goverment* gen();
+    static control::Goverment* gen(descriptor::Goverment*);
 
 private:
     Goverment() = delete;
     ~Goverment() = delete;
 
-    static control::Goverment* __createTemplate(int_t id = NONE);
+    static control::Goverment* __createTemplate(descriptor::Goverment*);
     static void __createInternals(control::Goverment*);
 }; 
 

@@ -26,7 +26,7 @@ namespace descriptor {
 
 class Angar : public Room {
 public:
-    Angar() = default;
+    Angar();
     ~Angar() = default;
     Angar(const std::string& data);
     std::string data() const;

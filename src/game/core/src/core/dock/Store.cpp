@@ -32,9 +32,16 @@
 
 #include <core/descriptor/item/Item.hpp>
 
+#include <core/descriptor/dock/Store.hpp>
+#include <core/model/dock/Store.hpp>
+
 namespace control {
 
-Store::Store(int id)
+Store::Store(descriptor::Store* descr, model::Store* model)
+    :
+      Room(descr, model)
+    , m_descriptor_store(descr)
+    , m_model_store(model)
 {
     assert(false);
     //    setId(id);
