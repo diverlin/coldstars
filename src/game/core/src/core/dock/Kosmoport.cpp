@@ -93,8 +93,10 @@ bool Kosmoport::isAllowedToLand() const
 /* virtual */
 bool Kosmoport::add(Vehicle* vehicle)
 {        
-    m_angar->add(vehicle);
+    if (!m_angar->add(vehicle))
+        return false;
     
+    vehicle->resetTargets();
     vehicle->setLand(this);
     if (!vehicle->starsystem()) {
         vehicle->setStarSystem(owner()->starsystem());

@@ -35,6 +35,8 @@ class Star;
 class Planet;
 class Asteroid;
 
+class Land;
+
 class SpaceStation;
 class Ship;
 class Satellite;
@@ -87,7 +89,9 @@ public:
     control::Ship* ship(int_t id) const;
     control::Satellite* satellite(int_t id) const;
     control::Container* container(int_t id) const;
+
     control::SpaceObject* spaceObject(int_t id) const;
+    control::Land* land(int_t id) const;
 
     control::item::Scaner* scaner(int_t) const;
     control::item::Drive* drive(int_t) const;

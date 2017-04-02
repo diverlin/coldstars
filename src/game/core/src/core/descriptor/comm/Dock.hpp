@@ -18,6 +18,7 @@
 
 #pragma once
 
+//#include "Base.hpp"
 #include <core/type/TelegramType.hpp>
 
 #include <ceti/type/IdType.hpp>
@@ -28,34 +29,34 @@
 namespace descriptor {
 namespace comm {
 
-class Creation
+class Dock
 {
 public:
-    Creation(int_t, int_t);
-    Creation(const std::string& data);
-    ~Creation() = default;
+    Dock(int_t, int_t);
+    Dock(const std::string& data);
+    ~Dock() = default;
     std::string data() const;
 
     int_t object() const { return m_object; }
-    int_t descriptor() const { return m_descriptor; }
+    int_t dock() const { return m_dock; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Creation:\n";
+        std::string result = "descriptor::comm::DockShip:\n";
         result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
+        result += std::string(" dock = ") + std::to_string(m_dock) + "\n";
         return result;
     }
 
 private:
     int_t m_object = NONE;
-    int_t m_descriptor = NONE;
+    int_t m_dock = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_object;
-        ar & m_descriptor;
+        ar & m_dock;
     }
 };
 

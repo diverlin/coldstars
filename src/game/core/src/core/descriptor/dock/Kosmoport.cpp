@@ -18,13 +18,17 @@
 
 #include "Kosmoport.hpp" 
 
+#include <core/type/PlaceType.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 
 Kosmoport::Kosmoport()
 {
+    setType(Type::KOSMOPORT);
     setObType(entity::Type::KOSMOPORT);
+    setPlace(place::Type::KOSMOPORT);
 }
 
 Kosmoport::Kosmoport(const std::string& data)

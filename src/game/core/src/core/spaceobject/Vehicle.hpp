@@ -119,8 +119,10 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     virtual ~Vehicle();
 
-    void setDockTarget(SpaceObject*);
+    void dock(SpaceObject*);
     void follow(SpaceObject*);
+
+    void resetTargets();
 
     WeaponComplex& weaponComplex() { return m_weapon_complex; }
     DriveComplex& driveComplex() { return m_drive_complex; }
@@ -144,7 +146,7 @@ public:
     void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_specialActionId = special_action_id; }
     void setParentVehicleSlot(slot::Vehicle* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
 
-    void setLand(Land* land) { m_Land = land; }
+    void setLand(Land* land);
 
     void setKorpusData(descriptor::Vehicle*);
 

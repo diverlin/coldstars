@@ -18,27 +18,27 @@
 
 #pragma once
 
-#include "Creation.hpp"
+#include "Dock.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-Creation::Creation(int_t obId, int_t obDescriptor)
+Dock::Dock(int_t object, int_t dock)
     :
-      m_object(obId)
-    , m_descriptor(obDescriptor)
+      m_object(object)
+    , m_dock(dock)
 {
 }
 
-Creation::Creation(const std::string& data)
+Dock::Dock(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Creation::data() const
+Dock::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

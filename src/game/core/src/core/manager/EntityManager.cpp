@@ -248,6 +248,13 @@ EntityManager::spaceObject(int_t id) const {
     return model;
 }
 
+control::Land*
+EntityManager::land(int_t id) const {
+    control::Land* model = static_cast<control::Land*>(get(id));
+    assert(model);
+    return model;
+}
+
 control::item::Scaner*
 EntityManager::scaner(int_t id) const
 {

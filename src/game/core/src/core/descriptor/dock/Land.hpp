@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <core/type/PlaceType.hpp>
+
 #include <core/descriptor/Base.hpp>
 
 namespace descriptor {
@@ -28,12 +30,20 @@ public:
     Land() = default;
     ~Land() = default;
 
+    void setPlace(place::Type place) { m_place = place; }
+
+    place::Type place() const { return m_place; }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
+        ar & m_place;
     }
+
+private:
+    place::Type m_place = place::Type::NONE;
 };
 
 } // namespace descriptor

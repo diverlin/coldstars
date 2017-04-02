@@ -88,11 +88,13 @@
 
 //#include <jeti/Render.hpp>
 
-#include <math/rand.hpp>
-#include <meti/RandUtils.hpp>
-
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/DescriptorManager.hpp>
+
+#include <core/descriptor/dock/Land.hpp>
+
+#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 namespace control {
 
@@ -123,7 +125,7 @@ Vehicle::~Vehicle()
 }
 
 void
-Vehicle::setDockTarget(SpaceObject* target) {
+Vehicle::dock(SpaceObject* target) {
     driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
 }
 
@@ -880,6 +882,19 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
     //starsystem->hyperSpace().AddVehicle(this);
 }
 
+void
+Vehicle::resetTargets()
+{
+    weaponComplex().deactivateWeapons();
+    driveComplex().resetTarget();
+}
+
+void
+Vehicle::setLand(Land* land)
+{
+    model()->setPlace(land->descriptor()->place());
+    m_Land = land;
+}
 
 void Vehicle::_dockingEvent()
 {
@@ -890,9 +905,7 @@ void Vehicle::_dockingEvent()
 //        return;
 //    }
 
-    weaponComplex().deactivateWeapons();
-    driveComplex().resetTarget();
-
+    resetTargets();
     switch(target->descriptor()->obType())
     {
     case entity::Type::PLANET:

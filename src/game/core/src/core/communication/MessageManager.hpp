@@ -15,6 +15,8 @@ class HitDescriptor;
 class ExplosionDescriptor;
 class AddToStarsystemDescriptor;
 
+void dockShipEvent(int_t, int_t);
+
 class MessageManager
 {
 public:
