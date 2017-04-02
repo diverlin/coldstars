@@ -29,21 +29,6 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 
-namespace model {
-
-VehicleSlot::VehicleSlot(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-VehicleSlot::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
-
 namespace control {
 
 VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)

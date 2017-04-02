@@ -23,25 +23,6 @@
 
 class Vehicle;
 
-namespace model {
-
-class VehicleSlot : public BaseSlot
-{
-public:
-    VehicleSlot() = default;
-    ~VehicleSlot() = default;
-    VehicleSlot(const std::string& data);
-    std::string data() const;
-
-    void setVehicle(int_t vehicle) { m_vehicle = vehicle; }
-    int_t vehicle() const { return m_vehicle; }
-
-private:
-    int_t m_vehicle = NONE;
-};
-
-} // namespace model
-
 namespace control {
 
 class VehicleSlot : public BaseSlot
@@ -63,11 +44,7 @@ public:
 //    virtual void Load(const boost::property_tree::ptree&);
 //    virtual void Resolve();
 
-    model::VehicleSlot* model() const { return m_model_vehicleslot; }
-
 private:
-    model::VehicleSlot* m_model_vehicleslot = nullptr;
-
     Vehicle* m_vehicle = nullptr;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
