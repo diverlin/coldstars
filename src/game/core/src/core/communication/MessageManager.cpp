@@ -7,7 +7,9 @@
 
 #include <core/type/EntityType.hpp> // test
 
-#include <core/descriptor/Hit.hpp>
+#include <core/descriptor/comm/Hit.hpp>
+#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/comm/Creation.hpp>
@@ -15,7 +17,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Container.hpp> // ??
 #include <core/descriptor/ExplosionDescriptor.hpp>
-#include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
 #include <core/spaceobject/ALL>
 
@@ -124,6 +125,7 @@ void createRadarEvent(const comm::Message& message) {
 }
 // item
 
+/** ADD TO STARSYSTEM */
 void addShipToStarSystemEvent(const comm::Message& message) {
     AddToStarsystemDescriptor descriptor(message.data());
     control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
@@ -137,6 +139,58 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
     starsystem->add(container);
 }
 
+/** DOCK */
+void dockShipEvent(const comm::Message& message) {
+    AddToStarsystemDescriptor descriptor(message.data());
+//    control::StarSystem* starsystem = EntityManager::get().starsystem(descriptor.owner);
+
+    control::Ship* ship = EntityManager::get().ship(descriptor.object);
+
+    control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
+
+    const auto& target = ship->driveComplex().target();
+    assert(target);
+
+    // move inside!!!
+    ship->weaponComplex().deactivateWeapons();
+    ship->driveComplex().resetTarget();
+
+    control::Land* land = nullptr;
+    switch(target->descriptor()->obType()) {
+    case entity::Type::PLANET: {
+        control::Planet* planet = static_cast<control::Planet*>(target);
+        assert(planet);
+        land = planet->land();
+        break;
+    }
+
+    case entity::Type::VEHICLE: {
+        switch(target->descriptor()->obSubType()) {
+        case entity::Type::SPACESTATION:
+        {
+            control::SpaceStation* spacestation = static_cast<control::SpaceStation*>(target);
+            assert(spacestation);
+            land = spacestation->land();
+            break;
+        }
+
+        case entity::Type::SHIP: {
+            //..
+            break;
+        }
+        }
+
+        break;
+    }
+    }
+
+    starsystem->remove(ship);
+    assert(land);
+    land->add(ship);
+}
+
+/** */
 void hitEvent(const comm::Message& message) {
     descriptor::Hit descr(message.data());
     control::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
@@ -173,6 +227,8 @@ void MessageManager::process(const comm::Message& message)
     case comm::Message::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(message); break;
     case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
 
+    /** DOCK */
+    case comm::Message::Type::DOCK_SHIP: dockShipEvent(message); break;
 
     /** OTHER */
     case comm::Message::Type::HIT: hitEvent(message); break;

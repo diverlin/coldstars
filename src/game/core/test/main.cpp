@@ -41,11 +41,13 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
-#include <core/descriptor/Hit.hpp>
+
+#include <core/descriptor/comm/Hit.hpp>
+#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/ExplosionDescriptor.hpp>
-#include <core/descriptor/AddToStarsystemDescriptor.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
