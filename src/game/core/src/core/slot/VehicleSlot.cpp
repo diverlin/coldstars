@@ -49,12 +49,14 @@ void Vehicle::putChildrenToGarbage() const
 //    }
 }
                       
-void Vehicle::insert(control::Vehicle* vehicle)
+bool Vehicle::insert(control::Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
     vehicle->model()->setPlace(place::Type::KOSMOPORT);
     vehicle->setParentVehicleSlot(this);
+
+    return true;
 }
 
 void Vehicle::release()

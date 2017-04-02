@@ -215,17 +215,23 @@ TEST(ship, dockingEvent)
     starsystem->add(planet);
     starsystem->add(ship, planet->position());
 
+    EXPECT_EQ(1, starsystem->ships().size());
     EXPECT_EQ(ship->position(), planet->position());
+    EXPECT_EQ(0, int(ship->position().length()));
 
     EXPECT_EQ(ship->driveComplex().target(), nullptr);
     EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::NONE);
 
-    ship->dock(planet);
+    ship->setDockTarget(planet);
 
     EXPECT_EQ(ship->driveComplex().target(), planet);
-    EXPECT_EQ(ship->driveComplex().target()->descriptor()->obType(), entity::Type::PLANET);
     EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::DOCKING);
 
     ship->process();
+
+    EXPECT_EQ(0, starsystem->ships().size());
+    EXPECT_EQ(0, int(ship->position().length()));
+
+
 }
 

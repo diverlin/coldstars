@@ -38,17 +38,17 @@ TEST(vehicle, item_lazer)
     control::Ship* ship = builder::Ship::gen();
     control::item::Lazer* lazer = builder::item::Lazer::gen();
 
-    assert(ship->weaponSlots()[0]);
+    assert(ship->weaponSlots().front());
 
     // init
-    EXPECT_EQ(nullptr, ship->weaponSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->weaponSlots().front()->item());
     EXPECT_EQ(0, ship->properties().total_damage);
     EXPECT_EQ(0, ship->properties().fire_radius_min);
     EXPECT_EQ(0, ship->properties().fire_radius_max);
 
     // event: insert item
     EXPECT_TRUE(ship->manage(lazer));
-    EXPECT_EQ(lazer, ship->weaponSlots()[0]->item());
+    EXPECT_EQ(lazer, ship->weaponSlots().front()->item());
     EXPECT_EQ(lazer->model()->damage(), ship->properties().total_damage);
     EXPECT_EQ(lazer->model()->radius(), ship->properties().fire_radius_min);
     EXPECT_EQ(lazer->model()->radius(), ship->properties().fire_radius_max);
@@ -59,17 +59,17 @@ TEST(vehicle, item_rocket)
     control::Ship* ship = builder::Ship::gen();
     control::item::Rocket* rocket = builder::item::Rocket::gen();
 
-    assert(ship->weaponSlots()[0]);
+    assert(ship->weaponSlots().front());
 
     // init
-    EXPECT_EQ(nullptr, ship->weaponSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->weaponSlots().front()->item());
     EXPECT_EQ(0, ship->properties().total_damage);
     EXPECT_EQ(0, ship->properties().fire_radius_min);
     EXPECT_EQ(0, ship->properties().fire_radius_max);
 
     // event: insert item
     EXPECT_TRUE(ship->manage(rocket));
-    EXPECT_EQ(rocket, ship->weaponSlots()[0]->item());
+    EXPECT_EQ(rocket, ship->weaponSlots().front()->item());
     EXPECT_EQ(rocket->model()->damage(), ship->properties().total_damage);
     EXPECT_EQ(rocket->model()->radius(), ship->properties().fire_radius_min);
     EXPECT_EQ(rocket->model()->radius(), ship->properties().fire_radius_max);
@@ -80,15 +80,15 @@ TEST(vehicle, item_bak)
     control::Ship* ship = builder::Ship::gen();
     control::item::Bak* bak = builder::item::Bak::gen();
 
-    assert(ship->bakSlots()[0]);
+    assert(ship->bakSlots().front());
 
     // init
-    EXPECT_EQ(nullptr, ship->bakSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->bakSlots().front()->item());
     EXPECT_EQ(0, ship->properties().hyper);
 
     // insert
     EXPECT_TRUE(ship->manage(bak));
-    EXPECT_EQ(bak, ship->bakSlots()[0]->item());
+    EXPECT_EQ(bak, ship->bakSlots().front()->item());
 
     // post
     EXPECT_EQ(0, ship->properties().hyper); // no drive is set, that's why hyper is 0
@@ -99,15 +99,15 @@ TEST(vehicle, item_drive)
     control::Ship* ship = builder::Ship::gen();
     control::item::Drive* drive = builder::item::Drive::gen();
 
-    assert(ship->driveSlots()[0]);
+    assert(ship->driveSlots().front());
 
     // init
-    EXPECT_EQ(nullptr, ship->driveSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->driveSlots().front()->item());
     EXPECT_EQ(0, ship->properties().hyper);
 
     // insert
     EXPECT_TRUE(ship->manage(drive));
-    EXPECT_EQ(drive, ship->driveSlots()[0]->item());
+    EXPECT_EQ(drive, ship->driveSlots().front()->item());
 
     // post
     EXPECT_EQ(0, ship->properties().hyper); // no bak is set that's why hyper is 0
@@ -119,8 +119,8 @@ TEST(vehicle, item_bak_and_drive)
     auto bak = builder::item::Bak::gen();
     auto drive = builder::item::Drive::gen();
 
-    assert(ship->bakSlots()[0]);
-    assert(ship->driveSlots()[0]);
+    assert(ship->bakSlots().front());
+    assert(ship->driveSlots().front());
 
     // init
     EXPECT_EQ(0, ship->properties().hyper);
@@ -171,16 +171,16 @@ TEST(vehicle, item_droid)
     auto ship = builder::Ship::gen();
     auto droid = builder::item::Droid::gen();
 
-    assert(ship->droidSlots()[0]);
+    assert(ship->droidSlots().front());
 
     // initial
-    EXPECT_EQ(nullptr, ship->droidSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->droidSlots().front()->item());
     EXPECT_EQ(0, ship->properties().repair);
 
     // event: item insert
     EXPECT_TRUE(ship->manage(droid));
     EXPECT_EQ(droid->model()->repair(), ship->properties().repair);
-    EXPECT_EQ(droid, ship->droidSlots()[0]->item());
+    EXPECT_EQ(droid, ship->droidSlots().front()->item());
 
     // event: lock item
     droid->doLock();
@@ -204,16 +204,16 @@ TEST(vehicle, item_grapple)
     auto ship = builder::Ship::gen();
     auto grapple = builder::item::Grapple::gen();
 
-    assert(ship->grappleSlots()[0]);
+    assert(ship->grappleSlots().front());
 
     // initial
-    EXPECT_EQ(nullptr, ship->grappleSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->grappleSlots().front()->item());
     EXPECT_EQ(0, ship->properties().grab_strength);
     EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: item insert
     EXPECT_TRUE(ship->manage(grapple));
-    EXPECT_EQ(grapple, ship->grappleSlots()[0]->item());
+    EXPECT_EQ(grapple, ship->grappleSlots().front()->item());
     EXPECT_EQ(grapple->model()->strength(), ship->properties().grab_strength);
     EXPECT_EQ(grapple->model()->radius(), ship->properties().grab_radius);
 
@@ -243,15 +243,15 @@ TEST(vehicle, item_scaner)
     auto ship = builder::Ship::gen();
     auto scaner = builder::item::Scaner::gen();
 
-    assert(ship->scanerSlots()[0]);
+    assert(ship->scanerSlots().front());
 
     // initial
-    EXPECT_EQ(nullptr, ship->scanerSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->scanerSlots().front()->item());
     EXPECT_EQ(0, ship->properties().scan);
 
     // item insert
     EXPECT_TRUE(ship->manage(scaner));
-    EXPECT_EQ(scaner, ship->scanerSlots()[0]->item());
+    EXPECT_EQ(scaner, ship->scanerSlots().front()->item());
     EXPECT_EQ(scaner->model()->scan(), ship->properties().scan);
 
     // event: lock item
@@ -276,15 +276,15 @@ TEST(vehicle, item_radar)
     auto ship = builder::Ship::gen();
     auto radar = builder::item::Radar::gen();
 
-    assert(ship->radarSlots()[0]);
+    assert(ship->radarSlots().front());
 
     // initial
-    EXPECT_EQ(nullptr, ship->radarSlots()[0]->item() );
+    EXPECT_EQ(nullptr, ship->radarSlots().front()->item() );
     EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: item insert
     EXPECT_TRUE(ship->manage(radar) );
-    EXPECT_EQ(radar, ship->radarSlots()[0]->item());
+    EXPECT_EQ(radar, ship->radarSlots().front()->item());
     EXPECT_EQ(radar->model()->radius(), ship->properties().radar);
 
     // event: lock item
@@ -309,15 +309,15 @@ TEST(vehicle, item_protector)
     auto ship = builder::Ship::gen();
     auto protector = builder::item::Protector::gen();
 
-    assert(ship->protectorSlots()[0]);
+    assert(ship->protectorSlots().front());
 
     // initial
-    EXPECT_EQ(nullptr, ship->protectorSlots()[0]->item());
+    EXPECT_EQ(nullptr, ship->protectorSlots().front()->item());
     EXPECT_EQ(ship->descriptor()->protection(), ship->properties().protection);
 
     // event: item insert
     EXPECT_TRUE(ship->manage(protector) );
-    EXPECT_EQ(protector, ship->protectorSlots()[0]->item());
+    EXPECT_EQ(protector, ship->protectorSlots().front()->item());
     int protection = ship->descriptor()->protection() + protector->model()->protection();
     EXPECT_EQ(protection, ship->properties().protection);
 

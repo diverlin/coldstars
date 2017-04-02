@@ -123,7 +123,7 @@ Vehicle::~Vehicle()
 }
 
 void
-Vehicle::dock(SpaceObject* target) {
+Vehicle::setDockTarget(SpaceObject* target) {
     driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
 }
 
@@ -883,17 +883,21 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 
 void Vehicle::_dockingEvent()
 {
-    //LOG("Vehicle("+std::to_string(id())+")::DockingEvent");
+    const auto& target = driveComplex().target();
+    assert(target);
 
-    assert(driveComplex().target());
+    if ((position() - target->position()).length() > 50) {
+        return;
+    }
 
     weaponComplex().deactivateWeapons();
+    driveComplex().resetTarget();
 
-    switch(driveComplex().target()->descriptor()->obType())
+    switch(target->descriptor()->obType())
     {
     case entity::Type::PLANET:
     {
-        Planet* planet = static_cast<Planet*>(driveComplex().target());
+        Planet* planet = static_cast<Planet*>(target);
         assert(planet);
         planet->land()->add(this);
         break;
@@ -901,11 +905,11 @@ void Vehicle::_dockingEvent()
 
     case entity::Type::VEHICLE:
     {
-        switch(driveComplex().target()->descriptor()->obSubType())
+        switch(target->descriptor()->obSubType())
         {
         case entity::Type::SPACESTATION:
         {
-            SpaceStation* spacestation = static_cast<SpaceStation*>(driveComplex().target());
+            SpaceStation* spacestation = static_cast<SpaceStation*>(target);
             assert(spacestation);
             spacestation->land()->add(this);
             break;
@@ -921,8 +925,6 @@ void Vehicle::_dockingEvent()
         break;
     }
     }
-
-    driveComplex().resetTarget();
 }
 
 void Vehicle::LaunchingEvent()
@@ -1188,7 +1190,7 @@ void Vehicle::_updatePropSpeed()
 //        } else {
 //            driveComplex().driveSlots()->item()->useNormalDeterioration();
 //        }
-        driveComplex().UpdatePath();
+        driveComplex().updatePath();
     }
 
     properties().speed = speed;
