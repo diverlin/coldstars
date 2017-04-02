@@ -22,7 +22,6 @@
 #include <core/spaceobject/Container.hpp>
 
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
-#include <core/builder/slot/ItemSlotBuilder.hpp>
 
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
@@ -232,63 +231,63 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     // WEAPON SLOTS
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::WEAPON_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::WEAPON_SLOT);
         //slot->setSubSubType(SLOT_WEAPON_TYPES[i]);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->radarSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::RADAR_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::RADAR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->scanerSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::SCANER_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::SCANER_SLOT);
         addItemSlot(slot);
     }
 
 
     for (int i=0; i<descr->grappleSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::GRAPPLE_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::GRAPPLE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->droidSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::DROID_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::DROID_SLOT);
         addItemSlot(slot);
     }
 
 #ifdef USE_EXTRA_EQUIPMENT
     for (int i=0; i<descr->energizerSlotNum(); ++i) {
-        ItemSlot* slot = getNewItemSlot(entity::type::ENERGIZER_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::type::ENERGIZER_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->freezerSlotNum(); ++i) {
-        ItemSlot* slot = GetNewItemSlot(entity::type::FREEZER_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::type::FREEZER_SLOT);
         AddItemSlot(slot);
     }
 #endif // USE_EXTRA_EQUIPMENT
 
     for (int i=0; i<descr->protectorSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::PROTECTOR_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::PROTECTOR_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->driveSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::DRIVE_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::DRIVE_SLOT);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->bakSlotNum(); ++i) {
-        ItemSlot* slot = genItemSlot(entity::Type::BAK_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::BAK_SLOT);
         addItemSlot(slot);
     }
 
 #ifdef USE_ARTEFACTS
     //////////// ARTEFACT SLOT /////////////////////////
     for (int i=0; i<descr->artefactSlotNum(); i++) {
-        ItemSlot* slot = getNewItemSlot(entity::type::ARTEFACT_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::type::ARTEFACT_SLOT);
         artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
         addItemSlot(slot);
     }
@@ -296,7 +295,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 
     //////// OTSEC SLOT ////////////////////////////////
     for (int i=0; i<descr->cargoSlotNum(); i++) {
-        ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);
+        ItemSlot* slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
         //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
         addItemSlot(slot);
     }

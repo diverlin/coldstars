@@ -29,8 +29,6 @@
 
 #include <world/starsystem.hpp>
 
-#include <core/builder/slot/ItemSlotBuilder.hpp>
-
 //#include <jeti/Render.hpp>
 
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
@@ -96,7 +94,7 @@ Container::Container(model::Container* _model, descriptor::Container* descr)
     , m_descriptor_container(descr)
 {
 
-    ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);
+    ItemSlot* slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
     bindItemSlot(slot);
 
     if (model()->item() != NONE) {

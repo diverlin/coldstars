@@ -18,10 +18,10 @@
 
 
 #include <builder/dock/AngarBuilder.hpp>
-#include <core/builder/slot/ItemSlotBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <core/slot/VehicleSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <core/descriptor/dock/Angar.hpp>
 #include <core/model/dock/Angar.hpp>
@@ -75,7 +75,7 @@ Angar::__createInternals(control::Angar* angar)
     }
 
     for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
-        control::ItemSlot* slot = genItemSlot(entity::Type::CARGO_SLOT);
+        control::ItemSlot* slot = new control::ItemSlot(entity::Type::CARGO_SLOT);
         angar->add(slot);
     }
     

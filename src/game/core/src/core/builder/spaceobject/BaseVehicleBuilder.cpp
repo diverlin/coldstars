@@ -48,8 +48,6 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
-#include <core/builder/slot/ItemSlotBuilder.hpp>
-
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 

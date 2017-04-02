@@ -18,7 +18,6 @@
 
 
 #include <builder/dock/StoreBuilder.hpp>
-#include <core/builder/slot/ItemSlotBuilder.hpp>
 
 #include <core/item/equipment/ALL>
 #include <core/builder/item/equipment/ALL>
