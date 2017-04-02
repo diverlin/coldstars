@@ -23,11 +23,11 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace control {
+namespace slot {
 class VehicleSlot;
-} // namespace control
+} // namespace slot
 
-control::VehicleSlot* getNewVehicleSlot(entity::Type, int_t id = NONE);
+slot::VehicleSlot* getNewVehicleSlot(entity::Type, int_t id = NONE);
 
     
 

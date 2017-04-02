@@ -21,11 +21,13 @@
 
 #include <core/slot/BaseSlot.hpp>
 
-class Vehicle;
-
 namespace control {
+class Vehicle;
+} // naemspace control
 
-class VehicleSlot : public BaseSlot
+namespace slot {
+
+class VehicleSlot : public control::BaseSlot
 {
 public:
     VehicleSlot(int, entity::Type);
@@ -33,8 +35,8 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    Vehicle* vehicle() const { return m_vehicle; }
-    void insert(Vehicle*);
+    control::Vehicle* vehicle() const { return m_vehicle; }
+    void insert(control::Vehicle*);
     void Release();
     void SwapVehicle(VehicleSlot*);
 
@@ -45,11 +47,11 @@ public:
 //    virtual void Resolve();
 
 private:
-    Vehicle* m_vehicle = nullptr;
+    control::Vehicle* m_vehicle = nullptr;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
 }; 
 
-} // namespace model
+} // namespace slot

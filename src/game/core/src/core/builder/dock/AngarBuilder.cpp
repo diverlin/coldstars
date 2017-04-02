@@ -70,20 +70,12 @@ Angar::__createTemplate(descriptor::Angar* descr)
 void
 Angar::__createInternals(control::Angar* angar)
 { 
-    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
-    {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_MILITARY_SLOT);
+    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
+        slot::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_VISITORS_SLOT);
         angar->add(vehicle_slot);
     }
 
-    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
-    {
-        control::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::VEHICLE_VISITORS_SLOT);
-        angar->add(vehicle_slot);
-    }
-
-    for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
-    {
+    for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
         control::ItemSlot* cargo_slot = genItemSlot(entity::Type::CARGO_SLOT);
         angar->add(cargo_slot);
     }

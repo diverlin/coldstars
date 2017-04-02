@@ -49,7 +49,7 @@ Store::Store(descriptor::Store* descr, model::Store* model)
     }
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++) {
-        VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
+        slot::VehicleSlot* vehicle_slot = getNewVehicleSlot(entity::Type::NONE);
         __add(vehicle_slot);
     }
 
@@ -75,7 +75,7 @@ void Store::__add(ItemSlot* item_slot)
     m_item_slots.push_back(item_slot);
 }
 
-void Store::__add(VehicleSlot* vehicle_slot)
+void Store::__add(slot::VehicleSlot* vehicle_slot)
 { 
     vehicle_slot->setOwner(this);
     m_vehicle_slots.push_back(vehicle_slot);
@@ -94,7 +94,7 @@ bool Store::add(Item* item)
 
 bool Store::add(Vehicle* vehicle)
 {
-    VehicleSlot* vehicle_slot = freeVehicleSlot();
+    slot::VehicleSlot* vehicle_slot = freeVehicleSlot();
     if (vehicle_slot) {
         //vehicle->SetLand(GetOwnerKosmoport());
         //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
@@ -119,7 +119,7 @@ Store::freeItemSlot() const
     return nullptr;
 }
 
-VehicleSlot*
+slot::VehicleSlot*
 Store::freeVehicleSlot() const
 {
     for (auto* slot: m_vehicle_slots) {
@@ -143,7 +143,7 @@ Store::buyItem(Item* item)
     return 0;
 }
 
-void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
+void Store::sellVehicle(Npc* npc, slot::VehicleSlot* vehicle_slot, int price)
 {
     assert(false);
     //    vehicle_slot->vehicle()->grabItemsFromVehicle(npc->vehicle());

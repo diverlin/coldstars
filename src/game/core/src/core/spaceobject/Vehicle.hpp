@@ -44,11 +44,14 @@ class StarSystem;
 class Item;
 } // namespace model
 
+namespace slot {
+class VehicleSlot;
+} // namespace slot
+
 namespace control {
 class Container;
 class Npc;
 class Item;
-class VehicleSlot;
 class Land;
 } //namespace control
 
@@ -139,7 +142,7 @@ public:
 
     void setGodMode(bool god_mode) { m_godMode = god_mode; }
     void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_specialActionId = special_action_id; }
-    void setParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
+    void setParentVehicleSlot(slot::VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
 
     void setLand(Land* land) { m_Land = land; }
 
@@ -149,7 +152,7 @@ public:
     Land* const land() const { return m_Land; }
     VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_specialActionId; }
 
-    VehicleSlot* const parentVehicleSlot() const { return m_parentVehicleSlot; }
+    slot::VehicleSlot* parentVehicleSlot() const { return m_parentVehicleSlot; }
 
     [[warning("remove this ugly non const")]]
     Propetries& properties() { return m_properties; }
@@ -321,7 +324,7 @@ private:
 
     control::Npc* m_npc = nullptr;
 
-    VehicleSlot* m_parentVehicleSlot = nullptr;
+    slot::VehicleSlot* m_parentVehicleSlot = nullptr;
 
     Land* m_Land = nullptr;
 
