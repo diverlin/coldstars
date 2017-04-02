@@ -444,9 +444,9 @@ void Vehicle::addItemSlot(slot::Item* slot)
         m_cargoSlots.push_back(slot);
     }
 
-    int offset = m_slots.size();
-    m_slots.insert(std::make_pair(offset, slot));
-    slot->setOffset(offset);
+    int position = m_slots.size();
+    m_slots.insert(std::make_pair(position, slot));
+    slot->setPosition(position);
 }
 
 bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
