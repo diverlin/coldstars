@@ -30,7 +30,7 @@ class Angar;
 
 namespace slot {
 class Vehicle;
-class ItemSlot;
+class Item;
 } // namespace slot
 
 namespace control {
@@ -52,7 +52,7 @@ public:
     virtual void putChildrenToGarbage() const;
 
     void add(slot::Vehicle*);
-    void add(slot::ItemSlot*);
+    void add(slot::Item*);
 
     void updateInStatic() const;
 
@@ -76,7 +76,7 @@ public:
 
 private:
     std::vector<slot::Vehicle*> m_vehicle_slots;
-    std::vector<slot::ItemSlot*> m_item_slots;
+    std::vector<slot::Item*> m_item_slots;
 
     int m_fuelPrice;
 

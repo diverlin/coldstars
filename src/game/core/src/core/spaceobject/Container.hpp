@@ -34,7 +34,7 @@ class Item;
 } // namespace control
 
 namespace slot {
-class ItemSlot;
+class Item;
 } // namespace slot
 
 namespace control {
@@ -45,9 +45,9 @@ public:
     Container(model::Container*, descriptor::Container*);
     virtual ~Container();
 
-    void bindItemSlot(slot::ItemSlot*);
+    void bindItemSlot(slot::Item*);
 
-    slot::ItemSlot* const itemSlot() const { return m_itemSlot; }
+    slot::Item* const itemSlot() const { return m_itemSlot; }
     bool insert(Item*);
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
@@ -67,7 +67,7 @@ private:
     model::Container* m_model_container = nullptr;
     descriptor::Container* m_descriptor_container = nullptr;
 
-    slot::ItemSlot* m_itemSlot = nullptr;
+    slot::Item* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;
 

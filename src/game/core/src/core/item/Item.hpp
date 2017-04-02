@@ -29,7 +29,7 @@ class Item;
 } // namespace model
 
 namespace slot {
-class ItemSlot; 
+class Item;
 } // namespace slot
 
 
@@ -43,9 +43,9 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void setSlot(slot::ItemSlot* slot)  { m_slot = slot; }
+    void setSlot(slot::Item* slot)  { m_slot = slot; }
 
-    slot::ItemSlot* slot() const { return m_slot; }
+    slot::Item* slot() const { return m_slot; }
 
     bool isDamaged() const;
     bool isLocked() const;
@@ -83,7 +83,7 @@ private:
     model::Item* m_model_item = nullptr;
     descriptor::Item* m_descriptor_item = nullptr;
 
-    slot::ItemSlot* m_slot = nullptr;
+    slot::Item* m_slot = nullptr;
 };
 
 } // namespace control
