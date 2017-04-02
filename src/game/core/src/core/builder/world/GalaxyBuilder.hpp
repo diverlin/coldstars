@@ -32,14 +32,15 @@ namespace builder {
 class Galaxy
 {
 public:
-    static control::Galaxy* create(descriptor::Galaxy*);
+    static control::Galaxy* gen();
+    static control::Galaxy* gen(descriptor::Galaxy*);
 
 private:
     Galaxy() = delete;
     ~Galaxy() = delete;
 
     static void __createInternals(control::Galaxy*, descriptor::Galaxy*);
-    static control::Galaxy* __genTemplate();
+    static control::Galaxy* __genTemplate(descriptor::Galaxy*);
 }; 
 
 } // namespace builder

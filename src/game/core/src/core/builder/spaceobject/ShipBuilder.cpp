@@ -64,7 +64,11 @@ control::Ship*
 Ship::__genTemplate(descriptor::Ship* descr, int_t ob_id)
 {
     model::Ship* model = new model::Ship(descr->id(), ob_id);
-    control::Ship* ship = new control::Ship(model, descr);
+    assert(model);
+
+    control::Ship* ship = new control::Ship(descr, model);
+    assert(ship);
+
     EntityManager::get().reg(ship);
     return ship;
 }

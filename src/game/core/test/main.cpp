@@ -155,25 +155,25 @@ TEST(descriptor,manager)
 
 TEST(clone, galaxy)
 {
-    const auto& descriptor = descriptor::Manager::get().randGalaxy();
-    control::Galaxy* galaxy1 = builder::Galaxy::create(descriptor);
-    control::Galaxy* galaxy2 = builder::Galaxy::create(descriptor);
+    const auto& descr = descriptor::Manager::get().randGalaxy();
+    control::Galaxy* galaxy1 = builder::Galaxy::gen(descr);
+    control::Galaxy* galaxy2 = builder::Galaxy::gen(descr);
     EXPECT_EQ(galaxy1->model()->data(), galaxy2->model()->data());
 }
 
 TEST(clone, sector)
 {
-    const auto& descriptor = descriptor::Manager::get().randSector();
-    control::Sector* sector1 = builder::Sector::create(descriptor);
-    control::Sector* sector2 = builder::Sector::create(descriptor);
+    const auto& descr = descriptor::Manager::get().randSector();
+    control::Sector* sector1 = builder::Sector::gen(descr);
+    control::Sector* sector2 = builder::Sector::gen(descr);
     EXPECT_EQ(sector1->model()->data(), sector2->model()->data());
 }
 
 TEST(clone, starsystem)
 {
-    const auto& descriptor = descriptor::Manager::get().randStarSystem();
-    control::StarSystem* starsystem1 = builder::StarSystem::gen(descriptor);
-    control::StarSystem* starsystem2 = builder::StarSystem::gen(descriptor);
+    const auto& descr = descriptor::Manager::get().randStarSystem();
+    control::StarSystem* starsystem1 = builder::StarSystem::gen(descr);
+    control::StarSystem* starsystem2 = builder::StarSystem::gen(descr);
     EXPECT_EQ(starsystem1->model()->data(), starsystem2->model()->data());
 }
 

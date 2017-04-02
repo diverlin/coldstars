@@ -46,7 +46,7 @@ namespace model {
 class Sector : public Base
 {
 public:
-    Sector();
+    Sector(int_t);
     ~Sector() = default;
     Sector(const std::string& data);
     std::string data() const;
@@ -88,7 +88,7 @@ namespace control {
 class Sector : public Base
 {
 public:
-    Sector(model::Sector*, descriptor::Sector*);
+    Sector(descriptor::Sector*, model::Sector*);
     ~Sector();
 
     model::StarSystem* activeStarsystem() const;
@@ -111,12 +111,12 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    model::Sector* model() const { return m_model_sector; }
     descriptor::Sector* descriptor() const { return m_descriptor_sector; }
+    model::Sector* model() const { return m_model_sector; }
 
 private:
-    model::Sector* m_model_sector = nullptr;
     descriptor::Sector* m_descriptor_sector = nullptr;
+    model::Sector* m_model_sector = nullptr;
 
     Galaxy* m_galaxy = nullptr;
 

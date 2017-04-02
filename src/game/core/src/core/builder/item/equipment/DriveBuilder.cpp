@@ -62,7 +62,7 @@ control::item::Drive*
 Drive::__genTemplate(descriptor::item::Drive* descr, int_t ob_id)
 {
     model::item::Drive* model = new model::item::Drive(descr->id(), ob_id);
-    control::item::Drive* drive = new control::item::Drive(model, descr);
+    control::item::Drive* drive = new control::item::Drive(descr, model);
     EntityManager::get().reg(drive);
     return drive;
 }

@@ -63,7 +63,7 @@ control::item::Scaner*
 Scaner::__genTemplate(descriptor::item::Scaner* descr, int_t ob_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descr->id(), ob_id);
-    control::item::Scaner* scaner = new control::item::Scaner(model, descr);
+    control::item::Scaner* scaner = new control::item::Scaner(descr, model);
     EntityManager::get().reg(scaner);
     return scaner;
 }

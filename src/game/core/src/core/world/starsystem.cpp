@@ -69,11 +69,11 @@
 
 namespace control {
 
-StarSystem::StarSystem(model::StarSystem* model, descriptor::StarSystem* descr)
+StarSystem::StarSystem(descriptor::StarSystem* descr, model::StarSystem* model)
     :
-      Base(model, descr)
-    , m_model_starsystem(model)
+      Base(descr, model)
     , m_descriptor_starsystem(descr)
+    , m_model_starsystem(model)
 {
     __actualizeModel();
 }
@@ -92,9 +92,6 @@ StarSystem::~StarSystem()
 void
 StarSystem::__actualizeModel()
 {
-    if (isInitialized())
-        return;
-
     model()->setWritable(false);
 
 
@@ -126,7 +123,6 @@ StarSystem::__actualizeModel()
 //    __actualizeItems();
 
     model()->setWritable(true);
-    setInitialized();
 }
 
 Star*

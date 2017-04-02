@@ -26,32 +26,45 @@
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 #include <meti/RandUtils.hpp>
 
 namespace builder {
 
 control::Galaxy*
-Galaxy::__genTemplate()
+Galaxy::gen()
 {
-    model::Galaxy* model = new model::Galaxy;
-    assert(model);
+    descriptor::Galaxy* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::GALAXY)) {
+        descr = descriptor::genGalaxy({0});
+    } else {
+        descr = descriptor::Manager::get().randGalaxy();
+    }
+    return gen(descr);
+}
 
-    control::Galaxy* galaxy = new control::Galaxy(model);
-    assert(galaxy);
-
-    EntityManager::get().reg(galaxy);
-    
+control::Galaxy*
+Galaxy::gen(descriptor::Galaxy* descr)
+{
+    control::Galaxy* galaxy = __genTemplate(descr);
+    __createInternals(galaxy, descr);
     return galaxy;
 } 
 
 control::Galaxy*
-Galaxy::create(descriptor::Galaxy* descr)
+Galaxy::__genTemplate(descriptor::Galaxy* descr)
 {
-    control::Galaxy* galaxy = __genTemplate();
-    __createInternals(galaxy, descr);
+    model::Galaxy* model = new model::Galaxy(descr->id());
+    assert(model);
+
+    control::Galaxy* galaxy = new control::Galaxy(descr, model);
+    assert(galaxy);
+
+    EntityManager::get().reg(galaxy);
+
     return galaxy;
-} 
+}
 
 void Galaxy::__createInternals(control::Galaxy* model, descriptor::Galaxy* descr)
 {     

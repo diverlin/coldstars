@@ -25,6 +25,10 @@
 
 #include <glm/glm.hpp>
 
+namespace descriptor {
+class Galaxy;
+} // namespace descriptor
+
 namespace  model {
 class Sector;
 class StarSystem;
@@ -41,7 +45,7 @@ namespace model {
 class Galaxy : public model::Base {
 
 public:
-    Galaxy();
+    Galaxy(int_t);
     ~Galaxy() = default;
     Galaxy(const std::string& data);
     std::string data() const;
@@ -71,7 +75,7 @@ namespace control {
 class Galaxy : public Base
 {
 public:
-    Galaxy(model::Galaxy*);
+    Galaxy(descriptor::Galaxy*, model::Galaxy*);
     ~Galaxy();
 
     model::StarSystem* activeStarsystem() const;
@@ -91,10 +95,13 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
+    descriptor::Galaxy* descriptor() const { return m_descriptor_galaxy; }
     model::Galaxy* model() const { return m_model_galaxy; }
 
 private:
+    descriptor::Galaxy* m_descriptor_galaxy = nullptr;
     model::Galaxy* m_model_galaxy = nullptr;
+
     std::vector<control::Sector*> m_sectors;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

@@ -108,7 +108,7 @@ class StarSystem : public Base
     //    using Vehicles = std::vector<Vehicle*>;
 
 public:
-    StarSystem(model::StarSystem*, descriptor::StarSystem*);
+    StarSystem(descriptor::StarSystem*, model::StarSystem*);
     ~StarSystem();
 
     virtual void putChildrenToGarbage() const;
@@ -228,12 +228,12 @@ public:
     Vehicle* randomVehicle(const std::vector<race::Type>&) const;
     //
 
-    model::StarSystem* model() const { return m_model_starsystem; }
     descriptor::StarSystem* descriptor() const { return m_descriptor_starsystem; }
+    model::StarSystem* model() const { return m_model_starsystem; }
 
 private:
-    model::StarSystem* m_model_starsystem = nullptr;
     descriptor::StarSystem* m_descriptor_starsystem = nullptr;
+    model::StarSystem* m_model_starsystem = nullptr;
 
     race::Type m_race_id = race::Type::R0;
     race::Type m_conqueror_race_id = race::Type::NONE;

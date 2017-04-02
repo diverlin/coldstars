@@ -27,13 +27,15 @@
 
 #include "../struct/StarSystemsConditionData.hpp"
 
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
 
-Galaxy::Galaxy()
+Galaxy::Galaxy(int_t descriptor_id)
 {
-//    setType(entity::type::GALAXY);
+    setDescriptor(descriptor_id);
 }
 
 Galaxy::Galaxy(const std::string& data)
@@ -60,10 +62,11 @@ bool Galaxy::operator!=(const Galaxy& rhs) const {
 
 namespace control {
 
-Galaxy::Galaxy(model::Galaxy* model)
+Galaxy::Galaxy(descriptor::Galaxy* descr, model::Galaxy* model)
     :
-    Base(model, nullptr)
-    , m_model_galaxy(model)
+    Base(descr, model)
+  , m_descriptor_galaxy(descr)
+  , m_model_galaxy(model)
 
 {
 }
@@ -90,12 +93,12 @@ void Galaxy::putChildrenToGarbage() const
 //    }
 }
 
-void Galaxy::add(model::Sector* _model, const glm::vec3& center)
+void Galaxy::add(model::Sector* model, const glm::vec3& center)
 { 
-    _model->setGalaxy(model()->id());
-    _model->setPosition(center);
+    model->setGalaxy(id());
+    model->setPosition(center);
 
-    control::Sector* sector = new control::Sector(_model, nullptr);
+    control::Sector* sector = new control::Sector(nullptr, model);
     m_sectors.push_back(sector);
 }
 

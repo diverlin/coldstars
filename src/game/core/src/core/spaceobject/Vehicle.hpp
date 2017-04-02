@@ -116,7 +116,7 @@ public:
     };
 
 public:
-    Vehicle(model::Vehicle*, descriptor::Vehicle*);
+    Vehicle(descriptor::Vehicle*, model::Vehicle*);
     virtual ~Vehicle();
 
     void dock(SpaceObject*);
@@ -158,7 +158,9 @@ public:
     Propetries& properties() { return m_properties; }
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
+
     descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
+    model::Vehicle* model() const { return m_model_vehicle; }
 
     virtual int givenExpirience() const override final;
     bool isSlotTypePresent(const entity::Type&) const;
@@ -283,15 +285,13 @@ public:
 
     float adjustDissipateFilter() const;
 
-    model::Vehicle* model() const { return m_model_vehicle; }
-
 private:
     void __updateFreeSpace();
 //    bool __addItemToCargo(Item*);
 
 protected:
-    model::Vehicle* m_model_vehicle = nullptr;
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
+    model::Vehicle* m_model_vehicle = nullptr;
 
     slot::Item* _freeArtefactSlot() const;
     slot::Item* _cargoSlotWithGoods(place::Type);

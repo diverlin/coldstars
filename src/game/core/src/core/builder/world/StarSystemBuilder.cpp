@@ -78,7 +78,7 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     model::StarSystem* model = new model::StarSystem(descr->id(), ob_id);
     assert(model);
 
-    control::StarSystem* starsystem = new control::StarSystem(model, descr);
+    control::StarSystem* starsystem = new control::StarSystem(descr, model);
     assert(starsystem);
 
     EntityManager::get().reg(starsystem);

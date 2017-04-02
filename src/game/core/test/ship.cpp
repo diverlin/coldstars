@@ -182,7 +182,7 @@ void testShipCloneScenario(control::Ship* ship)
     control::Vehicle::Propetries properties = ship->properties(); // we need copy, not reference
 
     model::Ship* model = new model::Ship(ship->model()->data());
-    control::Ship* clone = new control::Ship(model, ship->descriptor());
+    control::Ship* clone = new control::Ship(ship->descriptor(), model);
 
     compareShipModels(ship->model(), model);
     compareVehicleProperties(properties, clone->properties());

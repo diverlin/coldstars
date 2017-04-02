@@ -39,7 +39,7 @@ class Vehicle;
 class Land : public Base
 {
 public:
-    Land(model::Land*, descriptor::Land*);
+    Land(descriptor::Land*, model::Land*);
     virtual ~Land();
 
     void setOwner(SpaceObject* owner)  { m_owner = owner; }
@@ -54,14 +54,14 @@ public:
 
     virtual std::string vehiclesStr() const = 0;
 
-    model::Land* model() const { return m_model_land; }
     descriptor::Land* descriptor() const { return m_descriptor_land; }
+    model::Land* model() const { return m_model_land; }
 
 private:
     SpaceObject* m_owner = nullptr;
 
-    model::Land* m_model_land = nullptr;
     descriptor::Land* m_descriptor_land = nullptr;
+    model::Land* m_model_land = nullptr;
 
 //    UnresolvedDataLand data_unresolved_Land;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

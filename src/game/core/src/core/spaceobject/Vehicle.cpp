@@ -97,11 +97,11 @@
 namespace control {
 
 
-Vehicle::Vehicle(model::Vehicle* model, descriptor::Vehicle* descr)
+Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
     :
-      SpaceObject(model, descr)
-    , m_model_vehicle(model)
+      SpaceObject(descr, model)
     , m_descriptor_vehicle(descr)
+    , m_model_vehicle(model)
 {
     driveComplex().setOwnerVehicle(this);
 
@@ -142,17 +142,11 @@ Vehicle::process() {
 void
 Vehicle::__loadModel()
 {
-    if (isInitialized()) {
-        assert(false);
-        return;
-    }
-
     model()->setWritable(false);
 
     __loadItemsFromModel();
 
     model()->setWritable(true);
-    setInitialized();
 }
 
 void

@@ -31,7 +31,7 @@ namespace control {
 
 Room::Room(descriptor::Room* descr, model::Room* model)
     :
-      Base(model, descr)
+      Base(descr, model)
     , m_descriptor_room(descr)
     , m_model_room(model)
 {

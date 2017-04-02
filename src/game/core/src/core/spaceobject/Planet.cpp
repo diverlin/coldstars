@@ -35,11 +35,11 @@
 
 namespace control {
 
-Planet::Planet(model::Planet* model, descriptor::Planet* descr)
+Planet::Planet(descriptor::Planet* descr, model::Planet* model)
     :
-      Planetoid(model, descr)
-    , m_model_planet(model)
+      Planetoid(descr, model)
     , m_descriptor_planet(descr)
+    , m_model_planet(model)
 {}
 
 Planet::~Planet()

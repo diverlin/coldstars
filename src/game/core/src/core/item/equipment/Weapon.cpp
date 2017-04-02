@@ -26,11 +26,11 @@
 namespace control {
 namespace item {
 
-Weapon::Weapon(model::item::Weapon* model, descriptor::item::Weapon* descr)
+Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
     :
-      Equipment(model, descr)
-    , m_model_weapon(model)
+      Equipment(descr, model)
     , m_descriptor_weapon(descr)
+    , m_model_weapon(model)
 {
 //    fire_atOnce = meti::getRandInt(1, 3);
 }

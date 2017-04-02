@@ -148,7 +148,7 @@ SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
     model::SpaceStation* model = new model::SpaceStation(descr->id());
     assert(model);
 
-    control::SpaceStation* spacestation = new control::SpaceStation(model, descr);
+    control::SpaceStation* spacestation = new control::SpaceStation(descr, model);
     assert(spacestation);
 
     EntityManager::get().reg(spacestation);

@@ -31,11 +31,11 @@
 namespace control {
 namespace item {
 
-Bak::Bak(model::item::Bak* model, descriptor::item::Bak* descr)
+Bak::Bak(descriptor::item::Bak* descr, model::item::Bak* model)
     :
-      Equipment(model, descr)
-    , m_model_bak(model)
+      Equipment(descr, model)
     , m_descriptor_bak(descr)
+    , m_model_bak(model)
 {}
 
 int

@@ -63,7 +63,7 @@ control::item::Droid*
 Droid::__genTemplate(descriptor::item::Droid* descr, int ob_id)
 {
     model::item::Droid* model = new model::item::Droid(descr->id(), ob_id);
-    control::item::Droid* droid = new control::item::Droid(model, descr);
+    control::item::Droid* droid = new control::item::Droid(descr, model);
     EntityManager::get().reg(droid);
     return droid;
 }

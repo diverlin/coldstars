@@ -26,24 +26,27 @@ namespace builder {
 control::RocketBullet*
 Rocket::gen(const BulletData& data_bullet)
 {
-    control::RocketBullet* rocket_bullet = __genTemplate();
+    assert(false);
+    control::RocketBullet* rocket_bullet = __genTemplate(nullptr);
     createInternals(rocket_bullet, data_bullet);
 
     return rocket_bullet;
 }
 
 control::RocketBullet*
-Rocket::__genTemplate(int_t id)
+Rocket::__genTemplate(descriptor::RocketBullet* descr)
 {
-    model::RocketBullet* model = new model::RocketBullet;
-    descriptor::RocketBullet* descr = nullptr;
-    assert(descr);
-    control::RocketBullet* rocket_bullet = new control::RocketBullet(model, descr);
-    assert(rocket_bullet);
+    model::RocketBullet* model = new model::RocketBullet();
+    assert(false);
+    //model::RocketBullet* model = new model::RocketBullet(descr->id());
+    assert(model);
 
-    EntityManager::get().reg(rocket_bullet);
+    control::RocketBullet* bullet = new control::RocketBullet(descr, model);
+    assert(bullet);
 
-    return rocket_bullet;
+    EntityManager::get().reg(bullet);
+
+    return bullet;
 }
 
 void

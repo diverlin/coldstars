@@ -39,12 +39,12 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    Drive(model::item::Drive*, descriptor::item::Drive*);
+    Drive(descriptor::item::Drive*, model::item::Drive*);
     virtual ~Drive() = default;
 
 public:
-    model::item::Drive* model() const { return m_model_drive; }
     descriptor::item::Drive* descriptor() const { return m_descriptor_drive; }
+    model::item::Drive* model() const { return m_model_drive; }
 
 private:
     virtual void updateProperties();
@@ -53,8 +53,8 @@ private:
     int m_speed_add = 0;
     int m_hyper_add = 0;
 
-    model::item::Drive* m_model_drive = nullptr;
     descriptor::item::Drive* m_descriptor_drive = nullptr;
+    model::item::Drive* m_model_drive = nullptr;
 
     void virtual addUniqueInfo();
     std::string speedStr();
