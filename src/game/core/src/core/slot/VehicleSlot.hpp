@@ -27,7 +27,7 @@ class Vehicle;
 
 namespace slot {
 
-class Vehicle : public BaseSlot
+class Vehicle : public Base
 {
 public:
     Vehicle(int);

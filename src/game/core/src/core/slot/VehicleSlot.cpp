@@ -32,7 +32,7 @@
 namespace slot {
 
 Vehicle::Vehicle(int offset)
-    : BaseSlot()
+    : Base()
 {
     setId(offset);
 }
