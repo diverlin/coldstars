@@ -29,7 +29,7 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 
-namespace control {
+namespace slot {
 
 VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)
     : BaseSlot()
@@ -52,7 +52,7 @@ void VehicleSlot::putChildrenToGarbage() const
 //    }
 }
                       
-void VehicleSlot::insert(Vehicle* vehicle)
+void VehicleSlot::insert(control::Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
@@ -67,7 +67,7 @@ void VehicleSlot::Release()
 
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 {
-    Vehicle* tmp_vehicle = vehicle_slot->vehicle();
+    control::Vehicle* tmp_vehicle = vehicle_slot->vehicle();
     vehicle_slot->insert(m_vehicle);
     insert(tmp_vehicle);
 }
@@ -131,4 +131,4 @@ void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 ////    }
 //}
 
-} // namespace control
+} // namespace slot
