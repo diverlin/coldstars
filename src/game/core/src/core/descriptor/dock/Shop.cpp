@@ -23,6 +23,12 @@
 
 namespace descriptor {
 
+Shop::Shop()
+{
+    setType(Type::SHOP);
+    setObType(entity::Type::SHOP);
+}
+
 Shop::Shop(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA

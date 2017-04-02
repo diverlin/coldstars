@@ -26,7 +26,7 @@ namespace descriptor {
 class Store : public Room
 {
 public:
-    Store() = default;
+    Store();
     ~Store() = default;
     Store(const std::string& data);
     std::string data() const;

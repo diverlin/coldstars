@@ -139,7 +139,7 @@ public:
 
     void setGodMode(bool god_mode) { m_godMode = god_mode; }
     void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_specialActionId = special_action_id; }
-    void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
+    void setParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
 
     void setLand(Land* land) { m_Land = land; }
 

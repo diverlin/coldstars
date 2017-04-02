@@ -25,7 +25,7 @@ namespace descriptor {
 class Goverment : public Room
 {
 public:
-    Goverment() = default;
+    Goverment();
     ~Goverment() = default;
     Goverment(const std::string& data);
     std::string data() const;

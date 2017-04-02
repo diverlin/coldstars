@@ -27,7 +27,7 @@
 #include "../common/Global.hpp"
 
 #include <core/manager/EntityManager.hpp>
-
+#include <core/model/spaceobject/Vehicle.hpp>
 
 namespace model {
 
@@ -49,7 +49,7 @@ namespace control {
 VehicleSlot::VehicleSlot(int id, entity::Type subtype_id)
     : BaseSlot()
 {
-    assert(false);
+//    DANGER //assert(false);
 //    setId(id);
 //    setTypeId(entity::Type::VEHICLE_SLOT);
 //    setSubTypeId(subtype_id);
@@ -67,13 +67,12 @@ void VehicleSlot::putChildrenToGarbage() const
 //    }
 }
                       
-void VehicleSlot::InsertVehicle(Vehicle* vehicle)
+void VehicleSlot::insert(Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
-    //vehicle->setPlaceTypeId(data_id.type_id);
-    assert(false);
-    //        vehicle->SetParentVehicleSlot(this);
+    vehicle->model()->setPlace(place::Type::KOSMOPORT);
+    vehicle->setParentVehicleSlot(this);
 }
 
 void VehicleSlot::Release()
@@ -84,8 +83,8 @@ void VehicleSlot::Release()
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 {
     Vehicle* tmp_vehicle = vehicle_slot->vehicle();
-    vehicle_slot->InsertVehicle(m_vehicle);
-    InsertVehicle(tmp_vehicle);
+    vehicle_slot->insert(m_vehicle);
+    insert(tmp_vehicle);
 }
 
 //void VehicleSlot::Render(const ceti::Rect& rect) const

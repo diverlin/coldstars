@@ -72,10 +72,7 @@ public:
 //    void Resolve();
 
 private:
-    std::vector<VehicleSlot*> m_vehicle_total_slots;
-    std::vector<VehicleSlot*> m_vehicle_military_slots;
-    std::vector<VehicleSlot*> m_vehicle_visitors_slots;
-
+    std::vector<VehicleSlot*> m_vehicle_slots;
     std::vector<ItemSlot*> m_item_slots;
 
     int m_fuelPrice;

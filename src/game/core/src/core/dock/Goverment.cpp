@@ -35,9 +35,6 @@ Goverment::Goverment(descriptor::Goverment* descr, model::Goverment* model)
     , m_descriptor_goverment(descr)
     , m_model_goverment(model)
 {
-    assert(false);
-    //    setId(id);
-    //    setTypeId(entity::Type::GOVERMENT);
 }
 
 Goverment::~Goverment()
