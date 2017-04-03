@@ -58,6 +58,7 @@ public:
 
     bool add(Vehicle*);
     bool remove(Vehicle*);
+    int shipsNum() const;
 
     bool repairItem(Npc*, Item*) const;
     bool chargeRocketEquipment(Npc*, item::Rocket*) const;

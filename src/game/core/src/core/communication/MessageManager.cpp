@@ -169,8 +169,12 @@ void explosionEvent(const comm::Message& message) {
 namespace event {
 
 /** DOCK */
-void doDockShip(int_t object, int_t dock) {
+bool doDockShip(int_t object, int_t dock) {
     control::Ship* ship = EntityManager::get().ship(object);
+
+    if (!ship->properties().speed) {
+        return false;
+    }
 
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);
@@ -179,11 +183,16 @@ void doDockShip(int_t object, int_t dock) {
     control::Land* land = EntityManager::get().land(dock);
     assert(land);
     land->add(ship);
+
+    return true;
 }
 
-void doLaunchShip(int_t object, int_t dock) {
+bool doLaunchShip(int_t object, int_t dock) {
     control::Ship* ship = EntityManager::get().ship(object);
 
+    if (!ship->properties().speed) {
+        return false;
+    }
     control::Land* land = EntityManager::get().land(dock);
     assert(land);
     land->remove(ship);
@@ -191,6 +200,8 @@ void doLaunchShip(int_t object, int_t dock) {
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);
     starsystem->add(ship, land->owner()->position());
+
+    return true;
 }
 /** */
 

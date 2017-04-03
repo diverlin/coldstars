@@ -80,8 +80,8 @@ void Kosmoport::bindGoverment(Goverment* goverment)
     m_goverment->setKosmoport(this);
 }
 
-/* virtual */
-bool Kosmoport::isAllowedToLand() const
+bool
+Kosmoport::isAllowedToLand() const
 {
     if (m_angar->freeVehicleSlotTotalNum() > 0) {
         return true;
@@ -90,8 +90,8 @@ bool Kosmoport::isAllowedToLand() const
     return false;
 }
 
-/* virtual */
-bool Kosmoport::add(Vehicle* vehicle)
+bool
+Kosmoport::add(Vehicle* vehicle)
 {        
     if (!m_angar->add(vehicle))
         return false;
@@ -105,10 +105,16 @@ bool Kosmoport::add(Vehicle* vehicle)
     return true;
 }
 
-//* virtual */
-bool Kosmoport::remove(Vehicle* vehicle)
+bool
+Kosmoport::remove(Vehicle* vehicle)
 {        
     return m_angar->remove(vehicle);
+}
+
+int
+Kosmoport::shipsNum() const
+{
+    return m_angar->shipsNum();
 }
 
 

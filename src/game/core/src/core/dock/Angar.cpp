@@ -195,7 +195,8 @@ Angar::__slot(Vehicle* vehicle) const
 }
 
 
-bool Angar::add(Vehicle* vehicle)
+bool
+Angar::add(Vehicle* vehicle)
 {
     slot::Vehicle* slot = __freeSlot();
     if (slot) {
@@ -204,7 +205,8 @@ bool Angar::add(Vehicle* vehicle)
     return false;
 }
 
-bool Angar::remove(Vehicle* vehicle)
+bool
+Angar::remove(Vehicle* vehicle)
 {
     slot::Vehicle* slot = __slot(vehicle);
     if (slot) {
@@ -215,6 +217,18 @@ bool Angar::remove(Vehicle* vehicle)
         }
     }
     return false;
+}
+
+int
+Angar::shipsNum() const
+{
+    int count = 0;
+    for(auto slot: m_vehicle_slots) {
+        if (slot->vehicle()) {
+            count++;
+        }
+    }
+    return count;
 }
 
 std::string Angar::vehiclesStr() const

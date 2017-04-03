@@ -16,8 +16,8 @@ class ExplosionDescriptor;
 class AddToStarsystemDescriptor;
 
 namespace event {
-void doDockShip(int_t, int_t);
-void doLaunchShip(int_t, int_t);
+bool doDockShip(int_t, int_t);
+bool doLaunchShip(int_t, int_t);
 } // namespace event
 
 class MessageManager

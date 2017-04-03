@@ -49,6 +49,7 @@ public:
 
     virtual bool add(Vehicle*) = 0;
     virtual bool remove(Vehicle*) = 0;
+    virtual int shipsNum() const = 0;
 
     virtual void updateInStatic() = 0;
 
