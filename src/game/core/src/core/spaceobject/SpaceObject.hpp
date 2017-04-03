@@ -119,6 +119,9 @@ public:
     void setStarSystem(StarSystem* starsystem);
     void setParent(SpaceObject* parent);
 
+    const meti::vec3& nextTurnPosition() const { return m_nextTurnPosition; }
+    void setNextTurnPosition(const meti::vec3& position) { m_nextTurnPosition = position; }
+
     void addImpulse(const glm::vec3&, float);
 
     [[warning("do we need this?")]]
@@ -144,7 +147,8 @@ private:
     int m_mass = 0;
 
 protected:
-    glm::vec3 externalForce;
+    glm::vec3 m_impulse;
+    meti::vec3 m_nextTurnPosition;
 
     descriptor::SpaceObject* m_descriptor_spaceobject = nullptr;
     model::SpaceObject* m_model_spaceobject = nullptr;
@@ -157,9 +161,9 @@ protected:
 //    [[deprecated("!!! remove")]]
 //    const LifeData& _dataLife() const { return model()->dataLife; }
 
-    const glm::vec3& _externalForce() const { return externalForce; }
+    const glm::vec3& _externalForce() const { return m_impulse; }
     [[deprecated("!!! remove")]]
-    glm::vec3& _externalForce() { return externalForce; }
+    glm::vec3& _externalForce() { return m_impulse; }
 
     void _checkDeath(bool);
     virtual void _postDeathUniqueEvent(bool) {}

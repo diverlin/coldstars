@@ -54,8 +54,9 @@ public:
     bool add(control::Item*);
     bool canAcceptNewItem() const;
 
-    virtual bool add(Vehicle*);
-    virtual bool remove(Vehicle*);
+    bool add(Vehicle*) override final;
+    bool remove(Vehicle*) override final;
+    int shipsNum() const override final { return m_vehicles.size(); }
 
     virtual bool isAllowedToLand() const;
 

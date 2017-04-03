@@ -141,11 +141,11 @@ TEST(vehicle, item_bak_and_drive)
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
-    bak->doBreak();
+    bak->corrupt();
     EXPECT_EQ(0, ship->properties().hyper);
 
     // event: repair item
-    bak->doRepair();
+    bak->repair();
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     /// drive
@@ -158,11 +158,11 @@ TEST(vehicle, item_bak_and_drive)
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
-    drive->doBreak();
+    drive->corrupt();
     EXPECT_EQ(0, ship->properties().hyper);
 
     // event: repair item
-    drive->doRepair();
+    drive->repair();
     EXPECT_EQ(hyper, ship->properties().hyper);
 }
 
@@ -191,11 +191,11 @@ TEST(vehicle, item_droid)
     EXPECT_EQ(droid->model()->repair(), ship->properties().repair);
 
     // event: damage item
-    droid->doBreak();
+    droid->corrupt();
     EXPECT_EQ(0, ship->properties().repair);
 
     // event: repair item
-    droid->doRepair();
+    droid->repair();
     EXPECT_EQ(droid->model()->repair(), ship->properties().repair);
 }
 
@@ -228,12 +228,12 @@ TEST(vehicle, item_grapple)
     EXPECT_EQ(grapple->model()->radius(), ship->properties().grab_radius);
 
     // event: damage item
-    grapple->doBreak();
+    grapple->corrupt();
     EXPECT_EQ(0, ship->properties().grab_strength);
     EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: repair item
-    grapple->doRepair();
+    grapple->repair();
     EXPECT_EQ(grapple->model()->strength(), ship->properties().grab_strength);
     EXPECT_EQ(grapple->model()->radius(), ship->properties().grab_radius);
 }
@@ -263,11 +263,11 @@ TEST(vehicle, item_scaner)
     EXPECT_EQ(scaner->model()->scan(), ship->properties().scan);
 
     // event: damage item
-    scaner->doBreak();
+    scaner->corrupt();
     EXPECT_EQ(0, ship->properties().scan);
 
     // event: repair item
-    scaner->doRepair();
+    scaner->repair();
     EXPECT_EQ(scaner->model()->scan(), ship->properties().scan);
 }
 
@@ -296,11 +296,11 @@ TEST(vehicle, item_radar)
     EXPECT_EQ(radar->model()->radius(), ship->properties().radar);
 
     // event: damage item
-    radar->doBreak();
+    radar->corrupt();
     EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: repair item
-    radar->doRepair();
+    radar->repair();
     EXPECT_EQ(radar->model()->radius(), ship->properties().radar);
 }
 
@@ -330,11 +330,11 @@ TEST(vehicle, item_protector)
     EXPECT_EQ(protection, ship->properties().protection);
 
     // event: damage item
-    protector->doBreak();
+    protector->corrupt();
     EXPECT_EQ(ship->descriptor()->protection(), ship->properties().protection);
 
     // event: repair item
-    protector->doRepair();
+    protector->repair();
     EXPECT_EQ(protection, ship->properties().protection);
 }
 

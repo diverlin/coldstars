@@ -63,7 +63,7 @@ void SpaceObject::setParent(SpaceObject* parent)
 
 void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
 {
-    externalForce += force_dir * strength;
+    m_impulse += force_dir * strength;
 }
 
 void SpaceObject::hit(int damage)

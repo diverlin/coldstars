@@ -54,11 +54,11 @@ public:
     void useNormalDeterioration();
     void useOverloadDeterioration();
 
-    void doBreak();
+    void corrupt();
     void deteriorationEvent();
     void doLock(int lock = 1);
     void doUnlock();
-    bool doRepair();
+    bool repair();
 
     virtual void updateProperties() {}
     virtual void updateInStatic() { _updateLock(); }
