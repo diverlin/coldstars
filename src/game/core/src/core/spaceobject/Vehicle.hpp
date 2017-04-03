@@ -250,13 +250,13 @@ public:
     void _updateArtefactInfluence();
 
 protected:
-    void _dockingEvent();
+//    void _dockingEvent();
 
 public:
-    void process();
+//    void process();
 
     void HyperJumpEvent(model::StarSystem*);
-    void LaunchingEvent();
+//    void LaunchingEvent();
 
     void UpdateSpecialEffect();
     void UpdateLockedItems();

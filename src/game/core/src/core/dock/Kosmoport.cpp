@@ -108,9 +108,7 @@ bool Kosmoport::add(Vehicle* vehicle)
 //* virtual */
 bool Kosmoport::remove(Vehicle* vehicle)
 {        
-    assert(false);
-    //    vehicle->parentVehicleSlot()->Release();
-    return true;
+    return m_angar->remove(vehicle);
 }
 
 

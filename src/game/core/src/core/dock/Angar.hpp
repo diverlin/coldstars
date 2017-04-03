@@ -57,6 +57,7 @@ public:
     void updateInStatic() const;
 
     bool add(Vehicle*);
+    bool remove(Vehicle*);
 
     bool repairItem(Npc*, Item*) const;
     bool chargeRocketEquipment(Npc*, item::Rocket*) const;
@@ -84,9 +85,10 @@ private:
     std::vector<slot::Vehicle*> m_vehicle_slots;
     std::vector<slot::Item*> m_item_slots;
 
-    int m_fuelPrice;
+    int m_fuelPrice = 0;
 
     slot::Vehicle* __freeSlot() const;
+    slot::Vehicle* __slot(Vehicle*) const;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

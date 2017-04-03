@@ -141,9 +141,13 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
 }
 
 /** DOCK */
-void _dockShipEvent(const comm::Message& message) {
+void doDockShipEvent(const comm::Message& message) {
     descriptor::comm::Dock descr(message.data());
-    dockShipEvent(descr.object(), descr.dock());
+    event::doDockShip(descr.object(), descr.dock());
+}
+void doLaunchShipEvent(const comm::Message& message) {
+    descriptor::comm::Dock descr(message.data());
+    event::doLaunchShip(descr.object(), descr.dock());
 }
 /** */
 void hitEvent(const comm::Message& message) {
@@ -162,8 +166,10 @@ void explosionEvent(const comm::Message& message) {
 } // namespace
 
 
+namespace event {
+
 /** DOCK */
-void dockShipEvent(int_t object, int_t dock) {
+void doDockShip(int_t object, int_t dock) {
     control::Ship* ship = EntityManager::get().ship(object);
 
     control::StarSystem* starsystem = ship->starsystem();
@@ -174,7 +180,21 @@ void dockShipEvent(int_t object, int_t dock) {
     assert(land);
     land->add(ship);
 }
+
+void doLaunchShip(int_t object, int_t dock) {
+    control::Ship* ship = EntityManager::get().ship(object);
+
+    control::Land* land = EntityManager::get().land(dock);
+    assert(land);
+    land->remove(ship);
+
+    control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
+    starsystem->add(ship, land->owner()->position());
+}
 /** */
+
+} // namespace event
 
 void MessageManager::process(const comm::Message& message)
 {
@@ -198,7 +218,8 @@ void MessageManager::process(const comm::Message& message)
     case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
 
     /** DOCK */
-    case comm::Message::Type::DOCK_SHIP: _dockShipEvent(message); break;
+    case comm::Message::Type::DOCK_SHIP: doDockShipEvent(message); break;
+    case comm::Message::Type::LAUNCH_SHIP: doLaunchShipEvent(message); break;
 
     /** OTHER */
     case comm::Message::Type::HIT: hitEvent(message); break;

@@ -207,6 +207,7 @@ TEST(ship, equip_and_clone)
 
 TEST(ship, dockingEvent)
 {
+    // create
     control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Star* star = builder::Star::gen();
     control::Planet* planet = builder::Planet::gen();
@@ -216,25 +217,48 @@ TEST(ship, dockingEvent)
     starsystem->add(planet);
     starsystem->add(ship, planet->position());
 
+    // starsystem
     EXPECT_EQ(1, starsystem->ships().size());
-    EXPECT_EQ(ship->position(), planet->position());
-    EXPECT_EQ(0, int(ship->position().length()));
+
+    // ship
+    EXPECT_EQ(planet->position(), ship->position());
     EXPECT_EQ(place::Type::SPACE, ship->place());
     EXPECT_EQ(nullptr, ship->land());
 
-    EXPECT_EQ(ship->driveComplex().target(), nullptr);
-    EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::NONE);
+    for (int i=0; i<2; ++i) {
+        /** docking */
 
-    ship->dock(planet);
+        // drive complex
+        EXPECT_EQ(nullptr, ship->driveComplex().target());
+        EXPECT_EQ(DriveComplex::Action::NONE, ship->driveComplex().action());
 
-    EXPECT_EQ(ship->driveComplex().target(), planet);
-    EXPECT_EQ(ship->driveComplex().action(), DriveComplex::Action::DOCKING);
+        ship->dock(planet);
 
-    dockShipEvent(ship->id(), planet->land()->id());
+        // drive complex
+        EXPECT_EQ(planet, ship->driveComplex().target());
+        EXPECT_EQ(DriveComplex::Action::DOCKING, ship->driveComplex().action());
 
-    EXPECT_EQ(0, starsystem->ships().size());
-    EXPECT_EQ(0, int(ship->position().length()));
-    EXPECT_EQ(place::Type::KOSMOPORT, ship->place());
-    EXPECT_EQ(planet->land(), ship->land());
+        event::doDockShip(ship->id(), planet->land()->id());
+
+        // starsystem
+        EXPECT_EQ(0, starsystem->ships().size());
+
+        // ship
+        EXPECT_EQ(planet->position(), ship->position());
+        EXPECT_EQ(place::Type::KOSMOPORT, ship->place());
+        EXPECT_EQ(planet->land(), ship->land());
+
+        /** launching */
+        event::doLaunchShip(ship->id(), planet->land()->id());
+
+        // starsystem
+        EXPECT_EQ(1, starsystem->ships().size());
+
+        // ship
+        EXPECT_EQ(planet->position(), ship->position());
+        EXPECT_EQ(place::Type::SPACE, ship->place());
+        EXPECT_EQ(nullptr, ship->land());
+    }
+
 }
 
