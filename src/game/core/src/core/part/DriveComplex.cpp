@@ -69,7 +69,7 @@ void DriveComplex::resetTarget()
     m_pathEnd = true;
 }
       
-void DriveComplex::setCoords(const glm::vec3& target_pos)
+void DriveComplex::setCoordinates(const glm::vec3& target_pos)
 {
     resetTarget();
     m_hasTarget = true;
@@ -77,8 +77,6 @@ void DriveComplex::setCoords(const glm::vec3& target_pos)
     m_targetPos = target_pos;
     
     updatePath();
-
-    //LOG("vehicle_id="+std::to_string(m_ownerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y));
 }
                  
 void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
@@ -89,8 +87,6 @@ void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
     m_action = action_id;
     
     m_hasTarget = true;
-        
-    //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId));
 }
   
 void DriveComplex::__defineDistance()
