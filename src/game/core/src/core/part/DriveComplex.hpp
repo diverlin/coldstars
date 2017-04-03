@@ -59,8 +59,8 @@ public:
     void addDriveSlot(slot::Item* drive_slot) { m_driveSlots.push_back(drive_slot); }
     void addBakSlot(slot::Item* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
-    void setTarget(control::SpaceObject*, Action);
-    void setCoords(const glm::vec3&);
+    void setTarget(control::SpaceObject*, Action action = Action::KEEP_CLOSE);
+    void setCoordinates(const glm::vec3&);
 
     Action action() const { return m_action; }
 //    jeti::DriveEffect* driveEffect() const { return m_effectDrive; }
