@@ -77,7 +77,7 @@ void Item::useOverloadDeterioration()
     //m_deterioration = m_data.deterioration * m_data.deterioration_overload_rate;
 }
  
-void Item::doBreak()
+void Item::corrupt()
 {
     LOG("Base::broken");
     model()->setCondition(0);
@@ -88,11 +88,11 @@ void Item::deteriorationEvent()
 {
     model()->setCondition(model()->condition() - descriptor()->deterioration());
     if (model()->condition() <= 0) {
-        doBreak();
+        corrupt();
     }
 }         
                 
-bool Item::doRepair()
+bool Item::repair()
 {
     model()->setCondition(descriptor()->condition());
     m_slot->updateVehiclePropetries();

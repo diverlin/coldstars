@@ -116,7 +116,7 @@ private:
 
     void __updateDynamicTargetCoord();
 
-    void __defineDistance();
+//    void __defineDistance();
 };
 
 

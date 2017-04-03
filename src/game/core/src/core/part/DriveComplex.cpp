@@ -89,78 +89,78 @@ void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
     m_hasTarget = true;
 }
   
-void DriveComplex::__defineDistance()
-{
-    switch(m_action)
-    {
-        case Action::DOCKING:
-        {
-            assert(false);
-//            m_TargetDistance = m_target->collisionRadius()/4;
-//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
+//void DriveComplex::__defineDistance()
+//{
+//    switch(m_action)
+//    {
+//        case Action::DOCKING:
+//        {
+//            assert(false);
+////            m_TargetDistance = m_target->collisionRadius()/4;
+////            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
         
-        case Action::COLLECTING:
-        {
-            assert(false);
-            //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
-            //m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+//        case Action::COLLECTING:
+//        {
+//            assert(false);
+//            //m_TargetDistance = m_ownerVehicle->properties().grab_radius/2;
+//            //m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
 
-        case Action::KEEP_FIRE_DISTANCE:
-        {
-            assert(false);
-            //int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
-            //if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
-//            {
-//                m_TargetDistance = 150;
-//            }
+//        case Action::KEEP_FIRE_DISTANCE:
+//        {
+//            assert(false);
+//            //int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
+//            //if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
+////            {
+////                m_TargetDistance = 150;
+////            }
             
-            //m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_target->position().z);
+//            //m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
                     
-        case Action::KEEP_CLOSE:
-        {
-            assert(false);
-//            m_TargetDistance = m_target->collisionRadius()*1.5;
-//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
+//        case Action::KEEP_CLOSE:
+//        {
+//            assert(false);
+////            m_TargetDistance = m_target->collisionRadius()*1.5;
+////            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/5, m_target->collisionRadius()/2, m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
 
-        case Action::KEEP_MIDDLE:
-        {
-            assert(false);
-//            m_TargetDistance = m_target->collisionRadius()*4;
-//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+//        case Action::KEEP_MIDDLE:
+//        {
+//            assert(false);
+////            m_TargetDistance = m_target->collisionRadius()*4;
+////            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
         
-        case Action::KEEP_FAR:
-        {
-            assert(false);
-//            m_TargetDistance = m_target->collisionRadius()*8;
-//            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
+//        case Action::KEEP_FAR:
+//        {
+//            assert(false);
+////            m_TargetDistance = m_target->collisionRadius()*8;
+////            m_TargetOffset = meti::getRandXYVec3f(m_target->collisionRadius()/2, m_target->collisionRadius(), m_target->position().z);
             
-            break;
-        }
+//            break;
+//        }
 
-    }
-}
+//    }
+//}
                   
 void DriveComplex::updatePath()
 {
     if (m_target != nullptr)
     {
         if (__validateTarget()) {
-            __defineDistance();
+            //__defineDistance();
             __updateDynamicTargetCoord();
         } else {
             resetTarget();
@@ -187,47 +187,29 @@ bool DriveComplex::__validateTarget() const
 
 void DriveComplex::__updateDynamicTargetCoord()
 {
-    assert(false);
-//    switch(m_target->descriptor()->type())
+    switch(m_target->descriptor()->obType())
+    {
+//    case entity::Type::STARSYSTEM:
 //    {
-//        case entity::type::STARSYSTEM:
-//        {
-//        assert(false);
-////            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
-////            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
-////            m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
-            
-//            break;
-//        }
-    
-//        case entity::type::PLANET:
-//        {
-//            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;
-//            //m_TargetPos = ((Planet*)m_target)->position() + m_TargetOffset;
-//            break;
-//        }
-
-//        case entity::type::ASTEROID:
-//        {
-//        // TODO
-////            m_TargetPos = ((Asteroid*)m_target)->orbit().nextTurnPosition() + m_TargetOffset;
-////            break;
-//        }
-         
-//        case entity::type::VEHICLE:
-//        {
-//            m_TargetPos = m_target->position() + m_TargetOffset;
-//            break;
-//        }
-
-//        case entity::type::CONTAINER:
-//        {
-//            m_TargetPos = m_target->position() + m_TargetOffset;
-//            break;
-//        }
+//        float angle = M_PI/2 - meti::getAngle(meti::vec2(m_target->position()), meti::vec2(m_ownerVehicle->starsystem()->position())); //??    use cross()
+//        m_targetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_ownerVehicle->starsystem()->position().z);
+//        m_targetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
+//        break;
 //    }
 
-    //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->center()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
+    case entity::Type::PLANET:
+    case entity::Type::ASTEROID: {
+        m_targetPos = m_target->nextTurnPosition() + m_targetOffset;
+        break;
+    }
+    case entity::Type::STAR:
+    case entity::Type::CONTAINER:
+    case entity::Type::VEHICLE: {
+        m_targetPos = m_target->position() + m_targetOffset;
+        break;
+    }
+
+    }
 }
 
 
@@ -282,7 +264,7 @@ void DriveComplex::__calcPath()
     int round_counter_max = 2000;//2 + 2*M_PI/angle_step;
     int round_counter = 0;
 
-    assert(false);
+// DANGER    assert(false);
 //    float speed_base = m_ownerVehicle->properties().speed;
     
 //    glm::vec3 new_center(m_ownerVehicle->position());
@@ -391,13 +373,10 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 */
 
-    if (m_pathCenterVec.size() > 1)
-    {
+    if (m_pathCenterVec.size() > 1) {
         m_pathEnd = false;
         m_pathIndex = 0;
-    }
-    else
-    {
+    } else {
         __clearPath();
     }
 }

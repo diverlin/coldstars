@@ -244,6 +244,9 @@ TEST(ship, docking_launching)
         EXPECT_EQ(planet, ship->driveComplex().target());
         EXPECT_EQ(DriveComplex::Action::DOCKING, ship->driveComplex().action());
 
+        drive->corrupt();
+        EXPECT_FALSE(event::doDockShip(ship->id(), planet->land()->id()));
+        drive->repair();
         EXPECT_TRUE(event::doDockShip(ship->id(), planet->land()->id()));
 
         // starsystem
@@ -258,6 +261,9 @@ TEST(ship, docking_launching)
         EXPECT_EQ(planet->land(), ship->land());
 
         /** launching */
+        drive->corrupt();
+        EXPECT_FALSE(event::doLaunchShip(ship->id(), planet->land()->id()));
+        drive->repair();
         EXPECT_TRUE(event::doLaunchShip(ship->id(), planet->land()->id()));
 
         // starsystem
@@ -275,6 +281,20 @@ TEST(ship, docking_launching)
 
 TEST(ship, hyper)
 {
+    // create
+    control::StarSystem* starsystem1 = builder::StarSystem::gen();
+    control::StarSystem* starsystem2 = builder::StarSystem::gen();
+    control::Ship* ship = builder::Ship::gen();
+
+    control::item::Bak* bak = builder::item::Bak::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    EXPECT_TRUE(ship->mount(bak));
+    EXPECT_TRUE(ship->mount(drive));
+
+    starsystem1->add(ship);
+
+    // todo implement jump to starsystem2
+
     assert(false);
 }
 
