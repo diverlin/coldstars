@@ -30,6 +30,7 @@ public:
 
         /** TRANSITION */
         DOCK_SHIP,
+        LAUNCH_SHIP,
         ADD_SHIP_TO_STARSYSTEM,
         ADD_CONTAINER_TO_STARSYSTEM,
         INSERT,

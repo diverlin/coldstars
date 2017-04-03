@@ -62,6 +62,7 @@ void
 Planet::bindLand(Land* land)
 {
     m_land = land;
+    land->setOwner(this);
     model()->setLand(land->id());
 }
 

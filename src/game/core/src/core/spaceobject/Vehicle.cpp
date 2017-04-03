@@ -134,12 +134,12 @@ Vehicle::follow(SpaceObject* target) {
     driveComplex().setTarget(target, DriveComplex::Action::KEEP_MIDDLE);
 }
 
-void
-Vehicle::process() {
-    if (driveComplex().action() == DriveComplex::Action::DOCKING) {
-        _dockingEvent();
-    }
-}
+//void
+//Vehicle::process() {
+//    if (driveComplex().action() == DriveComplex::Action::DOCKING) {
+//        _dockingEvent();
+//    }
+//}
 
 void
 Vehicle::__loadModel()
@@ -830,7 +830,7 @@ void Vehicle::UpdateSpecialAction()
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            _dockingEvent();
+//            _dockingEvent();
             m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE;
         }
 
@@ -892,94 +892,94 @@ Vehicle::resetTargets()
 void
 Vehicle::setLand(Land* land)
 {
-    model()->setPlace(land->descriptor()->place());
     m_Land = land;
+    if (land) {
+        model()->setPlace(land->descriptor()->place());
+    }
 }
 
-void Vehicle::_dockingEvent()
-{
-    const auto& target = driveComplex().target();
-    assert(target);
+//void Vehicle::_dockingEvent()
+//{
+//    const auto& target = driveComplex().target();
+//    assert(target);
 
-//    if ((position() - target->position()).length() > 50) {
-//        return;
+////    if ((position() - target->position()).length() > 50) {
+////        return;
+////    }
+
+//    resetTargets();
+//    switch(target->descriptor()->obType())
+//    {
+//    case entity::Type::PLANET:
+//    {
+//        Planet* planet = static_cast<Planet*>(target);
+//        assert(planet);
+//        planet->land()->add(this);
+//        break;
 //    }
 
-    resetTargets();
-    switch(target->descriptor()->obType())
-    {
-    case entity::Type::PLANET:
-    {
-        Planet* planet = static_cast<Planet*>(target);
-        assert(planet);
-        planet->land()->add(this);
-        break;
-    }
+//    case entity::Type::VEHICLE:
+//    {
+//        switch(target->descriptor()->obSubType())
+//        {
+//        case entity::Type::SPACESTATION:
+//        {
+//            SpaceStation* spacestation = static_cast<SpaceStation*>(target);
+//            assert(spacestation);
+//            spacestation->land()->add(this);
+//            break;
+//        }
 
-    case entity::Type::VEHICLE:
-    {
-        switch(target->descriptor()->obSubType())
-        {
-        case entity::Type::SPACESTATION:
-        {
-            SpaceStation* spacestation = static_cast<SpaceStation*>(target);
-            assert(spacestation);
-            spacestation->land()->add(this);
-            break;
-        }
+//        case entity::Type::SHIP:
+//        {
+//            //..
+//            break;
+//        }
+//        }
 
-        case entity::Type::SHIP:
-        {
-            //..
-            break;
-        }
-        }
+//        break;
+//    }
+//    }
+//}
 
-        break;
-    }
-    }
-}
+//void Vehicle::LaunchingEvent()
+//{
+//    if (m_parentVehicleSlot != nullptr)
+//    {
+//        switch(m_parentVehicleSlot->owner()->typeId())
+//        {
+//        case entity::Type::ANGAR:
+//        {
+//            int angleInD = meti::getRandInt(360);
+//            glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
+//            glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
+//            glm::vec3 angle(0,0,angleInD);
+//            starsystem()->add(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
+//            m_Land->RemoveVehicle(this);
 
-void Vehicle::LaunchingEvent()
-{
-    //LOG("Vehicle("+std::to_string(id())+")::LaunchingEvent");
+//            break;
+//        }
 
-    /* if (m_parentVehicleSlot != nullptr)
-    {
-        switch(m_parentVehicleSlot->owner()->typeId())
-        {
-        case entity::Type::ANGAR:
-        {
-            int angleInD = meti::getRandInt(360);
-            glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
-            glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
-            glm::vec3 angle(0,0,angleInD);
-            starsystem()->add(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
-            m_Land->RemoveVehicle(this);
+//        case entity::Type::VEHICLE:
+//        {
+//            //..
+//            break;
+//        }
+//        }
+//    }
+//    else
+//    {
+//        int angleInD = meti::getRandInt(360);
+//        glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
+//        glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
+//        glm::vec3 angle(0,0,angleInD);
+//        starsystem()->add(this, ((SpaceObject*)m_Land->owner())->center() + offset_pos3, angle, nullptr);
+//        m_Land->remove(this);
+//    }
 
-            break;
-        }
-
-        case entity::Type::VEHICLE:
-        {
-            //..
-            break;
-        }
-        }
-    }
-    else
-    {
-        int angleInD = meti::getRandInt(360);
-        glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
-        glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,angleInD);
-        starsystem()->add(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
-        m_Land->RemoveVehicle(this);
-    }
-
-    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING);
-    // alpitodorender SetTransparency(0.1);*/
-}
+//    SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING);
+//    // alpitodorender SetTransparency(0.1);*/
+//}
 
 /* virtual */
 void Vehicle::remeberAgressor(Vehicle* agressor)

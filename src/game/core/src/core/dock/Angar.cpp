@@ -181,11 +181,38 @@ Angar::__freeSlot() const
     return nullptr;
 }
 
+slot::Vehicle*
+Angar::__slot(Vehicle* vehicle) const
+{
+    for (slot::Vehicle* slot: m_vehicle_slots) {
+        if (slot->vehicle()) {
+            if (slot->vehicle()->id() == vehicle->id()) {
+                return slot;
+            }
+        }
+    }
+    return nullptr;
+}
+
+
 bool Angar::add(Vehicle* vehicle)
 {
     slot::Vehicle* slot = __freeSlot();
     if (slot) {
         return slot->insert(vehicle);
+    }
+    return false;
+}
+
+bool Angar::remove(Vehicle* vehicle)
+{
+    slot::Vehicle* slot = __slot(vehicle);
+    if (slot) {
+        if (slot->release()) {
+            model()->removeGuest(vehicle->id());
+            vehicle->setLand(nullptr);
+            return true;
+        }
     }
     return false;
 }

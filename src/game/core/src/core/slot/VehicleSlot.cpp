@@ -59,9 +59,10 @@ bool Vehicle::insert(control::Vehicle* vehicle)
     return true;
 }
 
-void Vehicle::release()
+bool Vehicle::release()
 {
     m_vehicle = nullptr;
+    return true;
 } 
 
 void Vehicle::swapVehicle(Vehicle* vehicle_slot)

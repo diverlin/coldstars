@@ -37,7 +37,7 @@ public:
 
     control::Vehicle* vehicle() const { return m_vehicle; }
     bool insert(control::Vehicle*);
-    void release();
+    bool release();
     void swapVehicle(Vehicle*);
 
 //    void Render(const ceti::Rect&) const;
