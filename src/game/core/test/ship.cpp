@@ -205,13 +205,18 @@ TEST(ship, equip_and_clone)
     testShipCloneScenario(ship);
 }
 
-TEST(ship, dockingEvent)
+TEST(ship, docking_launching)
 {
     // create
     control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Star* star = builder::Star::gen();
     control::Planet* planet = builder::Planet::gen();
     control::Ship* ship = builder::Ship::gen();
+
+    control::item::Bak* bak = builder::item::Bak::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    EXPECT_TRUE(ship->mount(bak));
+    EXPECT_TRUE(ship->mount(drive));
 
     starsystem->add(star);
     starsystem->add(planet);
@@ -225,7 +230,8 @@ TEST(ship, dockingEvent)
     EXPECT_EQ(place::Type::SPACE, ship->place());
     EXPECT_EQ(nullptr, ship->land());
 
-    for (int i=0; i<2; ++i) {
+    int iterations = 10;
+    for (int i=0; i<iterations; ++i) {
         /** docking */
 
         // drive complex
@@ -238,10 +244,13 @@ TEST(ship, dockingEvent)
         EXPECT_EQ(planet, ship->driveComplex().target());
         EXPECT_EQ(DriveComplex::Action::DOCKING, ship->driveComplex().action());
 
-        event::doDockShip(ship->id(), planet->land()->id());
+        EXPECT_TRUE(event::doDockShip(ship->id(), planet->land()->id()));
 
         // starsystem
         EXPECT_EQ(0, starsystem->ships().size());
+
+        // land
+        EXPECT_EQ(1, planet->land()->shipsNum());
 
         // ship
         EXPECT_EQ(planet->position(), ship->position());
@@ -249,16 +258,23 @@ TEST(ship, dockingEvent)
         EXPECT_EQ(planet->land(), ship->land());
 
         /** launching */
-        event::doLaunchShip(ship->id(), planet->land()->id());
+        EXPECT_TRUE(event::doLaunchShip(ship->id(), planet->land()->id()));
 
         // starsystem
         EXPECT_EQ(1, starsystem->ships().size());
+
+        // land
+        EXPECT_EQ(0, planet->land()->shipsNum());
 
         // ship
         EXPECT_EQ(planet->position(), ship->position());
         EXPECT_EQ(place::Type::SPACE, ship->place());
         EXPECT_EQ(nullptr, ship->land());
     }
+}
 
+TEST(ship, hyper)
+{
+    assert(false);
 }
 

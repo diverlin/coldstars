@@ -151,13 +151,11 @@ public:
     void setKorpusData(descriptor::Vehicle*);
 
     bool godMode() const { return m_godMode; }
-    Land* const land() const { return m_Land; }
+    Land* land() const { return m_Land; }
     VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_specialActionId; }
 
     slot::Vehicle* parentVehicleSlot() const { return m_parentVehicleSlot; }
 
-    [[warning("remove this ugly non const")]]
-    Propetries& properties() { return m_properties; }
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
 
@@ -172,7 +170,7 @@ public:
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
 
-    bool install(Item*);
+    bool mount(Item*);
     bool load(Item*);
     bool manage(Item*);
 

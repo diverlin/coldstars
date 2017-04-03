@@ -53,8 +53,9 @@ public:
 
     virtual bool isAllowedToLand() const;
 
-    virtual bool add(Vehicle*);
-    virtual bool remove(Vehicle*);
+    virtual bool add(Vehicle*) override final;
+    virtual bool remove(Vehicle*) override final;
+    virtual int shipsNum() const override final;
 
     virtual void updateInStatic();
 
