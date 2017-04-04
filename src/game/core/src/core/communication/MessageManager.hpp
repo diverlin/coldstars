@@ -18,6 +18,8 @@ class AddToStarsystemDescriptor;
 namespace event {
 bool doDockShip(int_t, int_t);
 bool doLaunchShip(int_t, int_t);
+bool doJumpIn(int_t);
+bool doJumpOut(int_t, int_t);
 } // namespace event
 
 class MessageManager

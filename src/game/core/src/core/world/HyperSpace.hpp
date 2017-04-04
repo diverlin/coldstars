@@ -18,27 +18,47 @@
 
 #pragma once
 
-#include <vector>
+#include <core/common/Base.hpp>
+
+#include <ceti/Pack.hpp>
+
+namespace descriptor {
+class HyperSpace;
+} // naemspace descriptor
+
+namespace model {
+class HyperSpace;
+} // naemspace model
 
 namespace control {
 
 class Vehicle;
-class Starsystem;
+//class Starsystem;
 
-class HyperSpace
+class HyperSpace : public Base
 {
 public:
-    HyperSpace() = default;
+    HyperSpace(descriptor::HyperSpace*, model::HyperSpace*);
     ~HyperSpace() = default;
 
     void add(Vehicle*);
-    bool isHere(int) const;
-    void postHyperJumpEvent(Starsystem*);
+    void remove(Vehicle*);
 
-    int queueSize() const { return m_vehicles.size(); }
+    const ceti::pack<Vehicle*>& vehicles() const { return m_vehicles; }
+
+//    bool isHere(int) const;
+//    void postHyperJumpEvent(Starsystem*);
+
+//    int queueSize() const { return m_vehicles.size(); }
 
 private:
-    std::vector<Vehicle*> m_vehicles;
+    descriptor::HyperSpace* m_descriptor_hyperspace = nullptr;
+    model::HyperSpace* m_model_hyperspace = nullptr;
+
+    descriptor::HyperSpace* descriptor() const { return m_descriptor_hyperspace; }
+    model::HyperSpace* model() const { return m_model_hyperspace; }
+
+    ceti::pack<Vehicle*> m_vehicles;
 };
 
 } // namespace control

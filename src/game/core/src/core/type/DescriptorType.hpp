@@ -31,6 +31,7 @@ enum class Type {
     GALAXY,
     SECTOR,
     STARSYSTEM,
+    HYPERSPACE,
 
     // pilot
     NPC,

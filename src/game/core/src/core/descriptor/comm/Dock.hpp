@@ -29,34 +29,34 @@
 namespace descriptor {
 namespace comm {
 
-class Dock
+class Destination
 {
 public:
-    Dock(int_t, int_t);
-    Dock(const std::string& data);
-    ~Dock() = default;
+    Destination(int_t, int_t);
+    Destination(const std::string& data);
+    ~Destination() = default;
     std::string data() const;
 
     int_t object() const { return m_object; }
-    int_t dock() const { return m_dock; }
+    int_t destination() const { return m_destination; }
 
     std::string info() const {
         std::string result = "descriptor::comm::DockShip:\n";
         result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" dock = ") + std::to_string(m_dock) + "\n";
+        result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
         return result;
     }
 
 private:
     int_t m_object = NONE;
-    int_t m_dock = NONE;
+    int_t m_destination = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_object;
-        ar & m_dock;
+        ar & m_destination;
     }
 };
 

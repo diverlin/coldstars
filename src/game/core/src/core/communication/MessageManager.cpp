@@ -23,6 +23,8 @@
 
 #include <world/starsystem.hpp>
 
+#include <core/world/HyperSpace.hpp>
+
 #include <core/builder/spaceobject/ALL>
 
 #include <core/builder/item/equipment/ALL>
@@ -141,15 +143,27 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
 }
 
 /** DOCK */
-void doDockShipEvent(const comm::Message& message) {
-    descriptor::comm::Dock descr(message.data());
-    event::doDockShip(descr.object(), descr.dock());
+void _doDock(const comm::Message& message) {
+    descriptor::comm::Destination descr(message.data());
+    event::doDockShip(descr.object(), descr.destination());
 }
-void doLaunchShipEvent(const comm::Message& message) {
-    descriptor::comm::Dock descr(message.data());
-    event::doLaunchShip(descr.object(), descr.dock());
+void _doLaunch(const comm::Message& message) {
+    descriptor::comm::Destination descr(message.data());
+    event::doLaunchShip(descr.object(), descr.destination());
 }
+
+/** JUMP */
+void _doJumpIn(const comm::Message& message) {
+    descriptor::comm::Destination descr(message.data());
+    event::doJumpIn(descr.object());
+}
+void _doJumpOut(const comm::Message& message) {
+    descriptor::comm::Destination descr(message.data());
+    event::doJumpOut(descr.object(), descr.destination());
+}
+
 /** */
+
 void hitEvent(const comm::Message& message) {
     descriptor::Hit descr(message.data());
     control::SpaceObject* ob = EntityManager::get().spaceObject(descr.target());
@@ -169,41 +183,82 @@ void explosionEvent(const comm::Message& message) {
 namespace event {
 
 /** DOCK */
-bool doDockShip(int_t object, int_t dock) {
+bool doDockShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
 
+    // validate
     if (!ship->properties().speed) {
         return false;
     }
 
+    // remove
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);
     starsystem->remove(ship);
 
-    control::Land* land = EntityManager::get().land(dock);
-    assert(land);
+    // add
+    control::Land* land = EntityManager::get().land(destination);
     land->add(ship);
 
     return true;
 }
 
-bool doLaunchShip(int_t object, int_t dock) {
+bool doLaunchShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
 
+    // validate
     if (!ship->properties().speed) {
         return false;
     }
-    control::Land* land = EntityManager::get().land(dock);
-    assert(land);
+
+    // remove
+    control::Land* land = EntityManager::get().land(destination);
     land->remove(ship);
 
+    // add
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);
     starsystem->add(ship, land->owner()->position());
 
     return true;
 }
-/** */
+
+/** JUMP */
+bool doJumpIn(int_t object) {
+    control::Ship* ship = EntityManager::get().ship(object);
+
+    // validate
+    if (!ship->properties().hyper) {
+        return false;
+    }
+
+    // remove
+    control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
+    starsystem->remove(ship);
+
+    // add
+    control::HyperSpace* hyper = EntityManager::get().hyperspace();
+    hyper->add(ship);
+
+    return true;
+}
+bool doJumpOut(int_t object, int_t destination) {
+    control::Ship* ship = EntityManager::get().ship(object);
+
+    // validate
+
+    // remove
+    control::HyperSpace* hyper = EntityManager::get().hyperspace();
+    hyper->remove(ship);
+
+    // add
+    control::StarSystem* starsystem = EntityManager::get().starsystem(destination); // probably can be used from navigator
+    starsystem->add(ship /*, position implement entry point here */);
+
+    return true;
+}
+
 
 } // namespace event
 
@@ -229,8 +284,12 @@ void MessageManager::process(const comm::Message& message)
     case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
 
     /** DOCK */
-    case comm::Message::Type::DOCK_SHIP: doDockShipEvent(message); break;
-    case comm::Message::Type::LAUNCH_SHIP: doLaunchShipEvent(message); break;
+    case comm::Message::Type::DOCK_SHIP: _doDock(message); break;
+    case comm::Message::Type::LAUNCH_SHIP: _doLaunch(message); break;
+
+    /** JUMP **/
+    case comm::Message::Type::JUMP_IN: _doJumpIn(message); break;
+    case comm::Message::Type::JUMP_OUT: _doJumpOut(message); break;
 
     /** OTHER */
     case comm::Message::Type::HIT: hitEvent(message); break;

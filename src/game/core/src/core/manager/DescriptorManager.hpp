@@ -44,6 +44,8 @@ namespace descriptor {
 class Galaxy;
 class Sector;
 class StarSystem;
+class HyperSpace;
+
 class Star;
 class Planet;
 class WormHole;
@@ -95,6 +97,7 @@ public:
     Galaxy* randGalaxy() const;
     Sector* randSector() const;
     StarSystem* randStarSystem() const;
+    HyperSpace* randHyperSpace() const;
 
     Star* randStar() const;
     Planet* randPlanet() const;
@@ -126,6 +129,7 @@ public:
     Galaxy* galaxy(int_t) const;
     Sector* sector(int_t) const;
     StarSystem* starSystem(int_t) const;
+    HyperSpace* hyperSpace(int_t) const;
 
     Star* star(int_t) const;
     Planet* planet(int_t) const;

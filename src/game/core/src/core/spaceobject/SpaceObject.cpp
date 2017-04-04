@@ -51,14 +51,28 @@ void SpaceObject::_init()
 
 void SpaceObject::setStarSystem(StarSystem* starsystem)
 {
+    assert(starsystem);
     m_starsystem = starsystem;
     model()->setStarSystem(starsystem->id());
 }
 
 void SpaceObject::setParent(SpaceObject* parent)
 {
+    assert(parent);
     m_parent = parent;
     model()->setParent(parent->id());
+}
+
+void SpaceObject::resetStarSystem()
+{
+    m_starsystem = nullptr;
+    model()->setStarSystem(NONE);
+}
+
+void SpaceObject::resetParent()
+{
+    m_parent = nullptr;
+    model()->setParent(NONE);
 }
 
 void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)

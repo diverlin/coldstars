@@ -22,6 +22,7 @@
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
+#include <core/descriptor/world/HyperSpace.hpp>
 
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
@@ -87,6 +88,14 @@ genStarSystem(race::Type race)
 
     descr->setRace(race);
 
+    descriptor::Manager::get().reg(descr);
+    return descr;
+}
+
+descriptor::HyperSpace*
+genHyperSpace()
+{
+    descriptor::HyperSpace* descr = new descriptor::HyperSpace;
     descriptor::Manager::get().reg(descr);
     return descr;
 }

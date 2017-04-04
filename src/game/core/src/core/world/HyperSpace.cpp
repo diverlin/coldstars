@@ -17,44 +17,69 @@
 */
 
 #include "HyperSpace.hpp"
-#include "starsystem.hpp"
-#include <core/spaceobject/Vehicle.hpp>
-#include "../common/constants.hpp"
+//#include "starsystem.hpp"
+//#include "../common/constants.hpp"
 
+#include <core/descriptor/world/HyperSpace.hpp>
+#include <core/model/world/HyperSpace.hpp>
+
+#include <core/spaceobject/Vehicle.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 namespace control {
 
-void HyperSpace::add(Vehicle* vehicle)
+HyperSpace::HyperSpace(descriptor::HyperSpace* descr, model::HyperSpace* model)
+    :
+      Base(descr, model)
+    , m_descriptor_hyperspace(descr)
+    , m_model_hyperspace(model)
 {
+
+}
+
+void
+HyperSpace::add(Vehicle* vehicle)
+{
+    vehicle->resetStarSystem();
     vehicle->model()->setPlace(place::Type::HYPER);
-    m_vehicles.push_back(vehicle);
+    m_vehicles.add(vehicle);
+
+    model()->addVehicle(vehicle->id());
 }
 
-bool HyperSpace::isHere(int id) const
-{
-    for (Vehicle* vehicle: m_vehicles) {
-        if (vehicle->id() == id) {
-            return true;
-        }
-    }        
-    return false;
-}    
 
-void HyperSpace::postHyperJumpEvent(Starsystem* starsystem)
+void
+HyperSpace::remove(Vehicle* vehicle)
 {
-//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-//    {
-//        VEHICLE_vec[i]->driveComplex().ResetTarget();
-        
-//        glm::vec3 center(meti::getRandXYVec3f(500, 900, DEFAULT_ENTITY_ZPOS)); // get correct pos
-//        glm::vec3 angle(0,0,meti::getRandInt(360));
-//        starsystem->add(VEHICLE_vec[i], center, angle, VEHICLE_vec[i]->parent());
+    model()->removeVehicle(vehicle->id());
+    m_vehicles.remove(vehicle);
+}
+
+
+//bool HyperSpace::isHere(int id) const
+//{
+//    for (Vehicle* vehicle: m_vehicles) {
+//        if (vehicle->id() == id) {
+//            return true;
+//        }
 //    }
+//    return false;
+//}
+
+//void HyperSpace::postHyperJumpEvent(Starsystem* starsystem)
+//{
+////    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+////    {
+////        VEHICLE_vec[i]->driveComplex().ResetTarget();
+        
+////        glm::vec3 center(meti::getRandXYVec3f(500, 900, DEFAULT_ENTITY_ZPOS)); // get correct pos
+////        glm::vec3 angle(0,0,meti::getRandInt(360));
+////        starsystem->add(VEHICLE_vec[i], center, angle, VEHICLE_vec[i]->parent());
+////    }
           
-//    VEHICLE_vec.clear();
-}
+////    VEHICLE_vec.clear();
+//}
 
 } // namespace control
