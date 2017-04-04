@@ -68,7 +68,7 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
 
 void Galaxy::__createInternals(control::Galaxy* model, descriptor::Galaxy* descr)
 {     
-    assert(false);
+    // DANGER assert(false);
     //    for(const auto& id: descriptor.sectors) {
     //        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
     //        Sector* sector = core::global::get().sectorBuilder().create(descriptor::Manager::get().sector().get(id));

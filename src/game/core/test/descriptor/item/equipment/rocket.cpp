@@ -48,7 +48,6 @@ TEST(descriptor, clone_rocket) {
     testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
-    delete descr;
     delete copy;
 }
 

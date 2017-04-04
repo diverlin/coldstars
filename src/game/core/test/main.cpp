@@ -72,7 +72,7 @@
 
 #include <ctime>
 
-TEST(descriptor,accessors)
+TEST(descriptor, accessors)
 {
     descriptor::Hit descriptor(22, 33, 44);
     EXPECT_EQ(descriptor.owner(), 22);
@@ -80,7 +80,7 @@ TEST(descriptor,accessors)
     EXPECT_EQ(descriptor.damage(), 44);
 }
 
-TEST(base,hit)
+TEST(base, hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
@@ -96,7 +96,7 @@ TEST(base,hit)
     EXPECT_FALSE(ship2->model()->isDying());
 }
 
-TEST(base,critical_hit)
+TEST(base, critical_hit)
 {
     MessageManager& messageManager = core::global::get().messageManager();
 
@@ -109,7 +109,7 @@ TEST(base,critical_hit)
     EXPECT_TRUE(ship2->model()->isDying());
 }
 
-TEST(base,bomb)
+TEST(base, bomb)
 {
 //    MessageManager& messageManager = core::global::get().messageManager();
 
@@ -137,7 +137,7 @@ TEST(base,bomb)
     //    EXPECT_TRUE(ship->isDying());
 }
 
-TEST(descriptor,manager)
+TEST(descriptor, manager)
 {
     // TODO fix fail
 //    DescriptorManager& descriptor_manager = core::global::get().descriptorManager();
@@ -157,25 +157,22 @@ TEST(descriptor,manager)
 
 TEST(clone, galaxy)
 {
-    const auto& descr = descriptor::Manager::get().randGalaxy();
-    control::Galaxy* galaxy1 = builder::Galaxy::gen(descr);
-    control::Galaxy* galaxy2 = builder::Galaxy::gen(descr);
+    control::Galaxy* galaxy1 = builder::Galaxy::gen();
+    control::Galaxy* galaxy2 = builder::Galaxy::gen(galaxy1->descriptor());
     EXPECT_EQ(galaxy1->model()->data(), galaxy2->model()->data());
 }
 
 TEST(clone, sector)
 {
-    const auto& descr = descriptor::Manager::get().randSector();
-    control::Sector* sector1 = builder::Sector::gen(descr);
-    control::Sector* sector2 = builder::Sector::gen(descr);
+    control::Sector* sector1 = builder::Sector::gen();
+    control::Sector* sector2 = builder::Sector::gen(sector1->descriptor());
     EXPECT_EQ(sector1->model()->data(), sector2->model()->data());
 }
 
 TEST(clone, starsystem)
 {
-    const auto& descr = descriptor::Manager::get().randStarSystem();
-    control::StarSystem* starsystem1 = builder::StarSystem::gen(descr);
-    control::StarSystem* starsystem2 = builder::StarSystem::gen(descr);
+    control::StarSystem* starsystem1 = builder::StarSystem::gen();
+    control::StarSystem* starsystem2 = builder::StarSystem::gen(starsystem1->descriptor());
     EXPECT_EQ(starsystem1->model()->data(), starsystem2->model()->data());
 }
 

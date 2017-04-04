@@ -162,6 +162,7 @@ public:
     Material* randMaterial(texture::Type) const;
 
     void generate();
+    void clear();
 
 private:
     Collector<Mesh>* m_meshes = nullptr;
