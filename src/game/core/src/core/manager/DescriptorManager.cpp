@@ -18,13 +18,11 @@
 
 #include "DescriptorManager.hpp"
 #include <core/generator/DescriptorGenerator.hpp>
+
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
-
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <core/descriptor/world/SectorDescriptor.hpp>
-#include <core/descriptor/world/StarSystemDescriptor.hpp>
+#include <core/descriptor/world/ALL>
 
 #include <core/descriptor/Mesh.hpp>
 #include <core/descriptor/Texture.hpp>
@@ -164,6 +162,13 @@ StarSystem*
 Manager::randStarSystem() const
 {
     StarSystem* descr = static_cast<StarSystem*>(rand(Type::STARSYSTEM));
+    assert(descr);
+    return descr;
+}
+HyperSpace*
+Manager::randHyperSpace() const
+{
+    HyperSpace* descr = static_cast<HyperSpace*>(rand(Type::HYPERSPACE));
     assert(descr);
     return descr;
 }
@@ -361,6 +366,13 @@ StarSystem*
 Manager::starSystem(int_t id) const
 {
     StarSystem* descr = static_cast<StarSystem*>(get(id));
+    assert(descr);
+    return descr;
+}
+HyperSpace*
+Manager::hyperSpace(int_t id) const
+{
+    HyperSpace* descr = static_cast<HyperSpace*>(get(id));
     assert(descr);
     return descr;
 }

@@ -119,6 +119,9 @@ public:
     void setStarSystem(StarSystem* starsystem);
     void setParent(SpaceObject* parent);
 
+    void resetStarSystem();
+    void resetParent();
+
     const meti::vec3& nextTurnPosition() const { return m_nextTurnPosition; }
     void setNextTurnPosition(const meti::vec3& position) { m_nextTurnPosition = position; }
 

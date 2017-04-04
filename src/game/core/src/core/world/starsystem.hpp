@@ -20,7 +20,6 @@
 #pragma once
 
 #include <core/spaceobject/SpaceObject.hpp>
-#include <core/world/HyperSpace.hpp>
 #include <core/manager/AsteroidManager.hpp>
 #include <core/type/RaceType.hpp>
 
@@ -130,8 +129,6 @@ public:
     //        unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
     //        unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
     bool isAnyActiveParticlesEffectPresent(int) const;
-
-    HyperSpace& hyperSpace() { return m_hyperspace; };
 
     model::Npc* freeLeaderByRaceId(race::Type) const;
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
@@ -262,8 +259,6 @@ private:
     ceti::pack<SpaceStation*> m_spacestations;
     ceti::pack<Ship*> m_ships;
     ceti::pack<Satellite*> m_satellites;
-
-    HyperSpace m_hyperspace;
 
     // effects
     //        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;

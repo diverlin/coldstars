@@ -37,7 +37,8 @@ namespace entity
         NONE=0,
         /** */
 
-        GALAXY, SECTOR, STARSYSTEM, STAR, ASTEROID, 
+        GALAXY, SECTOR, STARSYSTEM, HYPERSPACE,
+        STAR, ASTEROID,
         
         PLANET, 
         PLANET_MIXED, PLANET_WATER, PLANET_VULCANIC, PLANET_ICE, PLANET_GAS, PLANET_ROCK,    

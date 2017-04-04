@@ -30,6 +30,8 @@ namespace descriptor {
 class Galaxy;
 class Sector;
 class StarSystem;
+class HyperSpace;
+
 class Star;
 class Planet;
 class WormHole;
@@ -63,6 +65,7 @@ class Scaner;
 descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
 descriptor::Sector* genSector(const std::vector<int_t>&);
 descriptor::StarSystem* genStarSystem(race::Type race = race::Type::NONE);
+descriptor::HyperSpace* genHyperSpace();
 
 /* spaceobjects */
 descriptor::Star* genStar();

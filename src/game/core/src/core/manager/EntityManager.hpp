@@ -30,6 +30,7 @@ class Player;
 namespace control {
 
 class StarSystem;
+class HyperSpace;
 
 class Star;
 class Planet;
@@ -75,11 +76,13 @@ public:
     void loadRequest() { m_load_request = true; }
 
     void reg(control::Base*);
+    void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 
     control::Base* get(int_t) const;
     control::Item* getItemBase(int_t) const;
 
     control::StarSystem* starsystem(int_t id) const;
+    control::HyperSpace* hyperspace() const;
 
     control::Star* star(int_t id) const;
     control::Planet* planet(int_t id) const;
@@ -117,8 +120,10 @@ private:
     bool m_save_request = false;
     bool m_load_request = false;
 
-    std::map<int_t, control::Base*> m_models;
+    std::map<int_t, control::Base*> m_controls;
     std::vector<control::Base*> m_garbage;
+
+    control::HyperSpace* m_hyperspace = nullptr;
 
     void clear();
 

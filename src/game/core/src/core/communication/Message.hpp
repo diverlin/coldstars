@@ -13,7 +13,6 @@ public:
     {
         NONE,
         /** CREATE */
-        //CREATE,
         CREATE_STARSYSTEM,
         CREATE_SHIP,
         CREATE_BOMB,
@@ -28,9 +27,15 @@ public:
         CREATE_PROTECTOR,
         /** */
 
-        /** TRANSITION */
+        /** DOCK */
         DOCK_SHIP,
         LAUNCH_SHIP,
+
+        /** JUMP */
+        JUMP_IN,
+        JUMP_OUT,
+
+        /** TRANSITION */
         ADD_SHIP_TO_STARSYSTEM,
         ADD_CONTAINER_TO_STARSYSTEM,
         INSERT,

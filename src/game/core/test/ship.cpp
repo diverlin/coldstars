@@ -25,11 +25,11 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/builder/world/StarSystemBuilder.hpp>
+#include <core/builder/world/ALL>
 #include <core/builder/spaceobject/ALL>
 #include <core/builder/item/equipment/ALL>
 
-#include <core/world/starsystem.hpp>
+#include <core/world/ALL>
 #include <core/item/equipment/ALL>
 #include <core/spaceobject/ALL>
 #include <core/slot/ItemSlot.hpp>
@@ -261,8 +261,12 @@ TEST(ship, docking_launching)
         EXPECT_EQ(planet->land(), ship->land());
 
         /** launching */
-        drive->corrupt();
-        EXPECT_FALSE(event::doLaunchShip(ship->id(), planet->land()->id()));
+        {
+            // drive broken
+            drive->corrupt();
+            EXPECT_FALSE(event::doLaunchShip(ship->id(), planet->land()->id()));
+        }
+
         drive->repair();
         EXPECT_TRUE(event::doLaunchShip(ship->id(), planet->land()->id()));
 
@@ -282,8 +286,9 @@ TEST(ship, docking_launching)
 TEST(ship, hyper)
 {
     // create
-    control::StarSystem* starsystem1 = builder::StarSystem::gen();
-    control::StarSystem* starsystem2 = builder::StarSystem::gen();
+    control::HyperSpace* hyper = builder::HyperSpace::gen();
+    control::StarSystem* starsystem_jumpFrom = builder::StarSystem::gen();
+    control::StarSystem* starsystem_jumpTo = builder::StarSystem::gen();
     control::Ship* ship = builder::Ship::gen();
 
     control::item::Bak* bak = builder::item::Bak::gen();
@@ -291,10 +296,69 @@ TEST(ship, hyper)
     EXPECT_TRUE(ship->mount(bak));
     EXPECT_TRUE(ship->mount(drive));
 
-    starsystem1->add(ship);
+    starsystem_jumpFrom->add(ship);
 
-    // todo implement jump to starsystem2
+    int iterations = 10;
+    for (int i=0; i<iterations; ++i) {
+        // ping pong logic
+        if (starsystem_jumpTo == ship->starsystem()) {
+            std::swap(starsystem_jumpTo, starsystem_jumpFrom);
+        }
 
-    assert(false);
+        /** jump in */
+        // starsystem
+        EXPECT_EQ(1, starsystem_jumpFrom->ships().size());
+        EXPECT_EQ(0, starsystem_jumpTo->ships().size());
+
+        // hyper
+        EXPECT_EQ(0, hyper->vehicles().size());
+
+        // ship
+        EXPECT_EQ(place::Type::SPACE, ship->place());
+
+        //ship->jump(starsystem2);
+
+        {
+            // bak broken
+            bak->corrupt();
+            drive->repair();
+            EXPECT_FALSE(event::doJumpIn(ship->id()));
+
+            // drive broken
+            bak->repair();
+            drive->corrupt();
+            EXPECT_FALSE(event::doJumpIn(ship->id()));
+        }
+
+        // bak and drive fixed
+        bak->repair();
+        drive->repair();
+        EXPECT_TRUE(event::doJumpIn(ship->id()));
+
+        // starsystem
+        EXPECT_EQ(0, starsystem_jumpFrom->ships().size());
+        EXPECT_EQ(0, starsystem_jumpTo->ships().size());
+
+        // hyper
+        EXPECT_EQ(1, hyper->vehicles().size());
+
+        // ship
+        EXPECT_EQ(place::Type::HYPER, ship->place());
+        EXPECT_EQ(nullptr, ship->starsystem());
+
+        /** jump out */
+        EXPECT_TRUE(event::doJumpOut(ship->id(), starsystem_jumpTo->id()));
+
+        // starsystem
+        EXPECT_EQ(0, starsystem_jumpFrom->ships().size());
+        EXPECT_EQ(1, starsystem_jumpTo->ships().size());
+
+        // hyper
+        EXPECT_EQ(0, hyper->vehicles().size());
+
+        // ship
+        EXPECT_EQ(place::Type::SPACE, ship->place());
+        EXPECT_EQ(starsystem_jumpTo, ship->starsystem());
+    }
 }
 

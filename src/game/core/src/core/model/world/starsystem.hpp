@@ -90,7 +90,6 @@ enum CONDITION {
 
 namespace model {
 
-//# TODO:: remove inherits from SpaceObject, do the same for Sector and Galaxy
 class StarSystem : public Base
 {
 public:
