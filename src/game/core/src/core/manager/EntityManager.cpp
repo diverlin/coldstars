@@ -110,14 +110,10 @@ EntityManager::genId() {
 void
 EntityManager::clear()
 {
-    assert(false);
-//    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
-//    {
-//        //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
-//        delete iterator->second;
-//    }
-
-//    m_entities_map.clear();
+    for (std::map<int_t, control::Base*>::iterator it = m_entities.begin(); it != m_entities.end(); it++) {
+        delete it->second;
+    }
+    m_entities.clear();
 }
 
 //void EntityManager::reg(core::Base* entity)
@@ -145,11 +141,11 @@ void EntityManager::reg(control::Base* control)
     }
     //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_controls.find(control->id()) != m_controls.end()) {
+    if (m_entities.find(control->id()) != m_entities.end()) {
         throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(control->id()) + " which already exists, descriptor = " + std::to_string(control->descriptor()->id()));
     }
 
-    m_controls.insert(std::make_pair(control->id(), control));
+    m_entities.insert(std::make_pair(control->id(), control));
 }
 
 //core::Base* EntityManager::getEntity(int_t id) const
@@ -165,7 +161,7 @@ control::Base*
 EntityManager::get(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, control::Base*>::const_iterator it = m_controls.find(id);
+    std::map<int_t, control::Base*>::const_iterator it = m_entities.find(id);
     assert(it->second);
     // TODO
     //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
@@ -176,7 +172,7 @@ control::Item*
 EntityManager::getItemBase(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, control::Base*>::const_iterator it = m_controls.find(id);
+    std::map<int_t, control::Base*>::const_iterator it = m_entities.find(id);
     assert(it->second);
     control::Item* item = static_cast<control::Item*>(it->second);
     assert(item);

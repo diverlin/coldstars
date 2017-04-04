@@ -205,7 +205,7 @@ TEST(ship, equip_and_clone)
     testShipCloneScenario(ship);
 }
 
-TEST(ship, docking_launching)
+TEST(ship, dock)
 {
     // create
     control::StarSystem* starsystem = builder::StarSystem::gen();
@@ -283,7 +283,7 @@ TEST(ship, docking_launching)
     }
 }
 
-TEST(ship, hyper)
+TEST(ship, jump)
 {
     // create
     control::HyperSpace* hyper = builder::HyperSpace::gen();

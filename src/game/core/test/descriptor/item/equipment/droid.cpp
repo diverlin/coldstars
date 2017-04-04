@@ -46,7 +46,6 @@ TEST(descriptor, clone_droid) {
     testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
-    delete descr;
     delete copy;
 }
 

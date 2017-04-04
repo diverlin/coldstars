@@ -55,16 +55,16 @@ public:
     bool operator!=(const Sector& rhs) const;
 
     void setGalaxy(int_t galaxy)  { m_galaxy = galaxy; }
-    void setPosition(const glm::vec3& center) { m_position = center; }
+    void setPosition(const meti::vec3& center) { m_position = center; }
 
     int_t galaxy() const  { return m_galaxy; }
-    const glm::vec3& position() const  { return m_position; }
+    const meti::vec3& position() const  { return m_position; }
 
     void add(int_t starsystem) { m_starsystems.push_back(starsystem); }
 
 private:
     int_t m_galaxy = NONE;
-    glm::vec3 m_position; // do we need this?
+    meti::vec3 m_position; // do we need this?
 
     std::vector<int_t> m_starsystems;
 
@@ -74,8 +74,7 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_galaxy;
-        assert(false);
-        //ar & m_position;
+        ar & m_position;
         ar & m_starsystems;
     }
 };

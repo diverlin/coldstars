@@ -116,16 +116,16 @@ public:
 
     int_t genId();
 
+    void clear();
+
 private:
     bool m_save_request = false;
     bool m_load_request = false;
 
-    std::map<int_t, control::Base*> m_controls;
+    std::map<int_t, control::Base*> m_entities;
     std::vector<control::Base*> m_garbage;
 
     control::HyperSpace* m_hyperspace = nullptr;
-
-    void clear();
 
     void saveEvent(const std::string&);
     void loadEvent(const std::string&);

@@ -45,7 +45,6 @@ TEST(descriptor, clone_satellite) {
     testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
-    delete descr;
     delete copy;
 }
 

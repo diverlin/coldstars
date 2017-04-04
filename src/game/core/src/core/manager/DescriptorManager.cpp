@@ -670,6 +670,28 @@ Manager::generate()
 }
 
 void
+Manager::clear()
+{
+    if (m_meshes) {
+        assert(false);
+        //m_meshes->clear();
+        m_meshes = nullptr;
+    }
+    if (m_materials) {
+        assert(false);
+        //m_materials->clear();
+        m_materials = nullptr;
+    }
+
+    for (std::map<int_t, Base*>::iterator it = m_descriptors.begin(); it != m_descriptors.end(); ++it) {
+        delete it->second;
+    }
+
+    m_descriptors.clear();
+    m_descriptorsTypes.clear();
+}
+
+void
 Manager::__resolveId(Base* descr) {
     if (descr->id() == NONE) {
         descr->setId(m_idGenerator.nextId());
