@@ -28,6 +28,7 @@
 #include <core/spaceobject/Asteroid.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/model/spaceobject/Asteroid.hpp>
 #include <core/model/world/starsystem.hpp>
 
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
@@ -37,6 +38,7 @@
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/item/other/BombBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
+#include <core/builder/spaceobject/AsteroidBuilder.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/Base.hpp>
@@ -62,9 +64,7 @@
 #endif
 #include <core/builder/item/other/ALL>
 
-#include <core/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
-#include <core/world/starsystem.hpp>
+#include <core/world/ALL>
 
 #include <core/item/equipment/ALL>
 
@@ -157,28 +157,60 @@ TEST(descriptor, manager)
 
 TEST(clone, galaxy)
 {
-    control::Galaxy* galaxy1 = builder::Galaxy::gen();
-    control::Galaxy* galaxy2 = builder::Galaxy::gen(galaxy1->descriptor());
-    EXPECT_EQ(galaxy1->model()->data(), galaxy2->model()->data());
+    control::Galaxy* galaxy = builder::Galaxy::gen();
+
+    // clone
+    model::Galaxy* model = new model::Galaxy(galaxy->model()->data());
+    control::Galaxy* clone = new control::Galaxy(galaxy->descriptor(), model);
+
+    EXPECT_EQ(galaxy->model()->data(), clone->model()->data());
+
+    // clear
+    delete model;
+    delete clone;
 }
 
 TEST(clone, sector)
 {
-    control::Sector* sector1 = builder::Sector::gen();
-    control::Sector* sector2 = builder::Sector::gen(sector1->descriptor());
-    EXPECT_EQ(sector1->model()->data(), sector2->model()->data());
+    control::Sector* sector = builder::Sector::gen();
+
+    // clone
+    model::Sector* model = new model::Sector(sector->model()->data());
+    control::Sector* clone = new control::Sector(sector->descriptor(), model);
+
+    EXPECT_EQ(sector->model()->data(), clone->model()->data());
+
+    // clear
+    delete model;
+    delete clone;
 }
 
 TEST(clone, starsystem)
 {
-    control::StarSystem* starsystem1 = builder::StarSystem::gen();
-    control::StarSystem* starsystem2 = builder::StarSystem::gen(starsystem1->descriptor());
-    EXPECT_EQ(starsystem1->model()->data(), starsystem2->model()->data());
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+
+    // clone
+    model::StarSystem* model = new model::StarSystem(starsystem->model()->data());
+    control::StarSystem* clone = new control::StarSystem(starsystem->descriptor(), model);
+
+    EXPECT_EQ(starsystem->model()->data(), clone->model()->data());
+
+    // clear
+    delete model;
+    delete clone;
 }
 
-//TEST(model, asteroid)
-//{
-//    model::Asteroid* model1 = builder::Asteroid::gen();
-//    model::Asteroid* model2 = new model::Asteroid(model1->data());
-//    EXPECT_EQ(model1->data(), model2->data());
-//}
+TEST(clone, asteroid)
+{
+    control::Asteroid* asteroid = builder::Asteroid::gen();
+
+    // clone
+    model::Asteroid* model = new model::Asteroid(asteroid->model()->data());
+    control::Asteroid* clone = new control::Asteroid(asteroid->descriptor(), model);
+
+    EXPECT_EQ(asteroid->model()->data(), clone->model()->data());
+
+    // clear
+    delete model;
+    delete clone;
+}
