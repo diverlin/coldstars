@@ -49,13 +49,13 @@ Galaxy::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-bool Galaxy::operator==(const Galaxy& rhs) const {
-    return isEqual(m_sectors, rhs.m_sectors);
-}
+//bool Galaxy::operator==(const Galaxy& rhs) const {
+//    return isEqual(m_sectors, rhs.m_sectors);
+//}
 
-bool Galaxy::operator!=(const Galaxy& rhs) const {
-    return *this == rhs;
-}
+//bool Galaxy::operator!=(const Galaxy& rhs) const {
+//    return *this == rhs;
+//}
 
 } // namespace model
 
@@ -93,7 +93,7 @@ void Galaxy::putChildrenToGarbage() const
 //    }
 }
 
-void Galaxy::add(model::Sector* model, const glm::vec3& center)
+void Galaxy::add(model::Sector* model, const meti::vec3& center)
 { 
     model->setGalaxy(id());
     model->setPosition(center);

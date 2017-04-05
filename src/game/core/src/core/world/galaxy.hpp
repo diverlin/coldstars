@@ -21,9 +21,11 @@
 
 #include <core/common/Base.hpp>
 
-#include <boost/serialization/vector.hpp>
+#include <meti/VectorUtils.hpp>
 
-#include <glm/glm.hpp>
+#include <ceti/Pack.hpp>
+
+#include <boost/serialization/vector.hpp>
 
 namespace descriptor {
 class Galaxy;
@@ -50,13 +52,13 @@ public:
     Galaxy(const std::string& data);
     std::string data() const;
 
-    bool operator==(const Galaxy& rhs) const;
-    bool operator!=(const Galaxy& rhs) const;
+//    bool operator==(const Galaxy& rhs) const;
+//    bool operator!=(const Galaxy& rhs) const;
 
-    void add(int_t sector) { m_sectors.push_back(sector); }
+    void add(int_t sector) { m_sectors.add(sector); }
 
 private:
-    std::vector<int_t> m_sectors;
+    ceti::pack<int_t> m_sectors;
 
 private:
     friend class boost::serialization::access;
@@ -82,7 +84,7 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(model::Sector*, const glm::vec3&);
+    void add(model::Sector*, const meti::vec3&);
 
     model::Sector* randomSector();
     model::Sector* closestSectorTo(model::Sector*);
