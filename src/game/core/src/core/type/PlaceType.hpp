@@ -27,9 +27,10 @@ enum class Type {
     NONE,
     //
     SPACE,
-    HYPER,
+    HYPERSPACE,
     KOSMOPORT,
-    NATURELAND
+    NATURELAND,
+    CONTAINER
 };
 
 } // namespace place

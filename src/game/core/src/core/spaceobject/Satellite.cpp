@@ -76,7 +76,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
             //points.setCenter(orbit->getPosition());
         //}
 
-        weaponComplex().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
+        _weaponComplex().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
     }
 }
 

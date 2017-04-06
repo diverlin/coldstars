@@ -24,6 +24,7 @@
 #include <core/part/WeaponComplex.hpp>
 #include <core/part/DriveComplex.hpp>
 #include <core/part/ProtectionComplex.hpp>
+#include <core/part/GrappleComplex.hpp>
 
 #include <core/struct/VehicleNeeds.hpp>
 
@@ -119,15 +120,13 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     virtual ~Vehicle();
 
+    const DriveComplex& driveComplex() const { return m_drive_complex; }
+
     void dock(SpaceObject*);
+    void grab(SpaceObject*);
     void follow(SpaceObject*);
 
     void resetTargets();
-
-    WeaponComplex& weaponComplex() { return m_weapon_complex; }
-    DriveComplex& driveComplex() { return m_drive_complex; }
-    ProtectionComplex& protectorComplex() { return m_protector_complex; }
-    const ProtectionComplex& protectorComplex() const { return m_protector_complex; }
 
     // wepon complex interface
     void fire(int, float);
@@ -205,9 +204,9 @@ public:
 //    slot::ItemSlot* energizerSlot() const { return m_energizerSlot; }
 //    slot::ItemSlot* freezerSlot()   const { return m_freezerSlot; }
 #endif // USE_EXTRA_EQUIPMENT
-    std::vector<slot::Item*> grappleSlots() const { return m_grappleSlots; }
+    std::vector<slot::Item*> grappleSlots() const { return m_grapple_complex.grappleSlots(); }
     std::vector<slot::Item*> droidSlots() const { return m_droidSlots; }
-    std::vector<slot::Item*> protectorSlots() const { return protectorComplex().protectorSlots(); }
+    std::vector<slot::Item*> protectorSlots() const { return m_protector_complex.protectorSlots(); }
 
     std::vector<slot::Item*> weaponSlots() const { return m_weapon_complex.weaponSlots(); }
     std::vector<slot::Item*> cargoSlots() const { return m_cargoSlots; }
@@ -332,7 +331,6 @@ private:
     slot::ItemSlot* m_energizerSlot = nullptr;
     slot::ItemSlot* m_freezerSlot = nullptr;
 #endif // USE_EXTRA_EQUIPMENT
-    std::vector<slot::Item*> m_grappleSlots;
     std::vector<slot::Item*> m_droidSlots;
 
     std::vector<slot::Item*> m_equipmentSlots;
@@ -344,6 +342,7 @@ private:
     WeaponComplex     m_weapon_complex;
     DriveComplex      m_drive_complex;
     ProtectionComplex m_protector_complex;
+    complex::Grapple m_grapple_complex;
 
     std::map<int, slot::Item*> m_slots;
 
@@ -370,6 +369,14 @@ private:
 
     void __loadModel();
     void __loadItemsFromModel();
+
+protected:
+    WeaponComplex& _weaponComplex() { return m_weapon_complex; }
+    DriveComplex& _driveComplex() { return m_drive_complex; }
+
+private:
+    class Test_Vehicle;
+    friend class Test_Vehicle;
 };
 
 

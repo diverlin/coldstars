@@ -24,13 +24,14 @@ std::string getPlaceStr(place::Type place_id)
 {
     switch(place_id)
     {
-        case place::Type::NONE: { return "PLACE_NONE"; }
+        case place::Type::NONE: { return "place::Type::NONE"; }
         
-        case place::Type::SPACE: { return "SPACE"; }
-        case place::Type::HYPER: { return "HYPER_SPACE"; }
-        case place::Type::KOSMOPORT: { return "KOSMOPORT"; }
-        case place::Type::NATURELAND: { return "NATURELAND"; }
+        case place::Type::SPACE: { return "place::Type::SPACE"; }
+        case place::Type::HYPERSPACE: { return "place::Type::HYPERSPACE"; }
+        case place::Type::KOSMOPORT: { return "place::Type::KOSMOPORT"; }
+        case place::Type::NATURELAND: { return "place::Type::NATURELAND"; }
+        case place::Type::CONTAINER: { return "place::Type::CONTAINER"; }
     }
-    return "PLACE_UKNOWN";
+    return "place::Type::PLACE_UKNOWN";
 } 
 
