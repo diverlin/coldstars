@@ -105,6 +105,9 @@ Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
     , m_descriptor_vehicle(descr)
     , m_model_vehicle(model)
     , m_drive_complex(complex::Drive(this))
+    , m_weapon_complex(complex::Weapon(this))
+    , m_grapple_complex(complex::Grapple(this))
+    , m_protector_complex(complex::Protector(this))
 {
     __createSlots(descr);
 
@@ -650,16 +653,16 @@ Vehicle::_cargoSlotWithGoods(place::Type requested_goods_subtype_id)
     return nullptr;
 }
 
-//bool
-//Vehicle::unpackContainerItemToCargoSlot(Container* container)
-//{
-//    if (load(container->itemSlot()->item())) {
-//        container->killSilently();
-//        return true;
-//    }
+bool
+Vehicle::unpackContainerItemToCargoSlot(Container* container)
+{
+    if (load(container->itemSlot()->item())) {
+        container->killSilently();
+        return true;
+    }
 
-//    return false;
-//}
+    return false;
+}
 
 //bool
 //Vehicle::__addItemToCargo(Item* item)

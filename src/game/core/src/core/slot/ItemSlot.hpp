@@ -146,15 +146,7 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void setTarget(control::SpaceObject* target, slot::Item* subtarget = nullptr);
-    void setTurrel(Turrel* turrel) { m_turrel = turrel; }
-
-    control::SpaceObject* target() const { return m_target; }
-    slot::Item* subtarget() const { return m_subtarget; }
-
     int hitProbability() const { return m_hitProbability; }
-
-    Turrel* turrel() const { return m_turrel; }
 
     control::item::Weapon* weapon() const { return static_cast<control::item::Weapon*>(m_item); }
     control::Item* item() const { return m_item; }
@@ -194,8 +186,6 @@ public:
     bool insert(control::Item*);
     void removeItem();
 
-    STATUS validateTarget();
-    void resetTarget();
     bool checkAmmo() const;
     void fireEvent(float, bool);
 
@@ -213,40 +203,22 @@ public:
 //    void updateRange(jeti::control::Material*);
     void drawRange(const glm::vec2&);
 
-    bool checkSubTarget(slot::Item*) const;
-    STATUS checkTarget(control::SpaceObject*) const;
-    STATUS checkTargetPure(control::SpaceObject*) const;
-
     void selectEvent();
     void deselectEvent();
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+//    virtual void Save(boost::property_tree::ptree&) const;
+//    virtual void Load(const boost::property_tree::ptree&);
+//    virtual void Resolve();
 
     int itemRadius() const;
     int itemDamage() const;
 
-//    model::ItemSlot* model() const { return m_model_itemslot; }
-
 private:
-//    model::ItemSlot* m_model_itemslot = nullptr;
-
-    Turrel* m_turrel = nullptr;          // only for weapons slot
-
     control::Item* m_item = nullptr;
-
-    control::SpaceObject* m_target = nullptr;
-    slot::Item* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
     bool checkItemInsertion(control::Item*) const;
-
-    bool isTargetAlive(control::SpaceObject*) const;
-    bool isTargetInSpace(control::SpaceObject*) const;
-    bool isTargetInSameStarSystem(control::SpaceObject*) const;
-    bool checkDistanceToTarget(control::SpaceObject*) const;
 
     void log(const std::string&) const;
 

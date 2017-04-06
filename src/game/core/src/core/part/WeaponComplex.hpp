@@ -19,17 +19,14 @@
 
 #pragma once
 
+#include "BaseComplex.hpp"
+
 #include <core/type/EntityType.hpp>
 
-#include <vector>
-
-//class Vehicle;
-
-namespace model {
-class SpaceObject;
-} // namespace model
+#include <ceti/Pack.hpp>
 
 namespace control {
+class Vehicle;
 class SpaceObject;
 } // namespace control
 
@@ -39,10 +36,10 @@ class Item;
 
 namespace complex {
 
-class Weapon
+class Weapon : public Base
 {
 public:
-    Weapon() = default;
+    Weapon(control::Vehicle*);
     ~Weapon() = default;
 
     int radiusMin() const { return m_radiusMin; }
@@ -86,8 +83,8 @@ private:
 //    Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
-    std::vector<slot::Item*> m_slots;
-    std::vector<slot::Item*> m_slots_reloaded;
+    ceti::pack<slot::Item*> m_slots;
+    ceti::pack<slot::Item*> m_slots_reloaded;
 
     void __reload();
     void __validateTargets();

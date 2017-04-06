@@ -18,11 +18,13 @@
 
 #pragma once
 
-//namespace control {
-//class Vehicle;
-//} // namespace control
+#include "BaseComplex.hpp"
 
 #include <vector>
+
+namespace control {
+class Vehicle;
+} // namespace control
 
 namespace slot {
 class Item;
@@ -30,21 +32,18 @@ class Item;
 
 namespace complex {
 
-class Protection
+class Protector : public Base
 {
 public:
-    Protection();
-    ~Protection();
+    Protector(control::Vehicle*);
+    ~Protector();
 
-//    void setOwnerVehicle(control::Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
     void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
 
     std::vector<slot::Item*> protectorSlots() const { return m_protectorSlots; }
     //        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
 private:
-//    control::Vehicle* m_owner_vehicle = nullptr;
-
     std::vector<slot::Item*> m_protectorSlots;
     //            ShieldEffect* shield_effect;
 };

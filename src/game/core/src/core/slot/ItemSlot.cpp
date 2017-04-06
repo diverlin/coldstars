@@ -109,34 +109,6 @@ void Item::putChildrenToGarbage() const
 //    }
 }
 
-void Item::setTarget(control::SpaceObject* target, slot::Item* subtarget)
-{
-    m_target    = target;
-    m_subtarget = subtarget;
-}
-
-STATUS Item::validateTarget()
-{       
-    if (m_subtarget) {
-        if (!checkSubTarget(m_subtarget)) {
-            m_subtarget = nullptr; // reseting only subtarget, firemode for target will be used
-        }
-    }
-    
-    STATUS status = checkTarget(m_target);
-    if (status != STATUS::OK) {
-        LOG(getTargetStatusStr(status));
-    }
-
-    return status;
-}
-
-void Item::resetTarget()
-{ 
-    m_target    = nullptr;
-    m_subtarget = nullptr;
-}
-
 bool Item::checkAmmo() const
 {
     assert(false);
@@ -212,10 +184,17 @@ bool Item::insert(control::Item* item)
 }
 
 void Item::removeItem()
-{    
+{
+    if (!m_item) {
+        return;
+    }
+
+    if (subtype() == entity::Type::WEAPON_SLOT) {
+        weapon()->resetTarget();
+    }
+
     // make it oop
     m_item = nullptr;
-    resetTarget();
 
     if (subtype() != entity::Type::CARGO_SLOT) {
         updateVehiclePropetries();
@@ -441,109 +420,30 @@ void Item::drawRange(const glm::vec2& offset)
     //m_VisualPath.Draw(offset);
 }
 
-bool Item::checkSubTarget(slot::Item* subtarget) const
-{
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    LOG(" ItemSlot("+std::to_string(id())+")::CheckSubTarget");
-#endif
-    
-    if (subtarget->item()) {
-        return true;
-    }
-    
-    return false;
-}
+///* virtual override final */
+//void Item::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    const std::string root = "item_slot." + std::to_string(id()) + ".";
+////    Base::SaveData(save_ptree, root);
+////    BaseSlot::SaveData(save_ptree, root);
+////    ItemSlot::SaveData(save_ptree, root);
+//}
 
+///* virtual override final */
+//void Item::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    BaseSlot::LoadData(load_ptree);
+////    ItemSlot::LoadData(load_ptree);
+//}
 
-STATUS Item::checkTarget(control::SpaceObject* target) const
-{
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
-#endif
-    
-    if (isTargetAlive(target) == false) {
-        return STATUS::TARGET_DEAD;
-    }
-    if (isTargetInSpace(target) == false) {
-        return STATUS::TARGET_NOTIN_SPACE;
-    }
-    if (isTargetInSameStarSystem(target) == false) {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;
-    }
-    if (checkDistanceToTarget(target) == false) {
-        return STATUS::TARGET_OUTOF_RANGE;
-    }
-    return STATUS::TARGET_OK;
-}     
-
-STATUS Item::checkTargetPure(control::SpaceObject* target) const
-{
-    if (!isTargetAlive(target)) {
-        return STATUS::TARGET_DEAD;
-    }
-    if (!isTargetInSpace(target)) {
-        return STATUS::TARGET_NOTIN_SPACE;
-    }
-    if (!isTargetInSameStarSystem(target)) {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;
-    }
-    return STATUS::TARGET_OK;
-} 
-
-bool Item::isTargetAlive(control::SpaceObject* target) const
-{
-    return target->model()->isAlive();
-}
-
-bool Item::isTargetInSpace(control::SpaceObject* target) const
-{
-    return (target->model()->place() == place::Type::SPACE);
-}               
-
-bool Item::isTargetInSameStarSystem(control::SpaceObject* target) const
-{
-    return (target->model()->starsystem() == vehicleOwner()->model()->starsystem());
-}                
-
-bool Item::checkDistanceToTarget(control::SpaceObject* target) const
-{
-    if (target->descriptor()->obType() == entity::Type::STARSYSTEM) {
-        return true;
-    }
-    
-    float dist = meti::distance(vehicleOwner()->position(), target->position());
-    if (dist < itemRadius())
-    {
-        return true;
-    }
-
-    return false;
-}
-
-/* virtual override final */
-void Item::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    const std::string root = "item_slot." + std::to_string(id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    BaseSlot::SaveData(save_ptree, root);
-//    ItemSlot::SaveData(save_ptree, root);
-}
-
-/* virtual override final */      
-void Item::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    BaseSlot::LoadData(load_ptree);
-//    ItemSlot::LoadData(load_ptree);
-}
-
-/* virtual override final */ 
-void Item::Resolve()
-{
-//    Base::ResolveData();
-//    BaseSlot::ResolveData();
-//    ItemSlot::ResolveData();
-}
+///* virtual override final */
+//void Item::Resolve()
+//{
+////    Base::ResolveData();
+////    BaseSlot::ResolveData();
+////    ItemSlot::ResolveData();
+//}
 
 //void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{

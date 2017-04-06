@@ -34,6 +34,9 @@ class Weapon;
 } // namespace model
 
 namespace control {
+
+class SpaceObject;
+
 namespace item {
 
 class Weapon : public Equipment
@@ -42,11 +45,25 @@ public:
     Weapon(descriptor::item::Weapon*, model::item::Weapon*);
     virtual ~Weapon() = default;
 
+    void setTarget(control::SpaceObject* target, slot::Item* subtarget = nullptr);
+    //void setTurrel(Turrel* turrel) { m_turrel = turrel; }
+
+    //Turrel* turrel() const { return m_turrel; }
+    control::SpaceObject* target() const { return m_target; }
+    slot::Item* subtarget() const { return m_subtarget; }
+
 //    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
 
 //    void FireEvent(float);
 
     virtual void updateProperties();
+
+    int radius() const;
+    int damage() const;
+
+    bool validateSubTarget() const;
+    void resetTarget();
+    void resetSubTarget();
 
 public:
     descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
@@ -58,6 +75,11 @@ private:
 
     int m_damage_add = 0;
     int m_radius_add = 0;
+
+    control::SpaceObject* m_target = nullptr;
+    slot::Item* m_subtarget = nullptr;
+
+//    Turrel* m_turrel = nullptr;          // only for weapons slot
 
 //    int fire_atOnce;
 
