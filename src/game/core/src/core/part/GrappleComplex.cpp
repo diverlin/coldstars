@@ -18,9 +18,18 @@
 
 #include "GrappleComplex.hpp"
 
+#include <core/type/EntityType.hpp>
+#include <core/type/StatusType.hpp>
+
+#include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 
 namespace complex {
+
+Grapple::Grapple(control::Vehicle* vehicle)
+    :
+      Base(vehicle)
+{}
 
 bool
 Grapple::isObjectIsTarget(control::SpaceObject* object) const
@@ -32,20 +41,6 @@ Grapple::isObjectIsTarget(control::SpaceObject* object) const
     }
 
     return false;
-}
-
-bool
-Grapple::canBeManaged(control::SpaceObject* object) const
-{
-    // avoiding dublicated items in the vector
-    // maybe better to inherit ceti::pack from std::set?
-    if (isObjectIsTarget(object)) {
-        return false;
-    }
-
-    if (m_free_strength < object->mass()) {
-        return false;
-    }
 }
 
 bool
@@ -67,68 +62,68 @@ Grapple::removeTarget(control::SpaceObject* target)
     m_free_strength += target->mass();
 }
 
-void Grapple::resetTargets()
+void
+Grapple::resetTargets()
 {
     m_targets.clear();
     m_free_strength = m_strength;
 }
 
-//void Grapple::UpdateGrabScenarioProgram_inDynamic()
-//{
-//        assert(false);
-////    for (std::vector<model::SpaceObject*>::iterator it = m_targets.begin(); it != m_targets.end(); ++it)
-////    {
-////        Vehicle& vehicle = *slot()->vehicleOwner(); // shortcut
-////        model::SpaceObject& target = **it;
+bool
+Grapple::canBeManaged(control::SpaceObject* object) const
+{
+    // avoiding dublicated items in the vector
+    // maybe better to inherit ceti::pack from std::set?
+    if (isObjectIsTarget(object)) {
+        return false;
+    }
 
-////        if (slot()->checkTarget(&target) == STATUS::TARGET_OK)
-////        {
-////            glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
+    if (m_free_strength < object->mass()) {
+        return false;
+    }
+}
 
+void
+Grapple::UpdateGrabScenarioProgram_inDynamic()
+{
+    ceti::pack<control::SpaceObject*> targetsToForget;
 
-////            target.addImpulse(impulse_dir, 0.001* strength());
+    for (control::SpaceObject* target: m_targets) {
+        if (_validateTarget(target, m_radius) != STATUS::TARGET_OK) {
+            targetsToForget.add(target);
+        } else {
+            glm::vec3 impulse_dir = glm::normalize(_vehicle()->position() - target->position());
 
-////            float dist = meti::distance(vehicle.position(), target.position());
-////            if (dist < 0.5*vehicle.collisionRadius())
-////            {
-////                switch(target.type())
-////                {
-////                case entity::Type::CONTAINER:
-////                {
-////                    Container* container = reinterpret_cast<Container*>(&target);
-////                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)
-////                    {
-////                        it = m_targets.erase(it);
-////                        return; // hack
-////                    }
+            target->addImpulse(impulse_dir, 0.001* m_strength);
 
-////                    break;
-////                }
+            float dist = meti::distance(_vehicle()->position(), target->position());
+            if (dist < 0.5*_vehicle()->collisionRadius()) {
+                switch(target->descriptor()->obType()) {
+                case entity::Type::CONTAINER: {
+                    control::Container* container = reinterpret_cast<control::Container*>(target);
+                    if (_vehicle()->unpackContainerItemToCargoSlot(container)) {
+                        targetsToForget.add(target);
+                    }
+                    break;
+                }
 
-////                    //case ENTITY::VEHICLE:
-////                    //{
-////                    //ItemSlot* _slot = GetEmptyOtsecSlot();
-////                    //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-////                    //if (_slot != nullptr)
-////                    //{
-////                    ////_slot->InsertItem(_vehicle);
-////                    //starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
-////                    //}
-////                    //grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-////                    //break;
-////                    //}
-////                }
-////            }
-////        }
-////        else
-////        {
-////            //LOG("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
-
-////            it = m_targets.erase(it);
-////            return; // hack
-////        }
-////    }
-//}
+                    //case ENTITY::VEHICLE:
+                    //{
+                    //ItemSlot* _slot = GetEmptyOtsecSlot();
+                    //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+                    //if (_slot != nullptr)
+                    //{
+                    ////_slot->InsertItem(_vehicle);
+                    //starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+                    //}
+                    //grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
+                    //break;
+                    //}
+                }
+            }
+        }
+    }
+}
 
 
 ////void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)

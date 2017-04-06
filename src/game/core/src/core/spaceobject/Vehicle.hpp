@@ -185,7 +185,7 @@ public:
     [[deprecated("move to ext")]]
     bool buyItem(Item*);
 
-    //bool unpackContainerItemToCargoSlot(control::Container*);
+    bool unpackContainerItemToCargoSlot(Container*);
 
     int freeSpace() const;
     int space() const;
@@ -341,7 +341,7 @@ private:
     VehicleNeeds m_needs;
     complex::Weapon m_weapon_complex;
     complex::Drive m_drive_complex;
-    complex::Protection m_protector_complex;
+    complex::Protector m_protector_complex;
     complex::Grapple m_grapple_complex;
 
     std::map<int, slot::Item*> m_slots;

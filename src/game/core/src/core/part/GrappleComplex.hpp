@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include "BaseComplex.hpp"
+
 #include <ceti/Pack.hpp>
 
 namespace slot {
@@ -25,29 +27,34 @@ class Item;
 } // namespace slot
 
 namespace control {
+class Vehicle;
 class SpaceObject;
 } // namespace control
 
 namespace complex {
 
-class Grapple
+class Grapple : public Base
 {
 public:
-    Grapple() = default;
+    Grapple(control::Vehicle*);
     ~Grapple() = default;
 
     void setStrength(int strength) { m_strength = strength; }
 
-    void addGrappleSlot(slot::Item* slot) { m_grappleSlots.add(slot); }
     bool isObjectIsTarget(control::SpaceObject*) const;
-    bool canBeManaged(control::SpaceObject*) const;
-
     bool addTarget(control::SpaceObject*);
     bool removeTarget(control::SpaceObject*);
 
     void resetTargets();
 
+    void addGrappleSlot(slot::Item* slot) { m_grappleSlots.add(slot); }
+    bool canBeManaged(control::SpaceObject*) const;
+
     ceti::pack<slot::Item*> grappleSlots() const { return m_grappleSlots; }
+
+    void UpdateGrabScenarioProgram_inDynamic();
+
+    const ceti::pack<control::SpaceObject*>& targets() const { return m_targets; }
 
 private:
     ceti::pack<slot::Item*> m_grappleSlots;
@@ -55,6 +62,7 @@ private:
 
     int m_free_strength = 0;
     int m_strength = 0;
+    int m_radius;
         //        void RenderGrabTrail(const jeti::Renderer&);
 };
 

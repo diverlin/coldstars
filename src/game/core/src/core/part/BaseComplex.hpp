@@ -16,26 +16,38 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ProtectionComplex.hpp"
-//#include <core/spaceobject/Vehicle.hpp>
-//#include "../resources/TextureCollector.hpp"
-//#include "../effects/Shield.hpp"
-#include "../common/constants.hpp"
+#pragma once
+
+#include <ceti/Pack.hpp>
+
+#include <core/type/StatusType.hpp>
+
+namespace control {
+class SpaceObject;
+class Vehicle;
+} // namespace control
 
 namespace complex {
 
-Protector::Protector(control::Vehicle* vehicle)
-    :
-      Base(vehicle)
-{        
-//    shield_effect = new ShieldEffect();
-//    jeti::control::TextureOb* texOb_shield = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHIELD_EFFECT);
-//    shield_effect->SetTextureOb(texOb_shield);
-}
+class Base
+{
+public:
+    Base(control::Vehicle*);
+    ~Base() = default;
 
-Protector::~Protector()
-{ 
-//    delete shield_effect;
-}
+protected:
+    control::Vehicle* _vehicle() const { return m_vehicle; }
+
+    STATUS _validateTarget(control::SpaceObject*, int) const;
+    STATUS _validateTargetDirty(control::SpaceObject*) const;
+
+    bool _isTargetAlive(control::SpaceObject*) const;
+    bool _isTargetInSpace(control::SpaceObject*) const;
+    bool _isTargetInSameStarSystem(control::SpaceObject*) const;
+    bool _checkDistanceToTarget(control::SpaceObject*, int) const;
+
+private:
+    control::Vehicle* m_vehicle = nullptr;
+};
 
 } // namespace complex

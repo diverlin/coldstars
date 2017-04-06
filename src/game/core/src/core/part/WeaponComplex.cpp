@@ -29,6 +29,11 @@
 
 namespace complex {
 
+Weapon::Weapon(control::Vehicle* vehicle)
+    :
+      Base(vehicle)
+{}
+
 bool
 Weapon::addSlot(slot::Item* slot)
 {
@@ -145,7 +150,7 @@ bool Weapon::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-void Weapon::setTarget(control::SpaceObject* target, slot::Item* item_slot)
+void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
 {                 
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
     //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
@@ -154,12 +159,13 @@ void Weapon::setTarget(control::SpaceObject* target, slot::Item* item_slot)
 
     for (slot::Item* slot: m_slots) {
         if (slot->isSelected()) {
-            if (slot->item()) {
-                if (slot->item()->isFunctioning()) {
-                    if (!slot->target()) {
-                        STATUS status = slot->checkTarget(target);
+            control::item::Weapon* weapon = slot->weapon();
+            if (weapon) {
+                if (weapon->isFunctioning()) {
+                    if (!weapon->target()) {
+                        STATUS status = _validateTarget(target, weapon->radius());
                         if (status == STATUS::TARGET_OK) {
-                            slot->setTarget(target, item_slot);
+                            weapon->setTarget(target, subtarget);
                         } else {
                             LOG(getTargetStatusStr(status));
                         }
@@ -186,15 +192,15 @@ void Weapon::fire(int timer, float attack_rate, bool show_effect)
     //if (timer < TURN_TIME - fire_delay) {
     std::vector<slot::Item*>::iterator it=m_slots_reloaded.begin();
         while(it!=m_slots_reloaded.end()) {
-            slot::Item& slot = **it; // shortcut
-            if (slot.target()) {
-                if (slot.validateTarget() == STATUS::TARGET_OK) {
-                    slot.fireEvent(attack_rate, show_effect);
+            control::item::Weapon* weapon = (*it)->weapon(); // shortcut
+            if (weapon->target()) {
+                if (_validateTarget(weapon->target(), weapon->radius()) == STATUS::TARGET_OK) {
+                    (*it)->fireEvent(attack_rate, show_effect);
 //                    if (slot.subtarget()) {
 //                        fire_delay += d_fire_delay;
 //                    }
                 } else {
-                    slot.resetTarget();
+                    weapon->resetTarget();
                 }
                 it = m_slots_reloaded.erase(it);
             } else {
@@ -207,9 +213,15 @@ void Weapon::fire(int timer, float attack_rate, bool show_effect)
 void Weapon::__validateTargets()
 {
     for (slot::Item* slot: m_slots) {
-        if (slot->target()) {
-            if (slot->validateTarget() != STATUS::TARGET_OK) {
-                slot->resetTarget();
+        control::item::Weapon* weapon = slot->weapon();
+        if (weapon) {
+            if (weapon->target()) {
+                if (!weapon->validateSubTarget()) {
+                    weapon->resetSubTarget();
+                }
+                if (_validateTarget(weapon->target(), weapon->radius()) != STATUS::TARGET_OK) {
+                    weapon->resetTarget();
+                }
             }
         }
     }

@@ -20,6 +20,8 @@
 #include <core/descriptor/item/equipment/Weapon.hpp>
 #include <core/model/item/equipment/Weapon.hpp>
 
+#include <core/slot/ItemSlot.hpp>
+
 //#include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
@@ -34,6 +36,9 @@ Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
 {
 //    fire_atOnce = meti::getRandInt(1, 3);
 }
+
+int Weapon::radius() const { return model()->radius(); }
+int Weapon::damage() const { return model()->damage(); }
 
 /* virtual */
 void Weapon::updateProperties()
@@ -82,6 +87,37 @@ Weapon::radiusStr()
         return std::to_string(descriptor()->radius());
     }
 }
+
+
+void
+Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
+{
+    m_target    = target;
+    m_subtarget = subtarget;
+}
+
+void
+Weapon::resetSubTarget()
+{
+    m_subtarget = nullptr;
+}
+
+bool
+Weapon::validateSubTarget() const
+{
+    if (m_subtarget->item()) {
+        return true;
+    }
+    return false;
+}
+
+void
+Weapon::resetTarget()
+{
+    m_target    = nullptr;
+    resetSubTarget();
+}
+
 
 //void Rocket::FireEvent(float attack_rate_normalized)
 //{
