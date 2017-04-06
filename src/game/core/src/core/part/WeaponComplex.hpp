@@ -37,11 +37,13 @@ namespace slot {
 class Item;
 } // namespace slot
 
-class WeaponComplex
+namespace complex {
+
+class Weapon
 {
 public:
-    WeaponComplex() = default;
-    ~WeaponComplex() = default;
+    Weapon() = default;
+    ~Weapon() = default;
 
     int radiusMin() const { return m_radiusMin; }
     int radiusMax() const { return m_radiusMax; }
@@ -91,4 +93,5 @@ private:
     void __validateTargets();
 };
 
+} // namespace complex
 

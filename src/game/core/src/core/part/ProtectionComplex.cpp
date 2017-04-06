@@ -22,15 +22,18 @@
 //#include "../effects/Shield.hpp"
 #include "../common/constants.hpp"
 
-ProtectionComplex::ProtectionComplex()
+namespace complex {
+
+Protection::Protection()
 {        
 //    shield_effect = new ShieldEffect();
 //    jeti::control::TextureOb* texOb_shield = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHIELD_EFFECT);
 //    shield_effect->SetTextureOb(texOb_shield);
 }
 
-ProtectionComplex::~ProtectionComplex() 
+Protection::~Protection()
 { 
 //    delete shield_effect;
 }
 
+} // namespace complex

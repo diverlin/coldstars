@@ -28,11 +28,13 @@ namespace slot {
 class Item;
 } // namespace slot
 
-class ProtectionComplex
+namespace complex {
+
+class Protection
 {
 public:
-    ProtectionComplex();
-    ~ProtectionComplex();
+    Protection();
+    ~Protection();
 
 //    void setOwnerVehicle(control::Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
     void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
@@ -47,4 +49,4 @@ private:
     //            ShieldEffect* shield_effect;
 };
 
-
+} // namepsace complex

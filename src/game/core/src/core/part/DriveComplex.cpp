@@ -38,15 +38,9 @@
 #include <meti/VectorUtils.hpp>
 #include <meti/QuaternionUtils.hpp>
 
-DriveComplex::DriveComplex()
-{}
+namespace complex {
 
-DriveComplex::~DriveComplex()
-{
-//    delete m_effectDrive;
-}
-
-bool DriveComplex::pathExists() const
+bool Drive::pathExists() const
 {
     if ( (m_pathEnd == true) and (m_pathCenterVec.size() == 0 ) ) {
         return false;
@@ -55,7 +49,7 @@ bool DriveComplex::pathExists() const
     return true;
 }
 
-void DriveComplex::resetTarget()
+void Drive::resetTarget()
 {
     m_target = nullptr;
             
@@ -69,7 +63,7 @@ void DriveComplex::resetTarget()
     m_pathEnd = true;
 }
       
-void DriveComplex::setCoordinates(const glm::vec3& target_pos)
+void Drive::setCoordinates(const glm::vec3& target_pos)
 {
     resetTarget();
     m_hasTarget = true;
@@ -79,7 +73,7 @@ void DriveComplex::setCoordinates(const glm::vec3& target_pos)
     updatePath();
 }
                  
-void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
+void Drive::setTarget(control::SpaceObject* target, Action action_id)
 {
     resetTarget();
     
@@ -155,7 +149,7 @@ void DriveComplex::setTarget(control::SpaceObject* target, Action action_id)
 //    }
 //}
                   
-void DriveComplex::updatePath()
+void Drive::updatePath()
 {
     if (m_target != nullptr)
     {
@@ -172,7 +166,7 @@ void DriveComplex::updatePath()
     }
 }
 
-bool DriveComplex::__validateTarget() const
+bool Drive::__validateTarget() const
 {
     if (m_target->model()->isAlive()) {
         if (m_target->model()->place() == place::Type::SPACE) {
@@ -185,7 +179,7 @@ bool DriveComplex::__validateTarget() const
 
 
 
-void DriveComplex::__updateDynamicTargetCoord()
+void Drive::__updateDynamicTargetCoord()
 {
     switch(m_target->descriptor()->obType())
     {
@@ -213,7 +207,7 @@ void DriveComplex::__updateDynamicTargetCoord()
 }
 
 
-bool DriveComplex::checkTargetEchievement(const meti::vec3& pos)
+bool Drive::checkTargetEchievement(const meti::vec3& pos)
 {
     if (m_target) {
         bool result = ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(pos),
@@ -228,7 +222,7 @@ bool DriveComplex::checkTargetEchievement(const meti::vec3& pos)
 }
 
 
-bool DriveComplex::getDockingPermission()
+bool Drive::getDockingPermission()
 {
     assert(false);
 //    switch(m_target->type())
@@ -249,13 +243,13 @@ bool DriveComplex::getDockingPermission()
     return false;
 }
 
-void DriveComplex::__clearPath()
+void Drive::__clearPath()
 {
     m_pathCenterVec.clear();
     m_pathDirectionVec.clear();
 }
 
-void DriveComplex::__calcPath()
+void Drive::__calcPath()
 {
     //LOG("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     
@@ -381,7 +375,7 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 }
 
-void DriveComplex::__calcPath_DEBUG()
+void Drive::__calcPath_DEBUG()
 {
 
     glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
@@ -432,7 +426,7 @@ void DriveComplex::__calcPath_DEBUG()
     }
 }
 
-void DriveComplex::updatePosition()
+void Drive::updatePosition()
 {
     if (m_pathEnd == false)
     {
@@ -466,3 +460,4 @@ void DriveComplex::updatePosition()
 //    }
 //}
 
+} // namespace complex

@@ -259,13 +259,13 @@ TEST(ship, dock)
 
         // drive complex
         EXPECT_EQ(nullptr, ship->driveComplex().target());
-        EXPECT_EQ(DriveComplex::Action::NONE, ship->driveComplex().action());
+        EXPECT_EQ(complex::Drive::Action::NONE, ship->driveComplex().action());
 
         ship->dock(planet);
 
         // drive complex
         EXPECT_EQ(planet, ship->driveComplex().target());
-        EXPECT_EQ(DriveComplex::Action::DOCKING, ship->driveComplex().action());
+        EXPECT_EQ(complex::Drive::Action::DOCKING, ship->driveComplex().action());
 
         drive->corrupt();
         EXPECT_FALSE(event::doDockShip(ship->id(), planet->land()->id()));

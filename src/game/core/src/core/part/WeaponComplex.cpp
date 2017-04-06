@@ -27,9 +27,10 @@
 #include <core/item/Item.hpp>
 #include <core/slot/ItemSlot.hpp>
 
+namespace complex {
 
 bool
-WeaponComplex::addSlot(slot::Item* slot)
+Weapon::addSlot(slot::Item* slot)
 {
     assert(slot);
     m_slots.push_back(slot);
@@ -38,7 +39,7 @@ WeaponComplex::addSlot(slot::Item* slot)
 
 
 slot::Item*
-WeaponComplex::freeSlot() const
+Weapon::freeSlot() const
 {
     for(slot::Item* slot: m_slots) {
         if (!slot->item()) {
@@ -50,7 +51,7 @@ WeaponComplex::freeSlot() const
 }
 
 slot::Item*
-WeaponComplex::equipedWeakestSlot() const
+Weapon::equipedWeakestSlot() const
 {
     int price_min = 0;
     slot::Item* result = nullptr;
@@ -67,14 +68,14 @@ WeaponComplex::equipedWeakestSlot() const
     return result;
 }
 
-void WeaponComplex::prepareWeapons()
+void Weapon::prepareWeapons()
 {       
     // used once at the begining of turn
     __reload();
     __validateTargets();
 }
 
-void WeaponComplex::__reload()
+void Weapon::__reload()
 {
     m_slots_reloaded.clear();
     for (slot::Item* slot: m_slots) {
@@ -91,21 +92,21 @@ void WeaponComplex::__reload()
 //    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
 }
 
-void WeaponComplex::selectAllWeapons()
+void Weapon::selectAllWeapons()
 {
     for (slot::Item* slot: m_slots_reloaded) {
         slot->selectEvent();
     }
 }
 
-void WeaponComplex::deactivateWeapons()
+void Weapon::deactivateWeapons()
 {
     for (slot::Item* slot: m_slots_reloaded) {
         slot->deselectEvent();
     }
 }
 
-void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
+void Weapon::selectAllWeapons(const entity::Type& weapon_subtype_id)
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
@@ -114,7 +115,7 @@ void WeaponComplex::selectAllWeapons(const entity::Type& weapon_subtype_id)
     }
 }
 
-void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
+void Weapon::deactivateWeapons(const entity::Type& weapon_subtype_id)
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
@@ -123,7 +124,7 @@ void WeaponComplex::deactivateWeapons(const entity::Type& weapon_subtype_id)
     }
 }
 
-bool WeaponComplex::isAnyWeaponSelected() const
+bool Weapon::isAnyWeaponSelected() const
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->isSelected() == true) {
@@ -144,7 +145,7 @@ bool WeaponComplex::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-void WeaponComplex::setTarget(control::SpaceObject* target, slot::Item* item_slot)
+void Weapon::setTarget(control::SpaceObject* target, slot::Item* item_slot)
 {                 
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
     //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
@@ -169,7 +170,7 @@ void WeaponComplex::setTarget(control::SpaceObject* target, slot::Item* item_slo
     }
 }
 
-int WeaponComplex::guessDamage(int dist = 0)
+int Weapon::guessDamage(int dist = 0)
 {
     int damage = 0;
     for (slot::Item* slot: m_slots_reloaded) {
@@ -180,7 +181,7 @@ int WeaponComplex::guessDamage(int dist = 0)
     return damage;
 }
 
-void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
+void Weapon::fire(int timer, float attack_rate, bool show_effect)
 {
     //if (timer < TURN_TIME - fire_delay) {
     std::vector<slot::Item*>::iterator it=m_slots_reloaded.begin();
@@ -203,7 +204,7 @@ void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
     //}
 }
 
-void WeaponComplex::__validateTargets()
+void Weapon::__validateTargets()
 {
     for (slot::Item* slot: m_slots) {
         if (slot->target()) {
@@ -214,7 +215,7 @@ void WeaponComplex::__validateTargets()
     }
 }
 
-void WeaponComplex::updateFireAbility()
+void Weapon::updateFireAbility()
 {
     m_damage = 0;
     m_radiusMax = 0;
@@ -270,3 +271,5 @@ void WeaponComplex::updateFireAbility()
 //        }
 //    }
 //}
+
+} // namespace complex
