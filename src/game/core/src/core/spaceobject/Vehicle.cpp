@@ -104,9 +104,8 @@ Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
       SpaceObject(descr, model)
     , m_descriptor_vehicle(descr)
     , m_model_vehicle(model)
+    , m_drive_complex(complex::Drive(this))
 {
-    _driveComplex().setOwnerVehicle(this);
-
     __createSlots(descr);
 
     __loadModel();
@@ -126,7 +125,7 @@ Vehicle::~Vehicle()
 
 void
 Vehicle::dock(SpaceObject* target) {
-    _driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
+    _driveComplex().setTarget(target, complex::Drive::Action::DOCKING);
 }
 
 void
@@ -136,7 +135,7 @@ Vehicle::grab(SpaceObject* target) {
 
 void
 Vehicle::follow(SpaceObject* target) {
-    _driveComplex().setTarget(target, DriveComplex::Action::KEEP_MIDDLE);
+    _driveComplex().setTarget(target, complex::Drive::Action::KEEP_MIDDLE);
 }
 
 //void

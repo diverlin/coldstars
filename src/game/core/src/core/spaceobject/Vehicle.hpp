@@ -120,7 +120,7 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     virtual ~Vehicle();
 
-    const DriveComplex& driveComplex() const { return m_drive_complex; }
+    const complex::Drive& driveComplex() const { return m_drive_complex; }
 
     void dock(SpaceObject*);
     void grab(SpaceObject*);
@@ -339,9 +339,9 @@ private:
 
     Propetries m_properties;
     VehicleNeeds m_needs;
-    WeaponComplex     m_weapon_complex;
-    DriveComplex      m_drive_complex;
-    ProtectionComplex m_protector_complex;
+    complex::Weapon m_weapon_complex;
+    complex::Drive m_drive_complex;
+    complex::Protection m_protector_complex;
     complex::Grapple m_grapple_complex;
 
     std::map<int, slot::Item*> m_slots;
@@ -371,8 +371,8 @@ private:
     void __loadItemsFromModel();
 
 protected:
-    WeaponComplex& _weaponComplex() { return m_weapon_complex; }
-    DriveComplex& _driveComplex() { return m_drive_complex; }
+    complex::Weapon& _weaponComplex() { return m_weapon_complex; }
+    complex::Drive& _driveComplex() { return m_drive_complex; }
 
 private:
     class Test_Vehicle;

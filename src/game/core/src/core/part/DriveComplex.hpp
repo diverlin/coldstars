@@ -43,17 +43,18 @@ namespace control {
 class SpaceObject;
 } // namespace control
 
-class DriveComplex
+namespace complex {
+
+class Drive
 {
 public:
     enum class Action : int {
         NONE=0, DOCKING, COLLECTING, KEEP_FIRE_DISTANCE, KEEP_CLOSE, KEEP_MIDDLE, KEEP_FAR
     };
 public:
-    DriveComplex();
-    ~DriveComplex();
+    Drive(control::Vehicle* owner):m_ownerVehicle(owner) {}
+    ~Drive() = default;
 
-    void setOwnerVehicle(control::Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
 //    void setDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
     void addDriveSlot(slot::Item* drive_slot) { m_driveSlots.push_back(drive_slot); }
@@ -119,4 +120,4 @@ private:
 //    void __defineDistance();
 };
 
-
+} // namespace complex
