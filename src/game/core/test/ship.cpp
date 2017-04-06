@@ -59,7 +59,7 @@ TEST(ship, create)
     EXPECT_EQ(ship->descriptor()->cargoSlotNum(), ship->cargoSlots().size());
 }
 
-TEST(ship, drop_item_to_space)
+TEST(ship, drop_item)
 {
     /* create objects */
     control::StarSystem* starsystem = builder::StarSystem::gen();
@@ -70,22 +70,45 @@ TEST(ship, drop_item_to_space)
     ship->manage(drive);
 
     /* add ship */
-    glm::vec3 pos(100.0f);
-    glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->model()->place(), place::Type::NONE);
-    starsystem->add(ship, pos, dir);
-    EXPECT_EQ(ship->model()->place(), place::Type::SPACE);
+    starsystem->add(ship);
 
     /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
     EXPECT_TRUE(ship->dropItemToSpace(entity::Type::DRIVE_SLOT));
     EXPECT_EQ(starsystem->containers().size(), 1);
-    assert(starsystem->containers()[0]);
+    assert(starsystem->containers().front());
 
-    control::Container* container = starsystem->containers()[0];
-    EXPECT_EQ(container->position(), pos);
+    control::Container* container = starsystem->containers().front();
+    EXPECT_EQ(container->position(), ship->position());
     EXPECT_EQ(container->model()->place(), place::Type::SPACE);
     EXPECT_EQ(container->itemSlot()->item(), drive);
+}
+
+TEST(ship, grab_container)
+{
+    /* create objects */
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Grapple* grapple = builder::item::Grapple::gen();
+    EXPECT_TRUE(ship->mount(grapple));
+
+    control::Container* container = builder::Container::gen();
+    control::item::Lazer* lazer = builder::item::Lazer::gen();
+    EXPECT_TRUE(container->insert(lazer));
+
+    /* add to starsystem */
+    starsystem->add(ship);
+    starsystem->add(container);
+
+    EXPECT_EQ(1, starsystem->containers().size());
+    EXPECT_EQ(place::Type::SPACE, container->place());
+
+    ship->grab(container);
+
+    event::doGrabContainer(ship->id(), container->id());
+
+    EXPECT_EQ(0, starsystem->containers().size());
+    EXPECT_EQ(place::Type::CONTAINER, container->place());
 }
 
 TEST(ship, base_shoot_to_ship)
@@ -343,7 +366,7 @@ TEST(ship, jump)
         EXPECT_EQ(1, hyper->vehicles().size());
 
         // ship
-        EXPECT_EQ(place::Type::HYPER, ship->place());
+        EXPECT_EQ(place::Type::HYPERSPACE, ship->place());
         EXPECT_EQ(nullptr, ship->starsystem());
 
         /** jump out */

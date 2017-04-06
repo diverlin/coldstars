@@ -79,7 +79,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
     if (time > 0) {
-        weaponComplex().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
+        _weaponComplex().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
     }
 }
 

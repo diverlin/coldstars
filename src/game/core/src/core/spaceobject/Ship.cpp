@@ -94,7 +94,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
     //    GetComplexProtector().GetShieldEffect()->Update();
-    driveComplex().updatePosition(); // debug
+    _driveComplex().updatePosition(); // debug
 
     if (time > 0) {
         UpdateSpecialAction();
@@ -107,7 +107,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
             updateOrientation();
 
             if (properties().speed > 0) {
-                driveComplex().updatePosition();
+                _driveComplex().updatePosition();
             }
 
             UpdateGrappleMicroProgram_inDynamic();

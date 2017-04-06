@@ -42,16 +42,7 @@ public:
     Grapple(descriptor::item::Grapple*, model::item::Grapple*);
     virtual ~Grapple() = default;
 
-//    bool CheckIfTargetAlreadyExistInQueue(model::SpaceObject* target) const;
-//    void AddTarget(model::SpaceObject*);
-//    void RemoveTarget(model::SpaceObject*);
-
-//    void RemoveAllTargets();
-
-//    std::string GetTarstr() const;
-
     void UpdateGrabScenarioProgram_inDynamic();
-    //        void RenderGrabTrail(const jeti::Renderer&);
 
     virtual void updateProperties();
 
@@ -67,8 +58,6 @@ private:
 
     model::item::Grapple* m_model_grapple = nullptr;
     descriptor::item::Grapple* m_descriptor_grapple = nullptr;
-
-//    std::vector<model::SpaceObject*> m_targets;
 
     void virtual addUniqueInfo();
     std::string strengthStr();

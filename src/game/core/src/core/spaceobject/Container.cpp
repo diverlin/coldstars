@@ -108,6 +108,12 @@ Container::~Container()
     LOG("___::~Container("+std::to_string(model()->id())+")");
 }
 
+Item*
+Container::item() const
+{
+    return m_itemSlot->item();
+}
+
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {

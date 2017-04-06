@@ -105,7 +105,7 @@ Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
     , m_descriptor_vehicle(descr)
     , m_model_vehicle(model)
 {
-    driveComplex().setOwnerVehicle(this);
+    _driveComplex().setOwnerVehicle(this);
 
     __createSlots(descr);
 
@@ -126,12 +126,17 @@ Vehicle::~Vehicle()
 
 void
 Vehicle::dock(SpaceObject* target) {
-    driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
+    _driveComplex().setTarget(target, DriveComplex::Action::DOCKING);
+}
+
+void
+Vehicle::grab(SpaceObject* target) {
+    m_grapple_complex.addTarget(target);
 }
 
 void
 Vehicle::follow(SpaceObject* target) {
-    driveComplex().setTarget(target, DriveComplex::Action::KEEP_MIDDLE);
+    _driveComplex().setTarget(target, DriveComplex::Action::KEEP_MIDDLE);
 }
 
 //void
@@ -319,27 +324,27 @@ void Vehicle::putChildrenToGarbage() const
 // weapon complex interface
 void Vehicle::fire(int timer, float attack_rate)
 {
-    weaponComplex().fire(timer, attack_rate, false);
+    _weaponComplex().fire(timer, attack_rate, false);
 }
 
 void Vehicle::setWeaponTarget(SpaceObject* object, slot::Item* slot)
 {
-    weaponComplex().setTarget(object, slot);
+    _weaponComplex().setTarget(object, slot);
 }
 
 void Vehicle::prepareWeapons()
 {
-    weaponComplex().prepareWeapons();
+    _weaponComplex().prepareWeapons();
 }
 
 void Vehicle::selectAllWeapons()
 {
-    weaponComplex().selectAllWeapons();
+    _weaponComplex().selectAllWeapons();
 }
 
 int Vehicle::guessDamage(int dist)
 {
-    return weaponComplex().guessDamage(dist);
+    return _weaponComplex().guessDamage(dist);
 }
 
 //\ weapon complex interface
@@ -411,20 +416,20 @@ void Vehicle::addItemSlot(slot::Item* slot)
 
 //        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
         //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
-        weaponComplex().addSlot(slot);
+        _weaponComplex().addSlot(slot);
 
         break;
     }
-    case entity::Type::DRIVE_SLOT:     { driveComplex().addDriveSlot(slot); break; }
-    case entity::Type::BAK_SLOT:       { driveComplex().addBakSlot(slot); break; }
-    case entity::Type::PROTECTOR_SLOT: { protectorComplex().addProtectorSlot(slot); break; }
+    case entity::Type::DRIVE_SLOT:     { m_drive_complex.addDriveSlot(slot); break; }
+    case entity::Type::BAK_SLOT:       { m_drive_complex.addBakSlot(slot); break; }
+    case entity::Type::PROTECTOR_SLOT: { m_protector_complex.addProtectorSlot(slot); break; }
     case entity::Type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
     case entity::Type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
 #ifdef USE_EXTRA_EQUIPMENT
     case entity::type::ENERGIZER_SLOT: { m_energizerSlots.push_back(slot); break; }
     case entity::type::FREEZER_SLOT:   { m_freezerSlots.push_back(slot); break; }
 #endif // USE_EXTRA_EQUIPMENT
-    case entity::Type::GRAPPLE_SLOT:   { m_grappleSlots.push_back(slot); break; }
+    case entity::Type::GRAPPLE_SLOT:   { m_grapple_complex.addGrappleSlot(slot); break; }
     case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
     }
 
@@ -555,7 +560,7 @@ bool Vehicle::__installEquipment(Item* item)
 bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
     if (ident.type == entity::Type::WEAPON_SLOT) {
-        if (weaponComplex().freeSlot()) {
+        if (_weaponComplex().freeSlot()) {
             return true;
         }
     } else {
@@ -875,7 +880,7 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
-    weaponComplex().deactivateWeapons();
+    _weaponComplex().deactivateWeapons();
 
     m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
     assert(false);
@@ -885,8 +890,8 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 void
 Vehicle::resetTargets()
 {
-    weaponComplex().deactivateWeapons();
-    driveComplex().resetTarget();
+    _weaponComplex().deactivateWeapons();
+    _driveComplex().resetTarget();
 }
 
 void
@@ -1183,7 +1188,7 @@ void Vehicle::_updatePropSpeed()
     LOG("Vehicle("+std::to_string(model()->id())+")::UpdatePropertiesSpeed");
     float speed = 0.0f;
 
-    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(_driveComplex().driveSlots());
     float actual_speed = 0.0f;
     for (slot::Item* slot: slots) {
         actual_speed += slot->driveEquipment()->model()->speed();
@@ -1203,7 +1208,7 @@ void Vehicle::_updatePropSpeed()
 //        } else {
 //            driveComplex().driveSlots()->item()->useNormalDeterioration();
 //        }
-        driveComplex().updatePath();
+        _driveComplex().updatePath();
     }
 
     m_properties.speed = speed;
@@ -1213,11 +1218,11 @@ void Vehicle::_updatePropFire()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
 
-    weaponComplex().updateFireAbility();
+    _weaponComplex().updateFireAbility();
 
-    m_properties.total_damage = weaponComplex().damage();
-    m_properties.fire_radius_min = weaponComplex().radiusMin();
-    m_properties.fire_radius_max = weaponComplex().radiusMax();
+    m_properties.total_damage = _weaponComplex().damage();
+    m_properties.fire_radius_min = _weaponComplex().radiusMin();
+    m_properties.fire_radius_max = _weaponComplex().radiusMax();
 }
 
 void Vehicle::_updatePropRadar()
@@ -1242,12 +1247,12 @@ void Vehicle::_updatePropJump()
     int hyper = 0;
     int fuel = 0;
 
-    std::vector<slot::Item*> drive_slots = __equipedAndFunctionalSlots(driveComplex().driveSlots());
+    std::vector<slot::Item*> drive_slots = __equipedAndFunctionalSlots(_driveComplex().driveSlots());
     for(slot::Item* slot: drive_slots) {
         hyper += slot->driveEquipment()->model()->hyper();
     }
 
-    std::vector<slot::Item*> bak_slots = __equipedAndFunctionalSlots(driveComplex().bakSlots());
+    std::vector<slot::Item*> bak_slots = __equipedAndFunctionalSlots(_driveComplex().bakSlots());
     for(slot::Item* slot: bak_slots) {
         fuel += slot->bakEquipment()->model()->fuel();
     }
@@ -1263,7 +1268,7 @@ void Vehicle::_updatePropProtection()
     //m_properties.shield_effect_enabled = false;
 
     //    if (!m_properties.hibernate_mode_enabled) {
-    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(protectorComplex().protectorSlots());
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_protector_complex.protectorSlots());
     for(slot::Item* slot: slots) {
         protection += slot->protectorEquipment()->model()->protection();
         // m_properties.shield_effect_enabled = true;
@@ -1364,7 +1369,7 @@ void Vehicle::_updatePropGrab()
     int strength = 0;
     int radius = 0;
 
-    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_grappleSlots);
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(m_grapple_complex.grappleSlots());
     for (slot::Item* slot: slots) {
         strength += slot->grappleEquipment()->model()->strength();
         radius += slot->grappleEquipment()->model()->radius();
@@ -1627,7 +1632,7 @@ STATUS Vehicle::CheckGrabStatus() const
 {
     STATUS status = STATUS::ITEM_OK;
 
-    for(slot::Item* slot: m_grappleSlots) {
+    for(slot::Item* slot: m_grapple_complex.grappleSlots()) {
         if (slot->item()) {
             assert(false);
     //        if (m_grappleSlot->grappleEquipment()->isDamaged() == true) {

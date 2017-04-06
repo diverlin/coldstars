@@ -200,7 +200,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
 
     for (Vehicle* _vehicle: m_vehicles) {
-        if (_vehicle->model()->id() == vehicle->model()->id()) {
+        if (_vehicle->id() == vehicle->id()) {
             LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
             exit(1);
         }
@@ -228,7 +228,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
 void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
     __addVehicleCommon(spacestation, position, dir);
-    model()->addSpaceStation(spacestation->model()->id());
+    model()->addSpaceStation(spacestation->id());
     m_spacestations.push_back(spacestation);
 }
 
@@ -241,7 +241,7 @@ void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, cons
 void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
     __addVehicleCommon(ship, position, dir);
-    model()->addShip(ship->model()->id());
+    model()->addShip(ship->id());
     m_ships.push_back(ship);
 }
 
@@ -254,14 +254,14 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
 void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
     __addVehicleCommon(satellite, position, dir);
-    model()->addSatellite(satellite->model()->id());
+    model()->addSatellite(satellite->id());
     m_satellites.push_back(satellite);
 }
 
 //void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
 //{
 //    _model->setPlace(place::Type::SPACE);
-//    _model->setStarSystem(model()->id());
+//    _model->setStarSystem(id());
 
 //    _model->setPosition(position);
 //    _model->setDirection(dir);
@@ -329,7 +329,7 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
 //    if (parent) {
 //        _model->setParent(parent->id());
 //    }
-//    _model->setStarSystem(model()->id());
+//    _model->setStarSystem(id());
 //    _model->setPlace(place::Type::SPACE);
 
 //    Asteroid* asteroid = new Asteroid(_model);
@@ -344,7 +344,9 @@ void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
         parent = star();
     }
 
-    asteroid->setParent(parent);
+    if (parent) {
+        asteroid->setParent(parent);
+    }
     asteroid->setStarSystem(this);
 
     asteroid->model()->setPlace(place::Type::SPACE);
@@ -361,13 +363,13 @@ void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
 //    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
 
 //    for (auto _container: m_containers) {
-//        if (_container->model()->id() == _model->id()) {
+//        if (_container->id() == _model->id()) {
 //            //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
 //            exit(1);
 //        }
 //    }
 
-//    _model->setStarSystem(model()->id());
+//    _model->setStarSystem(id());
 //    _model->setPlace(place::Type::SPACE);
 //    _model->setPosition(center);
 
@@ -393,7 +395,7 @@ void StarSystem::add(Container* container)
 
 //void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
 //{
-//    _model->setStarSystem(model()->id());
+//    _model->setStarSystem(id());
 //    _model->setPlace(place::Type::SPACE);
 //    _model->setPosition(center);
 
@@ -476,7 +478,8 @@ StarSystem::remove(Star* star)
 {
     assert(star);
     m_stars.remove(star);
-    model()->removeStar(star->model()->id());
+    star->model()->setPlace(place::Type::NONE);
+    model()->removeStar(star->id());
 }
 
 void
@@ -484,7 +487,8 @@ StarSystem::remove(Planet* planet)
 {
     assert(planet);
     m_planets.remove(planet);
-    model()->removePlanet(planet->model()->id());
+    planet->model()->setPlace(place::Type::NONE);
+    model()->removePlanet(planet->id());
 }
 
 void
@@ -492,7 +496,8 @@ StarSystem::remove(WormHole* wormhole)
 {
     assert(wormhole);
     m_wormholes.remove(wormhole);
-    model()->removeWormHole(wormhole->model()->id());
+    wormhole->model()->setPlace(place::Type::NONE);
+    model()->removeWormHole(wormhole->id());
 }
 
 void
@@ -500,7 +505,8 @@ StarSystem::remove(Asteroid* asteroid)
 {
     assert(asteroid);
     m_asteroids.remove(asteroid);
-    model()->removeAsteroid(asteroid->model()->id());
+    asteroid->model()->setPlace(place::Type::NONE);
+    model()->removeAsteroid(asteroid->id());
 }
 
 void
@@ -508,7 +514,8 @@ StarSystem::remove(Container* container)
 {
     assert(container);
     m_containers.remove(container);
-    model()->removeContainer(container->model()->id());
+    container->model()->setPlace(place::Type::NONE);
+    model()->removeContainer(container->id());
 }
 
 void
@@ -518,12 +525,13 @@ StarSystem::remove(SpaceStation* spacestation)
     m_spacestations.remove(spacestation);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->model()->id() == spacestation->model()->id()) {
+        if ((*it)->id() == spacestation->id()) {
             it = m_vehicles.erase(it);
         }
     }
 
-    model()->removeSpaceStation(spacestation->model()->id());
+    spacestation->model()->setPlace(place::Type::NONE);
+    model()->removeSpaceStation(spacestation->id());
 }
 
 void
@@ -533,12 +541,13 @@ StarSystem::remove(Ship* ship)
     m_ships.remove(ship);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->model()->id() == ship->model()->id()) {
+        if ((*it)->id() == ship->id()) {
             it = m_vehicles.erase(it);
         }
     }
 
-    model()->removeShip(ship->model()->id());
+    ship->model()->setPlace(place::Type::NONE);
+    model()->removeShip(ship->id());
 }
 
 void
@@ -548,12 +557,13 @@ StarSystem::remove(Satellite* satellite)
     m_satellites.remove(satellite);
 
     for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->model()->id() == satellite->model()->id()) {
+        if ((*it)->id() == satellite->id()) {
             it = m_vehicles.erase(it);
         }
     }
 
-    model()->removeSatellite(satellite->model()->id());
+    satellite->model()->setPlace(place::Type::NONE);
+    model()->removeSatellite(satellite->id());
 }
 
 //

@@ -29,16 +29,16 @@
 namespace descriptor {
 namespace comm {
 
-class Destination
+class Pair
 {
 public:
-    Destination(int_t, int_t);
-    Destination(const std::string& data);
-    ~Destination() = default;
+    Pair(int_t, int_t);
+    Pair(const std::string& data);
+    ~Pair() = default;
     std::string data() const;
 
     int_t object() const { return m_object; }
-    int_t destination() const { return m_destination; }
+    int_t target() const { return m_destination; }
 
     std::string info() const {
         std::string result = "descriptor::comm::DockShip:\n";

@@ -144,22 +144,28 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
 
 /** DOCK */
 void _doDock(const comm::Message& message) {
-    descriptor::comm::Destination descr(message.data());
-    event::doDockShip(descr.object(), descr.destination());
+    descriptor::comm::Pair descr(message.data());
+    event::doDockShip(descr.object(), descr.target());
 }
 void _doLaunch(const comm::Message& message) {
-    descriptor::comm::Destination descr(message.data());
-    event::doLaunchShip(descr.object(), descr.destination());
+    descriptor::comm::Pair descr(message.data());
+    event::doLaunchShip(descr.object(), descr.target());
 }
 
 /** JUMP */
 void _doJumpIn(const comm::Message& message) {
-    descriptor::comm::Destination descr(message.data());
+    descriptor::comm::Pair descr(message.data());
     event::doJumpIn(descr.object());
 }
 void _doJumpOut(const comm::Message& message) {
-    descriptor::comm::Destination descr(message.data());
-    event::doJumpOut(descr.object(), descr.destination());
+    descriptor::comm::Pair descr(message.data());
+    event::doJumpOut(descr.object(), descr.target());
+}
+
+/** GRAB */
+void _doGrabContainer(const comm::Message& message) {
+    descriptor::comm::Pair descr(message.data());
+    event::doGrabContainer(descr.object(), descr.target());
 }
 
 /** */
@@ -187,6 +193,7 @@ bool doDockShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
 
     // validate
+    // optimization: no needed here
     if (!ship->properties().speed) {
         return false;
     }
@@ -207,6 +214,7 @@ bool doLaunchShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
 
     // validate
+    // optimization: no needed here
     if (!ship->properties().speed) {
         return false;
     }
@@ -228,6 +236,7 @@ bool doJumpIn(int_t object) {
     control::Ship* ship = EntityManager::get().ship(object);
 
     // validate
+    // optimization: no needed here
     if (!ship->properties().hyper) {
         return false;
     }
@@ -247,6 +256,7 @@ bool doJumpOut(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
 
     // validate
+    // optimization: no needed here
 
     // remove
     control::HyperSpace* hyper = EntityManager::get().hyperspace();
@@ -255,6 +265,28 @@ bool doJumpOut(int_t object, int_t destination) {
     // add
     control::StarSystem* starsystem = EntityManager::get().starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
+
+    return true;
+}
+
+/** GRAB */
+bool doGrabContainer(int_t object, int_t target) {
+    control::Ship* ship = EntityManager::get().ship(object);
+    control::Container* container = EntityManager::get().container(target);
+
+    // validate
+    // optimization: no needed here
+//    if (!ship->validate(container)) {
+//        return false;
+//    }
+
+    // remove
+    control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
+    starsystem->remove(container);
+
+    // add
+    ship->load(container->item());
 
     return true;
 }

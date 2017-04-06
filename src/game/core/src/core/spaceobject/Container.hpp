@@ -49,6 +49,7 @@ public:
 
     slot::Item* const itemSlot() const { return m_itemSlot; }
     bool insert(Item*);
+    Item* item() const;
 
     //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 
@@ -67,6 +68,7 @@ private:
     descriptor::Container* m_descriptor_container = nullptr;
     model::Container* m_model_container = nullptr;
 
+    [[warning("remove this at all, we don't need slot here")]]
     slot::Item* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;
