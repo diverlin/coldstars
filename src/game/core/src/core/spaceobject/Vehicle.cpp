@@ -740,6 +740,21 @@ Vehicle::manage(Item* item)
     return false;
 }
 
+bool
+Vehicle::remove(Item* item)
+{
+    int pos = item->model()->slot();
+    auto it = m_slots.find(pos);
+    if (it == m_slots.end()) {
+        return false;
+    }
+    if (it->second->item() == item) {
+        it->second->release();
+        return true;
+    }
+    return false;
+}
+
 void Vehicle::manageItemsInCargo()
 {
     for (slot::Item* slot: m_cargoSlots) {
@@ -1666,28 +1681,6 @@ Vehicle::__equipedSlotsByType(const entity::Type& type) {
         }
     }
     return result;
-}
-
-bool
-Vehicle::dropItemToSpace(const entity::Type& type)
-{
-    if (model()->place() != place::Type::SPACE)
-        return false;
-
-    for (slot::Item* slot: __equipedSlotsByType(type)) {
-        if (slot->subtype() == type && slot->item()) {
-            Item* item = slot->takeItem();
-            Container* container = __wrapItemToContainer(item);
-            //    float impulse_strength = 0.5;
-            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-            //    container->addImpulse(impulse_dir, impulse_strength);
-
-            starsystem()->add(container, position());
-            return true;
-        }
-    }
-
-    return false;
 }
 
 Container*

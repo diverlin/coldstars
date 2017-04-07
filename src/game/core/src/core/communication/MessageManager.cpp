@@ -162,10 +162,14 @@ void _doJumpOut(const comm::Message& message) {
     event::doJumpOut(descr.object(), descr.target());
 }
 
-/** GRAB */
-void _doGrabContainer(const comm::Message& message) {
+/** DROP/TAKE */
+void _doDropItem(const comm::Message& message) {
     descriptor::comm::Pair descr(message.data());
-    event::doGrabContainer(descr.object(), descr.target());
+    event::doDropItem(descr.object(), descr.target());
+}
+void _doTakeContainer(const comm::Message& message) {
+    descriptor::comm::Pair descr(message.data());
+    event::doTakeContainer(descr.object(), descr.target());
 }
 
 /** */
@@ -237,8 +241,22 @@ void doJumpOut(int_t object, int_t destination) {
     starsystem->add(ship /*, position implement entry point here */);
 }
 
-/** GRAB */
-void doGrabContainer(int_t object, int_t target) {
+/** DROP/TAKE */
+void doDropItem(int_t object, int_t target) {
+    control::Ship* ship = EntityManager::get().ship(object);
+    control::Item* item = EntityManager::get().item(target);
+
+    // remove
+    ship->remove(item);
+
+    // add
+    control::Container* container = builder::Container::gen();
+    container->insert(item);
+    control::StarSystem* starsystem = ship->starsystem();
+    starsystem->add(container, ship->position());
+}
+
+void doTakeContainer(int_t object, int_t target) {
     control::Ship* ship = EntityManager::get().ship(object);
     control::Container* container = EntityManager::get().container(target);
 
@@ -248,6 +266,7 @@ void doGrabContainer(int_t object, int_t target) {
 
     // add
     ship->load(container->item());
+    container->killSilently();
 }
 
 
@@ -281,6 +300,10 @@ void MessageManager::process(const comm::Message& message)
     /** JUMP **/
     case comm::Message::Type::JUMP_IN: _doJumpIn(message); break;
     case comm::Message::Type::JUMP_OUT: _doJumpOut(message); break;
+
+    /** DROP/TAKE */
+    case comm::Message::Type::DROP_ITEM: _doDropItem(message); break;
+    case comm::Message::Type::TAKE_CONTAINER: _doTakeContainer(message); break;
 
     /** OTHER */
     case comm::Message::Type::HIT: hitEvent(message); break;

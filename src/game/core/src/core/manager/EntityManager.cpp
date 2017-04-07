@@ -260,6 +260,13 @@ EntityManager::land(int_t id) const {
     return control;
 }
 
+control::Item*
+EntityManager::item(int_t id) const {
+    control::Item* control = static_cast<control::Item*>(get(id));
+    assert(control);
+    return control;
+}
+
 control::item::Scaner*
 EntityManager::scaner(int_t id) const
 {

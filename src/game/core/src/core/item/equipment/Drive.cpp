@@ -39,6 +39,8 @@ Drive::Drive(descriptor::item::Drive* descr, model::item::Drive* model)
 
 }
 
+int Drive::speed() const { return model()->speed(); }
+
 /* virtual */
 void Drive::updateProperties()
 {     
