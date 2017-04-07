@@ -42,6 +42,8 @@ public:
     Drive(descriptor::item::Drive*, model::item::Drive*);
     virtual ~Drive() = default;
 
+    int speed() const;
+
 public:
     descriptor::item::Drive* descriptor() const { return m_descriptor_drive; }
     model::item::Drive* model() const { return m_model_drive; }

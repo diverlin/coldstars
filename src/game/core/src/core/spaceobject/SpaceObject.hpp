@@ -134,6 +134,7 @@ public:
     virtual void hit(int);
     void killSilently();
 
+    bool isAlive() const { model()->isAlive(); }
     int mass() const { return m_mass; }
 
     //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};

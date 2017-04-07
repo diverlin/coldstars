@@ -67,21 +67,25 @@ TEST(ship, drop_item)
 
     /* equip ship */
     control::item::Drive* drive = builder::item::Drive::gen();
-    ship->manage(drive);
+    ship->mount(drive);
 
     /* add ship */
     starsystem->add(ship);
+    EXPECT_EQ(starsystem->containers().size(), 0);
+    EXPECT_EQ(drive->speed(), ship->properties().speed);
 
     /* drop item to space */
-    EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_TRUE(ship->dropItemToSpace(entity::Type::DRIVE_SLOT));
+    event::doDropItem(ship->id(), drive->id());
+
     EXPECT_EQ(starsystem->containers().size(), 1);
     assert(starsystem->containers().front());
 
     control::Container* container = starsystem->containers().front();
     EXPECT_EQ(container->position(), ship->position());
-    EXPECT_EQ(container->model()->place(), place::Type::SPACE);
-    EXPECT_EQ(container->itemSlot()->item(), drive);
+    EXPECT_EQ(container->place(), place::Type::SPACE);
+    EXPECT_EQ(container->item(), drive);
+
+    EXPECT_EQ(0, ship->properties().speed);
 }
 
 TEST(ship, grab_container)
@@ -105,10 +109,10 @@ TEST(ship, grab_container)
 
     ship->grab(container);
 
-    event::doGrabContainer(ship->id(), container->id());
+    event::doTakeContainer(ship->id(), container->id());
 
     EXPECT_EQ(0, starsystem->containers().size());
-    EXPECT_EQ(place::Type::SHIP, container->place());
+    EXPECT_EQ(false, container->isAlive());
 }
 
 TEST(ship, base_shoot_to_ship)

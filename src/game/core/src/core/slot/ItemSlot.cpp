@@ -169,7 +169,7 @@ bool Item::insert(control::Item* item)
     if ((subtype() == entity::Type::CARGO_SLOT) || (subtype() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
-            item->slot()->removeItem();
+            item->slot()->release();
         }
         item->setSlot(this);
         item->model()->setSlot(position());
@@ -183,7 +183,7 @@ bool Item::insert(control::Item* item)
     return false;
 }
 
-void Item::removeItem()
+void Item::release()
 {
     if (!m_item) {
         return;
@@ -366,7 +366,7 @@ control::Item*
 Item::takeItem()
 {
     control::Item* item = m_item;
-    removeItem();
+    release();
     return item;
 }
 

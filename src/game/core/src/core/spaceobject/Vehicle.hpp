@@ -122,9 +122,16 @@ public:
 
     const complex::Drive& driveComplex() const { return m_drive_complex; }
 
+    // good
     void dock(SpaceObject*);
     void grab(SpaceObject*);
     void follow(SpaceObject*);
+
+    bool mount(Item*);
+    bool load(Item*);
+    bool manage(Item*);
+    bool remove(Item*);
+    //
 
     void resetTargets();
 
@@ -168,10 +175,6 @@ public:
 
     [[deprecated("ship swap items in different logic")]]
     bool grabItemsFromVehicle(Vehicle*);
-
-    bool mount(Item*);
-    bool load(Item*);
-    bool manage(Item*);
 
     bool isSlotFree(const place::Type&) const;
     bool checkManage(const core::Id&);
@@ -227,8 +230,6 @@ public:
     void CheckNeedsInStatic();
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
-
-    bool dropItemToSpace(const entity::Type&);
 
 private:
     void __increaseMass(int);

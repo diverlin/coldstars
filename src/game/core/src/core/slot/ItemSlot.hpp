@@ -184,7 +184,7 @@ public:
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
     bool insert(control::Item*);
-    void removeItem();
+    void release();
 
     bool checkAmmo() const;
     void fireEvent(float, bool);

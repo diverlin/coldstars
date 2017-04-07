@@ -24,13 +24,13 @@
 namespace place {
 
 enum class Type {
-    NONE,
+    NONE
     //
-    SPACE,
-    HYPERSPACE,
-    KOSMOPORT,
-    NATURELAND,
-    SHIP
+    , SPACE
+    , HYPERSPACE
+    , KOSMOPORT
+    , NATURELAND
+    //, SHIP
 };
 
 } // namespace place

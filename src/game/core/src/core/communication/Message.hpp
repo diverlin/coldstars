@@ -35,6 +35,10 @@ public:
         JUMP_IN,
         JUMP_OUT,
 
+        /** DROP_GRAB */
+        DROP_ITEM,
+        TAKE_CONTAINER,
+
         /** TRANSITION */
         ADD_SHIP_TO_STARSYSTEM,
         ADD_CONTAINER_TO_STARSYSTEM,
