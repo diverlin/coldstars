@@ -131,17 +131,12 @@ public:
     bool load(Item*);
     bool manage(Item*);
     bool remove(Item*);
+
+    complex::Weapon& weapons() { return m_weapon_complex; }
+    complex::Drive& navigator() { return m_drive_complex; }
     //
 
     void resetTargets();
-
-    // wepon complex interface
-    void fire(int, float);
-    void setWeaponTarget(SpaceObject* object, slot::Item* slot = nullptr);
-    void prepareWeapons();
-    void selectAllWeapons();
-    int guessDamage(int dist = 0);
-    //\ weapon complex interface
 
     [[deprecated("move to gui")]]
     void CreateDriveComplexTextureDependedStuff();
@@ -371,13 +366,9 @@ private:
     void __loadModel();
     void __loadItemsFromModel();
 
-protected:
-    complex::Weapon& _weaponComplex() { return m_weapon_complex; }
-    complex::Drive& _driveComplex() { return m_drive_complex; }
-
-private:
-    class Test_Vehicle;
-    friend class Test_Vehicle;
+//private:
+//    class Test_Vehicle;
+//    friend class Test_Vehicle;
 };
 
 

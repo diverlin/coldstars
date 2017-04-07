@@ -368,4 +368,9 @@ TEST(starsystem, add_remove_container)
     }
 }
 
+TEST(starsystem, create_kill)
+{
+    //assert(false);
+}
+
 } // namespace test
