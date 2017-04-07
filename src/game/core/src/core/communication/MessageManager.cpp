@@ -189,35 +189,20 @@ void explosionEvent(const comm::Message& message) {
 namespace event {
 
 /** DOCK */
-bool doDockShip(int_t object, int_t destination) {
+void doDockShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
-
-    // validate
-    // optimization: no needed here
-    if (!ship->properties().speed) {
-        return false;
-    }
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
-    assert(starsystem);
     starsystem->remove(ship);
 
     // add
     control::Land* land = EntityManager::get().land(destination);
     land->add(ship);
-
-    return true;
 }
 
-bool doLaunchShip(int_t object, int_t destination) {
+void doLaunchShip(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
-
-    // validate
-    // optimization: no needed here
-    if (!ship->properties().speed) {
-        return false;
-    }
 
     // remove
     control::Land* land = EntityManager::get().land(destination);
@@ -225,38 +210,23 @@ bool doLaunchShip(int_t object, int_t destination) {
 
     // add
     control::StarSystem* starsystem = ship->starsystem();
-    assert(starsystem);
     starsystem->add(ship, land->owner()->position());
-
-    return true;
 }
 
 /** JUMP */
-bool doJumpIn(int_t object) {
+void doJumpIn(int_t object) {
     control::Ship* ship = EntityManager::get().ship(object);
-
-    // validate
-    // optimization: no needed here
-    if (!ship->properties().hyper) {
-        return false;
-    }
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
-    assert(starsystem);
     starsystem->remove(ship);
 
     // add
     control::HyperSpace* hyper = EntityManager::get().hyperspace();
     hyper->add(ship);
-
-    return true;
 }
-bool doJumpOut(int_t object, int_t destination) {
+void doJumpOut(int_t object, int_t destination) {
     control::Ship* ship = EntityManager::get().ship(object);
-
-    // validate
-    // optimization: no needed here
 
     // remove
     control::HyperSpace* hyper = EntityManager::get().hyperspace();
@@ -265,30 +235,19 @@ bool doJumpOut(int_t object, int_t destination) {
     // add
     control::StarSystem* starsystem = EntityManager::get().starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
-
-    return true;
 }
 
 /** GRAB */
-bool doGrabContainer(int_t object, int_t target) {
+void doGrabContainer(int_t object, int_t target) {
     control::Ship* ship = EntityManager::get().ship(object);
     control::Container* container = EntityManager::get().container(target);
 
-    // validate
-    // optimization: no needed here
-//    if (!ship->validate(container)) {
-//        return false;
-//    }
-
     // remove
     control::StarSystem* starsystem = ship->starsystem();
-    assert(starsystem);
     starsystem->remove(container);
 
     // add
     ship->load(container->item());
-
-    return true;
 }
 
 

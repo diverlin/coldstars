@@ -30,7 +30,7 @@ enum class Type {
     HYPERSPACE,
     KOSMOPORT,
     NATURELAND,
-    CONTAINER
+    SHIP
 };
 
 } // namespace place
