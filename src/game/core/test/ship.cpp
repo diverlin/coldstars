@@ -108,7 +108,7 @@ TEST(ship, grab_container)
     event::doGrabContainer(ship->id(), container->id());
 
     EXPECT_EQ(0, starsystem->containers().size());
-    EXPECT_EQ(place::Type::CONTAINER, container->place());
+    EXPECT_EQ(place::Type::SHIP, container->place());
 }
 
 TEST(ship, base_shoot_to_ship)
@@ -267,10 +267,7 @@ TEST(ship, dock)
         EXPECT_EQ(planet, ship->driveComplex().target());
         EXPECT_EQ(complex::Drive::Action::DOCKING, ship->driveComplex().action());
 
-        drive->corrupt();
-        EXPECT_FALSE(event::doDockShip(ship->id(), planet->land()->id()));
-        drive->repair();
-        EXPECT_TRUE(event::doDockShip(ship->id(), planet->land()->id()));
+        event::doDockShip(ship->id(), planet->land()->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem->ships().size());
@@ -284,14 +281,7 @@ TEST(ship, dock)
         EXPECT_EQ(planet->land(), ship->land());
 
         /** launching */
-        {
-            // drive broken
-            drive->corrupt();
-            EXPECT_FALSE(event::doLaunchShip(ship->id(), planet->land()->id()));
-        }
-
-        drive->repair();
-        EXPECT_TRUE(event::doLaunchShip(ship->id(), planet->land()->id()));
+        event::doLaunchShip(ship->id(), planet->land()->id());
 
         // starsystem
         EXPECT_EQ(1, starsystem->ships().size());
@@ -339,24 +329,7 @@ TEST(ship, jump)
         // ship
         EXPECT_EQ(place::Type::SPACE, ship->place());
 
-        //ship->jump(starsystem2);
-
-        {
-            // bak broken
-            bak->corrupt();
-            drive->repair();
-            EXPECT_FALSE(event::doJumpIn(ship->id()));
-
-            // drive broken
-            bak->repair();
-            drive->corrupt();
-            EXPECT_FALSE(event::doJumpIn(ship->id()));
-        }
-
-        // bak and drive fixed
-        bak->repair();
-        drive->repair();
-        EXPECT_TRUE(event::doJumpIn(ship->id()));
+        event::doJumpIn(ship->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem_jumpFrom->ships().size());
@@ -370,7 +343,7 @@ TEST(ship, jump)
         EXPECT_EQ(nullptr, ship->starsystem());
 
         /** jump out */
-        EXPECT_TRUE(event::doJumpOut(ship->id(), starsystem_jumpTo->id()));
+        event::doJumpOut(ship->id(), starsystem_jumpTo->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem_jumpFrom->ships().size());

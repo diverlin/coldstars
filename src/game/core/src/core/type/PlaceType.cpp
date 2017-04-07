@@ -30,7 +30,7 @@ std::string getPlaceStr(place::Type place_id)
         case place::Type::HYPERSPACE: { return "place::Type::HYPERSPACE"; }
         case place::Type::KOSMOPORT: { return "place::Type::KOSMOPORT"; }
         case place::Type::NATURELAND: { return "place::Type::NATURELAND"; }
-        case place::Type::CONTAINER: { return "place::Type::CONTAINER"; }
+        case place::Type::SHIP: { return "place::Type::CONTAINER"; }
     }
     return "place::Type::PLACE_UKNOWN";
 } 
