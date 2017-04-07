@@ -128,7 +128,7 @@ Vehicle::~Vehicle()
 
 void
 Vehicle::dock(SpaceObject* target) {
-    _driveComplex().setTarget(target, complex::Drive::Action::DOCKING);
+    navigator().setTarget(target, complex::Drive::Action::DOCKING);
 }
 
 void
@@ -138,7 +138,7 @@ Vehicle::grab(SpaceObject* target) {
 
 void
 Vehicle::follow(SpaceObject* target) {
-    _driveComplex().setTarget(target, complex::Drive::Action::KEEP_MIDDLE);
+    navigator().setTarget(target, complex::Drive::Action::KEEP_MIDDLE);
 }
 
 //void
@@ -323,34 +323,6 @@ void Vehicle::putChildrenToGarbage() const
 //    }
 }
 
-// weapon complex interface
-void Vehicle::fire(int timer, float attack_rate)
-{
-    _weaponComplex().fire(timer, attack_rate, false);
-}
-
-void Vehicle::setWeaponTarget(SpaceObject* object, slot::Item* slot)
-{
-    _weaponComplex().setTarget(object, slot);
-}
-
-void Vehicle::prepareWeapons()
-{
-    _weaponComplex().prepareWeapons();
-}
-
-void Vehicle::selectAllWeapons()
-{
-    _weaponComplex().selectAllWeapons();
-}
-
-int Vehicle::guessDamage(int dist)
-{
-    return _weaponComplex().guessDamage(dist);
-}
-
-//\ weapon complex interface
-
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
     points().addMidLeftPoint();
@@ -418,7 +390,7 @@ void Vehicle::addItemSlot(slot::Item* slot)
 
 //        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
         //points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
-        _weaponComplex().addSlot(slot);
+        weapons().addSlot(slot);
 
         break;
     }
@@ -562,7 +534,7 @@ bool Vehicle::__installEquipment(Item* item)
 bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
     if (ident.type == entity::Type::WEAPON_SLOT) {
-        if (_weaponComplex().freeSlot()) {
+        if (weapons().freeSlot()) {
             return true;
         }
     } else {
@@ -897,7 +869,7 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
-    _weaponComplex().deactivateWeapons();
+    weapons().deactivateWeapons();
 
     m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
     assert(false);
@@ -907,8 +879,8 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 void
 Vehicle::resetTargets()
 {
-    _weaponComplex().deactivateWeapons();
-    _driveComplex().resetTarget();
+    weapons().deactivateWeapons();
+    navigator().resetTarget();
 }
 
 void
@@ -1205,7 +1177,7 @@ void Vehicle::_updatePropSpeed()
     LOG("Vehicle("+std::to_string(model()->id())+")::UpdatePropertiesSpeed");
     float speed = 0.0f;
 
-    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(_driveComplex().driveSlots());
+    std::vector<slot::Item*> slots = __equipedAndFunctionalSlots(navigator().driveSlots());
     float actual_speed = 0.0f;
     for (slot::Item* slot: slots) {
         actual_speed += slot->driveEquipment()->model()->speed();
@@ -1225,7 +1197,7 @@ void Vehicle::_updatePropSpeed()
 //        } else {
 //            driveComplex().driveSlots()->item()->useNormalDeterioration();
 //        }
-        _driveComplex().updatePath();
+        navigator().updatePath();
     }
 
     m_properties.speed = speed;
@@ -1235,11 +1207,11 @@ void Vehicle::_updatePropFire()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
 
-    _weaponComplex().updateFireAbility();
+    weapons().updateFireAbility();
 
-    m_properties.total_damage = _weaponComplex().damage();
-    m_properties.fire_radius_min = _weaponComplex().radiusMin();
-    m_properties.fire_radius_max = _weaponComplex().radiusMax();
+    m_properties.total_damage = weapons().damage();
+    m_properties.fire_radius_min = weapons().radiusMin();
+    m_properties.fire_radius_max = weapons().radiusMax();
 }
 
 void Vehicle::_updatePropRadar()
@@ -1264,12 +1236,12 @@ void Vehicle::_updatePropJump()
     int hyper = 0;
     int fuel = 0;
 
-    std::vector<slot::Item*> drive_slots = __equipedAndFunctionalSlots(_driveComplex().driveSlots());
+    std::vector<slot::Item*> drive_slots = __equipedAndFunctionalSlots(navigator().driveSlots());
     for(slot::Item* slot: drive_slots) {
         hyper += slot->driveEquipment()->model()->hyper();
     }
 
-    std::vector<slot::Item*> bak_slots = __equipedAndFunctionalSlots(_driveComplex().bakSlots());
+    std::vector<slot::Item*> bak_slots = __equipedAndFunctionalSlots(navigator().bakSlots());
     for(slot::Item* slot: bak_slots) {
         fuel += slot->bakEquipment()->model()->fuel();
     }

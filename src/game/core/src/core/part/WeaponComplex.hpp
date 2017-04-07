@@ -52,15 +52,15 @@ public:
     slot::Item* freeSlot() const;
     slot::Item* equipedWeakestSlot() const;
     
-    void prepareWeapons();
+    void prepare();
 
     void setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
 
-    void fire(int, float, bool);
+    void fire(int, float);
 
-    void selectAllWeapons();
+    void select();
     void deactivateWeapons();
-    void selectAllWeapons(const entity::Type&);
+    void select(const entity::Type&);
     void deactivateWeapons(const entity::Type&);
 
     bool isAnyWeaponSelected() const;
@@ -68,7 +68,7 @@ public:
 
     void updateFireAbility();
 
-    int guessDamage(int dist);
+    int guessDamage(int dist = 0);
 
 //    void RenderWeaponIcons() const;
 //    void RenderWeaponsRange();

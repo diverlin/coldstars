@@ -115,21 +115,22 @@ TEST(ship, grab_container)
     EXPECT_EQ(false, container->isAlive());
 }
 
-TEST(ship, base_shoot_to_ship)
+TEST(ship, base_shoot_ship)
 {
     /* create objects */
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
     /* initiate shoot */
-    ship1->prepareWeapons();
-    ship1->selectAllWeapons();
-    ship1->setWeaponTarget(ship2);
+    ship1->weapons().prepare();
+    ship1->weapons().select();
+    ship1->weapons().setTarget(ship2);
 
-    int actual_damage = ship1->guessDamage() * ship2->adjustDissipateFilter();
+    int dist = (ship1->position() - ship2->position()).length();
+    int actual_damage = ship1->weapons().guessDamage(dist) * ship2->adjustDissipateFilter();
     int armor_init = ship2->model()->armor();
 
-    ship1->fire(/*timer=*/0, /*rate=*/1.0);
+    ship1->weapons().fire(/*timer=*/0, /*rate=*/1.0);
 
     EXPECT_TRUE((armor_init - actual_damage) - ship2->model()->armor() <= 1);
 }

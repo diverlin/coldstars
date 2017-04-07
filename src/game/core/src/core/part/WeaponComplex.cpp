@@ -73,7 +73,7 @@ Weapon::equipedWeakestSlot() const
     return result;
 }
 
-void Weapon::prepareWeapons()
+void Weapon::prepare()
 {       
     // used once at the begining of turn
     __reload();
@@ -97,7 +97,7 @@ void Weapon::__reload()
 //    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
 }
 
-void Weapon::selectAllWeapons()
+void Weapon::select()
 {
     for (slot::Item* slot: m_slots_reloaded) {
         slot->selectEvent();
@@ -111,7 +111,7 @@ void Weapon::deactivateWeapons()
     }
 }
 
-void Weapon::selectAllWeapons(const entity::Type& weapon_subtype_id)
+void Weapon::select(const entity::Type& weapon_subtype_id)
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
@@ -176,7 +176,7 @@ void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
     }
 }
 
-int Weapon::guessDamage(int dist = 0)
+int Weapon::guessDamage(int dist)
 {
     int damage = 0;
     for (slot::Item* slot: m_slots_reloaded) {
@@ -187,7 +187,7 @@ int Weapon::guessDamage(int dist = 0)
     return damage;
 }
 
-void Weapon::fire(int timer, float attack_rate, bool show_effect)
+void Weapon::fire(int timer, float attack_rate)
 {
     //if (timer < TURN_TIME - fire_delay) {
     std::vector<slot::Item*>::iterator it=m_slots_reloaded.begin();
@@ -195,7 +195,7 @@ void Weapon::fire(int timer, float attack_rate, bool show_effect)
             control::item::Weapon* weapon = (*it)->weapon(); // shortcut
             if (weapon->target()) {
                 if (_validateTarget(weapon->target(), weapon->radius()) == STATUS::TARGET_OK) {
-                    (*it)->fireEvent(attack_rate, show_effect);
+                    (*it)->fireEvent(attack_rate, /*show effects*/false);
 //                    if (slot.subtarget()) {
 //                        fire_delay += d_fire_delay;
 //                    }
