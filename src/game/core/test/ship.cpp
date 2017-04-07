@@ -72,7 +72,7 @@ TEST(ship, drop_item)
     /* add ship */
     starsystem->add(ship);
     EXPECT_EQ(starsystem->containers().size(), 0);
-    EXPECT_EQ(drive->speed(), ship->properties().speed);
+    EXPECT_TRUE(ship->properties().speed > 0);
 
     /* drop item to space */
     event::doDropItem(ship->id(), drive->id());
