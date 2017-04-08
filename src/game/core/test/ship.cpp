@@ -34,10 +34,13 @@
 #include <core/spaceobject/ALL>
 #include <core/slot/ItemSlot.hpp>
 
+#include <core/descriptor/spaceobject/Ship.hpp>
+
 #include <core/model/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Container.hpp>
-#include <core/descriptor/spaceobject/Ship.hpp>
+
+#include <core/model/item/equipment/Drive.hpp>
 
 #include <core/manager/EntityManager.hpp>
 #include <core/communication/MessageManager.hpp>
@@ -138,7 +141,10 @@ TEST(ship, shoot_ship)
     /* initiate shoot */
     ship->weapons().prepare();
     ship->weapons().select();
-    EXPECT_TRUE(ship->weapons().setTarget(target));
+
+    slot::Item* slot = target->__itemSlot(drive->model()->slot());
+
+    EXPECT_TRUE(ship->weapons().setTarget(target, slot));
 
     EXPECT_EQ(target, lazer1->target());
     EXPECT_EQ(target, lazer2->target());
@@ -147,8 +153,12 @@ TEST(ship, shoot_ship)
     int actual_damage = ship->weapons().guessDamage(dist) * target->adjustDissipateFilter();
     int armor_init = target->model()->armor();
 
+    EXPECT_EQ(false, drive->isLocked());
+
     event::doShoot(ship->id(), lazer1->id());
     event::doShoot(ship->id(), lazer2->id());
+
+    EXPECT_EQ(true, drive->isLocked());
 
     //EXPECT_TRUE(target->npc()->isAgressor(ship->id()));
 
