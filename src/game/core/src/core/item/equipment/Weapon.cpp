@@ -87,8 +87,20 @@ std::string Weapon::radiusStr()
 
 void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
 {
-    m_target    = target;
+    m_target = target;
     m_subtarget = subtarget;
+}
+
+void Weapon::reset()
+{
+    resetTarget();
+    resetSubTarget();
+}
+
+void Weapon::resetTarget()
+{
+    m_target = nullptr;
+    resetSubTarget();
 }
 
 void Weapon::resetSubTarget()
@@ -103,13 +115,6 @@ bool Weapon::validateSubTarget() const
     }
     return false;
 }
-
-void Weapon::resetTarget()
-{
-    m_target    = nullptr;
-    resetSubTarget();
-}
-
 
 //void Rocket::FireEvent(float attack_rate_normalized)
 //{
