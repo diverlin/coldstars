@@ -155,7 +155,6 @@ private:
 
     //    void updateRange(jeti::control::Material*);
     //    void drawRange(const glm::vec2&);
-
 };
 
 } // namespace slot
