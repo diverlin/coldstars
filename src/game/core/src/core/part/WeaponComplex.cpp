@@ -234,15 +234,16 @@ void Weapon::updateFireAbility()
     m_radiusMax = 0;
     m_radiusMin = 0;
     for (slot::Item* slot: m_slots) {
-        if (slot->item()) {
-            if (slot->item()->isFunctioning()) {
-                int radius = slot->itemRadius();
+        control::item::Weapon* weapon = slot->weapon();
+        if (weapon) {
+            if (weapon->isFunctioning()) {
+                int radius = weapon->radius();
                 if (m_radiusMin == 0) {
                     m_radiusMin = radius;
                 }
                 m_radiusMin = std::min(m_radiusMin, radius);
                 m_radiusMax = std::max(m_radiusMax, radius);
-                m_damage += slot->itemDamage();
+                m_damage += weapon->damage();
             }
         }
     }
