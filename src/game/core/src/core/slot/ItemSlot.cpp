@@ -109,27 +109,6 @@ void Item::putChildrenToGarbage() const
 //    }
 }
 
-void Item::fireEvent(float attack_rate, bool show_effect)
-{
-    assert(false);
-//    switch(item()->subtype())
-//    {
-//        case entity::Type::LAZER_EQUIPMENT: {
-//            lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
-//            break;
-//        }
-
-//        case entity::Type::ROCKET_EQUIPMENT: {
-//            rocketEquipment()->FireEvent(attack_rate);
-//            break;
-//        }
-//    }
-
-//    if (target()->isAlive() == false) {
-//        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
-//    }
-}
-
 bool Item::checkItemInsertion(control::Item* item) const
 {
     assert(false);

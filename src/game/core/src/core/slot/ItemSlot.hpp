@@ -186,8 +186,6 @@ public:
     bool insert(control::Item*);
     void release();
 
-    void fireEvent(float, bool);
-
     void updateVehiclePropetries() const;
 
     //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
