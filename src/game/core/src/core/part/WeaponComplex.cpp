@@ -88,7 +88,7 @@ void Weapon::__reload()
         if (weapon) {
             if (weapon->isFunctioning()) {
                 if (weapon->checkAmmo()) {
-                    m_slots_reloaded.push_back(slot);
+                    m_slots_reloaded.add(slot);
                 }
             }
         }
@@ -133,7 +133,7 @@ void Weapon::deactivateWeapons(const entity::Type& weapon_subtype_id)
 bool Weapon::isAnyWeaponSelected() const
 {
     for (slot::Item* slot: m_slots_reloaded) {
-        if (slot->isSelected() == true) {
+        if (slot->isSelected()) {
             return true;
         }
     }    
@@ -182,33 +182,32 @@ int Weapon::guessDamage(int dist)
 {
     int damage = 0;
     for (slot::Item* slot: m_slots_reloaded) {
-        if (slot->weapon()->model()->radius() >= dist) {
-            damage += slot->weapon()->model()->damage();
+        if (slot->weapon()->radius() >= dist) {
+            damage += slot->weapon()->damage();
         }
     }
     return damage;
 }
 
-void Weapon::fire(int timer, float attack_rate)
+slot::Item*
+Weapon::__nextSlotReadyToFire() const {
+    for(slot::Item* slot: m_slots_reloaded) {
+        control::item::Weapon* weapon = slot->weapon(); // shortcut
+        if (_checkDistanceToTarget(weapon->target(), weapon->radius())) {
+            return slot;
+        }
+    }
+    return nullptr;
+}
+
+void Weapon::updateFire(int timer, float attack_rate)
 {
     //if (timer < TURN_TIME - fire_delay) {
-    std::vector<slot::Item*>::iterator it=m_slots_reloaded.begin();
-        while(it!=m_slots_reloaded.end()) {
-            control::item::Weapon* weapon = (*it)->weapon(); // shortcut
-            if (weapon->target()) {
-                if (_checkDistanceToTarget(weapon->target(), weapon->radius())) {
-                    (*it)->fireEvent(attack_rate, /*show effects*/false);
-//                    if (slot.subtarget()) {
-//                        fire_delay += d_fire_delay;
-//                    }
-                } else {
-                    weapon->resetTarget();
-                }
-                it = m_slots_reloaded.erase(it);
-            } else {
-                ++it;
-            }
-        }
+    slot::Item* slot = __nextSlotReadyToFire();
+    if (slot) {
+        slot->weapon()->fire(attack_rate);
+        m_slots_reloaded.remove(slot);
+    }
     //}
 }
 
@@ -222,7 +221,7 @@ void Weapon::__validateTargets()
                     weapon->resetSubTarget();
                 }
                 if (!_checkDistanceToTarget(weapon->target(), weapon->radius())) {
-                    weapon->resetTarget();
+                    weapon->reset();
                 }
             }
         }

@@ -122,10 +122,14 @@ TEST(ship, shoot_ship)
     /* create objects */
     control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Ship* ship = builder::Ship::gen();
-    control::item::Lazer* lazer = builder::item::Lazer::gen();
-    ship->mount(lazer);
+    control::item::Lazer* lazer1 = builder::item::Lazer::gen();
+    control::item::Lazer* lazer2 = builder::item::Lazer::gen();
+    EXPECT_TRUE(ship->mount(lazer1));
+    EXPECT_TRUE(ship->mount(lazer2));
 
     control::Ship* target = builder::Ship::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    EXPECT_TRUE(target->mount(drive));
 
     /* add to starsystem */
     starsystem->add(ship);
@@ -136,18 +140,23 @@ TEST(ship, shoot_ship)
     ship->weapons().select();
     EXPECT_TRUE(ship->weapons().setTarget(target));
 
-    EXPECT_EQ(target, lazer->target());
+    EXPECT_EQ(target, lazer1->target());
+    EXPECT_EQ(target, lazer2->target());
 
     int dist = (ship->position() - target->position()).length();
     int actual_damage = ship->weapons().guessDamage(dist) * target->adjustDissipateFilter();
     int armor_init = target->model()->armor();
 
-    event::doShoot(ship->id(), lazer->id());
+    event::doShoot(ship->id(), lazer1->id());
+    event::doShoot(ship->id(), lazer2->id());
 
     //EXPECT_TRUE(target->npc()->isAgressor(ship->id()));
 
     EXPECT_TRUE(actual_damage != 0);
     EXPECT_TRUE((armor_init - actual_damage) - target->model()->armor() <= 1);
+
+    lazer1->reset();
+    EXPECT_EQ(nullptr, lazer1->target());
 }
 
 TEST(ship, shoot_ship_presize)

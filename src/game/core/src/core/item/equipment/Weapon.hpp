@@ -63,6 +63,8 @@ public:
     int damage() const;
 
     bool validateSubTarget() const;
+
+    void reset();
     void resetTarget();
     void resetSubTarget();
 

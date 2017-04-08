@@ -56,7 +56,7 @@ public:
 
     bool setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
 
-    void fire(int, float);
+    void updateFire(int, float);
 
     void select();
     void deactivateWeapons();
@@ -88,6 +88,8 @@ private:
 
     void __reload();
     void __validateTargets();
+
+    slot::Item* __nextSlotReadyToFire() const;
 };
 
 } // namespace complex
