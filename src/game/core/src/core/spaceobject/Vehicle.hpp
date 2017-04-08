@@ -30,7 +30,7 @@
 
 #include <core/type/StatusType.hpp>
 
-//#include <boost/serialization/vector.hpp>
+#include <core/common/unittest.hpp>
 
 class GoodsPack;
 

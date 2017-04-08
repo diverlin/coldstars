@@ -6,6 +6,10 @@ set(PROJECT coldstars)
 project(${PROJECT})
 
 set(USE_TEST ON)
+if(USE_TEST)
+    add_definitions(-DUSE_TEST)
+endif()
+
 set(DUMP_DESCRIPTORS OFF)
 if(DUMP_DESCRIPTORS)
     add_definitions(-DDUMP_DESCRIPTORS)

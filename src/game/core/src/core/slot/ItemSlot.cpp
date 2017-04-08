@@ -109,31 +109,20 @@ void Item::putChildrenToGarbage() const
 //    }
 }
 
-bool Item::checkItemInsertion(control::Item* item) const
+bool Item::__checkItemInsertion(control::Item* item) const
 {
-    assert(false);
-//    if (subtype() == entity::Type::CARGO_SLOT) {
-//        return true;
-//    }
-
-//    if (subtype() == item->parentSubtype()) {
-//        return true;
-//    }
+    if (subtype() == entity::Type::CARGO_SLOT) {
+        return true;
+    }
+    if (subtype() == item->descriptor()->slotType()) {
+        return true;
+    }
     
     return false;
 }
 
 bool Item::insert(control::Item* item)
 {
-//    // make it oop
-//    if (subtype() == entity::Type::GATE_SLOT)
-//    {
-//        // make a gate not be a slot
-//        //m_item = item;
-//        //dropItemToSpace();
-//        return false;
-//    }
-
     if ((subtype() == entity::Type::CARGO_SLOT) || (subtype() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
@@ -158,7 +147,7 @@ void Item::release()
     }
 
     if (subtype() == entity::Type::WEAPON_SLOT) {
-        weapon()->resetTarget();
+        weapon()->reset();
     }
 
     // make it oop
@@ -291,7 +280,7 @@ bool Item::swapItem(slot::Item* slot)
 
     if ( (m_item != nullptr) && (slot->item() != nullptr) ) {
         control::Item* tmp_item = slot->item();
-        if ( (slot->checkItemInsertion(m_item) == true) && (checkItemInsertion(tmp_item) == true) ) {
+        if ( (slot->__checkItemInsertion(m_item) == true) && (__checkItemInsertion(tmp_item) == true) ) {
             slot->insert(m_item);
             tmp_item->setSlot(nullptr);
             insert(tmp_item);

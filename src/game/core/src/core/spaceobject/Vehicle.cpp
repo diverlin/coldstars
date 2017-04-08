@@ -98,7 +98,6 @@
 
 namespace control {
 
-
 Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
     :
       SpaceObject(descr, model)
@@ -663,7 +662,7 @@ Vehicle::__itemSlot(int id) const
         return it->second;
     }
 
-    assert(false);
+    assert(false); // normally never reach that point
     return nullptr;
 }
 

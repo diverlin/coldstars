@@ -140,7 +140,7 @@ private:
 
     int m_hitProbability = 0;
 
-    bool checkItemInsertion(control::Item*) const;
+    bool __checkItemInsertion(control::Item*) const;
 
     void log(const std::string&) const;
 
