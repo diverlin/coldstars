@@ -186,7 +186,6 @@ public:
     bool insert(control::Item*);
     void release();
 
-    bool checkAmmo() const;
     void fireEvent(float, bool);
 
     void updateVehiclePropetries() const;

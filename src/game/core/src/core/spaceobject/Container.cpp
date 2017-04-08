@@ -128,7 +128,7 @@ Container::insert(Item* item)
 }
 
 /* override final */
-void Container::hit(int damage) {
+void Container::hit(int damage, SpaceObject* agressor) {
     SpaceObject::hit(damage);
     assert(false);
 //    if (model()->dataLife().is_dying) {

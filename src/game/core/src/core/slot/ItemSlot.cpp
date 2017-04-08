@@ -109,17 +109,6 @@ void Item::putChildrenToGarbage() const
 //    }
 }
 
-bool Item::checkAmmo() const
-{
-    assert(false);
-//    switch(item()->subtype()) {
-//        case entity::Type::LAZER_EQUIPMENT:  { /*if check energy */  return true; break; }
-//        case entity::Type::ROCKET_EQUIPMENT: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
-//    }
-    
-    return false;
-}
-
 void Item::fireEvent(float attack_rate, bool show_effect)
 {
     assert(false);
@@ -203,10 +192,8 @@ void Item::release()
 
 void Item::selectEvent()
 {
-    // make it oop
     setSelected(true);
 
-    assert(false);
 //    if (owner()->type() == entity::Type::VEHICLE) {
 //        switch(subtype()) {
 //            case entity::Type::DRIVE_SLOT: { vehicleOwner()->_updatePropSpeed(); break; }
@@ -219,7 +206,6 @@ void Item::deselectEvent()
     // make it oop
     setSelected(false);
 
-    assert(false);
 //    if (owner()->type() == entity::Type::VEHICLE)
 //    {
 //        switch(subtype())

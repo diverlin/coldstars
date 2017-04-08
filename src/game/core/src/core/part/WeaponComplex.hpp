@@ -54,7 +54,7 @@ public:
     
     void prepare();
 
-    void setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
+    bool setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
 
     void fire(int, float);
 

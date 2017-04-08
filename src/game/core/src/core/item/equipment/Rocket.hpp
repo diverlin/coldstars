@@ -44,7 +44,8 @@ public:
 
 //    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
 
-//    void FireEvent(float);
+    bool checkAmmo() const override final;
+    void fire(float rate=1.0f) override final;
 
     virtual void updateProperties();
 

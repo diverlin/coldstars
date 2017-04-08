@@ -89,7 +89,8 @@ Grapple::UpdateGrabScenarioProgram_inDynamic()
     ceti::pack<control::SpaceObject*> targetsToForget;
 
     for (control::SpaceObject* target: m_targets) {
-        if (_validateTarget(target, m_radius) != STATUS::TARGET_OK) {
+        if (_checkTarget(target) != STATUS::TARGET_OK ||
+            !_checkDistanceToTarget(target, m_radius)) {
             targetsToForget.add(target);
         } else {
             glm::vec3 impulse_dir = glm::normalize(_vehicle()->position() - target->position());

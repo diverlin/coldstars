@@ -721,6 +721,7 @@ Vehicle::remove(Item* item)
         return false;
     }
     if (it->second->item() == item) {
+        model()->removeItem(item->id());
         it->second->release();
         return true;
     }
@@ -975,13 +976,6 @@ Vehicle::setLand(Land* land)
 //    // alpitodorender SetTransparency(0.1);*/
 //}
 
-/* virtual */
-void Vehicle::remeberAgressor(Vehicle* agressor)
-{
-    assert(false);
-    //m_npc->remeberAgressor(agressor);
-}
-
 
 float Vehicle::adjustDissipateFilter() const
 {
@@ -995,21 +989,20 @@ float Vehicle::adjustDissipateFilter() const
 }
 
 /* virtual */
-void Vehicle::hit(int damage)
+void Vehicle::hit(int damage, SpaceObject* agressor)
 {
-    LOG(std::string("Vehicle::hit id=") << std::to_string(model()->id()) << " damage=" << std::to_string(damage));
-    if (m_godMode)
-        return;
+//#ifdef USE_EXTRA_EQUIPMENT
+//    if (m_properties.energy < damage) {
+//        m_properties.hibernate_mode_enabled = true;
+//        _updatePropProtection();
+//    }
+//#endif
 
-#ifdef USE_EXTRA_EQUIPMENT
-    if (m_properties.energy < damage) {
-        m_properties.hibernate_mode_enabled = true;
-        _updatePropProtection();
+    if (agressor && m_npc) {
+        m_npc->remeberAgressor(agressor);
+//        model()->addAgressor(agressor->id());
     }
-#endif
-
     SpaceObject::hit(damage * adjustDissipateFilter());
-
     //if (show_effect == true)
     {
         //if (m_ComplexProtector.GetProtectorSlot()->item() != nullptr)

@@ -217,8 +217,7 @@ public:
     void UpdateSpecialAction();
     virtual void UpdateInSpace(int, bool) = 0;
 
-    virtual void remeberAgressor(Vehicle*);
-    void hit(int) override;
+    void hit(int, SpaceObject* agressor = nullptr) override;
 
     virtual void _postDeathUniqueEvent(bool);
 

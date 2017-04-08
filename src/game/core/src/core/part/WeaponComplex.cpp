@@ -84,9 +84,10 @@ void Weapon::__reload()
 {
     m_slots_reloaded.clear();
     for (slot::Item* slot: m_slots) {
-        if (slot->item()) {
-            if (slot->item()->isFunctioning()) {
-                if (slot->checkAmmo()) {
+        control::item::Weapon* weapon = slot->weapon();
+        if (weapon) {
+            if (weapon->isFunctioning()) {
+                if (weapon->checkAmmo()) {
                     m_slots_reloaded.push_back(slot);
                 }
             }
@@ -150,30 +151,31 @@ bool Weapon::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
-{                 
-    //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
-    //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
+bool Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
+{
+    STATUS status = _checkTarget(target);
+    if (status != STATUS::TARGET_OK) {
+        return false;
+    }
 
-    //target->remeberAgressor(owner_vehicle);
-
+    bool result = false;
     for (slot::Item* slot: m_slots) {
         if (slot->isSelected()) {
             control::item::Weapon* weapon = slot->weapon();
             if (weapon) {
                 if (weapon->isFunctioning()) {
                     if (!weapon->target()) {
-                        STATUS status = _validateTarget(target, weapon->radius());
-                        if (status == STATUS::TARGET_OK) {
+                        if (_checkDistanceToTarget(target, weapon->radius())) {
                             weapon->setTarget(target, subtarget);
-                        } else {
-                            LOG(getTargetStatusStr(status));
+                            result = true;
                         }
                     }
                 }
             }
         }
     }
+
+    return result;
 }
 
 int Weapon::guessDamage(int dist)
@@ -194,7 +196,7 @@ void Weapon::fire(int timer, float attack_rate)
         while(it!=m_slots_reloaded.end()) {
             control::item::Weapon* weapon = (*it)->weapon(); // shortcut
             if (weapon->target()) {
-                if (_validateTarget(weapon->target(), weapon->radius()) == STATUS::TARGET_OK) {
+                if (_checkDistanceToTarget(weapon->target(), weapon->radius())) {
                     (*it)->fireEvent(attack_rate, /*show effects*/false);
 //                    if (slot.subtarget()) {
 //                        fire_delay += d_fire_delay;
@@ -219,7 +221,7 @@ void Weapon::__validateTargets()
                 if (!weapon->validateSubTarget()) {
                     weapon->resetSubTarget();
                 }
-                if (_validateTarget(weapon->target(), weapon->radius()) != STATUS::TARGET_OK) {
+                if (!_checkDistanceToTarget(weapon->target(), weapon->radius())) {
                     weapon->resetTarget();
                 }
             }

@@ -29,57 +29,6 @@ Base::Base(control::Vehicle* vehicle)
       m_vehicle(vehicle)
 {}
 
-STATUS
-Base::_validateTarget(control::SpaceObject* target, int radius) const
-{
-    if (!_isTargetAlive(target)) {
-        return STATUS::TARGET_DEAD;
-    }
-    if (!_isTargetInSpace(target)) {
-        return STATUS::TARGET_NOTIN_SPACE;
-    }
-    if (!_isTargetInSameStarSystem(target)) {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;
-    }
-    if (!_checkDistanceToTarget(target, radius)) {
-        return STATUS::TARGET_OUTOF_RANGE;
-    }
-    return STATUS::TARGET_OK;
-}
-
-STATUS
-Base::_validateTargetDirty(control::SpaceObject* target) const
-{
-    if (!_isTargetAlive(target)) {
-        return STATUS::TARGET_DEAD;
-    }
-    if (!_isTargetInSpace(target)) {
-        return STATUS::TARGET_NOTIN_SPACE;
-    }
-    if (!_isTargetInSameStarSystem(target)) {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;
-    }
-    return STATUS::TARGET_OK;
-}
-
-bool
-Base::_isTargetAlive(control::SpaceObject* target) const
-{
-    return target->model()->isAlive();
-}
-
-bool
-Base::_isTargetInSpace(control::SpaceObject* target) const
-{
-    return (target->model()->place() == place::Type::SPACE);
-}
-
-bool
-Base::_isTargetInSameStarSystem(control::SpaceObject* target) const
-{
-    return (target->starsystem()->id() == m_vehicle->starsystem()->id());
-}
-
 bool
 Base::_checkDistanceToTarget(control::SpaceObject* target, int radius) const
 {
@@ -87,8 +36,40 @@ Base::_checkDistanceToTarget(control::SpaceObject* target, int radius) const
     if (dist <= radius) {
         return true;
     }
-
     return false;
+}
+
+STATUS
+Base::_checkTarget(control::SpaceObject* target) const
+{
+    if (!__isTargetAlive(target)) {
+        return STATUS::TARGET_DEAD;
+    }
+    if (!__isTargetInSpace(target)) {
+        return STATUS::TARGET_NOTIN_SPACE;
+    }
+    if (!__isTargetInSameStarSystem(target)) {
+        return STATUS::TARGET_NOTIN_STARSYSTEM;
+    }
+    return STATUS::TARGET_OK;
+}
+
+bool
+Base::__isTargetAlive(control::SpaceObject* target) const
+{
+    return target->model()->isAlive();
+}
+
+bool
+Base::__isTargetInSpace(control::SpaceObject* target) const
+{
+    return (target->model()->place() == place::Type::SPACE);
+}
+
+bool
+Base::__isTargetInSameStarSystem(control::SpaceObject* target) const
+{
+    return (target->starsystem()->id() == m_vehicle->starsystem()->id());
 }
 
 } // namespace complex

@@ -32,15 +32,11 @@ namespace control {
 namespace item {
 
 Rocket::Rocket(descriptor::item::Rocket* descr, model::item::Rocket* model)
-    :
-      Weapon(descr, model)
+    : Weapon(descr, model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)
-{
-//    fire_atOnce = meti::getRandInt(1, 3);
-}
+{}
 
-/* virtual */
 void Rocket::updateProperties()
 {
     m_ammo_add = 0;
@@ -54,6 +50,67 @@ void Rocket::updateProperties()
     model()->setAmmo(descriptor()->ammo() + m_ammo_add);
 }
 
+bool Rocket::checkAmmo() const
+{
+    return (model()->ammo() > 0);
+}
+
+void Rocket::fire(float rate)
+{
+    assert(false);
+//    int num = 0;
+
+//    glm::vec3 start_pos;
+//    float angle_inD = 0; // fake
+
+//    if (fire_atOnce>=1)
+//    {
+//        model::RocketBullet* rocket_bullet = core::global::get().rocketBulletBuilder().gen(data_bullet);
+//        rocket_bullet->setDamageRate(attack_rate_normalized);
+
+//        assert(false);
+//        //        if (slot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
+//        //        {
+//        //            start_pos = slot()->turrel()->position();
+//        //            //angle_inD = item_slot->GetTurrel()->GetAngle().z;
+//        //        }
+//        //        else
+//        //        {
+//        //            start_pos = slot()->vehicleOwner()->position();
+//        //            //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
+//        //        }
+
+//        //        rocket_bullet->SetOwnerId(slot()->vehicleOwner()->id());
+//        //        rocket_bullet->SetTarget(slot()->target());
+
+//        //        slot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
+//        //        num++;
+//    }
+
+//    //if (fire_atOnce>=2)
+//    //{
+//    //offset = +2.0;
+//    //RocketBuilder::Instance().CreateNewRocket();
+//    //RocketBuilder::Instance().createInternals(data_bullet);
+//    //slot->GetOwnerVehicle()->starsystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+//    //num++;
+//    //}
+
+//    //if (fire_atOnce>=3)
+//    //{
+//    //offset = -2.0;
+//    //RocketBuilder::Instance().CreateNewRocket();
+//    //RocketBuilder::Instance().createInternals(data_bullet);
+//    //slot->GetOwnerVehicle()->starsystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+//    //num++;
+//    //}
+
+//    //rocketlaunch.play()
+//    m_ammo -= num;
+
+//    deteriorationEvent();
+}
+
 void Rocket::addUniqueInfo()
 {
     //    info.addTitleStr("ROCKET");
@@ -63,8 +120,7 @@ void Rocket::addUniqueInfo()
     //    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
 }
 
-std::string
-Rocket::ammoStr()
+std::string Rocket::ammoStr()
 {
     if (m_ammo_add) {
          return std::to_string(descriptor()->ammo()) + "+" + std::to_string(m_ammo_add) + "/" + std::to_string(model()->ammo());

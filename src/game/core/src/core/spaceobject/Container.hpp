@@ -57,7 +57,7 @@ public:
 
     void updateInSpace(int, bool);
 
-    void hit(int damage) override final;
+    void hit(int damage, SpaceObject* agressor = nullptr) override final;
 
     //        void Render(const jeti::Renderer&);
 
