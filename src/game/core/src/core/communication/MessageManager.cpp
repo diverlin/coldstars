@@ -279,6 +279,10 @@ void doShoot(int_t object, int_t item) {
     control::item::Weapon* weapon = EntityManager::get().weapon(item);
 
     weapon->fire();
+
+    //    if (target()->isAlive() == false) {
+    //        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
+    //    }
 }
 
 
