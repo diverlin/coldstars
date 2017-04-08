@@ -38,7 +38,7 @@ class Bak;
 #ifdef USE_EXTRA_EQUIPMENT
 class FreezerEquipment;
 class EnergizerEquipment;
-#endif
+#endif // USE_EXTRA_EQUIPMENT
 class Protector;
 class Droid;
 class Scaner;
@@ -68,65 +68,6 @@ class GrappleModule;
 
 class Bomb; 
 class GoodsPack; 
-
-
-//namespace descriptor {
-
-//class ItemSlot : public BaseSlot
-//{
-//public:
-//    ItemSlot() = default;
-//    ~ItemSlot() = default;
-//    ItemSlot(const std::string& data);
-//    std::string data() const;
-
-//private:
-//    friend class boost::serialization::access;
-//    template<class Archive>
-//    void serialize(Archive & ar, const unsigned int version) {
-//        ar & boost::serialization::base_object<BaseSlot>(*this);
-//    }
-//};
-
-//} // namespace descriptor
-
-
-//namespace model {
-
-//class ItemSlot : public BaseSlot
-//{
-//public:
-//    ItemSlot() = default;
-//    ~ItemSlot() = default;
-//    ItemSlot(const std::string& data);
-//    std::string data() const;
-
-//    ItemSlot(int_t id, entity::type subtype_id);
-
-//    void setTarget(int_t target) { m_target = target; }
-//    void setSubtargetTarget(int_t subtarget) { m_subtarget = subtarget; }
-
-//    int_t item() const { return m_item; }
-//    int_t target() const { return m_target; }
-//    int_t subtarget() const { return m_subtarget; }
-
-//private:
-//    int_t m_item = NONE;
-//    int_t m_target = NONE;
-//    int_t m_subtarget = NONE;
-
-//private:
-//    friend class boost::serialization::access;
-//    template<class Archive>
-//    void serialize(Archive & ar, const unsigned int version) {
-//        ar & boost::serialization::base_object<BaseSlot>(*this);
-//        ar & m_item;
-//        ar & m_target;
-//        ar & m_subtarget;
-//    }
-//};
-
-//} // namespace model
 
 namespace slot {
 
@@ -184,31 +125,15 @@ public:
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
     bool insert(control::Item*);
+    control::Item* takeItem();
     void release();
 
     void updateVehiclePropetries() const;
 
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-    //        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-    //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*) const;
-    //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*, jeti::control::TextureOb*) const;
-
-    control::Item* takeItem();
-
     bool swapItem(slot::Item*);
-
-//    void updateRange(jeti::control::Material*);
-    void drawRange(const glm::vec2&);
 
     void selectEvent();
     void deselectEvent();
-
-//    virtual void Save(boost::property_tree::ptree&) const;
-//    virtual void Load(const boost::property_tree::ptree&);
-//    virtual void Resolve();
-
-    int itemRadius() const;
-    int itemDamage() const;
 
 private:
     control::Item* m_item = nullptr;
@@ -222,7 +147,17 @@ private:
     int m_position = NONE;
     entity::Type m_type = entity::Type::NONE;
     entity::Type m_subtype = entity::Type::NONE;
+
+    //    virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+    //    virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+    //    void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*) const;
+    //    void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::control::TextureOb*, jeti::control::TextureOb*) const;
+
+    //    void updateRange(jeti::control::Material*);
+    //    void drawRange(const glm::vec2&);
+
 };
 
 } // namespace slot
+
 

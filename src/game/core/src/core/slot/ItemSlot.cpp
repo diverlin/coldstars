@@ -266,67 +266,6 @@ void Item::updateVehiclePropetries() const
 //    render.DrawQuad(*textureOb_mask, box);
 //}
 
-int Item::itemRadius() const
-{       
-    switch(m_item->descriptor()->obType())
-    {
-        case entity::Type::EQUIPMENT:
-        {
-            switch (m_item->descriptor()->obSubType())
-            {
-                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->radius();  break; };
-                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->radius(); break; };
-
-                case entity::Type::GRAPPLE_EQUIPMENT: { return grappleEquipment()->model()->radius(); break; };
-                case entity::Type::RADAR_EQUIPMENT:   { return radarEquipment()->model()->radius();   break; };
-            }
-            
-            break;
-        }
-
-        case entity::Type::BOMB:
-        {
-            assert(false);
-            //return bomb()->radius();   break;
-        }
-    }
-
-    assert(false);
-//    if (item()) {
-//        return item()->radius();
-//    }
-    return 0;
-}
-
-int Item::itemDamage() const
-{       
-    switch(m_item->descriptor()->obType())
-    {
-        case entity::Type::EQUIPMENT:
-        {
-            switch (m_item->descriptor()->obSubType())
-            {
-                case entity::Type::LAZER_EQUIPMENT:   { return lazerEquipment()->model()->damage();  break; };
-                case entity::Type::ROCKET_EQUIPMENT:  { return rocketEquipment()->model()->damage(); break; };
-            }
-            
-            break;
-        }
-            
-        case entity::Type::BOMB:
-        {
-            assert(false);
-            //return bomb()->damage();   break;
-        }
-    }
-
-assert(false);
-//    if (item()) {
-//        return item()->damage();
-//    }
-    return 0;
-}
-
 control::Item*
 Item::takeItem()
 {
@@ -380,10 +319,10 @@ bool Item::swapItem(slot::Item* slot)
 //    //    m_VisualPath.FillData(_texOb, radius, size);
 //}
 
-void Item::drawRange(const glm::vec2& offset)
-{ 
-    //m_VisualPath.Draw(offset);
-}
+//void Item::drawRange(const glm::vec2& offset)
+//{
+//    m_VisualPath.Draw(offset);
+//}
 
 ///* virtual override final */
 //void Item::Save(boost::property_tree::ptree& save_ptree) const
