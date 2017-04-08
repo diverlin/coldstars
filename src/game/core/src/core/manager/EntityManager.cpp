@@ -93,6 +93,8 @@
 
 #include <core/model/item/equipment/ALL>
 
+#include <core/item/equipment/Weapon.hpp>
+
 IdGenerator EntityManager::m_idGenerator;
 
 EntityManager&
@@ -263,6 +265,13 @@ EntityManager::land(int_t id) const {
 control::Item*
 EntityManager::item(int_t id) const {
     control::Item* control = static_cast<control::Item*>(get(id));
+    assert(control);
+    return control;
+}
+
+control::item::Weapon*
+EntityManager::weapon(int_t id) const {
+    control::item::Weapon* control = static_cast<control::item::Weapon*>(get(id));
     assert(control);
     return control;
 }

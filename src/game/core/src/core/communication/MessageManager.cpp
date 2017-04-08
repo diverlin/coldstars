@@ -20,6 +20,7 @@
 #include <core/descriptor/ExplosionDescriptor.hpp>
 
 #include <core/spaceobject/ALL>
+#include <core/item/equipment/Weapon.hpp>
 
 #include <world/starsystem.hpp>
 
@@ -214,6 +215,7 @@ void doLaunchShip(int_t object, int_t destination) {
 
     // add
     control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
     starsystem->add(ship, land->owner()->position());
 }
 
@@ -223,6 +225,7 @@ void doJumpIn(int_t object) {
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
     starsystem->remove(ship);
 
     // add
@@ -253,6 +256,7 @@ void doDropItem(int_t object, int_t target) {
     control::Container* container = builder::Container::gen();
     container->insert(item);
     control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
     starsystem->add(container, ship->position());
 }
 
@@ -262,11 +266,19 @@ void doTakeContainer(int_t object, int_t target) {
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
+    assert(starsystem);
     starsystem->remove(container);
 
     // add
     ship->load(container->item());
     container->killSilently();
+}
+
+void doShoot(int_t object, int_t item) {
+    control::Ship* ship = EntityManager::get().ship(object);
+    control::item::Weapon* weapon = EntityManager::get().weapon(item);
+
+    weapon->fire();
 }
 
 

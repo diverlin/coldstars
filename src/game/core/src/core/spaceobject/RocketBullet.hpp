@@ -108,8 +108,8 @@ public:
 
     void collisionEvent(bool);
 
-    virtual void hit(int) override final;
-    virtual void _postDeathUniqueEvent(bool) override final;
+    void hit(int, SpaceObject* agresor = nullptr) override final;
+    void _postDeathUniqueEvent(bool) override final;
 
     int damage() const { return model()->damage(); }
     //void RenderInSpace(const Renderer&, float);

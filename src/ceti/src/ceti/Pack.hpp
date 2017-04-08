@@ -73,6 +73,14 @@ public:
         return (set1 == set2);
     }
 
+    bool contains(const T& element) const {
+        auto it = std::find(this->begin(), this->end(), element);
+        if (it != this->end()) {
+            return true;
+        }
+        return false;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

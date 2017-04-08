@@ -47,6 +47,7 @@ class SpaceObject;
 class Item;
 
 namespace item {
+class Weapon;
 class Scaner;
 class Drive;
 class Bak;
@@ -97,6 +98,7 @@ public:
     control::Land* land(int_t id) const;
 
     control::Item* item(int_t) const;
+    control::item::Weapon* weapon(int_t) const;
     control::item::Scaner* scaner(int_t) const;
     control::item::Drive* drive(int_t) const;
     control::item::Bak* bak(int_t) const;

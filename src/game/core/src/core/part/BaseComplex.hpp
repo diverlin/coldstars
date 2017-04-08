@@ -38,16 +38,15 @@ public:
 protected:
     control::Vehicle* _vehicle() const { return m_vehicle; }
 
-    STATUS _validateTarget(control::SpaceObject*, int) const;
-    STATUS _validateTargetDirty(control::SpaceObject*) const;
-
-    bool _isTargetAlive(control::SpaceObject*) const;
-    bool _isTargetInSpace(control::SpaceObject*) const;
-    bool _isTargetInSameStarSystem(control::SpaceObject*) const;
     bool _checkDistanceToTarget(control::SpaceObject*, int) const;
+    STATUS _checkTarget(control::SpaceObject*) const;
 
 private:
     control::Vehicle* m_vehicle = nullptr;
+
+    bool __isTargetAlive(control::SpaceObject*) const;
+    bool __isTargetInSpace(control::SpaceObject*) const;
+    bool __isTargetInSameStarSystem(control::SpaceObject*) const;
 };
 
 } // namespace complex

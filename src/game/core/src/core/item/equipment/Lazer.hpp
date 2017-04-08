@@ -41,7 +41,8 @@ public:
     Lazer(descriptor::item::Lazer*, model::item::Lazer*);
     virtual ~Lazer() = default;
 
-    //void FireEvent(SpaceObject*, slot::ItemSlot*, float, bool);
+    bool checkAmmo() const override final;
+    void fire(float rate=1.0f) override final;
 
     descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
     model::item::Lazer* model() const { return m_model_lazer; }

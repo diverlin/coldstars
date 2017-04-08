@@ -80,15 +80,13 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
     m_impulse += force_dir * strength;
 }
 
-void SpaceObject::hit(int damage)
+void SpaceObject::hit(int damage, SpaceObject* agressor)
 {
-    LOG(std::string("SpaceObject::hit id=") << std::to_string(model()->id()) << " damage=" << std::to_string(damage));
     model()->setArmor(model()->armor() - damage);
     if (model()->armor() <= 0) {
         model()->setArmor(0);
         model()->setIsDying(true);
     }
-    LOG(std::string("armor=") << std::to_string(model()->armor()) << " is_dying=" << std::to_string(model()->isDying()) << std::endl);
 }
 
 void SpaceObject::killSilently()

@@ -20,6 +20,9 @@
 #include <core/descriptor/item/equipment/Lazer.hpp>
 #include <core/model/item/equipment/Lazer.hpp>
 
+#include <core/spaceobject/SpaceObject.hpp>
+#include <core/slot/ItemSlot.hpp>
+
 #ifdef USE_MODULES
 #include <core/item/modules/LazerModule.hpp>
 #endif
@@ -39,6 +42,26 @@ Lazer::Lazer(descriptor::item::Lazer* descr, model::item::Lazer* model)
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL);
 //    texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT);
+}
+
+bool Lazer::checkAmmo() const
+{
+    /*if check energy */
+    return true;
+}
+
+void Lazer::fire(float rate)
+{
+    assert(target());
+    if (subtarget()) {
+        if (subtarget()->item()) {
+            subtarget()->item()->doLock(1);
+            rate /= 3;
+        }
+    }
+
+    target()->hit(damage() * rate);
+    deteriorationEvent();
 }
 
 void Lazer::addUniqueInfo()

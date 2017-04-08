@@ -54,9 +54,10 @@ public:
 
 //    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
 
-//    void FireEvent(float);
-
     virtual void updateProperties();
+
+    virtual bool checkAmmo() const = 0;
+    virtual void fire(float rate=1.0f) = 0;
 
     int radius() const;
     int damage() const;

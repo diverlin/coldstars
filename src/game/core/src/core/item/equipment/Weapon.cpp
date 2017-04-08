@@ -29,8 +29,7 @@ namespace control {
 namespace item {
 
 Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
-    :
-      Equipment(descr, model)
+    : Equipment(descr, model)
     , m_descriptor_weapon(descr)
     , m_model_weapon(model)
 {
@@ -58,8 +57,7 @@ void Weapon::updateProperties()
     model()->setRadius(descriptor()->radius() + m_radius_add);
 }
 
-void
-Weapon::addUniqueInfo()
+void Weapon::addUniqueInfo()
 {
     //    info.addTitleStr("ROCKET");
     
@@ -68,8 +66,7 @@ Weapon::addUniqueInfo()
     //    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
 }
 
-std::string
-Weapon::damageStr()
+std::string Weapon::damageStr()
 {
     if (m_damage_add) {
         return std::to_string(descriptor()->damage()) + "+" + std::to_string(m_damage_add);
@@ -78,8 +75,7 @@ Weapon::damageStr()
     }
 }
 
-std::string
-Weapon::radiusStr()
+std::string Weapon::radiusStr()
 {
     if (m_radius_add) {
         return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
@@ -89,21 +85,18 @@ Weapon::radiusStr()
 }
 
 
-void
-Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
+void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
 {
     m_target    = target;
     m_subtarget = subtarget;
 }
 
-void
-Weapon::resetSubTarget()
+void Weapon::resetSubTarget()
 {
     m_subtarget = nullptr;
 }
 
-bool
-Weapon::validateSubTarget() const
+bool Weapon::validateSubTarget() const
 {
     if (m_subtarget->item()) {
         return true;
@@ -111,8 +104,7 @@ Weapon::validateSubTarget() const
     return false;
 }
 
-void
-Weapon::resetTarget()
+void Weapon::resetTarget()
 {
     m_target    = nullptr;
     resetSubTarget();

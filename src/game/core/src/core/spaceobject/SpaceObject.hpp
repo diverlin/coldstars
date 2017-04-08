@@ -130,8 +130,8 @@ public:
     [[warning("do we need this?")]]
     virtual int givenExpirience() const { return model()->givenExpirience(); }
 
-    virtual void remeberAgressor(SpaceObject*) {}
-    virtual void hit(int);
+    virtual void __remeberAgressor(SpaceObject*) {}
+    virtual void hit(int, SpaceObject* agressor = nullptr);
     void killSilently();
 
     bool isAlive() const { model()->isAlive(); }

@@ -143,7 +143,7 @@ void RocketBullet::collisionEvent(bool show_effect)
 //}
 
 /* virtual override final */
-void RocketBullet::hit(int damage)
+void RocketBullet::hit(int damage, SpaceObject* agressor)
 {
     SpaceObject::hit(damage);
 

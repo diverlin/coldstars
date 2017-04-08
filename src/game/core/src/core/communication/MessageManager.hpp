@@ -25,6 +25,8 @@ void doJumpOut(int_t, int_t);
 /** DROP/TAKE */
 void doDropItem(int_t, int_t);
 void doTakeContainer(int_t, int_t);
+/** SHOOT */
+void doShoot(int_t, int_t);
 } // namespace event
 
 class MessageManager

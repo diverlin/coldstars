@@ -71,19 +71,21 @@ TEST(ship, drop_item)
 
     /* add ship */
     starsystem->add(ship);
-    EXPECT_EQ(starsystem->containers().size(), 0);
+    EXPECT_EQ(0, starsystem->containers().size());
     EXPECT_TRUE(ship->properties().speed > 0);
+    EXPECT_EQ(1, ship->model()->items().size());
 
     /* drop item to space */
     event::doDropItem(ship->id(), drive->id());
 
-    EXPECT_EQ(starsystem->containers().size(), 1);
+    EXPECT_EQ(0, ship->model()->items().size());
+    EXPECT_EQ(1, starsystem->containers().size());
     assert(starsystem->containers().front());
 
     control::Container* container = starsystem->containers().front();
-    EXPECT_EQ(container->position(), ship->position());
-    EXPECT_EQ(container->place(), place::Type::SPACE);
-    EXPECT_EQ(container->item(), drive);
+    EXPECT_EQ(ship->position(), container->position());
+    EXPECT_EQ(place::Type::SPACE, container->place());
+    EXPECT_EQ(drive, container->item());
 
     EXPECT_EQ(0, ship->properties().speed);
 }
@@ -115,29 +117,42 @@ TEST(ship, grab_container)
     EXPECT_EQ(false, container->isAlive());
 }
 
-TEST(ship, base_shoot_ship)
-{
-    /* create objects */
-    control::Ship* ship1 = builder::Ship::gen();
-    control::Ship* ship2 = builder::Ship::gen();
-
-    /* initiate shoot */
-    ship1->weapons().prepare();
-    ship1->weapons().select();
-    ship1->weapons().setTarget(ship2);
-
-    int dist = (ship1->position() - ship2->position()).length();
-    int actual_damage = ship1->weapons().guessDamage(dist) * ship2->adjustDissipateFilter();
-    int armor_init = ship2->model()->armor();
-
-    ship1->weapons().fire(/*timer=*/0, /*rate=*/1.0);
-
-    EXPECT_TRUE((armor_init - actual_damage) - ship2->model()->armor() <= 1);
-}
-
 TEST(ship, shoot_ship)
 {
-//    /* create objects */
+    /* create objects */
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Lazer* lazer = builder::item::Lazer::gen();
+    ship->mount(lazer);
+
+    control::Ship* target = builder::Ship::gen();
+
+    /* add to starsystem */
+    starsystem->add(ship);
+    starsystem->add(target);
+
+    /* initiate shoot */
+    ship->weapons().prepare();
+    ship->weapons().select();
+    EXPECT_TRUE(ship->weapons().setTarget(target));
+
+    EXPECT_EQ(target, lazer->target());
+
+    int dist = (ship->position() - target->position()).length();
+    int actual_damage = ship->weapons().guessDamage(dist) * target->adjustDissipateFilter();
+    int armor_init = target->model()->armor();
+
+    event::doShoot(ship->id(), lazer->id());
+
+    //EXPECT_TRUE(target->npc()->isAgressor(ship->id()));
+
+    EXPECT_TRUE(actual_damage != 0);
+    EXPECT_TRUE((armor_init - actual_damage) - target->model()->armor() <= 1);
+}
+
+TEST(ship, shoot_ship_presize)
+{
+    /* create objects */
 //    control::Ship* ship1 = builder::Ship::gen();
 //    control::Ship* ship2 = builder::Ship::gen();
 
@@ -153,7 +168,6 @@ TEST(ship, shoot_ship)
 //    ship1->weapons().fire(/*timer=*/0, /*rate=*/1.0);
 
 //    EXPECT_TRUE((armor_init - actual_damage) - ship2->model()->armor() <= 1);
-    assert(false);
 }
 
 TEST(ship, kill)

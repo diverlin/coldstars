@@ -26,6 +26,8 @@
 
 #include <core/ai/StateMachine.hpp>
 
+#include <ceti/Pack.hpp>
+
 #include <set>
 
 class BaseAiModel;
@@ -36,17 +38,12 @@ class Planet;
 class StarSystem;
 } // namespace model
 
+namespace control {
+class SpaceObject;
+} // namespace control
+
 class Player;
 class GoodsPack;
-
-//struct UnresolvedDataNpc
-//{
-//    int vehicle_id;
-//    int aiModel_id;
-
-//    Task macrotask;
-//    Task microtask;
-//};
 
 namespace model {
 
@@ -65,7 +62,11 @@ public:
     //    void setPlayer(Player* player) { m_player = player; }
     //    void setVehicle(Vehicle* vehicle)         { m_vehicle = vehicle; }
 
+    void addAgressor(int_t id) { if (_isWritable()) m_agressors.add(id); }
+    void removeAgressor(int_t id) { if (_isWritable()) m_agressors.remove(id); }
+
     Skills& skills() { return m_skills; }
+    ceti::pack<int_t> agressors() const { return m_agressors; }
 
 private:
     int_t m_race = NONE;
@@ -78,15 +79,14 @@ private:
 
     int_t m_aiModel = NONE;
 
-//    std::set<AgressorData, AgressorDataComparator> m_agressorsData;
-
     int_t m_scanTarget = NONE;
+
+    ceti::pack<int_t> m_agressors;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_race;
         ar & m_credits;
@@ -94,8 +94,8 @@ private:
         ar & m_vehicle;
         //ar & m_skills;
         ar & m_aiModel;
-    //    ar & m_agressorsData;
         ar & m_scanTarget;
+        ar & m_agressors;
     }
 };
 
@@ -126,7 +126,7 @@ public:
     void cloneMacroTaskFrom(model::Npc*);
 
     // AI
-    void remeberAgressor(model::Vehicle*);
+    void remeberAgressor(SpaceObject*);
     void updateInSpace(int, bool);
 
     void updateInSpaceInStatic();
@@ -152,6 +152,8 @@ public:
     std::string agressorSetString() const;
 
     model::Npc* model() const { return m_model_npc; }
+
+    bool isAgressor(int_t) const;
 
 private:
     model::Npc* m_model_npc = nullptr;

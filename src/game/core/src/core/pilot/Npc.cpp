@@ -83,6 +83,11 @@ Npc::Npc(int id, entity::Type subtype_id, entity::Type subsubtype_id)
 Npc::~Npc() 
 {}  
 
+bool Npc::isAgressor(int_t id) const
+{
+    return model()->agressors().contains(id);
+}
+
 model::StarSystem*
 Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
 
@@ -167,7 +172,7 @@ void Npc::addExpirience(int expirience, bool show_effect)
     }
 }
 
-void Npc::remeberAgressor(model::Vehicle* agressor)
+void Npc::remeberAgressor(control::SpaceObject* agressor)
 {
     assert(false);
 //    for (std::set<AgressorData>::iterator it=m_agressorsData.begin(); it!=m_agressorsData.end(); ++it)
