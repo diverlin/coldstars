@@ -59,7 +59,7 @@ Goverment::__createTemplate(descriptor::Goverment* descr)
     control::Goverment* goverment = new control::Goverment(descr, model);
     assert(goverment);
 
-    manager::EntityManager::get().add(goverment);
+    manager::Entity::get().add(goverment);
 
     return goverment;
 }

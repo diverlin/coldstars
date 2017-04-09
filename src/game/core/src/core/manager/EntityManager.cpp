@@ -97,30 +97,30 @@
 
 namespace manager {
 
-IdGenerator EntityManager::m_idGenerator;
+IdGenerator Entity::m_idGenerator;
 
-EntityManager&
-EntityManager::get()
+Entity&
+Entity::get()
 {
-    static EntityManager instance;
+    static Entity instance;
     return instance;
 }
 
 int_t
-EntityManager::genId() {
+Entity::genId() {
     return m_idGenerator.nextId();
 }
 
 void
-EntityManager::clear()
+Entity::clear()
 {
-    for (std::map<int_t, control::Base*>::iterator it = m_entities.begin(); it != m_entities.end(); it++) {
-        delete it->second;
+    for (auto it: m_entities) {
+        delete it.second;
     }
     m_entities.clear();
 }
 
-void EntityManager::add(control::Base* ob)
+void Entity::add(control::Base* ob)
 {
     assert(ob);
     if (ob->id() == NONE) {
@@ -135,7 +135,7 @@ void EntityManager::add(control::Base* ob)
 }
 
 control::Base*
-EntityManager::base(int_t id) const
+Entity::base(int_t id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
     std::map<int_t, control::Base*>::const_iterator it = m_entities.find(id);
@@ -146,100 +146,97 @@ EntityManager::base(int_t id) const
 }
 
 control::StarSystem*
-EntityManager::starsystem(int_t id) const {
+Entity::starsystem(int_t id) const {
     control::StarSystem* control = static_cast<control::StarSystem*>(base(id));
     assert(control);
     return control;
 }
 
 control::HyperSpace*
-EntityManager::hyperspace() const {
-//    control::HyperSpace* control = static_cast<control::HyperSpace*>(get(id));
-//    assert(control);
-//    return control;
+Entity::hyperspace() const {
     assert(m_hyperspace);
     return m_hyperspace;
 }
 
 control::Star*
-EntityManager::star(int_t id) const {
+Entity::star(int_t id) const {
     control::Star* control = static_cast<control::Star*>(base(id));
     assert(control);
     return control;
 }
 
 control::Planet*
-EntityManager::planet(int_t id) const {
+Entity::planet(int_t id) const {
     control::Planet* control = static_cast<control::Planet*>(base(id));
     assert(control);
     return control;
 }
 
 control::Asteroid*
-EntityManager::asteroid(int_t id) const {
+Entity::asteroid(int_t id) const {
     control::Asteroid* control = static_cast<control::Asteroid*>(base(id));
     assert(control);
     return control;
 }
 
 control::SpaceStation*
-EntityManager::spacestation(int_t id) const {
+Entity::spacestation(int_t id) const {
     control::SpaceStation* control = static_cast<control::SpaceStation*>(base(id));
     assert(control);
     return control;
 }
 
 control::Ship*
-EntityManager::ship(int_t id) const {
+Entity::ship(int_t id) const {
     control::Ship* control = static_cast<control::Ship*>(base(id));
     assert(control);
     return control;
 }
 
 control::Satellite*
-EntityManager::satellite(int_t id) const {
+Entity::satellite(int_t id) const {
     control::Satellite* control = static_cast<control::Satellite*>(base(id));
     assert(control);
     return control;
 }
 
 control::Container*
-EntityManager::container(int_t id) const {
+Entity::container(int_t id) const {
     control::Container* control = static_cast<control::Container*>(base(id));
     assert(control);
     return control;
 }
 
 control::SpaceObject*
-EntityManager::spaceObject(int_t id) const {
+Entity::spaceObject(int_t id) const {
     control::SpaceObject* control = static_cast<control::SpaceObject*>(base(id));
     assert(control);
     return control;
 }
 
 control::Land*
-EntityManager::land(int_t id) const {
+Entity::land(int_t id) const {
     control::Land* control = static_cast<control::Land*>(base(id));
     assert(control);
     return control;
 }
 
 control::Item*
-EntityManager::item(int_t id) const {
+Entity::item(int_t id) const {
     control::Item* control = static_cast<control::Item*>(base(id));
     assert(control);
     return control;
 }
 
 control::item::Weapon*
-EntityManager::weapon(int_t id) const {
+Entity::weapon(int_t id) const {
     control::item::Weapon* control = static_cast<control::item::Weapon*>(base(id));
     assert(control);
     return control;
 }
 
 control::item::Scaner*
-EntityManager::scaner(int_t id) const
+Entity::scaner(int_t id) const
 {
     control::item::Scaner* control = static_cast<control::item::Scaner*>(base(id));
     assert(control);
@@ -247,7 +244,7 @@ EntityManager::scaner(int_t id) const
 }
 
 control::item::Drive*
-EntityManager::drive(int_t id) const
+Entity::drive(int_t id) const
 {
     control::item::Drive* control = static_cast<control::item::Drive*>(base(id));
     assert(control);
@@ -255,7 +252,7 @@ EntityManager::drive(int_t id) const
 }
 
 control::item::Bak*
-EntityManager::bak(int_t id) const
+Entity::bak(int_t id) const
 {
     control::item::Bak* control = static_cast<control::item::Bak*>(base(id));
     assert(control);
@@ -263,7 +260,7 @@ EntityManager::bak(int_t id) const
 }
 
 control::item::Droid*
-EntityManager::droid(int_t id) const
+Entity::droid(int_t id) const
 {
     control::item::Droid* control = static_cast<control::item::Droid*>(base(id));
     assert(control);
@@ -271,7 +268,7 @@ EntityManager::droid(int_t id) const
 }
 
 control::item::Grapple*
-EntityManager::grapple(int_t id) const
+Entity::grapple(int_t id) const
 {
     control::item::Grapple* control = static_cast<control::item::Grapple*>(base(id));
     assert(control);
@@ -279,7 +276,7 @@ EntityManager::grapple(int_t id) const
 }
 
 control::item::Lazer*
-EntityManager::lazer(int_t id) const
+Entity::lazer(int_t id) const
 {
     control::item::Lazer* control = static_cast<control::item::Lazer*>(base(id));
     assert(control);
@@ -287,7 +284,7 @@ EntityManager::lazer(int_t id) const
 }
 
 control::item::Protector*
-EntityManager::protector(int_t id) const
+Entity::protector(int_t id) const
 {
     control::item::Protector* control = static_cast<control::item::Protector*>(base(id));
     assert(control);
@@ -295,7 +292,7 @@ EntityManager::protector(int_t id) const
 }
 
 control::item::Radar*
-EntityManager::radar(int_t id) const
+Entity::radar(int_t id) const
 {
     control::item::Radar* control = static_cast<control::item::Radar*>(base(id));
     assert(control);
@@ -303,7 +300,7 @@ EntityManager::radar(int_t id) const
 }
 
 control::item::Rocket*
-EntityManager::rocket(int_t id) const
+Entity::rocket(int_t id) const
 {
     control::item::Rocket* control = static_cast<control::item::Rocket*>(base(id));
     assert(control);
@@ -311,7 +308,7 @@ EntityManager::rocket(int_t id) const
 }
 
 
-Player* EntityManager::player() const
+Player* Entity::player() const
 {
     assert(false);
 //    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
@@ -322,7 +319,7 @@ Player* EntityManager::player() const
     return nullptr;
 }
 
-void EntityManager::remove(control::Base* ob)
+void Entity::remove(control::Base* ob)
 {
     if (auto it = m_entities.find(ob->id()) != m_entities.end()) {
         m_entities.erase(it);

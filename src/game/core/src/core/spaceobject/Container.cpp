@@ -44,44 +44,44 @@ namespace control {
 namespace {
 
 bool itemInsertHelper(slot::Item* slot, int_t id) {
-    control::Base* model_base = manager::EntityManager::get().base(id);
+    control::Base* model_base = manager::Entity::get().base(id);
     descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obSubType()) {
     case entity::Type::SCANER_EQUIPMENT: {
-        item::Scaner* item = manager::EntityManager::get().scaner(id);
+        item::Scaner* item = manager::Entity::get().scaner(id);
         return slot->insert(item);
     }
     case entity::Type::DRIVE_EQUIPMENT: {
-        item::Drive* item = manager::EntityManager::get().drive(id);
+        item::Drive* item = manager::Entity::get().drive(id);
         return slot->insert(item);
     }
     case entity::Type::BAK_EQUIPMENT: {
-        item::Bak* item = manager::EntityManager::get().bak(id);
+        item::Bak* item = manager::Entity::get().bak(id);
         return slot->insert(item);
     }
     case entity::Type::DROID_EQUIPMENT: {
-        item::Droid* item = manager::EntityManager::get().droid(id);
+        item::Droid* item = manager::Entity::get().droid(id);
         return slot->insert(item);
     }
     case entity::Type::GRAPPLE_EQUIPMENT: {
-        item::Grapple* item = manager::EntityManager::get().grapple(id);
+        item::Grapple* item = manager::Entity::get().grapple(id);
         return slot->insert(item);
     }
     case entity::Type::LAZER_EQUIPMENT: {
-        item::Lazer* item = manager::EntityManager::get().lazer(id);
+        item::Lazer* item = manager::Entity::get().lazer(id);
         return slot->insert(item);
     }
     case entity::Type::PROTECTOR_EQUIPMENT: {
-        item::Protector* item = manager::EntityManager::get().protector(id);
+        item::Protector* item = manager::Entity::get().protector(id);
         return slot->insert(item);
     }
     case entity::Type::RADAR_EQUIPMENT: {
-        item::Radar* item = manager::EntityManager::get().radar(id);
+        item::Radar* item = manager::Entity::get().radar(id);
         return slot->insert(item);
     }
     case entity::Type::ROCKET_EQUIPMENT: {
-        item::Rocket* item = manager::EntityManager::get().rocket(id);
+        item::Rocket* item = manager::Entity::get().rocket(id);
         return slot->insert(item);
     }
     }

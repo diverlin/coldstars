@@ -45,7 +45,7 @@ void Garbage::add(control::Base* ob)
 void Garbage::clear()
 {
     for(auto pair: m_garbage) {
-        manager::EntityManager::get().remove(pair.second);
+        manager::Entity::get().remove(pair.second);
         delete pair.second->model();
         delete pair.second;
     }

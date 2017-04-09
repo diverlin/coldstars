@@ -107,7 +107,7 @@ Planet::__genTemplate(descriptor::Planet* descr)
     control::Planet* planet = new control::Planet(descr, model);
     assert(planet);
 
-    manager::EntityManager::get().add(planet);
+    manager::Entity::get().add(planet);
 
     return planet;
 }
