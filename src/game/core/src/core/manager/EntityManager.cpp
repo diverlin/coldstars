@@ -333,17 +333,14 @@ Player* EntityManager::player() const
     return nullptr;
 }
 
-//void EntityManager::removeEntity(core::Base* entity)
-//{
-//    //LOG("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-
-//    if (m_entities_map.count(entity->id()) == 1) {
-//        m_entities_map.erase(m_entities_map.find(entity->id()));
-//    } else {
-//        //LOG("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-//    }
-//}
-
+void EntityManager::remove(control::Base* ob)
+{
+    if (auto it = m_entities.find(ob->id()) != m_entities.end()) {
+        m_entities.erase(it);
+    } else {
+        ceti::abort("attempt to remove not existed id");
+    }
+}
 
 void EntityManager::saveEvent(const std::string& filename)
 {
@@ -420,6 +417,7 @@ void EntityManager::addToGarbage(control::Base* ob)
     ob->die();
 
     if (m_garbage.count(ob->id()) == 1) {
+        assert(false);
         throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(ob->id()) + " which already exists, descriptor = " + std::to_string(ob->descriptor()->id()));
     }
     m_garbage.insert(std::make_pair(ob->id(), ob));
@@ -427,17 +425,12 @@ void EntityManager::addToGarbage(control::Base* ob)
 
 void EntityManager::clearGarbage()
 {
-    assert(false);
-//    for(unsigned int i=0; i<m_entitiesGarbage.size(); i++)
-//    {
-//        removeEntity(m_entitiesGarbage[i]);
-//#if CREATEDESTROY_LOG_ENABLED == 1
-//        LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
-//#endif
-//       core::global::get().idGenerator().addFreeId(m_entitiesGarbage[i]->id());
-//        delete m_entitiesGarbage[i];
-//    }
-//    m_entitiesGarbage.clear();
+    for(auto pair: m_garbage) {
+        remove(pair.second);
+        delete pair.second->model();
+        delete pair.second;
+    }
+    m_garbage.clear();
 }
 
 

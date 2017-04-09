@@ -17,9 +17,20 @@
 */
 
 #include "Logger.hpp"
-#include <iostream>
-#include <iomanip>
+//#include <iostream>
+//#include <iomanip>
+#include <cassert>
 #include <stdexcept>
+
+
+namespace ceti {
+
+void abort(const std::string& msg) {
+    assert(false);
+    throw std::runtime_error("ERROR: \n" + msg + "Abort.");
+}
+
+} // namespace ceti
 
 //Logger& Logger::Instance()
 //{

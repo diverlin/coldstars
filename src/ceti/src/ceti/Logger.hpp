@@ -20,6 +20,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #ifdef USE_LOG
     #define LOGs( ... )         std::cout  << __VA_ARGS__ << " "
@@ -29,6 +30,12 @@
     #define LOG( ... )
     #define LOG_ERROR( ... )
 #endif
+
+namespace ceti {
+
+void abort(const std::string& msg = "no info");
+
+} // namespace ceti
 
 //class Logger
 //{
