@@ -76,7 +76,7 @@ public:
     void saveRequest() { m_save_request = true; }
     void loadRequest() { m_load_request = true; }
 
-    void reg(control::Base*);
+    void add(control::Base*);
     void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 
     control::Base* get(int_t) const;

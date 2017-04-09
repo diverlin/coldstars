@@ -64,7 +64,7 @@ Rocket::__genTemplate(descriptor::item::Rocket* descr, int_t ob_id)
 {
     model::item::Rocket* model = new model::item::Rocket(descr->id(), ob_id);
     control::item::Rocket* rocket = new control::item::Rocket(descr, model);
-    EntityManager::get().reg(rocket);
+    EntityManager::get().add(rocket);
     return rocket;
 }
 
