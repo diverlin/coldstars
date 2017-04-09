@@ -63,7 +63,7 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
     control::Kosmoport* kosmoport = new control::Kosmoport(descr, model);
     assert(kosmoport);
 
-    manager::Entity::get().add(kosmoport);
+    manager::Entities::get().add(kosmoport);
     return kosmoport;
 }
 

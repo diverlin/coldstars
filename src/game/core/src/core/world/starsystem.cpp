@@ -98,26 +98,26 @@ StarSystem::__actualizeModel()
 //    std::vector<int_t> planets() const { return m_planets; }
 
     for(int_t id: model()->stars()) {
-        add(manager::Entity::get().star(id));
+        add(manager::Entities::get().star(id));
     }
     for(int_t id: model()->planets()) {
-        add(manager::Entity::get().planet(id));
+        add(manager::Entities::get().planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(manager::Entity::get().asteroid(id));
+        add(manager::Entities::get().asteroid(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(manager::Entity::get().ship(id));
+        add(manager::Entities::get().ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(manager::Entity::get().satellite(id));
+        add(manager::Entities::get().satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(manager::Entity::get().spacestation(id));
+        add(manager::Entities::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        add(manager::Entity::get().container(id));
+        add(manager::Entities::get().container(id));
     }
 
 //    __actualizeItems();

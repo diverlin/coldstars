@@ -40,11 +40,12 @@ private:
 public:
     static Garbage& get();
 
+    bool contain(int_t id) const { return (m_entities.count(id) == 1); }
     void add(control::Base*);
     void clear();
 
 private:
-    std::map<int_t, control::Base*> m_garbage;
+    std::map<int_t, control::Base*> m_entities;
 };
 
 } // namespace manager

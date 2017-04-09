@@ -34,22 +34,25 @@ Garbage::get()
 
 void Garbage::add(control::Base* ob)
 {
-    ob->die();
+    if (ob->isAlive()) {
+        // executaed for children
+        ob->die();
+    }
 
-    if (m_garbage.count(ob->id()) == 1) {
+    if (m_entities.count(ob->id()) == 1) {
         ceti::abort("attempt to registry id =" + std::to_string(ob->id()) + " which already exists");
     }
-    m_garbage.insert(std::make_pair(ob->id(), ob));
+    m_entities.insert(std::make_pair(ob->id(), ob));
 }
 
 void Garbage::clear()
 {
-    for(auto pair: m_garbage) {
-        manager::Entity::get().remove(pair.second);
+    for(auto pair: m_entities) {
+        manager::Entities::get().remove(pair.second);
         delete pair.second->model();
         delete pair.second;
     }
-    m_garbage.clear();
+    m_entities.clear();
 }
 
 } // namespace manager
