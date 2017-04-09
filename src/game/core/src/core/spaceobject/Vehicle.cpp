@@ -36,11 +36,8 @@
 
 #include <core/item/other/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
-#include <core/item/artefacts/GravityArtefact.hpp>
-#include <core/item/artefacts/ProtectorArtefact.hpp>
-#endif
-
-//#include <core/part/Turrel.hpp>
+#include <core/item/artefacts/ALL>
+#endif // USE_ARTEFACTS
 
 #include <core/pilot/Npc.hpp>
 
