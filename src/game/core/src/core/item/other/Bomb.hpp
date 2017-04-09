@@ -37,9 +37,9 @@ public:
 
     virtual void UpdateOwnerAbilities();
 
-    virtual void Save(boost::property_tree::ptree&) const;
-    virtual void Load(const boost::property_tree::ptree&);
-    virtual void Resolve();
+//    virtual void Save(boost::property_tree::ptree&) const;
+//    virtual void Load(const boost::property_tree::ptree&);
+//    virtual void Resolve();
 
 private:
     int m_damage = 0;
@@ -48,9 +48,9 @@ private:
     virtual void AddCommonInfo();
     virtual void addUniqueInfo();
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 };
 
 

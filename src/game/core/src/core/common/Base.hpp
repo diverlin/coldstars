@@ -23,9 +23,8 @@
 
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
-//#include <ceti/descriptor/BaseView.hpp>
 
-#include <boost/property_tree/ptree.hpp> // remove this
+//#include <boost/property_tree/ptree.hpp> // remove this
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -46,9 +45,11 @@ public:
     Base(const std::string& data);
     std::string data() const;
 
+    void setAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }
     void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
+    bool isAlive() const { return m_isAlive; }
     int_t id() const { return m_id; }
     int_t descriptor() const { return m_descriptor; }
 
@@ -59,6 +60,7 @@ protected:
 
 private:
     bool m_writable = true;
+    bool m_isAlive = true;
     int_t m_id = NONE;
     int_t m_descriptor = NONE;
 
@@ -66,6 +68,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        ar & m_isAlive;
         ar & m_id;
         ar & m_descriptor;
     }
@@ -79,13 +82,13 @@ class Base : private NonCopyable
 {
 public:
     Base(descriptor::Base*, model::Base*);
-    virtual ~Base();
+    virtual ~Base() = default;
 
     void setId(int_t id) { m_model_base->setId(id); }
 
     int_t id() { return model()->id(); }
-
-    virtual void putChildrenToGarbage() const {}
+    bool isAlive() const;
+    void die();
 
     descriptor::Base* descriptor() const { return m_descriptor_base; }
     model::Base* model() const { return m_model_base; }
@@ -93,6 +96,8 @@ public:
 private:
     descriptor::Base* m_descriptor_base = nullptr;
     model::Base* m_model_base = nullptr;
+
+    virtual void __putChildrenToGarbage() const {}
 };
 
 } // namespace control

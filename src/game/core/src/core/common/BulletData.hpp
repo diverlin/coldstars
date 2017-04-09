@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BULLETDATA_HPP
-#define BULLETDATA_HPP
+#pragma once
 
 
 class BulletData
@@ -44,9 +43,8 @@ class BulletData
         angular_speed(0.0)
         {}
     
-        void Save(boost::property_tree::ptree&, const std::string&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+//        void Save(boost::property_tree::ptree&, const std::string&) const;
+//        void Load(const boost::property_tree::ptree&);
+//        void Resolve();
 };
 
-#endif 

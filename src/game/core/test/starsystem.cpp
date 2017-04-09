@@ -28,9 +28,13 @@
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 #include <core/builder/spaceobject/ALL>
+#include <core/builder/item/equipment/ALL>
 
 #include <core/spaceobject/ALL>
+#include <core/item/equipment/ALL>
 #include <core/model/spaceobject/ALL>
+
+#include <core/pilot/Npc.hpp>
 
 #include <core/manager/EntityManager.hpp>
 
@@ -370,7 +374,23 @@ TEST(starsystem, add_remove_container)
 
 TEST(starsystem, create_kill)
 {
-    //assert(false);
+    auto starsystem = builder::StarSystem::gen();
+    auto ship = builder::Ship::genEquiped();
+    auto items = ship->__items();
+
+    starsystem->add(ship);
+
+    ship->die();
+
+    EXPECT_FALSE(ship->isAlive());
+
+    if (auto npc = ship->npc()) {
+        EXPECT_FALSE(npc->isAlive());
+    }
+
+    for(auto item: items) {
+        EXPECT_FALSE(item->isAlive());
+    }
 }
 
 } // namespace test

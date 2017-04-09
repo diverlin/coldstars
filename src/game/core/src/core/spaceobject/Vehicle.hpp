@@ -282,6 +282,7 @@ public:
 private:
     void __updateFreeSpace();
 //    bool __addItemToCargo(Item*);
+    ceti::pack<control::Item*> __items() const;
 
 protected:
     descriptor::Vehicle* m_descriptor_vehicle = nullptr;
@@ -308,7 +309,9 @@ protected:
 
     void UpdateGrappleMicroProgram_inDynamic();
 
-    virtual void putChildrenToGarbage() const override;
+protected:
+    void _putNpcToGarbage() const;
+    void _putItemsToGarbage() const;
 
 private:
     bool m_godMode = false;
@@ -364,6 +367,8 @@ private:
 
     void __loadModel();
     void __loadItemsFromModel();
+
+    void __putChildrenToGarbage() const override;
 
 //private:
 //    class Test_Vehicle;

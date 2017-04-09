@@ -40,6 +40,7 @@ public:
     static control::Ship* gen(descriptor::Ship*);
     static control::Ship* gen(int_t, int_t ob_id = NONE);
     static control::Ship* gen();
+    static control::Ship* genEquiped();
 
 private:
     Ship() = delete;

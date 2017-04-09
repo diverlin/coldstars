@@ -71,9 +71,8 @@ WormHole::__createInternals(control::WormHole* wormhole)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     
     LifeData data_life;
-    data_life.is_alive   = true;
     data_life.garbage_ready = false;
-    data_life.armor      = 100000;
+    data_life.armor = 100000;
     data_life.life_time = meti::getRandInt(250, 500);
     data_life.dying_time = 2;
 

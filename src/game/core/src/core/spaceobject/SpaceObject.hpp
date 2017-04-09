@@ -49,7 +49,6 @@ public:
     void setPlace(place::Type place) { m_place = place;  }
 //    void setMass(int mass) { m_mass = mass; }
 
-    void setIsAlive(bool is_alive) { m_dataLife.is_alive = is_alive; }
     void setIsDying(bool is_dying) { m_dataLife.is_dying = is_dying; }
     void setDyingTime(bool dying_time) { m_dataLife.dying_time = dying_time; }
 
@@ -58,7 +57,6 @@ public:
 
     void setParent(int_t parent) { m_parent = parent; }
 
-    bool isAlive() const { return m_dataLife.is_alive; }
     bool isDying() const { return m_dataLife.is_dying; }
     int dyingTime() const { return m_dataLife.dying_time; }
     bool garbageReady() const { return m_dataLife.garbage_ready; }
@@ -72,7 +70,6 @@ public:
     int givenExpirience() const { return m_expirienceToGive; }
 
     void immidiateKill() {
-        m_dataLife.is_alive = false;
         m_dataLife.dying_time = -1;
     }
 
@@ -109,7 +106,7 @@ class SpaceObject : public ceti::control::Orientation, public Base
 {
 public:
     SpaceObject(descriptor::SpaceObject*, model::SpaceObject*);
-    ~SpaceObject() override;
+    ~SpaceObject() override = default;
 
     place::Type place() const { return model()->place(); }
 

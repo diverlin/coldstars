@@ -20,6 +20,9 @@
 #include "ShipBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/builder/item/equipment/ALL>
+#include <core/item/equipment/ALL>
+
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/spaceobject/Ship.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -58,6 +61,23 @@ Ship::gen()
     }
     assert(descr);
     return gen(descr);
+}
+
+control::Ship*
+Ship::genEquiped()
+{
+    control::Ship* ship = gen();
+
+    ship->manage(builder::item::Drive::gen());
+    ship->manage(builder::item::Bak::gen());
+    ship->manage(builder::item::Protector::gen());
+    ship->manage(builder::item::Scaner::gen());
+    ship->manage(builder::item::Radar::gen());
+    ship->manage(builder::item::Grapple::gen());
+    ship->manage(builder::item::Lazer::gen());
+    ship->load(builder::item::Rocket::gen());
+
+    return ship;
 }
 
 control::Ship*

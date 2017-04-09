@@ -18,6 +18,8 @@
 
 #include "Base.hpp"
 
+//#include <core/manager/EntityManager.hpp>
+
 #include <ceti/Logger.hpp>
 #include <ceti/StringUtils.hpp>
 
@@ -55,11 +57,20 @@ Base::Base(descriptor::Base* descr, model::Base* model)
     :
       m_descriptor_base(descr)
     , m_model_base(model)
-
 {}
 
-Base::~Base()
-{}
+bool
+Base::isAlive() const
+{
+    return model()->isAlive();
+}
+
+void
+Base::die()
+{
+    model()->setAlive(false);
+    __putChildrenToGarbage();
+}
 
 //void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{

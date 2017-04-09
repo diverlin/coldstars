@@ -125,6 +125,7 @@ bool RocketBullet::CheckTarget() const
 
 void RocketBullet::collisionEvent(bool show_effect)
 {
+    model()->setAlive(false);
     model()->immidiateKill();
 }
 
