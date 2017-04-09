@@ -77,6 +77,8 @@ public:
     void loadRequest() { m_load_request = true; }
 
     void add(control::Base*);
+    void remove(control::Base*);
+
     void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 
     control::Base* get(int_t) const;
