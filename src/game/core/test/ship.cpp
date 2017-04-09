@@ -460,5 +460,6 @@ TEST(ship, erase)
         EXPECT_TRUE(entities.contain(item->id()));
     }
 
+    garbage.erase();
 }
 

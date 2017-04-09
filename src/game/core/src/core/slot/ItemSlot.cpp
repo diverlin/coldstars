@@ -100,14 +100,14 @@ Item::~Item()
 //    LOG("___::~ItemSlot("+std::to_string(id())+")");
 }  
 
-/* virtual */  
-void Item::putChildrenToGarbage() const
-{
-    assert(false);
-//    if (m_item) {
-//       manager::EntityManager::get().addToGarbage(m_item);
-//    }
-}
+///* virtual */
+//void Item::putChildrenToGarbage() const
+//{
+//    assert(false);
+////    if (m_item) {
+////       manager::EntityManager::get().addToGarbage(m_item);
+////    }
+//}
 
 bool Item::__checkItemInsertion(control::Item* item) const
 {

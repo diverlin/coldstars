@@ -59,6 +59,12 @@ Base::Base(descriptor::Base* descr, model::Base* model)
     , m_model_base(model)
 {}
 
+void
+Base::setId(int_t id) { model()->setId(id); }
+
+int_t
+Base::id() { return model()->id(); }
+
 bool
 Base::isAlive() const
 {

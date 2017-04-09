@@ -119,7 +119,7 @@ public:
 
     int_t genId();
 
-    void clear();
+//    void clear();
 
 private:
 //    bool m_save_request = false;

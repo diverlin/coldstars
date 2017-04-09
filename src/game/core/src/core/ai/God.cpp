@@ -114,7 +114,7 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded() == true) {
-        manager::Garbage::get().clear();
+        manager::Garbage::get().erase();
 
         //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
         //            bool load_event = manager::EntityManager::get().UpdateLoadRequest();
