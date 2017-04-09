@@ -63,16 +63,16 @@ class Rocket;
 
 namespace manager {
 
-class EntityManager
+class Entity
 {
 private:
-    EntityManager() = default;
-    EntityManager(const EntityManager&) = delete;
-    ~EntityManager() = default;
-    EntityManager& operator=(const EntityManager&) = delete;
+    Entity() = default;
+    Entity(const Entity&) = delete;
+    ~Entity() = default;
+    Entity& operator=(const Entity&) = delete;
 
 public:
-    static EntityManager& get();
+    static Entity& get();
 
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }

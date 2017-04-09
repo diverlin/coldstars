@@ -40,7 +40,7 @@ WormHole::__genTemplate(descriptor::WormHole* descr)
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-    manager::EntityManager::get().add(wormhole);
+    manager::Entity::get().add(wormhole);
     
     return wormhole;
 } 

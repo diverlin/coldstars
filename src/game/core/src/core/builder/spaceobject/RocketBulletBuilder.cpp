@@ -44,7 +44,7 @@ Rocket::__genTemplate(descriptor::RocketBullet* descr)
     control::RocketBullet* bullet = new control::RocketBullet(descr, model);
     assert(bullet);
 
-    manager::EntityManager::get().add(bullet);
+    manager::Entity::get().add(bullet);
 
     return bullet;
 }

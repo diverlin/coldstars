@@ -54,40 +54,40 @@
 
 TEST(communication, create_starsystem)
 {
-    int_t ob_id = manager::EntityManager::get().genId();
+    int_t ob_id = manager::Entity::get().genId();
 
     descriptor::StarSystem* descriptor = descriptor::genStarSystem();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_STARSYSTEM, creation.data()));
 
-    control::StarSystem* starsystem = manager::EntityManager::get().starsystem(ob_id);
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(ob_id);
     EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
 }
 
 TEST(communication, create_ship)
 {
-    int_t ob_id = manager::EntityManager::get().genId();
+    int_t ob_id = manager::Entity::get().genId();
 
     descriptor::Ship* descriptor = descriptor::genShip();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_SHIP, creation.data()));
 
-    control::Ship* ship = manager::EntityManager::get().ship(ob_id);
+    control::Ship* ship = manager::Entity::get().ship(ob_id);
     EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
 }
 
 TEST(communication, create_bak)
 {
-    int_t ob_id = manager::EntityManager::get().genId();
+    int_t ob_id = manager::Entity::get().genId();
 
     descriptor::item::Bak* descriptor = descriptor::item::genBak();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_BAK, creation.data()));
 
-    control::item::Bak* bak = manager::EntityManager::get().bak(ob_id);
+    control::item::Bak* bak = manager::Entity::get().bak(ob_id);
     EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
 }
 
