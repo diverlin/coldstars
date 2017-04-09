@@ -118,18 +118,18 @@ EntityManager::clear()
     m_entities.clear();
 }
 
-void EntityManager::reg(control::Base* control)
+void EntityManager::add(control::Base* ob)
 {
-    assert(control);
-    if (control->id() == NONE) {
-        control->setId(m_idGenerator.nextId());
+    assert(ob);
+    if (ob->id() == NONE) {
+        ob->setId(m_idGenerator.nextId());
     }
 
-    if (m_entities.count(control->id()) == 1) {
-        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(control->id()) + " which already exists, descriptor = " + std::to_string(control->descriptor()->id()));
+    if (m_entities.count(ob->id()) == 1) {
+        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(ob->id()) + " which already exists, descriptor = " + std::to_string(ob->descriptor()->id()));
     }
 
-    m_entities.insert(std::make_pair(control->id(), control));
+    m_entities.insert(std::make_pair(ob->id(), ob));
 }
 
 control::Base*
