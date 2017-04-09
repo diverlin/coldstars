@@ -73,16 +73,15 @@ private:
 public:
     static EntityManager& get();
 
-    void saveRequest() { m_save_request = true; }
-    void loadRequest() { m_load_request = true; }
+//    void saveRequest() { m_save_request = true; }
+//    void loadRequest() { m_load_request = true; }
 
     void add(control::Base*);
     void remove(control::Base*);
 
     void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 
-    control::Base* get(int_t) const;
-    control::Item* getItemBase(int_t) const;
+    control::Base* base(int_t) const;
 
     control::StarSystem* starsystem(int_t id) const;
     control::HyperSpace* hyperspace() const;
@@ -113,8 +112,8 @@ public:
 
     Player* player() const;
 
-    bool updateSaveRequest();
-    bool updateLoadRequest();
+//    bool updateSaveRequest();
+//    bool updateLoadRequest();
 
     void addToGarbage(control::Base*);
     void clearGarbage();
@@ -124,16 +123,16 @@ public:
     void clear();
 
 private:
-    bool m_save_request = false;
-    bool m_load_request = false;
+//    bool m_save_request = false;
+//    bool m_load_request = false;
 
     std::map<int_t, control::Base*> m_entities;
     std::map<int_t, control::Base*> m_garbage;
 
     control::HyperSpace* m_hyperspace = nullptr;
 
-    void saveEvent(const std::string&);
-    void loadEvent(const std::string&);
+//    void saveEvent(const std::string&);
+//    void loadEvent(const std::string&);
 
     static IdGenerator m_idGenerator;
 };
