@@ -84,9 +84,9 @@ public:
     Base(descriptor::Base*, model::Base*);
     virtual ~Base() = default;
 
-    void setId(int_t id) { m_model_base->setId(id); }
+    void setId(int_t id);
 
-    int_t id() { return model()->id(); }
+    int_t id();
     bool isAlive() const;
     void die();
 

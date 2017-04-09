@@ -42,7 +42,7 @@ public:
 
     bool contain(int_t id) const { return (m_entities.count(id) == 1); }
     void add(control::Base*);
-    void clear();
+    void erase();
 
 private:
     std::map<int_t, control::Base*> m_entities;

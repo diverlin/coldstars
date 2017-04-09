@@ -111,14 +111,14 @@ Entities::genId() {
     return m_idGenerator.nextId();
 }
 
-void
-Entities::clear()
-{
-    for (auto it: m_entities) {
-        delete it.second;
-    }
-    m_entities.clear();
-}
+//void
+//Entities::clear()
+//{
+//    for (auto it: m_entities) {
+//        delete it.second;
+//    }
+//    m_entities.clear();
+//}
 
 void Entities::add(control::Base* ob)
 {
@@ -321,7 +321,8 @@ Player* Entities::player() const
 
 void Entities::remove(control::Base* ob)
 {
-    if (auto it = m_entities.find(ob->id()) != m_entities.end()) {
+    std::map<int_t, control::Base*>::iterator it = m_entities.find(ob->id());
+    if (it != m_entities.end()) {
         m_entities.erase(it);
     } else {
         ceti::abort("attempt to remove not existed id = " + std::to_string(ob->id()));

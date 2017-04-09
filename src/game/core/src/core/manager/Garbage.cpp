@@ -45,12 +45,14 @@ void Garbage::add(control::Base* ob)
     m_entities.insert(std::make_pair(ob->id(), ob));
 }
 
-void Garbage::clear()
+void Garbage::erase()
 {
-    for(auto pair: m_entities) {
-        manager::Entities::get().remove(pair.second);
-        delete pair.second->model();
-        delete pair.second;
+    for(const auto& pair: m_entities) {
+        control::Base* ob = pair.second;
+        Entities::get().remove(ob);
+        model::Base* model = ob->model();
+        delete model;
+        delete ob;
     }
     m_entities.clear();
 }

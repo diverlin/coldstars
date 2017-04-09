@@ -85,7 +85,7 @@ public:
     entity::Type subtype() const { return m_subtype; }
     int position() const { return m_position; }
 
-    virtual void putChildrenToGarbage() const;
+//    virtual void putChildrenToGarbage() const;
 
     int hitProbability() const { return m_hitProbability; }
 

@@ -35,7 +35,7 @@ class Ship : public Vehicle
 {
 public:
     Ship(descriptor::Ship*, model::Ship*);
-    virtual ~Ship();
+    ~Ship() override final;
 
     virtual void UpdateInSpace(int, bool) override final;
 

@@ -118,7 +118,7 @@ public:
 
 public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
-    virtual ~Vehicle();
+    ~Vehicle() override;
 
     const complex::Drive& driveComplex() const { return m_drive_complex; }
 

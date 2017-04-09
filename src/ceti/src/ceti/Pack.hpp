@@ -81,6 +81,18 @@ public:
         return false;
     }
 
+    ceti::pack<T> operator<<(T val) {
+        add(val);
+        return *this;
+    }
+
+    ceti::pack<T> operator<<(const ceti::pack<T>& pack) {
+        for(const T& val: pack) {
+            add(val);
+        }
+        return *this;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>
