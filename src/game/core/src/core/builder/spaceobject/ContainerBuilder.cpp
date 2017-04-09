@@ -67,7 +67,7 @@ Container::__genTemplate(descriptor::Container* descr)
     control::Container* container = new control::Container(descr, model);
     assert(container);
 
-    EntityManager::get().add(container);
+    manager::EntityManager::get().add(container);
     return container;
 }
 

@@ -64,7 +64,7 @@ void Store::putChildrenToGarbage() const
 {
     assert(false);
     //    for(unsigned int i=0; i<item_slot_vec.size(); i++) {
-    //       EntityManager::get().addToGarbage(item_slot_vec[i]);
+    //       manager::EntityManager::get().addToGarbage(item_slot_vec[i]);
     //    }
 }
 
@@ -171,7 +171,7 @@ void Store::sellVehicle(Npc* npc, slot::Vehicle* vehicle_slot, int price)
 
 //void Store::ResolveData()
 //{
-//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this);
+//    //((Kosmoport*)manager::EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this);
 //}
 
 //void Store::Save(boost::property_tree::ptree& save_ptree) const

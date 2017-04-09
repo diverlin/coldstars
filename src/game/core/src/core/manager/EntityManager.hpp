@@ -61,6 +61,7 @@ class Rocket;
 
 } // namespace control
 
+namespace manager {
 
 class EntityManager
 {
@@ -133,4 +134,5 @@ private:
     static IdGenerator m_idGenerator;
 };
 
+} // namespace manager
 

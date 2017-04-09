@@ -51,7 +51,7 @@ Npc::__createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, int_t
     control::Npc* npc = new control::Npc(id, subtype_id, subsubtype_id);
     assert(npc);
 
-    EntityManager::get().add(npc);
+    manager::EntityManager::get().add(npc);
 
     return npc;
 }

@@ -55,7 +55,7 @@ Goverment::~Goverment()
 
 //void Goverment::ResolveData()
 //{
-//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
+//    //((Kosmoport*)manager::EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this);
 //}
 
 //void Goverment::Save(boost::property_tree::ptree& save_ptree) const

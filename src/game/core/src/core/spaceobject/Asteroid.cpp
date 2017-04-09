@@ -177,7 +177,7 @@ void Asteroid::_postDeathUniqueEvent(bool show_effect)
 //{
 //    LOG(" Asteroid("+std::to_string(id())+")::ResolveData");
     
-//    ((Starsystem*)EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
+//    ((Starsystem*)manager::EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
 //}
 
 ///* virtual override final */

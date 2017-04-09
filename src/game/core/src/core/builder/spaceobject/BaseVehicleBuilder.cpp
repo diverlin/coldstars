@@ -146,7 +146,7 @@ void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 //    {
 //        BakEquipment* bak_equipment = core::global::get().bakBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(bak_equipment) == false) {
-//           EntityManager::get().addToGarbage(bak_equipment);
+//           manager::EntityManager::get().addToGarbage(bak_equipment);
 //        }
 //        break;
 //    }
@@ -154,7 +154,7 @@ void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 //    {
 //        DriveEquipment* bak_equipment = core::global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
-//           EntityManager::get().addToGarbage(drive_equipment);
+//           manager::EntityManager::get().addToGarbage(drive_equipment);
 //        }
 //        break;
 //    }
@@ -162,7 +162,7 @@ void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 //    {
 //        DriveEquipment* bak_equipment = core::global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
-//           EntityManager::get().addToGarbage(drive_equipment);
+//           manager::EntityManager::get().addToGarbage(drive_equipment);
 //        }
 //        break;
 //    }

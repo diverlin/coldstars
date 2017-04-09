@@ -49,11 +49,11 @@ void NatureLand::putChildrenToGarbage() const
 {
     assert(false);
 //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++) {
-//       EntityManager::get().addToGarbage(VEHICLE_vec[i]);
+//       manager::EntityManager::get().addToGarbage(VEHICLE_vec[i]);
 //    }
 
 //    for (unsigned int i=0; i<item_slot_vec.size(); i++) {
-//       EntityManager::get().addToGarbage(item_slot_vec[i]);
+//       manager::EntityManager::get().addToGarbage(item_slot_vec[i]);
 //    }
 }
 

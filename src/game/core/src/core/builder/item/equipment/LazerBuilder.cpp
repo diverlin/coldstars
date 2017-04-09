@@ -65,7 +65,7 @@ Lazer::__genTemplate(descriptor::item::Lazer* descr, int_t ob_id)
     assert(model);
 
     control::item::Lazer* lazer = new control::item::Lazer(descr, model);
-    EntityManager::get().add(lazer);
+    manager::EntityManager::get().add(lazer);
     return lazer;
 } 
 

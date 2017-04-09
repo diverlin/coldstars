@@ -98,26 +98,26 @@ StarSystem::__actualizeModel()
 //    std::vector<int_t> planets() const { return m_planets; }
 
     for(int_t id: model()->stars()) {
-        add(EntityManager::get().star(id));
+        add(manager::EntityManager::get().star(id));
     }
     for(int_t id: model()->planets()) {
-        add(EntityManager::get().planet(id));
+        add(manager::EntityManager::get().planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(EntityManager::get().asteroid(id));
+        add(manager::EntityManager::get().asteroid(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(EntityManager::get().ship(id));
+        add(manager::EntityManager::get().ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(EntityManager::get().satellite(id));
+        add(manager::EntityManager::get().satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(EntityManager::get().spacestation(id));
+        add(manager::EntityManager::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        add(EntityManager::get().container(id));
+        add(manager::EntityManager::get().container(id));
     }
 
 //    __actualizeItems();
@@ -139,13 +139,13 @@ StarSystem::star() const
 void StarSystem::putChildrenToGarbage() const
 {    
     assert(false);
-    //    for(unsigned int i=0; i<m_stars.size(); i++)      { EntityManager::get().addToGarbage(m_stars[i]->model()); }
-//    for(unsigned int i=0; i<m_planets.size(); i++)    { EntityManager::get().addToGarbage(m_planets[i]->model()); }
-//    for(unsigned int i=0; i<m_asteroids.size(); i++)  { EntityManager::get().addToGarbage(m_asteroids[i]->model()); }
-    //for(unsigned int i=0; i<m_bullets.size(); i++)    { EntityManager::get().addToGarbage(m_bullets[i]); }
-    //for(unsigned int i=0; i<m_containers.size(); i++) { EntityManager::get().addToGarbage(m_containers[i]); }
-    //for(unsigned int i=0; i<m_blackholes.size(); i++) { EntityManager::get().addToGarbage(m_blackholes[i]); }
-    //for(unsigned int i=0; i<m_vehicles.size(); i++)   { EntityManager::get().addToGarbage(m_vehicles[i]); }
+    //    for(unsigned int i=0; i<m_stars.size(); i++)      { manager::EntityManager::get().addToGarbage(m_stars[i]->model()); }
+//    for(unsigned int i=0; i<m_planets.size(); i++)    { manager::EntityManager::get().addToGarbage(m_planets[i]->model()); }
+//    for(unsigned int i=0; i<m_asteroids.size(); i++)  { manager::EntityManager::get().addToGarbage(m_asteroids[i]->model()); }
+    //for(unsigned int i=0; i<m_bullets.size(); i++)    { manager::EntityManager::get().addToGarbage(m_bullets[i]); }
+    //for(unsigned int i=0; i<m_containers.size(); i++) { manager::EntityManager::get().addToGarbage(m_containers[i]); }
+    //for(unsigned int i=0; i<m_blackholes.size(); i++) { manager::EntityManager::get().addToGarbage(m_blackholes[i]); }
+    //for(unsigned int i=0; i<m_vehicles.size(); i++)   { manager::EntityManager::get().addToGarbage(m_vehicles[i]); }
 }      
 
 model::Npc*
@@ -1160,7 +1160,7 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
         assert(false);
         //        if ((*it)->isReadyForGarbage()) {
-        //           EntityManager::get().addToGarbage(*it);
+        //           manager::EntityManager::get().addToGarbage(*it);
         //            it = m_vehicles.erase(it);
         //        }
     }
@@ -1168,14 +1168,14 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<WormHole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage()) {
-//            EntityManager::get().addToGarbage(*it);
+//            manager::EntityManager::get().addToGarbage(*it);
 //            it = m_blackholes.erase(it);
 //        }
     }
 
     //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
     //        if ((*it)->isReadyForGarbage() == true) {
-    //           EntityManager::get().addToGarbage(*it);
+    //           manager::EntityManager::get().addToGarbage(*it);
     //            it = m_asteroids.erase(it);
     //        }
     //    }
@@ -1183,14 +1183,14 @@ void StarSystem::__manageDeadObjects_s()
     for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
         assert(false);
 //        if ((*it)->isReadyForGarbage() == true) {
-//            EntityManager::get().addToGarbage(*it);
+//            manager::EntityManager::get().addToGarbage(*it);
 //            it = m_containers.erase(it);
 //        }
     }
 
     for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
 //        if ((*it)->isReadyForGarbage() == true) {
-//            EntityManager::get().addToGarbage(*it);
+//            manager::EntityManager::get().addToGarbage(*it);
 //            it = m_bullets.erase(it);
 //        }
     }
@@ -1361,7 +1361,7 @@ void StarSystem::_postDeathUniqueEvent(bool)
 
 //void Starsystem::ResolveData()
 //{
-//    //((Sector*)EntityManager::get().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+//    //((Sector*)manager::EntityManager::get().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
 //}
 
 //void Starsystem::Save(boost::property_tree::ptree& save_ptree) const

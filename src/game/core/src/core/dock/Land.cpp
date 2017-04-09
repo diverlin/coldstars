@@ -56,7 +56,7 @@ Land::~Land()
 
 //void Land::ResolveData()
 //{
-////    Base* owner = EntityManager::get().get(data_unresolved_Land.owner_id);
+////    Base* owner = manager::EntityManager::get().get(data_unresolved_Land.owner_id);
 ////    switch(owner->type())
 ////    {
 ////        case entity::Type::PLANET:

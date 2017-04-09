@@ -249,7 +249,7 @@ void Star::_postDeathUniqueEvent(bool)
 //{
 //    LOG(" Star("+std::to_string(id())+")::ResolveData");
     
-//    ((Starsystem*)EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this);
+//    ((Starsystem*)manager::EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this);
 //}
 
 ///* virtual override final */

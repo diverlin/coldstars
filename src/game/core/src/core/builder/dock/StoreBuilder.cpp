@@ -76,7 +76,7 @@ Store::__createTemplate(descriptor::Store* descr)
     control::Store* store = new control::Store(descr, model);
     assert(store);
 
-    EntityManager::get().add(store);
+    manager::EntityManager::get().add(store);
 
     return store;
 }

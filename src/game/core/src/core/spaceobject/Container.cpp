@@ -44,44 +44,44 @@ namespace control {
 namespace {
 
 bool itemInsertHelper(slot::Item* slot, int_t id) {
-    control::Base* model_base = EntityManager::get().base(id);
+    control::Base* model_base = manager::EntityManager::get().base(id);
     descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obSubType()) {
     case entity::Type::SCANER_EQUIPMENT: {
-        item::Scaner* item = EntityManager::get().scaner(id);
+        item::Scaner* item = manager::EntityManager::get().scaner(id);
         return slot->insert(item);
     }
     case entity::Type::DRIVE_EQUIPMENT: {
-        item::Drive* item = EntityManager::get().drive(id);
+        item::Drive* item = manager::EntityManager::get().drive(id);
         return slot->insert(item);
     }
     case entity::Type::BAK_EQUIPMENT: {
-        item::Bak* item = EntityManager::get().bak(id);
+        item::Bak* item = manager::EntityManager::get().bak(id);
         return slot->insert(item);
     }
     case entity::Type::DROID_EQUIPMENT: {
-        item::Droid* item = EntityManager::get().droid(id);
+        item::Droid* item = manager::EntityManager::get().droid(id);
         return slot->insert(item);
     }
     case entity::Type::GRAPPLE_EQUIPMENT: {
-        item::Grapple* item = EntityManager::get().grapple(id);
+        item::Grapple* item = manager::EntityManager::get().grapple(id);
         return slot->insert(item);
     }
     case entity::Type::LAZER_EQUIPMENT: {
-        item::Lazer* item = EntityManager::get().lazer(id);
+        item::Lazer* item = manager::EntityManager::get().lazer(id);
         return slot->insert(item);
     }
     case entity::Type::PROTECTOR_EQUIPMENT: {
-        item::Protector* item = EntityManager::get().protector(id);
+        item::Protector* item = manager::EntityManager::get().protector(id);
         return slot->insert(item);
     }
     case entity::Type::RADAR_EQUIPMENT: {
-        item::Radar* item = EntityManager::get().radar(id);
+        item::Radar* item = manager::EntityManager::get().radar(id);
         return slot->insert(item);
     }
     case entity::Type::ROCKET_EQUIPMENT: {
-        item::Rocket* item = EntityManager::get().rocket(id);
+        item::Rocket* item = manager::EntityManager::get().rocket(id);
         return slot->insert(item);
     }
     }
@@ -216,7 +216,7 @@ void Container::updateInSpace(int time, bool show_effect)
 ///* virtual override final */
 //void Container::putChildrenToGarbage() const
 //{
-//   EntityManager::get().addToGarbage(m_itemSlot);
+//   manager::EntityManager::get().addToGarbage(m_itemSlot);
 //}
 
 //bool
@@ -320,7 +320,7 @@ void Container::updateInSpace(int time, bool show_effect)
 //{
 //    LOG(" Container("+std::to_string(id())+")::ResolveData()");
 
-//    //((Starsystem*)EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
+//    //((Starsystem*)manager::EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 //}
 
 ///* virtual override final */

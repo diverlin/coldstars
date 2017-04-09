@@ -54,40 +54,40 @@
 
 TEST(communication, create_starsystem)
 {
-    int_t ob_id = EntityManager::get().genId();
+    int_t ob_id = manager::EntityManager::get().genId();
 
     descriptor::StarSystem* descriptor = descriptor::genStarSystem();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_STARSYSTEM, creation.data()));
 
-    control::StarSystem* starsystem = EntityManager::get().starsystem(ob_id);
+    control::StarSystem* starsystem = manager::EntityManager::get().starsystem(ob_id);
     EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
 }
 
 TEST(communication, create_ship)
 {
-    int_t ob_id = EntityManager::get().genId();
+    int_t ob_id = manager::EntityManager::get().genId();
 
     descriptor::Ship* descriptor = descriptor::genShip();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_SHIP, creation.data()));
 
-    control::Ship* ship = EntityManager::get().ship(ob_id);
+    control::Ship* ship = manager::EntityManager::get().ship(ob_id);
     EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
 }
 
 TEST(communication, create_bak)
 {
-    int_t ob_id = EntityManager::get().genId();
+    int_t ob_id = manager::EntityManager::get().genId();
 
     descriptor::item::Bak* descriptor = descriptor::item::genBak();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
     core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_BAK, creation.data()));
 
-    control::item::Bak* bak = EntityManager::get().bak(ob_id);
+    control::item::Bak* bak = manager::EntityManager::get().bak(ob_id);
     EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
 }
 
@@ -101,7 +101,7 @@ TEST(communication, inject_ship)
 //    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::BOMB);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
-//    Bomb* bomb = static_cast<Bomb*>(EntityManager::get().get(descriptor.id()));
+//    Bomb* bomb = static_cast<Bomb*>(manager::EntityManager::get().get(descriptor.id()));
 //    assert(bomb);
 //    return bomb;
 //}
@@ -111,7 +111,7 @@ TEST(communication, inject_ship)
 //    auto descriptor = descriptor::Container(child_id);
 //   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-//    Container* container = static_cast<Container*>(EntityManager::get().get(descriptor.id()));
+//    Container* container = static_cast<Container*>(manager::EntityManager::get().get(descriptor.id()));
 //    assert(container);
 //    assert(container->itemSlot());
 //    assert(container->itemSlot()->item());

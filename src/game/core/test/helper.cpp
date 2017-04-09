@@ -24,7 +24,7 @@
 namespace test {
 
 void clear() {
-    EntityManager::get().clear();
+    manager::EntityManager::get().clear();
     descriptor::Manager::get().clear();
 }
 
