@@ -93,7 +93,7 @@ Asteroid::__genTemplate(descriptor::Asteroid* descr)
     control::Asteroid* asteroid = new control::Asteroid(descr, model);
     assert(asteroid);
 
-    EntityManager::get().add(asteroid);
+    manager::EntityManager::get().add(asteroid);
 
     return asteroid;
 }

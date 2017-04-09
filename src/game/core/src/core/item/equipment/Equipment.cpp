@@ -41,7 +41,7 @@ void Equipment::putChildrenToGarbage() const
 {
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
-       EntityManager::get().addToGarbage(modules_vec[i]);
+       manager::EntityManager::get().addToGarbage(modules_vec[i]);
     }
 #endif
 }

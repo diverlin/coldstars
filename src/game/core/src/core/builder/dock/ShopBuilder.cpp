@@ -59,7 +59,7 @@ Shop::__createTemplate(descriptor::Shop* descr)
     control::Shop* shop = new control::Shop(descr, model);
     assert(shop);
 
-    EntityManager::get().add(shop);
+    manager::EntityManager::get().add(shop);
     return shop;
 } 
 

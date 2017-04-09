@@ -65,7 +65,7 @@ Bak::__genTemplate(descriptor::item::Bak* descr, int_t ob_id)
 {
     model::item::Bak* model = new model::item::Bak(descr->id(), ob_id);
     control::item::Bak* bak = new control::item::Bak(descr, model);
-    EntityManager::get().add(bak);
+    manager::EntityManager::get().add(bak);
     return bak;
 }
 

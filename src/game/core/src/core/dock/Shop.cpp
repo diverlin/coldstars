@@ -118,7 +118,7 @@ Shop::buyGoods(GoodsPack* goods_pack)
     //    if (price > 0)
     //    {
     //        goods_pack->slot()->removeItem();
-    //       EntityManager::get().addToGarbage(goods_pack);
+    //       manager::EntityManager::get().addToGarbage(goods_pack);
     //    }
     
     //    return price;
@@ -257,7 +257,7 @@ void Shop::__updateExclusivePrice()
 //void Shop::ResolveData()
 //{
 ////    UpdateAllPrices();
-////    ((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this);
+////    ((Kosmoport*)manager::EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this);
 //}
 
 //void Shop::Save(boost::property_tree::ptree& save_ptree) const

@@ -79,7 +79,7 @@ Base::vehicleOwner() const {
 ////    LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
 ////    if (unresolved_BaseSlot.owner_id != NONE) {
-////        //m_owner = EntityManager::get().getEntity(unresolved_BaseSlot.owner_id);
+////        //m_owner = manager::EntityManager::get().getEntity(unresolved_BaseSlot.owner_id);
 ////    }
 //}
 

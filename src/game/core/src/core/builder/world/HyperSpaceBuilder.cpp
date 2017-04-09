@@ -68,7 +68,7 @@ HyperSpace::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
     control::HyperSpace* hyperspace = new control::HyperSpace(descr, model);
     assert(hyperspace);
 
-    EntityManager::get().setHyperSpace(hyperspace);
+    manager::EntityManager::get().setHyperSpace(hyperspace);
     return hyperspace;
 }
 

@@ -64,7 +64,7 @@ Sector::__genTemplate(descriptor::Sector* descr)
     control::Sector* sector = new control::Sector(descr, model);
     assert(sector);
 
-    EntityManager::get().add(sector);
+    manager::EntityManager::get().add(sector);
 
     return sector;
 }

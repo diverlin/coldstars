@@ -59,12 +59,12 @@ void Angar::putChildrenToGarbage() const
     assert(false);
     //    for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
     //    {
-    //       EntityManager::get().addToGarbage(vehicle_total_slot_vec[i]);
+    //       manager::EntityManager::get().addToGarbage(vehicle_total_slot_vec[i]);
     //    }
 
     //    for(unsigned int i=0; i<item_slot_vec.size(); i++)
     //    {
-    //       EntityManager::get().addToGarbage(item_slot_vec[i]);
+    //       manager::EntityManager::get().addToGarbage(item_slot_vec[i]);
     //    }
 }
 
@@ -257,7 +257,7 @@ std::string Angar::vehiclesStr() const
 
 //void Angar::ResolveData()
 //{
-//    //((Kosmoport*)EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
+//    //((Kosmoport*)manager::EntityManager::get().getEntity(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
 //}
 
 

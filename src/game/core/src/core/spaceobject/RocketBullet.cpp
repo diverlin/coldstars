@@ -334,10 +334,10 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 
 //    if (unresolved_RocketBullet_target_id != NONE)
 //    {
-//        m_Target = (SpaceObject*)EntityManager::get().getEntity(unresolved_RocketBullet_target_id);
+//        m_Target = (SpaceObject*)manager::EntityManager::get().getEntity(unresolved_RocketBullet_target_id);
 //    }
 
-//    //((Starsystem*)EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
+//    //((Starsystem*)manager::EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
 //}
 
 

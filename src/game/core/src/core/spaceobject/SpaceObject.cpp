@@ -39,10 +39,10 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* mod
 void SpaceObject::_init()
 {
     if (!m_starsystem && model()->starsystem() != NONE) {
-        m_starsystem = EntityManager::get().starsystem(model()->starsystem());
+        m_starsystem = manager::EntityManager::get().starsystem(model()->starsystem());
     }
     if (!m_parent && model()->parent() != NONE) {
-        m_parent = EntityManager::get().spaceObject(model()->parent());
+        m_parent = manager::EntityManager::get().spaceObject(model()->parent());
     }
 }
 
@@ -247,10 +247,10 @@ void SpaceObject::_checkDeath(bool show_effect)
 //    LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
 //    if (data_unresolved_SpaceObject.parent_id != NONE) {
-//        m_parent = (SpaceObject*)EntityManager::get().getEntity(data_unresolved_SpaceObject.parent_id);
+//        m_parent = (SpaceObject*)manager::EntityManager::get().getEntity(data_unresolved_SpaceObject.parent_id);
 //    }
 //    if (data_unresolved_SpaceObject.starsystem_id != NONE) {
-//        m_starsystem = (Starsystem*)EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id);
+//        m_starsystem = (Starsystem*)manager::EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id);
 //    }
 //}
 

@@ -105,7 +105,7 @@ void Item::putChildrenToGarbage() const
 {
     assert(false);
 //    if (m_item) {
-//       EntityManager::get().addToGarbage(m_item);
+//       manager::EntityManager::get().addToGarbage(m_item);
 //    }
 }
 
@@ -362,11 +362,11 @@ bool Item::swapItem(slot::Item* slot)
 ////    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
 ////    if (m_unresolved_ItemSlot.target_id != NONE) {
-////        m_target = (SpaceObject*)EntityManager::get().get(m_unresolved_ItemSlot.target_id);
+////        m_target = (SpaceObject*)manager::EntityManager::get().get(m_unresolved_ItemSlot.target_id);
 ////    }
 
 ////    if (m_unresolved_ItemSlot.subtarget_id != NONE) {
-////        m_subtarget = (slot::ItemSlot*)EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
+////        m_subtarget = (slot::ItemSlot*)manager::EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
 ////    }
 
 ////    switch(owner->typeId())

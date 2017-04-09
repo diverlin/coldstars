@@ -186,7 +186,7 @@ void Planet::_postDeathUniqueEvent(bool)
 //{
 //    LOG(" Planet("+std::to_string(id())+")::ResolveData");
 
-//    ((Starsystem*)EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
+//    ((Starsystem*)manager::EntityManager::get().getEntity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
 //}
 
 ///* virtual override final */

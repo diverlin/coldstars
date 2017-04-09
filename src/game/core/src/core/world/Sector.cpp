@@ -94,7 +94,7 @@ void Sector::putChildrenToGarbage() const
 {
     assert(false);
 //    for (unsigned int i=0; i<m_starsystems.size(); i++) {
-//       EntityManager::get().addToGarbage(m_starsystems[i]);
+//       manager::EntityManager::get().addToGarbage(m_starsystems[i]);
 //    }
 }
 
@@ -187,7 +187,7 @@ void Sector::update(int time)
 
 //void Sector::ResolveData()
 //{
-//    //((Galaxy*)EntityManager::get().get(m_data_unresolved_Sector.galaxy_id))->add(this, data_unresolved_Orientation.center);
+//    //((Galaxy*)manager::EntityManager::get().get(m_data_unresolved_Sector.galaxy_id))->add(this, data_unresolved_Orientation.center);
 //}
 
 //void Sector::Save(boost::property_tree::ptree& save_ptree) const

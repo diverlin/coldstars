@@ -116,10 +116,10 @@ void God::update()
     if (turnTimer.getTurnEnded() == true) {
         manager::Garbage::get().clear();
 
-        //            bool save_event = EntityManager::get().UpdateSaveRequest();
-        //            bool load_event = EntityManager::get().UpdateLoadRequest();
+        //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
+        //            bool load_event = manager::EntityManager::get().UpdateLoadRequest();
         //            if (load_event == true) {
-        //                player = EntityManager::get().GetPlayer();
+        //                player = manager::EntityManager::get().GetPlayer();
         //                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
         //            }
         //            if (save_event == true) {

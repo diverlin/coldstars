@@ -59,7 +59,7 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
     control::Galaxy* galaxy = new control::Galaxy(descr, model);
     assert(galaxy);
 
-    EntityManager::get().add(galaxy);
+    manager::EntityManager::get().add(galaxy);
 
     return galaxy;
 }

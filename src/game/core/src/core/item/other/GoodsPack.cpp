@@ -126,7 +126,7 @@ GoodsPack* GetNewGoodsPack(entity::Type subtype_id, int_t id)
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());
 
     assert(false);
-    //EntityManager::get().reg(goodsPack);
+    //manager::EntityManager::get().reg(goodsPack);
             
     return goodsPack;
 }

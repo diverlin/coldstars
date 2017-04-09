@@ -140,12 +140,12 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 ///* virtual override final */
 //void SpaceStation::putChildrenToGarbage() const
 //{
-//    EntityManager::get().addToGarbage(m_Land);
+//    manager::EntityManager::get().addToGarbage(m_Land);
 //    npc()->setAlive(false);
-//    EntityManager::get().addToGarbage(npc());
+//    manager::EntityManager::get().addToGarbage(npc());
     
 //    for(unsigned int i=0; i<m_slots.size(); i++) {
-//        EntityManager::get().addToGarbage(m_slots[i]);
+//        manager::EntityManager::get().addToGarbage(m_slots[i]);
 //    }
 //}
 
