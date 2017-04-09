@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <core/spaceobject/Vehicle.hpp>
+#include "Vehicle.hpp"
 
 #include <core/spaceobject/Container.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
@@ -30,8 +30,6 @@
 #include <core/slot/VehicleSlot.hpp>
 #include <core/slot/ItemSlot.hpp>
 
-#include <core/descriptor/spaceobject/Vehicle.hpp>
-
 #include <core/model/spaceobject/Vehicle.hpp>
 #include <core/model/item/equipment/ALL>
 #include <core/item/equipment/ALL>
@@ -42,18 +40,15 @@
 #include <core/item/artefacts/ProtectorArtefact.hpp>
 #endif
 
-#include <core/part/Turrel.hpp>
+//#include <core/part/Turrel.hpp>
 
 #include <core/pilot/Npc.hpp>
 
-#include <core/descriptor/item/Item.hpp>
-
 #include <core/dock/ALL>
 
+#include <core/descriptor/spaceobject/Vehicle.hpp>
+#include <core/descriptor/item/Item.hpp>
 #include <core/descriptor/dock/Land.hpp>
-
-#include <math/rand.hpp>
-#include <meti/RandUtils.hpp>
 
 namespace control {
 
