@@ -49,6 +49,8 @@
 
 #include <core/communication/MessageManager.hpp>
 
+#include <ceti/Pack.hpp>
+
 #include <gtest/gtest.h>
 
 TEST(ship, create)
@@ -430,36 +432,47 @@ TEST(ship, erase)
     auto items = ship->__items();
     auto npc = ship->npc();
 
+    // collect ids
+    ceti::pack<int_t> ids;
+
+    ids.add(ship->id());
+    if (npc) {
+        ids.add(npc->id());
+    }
+    for(auto item: items) {
+        ids.add(item->id());
+    }
+
+    // not in the garbage
+    for(int_t id: ids) {
+        EXPECT_FALSE(garbage.contain(id));
+    }
+
+    // kill
     ship->die();
     garbage.add(ship);
 
-    // check ship and it's children death
-    EXPECT_FALSE(ship->isAlive());
-    if (npc) {
-        EXPECT_FALSE(npc->isAlive());
-    }
-    for(auto item: items) {
-        EXPECT_FALSE(item->isAlive());
+    // in the garbage
+    for(int_t id: ids) {
+        EXPECT_TRUE(garbage.contain(id));
     }
 
-    // check ship and it's children death
-    EXPECT_TRUE(garbage.contain(ship->id()));
-    if (npc) {
-        EXPECT_TRUE(garbage.contain(npc->id()));
-    }
-    for(auto item: items) {
-        EXPECT_TRUE(garbage.contain(item->id()));
+    // in the entities manager
+    for(int_t id: ids) {
+        EXPECT_TRUE(entities.contain(id));
     }
 
-    // check ship and it's children is still inside manager::Entity
-    EXPECT_TRUE(entities.contain(ship->id()));
-    if (npc) {
-        EXPECT_TRUE(entities.contain(npc->id()));
-    }
-    for(auto item: items) {
-        EXPECT_TRUE(entities.contain(item->id()));
-    }
-
+    // delete objects
     garbage.erase();
+
+    // not in the garbage
+    for(int_t id: ids) {
+        EXPECT_FALSE(garbage.contain(id));
+    }
+
+    // not in the entities manager
+    for(int_t id: ids) {
+        EXPECT_FALSE(entities.contain(id));
+    }
 }
 

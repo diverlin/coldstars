@@ -41,7 +41,7 @@ class Base : public NonCopyable
 {
 public:
     Base() = default;
-    ~Base() = default;
+    virtual ~Base() = default; // virtual method is needed for proper model base deletion
     Base(const std::string& data);
     std::string data() const;
 
