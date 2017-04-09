@@ -76,7 +76,7 @@ Protector::__genTemplate(descriptor::item::Protector* descr, int_t ob_id)
 {
     model::item::Protector* model = new model::item::Protector(descr->id(), ob_id);
     control::item::Protector* protector = new control::item::Protector(descr, model);
-    manager::Entity::get().add(protector);
+    manager::Entities::get().add(protector);
     return protector;
 }
 

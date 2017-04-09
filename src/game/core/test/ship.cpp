@@ -20,9 +20,14 @@
 
 #include <core/type/PlaceType.hpp>
 #include <core/common/Global.hpp>
-
 #include <core/descriptor/Base.hpp>
+
+#include <core/manager/EntityManager.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Garbage.hpp>
+
+#include <core/pilot/Npc.hpp>
+
 #include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/builder/world/ALL>
@@ -42,7 +47,6 @@
 
 #include <core/model/item/equipment/Drive.hpp>
 
-#include <core/manager/EntityManager.hpp>
 #include <core/communication/MessageManager.hpp>
 
 #include <gtest/gtest.h>
@@ -415,5 +419,46 @@ TEST(ship, jump)
         EXPECT_EQ(place::Type::SPACE, ship->place());
         EXPECT_EQ(starsystem_jumpTo, ship->starsystem());
     }
+}
+
+TEST(ship, erase)
+{
+    auto& garbage = manager::Garbage::get();
+    auto& entities = manager::Entities::get();
+
+    auto ship = builder::Ship::genEquiped();
+    auto items = ship->__items();
+    auto npc = ship->npc();
+
+    ship->die();
+    garbage.add(ship);
+
+    // check ship and it's children death
+    EXPECT_FALSE(ship->isAlive());
+    if (npc) {
+        EXPECT_FALSE(npc->isAlive());
+    }
+    for(auto item: items) {
+        EXPECT_FALSE(item->isAlive());
+    }
+
+    // check ship and it's children death
+    EXPECT_TRUE(garbage.contain(ship->id()));
+    if (npc) {
+        EXPECT_TRUE(garbage.contain(npc->id()));
+    }
+    for(auto item: items) {
+        EXPECT_TRUE(garbage.contain(item->id()));
+    }
+
+    // check ship and it's children is still inside manager::Entity
+    EXPECT_TRUE(entities.contain(ship->id()));
+    if (npc) {
+        EXPECT_TRUE(entities.contain(npc->id()));
+    }
+    for(auto item: items) {
+        EXPECT_TRUE(entities.contain(item->id()));
+    }
+
 }
 

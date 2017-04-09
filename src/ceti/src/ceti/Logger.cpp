@@ -27,7 +27,7 @@ namespace ceti {
 
 void abort(const std::string& msg) {
     assert(false);
-    throw std::runtime_error("ERROR: \n" + msg + "Abort.");
+    throw std::runtime_error("ERROR: " + msg + "\nAbort.");
 }
 
 } // namespace ceti

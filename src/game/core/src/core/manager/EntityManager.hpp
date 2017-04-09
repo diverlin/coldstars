@@ -63,22 +63,23 @@ class Rocket;
 
 namespace manager {
 
-class Entity
+class Entities
 {
 private:
-    Entity() = default;
-    Entity(const Entity&) = delete;
-    ~Entity() = default;
-    Entity& operator=(const Entity&) = delete;
+    Entities() = default;
+    Entities(const Entities&) = delete;
+    ~Entities() = default;
+    Entities& operator=(const Entities&) = delete;
 
 public:
-    static Entity& get();
+    static Entities& get();
 
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }
 
     void add(control::Base*);
     void remove(control::Base*);
+    bool contain(int_t id) const { return (m_entities.count(id) == 1); }
 
     void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 

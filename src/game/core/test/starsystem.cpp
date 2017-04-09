@@ -21,7 +21,9 @@
 #include <core/common/Global.hpp>
 
 #include <core/descriptor/Base.hpp>
+
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <core/model/world/starsystem.hpp>
 #include <core/world/starsystem.hpp>
@@ -33,10 +35,6 @@
 #include <core/spaceobject/ALL>
 #include <core/item/equipment/ALL>
 #include <core/model/spaceobject/ALL>
-
-#include <core/pilot/Npc.hpp>
-
-#include <core/manager/EntityManager.hpp>
 
 #include <ceti/Pack.hpp>
 
@@ -369,27 +367,6 @@ TEST(starsystem, add_remove_container)
         EXPECT_EQ(place::Type::NONE, container->place());
         EXPECT_EQ(starsystem->containers().size(), container_ids.size());
         EXPECT_EQ(starsystem->model()->containers(), container_ids);
-    }
-}
-
-TEST(starsystem, create_kill)
-{
-    auto starsystem = builder::StarSystem::gen();
-    auto ship = builder::Ship::genEquiped();
-    auto items = ship->__items();
-
-    starsystem->add(ship);
-
-    ship->die();
-
-    EXPECT_FALSE(ship->isAlive());
-
-    if (auto npc = ship->npc()) {
-        EXPECT_FALSE(npc->isAlive());
-    }
-
-    for(auto item: items) {
-        EXPECT_FALSE(item->isAlive());
     }
 }
 
