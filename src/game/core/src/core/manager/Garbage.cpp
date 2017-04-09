@@ -50,8 +50,7 @@ void Garbage::erase()
     for(const auto& pair: m_entities) {
         control::Base* ob = pair.second;
         Entities::get().remove(ob);
-        model::Base* model = ob->model();
-        delete model;
+        delete ob->model();
         delete ob;
     }
     m_entities.clear();
