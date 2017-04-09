@@ -76,45 +76,45 @@ void GoodsPack::AddCommonInfo()
 }
 
  
-/*virtual*/
-void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "goods_pack." + std::to_string(id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    GoodsPack::SaveData(save_ptree, root);
-}
+///*virtual*/
+//void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "goods_pack." + std::to_string(id()) + ".";
+////    Base::SaveData(save_ptree, root);
+////    Base::SaveData(save_ptree, root);
+////    GoodsPack::SaveData(save_ptree, root);
+//}
 
-/*virtual*/
-void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    GoodsPack::LoadData(load_ptree);
-}
+///*virtual*/
+//void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Base::LoadData(load_ptree);
+////    GoodsPack::LoadData(load_ptree);
+//}
     
-/*virtual*/
-void GoodsPack::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    GoodsPack::ResolveData();
-}
+///*virtual*/
+//void GoodsPack::Resolve()
+//{
+////    Base::ResolveData();
+////    Base::ResolveData();
+////    GoodsPack::ResolveData();
+//}
 
-void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START");
-}
+//void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    LOG(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START");
+//}
          
-void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START");
-}
+//void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+////    LOG(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START");
+//}
 
-void GoodsPack::ResolveData()
-{
-//    LOG(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START");
-}
+//void GoodsPack::ResolveData()
+//{
+////    LOG(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START");
+//}
 
 
 GoodsPack* GetNewGoodsPack(entity::Type subtype_id, int_t id)

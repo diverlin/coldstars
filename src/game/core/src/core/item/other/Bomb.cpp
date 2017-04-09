@@ -55,50 +55,50 @@ void Bomb::addUniqueInfo()
 //    //info.addNameStr("armor:");       info.addValueStr(std::to_string(data_life.armor));
 }         
 
-/*virtual*/
-void Bomb::Save(boost::property_tree::ptree& save_ptree) const
-{
-//    std::string root = "bomb." + std::to_string(model()->id()) + ".";
-//    Base::SaveData(save_ptree, root);
-//    Base::SaveData(save_ptree, root);
-//    Bomb::SaveData(save_ptree, root);
-}
+///*virtual*/
+//void Bomb::Save(boost::property_tree::ptree& save_ptree) const
+//{
+////    std::string root = "bomb." + std::to_string(model()->id()) + ".";
+////    Base::SaveData(save_ptree, root);
+////    Base::SaveData(save_ptree, root);
+////    Bomb::SaveData(save_ptree, root);
+//}
 
-/*virtual*/
-void Bomb::Load(const boost::property_tree::ptree& load_ptree)
-{
-//    Base::LoadData(load_ptree);
-//    Base::LoadData(load_ptree);
-//    LoadData(load_ptree);
-}
+///*virtual*/
+//void Bomb::Load(const boost::property_tree::ptree& load_ptree)
+//{
+////    Base::LoadData(load_ptree);
+////    Base::LoadData(load_ptree);
+////    LoadData(load_ptree);
+//}
     
-/*virtual*/
-void Bomb::Resolve()
-{
-//    Base::ResolveData();
-//    Base::ResolveData();
-//    Bomb::ResolveData();
-}
+///*virtual*/
+//void Bomb::Resolve()
+//{
+////    Base::ResolveData();
+////    Base::ResolveData();
+////    Bomb::ResolveData();
+//}
 
-void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-//    LOG(" Bomb::SaveData()  id=" + std::to_string(model()->id()) + " START");
+//void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+////    LOG(" Bomb::SaveData()  id=" + std::to_string(model()->id()) + " START");
     
-//    save_ptree.put(root+"damage", m_damage);
-//    save_ptree.put(root+"radius", m_radius);
-}
+////    save_ptree.put(root+"damage", m_damage);
+////    save_ptree.put(root+"radius", m_radius);
+//}
          
-void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-//    LOG(" Bomb::LoadData()  id=" + std::to_string(id()) + " START");
+//void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+////    LOG(" Bomb::LoadData()  id=" + std::to_string(id()) + " START");
     
-//    m_damage = load_ptree.get<int>("damage");
-//    m_radius = load_ptree.get<int>("radius");
-}
+////    m_damage = load_ptree.get<int>("damage");
+////    m_radius = load_ptree.get<int>("radius");
+//}
 
-void Bomb::ResolveData()
-{
-//    LOG(" Bomb::ResolveData()  id=" + std::to_string(model()->id()) + " START");
-}
+//void Bomb::ResolveData()
+//{
+////    LOG(" Bomb::ResolveData()  id=" + std::to_string(model()->id()) + " START");
+//}
 
 

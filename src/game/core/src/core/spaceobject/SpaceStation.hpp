@@ -62,7 +62,7 @@ private:
     //        void UpdateRenderStuff_2D();
     //        virtual void UpdateInfo() override final;
 
-    virtual void putChildrenToGarbage() const override final;
+    void __putChildrenToGarbage() const override final;
 };
 
 } // namespace control

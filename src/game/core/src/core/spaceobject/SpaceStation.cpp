@@ -54,17 +54,11 @@ SpaceStation::~SpaceStation()
     LOG("___::~SpaceStation("+std::to_string(model()->id())+")");
 }
 
-/* virtual override final */
-void SpaceStation::putChildrenToGarbage() const
+void SpaceStation::__putChildrenToGarbage() const
 {
-    assert(false);
-//    EntityManager::get().addToGarbage(m_innerLand);
-//    npc()->setAlive(false);
-//    EntityManager::get().addToGarbage(npc());
-
-//    for(unsigned int i=0; i<m_slots.size(); i++) {
-//        EntityManager::get().addToGarbage(m_slots[i]);
-//    }
+    EntityManager::get().addToGarbage(m_innerLand);
+    _putNpcToGarbage();
+    _putItemsToGarbage();
 }
 
 void SpaceStation::bindLand(Land* land)

@@ -36,9 +36,6 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* mod
     _init();
 }
 
-SpaceObject::~SpaceObject()
-{}
-
 void SpaceObject::_init()
 {
     if (!m_starsystem && model()->starsystem() != NONE) {
@@ -91,8 +88,9 @@ void SpaceObject::hit(int damage, SpaceObject* agressor)
 
 void SpaceObject::killSilently()
 {
-    model()->setIsAlive(false);
-    model()->setGarbageReady(true);
+    model()->setAlive(false);
+
+    //model()->setGarbageReady(true);
 }
 
 void SpaceObject::_checkDeath(bool show_effect)
@@ -100,7 +98,7 @@ void SpaceObject::_checkDeath(bool show_effect)
     if (model()->isDying()) {
         model()->setDyingTime(model()->dyingTime() - 1);
         if (model()->dyingTime() < 0) {
-            model()->setIsAlive(false);
+            model()->setAlive(false);
             if (!model()->garbageReady()) {
                 _postDeathUniqueEvent(show_effect);
                 model()->setGarbageReady(true);

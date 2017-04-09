@@ -24,7 +24,6 @@
 
 struct LifeData
 {
-    bool is_alive = true;
     bool is_dying = false;
     int armor = 1;
     int life_time = 0;
@@ -38,7 +37,6 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & is_alive;
         ar & is_dying;
         ar & armor;
         ar & life_time;

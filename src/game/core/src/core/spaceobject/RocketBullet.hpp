@@ -127,8 +127,6 @@ private:
 
     //        virtual void UpdateInfo() override final;
 
-    virtual void putChildrenToGarbage() const override final {}
-
     bool CheckTarget() const;
 };
 

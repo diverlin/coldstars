@@ -125,6 +125,19 @@ Vehicle::~Vehicle()
     m_slots.clear();
 }
 
+ceti::pack<control::Item*>
+Vehicle::__items() const {
+    ceti::pack<control::Item*> items;
+    for(auto pair: m_slots) {
+        auto slot = pair.second;
+        if (slot->item()) {
+            items.add(slot->item());
+        }
+    }
+
+    return items;
+}
+
 void
 Vehicle::dock(SpaceObject* target) {
     navigator().setTarget(target, complex::Drive::Action::DOCKING);
@@ -310,17 +323,26 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
 //    }
 }
 
-/* virtual override */
-void Vehicle::putChildrenToGarbage() const
+void Vehicle::__putChildrenToGarbage() const
 {
-    assert(false);
-//    m_npc->setAlive(false);
-//    EntityManager::get().addToGarbage(m_npc);
-
-//    for(slot::ItemSlot* slot: m_slots) {
-//        EntityManager::get().addToGarbage(slot);
-//    }
+    _putNpcToGarbage();
+    _putItemsToGarbage();
 }
+
+void Vehicle::_putNpcToGarbage() const
+{
+    if (m_npc) {
+        EntityManager::get().addToGarbage(m_npc);
+    }
+}
+
+void Vehicle::_putItemsToGarbage() const
+{
+    for(auto item: __items()) {
+        EntityManager::get().addToGarbage(item);
+    }
+}
+
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {

@@ -198,9 +198,9 @@ public:
     //        void DrawOrbits(const jeti::Renderer&);
     //        void DrawPath();
 
-    void Save(boost::property_tree::ptree&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
+//    void Save(boost::property_tree::ptree&) const;
+//    void Load(const boost::property_tree::ptree&);
+//    void Resolve();
 
     // poor
 
@@ -291,9 +291,9 @@ private:
     void __asteroidCollision_s(bool);
     void __externalForcesAffection_s(bool);
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
     void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
 

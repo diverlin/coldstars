@@ -114,11 +114,11 @@ Container::item() const
     return m_itemSlot->item();
 }
 
-/* virtual override final */
-void Container::putChildrenToGarbage() const
+void Container::__putChildrenToGarbage() const
 {
-    assert(false);
-//   EntityManager::get().addToGarbage(m_itemSlot);
+    if (auto item = m_itemSlot->item()) {
+        EntityManager::get().addToGarbage(item);
+    }
 }
 
 bool

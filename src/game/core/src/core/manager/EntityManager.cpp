@@ -118,46 +118,19 @@ EntityManager::clear()
     m_entities.clear();
 }
 
-//void EntityManager::reg(core::Base* entity)
-//{
-//    assert(entity);
-//    if (entity->id() == NONE) {
-//        //assert(false);
-//        // TODO fixme
-//        entity->setId(core::global::get().idGenerator().nextId());
-//    }
-//    LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
-
-//    if (m_entities_map.find(entity->id()) != m_entities_map.end()) {
-//        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id()) + " which already exists, type = " + entity->dataTypeStr());
-//    }
-
-//    m_entities_map.insert(std::make_pair(entity->id(), entity));
-//}
-
 void EntityManager::reg(control::Base* control)
 {
     assert(control);
     if (control->id() == NONE) {
         control->setId(m_idGenerator.nextId());
     }
-    //LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
-    if (m_entities.find(control->id()) != m_entities.end()) {
-        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(control->id()) + " which already exists, descriptor = " + std::to_string(control->descriptor()->id()));
+    if (m_entities.count(control->id()) == 1) {
+        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(control->id()) + " which already exists, descriptor = " + std::to_string(control->descriptor()->id()));
     }
 
     m_entities.insert(std::make_pair(control->id(), control));
 }
-
-//core::Base* EntityManager::getEntity(int_t id) const
-//{
-//    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-//    std::map<int_t, core::Base*>::const_iterator slice = m_entities_map.find(id);
-//    assert(slice->second);
-//    LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
-//    return slice->second;
-//}
 
 control::Base*
 EntityManager::get(int_t id) const
@@ -442,19 +415,14 @@ bool EntityManager::updateLoadRequest()
 //    entity->putChildrenToGarbage();
 //}
 
-void EntityManager::addToGarbage(control::Base* control)
+void EntityManager::addToGarbage(control::Base* ob)
 {
-    //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-    assert(false);
-//    for (unsigned int i=0; i<m_entitiesGarbage.size(); i++) {
-//        if (m_entitiesGarbage[i]->id() == control->id()) {
-//            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
-//            exit(1);
-//        }
-//    }
+    ob->die();
 
-    m_garbage.push_back(control);
-    //control->putChildrenToGarbage();
+    if (m_garbage.count(ob->id()) == 1) {
+        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(ob->id()) + " which already exists, descriptor = " + std::to_string(ob->descriptor()->id()));
+    }
+    m_garbage.insert(std::make_pair(ob->id(), ob));
 }
 
 void EntityManager::clearGarbage()
