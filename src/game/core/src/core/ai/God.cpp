@@ -49,7 +49,7 @@
 
 #include <math/rand.hpp>
 
-#include <core/manager/EntityManager.hpp> // garbage
+#include <core/manager/Garbage.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <meti/RandUtils.hpp>
@@ -114,7 +114,7 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded() == true) {
-        EntityManager::get().clearGarbage();
+        manager::Garbage::get().clear();
 
         //            bool save_event = EntityManager::get().UpdateSaveRequest();
         //            bool load_event = EntityManager::get().UpdateLoadRequest();

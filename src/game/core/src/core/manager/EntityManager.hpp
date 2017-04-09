@@ -115,9 +115,6 @@ public:
 //    bool updateSaveRequest();
 //    bool updateLoadRequest();
 
-    void addToGarbage(control::Base*);
-    void clearGarbage();
-
     int_t genId();
 
     void clear();
@@ -127,7 +124,6 @@ private:
 //    bool m_load_request = false;
 
     std::map<int_t, control::Base*> m_entities;
-    std::map<int_t, control::Base*> m_garbage;
 
     control::HyperSpace* m_hyperspace = nullptr;
 
