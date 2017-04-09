@@ -126,7 +126,7 @@ void EntityManager::add(control::Base* ob)
     }
 
     if (m_entities.count(ob->id()) == 1) {
-        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(ob->id()) + " which already exists, descriptor = " + std::to_string(ob->descriptor()->id()));
+        ceti::abort("attempt to registry id =" + std::to_string(ob->id()) + " which already exists");
     }
 
     m_entities.insert(std::make_pair(ob->id(), ob));
@@ -338,7 +338,7 @@ void EntityManager::remove(control::Base* ob)
     if (auto it = m_entities.find(ob->id()) != m_entities.end()) {
         m_entities.erase(it);
     } else {
-        ceti::abort("attempt to remove not existed id");
+        ceti::abort("attempt to remove not existed id = " + std::to_string(ob->id()));
     }
 }
 
@@ -417,8 +417,7 @@ void EntityManager::addToGarbage(control::Base* ob)
     ob->die();
 
     if (m_garbage.count(ob->id()) == 1) {
-        assert(false);
-        throw std::runtime_error("ERROR: attempt to registry id =" + std::to_string(ob->id()) + " which already exists, descriptor = " + std::to_string(ob->descriptor()->id()));
+        ceti::abort("attempt to registry id =" + std::to_string(ob->id()) + " which already exists");
     }
     m_garbage.insert(std::make_pair(ob->id(), ob));
 }
