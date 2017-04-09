@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
 #include <world/starsystem.hpp>
 
 #include <dock/Kosmoport.hpp>
@@ -56,7 +56,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::__putChildrenToGarbage() const
 {
-    EntityManager::get().addToGarbage(m_innerLand);
+    manager::Garbage::get().add(m_innerLand);
     _putNpcToGarbage();
     _putItemsToGarbage();
 }

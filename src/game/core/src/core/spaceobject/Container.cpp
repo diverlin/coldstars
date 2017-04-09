@@ -26,6 +26,7 @@
 #include <common/Global.hpp>
 #include <core/model/spaceobject/Container.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
 
 #include <world/starsystem.hpp>
 
@@ -117,7 +118,7 @@ Container::item() const
 void Container::__putChildrenToGarbage() const
 {
     if (auto item = m_itemSlot->item()) {
-        EntityManager::get().addToGarbage(item);
+        manager::Garbage::get().add(item);
     }
 }
 

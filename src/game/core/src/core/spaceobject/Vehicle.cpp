@@ -17,21 +17,15 @@
 */
 
 #include <core/spaceobject/Vehicle.hpp>
-#include <core/spaceobject/Planet.hpp>
-#include <core/spaceobject/SpaceStation.hpp>
-#include <core/spaceobject/Container.hpp>
 
+#include <core/spaceobject/Container.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
-#include <world/starsystem.hpp>
-#include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <ceti/Logger.hpp>
-
-//#include <jeti/Render.hpp>
-
-//#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <core/slot/VehicleSlot.hpp>
 #include <core/slot/ItemSlot.hpp>
@@ -39,39 +33,14 @@
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 
 #include <core/model/spaceobject/Vehicle.hpp>
-#include <core/item/equipment/Rocket.hpp>
-#ifdef USE_EXTRA_EQUIPMENT
-#include <core/item/equipment/EnergizerEquipment.hpp>
-#include <core/item/equipment/FreezerEquipment.hpp>
-#endif
-#include <core/model/item/equipment/Radar.hpp>
-#include <core/model/item/equipment/Bak.hpp>
-#include <core/model/item/equipment/Protector.hpp>
-#include <core/model/item/equipment/Droid.hpp>
-#include <core/model/item/equipment/Drive.hpp>
-#include <core/model/item/equipment/Scaner.hpp>
-#include <core/model/item/equipment/Grapple.hpp>
-#include <core/model/item/equipment/Lazer.hpp>
-#include <core/model/item/equipment/Rocket.hpp>
+#include <core/model/item/equipment/ALL>
+#include <core/item/equipment/ALL>
 
-#include <core/item/equipment/Radar.hpp>
-#include <core/item/equipment/Bak.hpp>
-#include <core/item/equipment/Protector.hpp>
-#include <core/item/equipment/Droid.hpp>
-#include <core/item/equipment/Drive.hpp>
-#include <core/item/equipment/Scaner.hpp>
-#include <core/item/equipment/Grapple.hpp>
-#include <core/item/equipment/Lazer.hpp>
 #include <core/item/other/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/GravityArtefact.hpp>
 #include <core/item/artefacts/ProtectorArtefact.hpp>
 #endif
-
-//#include <client/effects/Shield.hpp>
-//#include <jeti/particlesystem/DriveEffect.hpp>
-//#include <jeti/particlesystem/ExplosionEffect.hpp>
-//#include <client/text/VerticalFlowText.hpp>
 
 #include <core/part/Turrel.hpp>
 
@@ -79,17 +48,7 @@
 
 #include <core/descriptor/item/Item.hpp>
 
-#include <core/dock/Kosmoport.hpp>
-#include <core/dock/Angar.hpp>
-#include <core/dock/Shop.hpp>
-#include <core/dock/Store.hpp>
-#include <core/dock/NatureLand.hpp>
-#include <core/dock/Land.hpp>
-
-//#include <jeti/Render.hpp>
-
-#include <core/manager/EntityManager.hpp>
-#include <core/manager/DescriptorManager.hpp>
+#include <core/dock/ALL>
 
 #include <core/descriptor/dock/Land.hpp>
 
@@ -332,14 +291,14 @@ void Vehicle::__putChildrenToGarbage() const
 void Vehicle::_putNpcToGarbage() const
 {
     if (m_npc) {
-        EntityManager::get().addToGarbage(m_npc);
+        manager::Garbage::get().add(m_npc);
     }
 }
 
 void Vehicle::_putItemsToGarbage() const
 {
     for(auto item: __items()) {
-        EntityManager::get().addToGarbage(item);
+        manager::Garbage::get().add(item);
     }
 }
 
