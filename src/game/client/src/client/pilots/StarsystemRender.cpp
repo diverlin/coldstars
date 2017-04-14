@@ -45,17 +45,9 @@
 #include <client/effects/lazerTrace.hpp>
 #include <client/text/VerticalFlowText.hpp>
 
-#include <spaceobjects/RocketBullet.hpp>
-#include <spaceobjects/Container.hpp>
-#include <spaceobjects/Star.hpp>
-#include <spaceobjects/Planet.hpp>
-#include <spaceobjects/BlackHole.hpp>
-#include <spaceobjects/Asteroid.hpp>
-#include <spaceobjects/SpaceStation.hpp>
-#include <spaceobjects/Satellite.hpp>
-#include <spaceobjects/Ship.hpp>
+#include <core/spaceobject/ALL>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 //#include <client/gui/GuiGalaxyMap.hpp>
 //#include <client/gui/GuiManager.hpp>

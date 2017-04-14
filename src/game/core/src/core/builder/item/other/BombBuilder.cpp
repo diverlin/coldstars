@@ -64,7 +64,7 @@ BombBuilder::__createInternals(Bomb* bomb, descriptor::BaseOLD* descr)
     assert(false);
     //    bomb->setDamage(descr->damage());
 //    bomb->setRadius(descr->radius());
-//    bomb->setParentSubTypeId(entity::type::CARGO_SLOT);
+//    bomb->setParentSubTypeId(entity::Type::CARGO_SLOT);
 }
 
 //void BombBuilder::write(const std::string& fpath, Bomb* bomb)

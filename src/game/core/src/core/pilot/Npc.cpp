@@ -48,7 +48,7 @@ namespace model {
 
 Npc::Npc()
 {
-//    setType(entity::type::NPC);
+//    setType(entity::Type::NPC);
 }
 
 Npc::Npc(const std::string& data)

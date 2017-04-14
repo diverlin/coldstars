@@ -101,45 +101,45 @@ RaceDescriptors::isGood(race::Type race_id) const
     
 //void TextureCollector::FillShipSubTypeList()
 //{
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R0)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R0)].size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R0)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R0)].size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R0)].size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R0)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R0)].size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R0)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R0)].size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R0)].size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R1)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R1)].size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R1)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R1)].size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R1)].size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R1)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R1)].size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R1)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R1)].size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R1)].size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R2)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R2)].size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R2)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R2)].size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R2)].size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R2)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R2)].size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R2)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R2)].size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R2)].size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R3)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R3)].size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R3)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R3)].size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R3)].size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R3)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R3)].size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R3)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R3)].size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R3)].size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R4)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R4)].size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R4)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R4)].size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R4)].size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R4)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R4)].size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R4)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R4)].size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R4)].size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R6)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R6)].size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R6)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R6)].size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R6)].size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R6)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R6)].size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R6)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R6)].size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R6)].size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 
-//    if (ship_ranger_texOb_vec[static_cast<int>(race::type::R7)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
-//    if (ship_warrior_texOb_vec[static_cast<int>(race::type::R7)].size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
-//    if (ship_trader_texOb_vec[static_cast<int>(race::type::R7)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
-//    if (ship_pirat_texOb_vec[static_cast<int>(race::type::R7)].size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
-//    if (ship_diplomat_texOb_vec[static_cast<int>(race::type::R7)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
+//    if (ship_ranger_texOb_vec[static_cast<int>(race::Type::R7)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::RANGER);
+//    if (ship_warrior_texOb_vec[static_cast<int>(race::Type::R7)].size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::WARRIOR);
+//    if (ship_trader_texOb_vec[static_cast<int>(race::Type::R7)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::TRADER);
+//    if (ship_pirat_texOb_vec[static_cast<int>(race::Type::R7)].size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::PIRAT);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(race::Type::R7)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(entity::Type::DIPLOMAT);
 //}

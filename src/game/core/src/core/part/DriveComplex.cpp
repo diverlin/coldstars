@@ -228,7 +228,7 @@ bool Drive::getDockingPermission()
 //    switch(m_target->type())
 //    {
 //        //case entity::Type::PLANET:       { return ((Planet*)m_target)->GetLand()->GetPermissionToLand(); break; }
-//        case entity::type::VEHICLE:
+//        case entity::Type::VEHICLE:
 //        {
 //            switch(m_target->subtype())
 //            {

@@ -77,12 +77,12 @@ Lazer::__createInternals(control::item::Lazer* lazer, descriptor::item::Lazer* d
     lazer->model()->setDamage(descr->damage());
     lazer->model()->setRadius(descr->radius());
 
-//    if (race_id == race::type::NONE) {
+//    if (race_id == race::Type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
 //    }
     
-//    if (tech_level == tech::type::NONE) {
-//        tech_level = tech::type::LEVEL0;
+//    if (tech_level == tech::Type::NONE) {
+//        tech_level = tech::Type::LEVEL0;
 //    }
 
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
@@ -104,7 +104,7 @@ Lazer::__createInternals(control::item::Lazer* lazer, descriptor::item::Lazer* d
 //    lazer->SetDamageOrig(damage_orig);
 //    lazer->SetRadiusOrig(radius_orig);
 //    //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-//    lazer->setParentSubTypeId(entity::type::WEAPON_SLOT);
+//    lazer->setParentSubTypeId(entity::Type::WEAPON_SLOT);
 //    lazer->setItemCommonData(common_data);
 
 //    lazer->updateProperties();

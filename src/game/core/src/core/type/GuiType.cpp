@@ -130,8 +130,8 @@ gui::type getGuiItemSlotType(entity::Type val)
         case entity::Type::ARTEFACT_SLOT4:  { return gui::type::ARTEFACT_SLOT4; break; }
 
         case entity::Type::GATE_SLOT:   { return gui::type::GATE_SLOT; break; }
-        //case entity::type::REPAIR_SLOT:   { return gui::type::REPAIR_SLOT; break; }
-        //case entity::type::CHARGE_SLOT:   { return gui::type::CHARGE_SLOT; break; }
+        //case entity::Type::REPAIR_SLOT:   { return gui::type::REPAIR_SLOT; break; }
+        //case entity::Type::CHARGE_SLOT:   { return gui::type::CHARGE_SLOT; break; }
     }
 
     return gui::type::NONE;

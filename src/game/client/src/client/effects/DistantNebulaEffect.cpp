@@ -87,8 +87,8 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     jeti::Mesh* mesh = nullptr; //MeshCollector::get().get(mesh::type::PLANE);
     assert(mesh);
     jeti::control::Material* textureOb = nullptr;
-    if (color_id == NONE)     textureOb = TextureCollector::get().getTextureByTypeId(texture::type::NEBULA_BACKGROUND);
-    else                      textureOb = TextureCollector::get().getTextureByColorId(texture::type::NEBULA_BACKGROUND, color_id);
+    if (color_id == NONE)     textureOb = TextureCollector::get().getTextureByTypeId(texture::Type::NEBULA_BACKGROUND);
+    else                      textureOb = TextureCollector::get().getTextureByColorId(texture::Type::NEBULA_BACKGROUND, color_id);
            
     float angle = meti::getRandInt(0, 360);
     float delta_angle = 0.0;

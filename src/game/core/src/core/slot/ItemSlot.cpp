@@ -219,8 +219,8 @@ void Item::updateVehiclePropetries() const
 
     case entity::Type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
 #ifdef USE_EXTRA_EQUIPMENT
-    case entity::type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
-    case entity::type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
+    case entity::Type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
+    case entity::Type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
 #endif // USE_EXTRA_EQUIPMENT
     case entity::Type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
     case entity::Type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }

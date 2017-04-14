@@ -28,10 +28,10 @@ class BaseVehicle
 {
 public:
     static void equip(Vehicle* vehicle, descriptor::Vehicle* descriptor);
-    static void equip(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
-    static void equipModules(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
-    static void equipArtefacts(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
-    static void equipBomb(Vehicle*, tech::type tech_leve = tech::type::LEVEL0);
+    static void equip(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
+    static void equipModules(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
+    static void equipArtefacts(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
+    static void equipBomb(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
 
 protected:
     static void _createSlots(Vehicle*);

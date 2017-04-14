@@ -19,7 +19,7 @@
 
 #include "Planet.hpp"
 
-#include <core/spaceobjects/Planet.hpp>
+#include <core/spaceobject/Planet.hpp>
   
 //#include <client/effects/BaseDecor.hpp>
 

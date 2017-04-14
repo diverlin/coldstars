@@ -21,15 +21,15 @@
 #include <core/common/constants.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/descriptor/Base.hpp>
-#include <core/spaceobjects/Star.hpp>
-#include <core/spaceobjects/Planet.hpp>
-#include <core/spaceobjects/Asteroid.hpp>
+#include <core/spaceobject/Star.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/Asteroid.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
-#include <core/descriptor/DescriptorManager.hpp>
 
-#include <core/descriptor/StarDescriptor.hpp>
-#include <core/descriptor/PlanetDescriptor.hpp>
-#include <core/descriptor/AsteroidDescriptor.hpp>
+#include <core/descriptor/spaceobject/Star.hpp>
+#include <core/descriptor/spaceobject/Planet.hpp>
+#include <core/descriptor/spaceobject/Asteroid.hpp>
 
 #include <client/view/ShipDrawable.hpp>
 #include <client/view/BulletDrawable.hpp>
@@ -56,7 +56,7 @@
 #include <jeti/animations/AnimationConstantRotation.hpp>
 
 #include <ceti/Collision.hpp>
-#include <ceti/descriptor/Collector.hpp>
+//#include <ceti/descriptor/Collector.hpp>
 
 
 namespace {
@@ -127,7 +127,7 @@ Space::~Space()
 {}                                    
 
 void
-Space::__updateVisible(control::Starsystem* starsystem,
+Space::__updateVisible(control::StarSystem* starsystem,
                       const meti::vec3& lookFrom,
                       const meti::vec3& lookTo,
                       float lookFar)
@@ -349,19 +349,19 @@ void Space::__add(jeti::view::BaseView* view)
     model::SpaceObject* ob = it->second;
 
     switch(ob->type()) {
-    case entity::type::STAR: {
+    case entity::Type::STAR: {
         view::Star* star = static_cast<view::Star*>(view);
         assert(star);
         m_stars.push_back(star);
         break;
     }
-    case entity::type::PLANET: {
+    case entity::Type::PLANET: {
         view::Planet* planet = static_cast<view::Planet*>(view);
         assert(planet);
         m_planets.push_back(planet);
         break;
     }
-    case entity::type::ASTEROID: {
+    case entity::Type::ASTEROID: {
         view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
         assert(asteroid);
         m_asteroids.push_back(asteroid);
@@ -745,7 +745,7 @@ void Space::__render_NEW2(jeti::Renderer& render)
 //                         bool forceDraw_orbits,
 //                         bool forceDraw_path)
 
-void Space::render(control::Starsystem* starsystem, jeti::Camera& camera)
+void Space::render(control::StarSystem* starsystem, jeti::Camera& camera)
 {   
     __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
 
