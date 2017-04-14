@@ -19,11 +19,11 @@
 
 #pragma once
 
+#include <core/type/GuiType.hpp>
+#include <ceti/Box2D.hpp>
+
 #include <map>
 #include <vector>
-
-#include <types/GuiTypes.hpp>
-#include <ceti/Box2D.hpp>
 
 class Player;
 

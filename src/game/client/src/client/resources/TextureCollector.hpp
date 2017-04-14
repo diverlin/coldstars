@@ -24,9 +24,10 @@
 #include <map>
 
 #include <client/resources/TextureDescriptor.hpp>
-#include <types/TextureTypes.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
+
+#include <type/TextureType.hpp>
+#include <type/RaceType.hpp>
+#include <type/EntityType.hpp>
 
 
 namespace jeti {

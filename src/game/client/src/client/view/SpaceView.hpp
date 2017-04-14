@@ -20,9 +20,9 @@
 
 #include <vector>
 #include <jeti/Render.hpp>
-#include <ceti/descriptor/Collector.hpp>
+//#include <ceti/descriptor/Collector.hpp>
 
-#include <world/starsystem.hpp>
+#include <core/world/starsystem.hpp>
 
 #include <map>
 
@@ -113,7 +113,7 @@ public:
 //    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
-    void render(control::Starsystem*, jeti::Camera&);
+    void render(control::StarSystem*, jeti::Camera&);
 
 private:
     /// visible entities
@@ -136,7 +136,7 @@ private:
 
     void applyConstantRotationAnimation(jeti::view::BaseView*);
 
-    void __updateVisible(control::Starsystem* starsystem,
+    void __updateVisible(control::StarSystem* starsystem,
                   const meti::vec3& lookFrom,
                   const meti::vec3& lookTo,
                   float lookFar);

@@ -20,7 +20,7 @@
 #pragma once
 
 #include <core/common/Base.hpp>
-#include <core/pilots/Show.hpp>
+#include <core/pilot/Show.hpp>
 
 #include <client/gui/Cursor.hpp>
 

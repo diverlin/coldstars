@@ -38,7 +38,7 @@ Slider::Slider()
     //subtype_id = GUI::TYPE::NONE;
     
     textureOb = GuiTextureObCollector::Instance().text_background;
-    textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::type::LAZER_EFFECT);
+    textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::Type::LAZER_EFFECT);
     
     //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE, "slide");  
     //button_map.insert(std::make_pair(GUI::BUTTON::SLIDE, slide_button));

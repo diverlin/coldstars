@@ -18,29 +18,31 @@
 
 #pragma once
 
+//#include <MyGl.hpp>
+ 
+#include <type/TextureType.hpp>
+#include <type/RaceType.hpp>
+#include <type/EntityType.hpp>
+#include <type/TechLevelType.hpp>
+
+#include <glm/glm.hpp>
+
 #include <string>
 #include <vector>
-//#include <MyGl.hpp>
-#include <glm/glm.hpp>
- 
-#include <types/TextureTypes.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
-#include <types/TechLevelTypes.hpp>
 
 struct TextureDescriptor
 {
-    texture::type type_id;
-    entity::type subtype_id;   //# warrior/trader and so on
-    race::type race_id;
-    tech::type tech_level_id;
+    texture::Type type_id;
+    entity::Type subtype_id;   //# warrior/trader and so on
+    race::Type race_id;
+    tech::Type tech_level_id;
 
     TextureDescriptor()
     :
-    type_id(texture::type::FAILBACK),
-    subtype_id(entity::type::NONE),
-    race_id(race::type::NONE),
-    tech_level_id(tech::type::NONE)
+    type_id(texture::Type::FAILBACK),
+    subtype_id(entity::Type::NONE),
+    race_id(race::Type::NONE),
+    tech_level_id(tech::Type::NONE)
     {}
 
     bool operator==(const TextureDescriptor& rhs) const

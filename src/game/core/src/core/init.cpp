@@ -45,22 +45,22 @@ void initGameStuff()
     srand(time(0));
     //GameDate::Instance().SetDate(1,1,4000);
     
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R0);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R1);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R2);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R3);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R4);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R6);
-//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::type::R7);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R0);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R1);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R2);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R3);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R4);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R6);
+//    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(race::Type::R7);
     
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R0);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R1);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R2);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R3);
-//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::type::R4);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::Type::R0);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::Type::R1);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::Type::R2);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::Type::R3);
+//    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(race::Type::R4);
     
-//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::type::R6);
-//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::type::R7);
+//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::Type::R6);
+//    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(race::Type::R7);
     
 //    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::WARRIOR);
 //    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(entity::Type::PIRAT);

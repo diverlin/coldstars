@@ -23,7 +23,7 @@
 #include <vector>
 
 namespace tech {
-enum class type {
+enum class Type {
     NONE=0,
     //
     LEVEL0,
@@ -33,14 +33,14 @@ enum class type {
 };
 } // namespace tech
 
-const std::vector<tech::type> TECH_TYPES = {
-    tech::type::LEVEL0,
-    tech::type::LEVEL1,
-    tech::type::LEVEL2,
-    tech::type::LEVEL3
+const std::vector<tech::Type> TECH_TYPES = {
+    tech::Type::LEVEL0,
+    tech::Type::LEVEL1,
+    tech::Type::LEVEL2,
+    tech::Type::LEVEL3
 };
 
-std::string to_string(tech::type);
+std::string to_string(tech::Type);
 
 
 

@@ -17,7 +17,7 @@
 */
 
 #include "Asteroid.hpp"
-#include <core/spaceobjects/Asteroid.hpp>
+#include <core/spaceobject/Asteroid.hpp>
 
 #include <jeti/Render.hpp>
 

@@ -19,23 +19,22 @@
 
 #include "TechLevelType.hpp"
 
-
-std::string to_string(tech::type techlevel_id) 
+std::string to_string(tech::Type techlevel_id)
 {
     switch(techlevel_id)
     {
-        case tech::type::NONE: { return "NONE"; break; }
+        case tech::Type::NONE: { return "NONE"; break; }
         
-        case tech::type::LEVEL0: { return "TECH0"; break; }
-        case tech::type::LEVEL1: { return "TECH1"; break; }
-        case tech::type::LEVEL2: { return "TECH2"; break; }
-        case tech::type::LEVEL3: { return "TECH3"; break; }
-        //case tech::type::L4: { return "TECH4"; break; }
-        //case tech::type::L5: { return "TECH5"; break; }
-        //case tech::type::L6: { return "TECH6"; break; }
-        //case tech::type::L7: { return "TECH7"; break; }
-        //case tech::type::L8: { return "TECH8"; break; }
-        //case tech::type::L9: { return "TECH9"; break; }
+        case tech::Type::LEVEL0: { return "TECH0"; break; }
+        case tech::Type::LEVEL1: { return "TECH1"; break; }
+        case tech::Type::LEVEL2: { return "TECH2"; break; }
+        case tech::Type::LEVEL3: { return "TECH3"; break; }
+        //case tech::Type::L4: { return "TECH4"; break; }
+        //case tech::Type::L5: { return "TECH5"; break; }
+        //case tech::Type::L6: { return "TECH6"; break; }
+        //case tech::Type::L7: { return "TECH7"; break; }
+        //case tech::Type::L8: { return "TECH8"; break; }
+        //case tech::Type::L9: { return "TECH9"; break; }
     }
     
     return "TECH_UKNOWN";

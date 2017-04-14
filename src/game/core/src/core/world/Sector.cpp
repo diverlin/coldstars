@@ -117,7 +117,7 @@ Sector::randomStarsystem(int condition_id)
 //        result = meti::getRand(m_starsystems)->model();
 //    } else {
 //        std::vector<model::Starsystem*> ss_vec;
-//        for (control::Starsystem* starsystem: m_starsystems) {
+//        for (control::StarSystem* starsystem: m_starsystems) {
 //            if (starsystem->conditionId() == condition_id) {
 //                ss_vec.push_back(starsystem->model());
 //            }

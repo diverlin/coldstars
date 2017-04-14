@@ -20,17 +20,15 @@
 #include <dock/Angar.hpp>
 #include "ButtonSingle.hpp"
 #include <common/Global.hpp>
-#include <slots/VehicleSlot.hpp>
-#include <slots/ItemSlot.hpp>
+#include <slot/VehicleSlot.hpp>
+#include <slot/ItemSlot.hpp>
 #include <item/Item.hpp>
-#include <client/resources/GuiTextureObCollector.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
-
-#include <builder/slots/ItemSlotBuilder.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/Render.hpp>
 #include <client/gui/GuiManager.hpp>

@@ -169,7 +169,7 @@ void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 //    }
 }
 
-void BaseVehicle::equip(Vehicle* vehicle, tech::type tech_level)
+void BaseVehicle::equip(Vehicle* vehicle, tech::Type tech_level)
 {
     assert(false);
 //    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
@@ -224,7 +224,7 @@ void BaseVehicle::equip(Vehicle* vehicle, tech::type tech_level)
 }
 
 #ifdef USE_MODULES
-void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, tech::type tech_level)
+void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, tech::Type tech_level)
 {
     for (unsigned int i=0; i<4; i++) 
     {     
@@ -251,7 +251,7 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, tech::type tech_level)
 #endif // USE_MODULES
 
 #ifdef USE_ARTEFACTS
-void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, tech::type tech_level)
+void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, tech::Type tech_level)
 {
     for (unsigned int i=0; i<2; i++) {
         if (vehicle->GetEmptyCargoSlot() == nullptr) {
@@ -269,7 +269,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, tech::type tech_level)
 }
 #endif // USE_ARTEFACTS
 
-void BaseVehicle::equipBomb(Vehicle* vehicle, tech::type tech_level)
+void BaseVehicle::equipBomb(Vehicle* vehicle, tech::Type tech_level)
 {
     for (unsigned int i=0; i<2; i++) {
         //vehicle->AddItemToCargoSlot(core::global::get().bombBuilder().create());

@@ -84,7 +84,7 @@ void God::createWorld(descriptor::Galaxy* descriptor)
 //        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
 //    }
 
-//    __createShips(starsystem, /*ships_num=*/20, race::type::R0);   // fake
+//    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
 }
 
 void God::update()
@@ -148,7 +148,7 @@ void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descript
     assert(false);
 //    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
 //        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
-//        race::type race_id = (race::type)meti::getRandInt((int)race::type::R6, (int)race::type::R7);
+//        race::type race_id = (race::type)meti::getRandInt((int)race::Type::R6, (int)race::Type::R7);
 //        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
 //        __createShips(starsystem, ship_num, race_id);
 //    }

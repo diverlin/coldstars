@@ -77,12 +77,12 @@ Rocket::__createInternals(control::item::Rocket* rocket, descriptor::item::Rocke
     rocket->model()->setDamage(descr->damage());
     rocket->model()->setRadius(descr->radius());
 
-//    if (race_id == race::type::NONE) {
+//    if (race_id == race::Type::NONE) {
 //        race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
 //    }
     
-//    if (tech_level == tech::type::NONE) {
-//        tech_level = tech::type::LEVEL0;
+//    if (tech_level == tech::Type::NONE) {
+//        tech_level = tech::Type::LEVEL0;
 //    }
 
 //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
@@ -118,7 +118,7 @@ Rocket::__createInternals(control::item::Rocket* rocket, descriptor::item::Rocke
 //    rocket->SetBulletData(data_bullet);
 //    rocket->SetAmmo(ammo_max_orig*0.6);
 //    //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-//    rocket->setParentSubTypeId(entity::type::WEAPON_SLOT);
+//    rocket->setParentSubTypeId(entity::Type::WEAPON_SLOT);
 //    rocket->setItemCommonData(common_data);
     
 //    rocket->updateProperties();

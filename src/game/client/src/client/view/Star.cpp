@@ -18,7 +18,7 @@
 
 #include "Star.hpp"
 
-#include <spaceobjects/Star.hpp>
+#include <core/spaceobject/Star.hpp>
 
 namespace view {
 

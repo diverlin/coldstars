@@ -20,18 +20,17 @@
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include <dock/Kosmoport.hpp>
-#include <jeti/Render.hpp>
 #include <item/Item.hpp>
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
-#include <builder/slots/ItemSlotBuilder.hpp>
 
-#include <pilots/Npc.hpp>
-#include <spaceobjects/Vehicle.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 #include "ButtonItemSlot.hpp"
 
-         
+#include <jeti/Render.hpp>
+
 GuiVehicle::GuiVehicle()
 :
 BaseGuiElement(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
@@ -56,7 +55,7 @@ m_Vehicle(nullptr)
     
     /** EQUIPMENT SLOTS */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::RADAR_SLOT), "ENTITY::RADAR_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::RADAR_SLOT), "ENTITY::RADAR_SLOT");
         
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -66,7 +65,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::SCANER_SLOT), "ENTITY::SCANER_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::SCANER_SLOT), "ENTITY::SCANER_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -76,7 +75,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::ENERGIZER_SLOT), "ENTITY::ENERGIZER_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::ENERGIZER_SLOT), "ENTITY::ENERGIZER_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -86,7 +85,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::GRAPPLE_SLOT), "ENTITY::GRAPPLE_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::GRAPPLE_SLOT), "ENTITY::GRAPPLE_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -96,7 +95,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::DROID_SLOT), "ENTITY::DROID_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::DROID_SLOT), "ENTITY::DROID_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -116,7 +115,7 @@ m_Vehicle(nullptr)
     //}
                 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::PROTECTOR_SLOT), "ENTITY::PROTECTOR_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::PROTECTOR_SLOT), "ENTITY::PROTECTOR_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -126,7 +125,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::DRIVE_SLOT), "ENTITY::DRIVE_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::DRIVE_SLOT), "ENTITY::DRIVE_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -136,7 +135,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::BAK_SLOT), "ENTITY::BAK_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::BAK_SLOT), "ENTITY::BAK_SLOT");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -175,7 +174,7 @@ m_Vehicle(nullptr)
         
     /** GATE SLOT */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::type::GATE_SLOT), "ENTITY::GATE_SLOT");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(entity::Type::GATE_SLOT), "ENTITY::GATE_SLOT");
         
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);

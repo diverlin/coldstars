@@ -33,7 +33,7 @@ public:
     ~Item() = default;
 
     void setRace(race::Type race) { m_race = race; }
-    void setTech(tech::type tech) { m_tech = tech; }
+    void setTech(tech::Type tech) { m_tech = tech; }
     void setSlotType(entity::Type slotType) { m_slotType = slotType; }
     void setCondition(int condition) { m_condition = condition; }
     void setDeterioration(int deterioration) { m_deterioration = deterioration; }
@@ -41,7 +41,7 @@ public:
     void setPrice(int price) { m_price = price; }
 
     race::Type race() const { return m_race; }
-    tech::type tech() const { return m_tech; }
+    tech::Type tech() const { return m_tech; }
     entity::Type slotType() const { return m_slotType; }
     int condition() const { return m_condition; }
     int deterioration() const { return m_deterioration; }
@@ -50,7 +50,7 @@ public:
 
 private:
     race::Type m_race = race::Type::NONE;
-    tech::type m_tech = tech::type::NONE;
+    tech::Type m_tech = tech::Type::NONE;
     entity::Type m_slotType = entity::Type::NONE;
     int m_condition = 0;
     int m_deterioration = 0;

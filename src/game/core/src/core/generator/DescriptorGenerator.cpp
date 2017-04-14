@@ -643,7 +643,7 @@ genBak(int race, int tech_level)
         race = int (race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int (tech::type::LEVEL0);
+        tech_level = int (tech::Type::LEVEL0);
     }
 
     int modules       = meti::getRandInt(Bak::MODULES_NUM_MIN, Bak::MODULES_NUM_MAX);
@@ -698,7 +698,7 @@ genDrive(int race, int tech_level)
         race = int (race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int (tech::type::LEVEL0);
+        tech_level = int (tech::Type::LEVEL0);
     }
 
     int modules       = meti::getRandInt(Drive::MODULES_NUM_MIN, Drive::MODULES_NUM_MAX);
@@ -755,7 +755,7 @@ genDroid(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules       = meti::getRandInt(Droid::MODULES_NUM_MIN, Droid::MODULES_NUM_MAX);
@@ -808,7 +808,7 @@ genGrapple(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules = meti::getRandInt(Grapple::MODULES_NUM_MIN, Grapple::MODULES_NUM_MAX);
@@ -870,7 +870,7 @@ genLazer(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules       = meti::getRandInt(Lazer::MODULES_NUM_MIN, Lazer::MODULES_NUM_MAX);
@@ -926,7 +926,7 @@ genProtector(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules = meti::getRandInt(Protector::MODULES_NUM_MIN, Protector::MODULES_NUM_MAX);
@@ -979,7 +979,7 @@ genRadar(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules = meti::getRandInt(Radar::MODULES_NUM_MIN, Radar::MODULES_NUM_MAX);
@@ -1031,7 +1031,7 @@ genRocket(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules = meti::getRandInt(Rocket::MODULES_NUM_MIN, Rocket::MODULES_NUM_MAX);
@@ -1092,7 +1092,7 @@ genScaner(int race, int tech_level)
         race = int(race::Type::R0);
     }
     if (tech_level == NONE) {
-        tech_level = int(tech::type::LEVEL0);
+        tech_level = int(tech::Type::LEVEL0);
     }
 
     int modules = meti::getRandInt(Scaner::MODULES_NUM_MIN, Scaner::MODULES_NUM_MAX);
