@@ -18,6 +18,8 @@
 
 #include "SpaceView.hpp"
 
+#include "Base.hpp"
+
 #include <core/common/constants.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/descriptor/Base.hpp>
@@ -30,6 +32,10 @@
 #include <core/descriptor/spaceobject/Star.hpp>
 #include <core/descriptor/spaceobject/Planet.hpp>
 #include <core/descriptor/spaceobject/Asteroid.hpp>
+
+#include <core/model/spaceobject/Star.hpp>
+#include <core/model/spaceobject/Planet.hpp>
+#include <core/model/spaceobject/Asteroid.hpp>
 
 #include <client/view/ShipDrawable.hpp>
 #include <client/view/BulletDrawable.hpp>
@@ -141,7 +147,7 @@ Space::__updateVisible(control::StarSystem* starsystem,
     visibilityData.observer.radius = lookFar;
 
     for(auto* star: starsystem->stars()) {
-        addIfVisible(star->model(), visibilityData);
+        addIfVisible(star, visibilityData);
     }
 
     for(auto* planet: starsystem->planets()) {
@@ -173,10 +179,10 @@ void Space::__clear()
 //    m_texts.clear();
 }
 
-jeti::view::BaseView*
-Space::__tryGetView(model::SpaceObject* model)
+Base*
+Space::__tryGetViewCached(int_t id)
 {
-    std::map<model::SpaceObject*, jeti::view::BaseView*>::const_iterator it = m_cache.find(model);
+    std::map<int_t, Base*>::const_iterator it = m_cache.find(id);
     if (it != m_cache.end()) {
         return it->second;
     } else {
@@ -184,21 +190,19 @@ Space::__tryGetView(model::SpaceObject* model)
     }
 }
 
-void Space::addIfVisible(model::Star* model, const VisibilityData& data)
+void Space::addIfVisible(control::Star* star, const VisibilityData& data)
 {
-    assert(model);
+    assert(star);
 //    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         //descriptor::Star* descriptor = core::global::get().descriptors().star().get(star->descriptorId());
         //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
         //jeti::Mesh* mesh = nullptr;
         //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
-    jeti::view::BaseView* view = __tryGetView(model);
+    Base* view = __tryGetViewCached(star->id());
     if (!view) {
-        assert(false);
-        auto descr = new descriptor::Star;
-        view = new view::Star(model, descr);
+        view = new view::Star(star);
         applyConstantRotationAnimation(view);
-        __cache(model, descr, view);
+        __cache(view);
     }
     assert(view);
 
@@ -211,17 +215,18 @@ void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
     assert(model);
 
 //    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-    jeti::view::BaseView* view = __tryGetView(model);
-    if (!view) {
-        assert(false);
-        auto descr = new descriptor::Planet;
-        view = new view::Planet(model, descr);
-        applyConstantRotationAnimation(view);
-        __cache(model, descr, view);
-    }
-    assert(view);
+    assert(false);
+//    Base* view = __tryGetView(model);
+//    if (!view) {
+//        assert(false);
+//        auto descr = new descriptor::Planet;
+//        view = new view::Planet(model, descr);
+//        applyConstantRotationAnimation(view);
+//        __cache(model, descr, view);
+//    }
+//    assert(view);
 
-    __add(view);
+//    __add(view);
 //    }
 }
 
@@ -231,22 +236,23 @@ void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
 
     //if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
         //if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
-            jeti::view::BaseView* view = __tryGetView(model);
-            if (!view) {
-                assert(false);
-                auto descr = new descriptor::Asteroid;
-                view = new view::Asteroid(model, descr);
-                applyConstantRotationAnimation(view);
-                __cache(model, descr, view);
-            }
-            assert(view);
+    assert(false);
+//            Base* view = __tryGetView(model);
+//            if (!view) {
+//                assert(false);
+//                auto descr = new descriptor::Asteroid;
+//                view = new view::Asteroid(model, descr);
+//                applyConstantRotationAnimation(view);
+//                __cache(model, descr, view);
+//            }
+//            assert(view);
 
-            __add(view);
+//            __add(view);
         //}
     //}
 }
 
-void Space::applyConstantRotationAnimation(jeti::view::BaseView* view)
+void Space::applyConstantRotationAnimation(Base* view)
 {
     jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
     view->setAnimationRotation(animation);
@@ -342,83 +348,80 @@ void Space::applyConstantRotationAnimation(jeti::view::BaseView* view)
 //}
 
 /// visible entities
-void Space::__add(jeti::view::BaseView* view)
+void Space::__add(Base* view)
 {
-    std::map<jeti::view::BaseView*, model::SpaceObject*>::const_iterator it = m_cache2.find(view);
-    assert(it != m_cache2.end());
-    model::SpaceObject* ob = it->second;
-
-    switch(ob->type()) {
-    case entity::Type::STAR: {
-        view::Star* star = static_cast<view::Star*>(view);
-        assert(star);
-        m_stars.push_back(star);
-        break;
-    }
-    case entity::Type::PLANET: {
-        view::Planet* planet = static_cast<view::Planet*>(view);
-        assert(planet);
-        m_planets.push_back(planet);
-        break;
-    }
-    case entity::Type::ASTEROID: {
-        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
-        assert(asteroid);
-        m_asteroids.push_back(asteroid);
-        break;
-    }
-    }
+    assert(false);
+//    switch(view->obType()) {
+//    case entity::Type::STAR: {
+//        view::Star* star = static_cast<view::Star*>(view);
+//        assert(star);
+//        m_stars.push_back(star);
+//        break;
+//    }
+//    case entity::Type::PLANET: {
+//        view::Planet* planet = static_cast<view::Planet*>(view);
+//        assert(planet);
+//        m_planets.push_back(planet);
+//        break;
+//    }
+//    case entity::Type::ASTEROID: {
+//        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
+//        assert(asteroid);
+//        m_asteroids.push_back(asteroid);
+//        break;
+//    }
+//    }
 }
 
-void Space::__loadResourcesFor(model::SpaceObject* model, jeti::view::BaseView* view)
+void Space::__loadResourcesFor(Base* view)
 {
-    {
-    jeti::Mesh* mesh = nullptr;
+    assert(false);
+//    {
+//    jeti::Mesh* mesh = nullptr;
 
-    int_t descritprorId = view->mesh();
-    auto it = m_meshCollector.find(descritprorId);
-    if (it != m_meshCollector.end()) {
-        mesh = it->second;
-    } else {
-        auto& collector = core::global::get().descriptors().mesh();
-        ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
-        if (descriptor) {
-            mesh = new jeti::Mesh(descriptor);
-        }
-        assert(mesh);
-        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
-    }
-    view->setMesh(mesh);
-    }
+//    int_t descritprorId = view->mesh();
+//    auto it = m_meshCollector.find(descritprorId);
+//    if (it != m_meshCollector.end()) {
+//        mesh = it->second;
+//    } else {
+//        auto& collector = core::global::get().descriptors().mesh();
+//        ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
+//        if (descriptor) {
+//            mesh = new jeti::Mesh(descriptor);
+//        }
+//        assert(mesh);
+//        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
+//    }
+//    view->setMesh(mesh);
+//    }
 
 
-    {
-    jeti::control::Material* material = nullptr;
+//    {
+//    jeti::control::Material* material = nullptr;
 
-    int_t descritprorId = model->material();
-    auto it = m_materialCollector.find(descritprorId);
-    if (it != m_materialCollector.end()) {
-        material = it->second;
-    } else {
-        auto& collector = core::global::get().descriptors().material();
-        ceti::descriptor::Material* descriptor = collector.get(descritprorId);
-        if (descriptor) {
-            jeti::model::Material* model = new jeti::model::Material(descriptor);
-            material = new jeti::control::Material(model);
-        }
-        assert(material);
-        m_materialCollector.insert(std::make_pair(descritprorId, material));
-    }
-    view->setMaterial(material);
+//    int_t descritprorId = model->material();
+//    auto it = m_materialCollector.find(descritprorId);
+//    if (it != m_materialCollector.end()) {
+//        material = it->second;
+//    } else {
+//        auto& collector = core::global::get().descriptors().material();
+//        ceti::descriptor::Material* descriptor = collector.get(descritprorId);
+//        if (descriptor) {
+//            jeti::model::Material* model = new jeti::model::Material(descriptor);
+//            material = new jeti::control::Material(model);
+//        }
+//        assert(material);
+//        m_materialCollector.insert(std::make_pair(descritprorId, material));
+//    }
+//    view->setMaterial(material);
 
-    }
+//    }
 }
 
-void Space::__cache(model::SpaceObject* ob, descriptor::BaseView* descr, jeti::view::BaseView* view)
+void Space::__cache(Base* view)
 {
-    __loadResourcesFor(ob, descr, view);
-    m_cache.insert(std::make_pair(ob, view));
-    m_cache2.insert(std::make_pair(view, ob));
+    __loadResourcesFor(view);
+    m_cache.insert(std::make_pair(view->id(), view));
 }
 
 void Space::__add(Star* view)
@@ -562,7 +565,7 @@ void Space::__render_NEW2(jeti::Renderer& render)
 
                 assert(m_stars.size());
                 for(Star* star: m_stars) {
-                    std::cout<<"-- render star "<<star->model()->typeInfo()<<std::endl;
+                    //std::cout<<"-- render star "<<star->star()->model()->typeInfo()<<std::endl;
                     star->draw(render);
                     //render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }

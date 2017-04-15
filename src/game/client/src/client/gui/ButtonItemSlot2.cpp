@@ -17,7 +17,7 @@
 */
              
 #include "ButtonItemSlot2.hpp"
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
     
 /* virtual override final */
 void ButtonItemSlot2::OnPressEventMBL(Player* player)

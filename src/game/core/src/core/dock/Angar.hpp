@@ -79,6 +79,9 @@ public:
     descriptor::Angar* desriptor() const { return m_descriptor_angar; }
     model::Angar* model() const { return m_model_angar; }
 
+    const std::vector<slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
+    const std::vector<slot::Item*>& itemSlots() const { return m_item_slots; }
+
 private:
     descriptor::Angar* m_descriptor_angar = nullptr;
     model::Angar* m_model_angar = nullptr;
@@ -94,8 +97,6 @@ private:
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
-
-//    friend class GuiAngar;
 };
 
 } // namespace control

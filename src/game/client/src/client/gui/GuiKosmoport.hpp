@@ -36,7 +36,7 @@ public:
     ~GuiKosmoport();
 
     void SetPlayer(Player*);
-    void BindKosmoport(Kosmoport*);
+    void BindKosmoport(control::Kosmoport*);
     void UnbindKosmoport();
 
     void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
@@ -62,17 +62,17 @@ private:
 
     int active_screen_id;
 
-    Kosmoport* kosmoport = nullptr;
+    control::Kosmoport* m_kosmoport = nullptr;
 
-    GuiAngar gui_angar;
-    GuiStore gui_store;
-    GuiShop gui_shop;
-    GuiGoverment gui_goverment;
+    GuiAngar m_gui_angar;
+    GuiStore m_gui_store;
+    GuiShop m_gui_shop;
+    GuiGoverment m_gui_goverment;
 
-    GuiGalaxyMap* gui_galaxymap_shared = nullptr;
-    GuiVehicle* gui_vehicle_scan_shared = nullptr;
-    GuiSkills* gui_skills_shared = nullptr;
-    Slider* slider_shared = nullptr;
+    GuiGalaxyMap* m_gui_galaxymap_shared = nullptr;
+    GuiVehicle* m_gui_vehicle_scan_shared = nullptr;
+    GuiSkills* m_gui_skills_shared = nullptr;
+    Slider* m_slider_shared = nullptr;
 
 
     void ExitGuiAngarScreen();

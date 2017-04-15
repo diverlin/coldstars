@@ -25,7 +25,7 @@
 
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <types/AiScenarioTypes.hpp>
+#include <core/type/AiScenarioType.hpp>
 
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/resources/TextureCollector.hpp>
@@ -41,10 +41,10 @@
 #include <ai/Task.hpp>
 #include <ai/StateMachine.hpp>
 
-#include <spaceobjects/Star.hpp>
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Star.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 #include <client/pilots/Player.hpp>
 
 

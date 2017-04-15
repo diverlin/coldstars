@@ -29,15 +29,15 @@
 #include <ceti/Logger.hpp>
 
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
 
-#include <dock/Kosmoport.hpp>
-#include <slots/ItemSlot.hpp>
-#include <item/Item.hpp>
+#include <core/dock/Kosmoport.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/item/Item.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -52,11 +52,11 @@
 
 GuiKosmoport::GuiKosmoport():
 init_done(false), 
-kosmoport(nullptr),
-gui_galaxymap_shared(nullptr),
-gui_vehicle_scan_shared(nullptr),
-gui_skills_shared(nullptr),
-slider_shared(nullptr)
+m_kosmoport(nullptr),
+m_gui_galaxymap_shared(nullptr),
+m_gui_vehicle_scan_shared(nullptr),
+m_gui_skills_shared(nullptr),
+m_slider_shared(nullptr)
 {
     //int screen_w = Screen::Instance().GetWidth();
     //int screen_h = Screen::Instance().GetHeight();
@@ -124,18 +124,18 @@ void GuiKosmoport::SetPlayer(Player* player)
     //gui_store.SetPlayer(player);
 }    
 
-void GuiKosmoport::BindKosmoport(Kosmoport* kosmoport)
+void GuiKosmoport::BindKosmoport(control::Kosmoport* kosmoport)
 {
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiKosmoport::BindKosmoport", GUI_LOG_DIP);
     #endif    
     
-        this->kosmoport = kosmoport;     
+        this->m_kosmoport = kosmoport;
                 
-    gui_angar.BindAngar(kosmoport->GetAngar());
-        gui_store.bindStore(kosmoport->GetStore());
-        gui_shop.BindShop(kosmoport->GetShop()); 
-        gui_goverment.BindGoverment(kosmoport->GetGoverment());
+    m_gui_angar.BindAngar(kosmoport->angar());
+        m_gui_store.bindStore(kosmoport->store());
+        m_gui_shop.bind(kosmoport->shop());
+        m_gui_goverment.bind(kosmoport->goverment());
         
         EnterGuiAngarScreen();
         
@@ -146,12 +146,12 @@ void GuiKosmoport::UnbindKosmoport()
 {
         ExitCurrentScreen();
         
-        kosmoport = nullptr;
+        m_kosmoport = nullptr;
         
-        gui_angar.UnbindAngar();
-        gui_store.UnbindStore();
-        gui_shop.UnbindShop();
-        gui_goverment.UnbindGoverment();
+        m_gui_angar.UnbindAngar();
+        m_gui_store.UnbindStore();
+        m_gui_shop.release();
+        m_gui_goverment.release();
         
         init_done = false;
 }
@@ -159,18 +159,18 @@ void GuiKosmoport::UnbindKosmoport()
 
 void GuiKosmoport::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
-        this->gui_galaxymap_shared    = gui_galaxymap_shared;
-        this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
-        this->gui_skills_shared       = gui_skills_shared;
-        this->slider_shared           = slider_shared;
+        this->m_gui_galaxymap_shared    = gui_galaxymap_shared;
+        this->m_gui_vehicle_scan_shared = gui_vehicle_scan_shared;
+        this->m_gui_skills_shared       = gui_skills_shared;
+        this->m_slider_shared           = slider_shared;
 }
 
 void GuiKosmoport::UnbindSharedGuis()
 {
-        gui_galaxymap_shared    = nullptr;
-        gui_vehicle_scan_shared = nullptr;
-        gui_skills_shared       = nullptr;
-        slider_shared           = nullptr;
+        m_gui_galaxymap_shared    = nullptr;
+        m_gui_vehicle_scan_shared = nullptr;
+        m_gui_skills_shared       = nullptr;
+        m_slider_shared           = nullptr;
 }
 
 void GuiKosmoport::EnterGuiScanInAngar()
@@ -218,7 +218,7 @@ void GuiKosmoport::ExitGuiAngarScreen()
     Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
     #endif    
     
-    if (gui_vehicle_scan_shared->vehicle() != nullptr)
+    if (m_gui_vehicle_scan_shared->vehicle() != nullptr)
     {
         ExitGuiScan();
     }
@@ -285,7 +285,7 @@ void GuiKosmoport::ExitGuiGalaxyMapScreen()
     Logger::Instance().Log("GuiKosmoport::ExitGuiGalaxyMapScreen", GUI_LOG_DIP);
     #endif    
     
-        gui_galaxymap_shared->UnbindGalaxy(); 
+        m_gui_galaxymap_shared->UnbindGalaxy();
 }
 
 void GuiKosmoport::EnterGuiGovermentScreen()

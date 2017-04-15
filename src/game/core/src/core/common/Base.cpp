@@ -18,6 +18,7 @@
 
 #include "Base.hpp"
 
+#include <core/descriptor/Base.hpp>
 //#include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
@@ -25,31 +26,31 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+//namespace model {
 
-Base::Base(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Base::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-//std::string Base::typeInfo() const
+//Base::Base(const std::string& data)
 //{
-//    std::string text;
-//    text += "id = (" + std::to_string(id());
-//    text += " | " + to_string(type());
-//    text += " | " + to_string(subtype());
-//    text += " | " + to_string(subsubtype()) + " )";
-//    return text;
+//    MACRO_READ_SERIALIZED_DATA
 //}
 
+//std::string
+//Base::data() const
+//{
+//    MACRO_SAVE_SERIALIZED_DATA
+//}
 
-} // namespace model
+////std::string Base::typeInfo() const
+////{
+////    std::string text;
+////    text += "id = (" + std::to_string(id());
+////    text += " | " + to_string(type());
+////    text += " | " + to_string(subtype());
+////    text += " | " + to_string(subsubtype()) + " )";
+////    return text;
+////}
+
+
+//} // namespace model
 
 namespace control {
 
@@ -58,6 +59,9 @@ Base::Base(descriptor::Base* descr, model::Base* model)
       m_descriptor_base(descr)
     , m_model_base(model)
 {}
+
+entity::Type
+Base::type() const { return descriptor()->obType(); }
 
 void
 Base::setId(int_t id) { model()->setId(id); }

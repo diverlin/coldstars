@@ -17,21 +17,19 @@
 */
 
 
-#ifndef RING_HPP
-#define RING_HPP
+#pragma once
 
 #include <client/effects/BaseDecor.hpp>
 
 class Ring : public BaseDecor
 {
-    public:
-        Ring();
-        virtual ~Ring();
-            
-        virtual void Render(const jeti::Renderer&, const glm::vec3&) override final;
+public:
+    Ring();
+    virtual ~Ring();
+
+    virtual void Render(const jeti::Renderer&, const glm::vec3&) override final;
 }; 
 
-#endif 
 
 
 

@@ -17,7 +17,7 @@
 */
 
 #include <iostream>
-#include <ceti/descriptor/Collector.hpp>
+//#include <ceti/descriptor/Collector.hpp>
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
@@ -38,14 +38,14 @@
 #include <client/common/global.hpp>
 
 
-#include "pilots/Npc.hpp"
-#include "pilots/Player.hpp"
+#include <core/pilot/Npc.hpp>
+#include <client/pilots/Player.hpp>
 
-#include "spaceobjects/Planet.hpp"
-#include "spaceobjects/Vehicle.hpp"
+#include <core/spaceobject/Planet.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
@@ -53,8 +53,8 @@
 #include <Game.hpp>
 #include <ai/God.hpp>
 
-#include <descriptor/GalaxyDescriptor.hpp>
-#include <descriptor/DescriptorManager.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"

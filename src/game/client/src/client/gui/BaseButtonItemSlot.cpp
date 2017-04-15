@@ -18,8 +18,8 @@
           
              
 #include "BaseButtonItemSlot.hpp"
-#include <slots/ItemSlot.hpp>
-#include <item/Item.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/item/Item.hpp>
 
 #include <client/resources/GuiTextureObCollector.hpp>
 
@@ -32,8 +32,8 @@
     
 bool BaseButtonItemSlot::GetEquiped() const
 {
-    if (m_itemSlot) {
-        if (m_itemSlot->item()) {
+    if (m_slot) {
+        if (m_slot->item()) {
             return true;
         }
     } 
@@ -81,12 +81,12 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 
 void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_subtype_id) const
 {
-    if (m_itemSlot != nullptr)
+    if (m_slot != nullptr)
     {
         if (GetEquiped() == false) 
         {
             gui::type buton_subtype_id = subTypeId();
-            for (entity::type type: SLOT_WEAPON_TYPES)
+            for (entity::Type type: SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
@@ -94,7 +94,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
                    break;
                 }
             }
-            for (entity::type type: SLOT_CARGO_TYPES)
+            for (entity::Type type: SLOT_CARGO_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
@@ -102,7 +102,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
                    break;
                 }
             }
-            for (entity::type type: SLOT_ARTEFACT_TYPES)
+            for (entity::Type type: SLOT_ARTEFACT_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
@@ -131,12 +131,12 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
 
 void BaseButtonItemSlot::RenderMarkTarget() const
 {
-    if (m_itemSlot) {
-        if (m_itemSlot->item()) {
+    if (m_slot) {
+        if (m_slot->item()) {
             //box.SetScale(1.5, 1.5);
             //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
             //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
-            jeti::drawColoredTextWithBackground(std::to_string(m_itemSlot->hitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
+            jeti::drawColoredTextWithBackground(std::to_string(m_slot->hitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
         }
     }
 }

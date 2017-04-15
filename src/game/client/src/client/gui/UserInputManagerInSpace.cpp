@@ -26,12 +26,11 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Camera.hpp>
 
-#include <parts/WeaponComplex.hpp>
-#include <pilots/Npc.hpp>
+#include <core/part/WeaponComplex.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+
 #include <client/pilots/Player.hpp>
-
-#include <spaceobjects/Vehicle.hpp>
-
 #include <client/gui/GuiManager.hpp>
 
 UserInputInSpace::UserInputInSpace()

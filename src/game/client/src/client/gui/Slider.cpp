@@ -28,9 +28,9 @@
 #include <client/resources/TextureCollector.hpp>
 #include <jeti/Screen.hpp>
 
-#include <item/others/GoodsPack.hpp>
+#include <core/item/other/GoodsPack.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 Slider::Slider()
 {
@@ -86,7 +86,7 @@ void Slider::UpdateSlidePosition(const MouseData& data_mouse)
     price_selected = price_for_one * ammount_selected; */
 }
         
-void Slider::ButtonsAction(Shop* shop)
+void Slider::ButtonsAction(/*Shop* shop*/)
 {
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
     //{

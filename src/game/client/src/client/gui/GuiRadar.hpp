@@ -21,7 +21,7 @@
 #include "BaseGuiElement.hpp"
 #include <ceti/rect.hpp> // to be removed
 
-namespace model {
+namespace control {
 class SpaceObject;
 class Vehicle;
 } // namespace model
@@ -32,33 +32,33 @@ class Renderer;
 
 class GuiRadar : public BaseGuiElement
 {
-    public:
-        GuiRadar();
-        virtual ~GuiRadar() override final;
+public:
+    GuiRadar();
+    virtual ~GuiRadar() override final;
     
-        const ceti::Rect& GetRect() const { return rect; };
-        void Resize(int, int);
-        
-        void ResetData();
-        
-        void Add(model::SpaceObject*);
-        void AddIfWithinRadarRange(model::SpaceObject*, const model::Vehicle&);
+    const ceti::Rect& GetRect() const { return m_rect; };
+    void Resize(int, int);
 
-        virtual void UpdateUnique(Player*) override final;
-                     
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
-            
-    private:
-        float scale;
-        
-        jeti::control::Material* textureOb_background;
-        jeti::control::Material* textureOb_bar;
-        jeti::control::Material* textureOb_screenrect;
-        jeti::control::Material* textureOb_range;
-                
-        ceti::Rect rect;
-        ceti::Rect screenrect;
-                                    
-        std::vector<model::SpaceObject*> entity_vec;
+    void ResetData();
+
+    void Add(control::SpaceObject*);
+    void AddIfWithinRadarRange(control::SpaceObject*, control::Vehicle*);
+
+    virtual void UpdateUnique(Player*) override final;
+
+    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+
+private:
+    float scale;
+
+    jeti::control::Material* m_textureOb_background = nullptr;
+    jeti::control::Material* m_textureOb_bar = nullptr;
+    jeti::control::Material* m_textureOb_screenrect = nullptr;
+    jeti::control::Material* m_textureOb_range = nullptr;
+
+    ceti::Rect m_rect;
+    ceti::Rect m_screenrect;
+
+    std::vector<control::SpaceObject*> m_entities;
 };
 

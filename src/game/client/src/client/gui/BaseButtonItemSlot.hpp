@@ -21,13 +21,13 @@
 
 #include "BaseButton.hpp"
 
-namespace control {
-class ItemSlot;
-} // namespace control
+namespace slot {
+class Item;
+} // namespace slot
 
 namespace jeti {
 class Renderer;
-}
+} // namespace jeti
 
 class BaseButtonItemSlot : public BaseButton
 {
@@ -35,17 +35,17 @@ public:
     BaseButtonItemSlot(gui::type type_id, gui::type subtype_id, const std::string& info)
         :
           BaseButton(type_id, subtype_id, info),
-          m_itemSlot(nullptr)
+          m_slot(nullptr)
     {}
 
-    virtual ~BaseButtonItemSlot() {};
+    virtual ~BaseButtonItemSlot() {}
 
     bool GetEquiped() const;
 
-    void SetItemSlot(control::ItemSlot* item_slot) { m_itemSlot = item_slot; }
+    void SetItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:
-    control::ItemSlot* const GetItemSlot() const { return m_itemSlot; }
+    slot::Item* GetItemSlot() const { return m_slot; }
 
     void UpdateAnimationProgram();
 
@@ -53,6 +53,6 @@ protected:
     void RenderMarkTarget() const;
 
 private:
-    control::ItemSlot* m_itemSlot = nullptr;
+    slot::Item* m_slot = nullptr;
 };
 

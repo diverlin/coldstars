@@ -23,19 +23,19 @@
 
 #include <builder/world/GalaxyBuilder.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 #include <client/pilots/Player.hpp>
 
 #include <ai/God.hpp>
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
-#include <world/starsystem.hpp>
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <spaceobjects/Planet.hpp>
-#include <dock/Land.hpp>
+#include <core/spaceobject/Planet.hpp>
+#include <core/dock/Land.hpp>
 
-#include <descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
 
 
 /* virtual */

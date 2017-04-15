@@ -27,7 +27,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/constants.hpp>
 
-GuiShop::GuiShop():shop(nullptr)
+GuiShop::GuiShop()
 {
     //glm::vec2 center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
             
@@ -93,14 +93,14 @@ GuiShop::GuiShop():shop(nullptr)
 GuiShop::~GuiShop()
 {}
 
-void GuiShop::BindShop(Shop* shop)
+void GuiShop::bind(control::Shop* shop)
 {
-        this->shop = shop;
+    m_shop = shop;
 }
 
-void GuiShop::UnbindShop()
+void GuiShop::release()
 {
-        shop = nullptr;
+    m_shop = nullptr;
 }
         
 void GuiShop::UpdateLables() const

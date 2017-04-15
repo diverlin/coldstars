@@ -17,12 +17,12 @@
 */
 
 #include <builder/world/GalaxyBuilder.hpp>
-#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <core/builder/spaceobject/ContainerBuilder.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 #include <client/pilots/Player.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
@@ -30,7 +30,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <descriptor/GalaxyDescriptor.hpp>
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>

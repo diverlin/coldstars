@@ -16,42 +16,30 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include "BaseGuiElement.hpp"
-#include <jeti/Material.hpp>
-#include <ceti/rect.hpp>
-#include <dock/Shop.hpp>
-#include "MouseData.hpp"
+#include <ceti/type/IdType.hpp>
+#include <core/type/EntityType.hpp>
 
-class Slider : public BaseGuiElement
-{
+#include <jeti/BaseView.hpp>
+
+namespace view {
+
+class Base : public jeti::view::BaseView {
 public:
-    Slider();
-    ~Slider();
+    Base(int_t id, entity::Type type)
+        :
+          m_id(id)
+        , m_type(type)
+    {}
+    ~Base() {}
 
-    void Configure(int, int);
-
-    //void setSubTypeId(int subtype_id) { this->subtype_id = subtype_id; };
-    //int subTypeId() const { return subtype_id; };
-
-    void UpdateSlidePosition(const MouseData&);
-    void ButtonsAction(/*Shop**/);
-
-    void CheckButtonsLock();
-
-    void Render() const;
+    int_t id() const { return m_id; }
+    entity::Type type() const { return m_type; }
 
 private:
-    int ammount_total;
-    int ammount_selected;
-    int price_selected;
-    int price_for_one;
-
-    ceti::Rect rect;
-    ceti::Rect rect_slide;
-    jeti::control::Material* textureOb;
-    jeti::control::Material* textureOb_scale;
+    int_t m_id = NONE;
+    entity::Type m_type = entity::Type::NONE;
 };
 
+} // namespace view

@@ -22,26 +22,25 @@
 #include <common/Global.hpp>
 #include <client/common/global.hpp>
 
-#include <core/descriptor/DescriptorManager.hpp>
-#include <core/descriptor/DescriptorGenerator.hpp>
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
-#include <ceti/descriptor/Collector.hpp>
+//#include <ceti/descriptor/Collector.hpp>
 #include <ceti/FsUtils.hpp>
-#include <ceti/MdLoader.hpp>
+//#include <ceti/MdLoader.hpp>
 #include <ceti/StringUtils.hpp>
 
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
 
 #include <ceti/type/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/MeshTypes.hpp>
-#include <types/TechLevelTypes.hpp>
-
-#include <core/types/TextureTypes.hpp>
+#include <core/type/RaceType.hpp>
+#include <core/type/MeshType.hpp>
+#include <core/type/TechLevelType.hpp>
+#include <core/type/TextureType.hpp>
 
 #include <string>
 
@@ -76,28 +75,29 @@ void Data::__generateMeshDescriptors()
 //        dm.mesh().save();
 //    }
 
-    auto& dmm = core::global::get().descriptors().mesh();
-    if (!dmm.loaded()) {
-        auto result = ceti::filesystem::getFilesList("data", ".od");
-        const auto& types = client::global::get().types();
-        dmm.generate(result, types);
-    }
+    assert(false);assert(false);
+//    auto& dmm = descriptor::Manager::get().mesh();
+//    if (!dmm.loaded()) {
+//        auto result = ceti::filesystem::getFilesList("data", ".od");
+//        const auto& types = client::global::get().types();
+//        dmm.generate(result, types);
+//    }
 }
 
 void Data::__generateGameObjectDescriptors()
 {
-    auto& dm = core::global::get().descriptors();
-    dm.generate();
+    descriptor::Manager::get().generate();
 }
 
 void Data::__generateMaterialDescriptors()
 {
-    auto& dmm = core::global::get().descriptors().material();
-    if (!dmm.loaded()) {
-        auto result = ceti::filesystem::getFilesList("data", ".md");
-        const auto& types = client::global::get().types();
-        dmm.generate(result, types);
-    }
+    assert(false);assert(false);
+//    auto& dmm = core::global::get().descriptors().material();
+//    if (!dmm.loaded()) {
+//        auto result = ceti::filesystem::getFilesList("data", ".md");
+//        const auto& types = client::global::get().types();
+//        dmm.generate(result, types);
+//    }
 //        //############ TURREL #########
 //        {
 //            Material material(int(type::texture::TURREL), "turrel/turrel1.png");

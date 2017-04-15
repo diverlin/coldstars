@@ -21,9 +21,9 @@
 #include <client/common/global.hpp>
 #include <client/pilots/Player.hpp>
 
-#include <core/spaceobjects/SpaceObject.hpp>
-#include <core/spaceobjects/Vehicle.hpp>
-#include <core/pilots/Npc.hpp>
+#include <core/spaceobject/SpaceObject.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
@@ -34,10 +34,10 @@ GuiRadar::GuiRadar()
 {
     setSubTypeId(gui::type::GUI_RADAR);
     
-    textureOb_background        = GuiTextureObCollector::Instance().radar_background;
-    textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
-    textureOb_screenrect        = GuiTextureObCollector::Instance().radar_screenrect;
-    textureOb_range             = GuiTextureObCollector::Instance().radar_range;
+    m_textureOb_background        = GuiTextureObCollector::Instance().radar_background;
+    m_textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
+    m_textureOb_screenrect        = GuiTextureObCollector::Instance().radar_screenrect;
+    m_textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
     int screen_w = client::global::get().screen().width();
@@ -50,35 +50,35 @@ GuiRadar::~GuiRadar()
 
 void GuiRadar::Resize(int screen_w, int screen_h)
 {
-    rect.set(0, 0, 250, 250);
+    m_rect.set(0, 0, 250, 250);
 }
          
 void GuiRadar::ResetData()
 {
-    entity_vec.clear();
+    m_entities.clear();
 }
 
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.set(rect.center() + client::global::get().screen().bottomLeftScreenWC() * scale, (int)(client::global::get().screen().width() * scale), (int)(client::global::get().screen().height() * scale));
+    m_screenrect.set(m_rect.center() + client::global::get().screen().bottomLeftScreenWC() * scale, (int)(client::global::get().screen().width() * scale), (int)(client::global::get().screen().height() * scale));
     const MouseData& data_mouse = player->cursor().mouseData();
-    if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
+    if (m_rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {
         if (data_mouse.left_press == true)
         {
-            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.center().x - screenrect.width()/2)/scale, ( data_mouse.pos_screencoord.y - rect.center().y - screenrect.height()/2)/scale);
+            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - m_rect.center().x - m_screenrect.width()/2)/scale, ( data_mouse.pos_screencoord.y - m_rect.center().y - m_screenrect.height()/2)/scale);
             client::global::get().screen().setBottomLeftScreenWC(new_global_coord);
         }
     }
 }
              
-void GuiRadar::Add(model::SpaceObject* object)
+void GuiRadar::Add(control::SpaceObject* object)
 {
-    entity_vec.push_back(object);
+    m_entities.push_back(object);
 }
 
-void GuiRadar::AddIfWithinRadarRange(model::SpaceObject* object, const model::Vehicle& vehicle)
+void GuiRadar::AddIfWithinRadarRange(control::SpaceObject* object, control::Vehicle* vehicle)
 {
 //    if (vehicle.IsObjectWithinRadarRange(object) == true)
 //    {
@@ -103,9 +103,8 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
     float size, size_base = 7;
     //render.enable_POINTSPRITE();  
     {         
-        for (unsigned int i=0; i<entity_vec.size(); i++)
-        {
-            switch(entity_vec[i]->type())
+        for (const auto& entity: m_entities) {
+            switch(entity->descriptor()->obType())
             {
                 case entity::Type::STAR:
                 {

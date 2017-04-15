@@ -17,23 +17,14 @@
 */
 
 #include "GuiGoverment.hpp"
-
-GuiGoverment::GuiGoverment()
-:
-goverment(nullptr)
-{}
-
-
-GuiGoverment::~GuiGoverment()
-{}    
     
-void GuiGoverment::BindGoverment(Goverment* goverment)
+void GuiGoverment::bind(control::Goverment* goverment)
 {
-    this->goverment = goverment;    
+    this->m_goverment = goverment;
 }
 
-void GuiGoverment::UnbindGoverment()
+void GuiGoverment::release()
 {
-    goverment = nullptr;
+    m_goverment = nullptr;
 }
 

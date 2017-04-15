@@ -45,9 +45,9 @@ public:
     void add(jeti::control::Material*, const TextureDescriptor&);
 
     jeti::control::Material* get(int);
-    jeti::control::Material* getTextureByTypeId(texture::type);
-    jeti::control::Material* getTextureByColorId(texture::type, int);
-    jeti::control::Material* getTextureByRaceId(texture::type, race::type);
+    jeti::control::Material* getTextureByTypeId(texture::Type);
+    jeti::control::Material* getTextureByColorId(texture::Type, int);
+    jeti::control::Material* getTextureByRaceId(texture::Type, race::Type);
     jeti::control::Material* getTextureByDescriptor(const TextureDescriptor& descriptior);
 
 private:
@@ -60,7 +60,7 @@ private:
     jeti::control::Material* m_textureBlank;
 
     std::map<int, std::pair<TextureDescriptor, jeti::control::Material*>> m_idsTextures;
-    std::map<texture::type, std::vector<std::pair<TextureDescriptor, jeti::control::Material*>>> m_typesTextures;
+    std::map<texture::Type, std::vector<std::pair<TextureDescriptor, jeti::control::Material*>>> m_typesTextures;
 
     bool isExist(jeti::control::Material*) const;
     
@@ -71,6 +71,6 @@ private:
     void _validate(jeti::control::Material*);
 
     bool hasId(int) const;
-    bool hasTypeId(texture::type) const;
+    bool hasTypeId(texture::Type) const;
 };
 

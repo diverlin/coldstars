@@ -21,9 +21,9 @@
 
 class UserInputInSpace;
 
-namespace type {
-class Collector;
-} // namespace type
+//namespace type {
+//class Collector;
+//} // namespace type
 
 namespace jeti {
 class Screen;
@@ -40,7 +40,7 @@ public:
 
     void init();
 
-    type::Collector& types() { return *m_types; }
+//    type::Collector& types() { return *m_types; }
     jeti::Screen& screen() { return *m_screen; }
     jeti::Renderer& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
@@ -53,7 +53,7 @@ private:
     ~global();
     global& operator=(const global&) = delete;
 
-    type::Collector* m_types = nullptr;
+//    type::Collector* m_types = nullptr;
     jeti::Screen* m_screen = nullptr;
     jeti::Renderer* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;

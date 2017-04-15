@@ -21,7 +21,7 @@
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 
-#include <core/types/TypesCollector.hpp>
+//#include <core/type/TypesCollector.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
@@ -41,8 +41,8 @@ global& global::get()
 
 global::global()
     :
-      m_types(new type::Collector)
-    , m_screen(new jeti::Screen)
+//      m_types(new type::Collector)
+    /*,*/ m_screen(new jeti::Screen)
     , m_render(new jeti::Renderer)
     , m_camera(new jeti::Camera)
     , m_inputsManager(new UserInputInSpace)
@@ -59,15 +59,17 @@ global::~global()
 
 void
 global::init() {
-    if (!m_init) {
-        srand(time(0));
-
-        m_screen->init();
-        m_render->init(m_camera, m_screen->width(), m_screen->height());
-
-        Data data;
-        m_init= true;
+    if (m_init) {
+        return;
     }
+
+    srand(time(0));
+
+    m_screen->init();
+    m_render->init(m_camera, m_screen->width(), m_screen->height());
+
+    Data data;
+    m_init = true;
 }
 
 } // namespace client

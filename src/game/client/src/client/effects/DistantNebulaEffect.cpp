@@ -24,7 +24,6 @@
 
 #include <client/resources/TextureCollector.hpp>
 
-#include <ceti/descriptor/Collector.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
 
@@ -46,41 +45,41 @@ void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
     // alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }
               
-void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    assert(false);
-//    std::string droot = root + "distant_nebula_effect."+std::to_string(id())+".";
+//void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    assert(false);
+////    std::string droot = root + "distant_nebula_effect."+std::to_string(id())+".";
     
-//    //BaseBackGroundEffect::SaveData(save_ptree, droot);
-//    DistantNebulaEffect::SaveData(save_ptree, droot);
-}    
+////    //BaseBackGroundEffect::SaveData(save_ptree, droot);
+////    DistantNebulaEffect::SaveData(save_ptree, droot);
+//}
 
-void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)
-{
-    //BaseBackGroundEffect::LoadData(load_ptree);
-    DistantNebulaEffect::LoadData(load_ptree);
-}
+//void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    //BaseBackGroundEffect::LoadData(load_ptree);
+//    DistantNebulaEffect::LoadData(load_ptree);
+//}
 
-void DistantNebulaEffect::Resolve()
-{
-    //BaseBackGroundEffect::ResolveData();
-    DistantNebulaEffect::ResolveData();
-}
+//void DistantNebulaEffect::Resolve()
+//{
+//    //BaseBackGroundEffect::ResolveData();
+//    DistantNebulaEffect::ResolveData();
+//}
 
-void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const        
-{
-    //save_ptree.put(root+"m_Angle", m_Angle);
-    //save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
-}
+//void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //save_ptree.put(root+"m_Angle", m_Angle);
+//    //save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
+//}
 
-void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //m_Angle = load_ptree.get<float>("m_Angle");
-    //m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
-}
+//void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //m_Angle = load_ptree.get<float>("m_Angle");
+//    //m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
+//}
 
-void DistantNebulaEffect::ResolveData()
-{}     
+//void DistantNebulaEffect::ResolveData()
+//{}
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {

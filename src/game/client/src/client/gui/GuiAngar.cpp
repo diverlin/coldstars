@@ -33,7 +33,7 @@
 #include <jeti/Render.hpp>
 #include <client/gui/GuiManager.hpp>
 
-GuiAngar::GuiAngar():angar(nullptr)
+GuiAngar::GuiAngar()
 {
     //int screen_w = core::global::get().config().SCREEN_WIDTH;
     //int screen_h = core::global::get().config().SCREEN_HEIGHT;
@@ -77,43 +77,41 @@ GuiAngar::GuiAngar():angar(nullptr)
 
 GuiAngar::~GuiAngar()
 {
-    delete repair_slot;
-    delete charge_slot;
+    delete m_repair_slot;
+    delete m_charge_slot;
 }    
 
-void GuiAngar::BindAngar(Angar* angar)
+void GuiAngar::BindAngar(control::Angar* angar)
 {
-    this->angar = angar;
+    m_angar = angar;
     
     int column_counter = 1;
     int row_counter = 0;
-    for (unsigned int i=0; i<angar->vehicle_visitors_slot_vec.size(); i++)
-    {
-        ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
+    for (slot::Vehicle* slot: angar->vehicleSlots()) {
+        ceti::Rect rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, slot::Vehicle*>(rect, slot));
 
         column_counter++;
     }
 
-    column_counter = 1;
-    row_counter = 2;
-    for (unsigned int i=0; i<angar->vehicle_military_slot_vec.size(); i++)
-    {
-        ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
-                   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
+//    column_counter = 1;
+//    row_counter = 2;
+//    for (slot::Vehicle* slot: angar->vehicleSlots()) {
+//    {
+//        ceti::Rect rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
+//                   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+//        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, slot::Vehicle*>(rect, slot));
 
-        column_counter++;
-    }
+//        column_counter++;
+//    }
     
     column_counter = 0;
     row_counter = 0;
-    for (unsigned int i=0; i<angar->item_slot_vec.size(); i++)
-    {
-        ceti::Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR,
+    for (slot::Item* slot: angar->itemSlots()) {
+        ceti::Rect rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR,
                    GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(_rect, angar->item_slot_vec[i]));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, slot));
 
         row_counter++;
     }
@@ -122,20 +120,20 @@ void GuiAngar::BindAngar(Angar* angar)
         ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
                   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, repair_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_repair_slot));
     }
 
     {
         ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
                   4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, charge_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_charge_slot));
     }
 }
 
 void GuiAngar::UnbindAngar()
 {
-    angar = nullptr;
+    m_angar = nullptr;
     
     m_vehicleslot_rects.clear();
     m_itemslot_rects.clear();
