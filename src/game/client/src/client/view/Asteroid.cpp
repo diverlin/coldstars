@@ -18,18 +18,16 @@
 
 #include "Asteroid.hpp"
 #include <core/spaceobject/Asteroid.hpp>
+#include <core/model/spaceobject/Asteroid.hpp>
 
 #include <jeti/Render.hpp>
 
 namespace view {
 
-Asteroid::Asteroid(model::Asteroid* model, descriptor::Asteroid* descr)
-    :
-      jeti::view::BaseView(model)
-    , m_model_asteroid(model)
-    , m_descriptor_asteroid(descr)
+Asteroid::Asteroid(control::Asteroid* asteroid)
+    : Base(asteroid->id(), asteroid->type()), m_asteroid(asteroid)
 {   
-    setOrientationModel(model);
+    setOrientationModel(asteroid->model());
 }
 
 Asteroid::~Asteroid()

@@ -52,7 +52,7 @@
 //#include <client/gui/GuiGalaxyMap.hpp>
 //#include <client/gui/GuiManager.hpp>
 
-//#include <slots/ItemSlot.hpp>
+//#include <core/slot/ItemSlot.hpp>
 
 //#include <client/gui/UserInput.hpp>
 //#include <client/gui/UserInputManagerInSpace.hpp>

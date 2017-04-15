@@ -43,14 +43,14 @@
 #include <jeti/Render.hpp>
 
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
 
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 
 GuiSpace::GuiSpace()

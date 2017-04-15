@@ -19,8 +19,8 @@
 
 #include "GuiManager.hpp"
 #include "UserInputManagerInSpace.hpp"
-#include <slots/ItemSlot.hpp>
-#include <dock/Kosmoport.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/dock/Kosmoport.hpp>
 #include <client/common/global.hpp>
 
 #include <world/Sector.hpp>
@@ -29,13 +29,13 @@
 //#include <ceti/StringUtils.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
-#include <parts/WeaponComplex.hpp>
+#include <core/part/WeaponComplex.hpp>
 #include <item/Item.hpp>
 
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 #include <client/pilots/Player.hpp>
 
-#include <spaceobjects/Vehicle.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <client/gui/GuiSkills.hpp>
 #include <client/gui/GuiGalaxyMap.hpp>

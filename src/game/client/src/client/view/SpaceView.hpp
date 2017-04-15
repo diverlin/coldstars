@@ -28,27 +28,19 @@
 
 class StarSystemDrawable;
 
-namespace model {
+namespace control {
 class Star;
 class Asteroid;
 class Planet;
 //class Container;
-} // namespace view
-
-namespace core {
-namespace model {
-class Base;
-} // namespace model
-} // namespace core
+} // namespace control
 
 namespace jeti {
 class Camera;
-namespace view {
-class BaseView;
-} // namespace view
 } // namespace jeti
 
 namespace view {
+class Base;
 class Star;
 class Asteroid;
 class Planet;
@@ -97,7 +89,7 @@ public:
     ~Space();
 
     /// visible entities
-    void addIfVisible(model::Star*, const VisibilityData&);
+    void addIfVisible(control::Star*, const VisibilityData&);
     void addIfVisible(model::Planet*, const VisibilityData&);
     void addIfVisible(model::Asteroid*, const VisibilityData&);
 //    void addIfVisible(view::Container*, const VisibilityData&);
@@ -134,7 +126,7 @@ private:
 //    std::vector<VerticalFlowText*> m_texts;
     
 
-    void applyConstantRotationAnimation(jeti::view::BaseView*);
+    void applyConstantRotationAnimation(Base*);
 
     void __updateVisible(control::StarSystem* starsystem,
                   const meti::vec3& lookFrom,
@@ -147,7 +139,7 @@ private:
     void __renderAxis(const jeti::Renderer&) const;
 
     /// visible entities
-    void __add(jeti::view::BaseView*);
+    void __add(Base*);
     void __add(Star*);
     void __add(Planet*);
     void __add(Asteroid*);
@@ -164,16 +156,16 @@ private:
     void __add(jeti::BaseParticleSystem*);
     void __add(VerticalFlowText*);
 
-    void __loadResourcesFor(model::SpaceObject* model, descriptor::BaseView*, jeti::view::BaseView* view);
-    void __cache(model::SpaceObject*, descriptor::BaseView*, jeti::view::BaseView*);
+    void __loadResourcesFor(Base*);
+    void __cache(Base*);
 
     void __clear();
 
-    jeti::view::BaseView* __tryGetView(model::SpaceObject*);
+    Base* __tryGetViewCached(int_t);
 
-    std::map<model::SpaceObject*, jeti::view::BaseView*> m_cache;
-    [[warning("ugly, think how to make it better")]]
-    std::map<jeti::view::BaseView*, model::SpaceObject*> m_cache2;
+    std::map<int_t, Base*> m_cache;
+//    [[warning("ugly, think how to make it better")]]
+//    std::map<Base*, control::SpaceObject*> m_cache2;
 
 //    ceti::Collector<jeti::Mesh> m_meshCollector;
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;

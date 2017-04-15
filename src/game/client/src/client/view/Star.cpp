@@ -19,16 +19,14 @@
 #include "Star.hpp"
 
 #include <core/spaceobject/Star.hpp>
+#include <core/model/spaceobject/Star.hpp>
 
 namespace view {
 
-Star::Star(model::Star* model, descriptor::Star* descr)
-    :
-      BaseView(model)
-    , m_model_star(model)
-    , m_descriptor_star(descr)
+Star::Star(control::Star* star)
+    : Base(star->id(), star->type()), m_star(star)
 {
-    setOrientationModel(model);
+    setOrientationModel(star->model());
 }
   
 Star::~Star()

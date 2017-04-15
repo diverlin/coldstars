@@ -71,6 +71,8 @@ public:
     descriptor::NatureLand* descriptor() const { return m_descriptor_natureland; }
     model::NatureLand* model() const { return m_model_natureland; }
 
+    const std::vector<slot::Item*>& itemSlots() const { return m_itemslots; }
+
 private:
     descriptor::NatureLand* m_descriptor_natureland = nullptr;
     model::NatureLand* m_model_natureland = nullptr;
@@ -84,8 +86,6 @@ private:
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
-
-//    friend class GuiNatureLand;
 };
 
 } // namespace control

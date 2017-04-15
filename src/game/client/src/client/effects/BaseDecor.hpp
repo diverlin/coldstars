@@ -19,14 +19,15 @@
 
 #pragma once
 
+#include <core/common/Base.hpp>
+
 #include <ceti/Orientation.hpp>
-#include <common/Base.hpp>
 
 namespace jeti {
 class Renderer;
 }
 
-class BaseDecor : public ceti::control::Orientation, public control::Base
+class BaseDecor : public ceti::control::Orientation
 {
 public:
     BaseDecor():
@@ -35,4 +36,4 @@ public:
     ~BaseDecor() {}
 
     virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
-}; 
+};

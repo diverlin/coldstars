@@ -42,8 +42,8 @@ class Base : public NonCopyable
 public:
     Base() = default;
     virtual ~Base() = default; // virtual method is needed for proper model base deletion
-    Base(const std::string& data);
-    std::string data() const;
+//    Base(const std::string& data);
+//    std::string data() const;
 
     void setAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }
@@ -87,6 +87,8 @@ public:
     void setId(int_t id);
 
     int_t id();
+    entity::Type type() const;
+
     bool isAlive() const;
     void die();
 

@@ -20,21 +20,20 @@
 #include "ButtonSingle.hpp"
 #include <common/Global.hpp>
 #include <jeti/Config.hpp>
-#include <slots/ItemSlot.hpp>
-#include <item/Item.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/item/Item.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 #include <math/rand.hpp>
 
-#include <pilots/Npc.hpp>
-#include <spaceobjects/Vehicle.hpp>
-//#include "../builder/ItemSlotBuilder.hpp"
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
-#include <dock/NatureLand.hpp>
+#include <core/dock/NatureLand.hpp>
 
 #include <jeti/Render.hpp>
 
-GuiNatureLand::GuiNatureLand():natureland(nullptr)
+GuiNatureLand::GuiNatureLand()
 {
     //int screen_w = core::global::get().config().SCREEN_WIDTH;
     //int screen_h = core::global::get().config().SCREEN_HEIGHT;
@@ -58,7 +57,7 @@ GuiNatureLand::GuiNatureLand():natureland(nullptr)
 GuiNatureLand::~GuiNatureLand()
 {}    
     
-void GuiNatureLand::BindNatureLand(NatureLand* natureland)
+void GuiNatureLand::BindNatureLand(control::NatureLand* natureland)
 {
 //    int screen_w = core::global::get().configVideo().width;
 //    int screen_h = core::global::get().configVideo().height;
@@ -66,16 +65,17 @@ void GuiNatureLand::BindNatureLand(NatureLand* natureland)
     int screen_w = 400;
     int screen_h = 300;
 
-    this->natureland = natureland;
+    this->m_natureland = natureland;
     
-    rect_itemslot_vec.clear();
+    m_rects_itemslots.clear();
 
-    for (control::ItemSlot* slot: natureland->m_itemslots)
+    for (slot::Item* slot: natureland->itemSlots())
     {
-        ceti::Rect _rect(slot->position().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR),
-                   slot->position().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR),
-                   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        // gen slot positions
         assert(false);
+        //        ceti::Rect _rect(slot->position().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR),
+//                   slot->position().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR),
+//                   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
 //        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(_rect, slot));
     }
 }

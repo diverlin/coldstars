@@ -19,32 +19,27 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include "BaseView.hpp"
 
-namespace model {
+namespace control {
 class Planet;
-} // namespace model
-
-namespace descriptor {
-class Planet;
-} // namespace descriptor
+} // namespace control
 
 namespace view {
 
-class Planet : public jeti::view::BaseView
+class Planet : public Base
 {
 public:
-    Planet(model::Planet*, descriptor::Planet*);
+    Planet(control::Planet*);
     virtual ~Planet() override final;
 
     void draw(const jeti::Renderer&) const override;
 
-    model::Planet* model() const { return m_model_planet; }
-    descriptor::Planet* descriptor() const { return m_descriptor_planet; }
+//    model::Planet* model() const { return m_model_planet; }
+//    descriptor::Planet* descriptor() const { return m_descriptor_planet; }
 
 private:
-    model::Planet* m_model_planet = nullptr;
-    descriptor::Planet* m_descriptor_planet = nullptr;
+    control::Planet* m_planet = nullptr;
     //virtual void UpdateInfo() override final;
 }; 
 

@@ -20,20 +20,18 @@
 #include "Planet.hpp"
 
 #include <core/spaceobject/Planet.hpp>
-  
+#include <core/model/spaceobject/Planet.hpp>
+
 //#include <client/effects/BaseDecor.hpp>
 
 #include <jeti/Render.hpp>
 
 namespace view {
 
-Planet::Planet(model::Planet* model, descriptor::Planet* descr)
-    :
-      jeti::view::BaseView(model)
-    , m_model_planet(model)
-    , m_descriptor_planet(descr)
+Planet::Planet(control::Planet* planet)
+    : Base(planet->id(), planet->type()), m_planet(planet)
 {
-    setOrientationModel(model);
+    setOrientationModel(planet->model());
 }
 
 /* virtual */

@@ -23,23 +23,21 @@
 
 #include <ceti/Logger.hpp>
 
-#include <types/GuiTypes.hpp>
+#include <core/type/GuiType.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 
-#include <builder/slots/ItemSlotBuilder.hpp>
-
-#include <slots/ItemSlot.hpp>
+#include <core/slot/ItemSlot.hpp>
 
 #include <item/Item.hpp>
 
-#include <spaceobjects/ALL>
+#include <core/spaceobject/ALL>
 
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
+#include <core/pilot/Npc.hpp>
 
-#include <parts/WeaponComplex.hpp>
+#include <core/part/WeaponComplex.hpp>
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 

@@ -57,6 +57,11 @@ public:
     int buyItem(Item*);
     void sellVehicle(Npc*, slot::Vehicle*, int);
 
+    [[deprecated("tmp")]]
+    const std::vector<slot::Item*>& itemSlots() const { return m_item_slots; }
+    [[deprecated("tmp")]]
+    const std::vector<slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
+
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
@@ -74,9 +79,6 @@ private:
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
-
-//    friend class GuiStore;
-
     void __add(slot::Vehicle*);
     void __add(slot::Item*);
 };

@@ -18,31 +18,28 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include "BaseView.hpp"
 
-namespace descriptor {
+namespace control {
 class Star;
 } // namespace descriptor
 
-namespace model {
-class Star;
-} // namespace model
-
 namespace view {
 
-class Star : public jeti::view::BaseView
+class Star : public Base
 {
 public:
-    Star(model::Star*, descriptor::Star*);
+    Star(control::Star*);
     virtual ~Star() override final;
 
     //        void draw(const jeti::Renderer& render) override final;
-    model::Star* model() const { return m_model_star; }
-    descriptor::Star* descriptor() const { return m_descriptor_star; }
+//    model::Star* model() const { return m_star->model(); }
+//    descriptor::Star* descriptor() const { return m_star->descriptor(); }
+
+    control::Star* star() const { return m_star; }
 
 private:
-    model::Star* m_model_star = nullptr;
-    descriptor::Star* m_descriptor_star = nullptr;
+    control::Star* m_star = nullptr;
 }; 
 
 } // namespace view

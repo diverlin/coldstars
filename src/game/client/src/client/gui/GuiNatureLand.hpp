@@ -19,31 +19,37 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-class NatureLand;
-class ItemSlot;
 #include "GuiPair.hpp"
 #include <ceti/rect.hpp>
 #include "MouseData.hpp"
 
+namespace control {
+class NatureLand;
+} // namespace control
+
+namespace slot {
+class Item;
+} // namespace slot
+
 class GuiNatureLand : public BaseGuiElement
 {
-    public:
-        GuiNatureLand();
-        ~GuiNatureLand();
-        
-        void BindNatureLand(NatureLand*);
-        
-        bool UpdateMouseInteractionWithEquipedItemSlots(const MouseData&);
+public:
+    GuiNatureLand();
+    ~GuiNatureLand();
 
-        void ButtonsAction() const;
+    void BindNatureLand(control::NatureLand*);
 
-        void RenderBackground(const ceti::Rect& rect) const;
-        void RenderEquipedItemSlots() const;
+    bool UpdateMouseInteractionWithEquipedItemSlots(const MouseData&);
 
-    private:
-        NatureLand* natureland;
+    void ButtonsAction() const;
 
-        std::vector<GuiPair<ceti::Rect, ItemSlot*>> rect_itemslot_vec;
+    void RenderBackground(const ceti::Rect& rect) const;
+    void RenderEquipedItemSlots() const;
+
+private:
+    control::NatureLand* m_natureland = nullptr;
+
+    std::vector<GuiPair<ceti::Rect, slot::Item*>> m_rects_itemslots;
 };
 
 

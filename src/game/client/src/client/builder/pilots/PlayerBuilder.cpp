@@ -17,18 +17,18 @@
 */
 
 #include <client/builder/pilots/PlayerBuilder.hpp>
-#include <builder/pilots/NpcBuilder.hpp>
-#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <core/builder/pilot/NpcBuilder.hpp>
+#include <core/builder/spaceobject/ShipBuilder.hpp>
 
 #include <client/pilots/Player.hpp>
 
-#include <spaceobjects/Ship.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntityManager.hpp>
+#include <core/manager/EntityManager.hpp>
 
 #include <common/constants.hpp>
 
@@ -71,9 +71,9 @@ Player* PlayerBuilder::createNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-    race::type prace_id         = race::Type::R0;
-    entity::type psubtype_id    = entity::Type::RANGER;
-    entity::type psubsubtype_id = entity::Type::WARRIOR;
+    race::Type prace_id         = race::Type::R0;
+    entity::Type psubtype_id    = entity::Type::RANGER;
+    entity::Type psubsubtype_id = entity::Type::WARRIOR;
     int size_id        = SIZE_4;
     int weapons_num    = 6;
     tech::Type tech = tech::Type::LEVEL3;

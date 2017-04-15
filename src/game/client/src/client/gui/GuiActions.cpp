@@ -19,8 +19,8 @@
 #include "GuiActions.hpp"
 #include "GuiGalaxyMap.hpp"
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
-#include <spaceobjects/Vehicle.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <common/Global.hpp>
 #include <client/gui/GuiManager.hpp>

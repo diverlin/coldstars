@@ -58,9 +58,7 @@ namespace  view {
 //} // namespace
 
 
-BaseView::BaseView(ceti::model::Base* model)
-    :
-      m_model_base(model)
+BaseView::BaseView()
 {
     assert(false);
     // TODO extract m_descriptor_view = ..

@@ -18,32 +18,27 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include "BaseView.hpp"
 
-namespace model {
+namespace control {
 class Asteroid;
-} // namespace model
-
-namespace descriptor {
-class Asteroid;
-} // namespace descriptor
+} // namespace control
 
 namespace view {
 
-class Asteroid : public jeti::view::BaseView
+class Asteroid : public Base
 {
 public:
-    Asteroid(model::Asteroid*, descriptor::Asteroid*);
+    Asteroid(control::Asteroid*);
     virtual ~Asteroid() override final;
 
-    model::Asteroid* model() const  { return m_model_asteroid; }
-    descriptor::Asteroid* descriptor() const  { return m_descriptor_asteroid; }
+//    model::Asteroid* model() const  { return m_asteroid->model(); }
+//    descriptor::Asteroid* descriptor() const  { return m_asteroid->descriptor(); }
 
     void draw(const jeti::Renderer& render) const;
 
 private:
-    model::Asteroid* m_model_asteroid = nullptr;
-    descriptor::Asteroid* m_descriptor_asteroid = nullptr;
+    control::Asteroid* m_asteroid = nullptr;
     //        virtual void UpdateInfo() override final;
 }; 
 

@@ -18,34 +18,35 @@
 
 #include "GuiStore.hpp"
 #include <dock/Store.hpp>
+#include <core/item/Item.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/slot/VehicleSlot.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
+
 #include <client/pilots/Player.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
-#include <item/Item.hpp>
-#include <slots/ItemSlot.hpp>
-#include <slots/VehicleSlot.hpp>
-#include <pilots/Npc.hpp>
-#include <spaceobjects/Vehicle.hpp>
 #include <client/gui/GuiManager.hpp>
 
-GuiStore::GuiStore():m_store(nullptr)
+GuiStore::GuiStore()
 {}
 
 GuiStore::~GuiStore()
 {}
 
-void GuiStore::bindStore(Store* store)
+void GuiStore::bindStore(control::Store* store)
 {
     this->m_store = store;
 
     int clm = 0;
     int row = 0;
-    for (auto* slot: store->m_itemslots) {
+    for (slot::Item* slot: store->itemSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, control::ItemSlot*>(rect, slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {
@@ -55,13 +56,13 @@ void GuiStore::bindStore(Store* store)
     }
 
 
-    for (auto* slot: store->m_vehicleslots) {
+    for (slot::Vehicle* slot: store->vehicleSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, control::VehicleSlot*>(rect, slot));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, slot::Vehicle*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {

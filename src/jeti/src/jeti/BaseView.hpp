@@ -60,7 +60,7 @@ namespace view {
 class BaseView
 {
 public:
-    BaseView(ceti::model::Base*);
+    BaseView();
     virtual ~BaseView();
 
 //    void validateResources() const;
@@ -101,11 +101,6 @@ protected:
     //void RenderAxis(const Renderer&) const;
 
 private:
-    ceti::descriptor::BaseView* m_descriptor_view = nullptr;
-    ceti::model::Base* m_model_base = nullptr;
-    ceti::descriptor::BaseView* descriptor() const { return m_descriptor_view; }
-    ceti::model::Base* model() const { return m_model_base; }
-
     glm::vec4 m_color;
 
     control::Material* m_material = nullptr;

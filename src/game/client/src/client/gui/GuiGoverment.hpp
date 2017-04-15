@@ -16,26 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIGOVERMENT_H
-#define GUIGOVERMENT_H
+#pragma once
 
 #include "BaseGuiElement.hpp"
+
+namespace control {
 class Goverment;
+} // namespace control
 
 class GuiGoverment : public BaseGuiElement
 {
-        public:
-               GuiGoverment();
-               ~GuiGoverment();
-        
-        void BindGoverment(Goverment*);
-        void UnbindGoverment();
-                
-        Goverment* GetGoverment() const { return goverment; };   
-           
-           private:
-                   Goverment* goverment;
+public:
+    GuiGoverment() = default;
+    ~GuiGoverment() = default;
+
+    void bind(control::Goverment*);
+    void release();
+
+    control::Goverment* goverment() const { return m_goverment; }
+
+private:
+    control::Goverment* m_goverment = nullptr;
 };
 
 
-#endif 

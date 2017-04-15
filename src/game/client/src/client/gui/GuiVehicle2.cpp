@@ -21,10 +21,12 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
-#include <spaceobjects/Vehicle.hpp>
-#include <slots/ItemSlot.hpp>
+
+#include <core/spaceobject/Vehicle.hpp>
+#include <core/slot/ItemSlot.hpp>
+#include <core/pilot/Npc.hpp>
+
 #include <client/pilots/Player.hpp>
-#include <pilots/Npc.hpp>
 
 
 GuiVehicle2::GuiVehicle2()
