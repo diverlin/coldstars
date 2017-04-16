@@ -1,5 +1,7 @@
 #include "main.hpp"
 
+namespace sandbox {
+
 namespace view {
 
 void
@@ -17,10 +19,14 @@ StarSystem::refresh() {
     }
 }
 
-}
+} // namespace view
+
+} // namespace sandbox
 
 int main()
 {
+    using namespace sandbox;
+
     ENTITIES = new Enteties;
 
     model::StarSystem* ss_model = reg(new model::StarSystem(/*id=*/1));
@@ -40,3 +46,5 @@ int main()
 
     return 0;
 }
+
+

@@ -4,6 +4,9 @@
 #include <vector>
 #include <cassert>
 
+
+namespace sandbox {
+
 namespace descr {
 
 class Ship {
@@ -175,4 +178,4 @@ T* reg(T* model) {
     return model;
 }
 
-
+} // namespace sandbox
