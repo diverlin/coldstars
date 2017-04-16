@@ -32,6 +32,7 @@
 #include <core/type/MeshType.hpp>
 #include <core/type/TextureType.hpp>
 
+#include <ceti/Pack.hpp>
 #include <ceti/descriptor/Base.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -51,8 +52,9 @@ class Planet;
 class WormHole;
 class Asteroid;
 class Container;
-class SpaceStation;
+class Npc;
 class Ship;
+class SpaceStation;
 class Satellite;
 
 // dock
@@ -86,9 +88,9 @@ private:
 public:
     static Manager& get();
 
-    void reg(Base*);
-    void reg(Mesh*);
-    void reg(Material*);
+    void add(Base*);
+    void add(Mesh*);
+    void add(Material*);
 
     Base* get(int_t) const;
     Base* rand(Type) const;
@@ -104,6 +106,7 @@ public:
     WormHole* randWormHole() const;
     Asteroid* randAsteroid() const;
     Container* randContainer() const;
+    Npc* randNpc() const;
     Ship* randShip() const;
     Satellite* randSatellite() const;
     SpaceStation* randSpaceStation() const;
@@ -136,6 +139,7 @@ public:
     WormHole* wormHole(int_t) const;
     Asteroid* asteroid(int_t) const;
     Container* container(int_t) const;
+    Npc* npc(int_t) const;
     Ship* ship(int_t) const;
     Satellite* satellite(int_t) const;
     SpaceStation* spaceStation(int_t) const;
@@ -158,8 +162,14 @@ public:
     item::Radar* radar(int_t) const;
     item::Rocket* rocket(int_t) const;
 
+    Mesh* mesh(int_t) const;
+    Material* material(int_t) const;
+
     Mesh* randMesh(mesh::Type) const;
     Material* randMaterial(texture::Type) const;
+
+    Collector<Mesh>* meshes() const { return m_meshes; }
+    Collector<Material>* materials() const { return m_materials; }
 
     void generate();
     void clear();
@@ -178,7 +188,9 @@ private:
     void __resolveId(Base*);
     void __resolveId(ceti::descriptor::Base*);
 
-    static IdGenerator m_idGenerator;
+    ceti::pack<int_t> __ids(Type) const;
+
+    IdGenerator m_idGenerator;
 }; 
 
 } // namespace descriptor

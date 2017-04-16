@@ -19,12 +19,16 @@
 #include <core/builder/pilot/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
+#include <core/pilot/Npc.hpp>
+#include <core/descriptor/pilot/Npc.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
+
 #include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
-
-#include <core/pilot/Npc.hpp>
 
 #include <ai/aiModel/AiModelCollector.hpp>
 #include <ai/aiModel/AiModelConqueror.hpp>
@@ -34,21 +38,34 @@
 namespace builder {
 
 control::Npc*
-Npc::gen(race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id)
+Npc::gen()
 {
-    control::Npc* npc = __createTemplate(subtype_id, subsubtype_id);
-    __createInternals(npc, race_id, subtype_id, subsubtype_id);
+    descriptor::Npc* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::NPC)) {
+        descr = descriptor::genNpc();
+    } else {
+        descr = descriptor::Manager::get().randNpc();
+    }
+    assert(descr);
+    return gen(descr);
+}
+
+control::Npc*
+Npc::gen(descriptor::Npc* descr)
+{
+    control::Npc* npc = __createTemplate(descr);
+    __createInternals(npc, descr);
     
     return npc;
 }
 
 control::Npc*
-Npc::__createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, int_t id)
+Npc::__createTemplate(descriptor::Npc* descr)
 {
-    model::Npc* model = new model::Npc/*(id, subtype_id, subsubtype_id)*/;
-    assert(false);
-    //control::Npc* npc = new control::Npc(model);
-    control::Npc* npc = new control::Npc(id, subtype_id, subsubtype_id);
+    model::Npc* model = new model::Npc(descr->id());
+    assert(model);
+
+    control::Npc* npc = new control::Npc(descr, model);
     assert(npc);
 
     manager::Entities::get().add(npc);
@@ -57,73 +74,74 @@ Npc::__createTemplate(entity::Type subtype_id, entity::Type subsubtype_id, int_t
 }
 
 void
-Npc::__createInternals(control::Npc* npc, race::Type race_id, entity::Type subtype_id, entity::Type subsubtype_id)
-{        
-    //LifeData data_life;
+Npc::__createInternals(control::Npc* npc, descriptor::Npc* descr)
+{
+    // assert(false); assert(false);
+//    //LifeData data_life;
     
-    //TextureOb* texOb_face  = TextureCollector::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
+//    //TextureOb* texOb_face  = TextureCollector::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
 
-    assert(false);
-//    npc->setRaceId(race_id);
+//    assert(false);
+////    npc->setRaceId(race_id);
 
-    //npc->SetTextureOb(texOb_face);
-    //npc->setSubTypeId(subtype_id);
-    //npc->setSubSubTypeId(subsubtype_id);
-    //npc->setLifeData(data_life);
+//    //npc->SetTextureOb(texOb_face);
+//    //npc->setSubTypeId(subtype_id);
+//    //npc->setSubSubTypeId(subsubtype_id);
+//    //npc->setLifeData(data_life);
     
-    assert(false);
-//    npc->applySkillsStrategy();
+//    assert(false);
+////    npc->applySkillsStrategy();
 
-    if ((race_id != race::Type::R6) && (race_id != race::Type::R7))
-    {
-        switch(subtype_id)
-        {
-        case entity::Type::RANGER:
-        {
-            assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
+//    if ((race_id != race::Type::R6) && (race_id != race::Type::R7))
+//    {
+//        switch(subtype_id)
+//        {
+//        case entity::Type::RANGER:
+//        {
+//            assert(false);
+////            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
-            break;
-        }
+//            break;
+//        }
 
-        case entity::Type::WARRIOR:
-        {
-            assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
+//        case entity::Type::WARRIOR:
+//        {
+//            assert(false);
+////            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
-            break;
-        }
+//            break;
+//        }
 
-        case entity::Type::TRADER:
-        {
-            assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER));
+//        case entity::Type::TRADER:
+//        {
+//            assert(false);
+////            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER));
 
-            break;
-        }
+//            break;
+//        }
 
-            //case ENTITY::DIPLOMAT:     {}
-            //case ENTITY::PIRAT:     {}
+//            //case ENTITY::DIPLOMAT:     {}
+//            //case ENTITY::PIRAT:     {}
 
-        default:
-        {
-            assert(false);
-//            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
+//        default:
+//        {
+//            assert(false);
+////            npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER));
 
-            break;
-        }
-        }
-    }
-    else
-    {
-        assert(false);
-//        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR));
-    }
+//            break;
+//        }
+//        }
+//    }
+//    else
+//    {
+//        assert(false);
+////        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR));
+//    }
 
-    npc->model()->skills().addExpirience(meti::getRandInt(10000, 100000));
-    while(npc->model()->skills().availablePoints()) {
-        npc->model()->skills().manageAccordingToStrategy();
-    }
+//    npc->model()->skills().addExpirience(meti::getRandInt(10000, 100000));
+//    while(npc->model()->skills().availablePoints()) {
+//        npc->model()->skills().manageAccordingToStrategy();
+//    }
 }
 
 } // namespace builder

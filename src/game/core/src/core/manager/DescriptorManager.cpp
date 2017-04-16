@@ -23,6 +23,7 @@
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
 #include <core/descriptor/world/ALL>
+#include <core/descriptor/pilot/Npc.hpp>
 
 #include <core/descriptor/Mesh.hpp>
 #include <core/descriptor/Texture.hpp>
@@ -42,8 +43,6 @@ const std::string descriptors_fname = "descriptors.txt";
 const std::string descriptor_meshes_fname = "mesh_descriptors.txt";
 const std::string descriptor_materials_fname = "material_descriptors.txt";
 } // namespace
-
-IdGenerator Manager::m_idGenerator;
 
 Manager&
 Manager::get()
@@ -71,7 +70,7 @@ Manager::Manager()
 }
 
 void
-Manager::reg(Base* descr)
+Manager::add(Base* descr)
 {
     __resolveId(descr);
 
@@ -100,14 +99,14 @@ Manager::reg(Base* descr)
 }
 
 void
-Manager::reg(Mesh* descr)
+Manager::add(Mesh* descr)
 {
     __resolveId(descr);
     m_meshes->add(descr);
 }
 
 void
-Manager::reg(Material* descr)
+Manager::add(Material* descr)
 {
     __resolveId(descr);
     m_materials->add(descr);
@@ -205,6 +204,14 @@ Container*
 Manager::randContainer() const
 {
     Container* descr = static_cast<Container*>(rand(Type::CONTAINER));
+    assert(descr);
+    return descr;
+}
+
+Npc*
+Manager::randNpc() const
+{
+    Npc* descr = static_cast<Npc*>(rand(Type::NPC));
     assert(descr);
     return descr;
 }
@@ -413,6 +420,14 @@ Manager::container(int_t id) const
     return descr;
 }
 
+Npc*
+Manager::npc(int_t id) const
+{
+    Npc* descr = static_cast<Npc*>(get(id));
+    assert(descr);
+    return descr;
+}
+
 Ship*
 Manager::ship(int_t id) const
 {
@@ -554,6 +569,22 @@ Manager::rocket(int_t id) const
 }
 
 Mesh*
+Manager::mesh(int_t id) const
+{
+    Mesh* mesh = m_meshes->get(id);
+    assert(mesh);
+    return mesh;
+}
+
+Material*
+Manager::material(int_t id) const
+{
+    Material* material = m_materials->get(id);
+    assert(material);
+    return material;
+}
+
+Mesh*
 Manager::randMesh(mesh::Type type) const
 {
     Mesh* mesh = m_meshes->random(int_t(type));
@@ -572,7 +603,7 @@ Manager::randMaterial(texture::Type type) const
 void
 Manager::__save()
 {
-    assert(false);
+//    assert(false);
 //    std::fstream filestream;
 //    filestream.open(descriptors_fname);
 //    if(filestream.is_open()) {
@@ -656,15 +687,14 @@ Manager::generate()
         genStarSystem();
     }
 
-//    num = base * 4;
-//    for(int i=0; i<num; ++i) {
-//        genSector(m_starsystem.idList());
-//    }
+    num = 4;
+    for(int i=0; i<num; ++i) {
+        const auto& ids = __ids(Type::STARSYSTEM).random(5);
+        genSector(ids);
+    }
 
-//    num = base * 1;
-//    for(int i=0; i<num; ++i) {
-//        genGalaxy(m_sector.idList());
-//    }
+    const auto& ids = __ids(Type::SECTOR).random(2);
+    genGalaxy(ids);
 
     __save();
 }
@@ -703,6 +733,21 @@ Manager::__resolveId(ceti::descriptor::Base* descr) {
     if (descr->id() == NONE) {
         descr->setId(m_idGenerator.nextId());
     }
+}
+
+ceti::pack<int_t>
+Manager::__ids(Type type) const
+{
+    ceti::pack<int_t> result;
+
+    std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
+    if (it != m_descriptorsTypes.end()) {
+        const std::vector<Base*>& descriptors = it->second;
+        for (Base* descr: descriptors) {
+            result.add(descr->id());
+        }
+    }
+    return result;
 }
 
 } // namespace descriptor

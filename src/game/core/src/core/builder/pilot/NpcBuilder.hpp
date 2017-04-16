@@ -19,10 +19,11 @@
 
 #pragma once
 
-#include <core/type/RaceType.hpp>
-#include <core/type/EntityType.hpp>
-
 #include <ceti/type/IdType.hpp>
+
+namespace descriptor {
+class Npc;
+} // namespace descriptor
 
 namespace control {
 class Npc;
@@ -33,14 +34,15 @@ namespace builder {
 class Npc
 {
 public:
-    static control::Npc* gen(race::Type, entity::Type, entity::Type);
+    static control::Npc* gen();
+    static control::Npc* gen(descriptor::Npc*);
 
 private:
     Npc() = delete;
     ~Npc() = delete;
 
-    static control::Npc* __createTemplate(entity::Type, entity::Type, int_t id = NONE);
-    static void __createInternals(control::Npc*, race::Type, entity::Type, entity::Type);
+    static control::Npc* __createTemplate(descriptor::Npc*);
+    static void __createInternals(control::Npc*, descriptor::Npc*);
 }; 
 
 } // namespace builder

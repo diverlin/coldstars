@@ -75,13 +75,12 @@ void Data::__generateMeshDescriptors()
 //        dm.mesh().save();
 //    }
 
-    assert(false);assert(false);
-//    auto& dmm = descriptor::Manager::get().mesh();
-//    if (!dmm.loaded()) {
-//        auto result = ceti::filesystem::getFilesList("data", ".od");
-//        const auto& types = client::global::get().types();
-//        dmm.generate(result, types);
-//    }
+    auto dmm = descriptor::Manager::get().meshes();
+    if (!dmm->loaded()) {
+        auto result = ceti::filesystem::getFilesList("data", ".od");
+        const auto& types = client::global::get().types();
+        dmm->generate(result, types);
+    }
 }
 
 void Data::__generateGameObjectDescriptors()
@@ -91,13 +90,12 @@ void Data::__generateGameObjectDescriptors()
 
 void Data::__generateMaterialDescriptors()
 {
-    assert(false);assert(false);
-//    auto& dmm = core::global::get().descriptors().material();
-//    if (!dmm.loaded()) {
-//        auto result = ceti::filesystem::getFilesList("data", ".md");
-//        const auto& types = client::global::get().types();
-//        dmm.generate(result, types);
-//    }
+    auto dmm = descriptor::Manager::get().materials();
+    if (!dmm->loaded()) {
+        auto result = ceti::filesystem::getFilesList("data", ".md");
+        const auto& types = client::global::get().types();
+        dmm->generate(result, types);
+    }
 //        //############ TURREL #########
 //        {
 //            Material material(int(type::texture::TURREL), "turrel/turrel1.png");

@@ -17,6 +17,9 @@
 */
 
 #include "Npc.hpp"
+
+#include <core/descriptor/pilot/Npc.hpp>
+
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 
@@ -46,9 +49,9 @@
 
 namespace model {
 
-Npc::Npc()
+Npc::Npc(int_t descriptor_id)
 {
-//    setType(entity::Type::NPC);
+    setDescriptor(descriptor_id);
 }
 
 Npc::Npc(const std::string& data)
@@ -66,11 +69,10 @@ Npc::data() const
 
 namespace control {
 
-Npc::Npc(int id, entity::Type subtype_id, entity::Type subsubtype_id)
+Npc::Npc(descriptor::Npc* descr, model::Npc* model)
     :
-      Base(nullptr, nullptr)
+      Base(descr, model)
 { 
-    assert(false);
 //    setTypeId(entity::Type::NPC);
 //    setSubTypeId(subtype_id);
 //    setSubSubTypeId(subsubtype_id);
@@ -130,11 +132,11 @@ void Npc::updateInKosmoportInStatic()
 
 void Npc::updateInSpaceInStatic()
 {
-    assert(false);
+    //assert(false); assert(false);
 //    //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
 
 //    m_vehicle->UpdateAllFunctionalItemsInStatic();
-//    m_vehicle->weaponComplex().prepareWeapons();
+//    m_vehicle->weapons().prepareWeapons();
 
 //    if (!m_player) {
 //        m_vehicle->CheckNeedsInStatic();
@@ -144,9 +146,9 @@ void Npc::updateInSpaceInStatic()
 
 //        m_observation.ObserveAllInSpace();
 
-////        if (ai_model) {
-////            ai_model->UpdateInStatic(this);
-////        }
+//        //        if (ai_model) {
+//        //            ai_model->UpdateInStatic(this);
+//        //        }
 
 //        __scenarioFireVehicleAgressor();
 

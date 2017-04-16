@@ -27,7 +27,7 @@
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
-namespace model {
+namespace control {
 
 World::World()
 {
@@ -39,15 +39,9 @@ World::~World()
 {
 }
 
-model::StarSystem*
-World::activeStarsystem() const {
-    assert(false);
-//    return core::global::get().god().galaxy()->activeStarsystem();
-}
-
-bool World::operator==(const World& rhs) const {
-    // todo implement
-    return true;
+Galaxy*
+World::galaxy() const {
+    return core::global::get().god().galaxy();
 }
 
 bool World::run() const
@@ -63,4 +57,4 @@ void World::update()
    core::global::get().god().update();
 }
 
-} // namespace model
+} // namespace control

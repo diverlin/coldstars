@@ -90,8 +90,8 @@ public:
 
     /// visible entities
     void addIfVisible(control::Star*, const VisibilityData&);
-    void addIfVisible(model::Planet*, const VisibilityData&);
-    void addIfVisible(model::Asteroid*, const VisibilityData&);
+    void addIfVisible(control::Planet*, const VisibilityData&);
+    void addIfVisible(control::Asteroid*, const VisibilityData&);
 //    void addIfVisible(view::Container*, const VisibilityData&);
 //    void addIfVisible(BulletDrawable*, const VisibilityData&);
 //    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);

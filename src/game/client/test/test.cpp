@@ -36,67 +36,51 @@
 
 namespace {
 
-template<typename T1, typename T2>
-void validate(const T1& descr, T2* view) {
-    assert(false);
-//    descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
-//    descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
+void validate(ceti::descriptor::BaseView* descr, jeti::view::BaseView* view) {
+    descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
+    descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
 
-//    EXPECT_NE(descr->texture(), -1);
-//    EXPECT_NE(material_descr->path(), "");
-//    EXPECT_EQ(descr->texture(), view->model()->material());
+    EXPECT_NE(descr->texture(), NONE);
+    EXPECT_NE(material_descr->path(), "");
 
-//    EXPECT_NE(descr->mesh(), -1);
-//    EXPECT_NE(mesh_descr->modelPath(), "");
-//    EXPECT_EQ(descr->mesh(), view->model()->mesh());
+    EXPECT_NE(descr->mesh(), NONE);
+    EXPECT_NE(mesh_descr->modelPath(), "");
 }
 
 } // namespace
 
 TEST(view, star)
 {
-    assert(false);
-//    client::global::get().init();
-//    auto descr = core::global::get().descriptors().star().random();
+    client::global::get().init();
+    control::Star* star = builder::Star::gen();
+    view::Star* view = new view::Star(star);
 
-//    model::Star* model = builder::Star::getNew(descr);
-//    view::Star* view = new view::Star(model);
-
-//    validate(descr, view);
+    validate(star->descriptor(), view);
 }
 
 TEST(view, planet)
 {
-    assert(false);
-//    client::global::get().init();
-//    auto descr = core::global::get().descriptors().planet().random();
+    //client::global::get().init();
+    control::Planet* planet = builder::Planet::gen();
+    view::Planet* view = new view::Planet(planet);
 
-//    model::Planet* model = builder::Planet::getNew(descr);
-//    view::Planet* view = new view::Planet(model);
-
-//    validate(descr, view);
+    validate(planet->descriptor(), view);
 }
 
 TEST(view, asteroid)
 {
-    assert(false);
-//    client::global::get().init();
-//    auto descr = core::global::get().descriptors().asteroid().random();
+    //client::global::get().init();
+    control::Asteroid* asteroid = builder::Asteroid::gen();
+    view::Asteroid* view = new view::Asteroid(asteroid);
 
-//    model::Asteroid* model = builder::Asteroid::getNew(descr);
-//    view::Asteroid* view = new view::Asteroid(model);
-
-//    validate(descr, view);
+    validate(asteroid->descriptor(), view);
 }
 
-TEST(view, ship)
-{
-    assert(false);
-//    client::global::get().init();
-//    auto descr = core::global::get().descriptors().ship().random();
+//TEST(view, ship)
+//{
+//    //client::global::get().init();
+//    control::Ship* ship = builder::Ship::gen();
+//    view::Ship* view = new view::Ship(ship);
 
-//    model::Ship* model = builder::Ship::getNew(descr);
-//    view::Ship* view = new view::Ship(model);
-
-//    validate(descr, view);
-}
+//    validate(ship->descriptor(), view);
+//}

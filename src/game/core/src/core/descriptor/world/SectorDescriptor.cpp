@@ -16,37 +16,21 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
-#include <core/builder/spaceobject/BaseVehicleBuilder.hpp>
-
-#include <ceti/type/IdType.hpp>
-
-#include <string>
+#include "SectorDescriptor.hpp"
 
 namespace descriptor {
-class Ship;
+
+Sector::Sector()
+{
+    setType(descriptor::Type::SECTOR);
+    setObType(entity::Type::SECTOR);
+}
+
 } // namespace descriptor
 
-namespace control {
-class Ship;
-} // namespace control
 
-namespace builder {
 
-class Ship : public BaseVehicle
-{
-public:
-    static control::Ship* gen(descriptor::Ship*);
-    static control::Ship* gen(int_t, int_t ob_id = NONE);
-    static control::Ship* gen();
 
-private:
-    Ship() = delete;
-    ~Ship() = delete;
 
-    static control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
-    static void __createInternals(control::Ship*, descriptor::Ship*);
-}; 
 
-} // namespace builder
+

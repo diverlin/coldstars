@@ -64,23 +64,6 @@ Ship::gen()
 }
 
 control::Ship*
-Ship::genEquiped()
-{
-    control::Ship* ship = gen();
-
-    ship->manage(builder::item::Drive::gen());
-    ship->manage(builder::item::Bak::gen());
-    ship->manage(builder::item::Protector::gen());
-    ship->manage(builder::item::Scaner::gen());
-    ship->manage(builder::item::Radar::gen());
-    ship->manage(builder::item::Grapple::gen());
-    ship->manage(builder::item::Lazer::gen());
-    ship->load(builder::item::Rocket::gen());
-
-    return ship;
-}
-
-control::Ship*
 Ship::__genTemplate(descriptor::Ship* descr, int_t ob_id)
 {
     model::Ship* model = new model::Ship(descr->id(), ob_id);

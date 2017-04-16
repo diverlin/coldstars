@@ -58,7 +58,7 @@ class Vehicle;
 class WormHole;
 class Container;
 class RocketBullet;
-} // namespace model
+} // namespace control
 
 
 class Player;
@@ -102,12 +102,14 @@ public:
     bool operator!=(const StarSystem& rhs) const;
 
     void setSector(int_t sector)  { m_sector = sector; }
+    void setPosition(const meti::vec3& position) { m_position = position; }
 
     int conditionId()     const { return m_condition_id; }
     int raceId()          const { return m_race_id; }
     int conquerorRaceId() const { return m_conqueror_race_id; }
 
     int_t sector() const { return m_sector; }
+    const meti::vec3& position() const { return m_position; }
 
     void addStar(int_t star) { if (_isWritable()) m_stars.add(star); }
     void addPlanet(int_t planet) { if (_isWritable()) m_planets.add(planet); }
@@ -147,6 +149,7 @@ private:
     int m_conqueror_race_id = NONE;
     int m_condition_id = NONE;
 
+    meti::vec3 m_position;
     int_t m_sector = NONE;
 
     ceti::pack<int_t> m_stars;
@@ -168,6 +171,7 @@ private:
         ar & m_race_id;
         ar & m_conqueror_race_id;
         ar & m_condition_id;
+        ar & m_position;
         ar & m_sector;
 
         ar & m_stars;

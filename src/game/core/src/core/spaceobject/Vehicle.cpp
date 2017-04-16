@@ -773,8 +773,7 @@ bool Vehicle::__mergeIdenticalGoods(Item* item)
 void Vehicle::bindNpc(control::Npc* owner_npc)
 {
     m_npc = owner_npc;
-    assert(false);
-    //    m_npc->setVehicle(this);
+    m_npc->setVehicle(this);
 }
 
 bool Vehicle::isObjectVisible(SpaceObject* object) const
@@ -1643,10 +1642,9 @@ Vehicle::__wrapItemToContainer(Item* item)
 
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
-    assert(false);
-//    if (m_properties.grab_radius > 0) {
-//        m_grappleSlot->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
-//    }
+    if (m_properties.grab_radius > 0) {
+        m_grapple_complex.UpdateGrabScenarioProgram_inDynamic();
+    }
 }
 
 

@@ -31,30 +31,30 @@ public:
     {}
 
 public:
-    void setRace(const std::string& race) { m_race = race; }
-//    void setType(const std::string& type) { m_type = type; }
-//    void setSubtype(const std::string& subtype) { m_subtype = subtype; }
-    void setName(const std::string& name) { m_name = name; }
-    void setColor(const std::string& color) { m_color = color; }
+    void setRaceStr(const std::string& race) { m_raceStr = race; }
+    void setTypeStr(const std::string& type) { m_typeStr = type; }
+    void setSubTypeStr(const std::string& subtype) { m_subtypeStr = subtype; }
+    void setNameStr(const std::string& name) { m_nameStr = name; }
+    void setColorStr(const std::string& color) { m_colorStr = color; }
 
-//    const std::string& type() const { return m_type; }
+    const std::string& typeStr() const { return m_typeStr; }
 
 private:
-    std::string m_race = "";
-//    std::string m_type = "";
-//    std::string m_subtype = "";
-    std::string m_name = "";
-    std::string m_color = "";
+    std::string m_raceStr = "";
+    std::string m_typeStr = "";
+    std::string m_subtypeStr = "";
+    std::string m_nameStr = "";
+    std::string m_colorStr = "";
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_race;
-//        ar & m_type;
-//        ar & m_subtype;
-        ar & m_name;
-        ar & m_color;
+        ar & m_raceStr;
+        ar & m_typeStr;
+        ar & m_subtypeStr;
+        ar & m_nameStr;
+        ar & m_colorStr;
     }
 };
 

@@ -24,6 +24,8 @@
 #include <core/type/CollectorType.hpp>
 #include <core/resource/MdLoader.hpp>
 
+#include <ceti/IdGenerator.hpp>
+
 #include <ceti/descriptor/Mesh.hpp>
 #include <ceti/descriptor/Texture.hpp>
 
@@ -41,7 +43,7 @@ namespace {
 template<typename T>
 void resolveTypeId(T* ob, const type::Collector& types)
 {
-    ob->setType(types.toInt(ob->association().type()));
+    ob->setType(types.toInt(ob->typeStr()));
 }
 
 } // namespace
@@ -62,7 +64,7 @@ public:
     T* failback() const { return m_failback; }
 
     void add(T* ob) {
-        assert(ob->id() != NONE);
+        ob->setId(m_idGenerator.nextId());
         if (!contains(ob->id())) {
             m_descriptors.insert(std::make_pair( ob->id(), ob ));
             m_descriptorsTypes[ob->type()].push_back(ob);
@@ -118,6 +120,8 @@ public:
     }
 
 private:
+    IdGenerator m_idGenerator;
+
     bool m_loaded = false;
     std::string m_fname;
     T* m_failback = nullptr;

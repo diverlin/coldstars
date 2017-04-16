@@ -678,14 +678,13 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
     std::vector<Vehicle*> vehicles;
     Vehicle* result = nullptr;
 
-    assert(false);
-    //    for (const race::type& race: races) {
-    //        for (Vehicle* vehicle: m_vehicles) {
-    //            if (race == vehicle->npc()->raceId()) {
-    //                vehicles.push_back(vehicle);
-    //            }
-    //        }
-    //    }
+    for (const race::Type& race: races) {
+        for (Vehicle* vehicle: m_vehicles) {
+            if (race == vehicle->npc()->descriptor()->race()) {
+                vehicles.push_back(vehicle);
+            }
+        }
+    }
     
     if (vehicles.size()) {
         result = meti::getRand(vehicles);
@@ -835,7 +834,6 @@ float StarSystem::calcResultGravityForce(const glm::vec3& center, const glm::vec
     return rate;
 }
 
-
 void StarSystem::update(int time)
 {                
     bool detalied_simulation = true;
@@ -846,7 +844,7 @@ void StarSystem::update(int time)
 
     if (time > 0) {
         if (m_unique_update_inDymanic_done == false) {
-            assert(false);
+            // assert(false); assert(false);
             //m_hyperspace.PostHyperJumpEvent(this);
             
             m_unique_update_inDymanic_done = true;
@@ -989,10 +987,9 @@ void StarSystem::__updateEntities_s(int time, bool show_effect)
     for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_wormholes.size(); i++)        { m_wormholes[i]->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
-    for (auto asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
+    for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
     
-    assert(false);
-    //for (unsigned int i=0; i<m_vehicles.size(); i++)          { m_vehicles[i]->UpdateInSpace(time, show_effect); }
+    for (Vehicle* vehicle: m_vehicles) { vehicle->UpdateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_bullets.size(); i++)           { m_bullets[i]->UpdateInSpace(time, show_effect); }
     
     // effects
@@ -1030,11 +1027,10 @@ void StarSystem::__updateInSpaceInStatic_s()
     __updateStates();
 
     for (Vehicle* vehicle: m_vehicles) {
-        assert(false);
-        //        vehicle->npc()->updateInSpaceInStatic();
-        //        if (vehicle->subtype() == entity::Type::SPACESTATION) {
-        //            static_cast<SpaceStation*>(vehicle)->land()->UpdateInStatic();
-        //        }
+        vehicle->npc()->updateInSpaceInStatic();
+        if (vehicle->descriptor()->obSubType() == entity::Type::SPACESTATION) {
+            static_cast<SpaceStation*>(vehicle)->land()->updateInStatic();
+        }
     }
 
     for (auto star: m_stars) { star->updateInSpaceInStatic(); }
@@ -1126,111 +1122,111 @@ void StarSystem::__shipManager_s(unsigned int num)
         int size_id     = SIZE_4;
         int weapons_num = 7;
 
-        control::Npc* new_npc = builder::Npc::gen(prace_id, psubtype_id, psubsubtype_id);
+        // prace_id, psubtype_id, psubsubtype_id
+        control::Npc* new_npc = builder::Npc::gen();
         control::Ship* new_pship = builder::Ship::gen();
 
-        assert(false);
-        //builder::ShipBuilder::equip(new_pship);   // improove
-        assert(false);
-        //new_pship->bindNpc(new_pnpc);
+        builder::BaseVehicle::equip(new_pship);
+        new_pship->bindNpc(new_npc);
 
         glm::vec2 center = meti::getRandVec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,meti::getRandInt(360));
+        //glm::vec3 angle(0,0,meti::getRandInt(360));
         
-        assert(false);
-        //add(new_pship, center3, angle);
+        add(new_pship, center3/*, angle*/);
     }
 }
 
 
 void StarSystem::__manageUnavaliableObjects_s()
-{               
-    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
-        assert(false);
-        //        if ((*it)->place() != type::place::KOSMOS) {
-        //            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
-        //            it = m_vehicles.erase(it);
-        //        }
-    }
+{
+    // old bad logic, use event system here
+//    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+//        assert(false);
+//        //        if ((*it)->place() != type::place::KOSMOS) {
+//        //            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
+//        //            it = m_vehicles.erase(it);
+//        //        }
+//    }
 }
 
 void StarSystem::__manageDeadObjects_s()
 {      
-    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
-        assert(false);
-        //        if ((*it)->isReadyForGarbage()) {
-        //           manager::EntityManager::get().addToGarbage(*it);
-        //            it = m_vehicles.erase(it);
-        //        }
-    }
+    // bad approach, use event system here
+//    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+//        assert(false);
+//        //        if ((*it)->isReadyForGarbage()) {
+//        //           manager::EntityManager::get().addToGarbage(*it);
+//        //            it = m_vehicles.erase(it);
+//        //        }
+//    }
 
-    for(std::vector<WormHole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
-        assert(false);
-//        if ((*it)->isReadyForGarbage()) {
-//            manager::EntityManager::get().addToGarbage(*it);
-//            it = m_blackholes.erase(it);
-//        }
-    }
+//    for(std::vector<WormHole*>::iterator it=m_wormholes.begin(); it<m_wormholes.end(); ++it) {
+//        assert(false);
+////        if ((*it)->isReadyForGarbage()) {
+////            manager::EntityManager::get().addToGarbage(*it);
+////            it = m_blackholes.erase(it);
+////        }
+//    }
 
-    //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
-    //        if ((*it)->isReadyForGarbage() == true) {
-    //           manager::EntityManager::get().addToGarbage(*it);
-    //            it = m_asteroids.erase(it);
-    //        }
-    //    }
+//    //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
+//    //        if ((*it)->isReadyForGarbage() == true) {
+//    //           manager::EntityManager::get().addToGarbage(*it);
+//    //            it = m_asteroids.erase(it);
+//    //        }
+//    //    }
 
-    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
-        assert(false);
-//        if ((*it)->isReadyForGarbage() == true) {
-//            manager::EntityManager::get().addToGarbage(*it);
-//            it = m_containers.erase(it);
-//        }
-    }
+//    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
+//        assert(false);
+////        if ((*it)->isReadyForGarbage() == true) {
+////            manager::EntityManager::get().addToGarbage(*it);
+////            it = m_containers.erase(it);
+////        }
+//    }
 
-    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
-//        if ((*it)->isReadyForGarbage() == true) {
-//            manager::EntityManager::get().addToGarbage(*it);
-//            it = m_bullets.erase(it);
-//        }
-    }
+//    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
+////        if ((*it)->isReadyForGarbage() == true) {
+////            manager::EntityManager::get().addToGarbage(*it);
+////            it = m_bullets.erase(it);
+////        }
+//    }
 
-    //effects
-    //    for(std::vector<ShockWaveEffect*>::iterator it=effect_SHOCKWAVE_vec.begin(); it<effect_SHOCKWAVE_vec.end(); ++it)
-    //    {
-    //        if ((*it)->isAlive() == false)
-    //        {
-    //            garbage_effects.add(*it);
-    //            it = effect_SHOCKWAVE_vec.erase(it);
-    //        }
-    //    }
+//    //effects
+//    //    for(std::vector<ShockWaveEffect*>::iterator it=effect_SHOCKWAVE_vec.begin(); it<effect_SHOCKWAVE_vec.end(); ++it)
+//    //    {
+//    //        if ((*it)->isAlive() == false)
+//    //        {
+//    //            garbage_effects.add(*it);
+//    //            it = effect_SHOCKWAVE_vec.erase(it);
+//    //        }
+//    //    }
 
-    //    for(std::vector<LazerTraceEffect*>::iterator it=effect_LAZERTRACE_vec.begin(); it<effect_LAZERTRACE_vec.end(); ++it)
-    //    {
-    //        if ((*it)->isAlive() == false)
-    //        {
-    //            garbage_effects.add(*it);
-    //            it = effect_LAZERTRACE_vec.erase(it);
-    //        }
-    //    }
+//    //    for(std::vector<LazerTraceEffect*>::iterator it=effect_LAZERTRACE_vec.begin(); it<effect_LAZERTRACE_vec.end(); ++it)
+//    //    {
+//    //        if ((*it)->isAlive() == false)
+//    //        {
+//    //            garbage_effects.add(*it);
+//    //            it = effect_LAZERTRACE_vec.erase(it);
+//    //        }
+//    //    }
 
-    //    for(std::vector<jeti::BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
-    //    {
-    //        if ((*it)->isAlive() == false)
-    //        {
-    //            garbage_effects.add(*it);
-    //            it = effect_PARTICLESYSTEM_vec.erase(it);
-    //        }
-    //    }
+//    //    for(std::vector<jeti::BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
+//    //    {
+//    //        if ((*it)->isAlive() == false)
+//    //        {
+//    //            garbage_effects.add(*it);
+//    //            it = effect_PARTICLESYSTEM_vec.erase(it);
+//    //        }
+//    //    }
 
-    //    for(std::vector<VerticalFlowText*>::iterator it=text_DAMAGE_vec.begin(); it<text_DAMAGE_vec.end(); ++it)
-    //    {
-    //        if ((*it)->isAlive() == false)
-    //        {
-    //            garbage_effects.add(*it);
-    //            it = text_DAMAGE_vec.erase(it);
-    //        }
-    //    }
+//    //    for(std::vector<VerticalFlowText*>::iterator it=text_DAMAGE_vec.begin(); it<text_DAMAGE_vec.end(); ++it)
+//    //    {
+//    //        if ((*it)->isAlive() == false)
+//    //        {
+//    //            garbage_effects.add(*it);
+//    //            it = text_DAMAGE_vec.erase(it);
+//    //        }
+//    //    }
 }    
 
 

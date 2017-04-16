@@ -74,16 +74,6 @@ Galaxy::Galaxy(descriptor::Galaxy* descr, model::Galaxy* model)
 Galaxy::~Galaxy()
 {}
 
-model::StarSystem*
-Galaxy::activeStarsystem() const
-{
-    assert(m_sectors.size() != 0);
-    assert(false);
-    //    return m_sectors[0]->activeStarsystem();
-}
-
-
-
 /* virtual */
 void Galaxy::putChildrenToGarbage() const
 {
@@ -93,32 +83,30 @@ void Galaxy::putChildrenToGarbage() const
 //    }
 }
 
-void Galaxy::add(model::Sector* model, const meti::vec3& center)
+void Galaxy::add(Sector* sector, const meti::vec3& center)
 { 
-    model->setGalaxy(id());
-    model->setPosition(center);
-
-    control::Sector* sector = new control::Sector(nullptr, model);
+    sector->model()->setGalaxy(id());
+    sector->model()->setPosition(center);
     m_sectors.push_back(sector);
 }
 
-model::Sector*
+Sector*
 Galaxy::randomSector()
 {
-    return meti::getRand(m_sectors)->model();
+    return meti::getRand(m_sectors);
 }
 
-model::Sector*
-Galaxy::closestSectorTo(model::Sector* toSector)
+Sector*
+Galaxy::closestSectorTo(Sector* toSector)
 {
-    float dist_min = INCREDIBLY_MAX_FLOAT;
+    Sector* result = nullptr;
 
-    model::Sector* result = nullptr;
+    float dist_min = INCREDIBLY_MAX_FLOAT;
     for (auto sector : m_sectors) {
-        float dist = meti::distance(toSector->position(), sector->model()->position());
+        float dist = meti::distance(toSector->model()->position(), sector->model()->position());
         if (dist < dist_min) {
             dist_min = dist;
-            result = sector->model();
+            result = sector;
         }
     }
 

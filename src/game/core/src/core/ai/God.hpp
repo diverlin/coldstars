@@ -23,9 +23,10 @@
 #include <core/common/GameDate.hpp>
 #include <core/struct/StarSystemsConditionData.hpp>
 
-
-class Starsystem;
+namespace control {
+class StarSystem;
 class Planet;
+}
 
 namespace model {
 class Galaxy;
@@ -57,10 +58,10 @@ private:
 
     StarSystemsConditionData data_starsystems_condition;
 
-    void __createLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
+    void __createLifeAtPlanet(control::Planet*, const StarSystemDescriptor&) const;
 
-    void __createSpaceStations(Starsystem*, int) const;
-    void __createShips(Starsystem*, int, race::Type race_id = race::Type::NONE, entity::Type subtype_id = entity::Type::NONE, entity::Type subsubtype_id = entity::Type::NONE) const;
+    void __createSpaceStations(control::StarSystem*, int) const;
+    void __createShips(control::StarSystem*, int, race::Type race_id = race::Type::NONE, entity::Type subtype_id = entity::Type::NONE, entity::Type subsubtype_id = entity::Type::NONE) const;
 
     void __proceedInvasion(control::Galaxy*) const;
 

@@ -151,11 +151,11 @@ Space::__updateVisible(control::StarSystem* starsystem,
     }
 
     for(auto* planet: starsystem->planets()) {
-        addIfVisible(planet->model(), visibilityData);
+        addIfVisible(planet, visibilityData);
     }
 
     for(auto* asteroid: starsystem->asteroids()) {
-        addIfVisible(asteroid->model(), visibilityData);
+        addIfVisible(asteroid, visibilityData);
     }
 }
 
@@ -210,45 +210,38 @@ void Space::addIfVisible(control::Star* star, const VisibilityData& data)
     //    }
 }
 
-void Space::addIfVisible(model::Planet* model, const VisibilityData& data)
+void Space::addIfVisible(control::Planet* planet, const VisibilityData& data)
 {
-    assert(model);
+    assert(planet);
 
 //    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-    assert(false);
-//    Base* view = __tryGetView(model);
-//    if (!view) {
-//        assert(false);
-//        auto descr = new descriptor::Planet;
-//        view = new view::Planet(model, descr);
-//        applyConstantRotationAnimation(view);
-//        __cache(model, descr, view);
-//    }
-//    assert(view);
+    Base* view = __tryGetViewCached(planet->id());
+    if (!view) {
+        view = new view::Planet(planet);
+        applyConstantRotationAnimation(view);
+        __cache(view);
+    }
+    assert(view);
 
-//    __add(view);
+    __add(view);
 //    }
 }
 
-void Space::addIfVisible(model::Asteroid* model, const VisibilityData& data)
+void Space::addIfVisible(control::Asteroid* asteroid, const VisibilityData& data)
 {
-    assert(model);
+    assert(asteroid);
 
     //if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
         //if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
-    assert(false);
-//            Base* view = __tryGetView(model);
-//            if (!view) {
-//                assert(false);
-//                auto descr = new descriptor::Asteroid;
-//                view = new view::Asteroid(model, descr);
-//                applyConstantRotationAnimation(view);
-//                __cache(model, descr, view);
-//            }
-//            assert(view);
+    Base* view = __tryGetViewCached(asteroid->id());
+    if (!view) {
+        view = new view::Asteroid(asteroid);
+        applyConstantRotationAnimation(view);
+        __cache(view);
+    }
+    assert(view);
 
-//            __add(view);
-        //}
+    __add(view);
     //}
 }
 
@@ -750,6 +743,7 @@ void Space::__render_NEW2(jeti::Renderer& render)
 
 void Space::render(control::StarSystem* starsystem, jeti::Camera& camera)
 {   
+    assert(starsystem);
     __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
 
     jeti::Renderer& renderer = client::global::get().render();
