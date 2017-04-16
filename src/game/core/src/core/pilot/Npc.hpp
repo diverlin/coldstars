@@ -30,6 +30,10 @@
 
 #include <set>
 
+namespace descriptor {
+class Npc;
+} // namespace descriptor
+
 class BaseAiModel;
 
 namespace model {
@@ -50,7 +54,7 @@ namespace model {
 class Npc : public Base {
 
 public:
-    Npc();
+    Npc(int_t);
     ~Npc() = default;
     Npc(const std::string& data);
     std::string data() const;
@@ -106,10 +110,12 @@ namespace control {
 class Npc : public Base
 {
 public:
-    Npc(int, entity::Type, entity::Type);
+    Npc(descriptor::Npc*, model::Npc*);
     virtual ~Npc();
 
     virtual void putChildrenToGarbage() const {}
+
+    void setVehicle(Vehicle* vehicle) { m_vehicle = vehicle; }
 
     Player* player() const { return m_player; }
     Vehicle* vehicle() const { return m_vehicle; }

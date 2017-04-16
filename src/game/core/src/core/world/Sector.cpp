@@ -82,13 +82,6 @@ Sector::Sector(descriptor::Sector* descr, model::Sector* model)
 Sector::~Sector()
 {}
 
-model::StarSystem*
-Sector::activeStarsystem() const {
-    assert(false);
-//    assert(m_starsystems.size() != 0);
-//    return m_starsystems[0];
-}
-
 /* virtual */
 void Sector::putChildrenToGarbage() const
 {
@@ -98,64 +91,63 @@ void Sector::putChildrenToGarbage() const
 //    }
 }
 
-//void Sector::add(model::StarSystem* _model, const glm::vec3& center)
-//{
-//    _model->setSector(model()->id());
-//assert(false);
-//    //    _model->setPosition(center);
-
-//    control::StarSystem* starsystem = new control::StarSystem(_model);
-//    m_starsystems.push_back(starsystem);
-//}
-
-model::StarSystem*
-Sector::randomStarsystem(int condition_id)
+void
+Sector::add(control::StarSystem* starsystem, const glm::vec3& center)
 {
-    model::StarSystem* result = nullptr;
-    assert(false);
-//    if (condition_id == NONE) {
-//        result = meti::getRand(m_starsystems)->model();
-//    } else {
-//        std::vector<model::Starsystem*> ss_vec;
-//        for (control::StarSystem* starsystem: m_starsystems) {
-//            if (starsystem->conditionId() == condition_id) {
-//                ss_vec.push_back(starsystem->model());
-//            }
-//        }
-//        if (ss_vec.size()) {
-//            result = meti::getRand(ss_vec);
-//        }
-//    }
+    starsystem->model()->setSector(model()->id());
+    starsystem->model()->setPosition(center);
+
+    m_starsystems.push_back(starsystem);
+}
+
+StarSystem*
+Sector::randomStarSystem(int condition_id)
+{
+    StarSystem* result = nullptr;
+    if (condition_id == NONE) {
+        result = meti::getRand(m_starsystems);
+    } else {
+        std::vector<StarSystem*> ss_vec;
+        for (StarSystem* starsystem: m_starsystems) {
+            if (starsystem->conditionId() == condition_id) {
+                ss_vec.push_back(starsystem);
+            }
+        }
+        if (ss_vec.size()) {
+            result = meti::getRand(ss_vec);
+        }
+    }
 
     return result;
 }
 
 
 
-model::StarSystem*
-Sector::closestStarsystemTo(model::StarSystem* toStarsystem, int condition_id)
+StarSystem*
+Sector::closestStarsystemTo(StarSystem* toStarsystem, int condition_id)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
-    model::StarSystem* result = nullptr;
+    StarSystem* result = nullptr;
     assert(false);
-//    for (auto starsystem: m_starsystems) {
-//        if (starsystem->id() != toStarsystem->id()) {
-//            if ( (starsystem->conditionId() == condition_id) || (condition_id == NONE) ) {
+    for (auto starsystem: m_starsystems) {
+        if (starsystem->id() != toStarsystem->id()) {
+            if ( (starsystem->conditionId() == condition_id) || (condition_id == NONE) ) {
+                assert(false);
 //                float dist = meti::distance(starsystem->position(), toStarsystem->position());
 //                if (dist < dist_min) {
 //                    dist_min = dist;
 //                    result = starsystem;
 //                }
-//            }
-//        }
-//    }
+            }
+        }
+    }
 
     return result;
 }
 
 void Sector::update(int time)
 {
-    for (control::StarSystem* starsystem: m_starsystems) {
+    for (StarSystem* starsystem: m_starsystems) {
         starsystem->update(time);
     }
 }

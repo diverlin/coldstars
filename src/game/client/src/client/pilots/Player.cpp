@@ -69,9 +69,6 @@
 #include <meti/RandUtils.hpp>
 
 Player::Player(int id)
-:
-npc(nullptr),
-starsystem(nullptr)     
 { 
 //    setId(id);
 //    setTypeId(entity::Type::PLAYER);
@@ -220,7 +217,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     client::global::get().screen().updateInSpace();
 }
              
-void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
+void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -247,10 +244,10 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
                 //starsystem->DrawBackground(render, world_coord);
                 render.setOrthogonalProjection(w*scale, h*scale);
 
-                for(Star* star : visible_STAR_vec)
-                {
-                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
-                }
+//                for(Star* star : visible_STAR_vec)
+//                {
+//                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
+//                }
             }
             render.deactivateFbo(0);
 
@@ -333,7 +330,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
                         //rocket->RenderInSpace(render, 1/scale);
                     }
                 }
-                if (show.collisionRadius() == true)
+                if (m_show.collisionRadius() == true)
                 {
                     RenderAxis(render);
                     RenderCollisionRadius(render);
@@ -431,7 +428,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     //render.SetOrthogonalProjection(w, h); 
 }
     
-void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
@@ -464,7 +461,7 @@ void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDr
 //            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
 //            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
         
-            if (show.GetRangeRadar() == true)
+            if (m_show.GetRangeRadar() == true)
             {
                 //npc->vehicle()->RenderRadarRange();
             }
@@ -828,7 +825,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
     }
 }
 
-void Player::SessionInSpace(Starsystem* starsystem, const TurnTimer& turn_timer)
+void Player::SessionInSpace(control::StarSystem* starsystem, const TurnTimer& turn_timer)
 {    
 //    starsystem->FindRenderVisibleEntities_c(this);
 //    if (meti::getRandInt(1,5) == 1)

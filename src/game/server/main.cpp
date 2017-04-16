@@ -20,7 +20,7 @@
 
 int main()
 {
-    model::World game;
+    control::World game;
     return game.run();
 }
 

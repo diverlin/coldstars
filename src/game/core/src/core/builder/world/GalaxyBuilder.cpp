@@ -64,14 +64,14 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
     return galaxy;
 }
 
-void Galaxy::__createInternals(control::Galaxy* model, descriptor::Galaxy* descr)
+void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
 {     
-    // DANGER assert(false);
-    //    for(const auto& id: descriptor.sectors) {
-    //        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-    //        Sector* sector = core::global::get().sectorBuilder().create(descriptor::Manager::get().sector().get(id));
-    //        galaxy->add(sector, center);
-    //    }
+    for(int_t id: descr->sectors) {
+        glm::vec3 position = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
+        descriptor::Sector* descr_sector = descriptor::Manager::get().sector(id);
+        control::Sector* sector = builder::Sector::gen(descr_sector);
+        galaxy->add(sector, position);
+    }
 }
 
 } // namespace builder

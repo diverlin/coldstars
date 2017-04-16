@@ -31,13 +31,9 @@ namespace descriptor {
 class Galaxy;
 } // namespace descriptor
 
-namespace  model {
-class Sector;
-class StarSystem;
-} // namespace model
-
 namespace  control {
 class Sector;
+class StarSystem;
 } // namespace control
 
 class StarSystemsConditionData;
@@ -63,8 +59,7 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<model::Base>(*this);
         ar & m_sectors;
     }
@@ -80,14 +75,12 @@ public:
     Galaxy(descriptor::Galaxy*, model::Galaxy*);
     ~Galaxy();
 
-    model::StarSystem* activeStarsystem() const;
-
     virtual void putChildrenToGarbage() const;
 
-    void add(model::Sector*, const meti::vec3&);
+    void add(Sector*, const meti::vec3&);
 
-    model::Sector* randomSector();
-    model::Sector* closestSectorTo(model::Sector*);
+    Sector* randomSector();
+    Sector* closestSectorTo(Sector*);
 
     void update(int);
 
@@ -104,7 +97,7 @@ private:
     descriptor::Galaxy* m_descriptor_galaxy = nullptr;
     model::Galaxy* m_model_galaxy = nullptr;
 
-    std::vector<control::Sector*> m_sectors;
+    std::vector<Sector*> m_sectors;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

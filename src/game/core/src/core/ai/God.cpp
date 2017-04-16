@@ -27,6 +27,7 @@
 #include <core/world/galaxy.hpp>
 #include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
+#include <core/model/world/starsystem.hpp>
 
 #include <core/builder/dock/KosmoportBuilder.hpp>
 #include <core/builder/dock/NatureLandBuilder.hpp>
@@ -65,26 +66,25 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld(descriptor::Galaxy* descriptor)
+void God::createWorld(descriptor::Galaxy* descr)
 {
-    assert(false);
-//    m_galaxy = core::global::get().galaxyBuilder().create(descriptor);
-//    __createLife(m_galaxy, descriptor);
-//    if (descriptor.allow_invasion == true) {
-//        __createInvasion(m_galaxy, descriptor);
-//    }
+    m_galaxy = builder::Galaxy::gen(descr);
+    __createLife(m_galaxy, descr);
+    if (descr->allow_invasion) {
+        __createInvasion(m_galaxy, descr);
+    }
 
-//    bool player2space = true;
-//    model::Starsystem* const starsystem = m_galaxy->randomSector()->randomStarsystem();
-//    if (player2space == true) {
-//        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
-//        glm::vec3 angle(0,0,0);
-//        //starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
-//    } else {
-//        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
-//    }
+    bool player2space = true;
+    control::StarSystem* starsystem = m_galaxy->randomSector()->randomStarSystem();
+    if (player2space == true) {
+        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,0);
+        //starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
+    } else {
+        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
+    }
 
-//    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
+    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
 }
 
 void God::update()
@@ -108,12 +108,12 @@ void God::update()
         LOG(data_starsystems_condition.info());
     }
 
-    if (turnTimer.getTurnEnded() == true) {
+    if (turnTimer.getTurnEnded()) {
         turnTimer.nextTurn();
         gameDate.dayPass();
     }
 
-    if (turnTimer.getTurnEnded() == true) {
+    if (turnTimer.getTurnEnded()) {
         manager::Garbage::get().erase();
 
         //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
@@ -145,13 +145,17 @@ void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) 
 
 void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
 {
-    assert(false);
-//    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-//        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
-//        race::type race_id = (race::type)meti::getRandInt((int)race::Type::R6, (int)race::Type::R7);
-//        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-//        __createShips(starsystem, ship_num, race_id);
-//    }
+    //!!!!
+    return;
+    //!!!!
+
+    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
+        control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
+        assert(starsystem);
+        race::Type race_id = (race::Type)meti::getRandInt((int)race::Type::R6, (int)race::Type::R7);
+        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        __createShips(starsystem, ship_num, race_id);
+    }
 }
 
 void God::__proceedInvasion(control::Galaxy* galaxy) const
@@ -179,7 +183,7 @@ void God::__proceedInvasion(control::Galaxy* galaxy) const
 //    starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
-void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
+void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
 {            
     //    unsigned long int population = 0;
     //    meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
@@ -247,7 +251,7 @@ void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& stars
     //    }
 }
 
-void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_system) const
+void God::__createSpaceStations(control::StarSystem* starsystem, int spacestation_per_system) const
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {
@@ -260,12 +264,11 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
         //int weapons_num = 5;
         
         control::SpaceStation* spacestation = builder::SpaceStation::gen();
-        assert(false);
-        //core::global::get().spaceStationBuilder().equip(spacestation);  // improove
+        builder::BaseVehicle::equip(spacestation);
 
-        control::Npc* npc = builder::Npc::gen(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        assert(false);
-        //spacestation->bindNpc(npc);
+        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        control::Npc* npc = builder::Npc::gen();
+        spacestation->bindNpc(npc);
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
@@ -291,7 +294,7 @@ void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_sys
     }
 }
 
-void God::__createShips(Starsystem* starsystem, int ship_num, race::Type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
+void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
 {
     entity::Type npc_subtype_id = entity::Type::NONE;
     entity::Type npc_subsubtype_id = entity::Type::NONE;
@@ -313,16 +316,14 @@ void God::__createShips(Starsystem* starsystem, int ship_num, race::Type npc_rac
         // VERY UGLY LOGIC END
 
         control::Ship* new_ship = builder::Ship::gen();
-        assert(false);
-        //builder::ShipBuilder::equip(new_ship); // improove
+        builder::Ship::equip(new_ship);
 
-        control::Npc* new_npc = builder::Npc::gen(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        assert(false);
-        //new_ship->bindNpc(new_npc);
+        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        control::Npc* new_npc = builder::Npc::gen();
+        new_ship->bindNpc(new_npc);
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
         //        glm::vec3 angle(0, 0, meti::getRandInt(360));
-        assert(false);
-//        starsystem->add(new_ship, center);
+        starsystem->add(new_ship, center);
     }
 }

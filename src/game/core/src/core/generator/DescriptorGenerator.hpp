@@ -36,6 +36,7 @@ class Star;
 class Planet;
 class WormHole;
 class Asteroid;
+class Npc;
 class Ship;
 class SpaceStation;
 class Satellite;
@@ -73,6 +74,7 @@ descriptor::Planet* genPlanet();
 descriptor::WormHole* genWormHole();
 descriptor::Asteroid* genAsteroid();
 
+descriptor::Npc* genNpc();
 descriptor::Ship* genShip();
 descriptor::SpaceStation* genSpaceStation();
 descriptor::Satellite* genSatellite();

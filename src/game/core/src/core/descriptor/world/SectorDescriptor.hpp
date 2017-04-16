@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 #include <ceti/StringUtils.hpp>
 #include <ceti/type/IdType.hpp>
@@ -32,7 +32,7 @@ struct Sector : public Base
 public:
     std::vector<int_t> starsystems;
 
-    Sector() = default;
+    Sector();
     ~Sector() = default;
 
     std::string info() const {

@@ -18,12 +18,14 @@
 
 #pragma once
 
-#include <vector>   
-#include <set>
-#include <algorithm>
+#include <meti/RandUtils.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+
+#include <vector>
+#include <set>
+#include <algorithm>
 
 namespace ceti {
 
@@ -34,11 +36,11 @@ public:
     pack() = default;
     ~pack() = default;
 
-    void add(T element) {
+    void add(const T& element) {
         this->push_back(element);
     }
 
-    T remove(T element) {
+    T remove(const T& element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             // swap the one to be removed with the last element
@@ -49,7 +51,7 @@ public:
         }
     }
 
-    T take(T element) {
+    T take(const T& element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             // swap the one to be removed with the last element
@@ -91,6 +93,15 @@ public:
             add(val);
         }
         return *this;
+    }
+
+    ceti::pack<T> random(int size) {
+        assert(!this->empty());
+        ceti::pack<T> result;
+        for (int i=0; i<size; ++i) {
+            result.add(meti::getRand(*this));
+        }
+        return result;
     }
 
 private:

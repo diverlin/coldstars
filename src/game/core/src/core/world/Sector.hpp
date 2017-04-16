@@ -30,10 +30,6 @@
 
 class Galaxy;
 
-namespace model {
-class StarSystem;
-} // namespace model
-
 namespace control {
 class StarSystem;
 } // namespace control
@@ -90,17 +86,15 @@ public:
     Sector(descriptor::Sector*, model::Sector*);
     ~Sector();
 
-    model::StarSystem* activeStarsystem() const;
-
     void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
     Galaxy* galaxy() const  { return m_galaxy; }
 
     virtual void putChildrenToGarbage() const;
 
-//    void add(model::StarSystem*, const glm::vec3&);
+    void add(control::StarSystem*, const glm::vec3&);
 
-    model::StarSystem* randomStarsystem(int condition_id = NONE);
-    model::StarSystem* closestStarsystemTo(model::StarSystem*, int condition_id = NONE);
+    StarSystem* randomStarSystem(int condition_id = NONE);
+    StarSystem* closestStarsystemTo(StarSystem*, int condition_id = NONE);
 
     void update(int);
 
@@ -119,7 +113,7 @@ private:
 
     Galaxy* m_galaxy = nullptr;
 
-    std::vector<control::StarSystem*> m_starsystems;
+    std::vector<StarSystem*> m_starsystems;
 
 //    friend class GuiGalaxyMap;
 //    friend class Observation;

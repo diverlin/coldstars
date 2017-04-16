@@ -59,10 +59,7 @@ namespace  view {
 
 
 BaseView::BaseView()
-{
-    assert(false);
-    // TODO extract m_descriptor_view = ..
-}
+{}
 
 BaseView::~BaseView() {
     delete m_animationRotation;

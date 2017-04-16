@@ -32,7 +32,7 @@ public:
     bool allow_invasion = true;
     std::vector<int_t> sectors;
 
-    Galaxy() = default;
+    Galaxy();
     ~Galaxy() = default;
 
     std::string info() const {

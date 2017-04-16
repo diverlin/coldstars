@@ -30,7 +30,10 @@
 
 class TurnTimer;
 
-class Starsystem;
+namespace control {
+class StarSystem;
+} // namespace control
+
 class Star;
 class Planet;
 class BlackHole;
@@ -40,8 +43,8 @@ class Npc;
 class SpaceStation;
 class Satellite;
 class Ship;
-class Container; 
-class RocketBullet; 
+class Container;
+class RocketBullet;
 
 class LazerTraceEffect;
 class ShockWaveEffect;
@@ -69,9 +72,12 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    Show& GetShow() { return show; }
+    void setStarSystem(control::StarSystem* starsystem) { m_starsystem = starsystem; }
+    control::StarSystem* starSystem() { return m_starsystem; }
 
-    Npc* GetNpc() const { return npc; }
+    Show& GetShow() { return m_show; }
+
+    Npc* GetNpc() const { return m_npc; }
     Cursor& cursor() { return m_cursor; }
 
     void BindNpc(Npc*);
@@ -90,12 +96,12 @@ public:
     //        void Resolve();
 
 private:
-    Npc* npc;
+    Npc* m_npc = nullptr;
 
     Cursor m_cursor;
 
-    Show show;
-    Starsystem* starsystem;
+    Show m_show;
+    control::StarSystem* m_starsystem = nullptr;
 
     // VISIBLE ENTITY LIST
     std::vector<Star*>         visible_STAR_vec;
@@ -115,12 +121,12 @@ private:
     std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
     //
     
-    void RenderInSpace(Starsystem*, bool, bool, bool);
-    void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
+    void RenderInSpace(control::StarSystem*, bool, bool, bool);
+    void RenderInSpace_NEW(jeti::Renderer&, control::StarSystem*);
     void RenderCollisionRadius(const jeti::Renderer&) const;
     void RenderAxis(const jeti::Renderer&) const;
 
-    void SessionInSpace(Starsystem*, const TurnTimer&);
+    void SessionInSpace(control::StarSystem*, const TurnTimer&);
     void SessionInKosmoport();
     void SessionInNatureLand();
 

@@ -30,9 +30,6 @@
 
 #include <common/Config.hpp>
 
-#include <meti/RandUtils.hpp>
-
-
 namespace builder {
 
 control::Sector*
@@ -72,13 +69,12 @@ Sector::__genTemplate(descriptor::Sector* descr)
 void
 Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
 {
-    // DANGER assert(false);
-//    for(const auto& id: descr->starsystems) {
-//        glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
-        
-//       control::StarSystem* starsystem = builder::StarSystem::gen(descriptor::Manager::get().starSystem(id));
-//        sector->add(starsystem, center);
-//    }
+    for(const auto& id: descr->starsystems) {
+        glm::vec3 position(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
+        descriptor::StarSystem* descr_starsystem = descriptor::Manager::get().starSystem(id);
+        control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
+        sector->add(starsystem, position);
+    }
 }
 
 } // namespace builder

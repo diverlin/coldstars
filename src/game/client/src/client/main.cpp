@@ -108,13 +108,16 @@ int main()
 
     Player* player = createPlayer();
 
-    model::World world;
+    control::World world;
     view::Space viewer;
+
+    control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
+    player->setStarSystem(starsystem);
+
     while(inputs_manager.runSession()) {
         inputs_manager.update(player);
         world.update();
-        assert(false);
-        //viewer.render(world.activeStarsystem(), camera);
+        viewer.render(player->starSystem(), camera);
         screen.draw();
     }
 

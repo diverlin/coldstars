@@ -100,9 +100,8 @@ void Ship::UpdateInSpace(int time, bool show_effect)
         UpdateSpecialAction();
 
         if (npc()) {
-            assert(false);
-            //npc()->updateInSpace(time, show_effect);
-            //weaponComplex().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
+            npc()->updateInSpace(time, show_effect);
+            //weapons().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
 
             updateOrientation();
 

@@ -59,6 +59,22 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
+
+namespace builder {
+
+void
+BaseVehicle::equip(control::Vehicle* vehicle)
+{
+    vehicle->manage(builder::item::Drive::gen());
+    vehicle->manage(builder::item::Bak::gen());
+    vehicle->manage(builder::item::Protector::gen());
+    vehicle->manage(builder::item::Scaner::gen());
+    vehicle->manage(builder::item::Radar::gen());
+    vehicle->manage(builder::item::Grapple::gen());
+    vehicle->manage(builder::item::Lazer::gen());
+    vehicle->load(builder::item::Rocket::gen());
+}
+
 //void BaseVehicle::_createSlots(Vehicle* vehicle)
 //{
 //    assert(false);
@@ -276,6 +292,7 @@ void BaseVehicle::equipBomb(Vehicle* vehicle, tech::Type tech_level)
     }    
 }
 
+} // namespace builder
 
 
 

@@ -18,17 +18,16 @@
 
 #pragma once
 
-namespace model {
+namespace control {
 
-class StarSystem;
+class Galaxy;
 
 class World {
 public:
     World();
     ~World();
-    bool operator==(const World& rhs) const;
 
-    model::StarSystem* activeStarsystem() const;
+    Galaxy* galaxy() const;
 
     bool run() const;
     void update();
@@ -37,4 +36,4 @@ private:
     bool m_isRunning = true;
 };
 
-} // namespace model
+} // namespace control

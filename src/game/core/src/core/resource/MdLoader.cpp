@@ -70,19 +70,19 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
     boost::optional<std::string> color = root.get_optional<std::string>("association.color");
 
     if (name) {
-        mesh->setName(name.get());
+        mesh->setNameStr(name.get());
     }
     if (race) {
-        mesh->setRace(race.get());
+        mesh->setRaceStr(race.get());
     }
-//    if (type) {
-//        mesh->setType("mesh::" + type.get());
-//    }
-//    if (subtype) {
-//        mesh->setSubtype(subtype.get());
-//    }
+    if (type) {
+        mesh->setTypeStr("mesh::" + type.get());
+    }
+    if (subtype) {
+        mesh->setSubTypeStr(subtype.get());
+    }
     if (color) {
-        mesh->setColor(color.get());
+        mesh->setColorStr(color.get());
     }
 
     std::string mesh_path = ceti::replace(path, ".od", ".obj");
@@ -93,8 +93,7 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
         mesh->setMaterialPath(material_path);
     }
 
-    assert(mesh->id() != NONE);
-//    assert(mesh->type() != NONE);
+    //assert(mesh->type() != NONE);
 }
 
 void
@@ -111,19 +110,19 @@ InfoLoader::read(const std::string& path, descriptor::Material* material)
     boost::optional<std::string> color = root.get_optional<std::string>("association.color");
 
     if (name) {
-        material->setName(name.get());
+        material->setNameStr(name.get());
     }
     if (race) {
-        material->setRace(race.get());
+        material->setRaceStr(race.get());
     }
-//    if (type) {
-//        material->setType("texture::" + type.get());
-//    }
-//    if (subtype) {
-//        material->setSubtype(subtype.get());
-//    }
+    if (type) {
+        material->setTypeStr("texture::" + type.get());
+    }
+    if (subtype) {
+        material->setSubTypeStr(subtype.get());
+    }
     if (color) {
-        material->setColor(color.get());
+        material->setColorStr(color.get());
     }
 
     boost::optional<float> brightThreshold = root.get_optional<float>("material.brightThreshold");
@@ -163,7 +162,6 @@ InfoLoader::read(const std::string& path, descriptor::Material* material)
     assert(material->row() != 0);
     assert(material->col() != 0);
 
-    assert(material->id() != NONE);
-//    assert(material->type() != NONE);
+    //assert(material->type() != NONE);
 }
 

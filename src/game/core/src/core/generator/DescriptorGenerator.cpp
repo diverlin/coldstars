@@ -23,6 +23,7 @@
 #include <core/descriptor/world/SectorDescriptor.hpp>
 #include <core/descriptor/world/StarSystemDescriptor.hpp>
 #include <core/descriptor/world/HyperSpace.hpp>
+#include <core/descriptor/pilot/Npc.hpp>
 
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
@@ -61,8 +62,7 @@ genGalaxy(const std::vector<int_t>& sectors) {
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::getRand(sectors));
     }
-
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -73,8 +73,7 @@ genSector(const std::vector<int_t>& starsystems) {
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::getRand(starsystems));
     }
-
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -88,7 +87,7 @@ genStarSystem(race::Type race)
 
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -96,7 +95,7 @@ descriptor::HyperSpace*
 genHyperSpace()
 {
     descriptor::HyperSpace* descr = new descriptor::HyperSpace;
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -142,7 +141,7 @@ genStar()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::STAR));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -173,7 +172,7 @@ genPlanet()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -259,7 +258,7 @@ genAsteroid()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::ASTEROID));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE_DEFORMED));
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -272,7 +271,7 @@ genWormHole()
 {
     descriptor::WormHole* descr = new descriptor::WormHole;
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -281,7 +280,16 @@ genContainer()
 {
     descriptor::Container* descr = new descriptor::Container;
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
+    return descr;
+}
+
+descriptor::Npc*
+genNpc()
+{
+    descriptor::Npc* descr = new descriptor::Npc;
+
+    descriptor::Manager::get().add(descr);
     return descr;
 }
 
@@ -366,7 +374,7 @@ genShip()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -453,7 +461,7 @@ genSpaceStation()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -539,7 +547,7 @@ genSatellite()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -556,7 +564,7 @@ genKosmoport(race::Type race)
     Kosmoport* descr = new Kosmoport;
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -566,7 +574,7 @@ genNatureLand()
 {
     NatureLand* descr = new NatureLand;
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -582,7 +590,7 @@ genAngar(race::Type race)
     Angar* descr = new Angar;
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -597,7 +605,7 @@ genStore(race::Type race)
     Store* descr = new Store;
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -612,7 +620,7 @@ genShop(race::Type race)
     Shop* descr = new Shop;
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -627,7 +635,7 @@ genGoverment(race::Type race)
     Goverment* descr = new Goverment;
     descr->setRace(race);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -685,7 +693,7 @@ genBak(int race, int tech_level)
     // descriptor::item::Bak
     descr->setFuel(fuel);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -743,7 +751,7 @@ genDrive(int race, int tech_level)
     descr->setSpeed(speed);
     descr->setHyper(hyper);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -795,7 +803,7 @@ genDroid(int race, int tech_level)
     // descriptor::item::Droid
     descr->setRepair(repair);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -858,7 +866,7 @@ genGrapple(int race, int tech_level)
     descr->setRadius(radius);
     descr->setSpeed(speed);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -914,7 +922,7 @@ genLazer(int race, int tech_level)
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -967,7 +975,7 @@ genProtector(int race, int tech_level)
     // descriptor::item::Protector
     descr->setProtection(protection);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -1019,7 +1027,7 @@ genRadar(int race, int tech_level)
     // descriptor::item::Radar
     descr->setRadius(radius);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -1080,7 +1088,7 @@ genRocket(int race, int tech_level)
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }
@@ -1133,7 +1141,7 @@ genScaner(int race, int tech_level)
     // descriptor::item::Radar
     descr->setScan(scan);
 
-    descriptor::Manager::get().reg(descr);
+    descriptor::Manager::get().add(descr);
 
     return descr;
 }

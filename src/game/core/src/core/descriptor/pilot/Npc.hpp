@@ -18,35 +18,28 @@
 
 #pragma once
 
-#include <core/builder/spaceobject/BaseVehicleBuilder.hpp>
-
-#include <ceti/type/IdType.hpp>
-
-#include <string>
+#include <core/descriptor/Base.hpp>
 
 namespace descriptor {
-class Ship;
-} // namespace descriptor
 
-namespace control {
-class Ship;
-} // namespace control
+class Npc : public Base {
 
-namespace builder {
-
-class Ship : public BaseVehicle
-{
 public:
-    static control::Ship* gen(descriptor::Ship*);
-    static control::Ship* gen(int_t, int_t ob_id = NONE);
-    static control::Ship* gen();
+    Npc();
+    ~Npc() = default;
+    Npc(const std::string& data);
+    std::string data() const;
 
 private:
-    Ship() = delete;
-    ~Ship() = delete;
+    // ..
 
-    static control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
-    static void __createInternals(control::Ship*, descriptor::Ship*);
-}; 
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+    }
+};
 
-} // namespace builder
+} // namespace desriptor
+

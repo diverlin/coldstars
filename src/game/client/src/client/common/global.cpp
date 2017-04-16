@@ -21,7 +21,7 @@
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 
-//#include <core/type/TypesCollector.hpp>
+#include <core/type/CollectorType.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
@@ -41,8 +41,8 @@ global& global::get()
 
 global::global()
     :
-//      m_types(new type::Collector)
-    /*,*/ m_screen(new jeti::Screen)
+      m_types(new type::Collector)
+    , m_screen(new jeti::Screen)
     , m_render(new jeti::Renderer)
     , m_camera(new jeti::Camera)
     , m_inputsManager(new UserInputInSpace)
