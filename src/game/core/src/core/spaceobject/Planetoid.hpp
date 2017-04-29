@@ -39,19 +39,23 @@ public:
     Planetoid(const std::string& data);
     std::string data() const;
 
-    void setRadius(int radius) { m_radius = radius; }
+    void setRadiusA(int radiusA) { m_radiusA = radiusA; }
+    void setRadiusB(int radiusB) { m_radiusB = radiusB; }
 
-    int radius() const { return m_radius; }
+    int radiusA() const { return m_radiusA; }
+    int radiusB() const { return m_radiusB; }
 
 private:
-    int m_radius = 0;
+    int m_radiusA = 0;
+    int m_radiusB = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_radius;
+        ar & m_radiusA;
+        ar & m_radiusB;
     }
 };
 
