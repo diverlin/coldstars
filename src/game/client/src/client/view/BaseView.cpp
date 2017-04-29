@@ -16,32 +16,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "BaseView.hpp"
 
-#include <ceti/type/IdType.hpp>
-#include <core/type/EntityType.hpp>
-
-#include <jeti/BaseView.hpp>
-
-namespace control {
-class Base;
-} // namespace control
+#include <core/common/Base.hpp>
+#include <core/descriptor/Base.hpp>
 
 namespace view {
 
-class Base : public jeti::view::BaseView {
-public:
-    Base(control::Base*);
-    ~Base();
+Base::Base(control::Base* base)
+    :
+      m_control_base(base)
+{}
 
-    int_t id() const;
-    entity::Type type() const;
-    int_t mesh() const;
-    int_t texture() const;
+Base::~Base()
+{}
 
-
-private:
-    control::Base* m_control_base = nullptr;
-};
+int_t Base::id() const { return m_control_base->id(); }
+entity::Type Base::type() const { return m_control_base->type(); }
+int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
+int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 
 } // namespace view

@@ -27,7 +27,7 @@
 
 namespace descriptor {
 
-struct Orientation : public Base, public ceti::descriptor::BaseView
+struct Orientation : public Base/*, public ceti::descriptor::BaseView*/
 {
 public:
     Orientation() = default;
@@ -36,7 +36,7 @@ public:
     std::string info() const {
         std::string result = "Orientation descriptor:\n";
         result += std::string(" size = ") + meti::to_string(m_size) + "\n";
-        result += ceti::descriptor::BaseView::info();
+//        result += ceti::descriptor::BaseView::info();
         result += Base::info();
         return result;
     }
@@ -55,7 +55,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
-        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
+//        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_size;
         ar & m_direction;
     }

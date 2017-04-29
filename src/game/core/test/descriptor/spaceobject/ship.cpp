@@ -43,7 +43,7 @@ TEST(descriptor, clone_ship) {
     testShipEquality(descr, copy);
     testVehicleEquality(descr, copy);
     testSpaceObjectEquality(descr, copy);
-    testBaseViewEquality(descr, copy);
+//    testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
     delete copy;

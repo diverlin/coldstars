@@ -29,7 +29,9 @@
 namespace view {
 
 Planet::Planet(control::Planet* planet)
-    : Base(planet->id(), planet->type()), m_planet(planet)
+    :
+      Base(planet)
+    , m_planet(planet)
 {
     setOrientationModel(planet->model());
 }

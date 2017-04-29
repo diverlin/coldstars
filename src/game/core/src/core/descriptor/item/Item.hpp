@@ -26,7 +26,7 @@
 
 namespace descriptor {
 
-class Item : public Base, public ceti::descriptor::BaseView
+class Item : public Base/*, public ceti::descriptor::BaseView*/
 {
 public:
     Item() = default;
@@ -67,7 +67,7 @@ protected:
         result += std::string(" deterioration = ") + std::to_string(m_deterioration) + "\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
         result += std::string(" price = ") + std::to_string(m_price) + "\n";
-        result += ceti::descriptor::BaseView::info();
+//        result += ceti::descriptor::BaseView::info();
         result += ::descriptor::Base::info();
         return result;
     }
@@ -77,7 +77,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<::descriptor::Base>(*this);
-        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
+//        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_race;
         ar & m_tech;
         ar & m_slotType;
