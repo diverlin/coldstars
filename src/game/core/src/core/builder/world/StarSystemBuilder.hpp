@@ -45,9 +45,9 @@ private:
 
     static void __createInternals(control::StarSystem*, descriptor::StarSystem*);
 
-    static void __createBackground(control::StarSystem&, int, int, int);
-    static void __createStar(control::StarSystem&);
-    static void __createPlanets(control::StarSystem&, int);
+    static void __createBackground(control::StarSystem*, int, int, int);
+    static void __createStar(control::StarSystem*);
+    static void __createPlanets(control::StarSystem*, int);
 
     static control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t ob_id = NONE);
 }; 

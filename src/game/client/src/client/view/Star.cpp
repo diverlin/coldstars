@@ -24,7 +24,9 @@
 namespace view {
 
 Star::Star(control::Star* star)
-    : Base(star->id(), star->type()), m_star(star)
+    :
+      Base(star)
+    , m_star(star)
 {
     setOrientationModel(star->model());
 }

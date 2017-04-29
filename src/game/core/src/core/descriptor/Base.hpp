@@ -41,6 +41,8 @@ public:
     void setObSubType(const entity::Type& obSubType) { m_obSubType = obSubType; }
     void setObSubSubType(const entity::Type& obSubSubType) { m_obSubSubType = obSubSubType; }
     void setRace(race::Type race) { m_race = race; }
+    void setMesh(int_t mesh) { m_mesh = mesh; }
+    void setTexture(int_t texture) { m_texture = texture; }
 
     int_t id() const { return m_id; }
     descriptor::Type type() const { return m_type; }
@@ -48,6 +50,8 @@ public:
     const entity::Type& obSubType() const { return m_obSubType; }
     const entity::Type& obSubSubType() const { return m_obSubSubType; }
     race::Type race() const { return m_race; }
+    int_t mesh() const { return m_mesh; }
+    int_t texture() const { return m_texture; }
 
     std::string info() const {
         std::string result = "descriptor::Base:\n";
@@ -57,6 +61,8 @@ public:
         result += std::string(" obSubtype = ") + to_string(m_obSubType) + "\n";
         result += std::string(" obSubsubtype = ") + to_string(m_obSubSubType) + "\n";
         result += std::string(" race = ") + to_string(m_race) + "\n";
+        result += std::string(" mesh = ") + std::to_string(m_mesh) + "\n";
+        result += std::string(" material = ") + std::to_string(m_texture) + "\n";
         return result;
     }
 
@@ -70,6 +76,8 @@ private:
     entity::Type m_obSubType = entity::Type::NONE;
     entity::Type m_obSubSubType = entity::Type::NONE;
     race::Type m_race = race::Type::NONE;
+    int_t m_mesh = NONE;
+    int_t m_texture = NONE;
 
 private:
     friend class boost::serialization::access;
@@ -81,6 +89,8 @@ private:
         ar & m_obSubType;
         ar & m_obSubSubType;
         ar & m_race;
+        ar & m_mesh;
+        ar & m_texture;
     }
 };
 

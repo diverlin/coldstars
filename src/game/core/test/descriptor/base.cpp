@@ -31,13 +31,15 @@ void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy)
     EXPECT_EQ(descr->obType(), copy->obType());
     EXPECT_EQ(descr->obSubType(), copy->obSubType());
     EXPECT_EQ(descr->obSubSubType(), copy->obSubSubType());
+    EXPECT_EQ(descr->mesh(), copy->mesh());
+    EXPECT_EQ(descr->texture(), copy->texture());
 }
 
-void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy)
-{
-    EXPECT_EQ(descr->texture(), copy->texture());
-    EXPECT_EQ(descr->mesh(), copy->mesh());
-}
+//void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy)
+//{
+//    EXPECT_EQ(descr->texture(), copy->texture());
+//    EXPECT_EQ(descr->mesh(), copy->mesh());
+//}
 
 
 } // namespace test

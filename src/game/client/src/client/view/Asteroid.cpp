@@ -25,7 +25,9 @@
 namespace view {
 
 Asteroid::Asteroid(control::Asteroid* asteroid)
-    : Base(asteroid->id(), asteroid->type()), m_asteroid(asteroid)
+    :
+      Base(asteroid)
+    , m_asteroid(asteroid)
 {   
     setOrientationModel(asteroid->model());
 }

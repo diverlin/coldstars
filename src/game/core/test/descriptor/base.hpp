@@ -29,6 +29,6 @@ class BaseView;
 namespace  test {
 
 void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy);
-void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy);
+//void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy);
 
 } // namespace test

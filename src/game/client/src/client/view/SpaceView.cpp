@@ -64,7 +64,6 @@
 #include <ceti/Collision.hpp>
 //#include <ceti/descriptor/Collector.hpp>
 
-
 namespace {
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
@@ -125,9 +124,7 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
 namespace view {
 
 Space::Space()
-{
-
-}
+{}
 
 Space::~Space()
 {}                                    
@@ -185,9 +182,8 @@ Space::__tryGetViewCached(int_t id)
     std::map<int_t, Base*>::const_iterator it = m_cache.find(id);
     if (it != m_cache.end()) {
         return it->second;
-    } else {
-        return nullptr;
     }
+    return nullptr;
 }
 
 void Space::addIfVisible(control::Star* star, const VisibilityData& data)
@@ -343,72 +339,68 @@ void Space::applyConstantRotationAnimation(Base* view)
 /// visible entities
 void Space::__add(Base* view)
 {
-    assert(false);
-//    switch(view->obType()) {
-//    case entity::Type::STAR: {
-//        view::Star* star = static_cast<view::Star*>(view);
-//        assert(star);
-//        m_stars.push_back(star);
-//        break;
-//    }
-//    case entity::Type::PLANET: {
-//        view::Planet* planet = static_cast<view::Planet*>(view);
-//        assert(planet);
-//        m_planets.push_back(planet);
-//        break;
-//    }
-//    case entity::Type::ASTEROID: {
-//        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
-//        assert(asteroid);
-//        m_asteroids.push_back(asteroid);
-//        break;
-//    }
-//    }
+    switch(view->type()) {
+    case entity::Type::STAR: {
+        view::Star* star = static_cast<view::Star*>(view);
+        assert(star);
+        m_stars.push_back(star);
+        break;
+    }
+    case entity::Type::PLANET: {
+        view::Planet* planet = static_cast<view::Planet*>(view);
+        assert(planet);
+        m_planets.push_back(planet);
+        break;
+    }
+    case entity::Type::ASTEROID: {
+        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
+        assert(asteroid);
+        m_asteroids.push_back(asteroid);
+        break;
+    }
+    }
 }
 
 void Space::__loadResourcesFor(Base* view)
 {
-    assert(false);
-//    {
-//    jeti::Mesh* mesh = nullptr;
+    {
+    jeti::Mesh* mesh = nullptr;
 
-//    int_t descritprorId = view->mesh();
-//    auto it = m_meshCollector.find(descritprorId);
-//    if (it != m_meshCollector.end()) {
-//        mesh = it->second;
-//    } else {
-//        auto& collector = core::global::get().descriptors().mesh();
-//        ceti::descriptor::Mesh* descriptor = collector.get(descritprorId);
-//        if (descriptor) {
-//            mesh = new jeti::Mesh(descriptor);
-//        }
-//        assert(mesh);
-//        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
-//    }
-//    view->setMesh(mesh);
-//    }
+    int_t descritprorId = view->mesh();
+    auto it = m_meshCollector.find(descritprorId);
+    if (it != m_meshCollector.end()) {
+        mesh = it->second;
+    } else {
+        ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
+        if (descriptor) {
+            mesh = new jeti::Mesh(descriptor);
+        }
+        assert(mesh);
+        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
+    }
+    view->setMesh(mesh);
+    }
 
 
-//    {
-//    jeti::control::Material* material = nullptr;
+    {
+    jeti::control::Material* material = nullptr;
 
-//    int_t descritprorId = model->material();
-//    auto it = m_materialCollector.find(descritprorId);
-//    if (it != m_materialCollector.end()) {
-//        material = it->second;
-//    } else {
-//        auto& collector = core::global::get().descriptors().material();
-//        ceti::descriptor::Material* descriptor = collector.get(descritprorId);
-//        if (descriptor) {
-//            jeti::model::Material* model = new jeti::model::Material(descriptor);
-//            material = new jeti::control::Material(model);
-//        }
-//        assert(material);
-//        m_materialCollector.insert(std::make_pair(descritprorId, material));
-//    }
-//    view->setMaterial(material);
+    int_t descritprorId = view->texture();
+    auto it = m_materialCollector.find(descritprorId);
+    if (it != m_materialCollector.end()) {
+        material = it->second;
+    } else {
+        ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(descritprorId);
+        if (descriptor) {
+            jeti::model::Material* model = new jeti::model::Material(descriptor);
+            material = new jeti::control::Material(model);
+        }
+        assert(material);
+        m_materialCollector.insert(std::make_pair(descritprorId, material));
+    }
+    view->setMaterial(material);
 
-//    }
+    }
 }
 
 void Space::__cache(Base* view)

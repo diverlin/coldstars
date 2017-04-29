@@ -43,7 +43,7 @@ TEST(descriptor, clone_protector) {
 
     testEquipmentEquality(descr, copy);
     testItemEquality(descr, copy);
-    testBaseViewEquality(descr, copy);
+//    testBaseViewEquality(descr, copy);
     testBaseEquality(descr, copy);
 
     delete copy;
