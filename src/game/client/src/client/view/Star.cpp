@@ -21,6 +21,8 @@
 #include <core/spaceobject/Star.hpp>
 #include <core/model/spaceobject/Star.hpp>
 
+#include <jeti/Render.hpp>
+
 namespace view {
 
 Star::Star(control::Star* star)
@@ -34,9 +36,10 @@ Star::Star(control::Star* star)
 Star::~Star()
 {}
 
-//void Star::draw(const jeti::Renderer& render)
-//{
-//}
+void Star::draw(const jeti::Renderer& render) const
+{
+    render.drawMesh(_mesh(), _material(), _modelMatrix());
+}
 
 //void Star::UpdateInfo()
 //{

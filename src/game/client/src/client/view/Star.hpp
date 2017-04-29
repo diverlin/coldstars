@@ -32,9 +32,7 @@ public:
     Star(control::Star*);
     virtual ~Star() override final;
 
-    //        void draw(const jeti::Renderer& render) override final;
-//    model::Star* model() const { return m_star->model(); }
-//    descriptor::Star* descriptor() const { return m_star->descriptor(); }
+    void draw(const jeti::Renderer& render) const override final;
 
     control::Star* star() const { return m_star; }
 

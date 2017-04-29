@@ -215,15 +215,8 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     vehicle->setDirection(dir);
     vehicle->updateOrientation(); // remove bad logic
 
-    //    alpitodorender vehicle->SetColor(color);
     m_vehicles.push_back(vehicle);
 }
-
-//void StarSystem::add(model::SpaceStation* _model)
-//{
-//    auto spacestation = new SpaceStation(_model);
-//    add(spacestation, _model->position(), _model->direction());
-//}
 
 void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
@@ -232,24 +225,12 @@ void StarSystem::add(SpaceStation* spacestation, const glm::vec3& position, cons
     m_spacestations.push_back(spacestation);
 }
 
-//void StarSystem::add(model::Ship* _model)
-//{
-//    auto ship = new Ship(_model);
-//    add(ship, _model->position(), _model->direction());
-//}
-
 void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
     __addVehicleCommon(ship, position, dir);
     model()->addShip(ship->id());
     m_ships.push_back(ship);
 }
-
-//void StarSystem::add(model::Satellite* _model)
-//{
-//    auto satellite = new Satellite(_model);
-//    add(satellite, _model->position(), _model->direction());
-//}
 
 void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
 {
@@ -312,7 +293,7 @@ void StarSystem::add(Planet* planet, SpaceObject* parent)
 
     float offset_radius = 0;
     if (m_planets.size()) {
-        offset_radius = m_planets.back()->model()->radius();
+        offset_radius = m_planets.back()->model()->radiusA();
     }
     planet->calibrateOrbit(offset_radius);
     planet->initOrbit();

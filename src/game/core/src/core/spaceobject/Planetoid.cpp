@@ -58,7 +58,8 @@ Planetoid::~Planetoid()
 void
 Planetoid::calibrateOrbit(float offset_radius)
 {
-    model()->setRadius(model()->radius() + offset_radius);
+    model()->setRadiusA(descriptor()->radiusA() + offset_radius);
+    model()->setRadiusB(descriptor()->radiusB() + offset_radius);
 }
 
 void Planetoid::initOrbit(int it)
@@ -71,8 +72,8 @@ void Planetoid::initOrbit(int it)
 void Planetoid::__createOrbit()
 {
     m_orbit.calcPath(
-                model()->radius(),
-                descriptor()->radiusB(),
+                model()->radiusA(),
+                model()->radiusB(),
                 descriptor()->speed(),
                 descriptor()->orbitPhi(),
                 descriptor()->clockwise());

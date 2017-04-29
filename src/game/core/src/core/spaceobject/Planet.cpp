@@ -55,7 +55,7 @@ Planet::putChildrenToGarbage() const
 int
 Planet::radius() const
 {
-    return model()->radius();
+    return model()->radiusA();
 }
 
 void

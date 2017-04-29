@@ -30,6 +30,7 @@ const int Star::SPEED_MAX = 10;
 Star::Star()
 {
     setType(Type::STAR);
+    setObType(entity::Type::STAR);
 }
 
 Star::Star(const std::string& data) {
