@@ -32,6 +32,7 @@ const int Asteroid::SPEED_MAX = 100;
 Asteroid::Asteroid()
 {
     setType(Type::ASTEROID);
+    setObType(entity::Type::ASTEROID);
 }
 
 } // namespace descriptor
