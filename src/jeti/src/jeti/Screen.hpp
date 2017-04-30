@@ -53,17 +53,6 @@ public:
 
     void init();
 
-    const ceti::Rect& rect() const { return m_rect; }
-
-    void setBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
-
-    glm::vec2 bottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
-    glm::vec2 topRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.width()*m_data.scale, m_rect.height()*m_data.scale)); }
-
-    const glm::vec2& bottomLeft() const    { return m_rect.GetBottomLeft(); }
-    const glm::vec2& topRight()    const    { return m_rect.GetTopRight(); }
-
-    void move(const glm::vec2&);
     void initiateScrollTo(const glm::vec2& scroll_coord) { m_targetCenter = scroll_coord; m_autoScroll = true; }
     void updateInSpace();
 
@@ -87,7 +76,6 @@ private:
     float m_lastTime = 0;
 
     float m_deltaScale = 0.0;
-    ceti::Rect m_rect;
     glm::vec2 m_targetCenter;
 
     void __drawFps();

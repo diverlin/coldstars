@@ -150,7 +150,8 @@ void Cursor::UpdateMouseStuff()
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
     m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
-    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*client::global::get().screen().scale() + client::global::get().screen().bottomLeftScreenWC();
+    assert(false);
+    //m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*client::global::get().screen().scale() + client::global::get().screen().bottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const

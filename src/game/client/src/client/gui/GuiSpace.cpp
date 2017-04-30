@@ -352,6 +352,6 @@ void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
 
     //RenderChildInfo(data_mouse);
     
-    RenderText(client::global::get().screen().bottomLeftScreenWC());
+    //RenderText(client::global::get().screen().bottomLeftScreenWC());
 }
 
