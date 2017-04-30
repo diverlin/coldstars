@@ -51,7 +51,6 @@ void Screen::init()
     
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
 
-    m_rect.set(0.0, 0.0, width, height);
     m_data.resize(width, height);
 }
 
@@ -86,27 +85,22 @@ void Screen::resize(int width, int height)
 }
 
 
-void Screen::move(const glm::vec2& delta)
-{
-    m_rect.MovingBy(delta);
-}
-
-void Screen::updateInSpace()
-{   
-    jeti::Camera& camera = client::global::get().camera();
-    m_rect.SetBottomLeft(camera.target().x, camera.target().y);
-    //if (auto_scroll == true)
-    //{
-    //glm::vec2 d_pos;
-    //float speed = 15.0;
-    //get_dPos_ToPoint(rect.center(), target_center, speed, d_pos);
-    //MovingBy(d_pos);
-    //if ( ( fabs(rect.center().x - target_center.x) < speed ) and ( fabs(rect.center().y - target_center.y) < speed ) )
-    //{
-    //auto_scroll = false;
-    //}
-    //}
-}
+//void Screen::updateInSpace()
+//{
+//    jeti::Camera& camera = client::global::get().camera();
+//    m_rect.SetBottomLeft(camera.target().x, camera.target().y);
+//    //if (auto_scroll == true)
+//    //{
+//    //glm::vec2 d_pos;
+//    //float speed = 15.0;
+//    //get_dPos_ToPoint(rect.center(), target_center, speed, d_pos);
+//    //MovingBy(d_pos);
+//    //if ( ( fabs(rect.center().x - target_center.x) < speed ) and ( fabs(rect.center().y - target_center.y) < speed ) )
+//    //{
+//    //auto_scroll = false;
+//    //}
+//    //}
+//}
 
 void Screen::draw()
 {
@@ -124,33 +118,18 @@ void Screen::draw()
 }
 
 void  Screen::increaseScale()
-{ 
+{
     m_deltaScale = SCALE_STEP;
     if (m_data.scale < SCALE_MAX) {
         m_data.scale += m_deltaScale;
-        
-        glm::vec2 center = m_rect.center();
-        float rate = 0.5 * m_deltaScale;
-        float offset_x = m_rect.width()*rate;
-        float offset_y = m_rect.height()*rate;
-        glm::vec2 offset(offset_x, offset_y);
-        m_rect.setCenter(center-offset);
     }
 }
 
 void Screen::decreaseScale()
-{ 
+{
     m_deltaScale = -SCALE_STEP;
     if (m_data.scale > SCALE_MIN) {
         m_data.scale += m_deltaScale;
-        
-        glm::vec2 center = m_rect.center();
-        float rate = 0.5 * m_deltaScale;
-        float offset_x = m_rect.width()*rate;
-        float offset_y = m_rect.height()*rate;
-        glm::vec2 offset(offset_x, offset_y);
-        
-        m_rect.setCenter(center-offset);
     }
 }
 

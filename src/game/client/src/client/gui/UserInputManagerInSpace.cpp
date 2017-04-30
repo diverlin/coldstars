@@ -303,6 +303,4 @@ void UserInputInSpace::__scrollCamera(Player* player)
         camera.appendSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
         break;
     }
-
-    client::global::get().screen().move(m_scrollAccel);
 }

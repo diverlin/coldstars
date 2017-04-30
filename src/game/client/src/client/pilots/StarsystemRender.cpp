@@ -94,7 +94,7 @@ void StarsystemRender::clearVisibleEntities()
 
 void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 {
-    if (ob->inRect(client::global::get().screen().rect())) {
+    if (ob->inRect(client::global::get().screen().data().rect)) {
         m_objects.push_back(ob);
     }
 }
@@ -214,7 +214,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     float scale = client::global::get().screen().scale();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
-    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
+//    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -248,7 +248,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
             render.activateFbo(1, w, h);
             {
                 //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
-                render.drawPostEffectVolumetricLight(world_coord, w, h);
+                //render.drawPostEffectVolumetricLight(world_coord, w, h);
             }
             render.deactivateFbo(1);
         }
@@ -518,44 +518,44 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
-    float scale = client::global::get().screen().scale();
-    if (center.x < (client::global::get().screen().bottomLeftScreenWC().x - size.x*scale))
-        return false;
-    if (center.x > (client::global::get().screen().topRightScreenWC().x   + size.x*scale))
-        return false;
-    if (center.y < (client::global::get().screen().bottomLeftScreenWC().y - size.y*scale))
-        return false;
-    if (center.y > (client::global::get().screen().topRightScreenWC().y   + size.y*scale))
-        return false;
+//    float scale = client::global::get().screen().scale();
+//    if (center.x < (client::global::get().screen().bottomLeftScreenWC().x - size.x*scale))
+//        return false;
+//    if (center.x > (client::global::get().screen().topRightScreenWC().x   + size.x*scale))
+//        return false;
+//    if (center.y < (client::global::get().screen().bottomLeftScreenWC().y - size.y*scale))
+//        return false;
+//    if (center.y > (client::global::get().screen().topRightScreenWC().y   + size.y*scale))
+//        return false;
     
     return true;
 }
 
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
-    float scale = client::global::get().screen().scale();
-    if (ob_center.x < (client::global::get().screen().bottomLeftScreenWC().x - sizeInPixels*scale))
-        return false;
-    if (ob_center.x > (client::global::get().screen().topRightScreenWC().x + sizeInPixels*scale))
-        return false;
-    if (ob_center.y < (client::global::get().screen().bottomLeftScreenWC().y - sizeInPixels*scale))
-        return false;
-    if (ob_center.y > (client::global::get().screen().topRightScreenWC().y + sizeInPixels*scale))
-        return false;
+//    float scale = client::global::get().screen().scale();
+//    if (ob_center.x < (client::global::get().screen().bottomLeftScreenWC().x - sizeInPixels*scale))
+//        return false;
+//    if (ob_center.x > (client::global::get().screen().topRightScreenWC().x + sizeInPixels*scale))
+//        return false;
+//    if (ob_center.y < (client::global::get().screen().bottomLeftScreenWC().y - sizeInPixels*scale))
+//        return false;
+//    if (ob_center.y > (client::global::get().screen().topRightScreenWC().y + sizeInPixels*scale))
+//        return false;
     
     return true;
 }
 
 bool isPointOnScreen(const glm::vec2& p)
 {       
-    if (p.x < (client::global::get().screen().bottomLeftScreenWC().x))
-        return false;
-    if (p.x > (client::global::get().screen().topRightScreenWC().x))
-        return false;
-    if (p.y < (client::global::get().screen().bottomLeftScreenWC().y))
-        return false;
-    if (p.y > (client::global::get().screen().topRightScreenWC().y))
-        return false;
+//    if (p.x < (client::global::get().screen().bottomLeftScreenWC().x))
+//        return false;
+//    if (p.x > (client::global::get().screen().topRightScreenWC().x))
+//        return false;
+//    if (p.y < (client::global::get().screen().bottomLeftScreenWC().y))
+//        return false;
+//    if (p.y > (client::global::get().screen().topRightScreenWC().y))
+//        return false;
     
     return true;
 }

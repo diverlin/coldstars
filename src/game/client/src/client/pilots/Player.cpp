@@ -229,7 +229,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* star
     float scale = client::global::get().screen().scale();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
-    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
+//    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
     render.clearColorAndDepthBuffers();
     
@@ -263,7 +263,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* star
             render.activateFbo(1, w, h);
             {
                 //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
-                render.drawPostEffectVolumetricLight(world_coord, w, h);
+                //render.drawPostEffectVolumetricLight(world_coord, w, h);
             }
             render.deactivateFbo(1);
         }
