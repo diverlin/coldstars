@@ -52,6 +52,7 @@ void Screen::init()
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
 
     m_rect.set(0.0, 0.0, width, height);
+    m_data.resize(width, height);
 }
 
 void Screen::__drawFps()
@@ -125,8 +126,8 @@ void Screen::draw()
 void  Screen::increaseScale()
 { 
     m_deltaScale = SCALE_STEP;
-    if (m_scale < SCALE_MAX) {
-        m_scale += m_deltaScale;
+    if (m_data.scale < SCALE_MAX) {
+        m_data.scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
         float rate = 0.5 * m_deltaScale;
@@ -140,8 +141,8 @@ void  Screen::increaseScale()
 void Screen::decreaseScale()
 { 
     m_deltaScale = -SCALE_STEP;
-    if (m_scale > SCALE_MIN) {
-        m_scale += m_deltaScale;
+    if (m_data.scale > SCALE_MIN) {
+        m_data.scale += m_deltaScale;
         
         glm::vec2 center = m_rect.center();
         float rate = 0.5 * m_deltaScale;
