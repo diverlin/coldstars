@@ -19,6 +19,7 @@
 #pragma once
 
 #include <ceti/NonCopyable.hpp>
+
 #include <glm/glm.hpp>
 
 namespace jeti {
@@ -27,27 +28,28 @@ class Camera : public NonCopyable
 {
     const float CAMERA_SPEED_MAX = 10.0f;
     const float CAMERA_INERTIA = 0.95f;
-
+    const float LOOKTO_Z = -1.0;
 public:
-    Camera();
-    ~Camera();
+    Camera() = default;
+    ~Camera() = default;
 
-    const glm::vec3& lookTo() const { return m_lookTo; }
-    const glm::vec3& lookFrom() const { return m_lookFrom; }
-    float lookRadius() const { return m_lookRadius; }
+    void setPosition(const glm::vec3& position) { m_position = position; }
+    const glm::vec3& target() const { return m_target; }
+    const glm::vec3& position() const { return m_position; }
+    float radius() const { return m_radius; }
     const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
     void appendSpeed(const glm::vec3&);
 
-    void update(int, int);
+    void update();
 
 private:
-    float m_lookRadius = 500.0;
+    float m_radius = 1000.0;
 
-    glm::vec3 m_lookFrom = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
 
-    glm::vec3 m_lookTo = glm::vec3(0.0f, 0.0f, 499.0f);
-    glm::vec3 m_direction = glm::vec3(0.0f, 0.0f, -11.0f);
+    glm::vec3 m_target;
+    glm::vec3 m_direction = glm::vec3(0.0f, 0.0f, LOOKTO_Z);
     glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 
     float m_inertiaFactor = CAMERA_INERTIA;

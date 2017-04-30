@@ -432,9 +432,7 @@ void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, boo
 {   
     jeti::Renderer& renderer = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
-    int w = client::global::get().screen().width();
-    int h = client::global::get().screen().height();
-    camera.update(w, h);
+    camera.update();
     
     renderer.composeViewMatrix(camera.viewMatrix());
 
