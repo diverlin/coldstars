@@ -62,64 +62,6 @@
 #include <jeti/animations/AnimationConstantRotation.hpp>
 
 #include <ceti/Collision.hpp>
-//#include <ceti/descriptor/Collector.hpp>
-
-namespace {
-
-bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
-{
-    if (center.x < (screen_wc.x - size.x*scale)) {
-        return false;
-    }
-    if (center.x > (screen_wc.x + size.x*scale)) {
-        return false;
-    }
-    if (center.y < (screen_wc.y - size.y*scale)) {
-        return false;
-    }
-    if (center.y > (screen_wc.y + size.y*scale)) {
-        return false;
-    }
-    return true;
-}
-
-bool isRectOnVisibleScreenArea(const glm::vec2& center, const glm::vec2& size, const glm::vec2& screen_wc, float scale)
-{
-    if (center.x < (screen_wc.x - size.x*scale)) {
-        return false;
-    }
-    if (center.x > (screen_wc.x + size.x*scale)) {
-        return false;
-    }
-    if (center.y < (screen_wc.y - size.y*scale)) {
-        return false;
-    }
-    if (center.y > (screen_wc.y + size.y*scale)) {
-        return false;
-    }
-    return true;
-}
-
-bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
-{
-    if (p.x < (screen_wc.x)) {
-        return false;
-    }
-    if (p.x > (screen_wc.x)) {
-        return false;
-    }
-    if (p.y < (screen_wc.y)) {
-        return false;
-    }
-    if (p.y > (screen_wc.y)) {
-        return false;
-    }
-
-    return true;
-}
-
-} // namespace
-
 
 namespace view {
 
@@ -189,11 +131,10 @@ Space::__tryGetViewCached(int_t id)
 void Space::addIfVisible(control::Star* star, const VisibilityData& data)
 {
     assert(star);
-//    if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-        //descriptor::Star* descriptor = core::global::get().descriptors().star().get(star->descriptorId());
-        //jeti::control::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
-        //jeti::Mesh* mesh = nullptr;
-        //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
+    if (!isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
+        return;
+    }
+
     Base* view = __tryGetViewCached(star->id());
     if (!view) {
         view = new view::Star(star);
@@ -203,14 +144,16 @@ void Space::addIfVisible(control::Star* star, const VisibilityData& data)
     assert(view);
 
     __add(view);
-    //    }
 }
 
 void Space::addIfVisible(control::Planet* planet, const VisibilityData& data)
 {
     assert(planet);
 
-//    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
+    if (!isRectOnVisibleScreenArea(planet->position(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
+        return;
+    }
+
     Base* view = __tryGetViewCached(planet->id());
     if (!view) {
         view = new view::Planet(planet);
@@ -220,15 +163,18 @@ void Space::addIfVisible(control::Planet* planet, const VisibilityData& data)
     assert(view);
 
     __add(view);
-//    }
 }
 
 void Space::addIfVisible(control::Asteroid* asteroid, const VisibilityData& data)
 {
     assert(asteroid);
+    if (!isRectOnVisibleScreenArea(asteroid->position(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
+        return;
+    }
+    if (!ceti::isPointInObserverRadius(asteroid->position(), data.observer.center, data.observer.radius)) {
+        return;
+    }
 
-    //if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
-        //if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
     Base* view = __tryGetViewCached(asteroid->id());
     if (!view) {
         view = new view::Asteroid(asteroid);
@@ -238,7 +184,6 @@ void Space::addIfVisible(control::Asteroid* asteroid, const VisibilityData& data
     assert(view);
 
     __add(view);
-    //}
 }
 
 void Space::applyConstantRotationAnimation(Base* view)
@@ -823,5 +768,62 @@ void Space::__renderAxis(const jeti::Renderer& render) const
 */
     //render.disable_DEPTH();
 }         
+
+
+bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
+{
+    if (center.x < (screen_wc.x - size.x*scale)) {
+        return false;
+    }
+    if (center.x > (screen_wc.x + size.x*scale)) {
+        return false;
+    }
+    if (center.y < (screen_wc.y - size.y*scale)) {
+        return false;
+    }
+    if (center.y > (screen_wc.y + size.y*scale)) {
+        return false;
+    }
+    return true;
+}
+
+bool isRectOnVisibleScreenArea(const glm::vec2& center, const glm::vec2& size, const glm::vec2& screen_wc, float scale)
+{
+    const glm::vec3 center3(center.x, center.y, 0);
+    const glm::vec3 size3(size.x, size.y, 0);
+    return isRectOnVisibleScreenArea(center3, size3, screen_wc, scale);
+}
+
+bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
+{
+    if (p.x < (screen_wc.x)) {
+        return false;
+    }
+    if (p.x > (screen_wc.x)) {
+        return false;
+    }
+    if (p.y < (screen_wc.y)) {
+        return false;
+    }
+    if (p.y > (screen_wc.y)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool isObjectVisible(const glm::vec3& center, const glm::vec3& size3, const jeti::Screen::Data& screen)
+{
+    assert(center.z == screen.worldcoolds.z);
+    glm::vec3 diffv = center - screen.worldcoolds;
+    float size = std::max(size3.x, size3.y) / 2;
+    float scaledSize = size * screen.scale;
+    float dist = glm::length(diffv);
+    if (dist < (screen.scaledRadius() - scaledSize)) {
+        return true;
+    }
+
+    return false;
+}
 
 } // namespace view

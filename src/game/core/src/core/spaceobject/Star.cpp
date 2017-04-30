@@ -41,9 +41,6 @@ Star::Star(descriptor::Star* descr, model::Star* model)
     , m_descriptor_star(descr)
     , m_model_star(model)
 {
-//    setId(id);
-//    setTypeId(entity::Type::STAR);
-
 //    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
 

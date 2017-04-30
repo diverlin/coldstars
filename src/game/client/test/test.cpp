@@ -31,6 +31,7 @@
 #include <client/view/Asteroid.hpp>
 
 #include <client/common/global.hpp>
+#include <client/view/SpaceView.hpp>
 
 #include <gtest/gtest.h>
 
@@ -60,7 +61,7 @@ TEST(view, star)
 
 TEST(view, planet)
 {
-    //client::global::get().init();
+    client::global::get().init();
     control::Planet* planet = builder::Planet::gen();
     view::Planet* view = new view::Planet(planet);
 
@@ -69,7 +70,7 @@ TEST(view, planet)
 
 TEST(view, asteroid)
 {
-    //client::global::get().init();
+    client::global::get().init();
     control::Asteroid* asteroid = builder::Asteroid::gen();
     view::Asteroid* view = new view::Asteroid(asteroid);
 
@@ -84,3 +85,44 @@ TEST(view, asteroid)
 
 //    validate(ship->descriptor(), view);
 //}
+
+TEST(view, object_visible)
+{
+    jeti::Screen::Data screen;
+    screen.resize(800, 600);
+    glm::vec3 center;
+    glm::vec3 size3 = glm::vec3(100.0f, 100.0f, 100.0f);
+
+    float size = std::max(size3.x, size3.y) / 2;
+
+    std::vector<float> scales = { 0.1f, 1.0f, 2.0f };
+    // std::vector<float> scales = { 0.1f };
+    for (float scale: scales) {
+        // std::cout << "scale=" << scale << std::endl;
+        screen.scale = scale;
+
+        float threshold = screen.scaledRadius() - size * screen.scale;
+
+        // object and wordcoords at (0,0,0)
+        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+        center = glm::vec3(0.0f, 0.0f, 0.0f);
+        EXPECT_TRUE(view::isObjectVisible(center, size3, screen));
+
+        // object inside the screen radius, near to visibility threshold
+        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+        center = glm::vec3(threshold - 0.1f, 0.0f, 0.0f);
+        EXPECT_TRUE(view::isObjectVisible(center, size3, screen));
+
+        // object out of screen radius, near to visibility threshold
+        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+        center = glm::vec3(threshold + 0.1f, 0.0f, 0.0f);
+        EXPECT_FALSE(view::isObjectVisible(center, size3, screen));
+
+        // object out of screen radius
+        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+        center = glm::vec3(threshold + 10000.0f, 0.0f, 0.0f);
+        EXPECT_FALSE(view::isObjectVisible(center, size3, screen));
+    }
+}
+
+

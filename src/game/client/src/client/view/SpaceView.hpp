@@ -20,7 +20,7 @@
 
 #include <vector>
 #include <jeti/Render.hpp>
-//#include <ceti/descriptor/Collector.hpp>
+#include <jeti/Screen.hpp>
 
 #include <core/world/starsystem.hpp>
 
@@ -174,6 +174,12 @@ private:
 
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
 };
+
+bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);
+bool isRectOnVisibleScreenArea(const glm::vec2& center, const glm::vec2& size, const glm::vec2& screen_wc, float scale);
+bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
+
+bool isObjectVisible(const glm::vec3& center, const glm::vec3& size, const jeti::Screen::Data& screen);
 
 } // namespace view
 
