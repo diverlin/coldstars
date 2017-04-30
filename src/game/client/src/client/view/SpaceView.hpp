@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <jeti/Render.hpp>
+#include <jeti/Camera.hpp>
 #include <jeti/Screen.hpp>
 
 #include <core/world/starsystem.hpp>
@@ -68,30 +69,16 @@ class BaseView;
 
 namespace view {
 
-struct VisibilityData
-{
-    struct VisibilityScreenData {
-        glm::vec2 worldcoord;
-        float scale = 1.0f;
-    };
-    struct VisibilityObserverData {
-        glm::vec3 center;
-        float radius = 0.0f;
-    };
-    VisibilityScreenData screen;
-    VisibilityObserverData observer;
-};
-
 class Space
 {
 public:
-    Space();
+    Space(jeti::Camera& camera);
     ~Space();
 
     /// visible entities
-    void addIfVisible(control::Star*, const VisibilityData&);
-    void addIfVisible(control::Planet*, const VisibilityData&);
-    void addIfVisible(control::Asteroid*, const VisibilityData&);
+    bool addIfVisible(control::Star*, const jeti::Screen::Data&);
+    bool addIfVisible(control::Planet*, const jeti::Screen::Data&);
+    bool addIfVisible(control::Asteroid*, const jeti::Screen::Data& data);
 //    void addIfVisible(view::Container*, const VisibilityData&);
 //    void addIfVisible(BulletDrawable*, const VisibilityData&);
 //    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
@@ -105,7 +92,7 @@ public:
 //    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
-    void render(control::StarSystem*, jeti::Camera&);
+    void render(control::StarSystem*);
 
 private:
     /// visible entities
@@ -128,10 +115,7 @@ private:
 
     void applyConstantRotationAnimation(Base*);
 
-    void __updateVisible(control::StarSystem* starsystem,
-                  const meti::vec3& lookFrom,
-                  const meti::vec3& lookTo,
-                  float lookFar);
+    void __updateVisible(control::StarSystem* starsystem);
 
     void __render_NEW(jeti::Renderer&);
     void __render_NEW2(jeti::Renderer&);
@@ -173,13 +157,20 @@ private:
     std::map<int_t, jeti::control::Material*> m_materialCollector;
 
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
+
+    bool __isObjectOnScreen(const glm::vec3& center, const ceti::Rect& rect);
+    jeti::Camera& m_camera;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);
 bool isRectOnVisibleScreenArea(const glm::vec2& center, const glm::vec2& size, const glm::vec2& screen_wc, float scale);
 bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
 
-bool isObjectVisible(const glm::vec3& center, const glm::vec3& size, const jeti::Screen::Data& screen);
+bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect);
+bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect);
+bool isObjectOnScreen(const glm::vec3& pos_sc, const ceti::Rect& rect);
+
+glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& screen);
 
 } // namespace view
 

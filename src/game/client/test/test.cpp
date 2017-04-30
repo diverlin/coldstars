@@ -86,43 +86,79 @@ TEST(view, asteroid)
 //    validate(ship->descriptor(), view);
 //}
 
-TEST(view, object_visible)
+//TEST(view, object_visible)
+//{
+//    jeti::Screen::Data screen;
+//    screen.resize(800, 600);
+//    glm::vec3 center;
+//    glm::vec3 size3 = glm::vec3(100.0f, 100.0f, 100.0f);
+
+//    float size = std::max(size3.x, size3.y) / 2;
+
+//    std::vector<float> scales = { 0.1f, 1.0f, 2.0f };
+//    // std::vector<float> scales = { 0.1f };
+//    for (float scale: scales) {
+//        // std::cout << "scale=" << scale << std::endl;
+//        screen.scale = scale;
+
+//        float threshold = screen.scaledRadius() - size * screen.scale;
+
+//        // object and wordcoords at (0,0,0)
+//        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+//        center = glm::vec3(0.0f, 0.0f, 0.0f);
+//        EXPECT_TRUE(view::isObjectOnScreen(center, size3, screen));
+
+//        // object inside the screen radius, near to visibility threshold
+//        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+//        center = glm::vec3(threshold - 0.1f, 0.0f, 0.0f);
+//        EXPECT_TRUE(view::isObjectOnScreen(center, size3, screen));
+
+//        // object out of screen radius, near to visibility threshold
+//        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+//        center = glm::vec3(threshold + 0.1f, 0.0f, 0.0f);
+//        EXPECT_FALSE(view::isObjectOnScreen(center, size3, screen));
+
+//        // object out of screen radius
+//        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
+//        center = glm::vec3(threshold + 10000.0f, 0.0f, 0.0f);
+//        EXPECT_FALSE(view::isObjectOnScreen(center, size3, screen));
+//    }
+//}
+
+TEST(view, objectOnScreen)
 {
+    jeti::Camera camera;
+    camera.setPosition(glm::vec3(0,0,0));
+
+    glm::vec3 pos_wc(1000, 1000, 0);
     jeti::Screen::Data screen;
-    screen.resize(800, 600);
-    glm::vec3 center;
-    glm::vec3 size3 = glm::vec3(100.0f, 100.0f, 100.0f);
+    screen.resize(1000, 1000);
 
-    float size = std::max(size3.x, size3.y) / 2;
+    glm::vec3 pos_sc;
 
-    std::vector<float> scales = { 0.1f, 1.0f, 2.0f };
-    // std::vector<float> scales = { 0.1f };
-    for (float scale: scales) {
-        // std::cout << "scale=" << scale << std::endl;
-        screen.scale = scale;
+    pos_sc = view::screenCoord(pos_wc, camera);
+    EXPECT_EQ(glm::vec3(1000, 1000, 0), pos_sc);
+    EXPECT_TRUE(view::isPointInRect(pos_sc, screen.rect));
 
-        float threshold = screen.scaledRadius() - size * screen.scale;
+    camera.setPosition(glm::vec3(500,0,0));
+    pos_sc = view::screenCoord(pos_wc, camera);
+    EXPECT_EQ(glm::vec3(500, 1000, 0), pos_sc);
+    EXPECT_TRUE(view::isPointInRect(pos_sc, screen.rect));
 
-        // object and wordcoords at (0,0,0)
-        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
-        center = glm::vec3(0.0f, 0.0f, 0.0f);
-        EXPECT_TRUE(view::isObjectVisible(center, size3, screen));
+    camera.setPosition(glm::vec3(999,999,0));
+    pos_sc = view::screenCoord(pos_wc, camera);
+    EXPECT_EQ(glm::vec3(1, 1, 0), pos_sc);
+    EXPECT_TRUE(view::isPointInRect(pos_sc, screen.rect));
 
-        // object inside the screen radius, near to visibility threshold
-        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
-        center = glm::vec3(threshold - 0.1f, 0.0f, 0.0f);
-        EXPECT_TRUE(view::isObjectVisible(center, size3, screen));
+    camera.setPosition(glm::vec3(-1000,-1000,0));
+    pos_sc = view::screenCoord(pos_wc, camera);
+    EXPECT_EQ(glm::vec3(2000, 2000, 0), pos_sc);
+    EXPECT_FALSE(view::isPointInRect(pos_sc, screen.rect));
 
-        // object out of screen radius, near to visibility threshold
-        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
-        center = glm::vec3(threshold + 0.1f, 0.0f, 0.0f);
-        EXPECT_FALSE(view::isObjectVisible(center, size3, screen));
-
-        // object out of screen radius
-        screen.worldcoolds = glm::vec3(0.0f, 0.0f, 0.0f);
-        center = glm::vec3(threshold + 10000.0f, 0.0f, 0.0f);
-        EXPECT_FALSE(view::isObjectVisible(center, size3, screen));
-    }
+    camera.setPosition(glm::vec3(2001,2001,0));
+    pos_sc = view::screenCoord(pos_wc, camera);
+    EXPECT_EQ(glm::vec3(-1001, -1001, 0), pos_sc);
+    EXPECT_FALSE(view::isPointInRect(pos_sc, screen.rect));
 }
 
 

@@ -36,16 +36,13 @@ class Screen : public SFMLWrapper
 public:
     class Data {
     public:
-        int width = 0;
-        int height = 0;
+        ceti::Rect rect;
         int radius = 0;
-        glm::vec3 worldcoolds;
         float scale = 1.0f;
         Data() = default;
        ~Data() = default;
         void resize(int w, int h) {
-            width = w;
-            height = h;
+            rect.setSize(w, h);
             radius = std::sqrt(w*w + h*h);
         }
         float scaledRadius() const { return radius / scale; }
@@ -67,7 +64,7 @@ public:
     const glm::vec2& topRight()    const    { return m_rect.GetTopRight(); }
 
     void move(const glm::vec2&);
-    void initiateScrollTo(const glm::vec2& scroll_coord) { m_targetCenter = scroll_coord; m_autoScroll = true; };
+    void initiateScrollTo(const glm::vec2& scroll_coord) { m_targetCenter = scroll_coord; m_autoScroll = true; }
     void updateInSpace();
 
     void resize(int, int);
@@ -78,6 +75,8 @@ public:
     float scale() const { return m_data.scale; }
     void increaseScale();
     void decreaseScale();
+
+    const Data& data() const { return m_data; }
 
 private:
     Data m_data;

@@ -109,7 +109,7 @@ int main()
     Player* player = createPlayer();
 
     control::World world;
-    view::Space viewer;
+    view::Space viewer(camera);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);
@@ -117,7 +117,7 @@ int main()
     while(inputs_manager.runSession()) {
         inputs_manager.update(player);
         world.update();
-        viewer.render(player->starSystem(), camera);
+        viewer.render(player->starSystem());
         screen.draw();
     }
 

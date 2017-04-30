@@ -65,36 +65,31 @@
 
 namespace view {
 
-Space::Space()
+Space::Space(jeti::Camera& camera)
+    :
+      m_camera(camera)
 {}
 
 Space::~Space()
 {}                                    
 
 void
-Space::__updateVisible(control::StarSystem* starsystem,
-                      const meti::vec3& lookFrom,
-                      const meti::vec3& lookTo,
-                      float lookFar)
+Space::__updateVisible(control::StarSystem* starsystem)
 {
     __clear();
 
-    VisibilityData visibilityData;
-    visibilityData.screen.worldcoord.x = lookTo.x;
-    visibilityData.screen.worldcoord.y = lookTo.y;
-    visibilityData.observer.center = lookFrom;
-    visibilityData.observer.radius = lookFar;
+    const jeti::Screen::Data& screenData = client::global::get().screen().data();
 
     for(auto* star: starsystem->stars()) {
-        addIfVisible(star, visibilityData);
+        addIfVisible(star, screenData);
     }
 
     for(auto* planet: starsystem->planets()) {
-        addIfVisible(planet, visibilityData);
+        addIfVisible(planet, screenData);
     }
 
     for(auto* asteroid: starsystem->asteroids()) {
-        addIfVisible(asteroid, visibilityData);
+        addIfVisible(asteroid, screenData);
     }
 }
 
@@ -128,11 +123,12 @@ Space::__tryGetViewCached(int_t id)
     return nullptr;
 }
 
-void Space::addIfVisible(control::Star* star, const VisibilityData& data)
+bool
+Space::addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 {
     assert(star);
-    if (!isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
-        return;
+    if (!isObjectOnScreen(star->position(), data.rect)) {
+        return false;
     }
 
     Base* view = __tryGetViewCached(star->id());
@@ -144,14 +140,16 @@ void Space::addIfVisible(control::Star* star, const VisibilityData& data)
     assert(view);
 
     __add(view);
+
+    return true;
 }
 
-void Space::addIfVisible(control::Planet* planet, const VisibilityData& data)
+bool
+Space::addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 {
     assert(planet);
-
-    if (!isRectOnVisibleScreenArea(planet->position(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
-        return;
+    if (!__isObjectOnScreen(planet->position(), data.rect)) {
+        return false;
     }
 
     Base* view = __tryGetViewCached(planet->id());
@@ -163,17 +161,20 @@ void Space::addIfVisible(control::Planet* planet, const VisibilityData& data)
     assert(view);
 
     __add(view);
+
+    return true;
 }
 
-void Space::addIfVisible(control::Asteroid* asteroid, const VisibilityData& data)
+bool
+Space::addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
 {
     assert(asteroid);
-    if (!isRectOnVisibleScreenArea(asteroid->position(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
-        return;
+    if (!__isObjectOnScreen(asteroid->position(), data.rect)) {
+        return false;
     }
-    if (!ceti::isPointInObserverRadius(asteroid->position(), data.observer.center, data.observer.radius)) {
-        return;
-    }
+//    if (!ceti::isPointInObserverRadius(asteroid->position(), data.wc, m_playerRadius)) {
+//        return false;
+//    }
 
     Base* view = __tryGetViewCached(asteroid->id());
     if (!view) {
@@ -184,6 +185,8 @@ void Space::addIfVisible(control::Asteroid* asteroid, const VisibilityData& data
     assert(view);
 
     __add(view);
+
+    return true;
 }
 
 void Space::applyConstantRotationAnimation(Base* view)
@@ -678,19 +681,16 @@ void Space::__render_NEW2(jeti::Renderer& render)
 //                         bool forceDraw_orbits,
 //                         bool forceDraw_path)
 
-void Space::render(control::StarSystem* starsystem, jeti::Camera& camera)
+void Space::render(control::StarSystem* starsystem)
 {   
     assert(starsystem);
-    __updateVisible(starsystem, camera.lookFrom(), camera.lookTo(), camera.lookRadius());
-
     jeti::Renderer& renderer = client::global::get().render();
 
-    int w = client::global::get().screen().width();
-    int h = client::global::get().screen().height();
-
-    camera.update(w, h);
+    m_camera.update();
     
-    renderer.composeViewMatrix(camera.viewMatrix());
+    __updateVisible(starsystem);
+
+    renderer.composeViewMatrix(m_camera.viewMatrix());
     __render_NEW(renderer);
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
@@ -769,6 +769,13 @@ void Space::__renderAxis(const jeti::Renderer& render) const
     //render.disable_DEPTH();
 }         
 
+bool
+Space::__isObjectOnScreen(const glm::vec3& pos, const ceti::Rect& rect)
+{
+    glm::vec3 pos_sc = screenCoord(pos, m_camera);
+    return isObjectOnScreen(pos_sc, rect);
+}
+
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
@@ -812,18 +819,50 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
     return true;
 }
 
-bool isObjectVisible(const glm::vec3& center, const glm::vec3& size3, const jeti::Screen::Data& screen)
+bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect)
 {
-    assert(center.z == screen.worldcoolds.z);
-    glm::vec3 diffv = center - screen.worldcoolds;
-    float size = std::max(size3.x, size3.y) / 2;
-    float scaledSize = size * screen.scale;
-    float dist = glm::length(diffv);
-    if (dist < (screen.scaledRadius() - scaledSize)) {
-        return true;
+    if (p.x < 0) {
+        return false;
+    }
+    if (p.x > rect.width()) {
+        return false;
+    }
+    if (p.y < 0) {
+        return false;
+    }
+    if (p.y > rect.height()) {
+        return false;
     }
 
-    return false;
+    return true;
 }
+
+bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
+{
+    if (p.x < 0) {
+        return false;
+    }
+    if (p.x > rect.width()) {
+        return false;
+    }
+    if (p.y < 0) {
+        return false;
+    }
+    if (p.y > rect.height()) {
+        return false;
+    }
+
+    return true;
+}
+
+bool isObjectOnScreen(const glm::vec3& pos_sc, const ceti::Rect& rect)
+{
+    return isPointInRect(pos_sc, rect);
+}
+
+glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera) {
+    return glm::vec3(pos_wc - camera.position());
+}
+
 
 } // namespace view

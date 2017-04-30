@@ -94,7 +94,7 @@ void Screen::move(const glm::vec2& delta)
 void Screen::updateInSpace()
 {   
     jeti::Camera& camera = client::global::get().camera();
-    m_rect.SetBottomLeft(camera.lookTo().x, camera.lookTo().y);
+    m_rect.SetBottomLeft(camera.target().x, camera.target().y);
     //if (auto_scroll == true)
     //{
     //glm::vec2 d_pos;
