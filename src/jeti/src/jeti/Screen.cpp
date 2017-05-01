@@ -20,6 +20,7 @@
 #include <jeti/Camera.hpp>
 
 #include <jeti/Config.hpp>
+//#include <jeti/Render.hpp>
 
 #include <client/common/global.hpp>
 
@@ -29,12 +30,6 @@
 #include <iostream>
 
 namespace jeti {
-
-Screen::Screen()
-{}
-
-Screen::~Screen()
-{}
 
 void Screen::init()
 {
@@ -67,7 +62,7 @@ void Screen::__drawFps()
     
     //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(core::global::get().config().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
-    if (meti::getRandInt(30) == 0) std::cout<<"fps="<<m_fps<<std::endl;
+    if (meti::getRandInt(100) == 0) std::cout<<"fps="<<m_fps<<std::endl;
 }
 
 

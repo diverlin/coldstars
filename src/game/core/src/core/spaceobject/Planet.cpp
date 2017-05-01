@@ -84,7 +84,7 @@ void Planet::updateInSpace(int time, bool show_effect)
 
 void Planet::updateInSpaceInStatic()
 {
-    std::cout<<"WARNING: implement land please"<<std::endl;
+    //std::cout<<"WARNING: implement land please"<<std::endl;
     //land()->UpdateInStatic();
 }
 

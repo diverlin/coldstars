@@ -89,7 +89,7 @@ void Renderer::init(Camera* camera, int w, int h)
 
     glShadeModel(GL_SMOOTH);
 
-    setOrthogonalProjection(w, h);
+    setOrthogonalProjection();
 
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
@@ -207,9 +207,14 @@ void Renderer::setPerspectiveProjection(float w, float h)
     __updateProjectionViewMatrix();
 }
 
-void Renderer::setOrthogonalProjection(float w, float h)
+void Renderer::applyScale(float scale) {
+    m_scale = scale;
+    setOrthogonalProjection();
+}
+
+void Renderer::setOrthogonalProjection()
 {        
-    m_projectionMatrix = glm::ortho(-w/2 * m_scale, w/2 * m_scale, -h/2 * m_scale, h/2 * m_scale, ZNEAR, ZFAR);
+    m_projectionMatrix = glm::ortho(-m_w/2 * m_scale, m_w/2 * m_scale, -m_h/2 * m_scale, m_h/2 * m_scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 

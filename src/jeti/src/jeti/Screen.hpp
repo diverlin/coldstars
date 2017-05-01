@@ -38,7 +38,7 @@ public:
     public:
         ceti::Rect rect;
         int radius = 0;
-        float scale = 1.0f;
+        float scale = 2.5f;
         Data() = default;
        ~Data() = default;
         void resize(int w, int h) {
@@ -48,8 +48,8 @@ public:
         float scaledRadius() const { return radius / scale; }
     };
 
-    Screen();
-    ~Screen();
+    Screen() = default;
+    ~Screen() = default;
 
     void init();
 

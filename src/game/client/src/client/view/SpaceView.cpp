@@ -84,6 +84,11 @@ Space::__updateVisible(control::StarSystem* starsystem)
         addIfVisible(star, screenData);
     }
 
+    // debug
+//    if (starsystem->planets().size()) {
+//        addIfVisible(starsystem->planets()[0], screenData);
+//    }
+
     for(auto* planet: starsystem->planets()) {
         addIfVisible(planet, screenData);
     }
@@ -127,7 +132,7 @@ bool
 Space::addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 {
     assert(star);
-    if (!isObjectOnScreen(star->position(), data.rect)) {
+    if (!isObjectOnScreen(star->position(), data)) {
         return false;
     }
 
@@ -148,7 +153,7 @@ bool
 Space::addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 {
     assert(planet);
-    if (!__isObjectOnScreen(planet->position(), data.rect)) {
+    if (!__isObjectOnScreen(planet->position(), data)) {
         return false;
     }
 
@@ -169,12 +174,12 @@ bool
 Space::addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
 {
     assert(asteroid);
-    if (!__isObjectOnScreen(asteroid->position(), data.rect)) {
+    if (!__isObjectOnScreen(asteroid->position(), data)) {
         return false;
     }
-//    if (!ceti::isPointInObserverRadius(asteroid->position(), data.wc, m_playerRadius)) {
-//        return false;
-//    }
+    if (!ceti::isPointInObserverRadius(asteroid->position(), m_camera.position(), m_camera.radius())) {
+        return false;
+    }
 
     Base* view = __tryGetViewCached(asteroid->id());
     if (!view) {
@@ -435,38 +440,41 @@ void Space::__render_NEW(jeti::Renderer& render)
 //    bool draw_robustSpaceObjects = true;
 
     const auto& screen = client::global::get().screen();
-    float scale = screen.scale();
-    int w = screen.width();
-    int h = screen.height();
-    //glm::vec2 world_coord(client::global::get().screen().GetBottomLeft());
 
     render.clearColorAndDepthBuffers();
+    render.applyScale(screen.data().scale);
 
     //render.setPerspectiveProjection(w, h);
     //starsystem->DrawBackground(render, world_coord);
-    render.setOrthogonalProjection(w*scale, h*scale);
+    render.setOrthogonalProjection();
 
-    //render.enable_CULLFACE();
+    render.enable_CULLFACE();
 
     for(Star* star: m_stars) {
         star->update();
         star->draw(render);
-        star->drawAxis(render);
+        if (m_debug) {
+            star->drawAxis(render);
+        }
     }
 
     for(Planet* planet: m_planets) {
         planet->update();
         planet->draw(render);
-        planet->drawAxis(render);
+        if (m_debug) {
+            planet->drawAxis(render);
+        }
     }
 
     for(Asteroid* asteroid: m_asteroids) {
         asteroid->update();
         asteroid->draw(render);
-        asteroid->drawAxis(render);
+        if (m_debug) {
+            asteroid->drawAxis(render);
+        }
     }
 
-    //render.disable_CULLFACE();
+    render.disable_CULLFACE();
 }
 
 void Space::__render_NEW2(jeti::Renderer& render)
@@ -492,9 +500,9 @@ void Space::__render_NEW2(jeti::Renderer& render)
             // render background and star to FBO0
             //render.activateFbo(0, w, h);
             {
-                render.setPerspectiveProjection(w, h);
+                //render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
-                render.setOrthogonalProjection(w*scale, h*scale);
+                render.setOrthogonalProjection();
 
                 assert(m_stars.size());
                 for(Star* star: m_stars) {
@@ -770,10 +778,10 @@ void Space::__renderAxis(const jeti::Renderer& render) const
 }         
 
 bool
-Space::__isObjectOnScreen(const glm::vec3& pos, const ceti::Rect& rect)
+Space::__isObjectOnScreen(const glm::vec3& pos, const jeti::Screen::Data& screen)
 {
-    glm::vec3 pos_sc = screenCoord(pos, m_camera);
-    return isObjectOnScreen(pos_sc, rect);
+    glm::vec3 pos_sc = screenCoord(pos, m_camera, screen);
+    return isObjectOnScreen(pos_sc, screen);
 }
 
 
@@ -855,14 +863,29 @@ bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
     return true;
 }
 
-bool isObjectOnScreen(const glm::vec3& pos_sc, const ceti::Rect& rect)
+bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data& data)
 {
-    return isPointInRect(pos_sc, rect);
+    return isPointInRect(pos_sc, data.rect);
 }
 
-glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera) {
-    return glm::vec3(pos_wc - camera.position());
-}
+glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera, const jeti::Screen::Data& screen) {
+    // be carifull modyfing this, here is the MAGIC
+    glm::vec3 pos_sc(pos_wc - camera.position());
+//    std::cout<<"scale="<<screen.scale<<std::endl;
+//    std::cout<<"cam_pos: "<<camera.position().x<<" "<<camera.position().y<<std::endl;
+//    std::cout<<"pos_wc: "<<pos_wc.x<<" "<<pos_wc.y<<std::endl;
 
+    // first try
+    pos_sc /= screen.scale;
+
+    pos_sc.x += screen.rect.width()/2 * screen.scale;
+    pos_sc.y += screen.rect.height()/2 * screen.scale;
+
+    // repeating is needed, but why?
+    pos_sc /= screen.scale;
+
+//    std::cout<<"pos_sc: "<<pos_sc.x<<" "<<pos_sc.y<<std::endl;
+    return pos_sc;
+}
 
 } // namespace view
