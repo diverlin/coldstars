@@ -225,12 +225,11 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
             // render background and star to FBO0
             render.activateFbo(0, w, h);
             {
-                render.setPerspectiveProjection(w, h);
+                //render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
-                render.setOrthogonalProjection(w*scale, h*scale);
+                render.setOrthogonalProjection();
 
-                for(Star* star : visible_STAR_vec)
-                {
+                for(Star* star : visible_STAR_vec) {
                     //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
             }

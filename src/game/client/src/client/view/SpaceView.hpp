@@ -158,8 +158,10 @@ private:
 
 //    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
 
-    bool __isObjectOnScreen(const glm::vec3& center, const ceti::Rect& rect);
+    bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
     jeti::Camera& m_camera;
+
+    bool m_debug = false;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);
@@ -168,9 +170,9 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
 
 bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect);
 bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect);
-bool isObjectOnScreen(const glm::vec3& pos_sc, const ceti::Rect& rect);
+bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data&);
 
-glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& screen);
+glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera, const jeti::Screen::Data& screen);
 
 } // namespace view
 

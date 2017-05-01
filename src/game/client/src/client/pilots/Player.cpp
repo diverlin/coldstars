@@ -242,7 +242,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* star
             {
                 render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
-                render.setOrthogonalProjection(w*scale, h*scale);
+                render.setOrthogonalProjection();
 
 //                for(Star* star : visible_STAR_vec)
 //                {

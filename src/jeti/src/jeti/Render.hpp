@@ -55,6 +55,8 @@ public:
     Renderer();
     ~Renderer();
 
+    void applyScale(float);
+
     void enable_CULLFACE();
     void disable_CULLFACE();
 
@@ -66,7 +68,7 @@ public:
     void showAxis(bool flag) { m_drawAxis = flag; }
 
     void setPerspectiveProjection(float, float);
-    void setOrthogonalProjection(float, float);
+    void setOrthogonalProjection();
 
     BloomEffect& bloom() { return m_bloom; }
     const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
@@ -106,7 +108,7 @@ public:
 private:
     bool m_initialized = false;
     bool m_drawAxis = true;
-    float m_scale = 2.5f;
+    float m_scale = 1.0f;
     int m_w = 0;
     int m_h = 0;
 
