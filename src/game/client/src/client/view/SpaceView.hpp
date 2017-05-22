@@ -18,16 +18,22 @@
 
 #pragma once
 
-#include <vector>
+#include <client/gui/GuiDemo.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
 #include <jeti/Screen.hpp>
 
 #include <core/world/starsystem.hpp>
 
+#include <vector>
 #include <map>
 
 class StarSystemDrawable;
+
+namespace gui {
+class Demo;
+} // naemspace gui
 
 namespace control {
 class Star;
@@ -75,26 +81,11 @@ public:
     Space(jeti::Camera& camera);
     ~Space();
 
-    /// visible entities
-    bool addIfVisible(control::Star*, const jeti::Screen::Data&);
-    bool addIfVisible(control::Planet*, const jeti::Screen::Data&);
-    bool addIfVisible(control::Asteroid*, const jeti::Screen::Data& data);
-//    void addIfVisible(view::Container*, const VisibilityData&);
-//    void addIfVisible(BulletDrawable*, const VisibilityData&);
-//    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
-//    void addIfVisible(ShipDrawable*, const VisibilityData&);
-//    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
-//    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
-
-    /// visible effects
-//    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
-//    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
-//    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
-//    void addIfVisible(VerticalFlowText*, const VisibilityData&);
-
     void render(control::StarSystem*);
 
 private:
+    gui::Demo* m_guiDemo = nullptr;
+
     /// visible entities
     std::vector<Star*> m_stars;
     std::vector<Planet*> m_planets;
@@ -112,7 +103,6 @@ private:
 //    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
 //    std::vector<VerticalFlowText*> m_texts;
     
-
     void applyConstantRotationAnimation(Base*);
 
     void __updateVisible(control::StarSystem* starsystem);
@@ -121,6 +111,23 @@ private:
     void __render_NEW2(jeti::Renderer&);
     void __renderCollisionRadius(const jeti::Renderer&) const;
     void __renderAxis(const jeti::Renderer&) const;
+
+    /// visible entities
+    bool __addIfVisible(control::Star*, const jeti::Screen::Data&);
+    bool __addIfVisible(control::Planet*, const jeti::Screen::Data&);
+    bool __addIfVisible(control::Asteroid*, const jeti::Screen::Data& data);
+//    void addIfVisible(view::Container*, const VisibilityData&);
+//    void addIfVisible(BulletDrawable*, const VisibilityData&);
+//    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
+//    void addIfVisible(ShipDrawable*, const VisibilityData&);
+//    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
+//    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
+
+    /// visible effects
+//    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
+//    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
+//    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
+//    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
     /// visible entities
     void __add(Base*);

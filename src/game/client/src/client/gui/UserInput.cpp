@@ -34,16 +34,21 @@ void UserInput::update()
     m_keyboardPressedCodes.clear();
     m_mousePressedCodes.clear();
 
-    while(client::global::get().screen().window().pollEvent(m_event)) {
-        switch(m_event.type)  {
-        case sf::Event::Closed:             { client::global::get().screen().window().close(); break; }
+    sf::Event event;
+    while(client::global::get().screen().window().pollEvent(event)) {
+        switch(event.type)  {
+        case sf::Event::Closed:     { client::global::get().screen().window().close(); break; }
         case sf::Event::KeyPressed: {
-            m_keyboardPressedCodes.push_back(m_event.key.code);
+            m_keyboardPressedCodes.push_back(event.key.code);
             break;
         }
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
-        case sf::Event::MouseButtonPressed: { m_mousePressedCodes.push_back(m_event.key.code); break; }
+        case sf::Event::MouseButtonPressed: { m_mousePressedCodes.push_back(event.key.code); break; }
+        }
+        if (m_desktop) {
+            // in some reason event handler wants to be inside the pollEvent
+            m_desktop->HandleEvent(event);
         }
     }
 }

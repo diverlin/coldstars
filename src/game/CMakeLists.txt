@@ -24,6 +24,9 @@ if (USE_EXTRA_EQUIPMENT)
     add_definitions(-DUSE_EXTRA_EQUIPMENT)
 endif()
 
+include_directories("/media/yeti/ext_workspace/dist_gcc54/SFGUI-0.3.2/include")
+include_directories("/media/yeti/ext_workspace/dist_gcc54/SFML-2.4.2/include")
+
 add_subdirectory(core)
 add_subdirectory(server)
 add_subdirectory(client)
