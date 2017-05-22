@@ -38,6 +38,7 @@ SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=g
 
 find_package(SFML COMPONENTS system graphics window REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
+message("${SFML_INCLUDE_DIR}")
 message("${SFML_LIBRARIES}")
 
 set(include_dirs

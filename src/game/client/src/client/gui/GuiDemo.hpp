@@ -16,36 +16,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
 
 #include <SFML/Window.hpp>
 
-#include <SFGUI/Desktop.hpp>
+#include <SFGUI/SFGUI.hpp>
+#include <SFGUI/Widgets.hpp>
 
-class UserInputInSpace;
+namespace jeti {
+class SFMLWrapper;
+} // namespace jeti
 
-class UserInput
+namespace gui {
+
+class Demo
 {
 public:
-    static UserInput& get();
-    ~UserInput() {}
+    Demo(jeti::SFMLWrapper*);
+    ~Demo();
 
-    //void update();
-    void setDesktop(sfg::Desktop* desktop) { m_desktop = desktop; }
-    void update();
-    //    const std::vector<sf::Event>& events() const { return m_events; }
+    sfg::Desktop* desktop() { return &m_desktop; }
+
+    void update(const std::vector<sf::Event>&);
+    void draw();
 
 private:
-    UserInput() {}
-    UserInput(const UserInput&) = delete;
-    UserInput& operator=(const UserInput&) = delete;
-
-//    std::vector<sf::Event> m_events;
-
-    std::vector<sf::Keyboard::Key> m_keyboardPressedCodes;
-    std::vector<sf::Keyboard::Key> m_mousePressedCodes;
-    
-    sfg::Desktop* m_desktop = nullptr;
-    friend class UserInputInSpace;
+    sf::Clock m_clock;
+    sf::Window& m_window;
+    sfg::Desktop m_desktop;
+    sfg::SFGUI m_gui;
 };
 
+} // namespace gui

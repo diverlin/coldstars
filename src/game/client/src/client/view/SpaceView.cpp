@@ -63,11 +63,14 @@
 
 #include <ceti/Collision.hpp>
 
+#include <client/gui/UserInput.hpp>
+
 namespace view {
 
 Space::Space(jeti::Camera& camera)
     :
       m_camera(camera)
+    , m_guiDemo(new gui::Demo(&client::global::get().screen()))
 {}
 
 Space::~Space()
@@ -81,20 +84,15 @@ Space::__updateVisible(control::StarSystem* starsystem)
     const jeti::Screen::Data& screenData = client::global::get().screen().data();
 
     for(auto* star: starsystem->stars()) {
-        addIfVisible(star, screenData);
+        __addIfVisible(star, screenData);
     }
 
-    // debug
-//    if (starsystem->planets().size()) {
-//        addIfVisible(starsystem->planets()[0], screenData);
-//    }
-
     for(auto* planet: starsystem->planets()) {
-        addIfVisible(planet, screenData);
+        __addIfVisible(planet, screenData);
     }
 
     for(auto* asteroid: starsystem->asteroids()) {
-        addIfVisible(asteroid, screenData);
+        __addIfVisible(asteroid, screenData);
     }
 }
 
@@ -129,7 +127,7 @@ Space::__tryGetViewCached(int_t id)
 }
 
 bool
-Space::addIfVisible(control::Star* star, const jeti::Screen::Data& data)
+Space::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 {
     assert(star);
     if (!isObjectOnScreen(star->position(), data)) {
@@ -150,7 +148,7 @@ Space::addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 }
 
 bool
-Space::addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
+Space::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 {
     assert(planet);
     if (!__isObjectOnScreen(planet->position(), data)) {
@@ -171,7 +169,7 @@ Space::addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 }
 
 bool
-Space::addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
+Space::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
 {
     assert(asteroid);
     if (!__isObjectOnScreen(asteroid->position(), data)) {
@@ -475,6 +473,12 @@ void Space::__render_NEW(jeti::Renderer& render)
     }
 
     render.disable_CULLFACE();
+
+    UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
+
+    if (m_guiDemo) {
+        m_guiDemo->draw();
+    }
 }
 
 void Space::__render_NEW2(jeti::Renderer& render)
