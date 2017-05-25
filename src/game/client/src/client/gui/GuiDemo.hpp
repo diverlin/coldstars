@@ -28,6 +28,11 @@ namespace jeti {
 class SFMLWrapper;
 } // namespace jeti
 
+
+namespace info {
+class StarSystem;
+} // namespace info
+
 namespace gui {
 
 class Demo
@@ -41,11 +46,15 @@ public:
     void update(const std::vector<sf::Event>&);
     void draw();
 
+    info::StarSystem* infoStarSystem() const { return m_infoStarSystem; }
+
 private:
     sf::Clock m_clock;
     sf::Window& m_window;
     sfg::Desktop m_desktop;
     sfg::SFGUI m_gui;
+
+    info::StarSystem* m_infoStarSystem = nullptr;
 };
 
 } // namespace gui
