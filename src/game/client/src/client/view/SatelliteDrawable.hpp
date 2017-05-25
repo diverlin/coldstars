@@ -18,20 +18,28 @@
 
 #pragma once
 
-#include <client/view/VehicleDrawable.hpp>
+#include "BaseView.hpp"
 
-//class SatelliteDrawable : public VehicleDrawable
-//{
-//    public:
-//        SatelliteDrawable(jeti::control::TextureOb*, jeti::Mesh*);
-//        virtual ~SatelliteDrawable() override final;
-            
-//        //virtual void UpdateInSpace(int, bool) override final;
-        
-//        void RenderInSpace(const jeti::Renderer&, float);
-//        void RenderAtPlanet(const jeti::Renderer&);
-            
-//    private:
-//        //virtual void UpdateInfo() override final;
-//        void UpdateRenderStuff();
-//};
+namespace control {
+class Satellite;
+} // namespace descriptor
+
+namespace view {
+
+class Satellite : public Base
+{
+public:
+    Satellite(control::Satellite*);
+    ~Satellite() override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+    //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
+    void draw(const jeti::Renderer& render) const override final;
+
+    control::Satellite* satellite() const { return m_satellite; }
+
+private:
+    control::Satellite* m_satellite = nullptr;
+};
+
+} // namespace view

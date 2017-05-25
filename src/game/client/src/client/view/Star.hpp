@@ -30,7 +30,7 @@ class Star : public Base
 {
 public:
     Star(control::Star*);
-    virtual ~Star() override final;
+    ~Star() override final;
 
     void draw(const jeti::Renderer& render) const override final;
 
