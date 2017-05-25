@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ShipDrawable.hpp"
+#include "Ship.hpp"
 
 #include <core/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>

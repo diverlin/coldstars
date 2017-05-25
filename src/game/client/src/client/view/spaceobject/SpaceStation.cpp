@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "SpaceStationDrawable.hpp"
+#include "SpaceStation.hpp"
 
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/model/spaceobject/SpaceStation.hpp>

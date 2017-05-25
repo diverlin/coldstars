@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "BaseView.hpp"
+#include <client/view/BaseView.hpp>
 
 namespace control {
 class Planet;

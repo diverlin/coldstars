@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "SatelliteDrawable.hpp"
+#include "Satellite.hpp"
 
 #include <core/spaceobject/Satellite.hpp>
 #include <core/model/spaceobject/Satellite.hpp>
