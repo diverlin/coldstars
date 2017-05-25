@@ -57,6 +57,14 @@
 #include <ceti/Collision.hpp>
 
 #include <client/gui/UserInput.hpp>
+#include <client/gui/info/starsystem.hpp>
+
+
+namespace  {
+std::string join(size_t int1, size_t int2) {
+    return std::string(std::to_string(int1) + " / " + std::to_string(int2));
+}
+} // namespace
 
 namespace view {
 
@@ -97,6 +105,26 @@ Space::__updateVisible(control::StarSystem* starsystem)
     for(auto satellite: starsystem->satellites()) {
         __addIfVisible(satellite, screenData);
     }
+
+
+    // update ui
+    auto info = m_guiDemo->infoStarSystem();
+
+    info->setStarsNum(starsystem->stars().size());
+    info->setPlanetsNum(starsystem->planets().size());
+    info->setAsteroidsNum(starsystem->asteroids().size());
+    info->setShipsNum(starsystem->ships().size());
+    info->setSatellitesNum(starsystem->satellites().size());
+    info->setSpaceStationsNum(starsystem->spacestations().size());
+    info->setContainersNum(starsystem->containers().size());
+
+    info->setVisibleStarsNum(m_stars.size());
+    info->setVisiblePlanetsNum(m_planets.size());
+    info->setVisibleAsteroidsNum(m_asteroids.size());
+    info->setVisibleShipsNum(m_ships.size());
+    info->setVisibleSatellitesNum(m_satellites.size());
+    info->setVisibleSpaceStationsNum(m_spacestations.size());
+    //info->setVisibleContainersNum(m_containers.size());
 }
 
 void Space::__clear()

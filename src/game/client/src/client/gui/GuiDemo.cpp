@@ -18,6 +18,9 @@
 
 #include "GuiDemo.hpp"
 
+#include <client/gui/info/table.hpp>
+#include <client/gui/info/starsystem.hpp>
+
 #include <jeti/SFMLWrapper.hpp>
 
 namespace gui {
@@ -29,7 +32,7 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     m_window.setActive();
 
     sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
-    window->SetTitle( "Coldstars GUI (with SFGUI)" );
+    window->SetTitle( "StarSystem" );
 
     auto red_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
     auto green_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
@@ -52,14 +55,26 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     table->Attach( angle_scale, sf::Rect<sf::Uint32>( 1, 4, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
     table->Attach( auto_check, sf::Rect<sf::Uint32>( 2, 4, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
 
-    window->Add( table );
+    m_infoStarSystem = new info::StarSystem;
+
+    auto container = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+
+//    container->Pack( table );
+//    container->Pack( m_info );
+    container->Pack( m_infoStarSystem->mainWidget() );
+
+    window->Add( container );
 
     m_desktop.Add( window );
 
     m_desktop.SetProperties(
         "Window {"
         "   BackgroundColor: #293546CC;"
-        "}");
+        "}"
+        "Label#value {"
+        "   Color: #66ff33FF;"
+        "}"
+                );
 }
 
 Demo::~Demo() {

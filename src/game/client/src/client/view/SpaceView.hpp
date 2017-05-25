@@ -57,7 +57,6 @@ class SpaceStation;
 class Satellite;
 } // namespace view
 
-
 //class BlackHoleDrawable;
 //class ShipDrawable;
 //class SpaceStationDrawable;
@@ -76,6 +75,10 @@ namespace descriptor{
 class BaseView;
 } // namespace descriptor
 
+namespace info {
+class Table;
+} // namespace info
+
 namespace view {
 
 class Space
@@ -85,6 +88,16 @@ public:
     ~Space();
 
     void render(control::StarSystem*);
+
+
+//    const std::vector<Star*>& stars() const { return m_stars; }
+//    const std::vector<Planet*>& planets() const { return  m_planets; }
+//    const std::vector<Asteroid*>& asteroids() const { return m_asteroids; }
+////    std::vector<view::Container*> m_containers;
+//    const std::vector<Ship*>& ships() const { return m_ships; }
+//    const std::vector<Satellite*>& satellites() const { return m_satellites; }
+//    const std::vector<SpaceStation*>& spacestations() const { return m_spacestations; }
+
 
 private:
     gui::Demo* m_guiDemo = nullptr;
@@ -172,6 +185,8 @@ private:
     jeti::Camera& m_camera;
 
     bool m_debug = false;
+
+//    info::Table* m_table = nullptr;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);
