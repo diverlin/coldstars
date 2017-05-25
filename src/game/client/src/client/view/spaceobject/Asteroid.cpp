@@ -17,6 +17,7 @@
 */
 
 #include "Asteroid.hpp"
+
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/model/spaceobject/Asteroid.hpp>
 

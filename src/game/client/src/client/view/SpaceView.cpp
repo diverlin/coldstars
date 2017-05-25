@@ -37,13 +37,8 @@
 
 #include <client/view/BulletDrawable.hpp>
 #include <client/view/ContainerDrawable.hpp>
-#include <client/view/Star.hpp>
-#include <client/view/Planet.hpp>
+#include <client/view/spaceobject/ALL>
 #include <client/view/BlackHoleDrawable.hpp>
-#include <client/view/Asteroid.hpp>
-#include <client/view/ShipDrawable.hpp>
-#include <client/view/SpaceStationDrawable.hpp>
-#include <client/view/SatelliteDrawable.hpp>
 
 /// effects
 #include <client/effects/lazerTrace.hpp>
