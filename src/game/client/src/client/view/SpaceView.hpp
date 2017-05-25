@@ -52,6 +52,9 @@ class Star;
 class Asteroid;
 class Planet;
 class Container;
+class Ship;
+class SpaceStation;
+class Satellite;
 } // namespace view
 
 
@@ -93,9 +96,9 @@ private:
 //    std::vector<view::Container*> m_containers;
 //    std::vector<BulletDrawable*> m_bullets;
 //    std::vector<BlackHoleDrawable*> m_wormholes;
-//    std::vector<ShipDrawable*> m_ships;
-//    std::vector<SatelliteDrawable*> m_satellites;
-//    std::vector<SpaceStationDrawable*> m_spacestations;
+    std::vector<Ship*> m_ships;
+    std::vector<Satellite*> m_satellites;
+    std::vector<SpaceStation*> m_spacestations;
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
@@ -119,9 +122,9 @@ private:
 //    void addIfVisible(view::Container*, const VisibilityData&);
 //    void addIfVisible(BulletDrawable*, const VisibilityData&);
 //    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
-//    void addIfVisible(ShipDrawable*, const VisibilityData&);
-//    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
-//    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
+    bool __addIfVisible(control::Ship*, const jeti::Screen::Data&);
+    bool __addIfVisible(control::SpaceStation*, const jeti::Screen::Data&);
+    bool __addIfVisible(control::Satellite*, const jeti::Screen::Data&);
 
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
@@ -137,9 +140,9 @@ private:
     void __add(Container*);
 //    void __add(BulletDrawable*);
 //    void __add(BlackHoleDrawable*);
-//    void __add(ShipDrawable*);
-//    void __add(SpaceStationDrawable*);
-//    void __add(SatelliteDrawable*);
+    void __add(Ship*);
+    void __add(SpaceStation*);
+    void __add(Satellite*);
 
     /// visible effects
     void __add(ShockWaveEffect*);

@@ -1,36 +1,37 @@
-///*
-//    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+/*
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
     
-//    This program is free software; you can redistribute it and/or
-//    modify it under the terms of the GNU General Public License
-//    as published by the Free Software Foundation; either version 2
-//    of the License, or (at your option) any later version.
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
     
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
     
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-//*/
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 
-//#include "SpaceStationDrawable.hpp"
+#include "SpaceStationDrawable.hpp"
 
-//SpaceStationDrawable::SpaceStationDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
-//    :
-//      VehicleDrawable(texture, mesh)
-//{}
+#include <core/spaceobject/SpaceStation.hpp>
+#include <core/model/spaceobject/SpaceStation.hpp>
 
-///* virtual override final */
-//SpaceStationDrawable::~SpaceStationDrawable()
-//{
-//    #if CREATEDESTROY_LOG_ENABLED == 1
-//    Logger::Instance().Log("___::~SpaceStationDrawable("+std::to_string(id())+")");
-//    #endif
-//}
- 
+namespace view {
+
+SpaceStation::SpaceStation(control::SpaceStation* spacestation)
+    :
+      Base(spacestation)
+    , m_spacestation(spacestation)
+{}
+
+SpaceStation::~SpaceStation()
+{}
+
 ///* virtual override final */
 ////void SpaceStationDrawable::UpdateInSpace(int time, bool show_effect)
 ////{
@@ -65,20 +66,20 @@
 ////    //}
 ////}
 
-//void SpaceStationDrawable::RenderInSpace(const jeti::Renderer& render, float scale)
-//{
-//    //UpdateRenderStuff_2D();
+void SpaceStation::draw(const jeti::Renderer& render) const
+{
+    //UpdateRenderStuff_2D();
         
-//    RenderKorpus(render);
+    ////////////RenderKorpus(render);
         
-//    //if (GetDataKorpus().draw_turrels == true)
-//    //{
-//        //GetComplexWeapon().RenderTurrels();
-//    //}
+    //if (GetDataKorpus().draw_turrels) {
+        //GetComplexWeapon().RenderTurrels();
+    //}
     
-//    //if (GetComplexProtector().GetProtectorSlot()->item() != nullptr)
-//    //{
-//        //RenderShieldEffect(1.0 - color().a);
-//        //starsystem()->RestoreSceneColor();
-//    //}
-//}
+    //if (GetComplexProtector().GetProtectorSlot()->item()) {
+        //RenderShieldEffect(1.0 - color().a);
+        //starsystem()->RestoreSceneColor();
+    //}
+}
+
+} // namespace view
