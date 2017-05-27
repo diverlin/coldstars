@@ -28,6 +28,8 @@
 #include <client/common/global.hpp>
 #include <client/view/SpaceView.hpp>
 
+#include <jeti/Camera.hpp>
+
 #include <gtest/gtest.h>
 
 namespace {
