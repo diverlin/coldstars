@@ -22,63 +22,11 @@
 
 #include <ceti/type/IdType.hpp>
 
+#include <client/gui/info/Row2.hpp>
+
 #include <map>
 
 namespace info {
-
-const std::string title_id = "title";
-const std::string value_id = "value";
-
-class Row {
-public:
-    Row(const std::string& title) {
-        m_labelTitle = sfg::Label::Create(title+":");
-        m_labelTitle->SetId(title_id);
-
-        m_labelFirstNum = sfg::Label::Create(std::to_string(m_firstNum));
-        m_labelFirstNum->SetId(value_id);
-    }
-
-    void setFirstNum(int num) {
-        if (m_firstNum == num) {
-            return;
-        }
-        m_labelFirstNum->SetText(std::to_string(num));
-        m_firstNum = num;
-    }
-
-    sfg::Label::Ptr labelTitle() const { return m_labelTitle; }
-    sfg::Label::Ptr labelFirstNum() const { return m_labelFirstNum; }
-
-private:
-    std::string m_title = "";
-    int m_firstNum = 0;
-
-    sfg::Label::Ptr m_labelTitle;
-    sfg::Label::Ptr m_labelFirstNum;
-};
-
-class Row2 : public Row {
-public:
-    Row2(const std::string& title): Row(title) {
-        m_labelSecondNum = sfg::Label::Create(std::to_string(m_secondNum));
-        m_labelSecondNum->SetId(value_id);
-    }
-
-    void setSecondNum(int num) {
-        if (m_secondNum == num) {
-            return;
-        }
-        m_labelSecondNum->SetText(std::to_string(num));
-        m_secondNum = num;
-    }
-
-    sfg::Label::Ptr labelSecondNum() const { return m_labelSecondNum; }
-
-private:
-    int m_secondNum = 0;
-    sfg::Label::Ptr m_labelSecondNum;
-};
 
 class StarSystem
 {
@@ -133,9 +81,9 @@ public:
 
 private:
     sfg::Table::Ptr m_table;
-    std::map<int, Row2*> m_rows;
+    std::map<int, gui::Row2*> m_rows;
 
-    Row2* __getRowByTitle(int);
+    gui::Row2* __getRowByTitle(int);
 };
 
 } // namespace info

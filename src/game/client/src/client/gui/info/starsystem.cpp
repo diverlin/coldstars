@@ -37,7 +37,7 @@ StarSystem::StarSystem() {
     titles.push_back(std::pair<int, std::string>(BULLETS, BULLETS_TITLE));
 
     for(auto title: titles) {
-        m_rows.insert(std::make_pair(title.first, new Row2(title.second)));
+        m_rows.insert(std::make_pair(title.first, new gui::Row2(title.second)));
     }
 
     /// fill table
@@ -130,8 +130,9 @@ void StarSystem::setVisibleBulletsNum(int num) {
     __getRowByTitle(BULLETS)->setSecondNum(num);
 }
 
-Row2* StarSystem::__getRowByTitle(int key) {
-    Row2* row = nullptr;
+gui::Row2*
+StarSystem::__getRowByTitle(int key) {
+    gui::Row2* row = nullptr;
     auto it = m_rows.find(key);
     if (it != m_rows.end()) {
         row = it->second;
