@@ -91,10 +91,11 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(control::StarSystem*, const glm::vec3&);
+    void add(StarSystem*, const glm::vec3&);
 
     StarSystem* randomStarSystem(int condition_id = NONE);
     StarSystem* closestStarsystemTo(StarSystem*, int condition_id = NONE);
+    const std::vector<StarSystem*>& starSystems() const { return m_starsystems; }
 
     void update(int);
 

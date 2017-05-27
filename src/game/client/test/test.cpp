@@ -26,7 +26,7 @@
 #include <client/view/spaceobject/ALL>
 
 #include <client/common/global.hpp>
-#include <client/view/SpaceView.hpp>
+#include <client/view/StarSystem.hpp>
 
 #include <jeti/Camera.hpp>
 

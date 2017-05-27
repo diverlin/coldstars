@@ -53,6 +53,8 @@ Satellite::~Satellite()
 
 void Satellite::draw(const jeti::Renderer& render) const
 {
+    jeti::view::BaseView::draw(render);
+
     ////RenderKorpus(render);
     
     //if (GetDataKorpus().draw_turrels) {

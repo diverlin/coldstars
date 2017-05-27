@@ -67,7 +67,7 @@
 #include <pureTest/vectorPerfomanceTest.cpp>
 #include <pureTest/matrixPerfomanceTest.cpp>
 
-#include <client/view/SpaceView.hpp>
+#include <client/view/StarSystem.hpp>
 
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
@@ -110,7 +110,7 @@ int main()
     Player* player = createPlayer();
 
     control::World world;
-    view::Space viewer(camera);
+    view::StarSystem viewer(camera);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);

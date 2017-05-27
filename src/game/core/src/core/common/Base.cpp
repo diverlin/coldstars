@@ -63,6 +63,9 @@ Base::Base(descriptor::Base* descr, model::Base* model)
 entity::Type
 Base::type() const { return descriptor()->obType(); }
 
+entity::Type
+Base::subType() const { return descriptor()->obSubType(); }
+
 void
 Base::setId(int_t id) { model()->setId(id); }
 

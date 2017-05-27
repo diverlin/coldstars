@@ -81,6 +81,7 @@ public:
 
     Sector* randomSector();
     Sector* closestSectorTo(Sector*);
+    const std::vector<Sector*>& sectors() const { return m_sectors; }
 
     void update(int);
 

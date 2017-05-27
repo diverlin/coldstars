@@ -38,6 +38,7 @@ public:
     static control::StarSystem* gen(descriptor::StarSystem*);
     static control::StarSystem* gen(int_t, int_t ob_id = NONE);
     static control::StarSystem* gen();
+    static void genLife(control::StarSystem*);
 
 private:
     StarSystem()=delete;
@@ -48,6 +49,7 @@ private:
     static void __createBackground(control::StarSystem*, int, int, int);
     static void __createStar(control::StarSystem*);
     static void __createPlanets(control::StarSystem*, int);
+    static void __createShips(control::StarSystem* starsystem, int);
 
     static control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t ob_id = NONE);
 }; 

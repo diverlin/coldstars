@@ -34,7 +34,8 @@ class Sector
 public:
     static control::Sector* gen();
     static control::Sector* gen(descriptor::Sector*);
-    
+    static void genLife(control::Sector*);
+
 private:
     Sector()=delete;
     ~Sector()=delete;

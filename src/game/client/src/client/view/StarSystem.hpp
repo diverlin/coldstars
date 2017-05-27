@@ -78,11 +78,11 @@ class VerticalFlowText;
 
 namespace view {
 
-class Space
+class StarSystem
 {
 public:
-    Space(jeti::Camera& camera);
-    ~Space();
+    StarSystem(jeti::Camera& camera);
+    ~StarSystem();
 
     void render(control::StarSystem*);
 

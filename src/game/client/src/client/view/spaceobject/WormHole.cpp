@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BlackHoleDrawable.hpp"
+#include "WormHole.hpp"
 #include <client/effects/ShockWaveEffect.hpp>
 
 //BlackHoleDrawable::BlackHoleDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
