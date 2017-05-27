@@ -18,13 +18,9 @@
 
 #pragma once
 
-#include <client/gui/GuiDemo.hpp>
+#include <ceti/type/IdType.hpp>
 
-#include <jeti/Render.hpp>
-#include <jeti/Camera.hpp>
 #include <jeti/Screen.hpp>
-
-#include <core/world/starsystem.hpp>
 
 #include <vector>
 #include <map>
@@ -35,33 +31,42 @@ namespace gui {
 class Demo;
 } // naemspace gui
 
+namespace jeti {
+class Renderer;
+class Camera;
+class Mesh;
+
 namespace control {
-class Star;
-class Asteroid;
-class Planet;
-//class Container;
+class Material;
 } // namespace control
 
-namespace jeti {
-class Camera;
 } // namespace jeti
+
+namespace control {
+class StarSystem;
+class Star;
+class Planet;
+class Asteroid;
+class WormHole;
+class Container;
+class SpaceStation;
+class Ship;
+class Satellite;
+class Bullet;
+} // namespace control
 
 namespace view {
 class Base;
 class Star;
-class Asteroid;
 class Planet;
+class Asteroid;
+class WormHole;
 class Container;
-class Ship;
 class SpaceStation;
+class Ship;
 class Satellite;
+class Bullet;
 } // namespace view
-
-//class BlackHoleDrawable;
-//class ShipDrawable;
-//class SpaceStationDrawable;
-//class SatelliteDrawable;
-//class BulletDrawable;
 
 /// effects
 class LazerTraceEffect;
@@ -70,14 +75,6 @@ namespace jeti {
 class BaseParticleSystem;
 }
 class VerticalFlowText;
-
-namespace descriptor{
-class BaseView;
-} // namespace descriptor
-
-namespace info {
-class Table;
-} // namespace info
 
 namespace view {
 
@@ -89,29 +86,19 @@ public:
 
     void render(control::StarSystem*);
 
-
-//    const std::vector<Star*>& stars() const { return m_stars; }
-//    const std::vector<Planet*>& planets() const { return  m_planets; }
-//    const std::vector<Asteroid*>& asteroids() const { return m_asteroids; }
-////    std::vector<view::Container*> m_containers;
-//    const std::vector<Ship*>& ships() const { return m_ships; }
-//    const std::vector<Satellite*>& satellites() const { return m_satellites; }
-//    const std::vector<SpaceStation*>& spacestations() const { return m_spacestations; }
-
-
 private:
     gui::Demo* m_guiDemo = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
     std::vector<Planet*> m_planets;
+    std::vector<WormHole*> m_wormHoles;
     std::vector<Asteroid*> m_asteroids;
-//    std::vector<view::Container*> m_containers;
-//    std::vector<BulletDrawable*> m_bullets;
-//    std::vector<BlackHoleDrawable*> m_wormholes;
+    std::vector<Container*> m_containers;
+    std::vector<SpaceStation*> m_spacestations;
     std::vector<Ship*> m_ships;
     std::vector<Satellite*> m_satellites;
-    std::vector<SpaceStation*> m_spacestations;
+    std::vector<Bullet*> m_bullets;
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
@@ -132,9 +119,9 @@ private:
     bool __addIfVisible(control::Star*, const jeti::Screen::Data&);
     bool __addIfVisible(control::Planet*, const jeti::Screen::Data&);
     bool __addIfVisible(control::Asteroid*, const jeti::Screen::Data& data);
-//    void addIfVisible(view::Container*, const VisibilityData&);
-//    void addIfVisible(BulletDrawable*, const VisibilityData&);
-//    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
+    void __addIfVisible(control::Container*, const jeti::Screen::Data& data);
+    void __addIfVisible(control::Bullet*, const jeti::Screen::Data& data);
+    void __addIfVisible(control::WormHole*, const jeti::Screen::Data& data);
     bool __addIfVisible(control::Ship*, const jeti::Screen::Data&);
     bool __addIfVisible(control::SpaceStation*, const jeti::Screen::Data&);
     bool __addIfVisible(control::Satellite*, const jeti::Screen::Data&);
@@ -151,8 +138,8 @@ private:
     void __add(Planet*);
     void __add(Asteroid*);
     void __add(Container*);
-//    void __add(BulletDrawable*);
-//    void __add(BlackHoleDrawable*);
+    void __add(Bullet*);
+    void __add(WormHole*);
     void __add(Ship*);
     void __add(SpaceStation*);
     void __add(Satellite*);
@@ -171,22 +158,14 @@ private:
     Base* __tryGetViewCached(int_t);
 
     std::map<int_t, Base*> m_cache;
-//    [[warning("ugly, think how to make it better")]]
-//    std::map<Base*, control::SpaceObject*> m_cache2;
 
-//    ceti::Collector<jeti::Mesh> m_meshCollector;
-//    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
     std::map<int_t, jeti::Mesh*> m_meshCollector;
     std::map<int_t, jeti::control::Material*> m_materialCollector;
-
-//    ceti::Collector<jeti::control::TextureOb> m_materialCollector;
 
     bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
     jeti::Camera& m_camera;
 
     bool m_debug = false;
-
-//    info::Table* m_table = nullptr;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);

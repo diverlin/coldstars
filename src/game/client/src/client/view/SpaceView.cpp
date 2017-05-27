@@ -47,6 +47,7 @@
 #include <client/resources/TextureCollector.hpp>
 #include <client/common/global.hpp>
 
+#include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Mesh.hpp>
@@ -58,7 +59,7 @@
 
 #include <client/gui/UserInput.hpp>
 #include <client/gui/info/starsystem.hpp>
-
+#include <client/gui/GuiDemo.hpp>
 
 namespace  {
 std::string join(size_t int1, size_t int2) {
@@ -112,19 +113,23 @@ Space::__updateVisible(control::StarSystem* starsystem)
 
     info->setStarsNum(starsystem->stars().size());
     info->setPlanetsNum(starsystem->planets().size());
+    //info->setWormHolesNum(starsystem->wormHoles().size());
     info->setAsteroidsNum(starsystem->asteroids().size());
+    info->setContainersNum(starsystem->containers().size());
+    info->setSpaceStationsNum(starsystem->spacestations().size());
     info->setShipsNum(starsystem->ships().size());
     info->setSatellitesNum(starsystem->satellites().size());
-    info->setSpaceStationsNum(starsystem->spacestations().size());
-    info->setContainersNum(starsystem->containers().size());
+    info->setBulletsNum(starsystem->bullets().size());
 
     info->setVisibleStarsNum(m_stars.size());
     info->setVisiblePlanetsNum(m_planets.size());
+    info->setVisibleWormHolesNum(m_wormHoles.size());
     info->setVisibleAsteroidsNum(m_asteroids.size());
+    info->setVisibleContainersNum(m_containers.size());
+    info->setVisibleSpaceStationsNum(m_spacestations.size());
     info->setVisibleShipsNum(m_ships.size());
     info->setVisibleSatellitesNum(m_satellites.size());
-    info->setVisibleSpaceStationsNum(m_spacestations.size());
-    //info->setVisibleContainersNum(m_containers.size());
+    info->setVisibleBulletsNum(m_bullets.size());
 }
 
 void Space::__clear()
@@ -132,13 +137,13 @@ void Space::__clear()
     // entities
     m_stars.clear();
     m_planets.clear();
+    m_wormHoles.clear();
     m_asteroids.clear();
-//    m_containers.clear();
+    m_containers.clear();
+    m_spacestations.clear();
     m_ships.clear();
     m_satellites.clear();
-    m_spacestations.clear();
-//    m_bullets.clear();
-//    m_wormholes.clear();
+    m_bullets.clear();
 
     // effects
 //    m_shockwaves.clear();
