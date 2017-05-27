@@ -88,6 +88,7 @@ public:
 
     int_t id();
     entity::Type type() const;
+    entity::Type subType() const;
 
     bool isAlive() const;
     void die();

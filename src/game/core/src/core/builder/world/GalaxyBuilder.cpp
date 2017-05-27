@@ -64,6 +64,13 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
     return galaxy;
 }
 
+void Galaxy::genLife(control::Galaxy* galaxy)
+{
+    for(control::Sector* sector: galaxy->sectors()) {
+        builder::Sector::genLife(sector);
+    }
+}
+
 void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
 {     
     for(int_t id: descr->sectors) {

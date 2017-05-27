@@ -52,6 +52,14 @@ Sector::gen(descriptor::Sector* descr)
     return sector;
 } 
 
+void
+Sector::genLife(control::Sector* sector)
+{
+    for(control::StarSystem* starsystem: sector->starSystems()) {
+        builder::StarSystem::genLife(starsystem);
+    }
+}
+
 control::Sector*
 Sector::__genTemplate(descriptor::Sector* descr)
 {

@@ -34,6 +34,7 @@ class Galaxy
 public:
     static control::Galaxy* gen();
     static control::Galaxy* gen(descriptor::Galaxy*);
+    static void genLife(control::Galaxy*);
 
 private:
     Galaxy() = delete;

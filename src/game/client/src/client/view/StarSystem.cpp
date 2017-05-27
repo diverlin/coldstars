@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "SpaceView.hpp"
+#include "StarSystem.hpp"
 
 #include "Base.hpp"
 
@@ -35,10 +35,7 @@
 
 #include <core/model/spaceobject/ALL>
 
-#include <client/view/BulletDrawable.hpp>
-#include <client/view/ContainerDrawable.hpp>
 #include <client/view/spaceobject/ALL>
-#include <client/view/BlackHoleDrawable.hpp>
 
 /// effects
 #include <client/effects/lazerTrace.hpp>
@@ -69,17 +66,17 @@ std::string join(size_t int1, size_t int2) {
 
 namespace view {
 
-Space::Space(jeti::Camera& camera)
+StarSystem::StarSystem(jeti::Camera& camera)
     :
       m_camera(camera)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
 {}
 
-Space::~Space()
+StarSystem::~StarSystem()
 {}                                    
 
 void
-Space::__updateVisible(control::StarSystem* starsystem)
+StarSystem::__updateVisible(control::StarSystem* starsystem)
 {
     __clear();
 
@@ -88,25 +85,31 @@ Space::__updateVisible(control::StarSystem* starsystem)
     for(auto star: starsystem->stars()) {
         __addIfVisible(star, screenData);
     }
-
     for(auto planet: starsystem->planets()) {
         __addIfVisible(planet, screenData);
     }
-
+//    for(auto wormHole: starsystem->wormHoles()) {
+//        __addIfVisible(wormhole, screenData);
+//    }
     for(auto asteroid: starsystem->asteroids()) {
         __addIfVisible(asteroid, screenData);
     }
-
-    for(auto ship: starsystem->ships()) {
-        __addIfVisible(ship, screenData);
+    for(auto container: starsystem->containers()) {
+        __addIfVisible(container, screenData);
     }
+
     for(auto spacestation: starsystem->spacestations()) {
         __addIfVisible(spacestation, screenData);
+    }
+    for(auto ship: starsystem->ships()) {
+        __addIfVisible(ship, screenData);
     }
     for(auto satellite: starsystem->satellites()) {
         __addIfVisible(satellite, screenData);
     }
-
+//    for(auto bullet: starsystem->bullets()) {
+//        __addIfVisible(bullet, screenData);
+//    }
 
     // update ui
     auto info = m_guiDemo->infoStarSystem();
@@ -132,7 +135,7 @@ Space::__updateVisible(control::StarSystem* starsystem)
     info->setVisibleBulletsNum(m_bullets.size());
 }
 
-void Space::__clear()
+void StarSystem::__clear()
 {
     // entities
     m_stars.clear();
@@ -153,7 +156,7 @@ void Space::__clear()
 }
 
 Base*
-Space::__tryGetViewCached(int_t id)
+StarSystem::__tryGetViewCached(int_t id)
 {
     std::map<int_t, Base*>::const_iterator it = m_cache.find(id);
     if (it != m_cache.end()) {
@@ -163,7 +166,7 @@ Space::__tryGetViewCached(int_t id)
 }
 
 bool
-Space::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 {
     assert(star);
     if (!isObjectOnScreen(star->position(), data)) {
@@ -184,7 +187,7 @@ Space::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 }
 
 bool
-Space::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 {
     assert(planet);
     if (!__isObjectOnScreen(planet->position(), data)) {
@@ -205,7 +208,7 @@ Space::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
 }
 
 bool
-Space::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
 {
     assert(asteroid);
     if (!__isObjectOnScreen(asteroid->position(), data)) {
@@ -230,7 +233,7 @@ Space::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& dat
 
 
 bool
-Space::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 {
     assert(ship);
     if (!__isObjectOnScreen(ship->position(), data)) {
@@ -253,7 +256,7 @@ Space::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 }
 
 bool
-Space::__addIfVisible(control::SpaceStation* spacestation, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::SpaceStation* spacestation, const jeti::Screen::Data& data)
 {
     assert(spacestation);
     if (!__isObjectOnScreen(spacestation->position(), data)) {
@@ -276,7 +279,7 @@ Space::__addIfVisible(control::SpaceStation* spacestation, const jeti::Screen::D
 }
 
 bool
-Space::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Data& data)
 {
     assert(satellite);
     if (!__isObjectOnScreen(satellite->position(), data)) {
@@ -298,29 +301,31 @@ Space::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Data& d
     return true;
 }
 
-void Space::applyConstantRotationAnimation(Base* view)
+void StarSystem::applyConstantRotationAnimation(Base* view)
 {
     jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
     view->setAnimationRotation(animation);
 }
 
-//void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
-//{
+void StarSystem::__addIfVisible(control::Container* container, const jeti::Screen::Data& data)
+{
+    assert(false);
 //    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
 //        if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
 //            __add(container);
 //        }
 //    }
-//}
+}
 
-//void SpaceViewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
-//{
+void StarSystem::__addIfVisible(control::Bullet* bullet, const jeti::Screen::Data& data)
+{
+    assert(false);
 //    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
 //        if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
 //            __add(bullet);
 //        }
 //    }
-//}
+}
 
 //void SpaceViewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
 //{
@@ -394,31 +399,54 @@ void Space::applyConstantRotationAnimation(Base* view)
 //}
 
 /// visible entities
-void Space::__add(Base* view)
+void StarSystem::__add(Base* view)
 {
     switch(view->type()) {
     case entity::Type::STAR: {
-        view::Star* star = static_cast<view::Star*>(view);
+        Star* star = static_cast<Star*>(view);
         assert(star);
         m_stars.push_back(star);
-        break;
+        return;
     }
     case entity::Type::PLANET: {
-        view::Planet* planet = static_cast<view::Planet*>(view);
+        Planet* planet = static_cast<Planet*>(view);
         assert(planet);
         m_planets.push_back(planet);
-        break;
+        return;
     }
     case entity::Type::ASTEROID: {
-        view::Asteroid* asteroid = static_cast<view::Asteroid*>(view);
+        Asteroid* asteroid = static_cast<Asteroid*>(view);
         assert(asteroid);
         m_asteroids.push_back(asteroid);
-        break;
+        return;
+    }
+    case entity::Type::VEHICLE: {
+        switch(view->subType()) {
+        case entity::Type::SPACESTATION: {
+            SpaceStation* spacestation = static_cast<SpaceStation*>(view);
+            assert(spacestation);
+            m_spacestations.push_back(spacestation);
+            return;
+        }
+        case entity::Type::SHIP: {
+            Ship* ship = static_cast<Ship*>(view);
+            assert(ship);
+            m_ships.push_back(ship);
+            return;
+        }
+        case entity::Type::SATELLITE: {
+            Satellite* satellite = static_cast<Satellite*>(view);
+            assert(satellite);
+            m_satellites.push_back(satellite);
+            return;
+        }
+        }
     }
     }
+    assert(false);
 }
 
-void Space::__loadResourcesFor(Base* view)
+void StarSystem::__loadResourcesFor(Base* view)
 {
     {
     jeti::Mesh* mesh = nullptr;
@@ -460,53 +488,53 @@ void Space::__loadResourcesFor(Base* view)
     }
 }
 
-void Space::__cache(Base* view)
+void StarSystem::__cache(Base* view)
 {
     __loadResourcesFor(view);
     m_cache.insert(std::make_pair(view->id(), view));
 }
 
-void Space::__add(Star* view)
+void StarSystem::__add(Star* view)
 {
     m_stars.push_back(view);
 }
 
-void Space::__add(Planet* view)
+void StarSystem::__add(Planet* view)
 {
     m_planets.push_back(view);
 }
 
-void Space::__add(Asteroid* view)
+void StarSystem::__add(Asteroid* view)
 {
     m_asteroids.push_back(view);
 }
 
-//void SpaceViewer::__add(Container* view)
-//{
-//    m_containers.push_back(view);
-//}
+void StarSystem::__add(Container* view)
+{
+    m_containers.push_back(view);
+}
 
-//void SpaceViewer::__add(BulletDrawable* view)
-//{
-//    m_bullets.push_back(view);
-//}
+void StarSystem::__add(Bullet* view)
+{
+    m_bullets.push_back(view);
+}
 
-//void SpaceViewer::__add(BlackHoleDrawable* view)
-//{
-//    m_wormholes.push_back(view);
-//}
+void StarSystem::__add(WormHole* view)
+{
+    m_wormHoles.push_back(view);
+}
 
-void Space::__add(Ship* view)
+void StarSystem::__add(Ship* view)
 {
     m_ships.push_back(view);
 }
 
-void Space::__add(SpaceStation* view)
+void StarSystem::__add(SpaceStation* view)
 {
     m_spacestations.push_back(view);
 }
 
-void Space::__add(Satellite* view)
+void StarSystem::__add(Satellite* view)
 {
     m_satellites.push_back(view);
 }
@@ -534,7 +562,7 @@ void Space::__add(Satellite* view)
 
 
 
-void Space::__render_NEW(jeti::Renderer& render)
+void StarSystem::__render_NEW(jeti::Renderer& render)
 {
 //    bool draw_background    = true;
 //    bool draw_volumetric    = true;
@@ -578,6 +606,15 @@ void Space::__render_NEW(jeti::Renderer& render)
         }
     }
 
+    for(Ship* ship: m_ships) {
+        ship->update();
+        ship->draw(render);
+        if (m_debug) {
+            ship->drawAxis(render);
+        }
+    }
+
+
     render.disable_CULLFACE();
 
     UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
@@ -587,7 +624,7 @@ void Space::__render_NEW(jeti::Renderer& render)
     }
 }
 
-void Space::__render_NEW2(jeti::Renderer& render)
+void StarSystem::__render_NEW2(jeti::Renderer& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -799,7 +836,7 @@ void Space::__render_NEW2(jeti::Renderer& render)
 //                         bool forceDraw_orbits,
 //                         bool forceDraw_path)
 
-void Space::render(control::StarSystem* starsystem)
+void StarSystem::render(control::StarSystem* starsystem)
 {   
     assert(starsystem);
     jeti::Renderer& renderer = client::global::get().render();
@@ -846,7 +883,7 @@ void Space::render(control::StarSystem* starsystem)
     //resizeGl(w, h);
 } 
 
-void Space::__renderCollisionRadius(const jeti::Renderer& render) const
+void StarSystem::__renderCollisionRadius(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {   //a;pitodorender
@@ -867,7 +904,7 @@ void Space::__renderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void Space::__renderAxis(const jeti::Renderer& render) const
+void StarSystem::__renderAxis(const jeti::Renderer& render) const
 {    
     //render.enable_DEPTH();
     //alpitodorender
@@ -888,7 +925,7 @@ void Space::__renderAxis(const jeti::Renderer& render) const
 }         
 
 bool
-Space::__isObjectOnScreen(const glm::vec3& pos, const jeti::Screen::Data& screen)
+StarSystem::__isObjectOnScreen(const glm::vec3& pos, const jeti::Screen::Data& screen)
 {
     glm::vec3 pos_sc = screenCoord(pos, m_camera, screen);
     return isObjectOnScreen(pos_sc, screen);

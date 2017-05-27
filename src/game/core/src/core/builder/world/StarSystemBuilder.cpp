@@ -85,6 +85,10 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     return starsystem;
 }
 
+void StarSystem::genLife(control::StarSystem* starsystem)
+{
+    __createShips(starsystem, 20);
+}
 
 void StarSystem::__createInternals(control::StarSystem* starsystem, descriptor::StarSystem* descr)
 {
@@ -124,6 +128,45 @@ void StarSystem::__createPlanets(control::StarSystem* starsystem, int planet_per
         control::Planet* planet = builder::Planet::gen();
         starsystem->add(planet);
         //orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
+    }
+}
+
+void StarSystem::__createShips(control::StarSystem* starsystem, int ship_num)
+{
+    entity::Type subtype_id = entity::Type::NONE;
+    entity::Type subsubtype_id = entity::Type::NONE;
+
+    entity::Type npc_subtype_id = entity::Type::NONE;
+    entity::Type npc_subsubtype_id = entity::Type::NONE;
+
+    race::Type npc_race_id = race::Type::R0;
+
+    for(int i=0; i<ship_num; i++)
+    {
+        // VERY UGLY LOGIC START (TODO)
+        if (subtype_id == entity::Type::NONE) {
+            npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+        } else {
+            npc_subtype_id = subtype_id;
+        }
+
+        if (subsubtype_id == entity::Type::NONE) {
+            npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+        } else {
+            npc_subsubtype_id = subsubtype_id;
+        }
+        // VERY UGLY LOGIC END
+
+        control::Ship* new_ship = builder::Ship::gen();
+        builder::Ship::equip(new_ship);
+
+        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        control::Npc* new_npc = builder::Npc::gen();
+        new_ship->bindNpc(new_npc);
+
+        glm::vec3 center = meti::getRandXYVec3f(300, 1200, 0);
+        //        glm::vec3 angle(0, 0, meti::getRandInt(360));
+        starsystem->add(new_ship, center);
     }
 }
 

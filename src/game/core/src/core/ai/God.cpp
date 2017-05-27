@@ -84,7 +84,7 @@ void God::createWorld(descriptor::Galaxy* descr)
         //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
     }
 
-    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
+//    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
 }
 
 void God::update()
@@ -131,16 +131,20 @@ void God::update()
 
 void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
 {
-    //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
-    //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
-    //            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
-    //            Starsystem* starsystem = galaxy->m_sectors[i]->m_starsystems[j];
-    //            for(unsigned int j=0; j<starsystem->m_planets.size(); j++) {
-    //                CreateLifeAtPlanet(starsystem->m_planets[j], starsystem_descriptor);
-    //            }
-    //            CreateSpaceStations(starsystem, starsystem_descriptor.spacestation_num);
-    //        }
-    //    }
+    builder::Galaxy::genLife(galaxy);
+
+//    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
+//        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
+//            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
+//            Starsystem* starsystem = galaxy->m_sectors[i]->m_starsystems[j];
+//            for(unsigned int j=0; j<starsystem->m_planets.size(); j++) {
+//                CreateLifeAtPlanet(starsystem->m_planets[j], starsystem_descriptor);
+//            }
+//            CreateSpaceStations(starsystem, starsystem_descriptor.spacestation_num);
+//        }
+//    }
+
+    //    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
 }
 
 void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
@@ -302,9 +306,9 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
     {
         // VERY UGLY LOGIC START (TODO)
         if (subtype_id == entity::Type::NONE) {
-            npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
+            npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
         } else {
-            npc_subtype_id    = subtype_id;
+            npc_subtype_id = subtype_id;
         }
 
         if (subsubtype_id == entity::Type::NONE) {
