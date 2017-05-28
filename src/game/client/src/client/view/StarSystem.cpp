@@ -155,7 +155,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         auto info = m_guiDemo->infoRender();
         info->setZNear(std::to_string(jeti::ZNEAR));
         info->setZFar(std::to_string(jeti::ZFAR));
-        info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_Z));
+        info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_ZPOS));
 
         info->setScale(std::to_string(render.scale()));
         info->setWidth(ceti::to_string(render.width()));

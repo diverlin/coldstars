@@ -403,7 +403,7 @@ void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::Material& 
 void Renderer::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const
 {
     // ugly 
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly 
@@ -478,7 +478,7 @@ void Renderer::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 {
     // ugly 
     float scale = 1.0;
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -510,7 +510,7 @@ void Renderer::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int 
 {
     // ugly 
     //float scale = 1.0;
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -541,7 +541,7 @@ void Renderer::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
 {
     // ugly 
     //float scale = 1.0;
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -578,7 +578,7 @@ void Renderer::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
         for (unsigned int j=0; j<quad_num_h; ++j)
         {
             // ugly 
-            glm::mat4 TranslateMatrix = glm::translate(glm::vec3(size_w+i*size_w, size_h+j*size_h, SCREEN_QUAD_Z));
+            glm::mat4 TranslateMatrix = glm::translate(glm::vec3(size_w+i*size_w, size_h+j*size_h, SCREEN_QUAD_ZPOS));
             glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(size_w, size_h, 1.0f));
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
@@ -604,7 +604,7 @@ void Renderer::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
 {
     // ugly 
     float scale = 1.0;
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -633,7 +633,7 @@ void Renderer::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
 void Renderer::drawPostEffectBlur(GLuint texture, int w, int h) const
 {  
     // ugly  
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -660,7 +660,7 @@ void Renderer::drawPostEffectBlur(GLuint texture, int w, int h) const
 void Renderer::drawScreenQuadTextured(GLuint texture, int w, int h) const
 {
     // ugly 
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
@@ -704,7 +704,7 @@ void Renderer::drawParticles(const Mesh& mesh, const control::Material& textureO
 void Renderer::drawStarField(int w, int h, float pos_x, float pos_y) const
 {
     // ugly 
-    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_Z));
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly

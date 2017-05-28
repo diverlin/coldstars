@@ -40,7 +40,7 @@ class Material;
 } // namespace control
 
 const int FBO_NUM = 6;
-const float SCREEN_QUAD_Z = -999.0f;
+const float SCREEN_QUAD_ZPOS = -999.0f;
 const float ZNEAR = 0.1f;
 const float ZFAR = 1000.0f;
 
