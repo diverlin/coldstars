@@ -20,6 +20,8 @@
 
 #include <client/gui/info/table.hpp>
 #include <client/gui/info/starsystem.hpp>
+#include <client/gui/info/Camera.hpp>
+#include <client/gui/info/Renderer.hpp>
 
 #include <jeti/SFMLWrapper.hpp>
 
@@ -58,14 +60,34 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     m_infoStarSystem = new info::StarSystem;
 
     auto container = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
-
-//    container->Pack( table );
-//    container->Pack( m_info );
     container->Pack( m_infoStarSystem->mainWidget() );
 
     window->Add( container );
-
     m_desktop.Add( window );
+
+    {
+        m_infoCamera = new info::Camera;
+        sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
+        window->SetTitle( "Camera" );
+        auto container = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+        container->Pack( m_infoCamera->mainWidget() );
+        window->Add( container );
+
+        m_desktop.Add( window );
+        window->SetPosition(sf::Vector2f(200, 0));
+    }
+
+    {
+        m_infoRender = new info::Renderer;
+        sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
+        window->SetTitle( "Render" );
+        auto container = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+        container->Pack( m_infoRender->mainWidget() );
+        window->Add( container );
+
+        m_desktop.Add( window );
+        window->SetPosition(sf::Vector2f(400, 0));
+    }
 
     m_desktop.SetProperties(
         "Window {"

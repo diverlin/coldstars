@@ -33,7 +33,6 @@ Mesh::Mesh()
 
 Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     :
-      m_textureOb(nullptr),
       m_originDirection(descriptor->orientation())
 {     
     m_listId = glGenLists(1);

@@ -20,6 +20,8 @@
 
 #include <ceti/NonCopyable.hpp>
 
+#include <meti/VectorUtils.hpp>
+
 #include <glm/glm.hpp>
 
 namespace jeti {
@@ -28,7 +30,7 @@ class Camera : public NonCopyable
 {
     const float CAMERA_SPEED_MAX = 10.0f;
     const float CAMERA_INERTIA = 0.95f;
-    const float LOOKTO_Z = -100.0;
+    const float LOOKTO_Z = -1.0;
 public:
     Camera() = default;
     ~Camera() = default;
@@ -36,6 +38,7 @@ public:
     void setPosition(const glm::vec3& position) { m_position = position; }
     const glm::vec3& target() const { return m_target; }
     const glm::vec3& position() const { return m_position; }
+    const glm::vec3& up() const { return m_up; }
     float radius() const { return m_radius; }
     const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
@@ -46,11 +49,11 @@ public:
 private:
     float m_radius = 1000.0;
 
-    glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 m_position;
 
     glm::vec3 m_target;
     glm::vec3 m_direction = glm::vec3(0.0f, 0.0f, LOOKTO_Z);
-    glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 m_up = meti::OY;
 
     float m_inertiaFactor = CAMERA_INERTIA;
     glm::vec3 m_moveSpeed;

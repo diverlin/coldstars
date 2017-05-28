@@ -63,11 +63,26 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 
+    //boost::optional<std::string> axis = root.get_optional<std::string>("axis");
+
     boost::optional<std::string> name = root.get_optional<std::string>("association.name");
     boost::optional<std::string> race = root.get_optional<std::string>("association.race");
     boost::optional<std::string> type = root.get_optional<std::string>("association.type");
     boost::optional<std::string> subtype = root.get_optional<std::string>("association.subtype");
     boost::optional<std::string> color = root.get_optional<std::string>("association.color");
+
+//    if (axis) {
+//        std::string axis_str = axis.get();
+//        if (axis_str == "ox") {
+//            mesh->setOrientation(meti::OX);
+//        }
+//        if (axis_str == "oy") {
+//            mesh->setOrientation(meti::OY);
+//        }
+//        if (axis_str == "oz") {
+//            mesh->setOrientation(meti::OZ);
+//        }
+//    }
 
     if (name) {
         mesh->setNameStr(name.get());

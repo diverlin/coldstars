@@ -136,11 +136,11 @@ public:
 
     //// TRANSITION
 //    void add(model::SpaceStation*);
-    void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OX);
 //    void add(model::Ship*);
-    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+    void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OX);
 //    void add(model::Satellite*);
-    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const model::SpaceObject* const parent = nullptr);
+    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OX, const model::SpaceObject* const parent = nullptr);
 
 //    void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
 

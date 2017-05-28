@@ -22,16 +22,15 @@
 
 std::string getTypeStr(mesh::Type type)
 {
-    switch(type)
-    {
-        case mesh::Type::FAILBACK:            { return "mesh::Type::FAILBACK"; break; }
+    switch(type) {
+        case mesh::Type::FAILBACK:            { return "mesh::Type::FAILBACK"; }
 
-        case mesh::Type::PLANE:            { return "mesh::Type::PLANE"; break; }
-        case mesh::Type::SPHERE:           { return "mesh::Type::SPHERE"; break; }
-        case mesh::Type::SPHERE_DEFORMED:  { return "mesh::Type::SPHERE_DEFORMED"; break; }
-        case mesh::Type::SPACESTATION:     { return "mesh::Type::SPACESTATION"; break; }
+        case mesh::Type::PLANE:            { return "mesh::Type::PLANE"; }
+        case mesh::Type::SPHERE:           { return "mesh::Type::SPHERE"; }
+        case mesh::Type::SPHERE_DEFORMED:  { return "mesh::Type::SPHERE_DEFORMED"; }
+        case mesh::Type::SPACESTATION:     { return "mesh::Type::SPACESTATION"; }
 
-        default: { return "UKNOWN MESH TYPE"; break; }
+        default: { return "UKNOWN MESH TYPE"; }
     }
     assert(false);
 }

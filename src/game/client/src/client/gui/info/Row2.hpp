@@ -27,23 +27,27 @@ namespace gui {
 class Row2 : public Row {
 public:
     Row2(const std::string& title): Row(title) {
-        m_labelSecondNum = sfg::Label::Create(std::to_string(m_secondNum));
-        m_labelSecondNum->SetId(value_id);
+        m_labelValueSecond = sfg::Label::Create(m_valueSecond);
+        m_labelValueSecond->SetId(value_id);
     }
 
-    void setSecondNum(int num) {
-        if (m_secondNum == num) {
+    void setValueSecond(int value) {
+        setValueSecond(std::to_string(value));
+    }
+
+    void setValueSecond(const std::string value) {
+        if (m_valueSecond == value) {
             return;
         }
-        m_labelSecondNum->SetText(std::to_string(num));
-        m_secondNum = num;
+        m_labelValueSecond->SetText(value);
+        m_valueSecond = value;
     }
 
-    sfg::Label::Ptr labelSecondNum() const { return m_labelSecondNum; }
+    sfg::Label::Ptr labelValueSecond() const { return m_labelValueSecond; }
 
 private:
-    int m_secondNum = 0;
-    sfg::Label::Ptr m_labelSecondNum;
+    std::string m_valueSecond;
+    sfg::Label::Ptr m_labelValueSecond;
 };
 
 } // namespace gui

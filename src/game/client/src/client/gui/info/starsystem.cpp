@@ -54,7 +54,7 @@ StarSystem::StarSystem() {
     row = 0;
 
     for(auto rowData: m_rows) {
-        m_table->Attach( rowData.second->labelFirstNum(), sf::Rect<sf::Uint32>( col, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+        m_table->Attach( rowData.second->labelValue(), sf::Rect<sf::Uint32>( col, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
         row++;
     }
 
@@ -69,65 +69,65 @@ StarSystem::StarSystem() {
     col++;
     row = 0;
     for(auto rowData: m_rows) {
-        m_table->Attach( rowData.second->labelSecondNum(), sf::Rect<sf::Uint32>( col, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+        m_table->Attach( rowData.second->labelValueSecond(), sf::Rect<sf::Uint32>( col, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
         row++;
     }
 }
 
 void StarSystem::setStarsNum(int num) {
-    __getRowByTitle(STARS)->setFirstNum(num);
+    __getRowByTitle(STARS)->setValue(num);
 }
 void StarSystem::setPlanetsNum(int num) {
-    __getRowByTitle(PLANETS)->setFirstNum(num);
+    __getRowByTitle(PLANETS)->setValue(num);
 }
 void StarSystem::setWormHolesNum(int num) {
-    __getRowByTitle(WORMHOLES)->setFirstNum(num);
+    __getRowByTitle(WORMHOLES)->setValue(num);
 }
 void StarSystem::setAsteroidsNum(int num) {
-    __getRowByTitle(ASTEROIDS)->setFirstNum(num);
+    __getRowByTitle(ASTEROIDS)->setValue(num);
 }
 void StarSystem::setContainersNum(int num) {
-    __getRowByTitle(CONTAINERS)->setFirstNum(num);
+    __getRowByTitle(CONTAINERS)->setValue(num);
 }
 void StarSystem::setSpaceStationsNum(int num) {
-    __getRowByTitle(SPACESTATIONS)->setFirstNum(num);
+    __getRowByTitle(SPACESTATIONS)->setValue(num);
 }
 void StarSystem::setShipsNum(int num) {
-    __getRowByTitle(SHIPS)->setFirstNum(num);
+    __getRowByTitle(SHIPS)->setValue(num);
 }
 void StarSystem::setSatellitesNum(int num) {
-    __getRowByTitle(SATELLITES)->setFirstNum(num);
+    __getRowByTitle(SATELLITES)->setValue(num);
 }
 void StarSystem::setBulletsNum(int num) {
-    __getRowByTitle(BULLETS)->setFirstNum(num);
+    __getRowByTitle(BULLETS)->setValue(num);
 }
 
 void StarSystem::setVisibleStarsNum(int num) {
-    __getRowByTitle(STARS)->setSecondNum(num);
+    __getRowByTitle(STARS)->setValueSecond(num);
 }
 void StarSystem::setVisiblePlanetsNum(int num) {
-    __getRowByTitle(PLANETS)->setSecondNum(num);
+    __getRowByTitle(PLANETS)->setValueSecond(num);
 }
 void StarSystem::setVisibleWormHolesNum(int num) {
-    __getRowByTitle(WORMHOLES)->setSecondNum(num);
+    __getRowByTitle(WORMHOLES)->setValueSecond(num);
 }
 void StarSystem::setVisibleAsteroidsNum(int num) {
-    __getRowByTitle(ASTEROIDS)->setSecondNum(num);
+    __getRowByTitle(ASTEROIDS)->setValueSecond(num);
 }
 void StarSystem::setVisibleContainersNum(int num) {
-    __getRowByTitle(CONTAINERS)->setSecondNum(num);
+    __getRowByTitle(CONTAINERS)->setValueSecond(num);
 }
 void StarSystem::setVisibleSpaceStationsNum(int num) {
-    __getRowByTitle(SPACESTATIONS)->setSecondNum(num);
+    __getRowByTitle(SPACESTATIONS)->setValueSecond(num);
 }
 void StarSystem::setVisibleShipsNum(int num) {
-    __getRowByTitle(SHIPS)->setSecondNum(num);
+    __getRowByTitle(SHIPS)->setValueSecond(num);
 }
 void StarSystem::setVisibleSatellitesNum(int num) {
-    __getRowByTitle(SATELLITES)->setSecondNum(num);
+    __getRowByTitle(SATELLITES)->setValueSecond(num);
 }
 void StarSystem::setVisibleBulletsNum(int num) {
-    __getRowByTitle(BULLETS)->setSecondNum(num);
+    __getRowByTitle(BULLETS)->setValueSecond(num);
 }
 
 gui::Row2*

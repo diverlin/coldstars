@@ -49,7 +49,7 @@ public:
 private:
     meti::vec3 m_position;
     meti::vec3 m_size;
-    meti::vec3 m_direction;
+    meti::vec3 m_direction /*= meti::OZ*/;
 
     friend class boost::serialization::access;
     template<class Archive>

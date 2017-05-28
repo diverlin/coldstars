@@ -152,19 +152,43 @@ void BaseView::__updateModelMatrix()
     assert(m_mesh);
     assert(m_orientation);
 
-    m_matrixTranslate = glm::translate(m_orientation->position());
-    m_matrixScale     = glm::scale(m_orientation->size());
+    bool debug = true;
 
-    meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+    if (debug) {
+        auto pos = m_orientation->position();
+        pos.z = -500.0;
+        m_matrixTranslate = glm::translate(pos/*m_orientation->position()*/);
+        m_matrixScale     = glm::scale(m_orientation->size());
 
-    if (m_animationRotation) {
-        m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
-        m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
+        //meti::quatBetweenVectors(m_quatDirection, meti::OX/*m_mesh->originDirection()*/, meti::OX/*m_orientation->direction()*/);
+
+        if (m_animationRotation) {
+            m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
+            m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
+        } else {
+            //m_matrixRotate = glm::toMat4(m_quatDirection);
+            //zzz += 0.01f;
+            zzz = 180/(2*3.14);
+            m_matrixRotate = glm::rotate(glm::mat4(1.0f), zzz, glm::vec3(0.0, 1.0, 0.0));
+            std::cout<<zzz*180/3.14<<std::endl;
+        }
+
+        m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
     } else {
-        m_matrixRotate = glm::toMat4(m_quatDirection);
-    }
+        m_matrixTranslate = glm::translate(m_orientation->position());
+        m_matrixScale     = glm::scale(m_orientation->size());
 
-    m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
+        meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+
+        if (m_animationRotation) {
+            m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
+            m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
+        } else {
+            m_matrixRotate = glm::toMat4(m_quatDirection);
+        }
+
+        m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
+    }
 }
 
 } // namespace view

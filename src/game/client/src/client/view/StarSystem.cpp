@@ -56,6 +56,8 @@
 
 #include <client/gui/UserInput.hpp>
 #include <client/gui/info/starsystem.hpp>
+#include <client/gui/info/Camera.hpp>
+#include <client/gui/info/Renderer.hpp>
 #include <client/gui/GuiDemo.hpp>
 
 namespace  {
@@ -111,7 +113,11 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 //        __addIfVisible(bullet, screenData);
 //    }
 
+//    std::cout<<"ship="<<ceti::to_string(starsystem->ships()[0]->position())<<std::endl;
+//    std::cout<<"star="<<ceti::to_string(starsystem->stars()[0]->position())<<std::endl;
+
     // update ui
+    {
     auto info = m_guiDemo->infoStarSystem();
 
     info->setStarsNum(starsystem->stars().size());
@@ -133,6 +139,28 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     info->setVisibleShipsNum(m_ships.size());
     info->setVisibleSatellitesNum(m_satellites.size());
     info->setVisibleBulletsNum(m_bullets.size());
+    }
+
+    {
+        // update ui
+        auto info = m_guiDemo->infoCamera();
+        info->setLookFrom(ceti::to_string(m_camera.position()));
+        info->setLookAt(ceti::to_string(m_camera.target()));
+        info->setUp(ceti::to_string(m_camera.up()));
+    }
+
+    {
+        const jeti::Renderer& render = client::global::get().render();
+        // update ui
+        auto info = m_guiDemo->infoRender();
+        info->setZNear(std::to_string(jeti::ZNEAR));
+        info->setZFar(std::to_string(jeti::ZFAR));
+        info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_Z));
+
+        info->setScale(std::to_string(render.scale()));
+        info->setWidth(ceti::to_string(render.width()));
+        info->setHeight(ceti::to_string(render.height()));
+    }
 }
 
 void StarSystem::__clear()
@@ -246,6 +274,7 @@ StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
     Base* view = __tryGetViewCached(ship->id());
     if (!view) {
         view = new Ship(ship);
+        applyConstantRotationAnimation(view);
         __cache(view);
     }
     assert(view);
@@ -303,8 +332,8 @@ StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Da
 
 void StarSystem::applyConstantRotationAnimation(Base* view)
 {
-    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
-    view->setAnimationRotation(animation);
+//    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
+//    view->setAnimationRotation(animation);
 }
 
 void StarSystem::__addIfVisible(control::Container* container, const jeti::Screen::Data& data)

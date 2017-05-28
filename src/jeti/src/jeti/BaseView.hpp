@@ -98,8 +98,6 @@ protected:
 //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
-    //void RenderAxis(const Renderer&) const;
-
 private:
     glm::vec4 m_color;
 
@@ -117,14 +115,11 @@ private:
     glm::quat m_quatDirection;
     glm::quat m_quatAnimation;
 
-    //void __updateRenderAnimation();
-
-    //    protected:
-    //        InfoTable m_Info;
-    //        virtual void UpdateInfo() {};
     virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
 
     void __updateModelMatrix();
+
+    float zzz = 0;
 };
 
 } // namepsace view
