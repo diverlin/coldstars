@@ -49,8 +49,7 @@ namespace descriptor {
 namespace {
 
 glm::vec3 randDirection() {
-    //return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
-    return meti::OX;
+    return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, 1.0));
 }
 
 } // namespace
@@ -106,6 +105,9 @@ namespace {
 
 int_t meshDescriptorIdFromType(const mesh::Type& type) {
     descriptor::Mesh* descr = descriptor::Manager::get().randMesh(type);
+    if (type == mesh::Type::PLANE) {
+        descr->setIsPlane();
+    }
     assert(descr->id() != NONE);
     return descr->id();
 }
@@ -378,7 +380,7 @@ genShip()
     // 3d
     descr->setTexture(textureDescriptorIdFromType(texture::Type::SHIP));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
-    descr->setSize(meti::vec3(meti::getRandInt(90, 100))); // TODO: take from image
+    //descr->setSize(meti::vec3(meti::getRandInt(100, 100))); // TODO: take from image
 
     descriptor::Manager::get().add(descr);
 

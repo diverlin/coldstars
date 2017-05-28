@@ -31,16 +31,22 @@ public:
     Mesh(const std::string& data);
     ~Mesh() = default;
 
+    bool isFlat() const { return m_isFlat; }
+    void setIsPlane() { m_isFlat = true; }
+
     std::string data() const;
 
     bool operator==(const Mesh& rhs) const;
 
 private:
+    bool m_isFlat;
+
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::descriptor::Mesh>(*this);
         ar & boost::serialization::base_object<Association>(*this);
+        ar & m_isFlat;
     }
 };
 

@@ -67,7 +67,7 @@ public:
     void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
-    void setMesh(Mesh* mesh) { m_mesh = mesh; }
+    void bindMesh(Mesh* mesh);
     void setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
 
     //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
@@ -118,8 +118,7 @@ private:
     virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
 
     void __updateModelMatrix();
-
-    float zzz = 0;
+    void __adjustSizeFromMaterial();
 };
 
 } // namepsace view

@@ -209,10 +209,8 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     vehicle->model()->setPlace(place::Type::SPACE);
     vehicle->setStarSystem(this);
 
-    vehicle->model()->setPlace(place::Type::SPACE);
-
     vehicle->setPosition(position);
-    vehicle->setDirection(dir);
+    vehicle->setDirection(glm::vec3(0,1,0)/*dir*/);
     vehicle->updateOrientation(); // remove bad logic
 
     m_vehicles.push_back(vehicle);
