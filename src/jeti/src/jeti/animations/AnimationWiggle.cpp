@@ -24,32 +24,29 @@
 namespace jeti {
 
 AnimationWiggle::AnimationWiggle(float delta, float threshold)
-:
-BaseAnimationRotation(delta), 
-m_Clockwise(true),
-m_Threshold(threshold)
+    :
+      BaseAnimationRotation(delta),
+      m_threshold(threshold)
 {}
 
-/* virtual */
 AnimationWiggle::~AnimationWiggle()
 {}
 
-/* virtual override final */
 void AnimationWiggle::update(glm::quat& quat, const glm::vec3& axis)
 {
-    if (m_Clockwise) {
+    if (m_clockwise) {
         m_angle += deltaAngle();
-        if (m_angle > m_Threshold) {
-            m_Clockwise = false;
+        if (m_angle > m_threshold) {
+            m_clockwise = false;
         }
     } else {
         m_angle -= deltaAngle();
-        if (m_angle < -m_Threshold) {
-            m_Clockwise = true;
-        }        
+        if (m_angle < -m_threshold) {
+            m_clockwise = true;
+        }
     }
     
     meti::quatFromAngleAndAxis(quat, m_angle, axis);
 }
 
-}
+} // namespace jeti

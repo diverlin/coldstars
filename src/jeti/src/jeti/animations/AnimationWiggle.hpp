@@ -24,19 +24,18 @@ namespace jeti {
 
 class AnimationWiggle : public BaseAnimationRotation 
 {  
-    public:
-        AnimationWiggle(float, float);
-        virtual ~AnimationWiggle();
+public:
+    AnimationWiggle(float, float);
+    ~AnimationWiggle() override final;
 
-        virtual void update(glm::quat&, const glm::vec3&) override final;
-        
-    private:
-        bool m_Clockwise;
-        float m_Threshold;
+    void update(glm::quat&, const glm::vec3&) override final;
 
+private:
+    bool m_clockwise = false;
+    float m_threshold = 0.0f;
 };
 
-}
+} // namespace jeti
 
 
 

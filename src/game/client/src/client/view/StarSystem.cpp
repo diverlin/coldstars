@@ -275,7 +275,7 @@ StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
     Base* view = __tryGetViewCached(ship->id());
     if (!view) {
         view = new Ship(ship);
-//        applyConstantRotationAnimation(view);
+        applyConstantRotationAnimation(view);
         __cache(view);
     }
     assert(view);
