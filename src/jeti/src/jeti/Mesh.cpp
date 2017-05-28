@@ -81,8 +81,6 @@ void Mesh::__genQuad()
 
     ObjLoader objLoader(ss);
     fillVertices(objLoader);
-
-    m_isFlat = true;
 }
 
 void Mesh::fillVertices(const ObjLoader& objLoader)
@@ -204,10 +202,14 @@ void Mesh::fillPointVerticesFast(const std::vector<glm::vec3>& positions, const 
 
 void Mesh::__updateVbo()
 {    
+    if (m_vertexCount == 12) {
+        m_isFlat = true;
+    }
+
     int stride = STRIDE_POSITION;
     
     if (m_hasTexCoords) { stride += STRIDE_TEXCOORD; }
-    if ((m_hasNormals) or (m_hasPointsSize))  { stride += STRIDE_NORMAL; }
+    if ((m_hasNormals) || (m_hasPointsSize))  { stride += STRIDE_NORMAL; }
     if (m_hasColors)    { stride += STRIDE_COLOR; }
 
     GLfloat data_array[m_vertexCount * stride];

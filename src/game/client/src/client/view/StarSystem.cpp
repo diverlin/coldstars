@@ -20,6 +20,7 @@
 
 #include "Base.hpp"
 
+#include <core/type/MeshType.hpp>
 #include <core/common/constants.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/descriptor/Base.hpp>
@@ -264,17 +265,17 @@ bool
 StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 {
     assert(ship);
-    if (!__isObjectOnScreen(ship->position(), data)) {
-        return false;
-    }
-    if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
-        return false;
-    }
+//    if (!__isObjectOnScreen(ship->position(), data)) {
+//        return false;
+//    }
+//    if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
+//        return false;
+//    }
 
     Base* view = __tryGetViewCached(ship->id());
     if (!view) {
         view = new Ship(ship);
-        applyConstantRotationAnimation(view);
+//        applyConstantRotationAnimation(view);
         __cache(view);
     }
     assert(view);
@@ -332,8 +333,8 @@ StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Da
 
 void StarSystem::applyConstantRotationAnimation(Base* view)
 {
-//    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
-//    view->setAnimationRotation(animation);
+    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
+    view->setAnimationRotation(animation);
 }
 
 void StarSystem::__addIfVisible(control::Container* container, const jeti::Screen::Data& data)
@@ -478,25 +479,6 @@ void StarSystem::__add(Base* view)
 void StarSystem::__loadResourcesFor(Base* view)
 {
     {
-    jeti::Mesh* mesh = nullptr;
-
-    int_t descritprorId = view->mesh();
-    auto it = m_meshCollector.find(descritprorId);
-    if (it != m_meshCollector.end()) {
-        mesh = it->second;
-    } else {
-        ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
-        if (descriptor) {
-            mesh = new jeti::Mesh(descriptor);
-        }
-        assert(mesh);
-        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
-    }
-    view->setMesh(mesh);
-    }
-
-
-    {
     jeti::control::Material* material = nullptr;
 
     int_t descritprorId = view->texture();
@@ -513,8 +495,27 @@ void StarSystem::__loadResourcesFor(Base* view)
         m_materialCollector.insert(std::make_pair(descritprorId, material));
     }
     view->setMaterial(material);
-
     }
+
+    {
+    jeti::Mesh* mesh = nullptr;
+
+    int_t descritprorId = view->mesh();
+    auto it = m_meshCollector.find(descritprorId);
+    if (it != m_meshCollector.end()) {
+        mesh = it->second;
+    } else {
+        ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
+        if (descriptor) {
+            mesh = new jeti::Mesh(descriptor);
+        }
+        assert(mesh);
+        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
+    }
+
+    view->bindMesh(mesh);
+    }
+
 }
 
 void StarSystem::__cache(Base* view)

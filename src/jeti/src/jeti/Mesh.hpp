@@ -30,6 +30,7 @@ public:
     ~Mesh();
 
     int_t id() const { return m_id; }
+
     bool isFlat() const { return m_isFlat; }
     [[warning("added for compatibility")]]
     int_t type() const { return 0; }

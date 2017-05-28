@@ -41,8 +41,10 @@ class Material;
 
 const int FBO_NUM = 6;
 const float SCREEN_QUAD_ZPOS = -999.0f;
-const float ZNEAR = 0.1f;
+const float ZNEAR = -1000.0f;
 const float ZFAR = 1000.0f;
+//const float ZNEAR = 1000.0f;
+//const float ZFAR = 0.1;
 
 class Renderer : public NonCopyable
 {
