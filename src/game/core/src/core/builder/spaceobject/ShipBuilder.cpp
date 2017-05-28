@@ -131,7 +131,11 @@ Ship::__createInternals(control::Ship* ship, descriptor::Ship* descr)
 //    assert(false);
 //    data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->model()->setLifeData(data_life);
-    
+
+    // orientation
+    ship->model()->setSize(descr->size());
+    ship->model()->setDirection(descr->direction());
+
 //    assert(false);
 //    ship->CreateDriveComplexTextureDependedStuff();
 //    ship->CreateProtectionComplexTextureDependedStuff();

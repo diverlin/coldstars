@@ -31,6 +31,8 @@ class SFMLWrapper;
 
 namespace info {
 class StarSystem;
+class Camera;
+class Renderer;
 } // namespace info
 
 namespace gui {
@@ -47,6 +49,8 @@ public:
     void draw();
 
     info::StarSystem* infoStarSystem() const { return m_infoStarSystem; }
+    info::Camera* infoCamera() const { return m_infoCamera; }
+    info::Renderer* infoRender() const { return m_infoRender; }
 
 private:
     sf::Clock m_clock;
@@ -55,6 +59,8 @@ private:
     sfg::SFGUI m_gui;
 
     info::StarSystem* m_infoStarSystem = nullptr;
+    info::Camera* m_infoCamera = nullptr;
+    info::Renderer* m_infoRender = nullptr;
 };
 
 } // namespace gui

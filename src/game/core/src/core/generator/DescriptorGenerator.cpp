@@ -49,7 +49,8 @@ namespace descriptor {
 namespace {
 
 glm::vec3 randDirection() {
-    return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
+    //return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
+    return meti::OX;
 }
 
 } // namespace
@@ -223,7 +224,7 @@ genPlanet()
     //        Ring* ring = new Ring();
     //        ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
     //        //ring->setDirection(glm::normalize(glm::vec3(1.0f)));
-    //        ring->setDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+    //        ring->setDirection(glm::normalize(meti::OY));
     //        planet->AddDecoration(ring);
     //    }
     //    */
@@ -296,7 +297,7 @@ genNpc()
 descriptor::Ship*
 genShip()
 {
-    race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -374,6 +375,11 @@ genShip()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
+    // 3d
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::SHIP));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+    descr->setSize(meti::vec3(meti::getRandInt(90, 100))); // TODO: take from image
+
     descriptor::Manager::get().add(descr);
 
     return descr;
@@ -383,7 +389,7 @@ genShip()
 descriptor::SpaceStation*
 genSpaceStation()
 {
-    race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;

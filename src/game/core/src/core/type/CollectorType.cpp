@@ -32,6 +32,7 @@ Collector::Collector() {
     __registerType(int_t(texture::Type::SHIP), "texture::ship");
     __registerType(int_t(mesh::Type::SPHERE), "mesh::sphere");
     __registerType(int_t(mesh::Type::SPHERE_DEFORMED), "mesh::sphere_deformed");
+    __registerType(int_t(mesh::Type::PLANE), "mesh::plane");
 }
 
 Collector::~Collector() {}

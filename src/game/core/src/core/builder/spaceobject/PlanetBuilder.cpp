@@ -92,7 +92,7 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
         //ring->setDirection(glm::normalize(glm::vec3(1.0f)));
-        ring->setDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+        ring->setDirection(glm::normalize(meti::OY));
         planet->AddDecoration(ring);
     }
     */

@@ -165,7 +165,7 @@ private:
     bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
     jeti::Camera& m_camera;
 
-    bool m_debug = false;
+    bool m_debug = true;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);

@@ -27,7 +27,7 @@
 namespace descriptor {
 
 class Ship : public Vehicle {
-public:
+public:    
     Ship();
     Ship(const std::string& data);
     ~Ship() = default;

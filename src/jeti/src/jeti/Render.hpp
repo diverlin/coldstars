@@ -40,13 +40,12 @@ class Material;
 } // namespace control
 
 const int FBO_NUM = 6;
+const float SCREEN_QUAD_Z = -999.0f;
+const float ZNEAR = 0.1f;
+const float ZFAR = 1000.0f;
 
 class Renderer : public NonCopyable
 {
-    const float SCREEM_QUAD_ZPOS = -999.0f;
-    const float ZNEAR = 0.1f;
-    const float ZFAR = 1000.0f;
-
     const std::string SHADERS_PATH = "shaders/";
 
     enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
@@ -54,6 +53,10 @@ class Renderer : public NonCopyable
 public:
     Renderer();
     ~Renderer();
+
+    float scale() const { return m_scale; }
+    int width() const { return m_w; }
+    int height() const { return m_h; }
 
     void applyScale(float);
 

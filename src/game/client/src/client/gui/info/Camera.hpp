@@ -20,43 +20,43 @@
 
 #include <SFGUI/Widgets.hpp>
 
-namespace gui {
+#include <ceti/type/IdType.hpp>
 
-const std::string title_id = "title";
-const std::string value_id = "value";
+#include <client/gui/info/Row2.hpp>
 
-class Row {
+#include <map>
+
+namespace info {
+
+class Camera
+{
+private:
+    const std::string LOOKFROM_TITLE = "lookFrom";
+    const std::string LOOKAT_TITLE = "lookAt";
+    const std::string UP_TITLE = "up";
+
+    enum {
+        LOOKFROM,
+        LOOKAT,
+        UP
+    };
+
 public:
-    Row(const std::string& title) {
-        m_labelTitle = sfg::Label::Create(title+":");
-        m_labelTitle->SetId(title_id);
+    Camera();
+    ~Camera() = default;
 
-        m_labelValue = sfg::Label::Create(m_value);
-        m_labelValue->SetId(value_id);
-    }
+    void setLookFrom(const std::string&);
+    void setLookAt(const std::string&);
+    void setUp(const std::string&);
 
-    void setValue(int value) {
-        setValue(std::to_string(value));
-    }
-
-    void setValue(const std::string& value) {
-        if (m_value == value) {
-            return;
-        }
-        m_labelValue->SetText(value);
-        m_value = value;
-    }
-
-    sfg::Label::Ptr labelTitle() const { return m_labelTitle; }
-    sfg::Label::Ptr labelValue() const { return m_labelValue; }
+    sfg::Table::Ptr mainWidget() const { return m_table; }
 
 private:
-    std::string m_title;
-    std::string m_value;
+    sfg::Table::Ptr m_table;
+    std::map<int, gui::Row*> m_rows;
 
-    sfg::Label::Ptr m_labelTitle;
-    sfg::Label::Ptr m_labelValue;
+    gui::Row* __getRowByTitle(int);
 };
 
-} // namespace gui
+} // namespace info
 

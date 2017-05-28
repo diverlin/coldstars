@@ -22,14 +22,26 @@
 
 namespace ceti {
 
+//std::string to_string(const glm::vec3& v) {
+//    std::string result;
+//    result += "(";
+//    result += to_string(v.x);
+//    result += ",";
+//    result += to_string(v.y);
+//    result += ",";
+//    result += to_string(v.z);
+//    result += ")";
+//    return result;
+//}
+
 std::string to_string(const glm::vec3& v) {
     std::string result;
     result += "(";
-    result += to_string(v.x);
+    result += to_string(int(v.x));
     result += ",";
-    result += to_string(v.y);
+    result += to_string(int(v.y));
     result += ",";
-    result += to_string(v.z);
+    result += to_string(int(v.z));
     result += ")";
     return result;
 }
