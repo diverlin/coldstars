@@ -46,4 +46,4 @@ void AnimationConstantRotation::update(glm::quat& quat, const glm::vec3& axis)
     meti::quatFromAngleAndAxis(quat, m_angle, axis);
 }
 
-}
+} // namespace jeti

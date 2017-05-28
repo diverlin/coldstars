@@ -24,15 +24,14 @@ namespace jeti {
 
 class AnimationConstantRotation : public BaseAnimationRotation 
 {  
-    public:
-        AnimationConstantRotation(float);
-        virtual ~AnimationConstantRotation();
+public:
+    AnimationConstantRotation(float);
+    ~AnimationConstantRotation() override final;
 
-        virtual void update(glm::quat&, const glm::vec3&);
-
+    void update(glm::quat&, const glm::vec3&) override final;
 };
 
-}
+} // naemspace jeti
 
 
 

@@ -165,7 +165,7 @@ void BaseView::__updateModelMatrix()
     meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
 
     if (m_animationRotation) {
-        m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
+        m_animationRotation->update(m_quatAnimation, meti::OZ/*m_mesh->originDirection()*/);
         m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
     } else {
         m_matrixRotate = glm::toMat4(m_quatDirection);
