@@ -106,7 +106,7 @@ private:
 //    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
 //    std::vector<VerticalFlowText*> m_texts;
     
-    void applyConstantRotationAnimation(Base*);
+    void applyConstantRotationAnimation(const glm::vec3&, Base*);
 
     void __updateVisible(control::StarSystem* starsystem);
 

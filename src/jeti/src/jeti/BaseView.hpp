@@ -52,7 +52,10 @@ namespace control {
 class Material;
 } // namespace control
 
-class BaseAnimationRotation;
+namespace animation {
+class BaseRotation;
+} // namespace animation
+
 class Renderer;
 
 namespace view {
@@ -64,7 +67,7 @@ public:
     virtual ~BaseView();
 
 //    void validateResources() const;
-    void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
+    void setAnimationRotation(animation::BaseRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
     void bindMesh(Mesh* mesh);
@@ -105,7 +108,7 @@ private:
     Mesh* m_mesh = nullptr;
     ceti::model::Orientation* m_orientation = nullptr;
 
-    BaseAnimationRotation* m_animationRotation = nullptr;
+    animation::BaseRotation* m_animationRotation = nullptr;
 
     glm::mat4 m_matrixModel;
     glm::mat4 m_matrixTranslate;

@@ -16,37 +16,40 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AnimationWiggle.hpp"
-#include <cmath>
+#pragma once
 
-#include <meti/QuaternionUtils.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace jeti {
 
-AnimationWiggle::AnimationWiggle(float delta, float threshold)
-    :
-      BaseAnimationRotation(delta),
-      m_threshold(threshold)
-{}
+namespace animation {
 
-AnimationWiggle::~AnimationWiggle()
-{}
+class BaseRotation
+{  
+public:
+    BaseRotation(const glm::vec3& axis, float delta_angle)
+        :
+          m_axis(axis)
+        , m_deltaAngle(delta_angle)
+    {}
+    virtual ~BaseRotation() = default;
 
-void AnimationWiggle::update(glm::quat& quat, const glm::vec3& axis)
-{
-    if (m_clockwise) {
-        m_angle += deltaAngle();
-        if (m_angle > m_threshold) {
-            m_clockwise = false;
-        }
-    } else {
-        m_angle -= deltaAngle();
-        if (m_angle < -m_threshold) {
-            m_clockwise = true;
-        }
-    }
+    virtual void update(glm::quat&) = 0;
     
-    meti::quatFromAngleAndAxis(quat, m_angle, axis);
-}
+protected:
+    float _deltaAngle() const { return m_deltaAngle; }
+//    const glm::vec3& _axis() const { return m_axis; }
+
+    glm::vec3 m_axis;
+    float m_angle = 0;
+
+private:
+    float m_deltaAngle = 0.0f;
+};
+
+} // namespace animation
 
 } // namespace jeti
+
+
+

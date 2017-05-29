@@ -51,7 +51,7 @@
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/Camera.hpp>
-#include <jeti/animations/AnimationConstantRotation.hpp>
+#include <jeti/animation/ConstantRotation.hpp>
 
 #include <ceti/Collision.hpp>
 
@@ -205,7 +205,7 @@ StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
     Base* view = __tryGetViewCached(star->id());
     if (!view) {
         view = new Star(star);
-        applyConstantRotationAnimation(view);
+        applyConstantRotationAnimation(meti::OY, view);
         __cache(view);
     }
     assert(view);
@@ -226,7 +226,7 @@ StarSystem::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& da
     Base* view = __tryGetViewCached(planet->id());
     if (!view) {
         view = new Planet(planet);
-        applyConstantRotationAnimation(view);
+        applyConstantRotationAnimation(meti::OY, view);
         __cache(view);
     }
     assert(view);
@@ -250,7 +250,7 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data
     Base* view = __tryGetViewCached(asteroid->id());
     if (!view) {
         view = new Asteroid(asteroid);
-        applyConstantRotationAnimation(view);
+        applyConstantRotationAnimation(meti::OY, view);
         __cache(view);
     }
     assert(view);
@@ -275,7 +275,7 @@ StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
     Base* view = __tryGetViewCached(ship->id());
     if (!view) {
         view = new Ship(ship);
-        applyConstantRotationAnimation(view);
+        applyConstantRotationAnimation(meti::OZ, view);
         __cache(view);
     }
     assert(view);
@@ -331,9 +331,9 @@ StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Da
     return true;
 }
 
-void StarSystem::applyConstantRotationAnimation(Base* view)
+void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
 {
-    jeti::AnimationConstantRotation* animation = new jeti::AnimationConstantRotation(meti::getRandFloat(0.001, 0.04));
+    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.04));
     view->setAnimationRotation(animation);
 }
 

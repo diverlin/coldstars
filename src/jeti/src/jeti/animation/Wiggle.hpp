@@ -18,21 +18,28 @@
 
 #pragma once
 
-#include "BaseAnimationRotation.hpp"
+#include "BaseRotation.hpp"
 
 namespace jeti {
 
-class AnimationConstantRotation : public BaseAnimationRotation 
+namespace animation {
+
+class Wiggle : public BaseRotation
 {  
 public:
-    AnimationConstantRotation(float);
-    ~AnimationConstantRotation() override final;
+    Wiggle(const glm::vec3&, float, float);
+    ~Wiggle() override final;
 
-    void update(glm::quat&, const glm::vec3&) override final;
+    void update(glm::quat&) override final;
+
+private:
+    bool m_clockwise = false;
+    float m_threshold = 0.0f;
 };
 
-} // naemspace jeti
+} // namespace animation
 
+} // namespace jeti
 
 
 
