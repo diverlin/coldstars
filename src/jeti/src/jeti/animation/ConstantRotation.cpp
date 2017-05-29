@@ -16,26 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "ConstantRotation.hpp"
 
-#include "BaseAnimationRotation.hpp"
+#include <meti/QuaternionUtils.hpp>
 
 namespace jeti {
+namespace animation {
 
-class AnimationWiggle : public BaseAnimationRotation 
-{  
-public:
-    AnimationWiggle(float, float);
-    ~AnimationWiggle() override final;
+ConstantRotation::ConstantRotation(const glm::vec3& axis, float delta_angle)
+    :
+      BaseRotation(axis, delta_angle)
+{}
 
-    void update(glm::quat&, const glm::vec3&) override final;
+void ConstantRotation::update(glm::quat& quat)
+{
+    m_angle += _deltaAngle();
+    if (m_angle > 2*M_PI) {
+        m_angle -= 2*M_PI;
+    }
 
-private:
-    bool m_clockwise = false;
-    float m_threshold = 0.0f;
-};
+    if (m_angle < -2*M_PI) {
+        m_angle += 2*M_PI;
+    }
+    
+    meti::quatFromAngleAndAxis(quat, m_angle, m_axis);
+}
 
+} // namespace animation
 } // namespace jeti
-
-
-
