@@ -90,23 +90,23 @@ Ship::~Ship()
 //}
 
 /* virtual override final */
-void Ship::UpdateInSpace(int time, bool show_effect)
+void Ship::update(int time)
 {
-    _checkDeath(show_effect);
+    _checkDeath(false);
     //    GetComplexProtector().GetShieldEffect()->Update();
-    navigator().updatePosition(); // debug
+    navigator().update(); // debug
 
     if (time > 0) {
-        UpdateSpecialAction();
+        __updateSpecialAction();
 
         if (npc()) {
-            npc()->updateInSpace(time, show_effect);
-            //weapons().fire(time, npc()->model()->skills().attackNormalized(), show_effect);
+            npc()->update(time);
+            //weapons().fire(time, npc()->model()->skills().attackNormalized());
 
             updateOrientation();
 
             if (properties().speed > 0) {
-                navigator().updatePosition();
+                navigator().update();
             }
 
             UpdateGrappleMicroProgram_inDynamic();

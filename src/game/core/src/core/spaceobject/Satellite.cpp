@@ -53,12 +53,11 @@ void Satellite::BindParent(const SpaceObject* const parent)
     m_Orbit.calcPath(2*1.1*parent->collisionRadius(), 1.0, meti::getRandBool());
 }
 
-void Satellite::UpdateInSpace(int time, bool show_effect)
+void Satellite::update(int time)
 {
-    _checkDeath(show_effect);
+    _checkDeath(false);
 //    UpdateRenderStuff();
-    if (time > 0)
-    {
+    if (time > 0) {
         m_Orbit.updatePosition();
 
         //printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);

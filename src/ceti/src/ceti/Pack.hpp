@@ -40,7 +40,7 @@ public:
         this->push_back(element);
     }
 
-    T remove(const T& element) {
+    void remove(const T& element) {
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             // swap the one to be removed with the last element

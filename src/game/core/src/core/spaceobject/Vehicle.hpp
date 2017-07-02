@@ -125,7 +125,8 @@ public:
     // good
     void dock(SpaceObject*);
     void grab(SpaceObject*);
-    void follow(SpaceObject*);
+    void navigate(SpaceObject*);
+    void navigate(const meti::vec3&);
 
     bool mount(Item*);
     bool load(Item*);
@@ -209,13 +210,15 @@ public:
     std::vector<slot::Item*> weaponSlots() const { return m_weapon_complex.weaponSlots(); }
     std::vector<slot::Item*> cargoSlots() const { return m_cargoSlots; }
 
+private:
+    void __updateSpecialAction();
+
 public:
     control::Npc* npc() const { return m_npc; }
 
     GoodsPack* goodsPack() const;
 
-    void UpdateSpecialAction();
-    virtual void UpdateInSpace(int, bool) = 0;
+    virtual void update(int) = 0;
 
     void hit(int, SpaceObject* agressor = nullptr) override;
 

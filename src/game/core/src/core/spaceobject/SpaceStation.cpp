@@ -69,9 +69,9 @@ void SpaceStation::bindLand(Land* land)
 }
 
 /* virtual override final */
-void SpaceStation::UpdateInSpace(int time, bool show_effect)
+void SpaceStation::update(int time)
 {
-    _checkDeath(show_effect);
+    _checkDeath(false);
     if (time > 0) {
         weapons().updateFire(time, npc()->model()->skills().attackNormalized());
     }

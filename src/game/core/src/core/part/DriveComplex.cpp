@@ -42,10 +42,9 @@ namespace complex {
 
 bool Drive::pathExists() const
 {
-    if ( (m_pathEnd == true) and (m_pathCenterVec.size() == 0 ) ) {
+    if (m_pathEnd || m_pathCenters.empty()) {
         return false;
-    }
-    
+    }    
     return true;
 }
 
@@ -63,14 +62,14 @@ void Drive::resetTarget()
     m_pathEnd = true;
 }
       
-void Drive::setCoordinates(const glm::vec3& target_pos)
+void Drive::setTarget(const glm::vec3& target_pos)
 {
     resetTarget();
     m_hasTarget = true;
     
     m_targetPos = target_pos;
     
-    updatePath();
+    refreshPath();
 }
                  
 void Drive::setTarget(control::SpaceObject* target, Action action_id)
@@ -149,10 +148,9 @@ void Drive::setTarget(control::SpaceObject* target, Action action_id)
 //    }
 //}
                   
-void Drive::updatePath()
+void Drive::refreshPath()
 {
-    if (m_target != nullptr)
-    {
+    if (m_target) {
         if (__validateTarget()) {
             //__defineDistance();
             __updateDynamicTargetCoord();
@@ -245,8 +243,8 @@ bool Drive::getDockingPermission()
 
 void Drive::__clearPath()
 {
-    m_pathCenterVec.clear();
-    m_pathDirectionVec.clear();
+    m_pathCenters.clear();
+    m_pathDirections.clear();
 }
 
 void Drive::__calcPath()
@@ -259,97 +257,102 @@ void Drive::__calcPath()
     int round_counter = 0;
 
 // DANGER    assert(false);
-//    float speed_base = m_ownerVehicle->properties().speed;
+    float speed_base = m_ownerVehicle->properties().speed;
     
-//    glm::vec3 new_center(m_ownerVehicle->position());
-//    glm::vec3 target_dir = glm::normalize(m_TargetPos - m_ownerVehicle->position());
+    glm::vec3 new_center(m_ownerVehicle->position());
+    glm::vec3 target_dir = glm::normalize(m_targetPos - m_ownerVehicle->position());
 
-//    glm::quat zero_quat;
-//    glm::quat target_quat;
+    glm::quat zero_quat;
+    glm::quat target_quat;
 
-//    glm::vec3 direction = glm::normalize(m_ownerVehicle->direction());
+    glm::vec3 direction = glm::normalize(glm::vec3(m_ownerVehicle->direction()));
 
-//    meti::quatBetweenVectors(target_quat, direction, target_dir);
-//    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
-//    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999)
-//    {
-//        direction = interpolated_quat * direction;
+    meti::quatBetweenVectors(target_quat, direction, target_dir);
+    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
+    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) {
+        direction = interpolated_quat * direction;
  
-//        new_center += direction * speed_base/* * gravity_rate*/;
-//        target_dir = glm::normalize(m_TargetPos - new_center);
+        new_center += direction * speed_base/* * gravity_rate*/;
+        target_dir = glm::normalize(m_targetPos - new_center);
 
-//        m_PathCenterVec.push_back(new_center);
-//        m_PathDirectionVec.push_back(direction);
+        m_pathCenters.push_back(new_center);
+        m_pathDirections.push_back(direction);
 
-//        round_counter++;
-//        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
-//        {
-//            //ClearPath();
-//            break;
-//            //return;
-//        }
-//    }
-
-    //float az = atan2(m_OwnerVehicle->direction().y, m_OwnerVehicle->direction().x);
-    ////float az = acos(glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), m_OwnerVehicle->direction()));
-    //std::cout<<"angle= "<<glm::degrees(az)<<std::endl;
-
-    //glm::vec3 direction = m_OwnerVehicle->direction();
-        
-    //glm::vec3 gravity;
-    //const StarSystem& starsystem = *m_OwnerVehicle->starsystem();
-    //int mass = m_OwnerVehicle->mass();
-    
-    //int sign = 1;
-    //float angle_step = glm::radians(1.0f);
-
-    //int round_counter_max = 2 + 2*M_PI/angle_step;
-    //int round_counter = 0;
-    //while (std::fabs(glm::dot(direction, target_dir)) < 0.999)
-    //{
-        //if (round_counter == 0)
-        //{
-            //float prob_az1 = az + angle_step;
-            //float prob_az2 = az - angle_step;
-            
-            //glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
-            //glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
-            
-            //float prob_cosa1 = glm::dot(prob_direction1, target_dir);
-            //float prob_cosa2 = glm::dot(prob_direction2, target_dir);
-                    
-            //if (prob_cosa1 > 0)
-            //{
-                //if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
-                //else                                                    { sign = 1; }
-            //}
-            //else
-            //{
-                //if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
-                //else                                                    { sign = -1; }
-            //}
-        //}
-    
-        //az += sign * angle_step;
-
-        //direction.x = cos(az);
-        //direction.y = sin(az);
-        
-        //round_counter++;
-        //if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
-        //{
-            //ClearPath();
+        round_counter++;
+        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
+        {
+            //__clearPath();
+            break;
             //return;
-        //}
+        }
+    }
 
-        ////float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);
+
+
+    /// old
+    ///
+/*
+   float az = atan2(m_ownerVehicle->direction().y, m_ownerVehicle->direction().x);
+    //float az = acos(glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), m_OwnerVehicle->direction()));
+    std::cout<<"angle= "<<glm::degrees(az)<<std::endl;
+
+    glm::vec3 direction = m_ownerVehicle->direction();
         
-        //new_center += direction * speed_base/* * gravity_rate*/;
+    glm::vec3 gravity;
+    const StarSystem& starsystem = *m_ownerVehicle->starsystem();
+    int mass = m_ownerVehicle->mass();
+    
+    int sign = 1;
+    float angle_step = glm::radians(1.0f);
 
-        //m_PathCenterVec.push_back(new_center);
-        //m_PathDirectionVec.push_back(direction);
-    //}
+    int round_counter_max = 2 + 2*M_PI/angle_step;
+    int round_counter = 0;
+    while (std::fabs(glm::dot(direction, target_dir)) < 0.999)
+    {
+        if (round_counter == 0)
+        {
+            float prob_az1 = az + angle_step;
+            float prob_az2 = az - angle_step;
+            
+            glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
+            glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
+            
+            float prob_cosa1 = glm::dot(prob_direction1, target_dir);
+            float prob_cosa2 = glm::dot(prob_direction2, target_dir);
+                    
+            if (prob_cosa1 > 0)
+            {
+                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
+                else                                                    { sign = 1; }
+            }
+            else
+            {
+                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
+                else                                                    { sign = -1; }
+            }
+        }
+    
+        az += sign * angle_step;
 
+        direction.x = cos(az);
+        direction.y = sin(az);
+        
+        round_counter++;
+        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
+        {
+            __clearPath();
+            return;
+        }
+
+        //float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);
+        
+        new_center += direction * speed_base; gravity_rate;
+
+        m_PathCenterVec.push_back(new_center);
+        m_PathDirectionVec.push_back(direction);
+    }
+*/
+/// old
 
 /*
 
@@ -367,7 +370,7 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 */
 
-    if (m_pathCenterVec.size() > 1) {
+    if (m_pathCenters.size() > 1) {
         m_pathEnd = false;
         m_pathIndex = 0;
     } else {
@@ -375,9 +378,168 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 }
 
+
+bool calcDirectPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
+              const glm::vec3& from,
+              const glm::vec3& to,
+              const glm::vec3& dir,
+              float speed)
+{
+    glm::vec3 new_center(from);
+    glm::vec3 direction = glm::normalize(dir);
+
+    int tries = 20000;
+    while(new_center != to) {
+        new_center += direction * speed;
+        centers.push_back(new_center);
+        directions.push_back(direction);
+
+        tries--;
+        if (tries < 0) {
+            // target_pos is not reachable (within circle)
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+bool calcRoundPath(std::vector<glm::vec3>& centers,
+                   std::vector<glm::vec3>& directions,
+                   const glm::vec3& from,
+                   const glm::vec3& to,
+                   const glm::vec3& dir,
+                   float speed)
+{
+    glm::vec3 target_dir(to - from);
+    if (glm::length(target_dir) < std::numeric_limits<float>::epsilon()) {
+        return false;
+    }
+
+
+    float radius = 100.0f;
+
+    glm::vec3 up(0,0,1);
+    glm::vec3 o1_dir = glm::cross(dir, up);
+    glm::vec3 o2_dir = glm::cross(dir, -up);
+
+    glm::vec3 o1(from + o1_dir * radius);
+    glm::vec3 o2(from + o2_dir * radius);
+
+    glm::vec3 to_O1(to-o1);
+    glm::vec3 to_O2(to-o2);
+
+    glm::vec3 o(o1);
+    glm::vec3 to_O(to_O1);
+
+    float diff1 = glm::length (to_O1);
+    float diff2 = glm::length(to_O2);
+    if (diff2 < diff1) {
+        o = o2;
+        to_O = to_O2;
+    }
+
+    float angle = std::acos(glm::dot(-to_O, from - o));
+
+    // local vars
+    glm::vec3 direction(dir);
+    glm::vec3 new_center(from);
+    target_dir = glm::normalize(target_dir);
+
+    float acos = glm::dot(direction, target_dir);
+    while(std::fabs(acos) < 0.9999) {
+        angle -= 0.001; // calc angular speed depending on the linear speed
+
+        new_center.x = radius * cos(angle);
+        new_center.y = radius * sin(angle);
+
+        if (!glm::length(to-new_center)) {
+            return true;
+        }
+        target_dir = to - new_center;
+        if (!glm::length(target_dir)) {
+            return true;
+        }
+
+        target_dir = glm::normalize(target_dir);
+
+        centers.push_back(new_center);
+        directions.push_back(direction);
+
+        if (angle<0) {
+            return false;
+        }
+
+        acos = std::fabs(glm::dot(direction, target_dir));
+    }
+
+    return true;
+}
+
+
+bool calcPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
+              const glm::vec3& from,
+              const glm::vec3& to,
+              const glm::vec3& dir,
+              float speed)
+{
+    glm::vec3 new_center(from);
+    glm::vec3 target_dir = glm::normalize(to - from);
+
+    glm::quat zero_quat;
+    glm::quat target_quat;
+
+    glm::vec3 direction = glm::normalize(dir);
+
+    // rotation part
+    meti::quatBetweenVectors(target_quat, direction, target_dir);
+    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
+
+    {
+    int tries = 2000;//2 + 2*M_PI/angle_step;
+    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) {
+        direction = interpolated_quat * direction;
+
+        new_center += direction * speed;
+        target_dir = glm::normalize(to - new_center);
+
+        centers.push_back(new_center);
+        directions.push_back(direction);
+
+        tries--;
+        if (tries < 0) {
+            // target_pos is not reachable (within circle)
+            return false;
+        }
+    }
+    }
+
+    // linear part
+    {
+    int tries = 20000;
+    while(new_center != to) {
+        new_center += direction * speed;
+        centers.push_back(new_center);
+        directions.push_back(direction);
+
+        tries--;
+        if (tries < 0) {
+            // target_pos is not reachable (within circle)
+            return false;
+        }
+    }
+    }
+
+    return true;
+}
+
+
+
 void Drive::__calcPath_DEBUG()
 {
-
     glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
     float alphatarget = M_PI;
     glm::vec3 target_dir = glm::normalize(glm::vec3(cos(alphatarget), sin(alphatarget), 0.0));
@@ -426,19 +588,14 @@ void Drive::__calcPath_DEBUG()
     }
 }
 
-void Drive::updatePosition()
+void Drive::update()
 {
-    if (m_pathEnd == false)
-    {
-        if (m_pathIndex < m_pathCenterVec.size())
-        {
-            assert(false);
-//            m_ownerVehicle->setPosition(m_PathCenterVec[m_PathIndex]);
-//            m_ownerVehicle->setDirection(m_PathDirectionVec[m_PathIndex]);
+    if (!m_pathEnd) {
+        if (m_pathIndex < m_pathCenters.size()) {
+            m_ownerVehicle->setPosition(m_pathCenters[m_pathIndex]);
+            m_ownerVehicle->setDirection(m_pathDirections[m_pathIndex]);
             m_pathIndex++;
-        }
-        else
-        {
+        } else {
             m_pathEnd = true;
         }
     }

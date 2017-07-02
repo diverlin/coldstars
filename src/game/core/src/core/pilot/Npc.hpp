@@ -133,7 +133,7 @@ public:
 
     // AI
     void remeberAgressor(SpaceObject*);
-    void updateInSpace(int, bool);
+    void update(int);
 
     void updateInSpaceInStatic();
     void updateInKosmoportInStatic();

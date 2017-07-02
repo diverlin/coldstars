@@ -29,10 +29,10 @@ public:
     Base(int id):m_id(id) {}
 
     int id() const { return m_id; }
-//    int descriptor() const { return m_descriptor; }
+
 private:
     int m_id = 0;
-//    int m_descriptor = 0;
+
 };
 
 class Ship : public Base {
