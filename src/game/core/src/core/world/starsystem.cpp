@@ -968,8 +968,8 @@ void StarSystem::__updateEntities_s(int time, bool show_effect)
     for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
     for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
     
-    for (Vehicle* vehicle: m_vehicles) { vehicle->UpdateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_bullets.size(); i++)           { m_bullets[i]->UpdateInSpace(time, show_effect); }
+    for (Vehicle* vehicle: m_vehicles) { vehicle->update(time); }
+    for (unsigned int i=0; i<m_bullets.size(); i++) { m_bullets[i]->UpdateInSpace(time, show_effect); }
     
     // effects
     //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->Update(); }

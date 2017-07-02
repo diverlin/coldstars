@@ -37,7 +37,7 @@ public:
     Ship(descriptor::Ship*, model::Ship*);
     ~Ship() override final;
 
-    virtual void UpdateInSpace(int, bool) override final;
+    virtual void update(int time=1) override final;
 
     //        virtual void UpdateInfo() override final;
 

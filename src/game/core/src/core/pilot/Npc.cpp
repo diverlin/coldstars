@@ -198,7 +198,7 @@ void Npc::remeberAgressor(control::SpaceObject* agressor)
 //    m_agressorsData.insert(agressor_data);
 }
 
-void Npc::updateInSpace(int time, bool show_effect)
+void Npc::update(int time)
 {
     if (time > 0) {
         m_stateMachine.updateInDynamicInSpace();

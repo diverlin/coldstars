@@ -53,6 +53,23 @@
 
 #include <gtest/gtest.h>
 
+namespace {
+void expect_eq(const meti::vec3& actual, const meti::vec3& expected)
+{
+    EXPECT_EQ(actual.x, expected.x);
+    EXPECT_EQ(actual.y, expected.y);
+    EXPECT_EQ(actual.z, expected.z);
+}
+
+void expect_eq_dirty(const meti::vec3& actual, const meti::vec3& expected)
+{
+    float precision = 0.1f;
+    EXPECT_TRUE(std::fabs(actual.x-expected.x) < precision);
+    EXPECT_TRUE(std::fabs(actual.y-expected.y) < precision);
+    EXPECT_TRUE(std::fabs(actual.z-expected.z) < precision);
+}
+} // namespace
+
 TEST(ship, create)
 {
     control::Ship* ship = builder::Ship::gen();
@@ -125,6 +142,90 @@ TEST(ship, grab_container)
     EXPECT_EQ(0, starsystem->containers().size());
     EXPECT_EQ(false, container->isAlive());
 }
+
+
+TEST(path, calc_direct)
+{
+    std::vector<glm::vec3> centers;
+    std::vector<glm::vec3> directions;
+
+    // linear path calculation
+    std::vector<glm::vec2> offsets = { glm::vec2(100, 0),
+                                       glm::vec2(-100, 0),
+                                       glm::vec2(0, 100),
+                                       glm::vec2(0, -100)};
+    for(const auto offset: offsets) {
+        assert(offset.x != offset.y != 0); // otherwise it will not be linear
+
+        glm::vec3 from(0,0,0);
+        glm::vec3 to(offset.x, offset.y, 0);
+        glm::vec3 dir(glm::normalize(to));
+        float speed = 1.0f;
+
+        bool result = complex::calcDirectPath(centers, directions, from, to, dir, speed);
+        EXPECT_TRUE(result);
+
+        expect_eq(centers.back(), to);
+
+        int steps = std::fabs(glm::length(offset)/speed);
+        EXPECT_EQ(centers.size(), steps);
+
+        centers.clear();
+        directions.clear();
+    }
+}
+
+TEST(path, calc_round)
+{
+    expect_eq(meti::OX, glm::cross(meti::OY, meti::OZ));
+
+    std::vector<glm::vec3> centers;
+    std::vector<glm::vec3> directions;
+
+    glm::vec3 from(0,0,0);
+    glm::vec3 to(100, 100, 0);
+    glm::vec3 dir(0, 1, 0);
+    float speed = 1.0f;
+
+    bool result = complex::calcRoundPath(centers, directions, from, to, dir, speed);
+    EXPECT_TRUE(result);
+
+    expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())));
+
+    centers.clear();
+    directions.clear();
+}
+
+
+TEST(ship, move)
+{
+    /* create objects */
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+    control::Ship* ship = builder::Ship::gen();
+    control::item::Drive* drive = builder::item::Drive::gen();
+    control::item::Bak* bak = builder::item::Bak::gen();
+
+    EXPECT_TRUE(ship->mount(drive));
+    EXPECT_TRUE(ship->mount(bak));
+
+    /* add to starsystem */
+    starsystem->add(ship);
+    EXPECT_EQ(ship->position(), meti::vec3());
+
+    EXPECT_TRUE(ship->properties().speed > 0);
+
+    float val = 400;
+    meti::vec3 target_pos = meti::vec3(val,0,0);
+    ship->navigate(target_pos);
+
+    int ticks = 2*int(val);
+    while(ticks) {
+        ship->update();
+        ticks--;
+    }
+    expect_eq(ship->position(), target_pos);
+}
+
 
 TEST(ship, shoot_ship)
 {

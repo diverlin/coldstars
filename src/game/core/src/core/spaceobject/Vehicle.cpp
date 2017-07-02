@@ -100,8 +100,13 @@ Vehicle::grab(SpaceObject* target) {
 }
 
 void
-Vehicle::follow(SpaceObject* target) {
+Vehicle::navigate(SpaceObject* target) {
     navigator().setTarget(target, complex::Drive::Action::KEEP_MIDDLE);
+}
+
+void
+Vehicle::navigate(const meti::vec3& target) {
+    navigator().setTarget(target);
 }
 
 //void
@@ -786,7 +791,7 @@ bool Vehicle::isObjectVisible(SpaceObject* object) const
     return false;
 }
 
-void Vehicle::UpdateSpecialAction()
+void Vehicle::__updateSpecialAction()
 {
     switch(m_specialActionId)
     {
@@ -1161,7 +1166,7 @@ void Vehicle::_updatePropSpeed()
 //        } else {
 //            driveComplex().driveSlots()->item()->useNormalDeterioration();
 //        }
-        navigator().updatePath();
+        navigator().refreshPath();
     }
 
     m_properties.speed = speed;

@@ -42,7 +42,7 @@ public:
 
     void BindParent(const SpaceObject* const);
 
-    virtual void UpdateInSpace(int, bool) override final;
+    virtual void update(int time=1) override final;
 
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&);

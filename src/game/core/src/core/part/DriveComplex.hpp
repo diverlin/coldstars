@@ -61,7 +61,7 @@ public:
     void addBakSlot(slot::Item* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
     void setTarget(control::SpaceObject*, Action action = Action::KEEP_CLOSE);
-    void setCoordinates(const glm::vec3&);
+    void setTarget(const glm::vec3&);
 
     Action action() const { return m_action; }
 //    jeti::DriveEffect* driveEffect() const { return m_effectDrive; }
@@ -78,8 +78,8 @@ public:
 
     void resetTarget();
 
-    void updatePath();
-    void updatePosition();
+    void refreshPath();
+    void update();
 
 //    void updatePathVisualisation();
 //    void drawPath(const jeti::Renderer&);
@@ -99,8 +99,8 @@ private:
     float m_targetDistance = 0.0f;
     glm::vec3 m_targetOffset;
 
-    std::vector<glm::vec3> m_pathCenterVec;
-    std::vector<glm::vec3> m_pathDirectionVec;
+    std::vector<glm::vec3> m_pathCenters;
+    std::vector<glm::vec3> m_pathDirections;
 
     bool m_pathEnd = true;
     unsigned int m_pathIndex = 0;
@@ -119,5 +119,26 @@ private:
 
 //    void __defineDistance();
 };
+
+bool calcDirectPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
+              const glm::vec3& from,
+              const glm::vec3& to,
+              const glm::vec3& dir,
+              float speed);
+
+bool calcRoundPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
+              const glm::vec3& from,
+              const glm::vec3& to,
+              const glm::vec3& dir,
+              float speed);
+
+bool calcPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
+              const glm::vec3& from,
+              const glm::vec3& to,
+              const glm::vec3& dir,
+              float speed);
 
 } // namespace complex
