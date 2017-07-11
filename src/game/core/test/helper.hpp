@@ -18,7 +18,13 @@
 
 #pragma once
 
+#include <meti/VectorUtils.hpp>
+#include <gtest/gtest.h>
+
 namespace test {
-void clear();
+
+void expect_eq(const meti::vec3& actual, const meti::vec3& expected);
+void expect_eq_dirty(const meti::vec3& actual, const meti::vec3& expected);
+
 } // namespace test
 
