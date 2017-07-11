@@ -23,9 +23,20 @@
 
 namespace test {
 
-void clear() {
-//    manager::Entities::get().clear();
-//    descriptor::Manager::get().clear();
+void expect_eq(const meti::vec3& actual, const meti::vec3& expected)
+{
+    EXPECT_EQ(actual.x, expected.x);
+    EXPECT_EQ(actual.y, expected.y);
+    EXPECT_EQ(actual.z, expected.z);
 }
+
+void expect_eq_dirty(const meti::vec3& actual, const meti::vec3& expected)
+{
+    float precision = 0.1f;
+    EXPECT_TRUE(std::fabs(actual.x-expected.x) < precision);
+    EXPECT_TRUE(std::fabs(actual.y-expected.y) < precision);
+    EXPECT_TRUE(std::fabs(actual.z-expected.z) < precision);
+}
+
 
 } // namespace test
