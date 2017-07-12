@@ -427,7 +427,8 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     float radius = calcRadius(speed, angle_step);
 
     glm::vec3 target_dir(to - from);
-    // target point is unreachable
+
+    // target point is unreachable, avoid infitite loop below
     if (glm::length(target_dir) < radius) {
         return false;
     }
@@ -461,25 +462,25 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     target_dir = glm::normalize(target_dir);
 
     float acos = glm::dot(direction, target_dir);
-    while(std::fabs(acos) < 0.9999f) {
+    while(std::fabs(acos) < 0.9999f && glm::length(to-new_center) > speed) {
         angle -= angle_step;
 
         new_center.x = radius * cos(angle);
         new_center.y = radius * sin(angle);
 
-        if (glm::length(to-new_center) <= speed) {
-            // reach destination
-            return true;
-        }
+//        if (glm::length(to-new_center) <= speed) {
+//            // reach destination
+//            return true;
+//        }
         target_dir = to - new_center;
         target_dir = glm::normalize(target_dir);
 
         centers.push_back(new_center);
         directions.push_back(direction);
 
-        if (angle<0) {
-            return false;
-        }
+//        if (angle<0) {
+//            return false;
+//        }
 
         acos = std::fabs(glm::dot(direction, target_dir));
     }
@@ -525,116 +526,6 @@ bool calcPath(std::vector<glm::vec3>& centers,
 //        calcRoundPath();
 //    }
 //}
-
-
-//bool calcPath(std::vector<glm::vec3>& centers,
-//              std::vector<glm::vec3>& directions,
-//              const glm::vec3& from,
-//              const glm::vec3& to,
-//              const glm::vec3& dir,
-//              float speed)
-//{
-//    glm::vec3 new_center(from);
-//    glm::vec3 target_dir = glm::normalize(to - from);
-
-//    glm::quat zero_quat;
-//    glm::quat target_quat;
-
-//    glm::vec3 direction = glm::normalize(dir);
-
-//    // rotation part
-//    meti::quatBetweenVectors(target_quat, direction, target_dir);
-//    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
-
-//    {
-//    int tries = 2000;//2 + 2*M_PI/angle_step;
-//    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999f) {
-//        direction = interpolated_quat * direction;
-
-//        new_center += direction * speed;
-//        target_dir = glm::normalize(to - new_center);
-
-//        centers.push_back(new_center);
-//        directions.push_back(direction);
-
-//        tries--;
-//        if (tries < 0) {
-//            // target_pos is not reachable (within circle)
-//            return false;
-//        }
-//    }
-//    }
-
-//    // linear part
-//    {
-//    int tries = 20000;
-//    while(new_center != to) {
-//        new_center += direction * speed;
-//        centers.push_back(new_center);
-//        directions.push_back(direction);
-
-//        tries--;
-//        if (tries < 0) {
-//            // target_pos is not reachable (within circle)
-//            return false;
-//        }
-//    }
-//    }
-
-//    return true;
-//}
-
-
-
-void Drive::__calcPath_DEBUG()
-{
-    glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
-    float alphatarget = M_PI;
-    glm::vec3 target_dir = glm::normalize(glm::vec3(cos(alphatarget), sin(alphatarget), 0.0));
-  
-    std::cout<<target_dir.x<<" "<<target_dir.y<<std::endl;
-      
-   // float az = 0.0;
-
-    int sign = 1;
-    float angle_step = 0.1;
-
-    float cosa = glm::dot(direction, target_dir);
-    float a = acos(cosa);
-    for (int i=0; i<32; i++)
-    {/*
-        if (round_counter == 0)
-        {
-            float prob_az1 = az + angle_step;
-            float prob_az2 = az - angle_step;
-            
-            glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
-            glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
-            
-            float prob_cosa1 = glm::dot(prob_direction1, target_dir);
-            float prob_cosa2 = glm::dot(prob_direction2, target_dir);
-                    
-            if (prob_cosa1 > 0)
-            {
-                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
-                else                                                    { sign = 1; }
-            }
-            else
-            {
-                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
-                else                                                    { sign = -1; }
-            }
-        }
-    */
-
-        a += sign*angle_step;
-        std::cout<<"alpha="<<glm::degrees(a)<<" dir="<<direction.x<<" "<<direction.y<<std::endl;
-        direction.x = cos(a);
-        direction.y = sin(a);
-    
-
-    }
-}
 
 void Drive::update()
 {
