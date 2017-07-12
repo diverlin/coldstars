@@ -86,8 +86,6 @@ TEST(path, calc_round_false)
     bool result = complex::calcRoundPath(centers, directions, from, to, dir, speed);
     EXPECT_FALSE(result);
 
-    //expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())));
-
     centers.clear();
     directions.clear();
 }
