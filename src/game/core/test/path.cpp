@@ -35,9 +35,7 @@ TEST(path, calc_direct)
                                        glm::vec2(-100, 0),
                                        glm::vec2(0, 100),
                                        glm::vec2(0, -100)};
-    for(const auto offset: offsets) {
-        assert(offset.x != offset.y != 0); // otherwise it will not be linear
-
+    for(const auto& offset: offsets) {
         glm::vec3 from(0,0,0);
         glm::vec3 to(offset.x, offset.y, 0);
         glm::vec3 dir(glm::normalize(to));
@@ -48,7 +46,7 @@ TEST(path, calc_direct)
 
         expect_eq(centers.back(), to);
 
-        int steps = std::fabs(glm::length(offset)/speed);
+        int steps = int(std::fabs(glm::length(offset)/speed));
         EXPECT_EQ(centers.size(), steps);
 
         centers.clear();
@@ -56,10 +54,8 @@ TEST(path, calc_direct)
     }
 }
 
-TEST(path, calc_round)
+TEST(path, calc_round_ok)
 {
-    expect_eq(meti::OX, glm::cross(meti::OY, meti::OZ));
-
     std::vector<glm::vec3> centers;
     std::vector<glm::vec3> directions;
 
@@ -72,6 +68,25 @@ TEST(path, calc_round)
     EXPECT_TRUE(result);
 
     expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())));
+
+    centers.clear();
+    directions.clear();
+}
+
+TEST(path, calc_round_false)
+{
+    std::vector<glm::vec3> centers;
+    std::vector<glm::vec3> directions;
+
+    glm::vec3 from(0,0,0);
+    glm::vec3 to(10, 0, 0);
+    glm::vec3 dir(0, 1, 0);
+    float speed = 1.0f;
+
+    bool result = complex::calcRoundPath(centers, directions, from, to, dir, speed);
+    EXPECT_FALSE(result);
+
+    //expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())));
 
     centers.clear();
     directions.clear();

@@ -388,18 +388,17 @@ bool calcDirectPath(std::vector<glm::vec3>& centers,
 {
     glm::vec3 new_center(from);
     glm::vec3 direction = glm::normalize(dir);
+    glm::vec3 target_dir = glm::normalize(to - from);
 
-    int tries = 20000;
-    while(new_center != to) {
+    // if actual direction and target direction are equal
+    if (glm::length(direction - target_dir) > std::numeric_limits<float>::epsilon()) {
+        return false;
+    }
+
+    while(glm::length(to - new_center) >= speed) {
         new_center += direction * speed;
         centers.push_back(new_center);
         directions.push_back(direction);
-
-        tries--;
-        if (tries < 0) {
-            // target_pos is not reachable (within circle)
-            return false;
-        }
     }
 
     return true;
@@ -413,13 +412,13 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
                    const glm::vec3& dir,
                    float speed)
 {
+   float radius = 100.0f;
+
     glm::vec3 target_dir(to - from);
-    if (glm::length(target_dir) < std::numeric_limits<float>::epsilon()) {
+    // target point is unreachable
+    if (glm::length(target_dir) < radius) {
         return false;
     }
-
-
-    float radius = 100.0f;
 
     glm::vec3 up(0,0,1);
     glm::vec3 o1_dir = glm::cross(dir, up);
@@ -441,7 +440,8 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
         to_O = to_O2;
     }
 
-    float angle = std::acos(glm::dot(-to_O, from - o));
+    float angle = std::acos(glm::dot(dir, from - o));
+    assert(std::isfinite(angle));
 
     // local vars
     glm::vec3 direction(dir);
@@ -449,20 +449,17 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     target_dir = glm::normalize(target_dir);
 
     float acos = glm::dot(direction, target_dir);
-    while(std::fabs(acos) < 0.9999) {
-        angle -= 0.001; // calc angular speed depending on the linear speed
+    while(std::fabs(acos) < 0.9999f) {
+        angle -= 0.001; // TODO: calc angular speed depending on the linear speed
 
-        new_center.x = radius * cos(angle);
-        new_center.y = radius * sin(angle);
+        new_center.x = radius * float(cos(angle));
+        new_center.y = radius * float(sin(angle));
 
-        if (!glm::length(to-new_center)) {
+        if (glm::length(to-new_center) <= speed) {
+            // reach destination
             return true;
         }
         target_dir = to - new_center;
-        if (!glm::length(target_dir)) {
-            return true;
-        }
-
         target_dir = glm::normalize(target_dir);
 
         centers.push_back(new_center);
@@ -500,7 +497,7 @@ bool calcPath(std::vector<glm::vec3>& centers,
 
     {
     int tries = 2000;//2 + 2*M_PI/angle_step;
-    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) {
+    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999f) {
         direction = interpolated_quat * direction;
 
         new_center += direction * speed;
