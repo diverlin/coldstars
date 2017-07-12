@@ -45,6 +45,8 @@ class SpaceObject;
 
 namespace complex {
 
+const float ANGLE_STEP = 0.01f;
+
 class Drive
 {
 public:
@@ -119,6 +121,12 @@ private:
 
 //    void __defineDistance();
 };
+
+float calcRadius(float speed, float angle_step);
+
+bool isLookingTowards(const glm::vec3& from,
+                          const glm::vec3& to,
+                          const glm::vec3& dir);
 
 bool calcDirectPath(std::vector<glm::vec3>& centers,
               std::vector<glm::vec3>& directions,

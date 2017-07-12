@@ -38,6 +38,7 @@
 #include <meti/VectorUtils.hpp>
 #include <meti/QuaternionUtils.hpp>
 
+
 namespace complex {
 
 bool Drive::pathExists() const
@@ -378,6 +379,19 @@ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
     }
 }
 
+float calcRadius(float speed, float angle_step) {
+    float radius = (180*speed)/(M_PI*glm::degrees<float>(angle_step));
+    return radius;
+}
+
+bool isLookingTowards(const glm::vec3& from, const glm::vec3& to, const glm::vec3& dir) {
+    if (glm::length(glm::normalize(dir) - glm::normalize(to - from)) > std::numeric_limits<float>::epsilon()) {
+        return false;
+    }
+
+    return true;
+}
+
 
 bool calcDirectPath(std::vector<glm::vec3>& centers,
               std::vector<glm::vec3>& directions,
@@ -390,10 +404,7 @@ bool calcDirectPath(std::vector<glm::vec3>& centers,
     glm::vec3 direction = glm::normalize(dir);
     glm::vec3 target_dir = glm::normalize(to - from);
 
-    // if actual direction and target direction are equal
-    if (glm::length(direction - target_dir) > std::numeric_limits<float>::epsilon()) {
-        return false;
-    }
+    assert(isLookingTowards(from, to, dir));
 
     while(glm::length(to - new_center) >= speed) {
         new_center += direction * speed;
@@ -412,7 +423,8 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
                    const glm::vec3& dir,
                    float speed)
 {
-   float radius = 100.0f;
+    float angle_step = ANGLE_STEP;
+    float radius = calcRadius(speed, angle_step);
 
     glm::vec3 target_dir(to - from);
     // target point is unreachable
@@ -450,10 +462,10 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
 
     float acos = glm::dot(direction, target_dir);
     while(std::fabs(acos) < 0.9999f) {
-        angle -= 0.001; // TODO: calc angular speed depending on the linear speed
+        angle -= angle_step;
 
-        new_center.x = radius * float(cos(angle));
-        new_center.y = radius * float(sin(angle));
+        new_center.x = radius * cos(angle);
+        new_center.y = radius * sin(angle);
 
         if (glm::length(to-new_center) <= speed) {
             // reach destination
@@ -475,7 +487,6 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     return true;
 }
 
-
 bool calcPath(std::vector<glm::vec3>& centers,
               std::vector<glm::vec3>& directions,
               const glm::vec3& from,
@@ -483,55 +494,95 @@ bool calcPath(std::vector<glm::vec3>& centers,
               const glm::vec3& dir,
               float speed)
 {
-    glm::vec3 new_center(from);
-    glm::vec3 target_dir = glm::normalize(to - from);
-
-    glm::quat zero_quat;
-    glm::quat target_quat;
-
-    glm::vec3 direction = glm::normalize(dir);
-
-    // rotation part
-    meti::quatBetweenVectors(target_quat, direction, target_dir);
-    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
-
-    {
-    int tries = 2000;//2 + 2*M_PI/angle_step;
-    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999f) {
-        direction = interpolated_quat * direction;
-
-        new_center += direction * speed;
-        target_dir = glm::normalize(to - new_center);
-
-        centers.push_back(new_center);
-        directions.push_back(direction);
-
-        tries--;
-        if (tries < 0) {
-            // target_pos is not reachable (within circle)
-            return false;
-        }
-    }
+    bool result = false;
+    if (isLookingTowards(from, to, dir)) {
+        result = calcRoundPath(centers,
+                               directions,
+                               from,
+                               to,
+                               dir,
+                               speed);
+    } else {
+        result = calcDirectPath(centers,
+                        directions,
+                        from,
+                        to,
+                        dir,
+                        speed);
     }
 
-    // linear part
-    {
-    int tries = 20000;
-    while(new_center != to) {
-        new_center += direction * speed;
-        centers.push_back(new_center);
-        directions.push_back(direction);
-
-        tries--;
-        if (tries < 0) {
-            // target_pos is not reachable (within circle)
-            return false;
-        }
-    }
-    }
-
-    return true;
+    return result;
 }
+
+//bool calcPath(std::vector<glm::vec3>& centers,
+//              std::vector<glm::vec3>& directions,
+//              const glm::vec3& from,
+//              const std::vector<glm::vec3>& to,
+//              const glm::vec3& dir,
+//              float speed)
+//{
+//    if (!isDirectlyAccessible()) {
+//        calcRoundPath();
+//    }
+//}
+
+
+//bool calcPath(std::vector<glm::vec3>& centers,
+//              std::vector<glm::vec3>& directions,
+//              const glm::vec3& from,
+//              const glm::vec3& to,
+//              const glm::vec3& dir,
+//              float speed)
+//{
+//    glm::vec3 new_center(from);
+//    glm::vec3 target_dir = glm::normalize(to - from);
+
+//    glm::quat zero_quat;
+//    glm::quat target_quat;
+
+//    glm::vec3 direction = glm::normalize(dir);
+
+//    // rotation part
+//    meti::quatBetweenVectors(target_quat, direction, target_dir);
+//    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
+
+//    {
+//    int tries = 2000;//2 + 2*M_PI/angle_step;
+//    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999f) {
+//        direction = interpolated_quat * direction;
+
+//        new_center += direction * speed;
+//        target_dir = glm::normalize(to - new_center);
+
+//        centers.push_back(new_center);
+//        directions.push_back(direction);
+
+//        tries--;
+//        if (tries < 0) {
+//            // target_pos is not reachable (within circle)
+//            return false;
+//        }
+//    }
+//    }
+
+//    // linear part
+//    {
+//    int tries = 20000;
+//    while(new_center != to) {
+//        new_center += direction * speed;
+//        centers.push_back(new_center);
+//        directions.push_back(direction);
+
+//        tries--;
+//        if (tries < 0) {
+//            // target_pos is not reachable (within circle)
+//            return false;
+//        }
+//    }
+//    }
+
+//    return true;
+//}
 
 
 

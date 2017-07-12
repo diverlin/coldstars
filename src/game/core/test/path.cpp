@@ -25,6 +25,39 @@
 
 namespace test {
 
+namespace {
+
+bool validate_path(const std::vector<glm::vec3>& v, float dist) {
+    if (!v.size()) {
+        return false;
+    }
+
+    if (v.size() < 2) {
+        return false;
+    }
+
+    glm::vec3 p0 = v.front();
+    int first = true;
+    for(const auto& p: v) {
+        if (first) {
+            first = false;
+            continue;
+        }
+        float diff = glm::length(p0-p);
+        if (diff > 1.001f * dist) {
+            return false;
+        }
+        if (diff < 0.999f * dist) {
+            return false;
+        }
+        p0=p;
+    }
+
+    return true;
+}
+
+} // namespace
+
 TEST(path, calc_direct)
 {
     std::vector<glm::vec3> centers;
@@ -43,6 +76,8 @@ TEST(path, calc_direct)
 
         bool result = complex::calcDirectPath(centers, directions, from, to, dir, speed);
         EXPECT_TRUE(result);
+
+        EXPECT_TRUE(validate_path(centers, speed));
 
         expect_eq(centers.back(), to);
 
@@ -67,6 +102,8 @@ TEST(path, calc_round_ok)
     bool result = complex::calcRoundPath(centers, directions, from, to, dir, speed);
     EXPECT_TRUE(result);
 
+    EXPECT_TRUE(validate_path(centers, speed));
+
     expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())));
 
     centers.clear();
@@ -85,6 +122,31 @@ TEST(path, calc_round_false)
 
     bool result = complex::calcRoundPath(centers, directions, from, to, dir, speed);
     EXPECT_FALSE(result);
+
+    centers.clear();
+    directions.clear();
+}
+
+TEST(path, complex)
+{
+    std::vector<glm::vec3> centers;
+    std::vector<glm::vec3> directions;
+
+    glm::vec3 from(0,0,0);
+//    std::vector<glm::vec3> to = {glm::vec3(100, 100, 0),
+//                                 glm::vec3(200, 100, 0),
+//                                 glm::vec3(300, -200, 0),
+//                                 glm::vec3(800, 800, 0)};
+
+    glm::vec3 to(800.0f, 800.0f, 0.0f);
+
+    glm::vec3 dir(0, 1, 0);
+    float speed = 1.0f;
+
+    bool result = complex::calcPath(centers, directions, from, to, dir, speed);
+    EXPECT_FALSE(result);
+
+    EXPECT_TRUE(validate_path(centers, speed));
 
     centers.clear();
     directions.clear();
