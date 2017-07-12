@@ -113,7 +113,6 @@ private:
 
     void __clearPath();
     void __calcPath();
-    void __calcPath_DEBUG();
 
     bool __validateTarget() const;
 
