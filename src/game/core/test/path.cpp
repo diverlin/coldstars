@@ -161,19 +161,19 @@ TEST(path, calc_round)
 
 TEST(path, calc_round_false)
 {
-//    std::vector<glm::vec3> centers;
-//    std::vector<glm::vec3> directions;
+    std::vector<glm::vec3> centers;
+    std::vector<glm::vec3> directions;
 
-//    glm::vec3 from(0,0,0);
-//    glm::vec3 to(10, 0, 0);
-//    glm::vec3 dir(0, 1, 0);
-//    float speed = 1.0f;
+    glm::vec3 from(0,0,0);
+    glm::vec3 to(10, 0, 0);
+    glm::vec3 dir(0, 1, 0);
+    float speed = 1.0f;
 
-//    bool result = complex::calcPath(centers, directions, from, to, dir, speed);
-////    EXPECT_FALSE(result);
+    bool result = path::calcPath(centers, directions, from, to, dir, speed);
+    EXPECT_FALSE(result);
 
-//    centers.clear();
-//    directions.clear();
+    centers.clear();
+    directions.clear();
 }
 
 TEST(path, complex)

@@ -156,37 +156,23 @@ bool calcPath(std::vector<glm::vec3>& centers,
               float speed)
 {
     bool result = true;
-    glm::vec3 from2(from);
-    glm::vec3 dir2(dir);
 
+    if (!isReachable(from, to, speed, ANGLE_STEP)) {
+        return false;
+    }
     if (!isLookingTowards(to-from, dir)) {
-//        if (!isReachable(from, to, speed, ANGLE_STEP)) {
-//            // solve dead circle by moving forward on 2R
-//            float radius = calcRadius(speed, ANGLE_STEP);
-//            glm::vec3 to_tmp(from+2*radius*dir);
-//            calcDirectPath(centers,
-//                           directions,
-//                           from,
-//                           to_tmp,
-//                           dir,
-//                           speed);
-//        }
-
-//        // move around to face the target
-//        if (centers.size()) {
-//            from2 = centers.back();
-//            dir2 = directions.back();
-//        }
         result = calcRoundPath(centers,
                                directions,
-                               from2,
+                               from,
                                to,
-                               dir2,
+                               dir,
                                speed);
     }
 
     // move forward to final destanation
     if (result) {
+        glm::vec3 from2(from);
+        glm::vec3 dir2(dir);
         if (centers.size()) {
             from2 = centers.back();
             dir2 = directions.back();
