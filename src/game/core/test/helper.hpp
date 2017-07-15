@@ -23,8 +23,8 @@
 
 namespace test {
 
-void expect_eq(const meti::vec3& actual, const meti::vec3& expected);
-void expect_eq_dirty(const meti::vec3& actual, const meti::vec3& expected);
+void expect_eq(const meti::vec3& actual, const meti::vec3& expected, const std::string& comment = "");
+void expect_eq_dirty(const meti::vec3& actual, const meti::vec3& expected, const std::string& comment = "");
 
 } // namespace test
 
