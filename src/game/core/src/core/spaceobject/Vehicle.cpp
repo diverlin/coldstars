@@ -302,8 +302,8 @@ void Vehicle::_putItemsToGarbage() const
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
-    points().addMidLeftPoint();
-    points().addMidFarLeftPoint();
+    //points().addMidLeftPoint();
+    //points().addMidFarLeftPoint();
 
     //DriveEffect* drive_effect = GetNewDriveEffect(textureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
     //m_ComplexDrive.SetDriveEffect(drive_effect);

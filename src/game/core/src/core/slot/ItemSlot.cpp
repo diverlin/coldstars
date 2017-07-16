@@ -29,7 +29,6 @@
 #include <core/pilot/Npc.hpp>
 
 #include "../world/starsystem.hpp"
-#include <core/part/Turrel.hpp>
 
 #include <core/item/equipment/Rocket.hpp>
 #include <core/item/equipment/Lazer.hpp>

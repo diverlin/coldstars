@@ -88,8 +88,8 @@ public:
     [[deprecated("depr")]]
     const glm::vec3* pParentPosition() { return &m_parentPosition; }
 
-    [[deprecated("depr")]]
-    ceti::Points& points()          { return m_points; }
+//    [[deprecated("depr")]]
+//    ceti::Points& points()          { return m_points; }
 
     float collisionRadius() const  { return m_collisionRadius; }
 
@@ -108,7 +108,7 @@ private:
     float m_collisionRadius;
     glm::vec3 m_parentPosition;
 
-    ceti::Points m_points;
+    //ceti::Points m_points;
 };
 
 } // namespace control

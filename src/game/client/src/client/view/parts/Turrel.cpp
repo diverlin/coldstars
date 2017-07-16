@@ -16,38 +16,38 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Turrel.hpp"
 
-#include <ceti/type/IdType.hpp>
-#include <core/type/EntityType.hpp>
+#include <core/slot/ItemSlot.hpp>
+//#include <jeti/Render.hpp>
+//#include <core/spaceobject/SpaceObject.hpp>
 
-#include <jeti/BaseView.hpp>
-
-namespace control {
-class Base;
-} // namespace control
+#include <ceti/Logger.hpp>
 
 namespace view {
 
-class Base : public jeti::view::BaseView {
-public:
-    Base(control::Base*);
-    ~Base();
+Turrel::Turrel(slot::Item* slot)
+    //:
+      //view::Base()
+{
+    m_slot = slot;
+}
 
-    int_t id() const;
-    entity::Type type() const;
-    entity::Type subType() const;
-    int_t mesh() const;
-    int_t texture() const;
+Turrel::~Turrel()
+{}
 
-    void addDecor(Base*);
+void Turrel::Render(float turrel_angle_inD)
+{        
+    //if (slot->GetTarget() != nullptr)
+    //{
+    //float _tur_xl = slot->GetTarget()->center().x - center().x;
+    //float _tur_yl = slot->GetTarget()->center().y - center().y;
 
-protected:
-    void _drawDecors(const jeti::Renderer& render) const;
+    //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
+    //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
+    //}
 
-private:
-    control::Base* m_control_base = nullptr;
-    std::vector<Base*> m_decors;
-};
+    //drawQuad(textureOb(), center(), size(), turrel_angle_inD);
+}        
 
-} // namespace view
+} // namepsace view

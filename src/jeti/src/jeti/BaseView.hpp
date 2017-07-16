@@ -125,6 +125,5 @@ private:
 };
 
 } // namepsace view
-
 } // namespace jeti
 

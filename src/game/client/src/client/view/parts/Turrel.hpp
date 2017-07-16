@@ -18,33 +18,25 @@
 
 #pragma once
 
+#include <client/view/BaseView.hpp>
+
 namespace slot {
 class Item;
 } // namespace slot
 
-class SpaceObject;
-//class TextureOb;
+namespace view {
 
-#include <ceti/points.hpp>
-#include <common/constants.hpp>
-#include <ceti/Orientation.hpp>
-
-class Turrel : public ceti::control::Orientation
+class Turrel : public view::Base
 {
-    public:
-        Turrel(slot::Item*);
-        ~Turrel();
-        
-        void Render(float);                 
-        
-        virtual void putChildrenToGarbage() const {};
-        
-//        virtual void Save(boost::property_tree::ptree&) const {}
-//        virtual void Load(const boost::property_tree::ptree&) {}
-//        virtual void Resolve() {}
-           
-    private:                       
-        slot::Item* m_slot = nullptr;
+public:
+    Turrel(slot::Item*);
+    ~Turrel();
+
+    void Render(float);
+
+private:
+    slot::Item* m_slot = nullptr;
 }; 
 
+} // namespace view
 

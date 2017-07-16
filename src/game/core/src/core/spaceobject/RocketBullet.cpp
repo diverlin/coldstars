@@ -75,8 +75,8 @@ RocketBullet::~RocketBullet()
 
 void RocketBullet::CreateDriveComplexTextureDependedStuff()
 {
-    points().addMidLeftPoint();
-    points().addMidFarLeftPoint();
+    //points().addMidLeftPoint();
+    //points().addMidFarLeftPoint();
         
     //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 }    
