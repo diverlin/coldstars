@@ -26,9 +26,9 @@
 
 namespace view {
 
-Turrel::Turrel(slot::Item* slot)
-    //:
-      //view::Base()
+Turrel::Turrel(slot::Item* slot, control::Base* control)
+    :
+      view::Base(control)
 {
     m_slot = slot;
 }

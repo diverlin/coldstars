@@ -35,7 +35,10 @@ Ship::Ship(control::Ship* ship)
     setOrientationModel(ship->model()); // ??
 
     for(slot::Item* slot: ship->weaponSlots()) {
-        addDecor(new Turrel(slot));
+        //view::Turrel* turrel = getTurrel...();
+        view::Turrel* turrel = nullptr;
+        assert(false);
+        addDecor(turrel);
     }
 }
 

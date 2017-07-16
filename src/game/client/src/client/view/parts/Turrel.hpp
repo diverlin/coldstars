@@ -24,12 +24,16 @@ namespace slot {
 class Item;
 } // namespace slot
 
+namespace control {
+class Base;
+} // namespace control
+
 namespace view {
 
 class Turrel : public view::Base
 {
 public:
-    Turrel(slot::Item*);
+    Turrel(slot::Item*, control::Base*);
     ~Turrel();
 
     void Render(float);
