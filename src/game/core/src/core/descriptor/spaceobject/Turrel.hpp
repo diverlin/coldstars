@@ -18,44 +18,28 @@
 
 #pragma once
 
-#include <core/descriptor/Base.hpp>
-
-#include <ceti/descriptor/BaseView.hpp>
-#include <ceti/serialization/macro.hpp>
-
-#include <meti/VectorUtils.hpp>
+#include "OrientationDescriptor.hpp"
 
 namespace descriptor {
 
-struct Orientation : public Base/*, public ceti::descriptor::BaseView*/
+struct Turrel : public Orientation
 {
 public:
-    Orientation() = default;
-    ~Orientation() = default;
+    Turrel() = default;
+    ~Turrel() = default;
 
     std::string info() const {
-        std::string result = "Orientation descriptor:\n";
-        result += std::string(" size = ") + meti::to_string(m_size) + "\n";
-        result += Base::info();
+        std::string result = "Turrel descriptor:\n";
+        result += Orientation::info();
         return result;
     }
 
-    const meti::vec3& size() const { return m_size; }
-    const meti::vec3& direction() const { return m_direction; }
-
-    void setSize(const meti::vec3& size) { m_size = size; }
-    void setDirection(const meti::vec3& direction) { m_direction = direction; }
-
 private:
-    meti::vec3 m_size;
-    meti::vec3 m_direction;
 
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_size;
-        ar & m_direction;
+        ar & boost::serialization::base_object<Orientation>(*this);
     }
 }; 
 

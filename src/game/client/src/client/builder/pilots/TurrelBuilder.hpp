@@ -16,35 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Turrel.hpp"
+#pragma once
 
-#include <core/slot/ItemSlot.hpp>
-//#include <jeti/Render.hpp>
-#include <core/spaceobject/SpaceObject.hpp>
+#include <ceti/type/IdType.hpp>
 
-#include <ceti/Logger.hpp>
+namespace descriptor {
+class Turrel;
+} // namespace descriptor
 
-Turrel::Turrel(slot::Item* slot)
-    :
-      ceti::control::Orientation(new ceti::model::Orientation)
+namespace control {
+class Turrel;
+} // namespace control
+
+namespace builder {
+
+class Turrel
 {
-    m_slot = slot;
-}
+public:
+    static control::Turrel* gen();
+    static control::Turrel* gen(descriptor::Turrel*);
 
-Turrel::~Turrel()
-{}
+private:
+    static control::Turrel* __genTemplate(descriptor::Turrel*);
+}; 
 
-void Turrel::Render(float turrel_angle_inD)
-{        
-    //if (slot->GetTarget() != nullptr)
-    //{
-    //float _tur_xl = slot->GetTarget()->center().x - center().x;
-    //float _tur_yl = slot->GetTarget()->center().y - center().y;
-
-    //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
-    //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-    //}
-
-    //drawQuad(textureOb(), center(), size(), turrel_angle_inD);
-}        
-
+} // namespace builder

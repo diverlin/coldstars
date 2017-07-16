@@ -21,6 +21,8 @@
 #include <core/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 
+#include <client/view/parts/Turrel.hpp>
+
 #include <jeti/Render.hpp>
 
 namespace view {
@@ -31,6 +33,10 @@ Ship::Ship(control::Ship* ship)
     , m_ship(ship)
 {
     setOrientationModel(ship->model()); // ??
+
+    for(slot::Item* slot: ship->weaponSlots()) {
+        addDecor(new Turrel(slot));
+    }
 }
 
 Ship::~Ship()
@@ -77,6 +83,7 @@ Ship::~Ship()
 void Ship::draw(const jeti::Renderer& render) const
 {
     jeti::view::BaseView::draw(render);
+    _drawDecors(render);
     //if (GetProperties().grab_radius > 0) {
         //RenderGrabTrail(render);
     //}

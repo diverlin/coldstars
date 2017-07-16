@@ -29,12 +29,27 @@ Base::Base(control::Base* base)
 {}
 
 Base::~Base()
-{}
+{
+    for(Base* decor: m_decors) {
+        delete decor;
+    }
+    m_decors.clear();
+}
 
 int_t Base::id() const { return m_control_base->id(); }
 entity::Type Base::type() const { return m_control_base->type(); }
 entity::Type Base::subType() const { return m_control_base->subType(); }
 int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
+
+void Base::addDecor(Base* decor) {
+    m_decors.push_back(decor);
+}
+
+void Base::_drawDecors(const jeti::Renderer& render) const {
+    for(Base* decor: m_decors) {
+        decor->draw(render);
+    }
+}
 
 } // namespace view
