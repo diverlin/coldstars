@@ -91,6 +91,9 @@ enum class Type {
     MESH,
     MATERIAL,
 
+    // parts
+    TURREL,
+
     /** */
     ANY
 };
