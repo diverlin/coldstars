@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "OrientationDescriptor.hpp"
+#include <core/descriptor/spaceobject/OrientationDescriptor.hpp>
 
 namespace descriptor {
 

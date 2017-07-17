@@ -21,7 +21,7 @@
 #include <core/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 
-#include <client/view/parts/Turrel.hpp>
+#include <client/view/part/Turrel.hpp>
 
 #include <jeti/Render.hpp>
 

@@ -22,6 +22,7 @@
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
+#include <core/descriptor/part/Turrel.hpp>
 #include <core/descriptor/world/ALL>
 #include <core/descriptor/pilot/Npc.hpp>
 
@@ -351,6 +352,15 @@ item::Rocket*
 Manager::randRocket() const
 {
     item::Rocket* descr = static_cast<item::Rocket*>(rand(Type::ROCKET_EQUIPMENT));
+    assert(descr);
+    return descr;
+}
+
+// parts
+Turrel*
+Manager::randTurrel() const
+{
+    Turrel* descr = static_cast<Turrel*>(rand(Type::TURREL));
     assert(descr);
     return descr;
 }

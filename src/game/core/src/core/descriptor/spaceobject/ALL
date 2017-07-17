@@ -6,5 +6,4 @@
 #include "Satellite.hpp"
 #include "Ship.hpp"
 #include "SpaceStation.hpp"
-#include "Turrel.hpp"
 

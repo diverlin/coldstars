@@ -19,8 +19,8 @@
 #include "TurrelBuilder.hpp"
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/model/spaceobject/Asteroid.hpp>
-#include <core/spaceobject/Asteroid.hpp>
-#include <core/descriptor/spaceobject/Asteroid.hpp>
+#include <core/part/Turrel.hpp>
+#include <core/descriptor/part/Turrel.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -45,9 +45,6 @@ Turrel::gen(descriptor::Turrel* descr)
     control::Turrel* turrel = __genTemplate(descr);
 
     /// Base
-    LifeData life_data;
-    life_data.armor = descr->armor();
-    turrel->model()->setLifeData(life_data);
 
     /// Orientation
     turrel->model()->setSize(descr->size());

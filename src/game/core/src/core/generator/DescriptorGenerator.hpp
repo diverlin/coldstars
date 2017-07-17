@@ -62,6 +62,9 @@ class Rocket;
 class Scaner;
 } // namespace item
 
+// parts
+class Turrel;
+
 /* world */
 descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
 descriptor::Sector* genSector(const std::vector<int_t>&);
@@ -102,5 +105,8 @@ Rocket* genRocket(int race = NONE, int tech_level = NONE);
 Scaner* genScaner(int race = NONE, int tech_level = NONE);
 //Bomb* genBomb(int damage = NONE, int radius = NONE);
 } // namespace item
+
+//parts
+Turrel* genTurrel();
 
 } // namespace descriptor
