@@ -77,6 +77,8 @@ class Radar;
 class Rocket;
 } // namespace item
 
+class Turrel;
+
 class Manager
 {
 private:
@@ -128,6 +130,8 @@ public:
     item::Protector* randProtector() const;
     item::Radar* randRadar() const;
     item::Rocket* randRocket() const;
+
+    Turrel* randTurrel() const;
 
     Galaxy* galaxy(int_t) const;
     Sector* sector(int_t) const;

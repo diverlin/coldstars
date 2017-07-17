@@ -27,7 +27,7 @@
 
 namespace descriptor {
 
-struct Orientation : public Base/*, public ceti::descriptor::BaseView*/
+struct Orientation : public Base
 {
 public:
     Orientation() = default;

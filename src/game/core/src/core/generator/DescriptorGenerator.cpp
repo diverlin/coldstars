@@ -28,6 +28,7 @@
 #include <core/descriptor/item/equipment/ALL>
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
+#include <core/descriptor/part/Turrel.hpp>
 
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -1174,6 +1175,29 @@ genScaner(int race, int tech_level)
 //}
 
 } // anemspace item
+
+
+
+descriptor::Turrel*
+genTurrel()
+{
+    descriptor::Turrel* descr = new descriptor::Turrel;
+
+    float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
+                                  descriptor::Asteroid::SCALE_MAX);
+    descr->setSize(meti::vec3(size));
+    descr->setDirection(randDirection());
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::TURREL));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+
+    descriptor::Manager::get().add(descr);
+
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
+
+    return descr;
+}
+
 
 } // namespace descriptor
 
