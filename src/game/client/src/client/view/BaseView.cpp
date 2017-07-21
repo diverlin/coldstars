@@ -43,11 +43,13 @@ int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 
 void Base::addDecor(Base* decor) {
+    decor->setParent(this);
     m_decors.push_back(decor);
 }
 
 void Base::_drawDecors(const jeti::Renderer& render) const {
     for(Base* decor: m_decors) {
+        decor->update();
         decor->draw(render);
     }
 }

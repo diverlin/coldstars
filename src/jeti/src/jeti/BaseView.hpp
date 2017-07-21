@@ -72,6 +72,7 @@ public:
     void setMaterial(control::Material* material) { m_material = material; }
     void bindMesh(Mesh* mesh);
     void setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
+    void setParent(BaseView* parent) { m_parent = parent; }
 
     //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
 
@@ -85,6 +86,9 @@ public:
     void drawAxis(const jeti::Renderer& render) const;
 
 protected:
+    ceti::model::Orientation* _orientation() const { return m_orientation; }
+    const glm::mat4& matrixRotate() const { return m_matrixRotate; }
+
     void _setTransparency(float alpha)  { m_color.a = alpha; }
 
     bool _updateFadeInEffect(); // depr, move to animation program
@@ -103,10 +107,12 @@ protected:
 
 private:
     glm::vec4 m_color;
+    meti::vec3 m_pos;
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
     ceti::model::Orientation* m_orientation = nullptr;
+    BaseView* m_parent = nullptr;
 
     animation::BaseRotation* m_animationRotation = nullptr;
 

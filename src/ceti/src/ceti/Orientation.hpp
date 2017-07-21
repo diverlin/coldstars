@@ -70,8 +70,8 @@ public:
     Orientation(model::Orientation* model);
     virtual ~Orientation();
 
-    void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
-    void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
+//    void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
+//    void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
 
     void setPosition(float x, float y, float z)    { model()->setPosition(meti::vec3(x, y, z)); m_isUpdated = false; }
     void setPosition(const meti::vec3& position)   { model()->setPosition(position); m_isUpdated = false; }
@@ -85,8 +85,8 @@ public:
 
     [[deprecated("depr")]]
     //glm::vec3* pPosition() { return &model()->position(); }
-    [[deprecated("depr")]]
-    const glm::vec3* pParentPosition() { return &m_parentPosition; }
+//    [[deprecated("depr")]]
+//    const glm::vec3* pParentPosition() { return &m_parentPosition; }
 
 //    [[deprecated("depr")]]
 //    ceti::Points& points()          { return m_points; }
@@ -106,7 +106,7 @@ private:
 
     bool m_isUpdated = false;
     float m_collisionRadius;
-    glm::vec3 m_parentPosition;
+//    glm::vec3 m_parentPosition;
 
     //ceti::Points m_points;
 };

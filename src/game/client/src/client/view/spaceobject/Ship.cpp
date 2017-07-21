@@ -23,7 +23,13 @@
 
 #include <client/view/part/Turrel.hpp>
 
+#include <core/builder/part/TurrelBuilder.hpp>/>
+
 #include <jeti/Render.hpp>
+
+#include <jeti/Mesh.hpp>
+#include <jeti/Material.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 namespace view {
 
@@ -35,9 +41,26 @@ Ship::Ship(control::Ship* ship)
     setOrientationModel(ship->model()); // ??
 
     for(slot::Item* slot: ship->weaponSlots()) {
-        //view::Turrel* turrel = getTurrel...();
-        view::Turrel* turrel = nullptr;
-        assert(false);
+        control::Turrel* turrel_control = builder::Turrel().gen();
+        view::Turrel* turrel = new view::Turrel(slot, turrel_control);
+
+        {
+            int_t descritprorId = turrel->texture();
+            ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(descritprorId);
+            assert(descriptor);
+            jeti::model::Material* model = new jeti::model::Material(descriptor);
+            jeti::control::Material* material = new jeti::control::Material(model);
+            turrel->setMaterial(material);
+        }
+
+        {
+            int_t descritprorId = turrel->mesh();
+            ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
+            assert(descriptor);
+            jeti::Mesh* mesh = new jeti::Mesh(descriptor);
+            turrel->bindMesh(mesh);
+        }
+
         addDecor(turrel);
     }
 }

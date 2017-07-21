@@ -32,6 +32,26 @@ public:
     vec3(glm::vec3 v):glm::vec3(v) {}
     vec3():glm::vec3() {}
 
+    const glm::vec3& operator+=(const vec3& v) {
+        x+=v.x;
+        y+=v.y;
+        z+=v.z;
+        return *this;
+    }
+
+    const glm::vec3& operator+=(const glm::vec4& v) {
+        x+=v.x;
+        y+=v.y;
+        z+=v.z;
+        return *this;
+    }
+
+    void operator=(const glm::vec4& v) {
+        x=v.x;
+        y=v.y;
+        z=v.z;
+    }
+
     float length() const {
         return glm::length(glm::vec3(x,y,z));
     }

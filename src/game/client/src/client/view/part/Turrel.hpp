@@ -25,7 +25,7 @@ class Item;
 } // namespace slot
 
 namespace control {
-class Base;
+class Turrel;
 } // namespace control
 
 namespace view {
@@ -33,10 +33,10 @@ namespace view {
 class Turrel : public view::Base
 {
 public:
-    Turrel(slot::Item*, control::Base*);
+    Turrel(slot::Item*, control::Turrel*);
     ~Turrel();
 
-    void Render(float);
+//    void Render(float);
 
 private:
     slot::Item* m_slot = nullptr;
