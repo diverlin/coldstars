@@ -159,18 +159,31 @@ void BaseView::__updateModelMatrix()
     assert(m_mesh);
     assert(m_orientation);
 
-    m_matrixTranslate = glm::translate(m_orientation->position());
-    m_matrixScale     = glm::scale(m_orientation->size());
-
+    // prepare rotation matrix
     meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
 
     if (m_animationRotation) {
         m_animationRotation->update(m_quatAnimation);
-        m_matrixRotate = glm::toMat4(m_quatDirection * m_quatAnimation);
-    } else {
-        m_matrixRotate = glm::toMat4(m_quatDirection);
+        m_quatDirection *= m_quatAnimation;
     }
 
+    m_matrixRotate = glm::toMat4(m_quatDirection);
+
+    // prepeare scale matrix
+    m_matrixScale = glm::scale(m_orientation->size());
+
+    // prepare transition matrix
+    if (m_parent) {
+        m_pos = m_parent->matrixRotate() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
+        m_pos += m_parent->_orientation()->position();
+
+    } else {
+        m_pos = m_orientation->position();
+    }
+
+    m_matrixTranslate = glm::translate(m_pos);
+
+    // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
 }
 

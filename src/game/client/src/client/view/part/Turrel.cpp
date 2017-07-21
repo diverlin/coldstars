@@ -22,32 +22,42 @@
 //#include <jeti/Render.hpp>
 //#include <core/spaceobject/SpaceObject.hpp>
 
+#include <core/part/Turrel.hpp>
+
 #include <ceti/Logger.hpp>
+
+#include <meti/RandUtils.hpp>
+
 
 namespace view {
 
-Turrel::Turrel(slot::Item* slot, control::Base* control)
+Turrel::Turrel(slot::Item* slot, control::Turrel* control)
     :
       view::Base(control)
 {
     m_slot = slot;
+
+    setOrientationModel(control->model()); // ??
+    glm::vec3 pos(meti::getRandInt(-50, 50), meti::getRandInt(-50, 50), 0);
+    control->setPosition(pos);
+//    control->setDirection(glm::normalize(pos));
 }
 
 Turrel::~Turrel()
 {}
 
-void Turrel::Render(float turrel_angle_inD)
-{        
-    //if (slot->GetTarget() != nullptr)
-    //{
-    //float _tur_xl = slot->GetTarget()->center().x - center().x;
-    //float _tur_yl = slot->GetTarget()->center().y - center().y;
+//void Turrel::Render(float turrel_angle_inD)
+//{
+//    //if (slot->GetTarget() != nullptr)
+//    //{
+//    //float _tur_xl = slot->GetTarget()->center().x - center().x;
+//    //float _tur_yl = slot->GetTarget()->center().y - center().y;
 
-    //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
-    //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-    //}
+//    //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
+//    //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
+//    //}
 
-    //drawQuad(textureOb(), center(), size(), turrel_angle_inD);
-}        
+//    //drawQuad(textureOb(), center(), size(), turrel_angle_inD);
+//}
 
 } // namepsace view
