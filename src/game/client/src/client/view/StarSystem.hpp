@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <client/view/Cache.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 #include <jeti/Screen.hpp>
@@ -150,21 +152,12 @@ private:
     void __add(jeti::BaseParticleSystem*);
     void __add(VerticalFlowText*);
 
-    void __loadResourcesFor(Base*);
-    void __cache(Base*);
-
     void __clear();
-
-    Base* __tryGetViewCached(int_t);
-
-    std::map<int_t, Base*> m_cache;
-
-    std::map<int_t, jeti::Mesh*> m_meshCollector;
-    std::map<int_t, jeti::control::Material*> m_materialCollector;
 
     bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
     jeti::Camera& m_camera;
 
+    Cache m_cache;
     bool m_debug = true;
 };
 
