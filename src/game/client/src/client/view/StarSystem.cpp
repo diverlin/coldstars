@@ -184,16 +184,6 @@ void StarSystem::__clear()
 //    m_texts.clear();
 }
 
-Base*
-StarSystem::__tryGetViewCached(int_t id)
-{
-    std::map<int_t, Base*>::const_iterator it = m_cache.find(id);
-    if (it != m_cache.end()) {
-        return it->second;
-    }
-    return nullptr;
-}
-
 bool
 StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 {
@@ -202,11 +192,11 @@ StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
         return false;
     }
 
-    Base* view = __tryGetViewCached(star->id());
+    Base* view = m_cache.get(star->id());
     if (!view) {
         view = new Star(star);
         applyConstantRotationAnimation(meti::OY, view);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -223,11 +213,11 @@ StarSystem::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& da
         return false;
     }
 
-    Base* view = __tryGetViewCached(planet->id());
+    Base* view = m_cache.get(planet->id());
     if (!view) {
         view = new Planet(planet);
         applyConstantRotationAnimation(meti::OY, view);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -247,11 +237,11 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data
         return false;
     }
 
-    Base* view = __tryGetViewCached(asteroid->id());
+    Base* view = m_cache.get(asteroid->id());
     if (!view) {
         view = new Asteroid(asteroid);
         applyConstantRotationAnimation(meti::OY, view);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -272,11 +262,11 @@ StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 //        return false;
 //    }
 
-    Base* view = __tryGetViewCached(ship->id());
+    Base* view = m_cache.get(ship->id());
     if (!view) {
         view = new Ship(ship);
         applyConstantRotationAnimation(meti::OZ, view);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -296,10 +286,10 @@ StarSystem::__addIfVisible(control::SpaceStation* spacestation, const jeti::Scre
         return false;
     }
 
-    Base* view = __tryGetViewCached(spacestation->id());
+    Base* view = m_cache.get(spacestation->id());
     if (!view) {
         view = new SpaceStation(spacestation);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -319,10 +309,10 @@ StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Da
         return false;
     }
 
-    Base* view = __tryGetViewCached(satellite->id());
+    Base* view = m_cache.get(satellite->id());
     if (!view) {
         view = new Satellite(satellite);
-        __cache(view);
+        m_cache.add(view);
     }
     assert(view);
 
@@ -474,54 +464,6 @@ void StarSystem::__add(Base* view)
     }
     }
     assert(false);
-}
-
-void StarSystem::__loadResourcesFor(Base* view)
-{
-    {
-    jeti::control::Material* material = nullptr;
-
-    int_t descritprorId = view->texture();
-    auto it = m_materialCollector.find(descritprorId);
-    if (it != m_materialCollector.end()) {
-        material = it->second;
-    } else {
-        ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(descritprorId);
-        if (descriptor) {
-            jeti::model::Material* model = new jeti::model::Material(descriptor);
-            material = new jeti::control::Material(model);
-        }
-        assert(material);
-        m_materialCollector.insert(std::make_pair(descritprorId, material));
-    }
-    view->setMaterial(material);
-    }
-
-    {
-    jeti::Mesh* mesh = nullptr;
-
-    int_t descritprorId = view->mesh();
-    auto it = m_meshCollector.find(descritprorId);
-    if (it != m_meshCollector.end()) {
-        mesh = it->second;
-    } else {
-        ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
-        if (descriptor) {
-            mesh = new jeti::Mesh(descriptor);
-        }
-        assert(mesh);
-        m_meshCollector.insert(std::make_pair(descritprorId, mesh));
-    }
-
-    view->bindMesh(mesh);
-    }
-
-}
-
-void StarSystem::__cache(Base* view)
-{
-    __loadResourcesFor(view);
-    m_cache.insert(std::make_pair(view->id(), view));
 }
 
 void StarSystem::__add(Star* view)
