@@ -36,26 +36,26 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
     window->SetTitle( "StarSystem" );
 
-    auto red_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
-    auto green_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
-    auto blue_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
-    auto angle_scale = sfg::Scale::Create( 0.f, 360.f, 1.f, sfg::Scale::Orientation::HORIZONTAL );
-    auto auto_check = sfg::CheckButton::Create( "Auto" );
+//    auto red_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
+//    auto green_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
+//    auto blue_scale = sfg::Scale::Create( 0.f, 1.f, .01f, sfg::Scale::Orientation::HORIZONTAL );
+//    auto angle_scale = sfg::Scale::Create( 0.f, 360.f, 1.f, sfg::Scale::Orientation::HORIZONTAL );
+//    auto auto_check = sfg::CheckButton::Create( "Auto" );
 
-    auto table = sfg::Table::Create();
-    table->SetRowSpacings( 5.f );
-    table->SetColumnSpacings( 5.f );
+//    auto table = sfg::Table::Create();
+//    table->SetRowSpacings( 5.f );
+//    table->SetColumnSpacings( 5.f );
 
-    table->Attach( sfg::Label::Create( "Change the color of the rect using the scales below." ), sf::Rect<sf::Uint32>( 0, 0, 3, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-    table->Attach( sfg::Label::Create( "Red:" ), sf::Rect<sf::Uint32>( 0, 1, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-    table->Attach( red_scale, sf::Rect<sf::Uint32>( 1, 1, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
-    table->Attach( sfg::Label::Create( "Green:" ), sf::Rect<sf::Uint32>( 0, 2, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-    table->Attach( green_scale, sf::Rect<sf::Uint32>( 1, 2, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
-    table->Attach( sfg::Label::Create( "Blue:" ), sf::Rect<sf::Uint32>( 0, 3, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-    table->Attach( blue_scale, sf::Rect<sf::Uint32>( 1, 3, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
-    table->Attach( sfg::Label::Create( "Angle:" ), sf::Rect<sf::Uint32>( 0, 4, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-    table->Attach( angle_scale, sf::Rect<sf::Uint32>( 1, 4, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
-    table->Attach( auto_check, sf::Rect<sf::Uint32>( 2, 4, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( sfg::Label::Create( "Change the color of the rect using the scales below." ), sf::Rect<sf::Uint32>( 0, 0, 3, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( sfg::Label::Create( "Red:" ), sf::Rect<sf::Uint32>( 0, 1, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( red_scale, sf::Rect<sf::Uint32>( 1, 1, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
+//    table->Attach( sfg::Label::Create( "Green:" ), sf::Rect<sf::Uint32>( 0, 2, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( green_scale, sf::Rect<sf::Uint32>( 1, 2, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
+//    table->Attach( sfg::Label::Create( "Blue:" ), sf::Rect<sf::Uint32>( 0, 3, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( blue_scale, sf::Rect<sf::Uint32>( 1, 3, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
+//    table->Attach( sfg::Label::Create( "Angle:" ), sf::Rect<sf::Uint32>( 0, 4, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+//    table->Attach( angle_scale, sf::Rect<sf::Uint32>( 1, 4, 1, 1 ), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL | sfg::Table::EXPAND );
+//    table->Attach( auto_check, sf::Rect<sf::Uint32>( 2, 4, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
 
     m_infoStarSystem = new info::StarSystem;
 
@@ -89,6 +89,16 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
         window->SetPosition(sf::Vector2f(400, 0));
     }
 
+    {
+        sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
+        m_fpsLabel = sfg::Label::Create();
+        m_fpsLabel->SetText( "Hello World!\nAnother Line" );
+        window->Add(m_fpsLabel);
+
+        m_desktop.Add( window );
+        window->SetPosition(sf::Vector2f(650, 0));
+    }
+
     m_desktop.SetProperties(
         "Window {"
         "   BackgroundColor: #293546CC;"
@@ -100,6 +110,11 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
 }
 
 Demo::~Demo() {
+}
+
+void
+Demo::updateFps(int fps) {
+    m_fpsLabel->SetText(std::string("fps: ")+std::to_string(fps));
 }
 
 void

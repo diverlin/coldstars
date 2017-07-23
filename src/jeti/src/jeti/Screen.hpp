@@ -67,6 +67,8 @@ public:
 
     const Data& data() const { return m_data; }
 
+    int fps() const { return m_fps; }
+
 private:
     Data m_data;
     bool m_autoScroll;

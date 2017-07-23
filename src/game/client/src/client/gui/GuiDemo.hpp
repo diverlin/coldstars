@@ -52,11 +52,15 @@ public:
     info::Camera* infoCamera() const { return m_infoCamera; }
     info::Renderer* infoRender() const { return m_infoRender; }
 
+    void updateFps(int fps);
+
 private:
     sf::Clock m_clock;
     sf::Window& m_window;
     sfg::Desktop m_desktop;
     sfg::SFGUI m_gui;
+
+    sfg::Label::Ptr m_fpsLabel;
 
     info::StarSystem* m_infoStarSystem = nullptr;
     info::Camera* m_infoCamera = nullptr;
