@@ -30,6 +30,8 @@ public:
     Path()=default;
     ~Path()=default;
 
+    std::vector<ceti::Position>& positions() { return m_positions; }
+
     void add(const glm::vec3&, const glm::vec3&);
     const ceti::Position& position() const;
     void clear();
