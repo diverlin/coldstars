@@ -248,14 +248,14 @@ void Drive::__calcPath()
     
     m_path.clear();
 
-    assert(false);
-
-//    if (m_pathCenters.size() > 1) {
-//        m_pathEnd = false;
-//        m_pathIndex = 0;
-//    } else {
-//        __clearPath();
-//    }
+    if(!path::calcPath(m_path.positions(),
+                 m_ownerVehicle->position(),
+                 m_targetPos,
+                 m_ownerVehicle->direction(),
+                 m_ownerVehicle->properties().speed))
+    {
+        m_path.clear();
+    }
 }
 
 
