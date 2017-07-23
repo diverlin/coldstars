@@ -18,9 +18,10 @@
 
 #pragma once
 
+#include <core/part/Path.hpp>
+
 //#include <jeti/PathVisual.hpp>
 #include <meti/VectorUtils.hpp>
-
 #include <vector>
 
 namespace control {
@@ -99,17 +100,17 @@ private:
     float m_targetDistance = 0.0f;
     glm::vec3 m_targetOffset;
 
-    std::vector<glm::vec3> m_pathCenters;
-    std::vector<glm::vec3> m_pathDirections;
+    path::Path m_path;
+//    std::vector<glm::vec3> m_pathCenters;
+//    std::vector<glm::vec3> m_pathDirections;
 
-    bool m_pathEnd = true;
-    unsigned int m_pathIndex = 0;
+//    bool m_pathEnd = true;
+//    unsigned int m_pathIndex = 0;
     bool m_hasTarget = false;
 
     //        jeti::PathVisual m_PathVisualCenter;
     //        jeti::PathVisual m_PathVisualTurn;
 
-    void __clearPath();
     void __calcPath();
 
     bool __validateTarget() const;
