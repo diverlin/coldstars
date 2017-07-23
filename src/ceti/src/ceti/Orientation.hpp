@@ -26,7 +26,15 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
+
 namespace ceti {
+
+class Position {
+public:
+    Position(const glm::vec3& center, const glm::vec3& direction):center(center), direction(direction) {}
+    glm::vec3 center;
+    glm::vec3 direction;
+};
 
 namespace model {
 
@@ -75,6 +83,12 @@ public:
 
     void setPosition(float x, float y, float z)    { model()->setPosition(meti::vec3(x, y, z)); m_isUpdated = false; }
     void setPosition(const meti::vec3& position)   { model()->setPosition(position); m_isUpdated = false; }
+
+    void setPosition(const Position& position)   {
+        model()->setPosition(position.center);
+        model()->setDirection(position.direction);
+        m_isUpdated = false;
+    }
 
     void setSize(float x, float y, float z) { model()->setSize(meti::vec3(x, y, z)); m_isUpdated = false; }
     void setSize(const meti::vec3& size) { model()->setSize(size); m_isUpdated = false; }

@@ -30,23 +30,24 @@ namespace {
 
 bool validate_path(const glm::vec3& from,
                    const glm::vec3& to,
-                   const std::vector<glm::vec3>& centers,
+                   const std::vector<ceti::Position>& positions,
                    float dist) {
-    if (!centers.size()) {
+    if (!positions.size()) {
         return false;
     }
 
-    if (centers.size() < 2) {
+    if (positions.size() < 2) {
         return false;
     }
 
-    glm::vec3 p0 = centers.front();
+    glm::vec3 p0 = positions.front().center;
     if (glm::length(p0 - from) > dist) {
         return false;
     }
 
     int first = true;
-    for(const auto& p: centers) {
+    for(const auto& _p: positions) {
+        const glm::vec3& p = _p.center;
         if (first) {
             first = false;
             continue;
@@ -61,7 +62,7 @@ bool validate_path(const glm::vec3& from,
         p0=p;
     }
 
-    expect_eq_dirty(centers.back(), to, "center_end");
+    expect_eq_dirty(positions.back().center, to, "center_end");
 
     return true;
 }
@@ -70,8 +71,7 @@ bool validate_path(const glm::vec3& from,
 
 TEST(path, calc_direct)
 {
-    std::vector<glm::vec3> centers;
-    std::vector<glm::vec3> directions;
+    std::vector<ceti::Position> positions;
 
     // linear path calculation
     std::vector<glm::vec2> offsets = {
@@ -88,18 +88,17 @@ TEST(path, calc_direct)
         float speed = 1.0f;
 
         EXPECT_TRUE(path::isLookingTowards(to-from, dir));
-        bool result = path::calcDirectPath(centers, directions, from, to, speed);
+        bool result = path::calcDirectPath(positions, from, to, speed);
         EXPECT_TRUE(result);
 
-        EXPECT_TRUE(validate_path(from, to, centers, speed));
+        EXPECT_TRUE(validate_path(from, to, positions, speed));
 
-        expect_eq(centers.back(), to, "center");
+        expect_eq(positions.back().center, to, "center");
 
         int steps = int(std::fabs(glm::length(offset)/speed));
-        EXPECT_EQ(centers.size(), steps);
+        EXPECT_EQ(positions.size(), steps);
 
-        centers.clear();
-        directions.clear();
+        positions.clear();
     }
 }
 
@@ -143,43 +142,38 @@ TEST(path, calc_round)
     };
 
     for(const auto& pair: pairs) {
-        std::vector<glm::vec3> centers;
-        std::vector<glm::vec3> directions;
+        std::vector<ceti::Position> positions;
 
         const auto& dir = pair.first;
         const auto& to = pair.second;
 
-        bool result = path::calcRoundPath(centers, directions, from, to, dir, speed);
+        bool result = path::calcRoundPath(positions, from, to, dir, speed);
         EXPECT_TRUE(result);
 
-        EXPECT_TRUE(validate_path(from, to, centers, speed));
+        EXPECT_TRUE(validate_path(from, to, positions, speed));
 
-        centers.clear();
-        directions.clear();
+        positions.clear();
     }
 }
 
 TEST(path, calc_round_false)
 {
-    std::vector<glm::vec3> centers;
-    std::vector<glm::vec3> directions;
+    std::vector<ceti::Position> positions;
 
     glm::vec3 from(0,0,0);
     glm::vec3 to(10, 0, 0);
     glm::vec3 dir(0, 1, 0);
     float speed = 1.0f;
 
-    bool result = path::calcPath(centers, directions, from, to, dir, speed);
+    bool result = path::calcPath(positions, from, to, dir, speed);
     EXPECT_FALSE(result);
 
-    centers.clear();
-    directions.clear();
+    positions.clear();
 }
 
 TEST(path, complex)
 {
-    std::vector<glm::vec3> centers;
-    std::vector<glm::vec3> directions;
+    std::vector<ceti::Position> positions;
 
     glm::vec3 from(0,0,0);
 
@@ -188,16 +182,15 @@ TEST(path, complex)
     glm::vec3 dir(0, 1, 0);
     float speed = 1.0f;
 
-    bool result = path::calcPath(centers, directions, from, to, dir, speed);
+    bool result = path::calcPath(positions, from, to, dir, speed);
     EXPECT_TRUE(result);
 
-    EXPECT_TRUE(validate_path(from, to, centers, speed));
+    EXPECT_TRUE(validate_path(from, to, positions, speed));
 
-    expect_eq_dirty(centers.back(), to,"center");
-    expect_eq_dirty(directions.back(), glm::normalize(glm::vec3(to-centers.back())), "dir");
+    expect_eq_dirty(positions.back().center, to,"center");
+    expect_eq_dirty(positions.back().direction, glm::normalize(glm::vec3(to-positions.back().direction)), "dir");
 
-    centers.clear();
-    directions.clear();
+    positions.clear();
 }
 
 } // namespace test
