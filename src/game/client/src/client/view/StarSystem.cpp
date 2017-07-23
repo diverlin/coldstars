@@ -162,6 +162,10 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         info->setWidth(ceti::to_string(render.width()));
         info->setHeight(ceti::to_string(render.height()));
     }
+
+    {
+        m_guiDemo->updateFps(client::global::get().screen().fps());
+    }
 }
 
 void StarSystem::__clear()
