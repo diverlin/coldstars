@@ -91,10 +91,15 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
 
     {
         sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
-        m_fpsLabel = sfg::Label::Create();
-        m_fpsLabel->SetText( "Hello World!\nAnother Line" );
-        window->Add(m_fpsLabel);
 
+        m_fpsLabel = sfg::Label::Create();
+        m_mousePosLabel = sfg::Label::Create();
+
+        auto box = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+        box->Pack(m_fpsLabel);
+        box->Pack(m_mousePosLabel);
+
+        window->Add(box);
         m_desktop.Add( window );
         window->SetPosition(sf::Vector2f(650, 0));
     }
@@ -116,6 +121,12 @@ void
 Demo::updateFps(int fps) {
     m_fpsLabel->SetText(std::string("fps: ")+std::to_string(fps));
 }
+
+void
+Demo::updateMousePos(int x, int y) {
+    m_mousePosLabel->SetText(std::string("mouse pos: ")+std::to_string(x)+","+std::to_string(y));
+}
+
 
 void
 Demo::update(const std::vector<sf::Event>& events) {
