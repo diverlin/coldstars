@@ -52,7 +52,8 @@ public:
     info::Camera* infoCamera() const { return m_infoCamera; }
     info::Renderer* infoRender() const { return m_infoRender; }
 
-    void updateFps(int fps);
+    void updateFps(int);
+    void updateMousePos(int, int);
 
 private:
     sf::Clock m_clock;
@@ -61,6 +62,7 @@ private:
     sfg::SFGUI m_gui;
 
     sfg::Label::Ptr m_fpsLabel;
+    sfg::Label::Ptr m_mousePosLabel;
 
     info::StarSystem* m_infoStarSystem = nullptr;
     info::Camera* m_infoCamera = nullptr;
