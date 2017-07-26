@@ -34,7 +34,8 @@ namespace model {
 
 Material::Material(ceti::descriptor::Material* descriptor)
 {
-    texture_path = descriptor->path();
+    texture_path = descriptor->texturePath();
+    normalmap_path = descriptor->normalmapPath();
     use_alpha = descriptor->useAlpha();
 
     col_num = descriptor->col();

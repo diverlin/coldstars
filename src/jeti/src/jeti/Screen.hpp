@@ -69,6 +69,20 @@ public:
 
     int fps() const { return m_fps; }
 
+    glm::vec3 toWorldCoord(const glm::vec2& screen_coord) {
+        glm::vec2 world_coord(__bottomLeft());
+        world_coord += screen_coord;
+        world_coord *= scale();
+        return glm::vec3(world_coord, 0);
+    }
+
+//    glm::vec2 toScreenCoord(const glm::vec2& screen_coord) {
+//        glm::vec2 screen_coord(__bottomLeft());
+//        world_coord += screen_coord;
+//        world_coord *= scale();
+//        return glm::vec3(world_coord, 0);
+//    }
+
 private:
     Data m_data;
     bool m_autoScroll;
@@ -81,6 +95,7 @@ private:
     glm::vec2 m_targetCenter;
 
     void __drawFps();
+    const glm::vec2& __bottomLeft() const { return m_data.rect.bottomLeft(); }
 };
 
 } // namespace jeti

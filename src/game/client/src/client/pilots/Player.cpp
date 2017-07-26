@@ -875,7 +875,7 @@ void Player::SessionInNatureLand()
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
-    m_cursor.Reset();
+    m_cursor.reset();
     assert(false);
 //    switch(npc->vehicle()->place())
 //    {
@@ -885,7 +885,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 //        case type::place::LAND:      { SessionInNatureLand(); break; }
 //    }
 
-    m_cursor.Update(this);
+    m_cursor.update(this);
     //m_cursor.RenderFocusedObjectInfo();
     client::global::get().screen().draw();
 }

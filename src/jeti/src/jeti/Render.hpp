@@ -84,6 +84,8 @@ public:
 
     void composeViewMatrix(const glm::mat4&);
 
+    void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
+
     void drawMesh                (const Mesh&, const glm::mat4&) const;
     void drawMesh                (const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLight           (const Mesh&, const control::Material&, const glm::mat4&) const;

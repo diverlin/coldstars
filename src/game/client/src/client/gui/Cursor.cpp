@@ -44,12 +44,12 @@
 
 Cursor::Cursor()
 : 
-m_FocusedSpaceObject(nullptr),
-m_FocusedGuiElement(nullptr)
+m_focusedSpaceObject(nullptr),
+m_focusedGuiElement(nullptr)
 {
     //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(entity::Type::CARGO_SLOT);
     
-    m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+    m_box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK, "attack");  
@@ -84,57 +84,57 @@ m_FocusedGuiElement(nullptr)
 /* virtual */
 Cursor::~Cursor()
 {
-    delete m_ItemSlot;
+    delete m_itemSlot;
 }
 
-void Cursor::Reset()
+void Cursor::reset()
 {
-    m_DataMouse.left_click  = false;
-    m_DataMouse.right_click = false;
+    m_dataMouse.left_click  = false;
+    m_dataMouse.right_click = false;
     
-    m_FocusedSpaceObject = nullptr;
-    m_FocusedGuiElement = nullptr;
+    m_focusedSpaceObject = nullptr;
+    m_focusedGuiElement = nullptr;
 }
 
-void Cursor::Update(Player* player)
+void Cursor::update(Player* player)
 {
-    if (m_FocusedSpaceObject) {
-        if (!m_FocusedSpaceObject->isAlive()) {
-            m_FocusedSpaceObject = nullptr;
+    if (m_focusedSpaceObject) {
+        if (!m_focusedSpaceObject->isAlive()) {
+            m_focusedSpaceObject = nullptr;
         }
     }
         
-    UpdateMouseStuff();
+    updateMouseStuff();
     
-    m_Box.setCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
+    m_box.setCenter(m_dataMouse.pos_screencoord.x, m_dataMouse.pos_screencoord.y);  
         
-    if (m_DataMouse.left_click) {
-        if (m_FocusedGuiElement != nullptr)
+    if (m_dataMouse.left_click) {
+        if (m_focusedGuiElement != nullptr)
         {
             #if GUI_LOG_ENABLED == 1
             Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
             #endif
         
-            m_FocusedGuiElement->OnPressEventMBL(player);
+            m_focusedGuiElement->OnPressEventMBL(player);
         }
         
-        if (m_FocusedSpaceObject != nullptr)
+        if (m_focusedSpaceObject != nullptr)
         {
             //..
         }        
     }
-    else if (m_DataMouse.right_click == true)
+    else if (m_dataMouse.right_click == true)
     {
-        if (m_FocusedGuiElement != nullptr)
+        if (m_focusedGuiElement != nullptr)
         {
             #if GUI_LOG_ENABLED == 1
             Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
             #endif
         
-            m_FocusedGuiElement->OnPressEventMBR(player);
+            m_focusedGuiElement->OnPressEventMBR(player);
         }
                 
-        if (m_FocusedSpaceObject != nullptr)
+        if (m_focusedSpaceObject != nullptr)
         {
             //..
         }
@@ -143,38 +143,38 @@ void Cursor::Update(Player* player)
                
 }
 
-void Cursor::UpdateMouseStuff()
+void Cursor::updateMouseStuff()
 {    
-    m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-    m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
+    m_dataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    m_dataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
-    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
+    m_dataMouse.pos_screencoord = glm::vec2(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
     assert(false);
     //m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*client::global::get().screen().scale() + client::global::get().screen().bottomLeftScreenWC();
 }
 
-void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
+void Cursor::renderFocusedObjectStuff(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
         float scale = 1.1;
-        if (m_FocusedSpaceObject != nullptr)
+        if (m_focusedSpaceObject != nullptr)
         {                    
             //m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
-            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->position()), meti::vec2(m_FocusedSpaceObject->size()));
+            ceti::Box2D box(meti::vec2(m_focusedSpaceObject->position()), meti::vec2(m_focusedSpaceObject->size()));
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
             render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
         }
         
-        if (m_FocusedGuiElement != nullptr)
+        if (m_focusedGuiElement != nullptr)
         {
-            if (m_FocusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT)
+            if (m_focusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT)
             {
-                ceti::Box2D box(m_FocusedGuiElement->GetBox());
+                ceti::Box2D box(m_focusedGuiElement->GetBox());
                 box.SetScale(scale, scale);
             
                 render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
@@ -184,21 +184,21 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
     //render.disable_BLEND();  
 }
 
-void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
+void Cursor::renderFocusedObjectInfo(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
-        if (m_FocusedGuiElement) {
-            m_FocusedGuiElement->RenderInfo(render);
+        if (m_focusedGuiElement) {
+            m_focusedGuiElement->RenderInfo(render);
         }        
-        if (m_FocusedSpaceObject) {
+        if (m_focusedSpaceObject) {
             //m_FocusedSpaceObject->RenderInfoInSpace(render, client::global::get().screen().GetBottomLeftScreenWC(), client::global::get().screen().GetScale());
         }
     }
     //render.disable_BLEND();  
 }
 
-void Cursor::RenderItem(const jeti::Renderer& render) const
+void Cursor::renderItem(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
