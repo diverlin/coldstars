@@ -37,13 +37,13 @@ Rect::Rect(const glm::vec2& bottomLeft, float width, float height)
 
 Rect::Rect(const Rect& rhs)
 {
-    set(rhs.GetBottomLeft(), rhs.width(), rhs.height());
+    set(rhs.bottomLeft(), rhs.width(), rhs.height());
 }
 
 Rect::~Rect()
 {}
 
-void Rect::Scale(float scale)
+void Rect::scale(float scale)
 {
     m_width *= scale;
     m_height *= scale;
@@ -52,7 +52,7 @@ void Rect::Scale(float scale)
     m_bottomLeft.y = m_center.y - m_height/2;
 }
 
-void Rect::Scale(const glm::vec2& scale)
+void Rect::scale(const glm::vec2& scale)
 {
     m_width *= scale.x;
     m_height *= scale.y;
@@ -60,12 +60,12 @@ void Rect::Scale(const glm::vec2& scale)
     m_bottomLeft.y = m_center.y - m_height/2;
 }
 
-bool Rect::CheckInteraction(const glm::vec2& point) const
+bool Rect::checkInteraction(const glm::vec2& point) const
 {
-    return CheckInteraction(point.x, point.y);
+    return checkInteraction(point.x, point.y);
 }
 
-bool Rect::CheckInteraction(float x, float y) const
+bool Rect::checkInteraction(float x, float y) const
 {           
     if (x < m_bottomLeft.x)
         return false;
@@ -79,7 +79,7 @@ bool Rect::CheckInteraction(float x, float y) const
     return true;
 }
 
-bool Rect::CheckRoundInteraction(const glm::vec2& p, float radius) const
+bool Rect::checkRoundInteraction(const glm::vec2& p, float radius) const
 {           
     float dist = glm::length((p-m_center));
     if (dist < radius)
@@ -109,7 +109,7 @@ void Rect::set(const glm::vec2& vbl, float width, float height)
 
 void Rect::set(const Rect& rect)
 {
-    set(rect.GetBottomLeft(), rect.width(), rect.height());
+    set(rect.bottomLeft(), rect.width(), rect.height());
 }
 
 void Rect::setCenter(const glm::vec2& center)
@@ -131,12 +131,12 @@ void Rect::setCenter(float center_x, float center_y)
     UpdateTopRight();
 }
 
-void Rect::SetBottomLeft(const glm::vec2& bottomLeft)
+void Rect::setBottomLeft(const glm::vec2& bottomLeft)
 {
-    SetBottomLeft(bottomLeft.x, bottomLeft.y);
+    setBottomLeft(bottomLeft.x, bottomLeft.y);
 }
 
-void Rect::SetBottomLeft(float pos_x, float pos_y)
+void Rect::setBottomLeft(float pos_x, float pos_y)
 {
     m_bottomLeft.x = pos_x;
     m_bottomLeft.y = pos_y;
@@ -145,7 +145,7 @@ void Rect::SetBottomLeft(float pos_x, float pos_y)
     UpdateTopRight();
 }
 
-void Rect::SetBottomLeftX(float pos_x)
+void Rect::setBottomLeftX(float pos_x)
 {
     m_bottomLeft.x = pos_x;
 
@@ -164,7 +164,7 @@ void Rect::setSize(float width, float height)
     UpdateTopRight();
 }
 
-void Rect::MovingBy(const glm::vec2& d_pos)
+void Rect::movingBy(const glm::vec2& d_pos)
 {
     m_bottomLeft += d_pos;
     UpdateCenter();

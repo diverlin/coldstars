@@ -39,7 +39,7 @@ void validate(descriptor::Base* descr, jeti::view::BaseView* view) {
     descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
 
     EXPECT_NE(descr->texture(), NONE);
-    EXPECT_NE(material_descr->path(), "");
+    EXPECT_NE(material_descr->texturePath(), "");
 
     EXPECT_NE(descr->mesh(), NONE);
     EXPECT_NE(mesh_descr->modelPath(), "");

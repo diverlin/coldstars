@@ -41,32 +41,32 @@ public:
     Cursor();
     ~Cursor();
 
-    void SetLeftMouseButtonClick(bool left_click)         { m_DataMouse.left_click = left_click; }
-    void SetRightMouseButtonClick(bool right_click)     { m_DataMouse.right_click = right_click; }
-    void SetFocusedSpaceObject(model::SpaceObject* space_object)   { m_FocusedSpaceObject = space_object; }
-    void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
+    void setLeftMouseButtonClick(bool left_click)         { m_dataMouse.left_click = left_click; }
+    void setRightMouseButtonClick(bool right_click)     { m_dataMouse.right_click = right_click; }
+    void focusOn(model::SpaceObject* space_object)   { m_focusedSpaceObject = space_object; }
+    void focusOn(BaseGuiElement* gui_element)      { m_focusedGuiElement = gui_element; }
 
-    const MouseData& mouseData() const { return m_DataMouse; }
-    ItemSlot* GetItemSlot() const { return m_ItemSlot; }
+    const MouseData& mouseData() const { return m_dataMouse; }
+    ItemSlot* itemSlot() const { return m_itemSlot; }
 
-    void Reset();
-    void Update(Player*);
+    void reset();
+    void update(Player*);
 
-    void RenderFocusedObjectStuff(const jeti::Renderer&) const;
-    void RenderFocusedObjectInfo(const jeti::Renderer&) const;
+    void renderFocusedObjectStuff(const jeti::Renderer&) const;
+    void renderFocusedObjectInfo(const jeti::Renderer&) const;
 
-    void RenderItem(const jeti::Renderer&) const;
+    void renderItem(const jeti::Renderer&) const;
 
 private:
-    ItemSlot* m_ItemSlot = nullptr;
+    ItemSlot* m_itemSlot = nullptr;
 
-    MouseData m_DataMouse;
+    MouseData m_dataMouse;
 
-    model::SpaceObject* m_FocusedSpaceObject = nullptr;
-    BaseGuiElement* m_FocusedGuiElement;
+    model::SpaceObject* m_focusedSpaceObject = nullptr;
+    BaseGuiElement* m_focusedGuiElement;
 
-    ceti::Box2D m_Box;
+    ceti::Box2D m_box;
 
-    void UpdateMouseStuff();
+    void updateMouseStuff();
 }; 
 

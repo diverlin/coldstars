@@ -35,7 +35,8 @@ public:
     Material() = default;
     ~Material() = default;
 
-    void setPath(const std::string& path) { m_path = path; }
+    void setTexturePath(const std::string& path) { m_texturePath = path; }
+    void setNormalmapPath(const std::string& path) { m_normalmapPath = path; }
     void setAlpha(bool alpha) { m_alpha = alpha; }
     void setCol(int col) { m_col = col; }
     void setRow(int row) { m_row = row; }
@@ -43,7 +44,8 @@ public:
     void setAutoRotated(bool auto_rotated) { m_autoRotated = auto_rotated; }
     void setBrightThreshold(float brightThreshold) { m_brightThreshold = brightThreshold; }
 
-    const std::string& path() const { return m_path; }
+    const std::string& texturePath() const { return m_texturePath; }
+    const std::string& normalmapPath() const { return m_normalmapPath; }
     bool useAlpha() const { return m_alpha; }
     bool animated() const { return (m_col !=1 || m_row != 1); }
     bool autoRotated() const { return m_autoRotated; }
@@ -53,7 +55,8 @@ public:
     float fps() const { return m_fps; }
 
 private:
-    std::string m_path = "";
+    std::string m_texturePath = "";
+    std::string m_normalmapPath = "";
     bool m_alpha = true;
     int m_col = 1;
     int m_row = 1;
@@ -66,7 +69,8 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
-        ar & m_path;
+        ar & m_texturePath;
+        ar & m_normalmapPath;
         ar & m_alpha;
         ar & m_col;
         ar & m_row;

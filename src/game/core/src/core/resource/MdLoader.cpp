@@ -4,6 +4,7 @@
 #include <core/descriptor/Texture.hpp>
 
 #include <ceti/StringUtils.hpp>
+#include <ceti/FsUtils.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -170,9 +171,16 @@ InfoLoader::read(const std::string& path, descriptor::Material* material)
         material->setAutoRotated(auto_rotated.get());
     }
 
-    std::string img_path = ceti::replace(path, ".md", ".png");
+    std::string img_base_path = ceti::replace(path, ".md", "");
 
-    material->setPath(img_path);
+    std::string img_texture_path = img_base_path + ".png";
+    std::string img_normalmap_path = img_base_path + "_nm.png";
+
+    assert(ceti::filesystem::is_file_exists(img_texture_path));
+    material->setTexturePath(img_texture_path);
+    if (ceti::filesystem::is_file_exists(img_normalmap_path)) {
+        material->setNormalmapPath(img_normalmap_path);
+    }
 
     assert(material->row() != 0);
     assert(material->col() != 0);

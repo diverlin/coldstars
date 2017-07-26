@@ -286,6 +286,14 @@ void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, co
     }
 }
 
+void Renderer::draw(const Mesh& mesh, const control::Material& material, const glm::mat4& MM) const {
+    if (material.model()->normalmap) {
+        drawMeshLightNormalMap(mesh, material, MM);
+    } else {
+        drawMeshLight(mesh, material, MM);
+    }
+}
+
 void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {

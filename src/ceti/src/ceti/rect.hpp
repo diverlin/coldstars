@@ -31,12 +31,12 @@ class Rect
         Rect(const Rect&);
         ~Rect();
         
-        void Scale(float);
-        void Scale(const glm::vec2&);
+        void scale(float);
+        void scale(const glm::vec2&);
         
-        bool CheckInteraction(float, float) const;
-        bool CheckInteraction(const glm::vec2&) const;
-        bool CheckRoundInteraction(const glm::vec2&, float) const;
+        bool checkInteraction(float, float) const;
+        bool checkInteraction(const glm::vec2&) const;
+        bool checkRoundInteraction(const glm::vec2&, float) const;
                             
         void set(float, float, float, float);
         void set(const glm::vec2&, float, float);
@@ -44,18 +44,18 @@ class Rect
             
         void setCenter(const glm::vec2&);
         void setCenter(float, float);
-        void SetBottomLeftX(float);
-        void SetBottomLeft(const glm::vec2&);
-        void SetBottomLeft(float, float);
+        void setBottomLeftX(float);
+        void setBottomLeft(const glm::vec2&);
+        void setBottomLeft(float, float);
                     
         const glm::vec2& center() const     { return m_center; }
-        const glm::vec2& GetBottomLeft() const { return m_bottomLeft; }
-        const glm::vec2& GetTopRight() const { return m_topRight; }
-        float width() const         { return m_width; }
-        float height() const     { return m_height; }
+        const glm::vec2& bottomLeft() const { return m_bottomLeft; }
+        const glm::vec2& topRight() const { return m_topRight; }
+        float width() const { return m_width; }
+        float height() const { return m_height; }
         
         void setSize(float, float);
-        void MovingBy(const glm::vec2&);
+        void movingBy(const glm::vec2&);
                             
     private:
         glm::vec2 m_bottomLeft;

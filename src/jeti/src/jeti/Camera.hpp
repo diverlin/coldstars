@@ -30,7 +30,7 @@ class Camera : public NonCopyable
 {
     const float CAMERA_SPEED_MAX = 10.0f;
     const float CAMERA_INERTIA = 0.95f;
-    const float LOOKTO_Z = 1000.0;
+    const float LOOKTO_Z = -1000.0;
 public:
     Camera() = default;
     ~Camera() = default;
