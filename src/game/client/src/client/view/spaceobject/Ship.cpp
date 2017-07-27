@@ -108,7 +108,7 @@ Ship::~Ship()
 
 void Ship::draw(const jeti::Renderer& render) const
 {
-    jeti::view::BaseView::draw(render);
+    render.draw(_mesh(), _material(), _modelMatrix());
     _drawDecors(render);
     //if (GetProperties().grab_radius > 0) {
         //RenderGrabTrail(render);

@@ -51,8 +51,7 @@ Asteroid::~Asteroid()
 
 void Asteroid::draw(const jeti::Renderer& render) const
 {
-    //render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
-    render.drawMeshLight(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), _modelMatrix());
 
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());

@@ -328,7 +328,7 @@ StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Da
 
 void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
 {
-    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.04));
+    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.01));
     view->setAnimationRotation(animation);
 }
 
@@ -818,6 +818,7 @@ void StarSystem::render(control::StarSystem* starsystem)
     assert(starsystem);
     jeti::Renderer& renderer = client::global::get().render();
 
+    renderer.update();
     m_camera.update();
     
     __updateVisible(starsystem);

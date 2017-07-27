@@ -210,8 +210,11 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             case sf::Keyboard::K: { client::global::get().screen().increaseScale(); break; }
             case sf::Keyboard::L: { client::global::get().screen().decreaseScale(); break; }
 
-            case sf::Keyboard::X: { client::global::get().render().showAxis(true); break; }
-            case sf::Keyboard::Z: { client::global::get().render().showAxis(false); break; }
+            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
+            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
+
+//            case sf::Keyboard::X: { client::global::get().render().showAxis(true); break; }
+//            case sf::Keyboard::Z: { client::global::get().render().showAxis(false); break; }
 
         }
     }
@@ -222,7 +225,14 @@ void UserInputInSpace::__mouseButtonPressed(Player* player)
     for (const auto & key_code : UserInput::get().m_mousePressedCodes)   
     {
         switch (key_code) {
-            case sf::Mouse::Left:  { player->cursor().setLeftMouseButtonClick(true); break; }
+            case sf::Mouse::Left:
+        {
+//            sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
+//            client::global::get().render().setLightPos(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
+
+            player->cursor().setLeftMouseButtonClick(true);
+            break;
+        }
             case sf::Mouse::Right: { player->cursor().setRightMouseButtonClick(true); break; }
         }
     }

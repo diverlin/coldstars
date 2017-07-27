@@ -21,6 +21,8 @@
 #include <meti/RandUtils.hpp>
 #include <ceti/descriptor/Texture.hpp>
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Color.hpp>
 
@@ -49,6 +51,28 @@ Material::Material(ceti::descriptor::Material* descriptor)
 
 namespace {
 
+
+//sf::RenderTexture resizeImage(sf::Image image,float width, float height)
+//{
+//    sf::Sprite spriteTmp(image);
+//    spriteTmp.Resize(width, height);
+//    sf::RenderTexture image;
+//    image.Clear(sf::Color(0,0,0,255));
+//    image.Draw(spriteTmp);
+//    image.display();
+//    return image;
+//}
+
+void loadToVRAM(GLuint& texture, const sf::Uint8* data, int& w, int& h)
+{
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+}
+
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
     sf::Image image;
@@ -61,12 +85,20 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
     w = image.getSize().x;
     h = image.getSize().y;
 
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+    loadToVRAM(texture, image.getPixelsPtr(), w, h);
+}
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+void resizeAndLoadToVRAM(const std::string& path, GLuint& texture, int w, int h)
+{
+    sf::Image image;
+    if (!image.loadFromFile(path)) {
+        throw std::runtime_error("FAULT: Not abe to open file:" + path);
+    }
+
+    image.flipVertically();
+//    image = resizeImage(image, w, h);
+
+    loadToVRAM(texture, image.getPixelsPtr(), w, h);
 }
 
 void loadToVRAM(GLuint& texture, int& w, int& h)
@@ -145,7 +177,7 @@ void Material::load()
         loadToVRAM(m_model->texture, m_model->w, m_model->h);
     }
     if (m_model->normalmap_path != "") {
-        loadToVRAM(m_model->normalmap_path, m_model->normalmap, m_model->w, m_model->h);
+        resizeAndLoadToVRAM(m_model->normalmap_path, m_model->normalmap, m_model->w, m_model->h);
     }
 
     m_isLoaded = true;

@@ -178,8 +178,15 @@ InfoLoader::read(const std::string& path, descriptor::Material* material)
 
     assert(ceti::filesystem::is_file_exists(img_texture_path));
     material->setTexturePath(img_texture_path);
+
     if (ceti::filesystem::is_file_exists(img_normalmap_path)) {
         material->setNormalmapPath(img_normalmap_path);
+    }
+
+    // test
+    if (material->typeStr() == "texture::ship") {
+        //material->setTexturePath("data/test1.png");
+        //material->setNormalmapPath("data/test1_nm.png");
     }
 
     assert(material->row() != 0);
