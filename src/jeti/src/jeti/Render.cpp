@@ -43,7 +43,7 @@ namespace jeti {
 
 Renderer::Renderer()
 {
-    m_light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
+    m_light.position    = glm::vec3(0.0f, 0.0f, -300.0f);
     m_light.ambient     = glm::vec4(0.2f);
     m_light.diffuse     = glm::vec4(1.0f);
 //    m_light.specular    = glm::vec4(1.5f); // visual artefact
@@ -57,6 +57,25 @@ Renderer::~Renderer()
     delete m_meshAxis;
 }
 
+void Renderer::increaseLightPos() {
+    m_light.position.z += 10.0;
+}
+
+void Renderer::decreaseLightPos() {
+    m_light.position.z -= 10.0;
+}
+
+//void Renderer::setLightPos(int x, int y) {
+//    m_light.position.x = float(x);
+//    m_light.position.y = float(y);
+//}
+
+void Renderer::update() {
+//    m_t += 0.01f;
+//    float R = 500;
+//    m_light.position.x = R*sin(m_t);
+//    m_light.position.y = R*cos(m_t);
+}
 
 void Renderer::init(Camera* camera, int w, int h)
 {
@@ -306,7 +325,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
 
     const model::Material& material = *textureOb.model();
 
-    __useTransparentMode(material.use_alpha);
+    //__useTransparentMode(material.use_alpha);
  	 	
     __useProgram(m_programLight);
     {
@@ -340,10 +359,10 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
 
 void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
-    if (mesh.isFlat()) {
-        drawMesh(mesh, textureOb, ModelMatrix);
-        return;
-    }
+//    if (mesh.isFlat()) {
+//        drawMesh(mesh, textureOb, ModelMatrix);
+//        return;
+//    }
 
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = m_camera->target();
@@ -754,16 +773,16 @@ void Renderer::__useTransparentMode(bool transparent_mode_on) const
 {
     if (m_transparentModeOn != transparent_mode_on) {
         if (transparent_mode_on) {
-			glEnable(GL_BLEND);
-			glDepthMask(GL_FALSE); // turn off depth buffer writing
+            glEnable(GL_BLEND);
+            glDepthMask(GL_FALSE); // turn off depth buffer writing
             glDisable(GL_CULL_FACE);
         } else {
 			glDisable(GL_BLEND);
-			glDepthMask(GL_TRUE); // turn on depth buffer writing
+            glDepthMask(GL_TRUE); // turn on depth buffer writing
             glEnable(GL_CULL_FACE);
-		}
+        }
         m_transparentModeOn = transparent_mode_on;
-	}
+    }
 	
     m_postEffectModeOn = -1;
 }

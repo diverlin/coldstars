@@ -134,6 +134,9 @@ void Rect::setCenter(float center_x, float center_y)
 void Rect::setBottomLeft(const glm::vec2& bottomLeft)
 {
     setBottomLeft(bottomLeft.x, bottomLeft.y);
+
+    UpdateCenter();
+    UpdateTopRight();
 }
 
 void Rect::setBottomLeft(float pos_x, float pos_y)

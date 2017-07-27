@@ -5,8 +5,7 @@
 #define VERTEX_NORMAL_LOCATION   2
 #define VERTEX_COLOR_LOCATION    3
 
-uniform struct Matrices
-{
+uniform struct Matrices {
     mat4 model;
     mat4 projectionView;
     mat3 normal;
@@ -14,8 +13,7 @@ uniform struct Matrices
 
 uniform vec3 u_EyePos;
 
-uniform struct Light
-{
+uniform struct Light {
     vec3  position;
     vec4  ambient;
     vec4  diffuse;
@@ -23,8 +21,7 @@ uniform struct Light
     vec3  attenuation;
 } u_Light;
 
-uniform struct Material
-{
+uniform struct Material {
     vec4  ambient;
     vec4  diffuse;
     vec4  specular;
@@ -52,7 +49,7 @@ void main(void)
       
     v_Vertex.texcoord = texcoord; 
     v_Vertex.normal = u_Matrices.normal * normal;                            
-   	vec3 lightDir = vertexPos.xyz - u_Light.position;              
+    vec3 lightDir = vertexPos.xyz - u_Light.position;
     vec3 eyeDir   = vertexPos.xyz - u_EyePos; 
 
     // tangent space

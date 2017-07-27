@@ -146,7 +146,7 @@ void BaseView::update()
 
 void BaseView::draw(const jeti::Renderer& render) const
 {
-    render.drawMesh(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), _modelMatrix());
 }
 
 void BaseView::drawAxis(const jeti::Renderer& render) const

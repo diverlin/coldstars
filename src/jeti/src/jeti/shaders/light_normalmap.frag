@@ -5,8 +5,7 @@
 uniform sampler2D u_Texture;
 uniform sampler2D u_Normalmap;
 
-uniform struct Light
-{
+uniform struct Light {
     vec3  position;
     vec4  ambient;
     vec4  diffuse;
@@ -14,8 +13,7 @@ uniform struct Light
     vec3  attenuation;
 } u_Light;
 
-uniform struct Material
-{
+uniform struct Material {
     vec4  ambient;
     vec4  diffuse;
     vec4  specular;
@@ -23,8 +21,7 @@ uniform struct Material
     float shininess;
 } u_Material;
 
-in struct Vertex
-{
+in struct Vertex {
     vec2 texcoord;
     vec3 normal;
     vec3 lightDir_ts; 
@@ -39,7 +36,7 @@ void main(void)
     vec3 lightDir_ts_n = (v_Vertex.lightDir_ts);
     vec3 eyeDir_ts_n   = (v_Vertex.eyeDir_ts);
 
-	vec3 normaltex_n = normalize(texture2D(u_Normalmap, v_Vertex.texcoord).rgb * 2.0 - 1.0); // Extract the normal from the normal map  
+    vec3 normaltex_n =  2.0 * normalize(texture2D(u_Normalmap, v_Vertex.texcoord).rgb) - 1.0; // Extract the normal from the normal map
 
     color  = u_Material.emission;
     color += u_Material.ambient * u_Light.ambient /** v_Vertex.attenuation*/;
@@ -51,5 +48,7 @@ void main(void)
     float RdotVpow = max(pow(dot(lightDirRefl, eyeDir_ts_n), u_Material.shininess), 0.0);
     color += u_Material.specular * u_Light.specular * RdotVpow /** v_Vertex.attenuation*/;
 
-    color *= texture(u_Texture, v_Vertex.texcoord);
+	vec4 orig_color = texture(u_Texture, v_Vertex.texcoord);
+    color *= orig_color;
+    color.a = orig_color.a;
 }

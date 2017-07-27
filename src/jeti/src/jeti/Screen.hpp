@@ -70,9 +70,9 @@ public:
     int fps() const { return m_fps; }
 
     glm::vec3 toWorldCoord(const glm::vec2& screen_coord) {
-        glm::vec2 world_coord(__bottomLeft());
+        glm::vec2 world_coord(position());
         world_coord += screen_coord;
-        world_coord *= scale();
+        //world_coord *= scale();
         return glm::vec3(world_coord, 0);
     }
 
@@ -82,6 +82,8 @@ public:
 //        world_coord *= scale();
 //        return glm::vec3(world_coord, 0);
 //    }
+    void setPosition(const glm::vec2& position) { m_data.rect.setBottomLeft(position); }
+    const glm::vec2& position() const { return m_data.rect.bottomLeft(); }
 
 private:
     Data m_data;
@@ -95,7 +97,6 @@ private:
     glm::vec2 m_targetCenter;
 
     void __drawFps();
-    const glm::vec2& __bottomLeft() const { return m_data.rect.bottomLeft(); }
 };
 
 } // namespace jeti

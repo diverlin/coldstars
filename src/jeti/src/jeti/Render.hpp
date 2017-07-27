@@ -43,8 +43,6 @@ const int FBO_NUM = 6;
 const float SCREEN_QUAD_ZPOS = -999.0f;
 const float ZNEAR = -1000.0f;
 const float ZFAR = 1000.0f;
-//const float ZNEAR = 1000.0f;
-//const float ZFAR = 0.1;
 
 class Renderer : public NonCopyable
 {
@@ -61,6 +59,9 @@ public:
     int height() const { return m_h; }
 
     void applyScale(float);
+    void increaseLightPos();
+    void decreaseLightPos();
+//    void setLightPos(int, int);
 
     void enable_CULLFACE();
     void disable_CULLFACE();
@@ -112,7 +113,11 @@ public:
 
     void drawStarField(int, int, float, float) const;
 
+    void update();
+
 private:
+    float m_t = 0.0f;
+
     bool m_initialized = false;
     bool m_drawAxis = true;
     float m_scale = 1.0f;
