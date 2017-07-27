@@ -174,7 +174,7 @@ void BaseView::__updateModelMatrix()
 
     // prepare transition matrix
     if (m_parent) {
-        m_pos = m_parent->matrixRotate() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
+        m_pos = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
         m_pos += m_parent->_orientation()->position();
 
     } else {

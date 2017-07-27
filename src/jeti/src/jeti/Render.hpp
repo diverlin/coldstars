@@ -55,9 +55,9 @@ public:
     ~Renderer();
 
     float scale() const { return m_scale; }
-    glm::ivec2 size() const { return glm::ivec2(m_w, m_h); }
-    int width() const { return m_w; }
-    int height() const { return m_h; }
+    const glm::ivec2& size() const { return m_size; }
+    int width() const { return m_size.x; }
+    int height() const { return m_size.y; }
 
     void applyScale(float);
     void increaseLightPos();
@@ -126,8 +126,7 @@ private:
     bool m_initialized = false;
     bool m_drawAxis = true;
     float m_scale = 1.0f;
-    int m_w = 0;
-    int m_h = 0;
+    glm::ivec2 m_size;
 
     Mesh* m_meshQuad = nullptr;
     Mesh* m_meshAxis = nullptr;

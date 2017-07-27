@@ -154,8 +154,8 @@ private:
 
     void __clear();
 
-    bool __isObjectOnScreen(const glm::vec3& center);
-    bool __isObjectOnScreen2(const glm::vec3& center);
+    bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
+    bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
 
     jeti::Renderer& m_render;
     jeti::Camera& m_camera;
@@ -170,7 +170,7 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
 
 bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect);
 bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect);
-bool isObjectOnScreen(const glm::vec3&, const glm::ivec2&);
+bool isObjectOnScreen(const glm::vec3&, const glm::vec3&, const glm::ivec2&, float);
 
 } // namespace view
 

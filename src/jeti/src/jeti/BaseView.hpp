@@ -88,6 +88,7 @@ public:
 protected:
     ceti::model::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }
+    const glm::mat4& matrixScale() const { return m_matrixScale; }
 
     void _setTransparency(float alpha)  { m_color.a = alpha; }
 
