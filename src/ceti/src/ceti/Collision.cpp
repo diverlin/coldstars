@@ -63,12 +63,13 @@ bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, 
 
 bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
 {
-    float dist = meti::distance(observer_pos, p);
-    if (dist < radius) {
-        return true;
-    } else {
-        return false;
-    }
+    return true;
+//    float dist = meti::distance(observer_pos, p);
+//    if (dist < radius) {
+//        return true;
+//    } else {
+//        return false;
+//    }
 }
 
 bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius)
