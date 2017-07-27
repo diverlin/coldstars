@@ -77,6 +77,20 @@ void Renderer::update() {
 //    m_light.position.y = R*cos(m_t);
 }
 
+glm::vec3
+Renderer::toWorldCoord(const glm::vec3& screen_coord) {
+    glm::vec3 world_coord(m_camera->position());
+
+    world_coord.x -= m_w/2;
+    world_coord.y -= m_h/2;
+
+    world_coord += screen_coord;
+
+    world_coord *= scale();
+
+    return world_coord;
+}
+
 void Renderer::init(Camera* camera, int w, int h)
 {
     if (m_initialized)
