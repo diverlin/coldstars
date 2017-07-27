@@ -104,13 +104,13 @@ int main()
 
     UserInput& userinput = UserInput::get();
     UserInputInSpace& inputs_manager = client::global::get().inputsManager();
-    jeti::Camera& camera = client::global::get().camera();
+    jeti::Renderer& render = client::global::get().render();
     jeti::Screen& screen = client::global::get().screen();
 
     Player* player = createPlayer();
 
     control::World world;
-    view::StarSystem viewer(camera);
+    view::StarSystem viewer(render);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);

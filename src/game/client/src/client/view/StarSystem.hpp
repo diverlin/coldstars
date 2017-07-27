@@ -83,7 +83,7 @@ namespace view {
 class StarSystem
 {
 public:
-    StarSystem(jeti::Camera& camera);
+    StarSystem(jeti::Renderer&);
     ~StarSystem();
 
     void render(control::StarSystem*);
@@ -118,15 +118,15 @@ private:
     void __renderAxis(const jeti::Renderer&) const;
 
     /// visible entities
-    bool __addIfVisible(control::Star*, const jeti::Screen::Data&);
-    bool __addIfVisible(control::Planet*, const jeti::Screen::Data&);
-    bool __addIfVisible(control::Asteroid*, const jeti::Screen::Data& data);
-    void __addIfVisible(control::Container*, const jeti::Screen::Data& data);
-    void __addIfVisible(control::Bullet*, const jeti::Screen::Data& data);
-    void __addIfVisible(control::WormHole*, const jeti::Screen::Data& data);
-    bool __addIfVisible(control::Ship*, const jeti::Screen::Data&);
-    bool __addIfVisible(control::SpaceStation*, const jeti::Screen::Data&);
-    bool __addIfVisible(control::Satellite*, const jeti::Screen::Data&);
+    bool __addIfVisible(control::Star*);
+    bool __addIfVisible(control::Planet*);
+    bool __addIfVisible(control::Asteroid* data);
+    void __addIfVisible(control::Container* data);
+    void __addIfVisible(control::Bullet* data);
+    void __addIfVisible(control::WormHole* data);
+    bool __addIfVisible(control::Ship*);
+    bool __addIfVisible(control::SpaceStation*);
+    bool __addIfVisible(control::Satellite*);
 
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
@@ -154,9 +154,10 @@ private:
 
     void __clear();
 
-    bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
-    bool __isObjectOnScreen2(const glm::vec3& center, const jeti::Screen::Data& screen);
+    bool __isObjectOnScreen(const glm::vec3& center);
+    bool __isObjectOnScreen2(const glm::vec3& center);
 
+    jeti::Renderer& m_render;
     jeti::Camera& m_camera;
 
     Cache m_cache;
@@ -169,7 +170,7 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
 
 bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect);
 bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect);
-bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data&);
+bool isObjectOnScreen(const glm::vec3&, const glm::ivec2&);
 
 } // namespace view
 
