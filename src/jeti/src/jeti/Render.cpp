@@ -78,18 +78,33 @@ void Renderer::update() {
 }
 
 glm::vec3
-Renderer::toWorldCoord(const glm::vec3& screen_coord) {
-    glm::vec3 world_coord(m_camera->position());
+Renderer::toWorldCoord(const glm::vec3& screen_coord) const {
+    glm::vec3 world_coord(screen_coord);
 
     world_coord.x -= m_w/2;
     world_coord.y -= m_h/2;
 
-    world_coord += screen_coord;
+    world_coord += m_camera->position();
 
     world_coord *= scale();
 
     return world_coord;
 }
+
+glm::vec3
+Renderer::toScreenCoord(const glm::vec3& world_coord) const {
+    glm::vec3 screen_coord(world_coord);
+
+    screen_coord -= m_camera->position();
+
+    screen_coord /= scale();
+
+    screen_coord.x += m_w/2;
+    screen_coord.y += m_h/2;
+
+    return screen_coord;
+}
+
 
 void Renderer::init(Camera* camera, int w, int h)
 {

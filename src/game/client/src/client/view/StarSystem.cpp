@@ -260,12 +260,12 @@ bool
 StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 {
     assert(ship);
-//    if (!__isObjectOnScreen(ship->position(), data)) {
-//        return false;
-//    }
-//    if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
-//        return false;
-//    }
+    if (!__isObjectOnScreen(ship->position(), data)) {
+        return false;
+    }
+    if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
+        return false;
+    }
 
     Base* view = m_cache.get(ship->id());
     if (!view) {
@@ -905,10 +905,20 @@ void StarSystem::__renderAxis(const jeti::Renderer& render) const
 bool
 StarSystem::__isObjectOnScreen(const glm::vec3& pos, const jeti::Screen::Data& screen)
 {
-    glm::vec3 pos_sc = screenCoord(pos, m_camera, screen);
-    return isObjectOnScreen(pos_sc, screen);
+    const auto& render = client::global::get().render();
+    glm::vec3 position_screen_coord = render.toScreenCoord(pos);
+    return isObjectOnScreen(position_screen_coord, screen);
 }
 
+bool
+StarSystem::__isObjectOnScreen2(const glm::vec3& pos, const jeti::Screen::Data& screen)
+{
+    const auto& render = client::global::get().render();
+    glm::vec3 position_screen_coord = render.toScreenCoord(pos);
+    bool result = isObjectOnScreen(position_screen_coord, screen);
+    std::cout<<"screen coord"<<ceti::to_string(position_screen_coord)<<" visible="<<result<<std::endl;
+    return result;
+}
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
@@ -991,26 +1001,6 @@ bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
 bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data& data)
 {
     return isPointInRect(pos_sc, data.rect);
-}
-
-glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera, const jeti::Screen::Data& screen) {
-    // be carifull modyfing this, here is the MAGIC
-    glm::vec3 pos_sc(pos_wc - camera.position());
-//    std::cout<<"scale="<<screen.scale<<std::endl;
-//    std::cout<<"cam_pos: "<<camera.position().x<<" "<<camera.position().y<<std::endl;
-//    std::cout<<"pos_wc: "<<pos_wc.x<<" "<<pos_wc.y<<std::endl;
-
-    // first try
-    pos_sc /= screen.scale;
-
-    pos_sc.x += screen.rect.width()/2 * screen.scale;
-    pos_sc.y += screen.rect.height()/2 * screen.scale;
-
-    // repeating is needed, but why?
-    pos_sc /= screen.scale;
-
-//    std::cout<<"pos_sc: "<<pos_sc.x<<" "<<pos_sc.y<<std::endl;
-    return pos_sc;
 }
 
 } // namespace view

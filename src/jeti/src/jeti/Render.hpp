@@ -115,7 +115,9 @@ public:
 
     void update();
 
-    glm::vec3 toWorldCoord(const glm::vec3&);
+    glm::vec3 toWorldCoord(const glm::vec3&) const;
+    glm::vec3 toScreenCoord(const glm::vec3&) const;
+    Camera* camera() const { return m_camera; }
 
 private:
     float m_t = 0.0f;

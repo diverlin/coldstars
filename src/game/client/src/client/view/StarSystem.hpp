@@ -155,6 +155,8 @@ private:
     void __clear();
 
     bool __isObjectOnScreen(const glm::vec3& center, const jeti::Screen::Data& screen);
+    bool __isObjectOnScreen2(const glm::vec3& center, const jeti::Screen::Data& screen);
+
     jeti::Camera& m_camera;
 
     Cache m_cache;
@@ -168,8 +170,6 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc);
 bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect);
 bool isPointInRect(const glm::vec3& p, const ceti::Rect& rect);
 bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data&);
-
-glm::vec3 screenCoord(const glm::vec3& pos_wc, const jeti::Camera& camera, const jeti::Screen::Data& screen);
 
 } // namespace view
 

@@ -16,7 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <jeti/Screen.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Camera.hpp>
 
 #include <core/builder/spaceobject/ALL>
 #include <core/spaceobject/ALL>
@@ -41,42 +42,112 @@
 namespace {
 bool epsilonEqual(const glm::vec2& v1, const glm::vec2& v2) {
     float epsilon = 0.0001;
-    EXPECT_TRUE(v1.x-v2.x<epsilon);
-    EXPECT_TRUE(v1.y-v2.y<epsilon);
-    return (v1.x-v2.x<epsilon) && (v1.y-v2.y<epsilon);
+    EXPECT_TRUE(std::fabs(v1.x-v2.x)<epsilon);
+    EXPECT_TRUE(std::fabs(v1.y-v2.y)<epsilon);
+    return (std::fabs(v1.x-v2.x)<epsilon) && (std::fabs(v1.y-v2.y)<epsilon);
 }
 
 bool epsilonEqual(const glm::vec3& v1, const glm::vec3& v2) {
+    std::cout<<"compare="<<ceti::to_string(v1)<<" and "<<ceti::to_string(v2)<<std::endl;
     float epsilon = 0.0001;
-    EXPECT_TRUE(v1.x-v2.x<epsilon);
-    EXPECT_TRUE(v1.y-v2.y<epsilon);
-    return (v1.x-v2.x<epsilon) && (v1.y-v2.y<epsilon);
+    EXPECT_TRUE(std::fabs(v1.x-v2.x)<epsilon);
+    EXPECT_TRUE(std::fabs(v1.y-v2.y)<epsilon);
+    return (std::fabs(v1.x-v2.x)<epsilon) && (std::fabs(v1.y-v2.y)<epsilon);
 }
 
 } // namespace
 
-TEST(screen, coords)
+TEST(coords, screen2word)
 {
     client::global::get().init();
-    jeti::Screen& screen = client::global::get().screen();
-    glm::vec2 screen_coord = screen.position();
-    glm::vec2 zero(0.0f, 0.0f);
-    EXPECT_TRUE(epsilonEqual(screen_coord, zero));
+    jeti::Renderer& render = client::global::get().render();
+    int w = render.width();
+    int h = render.height();
+    assert(w>0);
+    assert(h>0);
 
-//    {
-//        glm::vec2 mouse_pos(200, 200);
-//        glm::vec3 world_coord = screen.toWorldCoord(mouse_pos);
-//        EXPECT_TRUE(epsilonEqual(world_coord, glm::vec3(mouse_pos, 0.0f)));
-//    }
 
-//    {
-//        glm::vec2 mouse_pos(200, 200);
-//        screen.setPosition(glm::vec2(400, 400));
-//        glm::vec3 world_coord = screen.toWorldCoord(mouse_pos);
-//        std::cout<<ceti::to_string(world_coord)<<std::endl;
-//        EXPECT_TRUE(epsilonEqual(world_coord, glm::vec3(600.f,600.f, 0.0f)));
-//    }
+    std::vector<float> scales;
+    scales.push_back(0.1f);
+    scales.push_back(1.0f);
+    scales.push_back(2.0f);
+    scales.push_back(10.0f);
 
+    for (const float scale: scales) {
+        render.camera()->setPosition(glm::vec3(0));
+        render.applyScale(scale);
+
+        glm::vec3 screen_coord = render.camera()->position();
+        glm::vec3 zero(0,0,0);
+
+        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
+
+        {
+            glm::vec3 mouse_pos(w/2,h/2,0);
+            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+            EXPECT_TRUE(epsilonEqual(zero, world_coord));
+        }
+
+        {
+            glm::vec3 mouse_pos(w,h,0);
+            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+            EXPECT_TRUE(epsilonEqual(glm::vec3(scale*w/2,scale*h/2,0), world_coord));
+        }
+
+        {
+            glm::vec3 mouse_pos(w,h,0);
+            render.camera()->setPosition(glm::vec3(-w/2,-h/2,0));
+            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+            EXPECT_TRUE(epsilonEqual(zero, world_coord));
+        }
+    }
+}
+
+
+TEST(coords, word2screen)
+{
+    client::global::get().init();
+    jeti::Renderer& render = client::global::get().render();
+    int w = render.width();
+    int h = render.height();
+    assert(w>0);
+    assert(h>0);
+
+
+    std::vector<float> scales;
+    scales.push_back(0.1f);
+    scales.push_back(1.0f);
+    scales.push_back(2.0f);
+    scales.push_back(10.0f);
+
+    for (const float scale: scales) {
+        render.camera()->setPosition(glm::vec3(0));
+        render.applyScale(scale);
+
+        glm::vec3 screen_coord = render.camera()->position();
+        glm::vec3 zero(0,0,0);
+
+        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
+
+        {
+            glm::vec3 world_coord(zero);
+            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            EXPECT_TRUE(epsilonEqual(glm::vec3(w/2,h/2,0), screen_coord));
+        }
+
+        {
+            glm::vec3 world_coord(w/2*scale,h/2*scale,0);
+            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
+        }
+
+        {
+            glm::vec3 world_coord(zero);
+            render.camera()->setPosition(glm::vec3(-w/2*scale,-h/2*scale,0));
+            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
+        }
+    }
 }
 
 TEST(view, visibility)
