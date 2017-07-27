@@ -38,7 +38,7 @@ Turrel::Turrel(slot::Item* slot, control::Turrel* control)
     m_slot = slot;
 
     setOrientationModel(control->model()); // ??
-    glm::vec3 pos(meti::getRandInt(-50, 50), meti::getRandInt(-50, 50), 0);
+    glm::vec3 pos(meti::getRandFloat(-0.7f, 0.7f), meti::getRandFloat(-0.7f, 0.7f), 0);
     control->setPosition(pos);
 //    control->setDirection(glm::normalize(pos));
 }

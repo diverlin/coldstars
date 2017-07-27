@@ -41,6 +41,7 @@ Ship::Ship(control::Ship* ship)
     setOrientationModel(ship->model()); // ??
 
     for(slot::Item* slot: ship->weaponSlots()) {
+        // don't create resources, try to get existed from cache
         control::Turrel* turrel_control = builder::Turrel().gen();
         view::Turrel* turrel = new view::Turrel(slot, turrel_control);
 

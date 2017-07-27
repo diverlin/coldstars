@@ -192,7 +192,7 @@ bool
 StarSystem::__addIfVisible(control::Star* star)
 {
     assert(star);
-    if (!isObjectOnScreen(star->position(), m_render.size())) {
+    if (!__isObjectOnScreen(star->position(), star->size())) {
         return false;
     }
 
@@ -213,7 +213,7 @@ bool
 StarSystem::__addIfVisible(control::Planet* planet)
 {
     assert(planet);
-    if (!__isObjectOnScreen(planet->position())) {
+    if (!__isObjectOnScreen(planet->position(), planet->size())) {
         return false;
     }
 
@@ -234,7 +234,7 @@ bool
 StarSystem::__addIfVisible(control::Asteroid* asteroid)
 {
     assert(asteroid);
-    if (!__isObjectOnScreen(asteroid->position())) {
+    if (!__isObjectOnScreen(asteroid->position(), asteroid->size())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(asteroid->position(), m_camera.position(), m_camera.radius())) {
@@ -259,7 +259,7 @@ bool
 StarSystem::__addIfVisible(control::Ship* ship)
 {
     assert(ship);
-    if (!__isObjectOnScreen(ship->position())) {
+    if (!__isObjectOnScreen(ship->position(), ship->size())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
@@ -283,7 +283,7 @@ bool
 StarSystem::__addIfVisible(control::SpaceStation* spacestation)
 {
     assert(spacestation);
-    if (!__isObjectOnScreen(spacestation->position())) {
+    if (!__isObjectOnScreen(spacestation->position(), spacestation->size())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(spacestation->position(), m_camera.position(), m_camera.radius())) {
@@ -306,7 +306,7 @@ bool
 StarSystem::__addIfVisible(control::Satellite* satellite)
 {
     assert(satellite);
-    if (!__isObjectOnScreen(satellite->position())) {
+    if (!__isObjectOnScreen(satellite->position(), satellite->size())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(satellite->position(), m_camera.position(), m_camera.radius())) {
@@ -902,17 +902,17 @@ void StarSystem::__renderAxis(const jeti::Renderer& render) const
 }         
 
 bool
-StarSystem::__isObjectOnScreen(const glm::vec3& pos)
+StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
 {
     glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    return isObjectOnScreen(position_screen_coord, m_render.size());
+    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
 }
 
 bool
-StarSystem::__isObjectOnScreen2(const glm::vec3& pos)
+StarSystem::__isObjectOnScreen2(const glm::vec3& pos, const glm::vec3& size)
 {
     glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    bool result = isObjectOnScreen(position_screen_coord, m_render.size());
+    bool result = isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
     std::cout<<"screen coord"<<ceti::to_string(position_screen_coord)<<" visible="<<result<<std::endl;
     return result;
 }
@@ -995,18 +995,21 @@ bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
     return true;
 }
 
-bool isObjectOnScreen(const glm::vec3& screen_coord, const glm::ivec2& screen_size)
+bool isObjectOnScreen(const glm::vec3& screen_coord, const glm::vec3& object_size, const glm::ivec2& screen_size, float scale)
 {
-    if (screen_coord.x < 0) {
+    float scaled_half_w = 0.5f*object_size.x*scale;
+    float scaled_half_h = 0.5f*object_size.y*scale;
+
+    if (screen_coord.x < -scaled_half_w) {
         return false;
     }
-    if (screen_coord.x > screen_size.x) {
+    if (screen_coord.x > screen_size.x + scaled_half_w) {
         return false;
     }
-    if (screen_coord.y < 0) {
+    if (screen_coord.y < -scaled_half_h) {
         return false;
     }
-    if (screen_coord.y > screen_size.y) {
+    if (screen_coord.y > screen_size.y + scaled_half_h) {
         return false;
     }
 

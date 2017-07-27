@@ -81,8 +81,8 @@ glm::vec3
 Renderer::toWorldCoord(const glm::vec3& screen_coord) const {
     glm::vec3 world_coord(screen_coord);
 
-    world_coord.x -= m_w/2;
-    world_coord.y -= m_h/2;
+    world_coord.x -= m_size.x/2;
+    world_coord.y -= m_size.y/2;
 
     world_coord += m_camera->position();
 
@@ -99,8 +99,8 @@ Renderer::toScreenCoord(const glm::vec3& world_coord) const {
 
     screen_coord /= scale();
 
-    screen_coord.x += m_w/2;
-    screen_coord.y += m_h/2;
+    screen_coord.x += m_size.x/2;
+    screen_coord.y += m_size.y/2;
 
     return screen_coord;
 }
@@ -119,8 +119,8 @@ void Renderer::init(Camera* camera, int w, int h)
 
     __initAxisMesh();
 
-    m_w = w;
-    m_h = h;
+    m_size.x = w;
+    m_size.y = h;
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -220,7 +220,7 @@ void Renderer::__initPostEffects()
     }
         
     m_bloom.Create(m_shaders.blur, m_shaders.extractbright, m_shaders.combine);
-    __resizePostEffects(m_w, m_h);
+    __resizePostEffects(m_size.x, m_size.y);
 }
  
   
@@ -262,7 +262,7 @@ void Renderer::applyScale(float scale) {
 
 void Renderer::setOrthogonalProjection()
 {        
-    m_projectionMatrix = glm::ortho(-m_w/2 * m_scale, m_w/2 * m_scale, -m_h/2 * m_scale, m_h/2 * m_scale, ZNEAR, ZFAR);
+    m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 

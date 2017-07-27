@@ -336,20 +336,20 @@ genShip()
     descriptor::Ship* descr = new descriptor::Ship;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
-        int length = meti::getRandInt(100);
+        float length = meti::getRandFloat(-0.8f, 0.8f);
         float angle = meti::getRandAngle();
         descr->addTurrelPoint(meti::genVec3f(length, angle));
     }
-    for(int i=0; i<slot_drive_num; ++i) {
-        int length = meti::getRandInt(100);
-        float angle = meti::getRandAngle();
-        descr->addDrivePoint(meti::genVec3f(length, angle));
-    }
-    for(int i=0; i<slot_protector_num; ++i) {
-        int length = meti::getRandInt(100);
-        float angle = meti::getRandAngle();
-        descr->addProtectorPoint(meti::genVec3f(length, angle));
-    }
+//    for(int i=0; i<slot_drive_num; ++i) {
+//        int length = meti::getRandInt(100);
+//        float angle = meti::getRandAngle();
+//        descr->addDrivePoint(meti::genVec3f(length, angle));
+//    }
+//    for(int i=0; i<slot_protector_num; ++i) {
+//        int length = meti::getRandInt(100);
+//        float angle = meti::getRandAngle();
+//        descr->addProtectorPoint(meti::genVec3f(length, angle));
+//    }
     descr->setSize(size_id);
 
     descr->setSpace(space);
