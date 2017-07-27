@@ -69,9 +69,10 @@ std::string join(size_t int1, size_t int2) {
 
 namespace view {
 
-StarSystem::StarSystem(jeti::Camera& camera)
+StarSystem::StarSystem(jeti::Renderer& render)
     :
-      m_camera(camera)
+      m_render(render)
+    , m_camera(*render.camera())
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
 {}
 
@@ -83,35 +84,33 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 {
     __clear();
 
-    const jeti::Screen::Data& screenData = client::global::get().screen().data();
-
     for(auto star: starsystem->stars()) {
-        __addIfVisible(star, screenData);
+        __addIfVisible(star);
     }
     for(auto planet: starsystem->planets()) {
-        __addIfVisible(planet, screenData);
+        __addIfVisible(planet);
     }
 //    for(auto wormHole: starsystem->wormHoles()) {
-//        __addIfVisible(wormhole, screenData);
+//        __addIfVisible(wormhole);
 //    }
     for(auto asteroid: starsystem->asteroids()) {
-        __addIfVisible(asteroid, screenData);
+        __addIfVisible(asteroid);
     }
     for(auto container: starsystem->containers()) {
-        __addIfVisible(container, screenData);
+        __addIfVisible(container);
     }
 
     for(auto spacestation: starsystem->spacestations()) {
-        __addIfVisible(spacestation, screenData);
+        __addIfVisible(spacestation);
     }
     for(auto ship: starsystem->ships()) {
-        __addIfVisible(ship, screenData);
+        __addIfVisible(ship);
     }
     for(auto satellite: starsystem->satellites()) {
-        __addIfVisible(satellite, screenData);
+        __addIfVisible(satellite);
     }
 //    for(auto bullet: starsystem->bullets()) {
-//        __addIfVisible(bullet, screenData);
+//        __addIfVisible(bullet);
 //    }
 
 //    std::cout<<"ship="<<ceti::to_string(starsystem->ships()[0]->position())<<std::endl;
@@ -145,9 +144,9 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     {
         // update ui
         auto info = m_guiDemo->infoCamera();
-        info->setLookFrom(ceti::to_string(m_camera.position()));
-        info->setLookAt(ceti::to_string(m_camera.target()));
-        info->setUp(ceti::to_string(m_camera.up()));
+        info->setLookFrom(ceti::to_string(m_render.camera()->position()));
+        info->setLookAt(ceti::to_string(m_render.camera()->target()));
+        info->setUp(ceti::to_string(m_render.camera()->up()));
     }
 
     {
@@ -190,10 +189,10 @@ void StarSystem::__clear()
 }
 
 bool
-StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Star* star)
 {
     assert(star);
-    if (!isObjectOnScreen(star->position(), data)) {
+    if (!isObjectOnScreen(star->position(), m_render.size())) {
         return false;
     }
 
@@ -211,10 +210,10 @@ StarSystem::__addIfVisible(control::Star* star, const jeti::Screen::Data& data)
 }
 
 bool
-StarSystem::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Planet* planet)
 {
     assert(planet);
-    if (!__isObjectOnScreen(planet->position(), data)) {
+    if (!__isObjectOnScreen(planet->position())) {
         return false;
     }
 
@@ -232,10 +231,10 @@ StarSystem::__addIfVisible(control::Planet* planet, const jeti::Screen::Data& da
 }
 
 bool
-StarSystem::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Asteroid* asteroid)
 {
     assert(asteroid);
-    if (!__isObjectOnScreen(asteroid->position(), data)) {
+    if (!__isObjectOnScreen(asteroid->position())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(asteroid->position(), m_camera.position(), m_camera.radius())) {
@@ -257,10 +256,10 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid, const jeti::Screen::Data
 
 
 bool
-StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Ship* ship)
 {
     assert(ship);
-    if (!__isObjectOnScreen(ship->position(), data)) {
+    if (!__isObjectOnScreen(ship->position())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
@@ -281,10 +280,10 @@ StarSystem::__addIfVisible(control::Ship* ship, const jeti::Screen::Data& data)
 }
 
 bool
-StarSystem::__addIfVisible(control::SpaceStation* spacestation, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::SpaceStation* spacestation)
 {
     assert(spacestation);
-    if (!__isObjectOnScreen(spacestation->position(), data)) {
+    if (!__isObjectOnScreen(spacestation->position())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(spacestation->position(), m_camera.position(), m_camera.radius())) {
@@ -304,10 +303,10 @@ StarSystem::__addIfVisible(control::SpaceStation* spacestation, const jeti::Scre
 }
 
 bool
-StarSystem::__addIfVisible(control::Satellite* satellite, const jeti::Screen::Data& data)
+StarSystem::__addIfVisible(control::Satellite* satellite)
 {
     assert(satellite);
-    if (!__isObjectOnScreen(satellite->position(), data)) {
+    if (!__isObjectOnScreen(satellite->position())) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(satellite->position(), m_camera.position(), m_camera.radius())) {
@@ -332,7 +331,7 @@ void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* vie
     view->setAnimationRotation(animation);
 }
 
-void StarSystem::__addIfVisible(control::Container* container, const jeti::Screen::Data& data)
+void StarSystem::__addIfVisible(control::Container* container)
 {
     assert(false);
 //    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
@@ -342,7 +341,7 @@ void StarSystem::__addIfVisible(control::Container* container, const jeti::Scree
 //    }
 }
 
-void StarSystem::__addIfVisible(control::Bullet* bullet, const jeti::Screen::Data& data)
+void StarSystem::__addIfVisible(control::Bullet* bullet)
 {
     assert(false);
 //    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
@@ -903,19 +902,17 @@ void StarSystem::__renderAxis(const jeti::Renderer& render) const
 }         
 
 bool
-StarSystem::__isObjectOnScreen(const glm::vec3& pos, const jeti::Screen::Data& screen)
+StarSystem::__isObjectOnScreen(const glm::vec3& pos)
 {
-    const auto& render = client::global::get().render();
-    glm::vec3 position_screen_coord = render.toScreenCoord(pos);
-    return isObjectOnScreen(position_screen_coord, screen);
+    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
+    return isObjectOnScreen(position_screen_coord, m_render.size());
 }
 
 bool
-StarSystem::__isObjectOnScreen2(const glm::vec3& pos, const jeti::Screen::Data& screen)
+StarSystem::__isObjectOnScreen2(const glm::vec3& pos)
 {
-    const auto& render = client::global::get().render();
-    glm::vec3 position_screen_coord = render.toScreenCoord(pos);
-    bool result = isObjectOnScreen(position_screen_coord, screen);
+    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
+    bool result = isObjectOnScreen(position_screen_coord, m_render.size());
     std::cout<<"screen coord"<<ceti::to_string(position_screen_coord)<<" visible="<<result<<std::endl;
     return result;
 }
@@ -998,9 +995,22 @@ bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
     return true;
 }
 
-bool isObjectOnScreen(const glm::vec3& pos_sc, const jeti::Screen::Data& data)
+bool isObjectOnScreen(const glm::vec3& screen_coord, const glm::ivec2& screen_size)
 {
-    return isPointInRect(pos_sc, data.rect);
+    if (screen_coord.x < 0) {
+        return false;
+    }
+    if (screen_coord.x > screen_size.x) {
+        return false;
+    }
+    if (screen_coord.y < 0) {
+        return false;
+    }
+    if (screen_coord.y > screen_size.y) {
+        return false;
+    }
+
+    return true;
 }
 
 } // namespace view

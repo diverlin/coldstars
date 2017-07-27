@@ -55,6 +55,7 @@ public:
     ~Renderer();
 
     float scale() const { return m_scale; }
+    glm::ivec2 size() const { return glm::ivec2(m_w, m_h); }
     int width() const { return m_w; }
     int height() const { return m_h; }
 

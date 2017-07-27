@@ -87,7 +87,7 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
 
 void StarSystem::genLife(control::StarSystem* starsystem)
 {
-    __createShips(starsystem, 200);
+    __createShips(starsystem, 10);
 }
 
 void StarSystem::__createInternals(control::StarSystem* starsystem, descriptor::StarSystem* descr)
