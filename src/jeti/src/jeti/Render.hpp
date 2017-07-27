@@ -87,11 +87,11 @@ public:
 
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
 
-    void drawMesh                (const Mesh&, const glm::mat4&) const;
-    void drawMesh                (const Mesh&, const control::Material&, const glm::mat4&) const;
-    void drawMeshLight           (const Mesh&, const control::Material&, const glm::mat4&) const;
-    void drawMeshLightNormalMap  (const Mesh&, const control::Material&, const glm::mat4&) const;
-    void drawMeshMultiTextured   (const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawMesh(const Mesh&, const glm::mat4&) const;
+    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawMeshMultiTextured(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawQuad(const control::Material&, const glm::mat4&) const;
     void drawQuad(const control::Material&, const ceti::Box2D&) const;
@@ -114,6 +114,8 @@ public:
     void drawStarField(int, int, float, float) const;
 
     void update();
+
+    glm::vec3 toWorldCoord(const glm::vec3&);
 
 private:
     float m_t = 0.0f;
