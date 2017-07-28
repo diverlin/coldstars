@@ -133,7 +133,7 @@ Ship::__createInternals(control::Ship* ship, descriptor::Ship* descr)
     ship->model()->setLifeData(data_life);
 
     // orientation
-    ship->model()->setSize(descr->size());
+    ship->setSize(descr->size());
     ship->model()->setDirection(descr->direction());
 
 //    assert(false);

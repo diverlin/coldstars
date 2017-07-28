@@ -62,7 +62,7 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
     planet->model()->setLifeData(life_data);
 
     /// Orientation
-    planet->model()->setSize(descr->size());
+    planet->setSize(descr->size());
     planet->model()->setDirection(descr->direction());
 
     control::Kosmoport* kosmoport = builder::Kosmoport::gen();

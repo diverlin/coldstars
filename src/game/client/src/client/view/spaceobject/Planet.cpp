@@ -33,7 +33,7 @@ Planet::Planet(control::Planet* planet)
       Base(planet)
     , m_planet(planet)
 {
-    setOrientationModel(planet->model());
+    setOrientation(planet);
 }
 
 /* virtual */
@@ -61,6 +61,9 @@ Planet::~Planet()
 void Planet::draw(const jeti::Renderer& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
+
+    _drawCollisionRadius(render);
+    _drawAxis(render);
 
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());

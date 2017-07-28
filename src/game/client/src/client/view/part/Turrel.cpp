@@ -31,15 +31,15 @@
 
 namespace view {
 
-Turrel::Turrel(slot::Item* slot, control::Turrel* control)
+Turrel::Turrel(slot::Item* slot, control::Turrel* turrel)
     :
-      view::Base(control)
+      view::Base(turrel)
 {
     m_slot = slot;
 
-    setOrientationModel(control->model()); // ??
+    setOrientation(turrel);
     glm::vec3 pos(meti::getRandFloat(-0.7f, 0.7f), meti::getRandFloat(-0.7f, 0.7f), 0);
-    control->setPosition(pos);
+    turrel->setPosition(pos);
 //    control->setDirection(glm::normalize(pos));
 }
 

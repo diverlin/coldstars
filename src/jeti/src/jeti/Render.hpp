@@ -19,14 +19,16 @@
 
 #pragma once
 
-#include <ceti/NonCopyable.hpp>
-#include <MyGl.hpp>
+#include <jeti/MyGl.hpp>
+#include <jeti/Fbo.hpp>
+#include <jeti/Bloom.hpp>
+#include <jeti/Shaders.hpp>
+#include <jeti/Light.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Material.hpp>
 
+#include <ceti/NonCopyable.hpp>
 #include <ceti/Box2D.hpp>           // depr
-#include <Fbo.hpp>
-#include <Bloom.hpp>
-#include <Shaders.hpp>
-#include <Light.hpp>
 
 #include <string>
 #include <chrono>
@@ -70,6 +72,9 @@ public:
     void applyScale(float);
     void increaseScale();
     void decreaseScale();
+
+    bool showAxis() const { return m_drawAxis; }
+    bool showCollisionRadius() const { return m_drawCollisionRadius; }
 
     void increaseLightPos();
     void decreaseLightPos();
@@ -141,6 +146,7 @@ private:
 
     bool m_initialized = false;
     bool m_drawAxis = true;
+    bool m_drawCollisionRadius = true;
     float m_scale = SCALE_INIT;
     float m_deltaScale = SCALE_STEP;
 
@@ -148,6 +154,7 @@ private:
 
     Mesh* m_meshQuad = nullptr;
     Mesh* m_meshAxis = nullptr;
+    control::Material* m_material = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;

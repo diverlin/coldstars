@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <ceti/points.hpp>
+//#include <ceti/points.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -78,32 +78,16 @@ public:
     Orientation(model::Orientation* model);
     virtual ~Orientation();
 
-//    void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
-//    void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
+    void setPosition(float x, float y, float z);
+    void setPosition(const meti::vec3& position);
+    void setPosition(const Position& position);
 
-    void setPosition(float x, float y, float z)    { model()->setPosition(meti::vec3(x, y, z)); m_isUpdated = false; }
-    void setPosition(const meti::vec3& position)   { model()->setPosition(position); m_isUpdated = false; }
-
-    void setPosition(const Position& position)   {
-        model()->setPosition(position.center);
-        model()->setDirection(position.direction);
-        m_isUpdated = false;
-    }
-
-    void setSize(float x, float y, float z) { model()->setSize(meti::vec3(x, y, z)); m_isUpdated = false; }
-    void setSize(const meti::vec3& size) { model()->setSize(size); m_isUpdated = false; }
+    void setSize(float x, float y, float z);
+    void setSize(const meti::vec3& size);
 
     const meti::vec3& direction() const { return model()->direction(); }
     const meti::vec3& position() const { return model()->position(); }
     const meti::vec3& size() const { return model()->size(); }
-
-    [[deprecated("depr")]]
-    //glm::vec3* pPosition() { return &model()->position(); }
-//    [[deprecated("depr")]]
-//    const glm::vec3* pParentPosition() { return &m_parentPosition; }
-
-//    [[deprecated("depr")]]
-//    ceti::Points& points()          { return m_points; }
 
     float collisionRadius() const  { return m_collisionRadius; }
 
@@ -119,10 +103,9 @@ private:
     model::Orientation* m_model_orientation = nullptr;
 
     bool m_isUpdated = false;
-    float m_collisionRadius;
-//    glm::vec3 m_parentPosition;
+    float m_collisionRadius = 0;
 
-    //ceti::Points m_points;
+    void __updateCollisionRadius();
 };
 
 } // namespace control
