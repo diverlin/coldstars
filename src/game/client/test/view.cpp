@@ -124,15 +124,15 @@ TEST(view, asteroid)
 
 TEST(view, objectOnScreen)
 {
-    jeti::Camera camera;
-    camera.setPosition(glm::vec3(0,0,0));
+//    jeti::Camera camera;
+//    camera.setPosition(glm::vec3(0,0,0));
 
-    glm::vec3 pos_wc(1000, 1000, 0);
-    jeti::Screen::Data screen;
-    screen.resize(1000, 1000);
+//    glm::vec3 pos_wc(1000, 1000, 0);
+//    jeti::Screen::Data screen;
+//    screen.resize(1000, 1000);
 
-    glm::vec3 pos_sc;
-    float scale = 1.0f;
+//    glm::vec3 pos_sc;
+//    float scale = 1.0f;
 
 //    pos_sc = view::screenCoord(pos_wc, camera, screen.rect);
 //    EXPECT_EQ(glm::vec3(1000, 1000, 0), pos_sc);

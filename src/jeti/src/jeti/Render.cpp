@@ -18,16 +18,13 @@
 
 
 #include "Render.hpp"
-#include <Screen.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#include <jeti/Screen.hpp>
+#include <jeti/Material.hpp> // to be removed
+#include <jeti/Shaders.hpp>
+#include <jeti/ShaderLoader.hpp>
 
-#include <Material.hpp> // to be removed
-#include <Shaders.hpp>
-#include <ShaderLoader.hpp>
-
-#include <Mesh.hpp>
-#include <Camera.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Camera.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -38,6 +35,9 @@
 #include <glm/gtx/transform.hpp>
 #include <meti/QuaternionUtils.hpp>
 // for ugly
+
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace jeti {
 
@@ -89,6 +89,7 @@ void Renderer::decreaseScale()
 //}
 
 void Renderer::update() {
+    __updateFps();
 //    m_t += 0.01f;
 //    float R = 500;
 //    m_light.position.x = R*sin(m_t);
@@ -128,6 +129,8 @@ void Renderer::init(Camera* camera, int w, int h)
 {
     if (m_initialized)
         return;
+
+    m_lastTime = std::chrono::steady_clock::now();
 
     m_camera = camera;
 
@@ -982,6 +985,19 @@ void drawInfoIn2Column(
     //glPopMatrix();
 
 */
+}
+
+void Renderer::__updateFps()
+{
+    const auto now_time = std::chrono::steady_clock::now();
+    float seconds_diff = std::chrono::duration_cast<std::chrono::seconds>(now_time-m_lastTime).count();
+    if (seconds_diff > 1.0) {
+        m_fps = m_framesCounter;
+        m_framesCounter = 0;
+        m_lastTime = now_time;
+    } else {
+        m_framesCounter++;
+    }
 }
 
 } // namespace jeti

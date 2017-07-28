@@ -41,40 +41,9 @@ void Screen::init()
     int fps_limit  = config.fps_limit;
 
     std::string title("coldstars");
-
-    m_autoScroll = false;
     
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
-
-    m_data.resize(width, height);
 }
-
-void Screen::__drawFps()
-{    
-    float now_time = elapsedSeconds();
-    if ((now_time - m_lastTime) > 1.0) {
-        m_fps = m_framesCounter;
-        m_framesCounter = 0;
-        m_lastTime = now_time;
-    } else {
-        m_framesCounter++;
-    }
-}
-
-
-
-void Screen::resize(int width, int height)
-{
-    //m_Render.SetOrthogonalProjection(width, height);
-    
-    //wrResizeSpecific(width, height);
-    
-    //if (core::global::get().config().MODERN_EFFECTS == true)
-    //{
-    //ResizePostEffects(width, height);
-    //}
-}
-
 
 //void Screen::updateInSpace()
 //{
@@ -104,7 +73,6 @@ void Screen::draw()
     //drawTexturedRect(texOb, rect2, -2.0);
     //glPopMatrix();
     
-    __drawFps();
     wrDrawSpecific();
 }
 

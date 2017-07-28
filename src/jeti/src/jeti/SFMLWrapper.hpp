@@ -32,8 +32,8 @@ public:
     void drawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color);
 
 private:
-    int m_bpp;
-    bool m_vsync;
+    int m_bpp = 32;
+    bool m_vsync = false;
 
     //freetype::font_data ftfont;
 
