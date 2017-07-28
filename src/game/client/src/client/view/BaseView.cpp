@@ -57,13 +57,13 @@ void Base::_drawDecors(const jeti::Renderer& render) const {
 }
 
 void Base::_drawCollisionRadius(const jeti::Renderer& render) const {
-    if (render.showCollisionRadius()) {
+    if (render.allowDrawCollisionRadius()) {
         render.drawCollisionRadius(_calcCollisionModelMatrix());
     }
 }
 
 void Base::_drawAxis(const jeti::Renderer& render) const {
-    if (render.showAxis()) {
+    if (render.allowDrawAxis()) {
         render.drawAxis(_modelMatrix());
     }
 }

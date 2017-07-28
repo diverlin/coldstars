@@ -68,7 +68,6 @@ void Satellite::update(int time)
             new_pos.y = parent()->position().y + m_Orbit.position().y;
             new_pos.z = parent()->position().z;
             setPosition(new_pos);
-            updateOrientation();
         //}
         //else
         //{

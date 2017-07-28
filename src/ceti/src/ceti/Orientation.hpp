@@ -91,9 +91,6 @@ public:
 
     float collisionRadius() const  { return m_collisionRadius; }
 
-    [[deprecated("depr")]]
-    void updateOrientation();
-
     void setDirection(const meti::vec3& direction)   { model()->setDirection(meti::normalize(direction)); m_isUpdated = false; }
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 

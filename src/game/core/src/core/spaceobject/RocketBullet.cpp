@@ -85,9 +85,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
         
-    if (time > 0) {
-        updateOrientation();
-            
+    if (time > 0) {           
         if (model()->speed() < model()->bulletData().speed_max) {
             model()->increaseSpeed(model()->bulletData().d_speed);
         } 

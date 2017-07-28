@@ -73,8 +73,11 @@ public:
     void increaseScale();
     void decreaseScale();
 
-    bool showAxis() const { return m_drawAxis; }
-    bool showCollisionRadius() const { return m_drawCollisionRadius; }
+    bool allowDrawAxis() const { return m_allowDrawAxis; }
+    bool allowDrawCollisionRadius() const { return m_allowDrawCollisionRadius; }
+
+    void setAllowDrawAxis(bool allowDrawAxis) { m_allowDrawAxis = allowDrawAxis; }
+    void setAllowDrawCollisionRadius(bool allowDrawCollisionRadius) { m_allowDrawCollisionRadius = allowDrawCollisionRadius; }
 
     void increaseLightPos();
     void decreaseLightPos();
@@ -87,8 +90,6 @@ public:
     void deactivateFbo(int);
 
     void init(Camera*, int, int);
-
-    void showAxis(bool flag) { m_drawAxis = flag; }
 
     void setPerspectiveProjection(float, float);
     void setOrthogonalProjection();
@@ -145,8 +146,10 @@ private:
     std::chrono::steady_clock::time_point m_lastTime;
 
     bool m_initialized = false;
-    bool m_drawAxis = true;
-    bool m_drawCollisionRadius = true;
+
+    bool m_allowDrawAxis = false;
+    bool m_allowDrawCollisionRadius = true;
+
     float m_scale = SCALE_INIT;
     float m_deltaScale = SCALE_STEP;
 

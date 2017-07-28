@@ -984,19 +984,18 @@ bool isPointInRect(const glm::vec2& p, const ceti::Rect& rect)
 
 bool isObjectOnScreen(const glm::vec3& screen_coord, const glm::vec3& object_size, const glm::ivec2& screen_size, float scale)
 {
-    float scaled_half_w = 0.5f*object_size.x*scale;
-    float scaled_half_h = 0.5f*object_size.y*scale;
+    float max_part = std::max(object_size.x*scale, object_size.y*scale);
 
-    if (screen_coord.x < -scaled_half_w) {
+    if (screen_coord.x < -max_part) {
         return false;
     }
-    if (screen_coord.x > screen_size.x + scaled_half_w) {
+    if (screen_coord.x > (screen_size.x + max_part)) {
         return false;
     }
-    if (screen_coord.y < -scaled_half_h) {
+    if (screen_coord.y < -max_part) {
         return false;
     }
-    if (screen_coord.y > screen_size.y + scaled_half_h) {
+    if (screen_coord.y > (screen_size.y + max_part)) {
         return false;
     }
 

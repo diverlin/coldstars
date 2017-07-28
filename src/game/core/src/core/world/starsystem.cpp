@@ -211,7 +211,6 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
 
     vehicle->setPosition(position);
     vehicle->setDirection(glm::vec3(0,1,0)/*dir*/);
-    vehicle->updateOrientation(); // remove bad logic
 
     m_vehicles.push_back(vehicle);
 }
