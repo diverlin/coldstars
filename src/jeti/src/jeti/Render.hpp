@@ -29,6 +29,7 @@
 #include <Light.hpp>
 
 #include <string>
+#include <chrono>
 
 namespace  jeti {
 
@@ -58,6 +59,8 @@ class Renderer : public NonCopyable
 public:
     Renderer();
     ~Renderer();
+
+    int fps() const { return m_fps; }
 
     float scale() const { return m_scale; }
     const glm::ivec2& size() const { return m_size; }
@@ -131,6 +134,10 @@ public:
 private:
     float m_t = 0.0f;
 
+    int m_fps = 0;
+    int m_framesCounter = 0;
+    std::chrono::steady_clock::time_point m_lastTime;
+
     bool m_initialized = false;
     bool m_drawAxis = true;
     float m_scale = SCALE_INIT;
@@ -187,6 +194,8 @@ private:
 
     void __enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }
     void __disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }
+
+    void __updateFps();
 };
 
 // TEXT

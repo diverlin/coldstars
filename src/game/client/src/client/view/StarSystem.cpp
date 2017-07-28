@@ -163,7 +163,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     }
 
     {
-        m_guiDemo->updateFps(client::global::get().screen().fps());
+        m_guiDemo->updateFps(client::global::get().render().fps());
         m_guiDemo->updateMousePos(100, 100);
     }
 }

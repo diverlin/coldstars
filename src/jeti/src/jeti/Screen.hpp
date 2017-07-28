@@ -30,50 +30,14 @@ namespace jeti {
 class Screen : public SFMLWrapper
 {
 public:
-    class Data {
-    public:
-        ceti::Rect rect;
-        int radius = 0;
-        Data() = default;
-       ~Data() = default;
-        void resize(int w, int h) {
-            rect.setSize(w, h);
-            radius = std::sqrt(w*w + h*h);
-        }
-    };
-
     Screen() = default;
     ~Screen() = default;
 
     void init();
 
-    void initiateScrollTo(const glm::vec2& scroll_coord) { m_targetCenter = scroll_coord; m_autoScroll = true; }
-    void updateInSpace();
+//    void updateInSpace();
 
-    void resize(int, int);
     void draw();
-
-    int framesCounter() const { return m_framesCounter; }
-
-    const Data& data() const { return m_data; }
-
-    int fps() const { return m_fps; }
-
-    void setPosition(const glm::vec2& position) { m_data.rect.setBottomLeft(position); }
-    const glm::vec2& position() const { return m_data.rect.bottomLeft(); }
-
-private:
-    Data m_data;
-    bool m_autoScroll;
-
-    int m_fps = 0;
-    int m_framesCounter = 0;
-    float m_lastTime = 0;
-
-    float m_deltaScale = 0.0;
-    glm::vec2 m_targetCenter;
-
-    void __drawFps();
 };
 
 } // namespace jeti

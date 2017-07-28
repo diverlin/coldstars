@@ -213,8 +213,6 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            break;
 //        }
 //    }
-    
-    client::global::get().screen().updateInSpace();
 }
              
 void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* starsystem)

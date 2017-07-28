@@ -94,9 +94,10 @@ void StarsystemRender::clearVisibleEntities()
 
 void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 {
-    if (ob->inRect(client::global::get().screen().data().rect)) {
-        m_objects.push_back(ob);
-    }
+    assert(false);
+    //    if (ob->inRect(client::global::get().screen().data().rect)) {
+//        m_objects.push_back(ob);
+//    }
 }
 
 //void StarsystemRender::addIfVisible(Star* star)
