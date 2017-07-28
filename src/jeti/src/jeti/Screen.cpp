@@ -108,21 +108,5 @@ void Screen::draw()
     wrDrawSpecific();
 }
 
-void  Screen::increaseScale()
-{
-    m_deltaScale = SCALE_STEP;
-    if (m_data.scale < SCALE_MAX) {
-        m_data.scale += m_deltaScale;
-    }
-}
-
-void Screen::decreaseScale()
-{
-    m_deltaScale = -SCALE_STEP;
-    if (m_data.scale > SCALE_MIN) {
-        m_data.scale += m_deltaScale;
-    }
-}
-
 } // namespace jeti
 

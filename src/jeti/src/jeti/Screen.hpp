@@ -29,23 +29,17 @@ namespace jeti {
 
 class Screen : public SFMLWrapper
 {
-    const float SCALE_MIN = 0.2;
-    const float SCALE_MAX = 50.0;
-    const float SCALE_STEP = 0.05;
-
 public:
     class Data {
     public:
         ceti::Rect rect;
         int radius = 0;
-        float scale = 2.5f;
         Data() = default;
        ~Data() = default;
         void resize(int w, int h) {
             rect.setSize(w, h);
             radius = std::sqrt(w*w + h*h);
         }
-        float scaledRadius() const { return radius / scale; }
     };
 
     Screen() = default;
@@ -60,10 +54,6 @@ public:
     void draw();
 
     int framesCounter() const { return m_framesCounter; }
-
-    float scale() const { return m_data.scale; }
-    void increaseScale();
-    void decreaseScale();
 
     const Data& data() const { return m_data; }
 

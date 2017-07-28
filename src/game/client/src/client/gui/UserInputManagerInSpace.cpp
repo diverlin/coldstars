@@ -207,8 +207,8 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             
             case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::LOAD); break; }
     
-            case sf::Keyboard::K: { client::global::get().screen().increaseScale(); break; }
-            case sf::Keyboard::L: { client::global::get().screen().decreaseScale(); break; }
+            case sf::Keyboard::K: { client::global::get().render().increaseScale(); break; }
+            case sf::Keyboard::L: { client::global::get().render().decreaseScale(); break; }
 
             case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
             case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
