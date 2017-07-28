@@ -853,12 +853,18 @@ void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
 void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 {
     if (m_drawAxis) {
-        int width = 1;
+        int width = 2;
         glLineWidth(width);
         drawMesh(*m_meshAxis, modelMatrix);
     }
 }
-      
+
+void Renderer::drawCollisionRadius(const glm::mat4& modelMatrix) const
+{
+//    if (m_drawCollisionRadius) {
+//        drawMesh(*m_meshAxis, modelMatrix);
+//    }
+}
       
 void Renderer::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
 {
