@@ -103,8 +103,6 @@ void Ship::update(int time)
             npc()->update(time);
             //weapons().fire(time, npc()->model()->skills().attackNormalized());
 
-            updateOrientation();
-
             if (properties().speed > 0) {
                 navigator().update();
             }

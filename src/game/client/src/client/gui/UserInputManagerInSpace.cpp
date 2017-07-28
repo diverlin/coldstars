@@ -85,9 +85,7 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
     
             //DRIVE SLOT
             case sf::Keyboard::F: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::DRIVE_SLOT_SELECTOR); break; }
-            
-            case sf::Keyboard::N: { player->GetShow().InverseCollisionRadius(); break; }
-            
+
             // WEAPON SLOTS
             case sf::Keyboard::Num1: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT1_SELECTOR); break; }
             case sf::Keyboard::Num2: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT2_SELECTOR); break; }
@@ -210,12 +208,14 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             case sf::Keyboard::K: { client::global::get().render().increaseScale(); break; }
             case sf::Keyboard::L: { client::global::get().render().decreaseScale(); break; }
 
-            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
-            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
+//            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
+//            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
 
-//            case sf::Keyboard::X: { client::global::get().render().showAxis(true); break; }
-//            case sf::Keyboard::Z: { client::global::get().render().showAxis(false); break; }
+            case sf::Keyboard::X: { client::global::get().render().setAllowDrawAxis(true); break; }
+            case sf::Keyboard::Z: { client::global::get().render().setAllowDrawAxis(false); break; }
 
+            case sf::Keyboard::B: { client::global::get().render().setAllowDrawCollisionRadius(true); break; }
+            case sf::Keyboard::N: { client::global::get().render().setAllowDrawCollisionRadius(false); break; }
         }
     }
 }

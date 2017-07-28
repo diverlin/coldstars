@@ -183,7 +183,7 @@ void Renderer::init(Camera* camera, int w, int h)
     __initPostEffects();
     __makeShortCuts();
 
-    auto model = new model::Material("data/other/slot.png");
+    auto model = new model::Material("data/other/radius.png");
     m_material = new control::Material(model);
     m_initialized = true;
 }
@@ -856,7 +856,7 @@ void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
        
 void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 {
-    if (m_drawAxis) {
+    if (m_allowDrawAxis) {
         int width = 2;
         glLineWidth(width);
         drawMesh(*m_meshAxis, modelMatrix);
@@ -865,7 +865,7 @@ void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 
 void Renderer::drawCollisionRadius(const glm::mat4& modelMatrix) const
 {
-    if (m_drawCollisionRadius) {
+    if (m_allowDrawCollisionRadius) {
         drawQuad(*m_material, modelMatrix);
     }
 }
