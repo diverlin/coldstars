@@ -226,7 +226,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* star
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().screen().scale();
+    float scale = client::global::get().render().scale();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
 //    glm::vec2 world_coord(client::global::get().screen().bottomLeft());

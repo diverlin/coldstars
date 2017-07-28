@@ -550,7 +550,6 @@ void StarSystem::__render_NEW(jeti::Renderer& render)
     const auto& screen = client::global::get().screen();
 
     render.clearColorAndDepthBuffers();
-    render.applyScale(screen.data().scale);
 
     //render.setPerspectiveProjection(w, h);
     //starsystem->DrawBackground(render, world_coord);
@@ -609,7 +608,7 @@ void StarSystem::__render_NEW2(jeti::Renderer& render)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().screen().scale();
+    float scale = client::global::get().render().scale();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
 //    glm::vec2 world_coord(client::global::get().screen().bottomLeft());

@@ -65,6 +65,24 @@ void Renderer::decreaseLightPos() {
     m_light.position.z -= 10.0;
 }
 
+void  Renderer::increaseScale()
+{
+    if (m_scale < SCALE_MAX) {
+        m_scale += m_deltaScale;
+    } else {
+        m_scale = SCALE_MAX;
+    }
+}
+
+void Renderer::decreaseScale()
+{
+    if (m_scale > SCALE_MIN) {
+        m_scale -= m_deltaScale;
+    } else {
+        m_scale = SCALE_MIN;
+    }
+}
+
 //void Renderer::setLightPos(int x, int y) {
 //    m_light.position.x = float(x);
 //    m_light.position.y = float(y);

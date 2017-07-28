@@ -46,6 +46,11 @@ const float ZFAR = 1000.0f;
 
 class Renderer : public NonCopyable
 {
+    const float SCALE_INIT = 2.5;
+    const float SCALE_MIN = 0.2;
+    const float SCALE_MAX = 50.0;
+    const float SCALE_STEP = 0.05;
+
     const std::string SHADERS_PATH = "shaders/";
 
     enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
@@ -60,6 +65,9 @@ public:
     int height() const { return m_size.y; }
 
     void applyScale(float);
+    void increaseScale();
+    void decreaseScale();
+
     void increaseLightPos();
     void decreaseLightPos();
 //    void setLightPos(int, int);
@@ -125,7 +133,9 @@ private:
 
     bool m_initialized = false;
     bool m_drawAxis = true;
-    float m_scale = 1.0f;
+    float m_scale = SCALE_INIT;
+    float m_deltaScale = SCALE_STEP;
+
     glm::ivec2 m_size;
 
     Mesh* m_meshQuad = nullptr;
