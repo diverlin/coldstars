@@ -120,6 +120,7 @@ public:
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawAxis(const glm::mat4&) const;
+    void drawCollisionRadius(const glm::mat4&) const;
     void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;
     void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
