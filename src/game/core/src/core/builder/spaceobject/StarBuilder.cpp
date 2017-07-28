@@ -54,7 +54,7 @@ Star::gen(descriptor::Star* descr)
     control::Star* star = __genTemplate(descr);
 
     // Orientation
-    star->model()->setSize(descr->size());
+    star->setSize(descr->size());
     star->model()->setDirection(descr->direction());
 
     LifeData data_life;

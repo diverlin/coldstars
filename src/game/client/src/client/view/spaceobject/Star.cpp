@@ -30,7 +30,7 @@ Star::Star(control::Star* star)
       Base(star)
     , m_star(star)
 {
-    setOrientationModel(star->model());
+    setOrientation(star);
 }
   
 Star::~Star()
@@ -39,6 +39,8 @@ Star::~Star()
 void Star::draw(const jeti::Renderer& render) const
 {
     render.drawMesh(_mesh(), _material(), _modelMatrix());
+    _drawCollisionRadius(render);
+    _drawAxis(render);
 }
 
 //void Star::UpdateInfo()

@@ -50,7 +50,7 @@ Asteroid::gen(descriptor::Asteroid* descr)
     asteroid->model()->setLifeData(life_data);
 
     /// Orientation
-    asteroid->model()->setSize(descr->size());
+    asteroid->setSize(descr->size());
     asteroid->model()->setDirection(descr->direction());
 
     return asteroid;

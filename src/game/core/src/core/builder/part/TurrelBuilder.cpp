@@ -47,7 +47,7 @@ Turrel::gen(descriptor::Turrel* descr)
     /// Base
 
     /// Orientation
-    turrel->model()->setSize(descr->size());
+    turrel->setSize(descr->size());
     turrel->model()->setDirection(descr->direction());
 
     return turrel;

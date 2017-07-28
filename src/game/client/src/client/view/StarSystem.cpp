@@ -560,33 +560,21 @@ void StarSystem::__render_NEW(jeti::Renderer& render)
     for(Star* star: m_stars) {
         star->update();
         star->draw(render);
-        if (m_debug) {
-            star->drawAxis(render);
-        }
     }
 
     for(Planet* planet: m_planets) {
         planet->update();
         planet->draw(render);
-        if (m_debug) {
-            planet->drawAxis(render);
-        }
     }
 
     for(Asteroid* asteroid: m_asteroids) {
         asteroid->update();
         asteroid->draw(render);
-        if (m_debug) {
-            asteroid->drawAxis(render);
-        }
     }
 
     for(Ship* ship: m_ships) {
         ship->update();
         ship->draw(render);
-        if (m_debug) {
-            ship->drawAxis(render);
-        }
     }
 
 

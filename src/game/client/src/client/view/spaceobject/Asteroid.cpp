@@ -30,7 +30,7 @@ Asteroid::Asteroid(control::Asteroid* asteroid)
       Base(asteroid)
     , m_asteroid(asteroid)
 {   
-    setOrientationModel(asteroid->model());
+    setOrientation(asteroid);
 }
 
 Asteroid::~Asteroid()
@@ -52,6 +52,9 @@ Asteroid::~Asteroid()
 void Asteroid::draw(const jeti::Renderer& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
+
+    _drawCollisionRadius(render);
+    _drawAxis(render);
 
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());

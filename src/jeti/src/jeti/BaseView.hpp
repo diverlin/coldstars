@@ -71,7 +71,7 @@ public:
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
     void bindMesh(Mesh* mesh);
-    void setOrientationModel(ceti::model::Orientation* model) { m_orientation = model; }
+    void setOrientation(ceti::control::Orientation* model) { m_orientation = model; }
     void setParent(BaseView* parent) { m_parent = parent; }
 
     //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
@@ -84,9 +84,10 @@ public:
     virtual void draw(const jeti::Renderer& render) const;
 
     void drawAxis(const jeti::Renderer& render) const;
+    void drawCollisionRadius(const jeti::Renderer& render) const;
 
 protected:
-    ceti::model::Orientation* _orientation() const { return m_orientation; }
+    ceti::control::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }
     const glm::mat4& matrixScale() const { return m_matrixScale; }
 
@@ -106,13 +107,16 @@ protected:
 //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
+protected:
+    glm::mat4 _calcCollisionModelMatrix() const;
+
 private:
     glm::vec4 m_color;
     meti::vec3 m_pos;
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    ceti::model::Orientation* m_orientation = nullptr;
+    ceti::control::Orientation* m_orientation = nullptr;
     BaseView* m_parent = nullptr;
 
     animation::BaseRotation* m_animationRotation = nullptr;

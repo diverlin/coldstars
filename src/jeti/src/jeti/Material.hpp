@@ -41,6 +41,7 @@ namespace model {
 class Material
 {
 public:
+    Material(const std::string&);
     Material(ceti::descriptor::Material* descriptor);
     Material() = default;
 

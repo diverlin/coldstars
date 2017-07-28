@@ -38,7 +38,7 @@ Ship::Ship(control::Ship* ship)
       Base(ship)
     , m_ship(ship)
 {
-    setOrientationModel(ship->model()); // ??
+    setOrientation(ship);
 
     for(slot::Item* slot: ship->weaponSlots()) {
         // don't create resources, try to get existed from cache
@@ -111,6 +111,10 @@ void Ship::draw(const jeti::Renderer& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
     _drawDecors(render);
+
+    _drawCollisionRadius(render);
+    _drawAxis(render);
+
     //if (GetProperties().grab_radius > 0) {
         //RenderGrabTrail(render);
     //}

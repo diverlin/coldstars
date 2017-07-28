@@ -21,6 +21,8 @@
 #include <core/common/Base.hpp>
 #include <core/descriptor/Base.hpp>
 
+#include <jeti/Render.hpp>
+
 namespace view {
 
 Base::Base(control::Base* base)
@@ -51,6 +53,18 @@ void Base::_drawDecors(const jeti::Renderer& render) const {
     for(Base* decor: m_decors) {
         decor->update();
         decor->draw(render);
+    }
+}
+
+void Base::_drawCollisionRadius(const jeti::Renderer& render) const {
+    if (render.showCollisionRadius()) {
+        render.drawCollisionRadius(_calcCollisionModelMatrix());
+    }
+}
+
+void Base::_drawAxis(const jeti::Renderer& render) const {
+    if (render.showAxis()) {
+        render.drawAxis(_modelMatrix());
     }
 }
 

@@ -34,6 +34,13 @@ namespace jeti {
 
 namespace model {
 
+Material::Material(const std::string& path)
+    :
+      texture_path(path)
+{
+    use_alpha = true;
+}
+
 Material::Material(ceti::descriptor::Material* descriptor)
 {
     texture_path = descriptor->texturePath();
@@ -51,17 +58,6 @@ Material::Material(ceti::descriptor::Material* descriptor)
 
 namespace {
 
-
-//sf::RenderTexture resizeImage(sf::Image image,float width, float height)
-//{
-//    sf::Sprite spriteTmp(image);
-//    spriteTmp.Resize(width, height);
-//    sf::RenderTexture image;
-//    image.Clear(sf::Color(0,0,0,255));
-//    image.Draw(spriteTmp);
-//    image.display();
-//    return image;
-//}
 
 void loadToVRAM(GLuint& texture, const sf::Uint8* data, int& w, int& h)
 {
@@ -96,7 +92,6 @@ void resizeAndLoadToVRAM(const std::string& path, GLuint& texture, int w, int h)
     }
 
     image.flipVertically();
-//    image = resizeImage(image, w, h);
 
     loadToVRAM(texture, image.getPixelsPtr(), w, h);
 }

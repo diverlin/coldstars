@@ -154,6 +154,11 @@ void BaseView::drawAxis(const jeti::Renderer& render) const
     render.drawAxis(_modelMatrix());
 }
 
+void BaseView::drawCollisionRadius(const jeti::Renderer& render) const
+{
+    render.drawAxis(_modelMatrix());
+}
+
 void BaseView::__updateModelMatrix()
 {
     assert(m_mesh);
@@ -185,6 +190,19 @@ void BaseView::__updateModelMatrix()
 
     // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
+}
+
+glm::mat4
+BaseView::_calcCollisionModelMatrix() const
+{
+    // prepeare scale matrix
+    float r = m_orientation->collisionRadius();
+    assert(r>0);
+    glm::mat4 matrixScale = glm::scale(glm::vec3(r, r, 1.0f));
+
+    // combine transformations
+    glm::mat4 matrixCollisionModel = m_matrixTranslate * matrixScale;
+    return matrixCollisionModel;
 }
 
 void

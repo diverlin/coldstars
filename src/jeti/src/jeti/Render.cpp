@@ -55,6 +55,8 @@ Renderer::~Renderer()
 {
     delete m_meshQuad;
     delete m_meshAxis;
+    delete m_material->model();
+    delete m_material;
 }
 
 void Renderer::increaseLightPos() {
@@ -181,6 +183,8 @@ void Renderer::init(Camera* camera, int w, int h)
     __initPostEffects();
     __makeShortCuts();
 
+    auto model = new model::Material("data/other/slot.png");
+    m_material = new control::Material(model);
     m_initialized = true;
 }
 
@@ -861,9 +865,9 @@ void Renderer::drawAxis(const glm::mat4& modelMatrix) const
 
 void Renderer::drawCollisionRadius(const glm::mat4& modelMatrix) const
 {
-//    if (m_drawCollisionRadius) {
-//        drawMesh(*m_meshAxis, modelMatrix);
-//    }
+    if (m_drawCollisionRadius) {
+        drawQuad(*m_material, modelMatrix);
+    }
 }
       
 void Renderer::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
