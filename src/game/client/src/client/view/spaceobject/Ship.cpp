@@ -52,7 +52,7 @@ Ship::Ship(control::Ship* ship)
 
         {
             jeti::Mesh* mesh = utils::createMeshByDescriptorId(turrel->mesh());
-            turrel->bindMesh(mesh);
+            turrel->setMesh(mesh);
         }
 
         addDecor(turrel);

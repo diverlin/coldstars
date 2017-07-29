@@ -31,6 +31,8 @@ class Material;
 
 namespace utils {
 
+
+// TODO: remove this, perform everything via cache
 jeti::Mesh* createMeshByDescriptorId(int_t);
 jeti::control::Material* createMaterialByDescriptorId(int_t);
 jeti::control::Material* createMaterialByDescriptorType(texture::Type) ;

@@ -67,7 +67,7 @@ BaseView::~BaseView() {
 }
 
 void
-BaseView::bindMesh(Mesh* mesh) {
+BaseView::setMesh(Mesh* mesh) {
     m_mesh = mesh;
     if (mesh->isFlat()) {
         __adjustSizeFromMaterial();

@@ -70,7 +70,7 @@ public:
     void setAnimationRotation(animation::BaseRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
-    void bindMesh(Mesh* mesh);
+    void setMesh(Mesh* mesh);
     void setOrientation(ceti::control::Orientation* model) { m_orientation = model; }
     void setParent(BaseView* parent) { m_parent = parent; }
 

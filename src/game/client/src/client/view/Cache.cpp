@@ -89,7 +89,7 @@ Cache::__loadResourcesFor(Base* view)
         m_meshCollector.insert(std::make_pair(descritprorId, mesh));
     }
 
-    view->bindMesh(mesh);
+    view->setMesh(mesh);
     }
 }
 
