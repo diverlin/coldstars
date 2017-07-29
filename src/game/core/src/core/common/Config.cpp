@@ -28,8 +28,8 @@ Config::Config()
         auto_load_mode     = ptree.get<bool>("Gameplay.auto_load_mode");
         GAME_SPEED     = ptree.get<int>("Gameplay.GAME_SPEED");
 
-        SCROLL_VELOCITY_MAX     = ptree.get<int>("Control.SCROLL_VELOCITY_MAX");
-        SCROLL_VELOCITY_STEP    = ptree.get<int>("Control.SCROLL_VELOCITY_STEP");
+        SCROLL_VELOCITY_MAX     = ptree.get<float>("Control.SCROLL_VELOCITY_MAX");
+        SCROLL_VELOCITY_STEP    = ptree.get<float>("Control.SCROLL_VELOCITY_STEP");
         mouse_camera_scroll = ptree.get<bool>("Control.mouse_camera_scroll");
     } catch (...) {
         // todo save values to file

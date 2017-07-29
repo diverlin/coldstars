@@ -29,6 +29,7 @@ Camera::Camera() {
     titles.push_back(std::pair<int, std::string>(LOOKFROM, LOOKFROM_TITLE));
     titles.push_back(std::pair<int, std::string>(LOOKAT, LOOKAT_TITLE));
     titles.push_back(std::pair<int, std::string>(UP, UP_TITLE));
+    titles.push_back(std::pair<int, std::string>(SPEED, SPEED_TITLE));
 
     for(auto title: titles) {
         m_rows.insert(std::make_pair(title.first, new gui::Row(title.second)));
@@ -61,6 +62,9 @@ void Camera::setLookAt(const std::string& lookAt) {
 }
 void Camera::setUp(const std::string& up) {
     __getRowByTitle(UP)->setValue(up);
+}
+void Camera::setSpeed(const std::string& speed) {
+    __getRowByTitle(SPEED)->setValue(speed);
 }
 
 gui::Row*

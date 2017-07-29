@@ -46,6 +46,7 @@ void UserInput::update()
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
         case sf::Event::MouseButtonPressed: { m_mousePressedCodes.push_back(event.key.code); break; }
         }
+        // share events with gui
         if (m_desktop) {
             // in some reason event handler wants to be inside the pollEvent
             m_desktop->HandleEvent(event);

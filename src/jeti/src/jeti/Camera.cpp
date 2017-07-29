@@ -23,20 +23,26 @@
 
 namespace jeti {
 
-void Camera::appendSpeed(const glm::vec3& speed) 
+void Camera::addSpeed(const glm::vec3& speed)
 { 
-    if (glm::length(m_moveSpeed) < m_speedMax) {
-        m_moveSpeed += speed; 
+    if (__speedAboveMax()) {
+        return;
     }
+    m_speed += speed;
 }
 
 void Camera::update()
 {
-    m_moveSpeed *= m_inertiaFactor;
-    m_position += m_moveSpeed;
+    m_speed *= m_inertiaFactor;
+    m_position += m_speed;
     m_target = m_position + m_direction;
 
     m_viewMatrix = glm::lookAt(m_position, m_target, m_up);
+}
+
+bool Camera::__speedAboveMax() const
+{
+    return (glm::length(m_speed) > m_speedMax);
 }
 
 } // namespace jeti
