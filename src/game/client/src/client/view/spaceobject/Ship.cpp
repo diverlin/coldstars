@@ -107,7 +107,7 @@ Ship::~Ship()
 //    //info.addNameStr("defenceR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );
 //}
 
-void Ship::draw(const jeti::Renderer& render) const
+void Ship::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
     _drawDecors(render);

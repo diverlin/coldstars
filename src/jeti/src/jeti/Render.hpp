@@ -47,7 +47,7 @@ const float SCREEN_QUAD_ZPOS = -999.0f;
 const float ZNEAR = -1000.0f;
 const float ZFAR = 1000.0f;
 
-class Renderer : public NonCopyable
+class Render : public NonCopyable
 {
     const float SCALE_INIT = 2.5;
     const float SCALE_MIN = 0.2;
@@ -59,8 +59,8 @@ class Renderer : public NonCopyable
     enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
 public:
-    Renderer();
-    ~Renderer();
+    Render();
+    ~Render();
 
     int fps() const { return m_fps; }
 

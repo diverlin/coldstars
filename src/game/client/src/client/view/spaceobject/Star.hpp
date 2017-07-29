@@ -32,7 +32,7 @@ public:
     Star(control::Star*);
     ~Star() override final;
 
-    void draw(const jeti::Renderer& render) const override final;
+    void draw(const jeti::Render& render) const override final;
 
     control::Star* star() const { return m_star; }
 

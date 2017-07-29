@@ -24,7 +24,7 @@
 #include <ceti/Orientation.hpp>
 
 namespace jeti {
-class Renderer;
+class Render;
 }
 
 class BaseDecor : public ceti::control::Orientation
@@ -35,5 +35,5 @@ public:
     {}
     ~BaseDecor() {}
 
-    virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
+    virtual void Render(const jeti::Render&, const glm::vec3&) = 0;
 };

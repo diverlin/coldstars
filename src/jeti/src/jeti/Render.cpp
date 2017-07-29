@@ -41,7 +41,7 @@
 
 namespace jeti {
 
-Renderer::Renderer()
+Render::Render()
 {
     m_light.position    = glm::vec3(0.0f, 0.0f, -300.0f);
     m_light.ambient     = glm::vec4(0.2f);
@@ -51,7 +51,7 @@ Renderer::Renderer()
     m_light.attenuation = glm::vec3(0.1f);
 }
 
-Renderer::~Renderer() 
+Render::~Render() 
 {
     delete m_meshQuad;
     delete m_meshAxis;
@@ -59,15 +59,15 @@ Renderer::~Renderer()
     delete m_material;
 }
 
-void Renderer::increaseLightPos() {
+void Render::increaseLightPos() {
     m_light.position.z += 10.0;
 }
 
-void Renderer::decreaseLightPos() {
+void Render::decreaseLightPos() {
     m_light.position.z -= 10.0;
 }
 
-void  Renderer::increaseScale()
+void  Render::increaseScale()
 {
     if (m_scale < SCALE_MAX) {
         m_scale += m_deltaScale;
@@ -76,7 +76,7 @@ void  Renderer::increaseScale()
     }
 }
 
-void Renderer::decreaseScale()
+void Render::decreaseScale()
 {
     if (m_scale > SCALE_MIN) {
         m_scale -= m_deltaScale;
@@ -90,7 +90,7 @@ void Renderer::decreaseScale()
 //    m_light.position.y = float(y);
 //}
 
-void Renderer::update() {
+void Render::update() {
     __updateFps();
 //    m_t += 0.01f;
 //    float R = 500;
@@ -99,7 +99,7 @@ void Renderer::update() {
 }
 
 glm::vec3
-Renderer::toWorldCoord(const glm::vec3& screen_coord) const {
+Render::toWorldCoord(const glm::vec3& screen_coord) const {
     glm::vec3 world_coord(screen_coord);
 
     world_coord.x -= m_size.x/2;
@@ -113,7 +113,7 @@ Renderer::toWorldCoord(const glm::vec3& screen_coord) const {
 }
 
 glm::vec3
-Renderer::toScreenCoord(const glm::vec3& world_coord) const {
+Render::toScreenCoord(const glm::vec3& world_coord) const {
     glm::vec3 screen_coord(world_coord);
 
     screen_coord -= m_camera->position();
@@ -127,7 +127,7 @@ Renderer::toScreenCoord(const glm::vec3& world_coord) const {
 }
 
 
-void Renderer::init(Camera* camera, int w, int h)
+void Render::init(Camera* camera, int w, int h)
 {
     if (m_initialized)
         return;
@@ -188,7 +188,7 @@ void Renderer::init(Camera* camera, int w, int h)
     m_initialized = true;
 }
 
-void Renderer::__initAxisMesh()
+void Render::__initAxisMesh()
 {
     m_meshAxis = new Mesh;
 
@@ -214,7 +214,7 @@ void Renderer::__initAxisMesh()
     m_meshAxis->fillVertices(vertices, colors);
 }
 
-void Renderer::activateFbo(int index, int w, int h)
+void Render::activateFbo(int index, int w, int h)
 {
     if ( (index < 0) or (index >= m_fboNum) ) {
         throw std::runtime_error("wrong fbo index");
@@ -224,7 +224,7 @@ void Renderer::activateFbo(int index, int w, int h)
     m_indexFboLastActivated = index;
 }
 
-void Renderer::deactivateFbo(int index)
+void Render::deactivateFbo(int index)
 {
     if ((index < 0) or (index >= m_fboNum)) {
         throw std::runtime_error("wrong fbo index");
@@ -238,7 +238,7 @@ void Renderer::deactivateFbo(int index)
     m_indexFboLastDeactivated = index;
 }
 
-void Renderer::__initPostEffects()
+void Render::__initPostEffects()
 {
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].Create();
@@ -249,7 +249,7 @@ void Renderer::__initPostEffects()
 }
  
   
-void Renderer::__resizePostEffects(int width, int height)
+void Render::__resizePostEffects(int width, int height)
 {
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].Resize(width, height);
@@ -258,7 +258,7 @@ void Renderer::__resizePostEffects(int width, int height)
     m_bloom.Resize(width, height);
 } 
 
-void Renderer::__makeShortCuts()
+void Render::__makeShortCuts()
 {
     {
     m_programLight = m_shaders.light;
@@ -274,41 +274,41 @@ void Renderer::__makeShortCuts()
     m_programBlur  = m_shaders.blur;
 }
         
-void Renderer::setPerspectiveProjection(float w, float h)
+void Render::setPerspectiveProjection(float w, float h)
 {        
     m_projectionMatrix = glm::perspective(90.0f, w/h, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 
-void Renderer::applyScale(float scale) {
+void Render::applyScale(float scale) {
     m_scale = scale;
     setOrthogonalProjection();
 }
 
-void Renderer::setOrthogonalProjection()
+void Render::setOrthogonalProjection()
 {        
     m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 
-void Renderer::composeViewMatrix(const glm::mat4& Vm)
+void Render::composeViewMatrix(const glm::mat4& Vm)
 { 
     m_viewMatrix = Vm;
     __updateProjectionViewMatrix();
 } 
                                 
-void Renderer::__updateProjectionViewMatrix()
+void Render::__updateProjectionViewMatrix()
 { 
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
 }
 
 
-void Renderer::drawQuad(const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawQuad(const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     drawMesh(*m_meshQuad, textureOb, ModelMatrix);
 }
 
-void Renderer::drawQuad(const control::Material& texOb, const ceti::Box2D& box) const
+void Render::drawQuad(const control::Material& texOb, const ceti::Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.center();
@@ -331,7 +331,7 @@ void Renderer::drawQuad(const control::Material& texOb, const ceti::Box2D& box) 
     drawMesh(*m_meshQuad, texOb, ModelMatrix);
 }
 
-void Renderer::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
+void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 {
     __useProgram(m_shaders.basecolor);
     {
@@ -342,7 +342,7 @@ void Renderer::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
     }
 }
 
-void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix) const
+void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix) const
 {
     __useTransparentMode(textureOb.model()->use_alpha);
  	
@@ -359,7 +359,7 @@ void Renderer::drawMesh(const Mesh& mesh, const control::Material& textureOb, co
     }
 }
 
-void Renderer::draw(const Mesh& mesh, const control::Material& material, const glm::mat4& MM) const {
+void Render::draw(const Mesh& mesh, const control::Material& material, const glm::mat4& MM) const {
     if (material.model()->normalmap) {
         drawMeshLightNormalMap(mesh, material, MM);
     } else {
@@ -367,7 +367,7 @@ void Renderer::draw(const Mesh& mesh, const control::Material& material, const g
     }
 }
 
-void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
         drawMesh(mesh, textureOb, ModelMatrix);
@@ -411,7 +411,7 @@ void Renderer::drawMeshLight(const Mesh& mesh, const control::Material& textureO
 	}
 }
 
-void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
 //    if (mesh.isFlat()) {
 //        drawMesh(mesh, textureOb, ModelMatrix);
@@ -458,7 +458,7 @@ void Renderer::drawMeshLightNormalMap(const Mesh& mesh, const control::Material&
 	}
 } 
 
-void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     __useTransparentMode(textureOb.model()->use_alpha);
  	
@@ -481,7 +481,7 @@ void Renderer::drawMeshMultiTextured(const Mesh& mesh, const control::Material& 
 	}
 }  
 
-void Renderer::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const
+void Render::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const
 {
     // ugly 
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
@@ -555,7 +555,7 @@ void Renderer::drawPostEffectCombined(const std::vector<GLuint>& textures, int w
 	}
 }
 
-void Renderer::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3& center, const glm::vec2& world_coord, float radius) const
+void Render::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3& center, const glm::vec2& world_coord, float radius) const
 {
     // ugly 
     float scale = 1.0;
@@ -587,7 +587,7 @@ void Renderer::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 }
 
 
-void Renderer::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int count, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
+void Render::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int count, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
 {
     // ugly 
     //float scale = 1.0;
@@ -618,7 +618,7 @@ void Renderer::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int 
 
 
 
-void Renderer::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, float brightThreshold) const
+void Render::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, float brightThreshold) const
 {
     // ugly 
     //float scale = 1.0;
@@ -644,7 +644,7 @@ void Renderer::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
 	}
 }
 
-void Renderer::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, int w, int h) const
+void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, int w, int h) const
 {
     //float ratio = (float)h/w;
     unsigned int quad_num = textures.size();
@@ -681,7 +681,7 @@ void Renderer::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
     }
 }
 
-void Renderer::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, int h)
+void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, int h)
 {
     // ugly 
     float scale = 1.0;
@@ -711,7 +711,7 @@ void Renderer::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
     }
 }
 
-void Renderer::drawPostEffectBlur(GLuint texture, int w, int h) const
+void Render::drawPostEffectBlur(GLuint texture, int w, int h) const
 {  
     // ugly  
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
@@ -738,7 +738,7 @@ void Renderer::drawPostEffectBlur(GLuint texture, int w, int h) const
     }
 }
 
-void Renderer::drawScreenQuadTextured(GLuint texture, int w, int h) const
+void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
 {
     // ugly 
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
@@ -761,7 +761,7 @@ void Renderer::drawScreenQuadTextured(GLuint texture, int w, int h) const
     }
 }
  
-void Renderer::drawParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     __enable_POINTSPRITE();
     {   
@@ -782,7 +782,7 @@ void Renderer::drawParticles(const Mesh& mesh, const control::Material& textureO
     __disable_POINTSPRITE();
 }
 
-void Renderer::drawStarField(int w, int h, float pos_x, float pos_y) const
+void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
 {
     // ugly 
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
@@ -805,7 +805,7 @@ void Renderer::drawStarField(int w, int h, float pos_x, float pos_y) const
     }
 }
 
-void Renderer::__useProgram(GLuint program) const
+void Render::__useProgram(GLuint program) const
 {
     if (m_activeProgram != program) {
         glUseProgram(program);
@@ -813,17 +813,17 @@ void Renderer::__useProgram(GLuint program) const
     }
 }
  
-void Renderer::enable_CULLFACE()
+void Render::enable_CULLFACE()
 {
     glEnable(GL_CULL_FACE);
 }
 
-void Renderer::disable_CULLFACE()
+void Render::disable_CULLFACE()
 {
     glDisable(GL_CULL_FACE);
 }
 
-void Renderer::__useTransparentMode(bool transparent_mode_on) const
+void Render::__useTransparentMode(bool transparent_mode_on) const
 {
     if (m_transparentModeOn != transparent_mode_on) {
         if (transparent_mode_on) {
@@ -841,7 +841,7 @@ void Renderer::__useTransparentMode(bool transparent_mode_on) const
     m_postEffectModeOn = -1;
 }
 
-void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
+void Render::__usePostEffectMode(bool posteffect_mode_on) const
 {
     if (m_postEffectModeOn != posteffect_mode_on) {
         if (posteffect_mode_on) {
@@ -854,7 +854,7 @@ void Renderer::__usePostEffectMode(bool posteffect_mode_on) const
     m_transparentModeOn = -1;
 }
        
-void Renderer::drawAxis(const glm::mat4& modelMatrix) const
+void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
     if (m_allowDrawAxis) {
         int width = 2;
@@ -863,14 +863,14 @@ void Renderer::drawAxis(const glm::mat4& modelMatrix) const
     }
 }
 
-void Renderer::drawCollisionRadius(const glm::mat4& modelMatrix) const
+void Render::drawCollisionRadius(const glm::mat4& modelMatrix) const
 {
     if (m_allowDrawCollisionRadius) {
         drawQuad(*m_material, modelMatrix);
     }
 }
       
-void Renderer::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
+void Render::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
 {
     //glDisable(GL_TEXTURE_2D);
     
@@ -887,7 +887,7 @@ void Renderer::drawVector(const glm::vec3& v, const glm::vec3& pos, float length
     //glEnable(GL_TEXTURE_2D);
 }
 
-void Renderer::drawVector(const glm::vec3& v, const glm::mat4& ModelMatrix, float width) const
+void Render::drawVector(const glm::vec3& v, const glm::mat4& ModelMatrix, float width) const
 {
     //glDisable(GL_TEXTURE_2D);
     
@@ -997,7 +997,7 @@ void drawInfoIn2Column(
 */
 }
 
-void Renderer::__updateFps()
+void Render::__updateFps()
 {
     const auto now_time = std::chrono::steady_clock::now();
     float seconds_diff = std::chrono::duration_cast<std::chrono::seconds>(now_time-m_lastTime).count();

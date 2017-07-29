@@ -154,7 +154,7 @@ void Cursor::updateMouseStuff()
     //m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*client::global::get().screen().scale() + client::global::get().screen().bottomLeftScreenWC();
 }
 
-void Cursor::renderFocusedObjectStuff(const jeti::Renderer& render) const
+void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 {
     //render.enable_BLEND();
     {
@@ -184,7 +184,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Renderer& render) const
     //render.disable_BLEND();  
 }
 
-void Cursor::renderFocusedObjectInfo(const jeti::Renderer& render) const
+void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
 {
     //render.enable_BLEND();
     {
@@ -198,7 +198,7 @@ void Cursor::renderFocusedObjectInfo(const jeti::Renderer& render) const
     //render.disable_BLEND();  
 }
 
-void Cursor::renderItem(const jeti::Renderer& render) const
+void Cursor::renderItem(const jeti::Render& render) const
 {
     //render.enable_BLEND();
     {

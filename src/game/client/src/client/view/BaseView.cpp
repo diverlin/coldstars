@@ -49,20 +49,20 @@ void Base::addDecor(Base* decor) {
     m_decors.push_back(decor);
 }
 
-void Base::_drawDecors(const jeti::Renderer& render) const {
+void Base::_drawDecors(const jeti::Render& render) const {
     for(Base* decor: m_decors) {
         decor->update();
         decor->draw(render);
     }
 }
 
-void Base::_drawCollisionRadius(const jeti::Renderer& render) const {
+void Base::_drawCollisionRadius(const jeti::Render& render) const {
     if (render.allowDrawCollisionRadius()) {
         render.drawCollisionRadius(_calcCollisionModelMatrix());
     }
 }
 
-void Base::_drawAxis(const jeti::Renderer& render) const {
+void Base::_drawAxis(const jeti::Render& render) const {
     if (render.allowDrawAxis()) {
         render.drawAxis(_modelMatrix());
     }

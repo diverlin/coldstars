@@ -104,7 +104,7 @@ int main()
 
     UserInput& userinput = UserInput::get();
     UserInputInSpace& inputs_manager = client::global::get().inputsManager();
-    jeti::Renderer& render = client::global::get().render();
+    jeti::Render& render = client::global::get().render();
     jeti::Screen& screen = client::global::get().screen();
 
     Player* player = createPlayer();

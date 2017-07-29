@@ -34,7 +34,7 @@ public:
 
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
-    void draw(const jeti::Renderer& render) const override final;
+    void draw(const jeti::Render& render) const override final;
 
     control::Satellite* satellite() const { return m_satellite; }
 

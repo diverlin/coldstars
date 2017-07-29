@@ -35,7 +35,7 @@ public:
 //    model::Asteroid* model() const  { return m_asteroid->model(); }
 //    descriptor::Asteroid* descriptor() const  { return m_asteroid->descriptor(); }
 
-    void draw(const jeti::Renderer& render) const;
+    void draw(const jeti::Render& render) const;
 
 private:
     control::Asteroid* m_asteroid = nullptr;

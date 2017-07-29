@@ -27,7 +27,7 @@ class Collector;
 
 namespace jeti {
 class Screen;
-class Renderer;
+class Render;
 class Camera;
 } // namespace jeti
 
@@ -42,7 +42,7 @@ public:
 
     type::Collector& types() { return *m_types; }
     jeti::Screen& screen() { return *m_screen; }
-    jeti::Renderer& render() { return *m_render; }
+    jeti::Render& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
 
     UserInputInSpace& inputsManager() { return *m_inputsManager; }
@@ -55,7 +55,7 @@ private:
 
     type::Collector* m_types = nullptr;
     jeti::Screen* m_screen = nullptr;
-    jeti::Renderer* m_render = nullptr;
+    jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
 
     UserInputInSpace* m_inputsManager = nullptr;

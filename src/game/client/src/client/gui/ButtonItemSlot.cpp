@@ -49,7 +49,7 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 }
 
 /* virtual override final */
-void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) const
+void ButtonItemSlot::RenderUnique(const jeti::Render& render, Player* player) const
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
 
@@ -65,7 +65,7 @@ void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) 
 }
   
 /* virtual override final */
-void ButtonItemSlot::RenderInfo(const jeti::Renderer& render) const
+void ButtonItemSlot::RenderInfo(const jeti::Render& render) const
 {
     if (GetItemSlot()) {
         if (GetItemSlot()->item()) {

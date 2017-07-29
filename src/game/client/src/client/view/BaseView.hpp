@@ -43,9 +43,9 @@ public:
     void addDecor(Base*);
 
 protected:
-    void _drawDecors(const jeti::Renderer& render) const;
-    void _drawCollisionRadius(const jeti::Renderer& render) const;
-    void _drawAxis(const jeti::Renderer& render) const;
+    void _drawDecors(const jeti::Render& render) const;
+    void _drawCollisionRadius(const jeti::Render& render) const;
+    void _drawAxis(const jeti::Render& render) const;
 
 private:
     control::Base* m_control_base = nullptr;

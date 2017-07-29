@@ -40,7 +40,7 @@ void DistantNebulaEffect::Update()
 }        
 
 /* virtual override */
-void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
+void DistantNebulaEffect::Render(const jeti::Render& render, const glm::vec3&)
 {   
     // alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }

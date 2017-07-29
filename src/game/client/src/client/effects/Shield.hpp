@@ -25,7 +25,7 @@ class SpaceObject;
 } // namespace model
 
 namespace jeti {
-class Renderer;
+class Render;
 namespace control {
 class Material;
 } // namespace control
@@ -42,7 +42,7 @@ public:
     void setParent(model::SpaceObject*);
 
     void Update();
-    void Render(const jeti::Renderer&, float) const;
+    void Render(const jeti::Render&, float) const;
 
 private:
     glm::vec4 color;
