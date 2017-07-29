@@ -35,21 +35,27 @@ namespace effect {
 
 class Shield
 {  
+    enum move {stop, up, down};
 public:
     Shield();
     ~Shield();
 
     void setMaterial(jeti::control::Material* material) { m_material = material; }
 
+    void dissipate();
     void update();
     void draw(const glm::mat4&, const jeti::Render&) const;
 
 private:
+    bool m_cyclic = true;
+    move m_move = stop;
     glm::vec4 m_color;
     glm::mat4 m_scaleMatrix;
 
-    float m_alphaInit = 0.05;
-    float m_deltaAlpha = 0.01;
+    float m_opacityMin = 0.05;
+    float m_opacityMax = 0.5;
+    float m_opacityUpFactor = 1.5;
+    float m_opacityDownFactor = 0.95;
 
     jeti::control::Material* m_material = nullptr;
 };

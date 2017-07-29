@@ -31,7 +31,7 @@ Shield::Shield()
     m_color.r = 1.0;
     m_color.g = 1.0;
     m_color.b = 1.0;
-    m_color.a = m_alphaInit;
+    m_color.a = m_opacityMin;
 
     m_scaleMatrix = glm::scale(glm::vec3(1.4f, 1.4f, 1.0f));
 }
@@ -39,12 +39,36 @@ Shield::Shield()
 Shield::~Shield()
 {}
 
+void Shield::dissipate()
+{
+    m_move = up;
+}
+
 void Shield::update()
 {      
-    if (m_color.a > m_alphaInit) {
-        m_color.a -= m_deltaAlpha;
-    } else {
-        m_color.a = m_alphaInit;
+    if (m_move == stop) {
+        if (m_cyclic) {
+            dissipate();
+        }
+        return;
+    }
+
+    if (m_move == up) {
+        m_color.a *= m_opacityUpFactor;
+    } else if (m_move == down) {
+        m_color.a *= m_opacityDownFactor;
+    }
+
+    if (m_color.a > m_opacityMax) {
+        m_move = down;
+        m_color.a = m_opacityMax;
+    } else if (m_color.a < m_opacityMin) {
+        m_color.a = m_opacityMin;
+        if (m_cyclic) {
+            dissipate();
+        } else {
+            m_move = stop;
+        }
     }
 }
 
