@@ -20,39 +20,36 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <common/constants.hpp>
 
 class Player;
-class GuiManager;
 
 class UserInputInSpace
 {
-    public:
-        UserInputInSpace();
-        ~UserInputInSpace();
-        
-        bool nextTurnReady() const { return m_nextTurnReady; }
-        bool runSession() const { return m_runSession; }
+public:
+    UserInputInSpace();
+    ~UserInputInSpace();
 
-        void update(Player*);
-        
-    private:
-        bool m_nextTurnReady = false;
-        bool m_runSession = true;
+    bool nextTurnReady() const { return m_nextTurnReady; }
+    bool runSession() const { return m_runSession; }
 
-        CAMERADIRECTION m_cameraMoveAxisX;
-        CAMERADIRECTION m_cameraMoveAxisY;
-            
-        glm::vec2 m_scrollAccel;
-                
-        void __reset();
+    void update(Player*);
+
+    const glm::vec3& scrollAccel() const { return m_scrollAccel; }
+
+private:
+    bool m_nextTurnReady = false;
+    bool m_runSession = true;
+
+    float m_scrollStep = 0.0;
+    glm::vec3 m_scrollAccel;
+
+    void __reset();
     
-        void __manageInputsInSpace(Player*);
-        
-        void __mouseButtonPressed(Player*);
-                    
-        void __manageRealTimeInputsInSpace(Player*);
-        void __scrollCamera(Player*);
+    void __manageInputsInSpace(Player*);
+
+    void __mouseButtonPressed(Player*);
+
+    void __manageRealTimeInputsInSpace(Player*);
 };
 
 

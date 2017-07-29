@@ -28,7 +28,7 @@ namespace jeti {
 
 class Camera : public NonCopyable
 {
-    const float CAMERA_SPEED_MAX = 10.0f;
+    const float CAMERA_SPEED_MAX = 20.0f;
     const float CAMERA_INERTIA = 0.95f;
     const float LOOKTO_Z = -1000.0;
 public:
@@ -39,10 +39,13 @@ public:
     const glm::vec3& target() const { return m_target; }
     const glm::vec3& position() const { return m_position; }
     const glm::vec3& up() const { return m_up; }
+    const glm::vec3& speed() const { return m_speed; }
+
     float radius() const { return m_radius; }
     const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
-    void appendSpeed(const glm::vec3&);
+    void addSpeed(const glm::vec2&);
+    void addSpeed(const glm::vec3&);
 
     void update();
 
@@ -56,10 +59,12 @@ private:
     glm::vec3 m_up = meti::OY;
 
     float m_inertiaFactor = CAMERA_INERTIA;
-    glm::vec3 m_moveSpeed;
+    glm::vec3 m_speed;
     float m_speedMax = CAMERA_SPEED_MAX;
 
     glm::mat4 m_viewMatrix;
+
+    bool __speedAboveMax() const;
 };
 
 } // namespace jeti

@@ -85,11 +85,6 @@ enum GAME_MODE
     CRASH_TEST
 };
 
-enum class CAMERADIRECTION
-{
-    NONE=0, LEFT, RIGHT, UP, DOWN
-};
-
 const float AMMO_PRICE_RATE = 0.01f;
 
 const int STARSPAK_TURN_THRESHOLD_MIN = 5;

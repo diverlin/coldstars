@@ -25,8 +25,8 @@ struct Config
         bool AUTO_TURN_MODE = false;
         int GAME_SPEED = 1; // 1-10
         
-        int SCROLL_VELOCITY_MAX = 20;
-        int SCROLL_VELOCITY_STEP = 1;
+        float SCROLL_VELOCITY_MAX = 20;
+        float SCROLL_VELOCITY_STEP = 1;
 
     private:
         int game_mode = 0;

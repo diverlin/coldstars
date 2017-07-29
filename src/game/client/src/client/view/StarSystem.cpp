@@ -147,6 +147,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         info->setLookFrom(ceti::to_string(m_render.camera()->position()));
         info->setLookAt(ceti::to_string(m_render.camera()->target()));
         info->setUp(ceti::to_string(m_render.camera()->up()));
+        info->setSpeed(ceti::to_string(m_render.camera()->speed()));
     }
 
     {

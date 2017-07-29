@@ -34,11 +34,13 @@ private:
     const std::string LOOKFROM_TITLE = "lookFrom";
     const std::string LOOKAT_TITLE = "lookAt";
     const std::string UP_TITLE = "up";
+    const std::string SPEED_TITLE = "speed";
 
     enum {
         LOOKFROM,
         LOOKAT,
-        UP
+        UP,
+        SPEED
     };
 
 public:
@@ -48,6 +50,7 @@ public:
     void setLookFrom(const std::string&);
     void setLookAt(const std::string&);
     void setUp(const std::string&);
+    void setSpeed(const std::string&);
 
     sfg::Table::Ptr mainWidget() const { return m_table; }
 

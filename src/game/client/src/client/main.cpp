@@ -25,6 +25,7 @@
 
 #include <jeti/Mesh.hpp>
 #include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
 #include <client/gui/UserInputManagerInSpace.hpp>
@@ -103,8 +104,9 @@ int main()
     client::global::get().init();
 
     UserInput& userinput = UserInput::get();
-    UserInputInSpace& inputs_manager = client::global::get().inputsManager();
+    UserInputInSpace& userinputs = client::global::get().inputsManager();
     jeti::Render& render = client::global::get().render();
+    jeti::Camera& camera = client::global::get().camera();
     jeti::Screen& screen = client::global::get().screen();
 
     Player* player = createPlayer();
@@ -115,9 +117,10 @@ int main()
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);
 
-    while(inputs_manager.runSession() && screen.window().isOpen()) {
-        inputs_manager.update(player);
-        userinput.update();
+    while(userinputs.runSession() && screen.window().isOpen()) {
+        userinputs.update(player);
+        camera.addSpeed(userinputs.scrollAccel());
+
         world.update();
         viewer.render(player->starSystem());
         screen.draw();
