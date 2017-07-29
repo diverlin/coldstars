@@ -20,16 +20,15 @@
 
 #include <core/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
+#include <core/builder/part/TurrelBuilder.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/part/Turrel.hpp>
-
-#include <core/builder/part/TurrelBuilder.hpp>/>
+#include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
-
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
-#include <core/manager/DescriptorManager.hpp>
 
 namespace view {
 
@@ -47,10 +46,7 @@ Ship::Ship(control::Ship* ship)
 
         {
             int_t descritprorId = turrel->texture();
-            ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(descritprorId);
-            assert(descriptor);
-            jeti::model::Material* model = new jeti::model::Material(descriptor);
-            jeti::control::Material* material = new jeti::control::Material(model);
+            jeti::control::Material* material = utils::createMaterialByDescriptorId(descritprorId);
             turrel->setMaterial(material);
         }
 
@@ -66,15 +62,10 @@ Ship::Ship(control::Ship* ship)
     }
 
     {
-    effect::Shield* shield = createShieldEffect();
-
-    // find texture
-    ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->random(int(texture::Type::SHIELD_EFFECT));
-    assert(descriptor);
-    jeti::model::Material* model = new jeti::model::Material(descriptor);
-    jeti::control::Material* material = new jeti::control::Material(model);
-    shield->setMaterial(material);
-    shield->dissipate();
+        effect::Shield* shield = createShieldEffect();
+        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::SHIELD_EFFECT);
+        shield->setMaterial(material);
+        shield->dissipate();
     }
 }
 
