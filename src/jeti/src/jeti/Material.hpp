@@ -125,5 +125,4 @@ private:
 };
 
 } // namespace control
-
 } // namespace jeti
