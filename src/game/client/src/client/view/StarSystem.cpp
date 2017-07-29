@@ -165,7 +165,12 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     {
         m_guiDemo->updateFps(client::global::get().render().fps());
-        m_guiDemo->updateMousePos(100, 100);
+
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
+        mouse_pos.y = m_render.height()-mouse_pos.y;
+        m_guiDemo->setMousePosScreenCoord(mouse_pos.x, mouse_pos.y);
+        glm::vec3 wc = m_render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
+        m_guiDemo->setMousePosWorldCoord(wc.x, wc.y);
     }
 }
 

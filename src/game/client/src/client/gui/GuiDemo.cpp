@@ -93,11 +93,13 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
         sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
 
         m_fpsLabel = sfg::Label::Create();
-        m_mousePosLabel = sfg::Label::Create();
+        m_mousePosScLabel = sfg::Label::Create();
+        m_mousePosWcLabel = sfg::Label::Create();
 
         auto box = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
         box->Pack(m_fpsLabel);
-        box->Pack(m_mousePosLabel);
+        box->Pack(m_mousePosScLabel);
+        box->Pack(m_mousePosWcLabel);
 
         window->Add(box);
         m_desktop.Add( window );
@@ -123,10 +125,14 @@ Demo::updateFps(int fps) {
 }
 
 void
-Demo::updateMousePos(int x, int y) {
-    m_mousePosLabel->SetText(std::string("mouse pos: ")+std::to_string(x)+","+std::to_string(y));
+Demo::setMousePosScreenCoord(int x, int y) {
+    m_mousePosScLabel->SetText(std::string("mouse pos, sc: ")+std::to_string(x)+","+std::to_string(y));
 }
 
+void
+Demo::setMousePosWorldCoord(int x, int y) {
+    m_mousePosWcLabel->SetText(std::string("mouse pos, wc: ")+std::to_string(x)+","+std::to_string(y));
+}
 
 void
 Demo::update(const std::vector<sf::Event>& events) {
