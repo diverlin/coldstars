@@ -5,10 +5,12 @@
 layout(location = FRAG_OUTPUT0) out vec4 color;
 
 uniform sampler2D u_Texture;
+uniform float u_opacity;
 
 in vec2 v_Texcoord;
  
 void main (void)
 {
     color = texture2D(u_Texture, v_Texcoord);
+    color.a *= u_opacity;
 }

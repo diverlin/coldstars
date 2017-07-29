@@ -18,41 +18,42 @@
 
 #pragma once
 
-#include <meti/VectorUtils.hpp>
-
-namespace model {
-class SpaceObject;
-} // namespace model
+#include <glm/glm.hpp>
 
 namespace jeti {
+
 class Render;
+
 namespace control {
 class Material;
 } // namespace control
+
 } // namespace jeti
 
-class ShieldEffect
+namespace view {
+namespace effect {
+
+class Shield
 {  
 public:
-    ShieldEffect();
-    ~ShieldEffect();
+    Shield();
+    ~Shield();
 
-    void SetTextureOb(jeti::control::Material* textureOb) { this->textureOb = textureOb; };
-    void SetAlpha(float alpha) { color.a = alpha; };
-    void setParent(model::SpaceObject*);
+    void setMaterial(jeti::control::Material* material) { m_material = material; }
 
-    void Update();
-    void Render(const jeti::Render&, float) const;
+    void update();
+    void draw(const glm::mat4&, const jeti::Render&) const;
 
 private:
-    glm::vec4 color;
-    glm::vec3 size;
+    glm::vec4 m_color;
+    glm::mat4 m_scaleMatrix;
 
-    float alpha_start;
-    float d_alpha;
+    float m_alphaInit = 0.05;
+    float m_deltaAlpha = 0.01;
 
-    jeti::control::Material* textureOb = nullptr;
-    model::SpaceObject* parent = nullptr;
-
+    jeti::control::Material* m_material = nullptr;
 };
+
+} // namespace effect
+} // namespace view
 

@@ -35,6 +35,7 @@ public:
     void update(Player*);
 
     const glm::vec3& scrollAccel() const { return m_scrollAccel; }
+    const glm::vec3& mouseCliclPos() const { return m_scrollAccel; }
 
 private:
     bool m_nextTurnReady = false;
@@ -42,6 +43,7 @@ private:
 
     float m_scrollStep = 0.0;
     glm::vec3 m_scrollAccel;
+    glm::vec3 m_mouseClickPos;
 
     void __reset();
     

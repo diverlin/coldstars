@@ -49,8 +49,8 @@ namespace descriptor {
 
 namespace {
 
-glm::vec3 randDirection() {
-    return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, 1.0));
+glm::vec3 randPlanetoidDirection() {
+    return glm::normalize(glm::vec3(meti::getRandFloat(0.1, 0.3), 1.0, -1.0));
 }
 
 } // namespace
@@ -140,7 +140,7 @@ genStar()
     float size = meti::getRandInt(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
     descr->setSize(meti::vec3(size));
-    descr->setDirection(randDirection());
+    descr->setDirection(randPlanetoidDirection());
 
     descr->setTexture(textureDescriptorIdFromType(texture::Type::STAR));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
@@ -172,7 +172,7 @@ genPlanet()
     float size = meti::getRandInt(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
-    descr->setDirection(randDirection());
+    descr->setDirection(randPlanetoidDirection());
     descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
@@ -258,7 +258,7 @@ genAsteroid()
     float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
-    descr->setDirection(randDirection());
+    descr->setDirection(randPlanetoidDirection());
     descr->setTexture(textureDescriptorIdFromType(texture::Type::ASTEROID));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE_DEFORMED));
 
@@ -1186,7 +1186,7 @@ genTurrel()
     float size = meti::getRandInt(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
-    descr->setDirection(randDirection());
+    descr->setDirection(randPlanetoidDirection());
     descr->setTexture(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 

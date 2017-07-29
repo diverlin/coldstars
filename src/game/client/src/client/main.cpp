@@ -103,7 +103,7 @@ int main()
 {
     client::global::get().init();
 
-    UserInputInSpace& userinput = client::global::get().inputsManager();
+    UserInputInSpace& input = client::global::get().input();
     jeti::Render& render = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
     jeti::Screen& screen = client::global::get().screen();
@@ -116,9 +116,9 @@ int main()
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);
 
-    while(userinput.runSession() && screen.window().isOpen()) {
-        userinput.update(player);
-        camera.addSpeed(userinput.scrollAccel());
+    while(input.runSession() && screen.window().isOpen()) {
+        input.update(player);
+        camera.addSpeed(input.scrollAccel());
 
         world.update();
         viewer.render(player->starSystem());

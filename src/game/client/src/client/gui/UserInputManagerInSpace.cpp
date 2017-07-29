@@ -220,19 +220,20 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
 
 void UserInputInSpace::__mouseButtonPressed(Player* player)
 {
-    for (const auto & key_code : UserInput::get().m_mousePressedCodes)
-    {
+    for (const auto & key_code : UserInput::get().m_mousePressedCodes) {
         switch (key_code) {
-        case sf::Mouse::Left:
-        {
-            //            sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
-            //            client::global::get().render().setLightPos(mouse_pos.x, client::global::get().screen().height() - mouse_pos.y);
-
+        case sf::Mouse::Left: {
             player->cursor().setLeftMouseButtonClick(true);
             break;
         }
-        case sf::Mouse::Right: { player->cursor().setRightMouseButtonClick(true); break; }
+        case sf::Mouse::Right: {
+            player->cursor().setRightMouseButtonClick(true);
+            break;
         }
+        } // case
+
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
+        m_mouseClickPos = glm::vec3(mouse_pos.x, client::global::get().render().height() - mouse_pos.y, 0.0f);
     }
 }
 

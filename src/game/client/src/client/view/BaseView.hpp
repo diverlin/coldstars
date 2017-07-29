@@ -18,8 +18,11 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
 #include <core/type/EntityType.hpp>
+
+#include <client/effects/Shield.hpp>
+
+#include <ceti/type/IdType.hpp>
 
 #include <jeti/BaseView.hpp>
 
@@ -41,15 +44,18 @@ public:
     int_t texture() const;
 
     void addDecor(Base*);
+    effect::Shield* createShieldEffect();
 
 protected:
-    void _drawDecors(const jeti::Render& render) const;
-    void _drawCollisionRadius(const jeti::Render& render) const;
-    void _drawAxis(const jeti::Render& render) const;
+    void _drawDecors(const jeti::Render&) const;
+    void _drawShield(const jeti::Render&) const;
+    void _drawCollisionRadius(const jeti::Render&) const;
+    void _drawAxis(const jeti::Render&) const;
 
 private:
     control::Base* m_control_base = nullptr;
     std::vector<Base*> m_decors;
+    effect::Shield* m_shield = nullptr;
 };
 
 } // namespace view

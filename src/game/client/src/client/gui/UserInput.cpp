@@ -37,14 +37,21 @@ void UserInput::update()
     sf::Event event;
     while(client::global::get().screen().window().pollEvent(event)) {
         switch(event.type)  {
-        case sf::Event::Closed:     { client::global::get().screen().window().close(); break; }
+        case sf::Event::Closed:     {
+            client::global::get().screen().window().close();
+            break;
+        }
         case sf::Event::KeyPressed: {
             m_keyboardPressedCodes.push_back(event.key.code);
             break;
         }
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
-        case sf::Event::MouseButtonPressed: { m_mousePressedCodes.push_back(event.key.code); break; }
+        case sf::Event::MouseButtonPressed: {
+            m_mousePressedCodes.push_back(event.key.code);
+            break;
+        }
+
         }
         // share events with gui
         if (m_desktop) {
