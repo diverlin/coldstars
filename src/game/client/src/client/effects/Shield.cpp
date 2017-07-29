@@ -17,48 +17,42 @@
 */
 
 #include "Shield.hpp"
+
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
 
-#include <core/spaceobject/SpaceObject.hpp>
+#include <glm/gtx/transform.hpp>
 
+namespace view {
+namespace effect {
 
-ShieldEffect::ShieldEffect()
+Shield::Shield()
 {       
-        alpha_start = 0.4;
-        d_alpha = 0.01;
+    m_color.r = 1.0;
+    m_color.g = 1.0;
+    m_color.b = 1.0;
+    m_color.a = m_alphaInit;
 
-        color.r = 1.0;
-        color.g = 1.0;
-        color.b = 1.0;
-        color.a = alpha_start;
-        
-        textureOb = nullptr;
-        parent = nullptr;
+    m_scaleMatrix = glm::scale(glm::vec3(1.4f, 1.4f, 1.0f));
 }
 
-ShieldEffect::~ShieldEffect()
+Shield::~Shield()
 {}
 
-void ShieldEffect::setParent(model::SpaceObject* parent)
-{ 
-    assert(false);
-//    this->parent = parent;
-    
-//    float rate = 1.3;
-//    size = glm::vec3(parent->size() * rate);
-}
-
-
-void ShieldEffect::Update()
+void Shield::update()
 {      
-    if (color.a > alpha_start)      { color.a -= d_alpha; }
-    else                            { color.a = alpha_start; }
+    if (m_color.a > m_alphaInit) {
+        m_color.a -= m_deltaAlpha;
+    } else {
+        m_color.a = m_alphaInit;
+    }
 }
 
-void ShieldEffect::Render(const jeti::Render& renderer, float parent_d_alpha) const
+void Shield::draw(const glm::mat4& parentModelMatrix, const jeti::Render& render) const
 {
-    // alpitodorender renderer.DrawQuad(*textureOb, parent->modelMatrix());
+    render.drawQuad(*m_material, parentModelMatrix*m_scaleMatrix, m_color.a);
 }
 
+} // namespace effect
+} // namespace view
 

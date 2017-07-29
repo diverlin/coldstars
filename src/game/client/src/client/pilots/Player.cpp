@@ -61,12 +61,12 @@
 #include <client/gui/UserInput.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 
-#include <glm/gtc/matrix_transform.hpp>
-
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 #include <jeti/Camera.hpp>
 
 #include <meti/RandUtils.hpp>
+
+#include <glm/gtc/matrix_transform.hpp>
 
 Player::Player(int id)
 { 

@@ -45,7 +45,7 @@ public:
     jeti::Render& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
 
-    UserInputInSpace& inputsManager() { return *m_inputsManager; }
+    UserInputInSpace& input() { return *m_inputsManager; }
 
 private:
     global();

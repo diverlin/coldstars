@@ -55,8 +55,8 @@ Render::~Render()
 {
     delete m_meshQuad;
     delete m_meshAxis;
-    delete m_material->model();
-    delete m_material;
+    delete m_materialCollisionRadius->model();
+    delete m_materialCollisionRadius;
 }
 
 void Render::increaseLightPos() {
@@ -183,8 +183,11 @@ void Render::init(Camera* camera, int w, int h)
     __initPostEffects();
     __makeShortCuts();
 
-    auto model = new model::Material("data/other/radius.png");
-    m_material = new control::Material(model);
+    {
+        auto model = new model::Material("data/other/radius.png");
+        m_materialCollisionRadius = new control::Material(model);
+    }
+
     m_initialized = true;
 }
 
@@ -303,9 +306,9 @@ void Render::__updateProjectionViewMatrix()
 }
 
 
-void Render::drawQuad(const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawQuad(const control::Material& textureOb, const glm::mat4& ModelMatrix, float opacity) const
 {
-    drawMesh(*m_meshQuad, textureOb, ModelMatrix);
+    drawMesh(*m_meshQuad, textureOb, ModelMatrix, opacity);
 }
 
 void Render::drawQuad(const control::Material& texOb, const ceti::Box2D& box) const
@@ -335,26 +338,28 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 {
     __useProgram(m_shaders.basecolor);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basecolor, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basecolor, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         mesh.draw();
     }
 }
 
-void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix) const
+void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix, float opacity) const
 {
-    __useTransparentMode(textureOb.model()->use_alpha);
+    //__useTransparentMode(textureOb.model()->use_alpha);
  	
     __useProgram(m_shaders.basetexture);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
-	
+
+        glUniform1f(glGetUniformLocation(m_shaders.basetexture, "u_opacity"), opacity);
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
-	                        
+
         mesh.draw();
     }
 }
@@ -853,7 +858,7 @@ void Render::__usePostEffectMode(bool posteffect_mode_on) const
 	
     m_transparentModeOn = -1;
 }
-       
+
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
     if (m_allowDrawAxis) {
@@ -866,7 +871,7 @@ void Render::drawAxis(const glm::mat4& modelMatrix) const
 void Render::drawCollisionRadius(const glm::mat4& modelMatrix) const
 {
     if (m_allowDrawCollisionRadius) {
-        drawQuad(*m_material, modelMatrix);
+        drawQuad(*m_materialCollisionRadius, modelMatrix);
     }
 }
       

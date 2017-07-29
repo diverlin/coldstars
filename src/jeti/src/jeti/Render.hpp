@@ -106,12 +106,12 @@ public:
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
-    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, float opacity = 1.0) const;
     void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshMultiTextured(const Mesh&, const control::Material&, const glm::mat4&) const;
 
-    void drawQuad(const control::Material&, const glm::mat4&) const;
+    void drawQuad(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
     void drawQuad(const control::Material&, const ceti::Box2D&) const;
 
     void drawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
@@ -157,7 +157,7 @@ private:
 
     Mesh* m_meshQuad = nullptr;
     Mesh* m_meshAxis = nullptr;
-    control::Material* m_material = nullptr;
+    control::Material* m_materialCollisionRadius = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;

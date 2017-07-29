@@ -36,6 +36,11 @@ Base::~Base()
         delete decor;
     }
     m_decors.clear();
+
+    if (m_shield) {
+        delete m_shield;
+        m_shield = nullptr;
+    }
 }
 
 int_t Base::id() const { return m_control_base->id(); }
@@ -43,6 +48,13 @@ entity::Type Base::type() const { return m_control_base->type(); }
 entity::Type Base::subType() const { return m_control_base->subType(); }
 int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
+
+effect::Shield*
+Base::createShieldEffect() {
+    assert(m_shield == nullptr);
+    m_shield = new effect::Shield();
+    return m_shield;
+}
 
 void Base::addDecor(Base* decor) {
     decor->setParent(this);
@@ -54,6 +66,12 @@ void Base::_drawDecors(const jeti::Render& render) const {
         decor->update();
         decor->draw(render);
     }
+}
+
+void Base::_drawShield(const jeti::Render& render) const {
+    assert(m_shield);
+    m_shield->update();
+    m_shield->draw(_modelMatrix(), render);
 }
 
 void Base::_drawCollisionRadius(const jeti::Render& render) const {

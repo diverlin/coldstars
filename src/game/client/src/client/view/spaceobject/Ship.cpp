@@ -64,6 +64,17 @@ Ship::Ship(control::Ship* ship)
 
         addDecor(turrel);
     }
+
+    {
+    effect::Shield* shield = createShieldEffect();
+
+    // find texture
+    ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->random(int(texture::Type::SHIELD_EFFECT));
+    assert(descriptor);
+    jeti::model::Material* model = new jeti::model::Material(descriptor);
+    jeti::control::Material* material = new jeti::control::Material(model);
+    shield->setMaterial(material);
+    }
 }
 
 Ship::~Ship()
@@ -110,10 +121,10 @@ Ship::~Ship()
 void Ship::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
-    _drawDecors(render);
-
-    _drawCollisionRadius(render);
-    _drawAxis(render);
+    //if (GetDataKorpus().draw_turrels) {
+        //GetComplexWeapon().RenderTurrels();
+        _drawDecors(render);
+    //}
 
     //if (GetProperties().grab_radius > 0) {
         //RenderGrabTrail(render);
@@ -121,18 +132,22 @@ void Ship::draw(const jeti::Render& render) const
         
     ///////RenderKorpus(render);
     
-    //if (GetDataKorpus().draw_turrels) {
-        //GetComplexWeapon().RenderTurrels();
-    //}
+
+
+
     
     //if (GetProperties().speed > 0) {
         //RenderDriveEffect(scale , 1.0 - color().a);
         //starsystem()->RestoreSceneColor();
     //}
     
-//    if (GetProperties().shield_effect_enabled) {
-//        RenderShieldEffect(render, 1.0f - color().a);
-//    }
+    //if (ship()->properties().shield_effect_enabled) {
+        _drawShield(render);
+        //RenderShieldEffect(render, 1.0f - color().a);
+    //}
+
+    _drawCollisionRadius(render);
+    _drawAxis(render);
 }
 
 //void ShipDrawable::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
