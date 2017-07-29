@@ -20,6 +20,7 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
+#include <jeti/animation/OpacityAnimation.hpp>
 
 #include <glm/gtx/transform.hpp>
 
@@ -28,10 +29,13 @@ namespace effect {
 
 Shield::Shield()
 {       
+    m_opacityAnimation = new jeti::animation::Opacity(0.02f, 0.5f, 0.95f, 1.5f);
+    m_opacityAnimation->setCyclic(true);
+
     m_color.r = 1.0;
     m_color.g = 1.0;
     m_color.b = 1.0;
-    m_color.a = m_opacityMin;
+//    m_color.a = m_opacityMin;
 
     m_scaleMatrix = glm::scale(glm::vec3(1.4f, 1.4f, 1.0f));
 }
@@ -41,35 +45,13 @@ Shield::~Shield()
 
 void Shield::dissipate()
 {
-    m_move = up;
+    m_opacityAnimation->run();
 }
 
 void Shield::update()
-{      
-    if (m_move == stop) {
-        if (m_cyclic) {
-            dissipate();
-        }
-        return;
-    }
-
-    if (m_move == up) {
-        m_color.a *= m_opacityUpFactor;
-    } else if (m_move == down) {
-        m_color.a *= m_opacityDownFactor;
-    }
-
-    if (m_color.a > m_opacityMax) {
-        m_move = down;
-        m_color.a = m_opacityMax;
-    } else if (m_color.a < m_opacityMin) {
-        m_color.a = m_opacityMin;
-        if (m_cyclic) {
-            dissipate();
-        } else {
-            m_move = stop;
-        }
-    }
+{
+    m_opacityAnimation->update();
+    m_color.a = m_opacityAnimation->opacity();
 }
 
 void Shield::draw(const glm::mat4& parentModelMatrix, const jeti::Render& render) const

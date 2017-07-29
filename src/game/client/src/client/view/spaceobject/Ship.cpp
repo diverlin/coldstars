@@ -74,6 +74,7 @@ Ship::Ship(control::Ship* ship)
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
     shield->setMaterial(material);
+    shield->dissipate();
     }
 }
 

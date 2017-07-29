@@ -18,45 +18,34 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
-
 namespace jeti {
-
-class Render;
-
 namespace animation {
-class Opacity;
-} // namespace animation
 
-namespace control {
-class Material;
-} // namespace control
-
-} // namespace jeti
-
-namespace view {
-namespace effect {
-
-class Shield
+class Opacity
 {  
+    enum move {STOP, UP, DOWN};
 public:
-    Shield();
-    ~Shield();
+    Opacity(float, float, float, float);
+    ~Opacity() = default;
 
-    void setMaterial(jeti::control::Material* material) { m_material = material; }
+    void setCyclic(bool cyclic) { m_cyclic = cyclic; }
+    float opacity() const { return m_opacity; }
 
-    void dissipate();
+    void run() { m_move = UP; }
+    void stop() { m_move = STOP; }
     void update();
-    void draw(const glm::mat4&, const jeti::Render&) const;
 
 private:
-    glm::vec4 m_color;
-    glm::mat4 m_scaleMatrix;
+    float m_opacity = 1.0f;
+    bool m_cyclic = false;
+    move m_move = STOP;
 
-    jeti::animation::Opacity* m_opacityAnimation = nullptr;
-    jeti::control::Material* m_material = nullptr;
+    float m_min = 0.0f;
+    float m_max = 1.0f;
+    float m_downFactor = 0.99f;
+    float m_upFactor = 1.01f;
 };
 
-} // namespace effect
-} // namespace view
+} // namespace animation
+} // namespace jeti
 
