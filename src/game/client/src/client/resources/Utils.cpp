@@ -21,8 +21,17 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <jeti/Material.hpp>
+#include <jeti/Mesh.hpp>
 
 namespace utils {
+
+jeti::Mesh*
+createMeshByDescriptorId(int_t id) {
+    ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(id);
+    assert(descriptor);
+    jeti::Mesh* mesh = new jeti::Mesh(descriptor);
+    return mesh;
+}
 
 jeti::control::Material*
 createMaterialByDescriptorId(int_t id) {

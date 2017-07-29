@@ -51,10 +51,7 @@ Ship::Ship(control::Ship* ship)
         }
 
         {
-            int_t descritprorId = turrel->mesh();
-            ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
-            assert(descriptor);
-            jeti::Mesh* mesh = new jeti::Mesh(descriptor);
+            jeti::Mesh* mesh = utils::createMeshByDescriptorId(turrel->mesh());
             turrel->bindMesh(mesh);
         }
 

@@ -23,6 +23,7 @@
 #include <core/type/TextureType.hpp>
 
 namespace jeti {
+class Mesh;
 namespace control {
 class Material;
 } // namespace control
@@ -30,7 +31,8 @@ class Material;
 
 namespace utils {
 
-jeti::control::Material* createMaterialByDescriptorId(int_t id);
-jeti::control::Material* createMaterialByDescriptorType(texture::Type type) ;
+jeti::Mesh* createMeshByDescriptorId(int_t);
+jeti::control::Material* createMaterialByDescriptorId(int_t);
+jeti::control::Material* createMaterialByDescriptorType(texture::Type) ;
 
 } // namespace utils
