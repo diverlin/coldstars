@@ -122,9 +122,9 @@ private:
     //
     
     void RenderInSpace(control::StarSystem*, bool, bool, bool);
-    void RenderInSpace_NEW(jeti::Renderer&, control::StarSystem*);
-    void RenderCollisionRadius(const jeti::Renderer&) const;
-    void RenderAxis(const jeti::Renderer&) const;
+    void RenderInSpace_NEW(jeti::Render&, control::StarSystem*);
+    void RenderCollisionRadius(const jeti::Render&) const;
+    void RenderAxis(const jeti::Render&) const;
 
     void SessionInSpace(control::StarSystem*, const TurnTimer&);
     void SessionInKosmoport();

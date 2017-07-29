@@ -31,7 +31,7 @@ Atmosphere::~Atmosphere()
 }
  
  /* virtual override final */            
-void Atmosphere::Render(const jeti::Renderer& render, const glm::vec3& center)
+void Atmosphere::Render(const jeti::Render& render, const glm::vec3& center)
 {      
     setPosition(center);
     //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());

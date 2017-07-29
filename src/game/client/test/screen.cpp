@@ -60,7 +60,7 @@ bool epsilonEqual(const glm::vec3& v1, const glm::vec3& v2) {
 TEST(coords, screen2word)
 {
     client::global::get().init();
-    jeti::Renderer& render = client::global::get().render();
+    jeti::Render& render = client::global::get().render();
     int w = render.width();
     int h = render.height();
     assert(w>0);
@@ -107,7 +107,7 @@ TEST(coords, screen2word)
 TEST(coords, word2screen)
 {
     client::global::get().init();
-    jeti::Renderer& render = client::global::get().render();
+    jeti::Render& render = client::global::get().render();
     int w = render.width();
     int h = render.height();
     assert(w>0);

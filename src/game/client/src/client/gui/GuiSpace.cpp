@@ -325,7 +325,7 @@ void GuiSpace::UpdateUnique(Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
+void GuiSpace::RenderUnique(const jeti::Render&, Player* player) const
 {
     //if (show_gui_radar == true)  
     //{

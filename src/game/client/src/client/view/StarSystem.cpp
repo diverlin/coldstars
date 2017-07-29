@@ -69,7 +69,7 @@ std::string join(size_t int1, size_t int2) {
 
 namespace view {
 
-StarSystem::StarSystem(jeti::Renderer& render)
+StarSystem::StarSystem(jeti::Render& render)
     :
       m_render(render)
     , m_camera(*render.camera())
@@ -150,7 +150,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     }
 
     {
-        const jeti::Renderer& render = client::global::get().render();
+        const jeti::Render& render = client::global::get().render();
         // update ui
         auto info = m_guiDemo->infoRender();
         info->setZNear(std::to_string(jeti::ZNEAR));
@@ -538,7 +538,7 @@ void StarSystem::__add(Satellite* view)
 
 
 
-void StarSystem::__render_NEW(jeti::Renderer& render)
+void StarSystem::__render_NEW(jeti::Render& render)
 {
 //    bool draw_background    = true;
 //    bool draw_volumetric    = true;
@@ -587,7 +587,7 @@ void StarSystem::__render_NEW(jeti::Renderer& render)
     }
 }
 
-void StarSystem::__render_NEW2(jeti::Renderer& render)
+void StarSystem::__render_NEW2(jeti::Render& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -802,7 +802,7 @@ void StarSystem::__render_NEW2(jeti::Renderer& render)
 void StarSystem::render(control::StarSystem* starsystem)
 {   
     assert(starsystem);
-    jeti::Renderer& renderer = client::global::get().render();
+    jeti::Render& renderer = client::global::get().render();
 
     renderer.update();
     m_camera.update();
@@ -847,7 +847,7 @@ void StarSystem::render(control::StarSystem* starsystem)
     //resizeGl(w, h);
 } 
 
-void StarSystem::__renderCollisionRadius(const jeti::Renderer& render) const
+void StarSystem::__renderCollisionRadius(const jeti::Render& render) const
 {
     //render.enable_BLEND();
     {   //a;pitodorender
@@ -868,7 +868,7 @@ void StarSystem::__renderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void StarSystem::__renderAxis(const jeti::Renderer& render) const
+void StarSystem::__renderAxis(const jeti::Render& render) const
 {    
     //render.enable_DEPTH();
     //alpitodorender

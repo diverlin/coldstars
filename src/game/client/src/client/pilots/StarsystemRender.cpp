@@ -203,7 +203,7 @@ void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 //    }
 //}
 
-void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
+void StarsystemRender::RenderInSpace_NEW(jeti::Render& render, Starsystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -414,7 +414,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     
 void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = client::global::get().render();
+    jeti::Render& renderer = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
     camera.update();
 
@@ -460,7 +460,7 @@ void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bo
     //resizeGl(w, h); 
 } 
 
-void StarsystemRender::RenderCollisionRadius(const jeti::Renderer& render) const
+void StarsystemRender::RenderCollisionRadius(const jeti::Render& render) const
 {
     //render.enable_BLEND(); 
     {   //a;pitodorender
@@ -481,7 +481,7 @@ void StarsystemRender::RenderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void StarsystemRender::RenderAxis(const jeti::Renderer& render) const
+void StarsystemRender::RenderAxis(const jeti::Render& render) const
 {    
     //render.enable_DEPTH(); 
     //alpitodorender

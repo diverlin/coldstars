@@ -23,7 +23,7 @@
 #include "BaseGuiElement.hpp"
 
 namespace jeti {
-class Renderer;
+class Render;
 }
 
 class BaseButton : public BaseGuiElement
@@ -41,8 +41,8 @@ class BaseButton : public BaseGuiElement
         
         virtual void ResetState() override;
         
-        virtual void RenderInfo(const jeti::Renderer&) const override;
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override;
+        virtual void RenderInfo(const jeti::Render&) const override;
+        virtual void RenderUnique(const jeti::Render&, Player*) const override;
                        
     protected:          
         float m_Alpha;                        

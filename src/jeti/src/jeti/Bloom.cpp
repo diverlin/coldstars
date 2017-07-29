@@ -78,14 +78,14 @@ void BloomEffect::Resize(int width, int height)
     fbo_final.Resize(width, height);
 }
                 
-void BloomEffect::Proceed(const Renderer& render, int width, int height, GLuint texture, float brightness_threshold)
+void BloomEffect::Proceed(const Render& render, int width, int height, GLuint texture, float brightness_threshold)
 {
     Pass0(render, width, height, texture, brightness_threshold);
     RestPasses(render, width, height);
     Combine(render, width, height, texture);
 }
                 
-void BloomEffect::Pass0(const Renderer& render, int width, int height, GLuint scene_texture, float brightThreshold)
+void BloomEffect::Pass0(const Render& render, int width, int height, GLuint scene_texture, float brightThreshold)
 {
     // RENDER TO FBO0
     (vec_vec_fbo[0])[0]->Activate(width, height);
@@ -105,7 +105,7 @@ void BloomEffect::Pass0(const Renderer& render, int width, int height, GLuint sc
     }                
 }       
                 
-void BloomEffect::RestPasses(const Renderer& render, int width, int height)
+void BloomEffect::RestPasses(const Render& render, int width, int height)
 {
     for (int pass_num = 1; pass_num < pass_max; pass_num++) 
     {   
@@ -123,7 +123,7 @@ void BloomEffect::RestPasses(const Renderer& render, int width, int height)
 
 
 
-void BloomEffect::Combine(const Renderer& render, int width, int height, GLuint _orig_scene_texture)
+void BloomEffect::Combine(const Render& render, int width, int height, GLuint _orig_scene_texture)
 {
     // RENDER TO final FBO
     fbo_final.Activate(width, height);

@@ -72,13 +72,13 @@ void BaseButton::ShadeOff()
 }      
    
 /* virtual override */               
-void BaseButton::RenderInfo(const jeti::Renderer&) const
+void BaseButton::RenderInfo(const jeti::Render&) const
 {
     jeti::drawColoredTextWithBackground(GetInfo(), 12, GetBox().center(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
+void BaseButton::RenderUnique(const jeti::Render& render, Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     

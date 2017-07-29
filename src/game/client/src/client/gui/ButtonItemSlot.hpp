@@ -39,8 +39,8 @@ public:
 private:
     virtual void UpdateUnique(Player*) override final;
 
-    virtual void RenderInfo(const jeti::Renderer&) const override final;
-    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+    virtual void RenderInfo(const jeti::Render&) const override final;
+    virtual void RenderUnique(const jeti::Render&, Player*) const override final;
 };
 
 

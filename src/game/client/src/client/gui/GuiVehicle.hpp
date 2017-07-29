@@ -45,7 +45,7 @@ class GuiVehicle : public BaseGuiElement
             
         Vehicle* m_Vehicle;
 
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+        virtual void RenderUnique(const jeti::Render&, Player*) const override final;
         
         void CreateKorpusGui(Vehicle*, float);
         void CreateItemSlotsGeometry(Vehicle*, float);

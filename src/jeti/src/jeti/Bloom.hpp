@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace jeti {
 
-class Renderer;
+class Render;
 
 class BloomEffect
 {
@@ -40,7 +40,7 @@ class BloomEffect
         void Create(GLuint, GLuint, GLuint);
         void Resize(int, int);
         
-        void Proceed(const Renderer&, int w, int h, GLuint texture, float brightness_threshold);
+        void Proceed(const Render&, int w, int h, GLuint texture, float brightness_threshold);
                 
     private:
         int pass_max;
@@ -55,9 +55,9 @@ class BloomEffect
         GLuint program_extractBright;
         GLuint program_combine;
         
-        void Pass0(const Renderer&, int, int, GLuint, float);
-        void RestPasses(const Renderer&, int, int);
-        void Combine(const Renderer&, int, int, GLuint);
+        void Pass0(const Render&, int, int, GLuint, float);
+        void RestPasses(const Render&, int, int);
+        void Combine(const Render&, int, int, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  

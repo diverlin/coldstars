@@ -49,7 +49,7 @@ Asteroid::~Asteroid()
 //    m_Info.addNameStr("pos:");         m_Info.addValueStr( str(center()) );
 //}
 
-void Asteroid::draw(const jeti::Renderer& render) const
+void Asteroid::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 

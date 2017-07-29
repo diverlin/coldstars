@@ -51,7 +51,7 @@ Satellite::~Satellite()
 //    //    updateOrientation();
 //}
 
-void Satellite::draw(const jeti::Renderer& render) const
+void Satellite::draw(const jeti::Render& render) const
 {
     jeti::view::BaseView::draw(render);
 

@@ -58,7 +58,7 @@ Planet::~Planet()
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
-void Planet::draw(const jeti::Renderer& render) const
+void Planet::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 

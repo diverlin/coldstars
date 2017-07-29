@@ -92,7 +92,7 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 }
 
 /*virtual override final*/
-void ButtonItemSlot2::RenderUnique(const jeti::Renderer& render, Player*) const
+void ButtonItemSlot2::RenderUnique(const jeti::Render& render, Player*) const
 {
     if (GetItemSlot()) {
         //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);

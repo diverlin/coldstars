@@ -186,7 +186,7 @@ void BaseGuiElement::UpdateCommon(Player* player)
        }
 }
 
-void BaseGuiElement::Render(const jeti::Renderer& render, Player* player) const
+void BaseGuiElement::Render(const jeti::Render& render, Player* player) const
 {
     if (!m_Show)
     {
@@ -207,7 +207,7 @@ void BaseGuiElement::Render(const jeti::Renderer& render, Player* player) const
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(const jeti::Renderer& render, Player* player) const
+void BaseGuiElement::RenderUnique(const jeti::Render& render, Player* player) const
 {
     if (m_TextureOb)
     {
@@ -215,7 +215,7 @@ void BaseGuiElement::RenderUnique(const jeti::Renderer& render, Player* player) 
     }
 }
 
-void BaseGuiElement::RenderCommon(const jeti::Renderer& render, Player* player) const
+void BaseGuiElement::RenderCommon(const jeti::Render& render, Player* player) const
 {
     for (const auto &gui_element : m_Child_vec)
     {

@@ -144,17 +144,17 @@ void BaseView::update()
     __updateModelMatrix();
 }
 
-void BaseView::draw(const jeti::Renderer& render) const
+void BaseView::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 }
 
-void BaseView::drawAxis(const jeti::Renderer& render) const
+void BaseView::drawAxis(const jeti::Render& render) const
 {
     render.drawAxis(_modelMatrix());
 }
 
-void BaseView::drawCollisionRadius(const jeti::Renderer& render) const
+void BaseView::drawCollisionRadius(const jeti::Render& render) const
 {
     render.drawAxis(_modelMatrix());
 }

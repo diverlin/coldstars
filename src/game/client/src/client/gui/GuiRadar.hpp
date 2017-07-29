@@ -27,7 +27,7 @@ class Vehicle;
 } // namespace model
 
 namespace jeti {
-class Renderer;
+class Render;
 }
 
 class GuiRadar : public BaseGuiElement
@@ -46,7 +46,7 @@ public:
 
     virtual void UpdateUnique(Player*) override final;
 
-    virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
+    virtual void RenderUnique(const jeti::Render&, Player*) const override final;
 
 private:
     float scale;

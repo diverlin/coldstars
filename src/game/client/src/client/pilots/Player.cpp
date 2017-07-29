@@ -215,7 +215,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    }
 }
              
-void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* starsystem)
+void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -428,7 +428,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, control::StarSystem* star
     
 void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = client::global::get().render();
+    jeti::Render& renderer = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
     camera.update();
     
@@ -893,7 +893,7 @@ void Player::ForceStateMachineReset() const
     //npc->GetStateMachine().ForceReset();
 }    
 
-void Player::RenderCollisionRadius(const jeti::Renderer& render) const
+void Player::RenderCollisionRadius(const jeti::Render& render) const
 {
     //render.enable_BLEND(); 
     {   //a;pitodorender
@@ -914,7 +914,7 @@ void Player::RenderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void Player::RenderAxis(const jeti::Renderer& render) const
+void Player::RenderAxis(const jeti::Render& render) const
 {    
     //render.enable_DEPTH(); 
     //alpitodorender

@@ -34,7 +34,7 @@ namespace control {
 class Material;
 } // namespace control
 
-class Renderer;
+class Render;
 }
           
 class BaseGuiElement
@@ -76,8 +76,8 @@ class BaseGuiElement
         virtual void ResetState();
 
         void Update(Player*);
-        void Render(const jeti::Renderer&, Player*) const;
-        virtual void RenderInfo(const jeti::Renderer&) const {};
+        void Render(const jeti::Render&, Player*) const;
+        virtual void RenderInfo(const jeti::Render&) const {};
                 
     protected:
         std::vector<BaseGuiElement*> m_Child_vec;
@@ -111,8 +111,8 @@ class BaseGuiElement
         virtual void UpdateUnique(Player*);        
         void UpdateCommon(Player*);
                         
-        virtual void RenderUnique(const jeti::Renderer&, Player*) const;
-        void RenderCommon(const jeti::Renderer&, Player*) const;
+        virtual void RenderUnique(const jeti::Render&, Player*) const;
+        void RenderCommon(const jeti::Render&, Player*) const;
                           
     private: 
         gui::type m_Type_id;

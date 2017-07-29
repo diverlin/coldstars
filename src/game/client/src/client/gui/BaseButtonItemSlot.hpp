@@ -26,7 +26,7 @@ class Item;
 } // namespace slot
 
 namespace jeti {
-class Renderer;
+class Render;
 } // namespace jeti
 
 class BaseButtonItemSlot : public BaseButton
@@ -49,7 +49,7 @@ protected:
 
     void UpdateAnimationProgram();
 
-    void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, gui::type) const;
+    void RenderMarkEmptySlot(const jeti::Render&, const glm::vec2&, gui::type) const;
     void RenderMarkTarget() const;
 
 private:

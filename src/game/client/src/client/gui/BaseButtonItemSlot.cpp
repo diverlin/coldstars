@@ -79,7 +79,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 //    }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_subtype_id) const
 {
     if (m_slot != nullptr)
     {

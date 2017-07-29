@@ -99,9 +99,9 @@ class StarsystemRender
         //
 
         void RenderInSpace(Starsystem*, bool, bool, bool);
-        void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
-        void RenderCollisionRadius(const jeti::Renderer&) const;
-        void RenderAxis(const jeti::Renderer&) const;
+        void RenderInSpace_NEW(jeti::Render&, Starsystem*);
+        void RenderCollisionRadius(const jeti::Render&) const;
+        void RenderAxis(const jeti::Render&) const;
 
         void clearVisibleEntities();
         void addIfVisible(jeti::view::BaseView*);

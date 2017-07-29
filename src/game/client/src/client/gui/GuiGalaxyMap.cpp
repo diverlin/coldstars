@@ -140,7 +140,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
 
 
 /* vitual override final */
-void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) const
+void GuiGalaxyMap::RenderUnique(const jeti::Render& render, Player* player) const
 {
     render.drawQuad(textureOb(), GetBox());    
 

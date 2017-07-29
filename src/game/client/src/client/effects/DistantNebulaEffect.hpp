@@ -29,7 +29,7 @@ class DistantNebulaEffect : public BaseDecor
         
         void Update();
         
-        virtual void Render(const jeti::Renderer&, const glm::vec3&) override;
+        virtual void Render(const jeti::Render&, const glm::vec3&) override;
         
 //        void Save(boost::property_tree::ptree&, const std::string&) const;
 //        void Load(const boost::property_tree::ptree&);

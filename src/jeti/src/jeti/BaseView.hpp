@@ -56,7 +56,7 @@ namespace animation {
 class BaseRotation;
 } // namespace animation
 
-class Renderer;
+class Render;
 
 namespace view {
 
@@ -81,10 +81,10 @@ public:
     //        void RenderCollisionRadius(const Renderer&) const;
 
     virtual void update();
-    virtual void draw(const jeti::Renderer& render) const;
+    virtual void draw(const jeti::Render& render) const;
 
-    void drawAxis(const jeti::Renderer& render) const;
-    void drawCollisionRadius(const jeti::Renderer& render) const;
+    void drawAxis(const jeti::Render& render) const;
+    void drawCollisionRadius(const jeti::Render& render) const;
 
 protected:
     ceti::control::Orientation* _orientation() const { return m_orientation; }
@@ -129,7 +129,7 @@ private:
     glm::quat m_quatDirection;
     glm::quat m_quatAnimation;
 
-    virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
+    virtual void __renderStuffWhenFocusedInSpace(const Render&) {}
 
     void __updateModelMatrix();
     void __adjustSizeFromMaterial();

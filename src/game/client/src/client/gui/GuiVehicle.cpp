@@ -334,7 +334,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 */   
      
 /* virtual override final */
-void GuiVehicle::RenderUnique(const jeti::Renderer& render, Player* player) const
+void GuiVehicle::RenderUnique(const jeti::Render& render, Player* player) const
 {
     //enable_BLEND(); 
     //{

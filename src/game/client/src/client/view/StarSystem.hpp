@@ -34,7 +34,7 @@ class Demo;
 } // naemspace gui
 
 namespace jeti {
-class Renderer;
+class Render;
 class Camera;
 class Mesh;
 
@@ -83,7 +83,7 @@ namespace view {
 class StarSystem
 {
 public:
-    StarSystem(jeti::Renderer&);
+    StarSystem(jeti::Render&);
     ~StarSystem();
 
     void render(control::StarSystem*);
@@ -112,10 +112,10 @@ private:
 
     void __updateVisible(control::StarSystem* starsystem);
 
-    void __render_NEW(jeti::Renderer&);
-    void __render_NEW2(jeti::Renderer&);
-    void __renderCollisionRadius(const jeti::Renderer&) const;
-    void __renderAxis(const jeti::Renderer&) const;
+    void __render_NEW(jeti::Render&);
+    void __render_NEW2(jeti::Render&);
+    void __renderCollisionRadius(const jeti::Render&) const;
+    void __renderAxis(const jeti::Render&) const;
 
     /// visible entities
     bool __addIfVisible(control::Star*);
@@ -157,7 +157,7 @@ private:
     bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
     bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
 
-    jeti::Renderer& m_render;
+    jeti::Render& m_render;
     jeti::Camera& m_camera;
 
     Cache m_cache;
