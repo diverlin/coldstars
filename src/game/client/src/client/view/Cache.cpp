@@ -21,6 +21,7 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/BaseView.hpp>
+#include <client/resources/Utils.hpp>
 
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
@@ -62,12 +63,7 @@ Cache::__loadResourcesFor(Base* view)
     if (it != m_materialCollector.end()) {
         material = it->second;
     } else {
-        ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(descritprorId);
-        if (descriptor) {
-            jeti::model::Material* model = new jeti::model::Material(descriptor);
-            material = new jeti::control::Material(model);
-        }
-        assert(material);
+        material = utils::createMaterialByDescriptorId(descritprorId);
         m_materialCollector.insert(std::make_pair(descritprorId, material));
     }
     view->setMaterial(material);
@@ -81,11 +77,7 @@ Cache::__loadResourcesFor(Base* view)
     if (it != m_meshCollector.end()) {
         mesh = it->second;
     } else {
-        ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(descritprorId);
-        if (descriptor) {
-            mesh = new jeti::Mesh(descriptor);
-        }
-        assert(mesh);
+        mesh = utils::createMeshByDescriptorId(descritprorId);
         m_meshCollector.insert(std::make_pair(descritprorId, mesh));
     }
 

@@ -30,6 +30,7 @@ createMeshByDescriptorId(int_t id) {
     ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(id);
     assert(descriptor);
     jeti::Mesh* mesh = new jeti::Mesh(descriptor);
+    assert(mesh);
     return mesh;
 }
 
@@ -39,6 +40,7 @@ createMaterialByDescriptorId(int_t id) {
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
+    assert(material);
     return material;
 }
 
@@ -48,6 +50,7 @@ createMaterialByDescriptorType(texture::Type type) {
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
+    assert(material);
     return material;
 }
 
