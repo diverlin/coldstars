@@ -16,46 +16,49 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "OpacityAnimation.hpp"
 
-#include <glm/glm.hpp>
+#include <cassert>
 
 namespace jeti {
-
-class Render;
-
 namespace animation {
-class Opacity;
-} // namespace animation
 
-namespace control {
-class Material;
-} // namespace control
+Opacity::Opacity(float min, float max, float downFactor, float upFactor)
+    :
+      m_min(min)
+    , m_max(max)
+    , m_downFactor(downFactor)
+    , m_upFactor(upFactor)
+{
+    assert(downFactor<1.0f);
+    assert(upFactor>1.0f);
+    m_opacity = m_min;
+}
 
-} // namespace jeti
+void Opacity::update()
+{      
+    if (m_move == STOP) {
+        return;
+    }
 
-namespace view {
-namespace effect {
+    if (m_move == UP) {
+        m_opacity *= m_upFactor;
+    } else if (m_move == DOWN) {
+        m_opacity *= m_downFactor;
+    }
 
-class Shield
-{  
-public:
-    Shield();
-    ~Shield();
-
-    void setMaterial(jeti::control::Material* material) { m_material = material; }
-
-    void dissipate();
-    void update();
-    void draw(const glm::mat4&, const jeti::Render&) const;
-
-private:
-    glm::vec4 m_color;
-    glm::mat4 m_scaleMatrix;
-
-    jeti::animation::Opacity* m_opacityAnimation = nullptr;
-    jeti::control::Material* m_material = nullptr;
-};
+    if (m_opacity > m_max) {
+        m_move = DOWN;
+        m_opacity = m_max;
+    } else if (m_opacity < m_min) {
+        m_opacity = m_min;
+        if (m_cyclic) {
+            run();
+        } else {
+            m_move = STOP;
+        }
+    }
+}
 
 } // namespace effect
 } // namespace view
