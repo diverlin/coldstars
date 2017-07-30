@@ -23,22 +23,13 @@
 
 class DistantNebulaEffect : public BaseDecor
 {
-    public:
-        DistantNebulaEffect();
-        virtual ~DistantNebulaEffect(); 
-        
-        void Update();
-        
-        virtual void Render(const jeti::Render&, const glm::vec3&) override;
-        
-//        void Save(boost::property_tree::ptree&, const std::string&) const;
-//        void Load(const boost::property_tree::ptree&);
-//        void Resolve();
-        
-//    private:
-//        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//        void LoadData(const boost::property_tree::ptree&);
-//        void ResolveData();
+public:
+    DistantNebulaEffect();
+    virtual ~DistantNebulaEffect();
+
+    void Update();
+
+    virtual void Render(const jeti::Render&, const glm::vec3&) override;
 };
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id = -1);

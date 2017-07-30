@@ -45,42 +45,6 @@ void DistantNebulaEffect::Render(const jeti::Render& render, const glm::vec3&)
     // alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }
               
-//void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-//    assert(false);
-////    std::string droot = root + "distant_nebula_effect."+std::to_string(id())+".";
-    
-////    //BaseBackGroundEffect::SaveData(save_ptree, droot);
-////    DistantNebulaEffect::SaveData(save_ptree, droot);
-//}
-
-//void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)
-//{
-//    //BaseBackGroundEffect::LoadData(load_ptree);
-//    DistantNebulaEffect::LoadData(load_ptree);
-//}
-
-//void DistantNebulaEffect::Resolve()
-//{
-//    //BaseBackGroundEffect::ResolveData();
-//    DistantNebulaEffect::ResolveData();
-//}
-
-//void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-//    //save_ptree.put(root+"m_Angle", m_Angle);
-//    //save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
-//}
-
-//void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
-//{
-//    //m_Angle = load_ptree.get<float>("m_Angle");
-//    //m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
-//}
-
-//void DistantNebulaEffect::ResolveData()
-//{}
-
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
     jeti::Mesh* mesh = nullptr; //MeshCollector::get().get(mesh::type::PLANE);
@@ -96,7 +60,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
         delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
     }
     
-    float z = -meti::getRandInt(200, 499);
+    float z = -meti::getRandInt(799, 999);
     float rate = 5;
     
     glm::vec3 center(meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), z);

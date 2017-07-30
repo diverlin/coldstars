@@ -57,6 +57,10 @@ class Satellite;
 class Bullet;
 } // namespace control
 
+namespace effect {
+class DistantStars;
+} // namespace
+
 namespace view {
 class Base;
 class Star;
@@ -90,6 +94,7 @@ public:
 
 private:
     gui::Demo* m_guiDemo = nullptr;
+    ::effect::DistantStars* m_distantStars = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;

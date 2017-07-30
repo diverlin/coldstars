@@ -30,9 +30,7 @@ class Render;
 class BaseDecor : public ceti::control::Orientation
 {
 public:
-    BaseDecor():
-    ceti::control::Orientation(new ceti::model::Orientation)
-    {}
+    BaseDecor():ceti::control::Orientation(new ceti::model::Orientation) {}
     ~BaseDecor() {}
 
     virtual void Render(const jeti::Render&, const glm::vec3&) = 0;

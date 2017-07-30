@@ -83,6 +83,11 @@ Cache::__loadResourcesFor(Base* view)
 
     view->setMesh(mesh);
     }
+
+    // turrels and other decors
+    for(auto decor: view->decors()) {
+        __loadResourcesFor(decor);
+    }
 }
 
 } // namespace view

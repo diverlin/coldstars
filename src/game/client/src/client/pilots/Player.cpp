@@ -238,7 +238,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
             // render background and star to FBO0
             render.activateFbo(0, w, h);
             {
-                render.setPerspectiveProjection(w, h);
+                render.setPerspectiveProjection();
                 //starsystem->DrawBackground(render, world_coord);
                 render.setOrthogonalProjection();
 

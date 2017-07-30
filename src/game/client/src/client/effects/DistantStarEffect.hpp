@@ -19,33 +19,48 @@
 
 #pragma once
 
-#include <client/effects/BaseBackGroundEffect.hpp>
-
 #include <ceti/type/IdType.hpp>
 
-const int DISTANT_STAR_MIN = 10000;
-const int DISTANT_STAR_MAX = 10000;
+#include <glm/glm.hpp>
 
-class DistantStarEffect : public BaseBackGroundEffect
-{   
+#include <vector>
+
+namespace jeti {
+class Render;
+class Mesh;
+namespace control {
+class Material;
+} // namespace control
+} // namespace jeti
+
+const int DISTANT_STAR_MIN = 500;
+const int DISTANT_STAR_MAX = 1000;
+
+namespace effect {
+
+class DistantStars
+{
 public:
-    DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
-    ~DistantStarEffect();
+    DistantStars(const std::vector<glm::vec3>&,
+                      const std::vector<glm::vec4>&,
+                      const std::vector<float>&,
+                      float scale = 1.0f);
+    ~DistantStars();
 
-    void Save(boost::property_tree::ptree&, const std::string&) const;
-    void Load(const boost::property_tree::ptree&);
-    void Resolve();
-    
+    void setMaterial(jeti::control::Material* material) { m_material = material; }
+
+    void draw(const jeti::Render&) const;
+
 private:
-    std::vector<glm::vec3> m_Positions;
-    std::vector<glm::vec4> m_Colors;
-    std::vector<float> m_Sizes;
+    jeti::control::Material* m_material = nullptr;
+    jeti::Mesh* m_mesh = nullptr;
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+    glm::mat4 m_Mm;
+    std::vector<glm::vec3> m_positions;
+    std::vector<glm::vec4> m_colors;
+    std::vector<float> m_sizes;
 }; 
 
-DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE);
+DistantStars* genDistantStars(int color_id = NONE);
 
-
+} // namespace effect
