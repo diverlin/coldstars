@@ -43,18 +43,6 @@ Ship::Ship(control::Ship* ship)
         // don't create resources, try to get existed from cache
         control::Turrel* turrel_control = builder::Turrel().gen();
         view::Turrel* turrel = new view::Turrel(slot, turrel_control);
-
-        {
-            int_t descritprorId = turrel->texture();
-            jeti::control::Material* material = utils::createMaterialByDescriptorId(descritprorId);
-            turrel->setMaterial(material);
-        }
-
-        {
-            jeti::Mesh* mesh = utils::createMeshByDescriptorId(turrel->mesh());
-            turrel->setMesh(mesh);
-        }
-
         addDecor(turrel);
     }
 

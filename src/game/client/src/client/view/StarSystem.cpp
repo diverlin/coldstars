@@ -45,6 +45,8 @@
 #include <client/resources/TextureCollector.hpp>
 #include <client/common/global.hpp>
 
+#include <client/effects/DistantStarEffect.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
 #include <jeti/Screen.hpp>
@@ -74,6 +76,7 @@ StarSystem::StarSystem(jeti::Render& render)
       m_render(render)
     , m_camera(*render.camera())
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
+    , m_distantStars(::effect::genDistantStars())
 {}
 
 StarSystem::~StarSystem()
@@ -557,8 +560,10 @@ void StarSystem::__render_NEW(jeti::Render& render)
 
     render.clearColorAndDepthBuffers();
 
-    //render.setPerspectiveProjection(w, h);
+    //render.setPerspectiveProjection();
     //starsystem->DrawBackground(render, world_coord);
+    m_distantStars->draw(render);
+
     render.setOrthogonalProjection();
 
     render.enable_CULLFACE();

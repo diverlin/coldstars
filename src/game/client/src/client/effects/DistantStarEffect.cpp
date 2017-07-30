@@ -17,77 +17,60 @@
 */
 
 #include "DistantStarEffect.hpp"
-//#include <ceti/StringUtils.hpp>
-#include <common/constants.hpp>
-//#include <math/rand.hpp>
+//#include <common/constants.hpp>
+
 #include <meti/RandUtils.hpp>
 
-#include <client/resources/TextureCollector.hpp>
+//#include <client/resources/TextureCollector.hpp>
+#include <client/resources/Utils.hpp>
+
 #include <jeti/Mesh.hpp>
+#include <jeti/Render.hpp>
 
+#include <glm/gtx/transform.hpp>
 
-DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
+namespace effect {
+
+DistantStars::DistantStars(const std::vector<glm::vec3>& positions,
+                           const std::vector<glm::vec4>& colors,
+                           const std::vector<float>& sizes,
+                           float scale)
 {
-    for (unsigned int i=0; i<positions.size(); i++)
-    {
-        m_Positions.push_back(positions[i]);
-        m_Colors.push_back(colors[i]);
-        m_Sizes.push_back(sizes[i]);
+    //assert(positions.size()==colors.size()==sizes.size());
+    for (unsigned int i=0; i<positions.size(); i++) {
+        m_positions.push_back(positions[i]);
+        m_colors.push_back(colors[i]);
+        m_sizes.push_back(sizes[i]);
     }
 
-    m_Mesh = new jeti::Mesh();
-    m_Mesh->fillPointVertices(m_Positions, m_Colors, m_Sizes);
+    m_mesh = new jeti::Mesh();
+    m_mesh->fillPointVertices(m_positions, m_colors, m_sizes);
+
+    m_Mm = glm::scale(glm::vec3(scale));
 }
 
-DistantStarEffect::~DistantStarEffect()
+DistantStars::~DistantStars()
 {
-    delete m_Mesh;
+    delete m_mesh;
 }
 
-void DistantStarEffect::SaveData(boost::property_tree::ptree&, const std::string&) const        
-{}
-
-void DistantStarEffect::LoadData(const boost::property_tree::ptree&)
-{}
-
-void DistantStarEffect::ResolveData()
-{}        
-        
-  
- 
-void DistantStarEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DistantStars::draw(const jeti::Render& render) const
 {
-    std::string droot = root + "distant_star_effect."+std::to_string(id)+".";
-    
-    BaseBackGroundEffect::SaveData(save_ptree, droot);
-    DistantStarEffect::SaveData(save_ptree, droot);
-}    
-
-void DistantStarEffect::Load(const boost::property_tree::ptree& load_ptree)
-{
-    BaseBackGroundEffect::LoadData(load_ptree);
-    DistantStarEffect::LoadData(load_ptree);
+    render.drawBlinkingParticles(*m_mesh, *m_material, m_Mm);
 }
 
-void DistantStarEffect::Resolve()
-{
-    BaseBackGroundEffect::ResolveData();
-    DistantStarEffect::ResolveData();
-}
-
- 
-DistantStarEffect* GetNewDistantStarEffect(int color_id)
+DistantStars* genDistantStars(int color_id)
 {
     int distStar_num = meti::getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
 
-    //jeti::control::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DISTANTSTAR);
+    jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
+    assert(material);
 
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    for (int i=0; i<distStar_num; i++)
-    {
+    for (int i=0; i<distStar_num; i++) {
         float z = -meti::getRandInt(200, 499);
         glm::vec3 position = meti::getRandXYVec3f(0, 3000, z);
 
@@ -97,11 +80,13 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
         
         positions.push_back(position);
         colors.push_back(glm::vec4(r, g, b, 1.0f));
-        sizes.push_back(meti::getRandFloat(5.0, 25.0));
+        sizes.push_back(meti::getRandFloat(3.0, 10.0));
     }
             
-    DistantStarEffect* ds = new DistantStarEffect(positions, colors, sizes);
-    //ds->SetTextureOb(textureOb);
+    DistantStars* ds = new DistantStars(positions, colors, sizes);
+    ds->setMaterial(material);
     
     return ds;
 }
+
+} // namespace effect

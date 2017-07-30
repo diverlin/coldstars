@@ -34,21 +34,21 @@ public:
     BaseBackGroundEffect();
     ~BaseBackGroundEffect();
 
-    void ValidateResources() const;
-    void SetTextureOb(jeti::control::Material* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
+    void validateResources() const;
+    void setTextureOb(jeti::control::Material* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
-    void setCenter(const glm::vec3& center)     { m_Center = center; }
-    void setSize(const glm::vec3& size)         { m_Size = size; }
+    void setCenter(const glm::vec3& center)     { m_center = center; }
+    void setSize(const glm::vec3& size)         { m_size = size; }
 
-    void SetAngle(float angle)              { m_Angle = angle; }
-    void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
+    void setAngle(float angle)              { m_angle = angle; }
+    void setDeltaAngle(float delta_angle)   { m_deltaAngle = delta_angle; }
 
-    const glm::vec3& center() const { return m_Center; }
-    const jeti::control::Material& textureOb() const { return *m_TextureOb; }
+    const glm::vec3& center() const { return m_center; }
+    const jeti::control::Material& textureOb() const { return *m_textureOb; }
 
-    const glm::vec4& color() const { return m_Color; }
+    const glm::vec4& color() const { return m_color; }
 
-    const jeti::Mesh& mesh() const { return *m_Mesh; }
+    const jeti::Mesh& mesh() const { return *m_mesh; }
 
     const glm::mat4& actualModelMatrix();
 
@@ -57,27 +57,22 @@ protected:
 
     static unsigned long int counter;
 
-    jeti::control::Material* m_TextureOb;
-    std::string m_TextureObPath;
+    jeti::control::Material* m_textureOb = nullptr;
+    std::string m_textureObPath;
 
-    glm::vec3 m_Center;
-    glm::vec3 m_Size;
-    glm::vec4 m_Color;
+    glm::vec3 m_center;
+    glm::vec3 m_size;
+    glm::vec4 m_color;
 
-    float m_Angle;
-    float m_DeltaAngle;
+    float m_angle;
+    float m_deltaAngle;
 
     glm::mat4 m_Mm;
     glm::mat4 m_Tm;
     glm::mat4 m_Rm;
     glm::mat4 m_Sm;
 
-    jeti::Mesh* m_Mesh;
-
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
-    
+    jeti::Mesh* m_mesh = nullptr;
 };
 
 

@@ -69,12 +69,13 @@ public:
     int width() const { return m_size.x; }
     int height() const { return m_size.y; }
 
-    void applyScale(float);
     void increaseScale();
     void decreaseScale();
 
     bool allowDrawAxis() const { return m_allowDrawAxis; }
     bool allowDrawCollisionRadius() const { return m_allowDrawCollisionRadius; }
+
+    void setScale(float scale) { m_scale = scale;}
 
     void setAllowDrawAxis(bool allowDrawAxis) { m_allowDrawAxis = allowDrawAxis; }
     void setAllowDrawCollisionRadius(bool allowDrawCollisionRadius) { m_allowDrawCollisionRadius = allowDrawCollisionRadius; }
@@ -91,7 +92,7 @@ public:
 
     void init(Camera*, int, int);
 
-    void setPerspectiveProjection(float, float);
+    void setPerspectiveProjection();
     void setOrthogonalProjection();
 
     BloomEffect& bloom() { return m_bloom; }
@@ -104,6 +105,7 @@ public:
     void composeViewMatrix(const glm::mat4&);
 
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
+
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, float opacity = 1.0) const;
@@ -124,6 +126,7 @@ public:
     void drawScreenQuadTextured(GLuint, int, int) const;
 
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawBlinkingParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawAxis(const glm::mat4&) const;
     void drawCollisionRadius(const glm::mat4&) const;
@@ -139,7 +142,7 @@ public:
     Camera* camera() const { return m_camera; }
 
 private:
-    float m_t = 0.0f;
+    float m_time = 0.0f;
 
     int m_fps = 0;
     int m_framesCounter = 0;

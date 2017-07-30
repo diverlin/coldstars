@@ -100,7 +100,7 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
 void
 InfoLoader::read(const std::string& path, descriptor::Material* material)
 {
-    std::cout<<"mnaging "<<path<<" ..."<<std::endl;
+    std::cout<<"managing "<<path<<" ..."<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 

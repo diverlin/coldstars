@@ -92,7 +92,7 @@ void Render::decreaseScale()
 
 void Render::update() {
     __updateFps();
-//    m_t += 0.01f;
+    m_time += 0.01f;
 //    float R = 500;
 //    m_light.position.x = R*sin(m_t);
 //    m_light.position.y = R*cos(m_t);
@@ -178,6 +178,7 @@ void Render::init(Camera* camera, int w, int h)
     m_shaders.flash           = compile_program(SHADERS_PATH+"flash.vert",             SHADERS_PATH+"flash.frag");
     m_shaders.mask            = compile_program(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
     m_shaders.particle        = compile_program(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
+    m_shaders.particle_blink  = compile_program(SHADERS_PATH+"particle_blink.vert",    SHADERS_PATH+"particle_blink.frag");
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
 
     __initPostEffects();
@@ -276,16 +277,11 @@ void Render::__makeShortCuts()
     
     m_programBlur  = m_shaders.blur;
 }
-        
-void Render::setPerspectiveProjection(float w, float h)
-{        
-    m_projectionMatrix = glm::perspective(90.0f, w/h, ZNEAR, ZFAR);
-    __updateProjectionViewMatrix();
-}
 
-void Render::applyScale(float scale) {
-    m_scale = scale;
-    setOrthogonalProjection();
+void Render::setPerspectiveProjection()
+{        
+    m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 300.0f, ZNEAR);
+    __updateProjectionViewMatrix();
 }
 
 void Render::setOrthogonalProjection()
@@ -781,6 +777,28 @@ void Render::drawParticles(const Mesh& mesh, const control::Material& textureOb,
             glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
       
+            mesh.draw(GL_POINTS);
+        }
+    }
+    __disable_POINTSPRITE();
+}
+
+void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+{
+    __enable_POINTSPRITE();
+    {
+        __useTransparentMode(true);
+
+        __useProgram(m_shaders.particle_blink);
+        {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+            glUniform1i(glGetUniformLocation(m_shaders.particle_blink, "uTexture_0"), 0);
+            glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_time"), m_time);
+
+            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
+
             mesh.draw(GL_POINTS);
         }
     }
