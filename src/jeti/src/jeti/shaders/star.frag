@@ -15,14 +15,19 @@ float rand(int seed, float ray) {
 }
 
 layout(location = FRAG_OUTPUT0) out vec4 color;
+in vec2 v_texCoord;
 
 void main( void ) {
+    vec4 texel = texture2D(u_texture, v_texCoord);
+    color = texel;
+    //color.rgb *= 0.5;
+
     float pi = 3.14159265359;
     vec2 position = ( gl_FragCoord.xy / u_resolution.xy ) - vec2(u_worldPosition.x, u_worldPosition.y);
     position.y *= u_resolution.y/u_resolution.x;
     float ang = atan(position.y, position.x);
     float dist = u_sizeFactor*length(position);
-    color.rgb = vec3(0.8, 0.8, 0.15) * (pow(dist, -4.0) * 0.5);
+    color.rgb += vec3(0.8, 0.8, 0.15) * (pow(dist, -4.0) * 0.5);
     for (float ray = 0.0; ray < 2.0; ray += 0.095) {
         float rayang = rand(5, ray)*6.2+(u_time*0.1)*2.0*(rand(2546, ray))-rand(5785, ray)-(rand(3545, ray)-rand(5467, ray));
         rayang = mod(rayang, pi*2.0);
@@ -34,6 +39,6 @@ void main( void ) {
             color.rgb += vec3(0.3+0.4*rand(8644, ray), 0.25+0.4*rand(4567, ray), 0.7+0.4*rand(7354, ray)) * brite * 0.1;
         }
     }
-    color.a = 1.0;
+    //color.a = 1.0;
 }
 

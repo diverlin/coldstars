@@ -78,6 +78,13 @@ glm::vec3 getRandXYVec3Unit()
     return glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 
+glm::vec3 getXYVec3(float radius, float angle)
+{
+    float angleInRad = glm::radians(angle);
+    return glm::vec3(radius*sin(angleInRad), radius*cos(angleInRad), 0.0);
+}
+
+
 glm::vec3 getXYVec3Unit(float alpha)
 {
     alpha = glm::radians(alpha); //ugly

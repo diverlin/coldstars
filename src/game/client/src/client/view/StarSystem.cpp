@@ -562,16 +562,19 @@ void StarSystem::__render_NEW(jeti::Render& render)
     //render.setPerspectiveProjection();
     //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(0.2f);
-    m_distantNebulas->update(render.camera()->position());
-    m_distantNebulas->draw(render);
 
+    m_distantNebulas->update(render.camera()->position());
     m_distantStars->update(render.camera()->position());
+
+    render.m_fboBackGround.activate(render.size().x, render.size().y);
+    glDisable(GL_DEPTH_TEST);
+    m_distantNebulas->draw(render);
     m_distantStars->draw(render);
+    render.m_fboBackGround.deactivate();
 
     render.setOrthogonalProjection();
 
-
-    render.drawStar();
+    render.drawStar(render.m_fboBackGround.colorBuffer());
 
     render.enable_CULLFACE();
 
