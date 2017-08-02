@@ -24,22 +24,22 @@ namespace jeti {
 
 class Fbo
 {
-    public:
-        Fbo();
-        ~Fbo();
-        
-        void Create();
-        const GLuint GetTexture() const { return texture; };
-        
-        void Activate(int, int);
-        void Deactivate();
-        
-        void Resize(int, int);
+public:
+    Fbo()=default;
+    ~Fbo()=default;
 
-    private:
-        GLuint texture;
-        GLuint depth_buffer;
-        GLuint fbo;
+    void init();
+    GLuint colorBuffer() const { return m_color_buffer; }
+
+    void activate(int, int);
+    void deactivate();
+
+    void resize(int, int);
+
+private:
+    GLuint m_color_buffer;
+    GLuint m_depth_buffer;
+    GLuint m_fbo;
 };
-    
-}
+
+} // namespace jeti

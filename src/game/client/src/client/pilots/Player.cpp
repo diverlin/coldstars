@@ -280,7 +280,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
             // render space entites to FBO2
             render.activateFbo(3, w, h);
             {
-                render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
 
                 // resizeGl(w*scale, h*scale);
                 {
@@ -371,7 +371,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
 //                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
 //                }
 
-                render.drawPostEffectShockWaves(render.lastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
+                render.drawPostEffectShockWaves(render.lastFbo().colorBuffer(), w, h, i, center_array, xyz_array, time_array);
             }
             render.deactivateFbo(4);
         }
@@ -382,7 +382,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
             render.activateFbo(5, w, h);
             {
                 //resizeGl(w, h);
-                render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
 
                 //resizeGl(w*scale, h*scale);
                 //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
@@ -403,7 +403,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
         }
 
         render.clearColorAndDepthBuffers();       
-        render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
+        render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
   
         // FOGWAR and STARSPARK to final scene
         //resizeGl(w, h); 

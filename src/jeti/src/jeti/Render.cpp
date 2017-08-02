@@ -227,7 +227,7 @@ void Render::activateFbo(int index, int w, int h)
         throw std::runtime_error("wrong fbo index");
     }
 
-    m_fbos[index].Activate(w, h);
+    m_fbos[index].activate(w, h);
     m_indexFboLastActivated = index;
 }
 
@@ -241,14 +241,14 @@ void Render::deactivateFbo(int index)
         throw std::runtime_error("you are trying to deactivate not active fbo");
     }
     
-    m_fbos[index].Deactivate();
+    m_fbos[index].deactivate();
     m_indexFboLastDeactivated = index;
 }
 
 void Render::__initPostEffects()
 {
     for (int i=0; i<m_fboNum; i++) {
-        m_fbos[i].Create();
+        m_fbos[i].init();
     }
         
     m_bloom.Create(m_shaders.blur, m_shaders.extractbright, m_shaders.combine);
@@ -259,7 +259,7 @@ void Render::__initPostEffects()
 void Render::__resizePostEffects(int width, int height)
 {
     for (int i=0; i<m_fboNum; i++) {
-        m_fbos[i].Resize(width, height);
+        m_fbos[i].resize(width, height);
     }
         
     m_bloom.Resize(width, height);
@@ -737,7 +737,7 @@ void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, m_bloom.GetFboFinal().GetTexture());
+        glBindTexture(GL_TEXTURE_2D, m_bloom.GetFboFinal().colorBuffer());
         glUniform1i(glGetUniformLocation(m_shaders.volumetriclight, "FullSampler"), 0);
 
         glActiveTexture(GL_TEXTURE1);                                
