@@ -20,24 +20,17 @@
 
 namespace jeti {
 
-Fbo::Fbo()
-{}
-
-void Fbo::Create()
+void Fbo::init()
 {
-    glGenTextures(1, &texture);         // create a color texture
-    glGenRenderbuffers(1, &depth_buffer);     // create depth renderbuffer
-    glGenFramebuffers(1, &fbo);            // create Fbo
+    glGenTextures(1, &m_color_buffer);          // create a color texture
+    glGenRenderbuffers(1, &m_depth_buffer);     // create depth renderbuffer
+    glGenFramebuffers(1, &m_fbo);               // create Fbo
 }
 
-Fbo::~Fbo()
-{}
-    
-    
-void Fbo::Resize(int w, int h)
+void Fbo::resize(int w, int h)
 {
     // color texture manipulation
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, m_color_buffer);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_INT, nullptr); // no data transferred
     
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -45,36 +38,36 @@ void Fbo::Resize(int w, int h)
     glBindTexture(GL_TEXTURE_2D, 0);
     
     // depth renderbuffer manipulation
-    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
+    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_depth_buffer);
     glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
     
     // Fbo manipulation
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo); 
-    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_color_buffer, 0);
+    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depth_buffer);
     
     // Go back to regular frame buffer rendering
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }              
 
-void Fbo::Activate(int width, int height)
+void Fbo::activate(int width, int height)
 {
     glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);     // bind fbo
+    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);   // bind fbo
     
-    glDepthMask(GL_TRUE); 
+    glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
     glViewport(0, 0, width, height);
 }
 
-void Fbo::Deactivate()
+void Fbo::deactivate()
 {
     glActiveTexture(GL_TEXTURE0);                // debug     ???
     glPopAttrib();                               // restore viewport
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-}
+} // namespace jeti
 
