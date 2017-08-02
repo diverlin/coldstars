@@ -20,6 +20,7 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <core/type/MeshType.hpp>
 #include <core/type/TextureType.hpp>
 
 namespace jeti {
@@ -34,6 +35,7 @@ namespace utils {
 
 // TODO: remove this, perform everything via cache
 jeti::Mesh* createMeshByDescriptorId(int_t);
+jeti::Mesh* createMeshByDescriptorType(mesh::Type);
 jeti::control::Material* createMaterialByDescriptorId(int_t);
 jeti::control::Material* createMaterialByDescriptorType(texture::Type) ;
 

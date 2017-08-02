@@ -34,6 +34,16 @@ createMeshByDescriptorId(int_t id) {
     return mesh;
 }
 
+jeti::Mesh*
+createMeshByDescriptorType(mesh::Type type) {
+    ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->random(int(type));
+    assert(descriptor);
+    jeti::Mesh* mesh = new jeti::Mesh(descriptor);
+    assert(mesh);
+    return mesh;
+}
+
+
 jeti::control::Material*
 createMaterialByDescriptorId(int_t id) {
     ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(id);

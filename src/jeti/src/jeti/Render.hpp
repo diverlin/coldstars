@@ -94,6 +94,7 @@ public:
 
     void setPerspectiveProjection();
     void setOrthogonalProjection();
+    void setOrthogonalProjection(float);
 
     BloomEffect& bloom() { return m_bloom; }
     const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
@@ -116,6 +117,7 @@ public:
     void drawQuad(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
     void drawQuad(const control::Material&, const ceti::Box2D&) const;
 
+    void drawStar();
     void drawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
     void drawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
     void drawPostEffectExtractBright(GLuint, int, int, float) const;
@@ -193,6 +195,8 @@ private:
 
     BloomEffect m_bloom;
     Camera* m_camera = nullptr;
+
+    glm::mat4 m_screenModelMatrix;
 
     void __initAxisMesh();
     void __initPostEffects();

@@ -66,6 +66,21 @@ BaseView::~BaseView() {
     m_animationRotation = nullptr;
 }
 
+void BaseView::setPosition(const glm::vec3& position)
+{
+    _orientation()->setPosition(position);
+}
+
+void BaseView::setSize(const glm::vec3& size)
+{
+    _orientation()->setSize(size);
+}
+
+void BaseView::setDirection(const glm::vec3& direction)
+{
+    _orientation()->setDirection(direction);
+}
+
 void
 BaseView::setMesh(Mesh* mesh) {
     m_mesh = mesh;
@@ -149,14 +164,18 @@ void BaseView::draw(const jeti::Render& render) const
     render.draw(_mesh(), _material(), _modelMatrix());
 }
 
-void BaseView::drawAxis(const jeti::Render& render) const
+void BaseView::_drawAxis(const jeti::Render& render) const
 {
-    render.drawAxis(_modelMatrix());
+    if (render.allowDrawAxis()) {
+        render.drawAxis(_modelMatrix());
+    }
 }
 
-void BaseView::drawCollisionRadius(const jeti::Render& render) const
+void BaseView::_drawCollisionRadius(const jeti::Render& render) const
 {
-    render.drawAxis(_modelMatrix());
+    if (render.allowDrawCollisionRadius()) {
+        render.drawCollisionRadius(_calcCollisionModelMatrix());
+    }
 }
 
 void BaseView::__updateModelMatrix()

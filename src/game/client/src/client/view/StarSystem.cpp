@@ -44,8 +44,8 @@
 #include <client/text/VerticalFlowText.hpp>
 #include <client/resources/TextureCollector.hpp>
 #include <client/common/global.hpp>
-
-#include <client/effects/DistantStarEffect.hpp>
+#include <client/effects/DistantStarsEffect.hpp>
+#include <client/effects/DistantNebulaEffect.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
@@ -77,6 +77,7 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_camera(*render.camera())
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
+    , m_distantNebulas(::effect::genDistantNebulas())
 {}
 
 StarSystem::~StarSystem()
@@ -556,22 +557,28 @@ void StarSystem::__render_NEW(jeti::Render& render)
 //    bool draw_shockwave     = true;
 //    bool draw_robustSpaceObjects = true;
 
-    const auto& screen = client::global::get().screen();
-
     render.clearColorAndDepthBuffers();
 
     //render.setPerspectiveProjection();
     //starsystem->DrawBackground(render, world_coord);
+    render.setOrthogonalProjection(0.2f);
+    m_distantNebulas->update(render.camera()->position());
+    m_distantNebulas->draw(render);
+
+    m_distantStars->update(render.camera()->position());
     m_distantStars->draw(render);
 
     render.setOrthogonalProjection();
 
+
+    render.drawStar();
+
     render.enable_CULLFACE();
 
-    for(Star* star: m_stars) {
-        star->update();
-        star->draw(render);
-    }
+//    for(Star* star: m_stars) {
+//        star->update();
+//        star->draw(render);
+//    }
 
     for(Planet* planet: m_planets) {
         planet->update();
@@ -587,7 +594,6 @@ void StarSystem::__render_NEW(jeti::Render& render)
         ship->update();
         ship->draw(render);
     }
-
 
     render.disable_CULLFACE();
 

@@ -19,19 +19,36 @@
 
 #pragma once
 
-#include <client/effects/BaseDecor.hpp>    
+#include <jeti/BaseView.hpp>
 
-class DistantNebulaEffect : public BaseDecor
-{
+namespace effect {
+
+class DistantNebula;
+class DistantNebulas {
 public:
-    DistantNebulaEffect();
-    virtual ~DistantNebulaEffect();
+    DistantNebulas(const std::vector<DistantNebula*>&);
+    ~DistantNebulas();
 
-    void Update();
+    void update(const glm::vec3&);
+    void draw(const jeti::Render&) const;
 
-    virtual void Render(const jeti::Render&, const glm::vec3&) override;
+private:
+    std::vector<DistantNebula*> m_nebulas;
 };
 
-DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id = -1);
+class DistantNebula : public jeti::view::BaseView
+{
+public:
+    DistantNebula(float);
+    virtual ~DistantNebula();
 
+    void update(const glm::vec3&);
 
+private:
+    glm::vec3 m_offset;
+    float m_paralaxFactor = 1.0f;
+};
+
+DistantNebulas* genDistantNebulas(int color_id = -1);
+
+} // namespace effect

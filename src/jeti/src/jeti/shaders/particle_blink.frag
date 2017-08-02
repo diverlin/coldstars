@@ -15,6 +15,6 @@ void main (void)
     color = vColor*texel;
     float offset = 2*vColor.r;
 
-    float factor = clamp(cos(offset*u_time), 0.5, 1.0);
+    float factor = clamp(cos(offset*u_time), 0.7, 1.0);
     color.rgb *= factor;
 }

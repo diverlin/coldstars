@@ -66,6 +66,12 @@ public:
     BaseView();
     virtual ~BaseView();
 
+    [[depracated("depr this")]]
+    void setPosition(const glm::vec3&);
+    void setSize(const glm::vec3&);
+    void setDirection(const glm::vec3&);
+    //
+
 //    void validateResources() const;
     void setAnimationRotation(animation::BaseRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
@@ -83,13 +89,15 @@ public:
     virtual void update();
     virtual void draw(const jeti::Render& render) const;
 
-    void drawAxis(const jeti::Render& render) const;
-    void drawCollisionRadius(const jeti::Render& render) const;
-
 protected:
+    void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
+    void _drawAxis(const jeti::Render& render) const;
+    void _drawCollisionRadius(const jeti::Render& render) const;
+
     ceti::control::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }
     const glm::mat4& matrixScale() const { return m_matrixScale; }
+    const glm::mat4& matrixTranslate() const { return m_matrixTranslate; }
 
     void _setTransparency(float alpha)  { m_color.a = alpha; }
 
@@ -107,7 +115,6 @@ protected:
 //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
-protected:
     glm::mat4 _calcCollisionModelMatrix() const;
 
 private:

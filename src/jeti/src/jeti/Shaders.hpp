@@ -40,6 +40,7 @@ struct Shaders
     GLuint mask;
     GLuint particle;
     GLuint particle_blink;
+    GLuint star;
     GLuint starfield;
 };
 

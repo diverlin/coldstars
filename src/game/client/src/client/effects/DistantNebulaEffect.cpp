@@ -22,56 +22,98 @@
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
 
-#include <client/resources/TextureCollector.hpp>
+#include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
 
+#include <glm/gtx/transform.hpp>
 
-DistantNebulaEffect::DistantNebulaEffect()
-{}
-   
-DistantNebulaEffect::~DistantNebulaEffect()
-{}
-   
-void DistantNebulaEffect::Update()
-{
-    //m_Angle += m_DeltaAngle;  
-}        
+namespace effect {
 
-/* virtual override */
-void DistantNebulaEffect::Render(const jeti::Render& render, const glm::vec3&)
-{   
-    // alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
-}
-              
-DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
+
+DistantNebulas::DistantNebulas(const std::vector<DistantNebula*>& nebulas)
 {
-    jeti::Mesh* mesh = nullptr; //MeshCollector::get().get(mesh::type::PLANE);
-    assert(mesh);
-    jeti::control::Material* textureOb = nullptr;
-    if (color_id == NONE)     textureOb = TextureCollector::get().getTextureByTypeId(texture::Type::NEBULA_BACKGROUND);
-    else                      textureOb = TextureCollector::get().getTextureByColorId(texture::Type::NEBULA_BACKGROUND, color_id);
-           
-    float angle = meti::getRandInt(0, 360);
-    float delta_angle = 0.0;
-    if(textureOb->model()->is_rotated)
-    {
-        delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
+    for (auto nebula: nebulas) {
+        m_nebulas.push_back(nebula);
     }
-    
-    float z = -meti::getRandInt(799, 999);
-    float rate = 5;
-    
-    glm::vec3 center(meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), z);
-    
-    DistantNebulaEffect* dn = new DistantNebulaEffect();
-    glm::vec3 size = textureOb->size();
-    // alpitodorender dn->SetRenderData(mesh, textureOb, size*=3);
+}
+DistantNebulas::~DistantNebulas() {
+    for (auto nebula: m_nebulas) {
+        delete nebula;
+    }
+    m_nebulas.clear();
+}
 
-    dn->setPosition(center);
-    //dn->SetAngle(angle);
-    //dn->SetDeltaAngle(delta_angle);
-    
+void DistantNebulas::update(const glm::vec3& camera_pos) {
+    for (auto nebula: m_nebulas) {
+        nebula->update(camera_pos);
+    }
+}
+
+void DistantNebulas::draw(const jeti::Render& render) const {
+    glEnable(GL_BLEND);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    for (auto nebula: m_nebulas) {
+        nebula->draw(render);
+    }
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisable(GL_BLEND);
+}
+
+
+
+DistantNebula::DistantNebula(float paralaxFactor):
+    m_paralaxFactor(paralaxFactor)
+{}
+   
+DistantNebula::~DistantNebula()
+{}     
+
+void DistantNebula::update(const glm::vec3& camera_pos) {
+    if (m_offset != camera_pos) {
+        m_offset = camera_pos;
+        jeti::view::BaseView::update();
+        glm::mat4 trans = glm::translate(m_offset/m_paralaxFactor);
+         _overrideModelMatrix(matrixTranslate()*trans*matrixScale());
+    }
+}
+
+DistantNebulas* genDistantNebulas(int color_id)
+{
+    float num = 10;
+    std::vector<DistantNebula*> nebulas;
+    for (int i=0; i<num; ++i) {
+        jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
+        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
+
+        float angle = meti::getRandInt(0, 360);
+        float delta_angle = 0.0;
+        if(material->model()->is_rotated) {
+            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
+        }
+
+        float z = -meti::getRandInt(799, 999);
+
+        glm::vec3 position = meti::getRandXYVec3f(400, 2000, z);
+
+        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
+        DistantNebula* dn = new DistantNebula(paralaxFactor);
+
+        dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
+        dn->setMaterial(material);
+        dn->setMesh(mesh);
+        dn->setPosition(position);
+        dn->setSize(meti::getRandFloat(20.f, 25.f)*material->size());
+        //dn->SetAngle(angle);
+        //dn->SetDeltaAngle(delta_angle);
+        nebulas.push_back(dn);
+    }
+
+    DistantNebulas* dn = new DistantNebulas(nebulas);
     return dn;
 }
+
+} // namespace effect

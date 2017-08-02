@@ -38,24 +38,42 @@ const int DISTANT_STAR_MAX = 1000;
 
 namespace effect {
 
-class DistantStars
-{
+class DistantStarsLayer;
+class DistantStars {
 public:
-    DistantStars(const std::vector<glm::vec3>&,
-                      const std::vector<glm::vec4>&,
-                      const std::vector<float>&,
-                      float scale = 1.0f);
+    DistantStars(const std::vector<DistantStarsLayer*>&);
     ~DistantStars();
 
-    void setMaterial(jeti::control::Material* material) { m_material = material; }
-
+    void update(const glm::vec3&);
     void draw(const jeti::Render&) const;
 
 private:
+    std::vector<DistantStarsLayer*> m_layers;
+};
+
+class DistantStarsLayer
+{
+public:
+    DistantStarsLayer(const std::vector<glm::vec3>&,
+                      const std::vector<glm::vec4>&,
+                      const std::vector<float>&,
+                      float);
+    ~DistantStarsLayer();
+
+    void setMaterial(jeti::control::Material* material) { m_material = material; }
+
+    void update(const glm::vec3&);
+    void draw(const jeti::Render&) const;
+
+private:
+    glm::vec3 m_offset;
+    float m_paralaxFactor = 1.0f;
+
     jeti::control::Material* m_material = nullptr;
     jeti::Mesh* m_mesh = nullptr;
 
     glm::mat4 m_Mm;
+
     std::vector<glm::vec3> m_positions;
     std::vector<glm::vec4> m_colors;
     std::vector<float> m_sizes;
