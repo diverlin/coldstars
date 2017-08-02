@@ -34,6 +34,7 @@ bool getRandBool();
 glm::vec2 getRandVec2f(int radius_min, int radius_max);
 glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
 glm::vec3 getRandXYVec3Unit();
+glm::vec3 getXYVec3(float radius, float angle);
 
 bool isActionShouldHappen(int);
 

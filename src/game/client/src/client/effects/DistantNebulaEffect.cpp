@@ -53,7 +53,7 @@ void DistantNebulas::update(const glm::vec3& camera_pos) {
 
 void DistantNebulas::draw(const jeti::Render& render) const {
     glEnable(GL_BLEND);
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     for (auto nebula: m_nebulas) {
@@ -83,21 +83,31 @@ void DistantNebula::update(const glm::vec3& camera_pos) {
 
 DistantNebulas* genDistantNebulas(int color_id)
 {
-    float num = 10;
+    float num = 3;
+    float angle_base = 0.0;
+    float angle_step = 360/num;
     std::vector<DistantNebula*> nebulas;
     for (int i=0; i<num; ++i) {
+        angle_base += angle_step;
+
         jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
 
-        float angle = meti::getRandInt(0, 360);
-        float delta_angle = 0.0;
-        if(material->model()->is_rotated) {
-            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
-        }
+//        float angle = meti::getRandInt(0, 360);
+//        float delta_angle = 0.0;
+//        if(material->model()->is_rotated) {
+//            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
+//        }
 
         float z = -meti::getRandInt(799, 999);
 
-        glm::vec3 position = meti::getRandXYVec3f(400, 2000, z);
+        float radius_base = 1000;
+        float rate = 0.2;
+        float radius_delta = radius_base*meti::getRandFloat(-rate, rate);
+        float radius = radius_base + radius_delta;
+        float angle_delta = angle_base*meti::getRandFloat(-rate, rate);
+        float angle = angle_base + angle_delta;
+        glm::vec3 position = meti::getXYVec3(radius, angle);
 
         float paralaxFactor = meti::getRandFloat(1.005, 1.02);
         DistantNebula* dn = new DistantNebula(paralaxFactor);
@@ -106,7 +116,7 @@ DistantNebulas* genDistantNebulas(int color_id)
         dn->setMaterial(material);
         dn->setMesh(mesh);
         dn->setPosition(position);
-        dn->setSize(meti::getRandFloat(20.f, 25.f)*material->size());
+        dn->setSize(meti::getRandFloat(10.f, 15.f)*material->size());
         //dn->SetAngle(angle);
         //dn->SetDeltaAngle(delta_angle);
         nebulas.push_back(dn);

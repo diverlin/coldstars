@@ -247,6 +247,8 @@ void Render::deactivateFbo(int index)
 
 void Render::__initPostEffects()
 {
+    m_fboBackGround.init();
+
     for (int i=0; i<m_fboNum; i++) {
         m_fbos[i].init();
     }
@@ -256,13 +258,15 @@ void Render::__initPostEffects()
 }
  
   
-void Render::__resizePostEffects(int width, int height)
+void Render::__resizePostEffects(int w, int h)
 {
     for (int i=0; i<m_fboNum; i++) {
-        m_fbos[i].resize(width, height);
+        m_fbos[i].resize(w, h);
     }
         
-    m_bloom.Resize(width, height);
+    m_bloom.Resize(w, h);
+
+    m_fboBackGround.resize(w, h);
 } 
 
 void Render::__makeShortCuts()
@@ -510,7 +514,7 @@ void Render::drawStar(GLuint texture) const
             glUniform1i(glGetUniformLocation(m_shaders.particle, "u_texture"), 0);
         }
 
-        glUniform1f(glGetUniformLocation(m_shaders.star, "u_time"), m_time);
+        glUniform1f(glGetUniformLocation(m_shaders.star, "u_time"), 3*m_time);
         glUniform1f(glGetUniformLocation(m_shaders.star, "u_sizeFactor"), 2*m_scale);
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_resolution"), 1, glm::value_ptr(glm::vec2(m_size.x, m_size.y)));
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_worldPosition"), 1, glm::value_ptr(offset));

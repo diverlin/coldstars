@@ -189,6 +189,7 @@ private:
 
     int m_fboNum = FBO_NUM;
     Fbo m_fbos[FBO_NUM];
+    Fbo m_fboBackGround;
 
     int m_indexFboLastActivated = -1;
     int m_indexFboLastDeactivated = -1;
