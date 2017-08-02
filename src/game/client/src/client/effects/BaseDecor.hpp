@@ -33,5 +33,5 @@ public:
     BaseDecor():ceti::control::Orientation(new ceti::model::Orientation) {}
     ~BaseDecor() {}
 
-    virtual void Render(const jeti::Render&, const glm::vec3&) = 0;
+    virtual void draw(const jeti::Render&) = 0;
 };

@@ -61,6 +61,6 @@ const glm::mat4& BaseBackGroundEffect::actualModelMatrix()
 void BaseBackGroundEffect::setTextureOb(jeti::control::Material* textureOb, const glm::vec3& scale_factor)
 {
     m_textureOb = textureOb;
-};
+}
             
 

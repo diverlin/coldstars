@@ -51,8 +51,6 @@ public:
 protected:
     void _drawDecors(const jeti::Render&) const;
     void _drawShield(const jeti::Render&) const;
-    void _drawCollisionRadius(const jeti::Render&) const;
-    void _drawAxis(const jeti::Render&) const;
 
 private:
     control::Base* m_control_base = nullptr;

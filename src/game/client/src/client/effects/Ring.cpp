@@ -16,7 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Ring.hpp"  
+#include "Ring.hpp"
+
 #include <jeti/Render.hpp>
 
 Ring::Ring()
@@ -24,16 +25,12 @@ Ring::Ring()
 
 /* virtual */
 Ring::~Ring()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Ring");
-    #endif    
-}
+{}
  
  /* virtual override final */            
-void Ring::Render(const jeti::Render& render, const glm::vec3& center)
+void Ring::draw(const jeti::Render& render)
 {      
-    setPosition(center);
+    //setPosition(center);
     //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }
 

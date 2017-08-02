@@ -33,6 +33,7 @@ Collector::Collector() {
     __registerType(int_t(texture::Type::TURREL), "texture::turrel");
     __registerType(int_t(texture::Type::SHIELD_EFFECT), "texture::shield_effect");
     __registerType(int_t(texture::Type::DISTANTSTAR), "texture::distantstar");
+    __registerType(int_t(texture::Type::NEBULA_BACKGROUND), "texture::nebula_background");
     __registerType(int_t(mesh::Type::SPHERE), "mesh::sphere");
     __registerType(int_t(mesh::Type::SPHERE_DEFORMED), "mesh::sphere_deformed");
     __registerType(int_t(mesh::Type::PLANE), "mesh::plane");

@@ -74,16 +74,4 @@ void Base::_drawShield(const jeti::Render& render) const {
     m_shield->draw(_modelMatrix(), render);
 }
 
-void Base::_drawCollisionRadius(const jeti::Render& render) const {
-    if (render.allowDrawCollisionRadius()) {
-        render.drawCollisionRadius(_calcCollisionModelMatrix());
-    }
-}
-
-void Base::_drawAxis(const jeti::Render& render) const {
-    if (render.allowDrawAxis()) {
-        render.drawAxis(_modelMatrix());
-    }
-}
-
 } // namespace view

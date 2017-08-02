@@ -17,21 +17,19 @@
 */
 
 
-#ifndef ATMOSPHERE_HPP
-#define ATMOSPHERE_HPP
+#pragma once
 
 #include <client/effects/BaseDecor.hpp>
 
 class Atmosphere : public BaseDecor
 {
-    public:
-        Atmosphere();
-        virtual ~Atmosphere();
-            
-        virtual void Render(const jeti::Render&, const glm::vec3&) override final;
+public:
+    Atmosphere();
+    virtual ~Atmosphere();
+
+    virtual void draw(const jeti::Render&) override final;
 }; 
 
-#endif 
 
 
 

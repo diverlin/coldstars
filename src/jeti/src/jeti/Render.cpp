@@ -49,6 +49,8 @@ Render::Render()
 //    m_light.specular    = glm::vec4(1.5f); // visual artefact
     m_light.specular    = glm::vec4(0.0f);
     m_light.attenuation = glm::vec3(0.1f);
+
+    m_screenModelMatrix = glm::scale(glm::vec3(1.0, 1.0, 1.0f));
 }
 
 Render::~Render() 
@@ -179,6 +181,7 @@ void Render::init(Camera* camera, int w, int h)
     m_shaders.mask            = compile_program(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
     m_shaders.particle        = compile_program(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
     m_shaders.particle_blink  = compile_program(SHADERS_PATH+"particle_blink.vert",    SHADERS_PATH+"particle_blink.frag");
+    m_shaders.star            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"star.frag");
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
 
     __initPostEffects();
@@ -281,6 +284,15 @@ void Render::__makeShortCuts()
 void Render::setPerspectiveProjection()
 {        
     m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 300.0f, ZNEAR);
+    __updateProjectionViewMatrix();
+}
+
+/* used for parallax (bg), to decrease affection on scale by scaleFactor
+ * */
+void Render::setOrthogonalProjection(float scaleFactor)
+{
+    float scale = 1.0f + scaleFactor*m_scale;
+    m_projectionMatrix = glm::ortho(-m_size.x/2 * scale, m_size.x/2 * scale, -m_size.y/2 * scale, m_size.y/2 * scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
 
@@ -481,6 +493,26 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
 		mesh.draw();
 	}
 }  
+
+void Render::drawStar()
+{
+    __usePostEffectMode(true);
+
+    glm::vec2 offset(0.5-m_camera->position().x/m_size.x/m_scale, 0.5-m_camera->position().y/m_size.y/m_scale);
+
+    __useProgram(m_shaders.star);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.star, "u_ModelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
+
+        glUniform1f(glGetUniformLocation(m_shaders.star, "u_time"), m_time);
+        glUniform1f(glGetUniformLocation(m_shaders.star, "u_sizeFactor"), 2*m_scale);
+        glUniform2fv(glGetUniformLocation(m_shaders.star, "u_resolution"), 1, glm::value_ptr(glm::vec2(m_size.x, m_size.y)));
+        glUniform2fv(glGetUniformLocation(m_shaders.star, "u_worldPosition"), 1, glm::value_ptr(offset));
+
+        m_meshQuad->draw();
+    }
+}
+
 
 void Render::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const
 {
