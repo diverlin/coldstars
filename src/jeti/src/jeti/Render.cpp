@@ -494,15 +494,21 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
 	}
 }  
 
-void Render::drawStar()
+void Render::drawStar(GLuint texture) const
 {
     __usePostEffectMode(true);
 
-    glm::vec2 offset(0.5-m_camera->position().x/m_size.x/m_scale, 0.5-m_camera->position().y/m_size.y/m_scale);
+    glm::vec2 offset(0.5f-m_camera->position().x/m_size.x/m_scale, 0.5f-m_camera->position().y/m_size.y/m_scale);
 
     __useProgram(m_shaders.star);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.star, "u_ModelMatrix"), 1, GL_FALSE, &m_screenModelMatrix[0][0]);
+
+        if (texture) {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glUniform1i(glGetUniformLocation(m_shaders.particle, "u_texture"), 0);
+        }
 
         glUniform1f(glGetUniformLocation(m_shaders.star, "u_time"), m_time);
         glUniform1f(glGetUniformLocation(m_shaders.star, "u_sizeFactor"), 2*m_scale);
