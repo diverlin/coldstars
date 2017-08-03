@@ -34,7 +34,7 @@ class Material;
 } // namespace jeti
 
 const int DISTANT_STAR_MIN = 500;
-const int DISTANT_STAR_MAX = 1000;
+const int DISTANT_STAR_MAX = 2000;
 
 namespace effect {
 

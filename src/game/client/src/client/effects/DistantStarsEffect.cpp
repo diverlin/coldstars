@@ -96,7 +96,7 @@ void DistantStarsLayer::draw(const jeti::Render& render) const
 DistantStars* genDistantStars(int color_id)
 {
     std::vector<DistantStarsLayer*> layers;
-    int iterations = 5;
+    int iterations = 10;
     for (int i=0; i<iterations; ++i) {
         int distStar_num = meti::getRandInt(DISTANT_STAR_MIN/iterations, DISTANT_STAR_MAX/iterations);
 

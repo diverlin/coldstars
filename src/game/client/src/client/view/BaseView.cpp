@@ -43,6 +43,11 @@ Base::~Base()
     }
 }
 
+void Base::update()
+{
+    _updateModelMatrix();
+}
+
 int_t Base::id() const { return m_control_base->id(); }
 entity::Type Base::type() const { return m_control_base->type(); }
 entity::Type Base::subType() const { return m_control_base->subType(); }

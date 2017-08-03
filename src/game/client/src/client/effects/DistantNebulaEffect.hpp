@@ -45,11 +45,10 @@ public:
     void update(const glm::vec3&);
 
 private:
-    glm::vec3 m_offset;
     float m_paralaxFactor = 1.0f;
 };
 
 DistantNebulas* genDistantNebulas(int color_id = -1);
-DistantNebulas* genDistantNebulas2(int color_id = -1);
+//DistantNebulas* genDistantNebulas2(int color_id = -1);
 
 } // namespace effect
