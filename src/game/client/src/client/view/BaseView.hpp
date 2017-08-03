@@ -47,6 +47,7 @@ public:
     effect::Shield* createShieldEffect();
 
     const std::vector<Base*>& decors() const { return m_decors; }
+    void update();
 
 protected:
     void _drawDecors(const jeti::Render&) const;

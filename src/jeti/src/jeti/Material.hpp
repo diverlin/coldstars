@@ -79,7 +79,7 @@ public:
 
     float brightThreshold = 1.0f;
     int color_id = 0;
-    bool is_rotated = 0;
+    bool is_rotated = false;
 };
 
 } // namespace model

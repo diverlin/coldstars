@@ -80,32 +80,25 @@ public:
     void setOrientation(ceti::control::Orientation* model) { m_orientation = model; }
     void setParent(BaseView* parent) { m_parent = parent; }
 
-    //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
-
-    [[warning("todo")]]
-    virtual bool inRect(const ceti::Rect&) { return true; }
-    //        void RenderCollisionRadius(const Renderer&) const;
-
-    virtual void update();
     virtual void draw(const jeti::Render& render) const;
 
     void drawCollisionRadius(const jeti::Render& render) const;
     void drawAxis(const jeti::Render& render) const;
 
 protected:
-    void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
+    //void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
-    const glm::mat4& matrixRotate() const { return m_matrixRotate; }
-    const glm::mat4& matrixScale() const { return m_matrixScale; }
-    const glm::mat4& matrixTranslate() const { return m_matrixTranslate; }
+    const glm::mat4& _matrixRotate() const { return m_matrixRotate; }
+    const glm::mat4& _matrixScale() const { return m_matrixScale; }
+    //const glm::mat4& matrixTranslate() const { return m_matrixTranslate; }
+    const glm::mat4& _modelMatrix() const { return m_matrixModel; }
+    const glm::mat4& _collisionModelMatrix() const { return m_matrixCollisionModel; }
 
-    void _setTransparency(float alpha)  { m_color.a = alpha; }
+    //void _setTransparency(float alpha)  { m_color.a = alpha; }
 
     bool _updateFadeInEffect(); // depr, move to animation program
     bool _updateFadeOutEffect(); // depr, move to animation program
-
-    const glm::mat4& _modelMatrix() const { return m_matrixModel; }
 
     const control::Material& _material() const { return *m_material; }
     const Mesh& _mesh() const     { return *m_mesh; }
@@ -116,7 +109,7 @@ protected:
 //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
-    glm::mat4 _calcCollisionModelMatrix() const;
+    void _updateModelMatrix(const glm::vec3& parallax_offset = glm::vec3(0.0f));
 
 private:
     glm::vec4 m_color;
@@ -129,17 +122,22 @@ private:
 
     animation::BaseRotation* m_animationRotation = nullptr;
 
-    glm::mat4 m_matrixModel;
     glm::mat4 m_matrixTranslate;
     glm::mat4 m_matrixRotate;
     glm::mat4 m_matrixScale;
+
+    glm::mat4 m_matrixModel;
+
+    glm::mat4 m_matrixCollisionScale;
+    glm::mat4 m_matrixCollisionModel;
 
     glm::quat m_quatDirection;
     glm::quat m_quatAnimation;
 
     virtual void __renderStuffWhenFocusedInSpace(const Render&) {}
 
-    void __updateModelMatrix();
+    void __updateCollisionModelMatrix();
+
     void __adjustSizeFromMaterial();
 };
 

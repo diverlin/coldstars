@@ -26,11 +26,12 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
+#include <jeti/animation/ConstantRotation.hpp>
 
 #include <glm/gtx/transform.hpp>
 
-namespace effect {
 
+namespace effect {
 
 DistantNebulas::DistantNebulas(const std::vector<DistantNebula*>& nebulas)
 {
@@ -63,19 +64,13 @@ void DistantNebulas::draw(const jeti::Render& render) const {
 DistantNebula::DistantNebula(float paralaxFactor):
     m_paralaxFactor(paralaxFactor)
 {
-    m_offset = glm::vec3(-1.0f);
 }
    
 DistantNebula::~DistantNebula()
 {}     
 
 void DistantNebula::update(const glm::vec3& camera_pos) {
-    if (m_offset != camera_pos) {
-        m_offset = camera_pos;
-        jeti::view::BaseView::update();
-        glm::mat4 trans = glm::translate(m_offset/m_paralaxFactor);
-         _overrideModelMatrix(matrixTranslate()*trans*matrixScale());
-    }
+    _updateModelMatrix(-camera_pos/m_paralaxFactor);
 }
 
 DistantNebulas* genDistantNebulas(int color_id)
@@ -117,6 +112,11 @@ DistantNebulas* genDistantNebulas(int color_id)
         //dn->SetAngle(angle);
         //dn->SetDeltaAngle(delta_angle);
         nebulas.push_back(dn);
+
+        //if (material->model()->is_rotated) {
+            jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(meti::OZ, meti::getRandFloat(0.001, 0.01));
+            dn->setAnimationRotation(animation);
+        //}
     }
 
     DistantNebulas* dn = new DistantNebulas(nebulas);
@@ -124,49 +124,47 @@ DistantNebulas* genDistantNebulas(int color_id)
 }
 
 
-DistantNebulas* genDistantNebulas2(int color_id)
-{
-    float num = 3;
-    float angle_base = 0.0;
-    float angle_step = 360/num;
-    std::vector<DistantNebula*> nebulas;
-    for (int i=0; i<num; ++i) {
-        angle_base += angle_step;
+//DistantNebulas* genDistantNebulas2(int color_id)
+//{
+//    float num = 3;
+//    float angle_base = 0.0;
+//    float angle_step = 360/num;
+//    std::vector<DistantNebula*> nebulas;
+//    for (int i=0; i<num; ++i) {
+//        angle_base += angle_step;
 
-        jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
-        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
-        glm::vec3 base_size = meti::getRandFloat(10.f, 15.f)*material->size();
+//        jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
+//        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
+//        glm::vec3 base_size = meti::getRandFloat(10.f, 15.f)*material->size();
 
-        float z = -meti::getRandInt(799, 999);
+//        float z = -meti::getRandInt(799, 999);
 
-        float radius_base = 500;
-        float rate = 0.2;
-        float radius_delta = radius_base*meti::getRandFloat(-rate, rate);
-        float radius = radius_base + radius_delta;
-        float angle_delta = angle_base*meti::getRandFloat(-rate, rate);
-        float angle = angle_base + angle_delta;
-        glm::vec3 position = meti::getXYVec3(radius, angle);
+//        float radius_base = 500;
+//        float rate = 0.2;
+//        float radius_delta = radius_base*meti::getRandFloat(-rate, rate);
+//        float radius = radius_base + radius_delta;
+//        float angle_delta = angle_base*meti::getRandFloat(-rate, rate);
+//        float angle = angle_base + angle_delta;
+//        glm::vec3 position = meti::getXYVec3(radius, angle);
 
-        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
-        for (int j=0; j<2; ++j) {
-            glm::vec3 size = base_size*paralaxFactor;
-            DistantNebula* dn = new DistantNebula(paralaxFactor);
+//        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
+//        for (int j=0; j<2; ++j) {
+//            glm::vec3 size = base_size*paralaxFactor;
+//            DistantNebula* dn = new DistantNebula(paralaxFactor);
 
-            dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
-            dn->setMaterial(material);
-            dn->setMesh(mesh);
-            dn->setPosition(position);
-            dn->setSize(size);
-            //dn->SetAngle(angle);
-            //dn->SetDeltaAngle(delta_angle);
-            nebulas.push_back(dn);
-        }
-    }
+//            dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
+//            dn->setMaterial(material);
+//            dn->setMesh(mesh);
+//            dn->setPosition(position);
+//            dn->setSize(size);
+//            //dn->SetAngle(angle);
+//            //dn->SetDeltaAngle(delta_angle);
+//            nebulas.push_back(dn);
+//        }
+//    }
 
-    DistantNebulas* dn = new DistantNebulas(nebulas);
-    return dn;
-}
-
-
+//    DistantNebulas* dn = new DistantNebulas(nebulas);
+//    return dn;
+//}
 
 } // namespace effect

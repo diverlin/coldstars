@@ -137,11 +137,6 @@ bool BaseView::_updateFadeOutEffect()
     }
 }
 
-void BaseView::update()
-{
-    __updateModelMatrix();
-}
-
 void BaseView::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
@@ -154,10 +149,10 @@ void BaseView::drawAxis(const jeti::Render& render) const
 
 void BaseView::drawCollisionRadius(const jeti::Render& render) const
 {
-    render.drawCollisionRadius(_calcCollisionModelMatrix());
+    render.drawCollisionRadius(_collisionModelMatrix());
 }
 
-void BaseView::__updateModelMatrix()
+void BaseView::_updateModelMatrix(const glm::vec3& parallax_offset)
 {
     assert(m_mesh);
     assert(m_orientation);
@@ -177,30 +172,30 @@ void BaseView::__updateModelMatrix()
 
     // prepare transition matrix
     if (m_parent) {
-        m_pos = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
+        m_pos = m_parent->_matrixRotate() * m_parent->_matrixScale() * glm::vec4(m_orientation->position() - parallax_offset, 1.0f); // parent rotation offset position
         m_pos += m_parent->_orientation()->position();
-
     } else {
-        m_pos = m_orientation->position();
+        m_pos = m_orientation->position() - parallax_offset;
     }
 
     m_matrixTranslate = glm::translate(m_pos);
 
     // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
+
+    __updateCollisionModelMatrix();
 }
 
-glm::mat4
-BaseView::_calcCollisionModelMatrix() const
+void
+BaseView::__updateCollisionModelMatrix()
 {
     // prepeare scale matrix
     float r = m_orientation->collisionRadius();
     assert(r>0);
-    glm::mat4 matrixScale = glm::scale(glm::vec3(r, r, 1.0f));
+    m_matrixCollisionScale = glm::scale(glm::vec3(r, r, 1.0f));
 
     // combine transformations
-    glm::mat4 matrixCollisionModel = m_matrixTranslate * matrixScale;
-    return matrixCollisionModel;
+    m_matrixCollisionModel = m_matrixTranslate * m_matrixCollisionScale;
 }
 
 void
