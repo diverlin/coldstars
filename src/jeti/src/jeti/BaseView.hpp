@@ -89,10 +89,11 @@ public:
     virtual void update();
     virtual void draw(const jeti::Render& render) const;
 
+    void drawCollisionRadius(const jeti::Render& render) const;
+    void drawAxis(const jeti::Render& render) const;
+
 protected:
     void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
-    void _drawAxis(const jeti::Render& render) const;
-    void _drawCollisionRadius(const jeti::Render& render) const;
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }

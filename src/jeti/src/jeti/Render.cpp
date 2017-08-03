@@ -61,6 +61,57 @@ Render::~Render()
     delete m_materialCollisionRadius;
 }
 
+void Render::enable_CULLFACE()
+{
+    if (!glIsEnabled(GL_CULL_FACE)) {
+        glEnable(GL_CULL_FACE);
+    }
+}
+
+void Render::disable_CULLFACE()
+{
+    if (glIsEnabled(GL_CULL_FACE)) {
+        glDisable(GL_CULL_FACE);
+    }
+}
+
+void Render::enable_ADDITIVE_BLEND() const
+{
+    if (!glIsEnabled(GL_BLEND)) {
+        glEnable(GL_BLEND);
+    }
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+}
+
+void Render::enable_BLEND() const
+{
+    if (!glIsEnabled(GL_BLEND)) {
+        glEnable(GL_BLEND);
+    }
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void Render::disable_BLEND() const
+{
+    if (glIsEnabled(GL_BLEND)) {
+        glDisable(GL_BLEND);
+    }
+}
+
+void Render::enable_DEPTH_TEST() const
+{
+    if (!glIsEnabled(GL_DEPTH_TEST)) {
+        glEnable(GL_DEPTH_TEST);
+    }
+}
+
+void Render::disable_DEPTH_TEST() const
+{
+    if (glIsEnabled(GL_DEPTH_TEST)) {
+        glDisable(GL_DEPTH_TEST);
+    }
+}
+
 void Render::increaseLightPos() {
     m_light.position.z += 10.0;
 }
@@ -878,16 +929,6 @@ void Render::__useProgram(GLuint program) const
     }
 }
  
-void Render::enable_CULLFACE()
-{
-    glEnable(GL_CULL_FACE);
-}
-
-void Render::disable_CULLFACE()
-{
-    glDisable(GL_CULL_FACE);
-}
-
 void Render::__useTransparentMode(bool transparent_mode_on) const
 {
     if (m_transparentModeOn != transparent_mode_on) {

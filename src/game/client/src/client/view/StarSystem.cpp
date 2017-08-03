@@ -563,11 +563,12 @@ void StarSystem::__render_NEW(jeti::Render& render)
     //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(0.2f);
 
+    // update background
     m_distantNebulas->update(render.camera()->position());
     m_distantStars->update(render.camera()->position());
 
+    // draw background
     render.m_fboBackGround.activate(render.size().x, render.size().y);
-    glDisable(GL_DEPTH_TEST);
     m_distantNebulas->draw(render);
     m_distantStars->draw(render);
     render.m_fboBackGround.deactivate();
@@ -593,12 +594,16 @@ void StarSystem::__render_NEW(jeti::Render& render)
         asteroid->draw(render);
     }
 
+    render.enable_BLEND();
     for(Ship* ship: m_ships) {
         ship->update();
         ship->draw(render);
     }
 
     render.disable_CULLFACE();
+
+    __drawCollisionRadius(render);
+    __drawAxis(render);
 
     UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
 
@@ -867,46 +872,50 @@ void StarSystem::render(control::StarSystem* starsystem)
     //resizeGl(w, h);
 } 
 
-void StarSystem::__renderCollisionRadius(const jeti::Render& render) const
+void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
 {
-    //render.enable_BLEND();
-    {   //a;pitodorender
-        /*
-        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderCollisionRadius(render); }
-        
-        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderCollisionRadius(render); }
-
-        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(render); }
-        */
+    if (!render.allowDrawCollisionRadius()) {
+        return;
     }
-    //render.disable_BLEND();
+
+    render.disable_DEPTH_TEST();
+    render.enable_BLEND();
+    {
+        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawCollisionRadius(render); }
+        for(const Satellite* satellite: m_satellites)           { satellite->drawCollisionRadius(render); }
+        for(const Ship* ship: m_ships)                          { ship->drawCollisionRadius(render); }
+        
+        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawCollisionRadius(render); }
+        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawCollisionRadius(render); }
+
+        for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
+        for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
+        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
+        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawCollisionRadius(render); }
+     }
 }
 
-void StarSystem::__renderAxis(const jeti::Render& render) const
-{    
-    //render.enable_DEPTH();
-    //alpitodorender
-    /*
-        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderAxis(render); }
-        
-        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderAxis(render); }
+void StarSystem::__drawAxis(const jeti::Render& render) const
+{
+    if (!render.allowDrawAxis()) {
+        return;
+    }
 
-        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderAxis(render); }
-*/
-    //render.disable_DEPTH();
-}         
+    render.enable_DEPTH_TEST();
+    {
+        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawAxis(render); }
+        for(const Satellite* satellite: m_satellites)           { satellite->drawAxis(render); }
+        for(const Ship* ship: m_ships)                          { ship->drawAxis(render); }
+
+        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawAxis(render); }
+        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawAxis(render); }
+
+        for(const Star* star: m_stars)                  { star->drawAxis(render); }
+        for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
+        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
+        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
+     }
+}
 
 bool
 StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)

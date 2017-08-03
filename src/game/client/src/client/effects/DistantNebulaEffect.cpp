@@ -52,22 +52,19 @@ void DistantNebulas::update(const glm::vec3& camera_pos) {
 }
 
 void DistantNebulas::draw(const jeti::Render& render) const {
-    glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    render.disable_DEPTH_TEST();
+    render.enable_BLEND();
     for (auto nebula: m_nebulas) {
         nebula->draw(render);
     }
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisable(GL_BLEND);
 }
-
 
 
 DistantNebula::DistantNebula(float paralaxFactor):
     m_paralaxFactor(paralaxFactor)
-{}
+{
+    m_offset = glm::vec3(-1.0f);
+}
    
 DistantNebula::~DistantNebula()
 {}     
@@ -83,7 +80,7 @@ void DistantNebula::update(const glm::vec3& camera_pos) {
 
 DistantNebulas* genDistantNebulas(int color_id)
 {
-    float num = 3;
+    float num = meti::getRandInt(3, 5);
     float angle_base = 0.0;
     float angle_step = 360/num;
     std::vector<DistantNebula*> nebulas;
@@ -99,17 +96,17 @@ DistantNebulas* genDistantNebulas(int color_id)
 //            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
 //        }
 
-        float z = -meti::getRandInt(799, 999);
+        //float z = -meti::getRandInt(799.0f, 999.0f);
 
-        float radius_base = 1000;
-        float rate = 0.2;
+        float radius_base = 700.f;
+        float rate = 0.2f;
         float radius_delta = radius_base*meti::getRandFloat(-rate, rate);
         float radius = radius_base + radius_delta;
         float angle_delta = angle_base*meti::getRandFloat(-rate, rate);
         float angle = angle_base + angle_delta;
         glm::vec3 position = meti::getXYVec3(radius, angle);
 
-        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
+        float paralaxFactor = meti::getRandFloat(1.005f, 1.02f);
         DistantNebula* dn = new DistantNebula(paralaxFactor);
 
         dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
@@ -125,5 +122,51 @@ DistantNebulas* genDistantNebulas(int color_id)
     DistantNebulas* dn = new DistantNebulas(nebulas);
     return dn;
 }
+
+
+DistantNebulas* genDistantNebulas2(int color_id)
+{
+    float num = 3;
+    float angle_base = 0.0;
+    float angle_step = 360/num;
+    std::vector<DistantNebula*> nebulas;
+    for (int i=0; i<num; ++i) {
+        angle_base += angle_step;
+
+        jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
+        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
+        glm::vec3 base_size = meti::getRandFloat(10.f, 15.f)*material->size();
+
+        float z = -meti::getRandInt(799, 999);
+
+        float radius_base = 500;
+        float rate = 0.2;
+        float radius_delta = radius_base*meti::getRandFloat(-rate, rate);
+        float radius = radius_base + radius_delta;
+        float angle_delta = angle_base*meti::getRandFloat(-rate, rate);
+        float angle = angle_base + angle_delta;
+        glm::vec3 position = meti::getXYVec3(radius, angle);
+
+        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
+        for (int j=0; j<2; ++j) {
+            glm::vec3 size = base_size*paralaxFactor;
+            DistantNebula* dn = new DistantNebula(paralaxFactor);
+
+            dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
+            dn->setMaterial(material);
+            dn->setMesh(mesh);
+            dn->setPosition(position);
+            dn->setSize(size);
+            //dn->SetAngle(angle);
+            //dn->SetDeltaAngle(delta_angle);
+            nebulas.push_back(dn);
+        }
+    }
+
+    DistantNebulas* dn = new DistantNebulas(nebulas);
+    return dn;
+}
+
+
 
 } // namespace effect

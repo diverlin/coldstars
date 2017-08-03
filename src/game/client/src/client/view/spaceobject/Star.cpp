@@ -39,8 +39,6 @@ Star::~Star()
 void Star::draw(const jeti::Render& render) const
 {
     render.drawMesh(_mesh(), _material(), _modelMatrix());
-    _drawCollisionRadius(render);
-    _drawAxis(render);
 }
 
 //void Star::UpdateInfo()

@@ -24,8 +24,8 @@ const int Planet::SCALE_MIN = 100;
 const int Planet::SCALE_MAX = 190;
 const int Planet::POPULATION_MIN = 6000;
 const int Planet::POPULATION_MAX = 20000;
-const int Planet::DISTANCE_MIN = 400;
-const int Planet::DISTANCE_MAX = 500;
+const int Planet::DISTANCE_MIN = 600;
+const int Planet::DISTANCE_MAX = 800;
 const int Planet::SPEED_MIN = 40;
 const int Planet::SPEED_MAX = 50;
 

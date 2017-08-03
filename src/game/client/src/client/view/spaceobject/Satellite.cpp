@@ -55,9 +55,6 @@ void Satellite::draw(const jeti::Render& render) const
 {
     jeti::view::BaseView::draw(render);
 
-    _drawCollisionRadius(render);
-    _drawAxis(render);
-
     ////RenderKorpus(render);
     
     //if (GetDataKorpus().draw_turrels) {

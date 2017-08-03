@@ -64,6 +64,13 @@ public:
 
     int fps() const { return m_fps; }
 
+    void enable_ADDITIVE_BLEND() const;
+    void enable_BLEND() const;
+    void disable_BLEND() const;
+
+    void enable_DEPTH_TEST() const;
+    void disable_DEPTH_TEST() const;
+
     float scale() const { return m_scale; }
     const glm::ivec2& size() const { return m_size; }
     int width() const { return m_size.x; }
@@ -101,7 +108,7 @@ public:
     const Shaders& shaders() const { return m_shaders; }
 
     void clearColorAndDepthBuffers() const
-    { glDepthMask(GL_TRUE); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+    { /*glDepthMask(GL_TRUE);*/ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
     void composeViewMatrix(const glm::mat4&);
 

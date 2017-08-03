@@ -121,8 +121,8 @@ private:
 
     void __render_NEW(jeti::Render&);
     void __render_NEW2(jeti::Render&);
-    void __renderCollisionRadius(const jeti::Render&) const;
-    void __renderAxis(const jeti::Render&) const;
+    void __drawCollisionRadius(const jeti::Render&) const;
+    void __drawAxis(const jeti::Render&) const;
 
     /// visible entities
     bool __addIfVisible(control::Star*);
