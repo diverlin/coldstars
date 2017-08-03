@@ -924,15 +924,6 @@ StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
     return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
 }
 
-bool
-StarSystem::__isObjectOnScreen2(const glm::vec3& pos, const glm::vec3& size)
-{
-    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    bool result = isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
-    std::cout<<"screen coord"<<ceti::to_string(position_screen_coord)<<" visible="<<result<<std::endl;
-    return result;
-}
-
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
     if (center.x < (screen_wc.x - size.x*scale)) {
