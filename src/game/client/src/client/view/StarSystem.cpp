@@ -579,10 +579,10 @@ void StarSystem::__render_NEW(jeti::Render& render)
 
     render.enable_CULLFACE();
 
-//    for(Star* star: m_stars) {
-//        star->update();
-//        star->draw(render);
-//    }
+    for(Star* star: m_stars) {
+        star->update();
+        //star->draw(render);
+    }
 
     for(Planet* planet: m_planets) {
         planet->update();
