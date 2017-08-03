@@ -113,11 +113,11 @@ DistantNebulas* genDistantNebulas(int color_id)
         //dn->SetDeltaAngle(delta_angle);
         nebulas.push_back(dn);
 
-        //if (material->model()->is_rotated) {
-            float delta_angle = meti::getRandBool() * meti::getRandFloat(0.0001, 0.0005);
+        if (material->model()->is_rotated) {
+            float delta_angle = meti::getRandBool() * meti::getRandFloat(0.0001f, 0.0005f);
             jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(meti::OZ, delta_angle);
             dn->setAnimationRotation(animation);
-        //}
+        }
     }
 
     DistantNebulas* dn = new DistantNebulas(nebulas);
