@@ -61,14 +61,14 @@ Render::~Render()
     delete m_materialCollisionRadius;
 }
 
-void Render::enable_CULLFACE()
+void Render::enable_CULLFACE() const
 {
     if (!glIsEnabled(GL_CULL_FACE)) {
         glEnable(GL_CULL_FACE);
     }
 }
 
-void Render::disable_CULLFACE()
+void Render::disable_CULLFACE() const
 {
     if (glIsEnabled(GL_CULL_FACE)) {
         glDisable(GL_CULL_FACE);
@@ -551,8 +551,6 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
 
 void Render::drawStar(GLuint texture) const
 {
-    __usePostEffectMode(true);
-
     glm::vec2 offset(0.5f-m_camera->position().x/m_size.x/m_scale, 0.5f-m_camera->position().y/m_size.y/m_scale);
 
     __useProgram(m_shaders.star);
@@ -583,8 +581,6 @@ void Render::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, 
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly 
 
-    __usePostEffectMode(true);
- 	
     __useProgram(m_shaders.combine);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -658,8 +654,6 @@ void Render::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3&
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
-    __usePostEffectMode(true);
- 	
     __useProgram(m_shaders.fogwarspark);
 	{
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -689,9 +683,7 @@ void Render::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int co
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-   
-    __usePostEffectMode(true);
-    	
+      	
     __useProgram(m_shaders.shockwave);
 	{
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -720,8 +712,6 @@ void Render::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, flo
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-      
-    __usePostEffectMode(true);
        	                       
     __useProgram(m_shaders.extractbright);
 	{
@@ -748,20 +738,15 @@ void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, in
     int size_w = w/quad_num_w;  
     int size_h = h/quad_num_w;  
 
-    for (unsigned int i=0; i<quad_num_w; ++i)
-    {
-        for (unsigned int j=0; j<quad_num_h; ++j)
-        {
+    for (unsigned int i=0; i<quad_num_w; ++i) {
+        for (unsigned int j=0; j<quad_num_h; ++j) {
             // ugly 
             glm::mat4 TranslateMatrix = glm::translate(glm::vec3(size_w+i*size_w, size_h+j*size_h, SCREEN_QUAD_ZPOS));
             glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(size_w, size_h, 1.0f));
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
-    
-            __usePostEffectMode(true);
      	
-            __useProgram(m_shaders.basetexture);
-			{
+            __useProgram(m_shaders.basetexture); {
                 glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
                 glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 				
@@ -782,9 +767,7 @@ void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, 
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEN_QUAD_ZPOS));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
-    // ugly
-    
-    __usePostEffectMode(true);
+    // ugly    
      	
     __useProgram(m_shaders.volumetriclight);
     {
@@ -812,8 +795,6 @@ void Render::drawPostEffectBlur(GLuint texture, int w, int h) const
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-
-    __usePostEffectMode(true);
  	
     __useProgram(m_programBlur);
     {    
@@ -840,8 +821,6 @@ void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
-    __usePostEffectMode(true);
- 	
     __useProgram(m_shaders.basetexture);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
@@ -905,8 +884,6 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-
-    __usePostEffectMode(true);
  	
     __useProgram(m_shaders.starfield);
     {
@@ -923,41 +900,24 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
 
 void Render::__useProgram(GLuint program) const
 {
-    if (m_activeProgram != program) {
+    GLint id;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &id);
+    if (id != program) {
         glUseProgram(program);
-        m_activeProgram = program;
     }
 }
  
-void Render::__useTransparentMode(bool transparent_mode_on) const
+void Render::__useTransparentMode(bool transparent) const
 {
-    if (m_transparentModeOn != transparent_mode_on) {
-        if (transparent_mode_on) {
-            glEnable(GL_BLEND);
-            glDepthMask(GL_FALSE); // turn off depth buffer writing
-            glDisable(GL_CULL_FACE);
-        } else {
-			glDisable(GL_BLEND);
-            glDepthMask(GL_TRUE); // turn on depth buffer writing
-            glEnable(GL_CULL_FACE);
-        }
-        m_transparentModeOn = transparent_mode_on;
+    if (transparent) {
+        enable_BLEND();
+        //disable_DEPTH_TEST();
+        disable_CULLFACE();
+    } else {
+        disable_BLEND();
+        //enable_DEPTH_TEST();
+        enable_CULLFACE();
     }
-	
-    m_postEffectModeOn = -1;
-}
-
-void Render::__usePostEffectMode(bool posteffect_mode_on) const
-{
-    if (m_postEffectModeOn != posteffect_mode_on) {
-        if (posteffect_mode_on) {
-			glDisable(GL_BLEND);
-			glDepthMask(GL_FALSE);
-		}
-        m_postEffectModeOn = posteffect_mode_on;
-	}
-	
-    m_transparentModeOn = -1;
 }
 
 void Render::drawAxis(const glm::mat4& modelMatrix) const

@@ -18,9 +18,7 @@ layout(location = FRAG_OUTPUT0) out vec4 color;
 in vec2 v_texCoord;
 
 void main( void ) {
-    vec4 texel = texture2D(u_texture, v_texCoord);
-    color = texel;
-    //color.rgb *= 0.5;
+    color = texture2D(u_texture, v_texCoord);
 
     float pi = 3.14159265359;
     vec2 position = ( gl_FragCoord.xy / u_resolution.xy ) - vec2(u_worldPosition.x, u_worldPosition.y);
@@ -39,6 +37,6 @@ void main( void ) {
             color.rgb += vec3(0.3+0.4*rand(8644, ray), 0.25+0.4*rand(4567, ray), 0.7+0.4*rand(7354, ray)) * brite * 0.1;
         }
     }
-    //color.a = 1.0;
+    color.a = 1.0;
 }
 

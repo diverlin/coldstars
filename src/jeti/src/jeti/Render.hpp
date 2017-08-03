@@ -91,8 +91,8 @@ public:
     void decreaseLightPos();
 //    void setLightPos(int, int);
 
-    void enable_CULLFACE();
-    void disable_CULLFACE();
+    void enable_CULLFACE() const;
+    void disable_CULLFACE() const;
 
     void activateFbo(int, int, int);
     void deactivateFbo(int);
@@ -108,12 +108,11 @@ public:
     const Shaders& shaders() const { return m_shaders; }
 
     void clearColorAndDepthBuffers() const
-    { /*glDepthMask(GL_TRUE);*/ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+    { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
     void composeViewMatrix(const glm::mat4&);
 
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
-
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, float opacity = 1.0) const;
@@ -174,6 +173,7 @@ private:
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;
     glm::mat4 m_projectionViewMatrix;
+    glm::mat4 m_screenModelMatrix;
 
     Light m_light;
 
@@ -190,9 +190,6 @@ private:
     GLint m_programLightLocation_uTexture = -1;
     
     GLuint m_programBlur = 0;
-    mutable GLuint m_activeProgram = 0;
-    mutable int m_transparentModeOn = -1;
-    mutable int m_postEffectModeOn = -1;
 
     int m_fboNum = FBO_NUM;
     Fbo m_fbos[FBO_NUM];
@@ -204,8 +201,6 @@ private:
     BloomEffect m_bloom;
     Camera* m_camera = nullptr;
 
-    glm::mat4 m_screenModelMatrix;
-
     void __initAxisMesh();
     void __initPostEffects();
     void __makeShortCuts();
@@ -216,7 +211,6 @@ private:
 
     void __useProgram(GLuint) const;
     void __useTransparentMode(bool) const;
-    void __usePostEffectMode(bool) const;
 
     void __enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }
     void __disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }
