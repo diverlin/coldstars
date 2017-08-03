@@ -108,23 +108,6 @@ BaseView::setMesh(Mesh* mesh) {
 //setCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
 //} 
 
-
-//void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
-//{
-////    TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
-////    glm::vec3 zero;
-////    glm::mat4 Mm = getModelMatrix(m_Orientation->center(), glm::vec3(2*m_Orientation->collisionRadius()), zero);
-////    render.DrawQuad(*texOb_collision_radius, Mm);
-//}
-
-//void BaseView::_renderAxis(const Renderer& render) const
-//{
-//    glm::mat4 Mm = getModelMatrix(m_orientation->position(), glm::vec3(2*m_orientation->collisionRadius()), glm::vec3(0.0f));    // angle
-//    render.DrawAxis(Mm, /*width*/4);
-//    //render.DrawVector(GetDir(), center(), size().x, /*width*/6);
-//    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
-//}
-
 //void BaseView::__updateRenderAnimation()
 //{
 //    if (m_animationRotation) {
@@ -164,18 +147,14 @@ void BaseView::draw(const jeti::Render& render) const
     render.draw(_mesh(), _material(), _modelMatrix());
 }
 
-void BaseView::_drawAxis(const jeti::Render& render) const
+void BaseView::drawAxis(const jeti::Render& render) const
 {
-    if (render.allowDrawAxis()) {
-        render.drawAxis(_modelMatrix());
-    }
+    render.drawAxis(_modelMatrix());
 }
 
-void BaseView::_drawCollisionRadius(const jeti::Render& render) const
+void BaseView::drawCollisionRadius(const jeti::Render& render) const
 {
-    if (render.allowDrawCollisionRadius()) {
-        render.drawCollisionRadius(_calcCollisionModelMatrix());
-    }
+    render.drawCollisionRadius(_calcCollisionModelMatrix());
 }
 
 void BaseView::__updateModelMatrix()

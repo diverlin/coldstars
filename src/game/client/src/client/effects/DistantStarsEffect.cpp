@@ -50,14 +50,11 @@ void DistantStars::update(const glm::vec3& offset) {
 }
 
 void DistantStars::draw(const jeti::Render& render) const {
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-//    /glBlendFunc(GL_ONE, GL_ONE);
+    render.disable_DEPTH_TEST();
+    render.enable_ADDITIVE_BLEND();
     for (auto layer: m_layers) {
         layer->draw(render);
     }
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisable(GL_BLEND);
 }
 
 

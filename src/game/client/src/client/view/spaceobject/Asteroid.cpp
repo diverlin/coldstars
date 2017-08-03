@@ -53,9 +53,6 @@ void Asteroid::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 
-    _drawCollisionRadius(render);
-    _drawAxis(render);
-
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());
 //    }

@@ -70,9 +70,6 @@ void SpaceStation::draw(const jeti::Render& render) const
 {
     jeti::view::BaseView::draw(render);
 
-    _drawCollisionRadius(render);
-    _drawAxis(render);
-
     //UpdateRenderStuff_2D();
         
     ////////////RenderKorpus(render);

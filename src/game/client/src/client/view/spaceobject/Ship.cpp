@@ -122,9 +122,6 @@ void Ship::draw(const jeti::Render& render) const
         _drawShield(render);
         //RenderShieldEffect(render, 1.0f - color().a);
     //}
-
-    _drawCollisionRadius(render);
-    _drawAxis(render);
 }
 
 //void ShipDrawable::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
