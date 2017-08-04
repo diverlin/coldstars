@@ -18,21 +18,15 @@
 
 #include <cmath>
 
-#include "DriveEffect.hpp"
-#include <particlesystem/Particle.hpp>
+#include "Linear.hpp"
+#include "Particle.hpp"
 
 namespace jeti {
 namespace particlesystem {
 
-Linear::Linear()
-{}
-
-Linear::~Linear()
-{}
-
-void Linear::createParticles()
+Linear::Linear(int particlesNum)
 {
-    for (unsigned int i=0; i<_particlesNum(); i++) {
+    for (int i=0; i<particlesNum; i++) {
         Particle* particle = new Particle(_particleData());
         particle->setPosition(center());
         particle->setDirection(_direction());
@@ -41,9 +35,17 @@ void Linear::createParticles()
     }
 }
 
+void Linear::update(const glm::vec3& offset, const:: glm::vec3& dir)
+{
+    setDirection(dir);
+    update(offset);
+}
+
 void Linear::update(const glm::vec3& offset)
 {
     setCenter(center()+offset);
+    _updateModelMatrix();
+
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
@@ -83,14 +85,12 @@ Linear* genLinearParticleSystem(control::Material* material, int size_id)
     int particles_num = 5;
 
     //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
-    Linear* ps = new Linear();
+    Linear* ps = new Linear(particles_num);
     
     ps->setMaterial(material);
     ps->setParticleData(data_particle);
     ps->setParticlesNum(particles_num);
-    
-    ps->createParticles();
-            
+
     return ps;
 }
 

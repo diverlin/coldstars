@@ -37,6 +37,10 @@ namespace jeti {
 class Render;
 class Camera;
 class Mesh;
+namespace particlesystem {
+class Base;
+class Linear;
+} // namespace particlesystem
 
 namespace control {
 class Material;
@@ -78,15 +82,38 @@ class Bullet;
 /// effects
 class LazerTraceEffect;
 class ShockWaveEffect;
-namespace jeti {
-class BaseParticleSystem;
-}
+
 class VerticalFlowText;
 
 namespace view {
 
 class StarSystem
 {
+    class Draw {
+    public:
+        bool background() const { return (m_stars || m_nebulas); }
+        bool background_fbo() const { return m_star; }
+        bool star() const { return m_star; }
+        bool stars() const { return m_stars; }
+        bool nebulas() const { return m_nebulas; }
+        bool spaceobjects() const { return m_spaceobjects; }
+        bool spaceobjects_meta() const { return (collision_radius() || axis()); }
+        bool collision_radius() const { return (m_spaceobjects && m_collision_radius); }
+        bool axis() const { return (m_spaceobjects && m_axis); }
+        bool hud() const { return m_hud; }
+        bool experiment() const { return m_experiment; }
+
+    private:
+        bool m_star = true;
+        bool m_stars = true;
+        bool m_nebulas = false;
+        bool m_spaceobjects = true;
+        bool m_collision_radius = true;
+        bool m_axis = false;
+        bool m_hud = true;
+        bool m_experiment = true;
+    };
+
 public:
     StarSystem(jeti::Render&);
     ~StarSystem();
@@ -97,6 +124,7 @@ private:
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
+    jeti::particlesystem::Linear* m_psLinear = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
@@ -108,6 +136,14 @@ private:
     std::vector<Ship*> m_ships;
     std::vector<Satellite*> m_satellites;
     std::vector<Bullet*> m_bullets;
+
+    jeti::Render& m_render;
+    jeti::Camera& m_camera;
+
+    Cache m_cache;
+    bool m_debug = true;
+
+    Draw m_draw;
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
@@ -156,7 +192,7 @@ private:
     /// visible effects
     void __add(ShockWaveEffect*);
     void __add(LazerTraceEffect*);
-    void __add(jeti::BaseParticleSystem*);
+    void __add(jeti::particlesystem::Base*);
     void __add(VerticalFlowText*);
 
     void __clear();
@@ -164,11 +200,12 @@ private:
     bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
     bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
 
-    jeti::Render& m_render;
-    jeti::Camera& m_camera;
-
-    Cache m_cache;
-    bool m_debug = true;
+    void __renderBackground(jeti::Render& render) const;
+    void __renderStarPostEffect(jeti::Render& render) const;
+    void __renderSpaceObjects(jeti::Render& render) const;
+    void __renderSpaceObjectsMeta(jeti::Render& render) const;
+    void __renderHUD(jeti::Render& render) const;
+    void __renderExperiment(jeti::Render& render) const;
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);
