@@ -69,7 +69,7 @@ void Base::update()
     for (unsigned int i=0; i<m_particles.size(); i++) {
         const Particle& particle = *m_particles[i];
 
-        positions.push_back(particle.GetPosition());
+        positions.push_back(particle.position());
         colors.push_back(particle.color());
         sizes.push_back(particle.size());
     }

@@ -36,8 +36,8 @@ void DamageEffect::CreateParticles()
 {
     for(unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
-        particle->Randomize_d_alpha(0.003, 0.006); //   ??
-        particle->CalcRandomVelocity();
+        particle->randomizeDeltaAlpha(0.003, 0.006); //   ??
+        particle->randomVelocity();
 
         _particles().push_back(particle);
     }
@@ -46,13 +46,13 @@ void DamageEffect::CreateParticles()
 void DamageEffect::update()
 {
     _setIsAlive(false);
-    for (auto particle: _particles()) {
+    for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
-            particle->Update();
+            particle->update();
             _setIsAlive(true);
         } else {
             if (!_isDying()) {
-                particle->Reborn();
+                particle->reborn();
             }
         }
     }
