@@ -30,9 +30,12 @@
 namespace jeti {
 namespace particlesystem {
 
-Base::Base()
+Base::Base(const ParticleSystemData& config)
+    :
+    m_dataParticle(config)
 {
     m_mesh = new Mesh();
+    m_direction = glm::vec3(1.0f, 0.0f, 0.0f);
 }
 
 Base::~Base()
@@ -45,6 +48,29 @@ Base::~Base()
     m_particles.clear();
 }
 
+void Base::_emitNewParticle() {
+    if (m_particles.size() > m_dataParticle.particles_num) {
+        return;
+    }
+
+    const auto now_time = std::chrono::steady_clock::now();
+    float seconds_diff = std::chrono::duration_cast<std::chrono::seconds>(now_time-m_lastTime).count();
+
+    if (seconds_diff > m_dataParticle.creation_delay) {
+        m_particles.push_back(_genParticle());
+        m_lastTime = now_time;
+    }
+}
+
+Particle* Base::_genParticle() const
+{
+    Particle* particle = new Particle(m_dataParticle);
+    particle->setPosition(m_center);
+    particle->setDirection(m_direction);
+    particle->setVelocity(m_velocity);
+    return particle;
+}
+
 void Base::validateResources() const
 {
     assert(m_material);
@@ -53,7 +79,7 @@ void Base::validateResources() const
     }
 }
 
-void Base::update(const glm::vec3& offset)
+void Base::_updateToGPU()
 {  
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
@@ -71,11 +97,11 @@ void Base::update(const glm::vec3& offset)
 void
 Base::_updateModelMatrix()
 { 
-    m_Mm = glm::translate(center());
+    m_Tm = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
-    //m_MatrixScale     = glm::scale(size());
+    m_Sm = glm::scale(glm::vec3(100.0f));
 
-    //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
+    m_Mm = m_Tm * m_Sm /** m_MatrixRotate*/;
 }
 
 void Base::draw(const jeti::Render& render) const

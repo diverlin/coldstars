@@ -29,7 +29,7 @@ namespace particlesystem {
 class Particle
 {
 public:
-    Particle(const ParticleData&);
+    Particle(const ParticleSystemData&);
     ~Particle();
 
     void setPosition(const glm::vec3& position) { m_position = position; }
@@ -66,7 +66,7 @@ private:
 
     float m_size = 1.0f;
 
-    ParticleData m_dataParticle;
+    ParticleSystemData m_dataParticle;
 };
 
 } // namespace particlesystem

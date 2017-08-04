@@ -104,13 +104,13 @@ class StarSystem
         bool experiment() const { return m_experiment; }
 
     private:
-        bool m_star = true;
-        bool m_stars = true;
+        bool m_star = false;
+        bool m_stars = false;
         bool m_nebulas = false;
-        bool m_spaceobjects = true;
+        bool m_spaceobjects = false;
         bool m_collision_radius = true;
         bool m_axis = false;
-        bool m_hud = true;
+        bool m_hud = false;
         bool m_experiment = true;
     };
 
@@ -155,8 +155,8 @@ private:
 
     void __updateVisible(control::StarSystem* starsystem);
 
-    void __render_NEW(jeti::Render&);
-    void __render_NEW2(jeti::Render&);
+    void __render(jeti::Render&);
+    void __render_DEPRECATED(jeti::Render&);
     void __drawCollisionRadius(const jeti::Render&) const;
     void __drawAxis(const jeti::Render&) const;
 

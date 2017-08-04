@@ -22,6 +22,7 @@
 #include <particlesystem/ParticleData.hpp>
 
 #include <vector>
+#include <chrono>
 
 namespace jeti {
 
@@ -38,7 +39,7 @@ class Particle;
 class Base
 {
 public:
-    Base();
+    Base(const ParticleSystemData&);
     virtual ~Base();
 
     [[deprecated("depr")]]
@@ -49,8 +50,6 @@ public:
 
     void setCenter(const glm::vec3& center) { m_center = center; }
     void setDirection(const glm::vec3& dir) { m_direction = dir; }
-    void setParticlesNum(unsigned int particles_num)  { m_particlesNum = particles_num; }
-    void setParticleData(const ParticleData& data_particle) { m_dataParticle = data_particle; }
 
     int typeId() const { return m_type; }
     bool isAlive() const { return m_isAlive; }
@@ -62,12 +61,14 @@ public:
 
     const glm::mat4& modelMatrix() const { return m_Mm; }
 
-    virtual void update(const glm::vec3&);
+    virtual void update(const glm::vec3&) = 0;
     void draw(const jeti::Render&) const;
 
 protected:
+    void _emitNewParticle();
+    Particle* _genParticle() const;
+
     void _updateModelMatrix();
-    unsigned int _particlesNum() const { return m_particlesNum; }
 
     void _setIsAlive(bool isAlive) { m_isAlive = isAlive; }
 
@@ -75,21 +76,25 @@ protected:
 
     const glm::vec3& _direction() const { return m_direction; }
 
-    ParticleData& _particleData() { return m_dataParticle; }
+    ParticleSystemData& _particleData() { return m_dataParticle; }
     std::vector<Particle*>& _particles() { return m_particles; }
+
+    void _updateToGPU();
 
 private:
     int m_type = -1;
-    unsigned int m_particlesNum;
+    std::chrono::steady_clock::time_point m_lastTime;
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    ParticleData m_dataParticle;
+    ParticleSystemData m_dataParticle;
 
     glm::vec3 m_center;
     glm::vec3 m_direction;
     float m_velocity = 0.0f;
 
+    glm::mat4 m_Tm;
+    glm::mat4 m_Sm;
     glm::mat4 m_Mm;
 
     bool m_isAlive = true;

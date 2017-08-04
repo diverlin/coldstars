@@ -19,24 +19,27 @@
 #include "Particle.hpp"
 #include <meti/RandUtils.hpp>
 
+#include <ceti/StringUtils.hpp>
+#include <iostream>
+
 namespace jeti {
 namespace particlesystem {
 
-Particle::Particle(const ParticleData& data_particle)
+Particle::Particle(const ParticleSystemData& data_particle)
     :
       m_color(data_particle.color_start),
       m_size(data_particle.size_start),
       m_velocity(data_particle.velocity_start),
       m_dataParticle(data_particle)
-{} 
+{}
 
 Particle::~Particle()
 {}
 
 void Particle::randomizeLifeTime(float low, float high)
 {
-    float speed_rate              = meti::getRandFloat(low, high);   // 0.5, 0.8
-    m_dataParticle.d_size         *= speed_rate;
+    float speed_rate = meti::getRandFloat(low, high);   // 0.5, 0.8
+    m_dataParticle.size_delta *= speed_rate;
     m_dataParticle.velocity_start *= speed_rate;
 }
 
@@ -60,23 +63,23 @@ void Particle::randomDirection()
 
 void Particle::randDirectionDirty()
 {
-    m_direction.x = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
-    m_direction.y = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
-    m_direction.z = 0;
+//    m_direction.x = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
+//    m_direction.y = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
+//    m_direction.z = 0;
 }
 
 
 void Particle::randDirectionAccurate()
 {
-    float _len   = meti::getRandInt(50, 100);
-    float _angle = glm::radians(meti::getRandFloat(360.0f));
+//    float _len   = meti::getRandInt(50, 100);
+//    float _angle = glm::radians(meti::getRandFloat(360.0f));
     
-    float target_x = cos(_angle) * _len;
-    float target_y = sin(_angle) * _len;
+//    float target_x = cos(_angle) * _len;
+//    float target_y = sin(_angle) * _len;
     
-    m_direction.x = target_x/_len;
-    m_direction.y = target_y/_len;
-    m_direction.z = 0;
+//    m_direction.x = target_x/_len;
+//    m_direction.y = target_y/_len;
+//    m_direction.z = 0;
 }  
 
 
@@ -109,6 +112,7 @@ void Particle::reborn()
 
     m_color = m_dataParticle.color_start;
     m_size  = m_dataParticle.size_start;
+    m_velocity = m_dataParticle.velocity_start;
 }
 
 
@@ -118,9 +122,9 @@ void Particle::update()
         return;
     }
 
-    m_position += m_velocity;
+    m_position += m_velocity*m_direction;
     m_color.a  -= m_dataParticle.color_delta.a;
-    m_size     -= m_dataParticle.d_size;
+    m_size     -= m_dataParticle.size_delta;
 
     if (m_color.a < m_dataParticle.color_end.a) {
         m_color.a = m_dataParticle.color_end.a;

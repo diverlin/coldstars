@@ -26,21 +26,21 @@ namespace particlesystem {
 
 class ExplosionEffect : public Base
 { 
-    public:
-        ExplosionEffect(float);       
-        virtual ~ExplosionEffect() override final;
-        
-        float GetRadius() const { return m_Radius; }
+public:
+    ExplosionEffect(const ParticleSystemData&, float);
+    virtual ~ExplosionEffect() override final;
 
-        void update(const glm::vec3&) override final;
-        
-        void CreateParticles();
+    float GetRadius() const { return m_Radius; }
 
-    private:
-        float m_Radius;
+    void update(const glm::vec3&) override final;
+
+    void CreateParticles();
+
+private:
+    float m_Radius;
 };  
 
 //ExplosionEffect* getNewExplosionEffect(float);
-    
+
 } // namepsace particlesystem
 } // namespace jeti
