@@ -37,13 +37,13 @@ void DamageEffect::CreateParticles()
     for(unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
         particle->randomizeDeltaAlpha(0.003, 0.006); //   ??
-        particle->randomVelocity();
+        particle->randomDirection();
 
         _particles().push_back(particle);
     }
 }
 
-void DamageEffect::update()
+void DamageEffect::update(const glm::vec3& offset)
 {
     _setIsAlive(false);
     for (Particle* particle: _particles()) {

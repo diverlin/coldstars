@@ -114,7 +114,6 @@ m_Radius(radius)
     //} 
 }
  
-/* virtual override final */
 ExplosionEffect::~ExplosionEffect()
 {}
 
@@ -122,14 +121,14 @@ void ExplosionEffect::CreateParticles()
 {
     for(unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
-        particle->randomVelocity();
+        particle->randomDirection();
         _particles().push_back(particle);
     }
 }
 
-void ExplosionEffect::update()
+void ExplosionEffect::update(const glm::vec3& offset)
 {
-    Base::update();
+    Base::update(offset);
 
     _setIsAlive(false);
     for (Particle* particle: _particles()) {

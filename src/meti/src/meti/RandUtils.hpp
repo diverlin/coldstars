@@ -25,6 +25,7 @@
 
 namespace meti {
 
+float getRandFloat(float);
 float getRandFloat(float, float);
 int getRandInt(int);
 int getRandInt(int, int);

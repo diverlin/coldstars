@@ -24,114 +24,75 @@
 namespace jeti {
 namespace particlesystem {
 
-Linear::Linear(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
-{
-    this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
-    this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
-}
+Linear::Linear()
+{}
 
 Linear::~Linear()
 {}
 
-void Linear::_createParticles()
+void Linear::createParticles()
 {
     for (unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
-        particle->setPosition(*pTo_start_pos);
-        particle->setVelocity(m_velocity);
+        particle->setPosition(center());
+        particle->setDirection(_direction());
+        particle->setVelocity(velocity());
         _particles().push_back(particle);
     }
 }
 
-
-void Linear::_updateVelocity()
+void Linear::update(const glm::vec3& offset)
 {
-    float xl = (pTo_target_pos->x - pTo_start_pos->x);
-    float yl = (pTo_target_pos->y - pTo_start_pos->y);
-    float l = sqrt(xl*xl + yl*yl);
-
-    float d_xn = xl / l;
-    float d_yn = yl / l;
-
-    assert(false);
-//    m_dir.x = d_xn * _particleData().velocity_start;
-//    m_dir.y = d_yn * _particleData().velocity_start;
-//    m_dir.z = 0;
-}
-
-
-void Linear::_restart()
-{
-    //float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
-    
-    //for (unsigned int i = 0; i < particles_vec.size(); i++) 
-    //{
-        //while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
-        //{
-            //particles_vec[i]->Update();
-        //}     
-    //}
-}
-
-/* virtual override final */
-void Linear::update()
-{
-    _updateVelocity();
-
+    setCenter(center()+offset);
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
         } else {
-            particle->setPosition(*pTo_start_pos);
-            particle->setVelocity(m_velocity);
             particle->reborn();
         }
     }
 }
 
-//DriveEffect* GetNewDriveEffect(int size_id, glm::vec3* pTo_pos, glm::vec3* pTo_target_pos)
-//{
-//    ParticleData data_particle;
+Linear* genLinearParticleSystem(control::Material* material, int size_id)
+{
+    ParticleData data_particle;
                    
-//    data_particle.size_start = 15.0 + 2*size_id;
-//    data_particle.size_end   = 2.0;
-//    data_particle.d_size     = 0.0;
+    data_particle.size_start = 15.0f + 2*size_id;
+    data_particle.size_end   = 2.0f;
+    data_particle.d_size     = 0.0f;
     
-//    data_particle.velocity_start = 1.2;
-//    data_particle.velocity_end   = 1.2;
-//    data_particle.d_velocity     = 0.0;
+    data_particle.velocity_start = 1.2f;
+    data_particle.velocity_end   = 1.2f;
+    data_particle.d_velocity     = 0.0f;
     
-//    data_particle.color_start.r    = 1.0;
-//    data_particle.color_start.g    = 1.0;
-//    data_particle.color_start.b    = 1.0;
-//    data_particle.color_start.a    = 0.9;
+    data_particle.color_start.r = 1.0f;
+    data_particle.color_start.g = 1.0f;
+    data_particle.color_start.b = 1.0f;
+    data_particle.color_start.a = 0.9f;
     
-//    data_particle.color_end.r    = 0.0;
-//    data_particle.color_end.g    = 0.0;
-//    data_particle.color_end.b    = 0.0;
-//    data_particle.color_end.a    = 0.1;
+    data_particle.color_end.r = 0.0f;
+    data_particle.color_end.g = 0.0f;
+    data_particle.color_end.b = 0.0f;
+    data_particle.color_end.a = 0.1f;
     
-//    data_particle.color_delta.r    = 0.0;
-//    data_particle.color_delta.g    = 0.0;
-//    data_particle.color_delta.b    = 0.0;
-//    data_particle.color_delta.a    = 0.1;
+    data_particle.color_delta.r = 0.0f;
+    data_particle.color_delta.g = 0.0f;
+    data_particle.color_delta.b = 0.0f;
+    data_particle.color_delta.a = 0.1f;
+        
+    int particles_num = 5;
+
+    //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
+    Linear* ps = new Linear();
     
+    ps->setMaterial(material);
+    ps->setParticleData(data_particle);
+    ps->setParticlesNum(particles_num);
     
-//    int particles_num = 5;
-                   
-//    TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT, COLOR::RED);
-//    DriveEffect* drive_effect = new DriveEffect(pTo_pos, pTo_target_pos);
-    
-//    drive_effect->SetTextureOb(texOb_particle);
-//    drive_effect->SetParticleData(data_particle);
-//    drive_effect->SetParticlesNum(particles_num);
-    
-//    drive_effect->UpdateVelocity();
-//    drive_effect->CreateParticles();
-//    drive_effect->PutParticlesToInitPos();
+    ps->createParticles();
             
-//    return drive_effect;
-//}
+    return ps;
+}
 
 } // namespace aprticlesystem
 } // namespace jeti

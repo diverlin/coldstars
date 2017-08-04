@@ -33,7 +33,8 @@ public:
     ~Particle();
 
     void setPosition(const glm::vec3& position) { m_position = position; }
-    void setVelocity(const glm::vec3& velocity) { m_velocity = velocity; }
+    void setDirection(const glm::vec3& direction) { m_direction = direction; }
+    void setVelocity(float velocity) { m_velocity = velocity; }
 
     bool isAlive() const { return m_isAlive; }
     float alpha() const { return m_color.a; }
@@ -48,9 +49,9 @@ public:
     void randomizeLifeTime(float, float);
     void randomizeDeltaAlpha(float, float);
 
-    void randomVelocity();
-    void randAccurateVelocity();
-    void randDirtyVelocity();
+    void randomDirection();
+    void randDirectionAccurate();
+    void randDirectionDirty();
 
     void update();
 
@@ -58,12 +59,12 @@ private:
     bool m_isAlive = true;
 
     glm::vec3 m_position;
-    glm::vec3 m_velocity;
-    glm::vec3 m_force;
+    glm::vec3 m_direction;
+    float m_velocity = 0.0f;
 
     glm::vec4 m_color;
 
-    float m_size;
+    float m_size = 1.0f;
 
     ParticleData m_dataParticle;
 };
