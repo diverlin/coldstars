@@ -29,7 +29,7 @@
 #include <jeti/Render.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
-#include <jeti/particlesystem/Linear.hpp>
+#include <jeti/particlesystem/Jet.hpp>
 
 namespace view {
 

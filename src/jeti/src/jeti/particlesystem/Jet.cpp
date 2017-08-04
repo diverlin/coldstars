@@ -16,25 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cmath>
-
-#include "Linear.hpp"
+#include "Jet.hpp"
 #include "Particle.hpp"
+
+#include <cmath>
 
 namespace jeti {
 namespace particlesystem {
 
-Linear::Linear(const Config& particleData)
+Jet::Jet(const Config& particleData)
     : Base(particleData)
 {}
 
-void Linear::update(const glm::vec3& center, const:: glm::vec3& dir)
+void Jet::update(const glm::vec3& center, const:: glm::vec3& dir)
 {
     setDirection(dir);
     update(center);
 }
 
-void Linear::update(const glm::vec3& center)
+void Jet::update(const glm::vec3& center)
 {    
     setCenter(center);
 
@@ -51,7 +51,7 @@ void Linear::update(const glm::vec3& center)
     _emitNewParticle();
 }
 
-Linear* genLinearParticleSystem(control::Material* material, int size_id)
+Jet* genLinearParticleSystem(control::Material* material, int size_id)
 {
     Config config;
 
@@ -82,7 +82,7 @@ Linear* genLinearParticleSystem(control::Material* material, int size_id)
     config.color_delta.a = 0.05f;
         
     //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
-    Linear* ps = new Linear(config);
+    Jet* ps = new Jet(config);
     ps->setMaterial(material);
 
     return ps;

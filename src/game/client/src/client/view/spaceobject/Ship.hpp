@@ -22,7 +22,7 @@
 
 namespace jeti {
 namespace particlesystem {
-class Linear;
+class Jet;
 } // namespace aprticlesystem
 } // namespace jeti
 
@@ -46,7 +46,7 @@ public:
 
 private:
     control::Ship* m_ship = nullptr;
-    jeti::particlesystem::Linear* m_driveJet = nullptr;
+    jeti::particlesystem::Jet* m_driveJet = nullptr;
 };
 
 } // namespace view

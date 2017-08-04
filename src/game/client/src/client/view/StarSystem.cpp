@@ -54,7 +54,7 @@
 #include <jeti/Material.hpp>
 #include <jeti/Camera.hpp>
 #include <jeti/animation/ConstantRotation.hpp>
-#include <jeti/particlesystem/Linear.hpp>
+#include <jeti/particlesystem/Jet.hpp>
 
 #include <ceti/Collision.hpp>
 

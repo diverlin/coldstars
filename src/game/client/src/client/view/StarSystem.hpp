@@ -39,7 +39,7 @@ class Camera;
 class Mesh;
 namespace particlesystem {
 class Base;
-class Linear;
+class Jet;
 } // namespace particlesystem
 
 namespace control {
@@ -124,7 +124,7 @@ private:
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
-    jeti::particlesystem::Linear* m_psLinear = nullptr;
+    jeti::particlesystem::Jet* m_psLinear = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
