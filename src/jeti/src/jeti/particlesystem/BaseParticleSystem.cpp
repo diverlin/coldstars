@@ -32,12 +32,6 @@ namespace jeti {
 namespace particlesystem {
 
 Base::Base()
-    :
-      m_typeId(-1),
-      m_mesh(nullptr),
-//      m_Parent(nullptr),
-      m_isAlive(true),
-      m_isDying(false)
 {
     m_mesh = new Mesh();
 }
@@ -60,24 +54,23 @@ void Base::validateResources() const
     }
 }
 
-void Base::update()
+void Base::update(const glm::vec3& offset)
 {  
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    for (unsigned int i=0; i<m_particles.size(); i++) {
-        const Particle& particle = *m_particles[i];
-
-        positions.push_back(particle.position());
-        colors.push_back(particle.color());
-        sizes.push_back(particle.size());
+    for (Particle* particle: m_particles) {
+        positions.push_back(particle->position());
+        colors.push_back(particle->color());
+        sizes.push_back(particle->size());
     }
 
     m_mesh->fillPointVerticesFast(positions, colors, sizes);
 }
 
-const glm::mat4& Base::actualModelMatrix()
+const glm::mat4&
+Base::actualModelMatrix()
 { 
     m_matrixModel = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);

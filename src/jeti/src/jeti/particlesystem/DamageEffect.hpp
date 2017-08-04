@@ -32,7 +32,7 @@ public:
 
     void CreateParticles();
 
-    virtual void update() override final;
+    void update(const glm::vec3&) override final;
 };
 
 //DamageEffect* getNewDamageEffect(int, SpaceObject*);

@@ -32,7 +32,7 @@ class ExplosionEffect : public Base
         
         float GetRadius() const { return m_Radius; }
 
-        virtual void update() override final;
+        void update(const glm::vec3&) override final;
         
         void CreateParticles();
 

@@ -209,7 +209,7 @@ void Mesh::__updateVbo()
     int stride = STRIDE_POSITION;
     
     if (m_hasTexCoords) { stride += STRIDE_TEXCOORD; }
-    if ((m_hasNormals) || (m_hasPointsSize))  { stride += STRIDE_NORMAL; }
+    if (m_hasNormals || m_hasPointsSize)  { stride += STRIDE_NORMAL; }
     if (m_hasColors)    { stride += STRIDE_COLOR; }
 
     GLfloat data_array[m_vertexCount * stride];

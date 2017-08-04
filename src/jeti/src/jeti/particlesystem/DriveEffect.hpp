@@ -27,25 +27,16 @@ namespace particlesystem {
 class Linear : public Base
 {
 public:
-    Linear(glm::vec3*, glm::vec3*);
+    Linear();
     virtual ~Linear() override final;
 
-    virtual void update() override final;
+    void update(const glm::vec3&) override final;
 
-protected:
-    void _createParticles();
-    void _updateVelocity();
-    void _restart();
-
-private:
-    glm::vec3* pTo_start_pos;
-    glm::vec3* pTo_target_pos;
-
-    float m_length = 0;
-    glm::vec3 m_velocity;
+public:
+    void createParticles();
 };
 
-//DriveEffect* GetNewDriveEffect(int, glm::vec3*, glm::vec3*);
+Linear* genLinearParticleSystem(control::Material*, int);
 
 } // namespace particlesystem
 } // namespace jeti

@@ -47,18 +47,21 @@ public:
     void setMaterial(control::Material* material) { m_material = material; }
 
     void setCenter(const glm::vec3& center) { m_center = center; }
+    void setDirection(const glm::vec3& dir) { m_direction = dir; }
     void setParticlesNum(unsigned int particles_num)  { m_particlesNum = particles_num; }
     void setParticleData(const ParticleData& data_particle) { m_dataParticle = data_particle; }
 
-    int typeId() const { return m_typeId; }
+    int typeId() const { return m_type; }
     bool isAlive() const { return m_isAlive; }
     const glm::vec3& center() const { return m_center; }
+    float velocity() const { return m_velocity; }
+
     const Mesh& mesh() const { return *m_mesh; }
     const control::Material& material() const { return *m_material; }
 
     const glm::mat4& actualModelMatrix();
 
-    virtual void update() = 0;
+    virtual void update(const glm::vec3& offset);
 
 protected:
     unsigned int _particlesNum() const { return m_particlesNum; }
@@ -67,11 +70,13 @@ protected:
 
     bool _isDying() const { return m_isDying; }
 
+    const glm::vec3& _direction() const { return m_direction; }
+
     ParticleData& _particleData() { return m_dataParticle; }
     std::vector<Particle*>& _particles() { return m_particles; }
 
 private:
-    int m_typeId;
+    int m_type = -1;
     unsigned int m_particlesNum;
 
     control::Material* m_material = nullptr;
@@ -79,13 +84,13 @@ private:
     ParticleData m_dataParticle;
 
     glm::vec3 m_center;
-    glm::vec3 m_velocity;
-    glm::vec3 m_dir;
+    glm::vec3 m_direction;
+    float m_velocity = 0.0f;
 
     glm::mat4 m_matrixModel;
 
-    bool m_isAlive;
-    bool m_isDying;
+    bool m_isAlive = true;
+    bool m_isDying = false;
 
     std::vector<Particle*> m_particles;
 };

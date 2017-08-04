@@ -24,6 +24,12 @@
 
 namespace meti {
 
+float getRandFloat(float high)
+{
+    float precision = 100000.0;
+    return (float)getRandInt(0, (int)precision*high)/precision;
+}
+
 float getRandFloat(float low, float high)
 {
     assert(low<=high);

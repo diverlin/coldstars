@@ -26,6 +26,7 @@ Particle::Particle(const ParticleData& data_particle)
     :
       m_color(data_particle.color_start),
       m_size(data_particle.size_start),
+      m_velocity(data_particle.velocity_start),
       m_dataParticle(data_particle)
 {} 
 
@@ -44,44 +45,38 @@ void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
     float val1_i = val1_f*10000;
     float val2_i = val2_f*10000;
 
-    m_dataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0;
+    m_dataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0f;
 }                
 
 
-void Particle::randomVelocity()
+void Particle::randomDirection()
 {
     if (meti::getRandBool() == true) {
-        randDirtyVelocity();
+        randDirectionDirty();
     } else {
-        randAccurateVelocity();
+        randDirectionAccurate();
     }
 }
 
-void Particle::randDirtyVelocity()
+void Particle::randDirectionDirty()
 {
-    float dx_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
-    float dy_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
-    
-    m_velocity.x = dx_n * m_dataParticle.velocity_start;
-    m_velocity.y = dy_n * m_dataParticle.velocity_start;
-    m_velocity.z = 0;
+    m_direction.x = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
+    m_direction.y = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
+    m_direction.z = 0;
 }
 
 
-void Particle::randAccurateVelocity()
+void Particle::randDirectionAccurate()
 {
     float _len   = meti::getRandInt(50, 100);
-    float _angle = glm::radians((float)meti::getRandInt(360));
+    float _angle = glm::radians(meti::getRandFloat(360.0f));
     
     float target_x = cos(_angle) * _len;
     float target_y = sin(_angle) * _len;
     
-    float dx_n = target_x/_len;
-    float dy_n = target_y/_len;
-    
-    m_velocity.x = dx_n * m_dataParticle.velocity_start;
-    m_velocity.y = dy_n * m_dataParticle.velocity_start;
-    m_velocity.z = 0;
+    m_direction.x = target_x/_len;
+    m_direction.y = target_y/_len;
+    m_direction.z = 0;
 }  
 
 
