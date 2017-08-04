@@ -42,7 +42,6 @@ private:
     glm::vec3* pTo_target_pos;
 
     float m_length = 0;
-    glm::vec3 m_dir;
     glm::vec3 m_velocity;
 };
 

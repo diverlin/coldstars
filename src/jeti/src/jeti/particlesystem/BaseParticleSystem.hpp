@@ -25,14 +25,14 @@
 
 namespace jeti {
 
-class Particle;
-
 class Mesh;
 namespace control {
 class Material;
 }
 
 namespace particlesystem {
+
+class Particle;
 
 class Base
 {

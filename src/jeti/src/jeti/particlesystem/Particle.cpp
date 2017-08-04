@@ -20,55 +20,55 @@
 #include <meti/RandUtils.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
 Particle::Particle(const ParticleData& data_particle)
-:
-m_IsAlive(true),
-m_Color(data_particle.color_start),
-m_Size(data_particle.size_start),
-m_DataParticle(data_particle)
+    :
+      m_color(data_particle.color_start),
+      m_size(data_particle.size_start),
+      m_dataParticle(data_particle)
 {} 
-      
+
 Particle::~Particle()
 {}
 
-void Particle::RandomizeLifeTime(float low, float high)
+void Particle::randomizeLifeTime(float low, float high)
 {
     float speed_rate              = meti::getRandFloat(low, high);   // 0.5, 0.8
-    m_DataParticle.d_size         *= speed_rate;
-    m_DataParticle.velocity_start *= speed_rate;
+    m_dataParticle.d_size         *= speed_rate;
+    m_dataParticle.velocity_start *= speed_rate;
 }
 
-void Particle::Randomize_d_alpha(float val1_f, float val2_f)
+void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
 {
     float val1_i = val1_f*10000;
     float val2_i = val2_f*10000;
-        
-    m_DataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0;
+
+    m_dataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0;
 }                
-              
-                
-void Particle::CalcRandomVelocity()
+
+
+void Particle::randomVelocity()
 {
     if (meti::getRandBool() == true) {
-        CalcRandomDirtyVelocity();
+        randDirtyVelocity();
     } else {
-        CalcRandomAccurateVelocity();
+        randAccurateVelocity();
     }
 }
 
-void Particle::CalcRandomDirtyVelocity()
+void Particle::randDirtyVelocity()
 {
     float dx_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
     float dy_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
     
-    m_Velocity.x = dx_n * m_DataParticle.velocity_start;
-    m_Velocity.y = dy_n * m_DataParticle.velocity_start;
-    m_Velocity.z = 0;
+    m_velocity.x = dx_n * m_dataParticle.velocity_start;
+    m_velocity.y = dy_n * m_dataParticle.velocity_start;
+    m_velocity.z = 0;
 }
 
 
-void Particle::CalcRandomAccurateVelocity()
+void Particle::randAccurateVelocity()
 {
     float _len   = meti::getRandInt(50, 100);
     float _angle = glm::radians((float)meti::getRandInt(360));
@@ -79,64 +79,64 @@ void Particle::CalcRandomAccurateVelocity()
     float dx_n = target_x/_len;
     float dy_n = target_y/_len;
     
-    m_Velocity.x = dx_n * m_DataParticle.velocity_start;
-    m_Velocity.y = dy_n * m_DataParticle.velocity_start;
-    m_Velocity.z = 0;
+    m_velocity.x = dx_n * m_dataParticle.velocity_start;
+    m_velocity.y = dy_n * m_dataParticle.velocity_start;
+    m_velocity.z = 0;
 }  
 
 
 //void Particle::calcAccurateRandomVelocity2(glm::vec2 center)
 //{
-    //float _len   = getRandInt(50, 100);
-    //float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
-    
-    //glm::vec2 target;
-    //target = center;
-    
-    //pos.x = center.x + sin(_angle) * _len;
-    //pos.y = center.y + cos(_angle) * _len;
-    
-    //float xl = (target.x - pos.x);
-    //float yl = (target.y - pos.y);
-    
-    //float dx_n = xl/_len;
-    //float dy_n = yl/_len;
-    
-    //m_Velocity.x = dx_n * m_DataParticle.velocity_start;
-    //m_Velocity.y = dy_n * m_DataParticle.velocity_start;
-    //m_Velocity.z = 0;
+//float _len   = getRandInt(50, 100);
+//float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
+
+//glm::vec2 target;
+//target = center;
+
+//pos.x = center.x + sin(_angle) * _len;
+//pos.y = center.y + cos(_angle) * _len;
+
+//float xl = (target.x - pos.x);
+//float yl = (target.y - pos.y);
+
+//float dx_n = xl/_len;
+//float dy_n = yl/_len;
+
+//m_Velocity.x = dx_n * m_DataParticle.velocity_start;
+//m_Velocity.y = dy_n * m_DataParticle.velocity_start;
+//m_Velocity.z = 0;
 //}  
 
-void Particle::Reborn()
+void Particle::reborn()
 {   
-    m_Position = glm::vec3(0.0f);  
-    m_IsAlive = true;
-                   
-    m_Color = m_DataParticle.color_start;
-    m_Size  = m_DataParticle.size_start;
+    m_position = glm::vec3(0.0f);
+    m_isAlive = true;
+
+    m_color = m_dataParticle.color_start;
+    m_size  = m_dataParticle.size_start;
 }
-              
 
-void Particle::Update()
+
+void Particle::update()
 {
-    if (m_IsAlive)  
-    {
-        m_Position += m_Velocity;    
-        m_Color.a  -= m_DataParticle.color_delta.a;
-        m_Size     -= m_DataParticle.d_size;     
+    if (!m_isAlive) {
+        return;
+    }
 
-        if (m_Color.a < m_DataParticle.color_end.a)
-        {
-            m_Color.a = m_DataParticle.color_end.a;
-            m_IsAlive = false;
-        }
-    
-        if (m_Size < m_DataParticle.size_end)
-        {
-            m_Size = m_DataParticle.size_end;
-            m_IsAlive = false;
-        }
+    m_position += m_velocity;
+    m_color.a  -= m_dataParticle.color_delta.a;
+    m_size     -= m_dataParticle.d_size;
+
+    if (m_color.a < m_dataParticle.color_end.a) {
+        m_color.a = m_dataParticle.color_end.a;
+        m_isAlive = false;
+    }
+
+    if (m_size < m_dataParticle.size_end) {
+        m_size = m_dataParticle.size_end;
+        m_isAlive = false;
     }
 }
 
-}
+} // namespace particlesystem
+} // namespace jeti

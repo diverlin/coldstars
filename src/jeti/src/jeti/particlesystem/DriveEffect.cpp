@@ -37,8 +37,8 @@ void Linear::_createParticles()
 {
     for (unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
-        particle->SetPosition(*pTo_start_pos);
-        particle->SetVelocity(m_velocity);
+        particle->setPosition(*pTo_start_pos);
+        particle->setVelocity(m_velocity);
         _particles().push_back(particle);
     }
 }
@@ -53,9 +53,10 @@ void Linear::_updateVelocity()
     float d_xn = xl / l;
     float d_yn = yl / l;
 
-    m_dir.x = d_xn * _particleData().velocity_start;
-    m_dir.y = d_yn * _particleData().velocity_start;
-    m_dir.z = 0;
+    assert(false);
+//    m_dir.x = d_xn * _particleData().velocity_start;
+//    m_dir.y = d_yn * _particleData().velocity_start;
+//    m_dir.z = 0;
 }
 
 
@@ -77,13 +78,13 @@ void Linear::update()
 {
     _updateVelocity();
 
-    for (auto particle: _particles()) {
+    for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
-            particle->Update();
+            particle->update();
         } else {
-            particle->SetPosition(*pTo_start_pos);
-            particle->SetVelocity(m_velocity);
-            particle->Reborn();
+            particle->setPosition(*pTo_start_pos);
+            particle->setVelocity(m_velocity);
+            particle->reborn();
         }
     }
 }

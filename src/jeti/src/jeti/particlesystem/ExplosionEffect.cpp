@@ -122,7 +122,7 @@ void ExplosionEffect::CreateParticles()
 {
     for(unsigned int i=0; i<_particlesNum(); i++) {
         Particle* particle = new Particle(_particleData());
-        particle->CalcRandomVelocity();
+        particle->randomVelocity();
         _particles().push_back(particle);
     }
 }
@@ -132,9 +132,9 @@ void ExplosionEffect::update()
     Base::update();
 
     _setIsAlive(false);
-    for (auto particle: _particles()) {
+    for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
-            particle->Update();
+            particle->update();
             _setIsAlive(true);
         }
     }  

@@ -18,52 +18,55 @@
 
 
 #pragma once
- 
+
 #include <particlesystem/ParticleData.hpp>
+
 #include <glm/glm.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
 class Particle
 {
-    public:
-        Particle(const ParticleData&);       
-        ~Particle();
-        
-        void SetPosition(const glm::vec3& position) { m_Position = position; };              
-        void SetVelocity(const glm::vec3& velocity) { m_Velocity = velocity; };
-        
-        bool isAlive()     const { return m_IsAlive; };
-        float GetAlpha()      const { return m_Color.a; };
-        
-        const glm::vec3& GetPosition() const { return m_Position; }
-        const glm::vec4& color() const { return m_Color; }
-        
-        float size() const { return m_Size; }
+public:
+    Particle(const ParticleData&);
+    ~Particle();
 
-        void Reborn();      
-        
-        void RandomizeLifeTime(float, float);
-        void Randomize_d_alpha(float, float);        
-        
-        void CalcRandomVelocity();            
-        void CalcRandomAccurateVelocity();
-        void CalcRandomDirtyVelocity();
-        
-        void Update();
-                
-    private:
-        bool m_IsAlive;
-        
-        glm::vec3 m_Position;
-        glm::vec3 m_Velocity;
-        glm::vec3 m_Force;
-        
-        glm::vec4 m_Color;
-        
-        float m_Size;
-        
-        ParticleData m_DataParticle;
+    void setPosition(const glm::vec3& position) { m_position = position; }
+    void setVelocity(const glm::vec3& velocity) { m_velocity = velocity; }
+
+    bool isAlive() const { return m_isAlive; }
+    float alpha() const { return m_color.a; }
+
+    const glm::vec3& position() const { return m_position; }
+    const glm::vec4& color() const { return m_color; }
+
+    float size() const { return m_size; }
+
+    void reborn();
+
+    void randomizeLifeTime(float, float);
+    void randomizeDeltaAlpha(float, float);
+
+    void randomVelocity();
+    void randAccurateVelocity();
+    void randDirtyVelocity();
+
+    void update();
+
+private:
+    bool m_isAlive = true;
+
+    glm::vec3 m_position;
+    glm::vec3 m_velocity;
+    glm::vec3 m_force;
+
+    glm::vec4 m_color;
+
+    float m_size;
+
+    ParticleData m_dataParticle;
 };
-  
-}
+
+} // namespace particlesystem
+} // namespace jeti
