@@ -20,6 +20,7 @@
 #include <particlesystem/Particle.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
 ExplosionEffect::ExplosionEffect(float radius)
 :
@@ -34,27 +35,27 @@ m_Radius(radius)
      
 //    //data_particle.velocity_start = getRandInt(13,17) * 0.1;
 //    m_DataParticle.velocity_start = (float)size_id*0.1f + getRandInt(40,90) * 0.01;
-    m_DataParticle.velocity_end   = m_DataParticle.velocity_start;
-    m_DataParticle.d_velocity     = 0;
+    _particleData().velocity_end   = _particleData().velocity_start;
+    _particleData().d_velocity     = 0;
 
-    m_DataParticle.color_start.r    = 1.0;
-    m_DataParticle.color_start.g    = 1.0;
-    m_DataParticle.color_start.b    = 1.0;
-    m_DataParticle.color_start.a    = 1.0;
+    _particleData().color_start.r    = 1.0;
+    _particleData().color_start.g    = 1.0;
+    _particleData().color_start.b    = 1.0;
+    _particleData().color_start.a    = 1.0;
 
-    m_DataParticle.color_end.r    = 0.0;
-    m_DataParticle.color_end.g    = 0.0;
-    m_DataParticle.color_end.b    = 0.0;
-    m_DataParticle.color_end.a    = 0.0;
+    _particleData().color_end.r    = 0.0;
+    _particleData().color_end.g    = 0.0;
+    _particleData().color_end.b    = 0.0;
+    _particleData().color_end.a    = 0.0;
 
-    m_DataParticle.color_delta.r    = 0.0;
-    m_DataParticle.color_delta.g    = 0.0;
-    m_DataParticle.color_delta.b    = 0.0;
-//    m_DataParticle.color_delta.a    = getRandInt(20,30) * 0.0004;
+    _particleData().color_delta.r    = 0.0;
+    _particleData().color_delta.g    = 0.0;
+    _particleData().color_delta.b    = 0.0;
+//    _particleData().color_delta.a    = getRandInt(20,30) * 0.0004;
 
     
     //data_particle.size_start
-    m_DataParticle.size_end          = 2.0;        
+    _particleData().size_end          = 2.0;
 //    m_DataParticle.d_size          = (float)size_id*0.04f + getRandInt(30,50) * 0.002;
         
 
@@ -119,26 +120,22 @@ ExplosionEffect::~ExplosionEffect()
 
 void ExplosionEffect::CreateParticles()
 {
-    for(unsigned int i=0; i<m_ParticlesNum; i++)
-    {  
-        Particle* particle = new Particle(m_DataParticle);
+    for(unsigned int i=0; i<_particlesNum(); i++) {
+        Particle* particle = new Particle(_particleData());
         particle->CalcRandomVelocity();
-        m_Particles.push_back(particle);
+        _particles().push_back(particle);
     }
 }
 
-/* virtual override final */
-void ExplosionEffect::Update()
+void ExplosionEffect::update()
 {
-    BaseParticleSystem::Update();
+    Base::update();
 
-    m_IsAlive = false;
-    for (unsigned int i=0; i<m_ParticlesNum; i++)
-    {
-        if (m_Particles[i]->isAlive() == true)
-        {
-            m_Particles[i]->Update();
-            m_IsAlive = true;
+    _setIsAlive(false);
+    for (auto particle: _particles()) {
+        if (particle->isAlive()) {
+            particle->Update();
+            _setIsAlive(true);
         }
     }  
 }
@@ -151,4 +148,5 @@ void ExplosionEffect::Update()
 //    return explosion;
 //}
 
-}
+} // namespace particlesystem
+} // namespace jeti

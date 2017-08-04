@@ -22,8 +22,9 @@
 #include "BaseParticleSystem.hpp"
 
 namespace jeti {
+namespace particlesystem {
 
-class ExplosionEffect : public BaseParticleSystem
+class ExplosionEffect : public Base
 { 
     public:
         ExplosionEffect(float);       
@@ -31,7 +32,7 @@ class ExplosionEffect : public BaseParticleSystem
         
         float GetRadius() const { return m_Radius; }
 
-        virtual void Update() override final;
+        virtual void update() override final;
         
         void CreateParticles();
 
@@ -41,4 +42,5 @@ class ExplosionEffect : public BaseParticleSystem
 
 //ExplosionEffect* getNewExplosionEffect(float);
     
-}
+} // namepsace particlesystem
+} // namespace jeti

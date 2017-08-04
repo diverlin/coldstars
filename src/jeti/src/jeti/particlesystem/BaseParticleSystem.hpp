@@ -19,67 +19,76 @@
 
 #pragma once
 
-#include <vector>
 #include <particlesystem/ParticleData.hpp>
 
-//class SpaceObject;
+#include <vector>
 
 namespace jeti {
 
 class Particle;
 
+class Mesh;
 namespace control {
 class Material;
 }
 
-class Mesh;
+namespace particlesystem {
 
-class BaseParticleSystem 
+class Base
 {
-    public:
-        BaseParticleSystem();
-        virtual ~BaseParticleSystem();
-        
-        void ValidateResources() const;
-        void SetDying() { m_IsDying = true; }
-        void SetTextureOb(control::Material* textureOb) { m_TextureOb = textureOb; }
-        //void setParent(SpaceObject* parent) { m_Parent = parent; }
-        void setCenter(const glm::vec3& center) { m_Center = center; }
-        void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
-        void SetParticleData(const ParticleData& data_particle) { m_DataParticle = data_particle; }
-        
-        int typeId() const { return m_TypeId; }
-        bool isAlive() const { return m_IsAlive; }
-        const glm::vec3& center() const { return m_Center; }
-        const Mesh& mesh() const { return *m_Mesh; }
-        const control::Material& textureOb() const { return *m_TextureOb; }
+public:
+    Base();
+    virtual ~Base();
 
-        unsigned int GetParticlesNum() const { return m_ParticlesNum; }
+    [[deprecated("depr")]]
+    void validateResources() const;
 
-        const glm::mat4& actualModelMatrix();
+    void setDying() { m_isDying = true; }
+    void setMaterial(control::Material* material) { m_material = material; }
 
-        virtual void Update() = 0;
+    void setCenter(const glm::vec3& center) { m_center = center; }
+    void setParticlesNum(unsigned int particles_num)  { m_particlesNum = particles_num; }
+    void setParticleData(const ParticleData& data_particle) { m_dataParticle = data_particle; }
 
-    protected:
-        int m_TypeId;
-        unsigned int m_ParticlesNum;
-        
-        control::Material* m_TextureOb;
-        Mesh* m_Mesh;
-        ParticleData m_DataParticle;
+    int typeId() const { return m_typeId; }
+    bool isAlive() const { return m_isAlive; }
+    const glm::vec3& center() const { return m_center; }
+    const Mesh& mesh() const { return *m_mesh; }
+    const control::Material& material() const { return *m_material; }
 
-        glm::vec3 m_Center;
-        glm::vec3 m_Velocity;
-        glm::vec3 m_Dir;
+    const glm::mat4& actualModelMatrix();
 
-        glm::mat4 m_MatrixModel;
+    virtual void update() = 0;
 
-        //SpaceObject* m_Parent;
-        
-        bool m_IsAlive;
-        bool m_IsDying;
-        
-        std::vector<Particle*> m_Particles;
+protected:
+    unsigned int _particlesNum() const { return m_particlesNum; }
+
+    void _setIsAlive(bool isAlive) { m_isAlive = isAlive; }
+
+    bool _isDying() const { return m_isDying; }
+
+    ParticleData& _particleData() { return m_dataParticle; }
+    std::vector<Particle*>& _particles() { return m_particles; }
+
+private:
+    int m_typeId;
+    unsigned int m_particlesNum;
+
+    control::Material* m_material = nullptr;
+    Mesh* m_mesh = nullptr;
+    ParticleData m_dataParticle;
+
+    glm::vec3 m_center;
+    glm::vec3 m_velocity;
+    glm::vec3 m_dir;
+
+    glm::mat4 m_matrixModel;
+
+    bool m_isAlive;
+    bool m_isDying;
+
+    std::vector<Particle*> m_particles;
 };
 
-}
+} // namespace particlesystem
+} // namespace jeti

@@ -22,26 +22,31 @@
 #include "BaseParticleSystem.hpp"
 
 namespace jeti {
+namespace particlesystem {
 
-class DriveEffect : public BaseParticleSystem
+class Linear : public Base
 {
-       public:
-        DriveEffect(glm::vec3*, glm::vec3*);
-        virtual ~DriveEffect() override final;
-        
-        virtual void Update() override final;
-        
-        void CreateParticles();
-        void UpdateVelocity();
-        void PutParticlesToInitPos();
-                                
-    private:
-        glm::vec3* pTo_start_pos;      //ob.points.midLeft
-        glm::vec3* pTo_target_pos;     //ob.points.midFarLeft
-        
-        glm::vec3 velocity;
+public:
+    Linear(glm::vec3*, glm::vec3*);
+    virtual ~Linear() override final;
+
+    virtual void update() override final;
+
+protected:
+    void _createParticles();
+    void _updateVelocity();
+    void _restart();
+
+private:
+    glm::vec3* pTo_start_pos;
+    glm::vec3* pTo_target_pos;
+
+    float m_length = 0;
+    glm::vec3 m_dir;
+    glm::vec3 m_velocity;
 };
 
 //DriveEffect* GetNewDriveEffect(int, glm::vec3*, glm::vec3*);
 
-}
+} // namespace particlesystem
+} // namespace jeti
