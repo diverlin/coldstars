@@ -19,14 +19,13 @@
 #include "BaseParticleSystem.hpp"
 #include <particlesystem/Particle.hpp>
 
-//#include <spaceobjects/SpaceObject.hpp> // depr
+#include <jeti/Material.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Render.hpp>
 
-#include <Material.hpp>
-#include <Mesh.hpp>
-
-// math
-#include <glm/gtx/transform.hpp>
 #include <meti/RandUtils.hpp>
+
+#include <glm/gtx/transform.hpp>
 
 namespace jeti {
 namespace particlesystem {
@@ -36,14 +35,14 @@ Base::Base()
     m_mesh = new Mesh();
 }
 
-/* virtual */
 Base::~Base()
 {
-    //delete m_Mesh; FIXME cause bug
+    //delete m_mesh; FIXME cause bug
 
-    for (unsigned int i=0; i<m_particles.size(); i++) {
-        delete m_particles[i];
+    for (Particle* particle: m_particles) {
+        delete particle;
     }
+    m_particles.clear();
 }
 
 void Base::validateResources() const
@@ -69,16 +68,19 @@ void Base::update(const glm::vec3& offset)
     m_mesh->fillPointVerticesFast(positions, colors, sizes);
 }
 
-const glm::mat4&
-Base::actualModelMatrix()
+void
+Base::_updateModelMatrix()
 { 
-    m_matrixModel = glm::translate(center());
+    m_Mm = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
     //m_MatrixScale     = glm::scale(size());
 
     //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
-    
-    return m_matrixModel;
+}
+
+void Base::draw(const jeti::Render& render) const
+{
+    render.drawParticles(*m_mesh, *m_material, m_Mm);
 }
 
 } // namespace particlesystem

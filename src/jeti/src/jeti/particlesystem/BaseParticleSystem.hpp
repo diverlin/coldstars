@@ -25,6 +25,7 @@
 
 namespace jeti {
 
+class Render;
 class Mesh;
 namespace control {
 class Material;
@@ -59,11 +60,13 @@ public:
     const Mesh& mesh() const { return *m_mesh; }
     const control::Material& material() const { return *m_material; }
 
-    const glm::mat4& actualModelMatrix();
+    const glm::mat4& modelMatrix() const { return m_Mm; }
 
-    virtual void update(const glm::vec3& offset);
+    virtual void update(const glm::vec3&);
+    void draw(const jeti::Render&) const;
 
 protected:
+    void _updateModelMatrix();
     unsigned int _particlesNum() const { return m_particlesNum; }
 
     void _setIsAlive(bool isAlive) { m_isAlive = isAlive; }
@@ -87,7 +90,7 @@ private:
     glm::vec3 m_direction;
     float m_velocity = 0.0f;
 
-    glm::mat4 m_matrixModel;
+    glm::mat4 m_Mm;
 
     bool m_isAlive = true;
     bool m_isDying = false;

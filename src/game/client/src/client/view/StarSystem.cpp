@@ -54,6 +54,7 @@
 #include <jeti/Material.hpp>
 #include <jeti/Camera.hpp>
 #include <jeti/animation/ConstantRotation.hpp>
+#include <jeti/particlesystem/Linear.hpp>
 
 #include <ceti/Collision.hpp>
 
@@ -62,6 +63,7 @@
 #include <client/gui/info/Camera.hpp>
 #include <client/gui/info/Renderer.hpp>
 #include <client/gui/GuiDemo.hpp>
+#include <client/resources/Utils.hpp>
 
 namespace  {
 std::string join(size_t int1, size_t int2) {
@@ -78,6 +80,7 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
+    , m_psLinear(jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {}
 
 StarSystem::~StarSystem()
@@ -548,35 +551,46 @@ void StarSystem::__add(Satellite* view)
 
 
 
-void StarSystem::__render_NEW(jeti::Render& render)
-{
-//    bool draw_background    = true;
-//    bool draw_volumetric    = true;
-//    bool draw_something     = false;
-//    bool draw_spaceObjects  = true;
-//    bool draw_shockwave     = true;
-//    bool draw_robustSpaceObjects = true;
+void StarSystem::__renderBackground(jeti::Render& render) const {
+    if (!m_draw.background()) {
+        return;
+    }
 
-    render.clearColorAndDepthBuffers();
-
-    //render.setPerspectiveProjection();
-    //starsystem->DrawBackground(render, world_coord);
     render.setOrthogonalProjection(0.2f);
 
-    // update background
-    m_distantNebulas->update(render.camera()->position());
-    m_distantStars->update(render.camera()->position());
+    if (m_draw.background_fbo()) {
+        render.m_fboBackGround.activate(render.size().x, render.size().y);
+    }
 
-    // draw background
-    render.m_fboBackGround.activate(render.size().x, render.size().y);
-    m_distantNebulas->draw(render);
-    m_distantStars->draw(render);
-    render.m_fboBackGround.deactivate();
+    if (m_draw.nebulas()) {
+        m_distantNebulas->update(render.camera()->position());
+        m_distantNebulas->draw(render);
+    }
+    if (m_draw.stars()) {
+        m_distantStars->update(render.camera()->position());
+        m_distantStars->draw(render);
+    }
+    if (m_draw.background_fbo()) {
+        render.m_fboBackGround.deactivate();
+    }
+}
+
+void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
+    if (!m_draw.star()) {
+        return;
+    }
 
     render.setOrthogonalProjection();
 
     render.drawStar(render.m_fboBackGround.colorBuffer());
+}
 
+void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
+    if (!m_draw.spaceobjects()) {
+        return;
+    }
+
+    render.setOrthogonalProjection();
     render.enable_CULLFACE();
 
     for(Star* star: m_stars) {
@@ -599,17 +613,54 @@ void StarSystem::__render_NEW(jeti::Render& render)
         ship->update();
         ship->draw(render);
     }
+}
+
+
+void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
+    if (!m_draw.spaceobjects_meta()) {
+        return;
+    }
 
     render.disable_CULLFACE();
 
-    __drawCollisionRadius(render);
-    __drawAxis(render);
+    if (!m_draw.collision_radius()) {
+        __drawCollisionRadius(render);
+    }
+    if (!m_draw.axis()) {
+        __drawAxis(render);
+    }
+}
+
+void StarSystem::__renderHUD(jeti::Render& render) const {
+    if (!m_draw.hud()) {
+        return;
+    }
 
     UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
-
     if (m_guiDemo) {
         m_guiDemo->draw();
     }
+}
+
+void StarSystem::__renderExperiment(jeti::Render& render) const {
+    if (!m_draw.experiment()) {
+        return;
+    }
+
+    m_psLinear->update(glm::vec3(500.0f, 500.0f, 0.0f), glm::vec3(1.0, 0.0, 0.0));
+    m_psLinear->draw(render);
+}
+
+void StarSystem::__render_NEW(jeti::Render& render)
+{
+    render.clearColorAndDepthBuffers();
+
+    __renderBackground(render);
+    __renderStarPostEffect(render);
+    __renderSpaceObjects(render);
+    __renderSpaceObjectsMeta(render);
+    __renderHUD(render);
+    __renderExperiment(render);
 }
 
 void StarSystem::__render_NEW2(jeti::Render& render)
