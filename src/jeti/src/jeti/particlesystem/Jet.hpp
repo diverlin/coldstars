@@ -24,17 +24,17 @@
 namespace jeti {
 namespace particlesystem {
 
-class Linear : public Base
+class Jet : public Base
 {
 public:
-    Linear(const Config&);
-    virtual ~Linear() override final = default;
+    Jet(const Config&);
+    virtual ~Jet() override final = default;
 
     void update(const glm::vec3&, const:: glm::vec3&);
     void update(const glm::vec3&) override final;
 };
 
-Linear* genLinearParticleSystem(control::Material*, int size_id = 1);
+Jet* genLinearParticleSystem(control::Material*, int size_id = 1);
 
 } // namespace particlesystem
 } // namespace jeti
