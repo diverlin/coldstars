@@ -27,7 +27,7 @@ namespace particlesystem {
 class ExplosionEffect : public Base
 { 
 public:
-    ExplosionEffect(const ParticleSystemData&, float);
+    ExplosionEffect(const Config&, float);
     virtual ~ExplosionEffect() override final;
 
     float GetRadius() const { return m_Radius; }

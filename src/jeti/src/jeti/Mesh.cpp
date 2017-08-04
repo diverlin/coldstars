@@ -81,6 +81,8 @@ void Mesh::__genQuad()
 
     ObjLoader objLoader(ss);
     fillVertices(objLoader);
+
+    m_states = States::QUAD;
 }
 
 void Mesh::fillVertices(const ObjLoader& objLoader)
@@ -137,6 +139,7 @@ void Mesh::fillVertices(const std::vector<glm::vec3>& positions, const std::vect
 void Mesh::fillPointVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
 {
     m_primitiveType = GL_POINTS;
+    m_states = States::PARTICLES;
     
     m_hasTexCoords = false;
     m_hasNormals = false;
@@ -161,6 +164,7 @@ void Mesh::fillPointVertices(const std::vector<glm::vec3>& positions, const std:
 void Mesh::fillPointVerticesFast(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
 {  
     m_primitiveType = GL_POINTS;
+    m_states = States::PARTICLES;
 
     m_vertexCount = positions.size();
 
@@ -203,7 +207,7 @@ void Mesh::fillPointVerticesFast(const std::vector<glm::vec3>& positions, const 
 void Mesh::__updateVbo()
 {    
     if (m_vertexCount == 12) {
-        m_isFlat = true;
+        m_states = States::QUAD;
     }
 
     int stride = STRIDE_POSITION;

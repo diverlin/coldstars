@@ -417,6 +417,36 @@ void Render::drawQuad(const control::Material& texOb, const ceti::Box2D& box) co
     drawMesh(*m_meshQuad, texOb, ModelMatrix);
 }
 
+void Render::__drawMesh(const Mesh& mesh) const {
+    if (mesh.states() != m_activeStates) {
+        switch(mesh.states()) {
+        case Mesh::States::QUAD:
+            enable_BLEND();
+            disable_DEPTH_TEST();
+            disable_CULLFACE();
+            break;
+        case Mesh::States::NORMAL:
+            disable_BLEND();
+            enable_DEPTH_TEST();
+            enable_CULLFACE();
+            break;
+        case Mesh::States::PARTICLES:
+            __enable_POINTSPRITE();
+            enable_ADDITIVE_BLEND();
+            disable_DEPTH_TEST();
+            disable_CULLFACE();
+            break;
+        }
+        m_activeStates = mesh.states();
+    }
+
+    mesh.draw();
+
+    if (m_activeStates == Mesh::States::PARTICLES) {
+        __disable_POINTSPRITE();
+    }
+}
+
 void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 {
     __useProgram(m_shaders.basecolor);
@@ -424,7 +454,7 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basecolor, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basecolor, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
-        mesh.draw();
+        __drawMesh(mesh);
     }
 }
 
@@ -443,7 +473,7 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, cons
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
 
-        mesh.draw();
+        __drawMesh(mesh);
     }
 }
 
@@ -495,7 +525,7 @@ void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb,
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
         glUniform1i(m_programLightLocation_uTexture, 0);
 	                        
-	    mesh.draw();
+        __drawMesh(mesh);
 	}
 }
 
@@ -542,7 +572,7 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->normalmap);
         glUniform1i(glGetUniformLocation(m_shaders.light_normalmap, "u_Normalmap"), 1);
                   
-		mesh.draw();
+        __drawMesh(mesh);
 	}
 } 
 
@@ -565,7 +595,7 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
 		
         glUniform2f(glGetUniformLocation(m_shaders.multitexturing, "displ"), textureOb.model()->texture_offset.x, textureOb.model()->texture_offset.y);
 				  
-		mesh.draw();
+        __drawMesh(mesh);
 	}
 }  
 
@@ -588,7 +618,7 @@ void Render::drawStar(GLuint texture) const
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_resolution"), 1, glm::value_ptr(glm::vec2(m_size.x, m_size.y)));
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_worldPosition"), 1, glm::value_ptr(offset));
 
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
     }
 }
 
@@ -661,7 +691,7 @@ void Render::drawPostEffectCombined(const std::vector<GLuint>& textures, int w, 
 		glBindTexture(GL_TEXTURE_2D, textures[12]);
         glUniform1i(glGetUniformLocation(m_shaders.combine, "u_Pass2_tex4"), 12);
 	
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
 	}
 }
 
@@ -690,7 +720,7 @@ void Render::drawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3&
 	
         glUniform1f(glGetUniformLocation(m_shaders.fogwarspark, "dcolor"), 0.5f/*npc->vehicle()->starsystem()->GetStar()->GetDeltaColor()*/);
 	
-        m_meshQuad->draw();
+         __drawMesh(*m_meshQuad);
 	}
 }
 
@@ -718,7 +748,7 @@ void Render::drawPostEffectShockWaves(GLuint scene_texture, int w, int h, int co
         glUniform3fv(glGetUniformLocation(m_shaders.shockwave, "shockParams"), count, *xyz_array);
         glUniform1fv(glGetUniformLocation(m_shaders.shockwave, "time"),        count, time_array);
 	
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
 	}
 }
 
@@ -744,7 +774,7 @@ void Render::drawPostEffectExtractBright(GLuint scene_texture, int w, int h, flo
 	
         glUniform1f(glGetUniformLocation(m_shaders.extractbright, "threshold"), brightThreshold);
 		
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
 	}
 }
 
@@ -774,7 +804,7 @@ void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, in
 				glBindTexture(GL_TEXTURE_2D, textures[i+j]);
                 glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_TextureScene"), 0);
 		
-                m_meshQuad->draw();
+                __drawMesh(*m_meshQuad);
 			}
         }
     }
@@ -804,7 +834,7 @@ void Render::drawPostEffectVolumetricLight(const glm::vec2& world_coord, int w, 
 
         glUniform4f(glGetUniformLocation(m_shaders.volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
 
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
     }
 }
 
@@ -829,7 +859,7 @@ void Render::drawPostEffectBlur(GLuint texture, int w, int h) const
         glUniform1f(glGetUniformLocation(m_programBlur, "rt_h"), 3*h);
         glUniform1f(glGetUniformLocation(m_programBlur, "vx_offset"), 1.0);
         
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
     }
 }
 
@@ -850,51 +880,39 @@ void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
         glBindTexture(GL_TEXTURE_2D, texture); 
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
                     
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
     }
 }
  
 void Render::drawParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
-    __enable_POINTSPRITE();
-    {   
-        __useTransparentMode(true);
-     	
-        __useProgram(m_shaders.particle);
-        {    
-            glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
-            glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
+    __useProgram(m_shaders.particle);
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
 
-            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
-      
-            mesh.draw(GL_POINTS);
-        }
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
+
+        __drawMesh(mesh);
     }
-    __disable_POINTSPRITE();
 }
 
 void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
-    __enable_POINTSPRITE();
+    __useProgram(m_shaders.particle_blink);
     {
-        __useTransparentMode(true);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.particle_blink, "uTexture_0"), 0);
+        glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_time"), m_time);
 
-        __useProgram(m_shaders.particle_blink);
-        {
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
-            glUniform1i(glGetUniformLocation(m_shaders.particle_blink, "uTexture_0"), 0);
-            glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_time"), m_time);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
 
-            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-            glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
-
-            mesh.draw(GL_POINTS);
-        }
+        __drawMesh(mesh);
     }
-    __disable_POINTSPRITE();
 }
 
 void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
@@ -914,7 +932,7 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
         glUniform2f(glGetUniformLocation(m_shaders.starfield, "mouse"), pos_x, pos_y);
         glUniform1f(glGetUniformLocation(m_shaders.starfield, "time"), 1.0f);
                     
-        m_meshQuad->draw();
+        __drawMesh(*m_meshQuad);
     }
 }
 

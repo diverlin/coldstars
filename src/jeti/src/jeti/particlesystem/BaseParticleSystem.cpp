@@ -27,12 +27,13 @@
 
 #include <glm/gtx/transform.hpp>
 
+
 namespace jeti {
 namespace particlesystem {
 
-Base::Base(const ParticleSystemData& config)
+Base::Base(const Config& config)
     :
-    m_dataParticle(config)
+    m_config(config)
 {
     m_mesh = new Mesh();
     m_direction = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -49,14 +50,13 @@ Base::~Base()
 }
 
 void Base::_emitNewParticle() {
-    if (m_particles.size() > m_dataParticle.particles_num) {
+    if (m_particles.size() >= m_config.particles_num) {
         return;
     }
 
     const auto now_time = std::chrono::steady_clock::now();
-    float seconds_diff = std::chrono::duration_cast<std::chrono::seconds>(now_time-m_lastTime).count();
-
-    if (seconds_diff > m_dataParticle.creation_delay) {
+    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
+    if (msec_diff > m_config.creation_delay_msec) {
         m_particles.push_back(_genParticle());
         m_lastTime = now_time;
     }
@@ -64,10 +64,9 @@ void Base::_emitNewParticle() {
 
 Particle* Base::_genParticle() const
 {
-    Particle* particle = new Particle(m_dataParticle);
+    Particle* particle = new Particle(m_config);
     particle->setPosition(m_center);
     particle->setDirection(m_direction);
-    particle->setVelocity(m_velocity);
     return particle;
 }
 
@@ -106,6 +105,9 @@ Base::_updateModelMatrix()
 
 void Base::draw(const jeti::Render& render) const
 {
+    if (!m_isAlive) {
+        return;
+    }
     render.drawParticles(*m_mesh, *m_material, m_Mm);
 }
 

@@ -22,7 +22,7 @@
 namespace jeti {
 namespace particlesystem {
 
-ExplosionEffect::ExplosionEffect(const ParticleSystemData& config, float radius)
+ExplosionEffect::ExplosionEffect(const Config& config, float radius)
     :
       Base(config)
     , m_Radius(radius)

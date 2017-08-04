@@ -25,12 +25,12 @@
 namespace jeti {
 namespace particlesystem {
 
-Particle::Particle(const ParticleSystemData& data_particle)
+Particle::Particle(const Config& data_particle)
     :
       m_color(data_particle.color_start),
       m_size(data_particle.size_start),
       m_velocity(data_particle.velocity_start),
-      m_dataParticle(data_particle)
+      m_config(data_particle)
 {}
 
 Particle::~Particle()
@@ -39,8 +39,8 @@ Particle::~Particle()
 void Particle::randomizeLifeTime(float low, float high)
 {
     float speed_rate = meti::getRandFloat(low, high);   // 0.5, 0.8
-    m_dataParticle.size_delta *= speed_rate;
-    m_dataParticle.velocity_start *= speed_rate;
+    m_config.size_delta *= speed_rate;
+    m_config.velocity_start *= speed_rate;
 }
 
 void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
@@ -48,7 +48,7 @@ void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
     float val1_i = val1_f*10000;
     float val2_i = val2_f*10000;
 
-    m_dataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0f;
+    m_config.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0f;
 }                
 
 
@@ -105,14 +105,15 @@ void Particle::randDirectionAccurate()
 //m_Velocity.z = 0;
 //}  
 
-void Particle::reborn()
+void Particle::restart(const glm::vec3& direction)
 {   
     m_position = glm::vec3(0.0f);
     m_isAlive = true;
 
-    m_color = m_dataParticle.color_start;
-    m_size  = m_dataParticle.size_start;
-    m_velocity = m_dataParticle.velocity_start;
+    m_color = m_config.color_start;
+    m_size  = m_config.size_start;
+    m_velocity = m_config.velocity_start;
+    m_direction = direction;
 }
 
 
@@ -123,16 +124,16 @@ void Particle::update()
     }
 
     m_position += m_velocity*m_direction;
-    m_color.a  -= m_dataParticle.color_delta.a;
-    m_size     -= m_dataParticle.size_delta;
+    m_color    -= m_config.color_delta;
+    m_size     -= m_config.size_delta;
 
-    if (m_color.a < m_dataParticle.color_end.a) {
-        m_color.a = m_dataParticle.color_end.a;
+    if (m_color.a < m_config.color_end.a) {
+        m_color.a = m_config.color_end.a;
         m_isAlive = false;
     }
 
-    if (m_size < m_dataParticle.size_end) {
-        m_size = m_dataParticle.size_end;
+    if (m_size < m_config.size_end) {
+        m_size = m_config.size_end;
         m_isAlive = false;
     }
 }

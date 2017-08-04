@@ -104,14 +104,14 @@ class StarSystem
         bool experiment() const { return m_experiment; }
 
     private:
-        bool m_star = false;
-        bool m_stars = false;
-        bool m_nebulas = false;
-        bool m_spaceobjects = false;
+        bool m_star = true;
+        bool m_stars = true;
+        bool m_nebulas = true;
+        bool m_spaceobjects = true;
         bool m_collision_radius = true;
         bool m_axis = false;
-        bool m_hud = false;
-        bool m_experiment = true;
+        bool m_hud = true;
+        bool m_experiment = false;
     };
 
 public:
