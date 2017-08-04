@@ -24,23 +24,25 @@
 namespace jeti {
 namespace particlesystem {
 
-Linear::Linear(const ParticleSystemData& particleData)
+Linear::Linear(const Config& particleData)
     : Base(particleData)
 {}
 
-void Linear::update(const glm::vec3& offset, const:: glm::vec3& dir)
+void Linear::update(const glm::vec3& center, const:: glm::vec3& dir)
 {
     setDirection(dir);
-    update(offset);
+    update(center);
 }
 
-void Linear::update(const glm::vec3& offset)
-{
+void Linear::update(const glm::vec3& center)
+{    
+    setCenter(center);
+
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
         } else {
-            particle->reborn();
+            particle->restart(_direction());
         }
     }
 
@@ -51,18 +53,18 @@ void Linear::update(const glm::vec3& offset)
 
 Linear* genLinearParticleSystem(control::Material* material, int size_id)
 {
-    ParticleSystemData config;
+    Config config;
 
-    config.particles_num = 5;
-    config.creation_delay = 0.1f;
+    config.particles_num = 10;
+    config.creation_delay_msec = 50;
 
     config.size_start = 15.0f + 2*size_id;
     config.size_end   = 2.0f;
-    config.size_delta = 0.0f;
+    config.size_delta = 0.9f;
     
     config.velocity_start = 0.05f;
     config.velocity_end   = 0.05f;
-    config.velocity_delta = config.velocity_start;
+    config.velocity_delta = 0.0f;
     
     config.color_start.r = 1.0f;
     config.color_start.g = 1.0f;
@@ -75,9 +77,9 @@ Linear* genLinearParticleSystem(control::Material* material, int size_id)
     config.color_end.a = 0.1f;
     
     config.color_delta.r = 0.0f;
-    config.color_delta.g = 0.0f;
+    config.color_delta.g = 0.1f;
     config.color_delta.b = 0.0f;
-    config.color_delta.a = 0.1f;
+    config.color_delta.a = 0.05f;
         
     //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
     Linear* ps = new Linear(config);

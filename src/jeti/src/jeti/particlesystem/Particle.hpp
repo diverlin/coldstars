@@ -29,7 +29,7 @@ namespace particlesystem {
 class Particle
 {
 public:
-    Particle(const ParticleSystemData&);
+    Particle(const Config&);
     ~Particle();
 
     void setPosition(const glm::vec3& position) { m_position = position; }
@@ -44,7 +44,7 @@ public:
 
     float size() const { return m_size; }
 
-    void reborn();
+    void restart(const glm::vec3&);
 
     void randomizeLifeTime(float, float);
     void randomizeDeltaAlpha(float, float);
@@ -66,7 +66,7 @@ private:
 
     float m_size = 1.0f;
 
-    ParticleSystemData m_dataParticle;
+    Config m_config;
 };
 
 } // namespace particlesystem

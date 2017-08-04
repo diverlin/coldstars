@@ -56,7 +56,7 @@ class Render : public NonCopyable
 
     const std::string SHADERS_PATH = "shaders/";
 
-    enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
+    enum class projection { NONE, PERSPECTIVE, ORTHOGONAL, ORTHOGONAL_PARALLAX };
 
 public:
     Render();
@@ -75,6 +75,7 @@ public:
     const glm::ivec2& size() const { return m_size; }
     int width() const { return m_size.x; }
     int height() const { return m_size.y; }
+    float time() const { return m_time; }
 
     void increaseScale();
     void decreaseScale();
@@ -150,6 +151,9 @@ public:
     Camera* camera() const { return m_camera; }
 
 private:
+    projection m_activeProjection = projection::NONE;
+    mutable Mesh::States m_activeStates = Mesh::States::NONE;
+
     float m_time = 0.0f;
 
     int m_fps = 0;
@@ -216,6 +220,7 @@ private:
     void __disable_POINTSPRITE() const;
 
     void __updateFps();
+    void __drawMesh(const Mesh&) const;
 };
 
 // TEXT

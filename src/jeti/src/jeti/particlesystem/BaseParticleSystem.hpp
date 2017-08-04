@@ -39,7 +39,7 @@ class Particle;
 class Base
 {
 public:
-    Base(const ParticleSystemData&);
+    Base(const Config&);
     virtual ~Base();
 
     [[deprecated("depr")]]
@@ -76,7 +76,7 @@ protected:
 
     const glm::vec3& _direction() const { return m_direction; }
 
-    ParticleSystemData& _particleData() { return m_dataParticle; }
+    Config& _particleData() { return m_config; }
     std::vector<Particle*>& _particles() { return m_particles; }
 
     void _updateToGPU();
@@ -87,7 +87,7 @@ private:
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    ParticleSystemData m_dataParticle;
+    Config m_config;
 
     glm::vec3 m_center;
     glm::vec3 m_direction;

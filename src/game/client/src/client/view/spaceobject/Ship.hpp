@@ -20,6 +20,12 @@
 
 #include <client/view/BaseView.hpp>
 
+namespace jeti {
+namespace particlesystem {
+class Linear;
+} // namespace aprticlesystem
+} // namespace jeti
+
 namespace control {
 class Ship;
 } // namespace descriptor
@@ -40,6 +46,7 @@ public:
 
 private:
     control::Ship* m_ship = nullptr;
+    jeti::particlesystem::Linear* m_driveJet = nullptr;
 };
 
 } // namespace view

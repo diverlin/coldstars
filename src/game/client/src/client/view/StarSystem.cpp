@@ -81,7 +81,8 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
     , m_psLinear(jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
-{}
+{
+}
 
 StarSystem::~StarSystem()
 {}                                    
@@ -282,7 +283,7 @@ StarSystem::__addIfVisible(control::Ship* ship)
     Base* view = m_cache.get(ship->id());
     if (!view) {
         view = new Ship(ship);
-        applyConstantRotationAnimation(meti::OZ, view);
+        //applyConstantRotationAnimation(meti::OZ, view);
         m_cache.add(view);
     }
     assert(view);
@@ -616,7 +617,6 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         asteroid->draw(render);
     }
 
-    render.enable_BLEND();
     for(Ship* ship: m_ships) {
         ship->update();
         ship->draw(render);
@@ -629,16 +629,13 @@ void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
         return;
     }
 
-    //states
-    render.disable_CULLFACE();
-
     // projection
     render.setOrthogonalProjection();
 
-    if (!m_draw.collision_radius()) {
+    if (m_draw.collision_radius()) {
         __drawCollisionRadius(render);
     }
-    if (!m_draw.axis()) {
+    if (m_draw.axis()) {
         __drawAxis(render);
     }
 }
@@ -662,7 +659,9 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
     // projection
     render.setOrthogonalProjection();
 
-    m_psLinear->update(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0, 0.0, 0.0));
+    glm::vec3 center = glm::vec3(sin(render.time())*0.0f, 0.0f, 0.0f);
+    glm::vec3 dir = glm::vec3(sin(render.time()), cos(render.time()), 0.0f);
+    m_psLinear->update(center, dir);
     m_psLinear->draw(render);
 }
 

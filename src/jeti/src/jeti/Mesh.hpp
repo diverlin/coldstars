@@ -25,13 +25,15 @@ class TextureOb;
 class Mesh
 { 
 public:
+    enum class States { NONE, QUAD, NORMAL, PARTICLES };
+
     Mesh();
     Mesh(ceti::descriptor::Mesh*);
     ~Mesh();
 
     int_t id() const { return m_id; }
 
-    bool isFlat() const { return m_isFlat; }
+    bool isFlat() const { return m_states == States::QUAD; }
     [[warning("added for compatibility")]]
     int_t type() const { return 0; }
 
@@ -46,6 +48,8 @@ public:
 
     void draw() const;
     void draw(GLenum) const;
+
+    const States& states() const { return m_states; }
     
 private:
     struct Vertex {
@@ -58,7 +62,7 @@ private:
 
     int_t m_id = -1;
     GLenum m_primitiveType = GL_TRIANGLES;
-    bool m_isFlat = false;
+    States m_states = States::NORMAL;
 
     TextureOb* m_textureOb = nullptr;
     std::vector<Vertex> m_vertices;

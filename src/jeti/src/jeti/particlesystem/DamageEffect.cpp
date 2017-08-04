@@ -22,7 +22,7 @@
 namespace jeti {
 namespace particlesystem {
 
-DamageEffect::DamageEffect(const ParticleSystemData& config)
+DamageEffect::DamageEffect(const Config& config)
     :
       Base(config)
 {
@@ -54,7 +54,7 @@ void DamageEffect::update(const glm::vec3& offset)
             _setIsAlive(true);
         } else {
             if (!_isDying()) {
-                particle->reborn();
+                particle->restart(_direction());
             }
         }
     }

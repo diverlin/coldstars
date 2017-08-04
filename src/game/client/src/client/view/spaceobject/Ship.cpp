@@ -29,6 +29,7 @@
 #include <jeti/Render.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
+#include <jeti/particlesystem/Linear.hpp>
 
 namespace view {
 
@@ -52,6 +53,8 @@ Ship::Ship(control::Ship* ship)
         shield->setMaterial(material);
         shield->dissipate();
     }
+
+    m_driveJet = jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
 }
 
 Ship::~Ship()
@@ -107,14 +110,14 @@ void Ship::draw(const jeti::Render& render) const
         //RenderGrabTrail(render);
     //}
         
-    ///////RenderKorpus(render);
-    
+    ///////RenderKorpus(render);    
 
-
-
-    
     //if (GetProperties().speed > 0) {
-        //RenderDriveEffect(scale , 1.0 - color().a);
+        //std::cout<<"ddd="<<ceti::to_string(m_ship->direction())<<std::endl;
+        glm::vec3 pos = m_ship->position();
+        pos -= m_ship->size().x * m_ship->direction();
+        m_driveJet->update(pos, -m_ship->direction());
+        m_driveJet->draw(render);
         //starsystem()->RestoreSceneColor();
     //}
     

@@ -27,7 +27,7 @@ namespace particlesystem {
 class DamageEffect : public Base
 {
 public:
-    DamageEffect(const ParticleSystemData&);
+    DamageEffect(const Config&);
     virtual ~DamageEffect() override final;
 
     void CreateParticles();

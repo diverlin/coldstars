@@ -24,10 +24,10 @@
 namespace jeti {
 namespace particlesystem {
 
-struct ParticleSystemData
+struct Config
 {
     int particles_num = 0;
-    float creation_delay = 0.0f;
+    int creation_delay_msec = 0;
 
     float size_start = 0.0f;
     float size_end = 0.0f;

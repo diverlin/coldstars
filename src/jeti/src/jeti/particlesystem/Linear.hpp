@@ -27,7 +27,7 @@ namespace particlesystem {
 class Linear : public Base
 {
 public:
-    Linear(const ParticleSystemData&);
+    Linear(const Config&);
     virtual ~Linear() override final = default;
 
     void update(const glm::vec3&, const:: glm::vec3&);
