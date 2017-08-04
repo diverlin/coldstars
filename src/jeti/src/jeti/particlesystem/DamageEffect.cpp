@@ -20,6 +20,7 @@
 #include <particlesystem/Particle.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
 DamageEffect::DamageEffect()
 {
@@ -33,32 +34,25 @@ DamageEffect::~DamageEffect()
 
 void DamageEffect::CreateParticles()
 {
-    for(unsigned int i=0; i<GetParticlesNum(); i++)
-    {  
-        Particle* particle = new Particle(m_DataParticle);
+    for(unsigned int i=0; i<_particlesNum(); i++) {
+        Particle* particle = new Particle(_particleData());
         particle->Randomize_d_alpha(0.003, 0.006); //   ??
         particle->CalcRandomVelocity();
 
-        m_Particles.push_back(particle);
+        _particles().push_back(particle);
     }
 }
 
-/* virtual override final */
-void DamageEffect::Update()
+void DamageEffect::update()
 {
-    m_IsAlive = false;
-    for (unsigned int i=0; i<GetParticlesNum(); i++)
-    {
-        if (m_Particles[i]->isAlive() == true)
-        {
-            m_Particles[i]->Update();
-            m_IsAlive = true;
-        }
-        else
-        {
-            if (m_IsDying == false)
-            {
-                m_Particles[i]->Reborn();
+    _setIsAlive(false);
+    for (auto particle: _particles()) {
+        if (particle->isAlive()) {
+            particle->Update();
+            _setIsAlive(true);
+        } else {
+            if (!_isDying()) {
+                particle->Reborn();
             }
         }
     }
@@ -108,4 +102,5 @@ void DamageEffect::Update()
 //    return damage;
 //}
 
-}
+} // namespace particlesystem
+} // namespace jeti

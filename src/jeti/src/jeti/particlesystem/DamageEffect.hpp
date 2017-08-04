@@ -22,21 +22,20 @@
 #include "BaseParticleSystem.hpp"
 
 namespace jeti {
+namespace particlesystem {
 
-class DamageEffect : public BaseParticleSystem
+class DamageEffect : public Base
 {
-       public: 
-        DamageEffect();   
-        virtual ~DamageEffect() override final;
-            
-        void CreateParticles(); 
-                            
-        virtual void Update() override final;
+public:
+    DamageEffect();
+    virtual ~DamageEffect() override final;
 
-    private:    
+    void CreateParticles();
 
+    virtual void update() override final;
 };
 
 //DamageEffect* getNewDamageEffect(int, SpaceObject*);
 
-}
+} // namespace particlesystem
+} // namespace jeti

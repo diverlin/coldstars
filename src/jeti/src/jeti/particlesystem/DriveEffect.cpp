@@ -22,30 +22,29 @@
 #include <particlesystem/Particle.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
-DriveEffect::DriveEffect(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
+Linear::Linear(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
 {
     this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
     this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
 }
 
-/* virtual override final */
-DriveEffect::~DriveEffect()
+Linear::~Linear()
 {}
 
-void DriveEffect::CreateParticles()
+void Linear::_createParticles()
 {
-    for (unsigned int i=0; i<GetParticlesNum(); i++)
-    {
-        Particle* particle = new Particle(m_DataParticle);  
+    for (unsigned int i=0; i<_particlesNum(); i++) {
+        Particle* particle = new Particle(_particleData());
         particle->SetPosition(*pTo_start_pos);
-        particle->SetVelocity(velocity);
-        m_Particles.push_back(particle);
+        particle->SetVelocity(m_velocity);
+        _particles().push_back(particle);
     }
 }
 
 
-void DriveEffect::UpdateVelocity()
+void Linear::_updateVelocity()
 {
     float xl = (pTo_target_pos->x - pTo_start_pos->x);
     float yl = (pTo_target_pos->y - pTo_start_pos->y);
@@ -54,13 +53,13 @@ void DriveEffect::UpdateVelocity()
     float d_xn = xl / l;
     float d_yn = yl / l;
 
-    m_Dir.x = d_xn * m_DataParticle.velocity_start;
-    m_Dir.y = d_yn * m_DataParticle.velocity_start;
-    m_Dir.z = 0;
+    m_dir.x = d_xn * _particleData().velocity_start;
+    m_dir.y = d_yn * _particleData().velocity_start;
+    m_dir.z = 0;
 }
 
 
-void DriveEffect::PutParticlesToInitPos()
+void Linear::_restart()
 {
     //float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
     
@@ -74,21 +73,17 @@ void DriveEffect::PutParticlesToInitPos()
 }
 
 /* virtual override final */
-void DriveEffect::Update()
+void Linear::update()
 {
-    UpdateVelocity();
+    _updateVelocity();
 
-    for (unsigned int i=0; i<m_Particles.size(); i++) 
-    {
-        if (m_Particles[i]->isAlive() == true)
-        {
-            m_Particles[i]->Update();
-        }
-        else
-        {
-            m_Particles[i]->SetPosition(*pTo_start_pos);
-            m_Particles[i]->SetVelocity(velocity);
-            m_Particles[i]->Reborn();
+    for (auto particle: _particles()) {
+        if (particle->isAlive()) {
+            particle->Update();
+        } else {
+            particle->SetPosition(*pTo_start_pos);
+            particle->SetVelocity(m_velocity);
+            particle->Reborn();
         }
     }
 }
@@ -137,5 +132,6 @@ void DriveEffect::Update()
 //    return drive_effect;
 //}
 
-}
+} // namespace aprticlesystem
+} // namespace jeti
 

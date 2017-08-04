@@ -29,62 +29,64 @@
 #include <meti/RandUtils.hpp>
 
 namespace jeti {
+namespace particlesystem {
 
-BaseParticleSystem::BaseParticleSystem()
+Base::Base()
     :
-      m_TypeId(-1),
-      m_Mesh(nullptr),
+      m_typeId(-1),
+      m_mesh(nullptr),
 //      m_Parent(nullptr),
-      m_IsAlive(true),
-      m_IsDying(false)
+      m_isAlive(true),
+      m_isDying(false)
 {
-    m_Mesh = new Mesh();
+    m_mesh = new Mesh();
 }
 
 /* virtual */
-BaseParticleSystem::~BaseParticleSystem()
+Base::~Base()
 {
     //delete m_Mesh; FIXME cause bug
 
-    for (unsigned int i=0; i<m_Particles.size(); i++) {
-        delete m_Particles[i];
+    for (unsigned int i=0; i<m_particles.size(); i++) {
+        delete m_particles[i];
     }
 }
 
-void BaseParticleSystem::ValidateResources() const
+void Base::validateResources() const
 {
-    assert(m_TextureOb);
-    if (!m_TextureOb->isLoaded()) {
-        m_TextureOb->load();
+    assert(m_material);
+    if (!m_material->isLoaded()) {
+        m_material->load();
     }
 }
 
-void BaseParticleSystem::Update()
+void Base::update()
 {  
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    for (unsigned int i=0; i<m_Particles.size(); i++) {
-        const Particle& particle = *m_Particles[i];
+    for (unsigned int i=0; i<m_particles.size(); i++) {
+        const Particle& particle = *m_particles[i];
 
         positions.push_back(particle.GetPosition());
         colors.push_back(particle.color());
         sizes.push_back(particle.size());
     }
 
-    m_Mesh->fillPointVerticesFast(positions, colors, sizes);
+    m_mesh->fillPointVerticesFast(positions, colors, sizes);
 }
 
-const glm::mat4& BaseParticleSystem::actualModelMatrix()
+const glm::mat4& Base::actualModelMatrix()
 { 
-    m_MatrixModel = glm::translate(center());
+    m_matrixModel = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
     //m_MatrixScale     = glm::scale(size());
 
     //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     
-    return m_MatrixModel;
+    return m_matrixModel;
 }
 
-}
+} // namespace particlesystem
+} // namespace jeti
