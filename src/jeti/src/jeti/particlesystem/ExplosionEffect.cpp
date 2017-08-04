@@ -22,9 +22,10 @@
 namespace jeti {
 namespace particlesystem {
 
-ExplosionEffect::ExplosionEffect(float radius)
-:
-m_Radius(radius)
+ExplosionEffect::ExplosionEffect(const ParticleSystemData& config, float radius)
+    :
+      Base(config)
+    , m_Radius(radius)
 {
     //m_TypeId = EFFECT::EXPLOSION;
     
@@ -36,7 +37,7 @@ m_Radius(radius)
 //    //data_particle.velocity_start = getRandInt(13,17) * 0.1;
 //    m_DataParticle.velocity_start = (float)size_id*0.1f + getRandInt(40,90) * 0.01;
     _particleData().velocity_end   = _particleData().velocity_start;
-    _particleData().d_velocity     = 0;
+    _particleData().velocity_delta     = 0;
 
     _particleData().color_start.r    = 1.0;
     _particleData().color_start.g    = 1.0;
@@ -119,17 +120,15 @@ ExplosionEffect::~ExplosionEffect()
 
 void ExplosionEffect::CreateParticles()
 {
-    for(unsigned int i=0; i<_particlesNum(); i++) {
-        Particle* particle = new Particle(_particleData());
-        particle->randomDirection();
-        _particles().push_back(particle);
-    }
+//    for(unsigned int i=0; i<_particlesNum(); i++) {
+//        Particle* particle = new Particle(_particleData());
+//        particle->randomDirection();
+//        _particles().push_back(particle);
+//    }
 }
 
 void ExplosionEffect::update(const glm::vec3& offset)
 {
-    Base::update(offset);
-
     _setIsAlive(false);
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
@@ -137,6 +136,8 @@ void ExplosionEffect::update(const glm::vec3& offset)
             _setIsAlive(true);
         }
     }  
+
+    _updateToGPU();
 }
 
    

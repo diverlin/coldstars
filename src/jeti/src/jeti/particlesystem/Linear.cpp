@@ -24,16 +24,9 @@
 namespace jeti {
 namespace particlesystem {
 
-Linear::Linear(int particlesNum)
-{
-    for (int i=0; i<particlesNum; i++) {
-        Particle* particle = new Particle(_particleData());
-        particle->setPosition(center());
-        particle->setDirection(_direction());
-        particle->setVelocity(velocity());
-        _particles().push_back(particle);
-    }
-}
+Linear::Linear(const ParticleSystemData& particleData)
+    : Base(particleData)
+{}
 
 void Linear::update(const glm::vec3& offset, const:: glm::vec3& dir)
 {
@@ -43,9 +36,6 @@ void Linear::update(const glm::vec3& offset, const:: glm::vec3& dir)
 
 void Linear::update(const glm::vec3& offset)
 {
-    setCenter(center()+offset);
-    _updateModelMatrix();
-
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
@@ -53,43 +43,45 @@ void Linear::update(const glm::vec3& offset)
             particle->reborn();
         }
     }
+
+    _updateToGPU();
+    _updateModelMatrix();
+    _emitNewParticle();
 }
 
 Linear* genLinearParticleSystem(control::Material* material, int size_id)
 {
-    ParticleData data_particle;
-                   
-    data_particle.size_start = 15.0f + 2*size_id;
-    data_particle.size_end   = 2.0f;
-    data_particle.d_size     = 0.0f;
-    
-    data_particle.velocity_start = 1.2f;
-    data_particle.velocity_end   = 1.2f;
-    data_particle.d_velocity     = 0.0f;
-    
-    data_particle.color_start.r = 1.0f;
-    data_particle.color_start.g = 1.0f;
-    data_particle.color_start.b = 1.0f;
-    data_particle.color_start.a = 0.9f;
-    
-    data_particle.color_end.r = 0.0f;
-    data_particle.color_end.g = 0.0f;
-    data_particle.color_end.b = 0.0f;
-    data_particle.color_end.a = 0.1f;
-    
-    data_particle.color_delta.r = 0.0f;
-    data_particle.color_delta.g = 0.0f;
-    data_particle.color_delta.b = 0.0f;
-    data_particle.color_delta.a = 0.1f;
-        
-    int particles_num = 5;
+    ParticleSystemData config;
 
-    //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
-    Linear* ps = new Linear(particles_num);
+    config.particles_num = 5;
+    config.creation_delay = 0.1f;
+
+    config.size_start = 15.0f + 2*size_id;
+    config.size_end   = 2.0f;
+    config.size_delta = 0.0f;
     
+    config.velocity_start = 0.05f;
+    config.velocity_end   = 0.05f;
+    config.velocity_delta = config.velocity_start;
+    
+    config.color_start.r = 1.0f;
+    config.color_start.g = 1.0f;
+    config.color_start.b = 1.0f;
+    config.color_start.a = 0.9f;
+    
+    config.color_end.r = 0.0f;
+    config.color_end.g = 0.0f;
+    config.color_end.b = 0.0f;
+    config.color_end.a = 0.1f;
+    
+    config.color_delta.r = 0.0f;
+    config.color_delta.g = 0.0f;
+    config.color_delta.b = 0.0f;
+    config.color_delta.a = 0.1f;
+        
+    //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
+    Linear* ps = new Linear(config);
     ps->setMaterial(material);
-    ps->setParticleData(data_particle);
-    ps->setParticlesNum(particles_num);
 
     return ps;
 }

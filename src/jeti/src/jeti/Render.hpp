@@ -212,8 +212,8 @@ private:
     void __useProgram(GLuint) const;
     void __useTransparentMode(bool) const;
 
-    void __enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }
-    void __disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }
+    void __enable_POINTSPRITE() const;
+    void __disable_POINTSPRITE() const;
 
     void __updateFps();
 };

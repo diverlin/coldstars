@@ -555,7 +555,9 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     if (!m_draw.background()) {
         return;
     }
+    // states
 
+    // projection
     render.setOrthogonalProjection(0.2f);
 
     if (m_draw.background_fbo()) {
@@ -580,6 +582,9 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
         return;
     }
 
+    //states
+
+    // projection
     render.setOrthogonalProjection();
 
     render.drawStar(render.m_fboBackGround.colorBuffer());
@@ -590,8 +595,11 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         return;
     }
 
-    render.setOrthogonalProjection();
+    // states
     render.enable_CULLFACE();
+
+    // projections
+    render.setOrthogonalProjection();
 
     for(Star* star: m_stars) {
         star->update();
@@ -621,7 +629,11 @@ void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
         return;
     }
 
+    //states
     render.disable_CULLFACE();
+
+    // projection
+    render.setOrthogonalProjection();
 
     if (!m_draw.collision_radius()) {
         __drawCollisionRadius(render);
@@ -647,11 +659,14 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
         return;
     }
 
-    m_psLinear->update(glm::vec3(500.0f, 500.0f, 0.0f), glm::vec3(1.0, 0.0, 0.0));
+    // projection
+    render.setOrthogonalProjection();
+
+    m_psLinear->update(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0, 0.0, 0.0));
     m_psLinear->draw(render);
 }
 
-void StarSystem::__render_NEW(jeti::Render& render)
+void StarSystem::__render(jeti::Render& render)
 {
     render.clearColorAndDepthBuffers();
 
@@ -659,11 +674,11 @@ void StarSystem::__render_NEW(jeti::Render& render)
     __renderStarPostEffect(render);
     __renderSpaceObjects(render);
     __renderSpaceObjectsMeta(render);
-    __renderHUD(render);
     __renderExperiment(render);
+    __renderHUD(render);
 }
 
-void StarSystem::__render_NEW2(jeti::Render& render)
+void StarSystem::__render_DEPRECATED(jeti::Render& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -886,7 +901,7 @@ void StarSystem::render(control::StarSystem* starsystem)
     __updateVisible(starsystem);
 
     renderer.composeViewMatrix(m_camera.viewMatrix());
-    __render_NEW(renderer);
+    __render(renderer);
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
     //    {

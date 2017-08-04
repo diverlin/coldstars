@@ -17,37 +17,30 @@
 */
 
 
-#ifndef PARTICLEDATA_HPP
-#define PARTICLEDATA_HPP
+#pragma once
 
 #include <glm/glm.hpp>  
 
-struct ParticleData
-{
-    float size_start;
-    float size_end;
-    float d_size;
+namespace jeti {
+namespace particlesystem {
 
-    float velocity_start;
-    float velocity_end;
-    float d_velocity;
+struct ParticleSystemData
+{
+    int particles_num = 0;
+    float creation_delay = 0.0f;
+
+    float size_start = 0.0f;
+    float size_end = 0.0f;
+    float size_delta = 0.0f;
+
+    float velocity_start = 0.0f;
+    float velocity_end = 0.0f;
+    float velocity_delta = 0.0f;
 
     glm::vec4 color_start;
     glm::vec4 color_end;
     glm::vec4 color_delta;
-
-    int frame;
-    
-    ParticleData()
-    :
-    size_start(0.0),
-    size_end(0.0),
-    d_size(0.0),
-    velocity_start(0.0),
-    velocity_end(0.0),
-    d_velocity(0.0),    
-    frame(0)
-    {}
 };
 
-#endif
+} // namespace aprticlesystem
+} // namespace jeti

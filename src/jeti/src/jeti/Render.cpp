@@ -112,6 +112,26 @@ void Render::disable_DEPTH_TEST() const
     }
 }
 
+void Render::__enable_POINTSPRITE() const
+{
+    if (!glIsEnabled(GL_POINT_SPRITE)) {
+        glEnable(GL_POINT_SPRITE);
+    }
+    if (!glIsEnabled(GL_PROGRAM_POINT_SIZE)) {
+        glEnable(GL_PROGRAM_POINT_SIZE);
+    }
+}
+
+void Render::__disable_POINTSPRITE() const
+{
+    if (glIsEnabled(GL_POINT_SPRITE)) {
+        glDisable(GL_POINT_SPRITE);
+    }
+    if (glIsEnabled(GL_PROGRAM_POINT_SIZE)) {
+        glDisable(GL_PROGRAM_POINT_SIZE);
+    }
+}
+
 void Render::increaseLightPos() {
     m_light.position.z += 10.0;
 }
