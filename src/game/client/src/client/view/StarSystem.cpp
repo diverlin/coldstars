@@ -76,8 +76,8 @@ namespace view {
 StarSystem::StarSystem(jeti::Render& render)
     :
       m_render(render)
-    , m_camera(*render.camera())
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
+    , m_camera(*render.camera())
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
     , m_psLinear(jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
