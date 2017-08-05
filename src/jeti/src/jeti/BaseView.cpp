@@ -158,8 +158,8 @@ void BaseView::_updateModelMatrix(const glm::vec3& parallax_offset)
     assert(m_orientation);
 
     // prepare rotation matrix
-    //meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
-    meti::quatBetweenVectors(m_quatDirection, meti::OX, m_orientation->direction());
+    meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+    //meti::quatBetweenVectors(m_quatDirection, meti::OX, m_orientation->direction());
 
     if (m_animationRotation) {
         m_animationRotation->update(m_quatAnimation);
