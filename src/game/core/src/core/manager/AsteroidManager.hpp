@@ -37,7 +37,7 @@ public:
     void update(control::StarSystem*);
 
 private:
-    unsigned int m_asteroidsNum = 30;
+    unsigned int m_asteroidsNum = 3;
     int m_delay = 0;
     int m_lastTurn = 0;
 };

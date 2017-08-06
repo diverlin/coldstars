@@ -142,19 +142,19 @@ void Render::decreaseLightPos() {
 
 void  Render::increaseScale()
 {
-    if (m_scale < SCALE_MAX) {
-        m_scale += m_deltaScale;
+    if (m_scaleBase < SCALE_MAX) {
+        m_scaleBase += m_deltaScale;
     } else {
-        m_scale = SCALE_MAX;
+        m_scaleBase = SCALE_MAX;
     }
 }
 
 void Render::decreaseScale()
 {
-    if (m_scale > SCALE_MIN) {
-        m_scale -= m_deltaScale;
+    if (m_scaleBase > SCALE_MIN) {
+        m_scaleBase -= m_deltaScale;
     } else {
-        m_scale = SCALE_MIN;
+        m_scaleBase = SCALE_MIN;
     }
 }
 
@@ -180,7 +180,7 @@ Render::toWorldCoord(const glm::vec3& screen_coord) const {
 
     world_coord += m_camera->position();
 
-    world_coord *= scale();
+    world_coord *= scaleBase();
 
     return world_coord;
 }
@@ -191,7 +191,7 @@ Render::toScreenCoord(const glm::vec3& world_coord) const {
 
     screen_coord -= m_camera->position();
 
-    screen_coord /= scale();
+    screen_coord /= scaleBase();
 
     screen_coord.x += m_size.x/2;
     screen_coord.y += m_size.y/2;
@@ -366,13 +366,17 @@ void Render::setPerspectiveProjection()
  * */
 void Render::setOrthogonalProjection(float scaleFactor)
 {
-    float scale = 1.0f + scaleFactor*m_scale;
-    m_projectionMatrix = glm::ortho(-m_size.x/2 * scale, m_size.x/2 * scale, -m_size.y/2 * scale, m_size.y/2 * scale, ZNEAR, ZFAR);
-    __updateProjectionViewMatrix();
+    m_scale = 1.0f + scaleFactor*m_scaleBase;
+    __setOrthogonalProjection();
 }
 
 void Render::setOrthogonalProjection()
 {        
+    m_scale = m_scaleBase;
+    __setOrthogonalProjection();
+}
+
+void Render::__setOrthogonalProjection() {
     m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, ZNEAR, ZFAR);
     __updateProjectionViewMatrix();
 }
@@ -587,7 +591,7 @@ void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& te
 
 void Render::drawStar(GLuint texture) const
 {
-    glm::vec2 offset(0.5f-m_camera->position().x/m_size.x/m_scale, 0.5f-m_camera->position().y/m_size.y/m_scale);
+    glm::vec2 offset(0.5f-m_camera->position().x/m_size.x/m_scaleBase, 0.5f-m_camera->position().y/m_size.y/m_scaleBase);
 
     __useProgram(m_shaders.star);
     {
@@ -600,7 +604,7 @@ void Render::drawStar(GLuint texture) const
         }
 
         glUniform1f(glGetUniformLocation(m_shaders.star, "u_time"), 3*m_time);
-        glUniform1f(glGetUniformLocation(m_shaders.star, "u_sizeFactor"), 2*m_scale);
+        glUniform1f(glGetUniformLocation(m_shaders.star, "u_sizeFactor"), 2*m_scaleBase);
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_resolution"), 1, glm::value_ptr(glm::vec2(m_size.x, m_size.y)));
         glUniform2fv(glGetUniformLocation(m_shaders.star, "u_worldPosition"), 1, glm::value_ptr(offset));
 
@@ -881,6 +885,8 @@ void Render::drawParticles(const Mesh& mesh, const control::Material& textureOb,
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
 
+        glUniform1f(glGetUniformLocation(m_shaders.particle, "u_scale"), m_scale);
+
         __drawMesh(mesh);
     }
 }
@@ -896,6 +902,8 @@ void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& te
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_scale"), m_scale);
 
         __drawMesh(mesh);
     }

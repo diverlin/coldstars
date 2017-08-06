@@ -66,9 +66,9 @@ Jet* genJet(control::Material* material, int size_id)
     config.rand_size_delta = 0.1f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 15.0f + 2*size_id;
-    particle.size_end   = 2.0f;
-    particle.size_delta = 0.9f;
+    particle.size_start = 30.0f + 2*size_id;
+    particle.size_end   = 5.5f;
+    particle.size_delta = 2.0f;
     
     particle.velocity_start = 0.05f;
     particle.velocity_end   = 0.05f;
