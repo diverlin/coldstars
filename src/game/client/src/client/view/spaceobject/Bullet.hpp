@@ -28,7 +28,7 @@ class Jet;
 
 namespace control {
 class Bullet;
-} // namespace descriptor
+} // namespace control
 
 namespace view {
 

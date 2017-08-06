@@ -199,8 +199,7 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    // poor
-
+    // ugly
     ceti::pack<Star*> stars() const { return m_stars; }
     ceti::pack<Planet*> planets() const { return m_planets; }
     ceti::pack<WormHole*> wormholes() const { return m_wormholes; }
