@@ -575,7 +575,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     render.setOrthogonalProjection(0.2f);
 
     if (m_draw.background_fbo()) {
-        render.m_fboBackGround.activate(render.size().x, render.size().y);
+        render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
     if (m_draw.nebulas()) {
@@ -587,7 +587,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
         m_distantStars->draw(render);
     }
     if (m_draw.background_fbo()) {
-        render.m_fboBackGround.deactivate();
+        render.fboBackGround().deactivate();
     }
 }
 
@@ -599,7 +599,7 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
     // projection
     render.setOrthogonalProjection();
 
-    render.drawStar(render.m_fboBackGround.colorBuffer());
+    render.drawStar(render.fboBackGround().colorBuffer());
 }
 
 void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
@@ -776,20 +776,17 @@ void StarSystem::__drawAxis(const jeti::Render& render) const
         return;
     }
 
-    render.__enable_DEPTH_TEST();
-    {
-        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawAxis(render); }
-        for(const Satellite* satellite: m_satellites)           { satellite->drawAxis(render); }
-        for(const Ship* ship: m_ships)                          { ship->drawAxis(render); }
+    for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawAxis(render); }
+    for(const Satellite* satellite: m_satellites)           { satellite->drawAxis(render); }
+    for(const Ship* ship: m_ships)                          { ship->drawAxis(render); }
 
-        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawAxis(render); }
-        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawAxis(render); }
+    for(const Bullet* bullet: m_bullets) { bullet->drawAxis(render); }
+    for(const Container* container: m_containers) { container->drawAxis(render); }
 
-        for(const Star* star: m_stars)                  { star->drawAxis(render); }
-        for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
-        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
-        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
-     }
+    for(const Star* star: m_stars)                  { star->drawAxis(render); }
+    for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
+    for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
+    //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
 }
 
 bool

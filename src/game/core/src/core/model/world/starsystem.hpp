@@ -44,7 +44,7 @@ class Npc;
 class Vehicle;
 class WormHole;
 class Container;
-class RocketBullet;
+class Bullet;
 } // namespace model
 
 namespace control {
@@ -57,7 +57,7 @@ class Ship;
 class Vehicle;
 class WormHole;
 class Container;
-class RocketBullet;
+class Bullet;
 } // namespace control
 
 

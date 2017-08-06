@@ -16,32 +16,32 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RocketBulletBuilder.hpp"
+#include "BulletBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
 #include <core/spaceobject/Bullet.hpp>
 
 namespace builder {
 
-control::RocketBullet*
+control::Bullet*
 Rocket::gen(const BulletData& data_bullet)
 {
     assert(false);
-    control::RocketBullet* rocket_bullet = __genTemplate(nullptr);
+    control::Bullet* rocket_bullet = __genTemplate(nullptr);
     createInternals(rocket_bullet, data_bullet);
 
     return rocket_bullet;
 }
 
-control::RocketBullet*
+control::Bullet*
 Rocket::__genTemplate(descriptor::Bullet* descr)
 {
-    model::RocketBullet* model = new model::RocketBullet();
+    model::Bullet* model = new model::Bullet();
     assert(false);
-    //model::RocketBullet* model = new model::RocketBullet(descr->id());
+    //model::Bullet* model = new model::Bullet(descr->id());
     assert(model);
 
-    control::RocketBullet* bullet = new control::RocketBullet(descr, model);
+    control::Bullet* bullet = new control::Bullet(descr, model);
     assert(bullet);
 
     manager::Entities::get().add(bullet);
@@ -50,7 +50,7 @@ Rocket::__genTemplate(descriptor::Bullet* descr)
 }
 
 void
-Rocket::createInternals(control::RocketBullet* rocket_bullet, const BulletData& data_bullet)
+Rocket::createInternals(control::Bullet* rocket_bullet, const BulletData& data_bullet)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 

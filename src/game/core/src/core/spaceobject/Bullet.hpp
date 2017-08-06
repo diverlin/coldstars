@@ -45,12 +45,12 @@ private:
 
 namespace model {
 
-class RocketBullet : public SpaceObject {
+class Bullet : public SpaceObject {
 
 public:
-    RocketBullet();
-    ~RocketBullet() = default;
-    RocketBullet(const std::string& data);
+    Bullet();
+    ~Bullet() = default;
+    Bullet(const std::string& data);
     std::string data() const;
 
     void setBulletData(BulletData data_bullet) { m_dataBullet = data_bullet; m_speed = data_bullet.speed_init; }
@@ -91,11 +91,11 @@ private:
 
 namespace control {
 
-class RocketBullet : public SpaceObject
+class Bullet : public SpaceObject
 {
 public:
-    RocketBullet(descriptor::Bullet*, model::RocketBullet*);
-    virtual ~RocketBullet();
+    Bullet(descriptor::Bullet*, model::Bullet*);
+    virtual ~Bullet();
 
     void CreateDriveComplexTextureDependedStuff();
     void UpdateInSpace(int, bool);
@@ -109,11 +109,11 @@ public:
     //void RenderInSpace(const Renderer&, float);
 
     descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
-    model::RocketBullet* model() const { return m_model_rocket; }
+    model::Bullet* model() const { return m_model_rocket; }
 
 private:
     descriptor::Bullet* m_descriptor_rocket = nullptr;
-    model::RocketBullet* m_model_rocket = nullptr;
+    model::Bullet* m_model_rocket = nullptr;
 
     model::SpaceObject* m_target = nullptr;
 
@@ -126,11 +126,11 @@ private:
 
 } // namespace control
 
-//class RocketBullet : public SpaceObject
+//class Bullet : public SpaceObject
 //{
 //public:
-//    RocketBullet(int);
-//    virtual ~RocketBullet();
+//    Bullet(int);
+//    virtual ~Bullet();
 
 //    void SetBulletData(BulletData data_bullet) { m_DataBullet = data_bullet; m_Speed = data_bullet.speed_init; };
 //    void SetOwnerId(int owner_id) { m_OwnerId = owner_id; };
@@ -170,7 +170,7 @@ private:
 
 //    bool CheckTarget() const;
 
-//    int unresolved_RocketBullet_target_id;
+//    int unresolved_Bullet_target_id;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

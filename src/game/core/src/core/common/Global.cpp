@@ -65,7 +65,7 @@
 
 #include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
-#include <core/builder/spaceobject/RocketBulletBuilder.hpp>
+#include <core/builder/spaceobject/BulletBuilder.hpp>
 
 namespace core {
 
