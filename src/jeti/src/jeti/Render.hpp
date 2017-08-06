@@ -133,7 +133,6 @@ public:
     void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
     void drawStarField(int, int, float, float) const;
-    void drawDummy();
 
     void update();
 

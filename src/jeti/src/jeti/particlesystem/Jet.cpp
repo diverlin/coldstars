@@ -57,7 +57,7 @@ Jet* genJet(control::Material* material, int size_id)
 
     config.particles_num = 10;
     config.creation_delay_msec = 50;
-    config.rand_dir = false;
+    config.use_rand_dir = false;
 
     config.size_start = 15.0f + 2*size_id;
     config.size_end   = 2.0f;

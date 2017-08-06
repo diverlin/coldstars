@@ -208,7 +208,6 @@ private:
     bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
     bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
 
-    void __renderDummy(jeti::Render& render) const;
     void __renderBackground(jeti::Render& render) const;
     void __renderStarPostEffect(jeti::Render& render) const;
     void __renderSpaceObjects(jeti::Render& render) const;

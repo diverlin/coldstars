@@ -35,6 +35,8 @@ public:
     void setPosition(const glm::vec3& position) { m_position = position; }
     void setDirection(const glm::vec3& direction) { m_direction = direction; }
     void setVelocity(float velocity) { m_velocity = velocity; }
+    void setColorDelta(const glm::vec4& color_delta) { m_config.color_delta = color_delta; }
+    void setSizeDelta(float size_delta) { m_config.size_delta = size_delta; }
 
     bool isAlive() const { return m_isAlive; }
     float alpha() const { return m_color.a; }

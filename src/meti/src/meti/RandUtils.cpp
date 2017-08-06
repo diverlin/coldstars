@@ -24,6 +24,11 @@
 
 namespace meti {
 
+float addRandPercent(float val, float percent)
+{
+    return val*(1+getRandFloat(percent));
+}
+
 float getRandFloat(float high)
 {
     float precision = 100000.0;

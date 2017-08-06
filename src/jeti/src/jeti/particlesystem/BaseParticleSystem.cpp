@@ -49,6 +49,21 @@ Base::~Base()
     m_particles.clear();
 }
 
+void Base::_checkAlive() {
+    if (m_particles.size() == m_config.particles_num) {
+        return;
+    }
+
+    for (Particle* particle: _particles()) {
+        if (particle->isAlive()) {
+            m_isAlive = true;
+            return;
+        }
+    }
+
+    m_isAlive = false;
+}
+
 void Base::_emitNewParticle() {
     if (m_particles.size() >= m_config.particles_num) {
         return;
@@ -57,10 +72,6 @@ void Base::_emitNewParticle() {
     const auto now_time = std::chrono::steady_clock::now();
     float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
     if (msec_diff > m_config.creation_delay_msec) {
-        Particle* particle = _genParticle();
-        if (m_config.rand_dir) {
-            particle->randomDirection();
-        }
         m_particles.push_back(_genParticle());
         m_lastTime = now_time;
     }
@@ -70,7 +81,24 @@ Particle* Base::_genParticle() const
 {
     Particle* particle = new Particle(m_config);
     particle->setPosition(m_center);
-    particle->setDirection(m_direction);
+    if (m_config.use_rand_dir) {
+        particle->randomDirection();
+    } else {
+        particle->setDirection(m_direction);
+    }
+    if (m_config.use_rand_color_delta) {
+        glm::vec4 delta_color;
+        delta_color.r = meti::addRandPercent(m_config.color_delta.r, m_config.rand_color_delta);
+        delta_color.g = meti::addRandPercent(m_config.color_delta.g, m_config.rand_color_delta);
+        delta_color.b = meti::addRandPercent(m_config.color_delta.b, m_config.rand_color_delta);
+        delta_color.a = meti::addRandPercent(m_config.color_delta.a, m_config.rand_color_delta);
+        particle->setColorDelta(delta_color);
+    }
+    if (m_config.use_rand_size_delta) {
+        float size_delta = meti::addRandPercent(m_config.size_delta, m_config.rand_size_delta);
+        particle->setSizeDelta(size_delta);
+    }
+
     return particle;
 }
 

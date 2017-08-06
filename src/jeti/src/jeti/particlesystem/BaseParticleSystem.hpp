@@ -65,6 +65,8 @@ public:
     void draw(const jeti::Render&) const;
 
 protected:
+    void _checkAlive();
+
     void _emitNewParticle();
     Particle* _genParticle() const;
 

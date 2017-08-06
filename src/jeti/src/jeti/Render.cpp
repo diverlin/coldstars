@@ -922,14 +922,6 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
     }
 }
 
-void Render::drawDummy()
-{
-    // in some reason the drawing only particles are not possible, blank screen is shown.
-    // to solve this, dummy draw function is needed to draw poit sprites without anything else.
-
-    __drawMesh(*m_meshQuad);
-}
-
 void Render::__useProgram(GLuint program) const
 {
     GLint id;
