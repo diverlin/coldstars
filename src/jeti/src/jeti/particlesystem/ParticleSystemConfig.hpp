@@ -19,27 +19,16 @@
 
 #pragma once
 
+#include <jeti/particlesystem/ParticleConfig.hpp>
+
 #include <glm/glm.hpp>  
 
 namespace jeti {
 namespace particlesystem {
 
-struct Config
-{
+struct ParticleSystemConfig {
     int particles_num = 0;
     int creation_delay_msec = 0;
-
-    float size_start = 0.0f;
-    float size_end = 0.0f;
-    float size_delta = 0.0f;
-
-    float velocity_start = 0.0f;
-    float velocity_end = 0.0f;
-    float velocity_delta = 0.0f;
-
-    glm::vec4 color_start;
-    glm::vec4 color_end;
-    glm::vec4 color_delta;
 
     bool use_rand_dir = true;
     bool use_rand_color_delta = false;
@@ -47,6 +36,8 @@ struct Config
 
     bool use_rand_size_delta = false;
     float rand_size_delta = 0.0f;
+
+    ParticleConfig particle;
 };
 
 } // namespace aprticlesystem

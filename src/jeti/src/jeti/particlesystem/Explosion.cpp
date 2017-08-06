@@ -27,7 +27,7 @@
 namespace jeti {
 namespace particlesystem {
 
-Explosion::Explosion(const Config& config, float radius)
+Explosion::Explosion(const ParticleSystemConfig& config, float radius)
     :
       Base(config)
     , m_radius(radius)
@@ -55,34 +55,31 @@ Explosion* genExplosion(control::Material* material)
     float radius = 100;
     int size_id = 1;
 
-    Config config;
+    ParticleSystemConfig config;
 
     config.particles_num = 50;
     config.creation_delay_msec =10;
 
-    config.size_start = 25.0f + 2*size_id;
-    config.size_end   = 2.0f;
-    config.size_delta = 0.2f;
+    config.particle.size_start = 25.0f + 2*size_id;
+    config.particle.size_end   = 2.0f;
+    config.particle.size_delta = 0.2f;
 
-    config.velocity_start = 0.015f;
-    config.velocity_end   = 0.015f;
-    config.velocity_delta = 0.0f;
+    config.particle.velocity_start = 0.015f;
+    config.particle.velocity_end   = 0.015f;
+    config.particle.velocity_delta = 0.0f;
 
-    config.color_start.r = 1.0f;
-    config.color_start.g = 1.0f;
-    config.color_start.b = 1.0f;
-    config.color_start.a = 1.0f;
+    config.particle.color_start.r = 1.0f;
+    config.particle.color_start.g = 1.0f;
+    config.particle.color_start.b = 1.0f;
+    config.particle.color_start.a = 1.0f;
 
-    config.color_end.r = 0.0f;
-    config.color_end.g = 0.0f;
-    config.color_end.b = 0.0f;
-    config.color_end.a = 0.0f;
+    config.particle.color_end = 0.0f;
 
-    config.color_delta.r = 0.01f;
-    config.color_delta.g = 0.02f;
-    config.color_delta.b = 0.03f;
-    config.color_delta.a = 0.01f;
-    config.color_delta *= 0.5f;
+    config.particle.color_delta.r = 0.01f;
+    config.particle.color_delta.g = 0.02f;
+    config.particle.color_delta.b = 0.03f;
+    config.particle.color_delta.a = 0.01f;
+    config.particle.color_delta *= 0.5f;
 
     config.use_rand_dir = true;
     config.use_rand_color_delta = true;

@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <particlesystem/ParticleData.hpp>
+#include <jeti/particlesystem/ParticleConfig.hpp>
 
 #include <glm/glm.hpp>
 
@@ -29,7 +29,7 @@ namespace particlesystem {
 class Particle
 {
 public:
-    Particle(const Config&);
+    Particle(const ParticleConfig&);
     ~Particle();
 
     void setPosition(const glm::vec3& position) { m_position = position; }
@@ -60,13 +60,12 @@ private:
 
     glm::vec3 m_position;
     glm::vec3 m_direction;
-    float m_velocity = 0.0f;
-
     glm::vec4 m_color;
 
+    float m_velocity = 0.0f;
     float m_size = 1.0f;
 
-    Config m_config;
+    ParticleConfig m_config;
 };
 
 } // namespace particlesystem

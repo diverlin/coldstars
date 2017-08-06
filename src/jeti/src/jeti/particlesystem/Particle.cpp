@@ -25,12 +25,12 @@
 namespace jeti {
 namespace particlesystem {
 
-Particle::Particle(const Config& data_particle)
+Particle::Particle(const ParticleConfig& config)
     :
-      m_color(data_particle.color_start),
-      m_size(data_particle.size_start),
-      m_velocity(data_particle.velocity_start),
-      m_config(data_particle)
+      m_color(config.color_start),
+      m_size(config.size_start),
+      m_velocity(config.velocity_start),
+      m_config(config)
 {}
 
 Particle::~Particle()
@@ -104,8 +104,8 @@ void Particle::update()
     m_color    -= m_config.color_delta;
     m_size     -= m_config.size_delta;
 
-    if (m_color.a < m_config.color_end.a) {
-        m_color.a = m_config.color_end.a;
+    if (m_color.a < m_config.color_end) {
+        m_color.a = m_config.color_end;
         m_isAlive = false;
     }
 

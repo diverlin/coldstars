@@ -27,7 +27,7 @@ namespace particlesystem {
 class Jet : public Base
 {
 public:
-    Jet(const Config&);
+    Jet(const ParticleSystemConfig&);
     virtual ~Jet() override final = default;
 
     void update(const glm::vec3&, const:: glm::vec3&);

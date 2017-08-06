@@ -24,7 +24,7 @@
 namespace jeti {
 namespace particlesystem {
 
-Jet::Jet(const Config& config)
+Jet::Jet(const ParticleSystemConfig& config)
     : Base(config)
 {}
 
@@ -53,34 +53,31 @@ void Jet::update(const glm::vec3& center)
 
 Jet* genJet(control::Material* material, int size_id)
 {
-    Config config;
+    ParticleSystemConfig config;
 
     config.particles_num = 10;
     config.creation_delay_msec = 50;
     config.use_rand_dir = false;
 
-    config.size_start = 15.0f + 2*size_id;
-    config.size_end   = 2.0f;
-    config.size_delta = 0.9f;
+    config.particle.size_start = 15.0f + 2*size_id;
+    config.particle.size_end   = 2.0f;
+    config.particle.size_delta = 0.9f;
     
-    config.velocity_start = 0.05f;
-    config.velocity_end   = 0.05f;
-    config.velocity_delta = 0.0f;
+    config.particle.velocity_start = 0.05f;
+    config.particle.velocity_end   = 0.05f;
+    config.particle.velocity_delta = 0.0f;
     
-    config.color_start.r = 1.0f;
-    config.color_start.g = 1.0f;
-    config.color_start.b = 1.0f;
-    config.color_start.a = 0.9f;
+    config.particle.color_start.r = 1.0f;
+    config.particle.color_start.g = 1.0f;
+    config.particle.color_start.b = 1.0f;
+    config.particle.color_start.a = 0.9f;
     
-    config.color_end.r = 0.0f;
-    config.color_end.g = 0.0f;
-    config.color_end.b = 0.0f;
-    config.color_end.a = 0.1f;
+    config.particle.color_end = 0.0f;
     
-    config.color_delta.r = 0.0f;
-    config.color_delta.g = 0.1f;
-    config.color_delta.b = 0.0f;
-    config.color_delta.a = 0.05f;
+    config.particle.color_delta.r = 0.0f;
+    config.particle.color_delta.g = 0.1f;
+    config.particle.color_delta.b = 0.0f;
+    config.particle.color_delta.a = 0.05f;
         
     //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
     Jet* ps = new Jet(config);

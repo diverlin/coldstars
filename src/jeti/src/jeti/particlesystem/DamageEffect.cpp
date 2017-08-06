@@ -22,7 +22,7 @@
 namespace jeti {
 namespace particlesystem {
 
-DamageEffect::DamageEffect(const Config& config)
+DamageEffect::DamageEffect(const ParticleSystemConfig& config)
     :
       Base(config)
 {

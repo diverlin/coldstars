@@ -19,26 +19,24 @@
 
 #pragma once
 
-#include "BaseParticleSystem.hpp"
+#include <glm/glm.hpp>  
 
 namespace jeti {
 namespace particlesystem {
 
-class Explosion : public Base
-{ 
-public:
-    Explosion(const ParticleSystemConfig&, float);
-    virtual ~Explosion() override final = default;
+struct ParticleConfig {
+    float size_start = 0.0f;
+    float size_end = 0.0f;
+    float size_delta = 0.0f;
 
-    float radius() const { return m_radius; }
+    float velocity_start = 0.0f;
+    float velocity_end = 0.0f;
+    float velocity_delta = 0.0f;
 
-    void update(const glm::vec3&) override final;
+    glm::vec4 color_start;
+    float color_end = 0.0f;
+    glm::vec4 color_delta;
+};
 
-private:
-    float m_radius;
-};  
-
-Explosion* genExplosion(control::Material* material);
-
-} // namepsace particlesystem
+} // namespace aprticlesystem
 } // namespace jeti
