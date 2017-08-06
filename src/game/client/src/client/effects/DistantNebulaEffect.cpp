@@ -53,8 +53,6 @@ void DistantNebulas::update(const glm::vec3& camera_pos) {
 }
 
 void DistantNebulas::draw(const jeti::Render& render) const {
-    render.disable_DEPTH_TEST();
-    render.enable_BLEND();
     for (auto nebula: m_nebulas) {
         nebula->draw(render);
     }

@@ -54,7 +54,7 @@ Ship::Ship(control::Ship* ship)
         shield->dissipate();
     }
 
-    m_driveJet = jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
 }
 
 Ship::~Ship()

@@ -50,8 +50,6 @@ public:
     void randomizeDeltaAlpha(float, float);
 
     void randomDirection();
-    void randDirectionAccurate();
-    void randDirectionDirty();
 
     void update();
 

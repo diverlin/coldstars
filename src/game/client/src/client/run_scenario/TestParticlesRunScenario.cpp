@@ -31,7 +31,8 @@
 #include <common/Global.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <jeti/particlesystem/ExplosionEffect.hpp>
+
+#include <jeti/particlesystem/Explosion.hpp>
 
 #include <iostream>
 

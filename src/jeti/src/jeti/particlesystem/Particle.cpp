@@ -54,34 +54,11 @@ void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
 
 void Particle::randomDirection()
 {
-    if (meti::getRandBool() == true) {
-        randDirectionDirty();
-    } else {
-        randDirectionAccurate();
-    }
+    float angle = glm::radians(meti::getRandFloat(360.0f));
+    m_direction.x = cos(angle);
+    m_direction.y = sin(angle);
+    m_direction.z = 0;
 }
-
-void Particle::randDirectionDirty()
-{
-//    m_direction.x = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
-//    m_direction.y = meti::getRandFloat(0.1f, 1.0f) * meti::getRandSign();
-//    m_direction.z = 0;
-}
-
-
-void Particle::randDirectionAccurate()
-{
-//    float _len   = meti::getRandInt(50, 100);
-//    float _angle = glm::radians(meti::getRandFloat(360.0f));
-    
-//    float target_x = cos(_angle) * _len;
-//    float target_y = sin(_angle) * _len;
-    
-//    m_direction.x = target_x/_len;
-//    m_direction.y = target_y/_len;
-//    m_direction.z = 0;
-}  
-
 
 //void Particle::calcAccurateRandomVelocity2(glm::vec2 center)
 //{

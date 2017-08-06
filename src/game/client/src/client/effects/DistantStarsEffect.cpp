@@ -50,8 +50,8 @@ void DistantStars::update(const glm::vec3& offset) {
 }
 
 void DistantStars::draw(const jeti::Render& render) const {
-    render.disable_DEPTH_TEST();
-    render.enable_ADDITIVE_BLEND();
+//    render.disable_DEPTH_TEST();
+//    render.enable_ADDITIVE_BLEND();
     for (auto layer: m_layers) {
         layer->draw(render);
     }
@@ -111,8 +111,8 @@ DistantStars* genDistantStars(int color_id)
             float z = -meti::getRandInt(799, 999);
             glm::vec3 position = meti::getRandXYVec3f(0, 3000, z);
 
-            float min = 0.5;
-            float mid = 0.8;
+            float min = 0.5f;
+            float mid = 0.8f;
             glm::vec4 color(1.0f);
             int choice = meti::getRandInt(0,3);
             if (choice == 0) {

@@ -64,13 +64,6 @@ public:
 
     int fps() const { return m_fps; }
 
-    void enable_ADDITIVE_BLEND() const;
-    void enable_BLEND() const;
-    void disable_BLEND() const;
-
-    void enable_DEPTH_TEST() const;
-    void disable_DEPTH_TEST() const;
-
     float scale() const { return m_scale; }
     const glm::ivec2& size() const { return m_size; }
     int width() const { return m_size.x; }
@@ -91,9 +84,6 @@ public:
     void increaseLightPos();
     void decreaseLightPos();
 //    void setLightPos(int, int);
-
-    void enable_CULLFACE() const;
-    void disable_CULLFACE() const;
 
     void activateFbo(int, int, int);
     void deactivateFbo(int);
@@ -143,6 +133,7 @@ public:
     void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
     void drawStarField(int, int, float, float) const;
+    void drawDummy();
 
     void update();
 
@@ -214,13 +205,24 @@ private:
     void __resizePostEffects(int, int);
 
     void __useProgram(GLuint) const;
-    void __useTransparentMode(bool) const;
-
-    void __enable_POINTSPRITE() const;
-    void __disable_POINTSPRITE() const;
 
     void __updateFps();
     void __drawMesh(const Mesh&) const;
+
+    // states
+    void __enable_POINTSPRITE() const;
+    void __disable_POINTSPRITE() const;
+
+    void __enable_DEPTH_TEST() const;
+    void __disable_DEPTH_TEST() const;
+
+    void __enable_ADDITIVE_BLEND() const;
+    void __enable_BLEND() const;
+    void __disable_BLEND() const;
+
+    void __enable_CULLFACE() const;
+    void __disable_CULLFACE() const;
+    //
 };
 
 // TEXT

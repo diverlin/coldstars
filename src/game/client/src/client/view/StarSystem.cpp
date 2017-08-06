@@ -55,6 +55,7 @@
 #include <jeti/Camera.hpp>
 #include <jeti/animation/ConstantRotation.hpp>
 #include <jeti/particlesystem/Jet.hpp>
+#include <jeti/particlesystem/Explosion.hpp>
 
 #include <ceti/Collision.hpp>
 
@@ -76,12 +77,25 @@ namespace view {
 StarSystem::StarSystem(jeti::Render& render)
     :
       m_render(render)
-    , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_camera(*render.camera())
+    , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
-    , m_psLinear(jeti::particlesystem::genLinearParticleSystem(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
+    , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {
+    m_debug = false;
+    if (m_debug) {
+        m_draw.setStar(false);
+        m_draw.setStars(true);
+        m_draw.setNebulas(false);
+        m_draw.setSpaceobjects(false);
+        m_draw.setCollisionRadius(false);
+        m_draw.setAxis(false);
+        m_draw.setHud(false);
+        m_draw.setExperimental(false);
+    } else {
+        m_draw.setExperimental(false);
+    }
 }
 
 StarSystem::~StarSystem()
@@ -550,13 +564,18 @@ void StarSystem::__add(Satellite* view)
 //    m_texts.push_back(view);
 //}
 
+void StarSystem::__renderDummy(jeti::Render& render) const {
+//    if (m_draw.nebulas()) {
+//        return;
+//    }
 
+   //render.drawDummy();
+}
 
 void StarSystem::__renderBackground(jeti::Render& render) const {
     if (!m_draw.background()) {
         return;
     }
-    // states
 
     // projection
     render.setOrthogonalProjection(0.2f);
@@ -583,8 +602,6 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
         return;
     }
 
-    //states
-
     // projection
     render.setOrthogonalProjection();
 
@@ -595,9 +612,6 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     if (!m_draw.spaceobjects()) {
         return;
     }
-
-    // states
-    render.enable_CULLFACE();
 
     // projections
     render.setOrthogonalProjection();
@@ -652,7 +666,7 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
 }
 
 void StarSystem::__renderExperiment(jeti::Render& render) const {
-    if (!m_draw.experiment()) {
+    if (!m_draw.experimental()) {
         return;
     }
 
@@ -660,15 +674,16 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
     render.setOrthogonalProjection();
 
     glm::vec3 center = glm::vec3(sin(render.time())*0.0f, 0.0f, 0.0f);
-    glm::vec3 dir = glm::vec3(sin(render.time()), cos(render.time()), 0.0f);
-    m_psLinear->update(center, dir);
-    m_psLinear->draw(render);
+
+    m_psExplosion->update(center);
+    m_psExplosion->draw(render);
 }
 
 void StarSystem::__render(jeti::Render& render)
 {
     render.clearColorAndDepthBuffers();
 
+    __renderDummy(render);
     __renderBackground(render);
     __renderStarPostEffect(render);
     __renderSpaceObjects(render);
@@ -677,8 +692,118 @@ void StarSystem::__render(jeti::Render& render)
     __renderHUD(render);
 }
 
-void StarSystem::__render_DEPRECATED(jeti::Render& render)
+void StarSystem::render(control::StarSystem* starsystem)
 {   
+    assert(starsystem);
+    jeti::Render& render = client::global::get().render();
+
+    render.update();
+    m_camera.update();
+    
+    __updateVisible(starsystem);
+
+    render.composeViewMatrix(m_camera.viewMatrix());
+    __render(render);
+
+    //resizeGl(w*scale, h*scale);
+    //enable_BLEND();
+    //    {
+    //        if (turn_ended == true)
+    //        {
+    //            if (forceDraw_orbits == true)
+    //            {
+    //                starsystem->DrawOrbits(renderer);
+    //            }
+
+    //            if (forceDraw_path == true)
+    //            {
+    //                starsystem->DrawPath();
+    //            }
+
+    //            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+    //            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+    //            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
+
+    //            if (show.GetRangeRadar() == true)
+    //            {
+    //                npc->vehicle()->RenderRadarRange();
+    //            }
+
+    //            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
+    //            {
+    //                npc->vehicle()->RenderGrappleRange();
+    //            }
+    //        }
+    
+    //        //m_cursor.RenderFocusedObjectStuff();
+    //    }
+    //disable_BLEND();
+    //resizeGl(w, h);
+} 
+
+void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
+{
+    if (!render.allowDrawCollisionRadius()) {
+        return;
+    }
+
+    render.__disable_DEPTH_TEST();
+    render.__enable_BLEND();
+    {
+        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawCollisionRadius(render); }
+        for(const Satellite* satellite: m_satellites)           { satellite->drawCollisionRadius(render); }
+        for(const Ship* ship: m_ships)                          { ship->drawCollisionRadius(render); }
+        
+        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawCollisionRadius(render); }
+        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawCollisionRadius(render); }
+
+        for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
+        for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
+        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
+        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawCollisionRadius(render); }
+     }
+}
+
+void StarSystem::__drawAxis(const jeti::Render& render) const
+{
+    if (!render.allowDrawAxis()) {
+        return;
+    }
+
+    render.__enable_DEPTH_TEST();
+    {
+        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawAxis(render); }
+        for(const Satellite* satellite: m_satellites)           { satellite->drawAxis(render); }
+        for(const Ship* ship: m_ships)                          { ship->drawAxis(render); }
+
+        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawAxis(render); }
+        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawAxis(render); }
+
+        for(const Star* star: m_stars)                  { star->drawAxis(render); }
+        for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
+        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
+        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
+     }
+}
+
+bool
+StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
+{
+    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
+    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
+}
+
+
+
+
+
+
+
+
+
+
+void StarSystem::__render_DEPRECATED(jeti::Render& render)
+{
     bool draw_background    = true;
     bool draw_volumetric    = true;
     bool draw_something     = false;
@@ -690,7 +815,7 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
 //    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
-    
+
     render.clearColorAndDepthBuffers();
 
     //render.enable_CULLFACE();
@@ -813,7 +938,7 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
 //                    xyz_array[i][0] = shockwave.parameters().x;
 //                    xyz_array[i][1] = shockwave.parameters().y;
 //                    xyz_array[i][2] = shockwave.parameters().z;
-                    
+
 //                    time_array[i] = shockwave.time();
 //                }
 //                for (unsigned int j=0; ((j<m_shockwaves.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
@@ -823,7 +948,7 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
 //                    xyz_array[i][0] = m_shockwaves[j]->parameters().x;
 //                    xyz_array[i][1] = m_shockwaves[j]->parameters().y;
 //                    xyz_array[i][2] = m_shockwaves[j]->parameters().z/scale;
-                    
+
 //                    time_array[i] = m_shockwaves[j]->time();
 //                }
 
@@ -877,117 +1002,11 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
         //starsystem->RestoreSceneColor();
     }
     //render.disable_CULLFACE();
-    
+
     //render.SetOrthogonalProjection(w, h);
 }
 
-//void SpaceViewer::render(Starsystem* starsystem,
-//                         const meti::vec3& lookFrom,
-//                         const meti::vec3& lookTo,
-//                         float lookFar,
-//                         bool turn_ended,
-//                         bool forceDraw_orbits,
-//                         bool forceDraw_path)
 
-void StarSystem::render(control::StarSystem* starsystem)
-{   
-    assert(starsystem);
-    jeti::Render& renderer = client::global::get().render();
-
-    renderer.update();
-    m_camera.update();
-    
-    __updateVisible(starsystem);
-
-    renderer.composeViewMatrix(m_camera.viewMatrix());
-    __render(renderer);
-    //resizeGl(w*scale, h*scale);
-    //enable_BLEND();
-    //    {
-    //        if (turn_ended == true)
-    //        {
-    //            if (forceDraw_orbits == true)
-    //            {
-    //                starsystem->DrawOrbits(renderer);
-    //            }
-
-    //            if (forceDraw_path == true)
-    //            {
-    //                starsystem->DrawPath();
-    //            }
-
-    //            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
-    //            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
-    //            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
-
-    //            if (show.GetRangeRadar() == true)
-    //            {
-    //                npc->vehicle()->RenderRadarRange();
-    //            }
-
-    //            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-    //            {
-    //                npc->vehicle()->RenderGrappleRange();
-    //            }
-    //        }
-    
-    //        //m_cursor.RenderFocusedObjectStuff();
-    //    }
-    //disable_BLEND();
-    //resizeGl(w, h);
-} 
-
-void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
-{
-    if (!render.allowDrawCollisionRadius()) {
-        return;
-    }
-
-    render.disable_DEPTH_TEST();
-    render.enable_BLEND();
-    {
-        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawCollisionRadius(render); }
-        for(const Satellite* satellite: m_satellites)           { satellite->drawCollisionRadius(render); }
-        for(const Ship* ship: m_ships)                          { ship->drawCollisionRadius(render); }
-        
-        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawCollisionRadius(render); }
-        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawCollisionRadius(render); }
-
-        for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
-        for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
-        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
-        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawCollisionRadius(render); }
-     }
-}
-
-void StarSystem::__drawAxis(const jeti::Render& render) const
-{
-    if (!render.allowDrawAxis()) {
-        return;
-    }
-
-    render.enable_DEPTH_TEST();
-    {
-        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawAxis(render); }
-        for(const Satellite* satellite: m_satellites)           { satellite->drawAxis(render); }
-        for(const Ship* ship: m_ships)                          { ship->drawAxis(render); }
-
-        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawAxis(render); }
-        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawAxis(render); }
-
-        for(const Star* star: m_stars)                  { star->drawAxis(render); }
-        for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
-        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
-        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
-     }
-}
-
-bool
-StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
-{
-    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
-}
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
