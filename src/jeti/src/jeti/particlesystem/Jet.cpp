@@ -59,25 +59,32 @@ Jet* genJet(control::Material* material, int size_id)
     config.creation_delay_msec = 50;
     config.use_rand_dir = false;
 
-    config.particle.size_start = 15.0f + 2*size_id;
-    config.particle.size_end   = 2.0f;
-    config.particle.size_delta = 0.9f;
+    config.use_rand_color_delta = true;
+    config.rand_color_delta = 0.2f;
+
+    config.use_rand_size_delta = true;
+    config.rand_size_delta = 0.1f;
+
+    ParticleConfig& particle = config.particle;
+    particle.size_start = 15.0f + 2*size_id;
+    particle.size_end   = 2.0f;
+    particle.size_delta = 0.9f;
     
-    config.particle.velocity_start = 0.05f;
-    config.particle.velocity_end   = 0.05f;
-    config.particle.velocity_delta = 0.0f;
+    particle.velocity_start = 0.05f;
+    particle.velocity_end   = 0.05f;
+    particle.velocity_delta = 0.0f;
     
-    config.particle.color_start.r = 1.0f;
-    config.particle.color_start.g = 1.0f;
-    config.particle.color_start.b = 1.0f;
-    config.particle.color_start.a = 0.9f;
+    particle.color_start.r = 1.0f;
+    particle.color_start.g = 1.0f;
+    particle.color_start.b = 1.0f;
+    particle.color_start.a = 0.9f;
     
-    config.particle.color_end = 0.0f;
+    particle.color_end = 0.0f;
     
-    config.particle.color_delta.r = 0.0f;
-    config.particle.color_delta.g = 0.1f;
-    config.particle.color_delta.b = 0.0f;
-    config.particle.color_delta.a = 0.05f;
+    particle.color_delta.r = 0.0f;
+    particle.color_delta.g = 0.1f;
+    particle.color_delta.b = 0.0f;
+    particle.color_delta.a = 0.05f;
         
     //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
     Jet* ps = new Jet(config);
