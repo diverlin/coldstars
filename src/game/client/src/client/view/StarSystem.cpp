@@ -83,16 +83,16 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_distantNebulas(::effect::genDistantNebulas())
     , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {
-    m_debug = false;
+    m_debug = true;
     if (m_debug) {
         m_draw.setStar(false);
-        m_draw.setStars(true);
+        m_draw.setStars(false);
         m_draw.setNebulas(false);
         m_draw.setSpaceobjects(false);
         m_draw.setCollisionRadius(false);
         m_draw.setAxis(false);
         m_draw.setHud(false);
-        m_draw.setExperimental(false);
+        m_draw.setExperimental(true);
     } else {
         m_draw.setExperimental(false);
     }
@@ -564,14 +564,6 @@ void StarSystem::__add(Satellite* view)
 //    m_texts.push_back(view);
 //}
 
-void StarSystem::__renderDummy(jeti::Render& render) const {
-//    if (m_draw.nebulas()) {
-//        return;
-//    }
-
-   //render.drawDummy();
-}
-
 void StarSystem::__renderBackground(jeti::Render& render) const {
     if (!m_draw.background()) {
         return;
@@ -683,7 +675,6 @@ void StarSystem::__render(jeti::Render& render)
 {
     render.clearColorAndDepthBuffers();
 
-    __renderDummy(render);
     __renderBackground(render);
     __renderStarPostEffect(render);
     __renderSpaceObjects(render);

@@ -28,7 +28,6 @@ struct Config
 {
     int particles_num = 0;
     int creation_delay_msec = 0;
-    bool rand_dir = true;
 
     float size_start = 0.0f;
     float size_end = 0.0f;
@@ -41,6 +40,13 @@ struct Config
     glm::vec4 color_start;
     glm::vec4 color_end;
     glm::vec4 color_delta;
+
+    bool use_rand_dir = true;
+    bool use_rand_color_delta = false;
+    float rand_color_delta = 0.0f;
+
+    bool use_rand_size_delta = false;
+    float rand_size_delta = 0.0f;
 };
 
 } // namespace aprticlesystem
