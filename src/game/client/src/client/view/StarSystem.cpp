@@ -114,9 +114,9 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto planet: starsystem->planets()) {
         __addIfVisible(planet);
     }
-//    for(auto wormHole: starsystem->wormHoles()) {
+    for(auto wormHole: starsystem->wormholes()) {
 //        __addIfVisible(wormhole);
-//    }
+    }
     for(auto asteroid: starsystem->asteroids()) {
         __addIfVisible(asteroid);
     }
@@ -133,12 +133,9 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto satellite: starsystem->satellites()) {
         __addIfVisible(satellite);
     }
-//    for(auto bullet: starsystem->bullets()) {
+    for(auto bullet: starsystem->bullets()) {
 //        __addIfVisible(bullet);
-//    }
-
-//    std::cout<<"ship="<<ceti::to_string(starsystem->ships()[0]->position())<<std::endl;
-//    std::cout<<"star="<<ceti::to_string(starsystem->stars()[0]->position())<<std::endl;
+    }
 
     // update ui
     {
@@ -146,7 +143,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     info->setStarsNum(starsystem->stars().size());
     info->setPlanetsNum(starsystem->planets().size());
-    //info->setWormHolesNum(starsystem->wormHoles().size());
+    //info->setWormHolesNum(starsystem->wormholes().size());
     info->setAsteroidsNum(starsystem->asteroids().size());
     info->setContainersNum(starsystem->containers().size());
     info->setSpaceStationsNum(starsystem->spacestations().size());
@@ -156,7 +153,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     info->setVisibleStarsNum(m_stars.size());
     info->setVisiblePlanetsNum(m_planets.size());
-    info->setVisibleWormHolesNum(m_wormHoles.size());
+    info->setVisibleWormHolesNum(m_wormholes.size());
     info->setVisibleAsteroidsNum(m_asteroids.size());
     info->setVisibleContainersNum(m_containers.size());
     info->setVisibleSpaceStationsNum(m_spacestations.size());
@@ -203,7 +200,7 @@ void StarSystem::__clear()
     // entities
     m_stars.clear();
     m_planets.clear();
-    m_wormHoles.clear();
+    m_wormholes.clear();
     m_asteroids.clear();
     m_containers.clear();
     m_spacestations.clear();
@@ -527,7 +524,7 @@ void StarSystem::__add(Bullet* view)
 
 void StarSystem::__add(WormHole* view)
 {
-    m_wormHoles.push_back(view);
+    m_wormholes.push_back(view);
 }
 
 void StarSystem::__add(Ship* view)
@@ -699,7 +696,7 @@ void StarSystem::mouseInterraction(const glm::vec2&) const
     for(const Star* star: m_stars)                  { /*star->drawCollisionRadius(render);*/ }
     for(const Planet* planet: m_planets)            { /*planet->drawCollisionRadius(render);*/ }
     for(const Asteroid* asteroid: m_asteroids)      { /*asteroid->drawCollisionRadius(render);*/ }
-    for(const WormHole* wormHole: m_wormHoles)      { /*wormHole->drawCollisionRadius(render);*/ }
+    for(const WormHole* wormHole: m_wormholes)      { /*wormHole->drawCollisionRadius(render);*/ }
 }
 
 void StarSystem::render(control::StarSystem* starsystem)
@@ -767,7 +764,7 @@ void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
     for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
     for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
     for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
-    //for(const WormHole* wormHole: m_wormHoles)      { wormHole->drawCollisionRadius(render); }
+    for(const WormHole* wormHole: m_wormholes)      { wormHole->drawCollisionRadius(render); }
 }
 
 void StarSystem::__drawAxis(const jeti::Render& render) const
@@ -786,7 +783,7 @@ void StarSystem::__drawAxis(const jeti::Render& render) const
     for(const Star* star: m_stars)                  { star->drawAxis(render); }
     for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
     for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
-    //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawAxis(render); }
+    for(const WormHole* wormHole: m_wormholes)    { wormHole->drawAxis(render); }
 }
 
 bool

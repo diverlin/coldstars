@@ -144,7 +144,7 @@ private:
     /// visible entities
     std::vector<Star*> m_stars;
     std::vector<Planet*> m_planets;
-    std::vector<WormHole*> m_wormHoles;
+    std::vector<WormHole*> m_wormholes;
     std::vector<Asteroid*> m_asteroids;
     std::vector<Container*> m_containers;
     std::vector<SpaceStation*> m_spacestations;

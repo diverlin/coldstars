@@ -18,25 +18,34 @@
 
 #pragma once
 
-//#include <jeti/BaseView.hpp>
+#include <client/view/BaseView.hpp>
+
+namespace control {
+class WormHole;
+} // namespace control
 
 //class ShockWaveEffect;
 
-//class BlackHoleDrawable : public jeti::view::BaseDrawable
-//{
-//    public:
-//        BlackHoleDrawable(jeti::control::TextureOb*, jeti::Mesh*);
-//        virtual ~BlackHoleDrawable() override final;
+namespace view {
 
-//        void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; };
-//        ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; };
-        
-//        void UpdateInSpace(int, bool);
-        
-//    private:
-//        ShockWaveEffect* m_shockwave;
-        
-////        virtual void UpdateInfo() override final;
-//};
+class WormHole : public Base
+{
+public:
+    WormHole(control::WormHole*);
+    virtual ~WormHole() override final;
 
+//    void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; }
+//    ShockWaveEffect* GetShockWaveEffect() const { return m_shockwave; }
+
+//    void UpdateInSpace(int, bool);
+    void draw(const jeti::Render& render) const override final;
+
+private:
+    control::WormHole* m_wormHole = nullptr;
+//    ShockWaveEffect* m_shockwave;
+
+    //        virtual void UpdateInfo() override final;
+};
+
+} // namespace view
 

@@ -17,25 +17,33 @@
 */
 
 #include "WormHole.hpp"
-#include <client/effects/ShockWaveEffect.hpp>
 
-//BlackHoleDrawable::BlackHoleDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
-//    :
-//      BaseDrawable(texture, mesh)
-//{
+#include <core/spaceobject/WormHole.hpp>
 
-//}
+//#include <client/effects/ShockWaveEffect.hpp>
 
-///* virtual override final */
-//BlackHoleDrawable::~BlackHoleDrawable()
-//{
-//    #if CREATEDESTROY_LOG_ENABLED == 1
-//    Logger::Instance().Log("___::~BlackHoleDrawable("+std::to_string(id())+")");
-//    #endif
-    
-//    delete m_shockwave;
-//}
-        
+#include <jeti/Render.hpp>
+
+namespace view {
+
+WormHole::WormHole(control::WormHole* wormHole)
+    :
+      Base(wormHole)
+    , m_wormHole(wormHole)
+{
+    setOrientation(wormHole);
+}
+
+WormHole::~WormHole()
+{
+    //delete m_shockwave;
+}
+
+void WormHole ::draw(const jeti::Render& render) const
+{
+    render.draw(_mesh(), _material(), _modelMatrix());
+}
+
 //void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)
 //{
 //    m_shockwave->Update();
@@ -53,3 +61,4 @@
 //    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(center()) );
 //}
           
+} // namespace view
