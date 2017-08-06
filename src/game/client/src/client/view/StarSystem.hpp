@@ -218,6 +218,8 @@ private:
     void __renderHUD(jeti::Render& render) const;
     void __renderExperiment(jeti::Render& render) const;
 
+
+    bool __isObjectOnScreen(Base*) const;
     void __render_DEPRECATED(jeti::Render&);
 };
 

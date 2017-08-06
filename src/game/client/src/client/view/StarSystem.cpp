@@ -143,7 +143,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     info->setStarsNum(starsystem->stars().size());
     info->setPlanetsNum(starsystem->planets().size());
-    //info->setWormHolesNum(starsystem->wormholes().size());
+    info->setWormHolesNum(starsystem->wormholes().size());
     info->setAsteroidsNum(starsystem->asteroids().size());
     info->setContainersNum(starsystem->containers().size());
     info->setSpaceStationsNum(starsystem->spacestations().size());
@@ -192,6 +192,8 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         m_guiDemo->setMousePosScreenCoord(mouse_pos.x, mouse_pos.y);
         glm::vec3 wc = m_render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
         m_guiDemo->setMousePosWorldCoord(wc.x, wc.y);
+
+        mouseInterraction(glm::vec2(mouse_pos.x, mouse_pos.y));
     }
 }
 
@@ -617,6 +619,11 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         planet->draw(render);
     }
 
+    for(WormHole* wormhole: m_wormholes) {
+        wormhole->update();
+        wormhole->draw(render);
+    }
+
     for(Asteroid* asteroid: m_asteroids) {
         asteroid->update();
         asteroid->draw(render);
@@ -625,6 +632,17 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     for(Ship* ship: m_ships) {
         ship->update();
         ship->draw(render);
+    }
+
+    for(Bullet* bullet: m_bullets) {
+        bullet->update();
+        bullet->draw(render);
+    }
+
+    for(Container* container: m_containers) {
+        assert(false);
+        //container->update();
+        container->draw(render);
     }
 }
 
@@ -686,17 +704,61 @@ void StarSystem::__render(jeti::Render& render)
 
 void StarSystem::mouseInterraction(const glm::vec2&) const
 {
-    for(const SpaceStation* spacestation: m_spacestations)  { /*spacestation->drawCollisionRadius(render);*/ }
-    for(const Satellite* satellite: m_satellites)           { /*satellite->drawCollisionRadius(render);*/ }
-    for(const Ship* ship: m_ships)                          { /*ship->drawCollisionRadius(render);*/ }
+    assert(false); // todo: make check of mouse interraction
 
-    for(const Bullet* bullet: m_bullets)            { /*bullet->drawCollisionRadius(render);*/ }
-    for(const Container* container: m_containers)   { /*container->drawCollisionRadius(render);*/ }
+    Base* base = nullptr;
 
-    for(const Star* star: m_stars)                  { /*star->drawCollisionRadius(render);*/ }
-    for(const Planet* planet: m_planets)            { /*planet->drawCollisionRadius(render);*/ }
-    for(const Asteroid* asteroid: m_asteroids)      { /*asteroid->drawCollisionRadius(render);*/ }
-    for(const WormHole* wormHole: m_wormholes)      { /*wormHole->drawCollisionRadius(render);*/ }
+    for(SpaceStation* spacestation: m_spacestations) {
+        if(__isObjectOnScreen(spacestation)) {
+            base = spacestation;
+        }
+    }
+    for(Satellite* satellite: m_satellites) {
+        if(__isObjectOnScreen(satellite)) {
+            base = satellite;
+        }
+    }
+    for(Ship* ship: m_ships) {
+        if(__isObjectOnScreen(ship)) {
+            base = ship;
+        }
+    }
+
+    for(Bullet* bullet: m_bullets) {
+        if(__isObjectOnScreen(bullet)) {
+            base = bullet;
+        }
+    }
+//    for(Container* container: m_containers) {
+//        if(__isObjectOnScreen(container)) {
+//            base = container;
+//        }
+//    }
+
+    for(Star* star: m_stars) {
+        if(__isObjectOnScreen(star)) {
+            base = star;
+        }
+    }
+    for(Planet* planet: m_planets) {
+        if(__isObjectOnScreen(planet)) {
+            base = planet;
+        }
+    }
+    for(Asteroid* asteroid: m_asteroids) {
+        if(__isObjectOnScreen(asteroid)) {
+            base = asteroid;
+        }
+    }
+    for(WormHole* wormhole: m_wormholes) {
+        if(__isObjectOnScreen(wormhole)) {
+            base = wormhole;
+        }
+    }
+
+    if (base) {
+        base->drawAxis(m_render);
+    }
 }
 
 void StarSystem::render(control::StarSystem* starsystem)
@@ -1006,7 +1068,12 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
     //render.SetOrthogonalProjection(w, h);
 }
 
-
+bool
+StarSystem::__isObjectOnScreen(Base* object) const
+{
+    glm::vec3 screen_coord(m_render.toScreenCoord(object->position()));
+    return isObjectOnScreen(screen_coord, object->size(), m_render.size(), m_render.scaleBase());
+}
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {

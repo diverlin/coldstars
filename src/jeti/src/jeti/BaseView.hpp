@@ -66,6 +66,9 @@ public:
     BaseView();
     virtual ~BaseView();
 
+    const glm::vec3& position() const { return _orientation()->position(); }
+    const glm::vec3& size() const { return _orientation()->size(); }
+
     [[depracated("depr this")]]
     void setPosition(const glm::vec3&);
     void setSize(const glm::vec3&);
