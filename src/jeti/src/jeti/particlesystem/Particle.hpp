@@ -39,20 +39,15 @@ public:
     void setSizeDelta(float size_delta) { m_config.size_delta = size_delta; }
 
     bool isAlive() const { return m_isAlive; }
-    float alpha() const { return m_color.a; }
 
     const glm::vec3& position() const { return m_position; }
     const glm::vec4& color() const { return m_color; }
 
     float size() const { return m_size; }
 
+    void randomizeDirection();
+
     void restart(const glm::vec3&);
-
-    void randomizeLifeTime(float, float);
-    void randomizeDeltaAlpha(float, float);
-
-    void randomDirection();
-
     void update();
 
 private:

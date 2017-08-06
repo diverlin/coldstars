@@ -24,6 +24,14 @@
 
 namespace meti {
 
+void randomizeDirection(glm::vec3& direction)
+{
+    float angle = getRandFloat(2*M_PI);
+    direction.x = cos(angle);
+    direction.y = sin(angle);
+    direction.z = 0.0f;
+}
+
 float addRandPercent(float val, float percent)
 {
     return val*(1+getRandFloat(percent));

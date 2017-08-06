@@ -25,6 +25,7 @@
 
 namespace meti {
 
+void randomizeDirection(glm::vec3&);
 float addRandPercent(float, float);
 
 float getRandFloat(float);
