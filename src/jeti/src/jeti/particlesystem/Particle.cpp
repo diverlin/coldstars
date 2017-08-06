@@ -43,15 +43,19 @@ void Particle::randomizeDirection()
 
 void Particle::restart(const glm::vec3& direction)
 {   
+    restart();
+    m_direction = direction;
+}
+
+void Particle::restart()
+{
     m_position = glm::vec3(0.0f);
     m_isAlive = true;
 
     m_color = m_config.color_start;
     m_size  = m_config.size_start;
     m_velocity = m_config.velocity_start;
-    m_direction = direction;
 }
-
 
 void Particle::update()
 {

@@ -56,6 +56,7 @@
 #include <jeti/animation/ConstantRotation.hpp>
 #include <jeti/particlesystem/Jet.hpp>
 #include <jeti/particlesystem/Explosion.hpp>
+#include <jeti/particlesystem/Damage.hpp>
 
 #include <ceti/Collision.hpp>
 
@@ -82,8 +83,9 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
     , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
+    , m_psDamage(jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {
-    m_debug = true;
+    m_debug = false;
     if (m_debug) {
         m_draw.setStar(false);
         m_draw.setStars(false);
@@ -665,10 +667,12 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
     // projection
     render.setOrthogonalProjection();
 
-    glm::vec3 center = glm::vec3(sin(render.time())*0.0f, 0.0f, 0.0f);
-
-    m_psExplosion->update(center);
+    m_psExplosion->update(glm::vec3(0.0f));
     m_psExplosion->draw(render);
+
+    glm::vec3 center = glm::vec3(sin(render.time())*100.0f, cos(render.time())*100.0f, 0.0f);
+    m_psDamage->update(center);
+    m_psDamage->draw(render);
 }
 
 void StarSystem::__render(jeti::Render& render)

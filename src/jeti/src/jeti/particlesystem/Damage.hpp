@@ -24,18 +24,16 @@
 namespace jeti {
 namespace particlesystem {
 
-class DamageEffect : public Base
+class Damage : public Base
 {
 public:
-    DamageEffect(const ParticleSystemConfig&);
-    virtual ~DamageEffect() override final;
-
-    void CreateParticles();
+    Damage(const ParticleSystemConfig&);
+    virtual ~Damage() override final = default;
 
     void update(const glm::vec3&) override final;
 };
 
-//DamageEffect* getNewDamageEffect(int, SpaceObject*);
+Damage* genDamage(control::Material* material);
 
 } // namespace particlesystem
 } // namespace jeti

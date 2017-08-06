@@ -40,6 +40,7 @@ class Mesh;
 namespace particlesystem {
 class Base;
 class Explosion;
+class Damage;
 } // namespace particlesystem
 
 namespace control {
@@ -137,6 +138,7 @@ private:
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
     jeti::particlesystem::Explosion* m_psExplosion = nullptr;
+    jeti::particlesystem::Damage* m_psDamage = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
