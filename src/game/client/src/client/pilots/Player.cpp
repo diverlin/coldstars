@@ -323,7 +323,7 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
                         //satellite->RenderInSpace(render, 1/scale);
                     }
 
-                    for(RocketBullet* rocket : visible_ROCKET_vec)
+                    for(Bullet* rocket : visible_ROCKET_vec)
                     {
                         //rocket->RenderInSpace(render, 1/scale);
                     }

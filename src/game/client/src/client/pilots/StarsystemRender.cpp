@@ -132,7 +132,7 @@ void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
 ////    }
 //}
 
-//void StarsystemRender::addIfVisible(RocketBullet* rocket)
+//void StarsystemRender::addIfVisible(Bullet* rocket)
 //{
 //    if (isObjectOnScreen(rocket->center(), rocket->size())) {
 ////        if (isObjectWithinRange(npc->vehicle()->center(), rocket->center(), radius)) {
@@ -309,7 +309,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Render& render, Starsystem* stars
                         //satellite->RenderInSpace(render, 1/scale);
                     }
 
-                    for(RocketBullet* rocket : visible_ROCKET_vec)
+                    for(Bullet* rocket : visible_ROCKET_vec)
                     {
                         //rocket->RenderInSpace(render, 1/scale);
                     }

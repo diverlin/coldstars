@@ -58,7 +58,7 @@ namespace entity
         CONTAINER,
         MINERALS, FOOD, MEDICINE, MILITARY, DRUG, EXCLUSIVE, 
         
-        BULLET, ROCKETBULLET,
+        BULLET, Bullet,
         
         BOMB, GOODS, PLAYER, KOSMOPORT, NATURELAND,
 

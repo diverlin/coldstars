@@ -60,7 +60,7 @@ void Bullet ::draw(const jeti::Render& render) const
     //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 //}
 
-//void RocketBullet::UpdateInfo()
+//void Bullet::UpdateInfo()
 //{
 //    GetInfo().clear();
 
@@ -73,7 +73,7 @@ void Bullet ::draw(const jeti::Render& render) const
 //    }
 //}
 
-//void RocketBullet::RenderInSpace(const Renderer& render, float scale)
+//void Bullet::RenderInSpace(const Renderer& render, float scale)
 //{
 //    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
 

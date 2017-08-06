@@ -26,7 +26,7 @@ class Bullet;
 } // namespace descriptor
 
 namespace control {
-class RocketBullet;
+class Bullet;
 } // namespace control
 
 class BulletData;
@@ -36,14 +36,14 @@ namespace builder {
 class Rocket
 {
 public:
-    static control::RocketBullet* gen(const BulletData&);
+    static control::Bullet* gen(const BulletData&);
 
 private:
     Rocket() = delete;
     ~Rocket() = delete;
 
-    static void createInternals(control::RocketBullet*, const BulletData&);
-    static control::RocketBullet* __genTemplate(descriptor::Bullet* descr);
+    static void createInternals(control::Bullet*, const BulletData&);
+    static control::Bullet* __genTemplate(descriptor::Bullet* descr);
 }; 
 
 } // namespace builder

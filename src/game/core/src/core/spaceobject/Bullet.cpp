@@ -36,19 +36,19 @@
 
 namespace model {
 
-RocketBullet::RocketBullet()
+Bullet::Bullet()
 {
 //    setType(entity::Type::BULLET);
-//    setSubType(entity::Type::ROCKETBULLET);
+//    setSubType(entity::Type::Bullet);
 }
 
-RocketBullet::RocketBullet(const std::string& data)
+Bullet::Bullet(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-RocketBullet::data() const
+Bullet::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
@@ -57,7 +57,7 @@ RocketBullet::data() const
 
 namespace control {
 
-RocketBullet::RocketBullet(descriptor::Bullet* descr, model::RocketBullet* model)
+Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_rocket(descr)
@@ -66,14 +66,14 @@ RocketBullet::RocketBullet(descriptor::Bullet* descr, model::RocketBullet* model
 }
 
 /* virtual */
-RocketBullet::~RocketBullet()
+Bullet::~Bullet()
 {
-//    LOG("___::~RocketBullet("+std::to_string(id())+")");
+//    LOG("___::~Bullet("+std::to_string(id())+")");
 
     //delete m_EffectDrive;
 }
 
-void RocketBullet::CreateDriveComplexTextureDependedStuff()
+void Bullet::CreateDriveComplexTextureDependedStuff()
 {
     //points().addMidLeftPoint();
     //points().addMidFarLeftPoint();
@@ -81,7 +81,7 @@ void RocketBullet::CreateDriveComplexTextureDependedStuff()
     //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 }    
 
-void RocketBullet::UpdateInSpace(int time, bool show_effect)
+void Bullet::UpdateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);
         
@@ -107,7 +107,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-bool RocketBullet::CheckTarget() const
+bool Bullet::CheckTarget() const
 {
     if (m_target->isAlive()) {
         assert(false);
@@ -121,14 +121,14 @@ bool RocketBullet::CheckTarget() const
     return false;
 }
 
-void RocketBullet::collisionEvent(bool show_effect)
+void Bullet::collisionEvent(bool show_effect)
 {
     model()->setAlive(false);
     model()->immidiateKill();
 }
 
 ///* virtual override final */
-//void RocketBullet::UpdateInfo()
+//void Bullet::UpdateInfo()
 //{
 //    GetInfo().clear();
 
@@ -142,7 +142,7 @@ void RocketBullet::collisionEvent(bool show_effect)
 //}
 
 /* virtual override final */
-void RocketBullet::hit(int damage, SpaceObject* agressor)
+void Bullet::hit(int damage, SpaceObject* agressor)
 {
     SpaceObject::hit(damage);
 
@@ -155,7 +155,7 @@ void RocketBullet::hit(int damage, SpaceObject* agressor)
 }
 
 /* virtual override final */
-void RocketBullet::_postDeathUniqueEvent(bool show_effect)  
+void Bullet::_postDeathUniqueEvent(bool show_effect)
 {
     if (show_effect == true)
     {
@@ -164,7 +164,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
     }
 }
 
-//void RocketBullet::RenderInSpace(const Renderer& render, float scale)
+//void Bullet::RenderInSpace(const Renderer& render, float scale)
 //{
 //    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
 
@@ -176,7 +176,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 
 
 
-//RocketBullet::RocketBullet(int id)
+//Bullet::Bullet(int id)
 //:
 //m_Speed(0),
 //m_DamageRate(1.0),
@@ -186,18 +186,18 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //{
 //    setId(id);
 //    setTypeId(entity::Type::BULLET);
-//    setSubTypeId(entity::Type::ROCKETBULLET);
+//    setSubTypeId(entity::Type::Bullet);
 //}
 
 ///* virtual */
-//RocketBullet::~RocketBullet()
+//Bullet::~Bullet()
 //{
-//    LOG("___::~RocketBullet("+std::to_string(id())+")");
+//    LOG("___::~Bullet("+std::to_string(id())+")");
 
 //    delete m_EffectDrive;
 //}
 
-//void RocketBullet::CreateDriveComplexTextureDependedStuff()
+//void Bullet::CreateDriveComplexTextureDependedStuff()
 //{
 //    points().addMidLeftPoint();
 //    points().addMidFarLeftPoint();
@@ -205,7 +205,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 //}
 
-//void RocketBullet::UpdateInSpace(int time, bool show_effect)
+//void Bullet::UpdateInSpace(int time, bool show_effect)
 //{
 //    _checkDeath(show_effect);
 
@@ -239,7 +239,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //    }
 //}
 
-//bool RocketBullet::CheckTarget() const
+//bool Bullet::CheckTarget() const
 //{
 //    if (m_Target->isAlive() == true)
 //    {
@@ -255,14 +255,14 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //    return false;
 //}
 
-//void RocketBullet::collisionEvent(bool show_effect)
+//void Bullet::collisionEvent(bool show_effect)
 //{
 //    _dataLife().is_alive = false;
 //    _dataLife().dying_time = -1;
 //}
 
 /////* virtual override final */
-////void RocketBullet::UpdateInfo()
+////void Bullet::UpdateInfo()
 ////{
 ////    GetInfo().clear();
 
@@ -276,7 +276,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 ////}
 
 ///* virtual override final */
-//void RocketBullet::hit(int damage)
+//void Bullet::hit(int damage)
 //{
 //    SpaceObject::hit(damage);
 
@@ -289,7 +289,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //}
 
 ///* virtual override final */
-//void RocketBullet::_postDeathUniqueEvent(bool show_effect)
+//void Bullet::_postDeathUniqueEvent(bool show_effect)
 //{
 //    if (show_effect == true)
 //    {
@@ -298,7 +298,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //    }
 //}
 
-////void RocketBullet::RenderInSpace(const Renderer& render, float scale)
+////void Bullet::RenderInSpace(const Renderer& render, float scale)
 ////{
 ////    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
 
@@ -307,7 +307,7 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 ////}
 
 
-//void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//void Bullet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{
 //    save_ptree.put(root+"speed", m_Speed);
 //    save_ptree.put(root+"owner_id", m_OwnerId);
@@ -317,22 +317,22 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 //    m_DataBullet.Save(save_ptree, root);
 //}
 
-//void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
+//void Bullet::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
 //    m_Speed = load_ptree.get<float>("speed");
 //    m_OwnerId = load_ptree.get<int>("owner_id");
-//    unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");
+//    unresolved_Bullet_target_id = load_ptree.get<int>("target_id");
 
 //    m_DataBullet.Load(load_ptree.get_child("data_bullet"));
 //}
 
-//void RocketBullet::ResolveData()
+//void Bullet::ResolveData()
 //{
 //    CreateDriveComplexTextureDependedStuff();
 
-//    if (unresolved_RocketBullet_target_id != NONE)
+//    if (unresolved_Bullet_target_id != NONE)
 //    {
-//        m_Target = (SpaceObject*)manager::EntityManager::get().getEntity(unresolved_RocketBullet_target_id);
+//        m_Target = (SpaceObject*)manager::EntityManager::get().getEntity(unresolved_Bullet_target_id);
 //    }
 
 //    //((Starsystem*)manager::EntityManager::get().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
@@ -340,33 +340,33 @@ void RocketBullet::_postDeathUniqueEvent(bool show_effect)
 
 
 ///* virtual override final */
-//void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
+//void Bullet::Save(boost::property_tree::ptree& save_ptree) const
 //{
-//    const std::string root = "rocketbullet."+std::to_string(id())+".";
+//    const std::string root = "Bullet."+std::to_string(id())+".";
 
 //    Base::SaveData(save_ptree, root);
 //    //Orientation::SaveData(save_ptree, root);
 ////    BaseDrawable::SaveData(save_ptree, root);
 //    SpaceObject::SaveData(save_ptree, root);
-//    RocketBullet::SaveData(save_ptree, root);
+//    Bullet::SaveData(save_ptree, root);
 //}
 
 ///* virtual override final */
-//void RocketBullet::Load(const boost::property_tree::ptree& load_ptree)
+//void Bullet::Load(const boost::property_tree::ptree& load_ptree)
 //{
 //    Base::LoadData(load_ptree);
 //    //Orientation::LoadData(load_ptree);
 ////    BaseDrawable::LoadData(load_ptree);
 //    SpaceObject::LoadData(load_ptree);
-//    RocketBullet::LoadData(load_ptree);
+//    Bullet::LoadData(load_ptree);
 //}
 
 ///* virtual override final */
-//void RocketBullet::Resolve()
+//void Bullet::Resolve()
 //{
 //    Base::ResolveData();
 //    //Orientation::ResolveData();
 ////    BaseDrawable::ResolveData();
 //    SpaceObject::ResolveData();
-//    RocketBullet::ResolveData();
+//    Bullet::ResolveData();
 //}

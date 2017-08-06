@@ -44,7 +44,7 @@ class SpaceStation;
 class Satellite;
 class Ship;
 class Container;
-class RocketBullet;
+class Bullet;
 
 class LazerTraceEffect;
 class ShockWaveEffect;
@@ -108,7 +108,7 @@ private:
     std::vector<Planet*>       visible_PLANET_vec;
     std::vector<Asteroid*>     visible_ASTEROID_vec;
     std::vector<Container*>    visible_CONTAINER_vec;
-    std::vector<RocketBullet*> visible_ROCKET_vec;
+    std::vector<Bullet*> visible_ROCKET_vec;
     std::vector<BlackHole*>    visible_BLACKHOLE_vec;
     std::vector<Ship*>         visible_SHIP_vec;
     std::vector<Satellite*>    visible_SATELLITE_vec;

@@ -125,7 +125,7 @@ bool Weapon::validateSubTarget() const
 
 //    if (fire_atOnce>=1)
 //    {
-//        model::RocketBullet* rocket_bullet = core::global::get().rocketBulletBuilder().gen(data_bullet);
+//        model::Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
 //        rocket_bullet->setDamageRate(attack_rate_normalized);
 
 //        assert(false);

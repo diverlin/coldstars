@@ -40,7 +40,7 @@ class Planet;
 class Asteroid;
 class WormHole;
 class Container;
-class RocketBullet;
+class Bullet;
 class Vehicle;
 class SpaceStation;
 class Ship;
@@ -54,7 +54,7 @@ class Planet;
 class Asteroid;
 class WormHole;
 class Container;
-class RocketBullet;
+class Bullet;
 class SpaceStation;
 class Ship;
 class Satellite;
@@ -139,7 +139,7 @@ public:
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObject* const parent = nullptr);
 
-//    void add(model::RocketBullet*, const glm::vec3&, const glm::vec3&);
+//    void add(model::Bullet*, const glm::vec3&, const glm::vec3&);
 
 //    void add(model::Star*);
     void add(Star*);
@@ -206,7 +206,7 @@ public:
     ceti::pack<WormHole*> wormholes() const { return m_wormholes; }
     ceti::pack<Asteroid*> asteroids() const { return m_asteroids; }
     ceti::pack<Container*> containers() const { return m_containers; }
-    ceti::pack<RocketBullet*> bullets() const { return m_bullets; }
+    ceti::pack<Bullet*> bullets() const { return m_bullets; }
 
     ceti::pack<Vehicle*> vehicles() const { return m_vehicles; }
     ceti::pack<SpaceStation*> spacestations() const { return m_spacestations; }
@@ -250,7 +250,7 @@ private:
     ceti::pack<Planet*> m_planets;
     ceti::pack<Asteroid*> m_asteroids;
     ceti::pack<Container*> m_containers;
-    ceti::pack<RocketBullet*> m_bullets;
+    ceti::pack<Bullet*> m_bullets;
     ceti::pack<WormHole*> m_wormholes;
     ceti::pack<Vehicle*> m_vehicles;
     ceti::pack<SpaceStation*> m_spacestations;

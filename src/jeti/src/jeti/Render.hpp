@@ -96,6 +96,7 @@ public:
 
     BloomEffect& bloom() { return m_bloom; }
     const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
+    Fbo& fboBackGround() { return m_fboBackGround; }
     const Shaders& shaders() const { return m_shaders; }
 
     void clearColorAndDepthBuffers() const

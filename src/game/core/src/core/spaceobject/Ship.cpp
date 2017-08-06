@@ -97,7 +97,7 @@ void Ship::update(int time)
     navigator().update(); // debug
 
     if (time > 0) {
-        __updateSpecialAction();
+        //__updateSpecialAction();
 
         if (npc()) {
             npc()->update(time);

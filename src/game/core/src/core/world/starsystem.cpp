@@ -236,7 +236,7 @@ void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm:
     m_satellites.push_back(satellite);
 }
 
-//void StarSystem::add(model::RocketBullet* _model, const glm::vec3& position, const glm::vec3& dir)
+//void StarSystem::add(model::Bullet* _model, const glm::vec3& position, const glm::vec3& dir)
 //{
 //    _model->setPlace(place::Type::SPACE);
 //    _model->setStarSystem(id());
@@ -246,8 +246,8 @@ void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm:
 //    //rocket->updateOrientation();
 
 //    assert(false);
-//    descriptor::RocketBullet* _descr = nullptr;
-//    RocketBullet* rocket = new RocketBullet(_model, _descr);
+//    descriptor::Bullet* _descr = nullptr;
+//    Bullet* rocket = new Bullet(_model, _descr);
 //    //rocket->initialize();
 
 //    m_bullets.push_back(rocket);
@@ -1162,7 +1162,7 @@ void StarSystem::__manageDeadObjects_s()
 ////        }
 //    }
 
-//    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
+//    for(std::vector<Bullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
 ////        if ((*it)->isReadyForGarbage() == true) {
 ////            manager::EntityManager::get().addToGarbage(*it);
 ////            it = m_bullets.erase(it);

@@ -135,7 +135,7 @@ public:
     //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
     builder::WormHole& blackHoleBuilder() { return *m_blackHoleBuilder; }
-    builder::Rocket& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
+    builder::Rocket& BulletBuilder() { return *m_BulletBuilder; }
 
 private:
     global();
@@ -184,7 +184,7 @@ private:
     //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
 
     builder::WormHole* m_blackHoleBuilder = nullptr;
-    builder::Rocket* m_rocketBulletBuilder = nullptr;
+    builder::Rocket* m_BulletBuilder = nullptr;
 };
 
 } // namespace core
