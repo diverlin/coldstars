@@ -182,7 +182,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         info->setZFar(std::to_string(jeti::ZFAR));
         info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_ZPOS));
 
-        info->setScale(std::to_string(render.scale()));
+        info->setScale(std::to_string(render.scaleBase()));
         info->setWidth(ceti::to_string(render.width()));
         info->setHeight(ceti::to_string(render.height()));
     }
@@ -785,7 +785,7 @@ bool
 StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
 {
     glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scale());
+    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scaleBase());
 }
 
 
@@ -806,7 +806,7 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().render().scale();
+    float scale = client::global::get().render().scaleBase();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
 //    glm::vec2 world_coord(client::global::get().screen().bottomLeft());

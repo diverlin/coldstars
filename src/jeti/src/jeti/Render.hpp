@@ -64,7 +64,7 @@ public:
 
     int fps() const { return m_fps; }
 
-    float scale() const { return m_scale; }
+    float scaleBase() const { return m_scaleBase; }
     const glm::ivec2& size() const { return m_size; }
     int width() const { return m_size.x; }
     int height() const { return m_size.y; }
@@ -76,7 +76,7 @@ public:
     bool allowDrawAxis() const { return m_allowDrawAxis; }
     bool allowDrawCollisionRadius() const { return m_allowDrawCollisionRadius; }
 
-    void setScale(float scale) { m_scale = scale;}
+    void setScaleBase(float scaleBase) { m_scaleBase = scaleBase;}
 
     void setAllowDrawAxis(bool allowDrawAxis) { m_allowDrawAxis = allowDrawAxis; }
     void setAllowDrawCollisionRadius(bool allowDrawCollisionRadius) { m_allowDrawCollisionRadius = allowDrawCollisionRadius; }
@@ -155,7 +155,8 @@ private:
     bool m_allowDrawAxis = false;
     bool m_allowDrawCollisionRadius = true;
 
-    float m_scale = SCALE_INIT;
+    float m_scale = 1.0f;
+    float m_scaleBase = SCALE_INIT;
     float m_deltaScale = SCALE_STEP;
 
     glm::ivec2 m_size;
@@ -207,6 +208,8 @@ private:
 
     void __updateFps();
     void __drawMesh(const Mesh&) const;
+
+    void __setOrthogonalProjection();
 
     // states
     void __enable_POINTSPRITE() const;

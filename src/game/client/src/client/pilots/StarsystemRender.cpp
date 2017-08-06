@@ -212,7 +212,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Render& render, Starsystem* stars
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().render().scale();
+    float scale = client::global::get().render().scaleBase();
     int w = client::global::get().screen().width();
     int h = client::global::get().screen().height();
 //    glm::vec2 world_coord(client::global::get().screen().bottomLeft());

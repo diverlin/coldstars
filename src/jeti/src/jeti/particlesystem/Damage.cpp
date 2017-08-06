@@ -65,9 +65,9 @@ Damage* genDamage(control::Material* material)
     config.rand_size_delta = 0.9f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 15.0f + 2*size_id;
-    particle.size_end   = 2.0f;
-    particle.size_delta = 0.2f;
+    particle.size_start = 45.0f + 2*size_id;
+    particle.size_end   = 5.5f;
+    particle.size_delta = 0.5f;
 
     particle.velocity_start = 0.015f;
     particle.velocity_end   = 0.015f;
@@ -84,7 +84,6 @@ Damage* genDamage(control::Material* material)
     particle.color_delta.g = 0.02f;
     particle.color_delta.b = 0.01f;
     particle.color_delta.a = 0.01f;
-    particle.color_delta *= 0.5f;
 
     Damage* ps = new Damage(config);
     ps->setMaterial(material);

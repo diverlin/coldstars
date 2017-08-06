@@ -96,7 +96,7 @@ void DistantStarsLayer::draw(const jeti::Render& render) const
 DistantStars* genDistantStars(int color_id)
 {
     std::vector<DistantStarsLayer*> layers;
-    int iterations = 10;
+    int iterations = 30;
     for (int i=0; i<iterations; ++i) {
         int distStar_num = meti::getRandInt(DISTANT_STAR_MIN/iterations, DISTANT_STAR_MAX/iterations);
 
@@ -130,10 +130,15 @@ DistantStars* genDistantStars(int color_id)
                 color.g = meti::getRandFloat(mid, 1.0);
                 color.b = meti::getRandFloat(min, 1.0);
             }
+            float size = meti::getRandFloat(5.0, 10.0);
+            if (meti::getRandInt(15) == 1) {
+                size = meti::getRandFloat(13.0, 16.0f);
+                color *= 1.2;
+            }
 
             positions.push_back(position);
             colors.push_back(color);
-            sizes.push_back(meti::getRandFloat(3.0, 10.0));
+            sizes.push_back(size);
         }
 
         float paralaxFactor = meti::getRandFloat(1.005, 1.02);

@@ -75,7 +75,7 @@ TEST(coords, screen2word)
 
     for (const float scale: scales) {
         render.camera()->setPosition(glm::vec3(0));
-        render.setScale(scale);
+        render.setScaleBase(scale);
 
         glm::vec3 screen_coord = render.camera()->position();
         glm::vec3 zero(0,0,0);
@@ -122,7 +122,7 @@ TEST(coords, word2screen)
 
     for (const float scale: scales) {
         render.camera()->setPosition(glm::vec3(0));
-        render.setScale(scale);
+        render.setScaleBase(scale);
 
         glm::vec3 screen_coord = render.camera()->position();
         glm::vec3 zero(0,0,0);
