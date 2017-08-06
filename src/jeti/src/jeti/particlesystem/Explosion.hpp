@@ -27,15 +27,10 @@ namespace particlesystem {
 class Explosion : public Base
 { 
 public:
-    Explosion(const ParticleSystemConfig&, float);
+    Explosion(const ParticleSystemConfig&);
     virtual ~Explosion() override final = default;
 
-    float radius() const { return m_radius; }
-
     void update(const glm::vec3&) override final;
-
-private:
-    float m_radius;
 };  
 
 Explosion* genExplosion(control::Material* material);
