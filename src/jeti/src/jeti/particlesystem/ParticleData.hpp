@@ -28,6 +28,7 @@ struct Config
 {
     int particles_num = 0;
     int creation_delay_msec = 0;
+    bool rand_dir = true;
 
     float size_start = 0.0f;
     float size_end = 0.0f;

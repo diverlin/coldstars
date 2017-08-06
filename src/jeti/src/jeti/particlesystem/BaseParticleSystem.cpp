@@ -57,6 +57,10 @@ void Base::_emitNewParticle() {
     const auto now_time = std::chrono::steady_clock::now();
     float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
     if (msec_diff > m_config.creation_delay_msec) {
+        Particle* particle = _genParticle();
+        if (m_config.rand_dir) {
+            particle->randomDirection();
+        }
         m_particles.push_back(_genParticle());
         m_lastTime = now_time;
     }

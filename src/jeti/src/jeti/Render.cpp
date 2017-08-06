@@ -61,21 +61,21 @@ Render::~Render()
     delete m_materialCollisionRadius;
 }
 
-void Render::enable_CULLFACE() const
+void Render::__enable_CULLFACE() const
 {
     if (!glIsEnabled(GL_CULL_FACE)) {
         glEnable(GL_CULL_FACE);
     }
 }
 
-void Render::disable_CULLFACE() const
+void Render::__disable_CULLFACE() const
 {
     if (glIsEnabled(GL_CULL_FACE)) {
         glDisable(GL_CULL_FACE);
     }
 }
 
-void Render::enable_ADDITIVE_BLEND() const
+void Render::__enable_ADDITIVE_BLEND() const
 {
     if (!glIsEnabled(GL_BLEND)) {
         glEnable(GL_BLEND);
@@ -83,7 +83,7 @@ void Render::enable_ADDITIVE_BLEND() const
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 }
 
-void Render::enable_BLEND() const
+void Render::__enable_BLEND() const
 {
     if (!glIsEnabled(GL_BLEND)) {
         glEnable(GL_BLEND);
@@ -91,21 +91,21 @@ void Render::enable_BLEND() const
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void Render::disable_BLEND() const
+void Render::__disable_BLEND() const
 {
     if (glIsEnabled(GL_BLEND)) {
         glDisable(GL_BLEND);
     }
 }
 
-void Render::enable_DEPTH_TEST() const
+void Render::__enable_DEPTH_TEST() const
 {
     if (!glIsEnabled(GL_DEPTH_TEST)) {
         glEnable(GL_DEPTH_TEST);
     }
 }
 
-void Render::disable_DEPTH_TEST() const
+void Render::__disable_DEPTH_TEST() const
 {
     if (glIsEnabled(GL_DEPTH_TEST)) {
         glDisable(GL_DEPTH_TEST);
@@ -421,30 +421,30 @@ void Render::__drawMesh(const Mesh& mesh) const {
     if (mesh.states() != m_activeStates) {
         switch(mesh.states()) {
         case Mesh::States::QUAD:
-            enable_BLEND();
-            disable_DEPTH_TEST();
-            disable_CULLFACE();
+            __disable_POINTSPRITE();
+            __enable_BLEND();
+            __disable_DEPTH_TEST();
+            __disable_CULLFACE();
             break;
         case Mesh::States::NORMAL:
-            disable_BLEND();
-            enable_DEPTH_TEST();
-            enable_CULLFACE();
+            __disable_POINTSPRITE();
+            __disable_BLEND();
+            __enable_DEPTH_TEST();
+            __enable_CULLFACE();
             break;
         case Mesh::States::PARTICLES:
             __enable_POINTSPRITE();
-            enable_ADDITIVE_BLEND();
-            disable_DEPTH_TEST();
-            disable_CULLFACE();
+            __enable_ADDITIVE_BLEND();
+            __disable_DEPTH_TEST();
+            __disable_CULLFACE();
             break;
+        case Mesh::States::NONE:
+            assert(false);
         }
         m_activeStates = mesh.states();
     }
 
     mesh.draw();
-
-    if (m_activeStates == Mesh::States::PARTICLES) {
-        __disable_POINTSPRITE();
-    }
 }
 
 void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
@@ -459,9 +459,7 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 }
 
 void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix, float opacity) const
-{
-    //__useTransparentMode(textureOb.model()->use_alpha);
- 	
+{	
     __useProgram(m_shaders.basetexture);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
@@ -494,10 +492,7 @@ void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb,
 
     float ambient_factor = 0.25;
     const glm::vec3& eye_pos = m_camera->position();
-
     const model::Material& material = *textureOb.model();
-
-    //__useTransparentMode(material.use_alpha);
  	 	
     __useProgram(m_programLight);
     {
@@ -531,16 +526,9 @@ void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb,
 
 void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
-//    if (mesh.isFlat()) {
-//        drawMesh(mesh, textureOb, ModelMatrix);
-//        return;
-//    }
-
     float ambient_factor = 0.25; 
-    const glm::vec3& eye_pos = m_camera->target();
-   
-    __useTransparentMode(textureOb.model()->use_alpha);
-    	
+    const glm::vec3& eye_pos = m_camera->target();   
+
     __useProgram(m_shaders.light_normalmap);
 	{
 	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));          
@@ -577,9 +565,7 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
 } 
 
 void Render::drawMeshMultiTextured(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
-{
-    __useTransparentMode(textureOb.model()->use_alpha);
- 	
+{	
     __useProgram(m_shaders.multitexturing);
 	{
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
@@ -936,6 +922,14 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
     }
 }
 
+void Render::drawDummy()
+{
+    // in some reason the drawing only particles are not possible, blank screen is shown.
+    // to solve this, dummy draw function is needed to draw poit sprites without anything else.
+
+    __drawMesh(*m_meshQuad);
+}
+
 void Render::__useProgram(GLuint program) const
 {
     GLint id;
@@ -945,19 +939,6 @@ void Render::__useProgram(GLuint program) const
     }
 }
  
-void Render::__useTransparentMode(bool transparent) const
-{
-    if (transparent) {
-        enable_BLEND();
-        //disable_DEPTH_TEST();
-        disable_CULLFACE();
-    } else {
-        disable_BLEND();
-        //enable_DEPTH_TEST();
-        enable_CULLFACE();
-    }
-}
-
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
     if (m_allowDrawAxis) {

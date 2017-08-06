@@ -39,7 +39,7 @@ class Camera;
 class Mesh;
 namespace particlesystem {
 class Base;
-class Jet;
+class Explosion;
 } // namespace particlesystem
 
 namespace control {
@@ -101,7 +101,16 @@ class StarSystem
         bool collision_radius() const { return (m_spaceobjects && m_collision_radius); }
         bool axis() const { return (m_spaceobjects && m_axis); }
         bool hud() const { return m_hud; }
-        bool experiment() const { return m_experiment; }
+        bool experimental() const { return m_experimental; }
+
+        void setStar(bool star) { m_star = star; }
+        void setStars(bool stars) { m_stars = stars; }
+        void setNebulas(bool nebulas) { m_nebulas = nebulas; }
+        void setSpaceobjects(bool spaceobjects) { m_spaceobjects = spaceobjects; }
+        void setCollisionRadius(bool collision_radius) { m_collision_radius = collision_radius; }
+        void setAxis(bool axis) { m_axis = axis; }
+        void setHud(bool hud) { m_hud = hud; }
+        void setExperimental(bool experimental) { m_experimental = experimental; }
 
     private:
         bool m_star = true;
@@ -111,7 +120,7 @@ class StarSystem
         bool m_collision_radius = true;
         bool m_axis = false;
         bool m_hud = true;
-        bool m_experiment = false;
+        bool m_experimental = true;
     };
 
 public:
@@ -121,10 +130,13 @@ public:
     void render(control::StarSystem*);
 
 private:
+    jeti::Render& m_render;
+    jeti::Camera& m_camera;
+
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
-    jeti::particlesystem::Jet* m_psLinear = nullptr;
+    jeti::particlesystem::Explosion* m_psExplosion = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
@@ -136,9 +148,6 @@ private:
     std::vector<Ship*> m_ships;
     std::vector<Satellite*> m_satellites;
     std::vector<Bullet*> m_bullets;
-
-    jeti::Render& m_render;
-    jeti::Camera& m_camera;
 
     Cache m_cache;
     bool m_debug = true;
@@ -156,7 +165,6 @@ private:
     void __updateVisible(control::StarSystem* starsystem);
 
     void __render(jeti::Render&);
-    void __render_DEPRECATED(jeti::Render&);
     void __drawCollisionRadius(const jeti::Render&) const;
     void __drawAxis(const jeti::Render&) const;
 
@@ -200,12 +208,15 @@ private:
     bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
     bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
 
+    void __renderDummy(jeti::Render& render) const;
     void __renderBackground(jeti::Render& render) const;
     void __renderStarPostEffect(jeti::Render& render) const;
     void __renderSpaceObjects(jeti::Render& render) const;
     void __renderSpaceObjectsMeta(jeti::Render& render) const;
     void __renderHUD(jeti::Render& render) const;
     void __renderExperiment(jeti::Render& render) const;
+
+    void __render_DEPRECATED(jeti::Render&);
 };
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale);

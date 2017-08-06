@@ -34,7 +34,7 @@ public:
     void update(const glm::vec3&) override final;
 };
 
-Jet* genLinearParticleSystem(control::Material*, int size_id = 1);
+Jet* genJet(control::Material*, int size_id = 1);
 
 } // namespace particlesystem
 } // namespace jeti
