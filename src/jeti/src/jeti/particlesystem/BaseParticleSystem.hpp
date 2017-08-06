@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <particlesystem/ParticleData.hpp>
+#include <jeti/particlesystem/ParticleSystemConfig.hpp>
 
 #include <vector>
 #include <chrono>
@@ -39,7 +39,7 @@ class Particle;
 class Base
 {
 public:
-    Base(const Config&);
+    Base(const ParticleSystemConfig&);
     virtual ~Base();
 
     [[deprecated("depr")]]
@@ -78,7 +78,7 @@ protected:
 
     const glm::vec3& _direction() const { return m_direction; }
 
-    Config& _particleData() { return m_config; }
+    ParticleSystemConfig& _particleData() { return m_config; }
     std::vector<Particle*>& _particles() { return m_particles; }
 
     void _updateToGPU();
@@ -89,7 +89,7 @@ private:
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    Config m_config;
+    ParticleSystemConfig m_config;
 
     glm::vec3 m_center;
     glm::vec3 m_direction;

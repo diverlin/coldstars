@@ -31,7 +31,7 @@
 namespace jeti {
 namespace particlesystem {
 
-Base::Base(const Config& config)
+Base::Base(const ParticleSystemConfig& config)
     :
     m_config(config)
 {
@@ -79,7 +79,7 @@ void Base::_emitNewParticle() {
 
 Particle* Base::_genParticle() const
 {
-    Particle* particle = new Particle(m_config);
+    Particle* particle = new Particle(m_config.particle);
     particle->setPosition(m_center);
     if (m_config.use_rand_dir) {
         particle->randomDirection();
@@ -88,14 +88,14 @@ Particle* Base::_genParticle() const
     }
     if (m_config.use_rand_color_delta) {
         glm::vec4 delta_color;
-        delta_color.r = meti::addRandPercent(m_config.color_delta.r, m_config.rand_color_delta);
-        delta_color.g = meti::addRandPercent(m_config.color_delta.g, m_config.rand_color_delta);
-        delta_color.b = meti::addRandPercent(m_config.color_delta.b, m_config.rand_color_delta);
-        delta_color.a = meti::addRandPercent(m_config.color_delta.a, m_config.rand_color_delta);
+        delta_color.r = meti::addRandPercent(m_config.particle.color_delta.r, m_config.rand_color_delta);
+        delta_color.g = meti::addRandPercent(m_config.particle.color_delta.g, m_config.rand_color_delta);
+        delta_color.b = meti::addRandPercent(m_config.particle.color_delta.b, m_config.rand_color_delta);
+        delta_color.a = meti::addRandPercent(m_config.particle.color_delta.a, m_config.rand_color_delta);
         particle->setColorDelta(delta_color);
     }
     if (m_config.use_rand_size_delta) {
-        float size_delta = meti::addRandPercent(m_config.size_delta, m_config.rand_size_delta);
+        float size_delta = meti::addRandPercent(m_config.particle.size_delta, m_config.rand_size_delta);
         particle->setSizeDelta(size_delta);
     }
 
