@@ -47,6 +47,7 @@ public:
 
     void randomizeDirection();
 
+    void restart();
     void restart(const glm::vec3&);
     void update();
 
