@@ -58,7 +58,9 @@ Ship::Ship(control::Ship* ship)
 }
 
 Ship::~Ship()
-{}
+{
+    delete m_driveJet;
+}
 
 /* virtual override final */
 //void ShipDrawable::UpdateInfo()

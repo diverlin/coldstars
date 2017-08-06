@@ -128,6 +128,7 @@ public:
     StarSystem(jeti::Render&);
     ~StarSystem();
 
+    void mouseInterraction(const glm::vec2&) const;
     void render(control::StarSystem*);
 
 private:

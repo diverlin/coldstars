@@ -19,7 +19,7 @@
 #include "RocketBulletBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
-#include <core/spaceobject/RocketBullet.hpp>
+#include <core/spaceobject/Bullet.hpp>
 
 namespace builder {
 
@@ -34,7 +34,7 @@ Rocket::gen(const BulletData& data_bullet)
 }
 
 control::RocketBullet*
-Rocket::__genTemplate(descriptor::RocketBullet* descr)
+Rocket::__genTemplate(descriptor::Bullet* descr)
 {
     model::RocketBullet* model = new model::RocketBullet();
     assert(false);

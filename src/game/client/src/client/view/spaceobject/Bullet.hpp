@@ -18,25 +18,36 @@
 
 #pragma once
 
-//#include <jeti/BaseView.hpp>
+#include <client/view/BaseView.hpp>
 
-//namespace jeti {
-//class DriveEffect;
-//}
+namespace jeti {
+namespace particlesystem {
+class Jet;
+} // namespace particlesystem
+} // namespace
 
-//class BulletDrawable : public jeti::view::BaseDrawable
-//{
-//    public:
-//        BulletDrawable(jeti::control::TextureOb*, jeti::Mesh*);
-        
-//        virtual ~BulletDrawable() final override;
-        
-//        void CreateDriveComplexTextureDependedStuff();
-        
-//        //void RenderInSpace(const Renderer&, float);
-            
-//    private:
-//        jeti::DriveEffect* m_EffectDrive;
-        
-//        //virtual void UpdateInfo() override final;
-//};
+namespace control {
+class Bullet;
+} // namespace descriptor
+
+namespace view {
+
+class Bullet : public Base
+{
+public:
+    Bullet(control::Bullet*);
+    ~Bullet() final override;
+
+    //void CreateDriveComplexTextureDependedStuff();
+
+    //void RenderInSpace(const Renderer&, float);
+    void draw(const jeti::Render& render) const override final;
+
+private:
+    control::Bullet* m_bullet = nullptr;
+    jeti::particlesystem::Jet* m_driveJet = nullptr;
+
+    //virtual void UpdateInfo() override final;
+};
+
+} // namespace view

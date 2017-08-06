@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class RocketBullet;
+class Bullet;
 } // namespace descriptor
 
 namespace control {
@@ -43,7 +43,7 @@ private:
     ~Rocket() = delete;
 
     static void createInternals(control::RocketBullet*, const BulletData&);
-    static control::RocketBullet* __genTemplate(descriptor::RocketBullet* descr);
+    static control::RocketBullet* __genTemplate(descriptor::Bullet* descr);
 }; 
 
 } // namespace builder

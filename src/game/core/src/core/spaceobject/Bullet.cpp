@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RocketBullet.hpp"
+#include "Bullet.hpp"
 
 #include <common/common.hpp>
 #include <common/constants.hpp>
@@ -57,7 +57,7 @@ RocketBullet::data() const
 
 namespace control {
 
-RocketBullet::RocketBullet(descriptor::RocketBullet* descr, model::RocketBullet* model)
+RocketBullet::RocketBullet(descriptor::Bullet* descr, model::RocketBullet* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_rocket(descr)
