@@ -36,51 +36,10 @@ Particle::Particle(const ParticleConfig& config)
 Particle::~Particle()
 {}
 
-void Particle::randomizeLifeTime(float low, float high)
+void Particle::randomizeDirection()
 {
-    float speed_rate = meti::getRandFloat(low, high);   // 0.5, 0.8
-    m_config.size_delta *= speed_rate;
-    m_config.velocity_start *= speed_rate;
+    meti::randomizeDirection(m_direction);
 }
-
-void Particle::randomizeDeltaAlpha(float val1_f, float val2_f)
-{
-    float val1_i = val1_f*10000;
-    float val2_i = val2_f*10000;
-
-    m_config.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0f;
-}                
-
-
-void Particle::randomDirection()
-{
-    float angle = glm::radians(meti::getRandFloat(360.0f));
-    m_direction.x = cos(angle);
-    m_direction.y = sin(angle);
-    m_direction.z = 0;
-}
-
-//void Particle::calcAccurateRandomVelocity2(glm::vec2 center)
-//{
-//float _len   = getRandInt(50, 100);
-//float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
-
-//glm::vec2 target;
-//target = center;
-
-//pos.x = center.x + sin(_angle) * _len;
-//pos.y = center.y + cos(_angle) * _len;
-
-//float xl = (target.x - pos.x);
-//float yl = (target.y - pos.y);
-
-//float dx_n = xl/_len;
-//float dy_n = yl/_len;
-
-//m_Velocity.x = dx_n * m_DataParticle.velocity_start;
-//m_Velocity.y = dy_n * m_DataParticle.velocity_start;
-//m_Velocity.z = 0;
-//}  
 
 void Particle::restart(const glm::vec3& direction)
 {   

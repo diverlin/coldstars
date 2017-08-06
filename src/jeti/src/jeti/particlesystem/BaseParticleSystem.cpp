@@ -82,7 +82,7 @@ Particle* Base::_genParticle() const
     Particle* particle = new Particle(m_config.particle);
     particle->setPosition(m_center);
     if (m_config.use_rand_dir) {
-        particle->randomDirection();
+        particle->randomizeDirection();
     } else {
         particle->setDirection(m_direction);
     }
