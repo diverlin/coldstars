@@ -3,7 +3,7 @@
 #include "WormHole.hpp"
 #include "Asteroid.hpp"
 #include "Container.hpp"
-#include "RocketBullet.hpp"
+#include "Bullet.hpp"
 
 #include "SpaceStation.hpp"
 #include "Satellite.hpp"

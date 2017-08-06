@@ -16,51 +16,69 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#include "BulletDrawable.hpp"
+#include "Bullet.hpp"
 
-//BulletDrawable::BulletDrawable(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
-//:
-//  BaseDrawable(texture, mesh),
-//  m_EffectDrive(nullptr)
-//{
-//}
+#include <core/spaceobject/Bullet.hpp>
 
-///* virtual override final */
-//BulletDrawable::~BulletDrawable()
-//{
-//    #if CREATEDESTROY_LOG_ENABLED == 1
-//    Logger::Instance().Log("___::~BulletDrawable("+std::to_string(id())+")");
-//    #endif
+#include <client/resources/Utils.hpp>
 
-//    delete m_EffectDrive;
-//}
+#include <jeti/Render.hpp>
+#include <jeti/particlesystem/Jet.hpp>
+
+namespace view {
+
+Bullet::Bullet(control::Bullet* bullet)
+    :
+      Base(bullet)
+    , m_bullet(bullet)
+{
+    setOrientation(bullet);
+
+    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+}
+
+Bullet::~Bullet()
+{
+    delete m_driveJet;
+}
+
+void Bullet ::draw(const jeti::Render& render) const
+{
+    render.draw(_mesh(), _material(), _modelMatrix());
+
+//    glm::vec3 pos = m_ship->position();
+//    pos -= m_ship->size().x * m_ship->direction();
+//    m_driveJet->update(pos, -m_ship->direction());
+//    m_driveJet->draw(render);
+}
 
 //void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 //{
-////    points().addMidLeftPoint();
-////    points().addMidFarLeftPoint();
+//    points().addMidLeftPoint();
+//    points().addMidFarLeftPoint();
         
-//    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
+    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 //}
 
-///* virtual override final */
-////void RocketBullet::UpdateInfo()
-////{
-////    GetInfo().clear();
+//void RocketBullet::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-////    GetInfo().addTitleStr("ROCKET");
-////    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) );
-////    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(dataLife().armor) );
-////    if (m_Target != nullptr)
-////    {
-////        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));
-////    }
-////}
+//    GetInfo().addTitleStr("ROCKET");
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) );
+//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(dataLife().armor) );
+//    if (m_Target != nullptr)
+//    {
+//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));
+//    }
+//}
 
-////void RocketBullet::RenderInSpace(const Renderer& render, float scale)
-////{
-////    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
+//void RocketBullet::RenderInSpace(const Renderer& render, float scale)
+//{
+//    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
 
-////    m_EffectDrive->Update();
-////    m_EffectDrive->Render(scale, 0.0f);
-////}
+//    m_EffectDrive->Update();
+//    m_EffectDrive->Render(scale, 0.0f);
+//}
+
+} // namespace view

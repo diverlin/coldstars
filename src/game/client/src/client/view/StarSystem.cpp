@@ -687,6 +687,21 @@ void StarSystem::__render(jeti::Render& render)
     __renderHUD(render);
 }
 
+void StarSystem::mouseInterraction(const glm::vec2&) const
+{
+    for(const SpaceStation* spacestation: m_spacestations)  { /*spacestation->drawCollisionRadius(render);*/ }
+    for(const Satellite* satellite: m_satellites)           { /*satellite->drawCollisionRadius(render);*/ }
+    for(const Ship* ship: m_ships)                          { /*ship->drawCollisionRadius(render);*/ }
+
+    for(const Bullet* bullet: m_bullets)            { /*bullet->drawCollisionRadius(render);*/ }
+    for(const Container* container: m_containers)   { /*container->drawCollisionRadius(render);*/ }
+
+    for(const Star* star: m_stars)                  { /*star->drawCollisionRadius(render);*/ }
+    for(const Planet* planet: m_planets)            { /*planet->drawCollisionRadius(render);*/ }
+    for(const Asteroid* asteroid: m_asteroids)      { /*asteroid->drawCollisionRadius(render);*/ }
+    for(const WormHole* wormHole: m_wormHoles)      { /*wormHole->drawCollisionRadius(render);*/ }
+}
+
 void StarSystem::render(control::StarSystem* starsystem)
 {   
     assert(starsystem);
@@ -742,21 +757,17 @@ void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
         return;
     }
 
-    render.__disable_DEPTH_TEST();
-    render.__enable_BLEND();
-    {
-        for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawCollisionRadius(render); }
-        for(const Satellite* satellite: m_satellites)           { satellite->drawCollisionRadius(render); }
-        for(const Ship* ship: m_ships)                          { ship->drawCollisionRadius(render); }
-        
-        //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->drawCollisionRadius(render); }
-        //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->drawCollisionRadius(render); }
+    for(const SpaceStation* spacestation: m_spacestations)  { spacestation->drawCollisionRadius(render); }
+    for(const Satellite* satellite: m_satellites)           { satellite->drawCollisionRadius(render); }
+    for(const Ship* ship: m_ships)                          { ship->drawCollisionRadius(render); }
 
-        for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
-        for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
-        for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
-        //for(const BackHole* blackhole: m_blackholes)    { blackhole->drawCollisionRadius(render); }
-     }
+    for(const Bullet* bullet: m_bullets)            { bullet->drawCollisionRadius(render); }
+    for(const Container* container: m_containers)   { container->drawCollisionRadius(render); }
+
+    for(const Star* star: m_stars)                  { star->drawCollisionRadius(render); }
+    for(const Planet* planet: m_planets)            { planet->drawCollisionRadius(render); }
+    for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawCollisionRadius(render); }
+    //for(const WormHole* wormHole: m_wormHoles)      { wormHole->drawCollisionRadius(render); }
 }
 
 void StarSystem::__drawAxis(const jeti::Render& render) const

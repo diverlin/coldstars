@@ -21,18 +21,14 @@
 #include <core/spaceobject/SpaceObject.hpp>
 #include <core/common/BulletData.hpp>
 
-//namespace jeti {
-//class DriveEffect;
-//}
-
 namespace descriptor {
 
-class RocketBullet : public SpaceObject {
+class Bullet : public SpaceObject {
 
 public:
-    RocketBullet();
-    ~RocketBullet() = default;
-    RocketBullet(const std::string& data);
+    Bullet();
+    ~Bullet() = default;
+    Bullet(const std::string& data);
     std::string data() const;
 
 private:
@@ -82,14 +78,12 @@ private:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_speed;
         ar & m_damageRate;
         ar & m_owner;
         ar & m_target;
-        //ar & m_DataBullet;
     }
 };
 
@@ -100,7 +94,7 @@ namespace control {
 class RocketBullet : public SpaceObject
 {
 public:
-    RocketBullet(descriptor::RocketBullet*, model::RocketBullet*);
+    RocketBullet(descriptor::Bullet*, model::RocketBullet*);
     virtual ~RocketBullet();
 
     void CreateDriveComplexTextureDependedStuff();
@@ -114,11 +108,11 @@ public:
     int damage() const { return model()->damage(); }
     //void RenderInSpace(const Renderer&, float);
 
-    descriptor::RocketBullet* descriptor() const { return m_descriptor_rocket; }
+    descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
     model::RocketBullet* model() const { return m_model_rocket; }
 
 private:
-    descriptor::RocketBullet* m_descriptor_rocket = nullptr;
+    descriptor::Bullet* m_descriptor_rocket = nullptr;
     model::RocketBullet* m_model_rocket = nullptr;
 
     model::SpaceObject* m_target = nullptr;

@@ -42,7 +42,7 @@
 #include <client/effects/lazerTrace.hpp>
 #include <client/text/VerticalFlowText.hpp>
 
-#include <core/spaceobject/RocketBullet.hpp>
+#include <core/spaceobject/Bullet.hpp>
 #include <core/spaceobject/Container.hpp>
 #include <core/spaceobject/Star.hpp>
 #include <core/spaceobject/Planet.hpp>
