@@ -36,7 +36,7 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
-    control::SpaceStation* spacestation() const { return m_spacestation; }
+    control::SpaceStation* control() const { return m_spacestation; }
 
 private:
     control::SpaceStation* m_spacestation = nullptr;

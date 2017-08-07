@@ -36,7 +36,7 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
-    control::Satellite* satellite() const { return m_satellite; }
+    control::Satellite* control() const { return m_satellite; }
 
 private:
     control::Satellite* m_satellite = nullptr;

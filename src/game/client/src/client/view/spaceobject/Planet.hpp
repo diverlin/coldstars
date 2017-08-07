@@ -35,11 +35,10 @@ public:
 
     void draw(const jeti::Render&) const override final;
 
-//    model::Planet* model() const { return m_model_planet; }
-//    descriptor::Planet* descriptor() const { return m_descriptor_planet; }
+    control::Planet* control() const { return m_control; }
 
 private:
-    control::Planet* m_planet = nullptr;
+    control::Planet* m_control = nullptr;
     //virtual void UpdateInfo() override final;
 }; 
 

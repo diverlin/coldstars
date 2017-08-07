@@ -42,9 +42,10 @@ public:
 
     //void RenderInSpace(const Renderer&, float);
     void draw(const jeti::Render& render) const override final;
+    control::Bullet* control() { return m_control; }
 
 private:
-    control::Bullet* m_bullet = nullptr;
+    control::Bullet* m_control = nullptr;
     jeti::particlesystem::Jet* m_driveJet = nullptr;
 
     //virtual void UpdateInfo() override final;

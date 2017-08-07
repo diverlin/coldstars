@@ -31,7 +31,7 @@ namespace view {
 Planet::Planet(control::Planet* planet)
     :
       Base(planet)
-    , m_planet(planet)
+    , m_control(planet)
 {
     setOrientation(planet);
 }

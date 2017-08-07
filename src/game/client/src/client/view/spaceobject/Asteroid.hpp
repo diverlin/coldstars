@@ -32,13 +32,12 @@ public:
     Asteroid(control::Asteroid*);
     virtual ~Asteroid() override final;
 
-//    model::Asteroid* model() const  { return m_asteroid->model(); }
-//    descriptor::Asteroid* descriptor() const  { return m_asteroid->descriptor(); }
+    control::Asteroid* control() const  { return m_control; }
 
     void draw(const jeti::Render& render) const;
 
 private:
-    control::Asteroid* m_asteroid = nullptr;
+    control::Asteroid* m_control = nullptr;
     //        virtual void UpdateInfo() override final;
 }; 
 

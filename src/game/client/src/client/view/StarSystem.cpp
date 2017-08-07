@@ -193,7 +193,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         glm::vec3 wc = m_render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
         m_guiDemo->setMousePosWorldCoord(wc.x, wc.y);
 
-        mouseInterraction(glm::vec2(mouse_pos.x, mouse_pos.y));
+        m_cursorBaseView = mouseInterraction(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
     }
 }
 
@@ -221,7 +221,7 @@ bool
 StarSystem::__addIfVisible(control::Star* star)
 {
     assert(star);
-    if (!__isObjectOnScreen(star->position(), star->size())) {
+    if (!__isObjectOnScreen(star)) {
         return false;
     }
 
@@ -242,7 +242,7 @@ bool
 StarSystem::__addIfVisible(control::Planet* planet)
 {
     assert(planet);
-    if (!__isObjectOnScreen(planet->position(), planet->size())) {
+    if (!__isObjectOnScreen(planet)) {
         return false;
     }
 
@@ -263,7 +263,7 @@ bool
 StarSystem::__addIfVisible(control::Asteroid* asteroid)
 {
     assert(asteroid);
-    if (!__isObjectOnScreen(asteroid->position(), asteroid->size())) {
+    if (!__isObjectOnScreen(asteroid)) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(asteroid->position(), m_camera.position(), m_camera.radius())) {
@@ -288,7 +288,7 @@ bool
 StarSystem::__addIfVisible(control::Ship* ship)
 {
     assert(ship);
-    if (!__isObjectOnScreen(ship->position(), ship->size())) {
+    if (!__isObjectOnScreen(ship)) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
@@ -312,7 +312,7 @@ bool
 StarSystem::__addIfVisible(control::SpaceStation* spacestation)
 {
     assert(spacestation);
-    if (!__isObjectOnScreen(spacestation->position(), spacestation->size())) {
+    if (!__isObjectOnScreen(spacestation)) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(spacestation->position(), m_camera.position(), m_camera.radius())) {
@@ -335,7 +335,7 @@ bool
 StarSystem::__addIfVisible(control::Satellite* satellite)
 {
     assert(satellite);
-    if (!__isObjectOnScreen(satellite->position(), satellite->size())) {
+    if (!__isObjectOnScreen(satellite)) {
         return false;
     }
     if (!ceti::isPointInObserverRadius(satellite->position(), m_camera.position(), m_camera.radius())) {
@@ -644,6 +644,10 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         //container->update();
         container->draw(render);
     }
+
+    if (m_cursorBaseView) {
+        m_cursorBaseView->drawAxis(m_render);
+    }
 }
 
 
@@ -702,63 +706,57 @@ void StarSystem::__render(jeti::Render& render)
     __renderHUD(render);
 }
 
-void StarSystem::mouseInterraction(const glm::vec2&) const
+Base* StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 {
-    assert(false); // todo: make check of mouse interraction
-
-    Base* base = nullptr;
-
     for(SpaceStation* spacestation: m_spacestations) {
-        if(__isObjectOnScreen(spacestation)) {
-            base = spacestation;
+        if(__isPointInsideObject(mouse_pos, spacestation->control())) {
+            return spacestation;
         }
     }
     for(Satellite* satellite: m_satellites) {
-        if(__isObjectOnScreen(satellite)) {
-            base = satellite;
+        if(__isPointInsideObject(mouse_pos, satellite->control())) {
+            return satellite;
         }
     }
     for(Ship* ship: m_ships) {
-        if(__isObjectOnScreen(ship)) {
-            base = ship;
+        if(__isPointInsideObject(mouse_pos, ship->control())) {
+            return ship;
         }
     }
 
     for(Bullet* bullet: m_bullets) {
-        if(__isObjectOnScreen(bullet)) {
-            base = bullet;
+        if(__isPointInsideObject(mouse_pos, bullet->control())) {
+            return bullet;
         }
     }
 //    for(Container* container: m_containers) {
-//        if(__isObjectOnScreen(container)) {
-//            base = container;
+//        if(__isPointInsideObject(mouse_pos, container)) {
+//            return container;
 //        }
 //    }
 
     for(Star* star: m_stars) {
-        if(__isObjectOnScreen(star)) {
-            base = star;
+        if(__isPointInsideObject(mouse_pos, star->star())) {
+            return star;
         }
     }
     for(Planet* planet: m_planets) {
-        if(__isObjectOnScreen(planet)) {
-            base = planet;
+        if(__isPointInsideObject(mouse_pos, planet->control())) {
+            return planet;
         }
     }
     for(Asteroid* asteroid: m_asteroids) {
-        if(__isObjectOnScreen(asteroid)) {
-            base = asteroid;
+        if(__isPointInsideObject(mouse_pos, asteroid->control())) {
+            return asteroid;
         }
     }
     for(WormHole* wormhole: m_wormholes) {
-        if(__isObjectOnScreen(wormhole)) {
-            base = wormhole;
+        if(__isPointInsideObject(mouse_pos, wormhole->control())) {
+            return wormhole;
         }
     }
 
-    if (base) {
-        base->drawAxis(m_render);
-    }
+    return nullptr;
 }
 
 void StarSystem::render(control::StarSystem* starsystem)
@@ -846,13 +844,6 @@ void StarSystem::__drawAxis(const jeti::Render& render) const
     for(const Planet* planet: m_planets)            { planet->drawAxis(render); }
     for(const Asteroid* asteroid: m_asteroids)      { asteroid->drawAxis(render); }
     for(const WormHole* wormHole: m_wormholes)    { wormHole->drawAxis(render); }
-}
-
-bool
-StarSystem::__isObjectOnScreen(const glm::vec3& pos, const glm::vec3& size)
-{
-    glm::vec3 position_screen_coord = m_render.toScreenCoord(pos);
-    return isObjectOnScreen(position_screen_coord, size, m_render.size(), m_render.scaleBase());
 }
 
 
@@ -1069,10 +1060,18 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
 }
 
 bool
-StarSystem::__isObjectOnScreen(Base* object) const
+StarSystem::__isObjectOnScreen(ceti::control::Orientation* orientation) const
 {
-    glm::vec3 screen_coord(m_render.toScreenCoord(object->position()));
-    return isObjectOnScreen(screen_coord, object->size(), m_render.size(), m_render.scaleBase());
+    m_screenCoord = m_render.toScreenCoord(orientation->position());
+    return isObjectOnScreen(m_screenCoord, orientation->size(), m_render.size(), m_render.scaleBase());
+}
+
+bool StarSystem::__isPointInsideObject(const glm::vec3& p, ceti::control::Orientation* orientation) const {
+    glm::vec3 diff(orientation->position() - p);
+    if (glm::length(diff) < orientation->collisionRadius()) {
+        return true;
+    }
+    return false;
 }
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
