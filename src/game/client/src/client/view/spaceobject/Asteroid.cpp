@@ -28,7 +28,7 @@ namespace view {
 Asteroid::Asteroid(control::Asteroid* asteroid)
     :
       Base(asteroid)
-    , m_asteroid(asteroid)
+    , m_control(asteroid)
 {   
     setOrientation(asteroid);
 }

@@ -29,7 +29,7 @@ namespace view {
 WormHole::WormHole(control::WormHole* wormHole)
     :
       Base(wormHole)
-    , m_wormHole(wormHole)
+    , m_control(wormHole)
 {
     setOrientation(wormHole);
 }

@@ -29,6 +29,12 @@
 
 class StarSystemDrawable;
 
+namespace ceti {
+namespace control {
+class Orientation;
+} // namespace control
+} // namespace ceti
+
 namespace gui {
 class Demo;
 } // naemspace gui
@@ -45,11 +51,12 @@ class Damage;
 
 namespace control {
 class Material;
-} // namespace control
+} // namespace controlobject
 
 } // namespace jeti
 
 namespace control {
+class Base;
 class StarSystem;
 class Star;
 class Planet;
@@ -128,7 +135,7 @@ public:
     StarSystem(jeti::Render&);
     ~StarSystem();
 
-    void mouseInterraction(const glm::vec2&) const;
+    Base* mouseInterraction(const glm::vec3&) const;
     void render(control::StarSystem*);
 
 private:
@@ -153,6 +160,8 @@ private:
     std::vector<Bullet*> m_bullets;
 
     Cache m_cache;
+    mutable glm::vec3 m_screenCoord;
+    mutable Base* m_cursorBaseView = nullptr;
     bool m_debug = true;
 
     Draw m_draw;
@@ -208,8 +217,8 @@ private:
 
     void __clear();
 
-    bool __isObjectOnScreen(const glm::vec3&, const glm::vec3&);
-    bool __isObjectOnScreen2(const glm::vec3&, const glm::vec3&);
+    bool __isObjectOnScreen(ceti::control::Orientation*) const;
+    bool __isPointInsideObject(const glm::vec3&, ceti::control::Orientation*) const;
 
     void __renderBackground(jeti::Render& render) const;
     void __renderStarPostEffect(jeti::Render& render) const;
@@ -219,7 +228,6 @@ private:
     void __renderExperiment(jeti::Render& render) const;
 
 
-    bool __isObjectOnScreen(Base*) const;
     void __render_DEPRECATED(jeti::Render&);
 };
 

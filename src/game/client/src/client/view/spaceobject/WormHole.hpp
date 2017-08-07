@@ -39,9 +39,10 @@ public:
 
 //    void UpdateInSpace(int, bool);
     void draw(const jeti::Render& render) const override final;
+    control::WormHole* control() const { return m_control; }
 
 private:
-    control::WormHole* m_wormHole = nullptr;
+    control::WormHole* m_control = nullptr;
 //    ShockWaveEffect* m_shockwave;
 
     //        virtual void UpdateInfo() override final;

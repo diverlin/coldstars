@@ -30,7 +30,7 @@ namespace view {
 Bullet::Bullet(control::Bullet* bullet)
     :
       Base(bullet)
-    , m_bullet(bullet)
+    , m_control(bullet)
 {
     setOrientation(bullet);
 
