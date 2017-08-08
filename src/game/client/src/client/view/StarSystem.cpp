@@ -173,7 +173,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     {
         m_guiDemo->updateFps(client::global::get().render().fps());
-        m_player->cursor().updateMouseStuff(m_render);
+        m_player->cursor().updateMouseInput(m_render);
 
         const glm::vec3 screen_coord = m_player->cursor().mouseData().screen_coord;
         const glm::vec3 world_coord = m_player->cursor().mouseData().world_coord;
@@ -182,9 +182,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         m_guiDemo->setMousePosWorldCoord(world_coord.x, world_coord.y);
 
         Base* view = mouseInterraction(screen_coord);
-        if (view) {
-            m_player->cursor().focusOn(view);
-        }
+        m_player->update(m_render, view);
     }
 }
 
@@ -713,7 +711,6 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
             return ship;
         }
     }
-
     for(Bullet* bullet: m_bullets) {
         if(__isPointInsideObject(mouse_pos, bullet->control())) {
             return bullet;
@@ -724,7 +721,6 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 //            return container;
 //        }
 //    }
-
     for(Star* star: m_stars) {
         if(__isPointInsideObject(mouse_pos, star->star())) {
             return star;

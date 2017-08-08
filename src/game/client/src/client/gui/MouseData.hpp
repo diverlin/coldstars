@@ -22,13 +22,12 @@
 
 struct MouseData
 {
+    enum Event { None, LeftButtonClick, RightButtonClick };
+
     glm::vec3 screen_coord;
     glm::vec3 world_coord;
 
-    bool left_click;
-    bool right_click;
-    bool left_press;
-    bool right_press;
+    Event event = None;
 };
 
 

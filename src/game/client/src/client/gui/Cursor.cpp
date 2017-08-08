@@ -88,64 +88,46 @@ Cursor::~Cursor()
 
 void Cursor::__reset()
 {
-    m_dataMouse.left_click  = false;
-    m_dataMouse.right_click = false;
+    m_dataMouse.event  = MouseData::None;
     
     m_focusedView = nullptr;
     m_focusedGuiElement = nullptr;
 }
 
-void Cursor::update(Player* player)
+void Cursor::update(Player* player, const jeti::Render& render)
 {
+    m_box.setCenter(m_dataMouse.screen_coord.x, m_dataMouse.screen_coord.y);
+
     if (m_focusedView) {
         //if (!m_focusedView->isAlive()) {
         //    m_focusedView = nullptr;
         //}
     }
-        
-    m_box.setCenter(m_dataMouse.screen_coord.x, m_dataMouse.screen_coord.y);
-        
-    if (m_dataMouse.left_click) {
-        if (m_focusedGuiElement)
-        {
-            #if GUI_LOG_ENABLED == 1
-            Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
-            #endif
-        
+
+    switch(m_dataMouse.event) {
+    case MouseData::LeftButtonClick: {
+        if (m_focusedGuiElement) {
             m_focusedGuiElement->OnPressEventMBL(player);
-        }
-        
-        if (m_focusedView)
-        {
-            //..
-        }        
+        }     
+        break;
     }
-    else if (m_dataMouse.right_click == true)
-    {
-        if (m_focusedGuiElement != nullptr)
-        {
-            #if GUI_LOG_ENABLED == 1
-            Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
-            #endif
-        
+    case MouseData::RightButtonClick: {
+        if (m_focusedGuiElement) {
             m_focusedGuiElement->OnPressEventMBR(player);
-        }
-                
-        if (m_focusedView)
-        {
-            //..
-        }
-        
+        }    
+        break;
     }
-               
+    }
 }
 
-void Cursor::updateMouseStuff(const jeti::Render& render)
+void Cursor::updateMouseInput(const jeti::Render& render)
 {    
     __reset();
-
-    m_dataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-    m_dataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        m_dataMouse.event = MouseData::LeftButtonClick;
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+        m_dataMouse.event = MouseData::RightButtonClick;
+    }
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
     mouse_pos.y = render.height()-mouse_pos.y;
