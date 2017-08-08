@@ -83,24 +83,9 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
-    , m_player(new Player)
     , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
     , m_psDamage(jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
-{
-    m_debug = false;
-    if (m_debug) {
-        m_draw.setStar(false);
-        m_draw.setStars(false);
-        m_draw.setNebulas(false);
-        m_draw.setSpaceobjects(false);
-        m_draw.setCollisionRadius(false);
-        m_draw.setAxis(false);
-        m_draw.setHud(false);
-        m_draw.setExperimental(true);
-    } else {
-        m_draw.setExperimental(false);
-    }
-}
+{}
 
 StarSystem::~StarSystem()
 {}                                    
@@ -572,32 +557,32 @@ void StarSystem::__add(Satellite* view)
 //}
 
 void StarSystem::__renderBackground(jeti::Render& render) const {
-    if (!m_draw.background()) {
+    if (!m_player->show().background()) {
         return;
     }
 
     // projection
     render.setOrthogonalProjection(0.2f);
 
-    if (m_draw.background_fbo()) {
+    if (m_player->show().background_fbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
-    if (m_draw.nebulas()) {
+    if (m_player->show().nebulas()) {
         m_distantNebulas->update(render.camera()->position());
         m_distantNebulas->draw(render);
     }
-    if (m_draw.stars()) {
+    if (m_player->show().stars()) {
         m_distantStars->update(render.camera()->position());
         m_distantStars->draw(render);
     }
-    if (m_draw.background_fbo()) {
+    if (m_player->show().background_fbo()) {
         render.fboBackGround().deactivate();
     }
 }
 
 void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
-    if (!m_draw.star()) {
+    if (!m_player->show().star()) {
         return;
     }
 
@@ -608,7 +593,7 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
 }
 
 void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
-    if (!m_draw.spaceobjects()) {
+    if (!m_player->show().spaceobjects()) {
         return;
     }
 
@@ -656,23 +641,23 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
 
 
 void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
-    if (!m_draw.spaceobjects_meta()) {
+    if (!m_player->show().spaceobjects_meta()) {
         return;
     }
 
     // projection
     render.setOrthogonalProjection();
 
-    if (m_draw.collision_radius()) {
+    if (m_player->show().collision_radius()) {
         __drawCollisionRadius(render);
     }
-    if (m_draw.axis()) {
+    if (m_player->show().axis()) {
         __drawAxis(render);
     }
 }
 
 void StarSystem::__renderHUD(jeti::Render& render) const {
-    if (!m_draw.hud()) {
+    if (!m_player->show().hud()) {
         return;
     }
 
@@ -683,7 +668,7 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
 }
 
 void StarSystem::__renderExperiment(jeti::Render& render) const {
-    if (!m_draw.experimental()) {
+    if (!m_player->show().experimental()) {
         return;
     }
 

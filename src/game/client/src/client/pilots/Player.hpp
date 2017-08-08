@@ -34,6 +34,19 @@ namespace control {
 class StarSystem;
 } // namespace control
 
+
+namespace view {
+class Star;
+class Planet;
+class Asteroid;
+class WormHole;
+class SpaceStation;
+class Satellite;
+class Ship;
+class Container;
+class Bullet;
+} // namespace view
+
 class Star;
 class Planet;
 class BlackHole;
@@ -75,7 +88,7 @@ public:
     void setStarSystem(control::StarSystem* starsystem) { m_starsystem = starsystem; }
     control::StarSystem* starSystem() { return m_starsystem; }
 
-    Show& GetShow() { return m_show; }
+    Show& show() { return m_show; }
 
     Npc* GetNpc() const { return m_npc; }
     gui::Cursor& cursor() { return m_cursor; }
@@ -90,10 +103,6 @@ public:
 
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
-
-    //        void Save(boost::property_tree::ptree&) const;
-    //        void Load(const boost::property_tree::ptree&);
-    //        void Resolve();
 
 private:
     Npc* m_npc = nullptr;
@@ -130,22 +139,17 @@ private:
     void SessionInKosmoport();
     void SessionInNatureLand();
 
-    bool MouseInteractionWithSpaceObjectsInSpace(const MouseData&);
-    bool MouseInteractionWithRockets(const MouseData&);
-    bool MouseInteractionWithContainers(const MouseData&);
-    bool MouseInteractionWithSatellites(const MouseData&);
-    bool MouseInteractionWithAsteroids(const MouseData&);
-    bool MouseInteractionWithShips(const MouseData&);
-    bool MouseInteractionWithBlackHoles(const MouseData&);
-    bool MouseInteractionWithSpaceStations(const MouseData&);
-    bool MouseInteractionWithPlanets(const MouseData&);
-    bool MouseInteractionWithStars(const MouseData&);
-    void MouseNavigation(const MouseData&) const;
-
-    //        UnresolvedDataPlayer data_unresolved_player;
-    //        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    //        void LoadData(const boost::property_tree::ptree&);
-    //        void ResolveData();
+    void __manageClickEvent();
+    void __clickOn(view::Bullet*);
+    void __clickOn(view::Container*);
+    void __clickOn(view::Satellite*);
+    void __clickOn(view::Asteroid*);
+    void __clickOn(view::Ship*);
+    void __clickOn(view::WormHole*);
+    void __clickOn(view::SpaceStation*);
+    void __clickOn(view::Planet*);
+    void __clickOn(view::Star*);
+    void __navigate() const;
 
     friend class UserInput;
 };
