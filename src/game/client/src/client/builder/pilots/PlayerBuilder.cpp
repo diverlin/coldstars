@@ -50,7 +50,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(int_t id) const
     }
 
     try {
-        player = new Player(id);
+        player = new Player();
     }
     catch(std::bad_alloc) {
         //Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");

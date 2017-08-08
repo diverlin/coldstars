@@ -27,7 +27,7 @@
 #include <vector>
 #include <map>
 
-class StarSystemDrawable;
+class Player;
 
 namespace ceti {
 namespace control {
@@ -125,7 +125,7 @@ class StarSystem
         bool m_stars = true;
         bool m_nebulas = false;
         bool m_spaceobjects = true;
-        bool m_collision_radius = true;
+        bool m_collision_radius = false;
         bool m_axis = false;
         bool m_hud = true;
         bool m_experimental = true;
@@ -159,9 +159,11 @@ private:
     std::vector<Satellite*> m_satellites;
     std::vector<Bullet*> m_bullets;
 
+    mutable glm::vec3 m_tmpScreenCoord;
+    Player* m_player = nullptr;
+
     Cache m_cache;
-    mutable glm::vec3 m_screenCoord;
-    mutable Base* m_cursorBaseView = nullptr;
+
     bool m_debug = true;
 
     Draw m_draw;

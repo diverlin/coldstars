@@ -16,20 +16,19 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MOUSEDATA_HPP
-#define MOUSEDATA_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
 struct MouseData
 {
-          glm::vec2 pos_screencoord;
-          glm::vec2 pos_worldcoord;
-          
-           bool left_click;
-           bool right_click;
-           bool left_press;
-           bool right_press;           
+    glm::vec3 screen_coord;
+    glm::vec3 world_coord;
+
+    bool left_click;
+    bool right_click;
+    bool left_press;
+    bool right_press;
 };
 
-#endif 
+

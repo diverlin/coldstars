@@ -66,6 +66,7 @@
 #include <client/gui/info/Renderer.hpp>
 #include <client/gui/GuiDemo.hpp>
 #include <client/resources/Utils.hpp>
+#include <client/pilots/Player.hpp>
 
 namespace  {
 std::string join(size_t int1, size_t int2) {
@@ -82,6 +83,7 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
+    , m_player(new Player)
     , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
     , m_psDamage(jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {
@@ -186,14 +188,18 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     {
         m_guiDemo->updateFps(client::global::get().render().fps());
+        m_player->cursor().updateMouseStuff(m_render);
 
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
-        mouse_pos.y = m_render.height()-mouse_pos.y;
-        m_guiDemo->setMousePosScreenCoord(mouse_pos.x, mouse_pos.y);
-        glm::vec3 wc = m_render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
-        m_guiDemo->setMousePosWorldCoord(wc.x, wc.y);
+        const glm::vec3 screen_coord = m_player->cursor().mouseData().screen_coord;
+        const glm::vec3 world_coord = m_player->cursor().mouseData().world_coord;
 
-        m_cursorBaseView = mouseInterraction(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
+        m_guiDemo->setMousePosScreenCoord(screen_coord.x, screen_coord.y);
+        m_guiDemo->setMousePosWorldCoord(world_coord.x, world_coord.y);
+
+        Base* view = mouseInterraction(screen_coord);
+        if (view) {
+            m_player->cursor().focusOn(view);
+        }
     }
 }
 
@@ -645,9 +651,7 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         container->draw(render);
     }
 
-    if (m_cursorBaseView) {
-        m_cursorBaseView->drawAxis(m_render);
-    }
+    m_player->cursor().renderFocusedObjectStuff(render);
 }
 
 
@@ -706,7 +710,8 @@ void StarSystem::__render(jeti::Render& render)
     __renderHUD(render);
 }
 
-Base* StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
+Base*
+StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 {
     for(SpaceStation* spacestation: m_spacestations) {
         if(__isPointInsideObject(mouse_pos, spacestation->control())) {
@@ -1062,13 +1067,14 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
 bool
 StarSystem::__isObjectOnScreen(ceti::control::Orientation* orientation) const
 {
-    m_screenCoord = m_render.toScreenCoord(orientation->position());
-    return isObjectOnScreen(m_screenCoord, orientation->size(), m_render.size(), m_render.scaleBase());
+    m_render.toScreenCoord(orientation->position(), m_tmpScreenCoord);
+    return isObjectOnScreen(m_tmpScreenCoord, orientation->size(), m_render.size(), m_render.scaleBase());
 }
 
 bool StarSystem::__isPointInsideObject(const glm::vec3& p, ceti::control::Orientation* orientation) const {
-    glm::vec3 diff(orientation->position() - p);
-    if (glm::length(diff) < orientation->collisionRadius()) {
+    m_render.toScreenCoord(orientation->position(), m_tmpScreenCoord);
+    glm::vec3 diff(m_tmpScreenCoord-p);
+    if (glm::length(diff) < orientation->collisionRadius()/m_render.scaleBase()) {
         return true;
     }
     return false;

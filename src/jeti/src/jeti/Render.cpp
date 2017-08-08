@@ -185,9 +185,9 @@ Render::toWorldCoord(const glm::vec3& screen_coord) const {
     return world_coord;
 }
 
-glm::vec3
-Render::toScreenCoord(const glm::vec3& world_coord) const {
-    glm::vec3 screen_coord(world_coord);
+void
+Render::toScreenCoord(const glm::vec3& world_coord, glm::vec3& screen_coord) const {
+    screen_coord = world_coord;
 
     screen_coord -= m_camera->position();
 
@@ -195,8 +195,6 @@ Render::toScreenCoord(const glm::vec3& world_coord) const {
 
     screen_coord.x += m_size.x/2;
     screen_coord.y += m_size.y/2;
-
-    return screen_coord;
 }
 
 

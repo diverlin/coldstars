@@ -64,10 +64,10 @@ class VerticalFlowText;
 //};
 
 
-class Player /*: public Base*/
+class Player
 {
 public:
-    Player(int);
+    Player();
     ~Player();
 
     virtual void putChildrenToGarbage() const {}
@@ -78,7 +78,7 @@ public:
     Show& GetShow() { return m_show; }
 
     Npc* GetNpc() const { return m_npc; }
-    Cursor& cursor() { return m_cursor; }
+    gui::Cursor& cursor() { return m_cursor; }
 
     void BindNpc(Npc*);
 
@@ -98,7 +98,7 @@ public:
 private:
     Npc* m_npc = nullptr;
 
-    Cursor m_cursor;
+    gui::Cursor m_cursor;
 
     Show m_show;
     control::StarSystem* m_starsystem = nullptr;
