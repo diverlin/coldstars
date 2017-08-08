@@ -139,19 +139,19 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             
         case sf::Keyboard::R: // RADAR
         {
-            player->GetShow().InverseRangeRadar();
+            //player->show().InverseRangeRadar();
             break;
         }
 
         case sf::Keyboard::O: // Orbits
         {
-            player->GetShow().InverseAllOrbits();
+            //player->show().InverseAllOrbits();
             break;
         }
 
         case sf::Keyboard::P: // Path
         {
-            player->GetShow().InverseAllPath();
+            //player->show().InverseAllPath();
             break;
         }
 

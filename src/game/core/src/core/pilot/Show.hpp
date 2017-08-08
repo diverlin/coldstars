@@ -17,47 +17,39 @@
 */
 
 
-#ifndef SHOW_HPP
-#define SHOW_HPP
+#pragma once
 
+class Show {
+public:
+    bool background() const { return (m_stars || m_nebulas); }
+    bool background_fbo() const { return m_star; }
+    bool star() const { return m_star; }
+    bool stars() const { return m_stars; }
+    bool nebulas() const { return m_nebulas; }
+    bool spaceobjects() const { return m_spaceobjects; }
+    bool spaceobjects_meta() const { return (collision_radius() || axis()); }
+    bool collision_radius() const { return (m_spaceobjects && m_collision_radius); }
+    bool axis() const { return (m_spaceobjects && m_axis); }
+    bool hud() const { return m_hud; }
+    bool experimental() const { return m_experimental; }
 
-class Show
-{
-    private:
-        bool m_AllPath;
-        bool m_AllOrbits;
-        
-        bool m_InfoShips;                
-        bool m_RangeRadar;
-        bool m_CollisionRadius;
-    
-    public:
-        Show()
-        :          
-        m_AllPath(false),
-        m_AllOrbits(false),                
-        m_InfoShips(false),             
-        m_RangeRadar(false),
-        m_CollisionRadius(false)
-        {}
-                
-        ~Show() {}
-                        
-        bool GetAllOrbits()    const { return m_AllOrbits; }
-        bool GetAllPath()      const { return m_AllPath; }
-                
-        //bool GetInfoShips()     const { return m_InfoShips; }
-        bool GetRangeRadar()     const { return m_RangeRadar; }
-        bool collisionRadius()     const { return m_CollisionRadius; }
-                        
-        void InverseAllPath()         { m_AllPath = !m_AllPath; }
-        void InverseAllOrbits()     { m_AllOrbits = !m_AllOrbits; }
-        void InverseRangeRadar()     { m_RangeRadar = !m_RangeRadar; }
-        void InverseCollisionRadius()     { m_CollisionRadius = !m_CollisionRadius; }
+    void setStar(bool star) { m_star = star; }
+    void setStars(bool stars) { m_stars = stars; }
+    void setNebulas(bool nebulas) { m_nebulas = nebulas; }
+    void setSpaceobjects(bool spaceobjects) { m_spaceobjects = spaceobjects; }
+    void setCollisionRadius(bool collision_radius) { m_collision_radius = collision_radius; }
+    void setAxis(bool axis) { m_axis = axis; }
+    void setHud(bool hud) { m_hud = hud; }
+    void setExperimental(bool experimental) { m_experimental = experimental; }
+
+private:
+    bool m_star = true;
+    bool m_stars = true;
+    bool m_nebulas = false;
+    bool m_spaceobjects = true;
+    bool m_collision_radius = false;
+    bool m_axis = false;
+    bool m_hud = true;
+    bool m_experimental = true;
 };
 
-#endif 
-
-
-
-        

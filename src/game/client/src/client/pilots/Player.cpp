@@ -42,15 +42,9 @@
 #include <client/effects/lazerTrace.hpp>
 #include <client/text/VerticalFlowText.hpp>
 
-#include <core/spaceobject/Bullet.hpp>
-#include <core/spaceobject/Container.hpp>
-#include <core/spaceobject/Star.hpp>
-#include <core/spaceobject/Planet.hpp>
-#include <core/spaceobject/WormHole.hpp>
-#include <core/spaceobject/Asteroid.hpp>
-#include <core/spaceobject/SpaceStation.hpp>
-#include <core/spaceobject/Satellite.hpp>
-#include <core/spaceobject/Ship.hpp>
+#include <core/spaceobject/ALL>
+
+#include <client/view/spaceobject/ALL>
 
 #include <core/pilot/Npc.hpp>
 #include <core/slot/ItemSlot.hpp>
@@ -74,6 +68,21 @@ Player::Player()
 //    setTypeId(entity::Type::PLAYER);
     
     GuiManager::Instance().SetPlayer(this);
+
+    bool debug = false;
+    if (debug) {
+        m_show.setStar(false);
+        m_show.setStars(false);
+        m_show.setNebulas(false);
+        m_show.setSpaceobjects(false);
+        m_show.setCollisionRadius(false);
+        m_show.setAxis(false);
+        m_show.setHud(false);
+        m_show.setExperimental(true);
+    } else {
+        m_show.setExperimental(false);
+    }
+
 }
     
 Player::~Player()
@@ -328,11 +337,10 @@ void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsy
                         //rocket->RenderInSpace(render, 1/scale);
                     }
                 }
-                if (m_show.collisionRadius() == true)
-                {
-                    RenderAxis(render);
-                    RenderCollisionRadius(render);
-                }
+//                if (m_show.collisionRadius()) {
+//                    RenderAxis(render);
+//                    RenderCollisionRadius(render);
+//                }
             }
             render.deactivateFbo(3);
         }
@@ -438,386 +446,240 @@ void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, boo
 
     RenderInSpace_NEW(renderer, starsystem);
 
-    //resizeGl(w*scale, h*scale); 
-    //enable_BLEND();   
-    {           
-        if (turn_ended == true)
-        {
-            if (forceDraw_orbits == true)
-            {
-                //starsystem->DrawOrbits(renderer);
-            }
-            
-            if (forceDraw_path == true)
-            {
-                //starsystem->DrawPath();
-            }
-            
-//            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
-//            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
-//            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
-        
-            if (m_show.GetRangeRadar() == true)
-            {
-                //npc->vehicle()->RenderRadarRange();
-            }
-        
-//            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) && (npc->vehicle()->grappleSlot()->isSelected() == true) )
-//            {
-//                //npc->vehicle()->RenderGrappleRange();
-//            }
+
+    if (turn_ended) {
+        if (forceDraw_orbits) {
+            //starsystem->DrawOrbits(renderer);
         }
-    
-        //m_cursor.RenderFocusedObjectStuff();
+
+        if (forceDraw_path) {
+            //starsystem->DrawPath();
+        }
+
+//        npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+//        npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+//        npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
+        
+//        if (m_show.GetRangeRadar()) {
+//            //npc->vehicle()->RenderRadarRange();
+//        }
+        
+//        if ( (npc->vehicle()->grappleSlot()->item()) && (npc->vehicle()->grappleSlot()->isSelected()) ) {
+//            //npc->vehicle()->RenderGrappleRange();
+//        }
     }
-    //disable_BLEND();
-    //resizeGl(w, h); 
+    
+    //m_cursor.RenderFocusedObjectStuff();
 } 
 
-bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse) 
+void Player::__manageClickEvent()
 {
-    /* NOTE: the intersection must be checked in order from small objects to huge */    
-    if (MouseInteractionWithRockets(data_mouse)) { return true; }
-    if (MouseInteractionWithContainers(data_mouse)) { return true; }
-    if (MouseInteractionWithSatellites(data_mouse)) { return true; }
-    if (MouseInteractionWithAsteroids(data_mouse)) { return true; }
-    if (MouseInteractionWithShips(data_mouse)) { return true; }    
-    if (MouseInteractionWithBlackHoles(data_mouse)) { return true; }    
-    if (MouseInteractionWithSpaceStations(data_mouse)) { return true; }    
-    if (MouseInteractionWithPlanets(data_mouse)) { return true; }    
-    if (MouseInteractionWithStars(data_mouse)) { return true; }  
-    
-    return false;  
-}
-
-bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
-{
-    for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
-    { 
-        assert(false);
-//        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->position(); // shortcut
-//        float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
-//        if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
-       
-////            if (data_mouse.left_click == true)
-////            {
-////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-////                {
-////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
-////                }
-////                else
-////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
-////                    npc->vehicle()->GetComplexDrive().UpdatePath();
-////                }
-////            }
-                
-//            return true;
+    if (view::Base* base = m_cursor.focusedView()) {
+        switch (base->type()) {
+        case entity::Type::BULLET: {
+            __clickOn(static_cast<view::Bullet*>(base));
+            break;
+        }
+//        case entity::Type::CONTAINER: {
+//            clickOn(static_cast<view::Container*>(base));
+//            break;
 //        }
-    }
-        
-    return false;
-}
-
-bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
-{
-    for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
-    { 
-        assert(false);
-//        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->position(); // shortcut
-//        float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
-//        if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
-                            
-//            if (data_mouse.left_click == true)
-//            {
-//                //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
-//            }
-            
-//            if (data_mouse.right_click == true)
-//            {
-////                if (npc->vehicle()->properties().grab_radius > 0)
-////                {
-////                    if (npc->vehicle()->grappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
-////                    {
-////                        if (npc->vehicle()->grappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
-////                        {
-////                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
-////                        }
-////                        else
-////                        {
-////                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
-////                        }
-////                    }
-////                }
-//            }
-                
-//            return true;
+        case entity::Type::SATELLITE: {
+            __clickOn(static_cast<view::Satellite*>(base));
+            break;
+        }
+        case entity::Type::ASTEROID: {
+            __clickOn(static_cast<view::Asteroid*>(base));
+            break;
+        }
+        case entity::Type::SHIP: {
+            __clickOn(static_cast<view::Ship*>(base));
+            break;
+        }
+//        case entity::Type::WORMHOLE: {
+//            clickOn(static_cast<view::WormHole*>(base));
+//            break;
 //        }
-            
+        case entity::Type::SPACESTATION: {
+            __clickOn(static_cast<view::SpaceStation*>(base));
+            break;
+        }
+        case entity::Type::PLANET: {
+            __clickOn(static_cast<view::Planet*>(base));
+            break;
+        }
+        case entity::Type::STAR: {
+            __clickOn(static_cast<view::Star*>(base));
+            break;
+        }
+        default:
+            assert(false);
+        }
+    } else {
+        __navigate();
     }
-        
-    return false;
 }
 
-bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
+void Player::__clickOn(view::Bullet* bullet)
 {
-    for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
-    { 
-        assert(false);
-
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
-        
-//            if (data_mouse.left_click == true)
-//            {
-////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-////                {
-////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
-////                }
-////                else
-////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);   // make it like a ai scenario (follow obj)
-////                    npc->vehicle()->GetComplexDrive().UpdatePath();
-////                }
-//            }
-            
-//            if (data_mouse.right_click == true)
-//            {
-//                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-//                {
-//                //if (pPLAYER->vehicle()->ableTo.GRAB == true)
-//                //{
-//                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
-//                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
-//                //}
-//                }
-//                else
-//                {
-////                    if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
-////                    {
-////                        npc->SetScanTarget(visible_SATELLITE_vec[i]);
-////                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-////                    }
-
-//                }
-//            }
-                        
-//            return true;
-//        }
-    }
-        
-    return false;
-}
-
-bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
-{
-    // todo
-//    for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
-//    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);
-        
-////            if (data_mouse.left_click == true)
-////            {
-////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-////                {
-////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
-////                }
-////                else
-////                {
-////                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
-////                    npc->vehicle()->GetComplexDrive().UpdatePath();
-////                }
-////            }
-                        
-//            return true;
+    assert(false);
+//    if (data_mouse.left_click) {
+//        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+//            npc->vehicle()->GetComplexWeapon().SetTarget(bullet);
+//        } else {
+//            npc->vehicle()->GetComplexDrive().SetTarget(bullet, NAVIGATOR_ACTION::KEEP_MIDDLE);
+//            npc->vehicle()->GetComplexDrive().UpdatePath();
 //        }
 //    }
-        
-    return false;
 }
 
-bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
+void Player::__clickOn(view::Container* container)
 {
-    for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-    { 
+    assert(false);
+//    if (data_mouse.left_click) {
+//        //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
+//    }
+
+//    if (data_mouse.right_click) {
+//        if (npc->vehicle()->properties().grab_radius > 0) {
+//            if (npc->vehicle()->grappleSlot()->CheckTarget(container) == STATUS::TARGET_OK) {
+//                if (!npc->vehicle()->grappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(container)) {
+//                    npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(container);
+//                } else {
+//                    npc->vehicle()->grappleSlot()->GetGrappleEquipment()->RemoveTarget(container);
+//                }
+//            }
+//        }
+//    }
+
+}
+
+void Player::__clickOn(view::Satellite* satellite)
+{
         assert(false);
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);
-        
-//            if (npc->vehicle()->id() != visible_SHIP_vec[i]->id())
-//            {
-////                if (data_mouse.left_click == true)
-////                {
-////                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-////                    {
-////                        npc->vehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
-////                    }
-////                    else
-////                    {
-////                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);
+//            if (data_mouse.left_click) {
+//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+//                    npc->vehicle()->GetComplexWeapon().SetTarget(satellite);
+//                } else {
+//                    npc->vehicle()->GetComplexDrive().SetTarget(satellite, NAVIGATOR_ACTION::KEEP_MIDDLE);   // make it like a ai scenario (follow obj)
+//                    npc->vehicle()->GetComplexDrive().UpdatePath();
+//                }
+//            }
+            
+//            if (data_mouse.right_click) {
+//                if ( (npc->vehicle()->grappleSlot()->item()) && (npc->vehicle()->grappleSlot()->isSelected()) ) {
+//                //if (npc->vehicle()->ableTo.GRAB) {
+//                    //npc->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+//                    //npc->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
+//                //}
+//                } else {
+//                    if ( npc->CheckPossibilityToScan(satellite) ) {
+//                        npc->SetScanTarget(satellite);
+//                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+//                    }
+
+//                }
+//            }
+}
+
+void Player::__clickOn(view::Asteroid* asteroid)
+{
+    assert(false);
+//    if (data_mouse.left_click) {
+//        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+//            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
+//        } else {
+//            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
+//            npc->vehicle()->GetComplexDrive().UpdatePath();
+//        }
+//    }
+}
+
+void Player::__clickOn(view::Ship* ship)
+{
+    assert(false);
+//            if (npc->vehicle()->id() != ship->id()) {
+////                if (data_mouse.left_click) {
+////                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+////                        npc->vehicle()->GetComplexWeapon().SetTarget(ship);
+////                    } else {
+////                        npc->vehicle()->GetComplexDrive().SetTarget(ship, NAVIGATOR_ACTION::KEEP_MIDDLE);
 ////                        npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                    }
 ////                }
 
-//                if (data_mouse.right_click == true)
-//                {
-//                    if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
-//                    {
-//                        //if (npc->vehicle()->ableTo.GRAB == true)
-//                           //{
-//                               //if (npc->vehicle()->grappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
-//                               //{
-//                                   //npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+//                if (data_mouse.right_click) {
+//                    if ( (npc->vehicle()->grappleSlot()->item() ) && (npc->vehicle()->grappleSlot()->isSelected()) ) {
+//                        //if (npc->vehicle()->ableTo.GRAB) {
+//                               //if (npc->vehicle()->grappleSlot()->CheckTarget(visible_SHIP_vec[i])) {
+//                                   //npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(ship);
 //                               //}
 //                           //}
-//                    }
-////                    else
-////                    {
-////                        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
-////                        {
-////                            npc->SetScanTarget(visible_SHIP_vec[i]);
+//                    } else {
+////                        if (npc->CheckPossibilityToScan(ship)) {
+////                            npc->SetScanTarget(ship);
 ////                        }
 ////                    }
 //                }
-//            }
-//            else
-//            {
-//                if (data_mouse.right_click == true)
-//                {
-//                    npc->setScanTarget(visible_SHIP_vec[i]);
+//            } else {
+//                if (data_mouse.right_click) {
+//                    npc->setScanTarget(ship);
 //                    GuiManager::Instance().GetGuiSpace().EnterGuiScan();
 //                }
 //            }
-                        
-//        return true;
-//        }
-    }
-        
-    return false;
 }
 
-bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
+void Player::__clickOn(view::WormHole* wormhole)
 {
-    assert(false);
-//    for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++) {
-//        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]);
-            
-//            return true;
-//        }
-//    }
-    
-    return false;
 }
 
-bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
+void Player::__clickOn(view::SpaceStation* spacestation)
 {
-    for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-    { 
-        assert(false);
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]);
-        
-////            if (data_mouse.left_click == true)
-////            {
-////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-////                {
-////                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
-////                }
-////                else
-////                {
-////                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING, visible_SPACESTATION_vec[i]->id());
+////            if (data_mouse.left_click) {
+////                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+////                    npc->vehicle()->GetComplexWeapon().SetTarget(spacestation);
+////                } else {
+////                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING, spacestation->id());
 ////                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
 ////                    npc->vehicle()->GetComplexDrive().UpdatePath();
 ////                }
 ////            }
 
-//            if (data_mouse.right_click == true)
-//            {
-//                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
+//            if (data_mouse.right_click) {
+//                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) && (npc->vehicle()->grappleSlot()->isSelected()) )
 //                {
-//                    //if (pPLAYER->vehicle()->ableTo.GRAB == true)
-//                    //{
-//                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
-//                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
+//                    //if (npc->vehicle()->ableTo.GRAB) {
+//                        //npc->vehicle()->grapple_slot.GetGrappleEquipment()->add(spacestation);
+//                        //npc->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
 //                    //}
-//                }
-////                else
-////                {
-////                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
-////                    {
-////                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+//                } else {
+////                    if ( npc->CheckPossibilityToScan(spacestation) ) {
+////                        npc->SetScanTarget(spacestation);
 ////                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
 ////                    }
 ////                }
 //            }
-    
-//            return true;
-//        }
-    }
-        
-    return false;
 }
 
-bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
+void Player::__clickOn(view::Planet* planet)
 {
-    for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
-    { 
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
-//        {
-//            m_cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]);
-  
-//            if (data_mouse.left_click == true)
-//            {
-//                Task microtask(type::AISCENARIO::MICRO_DOCKING, visible_PLANET_vec[i]->id());
-////                npc->GetStateMachine().SetCurrentMicroTask(microtask);
-////                npc->vehicle()->GetComplexDrive().UpdatePath();
-//            }
-        
-//            return true;
-//        }
-    }
-
-    return false;
-}
-
-bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
-{
-//    for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
-//    {
-//        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-//        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius()) {
-//            m_cursor.SetFocusedSpaceObject(visible_STAR_vec[i]);
-                
-//            return true;
-//        }
+    assert(false);
+//    if (data_mouse.left_click) {
+//        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
+//        npc->GetStateMachine().SetCurrentMicroTask(microtask);
+//        npc->vehicle()->GetComplexDrive().UpdatePath();
 //    }
-    
-//    return false;
 }
 
-void Player::MouseNavigation(const MouseData& data_mouse) const
+void Player::__clickOn(view::Star* star)
 {
-    if (data_mouse.left_click == true)
-    {
+}
+
+void Player::__navigate() const
+{
+    if (m_cursor.mouseData().left_click) {
         ForceStateMachineReset();
-        //npc->vehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->vehicle()->center().z));
+        //npc->vehicle()->GetComplexDrive().SetStaticTargetCoords(m)cursor.mouseData().world_coord);
     }
 }
 
@@ -891,89 +753,3 @@ void Player::ForceStateMachineReset() const
 {
     //npc->GetStateMachine().ForceReset();
 }    
-
-void Player::RenderCollisionRadius(const jeti::Render& render) const
-{
-    //render.enable_BLEND(); 
-    {   //a;pitodorender
-        /*
-        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderCollisionRadius(render); }            
-        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderCollisionRadius(render); } 
-        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderCollisionRadius(render); } 
-        
-        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderCollisionRadius(render); } 
-                        
-        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderCollisionRadius(render); }
-        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderCollisionRadius(render); } 
-        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(render); } 
-        */
-    }
-    //render.disable_BLEND();
-}
-
-void Player::RenderAxis(const jeti::Render& render) const
-{    
-    //render.enable_DEPTH(); 
-    //alpitodorender
-    /*
-        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderAxis(render); }            
-        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderAxis(render); } 
-        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderAxis(render); } 
-        
-        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderAxis(render); } 
-                        
-        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderAxis(render); }
-        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderAxis(render); } 
-        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderAxis(render); } 
-*/
-//render.disable_DEPTH();
-}         
-
-//void Player::Save(boost::property_tree::ptree& save_ptree) const
-//{
-//    std::string root = "player."+std::to_string(id())+".";
-    
-//    Base::SaveData(save_ptree, root);
-//    Player::SaveData(save_ptree, root);
-//}
-
-//void Player::Load(const boost::property_tree::ptree& load_ptree)
-//{
-//    Base::LoadData(load_ptree);
-//    Player::LoadData(load_ptree);
-//}
-
-//void Player::Resolve()
-//{
-//    Base::ResolveData();
-//    Player::ResolveData();
-//}
-        
-//void Player::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-//    save_ptree.put(root+"unresolved.npc_id", npc->id());
-//    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
-//    save_ptree.put(root+"unresolved.screen_pos_x", client::global::get().screen().GetBottomLeft().x);
-//    save_ptree.put(root+"unresolved.screen_pos_y", client::global::get().screen().GetBottomLeft().y);
-//}
-
-//void Player::LoadData(const boost::property_tree::ptree& load_ptree)
-//{
-//    data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
-//    data_unresolved_player.starsystem_id = load_ptree.get<int>("unresolved.starsystem_id");
-//    data_unresolved_player.screen_pos.x = load_ptree.get<float>("unresolved.screen_pos_x");
-//    data_unresolved_player.screen_pos.y = load_ptree.get<float>("unresolved.screen_pos_y");
-//}
-
-//void Player::ResolveData()
-//{
-//    BindNpc((Npc*)core::global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
-//    starsystem = (Starsystem*)core::global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
-//    //client::global::get().screen().SetBottomLeft(data_unresolved_player.screen_pos);
-//}
-
-

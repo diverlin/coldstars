@@ -112,6 +112,7 @@ int main()
 
     control::World world;
     view::StarSystem viewer(render);
+    viewer.setPlayer(player);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
     player->setStarSystem(starsystem);

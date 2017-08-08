@@ -97,44 +97,11 @@ namespace view {
 
 class StarSystem
 {
-    class Draw {
-    public:
-        bool background() const { return (m_stars || m_nebulas); }
-        bool background_fbo() const { return m_star; }
-        bool star() const { return m_star; }
-        bool stars() const { return m_stars; }
-        bool nebulas() const { return m_nebulas; }
-        bool spaceobjects() const { return m_spaceobjects; }
-        bool spaceobjects_meta() const { return (collision_radius() || axis()); }
-        bool collision_radius() const { return (m_spaceobjects && m_collision_radius); }
-        bool axis() const { return (m_spaceobjects && m_axis); }
-        bool hud() const { return m_hud; }
-        bool experimental() const { return m_experimental; }
-
-        void setStar(bool star) { m_star = star; }
-        void setStars(bool stars) { m_stars = stars; }
-        void setNebulas(bool nebulas) { m_nebulas = nebulas; }
-        void setSpaceobjects(bool spaceobjects) { m_spaceobjects = spaceobjects; }
-        void setCollisionRadius(bool collision_radius) { m_collision_radius = collision_radius; }
-        void setAxis(bool axis) { m_axis = axis; }
-        void setHud(bool hud) { m_hud = hud; }
-        void setExperimental(bool experimental) { m_experimental = experimental; }
-
-    private:
-        bool m_star = true;
-        bool m_stars = true;
-        bool m_nebulas = false;
-        bool m_spaceobjects = true;
-        bool m_collision_radius = false;
-        bool m_axis = false;
-        bool m_hud = true;
-        bool m_experimental = true;
-    };
-
 public:
     StarSystem(jeti::Render&);
     ~StarSystem();
 
+    void setPlayer(Player* player) { m_player = player; }
     Base* mouseInterraction(const glm::vec3&) const;
     void render(control::StarSystem*);
 
@@ -165,8 +132,6 @@ private:
     Cache m_cache;
 
     bool m_debug = true;
-
-    Draw m_draw;
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
