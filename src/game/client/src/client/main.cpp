@@ -115,14 +115,13 @@ int main()
     viewer.setPlayer(player);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
-    player->setStarSystem(starsystem);
 
     while(input.runSession() && screen.window().isOpen()) {
         input.update(player);
         camera.addSpeed(input.scrollAccel());
 
         world.update();
-        viewer.render(player->starSystem());
+        viewer.render(starsystem);
         screen.draw();
     }
 

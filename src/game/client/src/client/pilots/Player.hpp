@@ -28,12 +28,8 @@
 
 #include <vector>
 
+class Npc;
 class TurnTimer;
-
-namespace control {
-class StarSystem;
-} // namespace control
-
 
 namespace view {
 class Star;
@@ -47,46 +43,11 @@ class Container;
 class Bullet;
 } // namespace view
 
-class Star;
-class Planet;
-class BlackHole;
-class Asteroid;
-class Vehicle;
-class Npc;
-class SpaceStation;
-class Satellite;
-class Ship;
-class Container;
-class Bullet;
-
-class LazerTraceEffect;
-class ShockWaveEffect;
-
-namespace jeti {
-class BaseParticleSystem;
-} // namespce jeti
-
-class VerticalFlowText;
-
-
-//struct UnresolvedDataPlayer
-//{
-//    int npc_id;
-//    int starsystem_id;
-//    glm::vec2 screen_pos;
-//};
-
-
 class Player
 {
 public:
     Player();
     ~Player();
-
-    virtual void putChildrenToGarbage() const {}
-
-    void setStarSystem(control::StarSystem* starsystem) { m_starsystem = starsystem; }
-    control::StarSystem* starSystem() { return m_starsystem; }
 
     Show& show() { return m_show; }
 
@@ -106,38 +67,17 @@ public:
 
 private:
     Npc* m_npc = nullptr;
-
     gui::Cursor m_cursor;
-
     Show m_show;
-    control::StarSystem* m_starsystem = nullptr;
 
-    // VISIBLE ENTITY LIST
-    std::vector<Star*>         visible_STAR_vec;
-    std::vector<Planet*>       visible_PLANET_vec;
-    std::vector<Asteroid*>     visible_ASTEROID_vec;
-    std::vector<Container*>    visible_CONTAINER_vec;
-    std::vector<Bullet*> visible_ROCKET_vec;
-    std::vector<BlackHole*>    visible_BLACKHOLE_vec;
-    std::vector<Ship*>         visible_SHIP_vec;
-    std::vector<Satellite*>    visible_SATELLITE_vec;
-    std::vector<SpaceStation*> visible_SPACESTATION_vec;
+//    void RenderInSpace(control::StarSystem*, bool, bool, bool);
+//    void RenderInSpace_NEW(jeti::Render&, control::StarSystem*);
+//    void RenderCollisionRadius(const jeti::Render&) const;
+//    void RenderAxis(const jeti::Render&) const;
 
-    //effects
-    std::vector<ShockWaveEffect*>    visible_effect_SHOCKWAVE_vec;
-    std::vector<LazerTraceEffect*>   visible_effect_LAZERTRACE_vec;
-    std::vector<jeti::BaseParticleSystem*> visible_effect_PARTICLESYSTEM_vec;
-    std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
-    //
-    
-    void RenderInSpace(control::StarSystem*, bool, bool, bool);
-    void RenderInSpace_NEW(jeti::Render&, control::StarSystem*);
-    void RenderCollisionRadius(const jeti::Render&) const;
-    void RenderAxis(const jeti::Render&) const;
-
-    void SessionInSpace(control::StarSystem*, const TurnTimer&);
-    void SessionInKosmoport();
-    void SessionInNatureLand();
+//    void SessionInSpace(control::StarSystem*, const TurnTimer&);
+//    void SessionInKosmoport();
+//    void SessionInNatureLand();
 
     void __manageClickEvent();
     void __clickOn(view::Bullet*);

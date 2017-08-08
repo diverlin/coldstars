@@ -224,253 +224,253 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    }
 }
              
-void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsystem)
-{   
-    bool draw_background    = true;
-    bool draw_volumetric    = true;
-    bool draw_something     = false;
-    bool draw_spaceObjects  = true;
-    bool draw_shockwave     = true;
-    bool draw_robustSpaceObjects = true;
+//void Player::RenderInSpace_NEW(jeti::Render& render, control::StarSystem* starsystem)
+//{
+//    bool draw_background    = true;
+//    bool draw_volumetric    = true;
+//    bool draw_something     = false;
+//    bool draw_spaceObjects  = true;
+//    bool draw_shockwave     = true;
+//    bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().render().scaleBase();
-    int w = client::global::get().screen().width();
-    int h = client::global::get().screen().height();
-//    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
+//    float scale = client::global::get().render().scaleBase();
+//    int w = client::global::get().screen().width();
+//    int h = client::global::get().screen().height();
+////    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
     
-    render.clearColorAndDepthBuffers();
+//    render.clearColorAndDepthBuffers();
     
-    //render.enable_CULLFACE();
-    {
-        if (draw_background)
-        {
-            // render background and star to FBO0
-            render.activateFbo(0, w, h);
-            {
-                render.setPerspectiveProjection();
-                //starsystem->DrawBackground(render, world_coord);
-                render.setOrthogonalProjection();
-
-//                for(Star* star : visible_STAR_vec)
-//                {
-//                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
-//                }
-            }
-            render.deactivateFbo(0);
-
-            // BLOOM background and star (uses many FBO)
-            //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->vehicle()->starsystem()->GetStar()->GetBrightThreshold());
-        }
-
-        // VOLUMETRIC LIGHT to FBO1
-        if (draw_volumetric)
-        {
-            //resizeGl(w, h);
-            render.activateFbo(1, w, h);
-            {
-                //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
-                //render.drawPostEffectVolumetricLight(world_coord, w, h);
-            }
-            render.deactivateFbo(1);
-        }
-
-        if (draw_something)
-        {
-//            render.ActivateFbo(2, w, h);
+//    //render.enable_CULLFACE();
+//    {
+//        if (draw_background)
+//        {
+//            // render background and star to FBO0
+//            render.activateFbo(0, w, h);
 //            {
-//                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w*2, h*2);
+//                render.setPerspectiveProjection();
+//                //starsystem->DrawBackground(render, world_coord);
+//                render.setOrthogonalProjection();
+
+////                for(Star* star : visible_STAR_vec)
+////                {
+////                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
+////                }
 //            }
-//            render.DeactivateFbo(2);
-        }
+//            render.deactivateFbo(0);
 
-        if (draw_spaceObjects)
-        {
-            // render space entites to FBO2
-            render.activateFbo(3, w, h);
-            {
-                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+//            // BLOOM background and star (uses many FBO)
+//            //resizeGl(w, h);
+//            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->vehicle()->starsystem()->GetStar()->GetBrightThreshold());
+//        }
 
-                // resizeGl(w*scale, h*scale);
-                {
-                    for(Planet* planet : visible_PLANET_vec)
-                    {
-                        //planet->Render_NEW(render);
-                    }
+//        // VOLUMETRIC LIGHT to FBO1
+//        if (draw_volumetric)
+//        {
+//            //resizeGl(w, h);
+//            render.activateFbo(1, w, h);
+//            {
+//                //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
+//                //render.drawPostEffectVolumetricLight(world_coord, w, h);
+//            }
+//            render.deactivateFbo(1);
+//        }
 
-                    for(SpaceStation* spacestation : visible_SPACESTATION_vec)
-                    {
-                        //spacestation->RenderInSpace(render, 1/scale);
-                    }
+//        if (draw_something)
+//        {
+////            render.ActivateFbo(2, w, h);
+////            {
+////                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w*2, h*2);
+////            }
+////            render.DeactivateFbo(2);
+//        }
 
-                    //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
-                    for(Ship* ship : visible_SHIP_vec)
-                    {
-                        //ship->RenderInSpace(render, 1/scale);
-                    }
+//        if (draw_spaceObjects)
+//        {
+//            // render space entites to FBO2
+//            render.activateFbo(3, w, h);
+//            {
+//                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
 
-                    for(Asteroid* asteroid : visible_ASTEROID_vec)
-                    {
-                        //asteroid->Render_NEW(render, world_coord);
-                    }
-
-                    assert(false);
-//                    for(BlackHole* blackhole : visible_BLACKHOLE_vec)
+//                // resizeGl(w*scale, h*scale);
+//                {
+//                    for(Planet* planet : visible_PLANET_vec)
 //                    {
-//                        //blackhole->Render_NEW(render);
+//                        //planet->Render_NEW(render);
 //                    }
-                }
 
-                {
-                    for(Container* container : visible_CONTAINER_vec)
-                    {
-                        //container->Render(render);
-                    }
+//                    for(SpaceStation* spacestation : visible_SPACESTATION_vec)
+//                    {
+//                        //spacestation->RenderInSpace(render, 1/scale);
+//                    }
 
-                    for(Satellite* satellite : visible_SATELLITE_vec)
-                    {
-                        //satellite->RenderInSpace(render, 1/scale);
-                    }
+//                    //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
+//                    for(Ship* ship : visible_SHIP_vec)
+//                    {
+//                        //ship->RenderInSpace(render, 1/scale);
+//                    }
 
-                    for(Bullet* rocket : visible_ROCKET_vec)
-                    {
-                        //rocket->RenderInSpace(render, 1/scale);
-                    }
-                }
-//                if (m_show.collisionRadius()) {
-//                    RenderAxis(render);
-//                    RenderCollisionRadius(render);
+//                    for(Asteroid* asteroid : visible_ASTEROID_vec)
+//                    {
+//                        //asteroid->Render_NEW(render, world_coord);
+//                    }
+
+//                    assert(false);
+////                    for(BlackHole* blackhole : visible_BLACKHOLE_vec)
+////                    {
+////                        //blackhole->Render_NEW(render);
+////                    }
 //                }
-            }
-            render.deactivateFbo(3);
-        }
 
-        if (draw_shockwave)
-        {
-            // SHOCKWAVE post process to Fbo3
-            //resizeGl(w, h);
-            render.activateFbo(4, w, h);
-            {
-                float center_array[SHOCKWAVES_MAX_NUM][2];
-                float xyz_array[SHOCKWAVES_MAX_NUM][3];
-                float time_array[SHOCKWAVES_MAX_NUM];
-
-                unsigned int i=0;
-//                for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
 //                {
-//                    ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+//                    for(Container* container : visible_CONTAINER_vec)
+//                    {
+//                        //container->Render(render);
+//                    }
 
-//                    center_array[i][0] = (shockwave->center().x - world_coord.x)/w;
-//                    center_array[i][1] = (shockwave->center().y - world_coord.y)/h;
-//                    xyz_array[i][0] = shockwave->parameters().x;
-//                    xyz_array[i][1] = shockwave->parameters().y;
-//                    xyz_array[i][2] = shockwave->parameters().z;
-                    
-//                    time_array[i] = shockwave->time();
+//                    for(Satellite* satellite : visible_SATELLITE_vec)
+//                    {
+//                        //satellite->RenderInSpace(render, 1/scale);
+//                    }
+
+//                    for(Bullet* rocket : visible_ROCKET_vec)
+//                    {
+//                        //rocket->RenderInSpace(render, 1/scale);
+//                    }
 //                }
-//                for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+////                if (m_show.collisionRadius()) {
+////                    RenderAxis(render);
+////                    RenderCollisionRadius(render);
+////                }
+//            }
+//            render.deactivateFbo(3);
+//        }
+
+//        if (draw_shockwave)
+//        {
+//            // SHOCKWAVE post process to Fbo3
+//            //resizeGl(w, h);
+//            render.activateFbo(4, w, h);
+//            {
+//                float center_array[SHOCKWAVES_MAX_NUM][2];
+//                float xyz_array[SHOCKWAVES_MAX_NUM][3];
+//                float time_array[SHOCKWAVES_MAX_NUM];
+
+//                unsigned int i=0;
+////                for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
+////                {
+////                    ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+
+////                    center_array[i][0] = (shockwave->center().x - world_coord.x)/w;
+////                    center_array[i][1] = (shockwave->center().y - world_coord.y)/h;
+////                    xyz_array[i][0] = shockwave->parameters().x;
+////                    xyz_array[i][1] = shockwave->parameters().y;
+////                    xyz_array[i][2] = shockwave->parameters().z;
+                    
+////                    time_array[i] = shockwave->time();
+////                }
+////                for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+////                {
+////                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center().x - world_coord.x)/(w*scale);
+////                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center().y - world_coord.y)/(h*scale);
+////                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameters().x;
+////                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameters().y;
+////                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameters().z/scale;
+                    
+////                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
+////                }
+
+//                render.drawPostEffectShockWaves(render.lastFbo().colorBuffer(), w, h, i, center_array, xyz_array, time_array);
+//            }
+//            render.deactivateFbo(4);
+//        }
+
+//        if (draw_robustSpaceObjects)
+//        {
+//            // render effects not distorted by SHOCKWAVE
+//            render.activateFbo(5, w, h);
+//            {
+//                //resizeGl(w, h);
+//                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+
+//                //resizeGl(w*scale, h*scale);
+//                //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+
+//                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
 //                {
-//                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center().x - world_coord.x)/(w*scale);
-//                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center().y - world_coord.y)/(h*scale);
-//                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameters().x;
-//                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameters().y;
-//                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameters().z/scale;
-                    
-//                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
+//                    LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
+//                    //render.DrawMesh(lazer_trace.mesh(), lazer_trace.textureOb(), lazer_trace.actualModelMatrix());
 //                }
 
-                render.drawPostEffectShockWaves(render.lastFbo().colorBuffer(), w, h, i, center_array, xyz_array, time_array);
-            }
-            render.deactivateFbo(4);
-        }
+//                for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
+//                {
+//                    //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
+//                    //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
+//                }
+//            }
+//            render.deactivateFbo(5);
+//        }
 
-        if (draw_robustSpaceObjects)
-        {
-            // render effects not distorted by SHOCKWAVE
-            render.activateFbo(5, w, h);
-            {
-                //resizeGl(w, h);
-                render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
-
-                //resizeGl(w*scale, h*scale);
-                //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-
-                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-                {
-                    LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
-                    //render.DrawMesh(lazer_trace.mesh(), lazer_trace.textureOb(), lazer_trace.actualModelMatrix());
-                }
-
-                for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-                {
-                    //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                    //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
-                }
-            }
-            render.deactivateFbo(5);
-        }
-
-        render.clearColorAndDepthBuffers();       
-        render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
+//        render.clearColorAndDepthBuffers();
+//        render.drawScreenQuadTextured(render.lastFbo().colorBuffer(), w, h);
   
-        // FOGWAR and STARSPARK to final scene
-        //resizeGl(w, h); 
+//        // FOGWAR and STARSPARK to final scene
+//        //resizeGl(w, h);
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->properties().radius*/);
+//        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->properties().radius*/);
        
-        // render text
-        //resizeGl(w*scale, h*scale); 
-        //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-        for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
-        { 
-            //visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale); 
-        }   
+//        // render text
+//        //resizeGl(w*scale, h*scale);
+//        //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+//        for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
+//        {
+//            //visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale);
+//        }
                     
-        //starsystem->RestoreSceneColor();
-    }
-    //render.disable_CULLFACE();
+//        //starsystem->RestoreSceneColor();
+//    }
+//    //render.disable_CULLFACE();
     
-    //render.SetOrthogonalProjection(w, h); 
-}
+//    //render.SetOrthogonalProjection(w, h);
+//}
     
-void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
-{   
-    jeti::Render& renderer = client::global::get().render();
-    jeti::Camera& camera = client::global::get().camera();
-    camera.update();
+//void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+//{
+//    jeti::Render& renderer = client::global::get().render();
+//    jeti::Camera& camera = client::global::get().camera();
+//    camera.update();
     
-    renderer.composeViewMatrix(camera.viewMatrix());
+//    renderer.composeViewMatrix(camera.viewMatrix());
 
-    //float scale = client::global::get().screen().GetScale();
+//    //float scale = client::global::get().screen().GetScale();
 
-    RenderInSpace_NEW(renderer, starsystem);
+//    RenderInSpace_NEW(renderer, starsystem);
 
 
-    if (turn_ended) {
-        if (forceDraw_orbits) {
-            //starsystem->DrawOrbits(renderer);
-        }
-
-        if (forceDraw_path) {
-            //starsystem->DrawPath();
-        }
-
-//        npc->vehicle()->GetComplexDrive().DrawPath(renderer);
-//        npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
-//        npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
-        
-//        if (m_show.GetRangeRadar()) {
-//            //npc->vehicle()->RenderRadarRange();
+//    if (turn_ended) {
+//        if (forceDraw_orbits) {
+//            //starsystem->DrawOrbits(renderer);
 //        }
-        
-//        if ( (npc->vehicle()->grappleSlot()->item()) && (npc->vehicle()->grappleSlot()->isSelected()) ) {
-//            //npc->vehicle()->RenderGrappleRange();
+
+//        if (forceDraw_path) {
+//            //starsystem->DrawPath();
 //        }
-    }
+
+////        npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+////        npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+////        npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
+        
+////        if (m_show.GetRangeRadar()) {
+////            //npc->vehicle()->RenderRadarRange();
+////        }
+        
+////        if ( (npc->vehicle()->grappleSlot()->item()) && (npc->vehicle()->grappleSlot()->isSelected()) ) {
+////            //npc->vehicle()->RenderGrappleRange();
+////        }
+//    }
     
-    //m_cursor.RenderFocusedObjectStuff();
-} 
+//    //m_cursor.RenderFocusedObjectStuff();
+//}
 
 void Player::__manageClickEvent()
 {
@@ -683,55 +683,55 @@ void Player::__navigate() const
     }
 }
 
-void Player::SessionInSpace(control::StarSystem* starsystem, const TurnTimer& turn_timer)
-{    
-//    starsystem->FindRenderVisibleEntities_c(this);
-//    if (meti::getRandInt(1,5) == 1)
-//    {
-//        starsystem->FindRadarVisibleEntities_c(this);
-//    }
+//void Player::SessionInSpace(control::StarSystem* starsystem, const TurnTimer& turn_timer)
+//{
+////    starsystem->FindRenderVisibleEntities_c(this);
+////    if (meti::getRandInt(1,5) == 1)
+////    {
+////        starsystem->FindRadarVisibleEntities_c(this);
+////    }
 
-    UserInput::get().update();
-    //UserInputInSpace::get().update(this);
-//    if (turn_timer.GetTurnEnded() == true)
-//    {
-//        GuiManager::Instance().GetGuiSpace().Update(this);
-//        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(m_cursor.GetMouseData().pos_screencoord);
-//        if (gui_element == nullptr)
-//        {
-//            if ( (GuiManager::Instance().GetGuiVehicleScan()->vehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
-//            {
-//                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(m_cursor.GetMouseData());
-//                if (mouse_interaction == false)
-//                {
-//                    MouseNavigation(m_cursor.GetMouseData());
-//                }
-//            }
-//        }
-//        else
-//        {
-//            m_cursor.SetFocusedGuiElement(gui_element);
-//        }
-//    }
+//    UserInput::get().update();
+//    //UserInputInSpace::get().update(this);
+////    if (turn_timer.GetTurnEnded() == true)
+////    {
+////        GuiManager::Instance().GetGuiSpace().Update(this);
+////        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(m_cursor.GetMouseData().pos_screencoord);
+////        if (gui_element == nullptr)
+////        {
+////            if ( (GuiManager::Instance().GetGuiVehicleScan()->vehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
+////            {
+////                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(m_cursor.GetMouseData());
+////                if (mouse_interaction == false)
+////                {
+////                    MouseNavigation(m_cursor.GetMouseData());
+////                }
+////            }
+////        }
+////        else
+////        {
+////            m_cursor.SetFocusedGuiElement(gui_element);
+////        }
+////    }
 
-//    RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
+////    RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
     
-    GuiManager::Instance().UpdateSessionInSpace();
-    //GuiManager::Instance().GetGuiSpace().Render(this); 
+//    GuiManager::Instance().UpdateSessionInSpace();
+//    //GuiManager::Instance().GetGuiSpace().Render(this);
     
-    //m_cursor.RenderItem();
-}
+//    //m_cursor.RenderItem();
+//}
 
 
-void Player::SessionInKosmoport()
-{       
-    GuiManager::Instance().RunSessionInKosmoport(m_cursor.mouseData());
-}
+//void Player::SessionInKosmoport()
+//{
+//    GuiManager::Instance().RunSessionInKosmoport(m_cursor.mouseData());
+//}
 
-void Player::SessionInNatureLand()
-{       
-    GuiManager::Instance().RunSessionInNatureLand(m_cursor.mouseData());
-}
+//void Player::SessionInNatureLand()
+//{
+//    GuiManager::Instance().RunSessionInNatureLand(m_cursor.mouseData());
+//}
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
