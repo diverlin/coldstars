@@ -83,5 +83,4 @@ void Orientation::__updateCollisionRadius() {
 }
 
 } // namespace control
-
 } // namespace ceti

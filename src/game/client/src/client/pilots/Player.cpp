@@ -68,7 +68,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Player::Player(int id)
+Player::Player()
 { 
 //    setId(id);
 //    setTypeId(entity::Type::PLAYER);
@@ -873,7 +873,6 @@ void Player::SessionInNatureLand()
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
-    m_cursor.reset();
     assert(false);
 //    switch(npc->vehicle()->place())
 //    {
