@@ -32,6 +32,7 @@ class Npc;
 class TurnTimer;
 
 namespace view {
+class Base;
 class Star;
 class Planet;
 class Asteroid;
@@ -58,6 +59,7 @@ public:
 
     bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
 
+    void update(const jeti::Render&, view::Base* focusedView = nullptr);
     void RunSession(const TurnTimer&);
 
     void ForceStateMachineReset() const;

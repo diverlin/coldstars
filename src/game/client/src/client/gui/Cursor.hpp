@@ -46,23 +46,24 @@ public:
     Cursor();
     ~Cursor();
 
-    void setLeftMouseButtonClick(bool left_click) { m_dataMouse.left_click = left_click; }
-    void setRightMouseButtonClick(bool right_click) { m_dataMouse.right_click = right_click; }
-    void focusOn(view::Base* base) { m_focusedView = base; }
-    void focusOn(BaseGuiElement* gui_element) { m_focusedGuiElement = gui_element; }
+    void leftMouseButtonClick() { m_dataMouse.event = MouseData::LeftButtonClick; }
+    void rightMouseButtonClick() { m_dataMouse.event = MouseData::RightButtonClick; }
+
+    void setFocusedView(view::Base* focusedView) { m_focusedView = focusedView; }
+    void setFocusedView(BaseGuiElement* gui_element) { m_focusedGuiElement = gui_element; }
 
     view::Base* focusedView() const { return m_focusedView; }
 
     const MouseData& mouseData() const { return m_dataMouse; }
     ItemSlot* itemSlot() const { return m_itemSlot; }
 
-    void update(Player*);
-    void updateMouseStuff(const jeti::Render& render);
+    void update(Player*, const jeti::Render& render);
 
     void renderFocusedObjectStuff(const jeti::Render&) const;
     void renderFocusedObjectInfo(const jeti::Render&) const;
 
     void renderItem(const jeti::Render&) const;
+    void updateMouseInput(const jeti::Render& render);
 
 private:
     glm::vec3 m_screenCoord;

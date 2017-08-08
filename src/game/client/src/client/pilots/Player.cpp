@@ -522,15 +522,21 @@ void Player::__manageClickEvent()
 
 void Player::__clickOn(view::Bullet* bullet)
 {
-    assert(false);
-//    if (data_mouse.left_click) {
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        assert(false);
 //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //            npc->vehicle()->GetComplexWeapon().SetTarget(bullet);
-//        } else {
-//            npc->vehicle()->GetComplexDrive().SetTarget(bullet, NAVIGATOR_ACTION::KEEP_MIDDLE);
-//            npc->vehicle()->GetComplexDrive().UpdatePath();
 //        }
-//    }
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        assert(false);
+//        npc->vehicle()->GetComplexDrive().SetTarget(bullet, NAVIGATOR_ACTION::KEEP_MIDDLE);
+//        npc->vehicle()->GetComplexDrive().UpdatePath();
+        break;
+    }
+    }
 }
 
 void Player::__clickOn(view::Container* container)
@@ -577,22 +583,27 @@ void Player::__clickOn(view::Satellite* satellite)
 //                        npc->SetScanTarget(satellite);
 //                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
 //                    }
-
 //                }
 //            }
 }
 
 void Player::__clickOn(view::Asteroid* asteroid)
 {
-    assert(false);
-//    if (data_mouse.left_click) {
-//        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
-//            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
-//        } else {
-//            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
-//            npc->vehicle()->GetComplexDrive().UpdatePath();
-//        }
-//    }
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        assert(false);
+        //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+        //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
+        //        }
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        assert(false);
+        //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
+        //            npc->vehicle()->GetComplexDrive().UpdatePath();
+        break;
+    }
+    }
 }
 
 void Player::__clickOn(view::Ship* ship)
@@ -631,6 +642,16 @@ void Player::__clickOn(view::Ship* ship)
 
 void Player::__clickOn(view::WormHole* wormhole)
 {
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        // ..
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        // ..
+        break;
+    }
+    }
 }
 
 void Player::__clickOn(view::SpaceStation* spacestation)
@@ -663,23 +684,49 @@ void Player::__clickOn(view::SpaceStation* spacestation)
 
 void Player::__clickOn(view::Planet* planet)
 {
-    assert(false);
-//    if (data_mouse.left_click) {
-//        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
-//        npc->GetStateMachine().SetCurrentMicroTask(microtask);
-//        npc->vehicle()->GetComplexDrive().UpdatePath();
-//    }
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        assert(false);
+        //        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
+        //        npc->GetStateMachine().SetCurrentMicroTask(microtask);
+        //        npc->vehicle()->GetComplexDrive().UpdatePath();
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        // ..
+        break;
+    }
+    }
+
 }
 
 void Player::__clickOn(view::Star* star)
 {
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        // ..
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        // ..
+        break;
+    }
+    }
 }
 
 void Player::__navigate() const
 {
-    if (m_cursor.mouseData().left_click) {
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        assert(false);
         ForceStateMachineReset();
         //npc->vehicle()->GetComplexDrive().SetStaticTargetCoords(m)cursor.mouseData().world_coord);
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        // ..
+        break;
+    }
     }
 }
 
@@ -733,6 +780,13 @@ void Player::__navigate() const
 //    GuiManager::Instance().RunSessionInNatureLand(m_cursor.mouseData());
 //}
 
+void Player::update(const jeti::Render& render, view::Base* focusedView)
+{
+    m_cursor.setFocusedView(focusedView);
+    m_cursor.update(this, render);
+    __manageClickEvent();
+}
+
 void Player::RunSession(const TurnTimer& turn_timer)
 {
     assert(false);
@@ -744,9 +798,9 @@ void Player::RunSession(const TurnTimer& turn_timer)
 //        case type::place::LAND:      { SessionInNatureLand(); break; }
 //    }
 
-    m_cursor.update(this);
+//    m_cursor.update(this);
     //m_cursor.RenderFocusedObjectInfo();
-    client::global::get().screen().draw();
+//    client::global::get().screen().draw();
 }
 
 void Player::ForceStateMachineReset() const
