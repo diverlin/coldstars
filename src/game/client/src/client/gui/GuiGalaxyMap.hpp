@@ -49,8 +49,8 @@ private:
 
     model::Galaxy* m_Galaxy;
 
-    jeti::PathVisual m_VisualHyperJumpRange;
-    jeti::PathVisual m_VisualHyperJumpPath;
+//    jeti::PathView m_VisualHyperJumpRange;
+//    jeti::PathView m_VisualHyperJumpPath;
 
     virtual void UpdateUnique(Player*) override final;
     virtual void RenderUnique(const jeti::Render&, Player*) const override final;

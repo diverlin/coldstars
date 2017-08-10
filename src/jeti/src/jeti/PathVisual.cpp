@@ -25,88 +25,104 @@
 #include <glm/gtx/transform.hpp>
 
 namespace jeti {
+namespace view {
 
-PathVisual::PathVisual()
-:
-m_TextureOb(nullptr)  
+Path::Path(control::Material* material)
+    :
+      m_pointSize(10.0f)
+    , m_meshMove(new Mesh)
+    , m_meshTurn(new Mesh)
+    , m_material(material)
 {
-    m_Mesh = new Mesh();
-    //m_TextureOb = GuiTextureObCollector::Instance().dot_green;
-
-    m_PointSize = 10.0f;
 }
 
-PathVisual::~PathVisual() 
+
+Path::~Path()
 {
-    delete m_Mesh;
+    delete m_meshMove;
+    delete m_meshTurn;
 }
 
-void PathVisual::FillData(control::Material* textureOb, const std::vector<glm::vec3>& vec, int step, int point_size)
-{  
-    m_TextureOb = textureOb; 
 
-    FillData(vec, step, point_size);
-}
-
-void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point_size)
+void Path::fillData(const std::vector<glm::vec3>& positions)
 {   
-    std::vector<glm::vec3> points;
-    std::vector<glm::vec4> colors;
-    std::vector<float> sizes;
-
-    for (unsigned int i=0; i<vec.size(); i+=step)
-    {
-        points.push_back(vec[i]);
-        colors.push_back(glm::vec4(1.0f));
-        sizes.push_back(m_PointSize);
-    }
-
-    m_Mesh->fillPointVertices(points, colors, sizes);
+    __processMove(positions);
+    __processTurn(positions);
 }
 
-void PathVisual::FillData(control::Material* textureOb, int radius, int point_size)
+
+void Path::__processMove(const std::vector<glm::vec3>& positions)
 {
-    m_TextureOb = textureOb; 
+    int step = 10;
 
-    std::vector<glm::vec3> points;
-    std::vector<glm::vec4> colors;
-    std::vector<float> sizes;
-
-    float da = glm::radians(4.0f);
-    for (float a=0.0f; a<=2*M_PI; a+=da)
-    {
-        points.push_back(glm::vec3(radius * cos(a), radius * sin(a), 0.0f));
-        colors.push_back(glm::vec4(1.0f));
-        sizes.push_back(m_PointSize);
-    }
-
-    m_Mesh->fillPointVertices(points, colors, sizes);
+    __processPath(positions, m_meshMove, glm::vec4(0.8f, 0.8f, 1.0f, 0.5f), step, m_pointSize);
 }
 
-void PathVisual::FillData(control::Material* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
-{
-    m_TextureOb = textureOb; 
 
+void Path::__processTurn(const std::vector<glm::vec3>& positions)
+{
+    int step = 100;
+    float size = 1.5f*m_pointSize;
+
+    __processPath(positions, m_meshTurn, glm::vec4(0.8f, 1.0f, 0.8f, 0.5f), step, size);
+}
+
+void Path::__processPath(const std::vector<glm::vec3>& positions, Mesh* mesh, const glm::vec4& color, int step, float size)
+{
     std::vector<glm::vec3> points;
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    glm::vec3 point(start_pos);
-    glm::vec3 ll(target_pos - start_pos);                
-    glm::vec3 vstep = glm::normalize(ll) *(float)step;
+    for (int i=0; i<positions.size(); i+=step) {
+        points.push_back(positions[i]);
+        colors.push_back(color);
+        sizes.push_back(size);
+    }
+
+    mesh->fillPointVertices(points, colors, sizes);
+}
+
+//void PathVisual::fillData(control::Material* material, int radius, int point_size)
+//{
+//    m_material = material;
+
+//    std::vector<glm::vec3> points;
+//    std::vector<glm::vec4> colors;
+//    std::vector<float> sizes;
+
+//    float da = glm::radians(4.0f);
+//    for (float a=0.0f; a<=2*M_PI; a+=da) {
+//        points.push_back(glm::vec3(radius * cos(a), radius * sin(a), 0.0f));
+//        colors.push_back(glm::vec4(1.0f));
+//        sizes.push_back(m_pointSize);
+//    }
+
+//    m_mesh->fillPointVertices(points, colors, sizes);
+//}
+
+//void PathVisual::fillData(control::Material* material, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
+//{
+//    m_material = material;
+
+//    std::vector<glm::vec3> points;
+//    std::vector<glm::vec4> colors;
+//    std::vector<float> sizes;
+
+//    glm::vec3 point(start_pos);
+//    glm::vec3 ll(target_pos - start_pos);
+//    glm::vec3 vstep = glm::normalize(ll) *(float)step;
     
-    unsigned int num = glm::length(ll) / (float)step;
-    for (unsigned int i=0; i<num; i++)
-    {
-        points.push_back(point);
-        colors.push_back(glm::vec4(1.0f));
-        sizes.push_back(m_PointSize); 
+//    unsigned int num = glm::length(ll) / (float)step;
+//    for (unsigned int i=0; i<num; i++) {
+//        points.push_back(point);
+//        colors.push_back(glm::vec4(1.0f));
+//        sizes.push_back(m_pointSize);
 
-        point += vstep;
-    }
+//        point += vstep;
+//    }
 
-    m_Mesh->fillPointVertices(points, colors, sizes);
-}
+//    m_mesh->fillPointVertices(points, colors, sizes);
+//}
 
 
 //void PathVisual::Draw(const Renderer& renderer, const glm::vec3& offset)
@@ -120,4 +136,5 @@ void PathVisual::FillData(control::Material* textureOb, const glm::vec3& start_p
 //    renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
 //}
 
-}
+} // namespace view
+} // namespace jeti
