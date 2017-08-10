@@ -19,6 +19,7 @@
 #pragma once
 
 #include <meti/VectorUtils.hpp>
+
 #include <vector>
 
 namespace jeti {
@@ -29,28 +30,34 @@ class Material;
 
 class Mesh;
 
-class PathVisual
+namespace view {
+
+class Path
 {
-    public:
-        PathVisual();
-        ~PathVisual();
+public:
+    Path(control::Material*);
+    ~Path();
 
-        void FillData(control::Material*, const std::vector<glm::vec3>&, int step, int point_size);
-        void FillData(const std::vector<glm::vec3>&, int step, int point_size);
-        void FillData(control::Material*, int radius, int point_size);
-        void FillData(control::Material*, const glm::vec3&, const glm::vec3&, int step, int point_size);
-        
-//        void Draw(const Renderer&, const glm::vec3&);
-//        void Draw(const Renderer&) const;
+    void fillData(const std::vector<glm::vec3>&);
+//    void fillData(const std::vector<glm::vec3>&, int step, int point_size);
+//    void fillData(control::Material*, int radius, int point_size);
+//    void fillData(control::Material*, const glm::vec3&, const glm::vec3&, int step, int point_size);
 
-    private:
-        Mesh* m_Mesh;
-        control::Material* m_TextureOb;
-        glm::mat4 m_ModelMatrix;
+    //        void Draw(const Renderer&, const glm::vec3&);
+    //        void Draw(const Renderer&) const;
 
-        float m_PointSize;
+private:
+    float m_pointSize = 1.0f;
+    Mesh* m_meshMove = nullptr;
+    Mesh* m_meshTurn = nullptr;
+    control::Material* m_material = nullptr;
+
+    void __processPath(const std::vector<glm::vec3>&, Mesh*, const glm::vec4& color, int step, float size);
+    void __processMove(const std::vector<glm::vec3>&);
+    void __processTurn(const std::vector<glm::vec3>&);
 };
 
-}
+} // namespace view
+} // namespace jeti
 
 
