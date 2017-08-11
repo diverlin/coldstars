@@ -312,7 +312,7 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
         }
 
         if (subgroup == entity::Type::NONE) {
-            npc_subgroup = getRandNpcSubSubTypeId(npc_group);
+            npc_subgroup = getRandNpcClass(npc_group);
         } else {
             npc_subgroup = subgroup;
         }

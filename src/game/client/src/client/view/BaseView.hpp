@@ -53,16 +53,19 @@ public:
     int_t mesh() const;
     int_t texture() const;
 
-    void addDecor(Base*);
-    void createPath(jeti::control::Material*);
-    effect::Shield* createShield();
-
     const std::vector<Base*>& decors() const { return m_decors; }
     void update();
 
 protected:
     void _drawDecors(const jeti::Render&) const;
     void _drawShield(const jeti::Render&) const;
+    void _drawPath(const jeti::Render&) const;
+
+    void _addDecor(Base*);
+    effect::Shield* _createShield();
+    void _createPath(jeti::control::Material*);
+
+    jeti::view::Path* _path() const { return m_path; }
 
 private:
     control::Base* m_control_base = nullptr;

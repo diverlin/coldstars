@@ -89,13 +89,6 @@ Player::~Player()
 {}  
             
                            
-void Player::BindNpc(Npc* npc)
-{
-    assert(false);
-//    this->npc = npc;
-//    npc->setPlayer(this);
-}
-
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
 {
     if (force_full_control == false)
@@ -735,9 +728,9 @@ void Player::__navigate() const
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(false);
-        ForceStateMachineReset();
-        //npc->vehicle()->GetComplexDrive().SetStaticTargetCoords(m)cursor.mouseData().world_coord);
+        assert(m_npc);
+        resetStateMachine();
+        m_npc->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
         break;
     }
     case MouseData::RightButtonClick: {
@@ -820,7 +813,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 //    client::global::get().screen().draw();
 }
 
-void Player::ForceStateMachineReset() const
+void Player::resetStateMachine() const
 {
     //npc->GetStateMachine().ForceReset();
 }    

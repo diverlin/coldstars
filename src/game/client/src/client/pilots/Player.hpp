@@ -28,7 +28,10 @@
 
 #include <vector>
 
+namespace control {
 class Npc;
+} // namespace control
+
 class TurnTimer;
 
 namespace view {
@@ -52,23 +55,23 @@ public:
 
     Show& show() { return m_show; }
 
-    Npc* GetNpc() const { return m_npc; }
+    control::Npc* npc() const { return m_npc; }
     gui::Cursor& cursor() { return m_cursor; }
 
-    void BindNpc(Npc*);
+    void setNpc(control::Npc* npc) { m_npc = npc; }
 
     bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
 
     void update(const jeti::Render&, view::Base* focusedView = nullptr);
     void RunSession(const TurnTimer&);
 
-    void ForceStateMachineReset() const;
+    void resetStateMachine() const;
 
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
 
 private:
-    Npc* m_npc = nullptr;
+    control::Npc* m_npc = nullptr;
     gui::Cursor m_cursor;
     Show m_show;
 

@@ -43,8 +43,8 @@ public:
     TYPE object;
     float dist;
 
-    Pair(TYPE object, float dist):object(object), dist(dist) {};
-    ~Pair() {};
+    Pair(TYPE object, float dist):object(object), dist(dist) {}
+    ~Pair() {}
 };
 
 struct VisionStatus

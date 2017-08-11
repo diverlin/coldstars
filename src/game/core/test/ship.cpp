@@ -356,14 +356,14 @@ TEST(ship, dock)
         /** docking */
 
         // drive complex
-        EXPECT_EQ(nullptr, ship->driveComplex().target());
-        EXPECT_EQ(complex::Drive::Action::NONE, ship->driveComplex().action());
+        EXPECT_EQ(nullptr, ship->navigator().target());
+        EXPECT_EQ(complex::Drive::Action::NONE, ship->navigator().action());
 
         ship->dock(planet);
 
         // drive complex
-        EXPECT_EQ(planet, ship->driveComplex().target());
-        EXPECT_EQ(complex::Drive::Action::DOCKING, ship->driveComplex().action());
+        EXPECT_EQ(planet, ship->navigator().target());
+        EXPECT_EQ(complex::Drive::Action::DOCKING, ship->navigator().action());
 
         event::doDockShip(ship->id(), planet->land()->id());
 

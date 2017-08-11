@@ -30,6 +30,7 @@
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/particlesystem/Jet.hpp>
+#include <jeti/PathVisual.hpp>
 
 namespace view {
 
@@ -44,17 +45,19 @@ Ship::Ship(control::Ship* ship)
         // don't create resources, try to get existed from cache
         control::Turrel* turrel_control = builder::Turrel().gen();
         view::Turrel* turrel = new view::Turrel(slot, turrel_control);
-        addDecor(turrel);
+        _addDecor(turrel);
     }
 
     {
-        effect::Shield* shield = createShield();
+        effect::Shield* shield = _createShield();
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::SHIELD_EFFECT);
         shield->setMaterial(material);
         shield->dissipate();
     }
 
     m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+
+    _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
 }
 
 Ship::~Ship()
@@ -127,6 +130,15 @@ void Ship::draw(const jeti::Render& render) const
         _drawShield(render);
         //RenderShieldEffect(render, 1.0f - color().a);
     //}
+
+        if (m_ship->navigator().path().positions().size()) {
+            std::vector<glm::vec3> positions;
+            for(const auto& step: m_ship->navigator().path().positions()) {
+                positions.push_back(step.center);
+            }
+            _path()->update(positions);
+            _drawPath(render);
+        }
 }
 
 //void ShipDrawable::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
