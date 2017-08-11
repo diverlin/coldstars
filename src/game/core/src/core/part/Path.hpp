@@ -30,19 +30,26 @@ public:
     Path()=default;
     ~Path()=default;
 
-    const std::vector<ceti::Position>& positions() const { return m_positions; }
-    std::vector<ceti::Position>& positions() { return m_positions; }
+    const std::vector<glm::vec3>& centers() const { return m_centers; }
+    std::vector<glm::vec3>& centers() { return m_centers; }
+
+    const std::vector<glm::vec3>& directions() const { return m_directions; }
+    std::vector<glm::vec3>& directions() { return m_directions; }
 
     void add(const glm::vec3&, const glm::vec3&);
-    const ceti::Position& position() const;
     void clear();
+
+    const glm::vec3& center() const;
+    const glm::vec3& direction() const;
 
     void update();
     bool isValid() const;
     bool isCompleted() const { return m_isCompelted; }
 
 private:
-    std::vector<ceti::Position> m_positions;
+    std::vector<glm::vec3> m_centers;
+    std::vector<glm::vec3> m_directions;
+
     int m_it = -1;
     bool m_isCompelted = false;
 };
@@ -61,18 +68,21 @@ bool isLookingTowards(const glm::vec3& v1,
 
 glm::vec3 rotVec(glm::vec3 orig, glm::vec3 O, float angle);
 
-bool calcDirectPath(std::vector<ceti::Position>& positions,
-              const glm::vec3& from,
-              const glm::vec3& to,
-              float speed);
+bool calcDirectPath(std::vector<glm::vec3>& centers,
+                    std::vector<glm::vec3>& directions,
+                    const glm::vec3& from,
+                    const glm::vec3& to,
+                    float speed);
 
-bool calcRoundPath(std::vector<ceti::Position>& positions,
-              const glm::vec3& from,
-              const glm::vec3& to,
-              const glm::vec3& dir,
-              float speed);
+bool calcRoundPath(std::vector<glm::vec3>& centers,
+                   std::vector<glm::vec3>& directions,
+                   const glm::vec3& from,
+                   const glm::vec3& to,
+                   const glm::vec3& dir,
+                   float speed);
 
-bool calcPath(std::vector<ceti::Position>& positions,
+bool calcPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
               const glm::vec3& from,
               const glm::vec3& to,
               const glm::vec3& dir,

@@ -29,12 +29,12 @@
 
 namespace ceti {
 
-class Position {
-public:
-    Position(const glm::vec3& center, const glm::vec3& direction):center(center), direction(direction) {}
-    glm::vec3 center;
-    glm::vec3 direction;
-};
+//class Position {
+//public:
+//    Position(const glm::vec3& center, const glm::vec3& direction):center(center), direction(direction) {}
+//    glm::vec3 center;
+//    glm::vec3 direction;
+//};
 
 namespace model {
 
@@ -80,7 +80,7 @@ public:
 
     void setPosition(float x, float y, float z);
     void setPosition(const meti::vec3& position);
-    void setPosition(const Position& position);
+//    void setPosition(const Position& position);
 
     void setSize(float x, float y, float z);
     void setSize(const meti::vec3& size);

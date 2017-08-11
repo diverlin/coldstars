@@ -45,10 +45,8 @@ Orientation::Orientation(model::Orientation* model)
     __updateCollisionRadius();
 }
 
-/* virtual */
 Orientation::~Orientation()
 {
-    //    LOG("___::~Orientation("+std::to_string(id())+")");
 }
 
 void Orientation::setPosition(float x, float y, float z) {
@@ -61,11 +59,11 @@ void Orientation::setPosition(const meti::vec3& position) {
     m_isUpdated = false;
 }
 
-void Orientation::setPosition(const Position& position)   {
-    model()->setPosition(position.center);
-    model()->setDirection(position.direction);
-    m_isUpdated = false;
-}
+//void Orientation::setPosition(const Position& position)   {
+//    model()->setPosition(position.center);
+//    model()->setDirection(position.direction);
+//    m_isUpdated = false;
+//}
 
 void Orientation::setSize(float x, float y, float z) {
     setSize(meti::vec3(x, y, z));
