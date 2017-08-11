@@ -45,8 +45,8 @@ const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
 Scaner::Scaner()
 {
     setType(descriptor::Type::SCANER_EQUIPMENT);
-    setObType(entity::Type::EQUIPMENT);
-    setObGroup(entity::Type::SCANER_EQUIPMENT);
+    setObType(entity::Type::SCANER_EQUIPMENT);
+    setObGroup(entity::Type::EQUIPMENT);
     setSlotType(entity::Type::SCANER_SLOT);
 }
 

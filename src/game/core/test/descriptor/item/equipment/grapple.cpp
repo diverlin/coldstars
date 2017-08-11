@@ -32,8 +32,8 @@ TEST(descriptor, clone_grapple) {
     descriptor::item::Grapple* copy = new descriptor::item::Grapple(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::GRAPPLE_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::GRAPPLE_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::GRAPPLE_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::GRAPPLE_SLOT);
 
     EXPECT_EQ(descr->strength(), copy->strength());

@@ -25,8 +25,8 @@ namespace descriptor {
 Satellite::Satellite()
 {
     setType(descriptor::Type::SATELLITE);
-    setObType(entity::Type::VEHICLE);
-    setObGroup(entity::Type::SATELLITE);
+    setObType(entity::Type::SATELLITE);
+    setObGroup(entity::Type::VEHICLE);
 }
 
 Satellite::Satellite(const std::string& data)

@@ -608,7 +608,24 @@ void Player::__clickOn(view::Asteroid* asteroid)
 
 void Player::__clickOn(view::Ship* ship)
 {
-    assert(false);
+
+    switch(m_cursor.mouseData().event) {
+    case MouseData::LeftButtonClick: {
+        assert(false);
+        //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+        //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
+        //        }
+        break;
+    }
+    case MouseData::RightButtonClick: {
+        assert(false);
+        //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
+        //            npc->vehicle()->GetComplexDrive().UpdatePath();
+        break;
+    }
+    }
+
+
 //            if (npc->vehicle()->id() != ship->id()) {
 ////                if (data_mouse.left_click) {
 ////                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {

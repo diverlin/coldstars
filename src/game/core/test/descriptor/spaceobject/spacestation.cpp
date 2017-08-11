@@ -30,8 +30,8 @@ namespace test {
 namespace {
 void testSpaceStationEquality(descriptor::SpaceStation* descr, descriptor::SpaceStation* copy) {
     EXPECT_EQ(descr->type(), descriptor::Type::SPACESTATION);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SPACESTATION);
+    EXPECT_EQ(descr->obType(), entity::Type::SPACESTATION);
+    EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
 }
 } // namespace
 

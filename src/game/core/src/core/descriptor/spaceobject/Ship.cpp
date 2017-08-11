@@ -25,8 +25,8 @@ namespace descriptor {
 Ship::Ship()
 {
     setType(descriptor::Type::SHIP);
-    setObType(entity::Type::VEHICLE);
-    setObGroup(entity::Type::SHIP);
+    setObType(entity::Type::SHIP);
+    setObGroup(entity::Type::VEHICLE);
 }
 
 Ship::Ship(const std::string& data)

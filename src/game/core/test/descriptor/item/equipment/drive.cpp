@@ -32,8 +32,8 @@ TEST(descriptor, clone_drive) {
     descriptor::item::Drive* copy = new descriptor::item::Drive(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::DRIVE_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::DRIVE_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::DRIVE_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::DRIVE_SLOT);
 
     EXPECT_EQ(descr->speed(), copy->speed());

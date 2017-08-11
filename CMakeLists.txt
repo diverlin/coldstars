@@ -5,7 +5,7 @@ set(PROJECT coldstars)
 
 project(${PROJECT})
 
-set(USE_TEST OFF)
+set(USE_TEST ON)
 if(USE_TEST)
     add_definitions(-DUSE_TEST)
 endif()

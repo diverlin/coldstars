@@ -25,8 +25,8 @@ namespace descriptor {
 SpaceStation::SpaceStation()
 {
     setType(descriptor::Type::SPACESTATION);
-    setObType(entity::Type::VEHICLE);
-    setObGroup(entity::Type::SPACESTATION);
+    setObType(entity::Type::SPACESTATION);
+    setObGroup(entity::Type::VEHICLE);
 }
 
 SpaceStation::SpaceStation(const std::string& data)

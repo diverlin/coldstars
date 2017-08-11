@@ -43,8 +43,8 @@ const float Protector::MODULES_NUM_WEIGHT = 0.2f;
 Protector::Protector()
 {
     setType(descriptor::Type::PROTECTOR_EQUIPMENT);
-    setObType(entity::Type::EQUIPMENT);
-    setObGroup(entity::Type::PROTECTOR_EQUIPMENT);
+    setObType(entity::Type::PROTECTOR_EQUIPMENT);
+    setObGroup(entity::Type::EQUIPMENT);
     setSlotType(entity::Type::PROTECTOR_SLOT);
 }
 

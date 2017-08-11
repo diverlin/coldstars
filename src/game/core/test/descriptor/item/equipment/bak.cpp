@@ -32,8 +32,8 @@ TEST(descriptor, clone_bak) {
     descriptor::item::Bak* copy = new descriptor::item::Bak(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::BAK_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::BAK_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::BAK_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::BAK_SLOT);
 
     EXPECT_EQ(descr->fuel(), copy->fuel());

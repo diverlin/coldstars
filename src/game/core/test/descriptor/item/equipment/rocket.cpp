@@ -32,8 +32,8 @@ TEST(descriptor, clone_rocket) {
     descriptor::item::Rocket* copy = new descriptor::item::Rocket(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::ROCKET_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::ROCKET_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::ROCKET_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);
 
     EXPECT_EQ(descr->ammo(), copy->ammo());

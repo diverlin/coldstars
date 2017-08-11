@@ -32,8 +32,8 @@ TEST(descriptor, clone_protector) {
     descriptor::item::Protector* copy = new descriptor::item::Protector(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::PROTECTOR_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::PROTECTOR_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::PROTECTOR_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::PROTECTOR_SLOT);
 
     EXPECT_EQ(descr->protection(), copy->protection());
