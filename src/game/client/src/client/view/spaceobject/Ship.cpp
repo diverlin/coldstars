@@ -48,7 +48,7 @@ Ship::Ship(control::Ship* ship)
     }
 
     {
-        effect::Shield* shield = createShieldEffect();
+        effect::Shield* shield = createShield();
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::SHIELD_EFFECT);
         shield->setMaterial(material);
         shield->dissipate();
