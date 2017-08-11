@@ -23,16 +23,13 @@
 
 namespace path {
 
-//void
-//Path::add(const glm::vec3& center, const glm::vec3& direction) {
-//    m_centers.push_back(center);
-//    m_directions.push_back(direction);
-//}
-
 void Path::init() {
     assert(m_centers.size() == m_directions.size());
-    if (m_it == -1) {
+    if (!m_centers.empty()) {
+        m_isValid = true;
         m_it = 0;
+    } else {
+        m_isValid = false;
     }
 }
 
@@ -40,33 +37,28 @@ void
 Path::clear() {
     m_centers.clear();
     m_directions.clear();
-    m_it = -1;
-}
-
-bool
-Path::isValid() const {
-    if (m_it == -1 || m_centers.empty() || isCompleted()) {
-        return false;
-    }
-    return true;
+    m_it = 0;
 }
 
 const glm::vec3&
 Path::center() const {
-    assert(m_it>=0 && m_it<=m_centers.size());
+    assert(m_it<=m_centers.size());
     return m_centers[m_it];
 }
 
 const glm::vec3&
 Path::direction() const {
-    assert(m_it>=0 && m_it<=m_directions.size());
+    assert(m_it<=m_directions.size());
     return m_directions[m_it];
 }
 
 void Path::update() {
-    if (m_it++ == m_centers.size()) {
-        m_isCompelted = true;
-        m_it = -1;
+    if (m_it < m_centers.size()) {
+        m_it++;
+    }
+
+    if (m_it == m_centers.size()) {
+        m_isValid = false;
     }
 }
 
