@@ -131,20 +131,23 @@ TEST(coords, word2screen)
 
         {
             glm::vec3 world_coord(zero);
-            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            glm::vec3 screen_coord;
+            render.toScreenCoord(world_coord, screen_coord);
             EXPECT_TRUE(epsilonEqual(glm::vec3(w/2,h/2,0), screen_coord));
         }
 
         {
             glm::vec3 world_coord(w/2*scale,h/2*scale,0);
-            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            glm::vec3 screen_coord;
+            render.toScreenCoord(world_coord, screen_coord);
             EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
         }
 
         {
             glm::vec3 world_coord(zero);
             render.camera()->setPosition(glm::vec3(-w/2*scale,-h/2*scale,0));
-            glm::vec3 screen_coord = render.toScreenCoord(world_coord);
+            glm::vec3 screen_coord;
+            render.toScreenCoord(world_coord, screen_coord);
             EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
         }
     }

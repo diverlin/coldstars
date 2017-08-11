@@ -48,7 +48,7 @@ public:
     descriptor::Type type() const { return m_type; }
     const entity::Type& obType() const { return m_obType; }
     const entity::Type& obGroup() const { return m_obGroup; }
-    const entity::Type& obSubSubType() const { return m_obClass; }
+    const entity::Type& obClass() const { return m_obClass; }
     race::Type race() const { return m_race; }
     int_t mesh() const { return m_mesh; }
     int_t texture() const { return m_texture; }

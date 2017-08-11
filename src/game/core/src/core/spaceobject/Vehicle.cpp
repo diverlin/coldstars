@@ -355,7 +355,7 @@ void Vehicle::addItemSlot(slot::Item* slot)
 {
     slot->setOwner(this);
 
-    switch(slot->group())
+    switch(slot->type())
     {
     case entity::Type::WEAPON_SLOT:
     {
@@ -384,15 +384,15 @@ void Vehicle::addItemSlot(slot::Item* slot)
     case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
     }
 
-    if ( (slot->group() != entity::Type::ARTEFACT_SLOT) && (slot->group() != entity::Type::CARGO_SLOT) ) {
+    if ( (slot->type() != entity::Type::ARTEFACT_SLOT) && (slot->type() != entity::Type::CARGO_SLOT) ) {
         m_equipmentSlots.push_back(slot);
     }
 
-    if (slot->group() == entity::Type::ARTEFACT_SLOT) {
+    if (slot->type() == entity::Type::ARTEFACT_SLOT) {
         m_artefactSlots.push_back(slot);
     }
 
-    if (slot->group() == entity::Type::CARGO_SLOT) {
+    if (slot->type() == entity::Type::CARGO_SLOT) {
         m_cargoSlots.push_back(slot);
     }
 
@@ -557,7 +557,7 @@ slot::Item*
 Vehicle::__freeFunctionalSlot(const entity::Type& function) const
 {
     for(slot::Item* slot: m_equipmentSlots) {
-        if ( slot->group() == function && !slot->item() ) {
+        if ( slot->type() == function && !slot->item() ) {
             return slot;
         }
     }
@@ -663,7 +663,7 @@ Vehicle::__insertItem(slot::Item* slot, Item* item)
 bool
 Vehicle::mount(Item* item)
 {
-    if (item->descriptor()->obType() == entity::Type::EQUIPMENT) {
+    if (item->descriptor()->obGroup() == entity::Type::EQUIPMENT) {
         slot::Item* slot = __freeFunctionalSlot(item->descriptor()->slotType());
         return __insertItem(slot, item);
     }
@@ -1612,7 +1612,7 @@ std::vector<slot::Item*>
 Vehicle::__equipedSlotsByType(const entity::Type& type) {
     std::vector<slot::Item*> result;
     for(slot::Item* slot: m_equipmentSlots) {
-        if (slot->group() == type && slot->item()) {
+        if (slot->type() == type && slot->item()) {
             result.push_back(slot);
         }
     }

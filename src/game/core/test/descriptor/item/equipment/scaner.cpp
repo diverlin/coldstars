@@ -32,8 +32,8 @@ TEST(descriptor, clone_scaner) {
     descriptor::item::Scaner* copy = new descriptor::item::Scaner(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::SCANER_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SCANER_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::SCANER_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::SCANER_SLOT);
 
     EXPECT_EQ(descr->scan(), copy->scan());

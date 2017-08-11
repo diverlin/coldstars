@@ -32,8 +32,8 @@ TEST(descriptor, clone_radar) {
     descriptor::item::Radar* copy = new descriptor::item::Radar(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::RADAR_EQUIPMENT);
-    EXPECT_EQ(descr->obType(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->obSubType(), entity::Type::RADAR_EQUIPMENT);
+    EXPECT_EQ(descr->obType(), entity::Type::RADAR_EQUIPMENT);
+    EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     EXPECT_EQ(descr->slotType(), entity::Type::RADAR_SLOT);
 
     EXPECT_EQ(descr->radius(), copy->radius());

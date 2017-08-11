@@ -74,15 +74,15 @@ namespace slot {
 class Item : public Base
 {
 public:
-    Item(entity::Type group);
+    Item(entity::Type);
     virtual ~Item();
 
     void setType(entity::Type type) { m_type = type; }
-    void setSubType(entity::Type subtype) { m_subtype = subtype; }
+    void setGroup(entity::Type group) { m_group = group; }
     void setPosition(int position) { m_position = position; }
 
     entity::Type type() const { return m_type; }
-    entity::Type group() const { return m_subtype; }
+    //entity::Type group() const { return m_group; }
     int position() const { return m_position; }
 
 //    virtual void putChildrenToGarbage() const;
@@ -146,7 +146,7 @@ private:
 
     int m_position = NONE;
     entity::Type m_type = entity::Type::NONE;
-    entity::Type m_subtype = entity::Type::NONE;
+    entity::Type m_group = entity::Type::NONE;
 
     //    virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
     //    virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;

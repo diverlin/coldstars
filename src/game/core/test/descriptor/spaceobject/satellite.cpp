@@ -30,8 +30,8 @@ namespace test {
 namespace {
 void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* copy) {
     EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SATELLITE);
+    EXPECT_EQ(descr->obType(), entity::Type::SATELLITE);
+    EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
 }
 } // namespace
 

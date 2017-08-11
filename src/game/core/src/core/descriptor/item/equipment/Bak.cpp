@@ -43,8 +43,8 @@ const float Bak::MODULES_NUM_WEIGHT = 0.3f;
 Bak::Bak()
 {
     setType(descriptor::Type::BAK_EQUIPMENT);
-    setObType(entity::Type::EQUIPMENT);
-    setObGroup(entity::Type::BAK_EQUIPMENT);
+    setObType(entity::Type::BAK_EQUIPMENT);
+    setObGroup(entity::Type::EQUIPMENT);
     setSlotType(entity::Type::BAK_SLOT);
 }
 

@@ -85,19 +85,16 @@
 
 namespace slot {
 
-Item::Item(entity::Type subtype)
+Item::Item(entity::Type type)
 {
-    setType(entity::Type::ITEM_SLOT);
-    setSubType(subtype);
+    setType(type);
+    setGroup(entity::Type::ITEM_SLOT);
     
     m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
 }
 
-/* virtual */
 Item::~Item()
-{
-//    LOG("___::~ItemSlot("+std::to_string(id())+")");
-}  
+{}  
 
 ///* virtual */
 //void Item::putChildrenToGarbage() const
@@ -110,10 +107,10 @@ Item::~Item()
 
 bool Item::__checkItemInsertion(control::Item* item) const
 {
-    if (group() == entity::Type::CARGO_SLOT) {
+    if (type() == entity::Type::CARGO_SLOT) {
         return true;
     }
-    if (group() == item->descriptor()->slotType()) {
+    if (type() == item->descriptor()->slotType()) {
         return true;
     }
     
@@ -122,7 +119,7 @@ bool Item::__checkItemInsertion(control::Item* item) const
 
 bool Item::insert(control::Item* item)
 {
-    if ((group() == entity::Type::CARGO_SLOT) || (group() == item->descriptor()->slotType())) {
+    if ((type() == entity::Type::CARGO_SLOT) || (type() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->release();
@@ -130,7 +127,7 @@ bool Item::insert(control::Item* item)
         item->setSlot(this);
         item->model()->setSlot(position());
 
-        if (group() == item->descriptor()->slotType()) {
+        if (type() == item->descriptor()->slotType()) {
             updateVehiclePropetries();
         }
         return true;
@@ -145,14 +142,14 @@ void Item::release()
         return;
     }
 
-    if (group() == entity::Type::WEAPON_SLOT) {
+    if (type() == entity::Type::WEAPON_SLOT) {
         weapon()->reset();
     }
 
     // make it oop
     m_item = nullptr;
 
-    if (group() != entity::Type::CARGO_SLOT) {
+    if (type() != entity::Type::CARGO_SLOT) {
         updateVehiclePropetries();
     }
 }
@@ -195,11 +192,11 @@ void Item::updateVehiclePropetries() const
     // TODO: make it oop
     assert(vehicleOwner());
 
-    if (group() == entity::Type::CARGO_SLOT) {
+    if (type() == entity::Type::CARGO_SLOT) {
         return;
     }
 
-    switch(group())
+    switch(type())
     {
     case entity::Type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
     case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
@@ -226,6 +223,8 @@ void Item::updateVehiclePropetries() const
     case entity::Type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
 
     case entity::Type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
+    default:
+        assert(false);
     }
 }
 

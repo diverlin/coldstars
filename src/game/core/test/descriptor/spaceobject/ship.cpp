@@ -31,8 +31,8 @@ namespace test {
 namespace {
 void testShipEquality(descriptor::Ship* descr, descriptor::Ship* copy) {
     EXPECT_EQ(descr->type(), descriptor::Type::SHIP);
-    EXPECT_EQ(descr->obType(), entity::Type::VEHICLE);
-    EXPECT_EQ(descr->obSubType(), entity::Type::SHIP);
+    EXPECT_EQ(descr->obType(), entity::Type::SHIP);
+    EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
 }
 } // namespace
 

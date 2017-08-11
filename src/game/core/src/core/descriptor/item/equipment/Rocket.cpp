@@ -53,8 +53,8 @@ const float Rocket::MODULES_NUM_WEIGHT = 0.2f;
 Rocket::Rocket()
 {
     setType(descriptor::Type::ROCKET_EQUIPMENT);
-    setObType(entity::Type::EQUIPMENT);
-    setObGroup(entity::Type::ROCKET_EQUIPMENT);
+    setObType(entity::Type::ROCKET_EQUIPMENT);
+    setObGroup(entity::Type::EQUIPMENT);
     setSlotType(entity::Type::WEAPON_SLOT);
 }
 

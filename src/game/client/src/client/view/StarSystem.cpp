@@ -462,30 +462,27 @@ void StarSystem::__add(Base* view)
         m_asteroids.push_back(asteroid);
         return;
     }
-    case entity::Type::VEHICLE: {
-        switch(view->group()) {
-        case entity::Type::SPACESTATION: {
-            SpaceStation* spacestation = static_cast<SpaceStation*>(view);
-            assert(spacestation);
-            m_spacestations.push_back(spacestation);
-            return;
-        }
-        case entity::Type::SHIP: {
-            Ship* ship = static_cast<Ship*>(view);
-            assert(ship);
-            m_ships.push_back(ship);
-            return;
-        }
-        case entity::Type::SATELLITE: {
-            Satellite* satellite = static_cast<Satellite*>(view);
-            assert(satellite);
-            m_satellites.push_back(satellite);
-            return;
-        }
-        }
+    case entity::Type::SPACESTATION: {
+        SpaceStation* spacestation = static_cast<SpaceStation*>(view);
+        assert(spacestation);
+        m_spacestations.push_back(spacestation);
+        return;
     }
+    case entity::Type::SHIP: {
+        Ship* ship = static_cast<Ship*>(view);
+        assert(ship);
+        m_ships.push_back(ship);
+        return;
     }
-    assert(false);
+    case entity::Type::SATELLITE: {
+        Satellite* satellite = static_cast<Satellite*>(view);
+        assert(satellite);
+        m_satellites.push_back(satellite);
+        return;
+    }
+    default:
+        assert(false);
+    }
 }
 
 void StarSystem::__add(Star* view)
