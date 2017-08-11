@@ -22,6 +22,7 @@
 #include <core/descriptor/Base.hpp>
 
 #include <jeti/Render.hpp>
+#include <jeti/PathVisual.hpp>
 
 namespace view {
 
@@ -41,6 +42,11 @@ Base::~Base()
         delete m_shield;
         m_shield = nullptr;
     }
+
+    if (m_path) {
+        delete m_path;
+        m_path= nullptr;
+    }
 }
 
 void Base::update()
@@ -55,10 +61,16 @@ int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 
 effect::Shield*
-Base::createShieldEffect() {
+Base::createShield() {
     assert(m_shield == nullptr);
     m_shield = new effect::Shield();
     return m_shield;
+}
+
+void
+Base::createPath(jeti::control::Material* material) {
+    assert(m_path == nullptr);
+    m_path = new jeti::view::Path(material);
 }
 
 void Base::addDecor(Base* decor) {

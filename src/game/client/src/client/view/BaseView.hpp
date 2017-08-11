@@ -26,6 +26,16 @@
 
 #include <jeti/BaseView.hpp>
 
+namespace jeti {
+namespace view {
+class Path;
+} // namespace view
+
+namespace control {
+class Material;
+} // namespace control
+} // namespace jeti
+
 namespace control {
 class Base;
 } // namespace control
@@ -44,7 +54,8 @@ public:
     int_t texture() const;
 
     void addDecor(Base*);
-    effect::Shield* createShieldEffect();
+    void createPath(jeti::control::Material*);
+    effect::Shield* createShield();
 
     const std::vector<Base*>& decors() const { return m_decors; }
     void update();
@@ -57,6 +68,7 @@ private:
     control::Base* m_control_base = nullptr;
     std::vector<Base*> m_decors;
     effect::Shield* m_shield = nullptr;
+    jeti::view::Path* m_path = nullptr;
 };
 
 } // namespace view
