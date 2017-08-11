@@ -248,11 +248,12 @@ void Drive::__calcPath()
     
     m_path.clear();
 
-    if(!path::calcPath(m_path.positions(),
-                 m_ownerVehicle->position(),
-                 m_targetPos,
-                 m_ownerVehicle->direction(),
-                 m_ownerVehicle->properties().speed))
+    if(!path::calcPath(m_path.centers(),
+                       m_path.directions(),
+                       m_ownerVehicle->position(),
+                       m_targetPos,
+                       m_ownerVehicle->direction(),
+                       m_ownerVehicle->properties().speed))
     {
         m_path.clear();
     }
@@ -262,7 +263,8 @@ void Drive::__calcPath()
 void Drive::update()
 {
     if (m_path.isValid()) {
-        m_ownerVehicle->setPosition(m_path.position());
+        m_ownerVehicle->setPosition(m_path.center());
+        m_ownerVehicle->setDirection(m_path.direction());
         m_path.update();
     }
 }

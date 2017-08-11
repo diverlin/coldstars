@@ -25,32 +25,39 @@ namespace path {
 
 void
 Path::add(const glm::vec3& center, const glm::vec3& direction) {
-    m_positions.push_back(ceti::Position(center, direction));
+    m_centers.push_back(center);
+    m_directions.push_back(direction);
 }
 
 void
 Path::clear() {
-    m_positions.clear();
+    m_centers.clear();
+    m_directions.clear();
     m_it = -1;
 }
 
 bool
 Path::isValid() const {
-    if (m_it == -1 || m_positions.empty() || isCompleted()) {
+    if (m_it == -1 || m_centers.empty() || isCompleted()) {
         return false;
     }
     return true;
 }
 
+const glm::vec3&
+Path::center() const {
+    assert(m_it >= m_centers.size());
+    return m_centers[m_it];
+}
 
-const ceti::Position&
-Path::position() const {
-    assert(m_it >= m_positions.size());
-    return m_positions[m_it];
+const glm::vec3&
+Path::direction() const {
+    assert(m_it >= m_directions.size());
+    return m_directions[m_it];
 }
 
 void Path::update() {
-    if (m_it++ == m_positions.size()) {
+    if (m_it++ == m_centers.size()) {
         m_isCompelted = true;
     }
 }
@@ -79,17 +86,19 @@ bool isLookingTowards(const glm::vec3& v1, const glm::vec3& v2) {
 }
 
 
-bool calcDirectPath(std::vector<ceti::Position>& positions,
-              const glm::vec3& from,
-              const glm::vec3& to,
-              float speed)
+bool calcDirectPath(std::vector<glm::vec3>& centers,
+                    std::vector<glm::vec3>& directions,
+                    const glm::vec3& from,
+                    const glm::vec3& to,
+                    float speed)
 {
     glm::vec3 new_center(from);
     glm::vec3 dir = glm::normalize(to - from);
 
     while(glm::length(to - new_center) >= speed) {
         new_center += dir * speed;
-        positions.push_back(ceti::Position(new_center, dir));
+        centers.push_back(new_center);
+        directions.push_back(dir);
     }
 
     return true;
@@ -105,7 +114,8 @@ glm::vec3 rotVec(glm::vec3 orig, glm::vec3 O, float angle) {
 }
 
 
-bool calcRoundPath(std::vector<ceti::Position>& positions,
+bool calcRoundPath(std::vector<glm::vec3>& centers,
+                   std::vector<glm::vec3>& directions,
                    const glm::vec3& from,
                    const glm::vec3& to,
                    const glm::vec3& dir,
@@ -160,12 +170,14 @@ bool calcRoundPath(std::vector<ceti::Position>& positions,
         //std::cout<<"d: "<<meti::to_string(new_direction)<<std::endl;
         //std::cout<<"td: "<<meti::to_string(target_dir)<<std::endl;
 
-        positions.push_back(ceti::Position(new_center, new_direction));
+        centers.push_back(new_center);
+        directions.push_back(new_direction);
     }
 
     // manual last step
     new_center = new_center + speed * new_direction;
-    positions.push_back(ceti::Position(new_center, new_direction));
+    centers.push_back(new_center);
+    directions.push_back(new_direction);
 
     //std::cout<<"cm: "<<meti::to_string(new_center)<<std::endl;
     //std::cout<<"dm: "<<meti::to_string(new_direction)<<std::endl;
@@ -176,7 +188,8 @@ bool calcRoundPath(std::vector<ceti::Position>& positions,
     return true;
 }
 
-bool calcPath(std::vector<ceti::Position>& positions,
+bool calcPath(std::vector<glm::vec3>& centers,
+              std::vector<glm::vec3>& directions,
               const glm::vec3& from,
               const glm::vec3& to,
               const glm::vec3& dir,
@@ -188,7 +201,8 @@ bool calcPath(std::vector<ceti::Position>& positions,
         return false;
     }
     if (!isLookingTowards(to-from, dir)) {
-        result = calcRoundPath(positions,
+        result = calcRoundPath(centers,
+                               directions,
                                from,
                                to,
                                dir,
@@ -199,13 +213,14 @@ bool calcPath(std::vector<ceti::Position>& positions,
     if (result) {
         glm::vec3 from2(from);
         glm::vec3 dir2(dir);
-        if (positions.size()) {
-            from2 = positions.back().center;
-            dir2 = positions.back().direction;
+        if (centers.size()) {
+            from2 = centers.back();
+            dir2 = directions.back();
         }
 
         assert(isLookingTowards(to-from2, dir2));
-        result = calcDirectPath(positions,
+        result = calcDirectPath(centers,
+                                directions,
                                 from2,
                                 to,
                                 speed);

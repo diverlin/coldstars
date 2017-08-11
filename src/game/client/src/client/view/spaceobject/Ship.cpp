@@ -131,12 +131,8 @@ void Ship::draw(const jeti::Render& render) const
         //RenderShieldEffect(render, 1.0f - color().a);
     //}
 
-        if (m_ship->navigator().path().positions().size()) {
-            std::vector<glm::vec3> positions;
-            for(const auto& step: m_ship->navigator().path().positions()) {
-                positions.push_back(step.center);
-            }
-            _path()->update(positions);
+        if (m_ship->navigator().path().centers().size()) {
+            _path()->update(m_ship->navigator().path().centers());
             _drawPath(render);
         }
 }
