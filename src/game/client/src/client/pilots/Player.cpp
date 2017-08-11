@@ -517,14 +517,12 @@ void Player::__clickOn(view::Bullet* bullet)
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(false);
 //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //            npc->vehicle()->GetComplexWeapon().SetTarget(bullet);
 //        }
         break;
     }
     case MouseData::RightButtonClick: {
-        assert(false);
 //        npc->vehicle()->GetComplexDrive().SetTarget(bullet, NAVIGATOR_ACTION::KEEP_MIDDLE);
 //        npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -534,7 +532,6 @@ void Player::__clickOn(view::Bullet* bullet)
 
 void Player::__clickOn(view::Container* container)
 {
-    assert(false);
 //    if (data_mouse.left_click) {
 //        //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
 //    }
@@ -555,7 +552,6 @@ void Player::__clickOn(view::Container* container)
 
 void Player::__clickOn(view::Satellite* satellite)
 {
-        assert(false);
 //            if (data_mouse.left_click) {
 //                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //                    npc->vehicle()->GetComplexWeapon().SetTarget(satellite);
@@ -584,14 +580,12 @@ void Player::__clickOn(view::Asteroid* asteroid)
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(false);
         //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
         //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
         //        }
         break;
     }
     case MouseData::RightButtonClick: {
-        assert(false);
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -604,14 +598,12 @@ void Player::__clickOn(view::Ship* ship)
 
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(false);
         //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
         //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
         //        }
         break;
     }
     case MouseData::RightButtonClick: {
-        assert(false);
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -696,7 +688,6 @@ void Player::__clickOn(view::Planet* planet)
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(false);
         //        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
         //        npc->GetStateMachine().SetCurrentMicroTask(microtask);
         //        npc->vehicle()->GetComplexDrive().UpdatePath();
