@@ -959,8 +959,6 @@ void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
 
 void StarSystem::__updateEntities_s(int time, bool show_effect)
 {
-    loadEntitiesResource(); // hack for speed run
-
     for (auto star: m_stars) { star->updateInSpace(time, show_effect);  }
     for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_wormholes.size(); i++)        { m_wormholes[i]->updateInSpace(time, show_effect); }

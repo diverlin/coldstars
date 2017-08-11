@@ -248,13 +248,15 @@ void Drive::__calcPath()
     
     m_path.clear();
 
-    if(!path::calcPath(m_path.centers(),
+    if(path::calcPath(m_path.centers(),
                        m_path.directions(),
                        m_ownerVehicle->position(),
                        m_targetPos,
                        m_ownerVehicle->direction(),
                        m_ownerVehicle->properties().speed))
     {
+        m_path.init();
+    } else {
         m_path.clear();
     }
 }

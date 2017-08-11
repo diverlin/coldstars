@@ -92,7 +92,7 @@ Ship::~Ship()
 /* virtual override final */
 void Ship::update(int time)
 {
-    _checkDeath(false);
+    //_checkDeath(false);
     //    GetComplexProtector().GetShieldEffect()->Update();
     navigator().update(); // debug
 
