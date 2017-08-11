@@ -36,12 +36,13 @@ public:
     const std::vector<glm::vec3>& directions() const { return m_directions; }
     std::vector<glm::vec3>& directions() { return m_directions; }
 
-    void add(const glm::vec3&, const glm::vec3&);
+//    void add(const glm::vec3&, const glm::vec3&);
     void clear();
 
     const glm::vec3& center() const;
     const glm::vec3& direction() const;
 
+    void init();
     void update();
     bool isValid() const;
     bool isCompleted() const { return m_isCompelted; }
