@@ -31,8 +31,7 @@ namespace view {
 
 Path::Path(control::Material* material)
     :
-      m_pointSize(10.0f)
-    , m_meshMove(new Mesh)
+      m_meshMove(new Mesh)
     , m_meshTurn(new Mesh)
     , m_material(material)
 {
@@ -55,7 +54,7 @@ void Path::update(const std::vector<glm::vec3>& positions)
 
 void Path::__processMove(const std::vector<glm::vec3>& positions)
 {
-    int step = 10;
+    int step = STEP;
 
     __processPath(positions, m_meshMove, glm::vec4(0.8f, 0.8f, 1.0f, 0.5f), step, m_pointSize);
 }
@@ -63,7 +62,7 @@ void Path::__processMove(const std::vector<glm::vec3>& positions)
 
 void Path::__processTurn(const std::vector<glm::vec3>& positions)
 {
-    int step = 100;
+    int step = TURN_STEP;
     float size = 1.5f*m_pointSize;
 
     __processPath(positions, m_meshTurn, glm::vec4(0.8f, 1.0f, 0.8f, 0.5f), step, size);
@@ -135,9 +134,8 @@ void Path::__processPath(const std::vector<glm::vec3>& positions, Mesh* mesh, co
 
 void Path::draw(const Render& render) const
 {
-    glm::mat4 MM = glm::scale(glm::vec3(1.0f));
-    render.drawParticles(*m_meshMove, *m_material, MM);
-    render.drawParticles(*m_meshTurn, *m_material, MM);
+    render.drawParticles(*m_meshMove, *m_material);
+    render.drawParticles(*m_meshTurn, *m_material);
 }
 
 } // namespace view

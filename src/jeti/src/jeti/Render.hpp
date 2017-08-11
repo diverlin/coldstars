@@ -125,6 +125,7 @@ public:
     void drawPostEffectBlur(GLuint, int, int) const;
     void drawScreenQuadTextured(GLuint, int, int) const;
 
+    void drawParticles(const Mesh& mesh, const control::Material& material) const;
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawBlinkingParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
@@ -156,7 +157,7 @@ private:
     bool m_allowDrawAxis = false;
     bool m_allowDrawCollisionRadius = true;
 
-    float m_scale = 1.0f;
+    float m_scale = 0.0f;
     float m_scaleBase = SCALE_INIT;
     float m_deltaScale = SCALE_STEP;
 
@@ -170,6 +171,7 @@ private:
     glm::mat4 m_viewMatrix;
     glm::mat4 m_projectionViewMatrix;
     glm::mat4 m_screenModelMatrix;
+    glm::mat4 m_identityMatrix;
 
     Light m_light;
 

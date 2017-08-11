@@ -35,6 +35,10 @@ namespace view {
 
 class Path
 {
+    const float INIT_BASE_SIZE = 20.0f;
+    const int TURN_STEP = 150;
+    const int STEP = TURN_STEP/10;
+
 public:
     Path(control::Material*);
     ~Path();
@@ -48,7 +52,7 @@ public:
     void draw(const Render&) const;
 
 private:
-    float m_pointSize = 1.0f;
+    float m_pointSize = INIT_BASE_SIZE;
     Mesh* m_meshMove = nullptr;
     Mesh* m_meshTurn = nullptr;
     control::Material* m_material = nullptr;
