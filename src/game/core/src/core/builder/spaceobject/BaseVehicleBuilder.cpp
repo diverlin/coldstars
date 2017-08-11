@@ -248,8 +248,8 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, tech::Type tech_level)
             return;
         }
             
-        entity::Type module_subtype_id = meti::getRand(MODULE_TYPES);
-        switch(module_subtype_id) {
+        entity::Type module_group = meti::getRand(MODULE_TYPES);
+        switch(module_group) {
             case entity::Type::LAZER_MODULE:       { vehicle->AddItemToCargoSlot(core::global::get().lazerModuleBuilder().create()); break; }
             case entity::Type::ROCKET_MODULE:      { vehicle->AddItemToCargoSlot(core::global::get().rocketModuleBuilder().create()); break; }
             case entity::Type::DRIVE_MODULE:       { vehicle->AddItemToCargoSlot(core::global::get().driveModuleBuilder().create()); break; }

@@ -211,10 +211,10 @@ void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescript
 
     //                {
     //                    race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
-    //                    entity::Type npc_subtype_id    = entity::Type::WARRIOR;
-    //                    entity::Type npc_subsubtype_id = entity::Type::WARRIOR;
+    //                    entity::Type npc_group    = entity::Type::WARRIOR;
+    //                    entity::Type npc_subgroup = entity::Type::WARRIOR;
 
-    //                    Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+    //                    Npc* npc = core::global::get().npcBuilder().create(npc_race_id, npc_group, npc_subgroup);
     //                    satellite->BindOwnerNpc(npc);
     //                }
 
@@ -237,8 +237,8 @@ void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescript
     //            for (int j=0; j<ship_num; j++)
     //            {
     //                race::type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(type::KIND::GOOD));
-    //                entity::Type npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
-    //                entity::Type npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+    //                entity::Type npc_group    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
+    //                entity::Type npc_subgroup = getRandNpcSubSubTypeId(npc_group);
 
     //                Ship* new_ship = core::global::get().shipBuilder().create(descriptor::getNewVehicle());
     //               core::global::get().shipBuilder().equip(new_ship); // improove
@@ -246,7 +246,7 @@ void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescript
     //                //ShipBuilder::Instance().EquipArtefacts(ship, tech_level);
     //                //ShipBuilder::Instance().EquipBomb(ship, tech_level);
 
-    //                Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+    //                Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_group, npc_subgroup);
     //                new_ship->BindOwnerNpc(new_npc);
 
     //                planet->AddVehicle(new_ship);
@@ -259,17 +259,17 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
 {       
     for (int i=0; i<spacestation_per_system; i++) {
         race::Type npc_race_id = meti::getRand(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
-        entity::Type npc_subtype_id    = entity::Type::WARRIOR;
-        entity::Type npc_subsubtype_id = entity::Type::WARRIOR;
+        entity::Type npc_group    = entity::Type::WARRIOR;
+        entity::Type npc_subgroup = entity::Type::WARRIOR;
 
         //race::type ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
-        //entity::Type ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
+        //entity::Type ship_group = npc_group;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
         control::SpaceStation* spacestation = builder::SpaceStation::gen();
         builder::BaseVehicle::equip(spacestation);
 
-        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        // npc_race_id, npc_group, npc_subgroup
         control::Npc* npc = builder::Npc::gen();
         spacestation->bindNpc(npc);
 
@@ -285,7 +285,7 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
 //            assert(false);
 //            //core::global::get().satelliteBuilder().equip(satellite);                   // improove
 
-//            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_group, npc_subgroup);
 //            assert(false);
 //            //satellite->bindNpc(new_npc);
             
@@ -297,31 +297,31 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
     }
 }
 
-void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Type npc_race_id, entity::Type subtype_id, entity::Type subsubtype_id) const
+void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Type npc_race_id, entity::Type group, entity::Type subgroup) const
 {
-    entity::Type npc_subtype_id = entity::Type::NONE;
-    entity::Type npc_subsubtype_id = entity::Type::NONE;
+    entity::Type npc_group = entity::Type::NONE;
+    entity::Type npc_subgroup = entity::Type::NONE;
 
     for (int i=0; i<ship_num; i++)
     {
         // VERY UGLY LOGIC START (TODO)
-        if (subtype_id == entity::Type::NONE) {
-            npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+        if (group == entity::Type::NONE) {
+            npc_group = getRandNpcSubTypeId(npc_race_id);
         } else {
-            npc_subtype_id = subtype_id;
+            npc_group = group;
         }
 
-        if (subsubtype_id == entity::Type::NONE) {
-            npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+        if (subgroup == entity::Type::NONE) {
+            npc_subgroup = getRandNpcSubSubTypeId(npc_group);
         } else {
-            npc_subsubtype_id = subsubtype_id;
+            npc_subgroup = subgroup;
         }
         // VERY UGLY LOGIC END
 
         control::Ship* new_ship = builder::Ship::gen();
         builder::Ship::equip(new_ship);
 
-        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        // npc_race_id, npc_group, npc_subgroup
         control::Npc* new_npc = builder::Npc::gen();
         new_ship->bindNpc(new_npc);
 

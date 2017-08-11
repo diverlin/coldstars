@@ -45,7 +45,7 @@ Radar::Radar()
 {
     setType(descriptor::Type::RADAR_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::RADAR_EQUIPMENT);
+    setObGroup(entity::Type::RADAR_EQUIPMENT);
     setSlotType(entity::Type::RADAR_SLOT);
 }
 

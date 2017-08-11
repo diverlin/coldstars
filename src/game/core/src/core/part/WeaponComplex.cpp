@@ -112,19 +112,19 @@ void Weapon::deactivateWeapons()
     }
 }
 
-void Weapon::select(const entity::Type& weapon_subtype_id)
+void Weapon::select(const entity::Type& weapon_group)
 {
     for (slot::Item* slot: m_slots_reloaded) {
-        if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
+        if (slot->item()->descriptor()->obGroup() == weapon_group) {
             slot->selectEvent();
         }
     }
 }
 
-void Weapon::deactivateWeapons(const entity::Type& weapon_subtype_id)
+void Weapon::deactivateWeapons(const entity::Type& weapon_group)
 {
     for (slot::Item* slot: m_slots_reloaded) {
-        if (slot->item()->descriptor()->obSubType() == weapon_subtype_id) {
+        if (slot->item()->descriptor()->obGroup() == weapon_group) {
             slot->deselectEvent();
         }
     }

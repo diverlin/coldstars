@@ -40,7 +40,7 @@ class Render;
 class BaseGuiElement
 {
     public:
-        BaseGuiElement(gui::type type_id=gui::type::NONE, gui::type subtype_id=gui::type::NONE, const std::string& info="", jeti::control::Material* textureOb=nullptr);
+        BaseGuiElement(gui::type type_id=gui::type::NONE, gui::type group=gui::type::NONE, const std::string& info="", jeti::control::Material* textureOb=nullptr);
         virtual ~BaseGuiElement();
         
         void SetLabel(const std::string& label) { m_Label = label; }
@@ -50,7 +50,7 @@ class BaseGuiElement
         void setSize(glm::vec2 size) { m_Box.setSize(size); }
             
         gui::type typeId() const { return m_Type_id; }
-        gui::type subTypeId() const { return m_Subtype_id; }
+        gui::type subTypeId() const { return m_group; }
                     
         const ceti::Box2D& GetBox() const { return m_Box; }
         ceti::Box2D& GetBox() { return m_Box; } // !!!
@@ -82,7 +82,7 @@ class BaseGuiElement
     protected:
         std::vector<BaseGuiElement*> m_Child_vec;
 
-        void setSubTypeId(gui::type subtype_id) { m_Subtype_id = subtype_id; }
+        void setSubTypeId(gui::type group) { m_group = group; }
         
         void SetBox(const ceti::Box2D& box) { m_Box = box; }
         
@@ -116,7 +116,7 @@ class BaseGuiElement
                           
     private: 
         gui::type m_Type_id;
-        gui::type m_Subtype_id;
+        gui::type m_group;
         
         jeti::control::Material* m_TextureOb;
         

@@ -54,7 +54,7 @@ Grapple::Grapple()
 {
     setType(descriptor::Type::GRAPPLE_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::GRAPPLE_EQUIPMENT);
+    setObGroup(entity::Type::GRAPPLE_EQUIPMENT);
     setSlotType(entity::Type::GRAPPLE_SLOT);
 }
 

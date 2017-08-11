@@ -18,7 +18,7 @@
 
 //BlackHoleEffect :: BlackHoleEffect()
 //{  
-    ////subtype_id = BLACKHOLE_EFFECT;
+    ////group = BLACKHOLE_EFFECT;
 //}
  
 ///* virtual */

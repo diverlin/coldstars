@@ -30,14 +30,14 @@
 //#include <client/resources/MeshCollector.hpp>
 //#include <jeti/Material.hpp>
 
-GoodsPack::GoodsPack(int id, entity::Type subtype_id)
+GoodsPack::GoodsPack(int id, entity::Type group)
     :
       control::Item(nullptr, nullptr)
 {
     assert(false);
 //    setId(id);
 //    setTypeId(entity::Type::GOODS);
-//    setSubTypeId(subtype_id);
+//    setSubTypeId(group);
 }
 
 /* virtual */
@@ -117,12 +117,12 @@ void GoodsPack::AddCommonInfo()
 //}
 
 
-GoodsPack* GetNewGoodsPack(entity::Type subtype_id, int_t id)
+GoodsPack* GetNewGoodsPack(entity::Type group, int_t id)
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER);
     
-    GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
+    GoodsPack* goodsPack = new GoodsPack(id, group);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());
 
     assert(false);

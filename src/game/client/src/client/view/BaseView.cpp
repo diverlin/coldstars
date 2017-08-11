@@ -56,7 +56,7 @@ void Base::update()
 
 int_t Base::id() const { return m_control_base->id(); }
 entity::Type Base::type() const { return m_control_base->type(); }
-entity::Type Base::subType() const { return m_control_base->subType(); }
+entity::Type Base::group() const { return m_control_base->group(); }
 int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 

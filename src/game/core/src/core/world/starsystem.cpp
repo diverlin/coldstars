@@ -1006,7 +1006,7 @@ void StarSystem::__updateInSpaceInStatic_s()
 
     for (Vehicle* vehicle: m_vehicles) {
         vehicle->npc()->updateInSpaceInStatic();
-        if (vehicle->descriptor()->obSubType() == entity::Type::SPACESTATION) {
+        if (vehicle->descriptor()->obGroup() == entity::Type::SPACESTATION) {
             static_cast<SpaceStation*>(vehicle)->land()->updateInStatic();
         }
     }
@@ -1095,12 +1095,12 @@ void StarSystem::__shipManager_s(unsigned int num)
             prace_id = race::Type::R6;
         }
         
-        entity::Type psubtype_id    = entity::Type::WARRIOR;
-        entity::Type psubsubtype_id = entity::Type::WARRIOR;
+        entity::Type pgroup    = entity::Type::WARRIOR;
+        entity::Type psubgroup = entity::Type::WARRIOR;
         int size_id     = SIZE_4;
         int weapons_num = 7;
 
-        // prace_id, psubtype_id, psubsubtype_id
+        // prace_id, pgroup, psubgroup
         control::Npc* new_npc = builder::Npc::gen();
         control::Ship* new_pship = builder::Ship::gen();
 

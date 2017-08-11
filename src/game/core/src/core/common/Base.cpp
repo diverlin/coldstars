@@ -64,7 +64,7 @@ entity::Type
 Base::type() const { return descriptor()->obType(); }
 
 entity::Type
-Base::subType() const { return descriptor()->obSubType(); }
+Base::group() const { return descriptor()->obGroup(); }
 
 void
 Base::setId(int_t id) { model()->setId(id); }
@@ -91,8 +91,8 @@ Base::die()
     
 ////    save_ptree.put(root+"data_id.id",            m_data_id.id);
 ////    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
-////    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_data_id.subtype_id));
-////    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_data_id.subsubtype_id));
+////    save_ptree.put(root+"data_id.group",    static_cast<int>(m_data_id.group));
+////    save_ptree.put(root+"data_id.subgroup", static_cast<int>(m_data_id.subgroup));
 //}
 
 //void Base::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -101,8 +101,8 @@ Base::die()
     
 ////    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
 ////    m_data_id.type_id         = (entity::Type)load_ptree.get<int>("data_id.type_id");
-////    m_data_id.subtype_id      = (entity::Type)load_ptree.get<int>("data_id.subtype_id");
-////    m_data_id.subsubtype_id   = (entity::Type)load_ptree.get<int>("data_id.subsubtype_id");
+////    m_data_id.group      = (entity::Type)load_ptree.get<int>("data_id.group");
+////    m_data_id.subgroup   = (entity::Type)load_ptree.get<int>("data_id.subgroup");
 //}
 
 //void Base::ResolveData()
@@ -140,8 +140,8 @@ Base::die()
 
 ////    save_ptree.put(root+"data_id.id",            m_data_id.id);
 ////    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
-////    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_data_id.subtype_id));
-////    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_data_id.subsubtype_id));
+////    save_ptree.put(root+"data_id.group",    static_cast<int>(m_data_id.group));
+////    save_ptree.put(root+"data_id.subgroup", static_cast<int>(m_data_id.subgroup));
 //}
 
 //void Base::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -150,8 +150,8 @@ Base::die()
 
 ////    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
 ////    m_data_id.type_id         = (entity::Type)load_ptree.get<int>("data_id.type_id");
-////    m_data_id.subtype_id      = (entity::Type)load_ptree.get<int>("data_id.subtype_id");
-////    m_data_id.subsubtype_id   = (entity::Type)load_ptree.get<int>("data_id.subsubtype_id");
+////    m_data_id.group      = (entity::Type)load_ptree.get<int>("data_id.group");
+////    m_data_id.subgroup   = (entity::Type)load_ptree.get<int>("data_id.subgroup");
 //}
 
 //void Base::ResolveData()

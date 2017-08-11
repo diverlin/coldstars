@@ -1057,7 +1057,7 @@ void Data::__generateMaterialDescriptors()
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET;
-//    association_data.subtype_id = entity::Type::PLANET_MIXED;
+//    association_data.group = entity::Type::PLANET_MIXED;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1071,7 +1071,7 @@ void Data::__generateMaterialDescriptors()
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET;
-//    association_data.subtype_id = entity::Type::PLANET_WATER;
+//    association_data.group = entity::Type::PLANET_WATER;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1085,7 +1085,7 @@ void Data::__generateMaterialDescriptors()
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET;
-//    association_data.subtype_id = entity::Type::PLANET_VULCANIC;
+//    association_data.group = entity::Type::PLANET_VULCANIC;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1100,7 +1100,7 @@ void Data::__generateMaterialDescriptors()
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET;
-//    association_data.subtype_id = entity::Type::PLANET_ICE;
+//    association_data.group = entity::Type::PLANET_ICE;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1114,7 +1114,7 @@ void Data::__generateMaterialDescriptors()
 
 //    jeti::MaterialAssociationData association_data;
 //    association_data.type_id    = type::TEXTURE::PLANET;
-//    association_data.subtype_id = entity::Type::PLANET_GAS;
+//    association_data.group = entity::Type::PLANET_GAS;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);

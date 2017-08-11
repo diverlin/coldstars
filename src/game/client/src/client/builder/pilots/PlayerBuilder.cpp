@@ -72,14 +72,14 @@ Player* PlayerBuilder::createNewPlayer() const
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
     race::Type prace_id         = race::Type::R0;
-    entity::Type psubtype_id    = entity::Type::RANGER;
-    entity::Type psubsubtype_id = entity::Type::WARRIOR;
+    entity::Type pgroup    = entity::Type::RANGER;
+    entity::Type psubgroup = entity::Type::WARRIOR;
     int size_id        = SIZE_4;
     int weapons_num    = 6;
     tech::Type tech = tech::Type::LEVEL3;
     
-//    Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
-//    Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
+//    Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, pgroup, psubgroup);
+//    Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, pgroup, size_id, weapons_num);
     
 //    ShipBuilder::Instance().EquipEquipment(ship, tech_level);
 //    ShipBuilder::Instance().EquipModules(ship, tech_level);

@@ -134,11 +134,11 @@ int main()
     //Screen::Instance().Resize(core::global::get().config().SCREEN_WIDTH/1.5,core::global::get().config().SCREEN_HEIGHT);
     
     /** */
-    //ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
+    //ButtonTrigger* button = new ButtonTrigger(/*group=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
     //button->OnPressEventMBL(player);
     //button->OnPressEventMBL(player);
 
-    //ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
+    //ButtonTrigger* button2 = new ButtonTrigger(/*group=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
     //button2->OnPressEventMBL(player);
     
     ////GuiActions::GalaxyMapGuiTransition(player);

@@ -49,7 +49,7 @@ public:
 
     int_t id() const;
     entity::Type type() const;
-    entity::Type subType() const;
+    entity::Type group() const;
     int_t mesh() const;
     int_t texture() const;
 

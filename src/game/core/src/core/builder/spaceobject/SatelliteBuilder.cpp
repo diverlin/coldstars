@@ -72,7 +72,7 @@ void Satellite::__createInternals(control::Satellite* satellite, descriptor::Sat
 //    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE);
 
 //    int protection_rate = 1;
-//    //if (subtype_id == ENTITY::WARRIOR)
+//    //if (group == ENTITY::WARRIOR)
 //    //{
 //    //protection_rate = 1;
 //    //}

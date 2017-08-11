@@ -249,18 +249,18 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::PressEventMBL_onGuiElement(gui::type subtype_id)
+void GuiManager::PressEventMBL_onGuiElement(gui::type group)
 {
-    gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
+    gui_space.PressEventMBL_onGuiElement(group, player); 
 }    
 
-void GuiManager::ResetEventOnGuiElement(gui::type subtype_id)
+void GuiManager::ResetEventOnGuiElement(gui::type group)
 {
-    gui_space.ResetStateEventOnGuiElement(subtype_id);
+    gui_space.ResetStateEventOnGuiElement(group);
 }    
 
-BaseGuiElement* GuiManager::GetGuiElement(gui::type request_subtype_id) const
+BaseGuiElement* GuiManager::GetGuiElement(gui::type request_group) const
 {
-    return gui_space.GetGuiElement(request_subtype_id);
+    return gui_space.GetGuiElement(request_group);
 }
         

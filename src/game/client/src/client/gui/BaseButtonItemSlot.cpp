@@ -79,41 +79,41 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 //    }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_group) const
 {
     if (m_slot != nullptr)
     {
         if (GetEquiped() == false) 
         {
-            gui::type buton_subtype_id = subTypeId();
+            gui::type buton_group = subTypeId();
             for (entity::Type type: SLOT_WEAPON_TYPES)
             {
-                if (buton_subtype_id == getGuiItemSlotType(type))
+                if (buton_group == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::WEAPON_SLOT;
+                   buton_group = gui::type::WEAPON_SLOT;
                    break;
                 }
             }
             for (entity::Type type: SLOT_CARGO_TYPES)
             {
-                if (buton_subtype_id == getGuiItemSlotType(type))
+                if (buton_group == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::CARGO_SLOT;
+                   buton_group = gui::type::CARGO_SLOT;
                    break;
                 }
             }
             for (entity::Type type: SLOT_ARTEFACT_TYPES)
             {
-                if (buton_subtype_id == getGuiItemSlotType(type))
+                if (buton_group == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = gui::type::ARTEFACT_SLOT;
+                   buton_group = gui::type::ARTEFACT_SLOT;
                    break;
                 }
             }
                                 
-            if (buton_subtype_id != gui::type::GATE_SLOT)
+            if (buton_group != gui::type::GATE_SLOT)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == gui::type::CARGO_SLOT))
+                if ((mark_slot_group == buton_group) or (buton_group == gui::type::CARGO_SLOT))
                 {
                    //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }

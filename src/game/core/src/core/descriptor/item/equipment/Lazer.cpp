@@ -49,7 +49,7 @@ Lazer::Lazer()
 {
     setType(descriptor::Type::LAZER_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::LAZER_EQUIPMENT);
+    setObGroup(entity::Type::LAZER_EQUIPMENT);
     setSlotType(entity::Type::WEAPON_SLOT);
 }
 

@@ -28,10 +28,10 @@
 std::map<gui::type, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
    
-BaseGuiElement::BaseGuiElement(gui::type type_id, gui::type subtype_id, const std::string& info, jeti::control::Material* textureOb)
+BaseGuiElement::BaseGuiElement(gui::type type_id, gui::type group, const std::string& info, jeti::control::Material* textureOb)
 :
 m_Type_id(type_id),
-m_Subtype_id(subtype_id),
+m_group(group),
 m_TextureOb(textureOb),
 m_Info(info),
 m_Locked(false),
@@ -62,9 +62,9 @@ void BaseGuiElement::DeleteAnimationProgram()
 }
 
           
-BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_subtype_id) const
+BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_group) const
 {
-    std::map<gui::type, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
+    std::map<gui::type, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_group);
     if (it != static_gui_element_map.cend())
     {
         return it->second;
@@ -73,18 +73,18 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_subtype_id) cons
     return nullptr;
 }   
     
-void BaseGuiElement::PressEventMBL_onGuiElement(gui::type subtype_id, Player* player)
+void BaseGuiElement::PressEventMBL_onGuiElement(gui::type group, Player* player)
 {
-    BaseGuiElement* button = GetGuiElement(subtype_id);
+    BaseGuiElement* button = GetGuiElement(group);
     if (button != nullptr)
     {
         button->OnPressEventMBL(player);
     }
 }    
 
-void BaseGuiElement::ResetStateEventOnGuiElement(gui::type subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(gui::type group)
 {
-    BaseGuiElement* button = GetGuiElement(subtype_id);
+    BaseGuiElement* button = GetGuiElement(group);
     if (button != nullptr)
     {
         button->ResetState();

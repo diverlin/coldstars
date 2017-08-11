@@ -27,9 +27,9 @@ class Render;
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot2(gui::type subtype_id, const std::string& info, slot::Item* slot)
+    ButtonItemSlot2(gui::type group, const std::string& info, slot::Item* slot)
         :
-          BaseButtonItemSlot(gui::type::BUTTON_ITEMSLOT2, subtype_id, info)
+          BaseButtonItemSlot(gui::type::BUTTON_ITEMSLOT2, group, info)
     {
         SetItemSlot(slot);
     }

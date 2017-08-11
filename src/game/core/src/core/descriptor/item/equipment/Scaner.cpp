@@ -46,7 +46,7 @@ Scaner::Scaner()
 {
     setType(descriptor::Type::SCANER_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::SCANER_EQUIPMENT);
+    setObGroup(entity::Type::SCANER_EQUIPMENT);
     setSlotType(entity::Type::SCANER_SLOT);
 }
 

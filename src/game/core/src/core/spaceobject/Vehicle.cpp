@@ -133,7 +133,7 @@ Vehicle::__loadItemsFromModel()
         control::Base* model_base = manager::Entities::get().base(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
-        switch(descriptor_base->obSubType()) {
+        switch(descriptor_base->obGroup()) {
         case entity::Type::SCANER_EQUIPMENT: {
             item::Scaner* item = manager::Entities::get().scaner(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
@@ -340,11 +340,11 @@ int Vehicle::givenExpirience() const
     //return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
-bool Vehicle::isSlotTypePresent(const entity::Type& slot_subtype_id) const
+bool Vehicle::isSlotTypePresent(const entity::Type& slot_group) const
 {
     assert(false);
 //    for (slot::ItemSlot* slot: m_slots) {
-//        if (slot->subtype() == slot_subtype_id) {
+//        if (slot->subtype() == slot_group) {
 //            return true;
 //        }
 //    }
@@ -355,7 +355,7 @@ void Vehicle::addItemSlot(slot::Item* slot)
 {
     slot->setOwner(this);
 
-    switch(slot->subtype())
+    switch(slot->group())
     {
     case entity::Type::WEAPON_SLOT:
     {
@@ -384,15 +384,15 @@ void Vehicle::addItemSlot(slot::Item* slot)
     case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
     }
 
-    if ( (slot->subtype() != entity::Type::ARTEFACT_SLOT) && (slot->subtype() != entity::Type::CARGO_SLOT) ) {
+    if ( (slot->group() != entity::Type::ARTEFACT_SLOT) && (slot->group() != entity::Type::CARGO_SLOT) ) {
         m_equipmentSlots.push_back(slot);
     }
 
-    if (slot->subtype() == entity::Type::ARTEFACT_SLOT) {
+    if (slot->group() == entity::Type::ARTEFACT_SLOT) {
         m_artefactSlots.push_back(slot);
     }
 
-    if (slot->subtype() == entity::Type::CARGO_SLOT) {
+    if (slot->group() == entity::Type::CARGO_SLOT) {
         m_cargoSlots.push_back(slot);
     }
 
@@ -557,7 +557,7 @@ slot::Item*
 Vehicle::__freeFunctionalSlot(const entity::Type& function) const
 {
     for(slot::Item* slot: m_equipmentSlots) {
-        if ( slot->subtype() == function && !slot->item() ) {
+        if ( slot->group() == function && !slot->item() ) {
             return slot;
         }
     }
@@ -587,13 +587,13 @@ Vehicle::__freeCargoSlot()
 }
 
 slot::Item*
-Vehicle::_cargoSlotWithGoods(place::Type requested_goods_subtype_id)
+Vehicle::_cargoSlotWithGoods(place::Type requested_goods_group)
 {
     assert(false);
 //    for (slot::ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
 //            if (slot->item()->type() == entity::Type::GOODS) {
-//                if (slot->item()->subtype() == requested_goods_subtype_id) {
+//                if (slot->item()->subtype() == requested_goods_group) {
 //                    return slot;
 //                }
 //            }
@@ -1612,7 +1612,7 @@ std::vector<slot::Item*>
 Vehicle::__equipedSlotsByType(const entity::Type& type) {
     std::vector<slot::Item*> result;
     for(slot::Item* slot: m_equipmentSlots) {
-        if (slot->subtype() == type && slot->item()) {
+        if (slot->group() == type && slot->item()) {
             result.push_back(slot);
         }
     }
@@ -1941,10 +1941,10 @@ std::vector<slot::Item*> Vehicle::__equipedAndFunctionalSlots(const std::vector<
 //    return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 //}
 
-//bool Vehicle::isSlotTypePresent(const entity::Type& slot_subtype_id) const
+//bool Vehicle::isSlotTypePresent(const entity::Type& slot_group) const
 //{
 //    for (slot::ItemSlot* slot: m_slots) {
-//        if (slot->subtype() == slot_subtype_id) {
+//        if (slot->subtype() == slot_group) {
 //            return true;
 //        }
 //    }
@@ -2139,10 +2139,10 @@ std::vector<slot::Item*> Vehicle::__equipedAndFunctionalSlots(const std::vector<
 //#endif
 
 //ItemSlot* const
-//Vehicle::_functionalSlot(const entity::Type& functional_slot_subtype_id) const
+//Vehicle::_functionalSlot(const entity::Type& functional_slot_group) const
 //{
 //    for(slot::ItemSlot* slot: m_equipmentSlots) {
-//        if (slot->subtype() == functional_slot_subtype_id) {
+//        if (slot->subtype() == functional_slot_group) {
 //            return slot;
 //        }
 //    }
@@ -2183,12 +2183,12 @@ std::vector<slot::Item*> Vehicle::__equipedAndFunctionalSlots(const std::vector<
 //    return nullptr;
 //}
 
-//ItemSlot* const Vehicle::_cargoSlotWithGoods(entity::Type requested_goods_subtype_id)
+//ItemSlot* const Vehicle::_cargoSlotWithGoods(entity::Type requested_goods_group)
 //{
 //    for (slot::ItemSlot* slot: m_cargoSlots) {
 //        if (slot->item()) {
 //            if (slot->item()->type() == entity::Type::GOODS) {
-//                if (slot->item()->subtype() == requested_goods_subtype_id) {
+//                if (slot->item()->subtype() == requested_goods_group) {
 //                    return slot;
 //                }
 //            }

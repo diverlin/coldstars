@@ -42,7 +42,7 @@ Droid::Droid()
 {
     setType(descriptor::Type::DROID_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::DROID_EQUIPMENT);
+    setObGroup(entity::Type::DROID_EQUIPMENT);
     setSlotType(entity::Type::DROID_SLOT);
 }
 

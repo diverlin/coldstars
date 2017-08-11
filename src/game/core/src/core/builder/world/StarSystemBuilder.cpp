@@ -133,34 +133,34 @@ void StarSystem::__createPlanets(control::StarSystem* starsystem, int planet_per
 
 void StarSystem::__createShips(control::StarSystem* starsystem, int ship_num)
 {
-    entity::Type subtype_id = entity::Type::NONE;
-    entity::Type subsubtype_id = entity::Type::NONE;
+    entity::Type group = entity::Type::NONE;
+    entity::Type subgroup = entity::Type::NONE;
 
-    entity::Type npc_subtype_id = entity::Type::NONE;
-    entity::Type npc_subsubtype_id = entity::Type::NONE;
+    entity::Type npc_group = entity::Type::NONE;
+    entity::Type npc_subgroup = entity::Type::NONE;
 
     race::Type npc_race_id = race::Type::R0;
 
     for(int i=0; i<ship_num; i++)
     {
         // VERY UGLY LOGIC START (TODO)
-        if (subtype_id == entity::Type::NONE) {
-            npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+        if (group == entity::Type::NONE) {
+            npc_group = getRandNpcSubTypeId(npc_race_id);
         } else {
-            npc_subtype_id = subtype_id;
+            npc_group = group;
         }
 
-        if (subsubtype_id == entity::Type::NONE) {
-            npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+        if (subgroup == entity::Type::NONE) {
+            npc_subgroup = getRandNpcSubSubTypeId(npc_group);
         } else {
-            npc_subsubtype_id = subsubtype_id;
+            npc_subgroup = subgroup;
         }
         // VERY UGLY LOGIC END
 
         control::Ship* new_ship = builder::Ship::gen();
         builder::Ship::equip(new_ship);
 
-        // npc_race_id, npc_subtype_id, npc_subsubtype_id
+        // npc_race_id, npc_group, npc_subgroup
         control::Npc* new_npc = builder::Npc::gen();
         new_ship->bindNpc(new_npc);
 

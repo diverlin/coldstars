@@ -85,8 +85,8 @@ Npc::__createInternals(control::Npc* npc, descriptor::Npc* descr)
 ////    npc->setRaceId(race_id);
 
 //    //npc->SetTextureOb(texOb_face);
-//    //npc->setSubTypeId(subtype_id);
-//    //npc->setSubSubTypeId(subsubtype_id);
+//    //npc->setSubTypeId(group);
+//    //npc->setSubSubTypeId(subgroup);
 //    //npc->setLifeData(data_life);
     
 //    assert(false);
@@ -94,7 +94,7 @@ Npc::__createInternals(control::Npc* npc, descriptor::Npc* descr)
 
 //    if ((race_id != race::Type::R6) && (race_id != race::Type::R7))
 //    {
-//        switch(subtype_id)
+//        switch(group)
 //        {
 //        case entity::Type::RANGER:
 //        {
