@@ -36,7 +36,6 @@ public:
     const std::vector<glm::vec3>& directions() const { return m_directions; }
     std::vector<glm::vec3>& directions() { return m_directions; }
 
-//    void add(const glm::vec3&, const glm::vec3&);
     void clear();
 
     const glm::vec3& center() const;
@@ -44,15 +43,14 @@ public:
 
     void init();
     void update();
-    bool isValid() const;
-    bool isCompleted() const { return m_isCompelted; }
+    bool isValid() const { return m_isValid; }
 
 private:
     std::vector<glm::vec3> m_centers;
     std::vector<glm::vec3> m_directions;
 
-    int m_it = -1;
-    bool m_isCompelted = false;
+    int m_it = 0;
+    bool m_isValid = false;
 };
 
 const float ANGLE_STEP = 0.01f;
