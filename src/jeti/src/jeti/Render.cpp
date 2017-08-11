@@ -178,9 +178,9 @@ Render::toWorldCoord(const glm::vec3& screen_coord) const {
     world_coord.x -= m_size.x/2;
     world_coord.y -= m_size.y/2;
 
-    world_coord += m_camera->position();
-
     world_coord *= scaleBase();
+
+    world_coord += m_camera->position();
 
     return world_coord;
 }
