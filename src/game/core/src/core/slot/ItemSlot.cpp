@@ -110,10 +110,10 @@ Item::~Item()
 
 bool Item::__checkItemInsertion(control::Item* item) const
 {
-    if (subtype() == entity::Type::CARGO_SLOT) {
+    if (group() == entity::Type::CARGO_SLOT) {
         return true;
     }
-    if (subtype() == item->descriptor()->slotType()) {
+    if (group() == item->descriptor()->slotType()) {
         return true;
     }
     
@@ -122,7 +122,7 @@ bool Item::__checkItemInsertion(control::Item* item) const
 
 bool Item::insert(control::Item* item)
 {
-    if ((subtype() == entity::Type::CARGO_SLOT) || (subtype() == item->descriptor()->slotType())) {
+    if ((group() == entity::Type::CARGO_SLOT) || (group() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->release();
@@ -130,7 +130,7 @@ bool Item::insert(control::Item* item)
         item->setSlot(this);
         item->model()->setSlot(position());
 
-        if (subtype() == item->descriptor()->slotType()) {
+        if (group() == item->descriptor()->slotType()) {
             updateVehiclePropetries();
         }
         return true;
@@ -145,14 +145,14 @@ void Item::release()
         return;
     }
 
-    if (subtype() == entity::Type::WEAPON_SLOT) {
+    if (group() == entity::Type::WEAPON_SLOT) {
         weapon()->reset();
     }
 
     // make it oop
     m_item = nullptr;
 
-    if (subtype() != entity::Type::CARGO_SLOT) {
+    if (group() != entity::Type::CARGO_SLOT) {
         updateVehiclePropetries();
     }
 }
@@ -195,11 +195,11 @@ void Item::updateVehiclePropetries() const
     // TODO: make it oop
     assert(vehicleOwner());
 
-    if (subtype() == entity::Type::CARGO_SLOT) {
+    if (group() == entity::Type::CARGO_SLOT) {
         return;
     }
 
-    switch(subtype())
+    switch(group())
     {
     case entity::Type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
     case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }

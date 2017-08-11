@@ -74,7 +74,7 @@ namespace slot {
 class Item : public Base
 {
 public:
-    Item(entity::Type subtype_id);
+    Item(entity::Type group);
     virtual ~Item();
 
     void setType(entity::Type type) { m_type = type; }
@@ -82,7 +82,7 @@ public:
     void setPosition(int position) { m_position = position; }
 
     entity::Type type() const { return m_type; }
-    entity::Type subtype() const { return m_subtype; }
+    entity::Type group() const { return m_subtype; }
     int position() const { return m_position; }
 
 //    virtual void putChildrenToGarbage() const;

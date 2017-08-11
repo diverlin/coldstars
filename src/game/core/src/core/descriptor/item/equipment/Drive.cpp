@@ -53,7 +53,7 @@ Drive::Drive()
 {
     setType(descriptor::Type::DRIVE_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::DRIVE_EQUIPMENT);
+    setObGroup(entity::Type::DRIVE_EQUIPMENT);
     setSlotType(entity::Type::DRIVE_SLOT);
 }
 

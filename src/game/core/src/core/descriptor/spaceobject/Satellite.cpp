@@ -26,7 +26,7 @@ Satellite::Satellite()
 {
     setType(descriptor::Type::SATELLITE);
     setObType(entity::Type::VEHICLE);
-    setObSubType(entity::Type::SATELLITE);
+    setObGroup(entity::Type::SATELLITE);
 }
 
 Satellite::Satellite(const std::string& data)

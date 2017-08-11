@@ -463,7 +463,7 @@ void StarSystem::__add(Base* view)
         return;
     }
     case entity::Type::VEHICLE: {
-        switch(view->subType()) {
+        switch(view->group()) {
         case entity::Type::SPACESTATION: {
             SpaceStation* spacestation = static_cast<SpaceStation*>(view);
             assert(spacestation);

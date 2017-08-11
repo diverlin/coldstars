@@ -54,7 +54,7 @@ Rocket::Rocket()
 {
     setType(descriptor::Type::ROCKET_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::ROCKET_EQUIPMENT);
+    setObGroup(entity::Type::ROCKET_EQUIPMENT);
     setSlotType(entity::Type::WEAPON_SLOT);
 }
 

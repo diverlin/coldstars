@@ -44,7 +44,7 @@ Protector::Protector()
 {
     setType(descriptor::Type::PROTECTOR_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::PROTECTOR_EQUIPMENT);
+    setObGroup(entity::Type::PROTECTOR_EQUIPMENT);
     setSlotType(entity::Type::PROTECTOR_SLOT);
 }
 

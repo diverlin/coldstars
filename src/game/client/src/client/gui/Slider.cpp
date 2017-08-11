@@ -35,7 +35,7 @@
 Slider::Slider()
 {
     //type_id = GUI::TYPE::SLIDER;
-    //subtype_id = GUI::TYPE::NONE;
+    //group = GUI::TYPE::NONE;
     
     textureOb = GuiTextureObCollector::Instance().text_background;
     textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::Type::LAZER_EFFECT);
@@ -99,19 +99,19 @@ void Slider::ButtonsAction(/*Shop* shop*/)
                     //{
                         //case GUI::BUTTON::ACCEPT: 
                         //{ 
-                            //int goods_subtype_id;
-                            //switch(subtype_id)
+                            //int goods_group;
+                            //switch(group)
                             //{
-                                //case GUI::BUTTON::MINERALS:         { goods_subtype_id = ENTITY::MINERALS; break; }
-                                //case GUI::BUTTON::FOOD:         { goods_subtype_id = ENTITY::FOOD; break; }
-                                //case GUI::BUTTON::MEDICINE:         { goods_subtype_id = ENTITY::MEDICINE; break; }
-                                //case GUI::BUTTON::MILITARY:         { goods_subtype_id = ENTITY::MILITARY; break; }
-                                //case GUI::BUTTON::DRUG:         { goods_subtype_id = ENTITY::DRUG; break; }
-                                //case GUI::BUTTON::EXCLUSIVE:     { goods_subtype_id = ENTITY::EXCLUSIVE; break; }
+                                //case GUI::BUTTON::MINERALS:         { goods_group = ENTITY::MINERALS; break; }
+                                //case GUI::BUTTON::FOOD:         { goods_group = ENTITY::FOOD; break; }
+                                //case GUI::BUTTON::MEDICINE:         { goods_group = ENTITY::MEDICINE; break; }
+                                //case GUI::BUTTON::MILITARY:         { goods_group = ENTITY::MILITARY; break; }
+                                //case GUI::BUTTON::DRUG:         { goods_group = ENTITY::DRUG; break; }
+                                //case GUI::BUTTON::EXCLUSIVE:     { goods_group = ENTITY::EXCLUSIVE; break; }
                             //}
                             
                             
-                        //shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
+                        //shop->SellGoods(player->GetNpc(), goods_group, ammount_selected);
                         
                             //setSubTypeId(NONE);
                             //button->Reset(); //untrigger                        

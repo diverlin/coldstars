@@ -33,8 +33,8 @@ public:
 
     void Configure(int, int);
 
-    //void setSubTypeId(int subtype_id) { this->subtype_id = subtype_id; };
-    //int subTypeId() const { return subtype_id; };
+    //void setSubTypeId(int group) { this->group = group; };
+    //int subTypeId() const { return group; };
 
     void UpdateSlidePosition(const MouseData&);
     void ButtonsAction(/*Shop**/);

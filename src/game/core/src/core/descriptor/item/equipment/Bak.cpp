@@ -44,7 +44,7 @@ Bak::Bak()
 {
     setType(descriptor::Type::BAK_EQUIPMENT);
     setObType(entity::Type::EQUIPMENT);
-    setObSubType(entity::Type::BAK_EQUIPMENT);
+    setObGroup(entity::Type::BAK_EQUIPMENT);
     setSlotType(entity::Type::BAK_SLOT);
 }
 

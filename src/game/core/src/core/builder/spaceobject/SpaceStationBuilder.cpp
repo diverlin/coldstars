@@ -77,7 +77,7 @@ SpaceStation::__createInternals(control::SpaceStation* spacestation, descriptor:
 //    }
     
 //    int protection_rate = 50;
-//    //if (subtype_id == ENTITY::WARRIOR)
+//    //if (group == ENTITY::WARRIOR)
 //    //{
 //    //protection_rate = 5;
 //    //}

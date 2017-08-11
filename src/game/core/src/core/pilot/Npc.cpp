@@ -74,8 +74,8 @@ Npc::Npc(descriptor::Npc* descr, model::Npc* model)
       Base(descr, model)
 { 
 //    setTypeId(entity::Type::NPC);
-//    setSubTypeId(subtype_id);
-//    setSubSubTypeId(subsubtype_id);
+//    setSubTypeId(group);
+//    setSubSubTypeId(subgroup);
 
 //    m_observation.SetNpcOwner(this);
 //    m_stateMachine.setNpc(this);
@@ -311,17 +311,17 @@ bool Npc::buyGoods()
 {
     assert(false);
 //    Shop* shop = ((Kosmoport*)m_vehicle->land())->GetShop();
-//    entity::Type subtype_id = (entity::Type)meti::getRandInt((int)entity::Type::MINERALS, (int)entity::Type::EXCLUSIVE);
+//    entity::Type group = (entity::Type)meti::getRandInt((int)entity::Type::MINERALS, (int)entity::Type::EXCLUSIVE);
 
 //    // hard coded logic
 //    int amount_to_hold      = 0.8*m_vehicle->freeSpace();
-//    int amount_to_buy     = credits()/shop->GetPrice(subtype_id);
-//    int amount_available     = shop->GetAmount(subtype_id);
+//    int amount_to_buy     = credits()/shop->GetPrice(group);
+//    int amount_available     = shop->GetAmount(group);
     
 //    int amount = getMin<int>(amount_to_hold, amount_to_buy, amount_available);
 //    if (amount != 0)
 //    {
-//        shop->SellGoods(this, subtype_id, amount);
+//        shop->SellGoods(this, group, amount);
 //    }
     
     return true;
@@ -406,10 +406,10 @@ bool Npc::buyGoods()
 
 void Npc::applySkillsStrategy()
 {           /*
-    entity::Type class_type_id = data_id.subtype_id;
-    if (data_id.subtype_id == entity::Type::RANGER)
+    entity::Type class_type_id = data_id.group;
+    if (data_id.group == entity::Type::RANGER)
     {
-            class_type_id = data_id.subsubtype_id;
+            class_type_id = data_id.subgroup;
     }
 
     int skills_strategy[SKILLS_NUM];

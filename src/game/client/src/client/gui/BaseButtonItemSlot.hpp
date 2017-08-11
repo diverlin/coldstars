@@ -32,9 +32,9 @@ class Render;
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(gui::type type_id, gui::type subtype_id, const std::string& info)
+    BaseButtonItemSlot(gui::type type_id, gui::type group, const std::string& info)
         :
-          BaseButton(type_id, subtype_id, info),
+          BaseButton(type_id, group, info),
           m_slot(nullptr)
     {}
 

@@ -56,9 +56,9 @@ Shop::~Shop()
 {}                
 
 
-int Shop::amount(entity::Type subtype_id) const
+int Shop::amount(entity::Type group) const
 {
-    switch(subtype_id)
+    switch(group)
     {
     case entity::Type::MINERALS:     { return m_mineralsAmount; break; }
     case entity::Type::FOOD:         { return m_foodAmount; break; }
@@ -71,9 +71,9 @@ int Shop::amount(entity::Type subtype_id) const
     return 0;
 }    
 
-int Shop::price(entity::Type subtype_id) const
+int Shop::price(entity::Type group) const
 {
-    switch(subtype_id)
+    switch(group)
     {
     case entity::Type::MINERALS:     { return m_mineralsPrice; break; }
     case entity::Type::FOOD:         { return m_foodPrice; break; }
@@ -87,15 +87,15 @@ int Shop::price(entity::Type subtype_id) const
 }
 
 
-bool Shop::sellGoods(Npc* npc, entity::Type subtype_id, int amount)
+bool Shop::sellGoods(Npc* npc, entity::Type group, int amount)
 {    
     int sign = -1;
-    int price = __deal(sign, subtype_id, amount);
+    int price = __deal(sign, group, amount);
     
     if (price > 0) {
         assert(false);
         //        if (npc->withdrawCredits(price)) {
-        //            GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+        //            GoodsPack* goods_pack = GetNewGoodsPack(group);
         //            goods_pack->Increase(amount);
         
         //            assert(false);
@@ -125,10 +125,10 @@ Shop::buyGoods(GoodsPack* goods_pack)
 }
 
 int
-Shop::__deal(int sign, entity::Type subtype_id, int amount)
+Shop::__deal(int sign, entity::Type group, int amount)
 {
     int money = 0;
-    switch(subtype_id)
+    switch(group)
     {
     case entity::Type::MINERALS:
     {

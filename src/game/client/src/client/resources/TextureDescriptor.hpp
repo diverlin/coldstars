@@ -33,14 +33,14 @@
 struct TextureDescriptor
 {
     texture::Type type_id;
-    entity::Type subtype_id;   //# warrior/trader and so on
+    entity::Type group;   //# warrior/trader and so on
     race::Type race_id;
     tech::Type tech_level_id;
 
     TextureDescriptor()
     :
     type_id(texture::Type::FAILBACK),
-    subtype_id(entity::Type::NONE),
+    group(entity::Type::NONE),
     race_id(race::Type::NONE),
     tech_level_id(tech::Type::NONE)
     {}
@@ -49,7 +49,7 @@ struct TextureDescriptor
     {
         if (type_id != rhs.type_id)
             return false;
-        if (subtype_id != rhs.subtype_id)
+        if (group != rhs.group)
             return false;
         if (race_id != rhs.race_id)
             return false;

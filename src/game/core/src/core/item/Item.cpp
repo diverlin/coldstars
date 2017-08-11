@@ -152,7 +152,7 @@ void Item::_updateLock()
 ////    save_ptree.put(root+"condition", m_condition);
 ////    save_ptree.put(root+"locked_turns", m_locked_turns);
 ////    save_ptree.put(root+"race_id", (int)m_race_id);
-////    save_ptree.put(root+"parent_subtype_id", (int)m_parent_subtype_id);
+////    save_ptree.put(root+"parent_group", (int)m_parent_group);
 
 ////    save_ptree.put(root+"data_item.tech_level",                     (int)m_data.tech);
 ////    //save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num);
@@ -177,7 +177,7 @@ void Item::_updateLock()
 ////    m_condition         = load_ptree.get<int>("condition");
 ////    m_locked_turns      = load_ptree.get<int>("locked_turns");
 ////    m_race_id           = (race::type)load_ptree.get<int>("race_id");
-////    m_parent_subtype_id = (entity::Type)load_ptree.get<int>("parent_subtype_id");
+////    m_parent_group = (entity::Type)load_ptree.get<int>("parent_group");
 
 ////    m_data.tech           = (tech::Type)load_ptree.get<int>("data_item.tech_level");
 ////    //m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
