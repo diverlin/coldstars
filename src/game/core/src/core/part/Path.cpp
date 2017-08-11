@@ -65,12 +65,13 @@ void Path::update() {
 
 
 float calcRadius(float speed, float angle_step) {
-    return (180*speed)/(M_PI*glm::degrees<float>(angle_step));
+    return std::fabs((180*speed)/(M_PI*glm::degrees<float>(angle_step)));
 }
 
 bool isReachable(const glm::vec3& from, const glm::vec3& to, float speed, float angle_step) {
     float radius = calcRadius(speed, angle_step);
-    if (glm::length(to-from) < radius) {
+    std::cout<<"radius"<<radius<<std::endl;
+    if (glm::length(to-from) <= radius) {
         return false;
     }
 
