@@ -871,13 +871,18 @@ void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
         __drawMesh(*m_meshQuad);
     }
 }
- 
-void Render::drawParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+
+void Render::drawParticles(const Mesh& mesh, const control::Material& material) const
+{
+    drawParticles(mesh, material, m_identityMatrix);
+}
+
+void Render::drawParticles(const Mesh& mesh, const control::Material& material, const glm::mat4& ModelMatrix) const
 {
     __useProgram(m_shaders.particle);
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
