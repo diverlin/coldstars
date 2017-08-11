@@ -70,8 +70,9 @@ float calcRadius(float speed, float angle_step) {
 
 bool isReachable(const glm::vec3& from, const glm::vec3& to, float speed, float angle_step) {
     float radius = calcRadius(speed, angle_step);
-    std::cout<<"radius"<<radius<<std::endl;
-    if (glm::length(to-from) <= radius) {
+//    std::cout<<"radius="<<radius<<std::endl;
+//    std::cout<<"aradius="<<glm::length(from - to)<<std::endl;
+    if (glm::length(to-from) <= 2.01*radius) {
         return false;
     }
 
@@ -122,7 +123,7 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
                    const glm::vec3& dir,
                    float speed)
 {
-    float angle_step = -ANGLE_STEP;
+    float angle_step = ANGLE_STEP;
     float radius = calcRadius(speed, angle_step);
 
     assert(isReachable(from, to, speed, angle_step));
@@ -140,7 +141,7 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     glm::vec3 O(O1);
     glm::vec3 to_O(to_O1);
 
-    float diff1 = glm::length (to_O1);
+    float diff1 = glm::length(to_O1);
     float diff2 = glm::length(to_O2);
     if (diff2 < diff1) {
         O = O2;
