@@ -25,7 +25,7 @@
 
 entity::Type getRandNpcSubTypeId(race::Type, const std::vector<entity::Type>&);
 entity::Type getRandNpcSubTypeId(race::Type);
-entity::Type getRandNpcSubSubTypeId(entity::Type);
+entity::Type getRandNpcClass(entity::Type);
 
 
 

@@ -58,6 +58,8 @@ public:
 
 //    void setDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
 
+    const path::Path& path() const { return m_path; }
+
     void addDriveSlot(slot::Item* drive_slot) { m_driveSlots.push_back(drive_slot); }
     void addBakSlot(slot::Item* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
@@ -65,7 +67,6 @@ public:
     void setTarget(const glm::vec3&);
 
     Action action() const { return m_action; }
-//    jeti::DriveEffect* driveEffect() const { return m_effectDrive; }
 
     std::vector<slot::Item*> driveSlots() const { return m_driveSlots; }
     std::vector<slot::Item*> bakSlots() const { return m_bakSlots; }
@@ -91,8 +92,6 @@ private:
 
     control::Vehicle* m_ownerVehicle = nullptr;
     control::SpaceObject* m_target = nullptr;
-
-//    jeti::DriveEffect* m_effectDrive = nullptr;
 
     glm::vec3 m_targetPos;
 

@@ -44,6 +44,7 @@
 
 #include <core/spaceobject/Planet.hpp>
 #include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Ship.hpp>
 
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -115,6 +116,11 @@ int main()
     viewer.setPlayer(player);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
+
+    assert(starsystem->ships().size());
+    control::Npc* npc =starsystem->ships().front()->npc();
+    assert(npc);
+    player->setNpc(npc);
 
     while(input.runSession() && screen.window().isOpen()) {
         input.update(player);

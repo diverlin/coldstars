@@ -53,7 +53,7 @@ getRandNpcSubTypeId(race::Type race_id)
 }
 
 entity::Type
-getRandNpcSubSubTypeId(entity::Type group)
+getRandNpcClass(entity::Type group)
 {
 //    if (group == entity::Type::RANGER) {
 //        return meti::getRand(core::global::get().raceDescriptors().getSubSubTypes());

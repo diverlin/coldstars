@@ -120,8 +120,6 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     ~Vehicle() override;
 
-    const complex::Drive& driveComplex() const { return m_drive_complex; }
-
     // good
     void dock(SpaceObject*);
     void grab(SpaceObject*);
@@ -134,6 +132,7 @@ public:
     bool remove(Item*);
 
     complex::Weapon& weapons() { return m_weapon_complex; }
+    const complex::Drive& navigator() const { return m_drive_complex; }
     complex::Drive& navigator() { return m_drive_complex; }
     //
 

@@ -29,6 +29,7 @@ class Material;
 } // namespace control
 
 class Mesh;
+class Render;
 
 namespace view {
 
@@ -38,13 +39,13 @@ public:
     Path(control::Material*);
     ~Path();
 
-    void fillData(const std::vector<glm::vec3>&);
+    void update(const std::vector<glm::vec3>&);
 //    void fillData(const std::vector<glm::vec3>&, int step, int point_size);
 //    void fillData(control::Material*, int radius, int point_size);
 //    void fillData(control::Material*, const glm::vec3&, const glm::vec3&, int step, int point_size);
 
     //        void Draw(const Renderer&, const glm::vec3&);
-    //        void Draw(const Renderer&) const;
+    void draw(const Render&) const;
 
 private:
     float m_pointSize = 1.0f;

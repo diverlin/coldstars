@@ -38,16 +38,15 @@ TEST(planet, add_to_starsystem)
     control::StarSystem* starsystem = builder::StarSystem::gen();
     control::Planet* planet = builder::Planet::gen();
 
+    unsigned int planets_num_init = starsystem->planets().size();
     EXPECT_EQ(nullptr, planet->starsystem());
     EXPECT_EQ(place::Type::NONE, planet->place());
-    EXPECT_EQ(0, int(planet->position().length()));
-    EXPECT_EQ(0, starsystem->planets().size());
 
     starsystem->add(planet);
 
     EXPECT_EQ(starsystem, planet->starsystem());
     EXPECT_EQ(place::Type::SPACE, planet->place());
     EXPECT_EQ(int(planet->radius()), int(planet->position().length()));
-    EXPECT_EQ(1, starsystem->planets().size());
+    EXPECT_EQ(planets_num_init+1, starsystem->planets().size());
 }
 

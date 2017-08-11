@@ -18,10 +18,12 @@
 
 #include "PathVisual.hpp"
 
-#include <Mesh.hpp>
-#include <Material.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Material.hpp>
+#include <jeti/Render.hpp>
 
 #include <meti/VectorUtils.hpp>
+
 #include <glm/gtx/transform.hpp>
 
 namespace jeti {
@@ -44,7 +46,7 @@ Path::~Path()
 }
 
 
-void Path::fillData(const std::vector<glm::vec3>& positions)
+void Path::update(const std::vector<glm::vec3>& positions)
 {   
     __processMove(positions);
     __processTurn(positions);
@@ -131,10 +133,12 @@ void Path::__processPath(const std::vector<glm::vec3>& positions, Mesh* mesh, co
 //    renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
 //}
 
-//void PathVisual::Draw(const Renderer& renderer) const
-//{
-//    renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
-//}
+void Path::draw(const Render& render) const
+{
+    glm::mat4 MM = glm::scale(glm::vec3(1.0f));
+    render.drawParticles(*m_meshMove, *m_material, MM);
+    render.drawParticles(*m_meshTurn, *m_material, MM);
+}
 
 } // namespace view
 } // namespace jeti

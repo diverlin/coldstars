@@ -61,19 +61,19 @@ int_t Base::mesh() const { return m_control_base->descriptor()->mesh(); }
 int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 
 effect::Shield*
-Base::createShield() {
+Base::_createShield() {
     assert(m_shield == nullptr);
     m_shield = new effect::Shield();
     return m_shield;
 }
 
 void
-Base::createPath(jeti::control::Material* material) {
+Base::_createPath(jeti::control::Material* material) {
     assert(m_path == nullptr);
     m_path = new jeti::view::Path(material);
 }
 
-void Base::addDecor(Base* decor) {
+void Base::_addDecor(Base* decor) {
     decor->setParent(this);
     m_decors.push_back(decor);
 }
@@ -89,6 +89,12 @@ void Base::_drawShield(const jeti::Render& render) const {
     assert(m_shield);
     m_shield->update();
     m_shield->draw(_modelMatrix(), render);
+}
+
+void Base::_drawPath(const jeti::Render& render) const {
+    assert(m_path);
+    //m_path->update();
+    m_path->draw(render);
 }
 
 } // namespace view
