@@ -61,7 +61,7 @@ class Render;
 class BaseView
 {
 public:
-    BaseView();
+    BaseView(BaseView* parent = nullptr);
     virtual ~BaseView();
 
     const glm::vec3& position() const { return _orientation()->position(); }
@@ -106,10 +106,14 @@ protected:
     const control::Material& _material() const { return *m_material; }
     const Mesh& _mesh() const     { return *m_mesh; }
 
-    bool _hasMaterial() const { return (m_material != 0); }
+    BaseView* _parent() const { return m_parent; }
+
+    bool _hasMaterial() const { return (m_material != nullptr); }
 
     const glm::vec4& _color() const { return m_color; }
-//    const glm::vec3& _center() const;
+    glm::vec4& _color() { return m_color; }
+
+    //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
     void _updateModelMatrix(const glm::vec3& parallax_offset = glm::vec3(0.0f));

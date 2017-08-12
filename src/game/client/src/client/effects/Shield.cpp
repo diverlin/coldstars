@@ -31,21 +31,22 @@ namespace effect {
 
 Shield::Shield(jeti::BaseView* parent)
     :
-      m_parent(parent)
+      jeti::BaseView(parent)
 {       
-    m_opacityAnimation = new jeti::animation::Opacity(0.02f, 0.5f, 0.95f, 1.5f);
-    m_opacityAnimation->setCyclic(true);
+    m_opacityAnimation = new jeti::animation::Opacity(_color().a, 0.02f, 0.5f, 0.95f, 1.5f, true);
 
-    m_color.r = 1.0;
-    m_color.g = 1.0;
-    m_color.b = 1.0;
-//    m_color.a = m_opacityMin;
+    _color().r = 1.0;
+    _color().g = 1.0;
+    _color().b = 1.0;
 
     m_scaleMatrix = glm::scale(glm::vec3(1.4f, 1.4f, 1.0f));
 }
 
 Shield::~Shield()
-{}
+{
+    delete m_opacityAnimation;
+    m_opacityAnimation = nullptr;
+}
 
 void Shield::dissipate()
 {
@@ -55,12 +56,11 @@ void Shield::dissipate()
 void Shield::update()
 {
     m_opacityAnimation->update();
-    m_color.a = m_opacityAnimation->opacity();
 }
 
 void Shield::draw(const jeti::Render& render) const
 {
-    render.drawQuad(*m_material, m_parent->modelMatrix()*m_scaleMatrix, m_color.a);
+    render.drawQuad(_material(), _parent()->modelMatrix()*m_scaleMatrix, _color().a);
 }
 
 } // namespace effect

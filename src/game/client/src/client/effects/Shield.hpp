@@ -18,45 +18,36 @@
 
 #pragma once
 
+#include <jeti/BaseView.hpp>
+
 #include <glm/glm.hpp>
 
 namespace jeti {
 
-class BaseView;
 class Render;
 
 namespace animation {
 class Opacity;
 } // namespace animation
 
-namespace control {
-class Material;
-} // namespace control
-
 } // namespace jeti
 
 namespace view {
 namespace effect {
 
-class Shield
+class Shield : public jeti::BaseView
 {  
 public:
     Shield(jeti::BaseView*);
     ~Shield();
-
-    void setMaterial(jeti::control::Material* material) { m_material = material; }
 
     void dissipate();
     void update();
     void draw(const jeti::Render&) const;
 
 private:
-    jeti::BaseView* m_parent = nullptr;
-    glm::vec4 m_color;
     glm::mat4 m_scaleMatrix;
-
     jeti::animation::Opacity* m_opacityAnimation = nullptr;
-    jeti::control::Material* m_material = nullptr;
 };
 
 } // namespace effect

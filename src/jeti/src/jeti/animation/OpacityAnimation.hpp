@@ -25,25 +25,23 @@ class Opacity
 {  
     enum move {STOP, UP, DOWN};
 public:
-    Opacity(float, float, float, float);
+    Opacity(float&, float, float, float, float, bool cyclic = false);
     ~Opacity() = default;
-
-    void setCyclic(bool cyclic) { m_cyclic = cyclic; }
-    float opacity() const { return m_opacity; }
 
     void run() { m_move = UP; }
     void stop() { m_move = STOP; }
     void update();
 
 private:
-    float m_opacity = 1.0f;
-    bool m_cyclic = false;
+    float& m_value;
     move m_move = STOP;
 
     float m_min = 0.0f;
     float m_max = 1.0f;
     float m_downFactor = 0.99f;
     float m_upFactor = 1.01f;
+
+    bool m_cyclic = false;
 };
 
 } // namespace animation
