@@ -34,7 +34,9 @@
 
 namespace jeti {
 
-BaseView::BaseView()
+BaseView::BaseView(BaseView* parent)
+    :
+      m_parent(parent)
 {}
 
 BaseView::~BaseView() {

@@ -23,16 +23,23 @@
 namespace jeti {
 namespace animation {
 
-Opacity::Opacity(float min, float max, float downFactor, float upFactor)
+Opacity::Opacity(float& value,
+                 float min,
+                 float max,
+                 float downFactor,
+                 float upFactor,
+                 bool cyclic)
     :
-      m_min(min)
+      m_value(value)
+    , m_min(min)
     , m_max(max)
     , m_downFactor(downFactor)
     , m_upFactor(upFactor)
+    , m_cyclic(cyclic)
 {
     assert(downFactor<1.0f);
     assert(upFactor>1.0f);
-    m_opacity = m_min;
+    m_value = m_min;
 }
 
 void Opacity::update()
@@ -42,16 +49,16 @@ void Opacity::update()
     }
 
     if (m_move == UP) {
-        m_opacity *= m_upFactor;
+        m_value *= m_upFactor;
     } else if (m_move == DOWN) {
-        m_opacity *= m_downFactor;
+        m_value *= m_downFactor;
     }
 
-    if (m_opacity > m_max) {
+    if (m_value > m_max) {
         m_move = DOWN;
-        m_opacity = m_max;
-    } else if (m_opacity < m_min) {
-        m_opacity = m_min;
+        m_value = m_max;
+    } else if (m_value < m_min) {
+        m_value = m_min;
         if (m_cyclic) {
             run();
         } else {
@@ -60,6 +67,6 @@ void Opacity::update()
     }
 }
 
-} // namespace effect
-} // namespace view
+} // namespace animation
+} // namespace jeti
 
