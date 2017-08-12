@@ -28,14 +28,14 @@ Opacity::Opacity(float& value,
                  float max,
                  float downFactor,
                  float upFactor,
-                 bool cyclic)
+                 bool isCyclic)
     :
-      m_value(value)
+      Base(isCyclic)
+    , m_value(value)
     , m_min(min)
     , m_max(max)
     , m_downFactor(downFactor)
     , m_upFactor(upFactor)
-    , m_cyclic(cyclic)
 {
     assert(downFactor<1.0f);
     assert(upFactor>1.0f);
@@ -59,7 +59,7 @@ void Opacity::update()
         m_value = m_max;
     } else if (m_value < m_min) {
         m_value = m_min;
-        if (m_cyclic) {
+        if (_isCyclic()) {
             run();
         } else {
             m_move = STOP;

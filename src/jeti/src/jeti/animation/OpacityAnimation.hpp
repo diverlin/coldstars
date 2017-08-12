@@ -18,14 +18,16 @@
 
 #pragma once
 
+#include <jeti/animation/Base.hpp>
+
 namespace jeti {
 namespace animation {
 
-class Opacity
+class Opacity : public Base
 {  
-    enum move {STOP, UP, DOWN};
+    enum move { STOP, UP, DOWN };
 public:
-    Opacity(float&, float, float, float, float, bool cyclic = false);
+    Opacity(float&, float, float, float, float, bool isCyclic = false);
     ~Opacity() = default;
 
     void run() { m_move = UP; }
@@ -40,8 +42,6 @@ private:
     float m_max = 1.0f;
     float m_downFactor = 0.99f;
     float m_upFactor = 1.01f;
-
-    bool m_cyclic = false;
 };
 
 } // namespace animation
