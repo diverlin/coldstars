@@ -63,7 +63,7 @@ int_t Base::texture() const { return m_control_base->descriptor()->texture(); }
 effect::Shield*
 Base::_createShield() {
     assert(m_shield == nullptr);
-    m_shield = new effect::Shield();
+    m_shield = new effect::Shield(this);
     return m_shield;
 }
 
@@ -88,7 +88,7 @@ void Base::_drawDecors(const jeti::Render& render) const {
 void Base::_drawShield(const jeti::Render& render) const {
     assert(m_shield);
     m_shield->update();
-    m_shield->draw(_modelMatrix(), render);
+    m_shield->draw(render);
 }
 
 void Base::_drawPath(const jeti::Render& render) const {

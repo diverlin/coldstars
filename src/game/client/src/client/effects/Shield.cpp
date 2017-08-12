@@ -20,6 +20,8 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
+#include <jeti/BaseView.hpp>
+
 #include <jeti/animation/OpacityAnimation.hpp>
 
 #include <glm/gtx/transform.hpp>
@@ -27,7 +29,9 @@
 namespace view {
 namespace effect {
 
-Shield::Shield()
+Shield::Shield(jeti::view::BaseView* parent)
+    :
+      m_parent(parent)
 {       
     m_opacityAnimation = new jeti::animation::Opacity(0.02f, 0.5f, 0.95f, 1.5f);
     m_opacityAnimation->setCyclic(true);
@@ -54,9 +58,9 @@ void Shield::update()
     m_color.a = m_opacityAnimation->opacity();
 }
 
-void Shield::draw(const glm::mat4& parentModelMatrix, const jeti::Render& render) const
+void Shield::draw(const jeti::Render& render) const
 {
-    render.drawQuad(*m_material, parentModelMatrix*m_scaleMatrix, m_color.a);
+    render.drawQuad(*m_material, m_parent->modelMatrix()*m_scaleMatrix, m_color.a);
 }
 
 } // namespace effect

@@ -23,14 +23,12 @@
 Ring::Ring()
 {}
 
-/* virtual */
 Ring::~Ring()
 {}
- 
- /* virtual override final */            
-void Ring::draw(const jeti::Render& render)
-{      
-    //setPosition(center);
-    //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
-}
+
+//void Ring::draw(const jeti::Render& render)
+//{
+//    //setPosition(center);
+//    //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
+//}
 
