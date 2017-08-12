@@ -58,8 +58,6 @@ class BaseRotation;
 
 class Render;
 
-namespace view {
-
 class BaseView
 {
 public:
@@ -146,6 +144,5 @@ private:
     void __adjustSizeFromMaterial();
 };
 
-} // namepsace view
 } // namespace jeti
 

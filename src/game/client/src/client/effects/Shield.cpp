@@ -29,7 +29,7 @@
 namespace view {
 namespace effect {
 
-Shield::Shield(jeti::view::BaseView* parent)
+Shield::Shield(jeti::BaseView* parent)
     :
       m_parent(parent)
 {       

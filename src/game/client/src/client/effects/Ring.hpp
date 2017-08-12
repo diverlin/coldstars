@@ -21,7 +21,7 @@
 
 #include <jeti/BaseView.hpp>
 
-class Ring : public jeti::view::BaseView
+class Ring : public jeti::BaseView
 {
 public:
     Ring();

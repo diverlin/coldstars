@@ -34,7 +34,7 @@
 
 namespace {
 
-void validate(descriptor::Base* descr, jeti::view::BaseView* view) {
+void validate(descriptor::Base* descr, jeti::BaseView* view) {
     descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
     descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
 

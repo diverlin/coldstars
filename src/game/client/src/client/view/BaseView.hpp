@@ -42,7 +42,7 @@ class Base;
 
 namespace view {
 
-class Base : public jeti::view::BaseView {
+class Base : public jeti::BaseView {
 public:
     Base(control::Base*);
     ~Base();

@@ -92,7 +92,7 @@ void StarsystemRender::clearVisibleEntities()
 //    visible_text_DAMAGE_vec.clear();
 }
 
-void StarsystemRender::addIfVisible(jeti::view::BaseView* ob)
+void StarsystemRender::addIfVisible(jeti::BaseView* ob)
 {
     assert(false);
     //    if (ob->inRect(client::global::get().screen().data().rect)) {

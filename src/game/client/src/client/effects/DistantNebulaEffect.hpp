@@ -36,7 +36,7 @@ private:
     std::vector<DistantNebula*> m_nebulas;
 };
 
-class DistantNebula : public jeti::view::BaseView
+class DistantNebula : public jeti::BaseView
 {
 public:
     DistantNebula(float);

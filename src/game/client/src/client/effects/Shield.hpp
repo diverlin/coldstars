@@ -22,9 +22,7 @@
 
 namespace jeti {
 
-namespace view {
 class BaseView;
-} // namespace view
 class Render;
 
 namespace animation {
@@ -43,7 +41,7 @@ namespace effect {
 class Shield
 {  
 public:
-    Shield(jeti::view::BaseView*);
+    Shield(jeti::BaseView*);
     ~Shield();
 
     void setMaterial(jeti::control::Material* material) { m_material = material; }
@@ -53,7 +51,7 @@ public:
     void draw(const jeti::Render&) const;
 
 private:
-    jeti::view::BaseView* m_parent = nullptr;
+    jeti::BaseView* m_parent = nullptr;
     glm::vec4 m_color;
     glm::mat4 m_scaleMatrix;
 
