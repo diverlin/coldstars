@@ -113,9 +113,11 @@ void Mesh::fillVertices(const ObjLoader& objLoader)
     __updateVbo();
 }
 
-void Mesh::fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
+void Mesh::fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth)
 {
     m_primitiveType = GL_LINES;
+    m_states = States::LINES;
+    m_linesWidth = linesWidth;
 
     m_hasTexCoords = false;
     m_hasNormals = false;

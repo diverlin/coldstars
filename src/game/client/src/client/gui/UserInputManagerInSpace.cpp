@@ -209,11 +209,11 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
             //            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
             //            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
 
-        case sf::Keyboard::X: { client::global::get().render().setAllowDrawAxis(true); break; }
-        case sf::Keyboard::Z: { client::global::get().render().setAllowDrawAxis(false); break; }
+        case sf::Keyboard::X: { player->show().setAxis(true); break; }
+        case sf::Keyboard::Z: { player->show().setAxis(false); break; }
 
-        case sf::Keyboard::B: { client::global::get().render().setAllowDrawCollisionRadius(true); break; }
-        case sf::Keyboard::N: { client::global::get().render().setAllowDrawCollisionRadius(false); break; }
+        case sf::Keyboard::B: { player->show().setCollisionRadius(true); break; }
+        case sf::Keyboard::N: { player->show().setCollisionRadius(false); break; }
         }
     }
 }

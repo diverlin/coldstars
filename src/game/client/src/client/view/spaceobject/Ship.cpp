@@ -131,8 +131,9 @@ void Ship::draw(const jeti::Render& render) const
         //RenderShieldEffect(render, 1.0f - color().a);
     //}
 
-        if (m_ship->navigator().path().centers().size()) {
-            _path()->update(m_ship->navigator().path().centers());
+        const auto& path = m_ship->navigator().path();
+        if (path.centers().size()) {
+            _path()->update(path.centers(), path.directions());
             _drawPath(render);
         }
 }
