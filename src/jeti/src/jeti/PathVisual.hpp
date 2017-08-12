@@ -44,6 +44,7 @@ public:
     ~Path();
 
     void update(const std::vector<glm::vec3>&);
+    void update(const std::vector<glm::vec3>&, const std::vector<glm::vec3>&);
 //    void fillData(const std::vector<glm::vec3>&, int step, int point_size);
 //    void fillData(control::Material*, int radius, int point_size);
 //    void fillData(control::Material*, const glm::vec3&, const glm::vec3&, int step, int point_size);
@@ -55,11 +56,13 @@ private:
     float m_pointSize = INIT_BASE_SIZE;
     Mesh* m_meshMove = nullptr;
     Mesh* m_meshTurn = nullptr;
+    Mesh* m_meshDirections = nullptr;
     control::Material* m_material = nullptr;
 
     void __processPath(const std::vector<glm::vec3>&, Mesh*, const glm::vec4& color, int step, float size);
     void __processMove(const std::vector<glm::vec3>&);
     void __processTurn(const std::vector<glm::vec3>&);
+    void __processDirections(const std::vector<glm::vec3>&, const std::vector<glm::vec3>&);
 };
 
 } // namespace view

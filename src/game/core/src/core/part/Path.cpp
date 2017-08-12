@@ -177,9 +177,9 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
     }
 
     // manual last step
-    new_center = new_center + speed * new_direction;
-    centers.push_back(new_center);
-    directions.push_back(new_direction);
+//    new_center = new_center + speed * new_direction;
+//    centers.push_back(new_center);
+//    directions.push_back(new_direction);
 
     //std::cout<<"cm: "<<meti::to_string(new_center)<<std::endl;
     //std::cout<<"dm: "<<meti::to_string(new_direction)<<std::endl;

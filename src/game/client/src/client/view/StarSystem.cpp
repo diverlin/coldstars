@@ -559,7 +559,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     // projection
     render.setOrthogonalProjection(0.2f);
 
-    if (m_player->show().background_fbo()) {
+    if (m_player->show().backgroundFbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
@@ -571,7 +571,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
         m_distantStars->update(render.camera()->position());
         m_distantStars->draw(render);
     }
-    if (m_player->show().background_fbo()) {
+    if (m_player->show().backgroundFbo()) {
         render.fboBackGround().deactivate();
     }
 }
@@ -643,7 +643,7 @@ void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
     // projection
     render.setOrthogonalProjection();
 
-    if (m_player->show().collision_radius()) {
+    if (m_player->show().collisionRadius()) {
         __drawCollisionRadius(render);
     }
     if (m_player->show().axis()) {
@@ -793,7 +793,7 @@ void StarSystem::render(control::StarSystem* starsystem)
 
 void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
 {
-    if (!render.allowDrawCollisionRadius()) {
+    if (!m_player->show().collisionRadius()) {
         return;
     }
 
@@ -812,7 +812,7 @@ void StarSystem::__drawCollisionRadius(const jeti::Render& render) const
 
 void StarSystem::__drawAxis(const jeti::Render& render) const
 {
-    if (!render.allowDrawAxis()) {
+    if (!m_player->show().axis()) {
         return;
     }
 

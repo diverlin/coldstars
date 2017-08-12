@@ -25,7 +25,7 @@ class TextureOb;
 class Mesh
 { 
 public:
-    enum class States { NONE, QUAD, NORMAL, PARTICLES };
+    enum class States { NONE, QUAD, NORMAL, PARTICLES, LINES };
 
     Mesh();
     Mesh(ceti::descriptor::Mesh*);
@@ -34,15 +34,15 @@ public:
     int_t id() const { return m_id; }
 
     bool isFlat() const { return m_states == States::QUAD; }
-    [[warning("added for compatibility")]]
-    int_t type() const { return 0; }
 
     TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
     const glm::vec3& originDirection() const { return m_originDirection; }
 
+    float linesWidth() const { return m_linesWidth; }
+
     void fillVertices(const ObjLoader&);
-    void fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors);
+    void fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth);
     void fillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
     void fillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
 
@@ -62,6 +62,7 @@ private:
 
     int_t m_id = -1;
     GLenum m_primitiveType = GL_TRIANGLES;
+    float m_linesWidth = 1.0f;
     States m_states = States::NORMAL;
 
     TextureOb* m_textureOb = nullptr;

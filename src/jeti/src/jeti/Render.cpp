@@ -287,7 +287,8 @@ void Render::__initAxisMesh()
     colors.push_back(glm::vec4(m, m, s, s));
     colors.push_back(glm::vec4(m, m, 1.0, 1.0));
 
-    m_meshAxis->fillVertices(vertices, colors);
+    float linesWidth = 2.0f;
+    m_meshAxis->fillVertices(vertices, colors, linesWidth);
 }
 
 void Render::activateFbo(int index, int w, int h)
@@ -439,6 +440,9 @@ void Render::__drawMesh(const Mesh& mesh) const {
             __enable_ADDITIVE_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
+            break;
+        case Mesh::States::LINES:
+            glDisable(GL_TEXTURE_2D);
             break;
         case Mesh::States::NONE:
             assert(false);
@@ -944,18 +948,19 @@ void Render::__useProgram(GLuint program) const
  
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
-    if (m_allowDrawAxis) {
-        int width = 2;
-        glLineWidth(width);
-        drawMesh(*m_meshAxis, modelMatrix);
-    }
+    glLineWidth(m_meshAxis->linesWidth());
+    drawMesh(*m_meshAxis, modelMatrix);
+}
+
+void Render::drawLines(const Mesh& mesh) const
+{
+    glLineWidth(mesh.linesWidth());
+    __drawMesh(mesh);
 }
 
 void Render::drawCollisionRadius(const glm::mat4& modelMatrix) const
 {
-    if (m_allowDrawCollisionRadius) {
-        drawQuad(*m_materialCollisionRadius, modelMatrix);
-    }
+    drawQuad(*m_materialCollisionRadius, modelMatrix);
 }
       
 void Render::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const

@@ -22,13 +22,13 @@
 class Show {
 public:
     bool background() const { return (m_stars || m_nebulas); }
-    bool background_fbo() const { return m_star; }
+    bool backgroundFbo() const { return m_star; }
     bool star() const { return m_star; }
     bool stars() const { return m_stars; }
     bool nebulas() const { return m_nebulas; }
     bool spaceobjects() const { return m_spaceobjects; }
-    bool spaceobjects_meta() const { return (collision_radius() || axis()); }
-    bool collision_radius() const { return (m_spaceobjects && m_collision_radius); }
+    bool spaceobjects_meta() const { return (collisionRadius() || axis()); }
+    bool collisionRadius() const { return (m_spaceobjects && m_collision_radius); }
     bool axis() const { return (m_spaceobjects && m_axis); }
     bool hud() const { return m_hud; }
     bool experimental() const { return m_experimental; }

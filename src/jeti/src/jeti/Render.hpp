@@ -73,13 +73,7 @@ public:
     void increaseScale();
     void decreaseScale();
 
-    bool allowDrawAxis() const { return m_allowDrawAxis; }
-    bool allowDrawCollisionRadius() const { return m_allowDrawCollisionRadius; }
-
     void setScaleBase(float scaleBase) { m_scaleBase = scaleBase;}
-
-    void setAllowDrawAxis(bool allowDrawAxis) { m_allowDrawAxis = allowDrawAxis; }
-    void setAllowDrawCollisionRadius(bool allowDrawCollisionRadius) { m_allowDrawCollisionRadius = allowDrawCollisionRadius; }
 
     void increaseLightPos();
     void decreaseLightPos();
@@ -129,6 +123,7 @@ public:
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawBlinkingParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
+    void drawLines(const Mesh& mesh) const;
     void drawAxis(const glm::mat4&) const;
     void drawCollisionRadius(const glm::mat4&) const;
     void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;
@@ -153,9 +148,6 @@ private:
     std::chrono::steady_clock::time_point m_lastTime;
 
     bool m_initialized = false;
-
-    bool m_allowDrawAxis = false;
-    bool m_allowDrawCollisionRadius = true;
 
     float m_scale = 0.0f;
     float m_scaleBase = SCALE_INIT;

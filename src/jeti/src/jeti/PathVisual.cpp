@@ -33,6 +33,7 @@ Path::Path(control::Material* material)
     :
       m_meshMove(new Mesh)
     , m_meshTurn(new Mesh)
+    , m_meshDirections(new Mesh)
     , m_material(material)
 {
 }
@@ -42,6 +43,14 @@ Path::~Path()
 {
     delete m_meshMove;
     delete m_meshTurn;
+    delete m_meshDirections;
+}
+
+
+void Path::update(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& directions)
+{
+    update(positions);
+    __processDirections(positions, directions);
 }
 
 
@@ -51,6 +60,25 @@ void Path::update(const std::vector<glm::vec3>& positions)
     __processTurn(positions);
 }
 
+void Path::__processDirections(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& directions)
+{
+    int step = TURN_STEP;
+
+    std::vector<glm::vec4> colors;
+    float delta = 0.8f;
+
+    std::vector<glm::vec3> vertices;
+    for (int i=0; i<positions.size(); i+=step) {
+        vertices.push_back(positions[i]);
+        vertices.push_back(positions[i]+100.0f*directions[i]);
+
+        colors.push_back(glm::vec4(delta, 1.0, 1.0, 1.0));
+        colors.push_back(glm::vec4(1.0, 1.0, 1.0, 1.0));
+    }
+
+    float linesWidth = 2.0f;
+    m_meshDirections->fillVertices(vertices, colors, linesWidth);
+}
 
 void Path::__processMove(const std::vector<glm::vec3>& positions)
 {
@@ -136,6 +164,7 @@ void Path::draw(const Render& render) const
 {
     render.drawParticles(*m_meshMove, *m_material);
     render.drawParticles(*m_meshTurn, *m_material);
+    render.drawLines(*m_meshDirections);
 }
 
 } // namespace view
