@@ -19,15 +19,15 @@
 
 #pragma once
 
-#include <client/effects/BaseDecor.hpp>
+#include <jeti/BaseView.hpp>
 
-class Ring : public BaseDecor
+class Ring : public jeti::view::BaseView
 {
 public:
     Ring();
-    virtual ~Ring();
+    ~Ring();
 
-    virtual void draw(const jeti::Render&) override final;
+    //    virtual void draw(const jeti::Render&) const override final;
 }; 
 
 

@@ -19,21 +19,18 @@
 #include "Atmosphere.hpp"  
 #include <jeti/Render.hpp>
 
+namespace view {
+
 Atmosphere::Atmosphere()
 {}
 
-/* virtual */
 Atmosphere::~Atmosphere()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Atmosphere");
-    #endif    
-}
+{}
  
- /* virtual override final */            
-void Atmosphere::draw(const jeti::Render& render)
-{      
-    //setPosition(center);
-    //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());
-}
+//void Atmosphere::draw(const jeti::Render& render)
+//{
+//    //setPosition(center);
+//    //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());
+//}
 
+} // namespace view

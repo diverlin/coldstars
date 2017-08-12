@@ -23,53 +23,53 @@ namespace ceti {
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius)
 {
-    if (std::fabs(dot.x - center.x) > radius)
+    if (std::fabs(dot.x - center.x) > radius) {
         return false;
-    if (std::fabs(dot.y - center.y) > radius)
+    }
+    if (std::fabs(dot.y - center.y) > radius) {
         return false;
-    
+    }
     return true;
 }
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec3& dot, const glm::vec3& center, float radius)
 {
-    if (std::fabs(dot.x - center.x) > radius)
+    if (std::fabs(dot.x - center.x) > radius) {
         return false;
-    if (std::fabs(dot.y - center.y) > radius)
+    }
+    if (std::fabs(dot.y - center.y) > radius) {
         return false;
-
+    }
     return true;
 }
 
 bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size)
 {
-    if (std::fabs(dot.x - center.x) > size.x/2)
+    if (std::fabs(dot.x - center.x) > size.x/2) {
         return false;
-    if (std::fabs(dot.y - center.y) > size.y/2)
+    }
+    if (std::fabs(dot.y - center.y) > size.y/2) {
         return false;
-    
+    }
     return true;        
 }
 
 bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius)
 {
     float dist = meti::distance(observer_pos, p);
-    if (dist < radius) {
-        return true;
-    } else {
+    if (dist > radius) {
         return false;
     }
+    return true;
 }
 
 bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
 {
+    float dist = meti::distance(observer_pos, p);
+    if (dist > radius) {
+        return false;
+    }
     return true;
-//    float dist = meti::distance(observer_pos, p);
-//    if (dist < radius) {
-//        return true;
-//    } else {
-//        return false;
-//    }
 }
 
 bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius)

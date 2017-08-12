@@ -49,6 +49,5 @@ private:
 };
 
 DistantNebulas* genDistantNebulas(int color_id = -1);
-//DistantNebulas* genDistantNebulas2(int color_id = -1);
 
 } // namespace effect

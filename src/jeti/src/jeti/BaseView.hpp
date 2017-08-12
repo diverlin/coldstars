@@ -88,6 +88,8 @@ public:
     void drawCollisionRadius(const jeti::Render& render) const;
     void drawAxis(const jeti::Render& render) const;
 
+    const glm::mat4& modelMatrix() const { return m_matrixModel; }
+
 protected:
     //void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
 
