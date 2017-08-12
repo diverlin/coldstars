@@ -48,7 +48,6 @@ private:
 };
 
 } // namespace animation
-
 } // namespace jeti
 
 
