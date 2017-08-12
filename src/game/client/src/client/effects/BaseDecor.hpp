@@ -27,7 +27,7 @@
 //class Render;
 //}
 
-//class BaseDecor : public jeti::view::BaseView
+//class BaseDecor : public jeti::BaseView
 //{
 //public:
 //    BaseDecor()=default;

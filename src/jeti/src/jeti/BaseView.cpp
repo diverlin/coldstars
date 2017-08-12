@@ -33,7 +33,6 @@
 #include <glm/gtx/vector_angle.hpp>
 
 namespace jeti {
-namespace  view {
 
 BaseView::BaseView()
 {}
@@ -189,7 +188,5 @@ BaseView::__adjustSizeFromMaterial()
 
     m_orientation->setSize(glm::vec3(m_material->frameWidth(), m_material->frameHeight(), 1.0));
 }
-
-} // namespace view
 
 } // namespace jeti
