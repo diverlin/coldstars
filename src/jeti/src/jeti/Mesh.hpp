@@ -41,8 +41,8 @@ public:
 
     float linesWidth() const { return m_linesWidth; }
 
-    void fillVertices(const ObjLoader&);
-    void fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth);
+    void fillLineVertices(const ObjLoader&);
+    void fillLineVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth);
     void fillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
     void fillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
 

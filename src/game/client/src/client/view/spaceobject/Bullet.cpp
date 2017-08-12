@@ -42,23 +42,15 @@ Bullet::~Bullet()
     delete m_driveJet;
 }
 
-void Bullet ::draw(const jeti::Render& render) const
+void Bullet::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 
-//    glm::vec3 pos = m_ship->position();
-//    pos -= m_ship->size().x * m_ship->direction();
-//    m_driveJet->update(pos, -m_ship->direction());
-//    m_driveJet->draw(render);
+    glm::vec3 pos = m_control->position();
+    pos -= m_control->size().x * m_control->direction();
+    m_driveJet->update(pos, -m_control->direction());
+    m_driveJet->draw(render);
 }
-
-//void BulletDrawable::CreateDriveComplexTextureDependedStuff()
-//{
-//    points().addMidLeftPoint();
-//    points().addMidFarLeftPoint();
-        
-    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
-//}
 
 //void Bullet::UpdateInfo()
 //{
@@ -71,14 +63,6 @@ void Bullet ::draw(const jeti::Render& render) const
 //    {
 //        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));
 //    }
-//}
-
-//void Bullet::RenderInSpace(const Renderer& render, float scale)
-//{
-//    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
-
-//    m_EffectDrive->Update();
-//    m_EffectDrive->Render(scale, 0.0f);
 //}
 
 } // namespace view

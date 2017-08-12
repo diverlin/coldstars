@@ -48,7 +48,7 @@ private:
     bool m_nebulas = false;
     bool m_spaceobjects = true;
     bool m_collision_radius = false;
-    bool m_axis = false;
+    bool m_axis = true;
     bool m_hud = true;
     bool m_experimental = true;
 };

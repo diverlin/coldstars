@@ -53,6 +53,7 @@ public:
     void draw(const Render&) const;
 
 private:
+    bool m_debug = false;
     float m_pointSize = INIT_BASE_SIZE;
     Mesh* m_meshMove = nullptr;
     Mesh* m_meshTurn = nullptr;

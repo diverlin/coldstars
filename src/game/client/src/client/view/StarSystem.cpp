@@ -101,8 +101,8 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto planet: starsystem->planets()) {
         __addIfVisible(planet);
     }
-    for(auto wormHole: starsystem->wormholes()) {
-//        __addIfVisible(wormhole);
+    for(auto wormhole: starsystem->wormholes()) {
+        __addIfVisible(wormhole);
     }
     for(auto asteroid: starsystem->asteroids()) {
         __addIfVisible(asteroid);
@@ -121,7 +121,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         __addIfVisible(satellite);
     }
     for(auto bullet: starsystem->bullets()) {
-//        __addIfVisible(bullet);
+        __addIfVisible(bullet);
     }
 
     // update ui
@@ -206,6 +206,12 @@ void StarSystem::__clear()
 //    m_texts.clear();
 }
 
+void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
+{
+    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.01));
+    view->setAnimationRotation(animation);
+}
+
 bool
 StarSystem::__addIfVisible(control::Star* star)
 {
@@ -255,7 +261,7 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid)
     if (!__isObjectOnScreen(asteroid)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(asteroid->position(), m_camera.position(), m_camera.radius())) {
+    if (!ceti::isPointInObserverRadius(asteroid->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -280,7 +286,7 @@ StarSystem::__addIfVisible(control::Ship* ship)
     if (!__isObjectOnScreen(ship)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(ship->position(), m_camera.position(), m_camera.radius())) {
+    if (!ceti::isPointInObserverRadius(ship->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -304,7 +310,7 @@ StarSystem::__addIfVisible(control::SpaceStation* spacestation)
     if (!__isObjectOnScreen(spacestation)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(spacestation->position(), m_camera.position(), m_camera.radius())) {
+    if (!ceti::isPointInObserverRadius(spacestation->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -327,7 +333,7 @@ StarSystem::__addIfVisible(control::Satellite* satellite)
     if (!__isObjectOnScreen(satellite)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(satellite->position(), m_camera.position(), m_camera.radius())) {
+    if (!ceti::isPointInObserverRadius(satellite->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -343,67 +349,74 @@ StarSystem::__addIfVisible(control::Satellite* satellite)
     return true;
 }
 
-void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
+bool StarSystem::__addIfVisible(control::Container* container)
 {
-    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.01));
-    view->setAnimationRotation(animation);
+    assert(container);
+    if (!__isObjectOnScreen(container)) {
+        return false;
+    }
+    if (!ceti::isPointInObserverRadius(container->position(), m_player->position(), m_player->radius())) {
+        return false;
+    }
+
+    Base* view = m_cache.get(container->id());
+    if (!view) {
+        view = new Container(container);
+        //applyConstantRotationAnimation(meti::OZ, view);
+        m_cache.add(view);
+    }
+    assert(view);
+
+    __add(view);
+
+    return true;
 }
 
-void StarSystem::__addIfVisible(control::Container* container)
+bool StarSystem::__addIfVisible(control::Bullet* bullet)
 {
-    assert(false);
-//    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
-//            __add(container);
-//        }
-//    }
+    assert(bullet);
+    if (!__isObjectOnScreen(bullet)) {
+        return false;
+    }
+    if (!ceti::isPointInObserverRadius(bullet->position(), m_player->position(), m_player->radius())) {
+        return false;
+    }
+
+    Base* view = m_cache.get(bullet->id());
+    if (!view) {
+        view = new Bullet(bullet);
+        //applyConstantRotationAnimation(meti::OZ, view);
+        m_cache.add(view);
+    }
+    assert(view);
+
+    __add(view);
+
+    return true;
 }
 
-void StarSystem::__addIfVisible(control::Bullet* bullet)
+bool StarSystem::__addIfVisible(control::WormHole* wormhole)
 {
-    assert(false);
-//    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
-//            __add(bullet);
-//        }
-//    }
+    assert(wormhole);
+    if (!__isObjectOnScreen(wormhole)) {
+        return false;
+    }
+    if (!ceti::isPointInObserverRadius(wormhole->position(), m_player->position(), m_player->radius())) {
+        return false;
+    }
+
+    Base* view = m_cache.get(wormhole->id());
+    if (!view) {
+        view = new WormHole(wormhole);
+        //applyConstantRotationAnimation(meti::OZ, view);
+        m_cache.add(view);
+    }
+    assert(view);
+
+    __add(view);
+
+    return true;
 }
-
-//void SpaceViewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
-//{
-//    if (isRectOnVisibleScreenArea(wormhole->center(), wormhole->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(wormhole->center(), data.observer.center, data.observer.radius)) {
-//            __add(wormhole);
-//        }
-//    }
-//}
-
-//void SpaceViewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
-//{
-//    if (isRectOnVisibleScreenArea(ship->center(), ship->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(ship->center(), data.observer.center, data.observer.radius)) {
-//            __add(ship);
-//        }
-//    }
-//}
-
-//void SpaceViewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
-//{
-//    if (isRectOnVisibleScreenArea(spacestation->center(), spacestation->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(spacestation->center(), data.observer.center, data.observer.radius)) {
-//            __add(spacestation);
-//        }
-//    }
-//}
-
-//void SpaceViewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
-//{
-//    if (isRectOnVisibleScreenArea(satellite->center(), satellite->size(), data.screen.worldcoord, data.screen.scale)) {
-//        if (ceti::isPointInObserverRadius(satellite->center(), data.observer.center, data.observer.radius)) {
-//            __add(satellite);
-//        }
-//    }
-//}
 
 //void SpaceViewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
 //{
@@ -597,7 +610,7 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
 
     for(Star* star: m_stars) {
         star->update();
-        //star->draw(render);
+        //star->draw(render); // post effect is used instead
     }
 
     for(Planet* planet: m_planets) {
@@ -626,8 +639,7 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
 
     for(Container* container: m_containers) {
-        assert(false);
-        //container->update();
+        container->update();
         container->draw(render);
     }
 
@@ -713,11 +725,11 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
             return bullet;
         }
     }
-//    for(Container* container: m_containers) {
-//        if(__isPointInsideObject(mouse_pos, container)) {
-//            return container;
-//        }
-//    }
+    for(Container* container: m_containers) {
+        if(__isPointInsideObject(mouse_pos, container->control())) {
+            return container;
+        }
+    }
     for(Star* star: m_stars) {
         if(__isPointInsideObject(mouse_pos, star->star())) {
             return star;

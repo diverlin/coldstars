@@ -30,33 +30,10 @@
 #include <ceti/Base.hpp>
 
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 namespace jeti {
-
 namespace  view {
-
-//namespace {
-
-//glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
-//{
-//    glm::mat4 Tm = glm::translate(center);
-
-//    glm::quat Qx, Qy, Qz;
-
-//    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-//    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
-//    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
-
-//    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
-//    glm::mat4 Sm = glm::scale(size);
-
-//    glm::mat4 Mm = Tm * Rm * Sm;
-
-//    return Mm;
-//}
-
-//} // namespace
-
 
 BaseView::BaseView()
 {}
@@ -158,16 +135,20 @@ void BaseView::_updateModelMatrix(const glm::vec3& parallax_offset)
     assert(m_orientation);
 
     // prepare rotation matrix
-    meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
-    //meti::quatBetweenVectors(m_quatDirection, meti::OX, m_orientation->direction());
+    if (m_mesh->isFlat()) {
+        float angle = glm::orientedAngle(m_mesh->originDirection(), m_orientation->direction(), meti::OZ); //M_PI/4.0f;
+        m_matrixRotate = glm::rotate(angle, meti::OZ);
+    } else {
+        meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+        //meti::quatBetweenVectors(m_quatDirection, meti::OX, m_orientation->direction());
 
-    if (m_animationRotation) {
-        m_animationRotation->update(m_quatAnimation);
-        m_quatDirection *= m_quatAnimation;
+        if (m_animationRotation) {
+            m_animationRotation->update(m_quatAnimation);
+            m_quatDirection *= m_quatAnimation;
+        }
+
+        m_matrixRotate = glm::toMat4(m_quatDirection);
     }
-
-    m_matrixRotate = glm::toMat4(m_quatDirection);
-    //m_orientation->setDirection(glm::vec4(m_mesh->originDirection(), 1.0f) * m_matrixRotate);
 
     // prepeare scale matrix
     m_matrixScale = glm::scale(m_orientation->size());

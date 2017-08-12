@@ -18,20 +18,27 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include <client/view/BaseView.hpp>
+
+namespace control {
+class Container;
+} // namespace control
 
 namespace view {
 
-class Container : public jeti::view::BaseView
+class Container : public Base
 {
-    public:                  
-        Container(jeti::control::Material*, jeti::Mesh*);
-        virtual ~Container() final override;
-        
-        //virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
-        
-    private:
-        //virtual void UpdateInfo() override final;
+public:
+    Container(control::Container*);
+    ~Container() final override;
+
+    void draw(const jeti::Render& render) const override final;
+    control::Container* control() { return m_control; }
+
+private:
+    control::Container* m_control = nullptr;
+
+    //virtual void UpdateInfo() override final;
 };
 
 } // namespace view

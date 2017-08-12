@@ -288,7 +288,7 @@ void Render::__initAxisMesh()
     colors.push_back(glm::vec4(m, m, 1.0, 1.0));
 
     float linesWidth = 2.0f;
-    m_meshAxis->fillVertices(vertices, colors, linesWidth);
+    m_meshAxis->fillLineVertices(vertices, colors, linesWidth);
 }
 
 void Render::activateFbo(int index, int w, int h)
@@ -442,7 +442,10 @@ void Render::__drawMesh(const Mesh& mesh) const {
             __disable_CULLFACE();
             break;
         case Mesh::States::LINES:
-            glDisable(GL_TEXTURE_2D);
+            __disable_POINTSPRITE();
+            __disable_BLEND();
+            __disable_DEPTH_TEST();
+            __disable_CULLFACE();
             break;
         case Mesh::States::NONE:
             assert(false);
@@ -948,12 +951,14 @@ void Render::__useProgram(GLuint program) const
  
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
+    __useProgram(0);
     glLineWidth(m_meshAxis->linesWidth());
     drawMesh(*m_meshAxis, modelMatrix);
 }
 
 void Render::drawLines(const Mesh& mesh) const
 {
+    //__useProgram(0);
     glLineWidth(mesh.linesWidth());
     __drawMesh(mesh);
 }
