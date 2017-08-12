@@ -18,17 +18,35 @@
 
 #include "Container.hpp"
 
+#include <core/spaceobject/Container.hpp>
+
+#include <jeti/Render.hpp>
+
 namespace view {
 
-//Container::Container(jeti::control::TextureOb* texture, jeti::Mesh* mesh)
-//    :
-//      BaseDrawable(texture, mesh)
-//{
-//}
+Container::Container(control::Container* container)
+    :
+      Base(container)
+    , m_control(container)
+{
+}
 
-///* virtual */
-//Container::~Container()
-//{}
+Container::~Container()
+{}
+
+void Container::draw(const jeti::Render& render) const
+{
+    render.draw(_mesh(), _material(), _modelMatrix());
+
+    ////    UpdateInfo();
+    ////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
+    ////    pos /= zoom;
+    ////    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+
+    ////    pos.x += 300;
+    ////    m_ItemSlot->item()->RenderInfo(render, pos);
+}
+
 
 ///* virtual override final */
 ////void Container::UpdateInfo()
@@ -38,18 +56,6 @@ namespace view {
 ////    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
 ////    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
 ////    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
-////}
- 
-///* virtual override final */
-////void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
-////{
-////    UpdateInfo();
-////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
-////    pos /= zoom;
-////    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
-    
-////    pos.x += 300;
-////    m_ItemSlot->item()->RenderInfo(render, pos);
 ////}
 
 } // namespace view

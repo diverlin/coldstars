@@ -42,7 +42,7 @@ Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     if (!descriptor->modelPath().empty()) {
         m_id = descriptor->id();
         ObjLoader objLoader(descriptor->modelPath());
-        fillVertices(objLoader);
+        fillLineVertices(objLoader);
         m_boundaryBox = objLoader.__boundaryBox();
     } else {
         __genQuad();
@@ -80,12 +80,12 @@ void Mesh::__genQuad()
        << "f 8/4/2 5/2/2 7/3/2 \n";
 
     ObjLoader objLoader(ss);
-    fillVertices(objLoader);
+    fillLineVertices(objLoader);
 
     m_states = States::QUAD;
 }
 
-void Mesh::fillVertices(const ObjLoader& objLoader)
+void Mesh::fillLineVertices(const ObjLoader& objLoader)
 {
     m_primitiveType = GL_TRIANGLES;
 
@@ -113,7 +113,7 @@ void Mesh::fillVertices(const ObjLoader& objLoader)
     __updateVbo();
 }
 
-void Mesh::fillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth)
+void Mesh::fillLineVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, float linesWidth)
 {
     m_primitiveType = GL_LINES;
     m_states = States::LINES;

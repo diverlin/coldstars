@@ -151,9 +151,9 @@ private:
     bool __addIfVisible(control::Star*);
     bool __addIfVisible(control::Planet*);
     bool __addIfVisible(control::Asteroid* data);
-    void __addIfVisible(control::Container* data);
-    void __addIfVisible(control::Bullet* data);
-    void __addIfVisible(control::WormHole* data);
+    bool __addIfVisible(control::Container* data);
+    bool __addIfVisible(control::Bullet* data);
+    bool __addIfVisible(control::WormHole* data);
     bool __addIfVisible(control::Ship*);
     bool __addIfVisible(control::SpaceStation*);
     bool __addIfVisible(control::Satellite*);

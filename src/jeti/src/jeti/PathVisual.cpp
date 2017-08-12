@@ -50,7 +50,9 @@ Path::~Path()
 void Path::update(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& directions)
 {
     update(positions);
-    __processDirections(positions, directions);
+    if (m_debug) {
+        __processDirections(positions, directions);
+    }
 }
 
 
@@ -62,7 +64,7 @@ void Path::update(const std::vector<glm::vec3>& positions)
 
 void Path::__processDirections(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& directions)
 {
-    int step = TURN_STEP;
+    int step = STEP;
 
     std::vector<glm::vec4> colors;
     float delta = 0.8f;
@@ -77,7 +79,7 @@ void Path::__processDirections(const std::vector<glm::vec3>& positions, const st
     }
 
     float linesWidth = 2.0f;
-    m_meshDirections->fillVertices(vertices, colors, linesWidth);
+    m_meshDirections->fillLineVertices(vertices, colors, linesWidth);
 }
 
 void Path::__processMove(const std::vector<glm::vec3>& positions)
@@ -164,7 +166,9 @@ void Path::draw(const Render& render) const
 {
     render.drawParticles(*m_meshMove, *m_material);
     render.drawParticles(*m_meshTurn, *m_material);
-    render.drawLines(*m_meshDirections);
+    if (m_debug) {
+        render.drawLines(*m_meshDirections);
+    }
 }
 
 } // namespace view

@@ -26,6 +26,8 @@
 
 #include <jeti/Render.hpp>
 
+#include <meti/VectorUtils.hpp>
+
 #include <vector>
 
 namespace control {
@@ -54,6 +56,9 @@ public:
     ~Player();
 
     Show& show() { return m_show; }
+
+    const meti::vec3& position() const;
+    float radius() const;
 
     control::Npc* npc() const { return m_npc; }
     gui::Cursor& cursor() { return m_cursor; }

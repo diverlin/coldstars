@@ -38,9 +38,6 @@ public:
     Bullet(control::Bullet*);
     ~Bullet() final override;
 
-    //void CreateDriveComplexTextureDependedStuff();
-
-    //void RenderInSpace(const Renderer&, float);
     void draw(const jeti::Render& render) const override final;
     control::Bullet* control() { return m_control; }
 
