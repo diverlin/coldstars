@@ -394,14 +394,14 @@ void Render::__updateProjectionViewMatrix()
 }
 
 
-void Render::drawQuad(const control::Material& material, const glm::mat4& ModelMatrix, float opacity) const
+void Render::drawQuad(const control::Material& material, const glm::mat4& ModelMatrix, const glm::vec4& color) const
 {
-    drawMesh(*m_meshQuad, material, ModelMatrix, opacity);
+    drawMesh(*m_meshQuad, material, ModelMatrix, color);
 }
 
-void Render::drawQuadAdditive(const control::Material& material, const glm::mat4& ModelMatrix, float opacity) const
+void Render::drawQuadAdditive(const control::Material& material, const glm::mat4& ModelMatrix, const glm::vec4& color) const
 {
-    drawMesh(*m_meshQuadAdditive, material, ModelMatrix, opacity);
+    drawMesh(*m_meshQuadAdditive, material, ModelMatrix, color);
 }
 
 void Render::drawQuad(const control::Material& material, const ceti::Box2D& box) const
@@ -480,14 +480,14 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
     }
 }
 
-void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix, float opacity) const
+void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {	
     __useProgram(m_shaders.basetexture);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
-        glUniform1f(glGetUniformLocation(m_shaders.basetexture, "u_opacity"), opacity);
+        glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);

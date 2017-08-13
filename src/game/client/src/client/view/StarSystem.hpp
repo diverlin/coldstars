@@ -131,8 +131,8 @@ private:
     std::vector<jeti::particlesystem::Base*> m_particlesystems;
     std::vector<jeti::particlesystem::Base*> m_visible_particlesystems;
 
-    std::vector<::effect::Beam*> m_jets;
-    std::vector<::effect::Beam*> m_visible_jets;
+    std::vector<::effect::Beam*> m_beams;
+    std::vector<::effect::Beam*> m_visible_beams;
     //    std::vector<VerticalFlowText*> m_texts;
     
     void __applyConstantRotationAnimation(const glm::vec3&, Base*);
@@ -162,7 +162,7 @@ private:
 
     void __createDamage();
     void __createExplosion();
-    void __createJet();
+    void __createBeam();
 
     /// visible entities
     void __add(Base*);

@@ -27,6 +27,8 @@
 
 #include <glm/gtx/transform.hpp>
 
+#include <iostream>
+
 
 namespace jeti {
 namespace particlesystem {
@@ -37,6 +39,8 @@ Base::Base(const ParticleSystemConfig& config)
 {
     m_mesh = new Mesh();
     m_direction = glm::vec3(1.0f, 0.0f, 0.0f);
+
+    m_lastTime = std::chrono::steady_clock::now();
 }
 
 Base::~Base()
@@ -71,6 +75,7 @@ void Base::_emitNewParticle() {
     const auto now_time = std::chrono::steady_clock::now();
     float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
     if (msec_diff > m_config.creation_delay_msec) {
+        std::cout<<"create particle, delay="<<msec_diff<<std::endl;
         m_particles.push_back(_genParticle());
         m_lastTime = now_time;
     }
@@ -79,7 +84,6 @@ void Base::_emitNewParticle() {
 Particle* Base::_genParticle() const
 {
     Particle* particle = new Particle(m_config.particle);
-    particle->setPosition(m_center);
     if (m_config.use_rand_dir) {
         particle->randomizeDirection();
     } else {
@@ -127,8 +131,7 @@ void Base::_updateToGPU()
 void
 Base::_updateModelMatrix()
 { 
-    m_Tm = glm::translate(center());
-    m_Mm = m_Tm;
+    m_Mm = glm::translate(center());
 }
 
 void Base::draw(const jeti::Render& render) const

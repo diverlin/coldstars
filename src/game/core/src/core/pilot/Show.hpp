@@ -43,7 +43,7 @@ public:
     void setExperimental(bool experimental) { m_experimental = experimental; }
 
 private:
-    bool m_star = true;
+    bool m_star = false;
     bool m_stars = true;
     bool m_nebulas = false;
     bool m_spaceobjects = true;

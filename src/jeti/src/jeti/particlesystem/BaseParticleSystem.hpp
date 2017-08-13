@@ -97,8 +97,6 @@ private:
     glm::vec3 m_direction;
     float m_velocity = 0.0f;
 
-    glm::mat4 m_Tm;
-    glm::mat4 m_Sm;
     glm::mat4 m_Mm;
 
     bool m_isAlive = true;
