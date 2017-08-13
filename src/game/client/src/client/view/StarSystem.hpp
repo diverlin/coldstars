@@ -45,8 +45,6 @@ class Camera;
 class Mesh;
 namespace particlesystem {
 class Base;
-class Explosion;
-class Damage;
 } // namespace particlesystem
 
 namespace control {
@@ -112,8 +110,6 @@ private:
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
-    jeti::particlesystem::Explosion* m_psExplosion = nullptr;
-    jeti::particlesystem::Damage* m_psDamage = nullptr;
 
     /// visible entities
     std::vector<Star*> m_stars;
@@ -131,13 +127,12 @@ private:
 
     Cache m_cache;
 
-    bool m_debug = true;
-
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
 //    std::vector<LazerTraceEffect*> m_lazertraces;
-//    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
-//    std::vector<VerticalFlowText*> m_texts;
+    std::vector<jeti::particlesystem::Base*> m_particlesystems;
+    std::vector<jeti::particlesystem::Base*> m_visible_particlesystems;
+    //    std::vector<VerticalFlowText*> m_texts;
     
     void applyConstantRotationAnimation(const glm::vec3&, Base*);
 
@@ -161,8 +156,11 @@ private:
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
 //    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
-//    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
+    bool __addIfVisible(jeti::particlesystem::Base*);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
+
+    void __createDamage();
+    void __createExplosion();
 
     /// visible entities
     void __add(Base*);

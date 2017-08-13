@@ -30,10 +30,10 @@ public:
     Explosion(const ParticleSystemConfig&);
     virtual ~Explosion() override final = default;
 
-    void update(const glm::vec3&) override final;
+    void update() override final;
 };  
 
-Explosion* genExplosion(control::Material* material);
+Explosion* genExplosion(control::Material* material, float size = 1.0f);
 
 } // namepsace particlesystem
 } // namespace jeti
