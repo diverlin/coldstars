@@ -9,13 +9,11 @@ void checkOpenglErrors(const char *filename, int line_num)
 {
     std::vector<unsigned> errors;
     GLuint error;
-    while ((error = glGetError()) and (error != GL_NO_ERROR))
-    {
+    while ((error = glGetError()) and (error != GL_NO_ERROR)) {
         errors.push_back(error);
     }
     
-    if (errors.empty())
-    {
+    if (errors.empty()) {
         return;
     }
     
@@ -29,8 +27,7 @@ void checkOpenglErrors(const char *filename, int line_num)
      
     std::stringstream ss;
     ss<<"OpenGL errors:\n";
-    for(unsigned int i=0; i<errors.size(); i++)
-    {
+    for(unsigned int i=0; i<errors.size(); i++) {
         ss<<filename<<":"<<line_num<<":"<<error<<std::endl;
     }
     
@@ -70,4 +67,4 @@ void checkProgramErrors(GLuint program)
     throw std::runtime_error(oss.str());
 }
 
-}
+} // namespace jeti

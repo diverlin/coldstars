@@ -25,7 +25,7 @@ class TextureOb;
 class Mesh
 { 
 public:
-    enum class States { NONE, QUAD, NORMAL, PARTICLES, LINES };
+    enum class States { NONE, QUAD, QUAD_ADDITIVE, NORMAL, PARTICLES, LINES };
 
     Mesh();
     Mesh(ceti::descriptor::Mesh*);
@@ -33,7 +33,7 @@ public:
 
     int_t id() const { return m_id; }
 
-    bool isFlat() const { return m_states == States::QUAD; }
+    bool isFlat() const { return m_states == States::QUAD || m_states == States::QUAD_ADDITIVE; }
 
     TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
@@ -49,6 +49,7 @@ public:
     void draw() const;
     void draw(GLenum) const;
 
+    void setStates(Mesh::States states) { m_states = states; }
     const States& states() const { return m_states; }
     
 private:

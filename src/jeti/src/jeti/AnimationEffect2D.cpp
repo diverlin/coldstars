@@ -17,6 +17,7 @@
 */
 
 #include "AnimationEffect2D.hpp"
+
 #include <ceti/Box2D.hpp>
 
 namespace jeti {

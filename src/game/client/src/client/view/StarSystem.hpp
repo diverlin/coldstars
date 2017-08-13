@@ -70,6 +70,7 @@ class Bullet;
 namespace effect {
 class DistantStars;
 class DistantNebulas;
+class Beam;
 } // namespace
 
 namespace view {
@@ -86,9 +87,7 @@ class Bullet;
 } // namespace view
 
 /// effects
-class LazerTraceEffect;
 class ShockWaveEffect;
-
 class VerticalFlowText;
 
 namespace view {
@@ -129,12 +128,14 @@ private:
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
-//    std::vector<LazerTraceEffect*> m_lazertraces;
     std::vector<jeti::particlesystem::Base*> m_particlesystems;
     std::vector<jeti::particlesystem::Base*> m_visible_particlesystems;
+
+    std::vector<::effect::Beam*> m_jets;
+    std::vector<::effect::Beam*> m_visible_jets;
     //    std::vector<VerticalFlowText*> m_texts;
     
-    void applyConstantRotationAnimation(const glm::vec3&, Base*);
+    void __applyConstantRotationAnimation(const glm::vec3&, Base*);
 
     void __updateVisible(control::StarSystem* starsystem);
 
@@ -155,12 +156,13 @@ private:
 
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
-//    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
+    bool __addIfVisible(::effect::Beam*);
     bool __addIfVisible(jeti::particlesystem::Base*);
 //    void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
     void __createDamage();
     void __createExplosion();
+    void __createJet();
 
     /// visible entities
     void __add(Base*);
@@ -176,7 +178,7 @@ private:
 
     /// visible effects
     void __add(ShockWaveEffect*);
-    void __add(LazerTraceEffect*);
+    void __add(::effect::Beam*);
     void __add(jeti::particlesystem::Base*);
     void __add(VerticalFlowText*);
 

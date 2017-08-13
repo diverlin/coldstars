@@ -19,53 +19,56 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <glm/gtx/quaternion.hpp>
 
 namespace jeti {
 class Mesh;
+class Render;
 namespace control {
 class Material;
 } // namespace control
 class BaseParticleSystem;
 }
 
-class LazerTraceEffect
+namespace effect {
+
+class Beam
 { 
-    public:
-        LazerTraceEffect(jeti::control::Material*, const glm::vec3* const, const glm::vec3* const);
-        ~LazerTraceEffect();
+public:
+    Beam(jeti::control::Material*);
+    ~Beam();
 
-        bool isAlive() const { return m_IsAlive; }
+    bool isAlive() const { return m_isAlive; }
 
-        void BindParticleSystem(jeti::BaseParticleSystem* particle_system) { m_ParticleSystem = particle_system; }
-        
-        const glm::vec3& GetStartPos() const { return *m_pStartPos; }
-        const glm::vec3& GetEndPos() const { return *m_pEndPos; }
+    void setParticleSystem(jeti::BaseParticleSystem* particle_system) { m_particleSystem = particle_system; }
 
-        const glm::mat4& actualModelMatrix();
-        const jeti::Mesh& mesh() const { return *m_Mesh; }
-        const jeti::control::Material& textureOb() const { return *m_TextureOb; }
+    void setFrom(const glm::vec3& from) { m_from = from; }
+    void setTo(const glm::vec3& to) { m_to = to; }
 
-        void Update();
-                    
-     private:
-        bool m_IsAlive;
-        int m_LiveTime;
-        
-        jeti::Mesh* m_Mesh;
-        jeti::control::Material* m_TextureOb;
-        jeti::BaseParticleSystem* m_ParticleSystem;
+    const glm::vec3& from() const { return m_from; }
+    const glm::vec3& to() const { return m_to; }
 
-        const glm::vec3* m_pStartPos;
-        const glm::vec3* m_pEndPos;
+    const jeti::control::Material& material() const { return *m_material; }
 
-        glm::mat4 m_MatrixModel;
-        glm::mat4 m_MatrixTranslate;
-        glm::mat4 m_MatrixRotate;
-        glm::mat4 m_MatrixScale;
+    void update();
+    void draw(const jeti::Render&) const;
 
-        glm::quat m_QuatPosition;
+private:
+    bool m_isAlive = true;
+    int m_liveTime = 40;
+
+    jeti::control::Material* m_material = nullptr;
+    jeti::BaseParticleSystem* m_particleSystem = nullptr;
+
+    glm::vec3 m_from;
+    glm::vec3 m_to;
+
+    glm::mat4 m_matrixModel;
+    glm::mat4 m_matrixTranslate;
+    glm::mat4 m_matrixRotate;
+    glm::mat4 m_matrixScale;
+
+    void __updateModelMatrix();
 };
 
-
+} // namespace effect
 
