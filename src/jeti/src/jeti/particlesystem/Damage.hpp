@@ -30,10 +30,10 @@ public:
     Damage(const ParticleSystemConfig&);
     virtual ~Damage() override final = default;
 
-    void update(const glm::vec3&) override final;
+    void update() override final;
 };
 
-Damage* genDamage(control::Material* material);
+Damage* genDamage(control::Material* material, float size = 1.0f);
 
 } // namespace particlesystem
 } // namespace jeti

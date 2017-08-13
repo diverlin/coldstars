@@ -28,16 +28,8 @@ Jet::Jet(const ParticleSystemConfig& config)
     : Base(config)
 {}
 
-void Jet::update(const glm::vec3& center, const:: glm::vec3& dir)
-{
-    setDirection(dir);
-    update(center);
-}
-
-void Jet::update(const glm::vec3& center)
+void Jet::update()
 {    
-    setCenter(center);
-
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
@@ -51,7 +43,7 @@ void Jet::update(const glm::vec3& center)
     _emitNewParticle();
 }
 
-Jet* genJet(control::Material* material, int size_id)
+Jet* genJet(control::Material* material, float size)
 {
     ParticleSystemConfig config;
 
@@ -66,12 +58,12 @@ Jet* genJet(control::Material* material, int size_id)
     config.rand_size_delta = 0.1f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 30.0f + 2*size_id;
+    particle.size_start = 30.0f + 2*size;
     particle.size_end   = 5.5f;
     particle.size_delta = 2.0f;
     
-    particle.velocity_start = 0.05f;
-    particle.velocity_end   = 0.05f;
+    particle.velocity_start = 5.0f;
+    particle.velocity_end   = 5.0f;
     particle.velocity_delta = 0.0f;
     
     particle.color_start.r = 1.0f;

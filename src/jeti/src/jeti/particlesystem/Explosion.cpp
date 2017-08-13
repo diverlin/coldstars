@@ -30,10 +30,8 @@ Explosion::Explosion(const ParticleSystemConfig& config)
       Base(config)
 {}
 
-void Explosion::update(const glm::vec3& center)
+void Explosion::update()
 {
-    setCenter(center);
-
     for (Particle* particle: _particles()) {
         if (particle->isAlive()) {
             particle->update();
@@ -47,10 +45,8 @@ void Explosion::update(const glm::vec3& center)
 }
 
 
-Explosion* genExplosion(control::Material* material)
+Explosion* genExplosion(control::Material* material, float size)
 {
-    int size_id = 1;
-
     ParticleSystemConfig config;
 
     config.particles_num = 50;
@@ -64,12 +60,12 @@ Explosion* genExplosion(control::Material* material)
     config.rand_size_delta = 0.9f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 65.0f + 2*size_id;
+    particle.size_start = 65.0f + 2*size;
     particle.size_end   = 5.5f;
     particle.size_delta = 0.5f;
 
-    particle.velocity_start = 0.015f;
-    particle.velocity_end   = 0.015f;
+    particle.velocity_start = 1.5f;
+    particle.velocity_end   = 1.5f;
     particle.velocity_delta = 0.0f;
 
     particle.color_start.r = 1.0f;

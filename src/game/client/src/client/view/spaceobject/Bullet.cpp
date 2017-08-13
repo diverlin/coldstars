@@ -48,7 +48,9 @@ void Bullet::draw(const jeti::Render& render) const
 
     glm::vec3 pos = m_control->position();
     pos -= m_control->size().x * m_control->direction();
-    m_driveJet->update(pos, -m_control->direction());
+    m_driveJet->setCenter(pos);
+    m_driveJet->setDirection(-m_control->direction());
+    m_driveJet->update();
     m_driveJet->draw(render);
 }
 

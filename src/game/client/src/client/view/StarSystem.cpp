@@ -83,8 +83,6 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
-    , m_psExplosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
-    , m_psDamage(jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR)))
 {}
 
 StarSystem::~StarSystem()
@@ -123,6 +121,12 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto bullet: starsystem->bullets()) {
         __addIfVisible(bullet);
     }
+    for(auto ps: m_particlesystems) {
+        __addIfVisible(ps);
+    }
+
+    //__createDamage();
+    __createExplosion();
 
     // update ui
     {
@@ -202,7 +206,18 @@ void StarSystem::__clear()
     // effects
 //    m_shockwaves.clear();
 //    m_lazertraces.clear();
-//    m_particlesystems.clear();
+
+
+    // clear effects
+    for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it != m_particlesystems.end(); ++it) {
+        jeti::particlesystem::Base* ps = *it;
+        if (!ps->isAlive()) {
+            it = m_particlesystems.erase(it);
+            delete ps;
+        }
+    }
+    m_visible_particlesystems.clear();
+
 //    m_texts.clear();
 }
 
@@ -437,14 +452,53 @@ bool StarSystem::__addIfVisible(control::WormHole* wormhole)
 //    //    }
 //}
 
-//void SpaceViewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
-//{
-//    //    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
-//    //        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
-//    __add(effect);
-//    //        }
-//    //    }
-//}
+
+void
+StarSystem::__createDamage()
+{
+    if (m_particlesystems.size()>=3) {
+        return;
+    }
+
+    float size = meti::getRandFloat(1.0f, 10.0f);
+    glm::vec3 center(meti::getRandFloat(-400.0f,400.0f), meti::getRandFloat(-400.0f,400.0f), 0.0f);
+
+    jeti::particlesystem::Base* ps = jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+
+    ps->setCenter(center);
+    m_particlesystems.push_back(ps);
+}
+
+void
+StarSystem::__createExplosion()
+{
+    if (m_particlesystems.size()>=10) {
+        return;
+    }
+
+    float size = meti::getRandFloat(1.0f, 10.0f);
+    glm::vec3 center(meti::getRandFloat(-400.0f,400.0f), meti::getRandFloat(-400.0f,400.0f), 0.0f);
+
+    jeti::particlesystem::Base* ps = jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size);
+
+    ps->setCenter(center);
+    m_particlesystems.push_back(ps);
+}
+
+bool
+StarSystem::__addIfVisible(jeti::particlesystem::Base* ps)
+{
+    m_render.toScreenCoord(ps->center(), m_tmpScreenCoord);
+    if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
+        return false;
+    }
+    if (!ceti::isPointInObserverRadius(ps->center(), m_player->position(), m_player->radius())) {
+        return false;
+    }
+
+    m_visible_particlesystems.push_back(ps);
+    return true;
+}
 
 //void SpaceViewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
 //{
@@ -643,6 +697,13 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         container->draw(render);
     }
 
+    for(jeti::particlesystem::Base* ps: m_particlesystems) {
+        ps->update();
+    }
+    for(jeti::particlesystem::Base* ps: m_visible_particlesystems) {
+        ps->draw(render);
+    }
+
     m_player->cursor().renderFocusedObjectStuff(render);
 }
 
@@ -681,13 +742,6 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
 
     // projection
     render.setOrthogonalProjection();
-
-    m_psExplosion->update(glm::vec3(0.0f));
-    m_psExplosion->draw(render);
-
-    glm::vec3 center = glm::vec3(sin(render.time())*100.0f, cos(render.time())*100.0f, 0.0f);
-    m_psDamage->update(center);
-    m_psDamage->draw(render);
 }
 
 void StarSystem::__render(jeti::Render& render)

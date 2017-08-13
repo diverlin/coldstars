@@ -50,7 +50,7 @@ Base::~Base()
 }
 
 void Base::_checkAlive() {
-    if (m_particles.size() == m_config.particles_num) {
+    if (m_particles.size() != m_config.particles_num) {
         return;
     }
 
@@ -129,10 +129,7 @@ void
 Base::_updateModelMatrix()
 { 
     m_Tm = glm::translate(center());
-    //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
-    m_Sm = glm::scale(glm::vec3(100.0f));
-
-    m_Mm = m_Tm * m_Sm /** m_MatrixRotate*/;
+    m_Mm = m_Tm;
 }
 
 void Base::draw(const jeti::Render& render) const

@@ -30,11 +30,10 @@ public:
     Jet(const ParticleSystemConfig&);
     virtual ~Jet() override final = default;
 
-    void update(const glm::vec3&, const:: glm::vec3&);
-    void update(const glm::vec3&) override final;
+    void update() override final;
 };
 
-Jet* genJet(control::Material*, int size_id = 1);
+Jet* genJet(control::Material*, float size = 1.0f);
 
 } // namespace particlesystem
 } // namespace jeti

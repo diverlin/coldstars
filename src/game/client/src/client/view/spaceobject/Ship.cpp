@@ -121,7 +121,9 @@ void Ship::draw(const jeti::Render& render) const
         //std::cout<<"ddd="<<ceti::to_string(m_ship->direction())<<std::endl;
         glm::vec3 pos = m_ship->position();
         pos -= m_ship->size().x * m_ship->direction();
-        m_driveJet->update(pos, -m_ship->direction());
+        m_driveJet->setCenter(pos);
+        m_driveJet->setDirection(-m_ship->direction());
+        m_driveJet->update();
         m_driveJet->draw(render);
         //starsystem()->RestoreSceneColor();
     //}

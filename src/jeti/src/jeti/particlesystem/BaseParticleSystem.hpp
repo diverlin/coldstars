@@ -53,6 +53,7 @@ public:
 
     int typeId() const { return m_type; }
     bool isAlive() const { return m_isAlive; }
+    const glm::vec3& size() const { return m_size; }
     const glm::vec3& center() const { return m_center; }
     float velocity() const { return m_velocity; }
 
@@ -61,7 +62,7 @@ public:
 
     const glm::mat4& modelMatrix() const { return m_Mm; }
 
-    virtual void update(const glm::vec3&) = 0;
+    virtual void update() = 0;
     void draw(const jeti::Render&) const;
 
 protected:
@@ -92,6 +93,7 @@ private:
     ParticleSystemConfig m_config;
 
     glm::vec3 m_center;
+    glm::vec3 m_size = glm::vec3(1.0f);
     glm::vec3 m_direction;
     float m_velocity = 0.0f;
 
