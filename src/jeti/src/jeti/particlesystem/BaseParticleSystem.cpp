@@ -41,8 +41,7 @@ Base::Base(const ParticleSystemConfig& config)
 
 Base::~Base()
 {
-    //delete m_mesh; FIXME cause bug
-
+    delete m_mesh;
     for (Particle* particle: m_particles) {
         delete particle;
     }

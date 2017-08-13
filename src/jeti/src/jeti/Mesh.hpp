@@ -73,7 +73,6 @@ private:
     
     uint32_t m_vertexCount = 0;
 
-    GLuint m_listId = 0;
     GLuint m_vaoId = 0;
     GLuint m_vboId = 0;
 

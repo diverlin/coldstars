@@ -24,7 +24,6 @@ const int STRIDE_COLOR    = 4;
 
 Mesh::Mesh()
 {
-    m_listId = glGenLists(1);
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
@@ -35,7 +34,6 @@ Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     :
       m_originDirection(descriptor->orientation())
 {     
-    m_listId = glGenLists(1);
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
@@ -53,8 +51,8 @@ Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
 
 Mesh::~Mesh()
 {
+    //glDeleteVertexArrays(1, &m_vboId); // cause crash, why?
     glDeleteVertexArrays(1, &m_vaoId);
-    glDeleteVertexArrays(1, &m_vboId);
 }
 
 void Mesh::__genQuad()
@@ -286,12 +284,14 @@ void Mesh::__drawVbo() const
 {
     glBindVertexArray(m_vaoId);
     glDrawArrays(m_primitiveType, 0, m_vertexCount);
+    glBindVertexArray(0);
 }
 
 void Mesh::__drawVbo(GLenum primitive_type) const
 {
     glBindVertexArray(m_vaoId);
     glDrawArrays(primitive_type, 0, m_vertexCount);
+    glBindVertexArray(0);
 }
 
 void Mesh::draw() const
