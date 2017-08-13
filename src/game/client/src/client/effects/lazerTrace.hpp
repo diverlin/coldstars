@@ -21,13 +21,18 @@
 #include <glm/glm.hpp>
 
 namespace jeti {
+
 class Mesh;
 class Render;
+
 namespace control {
 class Material;
 } // namespace control
-class BaseParticleSystem;
-}
+
+namespace particlesystem {
+class Base;
+} // namespace particlesystem
+} // namespace jeti
 
 namespace effect {
 
@@ -39,7 +44,7 @@ public:
 
     bool isAlive() const { return m_isAlive; }
 
-    void setParticleSystem(jeti::BaseParticleSystem* particle_system) { m_particleSystem = particle_system; }
+    void setParticleSystem(jeti::particlesystem::Base* particleSystem) { m_particleSystem = particleSystem; }
 
     void setFrom(const glm::vec3& from) { m_from = from; }
     void setTo(const glm::vec3& to) { m_to = to; }
@@ -54,18 +59,27 @@ public:
 
 private:
     bool m_isAlive = true;
-    int m_liveTime = 40;
+    int m_liveTime = 140;
 
     jeti::control::Material* m_material = nullptr;
-    jeti::BaseParticleSystem* m_particleSystem = nullptr;
+    jeti::particlesystem::Base* m_particleSystem = nullptr;
+
+    glm::vec4 m_color;
+    glm::vec4 m_overlayColor;
 
     glm::vec3 m_from;
     glm::vec3 m_to;
 
+    float m_sizeMax = 6.0f;
+    float m_size = 1.0f;
+    float m_deltaSize = 0.0f;
+
     glm::mat4 m_matrixModel;
+    glm::mat4 m_matrixModelOverlay;
     glm::mat4 m_matrixTranslate;
     glm::mat4 m_matrixRotate;
     glm::mat4 m_matrixScale;
+    glm::mat4 m_matrixScaleOverlay;
 
     void __updateModelMatrix();
 };

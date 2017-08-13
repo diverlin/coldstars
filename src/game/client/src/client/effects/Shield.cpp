@@ -60,7 +60,7 @@ void Shield::update()
 
 void Shield::draw(const jeti::Render& render) const
 {
-    render.drawQuad(_material(), _parent()->modelMatrix()*m_scaleMatrix, _color().a);
+    render.drawQuad(_material(), _parent()->modelMatrix()*m_scaleMatrix, _color());
 }
 
 } // namespace effect

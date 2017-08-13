@@ -101,13 +101,13 @@ public:
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
-    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, float opacity = 1.0) const;
+    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshMultiTextured(const Mesh&, const control::Material&, const glm::mat4&) const;
 
-    void drawQuad(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
-    void drawQuadAdditive(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
+    void drawQuad(const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+    void drawQuadAdditive(const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawQuad(const control::Material&, const ceti::Box2D&) const;
 
     void drawStar(GLuint texture=0) const;

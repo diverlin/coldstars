@@ -17,6 +17,7 @@
 */
 
 #include "Damage.hpp"
+
 #include <jeti/particlesystem/Particle.hpp>
 
 namespace jeti {
@@ -50,8 +51,8 @@ Damage* genDamage(control::Material* material, float size)
 {
     ParticleSystemConfig config;
 
-    config.particles_num = 10;
-    config.creation_delay_msec =5;
+    config.particles_num = 20;
+    config.creation_delay_msec = 50;
 
     config.use_rand_dir = true;
     config.use_rand_color_delta = true;

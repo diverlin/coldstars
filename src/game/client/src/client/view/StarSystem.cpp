@@ -122,7 +122,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto bullet: starsystem->bullets()) {
         __addIfVisible(bullet);
     }
-    for(auto jet: m_jets) {
+    for(auto jet: m_beams) {
         __addIfVisible(jet);
     }
     for(auto ps: m_particlesystems) {
@@ -131,7 +131,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     //__createDamage();
     __createExplosion();
-    __createJet();
+    __createBeam();
 
     // update ui
     {
@@ -212,18 +212,18 @@ void StarSystem::__clear()
 //    m_shockwaves.clear();
 
     // clear jets
-    for(std::vector<::effect::Beam*>::iterator it=m_jets.begin(); it != m_jets.end(); ++it) {
-        ::effect::Beam* jet = *it;
-        if (!jet->isAlive()) {
-            it = m_jets.erase(it);
-            delete jet;
+    for(std::vector<::effect::Beam*>::iterator it=m_beams.begin(); it < m_beams.end(); ++it) {
+        ::effect::Beam* beam = *it;
+        if (!beam->isAlive()) {
+            it = m_beams.erase(it);
+            delete beam;
         }
     }
-    m_visible_jets.clear();
+    m_visible_beams.clear();
     //
 
     // clear effects
-    for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it != m_particlesystems.end(); ++it) {
+    for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it < m_particlesystems.end(); ++it) {
         jeti::particlesystem::Base* ps = *it;
         if (!ps->isAlive()) {
             it = m_particlesystems.erase(it);
@@ -469,21 +469,27 @@ bool StarSystem::__addIfVisible(control::WormHole* wormhole)
 
 
 void
-StarSystem::__createJet()
+StarSystem::__createBeam()
 {
-    if (m_jets.size()>=10) {
+    if (m_beams.size()>=1) {
         return;
     }
 
-    glm::vec3 from(400.0f, 400.0f, 0.0f);
-    glm::vec3 to(meti::getRandFloat(-800.0f,-400.0f), meti::getRandFloat(-800.0f,-400.0f), 0.0f);
+    glm::vec3 from(100.0f, 100.0f, 0.0f);
+    glm::vec3 to(200.0f, 200.0f, 0.0f);
+    //glm::vec3 from(meti::getRandFloat(-500.0f,500.0f), meti::getRandFloat(-500.0f,500.0f), 0.0f);
+//    glm::vec3 to(meti::getRandFloat(-200.0f,200.0f), meti::getRandFloat(-200.0f,200.0f), 0.0f);
 
-    ::effect::Beam* jet = new ::effect::Beam(utils::createMaterialByDescriptorType(texture::Type::LAZER_EFFECT));
+    ::effect::Beam* beam = new ::effect::Beam(utils::createMaterialByDescriptorType(texture::Type::LAZER_EFFECT));
 
-    jet->setFrom(from);
-    jet->setTo(to);
+    beam->setFrom(from);
+    beam->setTo(to);
 
-    m_jets.push_back(jet);
+    float size = 3.0f;
+    jeti::particlesystem::Base* ps = jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size);
+    beam->setParticleSystem(ps);
+
+    m_beams.push_back(beam);
 }
 
 void
@@ -505,7 +511,7 @@ StarSystem::__createDamage()
 void
 StarSystem::__createExplosion()
 {
-    if (m_particlesystems.size()>=10) {
+    if (m_particlesystems.size()>=0) {
         return;
     }
 
@@ -544,7 +550,7 @@ StarSystem::__addIfVisible(::effect::Beam* effect)
 //        return false;
 //    }
 
-    m_visible_jets.push_back(effect);
+    m_visible_beams.push_back(effect);
     return true;
 }
 
@@ -736,10 +742,10 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
 
     // jets
-    for(::effect::Beam* jet: m_jets) {
+    for(::effect::Beam* jet: m_beams) {
         jet->update();
     }
-    for(::effect::Beam* jet: m_visible_jets) {
+    for(::effect::Beam* jet: m_visible_beams) {
         jet->draw(render);
     }
 

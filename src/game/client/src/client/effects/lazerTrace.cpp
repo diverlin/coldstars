@@ -19,6 +19,7 @@
 #include "lazerTrace.hpp"
 
 #include <meti/VectorUtils.hpp>
+#include <meti/RandUtils.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 #include <jeti/Render.hpp>
@@ -31,12 +32,32 @@ namespace effect {
 Beam::Beam(jeti::control::Material* material)
     :
       m_material(material)
-{}
+{
+    //m_color = glm::vec4(1.0f, 0.8f, 0.6f, 0.4f);
+    float r = meti::getRandFloat(0.6f, 1.0f);
+    float g = meti::getRandFloat(0.6f, 1.0f);
+    float b = meti::getRandFloat(0.6f, 1.0f);
+    m_color = glm::vec4(r, g, b, 0.4f);
+
+//    r = meti::getRandFloat(0.6f, 1.0f);
+//    g = meti::getRandFloat(0.6f, 1.0f);
+//    b = meti::getRandFloat(0.6f, 1.0f);
+//    m_overlayColor = glm::vec4(r, g, b, 0.2f);
+
+    m_overlayColor = m_color;
+    m_overlayColor.a = 0.2f;
+
+    m_size = 1.0f;
+    m_deltaSize = 0.1f;
+    m_sizeMax = 6.0f;
+}
 
 Beam::~Beam()
 {
-    //    delete m_particleSystem;
-    //    m_particleSystem = nullptr;
+    if (m_particleSystem) {
+        delete m_particleSystem;
+        m_particleSystem = nullptr;
+    }
 }
 
 void Beam::update()
@@ -45,11 +66,25 @@ void Beam::update()
         return;
     }
 
+    if (m_liveTime > 30) {
+        if (m_size < m_sizeMax) {
+            m_size += 6*m_deltaSize;
+        }
+    } else {
+        m_size -= m_deltaSize;
+    }
+
     __updateModelMatrix();
+
+    if (m_particleSystem) {
+        m_particleSystem->setCenter(m_to);
+        m_particleSystem->update();
+    }
+
     if (m_liveTime < 0) {
         m_isAlive = false;
         if (m_particleSystem) {
-            //m_particleSystem->StartDying();
+            m_particleSystem->setDying();
         }
     }
     m_liveTime -= 1;
@@ -57,16 +92,22 @@ void Beam::update()
 
 void Beam::__updateModelMatrix()
 {
-    m_matrixTranslate = glm::translate(m_from);
+    glm::vec3 diff(m_to-m_from);
+    glm::vec3 direction(glm::normalize(diff));
+    float length = glm::length(diff);
+
+    m_matrixTranslate = glm::translate(m_from+(0.5f*length)*direction);
 
     const glm::vec3& origin_dir = glm::vec3(1.0f, 0.0f, 0.0f);
-    float angle = glm::orientedAngle(origin_dir, glm::normalize(m_to-m_from), meti::OZ);
+    float angle = glm::orientedAngle(origin_dir, direction, meti::OZ);
     m_matrixRotate = glm::rotate(angle, meti::OZ);
 
-    float length = glm::length(m_to - m_from);
-    m_matrixScale = glm::scale(glm::vec3(length, 6.0, 0.0f));
+    m_matrixScale = glm::scale(glm::vec3(length/2, m_size, 0.0f));
+    m_matrixScaleOverlay = glm::scale(glm::vec3(length/2, m_size*4.0f, 0.0f));
 
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
+
+    m_matrixModelOverlay = m_matrixTranslate * m_matrixRotate * m_matrixScaleOverlay;
 }
 
 
@@ -75,7 +116,12 @@ void Beam::draw(const jeti::Render& render) const
     if (!m_isAlive) {
         return;
     }
-    render.drawQuadAdditive(*m_material, m_matrixModel);
+    render.drawQuadAdditive(*m_material, m_matrixModel, m_color);
+    render.drawQuadAdditive(*m_material, m_matrixModelOverlay, m_overlayColor);
+
+    if (m_particleSystem) {
+        m_particleSystem->draw(render);
+    }
 }
 
 } // namespace effect
