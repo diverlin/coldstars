@@ -28,40 +28,40 @@ namespace jeti {
 
 class AnimationEffect2D
 {
-    public:
-        AnimationEffect2D(const glm::vec3& scale_min, const glm::vec3& scale_max, const glm::vec3& d_scale, float angle_min, float angle_max, float d_angle):
-        scale_min(scale_min), 
-        scale_max(scale_max), 
-        d_scale(d_scale), 
+public:
+    AnimationEffect2D(const glm::vec3& scale_min, const glm::vec3& scale_max, const glm::vec3& d_scale, float angle_min, float angle_max, float d_angle):
+        scale_min(scale_min),
+        scale_max(scale_max),
+        d_scale(d_scale),
         angle_min(angle_min),
         angle_max(angle_max),
         d_angle(d_angle),
-        scale_up(true) 
-        {}
-        
-        ~AnimationEffect2D() {}
+        scale_up(true)
+    {}
+
+    ~AnimationEffect2D() {}
     
-        const glm::vec3& GetScale() const { return scale; }
-        float GetAngle() const { return angle; }
-        
-        void Update(ceti::Box2D&);
-        void Reset();
-        
-    private:
-        glm::vec3 scale;
-        glm::vec3 scale_min;
-        glm::vec3 scale_max;
-        glm::vec3 d_scale;
-        
-        float angle;
-        float angle_min;
-        float angle_max;
-        float d_angle;
-        
-        bool scale_up;
-        
+    const glm::vec3& GetScale() const { return scale; }
+    float GetAngle() const { return angle; }
+
+    void Update(ceti::Box2D&);
+    void Reset();
+
+private:
+    glm::vec3 scale;
+    glm::vec3 scale_min;
+    glm::vec3 scale_max;
+    glm::vec3 d_scale;
+
+    float angle;
+    float angle_min;
+    float angle_max;
+    float d_angle;
+
+    bool scale_up;
+
 };
 
-}
+} // namespace jeti
 
 

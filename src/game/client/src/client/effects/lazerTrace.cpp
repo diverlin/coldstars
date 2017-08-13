@@ -18,80 +18,64 @@
 
 #include "lazerTrace.hpp"
 
-#include <glm/gtx/transform.hpp>
-#include <meti/QuaternionUtils.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
+#include <jeti/Render.hpp>
 
+#include <glm/gtx/transform.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
-//#include <ceti/descriptor/Collector.hpp> // remove
+namespace effect {
 
-
-LazerTraceEffect::LazerTraceEffect(jeti::control::Material* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
-:
-m_IsAlive(true),
-m_TextureOb(textureOb),
-m_pStartPos(start_pos),
-m_pEndPos(end_pos)
-{
-    //MeshCollector::get().get(mesh::type::PLANE);
-    m_LiveTime = 40;
-}
-
-LazerTraceEffect::~LazerTraceEffect()
+Beam::Beam(jeti::control::Material* material)
+    :
+      m_material(material)
 {}
 
-void LazerTraceEffect::Update()
+Beam::~Beam()
 {
-    if (m_IsAlive)
-    {
-        if (m_LiveTime < 0)
-        {
-            m_IsAlive = false;
-            if (m_ParticleSystem != nullptr)
-            {
-                //m_ParticleSystem->StartDying();
-            }
-        }
-
-        m_LiveTime -= 1;
-    }
+    //    delete m_particleSystem;
+    //    m_particleSystem = nullptr;
 }
 
-const glm::mat4& LazerTraceEffect::actualModelMatrix()
+void Beam::update()
 {
-    m_MatrixTranslate = glm::translate(*m_pStartPos);
+    if (!m_isAlive) {
+        return;
+    }
+
+    __updateModelMatrix();
+    if (m_liveTime < 0) {
+        m_isAlive = false;
+        if (m_particleSystem) {
+            //m_particleSystem->StartDying();
+        }
+    }
+    m_liveTime -= 1;
+}
+
+void Beam::__updateModelMatrix()
+{
+    m_matrixTranslate = glm::translate(m_from);
 
     const glm::vec3& origin_dir = glm::vec3(1.0f, 0.0f, 0.0f);
-    meti::quatBetweenVectors(m_QuatPosition, origin_dir, glm::normalize(*m_pEndPos));
+    float angle = glm::orientedAngle(origin_dir, glm::normalize(m_to-m_from), meti::OZ);
+    m_matrixRotate = glm::rotate(angle, meti::OZ);
 
-    m_MatrixRotate = glm::toMat4(m_QuatPosition);
+    float length = glm::length(m_to - m_from);
+    m_matrixScale = glm::scale(glm::vec3(length, 6.0, 0.0f));
 
-    float length = glm::length(*m_pEndPos - *m_pStartPos);
-    m_MatrixScale = glm::scale(glm::vec3(length, 6.0, 0.0f));
-
-    m_MatrixModel = m_MatrixTranslate * m_MatrixRotate * m_MatrixScale;
-
-    return m_MatrixModel;
+    m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
 }
 
 
-//void LazerTraceEffect::Render()
-//{
-    //if (m_IsAlive == true)
-    //{         
-        //glUseProgram(ShaderCollector::Instance().flash);
-        
-        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().flash, "iTexture_0"), 0);
-        //glUniform1f(glGetUniformLocation(ShaderCollector::Instance().flash, "iTime"), Screen::Instance().GetElapsedTimeInSeconds()*10.0);
-        
-        //glActiveTexture(GL_TEXTURE0);        
-        
-        ////drawLine(*texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);            
-        
-        //glUseProgram(0);
-        //glActiveTexture(GL_TEXTURE0);
-    //}
-//}
+void Beam::draw(const jeti::Render& render) const
+{
+    if (!m_isAlive) {
+        return;
+    }
+    render.drawQuadAdditive(*m_material, m_matrixModel);
+}
 
-
+} // namespace effect

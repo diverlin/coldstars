@@ -46,6 +46,7 @@
 #include <client/common/global.hpp>
 #include <client/effects/DistantStarsEffect.hpp>
 #include <client/effects/DistantNebulaEffect.hpp>
+#include <client/effects/lazerTrace.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
@@ -121,12 +122,16 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto bullet: starsystem->bullets()) {
         __addIfVisible(bullet);
     }
+    for(auto jet: m_jets) {
+        __addIfVisible(jet);
+    }
     for(auto ps: m_particlesystems) {
         __addIfVisible(ps);
     }
 
     //__createDamage();
     __createExplosion();
+    __createJet();
 
     // update ui
     {
@@ -205,8 +210,17 @@ void StarSystem::__clear()
 
     // effects
 //    m_shockwaves.clear();
-//    m_lazertraces.clear();
 
+    // clear jets
+    for(std::vector<::effect::Beam*>::iterator it=m_jets.begin(); it != m_jets.end(); ++it) {
+        ::effect::Beam* jet = *it;
+        if (!jet->isAlive()) {
+            it = m_jets.erase(it);
+            delete jet;
+        }
+    }
+    m_visible_jets.clear();
+    //
 
     // clear effects
     for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it != m_particlesystems.end(); ++it) {
@@ -217,11 +231,12 @@ void StarSystem::__clear()
         }
     }
     m_visible_particlesystems.clear();
+    //
 
 //    m_texts.clear();
 }
 
-void StarSystem::applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
+void StarSystem::__applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
 {
     jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::getRandFloat(0.001, 0.01));
     view->setAnimationRotation(animation);
@@ -238,7 +253,7 @@ StarSystem::__addIfVisible(control::Star* star)
     Base* view = m_cache.get(star->id());
     if (!view) {
         view = new Star(star);
-        applyConstantRotationAnimation(meti::OY, view);
+        __applyConstantRotationAnimation(meti::OY, view);
         m_cache.add(view);
     }
     assert(view);
@@ -259,7 +274,7 @@ StarSystem::__addIfVisible(control::Planet* planet)
     Base* view = m_cache.get(planet->id());
     if (!view) {
         view = new Planet(planet);
-        applyConstantRotationAnimation(meti::OY, view);
+        __applyConstantRotationAnimation(meti::OY, view);
         m_cache.add(view);
     }
     assert(view);
@@ -283,7 +298,7 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid)
     Base* view = m_cache.get(asteroid->id());
     if (!view) {
         view = new Asteroid(asteroid);
-        applyConstantRotationAnimation(meti::OY, view);
+        __applyConstantRotationAnimation(meti::OY, view);
         m_cache.add(view);
     }
     assert(view);
@@ -454,6 +469,24 @@ bool StarSystem::__addIfVisible(control::WormHole* wormhole)
 
 
 void
+StarSystem::__createJet()
+{
+    if (m_jets.size()>=10) {
+        return;
+    }
+
+    glm::vec3 from(400.0f, 400.0f, 0.0f);
+    glm::vec3 to(meti::getRandFloat(-800.0f,-400.0f), meti::getRandFloat(-800.0f,-400.0f), 0.0f);
+
+    ::effect::Beam* jet = new ::effect::Beam(utils::createMaterialByDescriptorType(texture::Type::LAZER_EFFECT));
+
+    jet->setFrom(from);
+    jet->setTo(to);
+
+    m_jets.push_back(jet);
+}
+
+void
 StarSystem::__createDamage()
 {
     if (m_particlesystems.size()>=3) {
@@ -497,6 +530,21 @@ StarSystem::__addIfVisible(jeti::particlesystem::Base* ps)
     }
 
     m_visible_particlesystems.push_back(ps);
+    return true;
+}
+
+bool
+StarSystem::__addIfVisible(::effect::Beam* effect)
+{
+//    m_render.toScreenCoord(ps->center(), m_tmpScreenCoord);
+//    if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
+//        return false;
+//    }
+//    if (!ceti::isPointInObserverRadius(ps->center(), m_player->position(), m_player->radius())) {
+//        return false;
+//    }
+
+    m_visible_jets.push_back(effect);
     return true;
 }
 
@@ -603,16 +651,6 @@ void StarSystem::__add(Satellite* view)
 //    m_shockwaves.push_back(view);
 //}
 
-//void SpaceViewer::__add(LazerTraceEffect* view)
-//{
-//    m_lazertraces.push_back(view);
-//}
-
-//void SpaceViewer::__add(jeti::BaseParticleSystem* view)
-//{
-//    m_particlesystems.push_back(view);
-//}
-
 //void SpaceViewer::__add(VerticalFlowText* view)
 //{
 //    m_texts.push_back(view);
@@ -697,6 +735,15 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         container->draw(render);
     }
 
+    // jets
+    for(::effect::Beam* jet: m_jets) {
+        jet->update();
+    }
+    for(::effect::Beam* jet: m_visible_jets) {
+        jet->draw(render);
+    }
+
+    // particles systems
     for(jeti::particlesystem::Base* ps: m_particlesystems) {
         ps->update();
     }

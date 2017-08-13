@@ -107,6 +107,7 @@ public:
     void drawMeshMultiTextured(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawQuad(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
+    void drawQuadAdditive(const control::Material&, const glm::mat4&, float opacity = 1.0) const;
     void drawQuad(const control::Material&, const ceti::Box2D&) const;
 
     void drawStar(GLuint texture=0) const;
@@ -156,6 +157,7 @@ private:
     glm::ivec2 m_size;
 
     Mesh* m_meshQuad = nullptr;
+    Mesh* m_meshQuadAdditive = nullptr;
     Mesh* m_meshAxis = nullptr;
     control::Material* m_materialCollisionRadius = nullptr;
 

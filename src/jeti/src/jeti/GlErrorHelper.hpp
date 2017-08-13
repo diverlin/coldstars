@@ -9,5 +9,5 @@ void checkOpenglErrors(const char *filename, int line_num);
 void checkShaderErrors(GLuint shader, const GLchar*);
 void checkProgramErrors(GLuint);
 
-}
+} // namespace jeti
 

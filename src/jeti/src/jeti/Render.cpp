@@ -210,6 +210,8 @@ void Render::init(Camera* camera, int w, int h)
     glewInit();
 
     m_meshQuad = new Mesh;
+    m_meshQuadAdditive = new Mesh;
+    m_meshQuadAdditive->setStates(Mesh::States::QUAD_ADDITIVE);
 
     __initAxisMesh();
 
@@ -392,12 +394,17 @@ void Render::__updateProjectionViewMatrix()
 }
 
 
-void Render::drawQuad(const control::Material& textureOb, const glm::mat4& ModelMatrix, float opacity) const
+void Render::drawQuad(const control::Material& material, const glm::mat4& ModelMatrix, float opacity) const
 {
-    drawMesh(*m_meshQuad, textureOb, ModelMatrix, opacity);
+    drawMesh(*m_meshQuad, material, ModelMatrix, opacity);
 }
 
-void Render::drawQuad(const control::Material& texOb, const ceti::Box2D& box) const
+void Render::drawQuadAdditive(const control::Material& material, const glm::mat4& ModelMatrix, float opacity) const
+{
+    drawMesh(*m_meshQuadAdditive, material, ModelMatrix, opacity);
+}
+
+void Render::drawQuad(const control::Material& material, const ceti::Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.center();
@@ -417,7 +424,7 @@ void Render::drawQuad(const control::Material& texOb, const ceti::Box2D& box) co
     glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
     // ugly end
 
-    drawMesh(*m_meshQuad, texOb, ModelMatrix);
+    drawMesh(*m_meshQuad, material, ModelMatrix);
 }
 
 void Render::__drawMesh(const Mesh& mesh) const {
@@ -426,6 +433,12 @@ void Render::__drawMesh(const Mesh& mesh) const {
         case Mesh::States::QUAD:
             __disable_POINTSPRITE();
             __enable_BLEND();
+            __disable_DEPTH_TEST();
+            __disable_CULLFACE();
+            break;
+        case Mesh::States::QUAD_ADDITIVE:
+            __disable_POINTSPRITE();
+            __enable_ADDITIVE_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
             break;
@@ -951,7 +964,7 @@ void Render::__useProgram(GLuint program) const
  
 void Render::drawAxis(const glm::mat4& modelMatrix) const
 {
-    __useProgram(0);
+    //__useProgram(0);
     glLineWidth(m_meshAxis->linesWidth());
     drawMesh(*m_meshAxis, modelMatrix);
 }
