@@ -130,8 +130,11 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     for(auto ps: m_particlesystems) {
         __addIfVisible(ps);
     }
+    for(auto text: m_texts) {
+        __addIfVisible(text);
+    }
 
-    //__createDamage();
+    __createText();
     __createExplosion();
     __createBeam();
 
@@ -224,6 +227,17 @@ void StarSystem::__clear()
     m_visible_beams.clear();
     //
 
+    // clear texts
+    for(std::vector<::effect::Text*>::iterator it=m_texts.begin(); it < m_texts.end(); ++it) {
+        ::effect::Text* text = *it;
+        if (!text->isAlive()) {
+            it = m_texts.erase(it);
+            delete text;
+        }
+    }
+    m_visible_texts.clear();
+    //
+
     // clear effects
     for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it < m_particlesystems.end(); ++it) {
         jeti::particlesystem::Base* ps = *it;
@@ -234,8 +248,6 @@ void StarSystem::__clear()
     }
     m_visible_particlesystems.clear();
     //
-
-//    m_texts.clear();
 }
 
 void StarSystem::__applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
@@ -495,25 +507,29 @@ StarSystem::__createBeam()
 }
 
 void
-StarSystem::__createDamage()
+StarSystem::__createText()
 {
-    if (m_particlesystems.size()>=3) {
+    if (m_texts.size()>=10) {
         return;
     }
 
+    std::string str = std::to_string(meti::getRandInt(1,200));
     float size = meti::getRandFloat(1.0f, 10.0f);
-    glm::vec3 center(meti::getRandFloat(-400.0f,400.0f), meti::getRandFloat(-400.0f,400.0f), 0.0f);
+    glm::vec2 center(meti::getRandFloat(-10.0f,10.0f), meti::getRandFloat(-10.0f,10.0f));
+    glm::vec4 color;
+    color.r = meti::getRandFloat(0.7f, 1.0f);
+    color.g = meti::getRandFloat(0.7f, 1.0f);
+    color.b = meti::getRandFloat(0.7f, 1.0f);
 
-    jeti::particlesystem::Base* ps = jeti::particlesystem::genDamage(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+    ::effect::Text* text = new ::effect::Text(str, size, center, color);
 
-    ps->setCenter(center);
-    m_particlesystems.push_back(ps);
+    m_texts.push_back(text);
 }
 
 void
 StarSystem::__createExplosion()
 {
-    if (m_particlesystems.size()>=0) {
+    if (m_particlesystems.size()>=1) {
         return;
     }
 
@@ -556,12 +572,15 @@ StarSystem::__addIfVisible(::effect::Beam* effect)
     return true;
 }
 
-//void SpaceViewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
-//{
+bool
+StarSystem::__addIfVisible(::effect::Text* text)
+{
 //    if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
 //        m_texts.push_back(effect);
 //    }
-//}
+    m_visible_texts.push_back(text);
+    return true;
+}
 
 /// visible entities
 void StarSystem::__add(Base* view)
@@ -659,11 +678,6 @@ void StarSystem::__add(Satellite* view)
 //    m_shockwaves.push_back(view);
 //}
 
-//void SpaceViewer::__add(VerticalFlowText* view)
-//{
-//    m_texts.push_back(view);
-//}
-
 void StarSystem::__renderBackground(jeti::Render& render) const {
     if (!m_player->show().background()) {
         return;
@@ -743,13 +757,14 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
         container->draw(render);
     }
 
-    // jets
-    for(::effect::Beam* jet: m_beams) {
-        jet->update();
+    // beams
+    for(::effect::Beam* beam: m_beams) {
+        beam->update();
     }
-    for(::effect::Beam* jet: m_visible_beams) {
-        jet->draw(render);
+    for(::effect::Beam* beam: m_visible_beams) {
+        beam->draw(render);
     }
+    //
 
     // particles systems
     for(jeti::particlesystem::Base* ps: m_particlesystems) {
@@ -758,6 +773,20 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     for(jeti::particlesystem::Base* ps: m_visible_particlesystems) {
         ps->draw(render);
     }
+    //
+
+    // texts
+    for(::effect::Text* text: m_texts) {
+        text->update();
+    }
+    sf::RenderWindow& window = client::global::get().screen().window();
+    glUseProgram(0);
+    window.pushGLStates();
+    for(::effect::Text* text: m_visible_texts) {
+        text->draw(window, m_camera.position());
+    }
+    window.popGLStates();
+    //
 
     m_player->cursor().renderFocusedObjectStuff(render);
 }

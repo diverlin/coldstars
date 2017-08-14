@@ -72,6 +72,7 @@ namespace effect {
 class DistantStars;
 class DistantNebulas;
 class Beam;
+class Text;
 } // namespace
 
 namespace view {
@@ -136,8 +137,9 @@ private:
 
     std::vector<::effect::Beam*> m_beams;
     std::vector<::effect::Beam*> m_visible_beams;
-    //    std::vector<VerticalFlowText*> m_texts;
-    
+    std::vector<::effect::Text*> m_texts;
+    std::vector<::effect::Text*> m_visible_texts;
+
     void __applyConstantRotationAnimation(const glm::vec3&, Base*);
 
     void __updateVisible(control::StarSystem* starsystem);
@@ -161,11 +163,13 @@ private:
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
     bool __addIfVisible(::effect::Beam*);
     bool __addIfVisible(jeti::particlesystem::Base*);
-//    void addIfVisible(VerticalFlowText*, const VisibilityData&);
+    bool __addIfVisible(::effect::Text*);
 
-    void __createDamage();
+    // debug
+    void __createText();
     void __createExplosion();
     void __createBeam();
+    //
 
     /// visible entities
     void __add(Base*);

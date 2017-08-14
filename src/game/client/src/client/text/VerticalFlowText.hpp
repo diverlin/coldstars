@@ -17,39 +17,44 @@
 */
 
 
-#ifndef VERTICALFLOWTEXT_HPP
-#define VERTICALFLOWTEXT_HPP
+#pragma once
 
-#include <string>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 #include <glm/glm.hpp>
 
+#include <string>
 
-class VerticalFlowText
+namespace effect {
+
+class Text
 {
-    public:
-        VerticalFlowText(const std::string&, int, const glm::vec2&, const glm::ivec4&, float);                                   
-        ~VerticalFlowText();
-        
-        bool isAlive() const { return m_IsAlive; }
-        
-        const glm::vec2& center() const { return m_Center; }
-        
-        void Update();
-        void Render(const glm::vec2&, float) const;
+public:
+    Text(const std::string&, int,
+         const glm::vec2&,
+         const glm::ivec4&);
+    ~Text();
+
+    bool isAlive() const { return m_isAlive; }
+    const glm::vec2& center() const { return m_center; }
+
+    void update();
+    void draw(sf::RenderWindow&, const glm::vec3&, float scale = 1.0f);
     
-    private:
-        bool m_IsAlive;
-        int m_LiveTime;
-        
-        int m_FontSize;
-        
-        std::string m_Text;
-        glm::ivec4 m_Color;
-        
-        glm::vec2 m_Center;
-        
-        float m_Speed;
+private:
+    sf::Text m_sfText;
+    bool m_isAlive = true;
+    int m_liveTime = 70;
+
+    int m_fontSize = 12;
+
+    std::string m_text;
+    glm::ivec4 m_color;
+
+    glm::vec2 m_center;
+
+    float m_speed = 2.0f;
 };
 
-#endif 
+} // namespace effect

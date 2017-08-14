@@ -17,57 +17,67 @@
 */
 
 #include "VerticalFlowText.hpp"
-#include <meti/RandUtils.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 
-VerticalFlowText::VerticalFlowText(const std::string& text, 
-                                    int font_size,
-                                    const glm::vec2& center, 
-                                    const glm::ivec4& color, 
-                                    float collision_radius)
-:
-m_IsAlive(true),
-m_LiveTime(70), //TEXT_EXISTANCE_TIME
-m_FontSize(font_size),
-m_Text(text),
-m_Color(color),
-m_Speed(2.0)
+#include <meti/RandUtils.hpp>
+
+namespace effect {
+
+Text::Text(const std::string& text,
+           int font_size,
+           const glm::vec2& center,
+           const glm::ivec4& color)
+    :
+      m_fontSize(font_size)
+    , m_text(text)
+    , m_color(color)
 {
-    float kof1 = 0.1 * meti::getRandInt(3, 18);
-    float kof2 = 0.1 * meti::getRandInt(5, 15);
+//    float kof1 = 0.1f * meti::getRandInt(3, 18);
+//    float kof2 = 0.1f * meti::getRandInt(5, 15);
     
-    m_Center.x = center.x - collision_radius * kof1;
-    m_Center.y = center.y + collision_radius * kof2;
+//    m_center.x = center.x - collision_radius * kof1;
+//    m_center.y = center.y + collision_radius * kof2;
+
+    m_center = glm::vec2(0.0f); //= center;
+
+    m_sfText.setString(text);
+    int scale = 24;
+    m_sfText.setScale(scale, scale);
+    //sf::Color sfColor(color.r*255, color.g*255, color.b*255, color.a*255);
+    sf::Color sfColor(255, 255, 255, 255);
+    m_sfText.setColor(sfColor);
 }
 
-VerticalFlowText::~VerticalFlowText()
+Text::~Text()
 {}
 
-void VerticalFlowText::Update()
+void Text::update()
 {
-    if (m_IsAlive == true)
-    {
-        m_Center.y += m_Speed;
-        if (m_Speed > 0.5)
-        {
-            m_Speed -= 0.1;
-        }
-        
-        m_LiveTime -= 1;
-        if (m_LiveTime < 0)
-        {
-            m_IsAlive = false;
-        }
+    if (!m_isAlive) {
+        return;
     }
-}
-                
-void VerticalFlowText::Render(const glm::vec2& scroll_coords, float scale) const
-{
-    if (m_IsAlive == true)
-    {
-        jeti::drawColoredText(m_Text, m_FontSize, (m_Center-scroll_coords)*scale, m_Color);
-    }
-}
- 
 
+    m_center.y += m_speed;
+    if (m_speed > 0.5f) {
+        m_speed -= 0.1;
+    }
+
+    m_liveTime -= 1;
+    if (m_liveTime < 0) {
+        m_isAlive = false;
+    }
+}
+
+void Text::draw(sf::RenderWindow& window, const glm::vec3& scroll_coords, float scale)
+{
+    if (!m_isAlive) {
+        return;
+    }
+
+    m_sfText.setPosition(m_center.x-scroll_coords.x, m_center.y-scroll_coords.y);
+    window.draw(m_sfText);
+}
+
+} // namepsace effect
