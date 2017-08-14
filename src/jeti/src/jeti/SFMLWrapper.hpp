@@ -32,12 +32,13 @@ public:
     void drawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color);
 
 private:
+    bool m_initialized = false;
     int m_bpp = 32;
     bool m_vsync = false;
 
     //freetype::font_data ftfont;
 
-    sf::Text m_text12;
+//    sf::Text m_text12;
     sf::Clock m_clock;
     sf::Font m_font;
     sf::View m_view;

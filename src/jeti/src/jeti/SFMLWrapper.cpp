@@ -10,13 +10,13 @@ namespace jeti {
 
 SFMLWrapper::SFMLWrapper()
 {
-    m_text12.setFont(m_font);
-    m_text12.setCharacterSize(12);
-    m_text12.setColor(sf::Color(255,0,0,255));
+//    m_text12.setFont(m_font);
+//    m_text12.setCharacterSize(12);
+//    m_text12.setColor(sf::Color(255,0,0,255));
     
+
     //std::string fontpath = DATA_PATH+"font/font.ttf";
-    //ftfont.init(fontpath.c_str(), 20);
-        
+    //ftfont.init(fontpath.c_str(), 20);        
 }
 
 SFMLWrapper::~SFMLWrapper()
@@ -24,12 +24,21 @@ SFMLWrapper::~SFMLWrapper()
 
 void SFMLWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, int fps_limit, const std::string& title)
 {    
+    if (m_initialized) {
+        assert(false);
+    }
     m_bpp = bpp;
     m_vsync = vert_sync;
     
     m_window.create(sf::VideoMode(width, height, bpp), title);
     m_window.setFramerateLimit(fps_limit);
     m_window.setVerticalSyncEnabled(vert_sync);
+
+    if (!m_font.loadFromFile(DATA_PATH+"font/font.ttf")) {
+        throw std::runtime_error("cannot load font");
+    }
+
+    m_initialized = true;
 }
          
 void SFMLWrapper::wrResizeSpecific(int width, int height)
