@@ -1111,8 +1111,8 @@ void drawInfoIn2Column(
 void Render::__updateFps()
 {
     const auto now_time = std::chrono::steady_clock::now();
-    float seconds_diff = std::chrono::duration_cast<std::chrono::seconds>(now_time-m_lastTime).count();
-    if (seconds_diff > 1.0) {
+    float milliseconds_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
+    if (milliseconds_diff > 1000.0) {
         m_fps = m_framesCounter;
         m_framesCounter = 0;
         m_lastTime = now_time;

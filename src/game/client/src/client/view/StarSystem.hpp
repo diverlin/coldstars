@@ -26,6 +26,7 @@
 
 #include <vector>
 #include <map>
+#include <chrono>
 
 class Player;
 
@@ -109,6 +110,8 @@ private:
     gui::Demo* m_guiDemo = nullptr;
     ::effect::DistantStars* m_distantStars = nullptr;
     ::effect::DistantNebulas* m_distantNebulas = nullptr;
+
+//    std::chrono::steady_clock::time_point m_lastTime;
 
     /// visible entities
     std::vector<Star*> m_stars;
