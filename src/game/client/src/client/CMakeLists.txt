@@ -24,7 +24,7 @@ target_link_libraries(${PROJECT_CLIENT}
     ${PROJECT_CETI}
     pthread
     #"/media/yeti/ext_workspace/dist_gcc54/TGUI-0.7.4/lib/libtgui.so"
-    "/media/yeti/ext_workspace/dist_gcc54/SFGUI-0.3.2/lib/libsfgui.so"
+    "/media/yeti/ext_workspace/dist_gcc54/SFGUI-0.3.2/lib/libsfgui-d.so"
 )
 set_target_properties(${PROJECT_CLIENT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 add_executable(${PROJECT_CLIENT}_exec main.cpp)

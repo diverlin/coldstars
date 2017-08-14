@@ -25,7 +25,8 @@
 
 namespace effect {
 
-Text::Text(const std::string& text,
+Text::Text(sf::Font& font,
+           const std::string& text,
            int font_size,
            const glm::vec2& center,
            const glm::ivec4& color)
@@ -33,6 +34,7 @@ Text::Text(const std::string& text,
       m_fontSize(font_size)
     , m_text(text)
     , m_color(color)
+    //, m_sfText(text, font)
 {
 //    float kof1 = 0.1f * meti::getRandInt(3, 18);
 //    float kof2 = 0.1f * meti::getRandInt(5, 15);
@@ -41,10 +43,10 @@ Text::Text(const std::string& text,
 //    m_center.y = center.y + collision_radius * kof2;
 
     m_center = glm::vec2(0.0f); //= center;
-
+    m_sfText.setFont(font);
+    m_sfText.setPosition(0,0);
     m_sfText.setString(text);
-    int scale = 24;
-    m_sfText.setScale(scale, scale);
+    m_sfText.setCharacterSize(font_size);
     //sf::Color sfColor(color.r*255, color.g*255, color.b*255, color.a*255);
     sf::Color sfColor(255, 255, 255, 255);
     m_sfText.setColor(sfColor);
@@ -76,8 +78,8 @@ void Text::draw(sf::RenderWindow& window, const glm::vec3& scroll_coords, float 
         return;
     }
 
-    m_sfText.setPosition(m_center.x-scroll_coords.x, m_center.y-scroll_coords.y);
-    window.draw(m_sfText);
+    //m_sfText.setPosition(m_center.x-scroll_coords.x, m_center.y-scroll_coords.y);
+    //window.draw(m_sfText);
 }
 
 } // namepsace effect

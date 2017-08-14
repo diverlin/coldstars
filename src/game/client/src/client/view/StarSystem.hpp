@@ -197,6 +197,7 @@ private:
     void __renderBackground(jeti::Render& render) const;
     void __renderStarPostEffect(jeti::Render& render) const;
     void __renderSpaceObjects(jeti::Render& render) const;
+    void __renderTexts(jeti::Render& render) const;
     void __renderSpaceObjectsMeta(jeti::Render& render) const;
     void __renderHUD(jeti::Render& render) const;
     void __renderExperiment(jeti::Render& render) const;

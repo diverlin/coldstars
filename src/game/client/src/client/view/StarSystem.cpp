@@ -514,14 +514,15 @@ StarSystem::__createText()
     }
 
     std::string str = std::to_string(meti::getRandInt(1,200));
-    float size = meti::getRandFloat(1.0f, 10.0f);
+    float size = meti::getRandFloat(18.0f, 32.0f);
     glm::vec2 center(meti::getRandFloat(-10.0f,10.0f), meti::getRandFloat(-10.0f,10.0f));
     glm::vec4 color;
     color.r = meti::getRandFloat(0.7f, 1.0f);
     color.g = meti::getRandFloat(0.7f, 1.0f);
     color.b = meti::getRandFloat(0.7f, 1.0f);
 
-    ::effect::Text* text = new ::effect::Text(str, size, center, color);
+    sf::Font& font = client::global::get().screen().font();
+    ::effect::Text* text = new ::effect::Text(font, str, size, center, color);
 
     m_texts.push_back(text);
 }
@@ -775,19 +776,6 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
     //
 
-    // texts
-    for(::effect::Text* text: m_texts) {
-        text->update();
-    }
-    sf::RenderWindow& window = client::global::get().screen().window();
-    glUseProgram(0);
-    window.pushGLStates();
-    for(::effect::Text* text: m_visible_texts) {
-        text->draw(window, m_camera.position());
-    }
-    window.popGLStates();
-    //
-
     m_player->cursor().renderFocusedObjectStuff(render);
 }
 
@@ -819,6 +807,25 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
     }
 }
 
+void StarSystem::__renderTexts(jeti::Render& render) const {
+    // projection
+//    render.setOrthogonalProjection();
+//    glUseProgram(0);
+
+    // texts
+    for(::effect::Text* text: m_texts) {
+        text->update();
+    }
+    sf::RenderWindow& window = client::global::get().screen().window();
+
+    window.pushGLStates();
+    for(::effect::Text* text: m_visible_texts) {
+        text->draw(window, m_camera.position());
+    }
+    window.popGLStates();
+    //
+}
+
 void StarSystem::__renderExperiment(jeti::Render& render) const {
     if (!m_player->show().experimental()) {
         return;
@@ -836,6 +843,7 @@ void StarSystem::__render(jeti::Render& render)
     __renderStarPostEffect(render);
     __renderSpaceObjects(render);
     __renderSpaceObjectsMeta(render);
+    __renderTexts(render);
     __renderExperiment(render);
     __renderHUD(render);
 }

@@ -31,7 +31,8 @@ namespace effect {
 class Text
 {
 public:
-    Text(const std::string&, int,
+    Text(sf::Font&,
+         const std::string&, int,
          const glm::vec2&,
          const glm::ivec4&);
     ~Text();
