@@ -84,7 +84,9 @@ StarSystem::StarSystem(jeti::Render& render)
     , m_guiDemo(new gui::Demo(&client::global::get().screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
-{}
+//    , m_lastTime(std::chrono::steady_clock::now())
+{
+}
 
 StarSystem::~StarSystem()
 {}                                    
@@ -863,6 +865,15 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 
 void StarSystem::render(control::StarSystem* starsystem)
 {   
+//    const auto now_time = std::chrono::steady_clock::now();
+//    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();
+//    if (msec_diff < 30) {
+//        return;
+//    }
+
+
+//    m_lastTime = now_time;
+
     assert(starsystem);
     jeti::Render& render = client::global::get().render();
 
