@@ -14,7 +14,7 @@ SFMLWrapper::SFMLWrapper()
     m_text12.setCharacterSize(12);
     m_text12.setColor(sf::Color(255,0,0,255));
     
-    std::string fontpath = DATA_PATH+"font/font.ttf";
+    //std::string fontpath = DATA_PATH+"font/font.ttf";
     //ftfont.init(fontpath.c_str(), 20);
         
 }
@@ -24,8 +24,8 @@ SFMLWrapper::~SFMLWrapper()
 
 void SFMLWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, int fps_limit, const std::string& title)
 {    
-    this->m_bpp = bpp;
-    this->m_vsync = vert_sync;
+    m_bpp = bpp;
+    m_vsync = vert_sync;
     
     m_window.create(sf::VideoMode(width, height, bpp), title);
     m_window.setFramerateLimit(fps_limit);
@@ -52,11 +52,11 @@ void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec
         
 void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
-    //glPushMatrix();
-        //glColor4ub(color.r, color.g, color.b, color.a);
-        //glScalef(0.5, 0.5, 0.5);
+    glPushMatrix();
+        glColor4ub(color.r, color.g, color.b, color.a);
+        glScalef(0.5, 0.5, 1.0);
         //freetype::print(ftfont, pos.x, pos.y, str.c_str());
-    //glPopMatrix();
+    glPopMatrix();
         
 }
 
