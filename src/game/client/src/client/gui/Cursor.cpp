@@ -139,7 +139,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 {
     if (m_focusedView) {
         m_focusedView->drawCollisionRadius(render);
-        m_focusedView->drawAxis(render);
+        //m_focusedView->drawAxis(render);
 
 //        //m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
 
