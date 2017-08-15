@@ -55,7 +55,7 @@ void Asteroid::updateInSpace(int time, bool show_effect)
     }
 }
 
-void Asteroid::collisionEvent(bool show_effect)
+void Asteroid::collisionEvent()
 {
     model()->setAlive(false);
     model()->setDyingTime(-1);

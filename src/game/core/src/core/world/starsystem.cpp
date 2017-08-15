@@ -60,6 +60,7 @@
 
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Garbage.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
@@ -818,7 +819,7 @@ void StarSystem::update(int time)
 
     __updateEntities_s(time, detalied_simulation);
     __manageUnavaliableObjects_s();
-    __manageDeadObjects_s();         // no need to update so frequently, pri /6
+    __manageDeadObjects();         // no need to update so frequently, pri /6
 
     if (time > 0) {
         if (m_unique_update_inDymanic_done == false) {
@@ -831,7 +832,7 @@ void StarSystem::update(int time)
 
         // phisics
         __rocketCollision_s(detalied_simulation);   // pri/2
-        __asteroidCollision_s(detalied_simulation); // pri/2
+        __asteroidsCollision_s(); // pri/2
         __externalForcesAffection_s(detalied_simulation); // pri/2
         //phisics
         
@@ -877,7 +878,7 @@ void StarSystem::__rocketCollision_s(bool show_effect)
             {
                 for (unsigned int ai = 0; ai < m_asteroids.size(); ai++)
                 {
-                    collide = ceti::checkCollision2D(m_bullets[ri], m_asteroids[ai], show_effect);
+                    collide = ceti::checkCollision(m_bullets[ri], m_asteroids[ai]);
                     if (collide == true) { break; }
                 }
             }
@@ -888,7 +889,7 @@ void StarSystem::__rocketCollision_s(bool show_effect)
             {
                 for (unsigned int ci = 0; ci < m_containers.size(); ci++)
                 {
-                    collide = ceti::checkCollision2D(m_bullets[ri], m_containers[ci], show_effect);
+                    collide = ceti::checkCollision(m_bullets[ri], m_containers[ci]);
                     if (collide == true) {     break; }
                 }
             }
@@ -897,50 +898,50 @@ void StarSystem::__rocketCollision_s(bool show_effect)
     }
 }
 
-
-
-
-
-
-void StarSystem::__asteroidCollision_s(bool show_effect)
+void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
-    bool collide = false;
-    for(auto asteroid: m_asteroids) {
-        if (asteroid->model()->isAlive()) {
-            if (!collide) {
-                for (auto vehicle: m_vehicles) {
-                    collide = ceti::checkCollision2D(asteroid, vehicle, show_effect);
-                    if (collide) {
-                        break;
-                    }
-                }
-            } else {
-                continue;
-            }
+    //send message asteroid death
+    int containers_num = meti::getRandInt(1,3);
+    for (int i=0; i<containers_num; ++i) {
+        int minerals = meti::getRandInt(3, 100);
+        // send telegram to create mineral
+    }
+    // send telegram to create explosion
+    // send telegram to remove asteroid from starsystem
+    // send telegram to add asteroid to garbage
+}
 
-            if (!collide) {
-                for (auto planet: m_planets) {
-                    collide = ceti::checkCollision2D(asteroid, planet, show_effect);
-                    if (collide) {
-                        break;
-                    }
-                }
-            } else {
-                continue;
-            }
-
-            if (!collide) {
-                for (auto star: m_stars) {
-                    collide = ceti::checkCollision2D(asteroid, star, show_effect);
-                    if (collide) {
-                        break;
-                    }
-                }
-            } else {
-                continue;
-            }
+void StarSystem::__asteroidsCollision_s() const {
+    for(Asteroid* asteroid: m_asteroids) {
+        if (__asteroidCollision_s(asteroid)) {
+            __processAsteroidDeath_s(asteroid);
         }
     }
+}
+
+
+bool StarSystem::__asteroidCollision_s(Asteroid* asteroid) const
+{
+    if (!asteroid->isAlive()) {
+        return false;
+    }
+
+    for (auto vehicle: m_vehicles) {
+        if (ceti::checkCollision(asteroid, vehicle)) {
+            return true;
+        }
+    }
+    for (auto planet: m_planets) {
+        if (ceti::checkCollision(asteroid, planet)) {
+            return true;
+        }
+    }
+    for (auto star: m_stars) {
+        if (ceti::checkCollision(asteroid, star)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
@@ -1126,7 +1127,7 @@ void StarSystem::__manageUnavaliableObjects_s()
 //    }
 }
 
-void StarSystem::__manageDeadObjects_s()
+void StarSystem::__manageDeadObjects()
 {      
     // bad approach, use event system here
 //    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
@@ -1145,12 +1146,22 @@ void StarSystem::__manageDeadObjects_s()
 ////        }
 //    }
 
-//    //    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
-//    //        if ((*it)->isReadyForGarbage() == true) {
-//    //           manager::EntityManager::get().addToGarbage(*it);
-//    //            it = m_asteroids.erase(it);
-//    //        }
-//    //    }
+
+    // asteroid
+    std::vector<Asteroid*> to_remove;
+    for(Asteroid* asteroid: m_asteroids) {
+        if(!asteroid->isAlive()) {
+            //manager::Garbage::get().add(asteroid);
+            //to_remove.push_back(asteroid);
+        }
+    }
+
+    for(Asteroid* asteroid: to_remove) {
+        //remove(asteroid);
+    }
+    //to_remove.clear();
+    //
+
 
 //    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
 //        assert(false);

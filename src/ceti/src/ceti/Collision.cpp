@@ -56,19 +56,19 @@ bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& cente
 
 bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius)
 {
-    float dist = meti::distance(observer_pos, p);
-    if (dist > radius) {
-        return false;
-    }
+//    float dist = meti::distance(observer_pos, p);
+//    if (dist > radius) {
+//        return false;
+//    }
     return true;
 }
 
 bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
 {
-    float dist = meti::distance(observer_pos, p);
-    if (dist > radius) {
-        return false;
-    }
+//    float dist = meti::distance(observer_pos, p);
+//    if (dist > radius) {
+//        return false;
+//    }
     return true;
 }
 

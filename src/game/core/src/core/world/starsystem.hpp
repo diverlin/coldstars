@@ -281,11 +281,14 @@ private:
     void __shipManager_s(unsigned int);
 
     void __manageUnavaliableObjects_s();
-    void __manageDeadObjects_s();
+    void __manageDeadObjects();
 
     void __rocketCollision_s(bool);
-    void __asteroidCollision_s(bool);
+    void __asteroidsCollision_s() const;
+    bool __asteroidCollision_s(Asteroid*) const;
     void __externalForcesAffection_s(bool);
+
+    void __processAsteroidDeath_s(Asteroid*) const;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
