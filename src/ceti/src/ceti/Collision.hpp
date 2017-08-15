@@ -20,6 +20,8 @@
 
 #include <glm/glm.hpp>   
 
+#include <iostream>
+
 namespace ceti {
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius);
@@ -27,11 +29,13 @@ bool checkCollisionDotWithCircle_DIRTY(const glm::vec3& dot, const glm::vec3& ce
 bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
 
 template <typename AGRESSOR, typename VICTIM>
-bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
+bool checkCollision(AGRESSOR* agressor,  VICTIM* victim)
 {
-    if (checkCollisionDotWithCircle_DIRTY(agressor->position(), victim->position(), victim->collisionRadius()) == true) {
+    if (checkCollisionDotWithCircle_DIRTY(agressor->position(),
+                                          victim->position(),
+                                          agressor->collisionRadius()+victim->collisionRadius())) {
         victim->hit(agressor->damage());
-        agressor->collisionEvent(show_effect);
+        agressor->collisionEvent();
         return true;
     }
 

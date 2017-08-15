@@ -100,7 +100,7 @@ public:
     void CreateDriveComplexTextureDependedStuff();
     void UpdateInSpace(int, bool);
 
-    void collisionEvent(bool);
+    void collisionEvent(bool show_effect = false);
 
     void hit(int, SpaceObject* agresor = nullptr) override final;
     void _postDeathUniqueEvent(bool) override final;

@@ -808,10 +808,6 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
 }
 
 void StarSystem::__renderTexts(jeti::Render& render) const {
-    // projection
-//    render.setOrthogonalProjection();
-//    glUseProgram(0);
-
     // texts
     for(::effect::Text* text: m_texts) {
         text->update();
