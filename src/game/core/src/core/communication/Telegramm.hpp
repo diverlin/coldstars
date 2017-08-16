@@ -16,6 +16,7 @@ public:
         CREATE_STARSYSTEM,
         CREATE_SHIP,
         CREATE_BOMB,
+        CREATE_MINERAL,
         CREATE_CONTAINER,
         // equipment
         CREATE_BAK,
@@ -48,7 +49,9 @@ public:
         /** */
 
         HIT,
-        EXPLOSION
+        EXPLOSION,
+
+        REMOVE_ASTEROID
     };
 
 public:

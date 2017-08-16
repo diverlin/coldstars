@@ -97,7 +97,7 @@ public:
     static global& get();
 
     God& god() { return *m_god; }
-    comm::TelegrammManager& messageManager() { return *m_messageManager; }
+    comm::TelegrammManager& telegrammManager() { return *m_messageManager; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }

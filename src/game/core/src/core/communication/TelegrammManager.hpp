@@ -35,14 +35,15 @@ class TelegrammManager
 {
 public:
     TelegrammManager() {}
-    void add(comm::Telegramm&& message);
+    void add(comm::Telegramm&&);
 
+    [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]
     void runLoop();
     void update();
 
 private:
     sf::Clock m_clock;
-    std::set<comm::Telegramm> m_telegramms_queue;
+    std::set<comm::Telegramm> m_telegramms;
 
     double currentTime() const;
     void process(const comm::Telegramm&);

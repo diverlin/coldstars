@@ -284,6 +284,14 @@ genContainer()
 {
     descriptor::Container* descr = new descriptor::Container;
 
+    descr->setSize(meti::vec3(1.0f));
+    descr->setDirection(randPlanetoidDirection());
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::MINERAL));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
+
     descriptor::Manager::get().add(descr);
     return descr;
 }

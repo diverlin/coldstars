@@ -28,11 +28,40 @@
 namespace descriptor {
 namespace comm {
 
+
+class Object
+{
+public:
+    Object(int_t);
+    Object(const std::string& data);
+    ~Object() = default;
+    std::string data() const;
+
+    int_t object() const { return m_object; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::Creation:\n";
+        result += std::string(" object = ") + std::to_string(m_object) + "\n";
+        return result;
+    }
+
+private:
+    int_t m_object = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_object;
+    }
+};
+
 class Creation
 {
 public:
     Creation(int_t, int_t);
     Creation(const std::string& data);
+    Creation() = default;
     ~Creation() = default;
     std::string data() const;
 
@@ -56,6 +85,35 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_object;
         ar & m_descriptor;
+    }
+};
+
+class Container : public Creation
+{
+public:
+    Container(int_t, int_t, int);
+    Container(const std::string& data);
+    ~Container() = default;
+    std::string data() const;
+
+    int mass() const { return m_mass; }
+
+    std::string info() const {
+        std::string result = Creation::info();
+        result += "descriptor::comm::Container:\n";
+        result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
+        return result;
+    }
+
+private:
+    int m_mass = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Creation>(*this);
+        ar & m_mass;
     }
 };
 

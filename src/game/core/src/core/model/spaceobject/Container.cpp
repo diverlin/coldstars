@@ -22,8 +22,9 @@
 
 namespace model {
 
-Container::Container(int_t descriptor_id)
+Container::Container(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 

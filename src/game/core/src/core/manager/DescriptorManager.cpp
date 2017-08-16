@@ -688,7 +688,7 @@ Manager::generate()
         genStar();
         genPlanet();
         genAsteroid();
-        //add(getNewContainer());
+        genContainer();
     }
 
     // world

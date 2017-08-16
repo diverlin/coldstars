@@ -103,10 +103,8 @@ Container::Container(descriptor::Container* descr, model::Container* model)
     }
 }
 
-/* virtual */   
 Container::~Container()
 {
-    LOG("___::~Container("+std::to_string(model()->id())+")");
 }
 
 Item*
@@ -183,9 +181,9 @@ void Container::_postDeathUniqueEvent(bool show_effect)
 //    }
 }
 
-void Container::updateInSpace(int time, bool show_effect)
+void Container::updateInSpace(int time)
 {
-    _checkDeath(show_effect);         
+    _checkDeath();
     if (time > 0) {
         setPosition(position() + _externalForce());
         _externalForce() *= 0.99;

@@ -29,6 +29,7 @@ Container::Container(control::Container* container)
       Base(container)
     , m_control(container)
 {
+    setOrientation(container);
 }
 
 Container::~Container()

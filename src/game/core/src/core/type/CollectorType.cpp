@@ -29,6 +29,7 @@ Collector::Collector() {
     __registerType(int_t(texture::Type::STAR), "texture::star");
     __registerType(int_t(texture::Type::PLANET), "texture::planet");
     __registerType(int_t(texture::Type::ASTEROID), "texture::asteroid");
+    __registerType(int_t(texture::Type::MINERAL), "texture::mineral");
     __registerType(int_t(texture::Type::SHIP), "texture::ship");
     __registerType(int_t(texture::Type::TURREL), "texture::turrel");
     __registerType(int_t(texture::Type::SHIELD_EFFECT), "texture::shield_effect");

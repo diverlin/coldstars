@@ -58,9 +58,12 @@
 //#include <client/gui/GuiManager.hpp>
 //#include <client/gui/GuiRadar.hpp>
 
+#include <descriptor/comm/Creation.hpp>
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
+#include <core/communication/TelegrammManager.hpp>
+#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
@@ -817,11 +820,15 @@ void StarSystem::update(int time)
 {                
     bool detalied_simulation = true;
 
+    comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+
     __updateEntities_s(time, detalied_simulation);
     __manageUnavaliableObjects_s();
     __manageDeadObjects();         // no need to update so frequently, pri /6
 
     if (time > 0) {
+        telegrammManager.update();
+
         if (m_unique_update_inDymanic_done == false) {
             // assert(false); assert(false);
             //m_hyperspace.PostHyperJumpEvent(this);
@@ -900,12 +907,30 @@ void StarSystem::__rocketCollision_s(bool show_effect)
 
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
-    //send message asteroid death
+    comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+    manager::Entities& entitiesManager = manager::Entities::get();
+    descriptor::Manager& descriptorManager = descriptor::Manager::get();
+    //comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+
+    // send message asteroid death
+    {
+    descriptor::comm::Object object(asteroid->id());
+    telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
+    }
+
+    // create minerals
     int containers_num = meti::getRandInt(1,3);
     for (int i=0; i<containers_num; ++i) {
-        int minerals = meti::getRandInt(3, 100);
+        int mass = meti::getRandInt(3, 100);
+        int_t object_id = entitiesManager.genId();
+        int_t descriptor_id = descriptorManager.randContainer()->id();
+        descriptor::comm::Container creation(object_id, descriptor_id, mass);
+        telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
 
-        // send telegram to create mineral
+        float strength = meti::getRandFloat(1.0f, 2.0f);
+        glm::vec3 impulse(meti::getRandXYVec3(strength));
+        AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
+        telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
     }
     // send telegram to create explosion
     // send telegram to remove asteroid from starsystem
@@ -964,7 +989,7 @@ void StarSystem::__updateEntities_s(int time, bool show_effect)
     for (auto star: m_stars) { star->updateInSpace(time, show_effect);  }
     for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
     for (unsigned int i=0; i<m_wormholes.size(); i++)        { m_wormholes[i]->updateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_containers.size(); i++)        { m_containers[i]->updateInSpace(time, show_effect); }
+    for (Container* container: m_containers) { container->updateInSpace(time); }
     for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
     
     for (Vehicle* vehicle: m_vehicles) { vehicle->update(time); }

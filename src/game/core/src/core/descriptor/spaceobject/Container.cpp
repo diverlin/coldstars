@@ -23,7 +23,8 @@ namespace descriptor {
 
 Container::Container()
 {
-    setType(descriptor::Type::CONTAINER);
+    setType(Type::CONTAINER);
+    setObType(entity::Type::CONTAINER);
 }
 
 Container::Container(const std::string& data)

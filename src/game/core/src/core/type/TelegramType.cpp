@@ -19,12 +19,15 @@
 
 #include "TelegramType.hpp"
 
+#include <cassert>
+
 std::string to_string(comm::Telegramm::Type type_id)
 {
     switch (type_id) {
     /** CREATE */
     case comm::Telegramm::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
     case comm::Telegramm::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
+    case comm::Telegramm::Type::CREATE_MINERAL:  { return "comm::Message::Type::CREATE_MINERAL"; }
     case comm::Telegramm::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
 
     // items
@@ -48,8 +51,10 @@ std::string to_string(comm::Telegramm::Type type_id)
     case comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
     case comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
-    }
+    case comm::Telegramm::Type::REMOVE_ASTEROID: { return "comm::Message::Type::REMOVE_ASTEROID"; }
 
+    }
+    assert(false);
     return "comm::Message::Type::UKNOWN";
 }
 

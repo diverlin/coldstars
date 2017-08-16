@@ -91,6 +91,12 @@ glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z)
     return glm::vec3(sin(alpha)*len, cos(alpha)*len, z);
 }
 
+glm::vec3 getRandXYVec3(float r)
+{
+    float alpha = glm::radians((float)getRandInt(0, 360));
+    return r*glm::vec3(sin(alpha), cos(alpha), 0.0);
+}
+
 glm::vec3 getRandXYVec3Unit()
 {
     float alpha = glm::radians((float)getRandInt(0, 360));

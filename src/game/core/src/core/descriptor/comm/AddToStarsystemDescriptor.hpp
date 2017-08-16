@@ -11,16 +11,18 @@
 
 class AddToStarsystemDescriptor {
     public:
-        AddToStarsystemDescriptor(int_t owner,
+        AddToStarsystemDescriptor(int_t starsystem,
                                   int_t object,
                                   const meti::vec3& position = meti::vec3(0.0f),
+                                  const meti::vec3& impulse = meti::vec3(0.0f),
                                   const meti::vec3& angle = meti::vec3(0.0f));
 
         AddToStarsystemDescriptor(const std::string& data);
 
-        int_t owner = 0;
+        int_t starsystem = 0;
         int_t object = 0;
         meti::vec3 position;
+        meti::vec3 impulse;
         meti::vec3 angle;
 
         std::string data() const;
@@ -29,9 +31,10 @@ class AddToStarsystemDescriptor {
         friend class boost::serialization::access;
         template<class Archive>
         void serialize(Archive & ar, const unsigned int version) {
-            ar & owner;
+            ar & starsystem;
             ar & object;
             ar & position;
+            ar & impulse;
             ar & angle;
         }
 };

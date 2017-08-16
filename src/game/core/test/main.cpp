@@ -82,7 +82,7 @@ TEST(descriptor, accessors)
 
 TEST(base, hit)
 {
-    comm::TelegrammManager& messageManager = core::global::get().messageManager();
+    comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
@@ -98,7 +98,7 @@ TEST(base, hit)
 
 TEST(base, critical_hit)
 {
-    comm::TelegrammManager& messageManager = core::global::get().messageManager();
+    comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
