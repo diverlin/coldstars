@@ -23,6 +23,6 @@
 
 #include <string>
 
-std::string to_string(comm::Telegramm::Type);
+std::string to_string(core::comm::Telegramm::Type);
 
 

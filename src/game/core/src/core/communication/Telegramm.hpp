@@ -4,6 +4,7 @@
 
 #include <string>
 
+namespace core {
 namespace comm {
 
 class Telegramm
@@ -13,12 +14,13 @@ public:
     {
         NONE,
         /** CREATE */
+        // spaceobjects
         CREATE_STARSYSTEM,
         CREATE_SHIP,
         CREATE_BOMB,
         CREATE_MINERAL,
         CREATE_CONTAINER,
-        // equipment
+        // items
         CREATE_BAK,
         CREATE_DRIVE,
         CREATE_DROID,
@@ -26,6 +28,8 @@ public:
         CREATE_SCANER,
         CREATE_RADAR,
         CREATE_PROTECTOR,
+        // effects
+        CREATE_EXPLOSION_EFFECT,
         /** */
 
         /** DOCK */
@@ -78,4 +82,4 @@ private:
 };
 
 } // namespace comm
-
+} // namespace core

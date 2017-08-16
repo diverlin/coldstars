@@ -12,6 +12,8 @@
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Garbage.hpp>
+
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/comm/Creation.hpp>
 
@@ -22,8 +24,7 @@
 #include <core/spaceobject/ALL>
 #include <core/item/equipment/Weapon.hpp>
 
-#include <world/starsystem.hpp>
-
+#include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
 
 #include <core/builder/spaceobject/ALL>
@@ -39,8 +40,7 @@
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 
-#include <core/world/starsystem.hpp>
-
+namespace core {
 namespace comm {
 
 void TelegrammManager::add(comm::Telegramm&& telegramm)
@@ -78,6 +78,7 @@ void TelegrammManager::update()
 
 namespace {
 
+// spaceobjects
 void createStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::StarSystem::gen(data.descriptor(), data.object());
@@ -107,8 +108,6 @@ void createBakEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::item::Bak::gen(data.descriptor(), data.object());
 }
-
-// items
 void createDriveEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::item::Drive::gen(data.descriptor(), data.object());
@@ -133,7 +132,6 @@ void createRadarEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::item::Radar::gen(data.descriptor(), data.object());
 }
-// item
 
 /** ADD TO STARSYSTEM */
 void addShipToStarSystemEvent(const comm::Telegramm& telegramm) {
@@ -201,6 +199,7 @@ void removeAsteroidEvent(const comm::Telegramm& telegramm) {
     control::Asteroid* asteroid = manager::Entities::get().asteroid(remove.object());
     asteroid->die();
     asteroid->starsystem()->remove(asteroid);
+    manager::Garbage::get().add(asteroid);
 }
 
 } // namespace
@@ -307,6 +306,7 @@ void TelegrammManager::process(const comm::Telegramm& telegramm)
 {
     switch(telegramm.type()) {
     /** CREATE */
+    // spaceobjects
     case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); break;
     case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); break;
     case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); break;
@@ -320,6 +320,7 @@ void TelegrammManager::process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); break;
     case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); break;
     case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); break;
+    /** */
 
     /** ADD TO STARSYSTEM */
     case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); break;
@@ -347,5 +348,5 @@ void TelegrammManager::process(const comm::Telegramm& telegramm)
 }
 
 } // namespace comm
-
+} // namespace core
 

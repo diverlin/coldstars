@@ -112,8 +112,8 @@ int main()
     Player* player = createPlayer();
 
     control::World world;
-    view::StarSystem viewer(render);
-    viewer.setPlayer(player);
+    view::StarSystem view(render);
+    view.setPlayer(player);
 
     control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
 
@@ -122,12 +122,14 @@ int main()
     assert(npc);
     player->setNpc(npc);
 
+    client::global::get().setView(&view);
+
     while(input.runSession() && screen.window().isOpen()) {
         input.update(player);
         camera.addSpeed(input.scrollAccel());
 
         world.update();
-        viewer.render(starsystem);
+        view.render(starsystem);
         screen.draw();
     }
 
