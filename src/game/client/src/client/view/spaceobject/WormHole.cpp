@@ -20,7 +20,7 @@
 
 #include <core/spaceobject/WormHole.hpp>
 
-//#include <client/effects/ShockWaveEffect.hpp>
+//#include <client/effect/ShockWaveEffect.hpp>
 
 #include <jeti/Render.hpp>
 

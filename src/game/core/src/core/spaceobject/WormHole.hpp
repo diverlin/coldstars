@@ -19,7 +19,7 @@
 
 #pragma once
 
-//#include <client/effects/ShockWaveEffect.hpp> //depr
+//#include <client/effect/ShockWaveEffect.hpp> //depr
 #include <core/spaceobject/Planetoid.hpp>
 
 #include <core/descriptor/spaceobject/WormHole.hpp>

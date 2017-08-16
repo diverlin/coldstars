@@ -18,7 +18,7 @@
 
 //#include <render/VehicleDrawable.hpp>
 
-//#include <client/effects/Shield.hpp>
+//#include <client/effect/Shield.hpp>
 //#include <jeti/particlesystem/DriveEffect.hpp>
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 //#include <client/text/VerticalFlowText.hpp>

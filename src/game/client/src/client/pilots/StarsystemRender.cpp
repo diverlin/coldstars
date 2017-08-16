@@ -42,7 +42,7 @@
 
 //#include <parts/WeaponComplex.hpp>
 
-#include <client/effects/lazerTrace.hpp>
+#include <client/effect/Beam.hpp>
 #include <client/text/VerticalFlowText.hpp>
 
 #include <core/spaceobject/ALL>
