@@ -20,7 +20,7 @@
 
 #include <core/type/EntityType.hpp>
 
-#include <client/effects/Shield.hpp>
+#include <client/effect/Shield.hpp>
 
 #include <ceti/type/IdType.hpp>
 

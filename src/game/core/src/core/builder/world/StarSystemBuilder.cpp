@@ -32,8 +32,8 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-//#include <client/effects/DistantNebulaEffect.hpp>
-//#include <client/effects/DistantStarEffect.hpp>
+//#include <client/effect/DistantNebulaEffect.hpp>
+//#include <client/effect/DistantStarEffect.hpp>
 
 #include <meti/RandUtils.hpp>
 

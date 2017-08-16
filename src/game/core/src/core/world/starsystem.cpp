@@ -48,9 +48,9 @@
 #include <core/model/spaceobject/ALL>
 #include <core/model/world/starsystem.hpp>
 
-//#include <client/effects/DistantNebulaEffect.hpp>
-//#include <client/effects/DistantStarEffect.hpp>
-//#include <client/effects/lazerTrace.hpp>
+//#include <client/effect/DistantNebulaEffect.hpp>
+//#include <client/effect/DistantStarEffect.hpp>
+//#include <client/effect/lazerTrace.hpp>
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 //#include <client/text/VerticalFlowText.hpp>

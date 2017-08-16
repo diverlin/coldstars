@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "lazerTrace.hpp"
+#include "Beam.hpp"
 
 #include <meti/VectorUtils.hpp>
 #include <meti/RandUtils.hpp>
