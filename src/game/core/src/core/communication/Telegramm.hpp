@@ -6,7 +6,7 @@
 
 namespace comm {
 
-class Message
+class Telegramm
 {
 public:
     enum class Type : int
@@ -52,9 +52,9 @@ public:
     };
 
 public:
-    Message(Type, const std::string& data = "", double delay = -1.0);
+    Telegramm(Type, const std::string& data = "", double delay = -1.0);
 
-    bool operator<(const Message&) const;
+    bool operator<(const Telegramm&) const;
 
     Type type() const { return m_type; }
     std::string data() const { return m_data; }
