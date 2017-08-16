@@ -47,7 +47,7 @@
 
 #include <core/model/item/equipment/Drive.hpp>
 
-#include <core/communication/MessageManager.hpp>
+#include <core/communication/TelegrammManager.hpp>
 
 #include <ceti/Pack.hpp>
 
@@ -87,7 +87,7 @@ TEST(ship, drop_item)
     EXPECT_EQ(1, ship->model()->items().size());
 
     /* drop item to space */
-    event::doDropItem(ship->id(), drive->id());
+    comm::event::doDropItem(ship->id(), drive->id());
 
     EXPECT_EQ(0, ship->model()->items().size());
     EXPECT_EQ(1, starsystem->containers().size());
@@ -122,7 +122,7 @@ TEST(ship, grab_container)
 
     ship->grab(container);
 
-    event::doTakeContainer(ship->id(), container->id());
+    comm::event::doTakeContainer(ship->id(), container->id());
 
     EXPECT_EQ(0, starsystem->containers().size());
     EXPECT_EQ(false, container->isAlive());
@@ -194,8 +194,8 @@ TEST(ship, shoot_ship)
 
     EXPECT_EQ(false, drive->isLocked());
 
-    event::doShoot(ship->id(), lazer1->id());
-    event::doShoot(ship->id(), lazer2->id());
+    comm::event::doShoot(ship->id(), lazer1->id());
+    comm::event::doShoot(ship->id(), lazer2->id());
 
     EXPECT_EQ(true, drive->isLocked());
 
@@ -365,7 +365,7 @@ TEST(ship, dock)
         EXPECT_EQ(planet, ship->navigator().target());
         EXPECT_EQ(complex::Drive::Action::DOCKING, ship->navigator().action());
 
-        event::doDockShip(ship->id(), planet->land()->id());
+        comm::event::doDockShip(ship->id(), planet->land()->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem->ships().size());
@@ -379,7 +379,7 @@ TEST(ship, dock)
         EXPECT_EQ(planet->land(), ship->land());
 
         /** launching */
-        event::doLaunchShip(ship->id(), planet->land()->id());
+        comm::event::doLaunchShip(ship->id(), planet->land()->id());
 
         // starsystem
         EXPECT_EQ(1, starsystem->ships().size());
@@ -427,7 +427,7 @@ TEST(ship, jump)
         // ship
         EXPECT_EQ(place::Type::SPACE, ship->place());
 
-        event::doJumpIn(ship->id());
+        comm::event::doJumpIn(ship->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem_jumpFrom->ships().size());
@@ -441,7 +441,7 @@ TEST(ship, jump)
         EXPECT_EQ(nullptr, ship->starsystem());
 
         /** jump out */
-        event::doJumpOut(ship->id(), starsystem_jumpTo->id());
+        comm::event::doJumpOut(ship->id(), starsystem_jumpTo->id());
 
         // starsystem
         EXPECT_EQ(0, starsystem_jumpFrom->ships().size());

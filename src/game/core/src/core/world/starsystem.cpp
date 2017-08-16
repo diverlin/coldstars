@@ -904,6 +904,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     int containers_num = meti::getRandInt(1,3);
     for (int i=0; i<containers_num; ++i) {
         int minerals = meti::getRandInt(3, 100);
+
         // send telegram to create mineral
     }
     // send telegram to create explosion

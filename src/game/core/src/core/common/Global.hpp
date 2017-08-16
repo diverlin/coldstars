@@ -20,7 +20,10 @@
 #pragma once
 
 class God;
-class MessageManager;
+namespace comm {
+class TelegrammManager;
+} // namespace comm
+
 class Config;
 class TurnTimer;
 class GameDate;
@@ -94,7 +97,7 @@ public:
     static global& get();
 
     God& god() { return *m_god; }
-    MessageManager& messageManager() { return *m_messageManager; }
+    comm::TelegrammManager& messageManager() { return *m_messageManager; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
@@ -144,7 +147,7 @@ private:
     global& operator=(const global&) = delete;
 
     God* m_god = nullptr;
-    MessageManager* m_messageManager = nullptr;
+    comm::TelegrammManager* m_messageManager = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;

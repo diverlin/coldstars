@@ -1,4 +1,4 @@
-#include "MessageManager.hpp"
+#include "TelegrammManager.hpp"
 
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -41,102 +41,104 @@
 
 #include <core/world/starsystem.hpp>
 
-void MessageManager::add(comm::Message&& message)
+namespace comm {
+
+void TelegrammManager::add(comm::Telegramm&& message)
 {
     if (message.delay() < 0) {
         process(message);
     } else {
         message.setDispatchTime(currentTime() + message.delay());
-        m_messages_queue.insert(message);
+        m_telegramms_queue.insert(message);
     }
 }
 
-double MessageManager::currentTime() const
+double TelegrammManager::currentTime() const
 {
     return m_clock.getElapsedTime().asSeconds();
 }
 
-void MessageManager::runLoop()
+void TelegrammManager::runLoop()
 {
-    while(!m_messages_queue.empty()) {
+    while(!m_telegramms_queue.empty()) {
         update();
     }
 }
 
-void MessageManager::update()
+void TelegrammManager::update()
 { 
-    for ( auto it = m_messages_queue.begin(); it != m_messages_queue.end(); ++it ) {
-        const comm::Message& message = *it;
+    for ( auto it = m_telegramms_queue.begin(); it != m_telegramms_queue.end(); ++it ) {
+        const comm::Telegramm& message = *it;
         if (message.dispatchTime() < currentTime()) {
             process(message);
-            m_messages_queue.erase(it);
+            m_telegramms_queue.erase(it);
         }
     }
 }
 
 namespace {
 
-void createStarSystemEvent(const comm::Message& message) {
+void createStarSystemEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::StarSystem::gen(data.descriptor(), data.object());
 }
 
-void createShipEvent(const comm::Message& message) {
+void createShipEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::Ship::gen(data.descriptor(), data.object());
 }
 
-void createBombEvent(const comm::Message& message) {
+void createBombEvent(const comm::Telegramm& message) {
     assert(false);
 //        core::global::get().bombBuilder().gen(message.data);
 }
 
-void createContainerEvent(const comm::Message& message) {
+void createContainerEvent(const comm::Telegramm& message) {
     assert(false);
 //        core::global::get().containerBuilder().gen(message.data);
 }
 
 // items
-void createBakEvent(const comm::Message& message) {
+void createBakEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Bak::gen(data.descriptor(), data.object());
 }
 
 // items
-void createDriveEvent(const comm::Message& message) {
+void createDriveEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Drive::gen(data.descriptor(), data.object());
 }
-void createDroidEvent(const comm::Message& message) {
+void createDroidEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Droid::gen(data.descriptor(), data.object());
 }
-void createGrappleEvent(const comm::Message& message) {
+void createGrappleEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Grapple::gen(data.descriptor(), data.object());
 }
-void createProtectorEvent(const comm::Message& message) {
+void createProtectorEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Protector::gen(data.descriptor(), data.object());
 }
-void createScanerEvent(const comm::Message& message) {
+void createScanerEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Scaner::gen(data.descriptor(), data.object());
 }
-void createRadarEvent(const comm::Message& message) {
+void createRadarEvent(const comm::Telegramm& message) {
     descriptor::comm::Creation data(message.data());
     builder::item::Radar::gen(data.descriptor(), data.object());
 }
 // item
 
 /** ADD TO STARSYSTEM */
-void addShipToStarSystemEvent(const comm::Message& message) {
+void addShipToStarSystemEvent(const comm::Telegramm& message) {
     AddToStarsystemDescriptor descriptor(message.data());
     control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.owner);
     control::Ship* ship = manager::Entities::get().ship(descriptor.object);
     starsystem->add(ship);
 }
-void addContainerToStarSystemEvent(const comm::Message& message) {
+void addContainerToStarSystemEvent(const comm::Telegramm& message) {
     AddToStarsystemDescriptor descriptor(message.data());
     control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.owner);
     control::Container* container = manager::Entities::get().container(descriptor.object);
@@ -144,43 +146,43 @@ void addContainerToStarSystemEvent(const comm::Message& message) {
 }
 
 /** DOCK */
-void _doDock(const comm::Message& message) {
+void _doDock(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doDockShip(descr.object(), descr.target());
 }
-void _doLaunch(const comm::Message& message) {
+void _doLaunch(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doLaunchShip(descr.object(), descr.target());
 }
 
 /** JUMP */
-void _doJumpIn(const comm::Message& message) {
+void _doJumpIn(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doJumpIn(descr.object());
 }
-void _doJumpOut(const comm::Message& message) {
+void _doJumpOut(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doJumpOut(descr.object(), descr.target());
 }
 
 /** DROP/TAKE */
-void _doDropItem(const comm::Message& message) {
+void _doDropItem(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doDropItem(descr.object(), descr.target());
 }
-void _doTakeContainer(const comm::Message& message) {
+void _doTakeContainer(const comm::Telegramm& message) {
     descriptor::comm::Pair descr(message.data());
     event::doTakeContainer(descr.object(), descr.target());
 }
 
 /** */
 
-void hitEvent(const comm::Message& message) {
+void hitEvent(const comm::Telegramm& message) {
     descriptor::Hit descr(message.data());
     control::SpaceObject* ob = manager::Entities::get().spaceObject(descr.target());
     ob->hit(descr.damage());
 }
-void explosionEvent(const comm::Message& message) {
+void explosionEvent(const comm::Telegramm& message) {
     descriptor::Explosion descriptor(message.data());
     control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.starsystem_id);
     Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
@@ -288,44 +290,45 @@ void doShoot(int_t object, int_t item) {
 
 } // namespace event
 
-void MessageManager::process(const comm::Message& message)
+void TelegrammManager::process(const comm::Telegramm& telegramm)
 {
-    switch(message.type()) {
+    switch(telegramm.type()) {
     /** CREATE */
-    case comm::Message::Type::CREATE_STARSYSTEM: createStarSystemEvent(message); break;
-    case comm::Message::Type::CREATE_SHIP: createShipEvent(message); break;
-    case comm::Message::Type::CREATE_BOMB: createBombEvent(message); break;
-    case comm::Message::Type::CREATE_CONTAINER: createContainerEvent(message); break;
+    case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); break;
     // items
-    case comm::Message::Type::CREATE_BAK: createBakEvent(message); break;
-    case comm::Message::Type::CREATE_DRIVE: createDriveEvent(message); break;
-    case comm::Message::Type::CREATE_DROID: createDroidEvent(message); break;
-    case comm::Message::Type::CREATE_GRAPPLE: createGrappleEvent(message); break;
-    case comm::Message::Type::CREATE_PROTECTOR: createProtectorEvent(message); break;
-    case comm::Message::Type::CREATE_SCANER: createScanerEvent(message); break;
-    case comm::Message::Type::CREATE_RADAR: createRadarEvent(message); break;
+    case comm::Telegramm::Type::CREATE_BAK: createBakEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_DROID: createDroidEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_GRAPPLE: createGrappleEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); break;
 
     /** ADD TO STARSYSTEM */
-    case comm::Message::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(message); break;
-    case comm::Message::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(message); break;
+    case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); break;
+    case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); break;
 
     /** DOCK */
-    case comm::Message::Type::DOCK_SHIP: _doDock(message); break;
-    case comm::Message::Type::LAUNCH_SHIP: _doLaunch(message); break;
+    case comm::Telegramm::Type::DOCK_SHIP: _doDock(telegramm); break;
+    case comm::Telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); break;
 
     /** JUMP **/
-    case comm::Message::Type::JUMP_IN: _doJumpIn(message); break;
-    case comm::Message::Type::JUMP_OUT: _doJumpOut(message); break;
+    case comm::Telegramm::Type::JUMP_IN: _doJumpIn(telegramm); break;
+    case comm::Telegramm::Type::JUMP_OUT: _doJumpOut(telegramm); break;
 
     /** DROP/TAKE */
-    case comm::Message::Type::DROP_ITEM: _doDropItem(message); break;
-    case comm::Message::Type::TAKE_CONTAINER: _doTakeContainer(message); break;
+    case comm::Telegramm::Type::DROP_ITEM: _doDropItem(telegramm); break;
+    case comm::Telegramm::Type::TAKE_CONTAINER: _doTakeContainer(telegramm); break;
 
     /** OTHER */
-    case comm::Message::Type::HIT: hitEvent(message); break;
-    case comm::Message::Type::EXPLOSION: explosionEvent(message); break;
+    case comm::Telegramm::Type::HIT: hitEvent(telegramm); break;
+    case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); break;
     }
 }
 
+} // namespace comm
 
 

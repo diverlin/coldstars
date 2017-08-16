@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include <core/communication/Message.hpp>
+#include <core/communication/Telegramm.hpp>
 
 #include <string>
 
-std::string to_string(comm::Message::Type);
+std::string to_string(comm::Telegramm::Type);
 
 

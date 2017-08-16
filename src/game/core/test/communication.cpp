@@ -46,7 +46,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/communication/MessageManager.hpp>
+#include <core/communication/TelegrammManager.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <ceti/IdGenerator.hpp>
@@ -59,7 +59,7 @@ TEST(communication, create_starsystem)
     descriptor::StarSystem* descriptor = descriptor::genStarSystem();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
-    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_STARSYSTEM, creation.data()));
+    core::global::get().messageManager().add(comm::Telegramm(comm::Telegramm::Type::CREATE_STARSYSTEM, creation.data()));
 
     control::StarSystem* starsystem = manager::Entities::get().starsystem(ob_id);
     EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
@@ -72,7 +72,7 @@ TEST(communication, create_ship)
     descriptor::Ship* descriptor = descriptor::genShip();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
-    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_SHIP, creation.data()));
+    core::global::get().messageManager().add(comm::Telegramm(comm::Telegramm::Type::CREATE_SHIP, creation.data()));
 
     control::Ship* ship = manager::Entities::get().ship(ob_id);
     EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
@@ -85,7 +85,7 @@ TEST(communication, create_bak)
     descriptor::item::Bak* descriptor = descriptor::item::genBak();
     descriptor::comm::Creation creation(ob_id, descriptor->id());
 
-    core::global::get().messageManager().add(comm::Message(comm::Message::Type::CREATE_BAK, creation.data()));
+    core::global::get().messageManager().add(comm::Telegramm(comm::Telegramm::Type::CREATE_BAK, creation.data()));
 
     control::item::Bak* bak = manager::Entities::get().bak(ob_id);
     EXPECT_EQ(descriptor->id(), bak->model()->descriptor());

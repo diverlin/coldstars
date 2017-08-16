@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <communication/Message.hpp>
+#include <communication/Telegramm.hpp>
 
 #include <SFML/System/Clock.hpp>
 
@@ -14,6 +14,8 @@ class ContainerDescriptor;
 class HitDescriptor;
 class ExplosionDescriptor;
 class AddToStarsystemDescriptor;
+
+namespace comm {
 
 namespace event {
 /** DOCK */
@@ -29,20 +31,21 @@ void doTakeContainer(int_t, int_t);
 void doShoot(int_t, int_t);
 } // namespace event
 
-class MessageManager
+class TelegrammManager
 {
 public:
-    MessageManager() {}
-    void add(comm::Message&& message);
+    TelegrammManager() {}
+    void add(comm::Telegramm&& message);
 
     void runLoop();
     void update();
 
 private:
     sf::Clock m_clock;
-    std::set<comm::Message> m_messages_queue;
+    std::set<comm::Telegramm> m_telegramms_queue;
 
     double currentTime() const;
-    void process(const comm::Message& message);
+    void process(const comm::Telegramm&);
 };
 
+} // namespace comm
