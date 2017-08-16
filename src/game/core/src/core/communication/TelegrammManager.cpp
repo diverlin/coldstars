@@ -46,14 +46,14 @@ namespace comm {
 void TelegrammManager::add(comm::Telegramm&& telegramm)
 {
     if (telegramm.delay() < 0) {
-        process(telegramm);
+        _process(telegramm);
     } else {
-        telegramm.setDispatchTime(currentTime() + telegramm.delay());
+        telegramm.setDispatchTime(__currentTime() + telegramm.delay());
         m_telegramms.insert(telegramm);
     }
 }
 
-double TelegrammManager::currentTime() const
+double TelegrammManager::__currentTime() const
 {
     return m_clock.getElapsedTime().asSeconds();
 }
@@ -69,8 +69,8 @@ void TelegrammManager::update()
 { 
     for ( auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it ) {
         const comm::Telegramm& telegramm = *it;
-        if (telegramm.dispatchTime() < currentTime()) {
-            process(telegramm);
+        if (telegramm.dispatchTime() < __currentTime()) {
+            _process(telegramm);
             m_telegramms.erase(it);
         }
     }
@@ -302,49 +302,51 @@ void doShoot(int_t object, int_t item) {
 
 } // namespace event
 
-void TelegrammManager::process(const comm::Telegramm& telegramm)
+bool TelegrammManager::_process(const comm::Telegramm& telegramm)
 {
     switch(telegramm.type()) {
     /** CREATE */
     // spaceobjects
-    case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_MINERAL: createMineralEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_MINERAL: createMineralEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); return true;
     // items
-    case comm::Telegramm::Type::CREATE_BAK: createBakEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_DROID: createDroidEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_GRAPPLE: createGrappleEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); break;
-    case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); break;
+    case comm::Telegramm::Type::CREATE_BAK: createBakEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_DROID: createDroidEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_GRAPPLE: createGrappleEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); return true;
     /** */
 
     /** ADD TO STARSYSTEM */
-    case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); break;
-    case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); break;
+    case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); return true;
 
     /** DOCK */
-    case comm::Telegramm::Type::DOCK_SHIP: _doDock(telegramm); break;
-    case comm::Telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); break;
+    case comm::Telegramm::Type::DOCK_SHIP: _doDock(telegramm); return true;
+    case comm::Telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); return true;
 
     /** JUMP **/
-    case comm::Telegramm::Type::JUMP_IN: _doJumpIn(telegramm); break;
-    case comm::Telegramm::Type::JUMP_OUT: _doJumpOut(telegramm); break;
+    case comm::Telegramm::Type::JUMP_IN: _doJumpIn(telegramm); return true;
+    case comm::Telegramm::Type::JUMP_OUT: _doJumpOut(telegramm); return true;
 
     /** DROP/TAKE */
-    case comm::Telegramm::Type::DROP_ITEM: _doDropItem(telegramm); break;
-    case comm::Telegramm::Type::TAKE_CONTAINER: _doTakeContainer(telegramm); break;
+    case comm::Telegramm::Type::DROP_ITEM: _doDropItem(telegramm); return true;
+    case comm::Telegramm::Type::TAKE_CONTAINER: _doTakeContainer(telegramm); return true;
 
     /** OTHER */
-    case comm::Telegramm::Type::HIT: hitEvent(telegramm); break;
-    case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); break;
+    case comm::Telegramm::Type::HIT: hitEvent(telegramm); return true;
+    case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); return true;
 
     /* REMOVE */
-    case comm::Telegramm::Type::REMOVE_ASTEROID: removeAsteroidEvent(telegramm); break;
+    case comm::Telegramm::Type::REMOVE_ASTEROID: removeAsteroidEvent(telegramm); return true;
     }
+
+    return false;
 }
 
 } // namespace comm

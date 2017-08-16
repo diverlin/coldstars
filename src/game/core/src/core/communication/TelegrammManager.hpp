@@ -42,12 +42,14 @@ public:
     void runLoop();
     void update();
 
+protected:
+    virtual bool _process(const Telegramm&);
+
 private:
     sf::Clock m_clock;
     std::set<Telegramm> m_telegramms;
 
-    double currentTime() const;
-    void process(const Telegramm&);
+    double __currentTime() const;
 };
 
 } // namespace comm
