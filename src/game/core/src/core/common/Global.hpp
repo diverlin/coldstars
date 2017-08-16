@@ -20,9 +20,12 @@
 #pragma once
 
 class God;
+
+namespace core {
 namespace comm {
 class TelegrammManager;
 } // namespace comm
+} // namespace core
 
 class Config;
 class TurnTimer;
@@ -147,7 +150,7 @@ private:
     global& operator=(const global&) = delete;
 
     God* m_god = nullptr;
-    comm::TelegrammManager* m_messageManager = nullptr;
+    core::comm::TelegrammManager* m_messageManager = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;

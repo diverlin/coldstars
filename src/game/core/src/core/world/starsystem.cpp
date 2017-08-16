@@ -820,7 +820,7 @@ void StarSystem::update(int time)
 {                
     bool detalied_simulation = true;
 
-    comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+    core::comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
 
     __updateEntities_s(time, detalied_simulation);
     __manageUnavaliableObjects_s();
@@ -907,7 +907,7 @@ void StarSystem::__rocketCollision_s(bool show_effect)
 
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
-    comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+    core::comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
     manager::Entities& entitiesManager = manager::Entities::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
     //comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
@@ -915,7 +915,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     // send message asteroid death
     {
     descriptor::comm::Object object(asteroid->id());
-    telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
+    telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
     }
 
     // create minerals
@@ -925,16 +925,14 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
         int_t object_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         descriptor::comm::Container creation(object_id, descriptor_id, mass);
-        telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
+        telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
 
         float strength = meti::getRandFloat(1.0f, 2.0f);
         glm::vec3 impulse(meti::getRandXYVec3(strength));
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
-        telegrammManager.add(comm::Telegramm(comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
     }
     // send telegram to create explosion
-    // send telegram to remove asteroid from starsystem
-    // send telegram to add asteroid to garbage
 }
 
 void StarSystem::__asteroidsCollision_s() const {
@@ -1174,17 +1172,17 @@ void StarSystem::__manageDeadObjects()
 
 
     // asteroid
-    std::vector<Asteroid*> to_remove;
-    for(Asteroid* asteroid: m_asteroids) {
-        if(!asteroid->isAlive()) {
-            //manager::Garbage::get().add(asteroid);
-            //to_remove.push_back(asteroid);
-        }
-    }
+//    std::vector<Asteroid*> to_remove;
+//    for(Asteroid* asteroid: m_asteroids) {
+//        if(!asteroid->isAlive()) {
+//            //manager::Garbage::get().add(asteroid);
+//            //to_remove.push_back(asteroid);
+//        }
+//    }
 
-    for(Asteroid* asteroid: to_remove) {
-        //remove(asteroid);
-    }
+//    for(Asteroid* asteroid: to_remove) {
+//        //remove(asteroid);
+//    }
     //to_remove.clear();
     //
 

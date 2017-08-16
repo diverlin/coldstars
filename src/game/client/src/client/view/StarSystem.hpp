@@ -21,8 +21,7 @@
 #include <client/view/Cache.hpp>
 
 #include <ceti/type/IdType.hpp>
-
-#include <jeti/Screen.hpp>
+#include <ceti/rect.hpp>
 
 #include <vector>
 #include <map>

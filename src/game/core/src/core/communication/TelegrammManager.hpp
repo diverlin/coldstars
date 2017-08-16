@@ -15,6 +15,7 @@ class HitDescriptor;
 class ExplosionDescriptor;
 class AddToStarsystemDescriptor;
 
+namespace core {
 namespace comm {
 
 namespace event {
@@ -35,7 +36,7 @@ class TelegrammManager
 {
 public:
     TelegrammManager() {}
-    void add(comm::Telegramm&&);
+    void add(Telegramm&&);
 
     [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]
     void runLoop();
@@ -43,10 +44,11 @@ public:
 
 private:
     sf::Clock m_clock;
-    std::set<comm::Telegramm> m_telegramms;
+    std::set<Telegramm> m_telegramms;
 
     double currentTime() const;
-    void process(const comm::Telegramm&);
+    void process(const Telegramm&);
 };
 
 } // namespace comm
+} // namespace core

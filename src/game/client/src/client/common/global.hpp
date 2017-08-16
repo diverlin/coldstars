@@ -31,6 +31,11 @@ class Render;
 class Camera;
 } // namespace jeti
 
+#include <client/view/StarSystem.hpp>
+//namespace view {
+//class StarSystem;
+//} // namespace view
+
 namespace client {
 
 class global
@@ -40,10 +45,13 @@ public:
 
     void init();
 
+    void setView(view::StarSystem* view) { m_view = view; }
+
     type::Collector& types() { return *m_types; }
     jeti::Screen& screen() { return *m_screen; }
     jeti::Render& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
+    view::StarSystem& view() { return *m_view; }
 
     UserInputInSpace& input() { return *m_inputsManager; }
 
@@ -57,6 +65,7 @@ private:
     jeti::Screen* m_screen = nullptr;
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
+    view::StarSystem* m_view = nullptr;
 
     UserInputInSpace* m_inputsManager = nullptr;
 

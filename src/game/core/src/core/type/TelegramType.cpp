@@ -21,37 +21,42 @@
 
 #include <cassert>
 
-std::string to_string(comm::Telegramm::Type type_id)
+std::string to_string(core::comm::Telegramm::Type type_id)
 {
     switch (type_id) {
     /** CREATE */
-    case comm::Telegramm::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
-    case comm::Telegramm::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
-    case comm::Telegramm::Type::CREATE_MINERAL:  { return "comm::Message::Type::CREATE_MINERAL"; }
-    case comm::Telegramm::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
+    // spaceobjects
+    case core::comm::Telegramm::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
+    case core::comm::Telegramm::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
+    case core::comm::Telegramm::Type::CREATE_MINERAL:  { return "comm::Message::Type::CREATE_MINERAL"; }
+    case core::comm::Telegramm::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
 
     // items
-    case comm::Telegramm::Type::CREATE_BAK:  { return "comm::Message::Type::CREATE_BAK"; }
-    case comm::Telegramm::Type::CREATE_DRIVE:  { return "comm::Message::Type::CREATE_DRIVE"; }
-    case comm::Telegramm::Type::CREATE_DROID:  { return "comm::Message::Type::CREATE_DROID"; }
-    case comm::Telegramm::Type::CREATE_GRAPPLE:  { return "comm::Message::Type::CREATE_GRAPPLE"; }
-    case comm::Telegramm::Type::CREATE_SCANER:  { return "comm::Message::Type::CREATE_SCANER"; }
-    case comm::Telegramm::Type::CREATE_RADAR:  { return "comm::Message::Type::CREATE_RADAR"; }
-    case comm::Telegramm::Type::CREATE_PROTECTOR:  { return "comm::Message::Type::CREATE_PROTECTOR"; }
+    case core::comm::Telegramm::Type::CREATE_BAK:  { return "comm::Message::Type::CREATE_BAK"; }
+    case core::comm::Telegramm::Type::CREATE_DRIVE:  { return "comm::Message::Type::CREATE_DRIVE"; }
+    case core::comm::Telegramm::Type::CREATE_DROID:  { return "comm::Message::Type::CREATE_DROID"; }
+    case core::comm::Telegramm::Type::CREATE_GRAPPLE:  { return "comm::Message::Type::CREATE_GRAPPLE"; }
+    case core::comm::Telegramm::Type::CREATE_SCANER:  { return "comm::Message::Type::CREATE_SCANER"; }
+    case core::comm::Telegramm::Type::CREATE_RADAR:  { return "comm::Message::Type::CREATE_RADAR"; }
+    case core::comm::Telegramm::Type::CREATE_PROTECTOR:  { return "comm::Message::Type::CREATE_PROTECTOR"; }
+
+    // effects
+    case core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT:  { return "comm::Message::Type::CREATE_EXPLOSION_EFFECT"; }
+
     /** */
 
     /** TRANSITION */
-    case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
-    case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
-    case comm::Telegramm::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
-    case comm::Telegramm::Type::REMOVE:  { return "comm::Message::Type::REMOVE"; }
-    case comm::Telegramm::Type::DELETE:  { return "comm::Message::Type::DELETE"; }
+    case core::comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
+    case core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
+    case core::comm::Telegramm::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
+    case core::comm::Telegramm::Type::REMOVE:  { return "comm::Message::Type::REMOVE"; }
+    case core::comm::Telegramm::Type::DELETE:  { return "comm::Message::Type::DELETE"; }
     /** */
 
-    case comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
-    case comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
+    case core::comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
+    case core::comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
-    case comm::Telegramm::Type::REMOVE_ASTEROID: { return "comm::Message::Type::REMOVE_ASTEROID"; }
+    case core::comm::Telegramm::Type::REMOVE_ASTEROID: { return "comm::Message::Type::REMOVE_ASTEROID"; }
 
     }
     assert(false);

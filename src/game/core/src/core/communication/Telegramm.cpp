@@ -4,6 +4,7 @@
 
 #include <assert.h>
 
+namespace core {
 namespace comm {
 
 Telegramm::Telegramm(Type type, const std::string& data, double delay)
@@ -19,3 +20,4 @@ bool Telegramm::operator<(const Telegramm& rhs) const
 }
 
 } // namespace comm
+} // namespace core

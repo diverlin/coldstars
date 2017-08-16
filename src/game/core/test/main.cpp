@@ -82,14 +82,14 @@ TEST(descriptor, accessors)
 
 TEST(base, hit)
 {
-    comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
+    core::comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageManager.add(comm::Telegramm(comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageManager.add(comm::Telegramm(comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageManager.add(comm::Telegramm(comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     messageManager.runLoop();
 
@@ -98,12 +98,12 @@ TEST(base, hit)
 
 TEST(base, critical_hit)
 {
-    comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
+    core::comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageManager.add(comm::Telegramm(comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
     messageManager.runLoop();
 
     EXPECT_TRUE(ship2->model()->isDying());
