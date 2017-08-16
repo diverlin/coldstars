@@ -20,6 +20,7 @@
 
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
+#include <client/communication/TelegrammManager.hpp>
 
 #include <core/type/CollectorType.hpp>
 
@@ -46,6 +47,7 @@ global::global()
     , m_render(new jeti::Render)
     , m_camera(new jeti::Camera)
     , m_inputsManager(new UserInputInSpace)
+    , m_telegrammManager(new comm::TelegrammManager)
 {
 }
 
