@@ -25,6 +25,28 @@
 namespace descriptor {
 namespace comm {
 
+
+Object::Object(int_t object)
+    :
+      m_object(object)
+{
+}
+
+Object::Object(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Object::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+
+//////////////////////
+
+
 Creation::Creation(int_t obId, int_t obDescriptor)
     :
       m_object(obId)
@@ -42,6 +64,27 @@ Creation::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
+
+////////////////////////
+
+Container::Container(int_t obId, int_t obDescriptor, int mass)
+    :
+      Creation(obId, obDescriptor)
+    , m_mass(mass)
+{
+}
+
+Container::Container(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Container::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 
 } // namespace comm
 } // namespace descriptor

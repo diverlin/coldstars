@@ -70,7 +70,7 @@ void
 Base::setId(int_t id) { model()->setId(id); }
 
 int_t
-Base::id() { return model()->id(); }
+Base::id() const { return model()->id(); }
 
 bool
 Base::isAlive() const

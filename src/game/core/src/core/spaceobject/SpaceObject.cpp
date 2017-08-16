@@ -77,6 +77,11 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
     m_impulse += force_dir * strength;
 }
 
+void SpaceObject::addImpulse(const glm::vec3& impulse)
+{
+    m_impulse += impulse;
+}
+
 void SpaceObject::hit(int damage, SpaceObject* agressor)
 {
     model()->setArmor(model()->armor() - damage);

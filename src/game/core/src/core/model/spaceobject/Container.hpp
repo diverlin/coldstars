@@ -28,7 +28,7 @@ namespace model {
 class Container : public SpaceObject {
 
 public:
-    Container(int_t);
+    Container(int_t, int_t id = NONE);
     ~Container() = default;
     Container(const std::string& data);
     std::string data() const;

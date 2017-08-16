@@ -55,7 +55,7 @@ public:
 
     virtual void _postDeathUniqueEvent(bool) override final;
 
-    void updateInSpace(int, bool);
+    void updateInSpace(int);
 
     void hit(int damage, SpaceObject* agressor = nullptr) override final;
 

@@ -86,7 +86,7 @@ public:
 
     void setId(int_t id);
 
-    int_t id();
+    int_t id() const;
     entity::Type type() const;
     entity::Type group() const;
 

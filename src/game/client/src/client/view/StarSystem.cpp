@@ -623,6 +623,12 @@ void StarSystem::__add(Base* view)
         m_satellites.push_back(satellite);
         return;
     }
+    case entity::Type::CONTAINER: {
+        Container* container = static_cast<Container*>(view);
+        assert(container);
+        m_containers.push_back(container);
+        return;
+    }
     default:
         assert(false);
     }

@@ -5,13 +5,16 @@
 AddToStarsystemDescriptor::AddToStarsystemDescriptor(int_t owner,
                                                      int_t object,
                                                      const meti::vec3& position,
+                                                     const meti::vec3& impulse,
                                                      const meti::vec3& angle)
     :
-      owner(owner)
+      starsystem(owner)
     , object(object)
     , position(position)
+    , impulse(impulse)
     , angle(angle)
-{}
+{
+}
 
 AddToStarsystemDescriptor::AddToStarsystemDescriptor(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA

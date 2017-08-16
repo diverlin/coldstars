@@ -53,6 +53,7 @@ public:
     void setNextTurnPosition(const meti::vec3& position) { m_nextTurnPosition = position; }
 
     void addImpulse(const glm::vec3&, float);
+    void addImpulse(const glm::vec3&);
 
     [[warning("do we need this?")]]
     virtual int givenExpirience() const { return model()->givenExpirience(); }
@@ -96,7 +97,7 @@ protected:
     [[deprecated("!!! remove")]]
     glm::vec3& _externalForce() { return m_impulse; }
 
-    void _checkDeath(bool);
+    void _checkDeath(bool show_effect = false);
     virtual void _postDeathUniqueEvent(bool) {}
 
     void _init();

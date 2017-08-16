@@ -488,10 +488,10 @@ void Player::__manageClickEvent()
             __clickOn(static_cast<view::Bullet*>(base));
             break;
         }
-//        case entity::Type::CONTAINER: {
-//            clickOn(static_cast<view::Container*>(base));
-//            break;
-//        }
+        case entity::Type::CONTAINER: {
+            __clickOn(static_cast<view::Container*>(base));
+            break;
+        }
         case entity::Type::SATELLITE: {
             __clickOn(static_cast<view::Satellite*>(base));
             break;
