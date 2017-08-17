@@ -19,6 +19,7 @@
 #include "Global.hpp"
 #include <ai/God.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <communication/TelegrammHub.hpp>
 #include <communication/TelegrammManager.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
@@ -78,6 +79,7 @@ global& global::get()
 global::global()
     :
       m_god(new God)
+    , m_messageHub(new comm::TelegrammHub)
     , m_messageManager(new comm::TelegrammManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)

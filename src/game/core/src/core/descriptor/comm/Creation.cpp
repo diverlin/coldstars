@@ -25,6 +25,29 @@
 namespace descriptor {
 namespace comm {
 
+namespace effect {
+
+Explosion::Explosion(int size, const glm::vec3& position)
+    :
+      m_size(size)
+    , m_position(position)
+{
+}
+
+Explosion::Explosion(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Explosion::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace effect
+
+//////////////////////
 
 Object::Object(int_t object)
     :

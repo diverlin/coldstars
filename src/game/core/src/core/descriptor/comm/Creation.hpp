@@ -124,7 +124,7 @@ namespace effect {
 class Explosion
 {
 public:
-    Explosion(int_t, int_t, int);
+    Explosion(int, const glm::vec3&);
     Explosion(const std::string& data);
     ~Explosion() = default;
     std::string data() const;

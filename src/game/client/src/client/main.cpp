@@ -71,6 +71,9 @@
 
 #include <client/view/StarSystem.hpp>
 
+#include <core/communication/TelegrammHub.hpp>
+#include <client/communication/TelegrammManager.hpp>
+
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
@@ -109,6 +112,7 @@ int main()
     jeti::Render& render = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
     jeti::Screen& screen = client::global::get().screen();
+    core::global::get().telegrammHub().add(new client::comm::TelegrammManager());
     //
 
     Player* player = createPlayer();

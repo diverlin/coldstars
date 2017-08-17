@@ -92,6 +92,13 @@ StarSystem::~StarSystem()
 {}                                    
 
 void
+StarSystem::add(jeti::particlesystem::Base* ps, const glm::vec3& center)
+{
+    ps->setCenter(center);
+    m_particlesystems.push_back(ps);
+}
+
+void
 StarSystem::__updateVisible(control::StarSystem* starsystem)
 {
     __clear();
@@ -134,9 +141,9 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         __addIfVisible(text);
     }
 
-    __createText();
-    __createExplosion();
-    __createBeam();
+    //__createText();
+    //__createExplosion();
+    //__createBeam();
 
     // update ui
     {
