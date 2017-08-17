@@ -104,10 +104,12 @@ int main()
 {
     client::global::get().init();
 
+    // shortcuts
     UserInputInSpace& input = client::global::get().input();
     jeti::Render& render = client::global::get().render();
     jeti::Camera& camera = client::global::get().camera();
     jeti::Screen& screen = client::global::get().screen();
+    //
 
     Player* player = createPlayer();
 
@@ -127,6 +129,7 @@ int main()
     while(input.runSession() && screen.window().isOpen()) {
         input.update(player);
         camera.addSpeed(input.scrollAccel());
+        camera.update();
 
         world.update();
         view.render(starsystem);

@@ -1,45 +1,5 @@
 #include "TelegrammManager.hpp"
 
-//#include <common/Global.hpp>
-//#include <core/manager/EntityManager.hpp>
-
-//#include <common/constants.hpp>
-
-//#include <core/type/EntityType.hpp> // test
-
-//#include <core/descriptor/comm/Hit.hpp>
-//#include <core/descriptor/comm/Dock.hpp>
-//#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
-
-//#include <core/manager/DescriptorManager.hpp>
-//#include <core/manager/Garbage.hpp>
-
-//#include <core/descriptor/Base.hpp>
-//#include <core/descriptor/comm/Creation.hpp>
-
-//#include <core/generator/DescriptorGenerator.hpp>
-//#include <core/descriptor/spaceobject/Container.hpp> // ??
-//#include <core/descriptor/ExplosionDescriptor.hpp>
-
-//#include <core/spaceobject/ALL>
-//#include <core/item/equipment/Weapon.hpp>
-
-//#include <core/world/starsystem.hpp>
-//#include <core/world/HyperSpace.hpp>
-
-//#include <core/builder/spaceobject/ALL>
-
-//#include <core/builder/item/equipment/ALL>
-//#ifdef USE_MODULES
-//#include <core/builder/item/module/ALL>
-//#endif // USE_MODULES
-//#ifdef USE_ARTEFACTS
-//#include <core/builder/item/artefact/ALL>
-//#endif // USE_ARTEFACTS
-//#include <core/builder/item/other/ALL>
-
-//#include <core/builder/world/StarSystemBuilder.hpp>
-
 #include <jeti/particlesystem/Explosion.hpp>
 
 namespace client {
