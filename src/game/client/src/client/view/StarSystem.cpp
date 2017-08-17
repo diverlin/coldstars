@@ -917,8 +917,6 @@ void StarSystem::render(control::StarSystem* starsystem)
     jeti::Render& render = client::global::get().render();
 
     render.update();
-    m_camera.update();
-    
     __updateVisible(starsystem);
 
     render.composeViewMatrix(m_camera.viewMatrix());
