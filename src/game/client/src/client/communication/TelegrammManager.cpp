@@ -1,5 +1,11 @@
 #include "TelegrammManager.hpp"
 
+#include <core/descriptor/comm/Creation.hpp>
+
+#include <client/resources/Utils.hpp>
+#include <client/common/global.hpp>
+#include <client/view/StarSystem.hpp>
+
 #include <jeti/particlesystem/Explosion.hpp>
 
 namespace client {
@@ -8,9 +14,9 @@ namespace comm {
 namespace {
 
 bool createExplosionEffectEvent(const core::comm::Telegramm& telegramm) {
-//    descriptor::comm::effect::Explosion descriptor(telegramm.data());
-//    jeti::particlesystem::Explosion* explosion = jeti::particlesystem::genExplosion(descriptor.size());
-//    client::global::get().view().add(explosion, descriptor.position());
+    descriptor::comm::effect::Explosion descriptor(telegramm.data());
+    jeti::particlesystem::Explosion* explosion = jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size());
+    client::global::get().view().add(explosion, descriptor.position());
     return true;
 }
 

@@ -103,6 +103,8 @@ public:
     Base* mouseInterraction(const glm::vec3&) const;
     void render(control::StarSystem*);
 
+    void add(jeti::particlesystem::Base*, const glm::vec3&);
+
 private:
     jeti::Render& m_render;
     jeti::Camera& m_camera;

@@ -43,7 +43,7 @@
 namespace core {
 namespace comm {
 
-void TelegrammManager::add(comm::Telegramm&& telegramm)
+void TelegrammManager::add(Telegramm& telegramm)
 {
     if (telegramm.delay() < 0) {
         _process(telegramm);
@@ -68,7 +68,7 @@ void TelegrammManager::runLoop()
 void TelegrammManager::update()
 { 
     for ( auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it ) {
-        const comm::Telegramm& telegramm = *it;
+        const Telegramm& telegramm = *it;
         if (telegramm.dispatchTime() < __currentTime()) {
             _process(telegramm);
             m_telegramms.erase(it);

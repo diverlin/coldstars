@@ -36,7 +36,7 @@ class TelegrammManager
 {
 public:
     TelegrammManager() {}
-    void add(Telegramm&&);
+    void add(Telegramm&);
 
     [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]
     void runLoop();

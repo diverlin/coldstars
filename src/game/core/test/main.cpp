@@ -53,7 +53,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/communication/TelegrammManager.hpp>
+#include <core/communication/TelegrammHub.hpp>
 
 #include <core/builder/item/equipment/ALL>
 #ifdef USE_MODULES
@@ -82,29 +82,32 @@ TEST(descriptor, accessors)
 
 TEST(base, hit)
 {
-    core::comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
+    core::comm::TelegrammHub& messageHub = core::global::get().telegrammHub();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
-    messageManager.runLoop();
+    assert(false);
+    //messageHub.runLoop();
 
     EXPECT_FALSE(ship2->model()->isDying());
 }
 
 TEST(base, critical_hit)
 {
-    core::comm::TelegrammManager& messageManager = core::global::get().telegrammManager();
+    core::comm::TelegrammHub& messageHub = core::global::get().telegrammHub();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
-    messageManager.runLoop();
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+
+    assert(false);
+    //messageManager.runLoop();
 
     EXPECT_TRUE(ship2->model()->isDying());
 }

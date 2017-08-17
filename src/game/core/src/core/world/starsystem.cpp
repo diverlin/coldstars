@@ -62,6 +62,7 @@
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
+#include <core/communication/TelegrammHub.hpp>
 #include <core/communication/TelegrammManager.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
@@ -907,7 +908,7 @@ void StarSystem::__rocketCollision_s(bool show_effect)
 
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
-    core::comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
     manager::Entities& entitiesManager = manager::Entities::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
     //comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
@@ -915,7 +916,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     // send message asteroid death
     {
     descriptor::comm::Object object(asteroid->id());
-    telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
     }
 
     // create minerals
@@ -925,14 +926,19 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
         int_t object_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         descriptor::comm::Container creation(object_id, descriptor_id, mass);
-        telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
 
         float strength = meti::getRandFloat(1.0f, 2.0f);
         glm::vec3 impulse(meti::getRandXYVec3(strength));
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
-        telegrammManager.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
     }
+
     // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(meti::getRandInt(1,10), asteroid->position());
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
 }
 
 void StarSystem::__asteroidsCollision_s() const {
