@@ -34,7 +34,6 @@
 
 namespace model {
 class StarSystem;
-
 class Star;
 class Planet;
 class Asteroid;
@@ -66,17 +65,7 @@ class Player;
 
 class Sector;
 
-class DistantNebulaEffect;
-class DistantStarEffect;
-
 class ShockWaveEffect;
-
-namespace jeti {
-class ExplosionEffect;
-class BaseParticleSystem;
-}
-
-class LazerTraceEffect;
 
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
@@ -133,42 +122,27 @@ public:
     model::Npc* freeLeaderByRaceId(race::Type) const;
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
 
+    void explosionEvent(const glm::vec3&, int, float) const;
 
-    //// TRANSITION
+    /** TRANSITION */
+    // add
+public:
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObject* const parent = nullptr);
-
 //    void add(model::Bullet*, const glm::vec3&, const glm::vec3&);
-
-//    void add(model::Star*);
     void add(Star*);
-//    void add(model::Planet*);
     void add(Planet*, SpaceObject* parent = nullptr);
-//    void add(model::Asteroid*, const model::SpaceObject* parent = nullptr, int it = 0);
     void add(Asteroid*, SpaceObject* parent = nullptr, int it = 0);
-//    void add(model::Container*, const glm::vec3& = glm::vec3(0.0f));
-    void add(Container*);
+
     void add(Container*, const glm::vec3&);
-//    void add(model::WormHole*, const glm::vec3&);
-    void add(WormHole*);
     void add(WormHole*, const glm::vec3&);
 
-    void add(Explosion*, const glm::vec3&);
+private:
+    void __add(Container*);
+    void __add(WormHole*);
 
-    // effects
-    void add(jeti::BaseParticleSystem*);
-    void add(ShockWaveEffect*, const glm::vec2&);
-    void add(jeti::ExplosionEffect*, const glm::vec3&, float, float);
-    void add(jeti::ExplosionEffect*, const glm::vec3&);
-    void add(LazerTraceEffect*);
-
-    void add(DistantNebulaEffect*);
-    void add(DistantStarEffect*);
-
-    //void Add(VerticalFlowText*);
-    //
-
+public:
     // remove
     void remove(Star*);
     void remove(Planet*);
@@ -191,13 +165,8 @@ public:
 
     float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
-    //        void DrawBackground(const jeti::Renderer&, const glm::vec2&);
     //        void DrawOrbits(const jeti::Renderer&);
     //        void DrawPath();
-
-//    void Save(boost::property_tree::ptree&) const;
-//    void Load(const boost::property_tree::ptree&);
-//    void Resolve();
 
     // ugly
     ceti::pack<Star*> stars() const { return m_stars; }
@@ -290,10 +259,7 @@ private:
 
     void __processAsteroidDeath_s(Asteroid*) const;
 
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
-
+    void __removeVehicle(int_t);
     void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
 
     void __actualizeModel();

@@ -183,7 +183,7 @@ TEST(starsystem, add_remove_wormhole)
         EXPECT_EQ(place::Type::NONE, wormhole->place());
 
         /* add objects */
-        starsystem->add(wormhole);
+        starsystem->add(wormhole, glm::vec3(0.0f));
         wormhole_ids.add(wormhole->id());
 
         /* post-add check */
@@ -347,7 +347,7 @@ TEST(starsystem, add_remove_container)
         EXPECT_EQ(place::Type::NONE, container->place());
 
         /* add objects */
-        starsystem->add(container);
+        starsystem->add(container, glm::vec3(0.0f));
         container_ids.add(container->id());
 
         /* post-add check */

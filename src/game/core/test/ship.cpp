@@ -115,7 +115,7 @@ TEST(ship, grab_container)
 
     /* add to starsystem */
     starsystem->add(ship);
-    starsystem->add(container);
+    starsystem->add(container, glm::vec3(0.0f));
 
     EXPECT_EQ(1, starsystem->containers().size());
     EXPECT_EQ(place::Type::SPACE, container->place());

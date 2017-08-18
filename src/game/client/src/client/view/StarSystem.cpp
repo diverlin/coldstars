@@ -1232,6 +1232,48 @@ bool StarSystem::__isPointInsideObject(const glm::vec3& p, ceti::control::Orient
     return false;
 }
 
+
+
+//void StarSystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
+//{
+//    //    shockwave->setCenter(center);
+//    //    effect_SHOCKWAVE_vec.push_back(shockwave);
+//}
+
+//void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
+//{
+//    //    float radius_damage = explosion->GetRadius();
+//    //    float damage = 0;
+//    //    Add(explosion, center, damage, radius_damage);
+//}
+
+//void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
+//{
+//    //    explosion->setCenter(center);
+//    //    effect_PARTICLESYSTEM_vec.push_back(explosion);
+
+//    //    float radius_effect = explosion->GetRadius();
+//    //    if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
+//    //    {
+//    //        ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
+//    //        Add(shockwave, meti::vec2(center));
+//    //    }
+
+//    //    if (radius_effect > 25)
+//    //    {
+//    //        DamageEventInsideCircle(center, radius_damage, damage, true);
+//    //    }
+//    //explosion.play()
+//}
+
+//void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
+//void StarSystem::Add(jeti::BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
+//void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
+//void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
+//void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
+
+
+
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
     if (center.x < (screen_wc.x - size.x*scale)) {
