@@ -105,7 +105,7 @@ Sector::randomStarSystem(int condition_id)
 {
     StarSystem* result = nullptr;
     if (condition_id == NONE) {
-        result = meti::rand(m_starsystems);
+        result = meti::rand_element(m_starsystems);
     } else {
         std::vector<StarSystem*> ss_vec;
         for (StarSystem* starsystem: m_starsystems) {
@@ -114,7 +114,7 @@ Sector::randomStarSystem(int condition_id)
             }
         }
         if (ss_vec.size()) {
-            result = meti::rand(ss_vec);
+            result = meti::rand_element(ss_vec);
         }
     }
 
