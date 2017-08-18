@@ -52,7 +52,7 @@ public:
     [[warning("check const")]]
 //    void addVehicle(Vehicle*);
 
-    void updateInSpace(int, bool);
+    void updateInSpace(int);
     void updateInSpaceInStatic();
 
     descriptor::Planet* descriptor() const { return m_descriptor_planet; }

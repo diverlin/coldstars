@@ -99,6 +99,7 @@ public:
 
     void update(int);
 
+    bool collideable() const { return true; }
     void collisionEvent();
 
     void hit(int, SpaceObject* agresor = nullptr) override final;

@@ -77,7 +77,7 @@ void Star::updateInSpaceInStatic()
     }
 }
 
-void Star::updateInSpace(int time, bool show_effect)
+void Star::updateInSpace(int time)
 {
 //    if (m_sparkActive) {
 //        if (show_effect == true) {

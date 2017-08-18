@@ -744,9 +744,10 @@ void StarSystem::update(int time)
         }
 
         // phisics
-        __rocketCollision_s(detalied_simulation);   // pri/2
-        __asteroidsCollision_s(); // pri/2
-        __externalForcesAffection_s(detalied_simulation); // pri/2
+        if (meti::getRandInt(0, 2) == 1) {
+            __bulletsCollisionCheck_s();    // pri/2
+            __asteroidsCollisionCheck_s(); // pri/2
+        }
         //phisics
         
         if (m_containers.size() > m_container_num_max) {
@@ -763,52 +764,9 @@ void StarSystem::update(int time)
     }
 }
 
-void StarSystem::__rocketCollision_s(bool show_effect)
+void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 {
-    bool collide = false;
-    for (unsigned int ri = 0; ri < m_bullets.size(); ri++)
-    {
-        if (m_bullets[ri]->model()->isAlive())
-        {
-            // vehicle
-            if (collide == false)
-            {
-                for (unsigned int vi = 0; vi < m_vehicles.size(); vi++)
-                {
-                    assert(false);
-                    //                    if (m_bullets[ri]->GetOwnerId() != m_vehicles[vi]->id())
-                    //                    {
-                    //                        collide = ceti::checkCollision2D(m_bullets[ri], m_vehicles[vi], show_effect);
-                    //                        if (collide == true) { break; }
-                    //                    }
-                }
-            }
-            else  { continue; }
-            //
 
-
-            if (collide == false)
-            {
-                for (unsigned int ai = 0; ai < m_asteroids.size(); ai++)
-                {
-                    collide = ceti::checkCollision(m_bullets[ri], m_asteroids[ai]);
-                    if (collide == true) { break; }
-                }
-            }
-            else  { continue; }
-
-
-            if (collide == false)
-            {
-                for (unsigned int ci = 0; ci < m_containers.size(); ci++)
-                {
-                    collide = ceti::checkCollision(m_bullets[ri], m_containers[ci]);
-                    if (collide == true) {     break; }
-                }
-            }
-            else  { continue; }
-        }
-    }
 }
 
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
@@ -846,57 +804,96 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     }
 }
 
-void StarSystem::__asteroidsCollision_s() const {
+void StarSystem::__bulletsCollisionCheck_s() const {
+    for(Bullet* bullet: m_bullets) {
+        if (__bulletCollisionCheck_s(bullet)) {
+            __processBulletDeath_s(bullet);
+        }
+    }
+}
+
+void StarSystem::__asteroidsCollisionCheck_s() const {
     for(Asteroid* asteroid: m_asteroids) {
-        if (__asteroidCollision_s(asteroid)) {
+        if (__asteroidCollisionCheck_s(asteroid)) {
             __processAsteroidDeath_s(asteroid);
         }
     }
 }
 
+bool StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
+{
+    if (!bullet->isAlive() || !bullet->collideable()) {
+        return false;
+    }
 
-bool StarSystem::__asteroidCollision_s(Asteroid* asteroid) const
+    for (auto v: m_vehicles) {
+        if (ceti::checkCollision(bullet, v)) {
+            return true;
+        }
+    }
+    for (auto a: m_asteroids) {
+        if (ceti::checkCollision(bullet, a)) {
+            return true;
+        }
+    }
+    for (auto c: m_containers) {
+        if (ceti::checkCollision(bullet, c)) {
+            return true;
+        }
+    }
+    for (auto b: m_bullets) {
+        if (b->collideable() && b->id() != bullet->id()) {
+            if (ceti::checkCollision(bullet, b)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
 {
     if (!asteroid->isAlive()) {
         return false;
     }
 
-    for (auto vehicle: m_vehicles) {
-        if (ceti::checkCollision(asteroid, vehicle)) {
+    for (auto v: m_vehicles) {
+        if (ceti::checkCollision(asteroid, v)) {
             return true;
         }
     }
-    for (auto planet: m_planets) {
-        if (ceti::checkCollision(asteroid, planet)) {
+    for (auto p: m_planets) {
+        if (ceti::checkCollision(asteroid, p)) {
             return true;
         }
     }
-    for (auto star: m_stars) {
-        if (ceti::checkCollision(asteroid, star)) {
+    for (auto s: m_stars) {
+        if (ceti::checkCollision(asteroid, s)) {
             return true;
+        }
+    }
+    for (auto a: m_asteroids) {
+        if (a->id() != asteroid->id()) {
+            if (ceti::checkCollision(asteroid, a)) {
+                return true;
+            }
+        }
+    }
+    for (auto b: m_bullets) {
+        if (b->collideable()) {
+            if (ceti::checkCollision(asteroid, b)) {
+                return true;
+            }
         }
     }
     return false;
 }
 
-void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
-{
-    //for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-    //{
-
-    //}
-    
-    //for (unsigned int si = 0; si < STAR_vec.size(); si++)
-    //{
-
-    //}
-
-}
-
 void StarSystem::__updateEntities_s(int time)
 {
-    for (Star* star: m_stars) { star->updateInSpace(time, show_effect);  }
-    for (Planet* planet: m_planets) { planet->updateInSpace(time, show_effect); }
+    for (Star* star: m_stars) { star->updateInSpace(time);  }
+    for (Planet* planet: m_planets) { planet->updateInSpace(time); }
     for (WormHole* wormhole: m_wormholes) { wormhole->updateInSpace(time); }
     for (Container* container: m_containers) { container->updateInSpace(time); }
     for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time); }

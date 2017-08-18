@@ -223,11 +223,12 @@ private:
     void __manageUnavaliableObjects_s();
     void __manageDeadObjects();
 
-    void __rocketCollision_s(bool);
-    void __asteroidsCollision_s() const;
-    bool __asteroidCollision_s(Asteroid*) const;
-    void __externalForcesAffection_s(bool);
+    void __bulletsCollisionCheck_s() const;
+    void __asteroidsCollisionCheck_s() const;
+    bool __bulletCollisionCheck_s(Bullet*) const;
+    bool __asteroidCollisionCheck_s(Asteroid*) const;
 
+    void __processBulletDeath_s(Bullet*) const;
     void __processAsteroidDeath_s(Asteroid*) const;
 
     void __removeVehicle(int_t);
