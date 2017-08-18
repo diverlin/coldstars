@@ -95,7 +95,7 @@ void createBombEvent(const comm::Telegramm& telegramm) {
 }
 
 void createMineralEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::Container data(telegramm.data());
+    descriptor::comm::CreateMineral data(telegramm.data());
     builder::Container::gen(data.descriptor(), data.object(), data.mass());
 }
 void createContainerEvent(const comm::Telegramm& telegramm) {

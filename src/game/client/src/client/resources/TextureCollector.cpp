@@ -81,7 +81,7 @@ jeti::control::Material* TextureCollector::getTextureByTypeId(texture::Type type
 {
     jeti::control::Material* requested = nullptr;
     if (hasTypeId(type_id)) {
-        requested = meti::getRand(m_typesTextures[type_id]).second;
+        requested = meti::rand(m_typesTextures[type_id]).second;
     }
 
     _validate(requested);
@@ -133,7 +133,7 @@ jeti::control::Material* TextureCollector::getTextureByDescriptor(const TextureD
     }
 
     if (!ids.empty()) {
-        int id = meti::getRand(ids);
+        int id = meti::rand(ids);
         requested = get(id);
     }
 

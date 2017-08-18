@@ -58,13 +58,13 @@ float getRandFloat(float low, float high)
 int getRandInt(int low, int high)
 {
     assert(low<=high);
-    return (low != high) ? low + rand()%(high+1-low) : low;
+    return (low != high) ? low + std::rand()%(high+1-low) : low;
 }
 
 int getRandInt(int arg)
 {
     //assert(arg != 0);
-    return rand()%(arg+1);
+    return std::rand()%(arg+1);
 }
 
 int getRandSign()
