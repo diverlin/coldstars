@@ -24,31 +24,35 @@
 #include <glm/glm.hpp>
 
 namespace meti {
+namespace rand {
 
-float rand_add_percent(float, float);
+float add_percent(float, float);
 
-bool rand_probability(int);
+bool get_probability(int);
 
-float rand_float(float);
-float rand_float(float, float);
-int rand_int(int);
-int rand_int(int, int);
-int rand_sing();
-bool rand_bool();
+float get_float(float);
+float get_float(float, float);
+int get_int(int);
+int get_int(int, int);
+int get_sing();
+bool get_bool();
 
-glm::vec2 rand_vec2f(int radius_min, int radius_max);
-glm::vec3 rand_xy_vec3f(int radius_min, int radius_max, float z=0);
-glm::vec3 rand_xy_vec3(float);
-glm::vec3 rand_xy_vec3_unit();
-void rand_xy_vec3_unit(glm::vec3&);
+float get_angle();
+
+glm::vec2 get_vec2(int radius_min, int radius_max);
+glm::vec3 get_vec3xy(int radius_min, int radius_max);
+glm::vec3 get_vec3xy(float);
+glm::vec3 get_vec3xy_unit();
+void get_vec3xy_unit(glm::vec3&);
 
 template<typename T>
-const T& rand_element(const std::vector<T>& v)
+const T& get_element(const std::vector<T>& v)
 {
     if (v.empty()) {
         throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
     }
-    return v[rand_int(v.size()-1)];
+    return v[get_int(v.size()-1)];
 }
 
+} // namespace rand
 } // namespace meti

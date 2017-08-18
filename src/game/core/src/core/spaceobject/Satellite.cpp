@@ -50,7 +50,7 @@ void Satellite::BindParent(const SpaceObject* const parent)
 {
     assert(false);
     //setParent(parent);
-    m_Orbit.calcPath(2*1.1*parent->collisionRadius(), 1.0, meti::rand_bool());
+    m_Orbit.calcPath(2*1.1*parent->collisionRadius(), 1.0, meti::rand::get_bool());
 }
 
 void Satellite::update(int time)

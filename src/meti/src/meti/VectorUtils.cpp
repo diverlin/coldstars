@@ -91,12 +91,6 @@ float distance(float x1, float y1, float x2, float y2)
     return sqrt(xl*xl + yl*yl);
 }
 
-float getRandAngle()
-{
-    float angle = rand_int(360);
-    return 2*M_PI/angle;
-}
-
 glm::vec2 genVec2f(float length, float angle)
 {
     angle = glm::radians(angle);

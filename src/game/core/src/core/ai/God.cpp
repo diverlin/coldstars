@@ -156,8 +156,8 @@ void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descript
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
         assert(starsystem);
-        race::Type race_id = (race::Type)meti::rand_int((int)race::Type::R6, (int)race::Type::R7);
-        int ship_num = meti::rand_int(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        race::Type race_id = (race::Type)meti::rand::get_int((int)race::Type::R6, (int)race::Type::R7);
+        int ship_num = meti::rand::get_int(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         __createShips(starsystem, ship_num, race_id);
     }
 }
@@ -258,7 +258,7 @@ void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescript
 void God::__createSpaceStations(control::StarSystem* starsystem, int spacestation_per_system) const
 {       
     for (int i=0; i<spacestation_per_system; i++) {
-        race::Type npc_race_id = meti::rand_element(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+        race::Type npc_race_id = meti::rand::get_element(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
         entity::Type npc_group    = entity::Type::WARRIOR;
         entity::Type npc_subgroup = entity::Type::WARRIOR;
 
@@ -273,7 +273,7 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
         control::Npc* npc = builder::Npc::gen();
         spacestation->bindNpc(npc);
 
-        glm::vec2 center = meti::rand_vec2f(700, 1500);
+        glm::vec2 center = meti::rand::get_vec2(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
         //glm::vec3 angle(0,0,meti::getRandInt(360));
 
@@ -325,7 +325,7 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
         control::Npc* new_npc = builder::Npc::gen();
         new_ship->bindNpc(new_npc);
 
-        glm::vec3 center = meti::rand_xy_vec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 center = meti::rand::get_vec3xy(300, 1200);
         //        glm::vec3 angle(0, 0, meti::getRandInt(360));
         starsystem->add(new_ship, center);
     }

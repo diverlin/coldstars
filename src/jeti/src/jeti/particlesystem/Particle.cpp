@@ -38,7 +38,7 @@ Particle::~Particle()
 
 void Particle::randomizeDirection()
 {
-    meti::rand_xy_vec3_unit(m_direction);
+    meti::rand::get_vec3xy_unit(m_direction);
 }
 
 void Particle::restart(const glm::vec3& direction)

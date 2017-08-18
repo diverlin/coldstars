@@ -42,14 +42,14 @@ getRandNpcSubTypeId(race::Type race_id, const std::vector<entity::Type>& subtype
         }
     }
     
-    return meti::rand_element(allowed_subtypes);
+    return meti::rand::get_element(allowed_subtypes);
 }
 
 entity::Type
 getRandNpcSubTypeId(race::Type race_id)
 {
     assert(!core::global::get().raceDescriptors().getSubTypes(race_id).empty());
-    return meti::rand_element(core::global::get().raceDescriptors().getSubTypes(race_id));
+    return meti::rand::get_element(core::global::get().raceDescriptors().getSubTypes(race_id));
 }
 
 entity::Type
