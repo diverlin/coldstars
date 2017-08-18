@@ -48,7 +48,7 @@ CreateBullet::data() const
 
 namespace effect {
 
-Explosion::Explosion(int size, const glm::vec3& position)
+Explosion::Explosion(float size, const glm::vec3& position)
     :
       m_size(size)
     , m_position(position)

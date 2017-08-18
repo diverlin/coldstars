@@ -751,11 +751,6 @@ void StarSystem::update(int time)
     }
 }
 
-void StarSystem::__processBulletDeath_s(Bullet* bullet) const
-{
-
-}
-
 void StarSystem::__bulletsManager_DEBUG(int num) const
 {
     if (m_bullets.size() >= num) {
@@ -800,7 +795,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     // send message asteroid death
     {
     descriptor::comm::Object object(asteroid->id());
-    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, object.data()));
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_ASTEROID, object.data()));
     }
 
     // create minerals
@@ -823,7 +818,45 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 
     // send telegram to create explosion
     {
-        descriptor::comm::effect::Explosion telegramm_descriptor(meti::rand::gen_int(1,10), asteroid->position());
+        descriptor::comm::effect::Explosion telegramm_descriptor(asteroid->collisionRadius(), asteroid->position());
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
+void StarSystem::__processBulletDeath_s(Bullet* bullet) const
+{
+    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
+    manager::Entity& entitiesManager = manager::Entity::get();
+    descriptor::Manager& descriptorManager = descriptor::Manager::get();
+
+    // send message bullet death
+    {
+    descriptor::comm::Object object(bullet->id());
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_BULLET, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(2*bullet->collisionRadius(), bullet->position());
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
+void StarSystem::__processContainerDeath_s(Container* container) const
+{
+    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
+    manager::Entity& entitiesManager = manager::Entity::get();
+    descriptor::Manager& descriptorManager = descriptor::Manager::get();
+
+    // send message container death
+    {
+    descriptor::comm::Object object(container->id());
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_CONTAINER, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(2*container->collisionRadius(), container->position());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
     }
 }
@@ -851,23 +884,29 @@ bool StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
     }
 
     for (auto v: m_vehicles) {
-        if (ceti::checkCollision(bullet, v)) {
-            return true;
+        if (bullet->ownerId() != v->id()) {
+            if (ceti::checkCollision(bullet, v)) {
+                 // hit vehicle
+                return true;
+            }
         }
     }
     for (auto a: m_asteroids) {
         if (ceti::checkCollision(bullet, a)) {
+            __processAsteroidDeath_s(a);
             return true;
         }
     }
     for (auto c: m_containers) {
         if (ceti::checkCollision(bullet, c)) {
+            __processContainerDeath_s(c);
             return true;
         }
     }
     for (auto b: m_bullets) {
-        if (b->collideable() && b->id() != bullet->id()) {
+        if (b->collideable() && (b->ownerId() != bullet->ownerId())) {
             if (ceti::checkCollision(bullet, b)) {
+                __processBulletDeath_s(b);
                 return true;
             }
         }

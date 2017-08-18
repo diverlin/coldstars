@@ -114,6 +114,7 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
     descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
     assert(bullet_descriptor);
     control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor);
+    bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);
     vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());
 }
@@ -208,13 +209,27 @@ void explosionEvent(const comm::Telegramm& telegramm) {
     //        starsystem->add(explosion, descriptor.center);
 }
 
-// REMOVE
-void removeAsteroidEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::Object remove(telegramm.data());
-    control::Asteroid* asteroid = manager::Entity::get().asteroid(remove.object());
+// KILL
+void killAsteroidEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Object descriptor(telegramm.data());
+    control::Asteroid* asteroid = manager::Entity::get().asteroid(descriptor.object());
     asteroid->die();
     asteroid->starsystem()->remove(asteroid);
     manager::Garbage::get().add(asteroid);
+}
+void killBulletEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Object descriptor(telegramm.data());
+    control::Bullet* bullet = manager::Entity::get().bullet(descriptor.object());
+    bullet->die();
+    bullet->starsystem()->remove(bullet);
+    manager::Garbage::get().add(bullet);
+}
+void killContainerEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Object descriptor(telegramm.data());
+    control::Container* container = manager::Entity::get().container(descriptor.object());
+    container->die();
+    container->starsystem()->remove(container);
+    manager::Garbage::get().add(container);
 }
 
 } // namespace
@@ -358,8 +373,10 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::HIT: hitEvent(telegramm); return true;
     case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); return true;
 
-    /* REMOVE */
-    case comm::Telegramm::Type::REMOVE_ASTEROID: removeAsteroidEvent(telegramm); return true;
+    /* KILL */
+    case comm::Telegramm::Type::KILL_ASTEROID: killAsteroidEvent(telegramm); return true;
+    case comm::Telegramm::Type::KILL_BULLET: killBulletEvent(telegramm); return true;
+    case comm::Telegramm::Type::KILL_CONTAINER: killContainerEvent(telegramm); return true;
     }
 
     return false;

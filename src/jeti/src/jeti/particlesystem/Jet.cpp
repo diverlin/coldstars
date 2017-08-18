@@ -45,6 +45,12 @@ void Jet::update()
 
 Jet* genJet(control::Material* material, float size)
 {
+    //assert(size>0.01f);
+    //if (size < 0.01) {
+        //size = 10.0f;
+    //}
+    const float SIZE_RATIO = 1.5f;
+
     ParticleSystemConfig config;
 
     config.particles_num = 10;
@@ -58,7 +64,7 @@ Jet* genJet(control::Material* material, float size)
     config.rand_size_delta = 0.1f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 30.0f + 2*size;
+    particle.size_start = SIZE_RATIO * size; //30.0f + 2*size;
     particle.size_end   = 5.5f;
     particle.size_delta = 2.0f;
     
@@ -78,7 +84,6 @@ Jet* genJet(control::Material* material, float size)
     particle.color_delta.b = 0.0f;
     particle.color_delta.a = 0.05f;
         
-    //control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
     Jet* ps = new Jet(config);
     ps->setMaterial(material);
 

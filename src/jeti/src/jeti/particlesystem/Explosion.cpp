@@ -47,10 +47,13 @@ void Explosion::update()
 
 Explosion* genExplosion(control::Material* material, float size)
 {
+    const float SIZE_RATIO = 1.2f;
+    const float NUM_RATIO = 0.5f;
+
     ParticleSystemConfig config;
 
-    config.particles_num = 50;
-    config.creation_delay_msec =10;
+    config.particles_num = int(NUM_RATIO*size);
+    config.creation_delay_msec = 10;
 
     config.use_rand_dir = true;
     config.use_rand_color_delta = true;
@@ -60,7 +63,7 @@ Explosion* genExplosion(control::Material* material, float size)
     config.rand_size_delta = 0.9f;
 
     ParticleConfig& particle = config.particle;
-    particle.size_start = 65.0f + 2*size;
+    particle.size_start = SIZE_RATIO*size;
     particle.size_end   = 5.5f;
     particle.size_delta = 0.5f;
 

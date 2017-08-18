@@ -161,12 +161,12 @@ namespace effect {
 class Explosion
 {
 public:
-    Explosion(int, const glm::vec3&);
+    Explosion(float, const glm::vec3&);
     Explosion(const std::string& data);
     ~Explosion() = default;
     std::string data() const;
 
-    int size() const { return m_size; }
+    float size() const { return m_size; }
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
@@ -177,7 +177,7 @@ public:
     }
 
 private:
-    int m_size = 0;
+    float m_size = 0.0f;
     meti::vec3 m_position;
 
 private:
