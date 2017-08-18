@@ -69,7 +69,7 @@ void Star::initiateSpark()
 void Star::updateInSpaceInStatic()
 {
     if (model()->turnSinceLastSparkCounter() > model()->turnSparkThreshold()) {
-        if (meti::getRandInt(1, 2) == 1) {
+        if (meti::rand_int(1, 2) == 1) {
             initiateSpark();
         }
     } else {

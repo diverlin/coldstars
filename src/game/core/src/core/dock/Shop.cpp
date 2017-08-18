@@ -42,12 +42,12 @@ Shop::Shop(descriptor::Shop* descr, model::Shop* model)
     , m_descriptor_shop(descr)
     , m_model_shop(model)
 {
-    m_mineralsAmount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
-    m_foodAmount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
-    m_medicineAmount  = meti::getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
-    m_militaryAmount  = meti::getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
-    m_drugAmount      = meti::getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
-    m_exclusiveAmount = meti::getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
+    m_mineralsAmount  = meti::rand_int(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
+    m_foodAmount      = meti::rand_int(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
+    m_medicineAmount  = meti::rand_int(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
+    m_militaryAmount  = meti::rand_int(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
+    m_drugAmount      = meti::rand_int(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
+    m_exclusiveAmount = meti::rand_int(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
     
     __updateAllPrices();
 }

@@ -156,8 +156,8 @@ void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descript
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE);
         assert(starsystem);
-        race::Type race_id = (race::Type)meti::getRandInt((int)race::Type::R6, (int)race::Type::R7);
-        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        race::Type race_id = (race::Type)meti::rand_int((int)race::Type::R6, (int)race::Type::R7);
+        int ship_num = meti::rand_int(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         __createShips(starsystem, ship_num, race_id);
     }
 }

@@ -739,7 +739,7 @@ void StarSystem::update(int time)
         //phisics
         
         if (m_containers.size() > m_container_num_max) {
-            unsigned int index = meti::getRandInt(m_container_num_max-1);
+            unsigned int index = meti::rand_int(m_container_num_max-1);
             m_containers[index]->hit(100);
         }
     } else {
@@ -781,16 +781,16 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     }
 
     // create minerals
-    int containers_num = meti::getRandInt(1,3);
+    int containers_num = meti::rand_int(1,3);
     for (int i=0; i<containers_num; ++i) {
-        int mass = meti::getRandInt(3, 100);
+        int mass = meti::rand_int(3, 100);
         int_t object_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         {
         descriptor::comm::CreateMineral telegramm_descriptor(object_id, descriptor_id, mass);
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
         }
-        float strength = meti::getRandFloat(1.0f, 2.0f);
+        float strength = meti::rand_float(1.0f, 2.0f);
         glm::vec3 impulse(meti::getRandXYVec3(strength));
         {
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
@@ -800,7 +800,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 
     // send telegram to create explosion
     {
-        descriptor::comm::effect::Explosion telegramm_descriptor(meti::getRandInt(1,10), asteroid->position());
+        descriptor::comm::effect::Explosion telegramm_descriptor(meti::rand_int(1,10), asteroid->position());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
     }
 }
@@ -922,7 +922,7 @@ void StarSystem::__shipManager_s(unsigned int num)
     while (m_vehicles.size() < num)
     {
         race::Type prace_id = race::Type::R0;
-        if (meti::getRandBool()) {
+        if (meti::rand_bool()) {
             prace_id = race::Type::R6;
         }
         

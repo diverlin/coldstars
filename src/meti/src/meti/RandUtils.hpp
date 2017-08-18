@@ -30,12 +30,12 @@ float addRandPercent(float, float);
 
 bool getProbability(int);
 
-float getRandFloat(float);
-float getRandFloat(float, float);
-int getRandInt(int);
-int getRandInt(int, int);
-int getRandSign();
-bool getRandBool();
+float rand_float(float);
+float rand_float(float, float);
+int rand_int(int);
+int rand_int(int, int);
+int rand_sing();
+bool rand_bool();
 
 glm::vec2 getRandVec2f(int radius_min, int radius_max);
 glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
@@ -43,15 +43,13 @@ glm::vec3 getRandXYVec3(float);
 glm::vec3 getRandXYVec3Unit();
 glm::vec3 getXYVec3(float radius, float angle);
 
-bool isActionShouldHappen(int);
-
 template<typename T>
 const T& rand_element(const std::vector<T>& v)
 {
     if (v.empty()) {
         throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
     }
-    return v[getRandInt(v.size()-1)];
+    return v[rand_int(v.size()-1)];
 }
 
 } // namespace meti
