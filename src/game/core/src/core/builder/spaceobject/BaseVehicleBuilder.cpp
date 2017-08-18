@@ -72,6 +72,7 @@ BaseVehicle::equip(control::Vehicle* vehicle)
     vehicle->manage(builder::item::Radar::gen());
     vehicle->manage(builder::item::Grapple::gen());
     vehicle->manage(builder::item::Lazer::gen());
+    vehicle->manage(builder::item::Rocket::gen());
     vehicle->load(builder::item::Rocket::gen());
 }
 

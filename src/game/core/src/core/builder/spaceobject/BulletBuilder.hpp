@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <core/common/BulletData.hpp>
-
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
@@ -38,14 +36,15 @@ namespace builder {
 class Bullet
 {
 public:
-    static control::Bullet* gen(const BulletData& = BulletData());
+    static control::Bullet* gen();
+    static control::Bullet* gen(descriptor::Bullet*);
 
 private:
     Bullet() = delete;
     ~Bullet() = delete;
 
-    static void createInternals(control::Bullet*, const BulletData&);
-    static control::Bullet* __genTemplate(descriptor::Bullet* descr);
+    static void createInternals(control::Bullet*, descriptor::Bullet*);
+    static control::Bullet* __genTemplate(descriptor::Bullet*);
 }; 
 
 } // namespace builder

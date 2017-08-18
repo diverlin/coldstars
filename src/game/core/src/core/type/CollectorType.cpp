@@ -36,6 +36,8 @@ Collector::Collector() {
     __registerType(int_t(texture::Type::DISTANTSTAR), "texture::distantstar");
     __registerType(int_t(texture::Type::LAZER_EFFECT), "texture::lazerjet");
     __registerType(int_t(texture::Type::NEBULA_BACKGROUND), "texture::nebula_background");
+    __registerType(int_t(texture::Type::ROCKET_BULLET), "texture::rocket_bullet");
+    __registerType(int_t(texture::Type::TORPEDO_BULLET), "texture::torpedo_bullet");
     __registerType(int_t(mesh::Type::SPHERE), "mesh::sphere");
     __registerType(int_t(mesh::Type::SPHERE_DEFORMED), "mesh::sphere_deformed");
     __registerType(int_t(mesh::Type::PLANE), "mesh::plane");

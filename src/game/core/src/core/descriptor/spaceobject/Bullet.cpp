@@ -16,36 +16,29 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Bullet.hpp"
 
-#pragma once
+#include <ceti/serialization/macro.hpp>
 
-#include <string>
 
-#include <meti/VectorUtils.hpp>
+namespace descriptor {
 
-namespace ceti {
-       
-template <typename T>
-inline T getMin(T val1, T val2, T val3)
+Bullet::Bullet()
 {
-    return std::min(std::min(val1, val2), val3);
+    setType(descriptor::Type::BULLET);
+    setObType(entity::Type::BULLET);
 }
 
-template <typename T>
-int getIndexWithMinVal(const T* array, unsigned int size)
+Bullet::Bullet(const std::string& data)
 {
-    int index_min = 0;
-    T val_min = array[index_min];
-    for (unsigned int i=1; i<size; i++)
-    {
-        if (array[i]<val_min)
-        {
-            val_min = array[i];
-            index_min = i;
-        }
-    }
-    
-    return index_min;
+    MACRO_READ_SERIALIZED_DATA
 }
 
-} // namespace ceti
+std::string
+Bullet::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace descriptor
+

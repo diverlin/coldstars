@@ -51,6 +51,7 @@ enum class Type: int
     MODULE,
     
     ROCKET_BULLET,
+    TORPEDO_BULLET,
 
     LAST
 };

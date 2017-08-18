@@ -19,26 +19,41 @@
 #include "BulletBuilder.hpp"
 
 #include <core/builder/CommonBuilderHeaders.hpp>
+#include <core/descriptor/spaceobject/Bullet.hpp>
+#include <core/model/spaceobject/Bullet.hpp>
 #include <core/spaceobject/Bullet.hpp>
+
+#include <core/manager/DescriptorManager.hpp>
+#include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
 
 control::Bullet*
-Bullet::gen(const BulletData& data_bullet)
+Bullet::gen()
 {
-    assert(false);
-    control::Bullet* rocket_bullet = __genTemplate(nullptr);
-    createInternals(rocket_bullet, data_bullet);
+    descriptor::Bullet* descr = nullptr;
+    if (!descriptor::Manager::get().hasType(descriptor::Type::CONTAINER)) {
+        descr = descriptor::genBullet();
+    } else {
+        descr = descriptor::Manager::get().randBullet();
+    }
+    assert(descr);
+    return gen(descr);
+}
 
-    return rocket_bullet;
+control::Bullet*
+Bullet::gen(descriptor::Bullet* descriptor)
+{
+    control::Bullet* bullet = __genTemplate(descriptor);
+    createInternals(bullet, descriptor);
+
+    return bullet;
 }
 
 control::Bullet*
 Bullet::__genTemplate(descriptor::Bullet* descr)
 {
     model::Bullet* model = new model::Bullet();
-    assert(false);
-    //model::Bullet* model = new model::Bullet(descr->id());
     assert(model);
 
     control::Bullet* bullet = new control::Bullet(descr, model);
@@ -50,19 +65,11 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
 }
 
 void
-Bullet::createInternals(control::Bullet* rocket_bullet, const BulletData& data_bullet)
+Bullet::createInternals(control::Bullet* bullet, descriptor::Bullet* descriptor)
 {
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-
     LifeData data_life;
-    data_life.armor = data_bullet.armor();
-
-    rocket_bullet->model()->setLifeData(data_life);
-    //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET);
-    //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->size());
-
-    assert(false);
-    //rocket_bullet->CreateDriveComplexTextureDependedStuff();
+    data_life.armor = descriptor->armor();
+    bullet->model()->setLifeData(data_life);
 }
 
 } // namespace builder

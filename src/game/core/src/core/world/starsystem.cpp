@@ -584,7 +584,7 @@ void StarSystem::__updateStates()
         if (m_wormholes.size() < 5) {
             glm::vec2 center = meti::rand::gen_vec2(200, 1200);
             
-            glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+            glm::vec3 center3(center.x, center.y, 0.0f);
             add(core::global::get().blackHoleBuilder().gen(), center3);
         }
     }
@@ -719,6 +719,7 @@ void StarSystem::update(int time)
     __manageDeadObjects();         // no need to update so frequently, pri /6
 
     if (time > 0) {
+        __bulletsManager_DEBUG(100);
         telegrammManager.update();
 
         if (m_unique_update_inDymanic_done == false) {
@@ -755,11 +756,18 @@ void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 
 }
 
-void StarSystem::__bulletsManager_DEBUG() const
+void StarSystem::__bulletsManager_DEBUG(int num) const
 {
+    if (m_bullets.size() >= num) {
+        return;
+    }
+
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
 
     Vehicle* vehicle = meti::rand::get_element(vehicles());
+    if (asteroids().empty()) { // ugly workaround
+        return;
+    }
     SpaceObject* target = meti::rand::get_element(asteroids());
     if (!vehicle || !target) {
         return;
@@ -769,6 +777,9 @@ void StarSystem::__bulletsManager_DEBUG() const
     int_t target_id = target->id();
 
     std::vector<item::Weapon*> rockets = vehicle->weapons().rockets();
+    if (rockets.empty()) { //ugly workaround
+        return;
+    }
     item::Weapon* rocket = meti::rand::get_element(rockets);
     if (!rocket) {
         return;

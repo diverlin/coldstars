@@ -52,6 +52,7 @@ class Planet;
 class WormHole;
 class Asteroid;
 class Container;
+class Bullet;
 class Npc;
 class Ship;
 class SpaceStation;
@@ -108,6 +109,7 @@ public:
     WormHole* randWormHole() const;
     Asteroid* randAsteroid() const;
     Container* randContainer() const;
+    Bullet* randBullet() const;
     Npc* randNpc() const;
     Ship* randShip() const;
     Satellite* randSatellite() const;
@@ -143,6 +145,7 @@ public:
     WormHole* wormHole(int_t) const;
     Asteroid* asteroid(int_t) const;
     Container* container(int_t) const;
+    Bullet* bullet(int_t) const;
     Npc* npc(int_t) const;
     Ship* ship(int_t) const;
     Satellite* satellite(int_t) const;

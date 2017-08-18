@@ -45,6 +45,7 @@ enum class Type {
     SPACESTATION,
     SATELLITE,
     CONTAINER,
+    BULLET,
 
     // equipment
     LAZER_EQUIPMENT,

@@ -95,7 +95,7 @@ protected:
 //    const LifeData& _dataLife() const { return model()->dataLife; }
 
     const glm::vec3& _externalForce() const { return m_impulse; }
-    [[deprecated("!!! remove")]]
+    [[deprecated("!!! not sure, probably needed for the containrs and bullets")]]
     glm::vec3& _externalForce() { return m_impulse; }
 
     void _checkDeath(bool show_effect = false);

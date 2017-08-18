@@ -18,42 +18,11 @@
 
 #include "Bullet.hpp"
 
+#include <core/descriptor/spaceobject/Bullet.hpp>
+#include <core/model/spaceobject/Bullet.hpp>
 #include <common/common.hpp>
-#include <common/constants.hpp>
 
-#include <common/Global.hpp>
-#include <core/manager/EntityManager.hpp>
-#include <world/starsystem.hpp>
-
-//#include <jeti/particlesystem/DriveEffect.hpp>
-//#include <jeti/particlesystem/ExplosionEffect.hpp>
-
-//#include <client/text/VerticalFlowText.hpp>
-
-//#include <ceti/StringUtils.hpp>
-#include <ceti/Logger.hpp>
-#include <ceti/serialization/macro.hpp>
-
-namespace model {
-
-Bullet::Bullet()
-{
-//    setType(entity::Type::BULLET);
-//    setSubType(entity::Type::Bullet);
-}
-
-Bullet::Bullet(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Bullet::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace model
+#include <core/world/starsystem.hpp>
 
 namespace control {
 
@@ -63,34 +32,32 @@ Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)
 {
-    m_model_rocket->setSpeed(m_model_rocket->bulletData().speedMin());
+    m_model_rocket->setSpeed(descr->speedMin());
 }
 
 Bullet::~Bullet()
 {
 }
 
+int Bullet::damage() const { return descriptor()->damage(); }
+
 void Bullet::update(int time)
 {
     _checkDeath();
         
     if (time > 0) {           
-        if (model()->speed() < model()->bulletData().speedMax()) {
-            model()->increaseSpeed(model()->bulletData().deltaSpeed());
+        if (model()->speed() < descriptor()->speedMax()) {
+            model()->increaseSpeed(descriptor()->deltaSpeed());
         } 
                 
         if (m_target) {
-            float angle; 
-            get_dPos_ToPoint(position(), m_target->position(), model()->speed()/100.0, _externalForce(), angle);
-        
-            if (__checkTarget()) {
-                //SetAngleZ(angle);
-            } else {
+            setDirection(glm::normalize(m_target->position()-position()));
+            if (!__checkTarget()) {
                 m_target = nullptr;
             }
-        }      
+        }
 
-        setPosition(position() + _externalForce());    
+        setPosition(position()+model()->speed()*direction()/* + _externalForce()*/);
 
         model()->decreaseLiveTime(1);
     }
@@ -99,12 +66,11 @@ void Bullet::update(int time)
 bool Bullet::__checkTarget() const
 {
     if (m_target->isAlive()) {
-        assert(false);
-//        if (m_target->place() == type::place::KOSMOS) {
-//            if (m_target->starsystem()->id() == starsystem()->id()) {
-//                return true;
-//            }
-//        }
+        if (m_target->place() == place::Type::SPACE) {
+            if (m_target->starsystem()->id() == starsystem()->id()) {
+                return true;
+            }
+        }
     }
     
     return false;

@@ -22,11 +22,11 @@
 #include <core/spaceobject/Container.hpp>
 
 #include <descriptor/Base.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 #include <core/model/spaceobject/Container.hpp>
 #include <core/spaceobject/Container.hpp>
 
+#include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 #include <core/slot/ItemSlot.hpp>

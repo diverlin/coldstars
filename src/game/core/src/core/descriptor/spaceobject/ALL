@@ -7,3 +7,5 @@
 #include "Ship.hpp"
 #include "SpaceStation.hpp"
 
+#include "Container.hpp"
+#include "Bullet.hpp"
