@@ -42,12 +42,12 @@ Shop::Shop(descriptor::Shop* descr, model::Shop* model)
     , m_descriptor_shop(descr)
     , m_model_shop(model)
 {
-    m_mineralsAmount  = meti::rand::get_int(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
-    m_foodAmount      = meti::rand::get_int(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
-    m_medicineAmount  = meti::rand::get_int(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
-    m_militaryAmount  = meti::rand::get_int(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
-    m_drugAmount      = meti::rand::get_int(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
-    m_exclusiveAmount = meti::rand::get_int(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
+    m_mineralsAmount  = meti::rand::gen_int(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
+    m_foodAmount      = meti::rand::gen_int(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
+    m_medicineAmount  = meti::rand::gen_int(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
+    m_militaryAmount  = meti::rand::gen_int(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
+    m_drugAmount      = meti::rand::gen_int(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
+    m_exclusiveAmount = meti::rand::gen_int(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
     
     __updateAllPrices();
 }

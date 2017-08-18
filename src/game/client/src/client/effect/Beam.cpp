@@ -34,9 +34,9 @@ Beam::Beam(jeti::control::Material* material)
       m_material(material)
 {
     //m_color = glm::vec4(1.0f, 0.8f, 0.6f, 0.4f);
-    float r = meti::rand::get_float(0.6f, 1.0f);
-    float g = meti::rand::get_float(0.6f, 1.0f);
-    float b = meti::rand::get_float(0.6f, 1.0f);
+    float r = meti::rand::gen_float(0.6f, 1.0f);
+    float g = meti::rand::gen_float(0.6f, 1.0f);
+    float b = meti::rand::gen_float(0.6f, 1.0f);
     m_color = glm::vec4(r, g, b, 0.4f);
 
 //    r = meti::getRandFloat(0.6f, 1.0f);

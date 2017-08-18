@@ -73,7 +73,7 @@ WormHole::__createInternals(control::WormHole* wormhole)
     LifeData data_life;
     data_life.garbage_ready = false;
     data_life.armor = 100000;
-    data_life.life_time = meti::rand::get_int(250, 500);
+    data_life.life_time = meti::rand::gen_int(250, 500);
     data_life.dying_time = 2;
 
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE);

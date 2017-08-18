@@ -50,7 +50,7 @@ namespace descriptor {
 namespace {
 
 glm::vec3 randPlanetoidDirection() {
-    return glm::normalize(glm::vec3(meti::rand::get_float(0.1, 0.3), 1.0, -1.0));
+    return glm::normalize(glm::vec3(meti::rand::gen_float(0.1, 0.3), 1.0, -1.0));
 }
 
 } // namespace
@@ -59,7 +59,7 @@ glm::vec3 randPlanetoidDirection() {
 descriptor::Galaxy*
 genGalaxy(const std::vector<int_t>& sectors) {
     descriptor::Galaxy* descr = new descriptor::Galaxy;
-    int num = meti::rand::get_int(1,3);
+    int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::rand::get_element(sectors));
     }
@@ -70,7 +70,7 @@ genGalaxy(const std::vector<int_t>& sectors) {
 descriptor::Sector*
 genSector(const std::vector<int_t>& starsystems) {
     descriptor::Sector* descr = new descriptor::Sector;
-    int num = meti::rand::get_int(1,3);
+    int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::rand::get_element(starsystems));
     }
@@ -127,17 +127,17 @@ genStar()
     descriptor::Star* descr = new descriptor::Star;
     descr->setArmor(10000000);
 
-    int orbit_radius = meti::rand::get_int(descriptor::Star::DISTANCE_MIN,
+    int orbit_radius = meti::rand::gen_int(descriptor::Star::DISTANCE_MIN,
                                         descriptor::Star::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::get_int(descriptor::Star::SPEED_MIN,
+    float speed = meti::rand::gen_int(descriptor::Star::SPEED_MIN,
                                    descriptor::Star::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
-    descr->setClockwise(meti::rand::get_bool());
+    descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::get_int(descriptor::Star::SCALE_MIN,
+    float size = meti::rand::gen_int(descriptor::Star::SCALE_MIN,
                                   descriptor::Star::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
@@ -159,17 +159,17 @@ genPlanet()
     descriptor::Planet* descr = new descriptor::Planet;
     descr->setArmor(100000);
 
-    int orbit_radius = meti::rand::get_int(descriptor::Planet::DISTANCE_MIN,
+    int orbit_radius = meti::rand::gen_int(descriptor::Planet::DISTANCE_MIN,
                                         descriptor::Planet::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::get_int(descriptor::Planet::SPEED_MIN,
+    float speed = meti::rand::gen_int(descriptor::Planet::SPEED_MIN,
                                    descriptor::Planet::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
-    descr->setClockwise(meti::rand::get_bool());
+    descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::get_int(descriptor::Planet::SCALE_MIN,
+    float size = meti::rand::gen_int(descriptor::Planet::SCALE_MIN,
                                   descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
@@ -240,22 +240,22 @@ descriptor::Asteroid*
 genAsteroid()
 {
     descriptor::Asteroid* descr = new descriptor::Asteroid;
-    descr->setArmor(meti::rand::get_int(descriptor::Asteroid::ARMOR_MIN,
+    descr->setArmor(meti::rand::gen_int(descriptor::Asteroid::ARMOR_MIN,
                                     descriptor::Asteroid::ARMOR_MAX));
 
-    int orbit_radiusA = meti::rand::get_int(descriptor::Asteroid::DISTANCE_MIN,
+    int orbit_radiusA = meti::rand::gen_int(descriptor::Asteroid::DISTANCE_MIN,
                                         descriptor::Asteroid::DISTANCE_MAX);
-    int orbit_radiusB = meti::rand::get_int(descriptor::Asteroid::DISTANCE_MIN,
+    int orbit_radiusB = meti::rand::gen_int(descriptor::Asteroid::DISTANCE_MIN,
                                         descriptor::Asteroid::DISTANCE_MAX);
     descr->setRadiusA(orbit_radiusA);
     descr->setRadiusB(orbit_radiusB);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::get_int(descriptor::Asteroid::SPEED_MIN,
+    float speed = meti::rand::gen_int(descriptor::Asteroid::SPEED_MIN,
                                    descriptor::Asteroid::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
     descr->setSpeed(speed);
-    descr->setClockwise(meti::rand::get_bool());
+    descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::get_int(descriptor::Asteroid::SCALE_MIN,
+    float size = meti::rand::gen_int(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
@@ -310,7 +310,7 @@ genShip()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
-    int size_id = meti::rand::get_int(1, 9);
+    int size_id = meti::rand::gen_int(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
@@ -320,11 +320,11 @@ genShip()
         case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
-    int space       = size_id*100 + meti::rand::get_int(100);
+    int space       = size_id*100 + meti::rand::gen_int(100);
     int armor       = space;
-    int protection  = protection_rate*meti::rand::get_int(size_id);
+    int protection  = protection_rate*meti::rand::gen_int(size_id);
     int temperature = 100;
-    int price       = meti::rand::get_int(200, 400)*size_id;
+    int price       = meti::rand::gen_int(200, 400)*size_id;
 
     int slot_bak_num       = 1;
     int slot_drive_num     = 1;
@@ -338,14 +338,14 @@ genShip()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::get_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::get_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
+    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
     descriptor::Ship* descr = new descriptor::Ship;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
-        float length = meti::rand::get_float(-0.8f, 0.8f);
-        float angle = meti::rand::get_angle();
+        float length = meti::rand::gen_float(-0.8f, 0.8f);
+        float angle = meti::rand::gen_angle();
         descr->addTurrelPoint(meti::genVec3f(length, angle));
     }
 //    for(int i=0; i<slot_drive_num; ++i) {
@@ -402,7 +402,7 @@ genSpaceStation()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
-    int size_id = meti::rand::get_int(1, 9);
+    int size_id = meti::rand::gen_int(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
@@ -412,11 +412,11 @@ genSpaceStation()
         case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
-    int space       = size_id*100 + meti::rand::get_int(100);
+    int space       = size_id*100 + meti::rand::gen_int(100);
     int armor       = space;
-    int protection  = protection_rate*meti::rand::get_int(size_id);
+    int protection  = protection_rate*meti::rand::gen_int(size_id);
     int temperature = 100;
-    int price       = meti::rand::get_int(200, 400)*size_id;
+    int price       = meti::rand::gen_int(200, 400)*size_id;
 
     int slot_bak_num       = 1;
     int slot_drive_num     = 1;
@@ -430,24 +430,24 @@ genSpaceStation()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::get_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::get_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
+    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
     descriptor::SpaceStation* descr = new descriptor::SpaceStation;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addTurrelPoint(meti::genVec3f(length, angle));
     }
     for(int i=0; i<slot_drive_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addDrivePoint(meti::genVec3f(length, angle));
     }
     for(int i=0; i<slot_protector_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addProtectorPoint(meti::genVec3f(length, angle));
     }
     descr->setSize(size_id);
@@ -488,7 +488,7 @@ genSatellite()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     entity::Type type_id = entity::Type::WARRIOR;
-    int size_id = meti::rand::get_int(1, 9);
+    int size_id = meti::rand::gen_int(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
@@ -498,11 +498,11 @@ genSatellite()
         case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
-    int space       = size_id*100 + meti::rand::get_int(100);
+    int space       = size_id*100 + meti::rand::gen_int(100);
     int armor       = space;
-    int protection  = protection_rate*meti::rand::get_int(size_id);
+    int protection  = protection_rate*meti::rand::gen_int(size_id);
     int temperature = 100;
-    int price       = meti::rand::get_int(200, 400)*size_id;
+    int price       = meti::rand::gen_int(200, 400)*size_id;
 
     int slot_bak_num       = 1;
     int slot_drive_num     = 1;
@@ -516,24 +516,24 @@ genSatellite()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::get_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::get_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
+    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
 
     descriptor::Satellite* descr = new descriptor::Satellite;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addTurrelPoint(meti::genVec3f(length, angle));
     }
     for(int i=0; i<slot_drive_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addDrivePoint(meti::genVec3f(length, angle));
     }
     for(int i=0; i<slot_protector_num; ++i) {
-        int length = meti::rand::get_int(100);
-        float angle = meti::rand::get_angle();
+        int length = meti::rand::gen_int(100);
+        float angle = meti::rand::gen_angle();
         descr->addProtectorPoint(meti::genVec3f(length, angle));
     }
     descr->setSize(size_id);
@@ -671,12 +671,12 @@ genBak(int race, int tech_level)
         tech_level = int (tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::get_int(Bak::MODULES_NUM_MIN, Bak::MODULES_NUM_MAX);
-    int mass          = meti::rand::get_int(Bak::MASS_MIN, Bak::MASS_MAX);
-    int condition     = meti::rand::get_int(Bak::CONDITION_MIN, Bak::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(Bak::MODULES_NUM_MIN, Bak::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(Bak::MASS_MIN, Bak::MASS_MAX);
+    int condition     = meti::rand::gen_int(Bak::CONDITION_MIN, Bak::CONDITION_MAX);
     int deterioration = 1;
 
-    int fuel = meti::rand::get_int(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + int(Bak::FUEL_TECH_RATE * tech_level));
+    int fuel = meti::rand::gen_int(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + int(Bak::FUEL_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int fuel, int modules, int mass, int condition) {
         float fuel_rate          = float(fuel) / Bak::FUEL_MIN;
@@ -726,13 +726,13 @@ genDrive(int race, int tech_level)
         tech_level = int (tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::get_int(Drive::MODULES_NUM_MIN, Drive::MODULES_NUM_MAX);
-    int mass          = meti::rand::get_int(Drive::MASS_MIN, Drive::MASS_MAX);
-    int condition     = meti::rand::get_int(Drive::CONDITION_MIN, Drive::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(Drive::MODULES_NUM_MIN, Drive::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(Drive::MASS_MIN, Drive::MASS_MAX);
+    int condition     = meti::rand::gen_int(Drive::CONDITION_MIN, Drive::CONDITION_MAX);
     int deterioration = 1;
 
-    int speed = meti::rand::get_int(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + int(Drive::SPEED_TECH_RATE * tech_level));
-    int hyper = meti::rand::get_int(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + int(Drive::HYPER_TECH_RATE * tech_level));
+    int speed = meti::rand::gen_int(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + int(Drive::SPEED_TECH_RATE * tech_level));
+    int hyper = meti::rand::gen_int(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + int(Drive::HYPER_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT);
 
@@ -783,12 +783,12 @@ genDroid(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::get_int(Droid::MODULES_NUM_MIN, Droid::MODULES_NUM_MAX);
-    int mass          = meti::rand::get_int(Droid::MASS_MIN,        Droid::MASS_MAX);
-    int condition     = meti::rand::get_int(Droid::CONDITION_MIN,   Droid::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(Droid::MODULES_NUM_MIN, Droid::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(Droid::MASS_MIN,        Droid::MASS_MAX);
+    int condition     = meti::rand::gen_int(Droid::CONDITION_MIN,   Droid::CONDITION_MAX);
     int deterioration = 1;
 
-    int repair = meti::rand::get_int(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + int(Droid::REPAIR_TECH_RATE * tech_level));
+    int repair = meti::rand::gen_int(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + int(Droid::REPAIR_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
@@ -836,17 +836,17 @@ genGrapple(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::get_int(Grapple::MODULES_NUM_MIN, Grapple::MODULES_NUM_MAX);
-    int mass = meti::rand::get_int(Grapple::MASS_MIN,        Grapple::MASS_MAX);
-    int condition = meti::rand::get_int(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
+    int modules = meti::rand::gen_int(Grapple::MODULES_NUM_MIN, Grapple::MODULES_NUM_MAX);
+    int mass = meti::rand::gen_int(Grapple::MASS_MIN,        Grapple::MASS_MAX);
+    int condition = meti::rand::gen_int(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT);
 
-    int strength   = meti::rand::get_int(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + int(Grapple::STRENGTH_TECH_RATE * tech_level));
-    int radius     = meti::rand::get_int(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + int(Grapple::RADIUS_TECH_RATE * tech_level));
-    int speed      = meti::rand::get_int(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + int(Grapple::SPEED_TECH_RATE * tech_level));
+    int strength   = meti::rand::gen_int(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + int(Grapple::STRENGTH_TECH_RATE * tech_level));
+    int radius     = meti::rand::gen_int(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + int(Grapple::RADIUS_TECH_RATE * tech_level));
+    int speed      = meti::rand::gen_int(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + int(Grapple::SPEED_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int strength, int radius, int speed, int modules, int mass, int condition) {
         float strength_rate      = float(strength) / Grapple::STRENGTH_MIN;
@@ -898,13 +898,13 @@ genLazer(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::get_int(Lazer::MODULES_NUM_MIN, Lazer::MODULES_NUM_MAX);
-    int mass          = meti::rand::get_int(Lazer::MASS_MIN,        Lazer::MASS_MAX);
-    int condition     = meti::rand::get_int(Lazer::CONDITION_MIN,   Lazer::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(Lazer::MODULES_NUM_MIN, Lazer::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(Lazer::MASS_MIN,        Lazer::MASS_MAX);
+    int condition     = meti::rand::gen_int(Lazer::CONDITION_MIN,   Lazer::CONDITION_MAX);
     int deterioration = 1;
 
-    int damage = meti::rand::get_int(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + int(Lazer::DAMAGE_TECH_RATE * tech_level));
-    int radius = meti::rand::get_int(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + int(Lazer::RADIUS_TECH_RATE * tech_level));
+    int damage = meti::rand::gen_int(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + int(Lazer::DAMAGE_TECH_RATE * tech_level));
+    int radius = meti::rand::gen_int(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + int(Lazer::RADIUS_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
@@ -954,15 +954,15 @@ genProtector(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::get_int(Protector::MODULES_NUM_MIN, Protector::MODULES_NUM_MAX);
-    int mass    = meti::rand::get_int(Protector::MASS_MIN,        Protector::MASS_MAX);
-    int condition = meti::rand::get_int(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
+    int modules = meti::rand::gen_int(Protector::MODULES_NUM_MIN, Protector::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(Protector::MASS_MIN,        Protector::MASS_MAX);
+    int condition = meti::rand::gen_int(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT);
 
-    int protection = meti::rand::get_int(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
+    int protection = meti::rand::gen_int(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
 
     auto funcCountPrice = [](int protection, int modules, int mass, int condition) {
         float protection_rate    = float(protection) / Protector::PROTECTION_MIN;
@@ -1007,15 +1007,15 @@ genRadar(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::get_int(Radar::MODULES_NUM_MIN, Radar::MODULES_NUM_MAX);
-    int mass    = meti::rand::get_int(Radar::MASS_MIN,        Radar::MASS_MAX);
-    int condition = meti::rand::get_int(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
+    int modules = meti::rand::gen_int(Radar::MODULES_NUM_MIN, Radar::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(Radar::MASS_MIN,        Radar::MASS_MAX);
+    int condition = meti::rand::gen_int(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
-    int radius = meti::rand::get_int(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
+    int radius = meti::rand::gen_int(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
 
     auto funcCountPrice = [](int radius, int modules, int mass, int condition) {
         float radius_rate      = float(radius) / Radar::RADIUS_MIN;
@@ -1059,17 +1059,17 @@ genRocket(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::get_int(Rocket::MODULES_NUM_MIN, Rocket::MODULES_NUM_MAX);
-    int mass    = meti::rand::get_int(Rocket::MASS_MIN,        Rocket::MASS_MAX);
-    int condition = meti::rand::get_int(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
+    int modules = meti::rand::gen_int(Rocket::MODULES_NUM_MIN, Rocket::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(Rocket::MASS_MIN,        Rocket::MASS_MAX);
+    int condition = meti::rand::gen_int(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
-    int ammo = meti::rand::get_int(Rocket::AMMO_MIN, Rocket::AMMO_MAX);
-    int damage = meti::rand::get_int(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
-    int radius = meti::rand::get_int(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
+    int ammo = meti::rand::gen_int(Rocket::AMMO_MIN, Rocket::AMMO_MAX);
+    int damage = meti::rand::gen_int(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
+    int radius = meti::rand::gen_int(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
 
     auto funcCountPrice = [](int ammo, int damage, int radius, int modules, int mass, int condition) {
         float ammo_rate     = float(ammo) / Rocket::AMMO_MIN;
@@ -1120,15 +1120,15 @@ genScaner(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::get_int(Scaner::MODULES_NUM_MIN, Scaner::MODULES_NUM_MAX);
-    int mass = meti::rand::get_int(Scaner::MASS_MIN,        Scaner::MASS_MAX);
-    int condition = meti::rand::get_int(Scaner::CONDITION_MIN,   Scaner::CONDITION_MAX);
+    int modules = meti::rand::gen_int(Scaner::MODULES_NUM_MIN, Scaner::MODULES_NUM_MAX);
+    int mass = meti::rand::gen_int(Scaner::MASS_MIN,        Scaner::MASS_MAX);
+    int condition = meti::rand::gen_int(Scaner::CONDITION_MIN,   Scaner::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT);
 
-    int scan = meti::rand::get_int(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + int(Scaner::SCAN_TECH_RATE * tech_level));
+    int scan = meti::rand::gen_int(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + int(Scaner::SCAN_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int scan, int modules, int mass, int condition) {
         float scan_rate          = float(scan) / Scaner::SCAN_MIN;
@@ -1191,7 +1191,7 @@ genTurrel()
 {
     descriptor::Turrel* descr = new descriptor::Turrel;
 
-    float size = meti::rand::get_int(descriptor::Asteroid::SCALE_MIN,
+    float size = meti::rand::gen_int(descriptor::Asteroid::SCALE_MIN,
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());

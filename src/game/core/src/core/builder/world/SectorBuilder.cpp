@@ -78,7 +78,7 @@ void
 Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
 {
     for(const auto& id: descr->starsystems) {
-        glm::vec3 position(meti::rand::get_vec3xy(3, 8));
+        glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
         descriptor::StarSystem* descr_starsystem = descriptor::Manager::get().starSystem(id);
         control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
         sector->add(starsystem, position);

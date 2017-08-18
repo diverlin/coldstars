@@ -74,7 +74,7 @@ void Galaxy::genLife(control::Galaxy* galaxy)
 void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
 {     
     for(int_t id: descr->sectors) {
-        glm::vec3 position = meti::rand::get_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
+        glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
         descriptor::Sector* descr_sector = descriptor::Manager::get().sector(id);
         control::Sector* sector = builder::Sector::gen(descr_sector);
         galaxy->add(sector, position);
