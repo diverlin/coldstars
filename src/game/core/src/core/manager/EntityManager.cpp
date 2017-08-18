@@ -178,6 +178,12 @@ Entities::asteroid(int_t id) const {
     assert(control);
     return control;
 }
+control::WormHole*
+Entities::wormhole(int_t id) const {
+    control::WormHole* control = static_cast<control::WormHole*>(base(id));
+    assert(control);
+    return control;
+}
 
 control::SpaceStation*
 Entities::spacestation(int_t id) const {
@@ -203,6 +209,13 @@ Entities::satellite(int_t id) const {
 control::Container*
 Entities::container(int_t id) const {
     control::Container* control = static_cast<control::Container*>(base(id));
+    assert(control);
+    return control;
+}
+
+control::Bullet*
+Entities::bullet(int_t id) const {
+    control::Bullet* control = static_cast<control::Bullet*>(base(id));
     assert(control);
     return control;
 }

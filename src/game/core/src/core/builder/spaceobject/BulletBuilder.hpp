@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <core/common/BulletData.hpp>
+
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
@@ -33,14 +35,14 @@ class BulletData;
 
 namespace builder {
 
-class Rocket
+class Bullet
 {
 public:
-    static control::Bullet* gen(const BulletData&);
+    static control::Bullet* gen(const BulletData& = BulletData());
 
 private:
-    Rocket() = delete;
-    ~Rocket() = delete;
+    Bullet() = delete;
+    ~Bullet() = delete;
 
     static void createInternals(control::Bullet*, const BulletData&);
     static control::Bullet* __genTemplate(descriptor::Bullet* descr);

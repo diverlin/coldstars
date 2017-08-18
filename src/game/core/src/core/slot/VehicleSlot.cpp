@@ -53,7 +53,7 @@ bool Vehicle::insert(control::Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
-    vehicle->model()->setPlace(place::Type::KOSMOPORT);
+    vehicle->setPlace(place::Type::KOSMOPORT);
     vehicle->setParentVehicleSlot(this);
 
     return true;

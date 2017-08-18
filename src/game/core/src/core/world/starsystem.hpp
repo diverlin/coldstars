@@ -130,7 +130,7 @@ public:
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObject* const parent = nullptr);
-//    void add(model::Bullet*, const glm::vec3&, const glm::vec3&);
+    void add(Bullet*, const glm::vec3&, const glm::vec3&);
     void add(Star*);
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(Asteroid*, SpaceObject* parent = nullptr, int it = 0);
@@ -141,6 +141,7 @@ public:
 private:
     void __add(Container*);
     void __add(WormHole*);
+    void __add(Bullet*);
 
 public:
     // remove
@@ -149,6 +150,7 @@ public:
     void remove(WormHole*);
     void remove(Asteroid*);
     void remove(Container*);
+    void remove(Bullet*);
     void remove(SpaceStation*);
     void remove(Ship*);
     void remove(Satellite*);

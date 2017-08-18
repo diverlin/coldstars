@@ -43,7 +43,7 @@ void
 HyperSpace::add(Vehicle* vehicle)
 {
     vehicle->resetStarSystem();
-    vehicle->model()->setPlace(place::Type::HYPERSPACE);
+    vehicle->setPlace(place::Type::HYPERSPACE);
     m_vehicles.add(vehicle);
 
     model()->addVehicle(vehicle->id());

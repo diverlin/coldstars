@@ -370,4 +370,45 @@ TEST(starsystem, add_remove_container)
     }
 }
 
+TEST(starsystem, add_remove_bullet)
+{
+    /* create opbjects */
+    control::StarSystem* starsystem = builder::StarSystem::gen();
+
+    ceti::pack<int_t> bullet_ids = starsystem->model()->bullets();
+
+    /* pre-add check */
+    EXPECT_EQ(starsystem->bullets().size(), bullet_ids.size());
+
+    int iterations = 5;
+    for(int i=1; i<iterations; ++i) {
+        control::Bullet* bullet = builder::Bullet::gen();
+
+        /* pre-add check */
+        EXPECT_EQ(place::Type::NONE, bullet->place());
+
+        /* add objects */
+        starsystem->add(bullet, glm::vec3(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+        bullet_ids.add(bullet->id());
+
+        /* post-add check */
+        EXPECT_EQ(place::Type::SPACE, bullet->place());
+        EXPECT_EQ(starsystem->containers().size(), bullet_ids.size());
+        EXPECT_EQ(starsystem->model()->containers(), bullet_ids);
+    }
+
+    for(control::Bullet* bullet: starsystem->bullets()) {
+        /* pre-remove check */
+        EXPECT_EQ(place::Type::SPACE, bullet->place());
+
+        starsystem->remove(bullet);
+        bullet_ids.remove(bullet->id());
+
+        /* post-remove check */
+        EXPECT_EQ(place::Type::NONE, bullet->place());
+        EXPECT_EQ(starsystem->bullets().size(), bullet_ids.size());
+        EXPECT_EQ(starsystem->model()->bullets(), bullet_ids);
+    }
+}
+
 } // namespace test

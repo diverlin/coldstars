@@ -24,7 +24,7 @@
 namespace builder {
 
 control::Bullet*
-Rocket::gen(const BulletData& data_bullet)
+Bullet::gen(const BulletData& data_bullet)
 {
     assert(false);
     control::Bullet* rocket_bullet = __genTemplate(nullptr);
@@ -34,7 +34,7 @@ Rocket::gen(const BulletData& data_bullet)
 }
 
 control::Bullet*
-Rocket::__genTemplate(descriptor::Bullet* descr)
+Bullet::__genTemplate(descriptor::Bullet* descr)
 {
     model::Bullet* model = new model::Bullet();
     assert(false);
@@ -50,7 +50,7 @@ Rocket::__genTemplate(descriptor::Bullet* descr)
 }
 
 void
-Rocket::createInternals(control::Bullet* rocket_bullet, const BulletData& data_bullet)
+Bullet::createInternals(control::Bullet* rocket_bullet, const BulletData& data_bullet)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 
