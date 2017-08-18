@@ -99,9 +99,6 @@ StarSystem::__actualizeModel()
 {
     model()->setWritable(false);
 
-
-//    std::vector<int_t> planets() const { return m_planets; }
-
     for(int_t id: model()->stars()) {
         add(manager::Entities::get().star(id));
     }
@@ -122,7 +119,7 @@ StarSystem::__actualizeModel()
         add(manager::Entities::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        add(manager::Entities::get().container(id));
+        __add(manager::Entities::get().container(id));
     }
 
 //    __actualizeItems();
@@ -341,33 +338,7 @@ void StarSystem::add(Asteroid* asteroid, SpaceObject* parent, int it)
     model()->addAsteroid(asteroid->id());
 }
 
-//void StarSystem::add(model::Container* _model, const glm::vec3& center)
-//{
-//    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
-
-//    for (auto _container: m_containers) {
-//        if (_container->id() == _model->id()) {
-//            //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
-//            exit(1);
-//        }
-//    }
-
-//    _model->setStarSystem(id());
-//    _model->setPlace(place::Type::SPACE);
-//    _model->setPosition(center);
-
-//    Container* container = new Container(_model);
-//    model()->addContainer(_model->id());
-//    m_containers.push_back(container);
-//}
-
-void StarSystem::add(Container* container, const glm::vec3& center)
-{
-    container->model()->setPosition(center);
-    add(container);
-}
-
-void StarSystem::add(Container* container)
+void StarSystem::__add(Container* container)
 {
     container->setStarSystem(this);
     container->model()->setPlace(place::Type::SPACE);
@@ -376,26 +347,13 @@ void StarSystem::add(Container* container)
     m_containers.push_back(container);
 }
 
-//void StarSystem::add(model::WormHole* _model, const glm::vec3& center)
-//{
-//    _model->setStarSystem(id());
-//    _model->setPlace(place::Type::SPACE);
-//    _model->setPosition(center);
-
-//    WormHole* blackhole = new WormHole(_model);
-
-//    m_wormholes.push_back(blackhole);
-
-//    model()->addWormhole(_model->id());
-//}
-
-void StarSystem::add(WormHole* wormhole, const glm::vec3& center)
+void StarSystem::add(Container* container, const glm::vec3& center)
 {
-    wormhole->model()->setPosition(center);
-    add(wormhole);
+    container->model()->setPosition(center);
+    __add(container);
 }
 
-void StarSystem::add(WormHole* wormhole)
+void StarSystem::__add(WormHole* wormhole)
 {
     wormhole->setStarSystem(this);
     wormhole->model()->setPlace(place::Type::SPACE);
@@ -404,56 +362,11 @@ void StarSystem::add(WormHole* wormhole)
     model()->addWormhole(wormhole->id());
 }
 
-
-void StarSystem::add(Explosion* explosion, const glm::vec3& center)
+void StarSystem::add(WormHole* wormhole, const glm::vec3& center)
 {
-    assert(false);
-    //    for (Vehicle* vehicle: m_vehicles) {
-    //        if (glm::length(vehicle->position() - center) < explosion->radius()) {
-    //            vehicle->hit(explosion->damage());
-    //        }
-    //    }
+    wormhole->model()->setPosition(center);
+    __add(wormhole);
 }
-
-void StarSystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
-{ 
-    //    shockwave->setCenter(center);
-    //    effect_SHOCKWAVE_vec.push_back(shockwave);
-}
-
-void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
-{ 
-    //    float radius_damage = explosion->GetRadius();
-    //    float damage = 0;
-    //    Add(explosion, center, damage, radius_damage);
-}
-
-void StarSystem::add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
-{ 
-    //    explosion->setCenter(center);
-    //    effect_PARTICLESYSTEM_vec.push_back(explosion);
-    
-    //    float radius_effect = explosion->GetRadius();
-    //    if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
-    //    {
-    //        ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
-    //        Add(shockwave, meti::vec2(center));
-    //    }
-    
-    //    if (radius_effect > 25)
-    //    {
-    //        DamageEventInsideCircle(center, radius_damage, damage, true);
-    //    }
-    //explosion.play()
-}
-
-//void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
-//void StarSystem::Add(jeti::BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
-//void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
-//void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
-//void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
-//// ******* TRANSITION ******* 
-
 
 // remove
 void
@@ -507,11 +420,7 @@ StarSystem::remove(SpaceStation* spacestation)
     assert(spacestation);
     m_spacestations.remove(spacestation);
 
-    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->id() == spacestation->id()) {
-            it = m_vehicles.erase(it);
-        }
-    }
+    __removeVehicle(spacestation->id());
 
     spacestation->model()->setPlace(place::Type::NONE);
     model()->removeSpaceStation(spacestation->id());
@@ -523,11 +432,7 @@ StarSystem::remove(Ship* ship)
     assert(ship);
     m_ships.remove(ship);
 
-    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->id() == ship->id()) {
-            it = m_vehicles.erase(it);
-        }
-    }
+    __removeVehicle(ship->id());
 
     ship->model()->setPlace(place::Type::NONE);
     model()->removeShip(ship->id());
@@ -539,17 +444,33 @@ StarSystem::remove(Satellite* satellite)
     assert(satellite);
     m_satellites.remove(satellite);
 
-    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
-        if ((*it)->id() == satellite->id()) {
-            it = m_vehicles.erase(it);
-        }
-    }
+    __removeVehicle(satellite->id());
 
     satellite->model()->setPlace(place::Type::NONE);
     model()->removeSatellite(satellite->id());
 }
 
+void StarSystem::__removeVehicle(int_t id) {
+    for(std::vector<Vehicle*>::iterator it = m_vehicles.begin(); it < m_vehicles.end(); ++it) {
+        if ((*it)->id() == id) {
+            it = m_vehicles.erase(it);
+        }
+    }
+}
+
 //
+
+
+void StarSystem::explosionEvent(const glm::vec3& epicenter, int damage, float radius) const
+{
+    assert(false);
+    //    for (Vehicle* vehicle: m_vehicles) {
+    //        if (glm::length(vehicle->position() - center) < radius) {
+    //            vehicle->hit(damage);
+    //        }
+    //    }
+}
+
 
 // poor                
 model::Planet*

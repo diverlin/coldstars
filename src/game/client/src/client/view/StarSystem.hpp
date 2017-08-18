@@ -105,6 +105,19 @@ public:
 
     void add(jeti::particlesystem::Base*, const glm::vec3&);
 
+    // effects
+//    void add(jeti::BaseParticleSystem*);
+//    void add(ShockWaveEffect*, const glm::vec2&);
+//    void add(jeti::ExplosionEffect*, const glm::vec3&, float, float);
+//    void add(jeti::particlesystem::Explosion*, const glm::vec3&);
+//    void add(LazerTraceEffect*);
+
+//    void add(DistantNebulaEffect*);
+//    void add(DistantStarEffect*);
+
+    //void Add(VerticalFlowText*);
+    //
+
 private:
     jeti::Render& m_render;
     jeti::Camera& m_camera;
