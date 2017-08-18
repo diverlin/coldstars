@@ -210,7 +210,7 @@ private:
     void __launchingEvent() const;
 
     void __updateInSpaceInStatic_s();
-    void __updateEntities_s(int, bool);
+    void __updateEntities_s(int);
 
     void __updateStates();
 
