@@ -58,7 +58,7 @@ int gen_int(int low, int high)
 
 int gen_int(int arg)
 {
-    //assert(arg != 0);
+    assert(arg>=0);
     return std::rand()%(arg+1);
 }
 
