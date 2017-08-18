@@ -22,92 +22,94 @@
 #include <stdlib.h>
 #include <cmath>
 
+namespace {
+const float FLOAT_RATE = 100000.0f;
+} // namespace
+
 namespace meti {
 namespace rand {
 
-bool get_probability(int val) {
+bool gen_probability(int val) {
     assert(val>0&&val<=100);
-    return (get_int(0, 100) > val);
+    return (gen_int(0, 100) > val);
 }
 
 float add_percent(float val, float percent)
 {
-    return val*(1+get_float(percent));
+    return val*(1+gen_float(percent));
 }
 
-float get_float(float high)
+float gen_float(float high)
 {
-    float precision = 100000.0;
-    return (float)get_int(0, (int)precision*high)/precision;
+    return float(gen_int(0, int(FLOAT_RATE*high))/FLOAT_RATE);
 }
 
-float get_float(float low, float high)
+float gen_float(float low, float high)
 {
     assert(low<=high);
-    float precision = 100000.0;
-    return (float)get_int((int)precision*low, (int)precision*high)/precision;
+    return float(gen_int(int(FLOAT_RATE*low), int(FLOAT_RATE*high))/FLOAT_RATE);
 }
 
-int get_int(int low, int high)
+int gen_int(int low, int high)
 {
     assert(low<=high);
     return (low != high) ? low + std::rand()%(high+1-low) : low;
 }
 
-int get_int(int arg)
+int gen_int(int arg)
 {
     //assert(arg != 0);
     return std::rand()%(arg+1);
 }
 
-int get_sing()
+int gen_sign()
 {
-    return get_bool()? 1: -1;
+    return gen_bool()? 1: -1;
 }
 
-bool get_bool()
+bool gen_bool()
 {
-    return get_int(0,10) > 5 ? true : false;
+    return gen_int(0,10) > 5 ? true : false;
 }
 
-float get_angle()
+float gen_angle()
 {
-    return get_float(2*M_PI);
+    return gen_float(2*float(M_PI));
 }
 
-glm::vec2 get_vec2(int radius_min, int radius_max)
+glm::vec2 gen_vec2(int radius_min, int radius_max)
 {
-    float alpha = get_angle();
-    int radius = get_int(radius_min, radius_max);
-    return glm::vec2(radius*sin(alpha), radius*cos(alpha));
+    float alpha = gen_angle();
+    int radius = gen_int(radius_min, radius_max);
+    return glm::vec2(radius*std::sin(alpha), radius*std::cos(alpha));
 }
 
-glm::vec3 get_vec3xy(int radius_min, int radius_max)
+glm::vec3 gen_vec3xy(int radius_min, int radius_max)
 {
-    float radius = get_int(radius_min, radius_max);
+    float radius = gen_int(radius_min, radius_max);
     glm::vec3 result;
-    get_vec3xy_unit(result);
+    fill_vec3xy_unit(result);
     result *= radius;
     return result;
 }
 
-glm::vec3 get_vec3xy(float radius)
+glm::vec3 gen_vec3xy(float radius)
 {
     glm::vec3 result;
-    get_vec3xy_unit(result);
+    fill_vec3xy_unit(result);
     result *= radius;
     return result;
 }
 
-glm::vec3 get_vec3xy_unit()
+glm::vec3 gen_vec3xy_unit()
 {
-    float alpha = get_angle();
-    return glm::vec3(sin(alpha), cos(alpha), 0.0f);
+    float alpha = gen_angle();
+    return glm::vec3(std::sin(alpha), std::cos(alpha), 0.0f);
 }
 
-void get_vec3xy_unit(glm::vec3& direction)
+void fill_vec3xy_unit(glm::vec3& direction)
 {
-    float alpha = get_angle();
+    float alpha = gen_angle();
     direction.x = std::sin(alpha);
     direction.y = std::cos(alpha);
     direction.z = 0.0f;

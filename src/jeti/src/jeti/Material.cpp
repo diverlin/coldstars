@@ -100,9 +100,9 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 {
     std::cout<<"gen new loadToVRAM"<<std::endl;
     sf::Image image;
-    const sf::Color& color = sf::Color(meti::rand::get_int(50, 256),
-                                       meti::rand::get_int(50, 256),
-                                       meti::rand::get_int(50, 256));
+    const sf::Color& color = sf::Color(meti::rand::gen_int(50, 256),
+                                       meti::rand::gen_int(50, 256),
+                                       meti::rand::gen_int(50, 256));
     image.create(w, h, color);
 
     glGenTextures(1, &texture);
