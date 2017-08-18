@@ -134,7 +134,6 @@ public:
     void add(Star*);
     void add(Planet*, SpaceObject* parent = nullptr);
     void add(Asteroid*, SpaceObject* parent = nullptr, int it = 0);
-
     void add(Container*, const glm::vec3&);
     void add(WormHole*, const glm::vec3&);
 
@@ -159,16 +158,9 @@ public:
     void bombExplosionEvent(Container*, bool);
     void starSparkEvent(float) const;
 
-    void findRenderVisibleEntities_c(Player*);
-    void findRadarVisibleEntities_c(Player*);
-
     void update(int);
-    void loadEntitiesResource();
 
-    float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
-
-    //        void DrawOrbits(const jeti::Renderer&);
-    //        void DrawPath();
+    //float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
     // ugly
     ceti::pack<Star*> stars() const { return m_stars; }

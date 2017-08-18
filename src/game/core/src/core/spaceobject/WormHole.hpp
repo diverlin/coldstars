@@ -39,7 +39,7 @@ public:
 
     //        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
 
-    void updateInSpace(int, bool);
+    void updateInSpace(int);
 
     descriptor::WormHole* descriptor() const { return m_descriptor_wormhole; }
     model::WormHole* model() const { return m_model_wormhole; }

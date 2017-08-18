@@ -97,16 +97,14 @@ public:
     Bullet(descriptor::Bullet*, model::Bullet*);
     virtual ~Bullet();
 
-    void CreateDriveComplexTextureDependedStuff();
-    void UpdateInSpace(int, bool);
+    void update(int);
 
-    void collisionEvent(bool show_effect = false);
+    void collisionEvent();
 
     void hit(int, SpaceObject* agresor = nullptr) override final;
     void _postDeathUniqueEvent(bool) override final;
 
     int damage() const { return model()->damage(); }
-    //void RenderInSpace(const Renderer&, float);
 
     descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
     model::Bullet* model() const { return m_model_rocket; }
@@ -117,11 +115,7 @@ private:
 
     model::SpaceObject* m_target = nullptr;
 
-//    jeti::DriveEffect* m_EffectDrive;
-
-    //        virtual void UpdateInfo() override final;
-
-    bool CheckTarget() const;
+    bool __checkTarget() const;
 };
 
 } // namespace control

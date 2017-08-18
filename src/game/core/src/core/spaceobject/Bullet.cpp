@@ -65,25 +65,13 @@ Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
 {
 }
 
-/* virtual */
 Bullet::~Bullet()
 {
-//    LOG("___::~Bullet("+std::to_string(id())+")");
-
-    //delete m_EffectDrive;
 }
 
-void Bullet::CreateDriveComplexTextureDependedStuff()
+void Bullet::update(int time)
 {
-    //points().addMidLeftPoint();
-    //points().addMidFarLeftPoint();
-        
-    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
-}    
-
-void Bullet::UpdateInSpace(int time, bool show_effect)
-{
-    _checkDeath(show_effect);
+    _checkDeath();
         
     if (time > 0) {           
         if (model()->speed() < model()->bulletData().speed_max) {
@@ -94,7 +82,7 @@ void Bullet::UpdateInSpace(int time, bool show_effect)
             float angle; 
             get_dPos_ToPoint(position(), m_target->position(), model()->speed()/100.0, _externalForce(), angle);
         
-            if (CheckTarget()) {
+            if (__checkTarget()) {
                 //SetAngleZ(angle);
             } else {
                 m_target = nullptr;
@@ -107,7 +95,7 @@ void Bullet::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-bool Bullet::CheckTarget() const
+bool Bullet::__checkTarget() const
 {
     if (m_target->isAlive()) {
         assert(false);
@@ -121,10 +109,9 @@ bool Bullet::CheckTarget() const
     return false;
 }
 
-void Bullet::collisionEvent(bool show_effect)
+void Bullet::collisionEvent()
 {
-    model()->setAlive(false);
-    model()->immidiateKill();
+    die();
 }
 
 ///* virtual override final */
@@ -195,14 +182,6 @@ void Bullet::_postDeathUniqueEvent(bool show_effect)
 //    LOG("___::~Bullet("+std::to_string(id())+")");
 
 //    delete m_EffectDrive;
-//}
-
-//void Bullet::CreateDriveComplexTextureDependedStuff()
-//{
-//    points().addMidLeftPoint();
-//    points().addMidFarLeftPoint();
-
-//    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 //}
 
 //void Bullet::UpdateInSpace(int time, bool show_effect)

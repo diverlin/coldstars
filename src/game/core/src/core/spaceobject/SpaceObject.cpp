@@ -96,11 +96,8 @@ void SpaceObject::hit(int damage, SpaceObject* agressor)
     }
 }
 
-void SpaceObject::killSilently()
-{
-    model()->setAlive(false);
-
-    //model()->setGarbageReady(true);
+void SpaceObject::die() {
+    model()->die();
 }
 
 void SpaceObject::_checkDeath(bool show_effect)

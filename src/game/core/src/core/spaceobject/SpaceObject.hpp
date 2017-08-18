@@ -61,7 +61,7 @@ public:
 
     virtual void __remeberAgressor(SpaceObject*) {}
     virtual void hit(int, SpaceObject* agressor = nullptr);
-    void killSilently();
+    void die();
 
     bool isAlive() const { model()->isAlive(); }
     int mass() const { return m_mass; }
@@ -140,7 +140,6 @@ protected:
 
 //    virtual void remeberAgressor(SpaceObject*) {}
 //    virtual void hit(int);
-//    void killSilently();
 
 //    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
 //    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);

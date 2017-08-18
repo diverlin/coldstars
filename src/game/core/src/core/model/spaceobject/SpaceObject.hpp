@@ -67,7 +67,8 @@ public:
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
-    void immidiateKill() {
+    void die() {
+        setAlive(false);
         m_dataLife.dying_time = -1;
     }
 

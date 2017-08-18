@@ -606,7 +606,7 @@ bool
 Vehicle::unpackContainerItemToCargoSlot(Container* container)
 {
     if (load(container->itemSlot()->item())) {
-        container->killSilently();
+        container->die();
         return true;
     }
 
