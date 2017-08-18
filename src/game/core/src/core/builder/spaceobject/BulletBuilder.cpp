@@ -44,7 +44,7 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
     control::Bullet* bullet = new control::Bullet(descr, model);
     assert(bullet);
 
-    manager::Entities::get().add(bullet);
+    manager::Entity::get().add(bullet);
 
     return bullet;
 }
@@ -55,10 +55,8 @@ Bullet::createInternals(control::Bullet* rocket_bullet, const BulletData& data_b
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
 
     LifeData data_life;
-    data_life.armor = data_bullet.armor;
+    data_life.armor = data_bullet.armor();
 
-    rocket_bullet->model()->setBulletData(data_bullet);
-    
     rocket_bullet->model()->setLifeData(data_life);
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET);
     //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->size());

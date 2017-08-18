@@ -23,6 +23,8 @@
 
 #include <core/spaceobject/ALL>
 #include <core/item/equipment/Weapon.hpp>
+#include <core/item/equipment/Rocket.hpp>
+#include <core/descriptor/item/equipment/Rocket.hpp>
 
 #include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
@@ -102,6 +104,15 @@ void createContainerEvent(const comm::Telegramm& telegramm) {
     assert(false);
 //        core::global::get().containerBuilder().gen(telegramm.data);
 }
+void createBulletEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::CreateBullet descriptor(telegramm.data());
+    control::Vehicle* vehicle = manager::Entity::get().vehicle(descriptor.owner());
+    control::item::Rocket* rocket = manager::Entity::get().rocket(descriptor.weapon());
+    control::SpaceObject* target = manager::Entity::get().spaceObject(descriptor.target());
+    assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
+
+    builder::Bullet::gen(rocket->descriptor()->bulletData());
+}
 
 // items
 void createBakEvent(const comm::Telegramm& telegramm) {
@@ -136,14 +147,14 @@ void createRadarEvent(const comm::Telegramm& telegramm) {
 /** ADD TO STARSYSTEM */
 void addShipToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.starsystem);
-    control::Ship* ship = manager::Entities::get().ship(descriptor.object);
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem);
+    control::Ship* ship = manager::Entity::get().ship(descriptor.object);
     starsystem->add(ship);
 }
 void addContainerToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.starsystem);
-    control::Container* container = manager::Entities::get().container(descriptor.object);
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem);
+    control::Container* container = manager::Entity::get().container(descriptor.object);
     container->addImpulse(descriptor.impulse);
     starsystem->add(container, descriptor.position);
 }
@@ -182,12 +193,12 @@ void _doTakeContainer(const comm::Telegramm& telegramm) {
 
 void hitEvent(const comm::Telegramm& telegramm) {
     descriptor::Hit descr(telegramm.data());
-    control::SpaceObject* ob = manager::Entities::get().spaceObject(descr.target());
+    control::SpaceObject* ob = manager::Entity::get().spaceObject(descr.target());
     ob->hit(descr.damage());
 }
 void explosionEvent(const comm::Telegramm& telegramm) {
     descriptor::Explosion descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entities::get().starsystem(descriptor.starsystem_id);
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem_id);
     Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
     assert(false);
     //        starsystem->add(explosion, descriptor.center);
@@ -196,7 +207,7 @@ void explosionEvent(const comm::Telegramm& telegramm) {
 // REMOVE
 void removeAsteroidEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Object remove(telegramm.data());
-    control::Asteroid* asteroid = manager::Entities::get().asteroid(remove.object());
+    control::Asteroid* asteroid = manager::Entity::get().asteroid(remove.object());
     asteroid->die();
     asteroid->starsystem()->remove(asteroid);
     manager::Garbage::get().add(asteroid);
@@ -209,22 +220,22 @@ namespace event {
 
 /** DOCK */
 void doDockShip(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entities::get().ship(object);
+    control::Ship* ship = manager::Entity::get().ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
     starsystem->remove(ship);
 
     // add
-    control::Land* land = manager::Entities::get().land(destination);
+    control::Land* land = manager::Entity::get().land(destination);
     land->add(ship);
 }
 
 void doLaunchShip(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entities::get().ship(object);
+    control::Ship* ship = manager::Entity::get().ship(object);
 
     // remove
-    control::Land* land = manager::Entities::get().land(destination);
+    control::Land* land = manager::Entity::get().land(destination);
     land->remove(ship);
 
     // add
@@ -235,7 +246,7 @@ void doLaunchShip(int_t object, int_t destination) {
 
 /** JUMP */
 void doJumpIn(int_t object) {
-    control::Ship* ship = manager::Entities::get().ship(object);
+    control::Ship* ship = manager::Entity::get().ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -243,25 +254,25 @@ void doJumpIn(int_t object) {
     starsystem->remove(ship);
 
     // add
-    control::HyperSpace* hyper = manager::Entities::get().hyperspace();
+    control::HyperSpace* hyper = manager::Entity::get().hyperspace();
     hyper->add(ship);
 }
 void doJumpOut(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entities::get().ship(object);
+    control::Ship* ship = manager::Entity::get().ship(object);
 
     // remove
-    control::HyperSpace* hyper = manager::Entities::get().hyperspace();
+    control::HyperSpace* hyper = manager::Entity::get().hyperspace();
     hyper->remove(ship);
 
     // add
-    control::StarSystem* starsystem = manager::Entities::get().starsystem(destination); // probably can be used from navigator
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
 }
 
 /** DROP/TAKE */
 void doDropItem(int_t object, int_t target) {
-    control::Ship* ship = manager::Entities::get().ship(object);
-    control::Item* item = manager::Entities::get().item(target);
+    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Item* item = manager::Entity::get().item(target);
 
     // remove
     ship->remove(item);
@@ -275,8 +286,8 @@ void doDropItem(int_t object, int_t target) {
 }
 
 void doTakeContainer(int_t object, int_t target) {
-    control::Ship* ship = manager::Entities::get().ship(object);
-    control::Container* container = manager::Entities::get().container(target);
+    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Container* container = manager::Entity::get().container(target);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -289,8 +300,8 @@ void doTakeContainer(int_t object, int_t target) {
 }
 
 void doShoot(int_t object, int_t item) {
-    control::Ship* ship = manager::Entities::get().ship(object);
-    control::item::Weapon* weapon = manager::Entities::get().weapon(item);
+    control::Ship* ship = manager::Entity::get().ship(object);
+    control::item::Weapon* weapon = manager::Entity::get().weapon(item);
 
     weapon->fire();
 
@@ -312,6 +323,7 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_MINERAL: createMineralEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_BULLET: createBulletEvent(telegramm); return true;
     // items
     case comm::Telegramm::Type::CREATE_BAK: createBakEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); return true;

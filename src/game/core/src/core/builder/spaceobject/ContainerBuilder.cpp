@@ -77,7 +77,7 @@ Container::__genTemplate(descriptor::Container* descr, int_t obId)
     control::Container* container = new control::Container(descr, model);
     assert(container);
 
-    manager::Entities::get().add(container);
+    manager::Entity::get().add(container);
     return container;
 }
 

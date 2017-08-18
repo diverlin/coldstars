@@ -25,6 +25,27 @@
 namespace descriptor {
 namespace comm {
 
+// BulletShoot
+CreateBullet::CreateBullet(int_t owner, int_t item, int_t target)
+    :
+    m_owner(owner)
+  , m_item(item)
+  , m_target(target)
+{}
+
+CreateBullet::CreateBullet(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+CreateBullet::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+//
+
+
 namespace effect {
 
 Explosion::Explosion(int size, const glm::vec3& position)

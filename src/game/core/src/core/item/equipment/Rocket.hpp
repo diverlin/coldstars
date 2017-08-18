@@ -42,8 +42,6 @@ public:
     Rocket(descriptor::item::Rocket*, model::item::Rocket*);
     virtual ~Rocket() = default;
 
-//    void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
-
     bool checkAmmo() const override final;
     void fire(float rate=1.0f) override final;
 
@@ -57,10 +55,6 @@ private:
     model::item::Rocket* m_model_rocket = nullptr;
 
     int m_ammo_add = 0;
-
-//    int fire_atOnce;
-
-//    BulletData data_bullet;
 
     void virtual addUniqueInfo();
 

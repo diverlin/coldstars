@@ -152,7 +152,7 @@ SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
     control::SpaceStation* spacestation = new control::SpaceStation(descr, model);
     assert(spacestation);
 
-    manager::Entities::get().add(spacestation);
+    manager::Entity::get().add(spacestation);
 
     return spacestation;
 }

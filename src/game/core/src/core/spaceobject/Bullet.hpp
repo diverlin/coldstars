@@ -53,37 +53,40 @@ public:
     Bullet(const std::string& data);
     std::string data() const;
 
-    void setBulletData(BulletData data_bullet) { m_dataBullet = data_bullet; m_speed = data_bullet.speed_init; }
     void setOwner(int_t owner) { m_owner = owner; }
     void setTarget(int_t target) { m_target = target; }
     void setDamageRate(float damage_rate) { m_damageRate = damage_rate; }
+    void setSpeed(float speed) { m_speed = speed; }
 
     void increaseSpeed(float d_speed) { m_speed += d_speed; }
-    void decreaseLiveTime(int val) { m_dataBullet.live_time -= val; }
+    void decreaseLiveTime(int val) { m_liveTime -= val; }
 
     float speed() const { return m_speed; }
-    int damage() const { return m_dataBullet.damage; }
     int_t owner() const { return m_owner; }
-    const BulletData& bulletData() const { return m_dataBullet; }
+
+    void setBulletData(const BulletData& bulletData) { m_data_bullet = bulletData; }
+    const BulletData& bulletData() const { return m_data_bullet; }
 
 private:
+    int m_liveTime = 0;
     float m_speed = 0.0f;
     float m_damageRate = 0.0f;
 
     int_t m_owner = NONE;
     int_t m_target = NONE;
 
-    BulletData m_dataBullet;
+    BulletData m_data_bullet;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & m_liveTime;
         ar & m_speed;
         ar & m_damageRate;
-        ar & m_owner;
-        ar & m_target;
+        ar & m_owner; // is it needed?
+        ar & m_target; // is it needed?
     }
 };
 
@@ -105,7 +108,7 @@ public:
     void hit(int, SpaceObject* agresor = nullptr) override final;
     void _postDeathUniqueEvent(bool) override final;
 
-    int damage() const { return model()->damage(); }
+    int damage() const { return model()->bulletData().damage(); }
 
     descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
     model::Bullet* model() const { return m_model_rocket; }

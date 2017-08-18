@@ -47,12 +47,19 @@ glm::vec3 gen_vec3xy_unit();
 void fill_vec3xy_unit(glm::vec3&);
 
 template<typename T>
-const T& get_element(const std::vector<T>& v)
-{
-    if (v.empty()) {
-        throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
+const T& get_element_or_die(const std::vector<T>& v) {
+    if (!v.empty()) {
+        return v[gen_int(v.size()-1)];
     }
-    return v[gen_int(v.size()-1)];
+    throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
+}
+
+template<typename T>
+const T& get_element(const std::vector<T>& v) {
+    if (!v.empty()) {
+        return v[gen_int(v.size()-1)];
+    }
+    return nullptr;
 }
 
 } // namespace rand

@@ -49,7 +49,7 @@ void Garbage::erase()
 {
     for(const auto& pair: m_entities) {
         control::Base* ob = pair.second;
-        Entities::get().remove(ob);
+        Entity::get().remove(ob);
         delete ob->model();
         delete ob;
     }

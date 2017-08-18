@@ -20,6 +20,7 @@ public:
         CREATE_BOMB,
         CREATE_MINERAL,
         CREATE_CONTAINER,
+        CREATE_BULLET,
         // items
         CREATE_BAK,
         CREATE_DRIVE,

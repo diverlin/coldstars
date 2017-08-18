@@ -39,6 +39,7 @@ class WormHole;
 
 class Land;
 
+class Vehicle;
 class SpaceStation;
 class Ship;
 class Satellite;
@@ -65,16 +66,16 @@ class Rocket;
 
 namespace manager {
 
-class Entities
+class Entity
 {
 private:
-    Entities() = default;
-    Entities(const Entities&) = delete;
-    ~Entities() = default;
-    Entities& operator=(const Entities&) = delete;
+    Entity() = default;
+    Entity(const Entity&) = delete;
+    ~Entity() = default;
+    Entity& operator=(const Entity&) = delete;
 
 public:
-    static Entities& get();
+    static Entity& get();
 
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }
@@ -95,6 +96,7 @@ public:
     control::Asteroid* asteroid(int_t id) const;
     control::WormHole* wormhole(int_t id) const;
 
+    control::Vehicle* vehicle(int_t id) const;
     control::SpaceStation* spacestation(int_t id) const;
     control::Ship* ship(int_t id) const;
     control::Satellite* satellite(int_t id) const;

@@ -26,6 +26,9 @@
 #include <ceti/Pack.hpp>
 
 namespace control {
+namespace item {
+class Weapon;
+} // namespace item
 class Vehicle;
 class SpaceObject;
 } // namespace control
@@ -75,6 +78,8 @@ public:
 
 //    void RenderTurrels() const;
 
+    std::vector<control::item::Weapon*> rockets() const;
+
 private:
     int m_damage = 0;
     int m_radiusMax = 0;
@@ -90,6 +95,7 @@ private:
     void __validateTargets();
 
     slot::Item* __nextSlotReadyToFire() const;
+    std::vector<control::item::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
 };
 
 } // namespace complex

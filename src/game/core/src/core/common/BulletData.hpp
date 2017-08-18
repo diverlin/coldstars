@@ -16,35 +16,63 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
+#include <string>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 class BulletData
 {
-    public:
-        int damage; 
-        int armor; 
-        int live_time;
-            
-        float speed_init;
-        float speed_max;
-        float d_speed; 
-        float angular_speed; 
-        
-        BulletData()
-        :
-        damage(0), 
-        armor(0),
-        live_time(0),            
-        speed_init(0.0),
-        speed_max(0.0),
-        d_speed(0.0),
-        angular_speed(0.0)
-        {}
-    
-//        void Save(boost::property_tree::ptree&, const std::string&) const;
-//        void Load(const boost::property_tree::ptree&);
-//        void Resolve();
+public:
+    BulletData() {}
+
+    int damage() const { return m_damage; }
+    int armor() const { return m_armor; }
+    int liveTime() const { return m_liveTime; }
+    float speedMin() const { return m_speedMin; }
+    float speedMax() const { return m_speedMax; }
+    float deltaSpeed() const { return m_deltaSpeed; }
+    //float m_angularSpeed = 0.0; // do we need that?
+
+    void setDamage(int damage) { m_damage = damage; }
+    void setArmor(int armor) { m_armor = armor; }
+    void setLiveTime(int liveTime) { m_liveTime = liveTime; }
+    void setSpeedMin(float speedMin) { m_speedMin = speedMin; }
+    void setSpeedMax(float speedMax) { m_speedMax = speedMax; }
+    void setDeltaSpeed(float deltaSpeed) { m_deltaSpeed = deltaSpeed; }
+
+    std::string info() const {
+        std::string result = "BulletData:\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        result += std::string(" armor = ") + std::to_string(m_armor) + "\n";
+        result += std::string(" liveTime = ") + std::to_string(m_liveTime) + "\n";
+        result += std::string(" speedMin = ") + std::to_string(m_speedMin) + "\n";
+        result += std::string(" speedMax = ") + std::to_string(m_speedMax) + "\n";
+        result += std::string(" deltaSpeed = ") + std::to_string(m_deltaSpeed) + "\n";
+        return result;
+    }
+
+private:
+    int m_damage = 0;
+    int m_armor = 0;
+    int m_liveTime = 0;
+    float m_speedMin = 0.0;
+    float m_speedMax = 0.0;
+    float m_deltaSpeed = 0.0;
+    //    float m_angularSpeed = 0.0; // do we need that?
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_damage;
+        ar & m_armor;
+        ar & m_liveTime;
+        ar & m_speedMin;
+        ar & m_speedMax;
+        ar & m_deltaSpeed;
+        //        ar & m_angularSpeed;
+    }
 };
 

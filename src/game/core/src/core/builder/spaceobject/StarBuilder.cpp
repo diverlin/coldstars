@@ -73,7 +73,7 @@ Star::__genTemplate(descriptor::Star* descr)
     control::Star* star = new control::Star(descr, model);
     assert(star);
 
-    manager::Entities::get().add(star);
+    manager::Entity::get().add(star);
     return star;
 }
 

@@ -64,7 +64,7 @@ Grapple::__genTemplate(descriptor::item::Grapple* descr, int_t ob_id)
 {
     model::item::Grapple* model = new model::item::Grapple(descr->id(), ob_id);
     control::item::Grapple* grapple = new control::item::Grapple(descr, model);
-    manager::Entities::get().add(grapple);
+    manager::Entity::get().add(grapple);
     return grapple;
 }
 
