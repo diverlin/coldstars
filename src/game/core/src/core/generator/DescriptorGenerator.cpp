@@ -296,6 +296,28 @@ genContainer()
     return descr;
 }
 
+descriptor::Bullet*
+genBullet()
+{
+    descriptor::Bullet* descr = new descriptor::Bullet;
+
+    texture::Type material_type;
+    if (meti::rand::gen_bool()) {
+        material_type = texture::Type::ROCKET_BULLET;
+    } else {
+        material_type = texture::Type::TORPEDO_BULLET;
+    }
+    descr->setTexture(textureDescriptorIdFromType(material_type));
+    descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+
+    descriptor::Manager::get().add(descr);
+
+    assert(descr->texture() != NONE);
+    assert(descr->mesh() != NONE);
+
+    return descr;
+}
+
 descriptor::Npc*
 genNpc()
 {
@@ -1064,9 +1086,6 @@ genRocket(int race, int tech_level)
     int condition = meti::rand::gen_int(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
     int deterioration = 1;
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
-
     int ammo = meti::rand::gen_int(Rocket::AMMO_MIN, Rocket::AMMO_MAX);
     int damage = meti::rand::gen_int(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
     int radius = meti::rand::gen_int(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
@@ -1100,10 +1119,16 @@ genRocket(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Rocket
-    descr->setAmmo(ammo);
+    // descriptor::item::Weapon
     descr->setDamage(damage);
     descr->setRadius(radius);
+
+    // descriptor::item::Rocket
+    descr->setBulletDescriptor(descriptor::Manager::get().randBullet()->id());
+    descr->setAmmo(ammo);
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
+    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
     descriptor::Manager::get().add(descr);
 
@@ -1185,16 +1210,11 @@ genScaner(int race, int tech_level)
 } // anemspace item
 
 
-
 descriptor::Turrel*
 genTurrel()
 {
     descriptor::Turrel* descr = new descriptor::Turrel;
 
-    float size = meti::rand::gen_int(descriptor::Asteroid::SCALE_MIN,
-                                  descriptor::Asteroid::SCALE_MAX);
-    descr->setSize(meti::vec3(size));
-    descr->setDirection(randPlanetoidDirection());
     descr->setTexture(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 

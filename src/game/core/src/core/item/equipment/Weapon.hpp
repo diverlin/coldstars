@@ -21,8 +21,6 @@
 
 #include "Equipment.hpp"
 
-#include <core/common/BulletData.hpp>
-
 namespace descriptor {
 namespace item {
 class Weapon;

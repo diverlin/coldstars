@@ -41,6 +41,7 @@ class Ship;
 class SpaceStation;
 class Satellite;
 class Container;
+class Bullet;
 
 // dock
 class Kosmoport;
@@ -83,6 +84,7 @@ descriptor::SpaceStation* genSpaceStation();
 descriptor::Satellite* genSatellite();
 
 descriptor::Container* genContainer();
+descriptor::Bullet* genBullet();
 
 // dock
 Kosmoport* genKosmoport(race::Type race = race::Type::NONE);

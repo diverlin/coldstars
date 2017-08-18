@@ -111,7 +111,11 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
     control::SpaceObject* target = manager::Entity::get().spaceObject(descriptor.target());
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
-    builder::Bullet::gen(rocket->descriptor()->bulletData());
+    descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
+    assert(bullet_descriptor);
+    control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor);
+    bullet->setTarget(target);
+    vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());
 }
 
 // items

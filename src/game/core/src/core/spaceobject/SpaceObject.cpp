@@ -33,6 +33,8 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* mod
     , m_model_spaceobject(model)
     , m_descriptor_spaceobject(descr)
 {
+    assert(m_model_spaceobject);
+    assert(m_descriptor_spaceobject);
     _init();
 }
 

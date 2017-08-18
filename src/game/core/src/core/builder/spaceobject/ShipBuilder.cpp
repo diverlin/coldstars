@@ -134,14 +134,6 @@ Ship::__createInternals(control::Ship* ship, descriptor::Ship* descr)
 
     // orientation
     ship->setSize(descr->size());
-    ship->model()->setDirection(descr->direction());
-
-//    assert(false);
-//    ship->CreateDriveComplexTextureDependedStuff();
-//    ship->CreateProtectionComplexTextureDependedStuff();
-     
-    //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
-    //ship->SetRenderAnimation(animation_program);
 
 //    _createSlots(ship);
 }

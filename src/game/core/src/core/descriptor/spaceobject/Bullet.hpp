@@ -18,15 +18,17 @@
 
 #pragma once
 
-#include <string>
+#include <core/spaceobject/SpaceObject.hpp>
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
+namespace descriptor {
 
-class BulletData
-{
+class Bullet : public SpaceObject {
+
 public:
-    BulletData() {}
+    Bullet();
+    ~Bullet() = default;
+    Bullet(const std::string& data);
+    std::string data() const;
 
     int damage() const { return m_damage; }
     int armor() const { return m_armor; }
@@ -44,28 +46,30 @@ public:
     void setDeltaSpeed(float deltaSpeed) { m_deltaSpeed = deltaSpeed; }
 
     std::string info() const {
-        std::string result = "BulletData:\n";
+        std::string result = "descriptor::Bullet:\n";
         result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
         result += std::string(" armor = ") + std::to_string(m_armor) + "\n";
         result += std::string(" liveTime = ") + std::to_string(m_liveTime) + "\n";
         result += std::string(" speedMin = ") + std::to_string(m_speedMin) + "\n";
         result += std::string(" speedMax = ") + std::to_string(m_speedMax) + "\n";
         result += std::string(" deltaSpeed = ") + std::to_string(m_deltaSpeed) + "\n";
+        result += SpaceObject::info();
         return result;
     }
 
 private:
-    int m_damage = 0;
-    int m_armor = 0;
-    int m_liveTime = 0;
-    float m_speedMin = 0.0;
-    float m_speedMax = 0.0;
-    float m_deltaSpeed = 0.0;
+    int m_damage = 1;
+    int m_armor = 1;
+    int m_liveTime = 300;
+    float m_speedMin = 0.2f;
+    float m_speedMax = 2.0f;
+    float m_deltaSpeed = 0.01f;
     //    float m_angularSpeed = 0.0; // do we need that?
 
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<SpaceObject>(*this);
         ar & m_damage;
         ar & m_armor;
         ar & m_liveTime;
@@ -75,4 +79,6 @@ private:
         //        ar & m_angularSpeed;
     }
 };
+
+} // namespace descriptor
 

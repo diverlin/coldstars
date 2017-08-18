@@ -436,7 +436,6 @@ bool StarSystem::__addIfVisible(control::Bullet* bullet)
     Base* view = m_cache.get(bullet->id());
     if (!view) {
         view = new Bullet(bullet);
-        //applyConstantRotationAnimation(meti::OZ, view);
         m_cache.add(view);
     }
     assert(view);
@@ -634,6 +633,12 @@ void StarSystem::__add(Base* view)
         Container* container = static_cast<Container*>(view);
         assert(container);
         m_containers.push_back(container);
+        return;
+    }
+    case entity::Type::BULLET: {
+        Bullet* bullet = static_cast<Bullet*>(view);
+        assert(bullet);
+        m_bullets.push_back(bullet);
         return;
     }
     default:

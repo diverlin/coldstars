@@ -208,6 +208,13 @@ Manager::randContainer() const
     assert(descr);
     return descr;
 }
+Bullet*
+Manager::randBullet() const
+{
+    Bullet* descr = static_cast<Bullet*>(rand(Type::BULLET));
+    assert(descr);
+    return descr;
+}
 
 Npc*
 Manager::randNpc() const
@@ -426,6 +433,13 @@ Container*
 Manager::container(int_t id) const
 {
     Container* descr = static_cast<Container*>(get(id));
+    assert(descr);
+    return descr;
+}
+Bullet*
+Manager::bullet(int_t id) const
+{
+    Bullet* descr = static_cast<Bullet*>(get(id));
     assert(descr);
     return descr;
 }
@@ -662,6 +676,10 @@ Manager::generate()
     ceti::filesystem::create_file(descriptors_fname);
 
     __clear();
+
+    for (int i=0; i<5; ++i) {
+        genBullet(); // nested for rocket, so must be generated firstly
+    }
 
     int base = 1;
     int num = base * 20;

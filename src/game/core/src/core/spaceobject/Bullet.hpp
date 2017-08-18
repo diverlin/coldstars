@@ -19,77 +19,13 @@
 #pragma once
 
 #include <core/spaceobject/SpaceObject.hpp>
-#include <core/common/BulletData.hpp>
 
 namespace descriptor {
-
-class Bullet : public SpaceObject {
-
-public:
-    Bullet();
-    ~Bullet() = default;
-    Bullet(const std::string& data);
-    std::string data() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
-    }
-};
-
+class Bullet;
 } // namespace descriptor
 
-
-
 namespace model {
-
-class Bullet : public SpaceObject {
-
-public:
-    Bullet();
-    ~Bullet() = default;
-    Bullet(const std::string& data);
-    std::string data() const;
-
-    void setOwner(int_t owner) { m_owner = owner; }
-    void setTarget(int_t target) { m_target = target; }
-    void setDamageRate(float damage_rate) { m_damageRate = damage_rate; }
-    void setSpeed(float speed) { m_speed = speed; }
-
-    void increaseSpeed(float d_speed) { m_speed += d_speed; }
-    void decreaseLiveTime(int val) { m_liveTime -= val; }
-
-    float speed() const { return m_speed; }
-    int_t owner() const { return m_owner; }
-
-    void setBulletData(const BulletData& bulletData) { m_data_bullet = bulletData; }
-    const BulletData& bulletData() const { return m_data_bullet; }
-
-private:
-    int m_liveTime = 0;
-    float m_speed = 0.0f;
-    float m_damageRate = 0.0f;
-
-    int_t m_owner = NONE;
-    int_t m_target = NONE;
-
-    BulletData m_data_bullet;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_liveTime;
-        ar & m_speed;
-        ar & m_damageRate;
-        ar & m_owner; // is it needed?
-        ar & m_target; // is it needed?
-    }
-};
-
+class Bullet;
 } // namespace model
 
 namespace control {
@@ -105,10 +41,12 @@ public:
     bool collideable() const { return true; }
     void collisionEvent();
 
+    void setTarget(SpaceObject* target) { m_target = target; }
+
     void hit(int, SpaceObject* agresor = nullptr) override final;
     void _postDeathUniqueEvent(bool) override final;
 
-    int damage() const { return model()->bulletData().damage(); }
+    int damage() const;
 
     descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
     model::Bullet* model() const { return m_model_rocket; }
@@ -117,7 +55,7 @@ private:
     descriptor::Bullet* m_descriptor_rocket = nullptr;
     model::Bullet* m_model_rocket = nullptr;
 
-    model::SpaceObject* m_target = nullptr;
+    control::SpaceObject* m_target = nullptr;
 
     bool __checkTarget() const;
 };

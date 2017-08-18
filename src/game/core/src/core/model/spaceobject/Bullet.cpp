@@ -16,36 +16,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Bullet.hpp"
 
-#pragma once
+#include <ceti/serialization/macro.hpp>
 
-#include <string>
+namespace model {
 
-#include <meti/VectorUtils.hpp>
+Bullet::Bullet()
+{}
 
-namespace ceti {
-       
-template <typename T>
-inline T getMin(T val1, T val2, T val3)
+Bullet::Bullet(const std::string& data)
 {
-    return std::min(std::min(val1, val2), val3);
+    MACRO_READ_SERIALIZED_DATA
 }
 
-template <typename T>
-int getIndexWithMinVal(const T* array, unsigned int size)
+std::string
+Bullet::data() const
 {
-    int index_min = 0;
-    T val_min = array[index_min];
-    for (unsigned int i=1; i<size; i++)
-    {
-        if (array[i]<val_min)
-        {
-            val_min = array[i];
-            index_min = i;
-        }
-    }
-    
-    return index_min;
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace ceti
+} // namespace model
