@@ -49,7 +49,7 @@ void WormHole::updateInSpace(int time)
     _checkDeath();
 
     if (time > 0) {
-        setPosition(position()+meti::getRandXYVec3f(1, 2, 0));
+        setPosition(position()+meti::rand_xy_vec3f(1, 2, 0));
         //        shockwave->setCenter(meti::vec2(center()));
 
         assert(false);

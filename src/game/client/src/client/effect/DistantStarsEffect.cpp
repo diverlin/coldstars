@@ -109,7 +109,7 @@ DistantStars* genDistantStars(int color_id)
 
         for (int i=0; i<distStar_num; i++) {
             float z = -meti::rand_int(799, 999);
-            glm::vec3 position = meti::getRandXYVec3f(0, 3000, z);
+            glm::vec3 position = meti::rand_xy_vec3f(0, 3000, z);
 
             float min = 0.5f;
             float mid = 0.8f;

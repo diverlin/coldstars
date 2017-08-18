@@ -164,7 +164,7 @@ void StarSystem::__createShips(control::StarSystem* starsystem, int ship_num)
         control::Npc* new_npc = builder::Npc::gen();
         new_ship->bindNpc(new_npc);
 
-        glm::vec3 center = meti::getRandXYVec3f(300, 1200, 0);
+        glm::vec3 center = meti::rand_xy_vec3f(300, 1200, 0);
         //        glm::vec3 angle(0, 0, meti::getRandInt(360));
         starsystem->add(new_ship, center);
     }

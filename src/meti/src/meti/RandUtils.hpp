@@ -25,10 +25,9 @@
 
 namespace meti {
 
-void randomizeDirection(glm::vec3&);
-float addRandPercent(float, float);
+float rand_add_percent(float, float);
 
-bool getProbability(int);
+bool rand_probability(int);
 
 float rand_float(float);
 float rand_float(float, float);
@@ -37,11 +36,11 @@ int rand_int(int, int);
 int rand_sing();
 bool rand_bool();
 
-glm::vec2 getRandVec2f(int radius_min, int radius_max);
-glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
-glm::vec3 getRandXYVec3(float);
-glm::vec3 getRandXYVec3Unit();
-glm::vec3 getXYVec3(float radius, float angle);
+glm::vec2 rand_vec2f(int radius_min, int radius_max);
+glm::vec3 rand_xy_vec3f(int radius_min, int radius_max, float z=0);
+glm::vec3 rand_xy_vec3(float);
+glm::vec3 rand_xy_vec3_unit();
+void rand_xy_vec3_unit(glm::vec3&);
 
 template<typename T>
 const T& rand_element(const std::vector<T>& v)

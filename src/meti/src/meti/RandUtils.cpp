@@ -24,12 +24,12 @@
 
 namespace meti {
 
-bool getProbability(int val) {
+bool rand_probability(int val) {
     assert(val>0&&val<=100);
     return (rand_int(0, 100) > val);
 }
 
-void randomizeDirection(glm::vec3& direction)
+void rand_xy_vec3_unit(glm::vec3& direction)
 {
     float angle = rand_float(2*M_PI);
     direction.x = cos(angle);
@@ -77,42 +77,29 @@ bool rand_bool()
     return rand_int(0,10) > 5 ? true : false;
 }
 
-glm::vec2 getRandVec2f(int radius_min, int radius_max)
+glm::vec2 rand_vec2f(int radius_min, int radius_max)
 {
     float alpha = glm::radians((float)rand_int(0, 360));
     int len = rand_int(radius_min, radius_max);
     return glm::vec2(sin(alpha) * len, cos(alpha) * len);
 }
 
-glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z)
+glm::vec3 rand_xy_vec3f(int radius_min, int radius_max, float z)
 {
     float alpha = glm::radians((float)rand_int(0, 360));
     int len = rand_int(radius_min, radius_max);
     return glm::vec3(sin(alpha)*len, cos(alpha)*len, z);
 }
 
-glm::vec3 getRandXYVec3(float r)
+glm::vec3 rand_xy_vec3(float r)
 {
     float alpha = glm::radians((float)rand_int(0, 360));
     return r*glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 
-glm::vec3 getRandXYVec3Unit()
+glm::vec3 rand_xy_vec3_unit()
 {
     float alpha = glm::radians((float)rand_int(0, 360));
-    return glm::vec3(sin(alpha), cos(alpha), 0.0);
-}
-
-glm::vec3 getXYVec3(float radius, float angle)
-{
-    float angleInRad = glm::radians(angle);
-    return glm::vec3(radius*sin(angleInRad), radius*cos(angleInRad), 0.0);
-}
-
-
-glm::vec3 getXYVec3Unit(float alpha)
-{
-    alpha = glm::radians(alpha); //ugly
     return glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 

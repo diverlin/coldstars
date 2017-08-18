@@ -8,11 +8,14 @@
 
 namespace meti {
 
-const float EPSILON = 0.00001;
+const float EPSILON = 0.00001f;
 
 const glm::vec3 OX = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 OY = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 OZ = glm::vec3(0.0f, 0.0f, 1.0f);
+
+glm::vec3 xy_vec3(float radius, float angle);
+glm::vec3 xy_vec3_unit(float angle);
 
 template<typename T>
 bool checkEqualVec(const T& v1, const T& v2) {
