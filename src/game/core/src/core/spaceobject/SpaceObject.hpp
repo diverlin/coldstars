@@ -44,6 +44,7 @@ public:
     SpaceObject* parent() const { return m_parent; }
 
     void setStarSystem(StarSystem* starsystem);
+    void setPlace(place::Type) const;
     void setParent(SpaceObject* parent);
 
     void resetStarSystem();

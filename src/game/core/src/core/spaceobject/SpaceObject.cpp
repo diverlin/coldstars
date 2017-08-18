@@ -53,6 +53,11 @@ void SpaceObject::setStarSystem(StarSystem* starsystem)
     model()->setStarSystem(starsystem->id());
 }
 
+void SpaceObject::setPlace(place::Type place) const
+{
+    model()->setPlace(place);
+}
+
 void SpaceObject::setParent(SpaceObject* parent)
 {
     assert(parent);

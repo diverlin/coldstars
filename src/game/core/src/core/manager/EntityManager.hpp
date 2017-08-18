@@ -35,6 +35,7 @@ class HyperSpace;
 class Star;
 class Planet;
 class Asteroid;
+class WormHole;
 
 class Land;
 
@@ -42,6 +43,7 @@ class SpaceStation;
 class Ship;
 class Satellite;
 class Container;
+class Bullet;
 class SpaceObject;
 
 class Item;
@@ -91,11 +93,13 @@ public:
     control::Star* star(int_t id) const;
     control::Planet* planet(int_t id) const;
     control::Asteroid* asteroid(int_t id) const;
+    control::WormHole* wormhole(int_t id) const;
 
     control::SpaceStation* spacestation(int_t id) const;
     control::Ship* ship(int_t id) const;
     control::Satellite* satellite(int_t id) const;
     control::Container* container(int_t id) const;
+    control::Bullet* bullet(int_t id) const;
 
     control::SpaceObject* spaceObject(int_t id) const;
     control::Land* land(int_t id) const;

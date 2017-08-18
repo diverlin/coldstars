@@ -865,7 +865,7 @@ Vehicle::setLand(Land* land)
 {
     m_Land = land;
     if (land) {
-        model()->setPlace(land->descriptor()->place());
+        setPlace(land->descriptor()->place());
     }
 }
 
