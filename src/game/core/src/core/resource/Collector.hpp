@@ -92,7 +92,7 @@ public:
         T* result = nullptr;
         auto it = m_descriptorsTypes.find(type);
         if (it != m_descriptorsTypes.end()) {
-            result = meti::getRand(it->second);
+            result = meti::rand(it->second);
         }
 #ifdef USE_FAILBACK_RESOURCES
         else {

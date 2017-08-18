@@ -93,7 +93,7 @@ void Galaxy::add(Sector* sector, const meti::vec3& center)
 Sector*
 Galaxy::randomSector()
 {
-    return meti::getRand(m_sectors);
+    return meti::rand(m_sectors);
 }
 
 Sector*

@@ -228,6 +228,7 @@ private:
     bool __bulletCollisionCheck_s(Bullet*) const;
     bool __asteroidCollisionCheck_s(Asteroid*) const;
 
+    void __createBullet_DEBUG() const;
     void __processBulletDeath_s(Bullet*) const;
     void __processAsteroidDeath_s(Asteroid*) const;
 

@@ -90,12 +90,12 @@ private:
     }
 };
 
-class Container : public Creation
+class CreateMineral : public Creation
 {
 public:
-    Container(int_t, int_t, int);
-    Container(const std::string& data);
-    ~Container() = default;
+    CreateMineral(int_t, int_t, int);
+    CreateMineral(const std::string& data);
+    ~CreateMineral() = default;
     std::string data() const;
 
     int mass() const { return m_mass; }

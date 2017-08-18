@@ -90,20 +90,20 @@ Creation::data() const
 
 ////////////////////////
 
-Container::Container(int_t obId, int_t obDescriptor, int mass)
+CreateMineral::CreateMineral(int_t obId, int_t obDescriptor, int mass)
     :
       Creation(obId, obDescriptor)
     , m_mass(mass)
 {
 }
 
-Container::Container(const std::string& data)
+CreateMineral::CreateMineral(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Container::data() const
+CreateMineral::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

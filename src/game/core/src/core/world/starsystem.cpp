@@ -501,7 +501,7 @@ StarSystem::randomInhabitedPlanet() const
     }
     
     if (tmp_planet_vec.size() >= 1)  {
-        requested_planet = meti::getRand(tmp_planet_vec);
+        requested_planet = meti::rand(tmp_planet_vec);
     }
 
     return requested_planet;
@@ -510,13 +510,13 @@ StarSystem::randomInhabitedPlanet() const
 Planet*
 StarSystem::randomPlanet() const
 {
-    return meti::getRand(m_planets);
+    return meti::rand(m_planets);
 }
 
 Vehicle*
 StarSystem::randomVehicle() const
 {
-    return meti::getRand(m_vehicles);
+    return meti::rand(m_vehicles);
 }
 
 Vehicle*
@@ -534,7 +534,7 @@ StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::getRand(vehicles);
+        result = meti::rand(vehicles);
     }
     
     return result;
@@ -556,7 +556,7 @@ StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::getRand(vehicles);
+        result = meti::rand(vehicles);
     }
     
     return result;
@@ -577,7 +577,7 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
     }
     
     if (vehicles.size()) {
-        result = meti::getRand(vehicles);
+        result = meti::rand(vehicles);
     }
     
     return result;
@@ -769,12 +769,22 @@ void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 
 }
 
+void StarSystem::__createBullet_DEBUG() const
+{
+    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
+
+//    int_t owner_id = meti::rand(vehicles())->id();
+//    int_t equipment_id = ;
+//    int_t target_id = ;
+//    descriptor::comm::ShootBullet telegramm_descriptor(owner_id, equipment_id, target_id);
+//    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, telegramm_descriptor.data()));
+}
+
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
     manager::Entities& entitiesManager = manager::Entities::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
-    //comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
 
     // send message asteroid death
     {
@@ -788,13 +798,16 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
         int mass = meti::getRandInt(3, 100);
         int_t object_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
-        descriptor::comm::Container creation(object_id, descriptor_id, mass);
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, creation.data()));
-
+        {
+        descriptor::comm::CreateMineral telegramm_descriptor(object_id, descriptor_id, mass);
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
+        }
         float strength = meti::getRandFloat(1.0f, 2.0f);
         glm::vec3 impulse(meti::getRandXYVec3(strength));
+        {
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        }
     }
 
     // send telegram to create explosion
