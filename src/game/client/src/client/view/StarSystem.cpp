@@ -259,7 +259,7 @@ void StarSystem::__clear()
 
 void StarSystem::__applyConstantRotationAnimation(const glm::vec3& axis, Base* view)
 {
-    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::rand_float(0.001, 0.01));
+    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(axis, meti::rand::get_float(0.001, 0.01));
     view->setAnimationRotation(animation);
 }
 
@@ -520,13 +520,13 @@ StarSystem::__createText()
         return;
     }
 
-    std::string str = std::to_string(meti::rand_int(1,200));
-    float size = meti::rand_float(18.0f, 32.0f);
-    glm::vec2 center(meti::rand_float(-10.0f,10.0f), meti::rand_float(-10.0f,10.0f));
+    std::string str = std::to_string(meti::rand::get_int(1,200));
+    float size = meti::rand::get_float(18.0f, 32.0f);
+    glm::vec2 center(meti::rand::get_float(-10.0f,10.0f), meti::rand::get_float(-10.0f,10.0f));
     glm::vec4 color;
-    color.r = meti::rand_float(0.7f, 1.0f);
-    color.g = meti::rand_float(0.7f, 1.0f);
-    color.b = meti::rand_float(0.7f, 1.0f);
+    color.r = meti::rand::get_float(0.7f, 1.0f);
+    color.g = meti::rand::get_float(0.7f, 1.0f);
+    color.b = meti::rand::get_float(0.7f, 1.0f);
 
     sf::Font& font = client::global::get().screen().font();
     ::effect::Text* text = new ::effect::Text(font, str, size, center, color);
@@ -541,8 +541,8 @@ StarSystem::__createExplosion()
         return;
     }
 
-    float size = meti::rand_float(1.0f, 10.0f);
-    glm::vec3 center(meti::rand_float(-400.0f,400.0f), meti::rand_float(-400.0f,400.0f), 0.0f);
+    float size = meti::rand::get_float(1.0f, 10.0f);
+    glm::vec3 center(meti::rand::get_float(-400.0f,400.0f), meti::rand::get_float(-400.0f,400.0f), 0.0f);
 
     jeti::particlesystem::Base* ps = jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size);
 

@@ -73,7 +73,7 @@ void DistantNebula::update(const glm::vec3& camera_pos) {
 
 DistantNebulas* genDistantNebulas(int color_id)
 {
-    float num = meti::rand_int(3, 5);
+    float num = meti::rand::get_int(3, 5);
     float angle_base = 0.0;
     float angle_step = 360/num;
     std::vector<DistantNebula*> nebulas;
@@ -93,26 +93,26 @@ DistantNebulas* genDistantNebulas(int color_id)
 
         float radius_base = 700.f;
         float rate = 0.2f;
-        float radius_delta = radius_base*meti::rand_float(-rate, rate);
+        float radius_delta = radius_base*meti::rand::get_float(-rate, rate);
         float radius = radius_base + radius_delta;
-        float angle_delta = angle_base*meti::rand_float(-rate, rate);
+        float angle_delta = angle_base*meti::rand::get_float(-rate, rate);
         float angle = angle_base + angle_delta;
         glm::vec3 position = meti::xy_vec3(radius, angle);
 
-        float paralaxFactor = meti::rand_float(1.005f, 1.02f);
+        float paralaxFactor = meti::rand::get_float(1.005f, 1.02f);
         DistantNebula* dn = new DistantNebula(paralaxFactor);
 
         dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
         dn->setMaterial(material);
         dn->setMesh(mesh);
         dn->setPosition(position);
-        dn->setSize(meti::rand_float(10.f, 15.f)*material->size());
+        dn->setSize(meti::rand::get_float(10.f, 15.f)*material->size());
         //dn->SetAngle(angle);
         //dn->SetDeltaAngle(delta_angle);
         nebulas.push_back(dn);
 
         if (material->model()->is_rotated) {
-            float delta_angle = meti::rand_bool() * meti::rand_float(0.0001f, 0.0005f);
+            float delta_angle = meti::rand::get_sign() * meti::rand::get_float(0.0001f, 0.0005f);
             jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(meti::OZ, delta_angle);
             dn->setAnimationRotation(animation);
         }

@@ -501,7 +501,7 @@ StarSystem::randomInhabitedPlanet() const
     }
     
     if (tmp_planet_vec.size() >= 1)  {
-        requested_planet = meti::rand_element(tmp_planet_vec);
+        requested_planet = meti::rand::get_element(tmp_planet_vec);
     }
 
     return requested_planet;
@@ -522,7 +522,7 @@ StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand_element(vehicles);
+        result = meti::rand::get_element(vehicles);
     }
     
     return result;
@@ -544,7 +544,7 @@ StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand_element(vehicles);
+        result = meti::rand::get_element(vehicles);
     }
     
     return result;
@@ -565,7 +565,7 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
     }
     
     if (vehicles.size()) {
-        result = meti::rand_element(vehicles);
+        result = meti::rand::get_element(vehicles);
     }
     
     return result;
@@ -584,7 +584,7 @@ void StarSystem::__updateStates()
         __shipManager_s(50);
         
         if (m_wormholes.size() < 5) {
-            glm::vec2 center = meti::rand_vec2f(200, 1200);
+            glm::vec2 center = meti::rand::get_vec2(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
             add(core::global::get().blackHoleBuilder().gen(), center3);
@@ -732,14 +732,14 @@ void StarSystem::update(int time)
         }
 
         // phisics
-        if (meti::rand_probability(/*percent*/33)) {
+        if (meti::rand::get_probability(/*percent*/33)) {
             __bulletsCollisionCheck_s();    // pri/2
             __asteroidsCollisionCheck_s(); // pri/2
         }
         //phisics
         
         if (m_containers.size() > m_container_num_max) {
-            unsigned int index = meti::rand_int(m_container_num_max-1);
+            unsigned int index = meti::rand::get_int(m_container_num_max-1);
             m_containers[index]->hit(100);
         }
     } else {
@@ -781,17 +781,17 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     }
 
     // create minerals
-    int containers_num = meti::rand_int(1,3);
+    int containers_num = meti::rand::get_int(1,3);
     for (int i=0; i<containers_num; ++i) {
-        int mass = meti::rand_int(3, 100);
+        int mass = meti::rand::get_int(3, 100);
         int_t object_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         {
         descriptor::comm::CreateMineral telegramm_descriptor(object_id, descriptor_id, mass);
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
         }
-        float strength = meti::rand_float(1.0f, 2.0f);
-        glm::vec3 impulse(meti::rand_xy_vec3(strength));
+        float strength = meti::rand::get_float(1.0f, 2.0f);
+        glm::vec3 impulse(meti::rand::get_vec3xy(strength));
         {
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
@@ -800,7 +800,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 
     // send telegram to create explosion
     {
-        descriptor::comm::effect::Explosion telegramm_descriptor(meti::rand_int(1,10), asteroid->position());
+        descriptor::comm::effect::Explosion telegramm_descriptor(meti::rand::get_int(1,10), asteroid->position());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
     }
 }
@@ -922,7 +922,7 @@ void StarSystem::__shipManager_s(unsigned int num)
     while (m_vehicles.size() < num)
     {
         race::Type prace_id = race::Type::R0;
-        if (meti::rand_bool()) {
+        if (meti::rand::get_bool()) {
             prace_id = race::Type::R6;
         }
         
@@ -938,7 +938,7 @@ void StarSystem::__shipManager_s(unsigned int num)
         builder::BaseVehicle::equip(new_pship);
         new_pship->bindNpc(new_npc);
 
-        glm::vec2 center = meti::rand_vec2f(100, 800);
+        glm::vec2 center = meti::rand::get_vec2(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
         //glm::vec3 angle(0,0,meti::getRandInt(360));
         

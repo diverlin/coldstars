@@ -99,7 +99,7 @@ public:
         assert(!this->empty());
         ceti::pack<T> result;
         for (int i=0; i<size; ++i) {
-            result.add(meti::rand_element(*this));
+            result.add(meti::rand::get_element(*this));
         }
         return result;
     }

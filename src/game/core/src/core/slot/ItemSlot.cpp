@@ -90,7 +90,7 @@ Item::Item(entity::Type type)
     setType(type);
     setGroup(entity::Type::ITEM_SLOT);
     
-    m_hitProbability = meti::rand_int(100); // (tmp) move to builder
+    m_hitProbability = meti::rand::get_int(100); // (tmp) move to builder
 }
 
 Item::~Item()

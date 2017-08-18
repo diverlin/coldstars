@@ -994,7 +994,7 @@ void Vehicle::hit(int damage, SpaceObject* agressor)
 /* virtual */
 void Vehicle::_postDeathUniqueEvent(bool show_effect)
 {
-    int num_items = meti::rand_int(3);
+    int num_items = meti::rand::get_int(3);
     for (int i = 0; i<num_items; i++)
     {
         //__dropRandomItemToSpace();
@@ -1527,7 +1527,7 @@ void Vehicle::lockRandomItem(int locked_turns)
 
     if (_equiped_slot_vec.size() > 0)
     {
-        unsigned int _rand = meti::rand_int(_equiped_slot_vec.size());
+        unsigned int _rand = meti::rand::get_int(_equiped_slot_vec.size());
         _equiped_slot_vec[_rand]->item()->doLock(locked_turns);
     }
 }
