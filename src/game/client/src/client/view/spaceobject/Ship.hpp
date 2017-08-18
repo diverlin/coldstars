@@ -42,10 +42,10 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
-    control::Ship* control() const { return m_ship; }
+    control::Ship* control() const { return m_control; }
 
 private:
-    control::Ship* m_ship = nullptr;
+    control::Ship* m_control = nullptr;
     jeti::particlesystem::Jet* m_driveJet = nullptr;
 };
 

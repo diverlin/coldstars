@@ -56,7 +56,11 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     case core::comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
     case core::comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
-    case core::comm::Telegramm::Type::REMOVE_ASTEROID: { return "comm::Message::Type::REMOVE_ASTEROID"; }
+        // kill
+    case core::comm::Telegramm::Type::KILL_ASTEROID: { return "comm::Message::Type::KILL_ASTEROID"; }
+    case core::comm::Telegramm::Type::KILL_BULLET: { return "comm::Message::Type::KILL_BULLET"; }
+    case core::comm::Telegramm::Type::KILL_CONTAINER: { return "comm::Message::Type::KILL_CONTAINER"; }
+        //
     case core::comm::Telegramm::Type::CREATE_BULLET: { return "comm::Message::Type::CREATE_BULLET"; }
 
     }

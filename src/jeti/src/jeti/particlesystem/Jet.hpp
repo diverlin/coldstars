@@ -33,7 +33,7 @@ public:
     void update() override final;
 };
 
-Jet* genJet(control::Material*, float size = 1.0f);
+Jet* genJet(control::Material*, float);
 
 } // namespace particlesystem
 } // namespace jeti

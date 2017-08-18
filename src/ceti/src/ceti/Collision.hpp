@@ -34,8 +34,8 @@ bool checkCollision(AGRESSOR* agressor, VICTIM* victim)
     if (checkCollisionDotWithCircle(agressor->position(),
                                     victim->position(),
                                     agressor->collisionRadius()+victim->collisionRadius())) {
-        victim->hit(agressor->damage());
-        agressor->collisionEvent();
+//        victim->hit(agressor->damage());
+//        agressor->collisionEvent();
         return true;
     }
 

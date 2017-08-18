@@ -36,6 +36,9 @@ public:
     Bullet(descriptor::Bullet*, model::Bullet*);
     virtual ~Bullet();
 
+    void setOwnerId(int_t) const;
+
+    int_t ownerId() const;
     void update(int);
 
     bool collideable() const { return true; }

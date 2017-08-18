@@ -27,14 +27,14 @@
 
 namespace view {
 
-Bullet::Bullet(control::Bullet* bullet)
+Bullet::Bullet(control::Bullet* control)
     :
-      Base(bullet)
-    , m_control(bullet)
+      Base(control)
+    , m_control(control)
 {
-    setOrientation(bullet);
+    setOrientation(control);
 
-    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 10.0f/*control->collisionRadius()*/);
 }
 
 Bullet::~Bullet()

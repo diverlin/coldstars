@@ -227,8 +227,9 @@ private:
     bool __asteroidCollisionCheck_s(Asteroid*) const;
 
     void __bulletsManager_DEBUG(int) const;
-    void __processBulletDeath_s(Bullet*) const;
     void __processAsteroidDeath_s(Asteroid*) const;
+    void __processBulletDeath_s(Bullet*) const;
+    void __processContainerDeath_s(Container*) const;
 
     void __removeVehicle(int_t);
     void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);

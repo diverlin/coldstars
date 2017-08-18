@@ -56,7 +56,10 @@ public:
         HIT,
         EXPLOSION,
 
-        REMOVE_ASTEROID
+        // kill
+        KILL_ASTEROID,
+        KILL_BULLET,
+        KILL_CONTAINER
     };
 
 public:

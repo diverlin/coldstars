@@ -39,6 +39,9 @@ Bullet::~Bullet()
 {
 }
 
+void Bullet::setOwnerId(int_t id) const { model()->setOwner(id); }
+int_t Bullet::ownerId() const { return model()->owner(); }
+
 int Bullet::damage() const { return descriptor()->damage(); }
 
 void Bullet::update(int time)
@@ -98,13 +101,6 @@ void Bullet::collisionEvent()
 void Bullet::hit(int damage, SpaceObject* agressor)
 {
     SpaceObject::hit(damage);
-
-    //if (show_effect == true)
-    {
-        // improove
-//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
-//        starsystem()->Add(text);
-    }
 }
 
 /* virtual override final */

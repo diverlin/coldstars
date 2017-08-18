@@ -34,14 +34,14 @@
 
 namespace view {
 
-Ship::Ship(control::Ship* ship)
+Ship::Ship(control::Ship* control)
     :
-      Base(ship)
-    , m_ship(ship)
+      Base(control)
+    , m_control(control)
 {
-    setOrientation(ship);
+    setOrientation(control);
 
-    for(slot::Item* slot: ship->weaponSlots()) {
+    for(slot::Item* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache
         control::Turrel* turrel_control = builder::Turrel().gen();
         view::Turrel* turrel = new view::Turrel(slot, turrel_control);
@@ -55,7 +55,7 @@ Ship::Ship(control::Ship* ship)
         shield->dissipate();
     }
 
-    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
+    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
 
     _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
 }
@@ -119,10 +119,10 @@ void Ship::draw(const jeti::Render& render) const
 
     //if (GetProperties().speed > 0) {
         //std::cout<<"ddd="<<ceti::to_string(m_ship->direction())<<std::endl;
-        glm::vec3 pos = m_ship->position();
-        pos -= m_ship->size().x * m_ship->direction();
+        glm::vec3 pos = m_control->position();
+        pos -= m_control->size().x * m_control->direction();
         m_driveJet->setCenter(pos);
-        m_driveJet->setDirection(-m_ship->direction());
+        m_driveJet->setDirection(-m_control->direction());
         m_driveJet->update();
         m_driveJet->draw(render);
         //starsystem()->RestoreSceneColor();
@@ -133,7 +133,7 @@ void Ship::draw(const jeti::Render& render) const
         //RenderShieldEffect(render, 1.0f - color().a);
     //}
 
-        const auto& path = m_ship->navigator().path();
+        const auto& path = m_control->navigator().path();
         if (path.centers().size()) {
             _path()->update(path.centers(), path.directions());
             _drawPath(render);
