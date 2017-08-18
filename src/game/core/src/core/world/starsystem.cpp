@@ -202,10 +202,8 @@ void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* tar
     }
 }
 
-void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
+void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position, const glm::vec3& direction)
 {
-    //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
-
     for (Vehicle* _vehicle: m_vehicles) {
         if (_vehicle->id() == vehicle->id()) {
             LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
@@ -217,7 +215,7 @@ void StarSystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position,
     vehicle->setStarSystem(this);
 
     vehicle->setPosition(position);
-    vehicle->setDirection(glm::vec3(0,1,0)/*dir*/);
+    vehicle->setDirection(direction);
 
     m_vehicles.push_back(vehicle);
 }
@@ -236,9 +234,9 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
     m_ships.push_back(ship);
 }
 
-void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const model::SpaceObject* const parent)
+void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& direction, const model::SpaceObject* const parent)
 {
-    __addVehicleCommon(satellite, position, dir);
+    __addVehicleCommon(satellite, position, direction);
     model()->addSatellite(satellite->id());
     m_satellites.push_back(satellite);
 }
@@ -919,8 +917,7 @@ void StarSystem::__updateInSpaceInStatic_s()
 
 void StarSystem::__shipManager_s(unsigned int num)
 {
-    while (m_vehicles.size() < num)
-    {
+    while (m_vehicles.size() < num) {
         race::Type prace_id = race::Type::R0;
         if (meti::rand::gen_bool()) {
             prace_id = race::Type::R6;
@@ -940,9 +937,9 @@ void StarSystem::__shipManager_s(unsigned int num)
 
         glm::vec2 center = meti::rand::gen_vec2(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        //glm::vec3 angle(0,0,meti::getRandInt(360));
+        glm::vec3 direction = meti::rand::gen_vec3xy_unit();
         
-        add(new_pship, center3/*, angle*/);
+        add(new_pship, center3, direction);
     }
 }
 
