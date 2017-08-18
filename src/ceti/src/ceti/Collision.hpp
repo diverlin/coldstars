@@ -25,15 +25,15 @@
 namespace ceti {
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius);
-bool checkCollisionDotWithCircle_DIRTY(const glm::vec3& dot, const glm::vec3& center, float radius);
+bool checkCollisionDotWithCircle(const glm::vec3& c1, const glm::vec3& c2, float radius);
 bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
 
 template <typename AGRESSOR, typename VICTIM>
-bool checkCollision(AGRESSOR* agressor,  VICTIM* victim)
+bool checkCollision(AGRESSOR* agressor, VICTIM* victim)
 {
-    if (checkCollisionDotWithCircle_DIRTY(agressor->position(),
-                                          victim->position(),
-                                          agressor->collisionRadius()+victim->collisionRadius())) {
+    if (checkCollisionDotWithCircle(agressor->position(),
+                                    victim->position(),
+                                    agressor->collisionRadius()+victim->collisionRadius())) {
         victim->hit(agressor->damage());
         agressor->collisionEvent();
         return true;

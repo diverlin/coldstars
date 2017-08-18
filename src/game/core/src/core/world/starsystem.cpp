@@ -744,7 +744,7 @@ void StarSystem::update(int time)
         }
 
         // phisics
-        if (meti::getRandInt(0, 2) == 1) {
+        if (meti::getProbability(/*percent*/33)) {
             __bulletsCollisionCheck_s();    // pri/2
             __asteroidsCollisionCheck_s(); // pri/2
         }
