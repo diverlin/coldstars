@@ -26,12 +26,12 @@ namespace meti {
 
 bool getProbability(int val) {
     assert(val>0&&val<=100);
-    return (getRandInt(0, 100) > val);
+    return (rand_int(0, 100) > val);
 }
 
 void randomizeDirection(glm::vec3& direction)
 {
-    float angle = getRandFloat(2*M_PI);
+    float angle = rand_float(2*M_PI);
     direction.x = cos(angle);
     direction.y = sin(angle);
     direction.z = 0.0f;
@@ -39,72 +39,67 @@ void randomizeDirection(glm::vec3& direction)
 
 float addRandPercent(float val, float percent)
 {
-    return val*(1+getRandFloat(percent));
+    return val*(1+rand_float(percent));
 }
 
-float getRandFloat(float high)
+float rand_float(float high)
 {
     float precision = 100000.0;
-    return (float)getRandInt(0, (int)precision*high)/precision;
+    return (float)rand_int(0, (int)precision*high)/precision;
 }
 
-float getRandFloat(float low, float high)
+float rand_float(float low, float high)
 {
     assert(low<=high);
     float precision = 100000.0;
-    return (float)getRandInt((int)precision*low, (int)precision*high)/precision;
+    return (float)rand_int((int)precision*low, (int)precision*high)/precision;
 }
 
-int getRandInt(int low, int high)
+int rand_int(int low, int high)
 {
     assert(low<=high);
     return (low != high) ? low + std::rand()%(high+1-low) : low;
 }
 
-int getRandInt(int arg)
+int rand_int(int arg)
 {
     //assert(arg != 0);
     return std::rand()%(arg+1);
 }
 
-int getRandSign()
+int rand_sing()
 {
-    return getRandInt(0,10) > 5 ? 1: -1;
+    return rand_int(0,10) > 5 ? 1: -1;
 }
 
-bool getRandBool()
+bool rand_bool()
 {
-    return getRandInt(0,10) > 5 ? true : false;
-}
-
-bool isActionShouldHappen(int percent)
-{
-    return percent > getRandInt(1, 100)? true : false;
+    return rand_int(0,10) > 5 ? true : false;
 }
 
 glm::vec2 getRandVec2f(int radius_min, int radius_max)
 {
-    float alpha = glm::radians((float)getRandInt(0, 360));
-    int len = getRandInt(radius_min, radius_max);
+    float alpha = glm::radians((float)rand_int(0, 360));
+    int len = rand_int(radius_min, radius_max);
     return glm::vec2(sin(alpha) * len, cos(alpha) * len);
 }
 
 glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z)
 {
-    float alpha = glm::radians((float)getRandInt(0, 360));
-    int len = getRandInt(radius_min, radius_max);
+    float alpha = glm::radians((float)rand_int(0, 360));
+    int len = rand_int(radius_min, radius_max);
     return glm::vec3(sin(alpha)*len, cos(alpha)*len, z);
 }
 
 glm::vec3 getRandXYVec3(float r)
 {
-    float alpha = glm::radians((float)getRandInt(0, 360));
+    float alpha = glm::radians((float)rand_int(0, 360));
     return r*glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 
 glm::vec3 getRandXYVec3Unit()
 {
-    float alpha = glm::radians((float)getRandInt(0, 360));
+    float alpha = glm::radians((float)rand_int(0, 360));
     return glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 

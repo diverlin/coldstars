@@ -98,7 +98,7 @@ DistantStars* genDistantStars(int color_id)
     std::vector<DistantStarsLayer*> layers;
     int iterations = 30;
     for (int i=0; i<iterations; ++i) {
-        int distStar_num = meti::getRandInt(DISTANT_STAR_MIN/iterations, DISTANT_STAR_MAX/iterations);
+        int distStar_num = meti::rand_int(DISTANT_STAR_MIN/iterations, DISTANT_STAR_MAX/iterations);
 
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
         assert(material);
@@ -108,31 +108,31 @@ DistantStars* genDistantStars(int color_id)
         std::vector<float> sizes;
 
         for (int i=0; i<distStar_num; i++) {
-            float z = -meti::getRandInt(799, 999);
+            float z = -meti::rand_int(799, 999);
             glm::vec3 position = meti::getRandXYVec3f(0, 3000, z);
 
             float min = 0.5f;
             float mid = 0.8f;
             glm::vec4 color(1.0f);
-            int choice = meti::getRandInt(0,3);
+            int choice = meti::rand_int(0,3);
             if (choice == 0) {
-                color.r = meti::getRandFloat(min, 1.0);
-                color.g = meti::getRandFloat(mid, 1.0);
-                color.b = meti::getRandFloat(mid, 1.0);
+                color.r = meti::rand_float(min, 1.0);
+                color.g = meti::rand_float(mid, 1.0);
+                color.b = meti::rand_float(mid, 1.0);
             }
             if (choice == 1) {
-                color.r = meti::getRandFloat(mid, 1.0);
-                color.g = meti::getRandFloat(min, 1.0);
-                color.b = meti::getRandFloat(mid, 1.0);
+                color.r = meti::rand_float(mid, 1.0);
+                color.g = meti::rand_float(min, 1.0);
+                color.b = meti::rand_float(mid, 1.0);
             }
             if (choice == 2) {
-                color.r = meti::getRandFloat(mid, 1.0);
-                color.g = meti::getRandFloat(mid, 1.0);
-                color.b = meti::getRandFloat(min, 1.0);
+                color.r = meti::rand_float(mid, 1.0);
+                color.g = meti::rand_float(mid, 1.0);
+                color.b = meti::rand_float(min, 1.0);
             }
-            float size = meti::getRandFloat(5.0, 10.0);
-            if (meti::getRandInt(15) == 1) {
-                size = meti::getRandFloat(13.0, 16.0f);
+            float size = meti::rand_float(5.0, 10.0);
+            if (meti::rand_int(15) == 1) {
+                size = meti::rand_float(13.0, 16.0f);
                 color *= 1.2;
             }
 
@@ -141,7 +141,7 @@ DistantStars* genDistantStars(int color_id)
             sizes.push_back(size);
         }
 
-        float paralaxFactor = meti::getRandFloat(1.005, 1.02);
+        float paralaxFactor = meti::rand_float(1.005, 1.02);
         DistantStarsLayer* layer = new DistantStarsLayer(positions, colors, sizes, paralaxFactor);
         layer->setMaterial(material);
 

@@ -81,7 +81,7 @@ float distance(float x1, float y1, float x2, float y2)
 
 float getRandAngle()
 {
-    float angle = getRandInt(360);
+    float angle = rand_int(360);
     return 2*M_PI/angle;
 }
 

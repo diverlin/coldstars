@@ -95,10 +95,10 @@ void StarSystem::__createInternals(control::StarSystem* starsystem, descriptor::
     //starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     __createStar(starsystem);
     
-    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
+    int distNebula_num = meti::rand_int(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
 
-    __createPlanets(starsystem, meti::getRandInt(2,5));
+    __createPlanets(starsystem, meti::rand_int(2,5));
 }
 
 void StarSystem::__createBackground(control::StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id)
