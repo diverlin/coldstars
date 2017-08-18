@@ -726,11 +726,9 @@ void StarSystem::__updateStates()
 
 void StarSystem::update(int time)
 {                
-    bool detalied_simulation = true;
-
     core::comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
 
-    __updateEntities_s(time, detalied_simulation);
+    __updateEntities_s(time);
     __manageUnavaliableObjects_s();
     __manageDeadObjects();         // no need to update so frequently, pri /6
 
@@ -895,7 +893,7 @@ void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
 
 }
 
-void StarSystem::__updateEntities_s(int time, bool show_effect)
+void StarSystem::__updateEntities_s(int time)
 {
     for (Star* star: m_stars) { star->updateInSpace(time, show_effect);  }
     for (Planet* planet: m_planets) { planet->updateInSpace(time, show_effect); }
