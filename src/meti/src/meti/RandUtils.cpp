@@ -24,6 +24,11 @@
 
 namespace meti {
 
+bool getProbability(int val) {
+    assert(val>0&&val<=100);
+    return (getRandInt(0, 100) > val);
+}
+
 void randomizeDirection(glm::vec3& direction)
 {
     float angle = getRandFloat(2*M_PI);
