@@ -258,7 +258,7 @@ void God::__createLifeAtPlanet(control::Planet* planet, const StarSystemDescript
 void God::__createSpaceStations(control::StarSystem* starsystem, int spacestation_per_system) const
 {       
     for (int i=0; i<spacestation_per_system; i++) {
-        race::Type npc_race_id = meti::rand::get_element(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
+        race::Type npc_race_id = meti::rand::get_element_or_die(core::global::get().raceDescriptors().getRaces(race::KIND::GOOD));
         entity::Type npc_group    = entity::Type::WARRIOR;
         entity::Type npc_subgroup = entity::Type::WARRIOR;
 

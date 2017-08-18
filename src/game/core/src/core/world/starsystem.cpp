@@ -100,32 +100,32 @@ StarSystem::__actualizeModel()
     model()->setWritable(false);
 
     for(int_t id: model()->stars()) {
-        add(manager::Entities::get().star(id));
+        add(manager::Entity::get().star(id));
     }
     for(int_t id: model()->planets()) {
-        add(manager::Entities::get().planet(id));
+        add(manager::Entity::get().planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(manager::Entities::get().asteroid(id));
+        add(manager::Entity::get().asteroid(id));
     }
     for(int_t id: model()->wormholes()) {
-        __add(manager::Entities::get().wormhole(id));
+        __add(manager::Entity::get().wormhole(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(manager::Entities::get().ship(id));
+        add(manager::Entity::get().ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(manager::Entities::get().satellite(id));
+        add(manager::Entity::get().satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(manager::Entities::get().spacestation(id));
+        add(manager::Entity::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        __add(manager::Entities::get().container(id));
+        __add(manager::Entity::get().container(id));
     }
     for(int_t id: model()->bullets()) {
-        __add(manager::Entities::get().bullet(id));
+        __add(manager::Entity::get().bullet(id));
     }
 //    __actualizeItems();
 
@@ -499,7 +499,7 @@ StarSystem::randomInhabitedPlanet() const
     }
     
     if (tmp_planet_vec.size() >= 1)  {
-        requested_planet = meti::rand::get_element(tmp_planet_vec);
+        requested_planet = meti::rand::get_element_or_die(tmp_planet_vec);
     }
 
     return requested_planet;
@@ -520,7 +520,7 @@ StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand::get_element(vehicles);
+        result = meti::rand::get_element_or_die(vehicles);
     }
     
     return result;
@@ -542,7 +542,7 @@ StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand::get_element(vehicles);
+        result = meti::rand::get_element_or_die(vehicles);
     }
     
     return result;
@@ -563,7 +563,7 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
     }
     
     if (vehicles.size()) {
-        result = meti::rand::get_element(vehicles);
+        result = meti::rand::get_element_or_die(vehicles);
     }
     
     return result;
@@ -755,21 +755,35 @@ void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 
 }
 
-void StarSystem::__createBullet_DEBUG() const
+void StarSystem::__bulletsManager_DEBUG() const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
 
-//    int_t owner_id = meti::rand(vehicles())->id();
-//    int_t equipment_id = ;
-//    int_t target_id = ;
-//    descriptor::comm::ShootBullet telegramm_descriptor(owner_id, equipment_id, target_id);
-//    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_ASTEROID, telegramm_descriptor.data()));
+    Vehicle* vehicle = meti::rand::get_element(vehicles());
+    SpaceObject* target = meti::rand::get_element(asteroids());
+    if (!vehicle || !target) {
+        return;
+    }
+
+    int_t owner_id = vehicle->id();
+    int_t target_id = target->id();
+
+    std::vector<item::Weapon*> rockets = vehicle->weapons().rockets();
+    item::Weapon* rocket = meti::rand::get_element(rockets);
+    if (!rocket) {
+        return;
+    }
+
+    int_t item_id = rocket->id();
+
+    descriptor::comm::CreateBullet telegramm_descriptor(owner_id, item_id, target_id);
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    manager::Entities& entitiesManager = manager::Entities::get();
+    manager::Entity& entitiesManager = manager::Entity::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
 
     // send message asteroid death

@@ -64,7 +64,7 @@ Scaner::__genTemplate(descriptor::item::Scaner* descr, int_t ob_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descr->id(), ob_id);
     control::item::Scaner* scaner = new control::item::Scaner(descr, model);
-    manager::Entities::get().add(scaner);
+    manager::Entity::get().add(scaner);
     return scaner;
 }
 

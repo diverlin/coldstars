@@ -57,6 +57,7 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     case core::comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
     case core::comm::Telegramm::Type::REMOVE_ASTEROID: { return "comm::Message::Type::REMOVE_ASTEROID"; }
+    case core::comm::Telegramm::Type::CREATE_BULLET: { return "comm::Message::Type::CREATE_BULLET"; }
 
     }
     assert(false);

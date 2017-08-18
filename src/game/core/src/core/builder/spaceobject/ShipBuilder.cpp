@@ -72,7 +72,7 @@ Ship::__genTemplate(descriptor::Ship* descr, int_t ob_id)
     control::Ship* ship = new control::Ship(descr, model);
     assert(ship);
 
-    manager::Entities::get().add(ship);
+    manager::Entity::get().add(ship);
     return ship;
 }
 

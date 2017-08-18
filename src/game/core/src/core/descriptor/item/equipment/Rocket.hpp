@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <core/common/BulletData.hpp>
+
 #include "Weapon.hpp"
 
 namespace descriptor {
@@ -59,18 +61,22 @@ public:
     std::string data() const;
 
     void setAmmo(int ammo) { m_ammo = ammo; }
+    void setBulletData(const BulletData& bulletData) { m_data_bullet = bulletData; }
 
     int ammo() const { return m_ammo; }
+    const BulletData& bulletData() const{ return m_data_bullet; }
 
     std::string info() const {
         std::string result = "descriptor::item::Rocket:\n";
         result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
+        result += m_data_bullet.info();
         result += Weapon::info();
         return result;
     }
 
 private:
     int m_ammo = 0;
+    BulletData m_data_bullet;
 
 private:
     friend class boost::serialization::access;
@@ -78,6 +84,7 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Weapon>(*this);
         ar & m_ammo;
+        ar & m_data_bullet;
     }
 };
 

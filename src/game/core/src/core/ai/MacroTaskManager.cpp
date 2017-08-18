@@ -28,7 +28,7 @@ void MacroTaskManager::setTask(const Task& macrotask)
     m_macrotask = macrotask;
     m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
     if (m_macrotask.targetId() != NONE) {
-        m_target = manager::Entities::get().spaceObject(macrotask.targetId())->model();
+        m_target = manager::Entity::get().spaceObject(macrotask.targetId())->model();
     }
 }
 

@@ -139,7 +139,7 @@ Manager::rand(Type type) const
     if (it == m_descriptorsTypes.end()) {
         throw std::runtime_error("Base* Manager::randdescriptor type = " + to_string(type) + " doesn't exist");
     }
-    Base* descr = meti::rand::get_element(it->second);
+    Base* descr = meti::rand::get_element_or_die(it->second);
     assert(descr);
     return descr;
 }

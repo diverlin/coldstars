@@ -61,7 +61,7 @@ Angar::__createTemplate(descriptor::Angar* descr)
     control::Angar* angar = new control::Angar(descr, model);
     assert(angar);
 
-    manager::Entities::get().add(angar);
+    manager::Entity::get().add(angar);
 
     return angar;
 }

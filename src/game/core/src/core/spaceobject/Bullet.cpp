@@ -63,6 +63,7 @@ Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)
 {
+    m_model_rocket->setSpeed(m_model_rocket->bulletData().speedMin());
 }
 
 Bullet::~Bullet()
@@ -74,8 +75,8 @@ void Bullet::update(int time)
     _checkDeath();
         
     if (time > 0) {           
-        if (model()->speed() < model()->bulletData().speed_max) {
-            model()->increaseSpeed(model()->bulletData().d_speed);
+        if (model()->speed() < model()->bulletData().speedMax()) {
+            model()->increaseSpeed(model()->bulletData().deltaSpeed());
         } 
                 
         if (m_target) {

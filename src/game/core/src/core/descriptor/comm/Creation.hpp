@@ -119,6 +119,43 @@ private:
     }
 };
 
+
+class CreateBullet
+{
+public:
+    CreateBullet(int_t, int_t, int_t);
+    CreateBullet(const std::string& data);
+    ~CreateBullet() = default;
+    std::string data() const;
+
+    int_t owner() const { return m_owner; }
+    int_t weapon() const { return m_item; }
+    int_t target() const { return m_target; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::BulletShoot:\n";
+        result += std::string(" owner = ") + std::to_string(m_owner) + "\n";
+        result += std::string(" item = ") + std::to_string(m_item) + "\n";
+        result += std::string(" target = ") + std::to_string(m_target) + "\n";
+        return result;
+    }
+
+private:
+    int_t m_owner = 0;
+    int_t m_item = 0;
+    int_t m_target = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_owner;
+        ar & m_item;
+        ar & m_target;
+    }
+};
+
+
 namespace effect {
 
 class Explosion

@@ -61,7 +61,7 @@ genGalaxy(const std::vector<int_t>& sectors) {
     descriptor::Galaxy* descr = new descriptor::Galaxy;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
-        descr->sectors.push_back(meti::rand::get_element(sectors));
+        descr->sectors.push_back(meti::rand::get_element_or_die(sectors));
     }
     descriptor::Manager::get().add(descr);
     return descr;
@@ -72,7 +72,7 @@ genSector(const std::vector<int_t>& starsystems) {
     descriptor::Sector* descr = new descriptor::Sector;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
-        descr->starsystems.push_back(meti::rand::get_element(starsystems));
+        descr->starsystems.push_back(meti::rand::get_element_or_die(starsystems));
     }
     descriptor::Manager::get().add(descr);
     return descr;

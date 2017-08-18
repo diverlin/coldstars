@@ -34,6 +34,7 @@ Weapon::Weapon(control::Vehicle* vehicle)
       Base(vehicle)
 {}
 
+
 bool
 Weapon::addSlot(slot::Item* slot)
 {
@@ -226,6 +227,26 @@ void Weapon::__validateTargets()
             }
         }
     }
+}
+
+std::vector<control::item::Weapon*> Weapon::rockets() const {
+    return __functionalWeapons(entity::Type::ROCKET_EQUIPMENT);
+}
+
+std::vector<control::item::Weapon*>
+Weapon::__functionalWeapons(entity::Type requested_type) const
+{
+    std::vector<control::item::Weapon*> result;
+    for (slot::Item* slot: m_slots) {
+        control::item::Weapon* weapon = slot->weapon();
+        if (weapon) {
+            if (weapon->isFunctioning()) {
+                if (weapon->type() == requested_type || entity::Type::ANY == requested_type)
+                    result.push_back(weapon);
+            }
+        }
+    }
+    return result;
 }
 
 void Weapon::updateFireAbility()
