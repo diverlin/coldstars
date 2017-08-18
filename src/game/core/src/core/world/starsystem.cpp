@@ -690,39 +690,39 @@ void StarSystem::__updateStates()
     }
 }
 
-float StarSystem::calcResultGravityForce(const glm::vec3& center, const glm::vec3& orient, float mass) const
-{
-    float rate = 1;
-    for (unsigned int i=0; i<m_stars.size(); i++)
-    {
-        float dist = meti::distance(center, m_stars[i]->position());
-        if (dist < 5*m_stars[i]->collisionRadius())
-        {
-            glm::vec3 force_dir(m_stars[i]->position() - center);
-            force_dir = glm::normalize(force_dir);
-            float power1 = meti::dotUnits(force_dir, orient);
-            float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
+//float StarSystem::calcResultGravityForce(const glm::vec3& center, const glm::vec3& orient, float mass) const
+//{
+//    float rate = 1;
+//    for (unsigned int i=0; i<m_stars.size(); i++)
+//    {
+//        float dist = meti::distance(center, m_stars[i]->position());
+//        if (dist < 5*m_stars[i]->collisionRadius())
+//        {
+//            glm::vec3 force_dir(m_stars[i]->position() - center);
+//            force_dir = glm::normalize(force_dir);
+//            float power1 = meti::dotUnits(force_dir, orient);
+//            float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
 
-            rate += power1*power2;
-        }
-    }
+//            rate += power1*power2;
+//        }
+//    }
 
-    for (unsigned int i=0; i<m_planets.size(); i++)
-    {
-        float dist = meti::distance(center, m_planets[i]->position());
-        if (dist < 5*m_planets[i]->collisionRadius())
-        {
-            glm::vec3 force_dir(m_planets[i]->position() - center);
-            force_dir = glm::normalize(force_dir);
-            float power1 = meti::dotUnits(force_dir, orient);
-            float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
+//    for (unsigned int i=0; i<m_planets.size(); i++)
+//    {
+//        float dist = meti::distance(center, m_planets[i]->position());
+//        if (dist < 5*m_planets[i]->collisionRadius())
+//        {
+//            glm::vec3 force_dir(m_planets[i]->position() - center);
+//            force_dir = glm::normalize(force_dir);
+//            float power1 = meti::dotUnits(force_dir, orient);
+//            float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
             
-            rate += power1*power2;
-        }
-    }
+//            rate += power1*power2;
+//        }
+//    }
     
-    return rate;
-}
+//    return rate;
+//}
 
 void StarSystem::update(int time)
 {                
@@ -897,43 +897,13 @@ void StarSystem::__externalForcesAffection_s(bool detalied_simulation)
 
 void StarSystem::__updateEntities_s(int time, bool show_effect)
 {
-    for (auto star: m_stars) { star->updateInSpace(time, show_effect);  }
-    for (auto planet: m_planets) { planet->updateInSpace(time, show_effect); }
-    for (unsigned int i=0; i<m_wormholes.size(); i++)        { m_wormholes[i]->updateInSpace(time, show_effect); }
+    for (Star* star: m_stars) { star->updateInSpace(time, show_effect);  }
+    for (Planet* planet: m_planets) { planet->updateInSpace(time, show_effect); }
+    for (WormHole* wormhole: m_wormholes) { wormhole->updateInSpace(time); }
     for (Container* container: m_containers) { container->updateInSpace(time); }
-    for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time, show_effect); }
-    
+    for (Asteroid* asteroid: m_asteroids) { asteroid->updateInSpace(time); }
     for (Vehicle* vehicle: m_vehicles) { vehicle->update(time); }
-    for (unsigned int i=0; i<m_bullets.size(); i++) { m_bullets[i]->UpdateInSpace(time, show_effect); }
-    
-    // effects
-    //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->Update(); }
-    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->Update(); }
-    //    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->Update(); }
-    //    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->Update(); }
-    //    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); }
-}
-
-void StarSystem::loadEntitiesResource()
-{
-    // alpitodorender
-    //    for (unsigned int i=0; i<STAR_vec.size(); i++)      { STAR_vec[i]->ValidateResources();  }
-    //    for (unsigned int i=0; i<PLANET_vec.size(); i++)    { PLANET_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++) { BLACKHOLE_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<CONTAINER_vec.size(); i++) { CONTAINER_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)  { ASTEROID_vec[i]->ValidateResources(); }
-
-    //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)   { VEHICLE_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<ROCKET_vec.size(); i++)    { ROCKET_vec[i]->ValidateResources(); }
-
-    //    // effects
-    //    //for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->ValidateResources(); }
-    //    //for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->ValidateResources(); }
-    //    //for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->ValidateResources(); }
-    //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++) { distantStarEffect_vec[i]->ValidateResources(); }
-
+    for (Bullet* bullet: m_bullets) { bullet->update(time); }
 }
 
 void StarSystem::__updateInSpaceInStatic_s()
@@ -949,78 +919,7 @@ void StarSystem::__updateInSpaceInStatic_s()
 
     for (auto star: m_stars) { star->updateInSpaceInStatic(); }
     for (auto planet: m_planets) { planet->updateInSpaceInStatic(); }
-
-    //garbage_effects.clear();
 }      
-
-void StarSystem::findRenderVisibleEntities_c(Player* player)
-{
-    //player->ClearVisibleEntities();
-
-    //    for (unsigned int i=0; i<STAR_vec.size(); i++)             { player->addIfVisible(STAR_vec[i]); }
-    //    for (unsigned int i=0; i<PLANET_vec.size(); i++)           { player->addIfVisible(PLANET_vec[i]); }
-    //    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)         { player->addIfVisible(ASTEROID_vec[i]); }
-    //    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)        { player->addIfVisible(CONTAINER_vec[i]); }
-    //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { player->addIfVisible(VEHICLE_vec[i]); }
-    //    for (unsigned int i=0; i<ROCKET_vec.size(); i++)           { player->addIfVisible(ROCKET_vec[i]); }
-    //    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)        { player->addIfVisible(BLACKHOLE_vec[i]); }
-
-    //effects
-    //    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->addIfVisible(effect_SHOCKWAVE_vec[i]); }
-    //    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->addIfVisible(effect_LAZERTRACE_vec[i]); }
-    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->addIfVisible(effect_PARTICLESYSTEM_vec[i]); }
-    //    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->addIfVisible(text_DAMAGE_vec[i]); }
-}
-
-void StarSystem::findRadarVisibleEntities_c(Player* player)
-{    
-    //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(gui::type::GUI_RADAR);
-    //    const Vehicle& vehicle = *player->GetNpc()->vehicle();
-    //    gui_radar.ResetData();
-    
-    //    for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }
-    //    for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); }
-    //    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); }
-
-    //    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }
-    //    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }
-}
-
-
-//void StarSystem::DrawBackground(const jeti::Renderer& render, const glm::vec2& scroll_coords)
-//{
-//    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
-//    {
-//        distantNebulaEffect_vec[i]->Render(render, glm::vec3(1.0f));
-//    }
-
-//    for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)
-//    {
-//        DistantStarEffect& ds = *distantStarEffect_vec[i];
-//        render.DrawParticles(ds.mesh(), ds.textureOb(), ds.actualModelMatrix());
-//    }
-//}
-
-//void StarSystem::DrawOrbits(const jeti::Renderer& render)
-//{
-//    for(unsigned int i = 0; i < PLANET_vec.size(); i++)
-//    {
-//        PLANET_vec[i]->GetOrbit().DrawPath(render);
-//    }
-
-//    for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
-//    {
-//        ASTEROID_vec[i]->GetOrbit().DrawPath(render);
-//    }
-//}
-
-//void StarSystem::DrawPath()
-//{
-//    for(unsigned int i=0; i<VEHICLE_vec.size(); i++)
-//    {
-//        //VEHICLE_vec[i]->GetDriveComplex()->DrawPath();
-//    }
-//}
 
 void StarSystem::__shipManager_s(unsigned int num)
 {

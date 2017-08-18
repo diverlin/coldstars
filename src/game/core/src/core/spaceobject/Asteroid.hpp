@@ -37,7 +37,7 @@ public:
 
     int damage() const { return mass()*10; }
 
-    void updateInSpace(int, bool);
+    void updateInSpace(int);
     void collisionEvent();
 
     descriptor::Asteroid* descriptor() const { return m_descriptor_asteroid; }

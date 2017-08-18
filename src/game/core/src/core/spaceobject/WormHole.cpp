@@ -44,9 +44,9 @@ WormHole::~WormHole()
 
 void WormHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
 
-void WormHole::updateInSpace(int time, bool show_effect)
+void WormHole::updateInSpace(int time)
 {
-    _checkDeath(show_effect);
+    _checkDeath();
 
     if (time > 0) {
         setPosition(position()+meti::getRandXYVec3f(1, 2, 0));

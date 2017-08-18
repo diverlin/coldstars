@@ -285,7 +285,7 @@ void doTakeContainer(int_t object, int_t target) {
 
     // add
     ship->load(container->item());
-    container->killSilently();
+    container->die();
 }
 
 void doShoot(int_t object, int_t item) {

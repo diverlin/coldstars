@@ -47,9 +47,9 @@ Asteroid::Asteroid(descriptor::Asteroid* descr, model::Asteroid* model)
 Asteroid::~Asteroid()
 {}
 
-void Asteroid::updateInSpace(int time, bool show_effect)
+void Asteroid::updateInSpace(int time)
 {
-    _checkDeath(show_effect);
+    _checkDeath();
     if (time > 0) {
         _updatePosition();
     }
