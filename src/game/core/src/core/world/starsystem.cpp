@@ -459,7 +459,7 @@ void StarSystem::explosionEvent(const glm::vec3& epicenter, int damage, float ra
 
 
 // poor                
-model::Planet*
+Planet*
 StarSystem::closestInhabitedPlanet(const glm::vec2& _pos) const
 {        
     Planet* requested_planet = nullptr;
@@ -485,10 +485,10 @@ StarSystem::closestInhabitedPlanet(const glm::vec2& _pos) const
         }
     }
     
-    return requested_planet->model();
+    return requested_planet;
 }
 
-model::Planet*
+Planet*
 StarSystem::randomInhabitedPlanet() const
 {
     Planet* requested_planet = nullptr;
@@ -504,13 +504,13 @@ StarSystem::randomInhabitedPlanet() const
         requested_planet = meti::getRand(tmp_planet_vec);
     }
 
-    return requested_planet->model();
+    return requested_planet;
 }
 
-model::Planet*
+Planet*
 StarSystem::randomPlanet() const
 {
-    return meti::getRand(m_planets)->model();
+    return meti::getRand(m_planets);
 }
 
 Vehicle*
@@ -1107,21 +1107,6 @@ void StarSystem::__damageEventInsideCircle(const glm::vec3& position, float radi
 
 }
 
-bool StarSystem::isAnyActiveParticlesEffectPresent(int request_type_id) const
-{
-    //    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
-    //    {
-    //        if (effect_PARTICLESYSTEM_vec[i]->typeId() == request_type_id)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    
-    return false;
-}
-
-
-/*virtual */
 void StarSystem::_postDeathUniqueEvent(bool)
 {}
 

@@ -91,10 +91,6 @@ namespace control {
 
 class StarSystem : public Base
 {
-    //    using Stars = std::vector<Star*>;
-    //    using Planets = std::vector<Planet*>;
-    //    using Vehicles = std::vector<Vehicle*>;
-
 public:
     StarSystem(descriptor::StarSystem*, model::StarSystem*);
     ~StarSystem();
@@ -108,16 +104,11 @@ public:
 
     const glm::vec4& color() const { return m_color; }
     //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
-    int conditionId()     const { return m_condition_id; }
-    race::Type raceId()          const { return m_race_id; }
+    int conditionId() const { return m_condition_id; }
+    race::Type raceId() const { return m_race_id; }
     race::Type conquerorRaceId() const { return m_conqueror_race_id; }
     Star* star() const;
     Sector* sector()      const { return m_sector; }
-    //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
-    unsigned int asteroidNum()     const { return m_asteroids.size(); }
-    //        unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
-    //        unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
-    bool isAnyActiveParticlesEffectPresent(int) const;
 
     model::Npc* freeLeaderByRaceId(race::Type) const;
     void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
@@ -162,22 +153,22 @@ public:
 
     //float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
+    const ceti::pack<Star*>& stars() const { return m_stars; }
+    const ceti::pack<Planet*>& planets() const { return m_planets; }
+    const ceti::pack<WormHole*>& wormholes() const { return m_wormholes; }
+    const ceti::pack<Asteroid*>& asteroids() const { return m_asteroids; }
+    const ceti::pack<Container*>& containers() const { return m_containers; }
+    const ceti::pack<Bullet*>& bullets() const { return m_bullets; }
+
+    const ceti::pack<Vehicle*>& vehicles() const { return m_vehicles; }
+    const ceti::pack<SpaceStation*>& spacestations() const { return m_spacestations; }
+    const ceti::pack<Ship*>& ships() const { return m_ships; }
+    const ceti::pack<Satellite*>& satellites() const { return m_satellites; }
+
     // ugly
-    ceti::pack<Star*> stars() const { return m_stars; }
-    ceti::pack<Planet*> planets() const { return m_planets; }
-    ceti::pack<WormHole*> wormholes() const { return m_wormholes; }
-    ceti::pack<Asteroid*> asteroids() const { return m_asteroids; }
-    ceti::pack<Container*> containers() const { return m_containers; }
-    ceti::pack<Bullet*> bullets() const { return m_bullets; }
-
-    ceti::pack<Vehicle*> vehicles() const { return m_vehicles; }
-    ceti::pack<SpaceStation*> spacestations() const { return m_spacestations; }
-    ceti::pack<Ship*> ships() const { return m_ships; }
-    ceti::pack<Satellite*> satellites() const { return m_satellites; }
-
-    model::Planet* closestInhabitedPlanet(const glm::vec2&) const;
-    model::Planet* randomInhabitedPlanet() const;
-    model::Planet* randomPlanet() const;
+    Planet* closestInhabitedPlanet(const glm::vec2&) const;
+    Planet* randomInhabitedPlanet() const;
+    Planet* randomPlanet() const;
     Vehicle* randomVehicle() const;
     Vehicle* randomVehicleExcludingNpcRaceId(race::Type) const;
     Vehicle* randVehicleByNpcRaceId(race::Type) const;
@@ -205,9 +196,6 @@ private:
 
     AsteroidManager m_asteroid_manager;
 
-    // ENTITY VECTORS
-    //std::vector<Player*>        PLAYER_vec;
-
     ceti::pack<Star*> m_stars;
     ceti::pack<Planet*> m_planets;
     ceti::pack<Asteroid*> m_asteroids;
@@ -218,17 +206,6 @@ private:
     ceti::pack<SpaceStation*> m_spacestations;
     ceti::pack<Ship*> m_ships;
     ceti::pack<Satellite*> m_satellites;
-
-    // effects
-    //        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
-    //        std::vector<DistantStarEffect*>   distantStarEffect_vec;
-
-    //        std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
-    //        std::vector<jeti::BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-    //        std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;
-    //        std::vector<VerticalFlowText*>    text_DAMAGE_vec;
-
-    //        GarbageEffects  garbage_effects;
 
     void __launchingEvent() const;
 
@@ -257,11 +234,6 @@ private:
     void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
 
     void __actualizeModel();
-
-    friend class GuiGalaxyMap;
-    friend class Observation;
-    friend class Player;
-    friend class God;
 };
 
 } // namespace control
