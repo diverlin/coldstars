@@ -75,7 +75,7 @@ Planet::bindLand(Land* land)
 //    land()->AddVehicle(vehicle);
 //}
 
-void Planet::updateInSpace(int time, bool show_effect)
+void Planet::updateInSpace(int time)
 {      
     if (time > 0) {
         _updatePosition();

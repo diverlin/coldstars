@@ -45,7 +45,7 @@ public:
 
     // alpitodorender void CalcColor();
     void updateInSpaceInStatic();
-    void updateInSpace(int, bool);
+    void updateInSpace(int);
 
     descriptor::Star* descriptor() const { return m_descriptor_star; }
     model::Star* model() const { return m_model_star; }
