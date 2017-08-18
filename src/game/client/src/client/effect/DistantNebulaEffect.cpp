@@ -97,7 +97,7 @@ DistantNebulas* genDistantNebulas(int color_id)
         float radius = radius_base + radius_delta;
         float angle_delta = angle_base*meti::rand_float(-rate, rate);
         float angle = angle_base + angle_delta;
-        glm::vec3 position = meti::getXYVec3(radius, angle);
+        glm::vec3 position = meti::xy_vec3(radius, angle);
 
         float paralaxFactor = meti::rand_float(1.005f, 1.02f);
         DistantNebula* dn = new DistantNebula(paralaxFactor);

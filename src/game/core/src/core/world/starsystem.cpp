@@ -584,7 +584,7 @@ void StarSystem::__updateStates()
         __shipManager_s(50);
         
         if (m_wormholes.size() < 5) {
-            glm::vec2 center = meti::getRandVec2f(200, 1200);
+            glm::vec2 center = meti::rand_vec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
             add(core::global::get().blackHoleBuilder().gen(), center3);
@@ -732,7 +732,7 @@ void StarSystem::update(int time)
         }
 
         // phisics
-        if (meti::getProbability(/*percent*/33)) {
+        if (meti::rand_probability(/*percent*/33)) {
             __bulletsCollisionCheck_s();    // pri/2
             __asteroidsCollisionCheck_s(); // pri/2
         }
@@ -791,7 +791,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
         }
         float strength = meti::rand_float(1.0f, 2.0f);
-        glm::vec3 impulse(meti::getRandXYVec3(strength));
+        glm::vec3 impulse(meti::rand_xy_vec3(strength));
         {
         AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
@@ -938,7 +938,7 @@ void StarSystem::__shipManager_s(unsigned int num)
         builder::BaseVehicle::equip(new_pship);
         new_pship->bindNpc(new_npc);
 
-        glm::vec2 center = meti::getRandVec2f(100, 800);
+        glm::vec2 center = meti::rand_vec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
         //glm::vec3 angle(0,0,meti::getRandInt(360));
         

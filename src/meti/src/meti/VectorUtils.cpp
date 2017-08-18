@@ -6,6 +6,18 @@
       
 namespace meti {
 
+glm::vec3 xy_vec3(float radius, float angle)
+{
+    float angleInRad = glm::radians(angle);
+    return glm::vec3(radius*sin(angleInRad), radius*cos(angleInRad), 0.0);
+}
+
+glm::vec3 xy_vec3_unit(float alpha)
+{
+    alpha = glm::radians(alpha);
+    return glm::vec3(sin(alpha), cos(alpha), 0.0f);
+}
+
 vec3
 normalize(const vec3& rhs)
 {
