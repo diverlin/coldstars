@@ -168,8 +168,6 @@ public:
     // ugly
     Planet* closestInhabitedPlanet(const glm::vec2&) const;
     Planet* randomInhabitedPlanet() const;
-    Planet* randomPlanet() const;
-    Vehicle* randomVehicle() const;
     Vehicle* randomVehicleExcludingNpcRaceId(race::Type) const;
     Vehicle* randVehicleByNpcRaceId(race::Type) const;
     Vehicle* randomVehicle(const std::vector<race::Type>&) const;

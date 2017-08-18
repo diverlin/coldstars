@@ -106,7 +106,7 @@ Vehicle* Observation::GetRandVisibleVehicle(const std::vector<race::Type>& races
     }
     
     if (vehicles.size()) {
-        return meti::rand(vehicles);
+        return meti::rand_element(vehicles);
     }
 
     return nullptr;

@@ -501,22 +501,10 @@ StarSystem::randomInhabitedPlanet() const
     }
     
     if (tmp_planet_vec.size() >= 1)  {
-        requested_planet = meti::rand(tmp_planet_vec);
+        requested_planet = meti::rand_element(tmp_planet_vec);
     }
 
     return requested_planet;
-}
-
-Planet*
-StarSystem::randomPlanet() const
-{
-    return meti::rand(m_planets);
-}
-
-Vehicle*
-StarSystem::randomVehicle() const
-{
-    return meti::rand(m_vehicles);
 }
 
 Vehicle*
@@ -534,7 +522,7 @@ StarSystem::randomVehicleExcludingNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand(vehicles);
+        result = meti::rand_element(vehicles);
     }
     
     return result;
@@ -556,7 +544,7 @@ StarSystem::randVehicleByNpcRaceId(race::Type race_id) const
     //    }
     
     if (vehicles.size()) {
-        result = meti::rand(vehicles);
+        result = meti::rand_element(vehicles);
     }
     
     return result;
@@ -577,7 +565,7 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
     }
     
     if (vehicles.size()) {
-        result = meti::rand(vehicles);
+        result = meti::rand_element(vehicles);
     }
     
     return result;
