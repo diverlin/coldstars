@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 class Ring : public jeti::Base
 {

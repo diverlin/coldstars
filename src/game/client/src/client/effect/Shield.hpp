@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 #include <glm/glm.hpp>
 
