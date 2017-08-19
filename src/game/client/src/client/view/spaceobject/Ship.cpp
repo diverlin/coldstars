@@ -43,7 +43,7 @@ Ship::Ship(control::Ship* control)
       Base(control)
     , m_control(control)
 {
-    setOrientation(control);
+    _setOrientation(control);
 
     for(slot::Item* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache

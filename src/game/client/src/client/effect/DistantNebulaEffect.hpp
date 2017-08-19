@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include <client/effect/Base.hpp>
 
 namespace effect {
 
@@ -36,7 +36,7 @@ private:
     std::vector<DistantNebula*> m_nebulas;
 };
 
-class DistantNebula : public jeti::BaseView
+class DistantNebula : public Base
 {
 public:
     DistantNebula(float);

@@ -32,7 +32,7 @@ Bullet::Bullet(control::Bullet* control)
       Base(control)
     , m_control(control)
 {
-    setOrientation(control);
+    _setOrientation(control);
 
     m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 10.0f/*control->collisionRadius()*/);
 }

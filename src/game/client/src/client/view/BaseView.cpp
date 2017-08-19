@@ -75,7 +75,7 @@ Base::_createPath(jeti::control::Material* material) {
 }
 
 void Base::_addDecor(Base* decor) {
-    decor->setParent(this);
+    decor->_setParent(this);
     m_decors.push_back(decor);
 }
 

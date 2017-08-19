@@ -34,37 +34,25 @@
 
 namespace jeti {
 
-BaseView::BaseView(BaseView* parent)
-    :
-      m_parent(parent)
+BaseView::BaseView()
 {}
 
-BaseView::BaseView(ceti::control::Orientation* orientation, BaseView* parent)
-    :
-      m_parent(parent)
-    , m_orientation(orientation)
-{
-    assert(m_orientation);
-}
-
 BaseView::~BaseView() {
-    delete m_animationRotation;
-    m_animationRotation = nullptr;
+    if (m_animationRotation) {
+        delete m_animationRotation;
+        m_animationRotation = nullptr;
+    }
+
+    if (m_clear_orientation) {
+        delete m_orientation->model();
+        delete m_orientation;
+    }
 }
 
-void BaseView::setPosition(const glm::vec3& position)
+void BaseView::_genOrientation()
 {
-    _orientation()->setPosition(position);
-}
-
-void BaseView::setSize(const glm::vec3& size)
-{
-    _orientation()->setSize(size);
-}
-
-void BaseView::setDirection(const glm::vec3& direction)
-{
-    _orientation()->setDirection(direction);
+    m_clear_orientation = true;
+    m_orientation = new ceti::control::Orientation(new ceti::model::Orientation);
 }
 
 void
@@ -74,8 +62,6 @@ BaseView::setMesh(Mesh* mesh) {
         __adjustSizeFromMaterial();
     }
 }
-//const glm::vec3& BaseView::_center() const { return m_orientation->position(); }
-//const glm::vec3& BaseView::_size() const { return m_orientation->size(); }
 
 //void BaseView::validateResources() const
 //{

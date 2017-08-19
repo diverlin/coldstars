@@ -30,7 +30,7 @@ Star::Star(control::Star* star)
       Base(star)
     , m_star(star)
 {
-    setOrientation(star);
+    _setOrientation(star);
 }
   
 Star::~Star()
