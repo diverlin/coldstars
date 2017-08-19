@@ -26,7 +26,7 @@ class Turrel;
 
 namespace view {
 
-class Turrel : public view::Base
+class Turrel : public Base
 {
 public:
     Turrel(control::Turrel*);

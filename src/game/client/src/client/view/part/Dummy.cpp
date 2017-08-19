@@ -16,47 +16,19 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
-
-#include <client/view/BaseView.hpp>
-
-#include <map>
-
-namespace jeti {
-namespace particlesystem {
-class Jet;
-} // namespace aprticlesystem
-} // namespace jeti
-
-namespace control {
-class Ship;
-} // namespace control
-
-namespace slot {
-class Item;
-} // namespace slot
-
+#include "Dummy.hpp"
 
 namespace view {
 
-class Turrel;
-
-class Ship : public Base
+Dummy::Dummy()
+    :
+      Base(nullptr)
 {
-public:
-    Ship(control::Ship*);
-    ~Ship() override final;
+    assert(false);
+    setOrientation(nullptr);
+}
 
-    //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
-    void draw(const jeti::Render& render) const override final;
+Dummy::~Dummy()
+{}
 
-    control::Ship* control() const { return m_control; }
-
-private:
-    std::map<slot::Item*, view::Turrel*> m_slots_turrels;
-
-    control::Ship* m_control = nullptr;
-    std::vector<jeti::particlesystem::Jet*> m_driveJets;
-};
-
-} // namespace view
+} // namepsace view
