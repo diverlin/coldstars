@@ -42,6 +42,7 @@ Orientation::Orientation(model::Orientation* model)
     :
       m_model_orientation(model)
 {
+    assert(model);
     __updateCollisionRadius();
 }
 
