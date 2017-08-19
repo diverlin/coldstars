@@ -21,6 +21,8 @@
 #include <jeti/Render.hpp>
 
 Ring::Ring()
+    :
+      jeti::BaseView()
 {}
 
 Ring::~Ring()

@@ -59,8 +59,10 @@ void DistantNebulas::draw(const jeti::Render& render) const {
 }
 
 
-DistantNebula::DistantNebula(float paralaxFactor):
-    m_paralaxFactor(paralaxFactor)
+DistantNebula::DistantNebula(float paralaxFactor)
+    :
+      jeti::BaseView()
+    , m_paralaxFactor(paralaxFactor)
 {
 }
    

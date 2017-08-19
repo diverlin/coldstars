@@ -62,6 +62,7 @@ class BaseView
 {
 public:
     BaseView(BaseView* parent = nullptr);
+    BaseView(ceti::control::Orientation*, BaseView* parent = nullptr);
     virtual ~BaseView();
 
     const glm::vec3& position() const { return _orientation()->position(); }
@@ -119,13 +120,14 @@ protected:
     void _updateModelMatrix(const glm::vec3& parallax_offset = glm::vec3(0.0f));
 
 private:
+    BaseView* m_parent = nullptr;
+
     glm::vec4 m_color;
     meti::vec3 m_pos;
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;
     ceti::control::Orientation* m_orientation = nullptr;
-    BaseView* m_parent = nullptr;
 
     animation::BaseRotation* m_animationRotation = nullptr;
 

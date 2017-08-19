@@ -39,6 +39,14 @@ BaseView::BaseView(BaseView* parent)
       m_parent(parent)
 {}
 
+BaseView::BaseView(ceti::control::Orientation* orientation, BaseView* parent)
+    :
+      m_parent(parent)
+    , m_orientation(orientation)
+{
+    assert(m_orientation);
+}
+
 BaseView::~BaseView() {
     delete m_animationRotation;
     m_animationRotation = nullptr;

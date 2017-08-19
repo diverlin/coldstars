@@ -28,7 +28,8 @@ namespace view {
 
 Base::Base(control::Base* base)
     :
-      m_control_base(base)
+      jeti::BaseView()
+    , m_control_base(base)
 {}
 
 Base::~Base()
