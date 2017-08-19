@@ -56,6 +56,10 @@ class Item;
 class Land;
 } //namespace control
 
+namespace slot {
+class Item;
+} // namespace slot
+
 class Equipment;
 class BaseParticleSystem;
 class ShockWaveEffect;

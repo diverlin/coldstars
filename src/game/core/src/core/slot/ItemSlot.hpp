@@ -25,9 +25,9 @@
 
 #include <ceti/type/IdType.hpp>
 
-class Turrel; 
-
 namespace control {
+
+class SpaceObject;
 class Item;
 
 namespace item {
@@ -49,7 +49,7 @@ class Grapple;
 } // naemspace control
 
 namespace control {
-class SpaceObject;
+
 } // namespace control
 
 #ifdef USE_MODULES

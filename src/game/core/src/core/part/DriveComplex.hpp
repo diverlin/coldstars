@@ -25,24 +25,19 @@
 #include <vector>
 
 namespace control {
+
 class Vehicle;
+} // namespace control
+
+namespace control {
+class SpaceObject;
+
 } // namespace control
 
 namespace slot {
 class Item;
 } // namespace slot
 
-//namespace jeti {
-//class DriveEffect;
-//}
-
-//namespace jeti {
-//class Renderer;
-//}
-
-namespace control {
-class SpaceObject;
-} // namespace control
 
 namespace complex {
 
@@ -100,15 +95,8 @@ private:
     glm::vec3 m_targetOffset;
 
     path::Path m_path;
-//    std::vector<glm::vec3> m_pathCenters;
-//    std::vector<glm::vec3> m_pathDirections;
 
-//    bool m_pathEnd = true;
-//    unsigned int m_pathIndex = 0;
     bool m_hasTarget = false;
-
-    //        jeti::PathVisual m_PathVisualCenter;
-    //        jeti::PathVisual m_PathVisualTurn;
 
     void __calcPath();
 

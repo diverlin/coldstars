@@ -41,11 +41,9 @@ public:
     void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
 
     std::vector<slot::Item*> protectorSlots() const { return m_protectorSlots; }
-    //        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
 private:
     std::vector<slot::Item*> m_protectorSlots;
-    //            ShieldEffect* shield_effect;
 };
 
 } // namepsace complex

@@ -26,11 +26,13 @@
 #include <ceti/Pack.hpp>
 
 namespace control {
+class Vehicle;
+class SpaceObject;
+
 namespace item {
 class Weapon;
 } // namespace item
-class Vehicle;
-class SpaceObject;
+
 } // namespace control
 
 namespace slot {
