@@ -28,7 +28,7 @@ namespace view {
 
 Base::Base(control::Base* base)
     :
-      jeti::BaseView()
+      jeti::Base()
     , m_control_base(base)
 {}
 

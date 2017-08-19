@@ -53,7 +53,7 @@ Satellite::~Satellite()
 
 void Satellite::draw(const jeti::Render& render) const
 {
-    jeti::BaseView::draw(render);
+    jeti::Base::draw(render);
 
     ////RenderKorpus(render);
     

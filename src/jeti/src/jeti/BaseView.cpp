@@ -34,10 +34,10 @@
 
 namespace jeti {
 
-BaseView::BaseView()
+Base::Base()
 {}
 
-BaseView::~BaseView() {
+Base::~Base() {
     if (m_animationRotation) {
         delete m_animationRotation;
         m_animationRotation = nullptr;
@@ -49,14 +49,14 @@ BaseView::~BaseView() {
     }
 }
 
-void BaseView::_genOrientation()
+void Base::_genOrientation()
 {
     m_clear_orientation = true;
     m_orientation = new ceti::control::Orientation(new ceti::model::Orientation);
 }
 
 void
-BaseView::setMesh(Mesh* mesh) {
+Base::setMesh(Mesh* mesh) {
     m_mesh = mesh;
     if (mesh->isFlat()) {
         __adjustSizeFromMaterial();
@@ -87,7 +87,7 @@ BaseView::setMesh(Mesh* mesh) {
 //    }
 //}
 
-bool BaseView::_updateFadeInEffect()
+bool Base::_updateFadeInEffect()
 {
     if (m_color.a > 0.01f) {
         m_color.a -= 0.02;
@@ -98,7 +98,7 @@ bool BaseView::_updateFadeInEffect()
     }
 }
 
-bool BaseView::_updateFadeOutEffect()
+bool Base::_updateFadeOutEffect()
 {
     if (m_color.a < 1.0f) {
         m_color.a += 0.02;
@@ -109,22 +109,22 @@ bool BaseView::_updateFadeOutEffect()
     }
 }
 
-void BaseView::draw(const jeti::Render& render) const
+void Base::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), _modelMatrix());
 }
 
-void BaseView::drawAxis(const jeti::Render& render) const
+void Base::drawAxis(const jeti::Render& render) const
 {
     render.drawAxis(_modelMatrix());
 }
 
-void BaseView::drawCollisionRadius(const jeti::Render& render) const
+void Base::drawCollisionRadius(const jeti::Render& render) const
 {
     render.drawCollisionRadius(_collisionModelMatrix());
 }
 
-void BaseView::_updateModelMatrix(const glm::vec3& parallax_offset)
+void Base::_updateModelMatrix(const glm::vec3& parallax_offset)
 {
     assert(m_mesh);
     assert(m_orientation);
@@ -165,7 +165,7 @@ void BaseView::_updateModelMatrix(const glm::vec3& parallax_offset)
 }
 
 void
-BaseView::__updateCollisionModelMatrix()
+Base::__updateCollisionModelMatrix()
 {
     // prepeare scale matrix
     float r = m_orientation->collisionRadius();
@@ -177,7 +177,7 @@ BaseView::__updateCollisionModelMatrix()
 }
 
 void
-BaseView::__adjustSizeFromMaterial()
+Base::__adjustSizeFromMaterial()
 {
     assert(m_material);
     assert(m_orientation);

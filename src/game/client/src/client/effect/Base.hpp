@@ -23,7 +23,7 @@
 
 namespace effect {
 
-class Base : public jeti::BaseView
+class Base : public jeti::Base
 {
 public:
     Base();
