@@ -35,10 +35,10 @@ class Opacity;
 namespace view {
 namespace effect {
 
-class Shield : public jeti::BaseView
+class Shield : public jeti::Base
 {  
 public:
-    Shield(jeti::BaseView*);
+    Shield(jeti::Base*);
     ~Shield();
 
     void dissipate();

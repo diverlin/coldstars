@@ -58,11 +58,11 @@ class BaseRotation;
 
 class Render;
 
-class BaseView
+class Base
 {
 public:
-    BaseView();
-    virtual ~BaseView();
+    Base();
+    virtual ~Base();
 
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& size() const { return _orientation()->size(); }
@@ -83,7 +83,7 @@ public:
 protected:
     void _genOrientation();
     void _setOrientation(ceti::control::Orientation* control) { assert(control); m_orientation = control; }
-    void _setParent(BaseView* parent) { assert(parent); m_parent = parent; }
+    void _setParent(Base* parent) { assert(parent); m_parent = parent; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& _matrixRotate() const { return m_matrixRotate; }
@@ -99,7 +99,7 @@ protected:
     const control::Material& _material() const { return *m_material; }
     const Mesh& _mesh() const     { return *m_mesh; }
 
-    BaseView* _parent() const { return m_parent; }
+    Base* _parent() const { return m_parent; }
 
     bool _hasMaterial() const { return (m_material != nullptr); }
 
@@ -113,7 +113,7 @@ protected:
 
 private:
     bool m_clear_orientation = false;
-    BaseView* m_parent = nullptr;
+    Base* m_parent = nullptr;
 
     glm::vec4 m_color;
     meti::vec3 m_pos;

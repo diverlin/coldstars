@@ -23,7 +23,7 @@
 
 namespace view {
 
-class Atmosphere : public jeti::BaseView
+class Atmosphere : public jeti::Base
 {
 public:
     Atmosphere();
