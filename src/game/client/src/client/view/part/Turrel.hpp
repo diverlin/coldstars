@@ -20,10 +20,6 @@
 
 #include <client/view/BaseView.hpp>
 
-namespace slot {
-class Item;
-} // namespace slot
-
 namespace control {
 class Turrel;
 } // namespace control
@@ -33,13 +29,8 @@ namespace view {
 class Turrel : public view::Base
 {
 public:
-    Turrel(slot::Item*, control::Turrel*);
+    Turrel(control::Turrel*);
     ~Turrel();
-
-//    void Render(float);
-
-private:
-    slot::Item* m_slot = nullptr;
 }; 
 
 } // namespace view

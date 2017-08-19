@@ -22,14 +22,14 @@
 
 #include <ceti/Pack.hpp>
 
-namespace slot {
-class Item;
-} // namespace slot
-
 namespace control {
 class Vehicle;
 class SpaceObject;
 } // namespace control
+
+namespace slot {
+class Item;
+} // namespace slot
 
 namespace complex {
 

@@ -21,6 +21,7 @@
 #include <core/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/builder/part/TurrelBuilder.hpp>
+#include <core/part/Turrel.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/part/Turrel.hpp>
@@ -44,8 +45,12 @@ Ship::Ship(control::Ship* control)
     for(slot::Item* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache
         control::Turrel* turrel_control = builder::Turrel().gen();
-        view::Turrel* turrel = new view::Turrel(slot, turrel_control);
+        glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);
+        turrel_control->setPosition(pos);
+
+        view::Turrel* turrel = new view::Turrel(turrel_control);
         _addDecor(turrel);
+        m_slots_turrels.insert(std::make_pair(slot, turrel));
     }
 
     {
@@ -63,6 +68,42 @@ Ship::Ship(control::Ship* control)
 Ship::~Ship()
 {
     delete m_driveJet;
+}
+
+void Ship::draw(const jeti::Render& render) const
+{
+    render.draw(_mesh(), _material(), _modelMatrix());
+    //if (GetDataKorpus().draw_turrels) {
+        //GetComplexWeapon().RenderTurrels();
+        _drawDecors(render);
+    //}
+
+    //if (GetProperties().grab_radius > 0) {
+        //RenderGrabTrail(render);
+    //}
+
+    ///////RenderKorpus(render);
+
+    //if (GetProperties().speed > 0) {
+        //glm::vec3 pos = m_control->position();
+        //pos -= m_control->size().x * m_control->direction();
+        //m_driveJet->setCenter(pos);
+        m_driveJet->setDirection(-m_control->direction());
+        m_driveJet->update();
+        m_driveJet->draw(render);
+        //starsystem()->RestoreSceneColor();
+    //}
+
+    //if (ship()->properties().shield_effect_enabled) {
+        _drawShield(render);
+        //RenderShieldEffect(render, 1.0f - color().a);
+    //}
+
+        const auto& path = m_control->navigator().path();
+        if (path.centers().size()) {
+            _path()->update(path.centers(), path.directions());
+            _drawPath(render);
+        }
 }
 
 /* virtual override final */
@@ -102,43 +143,6 @@ Ship::~Ship()
 //    //info.addNameStr("attackR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );
 //    //info.addNameStr("defenceR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );
 //}
-
-void Ship::draw(const jeti::Render& render) const
-{
-    render.draw(_mesh(), _material(), _modelMatrix());
-    //if (GetDataKorpus().draw_turrels) {
-        //GetComplexWeapon().RenderTurrels();
-        _drawDecors(render);
-    //}
-
-    //if (GetProperties().grab_radius > 0) {
-        //RenderGrabTrail(render);
-    //}
-        
-    ///////RenderKorpus(render);    
-
-    //if (GetProperties().speed > 0) {
-        //std::cout<<"ddd="<<ceti::to_string(m_ship->direction())<<std::endl;
-        glm::vec3 pos = m_control->position();
-        pos -= m_control->size().x * m_control->direction();
-        m_driveJet->setCenter(pos);
-        m_driveJet->setDirection(-m_control->direction());
-        m_driveJet->update();
-        m_driveJet->draw(render);
-        //starsystem()->RestoreSceneColor();
-    //}
-    
-    //if (ship()->properties().shield_effect_enabled) {
-        _drawShield(render);
-        //RenderShieldEffect(render, 1.0f - color().a);
-    //}
-
-        const auto& path = m_control->navigator().path();
-        if (path.centers().size()) {
-            _path()->update(path.centers(), path.directions());
-            _drawPath(render);
-        }
-}
 
 //void ShipDrawable::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
 //{

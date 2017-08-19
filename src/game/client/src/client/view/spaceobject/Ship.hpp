@@ -20,6 +20,8 @@
 
 #include <client/view/BaseView.hpp>
 
+#include <map>
+
 namespace jeti {
 namespace particlesystem {
 class Jet;
@@ -28,9 +30,16 @@ class Jet;
 
 namespace control {
 class Ship;
-} // namespace descriptor
+} // namespace control
+
+namespace slot {
+class Item;
+} // namespace slot
+
 
 namespace view {
+
+class Turrel;
 
 class Ship : public Base
 {
@@ -38,13 +47,13 @@ public:
     Ship(control::Ship*);
     ~Ship() override final;
 
-    //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
     control::Ship* control() const { return m_control; }
 
 private:
+    std::map<slot::Item*, view::Turrel*> m_slots_turrels;
     control::Ship* m_control = nullptr;
     jeti::particlesystem::Jet* m_driveJet = nullptr;
 };
