@@ -18,7 +18,7 @@
 
 #include "Turrel.hpp"
 
- #include <core/part/Turrel.hpp>
+#include <core/part/Turrel.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -27,7 +27,7 @@ namespace view {
 
 Turrel::Turrel(control::Turrel* turrel)
     :
-      view::Base(turrel)
+      Base(turrel)
 {
     setOrientation(turrel);
 }

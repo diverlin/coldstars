@@ -33,6 +33,8 @@
 #include <jeti/particlesystem/Jet.hpp>
 #include <jeti/PathVisual.hpp>
 
+#include <meti/RandUtils.hpp>
+
 namespace view {
 
 Ship::Ship(control::Ship* control)
@@ -60,14 +62,20 @@ Ship::Ship(control::Ship* control)
         shield->dissipate();
     }
 
-    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
+    int num = meti::rand::gen_int(1,3);
+    for (int i=0; i<num; ++i) {
+        jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
+        m_driveJets.push_back(jet);
+    }
 
     _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
 }
 
 Ship::~Ship()
 {
-    delete m_driveJet;
+    for (jeti::particlesystem::Jet* jet: m_driveJets) {
+        delete jet;
+    }
 }
 
 void Ship::draw(const jeti::Render& render) const
@@ -88,9 +96,13 @@ void Ship::draw(const jeti::Render& render) const
         //glm::vec3 pos = m_control->position();
         //pos -= m_control->size().x * m_control->direction();
         //m_driveJet->setCenter(pos);
-        m_driveJet->setDirection(-m_control->direction());
-        m_driveJet->update();
-        m_driveJet->draw(render);
+        for (jeti::particlesystem::Jet* jet: m_driveJets) {
+            jet->setDirection(-m_control->direction());
+            jet->update();
+            jet->draw(render);
+        }
+
+
         //starsystem()->RestoreSceneColor();
     //}
 
