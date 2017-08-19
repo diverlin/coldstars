@@ -39,6 +39,7 @@ class Item;
 
 namespace view {
 
+class Dummy;
 class Turrel;
 
 class Ship : public Base
@@ -56,7 +57,7 @@ private:
     std::map<slot::Item*, view::Turrel*> m_slots_turrels;
 
     control::Ship* m_control = nullptr;
-    std::vector<jeti::particlesystem::Jet*> m_driveJets;
+    std::vector<std::pair<jeti::particlesystem::Jet*, Dummy*>> m_driveJets;
 };
 
 } // namespace view

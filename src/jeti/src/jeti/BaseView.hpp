@@ -78,7 +78,7 @@ public:
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
     void setMesh(Mesh* mesh);
-    void setOrientation(ceti::control::Orientation* model) { m_orientation = model; }
+    void setOrientation(ceti::control::Orientation* control) { m_orientation = control; }
     void setParent(BaseView* parent) { m_parent = parent; }
 
     virtual void draw(const jeti::Render& render) const;

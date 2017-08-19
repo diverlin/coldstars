@@ -25,6 +25,7 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/part/Turrel.hpp>
+#include <client/view/part/Dummy.hpp>
 #include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
@@ -50,7 +51,7 @@ Ship::Ship(control::Ship* control)
         glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);
         turrel_control->setPosition(pos);
 
-        view::Turrel* turrel = new view::Turrel(turrel_control);
+        Turrel* turrel = new Turrel(turrel_control);
         _addDecor(turrel);
         m_slots_turrels.insert(std::make_pair(slot, turrel));
     }
@@ -64,8 +65,10 @@ Ship::Ship(control::Ship* control)
 
     int num = meti::rand::gen_int(1,3);
     for (int i=0; i<num; ++i) {
+        Dummy* dummy = new Dummy;
+        _addDecor(dummy);
         jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
-        m_driveJets.push_back(jet);
+        m_driveJets.push_back(std::make_pair(jet, dummy));
     }
 
     _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
@@ -73,7 +76,8 @@ Ship::Ship(control::Ship* control)
 
 Ship::~Ship()
 {
-    for (jeti::particlesystem::Jet* jet: m_driveJets) {
+    for (std::pair<jeti::particlesystem::Jet*, Dummy*> pair: m_driveJets) {
+        jeti::particlesystem::Jet* jet = pair.first;
         delete jet;
     }
 }
@@ -96,7 +100,8 @@ void Ship::draw(const jeti::Render& render) const
         //glm::vec3 pos = m_control->position();
         //pos -= m_control->size().x * m_control->direction();
         //m_driveJet->setCenter(pos);
-        for (jeti::particlesystem::Jet* jet: m_driveJets) {
+        for (std::pair<jeti::particlesystem::Jet*, Dummy*> pair: m_driveJets) {
+            jeti::particlesystem::Jet* jet = pair.first;
             jet->setDirection(-m_control->direction());
             jet->update();
             jet->draw(render);
