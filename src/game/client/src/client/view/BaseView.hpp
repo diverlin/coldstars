@@ -24,7 +24,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 namespace jeti {
 namespace view {

@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 namespace view {
 

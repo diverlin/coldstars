@@ -23,7 +23,7 @@
 //#include <client/gui/m_cursor.hpp>
 //#include <client/pilots/Show.hpp>
 //#include <jeti/Render.hpp>
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 #include <vector>
 

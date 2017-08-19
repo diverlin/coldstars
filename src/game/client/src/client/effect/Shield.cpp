@@ -20,7 +20,7 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
-#include <jeti/BaseView.hpp>
+#include <jeti/Base.hpp>
 
 #include <jeti/animation/OpacityAnimation.hpp>
 

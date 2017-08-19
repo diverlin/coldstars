@@ -17,7 +17,8 @@
 */
 
 
-#include "BaseView.hpp"
+#include "Base.hpp"
+
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/Mesh.hpp>
