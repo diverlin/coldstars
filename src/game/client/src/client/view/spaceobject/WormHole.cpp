@@ -31,7 +31,7 @@ WormHole::WormHole(control::WormHole* wormHole)
       Base(wormHole)
     , m_control(wormHole)
 {
-    setOrientation(wormHole);
+    _setOrientation(wormHole);
 }
 
 WormHole::~WormHole()

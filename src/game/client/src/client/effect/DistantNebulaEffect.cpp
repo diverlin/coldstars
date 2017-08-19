@@ -61,7 +61,7 @@ void DistantNebulas::draw(const jeti::Render& render) const {
 
 DistantNebula::DistantNebula(float paralaxFactor)
     :
-      jeti::BaseView()
+      Base()
     , m_paralaxFactor(paralaxFactor)
 {
 }
@@ -104,7 +104,6 @@ DistantNebulas* genDistantNebulas(int color_id)
         float paralaxFactor = meti::rand::gen_float(1.005f, 1.02f);
         DistantNebula* dn = new DistantNebula(paralaxFactor);
 
-        dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
         dn->setMaterial(material);
         dn->setMesh(mesh);
         dn->setPosition(position);

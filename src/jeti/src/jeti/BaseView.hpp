@@ -61,26 +61,17 @@ class Render;
 class BaseView
 {
 public:
-    BaseView(BaseView* parent = nullptr);
-    BaseView(ceti::control::Orientation*, BaseView* parent = nullptr);
+    BaseView();
     virtual ~BaseView();
 
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& size() const { return _orientation()->size(); }
-
-    [[depracated("depr this")]]
-    void setPosition(const glm::vec3&);
-    void setSize(const glm::vec3&);
-    void setDirection(const glm::vec3&);
-    //
 
 //    void validateResources() const;
     void setAnimationRotation(animation::BaseRotation* animation_rotation) { m_animationRotation = animation_rotation; }
     void setColor(const glm::vec4& color) { m_color = color; }
     void setMaterial(control::Material* material) { m_material = material; }
     void setMesh(Mesh* mesh);
-    void setOrientation(ceti::control::Orientation* control) { m_orientation = control; }
-    void setParent(BaseView* parent) { m_parent = parent; }
 
     virtual void draw(const jeti::Render& render) const;
 
@@ -90,12 +81,13 @@ public:
     const glm::mat4& modelMatrix() const { return m_matrixModel; }
 
 protected:
-    //void _overrideModelMatrix(const glm::mat4& Mm) { m_matrixModel = Mm; }
+    void _genOrientation();
+    void _setOrientation(ceti::control::Orientation* control) { assert(control); m_orientation = control; }
+    void _setParent(BaseView* parent) { assert(parent); m_parent = parent; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
     const glm::mat4& _matrixRotate() const { return m_matrixRotate; }
     const glm::mat4& _matrixScale() const { return m_matrixScale; }
-    //const glm::mat4& matrixTranslate() const { return m_matrixTranslate; }
     const glm::mat4& _modelMatrix() const { return m_matrixModel; }
     const glm::mat4& _collisionModelMatrix() const { return m_matrixCollisionModel; }
 
@@ -120,6 +112,7 @@ protected:
     void _updateModelMatrix(const glm::vec3& parallax_offset = glm::vec3(0.0f));
 
 private:
+    bool m_clear_orientation = false;
     BaseView* m_parent = nullptr;
 
     glm::vec4 m_color;

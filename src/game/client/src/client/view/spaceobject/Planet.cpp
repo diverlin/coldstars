@@ -33,7 +33,7 @@ Planet::Planet(control::Planet* planet)
       Base(planet)
     , m_control(planet)
 {
-    setOrientation(planet);
+    _setOrientation(planet);
 }
 
 /* virtual */

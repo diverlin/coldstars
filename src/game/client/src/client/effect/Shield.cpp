@@ -31,8 +31,9 @@ namespace effect {
 
 Shield::Shield(jeti::BaseView* parent)
     :
-      jeti::BaseView(parent)
+      jeti::BaseView()
 {       
+    _setParent(parent);
     m_opacityAnimation = new jeti::animation::Opacity(_color().a, 0.02f, 0.5f, 0.95f, 1.5f, true);
 
     _color().r = 1.0;

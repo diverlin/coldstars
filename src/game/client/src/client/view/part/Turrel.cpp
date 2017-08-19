@@ -29,7 +29,7 @@ Turrel::Turrel(control::Turrel* turrel)
     :
       Base(turrel)
 {
-    setOrientation(turrel);
+    _setOrientation(turrel);
 }
 
 Turrel::~Turrel()

@@ -30,7 +30,7 @@ Asteroid::Asteroid(control::Asteroid* asteroid)
       Base(asteroid)
     , m_control(asteroid)
 {   
-    setOrientation(asteroid);
+    _setOrientation(asteroid);
 }
 
 Asteroid::~Asteroid()
