@@ -22,6 +22,8 @@
 namespace view {
 
 Atmosphere::Atmosphere()
+    :
+      jeti::BaseView()
 {}
 
 Atmosphere::~Atmosphere()
