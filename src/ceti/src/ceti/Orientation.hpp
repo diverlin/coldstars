@@ -80,7 +80,6 @@ public:
 
     void setPosition(float x, float y, float z);
     void setPosition(const meti::vec3& position);
-//    void setPosition(const Position& position);
 
     void setSize(float x, float y, float z);
     void setSize(const meti::vec3& size);
