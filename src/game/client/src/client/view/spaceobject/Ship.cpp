@@ -66,7 +66,7 @@ Ship::Ship(control::Ship* control)
     int num = meti::rand::gen_int(1,3);
     for (int i=0; i<num; ++i) {
         Dummy* dummy = new Dummy;
-        _addDecor(dummy);
+        //_addDecor(dummy);
         jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
         m_driveJets.push_back(std::make_pair(jet, dummy));
     }
