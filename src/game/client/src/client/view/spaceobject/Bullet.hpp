@@ -44,7 +44,7 @@ public:
 private:
     control::Bullet* m_control = nullptr;
     jeti::particlesystem::Jet* m_driveJet = nullptr;
-
+    jeti::Point* m_jetPoint = nullptr;
     //virtual void UpdateInfo() override final;
 };
 

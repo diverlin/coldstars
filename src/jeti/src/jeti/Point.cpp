@@ -24,9 +24,10 @@
 
 namespace jeti {
 
-Point::Point(const meti::vec3& positionOrigin)
+Point::Point(const meti::vec3& positionOrigin, Base* parent)
     :
       m_positionOrigin(positionOrigin)
+    , m_parent(parent)
 {
 
 }
