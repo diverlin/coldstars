@@ -27,7 +27,7 @@
 namespace view {
 namespace effect {
 
-Jet::Jet(jeti::Base* parent, const glm::vec3& positionOrigin, float size)
+Jet::Jet(jeti::Base* parent, const meti::vec3& positionOrigin, float size)
     :
       m_parent(parent)
     , m_point(new jeti::Point(positionOrigin, parent))

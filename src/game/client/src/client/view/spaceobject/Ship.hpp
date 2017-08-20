@@ -22,15 +22,6 @@
 
 #include <map>
 
-namespace jeti {
-
-class Point;
-
-namespace particlesystem {
-class Jet;
-} // namespace particlesystem
-
-} // namespace jeti
 
 namespace control {
 class Ship;
@@ -44,6 +35,10 @@ class Item;
 namespace view {
 
 class Turrel;
+
+namespace effect {
+class Jet;
+} // namespace effect
 
 class Ship : public Base
 {
@@ -60,7 +55,7 @@ private:
     std::map<slot::Item*, view::Turrel*> m_slots_turrels;
 
     control::Ship* m_control = nullptr;
-    std::vector<std::pair<jeti::particlesystem::Jet*, jeti::Point*>> m_driveJets;
+    std::vector<view::effect::Jet*> m_driveJets;
 };
 
 } // namespace view
