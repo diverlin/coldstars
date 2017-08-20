@@ -40,7 +40,7 @@
 #include <core/part/WeaponComplex.hpp>
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
-#include <client/view/BaseView.hpp>
+#include <client/view/Base.hpp>
 
 namespace gui {
 
