@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <meti/VectorUtils.hpp>
+
 #include <glm/glm.hpp>
 
 namespace jeti {
@@ -38,7 +40,7 @@ namespace effect {
 class Jet
 {
 public:
-    Jet(jeti::Base*, const glm::vec3&, float);
+    Jet(jeti::Base*, const meti::vec3&, float);
     ~Jet();
 
     void draw(const jeti::Render&);

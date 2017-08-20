@@ -25,13 +25,13 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/part/Turrel.hpp>
+#include <client/view/effect/Jet.hpp>
 #include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
-#include <jeti/Point.hpp>
+//#include <jeti/Point.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
-#include <jeti/particlesystem/Jet.hpp>
 #include <jeti/PathVisual.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -81,10 +81,8 @@ Ship::Ship(control::Ship* control)
     }
 
     for (int i=0; i<num; ++i) {
-        jeti::Point* point = new jeti::Point(positions[i], this);
-        _addPoint(point);
-        jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
-        m_driveJets.push_back(std::make_pair(jet, point));
+        view::effect::Jet* driveJet = new view::effect::Jet(this, positions[i], 30.0f/*control->collisionRadius()*/);
+        m_driveJets.push_back(driveJet);
     }
 
     _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
@@ -92,11 +90,8 @@ Ship::Ship(control::Ship* control)
 
 Ship::~Ship()
 {
-    for (std::pair<jeti::particlesystem::Jet*, jeti::Point*> pair: m_driveJets) {
-        jeti::particlesystem::Jet* jet = pair.first;
-        jeti::Point* point = pair.second;
-        delete jet;
-        delete point;
+    for (view::effect::Jet* driveJet: m_driveJets) {
+        delete driveJet;
     }
 }
 
@@ -118,14 +113,8 @@ void Ship::draw(const jeti::Render& render) const
         //glm::vec3 pos = m_control->position();
         //pos -= m_control->size().x * m_control->direction();
         //m_driveJet->setCenter(pos);
-        _updatePoints();
-        for (std::pair<jeti::particlesystem::Jet*, jeti::Point*> pair: m_driveJets) {
-            jeti::particlesystem::Jet* jet = pair.first;
-            jeti::Point* point = pair.second;
-            jet->setCenter(point->position());
-            jet->setDirection(-m_control->direction());
-            jet->update();
-            jet->draw(render);
+        for (view::effect::Jet* driveJet: m_driveJets) {
+            driveJet->draw(render);
         }
 
 
