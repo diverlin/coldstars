@@ -25,10 +25,10 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/view/part/Turrel.hpp>
-#include <client/view/part/Dummy.hpp>
 #include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
+#include <jeti/Point.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/particlesystem/Jet.hpp>
@@ -63,12 +63,28 @@ Ship::Ship(control::Ship* control)
         shield->dissipate();
     }
 
+    std::vector<meti::vec3> positions;
     int num = meti::rand::gen_int(1,3);
+    float offset_x = 0.7f;
+    float offset_y = 0.8f;
+    if (num == 1) {
+        positions.emplace_back(0.0f, -offset_y-0.1f, 0.0f);
+    }
+    if (num == 2) {
+        positions.emplace_back(-offset_x, -offset_y, 0.0f);
+        positions.emplace_back(offset_x, -offset_y, 0.0f);
+    }
+    if (num == 3) {
+        positions.emplace_back(-offset_x,-offset_y, 0.0f);
+        positions.emplace_back(0.0f, -offset_y-0.1f, 0.0f);
+        positions.emplace_back(offset_x, -offset_y, 0.0f);
+    }
+
     for (int i=0; i<num; ++i) {
-        Dummy* dummy = new Dummy;
-        //_addDecor(dummy);
+        jeti::Point* point = new jeti::Point(positions[i]);
+        _addPoint(point);
         jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
-        m_driveJets.push_back(std::make_pair(jet, dummy));
+        m_driveJets.push_back(std::make_pair(jet, point));
     }
 
     _createPath(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR));
@@ -76,9 +92,11 @@ Ship::Ship(control::Ship* control)
 
 Ship::~Ship()
 {
-    for (std::pair<jeti::particlesystem::Jet*, Dummy*> pair: m_driveJets) {
+    for (std::pair<jeti::particlesystem::Jet*, jeti::Point*> pair: m_driveJets) {
         jeti::particlesystem::Jet* jet = pair.first;
+        jeti::Point* point = pair.second;
         delete jet;
+        delete point;
     }
 }
 
@@ -100,8 +118,11 @@ void Ship::draw(const jeti::Render& render) const
         //glm::vec3 pos = m_control->position();
         //pos -= m_control->size().x * m_control->direction();
         //m_driveJet->setCenter(pos);
-        for (std::pair<jeti::particlesystem::Jet*, Dummy*> pair: m_driveJets) {
+        _updatePoints();
+        for (std::pair<jeti::particlesystem::Jet*, jeti::Point*> pair: m_driveJets) {
             jeti::particlesystem::Jet* jet = pair.first;
+            jeti::Point* point = pair.second;
+            jet->setCenter(point->position());
             jet->setDirection(-m_control->direction());
             jet->update();
             jet->draw(render);

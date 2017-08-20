@@ -68,8 +68,8 @@ Jet* genJet(control::Material* material, float size)
     particle.size_end   = 5.5f;
     particle.size_delta = 2.0f;
     
-    particle.velocity_start = 5.0f;
-    particle.velocity_end   = 5.0f;
+    particle.velocity_start = 4.0f;
+    particle.velocity_end   = 4.0f;
     particle.velocity_delta = 0.0f;
     
     particle.color_start.r = 1.0f;

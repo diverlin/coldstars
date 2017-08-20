@@ -57,10 +57,11 @@ public:
     int_t mesh() const;
     int_t texture() const;
 
-    const std::vector<Base*>& decors() const { return m_children; }
+    const std::vector<Base*>& children() const { return m_children; }
     void update();
 
 protected:
+    void _updatePoints() const;
     void _drawChildren(const jeti::Render&) const;
     void _drawShield(const jeti::Render&) const;
     void _drawPath(const jeti::Render&) const;
@@ -74,6 +75,7 @@ protected:
 
 private:
     control::Base* m_control_base = nullptr;
+    std::vector<jeti::Point*> m_points;
     std::vector<Base*> m_children;
     effect::Shield* m_shield = nullptr;
     jeti::view::Path* m_path = nullptr;

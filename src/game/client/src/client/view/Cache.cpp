@@ -85,7 +85,7 @@ Cache::__loadResourcesFor(Base* view)
     }
 
     // turrels and other decors
-    for(auto decor: view->decors()) {
+    for(auto decor: view->children()) {
         __loadResourcesFor(decor);
     }
 }

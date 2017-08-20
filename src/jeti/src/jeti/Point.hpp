@@ -28,15 +28,15 @@ class Base;
 class Point
 {
 public:
-    Point(int, Base*, const meti::vec3&);
+    Point(const meti::vec3&);
     ~Point() = default;
 
-    const meti::vec3& posiiton() const { return m_position; }
+    const meti::vec3& position() const { return m_position; }
 
+    void setParent(Base* parent) { m_parent = parent; }
     void update();
 
 private:
-    int m_id = 0;
     Base* m_parent = nullptr;
     meti::vec3 m_position;
     meti::vec3 m_positionOrigin;
