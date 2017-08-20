@@ -44,7 +44,7 @@ Bullet::~Bullet()
 
 void Bullet::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), modelMatrix());
 
     glm::vec3 pos = m_control->position();
     pos -= m_control->size().x * m_control->direction();

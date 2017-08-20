@@ -79,6 +79,8 @@ public:
     void drawAxis(const jeti::Render& render) const;
 
     const glm::mat4& modelMatrix() const { return m_matrixModel; }
+    const glm::mat4& matrixRotate() const { return m_matrixRotate; }
+    const glm::mat4& matrixScale() const { return m_matrixScale; }
 
 protected:
     void _genOrientation();
@@ -86,9 +88,6 @@ protected:
     void _setParent(Base* parent) { assert(parent); m_parent = parent; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
-    const glm::mat4& _matrixRotate() const { return m_matrixRotate; }
-    const glm::mat4& _matrixScale() const { return m_matrixScale; }
-    const glm::mat4& _modelMatrix() const { return m_matrixModel; }
     const glm::mat4& _collisionModelMatrix() const { return m_matrixCollisionModel; }
 
     //void _setTransparency(float alpha)  { m_color.a = alpha; }
@@ -116,7 +115,7 @@ private:
     Base* m_parent = nullptr;
 
     glm::vec4 m_color;
-    meti::vec3 m_pos;
+    meti::vec3 m_position;
 
     control::Material* m_material = nullptr;
     Mesh* m_mesh = nullptr;

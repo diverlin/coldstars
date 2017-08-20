@@ -60,7 +60,7 @@ Planet::~Planet()
 
 void Planet::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), modelMatrix());
 
     //    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());

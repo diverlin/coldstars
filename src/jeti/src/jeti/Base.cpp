@@ -112,12 +112,12 @@ bool Base::_updateFadeOutEffect()
 
 void Base::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), modelMatrix());
 }
 
 void Base::drawAxis(const jeti::Render& render) const
 {
-    render.drawAxis(_modelMatrix());
+    render.drawAxis(modelMatrix());
 }
 
 void Base::drawCollisionRadius(const jeti::Render& render) const
@@ -151,13 +151,13 @@ void Base::_updateModelMatrix(const glm::vec3& parallax_offset)
 
     // prepare transition matrix
     if (m_parent) {
-        m_pos = m_parent->_matrixRotate() * m_parent->_matrixScale() * glm::vec4(m_orientation->position() - parallax_offset, 1.0f); // parent rotation offset position
-        m_pos += m_parent->_orientation()->position();
+        m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position() - parallax_offset, 1.0f); // parent rotation offset position
+        m_position += m_parent->_orientation()->position();
     } else {
-        m_pos = m_orientation->position() - parallax_offset;
+        m_position = m_orientation->position() - parallax_offset;
     }
 
-    m_matrixTranslate = glm::translate(m_pos);
+    m_matrixTranslate = glm::translate(m_position);
 
     // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;

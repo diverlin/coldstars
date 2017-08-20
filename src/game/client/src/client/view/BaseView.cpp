@@ -34,10 +34,10 @@ Base::Base(control::Base* base)
 
 Base::~Base()
 {
-    for(Base* decor: m_decors) {
+    for(Base* decor: m_childs) {
         delete decor;
     }
-    m_decors.clear();
+    m_childs.clear();
 
     if (m_shield) {
         delete m_shield;
@@ -74,15 +74,15 @@ Base::_createPath(jeti::control::Material* material) {
     m_path = new jeti::view::Path(material);
 }
 
-void Base::_addDecor(Base* decor) {
-    decor->_setParent(this);
-    m_decors.push_back(decor);
+void Base::_addChild(Base* child) {
+    child->_setParent(this);
+    m_childs.push_back(child);
 }
 
-void Base::_drawDecors(const jeti::Render& render) const {
-    for(Base* decor: m_decors) {
-        decor->update();
-        decor->draw(render);
+void Base::_drawChilds(const jeti::Render& render) const {
+    for(Base* child: m_childs) {
+        child->update();
+        child->draw(render);
     }
 }
 
