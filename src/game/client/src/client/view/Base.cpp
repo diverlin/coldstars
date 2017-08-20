@@ -23,6 +23,7 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/PathVisual.hpp>
+#include <jeti/Point.hpp>
 
 namespace view {
 
@@ -74,9 +75,20 @@ Base::_createPath(jeti::control::Material* material) {
     m_path = new jeti::view::Path(material);
 }
 
+void Base::_addPoint(jeti::Point* point) {
+    point->setParent(this);
+    m_points.push_back(point);
+}
+
 void Base::_addChild(Base* child) {
     child->_setParent(this);
     m_children.push_back(child);
+}
+
+void Base::_updatePoints() const {
+    for(jeti::Point* point: m_points) {
+        point->update();
+    }
 }
 
 void Base::_drawChildren(const jeti::Render& render) const {

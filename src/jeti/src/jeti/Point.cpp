@@ -24,17 +24,16 @@
 
 namespace jeti {
 
-Point::Point(int id, Base* parent, const meti::vec3& positionOrigin)
+Point::Point(const meti::vec3& positionOrigin)
     :
-      m_id(id)
-    , m_parent(parent)
-    , m_positionOrigin(positionOrigin)
+      m_positionOrigin(positionOrigin)
 {
 
 }
 
 void Point::update()
 {
+    assert(m_parent);
     m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_positionOrigin, 1.0f); // parent rotation offset position
     m_position += m_parent->position();
 }
