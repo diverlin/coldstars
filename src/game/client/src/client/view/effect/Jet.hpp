@@ -18,32 +18,37 @@
 
 #pragma once
 
-#include <client/view/Base.hpp>
+#include <glm/glm.hpp>
 
+namespace jeti {
 
-namespace control {
-class Bullet;
-} // namespace control
+class Point;
+class Base;
+class Render;
+
+namespace particlesystem {
+class Jet;
+} // namespace aprticlesystem
+
+} // namespace jeti
 
 namespace view {
-
 namespace effect {
-class Jet;
-} // namespace effect
 
-class Bullet : public Base
+class Jet
 {
 public:
-    Bullet(control::Bullet*);
-    ~Bullet() final override;
+    Jet(jeti::Base*, const glm::vec3&, float);
+    ~Jet();
 
-    void draw(const jeti::Render& render) const override final;
-    control::Bullet* control() { return m_control; }
+    void draw(const jeti::Render&);
 
 private:
-    control::Bullet* m_control = nullptr;
-    view::effect::Jet* m_driveJet = nullptr;
-    //virtual void UpdateInfo() override final;
-};
+    jeti::Base* m_parent = nullptr;
+    jeti::Point* m_point = nullptr;
+    jeti::particlesystem::Jet* m_particlesystem = nullptr;
+}; 
 
+} // namespace effect
 } // namespace view
+

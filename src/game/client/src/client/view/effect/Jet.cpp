@@ -16,34 +16,38 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Jet.hpp"
 
-#include <client/view/Base.hpp>
+#include <client/resources/Utils.hpp>
 
-
-namespace control {
-class Bullet;
-} // namespace control
+#include <jeti/Base.hpp>
+#include <jeti/Point.hpp>
+#include <jeti/particlesystem/Jet.hpp>
 
 namespace view {
-
 namespace effect {
-class Jet;
-} // namespace effect
 
-class Bullet : public Base
+Jet::Jet(jeti::Base* parent, const glm::vec3& positionOrigin, float size)
+    :
+      m_parent(parent)
+    , m_point(new jeti::Point(positionOrigin, parent))
+    , m_particlesystem(jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size))
 {
-public:
-    Bullet(control::Bullet*);
-    ~Bullet() final override;
+}
 
-    void draw(const jeti::Render& render) const override final;
-    control::Bullet* control() { return m_control; }
+Jet::~Jet()
+{
+    delete m_point;
+    delete m_particlesystem;
+}
 
-private:
-    control::Bullet* m_control = nullptr;
-    view::effect::Jet* m_driveJet = nullptr;
-    //virtual void UpdateInfo() override final;
-};
+void Jet::draw(const jeti::Render& render) {
+    m_point->update();
+    m_particlesystem->setCenter(m_point->position());
+    m_particlesystem->setDirection(-m_parent->direction());
+    m_particlesystem->update();
+    m_particlesystem->draw(render);
+}
 
-} // namespace view
+} // namespace effect
+} // namepsace view
