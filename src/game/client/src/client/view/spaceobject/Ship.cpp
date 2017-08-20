@@ -87,7 +87,7 @@ void Ship::draw(const jeti::Render& render) const
     render.draw(_mesh(), _material(), modelMatrix());
     //if (GetDataKorpus().draw_turrels) {
         //GetComplexWeapon().RenderTurrels();
-        _drawChilds(render);
+        _drawChildren(render);
     //}
 
     //if (GetProperties().grab_radius > 0) {
