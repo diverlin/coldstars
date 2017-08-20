@@ -27,6 +27,9 @@
 #include <jeti/Base.hpp>
 
 namespace jeti {
+
+class Point;
+
 namespace view {
 class Path;
 } // namespace view
@@ -34,6 +37,7 @@ class Path;
 namespace control {
 class Material;
 } // namespace control
+
 } // namespace jeti
 
 namespace control {
@@ -53,14 +57,15 @@ public:
     int_t mesh() const;
     int_t texture() const;
 
-    const std::vector<Base*>& decors() const { return m_childs; }
+    const std::vector<Base*>& decors() const { return m_children; }
     void update();
 
 protected:
-    void _drawChilds(const jeti::Render&) const;
+    void _drawChildren(const jeti::Render&) const;
     void _drawShield(const jeti::Render&) const;
     void _drawPath(const jeti::Render&) const;
 
+    void _addPoint(jeti::Point*);
     void _addChild(Base*);
     effect::Shield* _createShield();
     void _createPath(jeti::control::Material*);
@@ -69,7 +74,7 @@ protected:
 
 private:
     control::Base* m_control_base = nullptr;
-    std::vector<Base*> m_childs;
+    std::vector<Base*> m_children;
     effect::Shield* m_shield = nullptr;
     jeti::view::Path* m_path = nullptr;
 };
