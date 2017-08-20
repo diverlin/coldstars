@@ -45,10 +45,6 @@ void Jet::update()
 
 Jet* genJet(control::Material* material, float size)
 {
-    //assert(size>0.01f);
-    //if (size < 0.01) {
-        //size = 10.0f;
-    //}
     const float SIZE_RATIO = 1.5f;
 
     ParticleSystemConfig config;
