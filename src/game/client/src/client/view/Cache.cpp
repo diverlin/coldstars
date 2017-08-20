@@ -20,7 +20,7 @@
 
 #include <core/manager/DescriptorManager.hpp>
 
-#include <client/view/BaseView.hpp>
+#include <client/view/Base.hpp>
 #include <client/resources/Utils.hpp>
 
 #include <jeti/Mesh.hpp>
