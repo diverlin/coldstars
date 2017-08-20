@@ -66,7 +66,7 @@ protected:
     void _drawShield(const jeti::Render&) const;
     void _drawPath(const jeti::Render&) const;
 
-    void _addPoint(jeti::Point*);
+    void _addPoint(jeti::Point* point) {m_points.push_back(point); }
     void _addChild(Base*);
     effect::Shield* _createShield();
     void _createPath(jeti::control::Material*);

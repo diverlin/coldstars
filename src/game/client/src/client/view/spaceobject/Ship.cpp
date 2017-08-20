@@ -81,7 +81,7 @@ Ship::Ship(control::Ship* control)
     }
 
     for (int i=0; i<num; ++i) {
-        jeti::Point* point = new jeti::Point(positions[i]);
+        jeti::Point* point = new jeti::Point(positions[i], this);
         _addPoint(point);
         jeti::particlesystem::Jet* jet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 30.0f/*control->collisionRadius()*/);
         m_driveJets.push_back(std::make_pair(jet, point));

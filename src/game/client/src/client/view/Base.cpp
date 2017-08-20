@@ -75,11 +75,6 @@ Base::_createPath(jeti::control::Material* material) {
     m_path = new jeti::view::Path(material);
 }
 
-void Base::_addPoint(jeti::Point* point) {
-    point->setParent(this);
-    m_points.push_back(point);
-}
-
 void Base::_addChild(Base* child) {
     child->_setParent(this);
     m_children.push_back(child);
