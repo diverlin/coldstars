@@ -16,38 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Star.hpp"
 
-#include <core/spaceobject/Star.hpp>
-#include <core/model/spaceobject/Star.hpp>
+#pragma once
 
-#include <jeti/Render.hpp>
+#include <meti/VectorUtils.hpp>
 
-namespace view {
+namespace jeti {
 
-Star::Star(control::Star* star)
-    :
-      Base(star)
-    , m_star(star)
+class Base;
+
+class Point
 {
-    _setOrientation(star);
-}
-  
-Star::~Star()
-{}
+public:
+    Point(int, Base*, const meti::vec3&);
+    ~Point() = default;
 
-void Star::draw(const jeti::Render& render) const
-{
-    render.drawMesh(_mesh(), _material(), modelMatrix());
-}
+    const meti::vec3& posiiton() const { return m_position; }
 
-//void Star::UpdateInfo()
-//{
-//    GetInfo().clear();
-//    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
-//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
-//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(center()) );
-//}
+    void update();
 
-} // namespace view
+private:
+    int m_id = 0;
+    Base* m_parent = nullptr;
+    meti::vec3 m_position;
+    meti::vec3 m_positionOrigin;
+};
+
+} // namespace jeti
+

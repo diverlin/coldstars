@@ -16,38 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Star.hpp"
 
-#include <core/spaceobject/Star.hpp>
-#include <core/model/spaceobject/Star.hpp>
+#pragma once
 
-#include <jeti/Render.hpp>
+#include "Point.hpp"
+#include <jeti/Base.hpp>
 
-namespace view {
+namespace jeti {
 
-Star::Star(control::Star* star)
+Point::Point(int id, Base* parent, const meti::vec3& positionOrigin)
     :
-      Base(star)
-    , m_star(star)
+      m_id(id)
+    , m_parent(parent)
+    , m_positionOrigin(positionOrigin)
 {
-    _setOrientation(star);
-}
-  
-Star::~Star()
-{}
 
-void Star::draw(const jeti::Render& render) const
-{
-    render.drawMesh(_mesh(), _material(), modelMatrix());
 }
 
-//void Star::UpdateInfo()
-//{
-//    GetInfo().clear();
-//    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
-//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
-//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(center()) );
-//}
+void Point::update()
+{
+    m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_positionOrigin, 1.0f); // parent rotation offset position
+    m_position += m_parent->position();
+}
 
-} // namespace view
+} // namespace jeti
+

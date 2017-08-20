@@ -37,7 +37,7 @@ Container::~Container()
 
 void Container::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), modelMatrix());
 
     ////    UpdateInfo();
     ////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);

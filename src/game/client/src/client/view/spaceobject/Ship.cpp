@@ -52,7 +52,7 @@ Ship::Ship(control::Ship* control)
         turrel_control->setPosition(pos);
 
         Turrel* turrel = new Turrel(turrel_control);
-        _addDecor(turrel);
+        _addChild(turrel);
         m_slots_turrels.insert(std::make_pair(slot, turrel));
     }
 
@@ -84,10 +84,10 @@ Ship::~Ship()
 
 void Ship::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), _modelMatrix());
+    render.draw(_mesh(), _material(), modelMatrix());
     //if (GetDataKorpus().draw_turrels) {
         //GetComplexWeapon().RenderTurrels();
-        _drawDecors(render);
+        _drawChilds(render);
     //}
 
     //if (GetProperties().grab_radius > 0) {
