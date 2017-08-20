@@ -65,6 +65,7 @@ public:
     virtual ~Base();
 
     const glm::vec3& position() const { return _orientation()->position(); }
+    const glm::vec3& direction() const { return _orientation()->direction(); }
     const glm::vec3& size() const { return _orientation()->size(); }
 
 //    void validateResources() const;

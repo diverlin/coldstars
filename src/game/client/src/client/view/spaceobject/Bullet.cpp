@@ -20,11 +20,9 @@
 
 #include <core/spaceobject/Bullet.hpp>
 
-#include <client/resources/Utils.hpp>
+#include <client/view/effect/Jet.hpp>
 
 #include <jeti/Render.hpp>
-#include <jeti/Point.hpp>
-#include <jeti/particlesystem/Jet.hpp>
 
 namespace view {
 
@@ -35,25 +33,17 @@ Bullet::Bullet(control::Bullet* control)
 {
     _setOrientation(control);
 
-    m_jetPoint = new jeti::Point(meti::vec3(0.0f, -0.9f, 0.0f), this);
-    m_driveJet = jeti::particlesystem::genJet(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), 10.0f/*control->collisionRadius()*/);
+    m_driveJet = new view::effect::Jet(this, meti::vec3(0.0f, -0.9f, 0.0f), 10.0f/*control->collisionRadius()*/);
 }
 
 Bullet::~Bullet()
 {
     delete m_driveJet;
-    delete m_jetPoint;
 }
 
 void Bullet::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), modelMatrix());
-
-    assert(false); //simplify this
-    m_jetPoint->update();
-    m_driveJet->setCenter(m_jetPoint->position());
-    m_driveJet->setDirection(-m_control->direction());
-    m_driveJet->update();
     m_driveJet->draw(render);
 }
 
