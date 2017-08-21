@@ -74,7 +74,7 @@
 
 TEST(descriptor, accessors)
 {
-    descriptor::Hit descriptor(22, 33, 44);
+    descriptor::comm::Hit descriptor(22, 33, 44);
     EXPECT_EQ(descriptor.owner(), 22);
     EXPECT_EQ(descriptor.target(), 33);
     EXPECT_EQ(descriptor.damage(), 44);
@@ -87,9 +87,9 @@ TEST(base, hit)
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     assert(false);
     //messageHub.runLoop();
@@ -104,7 +104,7 @@ TEST(base, critical_hit)
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
 
     assert(false);
     //messageManager.runLoop();

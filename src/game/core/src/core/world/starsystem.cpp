@@ -41,15 +41,11 @@
 #include <core/model/spaceobject/ALL>
 #include <core/model/world/starsystem.hpp>
 
-#include <core/descriptor/comm/Creation.hpp> //
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 #include <core/manager/Processor.hpp>
-#include <core/communication/TelegrammHub.hpp> //
-#include <core/communication/TelegrammManager.hpp> //
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp> //
-#include <core/descriptor/item/other/Goods.hpp>
+#include <core/communication/TelegrammManager.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>

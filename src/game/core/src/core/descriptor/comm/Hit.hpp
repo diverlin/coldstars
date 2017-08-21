@@ -3,6 +3,7 @@
 #include <core/descriptor/Base.hpp>
 
 namespace descriptor {
+namespace comm {
 
 class Hit : public Base {
 public:
@@ -31,4 +32,5 @@ private:
     }
 };
 
+} // namespace comm
 } // namespace descriptor
