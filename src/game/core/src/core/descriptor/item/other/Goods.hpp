@@ -18,13 +18,13 @@
 
 #pragma once
 
-#include <core/descriptor/item/Item.hpp>
+#include <core/descriptor/Base.hpp>
 
 
 namespace descriptor {
 namespace item {
 
-class Goods : public Item
+class Goods : public descriptor::Base
 {
 public:
     Goods();
@@ -34,7 +34,7 @@ public:
 
     std::string info() const {
         std::string result = "descriptor::item::Goods:\n";
-        result += descriptor::Item::info();
+        result += descriptor::Base::info();
         return result;
     }
 
@@ -42,7 +42,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
+        ar & boost::serialization::base_object<descriptor::Base>(*this);
     }
 };
 

@@ -74,7 +74,6 @@ Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
 void
 Goods::__createInternals(control::item::Goods* control, descriptor::item::Goods* descriptor)
 {
-    Item::_createInternals(control, descriptor);
 }
 
 } // namespace item

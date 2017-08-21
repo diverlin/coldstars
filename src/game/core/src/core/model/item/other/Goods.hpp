@@ -18,12 +18,17 @@
 
 #pragma once
 
-#include <core/model/item/Item.hpp>
+#include <common/Base.hpp>
+
+#include <ceti/type/IdType.hpp>
+
+#include <string>
+#include <cassert>
 
 namespace model {
 namespace item {
 
-class Goods : public Item
+class Goods : public model::Base
 {
 public:
     Goods(int_t, int_t);
@@ -31,19 +36,19 @@ public:
     Goods(const std::string& data);
     std::string data() const;
 
-    void setAmmount(int ammount) { m_ammount = ammount; assert(ammount>=0); }
+    void setAmount(int amount) { m_amount = amount; assert(amount>=0); }
 
-    int ammount() const { return m_ammount; }
+    int amount() const { return m_amount; }
 
 private:
-    int m_ammount = 0;
+    int m_amount = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
-        ar & m_ammount;
+        ar & boost::serialization::base_object<model::Base>(*this);
+        ar & m_amount;
     }
 };
 

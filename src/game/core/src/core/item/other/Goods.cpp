@@ -26,7 +26,7 @@ namespace item {
 
 Goods::Goods(descriptor::item::Goods* descriptor, model::item::Goods* model)
     :
-      Item(descriptor, model)
+      Base(descriptor, model)
     , m_descriptor_goods(descriptor)
     , m_model_goods(model)
 {
@@ -35,8 +35,8 @@ Goods::Goods(descriptor::item::Goods* descriptor, model::item::Goods* model)
 Goods::~Goods()
 {}
 
-void Goods::increase(int amount) { m_model_goods->setAmmount(m_model_goods->ammount()+amount); }
-void Goods::decrease(int amount) { m_model_goods->setAmmount(m_model_goods->ammount()-amount); }
+void Goods::increase(int amount) { m_model_goods->setAmount(m_model_goods->amount()+amount); }
+void Goods::decrease(int amount) { m_model_goods->setAmount(m_model_goods->amount()-amount); }
 
            
 //void Goods::addUniqueInfo()
