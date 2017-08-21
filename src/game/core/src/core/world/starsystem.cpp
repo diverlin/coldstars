@@ -775,6 +775,8 @@ void StarSystem::__asteroidsCollisionCheck_s() const {
 
 void StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
 {
+    //std::cout<<"bullet damage = "<<bullet->damage()<<std::endl;
+
     if (!bullet->isAlive() || !bullet->collideable()) {
         return;
     }
@@ -815,6 +817,9 @@ void StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
 
 void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
 {
+    //std::cout<<"asteroid mass ="<<asteroid->mass()<<std::endl;
+    //std::cout<<"asteroid armor ="<<asteroid->model()->armor()<<std::endl;
+
     if (!asteroid->isAlive()) {
         return;
     }

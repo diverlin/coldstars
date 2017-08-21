@@ -35,10 +35,14 @@ Rocket::Rocket(descriptor::item::Rocket* descr, model::item::Rocket* model)
     : Weapon(descr, model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)
-{}
+{
+    updateProperties();
+}
 
 void Rocket::updateProperties()
 {
+    Weapon::updateProperties();
+
     m_ammo_add = 0;
     
 #ifdef USE_MODULES
