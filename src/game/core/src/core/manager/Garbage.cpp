@@ -23,6 +23,7 @@
 
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace manager {
 
 Garbage&
@@ -57,3 +58,4 @@ void Garbage::erase()
 }
 
 } // namespace manager
+} // core

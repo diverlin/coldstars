@@ -68,7 +68,7 @@ Npc::__createTemplate(descriptor::Npc* descr)
     control::Npc* npc = new control::Npc(descr, model);
     assert(npc);
 
-    manager::Entity::get().add(npc);
+    core::manager::Entity::get().add(npc);
 
     return npc;
 }

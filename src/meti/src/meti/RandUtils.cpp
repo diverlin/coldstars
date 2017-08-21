@@ -31,7 +31,7 @@ namespace rand {
 
 bool gen_probability(int val) {
     assert(val>0&&val<=100);
-    return (gen_int(0, 100) > val);
+    return (gen_int(0, 100) < val);
 }
 
 float add_percent(float val, float percent)

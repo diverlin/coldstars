@@ -95,6 +95,7 @@
 
 #include <core/item/equipment/Weapon.hpp>
 
+namespace core {
 namespace manager {
 
 IdGenerator Entity::m_idGenerator;
@@ -405,3 +406,4 @@ void Entity::remove(control::Base* ob)
 //}
 
 } // namespace manager
+} // namespace core

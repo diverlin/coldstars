@@ -130,52 +130,52 @@ void
 Vehicle::__loadItemsFromModel()
 {
     for(int_t id: model()->items()) {
-        control::Base* model_base = manager::Entity::get().base(id);
+        control::Base* model_base = core::manager::Entity::get().base(id);
         descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obGroup()) {
         case entity::Type::SCANER_EQUIPMENT: {
-            item::Scaner* item = manager::Entity::get().scaner(id);
+            item::Scaner* item = core::manager::Entity::get().scaner(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
-            item::Drive* item = manager::Entity::get().drive(id);
+            item::Drive* item = core::manager::Entity::get().drive(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
-            item::Bak* item = manager::Entity::get().bak(id);
+            item::Bak* item = core::manager::Entity::get().bak(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
-            item::Droid* item = manager::Entity::get().droid(id);
+            item::Droid* item = core::manager::Entity::get().droid(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
-            item::Grapple* item = manager::Entity::get().grapple(id);
+            item::Grapple* item = core::manager::Entity::get().grapple(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
-            item::Lazer* item = manager::Entity::get().lazer(id);
+            item::Lazer* item = core::manager::Entity::get().lazer(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
-            item::Protector* item = manager::Entity::get().protector(id);
+            item::Protector* item = core::manager::Entity::get().protector(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
-            item::Radar* item = manager::Entity::get().radar(id);
+            item::Radar* item = core::manager::Entity::get().radar(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
-            item::Rocket* item = manager::Entity::get().rocket(id);
+            item::Rocket* item = core::manager::Entity::get().rocket(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
@@ -288,14 +288,14 @@ void Vehicle::__putChildrenToGarbage() const
 void Vehicle::_putNpcToGarbage() const
 {
     if (m_npc) {
-        manager::Garbage::get().add(m_npc);
+        core::manager::Garbage::get().add(m_npc);
     }
 }
 
 void Vehicle::_putItemsToGarbage() const
 {
     for(auto item: __items()) {
-        manager::Garbage::get().add(item);
+        core::manager::Garbage::get().add(item);
     }
 }
 

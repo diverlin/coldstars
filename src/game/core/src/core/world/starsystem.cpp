@@ -86,32 +86,32 @@ StarSystem::__actualizeModel()
     model()->setWritable(false);
 
     for(int_t id: model()->stars()) {
-        add(manager::Entity::get().star(id));
+        add(core::manager::Entity::get().star(id));
     }
     for(int_t id: model()->planets()) {
-        add(manager::Entity::get().planet(id));
+        add(core::manager::Entity::get().planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(manager::Entity::get().asteroid(id));
+        add(core::manager::Entity::get().asteroid(id));
     }
     for(int_t id: model()->wormholes()) {
-        __add(manager::Entity::get().wormhole(id));
+        __add(core::manager::Entity::get().wormhole(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(manager::Entity::get().ship(id));
+        add(core::manager::Entity::get().ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(manager::Entity::get().satellite(id));
+        add(core::manager::Entity::get().satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(manager::Entity::get().spacestation(id));
+        add(core::manager::Entity::get().spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        __add(manager::Entity::get().container(id));
+        __add(core::manager::Entity::get().container(id));
     }
     for(int_t id: model()->bullets()) {
-        __add(manager::Entity::get().bullet(id));
+        __add(core::manager::Entity::get().bullet(id));
     }
 //    __actualizeItems();
 
@@ -714,7 +714,10 @@ void StarSystem::update(int time)
 
     __updateEntities_s(time);
     __manageUnavaliableObjects_s();
-    __manageDeadObjects();         // no need to update so frequently, pri /6
+
+    if (meti::rand::gen_probability(/*percent*/100)) {
+        __manageDeadObjects();
+    }
 
     if (time > 0) {
         __bulletsManager_DEBUG(100);
@@ -801,7 +804,7 @@ StarSystem::__genImpulses(int num) const
 void StarSystem::__processVehicleDeath_s(Vehicle* vehicle) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    manager::Entity& entitiesManager = manager::Entity::get();
+    core::manager::Entity& entitiesManager = core::manager::Entity::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
 
     // create containers
@@ -840,7 +843,7 @@ void StarSystem::__processVehicleDeath_s(Vehicle* vehicle) const
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    manager::Entity& entitiesManager = manager::Entity::get();
+    core::manager::Entity& entitiesManager = core::manager::Entity::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
 
     // send message asteroid death
@@ -882,7 +885,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    manager::Entity& entitiesManager = manager::Entity::get();
+    core::manager::Entity& entitiesManager = core::manager::Entity::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
 
     // send message bullet death
@@ -901,7 +904,7 @@ void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 void StarSystem::__processContainerDeath_s(Container* container) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    manager::Entity& entitiesManager = manager::Entity::get();
+    core::manager::Entity& entitiesManager = core::manager::Entity::get();
     descriptor::Manager& descriptorManager = descriptor::Manager::get();
 
     // send message container death

@@ -56,7 +56,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::__putChildrenToGarbage() const
 {
-    manager::Garbage::get().add(m_innerLand);
+    core::manager::Garbage::get().add(m_innerLand);
     _putNpcToGarbage();
     _putItemsToGarbage();
 }

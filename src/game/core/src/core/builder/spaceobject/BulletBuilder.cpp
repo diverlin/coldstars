@@ -59,7 +59,7 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
     control::Bullet* bullet = new control::Bullet(descr, model);
     assert(bullet);
 
-    manager::Entity::get().add(bullet);
+    core::manager::Entity::get().add(bullet);
 
     return bullet;
 }

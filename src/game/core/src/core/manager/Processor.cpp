@@ -16,31 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "MicroTaskManager.hpp"
-#include <core/ai/scenary/ScenarioCollector.hpp>
+#include "Processor.hpp"
 
-#include <core/spaceobject/SpaceObject.hpp>
+#include <core/common/Global.hpp>
+
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
 
-MicroTaskManager::MicroTaskManager()
-{}
+namespace core {
+namespace manager {
 
-MicroTaskManager::~MicroTaskManager()
-{}
-
-void MicroTaskManager::setTask(const Task& microtask)
+Processor&
+Processor::get()
 {
-    m_microtask = microtask;
-    m_scenario = ScenarioCollector::Instance().get(microtask.GetScenarioTypeId());
-    assert(m_scenario);
-    if (m_microtask.targetId() != NONE) {
-        m_target = core::manager::Entity::get().spaceObject(microtask.targetId())->model();
-    }
+    static Processor instance;
+    return instance;
 }
 
-void MicroTaskManager::__reset()
+Processor::Processor()
+    :
+      m_telegrammHub(core::global::get().telegrammHub())
+    , m_entitiesManager(manager::Entity::get())
+    , m_descriptorManager(descriptor::Manager::get())
 {
-    m_scenario  = nullptr;
-    m_target = nullptr;
-    m_microtask.reset();
-}    
+
+}
+
+} // namespace manager
+} // namespace core
