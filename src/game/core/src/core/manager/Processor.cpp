@@ -18,8 +18,10 @@
 
 #include "Processor.hpp"
 
+#include <core/world/starsystem.hpp>
 #include <core/common/Global.hpp>
 #include <core/spaceobject/ALL>
+#include <core/item/equipment/ALL>
 #include <core/world/starsystem.hpp>
 #include <core/descriptor/item/ALL>
 
@@ -167,6 +169,40 @@ void Processor::death(control::Container* container)
         descriptor::comm::effect::Explosion telegramm_descriptor(2*container->collisionRadius(), container->position());
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
     }
+}
+
+
+void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
+{
+    if (starsystem->bullets().size() >= num) {
+        return;
+    }
+
+    control::Vehicle* vehicle = meti::rand::get_element(starsystem->vehicles());
+    if (starsystem->asteroids().empty()) { // ugly workaround
+        return;
+    }
+    control::SpaceObject* target = meti::rand::get_element(starsystem->asteroids());
+    if (!vehicle || !target) {
+        return;
+    }
+
+    int_t owner_id = vehicle->id();
+    int_t target_id = target->id();
+
+    std::vector<control::item::Weapon*> rockets = vehicle->weapons().rockets();
+    if (rockets.empty()) { //ugly workaround
+        return;
+    }
+    control::item::Weapon* rocket = meti::rand::get_element(rockets);
+    if (!rocket) {
+        return;
+    }
+
+    int_t item_id = rocket->id();
+
+    descriptor::comm::CreateBullet telegramm_descriptor(owner_id, item_id, target_id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
 
