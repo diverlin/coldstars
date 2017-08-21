@@ -856,7 +856,7 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
         int_t container_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         {
-        descriptor::comm::CreateMineral telegramm_descriptor(container_id, descriptor_id, mass);
+        descriptor::comm::CreateGoodsPack telegramm_descriptor(container_id, descriptor_id, mass);
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
         }
         {

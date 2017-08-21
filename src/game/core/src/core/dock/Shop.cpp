@@ -27,7 +27,7 @@
 #include <core/manager/EntityManager.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 #include <core/slot/ItemSlot.hpp>
 #include <core/pilot/Npc.hpp>
 

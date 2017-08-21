@@ -25,7 +25,7 @@
 #include <core/descriptor/world/HyperSpace.hpp>
 #include <core/descriptor/pilot/Npc.hpp>
 
-#include <core/descriptor/item/equipment/ALL>
+#include <core/descriptor/item/ALL>
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
 #include <core/descriptor/part/Turrel.hpp>
@@ -1207,7 +1207,21 @@ genScaner(int race, int tech_level)
 //    return descr;
 //}
 
-} // anemspace item
+// other
+Goods*
+genGoods()
+{
+    Goods* descriptor = new Goods;
+
+    descriptor->setTexture(textureDescriptorIdFromType(texture::Type::GOODS));
+    descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+
+    descriptor::Manager::get().add(descriptor);
+
+    return descriptor;
+}
+
+} // namespace item
 
 
 descriptor::Turrel*

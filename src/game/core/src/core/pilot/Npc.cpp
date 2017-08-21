@@ -40,7 +40,7 @@
 
 #include <core/part/WeaponComplex.hpp>
 
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 
 #include "../dock/Shop.hpp"
 

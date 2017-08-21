@@ -120,12 +120,12 @@ private:
     }
 };
 
-class CreateMineral : public Creation
+class CreateGoodsPack : public Creation
 {
 public:
-    CreateMineral(int_t, int_t, int);
-    CreateMineral(const std::string& data);
-    ~CreateMineral() = default;
+    CreateGoodsPack(int_t, int_t, int);
+    CreateGoodsPack(const std::string& data);
+    ~CreateGoodsPack() = default;
     std::string data() const;
 
     int mass() const { return m_mass; }

@@ -26,7 +26,7 @@
 
 namespace descriptor {
 
-class Item : public Base/*, public ceti::descriptor::BaseView*/
+class Item : public Base
 {
 public:
     Item() = default;

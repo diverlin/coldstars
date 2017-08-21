@@ -16,36 +16,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
 
-#include <core/item/Item.hpp>
+#include "Goods.hpp"
 
-class GoodsPack : public control::Item
+#include <core/type/EntityType.hpp>
+
+#include <ceti/serialization/macro.hpp>
+
+namespace descriptor {
+namespace item {
+
+Goods::Goods()
 {
-public:
-    GoodsPack(int, entity::Type);
-    virtual ~GoodsPack();
+    setType(descriptor::Type::GOODS);
+    setObType(entity::Type::GOODS);
+    setSlotType(entity::Type::CARGO_SLOT);
+}
 
-    void Increase(int amount);
-    void Decrease(int amount);
+Goods::Goods(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-    virtual void UpdateOwnerAbilities();
+std::string
+Goods::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
-//    virtual void Save(boost::property_tree::ptree&) const;
-//    virtual void Load(const boost::property_tree::ptree&);
-//    virtual void Resolve();
-
-private:
-    int m_mass = 0;
-
-    virtual void AddCommonInfo();
-    virtual void addUniqueInfo();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree& load_ptree);
-//    void ResolveData();
-
-};
-
-GoodsPack* GetNewGoodsPack(entity::Type, int_t id = NONE);
-
+} // namespace item
+} // namespace descriptor
