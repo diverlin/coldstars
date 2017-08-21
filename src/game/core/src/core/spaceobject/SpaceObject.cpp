@@ -116,6 +116,7 @@ void SpaceObject::_checkDeath(bool show_effect)
     }
 }
 
+
 ///* virtual */
 //void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
 //{
