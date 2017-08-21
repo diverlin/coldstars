@@ -64,6 +64,7 @@ class Rocket;
 
 } // namespace control
 
+namespace core {
 namespace manager {
 
 class Entity
@@ -142,4 +143,5 @@ private:
 };
 
 } // namespace manager
+} // namespace core
 

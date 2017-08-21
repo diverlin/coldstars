@@ -45,8 +45,8 @@
 
 TEST(garbage, ship_with_items)
 {
-    auto& garbage = manager::Garbage::get();
-    auto& entities = manager::Entity::get();
+    auto& garbage = core::manager::Garbage::get();
+    auto& entities = core::manager::Entity::get();
 
     auto ship = builder::Ship::gen();
     builder::Ship::equip(ship);

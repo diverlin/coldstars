@@ -41,10 +41,10 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* mod
 void SpaceObject::_init()
 {
     if (!m_starsystem && model()->starsystem() != NONE) {
-        m_starsystem = manager::Entity::get().starsystem(model()->starsystem());
+        m_starsystem = core::manager::Entity::get().starsystem(model()->starsystem());
     }
     if (!m_parent && model()->parent() != NONE) {
-        m_parent = manager::Entity::get().spaceObject(model()->parent());
+        m_parent = core::manager::Entity::get().spaceObject(model()->parent());
     }
 }
 

@@ -19,34 +19,35 @@
 
 # pragma once
 
-#include <ceti/type/IdType.hpp>
-
-#include <map>
-
-namespace control {
-class Base;
-}
+namespace descriptor {
+class Manager;
+} // namespace descriptor
 
 namespace core {
+
+namespace comm {
+class TelegrammHub;
+} // namespac comm
+
 namespace manager {
 
-class Garbage
+class Entity;
+
+class Processor
 {
 private:
-    Garbage() = default;
-    Garbage(const Garbage&) = delete;
-    ~Garbage() = default;
-    Garbage& operator=(const Garbage&) = delete;
+    Processor();
+    Processor(const Processor&) = delete;
+    ~Processor() = default;
+    Processor& operator=(const Processor&) = delete;
 
 public:
-    static Garbage& get();
-
-    bool contain(int_t id) const { return (m_entities.count(id) == 1); }
-    void add(control::Base*);
-    void erase();
+    static Processor& get();
 
 private:
-    std::map<int_t, control::Base*> m_entities;
+    const core::comm::TelegrammHub& m_telegrammHub;
+    const manager::Entity& m_entitiesManager;
+    const descriptor::Manager& m_descriptorManager;
 };
 
 } // namespace manager

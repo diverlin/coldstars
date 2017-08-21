@@ -67,7 +67,7 @@ Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
     assert(model);
     control::item::Goods* control = new control::item::Goods(descriptor, model);
     assert(control);
-    manager::Entity::get().add(control);
+    core::manager::Entity::get().add(control);
     return control;
 }
 
