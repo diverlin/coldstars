@@ -67,6 +67,19 @@ Processor::__genImpulses(int num) const
     return result;
 }
 
+void Processor::death_spaceobject(control::SpaceObject* object)
+{
+    switch(object->type()) {
+    case entity::Type::ASTEROID: death(static_cast<control::Asteroid*>(object)); break;
+    case entity::Type::CONTAINER: __death(static_cast<control::Container*>(object)); break;
+    case entity::Type::BULLET: death(static_cast<control::Bullet*>(object)); break;
+    case entity::Type::SHIP:
+    case entity::Type::SPACESTATION:
+    case entity::Type::SATELLITE: __death(static_cast<control::Vehicle*>(object)); break;
+    default: assert(false);
+    }
+}
+
 void Processor::death(control::Asteroid* asteroid)
 {
     // create minerals
@@ -98,7 +111,7 @@ void Processor::death(control::Asteroid* asteroid)
     __explosionEffect(asteroid->collisionRadius(), asteroid->position());
 }
 
-void Processor::death(control::Vehicle* vehicle)
+void Processor::__death(control::Vehicle* vehicle)
 {
     // create containers
     int containers_num = meti::rand::gen_int(1,3);
@@ -134,7 +147,7 @@ void Processor::death(control::Bullet* bullet)
     __explosionEffect(2*bullet->collisionRadius(), bullet->position());
 }
 
-void Processor::death(control::Container* container)
+void Processor::__death(control::Container* container)
 {
     __removeSpaceObjectFromStarSystem(container);
     __addSpaceObjectToGarbage(container);

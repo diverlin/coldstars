@@ -213,8 +213,8 @@ private:
 
     void __bulletsCollisionCheck_s() const;
     void __asteroidsCollisionCheck_s() const;
-    bool __bulletCollisionCheck_s(Bullet*) const;
-    bool __asteroidCollisionCheck_s(Asteroid*) const;
+    void __bulletCollisionCheck_s(Bullet*) const;
+    void __asteroidCollisionCheck_s(Asteroid*) const;
 
     void __remove(Star*);
     void __remove(Planet*);

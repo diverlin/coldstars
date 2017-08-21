@@ -20,6 +20,7 @@
 
 #include <world/starsystem.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Processor.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
@@ -94,14 +95,22 @@ void SpaceObject::hit(int damage, SpaceObject* agressor)
     model()->setArmor(std::max(0, model()->armor() - damage));
 }
 
+int SpaceObject::armor() const {
+    return model()->armor();
+}
+
 void SpaceObject::die() {
     model()->setArmor(0);
 }
 
 void SpaceObject::_checkDeath(bool show_effect)
 {
+    if (!isAlive()) {
+        return;
+    }
     if (model()->armor() == 0) {
         model()->setIsAlive(false);
+        core::manager::Processor::get().death_spaceobject(this);
     }
 }
 
