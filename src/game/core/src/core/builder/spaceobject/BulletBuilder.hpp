@@ -36,14 +36,14 @@ namespace builder {
 class Bullet
 {
 public:
-    static control::Bullet* gen();
-    static control::Bullet* gen(descriptor::Bullet*);
+    static control::Bullet* gen(int damage);
+    static control::Bullet* gen(descriptor::Bullet*, int damage);
 
 private:
     Bullet() = delete;
     ~Bullet() = delete;
 
-    static void createInternals(control::Bullet*, descriptor::Bullet*);
+    static void createInternals(control::Bullet*, descriptor::Bullet*, int damage);
     static control::Bullet* __genTemplate(descriptor::Bullet*);
 }; 
 

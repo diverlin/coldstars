@@ -51,12 +51,12 @@ public:
 
     int damage() const;
 
-    descriptor::Bullet* descriptor() const { return m_descriptor_rocket; }
-    model::Bullet* model() const { return m_model_rocket; }
+    descriptor::Bullet* descriptor() const { return m_descriptor_bullet; }
+    model::Bullet* model() const { return m_model_bullet; }
 
 private:
-    descriptor::Bullet* m_descriptor_rocket = nullptr;
-    model::Bullet* m_model_rocket = nullptr;
+    descriptor::Bullet* m_descriptor_bullet = nullptr;
+    model::Bullet* m_model_bullet = nullptr;
 
     control::SpaceObject* m_target = nullptr;
 
