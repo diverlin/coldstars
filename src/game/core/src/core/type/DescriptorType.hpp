@@ -47,6 +47,10 @@ enum class Type {
     CONTAINER,
     BULLET,
 
+    /// items
+    // other
+    GOODS,
+
     // equipment
     LAZER_EQUIPMENT,
     ROCKET_EQUIPMENT,

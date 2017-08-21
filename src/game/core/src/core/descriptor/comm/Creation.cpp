@@ -111,20 +111,20 @@ Creation::data() const
 
 ////////////////////////
 
-CreateMineral::CreateMineral(int_t obId, int_t obDescriptor, int mass)
+CreateGoodsPack::CreateGoodsPack(int_t obId, int_t obDescriptor, int mass)
     :
       Creation(obId, obDescriptor)
     , m_mass(mass)
 {
 }
 
-CreateMineral::CreateMineral(const std::string& data)
+CreateGoodsPack::CreateGoodsPack(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-CreateMineral::data() const
+CreateGoodsPack::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

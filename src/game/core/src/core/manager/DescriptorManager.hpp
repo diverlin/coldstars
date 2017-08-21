@@ -76,6 +76,8 @@ class Lazer;
 class Protector;
 class Radar;
 class Rocket;
+
+class Goods;
 } // namespace item
 
 class Turrel;
@@ -133,6 +135,9 @@ public:
     item::Radar* randRadar() const;
     item::Rocket* randRocket() const;
 
+    // other
+    item::Goods* randGoods() const;
+
     Turrel* randTurrel() const;
 
     Galaxy* galaxy(int_t) const;
@@ -168,6 +173,8 @@ public:
     item::Protector* protector(int_t) const;
     item::Radar* radar(int_t) const;
     item::Rocket* rocket(int_t) const;
+    // other
+    item::Goods* goods(int_t) const;
 
     Mesh* mesh(int_t) const;
     Material* material(int_t) const;

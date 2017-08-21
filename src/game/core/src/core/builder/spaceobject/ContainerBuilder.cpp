@@ -31,7 +31,7 @@
 
 #include <core/slot/ItemSlot.hpp>
 
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 
 #include <meti/RandUtils.hpp>
 

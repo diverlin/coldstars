@@ -16,51 +16,48 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #pragma once
+
+#include <core/builder/item/ItemBuilder.hpp>
 
 #include <ceti/type/IdType.hpp>
 
 #include <string>
 
-namespace texture
+namespace descriptor {
+namespace item {
+class Goods;
+} // namespace item
+} // namespace descriptor
+
+namespace control {
+namespace item {
+class Goods;
+} // namespace item
+} // namespace control
+
+namespace builder {
+namespace item {
+
+class Goods : public Item
 {
-enum class Type: int
-{
-    FAILBACK=0,
+public:
+    static control::item::Goods* gen(descriptor::item::Goods*);
+    static control::item::Goods* gen(int_t, int_t object_id = NONE);
+    static control::item::Goods* gen();
 
-    ANGAR_BACKGROUND, STORE_BACKGROUND, SHOP_BACKGROUND, GOVERMENT_BACKGROUND,
-    NATURELAND_BACKGROUND,
-    NEBULA_BACKGROUND, DISTANTSTAR,
-    FACE,
+private:
+    Goods() = delete;
+    ~Goods() = delete;
 
-    VEHICLE_SLOT, ITEM_SLOT, TURREL,
-    
-    SPACESTATION, SATELLITE, SHIP, STAR, PLANET,
+    static control::item::Goods* __genTemplate(descriptor::item::Goods*, int_t object_id = NONE);
+    static void __createInternals(control::item::Goods*, descriptor::item::Goods*);
+}; 
 
-    ATMOSPHERE,
-    RING,
-
-    ASTEROID, MINERAL, CONTAINER, BOMB, BLACKHOLE,
-    
-    PARTICLE_EFFECT, LAZER_EFFECT, SHIELD_EFFECT,
-
-    
-    DRIVE_EQUIPMENT, LAZER_EQUIPMENT, ROCKET_EQUIPMENT, PROTECTOR_EQUIPMENT, DROID_EQUIPMENT, GRAPPLE_EQUIPMENT,
-    BAK_EQUIPMENT, ENERGIZER_EQUIPMENT, FREEZER_EQUIPMENT, RADAR_EQUIPMENT, SCANER_EQUIPMENT,
-    // other
-    GOODS,
-
-    MODULE,
-    
-    ROCKET_BULLET,
-    TORPEDO_BULLET,
-
-    LAST
-};
-
-} // namespace texture
+} // namespace item
+} // namespace builder
 
 
 
-std::string to_string(texture::Type);
 

@@ -31,7 +31,7 @@
 
 #include <core/builder/spaceobject/ALL>
 
-#include <core/builder/item/equipment/ALL>
+#include <core/builder/item/ALL>
 #ifdef USE_MODULES
 #include <core/builder/item/module/ALL>
 #endif // USE_MODULES
@@ -97,8 +97,8 @@ void createBombEvent(const comm::Telegramm& telegramm) {
 }
 
 void createMineralEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::CreateMineral descriptor(telegramm.data());
-    builder::Container::gen(descriptor.descriptor(), descriptor.object());
+    descriptor::comm::CreateGoodsPack descriptor(telegramm.data());
+    builder::item::Goods::gen(descriptor.descriptor(), descriptor.object());
 }
 void createContainerEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateContainer descriptor(telegramm.data());
@@ -112,7 +112,6 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
-    assert(bullet_descriptor);
     control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor);
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);

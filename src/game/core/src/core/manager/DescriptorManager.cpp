@@ -19,7 +19,7 @@
 #include "DescriptorManager.hpp"
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/descriptor/item/equipment/ALL>
+#include <core/descriptor/item/ALL>
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/dock/ALL>
 #include <core/descriptor/part/Turrel.hpp>
@@ -363,6 +363,14 @@ Manager::randRocket() const
     return descr;
 }
 
+item::Goods*
+Manager::randGoods() const
+{
+    item::Goods* descriptor = static_cast<item::Goods*>(rand(Type::GOODS));
+    assert(descriptor);
+    return descriptor;
+}
+
 // parts
 Turrel*
 Manager::randTurrel() const
@@ -591,6 +599,16 @@ Manager::rocket(int_t id) const
     assert(descr);
     return descr;
 }
+
+// other
+item::Goods*
+Manager::goods(int_t id) const
+{
+    item::Goods* descriptor = static_cast<item::Goods*>(get(id));
+    assert(descriptor);
+    return descriptor;
+}
+
 
 Mesh*
 Manager::mesh(int_t id) const

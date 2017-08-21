@@ -26,7 +26,7 @@
 //#include <ceti/StringUtils.hpp>
 #include "../../../ai/StateMachine.hpp"
 
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 
 MacroScenarioGoodsTrading::MacroScenarioGoodsTrading() 
 {

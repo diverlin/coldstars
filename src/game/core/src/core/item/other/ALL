@@ -1,2 +1,2 @@
 #include "Bomb.hpp"
-#include "GoodsPack.hpp"
+#include "Goods.hpp"

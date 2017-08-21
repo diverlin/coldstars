@@ -34,7 +34,7 @@
 #include <core/model/item/equipment/ALL>
 #include <core/item/equipment/ALL>
 
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 #ifdef USE_ARTEFACTS
 #include <core/item/artefacts/ALL>
 #endif // USE_ARTEFACTS

@@ -61,6 +61,9 @@ class Protector;
 class Radar;
 class Rocket;
 class Scaner;
+
+// other
+class Goods;
 } // namespace item
 
 // parts
@@ -105,6 +108,9 @@ Protector* genProtector(int race = NONE, int tech_level = NONE);
 Radar* genRadar(int race = NONE, int tech_level = NONE);
 Rocket* genRocket(int race = NONE, int tech_level = NONE);
 Scaner* genScaner(int race = NONE, int tech_level = NONE);
+
+// other
+Goods* genGoods();
 //Bomb* genBomb(int damage = NONE, int radius = NONE);
 } // namespace item
 
