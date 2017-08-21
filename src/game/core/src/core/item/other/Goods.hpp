@@ -35,7 +35,7 @@ class Goods;
 namespace control {
 namespace item {
 
-class Goods : public Item
+class Goods : public Base
 {
 public:
     Goods(descriptor::item::Goods*, model::item::Goods*);

@@ -28,7 +28,7 @@
 #include <client/resources/TextureCollector.hpp>
 #include <jeti/Screen.hpp>
 
-#include <core/item/other/GoodsPack.hpp>
+#include <core/item/other/Goods.hpp>
 
 #include <core/pilot/Npc.hpp>
 

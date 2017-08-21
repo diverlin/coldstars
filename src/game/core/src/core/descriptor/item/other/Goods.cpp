@@ -30,7 +30,6 @@ Goods::Goods()
 {
     setType(descriptor::Type::GOODS);
     setObType(entity::Type::GOODS);
-    setSlotType(entity::Type::CARGO_SLOT);
 }
 
 Goods::Goods(const std::string& data)
