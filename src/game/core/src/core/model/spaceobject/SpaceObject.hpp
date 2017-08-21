@@ -55,6 +55,20 @@ public:
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
+    std::map<std::string, std::string> info() const {
+        std::map<std::string, std::string> result = ceti::model::Orientation::info();
+        std::map<std::string, std::string> result2 = model::Base::info();
+        result.insert(result2.begin(), result2.end());
+        result.insert(std::make_pair("model::SpaceObject", ""));
+        result.insert(std::make_pair("armor", std::to_string(m_armor)));
+        result.insert(std::make_pair("lifeTime", std::to_string(m_lifeTime)));
+        result.insert(std::make_pair("parent", std::to_string(m_parent)));
+        result.insert(std::make_pair("starsystem", std::to_string(m_starsystem)));
+        result.insert(std::make_pair("place", place::strip(place::to_string(m_place))));
+        result.insert(std::make_pair("expirienceToGive", std::to_string(m_expirienceToGive)));
+        return result;
+    }
+
 private:
     int m_armor = 0;
     int m_lifeTime = 0;

@@ -54,11 +54,21 @@ public:
     const meti::vec3& size() const { return m_size; }
     const meti::vec3& direction() const { return m_direction; }
 
+    std::map<std::string, std::string> info() const {
+        std::map<std::string, std::string> result;
+        result.insert(std::make_pair("ceti::model::Orientation", ""));
+        result.insert(std::make_pair("position", meti::to_string(m_position)));
+        result.insert(std::make_pair("size", meti::to_string(m_size)));
+        result.insert(std::make_pair("direction", meti::to_string(m_direction)));
+        return result;
+    }
+
 private:
     meti::vec3 m_position;
     meti::vec3 m_size;
-    meti::vec3 m_direction /*= meti::OZ*/;
+    meti::vec3 m_direction;
 
+private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {

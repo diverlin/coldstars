@@ -26,6 +26,7 @@
 
 #include <map>
 
+namespace gui {
 namespace info {
 
 class StarSystem
@@ -87,4 +88,4 @@ private:
 };
 
 } // namespace info
-
+} // namespace gui

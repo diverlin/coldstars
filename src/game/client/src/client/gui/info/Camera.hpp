@@ -26,6 +26,7 @@
 
 #include <map>
 
+namespace gui {
 namespace info {
 
 class Camera
@@ -62,4 +63,4 @@ private:
 };
 
 } // namespace info
-
+} // namespace gui

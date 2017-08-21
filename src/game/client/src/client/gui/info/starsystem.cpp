@@ -20,6 +20,7 @@
 
 #include <cassert>
 
+namespace gui {
 namespace info {
 
 StarSystem::StarSystem() {
@@ -142,4 +143,4 @@ StarSystem::__getRowByTitle(int key) {
 }
 
 } // namespace info
-
+} // namespace gui

@@ -30,9 +30,12 @@ enum class Type {
     , HYPERSPACE
     , KOSMOPORT
     , NATURELAND
-    //, SHIP
+    , SHIP
 };
+
+std::string to_string(Type);
+
+std::string strip(const std::string&);
 
 } // namespace place
 
-std::string getPlaceStr(place::Type);

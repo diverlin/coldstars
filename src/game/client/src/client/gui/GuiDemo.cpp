@@ -22,6 +22,7 @@
 #include <client/gui/info/starsystem.hpp>
 #include <client/gui/info/Camera.hpp>
 #include <client/gui/info/Renderer.hpp>
+#include <client/gui/info/GenericTable.hpp>
 
 #include <jeti/SFMLWrapper.hpp>
 
@@ -104,6 +105,23 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
         window->Add(box);
         m_desktop.Add( window );
         window->SetPosition(sf::Vector2f(650, 0));
+    }
+
+    {
+        std::map<std::string, std::string> data;
+        data.insert(std::make_pair("label1", "value1"));
+        data.insert(std::make_pair("label2", "value2"));
+        data.insert(std::make_pair("label3", "value3"));
+        m_genericTable = new info::Table(data);
+
+        sfg::Window::Ptr window = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+        auto box = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+
+        box->Pack(m_genericTable->widget());
+
+        window->Add(box);
+        m_desktop.Add( window );
+        window->SetPosition(sf::Vector2f(300, 300));
     }
 
     m_desktop.SetProperties(

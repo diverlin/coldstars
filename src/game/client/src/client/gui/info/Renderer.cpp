@@ -20,6 +20,7 @@
 
 #include <cassert>
 
+namespace gui {
 namespace info {
 
 Renderer::Renderer() {
@@ -87,4 +88,4 @@ Renderer::__getRowByTitle(int key) {
 }
 
 } // namespace info
-
+} // namespace gui

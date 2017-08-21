@@ -45,6 +45,14 @@ public:
     int radiusA() const { return m_radiusA; }
     int radiusB() const { return m_radiusB; }
 
+    std::map<std::string, std::string> info() const {
+        std::map<std::string, std::string> result = SpaceObject::info();
+        result.insert(std::make_pair("model::Planetoid", ""));
+        result.insert(std::make_pair("radiusA", std::to_string(m_radiusA)));
+        result.insert(std::make_pair("radiusB", std::to_string(m_radiusB)));
+        return result;
+    }
+
 private:
     int m_radiusA = 0;
     int m_radiusB = 0;
