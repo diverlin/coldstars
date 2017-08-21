@@ -41,13 +41,14 @@
 #include <core/model/spaceobject/ALL>
 #include <core/model/world/starsystem.hpp>
 
-#include <core/descriptor/comm/Creation.hpp>
+#include <core/descriptor/comm/Creation.hpp> //
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
-#include <core/communication/TelegrammHub.hpp>
-#include <core/communication/TelegrammManager.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+#include <core/manager/Processor.hpp>
+#include <core/communication/TelegrammHub.hpp> //
+#include <core/communication/TelegrammManager.hpp> //
+#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp> //
 #include <core/descriptor/item/other/Goods.hpp>
 
 #include <ceti/Logger.hpp>
@@ -57,6 +58,10 @@
 #include <meti/RandUtils.hpp>
 
 #include <algorithm> // std::min
+
+namespace {
+core::manager::Processor& processor() { return core::manager::Processor::get(); }
+} // namespace
 
 namespace control {
 
@@ -840,48 +845,6 @@ void StarSystem::__processVehicleDeath_s(Vehicle* vehicle) const
     }
 }
 
-void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
-{
-    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-    core::manager::Entity& entitiesManager = core::manager::Entity::get();
-    descriptor::Manager& descriptorManager = descriptor::Manager::get();
-
-    // send message asteroid death
-    {
-    descriptor::comm::Object object(asteroid->id());
-    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_ASTEROID, object.data()));
-    }
-
-    // create minerals
-    int containers_num = meti::rand::gen_int(1,3);
-    std::vector<glm::vec3> impulses = __genImpulses(containers_num);
-    for (int i=0; i<containers_num; ++i) {
-        int_t item_id = entitiesManager.genId();
-        int amount = meti::rand::gen_int(3, 100);
-        {
-        int_t descriptor_id = descriptorManager.randGoods()->id();
-        descriptor::comm::CreateGoodsPack telegramm_descriptor(item_id, descriptor_id, amount);
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
-        }
-        int_t container_id = entitiesManager.genId();
-        {
-        int_t descriptor_id = descriptorManager.randContainer()->id();
-        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
-        }
-        {
-        AddToStarsystemDescriptor telegramm_descriptor(id(), container_id, asteroid->position(), impulses[i], asteroid->direction());
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
-        }
-    }
-
-    // send telegram to create explosion
-    {
-        descriptor::comm::effect::Explosion telegramm_descriptor(asteroid->collisionRadius(), asteroid->position());
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
-    }
-}
-
 void StarSystem::__processBulletDeath_s(Bullet* bullet) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
@@ -931,7 +894,7 @@ void StarSystem::__bulletsCollisionCheck_s() const {
 void StarSystem::__asteroidsCollisionCheck_s() const {
     for(Asteroid* asteroid: m_asteroids) {
         if (__asteroidCollisionCheck_s(asteroid)) {
-            __processAsteroidDeath_s(asteroid);
+            processor().death(asteroid);
         }
     }
 }
@@ -952,7 +915,7 @@ bool StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
     }
     for (auto a: m_asteroids) {
         if (ceti::checkCollision(bullet, a)) {
-            __processAsteroidDeath_s(a);
+            processor().death(a);
             return true;
         }
     }

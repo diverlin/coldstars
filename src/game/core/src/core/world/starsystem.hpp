@@ -229,7 +229,6 @@ private:
 
     void __bulletsManager_DEBUG(int) const;
     void __processVehicleDeath_s(Vehicle*) const;
-    void __processAsteroidDeath_s(Asteroid*) const;
     void __processBulletDeath_s(Bullet*) const;
     void __processContainerDeath_s(Container*) const;
 
