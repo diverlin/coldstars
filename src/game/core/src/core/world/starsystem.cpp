@@ -822,21 +822,21 @@ void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
     for (auto v: m_vehicles) {
         if (ceti::checkCollision(asteroid, v)) {
             processor().death(asteroid);
-            processor().hit(v, asteroid->armor());
+            processor().hit(v, asteroid->mass());
             return;
         }
     }
     for (auto p: m_planets) {
         if (ceti::checkCollision(asteroid, p)) {
             processor().death(asteroid);
-            //processor().hit(p, asteroid->armor());
+            //processor().hit(p, asteroid->mass());
             return;
         }
     }
     for (auto s: m_stars) {
         if (ceti::checkCollision(asteroid, s)) {
             processor().death(asteroid);
-            //processor().hit(s, asteroid->armor());
+            //processor().hit(s, asteroid->mass());
             return;
         }
     }

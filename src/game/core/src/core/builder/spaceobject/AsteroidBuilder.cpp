@@ -44,14 +44,12 @@ Asteroid::gen(descriptor::Asteroid* descr)
 {
     control::Asteroid* asteroid = __genTemplate(descr);
 
-    /// Base
-    LifeData life_data;
-    life_data.armor = descr->armor();
-    asteroid->model()->setLifeData(life_data);
-
     /// Orientation
     asteroid->setSize(descr->size());
     asteroid->model()->setDirection(descr->direction());
+
+    /// SpaceObject
+    asteroid->model()->setArmor(descr->armor());
 
     return asteroid;
 

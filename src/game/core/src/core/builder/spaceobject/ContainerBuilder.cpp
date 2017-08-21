@@ -169,10 +169,7 @@ Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
 void
 Container::__createInternals(control::Container* container, descriptor::Container* desr)
 {
-    LifeData data_life;
-    data_life.armor = 1;
-
-    container->model()->setLifeData(data_life);
+    container->model()->setArmor(1);
 }
 
 } // namespace builder

@@ -27,15 +27,16 @@
 
 namespace control {
 
-SpaceObject::SpaceObject(descriptor::SpaceObject* descr, model::SpaceObject* model)
+SpaceObject::SpaceObject(descriptor::SpaceObject* descriptor, model::SpaceObject* model)
     :
       ceti::control::Orientation(model)
-    , Base(descr, model)
+    , Base(descriptor, model)
     , m_model_spaceobject(model)
-    , m_descriptor_spaceobject(descr)
+    , m_descriptor_spaceobject(descriptor)
 {
     assert(m_model_spaceobject);
     assert(m_descriptor_spaceobject);
+
     _init();
 }
 
@@ -93,10 +94,6 @@ void SpaceObject::addImpulse(const glm::vec3& impulse)
 void SpaceObject::hit(int damage, SpaceObject* agressor)
 {
     model()->setArmor(std::max(0, model()->armor() - damage));
-}
-
-int SpaceObject::armor() const {
-    return model()->armor();
 }
 
 void SpaceObject::die() {

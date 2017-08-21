@@ -70,14 +70,11 @@ WormHole::__createInternals(control::WormHole* wormhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     
-    LifeData data_life;
-    data_life.armor = 100000;
-    data_life.life_time = meti::rand::gen_int(250, 500);
+    wormhole->model()->setArmor(100000);
+    wormhole->model()->setLifeTime(meti::rand::gen_int(250, 500));
 
     //jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE);
 
-    wormhole->model()->setLifeData(data_life);
-    
     float scale_comp = 30;
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender blackhole->SetRenderData(mesh, texOb, scale);
