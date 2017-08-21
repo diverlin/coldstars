@@ -28,7 +28,10 @@ class Manager;
 } // namespace descriptor
 
 namespace control {
+class Vehicle;
 class Asteroid;
+class Bullet;
+class Container;
 } // namespace control
 
 namespace core {
@@ -50,6 +53,9 @@ private:
     Processor& operator=(const Processor&) = delete;
 
     void death(control::Asteroid*);
+    void death(control::Vehicle*);
+    void death(control::Bullet*);
+    void death(control::Container*);
 
 public:
     static Processor& get();

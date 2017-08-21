@@ -104,5 +104,71 @@ void Processor::death(control::Asteroid* asteroid)
     }
 }
 
+void Processor::death(control::Vehicle* vehicle)
+{
+    // create containers
+    int containers_num = meti::rand::gen_int(1,3);
+    const ceti::pack<int_t> items = vehicle->model()->items().random(containers_num);
+    containers_num = int(items.size());
+
+    std::vector<glm::vec3> impulses = __genImpulses(containers_num);
+    for (int i=0; i<containers_num; ++i) {
+        int_t container_id = m_entitiesManager.genId();
+        int_t descriptor_id = m_descriptorManager.randContainer()->id();
+        int_t item_id = items[i];
+        {
+        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
+        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
+        }
+        {
+        AddToStarsystemDescriptor telegramm_descriptor(vehicle->starsystem()->id(), container_id, vehicle->position(), impulses[i], vehicle->direction()/* todo: add direction less way*/ );
+        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        }
+    }
+
+    // send message vehicle death
+    {
+    descriptor::comm::Object object(vehicle->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_VEHICLE, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(vehicle->collisionRadius(), vehicle->position());
+        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
+void Processor::death(control::Bullet* bullet)
+{
+    // send message bullet death
+    {
+    descriptor::comm::Object object(bullet->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_BULLET, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(2*bullet->collisionRadius(), bullet->position());
+        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
+void Processor::death(control::Container* container)
+{
+    // send message container death
+    {
+    descriptor::comm::Object object(container->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_CONTAINER, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(2*container->collisionRadius(), container->position());
+        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
+
 } // namespace manager
 } // namespace core
