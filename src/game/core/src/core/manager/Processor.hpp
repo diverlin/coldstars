@@ -19,9 +19,17 @@
 
 # pragma once
 
+#include <glm/glm.hpp>
+
+#include <vector>
+
 namespace descriptor {
 class Manager;
 } // namespace descriptor
+
+namespace control {
+class Asteroid;
+} // namespace control
 
 namespace core {
 
@@ -41,13 +49,17 @@ private:
     ~Processor() = default;
     Processor& operator=(const Processor&) = delete;
 
+    void death(control::Asteroid*);
+
 public:
     static Processor& get();
 
 private:
-    const core::comm::TelegrammHub& m_telegrammHub;
-    const manager::Entity& m_entitiesManager;
-    const descriptor::Manager& m_descriptorManager;
+    core::comm::TelegrammHub& m_telegrammHub;
+    manager::Entity& m_entitiesManager;
+    descriptor::Manager& m_descriptorManager;
+
+    std::vector<glm::vec3> __genImpulses(int num) const;
 };
 
 } // namespace manager
