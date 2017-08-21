@@ -43,7 +43,7 @@ namespace entity
         PLANET, 
         PLANET_MIXED, PLANET_WATER, PLANET_VULCANIC, PLANET_ICE, PLANET_GAS, PLANET_ROCK,    
         
-        BLACKHOLE, 
+        WORMHOLE,
                         
         VEHICLE, 
         

@@ -124,7 +124,7 @@ void GuiRadar::RenderUnique(const jeti::Render& render, Player* player) const
                     size = 1.25*size_base;
                     break;                
                 }
-                case entity::Type::BLACKHOLE:
+                case entity::Type::WORMHOLE:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->model()->texture);
                     size = 1.5*size_base;

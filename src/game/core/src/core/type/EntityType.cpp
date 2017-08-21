@@ -43,7 +43,7 @@ std::string to_string(entity::Type type_id)
         case entity::Type::STAR:         { return "entity::Type::STAR"; break; }
         case entity::Type::ASTEROID:     { return "entity::Type::ASTEROID"; break; }
         case entity::Type::PLANET:         { return "entity::Type::PLANET"; break; }
-        case entity::Type::BLACKHOLE:     { return "entity::Type::BLACKHOLE"; break; }
+        case entity::Type::WORMHOLE:     { return "entity::Type::WORMHOLE"; break; }
         case entity::Type::BOMB:         { return "entity::Type::BOMB"; break; }
         case entity::Type::GOODS:         { return "entity::Type::GOODS"; break; }
         case entity::Type::PLAYER:         { return "entity::Type::PLAYER"; break; }

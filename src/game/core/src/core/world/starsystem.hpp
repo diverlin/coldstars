@@ -134,18 +134,7 @@ private:
     void __add(Bullet*);
 
 public:
-    // remove
-    void remove(Star*);
-    void remove(Planet*);
-    void remove(WormHole*);
-    void remove(Asteroid*);
-    void remove(Container*);
-    void remove(Bullet*);
-    void remove(Vehicle*);
-    void remove(SpaceStation*);
-    void remove(Ship*);
-    void remove(Satellite*);
-    //
+    void remove(SpaceObject*);
 
     void bombExplosionEvent(Container*, bool);
     void starSparkEvent(float) const;
@@ -226,6 +215,16 @@ private:
     void __asteroidsCollisionCheck_s() const;
     bool __bulletCollisionCheck_s(Bullet*) const;
     bool __asteroidCollisionCheck_s(Asteroid*) const;
+
+    void __remove(Star*);
+    void __remove(Planet*);
+    void __remove(WormHole*);
+    void __remove(Asteroid*);
+    void __remove(Container*);
+    void __remove(Bullet*);
+    void __remove(SpaceStation*);
+    void __remove(Ship*);
+    void __remove(Satellite*);
 
     void __removeVehicle(int_t);
     void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
