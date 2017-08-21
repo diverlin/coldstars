@@ -54,17 +54,16 @@ private:
     ~Processor() = default;
     Processor& operator=(const Processor&) = delete;
 
+public:
+    static Processor& get();
+
+    void death_spaceobject(control::SpaceObject*);
     void death(control::Asteroid*);
-    void death(control::Vehicle*);
     void death(control::Bullet*);
-    void death(control::Container*);
 
     void hit(control::SpaceObject* object, int damage);
 
     void genBullets_DEBUG(control::StarSystem*, int) const;
-
-public:
-    static Processor& get();
 
 private:
     core::comm::TelegrammHub& m_telegrammHub;
@@ -74,6 +73,9 @@ private:
     void __addSpaceObjectToGarbage(control::SpaceObject*);
     void __removeSpaceObjectFromStarSystem(control::SpaceObject*);
     void __explosionEffect(float, const glm::vec3&);
+
+    void __death(control::Vehicle*);
+    void __death(control::Container*);
 
     std::vector<glm::vec3> __genImpulses(int num) const;
 };

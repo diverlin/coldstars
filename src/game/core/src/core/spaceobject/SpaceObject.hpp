@@ -63,13 +63,8 @@ public:
     virtual void hit(int, SpaceObject* agressor = nullptr);
     void die();
 
-    bool isAlive() const { model()->isAlive(); }
+    int armor() const;
     int mass() const { return m_mass; }
-
-    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
-    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
-    //        void RenderInfo(const glm::vec2&);
-    //        void virtual UpdateInfo() {}
 
     descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }
     model::SpaceObject* model() const { return m_model_spaceobject; }
@@ -87,12 +82,6 @@ protected:
     model::SpaceObject* m_model_spaceobject = nullptr;
 
     void _addMass(int d_mass) { m_mass += d_mass; }
-
-    //        InfoTable& GetInfo() { return m_Info; }
-//    [[deprecated("!!! why we need this?")]]
-//    LifeData& _dataLife() { return model()->dataLife; }
-//    [[deprecated("!!! remove")]]
-//    const LifeData& _dataLife() const { return model()->dataLife; }
 
     const glm::vec3& _externalForce() const { return m_impulse; }
     [[deprecated("!!! not sure, probably needed for the containrs and bullets")]]

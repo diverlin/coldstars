@@ -763,94 +763,101 @@ void StarSystem::update(int time)
 
 void StarSystem::__bulletsCollisionCheck_s() const {
     for(Bullet* bullet: m_bullets) {
-        if (__bulletCollisionCheck_s(bullet)) {
-            processor().death(bullet);
-        }
+        __bulletCollisionCheck_s(bullet);
     }
 }
 
 void StarSystem::__asteroidsCollisionCheck_s() const {
     for(Asteroid* asteroid: m_asteroids) {
-        if (__asteroidCollisionCheck_s(asteroid)) {
-            processor().death(asteroid);
-        }
+        __asteroidCollisionCheck_s(asteroid);
     }
 }
 
-bool StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
+void StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
 {
     if (!bullet->isAlive() || !bullet->collideable()) {
-        return false;
+        return;
     }
 
     for (auto v: m_vehicles) {
         if (bullet->ownerId() != v->id()) {
             if (ceti::checkCollision(bullet, v)) {
-                 // hit vehicle
-                return true;
+                processor().death(bullet);
+                processor().hit(v, bullet->damage());
+                return;
             }
         }
     }
     for (auto a: m_asteroids) {
         if (ceti::checkCollision(bullet, a)) {
-            processor().death(a);
-            return true;
+            processor().death(bullet);
+            processor().hit(a, bullet->damage());
+            return;
         }
     }
     for (auto c: m_containers) {
         if (ceti::checkCollision(bullet, c)) {
-            processor().death(c);
-            return true;
+            processor().death(bullet);
+            processor().hit(c, bullet->damage());
+            return;
         }
     }
     for (auto b: m_bullets) {
         if (b->collideable() && (b->ownerId() != bullet->ownerId())) {
             if (ceti::checkCollision(bullet, b)) {
+                processor().death(bullet);
                 processor().death(b);
-                return true;
+                return;
             }
         }
     }
-
-    return false;
 }
 
-bool StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
+void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
 {
     if (!asteroid->isAlive()) {
-        return false;
+        return;
     }
 
     for (auto v: m_vehicles) {
         if (ceti::checkCollision(asteroid, v)) {
-            return true;
+            processor().death(asteroid);
+            processor().hit(v, asteroid->armor());
+            return;
         }
     }
     for (auto p: m_planets) {
         if (ceti::checkCollision(asteroid, p)) {
-            return true;
+            processor().death(asteroid);
+            //processor().hit(p, asteroid->armor());
+            return;
         }
     }
     for (auto s: m_stars) {
         if (ceti::checkCollision(asteroid, s)) {
-            return true;
+            processor().death(asteroid);
+            //processor().hit(s, asteroid->armor());
+            return;
         }
     }
     for (auto a: m_asteroids) {
         if (a->id() != asteroid->id()) {
             if (ceti::checkCollision(asteroid, a)) {
-                return true;
+                processor().death(asteroid);
+                processor().death(a);
+                return;
             }
         }
     }
     for (auto b: m_bullets) {
         if (b->collideable()) {
             if (ceti::checkCollision(asteroid, b)) {
-                return true;
+                processor().hit(asteroid, b->damage());
+                processor().death(b);
+                return;
             }
         }
     }
-    return false;
 }
 
 void StarSystem::__updateEntities_s(int time)
