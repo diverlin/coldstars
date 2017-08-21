@@ -91,31 +91,19 @@ void SpaceObject::addImpulse(const glm::vec3& impulse)
 
 void SpaceObject::hit(int damage, SpaceObject* agressor)
 {
-    model()->setArmor(model()->armor() - damage);
-    if (model()->armor() <= 0) {
-        model()->setArmor(0);
-        model()->setIsDying(true);
-    }
+    model()->setArmor(std::max(0, model()->armor() - damage));
 }
 
 void SpaceObject::die() {
-    model()->die();
+    model()->setArmor(0);
 }
 
 void SpaceObject::_checkDeath(bool show_effect)
 {
-    if (model()->isDying()) {
-        model()->setDyingTime(model()->dyingTime() - 1);
-        if (model()->dyingTime() < 0) {
-            model()->setAlive(false);
-            if (!model()->garbageReady()) {
-                _postDeathUniqueEvent(show_effect);
-                model()->setGarbageReady(true);
-            }
-        }
+    if (model()->armor() == 0) {
+        model()->setIsAlive(false);
     }
 }
-
 
 ///* virtual */
 //void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)

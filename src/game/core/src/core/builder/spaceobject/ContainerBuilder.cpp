@@ -171,7 +171,6 @@ Container::__createInternals(control::Container* container, descriptor::Containe
 {
     LifeData data_life;
     data_life.armor = 1;
-    data_life.dying_time = 30;
 
     container->model()->setLifeData(data_life);
 }

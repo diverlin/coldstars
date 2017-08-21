@@ -47,17 +47,9 @@ public:
     void setPlace(place::Type place) { m_place = place;  }
 //    void setMass(int mass) { m_mass = mass; }
 
-    void setIsDying(bool is_dying) { m_dataLife.is_dying = is_dying; }
-    void setDyingTime(bool dying_time) { m_dataLife.dying_time = dying_time; }
-
     void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
-    void setGarbageReady(bool garbage_ready) { m_dataLife.garbage_ready = garbage_ready; }
 
     void setParent(int_t parent) { m_parent = parent; }
-
-    bool isDying() const { return m_dataLife.is_dying; }
-    int dyingTime() const { return m_dataLife.dying_time; }
-    bool garbageReady() const { return m_dataLife.garbage_ready; }
 
     int_t starsystem() const { return m_starsystem; }
     int_t parent() const { return m_parent; }
@@ -66,11 +58,6 @@ public:
     int armor() const { return m_dataLife.armor; }
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
-
-    void die() {
-        setAlive(false);
-        m_dataLife.dying_time = -1;
-    }
 
 private:
     LifeData m_dataLife;
