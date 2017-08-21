@@ -39,7 +39,6 @@ Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
 int Weapon::radius() const { return model()->radius(); }
 int Weapon::damage() const { return model()->damage(); }
 
-/* virtual */
 void Weapon::updateProperties()
 {
     m_damage_add   = 0;
