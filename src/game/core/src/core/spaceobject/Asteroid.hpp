@@ -48,8 +48,6 @@ private:
 
     descriptor::Asteroid* m_descriptor_asteroid = nullptr;
     model::Asteroid* m_model_asteroid = nullptr;
-
-    //        virtual void UpdateInfo() override final;
 };
 
 } // namespace control

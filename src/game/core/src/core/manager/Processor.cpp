@@ -67,7 +67,6 @@ Processor::__genImpulses(int num) const
     return result;
 }
 
-
 void Processor::death(control::Asteroid* asteroid)
 {
     // create minerals
