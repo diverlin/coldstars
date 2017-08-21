@@ -67,9 +67,7 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
 void
 Bullet::createInternals(control::Bullet* bullet, descriptor::Bullet* descriptor)
 {
-    LifeData data_life;
-    data_life.armor = descriptor->armor();
-    bullet->model()->setLifeData(data_life);
+    bullet->model()->setArmor(descriptor->armor());
 }
 
 } // namespace builder

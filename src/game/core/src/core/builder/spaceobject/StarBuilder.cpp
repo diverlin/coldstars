@@ -57,9 +57,7 @@ Star::gen(descriptor::Star* descr)
     star->setSize(descr->size());
     star->model()->setDirection(descr->direction());
 
-    LifeData data_life;
-    data_life.armor = descr->armor();
-    star->model()->setLifeData(data_life);
+    star->model()->setArmor(descr->armor());
 
     return star;
 }

@@ -20,7 +20,6 @@
 #pragma once
 
 #include <core/common/Base.hpp>
-#include <core/struct/LifeData.hpp>
 #include <core/type/PlaceType.hpp>
 
 #include <core/descriptor/spaceobject/SpaceObject.hpp>
@@ -63,7 +62,6 @@ public:
     virtual void hit(int, SpaceObject* agressor = nullptr);
     void die();
 
-    int armor() const;
     int mass() const { return m_mass; }
 
     descriptor::SpaceObject* descriptor() const { return m_descriptor_spaceobject; }

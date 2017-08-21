@@ -56,14 +56,12 @@ Planet::gen(descriptor::Planet* descr)
 void
 Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
 {
-    /// Base
-    LifeData life_data;
-    life_data.armor = descr->armor();
-    planet->model()->setLifeData(life_data);
-
     /// Orientation
     planet->setSize(descr->size());
     planet->model()->setDirection(descr->direction());
+
+    /// SpaceObject
+    planet->model()->setArmor(descr->armor());
 
     control::Kosmoport* kosmoport = builder::Kosmoport::gen();
     planet->bindLand(kosmoport);

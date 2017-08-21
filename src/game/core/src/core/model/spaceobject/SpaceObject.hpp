@@ -20,7 +20,6 @@
 #pragma once
 
 #include <core/common/Base.hpp>
-#include <core/struct/LifeData.hpp>
 #include <core/type/PlaceType.hpp>
 
 #include <ceti/Orientation.hpp>
@@ -38,14 +37,12 @@ public:
     SpaceObject() = default;
     ~SpaceObject() = default;
 
-    void addArmor(int armor) { m_dataLife.armor += armor; }
-
-    void setArmor(int armor) { m_dataLife.armor = armor; }
-    void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
+    void addArmor(int armor) { m_armor += armor; }
+    void setArmor(int armor) { m_armor = armor; }
+    void setLifeTime(int lifeTime) { m_lifeTime = lifeTime; }
 
     void setStarSystem(int_t starsystem) { m_starsystem = starsystem; }
     void setPlace(place::Type place) { m_place = place;  }
-//    void setMass(int mass) { m_mass = mass; }
 
     void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
 
@@ -54,17 +51,16 @@ public:
     int_t starsystem() const { return m_starsystem; }
     int_t parent() const { return m_parent; }
 
-//    int mass()  const { return m_mass; }
-    int armor() const { return m_dataLife.armor; }
+    int armor() const { return m_armor; }
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
 private:
-    LifeData m_dataLife;
+    int m_armor = 0;
+    int m_lifeTime = 0;
     int_t m_parent = NONE;
     int_t m_starsystem = NONE;
     place::Type m_place = place::Type::NONE;
-//    int m_mass = 0;
     int m_expirienceToGive = 0;
 
 private:
@@ -73,11 +69,11 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::model::Orientation>(*this);
         ar & boost::serialization::base_object<Base>(*this);
-        ar & m_dataLife;
+        ar & m_armor;
+        ar & m_lifeTime;
         ar & m_parent;
         ar & m_starsystem;
         ar & m_place;
-//        ar & m_mass;
         ar & m_expirienceToGive;
     }
 };
