@@ -20,6 +20,7 @@
 
 #include <cassert>
 
+namespace gui {
 namespace info {
 
 Camera::Camera() {
@@ -79,4 +80,4 @@ Camera::__getRowByTitle(int key) {
 }
 
 } // namespace info
-
+} // namespace gui

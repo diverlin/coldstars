@@ -24,10 +24,10 @@
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
 
-//#include <boost/property_tree/ptree.hpp> // remove this
-
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+
+#include <map>
 
 namespace descriptor {
 class Base;
@@ -42,8 +42,6 @@ class Base : public NonCopyable
 public:
     Base() = default;
     virtual ~Base() = default; // virtual method is needed for proper model base deletion
-//    Base(const std::string& data);
-//    std::string data() const;
 
     void setIsAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }
@@ -54,6 +52,15 @@ public:
     int_t descriptor() const { return m_descriptor; }
 
     void setWritable(bool writable) { m_writable = writable; }
+
+    std::map<std::string, std::string> info() const {
+        std::map<std::string, std::string> result;
+        result.insert(std::make_pair("model::Base", ""));
+        result.insert(std::make_pair("isAlive", std::to_string(m_isAlive)));
+        result.insert(std::make_pair("id", std::to_string(m_id)));
+        result.insert(std::make_pair("descriptor", std::to_string(m_descriptor)));
+        return result;
+    }
 
 protected:
     bool _isWritable() const { return m_writable; }

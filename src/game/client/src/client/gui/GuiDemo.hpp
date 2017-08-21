@@ -28,14 +28,14 @@ namespace jeti {
 class SFMLWrapper;
 } // namespace jeti
 
+namespace gui {
 
 namespace info {
 class StarSystem;
 class Camera;
 class Renderer;
+class Table;
 } // namespace info
-
-namespace gui {
 
 class Demo
 {
@@ -69,6 +69,7 @@ private:
     info::StarSystem* m_infoStarSystem = nullptr;
     info::Camera* m_infoCamera = nullptr;
     info::Renderer* m_infoRender = nullptr;
+    info::Table* m_genericTable = nullptr;
 };
 
 } // namespace gui

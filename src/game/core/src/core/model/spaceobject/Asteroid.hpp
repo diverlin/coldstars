@@ -30,6 +30,12 @@ public:
     Asteroid(const std::string& data);
     std::string data() const;
 
+    std::map<std::string, std::string> info() const {
+        std::map<std::string, std::string> result = Planetoid::info();
+        result.insert(std::make_pair("model::Asteroid", ""));
+        return result;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

@@ -18,20 +18,27 @@
 
 
 #include "PlaceType.hpp"
+#include <ceti/StringUtils.hpp>
 
+#include <cassert>
 
-std::string getPlaceStr(place::Type place_id)
+namespace place {
+
+std::string to_string(place::Type place)
 {
-    switch(place_id)
-    {
-        case place::Type::NONE: { return "place::Type::NONE"; }
-        
+    switch(place) {
+        case place::Type::NONE: { return "place::Type::NONE"; }        
         case place::Type::SPACE: { return "place::Type::SPACE"; }
         case place::Type::HYPERSPACE: { return "place::Type::HYPERSPACE"; }
         case place::Type::KOSMOPORT: { return "place::Type::KOSMOPORT"; }
         case place::Type::NATURELAND: { return "place::Type::NATURELAND"; }
-        //case place::Type::SHIP: { return "place::Type::SHIP"; }
+        case place::Type::SHIP: { return "place::Type::SHIP"; }
     }
-    return "place::Type::PLACE_UKNOWN";
+    assert(false);
 } 
 
+std::string strip(const std::string& str) {
+    return ceti::replace(str, "place::Type::", "");
+}
+
+} // namespace place

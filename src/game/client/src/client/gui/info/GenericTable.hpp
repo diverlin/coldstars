@@ -20,53 +20,25 @@
 
 #include <SFGUI/Widgets.hpp>
 
-#include <ceti/type/IdType.hpp>
-
-#include <client/gui/info/Row2.hpp>
-
+#include <string>
 #include <map>
 
 namespace gui {
 namespace info {
 
-class Renderer
+class Table
 {
-private:
-    const std::string ZNEAR_TITLE = "znear";
-    const std::string ZFAR_TITLE = "zfar";
-    const std::string QUAD_SCREEN_Z_TITLE = "quad_screen_z";
-    const std::string SCALE_TITLE = "scale";
-    const std::string WIDTH_TITLE = "width";
-    const std::string HEIGHT_TITLE = "height";
-
-    enum {
-        ZNEAR,
-        ZFAR,
-        QUAD_SCREEN_Z,
-        SCALE,
-        WIDTH,
-        HEIGHT
-    };
-
 public:
-    Renderer();
-    ~Renderer() = default;
+    Table(const std::map<std::string, std::string>&);
+    ~Table();
 
-    void setZNear(const std::string&);
-    void setZFar(const std::string&);
-    void setScreenQuadZ(const std::string&);
-    void setScale(const std::string&);
-    void setWidth(const std::string&);
-    void setHeight(const std::string&);
-
-    sfg::Table::Ptr mainWidget() const { return m_table; }
+    void update(const std::map<std::string, std::string>&);
+    sfg::Table::Ptr widget() { return m_table; }
 
 private:
     sfg::Table::Ptr m_table;
-    std::map<int, gui::Row*> m_rows;
-
-    gui::Row* __getRowByTitle(int);
+    std::map<std::string, std::shared_ptr<sfg::Label>> m_widgets;
 };
 
-} // namespace info
+} // naemspace info
 } // namespace gui
