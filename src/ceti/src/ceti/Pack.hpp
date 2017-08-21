@@ -37,6 +37,7 @@ public:
     ~pack() = default;
 
     void add(const T& element) {
+        assert(!this->contains(element));
         this->push_back(element);
     }
 
@@ -95,11 +96,24 @@ public:
         return *this;
     }
 
+    const T& random() {
+        assert(!this->empty());
+        return meti::rand::get_element_or_die(*this);
+    }
+
     ceti::pack<T> random(int size) {
         assert(!this->empty());
+
+        std::set<T> set1(this->begin(), this->end());
+
+        size = std::min(size, int(set1.size()));
+
         ceti::pack<T> result;
-        for (int i=0; i<size; ++i) {
-            result.add(meti::rand::get_element_or_die(*this));
+        while(result.size() != size) {
+            const T& element = meti::rand::get_element_or_die(*this);
+            if (!result.contains(element)) {
+                result.add(element);
+            }
         }
         return result;
     }

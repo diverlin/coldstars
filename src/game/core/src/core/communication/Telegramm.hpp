@@ -57,6 +57,7 @@ public:
         EXPLOSION,
 
         // kill
+        KILL_VEHICLE,
         KILL_ASTEROID,
         KILL_BULLET,
         KILL_CONTAINER

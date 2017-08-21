@@ -97,12 +97,12 @@ void createBombEvent(const comm::Telegramm& telegramm) {
 }
 
 void createMineralEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::CreateMineral data(telegramm.data());
-    builder::Container::gen(data.descriptor(), data.object(), data.mass());
+    descriptor::comm::CreateMineral descriptor(telegramm.data());
+    builder::Container::gen(descriptor.descriptor(), descriptor.object());
 }
 void createContainerEvent(const comm::Telegramm& telegramm) {
-    assert(false);
-//        core::global::get().containerBuilder().gen(telegramm.data);
+    descriptor::comm::CreateContainer descriptor(telegramm.data());
+    builder::Container::gen(descriptor.descriptor(), descriptor.object(), descriptor.item());
 }
 void createBulletEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateBullet descriptor(telegramm.data());
@@ -210,6 +210,13 @@ void explosionEvent(const comm::Telegramm& telegramm) {
 }
 
 // KILL
+void killVehicleEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Object descriptor(telegramm.data());
+    control::Vehicle* vehicle = manager::Entity::get().vehicle(descriptor.object());
+    vehicle->die();
+    vehicle->starsystem()->remove(vehicle);
+    manager::Garbage::get().add(vehicle);
+}
 void killAsteroidEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Object descriptor(telegramm.data());
     control::Asteroid* asteroid = manager::Entity::get().asteroid(descriptor.object());
@@ -374,6 +381,7 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); return true;
 
     /* KILL */
+    case comm::Telegramm::Type::KILL_VEHICLE: killVehicleEvent(telegramm); return true;
     case comm::Telegramm::Type::KILL_ASTEROID: killAsteroidEvent(telegramm); return true;
     case comm::Telegramm::Type::KILL_BULLET: killBulletEvent(telegramm); return true;
     case comm::Telegramm::Type::KILL_CONTAINER: killContainerEvent(telegramm); return true;

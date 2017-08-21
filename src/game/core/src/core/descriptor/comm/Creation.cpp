@@ -130,6 +130,26 @@ CreateMineral::data() const
 }
 
 
+//////////////////////////
+
+CreateContainer::CreateContainer(int_t object, int_t descriptor, int_t item)
+    :
+      Creation(object, descriptor)
+    , m_item(item)
+{
+}
+
+CreateContainer::CreateContainer(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+CreateContainer::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace comm
 } // namespace descriptor
 

@@ -97,9 +97,9 @@ glm::vec2 genVec2f(float length, float angle)
     return length * glm::vec2(sin(angle), cos(angle));
 }
 
-glm::vec3 genVec3f(float length, float angle, float pos_z)
+glm::vec3 get_vec3(float length, float angle, float z)
 {
-    return glm::vec3(length*sin(angle), length*cos(angle), pos_z);
+    return glm::vec3(length*sin(angle), length*cos(angle), z);
 }
 
 float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end)  // depr
