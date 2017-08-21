@@ -26,7 +26,7 @@ namespace item {
 
 Goods::Goods(descriptor::item::Goods* descriptor, model::item::Goods* model)
     :
-      Base(descriptor, model)
+      Item(descriptor, model)
     , m_descriptor_goods(descriptor)
     , m_model_goods(model)
 {

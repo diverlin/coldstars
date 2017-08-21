@@ -96,7 +96,7 @@ void createBombEvent(const comm::Telegramm& telegramm) {
 //        core::global::get().bombBuilder().gen(telegramm.data);
 }
 
-void createMineralEvent(const comm::Telegramm& telegramm) {
+void createGoodsEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateGoodsPack descriptor(telegramm.data());
     builder::item::Goods::gen(descriptor.descriptor(), descriptor.object());
 }
@@ -346,7 +346,7 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_MINERAL: createMineralEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_GOODS: createGoodsEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_BULLET: createBulletEvent(telegramm); return true;
     // items

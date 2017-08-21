@@ -72,8 +72,8 @@ public:
 protected:
     void _updateLock();
 
-    virtual void AddCommonInfo()=0;
-    virtual void addUniqueInfo()=0;
+    virtual void AddCommonInfo() {}
+    virtual void addUniqueInfo() {}
 
 public:
     descriptor::Item* descriptor() const { return m_descriptor_item; }

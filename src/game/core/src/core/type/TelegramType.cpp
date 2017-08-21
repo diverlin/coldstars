@@ -28,7 +28,7 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     // spaceobjects
     case core::comm::Telegramm::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
     case core::comm::Telegramm::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
-    case core::comm::Telegramm::Type::CREATE_MINERAL:  { return "comm::Message::Type::CREATE_MINERAL"; }
+    case core::comm::Telegramm::Type::CREATE_GOODS:  { return "comm::Message::Type::CREATE_GOODS"; }
     case core::comm::Telegramm::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
 
     // items
