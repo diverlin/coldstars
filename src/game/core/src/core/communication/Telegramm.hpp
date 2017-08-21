@@ -18,7 +18,7 @@ public:
         CREATE_STARSYSTEM,
         CREATE_SHIP,
         CREATE_BOMB,
-        CREATE_MINERAL,
+        CREATE_GOODS,
         CREATE_CONTAINER,
         CREATE_BULLET,
         // items

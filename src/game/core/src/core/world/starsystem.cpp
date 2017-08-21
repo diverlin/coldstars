@@ -48,6 +48,7 @@
 #include <core/communication/TelegrammHub.hpp>
 #include <core/communication/TelegrammManager.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+#include <core/descriptor/item/other/Goods.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
@@ -309,7 +310,7 @@ void StarSystem::__add(Container* container)
 
 void StarSystem::add(Container* container, const glm::vec3& center)
 {
-    container->model()->setPosition(center);
+    container->setPosition(center);
     __add(container);
 }
 
@@ -852,12 +853,18 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
     int containers_num = meti::rand::gen_int(1,3);
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
-        int mass = meti::rand::gen_int(3, 100);
-        int_t container_id = entitiesManager.genId();
-        int_t descriptor_id = descriptorManager.randContainer()->id();
+        int_t item_id = entitiesManager.genId();
+        int amount = meti::rand::gen_int(3, 100);
         {
-        descriptor::comm::CreateGoodsPack telegramm_descriptor(container_id, descriptor_id, mass);
-        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
+        int_t descriptor_id = descriptorManager.randGoods()->id();
+        descriptor::comm::CreateGoodsPack telegramm_descriptor(item_id, descriptor_id, amount);
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
+        }
+        int_t container_id = entitiesManager.genId();
+        {
+        int_t descriptor_id = descriptorManager.randContainer()->id();
+        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
         {
         AddToStarsystemDescriptor telegramm_descriptor(id(), container_id, asteroid->position(), impulses[i], asteroid->direction());

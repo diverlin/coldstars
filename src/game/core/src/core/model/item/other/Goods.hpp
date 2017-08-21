@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <common/Base.hpp>
+#include <core/model/item/Item.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -28,7 +28,7 @@
 namespace model {
 namespace item {
 
-class Goods : public model::Base
+class Goods : public Item
 {
 public:
     Goods(int_t, int_t);
@@ -47,7 +47,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::Base>(*this);
+        ar & boost::serialization::base_object<Item>(*this);
         ar & m_amount;
     }
 };

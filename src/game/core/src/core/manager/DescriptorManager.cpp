@@ -698,6 +698,7 @@ Manager::generate()
     for (int i=0; i<5; ++i) {
         genBullet(); // nested for rocket, so must be generated firstly
     }
+    item::genGoods();
 
     int base = 1;
     int num = base * 20;
