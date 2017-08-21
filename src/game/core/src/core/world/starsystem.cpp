@@ -725,7 +725,7 @@ void StarSystem::update(int time)
     }
 
     if (time > 0) {
-        __bulletsManager_DEBUG(100);
+        processor().genBullets_DEBUG(this, 100);
         telegrammManager.update();
 
         if (m_unique_update_inDymanic_done == false) {
@@ -755,41 +755,6 @@ void StarSystem::update(int time)
             m_unique_update_inStatic_done  = true;
         }
     }
-}
-
-void StarSystem::__bulletsManager_DEBUG(int num) const
-{
-    if (m_bullets.size() >= num) {
-        return;
-    }
-
-    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
-
-    Vehicle* vehicle = meti::rand::get_element(vehicles());
-    if (asteroids().empty()) { // ugly workaround
-        return;
-    }
-    SpaceObject* target = meti::rand::get_element(asteroids());
-    if (!vehicle || !target) {
-        return;
-    }
-
-    int_t owner_id = vehicle->id();
-    int_t target_id = target->id();
-
-    std::vector<item::Weapon*> rockets = vehicle->weapons().rockets();
-    if (rockets.empty()) { //ugly workaround
-        return;
-    }
-    item::Weapon* rocket = meti::rand::get_element(rockets);
-    if (!rocket) {
-        return;
-    }
-
-    int_t item_id = rocket->id();
-
-    descriptor::comm::CreateBullet telegramm_descriptor(owner_id, item_id, target_id);
-    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
 void StarSystem::__bulletsCollisionCheck_s() const {

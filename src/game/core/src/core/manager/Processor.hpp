@@ -28,6 +28,7 @@ class Manager;
 } // namespace descriptor
 
 namespace control {
+class StarSystem;
 class Vehicle;
 class Asteroid;
 class Bullet;
@@ -38,7 +39,7 @@ namespace core {
 
 namespace comm {
 class TelegrammHub;
-} // namespac comm
+} // namespace comm
 
 namespace manager {
 
@@ -56,6 +57,8 @@ private:
     void death(control::Vehicle*);
     void death(control::Bullet*);
     void death(control::Container*);
+
+    void genBullets_DEBUG(control::StarSystem*, int) const;
 
 public:
     static Processor& get();
