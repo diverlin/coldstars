@@ -208,34 +208,20 @@ void explosionEvent(const comm::Telegramm& telegramm) {
     //        starsystem->add(explosion, descriptor.center);
 }
 
-// KILL
-void killVehicleEvent(const comm::Telegramm& telegramm) {
+// GARBAGE
+void garbageSpaceObjectEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Object descriptor(telegramm.data());
-    control::Vehicle* vehicle = manager::Entity::get().vehicle(descriptor.object());
-    vehicle->die();
-    vehicle->starsystem()->remove(vehicle);
-    manager::Garbage::get().add(vehicle);
+    control::SpaceObject* object = manager::Entity::get().spaceObject(descriptor.object());
+    object->die();
+    manager::Garbage::get().add(object);
 }
-void killAsteroidEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::Object descriptor(telegramm.data());
-    control::Asteroid* asteroid = manager::Entity::get().asteroid(descriptor.object());
-    asteroid->die();
-    asteroid->starsystem()->remove(asteroid);
-    manager::Garbage::get().add(asteroid);
-}
-void killBulletEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::Object descriptor(telegramm.data());
-    control::Bullet* bullet = manager::Entity::get().bullet(descriptor.object());
-    bullet->die();
-    bullet->starsystem()->remove(bullet);
-    manager::Garbage::get().add(bullet);
-}
-void killContainerEvent(const comm::Telegramm& telegramm) {
-    descriptor::comm::Object descriptor(telegramm.data());
-    control::Container* container = manager::Entity::get().container(descriptor.object());
-    container->die();
-    container->starsystem()->remove(container);
-    manager::Garbage::get().add(container);
+
+// REMOVE
+void removeSpaceObjectFromStarSystemEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::StarSystemTransition descriptor(telegramm.data());
+    control::SpaceObject* object = manager::Entity::get().spaceObject(descriptor.object());
+    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem());
+    starsystem->remove(object);
 }
 
 } // namespace
@@ -363,6 +349,9 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); return true;
     case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); return true;
 
+    /** REMOVE FROM STARSYSTEM */
+    case comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegramm); return true;
+
     /** DOCK */
     case comm::Telegramm::Type::DOCK_SHIP: _doDock(telegramm); return true;
     case comm::Telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); return true;
@@ -377,13 +366,10 @@ bool TelegrammManager::_process(const comm::Telegramm& telegramm)
 
     /** OTHER */
     case comm::Telegramm::Type::HIT: hitEvent(telegramm); return true;
-    case comm::Telegramm::Type::EXPLOSION: explosionEvent(telegramm); return true;
+    //case comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
 
-    /* KILL */
-    case comm::Telegramm::Type::KILL_VEHICLE: killVehicleEvent(telegramm); return true;
-    case comm::Telegramm::Type::KILL_ASTEROID: killAsteroidEvent(telegramm); return true;
-    case comm::Telegramm::Type::KILL_BULLET: killBulletEvent(telegramm); return true;
-    case comm::Telegramm::Type::KILL_CONTAINER: killContainerEvent(telegramm); return true;
+    /* GARBAGE */
+    case comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: garbageSpaceObjectEvent(telegramm); return true;
     }
 
     return false;

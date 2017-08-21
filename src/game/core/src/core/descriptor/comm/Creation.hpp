@@ -221,6 +221,38 @@ private:
 
 } // namespace effect
 
+
+class StarSystemTransition
+{
+public:
+    StarSystemTransition(int_t, int_t);
+    StarSystemTransition(const std::string& data);
+    ~StarSystemTransition() = default;
+    std::string data() const;
+
+    int_t object() const { return m_object; }
+    int_t starsystem() const { return m_starsystem; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::StarSystemTransition:\n";
+        result += std::string(" object = ") + std::to_string(m_object) + "\n";
+        result += std::string(" starsystem = ") + std::to_string(m_starsystem) + "\n";
+        return result;
+    }
+
+private:
+    int_t m_object = NONE;
+    int_t m_starsystem = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_object;
+        ar & m_starsystem;
+    }
+};
+
 } // namespace comm
 } // namespace descriptor
 

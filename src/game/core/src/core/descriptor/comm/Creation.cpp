@@ -150,6 +150,25 @@ CreateContainer::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
+////////////////////////////////////////
+StarSystemTransition::StarSystemTransition(int_t object, int_t starsystem)
+    :
+      m_object(object)
+    , m_starsystem(starsystem)
+{
+}
+
+StarSystemTransition::StarSystemTransition(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+StarSystemTransition::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace comm
 } // namespace descriptor
 

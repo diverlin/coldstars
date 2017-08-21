@@ -49,19 +49,15 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     case core::comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
     case core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
     case core::comm::Telegramm::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
-    case core::comm::Telegramm::Type::REMOVE:  { return "comm::Message::Type::REMOVE"; }
+    case core::comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM:  { return "comm::Message::Type::REMOVE_FROM_STARSYSTEM"; }
     case core::comm::Telegramm::Type::DELETE:  { return "comm::Message::Type::DELETE"; }
     /** */
 
     case core::comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
-    case core::comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
-        // kill
-    case core::comm::Telegramm::Type::KILL_VEHICLE: { return "comm::Message::Type::KILL_VEHICLE"; }
-    case core::comm::Telegramm::Type::KILL_ASTEROID: { return "comm::Message::Type::KILL_ASTEROID"; }
-    case core::comm::Telegramm::Type::KILL_BULLET: { return "comm::Message::Type::KILL_BULLET"; }
-    case core::comm::Telegramm::Type::KILL_CONTAINER: { return "comm::Message::Type::KILL_CONTAINER"; }
-        //
+    // garbage
+    case core::comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "comm::Message::Type::GARBAGE"; }
+
     case core::comm::Telegramm::Type::CREATE_BULLET: { return "comm::Message::Type::CREATE_BULLET"; }
 
     }
