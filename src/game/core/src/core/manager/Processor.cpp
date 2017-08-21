@@ -29,6 +29,7 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <core/descriptor/comm/Creation.hpp>
+#include <core/descriptor/comm/Hit.hpp>
 #include <core/communication/TelegrammHub.hpp>
 #include <core/communication/TelegrammManager.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
@@ -134,11 +135,7 @@ void Processor::death(control::Vehicle* vehicle)
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_VEHICLE, object.data()));
     }
 
-    // send telegram to create explosion
-    {
-        descriptor::comm::effect::Explosion telegramm_descriptor(vehicle->collisionRadius(), vehicle->position());
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
-    }
+    __explosion(vehicle->collisionRadius(), vehicle->position());
 }
 
 void Processor::death(control::Bullet* bullet)
@@ -149,11 +146,7 @@ void Processor::death(control::Bullet* bullet)
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_BULLET, object.data()));
     }
 
-    // send telegram to create explosion
-    {
-        descriptor::comm::effect::Explosion telegramm_descriptor(2*bullet->collisionRadius(), bullet->position());
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
-    }
+    __explosion(2*bullet->collisionRadius(), bullet->position());
 }
 
 void Processor::death(control::Container* container)
@@ -164,11 +157,7 @@ void Processor::death(control::Container* container)
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_CONTAINER, object.data()));
     }
 
-    // send telegram to create explosion
-    {
-        descriptor::comm::effect::Explosion telegramm_descriptor(2*container->collisionRadius(), container->position());
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
-    }
+    __explosion(2*container->collisionRadius(), container->position());
 }
 
 
@@ -204,6 +193,34 @@ void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
     descriptor::comm::CreateBullet telegramm_descriptor(owner_id, item_id, target_id);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
+
+
+void Processor::__explosion(float radius, const glm::vec3& position)
+{
+    descriptor::comm::effect::Explosion telegramm_descriptor(radius, position);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+}
+
+//void Processor::hit(control::Asteroid*)
+//{
+//    assert(false);
+//}
+
+void Processor::hit(control::SpaceObject* object, int damage)
+{
+    descriptor::comm::Hit descriptor(object->id(), object->id(), damage);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
+}
+
+//void Processor::hit(control::Bullet*)
+//{
+//    assert(false);
+//}
+
+//void Processor::hit(control::Container*)
+//{
+//    assert(false);
+//}
 
 
 } // namespace manager

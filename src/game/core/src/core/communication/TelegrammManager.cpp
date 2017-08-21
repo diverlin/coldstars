@@ -196,9 +196,9 @@ void _doTakeContainer(const comm::Telegramm& telegramm) {
 /** */
 
 void hitEvent(const comm::Telegramm& telegramm) {
-    descriptor::Hit descr(telegramm.data());
-    control::SpaceObject* ob = manager::Entity::get().spaceObject(descr.target());
-    ob->hit(descr.damage());
+    descriptor::comm::Hit descriptor(telegramm.data());
+    control::SpaceObject* ob = manager::Entity::get().spaceObject(descriptor.target());
+    ob->hit(descriptor.damage());
 }
 void explosionEvent(const comm::Telegramm& telegramm) {
     descriptor::Explosion descriptor(telegramm.data());

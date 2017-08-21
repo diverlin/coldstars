@@ -3,6 +3,7 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
+namespace comm {
 
 Hit::Hit(int_t owner, int_t target, int damage)
     :
@@ -23,6 +24,7 @@ Hit::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
+} // namespace comm
 } // namespace descriptor
 
 

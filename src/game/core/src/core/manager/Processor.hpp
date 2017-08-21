@@ -28,6 +28,7 @@ class Manager;
 } // namespace descriptor
 
 namespace control {
+class SpaceObject;
 class StarSystem;
 class Vehicle;
 class Asteroid;
@@ -58,6 +59,8 @@ private:
     void death(control::Bullet*);
     void death(control::Container*);
 
+    void hit(control::SpaceObject* object, int damage);
+
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
 public:
@@ -68,6 +71,7 @@ private:
     manager::Entity& m_entitiesManager;
     descriptor::Manager& m_descriptorManager;
 
+    void __explosion(float, const glm::vec3&);
     std::vector<glm::vec3> __genImpulses(int num) const;
 };
 
