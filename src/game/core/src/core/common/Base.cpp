@@ -81,7 +81,7 @@ Base::isAlive() const
 void
 Base::die()
 {
-    model()->setAlive(false);
+    model()->setIsAlive(false);
     __putChildrenToGarbage();
 }
 

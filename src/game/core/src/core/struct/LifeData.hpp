@@ -24,23 +24,16 @@
 
 struct LifeData
 {
-    bool is_dying = false;
     int armor = 1;
     int life_time = 0;
-    int dying_time = 0;
-    bool garbage_ready = false;
 
     LifeData() = default;
     ~LifeData() = default;
-
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & is_dying;
         ar & armor;
         ar & life_time;
-        ar & dying_time;
-        ar & garbage_ready;
     }
 };

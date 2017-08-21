@@ -94,7 +94,7 @@ TEST(base, hit)
     assert(false);
     //messageHub.runLoop();
 
-    EXPECT_FALSE(ship2->model()->isDying());
+    EXPECT_FALSE(ship2->isAlive());
 }
 
 TEST(base, critical_hit)
@@ -109,7 +109,7 @@ TEST(base, critical_hit)
     assert(false);
     //messageManager.runLoop();
 
-    EXPECT_TRUE(ship2->model()->isDying());
+    EXPECT_TRUE(ship2->isAlive());
 }
 
 TEST(base, bomb)

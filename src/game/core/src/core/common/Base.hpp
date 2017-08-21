@@ -45,7 +45,7 @@ public:
 //    Base(const std::string& data);
 //    std::string data() const;
 
-    void setAlive(bool alive) { m_isAlive = alive; }
+    void setIsAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }
     void setDescriptor(int_t descriptor) { m_descriptor = descriptor; }
 
