@@ -30,6 +30,7 @@ public:
     Bullet(const std::string& data);
     std::string data() const;
 
+    void setDamage(int damage) {m_damage = damage; }
     void setOwner(int_t owner) { m_owner = owner; }
     void setTarget(int_t target) { m_target = target; }
     void setDamageRate(float damage_rate) { m_damageRate = damage_rate; }
@@ -38,10 +39,12 @@ public:
     void increaseSpeed(float d_speed) { m_speed += d_speed; }
     void decreaseLiveTime(int val) { m_liveTime -= val; }
 
+    int damage() const { return m_damage; }
     float speed() const { return m_speed; }
     int_t owner() const { return m_owner; }
 
 private:
+    int m_damage = 0;
     int m_liveTime = 0;
     float m_speed = 0.0f;
     float m_damageRate = 0.0f;
@@ -54,11 +57,12 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & m_damage;
         ar & m_liveTime;
         ar & m_speed;
         ar & m_damageRate;
-        ar & m_owner; // is it needed?
-        ar & m_target; // is it needed?
+        ar & m_owner;
+        ar & m_target;
     }
 };
 

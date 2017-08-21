@@ -112,7 +112,7 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
-    control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor);
+    control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor, rocket->damage());
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);
     vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());

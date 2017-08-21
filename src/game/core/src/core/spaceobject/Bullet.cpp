@@ -29,10 +29,10 @@ namespace control {
 Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
     :
       SpaceObject(descr, model)
-    , m_descriptor_rocket(descr)
-    , m_model_rocket(model)
+    , m_descriptor_bullet(descr)
+    , m_model_bullet(model)
 {
-    m_model_rocket->setSpeed(descr->speedMin());
+    m_model_bullet->setSpeed(descr->speedMin());
 }
 
 Bullet::~Bullet()
@@ -42,7 +42,7 @@ Bullet::~Bullet()
 void Bullet::setOwnerId(int_t id) const { model()->setOwner(id); }
 int_t Bullet::ownerId() const { return model()->owner(); }
 
-int Bullet::damage() const { return descriptor()->damage(); }
+int Bullet::damage() const { return model()->damage(); }
 
 void Bullet::update(int time)
 {

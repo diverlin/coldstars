@@ -30,26 +30,17 @@ public:
     Bullet(const std::string& data);
     std::string data() const;
 
-    int damage() const { return m_damage; }
-    int armor() const { return m_armor; }
-    int liveTime() const { return m_liveTime; }
     float speedMin() const { return m_speedMin; }
     float speedMax() const { return m_speedMax; }
     float deltaSpeed() const { return m_deltaSpeed; }
     //float m_angularSpeed = 0.0; // do we need that?
 
-    void setDamage(int damage) { m_damage = damage; }
-    void setArmor(int armor) { m_armor = armor; }
-    void setLiveTime(int liveTime) { m_liveTime = liveTime; }
     void setSpeedMin(float speedMin) { m_speedMin = speedMin; }
     void setSpeedMax(float speedMax) { m_speedMax = speedMax; }
     void setDeltaSpeed(float deltaSpeed) { m_deltaSpeed = deltaSpeed; }
 
     std::string info() const {
         std::string result = "descriptor::Bullet:\n";
-        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
-        result += std::string(" armor = ") + std::to_string(m_armor) + "\n";
-        result += std::string(" liveTime = ") + std::to_string(m_liveTime) + "\n";
         result += std::string(" speedMin = ") + std::to_string(m_speedMin) + "\n";
         result += std::string(" speedMax = ") + std::to_string(m_speedMax) + "\n";
         result += std::string(" deltaSpeed = ") + std::to_string(m_deltaSpeed) + "\n";
@@ -58,9 +49,6 @@ public:
     }
 
 private:
-    int m_damage = 1;
-    int m_armor = 1;
-    int m_liveTime = 300;
     float m_speedMin = 0.2f;
     float m_speedMax = 2.0f;
     float m_deltaSpeed = 0.01f;
@@ -70,9 +58,6 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<SpaceObject>(*this);
-        ar & m_damage;
-        ar & m_armor;
-        ar & m_liveTime;
         ar & m_speedMin;
         ar & m_speedMax;
         ar & m_deltaSpeed;

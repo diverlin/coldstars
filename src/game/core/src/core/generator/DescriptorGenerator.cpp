@@ -299,7 +299,7 @@ genContainer()
 descriptor::Bullet*
 genBullet()
 {
-    descriptor::Bullet* descr = new descriptor::Bullet;
+    descriptor::Bullet* descriptor = new descriptor::Bullet;
 
     texture::Type material_type;
     if (meti::rand::gen_bool()) {
@@ -307,15 +307,16 @@ genBullet()
     } else {
         material_type = texture::Type::TORPEDO_BULLET;
     }
-    descr->setTexture(textureDescriptorIdFromType(material_type));
-    descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+    descriptor->setTexture(textureDescriptorIdFromType(material_type));
+    descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
+    descriptor->setArmor(1);
 
-    descriptor::Manager::get().add(descr);
+    descriptor::Manager::get().add(descriptor);
 
-    assert(descr->texture() != NONE);
-    assert(descr->mesh() != NONE);
+    assert(descriptor->texture() != NONE);
+    assert(descriptor->mesh() != NONE);
 
-    return descr;
+    return descriptor;
 }
 
 descriptor::Npc*

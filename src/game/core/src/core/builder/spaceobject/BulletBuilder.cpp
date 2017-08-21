@@ -29,7 +29,7 @@
 namespace builder {
 
 control::Bullet*
-Bullet::gen()
+Bullet::gen(int damage)
 {
     descriptor::Bullet* descr = nullptr;
     if (!descriptor::Manager::get().hasType(descriptor::Type::CONTAINER)) {
@@ -38,14 +38,14 @@ Bullet::gen()
         descr = descriptor::Manager::get().randBullet();
     }
     assert(descr);
-    return gen(descr);
+    return gen(descr, damage);
 }
 
 control::Bullet*
-Bullet::gen(descriptor::Bullet* descriptor)
+Bullet::gen(descriptor::Bullet* descriptor, int damage)
 {
     control::Bullet* bullet = __genTemplate(descriptor);
-    createInternals(bullet, descriptor);
+    createInternals(bullet, descriptor, damage);
 
     return bullet;
 }
@@ -65,9 +65,10 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
 }
 
 void
-Bullet::createInternals(control::Bullet* bullet, descriptor::Bullet* descriptor)
+Bullet::createInternals(control::Bullet* bullet, descriptor::Bullet* descriptor, int damage)
 {
     bullet->model()->setArmor(descriptor->armor());
+    bullet->model()->setDamage(damage);
 }
 
 } // namespace builder
