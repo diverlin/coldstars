@@ -49,18 +49,14 @@ public:
         ADD_SHIP_TO_STARSYSTEM,
         ADD_CONTAINER_TO_STARSYSTEM,
         INSERT,
+        REMOVE_SPACEOBJECT_FROM_STARSYSTEM,
         REMOVE,
         DELETE,
         /** */
 
         HIT,
-        EXPLOSION,
 
-        // kill
-        KILL_VEHICLE,
-        KILL_ASTEROID,
-        KILL_BULLET,
-        KILL_CONTAINER
+        ADD_SPACEOBJECT_TO_GARBAGE
     };
 
 public:

@@ -70,13 +70,6 @@ Processor::__genImpulses(int num) const
 
 void Processor::death(control::Asteroid* asteroid)
 {
-
-    // send message asteroid death
-    {
-    descriptor::comm::Object object(asteroid->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_ASTEROID, object.data()));
-    }
-
     // create minerals
     int containers_num = meti::rand::gen_int(1,3);
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
@@ -100,11 +93,10 @@ void Processor::death(control::Asteroid* asteroid)
         }
     }
 
-    // send telegram to create explosion
-    {
-        descriptor::comm::effect::Explosion telegramm_descriptor(asteroid->collisionRadius(), asteroid->position());
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
-    }
+    __removeSpaceObjectFromStarSystem(asteroid);
+    __addSpaceObjectToGarbage(asteroid);
+
+    __explosionEffect(asteroid->collisionRadius(), asteroid->position());
 }
 
 void Processor::death(control::Vehicle* vehicle)
@@ -129,35 +121,26 @@ void Processor::death(control::Vehicle* vehicle)
         }
     }
 
-    // send message vehicle death
-    {
-    descriptor::comm::Object object(vehicle->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_VEHICLE, object.data()));
-    }
+    __removeSpaceObjectFromStarSystem(vehicle);
+    __addSpaceObjectToGarbage(vehicle);
 
-    __explosion(vehicle->collisionRadius(), vehicle->position());
+    __explosionEffect(vehicle->collisionRadius(), vehicle->position());
 }
 
 void Processor::death(control::Bullet* bullet)
 {
-    // send message bullet death
-    {
-    descriptor::comm::Object object(bullet->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_BULLET, object.data()));
-    }
+    __removeSpaceObjectFromStarSystem(bullet);
+    __addSpaceObjectToGarbage(bullet);
 
-    __explosion(2*bullet->collisionRadius(), bullet->position());
+    __explosionEffect(2*bullet->collisionRadius(), bullet->position());
 }
 
 void Processor::death(control::Container* container)
 {
-    // send message container death
-    {
-    descriptor::comm::Object object(container->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_CONTAINER, object.data()));
-    }
+    __removeSpaceObjectFromStarSystem(container);
+    __addSpaceObjectToGarbage(container);
 
-    __explosion(2*container->collisionRadius(), container->position());
+    __explosionEffect(2*container->collisionRadius(), container->position());
 }
 
 
@@ -194,33 +177,29 @@ void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
+void Processor::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
+{
+    descriptor::comm::StarSystemTransition descriptor(object->id(), object->starsystem()->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
+}
 
-void Processor::__explosion(float radius, const glm::vec3& position)
+void Processor::__addSpaceObjectToGarbage(control::SpaceObject* object)
+{
+    descriptor::comm::Object descriptor(object->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
+}
+
+void Processor::__explosionEffect(float radius, const glm::vec3& position)
 {
     descriptor::comm::effect::Explosion telegramm_descriptor(radius, position);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
 }
-
-//void Processor::hit(control::Asteroid*)
-//{
-//    assert(false);
-//}
 
 void Processor::hit(control::SpaceObject* object, int damage)
 {
     descriptor::comm::Hit descriptor(object->id(), object->id(), damage);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
 }
-
-//void Processor::hit(control::Bullet*)
-//{
-//    assert(false);
-//}
-
-//void Processor::hit(control::Container*)
-//{
-//    assert(false);
-//}
 
 
 } // namespace manager

@@ -71,7 +71,10 @@ private:
     manager::Entity& m_entitiesManager;
     descriptor::Manager& m_descriptorManager;
 
-    void __explosion(float, const glm::vec3&);
+    void __addSpaceObjectToGarbage(control::SpaceObject*);
+    void __removeSpaceObjectFromStarSystem(control::SpaceObject*);
+    void __explosionEffect(float, const glm::vec3&);
+
     std::vector<glm::vec3> __genImpulses(int num) const;
 };
 
