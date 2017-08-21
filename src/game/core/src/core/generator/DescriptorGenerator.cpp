@@ -368,7 +368,7 @@ genShip()
     for(int i=0; i<slot_weapon_num; ++i) {
         float length = meti::rand::gen_float(-0.8f, 0.8f);
         float angle = meti::rand::gen_angle();
-        descr->addTurrelPoint(meti::genVec3f(length, angle));
+        descr->addTurrelPoint(meti::get_vec3(length, angle));
     }
 //    for(int i=0; i<slot_drive_num; ++i) {
 //        int length = meti::getRandInt(100);
@@ -460,17 +460,17 @@ genSpaceStation()
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addTurrelPoint(meti::genVec3f(length, angle));
+        descr->addTurrelPoint(meti::get_vec3(length, angle));
     }
     for(int i=0; i<slot_drive_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addDrivePoint(meti::genVec3f(length, angle));
+        descr->addDrivePoint(meti::get_vec3(length, angle));
     }
     for(int i=0; i<slot_protector_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addProtectorPoint(meti::genVec3f(length, angle));
+        descr->addProtectorPoint(meti::get_vec3(length, angle));
     }
     descr->setSize(size_id);
 
@@ -546,17 +546,17 @@ genSatellite()
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addTurrelPoint(meti::genVec3f(length, angle));
+        descr->addTurrelPoint(meti::get_vec3(length, angle));
     }
     for(int i=0; i<slot_drive_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addDrivePoint(meti::genVec3f(length, angle));
+        descr->addDrivePoint(meti::get_vec3(length, angle));
     }
     for(int i=0; i<slot_protector_num; ++i) {
         int length = meti::rand::gen_int(100);
         float angle = meti::rand::gen_angle();
-        descr->addProtectorPoint(meti::genVec3f(length, angle));
+        descr->addProtectorPoint(meti::get_vec3(length, angle));
     }
     descr->setSize(size_id);
 

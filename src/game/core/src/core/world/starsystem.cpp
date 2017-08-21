@@ -17,60 +17,45 @@
 */
 
 
-#include <world/starsystem.hpp>
-#include <world/Sector.hpp>
-
-#include <meti/VectorUtils.hpp>
+#include <core/world/starsystem.hpp>
+#include <core/world/Sector.hpp>
 
 #include <core/builder/spaceobject/WormHoleBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>
 #include <core/builder/pilot/NpcBuilder.hpp>
 
-#include <ceti/Logger.hpp>
-#include <ceti/Collision.hpp>
-#include <math/rand.hpp>
-//#include <ceti/StringUtils.hpp>
+#include <core/math/rand.hpp>
 
-#include <common/Global.hpp>
+#include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <common/Config.hpp>
 
-//#include <jeti/Render.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/other/Bomb.hpp>
 
 #include <core/spaceobject/ALL>
 
-//#include <client/pilots/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
 #include <core/model/spaceobject/ALL>
 #include <core/model/world/starsystem.hpp>
 
-//#include <client/effect/DistantNebulaEffect.hpp>
-//#include <client/effect/DistantStarEffect.hpp>
-//#include <client/effect/lazerTrace.hpp>
-//#include <jeti/particlesystem/ExplosionEffect.hpp>
-
-//#include <client/text/VerticalFlowText.hpp>
-
-//#include <client/gui/GuiManager.hpp>
-//#include <client/gui/GuiRadar.hpp>
-
-#include <descriptor/comm/Creation.hpp>
-#include <descriptor/RaceDescriptors.hpp>
+#include <core/descriptor/comm/Creation.hpp>
+#include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 #include <core/communication/TelegrammHub.hpp>
 #include <core/communication/TelegrammManager.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
-//#include <jeti/Mesh.hpp>
+#include <ceti/Logger.hpp>
+#include <ceti/Collision.hpp>
+
+#include <meti/VectorUtils.hpp>
 #include <meti/RandUtils.hpp>
 
-//int Starsystem::m_counter = 0;
-
+#include <algorithm> // std::min
 
 namespace control {
 
@@ -396,6 +381,18 @@ StarSystem::remove(Bullet* bullet)
     m_bullets.remove(bullet);
     bullet->setPlace(place::Type::NONE);
     model()->removeContainer(bullet->id());
+}
+
+void
+StarSystem::remove(Vehicle* vehicle)
+{
+    assert(vehicle);
+    switch(vehicle->type()) {
+    case entity::Type::SHIP: remove(static_cast<Ship*>(vehicle)); break;
+    case entity::Type::SATELLITE: remove(static_cast<Satellite*>(vehicle)); break;
+    case entity::Type::SPACESTATION: remove(static_cast<SpaceStation*>(vehicle)); break;
+    default: assert(false);
+    }
 }
 
 void
@@ -786,6 +783,59 @@ void StarSystem::__bulletsManager_DEBUG(int num) const
     telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
+std::vector<glm::vec3>
+StarSystem::__genImpulses(int num) const
+{
+    std::vector<glm::vec3> result;
+    float delta_angle = float(2*M_PI/num);
+    float angle = meti::rand::gen_angle();
+    for (int i=0; i<num; ++i) {
+        float radius = meti::rand::gen_float(1.0f, 2.0f);
+        result.push_back(meti::get_vec3(radius, angle));
+        angle += delta_angle;
+    }
+    return result;
+}
+
+void StarSystem::__processVehicleDeath_s(Vehicle* vehicle) const
+{
+    core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
+    manager::Entity& entitiesManager = manager::Entity::get();
+    descriptor::Manager& descriptorManager = descriptor::Manager::get();
+
+    // create containers
+    int containers_num = meti::rand::gen_int(1,3);
+    const ceti::pack<int_t> items = vehicle->model()->items().random(containers_num);
+    containers_num = int(items.size());
+
+    std::vector<glm::vec3> impulses = __genImpulses(containers_num);
+    for (int i=0; i<containers_num; ++i) {
+        int_t container_id = entitiesManager.genId();
+        int_t descriptor_id = descriptorManager.randContainer()->id();
+        int_t item_id = items[i];
+        {
+        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
+        }
+        {
+        AddToStarsystemDescriptor telegramm_descriptor(id(), container_id, vehicle->position(), impulses[i], vehicle->direction()/* todo: add direction less way*/ );
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        }
+    }
+
+    // send message vehicle death
+    {
+    descriptor::comm::Object object(vehicle->id());
+    telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::KILL_VEHICLE, object.data()));
+    }
+
+    // send telegram to create explosion
+    {
+        descriptor::comm::effect::Explosion telegramm_descriptor(vehicle->collisionRadius(), vehicle->position());
+        telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    }
+}
+
 void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 {
     core::comm::TelegrammHub& telegrammHub = core::global::get().telegrammHub();
@@ -800,18 +850,17 @@ void StarSystem::__processAsteroidDeath_s(Asteroid* asteroid) const
 
     // create minerals
     int containers_num = meti::rand::gen_int(1,3);
+    std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
         int mass = meti::rand::gen_int(3, 100);
-        int_t object_id = entitiesManager.genId();
+        int_t container_id = entitiesManager.genId();
         int_t descriptor_id = descriptorManager.randContainer()->id();
         {
-        descriptor::comm::CreateMineral telegramm_descriptor(object_id, descriptor_id, mass);
+        descriptor::comm::CreateMineral telegramm_descriptor(container_id, descriptor_id, mass);
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_MINERAL, telegramm_descriptor.data()));
         }
-        float strength = meti::rand::gen_float(1.0f, 2.0f);
-        glm::vec3 impulse(meti::rand::gen_vec3xy(strength));
         {
-        AddToStarsystemDescriptor telegramm_descriptor(id(), object_id, asteroid->position(), impulse, asteroid->direction());
+        AddToStarsystemDescriptor telegramm_descriptor(id(), container_id, asteroid->position(), impulses[i], asteroid->direction());
         telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
         }
     }

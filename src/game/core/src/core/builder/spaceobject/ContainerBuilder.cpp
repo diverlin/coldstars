@@ -59,22 +59,34 @@ Container::gen(descriptor::Container* descr)
 }
 
 control::Container*
-Container::gen(int_t descrId, int_t obId, int mass)
+Container::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::Container* descr = descriptor::Manager::get().container(descrId);
-    control::Container* container = __genTemplate(descr, obId);
-    __createInternals(container, descr);
+    descriptor::Container* descriptor = descriptor::Manager::get().container(descriptor_id);
+    control::Container* container = __genTemplate(descriptor, object_id);
+    __createInternals(container, descriptor);
     return container;
 }
 
+control::Container*
+Container::gen(int_t descriptor_id, int_t object_id, int_t item_id)
+{
+    descriptor::Container* descriptor = descriptor::Manager::get().container(descriptor_id);
+    control::Container* container = __genTemplate(descriptor, object_id);
+    __createInternals(container, descriptor);
+
+    control::Item* item = manager::Entity::get().item(item_id);
+    container->insert(item);
+
+    return container;
+}
 
 control::Container*
-Container::__genTemplate(descriptor::Container* descr, int_t obId)
+Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
 {
-    model::Container* model = new model::Container(descr->id(), obId);
+    model::Container* model = new model::Container(descriptor->id(), object_id);
     assert(model);
 
-    control::Container* container = new control::Container(descr, model);
+    control::Container* container = new control::Container(descriptor, model);
     assert(container);
 
     manager::Entity::get().add(container);

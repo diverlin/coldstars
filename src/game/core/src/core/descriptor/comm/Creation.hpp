@@ -90,6 +90,36 @@ private:
     }
 };
 
+
+class CreateContainer : public Creation
+{
+public:
+    CreateContainer(int_t, int_t, int_t);
+    CreateContainer(const std::string& data);
+    ~CreateContainer() = default;
+    std::string data() const;
+
+    int item() const { return m_item; }
+
+    std::string info() const {
+        std::string result = Creation::info();
+        result += "descriptor::comm::Container:\n";
+        result += std::string(" item = ") + std::to_string(m_item) + "\n";
+        return result;
+    }
+
+private:
+    int m_item = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Creation>(*this);
+        ar & m_item;
+    }
+};
+
 class CreateMineral : public Creation
 {
 public:

@@ -43,7 +43,8 @@ public:
     static control::Container* gen();
 //    static model::Container* gen(const std::string& data);
     static control::Container* gen(descriptor::Container*);
-    static control::Container* gen(int_t, int_t, int);
+    static control::Container* gen(int_t, int_t);
+    static control::Container* gen(int_t, int_t, int_t);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;

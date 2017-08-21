@@ -57,6 +57,7 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     case core::comm::Telegramm::Type::EXPLOSION: { return "comm::Message::Type::EXPLOSION"; }
 
         // kill
+    case core::comm::Telegramm::Type::KILL_VEHICLE: { return "comm::Message::Type::KILL_VEHICLE"; }
     case core::comm::Telegramm::Type::KILL_ASTEROID: { return "comm::Message::Type::KILL_ASTEROID"; }
     case core::comm::Telegramm::Type::KILL_BULLET: { return "comm::Message::Type::KILL_BULLET"; }
     case core::comm::Telegramm::Type::KILL_CONTAINER: { return "comm::Message::Type::KILL_CONTAINER"; }
