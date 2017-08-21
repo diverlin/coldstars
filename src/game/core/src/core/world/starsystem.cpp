@@ -331,8 +331,28 @@ void StarSystem::add(WormHole* wormhole, const glm::vec3& center)
 }
 
 // remove
+
 void
-StarSystem::remove(Star* star)
+StarSystem::remove(SpaceObject* object)
+{
+    assert(object);
+    switch(object->type()) {
+    case entity::Type::STAR: __remove(static_cast<Star*>(object)); break;
+    case entity::Type::PLANET: __remove(static_cast<Planet*>(object)); break;
+    case entity::Type::ASTEROID: __remove(static_cast<Asteroid*>(object)); break;
+    case entity::Type::WORMHOLE: __remove(static_cast<WormHole*>(object)); break;
+    case entity::Type::CONTAINER: __remove(static_cast<Container*>(object)); break;
+    case entity::Type::BULLET: __remove(static_cast<Bullet*>(object)); break;
+    case entity::Type::SHIP: __remove(static_cast<Ship*>(object)); break;
+    case entity::Type::SATELLITE: __remove(static_cast<Satellite*>(object)); break;
+    case entity::Type::SPACESTATION: __remove(static_cast<SpaceStation*>(object)); break;
+    default: assert(false);
+    }
+}
+
+
+void
+StarSystem::__remove(Star* star)
 {
     assert(star);
     m_stars.remove(star);
@@ -341,7 +361,7 @@ StarSystem::remove(Star* star)
 }
 
 void
-StarSystem::remove(Planet* planet)
+StarSystem::__remove(Planet* planet)
 {
     assert(planet);
     m_planets.remove(planet);
@@ -350,7 +370,7 @@ StarSystem::remove(Planet* planet)
 }
 
 void
-StarSystem::remove(WormHole* wormhole)
+StarSystem::__remove(WormHole* wormhole)
 {
     assert(wormhole);
     m_wormholes.remove(wormhole);
@@ -359,7 +379,7 @@ StarSystem::remove(WormHole* wormhole)
 }
 
 void
-StarSystem::remove(Asteroid* asteroid)
+StarSystem::__remove(Asteroid* asteroid)
 {
     assert(asteroid);
     m_asteroids.remove(asteroid);
@@ -368,7 +388,7 @@ StarSystem::remove(Asteroid* asteroid)
 }
 
 void
-StarSystem::remove(Container* container)
+StarSystem::__remove(Container* container)
 {
     assert(container);
     m_containers.remove(container);
@@ -377,7 +397,7 @@ StarSystem::remove(Container* container)
 }
 
 void
-StarSystem::remove(Bullet* bullet)
+StarSystem::__remove(Bullet* bullet)
 {
     assert(bullet);
     m_bullets.remove(bullet);
@@ -386,19 +406,7 @@ StarSystem::remove(Bullet* bullet)
 }
 
 void
-StarSystem::remove(Vehicle* vehicle)
-{
-    assert(vehicle);
-    switch(vehicle->type()) {
-    case entity::Type::SHIP: remove(static_cast<Ship*>(vehicle)); break;
-    case entity::Type::SATELLITE: remove(static_cast<Satellite*>(vehicle)); break;
-    case entity::Type::SPACESTATION: remove(static_cast<SpaceStation*>(vehicle)); break;
-    default: assert(false);
-    }
-}
-
-void
-StarSystem::remove(SpaceStation* spacestation)
+StarSystem::__remove(SpaceStation* spacestation)
 {
     assert(spacestation);
     m_spacestations.remove(spacestation);
@@ -410,7 +418,7 @@ StarSystem::remove(SpaceStation* spacestation)
 }
 
 void
-StarSystem::remove(Ship* ship)
+StarSystem::__remove(Ship* ship)
 {
     assert(ship);
     m_ships.remove(ship);
@@ -422,7 +430,7 @@ StarSystem::remove(Ship* ship)
 }
 
 void
-StarSystem::remove(Satellite* satellite)
+StarSystem::__remove(Satellite* satellite)
 {
     assert(satellite);
     m_satellites.remove(satellite);
