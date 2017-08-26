@@ -109,6 +109,7 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
 
     {
         std::map<std::string, std::string> data;
+        data.insert(std::make_pair("id", "value1"));
         data.insert(std::make_pair("label1", "value1"));
         data.insert(std::make_pair("label2", "value2"));
         data.insert(std::make_pair("label3", "value3"));
@@ -127,6 +128,9 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     m_desktop.SetProperties(
         "Window {"
         "   BackgroundColor: #293546CC;"
+        "}"
+        "Label#title_main {"
+        "   Color: #ffff33FF;"
         "}"
         "Label#value {"
         "   Color: #66ff33FF;"

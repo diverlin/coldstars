@@ -3,6 +3,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <sstream>
+#include <iomanip>
       
 namespace meti {
 
@@ -138,10 +139,18 @@ std::string str(const glm::vec3& v)
     return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
 }
 
+
+namespace {
+const int FLOAT_PRECISION = 2;
+}
+
 std::string
 to_string(const vec3& v)
 {
-    return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
+    std::ostringstream out;
+    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
+    out << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return out.str();
 }
 
 } // namespace meti

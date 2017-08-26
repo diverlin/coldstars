@@ -47,6 +47,7 @@
 #include <client/effect/DistantStarsEffect.hpp>
 #include <client/effect/DistantNebulaEffect.hpp>
 #include <client/effect/Beam.hpp>
+#include <client/gui/info/GenericTable.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
@@ -180,8 +181,8 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     }
 
     {
-        const jeti::Render& render = client::global::get().render();
         // update ui
+        const jeti::Render& render = client::global::get().render();
         auto info = m_guiDemo->infoRender();
         info->setZNear(std::to_string(jeti::ZNEAR));
         info->setZFar(std::to_string(jeti::ZFAR));
@@ -193,6 +194,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
     }
 
     {
+        // update ui
         m_guiDemo->updateFps(client::global::get().render().fps());
         m_player->cursor().updateMouseInput(m_render);
 
@@ -204,6 +206,10 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
         Base* view = mouseInterraction(screen_coord);
         m_player->update(m_render, view);
+
+        if (view) {
+            m_guiDemo->genericTable()->update(view->control()->model()->info());
+        }
     }
 }
 

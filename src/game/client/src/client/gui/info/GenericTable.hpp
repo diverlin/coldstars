@@ -36,8 +36,11 @@ public:
     sfg::Table::Ptr widget() { return m_table; }
 
 private:
+    std::string m_id;
     sfg::Table::Ptr m_table;
-    std::map<std::string, std::shared_ptr<sfg::Label>> m_widgets;
+
+    void __clear();
+    void __create(const std::map<std::string, std::string>&);
 };
 
 } // naemspace info

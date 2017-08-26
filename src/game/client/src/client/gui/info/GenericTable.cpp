@@ -22,6 +22,7 @@
 
 namespace {
 const std::string title_id = "title";
+const std::string title_main_id = "title_main";
 const std::string value_id = "value";
 } // namespace
 
@@ -31,39 +32,66 @@ namespace info {
 Table::Table(const std::map<std::string, std::string>& data)
 {
     m_table = sfg::Table::Create();
-    int col = 0;
-    int row = 0;
-    for (const auto& it: data) {
-        sfg::Label::Ptr titleLabel = sfg::Label::Create(it.first);
-        sfg::Label::Ptr valueLabel = sfg::Label::Create(it.second);
-
-        titleLabel->SetId(title_id);
-        valueLabel->SetId(value_id);
-
-        m_widgets.insert(std::make_pair(it.first, valueLabel));
-        m_table->Attach( titleLabel, sf::Rect<sf::Uint32>( col,   row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-        m_table->Attach( valueLabel, sf::Rect<sf::Uint32>( col+1, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
-
-        row++;
-    }
-
+    __create(data);
     m_table->SetColumnSpacings(10);
 }
 
 Table::~Table()
 {
+    __clear(); // is it needed?
+}
 
+void Table::__clear()
+{
+    for(auto widget: m_table->GetChildren()) {
+        widget.reset();
+    }
+    m_table->RemoveAll();
+}
+
+void Table::__create(const std::map<std::string, std::string>& data)
+{
+    unsigned int col = 0;
+    unsigned int row = 0;
+    for (const auto& it: data) {
+        std::string title = it.first;
+        std::string value = it.second;
+
+        if (title == "id") {
+            m_id = title;
+        }
+        if (title.find("::") != title.npos) {
+            value = "----";
+        }
+
+        sfg::Label::Ptr titleLabel = sfg::Label::Create(title);
+        sfg::Label::Ptr valueLabel = sfg::Label::Create(value);
+
+        if (title.find("::") != title.npos) {
+            titleLabel->SetId(title_main_id);
+            valueLabel->SetId(title_main_id);
+        } else {
+            titleLabel->SetId(title_id);
+            valueLabel->SetId(value_id);
+        }
+
+        m_table->Attach( titleLabel, sf::Rect<sf::Uint32>( col,   row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+        m_table->Attach( valueLabel, sf::Rect<sf::Uint32>( col+1, row, 1, 1 ), sfg::Table::FILL, sfg::Table::FILL );
+
+        row++;
+    }
 }
 
 void Table::update(const std::map<std::string, std::string>& data)
 {
-    assert(data.size()==m_widgets.size());
-    for (const auto& it_string: data) {
-        if (const auto& it_widget = m_widgets.find(it_string.first) != m_widgets.end()) {
-            //it_widget.SetText(it_string.second);
-            m_widgets[it_string.first]->SetText(it_string.second);
-        }
+    if (data.find("id") == data.end()) {
+        assert(false);
     }
+    if (data.find("id")->second == m_id) {
+        return;
+    }
+    __clear();
+    __create(data);
 }
 
 } // naemspace info
