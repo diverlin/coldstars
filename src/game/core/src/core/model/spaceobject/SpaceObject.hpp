@@ -55,7 +55,7 @@ public:
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
-    std::map<std::string, std::string> info() const {
+    std::map<std::string, std::string> info() const override {
         std::map<std::string, std::string> result = ceti::model::Orientation::info();
         std::map<std::string, std::string> result2 = model::Base::info();
         result.insert(result2.begin(), result2.end());

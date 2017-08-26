@@ -60,13 +60,15 @@ public:
     const std::vector<Base*>& children() const { return m_children; }
     void update();
 
+    control::Base* control() const { return m_control_base; }
+
 protected:
     void _updatePoints() const;
     void _drawChildren(const jeti::Render&) const;
     void _drawShield(const jeti::Render&) const;
     void _drawPath(const jeti::Render&) const;
 
-    void _addPoint(jeti::Point* point) {m_points.push_back(point); }
+    void _addPoint(jeti::Point* point) { m_points.push_back(point); }
     void _addChild(Base*);
     effect::Shield* _createShield();
     void _createPath(jeti::control::Material*);

@@ -51,6 +51,7 @@ public:
     info::StarSystem* infoStarSystem() const { return m_infoStarSystem; }
     info::Camera* infoCamera() const { return m_infoCamera; }
     info::Renderer* infoRender() const { return m_infoRender; }
+    info::Table* genericTable() const { return m_genericTable; }
 
     void updateFps(int);
     void setMousePosScreenCoord(int, int);

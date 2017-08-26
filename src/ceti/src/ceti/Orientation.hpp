@@ -42,7 +42,7 @@ class Orientation
 {
 public:
     Orientation() = default;
-    ~Orientation() = default;
+    virtual ~Orientation() = default;
     Orientation(const std::string& data);
     std::string data() const;
 
@@ -54,7 +54,7 @@ public:
     const meti::vec3& size() const { return m_size; }
     const meti::vec3& direction() const { return m_direction; }
 
-    std::map<std::string, std::string> info() const {
+    virtual std::map<std::string, std::string> info() const {
         std::map<std::string, std::string> result;
         result.insert(std::make_pair("ceti::model::Orientation", ""));
         result.insert(std::make_pair("position", meti::to_string(m_position)));

@@ -41,7 +41,7 @@ class Base : public NonCopyable
 {
 public:
     Base() = default;
-    virtual ~Base() = default; // virtual method is needed for proper model base deletion
+    virtual ~Base() = default;
 
     void setIsAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }
@@ -53,7 +53,7 @@ public:
 
     void setWritable(bool writable) { m_writable = writable; }
 
-    std::map<std::string, std::string> info() const {
+    virtual std::map<std::string, std::string> info() const {
         std::map<std::string, std::string> result;
         result.insert(std::make_pair("model::Base", ""));
         result.insert(std::make_pair("isAlive", std::to_string(m_isAlive)));
