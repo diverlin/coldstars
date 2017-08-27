@@ -93,9 +93,4 @@ glm::vec3 getXYVec3Unit(float);
 
 glm::vec2 vec2(const glm::vec3&);
 
-std::string str(const glm::vec2&);
-std::string str(const glm::vec3&);
-
-std::string to_string(const vec3&);
-
 } // namespace meti

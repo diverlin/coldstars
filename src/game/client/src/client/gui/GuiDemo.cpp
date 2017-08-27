@@ -108,12 +108,7 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     }
 
     {
-        std::map<std::string, std::string> data;
-        data.insert(std::make_pair("id", "value1"));
-        data.insert(std::make_pair("label1", "value1"));
-        data.insert(std::make_pair("label2", "value2"));
-        data.insert(std::make_pair("label3", "value3"));
-        m_genericTable = new info::Table(data);
+        m_genericTable = new info::Table();
 
         sfg::Window::Ptr window = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
         auto box = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );

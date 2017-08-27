@@ -18,42 +18,34 @@
 
 #include "StringUtils.hpp"
 
+#include <iomanip>
 #include <sstream>
+
+namespace {
+const int FLOAT_PRECISION = 2;
+} // namespace
 
 namespace ceti {
 
-//std::string to_string(const glm::vec3& v) {
-//    std::string result;
-//    result += "(";
-//    result += to_string(v.x);
-//    result += ",";
-//    result += to_string(v.y);
-//    result += ",";
-//    result += to_string(v.z);
-//    result += ")";
-//    return result;
-//}
-
-std::string to_string(const glm::vec3& v) {
-    std::string result;
-    result += "(";
-    result += to_string(int(v.x));
-    result += ",";
-    result += to_string(int(v.y));
-    result += ",";
-    result += to_string(int(v.z));
-    result += ")";
-    return result;
-}
 
 std::string to_string(float val)
 {
-    std::ostringstream stream;
-    stream<<val;
-    return stream.str();
+    std::ostringstream out;
+    out << std::setprecision(FLOAT_PRECISION) << std::fixed << val;
+    return out.str();
 }
 
-std::string to_string(const std::string& label, const std::vector<int_t>& ids) {
+std::string
+to_string(const glm::vec3& v)
+{
+    std::ostringstream out;
+    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
+    out << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return out.str();
+}
+
+std::string to_string(const std::string& label, const std::vector<int_t>& ids)
+{
     std::string result = label;
     for (int_t id: ids) {
         result += std::to_string(id) + ",";

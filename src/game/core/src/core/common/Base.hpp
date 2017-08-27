@@ -27,7 +27,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-#include <map>
+#include <vector>
 
 namespace descriptor {
 class Base;
@@ -53,12 +53,12 @@ public:
 
     void setWritable(bool writable) { m_writable = writable; }
 
-    virtual std::map<std::string, std::string> info() const {
-        std::map<std::string, std::string> result;
-        result.insert(std::make_pair("model::Base", ""));
-        result.insert(std::make_pair("isAlive", std::to_string(m_isAlive)));
-        result.insert(std::make_pair("id", std::to_string(m_id)));
-        result.insert(std::make_pair("descriptor", std::to_string(m_descriptor)));
+    virtual std::vector<std::pair<std::string, std::string>> info() const {
+        std::vector<std::pair<std::string, std::string>> result;
+        result.push_back(std::make_pair("model::Base", ""));
+        result.push_back(std::make_pair("isAlive", std::to_string(m_isAlive)));
+        result.push_back(std::make_pair("id", std::to_string(m_id)));
+        result.push_back(std::make_pair("descriptor", std::to_string(m_descriptor)));
         return result;
     }
 

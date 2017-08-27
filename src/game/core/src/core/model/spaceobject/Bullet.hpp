@@ -20,6 +20,8 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
+#include <ceti/StringUtils.hpp>
+
 namespace model {
 
 class Bullet : public SpaceObject {
@@ -42,6 +44,18 @@ public:
     int damage() const { return m_damage; }
     float speed() const { return m_speed; }
     int_t owner() const { return m_owner; }
+
+    Info info() const override final {
+        Info result = SpaceObject::info();
+        result.push_back(std::make_pair("model::Bullet", ""));
+        result.push_back(std::make_pair("damage", std::to_string(m_damage)));
+        result.push_back(std::make_pair("liveTime", std::to_string(m_liveTime)));
+        result.push_back(std::make_pair("speed", ceti::to_string(m_speed)));
+        result.push_back(std::make_pair("damageRate", ceti::to_string(m_damageRate)));
+        result.push_back(std::make_pair("owner", std::to_string(m_owner)));
+        result.push_back(std::make_pair("target", std::to_string(m_target)));
+        return result;
+    }
 
 private:
     int m_damage = 0;

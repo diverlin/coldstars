@@ -22,6 +22,7 @@
 
 #include <ceti/descriptor/BaseView.hpp>
 #include <ceti/serialization/macro.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -35,7 +36,7 @@ public:
 
     std::string info() const {
         std::string result = "Orientation descriptor:\n";
-        result += std::string(" size = ") + meti::to_string(m_size) + "\n";
+        result += std::string(" size = ") + ceti::to_string(m_size) + "\n";
         result += Base::info();
         return result;
     }

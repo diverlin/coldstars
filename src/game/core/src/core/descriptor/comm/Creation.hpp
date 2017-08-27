@@ -21,6 +21,7 @@
 #include <core/type/TelegramType.hpp>
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -202,7 +203,7 @@ public:
     std::string info() const {
         std::string result = "descriptor::comm::effect::Explosion:\n";
         result += std::string(" size = ") + std::to_string(m_size) + "\n";
-        result += std::string(" position = ") + meti::to_string(m_position) + "\n";
+        result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }
 
