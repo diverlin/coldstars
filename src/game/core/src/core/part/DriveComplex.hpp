@@ -20,8 +20,8 @@
 
 #include <core/part/Path.hpp>
 
-//#include <jeti/PathVisual.hpp>
 #include <meti/VectorUtils.hpp>
+
 #include <vector>
 
 namespace control {
@@ -51,8 +51,6 @@ public:
     Drive(control::Vehicle* owner):m_ownerVehicle(owner) {}
     ~Drive() = default;
 
-//    void setDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
-
     const path::Path& path() const { return m_path; }
 
     void addDriveSlot(slot::Item* drive_slot) { m_driveSlots.push_back(drive_slot); }
@@ -77,9 +75,6 @@ public:
 
     void refreshPath();
     void update();
-
-//    void updatePathVisualisation();
-//    void drawPath(const jeti::Renderer&);
 
 private:
     std::vector<slot::Item*> m_driveSlots;

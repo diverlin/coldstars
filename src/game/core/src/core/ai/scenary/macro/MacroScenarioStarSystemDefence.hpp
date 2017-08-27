@@ -17,24 +17,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MACROSCENARIOSTARSYSTEMDEFENCE_H
-#define MACROSCENARIOSTARSYSTEMDEFENCE_H
+#pragma once
 
 #include "../BaseScenario.hpp"
 #include <core/pilot/Npc.hpp>
 
 class MacroScenarioStarSystemDefence : public BaseScenario
 {
-    public:
-        MacroScenarioStarSystemDefence();
-        virtual ~MacroScenarioStarSystemDefence();
-        
-        virtual void enter(Npc*) const;
-        virtual void UpdateInStaticInSpace(Npc*) const;    
-        virtual std::string GetDescription(Npc*) const;
-        virtual void exit(Npc*) const;    
+public:
+    MacroScenarioStarSystemDefence();
+    virtual ~MacroScenarioStarSystemDefence();
+
+    virtual void enter(control::Npc*) const;
+    virtual void UpdateInStaticInSpace(control::Npc*) const;
+    virtual std::string GetDescription(control::Npc*) const;
+    virtual void exit(control::Npc*) const;
 }; 
 
 
-#endif 
-     
+
+

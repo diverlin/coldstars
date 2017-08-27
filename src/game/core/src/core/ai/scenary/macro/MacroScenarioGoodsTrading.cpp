@@ -36,7 +36,7 @@ MacroScenarioGoodsTrading::MacroScenarioGoodsTrading()
 MacroScenarioGoodsTrading::~MacroScenarioGoodsTrading() 
 {}
 
-bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
+bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(control::Npc* npc) const
 {
     assert(false);
     //    if (npc->vehicle()->freeSpace() > 10)
@@ -51,14 +51,14 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 }
 
 /* virtual */
-void MacroScenarioGoodsTrading::enter(Npc* npc) const
+void MacroScenarioGoodsTrading::enter(control::Npc* npc) const
 {
     assert(false);
     //LOG( "npc_id="+std::to_string(npc->id())+" ENTER MacroScenarioGoodsTrading");
 }
 
 /* virtual */
-bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
+bool MacroScenarioGoodsTrading::Validation(control::Npc* npc) const
 {
     assert(false);
 //    if (npc->vehicle()->goodsPack() == nullptr)
@@ -74,7 +74,7 @@ bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 }
 
 /* virtual */        
-void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
+void MacroScenarioGoodsTrading::UpdateInStaticInSpace(control::Npc* npc) const
 {
     assert(false);
 //    bool see_pickable_container = npc->observation().GetVisionStatus().pickable_CONTAINER;
@@ -145,7 +145,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 }
 
 /* virtual */
-void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
+void MacroScenarioGoodsTrading::UpdateInStaticInDock(control::Npc* npc) const
 {
     assert(false);
 //    GoodsPack* goods_pack = npc->vehicle()->goodsPack();
@@ -164,14 +164,14 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 //    npc->stateMachine().setCurrentMicroTask(microtask);
 }
 
-void MacroScenarioGoodsTrading::exit(Npc* npc) const
+void MacroScenarioGoodsTrading::exit(control::Npc* npc) const
 {
     assert(false);
     //LOG( "npc_id="+std::to_string(npc->id())+" EXIT MacroScenarioGoodsTrading");
 }
 
 /* virtual */
-std::string MacroScenarioGoodsTrading::GetDescription(Npc* npc) const
+std::string MacroScenarioGoodsTrading::GetDescription(control::Npc* npc) const
 {
     return "MacroScenarioGoodsTrading";
 }

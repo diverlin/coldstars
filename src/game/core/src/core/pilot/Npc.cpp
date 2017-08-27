@@ -77,11 +77,10 @@ Npc::Npc(descriptor::Npc* descr, model::Npc* model)
 //    setSubTypeId(group);
 //    setSubSubTypeId(subgroup);
 
-//    m_observation.SetNpcOwner(this);
-//    m_stateMachine.setNpc(this);
+    m_observation.SetNpcOwner(this);
+    m_stateMachine.setNpc(this);
 }
 
-/* virtual */
 Npc::~Npc() 
 {}  
 
@@ -132,36 +131,31 @@ void Npc::updateInKosmoportInStatic()
 
 void Npc::updateInSpaceInStatic()
 {
-    //assert(false); assert(false);
-//    //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
+    m_vehicle->updateAllFunctionalItemsInStatic();
+    m_vehicle->weapons().prepare();
 
-//    m_vehicle->UpdateAllFunctionalItemsInStatic();
-//    m_vehicle->weapons().prepareWeapons();
+    if (!m_player) {
+        m_vehicle->checkNeedsInStatic();
+        if (model()->skills().availablePoints()) {
+            model()->skills().manageAccordingToStrategy();
+        }
 
-//    if (!m_player) {
-//        m_vehicle->CheckNeedsInStatic();
-//        if (m_skills.availablePoints()) {
-//            m_skills.manageAccordingToStrategy();
+        m_observation.ObserveAllInSpace();
+
+//        if (ai_model) {
+//            ai_model->UpdateInStatic(this);
 //        }
 
-//        m_observation.ObserveAllInSpace();
+        __scenarioFireVehicleAgressor();
 
-//        //        if (ai_model) {
-//        //            ai_model->UpdateInStatic(this);
-//        //        }
+        if (m_observation.visible().asteroid) {
+            __scenarioFireAsteroid();
+        }
 
-//        __scenarioFireVehicleAgressor();
+        m_stateMachine.updateInStaticInSpace();
+    }
 
-//        if (m_observation.see.ASTEROID) {
-//            __scenarioFireAsteroid();
-//        }
-
-//        m_stateMachine.updateInStaticInSpace();
-//    }
-
-//    m_vehicle->driveComplex().UpdatePath();
-
-//    //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END");
+    m_vehicle->navigator().update();
 }
 
 void Npc::addExpirience(int expirience, bool show_effect)

@@ -28,14 +28,14 @@ public:
     MicroScenarioDestroy();
     virtual ~MicroScenarioDestroy();
 
-    virtual bool Validate(Npc*) const;
+    virtual bool Validate(control::Npc*) const;
 
-    virtual void enter(Npc*) const;
-    virtual void UpdateInStaticInSpace(Npc*) const;
-    virtual void UpdateInDynamicInSpace(Npc*) const;
-    virtual void exit(Npc*) const;
+    virtual void enter(control::Npc*) const;
+    virtual void UpdateInStaticInSpace(control::Npc*) const;
+    virtual void UpdateInDynamicInSpace(control::Npc*) const;
+    virtual void exit(control::Npc*) const;
 
-    virtual std::string GetDescription(Npc*) const;
+    virtual std::string GetDescription(control::Npc*) const;
 };
 
 

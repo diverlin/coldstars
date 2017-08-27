@@ -227,9 +227,9 @@ public:
 
     virtual void _postDeathUniqueEvent(bool);
 
-    void CheckNeedsInStatic();
-    void ResolveNeedsInKosmoportInStatic();
-    void UpdateAllFunctionalItemsInStatic();
+    void checkNeedsInStatic();
+    void resolveNeedsInKosmoportInStatic();
+    void updateAllFunctionalItemsInStatic();
 
 private:
     void __increaseMass(int);

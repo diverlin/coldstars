@@ -47,28 +47,28 @@ public:
     ~Pair() {}
 };
 
-struct VisionStatus
+struct Visible
 {
-    VisionStatus()
+    Visible()
         :
-          ASTEROID(false),
-          CONTAINER(false),
-          pickable_CONTAINER(false),
-          RANGER(false),
-          WARRIOR(false),
-          TRADER(false),
-          PIRAT(false),
-          DIPLOMAT(false) {}
+          asteroid(false),
+          container(false),
+          pickable_container(false),
+          ranger(false),
+          warrior(false),
+          trader(false),
+          pirat(false),
+          diplomat(false) {}
     
-    bool ASTEROID;
-    bool CONTAINER;
-    bool pickable_CONTAINER;
+    bool asteroid;
+    bool container;
+    bool pickable_container;
 
-    bool RANGER;
-    bool WARRIOR;
-    bool TRADER;
-    bool PIRAT;
-    bool DIPLOMAT;
+    bool ranger;
+    bool warrior;
+    bool trader;
+    bool pirat;
+    bool diplomat;
 };
 
 
@@ -78,9 +78,9 @@ public:
     Observation();
     ~Observation();
 
-    const VisionStatus& GetVisionStatus() const { return see; };
+    const Visible& visible() const { return see; }
 
-    void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; };
+    void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; }
     void ObserveAllInSpace();
 
     void FindEchievableStarSystems(Galaxy*);
@@ -107,7 +107,7 @@ private:
 
     std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;
 
-    VisionStatus see;
+    Visible see;
 
     friend class Npc;
 };

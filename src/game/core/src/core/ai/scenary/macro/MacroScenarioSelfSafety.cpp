@@ -32,7 +32,7 @@ MacroScenarioSelfSafety::MacroScenarioSelfSafety()
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
 {}
 
-void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
+void MacroScenarioSelfSafety::UpdateInStaticInSpace(control::Npc* npc) const
 {
     assert(false);
 //    if (npc->starsystem()->conditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE)
@@ -57,7 +57,7 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 }
 
 
-std::string MacroScenarioSelfSafety::GetDescription(Npc* npc) const
+std::string MacroScenarioSelfSafety::GetDescription(control::Npc* npc) const
 {
     return "MacroScenarioSelfSafety";
 }
