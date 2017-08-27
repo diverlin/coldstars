@@ -45,11 +45,11 @@ public:
     int radiusA() const { return m_radiusA; }
     int radiusB() const { return m_radiusB; }
 
-    Info info() const override {
-        Info result = SpaceObject::info();
-        result.push_back(std::make_pair("model::Planetoid", ""));
-        result.push_back(std::make_pair("radiusA", std::to_string(m_radiusA)));
-        result.push_back(std::make_pair("radiusB", std::to_string(m_radiusB)));
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("model::Planetoid");
+        result.add("radiusA", m_radiusA);
+        result.add("radiusB", m_radiusB);
         return result;
     }
 

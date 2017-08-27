@@ -42,11 +42,11 @@ public:
     int_t population() const { return m_population; }
     int_t land() const { return m_land; }
 
-    Info info() const override final {
-        Info result = Planetoid::info();
-        result.push_back(std::make_pair("model::Planet", ""));
-        result.push_back(std::make_pair("land", std::to_string(m_land)));
-        result.push_back(std::make_pair("population", std::to_string(m_population)));
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Planetoid::info();
+        result.add("model::Planet");
+        result.add("land", m_land);
+        result.add("population", m_population);
         return result;
     }
 

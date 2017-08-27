@@ -23,6 +23,7 @@
 
 #include <ceti/NonCopyable.hpp>
 #include <ceti/Base.hpp>
+#include <ceti/InfoTable.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -53,12 +54,12 @@ public:
 
     void setWritable(bool writable) { m_writable = writable; }
 
-    virtual std::vector<std::pair<std::string, std::string>> info() const {
-        std::vector<std::pair<std::string, std::string>> result;
-        result.push_back(std::make_pair("model::Base", ""));
-        result.push_back(std::make_pair("isAlive", std::to_string(m_isAlive)));
-        result.push_back(std::make_pair("id", std::to_string(m_id)));
-        result.push_back(std::make_pair("descriptor", std::to_string(m_descriptor)));
+    virtual ceti::InfoTable info() const {
+        ceti::InfoTable result;
+        result.add("model::Base");
+        result.add("isAlive", m_isAlive);
+        result.add("id", m_id);
+        result.add("descriptor", m_descriptor);
         return result;
     }
 

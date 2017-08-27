@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include <ceti/InfoTable.hpp>
 #include <ceti/StringUtils.hpp>
 
 #include <meti/VectorUtils.hpp>
@@ -47,16 +48,13 @@ public:
     const meti::vec3& size() const { return m_size; }
     const meti::vec3& direction() const { return m_direction; }
 
-protected:
-    using Info = std::vector<std::pair<std::string, std::string>>;
-
 public:
-    virtual Info info() const {
-        Info result;
-        result.push_back(std::make_pair("ceti::model::Orientation", ""));
-        result.push_back(std::make_pair("position", ceti::to_string(m_position)));
-        result.push_back(std::make_pair("size", ceti::to_string(m_size)));
-        result.push_back(std::make_pair("direction", ceti::to_string(m_direction)));
+    virtual ceti::InfoTable info() const {
+        ceti::InfoTable result;
+        result.add("ceti::model::Orientation");
+        result.add("position", m_position);
+        result.add("size", m_size);
+        result.add("direction", m_direction);
         return result;
     }
 
