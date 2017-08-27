@@ -22,24 +22,18 @@
 #include <core/Base.hpp>
 #include <core/model/Base.hpp>
 
-#include <core/descriptor/world/StarSystemDescriptor.hpp>
 #include <core/descriptor/world/SectorDescriptor.hpp>
 
 #include "../common/constants.hpp"
 
-#include <boost/serialization/vector.hpp>
-
-class Galaxy;
-
 namespace control {
+class Galaxy;
 class StarSystem;
 } // namespace control
 
 namespace model {
 class Sector;
-} // naemspace model
-
-class StarSystemsConditionData;
+} // namespace model
 
 
 namespace control {
