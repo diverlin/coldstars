@@ -21,8 +21,9 @@
 #include <builder/world/SectorBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
+#include <core/world/galaxy.hpp>
+#include <core/model/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/DescriptorManager.hpp>

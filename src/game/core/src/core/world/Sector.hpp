@@ -35,49 +35,12 @@ namespace control {
 class StarSystem;
 } // namespace control
 
+namespace model {
+class Sector;
+} // naemspace model
+
 class StarSystemsConditionData;
 
-
-namespace model {
-
-class Sector : public Base
-{
-public:
-    Sector(int_t);
-    ~Sector() = default;
-    Sector(const std::string& data);
-    std::string data() const;
-
-    bool operator==(const Sector& rhs) const;
-    bool operator!=(const Sector& rhs) const;
-
-    void setGalaxy(int_t galaxy)  { m_galaxy = galaxy; }
-    void setPosition(const meti::vec3& center) { m_position = center; }
-
-    int_t galaxy() const  { return m_galaxy; }
-    const meti::vec3& position() const  { return m_position; }
-
-    void add(int_t starsystem) { m_starsystems.push_back(starsystem); }
-
-private:
-    int_t m_galaxy = NONE;
-    meti::vec3 m_position; // do we need this?
-
-    std::vector<int_t> m_starsystems;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_galaxy;
-        ar & m_position;
-        ar & m_starsystems;
-    }
-};
-
-
-} // namespace model
 
 namespace control {
 
@@ -99,12 +62,6 @@ public:
     const std::vector<StarSystem*>& starSystems() const { return m_starsystems; }
 
     void update(int);
-
-    //void FillStarSystemsCondition(StarSystemsConditionData&) const;
-
-//    void Save(boost::property_tree::ptree&) const;
-//    void Load(const boost::property_tree::ptree&);
-//    void Resolve();
 
     descriptor::Sector* descriptor() const { return m_descriptor_sector; }
     model::Sector* model() const { return m_model_sector; }
