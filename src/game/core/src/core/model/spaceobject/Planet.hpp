@@ -42,6 +42,14 @@ public:
     int_t population() const { return m_population; }
     int_t land() const { return m_land; }
 
+    Info info() const override final {
+        Info result = Planetoid::info();
+        result.push_back(std::make_pair("model::Planet", ""));
+        result.push_back(std::make_pair("land", std::to_string(m_land)));
+        result.push_back(std::make_pair("population", std::to_string(m_population)));
+        return result;
+    }
+
 private:
     int_t m_land = NONE;
     int_t m_population = NONE;

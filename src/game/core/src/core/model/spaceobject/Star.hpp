@@ -38,6 +38,14 @@ public:
     int turnSinceLastSparkCounter() const { return m_turnSinceLastSparkCounter; }
     int turnSparkThreshold() const { return m_turnSparkThreshold; }
 
+    Info info() const override final {
+        Info result = Planetoid::info();
+        result.push_back(std::make_pair("model::Star", ""));
+        result.push_back(std::make_pair("turnSinceLastSparkCounter", std::to_string(m_turnSinceLastSparkCounter)));
+        result.push_back(std::make_pair("turnSparkThreshold", std::to_string(m_turnSparkThreshold)));
+        return result;
+    }
+
 private:
     int m_turnSinceLastSparkCounter = 0;
     int m_turnSparkThreshold = 0;

@@ -44,6 +44,15 @@ to_string(const glm::vec3& v)
     return out.str();
 }
 
+std::string to_string(const std::vector<int_t>& ids)
+{
+    std::string result;
+    for (int_t id: ids) {
+        result += std::to_string(id) + ",";
+    }
+    return result;
+}
+
 std::string to_string(const std::string& label, const std::vector<int_t>& ids)
 {
     std::string result = label;

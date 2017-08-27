@@ -36,6 +36,12 @@ public:
     Satellite(const std::string& data);
     std::string data() const;
 
+    Info info() const override final {
+        Info result = Satellite::info();
+        result.push_back(std::make_pair("model::Satellite", ""));
+        return result;
+    }
+
 private:
     // ..
 
