@@ -62,10 +62,11 @@ public:
     const std::vector<int_t>& stars() const { return m_stars; }
     const std::vector<int_t>& planets() const { return m_planets; }
 
-    std::string info() const {
-        std::string result = "descriptor::StarSystem: " + Base::info();
-        result += ceti::to_string(" stars: ", m_stars);
-        result += ceti::to_string(" planets: ", m_planets);
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Base::info();
+        result.add("descriptor::StarSystem");
+        result.add("stars", m_stars);
+        result.add("planets", m_planets);
         return result;
     }
 

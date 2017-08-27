@@ -33,10 +33,10 @@ public:
     int modules() const { return m_modules; }
 
 protected:
-    std::string info() const {
-        std::string result = "descriptor::Equipment:\n";
-        result += std::string(" modules = ") + std::to_string(m_modules) + "\n";
-        result += Item::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = Item::info();
+        result.add("descriptor::Equipment");
+        result.add("modules", m_modules);
         return result;
     }
 

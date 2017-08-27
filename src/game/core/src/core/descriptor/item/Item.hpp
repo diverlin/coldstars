@@ -58,17 +58,16 @@ private:
     int m_price = 0;
 
 protected:
-    std::string info() const {
-        std::string result = "descriptor::Item:\n";
-        result += std::string(" race = ") + to_string(m_race) + "\n";
-        result += std::string(" tech = ") + to_string(m_tech) + "\n";
-        result += std::string(" slotType = ") + to_string(m_slotType) + "\n";
-        result += std::string(" condition = ") + std::to_string(m_condition) + "\n";
-        result += std::string(" deterioration = ") + std::to_string(m_deterioration) + "\n";
-        result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
-        result += std::string(" price = ") + std::to_string(m_price) + "\n";
-//        result += ceti::descriptor::BaseView::info();
-        result += ::descriptor::Base::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = ::descriptor::Base::info();
+        result.add("descriptor::Item");
+        result.add("race", race::to_string(m_race));
+        result.add("tech", tech::to_string(m_tech));
+        result.add("slotType", entity::to_string(m_slotType));
+        result.add("condition", m_condition);
+        result.add("deterioration", m_deterioration);
+        result.add("mass", m_mass);
+        result.add("price", m_price);
         return result;
     }
 
@@ -77,7 +76,6 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<::descriptor::Base>(*this);
-//        ar & boost::serialization::base_object<ceti::descriptor::BaseView>(*this);
         ar & m_race;
         ar & m_tech;
         ar & m_slotType;

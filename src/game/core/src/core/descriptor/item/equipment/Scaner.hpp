@@ -54,10 +54,10 @@ public:
 
     int scan() const { return m_scan; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Scaner:\n";
-        result += std::string(" scan = ") + std::to_string(m_scan) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Scaner");
+        result.add("scan", m_scan);
         return result;
     }
 

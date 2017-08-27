@@ -103,7 +103,8 @@ enum class Type {
     ANY
 };
 
+std::string to_string(Type);
+
 } // namespace descriptor
 
-std::string to_string(descriptor::Type);
 

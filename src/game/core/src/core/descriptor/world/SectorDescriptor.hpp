@@ -35,8 +35,10 @@ public:
     Sector();
     ~Sector() = default;
 
-    std::string info() const {
-        std::string result = "Sector descriptor: " + Base::info() + ceti::to_string(" starsystems:", starsystems);
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Base::info();
+        result.add("descriptor::Sector");
+        result.add("starsystems", ceti::to_string(starsystems));
         return result;
     }
 }; 

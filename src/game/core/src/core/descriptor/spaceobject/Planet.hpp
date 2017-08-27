@@ -41,8 +41,9 @@ public:
     }
     ~Planet() = default;
 
-    std::string info() const {
-        std::string result = "Planet descriptor: " + Planetoid::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Planetoid::info();
+        result.add("descriptor::Planet");
         return result;
     }
 

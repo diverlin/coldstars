@@ -33,9 +33,9 @@ public:
     ~Ship() = default;
     std::string data() const;
 
-    std::string info() const {
-        std::string result = "Ship descriptor:\n";
-        result += Vehicle::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Vehicle::info();
+        result.add("Ship descriptor");
         return result;
     }
 

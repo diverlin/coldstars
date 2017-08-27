@@ -64,11 +64,11 @@ public:
     int_t bulletDescriptor() const { return m_bulletDescriptor; }
     int ammo() const { return m_ammo; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Rocket:\n";
-        result += std::string(" ammo = ") + std::to_string(m_ammo) + "\n";
-        result += std::string(" bulletDescriptor = ") + std::to_string(m_bulletDescriptor) + "\n";
-        result += Weapon::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Weapon::info();
+        result.add("descriptor::item::Rocket");
+        result.add("ammo", m_ammo);
+        result.add("bulletDescriptor", m_bulletDescriptor);
         return result;
     }
 

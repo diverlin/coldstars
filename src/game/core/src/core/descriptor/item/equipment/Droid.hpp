@@ -53,10 +53,10 @@ public:
 
     int repair() const { return m_repair; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Droid:\n";
-        result += std::string(" repair = ") + std::to_string(m_repair) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Droid");
+        result.add("repair", m_repair);
         return result;
     }
 

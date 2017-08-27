@@ -28,10 +28,10 @@ public:
     SpaceObject() = default;
     ~SpaceObject() = default;
 
-    std::string info() const {
-        std::string result = "SpaceObject descriptor:\n";
-        result += std::string(" armor=") + std::to_string(m_armor) + "\n";
-        result += Orientation::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = Orientation::info();
+        result.add("descriptor::SpaceObject");
+        result.add("armor", m_armor);
         return result;
     }
 

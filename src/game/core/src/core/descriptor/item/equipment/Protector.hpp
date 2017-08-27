@@ -52,10 +52,10 @@ public:
 
     int protection() const { return m_protection; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Protector:\n";
-        result += std::string(" protection = ") + std::to_string(m_protection) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Protector");
+        result.add("protection", m_protection);
         return result;
     }
 

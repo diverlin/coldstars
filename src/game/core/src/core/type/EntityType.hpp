@@ -93,7 +93,9 @@ namespace entity
         /** */
         ANY
     };
-}
+
+    std::string to_string(entity::Type);
+} // namespace entity
  
 const std::vector<entity::Type> SLOT_WEAPON_TYPES =
 { 
@@ -167,6 +169,4 @@ entity::Type::FREEZER_MODULE,
 entity::Type::GRAPPLE_MODULE,
 entity::Type::SCANER_MODULE
 };    
-
-std::string to_string(entity::Type);
 

@@ -38,15 +38,17 @@ namespace race
         LAST
     };
 
+    std::string to_string(Type);
+
     enum class KIND : int
     {
         EVIL,
         GOOD,
         ALL
     };
-}
+} // namespace race
 
-std::string to_string(race::Type);
+
 
 
 

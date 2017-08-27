@@ -18,63 +18,71 @@
 
 #include "DescriptorType.hpp"
 
-std::string to_string(descriptor::Type type)
+#include <cassert>
+
+namespace descriptor {
+
+std::string to_string(Type type)
 {
     switch(type)
     {
-        case descriptor::Type::NONE: { return "descriptor::Type::NONE"; break; }
+        case Type::NONE: { return "descriptor::Type::NONE"; }
 
         // world
-        case descriptor::Type::GALAXY:         { return "descriptor::Type::GALAXY"; break; }
-        case descriptor::Type::STARSYSTEM:     { return "descriptor::Type::STARSYSTEM"; break; }
-        case descriptor::Type::SECTOR:     { return "descriptor::Type::SECTOR"; break; }
+        case Type::GALAXY:         { return "descriptor::Type::GALAXY";  }
+        case Type::STARSYSTEM:     { return "descriptor::Type::STARSYSTEM"; }
+        case Type::SECTOR:     { return "descriptor::Type::SECTOR"; }
 
         // pilots
-        case descriptor::Type::NPC:             { return "descriptor::Type::NPC"; break; }
+        case Type::NPC:             { return "descriptor::Type::NPC"; }
 
         // space object
-        case descriptor::Type::STAR:         { return "descriptor::Type::STAR"; break; }
-        case descriptor::Type::ASTEROID:     { return "descriptor::Type::ASTEROID"; break; }
-        case descriptor::Type::PLANET:         { return "descriptor::Type::PLANET"; break; }
-        case descriptor::Type::WORMHOLE:     { return "descriptor::Type::BLACKHOLE"; break; }
-        case descriptor::Type::SHIP:         { return "descriptor::Type::SHIP"; break; }
-        case descriptor::Type::SPACESTATION: { return "descriptor::Type::SPACESTATION"; break; }
-        case descriptor::Type::SATELLITE:     { return "descriptor::Type::SATELLITE"; break; }
-        case descriptor::Type::CONTAINER:     { return "descriptor::Type::CONTAINER"; break; }
+        case Type::STAR:         { return "descriptor::Type::STAR"; }
+        case Type::ASTEROID:     { return "descriptor::Type::ASTEROID"; }
+        case Type::PLANET:         { return "descriptor::Type::PLANET"; }
+        case Type::WORMHOLE:     { return "descriptor::Type::BLACKHOLE"; }
+        case Type::SHIP:         { return "descriptor::Type::SHIP"; }
+        case Type::SPACESTATION: { return "descriptor::Type::SPACESTATION"; }
+        case Type::SATELLITE:     { return "descriptor::Type::SATELLITE"; }
+        case Type::CONTAINER:     { return "descriptor::Type::CONTAINER"; }
 
         // equipment
-        case descriptor::Type::LAZER_EQUIPMENT:     { return "descriptor::Type::LAZER_EQUIPMENT"; break; }
-        case descriptor::Type::ROCKET_EQUIPMENT: { return "descriptor::Type::ROCKET_EQUIPMENT"; break; }
-        case descriptor::Type::DRIVE_EQUIPMENT:     { return "descriptor::Type::DRIVE_EQUIPMENT"; break; }
-        case descriptor::Type::RADAR_EQUIPMENT:     { return "descriptor::Type::RADAR_EQUIPMENT"; break; }
-        case descriptor::Type::BAK_EQUIPMENT:     { return "descriptor::Type::BAK_EQUIPMENT"; break; }
-        case descriptor::Type::ENERGIZER_EQUIPMENT:     { return "descriptor::Type::ENERGIZER_EQUIPMENT"; break; }
-        case descriptor::Type::PROTECTOR_EQUIPMENT:     { return "descriptor::Type::PROTECTOR_EQUIPMENT"; break; }
-        case descriptor::Type::DROID_EQUIPMENT:         { return "descriptor::Type::DROID_EQUIPMENT"; break; }
-        case descriptor::Type::FREEZER_EQUIPMENT:     { return "descriptor::Type::FREEZER_EQUIPMENT"; break; }
-        case descriptor::Type::GRAPPLE_EQUIPMENT:     { return "descriptor::Type::GRAPPLE_EQUIPMENT"; break; }
-        case descriptor::Type::SCANER_EQUIPMENT:     { return "descriptor::Type::SCANER_EQUIPMENT"; break; }
+        case Type::LAZER_EQUIPMENT:     { return "descriptor::Type::LAZER_EQUIPMENT"; }
+        case Type::ROCKET_EQUIPMENT: { return "descriptor::Type::ROCKET_EQUIPMENT"; }
+        case Type::DRIVE_EQUIPMENT:     { return "descriptor::Type::DRIVE_EQUIPMENT"; }
+        case Type::RADAR_EQUIPMENT:     { return "descriptor::Type::RADAR_EQUIPMENT"; }
+        case Type::BAK_EQUIPMENT:     { return "descriptor::Type::BAK_EQUIPMENT"; }
+        case Type::ENERGIZER_EQUIPMENT:     { return "descriptor::Type::ENERGIZER_EQUIPMENT"; }
+        case Type::PROTECTOR_EQUIPMENT:     { return "descriptor::Type::PROTECTOR_EQUIPMENT"; }
+        case Type::DROID_EQUIPMENT:         { return "descriptor::Type::DROID_EQUIPMENT"; }
+        case Type::FREEZER_EQUIPMENT:     { return "descriptor::Type::FREEZER_EQUIPMENT"; }
+        case Type::GRAPPLE_EQUIPMENT:     { return "descriptor::Type::GRAPPLE_EQUIPMENT"; }
+        case Type::SCANER_EQUIPMENT:     { return "descriptor::Type::SCANER_EQUIPMENT"; }
 
         // module
-        case descriptor::Type::LAZER_MODULE:     { return "descriptor::Type::LAZER_MODULE"; break; }
-        case descriptor::Type::ROCKET_MODULE:     { return "descriptor::Type::ROCKET_MODULE"; break; }
-        case descriptor::Type::DRIVE_MODULE:     { return "descriptor::Type::DRIVE_MODULE"; break; }
-        case descriptor::Type::RADAR_MODULE:     { return "descriptor::Type::RADAR_MODULE"; break; }
-        case descriptor::Type::BAK_MODULE:         { return "descriptor::Type::BAK_MODULE"; break; }
-        case descriptor::Type::ENERGIZER_MODULE: { return "descriptor::Type::ENERGIZER_MODULE"; break; }
-        case descriptor::Type::PROTECTOR_MODULE: { return "descriptor::Type::PROTECTOR_MODULE"; break; }
-        case descriptor::Type::DROID_MODULE:     { return "descriptor::Type::DROID_MODULE"; break; }
-        case descriptor::Type::FREEZER_MODULE:     { return "descriptor::Type::FREEZER_MODULE"; break; }
-        case descriptor::Type::GRAPPLE_MODULE:     { return "descriptor::Type::GRAPPLE_MODULE"; break; }
-        case descriptor::Type::SCANER_MODULE:     { return "descriptor::Type::SCANER_MODULE"; break; }
+        case Type::LAZER_MODULE:     { return "descriptor::Type::LAZER_MODULE"; }
+        case Type::ROCKET_MODULE:     { return "descriptor::Type::ROCKET_MODULE"; }
+        case Type::DRIVE_MODULE:     { return "descriptor::Type::DRIVE_MODULE"; }
+        case Type::RADAR_MODULE:     { return "descriptor::Type::RADAR_MODULE"; }
+        case Type::BAK_MODULE:         { return "descriptor::Type::BAK_MODULE"; }
+        case Type::ENERGIZER_MODULE: { return "descriptor::Type::ENERGIZER_MODULE"; }
+        case Type::PROTECTOR_MODULE: { return "descriptor::Type::PROTECTOR_MODULE"; }
+        case Type::DROID_MODULE:     { return "descriptor::Type::DROID_MODULE"; }
+        case Type::FREEZER_MODULE:     { return "descriptor::Type::FREEZER_MODULE"; }
+        case Type::GRAPPLE_MODULE:     { return "descriptor::Type::GRAPPLE_MODULE"; }
+        case Type::SCANER_MODULE:     { return "descriptor::Type::SCANER_MODULE"; }
         
         // artefact
-        case descriptor::Type::GRAVITY_ARTEFACT:     { return "descriptor::Type::GRAVITY_ARTEFACT"; break; }
-        case descriptor::Type::PROTECTOR_ARTEFACT:     { return "descriptor::Type::PROTECTOR_ARTEFACT"; break; }
+        case Type::GRAVITY_ARTEFACT:     { return "descriptor::Type::GRAVITY_ARTEFACT"; }
+        case Type::PROTECTOR_ARTEFACT:     { return "descriptor::Type::PROTECTOR_ARTEFACT"; }
 
         // other
-        case descriptor::Type::HIT:     { return "descriptor::Type::HIT"; break; }
+        case Type::HIT:     { return "descriptor::Type::HIT"; }
 
-        default: { return "descriptor::type is unknown, fixme"; break; }
+        default: {
+        assert(false);
+        return "descriptor::Type is unknown, fixme"; }
     }
 }
+
+} // namespace descriptor

@@ -38,8 +38,9 @@ public:
     Star(const std::string&);
     ~Star() = default;
 
-    std::string info() const {
-        std::string result = "Star descriptor: " + Planetoid::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Planetoid::info();
+        result.add("descriptor::Star");
         return result;
     }
 

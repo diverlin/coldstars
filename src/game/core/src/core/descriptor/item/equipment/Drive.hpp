@@ -63,11 +63,11 @@ public:
     int speed() const { return m_speed; }
     int hyper() const { return m_hyper; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Drive:\n";
-        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
-        result += std::string(" hyper = ") + std::to_string(m_hyper) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Drive");
+        result.add("speed", m_speed);
+        result.add("hyper", m_hyper);
         return result;
     }
 

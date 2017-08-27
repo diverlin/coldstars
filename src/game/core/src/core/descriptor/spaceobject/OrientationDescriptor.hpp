@@ -34,10 +34,11 @@ public:
     Orientation() = default;
     ~Orientation() = default;
 
-    std::string info() const {
-        std::string result = "Orientation descriptor:\n";
-        result += std::string(" size = ") + ceti::to_string(m_size) + "\n";
-        result += Base::info();
+    ceti::InfoTable info() const {
+        ceti::InfoTable result = Base::info();
+        result.add("descriptor::Orientation");
+        result.add("size", m_size);
+        result.add("direction", m_direction);
         return result;
     }
 
