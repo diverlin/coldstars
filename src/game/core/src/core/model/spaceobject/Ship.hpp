@@ -35,11 +35,11 @@ public:
     Ship(const std::string& data);
     std::string data() const;
 
-//    std::string info() const {
-//        std::string result = "Ship descriptor:\n";
-//        result += Vehicle::info();
-//        return result;
-//    }
+    Info info() const override final {
+        Info result = Vehicle::info();
+        result.push_back(std::make_pair("model::Ship", ""));
+        return result;
+    }
 
 private:
     // ...

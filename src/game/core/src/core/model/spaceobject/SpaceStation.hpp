@@ -39,6 +39,13 @@ public:
     int_t innerLand() const { return m_innerLand; }
     void setInnerLand(int_t inner_land) { m_innerLand = inner_land; }
 
+    Info info() const override final {
+        Info result = SpaceStation::info();
+        result.push_back(std::make_pair("model::SpaceStation", ""));
+        result.push_back(std::make_pair("innerLand", std::to_string(m_innerLand)));
+        return result;
+    }
+
 private:
     int_t m_innerLand = NONE;
 

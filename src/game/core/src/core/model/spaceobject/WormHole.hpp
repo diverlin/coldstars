@@ -30,6 +30,11 @@ public:
     WormHole(const std::string& data);
     std::string data() const;
 
+    Info info() const override final {
+        Info result = Planetoid::info();
+        return result;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

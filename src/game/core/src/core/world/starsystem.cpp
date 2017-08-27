@@ -1068,7 +1068,7 @@ void StarSystem::__damageEventInsideCircle(const glm::vec3& position, float radi
             glm::vec3 force_dir(m_containers[i]->position() - position);
             force_dir = glm::normalize(force_dir);
             float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist);
-            std::cout<<dist<<" "<<force_power<<" "<<ceti::to_string(force_dir)<<std::endl;
+            //std::cout<<dist<<" "<<force_power<<" "<<ceti::to_string(force_dir)<<std::endl;
 
             m_containers[i]->addImpulse(force_dir, force_power);
         }
