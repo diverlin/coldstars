@@ -35,6 +35,13 @@ public:
 
     int fuel() const { return m_fuel; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Bak");
+        result.add("fuel", m_fuel);
+        return result;
+    }
+
 private:
     int m_fuel = 0;
 

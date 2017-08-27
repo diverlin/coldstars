@@ -36,6 +36,13 @@ public:
 
     int ammo() const { return m_ammo; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Weapon::info();
+        result.add("model::Rocket");
+        result.add("ammo", m_ammo);
+        return result;
+    }
+
 private:
     int m_ammo = 0;
 

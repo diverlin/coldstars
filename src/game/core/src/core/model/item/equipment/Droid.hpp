@@ -36,6 +36,13 @@ public:
 
     int repair() const { return m_repair; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Droid");
+        result.add("repair", m_repair);
+        return result;
+    }
+
 private:
     int m_repair = 0;
 

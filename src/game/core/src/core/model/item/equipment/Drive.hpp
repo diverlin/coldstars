@@ -38,6 +38,14 @@ public:
     int speed() const { return m_speed; }
     int hyper() const { return m_hyper; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Drive");
+        result.add("speed", m_speed);
+        result.add("hyper", m_hyper);
+        return result;
+    }
+
 private:
     int m_speed = 0;
     int m_hyper = 0;

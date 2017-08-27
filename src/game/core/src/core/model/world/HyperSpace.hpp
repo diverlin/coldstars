@@ -36,7 +36,14 @@ public:
 
     void removeVehicle(int_t id) { m_vehicles.remove(id); }
 
-    ceti::pack<int_t> ships() const { return m_vehicles; }
+    ceti::pack<int_t> vehicles() const { return m_vehicles; }
+
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result;
+        result.add("model::HyperSpace");
+        result.add("vehicles", m_vehicles);
+        return result;
+    }
 
 private:
     ceti::pack<int_t> m_vehicles;

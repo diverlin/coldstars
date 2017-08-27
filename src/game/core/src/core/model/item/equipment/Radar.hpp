@@ -36,6 +36,13 @@ public:
 
     int radius() const { return m_radius; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Radar");
+        result.add("radius", m_radius);
+        return result;
+    }
+
 private:
     int m_radius = 0;
 

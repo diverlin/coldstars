@@ -38,6 +38,15 @@ public:
     int lockedTurns() const { return m_lockedTurns; }
     int condition() const { return m_condition; }
 
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = Base::info();
+        result.add("model::Item");
+        result.add("slot", m_slot);
+        result.add("lockedTurns", m_lockedTurns);
+        result.add("condition", m_condition);
+        return result;
+    }
+
 private:
     int m_slot = NONE;
     int m_lockedTurns = 0;
