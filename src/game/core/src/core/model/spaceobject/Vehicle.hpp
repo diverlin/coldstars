@@ -40,13 +40,13 @@ public:
 
     ceti::pack<int_t> items() const { return m_items; }
 
-    Info info() const override {
-        Info result = SpaceObject::info();
-        result.push_back(std::make_pair("model::Vehicle", ""));
-        result.push_back(std::make_pair("npc", std::to_string(m_npc)));
-        result.push_back(std::make_pair("dock", std::to_string(m_dock)));
-        result.push_back(std::make_pair("land", std::to_string(m_land)));
-        result.push_back(std::make_pair("items", ceti::to_string(m_items)));
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("model::Vehicle");
+        result.add("npc", m_npc);
+        result.add("dock", m_dock);
+        result.add("land", m_land);
+        result.add("items", m_items);
         return result;
     }
 

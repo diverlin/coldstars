@@ -35,9 +35,9 @@ public:
     Ship(const std::string& data);
     std::string data() const;
 
-    Info info() const override final {
-        Info result = Vehicle::info();
-        result.push_back(std::make_pair("model::Ship", ""));
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Vehicle::info();
+        result.add("model::Ship");
         return result;
     }
 

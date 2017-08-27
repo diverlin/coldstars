@@ -45,15 +45,15 @@ public:
     float speed() const { return m_speed; }
     int_t owner() const { return m_owner; }
 
-    Info info() const override final {
-        Info result = SpaceObject::info();
-        result.push_back(std::make_pair("model::Bullet", ""));
-        result.push_back(std::make_pair("damage", std::to_string(m_damage)));
-        result.push_back(std::make_pair("liveTime", std::to_string(m_liveTime)));
-        result.push_back(std::make_pair("speed", ceti::to_string(m_speed)));
-        result.push_back(std::make_pair("damageRate", ceti::to_string(m_damageRate)));
-        result.push_back(std::make_pair("owner", std::to_string(m_owner)));
-        result.push_back(std::make_pair("target", std::to_string(m_target)));
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("model::Bullet");
+        result.add("damage", m_damage);
+        result.add("liveTime", m_liveTime);
+        result.add("speed", m_speed);
+        result.add("damageRate", m_damageRate);
+        result.add("owner", m_owner);
+        result.add("target", m_target);
         return result;
     }
 

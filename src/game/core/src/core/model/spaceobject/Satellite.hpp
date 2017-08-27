@@ -36,9 +36,9 @@ public:
     Satellite(const std::string& data);
     std::string data() const;
 
-    Info info() const override final {
-        Info result = Satellite::info();
-        result.push_back(std::make_pair("model::Satellite", ""));
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Satellite::info();
+        result.add("model::Satellite");
         return result;
     }
 

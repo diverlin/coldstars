@@ -29,7 +29,7 @@ const std::string value_id = "value";
 namespace gui {
 namespace info {
 
-Table::Table(const Info& data)
+Table::Table(const ceti::InfoTable& data)
 {
     m_table = sfg::Table::Create();
     __create(data);
@@ -49,7 +49,7 @@ void Table::__clear()
     m_table->RemoveAll();
 }
 
-void Table::__create(const Info& data)
+void Table::__create(const ceti::InfoTable& data)
 {
     unsigned int col = 0;
     unsigned int row = 0;
@@ -82,10 +82,10 @@ void Table::__create(const Info& data)
     }
 }
 
-void Table::update(const Info& data)
+void Table::update(const ceti::InfoTable& data)
 {
     std::string id;
-    for (Info::const_iterator it = data.begin(); it != data.end(); ++it) {
+    for (ceti::InfoTable::const_iterator it = data.begin(); it != data.end(); ++it) {
         std::string title = it->first;
         if (title == "id") {
             id = it->second;

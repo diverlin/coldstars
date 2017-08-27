@@ -38,12 +38,12 @@ public:
     void setTargetPos(const glm::vec3& target_pos, float velocity)
     { m_targetPos = target_pos; m_velocity = velocity; }
 
-    Info info() const override final {
-        Info result = SpaceObject::info();
-        result.push_back(std::make_pair("model::Container", ""));
-        result.push_back(std::make_pair("model::item", std::to_string(m_item)));
-        result.push_back(std::make_pair("model::targetPos", ceti::to_string(m_targetPos)));
-        result.push_back(std::make_pair("model::velocity", ceti::to_string(m_velocity)));
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("model::Container");
+        result.add("model::item", m_item);
+        result.add("model::targetPos", m_targetPos);
+        result.add("model::velocity", m_velocity);
         return result;
     }
 

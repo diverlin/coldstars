@@ -30,8 +30,8 @@ public:
     WormHole(const std::string& data);
     std::string data() const;
 
-    Info info() const override final {
-        Info result = Planetoid::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Planetoid::info();
         return result;
     }
 

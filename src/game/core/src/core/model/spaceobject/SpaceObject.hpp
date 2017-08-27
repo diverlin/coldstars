@@ -55,17 +55,17 @@ public:
     place::Type place() const { return m_place; }
     int givenExpirience() const { return m_expirienceToGive; }
 
-    Info info() const override {
-        Info result = ceti::model::Orientation::info();
-        Info result2 = model::Base::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = ceti::model::Orientation::info();
+        ceti::InfoTable result2 = model::Base::info();
         result.insert(result.begin(), result2.begin(), result2.end());
-        result.push_back(std::make_pair("model::SpaceObject", ""));
-        result.push_back(std::make_pair("armor", std::to_string(m_armor)));
-        result.push_back(std::make_pair("lifeTime", std::to_string(m_lifeTime)));
-        result.push_back(std::make_pair("parent", std::to_string(m_parent)));
-        result.push_back(std::make_pair("starsystem", std::to_string(m_starsystem)));
-        result.push_back(std::make_pair("place", place::strip(place::to_string(m_place))));
-        result.push_back(std::make_pair("expirienceToGive", std::to_string(m_expirienceToGive)));
+        result.add("model::SpaceObject");
+        result.add("armor", m_armor);
+        result.add("lifeTime", m_lifeTime);
+        result.add("parent", m_parent);
+        result.add("starsystem", m_starsystem);
+        result.add("place", place::strip(place::to_string(m_place)));
+        result.add("expirienceToGive", m_expirienceToGive);
         return result;
     }
 

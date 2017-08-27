@@ -16,32 +16,31 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <core/spaceobject/Planetoid.hpp>
+#include <ceti/type/IdType.hpp>
 
-namespace model {
+#include <glm/glm.hpp>
 
-class Asteroid : public Planetoid {
+#include <string>
+#include <vector>
+
+namespace ceti {
+
+class InfoTable : public std::vector<std::pair<std::string, std::string>>
+{
 public:
-    Asteroid(int_t);
-    ~Asteroid() = default;
-    Asteroid(const std::string& data);
-    std::string data() const;
+    InfoTable() = default;
+    ~InfoTable() = default;
 
-    ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
-        result.add("model::Asteroid");
-        return result;
-    }
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-    }
+    void add(const std::string&);
+    void add(const std::string&, const std::string&);
+    void add(const std::string&, int);
+    void add(const std::string&, int_t);
+    void add(const std::string&, float);
+    void add(const std::string&, const glm::vec3&);
+    void add(const std::string&, const std::vector<int_t>&);
 };
 
-} // namespace model
+} // namespace ceti
+

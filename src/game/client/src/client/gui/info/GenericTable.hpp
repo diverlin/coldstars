@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <ceti/InfoTable.hpp>
+
 #include <SFGUI/Widgets.hpp>
 
 #include <string>
@@ -28,12 +30,11 @@ namespace info {
 
 class Table
 {
-    using Info = std::vector<std::pair<std::string, std::string>>;
 public:
-    Table(const Info& = Info());
+    Table(const ceti::InfoTable& = ceti::InfoTable());
     ~Table();
 
-    void update(const Info&);
+    void update(const ceti::InfoTable&);
     sfg::Table::Ptr widget() { return m_table; }
 
 private:
@@ -41,7 +42,7 @@ private:
     sfg::Table::Ptr m_table;
 
     void __clear();
-    void __create(const Info&);
+    void __create(const ceti::InfoTable&);
 };
 
 } // naemspace info
