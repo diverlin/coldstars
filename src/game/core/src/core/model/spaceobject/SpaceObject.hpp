@@ -19,7 +19,8 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
+#include <core/model/Base.hpp>
 #include <core/type/PlaceType.hpp>
 
 #include <ceti/Orientation.hpp>

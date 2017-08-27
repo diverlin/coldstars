@@ -19,15 +19,12 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
-//#include <client/gui/m_cursor.hpp>
-//#include <client/pilots/Show.hpp>
-//#include <jeti/Render.hpp>
+#include <core/Base.hpp>
+
 #include <jeti/Base.hpp>
 
 #include <vector>
 
-//class TurnTimer;
 
 class Starsystem;
 class Star;

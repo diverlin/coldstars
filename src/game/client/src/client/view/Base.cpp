@@ -18,7 +18,7 @@
 
 #include "Base.hpp"
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
 #include <core/descriptor/Base.hpp>
 
 #include <jeti/Render.hpp>

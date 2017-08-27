@@ -18,7 +18,7 @@
 
 #include "Garbage.hpp"
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
