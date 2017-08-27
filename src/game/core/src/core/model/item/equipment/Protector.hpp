@@ -36,6 +36,13 @@ public:
 
     int protection() const { return m_protection; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Protector");
+        result.add("protection", m_protection);
+        return result;
+    }
+
 private:
     int m_protection = 0;
 

@@ -36,6 +36,13 @@ public:
 
     int scan() const { return m_scan; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Scaner");
+        result.add("scan", m_scan);
+        return result;
+    }
+
 private:
     int m_scan = 0;
 

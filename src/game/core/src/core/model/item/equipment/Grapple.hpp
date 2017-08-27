@@ -40,6 +40,15 @@ public:
     int radius() const { return m_radius; }
     int speed() const { return m_speed; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Equipment::info();
+        result.add("model::Grapple");
+        result.add("strength", m_strength);
+        result.add("radius", m_radius);
+        result.add("speed", m_speed);
+        return result;
+    }
+
 private:
     int m_strength = 0;
     int m_radius = 0;

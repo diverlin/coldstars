@@ -70,14 +70,6 @@ class DistantStarEffect;
 
 class ShockWaveEffect;
 
-namespace jeti {
-class ExplosionEffect;
-class BaseParticleSystem;
-}
-
-class LazerTraceEffect;
-
-
 namespace ENTITY {
 namespace STARSYSTEM {
 
@@ -104,9 +96,9 @@ public:
     void setSector(int_t sector)  { m_sector = sector; }
     void setPosition(const meti::vec3& position) { m_position = position; }
 
-    int conditionId()     const { return m_condition_id; }
-    int raceId()          const { return m_race_id; }
-    int conquerorRaceId() const { return m_conqueror_race_id; }
+    int conditionId()     const { return m_status; }
+    int raceId()          const { return m_race; }
+    int conquerorRaceId() const { return m_invader; }
 
     int_t sector() const { return m_sector; }
     const meti::vec3& position() const { return m_position; }
@@ -144,10 +136,30 @@ public:
     ceti::pack<int_t> ships() const { return m_ships; }
     ceti::pack<int_t> satellites() const { return m_satellites; }
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result;
+        result.add("model::StarSystem");
+        result.add("race", m_race);
+        result.add("invader", m_invader);
+        result.add("status", m_status);
+        result.add("position", m_position);
+        result.add("sector", m_sector);
+        result.add("stars", m_stars);
+        result.add("wormholes", m_wormholes);
+        result.add("asteroids", m_asteroids);
+        result.add("containers", m_containers);
+        result.add("bullets", m_bullets);
+        result.add("spacestations", m_spacestations);
+        result.add("ships", m_ships);
+        result.add("satellites", m_satellites);
+
+        return result;
+    }
+
 private:
-    int m_race_id = NONE;
-    int m_conqueror_race_id = NONE;
-    int m_condition_id = NONE;
+    int m_race = NONE;
+    int m_invader = NONE;
+    int m_status = NONE;
 
     meti::vec3 m_position;
     int_t m_sector = NONE;
@@ -168,9 +180,9 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<Base>(*this);
-        ar & m_race_id;
-        ar & m_conqueror_race_id;
-        ar & m_condition_id;
+        ar & m_race;
+        ar & m_invader;
+        ar & m_status;
         ar & m_position;
         ar & m_sector;
 

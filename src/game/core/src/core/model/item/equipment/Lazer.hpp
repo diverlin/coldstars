@@ -31,6 +31,12 @@ public:
     Lazer(const std::string& data);
     std::string data() const;
 
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Weapon::info();
+        result.add("model::Lazer");
+        return result;
+    }
+
 private:
     // ..
 

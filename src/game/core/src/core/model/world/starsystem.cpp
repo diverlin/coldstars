@@ -71,7 +71,7 @@ StarSystem::StarSystem(int_t descriptor_id, int_t ob_id)
     setId(ob_id);
     setDescriptor(descriptor_id);
 
-    m_condition_id = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
+    m_status = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
 
 StarSystem::StarSystem(const std::string& data)

@@ -28,6 +28,12 @@ public:
     Equipment() = default;
     ~Equipment() = default;
 
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = Item::info();
+        result.add("model::Equipment");
+        return result;
+    }
+
 private:
     // ..
 
