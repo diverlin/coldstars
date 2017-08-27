@@ -67,12 +67,12 @@ public:
     int radius() const { return m_radius; }
     int speed() const { return m_speed; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Grapple:\n";
-        result += std::string(" strength = ") + std::to_string(m_strength) + "\n";
-        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += std::string(" speed = ") + std::to_string(m_speed) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Grapple");
+        result.add("strength", m_strength);
+        result.add("radius", m_radius);
+        result.add("speed", m_speed);
         return result;
     }
 

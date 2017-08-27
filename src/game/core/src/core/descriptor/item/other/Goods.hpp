@@ -32,9 +32,9 @@ public:
     Goods(const std::string& data);
     std::string data() const;
 
-    std::string info() const {
-        std::string result = "descriptor::item::Goods:\n";
-        result += Item::info();
+    ceti::InfoTable info() const {
+        ceti::InfoTable result = Item::info();
+        result.add("descriptor::item::Goods");
         return result;
     }
 

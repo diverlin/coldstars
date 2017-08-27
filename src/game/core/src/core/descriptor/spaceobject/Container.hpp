@@ -33,8 +33,9 @@ public:
     ~Container() = default;
     std::string data() const;
 
-    std::string info() const {
-        std::string result = "SpaceObject descriptor: " + SpaceObject::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("SpaceObject descriptor");
         return result;
     }
 

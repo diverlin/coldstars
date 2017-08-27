@@ -42,8 +42,9 @@ public:
     }
     ~Asteroid() = default;
 
-    std::string info() const {
-        std::string result = "Asteroid descriptor: " + Planetoid::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Planetoid::info();
+        result.add("descriptor::Asteroid");
         return result;
     }
 

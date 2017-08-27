@@ -52,9 +52,9 @@ public:
     Lazer(const std::string& data);
     std::string data() const;
 
-    std::string info() const {
-        std::string result = "descriptor::item::Lazer:\n";
-        result += Weapon::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Weapon::info();
+        result.add("descriptor::item::Lazer");
         return result;
     }
 

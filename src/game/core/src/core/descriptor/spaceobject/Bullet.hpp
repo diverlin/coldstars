@@ -39,12 +39,12 @@ public:
     void setSpeedMax(float speedMax) { m_speedMax = speedMax; }
     void setDeltaSpeed(float deltaSpeed) { m_deltaSpeed = deltaSpeed; }
 
-    std::string info() const {
-        std::string result = "descriptor::Bullet:\n";
-        result += std::string(" speedMin = ") + std::to_string(m_speedMin) + "\n";
-        result += std::string(" speedMax = ") + std::to_string(m_speedMax) + "\n";
-        result += std::string(" deltaSpeed = ") + std::to_string(m_deltaSpeed) + "\n";
-        result += SpaceObject::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("descriptor::Bullet");
+        result.add("speedMin", m_speedMin);
+        result.add("speedMax", m_speedMax);
+        result.add("deltaSpeed", m_deltaSpeed);
         return result;
     }
 

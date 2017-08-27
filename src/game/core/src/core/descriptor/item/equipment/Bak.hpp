@@ -52,10 +52,10 @@ public:
 
     int fuel() const { return m_fuel; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Bak:\n";
-        result += std::string(" fuel = ") + std::to_string(m_fuel) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Bak");
+        result.add("fuel", m_fuel);
         return result;
     }
 

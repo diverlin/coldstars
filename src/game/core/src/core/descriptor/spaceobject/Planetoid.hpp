@@ -28,14 +28,14 @@ public:
     Planetoid() = default;
     ~Planetoid() = default;
 
-    std::string info() const {
-        std::string result = "Planetoid descriptor:\n";
-        result += std::string(" radius=") + std::to_string(m_radiusA) + "\n";
-        result += std::string(" radiusB=") + std::to_string(m_radiusB) + "\n";
-        result += std::string(" orbitPhi=") + std::to_string(m_orbitPhi) + "\n";
-        result += std::string(" speed=") + std::to_string(m_speed) + "\n";
-        result += std::string(" clockwise=") + std::to_string(m_clockwise) + "\n";
-        result += SpaceObject::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("Planetoid descriptor");
+        result.add("radius", m_radiusA);
+        result.add("radiusB", m_radiusB);
+        result.add("orbitPhi", m_orbitPhi);
+        result.add("speed", m_speed);
+        result.add("clockwise", m_clockwise);
         return result;
     }
 

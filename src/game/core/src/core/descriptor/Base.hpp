@@ -23,6 +23,7 @@
 #include <core/type/RaceType.hpp>
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/InfoTable.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -33,7 +34,7 @@ class Base
 {
 public:
     Base() = default;
-    ~Base() = default;
+    virtual ~Base() = default;
 
     void setId(int_t id) { m_id = id; }
     void setType(const descriptor::Type& type)   { m_type = type; }
@@ -53,16 +54,17 @@ public:
     int_t mesh() const { return m_mesh; }
     int_t texture() const { return m_texture; }
 
-    std::string info() const {
-        std::string result = "descriptor::Base:\n";
-        result += std::string(" id = ") + std::to_string(m_id) + "\n";
-        result += std::string(" type = ") + to_string(m_type) + "\n";
-        result += std::string(" obType = ") + to_string(m_obType) + "\n";
-        result += std::string(" obGroup = ") + to_string(m_obGroup) + "\n";
-        result += std::string(" obClass = ") + to_string(m_obClass) + "\n";
-        result += std::string(" race = ") + to_string(m_race) + "\n";
-        result += std::string(" mesh = ") + std::to_string(m_mesh) + "\n";
-        result += std::string(" material = ") + std::to_string(m_texture) + "\n";
+    virtual ceti::InfoTable info() const {
+        ceti::InfoTable result;
+        result.add("descriptor::Base");
+        result.add("id", m_id);
+        result.add("type", descriptor::to_string(m_type));
+        result.add("obType", entity::to_string(m_obType));
+        result.add("obGroup", entity::to_string(m_obGroup));
+        result.add("obClass", entity::to_string(m_obClass));
+        result.add("race", race::to_string(m_race));
+        result.add("mesh", m_mesh);
+        result.add("material", m_texture);
         return result;
     }
 

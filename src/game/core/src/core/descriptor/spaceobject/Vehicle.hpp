@@ -89,33 +89,32 @@ public:
     void setArtefactSlotNum(int artefactSlotNum) { m_artefactSlotNum = artefactSlotNum; }
     void setCargoSlotNum(int otsecSlotNum) { m_cargoSlotNum = otsecSlotNum; }
 
-    std::string info() const {
-        std::string result = "Vehicle descriptor:\n";
-
-        result += std::string(" space = ") + ceti::to_string(m_space) + "\n";
-        result += std::string(" protection = ") + ceti::to_string(m_protection) + "\n";
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = SpaceObject::info();
+        result.add("descriptor::Vehicle");
+        result.add("space", m_space);
+        result.add("protection", m_protection);
 #ifdef USE_EXTRA_EQUIPMENT
-        result += std::string(" temperature = ") + ceti::to_string(m_temperature) + "\n";
+        result.add("temperature", m_temperature);
 #endif // USE_EXTRA_EQUIPMENT
-        result += std::string(" price = ") + ceti::to_string(m_price) + "\n";
+        result.add("price", m_price);
 
-        result += std::string(" drawTurrel = ") + ceti::to_string(m_drawTurrels) + "\n";
-        result += std::string(" bakSlotNum = ") + ceti::to_string(m_bakSlotNum) + "\n";
-        result += std::string(" driveSlotNum = ") + ceti::to_string(m_driveSlotNum) + "\n";
-        result += std::string(" droidSlotNum = ") + ceti::to_string(m_droidSlotNum) + "\n";
+        result.add("drawTurrel", m_drawTurrels);
+        result.add("bakSlotNum", m_bakSlotNum);
+        result.add("driveSlotNum", m_driveSlotNum);
+        result.add("droidSlotNum", m_droidSlotNum);
 #ifdef USE_EXTRA_EQUIPMENT
-        result += std::string(" energizerSlotNum = ") + ceti::to_string(m_energizerSlotNum) + "\n";
-        result += std::string(" freezerSlotNum = ") + ceti::to_string(m_freezerSlotNum) + "\n";
+        result.add("energizerSlotNum", m_energizerSlotNum);
+        result.add("freezerSlotNum", m_freezerSlotNum);
 #endif // USE_EXTRA_EQUIPMENT
-        result += std::string(" grappleSlotNum = ") + ceti::to_string(m_grappleSlotNum) + "\n";
-        result += std::string(" protectorSlotNum = ") + ceti::to_string(m_protectorSlotNum) + "\n";
-        result += std::string(" radarSlotNum = ") + ceti::to_string(m_radarSlotNum) + "\n";
-        result += std::string(" scanerSlotNum = ") + ceti::to_string(m_scanerSlotNum) + "\n";
-        result += std::string(" weaponSlotNum = ") + ceti::to_string(m_weaponSlotNum) + "\n";
-        result += std::string(" artefactSlotNum = ") + ceti::to_string(m_artefactSlotNum) + "\n";
-        result += std::string(" cargoSlotNum = ") + ceti::to_string(m_cargoSlotNum) + "\n";
+        result.add("grappleSlotNum", m_grappleSlotNum);
+        result.add("protectorSlotNum", m_protectorSlotNum);
+        result.add("radarSlotNum", m_radarSlotNum);
+        result.add("scanerSlotNum", m_scanerSlotNum);
+        result.add("weaponSlotNum", m_weaponSlotNum);
+        result.add("artefactSlotNum", m_artefactSlotNum);
+        result.add("cargoSlotNum", m_cargoSlotNum);
 
-        result += SpaceObject::info();
         return result;
     }
 

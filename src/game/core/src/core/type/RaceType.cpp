@@ -19,22 +19,30 @@
 
 #include "RaceType.hpp"
 
+#include <cassert>
+
+namespace race {
+
 std::string to_string(race::Type race_id)
 {
     switch(race_id)
     {
-        case race::Type::NONE: { return "RACE_NONE"; break; }
+        case Type::NONE: { return "RACE_NONE"; }
         
-        case race::Type::R0: { return "RACE0"; break; }
-        case race::Type::R1:    { return "RACE1"; break; }
-        case race::Type::R2:    { return "RACE2"; break; }
-        case race::Type::R3:    { return "RACE3"; break; }
-        case race::Type::R4:    { return "RACE4"; break; }
+        case Type::R0: { return "RACE0"; }
+        case Type::R1:    { return "RACE1"; }
+        case Type::R2:    { return "RACE2"; }
+        case Type::R3:    { return "RACE3"; }
+        case Type::R4:    { return "RACE4"; }
 
-        case race::Type::R6:    { return "RACE6"; break; }
-        case race::Type::R7:    { return "RACE7"; break; }
+        case Type::R6:    { return "RACE6"; }
+        case Type::R7:    { return "RACE7"; }
 
-        default: { return "RACE_UKNOWN"; break; }    
+        default: {
+        assert(false);
+        return "RACE_UKNOWN";
+    }
     }
 }
 
+} // namespace race

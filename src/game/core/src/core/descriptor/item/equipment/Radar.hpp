@@ -52,10 +52,10 @@ public:
 
     int radius() const { return m_radius; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Radar:\n";
-        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Radar");
+        result.add("radius", m_radius);
         return result;
     }
 

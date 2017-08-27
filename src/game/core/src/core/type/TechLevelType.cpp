@@ -19,24 +19,30 @@
 
 #include "TechLevelType.hpp"
 
+#include <cassert>
+
+namespace tech {
+
 std::string to_string(tech::Type techlevel_id)
 {
     switch(techlevel_id)
     {
-        case tech::Type::NONE: { return "NONE"; break; }
+    case tech::Type::NONE: { return "NONE"; }
         
-        case tech::Type::LEVEL0: { return "TECH0"; break; }
-        case tech::Type::LEVEL1: { return "TECH1"; break; }
-        case tech::Type::LEVEL2: { return "TECH2"; break; }
-        case tech::Type::LEVEL3: { return "TECH3"; break; }
-        //case tech::Type::L4: { return "TECH4"; break; }
-        //case tech::Type::L5: { return "TECH5"; break; }
-        //case tech::Type::L6: { return "TECH6"; break; }
-        //case tech::Type::L7: { return "TECH7"; break; }
-        //case tech::Type::L8: { return "TECH8"; break; }
-        //case tech::Type::L9: { return "TECH9"; break; }
+    case tech::Type::LEVEL0: { return "TECH0"; }
+    case tech::Type::LEVEL1: { return "TECH1"; }
+    case tech::Type::LEVEL2: { return "TECH2"; }
+    case tech::Type::LEVEL3: { return "TECH3"; }
+        //case tech::Type::L4: { return "TECH4"; }
+        //case tech::Type::L5: { return "TECH5"; }
+        //case tech::Type::L6: { return "TECH6"; }
+        //case tech::Type::L7: { return "TECH7"; }
+        //case tech::Type::L8: { return "TECH8"; }
+        //case tech::Type::L9: { return "TECH9"; }
     }
     
+    assert(false);
     return "TECH_UKNOWN";
 }
 
+} // namespace tech

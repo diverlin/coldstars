@@ -35,8 +35,10 @@ public:
     Galaxy();
     ~Galaxy() = default;
 
-    std::string info() const {
-        std::string result = "Galaxy descriptor: " + Base::info() + ceti::to_string(" sectors: ", sectors);
+    ceti::InfoTable info() const {
+        ceti::InfoTable result = Base::info();
+        result.add("descriptor::Galaxy");
+        result.add("sectors", ceti::to_string(sectors));
         return result;
     }
 }; 

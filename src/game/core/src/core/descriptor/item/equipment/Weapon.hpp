@@ -36,11 +36,11 @@ public:
     int radius() const { return m_radius; }
     int damage() const { return m_damage; }
 
-    std::string info() const {
-        std::string result = "descriptor::item::Weapon:\n";
-        result += std::string(" radius = ") + std::to_string(m_radius) + "\n";
-        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
-        result += descriptor::Equipment::info();
+    ceti::InfoTable info() const override {
+        ceti::InfoTable result = descriptor::Equipment::info();
+        result.add("descriptor::item::Weapon");
+        result.add("radius", m_radius);
+        result.add("damage", m_damage);
         return result;
     }
 

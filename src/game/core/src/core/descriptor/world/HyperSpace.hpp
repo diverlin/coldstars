@@ -30,8 +30,9 @@ public:
     std::string data() const;
     ~HyperSpace() = default;
 
-    std::string info() const {
-        std::string result = "HyperSpace descriptor: " + Base::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Base::info();
+        result.add("descriptor::HyperSpace");
         return result;
     }
 

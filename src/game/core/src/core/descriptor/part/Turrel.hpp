@@ -28,9 +28,9 @@ public:
     Turrel() = default;
     ~Turrel() = default;
 
-    std::string info() const {
-        std::string result = "Turrel descriptor:\n";
-        result += Orientation::info();
+    ceti::InfoTable info() const override final {
+        ceti::InfoTable result = Orientation::info();
+        result.add("Turrel descriptor");
         return result;
     }
 
