@@ -21,18 +21,19 @@
 #include <SFGUI/Widgets.hpp>
 
 #include <string>
-#include <map>
+#include <vector>
 
 namespace gui {
 namespace info {
 
 class Table
 {
+    using Info = std::vector<std::pair<std::string, std::string>>;
 public:
-    Table(const std::map<std::string, std::string>&);
+    Table(const Info& = Info());
     ~Table();
 
-    void update(const std::map<std::string, std::string>&);
+    void update(const Info&);
     sfg::Table::Ptr widget() { return m_table; }
 
 private:
@@ -40,7 +41,7 @@ private:
     sfg::Table::Ptr m_table;
 
     void __clear();
-    void __create(const std::map<std::string, std::string>&);
+    void __create(const Info&);
 };
 
 } // naemspace info

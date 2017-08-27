@@ -30,9 +30,9 @@ public:
     Asteroid(const std::string& data);
     std::string data() const;
 
-    std::map<std::string, std::string> info() const override final {
-        std::map<std::string, std::string> result = Planetoid::info();
-        result.insert(std::make_pair("model::Asteroid", ""));
+    Info info() const override final {
+        Info result = Planetoid::info();
+        result.push_back(std::make_pair("model::Asteroid", ""));
         return result;
     }
 

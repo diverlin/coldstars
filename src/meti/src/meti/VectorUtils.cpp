@@ -123,34 +123,9 @@ float dotUnits(const glm::vec3& v1, const glm::vec3& v2)
     return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
-
 glm::vec2 vec2(const glm::vec3& v3)
 {
     return glm::vec2(v3.x, v3.y);
-}
-
-std::string str(const glm::vec2& v)
-{
-    return std::to_string(v.x)+","+std::to_string(v.y);
-}
-
-std::string str(const glm::vec3& v)
-{
-    return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
-}
-
-
-namespace {
-const int FLOAT_PRECISION = 2;
-}
-
-std::string
-to_string(const vec3& v)
-{
-    std::ostringstream out;
-    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
-    out << "(" << v.x << ", " << v.y << ", " << v.z << ")";
-    return out.str();
 }
 
 } // namespace meti

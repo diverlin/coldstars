@@ -168,9 +168,9 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
 
         target_dir = glm::normalize(to - new_center);
 
-        //std::cout<<"c: "<<meti::to_string(new_center)<<std::endl;
-        //std::cout<<"d: "<<meti::to_string(new_direction)<<std::endl;
-        //std::cout<<"td: "<<meti::to_string(target_dir)<<std::endl;
+        //std::cout<<"c: "<<ceti::to_string(new_center)<<std::endl;
+        //std::cout<<"d: "<<ceti::to_string(new_direction)<<std::endl;
+        //std::cout<<"td: "<<ceti::to_string(target_dir)<<std::endl;
 
         centers.push_back(new_center);
         directions.push_back(new_direction);
@@ -181,12 +181,12 @@ bool calcRoundPath(std::vector<glm::vec3>& centers,
 //    centers.push_back(new_center);
 //    directions.push_back(new_direction);
 
-    //std::cout<<"cm: "<<meti::to_string(new_center)<<std::endl;
-    //std::cout<<"dm: "<<meti::to_string(new_direction)<<std::endl;
+    //std::cout<<"cm: "<<ceti::to_string(new_center)<<std::endl;
+    //std::cout<<"dm: "<<ceti::to_string(new_direction)<<std::endl;
 
 //    glm::vec3 to_(800,800,0);
 //    glm::vec3 dir_(glm::normalize(to_ - new_direction));
-//    std::cout<<"dir_: "<<meti::to_string(dir_)<<std::endl;
+//    std::cout<<"dir_: "<<ceti::to_string(dir_)<<std::endl;
     return true;
 }
 

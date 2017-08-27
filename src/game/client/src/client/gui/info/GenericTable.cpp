@@ -29,7 +29,7 @@ const std::string value_id = "value";
 namespace gui {
 namespace info {
 
-Table::Table(const std::map<std::string, std::string>& data)
+Table::Table(const Info& data)
 {
     m_table = sfg::Table::Create();
     __create(data);
@@ -49,7 +49,7 @@ void Table::__clear()
     m_table->RemoveAll();
 }
 
-void Table::__create(const std::map<std::string, std::string>& data)
+void Table::__create(const Info& data)
 {
     unsigned int col = 0;
     unsigned int row = 0;
@@ -82,12 +82,17 @@ void Table::__create(const std::map<std::string, std::string>& data)
     }
 }
 
-void Table::update(const std::map<std::string, std::string>& data)
+void Table::update(const Info& data)
 {
-    if (data.find("id") == data.end()) {
-        assert(false);
+    std::string id;
+    for (Info::const_iterator it = data.begin(); it != data.end(); ++it) {
+        std::string title = it->first;
+        if (title == "id") {
+            id = it->second;
+        }
     }
-    if (data.find("id")->second == m_id) {
+
+    if (id == m_id) {
         return;
     }
     __clear();

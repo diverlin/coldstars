@@ -19,7 +19,7 @@
 
 #pragma once
 
-//#include <ceti/points.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -28,13 +28,6 @@
 
 
 namespace ceti {
-
-//class Position {
-//public:
-//    Position(const glm::vec3& center, const glm::vec3& direction):center(center), direction(direction) {}
-//    glm::vec3 center;
-//    glm::vec3 direction;
-//};
 
 namespace model {
 
@@ -54,12 +47,16 @@ public:
     const meti::vec3& size() const { return m_size; }
     const meti::vec3& direction() const { return m_direction; }
 
-    virtual std::map<std::string, std::string> info() const {
-        std::map<std::string, std::string> result;
-        result.insert(std::make_pair("ceti::model::Orientation", ""));
-        result.insert(std::make_pair("position", meti::to_string(m_position)));
-        result.insert(std::make_pair("size", meti::to_string(m_size)));
-        result.insert(std::make_pair("direction", meti::to_string(m_direction)));
+protected:
+    using Info = std::vector<std::pair<std::string, std::string>>;
+
+public:
+    virtual Info info() const {
+        Info result;
+        result.push_back(std::make_pair("ceti::model::Orientation", ""));
+        result.push_back(std::make_pair("position", ceti::to_string(m_position)));
+        result.push_back(std::make_pair("size", ceti::to_string(m_size)));
+        result.push_back(std::make_pair("direction", ceti::to_string(m_direction)));
         return result;
     }
 
