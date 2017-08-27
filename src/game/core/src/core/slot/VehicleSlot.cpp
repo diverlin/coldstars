@@ -40,7 +40,6 @@ Vehicle::Vehicle(int offset)
 Vehicle::~Vehicle()
 {}
       
-/* virtual */
 void Vehicle::putChildrenToGarbage() const
 {
     assert(false);

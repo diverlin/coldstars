@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -30,12 +30,13 @@ class Vehicle;
 
 namespace slot {
 
-class Base : public ::Base
+class Base /*: public ::Base*/
 {
 public:
     Base() = default;
     virtual ~Base() = default;
 
+    void setId(int id) { m_id = id; }
     void setOwner(control::Base* owner) { m_owner = owner; }
     void setPosition(const glm::vec2& position) { m_position = position; }
     void setSelected(bool selected) { m_selected = selected; }
@@ -51,6 +52,7 @@ public:
     control::Base* owner() const { return m_owner; }
 
 private:
+    int m_id = 0;
     bool m_selected = false;
 
     control::Base* m_owner = nullptr;

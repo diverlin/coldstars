@@ -19,7 +19,8 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
+#include <core/model/Base.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -40,7 +41,7 @@ class StarSystemsConditionData;
 
 namespace model {
 
-class Galaxy : public model::Base {
+class Galaxy : public Base {
 
 public:
     Galaxy(int_t);

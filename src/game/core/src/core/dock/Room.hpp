@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "../common/Base.hpp"
+#include <core/Base.hpp>
 
 namespace descriptor {
 class Room;

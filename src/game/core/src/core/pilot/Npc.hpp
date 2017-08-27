@@ -18,7 +18,8 @@
 
 #pragma once
 
-#include <common/Base.hpp>
+#include <core/Base.hpp>
+#include <core/model/Base.hpp>
 
 #include <core/pilot/Skills.hpp>
 #include <core/pilot/Observation.hpp>

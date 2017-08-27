@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <core/common/Base.hpp>
+#include <core/Base.hpp>
 #include <core/type/PlaceType.hpp>
 
 #include <core/descriptor/spaceobject/SpaceObject.hpp>
