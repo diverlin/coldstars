@@ -45,6 +45,7 @@ std::string to_string(Type type)
         case Type::SPACESTATION: { return "descriptor::Type::SPACESTATION"; }
         case Type::SATELLITE:     { return "descriptor::Type::SATELLITE"; }
         case Type::CONTAINER:     { return "descriptor::Type::CONTAINER"; }
+        case Type::BULLET:     { return "descriptor::Type::BULLET"; }
 
         // equipment
         case Type::LAZER_EQUIPMENT:     { return "descriptor::Type::LAZER_EQUIPMENT"; }

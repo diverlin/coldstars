@@ -51,7 +51,10 @@ public:
     info::StarSystem* infoStarSystem() const { return m_infoStarSystem; }
     info::Camera* infoCamera() const { return m_infoCamera; }
     info::Renderer* infoRender() const { return m_infoRender; }
-    info::Table* genericTable() const { return m_genericTable; }
+    info::Table* modelTable() const { return m_modelTable; }
+    info::Table* descriptorTable() const { return m_descriptorTable; }
+
+    sfg::Window::Ptr windowObjectProperties() const { return m_windowObjectProperties; }
 
     void updateFps(int);
     void setMousePosScreenCoord(int, int);
@@ -70,7 +73,10 @@ private:
     info::StarSystem* m_infoStarSystem = nullptr;
     info::Camera* m_infoCamera = nullptr;
     info::Renderer* m_infoRender = nullptr;
-    info::Table* m_genericTable = nullptr;
+
+    sfg::Window::Ptr m_windowObjectProperties;
+    info::Table* m_modelTable = nullptr;
+    info::Table* m_descriptorTable = nullptr;
 };
 
 } // namespace gui

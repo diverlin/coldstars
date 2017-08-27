@@ -108,16 +108,18 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
     }
 
     {
-        m_genericTable = new info::Table();
+        m_modelTable = new info::Table();
+        m_descriptorTable = new info::Table();
 
-        sfg::Window::Ptr window = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
-        auto box = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
+        m_windowObjectProperties = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+        auto box = sfg::Box::Create( sfg::Box::Orientation::HORIZONTAL );
 
-        box->Pack(m_genericTable->widget());
+        box->Pack(m_modelTable->widget());
+        box->Pack(m_descriptorTable->widget());
 
-        window->Add(box);
-        m_desktop.Add( window );
-        window->SetPosition(sf::Vector2f(300, 300));
+        m_windowObjectProperties->Add(box);
+        m_desktop.Add( m_windowObjectProperties );
+        m_windowObjectProperties->SetPosition(sf::Vector2f(100, 300));
     }
 
     m_desktop.SetProperties(

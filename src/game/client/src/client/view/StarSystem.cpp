@@ -208,7 +208,13 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         m_player->update(m_render, view);
 
         if (view) {
-            m_guiDemo->genericTable()->update(view->control()->model()->info());
+            m_guiDemo->windowObjectProperties()->Show(true);
+            m_guiDemo->modelTable()->update(view->control()->model()->info());
+            m_guiDemo->descriptorTable()->update(view->control()->descriptor()->info());
+        } else {
+            m_guiDemo->modelTable()->reset();
+            m_guiDemo->descriptorTable()->reset();
+            m_guiDemo->windowObjectProperties()->Show(false);
         }
     }
 }

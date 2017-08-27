@@ -41,6 +41,11 @@ Table::~Table()
     __clear(); // is it needed?
 }
 
+void Table::reset()
+{
+    __clear();
+}
+
 void Table::__clear()
 {
     for(auto widget: m_table->GetChildren()) {

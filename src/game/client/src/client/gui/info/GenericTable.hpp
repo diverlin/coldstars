@@ -34,6 +34,7 @@ public:
     Table(const ceti::InfoTable& = ceti::InfoTable());
     ~Table();
 
+    void reset();
     void update(const ceti::InfoTable&);
     sfg::Table::Ptr widget() { return m_table; }
 
