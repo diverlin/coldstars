@@ -45,6 +45,7 @@
 
 #include <core/descriptor/spaceobject/Vehicle.hpp>
 #include <core/descriptor/item/Item.hpp>
+#include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/descriptor/dock/Land.hpp>
 
 namespace control {
@@ -1008,7 +1009,7 @@ void Vehicle::_postDeathUniqueEvent(bool show_effect)
 }
 
 
-void Vehicle::CheckNeedsInStatic()
+void Vehicle::checkNeedsInStatic()
 {
     // check armor
     if (model()->armor() < 0.5*descriptor()->armor()) {
@@ -1029,35 +1030,39 @@ void Vehicle::CheckNeedsInStatic()
 
     //check ammo
     needs().get_ammo = false;
-    assert(false);
-//    for (slot::ItemSlot* slot: m_equipmentSlots) {
-//        if (slot->item()) {
-//            if (slot->item()->subtype() == entity::Type::ROCKET_EQUIPMENT) {
-//                if (slot->rocketEquipment()->GetAmmo() == 0) {
-//                    needs().get_ammo = true;
-//                }
-//            }
-//        }
-//   }
+    for (slot::Item* slot: m_equipmentSlots) {
+        if (slot->item()) {
+            if (slot->item()->type() == entity::Type::ROCKET_EQUIPMENT) {
+                if (slot->rocketEquipment()->model()->ammo() == 0) {
+                    needs().get_ammo = true;
+                }
+            }
+        }
+   }
 
     // check fuel
-assert(false);
-//    needs().get_fuel = false;
-//    if (model()->driveComplex().bakSlot()) {
-//        if (model()->driveComplex().bakSlot()->item()) {
-//            if (model()->driveComplex().bakSlot()->bakEquipment()->fuel() < 0.8*model()->driveComplex().bakSlot()->bakEquipment()->fuelMax()) {
-//                needs().get_fuel = true;
-//            }
-//        }
-//    }
+    // why don't check properties?
+    needs().get_fuel = false;
+    slot::Item* bak_slot = navigator().bakSlots().front();
+    if (bak_slot) {
+        if (bak_slot->item()) {
+            item::Bak* bak = bak_slot->bakEquipment();
+            if (bak->model()->fuel() < 0.8*bak->descriptor()->fuel()) {
+                needs().get_fuel = true;
+            }
+        }
+    }
 
     // check credits
-//    if (m_npc->credits() < 1000)    { needs().get_credits = true; }
-//    else                            { needs().get_credits = false; }
+    if (m_npc->model()->credits() < 1000) {
+        needs().get_credits = true;
+    } else {
+        needs().get_credits = false;
+    }
 }
 
 
-void Vehicle::ResolveNeedsInKosmoportInStatic()
+void Vehicle::resolveNeedsInKosmoportInStatic()
 {
     bool result = true;
 
@@ -1103,7 +1108,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     //else                                { needs().get_credits = false; }
 }
 
-void Vehicle::UpdateAllFunctionalItemsInStatic()
+void Vehicle::updateAllFunctionalItemsInStatic()
 {
     for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
         if (m_equipmentSlots[i]->item()) {

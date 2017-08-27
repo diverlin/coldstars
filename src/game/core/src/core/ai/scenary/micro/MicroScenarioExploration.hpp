@@ -17,25 +17,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROSCENARIOEXPLORATION_H
-#define MICROSCENARIOEXPLORATION_H
+#pragma once
 
 #include "../BaseScenario.hpp"
 #include <core/pilot/Npc.hpp>
 
 class MicroScenarioExploration : public BaseScenario
 {
-    public:
-        MicroScenarioExploration();
-        virtual ~MicroScenarioExploration();
-        
-        virtual void enter(Npc*) const;
-        virtual void UpdateInStaticInSpace(Npc*) const;
-        virtual void UpdateInDynamicInSpace(Npc*) const;    
-        virtual void exit(Npc*) const;
-        
-        virtual std::string GetDescription(Npc*) const;
+public:
+    MicroScenarioExploration();
+    virtual ~MicroScenarioExploration();
+
+    virtual void enter(control::Npc*) const;
+    virtual void UpdateInStaticInSpace(control::Npc*) const;
+    virtual void UpdateInDynamicInSpace(control::Npc*) const;
+    virtual void exit(control::Npc*) const;
+
+    virtual std::string GetDescription(control::Npc*) const;
 };
 
-#endif 
-     
+
+

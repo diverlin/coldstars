@@ -44,6 +44,7 @@ class StarSystem;
 } // namespace model
 
 namespace control {
+class Vehicle;
 class SpaceObject;
 } // namespace control
 
@@ -67,6 +68,8 @@ public:
     //    void setPlayer(Player* player) { m_player = player; }
     //    void setVehicle(Vehicle* vehicle)         { m_vehicle = vehicle; }
 
+    int_t credits() const { return m_credits; }
+
     void addAgressor(int_t id) { if (_isWritable()) m_agressors.add(id); }
     void removeAgressor(int_t id) { if (_isWritable()) m_agressors.remove(id); }
 
@@ -75,7 +78,7 @@ public:
 
 private:
     int_t m_race = NONE;
-    unsigned long int m_credits;
+    int_t m_credits;
 
     int_t m_player = NONE;
     int_t m_vehicle = NONE;

@@ -961,7 +961,52 @@ void StarSystem::__manageDeadObjects()
 //        }
 //    }
 
-//    for(Asteroid* asteroid: to_remove) {
+//    for(Asteroid* aster//            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE);
+    //            //            dn->Load(v.second);
+    //            //            dn->Resolve();
+    //            //            Add(dn);
+    //        }
+    //    }
+
+    //    if (tmp_ptree.get_child_optional("distant_star_effect"))
+    //    {
+    //        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
+    //        {
+    //            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE);
+    //            //            ds->Load(v.second);
+    //            //            ds->Resolve();
+    //            //            Add(ds);
+    //        }
+    //    }
+    //}
+
+    //void Starsystem::ResolveData()
+    //{
+    //    //((Sector*)manager::EntityManager::get().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+    //}
+
+    //void Starsystem::Save(boost::property_tree::ptree& save_ptree) const
+    //{
+    //    const std::string root = "starsystem." + std::to_string(starsystem()->id())+".";
+
+    //    Base::SaveData(save_ptree, root);
+    //    SpaceObject::SaveData(save_ptree, root);
+    //    Starsystem::SaveData(save_ptree, root);
+    //}
+
+    //void Starsystem::Load(const boost::property_tree::ptree& load_ptree)
+    //{
+    //    Base::LoadData(load_ptree);
+    //    SpaceObject::LoadData(load_ptree);
+    //    Starsystem::LoadData(load_ptree);
+    //}
+
+    //void Starsystem::Resolve()
+    //{
+    //    Base::ResolveData();
+    //    SpaceObject::ResolveData();
+    //    Starsystem::ResolveData();
+    //}oid: to_remove) {
 //        //remove(asteroid);
 //    }
     //to_remove.clear();
@@ -1078,86 +1123,5 @@ void StarSystem::__damageEventInsideCircle(const glm::vec3& position, float radi
 
 void StarSystem::_postDeathUniqueEvent(bool)
 {}
-
-//void Starsystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-//    save_ptree.put(root+"sector_id", m_sector->id());
-    
-//    save_ptree.put(root+"color.r", m_color.r);
-//    save_ptree.put(root+"color.g", m_color.g);
-//    save_ptree.put(root+"color.b", m_color.b);
-//    save_ptree.put(root+"color.a", m_color.a);
-
-//    //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
-//    //    {
-//    //        distantStarEffect_vec[i]->Save(save_ptree, root);
-//    //    }
-
-//    //    for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
-//    //    {
-//    //        distantNebulaEffect_vec[i]->Save(save_ptree, root);
-//    //    }
-//}
-
-//void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
-//{
-//    m_data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
-    
-//    m_color.r = load_ptree.get<float>("color.r");
-//    m_color.g = load_ptree.get<float>("color.g");
-//    m_color.b = load_ptree.get<float>("color.b");
-//    m_color.a = load_ptree.get<float>("color.a");
-
-//    boost::property_tree::ptree tmp_ptree = load_ptree;
-//    if (tmp_ptree.get_child_optional("distant_nebula_effect"))
-//    {
-//        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
-//        {
-//            //            DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE);
-//            //            dn->Load(v.second);
-//            //            dn->Resolve();
-//            //            Add(dn);
-//        }
-//    }
-    
-//    if (tmp_ptree.get_child_optional("distant_star_effect"))
-//    {
-//        for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
-//        {
-//            //            DistantStarEffect* ds = GetNewDistantStarEffect(NONE);
-//            //            ds->Load(v.second);
-//            //            ds->Resolve();
-//            //            Add(ds);
-//        }
-//    }
-//}
-
-//void Starsystem::ResolveData()
-//{
-//    //((Sector*)manager::EntityManager::get().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
-//}
-
-//void Starsystem::Save(boost::property_tree::ptree& save_ptree) const
-//{
-//    const std::string root = "starsystem." + std::to_string(starsystem()->id())+".";
-
-//    Base::SaveData(save_ptree, root);
-//    SpaceObject::SaveData(save_ptree, root);
-//    Starsystem::SaveData(save_ptree, root);
-//}
-
-//void Starsystem::Load(const boost::property_tree::ptree& load_ptree)
-//{
-//    Base::LoadData(load_ptree);
-//    SpaceObject::LoadData(load_ptree);
-//    Starsystem::LoadData(load_ptree);
-//}
-
-//void Starsystem::Resolve()
-//{
-//    Base::ResolveData();
-//    SpaceObject::ResolveData();
-//    Starsystem::ResolveData();
-//}
 
 } // namespace control

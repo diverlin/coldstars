@@ -22,7 +22,9 @@
 
 #include <string>
 
+namespace control {
 class Npc;
+} // namespace control
 
 class BaseScenario
 {
@@ -33,15 +35,15 @@ public:
     void setTypeId(ai::type type) { m_type = type; }
     ai::type typeId() const { return m_type; }
 
-    virtual void enter(Npc*) const {}
-    virtual bool Validate(Npc*) const { return true; }
-    virtual void UpdateInStaticInSpace(Npc*) const {}
-    virtual void UpdateInStaticInDock(Npc*) const {}
-    virtual void UpdateInDynamicInSpace(Npc*) const {}
-    virtual void UpdateInDynamicInDock(Npc*) const {}
-    virtual void exit(Npc*) const {}
+    virtual void enter(control::Npc*) const {}
+    virtual bool Validate(control::Npc*) const { return true; }
+    virtual void UpdateInStaticInSpace(control::Npc*) const {}
+    virtual void UpdateInStaticInDock(control::Npc*) const {}
+    virtual void UpdateInDynamicInSpace(control::Npc*) const {}
+    virtual void UpdateInDynamicInDock(control::Npc*) const {}
+    virtual void exit(control::Npc*) const {}
 
-    virtual std::string GetDescription(Npc*) const { return "_"; }
+    virtual std::string GetDescription(control::Npc*) const { return "_"; }
 
 private:
     ai::type m_type = ai::type::NONE;

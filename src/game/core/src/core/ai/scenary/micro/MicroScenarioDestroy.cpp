@@ -34,7 +34,7 @@ MicroScenarioDestroy::~MicroScenarioDestroy()
 {}
 
 /* virtual */    
-bool MicroScenarioDestroy::Validate(Npc* npc) const
+bool MicroScenarioDestroy::Validate(control::Npc* npc) const
 {
     assert(false);
 //    if (!npc->stateMachine().microTaskManager().target()->isAlive()) {
@@ -49,14 +49,14 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 }
 
 /* virtual */                
-void MicroScenarioDestroy::enter(Npc* npc) const
+void MicroScenarioDestroy::enter(control::Npc* npc) const
 {    
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
 }
 
 /* virtual */
-void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
+void MicroScenarioDestroy::UpdateInStaticInSpace(control::Npc* npc) const
 {
     assert(false);
 //    npc->vehicle()->weaponComplex().activateWeapons();
@@ -66,18 +66,18 @@ void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 }
 
 /* virtual */
-void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
+void MicroScenarioDestroy::UpdateInDynamicInSpace(control::Npc* npc) const
 {}
 
 /* virtual */
-void MicroScenarioDestroy::exit(Npc* npc) const
+void MicroScenarioDestroy::exit(control::Npc* npc) const
 {
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
 }
 
 /* virtual */
-std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
+std::string MicroScenarioDestroy::GetDescription(control::Npc* npc) const
 {
     assert(false);
     //return "DESTROY ob_id=" + std::to_string( npc->stateMachine().microTaskManager().target()->id()) ;
