@@ -19,6 +19,7 @@
 #include "Sector.hpp"
 #include <core/world/starsystem.hpp>
 #include <core/world/galaxy.hpp>
+#include <core/model/world/Sector.hpp>
 #include <core/manager/EntityManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
@@ -34,39 +35,6 @@
 
 #include <ceti/serialization/macro.hpp>
 
-
-namespace model {
-
-Sector::Sector(int_t descriptor_id)
-{
-    setDescriptor(descriptor_id);
-}
-
-Sector::Sector(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Sector::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-bool Sector::operator==(const Sector& rhs) const {
-    if (m_position != rhs.m_position) {
-        return false;
-    }
-
-    bool result = isEqual(m_starsystems, rhs.m_starsystems);
-    return result;
-}
-
-bool Sector::operator!=(const Sector& rhs) const {
-    return !(*this == rhs);
-}
-
-} // namespace model
 
 
 namespace control {

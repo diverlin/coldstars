@@ -16,8 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "galaxy.hpp"
-#include "Sector.hpp"
+#include <core/world/galaxy.hpp>
+#include <core/model/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/model/world/Sector.hpp>
 #include <common/constants.hpp>
 #include <common/Global.hpp>
 #include <common/common.hpp>
@@ -30,34 +32,6 @@
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 
 #include <ceti/serialization/macro.hpp>
-
-namespace model {
-
-Galaxy::Galaxy(int_t descriptor_id)
-{
-    setDescriptor(descriptor_id);
-}
-
-Galaxy::Galaxy(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Galaxy::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-//bool Galaxy::operator==(const Galaxy& rhs) const {
-//    return isEqual(m_sectors, rhs.m_sectors);
-//}
-
-//bool Galaxy::operator!=(const Galaxy& rhs) const {
-//    return *this == rhs;
-//}
-
-} // namespace model
 
 
 namespace control {

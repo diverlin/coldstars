@@ -19,7 +19,8 @@
 #include "SectorBuilder.hpp"
 #include "StarSystemBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
-#include <world/Sector.hpp>
+#include <core/world/Sector.hpp>
+#include <core/model/world/Sector.hpp>
 
 #include <core/descriptor/world/SectorDescriptor.hpp>
 

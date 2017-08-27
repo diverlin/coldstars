@@ -32,43 +32,17 @@ namespace descriptor {
 class Galaxy;
 } // namespace descriptor
 
-namespace  control {
-class Sector;
-class StarSystem;
-} // namespace control
+namespace model {
+class Galaxy;
+} // namespace model
 
 class StarSystemsConditionData;
 
-namespace model {
-
-class Galaxy : public Base {
-
-public:
-    Galaxy(int_t);
-    ~Galaxy() = default;
-    Galaxy(const std::string& data);
-    std::string data() const;
-
-//    bool operator==(const Galaxy& rhs) const;
-//    bool operator!=(const Galaxy& rhs) const;
-
-    void add(int_t sector) { m_sectors.add(sector); }
-
-private:
-    ceti::pack<int_t> m_sectors;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::Base>(*this);
-        ar & m_sectors;
-    }
-};
-
-} // namespace model
 
 namespace control {
+
+class Sector;
+class StarSystem;
 
 class Galaxy : public Base
 {
