@@ -26,8 +26,6 @@
 
 #include <ceti/Pack.hpp>
 
-#include <boost/serialization/vector.hpp>
-
 namespace descriptor {
 class Galaxy;
 } // namespace descriptor

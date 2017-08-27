@@ -17,18 +17,6 @@
 */
 
 #include "Sector.hpp"
-#include <core/world/starsystem.hpp>
-#include <core/world/galaxy.hpp>
-#include <core/manager/EntityManager.hpp>
-#include <core/common/constants.hpp>
-#include <core/common/Global.hpp>
-#include <common/common.hpp>
-#include <meti/RandUtils.hpp>
-#include <core/pilot/Npc.hpp>
-
-#include <core/struct/StarSystemsConditionData.hpp>
-
-#include <core/model/world/starsystem.hpp>
 
 #include <ceti/serialization/macro.hpp>
 
@@ -52,12 +40,7 @@ Sector::data() const
 }
 
 bool Sector::operator==(const Sector& rhs) const {
-    if (m_position != rhs.m_position) {
-        return false;
-    }
-
-    bool result = isEqual(m_starsystems, rhs.m_starsystems);
-    return result;
+    return data() == rhs.data();
 }
 
 bool Sector::operator!=(const Sector& rhs) const {

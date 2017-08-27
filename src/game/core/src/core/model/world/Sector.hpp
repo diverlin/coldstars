@@ -21,11 +21,6 @@
 
 #include <core/model/Base.hpp>
 
-#include <core/descriptor/world/StarSystemDescriptor.hpp>
-#include <core/descriptor/world/SectorDescriptor.hpp>
-
-#include <core/common/constants.hpp>
-
 #include <meti/VectorUtils.hpp>
 
 #include <boost/serialization/vector.hpp>
