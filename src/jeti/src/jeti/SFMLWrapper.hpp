@@ -43,6 +43,7 @@ private:
     sf::Font m_font;
     sf::View m_view;
     sf::RenderWindow m_window;
+//    sf::RenderWindow m_window2;
 };
 
 }

@@ -165,9 +165,9 @@ bool Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
             control::item::Weapon* weapon = slot->weapon();
             if (weapon) {
                 if (weapon->isFunctioning()) {
-                    if (!weapon->target()) {
+                    if (!slot->target()) {
                         if (_checkDistanceToTarget(target, weapon->radius())) {
-                            weapon->setTarget(target, subtarget);
+                            slot->setTarget(target, subtarget);
                             result = true;
                         }
                     }
@@ -194,7 +194,7 @@ slot::Item*
 Weapon::__nextSlotReadyToFire() const {
     for(slot::Item* slot: m_slots_reloaded) {
         control::item::Weapon* weapon = slot->weapon(); // shortcut
-        if (_checkDistanceToTarget(weapon->target(), weapon->radius())) {
+        if (_checkDistanceToTarget(slot->target(), weapon->radius())) {
             return slot;
         }
     }
@@ -206,7 +206,7 @@ void Weapon::updateFire(int timer, float attack_rate)
     //if (timer < TURN_TIME - fire_delay) {
     slot::Item* slot = __nextSlotReadyToFire();
     if (slot) {
-        slot->weapon()->fire(attack_rate);
+        slot->weapon()->fire(slot->target(), attack_rate);
         m_slots_reloaded.remove(slot);
     }
     //}
@@ -217,12 +217,12 @@ void Weapon::__validateTargets()
     for (slot::Item* slot: m_slots) {
         control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
-            if (weapon->target()) {
-                if (!weapon->validateSubTarget()) {
-                    weapon->resetSubTarget();
+            if (slot->target()) {
+                if (!slot->validateSubTarget()) {
+                    slot->resetSubTarget();
                 }
-                if (!_checkDistanceToTarget(weapon->target(), weapon->radius())) {
-                    weapon->reset();
+                if (!_checkDistanceToTarget(slot->target(), weapon->radius())) {
+                    slot->reset();
                 }
             }
         }

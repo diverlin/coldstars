@@ -59,7 +59,7 @@ bool Rocket::checkAmmo() const
     return (model()->ammo() > 0);
 }
 
-void Rocket::fire(float rate)
+void Rocket::fire(control::SpaceObject* target, float rate)
 {
     assert(false);
 //    int num = 0;

@@ -29,10 +29,14 @@ void SFMLWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool ve
     }
     m_bpp = bpp;
     m_vsync = vert_sync;
-    
+
     m_window.create(sf::VideoMode(width, height, bpp), title);
     m_window.setFramerateLimit(fps_limit);
     m_window.setVerticalSyncEnabled(vert_sync);
+
+    //    m_window2.create(sf::VideoMode(width, height, bpp), title+"2");
+    //    m_window2.setFramerateLimit(fps_limit);
+    //    m_window2.setVerticalSyncEnabled(vert_sync);
 
     if (!m_font.loadFromFile(DATA_PATH+"font/font.ttf")) {
         throw std::runtime_error("cannot load font");
@@ -51,6 +55,7 @@ void SFMLWrapper::wrResizeSpecific(int width, int height)
 void SFMLWrapper::wrDrawSpecific()
 {    
       m_window.display();
+//      m_window2.display();
 }
 
 void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec2& pos)
@@ -69,5 +74,5 @@ void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec
         
 }
 
-}
+} // namespace jeti
    

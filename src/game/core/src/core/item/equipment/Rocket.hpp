@@ -34,6 +34,9 @@ class Rocket;
 } // namespace model
 
 namespace control {
+
+class SpaceObject;
+
 namespace item {
 
 class Rocket : public Weapon
@@ -43,7 +46,7 @@ public:
     virtual ~Rocket() = default;
 
     bool checkAmmo() const override final;
-    void fire(float rate=1.0f) override final;
+    void fire(control::SpaceObject*, float rate=1.0f) override final;
 
     virtual void updateProperties();
 

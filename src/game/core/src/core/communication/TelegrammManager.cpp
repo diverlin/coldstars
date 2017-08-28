@@ -26,6 +26,8 @@
 #include <core/item/equipment/Rocket.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 
+#include <core/slot/ItemSlot.hpp>
+
 #include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
 
@@ -314,7 +316,7 @@ void doShoot(int_t object, int_t item) {
     control::Ship* ship = manager::Entity::get().ship(object);
     control::item::Weapon* weapon = manager::Entity::get().weapon(item);
 
-    weapon->fire();
+    weapon->fire(weapon->slot()->target());
 
     //    if (target()->isAlive() == false) {
     //        vehicleOwner()->npc()->addExpirience(target()->givenExpirience(), show_effect);
