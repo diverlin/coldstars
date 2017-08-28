@@ -25,6 +25,7 @@
 #include <core/model/world/HyperSpace.hpp>
 #include <core/world/HyperSpace.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -68,7 +69,7 @@ HyperSpace::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
     control::HyperSpace* hyperspace = new control::HyperSpace(descr, model);
     assert(hyperspace);
 
-    core::manager::Entity::get().setHyperSpace(hyperspace);
+    core::Sessions::get().session()->entity()->setHyperSpace(hyperspace);
     return hyperspace;
 }
 

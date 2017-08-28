@@ -26,6 +26,7 @@
 #include <core/spaceobject/Star.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Session.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -71,7 +72,7 @@ Star::__genTemplate(descriptor::Star* descr)
     control::Star* star = new control::Star(descr, model);
     assert(star);
 
-    core::manager::Entity::get().add(star);
+    core::Sessions::get().session()->entity()->add(star);
     return star;
 }
 

@@ -50,6 +50,7 @@
 
 #include <math/rand.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/Garbage.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -114,7 +115,7 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded()) {
-        core::manager::Garbage::get().erase();
+        core::Sessions::get().session()->garbage()->erase();
 
         //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
         //            bool load_event = manager::EntityManager::get().UpdateLoadRequest();

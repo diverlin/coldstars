@@ -28,6 +28,7 @@
 #include <core/model/dock/Kosmoport.hpp>
 #include <core/dock/Kosmoport.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -63,7 +64,7 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
     control::Kosmoport* kosmoport = new control::Kosmoport(descr, model);
     assert(kosmoport);
 
-    core::manager::Entity::get().add(kosmoport);
+    core::Sessions::get().session()->entity()->add(kosmoport);
     return kosmoport;
 }
 

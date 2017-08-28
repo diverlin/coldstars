@@ -24,6 +24,7 @@
 
 #include <core/descriptor/world/SectorDescriptor.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -70,7 +71,7 @@ Sector::__genTemplate(descriptor::Sector* descr)
     control::Sector* sector = new control::Sector(descr, model);
     assert(sector);
 
-    core::manager::Entity::get().add(sector);
+    core::Sessions::get().session()->entity()->add(sector);
 
     return sector;
 }

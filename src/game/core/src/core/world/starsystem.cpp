@@ -27,6 +27,7 @@
 #include <core/math/rand.hpp>
 
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <common/Config.hpp>
 
@@ -82,32 +83,32 @@ StarSystem::__actualizeModel()
     model()->setWritable(false);
 
     for(int_t id: model()->stars()) {
-        add(core::manager::Entity::get().star(id));
+        add(core::Sessions::get().session()->entity()->star(id));
     }
     for(int_t id: model()->planets()) {
-        add(core::manager::Entity::get().planet(id));
+        add(core::Sessions::get().session()->entity()->planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(core::manager::Entity::get().asteroid(id));
+        add(core::Sessions::get().session()->entity()->asteroid(id));
     }
     for(int_t id: model()->wormholes()) {
-        __add(core::manager::Entity::get().wormhole(id));
+        __add(core::Sessions::get().session()->entity()->wormhole(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(core::manager::Entity::get().ship(id));
+        add(core::Sessions::get().session()->entity()->ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(core::manager::Entity::get().satellite(id));
+        add(core::Sessions::get().session()->entity()->satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(core::manager::Entity::get().spacestation(id));
+        add(core::Sessions::get().session()->entity()->spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        __add(core::manager::Entity::get().container(id));
+        __add(core::Sessions::get().session()->entity()->container(id));
     }
     for(int_t id: model()->bullets()) {
-        __add(core::manager::Entity::get().bullet(id));
+        __add(core::Sessions::get().session()->entity()->bullet(id));
     }
 //    __actualizeItems();
 
@@ -951,7 +952,7 @@ void StarSystem::__manageDeadObjects()
 //    std::vector<Asteroid*> to_remove;
 //    for(Asteroid* asteroid: m_asteroids) {
 //        if(!asteroid->isAlive()) {
-//            //manager::Garbage::get().add(asteroid);
+//            //Sessions::get().session()->garbage()->add(asteroid);
 //            //to_remove.push_back(asteroid);
 //        }
 //    }

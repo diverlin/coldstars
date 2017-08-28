@@ -27,6 +27,7 @@
 #include <core/model/dock/Angar.hpp>
 #include <core/dock/Angar.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -61,7 +62,7 @@ Angar::__createTemplate(descriptor::Angar* descr)
     control::Angar* angar = new control::Angar(descr, model);
     assert(angar);
 
-    core::manager::Entity::get().add(angar);
+    core::Sessions::get().session()->entity()->add(angar);
 
     return angar;
 }

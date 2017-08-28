@@ -11,6 +11,7 @@
 #include <core/descriptor/comm/Dock.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 
@@ -108,9 +109,9 @@ void createContainerEvent(const comm::Telegramm& telegramm) {
 }
 void createBulletEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateBullet descriptor(telegramm.data());
-    control::Vehicle* vehicle = manager::Entity::get().vehicle(descriptor.owner());
-    control::item::Rocket* rocket = manager::Entity::get().rocket(descriptor.weapon());
-    control::SpaceObject* target = manager::Entity::get().spaceObject(descriptor.target());
+    control::Vehicle* vehicle = Sessions::get().session()->entity()->vehicle(descriptor.owner());
+    control::item::Rocket* rocket = Sessions::get().session()->entity()->rocket(descriptor.weapon());
+    control::SpaceObject* target = Sessions::get().session()->entity()->spaceObject(descriptor.target());
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
@@ -153,14 +154,14 @@ void createRadarEvent(const comm::Telegramm& telegramm) {
 /** ADD TO STARSYSTEM */
 void addShipToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem);
-    control::Ship* ship = manager::Entity::get().ship(descriptor.object);
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(descriptor.object);
     starsystem->add(ship);
 }
 void addContainerToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem);
-    control::Container* container = manager::Entity::get().container(descriptor.object);
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
+    control::Container* container = Sessions::get().session()->entity()->container(descriptor.object);
     container->addImpulse(descriptor.impulse);
     starsystem->add(container, descriptor.position);
 }
@@ -199,12 +200,12 @@ void _doTakeContainer(const comm::Telegramm& telegramm) {
 
 void hitEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Hit descriptor(telegramm.data());
-    control::SpaceObject* ob = manager::Entity::get().spaceObject(descriptor.target());
+    control::SpaceObject* ob = Sessions::get().session()->entity()->spaceObject(descriptor.target());
     ob->hit(descriptor.damage());
 }
 void explosionEvent(const comm::Telegramm& telegramm) {
     descriptor::Explosion descriptor(telegramm.data());
-    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem_id);
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem_id);
     Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
     assert(false);
     //        starsystem->add(explosion, descriptor.center);
@@ -213,16 +214,16 @@ void explosionEvent(const comm::Telegramm& telegramm) {
 // GARBAGE
 void garbageSpaceObjectEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Object descriptor(telegramm.data());
-    control::SpaceObject* object = manager::Entity::get().spaceObject(descriptor.object());
+    control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(descriptor.object());
     object->die();
-    manager::Garbage::get().add(object);
+    Sessions::get().session()->garbage()->add(object);
 }
 
 // REMOVE
 void removeSpaceObjectFromStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::StarSystemTransition descriptor(telegramm.data());
-    control::SpaceObject* object = manager::Entity::get().spaceObject(descriptor.object());
-    control::StarSystem* starsystem = manager::Entity::get().starsystem(descriptor.starsystem());
+    control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(descriptor.object());
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem());
     starsystem->remove(object);
 }
 
@@ -233,22 +234,22 @@ namespace event {
 
 /** DOCK */
 void doDockShip(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
     starsystem->remove(ship);
 
     // add
-    control::Land* land = manager::Entity::get().land(destination);
+    control::Land* land = Sessions::get().session()->entity()->land(destination);
     land->add(ship);
 }
 
 void doLaunchShip(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
 
     // remove
-    control::Land* land = manager::Entity::get().land(destination);
+    control::Land* land = Sessions::get().session()->entity()->land(destination);
     land->remove(ship);
 
     // add
@@ -259,7 +260,7 @@ void doLaunchShip(int_t object, int_t destination) {
 
 /** JUMP */
 void doJumpIn(int_t object) {
-    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -267,25 +268,25 @@ void doJumpIn(int_t object) {
     starsystem->remove(ship);
 
     // add
-    control::HyperSpace* hyper = manager::Entity::get().hyperspace();
+    control::HyperSpace* hyper = Sessions::get().session()->entity()->hyperspace();
     hyper->add(ship);
 }
 void doJumpOut(int_t object, int_t destination) {
-    control::Ship* ship = manager::Entity::get().ship(object);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
 
     // remove
-    control::HyperSpace* hyper = manager::Entity::get().hyperspace();
+    control::HyperSpace* hyper = Sessions::get().session()->entity()->hyperspace();
     hyper->remove(ship);
 
     // add
-    control::StarSystem* starsystem = manager::Entity::get().starsystem(destination); // probably can be used from navigator
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
 }
 
 /** DROP/TAKE */
 void doDropItem(int_t object, int_t target) {
-    control::Ship* ship = manager::Entity::get().ship(object);
-    control::Item* item = manager::Entity::get().item(target);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Item* item = Sessions::get().session()->entity()->item(target);
 
     // remove
     ship->remove(item);
@@ -299,8 +300,8 @@ void doDropItem(int_t object, int_t target) {
 }
 
 void doTakeContainer(int_t object, int_t target) {
-    control::Ship* ship = manager::Entity::get().ship(object);
-    control::Container* container = manager::Entity::get().container(target);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Container* container = Sessions::get().session()->entity()->container(target);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -313,8 +314,8 @@ void doTakeContainer(int_t object, int_t target) {
 }
 
 void doShoot(int_t object, int_t item) {
-    control::Ship* ship = manager::Entity::get().ship(object);
-    control::item::Weapon* weapon = manager::Entity::get().weapon(item);
+    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::item::Weapon* weapon = Sessions::get().session()->entity()->weapon(item);
 
     weapon->fire(weapon->slot()->target());
 

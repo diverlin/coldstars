@@ -22,6 +22,7 @@
 #include <core/item/equipment/Grapple.hpp>
 #include <core/descriptor/item/equipment/Grapple.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -64,7 +65,7 @@ Grapple::__genTemplate(descriptor::item::Grapple* descr, int_t ob_id)
 {
     model::item::Grapple* model = new model::item::Grapple(descr->id(), ob_id);
     control::item::Grapple* grapple = new control::item::Grapple(descr, model);
-    core::manager::Entity::get().add(grapple);
+    core::Sessions::get().session()->entity()->add(grapple);
     return grapple;
 }
 

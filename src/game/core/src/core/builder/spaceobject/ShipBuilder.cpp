@@ -25,6 +25,8 @@
 
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/spaceobject/Ship.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
@@ -72,7 +74,7 @@ Ship::__genTemplate(descriptor::Ship* descr, int_t ob_id)
     control::Ship* ship = new control::Ship(descr, model);
     assert(ship);
 
-    core::manager::Entity::get().add(ship);
+    core::Sessions::get().session()->entity()->add(ship);
     return ship;
 }
 

@@ -69,14 +69,11 @@ namespace manager {
 
 class Entity
 {
-private:
+public:
     Entity() = default;
     Entity(const Entity&) = delete;
     ~Entity() = default;
     Entity& operator=(const Entity&) = delete;
-
-public:
-    static Entity& get();
 
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }

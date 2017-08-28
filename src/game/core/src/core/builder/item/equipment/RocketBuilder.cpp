@@ -21,6 +21,7 @@
 #include <core/item/equipment/Rocket.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
@@ -64,7 +65,7 @@ Rocket::__genTemplate(descriptor::item::Rocket* descr, int_t ob_id)
 {
     model::item::Rocket* model = new model::item::Rocket(descr->id(), ob_id);
     control::item::Rocket* rocket = new control::item::Rocket(descr, model);
-    core::manager::Entity::get().add(rocket);
+    core::Sessions::get().session()->entity()->add(rocket);
     return rocket;
 }
 

@@ -33,7 +33,8 @@ class Garbage;
 } // namespace manager
 
 class Session {
-    Session(manager::Entity*, manager::Garbage*);
+public:
+    Session();
     ~Session();
 
     manager::Entity* entity()  const { return m_entity; }

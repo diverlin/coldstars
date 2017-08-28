@@ -67,7 +67,7 @@ public:
 
 private:
     core::comm::TelegrammHub& m_telegrammHub;
-    manager::Entity& m_entitiesManager;
+    manager::Entity* m_entitiesManager = nullptr;
     descriptor::Manager& m_descriptorManager;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);

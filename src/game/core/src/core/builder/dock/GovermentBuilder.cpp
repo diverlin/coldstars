@@ -24,6 +24,7 @@
 #include <core/model/dock/Goverment.hpp>
 #include <core/dock/Goverment.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -59,7 +60,7 @@ Goverment::__createTemplate(descriptor::Goverment* descr)
     control::Goverment* goverment = new control::Goverment(descr, model);
     assert(goverment);
 
-    core::manager::Entity::get().add(goverment);
+    core::Sessions::get().session()->entity()->add(goverment);
 
     return goverment;
 }

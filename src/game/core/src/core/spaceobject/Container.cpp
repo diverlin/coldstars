@@ -38,50 +38,51 @@
 #include <core/item/Item.hpp>
 #include <core/item/equipment/ALL>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 namespace {
 
 bool itemInsertHelper(slot::Item* slot, int_t id) {
-    control::Base* model_base = core::manager::Entity::get().base(id);
+    control::Base* model_base = core::Sessions::get().session()->entity()->base(id);
     descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obGroup()) {
     case entity::Type::SCANER_EQUIPMENT: {
-        item::Scaner* item = core::manager::Entity::get().scaner(id);
+        item::Scaner* item = core::Sessions::get().session()->entity()->scaner(id);
         return slot->insert(item);
     }
     case entity::Type::DRIVE_EQUIPMENT: {
-        item::Drive* item = core::manager::Entity::get().drive(id);
+        item::Drive* item = core::Sessions::get().session()->entity()->drive(id);
         return slot->insert(item);
     }
     case entity::Type::BAK_EQUIPMENT: {
-        item::Bak* item = core::manager::Entity::get().bak(id);
+        item::Bak* item = core::Sessions::get().session()->entity()->bak(id);
         return slot->insert(item);
     }
     case entity::Type::DROID_EQUIPMENT: {
-        item::Droid* item = core::manager::Entity::get().droid(id);
+        item::Droid* item = core::Sessions::get().session()->entity()->droid(id);
         return slot->insert(item);
     }
     case entity::Type::GRAPPLE_EQUIPMENT: {
-        item::Grapple* item = core::manager::Entity::get().grapple(id);
+        item::Grapple* item = core::Sessions::get().session()->entity()->grapple(id);
         return slot->insert(item);
     }
     case entity::Type::LAZER_EQUIPMENT: {
-        item::Lazer* item = core::manager::Entity::get().lazer(id);
+        item::Lazer* item = core::Sessions::get().session()->entity()->lazer(id);
         return slot->insert(item);
     }
     case entity::Type::PROTECTOR_EQUIPMENT: {
-        item::Protector* item = core::manager::Entity::get().protector(id);
+        item::Protector* item = core::Sessions::get().session()->entity()->protector(id);
         return slot->insert(item);
     }
     case entity::Type::RADAR_EQUIPMENT: {
-        item::Radar* item = core::manager::Entity::get().radar(id);
+        item::Radar* item = core::Sessions::get().session()->entity()->radar(id);
         return slot->insert(item);
     }
     case entity::Type::ROCKET_EQUIPMENT: {
-        item::Rocket* item = core::manager::Entity::get().rocket(id);
+        item::Rocket* item = core::Sessions::get().session()->entity()->rocket(id);
         return slot->insert(item);
     }
     }
@@ -116,7 +117,7 @@ Container::item() const
 void Container::__putChildrenToGarbage() const
 {
     if (auto item = m_itemSlot->item()) {
-        core::manager::Garbage::get().add(item);
+        core::Sessions::get().session()->garbage()->add(item);
     }
 }
 

@@ -22,7 +22,10 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/Garbage.hpp>
+
 #include <world/starsystem.hpp>
 
 #include <dock/Kosmoport.hpp>
@@ -56,7 +59,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::__putChildrenToGarbage() const
 {
-    core::manager::Garbage::get().add(m_innerLand);
+    core::Sessions::get().session()->garbage()->add(m_innerLand);
     _putNpcToGarbage();
     _putItemsToGarbage();
 }

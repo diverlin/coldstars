@@ -27,6 +27,7 @@
 #include <world/starsystem.hpp>
 
 #include <descriptor/Base.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/model/world/starsystem.hpp>
 
@@ -81,7 +82,7 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     control::StarSystem* starsystem = new control::StarSystem(descr, model);
     assert(starsystem);
 
-    core::manager::Entity::get().add(starsystem);
+    core::Sessions::get().session()->entity()->add(starsystem);
     return starsystem;
 }
 

@@ -35,6 +35,7 @@
 
 #include <core/slot/ItemSlot.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -75,7 +76,7 @@ NatureLand::__createTemplate(descriptor::NatureLand* descr)
     control::NatureLand* natureland = new control::NatureLand(descr, model);
     assert(natureland);
 
-    core::manager::Entity::get().add(natureland);
+    core::Sessions::get().session()->entity()->add(natureland);
 
     return natureland;
 }

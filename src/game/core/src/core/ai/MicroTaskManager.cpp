@@ -20,6 +20,8 @@
 #include <core/ai/scenary/ScenarioCollector.hpp>
 
 #include <core/spaceobject/SpaceObject.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
 MicroTaskManager::MicroTaskManager()
@@ -34,7 +36,7 @@ void MicroTaskManager::setTask(const Task& microtask)
     m_scenario = ScenarioCollector::Instance().get(microtask.GetScenarioTypeId());
     assert(m_scenario);
     if (m_microtask.targetId() != NONE) {
-        m_target = core::manager::Entity::get().spaceObject(microtask.targetId())->model();
+        m_target = core::Sessions::get().session()->entity()->spaceObject(microtask.targetId())->model();
     }
 }
 

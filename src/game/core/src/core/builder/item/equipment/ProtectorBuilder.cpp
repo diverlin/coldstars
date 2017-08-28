@@ -21,6 +21,7 @@
 #include <core/model/item/equipment/Protector.hpp>
 #include <core/item/equipment/Protector.hpp>
 #include <core/descriptor/item/equipment/Protector.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -76,7 +77,7 @@ Protector::__genTemplate(descriptor::item::Protector* descr, int_t ob_id)
 {
     model::item::Protector* model = new model::item::Protector(descr->id(), ob_id);
     control::item::Protector* protector = new control::item::Protector(descr, model);
-    core::manager::Entity::get().add(protector);
+    core::Sessions::get().session()->entity()->add(protector);
     return protector;
 }
 

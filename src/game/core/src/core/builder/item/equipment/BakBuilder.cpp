@@ -23,6 +23,7 @@
 #include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -65,7 +66,7 @@ Bak::__genTemplate(descriptor::item::Bak* descr, int_t ob_id)
 {
     model::item::Bak* model = new model::item::Bak(descr->id(), ob_id);
     control::item::Bak* bak = new control::item::Bak(descr, model);
-    core::manager::Entity::get().add(bak);
+    core::Sessions::get().session()->entity()->add(bak);
     return bak;
 }
 

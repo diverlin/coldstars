@@ -24,6 +24,7 @@
 #include <core/item/equipment/Radar.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -65,7 +66,7 @@ Radar::__genTemplate(descriptor::item::Radar* descr, int_t ob_id)
 {
     model::item::Radar* model = new model::item::Radar(descr->id(), ob_id);
     control::item::Radar* radar = new control::item::Radar(descr, model);
-    core::manager::Entity::get().add(radar);
+    core::Sessions::get().session()->entity()->add(radar);
     return radar;
 }
 

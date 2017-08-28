@@ -32,14 +32,11 @@ namespace manager {
 
 class Garbage
 {
-private:
+public:
     Garbage() = default;
     Garbage(const Garbage&) = delete;
     ~Garbage() = default;
     Garbage& operator=(const Garbage&) = delete;
-
-public:
-    static Garbage& get();
 
     bool contain(int_t id) const { return (m_entities.count(id) == 1); }
     void add(control::Base*);

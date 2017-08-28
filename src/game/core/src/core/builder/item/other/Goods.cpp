@@ -23,6 +23,7 @@
 #include <core/descriptor/item/other/Goods.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -67,7 +68,7 @@ Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
     assert(model);
     control::item::Goods* control = new control::item::Goods(descriptor, model);
     assert(control);
-    core::manager::Entity::get().add(control);
+    core::Sessions::get().session()->entity()->add(control);
     return control;
 }
 
