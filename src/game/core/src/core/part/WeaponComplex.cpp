@@ -99,21 +99,21 @@ void Weapon::__reload()
 //    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
 }
 
-void Weapon::select()
+void Weapon::activate()
 {
     for (slot::Item* slot: m_slots_reloaded) {
         slot->selectEvent();
     }
 }
 
-void Weapon::deactivateWeapons()
+void Weapon::deactivate()
 {
     for (slot::Item* slot: m_slots_reloaded) {
         slot->deselectEvent();
     }
 }
 
-void Weapon::select(const entity::Type& weapon_group)
+void Weapon::activate(const entity::Type& weapon_group)
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obGroup() == weapon_group) {
@@ -122,7 +122,7 @@ void Weapon::select(const entity::Type& weapon_group)
     }
 }
 
-void Weapon::deactivateWeapons(const entity::Type& weapon_group)
+void Weapon::deactivate(const entity::Type& weapon_group)
 {
     for (slot::Item* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obGroup() == weapon_group) {

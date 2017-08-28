@@ -209,33 +209,32 @@ void Npc::update(int time)
 
 void Npc::__scenarioFireVehicleAgressor()
 {
-    assert(false);
 //    for (unsigned int i=0; i<m_observation.visible_VEHICLE_pair_vec.size(); i++)
 //    {
 //        for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
 //        {
-//            assert(false);
-////            if (m_observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
-////            {
-////                m_vehicle->weaponComplex().deactivateWeapons();
+//            if (m_observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
+//            {
+//                m_vehicle->weaponComplex().deactivateWeapons();
 
-////                m_vehicle->weaponComplex().activateWeapons();
-////                m_vehicle->weaponComplex().setTarget(m_observation.visible_VEHICLE_pair_vec[i].object);
+//                m_vehicle->weaponComplex().activateWeapons();
+//                m_vehicle->weaponComplex().setTarget(m_observation.visible_VEHICLE_pair_vec[i].object);
 
-////                return;
-////            }
+//                return;
+//            }
 //        }
 //    }
 }
 
 void Npc::__scenarioFireAsteroid()
 {
-    assert(false);
-//    m_vehicle->weaponComplex().deactivateWeapons();
+    m_vehicle->weapons().deactivate();
 
-//    m_vehicle->weaponComplex().activateWeapons();
-    // TODO
-//    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
+    m_vehicle->weapons().activate();
+
+    if (control::Asteroid* asteroid = m_observation.nearestAsteroid()) {
+        m_vehicle->weapons().setTarget(asteroid);
+    }
 }
 
 Planet*

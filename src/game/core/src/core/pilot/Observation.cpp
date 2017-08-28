@@ -54,6 +54,16 @@ void Observation::__findEchievableStarSystems(control::Galaxy* galaxy)
     __sort(m_starsystem_pairs);
 }
 
+
+control::Asteroid*
+Observation::nearestAsteroid() const
+{
+    if (!m_asteroid_pairs.empty()) {
+        return m_asteroid_pairs.front().object;
+    }
+    return nullptr;
+}
+
 control::Container*
 Observation::nearestPickableContainer() const
 {

@@ -17,72 +17,15 @@
 */
 
 #include "Weapon.hpp"
-#include <core/descriptor/item/equipment/Weapon.hpp>
-#include <core/model/item/equipment/Weapon.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 
-//#include <ceti/serialization/macro.hpp>
-#include <ceti/Logger.hpp>
 
-namespace control {
-namespace item {
+namespace slot {
 
-Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
-    : Equipment(descr, model)
-    , m_descriptor_weapon(descr)
-    , m_model_weapon(model)
+Weapon::Weapon()
 {
-//    fire_atOnce = meti::getRandInt(1, 3);
 }
-
-int Weapon::radius() const { return model()->radius(); }
-int Weapon::damage() const { return model()->damage(); }
-
-void Weapon::updateProperties()
-{
-    m_damage_add   = 0;
-    m_radius_add   = 0;
-    
-#ifdef USE_MODULES
-    // todo implement weapon module class
-    for (unsigned int i = 0; i < modules_vec.size(); i++) {
-        damage_add   += ((RocketModule*)modules_vec[i])->GetDamageAdd();
-        radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();
-    }
-#endif
-
-    model()->setDamage(descriptor()->damage() + m_damage_add);
-    model()->setRadius(descriptor()->radius() + m_radius_add);
-}
-
-void Weapon::addUniqueInfo()
-{
-    //    info.addTitleStr("ROCKET");
-    
-    //    info.addNameStr("ammo:");      info.addValueStr(GetAmmoStr());
-    //    info.addNameStr("damage:");    info.addValueStr(GetDamageStr());
-    //    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
-}
-
-std::string Weapon::damageStr()
-{
-    if (m_damage_add) {
-        return std::to_string(descriptor()->damage()) + "+" + std::to_string(m_damage_add);
-    } else {
-        return std::to_string(descriptor()->damage());
-    }
-}
-
-std::string Weapon::radiusStr()
-{
-    if (m_radius_add) {
-        return std::to_string(descriptor()->radius()) + "+" + std::to_string(m_radius_add);
-    } else {
-        return std::to_string(descriptor()->radius());
-    }
-}
-
 
 void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
 {
@@ -173,5 +116,5 @@ bool Weapon::validateSubTarget() const
 //    deteriorationEvent();
 //}
 
-} // namespace item
-} // namespace control
+} // namespace slot
+

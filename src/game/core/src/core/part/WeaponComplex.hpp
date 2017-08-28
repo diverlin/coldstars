@@ -63,10 +63,10 @@ public:
 
     void updateFire(int, float);
 
-    void select();
-    void deactivateWeapons();
-    void select(const entity::Type&);
-    void deactivateWeapons(const entity::Type&);
+    void activate();
+    void deactivate();
+    void activate(const entity::Type&);
+    void deactivate(const entity::Type&);
 
     bool isAnyWeaponSelected() const;
 //    int itemsNum() const;
