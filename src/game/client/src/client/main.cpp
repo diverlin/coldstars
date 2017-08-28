@@ -23,6 +23,9 @@
 #include "builder/pilots/PlayerBuilder.hpp"
 #include <common/Config.hpp>
 
+
+#include <core/manager/Session.hpp>
+
 #include <jeti/Mesh.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Camera.hpp>
@@ -30,7 +33,6 @@
 
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
-
 
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/gui/GuiActions.hpp>
@@ -106,6 +108,13 @@ Player* createPlayer() {
 int main()
 {
     client::global::get().init();
+
+    int server_id = 0;
+    int client_id = 1;
+
+    core::Sessions::get().add(server_id, new core::Session);
+    core::Sessions::get().add(client_id, new core::Session);
+    core::Sessions::get().activate(server_id);
 
     // shortcuts
     UserInputInSpace& input = client::global::get().input();

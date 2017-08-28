@@ -23,6 +23,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/model/item/equipment/Scaner.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -64,7 +65,7 @@ Scaner::__genTemplate(descriptor::item::Scaner* descr, int_t ob_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descr->id(), ob_id);
     control::item::Scaner* scaner = new control::item::Scaner(descr, model);
-    core::manager::Entity::get().add(scaner);
+    core::Sessions::get().session()->entity()->add(scaner);
     return scaner;
 }
 

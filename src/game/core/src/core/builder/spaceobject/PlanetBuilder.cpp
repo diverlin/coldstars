@@ -27,6 +27,7 @@
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -105,7 +106,7 @@ Planet::__genTemplate(descriptor::Planet* descr)
     control::Planet* planet = new control::Planet(descr, model);
     assert(planet);
 
-    core::manager::Entity::get().add(planet);
+    core::Sessions::get().session()->entity()->add(planet);
 
     return planet;
 }

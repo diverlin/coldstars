@@ -21,6 +21,7 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
 void MacroTaskManager::setTask(const Task& macrotask)
@@ -28,7 +29,7 @@ void MacroTaskManager::setTask(const Task& macrotask)
     m_macrotask = macrotask;
     m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
     if (m_macrotask.targetId() != NONE) {
-        m_target = core::manager::Entity::get().spaceObject(macrotask.targetId())->model();
+        m_target = core::Sessions::get().session()->entity()->spaceObject(macrotask.targetId())->model();
     }
 }
 

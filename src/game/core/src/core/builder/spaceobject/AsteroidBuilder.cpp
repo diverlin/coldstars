@@ -21,6 +21,7 @@
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/descriptor/spaceobject/Asteroid.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -91,7 +92,7 @@ Asteroid::__genTemplate(descriptor::Asteroid* descr)
     control::Asteroid* asteroid = new control::Asteroid(descr, model);
     assert(asteroid);
 
-    core::manager::Entity::get().add(asteroid);
+    core::Sessions::get().session()->entity()->add(asteroid);
 
     return asteroid;
 }

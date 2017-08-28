@@ -19,19 +19,13 @@
 #include "Garbage.hpp"
 
 #include <core/Base.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
 
 namespace core {
 namespace manager {
-
-Garbage&
-Garbage::get()
-{
-    static Garbage instance;
-    return instance;
-}
 
 void Garbage::add(control::Base* ob)
 {
@@ -50,7 +44,7 @@ void Garbage::erase()
 {
     for(const auto& pair: m_entities) {
         control::Base* ob = pair.second;
-        Entity::get().remove(ob);
+        Sessions::get().session()->entity()->remove(ob);
         delete ob->model();
         delete ob;
     }

@@ -24,6 +24,7 @@
 #include <core/model/dock/Shop.hpp>
 #include <core/dock/Shop.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -59,7 +60,7 @@ Shop::__createTemplate(descriptor::Shop* descr)
     control::Shop* shop = new control::Shop(descr, model);
     assert(shop);
 
-    core::manager::Entity::get().add(shop);
+    core::Sessions::get().session()->entity()->add(shop);
     return shop;
 } 
 

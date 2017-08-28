@@ -22,6 +22,7 @@
 #include <core/descriptor/item/equipment/Lazer.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -65,7 +66,7 @@ Lazer::__genTemplate(descriptor::item::Lazer* descr, int_t ob_id)
     assert(model);
 
     control::item::Lazer* lazer = new control::item::Lazer(descr, model);
-    core::manager::Entity::get().add(lazer);
+    core::Sessions::get().session()->entity()->add(lazer);
     return lazer;
 } 
 

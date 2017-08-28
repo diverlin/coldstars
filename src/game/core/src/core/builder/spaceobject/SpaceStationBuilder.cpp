@@ -23,6 +23,7 @@
 #include <core/model/spaceobject/SpaceStation.hpp>
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -152,7 +153,7 @@ SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
     control::SpaceStation* spacestation = new control::SpaceStation(descr, model);
     assert(spacestation);
 
-    core::manager::Entity::get().add(spacestation);
+    core::Sessions::get().session()->entity()->add(spacestation);
 
     return spacestation;
 }

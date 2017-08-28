@@ -19,6 +19,7 @@
 #include "SpaceObject.hpp"
 
 #include <world/starsystem.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Processor.hpp>
 
@@ -43,10 +44,10 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descriptor, model::SpaceObject
 void SpaceObject::_init()
 {
     if (!m_starsystem && model()->starsystem() != NONE) {
-        m_starsystem = core::manager::Entity::get().starsystem(model()->starsystem());
+        m_starsystem = core::Sessions::get().session()->entity()->starsystem(model()->starsystem());
     }
     if (!m_parent && model()->parent() != NONE) {
-        m_parent = core::manager::Entity::get().spaceObject(model()->parent());
+        m_parent = core::Sessions::get().session()->entity()->spaceObject(model()->parent());
     }
 }
 

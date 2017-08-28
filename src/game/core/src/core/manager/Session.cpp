@@ -25,13 +25,14 @@
 
 namespace core {
 
-
-Session::Session(manager::Entity* entity, manager::Garbage* garbage)
+Session::Session()
     :
-      m_entity(entity)
-    , m_garbage(garbage)
+      m_entity(new manager::Entity)
+    , m_garbage(new manager::Garbage)
 {}
 
+Session::~Session()
+{}
 
 Sessions&
 Sessions::get()
@@ -56,6 +57,8 @@ void Sessions::activate(int id) {
 }
 
 Session* Sessions::session() const {
+    assert(m_sessions.size()>0);
+    assert(m_active != -1);
     const auto& it = m_sessions.find(m_active);
     return it->second;
 }

@@ -21,6 +21,7 @@
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -38,7 +39,7 @@ Satellite::__genTemplate(descriptor::Satellite* descr)
     control::Satellite* satellite = new control::Satellite(descr, model);
     assert(satellite);
 
-    core::manager::Entity::get().add(satellite);
+    core::Sessions::get().session()->entity()->add(satellite);
     
     return satellite;
 }

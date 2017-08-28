@@ -100,13 +100,6 @@ namespace manager {
 
 IdGenerator Entity::m_idGenerator;
 
-Entity&
-Entity::get()
-{
-    static Entity instance;
-    return instance;
-}
-
 int_t
 Entity::genId() {
     return m_idGenerator.nextId();

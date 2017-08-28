@@ -23,6 +23,7 @@
 #include <core/model/spaceobject/Bullet.hpp>
 #include <core/spaceobject/Bullet.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -59,7 +60,7 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
     control::Bullet* bullet = new control::Bullet(descr, model);
     assert(bullet);
 
-    core::manager::Entity::get().add(bullet);
+    core::Sessions::get().session()->entity()->add(bullet);
 
     return bullet;
 }

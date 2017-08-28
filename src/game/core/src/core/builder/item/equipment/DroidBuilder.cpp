@@ -21,6 +21,7 @@
 #include <core/model/item/equipment/Droid.hpp>
 #include <core/item/equipment/Droid.hpp>
 #include <core/descriptor/item/equipment/Droid.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
@@ -64,7 +65,7 @@ Droid::__genTemplate(descriptor::item::Droid* descr, int ob_id)
 {
     model::item::Droid* model = new model::item::Droid(descr->id(), ob_id);
     control::item::Droid* droid = new control::item::Droid(descr, model);
-    core::manager::Entity::get().add(droid);
+    core::Sessions::get().session()->entity()->add(droid);
     return droid;
 }
 

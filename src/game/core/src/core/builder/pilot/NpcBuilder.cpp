@@ -22,6 +22,7 @@
 #include <core/pilot/Npc.hpp>
 #include <core/descriptor/pilot/Npc.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -68,7 +69,7 @@ Npc::__createTemplate(descriptor::Npc* descr)
     control::Npc* npc = new control::Npc(descr, model);
     assert(npc);
 
-    core::manager::Entity::get().add(npc);
+    core::Sessions::get().session()->entity()->add(npc);
 
     return npc;
 }

@@ -21,7 +21,7 @@
 #include <core/spaceobject/WormHole.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
-
+#include <core/manager/Session.hpp>
 //#include <core/type/MeshType.hpp>
 
 //#include <meti/RandUtils.hpp>
@@ -40,7 +40,7 @@ WormHole::__genTemplate(descriptor::WormHole* descr)
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-    core::manager::Entity::get().add(wormhole);
+    core::Sessions::get().session()->entity()->add(wormhole);
     
     return wormhole;
 } 

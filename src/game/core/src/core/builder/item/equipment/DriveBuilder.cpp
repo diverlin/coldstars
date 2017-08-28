@@ -20,9 +20,12 @@
 #include <core/model/item/equipment/Drive.hpp>
 #include <core/item/equipment/Drive.hpp>
 #include <core/descriptor/item/equipment/Drive.hpp>
-#include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/DescriptorManager.hpp>
+
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
@@ -63,7 +66,7 @@ Drive::__genTemplate(descriptor::item::Drive* descr, int_t ob_id)
 {
     model::item::Drive* model = new model::item::Drive(descr->id(), ob_id);
     control::item::Drive* drive = new control::item::Drive(descr, model);
-    core::manager::Entity::get().add(drive);
+    core::Sessions::get().session()->entity()->add(drive);
     return drive;
 }
 

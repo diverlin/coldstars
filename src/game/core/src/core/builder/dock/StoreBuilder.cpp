@@ -40,6 +40,7 @@
 
 #include <common/constants.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -76,7 +77,7 @@ Store::__createTemplate(descriptor::Store* descr)
     control::Store* store = new control::Store(descr, model);
     assert(store);
 
-    core::manager::Entity::get().add(store);
+    core::Sessions::get().session()->entity()->add(store);
 
     return store;
 }

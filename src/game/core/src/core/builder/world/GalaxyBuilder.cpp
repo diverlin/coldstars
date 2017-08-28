@@ -26,6 +26,7 @@
 #include <core/world/Sector.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -60,7 +61,7 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
     control::Galaxy* galaxy = new control::Galaxy(descr, model);
     assert(galaxy);
 
-    core::manager::Entity::get().add(galaxy);
+    core::Sessions::get().session()->entity()->add(galaxy);
 
     return galaxy;
 }
