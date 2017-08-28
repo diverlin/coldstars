@@ -45,26 +45,15 @@ public:
 
 struct Visible
 {
-    Visible()
-        :
-          asteroid(false),
-          container(false),
-          pickable_container(false),
-          ranger(false),
-          warrior(false),
-          trader(false),
-          pirat(false),
-          diplomat(false) {}
-    
-    bool asteroid;
-    bool container;
-    bool pickable_container;
+    bool asteroid = false;
+    bool container = false;
+    bool pickable_container = false;
 
-    bool ranger;
-    bool warrior;
-    bool trader;
-    bool pirat;
-    bool diplomat;
+    bool ranger = false;
+    bool warrior = false;
+    bool trader = false;
+    bool pirat = false;
+    bool diplomat = false;
 };
 
 
