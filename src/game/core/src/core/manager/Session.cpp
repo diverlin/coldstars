@@ -16,46 +16,49 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Garbage.hpp"
+#include "Session.hpp"
 
-#include <core/Base.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
 
 #include <ceti/Logger.hpp>
 
 namespace core {
-namespace manager {
 
-Garbage&
-Garbage::get()
+
+Session::Session(manager::Entity* entity, manager::Garbage* garbage)
+    :
+      m_entity(entity)
+    , m_garbage(garbage)
+{}
+
+
+Sessions&
+Sessions::get()
 {
-    static Garbage instance;
+    static Sessions instance;
     return instance;
 }
 
-void Garbage::add(control::Base* ob)
+void Sessions::add(int id, Session* session)
 {
-    if (ob->isAlive()) {
-        // executaed for children
-        ob->die();
+    if (m_sessions.find(id) != m_sessions.end()) {
+        ceti::abort("attempt to registry id =" + std::to_string(id) + " which already exists");
     }
-
-    if (m_entities.find(ob->id()) != m_entities.end()) {
-        ceti::abort("attempt to registry id =" + std::to_string(ob->id()) + " which already exists");
-    }
-    m_entities.insert(std::make_pair(ob->id(), ob));
+    m_sessions.insert(std::make_pair(id, session));
 }
 
-void Garbage::erase()
-{
-    for(const auto& pair: m_entities) {
-        control::Base* ob = pair.second;
-        Entity::get().remove(ob);
-        delete ob->model();
-        delete ob;
+void Sessions::activate(int id) {
+    if (m_sessions.find(id) == m_sessions.end()) {
+        ceti::abort("attempt to activate id =" + std::to_string(id) + " which doesn't exists");
     }
-    m_entities.clear();
+    m_active = id;
 }
 
-} // namespace manager
+Session* Sessions::session() const {
+    const auto& it = m_sessions.find(m_active);
+    return it->second;
+}
+
+
 } // core
