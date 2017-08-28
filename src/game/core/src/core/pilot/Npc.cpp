@@ -72,7 +72,11 @@ namespace control {
 Npc::Npc(descriptor::Npc* descr, model::Npc* model)
     :
       Base(descr, model)
+    , m_descriptor_npc(descr)
+    , m_model_npc(model)
 { 
+    assert(model);
+    assert(descr);
 //    setTypeId(entity::Type::NPC);
 //    setSubTypeId(group);
 //    setSubSubTypeId(subgroup);
@@ -89,8 +93,8 @@ bool Npc::isAgressor(int_t id) const
     return model()->agressors().contains(id);
 }
 
-model::StarSystem*
-Npc::starsystem() const {     assert(false); /*return m_vehicle->starsystem();*/ }
+StarSystem*
+Npc::starsystem() const {    return m_vehicle->starsystem(); }
 
 void Npc::cloneMacroTaskFrom(model::Npc* npc)
 {
@@ -98,10 +102,10 @@ void Npc::cloneMacroTaskFrom(model::Npc* npc)
     //m_stateMachine.setCurrentMacroTask(npc->stateMachine().macroTaskManager().task());
 }
 
-bool Npc::withdrawCredits(unsigned long int amount)
+bool Npc::withdrawCredits(int_t amount)
 {
-    if (m_credits > amount) {
-        m_credits -= amount;
+    if (int_t balance = model()->credits() > amount) {
+        model()->setCredits(balance - amount);
         return true;
     }    
     return false;
@@ -230,14 +234,13 @@ void Npc::__scenarioFireAsteroid()
 //    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
 }
 
-model::Planet*
+Planet*
 Npc::planetForDocking()
-{
-    assert(false);
-    //return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
+{    
+    return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
 }
 
-model::StarSystem*
+StarSystem*
 Npc::closestStarSystem(int requested_condition_id)
 {
     assert(false);
@@ -249,7 +252,7 @@ Npc::closestStarSystem(int requested_condition_id)
 
 
 //// *********** SCANNING ***********
-bool Npc::isAbleToScan(model::Vehicle* vehicle)
+bool Npc::isAbleToScan(Vehicle* vehicle)
 {
     assert(false);
 //    if (this->m_vehicle->id() == vehicle->id())    // selfscan is possible all time

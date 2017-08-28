@@ -37,15 +37,11 @@ class Npc;
 
 class BaseAiModel;
 
-namespace model {
-class Vehicle;
-class Planet;
-class StarSystem;
-} // namespace model
-
 namespace control {
 class Vehicle;
 class SpaceObject;
+class StarSystem;
+class Planet;
 } // namespace control
 
 class Player;
@@ -67,6 +63,8 @@ public:
     //    void setScanTarget(Vehicle* target)    { m_scanTarget = target; }
     //    void setPlayer(Player* player) { m_player = player; }
     //    void setVehicle(Vehicle* vehicle)         { m_vehicle = vehicle; }
+
+    void setCredits(int_t credits) { m_credits = credits; }
 
     int_t credits() const { return m_credits; }
 
@@ -127,10 +125,10 @@ public:
 
     StateMachine& stateMachine() { return m_stateMachine; }
 
-    model::StarSystem* starsystem() const;
+    StarSystem* starsystem() const;
 
-    void increaseCredits(unsigned long int credits) { m_credits += credits; }
-    bool withdrawCredits(unsigned long int);
+    void increaseCredits(int credits) { model()->setCredits(model()->credits() + credits); }
+    bool withdrawCredits(int_t);
     void addExpirience(int, bool);
 
     void cloneMacroTaskFrom(model::Npc*);
@@ -144,13 +142,13 @@ public:
     //
 
     //// scanning
-    bool isAbleToScan(model::Vehicle*);
+    bool isAbleToScan(Vehicle*);
     bool scanProceeding();
     void resetScanTarget();
     //// scanning
 
-    model::Planet* planetForDocking();
-    model::StarSystem* closestStarSystem(int);
+    Planet* planetForDocking();
+    StarSystem* closestStarSystem(int);
 
     void renderInfo(const glm::vec2&);
 
@@ -166,11 +164,11 @@ public:
     bool isAgressor(int_t) const;
 
 private:
+    descriptor::Npc* m_descriptor_npc = nullptr;
     model::Npc* m_model_npc = nullptr;
 
     //bool m_isAlive = true;
     int_t m_race = NONE;
-    unsigned long int m_credits = 0;
 
     Player* m_player = nullptr;
     Vehicle* m_vehicle = nullptr;
