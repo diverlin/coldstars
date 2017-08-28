@@ -35,7 +35,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = Vehicle::info();
-        result.add("Ship descriptor");
+        result.add("descriptor::Ship");
         return result;
     }
 
