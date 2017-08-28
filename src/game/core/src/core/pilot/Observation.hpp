@@ -65,6 +65,7 @@ public:
 
     const Visible& visible() const { return m_see; }
 
+    control::Asteroid* nearestAsteroid() const;
     control::Container* nearestPickableContainer() const;
     control::Container* randPickableContainer() const;
     control::StarSystem* nearestStarSystem(int) const;

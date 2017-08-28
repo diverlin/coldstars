@@ -847,7 +847,7 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
-    weapons().deactivateWeapons();
+    weapons().deactivate();
 
     m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT;
     assert(false);
@@ -857,7 +857,7 @@ void Vehicle::HyperJumpEvent(model::StarSystem* starsystem)
 void
 Vehicle::resetTargets()
 {
-    weapons().deactivateWeapons();
+    weapons().deactivate();
     navigator().resetTarget();
 }
 
