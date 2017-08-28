@@ -19,11 +19,8 @@
 
 # pragma once
 
+#include <memory>
 #include <map>
-
-namespace control {
-class Base;
-}
 
 namespace core {
 
@@ -35,14 +32,14 @@ class Garbage;
 class Session {
 public:
     Session();
-    ~Session();
+    ~Session()=default;
 
-    manager::Entity* entity()  const { return m_entity; }
-    manager::Garbage* garbage() const { return m_garbage; }
+    std::shared_ptr<manager::Entity> entity() const { return m_entity; }
+    std::shared_ptr<manager::Garbage> garbage() const { return m_garbage; }
 
 private:
-    manager::Entity* m_entity = nullptr;
-    manager::Garbage* m_garbage = nullptr;
+    std::shared_ptr<manager::Entity> m_entity;
+    std::shared_ptr<manager::Garbage> m_garbage;
 };
 
 class Sessions

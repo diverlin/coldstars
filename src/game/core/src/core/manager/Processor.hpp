@@ -21,6 +21,7 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
 #include <vector>
 
 namespace descriptor {
@@ -67,7 +68,7 @@ public:
 
 private:
     core::comm::TelegrammHub& m_telegrammHub;
-    manager::Entity* m_entitiesManager = nullptr;
+    std::shared_ptr<manager::Entity> m_entitiesManager;
     descriptor::Manager& m_descriptorManager;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);
