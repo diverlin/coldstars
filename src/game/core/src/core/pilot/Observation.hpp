@@ -23,18 +23,14 @@
 
 #include <vector>
 
-namespace model {
-class StarSystem;
-} // namespace model
-
 namespace control {
 class Npc; 
-} // namespace model
-
 class Galaxy;
+class StarSystem;
 class Asteroid;
 class Container;
 class Vehicle;
+} // namespace model
 
 template <class TYPE>
 class Pair
@@ -78,20 +74,20 @@ public:
     Observation();
     ~Observation();
 
-    const Visible& visible() const { return see; }
+    const Visible& visible() const { return m_see; }
 
     void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; }
     void ObserveAllInSpace();
 
-    void FindEchievableStarSystems(Galaxy*);
-    Container* GetClosestPickableContainer() const;
-    Container* GetRandomPickableContainer() const;
-    model::StarSystem* GetClosestStarSystem(int) const;
-    Vehicle* GetClosestVisibleVehicle(const std::vector<race::Type>&) const;
-    Vehicle* GetRandVisibleVehicle(const std::vector<race::Type>&) const;
+    void FindEchievableStarSystems(control::Galaxy*);
+    control::Container* GetClosestPickableContainer() const;
+    control::Container* GetRandomPickableContainer() const;
+    control::StarSystem* GetClosestStarSystem(int) const;
+    control::Vehicle* GetClosestVisibleVehicle(const std::vector<race::Type>&) const;
+    control::Vehicle* GetRandVisibleVehicle(const std::vector<race::Type>&) const;
 
     void FindVisibleAsteroidsInSpaceInStatic();
-    void FindVisibleContainersInSpaceInStatic();
+    void findVisibleContainersInSpaceInStatic();
     void FindVisibleVehiclesInSpaceInStatic();
 
     template <typename OBSERVED_DATA_TYPE>
@@ -100,14 +96,14 @@ public:
 private:
     control::Npc* npc_owner;
 
-    std::vector< Pair<model::StarSystem*> > visible_STARSYSTEM_pair_vec;
-    std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;
-    std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec;
-    std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;
+    std::vector< Pair<control::StarSystem*> > visible_STARSYSTEM_pair_vec;
+    std::vector< Pair<control::Container*> > visible_CONTAINER_pair_vec;
+    std::vector< Pair<control::Container*> > visible_pickable_CONTAINER_pair_vec;
+    std::vector< Pair<control::Asteroid*> > visible_ASTEROID_pair_vec;
 
-    std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;
+    std::vector< Pair<control::Vehicle*> > visible_VEHICLE_pair_vec;
 
-    Visible see;
+    Visible m_see;
 
     friend class Npc;
 };
