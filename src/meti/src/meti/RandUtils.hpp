@@ -55,7 +55,7 @@ const T& get_element_or_die(const std::vector<T>& v) {
 }
 
 template<typename T>
-const T& get_element(const std::vector<T>& v) {
+const T& get_pointer(const std::vector<T>& v) {
     if (!v.empty()) {
         return v[gen_int(v.size()-1)];
     }

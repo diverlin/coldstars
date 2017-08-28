@@ -67,6 +67,7 @@ public:
     void setCredits(int_t credits) { m_credits = credits; }
 
     int_t credits() const { return m_credits; }
+    race::Type race() const { return m_race; }
 
     void addAgressor(int_t id) { if (_isWritable()) m_agressors.add(id); }
     void removeAgressor(int_t id) { if (_isWritable()) m_agressors.remove(id); }
@@ -75,7 +76,7 @@ public:
     ceti::pack<int_t> agressors() const { return m_agressors; }
 
 private:
-    int_t m_race = NONE;
+    race::Type m_race = race::Type::NONE;
     int_t m_credits;
 
     int_t m_player = NONE;
@@ -114,6 +115,11 @@ class Npc : public Base
 public:
     Npc(descriptor::Npc*, model::Npc*);
     virtual ~Npc();
+
+
+    // model interface
+    race::Type race() const;
+    //
 
     virtual void putChildrenToGarbage() const {}
 
