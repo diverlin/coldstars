@@ -31,9 +31,6 @@ Session::Session()
     , m_garbage(new manager::Garbage)
 {}
 
-Session::~Session()
-{}
-
 Sessions&
 Sessions::get()
 {

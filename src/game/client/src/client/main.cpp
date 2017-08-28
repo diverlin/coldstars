@@ -76,6 +76,7 @@
 #include <core/communication/TelegrammHub.hpp>
 #include <client/communication/TelegrammManager.hpp>
 
+#include <memory>
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
@@ -105,8 +106,41 @@ Player* createPlayer() {
 //    run_scenario->Init(player);
 //}
 
+namespace {
+class base {
+public:
+    base(int i):
+    i(i)
+    {
+        std::cout<<"create"<<i<<std::endl;
+    }
+    ~base() {
+        std::cout<<"destroy"<<i<<std::endl;
+    }
+private:
+    int i=0;
+};
+
+
+void bench() {
+    {
+    std::shared_ptr<base> z1(new base(1));
+    std::shared_ptr<base> z2(new base(2));
+    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
+    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
+    //z1.reset();
+    z2 = z1;
+    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
+    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
+    }
+    exit(1);
+}
+
+} // namespace
 int main()
 {
+    bench();
+
     client::global::get().init();
 
     int server_id = 0;
