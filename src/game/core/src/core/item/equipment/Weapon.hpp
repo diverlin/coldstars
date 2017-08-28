@@ -45,24 +45,13 @@ public:
     Weapon(descriptor::item::Weapon*, model::item::Weapon*);
     virtual ~Weapon() = default;
 
-    void setTarget(control::SpaceObject* target, slot::Item* subtarget = nullptr);
-
-    control::SpaceObject* target() const { return m_target; }
-    slot::Item* subtarget() const { return m_subtarget; }
-
     virtual void updateProperties();
 
     virtual bool checkAmmo() const = 0;
-    virtual void fire(float rate=1.0f) = 0;
+    virtual void fire(control::SpaceObject*, float rate=1.0f) = 0;
 
     int radius() const;
     int damage() const;
-
-    bool validateSubTarget() const;
-
-    void reset();
-    void resetTarget();
-    void resetSubTarget();
 
 public:
     descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
@@ -74,11 +63,6 @@ private:
 
     int m_damage_add = 0;
     int m_radius_add = 0;
-
-    control::SpaceObject* m_target = nullptr;
-    slot::Item* m_subtarget = nullptr;
-
-//    int fire_atOnce;
 
     void virtual addUniqueInfo();
 

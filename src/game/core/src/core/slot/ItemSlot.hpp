@@ -19,8 +19,10 @@
 
 #pragma once
 
-#include <core/type/StatusType.hpp>
 #include <core/slot/BaseSlot.hpp>
+#include <core/slot/Weapon.hpp>
+
+#include <core/type/StatusType.hpp>
 #include <core/item/equipment/Weapon.hpp>
 
 #include <ceti/type/IdType.hpp>
@@ -71,7 +73,7 @@ class GoodsPack;
 
 namespace slot {
 
-class Item : public Base
+class Item : public Base, public Weapon
 {
 public:
     Item(entity::Type);

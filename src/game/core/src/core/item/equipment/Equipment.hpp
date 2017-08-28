@@ -45,10 +45,6 @@ protected:
 #endif
 
     virtual void AddCommonInfo();
-
-//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-//    void LoadData(const boost::property_tree::ptree&);
-//    void ResolveData();
 };
 
 } // namespace control

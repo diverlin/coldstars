@@ -42,7 +42,7 @@ public:
     virtual ~Lazer() = default;
 
     bool checkAmmo() const override final;
-    void fire(float rate=1.0f) override final;
+    void fire(control::SpaceObject*, float rate=1.0f) override final;
 
     descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
     model::item::Lazer* model() const { return m_model_lazer; }

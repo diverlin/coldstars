@@ -143,7 +143,7 @@ void Item::release()
     }
 
     if (type() == entity::Type::WEAPON_SLOT) {
-        weapon()->reset();
+        reset();
     }
 
     // make it oop

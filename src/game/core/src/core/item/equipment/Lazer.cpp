@@ -50,17 +50,17 @@ bool Lazer::checkAmmo() const
     return true;
 }
 
-void Lazer::fire(float rate)
+void Lazer::fire(control::SpaceObject* target, float rate)
 {
-    assert(target());
-    if (subtarget()) {
-        if (subtarget()->item()) {
-            subtarget()->item()->doLock(1);
-            rate /= 3;
-        }
-    }
+    assert(target);
+//    if (subtarget()) {
+//        if (subtarget()->item()) {
+//            subtarget()->item()->doLock(1);
+//            rate /= 3;
+//        }
+//    }
 
-    target()->hit(damage() * rate);
+    target->hit(damage() * rate);
     deteriorationEvent();
 }
 
