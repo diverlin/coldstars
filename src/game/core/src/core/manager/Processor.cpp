@@ -162,11 +162,11 @@ void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
         return;
     }
 
-    control::Vehicle* vehicle = meti::rand::get_element(starsystem->vehicles());
+    control::Vehicle* vehicle = meti::rand::get_pointer(starsystem->vehicles());
     if (starsystem->asteroids().empty()) { // ugly workaround
         return;
     }
-    control::SpaceObject* target = meti::rand::get_element(starsystem->asteroids());
+    control::SpaceObject* target = meti::rand::get_pointer(starsystem->asteroids());
     if (!vehicle || !target) {
         return;
     }
@@ -178,7 +178,7 @@ void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
     if (rockets.empty()) { //ugly workaround
         return;
     }
-    control::item::Weapon* rocket = meti::rand::get_element(rockets);
+    control::item::Weapon* rocket = meti::rand::get_pointer(rockets);
     if (!rocket) {
         return;
     }

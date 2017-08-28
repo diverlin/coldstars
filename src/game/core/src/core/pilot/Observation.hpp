@@ -71,41 +71,38 @@ struct Visible
 class Observation 
 {
 public:
-    Observation();
-    ~Observation();
+    Observation(control::Npc*);
+    ~Observation() = default;
 
     const Visible& visible() const { return m_see; }
 
-    void SetNpcOwner(control::Npc* npc_owner) { this->npc_owner = npc_owner; }
-    void ObserveAllInSpace();
+    control::Container* nearestPickableContainer() const;
+    control::Container* randPickableContainer() const;
+    control::StarSystem* nearestStarSystem(int) const;
+    control::Vehicle* nearestVehicle(const std::vector<race::Type>&) const;
+    control::Vehicle* randVehicle(const std::vector<race::Type>&) const;
 
-    void FindEchievableStarSystems(control::Galaxy*);
-    control::Container* GetClosestPickableContainer() const;
-    control::Container* GetRandomPickableContainer() const;
-    control::StarSystem* GetClosestStarSystem(int) const;
-    control::Vehicle* GetClosestVisibleVehicle(const std::vector<race::Type>&) const;
-    control::Vehicle* GetRandVisibleVehicle(const std::vector<race::Type>&) const;
-
-    void FindVisibleAsteroidsInSpaceInStatic();
-    void findVisibleContainersInSpaceInStatic();
-    void FindVisibleVehiclesInSpaceInStatic();
-
-    template <typename OBSERVED_DATA_TYPE>
-    void Sort(std::vector<OBSERVED_DATA_TYPE>&);
+    void update();
 
 private:
-    control::Npc* npc_owner;
+    control::Npc* m_owner = nullptr;
 
-    std::vector< Pair<control::StarSystem*> > visible_STARSYSTEM_pair_vec;
-    std::vector< Pair<control::Container*> > visible_CONTAINER_pair_vec;
-    std::vector< Pair<control::Container*> > visible_pickable_CONTAINER_pair_vec;
-    std::vector< Pair<control::Asteroid*> > visible_ASTEROID_pair_vec;
+    std::vector<Pair<control::StarSystem*>> m_starsystem_pairs;
+    std::vector<Pair<control::Container*>> m_container_pairs;
+    std::vector<Pair<control::Container*>> m_pickable_container_pairs;
+    std::vector<Pair<control::Asteroid*>> m_asteroid_pairs;
 
-    std::vector< Pair<control::Vehicle*> > visible_VEHICLE_pair_vec;
+    std::vector<Pair<control::Vehicle*>> m_vehicle_pairs;
 
     Visible m_see;
 
-    friend class Npc;
+    template <typename OBSERVED_DATA_TYPE>
+    void __sort(std::vector<OBSERVED_DATA_TYPE>&);
+
+    void __findEchievableStarSystems(control::Galaxy*);
+    void __findVisibleAsteroids();
+    void __findVisibleContainers();
+    void __findVisibleVehicles();
 };
 
 

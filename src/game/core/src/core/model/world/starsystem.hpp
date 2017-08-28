@@ -96,8 +96,8 @@ public:
     void setSector(int_t sector)  { m_sector = sector; }
     void setPosition(const meti::vec3& position) { m_position = position; }
 
-    int conditionId()     const { return m_status; }
-    int raceId()          const { return m_race; }
+    int status() const { return m_status; }
+    int race() const { return m_race; }
     int conquerorRaceId() const { return m_invader; }
 
     int_t sector() const { return m_sector; }

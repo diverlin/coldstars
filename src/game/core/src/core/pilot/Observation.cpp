@@ -17,85 +17,86 @@
 */
 
 #include "Observation.hpp"
-#include "../world/galaxy.hpp"
-//#include <math/rand.hpp>
-#include <meti/RandUtils.hpp>
+
 #include <core/pilot/Npc.hpp>
-#include "../world/starsystem.hpp"
+
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 
 #include <core/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Container.hpp>
 
-Observation::Observation():npc_owner(nullptr)
+#include <meti/RandUtils.hpp>
+
+
+Observation::Observation(control::Npc* owner)
+    :
+      m_owner(owner)
 {}
 
-Observation::~Observation()
-{}  
 
-
-void Observation::FindEchievableStarSystems(control::Galaxy* galaxy)
+void Observation::__findEchievableStarSystems(control::Galaxy* galaxy)
 {
-    //visible_STARSYSTEM_pair_vec.clear();
+    m_starsystem_pairs.clear();
 
-    //for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
-    //{
-    //const glm::vec3& starsystem_pos = npc_owner->vehicle()->starsystem()->center();
-    //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->position());
-    ////if (dist < npc_owner->getShip()->propetries.hyper)
-    //{
-    //visible_STARSYSTEM_pair_vec.push_back( Pair<Starsystem*>(galaxy->STARSYSTEM_vec[i], dist) );
-    //}
-    //}
+    for (control::Sector* sector: galaxy->sectors()) {
+        for (control::StarSystem* starsystem: sector->starSystems()) {
+            const glm::vec3& starsystem_pos = m_owner->vehicle()->starsystem()->position();
+            float dist = meti::distance(starsystem_pos, starsystem->position());
+            if (dist < m_owner->vehicle()->properties().hyper) {
+                m_starsystem_pairs.push_back( Pair<control::StarSystem*>(starsystem, dist) );
+            }
+        }
+    }
 
-    //Sort(&visible_STARSYSTEM_vec);
+    __sort(m_starsystem_pairs);
 }
 
 control::Container*
-Observation::GetClosestPickableContainer() const
+Observation::nearestPickableContainer() const
 {
-    if (!visible_pickable_CONTAINER_pair_vec.empty()) {
-        return visible_pickable_CONTAINER_pair_vec.front().object;
+    if (!m_pickable_container_pairs.empty()) {
+        return m_pickable_container_pairs.front().object;
     }
     return nullptr;
 }
 
 control::Container*
-Observation::GetRandomPickableContainer() const
+Observation::randPickableContainer() const
 {
-    if (!visible_pickable_CONTAINER_pair_vec.empty()) {
-        int rand_index = meti::rand::gen_int(visible_pickable_CONTAINER_pair_vec.size()-1);
-        return visible_pickable_CONTAINER_pair_vec[rand_index].object;
+    if (!m_pickable_container_pairs.empty()) {
+        unsigned long int rand_index = meti::rand::gen_int(m_pickable_container_pairs.size()-1);
+        return m_pickable_container_pairs[rand_index].object;
     }
 
     return nullptr;
 }
 
 control::StarSystem*
-Observation::GetClosestStarSystem(int requested_consdition_id) const
+Observation::nearestStarSystem(int requested_consdition_id) const
 {
-    control::StarSystem* _target_starsystem = nullptr;
-    assert(false);
-//    for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++) {
-//        if (visible_STARSYSTEM_pair_vec[i].object->conditionId() == requested_consdition_id) {
-//            _target_starsystem = visible_STARSYSTEM_pair_vec[i].object;
-//            break;
-//        }
-//    }
+    for (const auto& pair: m_starsystem_pairs) {
+        control::StarSystem* starsystem = pair.object;
+        if (starsystem->conditionId() == requested_consdition_id) {
+            return starsystem;
+        }
+    }
 
-    return _target_starsystem;
+    return nullptr;
 }        
 
 
 control::Vehicle*
-Observation::GetClosestVisibleVehicle(const std::vector<race::Type>& races) const
+Observation::nearestVehicle(const std::vector<race::Type>& races) const
 {
     for (const race::Type& race: races) {
-        for (auto pair: visible_VEHICLE_pair_vec) {
-            assert(false);
-//            if (race == pair.object->npc()->raceId()) {
-//                return pair.object;
-//            }
+        for (const auto& pair: m_vehicle_pairs) {
+            control::Vehicle* vehicle = pair.object;
+            if (race == vehicle->npc()->race()) {
+                return vehicle;
+            }
         }
     }
 
@@ -103,92 +104,81 @@ Observation::GetClosestVisibleVehicle(const std::vector<race::Type>& races) cons
 }
 
 control::Vehicle*
-Observation::GetRandVisibleVehicle(const std::vector<race::Type>& races) const
+Observation::randVehicle(const std::vector<race::Type>& races) const
 {
     std::vector<control::Vehicle*> vehicles;
     for (const race::Type& race: races) {
-        for (auto pair: visible_VEHICLE_pair_vec) {
-            assert(false);
-//            if (race == pair.object->npc()->raceId()) {
-//                vehicles.push_back(pair.object);
-//            }
+        for (auto pair: m_vehicle_pairs) {
+            control::Vehicle* vehicle = pair.object;
+            if (race == vehicle->npc()->race()) {
+                vehicles.push_back(vehicle);
+            }
         }
-    }
-    
-    if (vehicles.size()) {
-        return meti::rand::get_element_or_die(vehicles);
-    }
+    }    
 
-    return nullptr;
+    return meti::rand::get_pointer(vehicles);
 }
 
-void Observation::ObserveAllInSpace()
+void Observation::update()
 {
-    FindVisibleAsteroidsInSpaceInStatic();
-    findVisibleContainersInSpaceInStatic();
-    FindVisibleVehiclesInSpaceInStatic();
+    __findVisibleAsteroids();
+    __findVisibleContainers();
+    __findVisibleVehicles();
 }
 
 template <typename OBSERVED_DATA_TYPE>
-void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>& rDataVec)
+void Observation::__sort(std::vector<OBSERVED_DATA_TYPE>& data)
 {
-    for (unsigned int i=0; i<rDataVec.size(); i++)
-    {
-        int i_min = i;
-        float min = rDataVec[i].dist;
+    for (unsigned int i=0; i<data.size(); i++) {
+        unsigned int i_min = i;
+        float min = data[i].dist;
         
-        for (unsigned int j=i; j<rDataVec.size(); j++)
-        {
-            if ( rDataVec[j].dist < min )
-            {
+        for (unsigned int j=i; j<data.size(); j++) {
+            if ( data[j].dist < min ) {
                 i_min = j;
-                min = rDataVec[j].dist;
+                min = data[j].dist;
             }
         }
-        OBSERVED_DATA_TYPE tmp = rDataVec[i];
-        rDataVec[i]            = rDataVec[i_min];
-        rDataVec[i_min]        = tmp;
+        OBSERVED_DATA_TYPE tmp = data[i];
+        data[i] = data[i_min];
+        data[i_min] = tmp;
+        //std::swap(data[i_min], data[i]);
     }
 }
 
 
-void Observation::FindVisibleAsteroidsInSpaceInStatic()
+void Observation::__findVisibleAsteroids()
 {
-    // TODO
-//    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->m_asteroids;
+    m_see.asteroid  = false;
     
-//    see.ASTEROID  = false;
-    
-//    visible_ASTEROID_pair_vec.clear();
+    m_asteroid_pairs.clear();
 
-////    for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-////        float dist = meti::distance(npc_owner->vehicle()->position(), asteroid_vec[i]->position());
-////        if (dist < npc_owner->vehicle()->properties().radar) {
-////            visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
-////            see.ASTEROID = true;
-////        }
-////    }
+    for (control::Asteroid* asteroid: m_owner->starsystem()->asteroids()) {
+        float dist = meti::distance(m_owner->vehicle()->position(), asteroid->position());
+        if (dist < m_owner->vehicle()->properties().radar) {
+            m_asteroid_pairs.push_back( Pair<control::Asteroid*>(asteroid, dist) );
+            m_see.asteroid = true;
+        }
+    }
 
-//    Sort(visible_ASTEROID_pair_vec);
+    __sort(m_asteroid_pairs);
 }
 
-void Observation::findVisibleContainersInSpaceInStatic()
+void Observation::__findVisibleContainers()
 {
-    const std::vector<control::Container*>& containers = npc_owner->starsystem()->containers();
-    
     m_see.container           = false;
     m_see.pickable_container  = false;
 
-    visible_CONTAINER_pair_vec.clear();
-    visible_pickable_CONTAINER_pair_vec.clear();
+    m_container_pairs.clear();
+    m_pickable_container_pairs.clear();
 
-    for (control::Container* container: containers) {
-        float dist = meti::distance(npc_owner->vehicle()->position(), container->position());
-        if (dist < npc_owner->vehicle()->properties().radar) {
-            visible_CONTAINER_pair_vec.push_back( Pair<control::Container*>(container, dist) );
+    for (control::Container* container: m_owner->starsystem()->containers()) {
+        float dist = meti::distance(m_owner->vehicle()->position(), container->position());
+        if (dist < m_owner->vehicle()->properties().radar) {
+            m_container_pairs.push_back( Pair<control::Container*>(container, dist) );
             int container_mass = container->mass();
-            if(container_mass < npc_owner->vehicle()->properties().grab_strength) {
-                visible_pickable_CONTAINER_pair_vec.push_back( Pair<control::Container*>(container, dist) );
+            if(container_mass < m_owner->vehicle()->properties().grab_strength) {
+                m_pickable_container_pairs.push_back( Pair<control::Container*>(container, dist) );
                 m_see.pickable_container = true;
             }
             m_see.container = true;
@@ -196,30 +186,24 @@ void Observation::findVisibleContainersInSpaceInStatic()
     }
 }
 
-void Observation::FindVisibleVehiclesInSpaceInStatic()
+void Observation::__findVisibleVehicles()
 {
-    assert(false);
-//    const std::vector<control::Vehicle*>& vehicle_vec = npc_owner->starsystem()->m_vehicles;
+    m_see.ranger  = false;
+    m_see.warrior = false;
+    m_see.trader = false;
+    m_see.pirat = false;
+    m_see.diplomat = false;
 
-//    see.RANGER  = false;
-//    see.WARRIOR = false;
-//    see.TRADER = false;
-//    see.PIRAT = false;
-//    see.DIPLOMAT = false;
+    m_vehicle_pairs.clear();
 
-//    visible_VEHICLE_pair_vec.clear();
-
-//    for (unsigned int i=0; i<vehicle_vec.size(); i++)
-//    {
-//        float dist = meti::distance(npc_owner->vehicle()->position(), vehicle_vec[i]->position());
-//        //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->vehicle()->propetries.radius<<std::endl;
-//        if (dist < npc_owner->vehicle()->properties().radar)
-//        {
-//            visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(vehicle_vec[i], dist) );
-//        }
-//    }
-//    Sort(visible_VEHICLE_pair_vec);
-    //std::cout<<"visible_VEHICLE_pair_vec.size = "<<visible_VEHICLE_pair_vec.size()<<std::endl;
+    for (control::Vehicle* vehicle: m_owner->starsystem()->vehicles()) {
+        float dist = meti::distance(m_owner->vehicle()->position(), vehicle->position());
+        //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->vehicle()->propetries.radius<<std::endl;
+        if (dist < m_owner->vehicle()->properties().radar) {
+            m_vehicle_pairs.push_back( Pair<control::Vehicle*>(vehicle, dist) );
+        }
+    }
+    __sort(m_vehicle_pairs);
 }
 
 

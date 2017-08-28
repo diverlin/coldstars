@@ -95,6 +95,10 @@ public:
     StarSystem(descriptor::StarSystem*, model::StarSystem*);
     ~StarSystem();
 
+    // model interface
+    const glm::vec3& position() const;
+    //
+
     virtual void putChildrenToGarbage() const;
 
     void setContainerNumMax(int container_num_max) { m_container_num_max = container_num_max; }

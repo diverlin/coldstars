@@ -74,6 +74,7 @@ Npc::Npc(descriptor::Npc* descr, model::Npc* model)
       Base(descr, model)
     , m_descriptor_npc(descr)
     , m_model_npc(model)
+    , m_observation(Observation(this))
 { 
     assert(model);
     assert(descr);
@@ -81,12 +82,15 @@ Npc::Npc(descriptor::Npc* descr, model::Npc* model)
 //    setSubTypeId(group);
 //    setSubSubTypeId(subgroup);
 
-    m_observation.SetNpcOwner(this);
     m_stateMachine.setNpc(this);
 }
 
 Npc::~Npc() 
 {}  
+
+// model interface
+race::Type Npc::race() const { return model()->race(); }
+//
 
 bool Npc::isAgressor(int_t id) const
 {
@@ -144,7 +148,7 @@ void Npc::updateInSpaceInStatic()
             model()->skills().manageAccordingToStrategy();
         }
 
-        m_observation.ObserveAllInSpace();
+        m_observation.update();
 
 //        if (ai_model) {
 //            ai_model->UpdateInStatic(this);
