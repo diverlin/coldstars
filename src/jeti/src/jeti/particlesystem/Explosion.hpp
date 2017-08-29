@@ -28,7 +28,7 @@ class Explosion : public Base
 { 
 public:
     Explosion(const ParticleSystemConfig&);
-    virtual ~Explosion() override final = default;
+    virtual ~Explosion() override final;
 
     void update() override final;
 };  
