@@ -33,7 +33,7 @@
 #include <item/Item.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
 
@@ -85,7 +85,7 @@ GuiManager::~GuiManager()
     delete slider;  
 }
         
-void GuiManager::SetPlayer(Player* player)
+void GuiManager::SetPlayer(client::Player* player)
 {    
     this->player = player;
 }

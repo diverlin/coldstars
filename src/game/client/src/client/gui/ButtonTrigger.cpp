@@ -18,10 +18,10 @@
 
 
 #include "ButtonTrigger.hpp"
-#include "../pilots/Player.hpp"
+#include <client/pilot/Player.hpp>
     
 /*virtual override final*/
-void ButtonTrigger::OnPressEventMBL(Player* player)
+void ButtonTrigger::OnPressEventMBL(client::Player* player)
 {
     if (m_pAction)
     {
@@ -44,7 +44,7 @@ void ButtonTrigger::OnPressEventMBL(Player* player)
 }
 
 /*virtual override final*/    
-void ButtonTrigger::UpdateUnique(Player* player)
+void ButtonTrigger::UpdateUnique(client::Player* player)
 {
     if ( (GetLocked() == false) and (GetPressed() == false) )
     {

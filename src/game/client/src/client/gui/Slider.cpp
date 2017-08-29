@@ -24,7 +24,7 @@
 #include <client/gui/ButtonSingle.hpp>
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/gui/MouseData.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <client/resources/TextureCollector.hpp>
 #include <jeti/Screen.hpp>
 

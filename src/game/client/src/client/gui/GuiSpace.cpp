@@ -42,7 +42,7 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
 #include <world/starsystem.hpp>
@@ -250,7 +250,7 @@ void GuiSpace::ExitGuiScan()
     //GetGuiElement(gui::type::PLAYER_VEHICLE)->Show();
 }
 
-void GuiSpace::ButtonsAction(Player* player) const
+void GuiSpace::ButtonsAction(client::Player* player) const
 {}
 
 void GuiSpace::Resize(int screen_w, int screen_h)
@@ -268,7 +268,7 @@ void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 }
 
 /* virtual override final */
-void GuiSpace::UpdateUnique(Player* player)
+void GuiSpace::UpdateUnique(client::Player* player)
 { 
     int screen_w = client::global::get().screen().width();
     int screen_h = client::global::get().screen().height();
@@ -325,7 +325,7 @@ void GuiSpace::UpdateUnique(Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique(const jeti::Render&, Player* player) const
+void GuiSpace::RenderUnique(const jeti::Render&, client::Player* player) const
 {
     //if (show_gui_radar == true)  
     //{

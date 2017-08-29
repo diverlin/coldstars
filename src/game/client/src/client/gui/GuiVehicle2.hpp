@@ -30,7 +30,7 @@ class GuiVehicle2 : public BaseGuiElement
         GuiVehicle2();
         ~GuiVehicle2() {}
         
-        virtual void UpdateUnique(Player*) override final;
+        virtual void UpdateUnique(client::Player*) override final;
               
     private:
         Vehicle* m_Vehicle;

@@ -17,13 +17,11 @@
 */
 
 #include <iostream>
-//#include <ceti/descriptor/Collector.hpp>
 
 #include "builder/world/GalaxyBuilder.hpp"
-#include "builder/pilots/PlayerBuilder.hpp"
 #include <common/Config.hpp>
 
-
+#include <core/manager/Processor.hpp>
 #include <core/manager/Session.hpp>
 
 #include <jeti/Mesh.hpp>
@@ -31,6 +29,7 @@
 #include <jeti/Camera.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
+#include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
 
@@ -42,7 +41,7 @@
 
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <core/spaceobject/Planet.hpp>
 #include <core/spaceobject/Vehicle.hpp>
@@ -83,10 +82,6 @@
 //void render(Starsystem* starsystem, glm::vec3& center) {
 
 //}
-
-Player* createPlayer() {
-    return PlayerBuilder::Instance().createNewPlayer();
-}
 
 //{
     //runThreadTest();
@@ -136,50 +131,143 @@ void bench() {
     exit(1);
 }
 
+core::manager::Processor& processor() { return core::manager::Processor::get(); }
+
+enum Machine { server, client };
+
+
+class Server {
+private:
+    control::World* m_world = nullptr;
+    std::vector<core::Player*> m_players;
+
+public:
+    Server()
+    {
+        core::Sessions::get().add(Machine::server, new core::Session);
+
+        __activate();
+
+
+        Data data;
+
+        m_world = new control::World;
+    }
+
+    ~Server()
+    {
+    }
+
+    void update()
+    {
+        __activate();
+        m_world->update();
+    }
+
+    void create_player() {
+        int_t id = core::Sessions::get().session()->entity()->nextId();
+        core::Player* player = new core::Player(id);
+        m_players.push_back(player);
+
+        control::StarSystem* starsystem = m_world->galaxy()->randomSector()->randomStarSystem();
+
+        assert(starsystem->ships().size());
+        control::Npc* npc = starsystem->ships().front()->npc();
+        assert(npc);
+        player->setNpc(npc);
+
+        processor().createPlayer(player);
+    }
+
+private:
+    void __activate() const {
+        core::Sessions::get().activate(Machine::server);
+    }
+};
+
+class Client {
+private:
+    client::Player* m_player = nullptr;
+    jeti::Camera* m_camera = nullptr;
+    view::StarSystem* m_view = nullptr;
+    UserInputInSpace* m_input = nullptr;
+    jeti::Screen* m_screen = nullptr;
+
+public:
+    Client()
+    {
+        core::Sessions::get().add(Machine::client, new core::Session);
+
+        __activate();
+
+        client::global::get().init();
+
+        m_camera = &client::global::get().camera();
+        m_input = &client::global::get().input();
+        m_screen = &client::global::get().screen();
+
+        core::global::get().telegrammHub().add(new client::comm::TelegrammManager());
+
+        m_view = new view::StarSystem(client::global::get().render());
+        client::global::get().setView(m_view);
+    }
+
+    ~Client()
+    {
+    }
+
+    void update() {
+        __activate();
+
+        m_player = client::global::get().player();
+        if (!m_player) {
+            return;
+        }
+
+        m_view->setPlayer(m_player);
+        m_input->update(m_player);
+        m_view->update(m_input->scrollAccel());
+        m_view->render(m_player->npc()->vehicle()->starsystem());
+        m_screen->draw();
+    }
+
+    bool is_running() { return m_input->runSession() && m_screen->window().isOpen(); }
+
+private:
+    void __activate() const {
+        core::Sessions::get().activate(Machine::client);
+    }
+};
+
+
 } // namespace
+
 int main()
 {
-    client::global::get().init();
+    Server server;
+    Client client;
 
-    // client shortcuts
-    UserInputInSpace& input = client::global::get().input();
-    jeti::Render& render = client::global::get().render();
-    jeti::Camera& camera = client::global::get().camera();
-    jeti::Screen& screen = client::global::get().screen();
-    //
-
-    int server_id = 0;
-    int client_id = 1;
-
-    core::Sessions::get().add(server_id, new core::Session);
-    core::Sessions::get().add(client_id, new core::Session);
-    core::Sessions::get().activate(server_id);
-
-    core::global::get().telegrammHub().add(new client::comm::TelegrammManager());
-    Player* player = createPlayer();
-
-    control::World world;
-    view::StarSystem view(render);
-    view.setPlayer(player);
-
-    control::StarSystem* starsystem = world.galaxy()->randomSector()->randomStarSystem();
-
-    assert(starsystem->ships().size());
-    control::Npc* npc =starsystem->ships().front()->npc();
-    assert(npc);
-    player->setNpc(npc);
-
-    client::global::get().setView(&view);
-
-    while(input.runSession() && screen.window().isOpen()) {
-        input.update(player);
-        camera.addSpeed(input.scrollAccel());
-        camera.update();
-
-        world.update();
-        view.render(starsystem);
-        screen.draw();
+    while(client.is_running()) {
+        server.update();
+        client.update();
     }
+    return EXIT_SUCCESS;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
         
@@ -249,6 +337,4 @@ int main()
 //        jeti::checkOpenglErrors(__FILE__,__LINE__);
 //    }
 
-    return EXIT_SUCCESS;
-}
 

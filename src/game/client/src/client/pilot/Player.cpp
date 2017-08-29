@@ -62,7 +62,11 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Player::Player()
+namespace client {
+
+Player::Player(int_t id)
+    :
+      core::Player(id)
 { 
 //    setId(id);
 //    setTypeId(entity::Type::PLAYER);
@@ -823,3 +827,5 @@ void Player::resetStateMachine() const
 {
     //npc->GetStateMachine().ForceReset();
 }    
+
+} // namespace client

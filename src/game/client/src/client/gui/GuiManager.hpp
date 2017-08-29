@@ -34,7 +34,7 @@ class GuiManager
         static GuiManager& Instance();
         ~GuiManager();
         
-        void SetPlayer(Player*);
+        void SetPlayer(client::Player*);
         
         GuiKosmoport& GetGuiKosmoport() { return gui_kosmoport; };
         GuiSpace& GetGuiSpace() { return gui_space; };
@@ -66,7 +66,7 @@ class GuiManager
         
         std::vector<int> command_vec;
         
-        Player* player;
+        client::Player* player;
         
         GuiKosmoport     gui_kosmoport;
         GuiSpace         gui_space;

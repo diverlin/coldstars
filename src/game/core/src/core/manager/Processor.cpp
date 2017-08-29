@@ -21,9 +21,12 @@
 #include <core/world/starsystem.hpp>
 #include <core/common/Global.hpp>
 #include <core/spaceobject/ALL>
+#include <core/pilot/Npc.hpp>
 #include <core/item/equipment/ALL>
 #include <core/world/starsystem.hpp>
 #include <core/descriptor/item/ALL>
+
+#include <core/pilot/Player.hpp>
 
 #include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -31,9 +34,10 @@
 
 #include <core/descriptor/comm/Creation.hpp>
 #include <core/descriptor/comm/Hit.hpp>
+#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+
 #include <core/communication/TelegrammHub.hpp>
 #include <core/communication/TelegrammManager.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 namespace core {
 namespace manager {
@@ -87,14 +91,14 @@ void Processor::death(control::Asteroid* asteroid)
     int containers_num = meti::rand::gen_int(1,3);
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
-        int_t item_id = m_entitiesManager->genId();
+        int_t item_id = m_entitiesManager->nextId();
         int amount = meti::rand::gen_int(3, 100);
         {
         int_t descriptor_id = m_descriptorManager.randGoods()->id();
         descriptor::comm::CreateGoodsPack telegramm_descriptor(item_id, descriptor_id, amount);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
         }
-        int_t container_id = m_entitiesManager->genId();
+        int_t container_id = m_entitiesManager->nextId();
         {
         int_t descriptor_id = m_descriptorManager.randContainer()->id();
         descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
@@ -121,7 +125,7 @@ void Processor::__death(control::Vehicle* vehicle)
 
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
-        int_t container_id = m_entitiesManager->genId();
+        int_t container_id = m_entitiesManager->nextId();
         int_t descriptor_id = m_descriptorManager.randContainer()->id();
         int_t item_id = items[i];
         {
@@ -212,6 +216,12 @@ void Processor::hit(control::SpaceObject* object, int damage)
 {
     descriptor::comm::Hit descriptor(object->id(), object->id(), damage);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
+}
+
+void Processor::createPlayer(core::Player* player)
+{
+    descriptor::comm::CreatePlayer descriptor(player->id(), player->npc()->id());
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PLAYER, descriptor.data()));
 }
 
 

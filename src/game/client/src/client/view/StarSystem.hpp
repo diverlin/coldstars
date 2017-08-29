@@ -28,7 +28,9 @@
 #include <chrono>
 #include <memory>
 
+namespace client {
 class Player;
+} // namespace client
 
 namespace ceti {
 namespace control {
@@ -100,8 +102,10 @@ public:
     StarSystem(jeti::Render&);
     ~StarSystem();
 
-    void setPlayer(Player* player) { m_player = player; }
+    void setPlayer(client::Player* player) { m_player = player; }
     Base* mouseInterraction(const glm::vec3&) const;
+
+    void update(const glm::vec3&);
     void render(control::StarSystem*);
 
     void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);
@@ -141,7 +145,7 @@ private:
     std::vector<Bullet*> m_bullets;
 
     mutable glm::vec3 m_tmpScreenCoord;
-    Player* m_player = nullptr;
+    client::Player* m_player = nullptr;
 
     Cache m_cache;
 

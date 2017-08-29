@@ -101,7 +101,7 @@ namespace manager {
 IdGenerator Entity::m_idGenerator;
 
 int_t
-Entity::genId() {
+Entity::nextId() {
     return m_idGenerator.nextId();
 }
 
@@ -134,9 +134,15 @@ Entity::base(int_t id) const
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
     std::map<int_t, control::Base*>::const_iterator it = m_entities.find(id);
     assert(it->second);
-    // TODO
-    //LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return it->second;
+}
+
+control::Npc*
+Entity::npc(int_t id) const
+{
+    control::Npc* control = static_cast<control::Npc*>(base(id));
+    assert(control);
+    return control;
 }
 
 control::StarSystem*
@@ -327,7 +333,7 @@ Player* Entity::player() const
     assert(false);
 //    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
 //        if (it->second->type() == entity::Type::PLAYER) {
-//            return (Player*)it->second;
+//            return (client::Player*)it->second;
 //        }
 //    }
     return nullptr;

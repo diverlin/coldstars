@@ -17,7 +17,7 @@
 */
 
 #include "GuiVehicle.hpp"
-#include "../pilots/Player.hpp"
+#include <client/pilot/Player.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include <dock/Kosmoport.hpp>
 #include <item/Item.hpp>
@@ -334,7 +334,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 */   
      
 /* virtual override final */
-void GuiVehicle::RenderUnique(const jeti::Render& render, Player* player) const
+void GuiVehicle::RenderUnique(const jeti::Render& render, client::Player* player) const
 {
     //enable_BLEND(); 
     //{

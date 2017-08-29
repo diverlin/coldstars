@@ -16,22 +16,29 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "PlayerBuilder.hpp"
 
-//#include <types/MeshTypes.hpp>
+#include <core/pilot/Player.hpp>
 
-#include <common/common.hpp>
-#include <math/rand.hpp>
-#include <ceti/IdGenerator.hpp>
-#include <ceti/Logger.hpp>
+#include <core/manager/Session.hpp>
+#include <core/manager/EntityManager.hpp>
 
-//#include <client/resources/TextureCollector.hpp>
-//#include <jeti/Material.hpp>
-//#include <client/resources/MeshCollector.hpp>
+namespace builder {
 
-#include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+core::Player*
+Player::gen(int_t id)
+{
+    return __genTemplate(id);
+}
 
-//#include <jeti/animations/AnimationConstantRotation.hpp>
-//#include <jeti/animations/AnimationWiggle.hpp>
+core::Player*
+Player::__genTemplate(int_t id)
+{
+    core::Player* player = new core::Player(id);
+    assert(player);
+
+    return player;
+}
+
+} // namespace builder
 

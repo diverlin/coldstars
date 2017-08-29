@@ -29,6 +29,8 @@ class Player;
 
 namespace control {
 
+class Npc;
+
 class StarSystem;
 class HyperSpace;
 
@@ -85,6 +87,7 @@ public:
     void setHyperSpace(control::HyperSpace* hyperspace) { m_hyperspace = hyperspace; }
 
     control::Base* base(int_t) const;
+    control::Npc* npc(int_t) const;
 
     control::StarSystem* starsystem(int_t id) const;
     control::HyperSpace* hyperspace() const;
@@ -121,7 +124,7 @@ public:
 //    bool updateSaveRequest();
 //    bool updateLoadRequest();
 
-    int_t genId();
+    int_t nextId();
 
 //    void clear();
 

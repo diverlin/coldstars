@@ -30,6 +30,3 @@ private:
     void __generateMaterialDescriptors();
     void __generateGameObjectDescriptors();
 };
-
-
-

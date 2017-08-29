@@ -36,11 +36,11 @@ public:
 
     virtual ~ButtonItemSlot2() override final {};
 
-    virtual void OnPressEventMBL(Player*) override final;
+    virtual void OnPressEventMBL(client::Player*) override final;
     virtual void ResetState() override final;
-    virtual void UpdateUnique(Player*) override final;
+    virtual void UpdateUnique(client::Player*) override final;
 
-    virtual void RenderUnique(const jeti::Render&, Player*) const override final;
+    virtual void RenderUnique(const jeti::Render&, client::Player*) const override final;
 
 private:
 

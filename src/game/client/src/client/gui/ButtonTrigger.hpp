@@ -23,14 +23,14 @@
 class ButtonTrigger : public BaseButton
 {
 public:
-    ButtonTrigger(gui::type group, const std::string& info, void (*pAction)(Player*), jeti::control::Material* textureOb)
+    ButtonTrigger(gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
         :
           BaseButton(gui::type::BUTTON_TRIGGER, group, info, pAction, textureOb) {}
 
-    virtual ~ButtonTrigger() override final {};
+    virtual ~ButtonTrigger() override final {}
 
-    virtual void OnPressEventMBL(Player*) override final;
-    virtual void UpdateUnique(Player*) override final;
+    virtual void OnPressEventMBL(client::Player*) override final;
+    virtual void UpdateUnique(client::Player*) override final;
 
 private:
 };

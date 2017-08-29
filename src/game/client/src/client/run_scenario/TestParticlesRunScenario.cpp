@@ -20,7 +20,7 @@
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
 
@@ -48,7 +48,7 @@
 #include "TestParticlesRunScenario.hpp"
 
 /* virtual */
-void TestParticlesRunScenario::Init(Player* player)
+void TestParticlesRunScenario::Init(client::Player* player)
 {
 //    GalaxyDescription galaxy_description;
 //    galaxy_description.allow_invasion = false;
@@ -106,7 +106,7 @@ void TestParticlesRunScenario::Init(Player* player)
 }
 
 /* virtual */
-void TestParticlesRunScenario::Update_inDynamic(Player* player)
+void TestParticlesRunScenario::Update_inDynamic(client::Player* player)
 {
 //    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
             

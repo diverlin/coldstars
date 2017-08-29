@@ -19,7 +19,9 @@
 #ifndef GUIACTIONS_H
 #define GUIACTIONS_H
 
+namespace client {
 class Player;
+} // namespace client
 
 class GuiActions
 {
@@ -27,9 +29,9 @@ class GuiActions
         GuiActions() {}
         ~GuiActions() {}
 
-        static void GalaxyMapGuiTransition(Player* player);
-        static void SaveEvent(Player* player);
-        static void LoadEvent(Player* player);
+        static void GalaxyMapGuiTransition(client::Player* player);
+        static void SaveEvent(client::Player* player);
+        static void LoadEvent(client::Player* player);
 };
               
 #endif 

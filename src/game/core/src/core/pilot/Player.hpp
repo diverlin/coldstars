@@ -21,28 +21,35 @@
 
 #include <ceti/type/IdType.hpp>
 
-class Player;
+#include <meti/VectorUtils.hpp>
 
-class PlayerBuilder
+namespace control {
+class Npc;
+} // namespace control
+
+namespace core {
+
+class Player
 {
-    public:
-        static PlayerBuilder& Instance();
-        ~PlayerBuilder();
+public:
+    Player(int_t);
+    ~Player();
 
-        Player* GetNewPlayerTemplate(int_t id = NONE) const;
-        Player* createNewPlayer() const;
-                                     
-    private:               
-        PlayerBuilder() {}
-        PlayerBuilder(const PlayerBuilder&) = delete;
-        PlayerBuilder& operator=(const PlayerBuilder&) = delete;
-                         
-        void CreateNewInternals(Player*) const;        
-};  
+    int_t id() const { return m_id; }
+    const meti::vec3& position() const;
+    float radius() const;
+
+    control::Npc* npc() const { return m_npc; }
+
+    void setNpc(control::Npc* npc) { m_npc = npc; }
+
+private:
+    int_t m_id = NONE;
+    control::Npc* m_npc = nullptr;
+};
+
+} // namespace client
 
 
-    
-
-        
 
 

@@ -25,7 +25,9 @@
 #include <map>
 #include <vector>
 
+namespace client {
 class Player;
+} // namespace client
 
 namespace jeti {
 class AnimationEffect2D;
@@ -71,12 +73,12 @@ class BaseGuiElement
         void Show() { m_Show = true; }
         void Hide() { m_Show = false; }
                                 
-        virtual void OnPressEventMBL(Player*) {}
-        virtual void OnPressEventMBR(Player*) {}
+        virtual void OnPressEventMBL(client::Player*) {}
+        virtual void OnPressEventMBR(client::Player*) {}
         virtual void ResetState();
 
-        void Update(Player*);
-        void Render(const jeti::Render&, Player*) const;
+        void Update(client::Player*);
+        void Render(const jeti::Render&, client::Player*) const;
         virtual void RenderInfo(const jeti::Render&) const {};
                 
     protected:
@@ -103,16 +105,16 @@ class BaseGuiElement
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
-        void PressEventMBL_onGuiElement(gui::type, Player*);
+        void PressEventMBL_onGuiElement(gui::type, client::Player*);
         void ResetStateEventOnGuiElement(gui::type);
 
         void UpdateGeometry(const glm::vec2&, const glm::vec2&);    
         
-        virtual void UpdateUnique(Player*);        
-        void UpdateCommon(Player*);
+        virtual void UpdateUnique(client::Player*);
+        void UpdateCommon(client::Player*);
                         
-        virtual void RenderUnique(const jeti::Render&, Player*) const;
-        void RenderCommon(const jeti::Render&, Player*) const;
+        virtual void RenderUnique(const jeti::Render&, client::Player*) const;
+        void RenderCommon(const jeti::Render&, client::Player*) const;
                           
     private: 
         gui::type m_Type_id;

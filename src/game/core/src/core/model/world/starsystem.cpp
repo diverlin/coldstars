@@ -42,7 +42,7 @@
 
 #include <core/spaceobject/ALL>
 
-//#include <client/pilots/Player.hpp>
+//#include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
 //#include <client/effect/DistantNebulaEffect.hpp>

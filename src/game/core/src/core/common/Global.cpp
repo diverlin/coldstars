@@ -27,46 +27,6 @@
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
-#include <builder/dock/KosmoportBuilder.hpp>
-#include <builder/dock/NatureLandBuilder.hpp>
-#include <builder/dock/AngarBuilder.hpp>
-#include <builder/dock/StoreBuilder.hpp>
-#include <builder/dock/ShopBuilder.hpp>
-#include <builder/dock/GovermentBuilder.hpp>
-
-#ifdef USE_ARTEFACTS
-#include <builder/item/artefacts/GravityArtefactBuilder.hpp>
-#include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
-#endif // USE_ARTEFACTS
-
-#ifdef USE_EXTRA_EQUIPMENT
-#include <builder/item/equipment/EnergizerBuilder.hpp>
-#include <builder/item/equipment/FreezerBuilder.hpp>
-#endif // USE_EXTRA_EQUIPMENT
-#include <builder/item/equipment/ProtectorBuilder.hpp>
-#include <builder/item/equipment/RadarBuilder.hpp>
-#include <builder/item/equipment/ScanerBuilder.hpp>
-#include <builder/item/equipment/RocketBuilder.hpp>
-
-#ifdef USE_MODULES
-#include <builder/item/modules/BakModuleBuilder.hpp>
-#include <builder/item/modules/DriveModuleBuilder.hpp>
-#include <builder/item/modules/DroidModuleBuilder.hpp>
-#include <builder/item/modules/GrappleModuleBuilder.hpp>
-#include <builder/item/modules/ProtectorModuleBuilder.hpp>
-#include <builder/item/modules/RadarModuleBuilder.hpp>
-#include <builder/item/modules/ScanerModuleBuilder.hpp>
-#include <builder/item/modules/RocketModuleBuilder.hpp>
-#include <builder/item/modules/LazerModuleBuilder.hpp>
-#endif // USE_MODULES
-
-#include <builder/item/other/BombBuilder.hpp>
-
-#include <core/builder/pilot/NpcBuilder.hpp>
-
-#include <core/builder/spaceobject/WormHoleBuilder.hpp>
-#include <core/builder/spaceobject/ContainerBuilder.hpp>
-#include <core/builder/spaceobject/BulletBuilder.hpp>
 
 namespace core {
 
@@ -85,31 +45,6 @@ global::global()
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
     , m_raceDescriptors(new RaceDescriptors)
-    #ifdef USE_ARTEFACTS
-    , m_gravityArtefactBuilder(new GravityArtefactBuilder)
-    , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
-    #endif // USE_ARTEFACTS
-
-    #ifdef USE_EXTRA_EQUIPMENT
-    , m_energizerBuilder(new item::EnergizerBuilder)
-    , m_freezerBuilder(new item::FreezerBuilder)
-    #endif
-
-    #ifdef USE_MODULES
-    , m_bakModuleBuilder(new BakModuleBuilder)
-    , m_driveModuleBuilder(new DriveModuleBuilder)
-    , m_droidModuleBuilder(new DroidModuleBuilder)
-//    , m_energizerModuleBuilder(new EnergizerModuleBuilder)
-//    , m_freezerModuleBuilder(new FreezerModuleBuilder)
-    , m_grappleModuleBuilder(new GrappleModuleBuilder)
-    , m_protectorModuleBuilder(new ProtectorModuleBuilder)
-    , m_radarModuleBuilder(new RadarModuleBuilder)
-    , m_scanerModuleBuilder(new ScanerModuleBuilder)
-    , m_rocketModuleBuilder(new RocketModuleBuilder)
-    , m_lazerModuleBuilder(new LazerModuleBuilder)
-    #endif // USE_MODULES
-
-    , m_blackHoleBuilder(new builder::WormHole)
 {
 }
 
@@ -120,39 +55,6 @@ global::~global()
     delete m_turnTimer;
     delete m_gameDate;
     delete m_raceDescriptors;
-
-    delete m_kosmoportBuilder;
-    delete m_natureLandBuilder;
-    delete m_angarBuilder;
-    delete m_storeBuilder;
-    delete m_shopBuilder;
-    delete m_govermentBuilder;
-
-#ifdef USE_ARTEFACTS
-    delete m_gravityArtefactBuilder;
-    delete m_protectorArtefactBuilder;
-#endif // USE_ARTEFACTS
-
-#ifdef USE_EXTRA_EQUIPMENT
-    delete m_energizerBuilder;
-    delete m_freezerBuilder;
-#endif // USE_EXTRA_EQUIPMENT
-
-#ifdef USE_MODULES
-    delete m_bakModuleBuilder;
-    delete m_driveModuleBuilder;
-    delete m_droidModuleBuilder;
-    //    delete m_energizerModuleBuilder;
-    //    delete m_freezerModuleBuilder;
-    delete m_grappleModuleBuilder;
-    delete m_protectorModuleBuilder;
-    delete m_radarModuleBuilder;
-    delete m_scanerModuleBuilder;
-    delete m_rocketModuleBuilder;
-    delete m_lazerModuleBuilder;
-#endif // USE_MODULES
-
-    delete m_blackHoleBuilder;
 }
 
 } // namespace core

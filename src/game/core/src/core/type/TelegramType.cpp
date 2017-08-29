@@ -21,48 +21,51 @@
 
 #include <cassert>
 
+namespace core {
+namespace comm {
+
 std::string to_string(core::comm::Telegramm::Type type_id)
 {
     switch (type_id) {
     /** CREATE */
+    case Telegramm::Type::CREATE_PLAYER:  { return "Telegramm::Type::CREATE_STARSYSTEM"; }
     // spaceobjects
-    case core::comm::Telegramm::Type::CREATE_STARSYSTEM:  { return "comm::Message::Type::CREATE_STARSYSTEM"; }
-    case core::comm::Telegramm::Type::CREATE_SHIP:  { return "comm::Message::Type::CREATE_SHIP"; }
-    case core::comm::Telegramm::Type::CREATE_GOODS:  { return "comm::Message::Type::CREATE_GOODS"; }
-    case core::comm::Telegramm::Type::CREATE_CONTAINER:  { return "comm::Message::Type::CREATE_CONTAINER"; }
+    case Telegramm::Type::CREATE_STARSYSTEM:  { return "Telegramm::Type::CREATE_STARSYSTEM"; }
+    case Telegramm::Type::CREATE_SHIP:  { return "Telegramm::Type::CREATE_SHIP"; }
+    case Telegramm::Type::CREATE_GOODS:  { return "Telegramm::Type::CREATE_GOODS"; }
+    case Telegramm::Type::CREATE_CONTAINER:  { return "Telegramm::Type::CREATE_CONTAINER"; }
+    case Telegramm::Type::CREATE_BULLET: { return "Telegramm::Type::CREATE_BULLET"; }
 
     // items
-    case core::comm::Telegramm::Type::CREATE_BAK:  { return "comm::Message::Type::CREATE_BAK"; }
-    case core::comm::Telegramm::Type::CREATE_DRIVE:  { return "comm::Message::Type::CREATE_DRIVE"; }
-    case core::comm::Telegramm::Type::CREATE_DROID:  { return "comm::Message::Type::CREATE_DROID"; }
-    case core::comm::Telegramm::Type::CREATE_GRAPPLE:  { return "comm::Message::Type::CREATE_GRAPPLE"; }
-    case core::comm::Telegramm::Type::CREATE_SCANER:  { return "comm::Message::Type::CREATE_SCANER"; }
-    case core::comm::Telegramm::Type::CREATE_RADAR:  { return "comm::Message::Type::CREATE_RADAR"; }
-    case core::comm::Telegramm::Type::CREATE_PROTECTOR:  { return "comm::Message::Type::CREATE_PROTECTOR"; }
+    case Telegramm::Type::CREATE_BAK:  { return "Telegramm::Type::CREATE_BAK"; }
+    case Telegramm::Type::CREATE_DRIVE:  { return "Telegramm::Type::CREATE_DRIVE"; }
+    case Telegramm::Type::CREATE_DROID:  { return "Telegramm::Type::CREATE_DROID"; }
+    case Telegramm::Type::CREATE_GRAPPLE:  { return "Telegramm::Type::CREATE_GRAPPLE"; }
+    case Telegramm::Type::CREATE_SCANER:  { return "Telegramm::Type::CREATE_SCANER"; }
+    case Telegramm::Type::CREATE_RADAR:  { return "Telegramm::Type::CREATE_RADAR"; }
+    case Telegramm::Type::CREATE_PROTECTOR:  { return "Telegramm::Type::CREATE_PROTECTOR"; }
 
     // effects
-    case core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT:  { return "comm::Message::Type::CREATE_EXPLOSION_EFFECT"; }
+    case Telegramm::Type::CREATE_EXPLOSION_EFFECT:  { return "Telegramm::Type::CREATE_EXPLOSION_EFFECT"; }
 
     /** */
 
     /** TRANSITION */
-    case core::comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_SHIP"; }
-    case core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "comm::Message::Type::STARSYSTEM_ADD_CONTAINER"; }
-    case core::comm::Telegramm::Type::INSERT:  { return "comm::Message::Type::INSERT"; }
-    case core::comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM:  { return "comm::Message::Type::REMOVE_FROM_STARSYSTEM"; }
-    case core::comm::Telegramm::Type::DELETE:  { return "comm::Message::Type::DELETE"; }
+    case Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: { return "Telegramm::Type::STARSYSTEM_ADD_SHIP"; }
+    case Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: { return "Telegramm::Type::STARSYSTEM_ADD_CONTAINER"; }
+    case Telegramm::Type::INSERT:  { return "Telegramm::Type::INSERT"; }
+    case Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM:  { return "Telegramm::Type::REMOVE_FROM_STARSYSTEM"; }
+    case Telegramm::Type::DELETE:  { return "Telegramm::Type::DELETE"; }
     /** */
 
-    case core::comm::Telegramm::Type::HIT:     { return "comm::Message::Type::HIT"; }
+    case Telegramm::Type::HIT:     { return "Telegramm::Type::HIT"; }
 
     // garbage
-    case core::comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "comm::Message::Type::GARBAGE"; }
-
-    case core::comm::Telegramm::Type::CREATE_BULLET: { return "comm::Message::Type::CREATE_BULLET"; }
-
+    case Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "Telegramm::Type::GARBAGE"; }
     }
     assert(false);
-    return "comm::Message::Type::UKNOWN";
+    return "Telegramm::Type::UKNOWN";
 }
 
-
+} // namespace comm
+} // namespace core

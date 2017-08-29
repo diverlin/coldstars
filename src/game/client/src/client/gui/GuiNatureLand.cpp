@@ -23,7 +23,7 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../pilots/Player.hpp"
+#include <client/pilot/Player.hpp>
 #include <math/rand.hpp>
 
 #include <core/pilot/Npc.hpp>

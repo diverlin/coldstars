@@ -45,7 +45,7 @@
 #include <core/spaceobject/Vehicle.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 
 GuiGalaxyMap::GuiGalaxyMap()
@@ -87,7 +87,7 @@ void GuiGalaxyMap::UnbindGalaxy()
 }
         
 /* virtual override final */
-void GuiGalaxyMap::UpdateUnique(Player* player)
+void GuiGalaxyMap::UpdateUnique(client::Player* player)
 {    
 //    const MouseData& data_mouse = player->cursor().mouseData();
     
@@ -140,7 +140,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
 
 
 /* vitual override final */
-void GuiGalaxyMap::RenderUnique(const jeti::Render& render, Player* player) const
+void GuiGalaxyMap::RenderUnique(const jeti::Render& render, client::Player* player) const
 {
     render.drawQuad(textureOb(), GetBox());    
 

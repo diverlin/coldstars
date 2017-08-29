@@ -91,6 +91,38 @@ private:
     }
 };
 
+class CreatePlayer
+{
+public:
+    CreatePlayer(int_t, int_t);
+    CreatePlayer(const std::string& data);
+    CreatePlayer() = default;
+    ~CreatePlayer() = default;
+    std::string data() const;
+
+    int_t player() const { return m_player; }
+    int_t npc() const { return m_npc; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::CreatePlayer:\n";
+        result += std::string(" player = ") + std::to_string(m_player) + "\n";
+        result += std::string(" npc = ") + std::to_string(m_npc) + "\n";
+        return result;
+    }
+
+private:
+    int_t m_player = NONE;
+    int_t m_npc = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_player;
+        ar & m_npc;
+    }
+};
+
 
 class CreateContainer : public Creation
 {

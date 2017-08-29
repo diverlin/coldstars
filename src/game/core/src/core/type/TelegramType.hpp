@@ -23,6 +23,10 @@
 
 #include <string>
 
+namespace core {
+namespace comm {
+
 std::string to_string(core::comm::Telegramm::Type);
 
-
+} // namespace comm
+} // namespace core

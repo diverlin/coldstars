@@ -2,22 +2,12 @@
 
 #include <communication/Telegramm.hpp>
 
-#include <SFML/System/Clock.hpp>
-
-#include <set>
 #include <vector>
 
 namespace core {
 namespace comm {
 
 class TelegrammManager;
-//class Listener {
-//public:
-//    Listener()=default;
-//    ~Listener()=default;
-
-//    void add(const std::vector<Telegramm>& telegramms) {}
-//};
 
 class TelegrammHub
 {

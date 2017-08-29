@@ -19,41 +19,26 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <ceti/type/IdType.hpp>
 
 namespace client {
 class Player;
-} // naemspace client
+} // namespace core
 
-class UserInputInSpace
+namespace builder {
+
+class Player
 {
 public:
-    UserInputInSpace();
-    ~UserInputInSpace();
-
-    bool nextTurnReady() const { return m_nextTurnReady; }
-    bool runSession() const { return m_runSession; }
-
-    void update(client::Player*);
-
-    const glm::vec3& scrollAccel() const { return m_scrollAccel; }
-    const glm::vec3& mouseCliclPos() const { return m_scrollAccel; }
+    static client::Player* gen(int_t);
 
 private:
-    bool m_nextTurnReady = false;
-    bool m_runSession = true;
+    static client::Player* __genTemplate(int_t);
+};  
 
-    float m_scrollStep = 0.0;
-    glm::vec3 m_scrollAccel;
-    glm::vec3 m_mouseClickPos;
+} // namespace builder
 
-    void __reset();
-    
-    void __manageInputsInSpace(client::Player*);
 
-    void __mouseButtonPressed(client::Player*);
 
-    void __manageRealTimeInputsInSpace(client::Player*);
-};
 
 

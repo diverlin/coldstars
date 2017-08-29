@@ -29,7 +29,7 @@
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <client/gui/GuiManager.hpp>
 
 UserInputInSpace::UserInputInSpace()
@@ -42,7 +42,7 @@ UserInputInSpace::UserInputInSpace()
 UserInputInSpace::~UserInputInSpace()
 {}
 
-void UserInputInSpace::update(Player* player)
+void UserInputInSpace::update(client::Player* player)
 {
     UserInput::get().update();
 
@@ -54,7 +54,7 @@ void UserInputInSpace::update(Player* player)
 }
 
 
-void UserInputInSpace::__manageInputsInSpace(Player* player)
+void UserInputInSpace::__manageInputsInSpace(client::Player* player)
 {  
     for (const auto & key_code : UserInput::get().m_keyboardPressedCodes)
     {
@@ -218,7 +218,7 @@ void UserInputInSpace::__manageInputsInSpace(Player* player)
     }
 }
 
-void UserInputInSpace::__mouseButtonPressed(Player* player)
+void UserInputInSpace::__mouseButtonPressed(client::Player* player)
 {
     for (const auto & key_code : UserInput::get().m_mousePressedCodes) {
         switch (key_code) {
@@ -243,7 +243,7 @@ void UserInputInSpace::__reset()
     m_scrollAccel = glm::vec3(0);
 }
 
-void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
+void UserInputInSpace::__manageRealTimeInputsInSpace(client::Player* player)
 { 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         m_scrollAccel.x -= m_scrollStep;

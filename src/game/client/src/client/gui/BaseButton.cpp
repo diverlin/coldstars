@@ -25,7 +25,7 @@
 #include <jeti/Screen.hpp>
 
 
-BaseButton::BaseButton(gui::type type_id, gui::type group, const std::string& info, void (*pAction)(Player*), jeti::control::Material* textureOb)
+BaseButton::BaseButton(gui::type type_id, gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
 :
 BaseGuiElement(type_id, group, info, textureOb),
 m_Alpha(1.0f),
@@ -78,7 +78,7 @@ void BaseButton::RenderInfo(const jeti::Render&) const
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(const jeti::Render& render, Player*) const
+void BaseButton::RenderUnique(const jeti::Render& render, client::Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     

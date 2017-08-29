@@ -29,7 +29,7 @@ class Render;
 class BaseButton : public BaseGuiElement
 {
     public:
-        BaseButton(gui::type, gui::type, const std::string&,void (*pAction)(Player*) = nullptr, jeti::control::Material* textureOb = nullptr);
+        BaseButton(gui::type, gui::type, const std::string&,void (*pAction)(client::Player*) = nullptr, jeti::control::Material* textureOb = nullptr);
         virtual ~BaseButton();  
         
         void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
@@ -42,7 +42,7 @@ class BaseButton : public BaseGuiElement
         virtual void ResetState() override;
         
         virtual void RenderInfo(const jeti::Render&) const override;
-        virtual void RenderUnique(const jeti::Render&, Player*) const override;
+        virtual void RenderUnique(const jeti::Render&, client::Player*) const override;
                        
     protected:          
         float m_Alpha;                        
@@ -50,7 +50,7 @@ class BaseButton : public BaseGuiElement
         jeti::control::Material* m_TextureOb_additional;
         jeti::control::Material* m_TextureOb_mask;
         
-        void (*m_pAction)(Player*);
+        void (*m_pAction)(client::Player*);
         
         void FullShadeOn();
         void ShadeOn();

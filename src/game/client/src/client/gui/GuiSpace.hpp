@@ -44,12 +44,12 @@ class GuiSpace : public BaseGuiElement
         void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
         void UnbindSharedGuis();
         
-        virtual void UpdateUnique(Player*) override final;
+        virtual void UpdateUnique(client::Player*) override final;
                                         
         void Resize(int, int);
-        void ButtonsAction(Player*) const;
+        void ButtonsAction(client::Player*) const;
         
-        virtual void RenderUnique(const jeti::Render&, Player*) const override final;
+        virtual void RenderUnique(const jeti::Render&, client::Player*) const override final;
                 
         void RenderText(const glm::vec2&) const;
         
