@@ -139,8 +139,6 @@ void bench() {
 } // namespace
 int main()
 {
-//    /bench();
-
     client::global::get().init();
 
     // client shortcuts
