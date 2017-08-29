@@ -8,6 +8,8 @@
 
 #include <jeti/particlesystem/Explosion.hpp>
 
+#include <memory>
+
 namespace client {
 namespace comm {
 
@@ -15,7 +17,7 @@ namespace {
 
 bool createExplosionEffectEvent(const core::comm::Telegramm& telegramm) {
     descriptor::comm::effect::Explosion descriptor(telegramm.data());
-    jeti::particlesystem::Explosion* explosion = jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size());
+    std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::global::get().view().add(explosion, descriptor.position());
     return true;
 }

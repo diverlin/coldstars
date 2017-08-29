@@ -30,6 +30,11 @@ Explosion::Explosion(const ParticleSystemConfig& config)
       Base(config)
 {}
 
+Explosion::~Explosion()
+{
+
+}
+
 void Explosion::update()
 {
     for (Particle* particle: _particles()) {

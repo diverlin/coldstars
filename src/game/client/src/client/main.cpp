@@ -139,9 +139,16 @@ void bench() {
 } // namespace
 int main()
 {
-    bench();
+//    /bench();
 
     client::global::get().init();
+
+    // client shortcuts
+    UserInputInSpace& input = client::global::get().input();
+    jeti::Render& render = client::global::get().render();
+    jeti::Camera& camera = client::global::get().camera();
+    jeti::Screen& screen = client::global::get().screen();
+    //
 
     int server_id = 0;
     int client_id = 1;
@@ -150,14 +157,7 @@ int main()
     core::Sessions::get().add(client_id, new core::Session);
     core::Sessions::get().activate(server_id);
 
-    // shortcuts
-    UserInputInSpace& input = client::global::get().input();
-    jeti::Render& render = client::global::get().render();
-    jeti::Camera& camera = client::global::get().camera();
-    jeti::Screen& screen = client::global::get().screen();
     core::global::get().telegrammHub().add(new client::comm::TelegrammManager());
-    //
-
     Player* player = createPlayer();
 
     control::World world;

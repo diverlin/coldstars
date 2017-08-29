@@ -26,6 +26,7 @@
 #include <vector>
 #include <map>
 #include <chrono>
+#include <memory>
 
 class Player;
 
@@ -103,7 +104,7 @@ public:
     Base* mouseInterraction(const glm::vec3&) const;
     void render(control::StarSystem*);
 
-    void add(jeti::particlesystem::Base*, const glm::vec3&);
+    void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);
 
     // effects
 //    void add(jeti::BaseParticleSystem*);
@@ -146,8 +147,8 @@ private:
 
     /// visible effects
 //    std::vector<ShockWaveEffect*> m_shockwaves;
-    std::vector<jeti::particlesystem::Base*> m_particlesystems;
-    std::vector<jeti::particlesystem::Base*> m_visible_particlesystems;
+    std::vector<std::shared_ptr<jeti::particlesystem::Base>> m_particlesystems;
+    std::vector<std::shared_ptr<jeti::particlesystem::Base>> m_visible_particlesystems;
 
     std::vector<::effect::Beam*> m_beams;
     std::vector<::effect::Beam*> m_visible_beams;
@@ -176,7 +177,7 @@ private:
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
     bool __addIfVisible(::effect::Beam*);
-    bool __addIfVisible(jeti::particlesystem::Base*);
+    bool __addIfVisible(std::shared_ptr<jeti::particlesystem::Base>);
     bool __addIfVisible(::effect::Text*);
 
     // debug

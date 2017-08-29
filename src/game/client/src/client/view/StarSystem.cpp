@@ -70,11 +70,6 @@
 #include <client/resources/Utils.hpp>
 #include <client/pilots/Player.hpp>
 
-namespace  {
-std::string join(size_t int1, size_t int2) {
-    return std::string(std::to_string(int1) + " / " + std::to_string(int2));
-}
-} // namespace
 
 namespace view {
 
@@ -93,7 +88,7 @@ StarSystem::~StarSystem()
 {}                                    
 
 void
-StarSystem::add(jeti::particlesystem::Base* ps, const glm::vec3& center)
+StarSystem::add(std::shared_ptr<jeti::particlesystem::Base> ps, const glm::vec3& center)
 {
     ps->setCenter(center);
     m_particlesystems.push_back(ps);
@@ -258,11 +253,9 @@ void StarSystem::__clear()
     //
 
     // clear effects
-    for(std::vector<jeti::particlesystem::Base*>::iterator it=m_particlesystems.begin(); it < m_particlesystems.end(); ++it) {
-        jeti::particlesystem::Base* ps = *it;
-        if (!ps->isAlive()) {
+    for(std::vector<std::shared_ptr<jeti::particlesystem::Base>>::iterator it=m_particlesystems.begin(); it < m_particlesystems.end(); ++it) {
+        if (!(*it)->isAlive()) {
             it = m_particlesystems.erase(it);
-            delete ps;
         }
     }
     m_visible_particlesystems.clear();
@@ -548,21 +541,21 @@ StarSystem::__createText()
 void
 StarSystem::__createExplosion()
 {
-    if (m_particlesystems.size()>=1) {
+    if (m_particlesystems.size()>=0) {
         return;
     }
 
     float size = meti::rand::gen_float(1.0f, 10.0f);
     glm::vec3 center(meti::rand::gen_float(-400.0f,400.0f), meti::rand::gen_float(-400.0f,400.0f), 0.0f);
 
-    jeti::particlesystem::Base* ps = jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size);
+    std::shared_ptr<jeti::particlesystem::Explosion> ps(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), size));
 
     ps->setCenter(center);
     m_particlesystems.push_back(ps);
 }
 
 bool
-StarSystem::__addIfVisible(jeti::particlesystem::Base* ps)
+StarSystem::__addIfVisible(std::shared_ptr<jeti::particlesystem::Base> ps)
 {
     m_render.toScreenCoord(ps->center(), m_tmpScreenCoord);
     if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
@@ -798,10 +791,10 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     //
 
     // particles systems
-    for(jeti::particlesystem::Base* ps: m_particlesystems) {
+    for(std::shared_ptr<jeti::particlesystem::Base> ps: m_particlesystems) {
         ps->update();
     }
-    for(jeti::particlesystem::Base* ps: m_visible_particlesystems) {
+    for(std::shared_ptr<jeti::particlesystem::Base> ps: m_visible_particlesystems) {
         ps->draw(render);
     }
     //
