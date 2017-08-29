@@ -18,7 +18,7 @@
 
 #include "GuiActions.hpp"
 #include "GuiGalaxyMap.hpp"
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
@@ -27,7 +27,7 @@
 #include <ceti/Logger.hpp>
 
 /* static */
-void GuiActions::GalaxyMapGuiTransition(Player* player) 
+void GuiActions::GalaxyMapGuiTransition(client::Player* player)
 { 
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiActions::GalaxyMapGuiTransition", GUI_LOG_DIP);
@@ -45,7 +45,7 @@ void GuiActions::GalaxyMapGuiTransition(Player* player)
 }
 
 /* static */
-void GuiActions::SaveEvent(Player* player) 
+void GuiActions::SaveEvent(client::Player* player)
 { 
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiActions::SaveEvent", GUI_LOG_DIP);
@@ -55,7 +55,7 @@ void GuiActions::SaveEvent(Player* player)
 }
 
 /* static */
-void GuiActions::LoadEvent(Player* player) 
+void GuiActions::LoadEvent(client::Player* player)
 { 
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiActions::LoadEvent", GUI_LOG_DIP);

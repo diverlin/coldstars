@@ -19,7 +19,7 @@
 #include "GuiRadar.hpp"
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/common/global.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <core/spaceobject/SpaceObject.hpp>
 #include <core/spaceobject/Vehicle.hpp>
@@ -59,7 +59,7 @@ void GuiRadar::ResetData()
 }
 
 /*virtual final*/ 
-void GuiRadar::UpdateUnique(Player* player)
+void GuiRadar::UpdateUnique(client::Player* player)
 {        
 //    m_screenrect.set(m_rect.center() + client::global::get().screen().bottomLeftScreenWC() * scale, (int)(client::global::get().screen().width() * scale), (int)(client::global::get().screen().height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();
@@ -87,7 +87,7 @@ void GuiRadar::AddIfWithinRadarRange(control::SpaceObject* object, control::Vehi
 }             
             
 /* virtual override final */
-void GuiRadar::RenderUnique(const jeti::Render& render, Player* player) const
+void GuiRadar::RenderUnique(const jeti::Render& render, client::Player* player) const
 {
     assert(false);
 //    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;

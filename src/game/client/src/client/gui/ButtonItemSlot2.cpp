@@ -20,7 +20,7 @@
 #include <core/slot/ItemSlot.hpp>
     
 /* virtual override final */
-void ButtonItemSlot2::OnPressEventMBL(Player* player)
+void ButtonItemSlot2::OnPressEventMBL(client::Player* player)
 {
     if (GetLocked() == false)
     {
@@ -64,7 +64,7 @@ void ButtonItemSlot2::ResetState()
 }
         
 /* virtual override final */    
-void ButtonItemSlot2::UpdateUnique(Player* player)
+void ButtonItemSlot2::UpdateUnique(client::Player* player)
 {
     UpdateAnimationProgram();
             
@@ -92,7 +92,7 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 }
 
 /*virtual override final*/
-void ButtonItemSlot2::RenderUnique(const jeti::Render& render, Player*) const
+void ButtonItemSlot2::RenderUnique(const jeti::Render& render, client::Player*) const
 {
     if (GetItemSlot()) {
         //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);

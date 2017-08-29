@@ -24,32 +24,32 @@
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <common/common.hpp>
     
            
 /* virtual override final */
-void ButtonItemSlot::OnPressEventMBL(Player* player)
+void ButtonItemSlot::OnPressEventMBL(client::Player* player)
 {
     //player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
          
 /* virtual override final */
-void ButtonItemSlot::OnPressEventMBR(Player* player)
+void ButtonItemSlot::OnPressEventMBR(client::Player* player)
 {    
     //player->GetNpc()->vehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
 /* virtual override final */
-void ButtonItemSlot::UpdateUnique(Player* player)
+void ButtonItemSlot::UpdateUnique(client::Player* player)
 {
     UpdateAnimationProgram();
 }
 
 /* virtual override final */
-void ButtonItemSlot::RenderUnique(const jeti::Render& render, Player* player) const
+void ButtonItemSlot::RenderUnique(const jeti::Render& render, client::Player* player) const
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
 

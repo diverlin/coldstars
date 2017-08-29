@@ -19,7 +19,7 @@
 #include <builder/world/GalaxyBuilder.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
 #include <ai/God.hpp>
@@ -39,7 +39,7 @@
 #include "TestTextRunScenario.hpp"
 
 /* virtual */
-void TestTextRunScenario::Init(Player* player)
+void TestTextRunScenario::Init(client::Player* player)
 {
 //    GalaxyDescription galaxy_description;
 //    galaxy_description.allow_invasion = false;
@@ -80,7 +80,7 @@ void TestTextRunScenario::Init(Player* player)
 }
 
 /* virtual */
-void TestTextRunScenario::Update_inDynamic(Player* player)
+void TestTextRunScenario::Update_inDynamic(client::Player* player)
 {
 //    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
             
@@ -95,7 +95,7 @@ void TestTextRunScenario::Update_inDynamic(Player* player)
 }
 
 /* virtual */
-void TestTextRunScenario::Update_inStatic(Player* player)
+void TestTextRunScenario::Update_inStatic(client::Player* player)
 {
     Update_inDynamic(player);
 }

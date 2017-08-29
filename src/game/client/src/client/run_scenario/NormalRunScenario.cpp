@@ -24,7 +24,7 @@
 #include <builder/world/GalaxyBuilder.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <ai/God.hpp>
 #include <core/world/galaxy.hpp>
@@ -39,7 +39,7 @@
 
 
 /* virtual */
-void NormalRunScenario::Init(Player* player)
+void NormalRunScenario::Init(client::Player* player)
 {
 //    GalaxyDescription galaxy_description;
 //    galaxy_description.allow_invasion = false;

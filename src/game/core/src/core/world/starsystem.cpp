@@ -588,7 +588,7 @@ void StarSystem::__updateStates()
             glm::vec2 center = meti::rand::gen_vec2(200, 1200);
             
             glm::vec3 center3(center.x, center.y, 0.0f);
-            add(core::global::get().blackHoleBuilder().gen(), center3);
+            //add(core::global::get().blackHoleBuilder().gen(), center3);
         }
     }
     
@@ -771,8 +771,6 @@ void StarSystem::__asteroidsCollisionCheck_s() const {
 
 void StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
 {
-    //std::cout<<"bullet damage = "<<bullet->damage()<<std::endl;
-
     if (!bullet->isAlive() || !bullet->collideable()) {
         return;
     }

@@ -20,7 +20,7 @@
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
 #include <core/pilot/Npc.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
 
@@ -42,7 +42,7 @@
 #include <meti/RandUtils.hpp>
 
 /* virtual */
-void TestDrawManySimpleMeshesRunScenario::Init(Player* player)
+void TestDrawManySimpleMeshesRunScenario::Init(client::Player* player)
 {
 //    GalaxyDescriptor galaxy_description;
 //    galaxy_description.allow_invasion = false;
@@ -92,7 +92,7 @@ void TestDrawManySimpleMeshesRunScenario::Init(Player* player)
 }
 
 /* virtual */
-void TestDrawManySimpleMeshesRunScenario::Update_inDynamic(Player* player)
+void TestDrawManySimpleMeshesRunScenario::Update_inDynamic(client::Player* player)
 {
    
 }

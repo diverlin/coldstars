@@ -16,44 +16,26 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "PlayerBuilder.hpp"
 
-#pragma once
+#include <client/pilot/Player.hpp>
 
-#include <glm/glm.hpp>
+namespace builder {
 
-namespace client {
-class Player;
-} // naemspace client
-
-class UserInputInSpace
+client::Player*
+Player::gen(int_t id)
 {
-public:
-    UserInputInSpace();
-    ~UserInputInSpace();
+    return __genTemplate(id);
+}
 
-    bool nextTurnReady() const { return m_nextTurnReady; }
-    bool runSession() const { return m_runSession; }
+client::Player*
+Player::__genTemplate(int_t id)
+{
+    client::Player* player = new client::Player(id);
+    assert(player);
 
-    void update(client::Player*);
+    return player;
+}
 
-    const glm::vec3& scrollAccel() const { return m_scrollAccel; }
-    const glm::vec3& mouseCliclPos() const { return m_scrollAccel; }
-
-private:
-    bool m_nextTurnReady = false;
-    bool m_runSession = true;
-
-    float m_scrollStep = 0.0;
-    glm::vec3 m_scrollAccel;
-    glm::vec3 m_mouseClickPos;
-
-    void __reset();
-    
-    void __manageInputsInSpace(client::Player*);
-
-    void __mouseButtonPressed(client::Player*);
-
-    void __manageRealTimeInputsInSpace(client::Player*);
-};
-
+} // namespace builder
 

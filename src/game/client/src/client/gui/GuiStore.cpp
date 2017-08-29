@@ -24,7 +24,7 @@
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/gui/GuiManager.hpp>
 

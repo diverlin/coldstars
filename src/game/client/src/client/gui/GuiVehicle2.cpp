@@ -26,7 +26,7 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/pilot/Npc.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 
 GuiVehicle2::GuiVehicle2()
@@ -86,7 +86,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 }    
 
 /* virtual override final */
-void GuiVehicle2::UpdateUnique(Player* player)
+void GuiVehicle2::UpdateUnique(client::Player* player)
 {
     assert(false);
 //    bool need_update = false;

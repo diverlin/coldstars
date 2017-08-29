@@ -27,7 +27,7 @@
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/pilot/Npc.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/Render.hpp>

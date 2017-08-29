@@ -73,7 +73,7 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_group) const
     return nullptr;
 }   
     
-void BaseGuiElement::PressEventMBL_onGuiElement(gui::type group, Player* player)
+void BaseGuiElement::PressEventMBL_onGuiElement(gui::type group, client::Player* player)
 {
     BaseGuiElement* button = GetGuiElement(group);
     if (button != nullptr)
@@ -153,7 +153,7 @@ void BaseGuiElement::UpdateGeometry(const glm::vec2& parent_offset, const glm::v
     }
 }
 
-void BaseGuiElement::Update(Player* player)
+void BaseGuiElement::Update(client::Player* player)
 {
     if (!m_Show)
     {
@@ -170,10 +170,10 @@ void BaseGuiElement::Update(Player* player)
 }
  
 /* virtual */
-void BaseGuiElement::UpdateUnique(Player*)
+void BaseGuiElement::UpdateUnique(client::Player*)
 {}
 
-void BaseGuiElement::UpdateCommon(Player* player)
+void BaseGuiElement::UpdateCommon(client::Player* player)
 {
     for (auto &child : m_Child_vec)
     {      
@@ -186,7 +186,7 @@ void BaseGuiElement::UpdateCommon(Player* player)
        }
 }
 
-void BaseGuiElement::Render(const jeti::Render& render, Player* player) const
+void BaseGuiElement::Render(const jeti::Render& render, client::Player* player) const
 {
     if (!m_Show)
     {
@@ -207,7 +207,7 @@ void BaseGuiElement::Render(const jeti::Render& render, Player* player) const
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(const jeti::Render& render, Player* player) const
+void BaseGuiElement::RenderUnique(const jeti::Render& render, client::Player* player) const
 {
     if (m_TextureOb)
     {
@@ -215,7 +215,7 @@ void BaseGuiElement::RenderUnique(const jeti::Render& render, Player* player) co
     }
 }
 
-void BaseGuiElement::RenderCommon(const jeti::Render& render, Player* player) const
+void BaseGuiElement::RenderCommon(const jeti::Render& render, client::Player* player) const
 {
     for (const auto &gui_element : m_Child_vec)
     {

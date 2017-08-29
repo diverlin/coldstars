@@ -27,9 +27,9 @@ class TestDrawManySimpleMeshesRunScenario : public BaseRunScenario
         TestDrawManySimpleMeshesRunScenario() {}
         ~TestDrawManySimpleMeshesRunScenario() {}
             
-        virtual void Init(Player*);
-        virtual void Update_inDynamic(Player*);
-        virtual void Update_inStatic(Player*) {}
+        virtual void Init(client::Player*);
+        virtual void Update_inDynamic(client::Player*);
+        virtual void Update_inStatic(client::Player*) {}
 };
 
 #endif

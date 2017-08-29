@@ -28,7 +28,10 @@ class SpaceObject;
 } // namespace model
 
 class BaseGuiElement;
+
+namespace client {
 class Player;
+} // namespace client
 
 namespace jeti {
 class Render;
@@ -57,7 +60,7 @@ public:
     const MouseData& mouseData() const { return m_dataMouse; }
     ItemSlot* itemSlot() const { return m_itemSlot; }
 
-    void update(Player*, const jeti::Render& render);
+    void update(client::Player*, const jeti::Render& render);
 
     void renderFocusedObjectStuff(const jeti::Render&) const;
     void renderFocusedObjectInfo(const jeti::Render&) const;

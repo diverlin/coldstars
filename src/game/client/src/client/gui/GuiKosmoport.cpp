@@ -28,7 +28,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
 #include <core/spaceobject/Vehicle.hpp>
@@ -116,7 +116,7 @@ m_slider_shared(nullptr)
 GuiKosmoport::~GuiKosmoport()
 {}
     
-void GuiKosmoport::SetPlayer(Player* player)
+void GuiKosmoport::SetPlayer(client::Player* player)
 {    
     SetPlayer(player);
     

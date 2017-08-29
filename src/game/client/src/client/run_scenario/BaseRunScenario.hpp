@@ -20,8 +20,9 @@
 #ifndef BASERUNSCENARIO_HPP
 #define BASERUNSCENARIO_HPP
 
+namespace client {
 class Player;
-
+} // namspace client
 
 class BaseRunScenario
 {
@@ -29,9 +30,9 @@ class BaseRunScenario
         BaseRunScenario() {}
         ~BaseRunScenario() {}
             
-        virtual void Init(Player*) = 0;
-        virtual void Update_inDynamic(Player*) = 0;
-        virtual void Update_inStatic(Player*) = 0;
+        virtual void Init(client::Player*) = 0;
+        virtual void Update_inDynamic(client::Player*) = 0;
+        virtual void Update_inStatic(client::Player*) = 0;
 };
 
 #endif

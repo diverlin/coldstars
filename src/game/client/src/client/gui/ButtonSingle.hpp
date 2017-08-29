@@ -23,15 +23,15 @@
 class ButtonSingle : public BaseButton
 {
 public:
-    ButtonSingle(gui::type group, const std::string& info, void (*pAction)(Player*), jeti::control::Material* textureOb)
+    ButtonSingle(gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
         :
           BaseButton(gui::type::BUTTON_SINGLE, group, info, pAction, textureOb)
     {}
 
     virtual ~ButtonSingle() {}
 
-    virtual void OnPressEventMBL(Player*) override final;
-    virtual void UpdateUnique(Player*) override final;
+    virtual void OnPressEventMBL(client::Player*) override final;
+    virtual void UpdateUnique(client::Player*) override final;
 
 private:
 

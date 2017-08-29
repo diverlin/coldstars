@@ -39,6 +39,8 @@ class Container;
 
 namespace core {
 
+class Player;
+
 namespace comm {
 class TelegrammHub;
 } // namespace comm
@@ -65,6 +67,8 @@ public:
     void hit(control::SpaceObject* object, int damage);
 
     void genBullets_DEBUG(control::StarSystem*, int) const;
+
+    void createPlayer(core::Player*);
 
 private:
     core::comm::TelegrammHub& m_telegrammHub;

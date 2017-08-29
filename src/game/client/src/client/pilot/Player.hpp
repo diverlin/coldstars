@@ -19,8 +19,9 @@
 
 #pragma once
 
-#include <core/Base.hpp>
-#include <core/pilot/Show.hpp>
+#include <core/pilot/Player.hpp>
+
+#include <client/pilot/Show.hpp>
 
 #include <client/gui/Cursor.hpp>
 
@@ -49,10 +50,12 @@ class Container;
 class Bullet;
 } // namespace view
 
-class Player
+namespace client {
+
+class Player : public core::Player
 {
 public:
-    Player();
+    Player(int_t);
     ~Player();
 
     Show& show() { return m_show; }
@@ -104,7 +107,7 @@ private:
     friend class UserInput;
 };
 
-
+} // namespace client
 
 
 

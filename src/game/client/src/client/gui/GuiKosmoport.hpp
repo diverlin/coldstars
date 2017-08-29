@@ -35,7 +35,7 @@ public:
     GuiKosmoport();
     ~GuiKosmoport();
 
-    void SetPlayer(Player*);
+    void SetPlayer(client::Player*);
     void BindKosmoport(control::Kosmoport*);
     void UnbindKosmoport();
 

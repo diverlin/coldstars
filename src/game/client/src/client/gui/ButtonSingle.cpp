@@ -19,7 +19,7 @@
 #include "ButtonSingle.hpp"
 
 /*virtual override final*/
-void ButtonSingle::OnPressEventMBL(Player* player)
+void ButtonSingle::OnPressEventMBL(client::Player* player)
 {
     if (m_pAction)
     {
@@ -34,7 +34,7 @@ void ButtonSingle::OnPressEventMBL(Player* player)
 }
 
 /*virtual override final*/           
-void ButtonSingle::UpdateUnique(Player* player)
+void ButtonSingle::UpdateUnique(client::Player* player)
 {
     if (GetLocked() == false)
     {

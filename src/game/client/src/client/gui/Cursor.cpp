@@ -34,7 +34,7 @@
 
 #include <core/spaceobject/ALL>
 
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
 #include <core/part/WeaponComplex.hpp>
@@ -94,7 +94,7 @@ void Cursor::__reset()
     m_focusedGuiElement = nullptr;
 }
 
-void Cursor::update(Player* player, const jeti::Render& render)
+void Cursor::update(client::Player* player, const jeti::Render& render)
 {
     m_box.setCenter(m_dataMouse.screen_coord.x, m_dataMouse.screen_coord.y);
 

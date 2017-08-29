@@ -17,43 +17,34 @@
 */
 
 
-#pragma once
+#include "Player.hpp"
 
-#include <glm/glm.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
-namespace client {
-class Player;
-} // naemspace client
+namespace core {
 
-class UserInputInSpace
-{
-public:
-    UserInputInSpace();
-    ~UserInputInSpace();
-
-    bool nextTurnReady() const { return m_nextTurnReady; }
-    bool runSession() const { return m_runSession; }
-
-    void update(client::Player*);
-
-    const glm::vec3& scrollAccel() const { return m_scrollAccel; }
-    const glm::vec3& mouseCliclPos() const { return m_scrollAccel; }
-
-private:
-    bool m_nextTurnReady = false;
-    bool m_runSession = true;
-
-    float m_scrollStep = 0.0;
-    glm::vec3 m_scrollAccel;
-    glm::vec3 m_mouseClickPos;
-
-    void __reset();
+Player::Player(int_t id)
+    : m_id(id)
+{ 
+}
     
-    void __manageInputsInSpace(client::Player*);
+Player::~Player()
+{}  
+            
+const meti::vec3&
+Player::position() const {
+    assert(m_npc);
+    assert(m_npc->vehicle());
+    return m_npc->vehicle()->position();
+}
 
-    void __mouseButtonPressed(client::Player*);
 
-    void __manageRealTimeInputsInSpace(client::Player*);
-};
+float
+Player::radius() const {
+    assert(m_npc);
+    assert(m_npc->vehicle());
+    return m_npc->vehicle()->properties().radar;
+}
 
-
+} // namespace core

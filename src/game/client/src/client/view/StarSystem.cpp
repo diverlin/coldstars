@@ -68,7 +68,7 @@
 #include <client/gui/info/Renderer.hpp>
 #include <client/gui/GuiDemo.hpp>
 #include <client/resources/Utils.hpp>
-#include <client/pilots/Player.hpp>
+#include <client/pilot/Player.hpp>
 
 
 namespace view {
@@ -917,6 +917,12 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
     }
 
     return nullptr;
+}
+
+void StarSystem::update(const glm::vec3& camera_accel)
+{
+    m_camera.addSpeed(camera_accel);
+    m_camera.update();
 }
 
 void StarSystem::render(control::StarSystem* starsystem)

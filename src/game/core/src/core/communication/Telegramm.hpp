@@ -14,6 +14,7 @@ public:
     {
         NONE,
         /** CREATE */
+        CREATE_PLAYER,
         // spaceobjects
         CREATE_STARSYSTEM,
         CREATE_SHIP,
