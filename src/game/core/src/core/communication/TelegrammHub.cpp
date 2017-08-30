@@ -5,7 +5,7 @@
 namespace core {
 namespace comm {
 
-void TelegrammHub::add(TelegrammManager* listener)
+void TelegrammHub::add(TelegrammDispatcher* listener)
 {
     m_listeners.push_back(listener);
 }
@@ -19,14 +19,14 @@ void TelegrammHub::add(const Telegramm& telegramm)
 void TelegrammHub::__update()
 {
     __broadcast();
-    for (TelegrammManager* listener: m_listeners) {
+    for (TelegrammDispatcher* listener: m_listeners) {
         listener->update();
     }
 }
 
 void TelegrammHub::__broadcast()
 {
-    for (TelegrammManager* listener: m_listeners) {
+    for (TelegrammDispatcher* listener: m_listeners) {
         for(Telegramm& telegramm: m_telegramms) {
             listener->add(telegramm);
         }

@@ -715,7 +715,7 @@ void StarSystem::__updateStates()
 
 void StarSystem::update(int time)
 {                
-    core::comm::TelegrammManager& telegrammManager = core::global::get().telegrammManager();
+    core::comm::TelegrammDispatcher& telegrammManager = core::global::get().telegrammManager();
 
     __updateEntities_s(time);
     __manageUnavaliableObjects_s();

@@ -206,7 +206,7 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegrammHub().add(new client::comm::TelegrammManager());
+        core::global::get().telegrammHub().add(new client::comm::TelegrammDispatcher());
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);

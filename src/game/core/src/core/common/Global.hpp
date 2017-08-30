@@ -24,7 +24,7 @@ class God;
 namespace core {
 namespace comm {
 class TelegrammHub;
-class TelegrammManager;
+class TelegrammDispatcher;
 } // namespace comm
 } // namespace core
 
@@ -46,7 +46,7 @@ public:
 
     God& god() { return *m_god; }
     comm::TelegrammHub& telegrammHub() { return *m_messageHub; }
-    comm::TelegrammManager& telegrammManager() { return *m_messageManager; }
+    comm::TelegrammDispatcher& telegrammManager() { return *m_messageManager; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
@@ -60,7 +60,7 @@ private:
 
     God* m_god = nullptr;
     comm::TelegrammHub* m_messageHub = nullptr;
-    comm::TelegrammManager* m_messageManager = nullptr;
+    comm::TelegrammDispatcher* m_messageManager = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;
