@@ -1,6 +1,6 @@
 #include "TelegrammHub.hpp"
 
-#include <core/communication/TelegrammManager.hpp>
+#include <core/communication/TelegrammDispatcher.hpp>
 
 namespace core {
 namespace comm {

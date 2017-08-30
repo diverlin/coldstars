@@ -1,4 +1,4 @@
-#include "TelegrammManager.hpp"
+#include "TelegrammDispatcher.hpp"
 
 #include <core/descriptor/comm/Creation.hpp>
 #include <core/pilot/Npc.hpp>

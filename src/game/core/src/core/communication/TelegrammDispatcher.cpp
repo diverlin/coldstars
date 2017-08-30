@@ -1,4 +1,4 @@
-#include "TelegrammManager.hpp"
+#include "TelegrammDispatcher.hpp"
 
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>

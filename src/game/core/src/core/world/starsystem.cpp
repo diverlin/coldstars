@@ -46,7 +46,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 #include <core/communication/TelegrammComposer.hpp>
-#include <core/communication/TelegrammManager.hpp>
+#include <core/communication/TelegrammDispatcher.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
