@@ -64,7 +64,7 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
     control::Kosmoport* kosmoport = new control::Kosmoport(descr, model);
     assert(kosmoport);
 
-    core::Sessions::get().session()->entity()->add(kosmoport);
+    core::shortcuts::entities()->add(kosmoport);
     return kosmoport;
 }
 

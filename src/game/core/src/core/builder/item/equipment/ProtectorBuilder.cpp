@@ -77,7 +77,7 @@ Protector::__genTemplate(descriptor::item::Protector* descr, int_t ob_id)
 {
     model::item::Protector* model = new model::item::Protector(descr->id(), ob_id);
     control::item::Protector* protector = new control::item::Protector(descr, model);
-    core::Sessions::get().session()->entity()->add(protector);
+    core::shortcuts::entities()->add(protector);
     return protector;
 }
 

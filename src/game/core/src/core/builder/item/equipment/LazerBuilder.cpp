@@ -66,7 +66,7 @@ Lazer::__genTemplate(descriptor::item::Lazer* descr, int_t ob_id)
     assert(model);
 
     control::item::Lazer* lazer = new control::item::Lazer(descr, model);
-    core::Sessions::get().session()->entity()->add(lazer);
+    core::shortcuts::entities()->add(lazer);
     return lazer;
 } 
 

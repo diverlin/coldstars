@@ -66,7 +66,7 @@ Drive::__genTemplate(descriptor::item::Drive* descr, int_t ob_id)
 {
     model::item::Drive* model = new model::item::Drive(descr->id(), ob_id);
     control::item::Drive* drive = new control::item::Drive(descr, model);
-    core::Sessions::get().session()->entity()->add(drive);
+    core::shortcuts::entities()->add(drive);
     return drive;
 }
 

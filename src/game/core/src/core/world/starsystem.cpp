@@ -83,32 +83,32 @@ StarSystem::__actualizeModel()
     model()->setWritable(false);
 
     for(int_t id: model()->stars()) {
-        add(core::Sessions::get().session()->entity()->star(id));
+        add(core::shortcuts::entities()->star(id));
     }
     for(int_t id: model()->planets()) {
-        add(core::Sessions::get().session()->entity()->planet(id));
+        add(core::shortcuts::entities()->planet(id));
     }
     for(int_t id: model()->asteroids()) {
-        add(core::Sessions::get().session()->entity()->asteroid(id));
+        add(core::shortcuts::entities()->asteroid(id));
     }
     for(int_t id: model()->wormholes()) {
-        __add(core::Sessions::get().session()->entity()->wormhole(id));
+        __add(core::shortcuts::entities()->wormhole(id));
     }
 
     for(int_t id: model()->ships()) {
-        add(core::Sessions::get().session()->entity()->ship(id));
+        add(core::shortcuts::entities()->ship(id));
     }
     for(int_t id: model()->satellites()) {
-        add(core::Sessions::get().session()->entity()->satellite(id));
+        add(core::shortcuts::entities()->satellite(id));
     }
     for(int_t id: model()->spacestations()) {
-        add(core::Sessions::get().session()->entity()->spacestation(id));
+        add(core::shortcuts::entities()->spacestation(id));
     }
     for(int_t id: model()->containers()) {
-        __add(core::Sessions::get().session()->entity()->container(id));
+        __add(core::shortcuts::entities()->container(id));
     }
     for(int_t id: model()->bullets()) {
-        __add(core::Sessions::get().session()->entity()->bullet(id));
+        __add(core::shortcuts::entities()->bullet(id));
     }
 //    __actualizeItems();
 

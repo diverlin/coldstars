@@ -82,7 +82,7 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     control::StarSystem* starsystem = new control::StarSystem(descr, model);
     assert(starsystem);
 
-    core::Sessions::get().session()->entity()->add(starsystem);
+    core::shortcuts::entities()->add(starsystem);
     return starsystem;
 }
 

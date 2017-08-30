@@ -69,7 +69,7 @@ Npc::__createTemplate(descriptor::Npc* descr)
     control::Npc* npc = new control::Npc(descr, model);
     assert(npc);
 
-    core::Sessions::get().session()->entity()->add(npc);
+    core::shortcuts::entities()->add(npc);
 
     return npc;
 }

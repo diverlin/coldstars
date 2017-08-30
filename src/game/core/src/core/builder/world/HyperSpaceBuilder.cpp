@@ -69,7 +69,7 @@ HyperSpace::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
     control::HyperSpace* hyperspace = new control::HyperSpace(descr, model);
     assert(hyperspace);
 
-    core::Sessions::get().session()->entity()->setHyperSpace(hyperspace);
+    core::shortcuts::entities()->setHyperSpace(hyperspace);
     return hyperspace;
 }
 

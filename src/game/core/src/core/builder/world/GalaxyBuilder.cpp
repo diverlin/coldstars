@@ -61,7 +61,7 @@ Galaxy::__genTemplate(descriptor::Galaxy* descr)
     control::Galaxy* galaxy = new control::Galaxy(descr, model);
     assert(galaxy);
 
-    core::Sessions::get().session()->entity()->add(galaxy);
+    core::shortcuts::entities()->add(galaxy);
 
     return galaxy;
 }

@@ -165,7 +165,7 @@ public:
     }
 
     void create_player() {
-        int_t id = core::Sessions::get().session()->entity()->nextId();
+        int_t id = core::shortcuts::entities()->nextId();
         core::Player* player = new core::Player(id);
         m_players.push_back(player);
 

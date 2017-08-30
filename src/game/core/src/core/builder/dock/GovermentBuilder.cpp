@@ -60,7 +60,7 @@ Goverment::__createTemplate(descriptor::Goverment* descr)
     control::Goverment* goverment = new control::Goverment(descr, model);
     assert(goverment);
 
-    core::Sessions::get().session()->entity()->add(goverment);
+    core::shortcuts::entities()->add(goverment);
 
     return goverment;
 }

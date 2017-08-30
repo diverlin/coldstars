@@ -60,7 +60,7 @@ Shop::__createTemplate(descriptor::Shop* descr)
     control::Shop* shop = new control::Shop(descr, model);
     assert(shop);
 
-    core::Sessions::get().session()->entity()->add(shop);
+    core::shortcuts::entities()->add(shop);
     return shop;
 } 
 

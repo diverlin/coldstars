@@ -45,44 +45,44 @@ namespace control {
 namespace {
 
 bool itemInsertHelper(slot::Item* slot, int_t id) {
-    control::Base* model_base = core::Sessions::get().session()->entity()->base(id);
+    control::Base* model_base = core::shortcuts::entities()->base(id);
     descriptor::Base* descriptor_base = core::Sessions::get().session()->descriptor()->get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obGroup()) {
     case entity::Type::SCANER_EQUIPMENT: {
-        item::Scaner* item = core::Sessions::get().session()->entity()->scaner(id);
+        item::Scaner* item = core::shortcuts::entities()->scaner(id);
         return slot->insert(item);
     }
     case entity::Type::DRIVE_EQUIPMENT: {
-        item::Drive* item = core::Sessions::get().session()->entity()->drive(id);
+        item::Drive* item = core::shortcuts::entities()->drive(id);
         return slot->insert(item);
     }
     case entity::Type::BAK_EQUIPMENT: {
-        item::Bak* item = core::Sessions::get().session()->entity()->bak(id);
+        item::Bak* item = core::shortcuts::entities()->bak(id);
         return slot->insert(item);
     }
     case entity::Type::DROID_EQUIPMENT: {
-        item::Droid* item = core::Sessions::get().session()->entity()->droid(id);
+        item::Droid* item = core::shortcuts::entities()->droid(id);
         return slot->insert(item);
     }
     case entity::Type::GRAPPLE_EQUIPMENT: {
-        item::Grapple* item = core::Sessions::get().session()->entity()->grapple(id);
+        item::Grapple* item = core::shortcuts::entities()->grapple(id);
         return slot->insert(item);
     }
     case entity::Type::LAZER_EQUIPMENT: {
-        item::Lazer* item = core::Sessions::get().session()->entity()->lazer(id);
+        item::Lazer* item = core::shortcuts::entities()->lazer(id);
         return slot->insert(item);
     }
     case entity::Type::PROTECTOR_EQUIPMENT: {
-        item::Protector* item = core::Sessions::get().session()->entity()->protector(id);
+        item::Protector* item = core::shortcuts::entities()->protector(id);
         return slot->insert(item);
     }
     case entity::Type::RADAR_EQUIPMENT: {
-        item::Radar* item = core::Sessions::get().session()->entity()->radar(id);
+        item::Radar* item = core::shortcuts::entities()->radar(id);
         return slot->insert(item);
     }
     case entity::Type::ROCKET_EQUIPMENT: {
-        item::Rocket* item = core::Sessions::get().session()->entity()->rocket(id);
+        item::Rocket* item = core::shortcuts::entities()->rocket(id);
         return slot->insert(item);
     }
     }

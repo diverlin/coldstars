@@ -106,7 +106,7 @@ Planet::__genTemplate(descriptor::Planet* descr)
     control::Planet* planet = new control::Planet(descr, model);
     assert(planet);
 
-    core::Sessions::get().session()->entity()->add(planet);
+    core::shortcuts::entities()->add(planet);
 
     return planet;
 }

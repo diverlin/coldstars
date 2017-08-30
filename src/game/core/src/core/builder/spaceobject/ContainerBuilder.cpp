@@ -75,7 +75,7 @@ Container::gen(int_t descriptor_id, int_t object_id, int_t item_id)
     control::Container* container = __genTemplate(descriptor, object_id);
     __createInternals(container, descriptor);
 
-    control::Item* item = core::Sessions::get().session()->entity()->item(item_id);
+    control::Item* item = core::shortcuts::entities()->item(item_id);
     container->insert(item);
 
     return container;
@@ -90,7 +90,7 @@ Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
     control::Container* container = new control::Container(descriptor, model);
     assert(container);
 
-    core::Sessions::get().session()->entity()->add(container);
+    core::shortcuts::entities()->add(container);
     return container;
 }
 
