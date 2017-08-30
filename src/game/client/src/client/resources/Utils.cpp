@@ -18,6 +18,7 @@
 
 #include "Utils.hpp"
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <jeti/Material.hpp>
@@ -27,7 +28,7 @@ namespace utils {
 
 jeti::Mesh*
 createMeshByDescriptorId(int_t id) {
-    ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->get(id);
+    ceti::descriptor::Mesh* descriptor = core::Sessions::get().session()->descriptor()->meshes()->get(id);
     assert(descriptor);
     jeti::Mesh* mesh = new jeti::Mesh(descriptor);
     assert(mesh);
@@ -36,7 +37,7 @@ createMeshByDescriptorId(int_t id) {
 
 jeti::Mesh*
 createMeshByDescriptorType(mesh::Type type) {
-    ceti::descriptor::Mesh* descriptor = descriptor::Manager::get().meshes()->random(int(type));
+    ceti::descriptor::Mesh* descriptor = core::Sessions::get().session()->descriptor()->meshes()->random(int(type));
     assert(descriptor);
     jeti::Mesh* mesh = new jeti::Mesh(descriptor);
     assert(mesh);
@@ -46,7 +47,7 @@ createMeshByDescriptorType(mesh::Type type) {
 
 jeti::control::Material*
 createMaterialByDescriptorId(int_t id) {
-    ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->get(id);
+    ceti::descriptor::Material* descriptor = core::Sessions::get().session()->descriptor()->materials()->get(id);
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
@@ -56,7 +57,7 @@ createMaterialByDescriptorId(int_t id) {
 
 jeti::control::Material*
 createMaterialByDescriptorType(texture::Type type) {
-    ceti::descriptor::Material* descriptor = descriptor::Manager::get().materials()->random(int(type));
+    ceti::descriptor::Material* descriptor = core::Sessions::get().session()->descriptor()->materials()->random(int(type));
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);

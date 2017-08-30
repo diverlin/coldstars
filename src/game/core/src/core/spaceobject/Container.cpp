@@ -46,7 +46,7 @@ namespace {
 
 bool itemInsertHelper(slot::Item* slot, int_t id) {
     control::Base* model_base = core::Sessions::get().session()->entity()->base(id);
-    descriptor::Base* descriptor_base = descriptor::Manager::get().get(model_base->descriptor()->id());
+    descriptor::Base* descriptor_base = core::Sessions::get().session()->descriptor()->get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obGroup()) {
     case entity::Type::SCANER_EQUIPMENT: {

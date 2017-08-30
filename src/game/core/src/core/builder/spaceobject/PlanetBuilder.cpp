@@ -37,10 +37,10 @@ control::Planet*
 Planet::gen()
 {
     descriptor::Planet* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::PLANET)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::PLANET)) {
         descr = descriptor::genPlanet();
     } else {
-        descr = descriptor::Manager::get().randPlanet();
+        descr = core::Sessions::get().session()->descriptor()->randPlanet();
     }
     assert(descr);
     return gen(descr);

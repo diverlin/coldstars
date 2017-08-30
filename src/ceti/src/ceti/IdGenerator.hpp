@@ -19,9 +19,6 @@
 
 #pragma once
 
-#include <string>
-#include <vector>
-
 #include <ceti/type/IdType.hpp>
 
 class IdGenerator
@@ -31,9 +28,7 @@ public:
     ~IdGenerator() = default;
 
     int_t nextId();
-    void addFreeId(int_t free_id) { free_ids.push_back(free_id); }
 
 private:
-    int_t last_incremented_id = 0;
-    std::vector<int_t> free_ids;
+    int_t last_id = NONE;
 };

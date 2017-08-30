@@ -21,7 +21,10 @@
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/part/Turrel.hpp>
 #include <core/descriptor/part/Turrel.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
+
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
@@ -30,10 +33,10 @@ control::Turrel*
 Turrel::gen()
 {
     descriptor::Turrel* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::TURREL)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::TURREL)) {
         descr = descriptor::genTurrel();
     } else {
-        descr = descriptor::Manager::get().randTurrel();
+        descr = core::Sessions::get().session()->descriptor()->randTurrel();
     }
     assert(descr);
     return gen(descr);

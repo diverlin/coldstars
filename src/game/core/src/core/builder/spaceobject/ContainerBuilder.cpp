@@ -42,10 +42,10 @@ control::Container*
 Container::gen()
 {
     descriptor::Container* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::CONTAINER)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::CONTAINER)) {
         descr = descriptor::genContainer();
     } else {
-        descr = descriptor::Manager::get().randContainer();
+        descr = core::Sessions::get().session()->descriptor()->randContainer();
     }
     assert(descr);
     return gen(descr);
@@ -62,7 +62,7 @@ Container::gen(descriptor::Container* descr)
 control::Container*
 Container::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::Container* descriptor = descriptor::Manager::get().container(descriptor_id);
+    descriptor::Container* descriptor = core::Sessions::get().session()->descriptor()->container(descriptor_id);
     control::Container* container = __genTemplate(descriptor, object_id);
     __createInternals(container, descriptor);
     return container;
@@ -71,7 +71,7 @@ Container::gen(int_t descriptor_id, int_t object_id)
 control::Container*
 Container::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 {
-    descriptor::Container* descriptor = descriptor::Manager::get().container(descriptor_id);
+    descriptor::Container* descriptor = core::Sessions::get().session()->descriptor()->container(descriptor_id);
     control::Container* container = __genTemplate(descriptor, object_id);
     __createInternals(container, descriptor);
 

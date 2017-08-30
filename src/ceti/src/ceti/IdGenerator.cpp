@@ -20,12 +20,5 @@
 
 int_t IdGenerator::nextId()
 {  
-//    if (!free_ids.empty()) {
-//         unsigned long int= free_ids[free_ids.size()-1];
-//         free_ids.pop_back();
-//         return id;
-//    } else {
-        last_incremented_id++;
-        return last_incremented_id;
-//    }
+    return ++last_id;
 }  

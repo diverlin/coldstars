@@ -73,7 +73,7 @@ public:
 private:
     core::comm::TelegrammHub& m_telegrammHub;
     std::shared_ptr<manager::Entity> m_entitiesManager;
-    descriptor::Manager& m_descriptorManager;
+    std::shared_ptr<descriptor::Manager> m_descriptors;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);
     void __removeSpaceObjectFromStarSystem(control::SpaceObject*);
