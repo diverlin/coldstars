@@ -36,10 +36,10 @@ control::item::Protector*
 Protector::gen()
 {
     descriptor::item::Protector* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
         descr = descriptor::item::genProtector();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randProtector();
+        descr = core::shortcuts::descriptors()->randProtector();
     }
     assert(descr);
     return gen(descr);
@@ -58,7 +58,7 @@ Protector::gen(int num)
 control::item::Protector*
 Protector::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Protector* descr = core::Sessions::get().session()->descriptor()->protector(descriptor_id);
+    descriptor::item::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
     control::item::Protector* protector = __genTemplate(descr, ob_id);
     __createInternals(protector, descr);
     return protector;

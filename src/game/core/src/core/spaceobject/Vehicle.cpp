@@ -133,7 +133,7 @@ Vehicle::__loadItemsFromModel()
 {
     for(int_t id: model()->items()) {
         control::Base* model_base = core::shortcuts::entities()->base(id);
-        descriptor::Base* descriptor_base = core::Sessions::get().session()->descriptor()->get(model_base->descriptor()->id());
+        descriptor::Base* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obGroup()) {
         case entity::Type::SCANER_EQUIPMENT: {
@@ -290,14 +290,14 @@ void Vehicle::__putChildrenToGarbage() const
 void Vehicle::_putNpcToGarbage() const
 {
     if (m_npc) {
-        core::Sessions::get().session()->garbage()->add(m_npc);
+        core::shortcuts::session()->garbage()->add(m_npc);
     }
 }
 
 void Vehicle::_putItemsToGarbage() const
 {
     for(auto item: __items()) {
-        core::Sessions::get().session()->garbage()->add(item);
+        core::shortcuts::session()->garbage()->add(item);
     }
 }
 

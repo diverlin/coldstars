@@ -33,10 +33,10 @@ control::Turrel*
 Turrel::gen()
 {
     descriptor::Turrel* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::TURREL)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::TURREL)) {
         descr = descriptor::genTurrel();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randTurrel();
+        descr = core::shortcuts::descriptors()->randTurrel();
     }
     assert(descr);
     return gen(descr);

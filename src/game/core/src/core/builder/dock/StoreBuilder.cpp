@@ -50,10 +50,10 @@ control::Store*
 Store::gen()
 {
     descriptor::Store* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::STORE)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STORE)) {
         descr = descriptor::genStore();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randStore();
+        descr = core::shortcuts::descriptors()->randStore();
     }
     return gen(descr);
 } 

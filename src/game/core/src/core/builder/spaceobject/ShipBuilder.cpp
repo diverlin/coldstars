@@ -46,7 +46,7 @@ Ship::gen(descriptor::Ship* descr)
 control::Ship*
 Ship::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::Ship* descr = core::Sessions::get().session()->descriptor()->ship(descriptor_id);
+    descriptor::Ship* descr = core::shortcuts::descriptors()->ship(descriptor_id);
     control::Ship* ship = __genTemplate(descr, ob_id);
     __createInternals(ship, descr);
     return ship;
@@ -56,10 +56,10 @@ control::Ship*
 Ship::gen()
 {
     descriptor::Ship* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SHIP)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHIP)) {
         descr = descriptor::genShip();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randShip();
+        descr = core::shortcuts::descriptors()->randShip();
     }
     assert(descr);
     return gen(descr);

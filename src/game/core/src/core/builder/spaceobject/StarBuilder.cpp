@@ -40,10 +40,10 @@ control::Star*
 Star::gen()
 {
     descriptor::Star* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::STAR)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STAR)) {
         descr = descriptor::genStar();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randStar();
+        descr = core::shortcuts::descriptors()->randStar();
     }
     assert(descr);
     return gen(descr);

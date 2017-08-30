@@ -46,10 +46,10 @@ control::SpaceStation*
 SpaceStation::gen()
 {
     descriptor::SpaceStation* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SPACESTATION)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SPACESTATION)) {
         descr = descriptor::genSpaceStation();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randSpaceStation();
+        descr = core::shortcuts::descriptors()->randSpaceStation();
     }
     assert(descr);
     return gen(descr);

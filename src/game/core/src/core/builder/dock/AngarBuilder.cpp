@@ -37,10 +37,10 @@ control::Angar*
 Angar::gen()
 {
     descriptor::Angar* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::ANGAR)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ANGAR)) {
         descr = descriptor::genAngar();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randAngar();
+        descr = core::shortcuts::descriptors()->randAngar();
     }
     return gen(descr);
 } 

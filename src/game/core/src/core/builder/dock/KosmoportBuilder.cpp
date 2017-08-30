@@ -38,10 +38,10 @@ control::Kosmoport*
 Kosmoport::gen()
 {
     descriptor::Kosmoport* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::KOSMOPORT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::KOSMOPORT)) {
         descr = descriptor::genKosmoport();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randKosmoport();
+        descr = core::shortcuts::descriptors()->randKosmoport();
     }
     assert(descr);
     return gen(descr);

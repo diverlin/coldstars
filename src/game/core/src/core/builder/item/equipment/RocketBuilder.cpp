@@ -33,10 +33,10 @@ control::item::Rocket*
 Rocket::gen()
 {
     descriptor::item::Rocket* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::ROCKET_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ROCKET_EQUIPMENT)) {
         descr = descriptor::item::genRocket();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randRocket();
+        descr = core::shortcuts::descriptors()->randRocket();
     }
     assert(descr);
     return gen(descr);
@@ -45,7 +45,7 @@ Rocket::gen()
 control::item::Rocket*
 Rocket::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Rocket* descr = core::Sessions::get().session()->descriptor()->rocket(descriptor_id);
+    descriptor::item::Rocket* descr = core::shortcuts::descriptors()->rocket(descriptor_id);
     control::item::Rocket* rocket = __genTemplate(descr, ob_id);
     __createInternals(rocket, descr);
     return rocket;

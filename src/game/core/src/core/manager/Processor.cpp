@@ -52,8 +52,6 @@ Processor::get()
 Processor::Processor()
     :
       m_telegrammHub(core::global::get().telegrammHub())
-    , m_entitiesManager(core::shortcuts::entities())
-    , m_descriptors(core::Sessions::get().session()->descriptor())
 {
 
 }
@@ -91,16 +89,16 @@ void Processor::death(control::Asteroid* asteroid)
     int containers_num = meti::rand::gen_int(1,3);
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
-        int_t item_id = m_entitiesManager->nextId();
+        int_t item_id = shortcuts::entities()->nextId();
         int amount = meti::rand::gen_int(3, 100);
         {
-        int_t descriptor_id = m_descriptors->randGoods()->id();
+        int_t descriptor_id = shortcuts::descriptors()->randGoods()->id();
         descriptor::comm::CreateGoodsPack telegramm_descriptor(item_id, descriptor_id, amount);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
         }
-        int_t container_id = m_entitiesManager->nextId();
+        int_t container_id = shortcuts::entities()->nextId();
         {
-        int_t descriptor_id = m_descriptors->randContainer()->id();
+        int_t descriptor_id = shortcuts::descriptors()->randContainer()->id();
         descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
@@ -125,8 +123,8 @@ void Processor::__death(control::Vehicle* vehicle)
 
     std::vector<glm::vec3> impulses = __genImpulses(containers_num);
     for (int i=0; i<containers_num; ++i) {
-        int_t container_id = m_entitiesManager->nextId();
-        int_t descriptor_id = m_descriptors->randContainer()->id();
+        int_t container_id = shortcuts::entities()->nextId();
+        int_t descriptor_id = shortcuts::descriptors()->randContainer()->id();
         int_t item_id = items[i];
         {
         descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);

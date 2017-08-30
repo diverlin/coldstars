@@ -47,10 +47,10 @@ control::StarSystem*
 StarSystem::gen()
 {
     descriptor::StarSystem* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::STARSYSTEM)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STARSYSTEM)) {
         descr = descriptor::genStarSystem();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randStarSystem();
+        descr = core::shortcuts::descriptors()->randStarSystem();
     }
     assert(descr);
     return gen(descr);
@@ -67,7 +67,7 @@ StarSystem::gen(descriptor::StarSystem* descr)
 control::StarSystem*
 StarSystem::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::StarSystem* descr = core::Sessions::get().session()->descriptor()->starSystem(descriptor_id);
+    descriptor::StarSystem* descr = core::shortcuts::descriptors()->starSystem(descriptor_id);
     control::StarSystem* starsystem = __genTemplate(descr, ob_id);
     __createInternals(starsystem, descr);
     return starsystem;

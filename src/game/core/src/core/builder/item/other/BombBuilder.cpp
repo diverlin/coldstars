@@ -36,7 +36,7 @@ Bomb*
 BombBuilder::gen()
 {
     assert(false);
-    //    descriptor::BaseOLD* descriptor = core::Sessions::get().session()->descriptor()->getRand(descriptor::TypeOLD::BOMB);
+    //    descriptor::BaseOLD* descriptor = core::shortcuts::descriptors()->getRand(descriptor::TypeOLD::BOMB);
     //    return gen(descriptor);
 }
 

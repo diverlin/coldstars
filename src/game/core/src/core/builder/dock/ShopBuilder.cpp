@@ -34,10 +34,10 @@ control::Shop*
 Shop::gen()
 {
     descriptor::Shop* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SHOP)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHOP)) {
         descr = descriptor::genShop();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randShop();
+        descr = core::shortcuts::descriptors()->randShop();
     }
     return gen(descr);
 }

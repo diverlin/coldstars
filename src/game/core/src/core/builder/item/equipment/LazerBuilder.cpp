@@ -33,10 +33,10 @@ control::item::Lazer*
 Lazer::gen()
 {
     descriptor::item::Lazer* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::LAZER_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::LAZER_EQUIPMENT)) {
         descr = descriptor::item::genLazer();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randLazer();
+        descr = core::shortcuts::descriptors()->randLazer();
     }
     assert(descr);
     return gen(descr);
@@ -45,7 +45,7 @@ Lazer::gen()
 control::item::Lazer*
 Lazer::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Lazer* descr = core::Sessions::get().session()->descriptor()->lazer(descriptor_id);
+    descriptor::item::Lazer* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
     control::item::Lazer* lazer = __genTemplate(descr, ob_id);
     __createInternals(lazer, descr);
     return lazer;

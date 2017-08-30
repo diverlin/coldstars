@@ -34,10 +34,10 @@ control::Goverment*
 Goverment::gen()
 {
     descriptor::Goverment* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::GOVERMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GOVERMENT)) {
         descr = descriptor::genGoverment();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randGoverment();
+        descr = core::shortcuts::descriptors()->randGoverment();
     }
     return gen(descr);
 }

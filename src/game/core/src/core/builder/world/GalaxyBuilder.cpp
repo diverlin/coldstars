@@ -36,10 +36,10 @@ control::Galaxy*
 Galaxy::gen()
 {
     descriptor::Galaxy* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::GALAXY)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GALAXY)) {
         descr = descriptor::genGalaxy({0});
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randGalaxy();
+        descr = core::shortcuts::descriptors()->randGalaxy();
     }
     return gen(descr);
 }
@@ -77,7 +77,7 @@ void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* desc
 {     
     for(int_t id: descr->sectors) {
         glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-        descriptor::Sector* descr_sector = core::Sessions::get().session()->descriptor()->sector(id);
+        descriptor::Sector* descr_sector = core::shortcuts::descriptors()->sector(id);
         control::Sector* sector = builder::Sector::gen(descr_sector);
         galaxy->add(sector, position);
     }

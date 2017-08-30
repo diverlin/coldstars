@@ -31,10 +31,10 @@ control::Asteroid*
 Asteroid::gen()
 {
     descriptor::Asteroid* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::ASTEROID)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ASTEROID)) {
         descr = descriptor::genAsteroid();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randAsteroid();
+        descr = core::shortcuts::descriptors()->randAsteroid();
     }
     assert(descr);
     return gen(descr);

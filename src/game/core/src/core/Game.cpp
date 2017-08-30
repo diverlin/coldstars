@@ -33,7 +33,7 @@ namespace control {
 
 World::World()
 {
-    auto descriptor = core::Sessions::get().session()->descriptor()->randGalaxy();
+    auto descriptor = core::shortcuts::descriptors()->randGalaxy();
     core::global::get().god().createWorld(descriptor);
 }
 

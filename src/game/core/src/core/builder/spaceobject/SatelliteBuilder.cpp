@@ -56,10 +56,10 @@ control::Satellite*
 Satellite::gen()
 {
     descriptor::Satellite* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SATELLITE)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SATELLITE)) {
         descr = descriptor::genSatellite();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randSatellite();
+        descr = core::shortcuts::descriptors()->randSatellite();
     }
     assert(descr);
     return gen(descr);
