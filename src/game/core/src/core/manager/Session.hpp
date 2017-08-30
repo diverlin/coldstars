@@ -69,4 +69,13 @@ private:
     std::map<int, Session*> m_sessions;
 };
 
+
+namespace shortcuts {
+core::Session* session();
+std::shared_ptr<descriptor::Manager> descriptors();
+std::shared_ptr<core::manager::Entity> entities();
+} // namespace shortcuts
+
 } // namespace core
+
+

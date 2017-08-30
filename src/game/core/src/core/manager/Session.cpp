@@ -63,4 +63,20 @@ Session* Sessions::session() const {
 }
 
 
+namespace shortcuts {
+
+core::Session* session() {
+    return core::Sessions::get().session();
+}
+
+std::shared_ptr<descriptor::Manager> descriptors() {
+    return core::Sessions::get().session()->descriptor();
+}
+
+std::shared_ptr<core::manager::Entity> entities() {
+    return core::Sessions::get().session()->entity();
+}
+
+} // namespace shortcuts
+
 } // core
