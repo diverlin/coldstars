@@ -60,7 +60,7 @@ Bullet::__genTemplate(descriptor::Bullet* descr)
     control::Bullet* bullet = new control::Bullet(descr, model);
     assert(bullet);
 
-    core::Sessions::get().session()->entity()->add(bullet);
+    core::shortcuts::entities()->add(bullet);
 
     return bullet;
 }

@@ -72,7 +72,7 @@ Star::__genTemplate(descriptor::Star* descr)
     control::Star* star = new control::Star(descr, model);
     assert(star);
 
-    core::Sessions::get().session()->entity()->add(star);
+    core::shortcuts::entities()->add(star);
     return star;
 }
 

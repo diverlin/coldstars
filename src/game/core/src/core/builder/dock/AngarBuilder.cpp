@@ -62,7 +62,7 @@ Angar::__createTemplate(descriptor::Angar* descr)
     control::Angar* angar = new control::Angar(descr, model);
     assert(angar);
 
-    core::Sessions::get().session()->entity()->add(angar);
+    core::shortcuts::entities()->add(angar);
 
     return angar;
 }

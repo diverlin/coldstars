@@ -29,7 +29,7 @@ void MacroTaskManager::setTask(const Task& macrotask)
     m_macrotask = macrotask;
     m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
     if (m_macrotask.targetId() != NONE) {
-        m_target = core::Sessions::get().session()->entity()->spaceObject(macrotask.targetId())->model();
+        m_target = core::shortcuts::entities()->spaceObject(macrotask.targetId())->model();
     }
 }
 

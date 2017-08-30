@@ -71,7 +71,7 @@ Sector::__genTemplate(descriptor::Sector* descr)
     control::Sector* sector = new control::Sector(descr, model);
     assert(sector);
 
-    core::Sessions::get().session()->entity()->add(sector);
+    core::shortcuts::entities()->add(sector);
 
     return sector;
 }

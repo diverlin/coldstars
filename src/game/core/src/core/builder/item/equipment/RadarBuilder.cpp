@@ -66,7 +66,7 @@ Radar::__genTemplate(descriptor::item::Radar* descr, int_t ob_id)
 {
     model::item::Radar* model = new model::item::Radar(descr->id(), ob_id);
     control::item::Radar* radar = new control::item::Radar(descr, model);
-    core::Sessions::get().session()->entity()->add(radar);
+    core::shortcuts::entities()->add(radar);
     return radar;
 }
 

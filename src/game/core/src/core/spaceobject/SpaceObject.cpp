@@ -44,10 +44,10 @@ SpaceObject::SpaceObject(descriptor::SpaceObject* descriptor, model::SpaceObject
 void SpaceObject::_init()
 {
     if (!m_starsystem && model()->starsystem() != NONE) {
-        m_starsystem = core::Sessions::get().session()->entity()->starsystem(model()->starsystem());
+        m_starsystem = core::shortcuts::entities()->starsystem(model()->starsystem());
     }
     if (!m_parent && model()->parent() != NONE) {
-        m_parent = core::Sessions::get().session()->entity()->spaceObject(model()->parent());
+        m_parent = core::shortcuts::entities()->spaceObject(model()->parent());
     }
 }
 

@@ -39,7 +39,7 @@ Satellite::__genTemplate(descriptor::Satellite* descr)
     control::Satellite* satellite = new control::Satellite(descr, model);
     assert(satellite);
 
-    core::Sessions::get().session()->entity()->add(satellite);
+    core::shortcuts::entities()->add(satellite);
     
     return satellite;
 }

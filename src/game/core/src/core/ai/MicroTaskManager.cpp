@@ -36,7 +36,7 @@ void MicroTaskManager::setTask(const Task& microtask)
     m_scenario = ScenarioCollector::Instance().get(microtask.GetScenarioTypeId());
     assert(m_scenario);
     if (m_microtask.targetId() != NONE) {
-        m_target = core::Sessions::get().session()->entity()->spaceObject(microtask.targetId())->model();
+        m_target = core::shortcuts::entities()->spaceObject(microtask.targetId())->model();
     }
 }
 

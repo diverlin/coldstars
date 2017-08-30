@@ -27,7 +27,7 @@ void createPlayerEvent(const core::comm::Telegramm& telegramm) {
     descriptor::comm::CreatePlayer data(telegramm.data());
 
     client::Player* player = new client::Player(data.player());
-    control::Npc* npc = core::Sessions::get().session()->entity()->npc(data.npc());
+    control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
     player->setNpc(npc);
     client::global::get().setPlayer(player);
 }

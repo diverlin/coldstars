@@ -77,7 +77,7 @@ Store::__createTemplate(descriptor::Store* descr)
     control::Store* store = new control::Store(descr, model);
     assert(store);
 
-    core::Sessions::get().session()->entity()->add(store);
+    core::shortcuts::entities()->add(store);
 
     return store;
 }

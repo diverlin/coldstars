@@ -52,7 +52,7 @@ Processor::get()
 Processor::Processor()
     :
       m_telegrammHub(core::global::get().telegrammHub())
-    , m_entitiesManager(core::Sessions::get().session()->entity())
+    , m_entitiesManager(core::shortcuts::entities())
     , m_descriptors(core::Sessions::get().session()->descriptor())
 {
 
