@@ -48,7 +48,7 @@
 namespace core {
 namespace comm {
 
-void TelegrammManager::add(Telegramm& telegramm)
+void TelegrammDispatcher::add(Telegramm& telegramm)
 {
     if (telegramm.delay() < 0) {
         _process(telegramm);
@@ -58,19 +58,19 @@ void TelegrammManager::add(Telegramm& telegramm)
     }
 }
 
-double TelegrammManager::__currentTime() const
+double TelegrammDispatcher::__currentTime() const
 {
     return m_clock.getElapsedTime().asSeconds();
 }
 
-void TelegrammManager::runLoop()
+void TelegrammDispatcher::runLoop()
 {
     while(!m_telegramms.empty()) {
         update();
     }
 }
 
-void TelegrammManager::update()
+void TelegrammDispatcher::update()
 { 
     for ( auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it ) {
         const Telegramm& telegramm = *it;
@@ -327,7 +327,7 @@ void doShoot(int_t object, int_t item) {
 
 } // namespace event
 
-bool TelegrammManager::_process(const comm::Telegramm& telegramm)
+bool TelegrammDispatcher::_process(const comm::Telegramm& telegramm)
 {
     switch(telegramm.type()) {
     /** CREATE */

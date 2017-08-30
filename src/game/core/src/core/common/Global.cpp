@@ -40,7 +40,7 @@ global::global()
     :
       m_god(new God)
     , m_messageHub(new comm::TelegrammHub)
-    , m_messageManager(new comm::TelegrammManager)
+    , m_messageManager(new comm::TelegrammDispatcher)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)

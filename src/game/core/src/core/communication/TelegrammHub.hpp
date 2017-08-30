@@ -7,7 +7,7 @@
 namespace core {
 namespace comm {
 
-class TelegrammManager;
+class TelegrammDispatcher;
 
 class TelegrammHub
 {
@@ -15,12 +15,12 @@ public:
     TelegrammHub()=default;
     ~TelegrammHub()=default;
 
-    void add(TelegrammManager*);
+    void add(TelegrammDispatcher*);
     void add(const Telegramm&);
 
 private:
     std::vector<Telegramm> m_telegramms;
-    std::vector<TelegrammManager*> m_listeners;
+    std::vector<TelegrammDispatcher*> m_listeners;
 
     void __broadcast();
 

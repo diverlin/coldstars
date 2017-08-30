@@ -42,7 +42,7 @@ namespace client {
 class Player;
 
 namespace comm {
-class TelegrammManager;
+class TelegrammDispatcher;
 } // namespace comm
 
 class global
@@ -59,7 +59,7 @@ public:
     jeti::Render& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
     view::StarSystem& view() { return *m_view; }
-    comm::TelegrammManager& telegrammManager() { return *m_telegrammManager; }
+    comm::TelegrammDispatcher& telegrammManager() { return *m_telegrammManager; }
 
     UserInputInSpace& input() { return *m_inputsManager; }
 
@@ -79,7 +79,7 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     view::StarSystem* m_view = nullptr;
-    comm::TelegrammManager* m_telegrammManager = nullptr;
+    comm::TelegrammDispatcher* m_telegrammManager = nullptr;
 
     UserInputInSpace* m_inputsManager = nullptr;
 
