@@ -34,10 +34,10 @@ control::item::Droid*
 Droid::gen()
 {
     descriptor::item::Droid* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::DROID_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::DROID_EQUIPMENT)) {
         descr = descriptor::item::genDroid();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randDroid();
+        descr = core::shortcuts::descriptors()->randDroid();
     }
     assert(descr);
     return gen(descr);
@@ -46,7 +46,7 @@ Droid::gen()
 control::item::Droid*
 Droid::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Droid* descr = core::Sessions::get().session()->descriptor()->droid(descriptor_id);
+    descriptor::item::Droid* descr = core::shortcuts::descriptors()->droid(descriptor_id);
     control::item::Droid* droid = __genTemplate(descr, ob_id);
     __createInternals(droid, descr);
     return droid;

@@ -64,7 +64,7 @@ void Data::__generate()
 
 void Data::__generateMeshDescriptors()
 {        
-    auto dmm = core::Sessions::get().session()->descriptor()->meshes();
+    auto dmm = core::shortcuts::descriptors()->meshes();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".od");
         const auto& types = client::global::get().types();
@@ -74,12 +74,12 @@ void Data::__generateMeshDescriptors()
 
 void Data::__generateGameObjectDescriptors()
 {
-    core::Sessions::get().session()->descriptor()->generate();
+    core::shortcuts::descriptors()->generate();
 }
 
 void Data::__generateMaterialDescriptors()
 {
-    auto dmm = core::Sessions::get().session()->descriptor()->materials();
+    auto dmm = core::shortcuts::descriptors()->materials();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".md");
         const auto& types = client::global::get().types();

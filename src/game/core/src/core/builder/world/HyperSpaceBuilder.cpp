@@ -36,10 +36,10 @@ control::HyperSpace*
 HyperSpace::gen()
 {
     descriptor::HyperSpace* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::HYPERSPACE)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::HYPERSPACE)) {
         descr = descriptor::genHyperSpace();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randHyperSpace();
+        descr = core::shortcuts::descriptors()->randHyperSpace();
     }
     assert(descr);
     return gen(descr);
@@ -55,7 +55,7 @@ HyperSpace::gen(descriptor::HyperSpace* descr)
 control::HyperSpace*
 HyperSpace::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::HyperSpace* descr = core::Sessions::get().session()->descriptor()->hyperSpace(descriptor_id);
+    descriptor::HyperSpace* descr = core::shortcuts::descriptors()->hyperSpace(descriptor_id);
     control::HyperSpace* hyperspace = __genTemplate(descr, ob_id);
     return hyperspace;
 }

@@ -34,10 +34,10 @@ control::item::Grapple*
 Grapple::gen()
 {
     descriptor::item::Grapple* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::GRAPPLE_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GRAPPLE_EQUIPMENT)) {
         descr = descriptor::item::genGrapple();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randGrapple();
+        descr = core::shortcuts::descriptors()->randGrapple();
     }
     assert(descr);
     return gen(descr);
@@ -46,7 +46,7 @@ Grapple::gen()
 control::item::Grapple*
 Grapple::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Grapple* descr = core::Sessions::get().session()->descriptor()->grapple(descriptor_id);
+    descriptor::item::Grapple* descr = core::shortcuts::descriptors()->grapple(descriptor_id);
     control::item::Grapple* grapple = __genTemplate(descr, ob_id);
     __createInternals(grapple, descr);
     return grapple;

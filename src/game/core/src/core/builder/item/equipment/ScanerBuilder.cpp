@@ -34,10 +34,10 @@ control::item::Scaner*
 Scaner::gen()
 {
     descriptor::item::Scaner* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SCANER_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SCANER_EQUIPMENT)) {
         descr = descriptor::item::genScaner();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randScaner();
+        descr = core::shortcuts::descriptors()->randScaner();
     }
     assert(descr);
     return gen(descr);
@@ -46,7 +46,7 @@ Scaner::gen()
 control::item::Scaner*
 Scaner::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Scaner* descr = core::Sessions::get().session()->descriptor()->scaner(descriptor_id);
+    descriptor::item::Scaner* descr = core::shortcuts::descriptors()->scaner(descriptor_id);
     control::item::Scaner* scaner = __genTemplate(descr, ob_id);
     __createInternals(scaner, descr);
     return scaner;

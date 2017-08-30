@@ -49,10 +49,10 @@ control::NatureLand*
 NatureLand::gen()
 {
     descriptor::NatureLand* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::NATURELAND)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::NATURELAND)) {
         descr = descriptor::genNatureLand();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randNatureLand();
+        descr = core::shortcuts::descriptors()->randNatureLand();
     }
     assert(descr);
     return gen(descr);

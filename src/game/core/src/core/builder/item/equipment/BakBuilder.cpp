@@ -41,7 +41,7 @@ Bak::gen(descriptor::item::Bak* descr)
 control::item::Bak*
 Bak::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Bak* descr = core::Sessions::get().session()->descriptor()->bak(descriptor_id);
+    descriptor::item::Bak* descr = core::shortcuts::descriptors()->bak(descriptor_id);
     control::item::Bak* bak = __genTemplate(descr, ob_id);
     __createInternals(bak, descr);
     return bak;
@@ -51,10 +51,10 @@ control::item::Bak*
 Bak::gen()
 {
     descriptor::item::Bak* descr = nullptr;
-    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::BAK_EQUIPMENT)) {
+    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::BAK_EQUIPMENT)) {
         descr = descriptor::item::genBak();
     } else {
-        descr = core::Sessions::get().session()->descriptor()->randBak();
+        descr = core::shortcuts::descriptors()->randBak();
     }
     assert(descr);
     return gen(descr);
