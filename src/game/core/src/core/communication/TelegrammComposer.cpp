@@ -37,7 +37,7 @@
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 #include <core/communication/TelegrammHub.hpp>
-#include <core/communication/TelegrammManager.hpp>
+#include <core/communication/TelegrammDispatcher.hpp>
 
 namespace core {
 

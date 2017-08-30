@@ -1,6 +1,6 @@
 #pragma once
 
-# include <core/communication/TelegrammManager.hpp>
+# include <core/communication/TelegrammDispatcher.hpp>
 
 namespace client {
 namespace comm {

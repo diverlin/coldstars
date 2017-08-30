@@ -20,7 +20,7 @@
 #include <ai/God.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <communication/TelegrammHub.hpp>
-#include <communication/TelegrammManager.hpp>
+#include <communication/TelegrammDispatcher.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>

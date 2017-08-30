@@ -73,7 +73,7 @@
 #include <client/view/StarSystem.hpp>
 
 #include <core/communication/TelegrammHub.hpp>
-#include <client/communication/TelegrammManager.hpp>
+#include <client/communication/TelegrammDispatcher.hpp>
 
 #include <memory>
 
