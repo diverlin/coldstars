@@ -21,7 +21,7 @@
 #include "builder/world/GalaxyBuilder.hpp"
 #include <common/Config.hpp>
 
-#include <core/manager/Processor.hpp>
+#include <core/communication/TelegrammComposer.hpp>
 #include <core/manager/Session.hpp>
 
 #include <jeti/Mesh.hpp>
@@ -131,7 +131,7 @@ void bench() {
     exit(1);
 }
 
-core::manager::Processor& processor() { return core::manager::Processor::get(); }
+core::TelegrammComposer& composer() { return core::TelegrammComposer::get(); }
 
 enum Machine { server, client };
 
@@ -176,7 +176,7 @@ public:
         assert(npc);
         player->setNpc(npc);
 
-        processor().createPlayer(player);
+        composer().createPlayer(player);
     }
 
 private:

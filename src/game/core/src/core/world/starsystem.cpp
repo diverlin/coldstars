@@ -45,7 +45,7 @@
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
-#include <core/manager/Processor.hpp>
+#include <core/communication/TelegrammComposer.hpp>
 #include <core/communication/TelegrammManager.hpp>
 
 #include <ceti/Logger.hpp>
@@ -57,7 +57,7 @@
 #include <algorithm> // std::min
 
 namespace {
-core::manager::Processor& processor() { return core::manager::Processor::get(); }
+core::TelegrammComposer& composer() { return core::TelegrammComposer::get(); }
 } // namespace
 
 namespace control {
@@ -725,7 +725,7 @@ void StarSystem::update(int time)
     }
 
     if (time > 0) {
-        processor().genBullets_DEBUG(this, 100);
+        composer().genBullets_DEBUG(this, 100);
         telegrammManager.update();
 
         if (m_unique_update_inDymanic_done == false) {
@@ -778,31 +778,31 @@ void StarSystem::__bulletCollisionCheck_s(Bullet* bullet) const
     for (auto v: m_vehicles) {
         if (bullet->ownerId() != v->id()) {
             if (ceti::checkCollision(bullet, v)) {
-                processor().death(bullet);
-                processor().hit(v, bullet->damage());
+                composer().death(bullet);
+                composer().hit(v, bullet->damage());
                 return;
             }
         }
     }
     for (auto a: m_asteroids) {
         if (ceti::checkCollision(bullet, a)) {
-            processor().death(bullet);
-            processor().hit(a, bullet->damage());
+            composer().death(bullet);
+            composer().hit(a, bullet->damage());
             return;
         }
     }
     for (auto c: m_containers) {
         if (ceti::checkCollision(bullet, c)) {
-            processor().death(bullet);
-            processor().hit(c, bullet->damage());
+            composer().death(bullet);
+            composer().hit(c, bullet->damage());
             return;
         }
     }
     for (auto b: m_bullets) {
         if (b->collideable() && (b->ownerId() != bullet->ownerId())) {
             if (ceti::checkCollision(bullet, b)) {
-                processor().death(bullet);
-                processor().death(b);
+                composer().death(bullet);
+                composer().death(b);
                 return;
             }
         }
@@ -820,21 +820,21 @@ void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
 
     for (auto v: m_vehicles) {
         if (ceti::checkCollision(asteroid, v)) {
-            processor().death(asteroid);
-            processor().hit(v, asteroid->mass());
+            composer().death(asteroid);
+            composer().hit(v, asteroid->mass());
             return;
         }
     }
     for (auto p: m_planets) {
         if (ceti::checkCollision(asteroid, p)) {
-            processor().death(asteroid);
+            composer().death(asteroid);
             //processor().hit(p, asteroid->mass());
             return;
         }
     }
     for (auto s: m_stars) {
         if (ceti::checkCollision(asteroid, s)) {
-            processor().death(asteroid);
+            composer().death(asteroid);
             //processor().hit(s, asteroid->mass());
             return;
         }
@@ -842,8 +842,8 @@ void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
     for (auto a: m_asteroids) {
         if (a->id() != asteroid->id()) {
             if (ceti::checkCollision(asteroid, a)) {
-                processor().death(asteroid);
-                processor().death(a);
+                composer().death(asteroid);
+                composer().death(a);
                 return;
             }
         }
@@ -851,8 +851,8 @@ void StarSystem::__asteroidCollisionCheck_s(Asteroid* asteroid) const
     for (auto b: m_bullets) {
         if (b->collideable()) {
             if (ceti::checkCollision(asteroid, b)) {
-                processor().hit(asteroid, b->damage());
-                processor().death(b);
+                composer().hit(asteroid, b->damage());
+                composer().death(b);
                 return;
             }
         }
