@@ -78,5 +78,4 @@ std::shared_ptr<core::manager::Entity> entities() {
 }
 
 } // namespace shortcuts
-
 } // core

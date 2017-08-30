@@ -21,7 +21,7 @@
 #include <world/starsystem.hpp>
 #include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
-#include <core/manager/Processor.hpp>
+#include <core/communication/TelegrammComposer.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
@@ -108,7 +108,7 @@ void SpaceObject::_checkDeath(bool show_effect)
     }
     if (model()->armor() == 0) {
         model()->setIsAlive(false);
-        core::manager::Processor::get().death_spaceobject(this);
+        core::TelegrammComposer::get().death_spaceobject(this);
     }
 }
 

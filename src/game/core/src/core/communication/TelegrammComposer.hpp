@@ -45,18 +45,16 @@ namespace comm {
 class TelegrammHub;
 } // namespace comm
 
-namespace manager {
-
-class Processor
+class TelegrammComposer
 {
 private:
-    Processor();
-    Processor(const Processor&) = delete;
-    ~Processor() = default;
-    Processor& operator=(const Processor&) = delete;
+    TelegrammComposer();
+    TelegrammComposer(const TelegrammComposer&) = delete;
+    ~TelegrammComposer() = default;
+    TelegrammComposer& operator=(const TelegrammComposer&) = delete;
 
 public:
-    static Processor& get();
+    static TelegrammComposer& get();
 
     void death_spaceobject(control::SpaceObject*);
     void death(control::Asteroid*);
@@ -81,5 +79,4 @@ private:
     std::vector<glm::vec3> __genImpulses(int num) const;
 };
 
-} // namespace manager
 } // namespace core

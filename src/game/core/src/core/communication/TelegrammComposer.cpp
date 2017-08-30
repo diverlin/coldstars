@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Processor.hpp"
+#include "TelegrammComposer.hpp"
 
 #include <core/world/starsystem.hpp>
 #include <core/common/Global.hpp>
@@ -40,16 +40,15 @@
 #include <core/communication/TelegrammManager.hpp>
 
 namespace core {
-namespace manager {
 
-Processor&
-Processor::get()
+TelegrammComposer&
+TelegrammComposer::get()
 {
-    static Processor instance;
+    static TelegrammComposer instance;
     return instance;
 }
 
-Processor::Processor()
+TelegrammComposer::TelegrammComposer()
     :
       m_telegrammHub(core::global::get().telegrammHub())
 {
@@ -57,7 +56,7 @@ Processor::Processor()
 }
 
 std::vector<glm::vec3>
-Processor::__genImpulses(int num) const
+TelegrammComposer::__genImpulses(int num) const
 {
     std::vector<glm::vec3> result;
     float delta_angle = float(2*M_PI/num);
@@ -70,7 +69,7 @@ Processor::__genImpulses(int num) const
     return result;
 }
 
-void Processor::death_spaceobject(control::SpaceObject* object)
+void TelegrammComposer::death_spaceobject(control::SpaceObject* object)
 {
     switch(object->type()) {
     case entity::Type::ASTEROID: death(static_cast<control::Asteroid*>(object)); break;
@@ -83,7 +82,7 @@ void Processor::death_spaceobject(control::SpaceObject* object)
     }
 }
 
-void Processor::death(control::Asteroid* asteroid)
+void TelegrammComposer::death(control::Asteroid* asteroid)
 {
     // create minerals
     int containers_num = meti::rand::gen_int(1,3);
@@ -114,7 +113,7 @@ void Processor::death(control::Asteroid* asteroid)
     __explosionEffect(asteroid->collisionRadius(), asteroid->position());
 }
 
-void Processor::__death(control::Vehicle* vehicle)
+void TelegrammComposer::__death(control::Vehicle* vehicle)
 {
     // create containers
     int containers_num = meti::rand::gen_int(1,3);
@@ -142,7 +141,7 @@ void Processor::__death(control::Vehicle* vehicle)
     __explosionEffect(vehicle->collisionRadius(), vehicle->position());
 }
 
-void Processor::death(control::Bullet* bullet)
+void TelegrammComposer::death(control::Bullet* bullet)
 {
     __removeSpaceObjectFromStarSystem(bullet);
     __addSpaceObjectToGarbage(bullet);
@@ -150,7 +149,7 @@ void Processor::death(control::Bullet* bullet)
     __explosionEffect(2*bullet->collisionRadius(), bullet->position());
 }
 
-void Processor::__death(control::Container* container)
+void TelegrammComposer::__death(control::Container* container)
 {
     __removeSpaceObjectFromStarSystem(container);
     __addSpaceObjectToGarbage(container);
@@ -159,7 +158,7 @@ void Processor::__death(control::Container* container)
 }
 
 
-void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
+void TelegrammComposer::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
 {
     if (starsystem->bullets().size() >= num) {
         return;
@@ -192,36 +191,35 @@ void Processor::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
-void Processor::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
+void TelegrammComposer::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
 {
     descriptor::comm::StarSystemTransition descriptor(object->id(), object->starsystem()->id());
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
 }
 
-void Processor::__addSpaceObjectToGarbage(control::SpaceObject* object)
+void TelegrammComposer::__addSpaceObjectToGarbage(control::SpaceObject* object)
 {
     descriptor::comm::Object descriptor(object->id());
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
 }
 
-void Processor::__explosionEffect(float radius, const glm::vec3& position)
+void TelegrammComposer::__explosionEffect(float radius, const glm::vec3& position)
 {
     descriptor::comm::effect::Explosion telegramm_descriptor(radius, position);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
 }
 
-void Processor::hit(control::SpaceObject* object, int damage)
+void TelegrammComposer::hit(control::SpaceObject* object, int damage)
 {
     descriptor::comm::Hit descriptor(object->id(), object->id(), damage);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
 }
 
-void Processor::createPlayer(core::Player* player)
+void TelegrammComposer::createPlayer(core::Player* player)
 {
     descriptor::comm::CreatePlayer descriptor(player->id(), player->npc()->id());
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PLAYER, descriptor.data()));
 }
 
 
-} // namespace manager
 } // namespace core
