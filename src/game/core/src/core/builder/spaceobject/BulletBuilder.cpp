@@ -33,10 +33,10 @@ control::Bullet*
 Bullet::gen(int damage)
 {
     descriptor::Bullet* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::CONTAINER)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::CONTAINER)) {
         descr = descriptor::genBullet();
     } else {
-        descr = descriptor::Manager::get().randBullet();
+        descr = core::Sessions::get().session()->descriptor()->randBullet();
     }
     assert(descr);
     return gen(descr, damage);

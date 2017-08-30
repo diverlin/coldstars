@@ -41,7 +41,7 @@ Goods::gen(descriptor::item::Goods* descriptor)
 control::item::Goods*
 Goods::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::item::Goods* descriptor = descriptor::Manager::get().goods(descriptor_id);
+    descriptor::item::Goods* descriptor = core::Sessions::get().session()->descriptor()->goods(descriptor_id);
     control::item::Goods* control = __genTemplate(descriptor, object_id);
     __createInternals(control, descriptor);
     return control;
@@ -51,10 +51,10 @@ control::item::Goods*
 Goods::gen()
 {
     descriptor::item::Goods* descriptor = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::GOODS)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::GOODS)) {
         descriptor = descriptor::item::genGoods();
     } else {
-        descriptor = descriptor::Manager::get().randGoods();
+        descriptor = core::Sessions::get().session()->descriptor()->randGoods();
     }
     assert(descriptor);
     return gen(descriptor);

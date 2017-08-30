@@ -22,6 +22,7 @@
 #include <common/Global.hpp>
 #include <client/common/global.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
@@ -63,7 +64,7 @@ void Data::__generate()
 
 void Data::__generateMeshDescriptors()
 {        
-    auto dmm = descriptor::Manager::get().meshes();
+    auto dmm = core::Sessions::get().session()->descriptor()->meshes();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".od");
         const auto& types = client::global::get().types();
@@ -73,12 +74,12 @@ void Data::__generateMeshDescriptors()
 
 void Data::__generateGameObjectDescriptors()
 {
-    descriptor::Manager::get().generate();
+    core::Sessions::get().session()->descriptor()->generate();
 }
 
 void Data::__generateMaterialDescriptors()
 {
-    auto dmm = descriptor::Manager::get().materials();
+    auto dmm = core::Sessions::get().session()->descriptor()->materials();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".md");
         const auto& types = client::global::get().types();

@@ -38,6 +38,7 @@
 #include <core/type/TextureType.hpp>
 #include <core/item/Item.hpp>
 
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -63,7 +64,7 @@ genGalaxy(const std::vector<int_t>& sectors) {
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::rand::get_element_or_die(sectors));
     }
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -74,7 +75,7 @@ genSector(const std::vector<int_t>& starsystems) {
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::rand::get_element_or_die(starsystems));
     }
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -88,7 +89,7 @@ genStarSystem(race::Type race)
 
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -96,7 +97,7 @@ descriptor::HyperSpace*
 genHyperSpace()
 {
     descriptor::HyperSpace* descr = new descriptor::HyperSpace;
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -105,7 +106,7 @@ genHyperSpace()
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::Type& type) {
-    descriptor::Mesh* descr = descriptor::Manager::get().randMesh(type);
+    descriptor::Mesh* descr = core::Sessions::get().session()->descriptor()->randMesh(type);
     if (type == mesh::Type::PLANE) {
         descr->setIsPlane();
     }
@@ -114,7 +115,7 @@ int_t meshDescriptorIdFromType(const mesh::Type& type) {
 }
 
 int_t textureDescriptorIdFromType(const texture::Type& type) {
-    descriptor::Material* descr = descriptor::Manager::get().randMaterial(type);
+    descriptor::Material* descr = core::Sessions::get().session()->descriptor()->randMaterial(type);
     assert(descr->id() != NONE);
     return descr->id();
 }
@@ -145,7 +146,7 @@ genStar()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::STAR));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -176,7 +177,7 @@ genPlanet()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -262,7 +263,7 @@ genAsteroid()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::ASTEROID));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE_DEFORMED));
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
@@ -275,7 +276,7 @@ genWormHole()
 {
     descriptor::WormHole* descr = new descriptor::WormHole;
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -292,7 +293,7 @@ genContainer()
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -311,7 +312,7 @@ genBullet()
     descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
     descriptor->setArmor(1);
 
-    descriptor::Manager::get().add(descriptor);
+    core::Sessions::get().session()->descriptor()->add(descriptor);
 
     assert(descriptor->texture() != NONE);
     assert(descriptor->mesh() != NONE);
@@ -324,7 +325,7 @@ genNpc()
 {
     descriptor::Npc* descr = new descriptor::Npc;
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
     return descr;
 }
 
@@ -414,7 +415,7 @@ genShip()
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
     //descr->setSize(meti::vec3(meti::getRandInt(100, 100))); // TODO: take from image
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -501,7 +502,7 @@ genSpaceStation()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -587,7 +588,7 @@ genSatellite()
     //int size_threshold = 2;
     descr->setDrawTurrels(false);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -604,7 +605,7 @@ genKosmoport(race::Type race)
     Kosmoport* descr = new Kosmoport;
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -614,7 +615,7 @@ genNatureLand()
 {
     NatureLand* descr = new NatureLand;
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -630,7 +631,7 @@ genAngar(race::Type race)
     Angar* descr = new Angar;
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -645,7 +646,7 @@ genStore(race::Type race)
     Store* descr = new Store;
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -660,7 +661,7 @@ genShop(race::Type race)
     Shop* descr = new Shop;
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -675,7 +676,7 @@ genGoverment(race::Type race)
     Goverment* descr = new Goverment;
     descr->setRace(race);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -733,7 +734,7 @@ genBak(int race, int tech_level)
     // descriptor::item::Bak
     descr->setFuel(fuel);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -791,7 +792,7 @@ genDrive(int race, int tech_level)
     descr->setSpeed(speed);
     descr->setHyper(hyper);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -843,7 +844,7 @@ genDroid(int race, int tech_level)
     // descriptor::item::Droid
     descr->setRepair(repair);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -906,7 +907,7 @@ genGrapple(int race, int tech_level)
     descr->setRadius(radius);
     descr->setSpeed(speed);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -962,7 +963,7 @@ genLazer(int race, int tech_level)
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -1015,7 +1016,7 @@ genProtector(int race, int tech_level)
     // descriptor::item::Protector
     descr->setProtection(protection);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -1067,7 +1068,7 @@ genRadar(int race, int tech_level)
     // descriptor::item::Radar
     descr->setRadius(radius);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -1125,13 +1126,13 @@ genRocket(int race, int tech_level)
     descr->setRadius(radius);
 
     // descriptor::item::Rocket
-    descr->setBulletDescriptor(descriptor::Manager::get().randBullet()->id());
+    descr->setBulletDescriptor(core::Sessions::get().session()->descriptor()->randBullet()->id());
     descr->setAmmo(ammo);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -1184,7 +1185,7 @@ genScaner(int race, int tech_level)
     // descriptor::item::Radar
     descr->setScan(scan);
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     return descr;
 }
@@ -1203,7 +1204,7 @@ genScaner(int race, int tech_level)
 //    descr->setDamage(damage);
 //    descr->setRadius(radius);
 
-//    descriptor::Manager::get().reg(descr);
+//    core::Sessions::get().session()->descriptor()->reg(descr);
 
 //    return descr;
 //}
@@ -1217,7 +1218,7 @@ genGoods()
     descriptor->setTexture(textureDescriptorIdFromType(texture::Type::GOODS));
     descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 
-    descriptor::Manager::get().add(descriptor);
+    core::Sessions::get().session()->descriptor()->add(descriptor);
 
     return descriptor;
 }
@@ -1233,7 +1234,7 @@ genTurrel()
     descr->setTexture(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 
-    descriptor::Manager::get().add(descr);
+    core::Sessions::get().session()->descriptor()->add(descr);
 
     assert(descr->texture() != NONE);
     assert(descr->mesh() != NONE);

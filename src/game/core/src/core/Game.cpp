@@ -25,13 +25,15 @@
 #include <world/galaxy.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
+
+#include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 namespace control {
 
 World::World()
 {
-    auto descriptor = descriptor::Manager::get().randGalaxy();
+    auto descriptor = core::Sessions::get().session()->descriptor()->randGalaxy();
     core::global::get().god().createWorld(descriptor);
 }
 

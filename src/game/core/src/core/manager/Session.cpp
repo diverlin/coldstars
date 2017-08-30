@@ -18,6 +18,7 @@
 
 #include "Session.hpp"
 
+#include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Garbage.hpp>
 
@@ -27,7 +28,8 @@ namespace core {
 
 Session::Session()
     :
-      m_entity(new manager::Entity)
+      m_descriptor(new descriptor::Manager)
+    , m_entity(new manager::Entity)
     , m_garbage(new manager::Garbage)
 {}
 

@@ -38,10 +38,10 @@ control::Sector*
 Sector::gen()
 {
     descriptor::Sector* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::SECTOR)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::SECTOR)) {
         descr = descriptor::genSector({0});
     } else {
-        descr = descriptor::Manager::get().randSector();
+        descr = core::Sessions::get().session()->descriptor()->randSector();
     }
     return gen(descr);
 }
@@ -81,7 +81,7 @@ Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
 {
     for(const auto& id: descr->starsystems) {
         glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
-        descriptor::StarSystem* descr_starsystem = descriptor::Manager::get().starSystem(id);
+        descriptor::StarSystem* descr_starsystem = core::Sessions::get().session()->descriptor()->starSystem(id);
         control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
         sector->add(starsystem, position);
     }

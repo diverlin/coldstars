@@ -37,10 +37,10 @@ control::Angar*
 Angar::gen()
 {
     descriptor::Angar* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::ANGAR)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::ANGAR)) {
         descr = descriptor::genAngar();
     } else {
-        descr = descriptor::Manager::get().randAngar();
+        descr = core::Sessions::get().session()->descriptor()->randAngar();
     }
     return gen(descr);
 } 

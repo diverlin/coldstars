@@ -42,10 +42,10 @@ control::Npc*
 Npc::gen()
 {
     descriptor::Npc* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::NPC)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::NPC)) {
         descr = descriptor::genNpc();
     } else {
-        descr = descriptor::Manager::get().randNpc();
+        descr = core::Sessions::get().session()->descriptor()->randNpc();
     }
     assert(descr);
     return gen(descr);

@@ -45,12 +45,6 @@ const std::string descriptor_meshes_fname = "mesh_descriptors.txt";
 const std::string descriptor_materials_fname = "material_descriptors.txt";
 } // namespace
 
-Manager&
-Manager::get()
-{
-    static Manager instance;
-    return instance;
-}
 
 Manager::Manager()
     :
@@ -770,6 +764,7 @@ Manager::clear()
 
 void
 Manager::__resolveId(Base* descr) {
+
     if (descr->id() == NONE) {
         descr->setId(m_idGenerator.nextId());
     }

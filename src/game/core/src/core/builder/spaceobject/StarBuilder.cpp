@@ -40,10 +40,10 @@ control::Star*
 Star::gen()
 {
     descriptor::Star* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::STAR)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::STAR)) {
         descr = descriptor::genStar();
     } else {
-        descr = descriptor::Manager::get().randStar();
+        descr = core::Sessions::get().session()->descriptor()->randStar();
     }
     assert(descr);
     return gen(descr);

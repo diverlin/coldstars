@@ -49,10 +49,10 @@ control::WormHole*
 WormHole::gen()
 {
     descriptor::WormHole* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::WORMHOLE)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::WORMHOLE)) {
         descr = descriptor::genWormHole();
     } else {
-        descr = descriptor::Manager::get().randWormHole();
+        descr = core::Sessions::get().session()->descriptor()->randWormHole();
     }
 
     return gen(descr);

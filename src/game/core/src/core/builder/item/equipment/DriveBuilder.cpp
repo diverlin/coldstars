@@ -35,10 +35,10 @@ control::item::Drive*
 Drive::gen()
 {
     descriptor::item::Drive* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
         descr = descriptor::item::genDrive();
     } else {
-        descr = descriptor::Manager::get().randDrive();
+        descr = core::Sessions::get().session()->descriptor()->randDrive();
     }
     assert(descr);
     return gen(descr);
@@ -47,7 +47,7 @@ Drive::gen()
 control::item::Drive*
 Drive::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Drive* descr = descriptor::Manager::get().drive(descriptor_id);
+    descriptor::item::Drive* descr = core::Sessions::get().session()->descriptor()->drive(descriptor_id);
     control::item::Drive* drive = __genTemplate(descr, ob_id);
     __createInternals(drive, descr);
     return drive;

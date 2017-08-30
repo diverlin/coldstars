@@ -35,10 +35,10 @@ control::item::Radar*
 Radar::gen()
 {
     descriptor::item::Radar* descr = nullptr;
-    if (!descriptor::Manager::get().hasType(descriptor::Type::RADAR_EQUIPMENT)) {
+    if (!core::Sessions::get().session()->descriptor()->hasType(descriptor::Type::RADAR_EQUIPMENT)) {
         descr = descriptor::item::genRadar();
     } else {
-        descr = descriptor::Manager::get().randRadar();
+        descr = core::Sessions::get().session()->descriptor()->randRadar();
     }
     assert(descr);
     return gen(descr);
@@ -47,7 +47,7 @@ Radar::gen()
 control::item::Radar*
 Radar::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Radar* descr = descriptor::Manager::get().radar(descriptor_id);
+    descriptor::item::Radar* descr = core::Sessions::get().session()->descriptor()->radar(descriptor_id);
     control::item::Radar* radar = __genTemplate(descr, ob_id);
     __createInternals(radar, descr);
     return radar;

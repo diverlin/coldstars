@@ -114,7 +114,7 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
     control::SpaceObject* target = Sessions::get().session()->entity()->spaceObject(descriptor.target());
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
-    descriptor::Bullet* bullet_descriptor = descriptor::Manager::get().bullet(rocket->descriptor()->bulletDescriptor());
+    descriptor::Bullet* bullet_descriptor = core::Sessions::get().session()->descriptor()->bullet(rocket->descriptor()->bulletDescriptor());
     control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor, rocket->damage());
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);

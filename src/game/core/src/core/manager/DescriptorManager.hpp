@@ -84,14 +84,11 @@ class Turrel;
 
 class Manager
 {
-private:
+public:
     Manager();
     Manager(const Manager&) = delete;
     ~Manager() = default;
     Manager& operator=(const Manager&) = delete;
-
-public:
-    static Manager& get();
 
     void add(Base*);
     void add(Mesh*);
