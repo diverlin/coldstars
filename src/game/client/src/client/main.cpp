@@ -102,34 +102,34 @@
 //}
 
 namespace {
-class base {
-public:
-    base(int i):
-    i(i)
-    {
-        std::cout<<"create"<<i<<std::endl;
-    }
-    ~base() {
-        std::cout<<"destroy"<<i<<std::endl;
-    }
-private:
-    int i=0;
-};
+//class base {
+//public:
+//    base(int i):
+//    i(i)
+//    {
+//        std::cout<<"create"<<i<<std::endl;
+//    }
+//    ~base() {
+//        std::cout<<"destroy"<<i<<std::endl;
+//    }
+//private:
+//    int i=0;
+//};
 
 
-void bench() {
-    {
-    std::shared_ptr<base> z1(new base(1));
-    std::shared_ptr<base> z2(new base(2));
-    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
-    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
-    //z1.reset();
-    z2 = z1;
-    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
-    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
-    }
-    exit(1);
-}
+//void bench() {
+//    {
+//    std::shared_ptr<base> z1(new base(1));
+//    std::shared_ptr<base> z2(new base(2));
+//    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
+//    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
+//    //z1.reset();
+//    z2 = z1;
+//    std::cout<<"z1 count="<<z1.use_count()<<std::endl;
+//    std::cout<<"z2 count="<<z2.use_count()<<std::endl;
+//    }
+//    exit(1);
+//}
 
 core::TelegrammComposer& composer() { return core::TelegrammComposer::get(); }
 
@@ -148,6 +148,7 @@ public:
 
         __activate();
 
+        core::global::get().telegrammHub().subscribe(std::shared_ptr<core::comm::TelegrammDispatcher>(new core::comm::TelegrammDispatcher()));
 
         Data data;
 
@@ -164,20 +165,20 @@ public:
         m_world->update();
     }
 
-    void create_player() {
-        int_t id = core::shortcuts::entities()->nextId();
-        core::Player* player = new core::Player(id);
-        m_players.push_back(player);
+//    void create_player() {
+//        int_t id = core::shortcuts::entities()->nextId();
+//        core::Player* player = new core::Player(id);
+//        m_players.push_back(player);
 
-        control::StarSystem* starsystem = m_world->galaxy()->randomSector()->randomStarSystem();
+//        control::StarSystem* starsystem = m_world->galaxy()->randomSector()->randomStarSystem();
 
-        assert(starsystem->ships().size());
-        control::Npc* npc = starsystem->ships().front()->npc();
-        assert(npc);
-        player->setNpc(npc);
+//        assert(starsystem->ships().size());
+//        control::Npc* npc = starsystem->ships().front()->npc();
+//        assert(npc);
+//        player->setNpc(npc);
 
-        composer().createPlayer(player);
-    }
+//        composer().createPlayer(player);
+//    }
 
 private:
     void __activate() const {
@@ -206,7 +207,7 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegrammHub().add(new client::comm::TelegrammDispatcher());
+        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegrammDispatcher>(new client::comm::TelegrammDispatcher()));
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);
