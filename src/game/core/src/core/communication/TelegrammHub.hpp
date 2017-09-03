@@ -3,6 +3,7 @@
 #include <communication/Telegramm.hpp>
 
 #include <vector>
+#include <memory>
 
 namespace core {
 namespace comm {
@@ -15,12 +16,12 @@ public:
     TelegrammHub()=default;
     ~TelegrammHub()=default;
 
-    void add(TelegrammDispatcher*);
+    void subscribe(const std::shared_ptr<TelegrammDispatcher>&);
     void add(const Telegramm&);
 
 private:
     std::vector<Telegramm> m_telegramms;
-    std::vector<TelegrammDispatcher*> m_listeners;
+    std::vector<std::shared_ptr<TelegrammDispatcher>> m_listeners;
 
     void __broadcast();
 
