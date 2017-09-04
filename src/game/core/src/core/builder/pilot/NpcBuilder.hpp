@@ -35,13 +35,14 @@ class Npc
 {
 public:
     static control::Npc* gen();
-    static control::Npc* gen(descriptor::Npc*);
+    static control::Npc* gen(int_t descriptor_id, int_t id);
+    static control::Npc* gen(descriptor::Npc*, int_t id = NONE);
 
 private:
     Npc() = delete;
     ~Npc() = delete;
 
-    static control::Npc* __createTemplate(descriptor::Npc*);
+    static control::Npc* __createTemplate(descriptor::Npc*, int_t id);
     static void __createInternals(control::Npc*, descriptor::Npc*);
 }; 
 

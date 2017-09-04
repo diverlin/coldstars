@@ -47,9 +47,16 @@ Planet::gen()
 } 
 
 control::Planet*
-Planet::gen(descriptor::Planet* descr)
+Planet::gen(int_t descriptor_id, int_t id)
 {
-    control::Planet* planet = __genTemplate(descr);
+    descriptor::Planet* descr = core::shortcuts::descriptors()->planet(descriptor_id);
+    return gen(descr, id);
+}
+
+control::Planet*
+Planet::gen(descriptor::Planet* descr, int_t id)
+{
+    control::Planet* planet = __genTemplate(descr, id);
     __createInternals(planet, descr);
     return planet;
 }
@@ -98,15 +105,13 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
 }
 
 control::Planet*
-Planet::__genTemplate(descriptor::Planet* descr)
+Planet::__genTemplate(descriptor::Planet* descr, int_t id)
 {
-    model::Planet* model = new model::Planet(descr->id());
+    model::Planet* model = new model::Planet(descr->id(), id);
     assert(model);
 
     control::Planet* planet = new control::Planet(descr, model);
     assert(planet);
-
-    core::shortcuts::entities()->add(planet);
 
     return planet;
 }

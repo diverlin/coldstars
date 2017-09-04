@@ -52,7 +52,7 @@ namespace model {
 class Npc : public Base {
 
 public:
-    Npc(int_t);
+    Npc(int_t, int_t);
     ~Npc() = default;
     Npc(const std::string& data);
     std::string data() const;

@@ -14,9 +14,15 @@ public:
     {
         NONE,
         /** CREATE */
-        CREATE_PLAYER,
-        // spaceobjects
+        CREATE_GALAXY,
+        CREATE_SECTOR,
         CREATE_STARSYSTEM,
+        CREATE_PLAYER,
+        CREATE_NPC,
+        // spaceobjects
+        CREATE_STAR,
+        CREATE_PLANET,
+        CREATE_ASTEROID,
         CREATE_SHIP,
         CREATE_BOMB,
         CREATE_GOODS,
@@ -47,8 +53,14 @@ public:
         TAKE_CONTAINER,
 
         /** TRANSITION */
+        ADD_SECTOR_TO_GALAXY,
+        ADD_STARSYSTEM_TO_SECTOR,
+        ADD_STAR_TO_STARSYSTEM,
+        ADD_PLANET_TO_STARSYSTEM,
+        ADD_ASTEROID_TO_STARSYSTEM,
         ADD_SHIP_TO_STARSYSTEM,
         ADD_CONTAINER_TO_STARSYSTEM,
+        ADD_NPC_TO_SHIP,
         INSERT,
         REMOVE_SPACEOBJECT_FROM_STARSYSTEM,
         REMOVE,

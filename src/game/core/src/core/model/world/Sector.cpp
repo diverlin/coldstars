@@ -23,8 +23,9 @@
 
 namespace model {
 
-Sector::Sector(int_t descriptor_id)
+Sector::Sector(int_t descriptor_id, int_t object_id)
 {
+    setId(object_id);
     setDescriptor(descriptor_id);
 }
 

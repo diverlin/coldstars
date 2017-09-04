@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <ceti/type/IdType.hpp>
+
 namespace descriptor {
 class Star;
 } // namespace descriptor
@@ -36,10 +38,11 @@ public:
     ~Star();
 
     static control::Star* gen();
-    static control::Star* gen(descriptor::Star*);
+    static control::Star* gen(int_t, int_t);
+    static control::Star* gen(descriptor::Star*, int_t id = NONE);
 
 private:
-    static control::Star* __genTemplate(descriptor::Star*);
+    static control::Star* __genTemplate(descriptor::Star*, int_t id = NONE);
 };
 
 } // namespace builder

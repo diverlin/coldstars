@@ -19,12 +19,15 @@
 
 # pragma once
 
+#include <ceti/type/IdType.hpp>
+
 #include <glm/glm.hpp>
 
 #include <memory>
 #include <vector>
 
 namespace descriptor {
+class Galaxy;
 class Manager;
 } // namespace descriptor
 
@@ -65,6 +68,7 @@ public:
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
     void createPlayer(core::Player*);
+    void createGalaxy(descriptor::Galaxy*);
 
 private:
     core::comm::TelegrammHub& m_telegrammHub;
@@ -77,6 +81,19 @@ private:
     void __death(control::Container*);
 
     std::vector<glm::vec3> __genImpulses(int num) const;
+
+    void __createSectors(descriptor::Galaxy*, int_t) const;
+    void __createStarsystems(int_t, int_t) const;
+    void __createStarsystemInternalls(int_t, int_t) const;
+    void __createStar(int_t) const;
+    void __createPlanets(int_t starsystem_id, int planet_num) const;
+    void __createShips(int_t, int ship_num) const;
+    void __createShip(int_t descriptor_id, int_t id) const;
+    void __createNpc(int_t descriptor_id, int_t id) const;
+    void __addNpcToShip(int_t ship_id, int_t npc_id) const;
+    void __equipShip(int_t ship_id) const;
+
+    void __addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;
 };
 
 } // namespace core

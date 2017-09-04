@@ -16,32 +16,49 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <core/spaceobject/Planetoid.hpp>
+#include <ceti/type/IdType.hpp>
 
-namespace model {
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
-class Asteroid : public Planetoid {
+namespace descriptor {
+namespace comm {
+
+class Creation
+{
 public:
-    Asteroid(int_t, int_t);
-    ~Asteroid() = default;
-    Asteroid(const std::string& data);
+    Creation(int_t, int_t);
+    Creation(const std::string& data);
+    Creation() = default;
+    ~Creation() = default;
     std::string data() const;
 
-    ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
-        result.add("model::Asteroid");
+    int_t descriptor() const { return m_descriptor; }
+    int_t object() const { return m_object; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::Create:\n";
+        result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
+        result += std::string(" object = ") + std::to_string(m_object) + "\n";
         return result;
     }
+
+private:
+    int_t m_descriptor = NONE;
+    int_t m_object = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & m_descriptor;
+        ar & m_object;
     }
 };
 
-} // namespace model
+} // namespace comm
+} // namespace descriptor
+
+

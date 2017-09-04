@@ -28,9 +28,9 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <world/starsystem.hpp>
+//#include <world/starsystem.hpp>
 
-#include <common/Config.hpp>
+//#include <common/Config.hpp>
 
 namespace builder {
 
@@ -47,46 +47,44 @@ Sector::gen()
 }
 
 control::Sector*
-Sector::gen(descriptor::Sector* descr)
+Sector::gen(int_t descriptor_id, int_t object_id)
 {
-    control::Sector* sector = __genTemplate(descr);
-    __createInternals(sector, descr);
+    descriptor::Sector* descriptor = core::shortcuts::descriptors()->sector(descriptor_id);
+    control::Sector* sector = __genTemplate(descriptor, object_id);
+    __createInternals(sector, descriptor);
     return sector;
-} 
-
-void
-Sector::genLife(control::Sector* sector)
-{
-    for(control::StarSystem* starsystem: sector->starSystems()) {
-        builder::StarSystem::genLife(starsystem);
-    }
 }
 
 control::Sector*
-Sector::__genTemplate(descriptor::Sector* descr)
+Sector::gen(descriptor::Sector* descriptor)
 {
-    model::Sector* model = new model::Sector(descr->id());
+    control::Sector* sector = __genTemplate(descriptor);
+    __createInternals(sector, descriptor);
+    return sector;
+} 
+
+control::Sector*
+Sector::__genTemplate(descriptor::Sector* descriptor, int_t object_id)
+{
+    model::Sector* model = new model::Sector(descriptor->id(), object_id);
     assert(model);
 
-    control::Sector* sector = new control::Sector(descr, model);
+    control::Sector* sector = new control::Sector(descriptor, model);
     assert(sector);
-
-    core::shortcuts::entities()->add(sector);
 
     return sector;
 }
 
 void
-Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
+Sector::__createInternals(control::Sector* sector, descriptor::Sector* descriptor)
 {
-    for(const auto& id: descr->starsystems) {
-        glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
-        descriptor::StarSystem* descr_starsystem = core::shortcuts::descriptors()->starSystem(id);
-        control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
-        assert(false);
-        sector->add(starsystem, position);
-        assert(false);
-    }
+    assert(false);
+//    for(const auto& id: descr->starsystems) {
+//        glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
+//        descriptor::StarSystem* descr_starsystem = core::shortcuts::descriptors()->starSystem(id);
+//        control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
+//        sector->add(starsystem, position);
+//    }
 }
 
 } // namespace builder

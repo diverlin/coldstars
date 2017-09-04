@@ -48,7 +48,7 @@ public:
     God();
     ~God();
 
-    void createWorld(descriptor::Galaxy*);
+    void createWorld();
     void update();
 
     control::Galaxy* galaxy() const { return m_galaxy; }

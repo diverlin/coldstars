@@ -31,7 +31,7 @@ namespace model {
 class Sector : public Base
 {
 public:
-    Sector(int_t);
+    Sector(int_t, int_t);
     ~Sector() = default;
     Sector(const std::string& data);
     std::string data() const;

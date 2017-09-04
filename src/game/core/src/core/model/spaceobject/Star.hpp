@@ -28,7 +28,7 @@ namespace model {
 class Star : public Planetoid {
 
 public:
-    Star(int_t);
+    Star(int_t, int_t);
     ~Star() = default;
     Star(const std::string& data);
     std::string data() const;

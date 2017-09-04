@@ -16,32 +16,52 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <core/spaceobject/Planetoid.hpp>
+#include <descriptor/comm/Create.hpp>
 
-namespace model {
+#include <meti/VectorUtils.hpp>
+#include <ceti/StringUtils.hpp>
 
-class Asteroid : public Planetoid {
+namespace descriptor {
+namespace comm {
+
+class Adding {
 public:
-    Asteroid(int_t, int_t);
-    ~Asteroid() = default;
-    Asteroid(const std::string& data);
+    Adding(int_t, int_t, const meti::vec3& position = glm::vec3());
+    Adding(const std::string& data);
+    Adding() = default;
+    ~Adding() = default;
     std::string data() const;
 
-    ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
-        result.add("model::Asteroid");
+    int_t parent() const { return m_parent; }
+    int_t object() const { return m_object; }
+    const meti::vec3& position() const { return m_position; }
+
+    std::string info() const {
+        std::string result = "descriptor::comm::Adding:\n";
+        result += std::string(" parent = ") + ceti::to_string(m_parent) + "\n";
+        result += std::string(" object = ") + ceti::to_string(m_object) + "\n";
+        result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }
+
+private:
+    int_t m_parent = NONE;
+    int_t m_object = NONE;
+    meti::vec3 m_position;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & m_parent;
+        ar & m_object;
+        ar & m_position;
     }
 };
 
-} // namespace model
+} // namespace comm
+} // namespace descriptor
+
+

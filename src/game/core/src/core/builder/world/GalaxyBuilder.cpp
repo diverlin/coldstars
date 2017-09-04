@@ -23,7 +23,7 @@
 
 #include <core/world/galaxy.hpp>
 #include <core/model/world/galaxy.hpp>
-#include <core/world/Sector.hpp>
+//#include <core/world/Sector.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/Session.hpp>
@@ -45,42 +45,43 @@ Galaxy::gen()
 }
 
 control::Galaxy*
-Galaxy::gen(descriptor::Galaxy* descr)
+Galaxy::gen(int_t descriptor_id, int_t object_id)
 {
-    control::Galaxy* galaxy = __genTemplate(descr);
-    __createInternals(galaxy, descr);
+    descriptor::Galaxy* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
+    control::Galaxy* sector = __genTemplate(descriptor, object_id);
+    __createInternals(sector, descriptor);
+    return sector;
+}
+
+control::Galaxy*
+Galaxy::gen(descriptor::Galaxy* descriptor)
+{
+    control::Galaxy* galaxy = __genTemplate(descriptor);
+    __createInternals(galaxy, descriptor);
     return galaxy;
 } 
 
 control::Galaxy*
-Galaxy::__genTemplate(descriptor::Galaxy* descr)
+Galaxy::__genTemplate(descriptor::Galaxy* descriptor, int_t object_id)
 {
-    model::Galaxy* model = new model::Galaxy(descr->id());
+    model::Galaxy* model = new model::Galaxy(descriptor->id(), object_id);
     assert(model);
 
-    control::Galaxy* galaxy = new control::Galaxy(descr, model);
+    control::Galaxy* galaxy = new control::Galaxy(descriptor, model);
     assert(galaxy);
-
-    core::shortcuts::entities()->add(galaxy);
 
     return galaxy;
 }
 
-void Galaxy::genLife(control::Galaxy* galaxy)
-{
-    for(control::Sector* sector: galaxy->sectors()) {
-        builder::Sector::genLife(sector);
-    }
-}
-
 void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
-{     
-    for(int_t id: descr->sectors) {
-        glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-        descriptor::Sector* descr_sector = core::shortcuts::descriptors()->sector(id);
-        control::Sector* sector = builder::Sector::gen(descr_sector);
-        galaxy->add(sector, position);
-    }
+{
+    assert(false);
+//    for(int_t id: descr->sectors) {
+//        glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
+//        descriptor::Sector* descr_sector = core::shortcuts::descriptors()->sector(id);
+//        control::Sector* sector = builder::Sector::gen(descr_sector);
+//        galaxy->add(sector, position);
+//    }
 }
 
 } // namespace builder

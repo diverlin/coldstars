@@ -33,9 +33,10 @@
 
 namespace model {
 
-Galaxy::Galaxy(int_t descriptor_id)
+Galaxy::Galaxy(int_t descriptor, int_t object)
 {
-    setDescriptor(descriptor_id);
+    setId(object);
+    setDescriptor(descriptor);
 }
 
 Galaxy::Galaxy(const std::string& data)

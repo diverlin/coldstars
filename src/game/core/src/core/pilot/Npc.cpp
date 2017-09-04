@@ -49,8 +49,9 @@
 
 namespace model {
 
-Npc::Npc(int_t descriptor_id)
+Npc::Npc(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 
