@@ -23,8 +23,7 @@
 #include <core/descriptor/ExplosionDescriptor.hpp>
 
 #include <core/spaceobject/ALL>
-#include <core/item/equipment/Weapon.hpp>
-#include <core/item/equipment/Rocket.hpp>
+#include <core/item/ALL>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 
 #include <core/slot/ItemSlot.hpp>
@@ -51,7 +50,7 @@ namespace comm {
 void TelegrammDispatcher::add(Telegramm& telegramm)
 {
     if (telegramm.delay() < 0) {
-        _process(telegramm);
+        //_process(telegramm); // cause error while simulation server+client on single pachine
     } else {
         telegramm.setDispatchTime(__currentTime() + telegramm.delay());
         m_telegramms.insert(telegramm);
@@ -86,7 +85,8 @@ namespace {
 // spaceobjects
 void createStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::StarSystem::gen(data.descriptor(), data.object());
+    control::StarSystem* starsystem = builder::StarSystem::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(starsystem);
 }
 
 void createShipEvent(const comm::Telegramm& telegramm) {
@@ -101,7 +101,8 @@ void createBombEvent(const comm::Telegramm& telegramm) {
 
 void createGoodsEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateGoodsPack descriptor(telegramm.data());
-    builder::item::Goods::gen(descriptor.descriptor(), descriptor.object());
+    control::item::Goods* goods = builder::item::Goods::gen(descriptor.descriptor(), descriptor.object());
+    core::shortcuts::entities()->add(goods);
 }
 void createContainerEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateContainer descriptor(telegramm.data());

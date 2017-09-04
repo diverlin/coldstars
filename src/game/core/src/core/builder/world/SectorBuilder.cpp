@@ -83,7 +83,9 @@ Sector::__createInternals(control::Sector* sector, descriptor::Sector* descr)
         glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
         descriptor::StarSystem* descr_starsystem = core::shortcuts::descriptors()->starSystem(id);
         control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
+        assert(false);
         sector->add(starsystem, position);
+        assert(false);
     }
 }
 

@@ -92,13 +92,13 @@ void TelegrammComposer::death(control::Asteroid* asteroid)
         int amount = meti::rand::gen_int(3, 100);
         {
         int_t descriptor_id = shortcuts::descriptors()->randGoods()->id();
-        descriptor::comm::CreateGoodsPack telegramm_descriptor(item_id, descriptor_id, amount);
+        descriptor::comm::CreateGoodsPack telegramm_descriptor(descriptor_id, item_id, amount);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
         }
         int_t container_id = shortcuts::entities()->nextId();
         {
         int_t descriptor_id = shortcuts::descriptors()->randContainer()->id();
-        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
+        descriptor::comm::CreateContainer telegramm_descriptor(descriptor_id, container_id, item_id);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
         {
@@ -126,7 +126,7 @@ void TelegrammComposer::__death(control::Vehicle* vehicle)
         int_t descriptor_id = shortcuts::descriptors()->randContainer()->id();
         int_t item_id = items[i];
         {
-        descriptor::comm::CreateContainer telegramm_descriptor(container_id, descriptor_id, item_id);
+        descriptor::comm::CreateContainer telegramm_descriptor(descriptor_id, container_id, item_id);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
         {

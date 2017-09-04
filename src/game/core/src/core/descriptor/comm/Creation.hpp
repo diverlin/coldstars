@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include "Create.hpp"
+
 #include <core/type/TelegramType.hpp>
 
 #include <ceti/type/IdType.hpp>
@@ -59,37 +61,6 @@ private:
     }
 };
 
-class Creation
-{
-public:
-    Creation(int_t, int_t);
-    Creation(const std::string& data);
-    Creation() = default;
-    ~Creation() = default;
-    std::string data() const;
-
-    int_t object() const { return m_object; }
-    int_t descriptor() const { return m_descriptor; }
-
-    std::string info() const {
-        std::string result = "descriptor::comm::Creation:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
-        return result;
-    }
-
-private:
-    int_t m_object = NONE;
-    int_t m_descriptor = NONE;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-        ar & m_descriptor;
-    }
-};
 
 class CreatePlayer
 {
