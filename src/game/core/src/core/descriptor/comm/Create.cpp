@@ -16,32 +16,34 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <core/spaceobject/Planetoid.hpp>
+#include "Create.hpp"
 
-namespace model {
+#include <ceti/serialization/macro.hpp>
 
-class Asteroid : public Planetoid {
-public:
-    Asteroid(int_t, int_t);
-    ~Asteroid() = default;
-    Asteroid(const std::string& data);
-    std::string data() const;
+namespace descriptor {
+namespace comm {
 
-    ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
-        result.add("model::Asteroid");
-        return result;
-    }
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
-    }
-};
+Creation::Creation(int_t descriptor, int_t object)
+    :
+      m_descriptor(descriptor)
+    , m_object(object)
+{
+}
 
-} // namespace model
+Creation::Creation(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Creation::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace comm
+} // namespace descriptor
+

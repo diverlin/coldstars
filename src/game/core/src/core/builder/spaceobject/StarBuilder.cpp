@@ -50,9 +50,16 @@ Star::gen()
 } 
 
 control::Star*
-Star::gen(descriptor::Star* descr)
+Star::gen(int_t descriptor_id, int_t id)
 {
-    control::Star* star = __genTemplate(descr);
+    descriptor::Star* descriptor = core::shortcuts::descriptors()->star(descriptor_id);
+    return gen(descriptor, id);
+}
+
+control::Star*
+Star::gen(descriptor::Star* descr, int_t id)
+{
+    control::Star* star = __genTemplate(descr, id);
 
     // Orientation
     star->setSize(descr->size());
@@ -64,15 +71,14 @@ Star::gen(descriptor::Star* descr)
 }
 
 control::Star*
-Star::__genTemplate(descriptor::Star* descr)
+Star::__genTemplate(descriptor::Star* descr, int_t id)
 {
-    model::Star* model = new model::Star(descr->id());
+    model::Star* model = new model::Star(descr->id(), id);
     assert(model);
 
     control::Star* star = new control::Star(descr, model);
     assert(star);
 
-    core::shortcuts::entities()->add(star);
     return star;
 }
 

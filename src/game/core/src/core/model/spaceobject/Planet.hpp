@@ -31,7 +31,7 @@ namespace model {
 class Planet : public Planetoid {
 
 public:
-    Planet(int_t);
+    Planet(int_t, int_t);
     ~Planet() = default;
     Planet(const std::string& data);
     std::string data() const;

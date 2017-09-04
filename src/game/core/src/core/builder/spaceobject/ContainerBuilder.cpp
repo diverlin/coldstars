@@ -90,7 +90,6 @@ Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
     control::Container* container = new control::Container(descriptor, model);
     assert(container);
 
-    core::shortcuts::entities()->add(container);
     return container;
 }
 

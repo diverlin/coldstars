@@ -39,8 +39,6 @@ Satellite::__genTemplate(descriptor::Satellite* descr)
     control::Satellite* satellite = new control::Satellite(descr, model);
     assert(satellite);
 
-    core::shortcuts::entities()->add(satellite);
-    
     return satellite;
 }
 

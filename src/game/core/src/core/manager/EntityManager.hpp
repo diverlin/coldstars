@@ -31,6 +31,8 @@ namespace control {
 
 class Npc;
 
+class Galaxy;
+class Sector;
 class StarSystem;
 class HyperSpace;
 
@@ -89,6 +91,8 @@ public:
     control::Base* base(int_t) const;
     control::Npc* npc(int_t) const;
 
+    control::Galaxy* galaxy(int_t id) const;
+    control::Sector* sector(int_t id) const;
     control::StarSystem* starsystem(int_t id) const;
     control::HyperSpace* hyperspace() const;
 

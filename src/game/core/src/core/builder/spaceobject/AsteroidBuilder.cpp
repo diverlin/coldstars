@@ -41,9 +41,16 @@ Asteroid::gen()
 }
 
 control::Asteroid*
-Asteroid::gen(descriptor::Asteroid* descr)
+Asteroid::gen(int_t descriptor_id, int_t id)
 {
-    control::Asteroid* asteroid = __genTemplate(descr);
+    descriptor::Asteroid* descriptor = core::shortcuts::descriptors()->asteroid(descriptor_id);
+    return gen(descriptor, id);
+}
+
+control::Asteroid*
+Asteroid::gen(descriptor::Asteroid* descr, int_t id)
+{
+    control::Asteroid* asteroid = __genTemplate(descr, id);
 
     /// Orientation
     asteroid->setSize(descr->size());
@@ -84,15 +91,13 @@ Asteroid::gen(descriptor::Asteroid* descr)
 } 
 
 control::Asteroid*
-Asteroid::__genTemplate(descriptor::Asteroid* descr)
+Asteroid::__genTemplate(descriptor::Asteroid* descr, int_t id)
 {
-    model::Asteroid* model = new model::Asteroid(descr->id());
+    model::Asteroid* model = new model::Asteroid(descr->id(), id);
     assert(model);
 
     control::Asteroid* asteroid = new control::Asteroid(descr, model);
     assert(asteroid);
-
-    core::shortcuts::entities()->add(asteroid);
 
     return asteroid;
 }

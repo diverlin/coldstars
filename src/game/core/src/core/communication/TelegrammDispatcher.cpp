@@ -10,6 +10,7 @@
 #include <core/descriptor/comm/Hit.hpp>
 #include <core/descriptor/comm/Dock.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+#include <core/descriptor/comm/Adding.hpp>
 
 #include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -24,14 +25,19 @@
 
 #include <core/spaceobject/ALL>
 #include <core/item/ALL>
+#include <core/pilot/Npc.hpp>
 #include <core/descriptor/item/equipment/Rocket.hpp>
 
 #include <core/slot/ItemSlot.hpp>
 
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/world/HyperSpace.hpp>
 
+#include <core/builder/world/ALL>
 #include <core/builder/spaceobject/ALL>
+#include <core/builder/pilot/NpcBuilder.hpp>
 
 #include <core/builder/item/ALL>
 #ifdef USE_MODULES
@@ -82,13 +88,72 @@ void TelegrammDispatcher::update()
 
 namespace {
 
-// spaceobjects
+/** TRANSITION */
+void addSectorToGalaxyEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Adding data(telegramm.data());
+    control::Galaxy* galaxy = shortcuts::entities()->galaxy(data.parent());
+    control::Sector* sector = shortcuts::entities()->sector(data.object());
+    galaxy->add(sector, data.position());
+}
+
+void addStarSystemToSectorEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Adding data(telegramm.data());
+    control::Sector* sector = shortcuts::entities()->sector(data.parent());
+    control::StarSystem* starsystem = shortcuts::entities()->starsystem(data.object());
+    sector->add(starsystem, data.position());
+}
+void addNpcToShipEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Adding data(telegramm.data());
+    control::Ship* ship = shortcuts::entities()->ship(data.parent());
+    control::Npc* npc = shortcuts::entities()->npc(data.object());
+    ship->bindNpc(npc);
+}
+
+/** */
+
+
+/** CREATE */
+void createGalaxyEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Galaxy* galaxy = builder::Galaxy::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(galaxy);
+}
+
+void createSectorEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Sector* sector = builder::Sector::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(sector);
+}
+
 void createStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     control::StarSystem* starsystem = builder::StarSystem::gen(data.descriptor(), data.object());
     core::shortcuts::entities()->add(starsystem);
 }
+void createNpcEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Npc* npc = builder::Npc::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(npc);
+}
 
+// spaceobjects
+void createStarEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Star* star = builder::Star::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(star);
+}
+
+void createPlanetEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Planet* planet = builder::Planet::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(planet);
+}
+
+void createAsteroidEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::Asteroid* asteroid = builder::Asteroid::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(asteroid);
+}
 void createShipEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::Ship::gen(data.descriptor(), data.object());
@@ -151,8 +216,28 @@ void createRadarEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     builder::item::Radar::gen(data.descriptor(), data.object());
 }
+/** */
 
 /** ADD TO STARSYSTEM */
+void addStarToStarSystemEvent(const comm::Telegramm& telegramm) {
+    AddToStarsystemDescriptor descriptor(telegramm.data());
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
+    control::Star* star = Sessions::get().session()->entity()->star(descriptor.object);
+    starsystem->add(star);
+}
+void addPlanetToStarSystemEvent(const comm::Telegramm& telegramm) {
+    AddToStarsystemDescriptor descriptor(telegramm.data());
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
+    control::Planet* planet = Sessions::get().session()->entity()->planet(descriptor.object);
+    starsystem->add(planet);
+}
+void addAsteroidToStarSystemEvent(const comm::Telegramm& telegramm) {
+    AddToStarsystemDescriptor descriptor(telegramm.data());
+    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
+    control::Asteroid* asteroid = Sessions::get().session()->entity()->asteroid(descriptor.object);
+    starsystem->add(asteroid);
+}
+
 void addShipToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor descriptor(telegramm.data());
     control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(descriptor.starsystem);
@@ -332,8 +417,14 @@ bool TelegrammDispatcher::_process(const comm::Telegramm& telegramm)
 {
     switch(telegramm.type()) {
     /** CREATE */
-    // spaceobjects
+    case comm::Telegramm::Type::CREATE_GALAXY: createGalaxyEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_SECTOR: createSectorEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_NPC: createNpcEvent(telegramm); return true;
+    // spaceobjects
+    case comm::Telegramm::Type::CREATE_STAR: createStarEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_PLANET: createPlanetEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_ASTEROID: createAsteroidEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_GOODS: createGoodsEvent(telegramm); return true;
@@ -349,9 +440,18 @@ bool TelegrammDispatcher::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); return true;
     /** */
 
+        /** TRANSITION */
+    case comm::Telegramm::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegramm); return true;
+    case comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegramm); return true;
+        /** */
+
     /** ADD TO STARSYSTEM */
+    case comm::Telegramm::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::ADD_PLANET_TO_STARSYSTEM: addPlanetToStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::ADD_ASTEROID_TO_STARSYSTEM: addAsteroidToStarSystemEvent(telegramm); return true;
     case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); return true;
     case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); return true;
+    case comm::Telegramm::Type::ADD_NPC_TO_SHIP: addNpcToShipEvent(telegramm); return true;
 
     /** REMOVE FROM STARSYSTEM */
     case comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegramm); return true;

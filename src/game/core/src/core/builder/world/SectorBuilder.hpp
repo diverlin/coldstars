@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <ceti/type/IdType.hpp>
+
 namespace descriptor {
 class Sector;
 } // namespace descriptor
@@ -33,15 +35,15 @@ class Sector
 {
 public:
     static control::Sector* gen();
+    static control::Sector* gen(int_t, int_t object = NONE);
     static control::Sector* gen(descriptor::Sector*);
-    static void genLife(control::Sector*);
 
 private:
     Sector()=delete;
     ~Sector()=delete;
 
     static void __createInternals(control::Sector*, descriptor::Sector*);
-    static control::Sector* __genTemplate(descriptor::Sector*);
+    static control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);
 }; 
 
 } // namespace builder

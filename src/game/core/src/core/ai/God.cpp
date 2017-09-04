@@ -24,6 +24,8 @@
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 
+#include <core/communication/TelegrammComposer.hpp>
+
 #include <core/world/galaxy.hpp>
 #include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
@@ -45,6 +47,7 @@
 #include <core/ai/Task.hpp>
 #include <core/pilot/Npc.hpp>
 
+#include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
 
@@ -67,13 +70,15 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld(descriptor::Galaxy* descr)
+void God::createWorld(  )
 {
-    m_galaxy = builder::Galaxy::gen(descr);
-    __createLife(m_galaxy, descr);
-    if (descr->allow_invasion) {
-        __createInvasion(m_galaxy, descr);
-    }
+    descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+    core::TelegrammComposer::get().createGalaxy(galaxy_descriptor);
+
+    __createLife(m_galaxy, galaxy_descriptor);
+    //    if (descr->allow_invasion) {
+//        __createInvasion(m_galaxy, descr);
+//    }
 
     bool player2space = true;
     control::StarSystem* starsystem = m_galaxy->randomSector()->randomStarSystem();
@@ -90,6 +95,8 @@ void God::createWorld(descriptor::Galaxy* descr)
 
 void God::update()
 {
+    assert(m_galaxy);
+
     // shortcuts
     TurnTimer& turnTimer = core::global::get().turnTimer();
     GameDate& gameDate = core::global::get().gameDate();
@@ -132,8 +139,6 @@ void God::update()
 
 void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
 {
-    builder::Galaxy::genLife(galaxy);
-
 //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
 //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
 //            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];

@@ -34,10 +34,11 @@ class Asteroid
 {
 public:
     static control::Asteroid* gen();
-    static control::Asteroid* gen(descriptor::Asteroid*);
+    static control::Asteroid* gen(int_t, int_t id);
+    static control::Asteroid* gen(descriptor::Asteroid*, int_t id = NONE);
 
 private:
-    static control::Asteroid* __genTemplate(descriptor::Asteroid*);
+    static control::Asteroid* __genTemplate(descriptor::Asteroid*, int_t id);
 }; 
 
 } // namespace builder

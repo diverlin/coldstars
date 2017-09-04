@@ -23,8 +23,9 @@
 
 namespace model {
 
-Planet::Planet(int_t descriptor_id)
+Planet::Planet(int_t descriptor_id, int_t id)
 {
+    setId(id);
     setDescriptor(descriptor_id);
 }
 

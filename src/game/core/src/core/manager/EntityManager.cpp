@@ -16,22 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-//#include <boost/property_tree/ptree.hpp>
-//#include <boost/foreach.hpp>
-//#include <boost/property_tree/info_parser.hpp>
-
 #include "EntityManager.hpp"
 #include <ceti/Logger.hpp>
-//#include <ceti/StringUtils.hpp>
 #include <ceti/IdGenerator.hpp>
 
 #include <core/spaceobject/ALL>
 
-//#include "../pilots/Player.hpp"
 #include <core/pilot/Npc.hpp>
 
 #include "../world/galaxy.hpp"
-#include "../world/starsystem.hpp"
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 
 #include <builder/item/equipment/ALL>
 #ifdef USE_MODULES
@@ -49,7 +44,6 @@
 #include "../builder/world/GalaxyBuilder.hpp"
 #include "../builder/world/StarSystemBuilder.hpp"
 
-//#include "../builder/pilot/PlayerBuilder.hpp"
 #include <core/builder/pilot/NpcBuilder.hpp>
 
 #include "../builder/dock/NatureLandBuilder.hpp"
@@ -79,7 +73,6 @@
 #include "../dock/Kosmoport.hpp"
 
 #include <core/slot/VehicleSlot.hpp>
-//#include <ceti/StringUtils.hpp>
 #include <common/Global.hpp>
 #include <common/TurnTimer.hpp>
 
@@ -141,6 +134,20 @@ control::Npc*
 Entity::npc(int_t id) const
 {
     control::Npc* control = static_cast<control::Npc*>(base(id));
+    assert(control);
+    return control;
+}
+
+control::Galaxy*
+Entity::galaxy(int_t id) const {
+    control::Galaxy* control = static_cast<control::Galaxy*>(base(id));
+    assert(control);
+    return control;
+}
+
+control::Sector*
+Entity::sector(int_t id) const {
+    control::Sector* control = static_cast<control::Sector*>(base(id));
     assert(control);
     return control;
 }

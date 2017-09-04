@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include <ceti/type/IdType.hpp>
+
 namespace descriptor {
 class Galaxy;
 } // namespace descriptor
@@ -33,15 +35,15 @@ class Galaxy
 {
 public:
     static control::Galaxy* gen();
+    static control::Galaxy* gen(int_t, int_t object = NONE);
     static control::Galaxy* gen(descriptor::Galaxy*);
-    static void genLife(control::Galaxy*);
 
 private:
     Galaxy() = delete;
     ~Galaxy() = delete;
 
     static void __createInternals(control::Galaxy*, descriptor::Galaxy*);
-    static control::Galaxy* __genTemplate(descriptor::Galaxy*);
+    static control::Galaxy* __genTemplate(descriptor::Galaxy*, int_t object = NONE);
 }; 
 
 } // namespace builder

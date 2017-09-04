@@ -37,7 +37,7 @@ namespace model {
 class Galaxy : public Base {
 
 public:
-    Galaxy(int_t);
+    Galaxy(int_t, int_t);
     ~Galaxy() = default;
     Galaxy(const std::string& data);
     std::string data() const;
