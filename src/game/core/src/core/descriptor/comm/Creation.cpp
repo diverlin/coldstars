@@ -91,29 +91,6 @@ Object::data() const
 //////////////////////
 
 
-Creation::Creation(int_t obId, int_t obDescriptor)
-    :
-      m_object(obId)
-    , m_descriptor(obDescriptor)
-{
-}
-
-Creation::Creation(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Creation::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-////////////////////////
-
-//////////////////////
-
-
 CreatePlayer::CreatePlayer(int_t player, int_t npc)
     :
       m_player(player)
@@ -138,9 +115,9 @@ CreatePlayer::data() const
 /// \param descriptor
 /// \param mass
 ///
-CreateGoodsPack::CreateGoodsPack(int_t object, int_t descriptor, int mass)
+CreateGoodsPack::CreateGoodsPack(int_t descriptor, int_t object, int mass)
     :
-      Creation(object, descriptor)
+      Creation(descriptor, object)
     , m_mass(mass)
 {
 }
@@ -159,9 +136,9 @@ CreateGoodsPack::data() const
 
 //////////////////////////
 
-CreateContainer::CreateContainer(int_t object, int_t descriptor, int_t item)
+CreateContainer::CreateContainer(int_t descriptor, int_t object, int_t item)
     :
-      Creation(object, descriptor)
+      Creation(descriptor, object)
     , m_item(item)
 {
 }

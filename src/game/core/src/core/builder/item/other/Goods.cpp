@@ -24,7 +24,6 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/Session.hpp>
-#include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {
@@ -68,7 +67,6 @@ Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
     assert(model);
     control::item::Goods* control = new control::item::Goods(descriptor, model);
     assert(control);
-    core::shortcuts::entities()->add(control);
     return control;
 }
 

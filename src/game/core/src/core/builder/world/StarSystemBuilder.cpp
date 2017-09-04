@@ -33,12 +33,8 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-//#include <client/effect/DistantNebulaEffect.hpp>
-//#include <client/effect/DistantStarEffect.hpp>
-
 #include <meti/RandUtils.hpp>
 
-#include <core/manager/EntityManager.hpp>
 #include <core/descriptor/comm/Creation.hpp>
 
 namespace builder {
@@ -82,7 +78,6 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     control::StarSystem* starsystem = new control::StarSystem(descr, model);
     assert(starsystem);
 
-    core::shortcuts::entities()->add(starsystem);
     return starsystem;
 }
 
