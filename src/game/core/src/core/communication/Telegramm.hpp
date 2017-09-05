@@ -36,6 +36,8 @@ public:
         CREATE_SCANER,
         CREATE_RADAR,
         CREATE_PROTECTOR,
+        CREATE_LAZER,
+        CREATE_ROCKET,
         // effects
         CREATE_EXPLOSION_EFFECT,
         /** */
@@ -51,6 +53,8 @@ public:
         /** DROP_GRAB */
         DROP_ITEM,
         TAKE_CONTAINER,
+        LOAD_ITEM,
+        MOUNT_ITEM,
 
         /** TRANSITION */
         ADD_SECTOR_TO_GALAXY,

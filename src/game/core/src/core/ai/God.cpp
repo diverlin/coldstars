@@ -48,11 +48,13 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
+#include <core/manager/Session.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
 
 #include <math/rand.hpp>
 
+#include <core/manager/EntityManager.hpp>
 #include <core/manager/Session.hpp>
 #include <core/manager/Garbage.hpp>
 
@@ -81,7 +83,7 @@ void God::createWorld(  )
 //    }
 
     bool player2space = true;
-    control::StarSystem* starsystem = m_galaxy->randomSector()->randomStarSystem();
+    //control::StarSystem* starsystem = m_galaxy->randomSector()->randomStarSystem();
     if (player2space == true) {
         glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,0);
@@ -95,7 +97,10 @@ void God::createWorld(  )
 
 void God::update()
 {
-    assert(m_galaxy);
+    if (!m_galaxy) {
+        m_galaxy = core::shortcuts::entities()->galaxy();
+        return;
+    }
 
     // shortcuts
     TurnTimer& turnTimer = core::global::get().turnTimer();

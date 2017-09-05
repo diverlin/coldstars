@@ -61,11 +61,12 @@ Droid::gen(descriptor::item::Droid* descr)
 }  
 
 control::item::Droid*
-Droid::__genTemplate(descriptor::item::Droid* descr, int ob_id)
+Droid::__genTemplate(descriptor::item::Droid* descriptor, int id)
 {
-    model::item::Droid* model = new model::item::Droid(descr->id(), ob_id);
-    control::item::Droid* droid = new control::item::Droid(descr, model);
-    core::shortcuts::entities()->add(droid);
+    model::item::Droid* model = new model::item::Droid(descriptor->id(), id);
+    assert(model);
+    control::item::Droid* droid = new control::item::Droid(descriptor, model);
+    assert(droid);
     return droid;
 }
 

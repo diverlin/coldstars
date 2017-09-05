@@ -728,6 +728,12 @@ Manager::generate()
         genStarSystem();
     }
 
+    // npc
+    num = 5;
+    for(int i=0; i<num; ++i) {
+        genNpc();
+    }
+
     num = 4;
     for(int i=0; i<num; ++i) {
         const auto& ids = __ids(Type::STARSYSTEM).random(5);

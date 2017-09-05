@@ -60,13 +60,12 @@ Lazer::gen(descriptor::item::Lazer* descr)
 }
 
 control::item::Lazer*
-Lazer::__genTemplate(descriptor::item::Lazer* descr, int_t ob_id)
+Lazer::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
 { 
-    model::item::Lazer* model = new model::item::Lazer(descr->id(), ob_id);
+    model::item::Lazer* model = new model::item::Lazer(descriptor->id(), id);
     assert(model);
-
-    control::item::Lazer* lazer = new control::item::Lazer(descr, model);
-    core::shortcuts::entities()->add(lazer);
+    control::item::Lazer* lazer = new control::item::Lazer(descriptor, model);
+    assert(lazer);
     return lazer;
 } 
 

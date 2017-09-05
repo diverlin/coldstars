@@ -18,20 +18,12 @@
 
 #pragma once
 
-//#include <types/MeshType.hpp>
-
 #include <common/common.hpp>
 #include <math/rand.hpp>
 #include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 
-//#include <client/resources/TextureCollector.hpp>
-//#include <jeti/Material.hpp>
-//#include <client/resources/MeshCollector.hpp>
-
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
-//#include <jeti/animations/AnimationConstantRotation.hpp>
-//#include <jeti/animations/AnimationWiggle.hpp>
 

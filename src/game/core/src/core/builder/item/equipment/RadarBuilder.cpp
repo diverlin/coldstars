@@ -62,11 +62,12 @@ Radar::gen(descriptor::item::Radar* descr)
 } 
 
 control::item::Radar*
-Radar::__genTemplate(descriptor::item::Radar* descr, int_t ob_id)
+Radar::__genTemplate(descriptor::item::Radar* descriptor, int_t id)
 {
-    model::item::Radar* model = new model::item::Radar(descr->id(), ob_id);
-    control::item::Radar* radar = new control::item::Radar(descr, model);
-    core::shortcuts::entities()->add(radar);
+    model::item::Radar* model = new model::item::Radar(descriptor->id(), id);
+    assert(model);
+    control::item::Radar* radar = new control::item::Radar(descriptor, model);
+    assert(radar);
     return radar;
 }
 

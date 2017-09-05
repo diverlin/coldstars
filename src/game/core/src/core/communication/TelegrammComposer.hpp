@@ -94,6 +94,18 @@ private:
     void __equipShip(int_t ship_id) const;
 
     void __addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;
+
+    void __createBak(int_t descriptor_id, int_t id) const;
+    void __createDrive(int_t descriptor_id, int_t id) const;
+    void __createProtector(int_t descriptor_id, int_t id) const;
+    void __createScaner(int_t descriptor_id, int_t id) const;
+    void __createRadar(int_t descriptor_id, int_t id) const;
+    void __createGrapple(int_t descriptor_id, int_t id) const;
+    void __createLazer(int_t descriptor_id, int_t id) const;
+    void __createRocket(int_t descriptor_id, int_t id) const;
+
+    void __mountItem(int_t ship_id, int_t id) const;
+    void __loadItem(int_t ship_id, int_t id) const;
 };
 
 } // namespace core

@@ -109,6 +109,19 @@ void addNpcToShipEvent(const comm::Telegramm& telegramm) {
     ship->bindNpc(npc);
 }
 
+
+void mountItemEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Adding data(telegramm.data());
+    control::Ship* ship = shortcuts::entities()->ship(data.parent());
+    control::Item* item = shortcuts::entities()->item(data.object());
+    ship->mount(item);
+}
+void loadItemEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Adding data(telegramm.data());
+    control::Ship* ship = shortcuts::entities()->ship(data.parent());
+    control::Item* item = shortcuts::entities()->item(data.object());
+    ship->load(item);
+}
 /** */
 
 
@@ -117,6 +130,7 @@ void createGalaxyEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
     control::Galaxy* galaxy = builder::Galaxy::gen(data.descriptor(), data.object());
     core::shortcuts::entities()->add(galaxy);
+    core::shortcuts::entities()->setGalaxy(galaxy);
 }
 
 void createSectorEvent(const comm::Telegramm& telegramm) {
@@ -190,31 +204,48 @@ void createBulletEvent(const comm::Telegramm& telegramm) {
 // items
 void createBakEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Bak::gen(data.descriptor(), data.object());
+    control::item::Bak* bak = builder::item::Bak::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(bak);
 }
 void createDriveEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Drive::gen(data.descriptor(), data.object());
+    control::item::Drive* drive = builder::item::Drive::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(drive);
 }
 void createDroidEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Droid::gen(data.descriptor(), data.object());
+    control::item::Droid* droid = builder::item::Droid::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(droid);
 }
 void createGrappleEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Grapple::gen(data.descriptor(), data.object());
+    control::item::Grapple* grapple = builder::item::Grapple::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(grapple);
 }
 void createProtectorEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Protector::gen(data.descriptor(), data.object());
+    control::item::Protector* protector = builder::item::Protector::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(protector);
 }
 void createScanerEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Scaner::gen(data.descriptor(), data.object());
+    control::item::Scaner* scaner = builder::item::Scaner::gen(data.descriptor(), data.object());
+        core::shortcuts::entities()->add(scaner);
 }
 void createRadarEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
-    builder::item::Radar::gen(data.descriptor(), data.object());
+    control::item::Radar* radar = builder::item::Radar::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(radar);
+}
+void createLazerEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::item::Lazer* lazer = builder::item::Lazer::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(lazer);
+}
+void createRocketEvent(const comm::Telegramm& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    control::item::Rocket* rocket = builder::item::Rocket::gen(data.descriptor(), data.object());
+    core::shortcuts::entities()->add(rocket);
 }
 /** */
 
@@ -438,12 +469,17 @@ bool TelegrammDispatcher::_process(const comm::Telegramm& telegramm)
     case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); return true;
     case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); return true;
-    /** */
+    case comm::Telegramm::Type::CREATE_LAZER: createLazerEvent(telegramm); return true;
+    case comm::Telegramm::Type::CREATE_ROCKET: createRocketEvent(telegramm); return true;
+        /** */
 
-        /** TRANSITION */
+    case comm::Telegramm::Type::MOUNT_ITEM: mountItemEvent(telegramm); return true;
+    case comm::Telegramm::Type::LOAD_ITEM: loadItemEvent(telegramm); return true;
+
+    /** TRANSITION */
     case comm::Telegramm::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegramm); return true;
     case comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegramm); return true;
-        /** */
+    /** */
 
     /** ADD TO STARSYSTEM */
     case comm::Telegramm::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegramm); return true;

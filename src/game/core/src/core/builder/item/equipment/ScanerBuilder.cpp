@@ -64,8 +64,9 @@ control::item::Scaner*
 Scaner::__genTemplate(descriptor::item::Scaner* descr, int_t ob_id)
 {
     model::item::Scaner* model = new model::item::Scaner(descr->id(), ob_id);
+    assert(model);
     control::item::Scaner* scaner = new control::item::Scaner(descr, model);
-    core::shortcuts::entities()->add(scaner);
+    assert(scaner);
     return scaner;
 }
 
