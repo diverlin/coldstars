@@ -61,11 +61,12 @@ Rocket::gen(descriptor::item::Rocket* descr)
 
 
 control::item::Rocket*
-Rocket::__genTemplate(descriptor::item::Rocket* descr, int_t ob_id)
+Rocket::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
 {
-    model::item::Rocket* model = new model::item::Rocket(descr->id(), ob_id);
-    control::item::Rocket* rocket = new control::item::Rocket(descr, model);
-    core::shortcuts::entities()->add(rocket);
+    model::item::Rocket* model = new model::item::Rocket(descriptor->id(), id);
+    assert(model);
+    control::item::Rocket* rocket = new control::item::Rocket(descriptor, model);
+    assert(rocket);
     return rocket;
 }
 

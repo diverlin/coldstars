@@ -82,6 +82,8 @@ public:
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }
 
+    void setGalaxy(control::Galaxy* galaxy) { m_galaxy = galaxy; }
+
     void add(control::Base*);
     void remove(control::Base*);
     bool contain(int_t id) const { return (m_entities.count(id) == 1); }
@@ -91,6 +93,7 @@ public:
     control::Base* base(int_t) const;
     control::Npc* npc(int_t) const;
 
+    control::Galaxy* galaxy() const { return m_galaxy; }
     control::Galaxy* galaxy(int_t id) const;
     control::Sector* sector(int_t id) const;
     control::StarSystem* starsystem(int_t id) const;
@@ -133,15 +136,11 @@ public:
 //    void clear();
 
 private:
-//    bool m_save_request = false;
-//    bool m_load_request = false;
+    control::Galaxy* m_galaxy = nullptr;
 
     std::map<int_t, control::Base*> m_entities;
 
     control::HyperSpace* m_hyperspace = nullptr;
-
-//    void saveEvent(const std::string&);
-//    void loadEvent(const std::string&);
 
     static IdGenerator m_idGenerator;
 };

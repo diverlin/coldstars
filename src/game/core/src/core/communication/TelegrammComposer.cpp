@@ -97,6 +97,8 @@ void TelegrammComposer::__createStarsystems(int_t sector_descriptor_id, int_t se
         descriptor::comm::Adding telegramm_descriptor(sector_id, starsystem_id, position);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR, telegramm_descriptor.data()));
         }
+
+        __createStarsystemInternalls(starsystem_descriptor_id, starsystem_id);
     }
 }
 
@@ -210,9 +212,140 @@ void TelegrammComposer::__addNpcToShip(int_t ship_id, int_t npc_id) const
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_NPC_TO_SHIP, telegramm_descriptor.data()));
 }
 
+
+void TelegrammComposer::__createBak(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BAK, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createDrive(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_DRIVE, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createProtector(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PROTECTOR, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createScaner(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_SCANER, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createRadar(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_RADAR, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createGrapple(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GRAPPLE, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createLazer(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_LAZER, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__createRocket(int_t descriptor_id, int_t id) const
+{
+    descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_ROCKET, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__mountItem(int_t ship_id, int_t id) const
+{
+    descriptor::comm::Adding telegramm_descriptor(ship_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::MOUNT_ITEM, telegramm_descriptor.data()));
+}
+
+void TelegrammComposer::__loadItem(int_t ship_id, int_t id) const
+{
+    descriptor::comm::Adding telegramm_descriptor(ship_id, id);
+    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::LOAD_ITEM, telegramm_descriptor.data()));
+}
+
 void TelegrammComposer::__equipShip(int_t ship_id) const
 {
-    assert(false);
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randBak()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createBak(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randDrive()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createDrive(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randProtector()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createProtector(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randScaner()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createScaner(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randRadar()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createRadar(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randGrapple()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createGrapple(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randLazer()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createLazer(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createRocket(descriptor_id, id);
+        __mountItem(ship_id, id);
+    }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createRocket(descriptor_id, id);
+        __loadItem(ship_id, id);
+    }
 }
 
 void TelegrammComposer::createGalaxy(descriptor::Galaxy* galaxy_descriptor)

@@ -62,11 +62,12 @@ Drive::gen(descriptor::item::Drive* descr)
 }        
 
 control::item::Drive*
-Drive::__genTemplate(descriptor::item::Drive* descr, int_t ob_id)
+Drive::__genTemplate(descriptor::item::Drive* descriptor, int_t id)
 {
-    model::item::Drive* model = new model::item::Drive(descr->id(), ob_id);
-    control::item::Drive* drive = new control::item::Drive(descr, model);
-    core::shortcuts::entities()->add(drive);
+    model::item::Drive* model = new model::item::Drive(descriptor->id(), id);
+    assert(model);
+    control::item::Drive* drive = new control::item::Drive(descriptor, model);
+    assert(drive);
     return drive;
 }
 

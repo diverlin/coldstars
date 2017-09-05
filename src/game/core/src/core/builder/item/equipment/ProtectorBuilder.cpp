@@ -73,11 +73,12 @@ Protector::gen(descriptor::item::Protector* descr)
 }
 
 control::item::Protector*
-Protector::__genTemplate(descriptor::item::Protector* descr, int_t ob_id)
+Protector::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
 {
-    model::item::Protector* model = new model::item::Protector(descr->id(), ob_id);
-    control::item::Protector* protector = new control::item::Protector(descr, model);
-    core::shortcuts::entities()->add(protector);
+    model::item::Protector* model = new model::item::Protector(descriptor->id(), id);
+    assert(model);
+    control::item::Protector* protector = new control::item::Protector(descriptor, model);
+    assert(protector);
     return protector;
 }
 

@@ -50,10 +50,15 @@ std::string to_string(core::comm::Telegramm::Type type_id)
     case Telegramm::Type::CREATE_SCANER:  { return "Telegramm::Type::CREATE_SCANER"; }
     case Telegramm::Type::CREATE_RADAR:  { return "Telegramm::Type::CREATE_RADAR"; }
     case Telegramm::Type::CREATE_PROTECTOR:  { return "Telegramm::Type::CREATE_PROTECTOR"; }
+    case Telegramm::Type::CREATE_LAZER:  { return "Telegramm::Type::CREATE_LAZER"; }
+    case Telegramm::Type::CREATE_ROCKET:  { return "Telegramm::Type::CREATE_ROCKET"; }
 
     // effects
     case Telegramm::Type::CREATE_EXPLOSION_EFFECT:  { return "Telegramm::Type::CREATE_EXPLOSION_EFFECT"; }
     /** */
+
+    case Telegramm::Type::MOUNT_ITEM: { return "Telegramm::Type::MOUNT_ITEM"; }
+    case Telegramm::Type::LOAD_ITEM: { return "Telegramm::Type::LOAD_ITEM"; }
 
     /** TRANSITION */
     case Telegramm::Type::ADD_SECTOR_TO_GALAXY: { return "Telegramm::Type::ADD_SECTOR_TO_GALAXY"; }

@@ -61,11 +61,12 @@ Grapple::gen(descriptor::item::Grapple* descr)
 } 
 
 control::item::Grapple*
-Grapple::__genTemplate(descriptor::item::Grapple* descr, int_t ob_id)
+Grapple::__genTemplate(descriptor::item::Grapple* descriptor, int_t id)
 {
-    model::item::Grapple* model = new model::item::Grapple(descr->id(), ob_id);
-    control::item::Grapple* grapple = new control::item::Grapple(descr, model);
-    core::shortcuts::entities()->add(grapple);
+    model::item::Grapple* model = new model::item::Grapple(descriptor->id(), id);
+    assert(model);
+    control::item::Grapple* grapple = new control::item::Grapple(descriptor, model);
+    assert(grapple);
     return grapple;
 }
 

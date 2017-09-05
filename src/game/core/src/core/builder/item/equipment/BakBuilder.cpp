@@ -62,11 +62,12 @@ Bak::gen()
 
 
 control::item::Bak*
-Bak::__genTemplate(descriptor::item::Bak* descr, int_t ob_id)
+Bak::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
 {
-    model::item::Bak* model = new model::item::Bak(descr->id(), ob_id);
-    control::item::Bak* bak = new control::item::Bak(descr, model);
-    core::shortcuts::entities()->add(bak);
+    model::item::Bak* model = new model::item::Bak(descriptor->id(), id);
+    assert(model);
+    control::item::Bak* bak = new control::item::Bak(descriptor, model);
+    assert(bak);
     return bak;
 }
 
