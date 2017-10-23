@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/type/TelegrammType.hpp>
+#include <core/type/TelegramType.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -10,14 +10,14 @@
 namespace core {
 namespace comm {
 
-class Telegramm
+class Telegram
 {
 public:
-    Telegramm(telegramm::Type, const std::string& data = "", double delay = -1.0);
+    Telegram(telegram::Type, const std::string& data = "", double delay = -1.0);
 
-    bool operator<(const Telegramm&) const;
+    bool operator<(const Telegram&) const;
 
-    telegramm::Type type() const { return m_type; }
+    telegram::Type type() const { return m_type; }
     std::string data() const { return m_data; }
     double delay() const { return m_delay; }
     double dispatchTime() const { return m_dispatchTime; }
@@ -28,7 +28,7 @@ public:
 
 private:
     //id_type id = 0;
-    telegramm::Type m_type = telegramm::Type::NONE;
+    telegram::Type m_type = telegram::Type::NONE;
     std::string m_data = "";
 
     double m_delay = -1.0;

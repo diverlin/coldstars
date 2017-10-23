@@ -45,8 +45,8 @@
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
-#include <core/communication/TelegrammComposer.hpp>
-#include <core/communication/TelegrammDispatcher.hpp>
+#include <core/communication/TelegramComposer.hpp>
+#include <core/communication/TelegramDispatcher.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
@@ -57,7 +57,7 @@
 #include <algorithm> // std::min
 
 namespace {
-core::TelegrammCreator& composer() { return core::TelegrammCreator::get(); }
+core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 } // namespace
 
 namespace control {

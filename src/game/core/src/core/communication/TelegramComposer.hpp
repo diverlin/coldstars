@@ -45,19 +45,19 @@ namespace core {
 class Player;
 
 namespace comm {
-class TelegrammHub;
+class TelegramHub;
 } // namespace comm
 
-class TelegrammCreator
+class TelegramCreator
 {
 private:
-    TelegrammCreator();
-    TelegrammCreator(const TelegrammCreator&) = delete;
-    ~TelegrammCreator() = default;
-    TelegrammCreator& operator=(const TelegrammCreator&) = delete;
+    TelegramCreator();
+    TelegramCreator(const TelegramCreator&) = delete;
+    ~TelegramCreator() = default;
+    TelegramCreator& operator=(const TelegramCreator&) = delete;
 
 public:
-    static TelegrammCreator& get();
+    static TelegramCreator& get();
 
     void death_spaceobject(control::SpaceObject*);
     void death(control::Asteroid*);
@@ -72,7 +72,7 @@ public:
     void createGalaxy(descriptor::Galaxy*);
 
 private:
-    core::comm::TelegrammHub& m_telegrammHub;
+    core::comm::TelegramHub& m_telegrammHub;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);
     void __removeSpaceObjectFromStarSystem(control::SpaceObject*);

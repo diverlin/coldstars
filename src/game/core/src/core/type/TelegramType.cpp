@@ -16,11 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "TelegrammType.hpp"
+#include "TelegramType.hpp"
 
 #include <cassert>
 
-namespace telegramm {
+namespace telegram {
 
 std::string to_string(Type type)
 {
