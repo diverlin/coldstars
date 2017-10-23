@@ -46,10 +46,12 @@ protected:
     virtual bool _process(const Telegramm&);
 
 private:
+    bool m_log = true;
     sf::Clock m_clock;
     std::set<Telegramm> m_telegramms;
 
     double __currentTime() const;
+    void __log(const std::string&) const;
 };
 
 } // namespace comm

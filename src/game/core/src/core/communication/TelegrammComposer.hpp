@@ -67,7 +67,8 @@ public:
 
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
-    void createPlayer(core::Player*);
+    void createPlayer(int_t, int_t);
+//    void bindPlayerWithNpc(int_t, int_t);
     void createGalaxy(descriptor::Galaxy*);
 
 private:

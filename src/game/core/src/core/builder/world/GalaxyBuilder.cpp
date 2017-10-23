@@ -25,6 +25,7 @@
 #include <core/model/world/galaxy.hpp>
 //#include <core/world/Sector.hpp>
 
+#include <common/constants.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -75,13 +76,7 @@ Galaxy::__genTemplate(descriptor::Galaxy* descriptor, int_t object_id)
 
 void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
 {
-    assert(false);
-//    for(int_t id: descr->sectors) {
-//        glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-//        descriptor::Sector* descr_sector = core::shortcuts::descriptors()->sector(id);
-//        control::Sector* sector = builder::Sector::gen(descr_sector);
-//        galaxy->add(sector, position);
-//    }
+     // see composer, all logic there
 }
 
 } // namespace builder

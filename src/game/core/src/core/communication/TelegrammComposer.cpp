@@ -36,7 +36,7 @@
 #include <core/descriptor/pilot/Npc.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 #include <core/descriptor/comm/Creation.hpp>
-#include <core/descriptor/comm/Adding.hpp>
+#include <core/descriptor/comm/AddingPositional.hpp>
 #include <core/descriptor/comm/Hit.hpp>
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
@@ -73,7 +73,7 @@ void TelegrammComposer::__createSectors(descriptor::Galaxy* galaxy_descriptor, i
 
         {
         glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-        descriptor::comm::Adding telegramm_descriptor(galaxy_id, sector_id, position);
+        descriptor::comm::AddingPositional telegramm_descriptor(galaxy_id, sector_id, position);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SECTOR_TO_GALAXY, telegramm_descriptor.data()));
         }
 
@@ -94,7 +94,7 @@ void TelegrammComposer::__createStarsystems(int_t sector_descriptor_id, int_t se
 
         {
         glm::vec3 position = meti::rand::gen_vec3xy(3, 8);
-        descriptor::comm::Adding telegramm_descriptor(sector_id, starsystem_id, position);
+        descriptor::comm::AddingPositional telegramm_descriptor(sector_id, starsystem_id, position);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR, telegramm_descriptor.data()));
         }
 
@@ -122,7 +122,7 @@ void TelegrammComposer::__createStar(int_t starsystem_id) const
 
     {
     meti::vec3 position;
-    descriptor::comm::Adding telegramm_descriptor(starsystem_id, star_id, position);
+    descriptor::comm::AddingPositional telegramm_descriptor(starsystem_id, star_id, position);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_STAR_TO_STARSYSTEM, telegramm_descriptor.data()));
     }
 }
@@ -140,7 +140,7 @@ void TelegrammComposer::__createPlanets(int_t starsystem_id, int planet_per_syst
 
         {
         meti::vec3 position;
-        descriptor::comm::Adding telegramm_descriptor(starsystem_id, planet_id, position);
+        descriptor::comm::AddingPositional telegramm_descriptor(starsystem_id, planet_id, position);
         m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_PLANET_TO_STARSYSTEM, telegramm_descriptor.data()));
         }
     }
@@ -208,7 +208,7 @@ void TelegrammComposer::__addShipToStarSystem(int_t starsystem_id, int_t ship_id
 
 void TelegrammComposer::__addNpcToShip(int_t ship_id, int_t npc_id) const
 {
-    descriptor::comm::Adding telegramm_descriptor(ship_id, npc_id);
+    descriptor::comm::AddingPositional telegramm_descriptor(ship_id, npc_id);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_NPC_TO_SHIP, telegramm_descriptor.data()));
 }
 
@@ -263,13 +263,13 @@ void TelegrammComposer::__createRocket(int_t descriptor_id, int_t id) const
 
 void TelegrammComposer::__mountItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::Adding telegramm_descriptor(ship_id, id);
+    descriptor::comm::AddingPositional telegramm_descriptor(ship_id, id);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::MOUNT_ITEM, telegramm_descriptor.data()));
 }
 
 void TelegrammComposer::__loadItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::Adding telegramm_descriptor(ship_id, id);
+    descriptor::comm::AddingPositional telegramm_descriptor(ship_id, id);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::LOAD_ITEM, telegramm_descriptor.data()));
 }
 
@@ -518,9 +518,9 @@ void TelegrammComposer::hit(control::SpaceObject* object, int damage)
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
 }
 
-void TelegrammComposer::createPlayer(core::Player* player)
+void TelegrammComposer::createPlayer(int_t player_id, int_t npc_id)
 {
-    descriptor::comm::CreatePlayer descriptor(player->id(), player->npc()->id());
+    descriptor::comm::CreatePlayer descriptor(player_id, npc_id);
     m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PLAYER, descriptor.data()));
 }
 

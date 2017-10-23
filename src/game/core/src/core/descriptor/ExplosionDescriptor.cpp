@@ -8,7 +8,7 @@ namespace descriptor {
 
 Explosion::Explosion(int_t starsystem_id, const glm::vec3& center, int damage, int radius)
     :
-      starsystem_id(starsystem_id),
+      starsystem(starsystem_id),
       center(center),
       damage(damage),
       radius(radius)

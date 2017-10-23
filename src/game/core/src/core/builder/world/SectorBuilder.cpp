@@ -78,13 +78,7 @@ Sector::__genTemplate(descriptor::Sector* descriptor, int_t object_id)
 void
 Sector::__createInternals(control::Sector* sector, descriptor::Sector* descriptor)
 {
-    assert(false);
-//    for(const auto& id: descr->starsystems) {
-//        glm::vec3 position(meti::rand::gen_vec3xy(3, 8));
-//        descriptor::StarSystem* descr_starsystem = core::shortcuts::descriptors()->starSystem(id);
-//        control::StarSystem* starsystem = builder::StarSystem::gen(descr_starsystem);
-//        sector->add(starsystem, position);
-//    }
+     // see composer, all logic there
 }
 
 } // namespace builder

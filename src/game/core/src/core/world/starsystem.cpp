@@ -715,8 +715,6 @@ void StarSystem::__updateStates()
 
 void StarSystem::update(int time)
 {                
-    core::comm::TelegrammDispatcher& telegrammManager = core::global::get().telegrammManager();
-
     __updateEntities_s(time);
     __manageUnavaliableObjects_s();
 
@@ -726,7 +724,6 @@ void StarSystem::update(int time)
 
     if (time > 0) {
         composer().genBullets_DEBUG(this, 100);
-        telegrammManager.update();
 
         if (m_unique_update_inDymanic_done == false) {
             // assert(false); assert(false);

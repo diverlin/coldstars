@@ -26,12 +26,12 @@
 namespace descriptor {
 namespace comm {
 
-class Adding {
+class AddingPositional {
 public:
-    Adding(int_t, int_t, const meti::vec3& position = glm::vec3());
-    Adding(const std::string& data);
-    Adding() = default;
-    ~Adding() = default;
+    AddingPositional(int_t, int_t, const meti::vec3& position = glm::vec3());
+    AddingPositional(const std::string& data);
+    AddingPositional() = default;
+    ~AddingPositional() = default;
     std::string data() const;
 
     int_t parent() const { return m_parent; }
@@ -39,9 +39,9 @@ public:
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Adding:\n";
-        result += std::string(" parent = ") + ceti::to_string(m_parent) + "\n";
-        result += std::string(" object = ") + ceti::to_string(m_object) + "\n";
+        std::string result = "descriptor::comm::AddingPositional:\n";
+        result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
+        result += std::string(" object = ") + std::to_string(m_object) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }
