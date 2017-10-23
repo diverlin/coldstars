@@ -367,7 +367,7 @@ void hitEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Hit data(telegramm.data());
     control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(data.target());
     object->hit(data.damage());
-    MACRO_LOG_TELEGRAMM_EVENT
+    ///MACRO_LOG_TELEGRAMM_EVENT222
 }
 void explosionEvent(const comm::Telegramm& telegramm) {
     descriptor::Explosion data(telegramm.data());
