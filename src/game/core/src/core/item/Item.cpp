@@ -46,7 +46,7 @@ int Item::isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
 
 void Item::doLock(int lock)
 {
-    LOG("Base::LockEvent");
+    //LOG("Base::LockEvent");
     
     bool was_working = false;
     if (!model()->lockedTurns()) {
@@ -79,7 +79,7 @@ void Item::useOverloadDeterioration()
  
 void Item::corrupt()
 {
-    LOG("Base::broken");
+    //LOG("Base::broken");
     model()->setCondition(0);
     m_slot->updateVehiclePropetries();
 }

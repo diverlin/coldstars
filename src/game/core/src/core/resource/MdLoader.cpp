@@ -5,6 +5,7 @@
 
 #include <ceti/StringUtils.hpp>
 #include <ceti/FsUtils.hpp>
+#include <ceti/Logger.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -60,7 +61,7 @@ MdLoader::value(const std::string& key)
 void
 InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
 {
-    std::cout<<path<<std::endl;
+    LOG("managing "+path);
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 
@@ -100,7 +101,8 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
 void
 InfoLoader::read(const std::string& path, descriptor::Material* material)
 {
-    std::cout<<"managing "<<path<<" ..."<<std::endl;
+    LOG("managing "+path);
+    //std::cout<<"managing "<<path<<" ..."<<std::endl;
     boost::property_tree::ptree root;
     boost::property_tree::read_json(path, root);
 

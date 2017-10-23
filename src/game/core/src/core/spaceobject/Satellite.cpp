@@ -42,9 +42,7 @@ Satellite::Satellite(descriptor::Satellite* descr, model::Satellite* model)
 
 /* virtual */
 Satellite::~Satellite()
-{
-    LOG("___::~Satellite("+std::to_string(model()->id())+")");
-}
+{}
 
 void Satellite::BindParent(const SpaceObject* const parent)
 {

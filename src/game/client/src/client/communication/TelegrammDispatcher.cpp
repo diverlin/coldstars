@@ -40,9 +40,9 @@ void createExplosionEffectEvent(const core::comm::Telegramm& telegramm) {
 
 } // namespace
 
-bool TelegrammDispatcher::_process(const core::comm::Telegramm& telegramm)
+bool TelegrammHandler::_process(const core::comm::Telegramm& telegramm)
 {
-    if (core::comm::TelegrammDispatcher::_process(telegramm)) {
+    if (core::comm::TelegrammHandler::_process(telegramm)) {
         return true;
     }
 

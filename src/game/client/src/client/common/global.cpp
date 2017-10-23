@@ -46,7 +46,7 @@ global::global()
     , m_screen(new jeti::Screen)
     , m_render(new jeti::Render)
     , m_camera(new jeti::Camera)
-    , m_telegrammManager(new comm::TelegrammDispatcher)
+    , m_telegrammManager(new comm::TelegrammHandler)
     , m_inputsManager(new UserInputInSpace)
 {
 }
