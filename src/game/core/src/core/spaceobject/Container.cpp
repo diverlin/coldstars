@@ -117,7 +117,7 @@ Container::item() const
 void Container::__putChildrenToGarbage() const
 {
     if (auto item = m_itemSlot->item()) {
-        core::shortcuts::session()->garbage()->add(item);
+        core::shortcuts::session()->garbageManager()->add(item);
     }
 }
 

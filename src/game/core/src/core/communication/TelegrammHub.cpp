@@ -16,15 +16,15 @@ void TelegrammHub::add(const Telegramm& telegramm)
     //__update();
 }
 
-void TelegrammHub::__update()
-{
-    __broadcast();
-    for (const std::shared_ptr<TelegrammHandler>& listener: m_listeners) {
-        listener->update();
-    }
-}
+//void TelegrammHub::__update()
+//{
+//    __broadcast();
+//    for (const std::shared_ptr<TelegrammHandler>& listener: m_listeners) {
+//        listener->update();
+//    }
+//}
 
-void TelegrammHub::__broadcast()
+void TelegrammHub::broadcast()
 {
     for (const std::shared_ptr<TelegrammHandler>& listener: m_listeners) {
         for(Telegramm& telegramm: m_telegramms) {

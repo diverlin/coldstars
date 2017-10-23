@@ -38,14 +38,14 @@ public:
     Session();
     ~Session()=default;
 
-    std::shared_ptr<descriptor::Manager> descriptor() const { return m_descriptor; }
-    std::shared_ptr<manager::Entity> entity() const { return m_entity; }
-    std::shared_ptr<manager::Garbage> garbage() const { return m_garbage; }
+    std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
+    std::shared_ptr<manager::Entity> entitiesManager() const { return m_entitiesManager; }
+    std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
 
 private:
-    std::shared_ptr<descriptor::Manager> m_descriptor;
-    std::shared_ptr<manager::Entity> m_entity;
-    std::shared_ptr<manager::Garbage> m_garbage;
+    std::shared_ptr<descriptor::Manager> m_descriptorsManager;
+    std::shared_ptr<manager::Entity> m_entitiesManager;
+    std::shared_ptr<manager::Garbage> m_garbageManager;
 };
 
 class Sessions

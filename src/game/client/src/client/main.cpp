@@ -149,7 +149,6 @@ public:
     Server()
     {
         core::Sessions::get().add(Machine::server, new core::Session);
-
         __activate();
 
         m_telegrammHandler = std::shared_ptr<core::comm::TelegrammHandler>(new core::comm::TelegrammHandler());
@@ -172,6 +171,7 @@ public:
 //            __create_player();
 //        }
 
+        core::global::get().telegrammHub().broadcast();
         m_world->update();
     }
 
@@ -282,11 +282,11 @@ private:
 int main()
 {
     Server server;
-    Client client;
+    //Client client;
 
-    while(client.is_running()) {
+    while(true) {
         server.update();
-        client.update();
+        //client.update();
     }
     return EXIT_SUCCESS;
 }

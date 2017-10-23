@@ -127,7 +127,7 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded()) {
-        core::shortcuts::session()->garbage()->erase();
+        core::shortcuts::session()->garbageManager()->erase();
 
         //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
         //            bool load_event = manager::EntityManager::get().UpdateLoadRequest();

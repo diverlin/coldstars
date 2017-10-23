@@ -208,9 +208,9 @@ void createContainerEvent(const comm::Telegramm& telegramm) {
 }
 void createBulletEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::CreateBullet data(telegramm.data());
-    control::Vehicle* vehicle = Sessions::get().session()->entity()->vehicle(data.owner());
-    control::item::Rocket* rocket = Sessions::get().session()->entity()->rocket(data.weapon());
-    control::SpaceObject* target = Sessions::get().session()->entity()->spaceObject(data.target());
+    control::Vehicle* vehicle = Sessions::get().session()->entitiesManager()->vehicle(data.owner());
+    control::item::Rocket* rocket = Sessions::get().session()->entitiesManager()->rocket(data.weapon());
+    control::SpaceObject* target = Sessions::get().session()->entitiesManager()->spaceObject(data.target());
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
@@ -281,37 +281,37 @@ void createRocketEvent(const comm::Telegramm& telegramm) {
 /** ADD TO STARSYSTEM */
 void addStarToStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.parent());
-    control::Star* star = Sessions::get().session()->entity()->star(data.object());
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.parent());
+    control::Star* star = Sessions::get().session()->entitiesManager()->star(data.object());
     starsystem->add(star);
     LOG(__FUNCTION__+data.info());
 }
 void addPlanetToStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.parent());
-    control::Planet* planet = Sessions::get().session()->entity()->planet(data.object());
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.parent());
+    control::Planet* planet = Sessions::get().session()->entitiesManager()->planet(data.object());
     starsystem->add(planet);
     LOG(__FUNCTION__+data.info());
 }
 void addAsteroidToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.starsystem);
-    control::Asteroid* asteroid = Sessions::get().session()->entity()->asteroid(data.object);
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
+    control::Asteroid* asteroid = Sessions::get().session()->entitiesManager()->asteroid(data.object);
     starsystem->add(asteroid);
     LOG(__FUNCTION__+data.info());
 }
 
 void addShipToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.starsystem);
-    control::Ship* ship = Sessions::get().session()->entity()->ship(data.object);
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(data.object);
     starsystem->add(ship);
     LOG(__FUNCTION__+data.info());
 }
 void addContainerToStarSystemEvent(const comm::Telegramm& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.starsystem);
-    control::Container* container = Sessions::get().session()->entity()->container(data.object);
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
+    control::Container* container = Sessions::get().session()->entitiesManager()->container(data.object);
     container->addImpulse(data.impulse);
     starsystem->add(container, data.position);
     LOG(__FUNCTION__+data.info());
@@ -357,13 +357,13 @@ void _doTakeContainer(const comm::Telegramm& telegramm) {
 
 void hitEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Hit data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(data.target());
+    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.target());
     object->hit(data.damage());
     ///LOG(__FUNCTION__+data.info());
 }
 void explosionEvent(const comm::Telegramm& telegramm) {
     descriptor::Explosion data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.starsystem);
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
     Explosion* explosion = new Explosion(data.damage, data.radius);
     assert(false);
     //        starsystem->add(explosion, descriptor.center);
@@ -373,17 +373,17 @@ void explosionEvent(const comm::Telegramm& telegramm) {
 // GARBAGE
 void garbageSpaceObjectEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::Object data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(data.object());
+    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.object());
     object->die();
-    Sessions::get().session()->garbage()->add(object);
+    Sessions::get().session()->garbageManager()->add(object);
     LOG(__FUNCTION__+data.info());
 }
 
 // REMOVE
 void removeSpaceObjectFromStarSystemEvent(const comm::Telegramm& telegramm) {
     descriptor::comm::StarSystemTransition data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entity()->spaceObject(data.object());
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(data.starsystem());
+    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.object());
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem());
     starsystem->remove(object);
     LOG(__FUNCTION__+data.info());
 }
@@ -395,22 +395,22 @@ namespace event {
 
 /** DOCK */
 void doDockShip(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
     starsystem->remove(ship);
 
     // add
-    control::Land* land = Sessions::get().session()->entity()->land(destination);
+    control::Land* land = Sessions::get().session()->entitiesManager()->land(destination);
     land->add(ship);
 }
 
 void doLaunchShip(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
-    control::Land* land = Sessions::get().session()->entity()->land(destination);
+    control::Land* land = Sessions::get().session()->entitiesManager()->land(destination);
     land->remove(ship);
 
     // add
@@ -421,7 +421,7 @@ void doLaunchShip(int_t object, int_t destination) {
 
 /** JUMP */
 void doJumpIn(int_t object) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -429,25 +429,25 @@ void doJumpIn(int_t object) {
     starsystem->remove(ship);
 
     // add
-    control::HyperSpace* hyper = Sessions::get().session()->entity()->hyperspace();
+    control::HyperSpace* hyper = Sessions::get().session()->entitiesManager()->hyperspace();
     hyper->add(ship);
 }
 void doJumpOut(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
-    control::HyperSpace* hyper = Sessions::get().session()->entity()->hyperspace();
+    control::HyperSpace* hyper = Sessions::get().session()->entitiesManager()->hyperspace();
     hyper->remove(ship);
 
     // add
-    control::StarSystem* starsystem = Sessions::get().session()->entity()->starsystem(destination); // probably can be used from navigator
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
 }
 
 /** DROP/TAKE */
 void doDropItem(int_t object, int_t target) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
-    control::Item* item = Sessions::get().session()->entity()->item(target);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Item* item = Sessions::get().session()->entitiesManager()->item(target);
 
     // remove
     ship->remove(item);
@@ -461,8 +461,8 @@ void doDropItem(int_t object, int_t target) {
 }
 
 void doTakeContainer(int_t object, int_t target) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
-    control::Container* container = Sessions::get().session()->entity()->container(target);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Container* container = Sessions::get().session()->entitiesManager()->container(target);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -475,8 +475,8 @@ void doTakeContainer(int_t object, int_t target) {
 }
 
 void doShoot(int_t object, int_t item) {
-    control::Ship* ship = Sessions::get().session()->entity()->ship(object);
-    control::item::Weapon* weapon = Sessions::get().session()->entity()->weapon(item);
+    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::item::Weapon* weapon = Sessions::get().session()->entitiesManager()->weapon(item);
 
     weapon->fire(weapon->slot()->target());
 
@@ -493,68 +493,68 @@ bool TelegrammHandler::_process(const comm::Telegramm& telegramm)
 
     switch(telegramm.type()) {
     /** CREATE */
-    case comm::Telegramm::Type::CREATE_GALAXY: createGalaxyEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_SECTOR: createSectorEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_NPC: createNpcEvent(telegramm); return true;
+    case telegramm::Type::CREATE_GALAXY: createGalaxyEvent(telegramm); return true;
+    case telegramm::Type::CREATE_SECTOR: createSectorEvent(telegramm); return true;
+    case telegramm::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegramm); return true;
+    case telegramm::Type::CREATE_NPC: createNpcEvent(telegramm); return true;
     // spaceobjects
-    case comm::Telegramm::Type::CREATE_STAR: createStarEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_PLANET: createPlanetEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_ASTEROID: createAsteroidEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_GOODS: createGoodsEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_BULLET: createBulletEvent(telegramm); return true;
+    case telegramm::Type::CREATE_STAR: createStarEvent(telegramm); return true;
+    case telegramm::Type::CREATE_PLANET: createPlanetEvent(telegramm); return true;
+    case telegramm::Type::CREATE_ASTEROID: createAsteroidEvent(telegramm); return true;
+    case telegramm::Type::CREATE_SHIP: createShipEvent(telegramm); return true;
+    case telegramm::Type::CREATE_BOMB: createBombEvent(telegramm); return true;
+    case telegramm::Type::CREATE_GOODS: createGoodsEvent(telegramm); return true;
+    case telegramm::Type::CREATE_CONTAINER: createContainerEvent(telegramm); return true;
+    case telegramm::Type::CREATE_BULLET: createBulletEvent(telegramm); return true;
     // items
-    case comm::Telegramm::Type::CREATE_BAK: createBakEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_DROID: createDroidEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_GRAPPLE: createGrappleEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_LAZER: createLazerEvent(telegramm); return true;
-    case comm::Telegramm::Type::CREATE_ROCKET: createRocketEvent(telegramm); return true;
+    case telegramm::Type::CREATE_BAK: createBakEvent(telegramm); return true;
+    case telegramm::Type::CREATE_DRIVE: createDriveEvent(telegramm); return true;
+    case telegramm::Type::CREATE_DROID: createDroidEvent(telegramm); return true;
+    case telegramm::Type::CREATE_GRAPPLE: createGrappleEvent(telegramm); return true;
+    case telegramm::Type::CREATE_PROTECTOR: createProtectorEvent(telegramm); return true;
+    case telegramm::Type::CREATE_SCANER: createScanerEvent(telegramm); return true;
+    case telegramm::Type::CREATE_RADAR: createRadarEvent(telegramm); return true;
+    case telegramm::Type::CREATE_LAZER: createLazerEvent(telegramm); return true;
+    case telegramm::Type::CREATE_ROCKET: createRocketEvent(telegramm); return true;
         /** */
 
-    case comm::Telegramm::Type::MOUNT_ITEM: mountItemEvent(telegramm); return true;
-    case comm::Telegramm::Type::LOAD_ITEM: loadItemEvent(telegramm); return true;
+    case telegramm::Type::MOUNT_ITEM: mountItemEvent(telegramm); return true;
+    case telegramm::Type::LOAD_ITEM: loadItemEvent(telegramm); return true;
 
     /** TRANSITION */
-    case comm::Telegramm::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegramm); return true;
+    case telegramm::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegramm); return true;
+    case telegramm::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegramm); return true;
     /** */
 
     /** ADD TO STARSYSTEM */
-    case comm::Telegramm::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_PLANET_TO_STARSYSTEM: addPlanetToStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_ASTEROID_TO_STARSYSTEM: addAsteroidToStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); return true;
-    case comm::Telegramm::Type::ADD_NPC_TO_SHIP: addNpcToShipEvent(telegramm); return true;
+    case telegramm::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegramm); return true;
+    case telegramm::Type::ADD_PLANET_TO_STARSYSTEM: addPlanetToStarSystemEvent(telegramm); return true;
+    case telegramm::Type::ADD_ASTEROID_TO_STARSYSTEM: addAsteroidToStarSystemEvent(telegramm); return true;
+    case telegramm::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegramm); return true;
+    case telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegramm); return true;
+    case telegramm::Type::ADD_NPC_TO_SHIP: addNpcToShipEvent(telegramm); return true;
 
     /** REMOVE FROM STARSYSTEM */
-    case comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegramm); return true;
+    case telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegramm); return true;
 
     /** DOCK */
-    case comm::Telegramm::Type::DOCK_SHIP: _doDock(telegramm); return true;
-    case comm::Telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); return true;
+    case telegramm::Type::DOCK_SHIP: _doDock(telegramm); return true;
+    case telegramm::Type::LAUNCH_SHIP: _doLaunch(telegramm); return true;
 
     /** JUMP **/
-    case comm::Telegramm::Type::JUMP_IN: _doJumpIn(telegramm); return true;
-    case comm::Telegramm::Type::JUMP_OUT: _doJumpOut(telegramm); return true;
+    case telegramm::Type::JUMP_IN: _doJumpIn(telegramm); return true;
+    case telegramm::Type::JUMP_OUT: _doJumpOut(telegramm); return true;
 
     /** DROP/TAKE */
-    case comm::Telegramm::Type::DROP_ITEM: _doDropItem(telegramm); return true;
-    case comm::Telegramm::Type::TAKE_CONTAINER: _doTakeContainer(telegramm); return true;
+    case telegramm::Type::DROP_ITEM: _doDropItem(telegramm); return true;
+    case telegramm::Type::TAKE_CONTAINER: _doTakeContainer(telegramm); return true;
 
     /** OTHER */
-    case comm::Telegramm::Type::HIT: hitEvent(telegramm); return true;
-    //case comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
+    case telegramm::Type::HIT: hitEvent(telegramm); return true;
+    //case telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
 
     /* GARBAGE */
-    case comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: garbageSpaceObjectEvent(telegramm); return true;
+    case telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE: garbageSpaceObjectEvent(telegramm); return true;
     }
 
     return false;

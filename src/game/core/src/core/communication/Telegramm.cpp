@@ -7,7 +7,7 @@
 namespace core {
 namespace comm {
 
-Telegramm::Telegramm(Type type, const std::string& data, double delay)
+Telegramm::Telegramm(telegramm::Type type, const std::string& data, double delay)
     :
       m_type(type)
     , m_data(data)

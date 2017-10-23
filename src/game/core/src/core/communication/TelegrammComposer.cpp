@@ -68,13 +68,13 @@ void TelegrammCreator::__createSectors(descriptor::Galaxy* galaxy_descriptor, in
 
         {
         descriptor::comm::Creation telegramm_descriptor(sector_descriptor_id, sector_id);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_SECTOR, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_SECTOR, telegramm_descriptor.data()));
         }
 
         {
         glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
         descriptor::comm::AddingPositional telegramm_descriptor(galaxy_id, sector_id, position);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SECTOR_TO_GALAXY, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_SECTOR_TO_GALAXY, telegramm_descriptor.data()));
         }
 
         __createStarsystems(sector_descriptor_id, sector_id);
@@ -89,13 +89,13 @@ void TelegrammCreator::__createStarsystems(int_t sector_descriptor_id, int_t sec
 
         {
         descriptor::comm::Creation telegramm_descriptor(starsystem_descriptor_id, starsystem_id);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_STARSYSTEM, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_STARSYSTEM, telegramm_descriptor.data()));
         }
 
         {
         glm::vec3 position = meti::rand::gen_vec3xy(3, 8);
         descriptor::comm::AddingPositional telegramm_descriptor(sector_id, starsystem_id, position);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_STARSYSTEM_TO_SECTOR, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_STARSYSTEM_TO_SECTOR, telegramm_descriptor.data()));
         }
 
         __createStarsystemInternalls(starsystem_descriptor_id, starsystem_id);
@@ -117,13 +117,13 @@ void TelegrammCreator::__createStar(int_t starsystem_id) const
 
     {
     descriptor::comm::Creation telegramm_descriptor(star_descriptor_id, star_id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_STAR, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_STAR, telegramm_descriptor.data()));
     }
 
     {
     meti::vec3 position;
     descriptor::comm::AddingPositional telegramm_descriptor(starsystem_id, star_id, position);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_STAR_TO_STARSYSTEM, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_STAR_TO_STARSYSTEM, telegramm_descriptor.data()));
     }
 }
 
@@ -135,13 +135,13 @@ void TelegrammCreator::__createPlanets(int_t starsystem_id, int planet_per_syste
 
         {
         descriptor::comm::Creation telegramm_descriptor(planet_descriptor_id, planet_id);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PLANET, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_PLANET, telegramm_descriptor.data()));
         }
 
         {
         meti::vec3 position;
         descriptor::comm::AddingPositional telegramm_descriptor(starsystem_id, planet_id, position);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_PLANET_TO_STARSYSTEM, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_PLANET_TO_STARSYSTEM, telegramm_descriptor.data()));
         }
     }
 }
@@ -191,86 +191,86 @@ void TelegrammCreator::__createShips(int_t starsystem_id, int ship_num) const
 void TelegrammCreator::__createShip(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_SHIP, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_SHIP, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createNpc(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_NPC, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_NPC, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center) const
 {
     AddToStarsystemDescriptor telegramm_descriptor(starsystem_id, ship_id, center);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SHIP_TO_STARSYSTEM, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_SHIP_TO_STARSYSTEM, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__addNpcToShip(int_t ship_id, int_t npc_id) const
 {
     descriptor::comm::AddingPositional telegramm_descriptor(ship_id, npc_id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_NPC_TO_SHIP, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_NPC_TO_SHIP, telegramm_descriptor.data()));
 }
 
 
 void TelegrammCreator::__createBak(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BAK, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_BAK, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createDrive(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_DRIVE, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_DRIVE, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createProtector(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PROTECTOR, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_PROTECTOR, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createScaner(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_SCANER, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_SCANER, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createRadar(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_RADAR, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_RADAR, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createGrapple(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GRAPPLE, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_GRAPPLE, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createLazer(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_LAZER, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_LAZER, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__createRocket(int_t descriptor_id, int_t id) const
 {
     descriptor::comm::Creation telegramm_descriptor(descriptor_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_ROCKET, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_ROCKET, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__mountItem(int_t ship_id, int_t id) const
 {
     descriptor::comm::AddingPositional telegramm_descriptor(ship_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::MOUNT_ITEM, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::MOUNT_ITEM, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__loadItem(int_t ship_id, int_t id) const
 {
     descriptor::comm::AddingPositional telegramm_descriptor(ship_id, id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::LOAD_ITEM, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::LOAD_ITEM, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__equipShip(int_t ship_id) const
@@ -353,7 +353,7 @@ void TelegrammCreator::createGalaxy(descriptor::Galaxy* galaxy_descriptor)
     int_t galaxy_id = shortcuts::entities()->nextId();
 
     descriptor::comm::Creation telegramm_descriptor(galaxy_descriptor->id(), galaxy_id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GALAXY, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_GALAXY, telegramm_descriptor.data()));
 
     __createSectors(galaxy_descriptor, galaxy_id);
 }
@@ -396,17 +396,17 @@ void TelegrammCreator::death(control::Asteroid* asteroid)
         {
         int_t descriptor_id = shortcuts::descriptors()->randGoods()->id();
         descriptor::comm::CreateGoodsPack telegramm_descriptor(descriptor_id, item_id, amount);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_GOODS, telegramm_descriptor.data()));
         }
         int_t container_id = shortcuts::entities()->nextId();
         {
         int_t descriptor_id = shortcuts::descriptors()->randContainer()->id();
         descriptor::comm::CreateContainer telegramm_descriptor(descriptor_id, container_id, item_id);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
         {
         AddToStarsystemDescriptor telegramm_descriptor(asteroid->starsystem()->id(), container_id, asteroid->position(), impulses[i], asteroid->direction());
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
         }
     }
 
@@ -430,11 +430,11 @@ void TelegrammCreator::__death(control::Vehicle* vehicle)
         int_t item_id = items[i];
         {
         descriptor::comm::CreateContainer telegramm_descriptor(descriptor_id, container_id, item_id);
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_CONTAINER, telegramm_descriptor.data()));
         }
         {
         AddToStarsystemDescriptor telegramm_descriptor(vehicle->starsystem()->id(), container_id, vehicle->position(), impulses[i], vehicle->direction()/* todo: add direction less way*/ );
-        m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
+        m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM, telegramm_descriptor.data()));
         }
     }
 
@@ -491,37 +491,37 @@ void TelegrammCreator::genBullets_DEBUG(control::StarSystem* starsystem, int num
     int_t item_id = rocket->id();
 
     descriptor::comm::CreateBullet telegramm_descriptor(owner_id, item_id, target_id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_BULLET, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
 {
     descriptor::comm::StarSystemTransition descriptor(object->id(), object->starsystem()->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
 }
 
 void TelegrammCreator::__addSpaceObjectToGarbage(control::SpaceObject* object)
 {
     descriptor::comm::Object descriptor(object->id());
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
 }
 
 void TelegrammCreator::__explosionEffect(float radius, const glm::vec3& position)
 {
     descriptor::comm::effect::Explosion telegramm_descriptor(radius, position);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_EXPLOSION_EFFECT, telegramm_descriptor.data()));
 }
 
 void TelegrammCreator::hit(control::SpaceObject* object, int damage)
 {
     descriptor::comm::Hit descriptor(object->id(), object->id(), damage);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::HIT, descriptor.data()));
 }
 
 void TelegrammCreator::createPlayer(int_t player_id, int_t npc_id)
 {
     descriptor::comm::CreatePlayer descriptor(player_id, npc_id);
-    m_telegrammHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_PLAYER, descriptor.data()));
+    m_telegrammHub.add(core::comm::Telegramm(telegramm::Type::CREATE_PLAYER, descriptor.data()));
 }
 
 } // namespace core

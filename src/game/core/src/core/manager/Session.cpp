@@ -28,9 +28,9 @@ namespace core {
 
 Session::Session()
     :
-      m_descriptor(new descriptor::Manager)
-    , m_entity(new manager::Entity)
-    , m_garbage(new manager::Garbage)
+      m_descriptorsManager(new descriptor::Manager)
+    , m_entitiesManager(new manager::Entity)
+    , m_garbageManager(new manager::Garbage)
 {}
 
 Sessions&
@@ -70,12 +70,13 @@ core::Session* session() {
 }
 
 std::shared_ptr<descriptor::Manager> descriptors() {
-    return core::Sessions::get().session()->descriptor();
+    return core::Sessions::get().session()->descriptorsManager();
 }
 
 std::shared_ptr<core::manager::Entity> entities() {
-    return core::Sessions::get().session()->entity();
+    return core::Sessions::get().session()->entitiesManager();
 }
 
 } // namespace shortcuts
+
 } // core

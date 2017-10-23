@@ -20,7 +20,7 @@
 
 #include "Create.hpp"
 
-#include <core/type/TelegramType.hpp>
+#include <core/type/TelegrammType.hpp>
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/StringUtils.hpp>

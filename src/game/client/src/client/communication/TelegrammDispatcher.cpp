@@ -47,8 +47,8 @@ bool TelegrammHandler::_process(const core::comm::Telegramm& telegramm)
     }
 
     switch(telegramm.type()) {
-    case core::comm::Telegramm::Type::CREATE_PLAYER: createPlayerEvent(telegramm); return true;
-    case core::comm::Telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
+    case telegramm::Type::CREATE_PLAYER: createPlayerEvent(telegramm); return true;
+    case telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
     }
 
     assert(false);
