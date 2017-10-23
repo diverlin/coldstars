@@ -164,9 +164,9 @@ public:
         __activate();
         core::global::get().telegrammManager().update();
 
-        if (!m_players.size()) {
-            __create_player();
-        }
+//        if (!m_players.size()) {
+//            __create_player();
+//        }
 
         m_world->update();
     }

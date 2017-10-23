@@ -58,4 +58,12 @@ void InfoTable::add(const std::string& label, const std::vector<int_t>& value)
     add(label, ceti::to_string(value));
 }
 
+//std::string InfoTable::str() const {
+//    std::string result;
+//    for (auto p: *this) {
+//        result += p.first + ":" + p.second + ";";
+//    }
+//    return result;
+//}
+
 } // namespace ceti

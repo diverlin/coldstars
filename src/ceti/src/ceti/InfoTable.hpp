@@ -40,6 +40,8 @@ public:
     void add(const std::string&, float);
     void add(const std::string&, const glm::vec3&);
     void add(const std::string&, const std::vector<int_t>&);
+
+//    std::string str() const;
 };
 
 } // namespace ceti
