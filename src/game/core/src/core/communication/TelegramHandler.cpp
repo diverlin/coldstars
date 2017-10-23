@@ -89,128 +89,95 @@ void TelegramHandler::update()
     }
 }
 
-namespace {
+
+namespace event {
 
 /** TRANSITION */
-void addSectorToGalaxyEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::Galaxy* galaxy = shortcuts::entities()->galaxy(data.parent());
-    control::Sector* sector = shortcuts::entities()->sector(data.object());
-    galaxy->add(sector, data.position());
-    LOG(__FUNCTION__+data.info());
+void addSectorToGalaxy(int_t object, int_t parent, const glm::vec3& position)
+{
+    control::Sector* sector = shortcuts::entities()->sector(object);
+    control::Galaxy* galaxy = shortcuts::entities()->galaxy(parent);
+    galaxy->add(sector, position);
 }
-
-void addStarSystemToSectorEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::Sector* sector = shortcuts::entities()->sector(data.parent());
-    control::StarSystem* starsystem = shortcuts::entities()->starsystem(data.object());
-    sector->add(starsystem, data.position());
-    LOG(__FUNCTION__+data.info());
+void addStarSystemToSector(int_t object, int_t parent, const glm::vec3& position) {
+    control::StarSystem* starsystem = shortcuts::entities()->starsystem(object);
+    control::Sector* sector = shortcuts::entities()->sector(parent);
+    sector->add(starsystem, position);
 }
-void addNpcToShipEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::Ship* ship = shortcuts::entities()->ship(data.parent());
-    control::Npc* npc = shortcuts::entities()->npc(data.object());
+void addNpcToShip(int_t object, int_t parent) {
+    control::Npc* npc = shortcuts::entities()->npc(object);
+    control::Ship* ship = shortcuts::entities()->ship(parent);
     ship->bindNpc(npc);
-    LOG(__FUNCTION__+data.info());
 }
 
-
-void mountItemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::Ship* ship = shortcuts::entities()->ship(data.parent());
-    control::Item* item = shortcuts::entities()->item(data.object());
+// items
+void mountItem(int_t object, int_t parent) {
+    control::Ship* ship = shortcuts::entities()->ship(parent);
+    control::Item* item = shortcuts::entities()->item(object);
     ship->mount(item);
-    LOG(__FUNCTION__+data.info());
 }
-void loadItemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::Ship* ship = shortcuts::entities()->ship(data.parent());
-    control::Item* item = shortcuts::entities()->item(data.object());
+void loadItem(int_t object, int_t parent) {
+    control::Item* item = shortcuts::entities()->item(object);
+    control::Ship* ship = shortcuts::entities()->ship(parent);
     ship->load(item);
-    LOG(__FUNCTION__+data.info());
 }
 /** */
 
-
 /** CREATE */
-void createGalaxyEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Galaxy* galaxy = builder::Galaxy::gen(data.descriptor(), data.object());
+void createGalaxy(int_t descriptor, int_t object) {
+    control::Galaxy* galaxy = builder::Galaxy::gen(descriptor, object);
     core::shortcuts::entities()->add(galaxy);
     core::shortcuts::entities()->setGalaxy(galaxy);
-    LOG(__FUNCTION__+data.info());
 }
-
-void createSectorEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Sector* sector = builder::Sector::gen(data.descriptor(), data.object());
+void createSector(int_t descriptor, int_t object) {
+    control::Sector* sector = builder::Sector::gen(descriptor, object);
     core::shortcuts::entities()->add(sector);
-    LOG(__FUNCTION__+data.info());
 }
-
-void createStarSystemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::StarSystem* starsystem = builder::StarSystem::gen(data.descriptor(), data.object());
+void createStarSystem(int_t descriptor, int_t object) {
+    control::StarSystem* starsystem = builder::StarSystem::gen(descriptor, object);
     core::shortcuts::entities()->add(starsystem);
-    LOG(__FUNCTION__+data.info());
 }
-void createNpcEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Npc* npc = builder::Npc::gen(data.descriptor(), data.object());
+void createNpc(int_t descriptor, int_t object) {
+    control::Npc* npc = builder::Npc::gen(descriptor, object);
     core::shortcuts::entities()->add(npc);
-    LOG(__FUNCTION__+data.info());
 }
 
 // spaceobjects
-void createStarEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Star* star = builder::Star::gen(data.descriptor(), data.object());
+void createStar(int_t descriptor, int_t object) {
+    control::Star* star = builder::Star::gen(descriptor, object);
     core::shortcuts::entities()->add(star);
-    LOG(__FUNCTION__+data.info());
 }
-
-void createPlanetEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Planet* planet = builder::Planet::gen(data.descriptor(), data.object());
+void createPlanet(int_t descriptor, int_t object) {
+    control::Planet* planet = builder::Planet::gen(descriptor, object);
     core::shortcuts::entities()->add(planet);
-    LOG(__FUNCTION__+data.info());
 }
-
-void createAsteroidEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::Asteroid* asteroid = builder::Asteroid::gen(data.descriptor(), data.object());
+void createAsteroid(int_t descriptor, int_t object) {
+    control::Asteroid* asteroid = builder::Asteroid::gen(descriptor, object);
     core::shortcuts::entities()->add(asteroid);
-    LOG(__FUNCTION__+data.info());
 }
-void createShipEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    builder::Ship::gen(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
+void createShip(int_t descriptor, int_t object) {
+    control::Ship* ship = builder::Ship::gen(descriptor, object);
+    core::shortcuts::entities()->add(ship);
 }
 
-void createBombEvent(const comm::Telegram& telegramm) {
+void createBomb(int_t descriptor, int_t object) {
     assert(false);
-//        core::global::get().bombBuilder().gen(telegramm.data);
-    //LOG(__FUNCTION__+data.info());
 }
 
-void createGoodsEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::CreateGoodsPack data(telegramm.data());
-    control::item::Goods* goods = builder::item::Goods::gen(data.descriptor(), data.object());
-    core::shortcuts::entities()->add(goods);
-    LOG(__FUNCTION__+data.info());
+void createGoods(int_t descriptor, int_t object) {
+    control::item::Goods* goods = builder::item::Goods::gen(descriptor, object);
+    assert(false);
+    core::shortcuts::entities()->add(goods); // is it needed?
 }
-void createContainerEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::CreateContainer data(telegramm.data());
-    builder::Container::gen(data.descriptor(), data.object(), data.item());
-    LOG(__FUNCTION__+data.info());
+void createContainer(int_t descriptor, int_t object, int_t item) {
+    control::Container* container = builder::Container::gen(descriptor, object, item);
+    core::shortcuts::entities()->add(container);
 }
-void createBulletEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::CreateBullet data(telegramm.data());
-    control::Vehicle* vehicle = Sessions::get().session()->entitiesManager()->vehicle(data.owner());
-    control::item::Rocket* rocket = Sessions::get().session()->entitiesManager()->rocket(data.weapon());
-    control::SpaceObject* target = Sessions::get().session()->entitiesManager()->spaceObject(data.target());
+
+void createBullet(int_t owner, int_t weapon, int_t target_id) {
+    control::Vehicle* vehicle = core::shortcuts::entities()->vehicle(owner);
+    control::item::Rocket* rocket = core::shortcuts::entities()->rocket(weapon);
+    control::SpaceObject* target = core::shortcuts::entities()->spaceObject(target_id);
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
@@ -218,183 +185,106 @@ void createBulletEvent(const comm::Telegram& telegramm) {
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);
     vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());
-    LOG(__FUNCTION__+data.info());
 }
+
 
 // items
-void createBakEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Bak* bak = builder::item::Bak::gen(data.descriptor(), data.object());
+void createBak(int_t descriptor, int_t object) {
+    control::item::Bak* bak = builder::item::Bak::gen(descriptor, object);
     core::shortcuts::entities()->add(bak);
-    LOG(__FUNCTION__+data.info());
 }
-void createDriveEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Drive* drive = builder::item::Drive::gen(data.descriptor(), data.object());
+void createDrive(int_t descriptor, int_t object) {
+    control::item::Drive* drive = builder::item::Drive::gen(descriptor, object);
     core::shortcuts::entities()->add(drive);
-    LOG(__FUNCTION__+data.info());
 }
-void createDroidEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Droid* droid = builder::item::Droid::gen(data.descriptor(), data.object());
+void createDroid(int_t descriptor, int_t object) {
+    control::item::Droid* droid = builder::item::Droid::gen(descriptor, object);
     core::shortcuts::entities()->add(droid);
-    LOG(__FUNCTION__+data.info());
 }
-void createGrappleEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Grapple* grapple = builder::item::Grapple::gen(data.descriptor(), data.object());
+void createGrapple(int_t descriptor, int_t object) {
+    control::item::Grapple* grapple = builder::item::Grapple::gen(descriptor, object);
     core::shortcuts::entities()->add(grapple);
-    LOG(__FUNCTION__+data.info());
 }
-void createProtectorEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Protector* protector = builder::item::Protector::gen(data.descriptor(), data.object());
+void createProtector(int_t descriptor, int_t object) {
+    control::item::Protector* protector = builder::item::Protector::gen(descriptor, object);
     core::shortcuts::entities()->add(protector);
-    LOG(__FUNCTION__+data.info());
 }
-void createScanerEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Scaner* scaner = builder::item::Scaner::gen(data.descriptor(), data.object());
+void createScaner(int_t descriptor, int_t object) {
+    control::item::Scaner* scaner = builder::item::Scaner::gen(descriptor, object);
     core::shortcuts::entities()->add(scaner);
-    LOG(__FUNCTION__+data.info());
 }
-void createRadarEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Radar* radar = builder::item::Radar::gen(data.descriptor(), data.object());
+void createRadar(int_t descriptor, int_t object) {
+    control::item::Radar* radar = builder::item::Radar::gen(descriptor, object);
     core::shortcuts::entities()->add(radar);
-    LOG(__FUNCTION__+data.info());
 }
-void createLazerEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Lazer* lazer = builder::item::Lazer::gen(data.descriptor(), data.object());
+void createLazer(int_t descriptor, int_t object) {
+    control::item::Lazer* lazer = builder::item::Lazer::gen(descriptor, object);
     core::shortcuts::entities()->add(lazer);
-    LOG(__FUNCTION__+data.info());
 }
-void createRocketEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Creation data(telegramm.data());
-    control::item::Rocket* rocket = builder::item::Rocket::gen(data.descriptor(), data.object());
+void createRocket(int_t descriptor, int_t object) {
+    control::item::Rocket* rocket = builder::item::Rocket::gen(descriptor, object);
     core::shortcuts::entities()->add(rocket);
-    LOG(__FUNCTION__+data.info());
 }
 /** */
 
-/** ADD TO STARSYSTEM */
-void addStarToStarSystemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.parent());
-    control::Star* star = Sessions::get().session()->entitiesManager()->star(data.object());
+void addStarToStarSystem(int_t object, int_t parent) {
+    control::Star* star = core::shortcuts::entities()->star(object);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
     starsystem->add(star);
-    LOG(__FUNCTION__+data.info());
 }
-void addPlanetToStarSystemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::AddingPositional data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.parent());
-    control::Planet* planet = Sessions::get().session()->entitiesManager()->planet(data.object());
+void addPlanetToStarSystem(int_t object, int_t parent) {
+    control::Planet* planet = core::shortcuts::entities()->planet(object);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
     starsystem->add(planet);
-    LOG(__FUNCTION__+data.info());
 }
-void addAsteroidToStarSystemEvent(const comm::Telegram& telegramm) {
-    AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
-    control::Asteroid* asteroid = Sessions::get().session()->entitiesManager()->asteroid(data.object);
+void addAsteroidToStarSystem(int_t object, int_t parent) {
+    control::Asteroid* asteroid = core::shortcuts::entities()->asteroid(object);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
     starsystem->add(asteroid);
-    LOG(__FUNCTION__+data.info());
 }
 
-void addShipToStarSystemEvent(const comm::Telegram& telegramm) {
-    AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(data.object);
-    starsystem->add(ship);
-    LOG(__FUNCTION__+data.info());
+void addShipToStarSystem(int_t object, int_t parent, const glm::vec3& position) {
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
+    starsystem->add(ship, position);
 }
-void addContainerToStarSystemEvent(const comm::Telegram& telegramm) {
-    AddToStarsystemDescriptor data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
-    control::Container* container = Sessions::get().session()->entitiesManager()->container(data.object);
-    container->addImpulse(data.impulse);
-    starsystem->add(container, data.position);
-    LOG(__FUNCTION__+data.info());
+void addContainerToStarSystem(int_t object, int_t parent, const glm::vec3& position, const glm::vec3& impulse) {
+    control::Container* container = Sessions::get().session()->entitiesManager()->container(object);
+    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(parent);
+    container->addImpulse(impulse);
+    starsystem->add(container, position);
 }
 
-/** DOCK */
-void _doDock(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doDockShip(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
-}
-void _doLaunch(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doLaunchShip(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
+// hit
+void hitSpaceObject(int_t object_id, int damage) {
+    control::SpaceObject* object = core::shortcuts::entities()->spaceObject(object_id);
+    object->hit(damage);
 }
 
-/** JUMP */
-void _doJumpIn(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doJumpIn(data.object());
-    LOG(__FUNCTION__+data.info());
-}
-void _doJumpOut(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doJumpOut(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
-}
-
-/** DROP/TAKE */
-void _doDropItem(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doDropItem(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
-}
-void _doTakeContainer(const comm::Telegram& telegramm) {
-    descriptor::comm::Pair data(telegramm.data());
-    event::doTakeContainer(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
-}
-
-/** */
-
-void hitEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Hit data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.target());
-    object->hit(data.damage());
-    ///LOG(__FUNCTION__+data.info());
-}
-void explosionEvent(const comm::Telegram& telegramm) {
-    descriptor::Explosion data(telegramm.data());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem);
-    Explosion* explosion = new Explosion(data.damage, data.radius);
+void explode(int_t object, const glm::vec3& center, int damage, int radius) {
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(object);
+    Explosion* explosion = new Explosion(damage, radius);
     assert(false);
     //        starsystem->add(explosion, descriptor.center);
-    LOG(__FUNCTION__+data.info());
 }
 
 // GARBAGE
-void garbageSpaceObjectEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::Object data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.object());
+void garbageSpaceObject(int_t object_id) {
+    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(object_id);
     object->die();
     Sessions::get().session()->garbageManager()->add(object);
-    LOG(__FUNCTION__+data.info());
 }
 
 // REMOVE
-void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
-    descriptor::comm::StarSystemTransition data(telegramm.data());
-    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(data.object());
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(data.starsystem());
+void removeSpaceObjectFromStarSystem(int_t object_id, int_t parent) {
+    control::SpaceObject* object = core::shortcuts::entities()->spaceObject(object_id);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
     starsystem->remove(object);
-    LOG(__FUNCTION__+data.info());
 }
 
-} // namespace
-
-
-namespace event {
 
 /** DOCK */
-void doDockShip(int_t object, int_t destination) {
+void dockShip(int_t object, int_t destination) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
@@ -406,7 +296,7 @@ void doDockShip(int_t object, int_t destination) {
     land->add(ship);
 }
 
-void doLaunchShip(int_t object, int_t destination) {
+void launchShip(int_t object, int_t destination) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
@@ -420,7 +310,7 @@ void doLaunchShip(int_t object, int_t destination) {
 }
 
 /** JUMP */
-void doJumpIn(int_t object) {
+void jumpIn(int_t object) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
@@ -432,7 +322,7 @@ void doJumpIn(int_t object) {
     control::HyperSpace* hyper = Sessions::get().session()->entitiesManager()->hyperspace();
     hyper->add(ship);
 }
-void doJumpOut(int_t object, int_t destination) {
+void jumpOut(int_t object, int_t destination) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
 
     // remove
@@ -445,7 +335,7 @@ void doJumpOut(int_t object, int_t destination) {
 }
 
 /** DROP/TAKE */
-void doDropItem(int_t object, int_t target) {
+void dropItem(int_t object, int_t target) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
     control::Item* item = Sessions::get().session()->entitiesManager()->item(target);
 
@@ -460,7 +350,7 @@ void doDropItem(int_t object, int_t target) {
     starsystem->add(container, ship->position());
 }
 
-void doTakeContainer(int_t object, int_t target) {
+void takeContainer(int_t object, int_t target) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
     control::Container* container = Sessions::get().session()->entitiesManager()->container(target);
 
@@ -474,7 +364,7 @@ void doTakeContainer(int_t object, int_t target) {
     container->die();
 }
 
-void doShoot(int_t object, int_t item) {
+void shoot(int_t object, int_t item) {
     control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
     control::item::Weapon* weapon = Sessions::get().session()->entitiesManager()->weapon(item);
 
@@ -486,6 +376,249 @@ void doShoot(int_t object, int_t item) {
 }
 
 } // namespace event
+
+namespace {
+
+/** TRANSITION */
+void addSectorToGalaxyEvent(const comm::Telegram& telegram) {
+    descriptor::comm::AddingPositional data(telegram.data());
+    event::addSectorToGalaxy(data.object(), data.parent(), data.position());
+    LOG(__FUNCTION__+data.info());
+}
+
+void addStarSystemToSectorEvent(const comm::Telegram& telegram) {
+    descriptor::comm::AddingPositional data(telegram.data());
+    event::addStarSystemToSector(data.object(), data.parent(), data.position());
+    LOG(__FUNCTION__+data.info());
+}
+void addNpcToShipEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::AddingPositional data(telegramm.data());
+    event::addNpcToShip(data.object(), data.parent());
+    LOG(__FUNCTION__+data.info());
+}
+
+// items
+void mountItemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::AddingPositional data(telegramm.data());
+    event::mountItem(data.object(), data.parent());
+    LOG(__FUNCTION__+data.info());
+}
+void loadItemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::AddingPositional data(telegramm.data());
+    event::loadItem(data.object(), data.parent());
+    LOG(__FUNCTION__+data.info());
+}
+/** */
+
+
+/** CREATE */
+void createGalaxyEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createGalaxy(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createSectorEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createSector(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createStarSystemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createStarSystem(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createNpcEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createNpc(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+
+// spaceobjects
+void createStarEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createStar(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createPlanetEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createPlanet(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createAsteroidEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createAsteroid(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createShipEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createShip(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+
+// items
+void createBombEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createBomb(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+
+void createGoodsEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::CreateGoodsPack data(telegramm.data());
+    event::createGoods(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createContainerEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::CreateContainer data(telegramm.data());
+    event::createContainer(data.descriptor(), data.object(), data.item());
+    LOG(__FUNCTION__+data.info());
+}
+void createBulletEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::CreateBullet data(telegramm.data());
+    event::createBullet(data.owner(), data.weapon(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+
+// items
+void createBakEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createBak(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createDriveEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createDrive(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createDroidEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createDroid(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createGrappleEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createGrapple(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createProtectorEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createProtector(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createScanerEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createScaner(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createRadarEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createRadar(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createLazerEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createLazer(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void createRocketEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Creation data(telegramm.data());
+    event::createRocket(data.descriptor(), data.object());
+    LOG(__FUNCTION__+data.info());
+}
+/** */
+
+/** ADD TO STARSYSTEM */
+void addStarToStarSystemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::AddingPositional data(telegramm.data());
+    event::addStarToStarSystem(data.object(), data.parent());
+    LOG(__FUNCTION__+data.info());
+}
+void addPlanetToStarSystemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::AddingPositional data(telegramm.data());
+    event::addPlanetToStarSystem(data.object(), data.parent());
+    LOG(__FUNCTION__+data.info());
+}
+void addAsteroidToStarSystemEvent(const comm::Telegram& telegramm) {
+    AddToStarsystemDescriptor data(telegramm.data());
+    event::addAsteroidToStarSystem(data.object, data.starsystem);
+    LOG(__FUNCTION__+data.info());
+}
+
+void addShipToStarSystemEvent(const comm::Telegram& telegramm) {
+    AddToStarsystemDescriptor data(telegramm.data());
+    event::addShipToStarSystem(data.object, data.starsystem, data.position);
+    LOG(__FUNCTION__+data.info());
+}
+void addContainerToStarSystemEvent(const comm::Telegram& telegramm) {
+    AddToStarsystemDescriptor data(telegramm.data());
+    event::addContainerToStarSystem(data.object, data.starsystem, data.position, data.impulse);
+    LOG(__FUNCTION__+data.info());
+}
+
+/** DOCK */
+void _doDock(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::dockShip(data.object(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+void _doLaunch(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::launchShip(data.object(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+
+/** JUMP */
+void _doJumpIn(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::jumpIn(data.object());
+    LOG(__FUNCTION__+data.info());
+}
+void _doJumpOut(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::jumpOut(data.object(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+
+/** DROP/TAKE */
+void _doDropItem(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::dropItem(data.object(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+void _doTakeContainer(const comm::Telegram& telegramm) {
+    descriptor::comm::Pair data(telegramm.data());
+    event::takeContainer(data.object(), data.target());
+    LOG(__FUNCTION__+data.info());
+}
+
+/** */
+
+void hitEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Hit data(telegramm.data());
+    event::hitSpaceObject(data.target(), data.damage());
+    ///LOG(__FUNCTION__+data.info());
+}
+void explosionEvent(const comm::Telegram& telegramm) {
+    descriptor::Explosion data(telegramm.data());
+    event::explode(data.starsystem, data.center, data.damage, data.radius);
+    LOG(__FUNCTION__+data.info());
+}
+
+// GARBAGE
+void garbageSpaceObjectEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::Object data(telegramm.data());
+    event::garbageSpaceObject(data.object());
+    LOG(__FUNCTION__+data.info());
+}
+
+// REMOVE
+void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
+    descriptor::comm::StarSystemTransition data(telegramm.data());
+    event::removeSpaceObjectFromStarSystem(data.object(), data.starsystem());
+    LOG(__FUNCTION__+data.info());
+}
+
+} // namespace
+
 
 bool TelegramHandler::_process(const comm::Telegram& telegram)
 {
