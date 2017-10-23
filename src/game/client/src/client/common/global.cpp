@@ -20,7 +20,7 @@
 
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
-#include <client/communication/TelegramDispatcher.hpp>
+#include <client/communication/TelegramHandler.hpp>
 
 #include <core/type/CollectorType.hpp>
 

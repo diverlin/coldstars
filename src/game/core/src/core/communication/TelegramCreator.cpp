@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "TelegramComposer.hpp"
+#include "TelegramCreator.hpp"
 
 #include <core/world/starsystem.hpp>
 #include <core/common/Global.hpp>
@@ -41,7 +41,7 @@
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 
 #include <core/communication/TelegramHub.hpp>
-#include <core/communication/TelegramDispatcher.hpp>
+#include <core/communication/TelegramHandler.hpp>
 
 #include <core/math/rand.hpp> // ugly
 

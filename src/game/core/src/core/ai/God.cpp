@@ -24,7 +24,7 @@
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 
-#include <core/communication/TelegramComposer.hpp>
+#include <core/communication/TelegramCreator.hpp>
 
 #include <core/world/galaxy.hpp>
 #include <core/world/Sector.hpp>
