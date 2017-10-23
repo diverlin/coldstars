@@ -23,8 +23,8 @@ class God;
 
 namespace core {
 namespace comm {
-class TelegrammHub;
-class TelegrammHandler;
+class TelegramHub;
+class TelegramHandler;
 } // namespace comm
 } // namespace core
 
@@ -45,8 +45,8 @@ public:
     static global& get();
 
     God& god() { return *m_god; }
-    comm::TelegrammHub& telegrammHub() { return *m_messageHub; }
-    comm::TelegrammHandler& telegrammHandler() { return *m_telegrammHandler; }
+    comm::TelegramHub& telegrammHub() { return *m_messageHub; }
+    comm::TelegramHandler& telegrammHandler() { return *m_telegrammHandler; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
@@ -59,8 +59,8 @@ private:
     global& operator=(const global&) = delete;
 
     God* m_god = nullptr;
-    comm::TelegrammHub* m_messageHub = nullptr;
-    comm::TelegrammHandler* m_telegrammHandler = nullptr;
+    comm::TelegramHub* m_messageHub = nullptr;
+    comm::TelegramHandler* m_telegrammHandler = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;

@@ -21,16 +21,16 @@
 
 namespace client {
 
-class TelegrammComposer
+class TelegramComposer
 {
 private:
-    TelegrammComposer();
-    TelegrammComposer(const TelegrammComposer&) = delete;
-    ~TelegrammComposer() = default;
-    TelegrammComposer& operator=(const TelegrammComposer&) = delete;
+    TelegramComposer();
+    TelegramComposer(const TelegramComposer&) = delete;
+    ~TelegramComposer() = default;
+    TelegramComposer& operator=(const TelegramComposer&) = delete;
 
 public:
-    static TelegrammComposer& get();
+    static TelegramComposer& get();
 };
 
 } // namespace core

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <communication/Telegramm.hpp>
+#include <communication/Telegram.hpp>
 
 #include <SFML/System/Clock.hpp>
 
@@ -32,23 +32,23 @@ void doTakeContainer(int_t, int_t);
 void doShoot(int_t, int_t);
 } // namespace event
 
-class TelegrammHandler
+class TelegramHandler
 {
 public:
-    TelegrammHandler() {}
-    void add(Telegramm&);
+    TelegramHandler() {}
+    void add(Telegram&);
 
     [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]
     void runLoop();
     void update();
 
 protected:
-    virtual bool _process(const Telegramm&);
+    virtual bool _process(const Telegram&);
 
 private:
     bool m_log = true;
     sf::Clock m_clock;
-    std::set<Telegramm> m_telegramms;
+    std::set<Telegram> m_telegramms;
 
     double __currentTime() const;
     void __log(const std::string&) const;

@@ -24,7 +24,7 @@
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 
-#include <core/communication/TelegrammComposer.hpp>
+#include <core/communication/TelegramComposer.hpp>
 
 #include <core/world/galaxy.hpp>
 #include <core/world/Sector.hpp>
@@ -75,7 +75,7 @@ God::~God()
 void God::createWorld(  )
 {
     descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
-    core::TelegrammCreator::get().createGalaxy(galaxy_descriptor);
+    core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
 
     __createLife(m_galaxy, galaxy_descriptor);
     //    if (descr->allow_invasion) {

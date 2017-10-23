@@ -19,8 +19,8 @@
 #include "Global.hpp"
 #include <ai/God.hpp>
 #include <core/manager/EntityManager.hpp>
-#include <communication/TelegrammHub.hpp>
-#include <communication/TelegrammDispatcher.hpp>
+#include <communication/TelegramHub.hpp>
+#include <communication/TelegramDispatcher.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
@@ -39,8 +39,8 @@ global& global::get()
 global::global()
     :
       m_god(new God)
-    , m_messageHub(new comm::TelegrammHub)
-    , m_telegrammHandler(new comm::TelegrammHandler)
+    , m_messageHub(new comm::TelegramHub)
+    , m_telegrammHandler(new comm::TelegramHandler)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)

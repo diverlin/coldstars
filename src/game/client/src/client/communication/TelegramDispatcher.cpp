@@ -1,4 +1,4 @@
-#include "TelegrammDispatcher.hpp"
+#include "TelegramDispatcher.hpp"
 
 #include <core/descriptor/comm/Creation.hpp>
 #include <core/pilot/Npc.hpp>
@@ -23,7 +23,7 @@ namespace comm {
 namespace {
 
 // player
-void createPlayerEvent(const core::comm::Telegramm& telegramm) {
+void createPlayerEvent(const core::comm::Telegram& telegramm) {
     descriptor::comm::CreatePlayer data(telegramm.data());
 
     client::Player* player = new client::Player(data.player());
@@ -32,7 +32,7 @@ void createPlayerEvent(const core::comm::Telegramm& telegramm) {
     client::global::get().setPlayer(player);
 }
 
-void createExplosionEffectEvent(const core::comm::Telegramm& telegramm) {
+void createExplosionEffectEvent(const core::comm::Telegram& telegramm) {
     descriptor::comm::effect::Explosion descriptor(telegramm.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::global::get().view().add(explosion, descriptor.position());
@@ -40,15 +40,15 @@ void createExplosionEffectEvent(const core::comm::Telegramm& telegramm) {
 
 } // namespace
 
-bool TelegrammHandler::_process(const core::comm::Telegramm& telegramm)
+bool TelegramHandler::_process(const core::comm::Telegram& telegramm)
 {
-    if (core::comm::TelegrammHandler::_process(telegramm)) {
+    if (core::comm::TelegramHandler::_process(telegramm)) {
         return true;
     }
 
     switch(telegramm.type()) {
-    case telegramm::Type::CREATE_PLAYER: createPlayerEvent(telegramm); return true;
-    case telegramm::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
+    case telegram::Type::CREATE_PLAYER: createPlayerEvent(telegramm); return true;
+    case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
     }
 
     assert(false);

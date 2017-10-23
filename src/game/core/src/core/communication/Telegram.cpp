@@ -1,4 +1,4 @@
-#include "Telegramm.hpp"
+#include "Telegram.hpp"
 
 #include <ceti/StringUtils.hpp>
 
@@ -7,14 +7,14 @@
 namespace core {
 namespace comm {
 
-Telegramm::Telegramm(telegramm::Type type, const std::string& data, double delay)
+Telegram::Telegram(telegram::Type type, const std::string& data, double delay)
     :
       m_type(type)
     , m_data(data)
     , m_delay(delay)
 {}
 
-bool Telegramm::operator<(const Telegramm& rhs) const
+bool Telegram::operator<(const Telegram& rhs) const
 {
     return (m_dispatchTime < rhs.dispatchTime());
 }

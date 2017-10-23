@@ -20,7 +20,7 @@
 
 #include <string>
 
-namespace telegramm {
+namespace telegram {
 
 enum class Type : int
 {

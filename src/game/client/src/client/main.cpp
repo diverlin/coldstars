@@ -21,7 +21,7 @@
 #include "builder/world/GalaxyBuilder.hpp"
 #include <common/Config.hpp>
 
-#include <core/communication/TelegrammComposer.hpp>
+#include <core/communication/TelegramComposer.hpp>
 #include <core/manager/Session.hpp>
 
 #include <jeti/Mesh.hpp>
@@ -74,8 +74,8 @@
 
 #include <client/view/StarSystem.hpp>
 
-#include <core/communication/TelegrammHub.hpp>
-#include <client/communication/TelegrammDispatcher.hpp>
+#include <core/communication/TelegramHub.hpp>
+#include <client/communication/TelegramDispatcher.hpp>
 
 #include <memory>
 
@@ -133,7 +133,7 @@ namespace {
 //    exit(1);
 //}
 
-core::TelegrammCreator& composer() { return core::TelegrammCreator::get(); }
+core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 
 enum Machine { server, client };
 
@@ -143,7 +143,7 @@ private:
     control::World* m_world = nullptr;
     std::vector<core::Player*> m_players;
 
-    std::shared_ptr<core::comm::TelegrammHandler> m_telegrammHandler;
+    std::shared_ptr<core::comm::TelegramHandler> m_telegrammHandler;
 
 public:
     Server()
@@ -151,7 +151,7 @@ public:
         core::Sessions::get().add(Machine::server, new core::Session);
         __activate();
 
-        m_telegrammHandler = std::shared_ptr<core::comm::TelegrammHandler>(new core::comm::TelegrammHandler());
+        m_telegrammHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler());
         core::global::get().telegrammHub().subscribe(m_telegrammHandler);
 
         Data data;
@@ -221,7 +221,7 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegrammHandler>(new client::comm::TelegrammHandler()));
+        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler()));
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);
