@@ -18,14 +18,18 @@
 
 #pragma once
 
+#include <ceti/Pack.hpp>
+
 #include <fstream>
 #include <iostream>
 #include <string>
 
 #ifdef USE_LOG
-    #define LOGs( ... )         std::cout  << __VA_ARGS__ << " "
-    #define LOG( ... )          std::cout  << __VA_ARGS__ << std::endl
-    #define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
+//    #define LOGs( ... )         std::cout  << __VA_ARGS__ << " "
+//    #define LOG( ... )          std::cout  << __VA_ARGS__ << std::endl
+//    #define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
+    #define LOG( ... )          Logger::get().log(__VA_ARGS__)
+    #define LOG_ERROR( ... )    Logger::get().log_error(__VA_ARGS__)
 #else
     #define LOG( ... )
     #define LOG_ERROR( ... )
@@ -37,27 +41,31 @@ void abort(const std::string& msg = "no info");
 
 } // namespace ceti
 
-//class Logger
-//{
-//    public:
-//        static Logger& Instance();
-//        ~Logger();
-        
-//        void Log(const std::string&, int dip = 0);
-//        void warn(const std::string&, int dip = 0);
-//        void error(const std::string&);
+class Logger
+{
+public:
+    enum class Code: int { ANY, DATA, TELEGRAMM };
 
-//    private:
-//        Logger();
-//        Logger(const Logger&) = delete;
-//        Logger& operator=(const Logger&) = delete;
+    static Logger& get();
+    ~Logger();
 
-//        enum class MODE: int { NONE=0, SCREEN, FILE, SCREENFILE };
-//        MODE mode;
-        
-//        std::ofstream file;
-        
-//        void toScreen(const std::string&, int);
-//        void toFile(const std::string&, int);
-//};
+    void log(const std::string&, Code code=Code::ANY);
+    void warn(const std::string&);
+    void error(const std::string&);
+
+private:
+    enum class Mode: int { NONE=0, SCREEN, FILE, SCREENFILE };
+
+    Logger();
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
+
+    ceti::pack<Code> m_codes;
+    Mode m_mode;
+
+    std::ofstream m_file;
+
+    void toScreen(const std::string&, Code);
+    void toFile(const std::string&, Code);
+};
 

@@ -32,10 +32,10 @@ void doTakeContainer(int_t, int_t);
 void doShoot(int_t, int_t);
 } // namespace event
 
-class TelegrammDispatcher
+class TelegrammHandler
 {
 public:
-    TelegrammDispatcher() {}
+    TelegrammHandler() {}
     void add(Telegramm&);
 
     [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]

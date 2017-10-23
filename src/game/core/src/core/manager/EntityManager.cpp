@@ -124,7 +124,7 @@ void Entity::add(control::Base* ob)
 control::Base*
 Entity::base(int_t id) const
 {
-    LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
+    LOG(std::string("EntityManager::entity requested_id=") + std::to_string(id));
     std::map<int_t, control::Base*>::const_iterator it = m_entities.find(id);
     assert(it->second);
     return it->second;

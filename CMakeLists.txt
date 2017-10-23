@@ -22,6 +22,7 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG)
+    add_definitions(-DUSE_LOG)
 endif ()
 
 #set( CMAKE_VERBOSE_MAKEFILE true )

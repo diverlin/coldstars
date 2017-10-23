@@ -29,6 +29,8 @@
 #include <jeti/Camera.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
+#include <meti/RandUtils.hpp>
+
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
@@ -141,6 +143,8 @@ private:
     control::World* m_world = nullptr;
     std::vector<core::Player*> m_players;
 
+    std::shared_ptr<core::comm::TelegrammHandler> m_telegrammHandler;
+
 public:
     Server()
     {
@@ -148,11 +152,11 @@ public:
 
         __activate();
 
-        core::global::get().telegrammHub().subscribe(std::shared_ptr<core::comm::TelegrammDispatcher>(new core::comm::TelegrammDispatcher()));
-
+        m_telegrammHandler = std::shared_ptr<core::comm::TelegrammHandler>(new core::comm::TelegrammHandler());
         Data data;
-
         m_world = new control::World;
+
+        core::global::get().telegrammHub().subscribe(m_telegrammHandler);
     }
 
     ~Server()
@@ -162,7 +166,7 @@ public:
     void update()
     {
         __activate();
-        core::global::get().telegrammManager().update();
+        core::global::get().telegrammHandler().update();
 
 //        if (!m_players.size()) {
 //            __create_player();
@@ -217,7 +221,7 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegrammDispatcher>(new client::comm::TelegrammDispatcher()));
+        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegrammHandler>(new client::comm::TelegrammHandler()));
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);
@@ -255,7 +259,8 @@ private:
     void __create_player() {
         control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
         if (!galaxy) {
-            std::cout<<"galaxy is null"<<std::endl;
+//            if (meti::rand::gen_int(1000) == 1000)
+//                std::cout<<"galaxy is null"<<std::endl;
             return;
         }
 

@@ -77,6 +77,10 @@ public:
     }
 
     bool contains(const T& element) const {
+        if (!this->size()) {
+            return false;
+        }
+
         auto it = std::find(this->begin(), this->end(), element);
         if (it != this->end()) {
             return true;

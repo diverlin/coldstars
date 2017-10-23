@@ -17,8 +17,8 @@
 */
 
 #include "Logger.hpp"
-//#include <iostream>
-//#include <iomanip>
+
+#include <iomanip>
 #include <cassert>
 #include <stdexcept>
 
@@ -31,60 +31,66 @@ void abort(const std::string& msg) {
 
 } // namespace ceti
 
-//Logger& Logger::Instance()
-//{
-//    static Logger instance;
-//    return instance;
-//}
+Logger& Logger::get()
+{
+    static Logger instance;
+    return instance;
+}
 
-//Logger::Logger()
-//{
-//    mode = MODE::SCREEN;
-//}
+Logger::Logger()
+{
+    m_mode = Mode::SCREEN;
+    m_codes.add(Code::ANY);
+    m_codes.add(Code::DATA);
+    m_codes.add(Code::TELEGRAMM);
+}
         
-//Logger::~Logger()
-//{
-//    file.close();
-//}
+Logger::~Logger()
+{
+    m_file.close();
+}
 
-//void Logger::warn(const std::string& msg, int dip)
-//{
-//    std::string text = "WARNING!!!: "+ msg;
-//    Log(text, dip);
-//}
+void Logger::warn(const std::string& msg)
+{
+    std::string text = "WARNING!!!: "+ msg;
+    log(text);
+}
 
-//void Logger::error(const std::string& msg)
-//{
-//    std::string text = "ERROR!!!: "+ msg;
-//    Log(text);
-//    throw std::runtime_error(text);
-//}
+void Logger::error(const std::string& msg)
+{
+    std::string text = "ERROR!!!: "+ msg;
+    log(text);
+    throw std::runtime_error(text);
+}
 
-//void Logger::Log(const std::string& msg, int dip)
-//{
-//    switch(mode)
-//    {
-//        case MODE::SCREEN: { toScreen(msg, dip); break; }
-//        case MODE::FILE: { toFile(msg, dip); break;  }
-//        case MODE::SCREENFILE: {
-//            toScreen(msg, dip);
-//            toFile(msg, dip);
-//            break;
-//        }
-//        case MODE::NONE: { break; }
+void Logger::log(const std::string& msg, Code code)
+{
+//    if (!m_codes.contains(code)) {
+//        return;
 //    }
-//}
+
+    switch(m_mode) {
+        case Mode::SCREEN: { toScreen(msg, code); break; }
+        case Mode::FILE: { toFile(msg, code); break;  }
+        case Mode::SCREENFILE: {
+            toScreen(msg, code);
+            toFile(msg, code);
+            break;
+        }
+        case Mode::NONE: { break; }
+    }
+}
             
-//void Logger::toScreen(const std::string& msg, int dip)
-//{
-//    std::cout<<std::setw(dip)<<msg<<std::endl;
-//}
+void Logger::toScreen(const std::string& msg, Code code)
+{
+    std::cout<<std::setw(int(code))<<msg<<std::endl;
+}
 
-//void Logger::toFile(const std::string& msg, int dip)
-//{
-//    if (!file) {
-//        file.open("log.txt");
-//    }
-//    file<<std::setw(dip)<<msg<<std::endl;
-//}
+void Logger::toFile(const std::string& msg, Code code)
+{
+    if (!m_file) {
+        m_file.open("log.txt");
+    }
+    m_file<<std::setw(int(code))<<msg<<std::endl;
+}
 

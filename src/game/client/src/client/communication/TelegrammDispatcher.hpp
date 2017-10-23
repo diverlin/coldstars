@@ -5,11 +5,11 @@
 namespace client {
 namespace comm {
 
-class TelegrammDispatcher : public core::comm::TelegrammDispatcher
+class TelegrammHandler : public core::comm::TelegrammHandler
 {
 public:
-    TelegrammDispatcher()=default;
-    virtual ~TelegrammDispatcher()=default;
+    TelegrammHandler()=default;
+    virtual ~TelegrammHandler()=default;
 
 private:
     bool _process(const core::comm::Telegramm&) override final;
