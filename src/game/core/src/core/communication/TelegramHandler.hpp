@@ -20,16 +20,16 @@ namespace comm {
 
 namespace event {
 /** DOCK */
-void doDockShip(int_t, int_t);
-void doLaunchShip(int_t, int_t);
+void dockShip(int_t, int_t);
+void launchShip(int_t, int_t);
 /** JUMP */
-void doJumpIn(int_t);
-void doJumpOut(int_t, int_t);
+void jumpIn(int_t);
+void jumpOut(int_t, int_t);
 /** DROP/TAKE */
-void doDropItem(int_t, int_t);
-void doTakeContainer(int_t, int_t);
+void dropItem(int_t, int_t);
+void takeContainer(int_t, int_t);
 /** SHOOT */
-void doShoot(int_t, int_t);
+void shoot(int_t, int_t);
 } // namespace event
 
 class TelegramHandler
