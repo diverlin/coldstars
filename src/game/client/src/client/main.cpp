@@ -133,7 +133,7 @@ namespace {
 //    exit(1);
 //}
 
-core::TelegrammComposer& composer() { return core::TelegrammComposer::get(); }
+core::TelegrammCreator& composer() { return core::TelegrammCreator::get(); }
 
 enum Machine { server, client };
 
@@ -153,10 +153,10 @@ public:
         __activate();
 
         m_telegrammHandler = std::shared_ptr<core::comm::TelegrammHandler>(new core::comm::TelegrammHandler());
+        core::global::get().telegrammHub().subscribe(m_telegrammHandler);
+
         Data data;
         m_world = new control::World;
-
-        core::global::get().telegrammHub().subscribe(m_telegrammHandler);
     }
 
     ~Server()
@@ -166,7 +166,7 @@ public:
     void update()
     {
         __activate();
-        core::global::get().telegrammHandler().update();
+        m_telegrammHandler->update();
 
 //        if (!m_players.size()) {
 //            __create_player();

@@ -57,7 +57,7 @@
 #include <algorithm> // std::min
 
 namespace {
-core::TelegrammComposer& composer() { return core::TelegrammComposer::get(); }
+core::TelegrammCreator& composer() { return core::TelegrammCreator::get(); }
 } // namespace
 
 namespace control {

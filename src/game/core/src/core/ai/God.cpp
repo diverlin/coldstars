@@ -75,7 +75,7 @@ God::~God()
 void God::createWorld(  )
 {
     descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
-    core::TelegrammComposer::get().createGalaxy(galaxy_descriptor);
+    core::TelegrammCreator::get().createGalaxy(galaxy_descriptor);
 
     __createLife(m_galaxy, galaxy_descriptor);
     //    if (descr->allow_invasion) {
