@@ -18,14 +18,14 @@
 
 #pragma once
 
-#include "Adding.hpp"
+#include "AddingPositional.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-Adding::Adding(int_t parent, int_t object, const meti::vec3& position)
+AddingPositional::AddingPositional(int_t parent, int_t object, const meti::vec3& position)
     :
       m_parent(parent)
     , m_object(object)
@@ -33,13 +33,13 @@ Adding::Adding(int_t parent, int_t object, const meti::vec3& position)
 {}
 
 
-Adding::Adding(const std::string& data)
+AddingPositional::AddingPositional(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Adding::data() const
+AddingPositional::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

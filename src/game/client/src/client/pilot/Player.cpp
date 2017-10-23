@@ -95,17 +95,17 @@ Player::~Player()
 
 const meti::vec3&
 Player::position() const {
-    assert(m_npc);
-    assert(m_npc->vehicle());
-    return m_npc->vehicle()->position();
+    assert(npc());
+    assert(npc()->vehicle());
+    return npc()->vehicle()->position();
 }
 
 
 float
 Player::radius() const {
-    assert(m_npc);
-    assert(m_npc->vehicle());
-    return m_npc->vehicle()->properties().radar;
+    assert(npc());
+    assert(npc()->vehicle());
+    return npc()->vehicle()->properties().radar;
 }
 
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
@@ -738,9 +738,9 @@ void Player::__navigate() const
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
-        assert(m_npc);
+        assert(npc());
         resetStateMachine();
-        m_npc->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
+        npc()->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
         break;
     }
     case MouseData::RightButtonClick: {

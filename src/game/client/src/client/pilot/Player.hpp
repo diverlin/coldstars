@@ -63,10 +63,7 @@ public:
     const meti::vec3& position() const;
     float radius() const;
 
-    control::Npc* npc() const { return m_npc; }
     gui::Cursor& cursor() { return m_cursor; }
-
-    void setNpc(control::Npc* npc) { m_npc = npc; }
 
     bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
 
@@ -79,7 +76,6 @@ public:
     void UpdatePostTransactionEvent(TurnTimer&);
 
 private:
-    control::Npc* m_npc = nullptr;
     gui::Cursor m_cursor;
     Show m_show;
 

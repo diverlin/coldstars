@@ -13,7 +13,7 @@ void TelegrammHub::subscribe(const std::shared_ptr<TelegrammDispatcher>& listene
 void TelegrammHub::add(const Telegramm& telegramm)
 {
     m_telegramms.push_back(telegramm);
-    __update();
+    //__update();
 }
 
 void TelegrammHub::__update()
