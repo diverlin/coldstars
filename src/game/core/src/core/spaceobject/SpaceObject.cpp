@@ -21,7 +21,7 @@
 #include <world/starsystem.hpp>
 #include <core/manager/Session.hpp>
 #include <core/manager/EntityManager.hpp>
-#include <core/communication/TelegramComposer.hpp>
+#include <core/communication/TelegramCreator.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>

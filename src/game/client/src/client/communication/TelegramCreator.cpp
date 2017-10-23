@@ -16,18 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "TelegramComposer.hpp"
+#include "TelegramCreator.hpp"
 
 namespace client {
 
-TelegramComposer&
-TelegramComposer::get()
+TelegramCreator&
+TelegramCreator::get()
 {
-    static TelegramComposer instance;
+    static TelegramCreator instance;
     return instance;
 }
 
-TelegramComposer::TelegramComposer()
+TelegramCreator::TelegramCreator()
 {
 
 }

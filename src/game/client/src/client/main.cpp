@@ -21,7 +21,7 @@
 #include "builder/world/GalaxyBuilder.hpp"
 #include <common/Config.hpp>
 
-#include <core/communication/TelegramComposer.hpp>
+#include <core/communication/TelegramCreator.hpp>
 #include <core/manager/Session.hpp>
 
 #include <jeti/Mesh.hpp>
@@ -75,7 +75,7 @@
 #include <client/view/StarSystem.hpp>
 
 #include <core/communication/TelegramHub.hpp>
-#include <client/communication/TelegramDispatcher.hpp>
+#include <client/communication/TelegramHandler.hpp>
 
 #include <memory>
 

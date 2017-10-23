@@ -45,8 +45,8 @@
 #include <core/descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
-#include <core/communication/TelegramComposer.hpp>
-#include <core/communication/TelegramDispatcher.hpp>
+#include <core/communication/TelegramCreator.hpp>
+#include <core/communication/TelegramHandler.hpp>
 
 #include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
