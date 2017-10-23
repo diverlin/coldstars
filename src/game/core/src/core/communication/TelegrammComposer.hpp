@@ -48,16 +48,16 @@ namespace comm {
 class TelegrammHub;
 } // namespace comm
 
-class TelegrammComposer
+class TelegrammCreator
 {
 private:
-    TelegrammComposer();
-    TelegrammComposer(const TelegrammComposer&) = delete;
-    ~TelegrammComposer() = default;
-    TelegrammComposer& operator=(const TelegrammComposer&) = delete;
+    TelegrammCreator();
+    TelegrammCreator(const TelegrammCreator&) = delete;
+    ~TelegrammCreator() = default;
+    TelegrammCreator& operator=(const TelegrammCreator&) = delete;
 
 public:
-    static TelegrammComposer& get();
+    static TelegrammCreator& get();
 
     void death_spaceobject(control::SpaceObject*);
     void death(control::Asteroid*);

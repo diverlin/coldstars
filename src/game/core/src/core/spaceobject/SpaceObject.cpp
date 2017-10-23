@@ -108,7 +108,7 @@ void SpaceObject::_checkDeath(bool show_effect)
     }
     if (model()->armor() == 0) {
         model()->setIsAlive(false);
-        core::TelegrammComposer::get().death_spaceobject(this);
+        core::TelegrammCreator::get().death_spaceobject(this);
     }
 }
 

@@ -79,11 +79,12 @@ void TelegrammHandler::runLoop()
 
 void TelegrammHandler::update()
 { 
-    for ( auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it ) {
+    for(auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it) {
         const Telegramm& telegramm = *it;
         if (telegramm.dispatchTime() < __currentTime()) {
             _process(telegramm);
             m_telegramms.erase(it);
+            return;
         }
     }
 }
@@ -488,6 +489,8 @@ void doShoot(int_t object, int_t item) {
 
 bool TelegrammHandler::_process(const comm::Telegramm& telegramm)
 {
+    std::cout<<"--process telegramm="<<std::endl;
+
     switch(telegramm.type()) {
     /** CREATE */
     case comm::Telegramm::Type::CREATE_GALAXY: createGalaxyEvent(telegramm); return true;
