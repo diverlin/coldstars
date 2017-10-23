@@ -44,7 +44,7 @@ void Garbage::erase()
 {
     for(const auto& pair: m_entities) {
         control::Base* ob = pair.second;
-        Sessions::get().session()->entity()->remove(ob);
+        Sessions::get().session()->entitiesManager()->remove(ob);
         delete ob->model();
         delete ob;
     }

@@ -59,7 +59,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::__putChildrenToGarbage() const
 {
-    core::shortcuts::session()->garbage()->add(m_innerLand);
+    core::shortcuts::session()->garbageManager()->add(m_innerLand);
     _putNpcToGarbage();
     _putItemsToGarbage();
 }

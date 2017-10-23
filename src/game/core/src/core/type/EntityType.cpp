@@ -22,9 +22,9 @@
 
 namespace entity {
 
-std::string to_string(Type type_id)
+std::string to_string(Type type)
 {
-    switch(type_id)
+    switch(type)
     {
         case Type::NONE: { return "entity::Type::NONE"; }
             
@@ -128,7 +128,7 @@ std::string to_string(Type type_id)
 
     default: {
         assert(false);
-        return "entity::Type::UNKNOWN id_type"; }
+        return "entity::Type::UNKNOWN type"; }
     }
 }
 

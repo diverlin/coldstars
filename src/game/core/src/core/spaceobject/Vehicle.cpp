@@ -290,14 +290,14 @@ void Vehicle::__putChildrenToGarbage() const
 void Vehicle::_putNpcToGarbage() const
 {
     if (m_npc) {
-        core::shortcuts::session()->garbage()->add(m_npc);
+        core::shortcuts::session()->garbageManager()->add(m_npc);
     }
 }
 
 void Vehicle::_putItemsToGarbage() const
 {
     for(auto item: __items()) {
-        core::shortcuts::session()->garbage()->add(item);
+        core::shortcuts::session()->garbageManager()->add(item);
     }
 }
 

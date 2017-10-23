@@ -94,7 +94,8 @@ namespace entity
         ANY
     };
 
-    std::string to_string(entity::Type);
+    std::string to_string(Type);
+
 } // namespace entity
  
 const std::vector<entity::Type> SLOT_WEAPON_TYPES =
