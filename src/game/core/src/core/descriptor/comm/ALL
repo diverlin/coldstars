@@ -1,0 +1,6 @@
+#include "AddingPositional.hpp"
+#include "AddToStarsystemDescriptor.hpp"
+#include "Create.hpp"
+#include "Creation.hpp"
+#include "Dock.hpp"
+#include "Hit.hpp"

@@ -144,7 +144,7 @@ private:
     control::World* m_world = nullptr;
     std::vector<core::Player*> m_players;
 
-    std::shared_ptr<core::comm::TelegramHandler> m_telegrammHandler;
+    std::shared_ptr<core::comm::TelegramHandler> m_telegramHandler;
 
 public:
     Server()
@@ -152,8 +152,8 @@ public:
         core::Sessions::get().add(Machine::server, new core::Session);
         __activate();
 
-        m_telegrammHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler());
-        core::global::get().telegramHub().subscribe(m_telegrammHandler);
+        m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler());
+        core::global::get().telegramHub().subscribe(m_telegramHandler);
 
         Data data;
         m_world = new control::World;
@@ -166,7 +166,7 @@ public:
     void update()
     {
         __activate();
-        m_telegrammHandler->update();
+        m_telegramHandler->update();
 
 //        if (!m_players.size()) {
 //            __create_player();
@@ -209,6 +209,8 @@ private:
     UserInputInSpace* m_input = nullptr;
     jeti::Screen* m_screen = nullptr;
 
+    std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;
+
 public:
     Client()
     {
@@ -222,7 +224,8 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegramHub().subscribe(std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler()));
+        m_telegramHandler = std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler());
+        core::global::get().telegramHub().subscribe(m_telegramHandler);
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);
@@ -235,7 +238,7 @@ public:
     void update() {
         __activate();
 
-        client::global::get().telegramManager().update();
+        m_telegramHandler->update();
 
         m_player = client::global::get().player();
         if (!m_player) {
