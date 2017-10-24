@@ -22,6 +22,7 @@
 #include <common/Config.hpp>
 
 #include <core/communication/TelegramCreator.hpp>
+#include <core/communication/TelegramHandler.hpp>
 #include <core/manager/Session.hpp>
 
 #include <jeti/Mesh.hpp>

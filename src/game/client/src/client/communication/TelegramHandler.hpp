@@ -1,18 +1,18 @@
 #pragma once
 
-# include <core/communication/TelegramHandler.hpp>
+# include <core/communication/BTelegramHandler.hpp>
 
 namespace client {
 namespace comm {
 
-class TelegramHandler : public core::comm::TelegramHandler
+class TelegramHandler : public core::comm::BTelegramHandler
 {
 public:
     TelegramHandler()=default;
     virtual ~TelegramHandler()=default;
 
-private:
-    bool _process(const core::comm::Telegram&) override final;
+protected:
+    void _process(const core::comm::Telegram&) const override final;
 };
 
 } // namespace comm
