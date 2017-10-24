@@ -5,7 +5,7 @@
 
 #include <SFML/System/Clock.hpp>
 
-#include <set>
+#include <vector>
 
 namespace core {
 namespace comm {
@@ -27,7 +27,7 @@ protected:
 
 private:
     sf::Clock m_clock;
-    std::set<Telegram> m_telegramms;
+    std::vector<Telegram> m_telegramms;
 
     double __currentTime() const;
 };

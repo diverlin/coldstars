@@ -25,6 +25,7 @@
 
 void AsteroidManager::update(control::StarSystem* starsystem)
 {
+    assert(false); // use telegram
     while (starsystem->asteroids().size() < m_asteroidsNum) {
         starsystem->add(builder::Asteroid::gen());
         int current_turn_counter = core::global::get().turnTimer().getStopTurnTimer();

@@ -22,9 +22,8 @@ public:
     void broadcast();
 
 private:
-    std::vector<Telegram> m_telegramms;
+    std::vector<Telegram> m_telegrams;
     std::vector<std::shared_ptr<BTelegramHandler>> m_listeners;
-//    void __update();
 };
 
 } // namespace comm

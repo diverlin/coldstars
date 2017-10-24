@@ -463,6 +463,8 @@ void TelegramCreator::__death(control::Container* container)
 
 void TelegramCreator::genBullets_DEBUG(control::StarSystem* starsystem, int num) const
 {
+    return;
+
     if (starsystem->bullets().size() >= num) {
         return;
     }

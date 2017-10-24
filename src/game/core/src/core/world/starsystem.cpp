@@ -575,9 +575,9 @@ StarSystem::randomVehicle(const std::vector<race::Type>& races) const
 
 void StarSystem::__updateStates()
 {
-    if (m_containers.size() < 100) {
-        m_asteroid_manager.update(this);
-    }
+//    if (m_containers.size() < 100) {
+//        m_asteroid_manager.update(this);
+//    }
 
     if (core::global::get().config().GetGameMode() == GAME_MODE::CRASH_TEST)
     {
@@ -618,62 +618,44 @@ void StarSystem::__updateStates()
     {
     case ENTITY::STARSYSTEM::CONDITION::SAFE:
     {
-        if (enemy_is_here == true)
-        {
-            if (friendly_is_here == true)
-            {
+        if (enemy_is_here) {
+            if (friendly_is_here) {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR;
-            }
-            else
-            {
+            } else {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED;
-                if (randVehicleByNpcRaceId(race::Type::R6) != nullptr)
-                {
+                if (randVehicleByNpcRaceId(race::Type::R6)) {
                     m_conqueror_race_id = race::Type::R6;
                 }
-
-                if (randVehicleByNpcRaceId(race::Type::R7) != nullptr)
-                {
+                if (randVehicleByNpcRaceId(race::Type::R7)) {
                     m_conqueror_race_id = race::Type::R7;
                 }
             }
         }
-
         break;
     }
 
     case ENTITY::STARSYSTEM::CONDITION::CAPTURED:
     {
-        if (friendly_is_here == true)
-        {
-            if (enemy_is_here == true)
-            {
+        if (friendly_is_here) {
+            if (enemy_is_here) {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::WAR;
-            }
-            else
-            {
+            } else {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE;
                 m_conqueror_race_id = race::Type::NONE;
             }
         }
-
         break;
     }
 
     case ENTITY::STARSYSTEM::CONDITION::WAR:
     {
-        if (friendly_is_here == true)
-        {
-            if (enemy_is_here == false)
-            {
+        if (friendly_is_here) {
+            if (!enemy_is_here) {
                 m_condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE;
             }
-        }
-        else
-        {
+        } else {
             m_condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED;
         }
-
         break;
     }
     }
