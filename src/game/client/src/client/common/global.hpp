@@ -39,8 +39,6 @@ class StarSystem;
 
 namespace client {
 
-class Player;
-
 namespace comm {
 class TelegramHandler;
 } // namespace comm
@@ -62,16 +60,11 @@ public:
 
     UserInputInSpace& input() { return *m_inputsManager; }
 
-    void setPlayer(client::Player* player) { m_player = player; }
-    client::Player* player() { return m_player; }
-
 private:
     global();
     global(const global&) = delete;
     ~global();
     global& operator=(const global&) = delete;
-
-    client::Player* m_player = nullptr;
 
     type::Collector* m_types = nullptr;
     jeti::Screen* m_screen = nullptr;

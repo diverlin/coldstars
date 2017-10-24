@@ -104,12 +104,12 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 
 // player
 void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const {
-    descriptor::comm::CreatePlayer data(telegram.data());
+//    descriptor::comm::CreatePlayer data(telegram.data());
 
-    client::Player* player = new client::Player(data.player());
-    control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
-    player->setNpc(npc);
-    client::global::get().setPlayer(player);
+//    client::Player* player = new client::Player(data.player());
+//    control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
+//    player->setNpc(npc);
+//    client::global::get().setPlayer(player);
 }
 
 void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
