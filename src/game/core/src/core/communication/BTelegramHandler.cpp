@@ -9,7 +9,7 @@ void BTelegramHandler::add(Telegram& telegramm)
 //        //_process(telegramm); // cause error while simulation server+client on single machine
 //    } else {
         telegramm.setDispatchTime(__currentTime() + telegramm.delay());
-        m_telegramms.insert(telegramm);
+        m_telegramms.push_back(telegramm);
 //    }
 }
 
