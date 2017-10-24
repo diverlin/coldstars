@@ -29,9 +29,13 @@
 //    #define LOG( ... )          std::cout  << __VA_ARGS__ << std::endl
 //    #define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
     #define LOG( ... )          Logger::get().log(__VA_ARGS__)
+    #define LOG_DATA( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::DATA)
+    #define LOG_COMM( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
     #define LOG_ERROR( ... )    Logger::get().log_error(__VA_ARGS__)
 #else
     #define LOG( ... )
+    #define LOG_DATA( ... )
+    #define LOG_COMM( ... )
     #define LOG_ERROR( ... )
 #endif
 
@@ -44,7 +48,7 @@ void abort(const std::string& msg = "no info");
 class Logger
 {
 public:
-    enum class Code: int { ANY, DATA, TELEGRAMM };
+    enum class Code: int { ANY, DATA, COMM };
 
     static Logger& get();
     ~Logger();
