@@ -90,4 +90,4 @@ enum class Type : int
 
 std::string to_string(Type);
 
-} // namespace telegramm
+} // namespace telegram

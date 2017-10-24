@@ -59,7 +59,7 @@ namespace comm {
 
 void TelegramHandler::_process(const comm::Telegram& telegram) const
 {
-    LOG_COMM("--server: process telegramm="+telegram::to_string(telegram.type()));
+    LOG_COMM("--server: process telegram="+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */
@@ -121,7 +121,7 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 
     /** OTHER */
     case telegram::Type::HIT: _hit(telegram); break;
-    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); break;
+    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegram); break;
 
     /* GARBAGE */
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
