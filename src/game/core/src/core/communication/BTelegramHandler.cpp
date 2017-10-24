@@ -32,12 +32,13 @@ void BTelegramHandler::runLoop()
 
 void BTelegramHandler::update()
 { 
-    for(auto it = m_telegrams.begin(); it != m_telegrams.end(); ++it) {
+    for(auto it = m_telegrams.begin(); it != m_telegrams.end();) {
         const Telegram& telegram = *it;
         if (telegram.dispatchTime() < __currentTime()) {
             _process(telegram);
-            m_telegrams.erase(it);
-            break;
+            it = m_telegrams.erase(it);
+        } else {
+            ++it;
         }
     }
 }

@@ -276,7 +276,6 @@ private:
         control::Npc* npc = starsystem->ships().front()->npc();
         assert(npc);
         m_player->setNpc(npc);
-
     }
 };
 
