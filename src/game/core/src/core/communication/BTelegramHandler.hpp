@@ -27,7 +27,7 @@ protected:
 
 private:
     sf::Clock m_clock;
-    std::vector<Telegram> m_telegramms;
+    std::vector<Telegram> m_telegrams;
 
     double __currentTime() const;
 };

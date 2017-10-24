@@ -45,7 +45,7 @@ public:
     static global& get();
 
     God& god() { return *m_god; }
-    comm::TelegramHub& telegrammHub() { return *m_messageHub; }
+    comm::TelegramHub& telegramHub() { return *m_messageHub; }
     comm::TelegramHandler& telegrammHandler() { return *m_telegrammHandler; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }

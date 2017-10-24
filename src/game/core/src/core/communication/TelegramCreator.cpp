@@ -56,7 +56,7 @@ TelegramCreator::get()
 
 TelegramCreator::TelegramCreator()
     :
-      m_telegrammHub(core::global::get().telegrammHub())
+      m_telegrammHub(core::global::get().telegramHub())
 {
 
 }

@@ -153,7 +153,7 @@ public:
         __activate();
 
         m_telegrammHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler());
-        core::global::get().telegrammHub().subscribe(m_telegrammHandler);
+        core::global::get().telegramHub().subscribe(m_telegrammHandler);
 
         Data data;
         m_world = new control::World;
@@ -172,7 +172,7 @@ public:
 //            __create_player();
 //        }
 
-        core::global::get().telegrammHub().broadcast();
+        core::global::get().telegramHub().broadcast();
         m_world->update();
     }
 
@@ -222,7 +222,7 @@ public:
         m_input = &client::global::get().input();
         m_screen = &client::global::get().screen();
 
-        core::global::get().telegrammHub().subscribe(std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler()));
+        core::global::get().telegramHub().subscribe(std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler()));
 
         m_view = new view::StarSystem(client::global::get().render());
         client::global::get().setView(m_view);
@@ -235,7 +235,7 @@ public:
     void update() {
         __activate();
 
-        client::global::get().telegrammManager().update();
+        client::global::get().telegramManager().update();
 
         m_player = client::global::get().player();
         if (!m_player) {
@@ -283,11 +283,11 @@ private:
 int main()
 {
     Server server;
-    //Client client;
+    Client client;
 
     while(true) {
         server.update();
-        //client.update();
+        client.update();
     }
     return EXIT_SUCCESS;
 }

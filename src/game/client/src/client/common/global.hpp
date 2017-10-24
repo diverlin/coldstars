@@ -59,7 +59,7 @@ public:
     jeti::Render& render() { return *m_render; }
     jeti::Camera& camera() { return *m_camera; }
     view::StarSystem& view() { return *m_view; }
-    comm::TelegramHandler& telegrammManager() { return *m_telegrammManager; }
+    comm::TelegramHandler& telegramManager() { return *m_telegrammManager; }
 
     UserInputInSpace& input() { return *m_inputsManager; }
 
