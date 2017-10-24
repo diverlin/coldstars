@@ -240,7 +240,6 @@ public:
 
         m_telegramHandler->update();
 
-        m_player = client::global::get().player();
         if (!m_player) {
             __create_player();
             return;
@@ -270,7 +269,6 @@ private:
 
         int_t id = core::shortcuts::entities()->nextId();
         m_player = new client::Player(id);
-        client::global::get().setPlayer(m_player);
 
         control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
         assert(starsystem->ships().size());
