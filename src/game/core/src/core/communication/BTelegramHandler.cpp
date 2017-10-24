@@ -9,7 +9,7 @@ void BTelegramHandler::add(Telegram& telegramm)
 //        //_process(telegramm); // cause error while simulation server+client on single machine
 //    } else {
         telegramm.setDispatchTime(__currentTime() + telegramm.delay());
-        m_telegramms.push_back(telegramm);
+        m_telegrams.push_back(telegramm);
 //    }
 }
 
@@ -20,19 +20,19 @@ double BTelegramHandler::__currentTime() const
 
 void BTelegramHandler::runLoop()
 {
-    while(!m_telegramms.empty()) {
+    while(!m_telegrams.empty()) {
         update();
     }
 }
 
 void BTelegramHandler::update()
 { 
-    for(auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it) {
+    for(auto it = m_telegrams.begin(); it != m_telegrams.end(); ++it) {
         const Telegram& telegramm = *it;
         if (telegramm.dispatchTime() < __currentTime()) {
             _process(telegramm);
-            m_telegramms.erase(it);
-            return;
+            m_telegrams.erase(it);
+            break;
         }
     }
 }
