@@ -65,9 +65,9 @@ void Logger::error(const std::string& msg)
 
 void Logger::log(const std::string& msg, Code code)
 {
-//    if (!m_codes.contains(code)) {
-//        return;
-//    }
+    if (!m_codes.contains(code)) {
+        return;
+    }
 
     switch(m_mode) {
         case Mode::SCREEN: { toScreen(msg, code); break; }
