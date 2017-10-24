@@ -8,7 +8,7 @@
 namespace core {
 namespace comm {
 
-class TelegramHandler;
+class BTelegramHandler;
 
 class TelegramHub
 {
@@ -16,14 +16,14 @@ public:
     TelegramHub()=default;
     ~TelegramHub()=default;
 
-    void subscribe(const std::shared_ptr<TelegramHandler>&);
+    void subscribe(const std::shared_ptr<BTelegramHandler>&);
     void add(const Telegram&);
 
     void broadcast();
 
 private:
     std::vector<Telegram> m_telegramms;
-    std::vector<std::shared_ptr<TelegramHandler>> m_listeners;
+    std::vector<std::shared_ptr<BTelegramHandler>> m_listeners;
 //    void __update();
 };
 

@@ -57,40 +57,6 @@
 namespace core {
 namespace comm {
 
-void TelegramHandler::add(Telegram& telegramm)
-{
-//    if (telegramm.delay() < 0) {
-//        //_process(telegramm); // cause error while simulation server+client on single machine
-//    } else {
-        telegramm.setDispatchTime(__currentTime() + telegramm.delay());
-        m_telegramms.insert(telegramm);
-//    }
-}
-
-double TelegramHandler::__currentTime() const
-{
-    return m_clock.getElapsedTime().asSeconds();
-}
-
-void TelegramHandler::runLoop()
-{
-    while(!m_telegramms.empty()) {
-        update();
-    }
-}
-
-void TelegramHandler::update()
-{ 
-    for(auto it = m_telegramms.begin(); it != m_telegramms.end(); ++it) {
-        const Telegram& telegramm = *it;
-        if (telegramm.dispatchTime() < __currentTime()) {
-            _process(telegramm);
-            m_telegramms.erase(it);
-            return;
-        }
-    }
-}
-
 
 namespace {
 
@@ -335,77 +301,79 @@ void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
 } // namespace
 
 
-bool TelegramHandler::_process(const comm::Telegram& telegram)
+void TelegramHandler::_process(const comm::Telegram& telegram) const
 {
     std::cout<<"--process telegramm="<<telegram::to_string(telegram.type())<<std::endl;
 
     switch(telegram.type()) {
     /** CREATE */
-    case telegram::Type::CREATE_GALAXY: createGalaxyEvent(telegram); return true;
-    case telegram::Type::CREATE_SECTOR: createSectorEvent(telegram); return true;
-    case telegram::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegram); return true;
-    case telegram::Type::CREATE_NPC: createNpcEvent(telegram); return true;
+    case telegram::Type::CREATE_GALAXY: createGalaxyEvent(telegram); break;
+    case telegram::Type::CREATE_SECTOR: createSectorEvent(telegram); break;
+    case telegram::Type::CREATE_STARSYSTEM: createStarSystemEvent(telegram); break;
+    case telegram::Type::CREATE_NPC: createNpcEvent(telegram); break;
     // spaceobjects
-    case telegram::Type::CREATE_STAR: createStarEvent(telegram); return true;
-    case telegram::Type::CREATE_PLANET: createPlanetEvent(telegram); return true;
-    case telegram::Type::CREATE_ASTEROID: createAsteroidEvent(telegram); return true;
-    case telegram::Type::CREATE_SHIP: createShipEvent(telegram); return true;
-    case telegram::Type::CREATE_BOMB: createBombEvent(telegram); return true;
-    case telegram::Type::CREATE_GOODS: createGoodsEvent(telegram); return true;
-    case telegram::Type::CREATE_CONTAINER: createContainerEvent(telegram); return true;
-    case telegram::Type::CREATE_BULLET: createBulletEvent(telegram); return true;
+    case telegram::Type::CREATE_STAR: createStarEvent(telegram); break;
+    case telegram::Type::CREATE_PLANET: createPlanetEvent(telegram); break;
+    case telegram::Type::CREATE_ASTEROID: createAsteroidEvent(telegram); break;
+    case telegram::Type::CREATE_SHIP: createShipEvent(telegram); break;
+    case telegram::Type::CREATE_BOMB: createBombEvent(telegram); break;
+    case telegram::Type::CREATE_GOODS: createGoodsEvent(telegram); break;
+    case telegram::Type::CREATE_CONTAINER: createContainerEvent(telegram); break;
+    case telegram::Type::CREATE_BULLET: createBulletEvent(telegram); break;
     // items
-    case telegram::Type::CREATE_BAK: createBakEvent(telegram); return true;
-    case telegram::Type::CREATE_DRIVE: createDriveEvent(telegram); return true;
-    case telegram::Type::CREATE_DROID: createDroidEvent(telegram); return true;
-    case telegram::Type::CREATE_GRAPPLE: createGrappleEvent(telegram); return true;
-    case telegram::Type::CREATE_PROTECTOR: createProtectorEvent(telegram); return true;
-    case telegram::Type::CREATE_SCANER: createScanerEvent(telegram); return true;
-    case telegram::Type::CREATE_RADAR: createRadarEvent(telegram); return true;
-    case telegram::Type::CREATE_LAZER: createLazerEvent(telegram); return true;
-    case telegram::Type::CREATE_ROCKET: createRocketEvent(telegram); return true;
+    case telegram::Type::CREATE_BAK: createBakEvent(telegram); break;
+    case telegram::Type::CREATE_DRIVE: createDriveEvent(telegram); break;
+    case telegram::Type::CREATE_DROID: createDroidEvent(telegram); break;
+    case telegram::Type::CREATE_GRAPPLE: createGrappleEvent(telegram); break;
+    case telegram::Type::CREATE_PROTECTOR: createProtectorEvent(telegram); break;
+    case telegram::Type::CREATE_SCANER: createScanerEvent(telegram); break;
+    case telegram::Type::CREATE_RADAR: createRadarEvent(telegram); break;
+    case telegram::Type::CREATE_LAZER: createLazerEvent(telegram); break;
+    case telegram::Type::CREATE_ROCKET: createRocketEvent(telegram); break;
         /** */
 
-    case telegram::Type::MOUNT_ITEM: mountItemEvent(telegram); return true;
-    case telegram::Type::LOAD_ITEM: loadItemEvent(telegram); return true;
+    case telegram::Type::MOUNT_ITEM: mountItemEvent(telegram); break;
+    case telegram::Type::LOAD_ITEM: loadItemEvent(telegram); break;
 
     /** TRANSITION */
-    case telegram::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegram); return true;
-    case telegram::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegram); return true;
+    case telegram::Type::ADD_SECTOR_TO_GALAXY: addSectorToGalaxyEvent(telegram); break;
+    case telegram::Type::ADD_STARSYSTEM_TO_SECTOR: addStarSystemToSectorEvent(telegram); break;
     /** */
 
     /** ADD TO STARSYSTEM */
-    case telegram::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegram); return true;
-    case telegram::Type::ADD_PLANET_TO_STARSYSTEM: addPlanetToStarSystemEvent(telegram); return true;
-    case telegram::Type::ADD_ASTEROID_TO_STARSYSTEM: addAsteroidToStarSystemEvent(telegram); return true;
-    case telegram::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegram); return true;
-    case telegram::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegram); return true;
-    case telegram::Type::ADD_NPC_TO_SHIP: addNpcToShipEvent(telegram); return true;
+    case telegram::Type::ADD_STAR_TO_STARSYSTEM: addStarToStarSystemEvent(telegram); break;
+    case telegram::Type::ADD_PLANET_TO_STARSYSTEM: addPlanetToStarSystemEvent(telegram); break;
+    case telegram::Type::ADD_ASTEROID_TO_STARSYSTEM: addAsteroidToStarSystemEvent(telegram); break;
+    case telegram::Type::ADD_SHIP_TO_STARSYSTEM: addShipToStarSystemEvent(telegram); break;
+    case telegram::Type::ADD_CONTAINER_TO_STARSYSTEM: addContainerToStarSystemEvent(telegram); break;
+    case telegram::Type::ADD_NPC_TO_SHIP: addNpcToShipEvent(telegram); break;
 
     /** REMOVE FROM STARSYSTEM */
-    case telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegram); return true;
+    case telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: removeSpaceObjectFromStarSystemEvent(telegram); break;
 
     /** DOCK */
-    case telegram::Type::DOCK_SHIP: _doDock(telegram); return true;
-    case telegram::Type::LAUNCH_SHIP: _doLaunch(telegram); return true;
+    case telegram::Type::DOCK_SHIP: _doDock(telegram); break;
+    case telegram::Type::LAUNCH_SHIP: _doLaunch(telegram); break;
 
     /** JUMP **/
-    case telegram::Type::JUMP_IN: _doJumpIn(telegram); return true;
-    case telegram::Type::JUMP_OUT: _doJumpOut(telegram); return true;
+    case telegram::Type::JUMP_IN: _doJumpIn(telegram); break;
+    case telegram::Type::JUMP_OUT: _doJumpOut(telegram); break;
 
     /** DROP/TAKE */
-    case telegram::Type::DROP_ITEM: _doDropItem(telegram); return true;
-    case telegram::Type::TAKE_CONTAINER: _doTakeContainer(telegram); return true;
+    case telegram::Type::DROP_ITEM: _doDropItem(telegram); break;
+    case telegram::Type::TAKE_CONTAINER: _doTakeContainer(telegram); break;
 
     /** OTHER */
-    case telegram::Type::HIT: hitEvent(telegram); return true;
-    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
+    case telegram::Type::HIT: hitEvent(telegram); break;
+    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); break;
 
     /* GARBAGE */
-    case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: garbageSpaceObjectEvent(telegram); return true;
+    case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: garbageSpaceObjectEvent(telegram); break;
+    default: {
+        assert(false);
+        break;
     }
-
-    return false;
+    }
 }
 
 } // namespace comm

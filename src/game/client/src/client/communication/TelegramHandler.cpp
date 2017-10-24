@@ -40,19 +40,21 @@ void createExplosionEffectEvent(const core::comm::Telegram& telegramm) {
 
 } // namespace
 
-bool TelegramHandler::_process(const core::comm::Telegram& telegramm)
+void TelegramHandler::_process(const core::comm::Telegram& telegramm) const
 {
-    if (core::comm::TelegramHandler::_process(telegramm)) {
-        return true;
-    }
-
     switch(telegramm.type()) {
-    case telegram::Type::CREATE_PLAYER: createPlayerEvent(telegramm); return true;
-    case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); return true;
-    }
 
-    assert(false);
-    return false;
+
+
+
+    // unique client
+    case telegram::Type::CREATE_PLAYER: createPlayerEvent(telegramm); break;
+    case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); break;
+    default: {
+        assert(false);
+        break;
+    }
+    }
 }
 
 } // namespace comm
