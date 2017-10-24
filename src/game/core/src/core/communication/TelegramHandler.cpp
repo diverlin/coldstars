@@ -63,31 +63,31 @@ namespace {
 /** TRANSITION */
 void addSectorToGalaxyEvent(const comm::Telegram& telegram) {
     descriptor::comm::AddingPositional data(telegram.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addSectorToGalaxy(data.object(), data.parent(), data.position());
-    LOG(__FUNCTION__+data.info());
 }
 
 void addStarSystemToSectorEvent(const comm::Telegram& telegram) {
     descriptor::comm::AddingPositional data(telegram.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addStarSystemToSector(data.object(), data.parent(), data.position());
-    LOG(__FUNCTION__+data.info());
 }
 void addNpcToShipEvent(const comm::Telegram& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addNpcToShip(data.object(), data.parent());
-    LOG(__FUNCTION__+data.info());
 }
 
 // items
 void mountItemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::mountItem(data.object(), data.parent());
-    LOG(__FUNCTION__+data.info());
 }
 void loadItemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::loadItem(data.object(), data.parent());
-    LOG(__FUNCTION__+data.info());
 }
 /** */
 
@@ -95,207 +95,207 @@ void loadItemEvent(const comm::Telegram& telegramm) {
 /** CREATE */
 void createGalaxyEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createGalaxy(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createSectorEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createSector(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createStarSystemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createStarSystem(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createNpcEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createNpc(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 
 // spaceobjects
 void createStarEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createStar(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createPlanetEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createPlanet(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createAsteroidEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createAsteroid(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createShipEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createShip(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 
 // items
 void createBombEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createBomb(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 
 void createGoodsEvent(const comm::Telegram& telegramm) {
     descriptor::comm::CreateGoodsPack data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createGoods(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createContainerEvent(const comm::Telegram& telegramm) {
     descriptor::comm::CreateContainer data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createContainer(data.descriptor(), data.object(), data.item());
-    LOG(__FUNCTION__+data.info());
 }
 void createBulletEvent(const comm::Telegram& telegramm) {
     descriptor::comm::CreateBullet data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createBullet(data.owner(), data.weapon(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 
 // items
 void createBakEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createBak(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createDriveEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createDrive(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createDroidEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createDroid(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createGrappleEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createGrapple(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createProtectorEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createProtector(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createScanerEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createScaner(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createRadarEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createRadar(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createLazerEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createLazer(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void createRocketEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Creation data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::createRocket(data.descriptor(), data.object());
-    LOG(__FUNCTION__+data.info());
 }
 /** */
 
 /** ADD TO STARSYSTEM */
 void addStarToStarSystemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addStarToStarSystem(data.object(), data.parent());
-    LOG(__FUNCTION__+data.info());
 }
 void addPlanetToStarSystemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::AddingPositional data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addPlanetToStarSystem(data.object(), data.parent());
-    LOG(__FUNCTION__+data.info());
 }
 void addAsteroidToStarSystemEvent(const comm::Telegram& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addAsteroidToStarSystem(data.object, data.starsystem);
-    LOG(__FUNCTION__+data.info());
 }
 
 void addShipToStarSystemEvent(const comm::Telegram& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addShipToStarSystem(data.object, data.starsystem, data.position);
-    LOG(__FUNCTION__+data.info());
 }
 void addContainerToStarSystemEvent(const comm::Telegram& telegramm) {
     AddToStarsystemDescriptor data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addContainerToStarSystem(data.object, data.starsystem, data.position, data.impulse);
-    LOG(__FUNCTION__+data.info());
 }
 
 /** DOCK */
 void _doDock(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::dockShip(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 void _doLaunch(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::launchShip(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 
 /** JUMP */
 void _doJumpIn(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::jumpIn(data.object());
-    LOG(__FUNCTION__+data.info());
 }
 void _doJumpOut(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::jumpOut(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 
 /** DROP/TAKE */
 void _doDropItem(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::dropItem(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 void _doTakeContainer(const comm::Telegram& telegramm) {
     descriptor::comm::Pair data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::takeContainer(data.object(), data.target());
-    LOG(__FUNCTION__+data.info());
 }
 
 /** */
 
 void hitEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Hit data(telegramm.data());
+    ///LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::hitSpaceObject(data.target(), data.damage());
-    ///LOG(__FUNCTION__+data.info());
 }
 void explosionEvent(const comm::Telegram& telegramm) {
     descriptor::Explosion data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::explode(data.starsystem, data.center, data.damage, data.radius);
-    LOG(__FUNCTION__+data.info());
 }
 
 // GARBAGE
 void garbageSpaceObjectEvent(const comm::Telegram& telegramm) {
     descriptor::comm::Object data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::garbageSpaceObject(data.object());
-    LOG(__FUNCTION__+data.info());
 }
 
 // REMOVE
 void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
     descriptor::comm::StarSystemTransition data(telegramm.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::removeSpaceObjectFromStarSystem(data.object(), data.starsystem());
-    LOG(__FUNCTION__+data.info());
 }
 
 } // namespace
@@ -303,7 +303,7 @@ void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
 
 void TelegramHandler::_process(const comm::Telegram& telegram) const
 {
-    LOG("--server: process telegramm="+telegram::to_string(telegram.type()));
+    LOG_COMM("--server: process telegramm="+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */
