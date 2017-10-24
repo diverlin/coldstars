@@ -25,72 +25,72 @@ namespace telegram {
 std::string to_string(Type type)
 {
     switch(type) {
-    case Type::NONE: { return "telegramm::Type::NONE"; }
+    case Type::NONE: { return "telegram::Type::NONE"; }
 
         /** CREATE */
-    case Type::CREATE_GALAXY: { return "telegramm::Type::CREATE_GALAXY"; }
-    case Type::CREATE_SECTOR: { return "telegramm::Type::CREATE_SECTOR"; }
-    case Type::CREATE_STARSYSTEM: { return "telegramm::Type::CREATE_STARSYSTEM"; }
-    case Type::CREATE_PLAYER: { return "telegramm::Type::CREATE_PLAYER"; }
-    case Type::CREATE_NPC: { return "telegramm::Type::CREATE_NPC"; }
+    case Type::CREATE_GALAXY: { return "telegram::Type::CREATE_GALAXY"; }
+    case Type::CREATE_SECTOR: { return "telegram::Type::CREATE_SECTOR"; }
+    case Type::CREATE_STARSYSTEM: { return "telegram::Type::CREATE_STARSYSTEM"; }
+    case Type::CREATE_PLAYER: { return "telegram::Type::CREATE_PLAYER"; }
+    case Type::CREATE_NPC: { return "telegram::Type::CREATE_NPC"; }
 
         // spaceobjects
-    case Type::CREATE_STAR: { return "telegramm::Type::CREATE_STAR"; }
-    case Type::CREATE_PLANET: { return "telegramm::Type::CREATE_PLANET"; }
-    case Type::CREATE_ASTEROID: { return "telegramm::Type::CREATE_ASTEROID"; }
-    case Type::CREATE_SHIP: { return "telegramm::Type::CREATE_SHIP"; }
-    case Type::CREATE_BOMB: { return "telegramm::Type::CREATE_BOMB"; }
-    case Type::CREATE_GOODS: { return "telegramm::Type::CREATE_GOODS"; }
-    case Type::CREATE_CONTAINER: { return "telegramm::Type::CREATE_CONTAINER"; }
-    case Type::CREATE_BULLET: { return "telegramm::Type::CREATE_BULLET"; }
+    case Type::CREATE_STAR: { return "telegram::Type::CREATE_STAR"; }
+    case Type::CREATE_PLANET: { return "telegram::Type::CREATE_PLANET"; }
+    case Type::CREATE_ASTEROID: { return "telegram::Type::CREATE_ASTEROID"; }
+    case Type::CREATE_SHIP: { return "telegram::Type::CREATE_SHIP"; }
+    case Type::CREATE_BOMB: { return "telegram::Type::CREATE_BOMB"; }
+    case Type::CREATE_GOODS: { return "telegram::Type::CREATE_GOODS"; }
+    case Type::CREATE_CONTAINER: { return "telegram::Type::CREATE_CONTAINER"; }
+    case Type::CREATE_BULLET: { return "telegram::Type::CREATE_BULLET"; }
 
         // items
-    case Type::CREATE_BAK: { return "telegramm::Type::CREATE_BAK"; }
-    case Type::CREATE_DRIVE: { return "telegramm::Type::CREATE_DRIVE"; }
-    case Type::CREATE_DROID: { return "telegramm::Type::CREATE_DROID"; }
-    case Type::CREATE_GRAPPLE: { return "telegramm::Type::CREATE_GRAPPLE"; }
-    case Type::CREATE_SCANER: { return "telegramm::Type::CREATE_SCANER"; }
-    case Type::CREATE_RADAR: { return "telegramm::Type::CREATE_RADAR"; }
-    case Type::CREATE_PROTECTOR: { return "telegramm::Type::CREATE_PROTECTOR"; }
-    case Type::CREATE_LAZER: { return "telegramm::Type::CREATE_LAZER"; }
-    case Type::CREATE_ROCKET: { return "telegramm::Type::CREATE_ROCKET"; }
+    case Type::CREATE_BAK: { return "telegram::Type::CREATE_BAK"; }
+    case Type::CREATE_DRIVE: { return "telegram::Type::CREATE_DRIVE"; }
+    case Type::CREATE_DROID: { return "telegram::Type::CREATE_DROID"; }
+    case Type::CREATE_GRAPPLE: { return "telegram::Type::CREATE_GRAPPLE"; }
+    case Type::CREATE_SCANER: { return "telegram::Type::CREATE_SCANER"; }
+    case Type::CREATE_RADAR: { return "telegram::Type::CREATE_RADAR"; }
+    case Type::CREATE_PROTECTOR: { return "telegram::Type::CREATE_PROTECTOR"; }
+    case Type::CREATE_LAZER: { return "telegram::Type::CREATE_LAZER"; }
+    case Type::CREATE_ROCKET: { return "telegram::Type::CREATE_ROCKET"; }
 
         // effects
-    case Type::CREATE_EXPLOSION_EFFECT: { return "telegramm::Type::CREATE_EXPLOSION_EFFECT"; }
+    case Type::CREATE_EXPLOSION_EFFECT: { return "telegram::Type::CREATE_EXPLOSION_EFFECT"; }
         /** */
 
         /** DOCK */
-    case Type::DOCK_SHIP: { return "telegramm::Type::DOCK_SHIP"; }
-    case Type::LAUNCH_SHIP: { return "telegramm::Type::LAUNCH_SHIP"; }
+    case Type::DOCK_SHIP: { return "telegram::Type::DOCK_SHIP"; }
+    case Type::LAUNCH_SHIP: { return "telegram::Type::LAUNCH_SHIP"; }
 
         /** JUMP */
-    case Type::JUMP_IN: { return "telegramm::Type::JUMP_IN"; }
-    case Type::JUMP_OUT: { return "telegramm::Type::JUMP_OUT"; }
+    case Type::JUMP_IN: { return "telegram::Type::JUMP_IN"; }
+    case Type::JUMP_OUT: { return "telegram::Type::JUMP_OUT"; }
 
         /** DROP_GRAB */
-    case Type::DROP_ITEM: { return "telegramm::Type::DROP_ITEM"; }
-    case Type::TAKE_CONTAINER: { return "telegramm::Type::TAKE_CONTAINER"; }
-    case Type::LOAD_ITEM: { return "telegramm::Type::LOAD_ITEM"; }
-    case Type::MOUNT_ITEM: { return "telegramm::Type::MOUNT_ITEM"; }
+    case Type::DROP_ITEM: { return "telegram::Type::DROP_ITEM"; }
+    case Type::TAKE_CONTAINER: { return "telegram::Type::TAKE_CONTAINER"; }
+    case Type::LOAD_ITEM: { return "telegram::Type::LOAD_ITEM"; }
+    case Type::MOUNT_ITEM: { return "telegram::Type::MOUNT_ITEM"; }
 
         /** TRANSITION */
-    case Type::ADD_SECTOR_TO_GALAXY: { return "telegramm::Type::ADD_SECTOR_TO_GALAXY"; }
-    case Type::ADD_STARSYSTEM_TO_SECTOR: { return "telegramm::Type::ADD_STARSYSTEM_TO_SECTOR"; }
-    case Type::ADD_STAR_TO_STARSYSTEM: { return "telegramm::Type::ADD_STAR_TO_STARSYSTEM"; }
-    case Type::ADD_PLANET_TO_STARSYSTEM: { return "telegramm::Type::ADD_PLANET_TO_STARSYSTEM"; }
-    case Type::ADD_ASTEROID_TO_STARSYSTEM: { return "telegramm::Type::ADD_ASTEROID_TO_STARSYSTEM"; }
-    case Type::ADD_SHIP_TO_STARSYSTEM: { return "telegramm::Type::ADD_SHIP_TO_STARSYSTEM"; }
-    case Type::ADD_CONTAINER_TO_STARSYSTEM: { return "telegramm::Type::ADD_CONTAINER_TO_STARSYSTEM"; }
-    case Type::ADD_NPC_TO_SHIP: { return "telegramm::Type::ADD_NPC_TO_SHIP"; }
-    case Type::INSERT: { return "telegramm::Type::INSERT"; }
-    case Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: { return "telegramm::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM"; }
-    case Type::REMOVE: { return "telegramm::Type::REMOVE"; }
-    case Type::DELETE: { return "telegramm::Type::DELETE"; }
+    case Type::ADD_SECTOR_TO_GALAXY: { return "telegram::Type::ADD_SECTOR_TO_GALAXY"; }
+    case Type::ADD_STARSYSTEM_TO_SECTOR: { return "telegram::Type::ADD_STARSYSTEM_TO_SECTOR"; }
+    case Type::ADD_STAR_TO_STARSYSTEM: { return "telegram::Type::ADD_STAR_TO_STARSYSTEM"; }
+    case Type::ADD_PLANET_TO_STARSYSTEM: { return "telegram::Type::ADD_PLANET_TO_STARSYSTEM"; }
+    case Type::ADD_ASTEROID_TO_STARSYSTEM: { return "telegram::Type::ADD_ASTEROID_TO_STARSYSTEM"; }
+    case Type::ADD_SHIP_TO_STARSYSTEM: { return "telegram::Type::ADD_SHIP_TO_STARSYSTEM"; }
+    case Type::ADD_CONTAINER_TO_STARSYSTEM: { return "telegram::Type::ADD_CONTAINER_TO_STARSYSTEM"; }
+    case Type::ADD_NPC_TO_SHIP: { return "telegram::Type::ADD_NPC_TO_SHIP"; }
+    case Type::INSERT: { return "telegram::Type::INSERT"; }
+    case Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: { return "telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM"; }
+    case Type::REMOVE: { return "telegram::Type::REMOVE"; }
+    case Type::DELETE: { return "telegram::Type::DELETE"; }
         /** */
 
-    case Type::HIT: { return "telegramm::Type::HIT"; }
+    case Type::HIT: { return "telegram::Type::HIT"; }
 
-    case Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "telegramm::Type::ADD_SPACEOBJECT_TO_GARBAGE"; }
+    case Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE"; }
 
 
     default: {
@@ -99,4 +99,4 @@ std::string to_string(Type type)
     }
 }
 
-} // namespace telegramm
+} // namespace telegram

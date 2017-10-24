@@ -46,7 +46,7 @@ public:
 
     God& god() { return *m_god; }
     comm::TelegramHub& telegramHub() { return *m_messageHub; }
-    comm::TelegramHandler& telegrammHandler() { return *m_telegrammHandler; }
+    comm::TelegramHandler& telegramHandler() { return *m_telegramHandler; }
     Config& config() { return *m_config; }
     TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
@@ -60,7 +60,7 @@ private:
 
     God* m_god = nullptr;
     comm::TelegramHub* m_messageHub = nullptr;
-    comm::TelegramHandler* m_telegrammHandler = nullptr;
+    comm::TelegramHandler* m_telegramHandler = nullptr;
     Config* m_config = nullptr;
     TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;

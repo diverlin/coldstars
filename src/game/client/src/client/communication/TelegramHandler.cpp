@@ -23,7 +23,7 @@ namespace comm {
 
 void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 {
-    LOG_COMM("--client: process telegramm="+telegram::to_string(telegram.type()));
+    LOG_COMM("--client: process telegram="+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */
@@ -85,7 +85,7 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 
     /** OTHER */
     case telegram::Type::HIT: _hit(telegram); break;
-    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegramm); break;
+    //case telegram::Type::CREATE_EXPLOSION_EFFECT: createExplosionEffectEvent(telegram); break;
 
     /* GARBAGE */
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
@@ -103,8 +103,8 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 }
 
 // player
-void TelegramHandler::_createPlayer(const core::comm::Telegram& telegramm) const {
-    descriptor::comm::CreatePlayer data(telegramm.data());
+void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const {
+    descriptor::comm::CreatePlayer data(telegram.data());
 
     client::Player* player = new client::Player(data.player());
     control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
@@ -112,8 +112,8 @@ void TelegramHandler::_createPlayer(const core::comm::Telegram& telegramm) const
     client::global::get().setPlayer(player);
 }
 
-void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegramm) const {
-    descriptor::comm::effect::Explosion descriptor(telegramm.data());
+void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
+    descriptor::comm::effect::Explosion descriptor(telegram.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::global::get().view().add(explosion, descriptor.position());
 }

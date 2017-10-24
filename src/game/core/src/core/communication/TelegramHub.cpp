@@ -21,8 +21,8 @@ void TelegramHub::add(const Telegram& telegram)
 void TelegramHub::broadcast()
 {
     for (const std::shared_ptr<BTelegramHandler>& listener: m_listeners) {
-        for(Telegram& telegramm: m_telegrams) {
-            listener->add(telegramm);
+        for(Telegram& telegram: m_telegrams) {
+            listener->add(telegram);
         }
     }
     m_telegrams.clear();

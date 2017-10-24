@@ -72,7 +72,7 @@ public:
     void createGalaxy(descriptor::Galaxy*);
 
 private:
-    core::comm::TelegramHub& m_telegrammHub;
+    core::comm::TelegramHub& m_telegramHub;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);
     void __removeSpaceObjectFromStarSystem(control::SpaceObject*);
