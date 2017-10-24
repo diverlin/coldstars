@@ -303,7 +303,7 @@ void removeSpaceObjectFromStarSystemEvent(const comm::Telegram& telegramm) {
 
 void TelegramHandler::_process(const comm::Telegram& telegram) const
 {
-    std::cout<<"--process telegramm="<<telegram::to_string(telegram.type())<<std::endl;
+    LOG("--server: process telegramm="+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */
