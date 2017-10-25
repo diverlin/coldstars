@@ -29,6 +29,7 @@ class Manager;
 // workaround
 namespace jeti {
 class Render;
+class Camera;
 class Screen;
 } // namespace jeti
 // workaround
@@ -50,7 +51,9 @@ public:
     std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
 
     virtual jeti::Render* render() { assert(false); return nullptr; }
+    virtual jeti::Camera* camera() { assert(false); return nullptr; }
     virtual jeti::Screen* screen() { assert(false); return nullptr; }
+    virtual void init() {}
 
 private:
     std::shared_ptr<descriptor::Manager> m_descriptorsManager;

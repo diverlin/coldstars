@@ -224,8 +224,9 @@ public:
         __activate();
 
         client::global::get().init();
+        core::shortcuts::session()->init();
 
-        m_camera = &client::global::get().camera();
+        m_camera = client::shortcuts::camera();
         m_input = &client::global::get().input();
         m_render = client::shortcuts::render();
         m_screen = client::shortcuts::screen();

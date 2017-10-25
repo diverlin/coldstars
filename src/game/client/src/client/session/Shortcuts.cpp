@@ -22,6 +22,7 @@
 #include <core/session/Session.hpp>
 
 #include <jeti/Render.hpp>
+#include <jeti/Camera.hpp>
 #include <jeti/Screen.hpp>
 
 namespace client {
@@ -29,6 +30,10 @@ namespace shortcuts {
 
 jeti::Render* render() {
     return core::Sessions::get().session()->render();
+}
+
+jeti::Camera* camera() {
+    return core::Sessions::get().session()->camera();
 }
 
 jeti::Screen* screen() {

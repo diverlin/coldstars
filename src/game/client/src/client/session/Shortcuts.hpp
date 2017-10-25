@@ -24,6 +24,7 @@
 // workaround
 namespace jeti {
 class Render;
+class Camera;
 class Screen;
 } // namespace jeti
 // workaround
@@ -32,6 +33,7 @@ namespace client {
 
 namespace shortcuts {
 jeti::Render* render();
+jeti::Camera* camera();
 jeti::Screen* screen();
 } // namespace shortcuts
 

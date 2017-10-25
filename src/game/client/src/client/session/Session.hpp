@@ -23,6 +23,7 @@
 
 namespace jeti {
 class Render;
+class Camera;
 class Screen;
 } // namespace jeti
 
@@ -33,15 +34,17 @@ public:
     Session();
     virtual ~Session()=default;
 
-    void init();
+    void init() override final;
 
     jeti::Render* render() override final { return m_render; }
+    jeti::Camera* camera() override final { return m_camera; }
     jeti::Screen* screen() override final { return m_screen; }
 
 private:
     bool m_init = false;
 
     jeti::Render* m_render = nullptr;
+    jeti::Camera* m_camera = nullptr;
     jeti::Screen* m_screen = nullptr;
 };
 

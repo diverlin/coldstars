@@ -22,8 +22,11 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Garbage.hpp>
 
+#include <client/resources/Data.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
 
 #include <ceti/Logger.hpp>
 
@@ -33,6 +36,7 @@ namespace client {
 Session::Session()
     :
       m_render(new jeti::Render)
+    , m_camera(new jeti::Camera)
     , m_screen(new jeti::Screen)
 {}
 
@@ -45,9 +49,9 @@ Session::init() {
     srand(time(0));
 
     m_screen->init();
-//    m_render->init(m_camera, m_screen->width(), m_screen->height());
+    m_render->init(m_camera, m_screen->width(), m_screen->height());
 
-//    Data data;
+    Data data;
     m_init = true;
 }
 
