@@ -29,6 +29,9 @@ class Render;
 class Camera;
 class Screen;
 } // namespace jeti
+namespace view {
+class StarSystem;
+} // namespace view
 // workaround
 
 namespace descriptor {
@@ -56,11 +59,13 @@ public:
     std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
     const type::Collector& types() const { return *m_types; }
 
+    // interface
     virtual jeti::Render* render() const { assert(false); return nullptr; }
     virtual jeti::Camera* camera() const { assert(false); return nullptr; }
     virtual jeti::Screen* screen() const { assert(false); return nullptr; }
-
     virtual UserInputInSpace* inputs() const { assert(false); return nullptr; }
+    virtual view::StarSystem* view() const { assert(false); return nullptr; }
+    //
 
     virtual void init() {}
 

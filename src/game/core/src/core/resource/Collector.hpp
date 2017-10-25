@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <client/common/global.hpp>
-
 #include <core/type/CollectorType.hpp>
 #include <core/resource/MdLoader.hpp>
 

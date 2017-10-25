@@ -18,11 +18,7 @@
 
 #include "Screen.hpp"
 #include <jeti/Camera.hpp>
-
 #include <jeti/Config.hpp>
-//#include <jeti/Render.hpp>
-
-#include <client/common/global.hpp>
 
 #include <constants.hpp>
 #include <meti/RandUtils.hpp> // remove

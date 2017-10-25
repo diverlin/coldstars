@@ -23,6 +23,8 @@
 #include <ceti/type/IdType.hpp>
 #include <ceti/rect.hpp>
 
+#include <jeti/Screen.hpp>
+
 #include <vector>
 #include <map>
 #include <chrono>
@@ -99,7 +101,7 @@ namespace view {
 class StarSystem
 {
 public:
-    StarSystem(jeti::Render&);
+    StarSystem(jeti::Render&, jeti::Screen&);
     ~StarSystem();
 
     void setPlayer(client::Player* player) { m_player = player; }

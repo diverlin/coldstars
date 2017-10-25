@@ -27,6 +27,10 @@ class Camera;
 class Screen;
 } // namespace jeti
 
+namespace view {
+class StarSystem;
+} // namespace view
+
 class UserInputInSpace;
 
 namespace client {
@@ -36,6 +40,7 @@ jeti::Render* render();
 jeti::Camera* camera();
 jeti::Screen* screen();
 UserInputInSpace* inputs();
+view::StarSystem* view();
 } // namespace shortcuts
 
 } // namespace core

@@ -33,18 +33,23 @@ class Camera;
 class Screen;
 } // namespace jeti
 
+namespace view {
+class StarSystem;
+} // namespace view
+
 namespace client {
 
 class Session : public core::Session {
 public:
     Session();
-    virtual ~Session()=default;
+    virtual ~Session();
 
     void init() override final;
 
     jeti::Render* render() const override final { return m_render; }
     jeti::Camera* camera() const override final { return m_camera; }
     jeti::Screen* screen() const override final { return m_screen; }
+    view::StarSystem* view() const override final { return m_view; }
 
     UserInputInSpace* inputs() const override final { return m_inputs; }
 
@@ -54,6 +59,7 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     jeti::Screen* m_screen = nullptr;
+    view::StarSystem* m_view = nullptr;
 
     UserInputInSpace* m_inputs = nullptr;
 };

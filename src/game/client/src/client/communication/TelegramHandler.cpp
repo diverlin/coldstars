@@ -2,11 +2,10 @@
 
 #include <core/descriptor/comm/Creation.hpp>
 #include <core/pilot/Npc.hpp>
-#include <core/session/Session.hpp>
+#include <client/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <client/resources/Utils.hpp>
-#include <client/common/global.hpp>
 #include <client/view/StarSystem.hpp>
 
 //#include <core/builder/pilot/PlayerBuilder.hpp>
@@ -115,7 +114,7 @@ void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const 
 void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
     descriptor::comm::effect::Explosion descriptor(telegram.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
-    client::global::get().view().add(explosion, descriptor.position());
+    client::shortcuts::view()->add(explosion, descriptor.position());
 }
 
 } // namespace comm
