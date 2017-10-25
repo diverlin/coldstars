@@ -41,12 +41,12 @@ global& global::get()
 }
 
 global::global()
-    :
-      m_types(new type::Collector)
+//    :
+//      m_types(new type::Collector)
 //    , m_screen(new jeti::Screen)
 //    , m_render(new jeti::Render)
 //    , m_camera(new jeti::Camera)
-    , m_inputsManager(new UserInputInSpace)
+//    , m_inputsManager(new UserInputInSpace)
 {
 }
 
@@ -55,7 +55,7 @@ global::~global()
 //    delete m_screen;
 //    delete m_render;
 //    delete m_camera;
-    delete m_inputsManager;
+//    delete m_inputsManager;
 }
 
 void

@@ -52,12 +52,12 @@ public:
 
     void setView(view::StarSystem* view) { m_view = view; }
 
-    type::Collector& types() { return *m_types; }
+//    type::Collector& types() { return *m_types; }
 //    jeti::Screen& screen() { return *m_screen; }
 //    jeti::Camera& camera() { return *m_camera; }
     view::StarSystem& view() { return *m_view; }
 
-    UserInputInSpace& input() { return *m_inputsManager; }
+//    UserInputInSpace& input() { return *m_inputsManager; }
 
 private:
     global();
@@ -65,12 +65,12 @@ private:
     ~global();
     global& operator=(const global&) = delete;
 
-    type::Collector* m_types = nullptr;
+//    type::Collector* m_types = nullptr;
 //    jeti::Screen* m_screen = nullptr;
 //    jeti::Camera* m_camera = nullptr;
     view::StarSystem* m_view = nullptr;
 
-    UserInputInSpace* m_inputsManager = nullptr;
+//    UserInputInSpace* m_inputsManager = nullptr;
 
     bool m_init = false;
 };

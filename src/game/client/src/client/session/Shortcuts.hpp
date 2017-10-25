@@ -21,13 +21,13 @@
 
 #include <memory>
 
-// workaround
 namespace jeti {
 class Render;
 class Camera;
 class Screen;
 } // namespace jeti
-// workaround
+
+class UserInputInSpace;
 
 namespace client {
 
@@ -35,6 +35,7 @@ namespace shortcuts {
 jeti::Render* render();
 jeti::Camera* camera();
 jeti::Screen* screen();
+UserInputInSpace* inputs();
 } // namespace shortcuts
 
 } // namespace core

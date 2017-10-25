@@ -44,5 +44,9 @@ std::shared_ptr<core::manager::Garbage> garbage() {
     return core::Sessions::get().session()->garbageManager();
 }
 
+const type::Collector& types() {
+    return core::Sessions::get().session()->types();
+}
+
 } // namespace shortcuts
 } // core

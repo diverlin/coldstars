@@ -21,6 +21,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Garbage.hpp>
+#include <core/type/CollectorType.hpp>
 
 namespace core {
 
@@ -29,6 +30,7 @@ Session::Session()
       m_descriptorsManager(new descriptor::Manager)
     , m_entitiesManager(new manager::Entity)
     , m_garbageManager(new manager::Garbage)
+    , m_types(new type::Collector)
 {}
 
 } // core

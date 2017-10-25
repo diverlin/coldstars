@@ -21,6 +21,8 @@
 #include <core/session/Sessions.hpp>
 #include <core/session/Session.hpp>
 
+#include <client/gui/UserInputManagerInSpace.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
 #include <jeti/Screen.hpp>
@@ -38,6 +40,10 @@ jeti::Camera* camera() {
 
 jeti::Screen* screen() {
     return core::Sessions::get().session()->screen();
+}
+
+UserInputInSpace* inputs() {
+    return core::Sessions::get().session()->inputs();
 }
 
 } // namespace shortcuts

@@ -22,17 +22,22 @@
 #include <memory>
 #include <cassert>
 
-namespace descriptor {
-class Manager;
-}
-
 // workaround
+class UserInputInSpace;
 namespace jeti {
 class Render;
 class Camera;
 class Screen;
 } // namespace jeti
 // workaround
+
+namespace descriptor {
+class Manager;
+}
+
+namespace type {
+class Collector;
+} // namespace type
 
 namespace core {
 
@@ -49,16 +54,21 @@ public:
     std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
     std::shared_ptr<manager::Entity> entitiesManager() const { return m_entitiesManager; }
     std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
+    const type::Collector& types() const { return *m_types; }
 
-    virtual jeti::Render* render() { assert(false); return nullptr; }
-    virtual jeti::Camera* camera() { assert(false); return nullptr; }
-    virtual jeti::Screen* screen() { assert(false); return nullptr; }
+    virtual jeti::Render* render() const { assert(false); return nullptr; }
+    virtual jeti::Camera* camera() const { assert(false); return nullptr; }
+    virtual jeti::Screen* screen() const { assert(false); return nullptr; }
+
+    virtual UserInputInSpace* inputs() const { assert(false); return nullptr; }
+
     virtual void init() {}
 
 private:
     std::shared_ptr<descriptor::Manager> m_descriptorsManager;
     std::shared_ptr<manager::Entity> m_entitiesManager;
     std::shared_ptr<manager::Garbage> m_garbageManager;
+    type::Collector* m_types = nullptr;
 };
 
 } // namespace core

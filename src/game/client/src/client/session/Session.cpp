@@ -18,11 +18,8 @@
 
 #include "Session.hpp"
 
-#include <core/manager/DescriptorManager.hpp>
-#include <core/manager/EntityManager.hpp>
-#include <core/manager/Garbage.hpp>
-
 #include <client/resources/Data.hpp>
+#include <client/gui/UserInputManagerInSpace.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -38,6 +35,7 @@ Session::Session()
       m_render(new jeti::Render)
     , m_camera(new jeti::Camera)
     , m_screen(new jeti::Screen)
+    , m_inputs(new UserInputInSpace)
 {}
 
 void

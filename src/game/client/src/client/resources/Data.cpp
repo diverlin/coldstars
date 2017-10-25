@@ -37,6 +37,8 @@
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
 
+#include <core/session/Shortcuts.hpp>
+
 #include <ceti/type/IdType.hpp>
 #include <core/type/RaceType.hpp>
 #include <core/type/MeshType.hpp>
@@ -67,7 +69,7 @@ void Data::__generateMeshDescriptors()
     auto dmm = core::shortcuts::descriptors()->meshes();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".od");
-        const auto& types = client::global::get().types();
+        const auto& types = core::shortcuts::types();
         dmm->generate(result, types);
     }
 }
@@ -82,7 +84,7 @@ void Data::__generateMaterialDescriptors()
     auto dmm = core::shortcuts::descriptors()->materials();
     if (!dmm->loaded()) {
         auto result = ceti::filesystem::getFilesList("data", ".md");
-        const auto& types = client::global::get().types();
+        const auto& types = core::shortcuts::types();
         dmm->generate(result, types);
     }
 }
