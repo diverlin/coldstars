@@ -37,6 +37,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 
+#include <client/session/Shortcuts.hpp>
 #include <client/gui/GuiSkills.hpp>
 #include <client/gui/GuiGalaxyMap.hpp>
 
@@ -52,8 +53,8 @@ GuiManager::GuiManager()
 player(nullptr),
 gui_vehicle_scan(nullptr)
 {   
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     
     /* shared gui */
     {

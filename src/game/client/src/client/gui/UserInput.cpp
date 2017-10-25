@@ -16,11 +16,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <client/session/Shortcuts.hpp>
 
 #include <client/gui/UserInput.hpp>
-
 #include <client/common/global.hpp>
+
 #include <jeti/Screen.hpp>
+
 #include <iostream>
 
 UserInput& UserInput::get()
@@ -35,10 +37,10 @@ void UserInput::update()
     m_mousePressedCodes.clear();
 
     sf::Event event;
-    while(client::global::get().screen().window().pollEvent(event)) {
+    while(client::shortcuts::screen()->window().pollEvent(event)) {
         switch(event.type)  {
         case sf::Event::Closed:     {
-            client::global::get().screen().window().close();
+            client::shortcuts::screen()->window().close();
             break;
         }
         case sf::Event::KeyPressed: {

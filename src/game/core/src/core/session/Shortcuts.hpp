@@ -1,3 +1,4 @@
+
 /*
      Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -16,46 +17,30 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Game.hpp"
+# pragma once
 
-#include <common/Global.hpp>
+#include <memory>
 
-#include <ai/God.hpp>
-
-#include <world/galaxy.hpp>
-
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
-
-#include <core/session/Session.hpp>
-#include <core/manager/DescriptorManager.hpp>
-
-namespace control {
-
-World::World()
-{
-    core::global::get().god().createWorld();
+namespace descriptor {
+class Manager;
 }
 
-World::~World()
-{
-}
+namespace core {
 
-Galaxy*
-World::galaxy() const {
-    return core::global::get().god().galaxy();
-}
+class Session;
 
-bool World::run() const
-{
-    while (m_isRunning) {
-       core::global::get().god().update();
-    }
-    return EXIT_SUCCESS;
-}
+namespace manager {
+class Entity;
+class Garbage;
+};
 
-void World::update()
-{
-   core::global::get().god().update();
-}
+namespace shortcuts {
+core::Session* session();
+std::shared_ptr<descriptor::Manager> descriptors();
+std::shared_ptr<core::manager::Entity> entities();
+std::shared_ptr<core::manager::Garbage> garbage();
+} // namespace shortcuts
 
-} // namespace control
+} // namespace core
+
+

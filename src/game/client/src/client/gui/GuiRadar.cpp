@@ -20,6 +20,7 @@
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/common/global.hpp>
 #include <client/pilot/Player.hpp>
+#include <client/session/Shortcuts.hpp>
 
 #include <core/spaceobject/SpaceObject.hpp>
 #include <core/spaceobject/Vehicle.hpp>
@@ -40,8 +41,8 @@ GuiRadar::GuiRadar()
     m_textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     Resize(screen_w, screen_h);
 }
 
@@ -61,14 +62,14 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(client::Player* player)
 {        
-//    m_screenrect.set(m_rect.center() + client::global::get().screen().bottomLeftScreenWC() * scale, (int)(client::global::get().screen().width() * scale), (int)(client::global::get().screen().height() * scale));
+//    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();
 //    if (m_rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
 //    {
 //        if (data_mouse.left_press == true)
 //        {
 //            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - m_rect.center().x - m_screenrect.width()/2)/scale, ( data_mouse.pos_screencoord.y - m_rect.center().y - m_screenrect.height()/2)/scale);
-//            //client::global::get().screen().setBottomLeftScreenWC(new_global_coord);
+//            //client::shortcuts::screen()->setBottomLeftScreenWC(new_global_coord);
 //        }
 //    }
 }

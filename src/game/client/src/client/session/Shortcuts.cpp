@@ -16,29 +16,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
+#include "Shortcuts.hpp"
 
-#include <core/pilot/Player.hpp>
-
+#include <core/session/Sessions.hpp>
 #include <core/session/Session.hpp>
-#include <core/manager/EntityManager.hpp>
 
-namespace builder {
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
-core::Player*
-Player::gen(int_t id)
-{
-    return __genTemplate(id);
+namespace client {
+namespace shortcuts {
+
+jeti::Render* render() {
+    return core::Sessions::get().session()->render();
 }
 
-core::Player*
-Player::__genTemplate(int_t id)
-{
-    core::Player* player = new core::Player(id);
-    assert(player);
-
-    return player;
+jeti::Screen* screen() {
+    return core::Sessions::get().session()->screen();
 }
 
-} // namespace builder
-
+} // namespace shortcuts
+} // client

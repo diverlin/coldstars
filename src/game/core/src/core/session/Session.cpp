@@ -16,29 +16,19 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
+#include "Session.hpp"
 
-#include <core/pilot/Player.hpp>
-
-#include <core/session/Session.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
 
-namespace builder {
+namespace core {
 
-core::Player*
-Player::gen(int_t id)
-{
-    return __genTemplate(id);
-}
+Session::Session()
+    :
+      m_descriptorsManager(new descriptor::Manager)
+    , m_entitiesManager(new manager::Entity)
+    , m_garbageManager(new manager::Garbage)
+{}
 
-core::Player*
-Player::__genTemplate(int_t id)
-{
-    core::Player* player = new core::Player(id);
-    assert(player);
-
-    return player;
-}
-
-} // namespace builder
-
+} // core

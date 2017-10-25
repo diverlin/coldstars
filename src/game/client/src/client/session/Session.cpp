@@ -16,29 +16,39 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
+#include "Session.hpp"
 
-#include <core/pilot/Player.hpp>
-
-#include <core/session/Session.hpp>
+#include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/manager/Garbage.hpp>
 
-namespace builder {
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
-core::Player*
-Player::gen(int_t id)
-{
-    return __genTemplate(id);
+#include <ceti/Logger.hpp>
+
+
+namespace client {
+
+Session::Session()
+    :
+      m_render(new jeti::Render)
+    , m_screen(new jeti::Screen)
+{}
+
+void
+Session::init() {
+    if (m_init) {
+        return;
+    }
+
+    srand(time(0));
+
+    m_screen->init();
+//    m_render->init(m_camera, m_screen->width(), m_screen->height());
+
+//    Data data;
+    m_init = true;
 }
 
-core::Player*
-Player::__genTemplate(int_t id)
-{
-    core::Player* player = new core::Player(id);
-    assert(player);
-
-    return player;
-}
-
-} // namespace builder
-
+} // client

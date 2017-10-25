@@ -42,6 +42,7 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
+#include <client/session/Shortcuts.hpp>
 #include <client/pilot/Player.hpp>
 #include <core/pilot/Npc.hpp>
 
@@ -61,8 +62,8 @@ gui_galaxymap_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {       
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     
     {
         glm::vec2 size(screen_w, screen_h);
@@ -262,16 +263,16 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 {
 //    const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + std::to_string(scroll_coords.x) + "," + std::to_string(scroll_coords.y);
-//    glm::vec2 pos(client::global::get().screen().GetWidth() - 400, client::global::get().screen().GetHeight() - 5);
+//    glm::vec2 pos(client::shortcuts::screen()->GetWidth() - 400, client::shortcuts::screen()->GetHeight() - 5);
 
-//    client::global::get().screen().DrawText(_coord_str, 12, pos);
+//    client::shortcuts::screen()->DrawText(_coord_str, 12, pos);
 }
 
 /* virtual override final */
 void GuiSpace::UpdateUnique(client::Player* player)
 { 
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     ceti::Rect screen_rect(0, 0, screen_w, screen_h);
     glm::vec2 center_screen(screen_w/2, screen_h/2);
 }
@@ -352,6 +353,6 @@ void GuiSpace::RenderUnique(const jeti::Render&, client::Player* player) const
 
     //RenderChildInfo(data_mouse);
     
-    //RenderText(client::global::get().screen().bottomLeftScreenWC());
+    //RenderText(client::shortcuts::screen()->bottomLeftScreenWC());
 }
 

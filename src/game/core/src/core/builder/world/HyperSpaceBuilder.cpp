@@ -25,7 +25,7 @@
 #include <core/model/world/HyperSpace.hpp>
 #include <core/world/HyperSpace.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/manager/EntityManager.hpp>

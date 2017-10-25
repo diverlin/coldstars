@@ -23,7 +23,7 @@
 #include <core/descriptor/item/other/Goods.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace builder {

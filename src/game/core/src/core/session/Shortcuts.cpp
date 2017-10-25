@@ -16,52 +16,15 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Session.hpp"
+#include "Shortcuts.hpp"
+#include <core/session/Sessions.hpp>
+#include <core/session/Session.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Garbage.hpp>
 
-#include <ceti/Logger.hpp>
-
 namespace core {
-
-Session::Session()
-    :
-      m_descriptorsManager(new descriptor::Manager)
-    , m_entitiesManager(new manager::Entity)
-    , m_garbageManager(new manager::Garbage)
-{}
-
-Sessions&
-Sessions::get()
-{
-    static Sessions instance;
-    return instance;
-}
-
-void Sessions::add(int id, Session* session)
-{
-    if (m_sessions.find(id) != m_sessions.end()) {
-        ceti::abort("attempt to registry id =" + std::to_string(id) + " which already exists");
-    }
-    m_sessions.insert(std::make_pair(id, session));
-}
-
-void Sessions::activate(int id) {
-    if (m_sessions.find(id) == m_sessions.end()) {
-        ceti::abort("attempt to activate id =" + std::to_string(id) + " which doesn't exists");
-    }
-    m_active = id;
-}
-
-Session* Sessions::session() const {
-    assert(m_sessions.size()>0);
-    assert(m_active != -1);
-    const auto& it = m_sessions.find(m_active);
-    return it->second;
-}
-
 
 namespace shortcuts {
 
@@ -77,6 +40,9 @@ std::shared_ptr<core::manager::Entity> entities() {
     return core::Sessions::get().session()->entitiesManager();
 }
 
-} // namespace shortcuts
+std::shared_ptr<core::manager::Garbage> garbage() {
+    return core::Sessions::get().session()->garbageManager();
+}
 
+} // namespace shortcuts
 } // core

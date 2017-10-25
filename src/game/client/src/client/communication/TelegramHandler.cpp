@@ -2,7 +2,7 @@
 
 #include <core/descriptor/comm/Creation.hpp>
 #include <core/pilot/Npc.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <client/resources/Utils.hpp>

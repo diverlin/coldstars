@@ -19,7 +19,7 @@
 #include "Garbage.hpp"
 
 #include <core/Base.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
@@ -44,7 +44,7 @@ void Garbage::erase()
 {
     for(const auto& pair: m_entities) {
         control::Base* ob = pair.second;
-        Sessions::get().session()->entitiesManager()->remove(ob);
+        core::shortcuts::entities()->remove(ob);
         delete ob->model();
         delete ob;
     }

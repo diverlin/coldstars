@@ -21,7 +21,7 @@
 #include <core/spaceobject/Container.hpp>
 #include <core/builder/spaceobject/ContainerBuilder.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/manager/Garbage.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -290,14 +290,14 @@ void Vehicle::__putChildrenToGarbage() const
 void Vehicle::_putNpcToGarbage() const
 {
     if (m_npc) {
-        core::shortcuts::session()->garbageManager()->add(m_npc);
+        core::shortcuts::garbage()->add(m_npc);
     }
 }
 
 void Vehicle::_putItemsToGarbage() const
 {
     for(auto item: __items()) {
-        core::shortcuts::session()->garbageManager()->add(item);
+        core::shortcuts::garbage()->add(item);
     }
 }
 

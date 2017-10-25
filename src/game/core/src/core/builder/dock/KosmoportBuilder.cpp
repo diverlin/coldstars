@@ -28,7 +28,7 @@
 #include <core/model/dock/Kosmoport.hpp>
 #include <core/dock/Kosmoport.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 

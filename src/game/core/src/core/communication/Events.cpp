@@ -12,7 +12,7 @@
 #include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
 #include <core/descriptor/comm/AddingPositional.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 
@@ -213,8 +213,8 @@ void addShipToStarSystem(int_t object, int_t parent, const glm::vec3& position) 
     starsystem->add(ship, position);
 }
 void addContainerToStarSystem(int_t object, int_t parent, const glm::vec3& position, const glm::vec3& impulse) {
-    control::Container* container = Sessions::get().session()->entitiesManager()->container(object);
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(parent);
+    control::Container* container = core::shortcuts::entities()->container(object);
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(parent);
     container->addImpulse(impulse);
     starsystem->add(container, position);
 }
@@ -234,9 +234,9 @@ void explode(int_t object, const glm::vec3& center, int damage, int radius) {
 
 // GARBAGE
 void garbageSpaceObject(int_t object_id) {
-    control::SpaceObject* object = Sessions::get().session()->entitiesManager()->spaceObject(object_id);
+    control::SpaceObject* object = core::shortcuts::entities()->spaceObject(object_id);
     object->die();
-    Sessions::get().session()->garbageManager()->add(object);
+    core::shortcuts::garbage()->add(object);
 }
 
 // REMOVE
@@ -249,22 +249,22 @@ void removeSpaceObjectFromStarSystem(int_t object_id, int_t parent) {
 
 /** DOCK */
 void dockShip(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
     starsystem->remove(ship);
 
     // add
-    control::Land* land = Sessions::get().session()->entitiesManager()->land(destination);
+    control::Land* land = core::shortcuts::entities()->land(destination);
     land->add(ship);
 }
 
 void launchShip(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
 
     // remove
-    control::Land* land = Sessions::get().session()->entitiesManager()->land(destination);
+    control::Land* land = core::shortcuts::entities()->land(destination);
     land->remove(ship);
 
     // add
@@ -275,7 +275,7 @@ void launchShip(int_t object, int_t destination) {
 
 /** JUMP */
 void jumpIn(int_t object) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -283,25 +283,25 @@ void jumpIn(int_t object) {
     starsystem->remove(ship);
 
     // add
-    control::HyperSpace* hyper = Sessions::get().session()->entitiesManager()->hyperspace();
+    control::HyperSpace* hyper = core::shortcuts::entities()->hyperspace();
     hyper->add(ship);
 }
 void jumpOut(int_t object, int_t destination) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
 
     // remove
-    control::HyperSpace* hyper = Sessions::get().session()->entitiesManager()->hyperspace();
+    control::HyperSpace* hyper = core::shortcuts::entities()->hyperspace();
     hyper->remove(ship);
 
     // add
-    control::StarSystem* starsystem = Sessions::get().session()->entitiesManager()->starsystem(destination); // probably can be used from navigator
+    control::StarSystem* starsystem = core::shortcuts::entities()->starsystem(destination); // probably can be used from navigator
     starsystem->add(ship /*, position implement entry point here */);
 }
 
 /** DROP/TAKE */
 void dropItem(int_t object, int_t target) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
-    control::Item* item = Sessions::get().session()->entitiesManager()->item(target);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
+    control::Item* item = core::shortcuts::entities()->item(target);
 
     // remove
     ship->remove(item);
@@ -315,8 +315,8 @@ void dropItem(int_t object, int_t target) {
 }
 
 void takeContainer(int_t object, int_t target) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
-    control::Container* container = Sessions::get().session()->entitiesManager()->container(target);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
+    control::Container* container = core::shortcuts::entities()->container(target);
 
     // remove
     control::StarSystem* starsystem = ship->starsystem();
@@ -329,8 +329,8 @@ void takeContainer(int_t object, int_t target) {
 }
 
 void shoot(int_t object, int_t item) {
-    control::Ship* ship = Sessions::get().session()->entitiesManager()->ship(object);
-    control::item::Weapon* weapon = Sessions::get().session()->entitiesManager()->weapon(item);
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
+    control::item::Weapon* weapon = core::shortcuts::entities()->weapon(item);
 
     weapon->fire(weapon->slot()->target());
 

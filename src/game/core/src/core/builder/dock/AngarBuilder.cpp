@@ -27,7 +27,7 @@
 #include <core/model/dock/Angar.hpp>
 #include <core/dock/Angar.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 

@@ -48,14 +48,14 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/RaceDescriptors.hpp>
 
 #include <math/rand.hpp>
 
 #include <core/manager/EntityManager.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Session.hpp>
 #include <core/manager/Garbage.hpp>
 
 #include <meti/RandUtils.hpp>

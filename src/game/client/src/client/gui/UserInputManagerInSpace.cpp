@@ -31,6 +31,7 @@
 
 #include <client/pilot/Player.hpp>
 #include <client/gui/GuiManager.hpp>
+#include <client/session/Shortcuts.hpp>
 
 UserInputInSpace::UserInputInSpace()
     :
@@ -130,7 +131,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             assert(false);
             //                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
             //                glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-            //                client::global::get().screen().initiateScrollTo(player_pos2);
+            //                client::shortcuts::screen()->initiateScrollTo(player_pos2);
             break;
         }
         case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::GRAPPLE_SLOT_SELECTOR); break; }
@@ -203,8 +204,8 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             
         case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::LOAD); break; }
 
-        case sf::Keyboard::K: { client::global::get().render().increaseScale(); break; }
-        case sf::Keyboard::L: { client::global::get().render().decreaseScale(); break; }
+        case sf::Keyboard::K: { assert(false); /*client::global::get().render().increaseScale();*/ break; }
+        case sf::Keyboard::L: { assert(false); /*client::global::get().render().decreaseScale();*/ break; }
 
             //            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
             //            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
@@ -232,8 +233,9 @@ void UserInputInSpace::__mouseButtonPressed(client::Player* player)
         }
         } // case
 
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
-        m_mouseClickPos = glm::vec3(mouse_pos.x, client::global::get().render().height() - mouse_pos.y, 0.0f);
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
+        assert(false);
+        m_mouseClickPos = glm::vec3(mouse_pos.x, /*client::global::get().render().height()*/ - mouse_pos.y, 0.0f);
     }
 }
 

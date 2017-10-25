@@ -19,7 +19,7 @@
 #include "SpaceObject.hpp"
 
 #include <world/starsystem.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/communication/TelegramCreator.hpp>
 
