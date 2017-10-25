@@ -21,7 +21,7 @@
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 

@@ -19,34 +19,11 @@
 
 # pragma once
 
-#include <memory>
 #include <map>
-
-namespace descriptor {
-class Manager;
-}
 
 namespace core {
 
-namespace manager {
-class Entity;
-class Garbage;
-} // namespace manager
-
-class Session {
-public:
-    Session();
-    ~Session()=default;
-
-    std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
-    std::shared_ptr<manager::Entity> entitiesManager() const { return m_entitiesManager; }
-    std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
-
-private:
-    std::shared_ptr<descriptor::Manager> m_descriptorsManager;
-    std::shared_ptr<manager::Entity> m_entitiesManager;
-    std::shared_ptr<manager::Garbage> m_garbageManager;
-};
+class Session;
 
 class Sessions
 {
@@ -68,13 +45,6 @@ private:
     int m_active = -1;
     std::map<int, Session*> m_sessions;
 };
-
-
-namespace shortcuts {
-core::Session* session();
-std::shared_ptr<descriptor::Manager> descriptors();
-std::shared_ptr<core::manager::Entity> entities();
-} // namespace shortcuts
 
 } // namespace core
 

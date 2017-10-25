@@ -17,62 +17,34 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+# pragma once
 
-#include <cassert>
-
-class UserInputInSpace;
-
-namespace type {
-class Collector;
-} // namespace type
+#include <core/session/Session.hpp>
 
 namespace jeti {
-//class Screen;
-//class Render;
-class Camera;
+class Render;
+class Screen;
 } // namespace jeti
-
-namespace view {
-class StarSystem;
-} // namespace view
 
 namespace client {
 
-namespace comm {
-class TelegramHandler;
-} // namespace comm
-
-class global
-{
+class Session : public core::Session {
 public:
-    static global& get();
+    Session();
+    virtual ~Session()=default;
 
     void init();
 
-    void setView(view::StarSystem* view) { m_view = view; }
-
-    type::Collector& types() { return *m_types; }
-//    jeti::Screen& screen() { return *m_screen; }
-    jeti::Camera& camera() { return *m_camera; }
-    view::StarSystem& view() { return *m_view; }
-
-    UserInputInSpace& input() { return *m_inputsManager; }
+    jeti::Render* render() override final { return m_render; }
+    jeti::Screen* screen() override final { return m_screen; }
 
 private:
-    global();
-    global(const global&) = delete;
-    ~global();
-    global& operator=(const global&) = delete;
-
-    type::Collector* m_types = nullptr;
-//    jeti::Screen* m_screen = nullptr;
-    jeti::Camera* m_camera = nullptr;
-    view::StarSystem* m_view = nullptr;
-
-    UserInputInSpace* m_inputsManager = nullptr;
-
     bool m_init = false;
+
+    jeti::Render* m_render = nullptr;
+    jeti::Screen* m_screen = nullptr;
 };
 
 } // namespace client
+
+

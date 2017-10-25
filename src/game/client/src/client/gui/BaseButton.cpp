@@ -19,7 +19,10 @@
 
 #include "BaseButton.hpp"
 #include <common/constants.hpp>
+
 #include <client/common/global.hpp>
+#include <client/session/Shortcuts.hpp>
+
 #include <ceti/Collision.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -101,7 +104,7 @@ void BaseButton::RenderUnique(const jeti::Render& render, client::Player*) const
     if (GetLabel() != "")
     {
         glm::vec2 pos(GetBox().center().x, GetBox().center().y + GetBox().size().y);
-        client::global::get().screen().drawText(GetLabel(), 12, pos);
+        client::shortcuts::screen()->drawText(GetLabel(), 12, pos);
     }
 }
         

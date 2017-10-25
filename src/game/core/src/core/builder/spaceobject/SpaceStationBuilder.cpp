@@ -23,7 +23,7 @@
 #include <core/model/spaceobject/SpaceStation.hpp>
 #include <core/spaceobject/SpaceStation.hpp>
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 

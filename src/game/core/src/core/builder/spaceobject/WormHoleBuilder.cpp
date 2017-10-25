@@ -21,7 +21,7 @@
 #include <core/spaceobject/WormHole.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 //#include <core/type/MeshType.hpp>
 
 //#include <meti/RandUtils.hpp>

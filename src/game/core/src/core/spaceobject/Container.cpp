@@ -38,7 +38,7 @@
 #include <core/item/Item.hpp>
 #include <core/item/equipment/ALL>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 namespace control {
@@ -117,7 +117,7 @@ Container::item() const
 void Container::__putChildrenToGarbage() const
 {
     if (auto item = m_itemSlot->item()) {
-        core::shortcuts::session()->garbageManager()->add(item);
+        core::shortcuts::garbage()->add(item);
     }
 }
 

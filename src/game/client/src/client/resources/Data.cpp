@@ -22,7 +22,7 @@
 #include <common/Global.hpp>
 #include <client/common/global.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 

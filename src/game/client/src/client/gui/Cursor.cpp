@@ -38,6 +38,8 @@
 #include <core/pilot/Npc.hpp>
 
 #include <core/part/WeaponComplex.hpp>
+
+#include <client/session/Shortcuts.hpp>
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/view/Base.hpp>
@@ -129,7 +131,7 @@ void Cursor::updateMouseInput(const jeti::Render& render)
         m_dataMouse.event = MouseData::RightButtonClick;
     }
 
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::global::get().screen().window());
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
     mouse_pos.y = render.height()-mouse_pos.y;
     m_dataMouse.screen_coord = glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f);
     m_dataMouse.world_coord = render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
@@ -167,7 +169,7 @@ void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
         m_focusedGuiElement->RenderInfo(render);
     }
     if (m_focusedView) {
-        //m_FocusedSpaceObject->RenderInfoInSpace(render, client::global::get().screen().GetBottomLeftScreenWC(), client::global::get().screen().GetScale());
+        //m_FocusedSpaceObject->RenderInfoInSpace(render, client::shortcuts::screen()->GetBottomLeftScreenWC(), client::shortcuts::screen()->GetScale());
     }
 }
 

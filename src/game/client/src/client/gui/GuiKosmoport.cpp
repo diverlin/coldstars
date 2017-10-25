@@ -49,6 +49,7 @@
 #include <client/gui/GuiSkills.hpp>
 #include <client/gui/GuiGalaxyMap.hpp>
 #include <client/gui/Slider.hpp>
+#include <client/session/Shortcuts.hpp>
 
 GuiKosmoport::GuiKosmoport():
 init_done(false), 
@@ -179,8 +180,8 @@ void GuiKosmoport::EnterGuiScanInAngar()
     Logger::Instance().Log("GuiKosmoport::EnterGuiScanInAngar", GUI_LOG_DIP);
     #endif    
 
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
@@ -231,8 +232,8 @@ void GuiKosmoport::EnterGuiStoreScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiStoreScreen", GUI_LOG_DIP);
     #endif    
     
-    int screen_w = client::global::get().screen().width();
-    int screen_h = client::global::get().screen().height();
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
     glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);

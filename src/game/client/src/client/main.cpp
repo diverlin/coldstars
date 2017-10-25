@@ -23,7 +23,9 @@
 
 #include <core/communication/TelegramCreator.hpp>
 #include <core/communication/TelegramHandler.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Session.hpp>
+#include <core/session/Sessions.hpp>
+#include <core/session/Shortcuts.hpp>
 
 #include <jeti/Mesh.hpp>
 #include <jeti/Screen.hpp>
@@ -32,6 +34,8 @@
 
 #include <meti/RandUtils.hpp>
 
+#include <client/session/Session.hpp>
+#include <client/session/Shortcuts.hpp>
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
@@ -205,6 +209,7 @@ class Client {
 private:
     client::Player* m_player = nullptr;
     jeti::Camera* m_camera = nullptr;
+    jeti::Render* m_render= nullptr;
     view::StarSystem* m_view = nullptr;
     UserInputInSpace* m_input = nullptr;
     jeti::Screen* m_screen = nullptr;
@@ -214,7 +219,7 @@ private:
 public:
     Client()
     {
-        core::Sessions::get().add(Machine::client, new core::Session);
+        core::Sessions::get().add(Machine::client, new client::Session);
 
         __activate();
 
@@ -222,12 +227,13 @@ public:
 
         m_camera = &client::global::get().camera();
         m_input = &client::global::get().input();
-        m_screen = &client::global::get().screen();
+        m_render = client::shortcuts::render();
+        m_screen = client::shortcuts::screen();
 
         m_telegramHandler = std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler());
         core::global::get().telegramHub().subscribe(m_telegramHandler);
 
-        m_view = new view::StarSystem(client::global::get().render());
+        m_view = new view::StarSystem(*m_render);
         client::global::get().setView(m_view);
     }
 
@@ -330,7 +336,7 @@ int main()
     /** */
     
 //    // GAME LOOP
-//    while (client::global::get().screen().GetWindow().isOpen())
+//    while (client::shortcuts::screen()->GetWindow().isOpen())
 //    {
 //        //std::cout<<player->GetNpc()->vehicle()->center().x<<std::endl;
 //        //std::cout<<player->GetNpc()->vehicle()->properties().radar<<std::endl;

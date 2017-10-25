@@ -1,3 +1,4 @@
+
 /*
      Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -16,46 +17,24 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Game.hpp"
+# pragma once
 
-#include <common/Global.hpp>
+#include <memory>
 
-#include <ai/God.hpp>
+// workaround
+namespace jeti {
+class Render;
+class Screen;
+} // namespace jeti
+// workaround
 
-#include <world/galaxy.hpp>
+namespace client {
 
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
+namespace shortcuts {
+jeti::Render* render();
+jeti::Screen* screen();
+} // namespace shortcuts
 
-#include <core/session/Session.hpp>
-#include <core/manager/DescriptorManager.hpp>
+} // namespace core
 
-namespace control {
 
-World::World()
-{
-    core::global::get().god().createWorld();
-}
-
-World::~World()
-{
-}
-
-Galaxy*
-World::galaxy() const {
-    return core::global::get().god().galaxy();
-}
-
-bool World::run() const
-{
-    while (m_isRunning) {
-       core::global::get().god().update();
-    }
-    return EXIT_SUCCESS;
-}
-
-void World::update()
-{
-   core::global::get().god().update();
-}
-
-} // namespace control

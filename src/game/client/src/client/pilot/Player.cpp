@@ -175,8 +175,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
 //    if (starsystem->id() != npc->vehicle()->starsystem()->id())
 //    {
-//        //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
-//        //client::global::get().screen().GetRect().setCenter(npc->vehicle()->center());
+//        //client::shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
+//        //client::shortcuts::screen()->GetRect().setCenter(npc->vehicle()->center());
 //        starsystem = npc->vehicle()->starsystem();
 //    }
     
@@ -189,7 +189,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //client::global::get().screen().InitiateScrollTo(npc->vehicle()->center());
+                    //client::shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
                 //}
             //}
             
@@ -215,7 +215,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
-//                    client::global::get().screen().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                    client::shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                    turn_timer.NextTurn();
 //                }
 //            }
@@ -227,7 +227,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
-//                client::global::get().screen().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                client::shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                turn_timer.NextTurn();
 //            }
             
@@ -246,9 +246,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    bool draw_robustSpaceObjects = true;
 
 //    float scale = client::global::get().render().scaleBase();
-//    int w = client::global::get().screen().width();
-//    int h = client::global::get().screen().height();
-////    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
+//    int w = client::shortcuts::screen()->width();
+//    int h = client::shortcuts::screen()->height();
+////    glm::vec2 world_coord(client::shortcuts::screen()->bottomLeft());
     
 //    render.clearColorAndDepthBuffers();
     
@@ -454,7 +454,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
 //    renderer.composeViewMatrix(camera.viewMatrix());
 
-//    //float scale = client::global::get().screen().GetScale();
+//    //float scale = client::shortcuts::screen()->GetScale();
 
 //    RenderInSpace_NEW(renderer, starsystem);
 
@@ -820,7 +820,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
 //    m_cursor.update(this);
     //m_cursor.RenderFocusedObjectInfo();
-//    client::global::get().screen().draw();
+//    client::shortcuts::screen()->draw();
 }
 
 void Player::resetStateMachine() const

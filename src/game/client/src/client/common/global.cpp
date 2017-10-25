@@ -43,8 +43,8 @@ global& global::get()
 global::global()
     :
       m_types(new type::Collector)
-    , m_screen(new jeti::Screen)
-    , m_render(new jeti::Render)
+//    , m_screen(new jeti::Screen)
+//    , m_render(new jeti::Render)
     , m_camera(new jeti::Camera)
     , m_inputsManager(new UserInputInSpace)
 {
@@ -52,8 +52,8 @@ global::global()
 
 global::~global()
 {
-    delete m_screen;
-    delete m_render;
+//    delete m_screen;
+//    delete m_render;
     delete m_camera;
     delete m_inputsManager;
 }
@@ -66,8 +66,8 @@ global::init() {
 
     srand(time(0));
 
-    m_screen->init();
-    m_render->init(m_camera, m_screen->width(), m_screen->height());
+//    m_screen->init();
+//    m_render->init(m_camera, m_screen->width(), m_screen->height());
 
     Data data;
     m_init = true;

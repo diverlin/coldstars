@@ -21,7 +21,7 @@
 #include <core/model/item/equipment/Droid.hpp>
 #include <core/item/equipment/Droid.hpp>
 #include <core/descriptor/item/equipment/Droid.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>

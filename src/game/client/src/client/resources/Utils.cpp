@@ -18,7 +18,7 @@
 
 #include "Utils.hpp"
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <jeti/Material.hpp>

@@ -21,7 +21,7 @@
 #include <core/model/item/equipment/Protector.hpp>
 #include <core/item/equipment/Protector.hpp>
 #include <core/descriptor/item/equipment/Protector.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/common/Global.hpp>
 #include <core/manager/DescriptorManager.hpp>

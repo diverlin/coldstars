@@ -69,7 +69,7 @@
 #include <client/gui/GuiDemo.hpp>
 #include <client/resources/Utils.hpp>
 #include <client/pilot/Player.hpp>
-
+#include <client/session/Shortcuts.hpp>
 
 namespace view {
 
@@ -77,7 +77,7 @@ StarSystem::StarSystem(jeti::Render& render)
     :
       m_render(render)
     , m_camera(*render.camera())
-    , m_guiDemo(new gui::Demo(&client::global::get().screen()))
+    , m_guiDemo(new gui::Demo(client::shortcuts::screen()))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
 //    , m_lastTime(std::chrono::steady_clock::now())
@@ -177,20 +177,19 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
 
     {
         // update ui
-        const jeti::Render& render = client::global::get().render();
         auto info = m_guiDemo->infoRender();
         info->setZNear(std::to_string(jeti::ZNEAR));
         info->setZFar(std::to_string(jeti::ZFAR));
         info->setScreenQuadZ(std::to_string(jeti::SCREEN_QUAD_ZPOS));
 
-        info->setScale(std::to_string(render.scaleBase()));
-        info->setWidth(ceti::to_string(render.width()));
-        info->setHeight(ceti::to_string(render.height()));
+        info->setScale(std::to_string(m_render.scaleBase()));
+        info->setWidth(ceti::to_string(m_render.width()));
+        info->setHeight(ceti::to_string(m_render.height()));
     }
 
     {
         // update ui
-        m_guiDemo->updateFps(client::global::get().render().fps());
+        m_guiDemo->updateFps(m_render.fps());
         m_player->cursor().updateMouseInput(m_render);
 
         const glm::vec3 screen_coord = m_player->cursor().mouseData().screen_coord;
@@ -532,7 +531,7 @@ StarSystem::__createText()
     color.g = meti::rand::gen_float(0.7f, 1.0f);
     color.b = meti::rand::gen_float(0.7f, 1.0f);
 
-    sf::Font& font = client::global::get().screen().font();
+    sf::Font& font = client::shortcuts::screen()->font();
     ::effect::Text* text = new ::effect::Text(font, str, size, center, color);
 
     m_texts.push_back(text);
@@ -835,7 +834,7 @@ void StarSystem::__renderTexts(jeti::Render& render) const {
     for(::effect::Text* text: m_texts) {
         text->update();
     }
-    sf::RenderWindow& window = client::global::get().screen().window();
+    sf::RenderWindow& window = client::shortcuts::screen()->window();
 
     window.pushGLStates();
     for(::effect::Text* text: m_visible_texts) {
@@ -937,13 +936,12 @@ void StarSystem::render(control::StarSystem* starsystem)
 //    m_lastTime = now_time;
 
     assert(starsystem);
-    jeti::Render& render = client::global::get().render();
 
-    render.update();
+    m_render.update();
     __updateVisible(starsystem);
 
-    render.composeViewMatrix(m_camera.viewMatrix());
-    __render(render);
+    m_render.composeViewMatrix(m_camera.viewMatrix());
+    __render(m_render);
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
@@ -1037,10 +1035,10 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = client::global::get().render().scaleBase();
-    int w = client::global::get().screen().width();
-    int h = client::global::get().screen().height();
-//    glm::vec2 world_coord(client::global::get().screen().bottomLeft());
+    float scale = render.scaleBase();
+    int w = client::shortcuts::screen()->width();
+    int h = client::shortcuts::screen()->height();
+//    glm::vec2 world_coord(client::shortcuts::screen()->bottomLeft());
 
     render.clearColorAndDepthBuffers();
 

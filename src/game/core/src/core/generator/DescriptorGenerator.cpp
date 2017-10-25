@@ -38,7 +38,7 @@
 #include <core/type/TextureType.hpp>
 #include <core/item/Item.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>

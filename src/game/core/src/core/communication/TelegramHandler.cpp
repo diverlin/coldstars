@@ -13,7 +13,7 @@
 //#include <core/descriptor/comm/AddingPositional.hpp>
 //#include <core/descriptor/comm/Creation.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 

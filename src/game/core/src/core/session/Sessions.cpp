@@ -16,29 +16,39 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
+#include "Sessions.hpp"
 
-#include <core/pilot/Player.hpp>
+#include <ceti/Logger.hpp>
 
-#include <core/session/Session.hpp>
-#include <core/manager/EntityManager.hpp>
+namespace core {
 
-namespace builder {
-
-core::Player*
-Player::gen(int_t id)
+Sessions&
+Sessions::get()
 {
-    return __genTemplate(id);
+    static Sessions instance;
+    return instance;
 }
 
-core::Player*
-Player::__genTemplate(int_t id)
+void Sessions::add(int id, Session* session)
 {
-    core::Player* player = new core::Player(id);
-    assert(player);
-
-    return player;
+    if (m_sessions.find(id) != m_sessions.end()) {
+        ceti::abort("attempt to registry id =" + std::to_string(id) + " which already exists");
+    }
+    m_sessions.insert(std::make_pair(id, session));
 }
 
-} // namespace builder
+void Sessions::activate(int id) {
+    if (m_sessions.find(id) == m_sessions.end()) {
+        ceti::abort("attempt to activate id =" + std::to_string(id) + " which doesn't exists");
+    }
+    m_active = id;
+}
 
+Session* Sessions::session() const {
+    assert(m_sessions.size()>0);
+    assert(m_active != -1);
+    const auto& it = m_sessions.find(m_active);
+    return it->second;
+}
+
+} // core

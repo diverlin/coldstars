@@ -26,7 +26,7 @@
 #include <core/spaceobject/Star.hpp>
 #include <core/descriptor/Base.hpp>
 #include <core/manager/DescriptorManager.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 

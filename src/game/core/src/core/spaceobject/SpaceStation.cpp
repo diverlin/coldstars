@@ -23,7 +23,7 @@
 
 #include <common/Global.hpp>
 
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/Garbage.hpp>
 
 #include <world/starsystem.hpp>
@@ -59,7 +59,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::__putChildrenToGarbage() const
 {
-    core::shortcuts::session()->garbageManager()->add(m_innerLand);
+    core::shortcuts::garbage()->add(m_innerLand);
     _putNpcToGarbage();
     _putItemsToGarbage();
 }

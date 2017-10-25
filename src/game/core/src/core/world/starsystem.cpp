@@ -27,7 +27,7 @@
 #include <core/math/rand.hpp>
 
 #include <core/common/Global.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <common/Config.hpp>
 

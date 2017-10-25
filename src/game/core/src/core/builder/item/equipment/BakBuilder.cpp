@@ -23,7 +23,7 @@
 #include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/common/Global.hpp>
-#include <core/manager/Session.hpp>
+#include <core/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
