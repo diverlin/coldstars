@@ -19,8 +19,6 @@
 
 #include <client/gui/Cursor.hpp>
 
-#include <client/common/global.hpp>
-
 #include <ceti/Logger.hpp>
 
 #include <core/type/GuiType.hpp>

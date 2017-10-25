@@ -18,7 +18,6 @@
 
 #include "GuiRadar.hpp"
 #include <client/resources/GuiTextureObCollector.hpp>
-#include <client/common/global.hpp>
 #include <client/pilot/Player.hpp>
 #include <client/session/Shortcuts.hpp>
 

@@ -20,6 +20,7 @@
 
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
+#include <client/view/StarSystem.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -36,7 +37,17 @@ Session::Session()
     , m_camera(new jeti::Camera)
     , m_screen(new jeti::Screen)
     , m_inputs(new UserInputInSpace)
-{}
+{
+}
+
+Session::~Session()
+{
+    delete m_render;
+    delete m_camera;
+    delete m_screen;
+    delete m_inputs;
+    delete m_view;
+}
 
 void
 Session::init() {
@@ -50,6 +61,9 @@ Session::init() {
     m_render->init(m_camera, m_screen->width(), m_screen->height());
 
     Data data;
+
+    m_view = new view::StarSystem(*m_render, *m_screen);
+
     m_init = true;
 }
 

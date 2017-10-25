@@ -44,8 +44,6 @@
 #include <client/gui/GuiActions.hpp>
 
 #include "common/TurnTimer.hpp"
-#include <client/common/global.hpp>
-
 
 #include <core/pilot/Npc.hpp>
 #include <client/pilot/Player.hpp>
@@ -223,19 +221,16 @@ public:
 
         __activate();
 
-        client::global::get().init();
         core::shortcuts::session()->init();
 
         m_camera = client::shortcuts::camera();
         m_inputs = client::shortcuts::inputs();
         m_render = client::shortcuts::render();
         m_screen = client::shortcuts::screen();
+        m_view = client::shortcuts::view();
 
         m_telegramHandler = std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler());
         core::global::get().telegramHub().subscribe(m_telegramHandler);
-
-        m_view = new view::StarSystem(*m_render);
-        client::global::get().setView(m_view);
     }
 
     ~Client()
@@ -249,10 +244,10 @@ public:
 
         if (!m_player) {
             __create_player();
+            m_view->setPlayer(m_player);
             return;
         }
 
-        m_view->setPlayer(m_player);
         m_inputs->update(m_player);
         m_view->update(m_inputs->scrollAccel());
         m_view->render(m_player->npc()->vehicle()->starsystem());

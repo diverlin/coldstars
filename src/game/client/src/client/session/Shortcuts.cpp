@@ -46,5 +46,9 @@ UserInputInSpace* inputs() {
     return core::Sessions::get().session()->inputs();
 }
 
+view::StarSystem* view() {
+    return core::Sessions::get().session()->view();
+}
+
 } // namespace shortcuts
 } // client

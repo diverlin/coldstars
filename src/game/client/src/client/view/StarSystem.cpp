@@ -43,7 +43,6 @@
 #include <client/effect/ShockWaveEffect.hpp>
 #include <client/text/VerticalFlowText.hpp>
 #include <client/resources/TextureCollector.hpp>
-#include <client/common/global.hpp>
 #include <client/effect/DistantStarsEffect.hpp>
 #include <client/effect/DistantNebulaEffect.hpp>
 #include <client/effect/Beam.hpp>
@@ -71,13 +70,19 @@
 #include <client/pilot/Player.hpp>
 #include <client/session/Shortcuts.hpp>
 
+
+namespace jeti {
+class Render;
+class Screen;
+} // namespace jeti
+
 namespace view {
 
-StarSystem::StarSystem(jeti::Render& render)
+StarSystem::StarSystem(jeti::Render& render, jeti::Screen& screen)
     :
       m_render(render)
     , m_camera(*render.camera())
-    , m_guiDemo(new gui::Demo(client::shortcuts::screen()))
+    , m_guiDemo(new gui::Demo(&screen))
     , m_distantStars(::effect::genDistantStars())
     , m_distantNebulas(::effect::genDistantNebulas())
 //    , m_lastTime(std::chrono::steady_clock::now())

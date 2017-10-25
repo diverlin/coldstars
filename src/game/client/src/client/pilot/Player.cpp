@@ -23,7 +23,6 @@
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 #include <world/starsystem.hpp>
-#include <client/common/global.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <math/rand.hpp>

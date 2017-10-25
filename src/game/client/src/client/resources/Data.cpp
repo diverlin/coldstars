@@ -20,7 +20,6 @@
 #include <common/constants.hpp>
 #include <common/Config.hpp>
 #include <common/Global.hpp>
-#include <client/common/global.hpp>
 
 #include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>

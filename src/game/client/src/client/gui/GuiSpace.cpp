@@ -33,7 +33,6 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/constants.hpp>
 #include <common/GameDate.hpp>
-#include <client/common/global.hpp>
 
 #include <ceti/Logger.hpp>
 

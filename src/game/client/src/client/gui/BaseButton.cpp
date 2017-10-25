@@ -20,7 +20,6 @@
 #include "BaseButton.hpp"
 #include <common/constants.hpp>
 
-#include <client/common/global.hpp>
 #include <client/session/Shortcuts.hpp>
 
 #include <ceti/Collision.hpp>

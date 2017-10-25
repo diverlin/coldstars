@@ -19,7 +19,6 @@
 #include <client/session/Shortcuts.hpp>
 
 #include <client/gui/UserInput.hpp>
-#include <client/common/global.hpp>
 
 #include <jeti/Screen.hpp>
 
