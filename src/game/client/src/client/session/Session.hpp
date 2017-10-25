@@ -21,6 +21,12 @@
 
 #include <core/session/Session.hpp>
 
+class UserInputInSpace;
+
+namespace type {
+class Collector;
+} // namespace type
+
 namespace jeti {
 class Render;
 class Camera;
@@ -36,9 +42,11 @@ public:
 
     void init() override final;
 
-    jeti::Render* render() override final { return m_render; }
-    jeti::Camera* camera() override final { return m_camera; }
-    jeti::Screen* screen() override final { return m_screen; }
+    jeti::Render* render() const override final { return m_render; }
+    jeti::Camera* camera() const override final { return m_camera; }
+    jeti::Screen* screen() const override final { return m_screen; }
+
+    UserInputInSpace* inputs() const override final { return m_inputs; }
 
 private:
     bool m_init = false;
@@ -46,6 +54,8 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     jeti::Screen* m_screen = nullptr;
+
+    UserInputInSpace* m_inputs = nullptr;
 };
 
 } // namespace client

@@ -211,7 +211,7 @@ private:
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render= nullptr;
     view::StarSystem* m_view = nullptr;
-    UserInputInSpace* m_input = nullptr;
+    UserInputInSpace* m_inputs = nullptr;
     jeti::Screen* m_screen = nullptr;
 
     std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;
@@ -227,7 +227,7 @@ public:
         core::shortcuts::session()->init();
 
         m_camera = client::shortcuts::camera();
-        m_input = &client::global::get().input();
+        m_inputs = client::shortcuts::inputs();
         m_render = client::shortcuts::render();
         m_screen = client::shortcuts::screen();
 
@@ -253,13 +253,13 @@ public:
         }
 
         m_view->setPlayer(m_player);
-        m_input->update(m_player);
-        m_view->update(m_input->scrollAccel());
+        m_inputs->update(m_player);
+        m_view->update(m_inputs->scrollAccel());
         m_view->render(m_player->npc()->vehicle()->starsystem());
         m_screen->draw();
     }
 
-    bool is_running() { return m_input->runSession() && m_screen->window().isOpen(); }
+    bool is_running() { return m_inputs->runSession() && m_screen->window().isOpen(); }
 
 private:
     void __activate() const {
