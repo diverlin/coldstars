@@ -1,6 +1,6 @@
 #include "TelegramHandler.hpp"
 
-#include <core/descriptor/comm/ALL>
+#include <core/communication/descriptor/ALL>
 #include <core/communication/Events.hpp>
 
 #include <ceti/Logger.hpp>

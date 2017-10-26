@@ -1,6 +1,6 @@
 #include "TelegramHandler.hpp"
 
-#include <core/descriptor/comm/Creation.hpp>
+#include <core/communication/descriptor/Creation.hpp>
 #include <core/pilot/Npc.hpp>
 #include <client/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -8,7 +8,6 @@
 #include <client/resources/Utils.hpp>
 #include <client/view/StarSystem.hpp>
 
-//#include <core/builder/pilot/PlayerBuilder.hpp>
 #include <client/pilot/Player.hpp>
 
 #include <ceti/Logger.hpp>

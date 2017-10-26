@@ -34,11 +34,7 @@
 
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/pilot/Npc.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
-#include <core/descriptor/comm/Creation.hpp>
-#include <core/descriptor/comm/AddingPositional.hpp>
-#include <core/descriptor/comm/Hit.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+#include <core/communication/descriptor/ALL>
 
 #include <core/communication/TelegramHub.hpp>
 #include <core/communication/TelegramHandler.hpp>

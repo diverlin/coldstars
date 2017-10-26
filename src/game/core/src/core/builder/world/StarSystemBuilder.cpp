@@ -35,7 +35,7 @@
 
 #include <meti/RandUtils.hpp>
 
-#include <core/descriptor/comm/Creation.hpp>
+#include <core/communication/descriptor/Creation.hpp>
 
 namespace builder {
 
