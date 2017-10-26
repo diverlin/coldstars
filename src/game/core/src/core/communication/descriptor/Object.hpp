@@ -35,6 +35,7 @@ class Object
 {
 public:
     Object(int_t);
+    Object()=default;
     Object(const std::string& data);
     ~Object() = default;
     std::string data() const;
