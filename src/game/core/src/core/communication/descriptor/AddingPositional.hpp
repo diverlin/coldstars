@@ -42,7 +42,8 @@ public:
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::AddingPositional:\n";
+        std::string result = Object::info();
+        result += "descriptor::comm::AddPositional:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;

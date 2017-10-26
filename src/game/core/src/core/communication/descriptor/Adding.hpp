@@ -39,7 +39,8 @@ public:
     int_t parent() const { return m_parent; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Adding:\n";
+        std::string result = Object::info();
+        result += "descriptor::comm::Add:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         return result;
     }
