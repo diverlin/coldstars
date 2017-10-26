@@ -204,7 +204,7 @@ void TelegramCreator::__addShipToStarSystem(int_t starsystem_id, int_t ship_id, 
 
 void TelegramCreator::__addNpcToShip(int_t ship_id, int_t npc_id) const
 {
-    descriptor::comm::AddingPositional telegram_descriptor(npc_id, ship_id);
+    descriptor::comm::Adding telegram_descriptor(npc_id, ship_id);
     m_telegramHub.add(core::comm::Telegram(telegram::Type::ADD_NPC_TO_SHIP, telegram_descriptor.data()));
 }
 
@@ -259,13 +259,13 @@ void TelegramCreator::__createRocket(int_t descriptor_id, int_t id) const
 
 void TelegramCreator::__mountItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::AddingPositional telegram_descriptor(id, ship_id);
+    descriptor::comm::Adding telegram_descriptor(id, ship_id);
     m_telegramHub.add(core::comm::Telegram(telegram::Type::MOUNT_ITEM, telegram_descriptor.data()));
 }
 
 void TelegramCreator::__loadItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::AddingPositional telegram_descriptor(id, ship_id);
+    descriptor::comm::Adding telegram_descriptor(id, ship_id);
     m_telegramHub.add(core::comm::Telegram(telegram::Type::LOAD_ITEM, telegram_descriptor.data()));
 }
 
