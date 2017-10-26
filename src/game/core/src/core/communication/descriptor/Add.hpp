@@ -28,12 +28,12 @@
 namespace descriptor {
 namespace comm {
 
-class Adding : public Object {
+class Add : public Object {
 public:
-    Adding(int_t, int_t);
-    Adding(const std::string& data);
-    Adding() = default;
-    ~Adding() = default;
+    Add(int_t, int_t);
+    Add(const std::string& data);
+    Add() = default;
+    ~Add() = default;
     std::string data() const;
 
     int_t parent() const { return m_parent; }

@@ -26,20 +26,20 @@
 namespace descriptor {
 namespace comm {
 
-class Creation
+class Create
 {
 public:
-    Creation(int_t, int_t);
-    Creation(const std::string& data);
-    Creation() = default;
-    ~Creation() = default;
+    Create(int_t, int_t);
+    Create(const std::string& data);
+    Create() = default;
+    ~Create() = default;
     std::string data() const;
 
     int_t descriptor() const { return m_descriptor; }
     int_t object() const { return m_object; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Creation:\n";
+        std::string result = "descriptor::comm::Create:\n";
         result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
         result += std::string(" object = ") + std::to_string(m_object) + "\n";
         return result;

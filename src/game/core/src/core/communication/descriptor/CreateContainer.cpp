@@ -27,7 +27,7 @@ namespace comm {
 
 CreateContainer::CreateContainer(int_t descriptor, int_t object, int_t item)
     :
-      Creation(descriptor, object)
+      Create(descriptor, object)
     , m_item(item)
 {
 }

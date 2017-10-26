@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Creation.hpp"
+#include "Create.hpp"
 
 #include <ceti/type/IdType.hpp>
 #include <ceti/StringUtils.hpp>
@@ -31,7 +31,7 @@
 namespace descriptor {
 namespace comm {
 
-class CreateGoodsPack : public Creation
+class CreateGoodsPack : public Create
 {
 public:
     CreateGoodsPack(int_t, int_t, int);
@@ -42,7 +42,7 @@ public:
     int mass() const { return m_mass; }
 
     std::string info() const {
-        std::string result = Creation::info();
+        std::string result = Create::info();
         result += "descriptor::comm::CreateGoodsPack:\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
         return result;
@@ -55,7 +55,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Creation>(*this);
+        ar & boost::serialization::base_object<Create>(*this);
         ar & m_mass;
     }
 };

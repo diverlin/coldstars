@@ -18,27 +18,27 @@
 
 #pragma once
 
-#include "Adding.hpp"
+#include "Add.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-Adding::Adding(int_t object, int_t parent)
+Add::Add(int_t object, int_t parent)
     :
       Object(object)
     , m_parent(parent)
 {}
 
 
-Adding::Adding(const std::string& data)
+Add::Add(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Adding::data() const
+Add::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
