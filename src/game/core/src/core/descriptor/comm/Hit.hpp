@@ -1,11 +1,14 @@
 #pragma once
 
-#include <core/descriptor/Base.hpp>
+#include <ceti/type/IdType.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 namespace descriptor {
 namespace comm {
 
-class Hit : public Base {
+class Hit {
 public:
     Hit(int_t agressor, int_t victim, int damage);
     Hit(const std::string&);
@@ -25,7 +28,6 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
         ar & m_owner;
         ar & m_target;
         ar & m_damage;

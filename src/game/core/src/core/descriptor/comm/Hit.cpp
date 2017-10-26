@@ -10,9 +10,7 @@ Hit::Hit(int_t owner, int_t target, int damage)
       m_owner(owner)
     , m_target(target)
     , m_damage(damage)
-{
-    setType(Type::HIT);
-}
+{}
 
 Hit::Hit(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
