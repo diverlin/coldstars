@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include "Object.hpp"
+
 #include <ceti/type/IdType.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
@@ -26,7 +28,7 @@
 namespace descriptor {
 namespace comm {
 
-class Dock
+class Dock : public Object
 {
 public:
     Dock(int_t, int_t);
@@ -34,25 +36,23 @@ public:
     ~Dock() = default;
     std::string data() const;
 
-    int_t object() const { return m_object; }
     int_t target() const { return m_destination; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Dock:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
+        std::string result = Object::info();
+        result += "descriptor::comm::Dock:\n";
         result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
         return result;
     }
 
 private:
-    int_t m_object = NONE;
     int_t m_destination = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
+        ar & boost::serialization::base_object<Object>(*this);
         ar & m_destination;
     }
 };

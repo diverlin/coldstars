@@ -27,7 +27,7 @@ namespace comm {
 
 Dock::Dock(int_t object, int_t dock)
     :
-      m_object(object)
+      Object(object)
     , m_destination(dock)
 {
 }

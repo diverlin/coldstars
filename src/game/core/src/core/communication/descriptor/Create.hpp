@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include "Object.hpp"
+
 #include <ceti/type/IdType.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
@@ -26,7 +28,7 @@
 namespace descriptor {
 namespace comm {
 
-class Create
+class Create : public Object
 {
 public:
     Create(int_t, int_t);
@@ -36,25 +38,23 @@ public:
     std::string data() const;
 
     int_t descriptor() const { return m_descriptor; }
-    int_t object() const { return m_object; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Create:\n";
+        std::string result = Object::info();
+        result += "descriptor::comm::Create:\n";
         result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
         return result;
     }
 
 private:
     int_t m_descriptor = NONE;
-    int_t m_object = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Object>(*this);
         ar & m_descriptor;
-        ar & m_object;
     }
 };
 
