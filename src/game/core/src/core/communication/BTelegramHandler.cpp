@@ -203,18 +203,18 @@ void BTelegramHandler::_addPlanetToStarSystem(const comm::Telegram& telegram) co
     event::addPlanetToStarSystem(data.object(), data.parent());
 }
 void BTelegramHandler::_addAsteroidToStarSystem(const comm::Telegram& telegram) const {
-    descriptor::comm::AddToStarsystemDescriptor data(telegram.data());
+    descriptor::comm::AddToStarsystem data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addAsteroidToStarSystem(data.object(), data.parent());
 }
 
 void BTelegramHandler::_addShipToStarSystem(const comm::Telegram& telegram) const {
-    descriptor::comm::AddToStarsystemDescriptor data(telegram.data());
+    descriptor::comm::AddToStarsystem data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addShipToStarSystem(data.object(), data.parent(), data.position());
 }
 void BTelegramHandler::_addContainerToStarSystem(const comm::Telegram& telegram) const {
-    descriptor::comm::AddToStarsystemDescriptor data(telegram.data());
+    descriptor::comm::AddToStarsystem data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addContainerToStarSystem(data.object(), data.parent(), data.position(), data.impulse);
 }

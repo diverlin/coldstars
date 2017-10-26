@@ -14,15 +14,15 @@
 namespace descriptor {
 namespace comm {
 
-class AddToStarsystemDescriptor : public AddPositional {
+class AddToStarsystem : public AddPositional {
 public:
-    AddToStarsystemDescriptor(int_t object,
+    AddToStarsystem(int_t object,
                               int_t parent,
                               const meti::vec3& position = meti::vec3(0.0f),
                               const meti::vec3& impulse = meti::vec3(0.0f),
                               const meti::vec3& angle = meti::vec3(0.0f));
 
-    AddToStarsystemDescriptor(const std::string& data);
+    AddToStarsystem(const std::string& data);
 
     meti::vec3 impulse;
     meti::vec3 angle;
