@@ -1,6 +1,6 @@
 #include "Add.hpp"
 #include "AddPositional.hpp"
-#include "AddToStarsystemDescriptor.hpp"
+#include "AddToStarsystem.hpp"
 #include "CreateBullet.hpp"
 #include "CreateContainer.hpp"
 #include "CreateGoodsPack.hpp"

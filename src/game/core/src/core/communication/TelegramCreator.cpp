@@ -198,7 +198,7 @@ void TelegramCreator::__createNpc(int_t descriptor_id, int_t id) const
 
 void TelegramCreator::__addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center) const
 {
-    descriptor::comm::AddToStarsystemDescriptor telegram_descriptor(ship_id, starsystem_id, center);
+    descriptor::comm::AddToStarsystem telegram_descriptor(ship_id, starsystem_id, center);
     m_telegramHub.add(core::comm::Telegram(telegram::Type::ADD_SHIP_TO_STARSYSTEM, telegram_descriptor.data()));
 }
 
@@ -401,7 +401,7 @@ void TelegramCreator::death(control::Asteroid* asteroid)
         m_telegramHub.add(core::comm::Telegram(telegram::Type::CREATE_CONTAINER, telegram_descriptor.data()));
         }
         {
-        descriptor::comm::AddToStarsystemDescriptor telegram_descriptor(container_id, asteroid->starsystem()->id(), asteroid->position(), impulses[i], asteroid->direction());
+        descriptor::comm::AddToStarsystem telegram_descriptor(container_id, asteroid->starsystem()->id(), asteroid->position(), impulses[i], asteroid->direction());
         m_telegramHub.add(core::comm::Telegram(telegram::Type::ADD_CONTAINER_TO_STARSYSTEM, telegram_descriptor.data()));
         }
     }
@@ -429,7 +429,7 @@ void TelegramCreator::__death(control::Vehicle* vehicle)
         m_telegramHub.add(core::comm::Telegram(telegram::Type::CREATE_CONTAINER, telegram_descriptor.data()));
         }
         {
-        descriptor::comm::AddToStarsystemDescriptor telegram_descriptor(container_id, vehicle->starsystem()->id(), vehicle->position(), impulses[i], vehicle->direction()/* todo: add direction less way*/ );
+        descriptor::comm::AddToStarsystem telegram_descriptor(container_id, vehicle->starsystem()->id(), vehicle->position(), impulses[i], vehicle->direction()/* todo: add direction less way*/ );
         m_telegramHub.add(core::comm::Telegram(telegram::Type::ADD_CONTAINER_TO_STARSYSTEM, telegram_descriptor.data()));
         }
     }
