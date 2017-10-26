@@ -57,19 +57,19 @@ void BTelegramHandler::_addStarSystemToSector(const comm::Telegram& telegram) co
     event::addStarSystemToSector(data.object(), data.parent(), data.position());
 }
 void BTelegramHandler::_addNpcToShip(const comm::Telegram& telegram) const {
-    descriptor::comm::AddingPositional data(telegram.data());
+    descriptor::comm::Adding data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addNpcToShip(data.object(), data.parent());
 }
 
 // items
 void BTelegramHandler::_mountItem(const comm::Telegram& telegram) const {
-    descriptor::comm::AddingPositional data(telegram.data());
+    descriptor::comm::Adding data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::mountItem(data.object(), data.parent());
 }
 void BTelegramHandler::_loadItem(const comm::Telegram& telegram) const {
-    descriptor::comm::AddingPositional data(telegram.data());
+    descriptor::comm::Adding data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::loadItem(data.object(), data.parent());
 }

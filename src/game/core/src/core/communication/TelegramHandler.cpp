@@ -7,12 +7,6 @@
 
 #include <core/type/EntityType.hpp> // test
 
-//#include <core/descriptor/comm/Hit.hpp>
-//#include <core/descriptor/comm/Dock.hpp>
-//#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
-//#include <core/descriptor/comm/AddingPositional.hpp>
-//#include <core/descriptor/comm/Creation.hpp>
-
 #include <core/session/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
