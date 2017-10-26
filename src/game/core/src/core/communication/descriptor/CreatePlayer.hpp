@@ -19,6 +19,9 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
+
+#include <meti/VectorUtils.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -26,34 +29,35 @@
 namespace descriptor {
 namespace comm {
 
-class Dock
+class CreatePlayer
 {
 public:
-    Dock(int_t, int_t);
-    Dock(const std::string& data);
-    ~Dock() = default;
+    CreatePlayer(int_t, int_t);
+    CreatePlayer(const std::string& data);
+    CreatePlayer() = default;
+    ~CreatePlayer() = default;
     std::string data() const;
 
-    int_t object() const { return m_object; }
-    int_t target() const { return m_destination; }
+    int_t player() const { return m_player; }
+    int_t npc() const { return m_npc; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Dock:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
+        std::string result = "descriptor::comm::CreatePlayer:\n";
+        result += std::string(" player = ") + std::to_string(m_player) + "\n";
+        result += std::string(" npc = ") + std::to_string(m_npc) + "\n";
         return result;
     }
 
 private:
-    int_t m_object = NONE;
-    int_t m_destination = NONE;
+    int_t m_player = NONE;
+    int_t m_npc = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-        ar & m_destination;
+        ar & m_player;
+        ar & m_npc;
     }
 };
 

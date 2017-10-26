@@ -221,36 +221,36 @@ void BTelegramHandler::_addContainerToStarSystem(const comm::Telegram& telegram)
 
 /** DOCK */
 void BTelegramHandler::_dockShip(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::dockShip(data.object(), data.target());
 }
 void BTelegramHandler::_launchShip(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::launchShip(data.object(), data.target());
 }
 
 /** JUMP */
 void BTelegramHandler::_jumpIn(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::jumpIn(data.object());
 }
 void BTelegramHandler::_jumpOut(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::jumpOut(data.object(), data.target());
 }
 
 /** DROP/TAKE */
 void BTelegramHandler::_dropItem(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::dropItem(data.object(), data.target());
 }
 void BTelegramHandler::_pickContainer(const comm::Telegram& telegram) const {
-    descriptor::comm::Pair data(telegram.data());
+    descriptor::comm::Dock data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::takeContainer(data.object(), data.target());
 }

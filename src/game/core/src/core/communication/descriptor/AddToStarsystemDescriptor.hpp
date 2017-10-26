@@ -39,7 +39,6 @@ public:
         return result;
     }
 
-
 private:
     friend class boost::serialization::access;
     template<class Archive>

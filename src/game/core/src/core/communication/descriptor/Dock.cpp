@@ -25,20 +25,20 @@
 namespace descriptor {
 namespace comm {
 
-Pair::Pair(int_t object, int_t dock)
+Dock::Dock(int_t object, int_t dock)
     :
       m_object(object)
     , m_destination(dock)
 {
 }
 
-Pair::Pair(const std::string& data)
+Dock::Dock(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Pair::data() const
+Dock::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

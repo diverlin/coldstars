@@ -18,46 +18,29 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include "Object.hpp"
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
+#include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-class Dock
+Object::Object(int_t object)
+    :
+      m_object(object)
 {
-public:
-    Dock(int_t, int_t);
-    Dock(const std::string& data);
-    ~Dock() = default;
-    std::string data() const;
+}
 
-    int_t object() const { return m_object; }
-    int_t target() const { return m_destination; }
+Object::Object(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-    std::string info() const {
-        std::string result = "descriptor::comm::Dock:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
-        return result;
-    }
-
-private:
-    int_t m_object = NONE;
-    int_t m_destination = NONE;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-        ar & m_destination;
-    }
-};
+std::string
+Object::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace comm
 } // namespace descriptor
-
-

@@ -1,6 +1,7 @@
 #include "TelegramHandler.hpp"
 
-#include <core/communication/descriptor/Creation.hpp>
+#include <core/communication/descriptor/ExplosionEffect.hpp>
+
 #include <core/pilot/Npc.hpp>
 #include <client/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>

@@ -18,7 +18,12 @@
 
 #pragma once
 
+#include "Creation.hpp"
+
 #include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
+
+#include <meti/VectorUtils.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -26,34 +31,32 @@
 namespace descriptor {
 namespace comm {
 
-class Dock
+class CreateContainer : public Creation
 {
 public:
-    Dock(int_t, int_t);
-    Dock(const std::string& data);
-    ~Dock() = default;
+    CreateContainer(int_t, int_t, int_t);
+    CreateContainer(const std::string& data);
+    ~CreateContainer() = default;
     std::string data() const;
 
-    int_t object() const { return m_object; }
-    int_t target() const { return m_destination; }
+    int item() const { return m_item; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Dock:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
+        std::string result = Creation::info();
+        result += "descriptor::comm::CreateContainer:\n";
+        result += std::string(" item = ") + std::to_string(m_item) + "\n";
         return result;
     }
 
 private:
-    int_t m_object = NONE;
-    int_t m_destination = NONE;
+    int m_item = 0;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-        ar & m_destination;
+        ar & boost::serialization::base_object<Creation>(*this);
+        ar & m_item;
     }
 };
 

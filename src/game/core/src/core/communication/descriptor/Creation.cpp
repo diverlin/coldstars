@@ -25,150 +25,21 @@
 namespace descriptor {
 namespace comm {
 
-// BulletShoot
-CreateBullet::CreateBullet(int_t owner, int_t item, int_t target)
-    :
-    m_owner(owner)
-  , m_item(item)
-  , m_target(target)
-{}
 
-CreateBullet::CreateBullet(const std::string& data)
+Creation::Creation(int_t descriptor, int_t object)
+    :
+      m_descriptor(descriptor)
+    , m_object(object)
+{
+}
+
+Creation::Creation(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-CreateBullet::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-//
-
-
-namespace effect {
-
-Explosion::Explosion(float size, const glm::vec3& position)
-    :
-      m_size(size)
-    , m_position(position)
-{
-}
-
-Explosion::Explosion(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Explosion::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-} // namespace effect
-
-//////////////////////
-
-Object::Object(int_t object)
-    :
-      m_object(object)
-{
-}
-
-Object::Object(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-Object::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-
-//////////////////////
-
-
-CreatePlayer::CreatePlayer(int_t player, int_t npc)
-    :
-      m_player(player)
-    , m_npc(npc)
-{
-}
-
-CreatePlayer::CreatePlayer(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-CreatePlayer::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-////////////////////////
-/// \brief CreateGoodsPack::CreateGoodsPack
-/// \param object
-/// \param descriptor
-/// \param mass
-///
-CreateGoodsPack::CreateGoodsPack(int_t descriptor, int_t object, int mass)
-    :
-      Creation(descriptor, object)
-    , m_mass(mass)
-{
-}
-
-CreateGoodsPack::CreateGoodsPack(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-CreateGoodsPack::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-
-//////////////////////////
-
-CreateContainer::CreateContainer(int_t descriptor, int_t object, int_t item)
-    :
-      Creation(descriptor, object)
-    , m_item(item)
-{
-}
-
-CreateContainer::CreateContainer(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-CreateContainer::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
-
-////////////////////////////////////////
-StarSystemTransition::StarSystemTransition(int_t object, int_t starsystem)
-    :
-      m_object(object)
-    , m_starsystem(starsystem)
-{
-}
-
-StarSystemTransition::StarSystemTransition(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string
-StarSystemTransition::data() const
+Creation::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

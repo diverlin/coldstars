@@ -1,6 +1,14 @@
 #include "AddingPositional.hpp"
 #include "AddToStarsystemDescriptor.hpp"
-#include "Create.hpp"
+#include "CreateBullet.hpp"
+#include "CreateContainer.hpp"
+#include "CreateGoodsPack.hpp"
+#include "CreatePlayer.hpp"
 #include "Creation.hpp"
 #include "Dock.hpp"
+#include "ExplosionEffect.hpp"
 #include "Hit.hpp"
+#include "Object.hpp"
+#include "StarSystemTransition.hpp"
+
+
