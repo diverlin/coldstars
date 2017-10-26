@@ -19,6 +19,14 @@ public:
     int_t target() const { return m_target; }
     int damage() const { return m_damage; }
 
+    std::string info() const {
+        std::string result = "descriptor::comm::Hit:\n";
+        result += std::string(" owner = ") + std::to_string(m_owner) + "\n";
+        result += std::string(" target = ") + std::to_string(m_target) + "\n";
+        result += std::string(" damage = ") + std::to_string(m_damage) + "\n";
+        return result;
+    }
+
 private:
     int_t m_owner = NONE;
     int_t m_target = NONE;

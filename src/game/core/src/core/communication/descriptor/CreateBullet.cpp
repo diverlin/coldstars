@@ -18,28 +18,28 @@
 
 #pragma once
 
-#include "Create.hpp"
+#include "CreateBullet.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-
-Creation::Creation(int_t descriptor, int_t object)
+// BulletShoot
+CreateBullet::CreateBullet(int_t owner, int_t item, int_t target)
     :
-      m_descriptor(descriptor)
-    , m_object(object)
-{
-}
+    m_owner(owner)
+  , m_item(item)
+  , m_target(target)
+{}
 
-Creation::Creation(const std::string& data)
+CreateBullet::CreateBullet(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Creation::data() const
+CreateBullet::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

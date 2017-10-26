@@ -19,45 +19,49 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
+
+#include <meti/VectorUtils.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
 namespace descriptor {
 namespace comm {
+namespace effect {
 
-class Creation
+class Explosion
 {
 public:
-    Creation(int_t, int_t);
-    Creation(const std::string& data);
-    Creation() = default;
-    ~Creation() = default;
+    Explosion(float, const glm::vec3&);
+    Explosion(const std::string& data);
+    ~Explosion() = default;
     std::string data() const;
 
-    int_t descriptor() const { return m_descriptor; }
-    int_t object() const { return m_object; }
+    float size() const { return m_size; }
+    const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Create:\n";
-        result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
+        std::string result = "descriptor::comm::effect::Explosion:\n";
+        result += std::string(" size = ") + std::to_string(m_size) + "\n";
+        result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }
 
 private:
-    int_t m_descriptor = NONE;
-    int_t m_object = NONE;
+    float m_size = 0.0f;
+    meti::vec3 m_position;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_descriptor;
-        ar & m_object;
+        ar & m_size;
+        ar & m_position;
     }
 };
 
+} // namespace effect
 } // namespace comm
 } // namespace descriptor
 
