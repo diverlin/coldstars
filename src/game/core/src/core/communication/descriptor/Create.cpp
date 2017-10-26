@@ -28,8 +28,8 @@ namespace comm {
 
 Create::Create(int_t descriptor, int_t object)
     :
-      m_descriptor(descriptor)
-    , m_object(object)
+      Object(object)
+    , m_descriptor(descriptor)
 {
 }
 

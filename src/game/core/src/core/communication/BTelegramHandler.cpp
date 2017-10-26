@@ -57,19 +57,19 @@ void BTelegramHandler::_addStarSystemToSector(const comm::Telegram& telegram) co
     event::addStarSystemToSector(data.object(), data.parent(), data.position());
 }
 void BTelegramHandler::_addNpcToShip(const comm::Telegram& telegram) const {
-    descriptor::comm::Add data(telegram.data());
+    descriptor::comm::ObjectParent data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::addNpcToShip(data.object(), data.parent());
 }
 
 // items
 void BTelegramHandler::_mountItem(const comm::Telegram& telegram) const {
-    descriptor::comm::Add data(telegram.data());
+    descriptor::comm::ObjectParent data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::mountItem(data.object(), data.parent());
 }
 void BTelegramHandler::_loadItem(const comm::Telegram& telegram) const {
-    descriptor::comm::Add data(telegram.data());
+    descriptor::comm::ObjectParent data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::loadItem(data.object(), data.parent());
 }
@@ -278,9 +278,9 @@ void BTelegramHandler::_garbageSpaceObject(const comm::Telegram& telegram) const
 
 // REMOVE
 void BTelegramHandler::_removeSpaceObjectFromStarSystem(const comm::Telegram& telegram) const {
-    descriptor::comm::StarSystemTransition data(telegram.data());
+    descriptor::comm::ObjectParent data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::removeSpaceObjectFromStarSystem(data.object(), data.starsystem());
+    event::removeSpaceObjectFromStarSystem(data.object(), data.parent());
 }
 
 } // namespace comm

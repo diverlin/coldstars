@@ -18,10 +18,9 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-#include <ceti/StringUtils.hpp>
+#include "Object.hpp"
 
-#include <meti/VectorUtils.hpp>
+#include <ceti/StringUtils.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -29,34 +28,32 @@
 namespace descriptor {
 namespace comm {
 
-class StarSystemTransition
-{
+class ObjectParent : public Object {
 public:
-    StarSystemTransition(int_t, int_t);
-    StarSystemTransition(const std::string& data);
-    ~StarSystemTransition() = default;
+    ObjectParent(int_t, int_t);
+    ObjectParent(const std::string& data);
+    ObjectParent() = default;
+    ~ObjectParent() = default;
     std::string data() const;
 
-    int_t object() const { return m_object; }
-    int_t starsystem() const { return m_starsystem; }
+    int_t parent() const { return m_parent; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::StarSystemTransition:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        result += std::string(" starsystem = ") + std::to_string(m_starsystem) + "\n";
+        std::string result = Object::info();
+        result += "descriptor::comm::ObjectParent:\n";
+        result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         return result;
     }
 
 private:
-    int_t m_object = NONE;
-    int_t m_starsystem = NONE;
+    int_t m_parent = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-        ar & m_starsystem;
+        ar & boost::serialization::base_object<Object>(*this);
+        ar & m_parent;
     }
 };
 
