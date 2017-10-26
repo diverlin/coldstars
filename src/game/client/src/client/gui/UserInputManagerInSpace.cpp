@@ -203,8 +203,8 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             
         case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::LOAD); break; }
 
-        case sf::Keyboard::K: { assert(false); /*client::global::get().render().increaseScale();*/ break; }
-        case sf::Keyboard::L: { assert(false); /*client::global::get().render().decreaseScale();*/ break; }
+        case sf::Keyboard::K: { client::shortcuts::render()->increaseScale(); break; }
+        case sf::Keyboard::L: { client::shortcuts::render()->decreaseScale(); break; }
 
             //            case sf::Keyboard::X: { client::global::get().render().increaseLightPos(); break; }
             //            case sf::Keyboard::Z: { client::global::get().render().decreaseLightPos(); break; }
@@ -233,8 +233,7 @@ void UserInputInSpace::__mouseButtonPressed(client::Player* player)
         } // case
 
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
-        assert(false);
-        m_mouseClickPos = glm::vec3(mouse_pos.x, /*client::global::get().render().height()*/ - mouse_pos.y, 0.0f);
+        m_mouseClickPos = glm::vec3(mouse_pos.x, client::shortcuts::render()->height() - mouse_pos.y, 0.0f);
     }
 }
 

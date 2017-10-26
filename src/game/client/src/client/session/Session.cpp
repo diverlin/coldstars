@@ -57,12 +57,14 @@ Session::init() {
 
     srand(time(0));
 
+    /// in a name of god don't change order below
     m_screen->init();
     m_render->init(m_camera, m_screen->width(), m_screen->height());
 
     Data data;
 
     m_view = new view::StarSystem(*m_render, *m_screen);
+    ///
 
     m_init = true;
 }
