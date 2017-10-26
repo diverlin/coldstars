@@ -7,9 +7,10 @@
 namespace core {
 namespace comm {
 
-Telegram::Telegram(telegram::Type type, const std::string& data, double delay)
+Telegram::Telegram(Address address, telegram::Type type, const std::string& data, double delay)
     :
-      m_type(type)
+      m_address(address)
+    , m_type(type)
     , m_data(data)
     , m_delay(delay)
 {}
