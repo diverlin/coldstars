@@ -75,6 +75,9 @@ public:
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
 
+    void leftMouseButtonClick();
+    void rightMouseButtonClick();
+
 private:
     gui::Cursor m_cursor;
     Show m_show;
@@ -99,6 +102,8 @@ private:
     void __clickOn(view::Planet*);
     void __clickOn(view::Star*);
     void __navigate() const;
+
+    void __requestServerMoveVehicle(const glm::vec3&) const;
 
     friend class UserInput;
 };
