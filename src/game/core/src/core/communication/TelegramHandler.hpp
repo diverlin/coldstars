@@ -8,7 +8,7 @@ namespace comm {
 class TelegramHandler : public BTelegramHandler
 {
 public:
-    TelegramHandler()=default;
+    TelegramHandler():BTelegramHandler(Machine::SERVER) {}
     virtual ~TelegramHandler()=default;
 
 protected:
