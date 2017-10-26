@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Creation.hpp"
+#include "Create.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
@@ -26,20 +26,20 @@ namespace descriptor {
 namespace comm {
 
 
-Creation::Creation(int_t descriptor, int_t object)
+Create::Create(int_t descriptor, int_t object)
     :
       m_descriptor(descriptor)
     , m_object(object)
 {
 }
 
-Creation::Creation(const std::string& data)
+Create::Create(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Creation::data() const
+Create::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

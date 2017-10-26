@@ -1,10 +1,8 @@
 #pragma once
 
-#include "AddingPositional.hpp"
+#include "AddPositional.hpp"
 
 #include <ceti/type/IdType.hpp>
-
-//#include <meti/VectorUtils.hpp>
 
 #include <ceti/StringUtils.hpp>
 
@@ -16,7 +14,7 @@
 namespace descriptor {
 namespace comm {
 
-class AddToStarsystemDescriptor : public AddingPositional {
+class AddToStarsystemDescriptor : public AddPositional {
 public:
     AddToStarsystemDescriptor(int_t object,
                               int_t parent,
@@ -32,7 +30,7 @@ public:
     std::string data() const;
 
     std::string info() const {
-        std::string result = AddingPositional::info();
+        std::string result = AddPositional::info();
         result += "descriptor::comm::AddToStarsystemDescriptor:\n";
         result += std::string(" impulse = ") + ceti::to_string(impulse) + "\n";
         result += std::string(" angle = ") + ceti::to_string(angle) + "\n";
@@ -43,7 +41,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<AddingPositional>(*this);
+        ar & boost::serialization::base_object<AddPositional>(*this);
         ar & impulse;
         ar & angle;
     }

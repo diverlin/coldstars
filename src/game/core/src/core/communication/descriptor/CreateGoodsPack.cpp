@@ -33,7 +33,7 @@ namespace comm {
 ///
 CreateGoodsPack::CreateGoodsPack(int_t descriptor, int_t object, int mass)
     :
-      Creation(descriptor, object)
+      Create(descriptor, object)
     , m_mass(mass)
 {
 }

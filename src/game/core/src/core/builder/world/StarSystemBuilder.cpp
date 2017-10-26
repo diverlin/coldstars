@@ -35,8 +35,6 @@
 
 #include <meti/RandUtils.hpp>
 
-#include <core/communication/descriptor/Creation.hpp>
-
 namespace builder {
 
 control::StarSystem*

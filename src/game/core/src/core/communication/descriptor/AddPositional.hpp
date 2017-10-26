@@ -30,12 +30,12 @@
 namespace descriptor {
 namespace comm {
 
-class AddingPositional : public Object {
+class AddPositional : public Object {
 public:
-    AddingPositional(int_t, int_t, const meti::vec3& position);
-    AddingPositional(const std::string& data);
-    AddingPositional() = default;
-    ~AddingPositional() = default;
+    AddPositional(int_t, int_t, const meti::vec3& position);
+    AddPositional(const std::string& data);
+    AddPositional() = default;
+    ~AddPositional() = default;
     std::string data() const;
 
     int_t parent() const { return m_parent; }

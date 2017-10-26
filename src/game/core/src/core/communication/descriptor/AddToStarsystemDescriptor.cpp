@@ -11,7 +11,7 @@ AddToStarsystemDescriptor::AddToStarsystemDescriptor(int_t object,
                                                      const meti::vec3& impulse,
                                                      const meti::vec3& angle)
     :
-      AddingPositional(object, parent, position)
+      AddPositional(object, parent, position)
     , impulse(impulse)
     , angle(angle)
 {
