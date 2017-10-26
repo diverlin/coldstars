@@ -10,15 +10,15 @@
 namespace core {
 namespace comm {
 
+enum class Machine: int {SERVER, CLIENT};
 
 class Telegram
 {
-protected:
-    enum class Address: int {SERVER, CLIENT};
-    Telegram(Address reciever, telegram::Type, const std::string& data, double delay = -1.0);
 public:
+    Telegram(const Machine& sender, telegram::Type, const std::string& data, double delay = -1.0);
     bool operator<(const Telegram&) const;
 
+    const Machine& sender() const { return m_sender; }
     telegram::Type type() const { return m_type; }
     std::string data() const { return m_data; }
     double delay() const { return m_delay; }
@@ -29,7 +29,7 @@ public:
     }
 private:
     //id_type id = 0;
-    Address m_address = Address::CLIENT;
+    Machine m_sender = Machine::SERVER;
     telegram::Type m_type = telegram::Type::NONE;
     std::string m_data = "";
 
@@ -42,7 +42,7 @@ class ServerTelegram : public Telegram {
 public:
     ServerTelegram(telegram::Type type, const std::string& data, double delay = -1.0)
         :
-          Telegram(Telegram::Address::SERVER, type, data, delay)
+          Telegram(Machine::SERVER, type, data, delay)
     {}
 };
 
@@ -50,7 +50,7 @@ class ClientTelegram : public Telegram {
 public:
     ClientTelegram(telegram::Type type, const std::string& data, double delay = -1.0)
         :
-          Telegram(Telegram::Address::CLIENT, type, data, delay)
+          Telegram(Machine::CLIENT, type, data, delay)
     {}
 };
 

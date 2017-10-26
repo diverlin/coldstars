@@ -13,7 +13,7 @@ namespace comm {
 class BTelegramHandler
 {
 public:
-    BTelegramHandler() {}
+    BTelegramHandler(const Machine& machine):m_machine(machine) {}
     virtual ~BTelegramHandler() {}
 
     void add(Telegram&);
@@ -21,6 +21,9 @@ public:
     [[deprecated("remove this shit, used only it tests, write helper function in tests instead")]]
     void runLoop();
     void update();
+
+
+    const Machine& machine() const { return m_machine; }
 
 protected:
     virtual void _process(const Telegram&) const = 0;
@@ -95,6 +98,7 @@ protected:
     void _removeSpaceObjectFromStarSystem(const comm::Telegram&) const;
 
 private:
+    Machine m_machine = Machine::SERVER;
     sf::Clock m_clock;
     std::vector<Telegram> m_telegrams;
 

@@ -27,7 +27,6 @@
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
-
 namespace core {
 
 global& global::get()

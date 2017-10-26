@@ -8,7 +8,7 @@ namespace comm {
 class TelegramHandler : public core::comm::BTelegramHandler
 {
 public:
-    TelegramHandler()=default;
+    TelegramHandler():BTelegramHandler(core::comm::Machine::CLIENT) {}
     virtual ~TelegramHandler()=default;
 
 protected:
