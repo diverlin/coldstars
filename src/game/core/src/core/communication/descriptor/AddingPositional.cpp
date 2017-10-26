@@ -25,7 +25,7 @@
 namespace descriptor {
 namespace comm {
 
-AddingPositional::AddingPositional(int_t parent, int_t object, const meti::vec3& position)
+AddingPositional::AddingPositional(int_t object, int_t parent, const meti::vec3& position)
     :
       Object(object)
     , m_parent(parent)
