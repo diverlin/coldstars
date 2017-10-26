@@ -7,17 +7,11 @@
 
 #include <core/type/EntityType.hpp> // test
 
-#include <core/descriptor/comm/Hit.hpp>
-#include <core/descriptor/comm/Dock.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
-#include <core/descriptor/comm/AddingPositional.hpp>
+#include <core/communication/descriptor/ALL>
 
 #include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
-
-#include <core/descriptor/Base.hpp>
-#include <core/descriptor/comm/Creation.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/spaceobject/Container.hpp> // ??
