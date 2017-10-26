@@ -27,8 +27,8 @@ namespace comm {
 
 AddingPositional::AddingPositional(int_t parent, int_t object, const meti::vec3& position)
     :
-      m_parent(parent)
-    , m_object(object)
+      Object(object)
+    , m_parent(parent)
     , m_position(position)
 {}
 
