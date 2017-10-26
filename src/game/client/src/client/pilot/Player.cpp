@@ -92,6 +92,16 @@ Player::~Player()
 {}  
             
 
+void Player::leftMouseButtonClick()
+{
+
+}
+
+void Player::rightMouseButtonClick()
+{
+
+}
+
 const meti::vec3&
 Player::position() const {
     assert(npc());
@@ -733,13 +743,19 @@ void Player::__clickOn(view::Star* star)
     }
 }
 
+void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
+{
+    assert(false);
+}
+
 void Player::__navigate() const
 {
     switch(m_cursor.mouseData().event) {
     case MouseData::LeftButtonClick: {
         assert(npc());
-        resetStateMachine();
-        npc()->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
+        __requestServerMoveVehicle(m_cursor.mouseData().world_coord);
+//        resetStateMachine();
+//        npc()->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
         break;
     }
     case MouseData::RightButtonClick: {

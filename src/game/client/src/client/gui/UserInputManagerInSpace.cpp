@@ -223,11 +223,11 @@ void UserInputInSpace::__mouseButtonPressed(client::Player* player)
     for (const auto & key_code : UserInput::get().m_mousePressedCodes) {
         switch (key_code) {
         case sf::Mouse::Left: {
-            player->cursor().leftMouseButtonClick();
+            player->leftMouseButtonClick();
             break;
         }
         case sf::Mouse::Right: {
-            player->cursor().rightMouseButtonClick();
+            player->rightMouseButtonClick();
             break;
         }
         } // case
