@@ -1,8 +1,10 @@
 #pragma once
 
+#include "AddingPositional.hpp"
+
 #include <ceti/type/IdType.hpp>
 
-#include <meti/VectorUtils.hpp>
+//#include <meti/VectorUtils.hpp>
 
 #include <ceti/StringUtils.hpp>
 
@@ -11,31 +13,29 @@
 
 #include <glm/glm.hpp>
 
-class AddToStarsystemDescriptor {
+namespace descriptor {
+namespace comm {
+
+class AddToStarsystemDescriptor : public AddingPositional {
 public:
-    AddToStarsystemDescriptor(int_t starsystem,
-                              int_t object,
+    AddToStarsystemDescriptor(int_t object,
+                              int_t parent,
                               const meti::vec3& position = meti::vec3(0.0f),
                               const meti::vec3& impulse = meti::vec3(0.0f),
                               const meti::vec3& angle = meti::vec3(0.0f));
 
     AddToStarsystemDescriptor(const std::string& data);
 
-    int_t starsystem = 0;
-    int_t object = 0;
-    meti::vec3 position;
     meti::vec3 impulse;
     meti::vec3 angle;
 
     std::string data() const;
 
     std::string info() const {
-        std::string result = "AddToStarsystemDescriptor:\n";
-        result += std::string(" starsystem = ") + std::to_string(starsystem) + "\n";
-        result += std::string(" object = ") + std::to_string(object) + "\n";
-        result += std::string(" position = ") + ceti::to_string(position) + "\n";
-        result += std::string(" position = ") + ceti::to_string(impulse) + "\n";
-        result += std::string(" position = ") + ceti::to_string(angle) + "\n";
+        std::string result = AddingPositional::info();
+        result += "descriptor::comm::AddToStarsystemDescriptor:\n";
+        result += std::string(" impulse = ") + ceti::to_string(impulse) + "\n";
+        result += std::string(" angle = ") + ceti::to_string(angle) + "\n";
         return result;
     }
 
@@ -43,12 +43,11 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & starsystem;
-        ar & object;
-        ar & position;
+        ar & boost::serialization::base_object<AddingPositional>(*this);
         ar & impulse;
         ar & angle;
     }
 };
 
-
+} // namespace comm
+} // namespace descriptor
