@@ -741,6 +741,7 @@ void Player::__clickOn(view::Star* star)
 
 void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
 {
+    // it's more proper to send player id instead, and on server got the id of vehicle which belongs to the certain player
 //    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
     client::TelegramCreator::get().playerRequestMove(npc()->vehicle()->id(), target_pos);
 }
@@ -751,8 +752,6 @@ void Player::__navigate() const
     case MouseData::Event::LeftButtonPress: {
         assert(npc());
         __requestServerMoveVehicle(m_cursor.mouseData().worldCoord());
-//        resetStateMachine();
-//        npc()->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
         break;
     }
     case MouseData::Event::RightButtonPress: {
