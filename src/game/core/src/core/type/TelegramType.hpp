@@ -87,6 +87,10 @@ enum class Type : int
 
     ADD_SPACEOBJECT_TO_GARBAGE,
 
+
+    // MOVE
+    MOVE_VEHICLE,
+
     // CLIENT
     PLAYER_REQUEST_MOVE
 };

@@ -741,7 +741,8 @@ void Player::__clickOn(view::Star* star)
 
 void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
 {
-    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
+//    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
+    client::TelegramCreator::get().playerRequestMove(npc()->vehicle()->id(), target_pos);
 }
 
 void Player::__navigate() const

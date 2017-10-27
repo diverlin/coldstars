@@ -89,7 +89,8 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
     /* GARBAGE */
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
 
-
+        // MOVE
+    case telegram::Type::MOVE_VEHICLE: _moveVehicle(telegram); break;
 
     // unique client
     case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
