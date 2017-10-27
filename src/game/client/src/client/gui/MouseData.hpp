@@ -20,14 +20,36 @@
 
 #include <glm/glm.hpp>
 
-struct MouseData
+class MouseData
 {
-    enum Event { None, LeftButtonClick, RightButtonClick };
+public:
+    enum class Event: int { None, LeftButtonPress, LeftButtonRelease, RightButtonPress, RightButtonRelease };
 
-    glm::vec3 screen_coord;
-    glm::vec3 world_coord;
+    MouseData()=default;
+    ~MouseData()=default;
 
-    Event event = None;
+    void reset() {
+        m_screenCoord = glm::vec3(0.0f);
+        m_worldCoord = glm::vec3(0.0f);
+
+        m_event = Event::None;
+    }
+
+    void setScreenCoord(const glm::vec3& coord) { m_screenCoord = coord; }
+    void setWorldCoord(const glm::vec3& coord) { m_worldCoord = coord; }
+
+    void setEvent(const Event& event) { m_event = event; }
+
+    const glm::vec3& screenCoord() const { return m_screenCoord; }
+    const glm::vec3& worldCoord() const { return m_worldCoord; }
+
+    const Event& event() const { return m_event; }
+
+private:
+    glm::vec3 m_screenCoord;
+    glm::vec3 m_worldCoord;
+
+    Event m_event = Event::None;
 };
 
 

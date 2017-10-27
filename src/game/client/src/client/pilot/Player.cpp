@@ -59,6 +59,8 @@
 
 #include <meti/RandUtils.hpp>
 
+#include <client/communication/TelegramCreator.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace client {
@@ -91,16 +93,6 @@ Player::Player(int_t id)
 Player::~Player()
 {}  
             
-
-void Player::leftMouseButtonClick()
-{
-
-}
-
-void Player::rightMouseButtonClick()
-{
-
-}
 
 const meti::vec3&
 Player::position() const {
@@ -495,6 +487,10 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
 void Player::__manageClickEvent()
 {
+    if (m_cursor.mouseData().event() == MouseData::Event::None) {
+        return;
+    }
+
     if (view::Base* base = m_cursor.focusedView()) {
         switch (base->type()) {
         case entity::Type::BULLET: {
@@ -543,14 +539,14 @@ void Player::__manageClickEvent()
 
 void Player::__clickOn(view::Bullet* bullet)
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
 //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //            npc->vehicle()->GetComplexWeapon().SetTarget(bullet);
 //        }
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
 //        npc->vehicle()->GetComplexDrive().SetTarget(bullet, NAVIGATOR_ACTION::KEEP_MIDDLE);
 //        npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -606,14 +602,14 @@ void Player::__clickOn(view::Satellite* satellite)
 
 void Player::__clickOn(view::Asteroid* asteroid)
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
         //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
         //        }
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -624,14 +620,14 @@ void Player::__clickOn(view::Asteroid* asteroid)
 void Player::__clickOn(view::Ship* ship)
 {
 
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
         //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
         //        }
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -672,12 +668,12 @@ void Player::__clickOn(view::Ship* ship)
 
 void Player::__clickOn(view::WormHole* wormhole)
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         // ..
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         // ..
         break;
     }
@@ -714,14 +710,14 @@ void Player::__clickOn(view::SpaceStation* spacestation)
 
 void Player::__clickOn(view::Planet* planet)
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         //        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
         //        npc->GetStateMachine().SetCurrentMicroTask(microtask);
         //        npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         // ..
         break;
     }
@@ -731,12 +727,12 @@ void Player::__clickOn(view::Planet* planet)
 
 void Player::__clickOn(view::Star* star)
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         // ..
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         // ..
         break;
     }
@@ -745,20 +741,20 @@ void Player::__clickOn(view::Star* star)
 
 void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
 {
-    assert(false);
+    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
 }
 
 void Player::__navigate() const
 {
-    switch(m_cursor.mouseData().event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_cursor.mouseData().event()) {
+    case MouseData::Event::LeftButtonPress: {
         assert(npc());
-        __requestServerMoveVehicle(m_cursor.mouseData().world_coord);
+        __requestServerMoveVehicle(m_cursor.mouseData().worldCoord());
 //        resetStateMachine();
 //        npc()->vehicle()->navigator().setTarget(m_cursor.mouseData().world_coord);
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         // ..
         break;
     }

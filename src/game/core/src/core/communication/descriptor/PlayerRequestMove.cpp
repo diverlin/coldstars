@@ -1,4 +1,3 @@
-
 /*
      Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -17,34 +16,33 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-# pragma once
+#pragma once
 
-#include <ceti/type/IdType.hpp>
+#include "PlayerRequestMove.hpp"
 
-#include <glm/glm.hpp>
+#include <ceti/serialization/macro.hpp>
 
-namespace core {
+namespace descriptor {
 namespace comm {
-class TelegramHub;
-} // namespace comm
-} // anemspace core
 
-namespace client {
+PlayerRequestMove::PlayerRequestMove(int_t object, const meti::vec3& position)
+    :
+      Object(object)
+    , m_position(position)
+{}
 
-class TelegramCreator
+
+PlayerRequestMove::PlayerRequestMove(const std::string& data)
 {
-private:
-    TelegramCreator();
-    TelegramCreator(const TelegramCreator&) = delete;
-    ~TelegramCreator() = default;
-    TelegramCreator& operator=(const TelegramCreator&) = delete;
+    MACRO_READ_SERIALIZED_DATA
+}
 
-private:
-    core::comm::TelegramHub& m_telegramHub;
+std::string
+PlayerRequestMove::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
-public:
-    static TelegramCreator& get();
-    void playerRequestMove(int_t, const glm::vec3&);
-};
+} // namespace comm
+} // namespace descriptor
 
-} // namespace core

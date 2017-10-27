@@ -49,15 +49,13 @@ public:
     Cursor();
     ~Cursor();
 
-    void leftMouseButtonClick() { m_dataMouse.event = MouseData::LeftButtonClick; }
-    void rightMouseButtonClick() { m_dataMouse.event = MouseData::RightButtonClick; }
-
     void setFocusedView(view::Base* focusedView) { m_focusedView = focusedView; }
     void setFocusedView(BaseGuiElement* gui_element) { m_focusedGuiElement = gui_element; }
 
     view::Base* focusedView() const { return m_focusedView; }
 
     const MouseData& mouseData() const { return m_dataMouse; }
+    MouseData& mouseData() { return m_dataMouse; }
     ItemSlot* itemSlot() const { return m_itemSlot; }
 
     void update(client::Player*, const jeti::Render& render);
@@ -67,6 +65,8 @@ public:
 
     void renderItem(const jeti::Render&) const;
     void updateMouseInput(const jeti::Render& render);
+
+    void reset();
 
 private:
     glm::vec3 m_screenCoord;
@@ -79,8 +79,6 @@ private:
     BaseGuiElement* m_focusedGuiElement = nullptr;
 
     ceti::Box2D m_box;
-
-    void __reset();
 }; 
 
 } // namespace gui

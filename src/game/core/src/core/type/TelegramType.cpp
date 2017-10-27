@@ -93,6 +93,9 @@ std::string to_string(Type type)
     case Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE"; }
 
 
+        // CLIENT
+    case Type::PLAYER_REQUEST_MOVE: { return "telegram::Type::PLAYER_REQUEST_MOVE"; }
+
     default: {
         assert(false);
         return "entity::Type::UNKNOWN type"; }

@@ -34,6 +34,7 @@ void UserInput::update()
 {    
     m_keyboardPressedCodes.clear();
     m_mousePressedCodes.clear();
+    m_mouseReleasedCodes.clear();
 
     sf::Event event;
     while(client::shortcuts::screen()->window().pollEvent(event)) {
@@ -49,7 +50,13 @@ void UserInput::update()
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
         case sf::Event::MouseButtonPressed: {
+            std::cout<<"--mb press..."<<std::endl;
             m_mousePressedCodes.push_back(event.key.code);
+            break;
+        }
+        case sf::Event::MouseButtonReleased: {
+            std::cout<<"--mb release..."<<std::endl;
+            m_mouseReleasedCodes.push_back(event.key.code);
             break;
         }
 

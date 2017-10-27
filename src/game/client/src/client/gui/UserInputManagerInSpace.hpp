@@ -47,7 +47,7 @@ private:
     glm::vec3 m_scrollAccel;
     glm::vec3 m_mouseClickPos;
 
-    void __reset();
+    void __reset(client::Player*);
     
     void __manageInputsInSpace(client::Player*);
 

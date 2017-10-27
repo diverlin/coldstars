@@ -48,6 +48,8 @@
 
 #include <ceti/Logger.hpp>
 
+#include <core/communication/descriptor/PlayerRequestMove.hpp>
+
 namespace core {
 namespace comm {
 
@@ -119,11 +121,22 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 
     /* GARBAGE */
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
+
+        /* CLIENT */
+    case telegram::Type::PLAYER_REQUEST_MOVE: _playerMoveReply(telegram); break;
+
     default: {
         assert(false);
         break;
     }
     }
+}
+
+
+void TelegramHandler::_playerMoveReply(const Telegram& telegram) const
+{
+    descriptor::comm::PlayerRequestMove telegram_descriptor(telegram.data());
+
 }
 
 } // namespace comm

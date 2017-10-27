@@ -85,7 +85,10 @@ enum class Type : int
 
     HIT,
 
-    ADD_SPACEOBJECT_TO_GARBAGE
+    ADD_SPACEOBJECT_TO_GARBAGE,
+
+    // CLIENT
+    PLAYER_REQUEST_MOVE
 };
 
 std::string to_string(Type);
