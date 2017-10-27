@@ -13,6 +13,8 @@ public:
 
 protected:
     void _process(const Telegram&) const override final;
+
+    void _playerMoveReply(const Telegram&) const;
 };
 
 } // namespace comm

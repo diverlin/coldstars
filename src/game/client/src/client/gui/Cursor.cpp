@@ -86,9 +86,9 @@ Cursor::~Cursor()
     delete m_itemSlot;
 }
 
-void Cursor::__reset()
+void Cursor::reset()
 {
-    m_dataMouse.event  = MouseData::None;
+    m_dataMouse.reset();
     
     m_focusedView = nullptr;
     m_focusedGuiElement = nullptr;
@@ -96,7 +96,7 @@ void Cursor::__reset()
 
 void Cursor::update(client::Player* player, const jeti::Render& render)
 {
-    m_box.setCenter(m_dataMouse.screen_coord.x, m_dataMouse.screen_coord.y);
+    m_box.setCenter(m_dataMouse.screenCoord().x, m_dataMouse.screenCoord().y);
 
     if (m_focusedView) {
         //if (!m_focusedView->isAlive()) {
@@ -104,14 +104,14 @@ void Cursor::update(client::Player* player, const jeti::Render& render)
         //}
     }
 
-    switch(m_dataMouse.event) {
-    case MouseData::LeftButtonClick: {
+    switch(m_dataMouse.event()) {
+    case MouseData::Event::LeftButtonPress: {
         if (m_focusedGuiElement) {
             m_focusedGuiElement->OnPressEventMBL(player);
         }     
         break;
     }
-    case MouseData::RightButtonClick: {
+    case MouseData::Event::RightButtonPress: {
         if (m_focusedGuiElement) {
             m_focusedGuiElement->OnPressEventMBR(player);
         }    
@@ -122,17 +122,16 @@ void Cursor::update(client::Player* player, const jeti::Render& render)
 
 void Cursor::updateMouseInput(const jeti::Render& render)
 {    
-    __reset();
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        m_dataMouse.event = MouseData::LeftButtonClick;
-    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        m_dataMouse.event = MouseData::RightButtonClick;
-    }
+//    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+//        m_dataMouse.event = MouseData::LeftButtonClick;
+//    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+//        m_dataMouse.event = MouseData::RightButtonClick;
+//    }
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
     mouse_pos.y = render.height()-mouse_pos.y;
-    m_dataMouse.screen_coord = glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f);
-    m_dataMouse.world_coord = render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
+    m_dataMouse.setScreenCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
+    m_dataMouse.setWorldCoord(render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f)));
 }
 
 void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const

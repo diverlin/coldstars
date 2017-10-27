@@ -18,6 +18,11 @@
 
 #include "TelegramCreator.hpp"
 
+#include <core/common/Global.hpp>
+#include <core/communication/Telegram.hpp>
+#include <core/communication/descriptor/PlayerRequestMove.hpp>
+#include <core/communication/TelegramHub.hpp>
+
 namespace client {
 
 TelegramCreator&
@@ -28,8 +33,16 @@ TelegramCreator::get()
 }
 
 TelegramCreator::TelegramCreator()
+    :
+    m_telegramHub(core::global::get().telegramHub())
 {
 
+}
+
+void TelegramCreator::playerRequestMove(int_t player, const glm::vec3& position)
+{
+    descriptor::comm::PlayerRequestMove telegram_descriptor(player, position);
+    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
 }
 
 } // namespace client

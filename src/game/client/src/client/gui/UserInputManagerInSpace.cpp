@@ -44,10 +44,10 @@ UserInputInSpace::~UserInputInSpace()
 
 void UserInputInSpace::update(client::Player* player)
 {
+    __reset(player);
+
     UserInput::get().update();
 
-    __reset();
-    
     __manageInputsInSpace(player);
     __manageRealTimeInputsInSpace(player);
     __mouseButtonPressed(player);
@@ -220,14 +220,14 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
 
 void UserInputInSpace::__mouseButtonPressed(client::Player* player)
 {
-    for (const auto & key_code : UserInput::get().m_mousePressedCodes) {
+    for (const auto & key_code : UserInput::get().mousePressedCodes()) {
         switch (key_code) {
         case sf::Mouse::Left: {
-            player->leftMouseButtonClick();
+            player->cursor().mouseData().setEvent(MouseData::Event::LeftButtonPress);
             break;
         }
         case sf::Mouse::Right: {
-            player->rightMouseButtonClick();
+            player->cursor().mouseData().setEvent(MouseData::Event::RightButtonPress);
             break;
         }
         } // case
@@ -237,8 +237,9 @@ void UserInputInSpace::__mouseButtonPressed(client::Player* player)
     }
 }
 
-void UserInputInSpace::__reset()
+void UserInputInSpace::__reset(client::Player* player)
 {       
+    player->cursor().mouseData().reset();
     m_nextTurnReady = false;
     m_scrollAccel = glm::vec3(0);
 }

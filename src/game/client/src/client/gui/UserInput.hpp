@@ -35,6 +35,9 @@ public:
     void update();
     //    const std::vector<sf::Event>& events() const { return m_events; }
 
+    const std::vector<sf::Keyboard::Key>& mousePressedCodes() { return m_mousePressedCodes; }
+    const std::vector<sf::Keyboard::Key>& mouseReleasedCodes() { return m_mouseReleasedCodes; }
+
 private:
     UserInput() {}
     UserInput(const UserInput&) = delete;
@@ -44,7 +47,8 @@ private:
 
     std::vector<sf::Keyboard::Key> m_keyboardPressedCodes;
     std::vector<sf::Keyboard::Key> m_mousePressedCodes;
-    
+    std::vector<sf::Keyboard::Key> m_mouseReleasedCodes;
+
     sfg::Desktop* m_desktop = nullptr;
     friend class UserInputInSpace;
 };
