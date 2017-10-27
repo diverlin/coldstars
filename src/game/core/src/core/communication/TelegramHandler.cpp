@@ -125,8 +125,12 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
         // MOVE
     case telegram::Type::MOVE_VEHICLE: _moveVehicle(telegram); break;
 
+        // GAME STATES
+    case telegram::Type::END_TURN: _endTurn(telegram); break;
+
         /* CLIENT */
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
 
     default: {
         assert(false);
@@ -140,6 +144,12 @@ void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
     descriptor::comm::MoveVehicle telegram_descriptor(telegram.data());
     m_telegramCreator.moveVehicle(telegram_descriptor.object(), telegram_descriptor.position());
+}
+
+void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
+{
+    descriptor::comm::Object telegram_descriptor(telegram.data()); // actually no needed it
+    m_telegramCreator.endTurn();
 }
 
 } // namespace comm

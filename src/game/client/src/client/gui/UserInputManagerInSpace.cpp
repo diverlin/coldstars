@@ -78,8 +78,6 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
 //                m_nextTurnReady = true;
 //            }
             player->endTurnEvent();
-            assert(false);
-
             break;
         }
 

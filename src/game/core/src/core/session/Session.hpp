@@ -19,6 +19,8 @@
 
 # pragma once
 
+#include <core/common/TurnTimer.hpp>
+
 #include <memory>
 #include <cassert>
 
@@ -52,7 +54,7 @@ class Garbage;
 class Session {
 public:
     Session();
-    ~Session()=default;
+    virtual ~Session()=default;
 
     std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
     std::shared_ptr<manager::Entity> entitiesManager() const { return m_entitiesManager; }
@@ -69,7 +71,12 @@ public:
 
     virtual void init() {}
 
+    TurnTimer& turnTimer() { return m_turnTimer; }
+    void endTurn() { m_turnTimer.nextTurn(); }
+
 private:
+    TurnTimer m_turnTimer;
+
     std::shared_ptr<descriptor::Manager> m_descriptorsManager;
     std::shared_ptr<manager::Entity> m_entitiesManager;
     std::shared_ptr<manager::Garbage> m_garbageManager;

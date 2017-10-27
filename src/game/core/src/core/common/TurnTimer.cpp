@@ -44,12 +44,13 @@ void TurnTimer::nextTurn()
                         
 void TurnTimer::update(int threshold)
 {
+    //std::cout<<"tick tack"<<m_stopTurnTimer<<std::endl;
     m_stopTurnTimer--;
 
     /////////// AUTO-TURN /////////////
     if (m_stopTurnTimer < threshold) {
         LOG("*** AUTO_TURN_MODE proceed END TURN");
-        nextTurn();
+        //nextTurn();
     }
         
     if (m_stopTurnTimer < 0) {

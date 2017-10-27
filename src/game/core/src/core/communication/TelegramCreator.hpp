@@ -72,6 +72,7 @@ public:
     void createGalaxy(descriptor::Galaxy*);
 
     void moveVehicle(int_t, const glm::vec3&) const;
+    void endTurn() const;
 
 private:
     core::comm::TelegramHub& m_telegramHub;

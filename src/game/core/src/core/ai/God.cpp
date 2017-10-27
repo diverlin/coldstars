@@ -103,12 +103,12 @@ void God::update()
     }
 
     // shortcuts
-    TurnTimer& turnTimer = core::global::get().turnTimer();
+    TurnTimer& turnTimer = core::shortcuts::session()->turnTimer();
     GameDate& gameDate = core::global::get().gameDate();
     // shortcuts
 
-    turnTimer.update(-100);
-    m_galaxy->update(turnTimer.getStopTurnTimer());
+    turnTimer.update(/*threshold*/-100);
+    m_galaxy->update(/*time*/turnTimer.getTurnCounter());
 
     if (m_DateLastUpdate - gameDate >= GOD_REST_IN_DAYS) {
         LOG("God::Update");
@@ -122,7 +122,8 @@ void God::update()
     }
 
     if (turnTimer.getTurnEnded()) {
-        turnTimer.nextTurn();
+        // realtime imitation
+//        turnTimer.nextTurn();
         gameDate.dayPass();
     }
 

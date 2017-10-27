@@ -91,8 +91,12 @@ enum class Type : int
     // MOVE
     MOVE_VEHICLE,
 
+    // GAME STATE
+    END_TURN,
+
     // CLIENT
-    PLAYER_REQUEST_MOVE
+    PLAYER_REQUEST_MOVE,
+    PLAYER_REQUEST_END_TURN
 };
 
 std::string to_string(Type);

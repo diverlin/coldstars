@@ -265,6 +265,7 @@ void Drive::__calcPath()
 void Drive::update()
 {
     if (m_path.isValid()) {
+        std::cout<<"x="<<m_path.center().x<<std::endl;
         m_ownerVehicle->setPosition(m_path.center());
         m_ownerVehicle->setDirection(m_path.direction());
         m_path.update();

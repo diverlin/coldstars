@@ -94,6 +94,9 @@ protected:
     // GARBAGE
     void _garbageSpaceObject(const comm::Telegram&) const;
 
+    // game states
+    void _endTurn(const comm::Telegram&) const;
+
     // REMOVE
     void _removeSpaceObjectFromStarSystem(const comm::Telegram&) const;
 

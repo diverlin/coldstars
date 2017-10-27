@@ -528,6 +528,10 @@ void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) c
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::MOVE_VEHICLE, descriptor.data()));
 }
 
-    //m_telegramCreator.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
+void TelegramCreator::endTurn() const
+{
+    descriptor::comm::Object descriptor(-1);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::END_TURN, descriptor.data()));
+}
 
 } // namespace core
