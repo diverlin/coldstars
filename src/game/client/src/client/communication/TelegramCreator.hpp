@@ -45,6 +45,7 @@ private:
 public:
     static TelegramCreator& get();
     void playerRequestMove(int_t, const glm::vec3&);
+    void playerRequestTurnEnd(int_t);
 };
 
 } // namespace core
