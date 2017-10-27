@@ -96,8 +96,12 @@ std::string to_string(Type type)
         // MOVE
     case Type::MOVE_VEHICLE: { return "telegram::Type::MOVE_VEHICLE"; }
 
+        // GAME STATE
+    case Type::END_TURN: { return "telegram::Type::END_TURN"; }
+
         // CLIENT
     case Type::PLAYER_REQUEST_MOVE: { return "telegram::Type::PLAYER_REQUEST_MOVE"; }
+    case Type::PLAYER_REQUEST_END_TURN: { return "telegram::Type::PLAYER_REQUEST_END_TURN"; }
 
     default: {
         assert(false);

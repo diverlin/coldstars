@@ -290,6 +290,14 @@ void BTelegramHandler::_moveVehicle(const comm::Telegram& telegram) const {
     event::moveVehicle(data.object(), data.position());
 }
 
+// game states
+void BTelegramHandler::_endTurn(const comm::Telegram&) const
+{
+    LOG_COMM(__FUNCTION__);
+    event::endTurn();
+}
+
+
 } // namespace comm
 } // namespace core
 

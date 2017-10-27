@@ -21,6 +21,8 @@ protected:
 
 private:
     void __playerMoveReply(const Telegram&) const;
+    void __playerTurnEndReply(const Telegram& telegram) const;
+
     TelegramCreator& m_telegramCreator;
 };
 

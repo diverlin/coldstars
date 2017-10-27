@@ -28,7 +28,7 @@ class TelegramHub;
 } // namespace core
 
 class Config;
-class TurnTimer;
+//class TurnTimer;
 class GameDate;
 class RaceDescriptors;
 
@@ -46,7 +46,7 @@ public:
     God& god() { return *m_god; }
     comm::TelegramHub& telegramHub() { return *m_telegramHub; }
     Config& config() { return *m_config; }
-    TurnTimer& turnTimer() { return *m_turnTimer; }
+//    TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
     RaceDescriptors& raceDescriptors() { return *m_raceDescriptors; }
 
@@ -59,7 +59,6 @@ private:
     God* m_god = nullptr;
     comm::TelegramHub* m_telegramHub = nullptr;
     Config* m_config = nullptr;
-    TurnTimer* m_turnTimer = nullptr;
     GameDate* m_gameDate = nullptr;
     RaceDescriptors* m_raceDescriptors = nullptr;
 };

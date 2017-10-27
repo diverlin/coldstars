@@ -92,6 +92,9 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
         // MOVE
     case telegram::Type::MOVE_VEHICLE: _moveVehicle(telegram); break;
 
+        // GAME STATES
+    case telegram::Type::END_TURN: _endTurn(telegram); break;
+
     // unique client
     case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
     case telegram::Type::CREATE_EXPLOSION_EFFECT: _createExplosionEffect(telegram); break;

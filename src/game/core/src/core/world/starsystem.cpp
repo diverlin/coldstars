@@ -705,7 +705,7 @@ void StarSystem::update(int time)
     }
 
     if (time > 0) {
-        composer().genBullets_DEBUG(this, 100);
+        //composer().genBullets_DEBUG(this, 100);
 
         if (m_unique_update_inDymanic_done == false) {
             // assert(false); assert(false);

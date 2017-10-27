@@ -22,7 +22,7 @@
 #include <communication/TelegramHub.hpp>
 #include <communication/TelegramHandler.hpp>
 #include <common/Config.hpp>
-#include <common/TurnTimer.hpp>
+//#include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
 #include <descriptor/RaceDescriptors.hpp>
 #include <core/manager/DescriptorManager.hpp>
@@ -40,7 +40,7 @@ global::global()
       m_god(new God)
     , m_telegramHub(new comm::TelegramHub)
     , m_config(new Config)
-    , m_turnTimer(new TurnTimer)
+//    , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
     , m_raceDescriptors(new RaceDescriptors)
 {
@@ -51,7 +51,7 @@ global::~global()
     delete m_god;
     delete m_telegramHub;
     delete m_config;
-    delete m_turnTimer;
+//    delete m_turnTimer;
     delete m_gameDate;
     delete m_raceDescriptors;
 }

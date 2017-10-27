@@ -94,7 +94,7 @@ void Ship::update(int time)
 {
     //_checkDeath(false);
     //    GetComplexProtector().GetShieldEffect()->Update();
-    navigator().update(); // debug
+    //navigator().update(); // debug
 
     if (time > 0) {
         //__updateSpecialAction();

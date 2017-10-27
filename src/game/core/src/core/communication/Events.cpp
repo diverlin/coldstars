@@ -44,6 +44,8 @@
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 
+#include <core/session/Session.hpp>
+
 #include <ceti/Logger.hpp>
 
 namespace core {
@@ -339,6 +341,13 @@ void moveVehicle(int_t object, const glm::vec3& position)
     control::Ship* ship = core::shortcuts::entities()->ship(object);
     ship->navigate(position);
 }
+
+// GAME STATES
+void endTurn()
+{
+    core::shortcuts::session()->endTurn();
+}
+
 
 } // namespace event
 } // namespace comm
