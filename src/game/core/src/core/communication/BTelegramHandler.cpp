@@ -283,6 +283,13 @@ void BTelegramHandler::_removeSpaceObjectFromStarSystem(const comm::Telegram& te
     event::removeSpaceObjectFromStarSystem(data.object(), data.parent());
 }
 
+// MOVE
+void BTelegramHandler::_moveVehicle(const comm::Telegram& telegram) const {
+    descriptor::comm::MoveVehicle data(telegram.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
+    event::moveVehicle(data.object(), data.position());
+}
+
 } // namespace comm
 } // namespace core
 

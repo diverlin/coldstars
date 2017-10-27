@@ -30,19 +30,19 @@
 namespace descriptor {
 namespace comm {
 
-class PlayerRequestMove : public Object {
+class MoveVehicle : public Object {
 public:
-    PlayerRequestMove(int_t, const meti::vec3& position);
-    PlayerRequestMove(const std::string& data);
-    PlayerRequestMove() = default;
-    ~PlayerRequestMove() = default;
+    MoveVehicle(int_t, const meti::vec3& position);
+    MoveVehicle(const std::string& data);
+    MoveVehicle() = default;
+    ~MoveVehicle() = default;
     std::string data() const;
 
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
         std::string result = Object::info();
-        result += "descriptor::comm::PlayerRequestMove:\n";
+        result += "descriptor::comm::MoveVehicle:\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }

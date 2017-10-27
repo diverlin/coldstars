@@ -38,8 +38,7 @@ global& global::get()
 global::global()
     :
       m_god(new God)
-    , m_messageHub(new comm::TelegramHub)
-    , m_telegramHandler(new comm::TelegramHandler)
+    , m_telegramHub(new comm::TelegramHub)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
@@ -50,6 +49,7 @@ global::global()
 global::~global()
 {
     delete m_god;
+    delete m_telegramHub;
     delete m_config;
     delete m_turnTimer;
     delete m_gameDate;

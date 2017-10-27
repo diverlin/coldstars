@@ -78,6 +78,10 @@ void takeContainer(int_t object, int_t target);
 
 void shoot(int_t object, int_t item);
 
+
+// MOVE
+void moveVehicle(int_t, const glm::vec3&);
+
 } // namespace event
 } // namespace comm
 } // namespace core

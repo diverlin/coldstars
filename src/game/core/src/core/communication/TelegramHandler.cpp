@@ -48,7 +48,7 @@
 
 #include <ceti/Logger.hpp>
 
-#include <core/communication/descriptor/PlayerRequestMove.hpp>
+#include <core/communication/descriptor/MoveVehicle.hpp>
 
 namespace core {
 namespace comm {
@@ -123,7 +123,7 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
 
         /* CLIENT */
-    case telegram::Type::PLAYER_REQUEST_MOVE: _playerMoveReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
 
     default: {
         assert(false);
@@ -133,9 +133,11 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 }
 
 
-void TelegramHandler::_playerMoveReply(const Telegram& telegram) const
+void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
-    descriptor::comm::PlayerRequestMove telegram_descriptor(telegram.data());
+    descriptor::comm::MoveVehicle telegram_descriptor(telegram.data());
+
+    assert(false);
 
 }
 

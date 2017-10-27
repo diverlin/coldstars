@@ -333,6 +333,13 @@ void shoot(int_t object, int_t item) {
     //    }
 }
 
+// MOVE
+void moveVehicle(int_t object, const glm::vec3& position)
+{
+    control::Ship* ship = core::shortcuts::entities()->ship(object);
+    ship->navigate(position);
+}
+
 } // namespace event
 } // namespace comm
 } // namespace core
