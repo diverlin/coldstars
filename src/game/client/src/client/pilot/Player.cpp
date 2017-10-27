@@ -94,6 +94,22 @@ Player::~Player()
 {}  
             
 
+void Player::endTurnEvent()
+{
+    client::TelegramCreator::get().playerRequestTurnEnd(id());
+}
+
+void Player::pressLeftMouseButtonEvent()
+{
+    m_cursor.mouseData().setEvent(MouseData::Event::LeftButtonPress);
+}
+
+void Player::pressRightMouseButtonEvent()
+{
+    m_cursor.mouseData().setEvent(MouseData::Event::RightButtonPress);
+}
+
+
 const meti::vec3&
 Player::position() const {
     assert(npc());

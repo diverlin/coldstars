@@ -75,6 +75,11 @@ public:
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
 
+    // events
+    void endTurnEvent();
+    void pressLeftMouseButtonEvent();
+    void pressRightMouseButtonEvent();
+
 private:
     gui::Cursor m_cursor;
     Show m_show;

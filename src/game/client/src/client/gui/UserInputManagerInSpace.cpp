@@ -74,9 +74,11 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             
         case sf::Keyboard::Space:
         {
-            if (!m_nextTurnReady) {
-                m_nextTurnReady = true;
-            }
+//            if (!m_nextTurnReady) {
+//                m_nextTurnReady = true;
+//            }
+            player->endTurnEvent();
+            assert(false);
 
             break;
         }
@@ -222,19 +224,13 @@ void UserInputInSpace::__mouseButtonPressed(client::Player* player)
 {
     for (const auto & key_code : UserInput::get().mousePressedCodes()) {
         switch (key_code) {
-        case sf::Mouse::Left: {
-            player->cursor().mouseData().setEvent(MouseData::Event::LeftButtonPress);
-            break;
-        }
-        case sf::Mouse::Right: {
-            player->cursor().mouseData().setEvent(MouseData::Event::RightButtonPress);
-            break;
+        case sf::Mouse::Left: { player->pressLeftMouseButtonEvent(); break; }
+        case sf::Mouse::Right: { player->pressRightMouseButtonEvent(); break;
         }
         } // case
-
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
-        m_mouseClickPos = glm::vec3(mouse_pos.x, client::shortcuts::render()->height() - mouse_pos.y, 0.0f);
     }
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
+    m_mouseClickPos = glm::vec3(mouse_pos.x, client::shortcuts::render()->height() - mouse_pos.y, 0.0f);
 }
 
 void UserInputInSpace::__reset(client::Player* player)

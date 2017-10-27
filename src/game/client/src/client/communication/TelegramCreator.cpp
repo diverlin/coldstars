@@ -45,4 +45,10 @@ void TelegramCreator::playerRequestMove(int_t player, const glm::vec3& position)
     m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
 }
 
+void TelegramCreator::playerRequestTurnEnd(int_t player)
+{
+    descriptor::comm::Object telegram_descriptor(player);
+    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_TURN_END, telegram_descriptor.data()));
+}
+
 } // namespace client
