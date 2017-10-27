@@ -1,7 +1,7 @@
 #pragma once
 
 #include <communication/BTelegramHandler.hpp>
-#include <communication/TelegramHub.hpp>
+#include <communication/TelegramCreator.hpp>
 
 namespace core {
 namespace comm {
@@ -9,10 +9,10 @@ namespace comm {
 class TelegramHandler : public BTelegramHandler
 {
 public:
-    TelegramHandler(TelegramHub& telegramHub)
+    TelegramHandler(TelegramCreator& telegramCreator)
         :
           BTelegramHandler(Machine::SERVER)
-        , m_telegramHub(telegramHub)
+        , m_telegramCreator(telegramCreator)
     {}
     ~TelegramHandler()=default;
 
@@ -21,7 +21,7 @@ protected:
 
 private:
     void __playerMoveReply(const Telegram&) const;
-    TelegramHub& m_telegramHub;
+    TelegramCreator& m_telegramCreator;
 };
 
 } // namespace comm

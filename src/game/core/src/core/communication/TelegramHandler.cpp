@@ -122,6 +122,9 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
     /* GARBAGE */
     case telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE: _garbageSpaceObject(telegram); break;
 
+        // MOVE
+    case telegram::Type::MOVE_VEHICLE: _moveVehicle(telegram); break;
+
         /* CLIENT */
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
 
@@ -136,9 +139,7 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
     descriptor::comm::MoveVehicle telegram_descriptor(telegram.data());
-
-    assert(false);
-
+    m_telegramCreator.moveVehicle(telegram_descriptor.object(), telegram_descriptor.position());
 }
 
 } // namespace comm

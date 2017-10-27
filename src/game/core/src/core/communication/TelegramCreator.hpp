@@ -71,6 +71,8 @@ public:
 //    void bindPlayerWithNpc(int_t, int_t);
     void createGalaxy(descriptor::Galaxy*);
 
+    void moveVehicle(int_t, const glm::vec3&) const;
+
 private:
     core::comm::TelegramHub& m_telegramHub;
 

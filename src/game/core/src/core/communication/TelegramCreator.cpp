@@ -522,4 +522,12 @@ void TelegramCreator::createPlayer(int_t player_id, int_t npc_id)
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_PLAYER, descriptor.data()));
 }
 
+void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) const
+{
+    descriptor::comm::MoveVehicle descriptor(vehicle_id, position);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::MOVE_VEHICLE, descriptor.data()));
+}
+
+    //m_telegramCreator.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
+
 } // namespace core

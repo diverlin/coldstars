@@ -93,6 +93,9 @@ std::string to_string(Type type)
     case Type::ADD_SPACEOBJECT_TO_GARBAGE: { return "telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE"; }
 
 
+        // MOVE
+    case Type::MOVE_VEHICLE: { return "telegram::Type::MOVE_VEHICLE"; }
+
         // CLIENT
     case Type::PLAYER_REQUEST_MOVE: { return "telegram::Type::PLAYER_REQUEST_MOVE"; }
 
