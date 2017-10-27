@@ -20,7 +20,7 @@
 
 #include <core/common/Global.hpp>
 #include <core/communication/Telegram.hpp>
-#include <core/communication/descriptor/PlayerRequestMove.hpp>
+#include <core/communication/descriptor/MoveVehicle.hpp>
 #include <core/communication/TelegramHub.hpp>
 
 namespace client {
@@ -41,7 +41,7 @@ TelegramCreator::TelegramCreator()
 
 void TelegramCreator::playerRequestMove(int_t player, const glm::vec3& position)
 {
-    descriptor::comm::PlayerRequestMove telegram_descriptor(player, position);
+    descriptor::comm::MoveVehicle telegram_descriptor(player, position);
     m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
 }
 

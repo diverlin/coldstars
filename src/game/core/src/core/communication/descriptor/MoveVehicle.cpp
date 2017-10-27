@@ -18,27 +18,27 @@
 
 #pragma once
 
-#include "PlayerRequestMove.hpp"
+#include "MoveVehicle.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
 namespace comm {
 
-PlayerRequestMove::PlayerRequestMove(int_t object, const meti::vec3& position)
+MoveVehicle::MoveVehicle(int_t object, const meti::vec3& position)
     :
       Object(object)
     , m_position(position)
 {}
 
 
-PlayerRequestMove::PlayerRequestMove(const std::string& data)
+MoveVehicle::MoveVehicle(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-PlayerRequestMove::data() const
+MoveVehicle::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

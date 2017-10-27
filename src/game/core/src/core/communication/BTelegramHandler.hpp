@@ -97,6 +97,9 @@ protected:
     // REMOVE
     void _removeSpaceObjectFromStarSystem(const comm::Telegram&) const;
 
+    // move
+    void _moveVehicle(const comm::Telegram&) const;
+
 private:
     Machine m_machine = Machine::SERVER;
     sf::Clock m_clock;
