@@ -20,23 +20,23 @@
 
 class TurnTimer
 {
-    static const int TURN_TIME = 150;
+    static const int TURN_TICKS = 150;
     static const int TURN_AUTODELAY = -50;
 
 public:
     TurnTimer();
     ~TurnTimer();
 
-    bool getTurnEnded()  const { return m_turnEnded; }
-    int getStopTurnTimer() const { return m_stopTurnTimer; }
-    unsigned long int getTurnCounter() const { return m_turnCounter; }
+    bool turnEnded()  const { return m_turnEnded; }
+    int ticksLeft() const { return m_ticksLeft; }
+    unsigned long int turnCount() const { return m_turnCount; }
     void nextTurn();
 
     void update(int threshold = TURN_AUTODELAY);
     
 private:
-    int m_stopTurnTimer = TURN_TIME;
-    unsigned long int m_turnCounter = 0;
+    int m_ticksLeft = TURN_TICKS;
+    unsigned long int m_turnCount = 0;
     bool m_turnEnded = false;
 };
 

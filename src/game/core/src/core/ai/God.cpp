@@ -108,7 +108,7 @@ void God::update()
     // shortcuts
 
     turnTimer.update(/*threshold*/-100);
-    m_galaxy->update(/*time*/turnTimer.getTurnCounter());
+    m_galaxy->update(/*time*/turnTimer.ticksLeft());
 
     if (m_DateLastUpdate - gameDate >= GOD_REST_IN_DAYS) {
         LOG("God::Update");
@@ -121,13 +121,13 @@ void God::update()
         LOG(data_starsystems_condition.info());
     }
 
-    if (turnTimer.getTurnEnded()) {
+    if (turnTimer.turnEnded()) {
         // realtime imitation
 //        turnTimer.nextTurn();
         gameDate.dayPass();
     }
 
-    if (turnTimer.getTurnEnded()) {
+    if (turnTimer.turnEnded()) {
         core::shortcuts::session()->garbageManager()->erase();
 
         //            bool save_event = manager::EntityManager::get().UpdateSaveRequest();
