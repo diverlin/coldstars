@@ -248,9 +248,15 @@ public:
             return;
         }
 
+        control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
+        assert(starsystem);
+
+        // simulate model(repeate what server is doing)
+        starsystem->update_client(time);
+
         m_inputs->update(m_player);
         m_view->update(m_inputs->scrollAccel());
-        m_view->render(m_player->npc()->vehicle()->starsystem());
+        m_view->render(starsystem);
         m_screen->draw();
     }
 
