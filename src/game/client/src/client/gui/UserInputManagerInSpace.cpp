@@ -23,6 +23,7 @@
 #include <common/Config.hpp>
 
 #include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
 
 #include <core/part/WeaponComplex.hpp>
 #include <core/pilot/Npc.hpp>
@@ -127,10 +128,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
 
         case sf::Keyboard::C:
         {
-            assert(false);
-            //                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
-            //                glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-            //                client::shortcuts::screen()->initiateScrollTo(player_pos2);
+            client::shortcuts::camera()->setTargetPosition(player->position());
             break;
         }
         case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::GRAPPLE_SLOT_SELECTOR); break; }

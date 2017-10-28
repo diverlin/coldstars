@@ -695,7 +695,12 @@ void StarSystem::__updateStates()
 //    return rate;
 //}
 
-void StarSystem::update(int time)
+void StarSystem::update_client(int time)
+{
+    __updateEntities_s(time);
+}
+
+void StarSystem::update_server(int time)
 {                
     __updateEntities_s(time);
     __manageUnavaliableObjects_s();

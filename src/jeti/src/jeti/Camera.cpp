@@ -19,24 +19,67 @@
 
 #include "Camera.hpp"
 
+#include <meti/common.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
+
+#include <iostream>
 
 namespace jeti {
 
+void Camera::setTargetPosition(const glm::vec3& position)
+{
+    if (m_position == position) {
+        return;
+    }
+    __resetSpeed();
+
+    glm::vec3 diff(position-m_position);
+    glm::vec3 dir(glm::normalize(diff));
+    float dist = glm::length(diff);
+
+    int num = 60;
+    float step = dist/num;
+    glm::vec3 pos =m_position;
+    for (int i=0; i<num; ++i) {
+        pos += step*dir;
+        m_positions.push_back(pos);
+    }
+
+    m_it = 0;
+    m_autoMove = true;
+}
+
 void Camera::addSpeed(const glm::vec3& speed)
 { 
+    if (glm::length(speed) == 0) {
+        return;
+    }
     if (__speedAboveMax()) {
         return;
     }
     m_speed += speed;
+
+    m_autoMove = false;
 }
 
 void Camera::update()
 {
-    m_speed *= m_inertiaFactor;
-    m_position += m_speed;
-    m_target = m_position + m_direction;
+    if (m_autoMove) {
+        if (m_it < m_positions.size()) {
+            m_position = m_positions[m_it];
+            m_it++;
+        } else {
+            m_autoMove = false;
+            m_positions.clear();
+            m_it = -1;
+        }
+    } else {
+        m_position += m_speed;
+        m_speed *= m_inertiaFactor;
+    }
 
+    m_target = m_position + m_direction;
     m_viewMatrix = glm::lookAt(m_position, m_target, m_up);
 }
 
@@ -45,4 +88,8 @@ bool Camera::__speedAboveMax() const
     return (glm::length(m_speed) > m_speedMax);
 }
 
+
+void Camera::__resetSpeed() {
+    m_speed = glm::vec3(0.0f);
+}
 } // namespace jeti

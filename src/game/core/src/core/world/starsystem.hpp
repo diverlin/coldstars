@@ -143,7 +143,8 @@ public:
     void bombExplosionEvent(Container*, bool);
     void starSparkEvent(float) const;
 
-    void update(int);
+    void update_server(int);
+    void update_client(int);
 
     //float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 

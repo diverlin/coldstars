@@ -37,23 +37,23 @@ void TurnTimer::nextTurn()
 //       manager::EntityManager::get().LoadRequest();
 //    }
                 
-    m_stopTurnTimer = TURN_TIME;
+    m_ticksLeft = TURN_TICKS;
     m_turnEnded = false;
-    m_turnCounter++;
+    m_turnCount++;
 }
                         
 void TurnTimer::update(int threshold)
 {
     //std::cout<<"tick tack"<<m_stopTurnTimer<<std::endl;
-    m_stopTurnTimer--;
+    m_ticksLeft--;
 
     /////////// AUTO-TURN /////////////
-    if (m_stopTurnTimer < threshold) {
+    if (m_ticksLeft < threshold) {
         LOG("*** AUTO_TURN_MODE proceed END TURN");
         //nextTurn();
     }
         
-    if (m_stopTurnTimer < 0) {
+    if (m_ticksLeft < 0) {
         m_turnEnded = true;
     } else {
         m_turnEnded = false;
