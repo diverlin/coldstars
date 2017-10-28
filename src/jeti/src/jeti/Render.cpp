@@ -498,11 +498,11 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, cons
 }
 
 void Render::draw(const Mesh& mesh, const control::Material& material, const glm::mat4& MM) const {
-    if (material.model()->normalmap) {
-        drawMeshLightNormalMap(mesh, material, MM);
-    } else {
+//    if (material.model()->normalmap) {
+//        drawMeshLightNormalMap(mesh, material, MM);
+//    } else {
         drawMeshLight(mesh, material, MM);
-    }
+//    }
 }
 
 void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
