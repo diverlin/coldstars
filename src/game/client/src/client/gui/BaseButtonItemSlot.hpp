@@ -40,14 +40,14 @@ public:
 
     virtual ~BaseButtonItemSlot() {}
 
-    bool GetEquiped() const;
+    bool isEquiped() const;
 
     void SetItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:
-    slot::Item* GetItemSlot() const { return m_slot; }
+    slot::Item* itemSlot() const { return m_slot; }
 
-    void UpdateAnimationProgram();
+    void updateAnimationProgram();
 
     void RenderMarkEmptySlot(const jeti::Render&, const glm::vec2&, gui::type) const;
     void RenderMarkTarget() const;

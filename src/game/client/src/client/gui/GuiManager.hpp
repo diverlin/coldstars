@@ -16,9 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef GUIMANAGER_HPP
-#define GUIMANAGER_HPP
+#pragma once
 
 class GuiSkill;
 class GuiGalaxyMap;
@@ -30,54 +28,54 @@ class GuiGalaxyMap;
 
 class GuiManager
 {
-    public:
-        static GuiManager& get();
-        ~GuiManager();
-        
-        void SetPlayer(client::Player*);
-        
-        GuiKosmoport& GetGuiKosmoport() { return gui_kosmoport; };
-        GuiSpace& GetGuiSpace() { return gui_space; };
-        
-        GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
-        GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
-                
-        void UpdateSessionInSpace();                                
-        void RunSessionInKosmoport(const MouseData&);
-        void RunSessionInNatureLand(const MouseData&);
+public:
+    static GuiManager& get();
+    ~GuiManager();
 
-        void EnterGuiKosmoport();
-        void ExitGuiKosmoport();                
-        
-        void EnterGuiSpace();
-        void ExitGuiSpace(); 
-        
-        bool UpdateMouseInteractionWithScanVehicle(const MouseData&);             
-        void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
-            
-        void pressEventMBL_onGuiElement(gui::type);
-        void ResetEventOnGuiElement(gui::type);
-        BaseGuiElement* GetGuiElement(gui::type) const;
-                
-    private:
-        GuiManager();
-        GuiManager(const GuiManager&) = delete;
-        GuiManager& operator=(const GuiManager&) = delete;
-        
-        std::vector<int> command_vec;
-        
-        client::Player* player;
-        
-        GuiKosmoport     gui_kosmoport;
-        GuiSpace         gui_space;
-        GuiNatureLand     gui_natureland;
-        
-        // shared guis
-        GuiVehicle*     gui_vehicle_scan;
-        GuiGalaxyMap*   gui_galaxymap;
-        
-        GuiSkills*       gui_skills;
-        Slider*         slider;  
+    void SetPlayer(client::Player*);
+
+    GuiKosmoport& kosmoport() { return m_kosmoport; }
+    GuiSpace& space() { return m_space; }
+
+    GuiVehicle* vehicle() const { return m_vehicle; }
+    GuiGalaxyMap* galaxy() const { return m_galaxymap; }
+
+    void updateSessionInSpace();
+    void runSessionInKosmoport(const MouseData&);
+    void runSessionInNatureLand(const MouseData&);
+
+    void enterKosmoport();
+    void quitKosmoport();
+
+    void enterSpace();
+    void quitSpace();
+
+    bool updateMouseInteractionWithScanVehicle(const MouseData&);
+    void renderScanVehicle(const MouseData&, bool show_skill = true) const;
+
+    void pressEventMBL_onGuiElement(gui::type);
+    void resetEventOnGuiElement(gui::type);
+    BaseGuiElement* element(gui::type) const;
+
+private:
+    GuiManager();
+    GuiManager(const GuiManager&) = delete;
+    GuiManager& operator=(const GuiManager&) = delete;
+
+    std::vector<int> m_commands;
+
+    client::Player* m_player = nullptr;
+
+    GuiKosmoport m_kosmoport;
+    GuiSpace m_space;
+    GuiNatureLand m_natureland;
+
+    // shared guis
+    GuiVehicle* m_vehicle = nullptr;
+    GuiGalaxyMap* m_galaxymap = nullptr;
+
+    GuiSkills* m_skills = nullptr;
+    Slider* m_slider = nullptr;
 };
-  
-#endif
+
+

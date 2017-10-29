@@ -33,28 +33,28 @@ class BaseButton : public BaseGuiElement
         virtual ~BaseButton();  
         
         void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
-        void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
+        void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_textureOb_mask = textureOb_mask; }
         
         //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }              
         void LockOn();
         void LockOff();
         
-        virtual void ResetState() override;
+        virtual void resetState() override;
         
-        virtual void RenderInfo(const jeti::Render&) const override;
-        virtual void RenderUnique(const jeti::Render&, client::Player*) const override;
+        virtual void renderInfo(const jeti::Render&) const override;
+        virtual void _renderUnique(const jeti::Render&, client::Player*) const override;
                        
     protected:          
-        float m_Alpha;                        
+        float m_alpha;                        
         
         jeti::control::Material* m_TextureOb_additional;
-        jeti::control::Material* m_TextureOb_mask;
+        jeti::control::Material* m_textureOb_mask;
         
-        void (*m_pAction)(client::Player*);
+        void (*m_action)(client::Player*);
         
-        void FullShadeOn();
+        void fullShadeOn();
         void ShadeOn();
-        void ShadeOff();
+        void shadeOff();
 };
 
 #endif

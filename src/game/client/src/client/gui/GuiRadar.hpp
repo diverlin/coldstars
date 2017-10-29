@@ -44,9 +44,9 @@ public:
     void Add(control::SpaceObject*);
     void AddIfWithinRadarRange(control::SpaceObject*, control::Vehicle*);
 
-    virtual void UpdateUnique(client::Player*) override final;
+    virtual void _updateUnique(client::Player*) override final;
 
-    virtual void RenderUnique(const jeti::Render&, client::Player*) const override final;
+    virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
 private:
     float scale;

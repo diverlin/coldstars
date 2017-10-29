@@ -50,7 +50,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
 
         glm::vec2 offset((-2+i)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (2)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                       
-        AddChild(button, offset);
+        add(button, offset);
     } 
     
     /** EQUIPMENT SLOTS */
@@ -61,7 +61,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
         
         glm::vec2 offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -71,7 +71,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                     
         glm::vec2 offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -81,7 +81,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                 
         glm::vec2 offset((0)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -91,7 +91,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
         
         glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -101,7 +101,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                             
         glm::vec2 offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     //{
@@ -121,7 +121,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                 
         glm::vec2 offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -131,7 +131,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                             
         glm::vec2 offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     {
@@ -141,7 +141,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                     
         glm::vec2 offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);
+        add(button, offset);
     }
 
     /** ARTEFACT SLOTS */
@@ -155,7 +155,7 @@ m_Vehicle(nullptr)
             button->setSize(size);
                              
             glm::vec2 offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-            AddChild(button, offset);
+            add(button, offset);
         }      
     }
         
@@ -169,7 +169,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
 
         glm::vec2 offset((-5+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
-        AddChild(button, offset);
+        add(button, offset);
     }
         
     /** GATE SLOT */
@@ -180,7 +180,7 @@ m_Vehicle(nullptr)
         button->setSize(size);
                             
         glm::vec2 offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        AddChild(button, offset);          
+        add(button, offset);
     }
     
     allow_full_control = false;
@@ -203,9 +203,8 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const glm::vec2& gui_offset, bool
 
 void GuiVehicle::UnbindVehicle()
 { 
-    for (auto child : m_Child_vec)
-    {  
-        child->Hide();
+    for (auto* child : m_children) {
+        child->hide();
         ((ButtonItemSlot*)child)->SetItemSlot(nullptr);
     }
     
@@ -214,12 +213,12 @@ void GuiVehicle::UnbindVehicle()
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-    SetTextureOb(GuiTextureObCollector::Instance().radar_range);
+    setTextureOb(GuiTextureObCollector::Instance().radar_range);
 
     float kontur_w = 400;
     float kontur_h = 400;           
 
-    GetBox().setSize(kontur_w * scale, kontur_h * scale); 
+    box().setSize(kontur_w * scale, kontur_h * scale);
 }      
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
@@ -334,7 +333,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 */   
      
 /* virtual override final */
-void GuiVehicle::RenderUnique(const jeti::Render& render, client::Player* player) const
+void GuiVehicle::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     //enable_BLEND(); 
     //{

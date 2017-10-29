@@ -32,27 +32,26 @@
 GuiVehicle2::GuiVehicle2()
 :
 BaseGuiElement(gui::type::PLAYER_VEHICLE, gui::type::PLAYER_VEHICLE),
-m_Vehicle(nullptr) 
+m_vehicle(nullptr)
 {
 
 }        
 
 void GuiVehicle2::Reset()
 {
-    for (unsigned int i=0; i<m_Child_vec.size(); i++)
-    {
-        delete m_Child_vec[i];
+    for (auto* child: m_children) {
+        delete child;
     }
-    m_Child_vec.clear();
+    m_children.clear();
     
-    m_Vehicle = nullptr;
+    m_vehicle = nullptr;
 }
 
 void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
 {
     CreateFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
     
-    m_Vehicle = vehicle;
+    m_vehicle = vehicle;
 }    
     
 void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, float scale)
@@ -86,7 +85,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 }    
 
 /* virtual override final */
-void GuiVehicle2::UpdateUnique(client::Player* player)
+void GuiVehicle2::_updateUnique(client::Player* player)
 {
     assert(false);
 //    bool need_update = false;

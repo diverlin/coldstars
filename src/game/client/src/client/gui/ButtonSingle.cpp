@@ -19,35 +19,29 @@
 #include "ButtonSingle.hpp"
 
 /*virtual override final*/
-void ButtonSingle::OnPressEventMBL(client::Player* player)
+void ButtonSingle::onPressEventMBL(client::Player* player)
 {
-    if (m_pAction)
-    {
-        m_pAction(player);
+    if (m_action) {
+        m_action(player);
     }
     
-    if (GetLock() == false)
-    {
-        SetPressed(true);
+    if (!isLocked()) {
+        _setIsPressed(true);
         ShadeOn();
     }
 }
 
 /*virtual override final*/           
-void ButtonSingle::UpdateUnique(client::Player* player)
+void ButtonSingle::_updateUnique(client::Player* player)
 {
-    if (GetLocked() == false)
-    {
-        if (m_Alpha < 1.0f)
-        {
-            m_Alpha += 0.01f;
-        }
-        else
-        {
-            m_Alpha = 1.0f;
+    if (!isLocked()) {
+        if (m_alpha < 1.0f) {
+            m_alpha += 0.01f;
+        } else {
+            m_alpha = 1.0f;
         }
     }
     
-    SetPressed(false);
+    _setIsPressed(false);
 }
       

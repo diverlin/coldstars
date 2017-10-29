@@ -418,7 +418,7 @@ void Render::drawQuad(const control::Material& material, const ceti::Box2D& box)
        
     glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
     
-    glm::vec2 size = box.size()*box.GetScale();
+    glm::vec2 size = box.size()*box.scale();
     glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
       
     glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;

@@ -25,20 +25,20 @@
 #include <jeti/AnimationEffect2D.hpp>
 
 
-std::map<gui::type, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
+std::map<gui::type, BaseGuiElement*> BaseGuiElement::m_elements;
 
    
 BaseGuiElement::BaseGuiElement(gui::type type_id, gui::type group, const std::string& info, jeti::control::Material* textureOb)
 :
-m_Type_id(type_id),
+m_type(type_id),
 m_group(group),
-m_TextureOb(textureOb),
-m_Info(info),
-m_Locked(false),
-m_Pressed(false),
-m_Show(true),
-m_Root(true),
-m_AnimationProgram(nullptr)
+m_textureOb(textureOb),
+m_info(info),
+m_isLocked(false),
+m_isPressed(false),
+m_isVisible(true),
+m_isRoot(true),
+m_animationProgram(nullptr)
 {}
 
 /* virtual */
@@ -49,84 +49,77 @@ BaseGuiElement::~BaseGuiElement()
         //delete *it;
     //}
     
-    delete m_AnimationProgram;
+    delete m_animationProgram;
 }    
  
-void BaseGuiElement::DeleteAnimationProgram()
+void BaseGuiElement::_deleteAnimationProgram()
 {
-    if (m_AnimationProgram != nullptr)
-    {
-        delete m_AnimationProgram;
-        m_AnimationProgram = nullptr;
+    if (m_animationProgram != nullptr) {
+        delete m_animationProgram;
+        m_animationProgram = nullptr;
     }
 }
 
           
-BaseGuiElement* BaseGuiElement::GetGuiElement(gui::type request_group) const
+BaseGuiElement* BaseGuiElement::element(gui::type request_group) const
 {
-    std::map<gui::type, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_group);
-    if (it != static_gui_element_map.cend())
-    {
+    std::map<gui::type, BaseGuiElement*>::const_iterator it = m_elements.find(request_group);
+    if (it != m_elements.cend()) {
         return it->second;
     }
     
     return nullptr;
 }   
     
-void BaseGuiElement::PressEventMBL_onGuiElement(gui::type group, client::Player* player)
+void BaseGuiElement::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
 {
-    BaseGuiElement* button = GetGuiElement(group);
-    if (button != nullptr)
-    {
-        button->OnPressEventMBL(player);
+    BaseGuiElement* button = element(group);
+    if (button) {
+        button->onPressEventMBL(player);
     }
 }    
 
-void BaseGuiElement::ResetStateEventOnGuiElement(gui::type group)
+void BaseGuiElement::_resetStateEventOnGuiElement(gui::type group)
 {
-    BaseGuiElement* button = GetGuiElement(group);
-    if (button != nullptr)
-    {
-        button->ResetState();
+    BaseGuiElement* button = element(group);
+    if (button) {
+        button->resetState();
     }
 }    
             
 /* virtual */
-void BaseGuiElement::ResetState()
+void BaseGuiElement::resetState()
 {
-    m_Pressed = false;
+    m_isPressed = false;
 }
 
-void BaseGuiElement::AddChild(BaseGuiElement* child, const glm::vec2& offset) 
+void BaseGuiElement::add(BaseGuiElement* child, const glm::vec2& offset)
 { 
     child->SetOffset(offset);
-    child->SetRoot(false);
+    child->_setIsRoot(false);
     
-    m_Child_vec.push_back(child); 
-    static_gui_element_map.insert(std::make_pair(child->subTypeId(), child));
+    m_children.push_back(child);
+    m_elements.insert(std::make_pair(child->group(), child));
 }
         
-BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const glm::vec2& mouse_pos)
+BaseGuiElement*
+BaseGuiElement::updateMouseInteraction(const glm::vec2& mouse_pos)
 {
-    if (!m_Show)
-    {
+    if (!m_isVisible) {
         return nullptr;
     }
     
     BaseGuiElement* child_interacted = nullptr;
-    for (const auto &child : m_Child_vec)
+    for (const auto &child : m_children)
     {
-        child_interacted = child->UpdateMouseInteraction(mouse_pos);
-        if (child_interacted)
-        {
+        child_interacted = child->updateMouseInteraction(mouse_pos);
+        if (child_interacted) {
             return child_interacted;
         }
     }
     
-    if (!m_Root)
-    {    
-        if (m_Box.CheckInteraction(mouse_pos) == true)
-        {
+    if (!m_isRoot) {
+        if (m_box.checkInteraction(mouse_pos)) {
             return this;
         }
     }
@@ -134,91 +127,88 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const glm::vec2& mouse_po
     return nullptr;
 }
 
-void BaseGuiElement::UpdateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
+void BaseGuiElement::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
 {
-    if (!m_Show)
+    if (!m_isVisible)
     {
         return;
     }
     
-    glm::vec2 next_offset = parent_offset + m_Offset;
-    glm::vec2 next_scale = parent_scale * m_Box.GetScale();
+    glm::vec2 next_offset = parent_offset + m_offset;
+    glm::vec2 next_scale = parent_scale * m_box.scale();
 
-    m_Box.setCenter(next_offset);
-    m_Box.SetScale(next_scale);
+    m_box.setCenter(next_offset);
+    m_box.setScale(next_scale);
             
-    for (auto &child : m_Child_vec)
+    for (auto &child : m_children)
     {
-        child->UpdateGeometry(next_offset, next_scale);
+        child->_updateGeometry(next_offset, next_scale);
     }
 }
 
-void BaseGuiElement::Update(client::Player* player)
+void BaseGuiElement::update(client::Player* player)
 {
-    if (!m_Show)
+    if (!m_isVisible)
     {
         return;
     }
     
-    if (m_Root)
+    if (m_isRoot)
     {
-        UpdateGeometry(m_Offset, glm::vec2(1,1));
+        _updateGeometry(m_offset, glm::vec2(1,1));
     }
     
-    UpdateCommon(player);
-    UpdateUnique(player);
+    _updateCommon(player);
+    _updateUnique(player);
 }
  
 /* virtual */
-void BaseGuiElement::UpdateUnique(client::Player*)
+void BaseGuiElement::_updateUnique(client::Player*)
 {}
 
-void BaseGuiElement::UpdateCommon(client::Player* player)
+void BaseGuiElement::_updateCommon(client::Player* player)
 {
-    for (auto &child : m_Child_vec)
-    {      
-        child->Update(player);
+    for (auto* child : m_children) {
+        child->update(player);
     }
     
-    if (m_AnimationProgram != nullptr)
+    if (m_animationProgram != nullptr)
        {    
-           m_AnimationProgram->Update(m_Box);
+           m_animationProgram->Update(m_box);
        }
 }
 
-void BaseGuiElement::Render(const jeti::Render& render, client::Player* player) const
+void BaseGuiElement::render(const jeti::Render& render, client::Player* player) const
 {
-    if (!m_Show)
+    if (!m_isVisible)
     {
         return;
     }
     
-    if (m_Root)
+    if (m_isRoot)
     {
         //resetRenderTransformation();
     }
     
     //render.enable_BLEND();
     {
-        RenderUnique(render, player);
-        RenderCommon(render, player);
+        _renderUnique(render, player);
+        _renderCommon(render, player);
     }
     //render.disable_BLEND();
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(const jeti::Render& render, client::Player* player) const
+void BaseGuiElement::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    if (m_TextureOb)
-    {
-        render.drawQuad(*m_TextureOb, m_Box);
+    if (m_textureOb) {
+        render.drawQuad(*m_textureOb, m_box);
     }
 }
 
-void BaseGuiElement::RenderCommon(const jeti::Render& render, client::Player* player) const
+void BaseGuiElement::_renderCommon(const jeti::Render& render, client::Player* player) const
 {
-    for (const auto &gui_element : m_Child_vec)
-    {
-        gui_element->Render(render, player);
+    for (const auto* gui_element : m_children) {
+        gui_element->render(render, player);
     }
 }

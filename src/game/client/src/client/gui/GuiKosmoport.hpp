@@ -52,8 +52,8 @@ public:
 
     void ButtonsAction();
 
-    bool Update(const MouseData&);
-    void Render(const MouseData&);
+    bool update(const MouseData&);
+    void render(const MouseData&);
 
     void EnterGuiAngarScreen();
 

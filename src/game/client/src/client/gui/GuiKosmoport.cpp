@@ -375,7 +375,7 @@ void GuiKosmoport::ButtonsAction()
 }
 
 
-bool GuiKosmoport::Update(const MouseData& data_mouse)
+bool GuiKosmoport::update(const MouseData& data_mouse)
 {    bool interaction = false;
     /*
      UserInput::Instance().UpdateInKosmoport(m_Player);
@@ -476,7 +476,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
     return interaction;
 }
 
-void GuiKosmoport::Render(const MouseData& data_mouse)
+void GuiKosmoport::render(const MouseData& data_mouse)
 {        /*
     Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
     glm::vec2 center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);

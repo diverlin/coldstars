@@ -30,8 +30,8 @@ public:
 
     virtual ~ButtonSingle() {}
 
-    virtual void OnPressEventMBL(client::Player*) override final;
-    virtual void UpdateUnique(client::Player*) override final;
+    virtual void onPressEventMBL(client::Player*) override final;
+    virtual void _updateUnique(client::Player*) override final;
 
 private:
 

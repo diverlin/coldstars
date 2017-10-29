@@ -26,39 +26,39 @@ class Rect; // tmp  hack
 
 class Box2D
 {  
-    public:
-        Box2D();
-        Box2D(const glm::vec2&);
-        Box2D(const glm::vec2&, const glm::vec2&);
-        Box2D(const Box2D&);
-        Box2D(const Rect&); // depr
-        ~Box2D();
-        
-        void Set(const Box2D&);
-        
-        void setCenter(const glm::vec2& center)    { m_Center = center; } 
-        void setCenter(float x, float y)           { m_Center = glm::vec2(x, y); } 
-        void setSize(const glm::vec2& size)        { m_Size = size; } 
-        void setSize(float x, float y)             { m_Size = glm::vec2(x, y); } 
-        void SetScale(const glm::vec2& scale)      { m_Scale = scale; }
-        void SetScale(float x, float y)            { m_Scale = glm::vec2(x, y); }
-        void SetAngle(float angle)                 { m_Angle = angle; }
-                
-        const glm::vec2& center() const    { return m_Center; }                    
-        const glm::vec2& size() const        { return m_Size; }
-        const glm::vec2& GetScale() const        { return m_Scale; }
-        float GetAngle() const        { return m_Angle; }
-                
-        const glm::vec2 GetMiddleTop() const { return m_Center + glm::vec2(0, m_Size.y/2); }
-        
-        bool CheckInteraction(const glm::vec2&) const;    
-                                          
-    private:
-        glm::vec2 m_Center;
-        glm::vec2 m_Size;
-        glm::vec2 m_Scale;
-        
-        float m_Angle;
+public:
+    Box2D();
+    Box2D(const glm::vec2&);
+    Box2D(const glm::vec2&, const glm::vec2&);
+    Box2D(const Box2D&);
+    Box2D(const Rect&); // depr
+    ~Box2D();
+
+    void set(const Box2D&);
+
+    void setCenter(const glm::vec2& center)    { m_center = center; }
+    void setCenter(float x, float y)           { m_center = glm::vec2(x, y); }
+    void setSize(const glm::vec2& size)        { m_size = size; }
+    void setSize(float x, float y)             { m_size = glm::vec2(x, y); }
+    void setScale(const glm::vec2& scale)      { m_scale = scale; }
+    void setScale(float x, float y)            { m_scale = glm::vec2(x, y); }
+    void setAngle(float angle)                 { m_angle = angle; }
+
+    const glm::vec2& center() const    { return m_center; }
+    const glm::vec2& size() const        { return m_size; }
+    const glm::vec2& scale() const        { return m_scale; }
+    float angle() const { return m_angle; }
+
+    const glm::vec2 middleTop() const { return m_center + glm::vec2(0, m_size.y/2); }
+
+    bool checkInteraction(const glm::vec2&) const;
+
+private:
+    glm::vec2 m_center;
+    glm::vec2 m_size;
+    glm::vec2 m_scale;
+
+    float m_angle;
 };
 
 } // namespace ceti

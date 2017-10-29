@@ -21,40 +21,40 @@
 #include <client/pilot/Player.hpp>
     
 /*virtual override final*/
-void ButtonTrigger::OnPressEventMBL(client::Player* player)
+void ButtonTrigger::onPressEventMBL(client::Player* player)
 {
-    if (m_pAction)
+    if (m_action)
     {
-        m_pAction(player);
+        m_action(player);
     }
     
-    if (GetLocked() == false)
+    if (isLocked() == false)
     {
-        if (GetPressed() == false)
+        if (isPressed() == false)
         {
-            SetPressed(true);
+            _setIsPressed(true);
             ShadeOn();
         }
         else
         {
-            SetPressed(false);
-            ShadeOff();
+            _setIsPressed(false);
+            shadeOff();
         }
     }
 }
 
 /*virtual override final*/    
-void ButtonTrigger::UpdateUnique(client::Player* player)
+void ButtonTrigger::_updateUnique(client::Player* player)
 {
-    if ( (GetLocked() == false) and (GetPressed() == false) )
+    if ( (isLocked() == false) and (isPressed() == false) )
     {
-        if (m_Alpha < 1.0f)
+        if (m_alpha < 1.0f)
         {
-            m_Alpha += 0.01f;
+            m_alpha += 0.01f;
         }
         else
         {
-            m_Alpha = 1.0f;
+            m_alpha = 1.0f;
         }
     }
 }

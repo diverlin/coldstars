@@ -20,18 +20,15 @@
 #include <core/slot/ItemSlot.hpp>
     
 /* virtual override final */
-void ButtonItemSlot2::OnPressEventMBL(client::Player* player)
+void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 {
-    if (GetLocked() == false)
-    {
-        SetPressed(!GetPressed());
-    }
-    else
-    {
-        SetPressed(false);
+    if (!isLocked()) {
+        _setIsPressed(!isPressed());
+    } else {
+        _setIsPressed(false);
     }
         
-    if (GetItemSlot() != nullptr) // !!!
+    if (itemSlot()) // !!!
     {        
 //        if (GetPressed() == true)
 //        {
@@ -51,10 +48,10 @@ void ButtonItemSlot2::OnPressEventMBL(client::Player* player)
 }
 
 /* virtual override final */
-void ButtonItemSlot2::ResetState()
+void ButtonItemSlot2::resetState()
 {
-    SetPressed(false);
-    if (GetItemSlot() != nullptr)
+    _setIsPressed(false);
+    if (itemSlot() != nullptr)
     {  
 //        if (GetItemSlot()->isSelected() == true)
 //        {
@@ -64,37 +61,29 @@ void ButtonItemSlot2::ResetState()
 }
         
 /* virtual override final */    
-void ButtonItemSlot2::UpdateUnique(client::Player* player)
+void ButtonItemSlot2::_updateUnique(client::Player* player)
 {
-    UpdateAnimationProgram();
+    updateAnimationProgram();
             
-    if (IsAnimationProgramActive() == false)
-    {
-        if (GetItemSlot() != nullptr)
-        {
-            if (GetPressed() == true)
-            {
-                GetBox().SetScale(1.5, 1.5);
-            }
-            else
-            {
-                GetBox().SetScale(1.0, 1.0);        
+    if (!isAnimationProgramActive()) {
+        if (itemSlot()) {
+            if (isPressed()) {
+                box().setScale(1.5, 1.5);
+            } else {
+                box().setScale(1.0, 1.0);
             }
         }
-    }
-    else
-    {        
-        if (GetPressed() == true)
-        {
-            ResetState();
+    } else {
+        if (isPressed()){
+            resetState();
         }
     }
 }
 
 /*virtual override final*/
-void ButtonItemSlot2::RenderUnique(const jeti::Render& render, client::Player*) const
+void ButtonItemSlot2::_renderUnique(const jeti::Render& render, client::Player*) const
 {
-    if (GetItemSlot()) {
+    if (itemSlot()) {
         //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
     }
 }        
