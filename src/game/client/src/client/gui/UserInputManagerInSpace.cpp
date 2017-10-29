@@ -83,18 +83,18 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
         }
 
             //DRIVE SLOT
-        case sf::Keyboard::F: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::DRIVE_SLOT_SELECTOR); break; }
+        case sf::Keyboard::F: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::DRIVE_SLOT_SELECTOR); break; }
 
             // WEAPON SLOTS
-        case sf::Keyboard::Num1: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT1_SELECTOR); break; }
-        case sf::Keyboard::Num2: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT2_SELECTOR); break; }
-        case sf::Keyboard::Num3: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT3_SELECTOR); break; }
-        case sf::Keyboard::Num4: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT4_SELECTOR); break; }
-        case sf::Keyboard::Num5: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT5_SELECTOR); break; }
-        case sf::Keyboard::Num6: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT6_SELECTOR); break; }
-        case sf::Keyboard::Num7: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT7_SELECTOR); break; }
-        case sf::Keyboard::Num8: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT8_SELECTOR); break; }
-        case sf::Keyboard::Num9: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT9_SELECTOR); break; }
+        case sf::Keyboard::Num1: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT1_SELECTOR); break; }
+        case sf::Keyboard::Num2: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT2_SELECTOR); break; }
+        case sf::Keyboard::Num3: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT3_SELECTOR); break; }
+        case sf::Keyboard::Num4: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT4_SELECTOR); break; }
+        case sf::Keyboard::Num5: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT5_SELECTOR); break; }
+        case sf::Keyboard::Num6: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT6_SELECTOR); break; }
+        case sf::Keyboard::Num7: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT7_SELECTOR); break; }
+        case sf::Keyboard::Num8: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT8_SELECTOR); break; }
+        case sf::Keyboard::Num9: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::WEAPON_SLOT9_SELECTOR); break; }
             
         case sf::Keyboard::A:
         {
@@ -131,9 +131,9 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             client::shortcuts::camera()->setTargetPosition(player->position());
             break;
         }
-        case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::GRAPPLE_SLOT_SELECTOR); break; }
+        case sf::Keyboard::G: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::GRAPPLE_SLOT_SELECTOR); break; }
             
-        case sf::Keyboard::M: {    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::GALAXYMAP); break; }
+        case sf::Keyboard::M: {    GuiManager::get().pressEventMBL_onGuiElement(gui::type::GALAXYMAP); break; }
             
         case sf::Keyboard::R: // RADAR
         {
@@ -173,7 +173,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             break;
         }
 
-        case sf::Keyboard::F5: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::SAVE); break; }
+        case sf::Keyboard::F5: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::SAVE); break; }
             
         case sf::Keyboard::F6: // slow down GAME SPEED
         {
@@ -199,7 +199,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             break;
         }
             
-        case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::LOAD); break; }
+        case sf::Keyboard::F9: { GuiManager::get().pressEventMBL_onGuiElement(gui::type::LOAD); break; }
 
         case sf::Keyboard::K: { client::shortcuts::render()->increaseScale(); break; }
         case sf::Keyboard::L: { client::shortcuts::render()->decreaseScale(); break; }

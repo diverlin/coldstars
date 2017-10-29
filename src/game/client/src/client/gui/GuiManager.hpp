@@ -31,7 +31,7 @@ class GuiGalaxyMap;
 class GuiManager
 {
     public:
-        static GuiManager& Instance();
+        static GuiManager& get();
         ~GuiManager();
         
         void SetPlayer(client::Player*);
@@ -55,7 +55,7 @@ class GuiManager
         bool UpdateMouseInteractionWithScanVehicle(const MouseData&);             
         void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
             
-        void PressEventMBL_onGuiElement(gui::type);
+        void pressEventMBL_onGuiElement(gui::type);
         void ResetEventOnGuiElement(gui::type);
         BaseGuiElement* GetGuiElement(gui::type) const;
                 

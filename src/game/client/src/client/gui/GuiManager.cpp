@@ -41,7 +41,7 @@
 #include <client/gui/GuiGalaxyMap.hpp>
 
 
-GuiManager& GuiManager::Instance()
+GuiManager& GuiManager::get()
 {
     static GuiManager instance;
     return instance;
@@ -249,7 +249,7 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::PressEventMBL_onGuiElement(gui::type group)
+void GuiManager::pressEventMBL_onGuiElement(gui::type group)
 {
     gui_space.PressEventMBL_onGuiElement(group, player); 
 }    
