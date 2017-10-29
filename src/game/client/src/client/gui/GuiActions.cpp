@@ -33,14 +33,14 @@ void GuiActions::GalaxyMapGuiTransition(client::Player* player)
     Logger::Instance().Log("GuiActions::GalaxyMapGuiTransition", GUI_LOG_DIP);
     #endif
     
-    if (GuiManager::get().GetGuiGalaxyMap()->GetGalaxy() == nullptr)
+    if (GuiManager::get().galaxy()->GetGalaxy() == nullptr)
     {
-        GuiManager::get().GetGuiSpace().EnterGalaxyMap();
+        GuiManager::get().space().EnterGalaxyMap();
 
     }
     else
     {
-        GuiManager::get().GetGuiSpace().ExitGalaxyMap();
+        GuiManager::get().space().ExitGalaxyMap();
     }
 }
 

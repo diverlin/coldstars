@@ -41,7 +41,7 @@ public:
 
     void CheckButtonsLock();
 
-    void Render() const;
+    void render() const;
 
 private:
     int ammount_total;

@@ -57,9 +57,9 @@ m_Galaxy(nullptr)
 //    int h = core::global::get().config().height;
 int w = 400;
 int h = 300;
-    GetBox().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
+    box().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
     
-    SetTextureOb(GuiTextureObCollector::Instance().text_background);
+    setTextureOb(GuiTextureObCollector::Instance().text_background);
     m_ScaleParsecToScreenCoord = w/(float)ENTITY::GALAXY::PARSEC;
 }
 
@@ -87,7 +87,7 @@ void GuiGalaxyMap::UnbindGalaxy()
 }
         
 /* virtual override final */
-void GuiGalaxyMap::UpdateUnique(client::Player* player)
+void GuiGalaxyMap::_updateUnique(client::Player* player)
 {    
 //    const MouseData& data_mouse = player->cursor().mouseData();
     
@@ -140,9 +140,9 @@ void GuiGalaxyMap::UpdateUnique(client::Player* player)
 
 
 /* vitual override final */
-void GuiGalaxyMap::RenderUnique(const jeti::Render& render, client::Player* player) const
+void GuiGalaxyMap::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    render.drawQuad(textureOb(), GetBox());    
+    render.drawQuad(textureOb(), box());
 
 //    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
 //    {

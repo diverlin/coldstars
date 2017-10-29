@@ -32,7 +32,7 @@
 
 GuiRadar::GuiRadar()
 {
-    setSubTypeId(gui::type::GUI_RADAR);
+    _setGroup(gui::type::GUI_RADAR);
     
     m_textureOb_background        = GuiTextureObCollector::Instance().radar_background;
     m_textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
@@ -59,7 +59,7 @@ void GuiRadar::ResetData()
 }
 
 /*virtual final*/ 
-void GuiRadar::UpdateUnique(client::Player* player)
+void GuiRadar::_updateUnique(client::Player* player)
 {        
 //    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();
@@ -87,7 +87,7 @@ void GuiRadar::AddIfWithinRadarRange(control::SpaceObject* object, control::Vehi
 }             
             
 /* virtual override final */
-void GuiRadar::RenderUnique(const jeti::Render& render, client::Player* player) const
+void GuiRadar::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     assert(false);
 //    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;

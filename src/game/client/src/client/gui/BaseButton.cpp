@@ -30,80 +30,76 @@
 BaseButton::BaseButton(gui::type type_id, gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
 :
 BaseGuiElement(type_id, group, info, textureOb),
-m_Alpha(1.0f),
+m_alpha(1.0f),
 m_TextureOb_additional(nullptr),
-m_TextureOb_mask(nullptr),    
-m_pAction(pAction)
+m_textureOb_mask(nullptr),
+m_action(pAction)
 {}
 
 BaseButton::~BaseButton()
 {}
 
 /* virtual override */
-void BaseButton::ResetState()
+void BaseButton::resetState()
 {
-    SetPressed(false);
-    ShadeOff();
+    _setIsPressed(false);
+    shadeOff();
 }
 
 void BaseButton::LockOn() 
 { 
-    SetLocked(true); 
-    FullShadeOn();  
+    _setIsLocked(true);
+    fullShadeOn();
 };
 
 void BaseButton::LockOff() 
 { 
-    SetLocked(false); 
-    ShadeOff();
+    _setIsLocked(false);
+    shadeOff();
 };
 
 void BaseButton::ShadeOn() 
 {
-    m_Alpha = 0.4f; 
+    m_alpha = 0.4f;
 }
 
-void BaseButton::FullShadeOn() 
+void BaseButton::fullShadeOn()
 {
-    m_Alpha = 0.05f; 
+    m_alpha = 0.05f;
 }
 
-void BaseButton::ShadeOff() 
+void BaseButton::shadeOff()
 {
-    m_Alpha = 1.0f; 
+    m_alpha = 1.0f;
 }      
    
 /* virtual override */               
-void BaseButton::RenderInfo(const jeti::Render&) const
+void BaseButton::renderInfo(const jeti::Render&) const
 {
-    jeti::drawColoredTextWithBackground(GetInfo(), 12, GetBox().center(), glm::ivec4(255, 255, 255, 255));
+    jeti::drawColoredTextWithBackground(_info(), 12, box().center(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(const jeti::Render& render, client::Player*) const
+void BaseButton::_renderUnique(const jeti::Render& render, client::Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     
-    if (HasTextureOb() == true)
-    {
-        render.drawQuad(textureOb(), GetBox());
+    if (_hasTextureOb()) {
+        render.drawQuad(textureOb(), box());
     }
     
-    if (m_TextureOb_additional != nullptr)
-    {
-        render.drawQuad(*m_TextureOb_additional, GetBox());
+    if (m_TextureOb_additional) {
+        render.drawQuad(*m_TextureOb_additional, box());
     }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     
-    if (m_TextureOb_mask)
-    {
-        render.drawQuad(*m_TextureOb_mask, GetBox());
+    if (m_textureOb_mask) {
+        render.drawQuad(*m_textureOb_mask, box());
     }
     
-    if (GetLabel() != "")
-    {
-        glm::vec2 pos(GetBox().center().x, GetBox().center().y + GetBox().size().y);
-        client::shortcuts::screen()->drawText(GetLabel(), 12, pos);
+    if (_label() != "") {
+        glm::vec2 pos(box().center().x, box().center().y + box().size().y);
+        client::shortcuts::screen()->drawText(_label(), 12, pos);
     }
 }
         

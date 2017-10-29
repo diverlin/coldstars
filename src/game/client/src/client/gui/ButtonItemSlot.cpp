@@ -30,26 +30,26 @@
     
            
 /* virtual override final */
-void ButtonItemSlot::OnPressEventMBL(client::Player* player)
+void ButtonItemSlot::onPressEventMBL(client::Player* player)
 {
     //player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
          
 /* virtual override final */
-void ButtonItemSlot::OnPressEventMBR(client::Player* player)
+void ButtonItemSlot::onPressEventMBR(client::Player* player)
 {    
     //player->GetNpc()->vehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
 /* virtual override final */
-void ButtonItemSlot::UpdateUnique(client::Player* player)
+void ButtonItemSlot::_updateUnique(client::Player* player)
 {
-    UpdateAnimationProgram();
+    updateAnimationProgram();
 }
 
 /* virtual override final */
-void ButtonItemSlot::RenderUnique(const jeti::Render& render, client::Player* player) const
+void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
 
@@ -65,10 +65,10 @@ void ButtonItemSlot::RenderUnique(const jeti::Render& render, client::Player* pl
 }
   
 /* virtual override final */
-void ButtonItemSlot::RenderInfo(const jeti::Render& render) const
+void ButtonItemSlot::renderInfo(const jeti::Render& render) const
 {
-    if (GetItemSlot()) {
-        if (GetItemSlot()->item()) {
+    if (itemSlot()) {
+        if (itemSlot()->item()) {
             //GetItemSlot()->item()->RenderInfo(render, GetBox().center());
         } else {
             //GetItemSlot()->RenderInfo();

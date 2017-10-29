@@ -49,48 +49,48 @@ GuiManager& GuiManager::get()
 
 GuiManager::GuiManager()
 :
-player(nullptr),
-gui_vehicle_scan(nullptr)
+m_player(nullptr),
+m_vehicle(nullptr)
 {   
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
     
     /* shared gui */
     {
-        gui_vehicle_scan = new GuiVehicle();
+        m_vehicle = new GuiVehicle();
 
         glm::vec2 size(250, 250);    
-        gui_vehicle_scan->setSize(size);
+        m_vehicle->setSize(size);
     
         glm::vec2 offset(screen_w/2, screen_h/2);
-        gui_space.AddChild(gui_vehicle_scan, offset);    
+        m_space.add(m_vehicle, offset);
     } 
     
     {
-        gui_galaxymap    = new GuiGalaxyMap();
+        m_galaxymap    = new GuiGalaxyMap();
         
         glm::vec2 offset(screen_w/2, screen_h/2);
-        gui_space.AddChild(gui_galaxymap, offset);
+        m_space.add(m_galaxymap, offset);
     }
     
-    gui_skills       = new GuiSkills();
-    slider           = new Slider();  
+    m_skills       = new GuiSkills();
+    m_slider           = new Slider();
 }
 
 GuiManager::~GuiManager()
 {
     //delete gui_vehicle_scan;
-    delete gui_skills;
-    delete gui_galaxymap;
-    delete slider;  
+    delete m_skills;
+    delete m_galaxymap;
+    delete m_slider;
 }
         
 void GuiManager::SetPlayer(client::Player* player)
 {    
-    this->player = player;
+    this->m_player = player;
 }
 
-bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
+bool GuiManager::updateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
 {
     //bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
     //if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
@@ -103,7 +103,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
     return false;
 }
 
-void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
+void GuiManager::renderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {    
     //if (player->GetCursor().GetItemSlot()->item() != nullptr)
     {
@@ -123,34 +123,34 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
     }                                        
 }
 
-void GuiManager::EnterGuiKosmoport()
+void GuiManager::enterKosmoport()
 {
     //gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->vehicle()->GetLand());
     //gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
-void GuiManager::ExitGuiKosmoport()
+void GuiManager::quitKosmoport()
 {    
     //gui_kosmoport.UnbindKosmoport();
     //gui_kosmoport.UnbindSharedGuis();
 }
 
-void GuiManager::EnterGuiSpace()
+void GuiManager::enterSpace()
 {
     //gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
 
-void GuiManager::ExitGuiSpace()
+void GuiManager::quitSpace()
 {
     //gui_space.UnbindSharedGuis();
 }
              
-void GuiManager::UpdateSessionInSpace()
+void GuiManager::updateSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(gui::type::SCAN_VEHICLE);
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(gui::type::PLAYER_VEHICLE);
-    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(gui::type::GUI_RADAR);
-    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(gui::type::GALAXYMAP);
+    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
+    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
+    GuiRadar* gui_radar             = (GuiRadar*)element(gui::type::GUI_RADAR);
+    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -183,21 +183,21 @@ void GuiManager::UpdateSessionInSpace()
 //        gui_radar->Show();
 //    }
 
-    BaseGuiElement* button = GetGuiElement(gui::type::BUTTON_GALAXYMAP);
-    if (button->GetPressed())
+    BaseGuiElement* button = element(gui::type::BUTTON_GALAXYMAP);
+    if (button->isPressed())
     {
         //player->GetNpc()->ResetScanTarget();
 
-        gui_radar->Hide(); 
-        gui_player_vehicle->Hide(); 
+        gui_radar->hide();
+        gui_player_vehicle->hide();
         
-        gui_galaxymap->Show();
+        gui_galaxymap->show();
         //gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
     }
     else
     {
         gui_galaxymap->UnbindGalaxy();
-        gui_galaxymap->Hide();
+        gui_galaxymap->hide();
     }
 
     //gui_space.Update(data_mouse);
@@ -205,13 +205,13 @@ void GuiManager::UpdateSessionInSpace()
     //gui_space.RenderInfo(data_mouse);
 }
 
-void GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
+void GuiManager::runSessionInKosmoport(const MouseData& data_mouse)
 {
-    gui_kosmoport.Update(data_mouse);
-    gui_kosmoport.Render(data_mouse);
+    m_kosmoport.update(data_mouse);
+    m_kosmoport.render(data_mouse);
 }
 
-void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
+void GuiManager::runSessionInNatureLand(const MouseData& data_mouse)
 {   
     /*     
     Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
@@ -251,16 +251,16 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 
 void GuiManager::pressEventMBL_onGuiElement(gui::type group)
 {
-    gui_space.PressEventMBL_onGuiElement(group, player); 
+    m_space._pressEventMBL_onGuiElement(group, m_player);
 }    
 
-void GuiManager::ResetEventOnGuiElement(gui::type group)
+void GuiManager::resetEventOnGuiElement(gui::type group)
 {
-    gui_space.ResetStateEventOnGuiElement(group);
+    m_space._resetStateEventOnGuiElement(group);
 }    
 
-BaseGuiElement* GuiManager::GetGuiElement(gui::type request_group) const
+BaseGuiElement* GuiManager::element(gui::type request_group) const
 {
-    return gui_space.GetGuiElement(request_group);
+    return m_space.element(request_group);
 }
         

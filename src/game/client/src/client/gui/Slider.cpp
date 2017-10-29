@@ -136,7 +136,7 @@ void Slider::CheckButtonsLock()
     //else                            { GetButton(GUI::BUTTON::ACCEPT)->LockOff(); }
 }
               
-void Slider::Render() const
+void Slider::render() const
 {
     //glPushMatrix();
     //{

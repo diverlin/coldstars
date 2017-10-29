@@ -78,7 +78,7 @@ slider_shared(nullptr)
         bar_top->setSize(size);
 
         glm::vec2 offset(screen_w/2, screen_h-GUI::BAR_HEIGHT/2);
-        AddChild(bar_top, offset);    
+        add(bar_top, offset);
 
         {
             jeti::control::Material* texOb = GuiTextureObCollector::Instance().icon_map;
@@ -88,7 +88,7 @@ slider_shared(nullptr)
             galaxymap_button->setSize(size);        
             
             glm::vec2 offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0);
-            bar_top->AddChild(galaxymap_button, offset);
+            bar_top->add(galaxymap_button, offset);
         }
         
         {
@@ -99,7 +99,7 @@ slider_shared(nullptr)
             load_button->setSize(size);
             
             glm::vec2 offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
-            bar_top->AddChild(load_button, offset);                     
+            bar_top->add(load_button, offset);
         }
         
         {
@@ -110,7 +110,7 @@ slider_shared(nullptr)
             save_button->setSize(size);    
             
             glm::vec2 offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);                     
-            bar_top->AddChild(save_button, offset);    
+            bar_top->add(save_button, offset);
         }
     }
     /** */
@@ -124,7 +124,7 @@ slider_shared(nullptr)
         bar_bottom->setSize(size);
 
         glm::vec2 offset(screen_w/2, GUI::BAR_HEIGHT/2);
-        AddChild(bar_bottom, offset);    
+        add(bar_bottom, offset);
     }
         
     {
@@ -134,7 +134,7 @@ slider_shared(nullptr)
         gui_radar->setSize(size);
     
         glm::vec2 offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
-        AddChild(gui_radar, offset);    
+        add(gui_radar, offset);
     }
     
     {
@@ -144,7 +144,7 @@ slider_shared(nullptr)
         gui_vehicle_player->setSize(size);
     
         glm::vec2 offset(125, 125);
-        AddChild(gui_vehicle_player, offset);    
+        add(gui_vehicle_player, offset);
     }   
 }
 
@@ -268,7 +268,7 @@ void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 }
 
 /* virtual override final */
-void GuiSpace::UpdateUnique(client::Player* player)
+void GuiSpace::_updateUnique(client::Player* player)
 { 
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
@@ -325,7 +325,7 @@ void GuiSpace::UpdateUnique(client::Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique(const jeti::Render&, client::Player* player) const
+void GuiSpace::_renderUnique(const jeti::Render&, client::Player* player) const
 {
     //if (show_gui_radar == true)  
     //{

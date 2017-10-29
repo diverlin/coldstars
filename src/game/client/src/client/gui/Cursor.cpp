@@ -107,13 +107,13 @@ void Cursor::update(client::Player* player, const jeti::Render& render)
     switch(m_dataMouse.event()) {
     case MouseData::Event::LeftButtonPress: {
         if (m_focusedGuiElement) {
-            m_focusedGuiElement->OnPressEventMBL(player);
+            m_focusedGuiElement->onPressEventMBL(player);
         }     
         break;
     }
     case MouseData::Event::RightButtonPress: {
         if (m_focusedGuiElement) {
-            m_focusedGuiElement->OnPressEventMBR(player);
+            m_focusedGuiElement->onPressEventMBR(player);
         }    
         break;
     }
@@ -151,9 +151,9 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 
     float scale = 1.1;
     if (m_focusedGuiElement) {
-        if (m_focusedGuiElement->typeId() == gui::type::BUTTON_ITEMSLOT) {
-            ceti::Box2D box(m_focusedGuiElement->GetBox());
-            box.SetScale(scale, scale);
+        if (m_focusedGuiElement->type() == gui::type::BUTTON_ITEMSLOT) {
+            ceti::Box2D box(m_focusedGuiElement->box());
+            box.setScale(scale, scale);
 
             render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
         }
@@ -163,7 +163,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
 {
     if (m_focusedGuiElement) {
-        m_focusedGuiElement->RenderInfo(render);
+        m_focusedGuiElement->renderInfo(render);
     }
     if (m_focusedView) {
         //m_FocusedSpaceObject->RenderInfoInSpace(render, client::shortcuts::screen()->GetBottomLeftScreenWC(), client::shortcuts::screen()->GetScale());
