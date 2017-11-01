@@ -30,7 +30,10 @@
 
 #include <meti/VectorUtils.hpp>
 
-GuiRadar::GuiRadar()
+
+namespace gui {
+
+Radar::Radar()
 {
     _setGroup(gui::type::GUI_RADAR);
     
@@ -42,24 +45,24 @@ GuiRadar::GuiRadar()
     scale = RADAR_SCALE;
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
-    Resize(screen_w, screen_h);
+    resize(screen_w, screen_h);
 }
 
-GuiRadar::~GuiRadar()
+Radar::~Radar()
 {}
 
-void GuiRadar::Resize(int screen_w, int screen_h)
+void Radar::resize(int screen_w, int screen_h)
 {
     m_rect.set(0, 0, 250, 250);
 }
          
-void GuiRadar::ResetData()
+void Radar::resetData()
 {
     m_entities.clear();
 }
 
 /*virtual final*/ 
-void GuiRadar::_updateUnique(client::Player* player)
+void Radar::_updateUnique(client::Player* player)
 {        
 //    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();
@@ -73,12 +76,12 @@ void GuiRadar::_updateUnique(client::Player* player)
 //    }
 }
              
-void GuiRadar::Add(control::SpaceObject* object)
+void Radar::add(control::SpaceObject* object)
 {
     m_entities.push_back(object);
 }
 
-void GuiRadar::AddIfWithinRadarRange(control::SpaceObject* object, control::Vehicle* vehicle)
+void Radar::addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
 {
 //    if (vehicle.IsObjectWithinRadarRange(object) == true)
 //    {
@@ -87,7 +90,7 @@ void GuiRadar::AddIfWithinRadarRange(control::SpaceObject* object, control::Vehi
 }             
             
 /* virtual override final */
-void GuiRadar::_renderUnique(const jeti::Render& render, client::Player* player) const
+void Radar::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     assert(false);
 //    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;
@@ -144,3 +147,5 @@ void GuiRadar::_renderUnique(const jeti::Render& render, client::Player* player)
     }
     //render.disable_POINTSPRITE(); 
 }
+
+} // namespace gui
