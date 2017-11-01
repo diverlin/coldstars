@@ -37,10 +37,10 @@ Radar::Radar()
 {
     _setGroup(gui::type::GUI_RADAR);
     
-    setMaterial(new jeti::control::Material(MaterialCollector::get().radar_background));
-    m_textureOb_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);
-    m_textureOb_screenrect = new jeti::control::Material(MaterialCollector::get().radar_screenrect);
-    m_textureOb_range = new jeti::control::Material(MaterialCollector::get().radar_range);
+    m_material_background = new jeti::control::Material(MaterialCollector::get().radar_background);
+    m_material_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);
+    m_material_screenrect = new jeti::control::Material(MaterialCollector::get().radar_screenrect);
+    m_material_range = new jeti::control::Material(MaterialCollector::get().radar_range);
         
     m_scale = RADAR_SCALE;
     int screen_w = client::shortcuts::screen()->width();
@@ -50,9 +50,9 @@ Radar::Radar()
 
 Radar::~Radar()
 {
-    delete m_textureOb_bar;
-    delete m_textureOb_screenrect;
-    delete m_textureOb_range;
+    delete m_material_bar;
+    delete m_material_screenrect;
+    delete m_material_range;
 }
 
 void Radar::resize(int screen_w, int screen_h)
@@ -67,7 +67,11 @@ void Radar::resetData()
 
 /*virtual final*/ 
 void Radar::_updateUnique(client::Player* player)
-{        
+{
+    float range_diameter = 2*player->npc()->vehicle()->properties().radar;
+    box().setSize(range_diameter, range_diameter);
+    box().setCenter(0, 800);
+
 //    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();
 //    if (m_rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
@@ -95,17 +99,15 @@ void Radar::addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
 /* virtual override final */
 void Radar::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    assert(false);
-//    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;
-//    ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
+    m_material_background->load();
+    render.drawQuadHUD(*m_material_background, box());
+//    /range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
     
-//    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
-    
-    //drawTexturedRect(textureOb_background, rect, -2.0);
-    //drawTexturedRect(textureOb_bar, rect, -2.0);
-    //drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
-    //drawTexturedRect(textureOb_range, range_rect, -2.0);
-            
+//    drawTexturedRect(textureOb_background, rect, -2.0);
+//    drawTexturedRect(textureOb_bar, rect, -2.0);
+//    drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
+//    drawTexturedRect(textureOb_range, range_rect, -2.0);
+          return;
     float size, size_base = 7;
     {         
         for (const auto& entity: m_entities) {

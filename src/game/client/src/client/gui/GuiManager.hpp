@@ -46,10 +46,10 @@ public:
     GuiKosmoport& kosmoport() { return m_kosmoport; }
     Space& space() { return m_space; }
 
-    GuiVehicle* vehicle() const { return m_vehicle; }
+    Vehicle* vehicle() const { return m_vehicle; }
     GuiGalaxyMap* galaxy() const { return m_galaxymap; }
 
-    void runSessionInSpace(const jeti::Render& render, client::Player* player);
+    void runSessionInSpace(jeti::Render& render, client::Player* player);
     void runSessionInKosmoport(const MouseData&);
     void runSessionInNatureLand(const MouseData&);
 
@@ -80,7 +80,7 @@ private:
     GuiNatureLand m_natureland;
 
     // shared guis
-    GuiVehicle* m_vehicle = nullptr;
+    Vehicle* m_vehicle = nullptr;
     GuiGalaxyMap* m_galaxymap = nullptr;
 
     GuiSkills* m_skills = nullptr;

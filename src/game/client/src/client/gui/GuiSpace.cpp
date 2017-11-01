@@ -151,7 +151,7 @@ Space::Space()
 Space::~Space()
 {}
 
-void Space::bindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
+void Space::bindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, Vehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
     m_galaxymapShared = gui_galaxymap_shared;
     //this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
