@@ -37,10 +37,10 @@ Radar::Radar()
 {
     _setGroup(gui::type::GUI_RADAR);
     
-    setMaterial(MaterialCollector::get().radar_background);
-    m_textureOb_bar        = MaterialCollector::get().radar_bar;
-    m_textureOb_screenrect = MaterialCollector::get().radar_screenrect;
-    m_textureOb_range      = MaterialCollector::get().radar_range;
+    setMaterial(new jeti::control::Material(MaterialCollector::get().radar_background));
+    m_textureOb_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);
+    m_textureOb_screenrect = new jeti::control::Material(MaterialCollector::get().radar_screenrect);
+    m_textureOb_range = new jeti::control::Material(MaterialCollector::get().radar_range);
         
     m_scale = RADAR_SCALE;
     int screen_w = client::shortcuts::screen()->width();
@@ -49,7 +49,11 @@ Radar::Radar()
 }
 
 Radar::~Radar()
-{}
+{
+    delete m_textureOb_bar;
+    delete m_textureOb_screenrect;
+    delete m_textureOb_range;
+}
 
 void Radar::resize(int screen_w, int screen_h)
 {
@@ -108,27 +112,27 @@ void Radar::_renderUnique(const jeti::Render& render, client::Player* player) co
             switch(entity->descriptor()->obType())
             {
                 case entity::Type::STAR: {
-                    glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_yellow->model()->texture);
+                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_yellow->model()->texture);
                     size = 2*size_base;
                     break;
                 }
                 case entity::Type::PLANET: {
-                    glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_blue->model()->texture);
+                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_blue->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case entity::Type::ASTEROID: {
-                    glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_red->model()->texture);
+                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_red->model()->texture);
                     size = 1.25*size_base;
                     break;                
                 }
                 case entity::Type::WORMHOLE: {
-                    glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_purple->model()->texture);
+                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_purple->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case entity::Type::VEHICLE: {
-                    glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_green->model()->texture);
+                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_green->model()->texture);
                     size = 1*size_base;
                     break;                
                 }

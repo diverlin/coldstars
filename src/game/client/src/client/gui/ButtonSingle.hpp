@@ -25,18 +25,22 @@ namespace gui {
 class ButtonSingle : public BaseButton
 {
 public:
-    ButtonSingle(gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
+    ButtonSingle(gui::type group,
+                 const std::string& info,
+                 void (*pAction)(client::Player*),
+                 jeti::model::Material* material)
         :
-          BaseButton(gui::type::BUTTON_SINGLE, group, info, pAction, textureOb)
+          BaseButton(gui::type::BUTTON_SINGLE,
+                     group,
+                     info,
+                     pAction,
+                     material)
     {}
 
     virtual ~ButtonSingle() {}
 
     virtual void onPressEventMBL(client::Player*) override final;
     virtual void _updateUnique(client::Player*) override final;
-
-private:
-
 };
 
 } // namespace gui

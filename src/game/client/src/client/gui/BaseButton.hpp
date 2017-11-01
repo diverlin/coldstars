@@ -30,7 +30,11 @@ namespace gui {
 class BaseButton : public Base
 {
 public:
-    BaseButton(gui::type, gui::type, const std::string&,void (*pAction)(client::Player*) = nullptr, jeti::control::Material* material = nullptr);
+    BaseButton(gui::type,
+               gui::type,
+               const std::string&,
+               void (*pAction)(client::Player*) = nullptr,
+               jeti::model::Material* material = nullptr);
     virtual ~BaseButton();
 
     void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }

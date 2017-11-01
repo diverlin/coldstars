@@ -50,6 +50,8 @@ Cursor::Cursor()
     
     m_box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
+    m_markTargetMaterial = new jeti::control::Material(MaterialCollector::get().mark_target);
+
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK, "attack");  
     //button_map.insert(std::make_pair(button->subTypeId(), button));
@@ -83,6 +85,7 @@ Cursor::Cursor()
 /* virtual */
 Cursor::~Cursor()
 {
+    delete m_markTargetMaterial;
     delete m_itemSlot;
 }
 
@@ -155,7 +158,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
             ceti::Box2D box(m_focusedGuiElement->box());
             box.setScale(scale, scale);
 
-            render.drawQuad(*MaterialCollector::get().mark_target, box);
+            render.drawQuad(*m_markTargetMaterial, box);
         }
     }
 }

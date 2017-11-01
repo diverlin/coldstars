@@ -72,8 +72,7 @@ slider_shared(nullptr)
     
     /** Top bar */
     {
-        jeti::control::Material* textureOb_bar_top = MaterialCollector::get().bar_top;
-        GuiBar* bar_top = new GuiBar(textureOb_bar_top);
+        GuiBar* bar_top = new GuiBar(MaterialCollector::get().bar_top);
     
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_top->setSize(size);
@@ -82,8 +81,10 @@ slider_shared(nullptr)
         add(bar_top, offset);
 
         {
-            jeti::control::Material* texOb = MaterialCollector::get().icon_map;
-            ButtonTrigger* galaxymap_button = new ButtonTrigger(gui::type::BUTTON_GALAXYMAP, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
+            ButtonTrigger* galaxymap_button = new ButtonTrigger(gui::type::BUTTON_GALAXYMAP,
+                                                                "galaxy map",
+                                                                GuiActions::GalaxyMapGuiTransition,
+                                                                MaterialCollector::get().icon_map);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
             galaxymap_button->setSize(size);        
@@ -93,8 +94,10 @@ slider_shared(nullptr)
         }
         
         {
-            jeti::control::Material* texOb = MaterialCollector::get().icon_plus;
-            ButtonSingle* load_button = new ButtonSingle(gui::type::LOAD, "load", GuiActions::LoadEvent, texOb);
+            ButtonSingle* load_button = new ButtonSingle(gui::type::LOAD,
+                                                         "load",
+                                                         GuiActions::LoadEvent,
+                                                         MaterialCollector::get().icon_plus);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             load_button->setSize(size);
@@ -104,8 +107,10 @@ slider_shared(nullptr)
         }
         
         {
-            jeti::control::Material* texOb = MaterialCollector::get().icon_minus;
-            ButtonSingle* save_button = new ButtonSingle(gui::type::SAVE, "save", GuiActions::SaveEvent, texOb);
+            ButtonSingle* save_button = new ButtonSingle(gui::type::SAVE,
+                                                         "save",
+                                                         GuiActions::SaveEvent,
+                                                         MaterialCollector::get().icon_minus);
 
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             save_button->setSize(size);    
@@ -118,8 +123,7 @@ slider_shared(nullptr)
     
     /** Bottom bar */
     {
-        jeti::control::Material* textureOb_bar_bottom = MaterialCollector::get().bar_bottom;
-        GuiBar* bar_bottom = new GuiBar(textureOb_bar_bottom);
+        GuiBar* bar_bottom = new GuiBar(MaterialCollector::get().bar_bottom);
 
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_bottom->setSize(size);

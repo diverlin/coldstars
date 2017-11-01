@@ -25,16 +25,21 @@ namespace gui {
 class ButtonTrigger : public BaseButton
 {
 public:
-    ButtonTrigger(gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
+    ButtonTrigger(gui::type group,
+                  const std::string& info,
+                  void (*pAction)(client::Player*),
+                  jeti::model::Material* material)
         :
-          BaseButton(gui::type::BUTTON_TRIGGER, group, info, pAction, textureOb) {}
+          BaseButton(gui::type::BUTTON_TRIGGER,
+                     group,
+                     info,
+                     pAction,
+                     material) {}
 
     virtual ~ButtonTrigger() override final {}
 
     virtual void onPressEventMBL(client::Player*) override final;
     virtual void _updateUnique(client::Player*) override final;
-
-private:
 };
 
 } // namespace gui
