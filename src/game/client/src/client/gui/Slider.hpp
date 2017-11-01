@@ -53,7 +53,7 @@ private:
 
     ceti::Rect rect;
     ceti::Rect rect_slide;
-    jeti::control::Material* textureOb;
+    jeti::control::Material* material;
     jeti::control::Material* textureOb_scale;
 };
 

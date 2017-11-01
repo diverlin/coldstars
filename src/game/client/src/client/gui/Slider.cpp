@@ -39,7 +39,7 @@ Slider::Slider()
     //type_id = GUI::TYPE::SLIDER;
     //group = GUI::TYPE::NONE;
     
-    textureOb = GuiTextureObCollector::Instance().text_background;
+    material = GuiTextureObCollector::Instance().text_background;
     textureOb_scale = TextureCollector::get().getTextureByTypeId(texture::Type::LAZER_EFFECT);
     
     //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE, "slide");  

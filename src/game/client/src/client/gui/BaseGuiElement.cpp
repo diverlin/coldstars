@@ -34,13 +34,8 @@ Base::Base(gui::type type_id, gui::type group, const std::string& info, jeti::co
 :
 m_type(type_id),
 m_group(group),
-m_textureOb(textureOb),
-m_info(info),
-m_isLocked(false),
-m_isPressed(false),
-m_isVisible(true),
-m_isRoot(true),
-m_animationProgram(nullptr)
+m_material(textureOb),
+m_info(info)
 {}
 
 /* virtual */
@@ -51,14 +46,14 @@ Base::~Base()
         //delete *it;
     //}
     
-    delete m_animationProgram;
+    delete m_animation;
 }    
  
 void Base::_deleteAnimationProgram()
 {
-    if (m_animationProgram != nullptr) {
-        delete m_animationProgram;
-        m_animationProgram = nullptr;
+    if (m_animation != nullptr) {
+        delete m_animation;
+        m_animation = nullptr;
     }
 }
 
@@ -97,7 +92,7 @@ void Base::resetState()
 
 void Base::add(Base* child, const glm::vec2& offset)
 { 
-    child->SetOffset(offset);
+    child->__setOffset(offset);
     child->_setIsRoot(false);
     
     m_children.push_back(child);
@@ -112,8 +107,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
     }
     
     Base* child_interacted = nullptr;
-    for (const auto &child : m_children)
-    {
+    for (const auto &child : m_children) {
         child_interacted = child->updateMouseInteraction(mouse_pos);
         if (child_interacted) {
             return child_interacted;
@@ -131,8 +125,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
 
 void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
 {
-    if (!m_isVisible)
-    {
+    if (!m_isVisible) {
         return;
     }
     
@@ -142,21 +135,18 @@ void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& pare
     m_box.setCenter(next_offset);
     m_box.setScale(next_scale);
             
-    for (auto &child : m_children)
-    {
+    for (auto &child : m_children) {
         child->_updateGeometry(next_offset, next_scale);
     }
 }
 
 void Base::update(client::Player* player)
 {
-    if (!m_isVisible)
-    {
+    if (!m_isVisible) {
         return;
     }
     
-    if (m_isRoot)
-    {
+    if (m_isRoot) {
         _updateGeometry(m_offset, glm::vec2(1,1));
     }
     
@@ -174,21 +164,18 @@ void Base::_updateCommon(client::Player* player)
         child->update(player);
     }
     
-    if (m_animationProgram != nullptr)
-       {    
-           m_animationProgram->Update(m_box);
-       }
+    if (m_animation) {
+        m_animation->Update(m_box);
+    }
 }
 
 void Base::render(const jeti::Render& render, client::Player* player) const
 {
-    if (!m_isVisible)
-    {
+    if (!m_isVisible) {
         return;
     }
     
-    if (m_isRoot)
-    {
+    if (m_isRoot) {
         //resetRenderTransformation();
     }
     
@@ -203,8 +190,8 @@ void Base::render(const jeti::Render& render, client::Player* player) const
 /* virtual */
 void Base::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    if (m_textureOb) {
-        render.drawQuad(*m_textureOb, m_box);
+    if (m_material) {
+        render.drawQuad(*m_material, m_box);
     }
 }
 
