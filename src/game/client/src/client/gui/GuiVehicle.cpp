@@ -34,7 +34,7 @@
 
 namespace gui {
 
-GuiVehicle::GuiVehicle()
+Vehicle::Vehicle()
 :
 Base(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
 m_vehicle(nullptr)
@@ -190,10 +190,10 @@ m_vehicle(nullptr)
     m_blockManualExit  = false;
 }
 
-GuiVehicle::~GuiVehicle()
+Vehicle::~Vehicle()
 {}
 
-void GuiVehicle::bindVehicle(control::Vehicle* vehicle, const glm::vec2& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
+void Vehicle::bindVehicle(control::Vehicle* vehicle, const glm::vec2& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
     m_vehicle = vehicle;
      
@@ -204,7 +204,7 @@ void GuiVehicle::bindVehicle(control::Vehicle* vehicle, const glm::vec2& gui_off
     createItemSlotsGeometry(vehicle, scale);
 }
 
-void GuiVehicle::unbindVehicle()
+void Vehicle::unbindVehicle()
 { 
     for (auto* child : _children()) {
         child->hide();
@@ -214,7 +214,7 @@ void GuiVehicle::unbindVehicle()
     m_vehicle = nullptr;
 }
 
-void GuiVehicle::createKorpusGui(control::Vehicle* vehicle, float scale)
+void Vehicle::createKorpusGui(control::Vehicle* vehicle, float scale)
 {
     setMaterial(new jeti::control::Material(MaterialCollector::get().radar_range));
 
@@ -224,7 +224,7 @@ void GuiVehicle::createKorpusGui(control::Vehicle* vehicle, float scale)
     box().setSize(kontur_w * scale, kontur_h * scale);
 }      
   
-void GuiVehicle::createItemSlotsGeometry(control::Vehicle* vehicle, float scale)
+void Vehicle::createItemSlotsGeometry(control::Vehicle* vehicle, float scale)
 {
     assert(false);
 //    for (const auto itemslot : vehicle->m_slots)
@@ -336,7 +336,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 */   
      
 /* virtual override final */
-void GuiVehicle::_renderUnique(const jeti::Render& render, client::Player* player) const
+void Vehicle::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     //enable_BLEND(); 
     //{

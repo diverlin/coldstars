@@ -198,7 +198,7 @@ void Base::render(const jeti::Render& render, client::Player* player) const
 void Base::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     if (m_material) {
-        render.drawQuad(*m_material, m_box);
+        render.drawQuadHUD(*m_material, m_box);
     }
 }
 

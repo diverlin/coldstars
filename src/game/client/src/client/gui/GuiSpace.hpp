@@ -28,7 +28,7 @@ class Renderer;
 
 namespace gui {
 
-class GuiVehicle;
+class Vehicle;
 class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
@@ -43,7 +43,7 @@ public:
 
     //GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 
-    void bindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+    void bindSharedGuis(GuiGalaxyMap*, Vehicle*, GuiSkills*, Slider*);
     void unbindSharedGuis();
 
     void resize(int, int);

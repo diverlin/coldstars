@@ -233,7 +233,7 @@ void Render::init(Camera* camera, int w, int h)
 
     glShadeModel(GL_SMOOTH);
 
-    setOrthogonalProjection();
+    applyOrthogonalProjection();
 
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
@@ -365,15 +365,21 @@ void Render::setPerspectiveProjection()
 
 /* used for parallax (bg), to decrease affection on scale by scaleFactor
  * */
-void Render::setOrthogonalProjection(float scaleFactor)
+void Render::applyOrthogonalProjection(float scaleFactor)
 {
     m_scale = 1.0f + scaleFactor*m_scaleBase;
     __setOrthogonalProjection();
 }
 
-void Render::setOrthogonalProjection()
+void Render::applyOrthogonalProjection()
 {        
     m_scale = m_scaleBase;
+    __setOrthogonalProjection();
+}
+
+void Render::applyOrthogonalProjectionForHUD()
+{
+    m_scale = 1.0f;
     __setOrthogonalProjection();
 }
 
@@ -404,27 +410,27 @@ void Render::drawQuadAdditive(const control::Material& material, const glm::mat4
     drawMesh(*m_meshQuadAdditive, material, ModelMatrix, color);
 }
 
-void Render::drawQuad(const control::Material& material, const ceti::Box2D& box) const
+void Render::drawQuadHUD(const control::Material& material, const ceti::Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.center();
     glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
      
-    glm::quat Qx, Qy, Qz;
+//    glm::quat Qx, Qy, Qz;
     
     //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
     //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
     //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
        
-    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
+//    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
     
     glm::vec2 size = box.size()*box.scale();
     glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
       
-    glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
+    glm::mat4 ModelMatrix = TranslationMatrix /* * RotationMatrix */ * ScaleMatrix;
     // ugly end
 
-    drawMesh(*m_meshQuad, material, ModelMatrix);
+    drawMeshForHUD(*m_meshQuad, material, ModelMatrix);
 }
 
 void Render::__drawMesh(const Mesh& mesh) const {
@@ -480,7 +486,7 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
     }
 }
 
-void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& modelMatrix, const glm::vec4& color) const
+void Render::drawMesh(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {	
     __useProgram(m_shaders.basetexture);
     {
@@ -490,7 +496,23 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& textureOb, cons
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
+
+        __drawMesh(mesh);
+    }
+}
+void Render::drawMeshForHUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+{
+    __useProgram(m_shaders.basetexture);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+        glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
 
         __drawMesh(mesh);

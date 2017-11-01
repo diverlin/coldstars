@@ -26,7 +26,7 @@
 
 namespace gui {
 
-class GuiVehicle;
+class Vehicle;
 class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
@@ -41,7 +41,7 @@ public:
     void BindKosmoport(control::Kosmoport*);
     void UnbindKosmoport();
 
-    void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+    void BindSharedGuis(GuiGalaxyMap*, Vehicle*, GuiSkills*, Slider*);
     void UnbindSharedGuis();
 
     void EnterGuiScanInAngar();
@@ -50,7 +50,7 @@ public:
     void EnterGuiStoreScreen();
     void ExitGuiStoreScreen();
 
-    bool GetInitDone() const { return init_done; }
+    bool GetInitDone() const { return m_initialized; }
 
     void ButtonsAction();
 
@@ -60,9 +60,9 @@ public:
     void EnterGuiAngarScreen();
 
 private:
-    bool init_done;
+    bool m_initialized = false;
 
-    int active_screen_id;
+    int m_activeScreenId;
 
     control::Kosmoport* m_kosmoport = nullptr;
 
@@ -72,7 +72,7 @@ private:
     GuiGoverment m_gui_goverment;
 
     GuiGalaxyMap* m_gui_galaxymap_shared = nullptr;
-    GuiVehicle* m_gui_vehicle_scan_shared = nullptr;
+    Vehicle* m_gui_vehicle_scan_shared = nullptr;
     GuiSkills* m_gui_skills_shared = nullptr;
     Slider* m_slider_shared = nullptr;
 

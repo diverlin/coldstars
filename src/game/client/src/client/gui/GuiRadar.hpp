@@ -54,10 +54,10 @@ public:
 private:
     float m_scale = 1.0f;
 
-    jeti::control::Material* m_textureOb_background = nullptr;
-    jeti::control::Material* m_textureOb_bar = nullptr;
-    jeti::control::Material* m_textureOb_screenrect = nullptr;
-    jeti::control::Material* m_textureOb_range = nullptr;
+    jeti::control::Material* m_material_background = nullptr;
+    jeti::control::Material* m_material_bar = nullptr;
+    jeti::control::Material* m_material_screenrect = nullptr;
+    jeti::control::Material* m_material_range = nullptr;
 
     ceti::Rect m_rect;
     ceti::Rect m_screenrect;

@@ -30,11 +30,11 @@ class MouseData; // to be removed
 
 namespace gui {
 
-class GuiVehicle : public Base
+class Vehicle : public Base
 {
 public:
-    GuiVehicle();
-    virtual ~GuiVehicle();
+    Vehicle();
+    virtual ~Vehicle();
 
     control::Vehicle* vehicle() const { return m_vehicle; }
     bool blockManualExit() const { return m_blockManualExit; }

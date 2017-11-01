@@ -95,9 +95,7 @@ namespace model {
 Material::Material(const std::string& path)
     :
       texture_path(path)
-{
-    use_alpha = true;
-}
+{}
 
 Material::Material(ceti::descriptor::Material* descriptor)
 {

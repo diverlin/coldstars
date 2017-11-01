@@ -56,7 +56,7 @@ Manager::Manager()
     
     /* shared gui */
     {
-        m_vehicle = new GuiVehicle();
+        m_vehicle = new Vehicle();
 
         glm::vec2 size(250, 250);    
         m_vehicle->setSize(size);
@@ -144,9 +144,9 @@ void Manager::quitSpace()
     //gui_space.UnbindSharedGuis();
 }
              
-void Manager::runSessionInSpace(const jeti::Render& render, client::Player* player)
+void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
 {
-    GuiVehicle* gui_scan_vehicle = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
+    Vehicle* gui_scan_vehicle = (Vehicle*)element(gui::type::SCAN_VEHICLE);
     GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
     gui::Radar* gui_radar = static_cast<gui::Radar*>(element(gui::type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
@@ -187,6 +187,7 @@ void Manager::runSessionInSpace(const jeti::Render& render, client::Player* play
         gui_galaxymap->hide();
     }
 
+    render.applyOrthogonalProjectionForHUD();
     //m_space.update(data_mouse);
     m_space.render(render, player);
     //gui_space.RenderInfo(data_mouse);

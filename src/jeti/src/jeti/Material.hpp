@@ -67,7 +67,7 @@ public:
     bool is_animated = false;
     bool is_loaded = false;
     bool is_shared = false;
-    bool use_alpha = false;
+    bool use_alpha = true;
 
     std::vector<glm::vec2> texCoord_bottomLeft_vec;
     std::vector<glm::vec2> texCoord_bottomRight_vec;

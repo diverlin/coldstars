@@ -158,7 +158,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
             ceti::Box2D box(m_focusedGuiElement->box());
             box.setScale(scale, scale);
 
-            render.drawQuad(*m_markTargetMaterial, box);
+            render.drawQuadHUD(*m_markTargetMaterial, box);
         }
     }
 }

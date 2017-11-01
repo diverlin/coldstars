@@ -90,16 +90,16 @@ void BaseButton::_renderUnique(const jeti::Render& render, client::Player*) cons
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     
     if (_hasTextureOb()) {
-        render.drawQuad(material(), box());
+        render.drawQuadHUD(material(), box());
     }
     
     if (m_TextureOb_additional) {
-        render.drawQuad(*m_TextureOb_additional, box());
+        render.drawQuadHUD(*m_TextureOb_additional, box());
     }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     
     if (m_textureOb_mask) {
-        render.drawQuad(*m_textureOb_mask, box());
+        render.drawQuadHUD(*m_textureOb_mask, box());
     }
     
     if (_label() != "") {

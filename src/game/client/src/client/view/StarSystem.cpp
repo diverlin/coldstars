@@ -713,7 +713,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     }
 
     // projection
-    render.setOrthogonalProjection(0.2f);
+    render.applyOrthogonalProjection(0.2f);
 
     if (m_player->show().backgroundFbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
@@ -738,7 +738,7 @@ void StarSystem::__renderStarPostEffect(jeti::Render& render) const {
     }
 
     // projection
-    render.setOrthogonalProjection();
+    render.applyOrthogonalProjection();
 
     render.drawStar(render.fboBackGround().colorBuffer());
 }
@@ -749,7 +749,7 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
 
     // projections
-    render.setOrthogonalProjection();
+    render.applyOrthogonalProjection();
 
     for(Star* star: m_stars) {
         star->update();
@@ -814,7 +814,7 @@ void StarSystem::__renderSpaceObjectsMeta(jeti::Render& render) const {
     }
 
     // projection
-    render.setOrthogonalProjection();
+    render.applyOrthogonalProjection();
 
     if (m_player->show().collisionRadius()) {
         __drawCollisionRadius(render);
@@ -830,7 +830,6 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
     }
 
     gui::Manager::get().runSessionInSpace(render, m_player);
-    //    //m_cursor.RenderItem();
 
     gui::UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
     if (m_guiDemo) {
@@ -859,7 +858,7 @@ void StarSystem::__renderExperiment(jeti::Render& render) const {
     }
 
     // projection
-    render.setOrthogonalProjection();
+    render.applyOrthogonalProjection();
 }
 
 void StarSystem::__render(jeti::Render& render)
@@ -1060,7 +1059,7 @@ void StarSystem::__render_DEPRECATED(jeti::Render& render)
             {
                 //render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
-                render.setOrthogonalProjection();
+                render.applyOrthogonalProjection();
 
                 assert(m_stars.size());
                 for(Star* star: m_stars) {
