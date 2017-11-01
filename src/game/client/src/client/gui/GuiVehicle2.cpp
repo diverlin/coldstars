@@ -40,10 +40,10 @@ m_vehicle(nullptr)
 
 void GuiVehicle2::Reset()
 {
-    for (auto* child: m_children) {
+    for (auto* child: _children()) {
         delete child;
     }
-    m_children.clear();
+    _children().clear();
     
     m_vehicle = nullptr;
 }

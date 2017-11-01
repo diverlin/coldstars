@@ -44,12 +44,15 @@ namespace gui {
 class Base
 {
 public:
-    Base(gui::type type_id=gui::type::NONE, gui::type group=gui::type::NONE, const std::string& _info="", jeti::control::Material* textureOb=nullptr);
+    Base(gui::type type_id=gui::type::NONE,
+         gui::type group=gui::type::NONE,
+         const std::string& _info="",
+         jeti::control::Material* material=nullptr);
     virtual ~Base();
 
     void setLabel(const std::string& label) { m_label = label; }
 
-    void setTextureOb(jeti::control::Material* textureOb) { m_textureOb = textureOb; }
+    void setMaterial(jeti::control::Material* textureOb) { m_material = textureOb; }
 
     void setSize(glm::vec2 size) { m_box.setSize(size); }
 
@@ -59,12 +62,12 @@ public:
     const ceti::Box2D& box() const { return m_box; }
     ceti::Box2D& box() { return m_box; } // !!!
 
-    const jeti::control::Material& textureOb() const { return *m_textureOb; }
+    const jeti::control::Material& material() const { return *m_material; }
 
     bool isLocked() const { return m_isLocked; }
     bool isPressed() const { return m_isPressed; }
 
-    bool isAnimationProgramActive() const { return (m_animationProgram != nullptr); }
+    bool isAnimationProgramActive() const { return (m_animation != nullptr); }
 
     Base* element(gui::type) const;
 
@@ -81,11 +84,9 @@ public:
 
     void update(client::Player*);
     void render(const jeti::Render&, client::Player*) const;
-    virtual void renderInfo(const jeti::Render&) const {};
+    virtual void renderInfo(const jeti::Render&) const {}
 
 protected:
-    std::vector<Base*> m_children;
-
     void _setGroup(gui::type group) { m_group = group; }
 
     void _setBox(const ceti::Box2D& box) { m_box = box; }
@@ -95,14 +96,14 @@ protected:
     void _setIsPressed(bool pressed) { m_isPressed = pressed; }
     void _setIsLocked(bool locked) { m_isLocked = locked; }
 
-    void _setAnimationProgram(jeti::AnimationEffect2D* animation_program) { m_animationProgram = animation_program; }
+    void _setAnimationProgram(jeti::AnimationEffect2D* animation_program) { m_animation = animation_program; }
 
-    bool _hasTextureOb() const { return (m_textureOb != nullptr); }
+    bool _hasTextureOb() const { return (m_material != nullptr); }
 
     const std::string& _info() const { return m_info; }
     const std::string& _label() const { return m_label; }
 
-    bool _animationProgramActive() const { return (m_animationProgram != nullptr); }
+    bool _animationProgramActive() const { return (m_animation != nullptr); }
     void _deleteAnimationProgram();
 
     void _pressEventMBL_onGuiElement(gui::type, client::Player*);
@@ -116,11 +117,16 @@ protected:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const;
     void _renderCommon(const jeti::Render&, client::Player*) const;
 
+    std::vector<Base*>& _children() { return m_children; }
+
 private:
+    static std::map<gui::type, Base*> m_elements;
+    std::vector<Base*> m_children;
+
     gui::type m_type;
     gui::type m_group;
 
-    jeti::control::Material* m_textureOb = nullptr;
+    jeti::control::Material* m_material = nullptr;
 
     std::string m_info;
     std::string m_label;
@@ -133,12 +139,10 @@ private:
     bool m_isRoot = false;
 
     glm::vec2 m_offset;
-    jeti::AnimationEffect2D* m_animationProgram = nullptr;
+    jeti::AnimationEffect2D* m_animation = nullptr;
 
-    static std::map<gui::type, Base*> m_elements;
-
-    void SetOffset(const glm::vec2& offset) { m_offset = offset; }
-    void SetOffset(float x, float y) { m_offset.x = x; m_offset.y = y; }
+    void __setOffset(const glm::vec2& offset) { m_offset = offset; }
+    void __setOffset(float x, float y) { m_offset.x = x; m_offset.y = y; }
 
     friend class GuiManager;
 };

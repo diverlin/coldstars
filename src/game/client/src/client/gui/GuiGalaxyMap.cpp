@@ -60,7 +60,7 @@ int w = 400;
 int h = 300;
     box().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
     
-    setTextureOb(GuiTextureObCollector::Instance().text_background);
+    setMaterial(GuiTextureObCollector::Instance().text_background);
     m_ScaleParsecToScreenCoord = w/(float)ENTITY::GALAXY::PARSEC;
 }
 
@@ -143,7 +143,7 @@ void GuiGalaxyMap::_updateUnique(client::Player* player)
 /* vitual override final */
 void GuiGalaxyMap::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    render.drawQuad(textureOb(), box());
+    render.drawQuad(material(), box());
 
 //    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
 //    {

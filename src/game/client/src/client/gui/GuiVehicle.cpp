@@ -206,7 +206,7 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const glm::vec2& gui_offset, bool
 
 void GuiVehicle::UnbindVehicle()
 { 
-    for (auto* child : m_children) {
+    for (auto* child : _children()) {
         child->hide();
         ((ButtonItemSlot*)child)->SetItemSlot(nullptr);
     }
@@ -216,7 +216,7 @@ void GuiVehicle::UnbindVehicle()
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-    setTextureOb(GuiTextureObCollector::Instance().radar_range);
+    setMaterial(GuiTextureObCollector::Instance().radar_range);
 
     float kontur_w = 400;
     float kontur_h = 400;           
