@@ -66,6 +66,7 @@
 #include <client/gui/info/Camera.hpp>
 #include <client/gui/info/Renderer.hpp>
 #include <client/gui/GuiDemo.hpp>
+#include <client/gui/GuiManager.hpp>
 #include <client/resources/Utils.hpp>
 #include <client/pilot/Player.hpp>
 #include <client/session/Shortcuts.hpp>
@@ -827,6 +828,9 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
     if (!m_player->show().hud()) {
         return;
     }
+
+    gui::Manager::get().runSessionInSpace(render, m_player);
+    //    //m_cursor.RenderItem();
 
     gui::UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
     if (m_guiDemo) {

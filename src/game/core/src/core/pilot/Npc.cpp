@@ -273,7 +273,7 @@ bool Npc::isAbleToScan(Vehicle* vehicle)
 }
 
 
-void Npc::resetScanTarget() { assert(false); /*m_scanTarget = nullptr;*/ }
+void Npc::resetScanTarget() { m_scanTarget = nullptr; }
 //// *********** SCANNING ***********
 
 

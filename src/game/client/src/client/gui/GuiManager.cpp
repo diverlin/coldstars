@@ -21,6 +21,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include <core/slot/ItemSlot.hpp>
 #include <core/dock/Kosmoport.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>
@@ -143,47 +144,37 @@ void Manager::quitSpace()
     //gui_space.UnbindSharedGuis();
 }
              
-void Manager::updateSessionInSpace()
+void Manager::runSessionInSpace(const jeti::Render& render, client::Player* player)
 {
-    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
+    GuiVehicle* gui_scan_vehicle = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
     GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
     gui::Radar* gui_radar = static_cast<gui::Radar*>(element(gui::type::GUI_RADAR));
-    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
+    GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
     assert(gui_radar);
     assert(gui_galaxymap);
 
-    assert(false);
-//    const SpaceObject* scan_target = player->GetNpc()->scanTarget();
-      
-//    if (scan_target != nullptr)
-//    {
-//        if (gui_scan_vehicle->vehicle() == nullptr)
-//        {
-//            if (scan_target->type() == entity::Type::VEHICLE)
-//            {
-//                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
-//                gui_scan_vehicle->Show();
-                
-//                gui_player_vehicle->Hide();
-//                gui_radar->Hide();
-//            }
-//        }
-//    }
-//    else
-//    {
-//        gui_scan_vehicle->UnbindVehicle();
-//        gui_scan_vehicle->Hide();
+    control::Vehicle* scan_target = player->npc()->scanTarget();
+    if (scan_target) {
+        if (!gui_scan_vehicle->vehicle()) {
+            gui_player_vehicle->hide();
+            gui_radar->hide();
+
+            gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
+            gui_scan_vehicle->show();
+        }
+    } else {
+        gui_scan_vehicle->unbindVehicle();
+        gui_scan_vehicle->hide();
         
-//        gui_player_vehicle->Show();
-//        gui_radar->Show();
-//    }
+        gui_player_vehicle->show();
+        gui_radar->show();
+    }
 
     Base* button = element(gui::type::BUTTON_GALAXYMAP);
-    if (button->isPressed())
-    {
+    if (button->isPressed()) {
         //player->GetNpc()->ResetScanTarget();
 
         gui_radar->hide();
@@ -191,15 +182,13 @@ void Manager::updateSessionInSpace()
         
         gui_galaxymap->show();
         //gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
-    }
-    else
-    {
+    } else {
         gui_galaxymap->UnbindGalaxy();
         gui_galaxymap->hide();
     }
 
-    //gui_space.Update(data_mouse);
-    //gui_space.Render();
+    //m_space.update(data_mouse);
+    m_space.render(render, player);
     //gui_space.RenderInfo(data_mouse);
 }
 

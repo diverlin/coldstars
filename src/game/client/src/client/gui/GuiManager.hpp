@@ -22,6 +22,14 @@
 #include <client/gui/GuiSpace.hpp>
 #include <client/gui/GuiNatureLand.hpp>
 
+namespace jeti {
+class Render;
+} // namespace jeti
+
+namespace client {
+class Player;
+} // namespace client
+
 namespace gui {
 
 class GuiSkill;
@@ -41,7 +49,7 @@ public:
     GuiVehicle* vehicle() const { return m_vehicle; }
     GuiGalaxyMap* galaxy() const { return m_galaxymap; }
 
-    void updateSessionInSpace();
+    void runSessionInSpace(const jeti::Render& render, client::Player* player);
     void runSessionInKosmoport(const MouseData&);
     void runSessionInNatureLand(const MouseData&);
 

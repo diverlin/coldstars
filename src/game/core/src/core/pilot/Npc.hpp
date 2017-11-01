@@ -116,7 +116,6 @@ public:
     Npc(descriptor::Npc*, model::Npc*);
     virtual ~Npc();
 
-
     // model interface
     race::Type race() const;
     //
@@ -169,6 +168,8 @@ public:
 
     bool isAgressor(int_t) const;
 
+    Vehicle* scanTarget() const { return m_scanTarget; }
+
 private:
     descriptor::Npc* m_descriptor_npc = nullptr;
     model::Npc* m_model_npc = nullptr;
@@ -178,6 +179,7 @@ private:
 
     Player* m_player = nullptr;
     Vehicle* m_vehicle = nullptr;
+    Vehicle* m_scanTarget = nullptr;
 
     BaseAiModel* m_aiModel = nullptr;
     StateMachine m_stateMachine;
