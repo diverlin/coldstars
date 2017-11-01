@@ -44,7 +44,7 @@ namespace gui {
 class Base
 {
 public:
-    Base(gui::type type_id=gui::type::NONE,
+    Base(gui::type id=gui::type::NONE,
          gui::type group=gui::type::NONE,
          const std::string& _info="",
          jeti::control::Material* material=nullptr);
@@ -56,7 +56,7 @@ public:
 
     void setSize(glm::vec2 size) { m_box.setSize(size); }
 
-    gui::type type() const { return m_type; }
+    gui::type id() const { return m_id; }
     gui::type group() const { return m_group; }
 
     const ceti::Box2D& box() const { return m_box; }
@@ -69,7 +69,7 @@ public:
 
     bool isAnimationProgramActive() const { return (m_animation != nullptr); }
 
-    Base* element(gui::type) const;
+    static Base* element(gui::type);
 
     Base* updateMouseInteraction(const glm::vec2&);
 
@@ -117,13 +117,13 @@ protected:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const;
     void _renderCommon(const jeti::Render&, client::Player*) const;
 
-    std::vector<Base*>& _children() { return m_children; }
+    std::vector<Base*>& _children() { return m_children; } // !!!
 
 private:
     static std::map<gui::type, Base*> m_elements;
     std::vector<Base*> m_children;
 
-    gui::type m_type;
+    gui::type m_id;
     gui::type m_group;
 
     jeti::control::Material* m_material = nullptr;

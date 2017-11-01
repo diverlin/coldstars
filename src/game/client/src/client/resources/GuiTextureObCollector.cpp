@@ -19,9 +19,12 @@
 
 #include "GuiTextureObCollector.hpp"
 
+namespace gui {
 
-GuiTextureObCollector& GuiTextureObCollector::Instance()
+MaterialCollector& MaterialCollector::get()
 {
-    static GuiTextureObCollector instance;
+    static MaterialCollector instance;
     return instance;
 }
+
+} // namespace gui

@@ -30,11 +30,14 @@ namespace gui {
 std::map<gui::type, Base*> Base::m_elements;
 
    
-Base::Base(gui::type type_id, gui::type group, const std::string& info, jeti::control::Material* textureOb)
+Base::Base(gui::type id,
+           gui::type group,
+           const std::string& info,
+           jeti::control::Material* material)
 :
-m_type(type_id),
+m_id(id),
 m_group(group),
-m_material(textureOb),
+m_material(material),
 m_info(info)
 {}
 
@@ -58,9 +61,9 @@ void Base::_deleteAnimationProgram()
 }
 
           
-Base* Base::element(gui::type request_group) const
+Base* Base::element(gui::type id)
 {
-    std::map<gui::type, Base*>::const_iterator it = m_elements.find(request_group);
+    std::map<gui::type, Base*>::const_iterator it = m_elements.find(id);
     if (it != m_elements.cend()) {
         return it->second;
     }

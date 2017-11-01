@@ -151,11 +151,11 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 
     float scale = 1.1;
     if (m_focusedGuiElement) {
-        if (m_focusedGuiElement->type() == gui::type::BUTTON_ITEMSLOT) {
+        if (m_focusedGuiElement->id() == gui::type::BUTTON_ITEMSLOT) {
             ceti::Box2D box(m_focusedGuiElement->box());
             box.setScale(scale, scale);
 
-            render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
+            render.drawQuad(*MaterialCollector::get().mark_target, box);
         }
     }
 }

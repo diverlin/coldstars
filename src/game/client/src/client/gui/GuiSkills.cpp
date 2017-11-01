@@ -153,7 +153,7 @@ diplomat_undo(0)
     }
     
     //background_rect.Set(0, 0, 6*button_w, SKILLS::ATTACK_MAX*button_h);    
-    textureOb_background = GuiTextureObCollector::Instance().text_background;
+    textureOb_background = MaterialCollector::get().text_background;
 }
 
 GuiSkills::~GuiSkills()
