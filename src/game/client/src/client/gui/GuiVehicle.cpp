@@ -216,7 +216,7 @@ void GuiVehicle::UnbindVehicle()
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-    setMaterial(MaterialCollector::get().radar_range);
+    setMaterial(new jeti::control::Material(MaterialCollector::get().radar_range));
 
     float kontur_w = 400;
     float kontur_h = 400;           

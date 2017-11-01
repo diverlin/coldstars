@@ -140,6 +140,7 @@ Material::Material(model::Material* material)
     :
       m_model(material)
 { 
+    assert(material);
     m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
     
     if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (m_model->fps == 0) ) {

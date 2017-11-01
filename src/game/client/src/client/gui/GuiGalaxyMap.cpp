@@ -60,7 +60,7 @@ int w = 400;
 int h = 300;
     box().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
     
-    setMaterial(MaterialCollector::get().text_background);
+    setMaterial(new jeti::control::Material(MaterialCollector::get().text_background));
     m_ScaleParsecToScreenCoord = w/(float)ENTITY::GALAXY::PARSEC;
 }
 

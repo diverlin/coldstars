@@ -33,13 +33,16 @@ std::map<gui::type, Base*> Base::m_elements;
 Base::Base(gui::type id,
            gui::type group,
            const std::string& info,
-           jeti::control::Material* material)
+           jeti::model::Material* material)
 :
 m_id(id),
 m_group(group),
-m_material(material),
 m_info(info)
-{}
+{
+    if (material) {
+        setMaterial(new jeti::control::Material(material));
+    }
+}
 
 /* virtual */
 Base::~Base()
@@ -49,6 +52,7 @@ Base::~Base()
         //delete *it;
     //}
     
+    delete m_material;
     delete m_animation;
 }    
  

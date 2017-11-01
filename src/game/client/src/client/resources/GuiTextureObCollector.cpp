@@ -27,4 +27,57 @@ MaterialCollector& MaterialCollector::get()
     return instance;
 }
 
+MaterialCollector::MaterialCollector() {
+    starsystem_mark_war = __create("data/other/ss_mark_war.png");
+    starsystem_mark_captured = __create("data/other/ss_mark_captured.png");
+    starsystem_mark_player = __create("data/other/mark_player_ss.png");
+
+    icon_minus = __create("data/icon/minus.png");
+    icon_plus = __create("data/icon/plus.png");
+    skill = __create("data/other/skill.png");
+    skill_transparent = __create("data/other/skill_transparent.png");
+
+    icon_map = __create("data/icon/starsystem_ICON.png");
+    grapple_trail = __create("data/effect/grapple_jet.png");
+
+    dot_blue = __create("data/other/dot_blue.png");
+    dot_red = __create("data/other/dot_red.png");
+    dot_green = __create("data/other/dot_green.png");
+    dot_black = __create("data/other/dot_black.png");
+    dot_yellow = __create("data/other/dot_yellow.png");
+    dot_purple = __create("data/other/dot_purple.png");
+
+    radar_screenrect = __create("data/gui/radar_screenrect.png");
+    radar_background = __create("data/gui/radar_background.png");
+    radar_bar = __create("data/gui/radar_bar.png");
+    radar_range = __create("data/gui/radar_range.png");
+    bar_bottom = __create("data/gui/bar_bottom.png");
+    bar_left = __create("data/gui/bar_left.png");
+    bar_top = __create("data/gui/bar_top.png");
+    bar_right = __create("data/gui/bar_right.png");
+
+    text_background = __create("data/other/text_background.png");
+
+    slot_mark_accept = __create("data/other/slot_mark_accept.png");
+    slot_mark_reject = __create("data/other/slot_mark_reject.png");
+    mask_round = __create("data/other/mask_round.png");
+    mark_target = __create("data/gui/mark_target.png");
+    mark_target_slot = __create("data/gui/mark_target_slot.png");
+}
+
+MaterialCollector::~MaterialCollector()
+{
+    for (jeti::model::Material* model: m_models) {
+        delete model;
+    }
+}
+
+jeti::model::Material*
+MaterialCollector::__create(const std::string& path)
+{
+    jeti::model::Material* model = new jeti::model::Material("data/other/mask_round.png");
+    m_models.push_back(model);
+    return model;
+}
+
 } // namespace gui

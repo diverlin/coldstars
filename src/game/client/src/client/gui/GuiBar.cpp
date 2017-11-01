@@ -22,9 +22,9 @@
 
 namespace gui {
 
-GuiBar::GuiBar(jeti::control::Material* textureOb)
+GuiBar::GuiBar(jeti::model::Material* material)
 :
-Base(gui::type::NONE, gui::type::NONE, "", textureOb)
+Base(gui::type::NONE, gui::type::NONE, "", material)
 {}
 
 /* virtual */

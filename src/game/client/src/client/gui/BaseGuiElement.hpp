@@ -32,6 +32,10 @@ class Player;
 namespace jeti {
 class AnimationEffect2D;
 
+namespace model {
+class Material;
+} // namespace model
+
 namespace control {
 class Material;
 } // namespace control
@@ -47,12 +51,12 @@ public:
     Base(gui::type id=gui::type::NONE,
          gui::type group=gui::type::NONE,
          const std::string& _info="",
-         jeti::control::Material* material=nullptr);
+         jeti::model::Material* material=nullptr);
     virtual ~Base();
 
     void setLabel(const std::string& label) { m_label = label; }
 
-    void setMaterial(jeti::control::Material* textureOb) { m_material = textureOb; }
+    void setMaterial(jeti::control::Material* material) { m_material = material; }
 
     void setSize(glm::vec2 size) { m_box.setSize(size); }
 

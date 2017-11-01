@@ -32,12 +32,15 @@ class Player;
 } // namespace client
 
 namespace jeti {
+namespace control {
+class Material;
+} //namespace control
 class Render;
-}
+} // namespace jeti
 
 namespace view {
 class Base;
-}
+} // namespace view
 
 namespace gui {
 
@@ -76,6 +79,7 @@ private:
 
     MouseData m_dataMouse;
 
+    jeti::control::Material* m_markTargetMaterial = nullptr;
     Base* m_focusedGuiElement = nullptr;
 
     ceti::Box2D m_box;

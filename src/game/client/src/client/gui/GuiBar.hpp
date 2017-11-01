@@ -20,17 +20,13 @@
 
 #include "BaseGuiElement.hpp"
 
-
 namespace gui {
 
 class GuiBar : public Base
 {
 public:
-    GuiBar(jeti::control::Material*);
+    GuiBar(jeti::model::Material*);
     ~GuiBar();
-
-private:
-
 };
 
 } // namespace gui
