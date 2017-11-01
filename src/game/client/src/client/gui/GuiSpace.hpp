@@ -20,7 +20,7 @@
 
 #include "BaseGuiElement.hpp"
 
-#include "../gui/GuiRadar.hpp"
+#include <client/gui/GuiRadar.hpp>
 #include "../gui/GuiVehicle.hpp"
 #include "../gui/GuiVehicle2.hpp"
 
@@ -39,37 +39,38 @@ public:
     GuiSpace();
     ~GuiSpace();
 
-    bool GetInitDone() const { return init_done; };
+    bool initialized() const { return m_initialized; }
 
     //GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 
-    void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
-    void UnbindSharedGuis();
+    void bindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+    void unbindSharedGuis();
 
-    virtual void _updateUnique(client::Player*) override final;
+    void resize(int, int);
+    void buttonsAction(client::Player*) const;
 
-    void Resize(int, int);
-    void ButtonsAction(client::Player*) const;
+    void renderText(const glm::vec2&) const;
 
-    virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
+    void enterGalaxyMap();
+    void exitGalaxyMap();
 
-    void RenderText(const glm::vec2&) const;
+    void enterGuiScan();
+    void exitGuiScan();
 
-    void EnterGalaxyMap();
-    void ExitGalaxyMap();
+protected:
+    void _updateUnique(client::Player*) override final;
+    void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
-    void EnterGuiScan();
-    void ExitGuiScan();
 
 private:
-    bool init_done;
+    bool m_initialized = false;
 
-    GuiGalaxyMap* gui_galaxymap_shared;
-    //GuiVehicle*   gui_vehicle_scan_shared;
-    GuiSkills*    gui_skills_shared;
-    Slider*       slider_shared;
+    GuiGalaxyMap* m_galaxymapShared = nullptr;
+    //GuiVehicle*   gui_vehicle_scan_shared = nullptr;
+    GuiSkills*    m_skillsShared = nullptr;
+    Slider*       m_sliderShared = nullptr;
 
-    bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);
+    bool updateMouseInteractionWithPreciseWeaponTarget(const MouseData&);
 };
 
 } // namespace gui

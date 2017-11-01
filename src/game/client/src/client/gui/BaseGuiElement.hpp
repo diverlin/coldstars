@@ -71,7 +71,7 @@ public:
     bool isLocked() const { return m_isLocked; }
     bool isPressed() const { return m_isPressed; }
 
-    bool isAnimationProgramActive() const { return (m_animation != nullptr); }
+    bool hasAnimation() const { return (m_animation != nullptr); }
 
     static Base* element(gui::type);
 
