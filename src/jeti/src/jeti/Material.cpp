@@ -29,35 +29,7 @@
 #include <stdexcept>
 #include <iostream>
 
-namespace jeti {
-
-
-namespace model {
-
-Material::Material(const std::string& path)
-    :
-      texture_path(path)
-{
-    use_alpha = true;
-}
-
-Material::Material(ceti::descriptor::Material* descriptor)
-{
-    texture_path = descriptor->texturePath();
-    normalmap_path = descriptor->normalmapPath();
-    use_alpha = descriptor->useAlpha();
-
-    col_num = descriptor->col();
-    row_num = descriptor->row();
-    fps = descriptor->fps();
-    is_rotated = descriptor->autoRotated();
-    brightThreshold = descriptor->brightThreshold();
-}
-
-} // namespace model
-
 namespace {
-
 
 void loadToVRAM(GLuint& texture, const sf::Uint8* data, int& w, int& h)
 {
@@ -115,6 +87,57 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 
 } // namespace
 
+
+namespace jeti {
+
+namespace model {
+
+Material::Material(const std::string& path)
+    :
+      texture_path(path)
+{
+    use_alpha = true;
+}
+
+Material::Material(ceti::descriptor::Material* descriptor)
+{
+    texture_path = descriptor->texturePath();
+    normalmap_path = descriptor->normalmapPath();
+    use_alpha = descriptor->useAlpha();
+
+    col_num = descriptor->col();
+    row_num = descriptor->row();
+    fps = descriptor->fps();
+    is_rotated = descriptor->autoRotated();
+    brightThreshold = descriptor->brightThreshold();
+}
+
+void Material::load()
+{
+    if (is_loaded) {
+        return;
+    }
+
+    if (texture_path != "") {
+        loadToVRAM(texture_path, texture, w, h);
+    } else {
+        loadToVRAM(texture, w, h);
+    }
+    if (normalmap_path != "") {
+        resizeAndLoadToVRAM(normalmap_path, normalmap, w, h);
+    }
+
+    is_loaded = true;
+}
+
+void Material::unloadFromVRAM()
+{
+    is_loaded = false;
+}
+
+} // namespace model
+
+
 namespace control {
 
 Material::Material()
@@ -159,29 +182,6 @@ Material::Material(model::Material* material)
 Material::~Material()
 { 
 
-}
-
-void Material::load()
-{
-    if (m_isLoaded) {
-        return;
-    }
-
-    if (m_model->texture_path != "") {
-        loadToVRAM(m_model->texture_path, m_model->texture, m_model->w, m_model->h);
-    } else {
-        loadToVRAM(m_model->texture, m_model->w, m_model->h);
-    }
-    if (m_model->normalmap_path != "") {
-        resizeAndLoadToVRAM(m_model->normalmap_path, m_model->normalmap, m_model->w, m_model->h);
-    }
-
-    m_isLoaded = true;
-}
-
-void Material::unloadFromVRAM()
-{
-    m_isLoaded = false;
 }
 
 void Material::__createTextureCoords(int col_num, int row_num, int fps)
