@@ -80,6 +80,9 @@ public:
     float brightThreshold = 1.0f;
     int color_id = 0;
     bool is_rotated = false;
+
+    void load();
+    void unloadFromVRAM();
 };
 
 } // namespace model
@@ -100,19 +103,15 @@ public:
     int frameWidth() const  { return m_model->w_slice; }
     int frameHeight() const { return m_model->h_slice; }
 
-    bool isLoaded() const { return m_isLoaded; }
-    void load();
-    void unloadFromVRAM();
-
     int updateAnimationFrame(float);
+    bool isLoaded() const { return m_model->is_loaded; }
+    void load() const { m_model->load(); }
 
     model::Material* model() const { return m_model; }
 
 private:
     int m_id = 0;
     model::Material* m_model = nullptr;
-
-    bool m_isLoaded = false;
 
     unsigned int m_currentFrame = 0;
     unsigned int m_framesCount = 1;
