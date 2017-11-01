@@ -33,6 +33,8 @@
 #include <jeti/Render.hpp>
 #include <client/gui/GuiManager.hpp>
 
+namespace gui {
+
 GuiAngar::GuiAngar()
 {
     //int screen_w = core::global::get().config().SCREEN_WIDTH;
@@ -289,4 +291,4 @@ void GuiAngar::RenderVehicleAndItemSlots() const
     //glPopMatrix();
 }
 
-
+} // namespace gui

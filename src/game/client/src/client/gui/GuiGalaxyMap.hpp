@@ -33,6 +33,8 @@ namespace jeti {
 class Render;
 }
 
+namespace gui {
+
 class GuiGalaxyMap : public BaseGuiElement
 {
 public:
@@ -58,3 +60,4 @@ private:
     glm::vec3 GetAbsoluteStarSystemPosition(const model::Starsystem&) const;
 };
 
+} // namespace gui

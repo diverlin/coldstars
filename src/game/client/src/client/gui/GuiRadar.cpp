@@ -42,7 +42,7 @@ Radar::Radar()
     m_textureOb_screenrect        = GuiTextureObCollector::Instance().radar_screenrect;
     m_textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
-    scale = RADAR_SCALE;
+    m_scale = RADAR_SCALE;
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
     resize(screen_w, screen_h);

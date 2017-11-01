@@ -24,6 +24,8 @@
 
 #include <iostream>
 
+namespace gui {
+
 UserInput& UserInput::get()
 {
     static UserInput instance;
@@ -68,6 +70,8 @@ void UserInput::update()
         }
     }
 }
+
+} // namespace gui
 
 
 

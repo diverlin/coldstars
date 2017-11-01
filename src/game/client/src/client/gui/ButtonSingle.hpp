@@ -20,6 +20,8 @@
 
 #include "BaseButton.hpp"
 
+namespace gui {
+
 class ButtonSingle : public BaseButton
 {
 public:
@@ -37,3 +39,4 @@ private:
 
 };
 
+} // namespace gui

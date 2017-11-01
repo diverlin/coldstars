@@ -52,6 +52,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 
+namespace gui {
 
 GuiSpace::GuiSpace()
 :
@@ -355,3 +356,4 @@ void GuiSpace::_renderUnique(const jeti::Render&, client::Player* player) const
     //RenderText(client::shortcuts::screen()->bottomLeftScreenWC());
 }
 
+} // namespace gui

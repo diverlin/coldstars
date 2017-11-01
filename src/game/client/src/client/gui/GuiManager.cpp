@@ -40,6 +40,7 @@
 #include <client/gui/GuiSkills.hpp>
 #include <client/gui/GuiGalaxyMap.hpp>
 
+namespace gui {
 
 GuiManager& GuiManager::get()
 {
@@ -264,3 +265,4 @@ BaseGuiElement* GuiManager::element(gui::type request_group) const
     return m_space.element(request_group);
 }
         
+} // namespace gui

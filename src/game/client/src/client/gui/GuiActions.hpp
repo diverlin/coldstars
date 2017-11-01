@@ -16,26 +16,26 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIACTIONS_H
-#define GUIACTIONS_H
+#pragma once
 
 namespace client {
 class Player;
 } // namespace client
 
+namespace gui {
+
 class GuiActions
 {
-       public:
-        GuiActions() {}
-        ~GuiActions() {}
+public:
+    GuiActions() {}
+    ~GuiActions() {}
 
-        static void GalaxyMapGuiTransition(client::Player* player);
-        static void SaveEvent(client::Player* player);
-        static void LoadEvent(client::Player* player);
+    static void GalaxyMapGuiTransition(client::Player* player);
+    static void SaveEvent(client::Player* player);
+    static void LoadEvent(client::Player* player);
 };
-              
-#endif 
+
+} // namespace gui
 
 
 
-        

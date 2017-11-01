@@ -31,6 +31,9 @@
 
 #include <jeti/Render.hpp>
 
+
+namespace gui {
+
 GuiVehicle::GuiVehicle()
 :
 BaseGuiElement(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
@@ -342,6 +345,7 @@ void GuiVehicle::_renderUnique(const jeti::Render& render, client::Player* playe
     //disable_BLEND();
 }        
         
+} // namespace gui
 
 
 

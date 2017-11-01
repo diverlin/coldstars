@@ -18,6 +18,8 @@
 
 #include "GuiGoverment.hpp"
     
+namespace gui {
+
 void GuiGoverment::bind(control::Goverment* goverment)
 {
     this->m_goverment = goverment;
@@ -28,3 +30,4 @@ void GuiGoverment::release()
     m_goverment = nullptr;
 }
 
+} // namespace gui

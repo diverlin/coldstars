@@ -24,6 +24,8 @@
 #include "../gui/GuiShop.hpp"
 #include "../gui/GuiGoverment.hpp"
 
+namespace gui {
+
 class GuiVehicle;
 class GuiSkills;
 class GuiGalaxyMap;
@@ -89,4 +91,5 @@ private:
     void ExitCurrentScreen();
 };
 
+} // namespace gui
 

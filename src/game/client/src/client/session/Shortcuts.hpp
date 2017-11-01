@@ -31,7 +31,9 @@ namespace view {
 class StarSystem;
 } // namespace view
 
+namespace gui {
 class UserInputInSpace;
+} // namespace gui
 
 namespace client {
 
@@ -39,7 +41,7 @@ namespace shortcuts {
 jeti::Render* render();
 jeti::Camera* camera();
 jeti::Screen* screen();
-UserInputInSpace* inputs();
+gui::UserInputInSpace* inputs();
 view::StarSystem* view();
 } // namespace shortcuts
 

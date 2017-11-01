@@ -18,6 +18,8 @@
 
 #include "ButtonSingle.hpp"
 
+namespace gui {
+
 /*virtual override final*/
 void ButtonSingle::onPressEventMBL(client::Player* player)
 {
@@ -45,3 +47,4 @@ void ButtonSingle::_updateUnique(client::Player* player)
     _setIsPressed(false);
 }
       
+} // namespace gui

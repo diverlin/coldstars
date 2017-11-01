@@ -47,6 +47,7 @@
 #include <core/pilot/Npc.hpp>
 #include <client/pilot/Player.hpp>
 
+namespace gui {
 
 GuiGalaxyMap::GuiGalaxyMap()
 :
@@ -192,3 +193,5 @@ void GuiGalaxyMap::_renderUnique(const jeti::Render& render, client::Player* pla
     }
     //render.disable_POINTSPRITE();  
 }
+
+} // namespace gui

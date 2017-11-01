@@ -20,6 +20,8 @@
 
 #include "BaseButton.hpp"
 
+namespace gui {
+
 class ButtonTrigger : public BaseButton
 {
 public:
@@ -34,5 +36,7 @@ public:
 
 private:
 };
+
+} // namespace gui
 
 

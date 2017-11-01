@@ -23,30 +23,33 @@
 #include <core/pilot/Skills.hpp>
 #include <ceti/rect.hpp>
 
+namespace gui {
+
 class GuiSkills : public BaseGuiElement
 {
-    public:
-        GuiSkills();
-        ~GuiSkills();
+public:
+    GuiSkills();
+    ~GuiSkills();
 
-        void Acknowledge();
+    void Acknowledge();
 
-        void ButtonsAction(Skills&);
-        void RenderSkills(const Skills&) const;
+    void ButtonsAction(Skills&);
+    void RenderSkills(const Skills&) const;
 
-    private:
-        int attack_undo;
-        int defence_undo;
-        int leader_undo;
-        int trader_undo;
-        int technic_undo;
-        int diplomat_undo;
+private:
+    int attack_undo;
+    int defence_undo;
+    int leader_undo;
+    int trader_undo;
+    int technic_undo;
+    int diplomat_undo;
 
-        jeti::control::Material* textureOb_skill;
-        jeti::control::Material* textureOb_skill_transparent;
-        
-        ceti::Rect background_rect;
-        jeti::control::Material* textureOb_background;
+    jeti::control::Material* textureOb_skill;
+    jeti::control::Material* textureOb_skill_transparent;
+
+    ceti::Rect background_rect;
+    jeti::control::Material* textureOb_background;
 };
 
+} // namespace gui
 

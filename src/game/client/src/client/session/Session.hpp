@@ -21,7 +21,9 @@
 
 #include <core/session/Session.hpp>
 
+namespace gui {
 class UserInputInSpace;
+}
 
 namespace type {
 class Collector;
@@ -51,7 +53,7 @@ public:
     jeti::Screen* screen() const override final { return m_screen; }
     view::StarSystem* view() const override final { return m_view; }
 
-    UserInputInSpace* inputs() const override final { return m_inputs; }
+    gui::UserInputInSpace* inputs() const override final { return m_inputs; }
 
 private:
     bool m_init = false;
@@ -61,7 +63,7 @@ private:
     jeti::Screen* m_screen = nullptr;
     view::StarSystem* m_view = nullptr;
 
-    UserInputInSpace* m_inputs = nullptr;
+    gui::UserInputInSpace* m_inputs = nullptr;
 };
 
 } // namespace client

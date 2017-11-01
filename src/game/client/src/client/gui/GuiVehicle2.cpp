@@ -28,6 +28,7 @@
 
 #include <client/pilot/Player.hpp>
 
+namespace gui {
 
 GuiVehicle2::GuiVehicle2()
 :
@@ -101,3 +102,5 @@ void GuiVehicle2::_updateUnique(client::Player* player)
 //        BindVehicle(player->GetNpc()->vehicle(), 0.6);
 //    }
 }
+
+} // namespace gui

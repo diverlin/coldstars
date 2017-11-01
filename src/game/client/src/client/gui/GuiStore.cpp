@@ -28,6 +28,8 @@
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/gui/GuiManager.hpp>
 
+namespace gui {
+
 GuiStore::GuiStore()
 {}
 
@@ -161,3 +163,5 @@ void GuiStore::renderSlots(int credits) const
     //}
     //glPopMatrix();
 }
+
+} // namespace gui

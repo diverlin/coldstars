@@ -26,6 +26,8 @@ namespace control {
 class Shop;
 } // namespace control
 
+namespace gui {
+
 class GuiShop : public BaseGuiElement
 {
 public:
@@ -44,7 +46,7 @@ private:
     control::Shop* m_shop = nullptr;
 };
 
-
+} // namespace gui
 
 
 

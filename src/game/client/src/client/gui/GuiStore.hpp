@@ -33,6 +33,8 @@ class Item;
 class Vehicle;
 } // namespace slot
 
+namespace gui {
+
 class GuiStore : public BaseGuiElement
 {
 public:
@@ -55,6 +57,6 @@ private:
     std::vector<GuiPair<ceti::Rect, slot::Vehicle*>> m_vehicleslot_rects;
 };
 
-
+} // namepsace gui
 
 

@@ -23,6 +23,8 @@
 
 class Renderer;
 
+namespace gui {
+
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 public:
@@ -43,4 +45,5 @@ private:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 };
 
+} // namespace gui
 

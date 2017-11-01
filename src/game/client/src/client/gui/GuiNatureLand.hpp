@@ -31,6 +31,8 @@ namespace slot {
 class Item;
 } // namespace slot
 
+namespace gui {
+
 class GuiNatureLand : public BaseGuiElement
 {
 public:
@@ -52,4 +54,4 @@ private:
     std::vector<GuiPair<ceti::Rect, slot::Item*>> m_rects_itemslots;
 };
 
-
+} // namespace gui

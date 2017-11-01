@@ -25,6 +25,8 @@
 #include <jeti/AnimationEffect2D.hpp>
 
 
+namespace gui {
+
 std::map<gui::type, BaseGuiElement*> BaseGuiElement::m_elements;
 
    
@@ -212,3 +214,5 @@ void BaseGuiElement::_renderCommon(const jeti::Render& render, client::Player* p
         gui_element->render(render, player);
     }
 }
+
+} // namespace gui

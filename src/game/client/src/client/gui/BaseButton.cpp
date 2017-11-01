@@ -26,6 +26,7 @@
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 
+namespace gui {
 
 BaseButton::BaseButton(gui::type type_id, gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
 :
@@ -103,3 +104,4 @@ void BaseButton::_renderUnique(const jeti::Render& render, client::Player*) cons
     }
 }
         
+} // namespace gui

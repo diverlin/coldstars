@@ -32,6 +32,8 @@
 
 #include <core/pilot/Npc.hpp>
 
+namespace gui {
+
 Slider::Slider()
 {
     //type_id = GUI::TYPE::SLIDER;
@@ -164,3 +166,4 @@ void Slider::render() const
     //RenderButtons();
 }
 
+} // namespace gui

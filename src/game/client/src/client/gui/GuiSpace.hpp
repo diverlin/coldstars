@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUISPACE_HPP
-#define GUISPACE_HPP
+#pragma once
 
 #include "BaseGuiElement.hpp"
 
@@ -25,49 +24,52 @@
 #include "../gui/GuiVehicle.hpp"
 #include "../gui/GuiVehicle2.hpp"
 
+class Renderer;
+
+namespace gui {
+
 class GuiVehicle;
 class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
-class Renderer;
 
 class GuiSpace : public BaseGuiElement
 {
-    public:
-        GuiSpace();
-        ~GuiSpace();
-        
-        bool GetInitDone() const { return init_done; };
-        
-        //GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
-        
-        void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
-        void UnbindSharedGuis();
-        
-        virtual void _updateUnique(client::Player*) override final;
-                                        
-        void Resize(int, int);
-        void ButtonsAction(client::Player*) const;
-        
-        virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
-                
-        void RenderText(const glm::vec2&) const;
-        
-        void EnterGalaxyMap();
-        void ExitGalaxyMap();
-        
-        void EnterGuiScan();
-        void ExitGuiScan();
-        
-    private:
-        bool init_done;
-        
-        GuiGalaxyMap* gui_galaxymap_shared;  
-        //GuiVehicle*   gui_vehicle_scan_shared;
-        GuiSkills*    gui_skills_shared;
-        Slider*       slider_shared;
-        
-        bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);  
+public:
+    GuiSpace();
+    ~GuiSpace();
+
+    bool GetInitDone() const { return init_done; };
+
+    //GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
+
+    void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+    void UnbindSharedGuis();
+
+    virtual void _updateUnique(client::Player*) override final;
+
+    void Resize(int, int);
+    void ButtonsAction(client::Player*) const;
+
+    virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
+
+    void RenderText(const glm::vec2&) const;
+
+    void EnterGalaxyMap();
+    void ExitGalaxyMap();
+
+    void EnterGuiScan();
+    void ExitGuiScan();
+
+private:
+    bool init_done;
+
+    GuiGalaxyMap* gui_galaxymap_shared;
+    //GuiVehicle*   gui_vehicle_scan_shared;
+    GuiSkills*    gui_skills_shared;
+    Slider*       slider_shared;
+
+    bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);
 };
 
-#endif
+} // namespace gui

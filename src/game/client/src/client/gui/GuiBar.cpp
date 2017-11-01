@@ -20,6 +20,7 @@
 
 #include "../resources/GuiTextureObCollector.hpp"
 
+namespace gui {
 
 GuiBar::GuiBar(jeti::control::Material* textureOb)
 :
@@ -29,3 +30,5 @@ BaseGuiElement(gui::type::NONE, gui::type::NONE, "", textureOb)
 /* virtual */
 GuiBar::~GuiBar()
 {}
+
+} // namespace gui

@@ -19,7 +19,7 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-//#include <ceti/rect.hpp> // to be removed
+#include <ceti/rect.hpp> // to be removed
 
 namespace control {
 class SpaceObject;
@@ -52,7 +52,7 @@ public:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
 private:
-    float scale;
+    float m_scale = 1.0f;
 
     jeti::control::Material* m_textureOb_background = nullptr;
     jeti::control::Material* m_textureOb_bar = nullptr;

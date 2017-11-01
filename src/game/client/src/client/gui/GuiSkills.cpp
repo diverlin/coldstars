@@ -22,6 +22,8 @@
 #include <jeti/Render.hpp>
 #include "ButtonSingle.hpp"
 
+namespace gui {
+
 GuiSkills::GuiSkills():
 attack_undo(0),
 defence_undo(0),
@@ -400,6 +402,6 @@ void GuiSkills::RenderSkills(const Skills& skills) const
     //glPopMatrix();
 }
 
-
+} // namespace gui
 
 
