@@ -54,7 +54,7 @@
 
 namespace gui {
 
-GuiSpace::GuiSpace()
+Space::Space()
 {       
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
@@ -148,10 +148,10 @@ GuiSpace::GuiSpace()
 }
 
 /* virtual */
-GuiSpace::~GuiSpace()
+Space::~Space()
 {}
 
-void GuiSpace::bindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
+void Space::bindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
     m_galaxymapShared = gui_galaxymap_shared;
     //this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
@@ -161,7 +161,7 @@ void GuiSpace::bindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gu
     m_initialized = true;
 }
 
-void GuiSpace::unbindSharedGuis()
+void Space::unbindSharedGuis()
 {
     m_galaxymapShared = nullptr;
     //gui_vehicle_scan_shared = nullptr;
@@ -171,7 +171,7 @@ void GuiSpace::unbindSharedGuis()
     m_initialized = false;
 }
 
-bool GuiSpace::updateMouseInteractionWithPreciseWeaponTarget(const MouseData& data_mouse)
+bool Space::updateMouseInteractionWithPreciseWeaponTarget(const MouseData& data_mouse)
 {
     //ItemSlot* selected_item_slot = gui_vehicle_target.GetInreactedItemSlot(data_mouse);
     //if (selected_item_slot != nullptr)
@@ -187,7 +187,7 @@ bool GuiSpace::updateMouseInteractionWithPreciseWeaponTarget(const MouseData& da
     return false;
 }
 
-void GuiSpace::enterGalaxyMap()
+void Space::enterGalaxyMap()
 {        
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiSpace::EnterGalaxyMap", GUI_LOG_DIP);
@@ -203,7 +203,7 @@ void GuiSpace::enterGalaxyMap()
     //gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->starsystem()->GetSector()->GetGalaxy());
 }
 
-void GuiSpace::exitGalaxyMap()
+void Space::exitGalaxyMap()
 {
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
@@ -213,7 +213,7 @@ void GuiSpace::exitGalaxyMap()
     //gui_galaxymap_shared->UnbindGalaxy();
 }
     
-void GuiSpace::enterGuiScan()
+void Space::enterGuiScan()
 {
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiSpace::EnterGuiScan", GUI_LOG_DIP);
@@ -231,7 +231,7 @@ void GuiSpace::enterGuiScan()
     //GetGuiElement(gui::type::GUI_RADAR)->Hide();
 }
 
-void GuiSpace::exitGuiScan()
+void Space::exitGuiScan()
 {       
     #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiSpace::ExitGuiScan", GUI_LOG_DIP);
@@ -249,16 +249,16 @@ void GuiSpace::exitGuiScan()
     //GetGuiElement(gui::type::PLAYER_VEHICLE)->Show();
 }
 
-void GuiSpace::buttonsAction(client::Player* player) const
+void Space::buttonsAction(client::Player* player) const
 {}
 
-void GuiSpace::resize(int screen_w, int screen_h)
+void Space::resize(int screen_w, int screen_h)
 {
 
 }
 
 
-void GuiSpace::renderText(const glm::vec2& scroll_coords) const
+void Space::renderText(const glm::vec2& scroll_coords) const
 {
 //    const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + std::to_string(scroll_coords.x) + "," + std::to_string(scroll_coords.y);
 //    glm::vec2 pos(client::shortcuts::screen()->GetWidth() - 400, client::shortcuts::screen()->GetHeight() - 5);
@@ -267,7 +267,7 @@ void GuiSpace::renderText(const glm::vec2& scroll_coords) const
 }
 
 /* virtual override final */
-void GuiSpace::_updateUnique(client::Player* player)
+void Space::_updateUnique(client::Player* player)
 { 
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
@@ -324,7 +324,7 @@ void GuiSpace::_updateUnique(client::Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::_renderUnique(const jeti::Render&, client::Player* player) const
+void Space::_renderUnique(const jeti::Render&, client::Player* player) const
 {
     //if (show_gui_radar == true)  
     //{

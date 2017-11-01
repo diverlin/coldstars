@@ -36,7 +36,7 @@ public:
     void SetPlayer(client::Player*);
 
     GuiKosmoport& kosmoport() { return m_kosmoport; }
-    GuiSpace& space() { return m_space; }
+    Space& space() { return m_space; }
 
     GuiVehicle* vehicle() const { return m_vehicle; }
     GuiGalaxyMap* galaxy() const { return m_galaxymap; }
@@ -68,7 +68,7 @@ private:
     client::Player* m_player = nullptr;
 
     GuiKosmoport m_kosmoport;
-    GuiSpace m_space;
+    Space m_space;
     GuiNatureLand m_natureland;
 
     // shared guis

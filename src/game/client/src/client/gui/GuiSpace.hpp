@@ -33,11 +33,11 @@ class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
-class GuiSpace : public Base
+class Space : public Base
 {
 public:
-    GuiSpace();
-    ~GuiSpace();
+    Space();
+    ~Space();
 
     bool initialized() const { return m_initialized; }
 
