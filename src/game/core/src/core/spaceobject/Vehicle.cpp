@@ -185,6 +185,11 @@ Vehicle::__loadItemsFromModel()
     }
 }
 
+bool Vehicle::canRadarObject(SpaceObject* ob) const
+{
+    return (glm::length(position()-ob->position()) <= m_properties.radar);
+}
+
 int Vehicle::freeSpace() const
 {
     return m_properties.free_space;

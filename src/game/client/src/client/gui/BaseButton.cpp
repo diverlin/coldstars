@@ -30,7 +30,7 @@ namespace gui {
 
 BaseButton::BaseButton(gui::type type_id, gui::type group, const std::string& info, void (*pAction)(client::Player*), jeti::control::Material* textureOb)
 :
-BaseGuiElement(type_id, group, info, textureOb),
+Base(type_id, group, info, textureOb),
 m_alpha(1.0f),
 m_TextureOb_additional(nullptr),
 m_textureOb_mask(nullptr),

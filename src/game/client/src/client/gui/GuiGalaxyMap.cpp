@@ -51,7 +51,7 @@ namespace gui {
 
 GuiGalaxyMap::GuiGalaxyMap()
 :
-BaseGuiElement(gui::type::GALAXYMAP, gui::type::GALAXYMAP),
+Base(gui::type::GALAXYMAP, gui::type::GALAXYMAP),
 m_Galaxy(nullptr)
 { 
 //    int w = core::global::get().config().width;

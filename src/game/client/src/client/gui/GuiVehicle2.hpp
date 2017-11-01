@@ -24,7 +24,7 @@ class Vehicle;
 
 namespace gui {
 
-class GuiVehicle2 : public BaseGuiElement
+class GuiVehicle2 : public Base
 {
 public:
     GuiVehicle2();

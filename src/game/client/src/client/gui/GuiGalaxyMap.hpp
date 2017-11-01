@@ -35,7 +35,7 @@ class Render;
 
 namespace gui {
 
-class GuiGalaxyMap : public BaseGuiElement
+class GuiGalaxyMap : public Base
 {
 public:
     GuiGalaxyMap();

@@ -33,7 +33,7 @@ class Render;
 
 namespace gui {
 
-class Radar : public BaseGuiElement
+class Radar : public Base
 {
 public:
     Radar();

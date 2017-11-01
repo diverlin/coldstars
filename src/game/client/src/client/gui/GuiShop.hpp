@@ -28,7 +28,7 @@ class Shop;
 
 namespace gui {
 
-class GuiShop : public BaseGuiElement
+class GuiShop : public Base
 {
 public:
     GuiShop();

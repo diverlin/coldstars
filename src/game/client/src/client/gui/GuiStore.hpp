@@ -35,7 +35,7 @@ class Vehicle;
 
 namespace gui {
 
-class GuiStore : public BaseGuiElement
+class GuiStore : public Base
 {
 public:
     GuiStore();

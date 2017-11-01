@@ -37,10 +37,10 @@ Radar::Radar()
 {
     _setGroup(gui::type::GUI_RADAR);
     
-    m_textureOb_background        = GuiTextureObCollector::Instance().radar_background;
-    m_textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
-    m_textureOb_screenrect        = GuiTextureObCollector::Instance().radar_screenrect;
-    m_textureOb_range             = GuiTextureObCollector::Instance().radar_range;
+    m_textureOb_background = GuiTextureObCollector::Instance().radar_background;
+    m_textureOb_bar        = GuiTextureObCollector::Instance().radar_bar;
+    m_textureOb_screenrect = GuiTextureObCollector::Instance().radar_screenrect;
+    m_textureOb_range      = GuiTextureObCollector::Instance().radar_range;
         
     m_scale = RADAR_SCALE;
     int screen_w = client::shortcuts::screen()->width();
@@ -83,10 +83,9 @@ void Radar::add(control::SpaceObject* object)
 
 void Radar::addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
 {
-//    if (vehicle.IsObjectWithinRadarRange(object) == true)
-//    {
-//        Add(object);
-//    }
+    if (vehicle->canRadarObject(object)) {
+        add(object);
+    }
 }             
             
 /* virtual override final */
@@ -104,37 +103,31 @@ void Radar::_renderUnique(const jeti::Render& render, client::Player* player) co
     //drawTexturedRect(textureOb_range, range_rect, -2.0);
             
     float size, size_base = 7;
-    //render.enable_POINTSPRITE();  
     {         
         for (const auto& entity: m_entities) {
             switch(entity->descriptor()->obType())
             {
-                case entity::Type::STAR:
-                {
+                case entity::Type::STAR: {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->model()->texture);
                     size = 2*size_base;
                     break;
                 }
-                case entity::Type::PLANET:
-                {
+                case entity::Type::PLANET: {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case entity::Type::ASTEROID:
-                {
+                case entity::Type::ASTEROID: {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->model()->texture);
                     size = 1.25*size_base;
                     break;                
                 }
-                case entity::Type::WORMHOLE:
-                {
+                case entity::Type::WORMHOLE: {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->model()->texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case entity::Type::VEHICLE:
-                {
+                case entity::Type::VEHICLE: {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->model()->texture);
                     size = 1*size_base;
                     break;                
@@ -142,10 +135,10 @@ void Radar::_renderUnique(const jeti::Render& render, client::Player* player) co
             }
             
             //float scale_render = Screen::Instance().GetScale();
-            //drawParticle(rect.center() + vec2(entity_vec[i]->position()*scale)/scale_render, size);
+            //render.drawParticle(rect.center() + vec2(entity->position()*scale)/scale_render, size);
+            //render.drawParticle(m_rect.center() + vec2(entity->position()), size);
         }
     }
-    //render.disable_POINTSPRITE(); 
 }
 
 } // namespace gui

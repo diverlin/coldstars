@@ -25,7 +25,7 @@
 
 namespace gui {
 
-class GuiSkills : public BaseGuiElement
+class GuiSkills : public Base
 {
 public:
     GuiSkills();

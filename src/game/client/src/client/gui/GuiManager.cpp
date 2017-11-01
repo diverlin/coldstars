@@ -184,7 +184,7 @@ void GuiManager::updateSessionInSpace()
 //        gui_radar->Show();
 //    }
 
-    BaseGuiElement* button = element(gui::type::BUTTON_GALAXYMAP);
+    Base* button = element(gui::type::BUTTON_GALAXYMAP);
     if (button->isPressed())
     {
         //player->GetNpc()->ResetScanTarget();
@@ -260,7 +260,7 @@ void GuiManager::resetEventOnGuiElement(gui::type group)
     m_space._resetStateEventOnGuiElement(group);
 }    
 
-BaseGuiElement* GuiManager::element(gui::type request_group) const
+Base* GuiManager::element(gui::type request_group) const
 {
     return m_space.element(request_group);
 }

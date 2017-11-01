@@ -24,7 +24,7 @@ namespace gui {
 
 GuiBar::GuiBar(jeti::control::Material* textureOb)
 :
-BaseGuiElement(gui::type::NONE, gui::type::NONE, "", textureOb)
+Base(gui::type::NONE, gui::type::NONE, "", textureOb)
 {}
 
 /* virtual */

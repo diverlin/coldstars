@@ -32,7 +32,7 @@ namespace gui {
 
 GuiVehicle2::GuiVehicle2()
 :
-BaseGuiElement(gui::type::PLAYER_VEHICLE, gui::type::PLAYER_VEHICLE),
+Base(gui::type::PLAYER_VEHICLE, gui::type::PLAYER_VEHICLE),
 m_vehicle(nullptr)
 {
 

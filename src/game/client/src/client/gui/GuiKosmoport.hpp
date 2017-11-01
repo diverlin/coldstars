@@ -31,7 +31,7 @@ class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
-class GuiKosmoport : public BaseGuiElement
+class GuiKosmoport : public Base
 {
 public:
     GuiKosmoport();
