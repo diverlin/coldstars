@@ -25,32 +25,33 @@ class Vehicle;
 class Store;
 class MouseData; // to be removed
 
+namespace gui {
 
 class GuiVehicle : public BaseGuiElement
 {
-    public:
-        GuiVehicle();
-        virtual ~GuiVehicle();
-        
-        Vehicle* vehicle() const { return m_Vehicle; }
-        bool GetBlockManualExit() const { return block_manual_exit; }
-        bool GetAllowFullControl() const { return allow_full_control; }
-                        
-        void BindVehicle(Vehicle*, const glm::vec2& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
-        void UnbindVehicle();
-    
-    private:     
-        bool block_manual_exit;
-        bool allow_full_control;
-            
-        Vehicle* m_Vehicle;
+public:
+    GuiVehicle();
+    virtual ~GuiVehicle();
 
-        virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
-        
-        void CreateKorpusGui(Vehicle*, float);
-        void CreateItemSlotsGeometry(Vehicle*, float);
-        void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
+    Vehicle* vehicle() const { return m_Vehicle; }
+    bool GetBlockManualExit() const { return block_manual_exit; }
+    bool GetAllowFullControl() const { return allow_full_control; }
+
+    void BindVehicle(Vehicle*, const glm::vec2& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
+    void UnbindVehicle();
+    
+private:
+    bool block_manual_exit;
+    bool allow_full_control;
+
+    Vehicle* m_Vehicle;
+
+    virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
+
+    void CreateKorpusGui(Vehicle*, float);
+    void CreateItemSlotsGeometry(Vehicle*, float);
+    void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
 };
 
-
+} // namespace gui
 

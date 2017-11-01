@@ -38,7 +38,9 @@ class Material;
 
 class Render;
 }
-          
+
+namespace gui {
+
 class BaseGuiElement
 {
     public:
@@ -141,4 +143,4 @@ class BaseGuiElement
     friend class GuiManager;
 };
 
-
+} // namespace gui

@@ -29,6 +29,7 @@
 #include <common/common.hpp>
 //#include <ceti/StringUtils.hpp>
 
+namespace gui {
     
 bool BaseButtonItemSlot::isEquiped() const
 {
@@ -135,3 +136,5 @@ void BaseButtonItemSlot::RenderMarkTarget() const
     //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
     jeti::drawColoredTextWithBackground(std::to_string(m_slot->hitProbability()), /*font_size=*/12, box().middleTop(), glm::ivec4(255));
 }
+
+} // namespace gui

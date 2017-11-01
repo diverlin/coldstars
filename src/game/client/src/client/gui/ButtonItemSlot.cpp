@@ -27,7 +27,9 @@
 #include <client/pilot/Player.hpp>
 
 #include <common/common.hpp>
-    
+
+
+namespace gui {
            
 /* virtual override final */
 void ButtonItemSlot::onPressEventMBL(client::Player* player)
@@ -75,3 +77,5 @@ void ButtonItemSlot::renderInfo(const jeti::Render& render) const
         }
     }
 }
+
+} // namespace gui

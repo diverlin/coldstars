@@ -24,6 +24,8 @@ namespace jeti {
 class Render;
 }
 
+namespace gui {
+
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
@@ -46,4 +48,5 @@ private:
 
 };
 
+} // namespace gui
 

@@ -49,6 +49,8 @@
 #include <client/gui/Slider.hpp>
 #include <client/session/Shortcuts.hpp>
 
+namespace gui {
+
 GuiKosmoport::GuiKosmoport():
 init_done(false), 
 m_kosmoport(nullptr),
@@ -575,3 +577,4 @@ void GuiKosmoport::render(const MouseData& data_mouse)
     }*/
 }
                 
+} // namespace gui

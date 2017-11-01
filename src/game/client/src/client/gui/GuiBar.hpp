@@ -20,6 +20,9 @@
 
 #include "BaseGuiElement.hpp"
 
+
+namespace gui {
+
 class GuiBar : public BaseGuiElement
 {
 public:
@@ -30,4 +33,5 @@ private:
 
 };
 
+} // namespace gui
 

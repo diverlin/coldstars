@@ -20,7 +20,8 @@
 #include "ButtonTrigger.hpp"
 #include <client/pilot/Player.hpp>
     
-/*virtual override final*/
+namespace gui {
+
 void ButtonTrigger::onPressEventMBL(client::Player* player)
 {
     if (m_action)
@@ -58,3 +59,5 @@ void ButtonTrigger::_updateUnique(client::Player* player)
         }
     }
 }
+
+} // namespace gui

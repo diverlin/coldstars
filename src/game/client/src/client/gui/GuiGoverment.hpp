@@ -24,6 +24,9 @@ namespace control {
 class Goverment;
 } // namespace control
 
+
+namespace gui {
+
 class GuiGoverment : public BaseGuiElement
 {
 public:
@@ -39,4 +42,5 @@ private:
     control::Goverment* m_goverment = nullptr;
 };
 
+} // namespace gui
 

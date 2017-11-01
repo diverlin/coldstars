@@ -22,6 +22,9 @@
 
 #include <SFGUI/Desktop.hpp>
 
+
+namespace gui {
+
 class UserInputInSpace;
 
 class UserInput
@@ -53,3 +56,4 @@ private:
     friend class UserInputInSpace;
 };
 
+} // namespace gui

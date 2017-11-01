@@ -27,8 +27,6 @@ namespace model {
 class SpaceObject;
 } // namespace model
 
-class BaseGuiElement;
-
 namespace client {
 class Player;
 } // namespace client
@@ -42,6 +40,8 @@ class Base;
 }
 
 namespace gui {
+
+class BaseGuiElement;
 
 class Cursor
 {

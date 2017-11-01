@@ -36,7 +36,7 @@ Session::Session()
       m_render(new jeti::Render)
     , m_camera(new jeti::Camera)
     , m_screen(new jeti::Screen)
-    , m_inputs(new UserInputInSpace)
+    , m_inputs(new gui::UserInputInSpace)
 {
 }
 

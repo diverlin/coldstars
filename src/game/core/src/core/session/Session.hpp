@@ -25,7 +25,9 @@
 #include <cassert>
 
 // workaround
+namespace gui {
 class UserInputInSpace;
+} // namespace gui
 namespace jeti {
 class Render;
 class Camera;
@@ -65,7 +67,7 @@ public:
     virtual jeti::Render* render() const { assert(false); return nullptr; }
     virtual jeti::Camera* camera() const { assert(false); return nullptr; }
     virtual jeti::Screen* screen() const { assert(false); return nullptr; }
-    virtual UserInputInSpace* inputs() const { assert(false); return nullptr; }
+    virtual gui::UserInputInSpace* inputs() const { assert(false); return nullptr; }
     virtual view::StarSystem* view() const { assert(false); return nullptr; }
     //
 

@@ -27,6 +27,8 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/constants.hpp>
 
+namespace gui {
+
 GuiShop::GuiShop()
 {
     //glm::vec2 center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
@@ -168,4 +170,6 @@ void GuiShop::ButtonsAction(Slider& slider)
         //}
     //}
 }    
+
+} // namespace gui
 

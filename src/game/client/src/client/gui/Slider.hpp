@@ -25,6 +25,8 @@
 #include <dock/Shop.hpp>
 #include "MouseData.hpp"
 
+namespace gui {
+
 class Slider : public BaseGuiElement
 {
 public:
@@ -55,3 +57,4 @@ private:
     jeti::control::Material* textureOb_scale;
 };
 
+} // namespace gui

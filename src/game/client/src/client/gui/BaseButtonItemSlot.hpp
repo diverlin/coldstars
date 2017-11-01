@@ -29,6 +29,9 @@ namespace jeti {
 class Render;
 } // namespace jeti
 
+
+namespace gui {
+
 class BaseButtonItemSlot : public BaseButton
 {
 public:
@@ -56,3 +59,4 @@ private:
     slot::Item* m_slot = nullptr;
 };
 
+} // namespace gui

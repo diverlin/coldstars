@@ -42,7 +42,7 @@ jeti::Screen* screen() {
     return core::Sessions::get().session()->screen();
 }
 
-UserInputInSpace* inputs() {
+gui::UserInputInSpace* inputs() {
     return core::Sessions::get().session()->inputs();
 }
 

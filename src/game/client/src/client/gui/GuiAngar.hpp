@@ -33,6 +33,8 @@ class Item;
 class Vehicle;
 } // namespace control
 
+namespace gui {
+
 class GuiAngar : public BaseGuiElement
 {
 public:
@@ -61,3 +63,4 @@ private:
     std::vector<GuiPair<ceti::Rect, slot::Item*>> m_itemslot_rects;
 };
 
+} // namespace gui

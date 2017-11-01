@@ -26,6 +26,8 @@
 #include <client/gui/GuiManager.hpp>
 #include <ceti/Logger.hpp>
 
+namespace gui {
+
 /* static */
 void GuiActions::GalaxyMapGuiTransition(client::Player* player)
 { 
@@ -36,7 +38,6 @@ void GuiActions::GalaxyMapGuiTransition(client::Player* player)
     if (GuiManager::get().galaxy()->GetGalaxy() == nullptr)
     {
         GuiManager::get().space().EnterGalaxyMap();
-
     }
     else
     {
@@ -64,4 +65,5 @@ void GuiActions::LoadEvent(client::Player* player)
     //global::get().entitiesManager().LoadRequest();
 }
 
+} // namespace gui
 

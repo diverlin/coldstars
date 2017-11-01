@@ -209,7 +209,7 @@ private:
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render= nullptr;
     view::StarSystem* m_view = nullptr;
-    UserInputInSpace* m_inputs = nullptr;
+    gui::UserInputInSpace* m_inputs = nullptr;
     jeti::Screen* m_screen = nullptr;
 
     std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;

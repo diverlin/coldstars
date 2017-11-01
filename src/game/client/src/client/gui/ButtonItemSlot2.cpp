@@ -19,7 +19,8 @@
 #include "ButtonItemSlot2.hpp"
 #include <core/slot/ItemSlot.hpp>
     
-/* virtual override final */
+namespace gui {
+
 void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 {
     if (!isLocked()) {
@@ -87,3 +88,5 @@ void ButtonItemSlot2::_renderUnique(const jeti::Render& render, client::Player*)
         //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
     }
 }        
+
+} // namespace gui

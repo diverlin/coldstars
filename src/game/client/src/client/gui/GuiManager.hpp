@@ -18,13 +18,14 @@
 
 #pragma once
 
-class GuiSkill;
-class GuiGalaxyMap;
-
 #include <client/gui/GuiKosmoport.hpp>
 #include <client/gui/GuiSpace.hpp>
 #include <client/gui/GuiNatureLand.hpp>
 
+namespace gui {
+
+class GuiSkill;
+class GuiGalaxyMap;
 
 class GuiManager
 {
@@ -78,4 +79,4 @@ private:
     Slider* m_slider = nullptr;
 };
 
-
+} // namespace gui

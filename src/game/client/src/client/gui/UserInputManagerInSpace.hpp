@@ -25,6 +25,8 @@ namespace client {
 class Player;
 } // naemspace client
 
+namespace gui {
+
 class UserInputInSpace
 {
 public:
@@ -56,4 +58,4 @@ private:
     void __manageRealTimeInputsInSpace(client::Player*);
 };
 
-
+} // namespace gui

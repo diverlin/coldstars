@@ -828,7 +828,7 @@ void StarSystem::__renderHUD(jeti::Render& render) const {
         return;
     }
 
-    UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
+    gui::UserInput::get().setDesktop(m_guiDemo->desktop()); // hack
     if (m_guiDemo) {
         m_guiDemo->draw();
     }

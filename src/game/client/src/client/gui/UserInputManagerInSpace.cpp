@@ -33,6 +33,8 @@
 #include <client/gui/GuiManager.hpp>
 #include <client/session/Shortcuts.hpp>
 
+namespace gui {
+
 UserInputInSpace::UserInputInSpace()
     :
       m_nextTurnReady(false)
@@ -249,4 +251,6 @@ void UserInputInSpace::__manageRealTimeInputsInSpace(client::Player* player)
         m_scrollAccel.y -= m_scrollStep;
     }
 }
+
+} // namespace gui
 

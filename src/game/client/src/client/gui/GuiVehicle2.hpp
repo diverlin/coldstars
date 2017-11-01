@@ -17,27 +17,27 @@
 */
 
 
-#ifndef GUIVEHICLE2_HPP
-#define GUIVEHICLE2_HPP
+#pragma once
 
 #include "BaseGuiElement.hpp"
 class Vehicle;
 
+namespace gui {
 
 class GuiVehicle2 : public BaseGuiElement
 {
-       public:
-        GuiVehicle2();
-        ~GuiVehicle2() {}
-        
-        virtual void _updateUnique(client::Player*) override final;
-              
-    private:
-        Vehicle* m_vehicle;
+public:
+    GuiVehicle2();
+    ~GuiVehicle2() {}
 
-        void Reset();
-        void BindVehicle(Vehicle*, float scale = 1.0f); 
-        void CreateFunctionalItemSlotsWithCircleGeometry(Vehicle*, float);
+    virtual void _updateUnique(client::Player*) override final;
+
+private:
+    Vehicle* m_vehicle;
+
+    void Reset();
+    void BindVehicle(Vehicle*, float scale = 1.0f);
+    void CreateFunctionalItemSlotsWithCircleGeometry(Vehicle*, float);
 };
 
-#endif
+} // namespace gui

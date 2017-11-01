@@ -33,6 +33,8 @@
 
 #include <jeti/Render.hpp>
 
+namespace gui {
+
 GuiNatureLand::GuiNatureLand()
 {
     //int screen_w = core::global::get().config().SCREEN_WIDTH;
@@ -141,3 +143,5 @@ void GuiNatureLand::RenderEquipedItemSlots() const
             //}
         //glPopMatrix();
 }
+
+} // namespace gui
