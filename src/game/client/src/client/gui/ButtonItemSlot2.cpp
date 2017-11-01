@@ -66,7 +66,7 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
 {
     updateAnimationProgram();
             
-    if (!isAnimationProgramActive()) {
+    if (!hasAnimation()) {
         if (itemSlot()) {
             if (isPressed()) {
                 box().setScale(1.5, 1.5);
