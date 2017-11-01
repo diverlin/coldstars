@@ -149,7 +149,7 @@ void GuiManager::updateSessionInSpace()
 {
     GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
     GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
-    GuiRadar* gui_radar             = (GuiRadar*)element(gui::type::GUI_RADAR);
+    gui::Radar* gui_radar = static_cast<gui::Radar*>(element(gui::type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
 
     assert(gui_scan_vehicle);

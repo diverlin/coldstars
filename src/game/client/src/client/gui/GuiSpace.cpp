@@ -128,7 +128,7 @@ slider_shared(nullptr)
     }
         
     {
-        GuiRadar* gui_radar = new GuiRadar();
+        gui::Radar* gui_radar = new gui::Radar();
         
         glm::vec2 size(250, 250);    
         gui_radar->setSize(size);

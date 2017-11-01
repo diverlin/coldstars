@@ -19,7 +19,7 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-#include <ceti/rect.hpp> // to be removed
+//#include <ceti/rect.hpp> // to be removed
 
 namespace control {
 class SpaceObject;
@@ -30,19 +30,22 @@ namespace jeti {
 class Render;
 }
 
-class GuiRadar : public BaseGuiElement
+
+namespace gui {
+
+class Radar : public BaseGuiElement
 {
 public:
-    GuiRadar();
-    virtual ~GuiRadar() override final;
+    Radar();
+    virtual ~Radar() override final;
     
-    const ceti::Rect& GetRect() const { return m_rect; };
-    void Resize(int, int);
+    //const ceti::Rect& rect() const { return m_rect; }
+    void resize(int, int);
 
-    void ResetData();
+    void resetData();
 
-    void Add(control::SpaceObject*);
-    void AddIfWithinRadarRange(control::SpaceObject*, control::Vehicle*);
+    void add(control::SpaceObject*);
+    void addVisible(control::SpaceObject*, control::Vehicle*);
 
     virtual void _updateUnique(client::Player*) override final;
 
@@ -62,3 +65,4 @@ private:
     std::vector<control::SpaceObject*> m_entities;
 };
 
+} // namespace gui
