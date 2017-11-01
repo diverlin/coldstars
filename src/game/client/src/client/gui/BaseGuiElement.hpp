@@ -148,7 +148,7 @@ private:
     void __setOffset(const glm::vec2& offset) { m_offset = offset; }
     void __setOffset(float x, float y) { m_offset.x = x; m_offset.y = y; }
 
-    friend class GuiManager;
+    friend class Manager;
 };
 
 } // namespace gui
