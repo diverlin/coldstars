@@ -27,13 +27,13 @@ namespace gui {
 class GuiSkill;
 class GuiGalaxyMap;
 
-class GuiManager
+class Manager
 {
 public:
-    static GuiManager& get();
-    ~GuiManager();
+    static Manager& get();
+    ~Manager();
 
-    void SetPlayer(client::Player*);
+    void setPlayer(client::Player*);
 
     GuiKosmoport& kosmoport() { return m_kosmoport; }
     Space& space() { return m_space; }
@@ -59,9 +59,9 @@ public:
     Base* element(gui::type) const;
 
 private:
-    GuiManager();
-    GuiManager(const GuiManager&) = delete;
-    GuiManager& operator=(const GuiManager&) = delete;
+    Manager();
+    Manager(const Manager&) = delete;
+    Manager& operator=(const Manager&) = delete;
 
     std::vector<int> m_commands;
 

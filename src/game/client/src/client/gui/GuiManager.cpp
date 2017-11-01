@@ -42,16 +42,13 @@
 
 namespace gui {
 
-GuiManager& GuiManager::get()
+Manager& Manager::get()
 {
-    static GuiManager instance;
+    static Manager instance;
     return instance;
 }
 
-GuiManager::GuiManager()
-:
-m_player(nullptr),
-m_vehicle(nullptr)
+Manager::Manager()
 {   
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
@@ -78,7 +75,7 @@ m_vehicle(nullptr)
     m_slider           = new Slider();
 }
 
-GuiManager::~GuiManager()
+Manager::~Manager()
 {
     //delete gui_vehicle_scan;
     delete m_skills;
@@ -86,12 +83,12 @@ GuiManager::~GuiManager()
     delete m_slider;
 }
         
-void GuiManager::SetPlayer(client::Player* player)
+void Manager::setPlayer(client::Player* player)
 {    
     this->m_player = player;
 }
 
-bool GuiManager::updateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
+bool Manager::updateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
 {
     //bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
     //if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
@@ -104,7 +101,7 @@ bool GuiManager::updateMouseInteractionWithScanVehicle(const MouseData& data_mou
     return false;
 }
 
-void GuiManager::renderScanVehicle(const MouseData& data_mouse, bool show_skill) const
+void Manager::renderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {    
     //if (player->GetCursor().GetItemSlot()->item() != nullptr)
     {
@@ -124,29 +121,29 @@ void GuiManager::renderScanVehicle(const MouseData& data_mouse, bool show_skill)
     }                                        
 }
 
-void GuiManager::enterKosmoport()
+void Manager::enterKosmoport()
 {
     //gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->vehicle()->GetLand());
     //gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
-void GuiManager::quitKosmoport()
+void Manager::quitKosmoport()
 {    
     //gui_kosmoport.UnbindKosmoport();
     //gui_kosmoport.UnbindSharedGuis();
 }
 
-void GuiManager::enterSpace()
+void Manager::enterSpace()
 {
     //gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
 
-void GuiManager::quitSpace()
+void Manager::quitSpace()
 {
     //gui_space.UnbindSharedGuis();
 }
              
-void GuiManager::updateSessionInSpace()
+void Manager::updateSessionInSpace()
 {
     GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)element(gui::type::SCAN_VEHICLE);
     GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
@@ -206,13 +203,13 @@ void GuiManager::updateSessionInSpace()
     //gui_space.RenderInfo(data_mouse);
 }
 
-void GuiManager::runSessionInKosmoport(const MouseData& data_mouse)
+void Manager::runSessionInKosmoport(const MouseData& data_mouse)
 {
     m_kosmoport.update(data_mouse);
     m_kosmoport.render(data_mouse);
 }
 
-void GuiManager::runSessionInNatureLand(const MouseData& data_mouse)
+void Manager::runSessionInNatureLand(const MouseData& data_mouse)
 {   
     /*     
     Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
@@ -250,17 +247,17 @@ void GuiManager::runSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::pressEventMBL_onGuiElement(gui::type group)
+void Manager::pressEventMBL_onGuiElement(gui::type group)
 {
     m_space._pressEventMBL_onGuiElement(group, m_player);
 }    
 
-void GuiManager::resetEventOnGuiElement(gui::type group)
+void Manager::resetEventOnGuiElement(gui::type group)
 {
     m_space._resetStateEventOnGuiElement(group);
 }    
 
-Base* GuiManager::element(gui::type request_group) const
+Base* Manager::element(gui::type request_group) const
 {
     return m_space.element(request_group);
 }

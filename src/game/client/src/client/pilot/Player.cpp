@@ -72,7 +72,7 @@ Player::Player(int_t id)
 //    setId(id);
 //    setTypeId(entity::Type::PLAYER);
     
-    gui::GuiManager::get().SetPlayer(this);
+    gui::Manager::get().setPlayer(this);
 
     bool debug = false;
     if (debug) {
