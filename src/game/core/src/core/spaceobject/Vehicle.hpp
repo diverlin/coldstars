@@ -124,6 +124,8 @@ public:
     Vehicle(descriptor::Vehicle*, model::Vehicle*);
     ~Vehicle() override;
 
+    bool canRadarObject(SpaceObject* ob) const;
+
     // good
     void dock(SpaceObject*);
     void grab(SpaceObject*);

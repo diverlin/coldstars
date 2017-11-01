@@ -23,7 +23,7 @@
 
 namespace gui {
 
-class GuiBar : public BaseGuiElement
+class GuiBar : public Base
 {
 public:
     GuiBar(jeti::control::Material*);

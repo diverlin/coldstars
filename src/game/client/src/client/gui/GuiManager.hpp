@@ -56,7 +56,7 @@ public:
 
     void pressEventMBL_onGuiElement(gui::type);
     void resetEventOnGuiElement(gui::type);
-    BaseGuiElement* element(gui::type) const;
+    Base* element(gui::type) const;
 
 private:
     GuiManager();

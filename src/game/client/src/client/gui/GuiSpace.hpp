@@ -33,7 +33,7 @@ class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
-class GuiSpace : public BaseGuiElement
+class GuiSpace : public Base
 {
 public:
     GuiSpace();

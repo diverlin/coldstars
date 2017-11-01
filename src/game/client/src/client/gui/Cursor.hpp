@@ -41,7 +41,7 @@ class Base;
 
 namespace gui {
 
-class BaseGuiElement;
+class Base;
 
 class Cursor
 {
@@ -50,7 +50,7 @@ public:
     ~Cursor();
 
     void setFocusedView(view::Base* focusedView) { m_focusedView = focusedView; }
-    void setFocusedView(BaseGuiElement* gui_element) { m_focusedGuiElement = gui_element; }
+    void setFocusedView(Base* gui_element) { m_focusedGuiElement = gui_element; }
 
     view::Base* focusedView() const { return m_focusedView; }
 
@@ -76,7 +76,7 @@ private:
 
     MouseData m_dataMouse;
 
-    BaseGuiElement* m_focusedGuiElement = nullptr;
+    Base* m_focusedGuiElement = nullptr;
 
     ceti::Box2D m_box;
 }; 

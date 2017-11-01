@@ -27,7 +27,7 @@ class MouseData; // to be removed
 
 namespace gui {
 
-class GuiVehicle : public BaseGuiElement
+class GuiVehicle : public Base
 {
 public:
     GuiVehicle();

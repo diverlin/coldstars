@@ -27,10 +27,10 @@
 
 namespace gui {
 
-std::map<gui::type, BaseGuiElement*> BaseGuiElement::m_elements;
+std::map<gui::type, Base*> Base::m_elements;
 
    
-BaseGuiElement::BaseGuiElement(gui::type type_id, gui::type group, const std::string& info, jeti::control::Material* textureOb)
+Base::Base(gui::type type_id, gui::type group, const std::string& info, jeti::control::Material* textureOb)
 :
 m_type(type_id),
 m_group(group),
@@ -44,7 +44,7 @@ m_animationProgram(nullptr)
 {}
 
 /* virtual */
-BaseGuiElement::~BaseGuiElement()
+Base::~Base()
 {
     //for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
     //{
@@ -54,7 +54,7 @@ BaseGuiElement::~BaseGuiElement()
     delete m_animationProgram;
 }    
  
-void BaseGuiElement::_deleteAnimationProgram()
+void Base::_deleteAnimationProgram()
 {
     if (m_animationProgram != nullptr) {
         delete m_animationProgram;
@@ -63,9 +63,9 @@ void BaseGuiElement::_deleteAnimationProgram()
 }
 
           
-BaseGuiElement* BaseGuiElement::element(gui::type request_group) const
+Base* Base::element(gui::type request_group) const
 {
-    std::map<gui::type, BaseGuiElement*>::const_iterator it = m_elements.find(request_group);
+    std::map<gui::type, Base*>::const_iterator it = m_elements.find(request_group);
     if (it != m_elements.cend()) {
         return it->second;
     }
@@ -73,29 +73,29 @@ BaseGuiElement* BaseGuiElement::element(gui::type request_group) const
     return nullptr;
 }   
     
-void BaseGuiElement::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
+void Base::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
 {
-    BaseGuiElement* button = element(group);
+    Base* button = element(group);
     if (button) {
         button->onPressEventMBL(player);
     }
 }    
 
-void BaseGuiElement::_resetStateEventOnGuiElement(gui::type group)
+void Base::_resetStateEventOnGuiElement(gui::type group)
 {
-    BaseGuiElement* button = element(group);
+    Base* button = element(group);
     if (button) {
         button->resetState();
     }
 }    
             
 /* virtual */
-void BaseGuiElement::resetState()
+void Base::resetState()
 {
     m_isPressed = false;
 }
 
-void BaseGuiElement::add(BaseGuiElement* child, const glm::vec2& offset)
+void Base::add(Base* child, const glm::vec2& offset)
 { 
     child->SetOffset(offset);
     child->_setIsRoot(false);
@@ -104,14 +104,14 @@ void BaseGuiElement::add(BaseGuiElement* child, const glm::vec2& offset)
     m_elements.insert(std::make_pair(child->group(), child));
 }
         
-BaseGuiElement*
-BaseGuiElement::updateMouseInteraction(const glm::vec2& mouse_pos)
+Base*
+Base::updateMouseInteraction(const glm::vec2& mouse_pos)
 {
     if (!m_isVisible) {
         return nullptr;
     }
     
-    BaseGuiElement* child_interacted = nullptr;
+    Base* child_interacted = nullptr;
     for (const auto &child : m_children)
     {
         child_interacted = child->updateMouseInteraction(mouse_pos);
@@ -129,7 +129,7 @@ BaseGuiElement::updateMouseInteraction(const glm::vec2& mouse_pos)
     return nullptr;
 }
 
-void BaseGuiElement::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
+void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
 {
     if (!m_isVisible)
     {
@@ -148,7 +148,7 @@ void BaseGuiElement::_updateGeometry(const glm::vec2& parent_offset, const glm::
     }
 }
 
-void BaseGuiElement::update(client::Player* player)
+void Base::update(client::Player* player)
 {
     if (!m_isVisible)
     {
@@ -165,10 +165,10 @@ void BaseGuiElement::update(client::Player* player)
 }
  
 /* virtual */
-void BaseGuiElement::_updateUnique(client::Player*)
+void Base::_updateUnique(client::Player*)
 {}
 
-void BaseGuiElement::_updateCommon(client::Player* player)
+void Base::_updateCommon(client::Player* player)
 {
     for (auto* child : m_children) {
         child->update(player);
@@ -180,7 +180,7 @@ void BaseGuiElement::_updateCommon(client::Player* player)
        }
 }
 
-void BaseGuiElement::render(const jeti::Render& render, client::Player* player) const
+void Base::render(const jeti::Render& render, client::Player* player) const
 {
     if (!m_isVisible)
     {
@@ -201,14 +201,14 @@ void BaseGuiElement::render(const jeti::Render& render, client::Player* player) 
 }
 
 /* virtual */
-void BaseGuiElement::_renderUnique(const jeti::Render& render, client::Player* player) const
+void Base::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     if (m_textureOb) {
         render.drawQuad(*m_textureOb, m_box);
     }
 }
 
-void BaseGuiElement::_renderCommon(const jeti::Render& render, client::Player* player) const
+void Base::_renderCommon(const jeti::Render& render, client::Player* player) const
 {
     for (const auto* gui_element : m_children) {
         gui_element->render(render, player);

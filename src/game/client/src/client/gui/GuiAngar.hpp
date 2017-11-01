@@ -35,7 +35,7 @@ class Vehicle;
 
 namespace gui {
 
-class GuiAngar : public BaseGuiElement
+class GuiAngar : public Base
 {
 public:
     GuiAngar();

@@ -36,7 +36,7 @@ namespace gui {
 
 GuiVehicle::GuiVehicle()
 :
-BaseGuiElement(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
+Base(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
 m_Vehicle(nullptr)
 {   
     int weapon_slot_max   = SLOT_WEAPON_TYPES.size();

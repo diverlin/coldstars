@@ -27,7 +27,7 @@
 
 namespace gui {
 
-class Slider : public BaseGuiElement
+class Slider : public Base
 {
 public:
     Slider();

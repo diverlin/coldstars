@@ -33,7 +33,7 @@ class Item;
 
 namespace gui {
 
-class GuiNatureLand : public BaseGuiElement
+class GuiNatureLand : public Base
 {
 public:
     GuiNatureLand();

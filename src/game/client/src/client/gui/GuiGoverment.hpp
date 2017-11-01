@@ -27,7 +27,7 @@ class Goverment;
 
 namespace gui {
 
-class GuiGoverment : public BaseGuiElement
+class GuiGoverment : public Base
 {
 public:
     GuiGoverment() = default;
