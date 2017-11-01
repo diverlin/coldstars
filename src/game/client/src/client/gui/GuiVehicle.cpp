@@ -37,7 +37,7 @@ namespace gui {
 GuiVehicle::GuiVehicle()
 :
 Base(gui::type::SCAN_VEHICLE, gui::type::SCAN_VEHICLE),
-m_Vehicle(nullptr)
+m_vehicle(nullptr)
 {   
     int weapon_slot_max   = SLOT_WEAPON_TYPES.size();
     int otsec_slot_max    = SLOT_CARGO_TYPES.size();
@@ -186,35 +186,35 @@ m_Vehicle(nullptr)
         add(button, offset);
     }
     
-    allow_full_control = false;
-    block_manual_exit  = false;
+    m_allowFullControl = false;
+    m_blockManualExit  = false;
 }
 
 GuiVehicle::~GuiVehicle()
 {}
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const glm::vec2& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
+void GuiVehicle::bindVehicle(control::Vehicle* vehicle, const glm::vec2& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
-    m_Vehicle = vehicle; 
+    m_vehicle = vehicle;
      
-    this->allow_full_control = allow_full_control;
-    this->block_manual_exit = block_manual_exit;
+    this->m_allowFullControl = allow_full_control;
+    this->m_blockManualExit = block_manual_exit;
 
-    CreateKorpusGui(vehicle, scale);
-    CreateItemSlotsGeometry(vehicle, scale);
+    createKorpusGui(vehicle, scale);
+    createItemSlotsGeometry(vehicle, scale);
 }
 
-void GuiVehicle::UnbindVehicle()
+void GuiVehicle::unbindVehicle()
 { 
     for (auto* child : _children()) {
         child->hide();
         ((ButtonItemSlot*)child)->SetItemSlot(nullptr);
     }
     
-    m_Vehicle = nullptr;
+    m_vehicle = nullptr;
 }
 
-void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
+void GuiVehicle::createKorpusGui(control::Vehicle* vehicle, float scale)
 {
     setMaterial(new jeti::control::Material(MaterialCollector::get().radar_range));
 
@@ -224,7 +224,7 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
     box().setSize(kontur_w * scale, kontur_h * scale);
 }      
   
-void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
+void GuiVehicle::createItemSlotsGeometry(control::Vehicle* vehicle, float scale)
 {
     assert(false);
 //    for (const auto itemslot : vehicle->m_slots)
