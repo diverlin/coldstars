@@ -29,19 +29,20 @@ namespace gui {
 
 std::map<gui::type, Base*> Base::m_elements;
 
-   
 Base::Base(gui::type id,
            gui::type group,
            const std::string& info,
            jeti::model::Material* material)
-:
-m_id(id),
-m_group(group),
-m_info(info)
+    :
+      m_id(id),
+      m_group(group),
+      m_info(info)
 {
     if (material) {
         setMaterial(new jeti::control::Material(material));
     }
+
+    m_elements.insert(std::make_pair(id, this));
 }
 
 /* virtual */
@@ -49,13 +50,13 @@ Base::~Base()
 {
     //for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
     //{
-        //delete *it;
+    //delete *it;
     //}
     
     delete m_material;
     delete m_animation;
 }    
- 
+
 void Base::_deleteAnimationProgram()
 {
     if (m_animation != nullptr) {
@@ -64,7 +65,7 @@ void Base::_deleteAnimationProgram()
     }
 }
 
-          
+
 Base* Base::element(gui::type id)
 {
     std::map<gui::type, Base*>::const_iterator it = m_elements.find(id);
@@ -74,7 +75,7 @@ Base* Base::element(gui::type id)
     
     return nullptr;
 }   
-    
+
 void Base::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
 {
     Base* button = element(group);
@@ -90,7 +91,7 @@ void Base::_resetStateEventOnGuiElement(gui::type group)
         button->resetState();
     }
 }    
-            
+
 /* virtual */
 void Base::resetState()
 {
@@ -103,9 +104,8 @@ void Base::add(Base* child, const glm::vec2& offset)
     child->_setIsRoot(false);
     
     m_children.push_back(child);
-    m_elements.insert(std::make_pair(child->group(), child));
 }
-        
+
 Base*
 Base::updateMouseInteraction(const glm::vec2& mouse_pos)
 {
@@ -126,7 +126,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
             return this;
         }
     }
-         
+
     return nullptr;
 }
 
@@ -139,9 +139,12 @@ void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& pare
     glm::vec2 next_offset = parent_offset + m_offset;
     glm::vec2 next_scale = parent_scale * m_box.scale();
 
+    if (m_id == gui::type::BUTTON_GALAXYMAP) {
+        std::cout<<next_offset.x<<" "<<next_offset.y<<std::endl;
+    }
     m_box.setCenter(next_offset);
     m_box.setScale(next_scale);
-            
+
     for (auto &child : m_children) {
         child->_updateGeometry(next_offset, next_scale);
     }
@@ -160,7 +163,7 @@ void Base::update(client::Player* player)
     _updateCommon(player);
     _updateUnique(player);
 }
- 
+
 /* virtual */
 void Base::_updateUnique(client::Player*)
 {}

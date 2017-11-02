@@ -247,9 +247,9 @@ void Manager::resetEventOnGuiElement(gui::type group)
     m_space._resetStateEventOnGuiElement(group);
 }    
 
-Base* Manager::element(gui::type request_group) const
+Base* Manager::element(gui::type id) const
 {
-    return m_space.element(request_group);
+    return m_space.element(id);
 }
         
 } // namespace gui

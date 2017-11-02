@@ -140,7 +140,7 @@ private:
     bool m_isLocked = false;
     bool m_isPressed = false;
     bool m_isVisible = true;
-    bool m_isRoot = false;
+    bool m_isRoot = true;
 
     glm::vec2 m_offset;
     jeti::AnimationEffect2D* m_animation = nullptr;

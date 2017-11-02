@@ -23,27 +23,27 @@
 namespace ceti {
 
 Box2D::Box2D()
-:
-m_angle(0.0)
+    :
+      m_angle(0.0)
+    , m_scale(glm::vec2(1.0f))
 {
-    setScale(1.0, 1.0);
 }
 
 Box2D::Box2D(const glm::vec2& size)
-:
-m_angle(0.0)
+    :
+      m_angle(0.0f)
+    , m_scale(glm::vec2(1.0f))
+    , m_size(size)
 {
-    setSize(size);
-    setScale(1.0, 1.0);
 }
 
 Box2D::Box2D(const glm::vec2& center, const glm::vec2& size)
-:
-m_angle(0.0)
+    :
+      m_angle(0.0)
+    , m_scale(glm::vec2(1.0f))
+    , m_size(size)
+    , m_center(center)
 {
-    setCenter(center);
-    setSize(size);    
-    setScale(1.0, 1.0);
 }
 
 Box2D::Box2D(const Box2D& rhs)

@@ -37,8 +37,8 @@ public:
                jeti::model::Material* material = nullptr);
     virtual ~BaseButton();
 
-    void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
-    void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_textureOb_mask = textureOb_mask; }
+    void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_material_additional = textureOb_additional; }
+    void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_material_mask = textureOb_mask; }
 
     //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }
     void LockOn();
@@ -52,8 +52,8 @@ public:
 protected:
     float m_alpha;
 
-    jeti::control::Material* m_TextureOb_additional;
-    jeti::control::Material* m_textureOb_mask;
+    jeti::control::Material* m_material_additional;
+    jeti::control::Material* m_material_mask;
 
     void (*m_action)(client::Player*);
 
