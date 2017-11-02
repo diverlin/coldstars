@@ -36,8 +36,6 @@ class Radar : public Base
 public:
     Radar();
     virtual ~Radar() override final;
-    
-    void resize(int, int);
 
     void reset();
 

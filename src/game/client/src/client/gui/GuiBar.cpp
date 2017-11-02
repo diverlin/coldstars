@@ -18,17 +18,35 @@
 
 #include "GuiBar.hpp"
 
-#include "../resources/GuiTextureObCollector.hpp"
+#include <client/session/Shortcuts.hpp>
+#include <jeti/Screen.hpp>
 
 namespace gui {
 
-GuiBar::GuiBar(jeti::model::Material* material)
-:
-Base(gui::type::NONE, gui::type::NONE, "", material)
+Bar::Bar(jeti::model::Material* material, Orientation orientation)
+    :
+      Base(gui::type::NONE,
+           gui::type::NONE,
+           "",
+           material)
+    , m_orientation(orientation)
 {}
 
-/* virtual */
-GuiBar::~GuiBar()
+Bar::~Bar()
 {}
+
+void Bar::_updateUnique(client::Player* player)
+{
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
+
+    // main gui frame
+    box().setSize(screen_w, BAR_HEIGHT);
+    if (m_orientation == Orientation::bottom) {
+        box().setCenter(0, -screen_h/2 + box().size().y);
+    } else {
+        box().setCenter(0, +screen_h/2 - box().size().y);
+    }
+}
 
 } // namespace gui

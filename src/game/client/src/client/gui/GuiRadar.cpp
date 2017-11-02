@@ -44,9 +44,6 @@ Radar::Radar()
     m_material_range = new jeti::control::Material(MaterialCollector::get().radar_range);
         
     m_scale = RADAR_SCALE;
-    int screen_w = client::shortcuts::screen()->width();
-    int screen_h = client::shortcuts::screen()->height();
-    resize(screen_w, screen_h);
 }
 
 Radar::~Radar()
@@ -56,23 +53,19 @@ Radar::~Radar()
     delete m_material_range;
 }
 
-void Radar::resize(int screen_w, int screen_h)
-{
-    m_screen_w = screen_w;
-    m_screen_h = screen_h;
-}
-         
 void Radar::reset()
 {
     m_entities.clear();
 }
 
-/*virtual final*/ 
 void Radar::_updateUnique(client::Player* player)
 {
+    int screen_w = client::shortcuts::screen()->width();
+    int screen_h = client::shortcuts::screen()->height();
+
     // main gui frame
     box().setSize(RADAR_FRAME_SIZE, RADAR_FRAME_SIZE);
-    box().setCenter(m_screen_w/2 - box().size().x, -m_screen_h/2 + box().size().y);
+    box().setCenter(screen_w/2 - box().size().x, -screen_h/2 + box().size().y);
 
     // range mark on radar gui
     float range = player->npc()->vehicle()->properties().radar;

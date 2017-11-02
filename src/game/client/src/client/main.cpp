@@ -215,6 +215,11 @@ private:
     std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;
 
 public:
+
+    bool sessionIsRunning() {
+        return m_screen->window().isOpen();
+    }
+
     Client()
     {
         core::Sessions::get().add(Machine::client, new client::Session);
@@ -294,7 +299,9 @@ int main()
     Server server;
     Client client;
 
-    while(true) {
+    //client::shortcuts::screen()->window().close()
+
+    while(client.sessionIsRunning()) {
         server.update();
         client.update();
     }
