@@ -937,6 +937,28 @@ void Render::drawParticles(const Mesh& mesh, const control::Material& material, 
     }
 }
 
+void Render::drawParticlesForHUD(const Mesh& mesh, const control::Material& material) const
+{
+    drawParticlesForHUD(mesh, material, m_identityMatrix);
+}
+
+void Render::drawParticlesForHUD(const Mesh& mesh, const control::Material& material, const glm::mat4& ModelMatrix) const
+{
+    __useProgram(m_shaders.particle);
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.particle, "uTexture_0"), 0);
+
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glUniform1f(glGetUniformLocation(m_shaders.particle, "u_scale"), m_scale);
+
+        __drawMesh(mesh);
+    }
+}
+
 void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
 {
     __useProgram(m_shaders.particle_blink);

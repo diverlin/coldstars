@@ -49,11 +49,11 @@ Radar::Radar()
 
     m_size_base = 7;
 
-    m_color_star = glm::vec4(1.0f);
-    m_color_planet = glm::vec4(1.0f);
-    m_color_asteroid = glm::vec4(1.0f);
-    m_color_wormhole = glm::vec4(1.0f);
-    m_color_vehicle = glm::vec4(1.0f);
+    m_color_star = glm::vec4(1.0f, 1.0f, 0.5f, 1.0f);
+    m_color_planet = glm::vec4(1.0f, 0.5f, 1.0f, 1.0f);
+    m_color_asteroid = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    m_color_wormhole = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    m_color_vehicle = glm::vec4(0.5f, 1.0f, 1.0f, 1.0f);
 
     m_size_star = 2.0f*m_size_base;
     m_size_planet = 1.5f*m_size_base;
@@ -97,7 +97,7 @@ void Radar::_updateUnique(client::Player* player)
     m_box_range.setCenter(box().center() + meti::to_vec2(player->npc()->vehicle()->position()) * m_scale);
 
     // screen rect
-    m_box_screenrect.setSize(m_screen_w*m_scale, m_screen_h*m_scale);
+    m_box_screenrect.setSize(screen_w*m_scale, screen_h*m_scale);
     m_box_screenrect.setCenter(box().center() + meti::to_vec2(client::shortcuts::camera()->position()) * m_scale);
 
 
@@ -156,11 +156,14 @@ void Radar::__add(control::SpaceObject* object)
         m_sizes.push_back(m_size_wormhole);
         break;
     }
-    case entity::Type::VEHICLE: {
+    case entity::Type::SHIP: {
         m_colors.push_back(m_color_vehicle);
         m_sizes.push_back(m_size_vehicle);
         break;
     }
+    default:
+        assert(false);
+        break;
     }
 }
 
@@ -180,7 +183,7 @@ void Radar::_renderUnique(const jeti::Render& render, client::Player* player) co
 
     if (m_positions.size()) {
         m_entitiesMesh->fillPointVertices(m_positions, m_colors, m_sizes);
-        render.drawParticles(*m_entitiesMesh, *m_material_dot);
+        render.drawParticlesForHUD(*m_entitiesMesh, *m_material_dot);
     }
 }
 

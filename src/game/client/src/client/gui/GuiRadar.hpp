@@ -44,7 +44,7 @@ protected:
 
 private:
     const float RADAR_FRAME_SIZE = 120;
-    const float RADAR_SCALE = 1/50.0;
+    const float RADAR_SCALE = 1/30.0;
 
     glm::vec4 m_color_star;
     glm::vec4 m_color_planet;
@@ -66,9 +66,6 @@ private:
     jeti::control::Material* m_material_screenrect = nullptr;
     jeti::control::Material* m_material_range = nullptr;
     jeti::control::Material* m_material_dot = nullptr;
-
-    int m_screen_w = 0;
-    int m_screen_h = 0;
 
     ceti::Box2D m_box_screenrect;
     ceti::Box2D m_box_range;
