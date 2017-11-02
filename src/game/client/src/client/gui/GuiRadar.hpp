@@ -19,7 +19,6 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-#include <ceti/rect.hpp> // to be removed
 
 namespace control {
 class SpaceObject;
@@ -30,7 +29,6 @@ namespace jeti {
 class Render;
 }
 
-
 namespace gui {
 
 class Radar : public Base
@@ -39,19 +37,21 @@ public:
     Radar();
     virtual ~Radar() override final;
     
-    //const ceti::Rect& rect() const { return m_rect; }
     void resize(int, int);
 
-    void resetData();
+    void reset();
 
     void add(control::SpaceObject*);
     void addVisible(control::SpaceObject*, control::Vehicle*);
 
+protected:
     virtual void _updateUnique(client::Player*) override final;
-
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
 private:
+    const float RADAR_FRAME_SIZE = 120;
+    const float RADAR_SCALE = 1/50.0;
+
     float m_scale = 1.0f;
 
     jeti::control::Material* m_material_background = nullptr;
@@ -59,8 +59,11 @@ private:
     jeti::control::Material* m_material_screenrect = nullptr;
     jeti::control::Material* m_material_range = nullptr;
 
-    ceti::Rect m_rect;
-    ceti::Rect m_screenrect;
+    int m_screen_w = 0;
+    int m_screen_h = 0;
+
+    ceti::Box2D m_box_screenrect;
+    ceti::Box2D m_box_range;
 
     std::vector<control::SpaceObject*> m_entities;
 };

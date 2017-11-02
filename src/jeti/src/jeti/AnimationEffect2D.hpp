@@ -44,7 +44,7 @@ public:
     const glm::vec3& GetScale() const { return scale; }
     float GetAngle() const { return angle; }
 
-    void Update(ceti::Box2D&);
+    void update(ceti::Box2D&);
     void Reset();
 
 private:

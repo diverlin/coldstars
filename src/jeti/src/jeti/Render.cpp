@@ -210,6 +210,7 @@ void Render::init(Camera* camera, int w, int h)
     glewInit();
 
     m_meshQuad = new Mesh;
+    m_meshQuad->setStates(Mesh::States::QUAD);
     m_meshQuadAdditive = new Mesh;
     m_meshQuadAdditive->setStates(Mesh::States::QUAD_ADDITIVE);
 
@@ -414,7 +415,7 @@ void Render::drawQuadHUD(const control::Material& material, const ceti::Box2D& b
 {
     // ugly start
     glm::vec2 pos = box.center();
-    glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
+    glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, 0.0f));
      
 //    glm::quat Qx, Qy, Qz;
     

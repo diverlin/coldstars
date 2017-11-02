@@ -157,7 +157,7 @@ public:
         m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
         core::global::get().telegramHub().subscribe(m_telegramHandler);
 
-        Data data;
+        Data data(/*server*/true);
         m_world = new control::World;
     }
 

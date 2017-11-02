@@ -26,6 +26,7 @@
 #include <core/pilot/Npc.hpp>
 
 #include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
 #include <jeti/Render.hpp>
 
 #include <meti/VectorUtils.hpp>
@@ -57,10 +58,11 @@ Radar::~Radar()
 
 void Radar::resize(int screen_w, int screen_h)
 {
-    m_rect.set(0, 0, 250, 250);
+    m_screen_w = screen_w;
+    m_screen_h = screen_h;
 }
          
-void Radar::resetData()
+void Radar::reset()
 {
     m_entities.clear();
 }
@@ -68,20 +70,25 @@ void Radar::resetData()
 /*virtual final*/ 
 void Radar::_updateUnique(client::Player* player)
 {
-    float range_diameter = 2*player->npc()->vehicle()->properties().radar;
-    box().setSize(range_diameter, range_diameter);
-    box().setCenter(0, 0);
+    // main gui frame
+    box().setSize(RADAR_FRAME_SIZE, RADAR_FRAME_SIZE);
+    box().setCenter(m_screen_w/2 - box().size().x, -m_screen_h/2 + box().size().y);
 
-//    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
-//    const MouseData& data_mouse = player->cursor().mouseData();
-//    if (m_rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
-//    {
-//        if (data_mouse.left_press == true)
-//        {
-//            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - m_rect.center().x - m_screenrect.width()/2)/scale, ( data_mouse.pos_screencoord.y - m_rect.center().y - m_screenrect.height()/2)/scale);
-//            //client::shortcuts::screen()->setBottomLeftScreenWC(new_global_coord);
-//        }
-//    }
+    // range mark on radar gui
+    float range = player->npc()->vehicle()->properties().radar;
+    m_box_range.setSize(range*m_scale, range*m_scale);
+    m_box_range.setCenter(box().center() + meti::vec2(player->npc()->vehicle()->position()) * m_scale);
+
+    // screen rect
+    m_box_screenrect.setSize(m_screen_w*m_scale, m_screen_h*m_scale);
+    m_box_screenrect.setCenter(box().center() + meti::vec2(client::shortcuts::camera()->position()) * m_scale);
+
+    const MouseData& data_mouse = player->cursor().mouseData();
+    if (box().checkInteraction(meti::vec2(data_mouse.screenCoord()))) {
+        if (data_mouse.event() == MouseData::Event::LeftButtonPress) {
+            client::shortcuts::camera()->setPosition(data_mouse.worldCoord());
+        }
+    }
 }
              
 void Radar::add(control::SpaceObject* object)
@@ -96,18 +103,13 @@ void Radar::addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
     }
 }             
             
-/* virtual override final */
 void Radar::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    m_material_background->load();
     render.drawQuadHUD(*m_material_background, box());
-//    /range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
-    
-//    drawTexturedRect(textureOb_background, rect, -2.0);
-//    drawTexturedRect(textureOb_bar, rect, -2.0);
-//    drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
-//    drawTexturedRect(textureOb_range, range_rect, -2.0);
-          return;
+    render.drawQuadHUD(*m_material_bar, box());
+    render.drawQuadHUD(*m_material_range, m_box_range);
+    render.drawQuadHUD(*m_material_screenrect, m_box_screenrect);
+
     float size, size_base = 7;
     {         
         for (const auto& entity: m_entities) {
