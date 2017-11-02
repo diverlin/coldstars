@@ -66,7 +66,7 @@ Space::Space()
     
     /** Top bar */
     {
-        GuiBar* bar_top = new GuiBar(MaterialCollector::get().bar_top);
+        Bar* bar_top = new Bar(MaterialCollector::get().bar_top, Bar::Orientation::top);
 
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_top->setSize(size);
@@ -117,7 +117,7 @@ Space::Space()
     
     /** Bottom bar */
     {
-        GuiBar* bar_bottom = new GuiBar(MaterialCollector::get().bar_bottom);
+        Bar* bar_bottom = new Bar(MaterialCollector::get().bar_bottom, Bar::Orientation::bottom);
 
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_bottom->setSize(size);

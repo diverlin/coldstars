@@ -22,11 +22,20 @@
 
 namespace gui {
 
-class GuiBar : public Base
+class Bar : public Base
 {
 public:
-    GuiBar(jeti::model::Material*);
-    ~GuiBar();
+    enum class Orientation: int {top, bottom};
+
+    Bar(jeti::model::Material*, Orientation orientation);
+    virtual ~Bar();
+
+protected:
+    void _updateUnique(client::Player* player) override final;
+
+private:
+    const float BAR_HEIGHT = 12;
+    Orientation m_orientation = Orientation::bottom;
 };
 
 } // namespace gui

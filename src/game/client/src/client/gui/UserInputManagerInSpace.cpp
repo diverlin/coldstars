@@ -75,11 +75,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             break;
         }
             
-        case sf::Keyboard::Space:
-        {
-//            if (!m_nextTurnReady) {
-//                m_nextTurnReady = true;
-//            }
+        case sf::Keyboard::Space: {
             player->endTurnEvent();
             break;
         }
@@ -128,8 +124,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             break;
         }
 
-        case sf::Keyboard::C:
-        {
+        case sf::Keyboard::C: {
             client::shortcuts::camera()->setTargetPosition(player->position());
             break;
         }
