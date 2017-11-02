@@ -124,6 +124,8 @@ public:
 
     void drawParticles(const Mesh& mesh, const control::Material& material) const;
     void drawParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
+    void drawParticlesForHUD(const Mesh& mesh, const control::Material& material) const;
+    void drawParticlesForHUD(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawBlinkingParticles(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawLines(const Mesh& mesh) const;
