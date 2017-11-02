@@ -37,16 +37,16 @@ Bar::~Bar()
 
 void Bar::_updateUnique(client::Player* player)
 {
-    int screen_w = client::shortcuts::screen()->width();
-    int screen_h = client::shortcuts::screen()->height();
+//    int screen_w = client::shortcuts::screen()->width();
+//    int screen_h = client::shortcuts::screen()->height();
 
-    // main gui frame
-    box().setSize(screen_w, BAR_HEIGHT);
-    if (m_orientation == Orientation::bottom) {
-        box().setCenter(0, -screen_h/2 + box().size().y);
-    } else {
-        box().setCenter(0, +screen_h/2 - box().size().y);
-    }
+//    // main gui frame
+//    box().setSize(screen_w, BAR_HEIGHT);
+//    if (m_orientation == Orientation::bottom) {
+//        box().setOffset(0, -screen_h/2 + box().size().y);
+//    } else {
+//        box().setOffset(0, +screen_h/2 - box().size().y);
+//    }
 }
 
 } // namespace gui

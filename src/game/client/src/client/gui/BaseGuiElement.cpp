@@ -139,9 +139,6 @@ void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& pare
     glm::vec2 next_offset = parent_offset + m_offset;
     glm::vec2 next_scale = parent_scale * m_box.scale();
 
-    if (m_id == gui::type::BUTTON_GALAXYMAP) {
-        std::cout<<next_offset.x<<" "<<next_offset.y<<std::endl;
-    }
     m_box.setCenter(next_offset);
     m_box.setScale(next_scale);
 
