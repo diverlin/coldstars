@@ -46,6 +46,7 @@ MaterialCollector::MaterialCollector() {
     dot_black = __create("data/other/dot_black.png");
     dot_yellow = __create("data/other/dot_yellow.png");
     dot_purple = __create("data/other/dot_purple.png");
+    dot = __create("data/other/dot.png");
 
     radar_screenrect = __create("data/gui/radar_screenrect.png");
     radar_background = __create("data/gui/radar_background.png");

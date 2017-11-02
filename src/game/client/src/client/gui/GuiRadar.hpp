@@ -26,6 +26,7 @@ class Vehicle;
 } // namespace model
 
 namespace jeti {
+class Mesh;
 class Render;
 }
 
@@ -37,11 +38,6 @@ public:
     Radar();
     virtual ~Radar() override final;
 
-    void reset();
-
-    void add(control::SpaceObject*);
-    void addVisible(control::SpaceObject*, control::Vehicle*);
-
 protected:
     virtual void _updateUnique(client::Player*) override final;
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
@@ -50,12 +46,26 @@ private:
     const float RADAR_FRAME_SIZE = 120;
     const float RADAR_SCALE = 1/50.0;
 
+    glm::vec4 m_color_star;
+    glm::vec4 m_color_planet;
+    glm::vec4 m_color_asteroid;
+    glm::vec4 m_color_wormhole;
+    glm::vec4 m_color_vehicle;
+
+    float m_size_base = 0;
+    float m_size_star= 0;
+    float m_size_planet = 0;
+    float m_size_asteroid = 0;
+    float m_size_wormhole = 0;
+    float m_size_vehicle = 0;
+
     float m_scale = 1.0f;
 
     jeti::control::Material* m_material_background = nullptr;
     jeti::control::Material* m_material_bar = nullptr;
     jeti::control::Material* m_material_screenrect = nullptr;
     jeti::control::Material* m_material_range = nullptr;
+    jeti::control::Material* m_material_dot = nullptr;
 
     int m_screen_w = 0;
     int m_screen_h = 0;
@@ -64,6 +74,16 @@ private:
     ceti::Box2D m_box_range;
 
     std::vector<control::SpaceObject*> m_entities;
+    jeti::Mesh* m_entitiesMesh = nullptr;
+
+    std::vector<glm::vec3> m_positions;
+    std::vector<glm::vec4> m_colors;
+    std::vector<float> m_sizes;
+
+    void __reset();
+
+    void __add(control::SpaceObject*);
+    void __addVisible(control::SpaceObject*, control::Vehicle*);
 };
 
 } // namespace gui

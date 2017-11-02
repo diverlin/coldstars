@@ -44,6 +44,7 @@ public:
     jeti::model::Material* dot_black = nullptr;
     jeti::model::Material* dot_yellow = nullptr;
     jeti::model::Material* dot_purple = nullptr;
+    jeti::model::Material* dot = nullptr;
 
     jeti::model::Material* radar_screenrect = nullptr;
     jeti::model::Material* radar_background = nullptr;

@@ -123,9 +123,14 @@ float dotUnits(const glm::vec3& v1, const glm::vec3& v2)
     return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
-glm::vec2 vec2(const glm::vec3& v3)
+glm::vec2 to_vec2(const glm::vec3& v3)
 {
     return glm::vec2(v3.x, v3.y);
+}
+
+glm::vec3 to_vec3(const glm::vec2& v2)
+{
+    return glm::vec3(v2.x, v2.y, 0.0f);
 }
 
 } // namespace meti
