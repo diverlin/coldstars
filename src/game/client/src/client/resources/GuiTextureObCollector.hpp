@@ -64,6 +64,8 @@ public:
 
     static MaterialCollector& get();
 
+    void load() const;
+
 private:
     MaterialCollector();
     ~MaterialCollector();

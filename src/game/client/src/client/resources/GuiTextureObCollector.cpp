@@ -75,9 +75,15 @@ MaterialCollector::~MaterialCollector()
 jeti::model::Material*
 MaterialCollector::__create(const std::string& path)
 {
-    jeti::model::Material* model = new jeti::model::Material("data/other/mask_round.png");
+    jeti::model::Material* model = new jeti::model::Material(path);
     m_models.push_back(model);
     return model;
+}
+
+void MaterialCollector::load() const {
+    for (jeti::model::Material* model: m_models) {
+        model->load();
+    }
 }
 
 } // namespace gui

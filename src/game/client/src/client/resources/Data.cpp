@@ -47,9 +47,13 @@
 #include <string>
 
 
-Data::Data()
+Data::Data(bool server)
 {
     __generate();
+
+    if (!server) {
+        gui::MaterialCollector::get().load();
+    }
 }
 
 Data::~Data()

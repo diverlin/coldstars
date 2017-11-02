@@ -172,7 +172,7 @@ void Base::_updateCommon(client::Player* player)
     }
     
     if (m_animation) {
-        m_animation->Update(m_box);
+        m_animation->update(m_box);
     }
 }
 

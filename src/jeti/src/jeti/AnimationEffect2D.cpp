@@ -22,7 +22,7 @@
 
 namespace jeti {
 
-void AnimationEffect2D::Update(ceti::Box2D& box)
+void AnimationEffect2D::update(ceti::Box2D& box)
 {
     if ((scale.x < scale_min.x) and (scale.y < scale_min.y)) {
         scale_up = true;
