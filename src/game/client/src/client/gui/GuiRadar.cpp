@@ -21,9 +21,10 @@
 #include <client/pilot/Player.hpp>
 #include <client/session/Shortcuts.hpp>
 
-#include <core/spaceobject/SpaceObject.hpp>
-#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/ALL>
 #include <core/pilot/Npc.hpp>
+#include <core/world/starsystem.hpp>
+
 
 #include <jeti/Screen.hpp>
 #include <jeti/Camera.hpp>
@@ -42,20 +43,43 @@ Radar::Radar()
     m_material_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);
     m_material_screenrect = new jeti::control::Material(MaterialCollector::get().radar_screenrect);
     m_material_range = new jeti::control::Material(MaterialCollector::get().radar_range);
-        
+    m_material_dot = new jeti::control::Material(MaterialCollector::get().dot);
+
+    m_entitiesMesh = new jeti::Mesh();
+
+    m_size_base = 7;
+
+    m_color_star = glm::vec4(1.0f);
+    m_color_planet = glm::vec4(1.0f);
+    m_color_asteroid = glm::vec4(1.0f);
+    m_color_wormhole = glm::vec4(1.0f);
+    m_color_vehicle = glm::vec4(1.0f);
+
+    m_size_star = 2.0f*m_size_base;
+    m_size_planet = 1.5f*m_size_base;
+    m_size_asteroid = 1.25f*m_size_base;
+    m_size_wormhole = 1.5f*m_size_base;
+    m_size_vehicle = 1.0f*m_size_base;
+
     m_scale = RADAR_SCALE;
 }
 
 Radar::~Radar()
 {
+    delete m_material_background;
     delete m_material_bar;
     delete m_material_screenrect;
     delete m_material_range;
+    delete m_material_dot;
 }
 
-void Radar::reset()
+void Radar::__reset()
 {
     m_entities.clear();
+
+    m_positions.clear();
+    m_colors.clear();
+    m_sizes.clear();
 }
 
 void Radar::_updateUnique(client::Player* player)
@@ -70,29 +94,80 @@ void Radar::_updateUnique(client::Player* player)
     // range mark on radar gui
     float range = player->npc()->vehicle()->properties().radar;
     m_box_range.setSize(range*m_scale, range*m_scale);
-    m_box_range.setCenter(box().center() + meti::vec2(player->npc()->vehicle()->position()) * m_scale);
+    m_box_range.setCenter(box().center() + meti::to_vec2(player->npc()->vehicle()->position()) * m_scale);
 
     // screen rect
     m_box_screenrect.setSize(m_screen_w*m_scale, m_screen_h*m_scale);
-    m_box_screenrect.setCenter(box().center() + meti::vec2(client::shortcuts::camera()->position()) * m_scale);
+    m_box_screenrect.setCenter(box().center() + meti::to_vec2(client::shortcuts::camera()->position()) * m_scale);
 
+
+    // fill with entitites
+    __reset();
+    control::StarSystem* starsystem = player->npc()->vehicle()->starsystem();
+    for (auto* star: starsystem->stars()) {
+        __add(star);
+    }
+    for (auto* planet: starsystem->planets()) {
+        __add(planet);
+    }
+    for (auto* asteroid: starsystem->asteroids()) {
+        __add(asteroid);
+    }
+    for (auto* vehicle: starsystem->vehicles()) {
+        __add(vehicle);
+    }
+
+    // TODO: to be fixed
     const MouseData& data_mouse = player->cursor().mouseData();
-    if (box().checkInteraction(meti::vec2(data_mouse.screenCoord()))) {
+    if (box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
         if (data_mouse.event() == MouseData::Event::LeftButtonPress) {
             client::shortcuts::camera()->setPosition(data_mouse.worldCoord());
         }
     }
 }
              
-void Radar::add(control::SpaceObject* object)
+void Radar::__add(control::SpaceObject* object)
 {
     m_entities.push_back(object);
+
+    float scale_render = 1.0f; // TODO
+
+    glm::vec3 position = meti::to_vec3(box().center()) + object->position()*m_scale/scale_render;
+    m_positions.push_back(position);
+    switch(object->descriptor()->obType())
+    {
+    case entity::Type::STAR: {
+        m_colors.push_back(m_color_star);
+        m_sizes.push_back(m_size_star);
+        break;
+    }
+    case entity::Type::PLANET: {
+        m_colors.push_back(m_color_planet);
+        m_sizes.push_back(m_size_planet);
+        break;
+    }
+    case entity::Type::ASTEROID: {
+        m_colors.push_back(m_color_asteroid);
+        m_sizes.push_back(m_size_asteroid);
+        break;
+    }
+    case entity::Type::WORMHOLE: {
+        m_colors.push_back(m_color_wormhole);
+        m_sizes.push_back(m_size_wormhole);
+        break;
+    }
+    case entity::Type::VEHICLE: {
+        m_colors.push_back(m_color_vehicle);
+        m_sizes.push_back(m_size_vehicle);
+        break;
+    }
+    }
 }
 
-void Radar::addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
+void Radar::__addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
 {
     if (vehicle->canRadarObject(object)) {
-        add(object);
+        __add(object);
     }
 }             
             
@@ -103,42 +178,9 @@ void Radar::_renderUnique(const jeti::Render& render, client::Player* player) co
     render.drawQuadHUD(*m_material_range, m_box_range);
     render.drawQuadHUD(*m_material_screenrect, m_box_screenrect);
 
-    float size, size_base = 7;
-    {         
-        for (const auto& entity: m_entities) {
-            switch(entity->descriptor()->obType())
-            {
-                case entity::Type::STAR: {
-                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_yellow->model()->texture);
-                    size = 2*size_base;
-                    break;
-                }
-                case entity::Type::PLANET: {
-                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_blue->model()->texture);
-                    size = 1.5*size_base;
-                    break;                
-                }
-                case entity::Type::ASTEROID: {
-                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_red->model()->texture);
-                    size = 1.25*size_base;
-                    break;                
-                }
-                case entity::Type::WORMHOLE: {
-                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_purple->model()->texture);
-                    size = 1.5*size_base;
-                    break;                
-                }
-                case entity::Type::VEHICLE: {
-                    //glBindTexture(GL_TEXTURE_2D, MaterialCollector::get().dot_green->model()->texture);
-                    size = 1*size_base;
-                    break;                
-                }
-            }
-            
-            //float scale_render = Screen::Instance().GetScale();
-            //render.drawParticle(rect.center() + vec2(entity->position()*scale)/scale_render, size);
-            //render.drawParticle(m_rect.center() + vec2(entity->position()), size);
-        }
+    if (m_positions.size()) {
+        m_entitiesMesh->fillPointVertices(m_positions, m_colors, m_sizes);
+        render.drawParticles(*m_entitiesMesh, *m_material_dot);
     }
 }
 
