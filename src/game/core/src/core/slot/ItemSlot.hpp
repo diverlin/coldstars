@@ -84,7 +84,7 @@ public:
     void setPosition(int position) { m_position = position; }
 
     entity::Type type() const { return m_type; }
-    //entity::Type group() const { return m_group; }
+    entity::Type group() const { return m_group; }
     int position() const { return m_position; }
 
 //    virtual void putChildrenToGarbage() const;

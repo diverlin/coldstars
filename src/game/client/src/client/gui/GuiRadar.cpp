@@ -70,7 +70,7 @@ void Radar::_updateUnique(client::Player* player)
 {
     float range_diameter = 2*player->npc()->vehicle()->properties().radar;
     box().setSize(range_diameter, range_diameter);
-    box().setCenter(0, 800);
+    box().setCenter(0, 0);
 
 //    m_screenrect.set(m_rect.center() + client::shortcuts::screen()->bottomLeftScreenWC() * scale, (int)(client::shortcuts::screen()->width() * scale), (int)(client::shortcuts::screen()->height() * scale));
 //    const MouseData& data_mouse = player->cursor().mouseData();

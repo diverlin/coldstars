@@ -20,7 +20,10 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
+
+namespace control {
 class Vehicle;
+} // namespace control
 
 namespace gui {
 
@@ -33,11 +36,11 @@ public:
     virtual void _updateUnique(client::Player*) override final;
 
 private:
-    Vehicle* m_vehicle;
+    control::Vehicle* m_vehicle = nullptr;
 
     void Reset();
-    void BindVehicle(Vehicle*, float scale = 1.0f);
-    void CreateFunctionalItemSlotsWithCircleGeometry(Vehicle*, float);
+    void BindVehicle(control::Vehicle*, float scale = 1.0f);
+    void CreateFunctionalItemSlotsWithCircleGeometry(control::Vehicle*, float);
 };
 
 } // namespace gui
