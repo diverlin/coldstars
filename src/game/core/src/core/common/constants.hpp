@@ -590,7 +590,7 @@ namespace ARTEFACT
 
 namespace GUI
 { 
-    const int BAR_HEIGHT = 30;
+    const int BAR_HEIGHT = 15;
     const int STORE_SLOTS_INROW = 10;
     
     
@@ -611,7 +611,7 @@ namespace GUI
         };
     }
     
-    const int ICON_SIZE = 20;
+    const float ICON_SIZE = 10;
     const int SLIDER_WIDTH = 300;
     const int INSERTED_MODULE_SIZE = 15;
 
