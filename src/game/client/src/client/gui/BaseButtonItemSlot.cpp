@@ -42,42 +42,30 @@ bool BaseButtonItemSlot::isEquiped() const
     return false;
 }   
 
-void BaseButtonItemSlot::updateAnimationProgram()
+void BaseButtonItemSlot::updateAnimation()
 {
-    assert(false);
-//    if (m_ItemSlot != nullptr)
-//    {
-//        if (m_ItemSlot->subtype() != entity::Type::CARGO_SLOT)
-//        {
-//            if (m_ItemSlot->item() != nullptr)
-//            {
-//                if (m_ItemSlot->item()->isFunctioning() == false)
-//                {
-//                    if (GetAnimationProgramActive() == false)
-//                    {
-//                        //SetAnimationProgram(new jeti::AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
-//                        return;
-//                    }
-//                }
-//                else
-//                {
-//                    if (GetAnimationProgramActive() == true)
-//                    {
-//                        DeleteAnimationProgram();
-//                        return;
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                if (GetAnimationProgramActive() == true)
-//                {
-//                    DeleteAnimationProgram();
-//                    return;
-//                }
-//            }
-//        }
-//    }
+    if (m_slot == nullptr) {
+        return;
+    }
+    if (m_slot->group() == entity::Type::CARGO_SLOT) {
+        return;
+    }
+    if (!m_slot->item()) {
+        if (hasAnimation()) {
+            _deleteAnimationProgram();
+        }
+        return;
+    }
+
+    if (!m_slot->item()->isFunctioning()) {
+        if (!hasAnimation()) {
+            //setAnimation(new jeti::AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
+        }
+    } else {
+        if (hasAnimation()) {
+            _deleteAnimationProgram();
+        }
+    }
 }
 
 void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_group) const

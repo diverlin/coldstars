@@ -50,7 +50,7 @@ public:
 protected:
     slot::Item* itemSlot() const { return m_slot; }
 
-    void updateAnimationProgram();
+    void updateAnimation();
 
     void RenderMarkEmptySlot(const jeti::Render&, const glm::vec2&, gui::type) const;
     void RenderMarkTarget() const;

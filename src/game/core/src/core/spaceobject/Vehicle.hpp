@@ -287,6 +287,15 @@ public:
 
     float adjustDissipateFilter() const;
 
+    std::vector<slot::Item*> slots() const
+    {
+        std::vector<slot::Item*> slots;
+        for (auto it: m_slots) {
+            slots.push_back(it.second);
+        }
+        return slots;
+    }
+
 private:
     void __updateFreeSpace();
 //    bool __addItemToCargo(Item*);
@@ -377,10 +386,6 @@ private:
     void __loadItemsFromModel();
 
     void __putChildrenToGarbage() const override;
-
-//private:
-//    class Test_Vehicle;
-//    friend class Test_Vehicle;
 };
 
 

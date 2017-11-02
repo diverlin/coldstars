@@ -48,59 +48,56 @@ void GuiVehicle2::Reset()
     m_vehicle = nullptr;
 }
 
-void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
+void GuiVehicle2::BindVehicle(control::Vehicle* vehicle, float scale)
 {
     CreateFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
     
     m_vehicle = vehicle;
 }    
     
-void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, float scale)
+void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
 {   
     Reset();     
     int angle = 0;
-    assert(false);
-//    for (unsigned int i=0; i<vehicle->m_slots.size(); i++)
-//    {
-//        entity::Type slot_group = vehicle->m_slots[i]->subtype();
-//        if ( (slot_group != entity::Type::CARGO_SLOT) && (slot_group != entity::Type::ARTEFACT_SLOT) )
-//        {
-//            entity::Type entity_type_id = slot_group;
-//            if (slot_group == entity::Type::WEAPON_SLOT)
-//            {
-//                entity_type_id = vehicle->m_slots[i]->subsubtype();
-//            }
+    for (slot::Item* slot: vehicle->slots())
+    {
+        entity::Type slot_group = slot->group();
+        if ( (slot_group != entity::Type::CARGO_SLOT) && (slot_group != entity::Type::ARTEFACT_SLOT) )
+        {
+            entity::Type entity_type_id = slot_group;
+            if (slot_group == entity::Type::WEAPON_SLOT) {
+                entity_type_id = slot->type();
+            }
                           
-//            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-//            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), str(entity_type_id), vehicle->m_slots[i]);
+            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
+            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), entity::to_string(entity_type_id), slot);
 
-//            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-//            button->setSize(size*scale);
+            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+            button->setSize(size*scale);
 
-//            glm::vec2 offset = meti::genVec2f(160, angle);
-//            AddChild(button, offset*scale);
+            glm::vec2 offset = meti::genVec2f(160, angle);
+            add(button, offset*scale);
 
-//            angle += 20;
-//        }
-//    }
+            angle += 20;
+        }
+    }
 }    
 
 /* virtual override final */
 void GuiVehicle2::_updateUnique(client::Player* player)
 {
-    assert(false);
-//    bool need_update = false;
-//    if (m_Vehicle) {
-//        if (m_Vehicle != player->GetNpc()->vehicle()) {
-//            need_update = true;
-//        }
-//    } else {
-//        need_update = true;
-//    }
+    bool need_update = false;
+    if (m_vehicle) {
+        if (m_vehicle != player->npc()->vehicle()) {
+            need_update = true;
+        }
+    } else {
+        need_update = true;
+    }
     
-//    if (need_update) {
-//        BindVehicle(player->GetNpc()->vehicle(), 0.6);
-//    }
+    if (need_update) {
+        BindVehicle(player->npc()->vehicle(), 0.6);
+    }
 }
 
 } // namespace gui
