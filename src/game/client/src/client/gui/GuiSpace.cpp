@@ -83,35 +83,38 @@ Space::Space()
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);
             galaxymap_button->setSize(size);
             
-            glm::vec2 offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0);
+            //glm::vec2 offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0);
+            glm::vec2 offset(0, 0);
             bar_top->add(galaxymap_button, offset);
-        }
-        
-        {
-            ButtonSingle* load_button = new ButtonSingle(gui::type::LOAD,
-                                                         "load",
-                                                         GuiActions::LoadEvent,
-                                                         MaterialCollector::get().icon_plus);
-            
-            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-            load_button->setSize(size);
-            
-            glm::vec2 offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
-            bar_top->add(load_button, offset);
-        }
-        
-        {
-            ButtonSingle* save_button = new ButtonSingle(gui::type::SAVE,
-                                                         "save",
-                                                         GuiActions::SaveEvent,
-                                                         MaterialCollector::get().icon_minus);
 
-            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-            save_button->setSize(size);
-            
-            glm::vec2 offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);
-            bar_top->add(save_button, offset);
+            //galaxymap_button->box().setCenter(200, 200);
         }
+        
+//        {
+//            ButtonSingle* load_button = new ButtonSingle(gui::type::LOAD,
+//                                                         "load",
+//                                                         GuiActions::LoadEvent,
+//                                                         MaterialCollector::get().icon_plus);
+            
+//            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);
+//            load_button->setSize(size);
+            
+//            glm::vec2 offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
+//            bar_top->add(load_button, offset);
+//        }
+        
+//        {
+//            ButtonSingle* save_button = new ButtonSingle(gui::type::SAVE,
+//                                                         "save",
+//                                                         GuiActions::SaveEvent,
+//                                                         MaterialCollector::get().icon_minus);
+
+//            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);
+//            save_button->setSize(size);
+            
+//            glm::vec2 offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);
+//            bar_top->add(save_button, offset);
+//        }
     }
     /** */
     
@@ -271,8 +274,8 @@ void Space::_updateUnique(client::Player* player)
 { 
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
-    ceti::Rect screen_rect(0, 0, screen_w, screen_h);
-    glm::vec2 center_screen(screen_w/2, screen_h/2);
+    //ceti::Rect screen_rect(0, 0, screen_w, screen_h);
+    //glm::vec2 center_screen(screen_w/2, screen_h/2);
 }
 
 //BaseGuiElement* GuiSpace::CheckInteraction(const MouseData& data_mouse)

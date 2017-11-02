@@ -68,7 +68,7 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
 
     {
         m_infoCamera = new info::Camera;
-        sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND*/);
+        sfg::Window::Ptr window = sfg::Window::Create(/*sfg::Window::Style::BACKGROUND|sfg::Window::Style::SHADOW*/);
         window->SetTitle( "Camera" );
         auto container = sfg::Box::Create( sfg::Box::Orientation::VERTICAL );
         container->Pack( m_infoCamera->mainWidget() );
@@ -111,7 +111,7 @@ Demo::Demo(jeti::SFMLWrapper* wrapper)
         m_modelTable = new info::Table();
         m_descriptorTable = new info::Table();
 
-        m_windowObjectProperties = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+        m_windowObjectProperties = sfg::Window::Create(sfg::Window::Style::BACKGROUND|sfg::Window::Style::SHADOW);
         auto box = sfg::Box::Create( sfg::Box::Orientation::HORIZONTAL );
 
         box->Pack(m_modelTable->widget());

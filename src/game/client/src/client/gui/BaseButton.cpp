@@ -33,12 +33,12 @@ BaseButton::BaseButton(gui::type id,
                        const std::string& info,
                        void (*pAction)(client::Player*),
                        jeti::model::Material* material)
-:
-Base(id, group, info, material),
-m_alpha(1.0f),
-m_TextureOb_additional(nullptr),
-m_textureOb_mask(nullptr),
-m_action(pAction)
+    :
+      Base(id, group, info, material),
+      m_alpha(1.0f),
+      m_material_additional(nullptr),
+      m_material_mask(nullptr),
+      m_action(pAction)
 {}
 
 BaseButton::~BaseButton()
@@ -77,7 +77,7 @@ void BaseButton::shadeOff()
 {
     m_alpha = 1.0f;
 }      
-   
+
 /* virtual override */               
 void BaseButton::renderInfo(const jeti::Render&) const
 {
@@ -93,13 +93,13 @@ void BaseButton::_renderUnique(const jeti::Render& render, client::Player*) cons
         render.drawQuadHUD(material(), box());
     }
     
-    if (m_TextureOb_additional) {
-        render.drawQuadHUD(*m_TextureOb_additional, box());
+    if (m_material_additional) {
+        render.drawQuadHUD(*m_material_additional, box());
     }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     
-    if (m_textureOb_mask) {
-        render.drawQuadHUD(*m_textureOb_mask, box());
+    if (m_material_mask) {
+        render.drawQuadHUD(*m_material_mask, box());
     }
     
     if (_label() != "") {
@@ -107,5 +107,5 @@ void BaseButton::_renderUnique(const jeti::Render& render, client::Player*) cons
         client::shortcuts::screen()->drawText(_label(), 12, pos);
     }
 }
-        
+
 } // namespace gui

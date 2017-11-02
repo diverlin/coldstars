@@ -44,7 +44,7 @@ protected:
 
 private:
     const float RADAR_FRAME_SIZE = 120;
-    const float RADAR_SCALE = 1/30.0;
+    const float RADAR_SCALE = 1/40.0;
 
     glm::vec4 m_color_star;
     glm::vec4 m_color_planet;

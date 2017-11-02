@@ -36,9 +36,9 @@
 namespace gui {
 
 Radar::Radar()
+    :
+      Base(gui::type::GUI_RADAR)
 {
-    _setGroup(gui::type::GUI_RADAR);
-    
     m_material_background = new jeti::control::Material(MaterialCollector::get().radar_background);
     m_material_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);
     m_material_screenrect = new jeti::control::Material(MaterialCollector::get().radar_screenrect);
@@ -53,7 +53,7 @@ Radar::Radar()
     m_color_planet = glm::vec4(1.0f, 0.5f, 1.0f, 1.0f);
     m_color_asteroid = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     m_color_wormhole = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    m_color_vehicle = glm::vec4(0.5f, 1.0f, 1.0f, 1.0f);
+    m_color_vehicle = glm::vec4(1.0f, 0.5f, 0.5f, 1.0f);
 
     m_size_star = 2.0f*m_size_base;
     m_size_planet = 1.5f*m_size_base;
