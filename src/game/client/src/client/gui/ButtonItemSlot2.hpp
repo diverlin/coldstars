@@ -37,9 +37,6 @@ public:
     virtual void _updateUnique(client::Player*) override final;
 
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
-
-private:
-
 };
 
 } // namespace gui

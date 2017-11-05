@@ -45,6 +45,7 @@ public:
 
     bool isEquiped() const;
 
+    void setOffset(int offset) { m_offset = offset; }
     void setItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:

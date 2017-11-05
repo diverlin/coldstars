@@ -79,10 +79,10 @@ public:
     Item(Type type);
     virtual ~Item();
 
-    void setPosition(int position) { m_position = position; }
+    void setOffset(int offset) { m_offset = offset; }
 
     Type type() const { return m_type; }
-    int position() const { return m_position; }
+    int offset() const { return m_offset; }
 
 //    virtual void putChildrenToGarbage() const;
 
@@ -143,7 +143,7 @@ private:
 
     void log(const std::string&) const;
 
-    int m_position = NONE;
+    int m_offset = NONE;
     Type m_type = Type::NONE;
 
     //    virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;

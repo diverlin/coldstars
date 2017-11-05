@@ -210,7 +210,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
     // WEAPON SLOTS
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
         slot::Item* slot = new slot::Item(slot::Type::WEAPON);
-        slot->setPosition(i);
+        slot->setOffset(i);
         addItemSlot(slot);
     }
 
@@ -274,7 +274,7 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
     //////// OTSEC SLOT ////////////////////////////////
     for (int i=0; i<descr->cargoSlotNum(); i++) {
         slot::Item* slot = new slot::Item(slot::Type::CARGO);
-        slot->setPosition(i);
+        slot->setOffset(i);
         addItemSlot(slot);
     }
 
@@ -402,7 +402,7 @@ void Vehicle::addItemSlot(slot::Item* slot)
     }
 
     m_slots.insert(std::make_pair(position, slot));
-    slot->setPosition(position);
+    slot->setOffset(position);
 }
 
 bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)

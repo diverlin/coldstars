@@ -21,7 +21,6 @@
 
 #include "BaseButtonItemSlot.hpp"
 
-class Renderer;
 
 namespace gui {
 
@@ -31,11 +30,7 @@ public:
     ButtonItemSlot(slot::Type type)
         :
           BaseButtonItemSlot(type)
-    {
-    }
-
-    slot::Type type() const { return m_type; }
-    void setOffset(int offset) { m_offset = offset; }
+    {}
 
     ~ButtonItemSlot() {}
 
@@ -43,9 +38,6 @@ public:
     virtual void onPressEventMBR(client::Player*) override final;
 
 private:
-    bool m_offset = 0;
-    slot::Type m_type = slot::Type::NONE;
-
     virtual void _updateUnique(client::Player*) override final;
 
     virtual void renderInfo(const jeti::Render&) const override final;
