@@ -137,7 +137,7 @@ Space::Space()
     }
     
     {
-        GuiVehicle2* gui_vehicle_player = new GuiVehicle2();
+        VehicleSimple* gui_vehicle_player = new VehicleSimple();
         
         glm::vec2 size(250, 250);
         gui_vehicle_player->setSize(size);

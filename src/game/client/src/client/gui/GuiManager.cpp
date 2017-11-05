@@ -147,7 +147,7 @@ void Manager::quitSpace()
 void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
 {
     Vehicle* gui_scan_vehicle = (Vehicle*)element(Type::SCAN_VEHICLE);
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(Type::PLAYER_VEHICLE);
+    VehicleSimple* gui_player_vehicle = (VehicleSimple*)element(Type::PLAYER_VEHICLE);
     gui::Radar* gui_radar = static_cast<gui::Radar*>(element(Type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(Type::GALAXYMAP);
 
