@@ -30,14 +30,14 @@
 
 namespace gui {
 
-GuiVehicle2::GuiVehicle2()
+VehicleSimple::VehicleSimple()
     :
       Base(gui::Type::PLAYER_VEHICLE, gui::Type::PLAYER_VEHICLE)
 {
 
 }        
 
-void GuiVehicle2::__reset()
+void VehicleSimple::__reset()
 {
     for (auto* child: _children()) {
         delete child;
@@ -47,14 +47,14 @@ void GuiVehicle2::__reset()
     m_vehicle = nullptr;
 }
 
-void GuiVehicle2::__bindVehicle(control::Vehicle* vehicle, float scale)
+void VehicleSimple::__bindVehicle(control::Vehicle* vehicle, float scale)
 {
     __createFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
     
     m_vehicle = vehicle;
 }    
     
-void GuiVehicle2::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
+void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
 {   
     __reset();
     int angle = 0;
@@ -76,7 +76,7 @@ void GuiVehicle2::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle
 }    
 
 /* virtual override final */
-void GuiVehicle2::_updateUnique(client::Player* player)
+void VehicleSimple::_updateUnique(client::Player* player)
 {
     bool need_update = false;
     if (m_vehicle) {

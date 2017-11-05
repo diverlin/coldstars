@@ -27,11 +27,11 @@ class Vehicle;
 
 namespace gui {
 
-class GuiVehicle2 : public Base
+class VehicleSimple : public Base
 {
 public:
-    GuiVehicle2();
-    ~GuiVehicle2()=default;
+    VehicleSimple();
+    ~VehicleSimple()=default;
 
 protected:
     virtual void _updateUnique(client::Player*) override final;
