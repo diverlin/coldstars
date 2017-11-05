@@ -20,22 +20,36 @@
 
 #include <cassert>
 
-namespace entity {
 
-std::string to_string(Group group)
+namespace slot {
+
+std::string to_string(Type type)
 {
-    switch(group)
+    switch(type)
     {
-    case Group::NONE: { return "entity::Group::NONE"; }
-    case Group::ITEM_SLOT: { return "entity::Group::ITEM_SLOT"; }
-    case Group::WEAPON_SLOT: { return "entity::Group::WEAPON_SLOT"; }
-    case Group::CARGO_SLOT: { return "entity::Group::CARGO_SLOT"; }
-    case Group::ARTEFACT_SLOT: { return "entity::Group::ARTEFACT_SLOT"; }
+    case Type::NONE:     { return "slot::Type::NONE"; }
+    case Type::WEAPON:   { return "slot::Type::WEAPON"; }
+    case Type::CARGO:    { return "slot::Type::CARGO"; }
+    case Type::ARTEFACT: { return "slot::Type::ARTEFACT"; }
+
+    case Type::DRIVE:     { return "slot::Type::DRIVE"; }
+    case Type::RADAR:     { return "slot::Type::RADAR"; }
+    case Type::BAK:       { return "slot::Type::BAK"; }
+    case Type::ENERGIZER: { return "slot::Type::ENERGIZER"; }
+    case Type::PROTECTOR: { return "slot::Type::PROTECTOR"; }
+    case Type::DROID:     { return "slot::Type::DROID"; }
+    case Type::FREEZER:   { return "slot::Type::FREEZER"; }
+    case Type::GRAPPLE:   { return "slot::Type::GRAPPLE"; }
+    case Type::SCANER:    { return "slot::Type::SCANER"; }
     }
 
     assert(false);
     return "UNDEFINED";
 }
+
+} // namespace slot
+
+namespace entity {
 
 std::string to_string(Type type)
 {
@@ -81,25 +95,16 @@ std::string to_string(Type type)
         case Type::GATE_SLOT:         { return "entity::Type::GATE_SLOT"; }
         case Type::REPAIR_SLOT:         { return "entity::Type::REPAIR_SLOT"; }
 
-        case Type::WEAPON1_SLOT:     { return "entity::Type::WEAPON1_SLOT"; }
-        case Type::WEAPON2_SLOT:     { return "entity::Type::WEAPON2_SLOT"; }
-        case Type::WEAPON3_SLOT:     { return "entity::Type::WEAPON3_SLOT"; }
-        case Type::WEAPON4_SLOT:     { return "entity::Type::WEAPON4_SLOT"; }
-        case Type::WEAPON5_SLOT:     { return "entity::Type::WEAPON5_SLOT"; }
-        case Type::WEAPON6_SLOT:     { return "entity::Type::WEAPON6_SLOT"; }
-        case Type::WEAPON7_SLOT:     { return "entity::Type::WEAPON7_SLOT"; }
-        case Type::WEAPON8_SLOT:     { return "entity::Type::WEAPON8_SLOT"; }
-        case Type::WEAPON9_SLOT:     { return "entity::Type::WEAPON9_SLOT"; }
+//        case Type::WEAPON1_SLOT:     { return "entity::Type::WEAPON1_SLOT"; }
+//        case Type::WEAPON2_SLOT:     { return "entity::Type::WEAPON2_SLOT"; }
+//        case Type::WEAPON3_SLOT:     { return "entity::Type::WEAPON3_SLOT"; }
+//        case Type::WEAPON4_SLOT:     { return "entity::Type::WEAPON4_SLOT"; }
+//        case Type::WEAPON5_SLOT:     { return "entity::Type::WEAPON5_SLOT"; }
+//        case Type::WEAPON6_SLOT:     { return "entity::Type::WEAPON6_SLOT"; }
+//        case Type::WEAPON7_SLOT:     { return "entity::Type::WEAPON7_SLOT"; }
+//        case Type::WEAPON8_SLOT:     { return "entity::Type::WEAPON8_SLOT"; }
+//        case Type::WEAPON9_SLOT:     { return "entity::Type::WEAPON9_SLOT"; }
         
-        case Type::DRIVE_SLOT:         { return "entity::Type::DRIVE_SLOT"; }
-        case Type::RADAR_SLOT:         { return "entity::Type::RADAR_SLOT"; }
-        case Type::BAK_SLOT:         { return "entity::Type::BAK_SLOT"; }
-        case Type::ENERGIZER_SLOT:     { return "entity::Type::ENERGIZER_SLOT"; }
-        case Type::PROTECTOR_SLOT:     { return "entity::Type::PROTECTOR_SLOT"; }
-        case Type::DROID_SLOT:         { return "entity::Type::DROID_SLOT"; }
-        case Type::FREEZER_SLOT:     { return "entity::Type::FREEZER_SLOT"; }
-        case Type::GRAPPLE_SLOT:     { return "entity::Type::GRAPPLE_SLOT"; }
-        case Type::SCANER_SLOT:         { return "entity::Type::SCANER_SLOT"; }
 
         case Type::EQUIPMENT:         { return "entity::Type::EQUIPMENT"; }
         case Type::MODULE:             { return "entity::Type::MODULE"; }

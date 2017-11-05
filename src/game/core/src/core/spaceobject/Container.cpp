@@ -96,7 +96,7 @@ Container::Container(descriptor::Container* descr, model::Container* model)
     , m_model_container(model)
 {
 
-    slot::Item* slot = new slot::Item(entity::Group::CARGO_SLOT);
+    slot::Item* slot = new slot::Item(slot::Type::CARGO);
     bindItemSlot(slot);
 
     if (m_model_container->item() != NONE) {

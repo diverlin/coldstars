@@ -362,8 +362,8 @@ genShip()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, 4);
+    int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
     descriptor::Ship* descr = new descriptor::Ship;
     descr->setRace(race_id);
@@ -454,8 +454,8 @@ genSpaceStation()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, 4);
+    int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
     descriptor::SpaceStation* descr = new descriptor::SpaceStation;
     descr->setRace(race_id);
@@ -540,8 +540,8 @@ genSatellite()
     int slot_radar_num     = 1;
     int slot_scaner_num    = 1;
     int slot_weapon_num   = weapons_num;
-    int slot_artefact_num = meti::rand::gen_int(1, SLOT_ARTEFACT_TYPES.size());
-    int slot_cargo_num    = meti::rand::gen_int(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    int slot_artefact_num = meti::rand::gen_int(1, 4);
+    int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
     descriptor::Satellite* descr = new descriptor::Satellite;
     descr->setRace(race_id);

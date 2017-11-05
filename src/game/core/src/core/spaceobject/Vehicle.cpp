@@ -208,75 +208,73 @@ Vehicle::__createSlots(descriptor::Vehicle* descr)
     int offset = 0;
 
     // WEAPON SLOTS
-    assert(descr->weaponSlotNum() <= SLOT_WEAPON_TYPES.size());
     for (int i=0; i<descr->weaponSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::WEAPON_SLOT, SLOT_WEAPON_TYPES[i]);
-        //slot->setSubSubType();
+        slot::Item* slot = new slot::Item(slot::Type::WEAPON);
+        slot->setPosition(i);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->radarSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::RADAR_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::RADAR);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->scanerSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::SCANER_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::SCANER);
         addItemSlot(slot);
     }
 
 
     for (int i=0; i<descr->grappleSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::GRAPPLE_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::GRAPPLE);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->droidSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::DROID_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::DROID);
         addItemSlot(slot);
     }
 
 #ifdef USE_EXTRA_EQUIPMENT
     for (int i=0; i<descr->energizerSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Group::ITEM_SLOT, entity::Type::ENERGIZER_SLOT);
+        slot::ItemSlot* slot = new slot::ItemSlot(slot::Type::ENERGIZER);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->freezerSlotNum(); ++i) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Group::ITEM_SLOT, entity::Type::FREEZER_SLOT);
+        slot::ItemSlot* slot = new slot::ItemSlot(slot::Type::FREEZER);
         AddItemSlot(slot);
     }
 #endif // USE_EXTRA_EQUIPMENT
 
     for (int i=0; i<descr->protectorSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::PROTECTOR_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::PROTECTOR);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->driveSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::DRIVE_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::DRIVE);
         addItemSlot(slot);
     }
 
     for (int i=0; i<descr->bakSlotNum(); ++i) {
-        slot::Item* slot = new slot::Item(entity::Group::ITEM_SLOT, entity::Type::BAK_SLOT);
+        slot::Item* slot = new slot::Item(slot::Type::BAK);
         addItemSlot(slot);
     }
 
 #ifdef USE_ARTEFACTS
     //////////// ARTEFACT SLOT /////////////////////////
     for (int i=0; i<descr->artefactSlotNum(); i++) {
-        slot::ItemSlot* slot = new slot::ItemSlot(entity::Group::ARTEFACT_SLOT, entity::Type::ARTEFACT_SLOT);
-        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
+        slot::ItemSlot* slot = new slot::ItemSlot(slot::Type::ARTEFACT);
+        slot->setPosition(i);
         addItemSlot(slot);
     }
 #endif
 
     //////// OTSEC SLOT ////////////////////////////////
-    assert(descr->cargoSlotNum()<=SLOT_CARGO_TYPES.size());
     for (int i=0; i<descr->cargoSlotNum(); i++) {
-        slot::Item* slot = new slot::Item(entity::Group::CARGO_SLOT, SLOT_CARGO_TYPES[i]);
-        //slot->setSubSubType(SLOT_CARGO_TYPES[i]);
+        slot::Item* slot = new slot::Item(slot::Type::CARGO);
+        slot->setPosition(i);
         addItemSlot(slot);
     }
 
@@ -364,8 +362,8 @@ void Vehicle::addItemSlot(slot::Item* slot)
 {
     slot->setOwner(this);
 
-    switch(slot->group()) {
-    case entity::Group::WEAPON_SLOT: {
+    switch(slot->type()) {
+    case slot::Type::WEAPON: {
         //        float border_start = 0.2;
         //        float border_end   = 0.8;
 
@@ -378,30 +376,31 @@ void Vehicle::addItemSlot(slot::Item* slot)
 
         break;
     }
-    case entity::Group::ITEM_SLOT: {
-        m_equipmentSlots.push_back(slot);
-        switch(slot->type())
-        {
 
-        case entity::Type::DRIVE_SLOT:     { m_drive_complex.addDriveSlot(slot); break; }
-        case entity::Type::BAK_SLOT:       { m_drive_complex.addBakSlot(slot); break; }
-        case entity::Type::PROTECTOR_SLOT: { m_protector_complex.addProtectorSlot(slot); break; }
-        case entity::Type::RADAR_SLOT:     { m_radarSlots.push_back(slot); break; }
-        case entity::Type::SCANER_SLOT:    { m_scanerSlots.push_back(slot); break; }
+    case slot::Type::DRIVE:     { m_drive_complex.addDriveSlot(slot); break; }
+    case slot::Type::BAK:       { m_drive_complex.addBakSlot(slot); break; }
+    case slot::Type::PROTECTOR: { m_protector_complex.addProtectorSlot(slot); break; }
+    case slot::Type::RADAR:     { m_radarSlots.push_back(slot); break; }
+    case slot::Type::SCANER:    { m_scanerSlots.push_back(slot); break; }
 #ifdef USE_EXTRA_EQUIPMENT
-        case entity::Type::ENERGIZER_SLOT: { m_energizerSlots.push_back(slot); break; }
-        case entity::Type::FREEZER_SLOT:   { m_freezerSlots.push_back(slot); break; }
+    case slot::Type::ENERGIZER: { m_energizerSlots.push_back(slot); break; }
+    case slot::Type::FREEZER:   { m_freezerSlots.push_back(slot); break; }
 #endif // USE_EXTRA_EQUIPMENT
-        case entity::Type::GRAPPLE_SLOT:   { m_grapple_complex.addGrappleSlot(slot); break; }
-        case entity::Type::DROID_SLOT:     { m_droidSlots.push_back(slot); break; }
-        }
-    }
+    case slot::Type::GRAPPLE:   { m_grapple_complex.addGrappleSlot(slot); break; }
+    case slot::Type::DROID:     { m_droidSlots.push_back(slot); break; }
 
-    case entity::Group::ARTEFACT_SLOT: { m_artefactSlots.push_back(slot); break; }
-    case entity::Group::CARGO_SLOT: { m_cargoSlots.push_back(slot); break; }
+    case slot::Type::ARTEFACT: { m_artefactSlots.push_back(slot); break; }
+    case slot::Type::CARGO: { m_cargoSlots.push_back(slot); break; }
     } // end top switch
 
     int position = m_slots.size();
+
+    if (slot->type() != slot::Type::WEAPON
+            && slot->type() != slot::Type::CARGO
+            && slot->type() != slot::Type::ARTEFACT) {
+        m_equipmentSlots.push_back(slot);
+    }
+
     m_slots.insert(std::make_pair(position, slot));
     slot->setPosition(position);
 }
@@ -478,13 +477,7 @@ bool Vehicle::_installGoodsPack(Item* item)
 bool Vehicle::__installEquipment(Item* item)
 {
     // todo simplify logic
-    slot::Item* slot = nullptr;
-    if (item->group() == entity::Type::WEAPON) {
-        slot = __freeFunctionalSlot(entity::Group::WEAPON_SLOT);
-    } else {
-        slot = __freeFunctionalSlot(item->descriptor()->slotType());
-    }
-
+    slot::Item* slot = __freeFunctionalSlot(item->descriptor()->slotType());
     if (slot) {
         return slot->insert(item);
     }
@@ -565,20 +558,7 @@ bool Vehicle::installArtefact(item::Base* item)
 #endif
 
 slot::Item*
-Vehicle::__freeFunctionalSlot(const entity::Group& group) const
-{
-    for(slot::Item* slot: m_equipmentSlots) {
-        if (!slot->item()) {
-            if ( slot->group() == group) {
-                return slot;
-            }
-        }
-    }
-    return nullptr;
-}
-
-slot::Item*
-Vehicle::__freeFunctionalSlot(const entity::Type& type) const
+Vehicle::__freeFunctionalSlot(const slot::Type& type) const
 {
     for(slot::Item* slot: m_equipmentSlots) {
         if (!slot->item()) {
@@ -1639,7 +1619,7 @@ STATUS Vehicle::CheckGrabStatus() const
 }
 
 std::vector<slot::Item*>
-Vehicle::__equipedSlotsByType(const entity::Type& type) {
+Vehicle::__equipedSlotsByType(const slot::Type& type) {
     std::vector<slot::Item*> result;
     for(slot::Item* slot: m_equipmentSlots) {
         if (slot->type() == type && slot->item()) {

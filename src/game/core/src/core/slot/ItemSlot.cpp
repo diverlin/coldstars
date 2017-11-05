@@ -85,10 +85,9 @@
 
 namespace slot {
 
-Item::Item(entity::Group group, entity::Type type)
+Item::Item(slot::Type type)
     :
-      m_group(m_group)
-    , m_type(type)
+      m_type(type)
 {
     m_hitProbability = meti::rand::gen_int(100); // (tmp) move to builder
 }
@@ -107,10 +106,10 @@ Item::~Item()
 
 bool Item::__checkItemInsertion(control::Item* item) const
 {
-    if (group() == entity::Group::CARGO_SLOT) {
+    if (type() == slot::Type::CARGO) {
         return true;
     }
-    if (group() == item->descriptor()->slotGroup()) {
+    if (type() == item->descriptor()->slotType()) {
         return true;
     }
     
@@ -119,7 +118,7 @@ bool Item::__checkItemInsertion(control::Item* item) const
 
 bool Item::insert(control::Item* item)
 {
-    if ((group() == entity::Group::CARGO_SLOT) || (group() == item->descriptor()->slotGroup())) {
+    if ((type() == slot::Type::CARGO) || (type() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->release();
@@ -127,7 +126,7 @@ bool Item::insert(control::Item* item)
         item->setSlot(this);
         item->model()->setSlot(position());
 
-        if (group() == item->descriptor()->slotGroup()) {
+        if (type() == item->descriptor()->slotType()) {
             updateVehiclePropetries();
         }
         return true;
@@ -142,14 +141,14 @@ void Item::release()
         return;
     }
 
-    if (group() == entity::Group::WEAPON_SLOT) {
+    if (type() == slot::Type::WEAPON) {
         reset();
     }
 
     // make it oop
     m_item = nullptr;
 
-    if (group() != entity::Group::CARGO_SLOT) {
+    if (type() != slot::Type::CARGO) {
         updateVehiclePropetries();
     }
 }
@@ -192,42 +191,33 @@ void Item::updateVehiclePropetries() const
     // TODO: make it oop
     assert(vehicleOwner());
 
-    if (group() == entity::Group::CARGO_SLOT) {
-        return;
-    }
-    if (group() == entity::Group::WEAPON_SLOT) {
-        vehicleOwner()->_updatePropFire();
-        return;
-    }
-    if (group() == entity::Group::ARTEFACT_SLOT) {
-        vehicleOwner()->_updateArtefactInfluence();
-        return;
-    }
-
     switch(type())
     {
-    case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
-    case entity::Type::BAK_SLOT:         {
+    case slot::Type::CARGO: { break; }
+    case slot::Type::WEAPON: { vehicleOwner()->_updatePropFire(); break; }
+    case slot::Type::ARTEFACT: { vehicleOwner()->_updateArtefactInfluence(); break; }
+    case slot::Type::SCANER:     { vehicleOwner()->_updatePropScan(); break; }
+    case slot::Type::BAK:         {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
 
         break;
     }
 
-    case entity::Type::DRIVE_SLOT:       {
+    case slot::Type::DRIVE:       {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
         break;
     }
 
-    case entity::Type::DROID_SLOT:     { vehicleOwner()->_updatePropRepair(); break; }
+    case slot::Type::DROID:     { vehicleOwner()->_updatePropRepair(); break; }
 #ifdef USE_EXTRA_EQUIPMENT
-    case entity::Type::ENERGIZER_SLOT: { vehicleOwner()->_updatePropEnergy(); break; }
-    case entity::Type::FREEZER_SLOT:     { vehicleOwner()->_updatePropFreeze(); break; }
+    case slot::Type::ENERGIZER: { vehicleOwner()->_updatePropEnergy(); break; }
+    case slot::Type::FREEZER:     { vehicleOwner()->_updatePropFreeze(); break; }
 #endif // USE_EXTRA_EQUIPMENT
-    case entity::Type::GRAPPLE_SLOT:     { vehicleOwner()->_updatePropGrab(); break; }
-    case entity::Type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
-    case entity::Type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
+    case slot::Type::GRAPPLE:     { vehicleOwner()->_updatePropGrab(); break; }
+    case slot::Type::PROTECTOR: { vehicleOwner()->_updatePropProtection(); break; }
+    case slot::Type::RADAR:     { vehicleOwner()->_updatePropRadar(); break; }
 
     default:
         assert(false);

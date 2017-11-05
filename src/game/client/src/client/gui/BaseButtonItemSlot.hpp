@@ -35,17 +35,17 @@ namespace gui {
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(gui::Type type_id, gui::Type group, const std::string& info)
+    BaseButtonItemSlot(slot::Type type)
         :
-          BaseButton(type_id, group, info),
-          m_slot(nullptr)
+          BaseButton(Type::NONE, Type::NONE, slot::to_string(type))
+        , m_type(type)
     {}
 
     virtual ~BaseButtonItemSlot() {}
 
     bool isEquiped() const;
 
-    void SetItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
+    void setItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:
     slot::Item* itemSlot() const { return m_slot; }
@@ -56,6 +56,8 @@ protected:
     void RenderMarkTarget() const;
 
 private:
+    int m_offset = 0;
+    slot::Type m_type = slot::Type::NONE;
     slot::Item* m_slot = nullptr;
 };
 

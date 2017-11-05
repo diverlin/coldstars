@@ -29,13 +29,7 @@ namespace gui {
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot2(gui::Type group, const std::string& info, slot::Item* slot)
-        :
-          BaseButtonItemSlot(gui::Type::BUTTON_ITEMSLOT2, group, info)
-    {
-        SetItemSlot(slot);
-    }
-
+    ButtonItemSlot2(slot::Item*);
     virtual ~ButtonItemSlot2() override final {}
 
     virtual void onPressEventMBL(client::Player*) override final;

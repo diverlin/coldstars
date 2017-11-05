@@ -54,7 +54,7 @@ Drive::Drive()
     setType(descriptor::Type::DRIVE_EQUIPMENT);
     setObType(entity::Type::DRIVE_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(entity::Type::DRIVE_SLOT);
+    setSlotType(slot::Type::DRIVE);
 }
 
 Drive::Drive(const std::string& data)

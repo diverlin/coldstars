@@ -59,10 +59,9 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
     __reset();
     int angle = 0;
     for (slot::Item* slot: vehicle->slots()) {
-        if (slot->group() == entity::Group::WEAPON_SLOT || slot->group() == entity::Group::ITEM_SLOT) {
+        if (slot->type() != slot::Type::CARGO && slot->type() != slot::Type::ARTEFACT) {
 
-            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(slot->type()),
-                                                          entity::to_string(slot->type()), slot);
+            ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
             glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             button->setSize(size*scale);
