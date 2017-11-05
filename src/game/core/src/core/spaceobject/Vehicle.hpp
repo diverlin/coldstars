@@ -378,10 +378,9 @@ private:
 
     bool __installItem(Item*);
     bool __installEquipment(Item*);
-    slot::Item* __freeFunctionalSlot(const entity::Group&) const;
-    slot::Item* __freeFunctionalSlot(const entity::Type&) const;
+    slot::Item* __freeFunctionalSlot(const slot::Type&) const;
 
-    std::vector<slot::Item*> __equipedSlotsByType(const entity::Type&);
+    std::vector<slot::Item*> __equipedSlotsByType(const slot::Type&);
 
     void __loadModel();
     void __loadItemsFromModel();

@@ -76,13 +76,12 @@ namespace slot {
 class Item : public Base, public Weapon
 {
 public:
-    Item(entity::Group, entity::Type type = entity::Type::NONE);
+    Item(Type type);
     virtual ~Item();
 
     void setPosition(int position) { m_position = position; }
 
-    entity::Type type() const { return m_type; }
-    entity::Group group() const { return m_group; }
+    Type type() const { return m_type; }
     int position() const { return m_position; }
 
 //    virtual void putChildrenToGarbage() const;
@@ -145,8 +144,7 @@ private:
     void log(const std::string&) const;
 
     int m_position = NONE;
-    entity::Type m_type = entity::Type::NONE;
-    entity::Group m_group = entity::Group::NONE;
+    Type m_type = Type::NONE;
 
     //    virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
     //    virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;

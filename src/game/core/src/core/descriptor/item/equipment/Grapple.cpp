@@ -55,7 +55,7 @@ Grapple::Grapple()
     setType(descriptor::Type::GRAPPLE_EQUIPMENT);
     setObType(entity::Type::GRAPPLE_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(entity::Type::GRAPPLE_SLOT);
+    setSlotType(slot::Type::GRAPPLE);
 }
 
 Grapple::Grapple(const std::string& data)

@@ -87,10 +87,10 @@ NatureLand::__createInternals(control::NatureLand* natureland)
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
 
     unsigned int item_slot_num = meti::rand::gen_int(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
-    assert(item_slot_num<=SLOT_CARGO_TYPES.size());
     for (unsigned int i=0; i<item_slot_num; i++) {
-        slot::Item* item_slot = new slot::Item(entity::Group::CARGO_SLOT, SLOT_CARGO_TYPES[i]);
-        natureland->add(item_slot);
+        slot::Item* slot = new slot::Item(slot::Type::CARGO);
+        slot->setPosition(i);
+        natureland->add(slot);
     }
     
     for (unsigned int i=0; i<item_slot_num; i++)

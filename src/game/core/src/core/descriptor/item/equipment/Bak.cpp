@@ -45,7 +45,7 @@ Bak::Bak()
     setType(descriptor::Type::BAK_EQUIPMENT);
     setObType(entity::Type::BAK_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(entity::Type::BAK_SLOT);
+    setSlotType(slot::Type::BAK);
 }
 
 Bak::Bak(const std::string& data)

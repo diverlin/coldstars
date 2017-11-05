@@ -28,17 +28,24 @@ namespace gui {
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot(Type group, const std::string& info)
+    ButtonItemSlot(slot::Type type)
         :
-          BaseButtonItemSlot(Type::BUTTON_ITEMSLOT, group, info)
-    {}
+          BaseButtonItemSlot(type)
+    {
+    }
 
-    virtual ~ButtonItemSlot() final {}
+    slot::Type type() const { return m_type; }
+    void setOffset(int offset) { m_offset = offset; }
+
+    ~ButtonItemSlot() {}
 
     virtual void onPressEventMBL(client::Player*) override final;
     virtual void onPressEventMBR(client::Player*) override final;
 
 private:
+    bool m_offset = 0;
+    slot::Type m_type = slot::Type::NONE;
+
     virtual void _updateUnique(client::Player*) override final;
 
     virtual void renderInfo(const jeti::Render&) const override final;

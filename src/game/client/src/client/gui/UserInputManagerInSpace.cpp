@@ -81,18 +81,18 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
         }
 
             //DRIVE SLOT
-        case sf::Keyboard::F: { Manager::get().pressEventMBL_onGuiElement(Type::DRIVE_SLOT_SELECTOR); break; }
+        case sf::Keyboard::F: { /*Manager::get().pressEventMBL_onGuiElement(Type::DRIVE_SLOT_SELECTOR);*/ break; }
 
             // WEAPON SLOTS
-        case sf::Keyboard::Num1: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT1_SELECTOR); break; }
-        case sf::Keyboard::Num2: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT2_SELECTOR); break; }
-        case sf::Keyboard::Num3: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT3_SELECTOR); break; }
-        case sf::Keyboard::Num4: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT4_SELECTOR); break; }
-        case sf::Keyboard::Num5: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT5_SELECTOR); break; }
-        case sf::Keyboard::Num6: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT6_SELECTOR); break; }
-        case sf::Keyboard::Num7: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT7_SELECTOR); break; }
-        case sf::Keyboard::Num8: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT8_SELECTOR); break; }
-        case sf::Keyboard::Num9: { Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT9_SELECTOR); break; }
+        case sf::Keyboard::Num1: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT1_SELECTOR);*/ break; }
+        case sf::Keyboard::Num2: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT2_SELECTOR);*/ break; }
+        case sf::Keyboard::Num3: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT3_SELECTOR);*/ break; }
+        case sf::Keyboard::Num4: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT4_SELECTOR);*/ break; }
+        case sf::Keyboard::Num5: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT5_SELECTOR);*/ break; }
+        case sf::Keyboard::Num6: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT6_SELECTOR);*/ break; }
+        case sf::Keyboard::Num7: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT7_SELECTOR);*/ break; }
+        case sf::Keyboard::Num8: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT8_SELECTOR);*/ break; }
+        case sf::Keyboard::Num9: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT9_SELECTOR); */break; }
             
         case sf::Keyboard::A:
         {
@@ -128,7 +128,7 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
             client::shortcuts::camera()->setTargetPosition(player->position());
             break;
         }
-        case sf::Keyboard::G: { Manager::get().pressEventMBL_onGuiElement(Type::GRAPPLE_SLOT_SELECTOR); break; }
+        case sf::Keyboard::G: { /*Manager::get().pressEventMBL_onGuiElement(Type::GRAPPLE_SLOT_SELECTOR);*/ break; }
             
         case sf::Keyboard::M: { Manager::get().pressEventMBL_onGuiElement(Type::GALAXYMAP); break; }
             

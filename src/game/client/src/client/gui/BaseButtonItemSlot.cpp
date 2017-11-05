@@ -44,10 +44,10 @@ bool BaseButtonItemSlot::isEquiped() const
 
 void BaseButtonItemSlot::updateAnimation()
 {
-    if (m_slot == nullptr) {
+    if (!m_slot) {
         return;
     }
-    if (m_slot->group() == entity::Group::CARGO_SLOT) {
+    if (m_slot->type() == slot::Type::CARGO) {
         return;
     }
     if (!m_slot->item()) {
@@ -78,36 +78,17 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const g
         return;
     }
 
-    Type buton_group = group();
-    for (entity::Type type: SLOT_WEAPON_TYPES) {
-        if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = Type::WEAPON_SLOT;
-            break;
-        }
-    }
-    for (entity::Type type: SLOT_CARGO_TYPES) {
-        if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = Type::CARGO_SLOT;
-            break;
-        }
-    }
-    for (entity::Type type: SLOT_ARTEFACT_TYPES) {
-        if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = Type::ARTEFACT_SLOT;
-            break;
-        }
-    }
-
-    if (buton_group == Type::GATE_SLOT)  {
-        return;
-    }
-    if ((mark_slot_group == buton_group) || (buton_group == Type::CARGO_SLOT)) {
-        //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_accept);
-    } else {
-        if (box().checkInteraction(mouse_screen_coord_pos)) {
-            //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_reject);
-        }
-    }
+    assert(false);
+//    if (type() == slot::Type::GATE)  {
+//        return;
+//    }
+//    if ((mark_slot_group == type()) || (type() == slot::Type::CARGO)) {
+//        //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_accept);
+//    } else {
+//        if (box().checkInteraction(mouse_screen_coord_pos)) {
+//            //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_reject);
+//        }
+//    }
 }
 
 void BaseButtonItemSlot::RenderMarkTarget() const

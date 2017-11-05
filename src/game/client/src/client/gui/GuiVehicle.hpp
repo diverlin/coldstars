@@ -47,13 +47,14 @@ private:
     bool m_blockManualExit;
     bool m_allowFullControl;
 
-    control::Vehicle* m_vehicle;
+    control::Vehicle* m_vehicle = nullptr;
 
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
-    void createKorpusGui(control::Vehicle*, float);
-    void createItemSlotsGeometry(control::Vehicle*, float);
-    void createFunctionalItemSlotsCircleGeometry(control::Vehicle*, float);
+    void __init(control::Vehicle*);
+    void __createKorpusGui(control::Vehicle*, float);
+    void __createItemSlotsGeometry(control::Vehicle*, float);
+    void __createFunctionalItemSlotsCircleGeometry(control::Vehicle*, float);
 };
 
 } // namespace gui

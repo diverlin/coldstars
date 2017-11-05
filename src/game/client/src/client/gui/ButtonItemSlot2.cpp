@@ -21,6 +21,14 @@
     
 namespace gui {
 
+ButtonItemSlot2::ButtonItemSlot2(slot::Item* slot)
+    :
+      BaseButtonItemSlot(slot->type())
+{
+    setItemSlot(slot);
+}
+
+
 void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 {
     if (!isLocked()) {
