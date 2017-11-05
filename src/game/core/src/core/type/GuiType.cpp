@@ -85,7 +85,7 @@ Type getGuiItemSlotType(entity::Type val)
 {
     switch(val)
     {
-        case entity::Type::CARGO_SLOT:     { return gui::Type::CARGO_SLOT; }
+        //case entity::Type::CARGO_SLOT:     { return gui::Type::CARGO_SLOT; }
         case entity::Type::CARGO_SLOT1:    { return gui::Type::CARGO_SLOT1; }
         case entity::Type::CARGO_SLOT2:    { return gui::Type::CARGO_SLOT2; }
         case entity::Type::CARGO_SLOT3:    { return gui::Type::CARGO_SLOT3; }
@@ -105,7 +105,7 @@ Type getGuiItemSlotType(entity::Type val)
         case entity::Type::CARGO_SLOT17:   { return gui::Type::CARGO_SLOT17; }
         case entity::Type::CARGO_SLOT18:   { return gui::Type::CARGO_SLOT18; }
 
-        case entity::Type::WEAPON_SLOT:    { return gui::Type::WEAPON_SLOT; }
+        //case entity::Type::WEAPON_SLOT:    { return gui::Type::WEAPON_SLOT; }
         case entity::Type::WEAPON1_SLOT:   { return gui::Type::WEAPON_SLOT1; }
         case entity::Type::WEAPON2_SLOT:   { return gui::Type::WEAPON_SLOT2; }
         case entity::Type::WEAPON3_SLOT:   { return gui::Type::WEAPON_SLOT3; }
@@ -126,7 +126,7 @@ Type getGuiItemSlotType(entity::Type val)
         case entity::Type::GRAPPLE_SLOT:   { return gui::Type::GRAPPLE_SLOT; }
         case entity::Type::SCANER_SLOT:   { return gui::Type::SCANER_SLOT; }
 
-        case entity::Type::ARTEFACT_SLOT:   { return gui::Type::ARTEFACT_SLOT; }
+        //case entity::Type::ARTEFACT_SLOT:   { return gui::Type::ARTEFACT_SLOT; }
         case entity::Type::ARTEFACT_SLOT1:  { return gui::Type::ARTEFACT_SLOT1; }
         case entity::Type::ARTEFACT_SLOT2:  { return gui::Type::ARTEFACT_SLOT2; }
         case entity::Type::ARTEFACT_SLOT3:  { return gui::Type::ARTEFACT_SLOT3; }

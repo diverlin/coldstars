@@ -378,6 +378,7 @@ private:
 
     bool __installItem(Item*);
     bool __installEquipment(Item*);
+    slot::Item* __freeFunctionalSlot(const entity::Group&) const;
     slot::Item* __freeFunctionalSlot(const entity::Type&) const;
 
     std::vector<slot::Item*> __equipedSlotsByType(const entity::Type&);

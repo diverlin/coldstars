@@ -22,6 +22,21 @@
 
 namespace entity {
 
+std::string to_string(Group group)
+{
+    switch(group)
+    {
+    case Group::NONE: { return "entity::Group::NONE"; }
+    case Group::ITEM_SLOT: { return "entity::Group::ITEM_SLOT"; }
+    case Group::WEAPON_SLOT: { return "entity::Group::WEAPON_SLOT"; }
+    case Group::CARGO_SLOT: { return "entity::Group::CARGO_SLOT"; }
+    case Group::ARTEFACT_SLOT: { return "entity::Group::ARTEFACT_SLOT"; }
+    }
+
+    assert(false);
+    return "UNDEFINED";
+}
+
 std::string to_string(Type type)
 {
     switch(type)
@@ -62,12 +77,10 @@ std::string to_string(Type type)
         case Type::VEHICLE_SLOT:             { return "entity::Type::VEHICLE_SLOT"; }
         case Type::VEHICLE_MILITARY_SLOT:     { return "entity::Type::VEHICLE_MILITARY_SLOT"; }
         case Type::VEHICLE_VISITORS_SLOT:     { return "entity::Type::VEHICLE_VISITORS_SLOT"; }
-        case Type::ITEM_SLOT:         { return "entity::Type::ITEM_SLOT"; }
         
-        case Type::CARGO_SLOT:         { return "entity::Type::CARGO_SLOT"; }
         case Type::GATE_SLOT:         { return "entity::Type::GATE_SLOT"; }
         case Type::REPAIR_SLOT:         { return "entity::Type::REPAIR_SLOT"; }
-        case Type::WEAPON_SLOT:         { return "entity::Type::WEAPON_SLOT"; }
+
         case Type::WEAPON1_SLOT:     { return "entity::Type::WEAPON1_SLOT"; }
         case Type::WEAPON2_SLOT:     { return "entity::Type::WEAPON2_SLOT"; }
         case Type::WEAPON3_SLOT:     { return "entity::Type::WEAPON3_SLOT"; }
@@ -87,7 +100,6 @@ std::string to_string(Type type)
         case Type::FREEZER_SLOT:     { return "entity::Type::FREEZER_SLOT"; }
         case Type::GRAPPLE_SLOT:     { return "entity::Type::GRAPPLE_SLOT"; }
         case Type::SCANER_SLOT:         { return "entity::Type::SCANER_SLOT"; }
-        case Type::ARTEFACT_SLOT:     { return "entity::Type::ARTEFACT_SLOT"; }
 
         case Type::EQUIPMENT:         { return "entity::Type::EQUIPMENT"; }
         case Type::MODULE:             { return "entity::Type::MODULE"; }
@@ -125,11 +137,10 @@ std::string to_string(Type type)
         case Type::PIRAT:     { return "entity::Type::PIRAT"; }
         case Type::TRADER:     { return "entity::Type::TRADER"; }
         case Type::DIPLOMAT: { return "entity::Type::DIPLOMAT"; }
-
-    default: {
-        assert(false);
-        return "entity::Type::UNKNOWN type"; }
     }
+
+    assert(false);
+    return "UNDEFINED";
 }
 
 } // namespace entity
