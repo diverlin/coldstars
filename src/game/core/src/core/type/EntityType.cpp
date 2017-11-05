@@ -68,15 +68,15 @@ std::string to_string(Type type)
         case Type::GATE_SLOT:         { return "entity::Type::GATE_SLOT"; }
         case Type::REPAIR_SLOT:         { return "entity::Type::REPAIR_SLOT"; }
         case Type::WEAPON_SLOT:         { return "entity::Type::WEAPON_SLOT"; }
-        case Type::WEAPON_SLOT1:     { return "entity::Type::WEAPON_SLOT1"; }
-        case Type::WEAPON_SLOT2:     { return "entity::Type::WEAPON_SLOT2"; }
-        case Type::WEAPON_SLOT3:     { return "entity::Type::WEAPON_SLOT3"; }
-        case Type::WEAPON_SLOT4:     { return "entity::Type::WEAPON_SLOT4"; }
-        case Type::WEAPON_SLOT5:     { return "entity::Type::WEAPON_SLOT5"; }
-        case Type::WEAPON_SLOT6:     { return "entity::Type::WEAPON_SLOT6"; }
-        case Type::WEAPON_SLOT7:     { return "entity::Type::WEAPON_SLOT7"; }
-        case Type::WEAPON_SLOT8:     { return "entity::Type::WEAPON_SLOT8"; }
-        case Type::WEAPON_SLOT9:     { return "entity::Type::WEAPON_SLOT9"; }
+        case Type::WEAPON1_SLOT:     { return "entity::Type::WEAPON1_SLOT"; }
+        case Type::WEAPON2_SLOT:     { return "entity::Type::WEAPON2_SLOT"; }
+        case Type::WEAPON3_SLOT:     { return "entity::Type::WEAPON3_SLOT"; }
+        case Type::WEAPON4_SLOT:     { return "entity::Type::WEAPON4_SLOT"; }
+        case Type::WEAPON5_SLOT:     { return "entity::Type::WEAPON5_SLOT"; }
+        case Type::WEAPON6_SLOT:     { return "entity::Type::WEAPON6_SLOT"; }
+        case Type::WEAPON7_SLOT:     { return "entity::Type::WEAPON7_SLOT"; }
+        case Type::WEAPON8_SLOT:     { return "entity::Type::WEAPON8_SLOT"; }
+        case Type::WEAPON9_SLOT:     { return "entity::Type::WEAPON9_SLOT"; }
         
         case Type::DRIVE_SLOT:         { return "entity::Type::DRIVE_SLOT"; }
         case Type::RADAR_SLOT:         { return "entity::Type::RADAR_SLOT"; }

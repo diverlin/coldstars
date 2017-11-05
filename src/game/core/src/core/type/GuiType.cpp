@@ -106,15 +106,15 @@ Type getGuiItemSlotType(entity::Type val)
         case entity::Type::CARGO_SLOT18:   { return gui::Type::CARGO_SLOT18; }
 
         case entity::Type::WEAPON_SLOT:    { return gui::Type::WEAPON_SLOT; }
-        case entity::Type::WEAPON_SLOT1:   { return gui::Type::WEAPON_SLOT1; }
-        case entity::Type::WEAPON_SLOT2:   { return gui::Type::WEAPON_SLOT2; }
-        case entity::Type::WEAPON_SLOT3:   { return gui::Type::WEAPON_SLOT3; }
-        case entity::Type::WEAPON_SLOT4:   { return gui::Type::WEAPON_SLOT4; }
-        case entity::Type::WEAPON_SLOT5:   { return gui::Type::WEAPON_SLOT5; }
-        case entity::Type::WEAPON_SLOT6:   { return gui::Type::WEAPON_SLOT6; }
-        case entity::Type::WEAPON_SLOT7:   { return gui::Type::WEAPON_SLOT7; }
-        case entity::Type::WEAPON_SLOT8:   { return gui::Type::WEAPON_SLOT8; }
-        case entity::Type::WEAPON_SLOT9:   { return gui::Type::WEAPON_SLOT9; }
+        case entity::Type::WEAPON1_SLOT:   { return gui::Type::WEAPON_SLOT1; }
+        case entity::Type::WEAPON2_SLOT:   { return gui::Type::WEAPON_SLOT2; }
+        case entity::Type::WEAPON3_SLOT:   { return gui::Type::WEAPON_SLOT3; }
+        case entity::Type::WEAPON4_SLOT:   { return gui::Type::WEAPON_SLOT4; }
+        case entity::Type::WEAPON5_SLOT:   { return gui::Type::WEAPON_SLOT5; }
+        case entity::Type::WEAPON6_SLOT:   { return gui::Type::WEAPON_SLOT6; }
+        case entity::Type::WEAPON7_SLOT:   { return gui::Type::WEAPON_SLOT7; }
+        case entity::Type::WEAPON8_SLOT:   { return gui::Type::WEAPON_SLOT8; }
+        case entity::Type::WEAPON9_SLOT:   { return gui::Type::WEAPON_SLOT9; }
 
         case entity::Type::DRIVE_SLOT:   { return gui::Type::DRIVE_SLOT; }
         case entity::Type::RADAR_SLOT:   { return gui::Type::RADAR_SLOT; }
@@ -145,15 +145,15 @@ Type getGuiItemSlotSelectorType(entity::Type id)
 {
     switch(id)
     {
-        case entity::Type::WEAPON_SLOT1:   { return gui::Type::WEAPON_SLOT1_SELECTOR; }
-        case entity::Type::WEAPON_SLOT2:   { return gui::Type::WEAPON_SLOT2_SELECTOR; }
-        case entity::Type::WEAPON_SLOT3:   { return gui::Type::WEAPON_SLOT3_SELECTOR; }
-        case entity::Type::WEAPON_SLOT4:   { return gui::Type::WEAPON_SLOT4_SELECTOR; }
-        case entity::Type::WEAPON_SLOT5:   { return gui::Type::WEAPON_SLOT5_SELECTOR; }
-        case entity::Type::WEAPON_SLOT6:   { return gui::Type::WEAPON_SLOT6_SELECTOR; }
-        case entity::Type::WEAPON_SLOT7:   { return gui::Type::WEAPON_SLOT7_SELECTOR; }
-        case entity::Type::WEAPON_SLOT8:   { return gui::Type::WEAPON_SLOT8_SELECTOR; }
-        case entity::Type::WEAPON_SLOT9:   { return gui::Type::WEAPON_SLOT9_SELECTOR; }
+        case entity::Type::WEAPON1_SLOT:   { return gui::Type::WEAPON_SLOT1_SELECTOR; }
+        case entity::Type::WEAPON2_SLOT:   { return gui::Type::WEAPON_SLOT2_SELECTOR; }
+        case entity::Type::WEAPON3_SLOT:   { return gui::Type::WEAPON_SLOT3_SELECTOR; }
+        case entity::Type::WEAPON4_SLOT:   { return gui::Type::WEAPON_SLOT4_SELECTOR; }
+        case entity::Type::WEAPON5_SLOT:   { return gui::Type::WEAPON_SLOT5_SELECTOR; }
+        case entity::Type::WEAPON6_SLOT:   { return gui::Type::WEAPON_SLOT6_SELECTOR; }
+        case entity::Type::WEAPON7_SLOT:   { return gui::Type::WEAPON_SLOT7_SELECTOR; }
+        case entity::Type::WEAPON8_SLOT:   { return gui::Type::WEAPON_SLOT8_SELECTOR; }
+        case entity::Type::WEAPON9_SLOT:   { return gui::Type::WEAPON_SLOT9_SELECTOR; }
 
         case entity::Type::DRIVE_SLOT:   { return gui::Type::DRIVE_SLOT_SELECTOR; }
         case entity::Type::RADAR_SLOT:   { return gui::Type::RADAR_SLOT_SELECTOR; }

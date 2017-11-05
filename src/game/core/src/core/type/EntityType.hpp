@@ -73,7 +73,7 @@ namespace entity
         CARGO_SLOT10, CARGO_SLOT11, CARGO_SLOT12, CARGO_SLOT13, CARGO_SLOT14, CARGO_SLOT15, CARGO_SLOT16, CARGO_SLOT17, CARGO_SLOT18,
                 
         WEAPON_SLOT, 
-        WEAPON_SLOT1, WEAPON_SLOT2, WEAPON_SLOT3, WEAPON_SLOT4, WEAPON_SLOT5, WEAPON_SLOT6, WEAPON_SLOT7, WEAPON_SLOT8, WEAPON_SLOT9,
+        WEAPON1_SLOT, WEAPON2_SLOT, WEAPON3_SLOT, WEAPON4_SLOT, WEAPON5_SLOT, WEAPON6_SLOT, WEAPON7_SLOT, WEAPON8_SLOT, WEAPON9_SLOT,
         
         GATE_SLOT, REPAIR_SLOT, CHARGE_SLOT,
         
@@ -100,15 +100,15 @@ namespace entity
  
 const std::vector<entity::Type> SLOT_WEAPON_TYPES =
 { 
-entity::Type::WEAPON_SLOT1,
-entity::Type::WEAPON_SLOT2,
-entity::Type::WEAPON_SLOT3,
-entity::Type::WEAPON_SLOT4,
-entity::Type::WEAPON_SLOT5,
-entity::Type::WEAPON_SLOT6,
-entity::Type::WEAPON_SLOT7,
-entity::Type::WEAPON_SLOT8,
-entity::Type::WEAPON_SLOT9
+entity::Type::WEAPON1_SLOT,
+entity::Type::WEAPON2_SLOT,
+entity::Type::WEAPON3_SLOT,
+entity::Type::WEAPON4_SLOT,
+entity::Type::WEAPON5_SLOT,
+entity::Type::WEAPON6_SLOT,
+entity::Type::WEAPON7_SLOT,
+entity::Type::WEAPON8_SLOT,
+entity::Type::WEAPON9_SLOT
 };
    
 const std::vector<entity::Type> SLOT_CARGO_TYPES =
