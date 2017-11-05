@@ -146,10 +146,10 @@ void Manager::quitSpace()
              
 void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
 {
-    Vehicle* gui_scan_vehicle = (Vehicle*)element(gui::type::SCAN_VEHICLE);
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(gui::type::PLAYER_VEHICLE);
-    gui::Radar* gui_radar = static_cast<gui::Radar*>(element(gui::type::GUI_RADAR));
-    GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(gui::type::GALAXYMAP);
+    Vehicle* gui_scan_vehicle = (Vehicle*)element(Type::SCAN_VEHICLE);
+    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)element(Type::PLAYER_VEHICLE);
+    gui::Radar* gui_radar = static_cast<gui::Radar*>(element(Type::GUI_RADAR));
+    GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(Type::GALAXYMAP);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -173,7 +173,7 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
         gui_radar->show();
     }
 
-    Base* button = element(gui::type::BUTTON_GALAXYMAP);
+    Base* button = element(Type::BUTTON_GALAXYMAP);
     if (button->isPressed()) {
         //player->GetNpc()->ResetScanTarget();
 
@@ -237,17 +237,17 @@ void Manager::runSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void Manager::pressEventMBL_onGuiElement(gui::type group)
+void Manager::pressEventMBL_onGuiElement(Type group)
 {
     m_space._pressEventMBL_onGuiElement(group, m_player);
 }    
 
-void Manager::resetEventOnGuiElement(gui::type group)
+void Manager::resetEventOnGuiElement(Type group)
 {
     m_space._resetStateEventOnGuiElement(group);
 }    
 
-Base* Manager::element(gui::type id) const
+Base* Manager::element(Type id) const
 {
     return m_space.element(id);
 }

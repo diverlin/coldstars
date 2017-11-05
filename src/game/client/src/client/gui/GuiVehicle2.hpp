@@ -31,16 +31,17 @@ class GuiVehicle2 : public Base
 {
 public:
     GuiVehicle2();
-    ~GuiVehicle2() {}
+    ~GuiVehicle2()=default;
 
+protected:
     virtual void _updateUnique(client::Player*) override final;
 
 private:
     control::Vehicle* m_vehicle = nullptr;
 
-    void Reset();
-    void BindVehicle(control::Vehicle*, float scale = 1.0f);
-    void CreateFunctionalItemSlotsWithCircleGeometry(control::Vehicle*, float);
+    void __reset();
+    void __bindVehicle(control::Vehicle*, float scale = 1.0f);
+    void __createFunctionalItemSlotsWithCircleGeometry(control::Vehicle*, float);
 };
 
 } // namespace gui

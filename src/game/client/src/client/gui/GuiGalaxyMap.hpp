@@ -44,12 +44,12 @@ public:
     void BindGalaxy(model::Galaxy*);
     void UnbindGalaxy();
 
-    model::Galaxy* GetGalaxy() const { return m_Galaxy; }
+    model::Galaxy* GetGalaxy() const { return m_galaxy; }
 
 private:
     float m_ScaleParsecToScreenCoord;
 
-    model::Galaxy* m_Galaxy;
+    model::Galaxy* m_galaxy = nullptr;
 
 //    jeti::PathView m_VisualHyperJumpRange;
 //    jeti::PathView m_VisualHyperJumpPath;

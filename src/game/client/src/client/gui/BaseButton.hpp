@@ -30,8 +30,8 @@ namespace gui {
 class BaseButton : public Base
 {
 public:
-    BaseButton(gui::type,
-               gui::type,
+    BaseButton(gui::Type,
+               gui::Type,
                const std::string&,
                void (*pAction)(client::Player*) = nullptr,
                jeti::model::Material* material = nullptr);
@@ -50,10 +50,10 @@ public:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override;
 
 protected:
-    float m_alpha;
+    float m_alpha = 1.0f;
 
-    jeti::control::Material* m_material_additional;
-    jeti::control::Material* m_material_mask;
+    jeti::control::Material* m_material_additional = nullptr;
+    jeti::control::Material* m_material_mask = nullptr;
 
     void (*m_action)(client::Player*);
 

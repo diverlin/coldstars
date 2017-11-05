@@ -154,7 +154,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 
     float scale = 1.1;
     if (m_focusedGuiElement) {
-        if (m_focusedGuiElement->id() == gui::type::BUTTON_ITEMSLOT) {
+        if (m_focusedGuiElement->id() == Type::BUTTON_ITEMSLOT) {
             ceti::Box2D box(m_focusedGuiElement->box());
             box.setScale(scale, scale);
 

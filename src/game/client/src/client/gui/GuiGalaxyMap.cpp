@@ -51,8 +51,7 @@ namespace gui {
 
 GuiGalaxyMap::GuiGalaxyMap()
 :
-Base(gui::type::GALAXYMAP, gui::type::GALAXYMAP),
-m_Galaxy(nullptr)
+Base(Type::GALAXYMAP, Type::GALAXYMAP)
 { 
 //    int w = core::global::get().config().width;
 //    int h = core::global::get().config().height;
@@ -79,12 +78,12 @@ glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const model::Starsystem& s
 
 void GuiGalaxyMap::BindGalaxy(model::Galaxy* galaxy)
 {
-    m_Galaxy = galaxy;
+    m_galaxy = galaxy;
 }
                 
 void GuiGalaxyMap::UnbindGalaxy()
 {
-    m_Galaxy = nullptr;
+    m_galaxy = nullptr;
 }
         
 /* virtual override final */

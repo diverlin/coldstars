@@ -25,13 +25,13 @@ namespace gui {
 class ButtonTrigger : public BaseButton
 {
 public:
-    ButtonTrigger(gui::type id,
+    ButtonTrigger(Type id,
                   const std::string& info,
                   void (*pAction)(client::Player*),
                   jeti::model::Material* material)
         :
           BaseButton(id,
-                     gui::type::BUTTON_TRIGGER,
+                     Type::BUTTON_TRIGGER,
                      info,
                      pAction,
                      material) {}

@@ -28,16 +28,13 @@
 
 namespace gui {
 
-BaseButton::BaseButton(gui::type id,
-                       gui::type group,
+BaseButton::BaseButton(Type id,
+                       Type group,
                        const std::string& info,
                        void (*pAction)(client::Player*),
                        jeti::model::Material* material)
     :
       Base(id, group, info, material),
-      m_alpha(1.0f),
-      m_material_additional(nullptr),
-      m_material_mask(nullptr),
       m_action(pAction)
 {}
 

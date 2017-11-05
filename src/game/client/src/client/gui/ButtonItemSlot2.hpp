@@ -29,9 +29,9 @@ namespace gui {
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot2(gui::type group, const std::string& info, slot::Item* slot)
+    ButtonItemSlot2(gui::Type group, const std::string& info, slot::Item* slot)
         :
-          BaseButtonItemSlot(gui::type::BUTTON_ITEMSLOT2, group, info)
+          BaseButtonItemSlot(gui::Type::BUTTON_ITEMSLOT2, group, info)
     {
         SetItemSlot(slot);
     }
