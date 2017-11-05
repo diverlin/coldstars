@@ -85,11 +85,11 @@
 
 namespace slot {
 
-Item::Item(entity::Type type)
+Item::Item(entity::Group group, entity::Type type)
+    :
+      m_group(m_group)
+    , m_type(type)
 {
-    setType(type);
-    setGroup(entity::Type::ITEM_SLOT);
-    
     m_hitProbability = meti::rand::gen_int(100); // (tmp) move to builder
 }
 
@@ -107,10 +107,10 @@ Item::~Item()
 
 bool Item::__checkItemInsertion(control::Item* item) const
 {
-    if (type() == entity::Type::CARGO_SLOT) {
+    if (group() == entity::Group::CARGO_SLOT) {
         return true;
     }
-    if (type() == item->descriptor()->slotType()) {
+    if (group() == item->descriptor()->slotGroup()) {
         return true;
     }
     
@@ -119,7 +119,7 @@ bool Item::__checkItemInsertion(control::Item* item) const
 
 bool Item::insert(control::Item* item)
 {
-    if ((type() == entity::Type::CARGO_SLOT) || (type() == item->descriptor()->slotType())) {
+    if ((group() == entity::Group::CARGO_SLOT) || (group() == item->descriptor()->slotGroup())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->release();
@@ -127,7 +127,7 @@ bool Item::insert(control::Item* item)
         item->setSlot(this);
         item->model()->setSlot(position());
 
-        if (type() == item->descriptor()->slotType()) {
+        if (group() == item->descriptor()->slotGroup()) {
             updateVehiclePropetries();
         }
         return true;
@@ -142,14 +142,14 @@ void Item::release()
         return;
     }
 
-    if (type() == entity::Type::WEAPON_SLOT) {
+    if (group() == entity::Group::WEAPON_SLOT) {
         reset();
     }
 
     // make it oop
     m_item = nullptr;
 
-    if (type() != entity::Type::CARGO_SLOT) {
+    if (group() != entity::Group::CARGO_SLOT) {
         updateVehiclePropetries();
     }
 }
@@ -158,11 +158,11 @@ void Item::selectEvent()
 {
     setSelected(true);
 
-//    if (owner()->type() == entity::Type::VEHICLE) {
-//        switch(subtype()) {
-//            case entity::Type::DRIVE_SLOT: { vehicleOwner()->_updatePropSpeed(); break; }
-//        }
-//    }
+    //    if (owner()->type() == entity::Type::VEHICLE) {
+    //        switch(subtype()) {
+    //            case entity::Type::DRIVE_SLOT: { vehicleOwner()->_updatePropSpeed(); break; }
+    //        }
+    //    }
 }
 
 void Item::deselectEvent()
@@ -170,20 +170,20 @@ void Item::deselectEvent()
     // make it oop
     setSelected(false);
 
-//    if (owner()->type() == entity::Type::VEHICLE)
-//    {
-//        switch(subtype())
-//        {
-//            case entity::Type::WEAPON_SLOT:     {     resetTarget(); break; }
-//            case entity::Type::DRIVE_SLOT:
-//            {
-//                assert(false);
-////                vehicleOwner()->_updatePropSpeed();
-//                //GetOwnerVehicle()->UpdatePropertiesJump();
-//                break;
-//            }
-//        }
-//    }
+    //    if (owner()->type() == entity::Type::VEHICLE)
+    //    {
+    //        switch(subtype())
+    //        {
+    //            case entity::Type::WEAPON_SLOT:     {     resetTarget(); break; }
+    //            case entity::Type::DRIVE_SLOT:
+    //            {
+    //                assert(false);
+    ////                vehicleOwner()->_updatePropSpeed();
+    //                //GetOwnerVehicle()->UpdatePropertiesJump();
+    //                break;
+    //            }
+    //        }
+    //    }
 
 }
 
@@ -192,13 +192,20 @@ void Item::updateVehiclePropetries() const
     // TODO: make it oop
     assert(vehicleOwner());
 
-    if (type() == entity::Type::CARGO_SLOT) {
+    if (group() == entity::Group::CARGO_SLOT) {
+        return;
+    }
+    if (group() == entity::Group::WEAPON_SLOT) {
+        vehicleOwner()->_updatePropFire();
+        return;
+    }
+    if (group() == entity::Group::ARTEFACT_SLOT) {
+        vehicleOwner()->_updateArtefactInfluence();
         return;
     }
 
     switch(type())
     {
-    case entity::Type::WEAPON_SLOT:     { vehicleOwner()->_updatePropFire(); break; }
     case entity::Type::SCANER_SLOT:     { vehicleOwner()->_updatePropScan(); break; }
     case entity::Type::BAK_SLOT:         {
         vehicleOwner()->_updatePropSpeed();
@@ -222,7 +229,6 @@ void Item::updateVehiclePropetries() const
     case entity::Type::PROTECTOR_SLOT: { vehicleOwner()->_updatePropProtection(); break; }
     case entity::Type::RADAR_SLOT:     { vehicleOwner()->_updatePropRadar(); break; }
 
-    case entity::Type::ARTEFACT_SLOT: { vehicleOwner()->_updateArtefactInfluence(); break; }
     default:
         assert(false);
     }
@@ -302,7 +308,7 @@ bool Item::swapItem(slot::Item* slot)
 //{
 //    float radius = this->itemRadius();
 //    int size = 6;
-    
+
 //    //    m_VisualPath.FillData(_texOb, radius, size);
 //}
 
@@ -350,7 +356,7 @@ bool Item::swapItem(slot::Item* slot)
 //void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 //{
 ////    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
-    
+
 ////    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
 ////    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
 //}
@@ -358,7 +364,7 @@ bool Item::swapItem(slot::Item* slot)
 //void ItemSlot::ResolveData()
 //{
 ////    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
-    
+
 ////    if (m_unresolved_ItemSlot.target_id != NONE) {
 ////        m_target = (SpaceObject*)manager::EntityManager::get().get(m_unresolved_ItemSlot.target_id);
 ////    }
@@ -379,14 +385,14 @@ bool Item::swapItem(slot::Item* slot)
 
 void Item::log(const std::string& func_name) const
 {
-//    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
+    //    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
     
-//    if (owner() != nullptr)     { str += " owner:" + owner()->dataTypeStr(); }
-//    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeStr();  }
-//    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
-//    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
+    //    if (owner() != nullptr)     { str += " owner:" + owner()->dataTypeStr(); }
+    //    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeStr();  }
+    //    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
+    //    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
     
-//    LOG(str);
+    //    LOG(str);
 }
 
 } // naespace slot

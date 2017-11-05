@@ -59,7 +59,7 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
     __reset();
     int angle = 0;
     for (slot::Item* slot: vehicle->slots()) {
-        if (slot->group() == entity::Type::WEAPON_SLOT || slot->group() == entity::Type::ITEM_SLOT) {
+        if (slot->group() == entity::Group::WEAPON_SLOT || slot->group() == entity::Group::ITEM_SLOT) {
 
             ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(slot->type()),
                                                           entity::to_string(slot->type()), slot);

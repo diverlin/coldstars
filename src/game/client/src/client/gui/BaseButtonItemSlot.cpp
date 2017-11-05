@@ -47,7 +47,7 @@ void BaseButtonItemSlot::updateAnimation()
     if (m_slot == nullptr) {
         return;
     }
-    if (m_slot->group() == entity::Type::CARGO_SLOT) {
+    if (m_slot->group() == entity::Group::CARGO_SLOT) {
         return;
     }
     if (!m_slot->item()) {

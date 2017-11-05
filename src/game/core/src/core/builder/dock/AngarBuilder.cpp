@@ -76,7 +76,7 @@ Angar::__createInternals(control::Angar* angar)
     }
 
     for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
-        slot::Item* slot = new slot::Item(entity::Type::CARGO_SLOT);
+        slot::Item* slot = new slot::Item(entity::Group::CARGO_SLOT);
         angar->add(slot);
     }
     
