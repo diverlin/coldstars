@@ -28,9 +28,9 @@ namespace gui {
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot(gui::type group, const std::string& info)
+    ButtonItemSlot(Type group, const std::string& info)
         :
-          BaseButtonItemSlot(gui::type::BUTTON_ITEMSLOT, group, info)
+          BaseButtonItemSlot(Type::BUTTON_ITEMSLOT, group, info)
     {}
 
     virtual ~ButtonItemSlot() final {}

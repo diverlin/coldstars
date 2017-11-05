@@ -27,10 +27,10 @@
 
 namespace gui {
 
-std::map<gui::type, Base*> Base::m_elements;
+std::map<Type, Base*> Base::m_elements;
 
-Base::Base(gui::type id,
-           gui::type group,
+Base::Base(Type id,
+           Type group,
            const std::string& info,
            jeti::model::Material* material)
     :
@@ -66,9 +66,9 @@ void Base::_deleteAnimationProgram()
 }
 
 
-Base* Base::element(gui::type id)
+Base* Base::element(Type id)
 {
-    std::map<gui::type, Base*>::const_iterator it = m_elements.find(id);
+    std::map<Type, Base*>::const_iterator it = m_elements.find(id);
     if (it != m_elements.cend()) {
         return it->second;
     }
@@ -76,7 +76,7 @@ Base* Base::element(gui::type id)
     return nullptr;
 }   
 
-void Base::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
+void Base::_pressEventMBL_onGuiElement(Type group, client::Player* player)
 {
     Base* button = element(group);
     if (button) {
@@ -84,7 +84,7 @@ void Base::_pressEventMBL_onGuiElement(gui::type group, client::Player* player)
     }
 }    
 
-void Base::_resetStateEventOnGuiElement(gui::type group)
+void Base::_resetStateEventOnGuiElement(Type group)
 {
     Base* button = element(group);
     if (button) {

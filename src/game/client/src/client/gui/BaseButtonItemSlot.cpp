@@ -68,7 +68,7 @@ void BaseButtonItemSlot::updateAnimation()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, gui::type mark_slot_group) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, Type mark_slot_group) const
 {
     if (m_slot == nullptr) {
         return;
@@ -78,30 +78,30 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const g
         return;
     }
 
-    gui::type buton_group = group();
+    Type buton_group = group();
     for (entity::Type type: SLOT_WEAPON_TYPES) {
         if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = gui::type::WEAPON_SLOT;
+            buton_group = Type::WEAPON_SLOT;
             break;
         }
     }
     for (entity::Type type: SLOT_CARGO_TYPES) {
         if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = gui::type::CARGO_SLOT;
+            buton_group = Type::CARGO_SLOT;
             break;
         }
     }
     for (entity::Type type: SLOT_ARTEFACT_TYPES) {
         if (buton_group == getGuiItemSlotType(type)) {
-            buton_group = gui::type::ARTEFACT_SLOT;
+            buton_group = Type::ARTEFACT_SLOT;
             break;
         }
     }
 
-    if (buton_group == gui::type::GATE_SLOT)  {
+    if (buton_group == Type::GATE_SLOT)  {
         return;
     }
-    if ((mark_slot_group == buton_group) || (buton_group == gui::type::CARGO_SLOT)) {
+    if ((mark_slot_group == buton_group) || (buton_group == Type::CARGO_SLOT)) {
         //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_accept);
     } else {
         if (box().checkInteraction(mouse_screen_coord_pos)) {

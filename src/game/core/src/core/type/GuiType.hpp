@@ -17,8 +17,7 @@
 */
 
 
-#ifndef GUITYPES_HPP
-#define GUITYPES_HPP
+#pragma once
 
 #include <core/type/EntityType.hpp>
 
@@ -26,7 +25,7 @@
 
 namespace gui
 { 
-    enum class type
+    enum class Type
     {
         NONE = 0,
         
@@ -75,12 +74,14 @@ namespace gui
         PLAYER_VEHICLE,
         SCAN_VEHICLE
     };
-}
 
-std::string getGuiTypeStr(gui::type);
+std::string to_string(Type);
+Type getGuiItemSlotType(entity::Type);
+Type getGuiItemSlotSelectorType(entity::Type);
 
-gui::type getGuiItemSlotType(entity::Type);
-gui::type getGuiItemSlotSelectorType(entity::Type);
+} // namespace gui
 
-#endif
+
+
+
 

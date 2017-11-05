@@ -31,14 +31,13 @@
 namespace gui {
 
 GuiVehicle2::GuiVehicle2()
-:
-Base(gui::type::PLAYER_VEHICLE, gui::type::PLAYER_VEHICLE),
-m_vehicle(nullptr)
+    :
+      Base(gui::Type::PLAYER_VEHICLE, gui::Type::PLAYER_VEHICLE)
 {
 
 }        
 
-void GuiVehicle2::Reset()
+void GuiVehicle2::__reset()
 {
     for (auto* child: _children()) {
         delete child;
@@ -48,29 +47,22 @@ void GuiVehicle2::Reset()
     m_vehicle = nullptr;
 }
 
-void GuiVehicle2::BindVehicle(control::Vehicle* vehicle, float scale)
+void GuiVehicle2::__bindVehicle(control::Vehicle* vehicle, float scale)
 {
-    CreateFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
+    __createFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
     
     m_vehicle = vehicle;
 }    
     
-void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
+void GuiVehicle2::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
 {   
-    Reset();     
+    __reset();
     int angle = 0;
-    for (slot::Item* slot: vehicle->slots())
-    {
-        entity::Type slot_group = slot->group();
-        if ( (slot_group != entity::Type::CARGO_SLOT) && (slot_group != entity::Type::ARTEFACT_SLOT) )
-        {
-            entity::Type entity_type_id = slot_group;
-            if (slot_group == entity::Type::WEAPON_SLOT) {
-                entity_type_id = slot->type();
-            }
-                          
-            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), entity::to_string(entity_type_id), slot);
+    for (slot::Item* slot: vehicle->slots()) {
+        if (slot->group() == entity::Type::WEAPON_SLOT || slot->group() == entity::Type::ITEM_SLOT) {
+
+            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(slot->type()),
+                                                          entity::to_string(slot->type()), slot);
 
             glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             button->setSize(size*scale);
@@ -96,7 +88,7 @@ void GuiVehicle2::_updateUnique(client::Player* player)
     }
     
     if (need_update) {
-        BindVehicle(player->npc()->vehicle(), 0.6);
+        __bindVehicle(player->npc()->vehicle(), 0.6);
     }
 }
 

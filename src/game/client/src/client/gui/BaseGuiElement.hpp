@@ -48,8 +48,8 @@ namespace gui {
 class Base
 {
 public:
-    Base(gui::type id=gui::type::NONE,
-         gui::type group=gui::type::NONE,
+    Base(gui::Type id=gui::Type::NONE,
+         gui::Type group=gui::Type::NONE,
          const std::string& _info="",
          jeti::model::Material* material=nullptr);
     virtual ~Base();
@@ -60,8 +60,8 @@ public:
 
     void setSize(glm::vec2 size) { m_box.setSize(size); }
 
-    gui::type id() const { return m_id; }
-    gui::type group() const { return m_group; }
+    gui::Type id() const { return m_id; }
+    gui::Type group() const { return m_group; }
 
     const ceti::Box2D& box() const { return m_box; }
     ceti::Box2D& box() { return m_box; } // !!!
@@ -73,7 +73,7 @@ public:
 
     bool hasAnimation() const { return (m_animation != nullptr); }
 
-    static Base* element(gui::type);
+    static Base* element(gui::Type);
 
     Base* updateMouseInteraction(const glm::vec2&);
 
@@ -91,7 +91,7 @@ public:
     virtual void renderInfo(const jeti::Render&) const {}
 
 protected:
-    void _setGroup(gui::type group) { m_group = group; }
+    void _setGroup(gui::Type group) { m_group = group; }
 
     void _setBox(const ceti::Box2D& box) { m_box = box; }
 
@@ -110,8 +110,8 @@ protected:
     bool _animationProgramActive() const { return (m_animation != nullptr); }
     void _deleteAnimationProgram();
 
-    void _pressEventMBL_onGuiElement(gui::type, client::Player*);
-    void _resetStateEventOnGuiElement(gui::type);
+    void _pressEventMBL_onGuiElement(gui::Type, client::Player*);
+    void _resetStateEventOnGuiElement(gui::Type);
 
     void _updateGeometry(const glm::vec2&, const glm::vec2&);
 
@@ -124,11 +124,11 @@ protected:
     std::vector<Base*>& _children() { return m_children; } // !!!
 
 private:
-    static std::map<gui::type, Base*> m_elements;
+    static std::map<gui::Type, Base*> m_elements;
     std::vector<Base*> m_children;
 
-    gui::type m_id;
-    gui::type m_group;
+    gui::Type m_id;
+    gui::Type m_group;
 
     jeti::control::Material* m_material = nullptr;
 

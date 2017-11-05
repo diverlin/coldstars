@@ -19,149 +19,154 @@
 
 #include "GuiType.hpp"
 
+#include <cassert>
 
-std::string getGuiTypeStr(gui::type type_id)
+namespace gui {
+
+std::string to_string(Type type_id)
 {
     switch(type_id)
     {
-        case gui::type::NONE: { return "GUI::NONE"; break; }
-            
-        case gui::type::MINERALS:         { return "GUI::MINERALS"; break; }
-        case gui::type::FOOD:             { return "GUI::FOOD"; break; }
-        case gui::type::MEDICINE:         { return "GUI::MEDICINE"; break; }
-        case gui::type::MILITARY:         { return "GUI::MILITARY"; break; }
-        case gui::type::DRUG:             { return "GUI::DRUG"; break; }
-        case gui::type::EXCLUSIVE:         { return "GUI::EXCLUSIVE"; break; }
+        case gui::Type::NONE: { return "GUI::NONE"; }
+
+        case gui::Type::MINERALS: { return "GUI::MINERALS"; }
+    case gui::Type::FOOD:         { return "GUI::FOOD"; }
+        case gui::Type::MEDICINE: { return "GUI::MEDICINE"; }
+        case gui::Type::MILITARY: { return "GUI::MILITARY"; }
+        case gui::Type::DRUG:     { return "GUI::DRUG"; }
+        case gui::Type::EXCLUSIVE: { return "GUI::EXCLUSIVE"; }
 
 
-        case gui::type::GOVERMENT:     { return "GUI::GOVERMENT"; break; }
-        case gui::type::STORE:         { return "GUI::STORE"; break; }
-        case gui::type::SHOP:         { return "GUI::SHOP"; break; }
-        case gui::type::ANGAR:         { return "GUI::ANGAR"; break; }
+        case gui::Type::GOVERMENT: { return "GUI::GOVERMENT"; }
+        case gui::Type::STORE:     { return "GUI::STORE"; }
+        case gui::Type::SHOP:      { return "GUI::SHOP"; }
+        case gui::Type::ANGAR:     { return "GUI::ANGAR"; }
     
-        case gui::type::CARGO_SLOT:         { return "GUI::CARGO_SLOT"; break; }
-        case gui::type::GATE_SLOT:         { return "GUI::GATE_SLOT"; break; }
+        case gui::Type::CARGO_SLOT: { return "GUI::CARGO_SLOT"; }
+        case gui::Type::GATE_SLOT:  { return "GUI::GATE_SLOT"; }
 
-        case gui::type::WEAPON_SLOT:         { return "GUI::WEAPON_SLOT"; break; }
-        case gui::type::WEAPON_SLOT1:         { return "GUI::WEAPON_SLOT1"; break; }
-        case gui::type::WEAPON_SLOT2:         { return "GUI::WEAPON_SLOT2"; break; }
-        case gui::type::WEAPON_SLOT3:         { return "GUI::WEAPON_SLOT3"; break; }
-        case gui::type::WEAPON_SLOT4:         { return "GUI::WEAPON_SLOT4"; break; }
-        case gui::type::WEAPON_SLOT5:         { return "GUI::WEAPON_SLOT5"; break; }
-        case gui::type::WEAPON_SLOT6:         { return "GUI::WEAPON_SLOT6"; break; }
-        case gui::type::WEAPON_SLOT7:         { return "GUI::WEAPON_SLOT7"; break; }
-        case gui::type::WEAPON_SLOT8:         { return "GUI::WEAPON_SLOT8"; break; }
-        case gui::type::WEAPON_SLOT9:         { return "GUI::WEAPON_SLOT9"; break; }
+        case gui::Type::WEAPON_SLOT:  { return "GUI::WEAPON_SLOT"; }
+        case gui::Type::WEAPON_SLOT1: { return "GUI::WEAPON_SLOT1"; }
+        case gui::Type::WEAPON_SLOT2: { return "GUI::WEAPON_SLOT2"; }
+        case gui::Type::WEAPON_SLOT3: { return "GUI::WEAPON_SLOT3"; }
+        case gui::Type::WEAPON_SLOT4: { return "GUI::WEAPON_SLOT4"; }
+        case gui::Type::WEAPON_SLOT5: { return "GUI::WEAPON_SLOT5"; }
+        case gui::Type::WEAPON_SLOT6: { return "GUI::WEAPON_SLOT6"; }
+        case gui::Type::WEAPON_SLOT7: { return "GUI::WEAPON_SLOT7"; }
+        case gui::Type::WEAPON_SLOT8: { return "GUI::WEAPON_SLOT8"; }
+        case gui::Type::WEAPON_SLOT9: { return "GUI::WEAPON_SLOT9"; }
     
-        case gui::type::WEAPON_SLOT1_SELECTOR: { return "GUI::WEAPON_SLOT1_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT2_SELECTOR: { return "GUI::WEAPON_SLOT2_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT3_SELECTOR: { return "GUI::WEAPON_SLOT3_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT4_SELECTOR: { return "GUI::WEAPON_SLOT4_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT5_SELECTOR: { return "GUI::WEAPON_SLOT5_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT6_SELECTOR: { return "GUI::WEAPON_SLOT6_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT7_SELECTOR: { return "GUI::WEAPON_SLOT7_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT8_SELECTOR: { return "GUI::WEAPON_SLOT8_SELECTOR"; break; }
-        case gui::type::WEAPON_SLOT9_SELECTOR: { return "GUI::WEAPON_SLOT9_SELECTOR"; break; }
+        case gui::Type::WEAPON_SLOT1_SELECTOR: { return "GUI::WEAPON_SLOT1_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT2_SELECTOR: { return "GUI::WEAPON_SLOT2_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT3_SELECTOR: { return "GUI::WEAPON_SLOT3_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT4_SELECTOR: { return "GUI::WEAPON_SLOT4_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT5_SELECTOR: { return "GUI::WEAPON_SLOT5_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT6_SELECTOR: { return "GUI::WEAPON_SLOT6_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT7_SELECTOR: { return "GUI::WEAPON_SLOT7_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT8_SELECTOR: { return "GUI::WEAPON_SLOT8_SELECTOR"; }
+        case gui::Type::WEAPON_SLOT9_SELECTOR: { return "GUI::WEAPON_SLOT9_SELECTOR"; }
          
-        case gui::type::DRIVE_SLOT:         { return "GUI::DRIVE_SLOT"; break; }
-        case gui::type::RADAR_SLOT:         { return "GUI::RADAR_SLOT"; break; }
-        case gui::type::BAK_SLOT:         { return "GUI::BAK_SLOT"; break; }
-        case gui::type::ENERGIZER_SLOT:     { return "GUI::ENERGIZER_SLOT"; break; }
-        case gui::type::PROTECTOR_SLOT:     { return "GUI::PROTECTOR_SLOT"; break; }
-        case gui::type::DROID_SLOT:         { return "GUI::DROID_SLOT"; break; }
-        case gui::type::FREEZER_SLOT:     { return "GUI::FREEZER_SLOT"; break; }
-        case gui::type::GRAPPLE_SLOT:     { return "GUI::GRAPPLE_SLOT"; break; }
-        case gui::type::SCANER_SLOT:     { return "GUI::SCANER_SLOT"; break; }
-        case gui::type::ARTEFACT_SLOT:     { return "GUI::ARTEFACT_SLOT"; break; }
-
-        default:     { return "GUI::UNKNOWN id_type"; break; }
+        case gui::Type::DRIVE_SLOT:     { return "GUI::DRIVE_SLOT"; }
+        case gui::Type::RADAR_SLOT:     { return "GUI::RADAR_SLOT"; }
+        case gui::Type::BAK_SLOT:       { return "GUI::BAK_SLOT"; }
+        case gui::Type::ENERGIZER_SLOT: { return "GUI::ENERGIZER_SLOT"; }
+        case gui::Type::PROTECTOR_SLOT: { return "GUI::PROTECTOR_SLOT"; }
+        case gui::Type::DROID_SLOT:     { return "GUI::DROID_SLOT"; }
+        case gui::Type::FREEZER_SLOT:   { return "GUI::FREEZER_SLOT"; }
+        case gui::Type::GRAPPLE_SLOT:   { return "GUI::GRAPPLE_SLOT"; }
+        case gui::Type::SCANER_SLOT:    { return "GUI::SCANER_SLOT"; }
+        case gui::Type::ARTEFACT_SLOT:  { return "GUI::ARTEFACT_SLOT"; }
     }
+     assert(false);
+     return "";
 }
 
-gui::type getGuiItemSlotType(entity::Type val)
+Type getGuiItemSlotType(entity::Type val)
 {
     switch(val)
     {
-        case entity::Type::CARGO_SLOT:     { return gui::type::CARGO_SLOT; break; }
-        case entity::Type::CARGO_SLOT1:    { return gui::type::CARGO_SLOT1; break; }
-        case entity::Type::CARGO_SLOT2:    { return gui::type::CARGO_SLOT2; break; }
-        case entity::Type::CARGO_SLOT3:    { return gui::type::CARGO_SLOT3; break; }
-        case entity::Type::CARGO_SLOT4:    { return gui::type::CARGO_SLOT4; break; }
-        case entity::Type::CARGO_SLOT5:    { return gui::type::CARGO_SLOT5; break; }
-        case entity::Type::CARGO_SLOT6:    { return gui::type::CARGO_SLOT6; break; }
-        case entity::Type::CARGO_SLOT7:    { return gui::type::CARGO_SLOT7; break; }
-        case entity::Type::CARGO_SLOT8:    { return gui::type::CARGO_SLOT8; break; }
-        case entity::Type::CARGO_SLOT9:    { return gui::type::CARGO_SLOT9; break; }
-        case entity::Type::CARGO_SLOT10:   { return gui::type::CARGO_SLOT10; break; }
-        case entity::Type::CARGO_SLOT11:   { return gui::type::CARGO_SLOT11; break; }
-        case entity::Type::CARGO_SLOT12:   { return gui::type::CARGO_SLOT12; break; }
-        case entity::Type::CARGO_SLOT13:   { return gui::type::CARGO_SLOT13; break; }
-        case entity::Type::CARGO_SLOT14:   { return gui::type::CARGO_SLOT14; break; }
-        case entity::Type::CARGO_SLOT15:   { return gui::type::CARGO_SLOT15; break; }
-        case entity::Type::CARGO_SLOT16:   { return gui::type::CARGO_SLOT16; break; }
-        case entity::Type::CARGO_SLOT17:   { return gui::type::CARGO_SLOT17; break; }
-        case entity::Type::CARGO_SLOT18:   { return gui::type::CARGO_SLOT18; break; }
+        case entity::Type::CARGO_SLOT:     { return gui::Type::CARGO_SLOT; }
+        case entity::Type::CARGO_SLOT1:    { return gui::Type::CARGO_SLOT1; }
+        case entity::Type::CARGO_SLOT2:    { return gui::Type::CARGO_SLOT2; }
+        case entity::Type::CARGO_SLOT3:    { return gui::Type::CARGO_SLOT3; }
+        case entity::Type::CARGO_SLOT4:    { return gui::Type::CARGO_SLOT4; }
+        case entity::Type::CARGO_SLOT5:    { return gui::Type::CARGO_SLOT5; }
+        case entity::Type::CARGO_SLOT6:    { return gui::Type::CARGO_SLOT6; }
+        case entity::Type::CARGO_SLOT7:    { return gui::Type::CARGO_SLOT7; }
+        case entity::Type::CARGO_SLOT8:    { return gui::Type::CARGO_SLOT8; }
+        case entity::Type::CARGO_SLOT9:    { return gui::Type::CARGO_SLOT9; }
+        case entity::Type::CARGO_SLOT10:   { return gui::Type::CARGO_SLOT10; }
+        case entity::Type::CARGO_SLOT11:   { return gui::Type::CARGO_SLOT11; }
+        case entity::Type::CARGO_SLOT12:   { return gui::Type::CARGO_SLOT12; }
+        case entity::Type::CARGO_SLOT13:   { return gui::Type::CARGO_SLOT13; }
+        case entity::Type::CARGO_SLOT14:   { return gui::Type::CARGO_SLOT14; }
+        case entity::Type::CARGO_SLOT15:   { return gui::Type::CARGO_SLOT15; }
+        case entity::Type::CARGO_SLOT16:   { return gui::Type::CARGO_SLOT16; }
+        case entity::Type::CARGO_SLOT17:   { return gui::Type::CARGO_SLOT17; }
+        case entity::Type::CARGO_SLOT18:   { return gui::Type::CARGO_SLOT18; }
 
-        case entity::Type::WEAPON_SLOT:    { return gui::type::WEAPON_SLOT; break; }
-        case entity::Type::WEAPON_SLOT1:   { return gui::type::WEAPON_SLOT1; break; }
-        case entity::Type::WEAPON_SLOT2:   { return gui::type::WEAPON_SLOT2; break; }
-        case entity::Type::WEAPON_SLOT3:   { return gui::type::WEAPON_SLOT3; break; }
-        case entity::Type::WEAPON_SLOT4:   { return gui::type::WEAPON_SLOT4; break; }
-        case entity::Type::WEAPON_SLOT5:   { return gui::type::WEAPON_SLOT5; break; }
-        case entity::Type::WEAPON_SLOT6:   { return gui::type::WEAPON_SLOT6; break; }
-        case entity::Type::WEAPON_SLOT7:   { return gui::type::WEAPON_SLOT7; break; }
-        case entity::Type::WEAPON_SLOT8:   { return gui::type::WEAPON_SLOT8; break; }
-        case entity::Type::WEAPON_SLOT9:   { return gui::type::WEAPON_SLOT9; break; }
+        case entity::Type::WEAPON_SLOT:    { return gui::Type::WEAPON_SLOT; }
+        case entity::Type::WEAPON_SLOT1:   { return gui::Type::WEAPON_SLOT1; }
+        case entity::Type::WEAPON_SLOT2:   { return gui::Type::WEAPON_SLOT2; }
+        case entity::Type::WEAPON_SLOT3:   { return gui::Type::WEAPON_SLOT3; }
+        case entity::Type::WEAPON_SLOT4:   { return gui::Type::WEAPON_SLOT4; }
+        case entity::Type::WEAPON_SLOT5:   { return gui::Type::WEAPON_SLOT5; }
+        case entity::Type::WEAPON_SLOT6:   { return gui::Type::WEAPON_SLOT6; }
+        case entity::Type::WEAPON_SLOT7:   { return gui::Type::WEAPON_SLOT7; }
+        case entity::Type::WEAPON_SLOT8:   { return gui::Type::WEAPON_SLOT8; }
+        case entity::Type::WEAPON_SLOT9:   { return gui::Type::WEAPON_SLOT9; }
 
-        case entity::Type::DRIVE_SLOT:   { return gui::type::DRIVE_SLOT; break; }
-        case entity::Type::RADAR_SLOT:   { return gui::type::RADAR_SLOT; break; }
-        case entity::Type::BAK_SLOT:   { return gui::type::BAK_SLOT; break; }
-        case entity::Type::ENERGIZER_SLOT:   { return gui::type::ENERGIZER_SLOT; break; }
-        case entity::Type::PROTECTOR_SLOT:   { return gui::type::PROTECTOR_SLOT; break; }
-        case entity::Type::DROID_SLOT:   { return gui::type::DROID_SLOT; break; }
-        case entity::Type::FREEZER_SLOT:   { return gui::type::FREEZER_SLOT; break; }
-        case entity::Type::GRAPPLE_SLOT:   { return gui::type::GRAPPLE_SLOT; break; }
-        case entity::Type::SCANER_SLOT:   { return gui::type::SCANER_SLOT; break; }
+        case entity::Type::DRIVE_SLOT:   { return gui::Type::DRIVE_SLOT; }
+        case entity::Type::RADAR_SLOT:   { return gui::Type::RADAR_SLOT; }
+        case entity::Type::BAK_SLOT:   { return gui::Type::BAK_SLOT; }
+        case entity::Type::ENERGIZER_SLOT:   { return gui::Type::ENERGIZER_SLOT; }
+        case entity::Type::PROTECTOR_SLOT:   { return gui::Type::PROTECTOR_SLOT; }
+        case entity::Type::DROID_SLOT:   { return gui::Type::DROID_SLOT; }
+        case entity::Type::FREEZER_SLOT:   { return gui::Type::FREEZER_SLOT; }
+        case entity::Type::GRAPPLE_SLOT:   { return gui::Type::GRAPPLE_SLOT; }
+        case entity::Type::SCANER_SLOT:   { return gui::Type::SCANER_SLOT; }
 
-        case entity::Type::ARTEFACT_SLOT:   { return gui::type::ARTEFACT_SLOT; break; }
-        case entity::Type::ARTEFACT_SLOT1:  { return gui::type::ARTEFACT_SLOT1; break; }
-        case entity::Type::ARTEFACT_SLOT2:  { return gui::type::ARTEFACT_SLOT2; break; }
-        case entity::Type::ARTEFACT_SLOT3:  { return gui::type::ARTEFACT_SLOT3; break; }
-        case entity::Type::ARTEFACT_SLOT4:  { return gui::type::ARTEFACT_SLOT4; break; }
+        case entity::Type::ARTEFACT_SLOT:   { return gui::Type::ARTEFACT_SLOT; }
+        case entity::Type::ARTEFACT_SLOT1:  { return gui::Type::ARTEFACT_SLOT1; }
+        case entity::Type::ARTEFACT_SLOT2:  { return gui::Type::ARTEFACT_SLOT2; }
+        case entity::Type::ARTEFACT_SLOT3:  { return gui::Type::ARTEFACT_SLOT3; }
+        case entity::Type::ARTEFACT_SLOT4:  { return gui::Type::ARTEFACT_SLOT4; }
 
-        case entity::Type::GATE_SLOT:   { return gui::type::GATE_SLOT; break; }
-        //case entity::Type::REPAIR_SLOT:   { return gui::type::REPAIR_SLOT; break; }
-        //case entity::Type::CHARGE_SLOT:   { return gui::type::CHARGE_SLOT; break; }
+        case entity::Type::GATE_SLOT:   { return gui::Type::GATE_SLOT; }
+        //case entity::Type::REPAIR_SLOT:   { return gui::type::REPAIR_SLOT; }
+        //case entity::Type::CHARGE_SLOT:   { return gui::type::CHARGE_SLOT; }
     }
 
-    return gui::type::NONE;
+    assert(false);
+    return gui::Type::NONE;
 }
 
-gui::type getGuiItemSlotSelectorType(entity::Type val)
+Type getGuiItemSlotSelectorType(entity::Type id)
 {
-    switch(val)
+    switch(id)
     {
-        case entity::Type::WEAPON_SLOT1:   { return gui::type::WEAPON_SLOT1_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT2:   { return gui::type::WEAPON_SLOT2_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT3:   { return gui::type::WEAPON_SLOT3_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT4:   { return gui::type::WEAPON_SLOT4_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT5:   { return gui::type::WEAPON_SLOT5_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT6:   { return gui::type::WEAPON_SLOT6_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT7:   { return gui::type::WEAPON_SLOT7_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT8:   { return gui::type::WEAPON_SLOT8_SELECTOR; break; }
-        case entity::Type::WEAPON_SLOT9:   { return gui::type::WEAPON_SLOT9_SELECTOR; break; }
+        case entity::Type::WEAPON_SLOT1:   { return gui::Type::WEAPON_SLOT1_SELECTOR; }
+        case entity::Type::WEAPON_SLOT2:   { return gui::Type::WEAPON_SLOT2_SELECTOR; }
+        case entity::Type::WEAPON_SLOT3:   { return gui::Type::WEAPON_SLOT3_SELECTOR; }
+        case entity::Type::WEAPON_SLOT4:   { return gui::Type::WEAPON_SLOT4_SELECTOR; }
+        case entity::Type::WEAPON_SLOT5:   { return gui::Type::WEAPON_SLOT5_SELECTOR; }
+        case entity::Type::WEAPON_SLOT6:   { return gui::Type::WEAPON_SLOT6_SELECTOR; }
+        case entity::Type::WEAPON_SLOT7:   { return gui::Type::WEAPON_SLOT7_SELECTOR; }
+        case entity::Type::WEAPON_SLOT8:   { return gui::Type::WEAPON_SLOT8_SELECTOR; }
+        case entity::Type::WEAPON_SLOT9:   { return gui::Type::WEAPON_SLOT9_SELECTOR; }
 
-        case entity::Type::DRIVE_SLOT:   { return gui::type::DRIVE_SLOT_SELECTOR; break; }
-        case entity::Type::RADAR_SLOT:   { return gui::type::RADAR_SLOT_SELECTOR; break; }
-        case entity::Type::BAK_SLOT:   { return gui::type::BAK_SLOT_SELECTOR; break; }
-        case entity::Type::ENERGIZER_SLOT:   { return gui::type::ENERGIZER_SLOT_SELECTOR; break; }
-        case entity::Type::PROTECTOR_SLOT:   { return gui::type::PROTECTOR_SLOT_SELECTOR; break; }
-        case entity::Type::DROID_SLOT:   { return gui::type::DROID_SLOT_SELECTOR; break; }
-        case entity::Type::FREEZER_SLOT:   { return gui::type::FREEZER_SLOT_SELECTOR; break; }
-        case entity::Type::GRAPPLE_SLOT:   { return gui::type::GRAPPLE_SLOT_SELECTOR; break; }
-        case entity::Type::SCANER_SLOT:   { return gui::type::SCANER_SLOT_SELECTOR; break; }
+        case entity::Type::DRIVE_SLOT:   { return gui::Type::DRIVE_SLOT_SELECTOR; }
+        case entity::Type::RADAR_SLOT:   { return gui::Type::RADAR_SLOT_SELECTOR; }
+        case entity::Type::BAK_SLOT:   { return gui::Type::BAK_SLOT_SELECTOR; }
+        case entity::Type::ENERGIZER_SLOT:   { return gui::Type::ENERGIZER_SLOT_SELECTOR; }
+        case entity::Type::PROTECTOR_SLOT:   { return gui::Type::PROTECTOR_SLOT_SELECTOR; }
+        case entity::Type::DROID_SLOT:   { return gui::Type::DROID_SLOT_SELECTOR; }
+        case entity::Type::FREEZER_SLOT:   { return gui::Type::FREEZER_SLOT_SELECTOR; }
+        case entity::Type::GRAPPLE_SLOT:   { return gui::Type::GRAPPLE_SLOT_SELECTOR; }
+        case entity::Type::SCANER_SLOT:   { return gui::Type::SCANER_SLOT_SELECTOR; }
     }
-
-    return gui::type::NONE;
+    assert(false);
+    return gui::Type::NONE;
 }
 
+} // namespace gui

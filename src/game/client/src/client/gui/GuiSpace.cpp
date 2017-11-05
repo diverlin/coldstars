@@ -75,7 +75,7 @@ Space::Space()
         add(bar_top, offset);
 
         {
-            ButtonTrigger* galaxymap_button = new ButtonTrigger(gui::type::BUTTON_GALAXYMAP,
+            ButtonTrigger* galaxymap_button = new ButtonTrigger(Type::BUTTON_GALAXYMAP,
                                                                 "galaxy map",
                                                                 GuiActions::GalaxyMapGuiTransition,
                                                                 MaterialCollector::get().icon_map);
@@ -88,7 +88,7 @@ Space::Space()
         }
         
         {
-            ButtonSingle* load_button = new ButtonSingle(gui::type::LOAD,
+            ButtonSingle* load_button = new ButtonSingle(Type::LOAD,
                                                          "load",
                                                          GuiActions::LoadEvent,
                                                          MaterialCollector::get().icon_plus);
@@ -101,7 +101,7 @@ Space::Space()
         }
         
         {
-            ButtonSingle* save_button = new ButtonSingle(gui::type::SAVE,
+            ButtonSingle* save_button = new ButtonSingle(Type::SAVE,
                                                          "save",
                                                          GuiActions::SaveEvent,
                                                          MaterialCollector::get().icon_minus);

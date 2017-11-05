@@ -37,7 +37,7 @@ namespace gui {
 
 Radar::Radar()
     :
-      Base(gui::type::GUI_RADAR)
+      Base(Type::GUI_RADAR)
 {
     m_material_background = new jeti::control::Material(MaterialCollector::get().radar_background);
     m_material_bar = new jeti::control::Material(MaterialCollector::get().radar_bar);

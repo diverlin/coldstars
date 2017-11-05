@@ -62,9 +62,9 @@ public:
     bool updateMouseInteractionWithScanVehicle(const MouseData&);
     void renderScanVehicle(const MouseData&, bool show_skill = true) const;
 
-    void pressEventMBL_onGuiElement(gui::type);
-    void resetEventOnGuiElement(gui::type);
-    Base* element(gui::type) const;
+    void pressEventMBL_onGuiElement(Type);
+    void resetEventOnGuiElement(Type);
+    Base* element(Type) const;
 
 private:
     Manager();

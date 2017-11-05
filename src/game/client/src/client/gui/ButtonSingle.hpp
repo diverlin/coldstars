@@ -25,12 +25,12 @@ namespace gui {
 class ButtonSingle : public BaseButton
 {
 public:
-    ButtonSingle(gui::type group,
+    ButtonSingle(Type group,
                  const std::string& info,
                  void (*pAction)(client::Player*),
                  jeti::model::Material* material)
         :
-          BaseButton(gui::type::BUTTON_SINGLE,
+          BaseButton(Type::BUTTON_SINGLE,
                      group,
                      info,
                      pAction,
