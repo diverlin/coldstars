@@ -165,7 +165,7 @@ Type getGuiItemSlotSelectorType(entity::Type id)
         case entity::Type::GRAPPLE_SLOT:   { return gui::Type::GRAPPLE_SLOT_SELECTOR; }
         case entity::Type::SCANER_SLOT:   { return gui::Type::SCANER_SLOT_SELECTOR; }
     }
-    assert(false);
+    //assert(false);
     return gui::Type::NONE;
 }
 
