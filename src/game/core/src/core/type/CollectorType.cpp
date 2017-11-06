@@ -41,6 +41,17 @@ Collector::Collector() {
     __registerType(int_t(mesh::Type::SPHERE), "mesh::sphere");
     __registerType(int_t(mesh::Type::SPHERE_DEFORMED), "mesh::sphere_deformed");
     __registerType(int_t(mesh::Type::PLANE), "mesh::plane");
+
+    // items
+    __registerType(int_t(texture::Type::DRIVE_EQUIPMENT), "texture::drive_item");
+    __registerType(int_t(texture::Type::BAK_EQUIPMENT), "texture::bak_item");
+    __registerType(int_t(texture::Type::DROID_EQUIPMENT), "texture::droid_item");
+    __registerType(int_t(texture::Type::GRAPPLE_EQUIPMENT), "texture::grapple_item");
+    __registerType(int_t(texture::Type::LAZER_EQUIPMENT), "texture::lazer_item");
+    __registerType(int_t(texture::Type::PROTECTOR_EQUIPMENT), "texture::protector_item");
+    __registerType(int_t(texture::Type::RADAR_EQUIPMENT), "texture::radar_item");
+    __registerType(int_t(texture::Type::ROCKET_EQUIPMENT), "texture::rocket_item");
+    __registerType(int_t(texture::Type::SCANER_EQUIPMENT), "texture::scaner_item");
 }
 
 Collector::~Collector() {}

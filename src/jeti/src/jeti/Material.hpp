@@ -19,8 +19,10 @@
 
 #pragma once
 
-#include <MyGl.hpp>
-#include <Material.hpp>
+#include <jeti/MyGl.hpp>
+
+#include <ceti/type/IdType.hpp>
+//#include <Material.hpp>
 
 #include <glm/glm.hpp>
 
@@ -42,9 +44,12 @@ class Material
 {
 public:
     Material(const std::string&);
-    Material(ceti::descriptor::Material* descriptor);
+    Material(ceti::descriptor::Material*);
     Material() = default;
 
+    int_t descriptor() const { return m_descriptor; }
+
+    int_t m_descriptor = -1;
     int id = 0;
     int w = 1, h = 1;
     int w_slice = 1, h_slice = 1;

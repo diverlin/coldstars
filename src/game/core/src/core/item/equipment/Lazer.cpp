@@ -61,7 +61,7 @@ void Lazer::fire(control::SpaceObject* target, float rate)
 //    }
 
     target->hit(damage() * rate);
-    deteriorationEvent();
+    deteriorate();
 }
 
 void Lazer::addUniqueInfo()

@@ -41,11 +41,11 @@ public:
     Item(descriptor::Item*, model::Item*);
     virtual ~Item() = default;
 
-    virtual void putChildrenToGarbage() const {}
+    descriptor::Item* descriptor() const { return m_descriptor_item; }
+    model::Item* model() const { return m_model_item; }
+    slot::Item* slot() const { return m_slot; }
 
     void setSlot(slot::Item* slot)  { m_slot = slot; }
-
-    slot::Item* slot() const { return m_slot; }
 
     bool isDamaged() const;
     bool isLocked() const;
@@ -55,29 +55,16 @@ public:
     void useOverloadDeterioration();
 
     void corrupt();
-    void deteriorationEvent();
-    void doLock(int lock = 1);
-    void doUnlock();
+    void deteriorate();
+    void lock(int lock = 1);
+    void unlock();
     bool repair();
 
     virtual void updateProperties() {}
     virtual void updateInStatic() { _updateLock(); }
 
-    //        void UpdateInfo();
-
-    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-    //        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
-    //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
-
 protected:
     void _updateLock();
-
-    virtual void AddCommonInfo() {}
-    virtual void addUniqueInfo() {}
-
-public:
-    descriptor::Item* descriptor() const { return m_descriptor_item; }
-    model::Item* model() const { return m_model_item; }
 
 private:
     descriptor::Item* m_descriptor_item = nullptr;

@@ -99,6 +99,7 @@ Material::Material(const std::string& path)
 
 Material::Material(ceti::descriptor::Material* descriptor)
 {
+    m_descriptor = descriptor->id();
     texture_path = descriptor->texturePath();
     normalmap_path = descriptor->normalmapPath();
     use_alpha = descriptor->useAlpha();

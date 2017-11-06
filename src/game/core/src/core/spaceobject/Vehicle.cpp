@@ -1525,20 +1525,16 @@ int Vehicle::fuelMiss() const
 
 void Vehicle::lockRandomItem(int locked_turns)
 {
-    std::vector<slot::Item*> _equiped_slot_vec;
-
-    for (unsigned int i=0; i<m_equipmentSlots.size(); i++)
-    {
-        if (m_equipmentSlots[i]->item() != nullptr)
-        {
-            _equiped_slot_vec.push_back(m_equipmentSlots[i]);
+    std::vector<slot::Item*> _equiped_slots;
+    for (slot::Item* slot:m_equipmentSlots) {
+        if (slot->item()) {
+            _equiped_slots.push_back(slot);
         }
     }
 
-    if (_equiped_slot_vec.size() > 0)
-    {
-        unsigned int _rand = meti::rand::gen_int(_equiped_slot_vec.size());
-        _equiped_slot_vec[_rand]->item()->doLock(locked_turns);
+    if (_equiped_slots.size() > 0) {
+        slot::Item* slot = meti::rand::get_pointer(_equiped_slots);
+        slot->item()->lock(locked_turns);
     }
 }
 

@@ -16,26 +16,23 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <ceti/type/IdType.hpp>
-#include <core/type/MeshType.hpp>
-#include <core/type/TextureType.hpp>
+#include <core/Base.hpp>
 
-namespace jeti {
-class Mesh;
-namespace control {
-class Material;
-} // namespace control
-} // namespace jeti
+namespace view {
 
-namespace utils {
+//class Item : public Base
+//{
+//public:
+//    Item(control::Item*);
+//    virtual ~Item() = default;
 
-// TODO: remove this, perform everything via cache
-jeti::Mesh* createMeshByDescriptorId(int_t);
-jeti::Mesh* createMeshByDescriptorType(mesh::Type);
-jeti::control::Material* createMaterialFromDescriptorId(int_t);
-jeti::control::Material* createMaterialByDescriptorType(texture::Type) ;
+//    //        void UpdateInfo();
 
-} // namespace utils
+//    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+//    //        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
+//    //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
+//};
+
+} // namespace view
