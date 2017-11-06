@@ -142,7 +142,7 @@ Player::radius() const {
     return npc()->vehicle()->properties().radar;
 }
 
-bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
+bool Player::isAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
 {
     if (force_full_control == false) {
         if (npc()->vehicle()->id() == npc()->scanTarget()->id()) {

@@ -47,9 +47,9 @@ public:
     BaseButtonItemSlot(slot::Item*);
     ~BaseButtonItemSlot();
 
-protected:
-    slot::Item* _itemSlot() const { return m_slot; }
+    slot::Item* itemSlot() const { return m_slot; }
 
+protected:
     void _actualizeItemMaterial();
     void _updateAnimation();
 

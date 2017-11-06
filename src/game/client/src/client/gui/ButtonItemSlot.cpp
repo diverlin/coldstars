@@ -71,8 +71,8 @@ void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* p
 /* virtual override final */
 void ButtonItemSlot::renderInfo(const jeti::Render& render) const
 {
-    if (_itemSlot()) {
-        if (_itemSlot()->item()) {
+    if (itemSlot()) {
+        if (itemSlot()->item()) {
             //GetItemSlot()->item()->RenderInfo(render, GetBox().center());
         } else {
             //GetItemSlot()->RenderInfo();

@@ -61,6 +61,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((-2.f+i)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (2.f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
         i++;
     }
 
@@ -73,6 +74,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((3.f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (-0.5f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     for (slot::Item* slot: vehicle->scanerSlots()) {
@@ -83,6 +85,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((3.f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (0.5f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
 //    for (slot::Item* slot: vehicle->energizerSlots()) {
@@ -93,7 +96,8 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
 //        glm::vec2 offset((0)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 //        add(button, offset);
-//    }
+//        m_buttonslots.push_back(button);
+    //    }
 
     //{
     //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(entity::Type::FREEZER_SLOT), "ENTITY::FREEZER_SLOT");
@@ -103,6 +107,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
     //glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
     //AddChild(button, offset);
+    //        m_buttonslots.push_back(button);
     //}
 
     for (slot::Item* slot: vehicle->grappleSlots()) {
@@ -113,6 +118,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((-0.75f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (0.75f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     for (slot::Item* slot: vehicle->droidSlots()) {
@@ -123,6 +129,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((0.75f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP,(0.75f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     for (slot::Item* slot: vehicle->protectorSlots()) {
@@ -133,6 +140,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((0.75f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP,(-0.75f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     for (slot::Item* slot: vehicle->driveSlots()) {
@@ -143,6 +151,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((-2.5f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (0.5f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     for (slot::Item* slot: vehicle->bakSlots()) {
@@ -153,6 +162,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((-2.5f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP, (-0.5f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     /** ARTEFACT SLOTS */
@@ -165,6 +175,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
 //        glm::vec2 offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 //        add(button, offset);
+//    m_buttonslots.push_back(button);
 //    }
 
 
@@ -179,6 +190,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
         glm::vec2 offset((-5+i)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
+        m_buttonslots.push_back(button);
         i++;
     }
 
@@ -192,6 +204,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
 //        glm::vec2 offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 //        add(button, offset);
+    //        m_buttonslots.push_back(button);
     }
 
     m_allowFullControl = false;
@@ -238,96 +251,102 @@ void Vehicle::__createKorpusGui(control::Vehicle* vehicle, float scale)
     box().setSize(kontur_w * scale, kontur_h * scale);
 }      
 
-/*
-bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
-{    
-    for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
-    {
-        if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
-        {
-            if ( (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr) and (m_Player->GetCursor().GetItemSlot()->item() == nullptr) )
-            {
-                m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->item());
-            }
 
-            if ( (data_mouse.left_click == true) and (allow_full_control == true) )
-            {
-                if (gui_itemslot_vec[i].GetItemSlot()->subTypeId() != ENTITY::GATE_SLOT)
-                {
-                    m_Player->GetCursor().GetItemSlot()->SwapItem(gui_itemslot_vec[i].GetItemSlot());
-                }
-                else
-                {
-                    if (m_Player->GetCursor().GetItemSlot()->item() != nullptr)
-                    {
-                        if (m_Player->GetNpc()->vehicle()->placeTypeId() == ENTITY::SPACE)
-                        {
-                            m_Player->GetCursor().GetItemSlot()->DropItemToSpace(m_Player->GetNpc()->vehicle());
-                        }
-                        else
-                        {
-                            m_Player->GetNpc()->vehicle()->SellItem(m_Player->GetCursor().GetItemSlot()->item());
-                        }
-                    }
-                }
-            }
-            
-            #if DEBUG_ITEMDAMAGELOCKVIAGUI > 0
-            {
-                switch(DEBUG_ITEMDAMAGELOCKVIAGUI)
-                {
-                    case 1:
-                    {
-                        if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
-                        {
-                            if (data_mouse.right_click == true)
-                            {
-                                std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, ItemLOck testing"<<std::endl;
-                                if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
-                                {
-                                    gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(2);
-                                }
-                                else
-                                {
-                                    gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(0);
-                                }
-                            }
-                        }
-                        
-                        break;
-                    }
-                    
-                    case 2:
-                    {
-                        if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
-                        {
-                            if (data_mouse.right_click == true)
-                            {
-                                std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, Item Damage testing"<<std::endl;
-                                if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
-                                {
-                                    gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(0);
-                                }
-                                else
-                                {
-                                    gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(1000);
-                                }
-                            }
-                        }
-                        
-                        break;
-                    }
-                }
-            }
-            #endif
-            
+bool
+Vehicle::_updateMouseInteraction(client::Player* player, const MouseData& data_mouse)
+{    
+    for(ButtonItemSlot* slot: m_buttonslots) {
+        bool result = __updateMouseInteractionWithSlot(slot, player, data_mouse);
+        if (result) {
             return true;
-               }
         }
+    }
+    return false;
+}
+
+
+
+bool
+Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Player* player, const MouseData& data_mouse)
+{
+    if (!gui_slot->box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
+        return false;
+    }
+
+    if (gui_slot->itemSlot()->item() && !player->cursor().itemSlot()->item()) {
+        assert(false);
+        //player->cursor().setFocusedObject(gui_slot->itemSlot()->item());
+    }
+
+    if (data_mouse.left_click && allow_full_control) {
+        if (gui_slot->itemSlot()->type() != slot::Type::GATE_SLOT) {
+            player->cursor().itemSlot()->swapItem(gui_slot->itemSlot());
+            return true;
+        } else {
+            if (player->cursor().itemSlot()->item()) {
+                if (player->npc()->vehicle()->place() == place::Type::SPACE) {
+                    player->cursor().itemSlot()->dropItemToSpace(player->npc()->vehicle());
+                    return true;
+                } else {
+                    player->npc()->vehicle()->sellItem(player->cursor().itemSlot()->item());
+                    return true;
+                }
+            }
+        }
+    }
+
+//#if DEBUG_ITEMDAMAGELOCKVIAGUI > 0
+//    {
+//        switch(DEBUG_ITEMDAMAGELOCKVIAGUI)
+//        {
+//        case 1:
+//        {
+//            if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
+//            {
+//                if (data_mouse.right_click == true)
+//                {
+//                    std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, ItemLOck testing"<<std::endl;
+//                    if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
+//                    {
+//                        gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(2);
+//                    }
+//                    else
+//                    {
+//                        gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(0);
+//                    }
+//                }
+//            }
+
+//            break;
+//        }
+
+//        case 2:
+//        {
+//            if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
+//            {
+//                if (data_mouse.right_click == true)
+//                {
+//                    std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, Item Damage testing"<<std::endl;
+//                    if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
+//                    {
+//                        gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(0);
+//                    }
+//                    else
+//                    {
+//                        gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(1000);
+//                    }
+//                }
+//            }
+
+//            break;
+//        }
+//        }
+//    }
+//#endif
 
     return false;
 }
-*/   
+
 
 void Vehicle::update(client::Player* player)
 {
