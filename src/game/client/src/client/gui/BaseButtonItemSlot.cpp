@@ -21,7 +21,12 @@
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
 
+#include <core/session/Shortcuts.hpp>
+#include <core/model/item/Item.hpp>
+#include <core/manager/DescriptorManager.hpp>
+
 #include <client/resources/GuiTextureObCollector.hpp>
+#include <client/resources/Utils.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 #include <jeti/Material.hpp>
@@ -47,6 +52,33 @@ BaseButtonItemSlot::~BaseButtonItemSlot()
     delete m_material_mark_accept;
     delete m_material_mark_reject;
     delete m_material_slot;
+    delete m_material_item;
+}
+
+//#include <iostream>
+void BaseButtonItemSlot::_actualizeItemMaterial()
+{
+    if (!m_slot->item()) {
+        return;
+    }
+
+    descriptor::Base* item_descr = core::shortcuts::descriptors()->get(m_slot->item()->model()->descriptor());
+    if (m_item_descriptor == item_descr) {
+        return;
+    }
+
+    if (m_material_item) {
+        delete m_material_item;
+        m_material_item = nullptr;
+    }
+
+    m_material_item = utils::createMaterialFromDescriptorId(item_descr->texture());
+    m_box_item = box();
+    m_box_item.setScale(0.8f);
+//    std::cout<<slot::to_string(m_slot->type())<<std::endl;
+//    std::cout<<"000 item texture path="<<m_material_item->model()->texture_path<<std::endl;
+
+    m_item_descriptor = item_descr;
 }
 
 void BaseButtonItemSlot::_updateAnimation()
@@ -78,8 +110,13 @@ void BaseButtonItemSlot::_updateAnimation()
 void BaseButtonItemSlot::_drawSlot(const jeti::Render& render) const
 {
     render.drawQuad_HUD(box(), *m_material_slot);
-    //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
+}
 
+void BaseButtonItemSlot::_drawItem(const jeti::Render& render) const
+{
+    if (m_material_item) {
+        render.drawQuad_HUD(m_box_item, *m_material_item);
+    }
 }
 
 void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,

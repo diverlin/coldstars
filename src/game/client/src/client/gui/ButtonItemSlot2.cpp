@@ -74,6 +74,7 @@ void ButtonItemSlot2::resetState()
 /* virtual override final */    
 void ButtonItemSlot2::_updateUnique(client::Player* player)
 {
+    _actualizeItemMaterial();
     _updateAnimation();
             
     if (!hasAnimation()) {
@@ -95,6 +96,7 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
 void ButtonItemSlot2::_renderUnique(const jeti::Render& render, client::Player*) const
 {
     _drawSlot(render);
+    _drawItem(render);
 }        
 
 } // namespace gui

@@ -716,11 +716,8 @@ genBak(int race, int tech_level)
     };
     int price = funcCountPrice(fuel, modules, mass, condition);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT, revision_id)
-
     Bak* descr = new Bak;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::BAK_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -757,8 +754,6 @@ genDrive(int race, int tech_level)
 
     int speed = meti::rand::gen_int(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + int(Drive::SPEED_TECH_RATE * tech_level));
     int hyper = meti::rand::gen_int(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + int(Drive::HYPER_TECH_RATE * tech_level));
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT);
 
     auto funcCountPrice = [](int speed, int hyper, int modules, int mass, int condition) {
         float speed_rate         = float(speed) / Drive::SPEED_MIN;
@@ -778,6 +773,7 @@ genDrive(int race, int tech_level)
 
 
     Drive* descr = new Drive;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::DRIVE_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -831,6 +827,7 @@ genDroid(int race, int tech_level)
     int price = funcCountPrice(repair, modules, mass, condition);
 
     Droid* descr = new Droid;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::DROID_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -865,9 +862,6 @@ genGrapple(int race, int tech_level)
     int condition = meti::rand::gen_int(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
     int deterioration = 1;
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT);
-
     int strength   = meti::rand::gen_int(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + int(Grapple::STRENGTH_TECH_RATE * tech_level));
     int radius     = meti::rand::gen_int(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + int(Grapple::RADIUS_TECH_RATE * tech_level));
     int speed      = meti::rand::gen_int(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + int(Grapple::SPEED_TECH_RATE * tech_level));
@@ -892,6 +886,7 @@ genGrapple(int race, int tech_level)
     int price = funcCountPrice(strength, radius, speed, modules, mass, condition);
 
     Grapple* descr = new Grapple;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::GRAPPLE_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -929,8 +924,6 @@ genLazer(int race, int tech_level)
 
     int damage = meti::rand::gen_int(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + int(Lazer::DAMAGE_TECH_RATE * tech_level));
     int radius = meti::rand::gen_int(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + int(Lazer::RADIUS_TECH_RATE * tech_level));
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
     auto funcCountPrice = [](int damage, int radius, int modules, int mass, int condition) {
         float damage_rate        = float(damage) / Lazer::DAMAGE_MIN;
@@ -949,6 +942,7 @@ genLazer(int race, int tech_level)
     int price = funcCountPrice(damage, radius, modules, mass, condition);
 
     Lazer* descr = new Lazer;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::LAZER_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -983,9 +977,6 @@ genProtector(int race, int tech_level)
     int condition = meti::rand::gen_int(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
     int deterioration = 1;
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT);
-
     int protection = meti::rand::gen_int(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
 
     auto funcCountPrice = [](int protection, int modules, int mass, int condition) {
@@ -1003,6 +994,7 @@ genProtector(int race, int tech_level)
     int price = funcCountPrice(protection, modules, mass, condition);
 
     Protector* descr = new Protector;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::PROTECTOR_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1036,9 +1028,6 @@ genRadar(int race, int tech_level)
     int condition = meti::rand::gen_int(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
     int deterioration = 1;
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
-    //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT);
-
     int radius = meti::rand::gen_int(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
 
     auto funcCountPrice = [](int radius, int modules, int mass, int condition) {
@@ -1055,6 +1044,7 @@ genRadar(int race, int tech_level)
     int price = funcCountPrice(radius, modules, mass, condition);
 
     Radar* descr = new Radar;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::RADAR_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1111,6 +1101,7 @@ genRocket(int race, int tech_level)
     int price = funcCountPrice(ammo, damage, radius, modules, mass, condition);
 
     Rocket* descr = new Rocket;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::ROCKET_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1172,6 +1163,7 @@ genScaner(int race, int tech_level)
     int price = funcCountPrice(scan, modules, mass, condition);
 
     Scaner* descr = new Scaner;
+    descr->setTexture(textureDescriptorIdFromType(texture::Type::SCANER_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);

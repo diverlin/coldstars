@@ -42,6 +42,7 @@ public:
     void setSize(float x, float y)          { m_size = glm::vec2(x, y); }
     void setScale(const glm::vec2& scale)   { m_scale = scale; }
     void setScale(float x, float y)         { m_scale = glm::vec2(x, y); }
+    void setScale(float scale)              { m_scale = glm::vec2(scale, scale); }
     void setAngle(float angle)              { m_angle = angle; }
 
     const glm::vec2& center() const { return m_center; }

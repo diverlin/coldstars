@@ -63,7 +63,7 @@ Cache::__loadResourcesFor(Base* view)
     if (it != m_materialCollector.end()) {
         material = it->second;
     } else {
-        material = utils::createMaterialByDescriptorId(descritprorId);
+        material = utils::createMaterialFromDescriptorId(descritprorId);
         m_materialCollector.insert(std::make_pair(descritprorId, material));
     }
     view->setMaterial(material);
