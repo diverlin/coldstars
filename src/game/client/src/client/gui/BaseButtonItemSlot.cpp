@@ -32,10 +32,10 @@
 
 namespace gui {
 
-BaseButtonItemSlot::BaseButtonItemSlot(slot::Type type)
+BaseButtonItemSlot::BaseButtonItemSlot(slot::Item* slot)
     :
-      BaseButton(Type::NONE, Type::NONE, slot::to_string(type))
-    , m_type(type)
+      BaseButton(Type::NONE, Type::NONE, slot::to_string(slot->type()))
+    , m_slot(slot)
 {
     m_material_mark_accept = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_accept);
     m_material_mark_reject = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_reject);

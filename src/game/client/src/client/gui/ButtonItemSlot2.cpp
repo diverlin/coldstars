@@ -23,11 +23,13 @@ namespace gui {
 
 ButtonItemSlot2::ButtonItemSlot2(slot::Item* slot)
     :
-      BaseButtonItemSlot(slot->type())
+      BaseButtonItemSlot(slot)
 {
-    setItemSlot(slot);
 }
 
+ButtonItemSlot2::~ButtonItemSlot2()
+{
+}
 
 void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 {
