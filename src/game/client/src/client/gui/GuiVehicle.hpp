@@ -51,9 +51,8 @@ private:
 
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
-    void __init(control::Vehicle*);
     void __createKorpusGui(control::Vehicle*, float);
-    void __createItemSlotsGeometry(control::Vehicle*, float);
+    void __createItemSlotsGeometry(control::Vehicle*);
     void __createFunctionalItemSlotsCircleGeometry(control::Vehicle*, float);
 };
 

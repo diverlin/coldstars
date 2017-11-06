@@ -53,6 +53,9 @@ public:
     void runSessionInKosmoport(const MouseData&);
     void runSessionInNatureLand(const MouseData&);
 
+    void enterScan(client::Player* player);
+    void exitScan(client::Player* player);
+
     void enterKosmoport();
     void quitKosmoport();
 

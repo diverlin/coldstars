@@ -143,12 +143,44 @@ void Manager::quitSpace()
 {
     //gui_space.UnbindSharedGuis();
 }
-             
+
+void Manager::enterScan(client::Player* player)
+{
+    Vehicle* gui_scan_vehicle = static_cast<Vehicle*>(element(Type::SCAN_VEHICLE));
+    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
+    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
+
+    control::Vehicle* scan_target = player->npc()->scanTarget();
+    assert(scan_target);
+    if (gui_scan_vehicle->vehicle()) {
+        gui_scan_vehicle->unbindVehicle();
+    }
+    gui_player_vehicle->hide();
+    gui_radar->hide();
+
+    gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
+    gui_scan_vehicle->show();
+}
+
+void Manager::exitScan(client::Player* player)
+{
+    Vehicle* gui_scan_vehicle = static_cast<Vehicle*>(element(Type::SCAN_VEHICLE));
+    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
+    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
+
+    gui_scan_vehicle->unbindVehicle();
+    gui_scan_vehicle->hide();
+
+    gui_player_vehicle->show();
+    gui_radar->show();
+}
+
+
 void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
 {
-    Vehicle* gui_scan_vehicle = (Vehicle*)element(Type::SCAN_VEHICLE);
-    VehicleSimple* gui_player_vehicle = (VehicleSimple*)element(Type::PLAYER_VEHICLE);
-    gui::Radar* gui_radar = static_cast<gui::Radar*>(element(Type::GUI_RADAR));
+    Vehicle* gui_scan_vehicle = static_cast<Vehicle*>(element(Type::SCAN_VEHICLE));
+    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
+    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(Type::GALAXYMAP);
 
     assert(gui_scan_vehicle);
@@ -156,22 +188,22 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
     assert(gui_radar);
     assert(gui_galaxymap);
 
-    control::Vehicle* scan_target = player->npc()->scanTarget();
-    if (scan_target) {
-        if (!gui_scan_vehicle->vehicle()) {
-            gui_player_vehicle->hide();
-            gui_radar->hide();
+//    control::Vehicle* scan_target = player->npc()->scanTarget();
+//    if (scan_target) {
+//        if (!gui_scan_vehicle->vehicle()) {
+//            gui_player_vehicle->hide();
+//            gui_radar->hide();
 
-            gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
-            gui_scan_vehicle->show();
-        }
-    } else {
-        gui_scan_vehicle->unbindVehicle();
-        gui_scan_vehicle->hide();
+//            gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
+//            gui_scan_vehicle->show();
+//        }
+//    } else {
+//        gui_scan_vehicle->unbindVehicle();
+//        gui_scan_vehicle->hide();
         
-        gui_player_vehicle->show();
-        gui_radar->show();
-    }
+//        gui_player_vehicle->show();
+//        gui_radar->show();
+//    }
 
     Base* button = element(Type::BUTTON_GALAXYMAP);
     if (button->isPressed()) {
@@ -186,11 +218,6 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
         gui_galaxymap->UnbindGalaxy();
         gui_galaxymap->hide();
     }
-
-    //\\//
-//    gui_scan_vehicle->bindVehicle(player->npc()->vehicle(), /*offset=*/glm::vec2(-400, -400), /*full_control_on*/true);
-//    gui_scan_vehicle->show();
-    //\\//
 
     m_space.update(player);
     render.applyOrthogonalProjectionForHUD();

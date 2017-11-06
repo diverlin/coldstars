@@ -46,6 +46,7 @@ void TurnTimer::update(int threshold)
 {
     //std::cout<<"tick tack"<<m_stopTurnTimer<<std::endl;
     m_ticksLeft--;
+    //std::cout<<"tick="<<m_ticksLeft<<std::endl;
 
     /////////// AUTO-TURN /////////////
     if (m_ticksLeft < threshold) {
@@ -55,8 +56,6 @@ void TurnTimer::update(int threshold)
         
     if (m_ticksLeft < 0) {
         m_turnEnded = true;
-    } else {
-        m_turnEnded = false;
     }
 }
 
