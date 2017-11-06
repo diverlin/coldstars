@@ -55,7 +55,6 @@ BaseButtonItemSlot::~BaseButtonItemSlot()
     delete m_material_item;
 }
 
-//#include <iostream>
 void BaseButtonItemSlot::_actualizeItemMaterial()
 {
     if (!m_slot->item()) {
@@ -63,11 +62,11 @@ void BaseButtonItemSlot::_actualizeItemMaterial()
     }
 
     descriptor::Base* item_descr = core::shortcuts::descriptors()->get(m_slot->item()->model()->descriptor());
-    if (m_item_descriptor == item_descr) {
+    if (m_item_descriptor == item_descr) { // item didn't change
         return;
     }
 
-    if (m_material_item) {
+    if (m_material_item) { // clear previous
         delete m_material_item;
         m_material_item = nullptr;
     }
@@ -75,8 +74,6 @@ void BaseButtonItemSlot::_actualizeItemMaterial()
     m_material_item = utils::createMaterialFromDescriptorId(item_descr->texture());
     m_box_item = box();
     m_box_item.setScale(0.8f);
-//    std::cout<<slot::to_string(m_slot->type())<<std::endl;
-//    std::cout<<"000 item texture path="<<m_material_item->model()->texture_path<<std::endl;
 
     m_item_descriptor = item_descr;
 }

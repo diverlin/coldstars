@@ -191,8 +191,8 @@ void Material::__createTextureCoords(int col_num, int row_num, int fps)
     m_model->w_slice = m_model->w/col_num;
     m_model->h_slice = m_model->h/row_num;
     
-    float w_slicef = (float)m_model->w_slice/m_model->w;
-    float h_slicef = (float)m_model->h_slice/m_model->h;
+    float w_slicef = float(m_model->w_slice)/m_model->w;
+    float h_slicef = float(m_model->h_slice)/m_model->h;
     
     float w_offsetf = 0;
     float h_offsetf = 0;
@@ -214,7 +214,7 @@ void Material::__createTextureCoords(int col_num, int row_num, int fps)
     m_lastUpdateTime = 0;
     
     if (m_frameNum == 0) {
-        m_frameNum = m_framesCount*1.3;
+        m_frameNum = m_framesCount*1.3f;
     } else {
         m_frameNum = fps;
     }
