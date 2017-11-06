@@ -26,6 +26,11 @@ class Item;
 } // namespace slot
 
 namespace jeti {
+
+namespace control {
+class Material;
+} // namespace control
+
 class Render;
 } // namespace jeti
 
@@ -35,31 +40,29 @@ namespace gui {
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(slot::Type type)
-        :
-          BaseButton(Type::NONE, Type::NONE, slot::to_string(type))
-        , m_type(type)
-    {}
-
-    virtual ~BaseButtonItemSlot() {}
-
-    bool isEquiped() const;
+    BaseButtonItemSlot(slot::Type);
+    ~BaseButtonItemSlot();
 
     void setOffset(int offset) { m_offset = offset; }
     void setItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:
-    slot::Item* itemSlot() const { return m_slot; }
+    slot::Item* _itemSlot() const { return m_slot; }
 
-    void updateAnimation();
+    void _updateAnimation();
 
-    void RenderMarkEmptySlot(const jeti::Render&, const glm::vec2&, gui::Type) const;
-    void RenderMarkTarget() const;
+    void _drawMarkEmptySlot(const jeti::Render&, const glm::vec2&, slot::Type) const;
+    void _drawMarkTarget() const;
 
 private:
     int m_offset = 0;
     slot::Type m_type = slot::Type::NONE;
     slot::Item* m_slot = nullptr;
+
+    jeti::control::Material* m_material_mark_accept = nullptr;
+    jeti::control::Material* m_material_mark_reject = nullptr;
+    jeti::control::Material* m_material_mark_target_slot = nullptr;
+
 };
 
 } // namespace gui

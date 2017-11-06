@@ -37,7 +37,7 @@ void ButtonItemSlot2::onPressEventMBL(client::Player* player)
         _setIsPressed(false);
     }
         
-    if (itemSlot()) // !!!
+    if (_itemSlot()) // !!!
     {        
 //        if (GetPressed() == true)
 //        {
@@ -60,7 +60,7 @@ void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 void ButtonItemSlot2::resetState()
 {
     _setIsPressed(false);
-    if (itemSlot() != nullptr)
+    if (_itemSlot() != nullptr)
     {  
 //        if (GetItemSlot()->isSelected() == true)
 //        {
@@ -72,10 +72,10 @@ void ButtonItemSlot2::resetState()
 /* virtual override final */    
 void ButtonItemSlot2::_updateUnique(client::Player* player)
 {
-    updateAnimation();
+    _updateAnimation();
             
     if (!hasAnimation()) {
-        if (itemSlot()) {
+        if (_itemSlot()) {
             if (isPressed()) {
                 box().setScale(1.5, 1.5);
             } else {
@@ -92,9 +92,9 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
 /*virtual override final*/
 void ButtonItemSlot2::_renderUnique(const jeti::Render& render, client::Player*) const
 {
-    if (itemSlot()) {
-        //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
-    }
+//    if (itemSlot()) {
+//        render.drawQuadHUD(box());
+//    }
 }        
 
 } // namespace gui

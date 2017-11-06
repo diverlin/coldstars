@@ -47,14 +47,13 @@ void VehicleSimple::__reset()
     m_vehicle = nullptr;
 }
 
-void VehicleSimple::__bindVehicle(control::Vehicle* vehicle, float scale)
+void VehicleSimple::__bindVehicle(control::Vehicle* vehicle)
 {
-    __createFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
-    
+    __createFunctionalItemSlotsWithCircleGeometry(vehicle);
     m_vehicle = vehicle;
 }    
     
-void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle, float scale)
+void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle)
 {   
     __reset();
     int angle = 0;
@@ -64,10 +63,10 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
             ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
             glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-            button->setSize(size*scale);
+            button->setSize(size);
 
             glm::vec2 offset = meti::genVec2f(160, angle);
-            add(button, offset*scale);
+            add(button, offset);
 
             angle += 20;
         }
@@ -87,7 +86,7 @@ void VehicleSimple::_updateUnique(client::Player* player)
     }
     
     if (need_update) {
-        __bindVehicle(player->npc()->vehicle(), 0.6);
+        __bindVehicle(player->npc()->vehicle());
     }
 }
 

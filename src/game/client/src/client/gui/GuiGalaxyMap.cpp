@@ -142,7 +142,7 @@ void GuiGalaxyMap::_updateUnique(client::Player* player)
 /* vitual override final */
 void GuiGalaxyMap::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    render.drawQuadHUD(material(), box());
+    render.drawQuad_HUD(box(), material());
 
 //    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
 //    {

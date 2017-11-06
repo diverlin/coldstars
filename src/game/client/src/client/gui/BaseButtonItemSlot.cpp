@@ -24,25 +24,32 @@
 #include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
+#include <jeti/Material.hpp>
 #include <jeti/Render.hpp>
 
 #include <common/common.hpp>
 //#include <ceti/StringUtils.hpp>
 
 namespace gui {
-    
-bool BaseButtonItemSlot::isEquiped() const
-{
-    if (m_slot) {
-        if (m_slot->item()) {
-            return true;
-        }
-    } 
-    
-    return false;
-}   
 
-void BaseButtonItemSlot::updateAnimation()
+BaseButtonItemSlot::BaseButtonItemSlot(slot::Type type)
+    :
+      BaseButton(Type::NONE, Type::NONE, slot::to_string(type))
+    , m_type(type)
+{
+    m_material_mark_accept = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_accept);
+    m_material_mark_reject = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_reject);
+    //m_material_mark_target_slot = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_target_slot);
+}
+    
+BaseButtonItemSlot::~BaseButtonItemSlot()
+{
+    delete m_material_mark_accept;
+    delete m_material_mark_reject;
+    delete m_material_mark_target_slot;
+}
+
+void BaseButtonItemSlot::_updateAnimation()
 {
     if (!m_slot) {
         return;
@@ -68,30 +75,30 @@ void BaseButtonItemSlot::updateAnimation()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Render& render, const glm::vec2& mouse_screen_coord_pos, Type mark_slot_group) const
+void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,
+                                            const glm::vec2& mouse_screen_coord_pos,
+                                            slot::Type type_to_mark) const
 {
-    if (m_slot == nullptr) {
+    if (!m_slot) {
+        return;
+    }
+    if (!m_slot->item()) {
         return;
     }
 
-    if (!isEquiped()) {
-        return;
-    }
-
-    assert(false);
 //    if (type() == slot::Type::GATE)  {
 //        return;
 //    }
-//    if ((mark_slot_group == type()) || (type() == slot::Type::CARGO)) {
-//        //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_accept);
-//    } else {
-//        if (box().checkInteraction(mouse_screen_coord_pos)) {
-//            //m_ItemSlot->RenderMark(render, box(), GuiTextureObCollector::Instance().slot_mark_reject);
-//        }
-//    }
+    if ((type_to_mark == m_slot->type()) || (m_slot->type() == slot::Type::CARGO)) {
+        render.drawQuad_HUD(box(), *m_material_mark_accept);
+    } else {
+        if (box().checkInteraction(mouse_screen_coord_pos)) {
+            render.drawQuad_HUD(box(), *m_material_mark_reject);
+        }
+    }
 }
 
-void BaseButtonItemSlot::RenderMarkTarget() const
+void BaseButtonItemSlot::_drawMarkTarget() const
 {
     if (!m_slot) {
         return;

@@ -411,7 +411,7 @@ void Render::drawQuadAdditive(const control::Material& material, const glm::mat4
     drawMesh(*m_meshQuadAdditive, material, ModelMatrix, color);
 }
 
-void Render::drawQuadHUD(const control::Material& material, const ceti::Box2D& box) const
+void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& material) const
 {
     // ugly start
     glm::vec2 pos = box.center();
@@ -431,7 +431,7 @@ void Render::drawQuadHUD(const control::Material& material, const ceti::Box2D& b
     glm::mat4 ModelMatrix = TranslationMatrix /* * RotationMatrix */ * ScaleMatrix;
     // ugly end
 
-    drawMeshForHUD(*m_meshQuad, material, ModelMatrix);
+    drawMesh_HUD(*m_meshQuad, material, ModelMatrix);
 }
 
 void Render::__drawMesh(const Mesh& mesh) const {
@@ -503,7 +503,7 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
         __drawMesh(mesh);
     }
 }
-void Render::drawMeshForHUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {
     __useProgram(m_shaders.basetexture);
     {
