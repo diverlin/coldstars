@@ -64,6 +64,7 @@ MaterialCollector::MaterialCollector() {
     mask_round = __create("data/other/mask_round.png");
     mark_target = __create("data/gui/mark_target.png");
     mark_target_slot = __create("data/gui/mark_target_slot.png");
+    slot = __create("data/other/slot.png");
 }
 
 MaterialCollector::~MaterialCollector()

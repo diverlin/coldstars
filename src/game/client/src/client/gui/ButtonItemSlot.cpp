@@ -53,9 +53,9 @@ void ButtonItemSlot::_updateUnique(client::Player* player)
 /* virtual override final */
 void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
+    _drawSlot(render);
 
-    assert(false);
+    //assert(false);
 //    if (player->cursor().GetItemSlot()->item()) {
 //        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));
 //    }

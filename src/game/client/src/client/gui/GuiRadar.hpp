@@ -32,6 +32,8 @@ class Render;
 
 namespace gui {
 
+const float RADAR_FRAME_SIZE = 120;
+
 class Radar : public Base
 {
 public:
@@ -43,7 +45,6 @@ protected:
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 
 private:
-    const float RADAR_FRAME_SIZE = 120;
     const float RADAR_SCALE = 1/40.0;
 
     glm::vec4 m_color_star;

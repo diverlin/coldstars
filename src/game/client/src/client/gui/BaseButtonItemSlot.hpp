@@ -48,6 +48,7 @@ protected:
 
     void _updateAnimation();
 
+    void _drawSlot(const jeti::Render&) const;
     void _drawMarkEmptySlot(const jeti::Render&, const glm::vec2&, slot::Type) const;
     void _drawMarkTarget() const;
 
@@ -56,7 +57,7 @@ private:
 
     jeti::control::Material* m_material_mark_accept = nullptr;
     jeti::control::Material* m_material_mark_reject = nullptr;
-    jeti::control::Material* m_material_mark_target_slot = nullptr;
+    jeti::control::Material* m_material_slot = nullptr;
 
 };
 

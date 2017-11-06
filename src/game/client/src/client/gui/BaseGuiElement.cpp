@@ -204,8 +204,8 @@ void Base::_renderUnique(const jeti::Render& render, client::Player* player) con
 
 void Base::_renderCommon(const jeti::Render& render, client::Player* player) const
 {
-    for (const auto* gui_element : m_children) {
-        gui_element->render(render, player);
+    for (const auto* child : m_children) {
+        child->render(render, player);
     }
 }
 

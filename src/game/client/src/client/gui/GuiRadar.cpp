@@ -88,8 +88,8 @@ void Radar::_updateUnique(client::Player* player)
     int screen_h = client::shortcuts::screen()->height();
 
     // main gui frame
-    box().setSize(RADAR_FRAME_SIZE, RADAR_FRAME_SIZE);
-    box().setCenter(screen_w/2 - box().size().x, -screen_h/2 + box().size().y);
+    //box().setSize(RADAR_FRAME_SIZE, RADAR_FRAME_SIZE);
+    //box().setCenter(screen_w/2 - box().size().x, -screen_h/2 + box().size().y);
 
     // range mark on radar gui
     float range = player->npc()->vehicle()->properties().radar;

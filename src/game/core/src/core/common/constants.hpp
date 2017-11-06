@@ -617,9 +617,6 @@ namespace GUI
 
     namespace ITEMSLOT
     {
-        const int WIDTH_FOR_SHIP  = 46;
-        const int HEIGHT_FOR_SHIP = 49;
-
         const int WIDTH_FOR_CURSOR  = 46;
         const int HEIGHT_FOR_CURSOR = 49;
 

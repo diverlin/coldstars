@@ -39,7 +39,7 @@ protected:
 private:
     control::Vehicle* m_vehicle = nullptr;
 
-    void __reset();
+    void __clear();
     void __bindVehicle(control::Vehicle*);
     void __createFunctionalItemSlotsWithCircleGeometry(control::Vehicle*);
 };

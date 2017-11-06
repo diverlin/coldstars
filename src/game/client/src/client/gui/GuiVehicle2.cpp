@@ -27,17 +27,16 @@
 #include <core/pilot/Npc.hpp>
 
 #include <client/pilot/Player.hpp>
+#include <client/gui/constants.hpp>
 
 namespace gui {
 
 VehicleSimple::VehicleSimple()
     :
       Base(gui::Type::PLAYER_VEHICLE, gui::Type::PLAYER_VEHICLE)
-{
+{}        
 
-}        
-
-void VehicleSimple::__reset()
+void VehicleSimple::__clear()
 {
     for (auto* child: _children()) {
         delete child;
@@ -49,23 +48,22 @@ void VehicleSimple::__reset()
 
 void VehicleSimple::__bindVehicle(control::Vehicle* vehicle)
 {
+    __clear();
     __createFunctionalItemSlotsWithCircleGeometry(vehicle);
     m_vehicle = vehicle;
 }    
     
 void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle)
 {   
-    __reset();
     int angle = 0;
     for (slot::Item* slot: vehicle->slots()) {
         if (slot->type() != slot::Type::CARGO && slot->type() != slot::Type::ARTEFACT) {
-
             ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
-            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+            glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
             button->setSize(size);
 
-            glm::vec2 offset = meti::genVec2f(160, angle);
+            glm::vec2 offset = meti::genVec2f(box().size().x - 1.8f*gui::itemslot::WIDTH_FOR_SHIP, angle);
             add(button, offset);
 
             angle += 20;
@@ -73,21 +71,14 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
     }
 }    
 
-/* virtual override final */
 void VehicleSimple::_updateUnique(client::Player* player)
 {
-    bool need_update = false;
     if (m_vehicle) {
-        if (m_vehicle != player->npc()->vehicle()) {
-            need_update = true;
+        if (m_vehicle == player->npc()->vehicle()) {
+            return;
         }
-    } else {
-        need_update = true;
     }
-    
-    if (need_update) {
-        __bindVehicle(player->npc()->vehicle());
-    }
+    __bindVehicle(player->npc()->vehicle());
 }
 
 } // namespace gui
