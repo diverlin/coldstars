@@ -94,9 +94,7 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
 /*virtual override final*/
 void ButtonItemSlot2::_renderUnique(const jeti::Render& render, client::Player*) const
 {
-//    if (itemSlot()) {
-//        render.drawQuadHUD(box());
-//    }
+    _drawSlot(render);
 }        
 
 } // namespace gui

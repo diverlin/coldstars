@@ -62,6 +62,7 @@ public:
     jeti::model::Material* mask_round = nullptr;
     jeti::model::Material* mark_target = nullptr;
     jeti::model::Material* mark_target_slot = nullptr;
+    jeti::model::Material* slot = nullptr;
 
     static MaterialCollector& get();
 

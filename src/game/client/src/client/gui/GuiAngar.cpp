@@ -29,9 +29,10 @@
 
 #include <client/pilot/Player.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
+#include <client/gui/GuiManager.hpp>
+#include <client/gui/constants.hpp>
 
 #include <jeti/Render.hpp>
-#include <client/gui/GuiManager.hpp>
 
 namespace gui {
 
@@ -119,16 +120,16 @@ void GuiAngar::BindAngar(control::Angar* angar)
     }
     
     {
-        ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
-                  3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        ceti::Rect rect(gui::itemslot::WIDTH_FOR_SHIP,
+                  3*gui::itemslot::HEIGHT_FOR_SHIP,
+                  gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
         m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_repair_slot));
     }
 
     {
-        ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
-                  4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        ceti::Rect rect(gui::itemslot::WIDTH_FOR_SHIP,
+                  4*gui::itemslot::HEIGHT_FOR_SHIP,
+                  gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
         m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_charge_slot));
     }
 }

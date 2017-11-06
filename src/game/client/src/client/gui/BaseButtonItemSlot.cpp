@@ -39,14 +39,14 @@ BaseButtonItemSlot::BaseButtonItemSlot(slot::Item* slot)
 {
     m_material_mark_accept = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_accept);
     m_material_mark_reject = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_reject);
-    //m_material_mark_target_slot = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_target_slot);
+    m_material_slot = new jeti::control::Material(gui::MaterialCollector::get().slot);
 }
     
 BaseButtonItemSlot::~BaseButtonItemSlot()
 {
     delete m_material_mark_accept;
     delete m_material_mark_reject;
-    delete m_material_mark_target_slot;
+    delete m_material_slot;
 }
 
 void BaseButtonItemSlot::_updateAnimation()
@@ -73,6 +73,13 @@ void BaseButtonItemSlot::_updateAnimation()
             _deleteAnimationProgram();
         }
     }
+}
+
+void BaseButtonItemSlot::_drawSlot(const jeti::Render& render) const
+{
+    render.drawQuad_HUD(box(), *m_material_slot);
+    //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
+
 }
 
 void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,

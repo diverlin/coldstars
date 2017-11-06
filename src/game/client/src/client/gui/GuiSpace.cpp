@@ -128,21 +128,14 @@ Space::Space()
 
     {
         gui::Radar* gui_radar = new gui::Radar();
-        
-        glm::vec2 size(250, 250);
-        gui_radar->setSize(size);
-
-        glm::vec2 offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
-        add(gui_radar, offset);
-    }
-    
-    {
         VehicleSimple* gui_vehicle_player = new VehicleSimple();
-        
-        glm::vec2 size(250, 250);
+
+        glm::vec2 size(gui::RADAR_FRAME_SIZE, gui::RADAR_FRAME_SIZE);
+        gui_radar->setSize(size);
         gui_vehicle_player->setSize(size);
 
-        glm::vec2 offset(125, 125);
+        glm::vec2 offset(screen_w/2 - gui::RADAR_FRAME_SIZE, -screen_h/2 + gui::RADAR_FRAME_SIZE);
+        add(gui_radar, offset);
         add(gui_vehicle_player, offset);
     }
 }
