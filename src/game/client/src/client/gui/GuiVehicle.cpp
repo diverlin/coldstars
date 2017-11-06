@@ -32,6 +32,8 @@
 
 #include <jeti/Render.hpp>
 
+#include <ceti/Logger.hpp>
+
 
 namespace gui {
 
@@ -39,7 +41,7 @@ Vehicle::Vehicle()
     :
       Base(Type::SCAN_VEHICLE, Type::SCAN_VEHICLE)
 {   
-
+    setMaterial(new jeti::control::Material(gui::MaterialCollector::get().slot));
 }
 
 Vehicle::~Vehicle()
@@ -207,6 +209,7 @@ void Vehicle::bindVehicle(control::Vehicle* vehicle,
     if (m_vehicle == vehicle) {
         return;
     }
+    Logger::get().log("Vehicle::bindVehicle", Logger::Code::GUI);
     m_vehicle = vehicle;
 
     m_allowFullControl = allow_full_control;
@@ -218,6 +221,7 @@ void Vehicle::bindVehicle(control::Vehicle* vehicle,
 
 void Vehicle::unbindVehicle()
 { 
+    Logger::get().log("Vehicle::unbindVehicle", Logger::Code::GUI);
     for (auto* child : _children()) {
         delete child;
     }
@@ -228,10 +232,8 @@ void Vehicle::unbindVehicle()
 
 void Vehicle::__createKorpusGui(control::Vehicle* vehicle, float scale)
 {
-    setMaterial(new jeti::control::Material(MaterialCollector::get().radar_range));
-
-    float kontur_w = 400;
-    float kontur_h = 400;
+    float kontur_w = 350;
+    float kontur_h = 250;
 
     box().setSize(kontur_w * scale, kontur_h * scale);
 }      
@@ -327,15 +329,28 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 }
 */   
 
-/* virtual override final */
-void Vehicle::_renderUnique(const jeti::Render& render, client::Player* player) const
+void Vehicle::update(client::Player* player)
 {
-    //enable_BLEND();
-    //{
-    //drawQuad(textureOb(), GetBox());
-    //}
-    //disable_BLEND();
-}        
+    if (!m_vehicle) {
+        return;
+    }
+    _updateChildren(player);
+    _updateUnique(player);
+}
+
+void Vehicle::render(const jeti::Render& render, client::Player* player) const
+{
+    if (!m_vehicle) {
+        return;
+    }
+    __renderKorpus(render, player);
+    _renderChildren(render, player);
+}
+
+void Vehicle::__renderKorpus(const jeti::Render& render, client::Player* player) const
+{
+    render.drawQuad_HUD(box(), material());
+}
 
 } // namespace gui
 

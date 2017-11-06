@@ -48,7 +48,7 @@ void abort(const std::string& msg = "no info");
 class Logger
 {
 public:
-    enum class Code: int { ANY, DATA, COMM };
+    enum class Code: int { ANY, DATA, COMM, GUI };
 
     static Logger& get();
     ~Logger();
