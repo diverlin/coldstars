@@ -4,13 +4,13 @@
 
 layout(location = FRAG_OUTPUT0) out vec4 color;
 
-uniform sampler2D u_Texture;
+uniform sampler2D u_texture;
 uniform vec4 u_color;
 
-in vec2 v_Texcoord;
+in vec2 v_texCoord;
  
 void main (void)
 {
-    color = texture2D(u_Texture, v_Texcoord);
+    color = texture2D(u_texture, v_texCoord);
     color *= u_color;
 }

@@ -491,14 +491,14 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
 {	
     __useProgram(m_shaders.basetexture);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
-        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
 
         __drawMesh(mesh);
     }
@@ -507,14 +507,14 @@ void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, c
 {
     __useProgram(m_shaders.basetexture);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
-        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
 
         __drawMesh(mesh);
     }
@@ -828,8 +828,8 @@ void Render::drawPostEffectCombinedDebug(const std::vector<GLuint>& textures, in
             // ugly 
      	
             __useProgram(m_shaders.basetexture); {
-                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 				
 				glActiveTexture(GL_TEXTURE0);                                
 				glBindTexture(GL_TEXTURE_2D, textures[i+j]);
@@ -904,12 +904,12 @@ void Render::drawScreenQuadTextured(GLuint texture, int w, int h) const
 
     __useProgram(m_shaders.basetexture);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture); 
-        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_Texture"), 0);
+        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
                     
         __drawMesh(*m_meshQuad);
     }
