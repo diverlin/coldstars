@@ -40,6 +40,7 @@ Logger& Logger::get()
 Logger::Logger()
 {
     m_mode = Mode::SCREEN;
+    m_codes.add(Code::GUI);
     //m_codes.add(Code::ANY);
     //m_codes.add(Code::DATA);
     m_codes.add(Code::COMM);

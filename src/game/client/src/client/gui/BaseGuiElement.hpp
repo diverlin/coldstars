@@ -79,15 +79,25 @@ public:
 
     void add(Base*, const glm::vec2&);
 
-    void show() { m_isVisible = true; }
-    void hide() { m_isVisible = false; }
+    void show() {
+        m_isVisible = true;
+        for(Base* child: m_children) {
+            child->show();
+        }
+    }
+    void hide() {
+        m_isVisible = false;
+        for(Base* child: m_children) {
+            child->hide();
+        }
+    }
 
     virtual void onPressEventMBL(client::Player*) {}
     virtual void onPressEventMBR(client::Player*) {}
     virtual void resetState();
 
-    void update(client::Player*);
-    void render(const jeti::Render&, client::Player*) const;
+    virtual void update(client::Player*);
+    virtual void render(const jeti::Render&, client::Player*) const;
     virtual void renderInfo(const jeti::Render&) const {}
 
 protected:
@@ -116,10 +126,10 @@ protected:
     void _updateGeometry(const glm::vec2&, const glm::vec2&);
 
     virtual void _updateUnique(client::Player*);
-    void _updateCommon(client::Player*);
+    void _updateChildren(client::Player*);
 
     virtual void _renderUnique(const jeti::Render&, client::Player*) const;
-    void _renderCommon(const jeti::Render&, client::Player*) const;
+    void _renderChildren(const jeti::Render&, client::Player*) const;
 
     std::vector<Base*>& _children() { return m_children; } // !!!
 
@@ -139,7 +149,7 @@ private:
 
     bool m_isLocked = false;
     bool m_isPressed = false;
-    bool m_isVisible = true;
+    bool m_isVisible = false; // setting to false cause bug
     bool m_isRoot = true;
 
     glm::vec2 m_offset;

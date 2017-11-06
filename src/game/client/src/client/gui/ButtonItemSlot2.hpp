@@ -22,7 +22,7 @@
 
 namespace jeti {
 class Render;
-}
+} // namespace jeti
 
 namespace gui {
 

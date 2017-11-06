@@ -43,13 +43,16 @@ public:
     void bindVehicle(control::Vehicle*, const glm::vec2& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
     void unbindVehicle();
     
+    void update(client::Player*) override final;
+    void render(const jeti::Render&, client::Player*) const override final;
+
 private:
     bool m_blockManualExit;
     bool m_allowFullControl;
 
     control::Vehicle* m_vehicle = nullptr;
 
-    virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
+    void __renderKorpus(const jeti::Render&, client::Player*) const;
 
     void __createKorpusGui(control::Vehicle*, float);
     void __createItemSlotsGeometry(control::Vehicle*);

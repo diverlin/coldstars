@@ -178,7 +178,6 @@ void GuiGalaxyMap::_renderUnique(const jeti::Render& render, client::Player* pla
     
     //render.enable_POINTSPRITE();
     {
-        assert(false);
 //        glm::vec2 player_starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->vehicle()->starsystem()));
         
         //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);

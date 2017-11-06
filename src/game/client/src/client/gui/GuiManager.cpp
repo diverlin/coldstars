@@ -41,6 +41,8 @@
 #include <client/gui/GuiSkills.hpp>
 #include <client/gui/GuiGalaxyMap.hpp>
 
+#include <ceti/Logger.hpp>
+
 namespace gui {
 
 Manager& Manager::get()
@@ -146,6 +148,7 @@ void Manager::quitSpace()
 
 void Manager::enterScan(client::Player* player)
 {
+    Logger::get().log("gui::Manager enterScan", Logger::Code::GUI);
     Vehicle* gui_scan_vehicle = static_cast<Vehicle*>(element(Type::SCAN_VEHICLE));
     VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
     gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
@@ -164,6 +167,7 @@ void Manager::enterScan(client::Player* player)
 
 void Manager::exitScan(client::Player* player)
 {
+    Logger::get().log("gui::Manager exitScan", Logger::Code::GUI);
     Vehicle* gui_scan_vehicle = static_cast<Vehicle*>(element(Type::SCAN_VEHICLE));
     VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
     gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
@@ -174,7 +178,6 @@ void Manager::exitScan(client::Player* player)
     gui_player_vehicle->show();
     gui_radar->show();
 }
-
 
 void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
 {
@@ -187,23 +190,6 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
     assert(gui_player_vehicle);
     assert(gui_radar);
     assert(gui_galaxymap);
-
-//    control::Vehicle* scan_target = player->npc()->scanTarget();
-//    if (scan_target) {
-//        if (!gui_scan_vehicle->vehicle()) {
-//            gui_player_vehicle->hide();
-//            gui_radar->hide();
-
-//            gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
-//            gui_scan_vehicle->show();
-//        }
-//    } else {
-//        gui_scan_vehicle->unbindVehicle();
-//        gui_scan_vehicle->hide();
-        
-//        gui_player_vehicle->show();
-//        gui_radar->show();
-//    }
 
     Base* button = element(Type::BUTTON_GALAXYMAP);
     if (button->isPressed()) {
@@ -219,6 +205,7 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
         gui_galaxymap->hide();
     }
 
+    m_space.show();
     m_space.update(player);
     render.applyOrthogonalProjectionForHUD();
     m_space.render(render, player);

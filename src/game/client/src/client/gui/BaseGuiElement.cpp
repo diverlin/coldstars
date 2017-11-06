@@ -42,7 +42,9 @@ Base::Base(Type id,
         setMaterial(new jeti::control::Material(material));
     }
 
-    m_elements.insert(std::make_pair(id, this));
+    if (id != gui::Type::NONE) {
+        m_elements.insert(std::make_pair(id, this));
+    }
 }
 
 /* virtual */
@@ -92,7 +94,6 @@ void Base::_resetStateEventOnGuiElement(Type group)
     }
 }    
 
-/* virtual */
 void Base::resetState()
 {
     m_isPressed = false;
@@ -131,11 +132,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
 }
 
 void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
-{
-    if (!m_isVisible) {
-        return;
-    }
-    
+{   
     glm::vec2 next_offset = parent_offset + m_offset;
     glm::vec2 next_scale = parent_scale * m_box.scale();
 
@@ -157,15 +154,14 @@ void Base::update(client::Player* player)
         _updateGeometry(m_offset, glm::vec2(1,1));
     }
     
-    _updateCommon(player);
+    _updateChildren(player);
     _updateUnique(player);
 }
 
-/* virtual */
 void Base::_updateUnique(client::Player*)
 {}
 
-void Base::_updateCommon(client::Player* player)
+void Base::_updateChildren(client::Player* player)
 {
     for (auto* child : m_children) {
         child->update(player);
@@ -180,29 +176,20 @@ void Base::render(const jeti::Render& render, client::Player* player) const
 {
     if (!m_isVisible) {
         return;
-    }
+    }    
     
-    if (m_isRoot) {
-        //resetRenderTransformation();
-    }
-    
-    //render.enable_BLEND();
-    {
-        _renderUnique(render, player);
-        _renderCommon(render, player);
-    }
-    //render.disable_BLEND();
+    _renderUnique(render, player);
+    _renderChildren(render, player);
 }
 
-/* virtual */
 void Base::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    if (m_material) {
-        render.drawQuad_HUD(m_box, *m_material);
-    }
+//    if (m_material) {
+//        render.drawQuad_HUD(m_box, *m_material);
+//    }
 }
 
-void Base::_renderCommon(const jeti::Render& render, client::Player* player) const
+void Base::_renderChildren(const jeti::Render& render, client::Player* player) const
 {
     for (const auto* child : m_children) {
         child->render(render, player);
