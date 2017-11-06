@@ -176,10 +176,10 @@ void Radar::__addVisible(control::SpaceObject* object, control::Vehicle* vehicle
             
 void Radar::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    render.drawQuadHUD(*m_material_background, box());
-    render.drawQuadHUD(*m_material_bar, box());
-    render.drawQuadHUD(*m_material_range, m_box_range);
-    render.drawQuadHUD(*m_material_screenrect, m_box_screenrect);
+    render.drawQuad_HUD(box(), *m_material_background);
+    render.drawQuad_HUD(box(), *m_material_bar);
+    render.drawQuad_HUD(m_box_range, *m_material_range);
+    render.drawQuad_HUD(m_box_screenrect, *m_material_screenrect);
 
     if (m_positions.size()) {
         m_entitiesMesh->fillPointVertices(m_positions, m_colors, m_sizes);

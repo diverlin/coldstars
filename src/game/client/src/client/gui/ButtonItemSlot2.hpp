@@ -34,8 +34,9 @@ public:
 
     virtual void onPressEventMBL(client::Player*) override final;
     virtual void resetState() override final;
-    virtual void _updateUnique(client::Player*) override final;
 
+protected:
+    virtual void _updateUnique(client::Player*) override final;
     virtual void _renderUnique(const jeti::Render&, client::Player*) const override final;
 };
 

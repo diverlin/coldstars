@@ -103,14 +103,14 @@ public:
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
-    void drawMeshForHUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+    void drawMesh_HUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshMultiTextured(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawQuad(const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawQuadAdditive(const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
-    void drawQuadHUD(const control::Material&, const ceti::Box2D&) const;
+    void drawQuad_HUD(const ceti::Box2D&, const control::Material&) const;
 
     void drawStar(GLuint texture=0) const;
     void drawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;

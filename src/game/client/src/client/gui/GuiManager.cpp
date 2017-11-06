@@ -187,6 +187,7 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
         gui_galaxymap->hide();
     }
 
+            gui_player_vehicle->show(); //
     m_space.update(player);
     render.applyOrthogonalProjectionForHUD();
     m_space.render(render, player);

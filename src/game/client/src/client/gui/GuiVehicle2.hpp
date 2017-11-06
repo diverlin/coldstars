@@ -40,8 +40,8 @@ private:
     control::Vehicle* m_vehicle = nullptr;
 
     void __reset();
-    void __bindVehicle(control::Vehicle*, float scale = 1.0f);
-    void __createFunctionalItemSlotsWithCircleGeometry(control::Vehicle*, float);
+    void __bindVehicle(control::Vehicle*);
+    void __createFunctionalItemSlotsWithCircleGeometry(control::Vehicle*);
 };
 
 } // namespace gui
