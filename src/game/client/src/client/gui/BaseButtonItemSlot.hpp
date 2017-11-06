@@ -40,11 +40,8 @@ namespace gui {
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(slot::Type);
+    BaseButtonItemSlot(slot::Item*);
     ~BaseButtonItemSlot();
-
-    void setOffset(int offset) { m_offset = offset; }
-    void setItemSlot(slot::Item* item_slot) { m_slot = item_slot; }
 
 protected:
     slot::Item* _itemSlot() const { return m_slot; }
@@ -55,8 +52,6 @@ protected:
     void _drawMarkTarget() const;
 
 private:
-    int m_offset = 0;
-    slot::Type m_type = slot::Type::NONE;
     slot::Item* m_slot = nullptr;
 
     jeti::control::Material* m_material_mark_accept = nullptr;

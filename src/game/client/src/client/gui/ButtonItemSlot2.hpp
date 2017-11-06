@@ -30,7 +30,7 @@ class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
     ButtonItemSlot2(slot::Item*);
-    virtual ~ButtonItemSlot2() override final {}
+    ~ButtonItemSlot2();
 
     virtual void onPressEventMBL(client::Player*) override final;
     virtual void resetState() override final;
