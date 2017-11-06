@@ -644,6 +644,7 @@ void Player::__clickOn(view::Ship* ship)
         break;
     }
     case MouseData::Event::RightButtonPress: {
+        npc()->tryScan(ship->control(), false);
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;

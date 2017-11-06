@@ -148,7 +148,8 @@ public:
 
     //// scanning
     bool isAbleToScan(Vehicle*);
-    bool scanProceeding();
+    bool tryScan(Vehicle*, bool check = true);
+//    bool scanProceeding();
     void resetScanTarget();
     //// scanning
 
@@ -169,6 +170,9 @@ public:
     bool isAgressor(int_t) const;
 
     Vehicle* scanTarget() const { return m_scanTarget; }
+
+protected:
+    void _setScanTarget(Vehicle* scanTarget);
 
 private:
     descriptor::Npc* m_descriptor_npc = nullptr;

@@ -162,12 +162,12 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
             gui_player_vehicle->hide();
             gui_radar->hide();
 
-            //gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
-            //gui_scan_vehicle->show();
+            gui_scan_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
+            gui_scan_vehicle->show();
         }
     } else {
-        //gui_scan_vehicle->unbindVehicle();
-        //gui_scan_vehicle->hide();
+        gui_scan_vehicle->unbindVehicle();
+        gui_scan_vehicle->hide();
         
         gui_player_vehicle->show();
         gui_radar->show();
@@ -188,8 +188,8 @@ void Manager::runSessionInSpace(jeti::Render& render, client::Player* player)
     }
 
     //\\//
-    gui_scan_vehicle->bindVehicle(player->npc()->vehicle(), /*offset=*/glm::vec2(-400, -400), /*full_control_on*/true);
-    gui_scan_vehicle->show();
+//    gui_scan_vehicle->bindVehicle(player->npc()->vehicle(), /*offset=*/glm::vec2(-400, -400), /*full_control_on*/true);
+//    gui_scan_vehicle->show();
     //\\//
 
     m_space.update(player);
