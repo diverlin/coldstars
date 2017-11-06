@@ -93,6 +93,23 @@ Player::Player(int_t id)
 Player::~Player()
 {}  
             
+bool Player::enterScan(control::Vehicle* vehicle)
+{
+    gui::Manager::get().enterScan(this);
+    m_blockSpaceNavigation = true;
+    return true;
+}
+
+void Player::exitScan()
+{
+    if (!npc()->scanTarget()) {
+        return;
+    }
+
+    npc()->resetScanTarget();
+    gui::Manager::get().exitScan(this);
+    m_blockSpaceNavigation = false;
+}
 
 void Player::endTurnEvent()
 {
@@ -127,14 +144,11 @@ Player::radius() const {
 
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
 {
-    if (force_full_control == false)
-    {
-        assert(false);
-//        if (npc->vehicle()->id() == npc->scanTarget()->id())
-//        {
-//            force_full_control = true;
-//            // modify full control for friend ships
-//        }
+    if (force_full_control == false) {
+        if (npc()->vehicle()->id() == npc()->scanTarget()->id()) {
+            force_full_control = true;
+            // modify full control for friend ships
+        }
     }
     
     return force_full_control;
@@ -644,7 +658,9 @@ void Player::__clickOn(view::Ship* ship)
         break;
     }
     case MouseData::Event::RightButtonPress: {
-        npc()->tryScan(ship->control(), false);
+        if (npc()->tryScan(ship->control(), false)) {
+            enterScan(ship->control());
+        }
         //            npc->vehicle()->GetComplexDrive().SetTarget(asteroid, NAVIGATOR_ACTION::KEEP_MIDDLE);
         //            npc->vehicle()->GetComplexDrive().UpdatePath();
         break;
@@ -765,6 +781,10 @@ void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
 
 void Player::__navigate() const
 {
+    if (m_blockSpaceNavigation) {
+        return;
+    }
+
     switch(m_cursor.mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         assert(npc());

@@ -46,7 +46,7 @@ Vehicle::~Vehicle()
 {}
 
 
-void Vehicle::__init(control::Vehicle* vehicle)
+void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 {
     float dist_rate = 2.1f;
     /** WEAPON SLOTS */
@@ -93,6 +93,16 @@ void Vehicle::__init(control::Vehicle* vehicle)
 //        add(button, offset);
 //    }
 
+    //{
+    //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(entity::Type::FREEZER_SLOT), "ENTITY::FREEZER_SLOT");
+
+    //glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+    //button->setSize(size);
+
+    //glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+    //AddChild(button, offset);
+    //}
+
     for (slot::Item* slot: vehicle->grappleSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
@@ -112,16 +122,6 @@ void Vehicle::__init(control::Vehicle* vehicle)
         glm::vec2 offset((0.75f)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP,(0.75f)*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
     }
-
-    //{
-    //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(entity::Type::FREEZER_SLOT), "ENTITY::FREEZER_SLOT");
-
-    //glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-    //button->setSize(size);
-
-    //glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-    //AddChild(button, offset);
-    //}
 
     for (slot::Item* slot: vehicle->protectorSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
@@ -212,9 +212,8 @@ void Vehicle::bindVehicle(control::Vehicle* vehicle,
     m_allowFullControl = allow_full_control;
     m_blockManualExit = block_manual_exit;
 
-    __init(vehicle);
     __createKorpusGui(vehicle, scale);
-    __createItemSlotsGeometry(vehicle, scale);
+    __createItemSlotsGeometry(vehicle);
 }
 
 void Vehicle::unbindVehicle()
@@ -236,25 +235,6 @@ void Vehicle::__createKorpusGui(control::Vehicle* vehicle, float scale)
 
     box().setSize(kontur_w * scale, kontur_h * scale);
 }      
-
-void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle, float scale)
-{
-    //    for (const auto itemslot : vehicle->m_slots)
-    //    {
-    //        entity::Type request_type = itemslot->subtype();
-    //        if ((request_type == entity::Type::WEAPON_SLOT) || (request_type == entity::Type::CARGO_SLOT) or (request_type == entity::Type::ARTEFACT_SLOT))
-    //        {
-    //            request_type = itemslot->subsubtype();
-    //        }
-    
-    //        BaseGuiElement* child = GetGuiElement(getGuiItemSlotType(request_type));
-    //        if (child)
-    //        {
-    //            child->Show();
-    //            ((ButtonItemSlot*)child)->SetItemSlot(itemslot);
-    //        }
-    //    }
-} 
 
 /*
 bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)

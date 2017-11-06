@@ -33,6 +33,7 @@
 
 namespace control {
 class Npc;
+class Vehicle;
 } // namespace control
 
 class TurnTimer;
@@ -75,6 +76,10 @@ public:
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
 
+
+    bool enterScan(control::Vehicle*);
+    void exitScan();
+
     // events
     void endTurnEvent();
     void pressLeftMouseButtonEvent();
@@ -83,6 +88,8 @@ public:
 private:
     gui::Cursor m_cursor;
     Show m_show;
+
+    bool m_blockSpaceNavigation = false;
 
 //    void RenderInSpace(control::StarSystem*, bool, bool, bool);
 //    void RenderInSpace_NEW(jeti::Render&, control::StarSystem*);
