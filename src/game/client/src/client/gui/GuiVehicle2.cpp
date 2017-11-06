@@ -60,10 +60,10 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
         if (slot->type() != slot::Type::CARGO && slot->type() != slot::Type::ARTEFACT) {
             ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
-            glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
+            glm::vec2 size(gui::itemslot::WIDTH_FOR_RADAR, gui::itemslot::HEIGHT_FOR_RADAR);
             button->setSize(size);
 
-            glm::vec2 offset = meti::genVec2f(box().size().x - 1.8f*gui::itemslot::WIDTH_FOR_SHIP, angle);
+            glm::vec2 offset = meti::genVec2f(box().size().x - 1.8f*gui::itemslot::WIDTH_FOR_RADAR, angle);
             add(button, offset);
 
             angle += 20;

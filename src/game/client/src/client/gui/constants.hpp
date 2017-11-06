@@ -23,8 +23,10 @@ namespace gui {
 namespace itemslot {
 //namespace item {
 
-const int WIDTH_FOR_SHIP  = 15;
-const int HEIGHT_FOR_SHIP = 15;
+const int WIDTH_FOR_SHIP  = 30;
+const int HEIGHT_FOR_SHIP = 30;
+const int WIDTH_FOR_RADAR  = 15;
+const int HEIGHT_FOR_RADAR = 15;
 
 //} // namespace item
 } // namespace slot

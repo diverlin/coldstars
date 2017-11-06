@@ -55,6 +55,7 @@ void ButtonItemSlot::_updateUnique(client::Player* player)
 void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
     _drawSlot(render);
+    _drawItem(render);
 
     //assert(false);
 //    if (player->cursor().GetItemSlot()->item()) {
