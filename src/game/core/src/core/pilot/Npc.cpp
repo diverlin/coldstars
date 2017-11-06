@@ -258,21 +258,30 @@ Npc::closestStarSystem(int requested_condition_id)
 //// *********** SCANNING ***********
 bool Npc::isAbleToScan(Vehicle* vehicle)
 {
-    assert(false);
-//    if (this->m_vehicle->id() == vehicle->id())    // selfscan is possible all time
-//    {
-//        return true;
-//    }
+    if (m_vehicle->id() == vehicle->id()) { // self-scanning is allowed all the time
+        return true;
+    }
 
-//    if (this->m_vehicle->properties().scan > vehicle->properties().protection)
-//    {
-//        return true;
-//    }
+    if (m_vehicle->properties().scan > vehicle->properties().protection) {
+        return true;
+    }
 
     return false;
 }
 
+bool Npc::tryScan(Vehicle* vehicle, bool check)
+{
+    if (check) {
+    if (!isAbleToScan(vehicle)) {
+        return false;
+    }
+    }
 
+    _setScanTarget(vehicle);
+    return true;
+}
+
+void Npc::_setScanTarget(Vehicle* scanTarget) { m_scanTarget = scanTarget; }
 void Npc::resetScanTarget() { m_scanTarget = nullptr; }
 //// *********** SCANNING ***********
 
