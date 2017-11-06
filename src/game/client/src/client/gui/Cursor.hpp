@@ -21,7 +21,9 @@
 #include <client/gui/MouseData.hpp>
 #include <ceti/Box2D.hpp>
 
-class ItemSlot;
+namespace slot {
+class Item;
+} // namespace slot
 
 namespace model {
 class SpaceObject;
@@ -59,7 +61,7 @@ public:
 
     const MouseData& mouseData() const { return m_dataMouse; }
     MouseData& mouseData() { return m_dataMouse; }
-    ItemSlot* itemSlot() const { return m_itemSlot; }
+    slot::Item* itemSlot() const { return m_itemSlot; }
 
     void update(client::Player*, const jeti::Render& render);
 
@@ -75,7 +77,7 @@ private:
     glm::vec3 m_screenCoord;
     view::Base* m_focusedView = nullptr;
 
-    ItemSlot* m_itemSlot = nullptr;
+    slot::Item* m_itemSlot = nullptr;
 
     MouseData m_dataMouse;
 

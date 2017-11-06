@@ -30,6 +30,8 @@ class MouseData; // to be removed
 
 namespace gui {
 
+class ButtonItemSlot;
+
 class Vehicle : public Base
 {
 public:
@@ -46,11 +48,18 @@ public:
     void update(client::Player*) override final;
     void render(const jeti::Render&, client::Player*) const override final;
 
+protected:
+    bool _updateMouseInteraction(const MouseData&);
+    bool _updateMouseInteraction(client::Player*, const MouseData&);
+
 private:
     bool m_blockManualExit;
     bool m_allowFullControl;
 
     control::Vehicle* m_vehicle = nullptr;
+    std::vector<ButtonItemSlot*> m_buttonslots;
+
+    bool __updateMouseInteractionWithSlot(ButtonItemSlot*, client::Player*, const MouseData&);
 
     void __renderKorpus(const jeti::Render&, client::Player*) const;
 

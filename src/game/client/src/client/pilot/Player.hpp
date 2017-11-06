@@ -66,7 +66,7 @@ public:
 
     gui::Cursor& cursor() { return m_cursor; }
 
-    bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
+    bool isAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
 
     void update(const jeti::Render&, view::Base* focusedView = nullptr);
     void RunSession(const TurnTimer&);
@@ -75,7 +75,6 @@ public:
 
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
-
 
     bool enterScan(control::Vehicle*);
     void exitScan();

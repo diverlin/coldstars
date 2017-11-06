@@ -39,7 +39,7 @@ void ButtonItemSlot2::onPressEventMBL(client::Player* player)
         _setIsPressed(false);
     }
         
-    if (_itemSlot()) // !!!
+    if (itemSlot()) // !!!
     {        
 //        if (GetPressed() == true)
 //        {
@@ -62,7 +62,7 @@ void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 void ButtonItemSlot2::resetState()
 {
     _setIsPressed(false);
-    if (_itemSlot() != nullptr)
+    if (itemSlot() != nullptr)
     {  
 //        if (GetItemSlot()->isSelected() == true)
 //        {
@@ -78,7 +78,7 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
     _updateAnimation();
             
     if (!hasAnimation()) {
-        if (_itemSlot()) {
+        if (itemSlot()) {
             if (isPressed()) {
                 box().setScale(1.5, 1.5);
             } else {
