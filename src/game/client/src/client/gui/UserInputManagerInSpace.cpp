@@ -65,12 +65,11 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
         {
         case sf::Keyboard::Escape:
         {
-            assert(false);
-            //                if (player->GetNpc()->scanTarget()) {
-            //                    //player->GetNpc()->ResetScanTarget();
-            //                } else {
-            //                    m_runSession = false;
-            //                }
+            if (player->npc()->scanTarget()) {
+                player->npc()->resetScanTarget();
+            } /*else {
+                m_runSession = false;
+            }*/
 
             break;
         }
