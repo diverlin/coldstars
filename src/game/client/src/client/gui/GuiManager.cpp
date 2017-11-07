@@ -155,7 +155,7 @@ void Manager::enterScan(client::Player* player)
 
     control::Vehicle* scan_target = player->npc()->scanTarget();
     assert(scan_target);
-    if (gui_scan_vehicle->vehicle()) {
+    if (gui_scan_vehicle->isActive()) {
         gui_scan_vehicle->unbindVehicle();
     }
     gui_player_vehicle->hide();

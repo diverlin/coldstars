@@ -286,7 +286,7 @@ Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Play
             if (player->cursor().itemSlot()->item()) {
                 if (player->npc()->vehicle()->place() == place::Type::SPACE) {
                     std::cout<<"push telegram here to drop item"<<std::endl;
-                    assert(false);
+                    //assert(false);
                     //player->cursor().itemSlot()->dropItemToSpace(player->npc()->vehicle());
                     return true;
                 } else {
@@ -364,7 +364,7 @@ void Vehicle::render(const jeti::Render& render, client::Player* player) const
     if (!m_vehicle) {
         return;
     }
-    __renderKorpus(render, player);
+    //__renderKorpus(render, player);
     _renderChildren(render, player);
 }
 

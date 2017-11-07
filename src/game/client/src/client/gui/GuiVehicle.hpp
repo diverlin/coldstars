@@ -42,7 +42,7 @@ public:
     Vehicle();
     virtual ~Vehicle();
 
-    control::Vehicle* vehicle() const { return m_vehicle; }
+    bool isActive() const { return m_vehicle != nullptr; }
     bool blockManualExit() const { return m_blockManualExit; }
     bool allowFullControl() const { return m_allowFullControl; }
 
@@ -53,7 +53,6 @@ public:
     void render(const jeti::Render&, client::Player*) const override final;
 
 protected:
-    bool _updateMouseInteraction(const MouseData&);
     bool _updateMouseInteraction(client::Player*, const MouseData&);
 
 private:
