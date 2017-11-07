@@ -41,6 +41,7 @@ std::string to_string(Type type)
     case Type::FREEZER:   { return "slot::Type::FREEZER"; }
     case Type::GRAPPLE:   { return "slot::Type::GRAPPLE"; }
     case Type::SCANER:    { return "slot::Type::SCANER"; }
+    case Type::GATE:      { return "slot::Type::GATE"; }
     }
 
     assert(false);

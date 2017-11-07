@@ -40,7 +40,8 @@ namespace gui {
 Vehicle::Vehicle()
     :
       Base(Type::SCAN_VEHICLE, Type::SCAN_VEHICLE)
-{   
+{
+    m_slot_gate = new slot::Item(slot::Type::GATE);
     setMaterial(new jeti::control::Material(gui::MaterialCollector::get().slot));
 }
 
@@ -188,7 +189,7 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP*scale_size, gui::itemslot::HEIGHT_FOR_SHIP*scale_size);
         button->setSize(size);
 
-        glm::vec2 offset((-5+i)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((-5.f+i)*dist_rate*gui::itemslot::WIDTH_FOR_SHIP*scale_size, -1.75f*dist_rate*gui::itemslot::HEIGHT_FOR_SHIP);
         add(button, offset);
         m_buttonslots.push_back(button);
         i++;
@@ -196,15 +197,14 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
 
     /** GATE SLOT */
     {
-    std::cout<<"WARNING, make gate slot be visible again"<<std::endl;
-//        ButtonItemSlot* button = new ButtonItemSlot(entity::Type::GATE_SLOT);
+        ButtonItemSlot* button = new ButtonItemSlot(m_slot_gate);
 
-//        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-//        button->setSize(size);
+        glm::vec2 size(0.5f*gui::itemslot::WIDTH_FOR_SHIP, 0.5f*gui::itemslot::WIDTH_FOR_SHIP);
+        button->setSize(size);
 
-//        glm::vec2 offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-//        add(button, offset);
-    //        m_buttonslots.push_back(button);
+        glm::vec2 offset((-3.2f)*gui::itemslot::WIDTH_FOR_SHIP, (3.0f)*gui::itemslot::WIDTH_FOR_SHIP);
+        add(button, offset);
+        m_buttonslots.push_back(button);
     }
 
     m_allowFullControl = false;
@@ -278,14 +278,16 @@ Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Play
         //player->cursor().setFocusedObject(gui_slot->itemSlot()->item());
     }
 
-    if (data_mouse.left_click && allow_full_control) {
-        if (gui_slot->itemSlot()->type() != slot::Type::GATE_SLOT) {
+    if (data_mouse.event() == MouseData::Event::LeftButtonPress && m_allowFullControl) {
+        if (gui_slot->itemSlot()->type() != slot::Type::GATE) {
             player->cursor().itemSlot()->swapItem(gui_slot->itemSlot());
             return true;
         } else {
             if (player->cursor().itemSlot()->item()) {
                 if (player->npc()->vehicle()->place() == place::Type::SPACE) {
-                    player->cursor().itemSlot()->dropItemToSpace(player->npc()->vehicle());
+                    std::cout<<"push telegram here to drop item"<<std::endl;
+                    assert(false);
+                    //player->cursor().itemSlot()->dropItemToSpace(player->npc()->vehicle());
                     return true;
                 } else {
                     player->npc()->vehicle()->sellItem(player->cursor().itemSlot()->item());

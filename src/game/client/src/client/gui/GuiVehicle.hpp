@@ -21,6 +21,10 @@
 
 #include <client/gui/BaseGuiElement.hpp>
 
+namespace slot {
+class Item;
+} // namespace slot
+
 namespace control {
 class Vehicle;
 } // namespace control
@@ -56,6 +60,7 @@ private:
     bool m_blockManualExit;
     bool m_allowFullControl;
 
+    slot::Item* m_slot_gate = nullptr;
     control::Vehicle* m_vehicle = nullptr;
     std::vector<ButtonItemSlot*> m_buttonslots;
 
