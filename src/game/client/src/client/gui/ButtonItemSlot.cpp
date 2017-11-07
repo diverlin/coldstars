@@ -48,7 +48,7 @@ void ButtonItemSlot::onPressEventMBR(client::Player* player)
 /* virtual override final */
 void ButtonItemSlot::_updateUnique(client::Player* player)
 {
-    _createItemView();
+    _invalidateItemView();
     _updateAnimation();
 }
 
