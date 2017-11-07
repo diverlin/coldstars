@@ -263,10 +263,11 @@ public:
         starsystem->update_client(core::shortcuts::session()->turnTimer().turnCount());
 
         m_inputs->update(m_player);
-        gui.update(m_player);
         m_view->update(m_inputs->scrollAccel());
 
+        gui.update(m_player);
         m_view->render(starsystem);
+
         gui.render(*m_render, m_player);
         m_screen->draw();
     }

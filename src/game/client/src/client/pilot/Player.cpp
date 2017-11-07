@@ -515,7 +515,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    //m_cursor.RenderFocusedObjectStuff();
 //}
 
-void Player::__manageClickEvent()
+void Player::__manageMouseClickEventInSpace()
 {
     if (m_cursor.mouseData().event() == MouseData::Event::None) {
         return;
@@ -852,7 +852,7 @@ void Player::update(const jeti::Render& render, view::Base* focusedView)
 {
     m_cursor.setFocusedView(focusedView);
     m_cursor.update(this, render);
-    __manageClickEvent();
+    __manageMouseClickEventInSpace();
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)

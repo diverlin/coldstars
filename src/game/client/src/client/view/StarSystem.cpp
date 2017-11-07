@@ -875,6 +875,10 @@ void StarSystem::__render(jeti::Render& render)
 Base*
 StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 {
+    if (!m_allowInterraction) {
+        return nullptr;
+    }
+
     for(SpaceStation* spacestation: m_spacestations) {
         if(__isPointInsideObject(mouse_pos, spacestation->control())) {
             return spacestation;
@@ -926,6 +930,7 @@ StarSystem::mouseInterraction(const glm::vec3& mouse_pos) const
 
 void StarSystem::update(const glm::vec3& camera_accel)
 {
+    m_allowInterraction = !gui::Manager::get().vehicle()->isActive();
     m_camera.addSpeed(camera_accel);
     m_camera.update();
 }

@@ -271,9 +271,12 @@ Vehicle::updateMouseInteraction(client::Player* player)
 bool
 Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Player* player, const MouseData& data_mouse)
 {
-    std::cout<<(data_mouse.event()==MouseData::Event::LeftButtonPress)<<std::endl;
+    //std::cout<<(data_mouse.event()==MouseData::Event::LeftButtonPress)<<std::endl;
+    std::cout<<data_mouse.screenCoord().x<<" "<<data_mouse.screenCoord().y<<std::endl;
     if (!gui_slot->box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
         return false;
+    } else {
+        std::cout<<"collide with"<<slot::to_string(gui_slot->itemSlot()->type())<<std::endl;
     }
 
     if (gui_slot->itemSlot()->item() && !player->cursor().itemSlot()->item()) {
