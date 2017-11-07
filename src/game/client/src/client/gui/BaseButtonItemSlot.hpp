@@ -54,7 +54,7 @@ public:
     slot::Item* itemSlot() const { return m_slot; }
 
 protected:
-    void _actualizeItemView();
+    void _createItemView();
     void _updateAnimation();
     void _drawSlot(const jeti::Render&) const;
     void _drawItem(const jeti::Render&) const;

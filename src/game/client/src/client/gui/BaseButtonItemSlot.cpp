@@ -73,7 +73,7 @@ void BaseButtonItemSlot::__createItemView(control::Item* item)
     m_itemView->setBox(_box);
 }
 
-void BaseButtonItemSlot::_actualizeItemView()
+void BaseButtonItemSlot::_createItemView()
 {
     // item is inserted
     if (!m_itemView && m_slot->item()) {
