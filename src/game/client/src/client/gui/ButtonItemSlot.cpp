@@ -63,13 +63,7 @@ void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* p
                            player->cursor().mouseData().screenCoordGui(),
                            taken_item->descriptor()->slotType());
     }
-    //assert(false);
-//    if (player->cursor().GetItemSlot()->item()) {
-//        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));
-//    }
-    
-//    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-//    {
+//    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //        RenderMarkTarget();
 //    }
 }

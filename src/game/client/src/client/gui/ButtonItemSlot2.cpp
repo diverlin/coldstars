@@ -62,8 +62,7 @@ void ButtonItemSlot2::onPressEventMBL(client::Player* player)
 void ButtonItemSlot2::resetState()
 {
     _setIsPressed(false);
-    if (itemSlot() != nullptr)
-    {  
+    if (itemSlot()) {
 //        if (GetItemSlot()->isSelected() == true)
 //        {
 //            GetItemSlot()->DeselectEvent();

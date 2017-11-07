@@ -171,26 +171,6 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
     }
 }
 
-//void Cursor::_createItemView()
-//{
-//    // item is inserted
-//    if (!m_itemView && m_slot->item()) {
-//        __createItemView(m_slot->item());
-//    }
-
-//    // item moved out
-//    if (m_itemView && !m_slot->item()) {
-//        __reset();
-//    }
-
-//    // item changed
-//    if (m_itemView && m_slot->item()) {
-//        if (m_itemView->item() != m_slot->item()) {
-//            __createItemView(m_slot->item());
-//        }
-//    }
-//}
-
 void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
 {
     if (m_focusedGuiElement) {
