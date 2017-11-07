@@ -271,28 +271,25 @@ Vehicle::updateMouseInteraction(client::Player* player)
 bool
 Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Player* player, const MouseData& data_mouse)
 {
-    //std::cout<<(data_mouse.event()==MouseData::Event::LeftButtonPress)<<std::endl;
-    std::cout<<data_mouse.screenCoord().x<<" "<<data_mouse.screenCoord().y<<std::endl;
-    if (!gui_slot->box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
+    if (!gui_slot->box().checkInteraction(data_mouse.screenCoordGui())) {
         return false;
     } else {
-        std::cout<<"collide with"<<slot::to_string(gui_slot->itemSlot()->type())<<std::endl;
+        //std::cout<<"collide with="<<slot::to_string(gui_slot->itemSlot()->type())<<" "<<gui_slot->itemSlot()->offset()<<std::endl;
     }
 
     if (gui_slot->itemSlot()->item() && !player->cursor().itemSlot()->item()) {
-        assert(false);
-        //player->cursor().setFocusedObject(gui_slot->itemSlot()->item());
+        player->cursor().setFocusedItemSlot(gui_slot->itemSlot());
     }
 
+    m_allowFullControl = true; // debug
     if (data_mouse.event() == MouseData::Event::LeftButtonPress && m_allowFullControl) {
         if (gui_slot->itemSlot()->type() != slot::Type::GATE) {
-            player->cursor().itemSlot()->swapItem(gui_slot->itemSlot());
+            bool result = player->cursor().itemSlot()->swapItem(gui_slot->itemSlot());
             return true;
         } else {
             if (player->cursor().itemSlot()->item()) {
                 if (player->npc()->vehicle()->place() == place::Type::SPACE) {
                     std::cout<<"push telegram here to drop item"<<std::endl;
-                    //assert(false);
                     //player->cursor().itemSlot()->dropItemToSpace(player->npc()->vehicle());
                     return true;
                 } else {

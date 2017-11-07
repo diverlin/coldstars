@@ -21,9 +21,13 @@
 
 #include "BaseButton.hpp"
 
-namespace descriptor {
-class Base;
-} // namespace descriptor
+namespace control {
+class Item;
+} // namespace control
+
+namespace view {
+class Item;
+} // namespace view
 
 namespace slot {
 class Item;
@@ -50,9 +54,8 @@ public:
     slot::Item* itemSlot() const { return m_slot; }
 
 protected:
-    void _actualizeItemMaterial();
+    void _actualizeItemView();
     void _updateAnimation();
-
     void _drawSlot(const jeti::Render&) const;
     void _drawItem(const jeti::Render&) const;
     void _drawMarkEmptySlot(const jeti::Render&, const glm::vec2&, slot::Type) const;
@@ -60,13 +63,14 @@ protected:
 
 private:
     slot::Item* m_slot = nullptr;
-    descriptor::Base* m_item_descriptor = nullptr;
-    ceti::Box2D m_box_item;
+    view::Item* m_itemView = nullptr;
 
     jeti::control::Material* m_material_mark_accept = nullptr;
     jeti::control::Material* m_material_mark_reject = nullptr;
     jeti::control::Material* m_material_slot = nullptr;
-    jeti::control::Material* m_material_item = nullptr;
+
+    void __reset();
+    void __createItemView(control::Item*);
 };
 
 } // namespace gui

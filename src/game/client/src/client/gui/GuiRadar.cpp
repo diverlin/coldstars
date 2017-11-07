@@ -119,7 +119,7 @@ void Radar::_updateUnique(client::Player* player)
 
     // TODO: to be fixed
     const MouseData& data_mouse = player->cursor().mouseData();
-    if (box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
+    if (box().checkInteraction(data_mouse.screenCoord())) {
         if (data_mouse.event() == MouseData::Event::LeftButtonPress) {
             client::shortcuts::camera()->setPosition(data_mouse.worldCoord());
         }

@@ -198,7 +198,7 @@ StarSystem::__updateVisible(control::StarSystem* starsystem)
         m_guiDemo->updateFps(m_render.fps());
         m_player->cursor().updateMouseInput(m_render);
 
-        const glm::vec3 screen_coord = m_player->cursor().mouseData().screenCoord();
+        const glm::vec3 screen_coord = glm::vec3(m_player->cursor().mouseData().screenCoord(), 0.0f);
         const glm::vec3 world_coord = m_player->cursor().mouseData().worldCoord();
 
         m_guiDemo->setMousePosScreenCoord(screen_coord.x, screen_coord.y);

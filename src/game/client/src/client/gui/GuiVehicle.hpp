@@ -60,8 +60,8 @@ public:
     bool updateMouseInteraction(client::Player*);
 
 private:
-    bool m_blockManualExit;
-    bool m_allowFullControl;
+    bool m_blockManualExit = false;
+    bool m_allowFullControl = false;
 
     slot::Item* m_slot_gate = nullptr;
     control::Vehicle* m_vehicle = nullptr;

@@ -29,24 +29,28 @@ public:
     ~MouseData()=default;
 
     void reset() {
-        m_screenCoord = glm::vec3(0.0f);
+        m_screenCoord = glm::vec2(0.0f);
+        m_screenCoordGui = glm::vec2(0.0f);
         m_worldCoord = glm::vec3(0.0f);
 
         m_event = Event::None;
     }
 
-    void setScreenCoord(const glm::vec3& coord) { m_screenCoord = coord; }
+    void setScreenCoord(const glm::vec2& coord) { m_screenCoord = coord; }
+    void setScreenCoordGui(const glm::vec2& coord) { m_screenCoordGui = coord; }
     void setWorldCoord(const glm::vec3& coord) { m_worldCoord = coord; }
 
     void setEvent(const Event& event) { m_event = event; }
 
-    const glm::vec3& screenCoord() const { return m_screenCoord; }
+    const glm::vec2& screenCoord() const { return m_screenCoord; }
+    const glm::vec2& screenCoordGui() const { return m_screenCoordGui; }
     const glm::vec3& worldCoord() const { return m_worldCoord; }
 
     const Event& event() const { return m_event; }
 
 private:
-    glm::vec3 m_screenCoord;
+    glm::vec2 m_screenCoord;
+    glm::vec2 m_screenCoordGui;
     glm::vec3 m_worldCoord;
 
     Event m_event = Event::None;

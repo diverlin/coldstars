@@ -19,6 +19,7 @@
              
 #include "ButtonItemSlot.hpp"
 
+#include <core/descriptor/item/Item.hpp>
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
 #include <core/pilot/Npc.hpp>
@@ -47,7 +48,7 @@ void ButtonItemSlot::onPressEventMBR(client::Player* player)
 /* virtual override final */
 void ButtonItemSlot::_updateUnique(client::Player* player)
 {
-    _actualizeItemMaterial();
+    _actualizeItemView();
     _updateAnimation();
 }
 
@@ -56,7 +57,12 @@ void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* p
 {
     _drawSlot(render);
     _drawItem(render);
-
+    control::Item* taken_item = player->cursor().itemSlot()->item();
+    if (taken_item) {
+        _drawMarkEmptySlot(render,
+                           player->cursor().mouseData().screenCoordGui(),
+                           taken_item->descriptor()->slotType());
+    }
     //assert(false);
 //    if (player->cursor().GetItemSlot()->item()) {
 //        RenderMarkEmptySlot(render, player->cursor().mouseData().pos_screencoord, getGuiItemSlotType(player->cursor().GetItemSlot()->item()->parentSubtype()));

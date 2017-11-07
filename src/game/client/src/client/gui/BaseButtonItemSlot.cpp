@@ -20,20 +20,20 @@
 #include "BaseButtonItemSlot.hpp"
 #include <core/slot/ItemSlot.hpp>
 #include <core/item/Item.hpp>
-
 #include <core/session/Shortcuts.hpp>
 #include <core/model/item/Item.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/resources/Utils.hpp>
+#include <client/view/item/Item.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/Render.hpp>
 
 #include <common/common.hpp>
-//#include <ceti/StringUtils.hpp>
+
 
 namespace gui {
 
@@ -52,30 +52,45 @@ BaseButtonItemSlot::~BaseButtonItemSlot()
     delete m_material_mark_accept;
     delete m_material_mark_reject;
     delete m_material_slot;
-    delete m_material_item;
+    delete m_itemView;
 }
 
-void BaseButtonItemSlot::_actualizeItemMaterial()
+void BaseButtonItemSlot::__reset()
 {
-    if (!m_slot->item()) {
-        return;
+    delete m_itemView;
+    m_itemView = nullptr;
+}
+
+void BaseButtonItemSlot::__createItemView(control::Item* item)
+{
+    if (m_itemView) {
+        __reset();
     }
 
-    descriptor::Base* item_descr = core::shortcuts::descriptors()->get(m_slot->item()->model()->descriptor());
-    if (m_item_descriptor == item_descr) { // item didn't change
-        return;
+    m_itemView = new view::Item(m_slot->item());
+    ceti::Box2D _box = box();
+    _box.setScale(0.8f);
+    m_itemView->setBox(_box);
+}
+
+void BaseButtonItemSlot::_actualizeItemView()
+{
+    // item is inserted
+    if (!m_itemView && m_slot->item()) {
+        __createItemView(m_slot->item());
     }
 
-    if (m_material_item) { // clear previous
-        delete m_material_item;
-        m_material_item = nullptr;
+    // item moved out
+    if (m_itemView && !m_slot->item()) {
+        __reset();
     }
 
-    m_material_item = utils::createMaterialFromDescriptorId(item_descr->texture());
-    m_box_item = box();
-    m_box_item.setScale(0.8f);
-
-    m_item_descriptor = item_descr;
+    // item changed
+    if (m_itemView && m_slot->item()) {
+        if (m_itemView->item() != m_slot->item()) {
+            __createItemView(m_slot->item());
+        }
+    }
 }
 
 void BaseButtonItemSlot::_updateAnimation()
@@ -111,29 +126,25 @@ void BaseButtonItemSlot::_drawSlot(const jeti::Render& render) const
 
 void BaseButtonItemSlot::_drawItem(const jeti::Render& render) const
 {
-    if (m_material_item) {
-        render.drawQuad_HUD(m_box_item, *m_material_item);
+    if (m_itemView) {
+        m_itemView->render(render);
     }
 }
 
 void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,
-                                            const glm::vec2& mouse_screen_coord_pos,
+                                            const glm::vec2& screen_coord,
                                             slot::Type type_to_mark) const
 {
-    if (!m_slot) {
+    if (m_slot->item()) {
         return;
     }
-    if (!m_slot->item()) {
+    if (m_slot->type() == slot::Type::GATE)  {
         return;
     }
-
-//    if (type() == slot::Type::GATE)  {
-//        return;
-//    }
     if ((type_to_mark == m_slot->type()) || (m_slot->type() == slot::Type::CARGO)) {
         render.drawQuad_HUD(box(), *m_material_mark_accept);
     } else {
-        if (box().checkInteraction(mouse_screen_coord_pos)) {
+        if (box().checkInteraction(screen_coord)) {
             render.drawQuad_HUD(box(), *m_material_mark_reject);
         }
     }
@@ -141,9 +152,6 @@ void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,
 
 void BaseButtonItemSlot::_drawMarkTarget() const
 {
-    if (!m_slot) {
-        return;
-    }
     if (!m_slot->item()) {
         return;
     }
