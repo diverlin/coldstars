@@ -41,7 +41,7 @@ public:
     static Manager& get();
     ~Manager();
 
-    void setPlayer(client::Player*);
+    void setPlayer(client::Player* player) { m_player = player; }
 
     GuiKosmoport& kosmoport() { return m_kosmoport; }
     Space& space() { return m_space; }
@@ -49,7 +49,10 @@ public:
     Vehicle* vehicle() const { return m_vehicle; }
     GuiGalaxyMap* galaxy() const { return m_galaxymap; }
 
-    void runSessionInSpace(jeti::Render& render, client::Player* player);
+    void update(client::Player*);
+    void render(jeti::Render&, client::Player*);
+
+//    void runSessionInSpace(jeti::Render& render, client::Player* player);
     void runSessionInKosmoport(const MouseData&);
     void runSessionInNatureLand(const MouseData&);
 
@@ -88,6 +91,9 @@ private:
 
     GuiSkills* m_skills = nullptr;
     Slider* m_slider = nullptr;
+
+    void __updateInSpace(client::Player*);
+    void __renderInSpace(jeti::Render&, client::Player*);
 };
 
 } // namespace gui

@@ -20,6 +20,7 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <core/type/PlaceType.hpp>
 
 #include <meti/VectorUtils.hpp>
 
@@ -40,6 +41,7 @@ public:
     float radius() const;
 
     control::Npc* npc() const { return m_npc; }
+    place::Type place() const;
 
     void setNpc(control::Npc* npc) { m_npc = npc; }
 

@@ -40,20 +40,24 @@ class Vehicle : public Base
 {
 public:
     Vehicle();
-    virtual ~Vehicle();
+    ~Vehicle();
 
     bool isActive() const { return m_vehicle != nullptr; }
     bool blockManualExit() const { return m_blockManualExit; }
     bool allowFullControl() const { return m_allowFullControl; }
 
-    void bindVehicle(control::Vehicle*, const glm::vec2& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
+    void bindVehicle(control::Vehicle*,
+                     const glm::vec2& offset,
+                     bool full_control_on,
+                     bool block_manual_closing = false,
+                     float scale = 1.0f);
+
     void unbindVehicle();
     
     void update(client::Player*) override final;
     void render(const jeti::Render&, client::Player*) const override final;
 
-protected:
-    bool _updateMouseInteraction(client::Player*, const MouseData&);
+    bool updateMouseInteraction(client::Player*);
 
 private:
     bool m_blockManualExit;

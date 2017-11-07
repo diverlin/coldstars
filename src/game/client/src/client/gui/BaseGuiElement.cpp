@@ -122,11 +122,11 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
         }
     }
     
-    if (!m_isRoot) {
+    //if (!m_isRoot) {
         if (m_box.checkInteraction(mouse_pos)) {
             return this;
         }
-    }
+    //}
 
     return nullptr;
 }
@@ -139,7 +139,7 @@ void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& pare
     m_box.setCenter(next_offset);
     m_box.setScale(next_scale);
 
-    for (auto &child : m_children) {
+    for (auto* child: m_children) {
         child->_updateGeometry(next_offset, next_scale);
     }
 }

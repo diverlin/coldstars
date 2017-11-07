@@ -167,17 +167,19 @@ void Vehicle::__createItemSlotsGeometry(control::Vehicle* vehicle)
     }
 
     /** ARTEFACT SLOTS */
-//    for (slot::Item* slot: vehicle->artefactSlots()) {
-//        float scale_size = 1/2.0;
-//        ButtonItemSlot* button = new ButtonItemSlot(slot);
+#ifdef USE_ARTEFACTS
+    for (slot::Item* slot: vehicle->artefactSlots()) {
+        float scale_size = 1/2.0;
+        ButtonItemSlot* button = new ButtonItemSlot(slot);
 
-//        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
-//        button->setSize(size);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
+        button->setSize(size);
 
-//        glm::vec2 offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-//        add(button, offset);
-//    m_buttonslots.push_back(button);
-//    }
+        glm::vec2 offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        add(button, offset);
+    m_buttonslots.push_back(button);
+    }
+#endif // USE_ARTEFACTS
 
 
     /** CARGO SLOTS */
@@ -239,6 +241,7 @@ void Vehicle::unbindVehicle()
         delete child;
     }
     _children().clear();
+    m_buttonslots.clear();
     
     m_vehicle = nullptr;
 }
@@ -253,8 +256,9 @@ void Vehicle::__createKorpusGui(control::Vehicle* vehicle, float scale)
 
 
 bool
-Vehicle::_updateMouseInteraction(client::Player* player, const MouseData& data_mouse)
+Vehicle::updateMouseInteraction(client::Player* player)
 {    
+    const MouseData& data_mouse = player->cursor().mouseData();
     for(ButtonItemSlot* slot: m_buttonslots) {
         bool result = __updateMouseInteractionWithSlot(slot, player, data_mouse);
         if (result) {
@@ -264,11 +268,10 @@ Vehicle::_updateMouseInteraction(client::Player* player, const MouseData& data_m
     return false;
 }
 
-
-
 bool
 Vehicle::__updateMouseInteractionWithSlot(ButtonItemSlot* gui_slot, client::Player* player, const MouseData& data_mouse)
 {
+    std::cout<<(data_mouse.event()==MouseData::Event::LeftButtonPress)<<std::endl;
     if (!gui_slot->box().checkInteraction(meti::to_vec2(data_mouse.screenCoord()))) {
         return false;
     }
@@ -355,6 +358,11 @@ void Vehicle::update(client::Player* player)
     if (!m_vehicle) {
         return;
     }
+
+    if (isRoot()) {
+        _updateGeometry(box().center(), box().scale());
+    }
+
     _updateChildren(player);
     _updateUnique(player);
 }
