@@ -35,7 +35,8 @@ enum class Type {
     DROID,
     FREEZER,
     GRAPPLE,
-    SCANER
+    SCANER,
+    GATE
 };
 
 std::string to_string(Type);
