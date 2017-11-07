@@ -39,6 +39,7 @@
 
 #include <client/session/Shortcuts.hpp>
 #include <client/gui/ButtonTrigger.hpp>
+#include <client/gui/ButtonItemSlot.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/view/Base.hpp>
 
@@ -47,7 +48,8 @@ namespace gui {
 Cursor::Cursor()
 {
     m_itemSlot = new slot::Item(slot::Type::CARGO);
-    
+    m_itemSlotGui = new gui::ButtonItemSlot(m_itemSlot, true);
+
     m_box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     m_markTargetMaterial = new jeti::control::Material(MaterialCollector::get().mark_target);

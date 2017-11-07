@@ -47,6 +47,7 @@ class Base;
 namespace gui {
 
 class Base;
+class ButtonItemSlot;
 
 class Cursor
 {
@@ -79,6 +80,7 @@ private:
 
     slot::Item* m_focusedItemSlot = nullptr;
     slot::Item* m_itemSlot = nullptr;
+    gui::ButtonItemSlot* m_itemSlotGui = nullptr;
 
     MouseData m_dataMouse;
 
