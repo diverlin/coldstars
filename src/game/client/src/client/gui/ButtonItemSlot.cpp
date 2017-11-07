@@ -32,43 +32,42 @@
 
 namespace gui {
            
-/* virtual override final */
 void ButtonItemSlot::onPressEventMBL(client::Player* player)
 {
     //player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
          
-/* virtual override final */
 void ButtonItemSlot::onPressEventMBR(client::Player* player)
 {    
     //player->GetNpc()->vehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
-/* virtual override final */
 void ButtonItemSlot::_updateUnique(client::Player* player)
 {
     _invalidateItemView();
     _updateAnimation();
 }
 
-/* virtual override final */
 void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    _drawSlot(render);
-    _drawItem(render);
-    control::Item* taken_item = player->cursor().itemSlot()->item();
-    if (taken_item) {
-        _drawMarkEmptySlot(render,
-                           player->cursor().mouseData().screenCoordGui(),
-                           taken_item->descriptor()->slotType());
+    if (m_cursorMode) {
+        _drawItem(render);
+    } else {
+        _drawSlot(render);
+        _drawItem(render);
+        control::Item* taken_item = player->cursor().itemSlot()->item();
+        if (taken_item) {
+            _drawMarkEmptySlot(render,
+                               player->cursor().mouseData().screenCoordGui(),
+                               taken_item->descriptor()->slotType());
+        }
+        //    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+        //        RenderMarkTarget();
+        //    }
     }
-//    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
-//        RenderMarkTarget();
-//    }
 }
-  
-/* virtual override final */
+
 void ButtonItemSlot::renderInfo(const jeti::Render& render) const
 {
     if (itemSlot()) {

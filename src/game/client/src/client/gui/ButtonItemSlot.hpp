@@ -27,9 +27,10 @@ namespace gui {
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot(slot::Item* slot)
+    ButtonItemSlot(slot::Item* slot, bool cursorMode = false)
         :
           BaseButtonItemSlot(slot)
+        , m_cursorMode(cursorMode)
     {}
 
     ~ButtonItemSlot() {}
@@ -38,6 +39,8 @@ public:
     virtual void onPressEventMBR(client::Player*) override final;
 
 private:
+    bool m_cursorMode = false;
+
     virtual void _updateUnique(client::Player*) override final;
 
     virtual void renderInfo(const jeti::Render&) const override final;
