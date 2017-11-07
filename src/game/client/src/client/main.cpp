@@ -80,6 +80,8 @@
 #include <core/communication/TelegramHub.hpp>
 #include <client/communication/TelegramHandler.hpp>
 
+#include <client/gui/GuiManager.hpp>
+
 #include <memory>
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
@@ -245,6 +247,7 @@ public:
     void update() {
         __activate();
 
+        gui::Manager& gui = gui::Manager::get();
         m_telegramHandler->update();
 
         if (!m_player) {
@@ -260,8 +263,11 @@ public:
         starsystem->update_client(core::shortcuts::session()->turnTimer().turnCount());
 
         m_inputs->update(m_player);
+        gui.update(m_player);
         m_view->update(m_inputs->scrollAccel());
+
         m_view->render(starsystem);
+        gui.render(*m_render, m_player);
         m_screen->draw();
     }
 

@@ -31,7 +31,13 @@ Player::Player(int_t id)
     
 Player::~Player()
 {}  
-            
+
+place::Type
+Player::place() const
+{
+    return m_npc->vehicle()->place();
+}
+
 const meti::vec3&
 Player::position() const {
     assert(m_npc);

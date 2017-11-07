@@ -54,6 +54,8 @@ public:
          jeti::model::Material* material=nullptr);
     virtual ~Base();
 
+    bool isRoot() const { return m_isRoot; }
+
     void setLabel(const std::string& label) { m_label = label; }
 
     void setMaterial(jeti::control::Material* material) { m_material = material; }
