@@ -18,61 +18,39 @@
 
 
 #include "Item.hpp"
-#include <common/constants.hpp>
 
-#include <core/common/Global.hpp>
-
-#include <core/slot/ItemSlot.hpp>
-
-#include <core/descriptor/item/Item.hpp>
+#include <core/item/Item.hpp>
 #include <core/model/item/Item.hpp>
+#include <core/manager/DescriptorManager.hpp>
+#include <core/descriptor/Base.hpp>
+#include <core/session/Shortcuts.hpp>
 
-#include <ceti/Logger.hpp>
+#include <client/resources/Utils.hpp>
+
+#include <jeti/Render.hpp>
 
 
 namespace view {
 
-//Item::Item(control::Item* item)
-//    :
-//      Base(descr, model)
-//    , m_descriptor_item(descr)
-//    , m_model_item(model)
-//{
-//}
+Item::Item(control::Item* item)
+    :
+      m_item(item)
+{
+    descriptor::Base* item_descr = core::shortcuts::descriptors()->get(item->model()->descriptor());
+    m_material = utils::createMaterialFromDescriptorId(item_descr->texture());
+}
+
+Item::~Item()
+{
+    delete m_material;
+    m_material = nullptr;
+}
+
+void Item::render(const jeti::Render& render)
+{
+    render.drawQuad_HUD(m_box, *m_material);
+}
 
 
-//void Base::UpdateInfo()
-//{
-////    info.clear();
-
-//    addUniqueInfo();
-//    AddCommonInfo();
-//}
-
-//void Base::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
-//{
-//    UpdateInfo();
-    
-//    //render.enable_BLEND();
-//    jeti::drawInfoIn2Column(info.title_list, info.value_list, pos);
-//    //render.disable_BLEND();
-//}
-
-///* virtual */
-//void Base::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
-//{
-//    RenderKorpus(render, box);
-//}
-
-//void Base::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
-//{
-//    glm::vec2 v(0.0);
-//    glm::vec4 c(1.0, 1.0, 1.0, 1.0);
-//    glm::vec3 center(box.center().x, box.center().y, GUI::POS_Z);
-//    setCenter(center);
-//    //SetAngle(box.GetAngle());
-//    //SetScale(box.size());
-//    //RenderMeshLight(v, c);
-//}
 
 } // namespace view

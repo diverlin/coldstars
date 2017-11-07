@@ -18,21 +18,36 @@
 
 #pragma once
 
-#include <core/Base.hpp>
+#include <ceti/Box2D.hpp>
+
+namespace jeti {
+namespace control {
+class Material;
+} // namespace control
+class Render;
+} // namespace jeti
+
+namespace control {
+class Item;
+} // namespace control
 
 namespace view {
 
-//class Item : public Base
-//{
-//public:
-//    Item(control::Item*);
-//    virtual ~Item() = default;
+class Item
+{
+public:
+    Item(control::Item*);
+    ~Item();
 
-//    //        void UpdateInfo();
+    control::Item* item() const { return m_item; }
 
-//    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-//    //        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
-//    //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
-//};
+    void setBox(const ceti::Box2D& box) { m_box = box; }
+    void render(const jeti::Render&);
+
+private:
+    control::Item* m_item;
+    ceti::Box2D m_box;
+    jeti::control::Material* m_material = nullptr;
+};
 
 } // namespace view

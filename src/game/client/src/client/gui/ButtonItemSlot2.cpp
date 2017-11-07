@@ -74,7 +74,7 @@ void ButtonItemSlot2::resetState()
 /* virtual override final */    
 void ButtonItemSlot2::_updateUnique(client::Player* player)
 {
-    _actualizeItemMaterial();
+    _actualizeItemView();
     _updateAnimation();
             
     if (!hasAnimation()) {

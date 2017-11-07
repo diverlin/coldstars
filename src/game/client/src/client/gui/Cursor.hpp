@@ -54,8 +54,9 @@ public:
     Cursor();
     ~Cursor();
 
-    void setFocusedView(view::Base* focusedView) { m_focusedView = focusedView; }
-    void setFocusedView(Base* gui_element) { m_focusedGuiElement = gui_element; }
+    void setFocusedView(view::Base* view) { m_focusedView = view; }
+    void setFocusedItemSlot(slot::Item* slot) { m_focusedItemSlot = slot; }
+    void setFocusedGuiElement(Base* gui_element) { m_focusedGuiElement = gui_element; }
 
     view::Base* focusedView() const { return m_focusedView; }
 
@@ -74,9 +75,9 @@ public:
     void reset();
 
 private:
-    //glm::vec3 m_screenCoord;
     view::Base* m_focusedView = nullptr;
 
+    slot::Item* m_focusedItemSlot = nullptr;
     slot::Item* m_itemSlot = nullptr;
 
     MouseData m_dataMouse;

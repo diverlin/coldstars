@@ -46,7 +46,7 @@ namespace gui {
 
 Cursor::Cursor()
 {
-    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(entity::Type::CARGO_SLOT);
+    m_itemSlot = new slot::Item(slot::Type::CARGO);
     
     m_box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
@@ -94,7 +94,7 @@ void Cursor::reset()
     m_dataMouse.reset();
     
     m_focusedView = nullptr;
-    m_focusedGuiElement = nullptr;
+    m_focusedItemSlot = nullptr;
 }
 
 void Cursor::update(client::Player* player, const jeti::Render& render)
@@ -133,7 +133,8 @@ void Cursor::updateMouseInput(const jeti::Render& render)
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(client::shortcuts::screen()->window());
     mouse_pos.y = render.height()-mouse_pos.y;
-    m_dataMouse.setScreenCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f));
+    m_dataMouse.setScreenCoord(glm::vec2(mouse_pos.x, mouse_pos.y));
+    m_dataMouse.setScreenCoordGui(glm::vec2(mouse_pos.x-render.width()/2, mouse_pos.y-render.height()/2));
     m_dataMouse.setWorldCoord(render.toWorldCoord(glm::vec3(mouse_pos.x, mouse_pos.y, 0.0f)));
 }
 
@@ -152,7 +153,14 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 //        render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
     }
 
-    float scale = 1.1;
+//    if (m_itemSlot->item()) {
+//        m_box.setCenter();
+//        m_box.setSize(100, 100);
+
+//        render.drawQuad_HUD(box, *m_markTargetMaterial);
+//    }
+
+    float scale = 1.1f;
     if (m_focusedGuiElement) {
         if (m_focusedGuiElement->id() == Type::BUTTON_ITEMSLOT) {
             ceti::Box2D box(m_focusedGuiElement->box());
