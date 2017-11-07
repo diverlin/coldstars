@@ -260,21 +260,21 @@ Item::takeItem()
 bool Item::swapItem(slot::Item* slot)
 {
     assert(slot);
-    if ( (m_item == nullptr) && (slot->item() != nullptr) ) {
-        if (insert(slot->item()) == true) {
+    if (!m_item && slot->item()) {
+        if (insert(slot->item())) {
             return true;
         }
     }
     
-    if ( (m_item != nullptr) && (slot->item() == nullptr) ) {
-        if (slot->insert(item()) == true) {
+    if (m_item && !slot->item()) {
+        if (slot->insert(item())) {
             return true;
         }
     }
 
-    if ( (m_item != nullptr) && (slot->item() != nullptr) ) {
+    if (!m_item && slot->item()) {
         control::Item* tmp_item = slot->item();
-        if ( (slot->__checkItemInsertion(m_item) == true) && (__checkItemInsertion(tmp_item) == true) ) {
+        if (slot->__checkItemInsertion(m_item) && __checkItemInsertion(tmp_item)) {
             slot->insert(m_item);
             tmp_item->setSlot(nullptr);
             insert(tmp_item);

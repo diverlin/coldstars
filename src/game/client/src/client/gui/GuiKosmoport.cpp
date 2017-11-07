@@ -219,8 +219,7 @@ void GuiKosmoport::ExitGuiAngarScreen()
     Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
 #endif
     
-    if (m_gui_vehicle_scan_shared->vehicle() != nullptr)
-    {
+    if (m_gui_vehicle_scan_shared->isActive()) {
         ExitGuiScan();
     }
 }

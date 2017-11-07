@@ -79,12 +79,10 @@ public:
     Item(Type type);
     virtual ~Item();
 
-    void setOffset(int offset) { m_offset = offset; }
-
     Type type() const { return m_type; }
     int offset() const { return m_offset; }
 
-//    virtual void putChildrenToGarbage() const;
+    void setOffset(int offset) { m_offset = offset; }
 
     int hitProbability() const { return m_hitProbability; }
 
