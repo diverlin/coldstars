@@ -74,7 +74,7 @@ public:
     void reset();
 
 private:
-    glm::vec3 m_screenCoord;
+    //glm::vec3 m_screenCoord;
     view::Base* m_focusedView = nullptr;
 
     slot::Item* m_itemSlot = nullptr;

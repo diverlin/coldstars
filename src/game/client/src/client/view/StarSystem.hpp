@@ -126,6 +126,8 @@ public:
     //
 
 private:
+    bool m_allowInterraction = true;
+
     jeti::Render& m_render;
     jeti::Camera& m_camera;
 

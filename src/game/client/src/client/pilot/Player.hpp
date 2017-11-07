@@ -99,7 +99,7 @@ private:
 //    void SessionInKosmoport();
 //    void SessionInNatureLand();
 
-    void __manageClickEvent();
+    void __manageMouseClickEventInSpace();
     void __clickOn(view::Bullet*);
     void __clickOn(view::Container*);
     void __clickOn(view::Satellite*);
