@@ -99,10 +99,10 @@ void Base::resetState()
     m_isPressed = false;
 }
 
-void Base::add(Base* child, const glm::vec2& offset)
+void Base::add(Base* child, const glm::vec2& rel_center)
 { 
-    child->__setOffset(offset);
-    child->_setIsRoot(false);
+    child->setParent(this);
+    child->setCenter(rel_center);
     
     m_children.push_back(child);
 }
@@ -122,7 +122,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
         }
     }
     
-    if (!m_isRoot) {
+    if (m_parent) {
         if (m_box.checkInteraction(mouse_pos)) {
             return this;
         }
@@ -131,16 +131,16 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
     return nullptr;
 }
 
-void Base::_updateGeometry(const glm::vec2& parent_offset, float parent_scale)
+void Base::_updateGeometry()
 {   
-    glm::vec2 next_offset = parent_offset + m_offset;
-    float next_scale = parent_scale * m_box.scale();
-
-    m_box.setCenter(next_offset);
-    m_box.setScale(next_scale);
+    if (m_parent) {
+        m_box.setCenter(m_parent->box().center() + m_box.centerOrig());
+    } else {
+        m_box.setCenter(m_box.centerOrig());
+    }
 
     for (auto* child: m_children) {
-        child->_updateGeometry(next_offset, next_scale);
+        child->_updateGeometry();
     }
 }
 
@@ -150,10 +150,10 @@ void Base::update(client::Player* player)
         return;
     }
     
-    if (m_isRoot) {
-        _updateGeometry(m_offset, 1.0f);
+    if (!m_parent) { // we update only for root node, it's important!!!
+        _updateGeometry();
     }
-    
+
     _updateChildren(player);
     _updateUnique(player);
 }

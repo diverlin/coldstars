@@ -56,7 +56,7 @@ Manager::Manager()
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
     
-    m_vehicle = new Vehicle(glm::vec2(250, 250));
+    m_vehicle = new Vehicle(glm::vec2(350, 250));
 
     glm::vec2 size(gui::RADAR_FRAME_SIZE, gui::RADAR_FRAME_SIZE);
     m_radar = new gui::Radar(size);
@@ -65,8 +65,8 @@ Manager::Manager()
     glm::vec2 position(screen_w/2 - gui::RADAR_FRAME_SIZE, -screen_h/2 + gui::RADAR_FRAME_SIZE);
     m_radar->setScale(1.0f);
     m_playerVehicle->setScale(1.0f);
-    m_radar->setOffset(position);
-    m_playerVehicle->setOffset(position);
+    m_radar->setCenter(position);
+    m_playerVehicle->setCenter(position);
 
     
     {
