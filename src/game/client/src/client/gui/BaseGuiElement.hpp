@@ -60,6 +60,9 @@ public:
 
     void setMaterial(jeti::control::Material* material) { m_material = material; }
 
+    // ugly
+    void setOffset(const glm::vec2& offset) { m_offset = offset; }
+
     void setCenter(const glm::vec2& center) { m_box.setCenter(center); }
     void setSize(float w, float h) { m_box.setSize(w, h); }
     void setSize(const glm::vec2& size) { m_box.setSize(size); }

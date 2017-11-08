@@ -87,6 +87,9 @@ private:
 
     // shared guis
     Vehicle* m_vehicle = nullptr;
+    Radar* m_radar = nullptr;
+    VehicleSimple* m_playerVehicle = nullptr;
+
     GuiGalaxyMap* m_galaxymap = nullptr;
 
     GuiSkills* m_skills = nullptr;

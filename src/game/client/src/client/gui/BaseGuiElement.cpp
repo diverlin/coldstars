@@ -122,11 +122,11 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
         }
     }
     
-    //if (!m_isRoot) {
+    if (!m_isRoot) {
         if (m_box.checkInteraction(mouse_pos)) {
             return this;
         }
-    //}
+    }
 
     return nullptr;
 }

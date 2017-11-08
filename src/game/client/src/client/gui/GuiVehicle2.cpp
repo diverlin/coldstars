@@ -31,10 +31,12 @@
 
 namespace gui {
 
-VehicleSimple::VehicleSimple()
+VehicleSimple::VehicleSimple(const glm::vec2& size)
     :
       Base(gui::Type::PLAYER_VEHICLE, gui::Type::PLAYER_VEHICLE)
-{}        
+{
+    setSize(size);
+}
 
 void VehicleSimple::__clear()
 {

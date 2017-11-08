@@ -56,16 +56,18 @@ Manager::Manager()
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
     
-    /* shared gui */
-    {
-        m_vehicle = new Vehicle();
+    m_vehicle = new Vehicle(glm::vec2(250, 250));
 
-        glm::vec2 size(250, 250);    
-        m_vehicle->setSize(size);
-    
-//        glm::vec2 offset(0, 0);
-//        m_space.add(m_vehicle, offset);
-    } 
+    glm::vec2 size(gui::RADAR_FRAME_SIZE, gui::RADAR_FRAME_SIZE);
+    m_radar = new gui::Radar(size);
+    m_playerVehicle = new VehicleSimple(size);
+
+    glm::vec2 position(screen_w/2 - gui::RADAR_FRAME_SIZE, -screen_h/2 + gui::RADAR_FRAME_SIZE);
+    m_radar->setScale(1.0f);
+    m_playerVehicle->setScale(1.0f);
+    m_radar->setOffset(position);
+    m_playerVehicle->setOffset(position);
+
     
     {
         m_galaxymap    = new GuiGalaxyMap();
@@ -80,7 +82,9 @@ Manager::Manager()
 
 Manager::~Manager()
 {
-    //delete gui_vehicle_scan;
+    delete m_vehicle;
+    delete m_radar;
+    delete m_playerVehicle;
     delete m_skills;
     delete m_galaxymap;
     delete m_slider;
@@ -144,16 +148,14 @@ void Manager::quitSpace()
 void Manager::enterScan(client::Player* player)
 {
     Logger::get().log("gui::Manager enterScan", Logger::Code::GUI);
-    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
-    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
 
     control::Vehicle* scan_target = player->npc()->scanTarget();
     assert(scan_target);
     if (m_vehicle->isActive()) {
         m_vehicle->unbindVehicle();
     }
-    gui_player_vehicle->hide();
-    gui_radar->hide();
+    m_playerVehicle->hide();
+    m_radar->hide();
 
     m_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
     m_vehicle->show();
@@ -162,14 +164,12 @@ void Manager::enterScan(client::Player* player)
 void Manager::exitScan(client::Player* player)
 {
     Logger::get().log("gui::Manager exitScan", Logger::Code::GUI);
-    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
-    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
 
     m_vehicle->unbindVehicle();
     m_vehicle->hide();
 
-    gui_player_vehicle->show();
-    gui_radar->show();
+    m_playerVehicle->show();
+    m_radar->show();
 }
 
 void Manager::update(client::Player* player)
@@ -191,20 +191,16 @@ void Manager::render(jeti::Render& render, client::Player* player)
 
 void Manager::__updateInSpace(client::Player* player)
 {
-    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
-    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(Type::GALAXYMAP);
 
-    assert(gui_player_vehicle);
-    assert(gui_radar);
     assert(gui_galaxymap);
 
     Base* button = element(Type::BUTTON_GALAXYMAP);
     if (button->isPressed()) {
         //player->GetNpc()->ResetScanTarget();
 
-        gui_radar->hide();
-        gui_player_vehicle->hide();
+        m_radar->hide();
+        m_playerVehicle->hide();
 
         gui_galaxymap->show();
         //gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
@@ -217,23 +213,35 @@ void Manager::__updateInSpace(client::Player* player)
         m_vehicle->update(player);
         m_vehicle->updateMouseInteraction(player);
     }
+
+
+    // ugly
+    if (m_vehicle->isActive()) {
+        m_radar->hide();
+        m_playerVehicle->hide();
+    } else {
+        m_radar->show();
+        m_playerVehicle->show();
+    }
+    //std::cout<<m_radar->box().center().x<<std::endl;
+
+    m_radar->update(player);
+    m_playerVehicle->update(player);
     //m_space.show();
 }
 
 void Manager::__renderInSpace(jeti::Render& render, client::Player* player)
 {
-    VehicleSimple* gui_player_vehicle = static_cast<VehicleSimple*>(element(Type::PLAYER_VEHICLE));
-    gui::Radar* gui_radar = static_cast<Radar*>(element(Type::GUI_RADAR));
     GuiGalaxyMap* gui_galaxymap = (GuiGalaxyMap*)element(Type::GALAXYMAP);
 
-    assert(gui_player_vehicle);
-    assert(gui_radar);
     assert(gui_galaxymap);
 
     if (m_vehicle->isActive()) {
         m_vehicle->render(render, player);
     }
 
+    m_radar->render(render, player);
+    m_playerVehicle->render(render, player);
     //m_space.render(render, player);
     //gui_space.RenderInfo(data_mouse);
 }

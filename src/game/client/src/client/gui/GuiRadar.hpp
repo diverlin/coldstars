@@ -37,7 +37,7 @@ const float RADAR_FRAME_SIZE = 120;
 class Radar : public Base
 {
 public:
-    Radar();
+    Radar(const glm::vec2&);
     virtual ~Radar() override final;
 
 protected:
