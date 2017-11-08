@@ -21,13 +21,13 @@
 
 namespace gui {
 namespace itemslot {
-//namespace item {
 
 const int WIDTH_FOR_SHIP  = 30;
 const int HEIGHT_FOR_SHIP = 30;
 const int WIDTH_FOR_RADAR  = 15;
 const int HEIGHT_FOR_RADAR = 15;
+const int WIDTH_FOR_CURSOR  = 35;
+const int HEIGHT_FOR_CURSOR = 35;
 
-//} // namespace item
-} // namespace slot
+} // namespace itemslot
 } // namespace gui

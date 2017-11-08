@@ -42,6 +42,7 @@
 #include <client/gui/ButtonItemSlot.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/view/Base.hpp>
+#include <client/gui/constants.hpp>
 
 namespace gui {
 
@@ -107,7 +108,8 @@ void Cursor::updateTakenItem()
 
     if (m_itemSlot->item() && !m_itemSlotGui) {
         m_itemSlotGui = new gui::ButtonItemSlot(m_itemSlot);
-        m_itemSlotGui->setSize(glm::vec2(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR));
+        m_itemSlotGui->setSize(gui::itemslot::WIDTH_FOR_CURSOR, gui::itemslot::HEIGHT_FOR_CURSOR);
+        m_itemSlotGui->setScale(0.8f);
         m_itemSlotGui->invalidate();
     }
 
@@ -177,15 +179,15 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
 //        render.drawQuad_HUD(box, *m_markTargetMaterial);
 //    }
 
-    float scale = 1.1f;
-    if (m_focusedGuiElement) {
-        if (m_focusedGuiElement->id() == Type::BUTTON_ITEMSLOT) {
-            ceti::Box2D box(m_focusedGuiElement->box());
-            box.setScale(scale);
+//    float scale = 1.0f;
+//    if (m_focusedGuiElement) {
+//        if (m_focusedGuiElement->id() == Type::BUTTON_ITEMSLOT) {
+//            ceti::Box2D box(m_focusedGuiElement->box());
+//            box.setScale(scale);
 
-            render.drawQuad_HUD(box, *m_markTargetMaterial);
-        }
-    }
+//            render.drawQuad_HUD(box, *m_markTargetMaterial);
+//        }
+//    }
 }
 
 void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
