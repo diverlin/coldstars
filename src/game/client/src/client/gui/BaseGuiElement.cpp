@@ -131,10 +131,10 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
     return nullptr;
 }
 
-void Base::_updateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
+void Base::_updateGeometry(const glm::vec2& parent_offset, float parent_scale)
 {   
     glm::vec2 next_offset = parent_offset + m_offset;
-    glm::vec2 next_scale = parent_scale * m_box.scale();
+    float next_scale = parent_scale * m_box.scale();
 
     m_box.setCenter(next_offset);
     m_box.setScale(next_scale);
@@ -151,7 +151,7 @@ void Base::update(client::Player* player)
     }
     
     if (m_isRoot) {
-        _updateGeometry(m_offset, glm::vec2(1,1));
+        _updateGeometry(m_offset, 1.0f);
     }
     
     _updateChildren(player);

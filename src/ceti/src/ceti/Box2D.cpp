@@ -23,43 +23,31 @@
 namespace ceti {
 
 Box2D::Box2D()
-    :
-      m_angle(0.0)
-    , m_scale(glm::vec2(1.0f))
 {
 }
 
 Box2D::Box2D(const glm::vec2& size)
     :
-      m_angle(0.0f)
-    , m_scale(glm::vec2(1.0f))
-    , m_size(size)
+      m_size(size)
 {
 }
 
 Box2D::Box2D(const glm::vec2& center, const glm::vec2& size)
     :
-      m_angle(0.0)
-    , m_scale(glm::vec2(1.0f))
-    , m_size(size)
+      m_size(size)
     , m_center(center)
 {
 }
 
 Box2D::Box2D(const Box2D& rhs)
-:
-m_angle(0.0)
 {
     set(rhs);
 }
 
 Box2D::Box2D(const Rect& rect)
-:
-m_angle(0.0)
 {
     setCenter(glm::vec2(rect.center().x, rect.center().y));
     setSize(glm::vec2(rect.width(), rect.height()));
-    setScale(1.0, 1.0);
 }
 
 Box2D::~Box2D()
@@ -67,7 +55,7 @@ Box2D::~Box2D()
 
 bool Box2D::checkInteraction(const glm::vec2& point) const
 {           
-    return checkCollisionDotWithRectangle(point, m_center, m_size*m_scale);
+    return checkCollisionDotWithRectangle(point, m_center, m_scale*m_size);
 }
                
 void Box2D::set(const Box2D& box)
@@ -75,7 +63,7 @@ void Box2D::set(const Box2D& box)
     setSize(box.size());
     setScale(box.scale());
     setCenter(box.center());
-    m_angle = box.angle();
+    setAngle(box.angle());
 }
 
 } // namespace ceti

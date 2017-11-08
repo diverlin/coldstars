@@ -109,7 +109,6 @@ protected:
 
     void _setBox(const ceti::Box2D& box) { m_box = box; }
 
-    void _setScale(const glm::vec2& scale) { m_box.setScale(scale); }
     void _setIsRoot(bool root) { m_isRoot = root; }
     void _setIsPressed(bool pressed) { m_isPressed = pressed; }
     void _setIsLocked(bool locked) { m_isLocked = locked; }
@@ -127,7 +126,7 @@ protected:
     void _pressEventMBL_onGuiElement(gui::Type, client::Player*);
     void _resetStateEventOnGuiElement(gui::Type);
 
-    void _updateGeometry(const glm::vec2&, const glm::vec2&);
+    void _updateGeometry(const glm::vec2&, float);
 
     virtual void _updateUnique(client::Player*);
     void _updateChildren(client::Player*);

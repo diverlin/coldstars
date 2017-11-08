@@ -79,9 +79,9 @@ void ButtonItemSlot2::_updateUnique(client::Player* player)
     if (!hasAnimation()) {
         if (itemSlot()) {
             if (isPressed()) {
-                box().setScale(1.5, 1.5);
+                box().setScale(1.5f);
             } else {
-                box().setScale(1.0, 1.0);
+                box().setScale(1.0f);
             }
         }
     } else {
