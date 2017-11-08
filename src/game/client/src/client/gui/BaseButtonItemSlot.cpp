@@ -26,7 +26,7 @@
 
 #include <client/resources/GuiTextureObCollector.hpp>
 #include <client/resources/Utils.hpp>
-#include <client/view/item/Item.hpp>
+#include <client/gui/Item.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 #include <jeti/Material.hpp>
@@ -81,7 +81,7 @@ void BaseButtonItemSlot::__createItemView(control::Item* item)
     }
 
     m_itemView = new gui::Item(m_slot->item(), box());
-    m_itemView->setScale(0.8);
+    m_itemView->setScale(0.8f);
 
 }
 

@@ -61,6 +61,7 @@ public:
     void setMaterial(jeti::control::Material* material) { m_material = material; }
 
     void setCenter(const glm::vec2& center) { m_box.setCenter(center); }
+    void setSize(float w, float h) { m_box.setSize(w, h); }
     void setSize(const glm::vec2& size) { m_box.setSize(size); }
     void setScale(float scale) { m_box.setScale(scale); }
 
