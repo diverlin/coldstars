@@ -54,16 +54,14 @@ public:
          jeti::model::Material* material=nullptr);
     virtual ~Base();
 
-    bool isRoot() const { return m_isRoot; }
+    bool isRoot() const { return (m_parent == nullptr); }
+    void setParent(Base* parent) { m_parent = parent; }
 
     void setLabel(const std::string& label) { m_label = label; }
 
     void setMaterial(jeti::control::Material* material) { m_material = material; }
 
-    // ugly
-    void setOffset(const glm::vec2& offset) { m_offset = offset; }
-
-    void setCenter(const glm::vec2& center) { m_box.setCenter(center); }
+    void setCenter(const glm::vec2& center) { m_box.setCenterOrig(center); }
     void setSize(float w, float h) { m_box.setSize(w, h); }
     void setSize(const glm::vec2& size) { m_box.setSize(size); }
     void setScale(float scale) { m_box.setScale(scale); }
@@ -113,7 +111,6 @@ protected:
 
     void _setBox(const ceti::Box2D& box) { m_box = box; }
 
-    void _setIsRoot(bool root) { m_isRoot = root; }
     void _setIsPressed(bool pressed) { m_isPressed = pressed; }
     void _setIsLocked(bool locked) { m_isLocked = locked; }
 
@@ -130,7 +127,7 @@ protected:
     void _pressEventMBL_onGuiElement(gui::Type, client::Player*);
     void _resetStateEventOnGuiElement(gui::Type);
 
-    void _updateGeometry(const glm::vec2&, float);
+    void _updateGeometry();
 
     virtual void _updateUnique(client::Player*);
     void _updateChildren(client::Player*);
@@ -142,6 +139,9 @@ protected:
 
 private:
     static std::map<gui::Type, Base*> m_elements;
+
+    Base* m_parent = nullptr;
+
     std::vector<Base*> m_children;
 
     gui::Type m_id;
@@ -157,13 +157,8 @@ private:
     bool m_isLocked = false;
     bool m_isPressed = false;
     bool m_isVisible = false; // setting to false cause bug
-    bool m_isRoot = true;
 
-    glm::vec2 m_offset;
     jeti::AnimationEffect2D* m_animation = nullptr;
-
-    void __setOffset(const glm::vec2& offset) { m_offset = offset; }
-    void __setOffset(float x, float y) { m_offset.x = x; m_offset.y = y; }
 
     friend class Manager;
 };

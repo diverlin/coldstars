@@ -36,6 +36,8 @@ public:
 
     void set(const Box2D&);
 
+    void setCenterOrig(const glm::vec2& center) { m_centerOrig = center; }
+    void setCenterOrig(float x, float y)        { m_centerOrig = glm::vec2(x, y); }
     void setCenter(const glm::vec2& center) { m_center = center; }
     void setCenter(float x, float y)        { m_center = glm::vec2(x, y); }
     void setSize(const glm::vec2& size)     { m_size = size; }
@@ -43,6 +45,7 @@ public:
     void setScale(float scale)              { m_scale = scale; }
     void setAngle(float angle)              { m_angle = angle; }
 
+    const glm::vec2& centerOrig() const { return m_centerOrig; }
     const glm::vec2& center() const { return m_center; }
     const glm::vec2& size() const   { return m_size; }
     float scale() const  { return m_scale; }
@@ -53,6 +56,7 @@ public:
     bool checkInteraction(const glm::vec2&) const;
 
 private:
+    glm::vec2 m_centerOrig;
     glm::vec2 m_center;
     glm::vec2 m_size;
     float m_scale = 1.0f;

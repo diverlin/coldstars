@@ -249,10 +249,10 @@ void Vehicle::unbindVehicle()
 
 void Vehicle::__createKorpusGui(control::Vehicle* vehicle, float scale)
 {
-    float kontur_w = 350;
-    float kontur_h = 250;
+//    float kontur_w = 350;
+//    float kontur_h = 250;
 
-    box().setSize(kontur_w * scale, kontur_h * scale);
+//    box().setSize(kontur_w * scale, kontur_h * scale);
 }      
 
 
@@ -361,7 +361,7 @@ void Vehicle::update(client::Player* player)
     }
 
     if (isRoot()) {
-        _updateGeometry(box().center(), box().scale());
+        _updateGeometry(/*box().center(), box().scale()*/);
     }
 
     _updateChildren(player);
