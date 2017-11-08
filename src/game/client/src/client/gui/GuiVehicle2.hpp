@@ -30,7 +30,7 @@ namespace gui {
 class VehicleSimple : public Base
 {
 public:
-    VehicleSimple();
+    VehicleSimple(const glm::vec2&);
     ~VehicleSimple()=default;
 
 protected:

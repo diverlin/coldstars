@@ -39,7 +39,7 @@ class ButtonItemSlot;
 class Vehicle : public Base
 {
 public:
-    Vehicle();
+    Vehicle(const glm::vec2&);
     ~Vehicle();
 
     bool isActive() const { return m_vehicle != nullptr; }

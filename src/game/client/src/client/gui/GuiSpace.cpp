@@ -59,10 +59,8 @@ Space::Space()
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
     
-    {
-        glm::vec2 size(screen_w, screen_h);
-        setSize(size);
-    }
+    glm::vec2 size(screen_w, screen_h);
+    setSize(size);
     
     /** Top bar */
     {
@@ -124,19 +122,6 @@ Space::Space()
 
         glm::vec2 offset(0, -screen_h/2 + GUI::BAR_HEIGHT);
         add(bar_bottom, offset);
-    }
-
-    {
-        gui::Radar* gui_radar = new gui::Radar();
-        VehicleSimple* gui_vehicle_player = new VehicleSimple();
-
-        glm::vec2 size(gui::RADAR_FRAME_SIZE, gui::RADAR_FRAME_SIZE);
-        gui_radar->setSize(size);
-        gui_vehicle_player->setSize(size);
-
-        glm::vec2 offset(screen_w/2 - gui::RADAR_FRAME_SIZE, -screen_h/2 + gui::RADAR_FRAME_SIZE);
-        add(gui_radar, offset);
-        add(gui_vehicle_player, offset);
     }
 }
 

@@ -37,11 +37,12 @@
 
 namespace gui {
 
-Vehicle::Vehicle()
+Vehicle::Vehicle(const glm::vec2& size)
     :
       Base(Type::SCAN_VEHICLE, Type::SCAN_VEHICLE)
 {
     m_slot_gate = new slot::Item(slot::Type::GATE);
+    setSize(size);
     setMaterial(new jeti::control::Material(gui::MaterialCollector::get().slot));
 }
 

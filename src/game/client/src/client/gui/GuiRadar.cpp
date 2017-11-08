@@ -35,7 +35,7 @@
 
 namespace gui {
 
-Radar::Radar()
+Radar::Radar(const glm::vec2& size)
     :
       Base(Type::GUI_RADAR)
 {
@@ -62,6 +62,8 @@ Radar::Radar()
     m_size_vehicle = 1.0f*m_size_base;
 
     m_scale = RADAR_SCALE;
+
+    setSize(size);
 }
 
 Radar::~Radar()
@@ -71,6 +73,7 @@ Radar::~Radar()
     delete m_material_screenrect;
     delete m_material_range;
     delete m_material_dot;
+    delete m_entitiesMesh;
 }
 
 void Radar::__reset()
@@ -87,10 +90,6 @@ void Radar::_updateUnique(client::Player* player)
     int screen_w = client::shortcuts::screen()->width();
     int screen_h = client::shortcuts::screen()->height();
 
-    // main gui frame
-    //box().setSize(RADAR_FRAME_SIZE, RADAR_FRAME_SIZE);
-    //box().setCenter(screen_w/2 - box().size().x, -screen_h/2 + box().size().y);
-
     // range mark on radar gui
     float range = player->npc()->vehicle()->properties().radar;
     m_box_range.setSize(range*m_scale, range*m_scale);
@@ -99,7 +98,6 @@ void Radar::_updateUnique(client::Player* player)
     // screen rect
     m_box_screenrect.setSize(screen_w*m_scale, screen_h*m_scale);
     m_box_screenrect.setCenter(box().center() + meti::to_vec2(client::shortcuts::camera()->position()) * m_scale);
-
 
     // fill with entitites
     __reset();
@@ -130,9 +128,7 @@ void Radar::__add(control::SpaceObject* object)
 {
     m_entities.push_back(object);
 
-    float scale_render = 1.0f; // TODO
-
-    glm::vec3 position = meti::to_vec3(box().center()) + object->position()*m_scale/scale_render;
+    glm::vec3 position = meti::to_vec3(box().center()) + object->position()*m_scale;
     m_positions.push_back(position);
     switch(object->descriptor()->obType())
     {
