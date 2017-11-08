@@ -321,7 +321,7 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid)
     if (!__isObjectOnScreen(asteroid)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(asteroid->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(asteroid->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -346,7 +346,7 @@ StarSystem::__addIfVisible(control::Ship* ship)
     if (!__isObjectOnScreen(ship)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(ship->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(ship->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -370,7 +370,7 @@ StarSystem::__addIfVisible(control::SpaceStation* spacestation)
     if (!__isObjectOnScreen(spacestation)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(spacestation->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(spacestation->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -393,7 +393,7 @@ StarSystem::__addIfVisible(control::Satellite* satellite)
     if (!__isObjectOnScreen(satellite)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(satellite->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(satellite->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -415,7 +415,7 @@ bool StarSystem::__addIfVisible(control::Container* container)
     if (!__isObjectOnScreen(container)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(container->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(container->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -438,7 +438,7 @@ bool StarSystem::__addIfVisible(control::Bullet* bullet)
     if (!__isObjectOnScreen(bullet)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(bullet->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(bullet->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -460,7 +460,7 @@ bool StarSystem::__addIfVisible(control::WormHole* wormhole)
     if (!__isObjectOnScreen(wormhole)) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(wormhole->position(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(wormhole->position(), m_player->position(), m_player->radius())) {
         return false;
     }
 
@@ -565,7 +565,7 @@ StarSystem::__addIfVisible(std::shared_ptr<jeti::particlesystem::Base> ps)
     if (!isObjectOnScreen(m_tmpScreenCoord, ps->size(), m_render.size(), m_render.scaleBase())) {
         return false;
     }
-    if (!ceti::isPointInObserverRadius(ps->center(), m_player->position(), m_player->radius())) {
+    if (!ceti::isPointInCircle(ps->center(), m_player->position(), m_player->radius())) {
         return false;
     }
 

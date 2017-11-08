@@ -24,27 +24,23 @@
 
 namespace ceti {
 
-bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius);
-bool checkCollisionDotWithCircle(const glm::vec3& c1, const glm::vec3& c2, float radius);
-bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
+bool isPointInCircle(const glm::vec3& c1, const glm::vec3& c2, float radius);
+bool isPointInCircle(const glm::vec2& c1, const glm::vec2& c2, float radius);
+bool isPointInRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor, VICTIM* victim)
 {
-    if (checkCollisionDotWithCircle(agressor->position(),
-                                    victim->position(),
-                                    agressor->collisionRadius()+victim->collisionRadius())) {
-//        victim->hit(agressor->damage());
-//        agressor->collisionEvent();
+    if (isPointInCircle(agressor->position(),
+                        victim->position(),
+                        agressor->collisionRadius()+victim->collisionRadius())) {
         return true;
     }
 
     return false;
 }
 
-bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius);
-bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius);
-bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius);
+bool isLineInCircle(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius);
 
 } // namespace ceti
 
