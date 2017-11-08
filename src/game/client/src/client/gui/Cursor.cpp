@@ -115,6 +115,7 @@ void Cursor::updateTakenItem()
 
     if (m_itemSlotGui) {
         m_itemSlotGui->setCenter(m_dataMouse.screenCoordGui());
+        m_itemSlotGui->updateGeometry();
     }
 }
 

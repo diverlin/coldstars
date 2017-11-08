@@ -56,11 +56,8 @@ public:
 
     bool isRoot() const { return (m_parent == nullptr); }
     void setParent(Base* parent) { m_parent = parent; }
-
     void setLabel(const std::string& label) { m_label = label; }
-
     void setMaterial(jeti::control::Material* material) { m_material = material; }
-
     void setCenter(const glm::vec2& center) { m_box.setCenterOrig(center); }
     void setSize(float w, float h) { m_box.setSize(w, h); }
     void setSize(const glm::vec2& size) { m_box.setSize(size); }
@@ -81,6 +78,7 @@ public:
 
     static Base* element(gui::Type);
 
+    void updatePosition();
     Base* updateMouseInteraction(const glm::vec2&);
 
     void add(Base*, const glm::vec2&);
@@ -126,8 +124,6 @@ protected:
 
     void _pressEventMBL_onGuiElement(gui::Type, client::Player*);
     void _resetStateEventOnGuiElement(gui::Type);
-
-    void _updateGeometry();
 
     virtual void _updateUnique(client::Player*);
     void _updateChildren(client::Player*);

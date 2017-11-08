@@ -106,6 +106,16 @@ void BaseButtonItemSlot::_invalidateItemView()
             return;
         }
     }
+
+
+}
+
+
+void BaseButtonItemSlot::updateGeometry()
+{
+    if (m_itemView) {
+        m_itemView->updatePosition();
+    }
 }
 
 void BaseButtonItemSlot::_updateAnimation()

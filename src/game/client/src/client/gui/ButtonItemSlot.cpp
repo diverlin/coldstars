@@ -49,6 +49,7 @@ void ButtonItemSlot::_updateUnique(client::Player* player)
     _updateAnimation();
 }
 
+
 void ButtonItemSlot::renderItem(const jeti::Render& render) const {
     _drawItem(render);
 }
