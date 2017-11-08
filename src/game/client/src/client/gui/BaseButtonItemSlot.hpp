@@ -25,7 +25,7 @@ namespace control {
 class Item;
 } // namespace control
 
-namespace view {
+namespace gui {
 class Item;
 } // namespace view
 
@@ -52,6 +52,9 @@ public:
     ~BaseButtonItemSlot();
 
     slot::Item* itemSlot() const { return m_slot; }
+    void invalidate();
+
+    void setCenter(const glm::vec2&);
 
 protected:
     void _invalidateItemView();
@@ -63,7 +66,7 @@ protected:
 
 private:
     slot::Item* m_slot = nullptr;
-    view::Item* m_itemView = nullptr;
+    gui::Item* m_itemView = nullptr;
 
     jeti::control::Material* m_material_mark_accept = nullptr;
     jeti::control::Material* m_material_mark_reject = nullptr;

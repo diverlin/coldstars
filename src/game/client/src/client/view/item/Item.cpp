@@ -30,27 +30,23 @@
 #include <jeti/Render.hpp>
 
 
-namespace view {
+namespace gui {
 
-Item::Item(control::Item* item)
+Item::Item(control::Item* item, const ceti::Box2D& box)
     :
       m_item(item)
 {
+    _setBox(box);
     descriptor::Base* item_descr = core::shortcuts::descriptors()->get(item->model()->descriptor());
-    m_material = utils::createMaterialFromDescriptorId(item_descr->texture());
+    setMaterial(utils::createMaterialFromDescriptorId(item_descr->texture()));
 }
 
 Item::~Item()
-{
-    delete m_material;
-    m_material = nullptr;
-}
+{}
 
 void Item::render(const jeti::Render& render)
 {
-    render.drawQuad_HUD(m_box, *m_material);
+    render.drawQuad_HUD(box(), material());
 }
 
-
-
-} // namespace view
+} // namespace gui

@@ -49,23 +49,23 @@ void ButtonItemSlot::_updateUnique(client::Player* player)
     _updateAnimation();
 }
 
+void ButtonItemSlot::renderItem(const jeti::Render& render) const {
+    _drawItem(render);
+}
+
 void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* player) const
 {
-    if (m_cursorMode) {
-        _drawItem(render);
-    } else {
-        _drawSlot(render);
-        _drawItem(render);
-        control::Item* taken_item = player->cursor().itemSlot()->item();
-        if (taken_item) {
-            _drawMarkEmptySlot(render,
-                               player->cursor().mouseData().screenCoordGui(),
-                               taken_item->descriptor()->slotType());
-        }
-        //    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
-        //        RenderMarkTarget();
-        //    }
+    _drawSlot(render);
+    _drawItem(render);
+    control::Item* taken_item = player->cursor().itemSlot()->item();
+    if (taken_item) {
+        _drawMarkEmptySlot(render,
+                           player->cursor().mouseData().screenCoordGui(),
+                           taken_item->descriptor()->slotType());
     }
+    //    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
+    //        RenderMarkTarget();
+    //    }
 }
 
 void ButtonItemSlot::renderInfo(const jeti::Render& render) const
