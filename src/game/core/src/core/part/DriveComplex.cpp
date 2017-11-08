@@ -208,16 +208,10 @@ void Drive::__updateDynamicTargetCoord()
 
 bool Drive::checkTargetEchievement(const meti::vec3& pos)
 {
-    if (m_target) {
-        bool result = ceti::checkCollisionDotWithCircle_DIRTY(meti::to_vec2(pos),
-                                                              meti::to_vec2(m_targetPos),
-                                                              m_targetDistance);
-        if (result) {
-            return true;
-        }
+    if (!m_target) {
+        return false;
     }
-    
-    return false;
+    return ceti::isPointInCircle(meti::to_vec2(pos), meti::to_vec2(m_targetPos), m_targetDistance);
 }
 
 

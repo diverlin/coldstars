@@ -21,57 +21,33 @@
 
 namespace ceti {
 
-bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius)
+bool isPointInCircle(const glm::vec2& c1, const glm::vec2& c2, float radius)
 {
-    if (std::fabs(dot.x - center.x) > radius) {
-        return false;
-    }
-    if (std::fabs(dot.y - center.y) > radius) {
-        return false;
-    }
-    return true;
+    return (glm::length(c1-c2) <= radius);
 }
 
-bool checkCollisionDotWithCircle(const glm::vec3& c1, const glm::vec3& c2, float dist)
+bool isPointInCircle(const glm::vec3& c1, const glm::vec3& c2, float radius)
 {
-    return (glm::length(c1-c2) <= dist);
+    return (glm::length(c1-c2) <= radius);
 }
 
-bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size)
+bool isPointInRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size)
 {
-    if (std::fabs(dot.x - center.x) > size.x/2) {
+    if (std::fabs(dot.x - center.x) > size.x) {
         return false;
     }
-    if (std::fabs(dot.y - center.y) > size.y/2) {
+    if (std::fabs(dot.y - center.y) > size.y) {
         return false;
     }
     return true;        
 }
 
-bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius)
+bool isLineInCircle(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius)
 {
-//    float dist = meti::distance(observer_pos, p);
-//    if (dist > radius) {
-//        return false;
-//    }
-    return true;
-}
-
-bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
-{
-//    float dist = meti::distance(observer_pos, p);
-//    if (dist > radius) {
-//        return false;
-//    }
-    return true;
-}
-
-bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius)
-{
-    if (!isPointInObserverRadius(p1, observer_pos, radius)) {
+    if (!isPointInCircle(p1, observer_pos, radius)) {
         return false;
     }
-    if (!isPointInObserverRadius(p2, observer_pos, radius)) {
+    if (!isPointInCircle(p2, observer_pos, radius)) {
         return false;
     }
     return true;

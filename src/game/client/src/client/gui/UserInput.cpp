@@ -52,12 +52,12 @@ void UserInput::update()
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
         case sf::Event::MouseButtonPressed: {
-            std::cout<<"--mb press..."<<std::endl;
+            //std::cout<<"--mb press..."<<std::endl;
             m_mousePressedCodes.push_back(event.key.code);
             break;
         }
         case sf::Event::MouseButtonReleased: {
-            std::cout<<"--mb release..."<<std::endl;
+            //std::cout<<"--mb release..."<<std::endl;
             m_mouseReleasedCodes.push_back(event.key.code);
             break;
         }

@@ -55,7 +55,7 @@ Box2D::~Box2D()
 
 bool Box2D::checkInteraction(const glm::vec2& point) const
 {           
-    return checkCollisionDotWithRectangle(point, m_center, m_scale*m_size);
+    return isPointInRectangle(point, m_center, m_scale*m_size);
 }
                
 void Box2D::set(const Box2D& box)
