@@ -54,6 +54,8 @@ public:
     slot::Item* itemSlot() const { return m_slot; }
     void invalidate();
 
+    void updateGeometry();
+
     void setCenter(const glm::vec2&);
 
 protected:

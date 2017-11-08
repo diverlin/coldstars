@@ -131,7 +131,7 @@ Base::updateMouseInteraction(const glm::vec2& mouse_pos)
     return nullptr;
 }
 
-void Base::_updateGeometry()
+void Base::updatePosition()
 {   
     if (m_parent) {
         m_box.setCenter(m_parent->box().center() + m_box.centerOrig());
@@ -140,7 +140,7 @@ void Base::_updateGeometry()
     }
 
     for (auto* child: m_children) {
-        child->_updateGeometry();
+        child->updatePosition();
     }
 }
 
@@ -151,7 +151,7 @@ void Base::update(client::Player* player)
     }
     
     if (!m_parent) { // we update only for root node, it's important!!!
-        _updateGeometry();
+        updatePosition();
     }
 
     _updateChildren(player);

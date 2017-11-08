@@ -361,7 +361,7 @@ void Vehicle::update(client::Player* player)
     }
 
     if (isRoot()) {
-        _updateGeometry(/*box().center(), box().scale()*/);
+        updatePosition(/*box().center(), box().scale()*/);
     }
 
     _updateChildren(player);

@@ -40,7 +40,6 @@ public:
     ~Item();
 
     control::Item* item() const { return m_item; }
-
     void render(const jeti::Render&);
 
 private:
