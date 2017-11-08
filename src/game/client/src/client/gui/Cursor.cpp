@@ -48,10 +48,7 @@ namespace gui {
 Cursor::Cursor()
 {
     m_itemSlot = new slot::Item(slot::Type::CARGO);
-    m_itemSlotGui = new gui::ButtonItemSlot(m_itemSlot, true);
 
-    m_box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
-    
     m_markTargetMaterial = new jeti::control::Material(MaterialCollector::get().mark_target);
 
     //ButtonTrigger* button; // EXPERIMENTAL GUI
@@ -89,6 +86,7 @@ Cursor::~Cursor()
 {
     delete m_markTargetMaterial;
     delete m_itemSlot;
+    delete m_itemSlotGui;
 }
 
 void Cursor::reset()
@@ -99,10 +97,27 @@ void Cursor::reset()
     m_focusedItemSlot = nullptr;
 }
 
+void Cursor::updateTakenItem()
+{
+    if (!m_itemSlot->item() && m_itemSlotGui) {
+        delete m_itemSlotGui;
+        m_itemSlotGui = nullptr;
+        return;
+    }
+
+    if (m_itemSlot->item() && !m_itemSlotGui) {
+        m_itemSlotGui = new gui::ButtonItemSlot(m_itemSlot);
+        m_itemSlotGui->setSize(glm::vec2(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR));
+        m_itemSlotGui->invalidate();
+    }
+
+    if (m_itemSlotGui) {
+        m_itemSlotGui->setCenter(m_dataMouse.screenCoordGui());
+    }
+}
+
 void Cursor::update(client::Player* player, const jeti::Render& render)
 {
-    m_box.setCenter(m_dataMouse.screenCoord().x, m_dataMouse.screenCoord().y);
-
     if (m_focusedView) {
         //if (!m_focusedView->isAlive()) {
         //    m_focusedView = nullptr;
@@ -166,7 +181,7 @@ void Cursor::renderFocusedObjectStuff(const jeti::Render& render) const
     if (m_focusedGuiElement) {
         if (m_focusedGuiElement->id() == Type::BUTTON_ITEMSLOT) {
             ceti::Box2D box(m_focusedGuiElement->box());
-            box.setScale(scale, scale);
+            box.setScale(scale);
 
             render.drawQuad_HUD(box, *m_markTargetMaterial);
         }
@@ -183,9 +198,11 @@ void Cursor::renderFocusedObjectInfo(const jeti::Render& render) const
     }
 }
 
-void Cursor::renderItem(const jeti::Render& render) const
+void Cursor::renderTakenItem(const jeti::Render& render) const
 {
-    //m_ItemSlot->RenderItem(render, m_Box, glm::vec2(0));
+    if (m_itemSlotGui) {
+        m_itemSlotGui->renderItem(render);
+    }
 }
 
 } // namespace gui

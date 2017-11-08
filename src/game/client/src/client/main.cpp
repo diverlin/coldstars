@@ -263,6 +263,7 @@ public:
         starsystem->update_client(core::shortcuts::session()->turnTimer().turnCount());
 
         m_inputs->update(m_player);
+        m_player->cursor().updateMouseInput(*m_render);
 
         m_view->update(m_inputs->scrollAccel());
         m_view->render(starsystem);

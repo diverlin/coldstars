@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <ceti/Box2D.hpp>
+#include <client/gui/BaseGuiElement.hpp>
 
 namespace jeti {
 namespace control {
@@ -31,23 +31,20 @@ namespace control {
 class Item;
 } // namespace control
 
-namespace view {
+namespace gui {
 
-class Item
+class Item : public Base
 {
 public:
-    Item(control::Item*);
+    Item(control::Item*, const ceti::Box2D&);
     ~Item();
 
     control::Item* item() const { return m_item; }
 
-    void setBox(const ceti::Box2D& box) { m_box = box; }
     void render(const jeti::Render&);
 
 private:
     control::Item* m_item;
-    ceti::Box2D m_box;
-    jeti::control::Material* m_material = nullptr;
 };
 
-} // namespace view
+} // namespace gui

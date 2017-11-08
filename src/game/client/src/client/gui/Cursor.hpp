@@ -19,7 +19,6 @@
 #pragma once
 
 #include <client/gui/MouseData.hpp>
-#include <ceti/Box2D.hpp>
 
 namespace slot {
 class Item;
@@ -70,10 +69,12 @@ public:
     void renderFocusedObjectStuff(const jeti::Render&) const;
     void renderFocusedObjectInfo(const jeti::Render&) const;
 
-    void renderItem(const jeti::Render&) const;
     void updateMouseInput(const jeti::Render& render);
 
     void reset();
+
+    void updateTakenItem();
+    void renderTakenItem(const jeti::Render&) const;
 
 private:
     view::Base* m_focusedView = nullptr;
@@ -86,8 +87,6 @@ private:
 
     jeti::control::Material* m_markTargetMaterial = nullptr;
     Base* m_focusedGuiElement = nullptr;
-
-    ceti::Box2D m_box;
 }; 
 
 } // namespace gui

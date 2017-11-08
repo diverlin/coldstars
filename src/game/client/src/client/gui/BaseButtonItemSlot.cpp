@@ -55,6 +55,19 @@ BaseButtonItemSlot::~BaseButtonItemSlot()
     delete m_itemView;
 }
 
+void BaseButtonItemSlot::invalidate()
+{
+    _invalidateItemView();
+}
+
+void BaseButtonItemSlot::setCenter(const glm::vec2& center)
+{
+    Base::setCenter(center);
+    if (m_itemView) {
+        m_itemView->setCenter(center);
+    }
+}
+
 void BaseButtonItemSlot::__reset()
 {
     delete m_itemView;
@@ -67,10 +80,9 @@ void BaseButtonItemSlot::__createItemView(control::Item* item)
         __reset();
     }
 
-    m_itemView = new view::Item(m_slot->item());
-    ceti::Box2D _box = box();
-    _box.setScale(0.8f);
-    m_itemView->setBox(_box);
+    m_itemView = new gui::Item(m_slot->item(), box());
+    m_itemView->setScale(0.8);
+
 }
 
 void BaseButtonItemSlot::_invalidateItemView()
@@ -78,17 +90,20 @@ void BaseButtonItemSlot::_invalidateItemView()
     // item is inserted
     if (!m_itemView && m_slot->item()) {
         __createItemView(m_slot->item());
+        return;
     }
 
     // item moved out
     if (m_itemView && !m_slot->item()) {
         __reset();
+        return;
     }
 
     // item changed
     if (m_itemView && m_slot->item()) {
         if (m_itemView->item() != m_slot->item()) {
             __createItemView(m_slot->item());
+            return;
         }
     }
 }

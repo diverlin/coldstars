@@ -365,6 +365,7 @@ void Vehicle::update(client::Player* player)
 
     _updateChildren(player);
     _updateUnique(player);
+    player->cursor().updateTakenItem();
 }
 
 void Vehicle::render(const jeti::Render& render, client::Player* player) const
@@ -374,6 +375,7 @@ void Vehicle::render(const jeti::Render& render, client::Player* player) const
     }
     //__renderKorpus(render, player);
     _renderChildren(render, player);
+    player->cursor().renderTakenItem(render);
 }
 
 void Vehicle::__renderKorpus(const jeti::Render& render, client::Player* player) const
