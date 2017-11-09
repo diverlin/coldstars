@@ -7,7 +7,7 @@
 #
 # It is trying a few standard installation locations, but can be customized
 # with the following variables:
-#   YETI_ROOT_DIR      - root directory
+#   COLDSTARS_DEPLOY_DIR - root directory
 
 set(_project "METI")
 set(_header "meti/meti.hpp")
