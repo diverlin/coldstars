@@ -1,49 +1,19 @@
-cmake_minimum_required (VERSION 2.8)
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../macros/cmake")
-
+# collect source
 file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 file(GLOB_RECURSE ${PROJECT}_FRAG RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/shaders *.frag)
 file(GLOB_RECURSE ${PROJECT}_VERT RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/shaders *.vert)
 
-set(GTEST_ROOT "/workspace/dist/gtest")
-
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-#add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
-
-find_package(GLEW REQUIRED)
-include_directories(${GLEW_INCLUDE_DIRS})
-
-set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../dependencies/glm-0.9.7.5")
-find_package(GLM REQUIRED)   
-include_directories(${GLM_INCLUDE_DIRS})
-add_definitions(-DGLM_FORCE_RADIANS)
-
-#free type
-find_package(Freetype REQUIRED)
-include_directories(${FREETYPE_INCLUDE_DIRS})
-#message("${FREETYPE_LIBRARIES}")
-#message("${FREETYPE_INCLUDE_DIRS}")
-
 add_library(freetyperender ../../../../dependencies/freetype2/src/FreeType.cpp)
+set_target_properties(freetyperender PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 include_directories(dependencies/freetype2/src)
 
-SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=gnu++11")
-
-list(APPEND CMAKE_PREFIX_PATH "/media/yeti/ext_workspace/dist_gcc54/SFML-2.4.2")
-find_package(SFML COMPONENTS system graphics window REQUIRED)
-include_directories(${SFML_INCLUDE_DIR})
-message("${SFML_INCLUDE_DIR}")
-message("${SFML_LIBRARIES}")
-
-set(CETI_ROOT )
 set(include_dirs
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/..
-    ${CMAKE_SOURCE_DIR}/src/ceti/src # hack
+    ${METI_INCLUDE_DIRS}
+    ${CETI_INCLUDE_DIRS}
     )
 
 add_library(${PROJECT} SHARED
@@ -53,7 +23,8 @@ add_library(${PROJECT} SHARED
 #    ${${PROJECT}_VERT}
     )
 target_link_libraries(${PROJECT}
-    ${CETI_PROJECT}
+    ${METI_LIBRARIES}
+    ${CETI_LIBRARIES}
     ${SFML_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLEW_LIBRARIES}
@@ -67,3 +38,18 @@ set_property(TARGET ${PROJECT} PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${include_
 
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
+# install
+install(TARGETS ${PROJECT}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    )
+install(TARGETS freetyperender
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    )
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../"
+    DESTINATION include
+    FILES_MATCHING
+    PATTERN "*.hpp"
+    )
