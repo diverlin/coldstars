@@ -1,8 +1,9 @@
 #pragma once
 
+#include <jeti/MyGl.hpp>
+
 #include <QtGui/QWindow>
 #include <QtGui/QOpenGLFunctions>
-
 
 class QPainter;
 class QOpenGLContext;
