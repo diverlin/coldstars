@@ -181,6 +181,7 @@ Render::toWorldCoord(const glm::vec3& screen_coord) const {
     world_coord *= scaleBase();
 
     world_coord += m_camera->position();
+    world_coord.z = ZDEFAULT;
 
     return world_coord;
 }
@@ -195,6 +196,8 @@ Render::toScreenCoord(const glm::vec3& world_coord, glm::vec3& screen_coord) con
 
     screen_coord.x += m_size.x/2;
     screen_coord.y += m_size.y/2;
+
+    screen_coord.z = ZDEFAULT;
 }
 
 
@@ -296,7 +299,7 @@ void Render::__initAxisMesh()
 
 void Render::activateFbo(int index, int w, int h)
 {
-    if ( (index < 0) or (index >= m_fboNum) ) {
+    if ( (index < 0) || (index >= m_fboNum) ) {
         throw std::runtime_error("wrong fbo index");
     }
 
@@ -306,7 +309,7 @@ void Render::activateFbo(int index, int w, int h)
 
 void Render::deactivateFbo(int index)
 {
-    if ((index < 0) or (index >= m_fboNum)) {
+    if ((index < 0) || (index >= m_fboNum)) {
         throw std::runtime_error("wrong fbo index");
     }
 
@@ -358,9 +361,9 @@ void Render::__makeShortCuts()
     m_programBlur  = m_shaders.blur;
 }
 
-void Render::setPerspectiveProjection()
+void Render::applyPerspectiveProjection()
 {        
-    m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 300.0f, ZNEAR);
+    m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), -1.0f, -1000.0f);
     __updateProjectionViewMatrix();
 }
 

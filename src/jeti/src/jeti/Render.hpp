@@ -43,16 +43,17 @@ class Material;
 } // namespace control
 
 const int FBO_NUM = 6;
-const float SCREEN_QUAD_ZPOS = -999.0f;
-const float ZNEAR = -1000.0f;
+const float SCREEN_QUAD_ZPOS = 0.0f; // remove, make it 0
+const float ZDEFAULT = 0.0f;
+const float ZNEAR = 0.0f;
 const float ZFAR = 1000.0f;
 
 class Render : public NonCopyable
 {
-    const float SCALE_INIT = 2.5;
-    const float SCALE_MIN = 0.2;
-    const float SCALE_MAX = 50.0;
-    const float SCALE_STEP = 0.05;
+    const float SCALE_INIT = 2.5f;
+    const float SCALE_MIN = 0.2f;
+    const float SCALE_MAX = 50.0f;
+    const float SCALE_STEP = 0.05f;
 
     const std::string SHADERS_PATH = "shaders/";
 
@@ -61,6 +62,9 @@ class Render : public NonCopyable
 public:
     Render();
     ~Render();
+
+    float zNear() const { return ZNEAR; }
+    float zFar() const { return ZFAR; }
 
     int fps() const { return m_fps; }
 
@@ -84,7 +88,7 @@ public:
 
     void init(Camera*, int, int);
 
-    void setPerspectiveProjection();
+    void applyPerspectiveProjection();
     void applyOrthogonalProjection();
     void applyOrthogonalProjection(float);
     void applyOrthogonalProjectionForHUD();
@@ -92,6 +96,7 @@ public:
     BloomEffect& bloom() { return m_bloom; }
     const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; }
     Fbo& fboBackGround() { return m_fboBackGround; }
+    Fbo& fboScene() { return m_fboScene; }
     const Shaders& shaders() const { return m_shaders; }
 
     void clearColorAndDepthBuffers() const
@@ -190,6 +195,7 @@ private:
     int m_fboNum = FBO_NUM;
     Fbo m_fbos[FBO_NUM];
     Fbo m_fboBackGround;
+    Fbo m_fboScene;
 
     int m_indexFboLastActivated = -1;
     int m_indexFboLastDeactivated = -1;
