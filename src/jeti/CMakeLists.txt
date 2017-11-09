@@ -59,6 +59,7 @@ find_package(CETI REQUIRED)
 # add
 add_subdirectory(src/jeti)
 
+set(USE_APP ON)
 if (USE_APP)
     add_subdirectory(app)
 endif()
