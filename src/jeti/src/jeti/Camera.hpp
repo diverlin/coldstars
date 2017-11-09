@@ -34,19 +34,15 @@ class Camera : public NonCopyable
 
 public:
     Camera(float znear, float zfar)
-        :
-          m_zFrom(znear)
-        , m_zTo(zfar)
     {
-        //m_position = glm::vec3(0.0f, 0.0f, -500.0f);
         m_direction = -meti::OZ;
-        m_radius = std::fabs(m_zTo-m_zFrom);
+        m_radius = 4000.0f; //std::fabs(m_zTo-m_zFrom);
     }
     ~Camera() = default;
 
     void setTargetPosition(const glm::vec3& position);
     void setPosition(const glm::vec3& position) { m_position = position; }
-    void setPositionZ(float z) { m_position.z = z; }
+    void setPositionZ(float z) { m_position.z = z; update(); }
 
     const glm::vec3& target() const { return m_target; }
     const glm::vec3& position() const { return m_position; }
@@ -63,8 +59,6 @@ public:
 
 private:
     bool m_autoMove = false;
-    float m_zFrom = 0.0f;
-    float m_zTo = 0.0f;
     float m_radius = 0.0;
 
     int m_it = -1;

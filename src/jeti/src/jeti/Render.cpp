@@ -364,7 +364,7 @@ void Render::__makeShortCuts()
 void Render::applyPerspectiveProjection()
 {        
     m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 100.0f, 2000.0f);
-    m_camera->setPositionZ(-500.0f);
+    m_camera->setPositionZ(-2000.0f);
     __updateProjectionViewMatrix();
 }
 
@@ -964,17 +964,17 @@ void Render::drawParticlesForHUD(const Mesh& mesh, const control::Material& mate
     }
 }
 
-void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawBlinkingParticles(const Mesh& mesh, const control::Material& material) const
 {
     __useProgram(m_shaders.particle_blink);
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.particle_blink, "uTexture_0"), 0);
         glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_time"), m_time);
 
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.particle_blink, "u_ModelMatrix"),          1, GL_FALSE, &m_identityMatrix[0][0]);
 
         glUniform1f(glGetUniformLocation(m_shaders.particle_blink, "u_scale"), m_scale);
 

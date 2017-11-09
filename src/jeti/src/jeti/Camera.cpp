@@ -23,13 +23,13 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <ceti/StringUtils.hpp>
 #include <iostream>
 
 namespace jeti {
 
 void Camera::setTargetPosition(const glm::vec3& position)
 {
-    std::cout<<"sss"<<position.z<<std::endl;
     if (m_position == position) {
         return;
     }
@@ -82,6 +82,7 @@ void Camera::update()
     }
 
     m_target = m_position + m_radius*m_direction;
+    std::cout<<"pos="<<ceti::to_string(m_position)<<" target="<<ceti::to_string(m_target)<<" r="<<m_radius<<std::endl;
     m_viewMatrix = glm::lookAt(m_position, m_target, m_up);
 }
 

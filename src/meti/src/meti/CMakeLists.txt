@@ -1,23 +1,26 @@
-cmake_minimum_required (VERSION 2.8)
-
-set(PROJECT ${PROJECT_METI})
-project (${PROJECT})
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../../macros/cmake")
-
+# collect sources
 file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
-find_package(GLM REQUIRED)   
-include_directories(${GLM_INCLUDE_DIRS})
-add_definitions(-DGLM_FORCE_RADIANS)
-
 set(include_dirs ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-if (NOT COMPILE_FLAGS)
-    set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
-endif ()
-
+# lib
 add_library(${PROJECT} SHARED ${${PROJECT}_SRC} ${${PROJECT}_HDR})
+
+# include dirs
+include_directories(${include_dirs})
+
+# target properties
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
+
+# install
+install(TARGETS ${PROJECT}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    )
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../"
+    DESTINATION include
+    FILES_MATCHING
+    PATTERN "*.hpp"
+    )
 

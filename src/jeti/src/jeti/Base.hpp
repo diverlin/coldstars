@@ -19,8 +19,6 @@
 
 #pragma once
 
-//#include <client/text/InfoTable.hpp>
-
 #include <ceti/type/IdType.hpp>
 #include <ceti/Orientation.hpp>
 #include <ceti/rect.hpp>

@@ -29,41 +29,11 @@
 
 namespace effect {
 
-
-DistantStars::DistantStars(const std::vector<DistantStarsLayer*>& layers)
-{
-    for (auto layer: layers) {
-        m_layers.push_back(layer);
-    }
-}
-DistantStars::~DistantStars() {
-    for (auto layer: m_layers) {
-        delete layer;
-    }
-    m_layers.clear();
-}
-
-void DistantStars::update(const glm::vec3& offset) {
-    for (auto layer: m_layers) {
-        layer->update(offset);
-    }
-}
-
-void DistantStars::draw(const jeti::Render& render) const {
-    for (auto layer: m_layers) {
-        layer->draw(render);
-    }
-}
-
-
-DistantStarsLayer::DistantStarsLayer(const std::vector<glm::vec3>& positions,
+DistantStars::DistantStars(const std::vector<glm::vec3>& positions,
                            const std::vector<glm::vec4>& colors,
-                           const std::vector<float>& sizes,
-                           float paralaxFactor)
-    :
-      m_paralaxFactor(paralaxFactor)
+                           const std::vector<float>& sizes)
 {
-    //assert(positions.size()==colors.size()==sizes.size());
+    assert((positions.size()==colors.size())&&(positions.size()==sizes.size()));
     for (unsigned int i=0; i<positions.size(); i++) {
         m_positions.push_back(positions[i]);
         m_colors.push_back(colors[i]);
@@ -74,81 +44,66 @@ DistantStarsLayer::DistantStarsLayer(const std::vector<glm::vec3>& positions,
     m_mesh->fillPointVertices(m_positions, m_colors, m_sizes);
 }
 
-DistantStarsLayer::~DistantStarsLayer()
+DistantStars::~DistantStars()
 {
     delete m_mesh;
+    delete m_material;
 }
 
-void DistantStarsLayer::update(const glm::vec3& camera_pos) {
-    if (m_offset != camera_pos) {
-        m_offset = camera_pos;
-        //m_Mm = glm::translate(m_offset/m_paralaxFactor);
-        m_Mm = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
-    }
-}
-
-void DistantStarsLayer::draw(const jeti::Render& render) const
+void DistantStars::draw(const jeti::Render& render) const
 {
-    render.drawBlinkingParticles(*m_mesh, *m_material, m_Mm);
+    render.drawBlinkingParticles(*m_mesh, *m_material);
 }
 
 DistantStars* genDistantStars(int color_id)
 {
-    std::vector<DistantStarsLayer*> layers;
-    int iterations = 30;
-    for (int i=0; i<iterations; ++i) {
-        int distStar_num = meti::rand::gen_int(DISTANT_STAR_MIN/iterations, DISTANT_STAR_MAX/iterations);
+    int distStar_num = meti::rand::gen_int(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
 
-        jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
-        assert(material);
+    jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR);
+    assert(material);
 
-        std::vector<glm::vec3> positions;
-        std::vector<glm::vec4> colors;
-        std::vector<float> sizes;
+    std::vector<glm::vec3> positions;
+    std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
 
-        for (int i=0; i<distStar_num; i++) {
-            //float z = -meti::rand::gen_int(799, 999);
-            float z = meti::rand::gen_int(-1, 1);
-            glm::vec3 position = meti::rand::gen_vec3xy(0, 3000);
+    for (int i=0; i<distStar_num; i++) {
+        //float z = -meti::rand::gen_int(799, 999);
+        float z = meti::rand::gen_int(-1000, 1000);
+        glm::vec3 position = meti::rand::gen_vec3xy(0, 3000);
 
-            float min = 0.5f;
-            float mid = 0.8f;
-            glm::vec4 color(1.0f);
-            int choice = meti::rand::gen_int(0,3);
-            if (choice == 0) {
-                color.r = meti::rand::gen_float(min, 1.0);
-                color.g = meti::rand::gen_float(mid, 1.0);
-                color.b = meti::rand::gen_float(mid, 1.0);
-            }
-            if (choice == 1) {
-                color.r = meti::rand::gen_float(mid, 1.0);
-                color.g = meti::rand::gen_float(min, 1.0);
-                color.b = meti::rand::gen_float(mid, 1.0);
-            }
-            if (choice == 2) {
-                color.r = meti::rand::gen_float(mid, 1.0);
-                color.g = meti::rand::gen_float(mid, 1.0);
-                color.b = meti::rand::gen_float(min, 1.0);
-            }
-            float size = meti::rand::gen_float(5.0, 10.0)*1000;
-            if (meti::rand::gen_int(15) == 1) {
-                size = meti::rand::gen_float(13.0, 16.0f);
-                color *= 1.2;
-            }
-
-            positions.push_back(position);
-            colors.push_back(color);
-            sizes.push_back(size);
+        float min = 0.5f;
+        float mid = 0.8f;
+        glm::vec4 color(1.0f);
+        int choice = meti::rand::gen_int(0,3);
+        if (choice == 0) {
+            color.r = meti::rand::gen_float(min, 1.0);
+            color.g = meti::rand::gen_float(mid, 1.0);
+            color.b = meti::rand::gen_float(mid, 1.0);
+        }
+        if (choice == 1) {
+            color.r = meti::rand::gen_float(mid, 1.0);
+            color.g = meti::rand::gen_float(min, 1.0);
+            color.b = meti::rand::gen_float(mid, 1.0);
+        }
+        if (choice == 2) {
+            color.r = meti::rand::gen_float(mid, 1.0);
+            color.g = meti::rand::gen_float(mid, 1.0);
+            color.b = meti::rand::gen_float(min, 1.0);
+        }
+        float size = meti::rand::gen_float(5.0, 10.0)*10;
+        if (meti::rand::gen_int(15) == 1) {
+            size = meti::rand::gen_float(13.0, 16.0f);
+            color *= 1.2;
         }
 
-        float paralaxFactor = meti::rand::gen_float(1.005f, 1.02f);
-        DistantStarsLayer* layer = new DistantStarsLayer(positions, colors, sizes, paralaxFactor);
-        layer->setMaterial(material);
-
-        layers.push_back(layer);
+        positions.push_back(position);
+        colors.push_back(color);
+        sizes.push_back(size);
     }
 
-    DistantStars* ds = new DistantStars(layers);
+    DistantStars* ds = new DistantStars(positions, colors, sizes);
+    ds->setMaterial(material);
+
     return ds;
 }
 
