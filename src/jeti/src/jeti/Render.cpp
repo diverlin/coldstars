@@ -267,6 +267,7 @@ void Render::init(Camera* camera, int w, int h)
         m_materialCollisionRadius = new control::Material(model);
     }
 
+    glViewport(0, 0, w, h);
     m_initialized = true;
 }
 

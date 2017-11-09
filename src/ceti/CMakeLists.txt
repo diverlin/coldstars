@@ -23,7 +23,6 @@ endif()
 set(PROJECT ${PROJECT_CETI})
 
 ### find deps
-
 # glm
 set(GLM_ROOT_DIR "../../../dependencies/glm-0.9.7.5/")
 find_package(GLM REQUIRED)

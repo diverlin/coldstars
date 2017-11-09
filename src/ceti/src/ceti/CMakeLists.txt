@@ -9,8 +9,10 @@ add_library(${PROJECT} SHARED ${${PROJECT}_SRC} ${${PROJECT}_HDR})
 
 # link
 target_link_libraries(${PROJECT} 
-    ${METI_LIBRARIES}
+    boost_system
     boost_filesystem
+    boost_serialization
+    ${METI_LIBRARIES}
     )
 
 # target properties
