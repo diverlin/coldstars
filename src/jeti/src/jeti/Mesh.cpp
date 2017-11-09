@@ -30,6 +30,18 @@ Mesh::Mesh()
     __genQuad();
 }
 
+Mesh::Mesh(const std::string& obj_path)
+{
+    glGenVertexArrays(1, &m_vaoId);
+    glGenBuffers(1, &m_vboId);
+
+    ObjLoader objLoader(obj_path);
+    fillLineVertices(objLoader);
+    m_boundaryBox = objLoader.__boundaryBox();
+
+    __validate();
+}
+
 Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
     :
       m_originDirection(descriptor->orientation())

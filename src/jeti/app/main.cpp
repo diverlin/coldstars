@@ -20,6 +20,8 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     jeti::Mesh* m_mesh = nullptr;
+    jeti::model::Material* m_material_model = nullptr;
+    jeti::control::Material* m_material_control = nullptr;
 
     int m_frame = 0;
 };
@@ -29,7 +31,6 @@ DemoWindow::DemoWindow()
 {
     m_render = new jeti::Render;
     m_camera = new jeti::Camera(m_render->zNear(), m_render->zFar());
-    //m_mesh = new jeti::Mesh;
 }
 
 int main(int argc, char **argv)
@@ -50,6 +51,9 @@ int main(int argc, char **argv)
 void DemoWindow::initialize()
 {
     m_render->init(m_camera, 640, 480);
+    m_mesh = new jeti::Mesh("data/obj/cube_test/cube_test.obj");
+    m_material_model = new jeti::model::Material("data/test1.png");
+    m_material_control = new jeti::control::Material(m_material_model);
 }
 
 void DemoWindow::render()
@@ -58,6 +62,8 @@ void DemoWindow::render()
     m_render->applyOrthogonalProjection();
     glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.f, 200.f, 1.f));
     m_render->drawCollisionRadius(scaleMatrix);
+
+    m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);
 
     ++m_frame;
 }
