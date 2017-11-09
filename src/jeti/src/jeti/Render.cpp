@@ -364,6 +364,7 @@ void Render::__makeShortCuts()
 void Render::applyPerspectiveProjection()
 {        
     m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 100.0f, 2000.0f);
+    m_camera->setPositionZ(-500.0f);
     __updateProjectionViewMatrix();
 }
 
@@ -389,6 +390,7 @@ void Render::applyOrthogonalProjectionForHUD()
 
 void Render::__setOrthogonalProjection() {
     m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, ZNEAR, ZFAR);
+    m_camera->setPositionZ(0.0f);
     __updateProjectionViewMatrix();
 }
 
