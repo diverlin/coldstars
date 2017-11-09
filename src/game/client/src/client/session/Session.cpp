@@ -34,7 +34,7 @@ namespace client {
 Session::Session()
     :
       m_render(new jeti::Render)
-    , m_camera(new jeti::Camera)
+    , m_camera(new jeti::Camera(m_render->zNear(), m_render->zFar()))
     , m_screen(new jeti::Screen)
     , m_inputs(new gui::UserInputInSpace)
 {

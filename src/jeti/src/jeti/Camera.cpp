@@ -29,6 +29,7 @@ namespace jeti {
 
 void Camera::setTargetPosition(const glm::vec3& position)
 {
+    std::cout<<"sss"<<position.z<<std::endl;
     if (m_position == position) {
         return;
     }
@@ -40,7 +41,7 @@ void Camera::setTargetPosition(const glm::vec3& position)
 
     int num = 60;
     float step = dist/num;
-    glm::vec3 pos =m_position;
+    glm::vec3 pos = m_position;
     for (int i=0; i<num; ++i) {
         pos += step*dir;
         m_positions.push_back(pos);
@@ -59,6 +60,7 @@ void Camera::addSpeed(const glm::vec3& speed)
         return;
     }
     m_speed += speed;
+    m_speed.z = 0;
 
     m_autoMove = false;
 }
@@ -79,7 +81,7 @@ void Camera::update()
         m_speed *= m_inertiaFactor;
     }
 
-    m_target = m_position + m_direction;
+    m_target = m_position + m_radius*m_direction;
     m_viewMatrix = glm::lookAt(m_position, m_target, m_up);
 }
 
@@ -87,7 +89,6 @@ bool Camera::__speedAboveMax() const
 {
     return (glm::length(m_speed) > m_speedMax);
 }
-
 
 void Camera::__resetSpeed() {
     m_speed = glm::vec3(0.0f);
