@@ -363,7 +363,7 @@ void Render::__makeShortCuts()
 
 void Render::applyPerspectiveProjection()
 {        
-    m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), -1.0f, -1000.0f);
+    m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 100.0f, 2000.0f);
     __updateProjectionViewMatrix();
 }
 
