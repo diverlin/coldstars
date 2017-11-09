@@ -716,7 +716,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     render.applyPerspectiveProjection();
 
     if (m_player->show().backgroundFbo()) {
-        render.fboBackGround().activate(render.size().x, render.size().y);
+        //render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
     if (m_player->show().nebulas()) {
@@ -724,11 +724,10 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
         m_distantNebulas->draw(render);
     }
     if (m_player->show().stars()) {
-        m_distantStars->update(render.camera()->position());
         m_distantStars->draw(render);
     }
     if (m_player->show().backgroundFbo()) {
-        render.fboBackGround().deactivate();
+        //render.fboBackGround().deactivate();
     }
 }
 
@@ -749,7 +748,8 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
 
     // projections
-    render.applyOrthogonalProjection();
+    render.applyPerspectiveProjection();
+    //render.applyOrthogonalProjection();
 
     for(Star* star: m_stars) {
         star->update();
@@ -864,12 +864,12 @@ void StarSystem::__render(jeti::Render& render)
     render.clearColorAndDepthBuffers();
 
     __renderBackground(render);
-    __renderStarPostEffect(render);
+//    __renderStarPostEffect(render);
     __renderSpaceObjects(render);
-    __renderSpaceObjectsMeta(render);
-    __renderTexts(render);
-    __renderExperiment(render);
-    __renderHUD(render);
+//    __renderSpaceObjectsMeta(render);
+//    __renderTexts(render);
+//    __renderExperiment(render);
+//    __renderHUD(render);
 }
 
 Base*

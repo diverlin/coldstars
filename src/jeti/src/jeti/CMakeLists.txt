@@ -1,8 +1,5 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(PROJECT ${PROJECT_JETI})
-project (${PROJECT})
-
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../macros/cmake")
 
 file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
@@ -36,20 +33,18 @@ include_directories(dependencies/freetype2/src)
 
 SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=gnu++11")
 
+list(APPEND CMAKE_PREFIX_PATH "/media/yeti/ext_workspace/dist_gcc54/SFML-2.4.2")
 find_package(SFML COMPONENTS system graphics window REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 message("${SFML_INCLUDE_DIR}")
 message("${SFML_LIBRARIES}")
 
+set(CETI_ROOT )
 set(include_dirs
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/..
     ${CMAKE_SOURCE_DIR}/src/ceti/src # hack
     )
-
-if (NOT COMPILE_FLAGS)
-    set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
-endif ()
 
 add_library(${PROJECT} SHARED
     ${${PROJECT}_SRC}
