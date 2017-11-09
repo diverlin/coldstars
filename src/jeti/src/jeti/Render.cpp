@@ -534,16 +534,16 @@ void Render::draw(const Mesh& mesh, const control::Material& material, const glm
 //    }
 }
 
-void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb, const glm::mat4& ModelMatrix) const
+void Render::drawMeshLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
-        drawMesh(mesh, textureOb, ModelMatrix);
+        drawMesh(mesh, materialc, ModelMatrix);
         return;
     }
 
     float ambient_factor = 0.25;
     const glm::vec3& eye_pos = m_camera->position();
-    const model::Material& material = *textureOb.model();
+    const model::Material& material = *materialc.model();
  	 	
     __useProgram(m_programLight);
     {
@@ -568,7 +568,7 @@ void Render::drawMeshLight(const Mesh& mesh, const control::Material& textureOb,
         glUniform1f(glGetUniformLocation(m_programLight,  "u_Material.shininess"), material.shininess);
 
 	    glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.model()->texture);
+        glBindTexture(GL_TEXTURE_2D, materialc.model()->texture);
         glUniform1i(m_programLightLocation_uTexture, 0);
 	                        
         __drawMesh(mesh);

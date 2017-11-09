@@ -28,6 +28,7 @@ public:
     enum class States { NONE, QUAD, QUAD_ADDITIVE, NORMAL, PARTICLES, LINES };
 
     Mesh();
+    Mesh(const std::string&);
     Mesh(ceti::descriptor::Mesh*);
     ~Mesh();
 
