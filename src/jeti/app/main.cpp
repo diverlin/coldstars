@@ -1,23 +1,17 @@
+#include "openglwindow.hpp"
+
+#include <QtGui/QGuiApplication>
+
 #include <jeti/Render.hpp>
 #include <jeti/Camera.hpp>
 #include <jeti/Mesh.hpp>
 
 #include <glm/gtx/transform.hpp>
 
-#include "openglwindow.hpp"
-
-#include <QtGui/QGuiApplication>
-//#include <QtGui/QMatrix4x4>
-//#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QScreen>
-
-
-//#include <QtCore/qmath.h>
-
-class TriangleWindow : public OpenGLWindow
+class DemoWindow : public OpenGLWindow
 {
 public:
-    TriangleWindow();
+    DemoWindow();
 
     void initialize() override;
     void render() override;
@@ -30,7 +24,7 @@ private:
     int m_frame = 0;
 };
 
-TriangleWindow::TriangleWindow()
+DemoWindow::DemoWindow()
     : m_frame(0)
 {
     m_render = new jeti::Render;
@@ -45,7 +39,7 @@ int main(int argc, char **argv)
     QSurfaceFormat format;
     format.setSamples(16);
 
-    TriangleWindow window;
+    DemoWindow window;
     window.setFormat(format);
     window.resize(640, 480);
     window.show();
@@ -53,16 +47,13 @@ int main(int argc, char **argv)
     return app.exec();
 }
 
-void TriangleWindow::initialize()
+void DemoWindow::initialize()
 {
     m_render->init(m_camera, 640, 480);
 }
 
-void TriangleWindow::render()
+void DemoWindow::render()
 {
-//    const qreal retinaScale = devicePixelRatio();
-//    glViewport(0, 0, width() * retinaScale, height() * retinaScale);
-
     m_render->clearColorAndDepthBuffers();
     m_render->applyOrthogonalProjection();
     glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.f, 200.f, 1.f));
