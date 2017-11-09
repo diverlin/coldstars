@@ -1,38 +1,45 @@
-# check loc
-if(NOT COLDSTARS_DEPLOY_DIR)
-    message(FATAL_ERROR "cmake var COLDSTARS_DEPLOY_DIR=${COLDSTARS_DEPLOY_DIR} is not set, but needed")
-endif()
 
-# default search dirs
-set(${_project}_HEADER_SEARCH_DIRS
-    "${COLDSTARS_DEPLOY_DIR}"
-    "${COLDSTARS_DEPLOY_DIR}/include"
-    )
+if(TARGET ${_library})
+    set(${_project}_LIBRARIES ${_library})
 
-# default search libs
-set(${_project}_LIBRARY_SEARCH_DIRS
-    "${COLDSTARS_DEPLOY_DIR}"
-    "${COLDSTARS_DEPLOY_DIR}/lib"
-    )
+else()
+    # check loc
+    if(NOT COLDSTARS_DEPLOY_DIR)
+        message(FATAL_ERROR "cmake var COLDSTARS_DEPLOY_DIR=${COLDSTARS_DEPLOY_DIR} is not set, but needed")
+    endif()
 
-# locate header
-find_path(${_project}_INCLUDE_DIR "${_header}"
-    PATHS ${${_project}_HEADER_SEARCH_DIRS})
+    # default search dirs
+    set(${_project}_HEADER_SEARCH_DIRS
+        "${COLDSTARS_DEPLOY_DIR}"
+        "${COLDSTARS_DEPLOY_DIR}/include"
+        )
 
-# locate library
-find_library(${_project}_LIBRARY NAMES "${_library}"
-    PATHS ${${_project}_LIBRARY_SEARCH_DIRS}
-    )
+    # default search libs
+    set(${_project}_LIBRARY_SEARCH_DIRS
+        "${COLDSTARS_DEPLOY_DIR}"
+        "${COLDSTARS_DEPLOY_DIR}/lib"
+        )
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(${_project} DEFAULT_MSG
-    ${_project}_INCLUDE_DIR
-    ${_project}_LIBRARY
-    )
+    # locate header
+    find_path(${_project}_INCLUDE_DIR "${_header}"
+        PATHS ${${_project}_HEADER_SEARCH_DIRS})
 
-if(${_project}_FOUND)
-    set(${_project}_INCLUDE_DIRS "${${_project}_INCLUDE_DIR}")
-    set(${_project}_LIBRARIES "${${_project}_LIBRARY}")
-    message(STATUS "${_project}_LIBRARIES = ${${_project}_LIBRARIES}")
-    message(STATUS "${_project}_INCLUDE_DIRS = ${${_project}_INCLUDE_DIRS}")
-endif()
+    # locate library
+    find_library(${_project}_LIBRARY NAMES "${_library}"
+        PATHS ${${_project}_LIBRARY_SEARCH_DIRS}
+        )
+
+    include(FindPackageHandleStandardArgs)
+    find_package_handle_standard_args(${_project} DEFAULT_MSG
+        ${_project}_INCLUDE_DIR
+        ${_project}_LIBRARY
+        )
+
+    if(${_project}_FOUND)
+        set(${_project}_INCLUDE_DIRS "${${_project}_INCLUDE_DIR}")
+        set(${_project}_LIBRARIES "${${_project}_LIBRARY}")
+        message(STATUS "${_project}_LIBRARIES = ${${_project}_LIBRARIES}")
+        message(STATUS "${_project}_INCLUDE_DIRS = ${${_project}_INCLUDE_DIRS}")
+    endif()
+
+endif(NOT TARGET ${_library})

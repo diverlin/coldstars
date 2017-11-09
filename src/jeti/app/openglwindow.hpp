@@ -3,6 +3,7 @@
 #include <QtGui/QWindow>
 #include <QtGui/QOpenGLFunctions>
 
+
 class QPainter;
 class QOpenGLContext;
 class QOpenGLPaintDevice;
@@ -19,10 +20,7 @@ public:
 
     virtual void initialize();
 
-    void setAnimating(bool animating);
-
 public slots:
-    void renderLater();
     void renderNow();
 
 protected:
@@ -31,8 +29,6 @@ protected:
     void exposeEvent(QExposeEvent *event) override;
 
 private:
-    bool m_animating;
-
-    QOpenGLContext *m_context;
-    QOpenGLPaintDevice *m_device;
+    QOpenGLContext* m_context = nullptr;
+    QOpenGLPaintDevice* m_device = nullptr;
 };

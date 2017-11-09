@@ -1,5 +1,5 @@
 #!/bin/sh
-./_b_meti.sh
-./_b_ceti.sh
-./_b_jeti.sh
+./b_meti.sh
+./b_ceti.sh
+./b_jeti.sh
 

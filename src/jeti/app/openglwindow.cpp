@@ -8,9 +8,6 @@
 
 OpenGLWindow::OpenGLWindow(QWindow *parent)
     : QWindow(parent)
-    , m_animating(false)
-    , m_context(0)
-    , m_device(0)
 {
     setSurfaceType(QWindow::OpenGLSurface);
 }
@@ -18,6 +15,7 @@ OpenGLWindow::OpenGLWindow(QWindow *parent)
 OpenGLWindow::~OpenGLWindow()
 {
     delete m_device;
+    delete m_context;
 }
 void OpenGLWindow::render(QPainter *painter)
 {
@@ -30,8 +28,9 @@ void OpenGLWindow::initialize()
 
 void OpenGLWindow::render()
 {
-    if (!m_device)
+    if (!m_device) {
         m_device = new QOpenGLPaintDevice;
+    }
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -39,11 +38,6 @@ void OpenGLWindow::render()
 
     QPainter painter(m_device);
     render(&painter);
-}
-
-void OpenGLWindow::renderLater()
-{
-    requestUpdate();
 }
 
 bool OpenGLWindow::event(QEvent *event)
@@ -91,14 +85,6 @@ void OpenGLWindow::renderNow()
 
     m_context->swapBuffers(this);
 
-    if (m_animating)
-        renderLater();
+    requestUpdate();
 }
 
-void OpenGLWindow::setAnimating(bool animating)
-{
-    m_animating = animating;
-
-    if (animating)
-        renderLater();
-}
