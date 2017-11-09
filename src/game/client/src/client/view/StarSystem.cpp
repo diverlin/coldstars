@@ -712,8 +712,8 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     }
 
     // projection
-    render.applyOrthogonalProjection(0.2f);
-    //render.applyPerspectiveProjection();
+    //render.applyOrthogonalProjection(0.2f);
+    render.applyPerspectiveProjection();
 
     if (m_player->show().backgroundFbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
@@ -750,7 +750,6 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
 
     // projections
     render.applyOrthogonalProjection();
-    //render.applyPerspectiveProjection();
 
     for(Star* star: m_stars) {
         star->update();

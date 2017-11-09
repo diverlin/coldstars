@@ -37,17 +37,17 @@ public:
         :
           m_zFrom(znear)
         , m_zTo(zfar)
-
     {
-        int sign = -1;
-        m_position = glm::vec3(0.0f, 0.0f, sign*m_zFrom);
-        m_direction = glm::normalize(glm::vec3(0.0f, 0.0f, sign*(m_zTo-m_zFrom)));
+        //m_position = glm::vec3(0.0f, 0.0f, -500.0f);
+        m_direction = -meti::OZ;
         m_radius = std::fabs(m_zTo-m_zFrom);
     }
     ~Camera() = default;
 
     void setTargetPosition(const glm::vec3& position);
     void setPosition(const glm::vec3& position) { m_position = position; }
+    void setPositionZ(float z) { m_position.z = z; }
+
     const glm::vec3& target() const { return m_target; }
     const glm::vec3& position() const { return m_position; }
     const glm::vec3& up() const { return m_up; }

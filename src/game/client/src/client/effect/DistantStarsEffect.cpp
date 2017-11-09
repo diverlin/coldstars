@@ -50,8 +50,6 @@ void DistantStars::update(const glm::vec3& offset) {
 }
 
 void DistantStars::draw(const jeti::Render& render) const {
-//    render.disable_DEPTH_TEST();
-//    render.enable_ADDITIVE_BLEND();
     for (auto layer: m_layers) {
         layer->draw(render);
     }
@@ -84,7 +82,8 @@ DistantStarsLayer::~DistantStarsLayer()
 void DistantStarsLayer::update(const glm::vec3& camera_pos) {
     if (m_offset != camera_pos) {
         m_offset = camera_pos;
-        m_Mm = glm::translate(m_offset/m_paralaxFactor);
+        //m_Mm = glm::translate(m_offset/m_paralaxFactor);
+        m_Mm = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
     }
 }
 
@@ -108,7 +107,8 @@ DistantStars* genDistantStars(int color_id)
         std::vector<float> sizes;
 
         for (int i=0; i<distStar_num; i++) {
-            float z = -meti::rand::gen_int(799, 999);
+            //float z = -meti::rand::gen_int(799, 999);
+            float z = meti::rand::gen_int(-200, 200);
             glm::vec3 position = meti::rand::gen_vec3xy(0, 3000);
 
             float min = 0.5f;
@@ -132,7 +132,7 @@ DistantStars* genDistantStars(int color_id)
             }
             float size = meti::rand::gen_float(5.0, 10.0);
             if (meti::rand::gen_int(15) == 1) {
-                size = meti::rand::gen_float(13.0, 16.0f);
+                size = meti::rand::gen_float(13.0, 16.0f)*1000;
                 color *= 1.2;
             }
 
@@ -141,7 +141,7 @@ DistantStars* genDistantStars(int color_id)
             sizes.push_back(size);
         }
 
-        float paralaxFactor = meti::rand::gen_float(1.005, 1.02);
+        float paralaxFactor = meti::rand::gen_float(1.005f, 1.02f);
         DistantStarsLayer* layer = new DistantStarsLayer(positions, colors, sizes, paralaxFactor);
         layer->setMaterial(material);
 
