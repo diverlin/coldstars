@@ -63,8 +63,11 @@ public:
     Render();
     ~Render();
 
-    float zNear() const { return ZNEAR; }
-    float zFar() const { return ZFAR; }
+    void setZNear(float zNear) { m_zNear = zNear; }
+    void setZFar(float zFar) { m_zFar = zFar; }
+
+    float zNear() const { return m_zNear; }
+    float zFar() const { return m_zFar; }
 
     int fps() const { return m_fps; }
 
@@ -151,6 +154,9 @@ public:
 private:
     projection m_activeProjection = projection::NONE;
     mutable Mesh::States m_activeStates = Mesh::States::NONE;
+
+    float m_zNear = ZNEAR;
+    float m_zFar = ZFAR;
 
     float m_time = 0.0f;
 

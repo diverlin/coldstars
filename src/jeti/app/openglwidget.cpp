@@ -36,18 +36,15 @@ void OpenGLWidget::resizeGL(int w, int h)
 {
     m_render->setSize(w, h);
     m_render->applyOrthogonalProjection();
-
-    setFixedSize(w, h);
 }
 
 void OpenGLWidget::paintGL()
 {
-    setFixedSize(800, 600);
     assert(isValid());
-    qDebug()<<"gl size="<<size();
     m_render->clearColorAndDepthBuffers();
-    m_render->applyOrthogonalProjection();
-    glm::mat4 scaleMatrix = glm::scale(glm::vec3(500.f, 500.f, 1.f));
+//    m_render->applyOrthogonalProjection();
+    m_render->applyPerspectiveProjection();
+    glm::mat4 scaleMatrix = glm::scale(glm::vec3(1000.f, 1000.f, 1000.f));
     m_render->drawCollisionRadius(scaleMatrix);
 
     m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);

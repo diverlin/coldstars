@@ -82,7 +82,7 @@ void Camera::update()
     }
 
     m_target = m_position + m_radius*m_direction;
-    std::cout<<"pos="<<ceti::to_string(m_position)<<" target="<<ceti::to_string(m_target)<<" r="<<m_radius<<std::endl;
+    //std::cout<<"pos="<<ceti::to_string(m_position)<<" target="<<ceti::to_string(m_target)<<" r="<<m_radius<<std::endl;
     m_viewMatrix = glm::lookAt(m_position, m_target, m_up);
 }
 
