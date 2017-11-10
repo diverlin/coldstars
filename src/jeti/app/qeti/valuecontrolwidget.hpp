@@ -8,12 +8,12 @@ class QSpinBox;
 
 namespace qeti {
 
-class ControlWidget: public QWidget
+class ValueControlWidget: public QWidget
 {
     Q_OBJECT
 public:
-    ControlWidget(int min, int max, QWidget* parent = nullptr);
-    ~ControlWidget()=default;
+    ValueControlWidget(int min, int max, QWidget* parent = nullptr);
+    ~ValueControlWidget()=default;
 
     int value() const { return m_value; }
 

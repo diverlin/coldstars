@@ -1,8 +1,8 @@
 #include "mainwindow.hpp"
 #include "openglwidget.hpp"
 
-#include "formwidget.hpp"
-#include "controlwidget.hpp"
+#include "qeti/formwidget.hpp"
+#include "qeti/valuecontrolwidget.hpp"
 
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QFormLayout>
@@ -76,27 +76,27 @@ MainWindow::__create_mainLayout() {
     QHBoxLayout* layout = new QHBoxLayout(this);
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
-
     return layout;
 }
 
 QWidget*
 MainWindow::__create_projectionControlWidget() {
+    // create
     qeti::FormWidget* form = new qeti::FormWidget();
-
-    m_zNear = new qeti::ControlWidget(-m_max, m_max);
-    m_zFar = new qeti::ControlWidget(-m_max, m_max);
+    m_zNearControlWIdget = new qeti::ValueControlWidget(-m_max, m_max);
+    m_zFarControlWidget = new qeti::ValueControlWidget(-m_max, m_max);
 
     // connect
-    connect(m_zNear, &qeti::ControlWidget::valueChanged, this, [this](int value) {
+    connect(m_zNearControlWIdget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
         __setZNear(value);
     });
-    connect(m_zFar, &qeti::ControlWidget::valueChanged, this, [this](int value) {
+    connect(m_zFarControlWidget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
         __setZFar(value);
     });
 
-    form->layout()->addRow("z near:", m_zNear);
-    form->layout()->addRow("z far:", m_zFar);
+    // mount
+    form->layout()->addRow("z near:", m_zNearControlWIdget);
+    form->layout()->addRow("z far:", m_zFarControlWidget);
 
     return form;
 }
@@ -104,20 +104,21 @@ MainWindow::__create_projectionControlWidget() {
 QWidget*
 MainWindow::__create_cameraControlWidget()
 {
-    qeti::FormWidget* form = new qeti::FormWidget();
+    // create
+    //qeti::FormWidget* form = new qeti::FormWidget();
 
     //QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
 }
 
 void MainWindow::__setZNear(int value)
 {
-    m_zNear->setValue(value);
+    m_zNearControlWIdget->setValue(value);
     m_glWidget->render()->setZNear(value);
 }
 
 void MainWindow::__setZFar(int value)
 {
-    m_zFar->setValue(value);
+    m_zFarControlWidget->setValue(value);
     m_glWidget->render()->setZFar(value);
 }
 

@@ -6,7 +6,7 @@
 class OpenGLWidget;
 
 namespace qeti {
-class ControlWidget;
+class ValueControlWidget;
 } // naemspace qeti
 
 class QBoxLayout;
@@ -38,8 +38,12 @@ private:
 //    QLineEdit* m_zFarLineEdit = nullptr;
 //    QSlider* m_zNearSlider = nullptr;
 //    QSlider* m_zFarSlider = nullptr;
-    qeti::ControlWidget* m_zNear = nullptr;
-    qeti::ControlWidget* m_zFar = nullptr;
+    qeti::ValueControlWidget* m_zNearControlWIdget = nullptr;
+    qeti::ValueControlWidget* m_zFarControlWidget = nullptr;
+
+    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
+    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
+    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
 
     QBoxLayout* __create_mainLayout();
     OpenGLWidget* __create_glWidget() const;
