@@ -1,5 +1,6 @@
 #include "valuecontrolwidget.hpp"
 
+#include <QLabel>
 #include <QSlider>
 #include <QLineEdit>
 #include <QIntValidator>
@@ -7,7 +8,11 @@
 
 namespace qeti {
 
-ValueControlWidget::ValueControlWidget(int min, int max, QWidget* parent):QWidget(parent) {
+ValueControlWidget::ValueControlWidget(int min, int max, const QString& label, QWidget* parent)
+    :
+      QWidget(parent)
+{
+    // create
     m_lineEdit = new QLineEdit;
     m_lineEdit->setValidator(new QIntValidator(min, max, this));
     m_lineEdit->setText(QString::number(m_value));
@@ -16,6 +21,7 @@ ValueControlWidget::ValueControlWidget(int min, int max, QWidget* parent):QWidge
     m_slider->setRange(min, max);
     m_slider->setValue(m_value);
 
+    // connect
     connect(m_slider, &QSlider::valueChanged, this, [this](int value) {
         __slot_setValue(value);
     });
@@ -23,7 +29,11 @@ ValueControlWidget::ValueControlWidget(int min, int max, QWidget* parent):QWidge
         __slot_setValue(text.toInt());
     });
 
+    // mount
     QHBoxLayout* layout = new QHBoxLayout();
+    if (!label.isEmpty()) {
+        layout->addWidget(new QLabel(label));
+    }
     layout->addWidget(m_lineEdit);
     layout->addWidget(m_slider);
     setLayout(layout);

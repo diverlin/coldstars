@@ -11,7 +11,7 @@ class PointControlWidget : public QWidget
 {
     Q_OBJECT
 public:
-    PointControlWidget(int min, int max, QWidget* parent = nullptr);
+    PointControlWidget(int min, int max, const QString& label="", QWidget* parent = nullptr);
     ~PointControlWidget()=default;
 
     void setValue(const QVector3D&);

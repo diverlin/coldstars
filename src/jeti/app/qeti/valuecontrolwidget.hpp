@@ -12,7 +12,7 @@ class ValueControlWidget: public QWidget
 {
     Q_OBJECT
 public:
-    ValueControlWidget(int min, int max, QWidget* parent = nullptr);
+    ValueControlWidget(int min, int max, const QString& label="", QWidget* parent = nullptr);
     ~ValueControlWidget()=default;
 
     int value() const { return m_value; }

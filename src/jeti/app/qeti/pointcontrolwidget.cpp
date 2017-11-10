@@ -6,14 +6,14 @@
 
 namespace qeti {
 
-PointControlWidget::PointControlWidget(int min, int max, QWidget* parent)
+PointControlWidget::PointControlWidget(int min, int max, const QString& label, QWidget* parent)
     :
       QWidget(parent)
 {
     // create
-    m_controlXWidget = new qeti::ValueControlWidget(min, max, this);
-    m_controlYWidget = new qeti::ValueControlWidget(min, max, this);
-    m_controlZWidget = new qeti::ValueControlWidget(min, max, this);
+    m_controlXWidget = new qeti::ValueControlWidget(min, max, label+"x", this);
+    m_controlYWidget = new qeti::ValueControlWidget(min, max, label+"y", this);
+    m_controlZWidget = new qeti::ValueControlWidget(min, max, label+"z", this);
 
     // connect
     connect(m_controlXWidget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {

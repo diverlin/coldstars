@@ -47,20 +47,40 @@ glm::vec3 to_glmvec3(const QVector3D& v) {
 
 MainWindow::MainWindow()
 {
+    // create
     QBoxLayout* mainLayout = __create_mainLayout();
     m_glWidget = __create_glWidget();
+    m_cameraRadiusControlWidget = new qeti::ValueControlWidget(0, m_max);
+    connect(m_cameraRadiusControlWidget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
+        __setCameraRadius(value);
+    });
 
-    mainLayout->addWidget(m_glWidget);
-    mainLayout->addWidget(__create_projectionControlWidget());
-    mainLayout->addWidget(__create_cameraControlWidget());
+    // mount
+    QWidget* widgetLeft = new QWidget;
+    widgetLeft->setLayout(new QVBoxLayout);
 
+    QWidget* widgetRight = new QWidget;
+    QFormLayout* formLayout = new QFormLayout;
+    widgetRight->setLayout(formLayout);
+
+    widgetLeft->layout()->addWidget(m_glWidget);
+    formLayout->addRow("proj:", __create_projectionControlWidget());
+    formLayout->addRow("cam pos:", __create_cameraControlWidget());
+    formLayout->addRow("cam rad:", m_cameraRadiusControlWidget);
+    mainLayout->addWidget(widgetLeft);
+    mainLayout->addWidget(widgetRight);
+
+    // read settings and init ui
     __setZNear(__readKey(KEY_PROJECTION_ZNEAR));
     __setZFar(__readKey(KEY_PROJECTION_ZFAR));
+
     QVector3D v;
     v.setX(__readKey(KEY_CAMERA_POSX));
     v.setY(__readKey(KEY_CAMERA_POSY));
     v.setZ(__readKey(KEY_CAMERA_POSZ));
     __setCameraPosition(v);
+
+    __setCameraRadius(__readKey(KEY_CAMERA_RADIUS));
 }
 
 MainWindow::~MainWindow()
@@ -116,8 +136,7 @@ QWidget*
 MainWindow::__create_cameraControlWidget()
 {
     // create
-    qeti::FormWidget* form = new qeti::FormWidget();
-    m_cameraPositionWidget = new qeti::PointControlWidget(-m_max, m_max, this);
+    m_cameraPositionWidget = new qeti::PointControlWidget(-m_max, m_max, "", this);
 
     // connect
     connect(m_cameraPositionWidget, &qeti::PointControlWidget::valueChanged, this, [this](const QVector3D& value) {
@@ -125,9 +144,7 @@ MainWindow::__create_cameraControlWidget()
     });
 
     // mount
-    form->layout()->addRow("camera pos:", m_cameraPositionWidget);
-
-    return form;
+    return m_cameraPositionWidget;
 }
 
 void MainWindow::__setZNear(int value)
@@ -156,6 +173,12 @@ void MainWindow::__setCameraPosition(const QVector3D& value)
     __saveKey(KEY_CAMERA_POSX, v.x);
     __saveKey(KEY_CAMERA_POSY, v.y);
     __saveKey(KEY_CAMERA_POSZ, v.z);
+}
+
+void MainWindow::__setCameraRadius(int radius)
+{
+    m_glWidget->render()->camera()->setRadius(radius);
+    __saveKey(KEY_CAMERA_RADIUS, radius);
 }
 
 int MainWindow::__readKey(const QString& key)
