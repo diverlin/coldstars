@@ -3,14 +3,17 @@
 
 #include "qeti/formwidget.hpp"
 #include "qeti/valuecontrolwidget.hpp"
+#include "qeti/pointcontrolwidget.hpp"
 
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QFormLayout>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QSlider>
-#include <QtWidgets/QLabel>
+#include <QHBoxLayout>
+#include <QFormLayout>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QSlider>
+#include <QLabel>
 #include <QIntValidator>
+#include <QVector3D>
+#include <QSettings>
 
 #include <QDebug>
 
@@ -36,6 +39,10 @@ QWidget* widgets_to_column(const QList<QWidget*>& list) {
     return widget;
 }
 
+glm::vec3 to_glmvec3(const QVector3D& v) {
+    return glm::vec3(v.x(), v.y(), v.z());
+}
+
 } // namespace
 
 MainWindow::MainWindow()
@@ -43,13 +50,17 @@ MainWindow::MainWindow()
     QBoxLayout* mainLayout = __create_mainLayout();
     m_glWidget = __create_glWidget();
 
-///    mainLayout->addWidget(new QPushButton("push1"));
     mainLayout->addWidget(m_glWidget);
-//    mainLayout->addWidget(new QPushButton("push2"));
     mainLayout->addWidget(__create_projectionControlWidget());
+    mainLayout->addWidget(__create_cameraControlWidget());
 
-    __setZNear(300);
-    __setZFar(1000);
+    __setZNear(__readKey(KEY_PROJECTION_ZNEAR));
+    __setZFar(__readKey(KEY_PROJECTION_ZFAR));
+    QVector3D v;
+    v.setX(__readKey(KEY_CAMERA_POSX));
+    v.setY(__readKey(KEY_CAMERA_POSY));
+    v.setZ(__readKey(KEY_CAMERA_POSZ));
+    __setCameraPosition(v);
 }
 
 MainWindow::~MainWindow()
@@ -83,11 +94,11 @@ QWidget*
 MainWindow::__create_projectionControlWidget() {
     // create
     qeti::FormWidget* form = new qeti::FormWidget();
-    m_zNearControlWIdget = new qeti::ValueControlWidget(-m_max, m_max);
+    m_zNearControlWidget = new qeti::ValueControlWidget(-m_max, m_max);
     m_zFarControlWidget = new qeti::ValueControlWidget(-m_max, m_max);
 
     // connect
-    connect(m_zNearControlWIdget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
+    connect(m_zNearControlWidget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
         __setZNear(value);
     });
     connect(m_zFarControlWidget, &qeti::ValueControlWidget::valueChanged, this, [this](int value) {
@@ -95,7 +106,7 @@ MainWindow::__create_projectionControlWidget() {
     });
 
     // mount
-    form->layout()->addRow("z near:", m_zNearControlWIdget);
+    form->layout()->addRow("z near:", m_zNearControlWidget);
     form->layout()->addRow("z far:", m_zFarControlWidget);
 
     return form;
@@ -105,21 +116,56 @@ QWidget*
 MainWindow::__create_cameraControlWidget()
 {
     // create
-    //qeti::FormWidget* form = new qeti::FormWidget();
+    qeti::FormWidget* form = new qeti::FormWidget();
+    m_cameraPositionWidget = new qeti::PointControlWidget(-m_max, m_max, this);
 
-    //QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
+    // connect
+    connect(m_cameraPositionWidget, &qeti::PointControlWidget::valueChanged, this, [this](const QVector3D& value) {
+        __setCameraPosition(value);
+    });
+
+    // mount
+    form->layout()->addRow("camera pos:", m_cameraPositionWidget);
+
+    return form;
 }
 
 void MainWindow::__setZNear(int value)
 {
-    m_zNearControlWIdget->setValue(value);
+    m_zNearControlWidget->setValue(value);
     m_glWidget->render()->setZNear(value);
+
+    __saveKey(KEY_PROJECTION_ZNEAR, value);
 }
 
 void MainWindow::__setZFar(int value)
 {
     m_zFarControlWidget->setValue(value);
     m_glWidget->render()->setZFar(value);
+
+    __saveKey(KEY_PROJECTION_ZFAR, value);
 }
 
+void MainWindow::__setCameraPosition(const QVector3D& value)
+{
+    m_cameraPositionWidget->setValue(value);
+    glm::vec3 v(to_glmvec3(value));
+    qDebug()<<v.x<<" "<<v.y<<" "<<v.z;
+    m_glWidget->render()->camera()->setPosition(v);
 
+    __saveKey(KEY_CAMERA_POSX, v.x);
+    __saveKey(KEY_CAMERA_POSY, v.y);
+    __saveKey(KEY_CAMERA_POSZ, v.z);
+}
+
+int MainWindow::__readKey(const QString& key)
+{
+    QSettings settings;
+    return settings.value(key, 0).toInt();
+}
+
+void MainWindow::__saveKey(const QString& key, int val)
+{
+    QSettings settings;
+    settings.setValue(key, val);
+}

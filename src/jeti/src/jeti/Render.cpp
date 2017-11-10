@@ -41,7 +41,9 @@
 
 namespace jeti {
 
-Render::Render()
+Render::Render(Camera* camera)
+    :
+      m_camera(camera)
 {
     m_light.position    = glm::vec3(0.0f, 0.0f, -300.0f);
     m_light.ambient     = glm::vec4(0.2f);
@@ -164,6 +166,7 @@ void Render::decreaseScale()
 //}
 
 void Render::update() {
+    m_camera->update();
     __updateFps();
     m_time += 0.01f;
 //    float R = 500;
@@ -201,14 +204,12 @@ Render::toScreenCoord(const glm::vec3& world_coord, glm::vec3& screen_coord) con
 }
 
 
-void Render::init(Camera* camera, int w, int h)
+void Render::init(int w, int h)
 {
     if (m_initialized)
         return;
 
     m_lastTime = std::chrono::steady_clock::now();
-
-    m_camera = camera;
 
     glewInit();
 
@@ -363,9 +364,7 @@ void Render::__makeShortCuts()
 
 void Render::applyPerspectiveProjection()
 {        
-    //m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), 100.0f, 2000.0f);
     m_projectionMatrix = glm::perspective(90.0f, m_size.x/float(m_size.y), m_zNear, m_zFar);
-    m_camera->setPositionZ(-2000.0f);
     __updateProjectionViewMatrix();
 }
 
@@ -391,18 +390,18 @@ void Render::applyOrthogonalProjectionForHUD()
 
 void Render::__setOrthogonalProjection() {
     m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, m_zNear, m_zFar);
-    m_camera->setPositionZ(0.0f);
     __updateProjectionViewMatrix();
 }
 
-void Render::composeViewMatrix(const glm::mat4& Vm)
-{ 
-    m_viewMatrix = Vm;
-    __updateProjectionViewMatrix();
-} 
+//void Render::composeViewMatrix(const glm::mat4& Vm)
+//{
+//    m_viewMatrix = Vm;
+//    __updateProjectionViewMatrix();
+//}
                                 
 void Render::__updateProjectionViewMatrix()
 { 
+    m_viewMatrix = glm::lookAt(m_camera->position(), m_camera->target(), m_camera->up());
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
 }
 

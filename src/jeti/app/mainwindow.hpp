@@ -7,9 +7,16 @@ class OpenGLWidget;
 
 namespace qeti {
 class ValueControlWidget;
+class PointControlWidget;
 } // naemspace qeti
 
 class QBoxLayout;
+
+const QString KEY_CAMERA_POSX = "camera.x";
+const QString KEY_CAMERA_POSY = "camera.y";
+const QString KEY_CAMERA_POSZ = "camera.z";
+const QString KEY_PROJECTION_ZNEAR = "projection.znear";
+const QString KEY_PROJECTION_ZFAR = "projection.zfar";
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -18,41 +25,25 @@ public:
     ~MainWindow();
 
 private:
-    int m_max = 1000;
-//    int m_zNear = 0;
-//    int m_zFar = 0;
+    int m_max = 5000;
     OpenGLWidget* m_glWidget = nullptr;
-//    QLineEdit* m_modelPosX = nullptr;
-//    QLineEdit* m_modelPosY = nullptr;
-//    QLineEdit* m_modelPosZ = nullptr;
 
-//    QLineEdit* m_cameraPosX = nullptr;
-//    QLineEdit* m_cameraPosY = nullptr;
-//    QLineEdit* m_cameraPosZ = nullptr;
-
-//    QLineEdit* m_cameraDirX = nullptr;
-//    QLineEdit* m_cameraDirY = nullptr;
-//    QLineEdit* m_cameraDirZ = nullptr;
-
-//    QLineEdit* m_zNearLineEdit = nullptr;
-//    QLineEdit* m_zFarLineEdit = nullptr;
-//    QSlider* m_zNearSlider = nullptr;
-//    QSlider* m_zFarSlider = nullptr;
-    qeti::ValueControlWidget* m_zNearControlWIdget = nullptr;
+    qeti::ValueControlWidget* m_zNearControlWidget = nullptr;
     qeti::ValueControlWidget* m_zFarControlWidget = nullptr;
 
-    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
-    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
-    //qeti::ControlWidget* m_zNearControlWIdget = nullptr;
+    qeti::PointControlWidget* m_cameraPositionWidget = nullptr;
 
     QBoxLayout* __create_mainLayout();
     OpenGLWidget* __create_glWidget() const;
-    //QWidget* __create_modelControlWIdget();
     QWidget* __create_projectionControlWidget();
     QWidget* __create_cameraControlWidget();
 
     void __setZNear(int);
     void __setZFar(int);
+    void __setCameraPosition(const QVector3D&);
+
+    int __readKey(const QString&);
+    void __saveKey(const QString&, int);
 };
 
 
