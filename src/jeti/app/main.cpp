@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
     DemoWindow window;
     window.setFormat(format);
-    window.resize(640, 480);
+    window.resize(800, 600);
     window.show();
 
     return app.exec();
@@ -50,9 +50,9 @@ int main(int argc, char **argv)
 
 void DemoWindow::initialize()
 {
-    m_render->init(m_camera, 640, 480);
+    m_render->init(m_camera, 800, 600);
     m_mesh = new jeti::Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj");
-    m_material_model = new jeti::model::Material("data/test1.png");
+    m_material_model = new jeti::model::Material("data/obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg");
     m_material_control = new jeti::control::Material(m_material_model);
 }
 
@@ -60,7 +60,7 @@ void DemoWindow::render()
 {
     m_render->clearColorAndDepthBuffers();
     m_render->applyOrthogonalProjection();
-    glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.f, 200.f, 1.f));
+    glm::mat4 scaleMatrix = glm::scale(glm::vec3(500.f, 500.f, 1.f));
     m_render->drawCollisionRadius(scaleMatrix);
 
     m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);
