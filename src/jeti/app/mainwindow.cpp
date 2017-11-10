@@ -1,6 +1,9 @@
 #include "mainwindow.hpp"
 #include "openglwidget.hpp"
 
+#include "formwidget.hpp"
+#include "controlwidget.hpp"
+
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QPushButton>
@@ -79,39 +82,21 @@ MainWindow::__create_mainLayout() {
 
 QWidget*
 MainWindow::__create_projectionControlWidget() {
-    FormWidget* form = new FormWidget();
+    qeti::FormWidget* form = new qeti::FormWidget();
 
-    m_zNearLineEdit = new QLineEdit;
-    m_zNearLineEdit->setValidator(new QIntValidator(-m_max, m_max, this));
-    m_zFarLineEdit = new QLineEdit;
-    m_zFarLineEdit->setValidator(new QIntValidator(-m_max, m_max, this));
-    m_zNearSlider = new QSlider(Qt::Horizontal);
-    m_zNearSlider->setRange(-m_max, m_max);
-    m_zFarSlider = new QSlider(Qt::Horizontal);
-    m_zFarSlider->setRange(-m_max, m_max);
+    m_zNear = new qeti::ControlWidget(-m_max, m_max);
+    m_zFar = new qeti::ControlWidget(-m_max, m_max);
 
     // connect
-    // sliders to lineedits
-    connect(m_zNearSlider, &QSlider::valueChanged, this, [this]() {
-        __setZNear(m_zNearSlider->value());
+    connect(m_zNear, &qeti::ControlWidget::valueChanged, this, [this](int value) {
+        __setZNear(value);
     });
-    connect(m_zFarSlider, &QSlider::valueChanged, this, [this]() {
-        __setZFar(m_zFarSlider->value());
-    });
-    // lineedits to sliders
-    connect(m_zNearLineEdit, &QLineEdit::textChanged, this, [this]() {
-        __setZNear(m_zNearLineEdit->text().toInt());
-    });
-    connect(m_zFarLineEdit, &QLineEdit::textChanged, this, [this]() {
-        __setZFar(m_zFarLineEdit->text().toInt());
+    connect(m_zFar, &qeti::ControlWidget::valueChanged, this, [this](int value) {
+        __setZFar(value);
     });
 
-    // stick
-    QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
-    QWidget* zfar_row = widgets_to_row(QList<QWidget*>()<<m_zFarLineEdit<<m_zFarSlider);
-
-    form->layout()->addRow("z near:", znear_row);
-    form->layout()->addRow("z far:", zfar_row);
+    form->layout()->addRow("z near:", m_zNear);
+    form->layout()->addRow("z far:", m_zFar);
 
     return form;
 }
@@ -119,35 +104,21 @@ MainWindow::__create_projectionControlWidget() {
 QWidget*
 MainWindow::__create_cameraControlWidget()
 {
-    FormWidget* form = new FormWidget();
+    qeti::FormWidget* form = new qeti::FormWidget();
 
-    QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
+    //QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
 }
 
-void MainWindow::__setZNear(int val)
+void MainWindow::__setZNear(int value)
 {
-    m_zNear = val;
-    QString zNearText = QString::number(val);
-    if (m_zNearLineEdit->text() != zNearText) {
-        m_zNearLineEdit->setText(zNearText);
-    }
-    if (m_zNearSlider->value() != val) {
-        m_zNearSlider->setValue(val);
-    }
-    m_glWidget->render()->setZNear(val);
+    m_zNear->setValue(value);
+    m_glWidget->render()->setZNear(value);
 }
 
-void MainWindow::__setZFar(int val)
+void MainWindow::__setZFar(int value)
 {
-    m_zFar = val;
-    QString zFarText = QString::number(val);
-    if (m_zFarLineEdit->text() != zFarText) {
-        m_zFarLineEdit->setText(zFarText);
-    }
-    if (m_zFarSlider->value() != val) {
-        m_zFarSlider->setValue(val);
-    }
-    m_glWidget->render()->setZFar(val);
+    m_zFar->setValue(value);
+    m_glWidget->render()->setZFar(value);
 }
 
 

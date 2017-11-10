@@ -5,6 +5,8 @@
 #include <QIntValidator>
 #include <QHBoxLayout>
 
+namespace qeti {
+
 ControlWidget::ControlWidget(int min, int max, QWidget* parent):QWidget(parent) {
     m_lineEdit = new QLineEdit;
     m_lineEdit->setValidator(new QIntValidator(min, max, this));
@@ -31,6 +33,10 @@ void ControlWidget::__slot_setValue(int value) {
 
 void ControlWidget::setValue(int value)
 {
+    if (m_value == value) {
+        return;
+    }
+
     m_value = value;
     QString valueText = QString::number(value);
     if (m_lineEdit->text() != valueText) {
@@ -39,5 +45,8 @@ void ControlWidget::setValue(int value)
     if (m_slider->value() != value) {
         m_slider->setValue(value);
     }
+
+    emit valueChanged(value);
 }
 
+} // namespace qeti
