@@ -160,10 +160,9 @@ void Render::decreaseScale()
     }
 }
 
-//void Renderer::setLightPos(int x, int y) {
-//    m_light.position.x = float(x);
-//    m_light.position.y = float(y);
-//}
+void Render::setLightPosition(const glm::vec3& position) {
+    m_light.position = position;
+}
 
 void Render::update() {
     m_camera->update();

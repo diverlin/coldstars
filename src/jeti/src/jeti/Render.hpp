@@ -85,7 +85,7 @@ public:
 
     void increaseLightPos();
     void decreaseLightPos();
-//    void setLightPos(int, int);
+    void setLightPosition(const glm::vec3&);
 
     void activateFbo(int, int, int);
     void deactivateFbo(int);

@@ -9,6 +9,7 @@ OpenGLWidget::OpenGLWidget(QWidget* parent)
 {
     m_camera = new jeti::Camera(1000);
     m_render = new jeti::Render(m_camera);
+    m_modelScale = glm::vec3(500.0f);
 }
 
 OpenGLWidget::~OpenGLWidget()
@@ -42,9 +43,12 @@ void OpenGLWidget::paintGL()
 {
     assert(isValid());
     m_render->clearColorAndDepthBuffers();
-//    m_render->applyOrthogonalProjection();
-    m_render->applyPerspectiveProjection();
-    glm::mat4 scaleMatrix = glm::scale(glm::vec3(1000.f, 1000.f, 1000.f));
+    if (m_useOrtho)
+        m_render->applyOrthogonalProjection();
+    else {
+        m_render->applyPerspectiveProjection();
+    }
+    glm::mat4 scaleMatrix = glm::scale(m_modelScale);
     m_render->drawCollisionRadius(scaleMatrix);
 
     m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);

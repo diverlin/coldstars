@@ -64,7 +64,6 @@ void PointControlWidget::__set(int x, int y, int z)
 
 void PointControlWidget::__slot_setX(int x)
 {
-    qDebug()<<"__slot_setX(int x)";
     if (m_position.x() == x) {
         return;
     }

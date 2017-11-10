@@ -14,6 +14,8 @@ public:
     OpenGLWidget(QWidget* parent = nullptr);
     ~OpenGLWidget();
 
+    void setUseOrtho(bool use_ortho) { m_useOrtho = use_ortho; }
+    void setModelScale(const glm::vec3& scale) { m_modelScale = scale; }
     jeti::Render* render() const { return m_render; }
 
 protected:
@@ -25,6 +27,9 @@ protected:
     QSize sizeHint() const override { return QSize(500, 500); }
 
 private:
+    bool m_useOrtho = false;
+
+    glm::vec3 m_modelScale;
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     jeti::Mesh* m_mesh = nullptr;
