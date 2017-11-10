@@ -33,10 +33,11 @@ class Camera : public NonCopyable
     const float INERTIA_RATE = 0.95f;
 
 public:
-    Camera(float znear, float zfar)
+    Camera(float radius)
+        :
+          m_radius(radius)
     {
         m_direction = -meti::OZ;
-        m_radius = 4000.0f; //std::fabs(m_zTo-m_zFrom);
     }
     ~Camera() = default;
 
@@ -50,7 +51,6 @@ public:
     const glm::vec3& speed() const { return m_speed; }
 
     float radius() const { return m_radius; }
-    const glm::mat4& viewMatrix() const { return m_viewMatrix; }
 
     void addSpeed(const glm::vec2&);
     void addSpeed(const glm::vec3&);
@@ -73,8 +73,6 @@ private:
     float m_inertiaFactor = INERTIA_RATE;
     glm::vec3 m_speed;
     float m_speedMax = MOVE_SPEED_MAX;
-
-    glm::mat4 m_viewMatrix;
 
     bool __speedAboveMax() const;
     void __resetSpeed();

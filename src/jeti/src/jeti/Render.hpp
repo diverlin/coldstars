@@ -60,7 +60,7 @@ class Render : public NonCopyable
     enum class projection { NONE, PERSPECTIVE, ORTHOGONAL, ORTHOGONAL_PARALLAX };
 
 public:
-    Render();
+    Render(Camera*);
     ~Render();
 
     void setZNear(float zNear) { m_zNear = zNear; }
@@ -90,7 +90,7 @@ public:
     void activateFbo(int, int, int);
     void deactivateFbo(int);
 
-    void init(Camera*, int, int);
+    void init(int, int);
 
     void applyPerspectiveProjection();
     void applyOrthogonalProjection();
@@ -105,8 +105,6 @@ public:
 
     void clearColorAndDepthBuffers() const
     { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
-
-    void composeViewMatrix(const glm::mat4&);
 
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
 

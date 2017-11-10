@@ -54,3 +54,7 @@ target_link_libraries(${PROJECT}
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../src/jeti/shaders"
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
     )
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../data"
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+    )

@@ -7,8 +7,8 @@
 OpenGLWidget::OpenGLWidget(QWidget* parent)
     : QOpenGLWidget(parent)
 {
-    m_render = new jeti::Render;
-    m_camera = new jeti::Camera(m_render->zNear(), m_render->zFar());
+    m_camera = new jeti::Camera(1000);
+    m_render = new jeti::Render(m_camera);
 }
 
 OpenGLWidget::~OpenGLWidget()
@@ -24,7 +24,7 @@ void OpenGLWidget::initializeGL()
 {
     int w = 800;
     int h = 600;
-    m_render->init(m_camera, w, h);
+    m_render->init(w, h);
     m_mesh = new jeti::Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj");
     m_material_model = new jeti::model::Material("data/obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg");
     m_material_control = new jeti::control::Material(m_material_model);
@@ -49,5 +49,6 @@ void OpenGLWidget::paintGL()
 
     m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);
 
+    m_render->update();
     update();
 }
