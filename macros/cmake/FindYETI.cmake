@@ -42,4 +42,4 @@ else()
         message(STATUS "${_project}_INCLUDE_DIRS = ${${_project}_INCLUDE_DIRS}")
     endif()
 
-endif(NOT TARGET ${_library})
+endif(TARGET ${_library})
