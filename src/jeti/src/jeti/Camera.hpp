@@ -41,6 +41,7 @@ public:
     }
     ~Camera() = default;
 
+    void setRadius(float radius) { m_radius = radius; }
     void setTargetPosition(const glm::vec3& position);
     void setPosition(const glm::vec3& position) { m_position = position; }
     void setPositionZ(float z) { m_position.z = z; update(); }
