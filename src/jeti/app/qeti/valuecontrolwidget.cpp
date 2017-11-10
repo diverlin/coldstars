@@ -1,4 +1,4 @@
-#include "controlwidget.hpp"
+#include "valuecontrolwidget.hpp"
 
 #include <QSlider>
 #include <QLineEdit>
@@ -7,7 +7,7 @@
 
 namespace qeti {
 
-ControlWidget::ControlWidget(int min, int max, QWidget* parent):QWidget(parent) {
+ValueControlWidget::ValueControlWidget(int min, int max, QWidget* parent):QWidget(parent) {
     m_lineEdit = new QLineEdit;
     m_lineEdit->setValidator(new QIntValidator(min, max, this));
 
@@ -27,11 +27,11 @@ ControlWidget::ControlWidget(int min, int max, QWidget* parent):QWidget(parent) 
     setLayout(layout);
 }
 
-void ControlWidget::__slot_setValue(int value) {
+void ValueControlWidget::__slot_setValue(int value) {
     setValue(value);
 }
 
-void ControlWidget::setValue(int value)
+void ValueControlWidget::setValue(int value)
 {
     if (m_value == value) {
         return;
