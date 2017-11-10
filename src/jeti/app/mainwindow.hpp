@@ -1,12 +1,31 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-
-class QBoxLayout;
+#include <QFormLayout>
 
 class OpenGLWidget;
 class QLineEdit;
 class QSlider;
+
+class QFormLayout;
+class QBoxLayout;
+
+class FormWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    FormWidget(QWidget* parent = nullptr):QWidget(parent){
+        m_layout = new QFormLayout(this);
+        setLayout(m_layout);
+    }
+    ~FormWidget()=default;
+
+    QFormLayout* layout() const { return m_layout; }
+
+private:
+    QFormLayout* m_layout = nullptr;
+};
+
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -38,8 +57,9 @@ private:
 
     QBoxLayout* __create_mainLayout();
     OpenGLWidget* __create_glWidget() const;
-    QWidget* __create_modelControlWIdget();
+    //QWidget* __create_modelControlWIdget();
     QWidget* __create_projectionControlWidget();
+    QWidget* __create_cameraControlWidget();
 
     void __setZNear(int);
     void __setZFar(int);

@@ -11,6 +11,8 @@
 
 #include <QDebug>
 
+
+
 namespace {
 QWidget* widgets_to_row(const QList<QWidget*>& list) {
     QWidget* widget = new QWidget();
@@ -30,6 +32,7 @@ QWidget* widgets_to_column(const QList<QWidget*>& list) {
     }
     return widget;
 }
+
 } // namespace
 
 MainWindow::MainWindow()
@@ -76,9 +79,7 @@ MainWindow::__create_mainLayout() {
 
 QWidget*
 MainWindow::__create_projectionControlWidget() {
-    QWidget* frame = new QWidget();
-    QFormLayout* layout = new QFormLayout();
-    frame->setLayout(layout);
+    FormWidget* form = new FormWidget();
 
     m_zNearLineEdit = new QLineEdit;
     m_zNearLineEdit->setValidator(new QIntValidator(-m_max, m_max, this));
@@ -109,10 +110,18 @@ MainWindow::__create_projectionControlWidget() {
     QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
     QWidget* zfar_row = widgets_to_row(QList<QWidget*>()<<m_zFarLineEdit<<m_zFarSlider);
 
-    layout->addRow("z near:", znear_row);
-    layout->addRow("z far:", zfar_row);
+    form->layout()->addRow("z near:", znear_row);
+    form->layout()->addRow("z far:", zfar_row);
 
-    return frame;
+    return form;
+}
+
+QWidget*
+MainWindow::__create_cameraControlWidget()
+{
+    FormWidget* form = new FormWidget();
+
+    QWidget* znear_row = widgets_to_row(QList<QWidget*>()<<m_zNearLineEdit<<m_zNearSlider);
 }
 
 void MainWindow::__setZNear(int val)
