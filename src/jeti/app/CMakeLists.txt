@@ -11,6 +11,7 @@ set(CMAKE_AUTOMOC ON)
 # Find the QtWidgets library
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5OpenGL REQUIRED)
 
 # jeti
 find_package(METI REQUIRED)
@@ -23,21 +24,21 @@ include_directories(
     ../src
     )
 
-set(SRC 
-    main.cpp
-    openglwindow.cpp)
-
-set(HDR
-    openglwindow.hpp)
+file(GLOB_RECURSE ${PROJECT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB_RECURSE ${PROJECT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 # create target
-add_executable(${PROJECT} ${SRC} ${HDR})
+add_executable(${PROJECT}
+    ${${PROJECT}_SRC}
+    ${${PROJECT}_HDR}
+    )
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
 # link
 target_link_libraries(${PROJECT}
     Qt5::Core
     Qt5::Widgets
+    Qt5::OpenGL
     )
 
 target_link_libraries(${PROJECT}

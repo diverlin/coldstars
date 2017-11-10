@@ -77,6 +77,7 @@ public:
     void increaseScale();
     void decreaseScale();
 
+    void setSize(int w, int h) { m_size = glm::vec2(w, h); glViewport(0, 0, w, h); }
     void setScaleBase(float scaleBase) { m_scaleBase = scaleBase;}
 
     void increaseLightPos();
