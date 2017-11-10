@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 void DemoWindow::initialize()
 {
     m_render->init(m_camera, 640, 480);
-    m_mesh = new jeti::Mesh("data/obj/cube_test/cube_test.obj");
+    m_mesh = new jeti::Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj");
     m_material_model = new jeti::model::Material("data/test1.png");
     m_material_control = new jeti::control::Material(m_material_model);
 }
