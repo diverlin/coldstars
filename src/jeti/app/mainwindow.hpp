@@ -4,28 +4,12 @@
 #include <QFormLayout>
 
 class OpenGLWidget;
-class QLineEdit;
-class QSlider;
 
-class QFormLayout;
+namespace qeti {
+class ControlWidget;
+} // naemspace qeti
+
 class QBoxLayout;
-
-class FormWidget : public QWidget
-{
-    Q_OBJECT
-public:
-    FormWidget(QWidget* parent = nullptr):QWidget(parent){
-        m_layout = new QFormLayout(this);
-        setLayout(m_layout);
-    }
-    ~FormWidget()=default;
-
-    QFormLayout* layout() const { return m_layout; }
-
-private:
-    QFormLayout* m_layout = nullptr;
-};
-
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -35,8 +19,8 @@ public:
 
 private:
     int m_max = 1000;
-    int m_zNear = 0;
-    int m_zFar = 0;
+//    int m_zNear = 0;
+//    int m_zFar = 0;
     OpenGLWidget* m_glWidget = nullptr;
 //    QLineEdit* m_modelPosX = nullptr;
 //    QLineEdit* m_modelPosY = nullptr;
@@ -50,10 +34,12 @@ private:
 //    QLineEdit* m_cameraDirY = nullptr;
 //    QLineEdit* m_cameraDirZ = nullptr;
 
-    QLineEdit* m_zNearLineEdit = nullptr;
-    QLineEdit* m_zFarLineEdit = nullptr;
-    QSlider* m_zNearSlider = nullptr;
-    QSlider* m_zFarSlider = nullptr;
+//    QLineEdit* m_zNearLineEdit = nullptr;
+//    QLineEdit* m_zFarLineEdit = nullptr;
+//    QSlider* m_zNearSlider = nullptr;
+//    QSlider* m_zFarSlider = nullptr;
+    qeti::ControlWidget* m_zNear = nullptr;
+    qeti::ControlWidget* m_zFar = nullptr;
 
     QBoxLayout* __create_mainLayout();
     OpenGLWidget* __create_glWidget() const;

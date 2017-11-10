@@ -6,6 +6,8 @@ class QLineEdit;
 class QSlider;
 class QSpinBox;
 
+namespace qeti {
+
 class ControlWidget: public QWidget
 {
     Q_OBJECT
@@ -30,5 +32,6 @@ private:
     QSpinBox* m_spinBox = nullptr;
 };
 
+} // namespace qeti
 
 
