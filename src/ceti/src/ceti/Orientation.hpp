@@ -42,10 +42,12 @@ public:
 
     void setPosition(const meti::vec3& position) { m_position = position; }
     void setSize(const meti::vec3& size) { m_size = size; }
+    void setScale(float scale) { m_scale = scale; }
     void setDirection(const meti::vec3& direction) { m_direction = direction; }
 
     const meti::vec3& position() const { return m_position; }
     const meti::vec3& size() const { return m_size; }
+    float scale() const { return m_scale; }
     const meti::vec3& direction() const { return m_direction; }
 
 public:
@@ -54,6 +56,7 @@ public:
         result.add("ceti::model::Orientation");
         result.add("position", m_position);
         result.add("size", m_size);
+        result.add("scale", m_scale);
         result.add("direction", m_direction);
         return result;
     }
@@ -61,6 +64,7 @@ public:
 private:
     meti::vec3 m_position;
     meti::vec3 m_size;
+    float m_scale = 1.0f;
     meti::vec3 m_direction;
 
 private:
@@ -69,6 +73,7 @@ private:
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_position;
         ar & m_size;
+        ar & m_scale;
         ar & m_direction;
     }
 };
@@ -89,13 +94,16 @@ public:
     void setSize(float x, float y, float z);
     void setSize(const meti::vec3& size);
 
+    void setDirection(float x, float y, float z);
+    void setDirection(const meti::vec3& size);
+    void setScale(float);
+
     const meti::vec3& direction() const { return model()->direction(); }
     const meti::vec3& position() const { return model()->position(); }
     const meti::vec3& size() const { return model()->size(); }
 
     float collisionRadius() const  { return m_collisionRadius; }
 
-    void setDirection(const meti::vec3& direction)   { model()->setDirection(meti::normalize(direction)); m_isUpdated = false; }
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
     model::Orientation* model() const { return m_model_orientation; }
