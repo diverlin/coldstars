@@ -13,14 +13,16 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 
-# jeti
+# other deps
 find_package(METI REQUIRED)
 find_package(CETI REQUIRED)
 find_package(JETI REQUIRED)
+find_package(QETI REQUIRED)
 include_directories(
     ${METI_INCLUDE_DIRS}
     ${CETI_INCLUDE_DIRS}
     ${JETI_INCLUDE_DIRS}
+    ${QETI_INCLUDE_DIRS}
     ../src
     )
 
@@ -42,15 +44,14 @@ target_link_libraries(${PROJECT}
     )
 
 target_link_libraries(${PROJECT}
-#    boost_system
-#    boost_filesystem
-#    boost_serialization
     ${SFML_LIBRARIES}
     ${METI_LIBRARIES}
     ${CETI_LIBRARIES}
     ${JETI_LIBRARIES}
+    ${QETI_LIBRARIES}
     )
 
+# install
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../src/jeti/shaders"
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
     )

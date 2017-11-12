@@ -51,6 +51,7 @@ void OpenGLWidget::paintGL()
     glm::mat4 scaleMatrix = glm::scale(m_modelScale);
     m_render->drawCollisionRadius(scaleMatrix);
 
+//    glEnable(GL_DEPTH_TEST);
     m_render->drawMeshLight(*m_mesh, *m_material_control, scaleMatrix);
 
     m_render->update();
