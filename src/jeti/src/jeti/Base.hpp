@@ -60,11 +60,20 @@ class Base
 {
 public:
     Base();
+    Base(Mesh*, control::Material*);
     virtual ~Base();
 
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& direction() const { return _orientation()->direction(); }
     const glm::vec3& size() const { return _orientation()->size(); }
+
+    void setPosition(const glm::vec3& position) { _orientation()->setPosition(position); }
+    void setPosition(float x, float y, float z) { _orientation()->setPosition(x,y,z); }
+    void setDirection(const glm::vec3& direction) { _orientation()->setDirection(direction); }
+    void setDirection(float x, float y, float z) { _orientation()->setDirection(x,y,z); }
+    void setSize(const glm::vec3& size) { _orientation()->setSize(size); }
+    void setSize(float x, float y, float z) { _orientation()->setSize(x,y,z); }
+    void setScale(float scale) { _orientation()->setScale(scale); }
 
 //    void validateResources() const;
     void setAnimationRotation(animation::BaseRotation* animation_rotation) { m_animationRotation = animation_rotation; }
@@ -95,7 +104,7 @@ protected:
     bool _updateFadeOutEffect(); // depr, move to animation program
 
     const control::Material& _material() const { return *m_material; }
-    const Mesh& _mesh() const     { return *m_mesh; }
+    const Mesh& _mesh() const { return *m_mesh; }
 
     Base* _parent() const { return m_parent; }
 
@@ -107,7 +116,7 @@ protected:
     //    const glm::vec3& _center() const;
 //    const glm::vec3& _size() const;
 
-    void _updateModelMatrix(const glm::vec3& parallax_offset = glm::vec3(0.0f));
+    void _updateModelMatrix();
 
 private:
     bool m_clear_orientation = false;

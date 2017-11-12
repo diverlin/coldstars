@@ -149,6 +149,8 @@ public:
     void toScreenCoord(const glm::vec3&, glm::vec3&) const;
     Camera* camera() const { return m_camera; }
 
+    control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
+
 private:
     projection m_activeProjection = projection::NONE;
     mutable Mesh::States m_activeStates = Mesh::States::NONE;

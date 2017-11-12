@@ -60,12 +60,6 @@ void Orientation::setPosition(const meti::vec3& position) {
     m_isUpdated = false;
 }
 
-//void Orientation::setPosition(const Position& position)   {
-//    model()->setPosition(position.center);
-//    model()->setDirection(position.direction);
-//    m_isUpdated = false;
-//}
-
 void Orientation::setSize(float x, float y, float z) {
     setSize(meti::vec3(x, y, z));
 }
@@ -74,6 +68,23 @@ void Orientation::setSize(const meti::vec3& size) {
     model()->setSize(size);
 
     __updateCollisionRadius();
+    m_isUpdated = false;
+}
+
+void Orientation::setDirection(const meti::vec3& direction)
+{
+    model()->setDirection(meti::normalize(direction));
+    m_isUpdated = false;
+}
+
+void Orientation::setDirection(float x, float y, float z)
+{
+    setDirection(glm::vec3(x,y,z));
+}
+
+void Orientation::setScale(float scale)
+{
+    model()->setScale(scale);
     m_isUpdated = false;
 }
 

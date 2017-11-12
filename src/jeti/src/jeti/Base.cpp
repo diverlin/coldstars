@@ -38,6 +38,14 @@ namespace jeti {
 Base::Base()
 {}
 
+Base::Base(Mesh* mesh, control::Material* material)
+    :
+      m_mesh(mesh)
+    , m_material(material)
+{
+    _genOrientation();
+}
+
 Base::~Base() {
     if (m_animationRotation) {
         delete m_animationRotation;
@@ -125,7 +133,7 @@ void Base::drawCollisionRadius(const jeti::Render& render) const
     render.drawCollisionRadius(_collisionModelMatrix());
 }
 
-void Base::_updateModelMatrix(const glm::vec3& parallax_offset)
+void Base::_updateModelMatrix()
 {
     assert(m_mesh);
     assert(m_orientation);
@@ -151,10 +159,8 @@ void Base::_updateModelMatrix(const glm::vec3& parallax_offset)
 
     // prepare transition matrix
     if (m_parent) {
-        m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position() - parallax_offset, 1.0f); // parent rotation offset position
+        m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
         m_position += m_parent->_orientation()->position();
-    } else {
-        m_position = m_orientation->position() - parallax_offset;
     }
 
     m_matrixTranslate = glm::translate(m_position);
