@@ -33,8 +33,8 @@ namespace client {
 
 Session::Session()
     :
-      m_render(new jeti::Render)
-    , m_camera(new jeti::Camera(m_render->zNear(), m_render->zFar()))
+      m_camera(new jeti::Camera(1))
+    , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
     , m_inputs(new gui::UserInputInSpace)
 {
@@ -59,7 +59,7 @@ Session::init() {
 
     /// in a name of god don't change order below
     m_screen->init();
-    m_render->init(m_camera, m_screen->width(), m_screen->height());
+    m_render->init(m_screen->width(), m_screen->height());
 
     Data data;
 

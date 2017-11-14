@@ -720,7 +720,7 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     }
 
     if (m_player->show().nebulas()) {
-        m_distantNebulas->update(render.camera()->position());
+        m_distantNebulas->update();
         m_distantNebulas->draw(render);
     }
     if (m_player->show().stars()) {
@@ -748,8 +748,7 @@ void StarSystem::__renderSpaceObjects(jeti::Render& render) const {
     }
 
     // projections
-    render.applyPerspectiveProjection();
-    //render.applyOrthogonalProjection();
+    render.applyOrthogonalProjection();
 
     for(Star* star: m_stars) {
         star->update();
@@ -864,12 +863,12 @@ void StarSystem::__render(jeti::Render& render)
     render.clearColorAndDepthBuffers();
 
     __renderBackground(render);
-//    __renderStarPostEffect(render);
+    __renderStarPostEffect(render);
     __renderSpaceObjects(render);
-//    __renderSpaceObjectsMeta(render);
-//    __renderTexts(render);
-//    __renderExperiment(render);
-//    __renderHUD(render);
+    __renderSpaceObjectsMeta(render);
+    __renderTexts(render);
+    __renderExperiment(render);
+    __renderHUD(render);
 }
 
 Base*
@@ -951,7 +950,6 @@ void StarSystem::render(control::StarSystem* starsystem)
     m_render.update();
     __updateVisible(starsystem);
 
-    m_render.composeViewMatrix(m_camera.viewMatrix());
     __render(m_render);
 
     //resizeGl(w*scale, h*scale);

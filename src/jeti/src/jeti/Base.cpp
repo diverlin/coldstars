@@ -35,14 +35,19 @@
 
 namespace jeti {
 
+int_t Base::counter=0;
+
 Base::Base()
-{}
+{
+    _genId();
+}
 
 Base::Base(Mesh* mesh, control::Material* material)
     :
       m_mesh(mesh)
     , m_material(material)
 {
+    _genId();
     _genOrientation();
 }
 
@@ -56,6 +61,11 @@ Base::~Base() {
         delete m_orientation->model();
         delete m_orientation;
     }
+}
+
+void Base::_genId() {
+    counter++;
+    m_id = counter;
 }
 
 void Base::_genOrientation()
@@ -118,6 +128,11 @@ bool Base::_updateFadeOutEffect()
     }
 }
 
+void Base::update()
+{
+    _updateModelMatrix();
+}
+
 void Base::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), modelMatrix());
@@ -161,12 +176,14 @@ void Base::_updateModelMatrix()
     if (m_parent) {
         m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
         m_position += m_parent->_orientation()->position();
+    } else {
+        m_position = _orientation()->position();
     }
 
     m_matrixTranslate = glm::translate(m_position);
 
     // combine transformations
-    m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
+    m_matrixModel = m_matrixTranslate * /*m_matrixRotate **/ m_matrixScale;
 
     __updateCollisionModelMatrix();
 }

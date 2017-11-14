@@ -5,6 +5,8 @@ set(PROJECT coldstars)
 
 project(${PROJECT})
 
+set(COLDSTARS_DEPLOY_DIR "/media/yeti/ext_workspace/dist_gcc54/coldstars")
+
 set(USE_TEST OFF)
 if(USE_TEST)
     add_definitions(-DUSE_TEST)

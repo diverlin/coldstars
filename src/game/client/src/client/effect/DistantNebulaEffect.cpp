@@ -46,9 +46,9 @@ DistantNebulas::~DistantNebulas() {
     m_nebulas.clear();
 }
 
-void DistantNebulas::update(const glm::vec3& camera_pos) {
+void DistantNebulas::update() {
     for (auto nebula: m_nebulas) {
-        nebula->update(camera_pos);
+        nebula->update();
     }
 }
 
@@ -69,8 +69,8 @@ DistantNebula::DistantNebula(float paralaxFactor)
 DistantNebula::~DistantNebula()
 {}     
 
-void DistantNebula::update(const glm::vec3& camera_pos) {
-    _updateModelMatrix(-camera_pos/m_paralaxFactor);
+void DistantNebula::update() {
+    _updateModelMatrix();
 }
 
 DistantNebulas* genDistantNebulas(int color_id)

@@ -58,8 +58,8 @@ public:
 private:
     bool m_init = false;
 
-    jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
+    jeti::Render* m_render = nullptr;
     jeti::Screen* m_screen = nullptr;
     view::StarSystem* m_view = nullptr;
 

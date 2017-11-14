@@ -51,8 +51,7 @@ Orientation::~Orientation()
 }
 
 void Orientation::setPosition(float x, float y, float z) {
-    model()->setPosition(meti::vec3(x, y, z));
-    m_isUpdated = false;
+    setPosition(meti::vec3(x,y,z));
 }
 
 void Orientation::setPosition(const meti::vec3& position) {
