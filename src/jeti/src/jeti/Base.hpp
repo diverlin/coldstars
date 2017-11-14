@@ -94,6 +94,8 @@ public:
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }
     const glm::mat4& matrixScale() const { return m_matrixScale; }
 
+    Mesh* mesh_DEBUG() const { return m_mesh; }
+
 protected:
     void _genId();
     void _genOrientation();

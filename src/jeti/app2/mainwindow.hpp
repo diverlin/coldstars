@@ -12,6 +12,11 @@ class QBoxLayout;
 class QCheckBox;
 class QTreeWidget;
 
+
+namespace jeti {
+class Mesh;
+} // namespace jeti
+
 class MainWindow: public QMainWindow {
     Q_OBJECT
 public:
@@ -28,6 +33,9 @@ private:
     QTreeWidget* __create_nodeTreeWidget() const;
 
     void __create_object();
+
+    jeti::Mesh* m_mesh = nullptr;
+    jeti::Mesh* m_mesh2 = nullptr;
 };
 
 

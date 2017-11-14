@@ -106,8 +106,7 @@ void Mesh::fillLineVertices(const ObjLoader& objLoader)
 
     m_vertices.clear();
 
-    for(unsigned int i=0; i<objLoader.m_faces_indexes.size(); ++i)
-    {
+    for(unsigned int i=0; i<objLoader.m_faces_indexes.size(); ++i) {
         Vertex vertex;
         for(unsigned int j=0; j<VERTECIES_PER_POLYGON_NUM; ++j) {
             vertex.position = objLoader.m_positions[objLoader.m_faces_indexes[i].position_index[j] - 1];
@@ -225,8 +224,8 @@ void Mesh::__updateVbo()
     int stride = STRIDE_POSITION;
     
     if (m_hasTexCoords) { stride += STRIDE_TEXCOORD; }
-    if (m_hasNormals || m_hasPointsSize)  { stride += STRIDE_NORMAL; }
-    if (m_hasColors)    { stride += STRIDE_COLOR; }
+    if (m_hasNormals || m_hasPointsSize) { stride += STRIDE_NORMAL; }
+    if (m_hasColors) { stride += STRIDE_COLOR; }
 
     GLfloat data_array[m_vertexCount * stride];
 

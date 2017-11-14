@@ -150,6 +150,7 @@ public:
     Camera* camera() const { return m_camera; }
 
     control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
+    Mesh* quadMesh() const { return m_meshQuad; }
 
 private:
     projection m_activeProjection = projection::NONE;
@@ -253,7 +254,6 @@ void drawInfoIn2Column(
         const std::vector<std::string>& pnfo_title_list,
         const std::vector<std::string>& info_value_list,
         const glm::vec2& pos);
-
 }
 
 
