@@ -20,7 +20,7 @@ class Mesh;
 namespace jeti {
 
 class ObjLoader;
-class TextureOb;
+//class TextureOb;
 
 class Mesh
 { 
@@ -36,7 +36,7 @@ public:
 
     bool isFlat() const { return m_states == States::QUAD || m_states == States::QUAD_ADDITIVE; }
 
-    TextureOb* textureOb() const { return m_textureOb; }
+    //TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
     const glm::vec3& originDirection() const { return m_originDirection; }
 
@@ -67,7 +67,7 @@ private:
     float m_linesWidth = 1.0f;
     States m_states = States::NORMAL;
 
-    TextureOb* m_textureOb = nullptr;
+    //TextureOb* m_textureOb = nullptr;
     std::vector<Vertex> m_vertices;
     glm::vec3 m_boundaryBox;
 

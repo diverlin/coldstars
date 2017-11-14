@@ -47,20 +47,16 @@ void OpenGLWidget::paintGL()
     m_render->applyOrthogonalProjection();
 
     for (jeti::Base* object: m_objects) {
-        //if (object->id() == 1) {
             object->update();
             object->draw(*m_render);
-            qDebug()<<"x="<<object->position().x;
-            qDebug()<<"y="<<object->position().y;
-            qDebug()<<"z="<<object->position().z;
-        //}
-
+            //m_render->drawCollisionRadius(object->modelMatrix());
+            //m_render->drawMesh(*m_render->quadMesh(), object->modelMatrix());
     }
-    glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.0f));
-    m_render->drawCollisionRadius(scaleMatrix);
+//    glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.0f));
+//    m_render->drawCollisionRadius(scaleMatrix);
 
-    scaleMatrix = glm::scale(glm::vec3(400.0f));
-    m_render->drawCollisionRadius(scaleMatrix);
+//    scaleMatrix = glm::scale(glm::vec3(400.0f));
+//    m_render->drawCollisionRadius(scaleMatrix);
 
     m_render->update();
     update();

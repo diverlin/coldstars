@@ -68,7 +68,6 @@ MainWindow::MainWindow()
     bottomLeftFrame->layout()->addWidget(btn);
     connect(btn, &QPushButton::clicked, this, [this](bool) {
         __create_object();
-        __create_object();
     });
 }
 
@@ -108,28 +107,20 @@ MainWindow::__create_nodeTreeWidget() const
 
 
 void MainWindow::__create_object() {
+    if (!m_mesh) {
+        m_mesh = new jeti::Mesh;
+    }
+    if (!m_mesh2) { // some bug, the obj with such mesh is not rendered
+        m_mesh2 = new jeti::Mesh;
+    }
     qDebug()<<"__create_object";
     m_counter++;
-    //jeti::Base* object = new jeti::Base(new jeti::Mesh(), new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model()));
-    jeti::Base* object = nullptr;
-    if (m_counter == 1) {
-        auto model = new jeti::model::Material("data/other/slot_mark_accept.png");
-        auto control = new jeti::control::Material(model);
-        control->load();
-        object = new jeti::Base(new jeti::Mesh, control);
-        object->setPosition(-100.0f, -100.0f, 0.0f);
-    } else {
-        auto model = new jeti::model::Material("data/other/slot_mark_reject.png");
-        auto control = new jeti::control::Material(model);
-        control->load();
-        object = new jeti::Base(new jeti::Mesh, control);
-        object->setPosition(100.0f, 100.0f, 0.0f);
-    }
+    jeti::Base* object = new jeti::Base(m_mesh,
+                                        new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model()));
     float size = meti::rand::gen_float(20.0f, 50.0f);
     object->setSize(size, size, 1.0f);
 
-
-    //object->setPosition(meti::rand::gen_float(0.0f, 400.0f), meti::rand::gen_float(0.0f, 300.0f), 0.0f);
+    object->setPosition(meti::rand::gen_float(0.0f, 400.0f), meti::rand::gen_float(0.0f, 300.0f), 0.0f);
     m_glWidget->add(object);
 
     QTreeWidgetItem* item = new QTreeWidgetItem();

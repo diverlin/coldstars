@@ -183,7 +183,7 @@ void Base::_updateModelMatrix()
     m_matrixTranslate = glm::translate(m_position);
 
     // combine transformations
-    m_matrixModel = m_matrixTranslate * /*m_matrixRotate **/ m_matrixScale;
+    m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
 
     __updateCollisionModelMatrix();
 }
