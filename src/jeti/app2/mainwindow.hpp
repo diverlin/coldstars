@@ -19,6 +19,7 @@ public:
     ~MainWindow();
 
 private:
+    int m_counter = 0;
     OpenGLWidget* m_glWidget = nullptr;
     QTreeWidget* m_nodeTree = nullptr;
 

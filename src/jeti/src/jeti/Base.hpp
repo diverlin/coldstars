@@ -58,10 +58,13 @@ class Render;
 
 class Base
 {
+    static int_t counter;
 public:
     Base();
     Base(Mesh*, control::Material*);
     virtual ~Base();
+
+    int_t id() const { return m_id; }
 
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& direction() const { return _orientation()->direction(); }
@@ -81,6 +84,7 @@ public:
     void setMaterial(control::Material* material) { m_material = material; }
     void setMesh(Mesh* mesh);
 
+    virtual void update();
     virtual void draw(const jeti::Render& render) const;
 
     void drawCollisionRadius(const jeti::Render& render) const;
@@ -91,6 +95,7 @@ public:
     const glm::mat4& matrixScale() const { return m_matrixScale; }
 
 protected:
+    void _genId();
     void _genOrientation();
     void _setOrientation(ceti::control::Orientation* control) { assert(control); m_orientation = control; }
     void _setParent(Base* parent) { assert(parent); m_parent = parent; }
@@ -119,6 +124,7 @@ protected:
     void _updateModelMatrix();
 
 private:
+    int_t m_id = 0;
     bool m_clear_orientation = false;
     Base* m_parent = nullptr;
 

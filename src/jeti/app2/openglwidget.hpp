@@ -20,7 +20,7 @@ public:
 
     void add(jeti::Base*);
     void take(jeti::Base*);
-    void setModelScale(const glm::vec3& scale) { m_modelScale = scale; }
+
     jeti::Render* render() const { return m_render; }
 
 protected:
@@ -32,7 +32,6 @@ protected:
     QSize sizeHint() const override { return QSize(500, 500); }
 
 private:
-    glm::vec3 m_modelScale = glm::vec3(500.0f);
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     std::vector<jeti::Base*> m_objects;

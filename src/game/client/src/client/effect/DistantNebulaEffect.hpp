@@ -29,7 +29,7 @@ public:
     DistantNebulas(const std::vector<DistantNebula*>&);
     ~DistantNebulas();
 
-    void update(const glm::vec3&);
+    void update();
     void draw(const jeti::Render&) const;
 
 private:
@@ -42,7 +42,7 @@ public:
     DistantNebula(float);
     virtual ~DistantNebula();
 
-    void update(const glm::vec3&);
+    void update();
 
 private:
     float m_paralaxFactor = 1.0f;

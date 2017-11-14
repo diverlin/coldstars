@@ -8,9 +8,11 @@
 #include <jeti/Base.hpp>
 #include <jeti/Render.hpp>
 
+#include <meti/RandUtils.hpp>
+
 #include <QHBoxLayout>
 //#include <QFormLayout>
-//#include <QPushButton>
+#include <QPushButton>
 //#include <QLineEdit>
 //#include <QSlider>
 //#include <QLabel>
@@ -27,6 +29,8 @@
 
 MainWindow::MainWindow()
 {
+    srand(time(NULL));
+
     // create
     QBoxLayout* mainLayout = __create_mainLayout();
     m_glWidget = __create_glWidget();
@@ -60,6 +64,12 @@ MainWindow::MainWindow()
     mainLayout->addWidget(bottomFrame);
 
     // read settings and init ui
+    QPushButton* btn = new QPushButton(tr("Create New Obj"));
+    bottomLeftFrame->layout()->addWidget(btn);
+    connect(btn, &QPushButton::clicked, this, [this](bool) {
+        __create_object();
+        __create_object();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -98,7 +108,31 @@ MainWindow::__create_nodeTreeWidget() const
 
 
 void MainWindow::__create_object() {
-    jeti::Base* object = new jeti::Base(new jeti::Mesh, m_glWidget->render()->materialCollisionRadius());
-    object->setScale(500.0f);
+    qDebug()<<"__create_object";
+    m_counter++;
+    //jeti::Base* object = new jeti::Base(new jeti::Mesh(), new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model()));
+    jeti::Base* object = nullptr;
+    if (m_counter == 1) {
+        auto model = new jeti::model::Material("data/other/slot_mark_accept.png");
+        auto control = new jeti::control::Material(model);
+        control->load();
+        object = new jeti::Base(new jeti::Mesh, control);
+        object->setPosition(-100.0f, -100.0f, 0.0f);
+    } else {
+        auto model = new jeti::model::Material("data/other/slot_mark_reject.png");
+        auto control = new jeti::control::Material(model);
+        control->load();
+        object = new jeti::Base(new jeti::Mesh, control);
+        object->setPosition(100.0f, 100.0f, 0.0f);
+    }
+    float size = meti::rand::gen_float(20.0f, 50.0f);
+    object->setSize(size, size, 1.0f);
+
+
+    //object->setPosition(meti::rand::gen_float(0.0f, 400.0f), meti::rand::gen_float(0.0f, 300.0f), 0.0f);
     m_glWidget->add(object);
+
+    QTreeWidgetItem* item = new QTreeWidgetItem();
+    item->setText(0, "111");
+    m_nodeTree->addTopLevelItem(item);
 }
