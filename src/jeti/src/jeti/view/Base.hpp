@@ -56,6 +56,8 @@ class BaseRotation;
 
 class Render;
 
+namespace view {
+
 class Base
 {
     static int_t counter;
@@ -69,6 +71,7 @@ public:
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& direction() const { return _orientation()->direction(); }
     const glm::vec3& size() const { return _orientation()->size(); }
+    float radius() const { return _orientation()->collisionRadius(); }
 
     void setPosition(const glm::vec3& position) { _orientation()->setPosition(position); }
     void setPosition(float x, float y, float z) { _orientation()->setPosition(x,y,z); }
@@ -93,6 +96,12 @@ public:
     const glm::mat4& modelMatrix() const { return m_matrixModel; }
     const glm::mat4& matrixRotate() const { return m_matrixRotate; }
     const glm::mat4& matrixScale() const { return m_matrixScale; }
+
+    float distanceTo(const glm::vec2&) const;
+    float distanceTo(const glm::vec3&) const;
+
+    bool isPointInsideShape(const glm::vec2&) const;
+    bool isPointInsideShape(const glm::vec3&) const;
 
     Mesh* mesh_DEBUG() const { return m_mesh; }
 
@@ -158,5 +167,6 @@ private:
     void __adjustSizeFromMaterial();
 };
 
+} // namespace view
 } // namespace jeti
 

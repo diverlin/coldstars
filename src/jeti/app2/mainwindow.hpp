@@ -23,6 +23,8 @@ public:
     MainWindow();
     ~MainWindow();
 
+    void init();
+
 private:
     int m_counter = 0;
     OpenGLWidget* m_glWidget = nullptr;

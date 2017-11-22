@@ -102,6 +102,12 @@ public:
     const meti::vec3& position() const { return model()->position(); }
     const meti::vec3& size() const { return model()->size(); }
 
+    float distanceTo(const glm::vec2&) const;
+    float distanceTo(const glm::vec3&) const;
+
+    bool isPointInsideShape(const glm::vec2&) const;
+    bool isPointInsideShape(const glm::vec3&) const;
+
     float collisionRadius() const  { return m_collisionRadius; }
 
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
