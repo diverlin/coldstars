@@ -7,6 +7,7 @@ class Render;
 class Camera;
 namespace view {
 class Base;
+class Control;
 } // namespace view
 } // namespace jeti
 
@@ -42,11 +43,14 @@ protected:
     void _trySelect(const glm::vec2&);
 
 private:
+    glm::vec2 m_cursorPosPrev;
     glm::vec2 m_cursorPos;
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     std::vector<jeti::view::Base*> m_objects;
 
     jeti::view::Base* m_selectedObject = nullptr;
-    jeti::view::Base* m_controlObject = nullptr;
+    jeti::view::Control* m_controlObject = nullptr;
+
+    void _resetSelection();
 };

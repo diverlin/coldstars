@@ -92,8 +92,8 @@ float Base::distanceTo(const glm::vec3& p) const {
     return m_orientation->distanceTo(p);
 }
 
-bool Base::isPointInsideShape(const glm::vec2& p) const {
-    return m_orientation->isPointInsideShape(p);
+bool Base::isPointInsideCircle(const glm::vec2& p) const {
+    return m_orientation->isPointInsideCircle(p);
 }
 
 bool Base::isPointInsideShape(const glm::vec3& p) const {

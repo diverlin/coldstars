@@ -71,7 +71,7 @@ private:
     std::vector<Vertex> m_vertices;
     glm::vec3 m_boundaryBox;
 
-    glm::vec3 m_originDirection;
+    glm::vec3 m_originDirection = glm::vec3(0.0f, 1.0f, 0.0f);
     
     uint32_t m_vertexCount = 0;
 

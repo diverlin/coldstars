@@ -4,6 +4,9 @@
 #include <jeti/Camera.hpp>
 #include <jeti/view/Base.hpp>
 #include <jeti/view/Editable.hpp>
+#include <jeti/view/Control.hpp>
+
+#include <ceti/StringUtils.hpp>
 
 #include <glm/gtx/transform.hpp>
 
@@ -32,6 +35,7 @@ void OpenGLWidget::initializeGL()
     int w = 800;
     int h = 600;
     m_render->init(w, h);
+    m_render->setBaseScale(1.0f);
 
     resizeGL(w, h);
 }
@@ -54,7 +58,10 @@ void OpenGLWidget::paintGL()
             //m_render->drawCollisionRadius(object->modelMatrix());
             //m_render->drawMesh(*m_render->quadMesh(), object->modelMatrix());
     }
-
+    if (m_selectedObject) { // to high light, works only with transparent objects, qick workaround
+        m_selectedObject->draw(*m_render);
+        m_selectedObject->drawAxis(*m_render);
+    }
     //    glm::mat4 scaleMatrix = glm::scale(glm::vec3(200.0f));
 //    m_render->drawCollisionRadius(scaleMatrix);
 
@@ -77,7 +84,7 @@ OpenGLWidget::_findClosest(const glm::vec2& cursorPos) const
     // pass 1: find intersected objects
     std::vector<jeti::view::Base*> m_intersected_objects;
     for(jeti::view::Base* object: m_objects) {
-        if (object->isPointInsideShape(cursorPos)) {
+        if (object->isPointInsideCircle(cursorPos)) {
             m_intersected_objects.push_back(object);
         }
     }
@@ -117,10 +124,48 @@ void OpenGLWidget::_trySelect(const glm::vec2& cursorPos)
 
 void OpenGLWidget::mouseMoveEvent(QMouseEvent* event)
 {
+    if (!m_selectedObject || !m_controlObject) {
+        return;
+    }
+
     m_cursorPos = _cursorWidgetToWorldCoord(event->x(), event->y());
-    if (m_selectedObject) {
+    glm::vec2 delta = m_cursorPos - m_cursorPosPrev;
+    if (glm::length(delta) > 6) { // sometimes initial value is too hight which cause jump in delta
+        delta = glm::vec2(0.0f,0.0f);
+    }
+
+    if (m_controlObject->role() == jeti::view::Control::Role::MOVE) {
         m_selectedObject->setPosition(m_cursorPos.x, m_cursorPos.y, 0);
     }
+    if (m_controlObject->role() == jeti::view::Control::Role::RESIZEX) {
+        glm::vec3 size = m_selectedObject->size();
+        size.x += delta.x;
+        m_selectedObject->setSize(size);
+    }
+    if (m_controlObject->role() == jeti::view::Control::Role::RESIZEY) {
+        glm::vec3 size = m_selectedObject->size();
+        size.y += delta.y;
+        m_selectedObject->setSize(size);
+    }
+    if (m_controlObject->role() == jeti::view::Control::Role::ROTATE) {
+        glm::vec3 pos = m_controlObject->position();
+        pos.x += delta.x;
+        pos.y += delta.y;
+        m_controlObject->setPosition(pos);
+
+        glm::vec3 dir = glm::normalize(m_controlObject->position() - m_selectedObject->position());//m_selectedObject->direction();
+        m_selectedObject->setDirection(dir);
+    }
+    if (m_controlObject->role() == jeti::view::Control::Role::SCALE) {
+        glm::vec3 size = m_selectedObject->size();
+        float d = -delta.x + delta.y;
+        size.x += d;
+        size.y += d;
+        qDebug()<<"delta="<<ceti::to_string(delta).c_str();
+        m_selectedObject->setSize(size);
+    }
+
+    m_cursorPosPrev = m_cursorPos;
 }
 
 void OpenGLWidget::mousePressEvent(QMouseEvent* event)
@@ -131,8 +176,15 @@ void OpenGLWidget::mousePressEvent(QMouseEvent* event)
 
 void OpenGLWidget::mouseReleaseEvent(QMouseEvent* event)
 {
+    _resetSelection();
+}
+
+void OpenGLWidget::_resetSelection() {
     if (!m_selectedObject) {
         m_selectedObject = nullptr;
+    }
+    if (!m_controlObject) {
+        m_controlObject = nullptr;
     }
 }
 

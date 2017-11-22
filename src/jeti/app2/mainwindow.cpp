@@ -114,10 +114,10 @@ void MainWindow::__create_object() {
     m_counter++;
     jeti::control::Material* material = new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model());
     jeti::view::Editable* object = new jeti::view::Editable(m_mesh, material);
-    float size = meti::rand::gen_float(100.0f, 200.0f);
+    float size = meti::rand::gen_float(30.0f, 60.0f);
     object->setSize(size, size, 1.0f);
 
-    object->setPosition(meti::rand::gen_float(0.0f, 400.0f), meti::rand::gen_float(0.0f, 300.0f), 0.0f);
+    object->setPosition(meti::rand::gen_vec3xy(200.f));
     m_glWidget->add(object);
 
     QTreeWidgetItem* item = new QTreeWidgetItem();

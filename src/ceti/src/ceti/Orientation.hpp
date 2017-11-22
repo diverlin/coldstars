@@ -65,7 +65,7 @@ private:
     meti::vec3 m_position;
     meti::vec3 m_size;
     float m_scale = 1.0f;
-    meti::vec3 m_direction;
+    meti::vec3 m_direction = glm::vec3(0.0f, 1.0f, 0.0f);
 
 private:
     friend class boost::serialization::access;
@@ -105,7 +105,7 @@ public:
     float distanceTo(const glm::vec2&) const;
     float distanceTo(const glm::vec3&) const;
 
-    bool isPointInsideShape(const glm::vec2&) const;
+    bool isPointInsideCircle(const glm::vec2&) const;
     bool isPointInsideShape(const glm::vec3&) const;
 
     float collisionRadius() const  { return m_collisionRadius; }
