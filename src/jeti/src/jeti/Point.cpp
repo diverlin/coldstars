@@ -20,11 +20,11 @@
 #pragma once
 
 #include "Point.hpp"
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 namespace jeti {
 
-Point::Point(const meti::vec3& positionOrigin, Base* parent)
+Point::Point(const meti::vec3& positionOrigin, view::Base* parent)
     :
       m_positionOrigin(positionOrigin)
     , m_parent(parent)

@@ -17,6 +17,7 @@
 */
 
 #include "Orientation.hpp"
+#include "StringUtils.hpp"
 #include <ceti/serialization/macro.hpp>
 
 namespace ceti {
@@ -89,6 +90,25 @@ void Orientation::setScale(float scale)
 
 void Orientation::__updateCollisionRadius() {
     m_collisionRadius = (model()->size().x + model()->size().y) / 2.0f;
+}
+
+float Orientation::distanceTo(const glm::vec2& p) const {
+    std::cout<<"ob pos="<<to_string(model()->position())<<std::endl;
+    std::cout<<"cursor pos="<<to_string(p)<<std::endl;
+    std::cout<<glm::length(glm::vec2(p.x, p.y)-meti::to_vec2(model()->position()))<<std::endl;
+    return glm::length(glm::vec2(p.x, p.y)-meti::to_vec2(model()->position()));
+}
+
+float Orientation::distanceTo(const glm::vec3& p) const {
+    return glm::length(p-model()->position());
+}
+
+bool Orientation::isPointInsideShape(const glm::vec2& p) const {
+    return (distanceTo(p) <= m_collisionRadius);
+}
+
+bool Orientation::isPointInsideShape(const glm::vec3& p) const {
+    return (distanceTo(p) <= m_collisionRadius);
 }
 
 } // namespace control

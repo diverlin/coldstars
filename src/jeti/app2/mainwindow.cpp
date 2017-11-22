@@ -5,23 +5,13 @@
 //#include <qeti/valuecontrolwidget.hpp>
 //#include <qeti/pointcontrolwidget.hpp>
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Editable.hpp>
 #include <jeti/Render.hpp>
 
 #include <meti/RandUtils.hpp>
 
 #include <QHBoxLayout>
-//#include <QFormLayout>
 #include <QPushButton>
-//#include <QLineEdit>
-//#include <QSlider>
-//#include <QLabel>
-//#include <QIntValidator>
-//#include <QVector3D>
-//#include <QSettings>
-//#include <QCheckBox>
-//#include <QGroupBox>
-//#include <QButtonGroup>
 #include <QTreeWidget>
 
 #include <QDebug>
@@ -76,10 +66,17 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::init()
+{
+    for (int i=0; i<10; ++i) {
+        __create_object();
+    }
+}
+
 QBoxLayout*
 MainWindow::__create_mainLayout() {
     QWidget* centralWidget = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    QVBoxLayout* layout = new QVBoxLayout();
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
     return layout;
@@ -115,15 +112,15 @@ void MainWindow::__create_object() {
     }
     qDebug()<<"__create_object";
     m_counter++;
-    jeti::Base* object = new jeti::Base(m_mesh,
-                                        new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model()));
-    float size = meti::rand::gen_float(20.0f, 50.0f);
+    jeti::control::Material* material = new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model());
+    jeti::view::Editable* object = new jeti::view::Editable(m_mesh, material);
+    float size = meti::rand::gen_float(100.0f, 200.0f);
     object->setSize(size, size, 1.0f);
 
     object->setPosition(meti::rand::gen_float(0.0f, 400.0f), meti::rand::gen_float(0.0f, 300.0f), 0.0f);
     m_glWidget->add(object);
 
     QTreeWidgetItem* item = new QTreeWidgetItem();
-    item->setText(0, "111");
+    item->setText(0, "object");
     m_nodeTree->addTopLevelItem(item);
 }

@@ -23,12 +23,14 @@
 
 namespace jeti {
 
+namespace view {
 class Base;
+} // namespace view
 
 class Point
 {
 public:
-    Point(const meti::vec3&, Base* parent);
+    Point(const meti::vec3&, view::Base* parent);
     ~Point() = default;
 
     const meti::vec3& position() const { return m_position; }
@@ -36,7 +38,7 @@ public:
     void update();
 
 private:
-    Base* m_parent = nullptr;
+    view::Base* m_parent = nullptr;
     meti::vec3 m_position;
     meti::vec3 m_positionOrigin;
 };

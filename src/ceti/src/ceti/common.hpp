@@ -36,10 +36,8 @@ int getIndexWithMinVal(const T* array, unsigned int size)
 {
     int index_min = 0;
     T val_min = array[index_min];
-    for (unsigned int i=1; i<size; i++)
-    {
-        if (array[i]<val_min)
-        {
+    for (unsigned int i=1; i<size; i++) {
+        if (array[i]<val_min) {
             val_min = array[i];
             index_min = i;
         }

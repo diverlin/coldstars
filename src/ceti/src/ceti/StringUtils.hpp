@@ -28,6 +28,7 @@
 
 namespace ceti {
 
+std::string to_string(const glm::vec2&);
 std::string to_string(const glm::vec3&);
 std::string to_string(float);
 std::string to_string(const std::vector<int_t>&);

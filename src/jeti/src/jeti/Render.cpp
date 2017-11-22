@@ -173,6 +173,20 @@ void Render::update() {
 //    m_light.position.y = R*cos(m_t);
 }
 
+glm::vec2
+Render::toWorldCoord(const glm::vec2& screen_coord) const {
+    glm::vec2 world_coord(screen_coord);
+
+    world_coord.x -= m_size.x/2;
+    world_coord.y -= m_size.y/2;
+
+    world_coord *= scaleBase();
+
+    world_coord += meti::to_vec2(m_camera->position());
+
+    return world_coord;
+}
+
 glm::vec3
 Render::toWorldCoord(const glm::vec3& screen_coord) const {
     glm::vec3 world_coord(screen_coord);

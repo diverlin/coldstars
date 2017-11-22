@@ -145,6 +145,7 @@ public:
 
     void update();
 
+    glm::vec2 toWorldCoord(const glm::vec2&) const;
     glm::vec3 toWorldCoord(const glm::vec3&) const;
     void toScreenCoord(const glm::vec3&, glm::vec3&) const;
     Camera* camera() const { return m_camera; }

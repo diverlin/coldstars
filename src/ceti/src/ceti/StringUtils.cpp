@@ -36,6 +36,15 @@ std::string to_string(float val)
 }
 
 std::string
+to_string(const glm::vec2& v)
+{
+    std::ostringstream out;
+    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
+    out << "(" << v.x << ", " << v.y << ")";
+    return out.str();
+}
+
+std::string
 to_string(const glm::vec3& v)
 {
     std::ostringstream out;

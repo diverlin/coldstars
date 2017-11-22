@@ -34,6 +34,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 namespace jeti {
+namespace view {
 
 int_t Base::counter=0;
 
@@ -49,6 +50,7 @@ Base::Base(Mesh* mesh, control::Material* material)
 {
     _genId();
     _genOrientation();
+    __adjustSizeFromMaterial();
 }
 
 Base::~Base() {
@@ -80,6 +82,22 @@ Base::setMesh(Mesh* mesh) {
     if (mesh->isFlat()) {
         __adjustSizeFromMaterial();
     }
+}
+
+float Base::distanceTo(const glm::vec2& p) const {
+    return m_orientation->distanceTo(p);
+}
+
+float Base::distanceTo(const glm::vec3& p) const {
+    return m_orientation->distanceTo(p);
+}
+
+bool Base::isPointInsideShape(const glm::vec2& p) const {
+    return m_orientation->isPointInsideShape(p);
+}
+
+bool Base::isPointInsideShape(const glm::vec3& p) const {
+    return m_orientation->isPointInsideShape(p);
 }
 
 //void BaseView::validateResources() const
@@ -209,4 +227,5 @@ Base::__adjustSizeFromMaterial()
     m_orientation->setSize(glm::vec3(m_material->frameWidth(), m_material->frameHeight(), 1.0));
 }
 
+} // namespace view
 } // namespace jeti
