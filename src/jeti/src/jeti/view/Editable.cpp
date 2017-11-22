@@ -18,6 +18,7 @@
 
 
 #include "Editable.hpp"
+#include <jeti/view/Control.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -28,33 +29,35 @@ Editable::Editable(Mesh* mesh, control::Material* material)
     :
       Base(mesh, material)
 {
-    m_controlMove = new Base(mesh, material);
-    m_controlRotate = new Base(mesh, material);
-    m_controlSizeX = new Base(mesh, material);
-    m_controlSizeY = new Base(mesh, material);
+    m_controlMove = new Control(Control::Role::MOVE, mesh, material);
+    m_controlRotate = new Control(Control::Role::ROTATE, mesh, material);
+    m_controlSizeX = new Control(Control::Role::RESIZEX, mesh, material);
+    m_controlSizeY = new Control(Control::Role::RESIZEY, mesh, material);
+    m_controlScale = new Control(Control::Role::SCALE, mesh, material);
 
     m_controls.push_back(m_controlMove);
     m_controls.push_back(m_controlRotate);
     m_controls.push_back(m_controlSizeX);
     m_controls.push_back(m_controlSizeY);
+    m_controls.push_back(m_controlScale);
 
-    glm::vec3 control_size(30.f, 30.f, 0.f);// = 0.2f*size();
-    for (Base* control: m_controls) {
+    glm::vec3 control_size(m_controlSize, m_controlSize, 0.0f);
+    for (Control* control: m_controls) {
         control->setSize(control_size);
     }
 }
 
 Editable::~Editable()
 {
-    for (Base* control: m_controls) {
+    for (Control* control: m_controls) {
         delete control;
     }
 }
 
-Base* Editable::collisionWithControls(const glm::vec2& cursorPos) const
+Control* Editable::collisionWithControls(const glm::vec2& cursorPos) const
 {
-    for (Base* control: m_controls) {
-        if (control->isPointInsideShape(cursorPos)) {
+    for (Control* control: m_controls) {
+        if (control->isPointInsideCircle(cursorPos)) {
             return control;
         }
     }
@@ -66,12 +69,17 @@ void Editable::update()
 {
     Base::update();
 
-    m_controlMove->setPosition(position());
-    m_controlSizeX->setPosition(position()+glm::vec3(radius(), 0.0f, 0.0f));
-    m_controlSizeY->setPosition(position()+glm::vec3(0.0f, radius(), 0.0f));
-    m_controlRotate->setPosition(position()+glm::vec3(-radius()/1.4f, radius()/1.4f, 0.0f));
+    float w = size().x - m_controlSize;
+    float h = size().y - m_controlSize;
 
-    for (Base* control: m_controls) {
+    float r = 0.5f*radius();
+    m_controlMove->setPosition(position());
+    m_controlSizeX->setPosition(position()+glm::vec3(w, 0.0f, 0.0f));
+    m_controlSizeY->setPosition(position()+glm::vec3(0.0f, h, 0.0f));
+    m_controlRotate->setPosition(position()+direction()*r);
+    m_controlScale->setPosition(position()+glm::vec3(-r, r, 0.0f));
+
+    for (Control* control: m_controls) {
         control->update();
     }
 }
@@ -79,7 +87,7 @@ void Editable::update()
 void Editable::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), modelMatrix());
-    for (Base* control: m_controls) {
+    for (Control* control: m_controls) {
         control->draw(render);
     }
 }

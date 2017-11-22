@@ -24,6 +24,8 @@
 namespace jeti {
 namespace view {
 
+class Control;
+
 class Editable : public Base
 {
 public:
@@ -33,14 +35,16 @@ public:
     void update() override;
     void draw(const jeti::Render& render) const override;
 
-    Base* collisionWithControls(const glm::vec2&) const;
+    Control* collisionWithControls(const glm::vec2&) const;
 
 private:
-    Base* m_controlMove = nullptr;
-    Base* m_controlRotate = nullptr;
-    Base* m_controlSizeX = nullptr;
-    Base* m_controlSizeY = nullptr;
-    std::vector<Base*> m_controls;
+    float m_controlSize = 10.0f;
+    Control* m_controlMove = nullptr;
+    Control* m_controlRotate = nullptr;
+    Control* m_controlSizeX = nullptr;
+    Control* m_controlSizeY = nullptr;
+    Control* m_controlScale = nullptr;
+    std::vector<Control*> m_controls;
 };
 
 } // namespace view

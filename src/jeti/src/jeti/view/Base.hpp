@@ -100,7 +100,7 @@ public:
     float distanceTo(const glm::vec2&) const;
     float distanceTo(const glm::vec3&) const;
 
-    bool isPointInsideShape(const glm::vec2&) const;
+    bool isPointInsideCircle(const glm::vec2&) const;
     bool isPointInsideShape(const glm::vec3&) const;
 
     Mesh* mesh_DEBUG() const { return m_mesh; }

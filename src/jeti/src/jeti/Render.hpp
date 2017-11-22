@@ -63,6 +63,7 @@ public:
     Render(Camera*);
     ~Render();
 
+    void setBaseScale(float scaleBase) { m_scaleBase = scaleBase; }
     void setZNear(float zNear) { m_zNear = zNear; }
     void setZFar(float zFar) { m_zFar = zFar; }
 

@@ -27,7 +27,7 @@ namespace view {
 class Control : public Base
 {
 public:
-    enum class Role : int {NONE, MOVE, ROTATE, SIZEX, SIZEY};
+    enum class Role : int {NONE, MOVE, ROTATE, RESIZEX, RESIZEY, SCALE};
     Control(Role, Mesh*, control::Material*);
     ~Control() override;
 
