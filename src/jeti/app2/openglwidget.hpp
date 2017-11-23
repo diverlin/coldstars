@@ -24,7 +24,13 @@ public:
     void add(jeti::view::Base*);
     void take(jeti::view::Base*);
 
+    void remove(jeti::view::Base*);
+    void select(jeti::view::Base*);
+
     jeti::Render* render() const { return m_render; }
+
+signals:
+    void selectedObjectChanged(jeti::view::Base*);
 
 protected:
     void initializeGL() override;

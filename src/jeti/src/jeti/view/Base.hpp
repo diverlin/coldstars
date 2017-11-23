@@ -139,7 +139,7 @@ private:
     bool m_clear_orientation = false;
     Base* m_parent = nullptr;
 
-    glm::vec4 m_color;
+    glm::vec4 m_color = glm::vec4(1.0f);
     meti::vec3 m_position;
 
     control::Material* m_material = nullptr;

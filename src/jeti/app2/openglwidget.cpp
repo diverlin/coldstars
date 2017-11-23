@@ -113,10 +113,27 @@ OpenGLWidget::_findClosest(const glm::vec2& cursorPos) const
     return nullptr;
 }
 
+void OpenGLWidget::select(jeti::view::Base* object)
+{
+    m_selectedObject = object;
+}
+
+void OpenGLWidget::remove(jeti::view::Base* object)
+{
+    _resetSelection();
+    for (std::vector<jeti::view::Base*>::iterator it = m_objects.begin(); it != m_objects.end(); ++it) {
+        if (*it == object) {
+            it = m_objects.erase(it);
+            return;
+        }
+    }
+}
+
 void OpenGLWidget::_trySelect(const glm::vec2& cursorPos)
 {
     m_selectedObject = _findClosest(cursorPos);
     if (m_selectedObject) {
+        emit selectedObjectChanged(m_selectedObject);
         jeti::view::Editable* baseEditable = static_cast<jeti::view::Editable*>(m_selectedObject);
         m_controlObject = baseEditable->collisionWithControls(cursorPos);
     }

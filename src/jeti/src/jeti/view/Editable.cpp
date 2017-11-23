@@ -35,6 +35,17 @@ Editable::Editable(Mesh* mesh, control::Material* material)
     m_controlSizeY = new Control(Control::Role::RESIZEY, mesh, material);
     m_controlScale = new Control(Control::Role::SCALE, mesh, material);
 
+    glm::vec4 white = glm::vec4(1.0, 1.0, 1.0, 1.0);
+    glm::vec4 red = glm::vec4(1.0, 0.8, 0.8, 1.0);
+    glm::vec4 green = glm::vec4(0.8, 1.0, 0.8, 1.0);
+    glm::vec4 blue = glm::vec4(0.8, 0.8, 1.0, 1.0);
+
+    m_controlMove->setColor(glm::vec4(0.8, 0.6, 0.8, 1.0));
+    m_controlRotate->setColor(green);
+    m_controlSizeX->setColor(red);
+    m_controlSizeY->setColor(green);
+    m_controlScale->setColor(blue);
+
     m_controls.push_back(m_controlMove);
     m_controls.push_back(m_controlRotate);
     m_controls.push_back(m_controlSizeX);
