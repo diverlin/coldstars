@@ -54,10 +54,16 @@ MainWindow::MainWindow()
     mainLayout->addWidget(bottomFrame);
 
     // read settings and init ui
-    QPushButton* btn = new QPushButton(tr("Create New Obj"));
-    bottomLeftFrame->layout()->addWidget(btn);
-    connect(btn, &QPushButton::clicked, this, [this](bool) {
+    QPushButton* add = new QPushButton(tr("Create Obj"));
+    bottomLeftFrame->layout()->addWidget(add);
+    connect(add, &QPushButton::clicked, this, [this](bool) {
         __create_object();
+    });
+
+    QPushButton* del = new QPushButton(tr("Delete Obj"));
+    bottomLeftFrame->layout()->addWidget(del);
+    connect(del, &QPushButton::clicked, this, [this](bool) {
+        __delete_object();
     });
 }
 
@@ -92,6 +98,9 @@ MainWindow::__create_glWidget() const
     format.setVersion(2, 0);
     format.setProfile(QSurfaceFormat::CoreProfile);
     widget->setFormat(format);
+
+    connect(widget, &OpenGLWidget::selectedObjectChanged, this, &MainWindow::__slot_changeCurrentItem);
+
     return widget;
 }
 
@@ -99,6 +108,10 @@ QTreeWidget*
 MainWindow::__create_nodeTreeWidget() const
 {
     QTreeWidget* widget = new QTreeWidget;
+
+    // connection
+    connect(widget, &QTreeWidget::currentItemChanged, this, &MainWindow::__slot_onCurrentItemChanged);
+
     return widget;
 }
 
@@ -110,7 +123,9 @@ void MainWindow::__create_object() {
     if (!m_mesh2) { // some bug, the obj with such mesh is not rendered
         m_mesh2 = new jeti::Mesh;
     }
+
     qDebug()<<"__create_object";
+
     m_counter++;
     jeti::control::Material* material = new jeti::control::Material(m_glWidget->render()->materialCollisionRadius()->model());
     jeti::view::Editable* object = new jeti::view::Editable(m_mesh, material);
@@ -123,4 +138,42 @@ void MainWindow::__create_object() {
     QTreeWidgetItem* item = new QTreeWidgetItem();
     item->setText(0, "object");
     m_nodeTree->addTopLevelItem(item);
+
+    m_itemsobjects_map.insert(std::make_pair(item, object));
+}
+
+void MainWindow::__delete_object() {
+    QTreeWidgetItem* currentItem = m_nodeTree->currentItem();
+    if (!currentItem) {
+        return;
+    }
+
+    std::map<QTreeWidgetItem*, jeti::view::Base*>::iterator it = m_itemsobjects_map.find(currentItem);
+    if (it == m_itemsobjects_map.end()) {
+        return;
+    }
+    m_nodeTree->removeItemWidget(currentItem, m_nodeTree->currentColumn());
+    jeti::view::Base* object = it->second;
+    m_glWidget->remove(object);
+
+    m_itemsobjects_map.erase(it);
+
+    delete currentItem;
+    delete object;
+}
+
+
+void MainWindow::__slot_onCurrentItemChanged(QTreeWidgetItem* curr, QTreeWidgetItem* prev)
+{
+    m_glWidget->select(m_itemsobjects_map[curr]);
+}
+
+void MainWindow::__slot_changeCurrentItem(jeti::view::Base* object)
+{
+    for(std::map<QTreeWidgetItem*, jeti::view::Base*>::iterator it = m_itemsobjects_map.begin(); it != m_itemsobjects_map.end(); ++it) {
+        if (it->second == object) {
+            m_nodeTree->setCurrentItem(it->first);
+            return;
+        }
+    }
 }

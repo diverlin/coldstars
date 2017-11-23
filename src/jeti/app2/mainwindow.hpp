@@ -2,19 +2,25 @@
 
 #include <QMainWindow>
 
-namespace qeti {
-class ValueControlWidget;
-class PointControlWidget;
-} // namespace qeti
+#include <map>
+
+//namespace qeti {
+//class ValueControlWidget;
+//class PointControlWidget;
+//} // namespace qeti
 
 class OpenGLWidget;
 class QBoxLayout;
 class QCheckBox;
 class QTreeWidget;
+class QTreeWidgetItem;
 
 
 namespace jeti {
 class Mesh;
+namespace view {
+class Base;
+} // namespace view
 } // namespace jeti
 
 class MainWindow: public QMainWindow {
@@ -34,10 +40,17 @@ private:
     OpenGLWidget* __create_glWidget() const;
     QTreeWidget* __create_nodeTreeWidget() const;
 
-    void __create_object();
-
     jeti::Mesh* m_mesh = nullptr;
     jeti::Mesh* m_mesh2 = nullptr;
+
+    std::map<QTreeWidgetItem*, jeti::view::Base*> m_itemsobjects_map;
+
+    void __create_object();
+    void __delete_object();
+
+private slots:
+    void __slot_onCurrentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
+    void __slot_changeCurrentItem(jeti::view::Base*);
 };
 
 
