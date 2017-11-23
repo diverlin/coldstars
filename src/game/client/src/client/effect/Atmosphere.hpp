@@ -19,11 +19,11 @@
 
 #pragma once
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 namespace view {
 
-class Atmosphere : public jeti::Base
+class Atmosphere : public jeti::view::Base
 {
 public:
     Atmosphere();

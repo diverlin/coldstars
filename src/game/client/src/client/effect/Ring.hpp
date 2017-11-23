@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
-class Ring : public jeti::Base
+class Ring : public jeti::view::Base
 {
 public:
     Ring();

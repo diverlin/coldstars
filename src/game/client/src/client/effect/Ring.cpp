@@ -22,7 +22,7 @@
 
 Ring::Ring()
     :
-      jeti::Base()
+      jeti::view::Base()
 {}
 
 Ring::~Ring()

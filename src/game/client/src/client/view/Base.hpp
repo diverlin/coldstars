@@ -24,7 +24,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 namespace jeti {
 
@@ -46,7 +46,7 @@ class Base;
 
 namespace view {
 
-class Base : public jeti::Base {
+class Base : public jeti::view::Base {
 public:
     Base(control::Base*);
     ~Base();

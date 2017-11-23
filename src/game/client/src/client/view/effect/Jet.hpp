@@ -25,8 +25,11 @@
 namespace jeti {
 
 class Point;
-class Base;
 class Render;
+
+namespace view {
+class Base;
+} // namespace view
 
 namespace particlesystem {
 class Jet;
@@ -40,13 +43,13 @@ namespace effect {
 class Jet
 {
 public:
-    Jet(jeti::Base*, const meti::vec3&, float);
+    Jet(jeti::view::Base*, const meti::vec3&, float);
     ~Jet();
 
     void draw(const jeti::Render&);
 
 private:
-    jeti::Base* m_parent = nullptr;
+    jeti::view::Base* m_parent = nullptr;
     jeti::Point* m_point = nullptr;
     jeti::particlesystem::Jet* m_particlesystem = nullptr;
 }; 

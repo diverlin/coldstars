@@ -21,13 +21,13 @@
 
 ////#include <core/common/Base.hpp>
 
-//#include <jeti/Base.hpp>
+//#include <jeti/view/Base.hpp>
 
 //namespace jeti {
 //class Render;
 //}
 
-//class BaseDecor : public jeti::BaseView
+//class BaseDecor : public jeti::view::BaseView
 //{
 //public:
 //    BaseDecor()=default;

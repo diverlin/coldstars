@@ -20,7 +20,7 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Material.hpp>
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 #include <jeti/animation/OpacityAnimation.hpp>
 
@@ -29,9 +29,9 @@
 namespace view {
 namespace effect {
 
-Shield::Shield(jeti::Base* parent)
+Shield::Shield(jeti::view::Base* parent)
     :
-      jeti::Base()
+      jeti::view::Base()
 {       
     _setParent(parent);
     m_opacityAnimation = new jeti::animation::Opacity(_color().a, 0.02f, 0.5f, 0.95f, 1.5f, true);
