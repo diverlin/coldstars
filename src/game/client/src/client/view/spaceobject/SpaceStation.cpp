@@ -68,7 +68,7 @@ SpaceStation::~SpaceStation()
 
 void SpaceStation::draw(const jeti::Render& render) const
 {
-    jeti::Base::draw(render);
+    jeti::view::Base::draw(render);
 
     //UpdateRenderStuff_2D();
         

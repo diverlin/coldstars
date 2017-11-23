@@ -19,11 +19,11 @@
 
 #pragma once
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 namespace effect {
 
-class Base : public jeti::Base
+class Base : public jeti::view::Base
 {
 public:
     Base();

@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <jeti/Base.hpp>
+#include <jeti/view/Base.hpp>
 
 #include <glm/glm.hpp>
 
@@ -35,10 +35,10 @@ class Opacity;
 namespace view {
 namespace effect {
 
-class Shield : public jeti::Base
+class Shield : public jeti::view::Base
 {  
 public:
-    Shield(jeti::Base*);
+    Shield(jeti::view::Base*);
     ~Shield();
 
     void dissipate();

@@ -21,7 +21,7 @@
 
 //#include <core/Base.hpp>
 
-//#include <jeti/Base.hpp>
+//#include <jeti/view/Base.hpp>
 
 //#include <vector>
 
@@ -75,7 +75,7 @@
 //        ~StarsystemRender();
 
 //    private:
-//        std::vector<jeti::Base*> m_objects;
+//        std::vector<jeti::view::Base*> m_objects;
 
 //        // VISIBLE ENTITY LIST
 //        std::vector<Star*>         visible_STAR_vec;
@@ -101,7 +101,7 @@
 //        void RenderAxis(const jeti::Render&) const;
 
 //        void clearVisibleEntities();
-//        void addIfVisible(jeti::Base*);
+//        void addIfVisible(jeti::view::Base*);
 
 ////        void addIfVisible(Star*);
 ////        void addIfVisible(Planet*);

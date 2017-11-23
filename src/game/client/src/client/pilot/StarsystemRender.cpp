@@ -92,7 +92,7 @@
 ////    visible_text_DAMAGE_vec.clear();
 //}
 
-//void StarsystemRender::addIfVisible(jeti::Base* ob)
+//void StarsystemRender::addIfVisible(jeti::view::Base* ob)
 //{
 //    assert(false);
 //    //    if (ob->inRect(client::shortcuts::screen()->data().rect)) {
