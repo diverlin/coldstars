@@ -8,6 +8,7 @@
 uniform mat4 u_ModelMatrix;
 uniform mat4 u_ProjectionViewMatrix;
 uniform float u_scale;
+uniform float u_time;
 
 layout(location = VERTEX_POSITION_LOCATION) in vec3 position;
 layout(location = VERTEX_NORMAL_LOCATION)   in vec3 normal;
@@ -19,7 +20,11 @@ void main(void)
 {
     vec4 vertexPos = u_ModelMatrix * vec4(position, 1.0f);     
     gl_Position = u_ProjectionViewMatrix * vertexPos; 
-    gl_PointSize = normal.x/u_scale;
+
+    float size = normal.x/u_scale;
+    float factor = cos(0.5*size*u_time);
+    
+    gl_PointSize = size + 2*factor;
 
     vColor = color; 
 }

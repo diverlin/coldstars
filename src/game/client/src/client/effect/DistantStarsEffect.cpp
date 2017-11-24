@@ -70,24 +70,24 @@ DistantStars* genDistantStars(int color_id)
         glm::vec3 position = meti::rand::gen_vec3xy(400, 10000);
         position.z = -meti::rand::gen_int(800, 1000);
 
-        float min = 0.5f;
-        float mid = 0.8f;
+        float b = 1.0f;
+        float d = 0.2f;
         glm::vec4 color(1.0f);
         int choice = meti::rand::gen_int(0,3);
         if (choice == 0) {
-            color.r = meti::rand::gen_float(min, 1.0);
-            color.g = meti::rand::gen_float(mid, 1.0);
-            color.b = meti::rand::gen_float(mid, 1.0);
+            color.r = meti::rand::gen_float(b-d, 1.0);
+            color.g = meti::rand::gen_float(b, 1.0);
+            color.b = meti::rand::gen_float(b, 1.0);
         }
         if (choice == 1) {
-            color.r = meti::rand::gen_float(mid, 1.0);
-            color.g = meti::rand::gen_float(min, 1.0);
-            color.b = meti::rand::gen_float(mid, 1.0);
+            color.r = meti::rand::gen_float(b, 1.0);
+            color.g = meti::rand::gen_float(b-d, 1.0);
+            color.b = meti::rand::gen_float(b, 1.0);
         }
         if (choice == 2) {
-            color.r = meti::rand::gen_float(mid, 1.0);
-            color.g = meti::rand::gen_float(mid, 1.0);
-            color.b = meti::rand::gen_float(min, 1.0);
+            color.r = meti::rand::gen_float(b, 1.0);
+            color.g = meti::rand::gen_float(b, 1.0);
+            color.b = meti::rand::gen_float(b-d, 1.0);
         }
         float size = meti::rand::gen_float(4.0, 10.0);
 
