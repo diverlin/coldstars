@@ -13,8 +13,4 @@ void main (void)
 {  	 
     vec4 texel = texture2D(u_Texture0, gl_PointCoord);
     color = vColor*texel;
-    float offset = 2*vColor.r;
-
-    float factor = clamp(cos(offset*u_time), 0.7, 1.0);
-    color.rgb *= factor;
 }
