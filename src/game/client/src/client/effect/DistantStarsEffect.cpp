@@ -67,9 +67,8 @@ DistantStars* genDistantStars(int color_id)
     std::vector<float> sizes;
 
     for (int i=0; i<distStar_num; i++) {
-        //float z = -meti::rand::gen_int(799, 999);
-        float z = meti::rand::gen_int(-1000, 1000);
-        glm::vec3 position = meti::rand::gen_vec3xy(0, 3000);
+        glm::vec3 position = meti::rand::gen_vec3xy(400, 10000);
+        position.z = -meti::rand::gen_int(800, 1000);
 
         float min = 0.5f;
         float mid = 0.8f;
@@ -90,11 +89,7 @@ DistantStars* genDistantStars(int color_id)
             color.g = meti::rand::gen_float(mid, 1.0);
             color.b = meti::rand::gen_float(min, 1.0);
         }
-        float size = meti::rand::gen_float(5.0, 10.0)*10;
-        if (meti::rand::gen_int(15) == 1) {
-            size = meti::rand::gen_float(13.0, 16.0f);
-            color *= 1.2;
-        }
+        float size = meti::rand::gen_float(4.0, 10.0);
 
         positions.push_back(position);
         colors.push_back(color);
