@@ -59,10 +59,9 @@ void DistantNebulas::draw(const jeti::Render& render) const {
 }
 
 
-DistantNebula::DistantNebula(float paralaxFactor)
+DistantNebula::DistantNebula()
     :
       Base()
-    , m_paralaxFactor(paralaxFactor)
 {
 }
    
@@ -72,6 +71,9 @@ DistantNebula::~DistantNebula()
 void DistantNebula::update() {
     _updateModelMatrix();
 }
+
+
+
 
 DistantNebulas* genDistantNebulas(int color_id)
 {
@@ -91,29 +93,27 @@ DistantNebulas* genDistantNebulas(int color_id)
 //            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
 //        }
 
-        //float z = -meti::getRandInt(799.0f, 999.0f);
-
-        float radius_base = 700.f;
+        float radius_base = 2000.f;
         float rate = 0.2f;
         float radius_delta = radius_base*meti::rand::gen_float(-rate, rate);
         float radius = radius_base + radius_delta;
         float angle_delta = angle_base*meti::rand::gen_float(-rate, rate);
         float angle = angle_base + angle_delta;
         glm::vec3 position = meti::xy_vec3(radius, angle);
+        position.z = -meti::rand::gen_float(799.0f, 999.0f);
 
-        float paralaxFactor = meti::rand::gen_float(1.005f, 1.02f);
-        DistantNebula* dn = new DistantNebula(paralaxFactor);
+        DistantNebula* dn = new DistantNebula();
 
         dn->setMaterial(material);
         dn->setMesh(mesh);
         dn->setPosition(position);
-        dn->setSize(meti::rand::gen_float(10.f, 15.f)*material->size());
+        dn->setSize(2*meti::rand::gen_float(10.f, 15.f)*material->size());
         //dn->SetAngle(angle);
         //dn->SetDeltaAngle(delta_angle);
         nebulas.push_back(dn);
 
         if (material->model()->is_rotated) {
-            float delta_angle = meti::rand::gen_sign() * meti::rand::gen_float(0.0001f, 0.0005f);
+            float delta_angle = meti::rand::gen_sign() * meti::rand::gen_float(0.001f, 0.005f);
             jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(meti::OZ, delta_angle);
             dn->setAnimationRotation(animation);
         }

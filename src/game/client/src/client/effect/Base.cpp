@@ -17,19 +17,6 @@
 */
 
 #include "Base.hpp"
-////#include <math/rand.hpp>
-//#include <meti/RandUtils.hpp>
-//#include <common/constants.hpp>
-////#include <ceti/StringUtils.hpp>
-
-//#include <client/resources/Utils.hpp>
-
-//#include <jeti/Render.hpp>
-//#include <jeti/Material.hpp>
-//#include <jeti/animation/ConstantRotation.hpp>
-
-//#include <glm/gtx/transform.hpp>
-
 
 namespace effect {
 

@@ -39,13 +39,19 @@ private:
 class DistantNebula : public Base
 {
 public:
-    DistantNebula(float);
+    DistantNebula();
     virtual ~DistantNebula();
 
     void update();
+};
 
-private:
-    float m_paralaxFactor = 1.0f;
+class DistantNebula3D : public DistantNebula
+{
+public:
+    DistantNebula3D();
+    virtual ~DistantNebula3D();
+
+    void update() override final;
 };
 
 DistantNebulas* genDistantNebulas(int color_id = -1);
