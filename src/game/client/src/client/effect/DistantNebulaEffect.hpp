@@ -60,8 +60,9 @@ public:
 
     void update() override final;
     void draw(const jeti::Render&) const override final;
+
 private:
-    std::vector<DistantNebula2D*> m_planes;
+    std::vector<ceti::control::Orientation*> m_planes;
 };
 
 DistantNebulas* genDistantNebulas(int color_id = -1);

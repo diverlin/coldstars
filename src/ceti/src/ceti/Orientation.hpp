@@ -85,6 +85,7 @@ namespace control {
 class Orientation
 {
 public:
+    Orientation();
     Orientation(model::Orientation* model);
     virtual ~Orientation();
 
@@ -115,6 +116,7 @@ public:
     model::Orientation* model() const { return m_model_orientation; }
 
 private:
+    bool m_own_model = false;
     model::Orientation* m_model_orientation = nullptr;
 
     bool m_isUpdated = false;
