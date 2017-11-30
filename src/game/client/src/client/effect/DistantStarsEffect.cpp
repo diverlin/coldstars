@@ -68,7 +68,7 @@ DistantStars* genDistantStars(int color_id)
 
     for (int i=0; i<distStar_num; i++) {
         glm::vec3 position = meti::rand::gen_vec3xy(400, 10000);
-        position.z = -meti::rand::gen_int(800, 1000);
+        position.z = -1000-meti::rand::gen_int(800, 1000);
 
         float b = 1.0f;
         float d = 0.2f;

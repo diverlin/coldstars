@@ -711,18 +711,23 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
         return;
     }
 
-    // projection
-    render.applyPerspectiveProjection();
-
     if (m_player->show().backgroundFbo()) {
         render.fboBackGround().activate(render.size().x, render.size().y);
     }
 
     if (m_player->show().nebulas()) {
+        // projection
+        render.applyOrthogonalProjection();
+
+        glEnable(GL_DEPTH_TEST);
         m_distantNebulas->update();
         m_distantNebulas->draw(render);
+        glDisable(GL_DEPTH_TEST);
     }
     if (m_player->show().stars()) {
+        // projection
+        render.applyPerspectiveProjection();
+
         m_distantStars->draw(render);
     }
     if (m_player->show().backgroundFbo()) {

@@ -41,6 +41,7 @@ int_t Base::counter=0;
 Base::Base()
 {
     _genId();
+    //_genOrientation();
 }
 
 Base::Base(Mesh* mesh, control::Material* material)
@@ -72,6 +73,7 @@ void Base::_genId() {
 
 void Base::_genOrientation()
 {
+    assert(m_orientation==nullptr);
     m_clear_orientation = true;
     m_orientation = new ceti::control::Orientation(new ceti::model::Orientation);
 }
@@ -151,6 +153,11 @@ void Base::update()
     _updateModelMatrix();
 }
 
+void Base::update2()
+{
+    _updateModelMatrix2();
+}
+
 void Base::draw(const jeti::Render& render) const
 {
     render.drawMesh(_mesh(), _material(), modelMatrix(), m_color);
@@ -173,7 +180,7 @@ void Base::_updateModelMatrix()
 
     // prepare rotation matrix
     if (m_mesh->isFlat()) {
-        float angle = glm::orientedAngle(m_mesh->originDirection(), m_orientation->direction(), meti::OZ); //M_PI/4.0f;
+        float angle = glm::orientedAngle(m_mesh->originDirection(), m_orientation->direction(), meti::OZ);
         m_matrixRotate = glm::rotate(angle, meti::OZ);
     } else {
         meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
@@ -197,6 +204,50 @@ void Base::_updateModelMatrix()
     } else {
         m_position = _orientation()->position();
     }
+
+    m_matrixTranslate = glm::translate(m_position);
+
+    // combine transformations
+    m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
+
+    __updateCollisionModelMatrix();
+}
+
+void Base::_updateModelMatrix2()
+{
+    assert(m_mesh);
+    assert(m_orientation);
+
+    if (std::fabs(angle) < 0.01f) {
+        angle = meti::rand::gen_float(0, 2*3.14);
+        d_angle = /*meti::rand::gen_sign()**/meti::rand::gen_float(0.001f, 0.003f);
+    }
+    angle += d_angle;
+
+    // prepare rotation matrix
+//    meti::quatBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+    //meti::quatBetweenVectors(m_quatDirection, meti::OX, m_orientation->direction());
+
+    m_matrixRotate = glm::rotate(angle, rotationAxis);
+    glm::vec4 up_ = m_matrixRotate * glm::vec4(upOrigin.x, upOrigin.y, upOrigin.z, 1.0f);
+    up = glm::vec3(up_.x, up_.y, up_.z);
+//    if (m_animationRotation) {
+//        m_animationRotation->update(m_quatAnimation);
+//        m_quatDirection *= m_quatAnimation;
+//    }
+
+    //m_matrixRotate = glm::toMat4(m_quatDirection);
+
+    // prepeare scale matrix
+    m_matrixScale = glm::scale(m_orientation->size());
+
+    // prepare transition matrix
+//    if (m_parent) {
+//        m_position = m_parent->matrixRotate() * m_parent->matrixScale() * glm::vec4(m_orientation->position(), 1.0f); // parent rotation offset position
+//        m_position += m_parent->_orientation()->position();
+//    } else {
+        m_position = _orientation()->position();
+//    }
 
     m_matrixTranslate = glm::translate(m_position);
 

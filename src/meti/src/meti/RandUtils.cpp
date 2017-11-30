@@ -107,6 +107,14 @@ glm::vec3 gen_vec3xy_unit()
     return glm::vec3(std::sin(alpha), std::cos(alpha), 0.0f);
 }
 
+glm::vec3 gen_vec3_unit()
+{
+    float x = gen_float(0.01f, 1.0f);
+    float y = gen_float(0.01f, 1.0f);
+    float z = gen_float(0.01f, 1.0f);
+    return glm::normalize(glm::vec3(x,y,z));
+}
+
 void fill_vec3xy_unit(glm::vec3& direction)
 {
     float alpha = gen_angle();

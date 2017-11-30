@@ -36,34 +36,22 @@ private:
     std::vector<DistantNebula*> m_nebulas;
 };
 
+
 class DistantNebula : public Base
 {
 public:
     DistantNebula();
     virtual ~DistantNebula();
 
-    void update();
-};
-
-class DistantNebula2D : public DistantNebula
-{
-public:
-    DistantNebula2D();
-    virtual ~DistantNebula2D();
-};
-
-class DistantNebula3D : public DistantNebula
-{
-public:
-    DistantNebula3D();
-    virtual ~DistantNebula3D();
+    void createChildren(int);
 
     void update() override final;
     void draw(const jeti::Render&) const override final;
 
 private:
-    std::vector<ceti::control::Orientation*> m_planes;
+    std::vector<jeti::view::Base*> m_children;
 };
+
 
 DistantNebulas* genDistantNebulas(int color_id = -1);
 

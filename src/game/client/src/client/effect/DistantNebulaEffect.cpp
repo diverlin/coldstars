@@ -64,48 +64,45 @@ DistantNebula::DistantNebula()
       Base()
 {
 }
-   
+
 DistantNebula::~DistantNebula()
-{}     
-
-void DistantNebula::update() {
-    _updateModelMatrix();
-}
-
-
-
-DistantNebula2D::DistantNebula2D()
-    :
-      DistantNebula()
-{
-}
-
-DistantNebula2D::~DistantNebula2D()
 {}
 
-
-
-
-DistantNebula3D::DistantNebula3D()
-    :
-      DistantNebula()
+void DistantNebula::createChildren(int num)
 {
-}
+    for(int i=0; i<=num; ++i) {
+        jeti::view::Base* child = new jeti::view::Base;
 
-DistantNebula3D::~DistantNebula3D()
-{}
+        child->setMaterial(material());
+        child->genOrientation();
+        child->setMesh(mesh());
+        child->setPosition(position());
+        child->setSize(size());
 
-void DistantNebula3D::update()
-{
-    for(ceti::control::Orientation* plane: m_planes) {
-//        plane->update();
+        child->rotationAxis = meti::rand::gen_vec3_unit();//meti::OY;
+        m_children.push_back(child);
     }
 }
 
-void DistantNebula3D::draw(const jeti::Render& render) const
+void DistantNebula::update()
 {
-    for(ceti::control::Orientation* plane: m_planes) {
-//        plane->draw(render);
+    for(jeti::view::Base* child: m_children) {
+        child->update2();
+    }
+}
+
+void DistantNebula::draw(const jeti::Render& render) const
+{
+    Base::draw(render);
+    for(jeti::view::Base* child: m_children) {
+        glm::vec4 color(child->color());
+        float rate = glm::dot(child->up, meti::OZ);
+        if (rate > 0) {
+            color = glm::vec4(rate);
+            color *= 0.4f;
+            render.drawMesh(*child->mesh(), *child->material(), child->modelMatrix(), color);
+            child->draw(render);
+        }
     }
 }
 
@@ -123,6 +120,7 @@ DistantNebulas* genDistantNebulas(int color_id)
         angle_base += angle_step;
 
         jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::PLANE);
+        mesh->setStates(jeti::Mesh::State::QUAD_ADDITIVE);
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::NEBULA_BACKGROUND);
 
 //        float angle = meti::getRandInt(0, 360);
@@ -131,23 +129,24 @@ DistantNebulas* genDistantNebulas(int color_id)
 //            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
 //        }
 
-        float radius_base = 2000.f;
+        float radius_base = 1500.f;
         float rate = 0.2f;
         float radius_delta = radius_base*meti::rand::gen_float(-rate, rate);
         float radius = radius_base + radius_delta;
         float angle_delta = angle_base*meti::rand::gen_float(-rate, rate);
         float angle = angle_base + angle_delta;
         glm::vec3 position = meti::xy_vec3(radius, angle);
-        position.z = -meti::rand::gen_float(799.0f, 999.0f);
+        position.z = -meti::rand::gen_float(1000.0f, 1500.0f);
 
-        DistantNebula* dn = new DistantNebula3D();
+        DistantNebula* dn = new DistantNebula();
 
         dn->setMaterial(material);
         dn->setMesh(mesh);
         dn->setPosition(position);
-        dn->setSize(2*meti::rand::gen_float(10.f, 15.f)*material->size());
-        //dn->SetAngle(angle);
-        //dn->SetDeltaAngle(delta_angle);
+        dn->setSize(1.0f*meti::rand::gen_float(10.f, 15.f)*material->size());
+
+        dn->createChildren(6);
+
         nebulas.push_back(dn);
 
         if (material->model()->is_rotated) {
