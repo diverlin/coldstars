@@ -227,9 +227,9 @@ void Render::init(int w, int h)
     glewInit();
 
     m_meshQuad = new Mesh;
-    m_meshQuad->setStates(Mesh::States::QUAD);
+    m_meshQuad->setStates(Mesh::State::QUAD);
     m_meshQuadAdditive = new Mesh;
-    m_meshQuadAdditive->setStates(Mesh::States::QUAD_ADDITIVE);
+    m_meshQuadAdditive->setStates(Mesh::State::QUAD_ADDITIVE);
 
     __initAxisMesh();
 
@@ -455,37 +455,37 @@ void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& mater
 void Render::__drawMesh(const Mesh& mesh) const {
     if (mesh.states() != m_activeStates) {
         switch(mesh.states()) {
-        case Mesh::States::QUAD:
+        case Mesh::State::QUAD:
             __disable_POINTSPRITE();
             __enable_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
             break;
-        case Mesh::States::QUAD_ADDITIVE:
+        case Mesh::State::QUAD_ADDITIVE:
             __disable_POINTSPRITE();
             __enable_ADDITIVE_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
             break;
-        case Mesh::States::NORMAL:
+        case Mesh::State::NORMAL:
             __disable_POINTSPRITE();
             __disable_BLEND();
             __enable_DEPTH_TEST();
             __enable_CULLFACE();
             break;
-        case Mesh::States::PARTICLES:
+        case Mesh::State::PARTICLES:
             __enable_POINTSPRITE();
             __enable_ADDITIVE_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
             break;
-        case Mesh::States::LINES:
+        case Mesh::State::LINES:
             __disable_POINTSPRITE();
             __disable_BLEND();
             __disable_DEPTH_TEST();
             __disable_CULLFACE();
             break;
-        case Mesh::States::NONE:
+        case Mesh::State::NONE:
             assert(false);
         }
         m_activeStates = mesh.states();
@@ -506,12 +506,13 @@ void Render::drawMesh(const Mesh& mesh, const glm::mat4& modelMatrix) const
 }
 
 void Render::drawMesh(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
-{	
+{
     __useProgram(m_shaders.basetexture);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
+        assert(glGetUniformLocation(m_shaders.basetexture, "u_color") != -1);
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
@@ -521,6 +522,22 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
         __drawMesh(mesh);
     }
 }
+//void Render::drawMesh2(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+//{
+//    __useProgram(m_shaders.basetexture);
+//    {
+//        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+//        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+//        glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
+
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+//        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
+
+//        __drawMesh(mesh);
+//    }
+//}
 void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {
     __useProgram(m_shaders.basetexture);

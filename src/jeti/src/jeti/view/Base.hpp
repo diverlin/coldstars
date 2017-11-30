@@ -66,12 +66,24 @@ public:
     Base(Mesh*, control::Material*);
     virtual ~Base();
 
+    float angle = 0;
+    float d_angle = 0;
+    meti::vec3 rotationAxis = meti::OX;
+    glm::vec3 upOrigin = meti::OZ;
+    glm::vec3 up = meti::OZ;
+
     int_t id() const { return m_id; }
 
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& direction() const { return _orientation()->direction(); }
     const glm::vec3& size() const { return _orientation()->size(); }
     float radius() const { return _orientation()->collisionRadius(); }
+
+    control::Material* material() const { return m_material; }
+    Mesh* mesh() const { return m_mesh; }
+
+    const glm::vec4& color() const { return m_color; }
+    glm::vec4& color() { return m_color; }
 
     void setPosition(const glm::vec3& position) { _orientation()->setPosition(position); }
     void setPosition(float x, float y, float z) { _orientation()->setPosition(x,y,z); }
@@ -88,6 +100,7 @@ public:
     void setMesh(Mesh* mesh);
 
     virtual void update();
+    virtual void update2();
     virtual void draw(const jeti::Render& render) const;
 
     void drawCollisionRadius(const jeti::Render& render) const;
@@ -103,12 +116,14 @@ public:
     bool isPointInsideCircle(const glm::vec2&) const;
     bool isPointInsideShape(const glm::vec3&) const;
 
+    void genOrientation() { _genOrientation(); }
+
     Mesh* mesh_DEBUG() const { return m_mesh; }
 
 protected:
     void _genId();
     void _genOrientation();
-    void _setOrientation(ceti::control::Orientation* control) { assert(control); m_orientation = control; }
+    void _setOrientation(ceti::control::Orientation* control) { assert(control); assert(m_orientation==nullptr); m_orientation = control; }
     void _setParent(Base* parent) { assert(parent); m_parent = parent; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
@@ -133,6 +148,7 @@ protected:
 //    const glm::vec3& _size() const;
 
     void _updateModelMatrix();
+    void _updateModelMatrix2();
 
 private:
     int_t m_id = 0;

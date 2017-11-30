@@ -25,7 +25,7 @@ class ObjLoader;
 class Mesh
 { 
 public:
-    enum class States { NONE, QUAD, QUAD_ADDITIVE, NORMAL, PARTICLES, LINES };
+    enum class State { NONE, QUAD, QUAD_ADDITIVE, NORMAL, PARTICLES, LINES };
 
     Mesh();
     Mesh(const std::string&);
@@ -34,7 +34,7 @@ public:
 
     int_t id() const { return m_id; }
 
-    bool isFlat() const { return m_states == States::QUAD || m_states == States::QUAD_ADDITIVE; }
+    bool isFlat() const { return m_states == State::QUAD || m_states == State::QUAD_ADDITIVE; }
 
     //TextureOb* textureOb() const { return m_textureOb; }
     const glm::vec3& boundaryBox() const { return m_boundaryBox; }
@@ -50,8 +50,8 @@ public:
     void draw() const;
     void draw(GLenum) const;
 
-    void setStates(Mesh::States states) { m_states = states; }
-    const States& states() const { return m_states; }
+    void setStates(Mesh::State states) { m_states = states; }
+    const State& states() const { return m_states; }
     
 private:
     struct Vertex {
@@ -65,7 +65,7 @@ private:
     int_t m_id = -1;
     GLenum m_primitiveType = GL_TRIANGLES;
     float m_linesWidth = 1.0f;
-    States m_states = States::NORMAL;
+    State m_states = State::NORMAL;
 
     //TextureOb* m_textureOb = nullptr;
     std::vector<Vertex> m_vertices;
