@@ -85,6 +85,34 @@ DistantNebula2D::~DistantNebula2D()
 
 
 
+
+DistantNebula3D::DistantNebula3D()
+    :
+      DistantNebula()
+{
+}
+
+DistantNebula3D::~DistantNebula3D()
+{}
+
+void DistantNebula3D::update()
+{
+    for(ceti::control::Orientation* plane: m_planes) {
+//        plane->update();
+    }
+}
+
+void DistantNebula3D::draw(const jeti::Render& render) const
+{
+    for(ceti::control::Orientation* plane: m_planes) {
+//        plane->draw(render);
+    }
+}
+
+
+
+
+
 DistantNebulas* genDistantNebulas(int color_id)
 {
     float num = meti::rand::gen_int(3, 5);
@@ -112,7 +140,7 @@ DistantNebulas* genDistantNebulas(int color_id)
         glm::vec3 position = meti::xy_vec3(radius, angle);
         position.z = -meti::rand::gen_float(799.0f, 999.0f);
 
-        DistantNebula2D* dn = new DistantNebula2D();
+        DistantNebula* dn = new DistantNebula3D();
 
         dn->setMaterial(material);
         dn->setMesh(mesh);

@@ -39,6 +39,13 @@ Orientation::data() const
 
 namespace control {
 
+Orientation::Orientation()
+{
+    m_model_orientation = new model::Orientation;
+    m_own_model = true;
+    __updateCollisionRadius();
+}
+
 Orientation::Orientation(model::Orientation* model)
     :
       m_model_orientation(model)
@@ -49,6 +56,9 @@ Orientation::Orientation(model::Orientation* model)
 
 Orientation::~Orientation()
 {
+    if (m_own_model) {
+        delete m_model_orientation;
+    }
 }
 
 void Orientation::setPosition(float x, float y, float z) {
