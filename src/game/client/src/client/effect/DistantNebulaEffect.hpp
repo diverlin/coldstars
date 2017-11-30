@@ -45,6 +45,13 @@ public:
     void update();
 };
 
+class DistantNebula2D : public DistantNebula
+{
+public:
+    DistantNebula2D();
+    virtual ~DistantNebula2D();
+};
+
 class DistantNebula3D : public DistantNebula
 {
 public:
@@ -52,6 +59,9 @@ public:
     virtual ~DistantNebula3D();
 
     void update() override final;
+    void draw(const jeti::Render&) const override final;
+private:
+    std::vector<DistantNebula2D*> m_planes;
 };
 
 DistantNebulas* genDistantNebulas(int color_id = -1);

@@ -74,6 +74,16 @@ void DistantNebula::update() {
 
 
 
+DistantNebula2D::DistantNebula2D()
+    :
+      DistantNebula()
+{
+}
+
+DistantNebula2D::~DistantNebula2D()
+{}
+
+
 
 DistantNebulas* genDistantNebulas(int color_id)
 {
@@ -102,7 +112,7 @@ DistantNebulas* genDistantNebulas(int color_id)
         glm::vec3 position = meti::xy_vec3(radius, angle);
         position.z = -meti::rand::gen_float(799.0f, 999.0f);
 
-        DistantNebula* dn = new DistantNebula();
+        DistantNebula2D* dn = new DistantNebula2D();
 
         dn->setMaterial(material);
         dn->setMesh(mesh);
