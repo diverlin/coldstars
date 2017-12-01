@@ -538,7 +538,6 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
-        assert(glGetUniformLocation(m_shaders.basetexture, "u_color") != -1);
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
 
         glActiveTexture(GL_TEXTURE0);
@@ -577,7 +576,7 @@ void Render::draw(const Mesh& mesh, const control::Material& material, const glm
 void Render::drawMeshLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
-        drawMesh(mesh, materialc, ModelMatrix, glm::vec4(1.0f));
+        drawMesh(mesh, materialc, ModelMatrix);
         return;
     }
 
@@ -1044,7 +1043,7 @@ void Render::drawStarField(int w, int h, float pos_x, float pos_y) const
     }
 }
 
-void Render::__useProgram(GLuint program) const
+void Render::__useProgram(GLint program) const
 {
     GLint id;
     glGetIntegerv(GL_CURRENT_PROGRAM, &id);
