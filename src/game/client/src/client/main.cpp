@@ -248,6 +248,7 @@ public:
         __activate();
 
         gui::Manager& gui = gui::Manager::get();
+
         m_telegramHandler->update();
 
         if (!m_player) {

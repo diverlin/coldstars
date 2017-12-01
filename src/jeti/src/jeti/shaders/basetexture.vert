@@ -8,8 +8,6 @@
 uniform mat4 u_modelMatrix;
 uniform mat4 u_projectionViewMatrix;
 
-uniform vec4 u_color;
-
 layout(location = VERTEX_POSITION_LOCATION) in vec3 position;
 layout(location = VERTEX_TEXCOORD_LOCATION) in vec2 texCoord;
 

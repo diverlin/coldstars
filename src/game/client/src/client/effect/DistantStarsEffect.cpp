@@ -90,7 +90,9 @@ DistantStars* genDistantStars(int color_id)
             color.b = meti::rand::gen_float(b-d, 1.0);
         }
         float size = meti::rand::gen_float(4.0, 10.0);
-
+        if (meti::rand::gen_int(1, 100) == 1) {
+            size *= 5.0f;
+        }
         positions.push_back(position);
         colors.push_back(color);
         sizes.push_back(size);

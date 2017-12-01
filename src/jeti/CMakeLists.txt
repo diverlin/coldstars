@@ -65,7 +65,7 @@ if (USE_APP)
     add_subdirectory(app)
 endif()
 
-set(USE_APP2 ON)
+set(USE_APP2 OFF)
 if (USE_APP2)
     add_subdirectory(app2)
 endif()

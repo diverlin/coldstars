@@ -38,7 +38,8 @@ Star::~Star()
 
 void Star::draw(const jeti::Render& render) const
 {
-    render.drawMesh(_mesh(), _material(), modelMatrix());
+    // ps doing drawing
+    //render.drawMesh(_mesh(), _material(), modelMatrix(), glm::vec4(1.0f));
 }
 
 //void Star::UpdateInfo()

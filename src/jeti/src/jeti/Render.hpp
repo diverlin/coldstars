@@ -45,7 +45,7 @@ class Material;
 const int FBO_NUM = 6;
 const float SCREEN_QUAD_ZPOS = 0.0f; // remove, make it 0
 const float ZDEFAULT = 0.0f;
-const float ZNEAR = 0.0f;
+const float ZNEAR = 1.0f;
 const float ZFAR = 3000.0f;
 
 class Render : public NonCopyable
@@ -110,8 +110,7 @@ public:
     void draw(const Mesh&, const control::Material&, const glm::mat4&) const;
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
-    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color/* = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)*/) const;
-    //void drawMesh2(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color) const;
+    void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)) const;
     void drawMesh_HUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;

@@ -48,6 +48,7 @@
 #include <client/effect/Beam.hpp>
 #include <client/gui/info/GenericTable.hpp>
 
+#include <jeti/GlErrorHelper.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/constants.hpp>
 #include <jeti/Screen.hpp>
@@ -718,11 +719,10 @@ void StarSystem::__renderBackground(jeti::Render& render) const {
     if (m_player->show().nebulas()) {
         // projection
         render.applyOrthogonalProjection();
+        //render.applyPerspectiveProjection();
 
-        glEnable(GL_DEPTH_TEST);
         m_distantNebulas->update();
         m_distantNebulas->draw(render);
-        glDisable(GL_DEPTH_TEST);
     }
     if (m_player->show().stars()) {
         // projection
@@ -868,11 +868,11 @@ void StarSystem::__render(jeti::Render& render)
 
     __renderBackground(render);
     __renderStarPostEffect(render);
-    __renderSpaceObjects(render);
-    __renderSpaceObjectsMeta(render);
-    __renderTexts(render);
-    __renderExperiment(render);
-    __renderHUD(render);
+//    __renderSpaceObjects(render);
+//    __renderSpaceObjectsMeta(render);
+//    __renderTexts(render);
+//    __renderExperiment(render);
+    //__renderHUD(render);
 }
 
 Base*
@@ -952,8 +952,8 @@ void StarSystem::render(control::StarSystem* starsystem)
     assert(starsystem);
 
     m_render.update();
-    __updateVisible(starsystem);
 
+    __updateVisible(starsystem);
     __render(m_render);
 
     //resizeGl(w*scale, h*scale);
