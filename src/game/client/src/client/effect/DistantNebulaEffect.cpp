@@ -98,7 +98,7 @@ void DistantNebula::draw(const jeti::Render& render) const
         float rate = glm::dot(child->up, meti::OZ);
         if (rate > 0) {
             color = glm::vec4(rate);
-            color *= 0.4f;
+            color *= 0.5f;
             render.drawMesh(*child->mesh(), *child->material(), child->modelMatrix(), color);
         }
     }
@@ -124,7 +124,7 @@ DistantNebulas* genDistantNebulas(int color_id)
 //            delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
 //        }
 
-        float radius_base = 1500.f;
+        float radius_base = 2000.f;
         float rate = 0.2f;
         float radius_delta = radius_base*meti::rand::gen_float(-rate, rate);
         float radius = radius_base + radius_delta;

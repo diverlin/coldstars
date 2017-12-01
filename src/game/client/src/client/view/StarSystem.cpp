@@ -868,11 +868,11 @@ void StarSystem::__render(jeti::Render& render)
 
     __renderBackground(render);
     __renderStarPostEffect(render);
-//    __renderSpaceObjects(render);
-//    __renderSpaceObjectsMeta(render);
-//    __renderTexts(render);
-//    __renderExperiment(render);
-    //__renderHUD(render);
+    __renderSpaceObjects(render);
+    __renderSpaceObjectsMeta(render);
+    __renderTexts(render);
+    __renderExperiment(render);
+    __renderHUD(render);
 }
 
 Base*

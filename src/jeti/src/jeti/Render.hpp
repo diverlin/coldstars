@@ -221,7 +221,7 @@ private:
 
     void __resizePostEffects(int, int);
 
-    void __useProgram(GLuint) const;
+    void __useProgram(GLint) const;
 
     void __updateFps();
     void __drawMesh(const Mesh&) const;
