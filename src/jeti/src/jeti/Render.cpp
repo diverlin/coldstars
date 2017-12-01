@@ -428,7 +428,7 @@ void Render::applyOrthogonalProjectionForHUD()
 }
 
 void Render::__setOrthogonalProjection() {
-    m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, m_zNear, m_zFar);
+    m_projectionMatrix = glm::ortho(-m_size.x/2 * m_scale, m_size.x/2 * m_scale, -m_size.y/2 * m_scale, m_size.y/2 * m_scale, 0.0f/*m_zNear*/, m_zFar);
     __updateProjectionViewMatrix();
 }
 
