@@ -17,6 +17,7 @@
 */
 
 #include "Material.hpp"
+#include "GlErrorHelper.hpp"
 
 #include <meti/RandUtils.hpp>
 #include <ceti/descriptor/Texture.hpp>
@@ -33,12 +34,20 @@ namespace {
 
 void loadToVRAM(GLuint& texture, const sf::Uint8* data, int& w, int& h)
 {
+    CHECK_OPENGL_ERRORS
+
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
+
     gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    // cause 1280 error
+//    CHECK_OPENGL_ERRORS
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//    CHECK_OPENGL_ERRORS
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+    CHECK_OPENGL_ERRORS
 }
 
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)

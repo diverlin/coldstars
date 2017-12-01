@@ -220,7 +220,7 @@ void Base::_updateModelMatrix2()
 
     if (std::fabs(angle) < 0.01f) {
         angle = meti::rand::gen_float(0, 2*3.14);
-        d_angle = /*meti::rand::gen_sign()**/meti::rand::gen_float(0.001f, 0.003f);
+        d_angle = /*meti::rand::gen_sign()**/meti::rand::gen_float(0.001f, 0.003f)/1.0f;
     }
     angle += d_angle;
 

@@ -22,6 +22,7 @@
 #include <jeti/Material.hpp> // to be removed
 #include <jeti/Shaders.hpp>
 #include <jeti/ShaderLoader.hpp>
+#include <jeti/GlErrorHelper.hpp>
 
 #include <jeti/Mesh.hpp>
 #include <jeti/Camera.hpp>
@@ -38,6 +39,8 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+#include <iostream>
 
 namespace jeti {
 
@@ -225,6 +228,7 @@ void Render::init(int w, int h)
     m_lastTime = std::chrono::steady_clock::now();
 
     glewInit();
+    CHECK_OPENGL_ERRORS
 
     m_meshQuad = new Mesh;
     m_meshQuad->setStates(Mesh::State::QUAD);
@@ -273,6 +277,26 @@ void Render::init(int w, int h)
     m_shaders.star            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"star.frag");
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
 
+    checkProgramErrors(m_shaders.basetexture);
+    checkProgramErrors(m_shaders.basecolor);
+    checkProgramErrors(m_shaders.black2alpha);
+    checkProgramErrors(m_shaders.shockwave);
+    checkProgramErrors(m_shaders.volumetriclight);
+    checkProgramErrors(m_shaders.light);
+    checkProgramErrors(m_shaders.light_normalmap);
+    checkProgramErrors(m_shaders.blur);
+    checkProgramErrors(m_shaders.extractbright);
+    checkProgramErrors(m_shaders.combine);
+    checkProgramErrors(m_shaders.multitexturing);
+    checkProgramErrors(m_shaders.blank);
+    checkProgramErrors(m_shaders.fogwarspark);
+    checkProgramErrors(m_shaders.flash);
+    checkProgramErrors(m_shaders.mask);
+    checkProgramErrors(m_shaders.particle);
+    checkProgramErrors(m_shaders.particle_blink);
+    checkProgramErrors(m_shaders.star);
+    checkProgramErrors(m_shaders.starfield);
+
     __initPostEffects();
     __makeShortCuts();
 
@@ -282,6 +306,8 @@ void Render::init(int w, int h)
     }
 
     m_initialized = true;
+
+    CHECK_OPENGL_ERRORS
 }
 
 void Render::__initAxisMesh()
@@ -522,22 +548,7 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
         __drawMesh(mesh);
     }
 }
-//void Render::drawMesh2(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
-//{
-//    __useProgram(m_shaders.basetexture);
-//    {
-//        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
-//        glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
-//        glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
-
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
-//        glUniform1i(glGetUniformLocation(m_shaders.basetexture, "u_texture"), 0);
-
-//        __drawMesh(mesh);
-//    }
-//}
 void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {
     __useProgram(m_shaders.basetexture);
@@ -566,7 +577,7 @@ void Render::draw(const Mesh& mesh, const control::Material& material, const glm
 void Render::drawMeshLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
-        drawMesh(mesh, materialc, ModelMatrix);
+        drawMesh(mesh, materialc, ModelMatrix, glm::vec4(1.0f));
         return;
     }
 
