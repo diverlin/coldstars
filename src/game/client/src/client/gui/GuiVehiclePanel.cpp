@@ -16,7 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GuiVehicle2.hpp"
+#include "GuiVehiclePanel.hpp"
 #include "ButtonItemSlot2.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
@@ -31,14 +31,14 @@
 
 namespace gui {
 
-VehicleSimple::VehicleSimple(const glm::vec2& size)
+VehiclePanel::VehiclePanel(const glm::vec2& size)
     :
       Base(gui::Type::PLAYER_VEHICLE, gui::Type::PLAYER_VEHICLE)
 {
     setSize(size);
 }
 
-void VehicleSimple::__clear()
+void VehiclePanel::__clear()
 {
     for (auto* child: _children()) {
         delete child;
@@ -48,14 +48,14 @@ void VehicleSimple::__clear()
     m_vehicle = nullptr;
 }
 
-void VehicleSimple::__bindVehicle(control::Vehicle* vehicle)
+void VehiclePanel::__bindVehicle(control::Vehicle* vehicle)
 {
     __clear();
     __createFunctionalItemSlotsWithCircleGeometry(vehicle);
     m_vehicle = vehicle;
 }    
     
-void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle)
+void VehiclePanel::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicle* vehicle)
 {   
     int angle = 0;
     for (slot::Item* slot: vehicle->slots()) {
@@ -73,7 +73,7 @@ void VehicleSimple::__createFunctionalItemSlotsWithCircleGeometry(control::Vehic
     }
 }    
 
-void VehicleSimple::_updateUnique(client::Player* player)
+void VehiclePanel::_updateUnique(client::Player* player)
 {
     if (m_vehicle) {
         if (m_vehicle == player->npc()->vehicle()) {

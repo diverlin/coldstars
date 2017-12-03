@@ -92,7 +92,12 @@ Player::Player(int_t id)
     
 Player::~Player()
 {}  
-            
+
+void Player::selectWeapon(int offset)
+{
+    assert(false);
+}
+
 bool Player::enterScan(control::Vehicle* vehicle)
 {
     gui::Manager::get().enterScan(this);

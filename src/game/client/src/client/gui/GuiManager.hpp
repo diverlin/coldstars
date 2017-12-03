@@ -68,7 +68,7 @@ public:
     bool updateMouseInteractionWithScanVehicle(const MouseData&);
     void renderScanVehicle(const MouseData&, bool show_skill = true) const;
 
-    void pressEventMBL_onGuiElement(Type);
+    void pressEventMBL_onGuiElement(Type, int offset = 0);
     void resetEventOnGuiElement(Type);
     Base* element(Type) const;
 
@@ -88,7 +88,7 @@ private:
     // shared guis
     Vehicle* m_vehicle = nullptr;
     Radar* m_radar = nullptr;
-    VehicleSimple* m_playerVehicle = nullptr;
+    VehiclePanel* m_vehiclePanel = nullptr;
 
     GuiGalaxyMap* m_galaxymap = nullptr;
 

@@ -60,13 +60,13 @@ Manager::Manager()
 
     glm::vec2 size(gui::RADAR_FRAME_SIZE, gui::RADAR_FRAME_SIZE);
     m_radar = new gui::Radar(size);
-    m_playerVehicle = new VehicleSimple(size);
+    m_vehiclePanel = new VehiclePanel(size);
 
     glm::vec2 position(screen_w/2 - gui::RADAR_FRAME_SIZE, -screen_h/2 + gui::RADAR_FRAME_SIZE);
     m_radar->setScale(1.0f);
-    m_playerVehicle->setScale(1.0f);
+    m_vehiclePanel->setScale(1.0f);
     m_radar->setCenter(position);
-    m_playerVehicle->setCenter(position);
+    m_vehiclePanel->setCenter(position);
 
     
     {
@@ -84,7 +84,7 @@ Manager::~Manager()
 {
     delete m_vehicle;
     delete m_radar;
-    delete m_playerVehicle;
+    delete m_vehiclePanel;
     delete m_skills;
     delete m_galaxymap;
     delete m_slider;
@@ -154,7 +154,7 @@ void Manager::enterScan(client::Player* player)
     if (m_vehicle->isActive()) {
         m_vehicle->unbindVehicle();
     }
-    m_playerVehicle->hide();
+    m_vehiclePanel->hide();
     m_radar->hide();
 
     m_vehicle->bindVehicle(scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
@@ -168,7 +168,7 @@ void Manager::exitScan(client::Player* player)
     m_vehicle->unbindVehicle();
     m_vehicle->hide();
 
-    m_playerVehicle->show();
+    m_vehiclePanel->show();
     m_radar->show();
 }
 
@@ -200,7 +200,7 @@ void Manager::__updateInSpace(client::Player* player)
         //player->GetNpc()->ResetScanTarget();
 
         m_radar->hide();
-        m_playerVehicle->hide();
+        m_vehiclePanel->hide();
 
         gui_galaxymap->show();
         //gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
@@ -218,15 +218,15 @@ void Manager::__updateInSpace(client::Player* player)
     // ugly
     if (m_vehicle->isActive()) {
         m_radar->hide();
-        m_playerVehicle->hide();
+        m_vehiclePanel->hide();
     } else {
         m_radar->show();
-        m_playerVehicle->show();
+        m_vehiclePanel->show();
     }
     //std::cout<<m_radar->box().center().x<<std::endl;
 
     m_radar->update(player);
-    m_playerVehicle->update(player);
+    m_vehiclePanel->update(player);
     //m_space.show();
 }
 
@@ -241,7 +241,7 @@ void Manager::__renderInSpace(jeti::Render& render, client::Player* player)
     }
 
     m_radar->render(render, player);
-    m_playerVehicle->render(render, player);
+    m_vehiclePanel->render(render, player);
     //m_space.render(render, player);
     //gui_space.RenderInfo(data_mouse);
 }
@@ -329,9 +329,9 @@ void Manager::runSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void Manager::pressEventMBL_onGuiElement(Type group)
+void Manager::pressEventMBL_onGuiElement(Type type, int offset)
 {
-    m_space._pressEventMBL_onGuiElement(group, m_player);
+    m_space._pressEventMBL_onGuiElement(type, offset, m_player);
 }    
 
 void Manager::resetEventOnGuiElement(Type group)

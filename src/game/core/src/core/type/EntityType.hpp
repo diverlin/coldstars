@@ -22,6 +22,7 @@
 #include <string>
 
 namespace slot {
+
 enum class Type {
     NONE = 0,
     WEAPON,

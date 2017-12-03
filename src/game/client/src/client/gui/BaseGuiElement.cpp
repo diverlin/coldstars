@@ -78,9 +78,9 @@ Base* Base::element(Type id)
     return nullptr;
 }   
 
-void Base::_pressEventMBL_onGuiElement(Type group, client::Player* player)
+void Base::_pressEventMBL_onGuiElement(Type type, int offset, client::Player* player)
 {
-    Base* button = element(group);
+    Base* button = element(type);
     if (button) {
         button->onPressEventMBL(player);
     }
