@@ -78,15 +78,15 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
         case sf::Keyboard::F: { /*Manager::get().pressEventMBL_onGuiElement(Type::DRIVE_SLOT_SELECTOR);*/ break; }
 
             // WEAPON SLOTS
-        case sf::Keyboard::Num1: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT1_SELECTOR);*/ break; }
-        case sf::Keyboard::Num2: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT2_SELECTOR);*/ break; }
-        case sf::Keyboard::Num3: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT3_SELECTOR);*/ break; }
-        case sf::Keyboard::Num4: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT4_SELECTOR);*/ break; }
-        case sf::Keyboard::Num5: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT5_SELECTOR);*/ break; }
-        case sf::Keyboard::Num6: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT6_SELECTOR);*/ break; }
-        case sf::Keyboard::Num7: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT7_SELECTOR);*/ break; }
-        case sf::Keyboard::Num8: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT8_SELECTOR);*/ break; }
-        case sf::Keyboard::Num9: { /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT9_SELECTOR); */break; }
+        case sf::Keyboard::Num1: { player->selectWeapon(1); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 1);*/ break; }
+        case sf::Keyboard::Num2: { player->selectWeapon(2); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 2);*/ break; }
+        case sf::Keyboard::Num3: { player->selectWeapon(3); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 3);*/ break; }
+        case sf::Keyboard::Num4: { player->selectWeapon(4); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 4);*/ break; }
+        case sf::Keyboard::Num5: { player->selectWeapon(5); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 5);*/ break; }
+        case sf::Keyboard::Num6: { player->selectWeapon(6); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 6);*/ break; }
+        case sf::Keyboard::Num7: { player->selectWeapon(7); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 7);*/ break; }
+        case sf::Keyboard::Num8: { player->selectWeapon(8); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 8);*/ break; }
+        case sf::Keyboard::Num9: { player->selectWeapon(9); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 9);*/ break; }
             
         case sf::Keyboard::A:
         {

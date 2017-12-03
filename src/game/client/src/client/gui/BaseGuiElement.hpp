@@ -122,7 +122,7 @@ protected:
     bool _animationProgramActive() const { return (m_animation != nullptr); }
     void _deleteAnimationProgram();
 
-    void _pressEventMBL_onGuiElement(gui::Type, client::Player*);
+    void _pressEventMBL_onGuiElement(gui::Type, int, client::Player*);
     void _resetStateEventOnGuiElement(gui::Type);
 
     virtual void _updateUnique(client::Player*);

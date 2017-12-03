@@ -22,7 +22,7 @@
 
 #include <client/gui/GuiRadar.hpp>
 #include "../gui/GuiVehicle.hpp"
-#include "../gui/GuiVehicle2.hpp"
+#include <client/gui/GuiVehiclePanel.hpp>
 
 class Renderer;
 

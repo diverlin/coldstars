@@ -25,6 +25,7 @@ ButtonItemSlot2::ButtonItemSlot2(slot::Item* slot)
     :
       BaseButtonItemSlot(slot)
 {
+//    setType(guiSlotType(slot));
 }
 
 ButtonItemSlot2::~ButtonItemSlot2()

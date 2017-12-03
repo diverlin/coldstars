@@ -61,6 +61,8 @@ public:
 
     Show& show() { return m_show; }
 
+    void selectWeapon(int offset);
+
     const meti::vec3& position() const;
     float radius() const;
 

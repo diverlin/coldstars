@@ -27,11 +27,11 @@ class Vehicle;
 
 namespace gui {
 
-class VehicleSimple : public Base
+class VehiclePanel : public Base
 {
 public:
-    VehicleSimple(const glm::vec2&);
-    ~VehicleSimple()=default;
+    VehiclePanel(const glm::vec2&);
+    ~VehiclePanel()=default;
 
 protected:
     virtual void _updateUnique(client::Player*) override final;
