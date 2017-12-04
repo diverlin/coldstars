@@ -49,6 +49,7 @@
 #include <ceti/Logger.hpp>
 
 #include <core/communication/descriptor/MoveVehicle.hpp>
+#include <core/communication/descriptor/ObjectSubject.hpp>
 
 namespace core {
 namespace comm {
@@ -131,7 +132,7 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
         /* CLIENT */
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
-
+    case telegram::Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET: __playerSetSpaceObjectTargetReply(telegram); break;
     default: {
         assert(false);
         break;
@@ -150,6 +151,12 @@ void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
     descriptor::comm::Object telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.endTurn();
+}
+
+void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram) const
+{
+    descriptor::comm::ObjectSubject telegram_descriptor(telegram.data()); // actually no needed it
+    m_telegramCreator.targetingSpaceObject(telegram_descriptor.object(), telegram_descriptor.subject());
 }
 
 } // namespace comm

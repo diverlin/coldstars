@@ -82,6 +82,8 @@ public:
 
     std::vector<control::item::Weapon*> rockets() const;
 
+    std::vector<int> radiusesOfSelectedWeapons() const;
+
 private:
     int m_damage = 0;
     int m_radiusMax = 0;

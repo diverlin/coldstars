@@ -57,21 +57,21 @@ void BTelegramHandler::_addStarSystemToSector(const comm::Telegram& telegram) co
     event::addStarSystemToSector(data.object(), data.parent(), data.position());
 }
 void BTelegramHandler::_addNpcToShip(const comm::Telegram& telegram) const {
-    descriptor::comm::ObjectParent data(telegram.data());
+    descriptor::comm::ObjectSubject data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addNpcToShip(data.object(), data.parent());
+    event::addNpcToShip(data.object(), data.subject());
 }
 
 // items
 void BTelegramHandler::_mountItem(const comm::Telegram& telegram) const {
-    descriptor::comm::ObjectParent data(telegram.data());
+    descriptor::comm::ObjectSubject data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::mountItem(data.object(), data.parent());
+    event::mountItem(data.object(), data.subject());
 }
 void BTelegramHandler::_loadItem(const comm::Telegram& telegram) const {
-    descriptor::comm::ObjectParent data(telegram.data());
+    descriptor::comm::ObjectSubject data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::loadItem(data.object(), data.parent());
+    event::loadItem(data.object(), data.subject());
 }
 /** */
 
@@ -278,9 +278,9 @@ void BTelegramHandler::_garbageSpaceObject(const comm::Telegram& telegram) const
 
 // REMOVE
 void BTelegramHandler::_removeSpaceObjectFromStarSystem(const comm::Telegram& telegram) const {
-    descriptor::comm::ObjectParent data(telegram.data());
+    descriptor::comm::ObjectSubject data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::removeSpaceObjectFromStarSystem(data.object(), data.parent());
+    event::removeSpaceObjectFromStarSystem(data.object(), data.subject());
 }
 
 // MOVE

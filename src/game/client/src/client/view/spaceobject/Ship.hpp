@@ -56,6 +56,9 @@ private:
 
     control::Ship* m_control = nullptr;
     std::vector<view::effect::Jet*> m_driveJets;
+
+protected:
+    void _drawSelectedWeaponsRadius(const jeti::Render& render) const;
 };
 
 } // namespace view

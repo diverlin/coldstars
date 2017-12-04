@@ -96,12 +96,16 @@ std::string to_string(Type type)
         // MOVE
     case Type::MOVE_VEHICLE: { return "telegram::Type::MOVE_VEHICLE"; }
 
+        // shoot
+    case Type::TARGET_SPACEOBJECT: { return "telegram::Type::TARGET_SPACEOBJECT"; }
+
         // GAME STATE
     case Type::END_TURN: { return "telegram::Type::END_TURN"; }
 
         // CLIENT
     case Type::PLAYER_REQUEST_MOVE: { return "telegram::Type::PLAYER_REQUEST_MOVE"; }
     case Type::PLAYER_REQUEST_END_TURN: { return "telegram::Type::PLAYER_REQUEST_END_TURN"; }
+    case Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET: { return "telegram::Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET"; }
 
     default: {
         assert(false);

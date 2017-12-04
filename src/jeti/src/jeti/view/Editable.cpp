@@ -83,7 +83,7 @@ void Editable::update()
     float w = size().x - m_controlSize;
     float h = size().y - m_controlSize;
 
-    float r = 0.5f*radius();
+    float r = 0.5f*collisionRadius();
     m_controlMove->setPosition(position());
     m_controlSizeX->setPosition(position()+glm::vec3(w, 0.0f, 0.0f));
     m_controlSizeY->setPosition(position()+glm::vec3(0.0f, h, 0.0f));

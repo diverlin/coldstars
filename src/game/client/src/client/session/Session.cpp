@@ -31,9 +31,10 @@
 
 namespace client {
 
-Session::Session()
+Session::Session(core::Session::Type type)
     :
-      m_camera(new jeti::Camera(1))
+      core::Session(type)
+    , m_camera(new jeti::Camera(1))
     , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
     , m_inputs(new gui::UserInputInSpace)

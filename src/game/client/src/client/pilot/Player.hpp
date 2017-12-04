@@ -117,6 +117,7 @@ private:
     void __navigate() const;
 
     void __requestServerMoveVehicle(const glm::vec3&) const;
+    void __requestServerSetSpaceObjectTarget(int_t) const;
 
     friend class UserInput;
 };

@@ -77,7 +77,7 @@ public:
     const glm::vec3& position() const { return _orientation()->position(); }
     const glm::vec3& direction() const { return _orientation()->direction(); }
     const glm::vec3& size() const { return _orientation()->size(); }
-    float radius() const { return _orientation()->collisionRadius(); }
+    float collisionRadius() const { return _orientation()->collisionRadius(); }
 
     control::Material* material() const { return m_material; }
     Mesh* mesh() const { return m_mesh; }
@@ -127,7 +127,6 @@ protected:
     void _setParent(Base* parent) { assert(parent); m_parent = parent; }
 
     ceti::control::Orientation* _orientation() const { return m_orientation; }
-    const glm::mat4& _collisionModelMatrix() const { return m_matrixCollisionModel; }
 
     //void _setTransparency(float alpha)  { m_color.a = alpha; }
 
@@ -170,15 +169,10 @@ private:
 
     glm::mat4 m_matrixModel;
 
-    glm::mat4 m_matrixCollisionScale;
-    glm::mat4 m_matrixCollisionModel;
-
     glm::quat m_quatDirection;
     glm::quat m_quatAnimation;
 
     virtual void __renderStuffWhenFocusedInSpace(const Render&) {}
-
-    void __updateCollisionModelMatrix();
 
     void __adjustSizeFromMaterial();
 };

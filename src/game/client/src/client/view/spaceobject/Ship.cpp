@@ -95,42 +95,42 @@ Ship::~Ship()
     }
 }
 
+void Ship::_drawSelectedWeaponsRadius(const jeti::Render& render) const
+{
+    const std::vector<int> radiuses = m_control->weapons().radiusesOfSelectedWeapons();
+    for (int radius: radiuses) {
+        render.drawCircle(position(), radius);
+    }
+}
+
 void Ship::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), modelMatrix());
-    //if (GetDataKorpus().draw_turrels) {
-        //GetComplexWeapon().RenderTurrels();
+    if (m_control->properties().draw_decors) {
         _drawChildren(render);
-    //}
+    }
 
-    //if (GetProperties().grab_radius > 0) {
+    if (m_control->properties().grab_radius > 0) {
         //RenderGrabTrail(render);
-    //}
+    }
 
-    ///////RenderKorpus(render);
-
-    //if (GetProperties().speed > 0) {
-        //glm::vec3 pos = m_control->position();
-        //pos -= m_control->size().x * m_control->direction();
-        //m_driveJet->setCenter(pos);
+    if (m_control->properties().speed > 0) {
         for (view::effect::Jet* driveJet: m_driveJets) {
             driveJet->draw(render);
         }
+    }
 
-
-        //starsystem()->RestoreSceneColor();
-    //}
-
-    //if (ship()->properties().shield_effect_enabled) {
+    if (m_control->properties().shield_effect_enabled) {
         _drawShield(render);
-        //RenderShieldEffect(render, 1.0f - color().a);
-    //}
+    }
 
-        const auto& path = m_control->navigator().path();
-        if (path.centers().size()) {
-            _path()->update(path.centers(), path.directions());
-            _drawPath(render);
-        }
+    const auto& path = m_control->navigator().path();
+    if (path.centers().size()) {
+        _path()->update(path.centers(), path.directions());
+        _drawPath(render);
+    }
+
+    _drawSelectedWeaponsRadius(render);
 }
 
 /* virtual override final */

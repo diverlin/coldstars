@@ -170,7 +170,7 @@ void Base::drawAxis(const jeti::Render& render) const
 
 void Base::drawCollisionRadius(const jeti::Render& render) const
 {
-    render.drawCollisionRadius(_collisionModelMatrix());
+    render.drawCircle(position(), collisionRadius());
 }
 
 void Base::_updateModelMatrix()
@@ -209,8 +209,6 @@ void Base::_updateModelMatrix()
 
     // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
-
-    __updateCollisionModelMatrix();
 }
 
 void Base::_updateModelMatrix2()
@@ -253,20 +251,6 @@ void Base::_updateModelMatrix2()
 
     // combine transformations
     m_matrixModel = m_matrixTranslate * m_matrixRotate * m_matrixScale;
-
-    __updateCollisionModelMatrix();
-}
-
-void
-Base::__updateCollisionModelMatrix()
-{
-    // prepeare scale matrix
-    float r = m_orientation->collisionRadius();
-    assert(r>0);
-    m_matrixCollisionScale = glm::scale(glm::vec3(r, r, 1.0f));
-
-    // combine transformations
-    m_matrixCollisionModel = m_matrixTranslate * m_matrixCollisionScale;
 }
 
 void

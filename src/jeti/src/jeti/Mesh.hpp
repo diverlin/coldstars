@@ -27,7 +27,7 @@ class Mesh
 public:
     enum class State { NONE, QUAD, QUAD_ADDITIVE, NORMAL, PARTICLES, LINES };
 
-    Mesh();
+    Mesh(bool circle = false);
     Mesh(const std::string&);
     Mesh(ceti::descriptor::Mesh*);
     ~Mesh();
@@ -88,7 +88,9 @@ private:
     void __drawVbo() const;
     void __drawVbo(GLenum) const;
     void __validate() const;
+
     void __genQuad();
+    void __genCircle();
 };
 
 } // namespace jeti
