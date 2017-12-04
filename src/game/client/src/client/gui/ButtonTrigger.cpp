@@ -34,7 +34,7 @@ void ButtonTrigger::onPressEventMBL(client::Player* player)
         if (isPressed() == false)
         {
             _setIsPressed(true);
-            ShadeOn();
+            shadeOn();
         }
         else
         {

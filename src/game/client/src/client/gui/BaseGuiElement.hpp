@@ -49,7 +49,7 @@ class Base
 {
 public:
     Base(gui::Type id=gui::Type::NONE,
-         gui::Type group=gui::Type::NONE,
+         gui::Type type=gui::Type::NONE,
          const std::string& _info="",
          jeti::model::Material* material=nullptr);
     virtual ~Base();
@@ -64,7 +64,7 @@ public:
     void setScale(float scale) { m_box.setScale(scale); }
 
     gui::Type id() const { return m_id; }
-    gui::Type group() const { return m_group; }
+    gui::Type type() const { return m_type; }
 
     const ceti::Box2D& box() const { return m_box; }
     ceti::Box2D& box() { return m_box; } // !!!
@@ -105,7 +105,7 @@ public:
     virtual void renderInfo(const jeti::Render&) const {}
 
 protected:
-    void _setGroup(gui::Type group) { m_group = group; }
+    void _setType(gui::Type type) { m_type = type; }
 
     void _setBox(const ceti::Box2D& box) { m_box = box; }
 
@@ -141,7 +141,7 @@ private:
     std::vector<Base*> m_children;
 
     gui::Type m_id;
-    gui::Type m_group;
+    gui::Type m_type;
 
     jeti::control::Material* m_material = nullptr;
 

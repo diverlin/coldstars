@@ -395,9 +395,7 @@ void Vehicle::addItemSlot(slot::Item* slot)
 
     int position = m_slots.size();
 
-    if (slot->type() != slot::Type::WEAPON
-            && slot->type() != slot::Type::CARGO
-            && slot->type() != slot::Type::ARTEFACT) {
+    if (slot->type() != slot::Type::CARGO && slot->type() != slot::Type::ARTEFACT) {
         m_equipmentSlots.push_back(slot);
     }
 
@@ -653,16 +651,14 @@ Vehicle::__itemSlot(int id) const
 bool
 Vehicle::__insertItem(slot::Item* slot, Item* item)
 {
-    if (!slot) {
-        return false;
-    }
-
+    assert(slot);
     if (slot->insert(item)) {
         __increaseMass(item->descriptor()->mass());
         model()->addItem(item->model()->id());
         return true;
     }
 
+    assert(false);
     return false;
 }
 
@@ -671,6 +667,9 @@ Vehicle::mount(Item* item)
 {
     if (item->descriptor()->obGroup() == entity::Type::EQUIPMENT) {
         slot::Item* slot = __freeFunctionalSlot(item->descriptor()->slotType());
+        if (!slot) {
+            return false;
+        }
         return __insertItem(slot, item);
     }
     return false;

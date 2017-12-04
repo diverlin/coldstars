@@ -38,12 +38,64 @@ VehiclePanel::VehiclePanel(const glm::vec2& size)
     setSize(size);
 }
 
+ButtonItemSlot2*
+VehiclePanel::__button(gui::Type type, int offset) const
+{
+    for (ButtonItemSlot2* button: m_slotbuttons) {
+        if (button->type() == type) {
+            if (button->itemSlot()->offset() == offset) {
+                return button;
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+void
+VehiclePanel::unselect(gui::Type type, int offset)
+{
+    ButtonItemSlot2* button = __button(type, offset);
+    if (!button) {
+        return;
+    }
+
+    slot::Item* slot = button->itemSlot();
+    if (slot->item()) {
+        slot->deselectEvent();
+    }
+    button->unpress();
+}
+
+
+void
+VehiclePanel::toggle(gui::Type type, int offset)
+{
+    ButtonItemSlot2* button = __button(type, offset);
+    if (!button) {
+        return;
+    }
+
+    slot::Item* slot = button->itemSlot();
+    if (slot->item()) {
+        if (button->isPressed()) {
+            slot->deselectEvent();
+            button->unpress();
+        } else {
+            slot->selectEvent();
+            button->press();
+        }
+    }
+}
+
+
 void VehiclePanel::__clear()
 {
     for (auto* child: _children()) {
         delete child;
     }
     _children().clear();
+    m_slotbuttons.clear();
     
     m_vehicle = nullptr;
 }
@@ -69,6 +121,8 @@ void VehiclePanel::__createFunctionalItemSlotsWithCircleGeometry(control::Vehicl
             add(button, offset);
 
             angle += 20;
+
+            m_slotbuttons.push_back(button);
         }
     }
 }    

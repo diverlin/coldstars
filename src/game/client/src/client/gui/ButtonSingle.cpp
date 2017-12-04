@@ -29,7 +29,7 @@ void ButtonSingle::onPressEventMBL(client::Player* player)
     
     if (!isLocked()) {
         _setIsPressed(true);
-        ShadeOn();
+        shadeOn();
     }
 }
 

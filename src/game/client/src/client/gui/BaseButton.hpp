@@ -40,6 +40,9 @@ public:
     void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_material_additional = textureOb_additional; }
     void SetTextureObMask(jeti::control::Material* textureOb_mask) { m_material_mask = textureOb_mask; }
 
+    void press();
+    void unpress();
+
     //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }
     void LockOn();
     void LockOff();
@@ -58,7 +61,7 @@ protected:
     void (*m_action)(client::Player*);
 
     void fullShadeOn();
-    void ShadeOn();
+    void shadeOn();
     void shadeOff();
 };
 

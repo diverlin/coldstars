@@ -41,6 +41,18 @@ BaseButton::BaseButton(Type id,
 BaseButton::~BaseButton()
 {}
 
+void BaseButton::press()
+{
+    _setIsPressed(true);
+    shadeOn();
+}
+
+void BaseButton::unpress()
+{
+    _setIsPressed(false);
+    shadeOff();
+}
+
 /* virtual override */
 void BaseButton::resetState()
 {
@@ -60,7 +72,7 @@ void BaseButton::LockOff()
     shadeOff();
 };
 
-void BaseButton::ShadeOn() 
+void BaseButton::shadeOn()
 {
     m_alpha = 0.4f;
 }
