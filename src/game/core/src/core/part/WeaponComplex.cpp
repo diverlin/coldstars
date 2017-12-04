@@ -35,6 +35,18 @@ Weapon::Weapon(control::Vehicle* vehicle)
 {}
 
 
+std::vector<int>
+Weapon::radiusesOfSelectedWeapons() const
+{
+    std::vector<int> radiuses;
+    for (slot::Item* slot: m_slots) {
+        if (slot->item() && slot->isSelected()) {
+            radiuses.push_back(slot->weapon()->radius());
+        }
+    }
+    return radiuses;
+}
+
 bool
 Weapon::addSlot(slot::Item* slot)
 {

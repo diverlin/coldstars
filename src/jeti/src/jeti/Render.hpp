@@ -138,7 +138,7 @@ public:
 
     void drawLines(const Mesh& mesh) const;
     void drawAxis(const glm::mat4&) const;
-    void drawCollisionRadius(const glm::mat4&) const;
+    //void drawCollisionRadius(const glm::mat4&) const;
     void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;
     void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
@@ -155,8 +155,8 @@ public:
     Mesh* quadMesh() const { return m_meshQuad; }
 
     void drawCircle(const glm::vec3& center,
-                    const glm::vec3& size,
-                    const glm::vec4& color) const;
+                    float radius,
+                    const glm::vec4& color = glm::vec4(1.0f)) const;
 
 private:
     projection m_activeProjection = projection::NONE;
@@ -182,6 +182,7 @@ private:
     Mesh* m_meshQuad = nullptr;
     Mesh* m_meshQuadAdditive = nullptr;
     Mesh* m_meshAxis = nullptr;
+    Mesh* m_meshCircle = nullptr;
     control::Material* m_materialCollisionRadius = nullptr;
 
     glm::mat4 m_projectionMatrix;

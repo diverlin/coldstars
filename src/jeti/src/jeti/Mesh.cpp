@@ -22,12 +22,16 @@ const int STRIDE_NORMAL   = 3;
 const int STRIDE_COLOR    = 4;
 } // namespace
 
-Mesh::Mesh()
+Mesh::Mesh(bool circle)
 {
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
-    __genQuad();
+    if (circle) {
+        __genCircle();
+    } else {
+        __genQuad();
+    }
 }
 
 Mesh::Mesh(const std::string& obj_path)
@@ -93,6 +97,37 @@ void Mesh::__genQuad()
     fillLineVertices(objLoader);
 
     m_states = State::QUAD;
+}
+
+void Mesh::__genCircle()
+{
+    m_primitiveType = GL_LINE_LOOP;
+    m_states = State::LINES;
+
+    m_hasTexCoords = false;
+    m_hasNormals = false;
+    m_hasPointsSize = false;
+    m_hasColors = false;
+
+    m_vertices.clear();
+
+    int num = 360;
+    for(int i=0; i<num; ++i) {
+        Vertex vertex;
+
+        float angle = glm::radians(float(i));
+        float x = glm::cos(angle);
+        float y = glm::sin(angle);
+        vertex.position = glm::vec3(x,y,0.0f);
+
+        m_vertices.push_back(vertex);
+    }
+
+    m_vertexCount = m_vertices.size();
+
+    m_linesWidth = 1.0f;
+
+    __updateVbo();
 }
 
 void Mesh::fillLineVertices(const ObjLoader& objLoader)
@@ -300,6 +335,9 @@ void Mesh::__drawVbo() const
 
 void Mesh::__drawVbo(GLenum primitive_type) const
 {
+//    if (primitive_type == GL_LINE_LOOP) {
+//        glLineWidth(m_linesWidth);
+//    }
     glBindVertexArray(m_vaoId);
     glDrawArrays(primitive_type, 0, m_vertexCount);
     glBindVertexArray(0);

@@ -153,7 +153,7 @@ private:
 public:
     Server()
     {
-        core::Sessions::get().add(Machine::server, new core::Session);
+        core::Sessions::get().add(Machine::server, new core::Session(core::Session::Type::SERVER));
         __activate();
 
         m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
@@ -224,7 +224,7 @@ public:
 
     Client()
     {
-        core::Sessions::get().add(Machine::client, new client::Session);
+        core::Sessions::get().add(Machine::client, new client::Session(core::Session::Type::CLIENT));
 
         __activate();
 

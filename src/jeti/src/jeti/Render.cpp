@@ -62,6 +62,7 @@ Render::~Render()
 {
     delete m_meshQuad;
     delete m_meshAxis;
+    delete m_meshCircle;
     delete m_materialCollisionRadius->model();
     delete m_materialCollisionRadius;
 }
@@ -234,13 +235,16 @@ void Render::init(int w, int h)
     m_meshQuad->setStates(Mesh::State::QUAD);
     m_meshQuadAdditive = new Mesh;
     m_meshQuadAdditive->setStates(Mesh::State::QUAD_ADDITIVE);
-
+    m_meshCircle = new Mesh(/*circle*/true);
     __initAxisMesh();
 
     m_size.x = w;
     m_size.y = h;
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    glEnable(GL_LINE_SMOOTH);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 
     // Enable Z-buffer read and write
     glEnable(GL_DEPTH_TEST);
@@ -1066,10 +1070,10 @@ void Render::drawLines(const Mesh& mesh) const
     __drawMesh(mesh);
 }
 
-void Render::drawCollisionRadius(const glm::mat4& modelMatrix) const
-{
-    drawQuad(*m_materialCollisionRadius, modelMatrix);
-}
+//void Render::drawCollisionRadius(const glm::mat4& modelMatrix) const
+//{
+//    drawQuad(*m_materialCollisionRadius, modelMatrix);
+//}
       
 void Render::drawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
 {
@@ -1212,11 +1216,15 @@ void Render::__updateFps()
 }
 
 void Render::drawCircle(const glm::vec3& center,
-                        const glm::vec3& size,
+                        float radius,
                         const glm::vec4& color) const {
-    glm::translate(m_translateMatrix, center);
-    glm::scale(m_scaleMatrix, center);
+    m_translateMatrix = glm::translate(center);
+    m_scaleMatrix = glm::scale(glm::vec3(radius, radius, 1.0f));
     m_modelMatrix = m_translateMatrix * m_scaleMatrix;
+
+    //__useProgram(0);
+    //glLineWidth(m_meshCircle->linesWidth());
+    //drawMesh(*m_meshCircle, *m_materialCollisionRadius, m_modelMatrix, color);
     drawMesh(*m_meshQuad, *m_materialCollisionRadius, m_modelMatrix, color);
 }
 

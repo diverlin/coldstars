@@ -664,12 +664,13 @@ void Player::__clickOn(view::Asteroid* asteroid)
 
 void Player::__clickOn(view::Ship* ship)
 {
-
     switch(m_cursor.mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
-        //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
-        //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
-        //        }
+        if (npc()->vehicle()->weapons().isAnyWeaponSelected()) {
+            __requestServerSetSpaceObjectTarget(ship->control()->id());
+            // telegram...
+            //npc()->vehicle()->weapons().setTarget(ship->control());
+        }
         break;
     }
     case MouseData::Event::RightButtonPress: {
@@ -792,6 +793,11 @@ void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
     // it's more proper to send player id instead, and on server got the id of vehicle which belongs to the certain player
 //    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
     client::TelegramCreator::get().playerRequestMove(npc()->vehicle()->id(), target_pos);
+}
+
+void Player::__requestServerSetSpaceObjectTarget(int_t target_id) const
+{
+    client::TelegramCreator::get().playerRequestSetSpaceObjectTarget(npc()->vehicle()->id(), target_id);
 }
 
 void Player::__navigate() const

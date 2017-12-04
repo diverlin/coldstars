@@ -73,6 +73,7 @@ public:
 
     void moveVehicle(int_t, const glm::vec3&) const;
     void endTurn() const;
+    void targetingSpaceObject(int_t vehicle_id, int_t target_id) const;
 
 private:
     core::comm::TelegramHub& m_telegramHub;

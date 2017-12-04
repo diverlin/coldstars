@@ -25,9 +25,10 @@
 
 namespace core {
 
-Session::Session()
+Session::Session(Type type)
     :
-      m_descriptorsManager(new descriptor::Manager)
+      m_type(type)
+    , m_descriptorsManager(new descriptor::Manager)
     , m_entitiesManager(new manager::Entity)
     , m_garbageManager(new manager::Garbage)
     , m_types(new type::Collector)

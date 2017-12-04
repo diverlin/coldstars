@@ -21,6 +21,7 @@
 #include <core/common/Global.hpp>
 #include <core/communication/Telegram.hpp>
 #include <core/communication/descriptor/MoveVehicle.hpp>
+#include <core/communication/descriptor/ObjectSubject.hpp>
 #include <core/communication/TelegramHub.hpp>
 
 namespace client {
@@ -49,6 +50,12 @@ void TelegramCreator::playerRequestTurnEnd(int_t player)
 {
     descriptor::comm::Object telegram_descriptor(player);
     m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_END_TURN, telegram_descriptor.data()));
+}
+
+void TelegramCreator::playerRequestSetSpaceObjectTarget(int_t vehicle_id, int_t target_id)
+{
+    descriptor::comm::ObjectSubject telegram_descriptor(vehicle_id, target_id);
+    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET, telegram_descriptor.data()));
 }
 
 } // namespace client

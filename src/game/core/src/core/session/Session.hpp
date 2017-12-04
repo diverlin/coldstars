@@ -55,7 +55,9 @@ class Garbage;
 
 class Session {
 public:
-    Session();
+    enum class Type : int { NONE, SERVER, CLIENT };
+
+    Session(Type);
     virtual ~Session()=default;
 
     std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
@@ -73,10 +75,13 @@ public:
 
     virtual void init() {}
 
+    bool isServer() const { return m_type == Type::SERVER; }
+
     TurnTimer& turnTimer() { return m_turnTimer; }
     void endTurn() { m_turnTimer.nextTurn(); }
 
 private:
+    Type m_type = Type::NONE;
     TurnTimer m_turnTimer;
 
     std::shared_ptr<descriptor::Manager> m_descriptorsManager;

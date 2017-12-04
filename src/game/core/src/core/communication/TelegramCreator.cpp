@@ -204,7 +204,7 @@ void TelegramCreator::__addShipToStarSystem(int_t starsystem_id, int_t ship_id, 
 
 void TelegramCreator::__addNpcToShip(int_t ship_id, int_t npc_id) const
 {
-    descriptor::comm::ObjectParent telegram_descriptor(npc_id, ship_id);
+    descriptor::comm::ObjectSubject telegram_descriptor(npc_id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_NPC_TO_SHIP, telegram_descriptor.data()));
 }
 
@@ -259,13 +259,13 @@ void TelegramCreator::__createRocket(int_t descriptor_id, int_t id) const
 
 void TelegramCreator::__mountItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::ObjectParent telegram_descriptor(id, ship_id);
+    descriptor::comm::ObjectSubject telegram_descriptor(id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::MOUNT_ITEM, telegram_descriptor.data()));
 }
 
 void TelegramCreator::__loadItem(int_t ship_id, int_t id) const
 {
-    descriptor::comm::ObjectParent telegram_descriptor(id, ship_id);
+    descriptor::comm::ObjectSubject telegram_descriptor(id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::LOAD_ITEM, telegram_descriptor.data()));
 }
 
@@ -502,7 +502,7 @@ void TelegramCreator::genBullets_DEBUG(control::StarSystem* starsystem, int num)
 
 void TelegramCreator::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
 {
-    descriptor::comm::ObjectParent descriptor(object->id(), object->starsystem()->id());
+    descriptor::comm::ObjectSubject descriptor(object->id(), object->starsystem()->id());
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
 }
 
@@ -540,6 +540,13 @@ void TelegramCreator::endTurn() const
 {
     descriptor::comm::Object descriptor(-1);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::END_TURN, descriptor.data()));
+}
+
+
+void TelegramCreator::targetingSpaceObject(int_t vehicle_id, int_t target_id) const
+{
+    descriptor::comm::ObjectSubject descriptor(vehicle_id, target_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::TARGET_SPACEOBJECT, descriptor.data()));
 }
 
 } // namespace core
