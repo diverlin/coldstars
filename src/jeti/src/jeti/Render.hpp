@@ -154,6 +154,10 @@ public:
     control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
     Mesh* quadMesh() const { return m_meshQuad; }
 
+    void drawCircle(const glm::vec3& center,
+                    const glm::vec3& size,
+                    const glm::vec4& color) const;
+
 private:
     projection m_activeProjection = projection::NONE;
     mutable Mesh::State m_activeStates = Mesh::State::NONE;
@@ -185,6 +189,13 @@ private:
     glm::mat4 m_projectionViewMatrix;
     glm::mat4 m_screenModelMatrix;
     glm::mat4 m_identityMatrix;
+
+    // buffer rendering
+    mutable glm::mat4 m_translateMatrix;
+//    mutable glm::mat4 m_rotateMatrix;
+    mutable glm::mat4 m_scaleMatrix;
+    mutable glm::mat4 m_modelMatrix;
+    //
 
     Light m_light;
 

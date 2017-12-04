@@ -1211,4 +1211,13 @@ void Render::__updateFps()
     }
 }
 
+void Render::drawCircle(const glm::vec3& center,
+                        const glm::vec3& size,
+                        const glm::vec4& color) const {
+    glm::translate(m_translateMatrix, center);
+    glm::scale(m_scaleMatrix, center);
+    m_modelMatrix = m_translateMatrix * m_scaleMatrix;
+    drawMesh(*m_meshQuad, *m_materialCollisionRadius, m_modelMatrix, color);
+}
+
 } // namespace jeti
