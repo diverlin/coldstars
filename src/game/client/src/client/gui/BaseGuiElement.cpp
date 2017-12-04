@@ -35,7 +35,7 @@ Base::Base(Type id,
            jeti::model::Material* material)
     :
       m_id(id),
-      m_group(group),
+      m_type(group),
       m_info(info)
 {
     if (material) {

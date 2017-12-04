@@ -78,42 +78,27 @@ void UserInputInSpace::__manageInputsInSpace(client::Player* player)
         case sf::Keyboard::F: { /*Manager::get().pressEventMBL_onGuiElement(Type::DRIVE_SLOT_SELECTOR);*/ break; }
 
             // WEAPON SLOTS
-        case sf::Keyboard::Num1: { player->selectWeapon(1); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 1);*/ break; }
-        case sf::Keyboard::Num2: { player->selectWeapon(2); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 2);*/ break; }
-        case sf::Keyboard::Num3: { player->selectWeapon(3); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 3);*/ break; }
-        case sf::Keyboard::Num4: { player->selectWeapon(4); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 4);*/ break; }
-        case sf::Keyboard::Num5: { player->selectWeapon(5); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 5);*/ break; }
-        case sf::Keyboard::Num6: { player->selectWeapon(6); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 6);*/ break; }
-        case sf::Keyboard::Num7: { player->selectWeapon(7); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 7);*/ break; }
-        case sf::Keyboard::Num8: { player->selectWeapon(8); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 8);*/ break; }
-        case sf::Keyboard::Num9: { player->selectWeapon(9); /*Manager::get().pressEventMBL_onGuiElement(Type::WEAPON_SLOT_SELECTOR, 9);*/ break; }
-            
+        case sf::Keyboard::Num1: { player->toggleWeapon(0); break; }
+        case sf::Keyboard::Num2: { player->toggleWeapon(1); break; }
+        case sf::Keyboard::Num3: { player->toggleWeapon(2); break; }
+        case sf::Keyboard::Num4: { player->toggleWeapon(3); break; }
+        case sf::Keyboard::Num5: { player->toggleWeapon(4); break; }
+        case sf::Keyboard::Num6: { player->toggleWeapon(5); break; }
+        case sf::Keyboard::Num7: { player->toggleWeapon(6); break; }
+        case sf::Keyboard::Num8: { player->toggleWeapon(7); break; }
+        case sf::Keyboard::Num9: { player->toggleWeapon(8); break; }
+
         case sf::Keyboard::A:
         {
-            //                if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-            //                {
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT1_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT2_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT3_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT4_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT5_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT6_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT7_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT8_SELECTOR);
-            //                    GuiManager::Instance().ResetEventOnGuiElement(Type::WEAPON_SLOT9_SELECTOR);
-            //                }
-            //                else
-            //                {
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(Type::WEAPON_SLOT1_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(Type::WEAPON_SLOT2_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(Type::WEAPON_SLOT3_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT4_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT5_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT6_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT7_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT8_SELECTOR);
-            //                    GuiManager::Instance().PressEventMBL_onGuiElement(gui::type::WEAPON_SLOT9_SELECTOR);
-            //                }
+            if (player->isAnyWeaponSelected()) {
+                for (int i=0; i<=8; ++i) {
+                    player->unselectWeapon(i);
+                }
+            } else {
+                for (int i=0; i<=8; ++i) {
+                    player->toggleWeapon(i);
+                }
+            }
 
             break;
         }

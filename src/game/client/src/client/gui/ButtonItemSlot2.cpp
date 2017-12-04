@@ -17,15 +17,42 @@
 */
              
 #include "ButtonItemSlot2.hpp"
+
 #include <core/slot/ItemSlot.hpp>
-    
+#include <core/type/EntityType.hpp>
+
+namespace {
+
+gui::Type guiTypeFromSlotType(slot::Type slot) {
+    switch(slot)
+    {
+    case slot::Type::CARGO:     { return gui::Type::CARGO_SLOT_SELECTOR; break; }
+    case slot::Type::WEAPON:    { return gui::Type::WEAPON_SLOT_SELECTOR; break; }
+    case slot::Type::DRIVE:     { return gui::Type::DRIVE_SLOT_SELECTOR; break; }
+    case slot::Type::RADAR:     { return gui::Type::RADAR_SLOT_SELECTOR; break; }
+    case slot::Type::BAK:       { return gui::Type::BAK_SLOT_SELECTOR; break; }
+        //case slot::Type::ENERGIZER:   { return gui::Type::ENERGIZER_SLOT_SELECTOR; break; }
+        //case slot::Type::PROTECTOR:   { return gui::Type::PROTECTOR_SLOT_SELECTOR; break; }
+    case slot::Type::DROID:     { return gui::Type::DROID_SLOT_SELECTOR; break; }
+    case slot::Type::FREEZER:   { return gui::Type::FREEZER_SLOT_SELECTOR; break; }
+    case slot::Type::GRAPPLE:   { return gui::Type::GRAPPLE_SLOT_SELECTOR; break; }
+    case slot::Type::SCANER:    { return gui::Type::SCANER_SLOT_SELECTOR; break; }
+        //            case entity::Type::ARTEFACT_SLOT:   { return gui::type::ARTEFACT_SLOT; break; }
+        //            case entity::Type::GATE_SLOT:   { return gui::type::GATE_SLOT; break; }
+    }
+
+    return gui::Type::NONE;
+}
+
+} // namespace
+
 namespace gui {
 
 ButtonItemSlot2::ButtonItemSlot2(slot::Item* slot)
     :
       BaseButtonItemSlot(slot)
 {
-//    setType(guiSlotType(slot));
+    _setType(guiTypeFromSlotType(slot->type()));
 }
 
 ButtonItemSlot2::~ButtonItemSlot2()

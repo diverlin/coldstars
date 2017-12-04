@@ -93,9 +93,19 @@ Player::Player(int_t id)
 Player::~Player()
 {}  
 
-void Player::selectWeapon(int offset)
+bool Player::isAnyWeaponSelected() const
 {
-    assert(false);
+    return npc()->vehicle()->weapons().isAnyWeaponSelected();
+}
+
+void Player::unselectWeapon(int offset)
+{
+    gui::Manager::get().vehiclePanel()->unselect(gui::Type::WEAPON_SLOT_SELECTOR, offset);
+}
+
+void Player::toggleWeapon(int offset)
+{
+    gui::Manager::get().vehiclePanel()->toggle(gui::Type::WEAPON_SLOT_SELECTOR, offset);
 }
 
 bool Player::enterScan(control::Vehicle* vehicle)

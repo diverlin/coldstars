@@ -46,6 +46,8 @@ public:
     GuiKosmoport& kosmoport() { return m_kosmoport; }
     Space& space() { return m_space; }
 
+    VehiclePanel* vehiclePanel() const { return m_vehiclePanel; }
+
     Vehicle* vehicle() const { return m_vehicle; }
     GuiGalaxyMap* galaxy() const { return m_galaxymap; }
 

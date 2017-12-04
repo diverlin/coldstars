@@ -27,17 +27,25 @@ class Vehicle;
 
 namespace gui {
 
+class ButtonItemSlot2;
+
 class VehiclePanel : public Base
 {
 public:
     VehiclePanel(const glm::vec2&);
     ~VehiclePanel()=default;
 
+    void unselect(gui::Type, int offset = 0);
+    void toggle(gui::Type, int offset = 0);
+
 protected:
     virtual void _updateUnique(client::Player*) override final;
 
 private:
     control::Vehicle* m_vehicle = nullptr;
+    std::vector<ButtonItemSlot2*> m_slotbuttons;
+
+    ButtonItemSlot2* __button(gui::Type, int offset) const;
 
     void __clear();
     void __bindVehicle(control::Vehicle*);

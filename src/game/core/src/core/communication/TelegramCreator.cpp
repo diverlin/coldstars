@@ -342,6 +342,14 @@ void TelegramCreator::__equipShip(int_t ship_id) const
         __createRocket(descriptor_id, id);
         __loadItem(ship_id, id);
     }
+
+    {
+        int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
+        int_t id = shortcuts::entities()->nextId();
+
+        __createLazer(descriptor_id, id);
+        __loadItem(ship_id, id);
+    }
 }
 
 void TelegramCreator::createGalaxy(descriptor::Galaxy* galaxy_descriptor)
