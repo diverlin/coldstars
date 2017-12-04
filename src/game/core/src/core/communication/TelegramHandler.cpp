@@ -129,10 +129,13 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
         // GAME STATES
     case telegram::Type::END_TURN: _endTurn(telegram); break;
 
+        // shoot
+    case telegram::Type::VEHICLE_TARGET_SPACEOBJECT: _vehicleTargetSpaceOject(telegram); break;
+
         /* CLIENT */
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET: __playerSetSpaceObjectTargetReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
     default: {
         assert(false);
         break;

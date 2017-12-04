@@ -35,7 +35,7 @@ public:
     void update(int threshold = TURN_AUTODELAY);
     
 private:
-    int m_ticksLeft = TURN_TICKS;
+    int m_ticksLeft = 0;
     unsigned long int m_turnCount = 0;
     bool m_turnEnded = false;
 };

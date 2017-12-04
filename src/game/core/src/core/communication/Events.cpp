@@ -348,6 +348,13 @@ void endTurn()
     core::shortcuts::session()->endTurn();
 }
 
+// shoot
+void targetSpaceObject(int_t object_id, int_t subject_id)
+{
+    control::Ship* ship = core::shortcuts::entities()->ship(object_id);
+    control::SpaceObject* target = core::shortcuts::entities()->ship(subject_id);
+    ship->weapons().setTarget(target);
+}
 
 } // namespace event
 } // namespace comm

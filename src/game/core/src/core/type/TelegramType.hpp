@@ -92,7 +92,7 @@ enum class Type : int
     MOVE_VEHICLE,
 
     // shoot
-    TARGET_SPACEOBJECT,
+    VEHICLE_TARGET_SPACEOBJECT,
 
     // GAME STATE
     END_TURN,
@@ -100,7 +100,7 @@ enum class Type : int
     // CLIENT
     PLAYER_REQUEST_MOVE,
     PLAYER_REQUEST_END_TURN,
-    PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET
+    PLAYER_REQUEST_TARGET_SPACE_OBJECT
 };
 
 std::string to_string(Type);

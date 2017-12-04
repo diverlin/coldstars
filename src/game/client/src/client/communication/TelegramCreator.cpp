@@ -55,7 +55,7 @@ void TelegramCreator::playerRequestTurnEnd(int_t player)
 void TelegramCreator::playerRequestSetSpaceObjectTarget(int_t vehicle_id, int_t target_id)
 {
     descriptor::comm::ObjectSubject telegram_descriptor(vehicle_id, target_id);
-    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_SET_SPACE_OBJECT_TARGET, telegram_descriptor.data()));
+    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT, telegram_descriptor.data()));
 }
 
 } // namespace client

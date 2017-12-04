@@ -145,7 +145,7 @@ void Weapon::deactivate(const entity::Type& weapon_group)
 
 bool Weapon::isAnyWeaponSelected() const
 {
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::Item* slot: m_slots/*_reloaded*/) {
         if (slot->isSelected()) {
             return true;
         }

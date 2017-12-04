@@ -85,6 +85,9 @@ void moveVehicle(int_t, const glm::vec3&);
 // GAME STATES
 void endTurn();
 
+// shoot
+void targetSpaceObject(int_t, int_t);
+
 } // namespace event
 } // namespace comm
 } // namespace core
