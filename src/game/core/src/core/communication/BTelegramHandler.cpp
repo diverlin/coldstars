@@ -297,6 +297,13 @@ void BTelegramHandler::_endTurn(const comm::Telegram&) const
     event::endTurn();
 }
 
+void BTelegramHandler::_vehicleTargetSpaceOject(const comm::Telegram& telegram) const
+{
+    descriptor::comm::ObjectSubject data(telegram.data());
+    LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
+    event::targetSpaceObject(data.object(), data.subject());
+}
+
 
 } // namespace comm
 } // namespace core

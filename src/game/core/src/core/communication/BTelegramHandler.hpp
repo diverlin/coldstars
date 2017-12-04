@@ -103,6 +103,8 @@ protected:
     // move
     void _moveVehicle(const comm::Telegram&) const;
 
+    void _vehicleTargetSpaceOject(const comm::Telegram& telegram) const;
+
 private:
     Machine m_machine = Machine::SERVER;
     sf::Clock m_clock;

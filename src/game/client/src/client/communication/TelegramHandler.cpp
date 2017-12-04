@@ -98,6 +98,7 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
     // unique client
     case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
     case telegram::Type::CREATE_EXPLOSION_EFFECT: _createExplosionEffect(telegram); break;
+    case telegram::Type::VEHICLE_TARGET_SPACEOBJECT: _vehicleTargetSpaceOject(telegram); break;
     default: {
         assert(false);
         break;

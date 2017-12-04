@@ -261,7 +261,9 @@ public:
         assert(starsystem);
 
         // simulate model(repeate what server is doing)
-        starsystem->update_client(core::shortcuts::session()->turnTimer().turnCount());
+        //std::cout<<core::shortcuts::session()->turnTimer().ticksLeft()<<std::endl;
+        core::shortcuts::session()->turnTimer().update(/*threshold*/-100);
+        starsystem->update_client(core::shortcuts::session()->turnTimer().ticksLeft());
 
         m_inputs->update(m_player);
         m_player->cursor().updateMouseInput(*m_render);

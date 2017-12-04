@@ -546,7 +546,7 @@ void TelegramCreator::endTurn() const
 void TelegramCreator::targetingSpaceObject(int_t vehicle_id, int_t target_id) const
 {
     descriptor::comm::ObjectSubject descriptor(vehicle_id, target_id);
-    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::TARGET_SPACEOBJECT, descriptor.data()));
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::VEHICLE_TARGET_SPACEOBJECT, descriptor.data()));
 }
 
 } // namespace core
