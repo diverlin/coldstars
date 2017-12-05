@@ -33,25 +33,10 @@ Atmosphere::~Atmosphere()
  
 void Atmosphere::draw(const jeti::Render& render) const
 {
-//    render.drawMeshWithPerlin(_parent()->mesh(),
-//                              *_parent()->material(),
-//                              _parent()->modelMatrix(),
-//                              _color());
-    // debug
-
-//    render.drawMesh(_parent()->mesh(),
-//                    *_parent()->material(),
-//                    _parent()->modelMatrix(),
-//                    _color());
-
-    //    render.drawCircleWithPerlin(*_parent()->material(),
-//                                _parent()->position(),
-//                                _parent()->collisionRadius(),
-//                                _color());
-    //_parent()->update();
-    render.drawMeshWithLight(_parent()->mesh(),
-                         _parent()->material(),
-                         _parent()->modelMatrix());
+    render.drawMeshWithPerlin(_parent()->mesh(),
+                              _parent()->material(),
+                              _parent()->modelMatrix(),
+                              _color());
 }
 
 } // namespace view

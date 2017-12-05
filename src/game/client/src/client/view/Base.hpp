@@ -56,8 +56,8 @@ public:
     int_t id() const;
     entity::Type type() const;
     entity::Type group() const;
-    int_t mesh() const;
-    int_t texture() const;
+    int_t meshId() const;
+    int_t materialId() const;
     //
 
     const std::vector<Base*>& children() const { return m_children; }
