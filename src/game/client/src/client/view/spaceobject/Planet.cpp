@@ -73,13 +73,10 @@ void Planet::update()
 
 void Planet::draw(const jeti::Render& render) const
 {
-   //render.draw(_mesh(), _material(), modelMatrix());
-   //render.drawMeshWithPerlin(_mesh(), material(), modelMatrix());
-   //    for (Base* child: children()) {
-//        child->draw(render);
-//    }
-   //render.draw(_mesh(), _material(), modelMatrix());
-   //atmosphere->draw(render);
+    render.draw(mesh(), material(), modelMatrix());
+    for (Base* child: children()) {
+        child->draw(render);
+    }
 }
 
 } // namespace view
