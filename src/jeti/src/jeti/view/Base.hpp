@@ -79,8 +79,8 @@ public:
     const glm::vec3& size() const { return _orientation()->size(); }
     float collisionRadius() const { return _orientation()->collisionRadius(); }
 
-    control::Material* material() const { return m_material; }
-    Mesh* mesh() const { return m_mesh; }
+    const control::Material& material() const { return *m_material; }
+    const Mesh& mesh() const { return *m_mesh; }
 
     const glm::vec4& color() const { return m_color; }
     glm::vec4& color() { return m_color; }
@@ -133,8 +133,8 @@ protected:
     bool _updateFadeInEffect(); // depr, move to animation program
     bool _updateFadeOutEffect(); // depr, move to animation program
 
-    const control::Material& _material() const { return *m_material; }
-    const Mesh& _mesh() const { return *m_mesh; }
+    control::Material* _material() const { return m_material; }
+    Mesh* _mesh() const { return m_mesh; }
 
     Base* _parent() const { return m_parent; }
 

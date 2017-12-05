@@ -73,9 +73,9 @@ void DistantNebula::createChildren(int num)
     for(int i=0; i<=num; ++i) {
         jeti::view::Base* child = new jeti::view::Base;
 
-        child->setMaterial(material());
+        child->setMaterial(_material());
         child->genOrientation();
-        child->setMesh(/*new jeti::Mesh*/mesh());
+        child->setMesh(_mesh());
         child->setPosition(position());
         child->setSize(size());
 
@@ -99,7 +99,7 @@ void DistantNebula::draw(const jeti::Render& render) const
         if (rate > 0) {
             color = glm::vec4(rate);
             color *= 0.5f;
-            render.drawMesh(*child->mesh(), *child->material(), child->modelMatrix(), color);
+            render.drawMesh(child->mesh(), child->material(), child->modelMatrix(), color);
         }
     }
 }

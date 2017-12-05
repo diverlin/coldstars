@@ -105,7 +105,7 @@ void Ship::_drawSelectedWeaponsRadius(const jeti::Render& render) const
 
 void Ship::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), modelMatrix());
+    render.draw(mesh(), material(), modelMatrix());
     if (m_control->properties().draw_decors) {
         _drawChildren(render);
     }

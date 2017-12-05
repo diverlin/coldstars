@@ -160,7 +160,7 @@ void Base::update2()
 
 void Base::draw(const jeti::Render& render) const
 {
-    render.drawMesh(_mesh(), _material(), modelMatrix(), m_color);
+    render.drawMesh(mesh(), material(), modelMatrix(), m_color);
 }
 
 void Base::drawAxis(const jeti::Render& render) const
