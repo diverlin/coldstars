@@ -65,15 +65,15 @@ Planet::~Planet()
 void Planet::update()
 {
     Base::update();
-    for (Base* child: children()) {
+   // for (Base* child: children()) {
 //        child->update(this);
-        child->update();
-    }
+  //      child->update();
+ //   }
 }
 
 void Planet::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), modelMatrix());
+    //render.draw(_mesh(), _material(), modelMatrix());
     for (Base* child: children()) {
         child->draw(render);
     }

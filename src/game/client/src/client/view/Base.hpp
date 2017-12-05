@@ -48,7 +48,6 @@ namespace view {
 
 class Base : public jeti::view::Base {
 public:
-    Base(); // for decors it's ok, decor doesn't have it's own control
     Base(control::Base*);
     ~Base();
 
