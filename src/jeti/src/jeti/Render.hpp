@@ -112,6 +112,7 @@ public:
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshWithPerlin(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+    void drawMeshWithOnlyPerlin(const Mesh&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMesh_HUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshWithLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;

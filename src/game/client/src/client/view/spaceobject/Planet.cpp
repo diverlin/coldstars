@@ -40,7 +40,6 @@ Planet::Planet(control::Planet* planet)
     _addChild(atmosphere);
 }
 
-/* virtual */
 Planet::~Planet()
 {  
 //    for (BaseDecor* decor : m_Decorations) {

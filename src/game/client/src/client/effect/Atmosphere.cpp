@@ -26,6 +26,7 @@ Atmosphere::Atmosphere(Base* parent)
       view::Base(parent->control())
 {
     _setParent(parent);
+    setColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
 }
 
 Atmosphere::~Atmosphere()
@@ -33,10 +34,10 @@ Atmosphere::~Atmosphere()
  
 void Atmosphere::draw(const jeti::Render& render) const
 {
-    render.drawMeshWithPerlin(_parent()->mesh(),
-                              _parent()->material(),
-                              _parent()->modelMatrix(),
-                              _color());
+    return;
+    render.drawMeshWithOnlyPerlin(_parent()->mesh(),
+                                  _parent()->modelMatrix(),
+                                  _color());
 }
 
 } // namespace view
