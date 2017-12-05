@@ -23,7 +23,7 @@ namespace view {
 
 Atmosphere::Atmosphere(Base* parent)
     :
-      view::Base()
+      view::Base(parent->control())
 {
     _setParent(parent);
 }
@@ -33,7 +33,15 @@ Atmosphere::~Atmosphere()
  
 void Atmosphere::draw(const jeti::Render& render) const
 {
-    render.drawCircleWithPerlin(_material(), _parent()->position(), _parent()->collisionRadius(), _color());
+//    render.drawMeshWithPerlin(_parent()->mesh(),
+//                              *_parent()->material(),
+//                              _parent()->modelMatrix(),
+//                              _color());
+
+    render.drawCircleWithPerlin(*_parent()->material(),
+                                _parent()->position(),
+                                _parent()->collisionRadius(),
+                                _color());
 }
 
 } // namespace view
