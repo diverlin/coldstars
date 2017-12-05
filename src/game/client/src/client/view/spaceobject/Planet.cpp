@@ -36,7 +36,7 @@ Planet::Planet(control::Planet* planet)
 {
     _setOrientation(planet);
 
-    Atmosphere* atmosphere = new Atmosphere(this);
+    atmosphere = new Atmosphere(this);
     _addChild(atmosphere);
 }
 
@@ -73,10 +73,13 @@ void Planet::update()
 
 void Planet::draw(const jeti::Render& render) const
 {
-    //render.draw(_mesh(), _material(), modelMatrix());
-    for (Base* child: children()) {
-        child->draw(render);
-    }
+   //render.draw(_mesh(), _material(), modelMatrix());
+   render.drawMeshWithPerlin(_mesh(), *material(), modelMatrix());
+   //    for (Base* child: children()) {
+//        child->draw(render);
+//    }
+   //render.draw(_mesh(), _material(), modelMatrix());
+   //atmosphere->draw(render);
 }
 
 } // namespace view
