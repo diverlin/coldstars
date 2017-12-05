@@ -262,6 +262,7 @@ void Render::init(int w, int h)
     applyOrthogonalProjection();
 
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
+    m_shaders.texturewithperlin = compile_program(SHADERS_PATH+"texturewithperlin.vert", SHADERS_PATH+"texturewithperlin.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
     m_shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     m_shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
@@ -282,6 +283,7 @@ void Render::init(int w, int h)
     m_shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
 
     checkProgramErrors(m_shaders.basetexture);
+    checkProgramErrors(m_shaders.texturewithperlin);
     checkProgramErrors(m_shaders.basecolor);
     checkProgramErrors(m_shaders.black2alpha);
     checkProgramErrors(m_shaders.shockwave);
@@ -308,6 +310,12 @@ void Render::init(int w, int h)
         auto model = new model::Material("data/other/radius.png");
         m_materialCollisionRadius = new control::Material(model);
     }
+
+    {
+        auto model = new model::Material("data/other/perlin.png");
+        m_materialPerlin = new control::Material(model);
+    }
+
 
     m_initialized = true;
 
@@ -552,6 +560,36 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
     }
 }
 
+
+void Render::drawMeshWIthPerlin(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+{
+    __useProgram(m_shaders.texturewithperlin);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+        glUniform4fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_color"), 1, glm::value_ptr(color));
+        glUniform1f(glGetUniformLocation(m_shaders.texturewithperlin, "u_time"), m_time);
+
+        glUniform1f(glGetUniformLocation(m_shaders.texturewithperlin, "u_scale"), m_scale);
+        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_resolution"), 1, glm::value_ptr(glm::vec2(m_size.x, m_size.y)));
+
+        glm::vec2 camera_pos(m_camera->position());
+        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_cameraPos"), 1, glm::value_ptr(camera_pos));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, material.model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.texturewithperlin, "u_texture"), 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.texturewithperlin, "u_texturePerlin"), 1);
+
+        __drawMesh(mesh);
+    }
+    glActiveTexture(GL_TEXTURE0);
+}
+
 void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
 {
     __useProgram(m_shaders.basetexture);
@@ -560,6 +598,7 @@ void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, c
         glUniformMatrix4fv(glGetUniformLocation(m_shaders.basetexture, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
 
         glUniform4fv(glGetUniformLocation(m_shaders.basetexture, "u_color"), 1, glm::value_ptr(color));
+        glUniform1f(glGetUniformLocation(m_programLight,  "u_time"), m_time);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
@@ -1215,9 +1254,18 @@ void Render::__updateFps()
     }
 }
 
-void Render::drawCircle(const glm::vec3& center,
+void Render::drawDebugCircle(const glm::vec3& center,
+                                 float radius,
+                                 const glm::vec4& color) const
+{
+    drawCircle(*m_materialCollisionRadius, center, radius, color);
+}
+
+void Render::drawCircle(const control::Material& material,
+                        const glm::vec3& center,
                         float radius,
-                        const glm::vec4& color) const {
+                        const glm::vec4& color) const
+{
     m_translateMatrix = glm::translate(center);
     m_scaleMatrix = glm::scale(glm::vec3(radius, radius, 1.0f));
     m_modelMatrix = m_translateMatrix * m_scaleMatrix;
@@ -1225,7 +1273,22 @@ void Render::drawCircle(const glm::vec3& center,
     //__useProgram(0);
     //glLineWidth(m_meshCircle->linesWidth());
     //drawMesh(*m_meshCircle, *m_materialCollisionRadius, m_modelMatrix, color);
-    drawMesh(*m_meshQuad, *m_materialCollisionRadius, m_modelMatrix, color);
+    drawMesh(*m_meshQuad, material, m_modelMatrix, color);
+}
+
+void Render::drawCircleWithPerlin(const control::Material& material,
+                                  const glm::vec3& center,
+                                  float radius,
+                                  const glm::vec4& color) const
+{
+    m_translateMatrix = glm::translate(center);
+    m_scaleMatrix = glm::scale(glm::vec3(radius, radius, 1.0f));
+    m_modelMatrix = m_translateMatrix * m_scaleMatrix;
+
+    //__useProgram(0);
+    //glLineWidth(m_meshCircle->linesWidth());
+    //drawMesh(*m_meshCircle, *m_materialCollisionRadius, m_modelMatrix, color);
+    drawMeshWIthPerlin(*m_meshQuad, material, m_modelMatrix, color);
 }
 
 } // namespace jeti

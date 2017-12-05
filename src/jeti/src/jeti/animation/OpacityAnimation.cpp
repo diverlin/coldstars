@@ -26,19 +26,17 @@ namespace animation {
 Opacity::Opacity(float& value,
                  float min,
                  float max,
-                 float downFactor,
-                 float upFactor,
+                 float stepDown,
+                 float stepUp,
                  bool isCyclic)
     :
       Base(isCyclic)
     , m_value(value)
     , m_min(min)
     , m_max(max)
-    , m_downFactor(downFactor)
-    , m_upFactor(upFactor)
+    , m_stepDown(stepDown)
+    , m_stepUp(stepUp)
 {
-    assert(downFactor<1.0f);
-    assert(upFactor>1.0f);
     m_value = m_min;
 }
 
@@ -49,9 +47,9 @@ void Opacity::update()
     }
 
     if (m_move == UP) {
-        m_value *= m_upFactor;
+        m_value += m_stepUp;
     } else if (m_move == DOWN) {
-        m_value *= m_downFactor;
+        m_value -= m_stepDown;
     }
 
     if (m_value > m_max) {

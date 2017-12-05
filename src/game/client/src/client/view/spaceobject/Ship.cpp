@@ -99,7 +99,7 @@ void Ship::_drawSelectedWeaponsRadius(const jeti::Render& render) const
 {
     const std::vector<int> radiuses = m_control->weapons().radiusesOfSelectedWeapons();
     for (int radius: radiuses) {
-        render.drawCircle(position(), radius);
+        render.drawDebugCircle(position(), radius);
     }
 }
 
@@ -120,9 +120,9 @@ void Ship::draw(const jeti::Render& render) const
         }
     }
 
-    if (m_control->properties().shield_effect_enabled) {
+    //if (m_control->properties().shield_effect_enabled) {
         _drawShield(render);
-    }
+    //}
 
     const auto& path = m_control->navigator().path();
     if (path.centers().size()) {

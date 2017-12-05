@@ -48,14 +48,18 @@ namespace view {
 
 class Base : public jeti::view::Base {
 public:
+    Base(); // for decors it's ok, decor doesn't have it's own control
     Base(control::Base*);
     ~Base();
 
+
+    // check all these in jeti::view::Base
     int_t id() const;
     entity::Type type() const;
     entity::Type group() const;
     int_t mesh() const;
     int_t texture() const;
+    //
 
     const std::vector<Base*>& children() const { return m_children; }
     void update();

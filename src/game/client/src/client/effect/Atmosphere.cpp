@@ -21,18 +21,19 @@
 
 namespace view {
 
-Atmosphere::Atmosphere()
+Atmosphere::Atmosphere(Base* parent)
     :
-      jeti::view::Base()
-{}
+      view::Base()
+{
+    _setParent(parent);
+}
 
 Atmosphere::~Atmosphere()
 {}
  
-//void Atmosphere::draw(const jeti::Render& render)
-//{
-//    //setPosition(center);
-//    //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());
-//}
+void Atmosphere::draw(const jeti::Render& render) const
+{
+    render.drawCircleWithPerlin(_material(), _parent()->position(), _parent()->collisionRadius(), _color());
+}
 
 } // namespace view

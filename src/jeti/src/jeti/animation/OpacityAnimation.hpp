@@ -40,8 +40,8 @@ private:
 
     float m_min = 0.0f;
     float m_max = 1.0f;
-    float m_downFactor = 0.99f;
-    float m_upFactor = 1.01f;
+    float m_stepDown = 0.01f;
+    float m_stepUp = 0.01f;
 };
 
 } // namespace animation

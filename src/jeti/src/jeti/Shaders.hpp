@@ -24,6 +24,7 @@
 struct Shaders
 {      
     GLuint basetexture;
+    GLuint texturewithperlin;
     GLuint basecolor;
     GLuint black2alpha;
     GLuint shockwave;

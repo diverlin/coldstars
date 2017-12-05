@@ -170,7 +170,7 @@ void Base::drawAxis(const jeti::Render& render) const
 
 void Base::drawCollisionRadius(const jeti::Render& render) const
 {
-    render.drawCircle(position(), collisionRadius());
+    render.drawDebugCircle(position(), collisionRadius());
 }
 
 void Base::_updateModelMatrix()
