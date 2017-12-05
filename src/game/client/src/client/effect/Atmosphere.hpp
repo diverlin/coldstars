@@ -19,17 +19,17 @@
 
 #pragma once
 
-#include <jeti/view/Base.hpp>
+#include <client/view/Base.hpp>
 
 namespace view {
 
-class Atmosphere : public jeti::view::Base
+class Atmosphere : public Base
 {
 public:
-    Atmosphere();
+    Atmosphere(Base*);
     virtual ~Atmosphere();
 
-//    void draw(const jeti::Render&) const override final;
+    void draw(const jeti::Render&) const override final;
 }; 
 
 } // namespace view

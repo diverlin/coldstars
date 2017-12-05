@@ -24,6 +24,8 @@
 
 #include <jeti/animation/OpacityAnimation.hpp>
 
+#include <meti/RandUtils.hpp>
+
 #include <glm/gtx/transform.hpp>
 
 namespace view {
@@ -34,13 +36,25 @@ Shield::Shield(jeti::view::Base* parent)
       jeti::view::Base()
 {       
     _setParent(parent);
-    m_opacityAnimation = new jeti::animation::Opacity(_color().a, 0.02f, 0.5f, 0.95f, 1.5f, true);
+    m_opacityAnimation = new jeti::animation::Opacity(_color().a, 0.3f, 1.0f, 0.01f, 0.01f, true);
 
-    _color().r = 1.0;
-    _color().g = 1.0;
-    _color().b = 1.0;
-
-    m_scaleMatrix = glm::scale(glm::vec3(1.4f, 1.4f, 1.0f));
+    int num = meti::rand::gen_int(1,3);
+    if (num == 1) {
+        // red
+        _color().r = 1.0f;
+        _color().g = 0.8f;
+        _color().b = 0.8f;
+    } else if (num == 2) {
+        // yellow
+        _color().r = 1.0f;
+        _color().g = 1.0f;
+        _color().b = 0.8f;
+    } else if (num == 3) {
+        // blue
+        _color().r = 0.6f;
+        _color().g = 0.6f;
+        _color().b = 1.0f;
+    }
 }
 
 Shield::~Shield()
@@ -61,7 +75,8 @@ void Shield::update()
 
 void Shield::draw(const jeti::Render& render) const
 {
-    render.drawQuad(_material(), _parent()->modelMatrix()*m_scaleMatrix, _color());
+    // do normal scale program
+    render.drawCircleWithPerlin(_material(), _parent()->position(), (1.2f+_color().a/3.0)*_parent()->collisionRadius(), _color());
 }
 
 } // namespace effect

@@ -46,7 +46,6 @@ public:
     void draw(const jeti::Render&) const;
 
 private:
-    glm::mat4 m_scaleMatrix;
     jeti::animation::Opacity* m_opacityAnimation = nullptr;
 };
 

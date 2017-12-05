@@ -22,6 +22,7 @@
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
 
+#include <client/effect/Atmosphere.hpp>
 //#include <client/effect/BaseDecor.hpp>
 
 #include <jeti/Render.hpp>
@@ -34,6 +35,9 @@ Planet::Planet(control::Planet* planet)
     , m_control(planet)
 {
     _setOrientation(planet);
+
+    Atmosphere* atmosphere = new Atmosphere(this);
+    _addChild(atmosphere);
 }
 
 /* virtual */
@@ -58,13 +62,21 @@ Planet::~Planet()
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
+void Planet::update()
+{
+    Base::update();
+    for (Base* child: children()) {
+//        child->update(this);
+        child->update();
+    }
+}
+
 void Planet::draw(const jeti::Render& render) const
 {
     render.draw(_mesh(), _material(), modelMatrix());
-
-    //    for (BaseDecor* decor : m_Decorations) {
-//        decor->Render(render, center());
-//    }
+    for (Base* child: children()) {
+        child->draw(render);
+    }
 }
 
 } // namespace view

@@ -111,6 +111,7 @@ public:
 
     void drawMesh(const Mesh&, const glm::mat4&) const;
     void drawMesh(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
+    void drawMeshWIthPerlin(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMesh_HUD(const Mesh&, const control::Material&, const glm::mat4&, const glm::vec4& color = glm::vec4(1.0f)) const;
     void drawMeshLight(const Mesh&, const control::Material&, const glm::mat4&) const;
     void drawMeshLightNormalMap(const Mesh&, const control::Material&, const glm::mat4&) const;
@@ -154,10 +155,17 @@ public:
     control::Material* materialCollisionRadius() const { return m_materialCollisionRadius; }
     Mesh* quadMesh() const { return m_meshQuad; }
 
-    void drawCircle(const glm::vec3& center,
+    void drawDebugCircle(const glm::vec3& center,
                     float radius,
                     const glm::vec4& color = glm::vec4(1.0f)) const;
-
+    void drawCircle(const control::Material& material,
+                    const glm::vec3& center,
+                    float radius,
+                    const glm::vec4& color = glm::vec4(1.0f)) const;
+    void drawCircleWithPerlin(const control::Material& material,
+                              const glm::vec3& center,
+                              float radius,
+                              const glm::vec4& color = glm::vec4(1.0f)) const;
 private:
     projection m_activeProjection = projection::NONE;
     mutable Mesh::State m_activeStates = Mesh::State::NONE;
@@ -184,6 +192,7 @@ private:
     Mesh* m_meshAxis = nullptr;
     Mesh* m_meshCircle = nullptr;
     control::Material* m_materialCollisionRadius = nullptr;
+    control::Material* m_materialPerlin = nullptr;
 
     glm::mat4 m_projectionMatrix;
     glm::mat4 m_viewMatrix;
