@@ -263,6 +263,7 @@ void Render::init(int w, int h)
 
     m_shaders.basetexture     = compile_program(SHADERS_PATH+"basetexture.vert",       SHADERS_PATH+"basetexture.frag");
     m_shaders.texturewithperlin = compile_program(SHADERS_PATH+"texturewithperlin.vert", SHADERS_PATH+"texturewithperlin.frag");
+    m_shaders.perlin          = compile_program(SHADERS_PATH+"perlin.vert",         SHADERS_PATH+"perlin.frag");
     m_shaders.basecolor       = compile_program(SHADERS_PATH+"basecolor.vert",         SHADERS_PATH+"basecolor.frag");
     m_shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     m_shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
@@ -508,6 +509,7 @@ void Render::__drawMesh(const Mesh& mesh) const {
         case Mesh::State::NORMAL:
             __disable_POINTSPRITE();
             __disable_BLEND();
+            //__enable_BLEND();
             __enable_DEPTH_TEST();
             __enable_CULLFACE();
             break;
@@ -587,6 +589,29 @@ void Render::drawMeshWithPerlin(const Mesh& mesh, const control::Material& mater
         __drawMesh(mesh);
     }
     glActiveTexture(GL_TEXTURE0);
+}
+
+void Render::drawMeshWithOnlyPerlin(const Mesh& mesh, const glm::mat4& modelMatrix, const glm::vec4& color) const
+{
+    __useProgram(m_shaders.perlin);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.perlin, "u_projectionViewMatrix"), 1, GL_FALSE, &m_projectionViewMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_shaders.perlin, "u_modelMatrix")         , 1, GL_FALSE, &modelMatrix[0][0]);
+
+        glUniform4fv(glGetUniformLocation(m_shaders.perlin, "u_color"), 1, glm::value_ptr(color));
+        glUniform1f(glGetUniformLocation(m_shaders.perlin, "u_time"), m_time);
+
+        glUniform1f(glGetUniformLocation(m_shaders.perlin, "u_scale"), m_scale);
+
+        glm::vec2 camera_pos(m_camera->position());
+        glUniform2fv(glGetUniformLocation(m_shaders.perlin, "u_cameraPos"), 1, glm::value_ptr(camera_pos));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->texture);
+        glUniform1i(glGetUniformLocation(m_shaders.perlin, "u_texturePerlin"), 0);
+
+        __drawMesh(mesh);
+    }
 }
 
 void Render::drawMesh_HUD(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const

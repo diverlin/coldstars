@@ -23,26 +23,27 @@
 
 struct Shaders
 {      
-    GLuint basetexture;
-    GLuint texturewithperlin;
-    GLuint basecolor;
-    GLuint black2alpha;
-    GLuint shockwave;
-    GLuint volumetriclight;
-    GLuint light;
-    GLuint light_normalmap;
-    GLuint blur;
-    GLuint extractbright;
-    GLuint combine;
-    GLuint multitexturing;
-    GLuint blank;
-    GLuint fogwarspark;
-    GLuint flash;
-    GLuint mask;
-    GLuint particle;
-    GLuint particle_blink;
-    GLuint star;
-    GLuint starfield;
+    GLuint basetexture = 0;
+    GLuint texturewithperlin = 0;
+    GLuint perlin = 0;
+    GLuint basecolor = 0;
+    GLuint black2alpha = 0;
+    GLuint shockwave = 0;
+    GLuint volumetriclight = 0;
+    GLuint light = 0;
+    GLuint light_normalmap = 0;
+    GLuint blur = 0;
+    GLuint extractbright = 0;
+    GLuint combine = 0;
+    GLuint multitexturing = 0;
+    GLuint blank = 0;
+    GLuint fogwarspark = 0;
+    GLuint flash = 0;
+    GLuint mask = 0;
+    GLuint particle = 0;
+    GLuint particle_blink = 0;
+    GLuint star = 0;
+    GLuint starfield = 0;
 };
 
 
