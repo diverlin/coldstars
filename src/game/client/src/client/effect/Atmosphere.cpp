@@ -50,7 +50,7 @@ void Atmosphere::draw(const jeti::Render& render) const
 //                                _color());
     //_parent()->update();
     render.drawMeshWithLight(_parent()->mesh(),
-                         *_parent()->material(),
+                         _parent()->material(),
                          _parent()->modelMatrix());
 }
 

@@ -41,7 +41,7 @@ WormHole::~WormHole()
 
 void WormHole ::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), modelMatrix());
+    render.draw(mesh(), material(), modelMatrix());
 }
 
 //void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)

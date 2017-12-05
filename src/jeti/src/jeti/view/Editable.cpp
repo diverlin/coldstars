@@ -97,7 +97,7 @@ void Editable::update()
 
 void Editable::draw(const jeti::Render& render) const
 {
-    render.draw(_mesh(), _material(), modelMatrix());
+    render.draw(mesh(), material(), modelMatrix());
     for (Control* control: m_controls) {
         control->draw(render);
     }
