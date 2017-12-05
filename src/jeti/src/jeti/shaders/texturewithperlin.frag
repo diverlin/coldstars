@@ -39,5 +39,5 @@ void main (void)
 	vec2 uv = 0.05 * (gl_FragCoord.xy + u_cameraPos / u_scale) / PERLIN_SIZE;
     float p1 = perlin_noise(uv.xy, u_time/100.0);
     p1 = perlin_noise(uv.xy, p1);
-	color.a *= p1;
+	color.r *= p1;
 }

@@ -611,11 +611,11 @@ void Render::draw(const Mesh& mesh, const control::Material& material, const glm
 //    if (material.model()->normalmap) {
 //        drawMeshLightNormalMap(mesh, material, MM);
 //    } else {
-        drawMeshLight(mesh, material, MM);
+        drawMeshWithLight(mesh, material, MM);
 //    }
 }
 
-void Render::drawMeshLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
+void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materialc, const glm::mat4& ModelMatrix) const
 {
     if (mesh.isFlat()) {
         drawMesh(mesh, materialc, ModelMatrix);
