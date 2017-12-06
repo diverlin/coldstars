@@ -39,13 +39,14 @@
 #include <client/view/spaceobject/ALL>
 
 /// effects
-#include <client/effect/Beam.hpp>
-#include <client/effect/ShockWaveEffect.hpp>
+#include <client/view/effect/Beam.hpp>
+#include <client/view/effect/ShockWaveEffect.hpp>
+#include <client/view/effect/DistantStarsEffect.hpp>
+#include <client/view/effect/DistantNebulaEffect.hpp>
+#include <client/view/effect/Beam.hpp>
+
 #include <client/text/VerticalFlowText.hpp>
 #include <client/resources/TextureCollector.hpp>
-#include <client/effect/DistantStarsEffect.hpp>
-#include <client/effect/DistantNebulaEffect.hpp>
-#include <client/effect/Beam.hpp>
 #include <client/gui/info/GenericTable.hpp>
 
 #include <jeti/GlErrorHelper.hpp>

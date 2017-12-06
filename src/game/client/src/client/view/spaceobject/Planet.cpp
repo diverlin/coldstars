@@ -22,8 +22,7 @@
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
 
-#include <client/effect/Atmosphere.hpp>
-//#include <client/effect/BaseDecor.hpp>
+#include <client/view/effect/Atmosphere.hpp>
 
 #include <jeti/Render.hpp>
 

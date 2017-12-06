@@ -21,7 +21,7 @@
 #include <core/Base.hpp>
 #include <core/descriptor/Base.hpp>
 
-#include <client/effect/Shield.hpp>
+#include <client/view/effect/Shield.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/PathVisual.hpp>
