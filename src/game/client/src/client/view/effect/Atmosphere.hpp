@@ -22,6 +22,7 @@
 #include <client/view/Base.hpp>
 
 namespace view {
+namespace effect {
 
 class Atmosphere : public Base
 {
@@ -32,6 +33,7 @@ public:
     void draw(const jeti::Render&) const override final;
 }; 
 
+} // namespace effect
 } // namespace view
 
 
