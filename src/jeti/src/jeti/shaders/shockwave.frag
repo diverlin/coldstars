@@ -19,11 +19,9 @@ void main()
 	float diffTime = 0.0;
 	vec2 diffUV;
 	
-   	for(int i=0; i<distortion_num; i++)
-  	{
+   	for(int i=0; i<distortion_num; i++) {
 		float dist = distance(v_Texcoord, center[i]);
-		if ( (dist <= (time[i] + shockParams[i].z)) && (dist >= (time[i] - shockParams[i].z)) )
-		{
+		if ( (dist <= (time[i] + shockParams[i].z)) && (dist >= (time[i] - shockParams[i].z)) ) {
 			float diff = dist - time[i];
 			float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);
 			diffTime += diff  * powDiff;

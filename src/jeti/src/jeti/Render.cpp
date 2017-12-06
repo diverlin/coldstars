@@ -563,7 +563,12 @@ void Render::drawMesh(const Mesh& mesh, const control::Material& material, const
 }
 
 
-void Render::drawMeshWithPerlin(const Mesh& mesh, const control::Material& material, const glm::mat4& modelMatrix, const glm::vec4& color) const
+void Render::drawMeshWithPerlin(const Mesh& mesh,
+                                const control::Material& material,
+                                const glm::mat4& modelMatrix,
+                                const glm::vec3& position,
+                                const glm::vec3& size,
+                                const glm::vec4& color) const
 {
     __useProgram(m_shaders.texturewithperlin);
     {
@@ -573,10 +578,12 @@ void Render::drawMeshWithPerlin(const Mesh& mesh, const control::Material& mater
         glUniform4fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_color"), 1, glm::value_ptr(color));
         glUniform1f(glGetUniformLocation(m_shaders.texturewithperlin, "u_time"), m_time);
 
-        glUniform1f(glGetUniformLocation(m_shaders.texturewithperlin, "u_scale"), m_scale);
-
         glm::vec2 camera_pos(m_camera->position());
-        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_cameraPos"), 1, glm::value_ptr(camera_pos));
+        glm::vec2 offset(1.0f/m_scale*(m_camera->position() - position));
+        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_offset"), 1, glm::value_ptr(offset));
+
+        //        glUniform1f(glGetUniformLocation(m_shaders.texturewithperlin, "u_scale"), m_scale);
+        //        glUniform2fv(glGetUniformLocation(m_shaders.texturewithperlin, "u_size"), 1, glm::value_ptr(glm::vec2(size)));
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, material.model()->texture);
@@ -1312,7 +1319,7 @@ void Render::drawCircleWithPerlin(const control::Material& material,
     //__useProgram(0);
     //glLineWidth(m_meshCircle->linesWidth());
     //drawMesh(*m_meshCircle, *m_materialCollisionRadius, m_modelMatrix, color);
-    drawMeshWithPerlin(*m_meshQuad, material, m_modelMatrix, color);
+    drawMeshWithPerlin(*m_meshQuad, material, m_modelMatrix, center, glm::vec3(radius, radius, 1.0f), color);
 }
 
 } // namespace jeti

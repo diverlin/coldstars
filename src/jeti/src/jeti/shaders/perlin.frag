@@ -1,21 +1,20 @@
 #version 330 core
 
 #define FRAG_OUTPUT0 0
+#define PERLIN_SIZE vec2(96,96)
 
 layout(location = FRAG_OUTPUT0) out vec4 color;
 
-uniform sampler2D u_texture;
 uniform sampler2D u_texturePerlin;
 
-uniform vec2 u_offset;
-//uniform float u_scale;
-//uniform vec2 u_size;
+uniform float u_scale;
+uniform vec2 u_cameraPos;
 uniform vec4 u_color;
 uniform float u_time;
 
 in vec2 v_texCoord;
   
-float noise(vec2 uv) {
+float noise( vec2 uv ){
 	return texture(u_texturePerlin, uv).r;
 }
 
@@ -33,11 +32,10 @@ float perlin_noise(vec2 uv, float t){
 
 void main (void)
 {
-    color = texture2D(u_texture, v_texCoord);
-    color *= u_color;
+    color = u_color;
     
-	vec2 uv = 0.05 * (gl_FragCoord.xy + u_offset) / vec2(96, 96);
+	vec2 uv = 0.03 * (gl_FragCoord.xy + u_cameraPos / u_scale) / PERLIN_SIZE;
     float p1 = perlin_noise(uv.xy, u_time/100.0);
     p1 = perlin_noise(uv.xy, p1);
-	color.a *= p1;
+	color *= p1;
 }
