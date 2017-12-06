@@ -28,6 +28,20 @@ public:
     Planetoid() = default;
     ~Planetoid() = default;
 
+    void setRadiusA(int radiusA) { m_radiusA = radiusA; }
+    void setRadiusB(int radiusB) { m_radiusB = radiusB; }
+    void setOrbitPhi(int orbitPhi) { m_orbitPhi = orbitPhi; }
+    void setSpeed(float speed) { m_speed = speed; }
+    void setClockwise(int clockwise) { m_clockwise = clockwise; }
+    void setAtmosphereMaterial(int_t material) { m_atmosphereMaterial = material; }
+
+    int radiusA() const { return m_radiusA; }
+    int radiusB() const { return m_radiusB; }
+    int orbitPhi() const { return m_orbitPhi; }
+    float speed() const { return m_speed; }
+    bool clockwise() const { return m_clockwise; }
+    int_t atmosphereMaterial() const { return m_atmosphereMaterial; }
+
     ceti::InfoTable info() const override {
         ceti::InfoTable result = SpaceObject::info();
         result.add("Planetoid descriptor");
@@ -36,20 +50,9 @@ public:
         result.add("orbitPhi", m_orbitPhi);
         result.add("speed", m_speed);
         result.add("clockwise", m_clockwise);
+        result.add("atmosphereTexture", m_atmosphereMaterial);
         return result;
     }
-
-    int radiusA() const { return m_radiusA; }
-    int radiusB() const { return m_radiusB; }
-    int orbitPhi() const { return m_orbitPhi; }
-    float speed() const { return m_speed; }
-    bool clockwise() const { return m_clockwise; }
-
-    void setRadiusA(int radiusA) { m_radiusA = radiusA; }
-    void setRadiusB(int radiusB) { m_radiusB = radiusB; }
-    void setOrbitPhi(int orbitPhi) { m_orbitPhi = orbitPhi; }
-    void setSpeed(float speed) { m_speed = speed; }
-    void setClockwise(int clockwise) { m_clockwise = clockwise; }
 
 private:
     int m_radiusA = 0;
@@ -57,6 +60,7 @@ private:
     int m_orbitPhi = 0;
     float m_speed = 0.0f;
     bool m_clockwise = true;
+    int_t m_atmosphereMaterial = NONE;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -67,6 +71,7 @@ private:
         ar & m_orbitPhi;
         ar & m_speed;
         ar & m_clockwise;
+        ar & m_atmosphereMaterial;
     }
 }; 
 

@@ -171,10 +171,11 @@ genPlanet()
     descr->setClockwise(meti::rand::gen_bool());
 
     float size = meti::rand::gen_int(descriptor::Planet::SCALE_MIN,
-                                  descriptor::Planet::SCALE_MAX);
+                                     descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
+    descr->setAtmosphereMaterial(textureDescriptorIdFromType(texture::Type::ATMOSPHERE));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
     core::shortcuts::descriptors()->add(descr);
