@@ -18,48 +18,36 @@
 
 
 #include "Player.hpp"
-#include <common/Config.hpp>
 
-#include <jeti/Render.hpp>
-#include <jeti/Screen.hpp>
-#include <world/starsystem.hpp>
+#include <core/common/TurnTimer.hpp>
+#include <core/common/Config.hpp>
+#include <core/world/starsystem.hpp>
 #include <core/manager/EntityManager.hpp>
-
-#include <math/rand.hpp>
-//#include <ceti/StringUtils.hpp>
-#include <common/TurnTimer.hpp>
-#include <ceti/Logger.hpp>
-
-#include <ai/Task.hpp>
-#include <ai/StateMachine.hpp>
-
-#include <item/equipment/Scaner.hpp>
-#include <item/equipment/Grapple.hpp>
-
-#include <core/part/WeaponComplex.hpp>
-
-#include <client/effect/Beam.hpp>
-#include <client/text/VerticalFlowText.hpp>
-
+#include <core/ai/Task.hpp>
+#include <core/ai/StateMachine.hpp>
 #include <core/spaceobject/ALL>
-
-#include <client/view/spaceobject/ALL>
-
 #include <core/pilot/Npc.hpp>
 #include <core/slot/ItemSlot.hpp>
+#include <core/part/WeaponComplex.hpp>
 
+#include <client/view/effect/Beam.hpp>
+#include <client/text/VerticalFlowText.hpp>
+#include <client/view/spaceobject/ALL>
 #include <client/gui/GuiGalaxyMap.hpp>
 #include <client/gui/GuiManager.hpp>
-
 #include <client/gui/UserInput.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
+#include <client/communication/TelegramCreator.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 #include <jeti/Camera.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
 #include <meti/RandUtils.hpp>
+#include <core/math/rand.hpp>
 
-#include <client/communication/TelegramCreator.hpp>
+#include <ceti/Logger.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -69,9 +57,6 @@ Player::Player(int_t id)
     :
       core::Player(id)
 { 
-//    setId(id);
-//    setTypeId(entity::Type::PLAYER);
-    
     gui::Manager::get().setPlayer(this);
 
     bool debug = false;

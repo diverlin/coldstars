@@ -24,7 +24,7 @@
 #include <core/part/Turrel.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
-#include <client/effect/Shield.hpp>
+#include <client/view/effect/Shield.hpp>
 #include <client/view/part/Turrel.hpp>
 #include <client/view/effect/Jet.hpp>
 #include <client/resources/Utils.hpp>
