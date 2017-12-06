@@ -44,7 +44,9 @@ class Base;
 
 namespace view {
 
+namespace effect {
 class Shield;
+} // namespace effect
 
 class Base : public jeti::view::Base
 {
@@ -75,7 +77,7 @@ protected:
 
     void _addPoint(jeti::Point* point) { m_points.push_back(point); }
     void _addChild(Base*);
-    Shield* _createShield();
+    effect::Shield* _createShield();
     void _createPath(jeti::control::Material*);
 
     jeti::view::Path* _path() const { return m_path; }
@@ -84,7 +86,7 @@ private:
     control::Base* m_control_base = nullptr;
     std::vector<jeti::Point*> m_points;
     std::vector<Base*> m_children;
-    Shield* m_shield = nullptr;
+    effect::Shield* m_shield = nullptr;
     jeti::view::Path* m_path = nullptr;
 };
 

@@ -29,6 +29,7 @@
 #include <glm/gtx/transform.hpp>
 
 namespace view {
+namespace effect {
 
 Shield::Shield(Base* parent)
 {       
@@ -76,5 +77,6 @@ void Shield::draw(const jeti::Render& render) const
     render.drawCircleWithPerlin(material(), _parent()->position(), (1.2f+_color().a/3.0)*_parent()->collisionRadius(), _color());
 }
 
+} // namespace effect
 } // namespace view
 

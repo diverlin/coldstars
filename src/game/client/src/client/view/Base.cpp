@@ -73,10 +73,10 @@ int_t Base::descriptorMaterialId() const { return m_control_base->descriptor()->
 
 void Base::setDescriptorMaterialId(int_t id) { m_control_base->descriptor()->setMaterial(id); };
 
-Shield*
+effect::Shield*
 Base::_createShield() {
     assert(m_shield == nullptr);
-    m_shield = new Shield(this);
+    m_shield = new effect::Shield(this);
     return m_shield;
 }
 

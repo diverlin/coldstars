@@ -20,6 +20,7 @@
 #include <jeti/Render.hpp>
 
 namespace view {
+namespace effect {
 
 Atmosphere::Atmosphere(jeti::view::Base* parent)
 {
@@ -41,4 +42,5 @@ void Atmosphere::draw(const jeti::Render& render) const
 //                                  _color());
 }
 
+} // namespace effect
 } // namespace view

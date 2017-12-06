@@ -33,6 +33,7 @@ class Opacity;
 } // namespace jeti
 
 namespace view {
+namespace effect {
 
 class Shield : public Base
 {  
@@ -48,5 +49,6 @@ private:
     jeti::animation::Opacity* m_opacityAnimation = nullptr;
 };
 
+} // namespace effect
 } // namespace view
 
