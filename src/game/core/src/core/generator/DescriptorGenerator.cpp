@@ -143,12 +143,12 @@ genStar()
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
 
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::STAR));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::STAR));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
     core::shortcuts::descriptors()->add(descr);
 
-    assert(descr->texture() != NONE);
+    assert(descr->material() != NONE);
     assert(descr->mesh() != NONE);
 
     return descr;
@@ -174,13 +174,13 @@ genPlanet()
                                      descriptor::Planet::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::PLANET));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::PLANET));
     descr->setAtmosphereMaterial(textureDescriptorIdFromType(texture::Type::ATMOSPHERE));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE));
 
     core::shortcuts::descriptors()->add(descr);
 
-    assert(descr->texture() != NONE);
+    assert(descr->material() != NONE);
     assert(descr->mesh() != NONE);
 
     return descr;
@@ -261,12 +261,12 @@ genAsteroid()
                                   descriptor::Asteroid::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::ASTEROID));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::ASTEROID));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::SPHERE_DEFORMED));
 
     core::shortcuts::descriptors()->add(descr);
 
-    assert(descr->texture() != NONE);
+    assert(descr->material() != NONE);
     assert(descr->mesh() != NONE);
 
     return descr;
@@ -288,10 +288,10 @@ genContainer()
 
     descr->setSize(meti::vec3(1.0f));
     descr->setDirection(randPlanetoidDirection());
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::MINERAL));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::MINERAL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 
-    assert(descr->texture() != NONE);
+    assert(descr->material() != NONE);
     assert(descr->mesh() != NONE);
 
     core::shortcuts::descriptors()->add(descr);
@@ -309,13 +309,13 @@ genBullet()
     } else {
         material_type = texture::Type::TORPEDO_BULLET;
     }
-    descriptor->setTexture(textureDescriptorIdFromType(material_type));
+    descriptor->setMaterial(textureDescriptorIdFromType(material_type));
     descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
     descriptor->setArmor(1);
 
     core::shortcuts::descriptors()->add(descriptor);
 
-    assert(descriptor->texture() != NONE);
+    assert(descriptor->material() != NONE);
     assert(descriptor->mesh() != NONE);
 
     return descriptor;
@@ -412,7 +412,7 @@ genShip()
     descr->setDrawTurrels(false);
 
     // 3d
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::SHIP));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::SHIP));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
     //descr->setSize(meti::vec3(meti::getRandInt(100, 100))); // TODO: take from image
 
@@ -718,7 +718,7 @@ genBak(int race, int tech_level)
     int price = funcCountPrice(fuel, modules, mass, condition);
 
     Bak* descr = new Bak;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::BAK_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::BAK_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -774,7 +774,7 @@ genDrive(int race, int tech_level)
 
 
     Drive* descr = new Drive;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::DRIVE_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::DRIVE_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -828,7 +828,7 @@ genDroid(int race, int tech_level)
     int price = funcCountPrice(repair, modules, mass, condition);
 
     Droid* descr = new Droid;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::DROID_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::DROID_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -887,7 +887,7 @@ genGrapple(int race, int tech_level)
     int price = funcCountPrice(strength, radius, speed, modules, mass, condition);
 
     Grapple* descr = new Grapple;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::GRAPPLE_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::GRAPPLE_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -943,7 +943,7 @@ genLazer(int race, int tech_level)
     int price = funcCountPrice(damage, radius, modules, mass, condition);
 
     Lazer* descr = new Lazer;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::LAZER_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::LAZER_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -995,7 +995,7 @@ genProtector(int race, int tech_level)
     int price = funcCountPrice(protection, modules, mass, condition);
 
     Protector* descr = new Protector;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::PROTECTOR_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::PROTECTOR_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1045,7 +1045,7 @@ genRadar(int race, int tech_level)
     int price = funcCountPrice(radius, modules, mass, condition);
 
     Radar* descr = new Radar;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::RADAR_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::RADAR_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1102,7 +1102,7 @@ genRocket(int race, int tech_level)
     int price = funcCountPrice(ammo, damage, radius, modules, mass, condition);
 
     Rocket* descr = new Rocket;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::ROCKET_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::ROCKET_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1164,7 +1164,7 @@ genScaner(int race, int tech_level)
     int price = funcCountPrice(scan, modules, mass, condition);
 
     Scaner* descr = new Scaner;
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::SCANER_EQUIPMENT));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::SCANER_EQUIPMENT));
 
     // descriptor::Item
     descr->setMass(mass);
@@ -1208,7 +1208,7 @@ genGoods()
 {
     Goods* descriptor = new Goods;
 
-    descriptor->setTexture(textureDescriptorIdFromType(texture::Type::GOODS));
+    descriptor->setMaterial(textureDescriptorIdFromType(texture::Type::GOODS));
     descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 
     core::shortcuts::descriptors()->add(descriptor);
@@ -1224,12 +1224,12 @@ genTurrel()
 {
     descriptor::Turrel* descr = new descriptor::Turrel;
 
-    descr->setTexture(textureDescriptorIdFromType(texture::Type::TURREL));
+    descr->setMaterial(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
 
     core::shortcuts::descriptors()->add(descr);
 
-    assert(descr->texture() != NONE);
+    assert(descr->material() != NONE);
     assert(descr->mesh() != NONE);
 
     return descr;

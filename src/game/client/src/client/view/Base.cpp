@@ -60,9 +60,9 @@ int_t Base::id() const { return m_control_base->id(); }
 entity::Type Base::type() const { return m_control_base->type(); }
 entity::Type Base::group() const { return m_control_base->group(); }
 int_t Base::descriptorMeshId() const { return m_control_base->descriptor()->mesh(); }
-int_t Base::descriptorMaterialId() const { return m_control_base->descriptor()->texture(); }
+int_t Base::descriptorMaterialId() const { return m_control_base->descriptor()->material(); }
 
-void Base::setDescriptorMaterialId(int_t id) { m_control_base->descriptor()->setTexture(id); };
+void Base::setDescriptorMaterialId(int_t id) { m_control_base->descriptor()->setMaterial(id); };
 
 effect::Shield*
 Base::_createShield() {

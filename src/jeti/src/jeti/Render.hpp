@@ -251,7 +251,7 @@ private:
     void __useProgram(GLint) const;
 
     void __updateFps();
-    void __drawMesh(const Mesh&) const;
+    void __drawMesh(const Mesh&, bool use_alpha=false) const;
 
     void __setOrthogonalProjection();
 
