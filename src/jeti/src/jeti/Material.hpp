@@ -37,7 +37,6 @@ class Material;
 
 namespace jeti {
 
-
 namespace model {
 
 class Material

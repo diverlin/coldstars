@@ -38,7 +38,7 @@ Item::Item(control::Item* item, const ceti::Box2D& box)
 {
     _setBox(box);
     descriptor::Base* item_descr = core::shortcuts::descriptors()->get(item->model()->descriptor());
-    setMaterial(utils::createMaterialFromDescriptorId(item_descr->texture()));
+    setMaterial(utils::createMaterialFromDescriptorId(item_descr->material()));
 }
 
 Item::~Item()

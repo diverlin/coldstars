@@ -65,18 +65,17 @@ Planet::~Planet()
 void Planet::update()
 {
     Base::update();
-   // for (Base* child: children()) {
-//        child->update(this);
-  //      child->update();
- //   }
+    for (Base* child: children()) {
+        child->update();
+    }
 }
 
 void Planet::draw(const jeti::Render& render) const
 {
     render.draw(mesh(), material(), modelMatrix());
-    for (Base* child: children()) {
-        child->draw(render);
-    }
+//    for (Base* child: children()) {
+//        child->draw(render);
+//    }
 }
 
 } // namespace view

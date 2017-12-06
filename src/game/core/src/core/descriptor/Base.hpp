@@ -43,7 +43,7 @@ public:
     void setObClass(const entity::Type& obClass) { m_obClass = obClass; }
     void setRace(race::Type race) { m_race = race; }
     void setMesh(int_t mesh) { m_mesh = mesh; }
-    void setTexture(int_t texture) { m_texture = texture; }
+    void setMaterial(int_t texture) { m_texture = texture; }
 
     int_t id() const { return m_id; }
     descriptor::Type type() const { return m_type; }
@@ -52,7 +52,7 @@ public:
     const entity::Type& obClass() const { return m_obClass; }
     race::Type race() const { return m_race; }
     int_t mesh() const { return m_mesh; }
-    int_t texture() const { return m_texture; }
+    int_t material() const { return m_texture; }
 
     virtual ceti::InfoTable info() const {
         ceti::InfoTable result;

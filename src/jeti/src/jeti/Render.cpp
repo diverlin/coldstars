@@ -491,7 +491,7 @@ void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& mater
     drawMesh_HUD(*m_meshQuad, material, ModelMatrix);
 }
 
-void Render::__drawMesh(const Mesh& mesh) const {
+void Render::__drawMesh(const Mesh& mesh, bool use_alpha) const {
     if (mesh.states() != m_activeStates) {
         switch(mesh.states()) {
         case Mesh::State::QUAD:
@@ -508,9 +508,14 @@ void Render::__drawMesh(const Mesh& mesh) const {
             break;
         case Mesh::State::NORMAL:
             __disable_POINTSPRITE();
-            __disable_BLEND();
-            //__enable_BLEND();
-            __enable_DEPTH_TEST();
+            if (use_alpha) {
+                __enable_BLEND();
+                __disable_DEPTH_TEST();
+            } else {
+                __disable_BLEND();
+                __enable_DEPTH_TEST();
+            }
+
             __enable_CULLFACE();
             break;
         case Mesh::State::PARTICLES:
@@ -684,7 +689,7 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
         glBindTexture(GL_TEXTURE_2D, materialc.model()->texture);
         glUniform1i(m_programLightLocation_uTexture, 0);
 	                        
-        __drawMesh(mesh);
+        __drawMesh(mesh, material.use_alpha);
 	}
 }
 
