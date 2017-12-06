@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <client/effect/Base.hpp>
+#include <client/view/Base.hpp>
 
 namespace effect {
 
@@ -37,7 +37,7 @@ private:
 };
 
 
-class DistantNebula : public Base
+class DistantNebula : public view::Base
 {
 public:
     DistantNebula();

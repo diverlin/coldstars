@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <jeti/view/Base.hpp>
+#include <client/view/Base.hpp>
 
 #include <glm/glm.hpp>
 
@@ -33,12 +33,11 @@ class Opacity;
 } // namespace jeti
 
 namespace view {
-namespace effect {
 
-class Shield : public jeti::view::Base
+class Shield : public Base
 {  
 public:
-    Shield(jeti::view::Base*);
+    Shield(Base*);
     ~Shield();
 
     void dissipate();
@@ -49,6 +48,5 @@ private:
     jeti::animation::Opacity* m_opacityAnimation = nullptr;
 };
 
-} // namespace effect
 } // namespace view
 

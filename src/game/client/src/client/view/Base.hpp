@@ -20,8 +20,6 @@
 
 #include <core/type/EntityType.hpp>
 
-#include <client/effect/Shield.hpp>
-
 #include <ceti/type/IdType.hpp>
 
 #include <jeti/view/Base.hpp>
@@ -46,11 +44,14 @@ class Base;
 
 namespace view {
 
-class Base : public jeti::view::Base {
+class Shield;
+
+class Base : public jeti::view::Base
+{
 public:
+    Base(); // used for effects
     Base(control::Base*);
     ~Base();
-
 
     // check all these in jeti::view::Base
     int_t id() const;
@@ -74,7 +75,7 @@ protected:
 
     void _addPoint(jeti::Point* point) { m_points.push_back(point); }
     void _addChild(Base*);
-    effect::Shield* _createShield();
+    Shield* _createShield();
     void _createPath(jeti::control::Material*);
 
     jeti::view::Path* _path() const { return m_path; }
@@ -83,7 +84,7 @@ private:
     control::Base* m_control_base = nullptr;
     std::vector<jeti::Point*> m_points;
     std::vector<Base*> m_children;
-    effect::Shield* m_shield = nullptr;
+    Shield* m_shield = nullptr;
     jeti::view::Path* m_path = nullptr;
 };
 
