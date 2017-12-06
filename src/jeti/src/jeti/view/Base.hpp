@@ -66,11 +66,13 @@ public:
     Base(Mesh*, control::Material*);
     virtual ~Base();
 
+    // ugly
     float angle = 0;
     float d_angle = 0;
     meti::vec3 rotationAxis = meti::OX;
     glm::vec3 upOrigin = meti::OZ;
     glm::vec3 up = meti::OZ;
+    // ugly
 
     int_t id() const { return m_id; }
 
@@ -117,8 +119,6 @@ public:
     bool isPointInsideShape(const glm::vec3&) const;
 
     void genOrientation() { _genOrientation(); }
-
-    Mesh* mesh_DEBUG() const { return m_mesh; }
 
 protected:
     void _genId();

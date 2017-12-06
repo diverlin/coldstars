@@ -58,7 +58,7 @@ Cache::__loadResourcesFor(Base* view)
     {
     jeti::control::Material* material = nullptr;
 
-    int_t descritprorId = view->materialId();
+    int_t descritprorId = view->descriptorMaterialId();
     auto it = m_materialCollector.find(descritprorId);
     if (it != m_materialCollector.end()) {
         material = it->second;
@@ -72,7 +72,7 @@ Cache::__loadResourcesFor(Base* view)
     {
     jeti::Mesh* mesh = nullptr;
 
-    int_t descritprorId = view->meshId();
+    int_t descritprorId = view->descriptorMeshId();
     auto it = m_meshCollector.find(descritprorId);
     if (it != m_meshCollector.end()) {
         mesh = it->second;

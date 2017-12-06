@@ -37,6 +37,7 @@ Planet::Planet(control::Planet* planet)
     _setOrientation(planet);
 
     atmosphere = new Atmosphere(this);
+    atmosphere->setDescriptorMaterialId(m_control->descriptor()->atmosphereMaterial());
     _addChild(atmosphere);
 }
 

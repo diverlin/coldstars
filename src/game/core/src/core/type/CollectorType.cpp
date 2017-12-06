@@ -28,6 +28,7 @@ namespace type {
 Collector::Collector() {
     __registerType(int_t(texture::Type::STAR), "texture::star");
     __registerType(int_t(texture::Type::PLANET), "texture::planet");
+    __registerType(int_t(texture::Type::ATMOSPHERE), "texture::atmosphere");
     __registerType(int_t(texture::Type::ASTEROID), "texture::asteroid");
     __registerType(int_t(texture::Type::MINERAL), "texture::mineral");
     __registerType(int_t(texture::Type::SHIP), "texture::ship");

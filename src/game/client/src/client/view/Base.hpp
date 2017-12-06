@@ -56,8 +56,9 @@ public:
     int_t id() const;
     entity::Type type() const;
     entity::Type group() const;
-    int_t meshId() const;
-    int_t materialId() const;
+    int_t descriptorMeshId() const;
+    int_t descriptorMaterialId() const;
+    void setDescriptorMaterialId(int_t id);
     //
 
     const std::vector<Base*>& children() const { return m_children; }

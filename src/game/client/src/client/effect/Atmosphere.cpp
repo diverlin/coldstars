@@ -34,10 +34,12 @@ Atmosphere::~Atmosphere()
  
 void Atmosphere::draw(const jeti::Render& render) const
 {
-    return;
-    render.drawMeshWithOnlyPerlin(_parent()->mesh(),
-                                  _parent()->modelMatrix(),
-                                  _color());
+    render.drawMeshWithLight(_parent()->mesh(),
+                             /**render.materialCollisionRadius(), */material(),
+                             _parent()->modelMatrix());
+//    render.drawMeshWithOnlyPerlin(_parent()->mesh(),
+//                                  _parent()->modelMatrix(),
+//                                  _color());
 }
 
 } // namespace view
