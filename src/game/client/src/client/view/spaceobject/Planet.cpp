@@ -36,9 +36,9 @@ Planet::Planet(control::Planet* planet)
 {
     _setOrientation(planet);
 
-    atmosphere = new ::effect::Atmosphere(this);
+    atmosphere = new Atmosphere(this);
     atmosphere->setDescriptorMaterialId(m_control->descriptor()->atmosphereMaterial());
-//    _addChild(atmosphere);
+    _addChild(atmosphere);
 }
 
 Planet::~Planet()

@@ -19,11 +19,9 @@
 #include "Atmosphere.hpp"  
 #include <jeti/Render.hpp>
 
-namespace effect {
+namespace view {
 
 Atmosphere::Atmosphere(jeti::view::Base* parent)
-    :
-      Base()
 {
     _setParent(parent);
     setColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
@@ -43,4 +41,4 @@ void Atmosphere::draw(const jeti::Render& render) const
 //                                  _color());
 }
 
-} // namespace effect
+} // namespace view

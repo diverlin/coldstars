@@ -21,11 +21,20 @@
 #include <core/Base.hpp>
 #include <core/descriptor/Base.hpp>
 
+#include <client/effect/Shield.hpp>
+
 #include <jeti/Render.hpp>
 #include <jeti/PathVisual.hpp>
 #include <jeti/Point.hpp>
 
 namespace view {
+
+Base::Base() // used for effects
+    :
+      jeti::view::Base()
+{
+    _genOrientation();
+}
 
 Base::Base(control::Base* base)
     :
@@ -64,10 +73,10 @@ int_t Base::descriptorMaterialId() const { return m_control_base->descriptor()->
 
 void Base::setDescriptorMaterialId(int_t id) { m_control_base->descriptor()->setMaterial(id); };
 
-effect::Shield*
+Shield*
 Base::_createShield() {
     assert(m_shield == nullptr);
-    m_shield = new effect::Shield(this);
+    m_shield = new Shield(this);
     return m_shield;
 }
 

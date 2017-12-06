@@ -24,12 +24,12 @@
 #include <core/part/Turrel.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+#include <client/effect/Shield.hpp>
 #include <client/view/part/Turrel.hpp>
 #include <client/view/effect/Jet.hpp>
 #include <client/resources/Utils.hpp>
 
 #include <jeti/Render.hpp>
-//#include <jeti/Point.hpp>
 #include <jeti/Mesh.hpp>
 #include <jeti/Material.hpp>
 #include <jeti/PathVisual.hpp>
@@ -57,7 +57,7 @@ Ship::Ship(control::Ship* control)
     }
 
     {
-        effect::Shield* shield = _createShield();
+        Shield* shield = _createShield();
         jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::SHIELD_EFFECT);
         shield->setMaterial(material);
         shield->dissipate();

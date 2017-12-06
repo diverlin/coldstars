@@ -25,11 +25,9 @@ namespace control {
 class Planet;
 } // namespace control
 
-namespace effect {
-class Atmosphere;
-} // namespace effect
-
 namespace view {
+
+class Atmosphere;
 
 class Planet : public Base
 {
@@ -45,7 +43,7 @@ public:
 private:
     control::Planet* m_control = nullptr;
     //virtual void UpdateInfo() override final;
-    ::effect::Atmosphere* atmosphere = nullptr;
+    Atmosphere* atmosphere = nullptr;
 }; 
 
 } // namespace view

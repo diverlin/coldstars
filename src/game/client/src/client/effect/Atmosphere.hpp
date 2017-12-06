@@ -19,10 +19,9 @@
 
 #pragma once
 
-#include <client/effect/Base.hpp>
-//#include <client/view/Base.hpp>
+#include <client/view/Base.hpp>
 
-namespace effect {
+namespace view {
 
 class Atmosphere : public Base
 {
@@ -33,7 +32,7 @@ public:
     void draw(const jeti::Render&) const override final;
 }; 
 
-} // namespace effect
+} // namespace view
 
 
 
