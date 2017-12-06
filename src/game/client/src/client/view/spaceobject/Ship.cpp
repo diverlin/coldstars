@@ -105,15 +105,27 @@ void Ship::_drawSelectedWeaponsRadius(const jeti::Render& render) const
 
 void Ship::draw(const jeti::Render& render) const
 {
-    render.draw(mesh(), material(), modelMatrix());
-    if (m_control->properties().draw_decors) {
-        _drawChildren(render);
+    // draw path
+    const auto& path = m_control->navigator().path();
+    if (path.centers().size()) {
+        _path()->update(path.centers(), path.directions());
+        _drawPath(render);
     }
 
+    // draw grapple jet
     if (m_control->properties().grab_radius > 0) {
         //RenderGrabTrail(render);
     }
 
+    // draw korpus
+    render.draw(mesh(), material(), modelMatrix());
+
+    // draw children
+    if (m_control->properties().draw_decors) {
+        _drawChildren(render);
+    }
+
+    // draw jets
     if (m_control->properties().speed > 0) {
         for (view::effect::Jet* driveJet: m_driveJets) {
             driveJet->draw(render);
@@ -123,12 +135,6 @@ void Ship::draw(const jeti::Render& render) const
     //if (m_control->properties().shield_effect_enabled) {
         _drawShield(render);
     //}
-
-    const auto& path = m_control->navigator().path();
-    if (path.centers().size()) {
-        _path()->update(path.centers(), path.directions());
-        _drawPath(render);
-    }
 
     _drawSelectedWeaponsRadius(render);
 }
