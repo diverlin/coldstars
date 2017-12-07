@@ -34,7 +34,7 @@ set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 #SET(COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
 #SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -O0 -fPIC -rdynamic")
-SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -fPIC")
+SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -O0 -fPIC")
 
 
 set(CMAKE_PREFIX_PATH ${COLDSTARS_DEPENDENCIES_ROOT})

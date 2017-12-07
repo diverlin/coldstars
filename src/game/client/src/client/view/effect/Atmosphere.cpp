@@ -26,6 +26,9 @@ Atmosphere::Atmosphere(Base* parent)
 {
     _setParent(parent);
     setColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+    glm::vec3 size = 1.1f * _parent()->size();
+    setSize(size);
 }
 
 Atmosphere::~Atmosphere()
@@ -33,7 +36,7 @@ Atmosphere::~Atmosphere()
  
 void Atmosphere::draw(const jeti::Render& render) const
 {
-    render.drawMeshWithLight(_parent()->mesh(),
+    render.drawMeshWithLight(mesh(),
                              material(),
                              modelMatrix());
 
