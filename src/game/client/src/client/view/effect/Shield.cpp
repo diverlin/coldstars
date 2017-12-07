@@ -74,7 +74,8 @@ void Shield::update()
 void Shield::draw(const jeti::Render& render) const
 {
     // do normal scale program
-    render.drawCircleWithPerlin(material(), _parent()->position(), (1.2f+_color().a/3.0)*_parent()->collisionRadius(), _color());
+    float radius = (1.2f+_color().a/3.0)*_parent()->collisionRadius();
+    render.drawCircleWithPerlin(material(), _parent()->position(), radius, _color());
 }
 
 } // namespace effect
