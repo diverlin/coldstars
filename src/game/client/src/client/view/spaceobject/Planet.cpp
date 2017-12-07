@@ -27,6 +27,9 @@
 
 #include <jeti/Render.hpp>
 
+#include <jeti/animation/ConstantRotation.hpp>
+#include <meti/RandUtils.hpp>
+
 namespace view {
 
 Planet::Planet(control::Planet* planet)
@@ -37,7 +40,12 @@ Planet::Planet(control::Planet* planet)
     _setOrientation(planet);
 
     atmosphere = new effect::Atmosphere(this);
+    jeti::Mesh* mesh = utils::createMeshByDescriptorType(mesh::Type::SPHERE);
     jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::ATMOSPHERE);
+    atmosphere->setMesh(mesh);
+    atmosphere->setMaterial(material);
+    jeti::animation::ConstantRotation* animation = new jeti::animation::ConstantRotation(meti::OY, meti::rand::gen_float(0.001, 0.01));
+    atmosphere->setAnimationRotation(animation);
     //atmosphere->setDescriptorMaterialId(m_control->descriptor()->atmosphereMaterial());
     _addChild(atmosphere);
 }
@@ -74,9 +82,9 @@ void Planet::update()
 void Planet::draw(const jeti::Render& render) const
 {
     render.draw(mesh(), material(), modelMatrix());
-//    for (Base* child: children()) {
-//        child->draw(render);
-//    }
+    for (Base* child: children()) {
+        child->draw(render);
+    }
 }
 
 } // namespace view

@@ -492,7 +492,8 @@ void Render::drawQuad_HUD(const ceti::Box2D& box, const control::Material& mater
 }
 
 void Render::__drawMesh(const Mesh& mesh, bool use_alpha) const {
-    if (mesh.states() != m_activeStates) {
+    // bug with transparent normal mesh (move states to material)
+    //if (mesh.states() != m_activeStates) {
         switch(mesh.states()) {
         case Mesh::State::QUAD:
             __disable_POINTSPRITE();
@@ -534,7 +535,7 @@ void Render::__drawMesh(const Mesh& mesh, bool use_alpha) const {
             assert(false);
         }
         m_activeStates = mesh.states();
-    }
+    //}
 
     mesh.draw();
 }

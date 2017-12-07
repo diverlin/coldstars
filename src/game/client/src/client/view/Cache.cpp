@@ -55,6 +55,10 @@ Cache::get(int_t id) const
 void
 Cache::__loadResourcesFor(Base* view)
 {
+    if (!view->control()) {
+        return; // workaround for effects
+    }
+
     {
     jeti::control::Material* material = nullptr;
 
