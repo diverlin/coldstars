@@ -22,7 +22,7 @@
 namespace view {
 namespace effect {
 
-Atmosphere::Atmosphere(jeti::view::Base* parent)
+Atmosphere::Atmosphere(Base* parent)
 {
     _setParent(parent);
     setColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));

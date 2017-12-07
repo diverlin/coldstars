@@ -22,6 +22,7 @@
 #include <core/spaceobject/Planet.hpp>
 #include <core/model/spaceobject/Planet.hpp>
 
+#include <client/resources/Utils.hpp>
 #include <client/view/effect/Atmosphere.hpp>
 
 #include <jeti/Render.hpp>
@@ -35,9 +36,10 @@ Planet::Planet(control::Planet* planet)
 {
     _setOrientation(planet);
 
-//    atmosphere = new Atmosphere(this);
-//    atmosphere->setDescriptorMaterialId(m_control->descriptor()->atmosphereMaterial());
-//    _addChild(atmosphere);
+    atmosphere = new effect::Atmosphere(this);
+    jeti::control::Material* material = utils::createMaterialByDescriptorType(texture::Type::ATMOSPHERE);
+    //atmosphere->setDescriptorMaterialId(m_control->descriptor()->atmosphereMaterial());
+    _addChild(atmosphere);
 }
 
 Planet::~Planet()

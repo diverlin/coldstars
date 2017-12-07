@@ -27,7 +27,7 @@ namespace effect {
 class Atmosphere : public Base
 {
 public:
-    Atmosphere(jeti::view::Base*);
+    Atmosphere(Base*);
     virtual ~Atmosphere();
 
     void draw(const jeti::Render&) const override final;
