@@ -40,8 +40,8 @@ void Atmosphere::draw(const jeti::Render& render) const
                              material(),
                              modelMatrix());
 
-//    render.drawMeshWithOnlyPerlin(_parent()->mesh(),
-//                                  _parent()->modelMatrix(),
+//    render.drawMeshWithOnlyPerlin(mesh(),
+//                                  modelMatrix(),
 //                                  _color());
 }
 

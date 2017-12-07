@@ -510,7 +510,7 @@ void Render::__drawMesh(const Mesh& mesh, bool use_alpha) const {
         case Mesh::State::NORMAL:
             __disable_POINTSPRITE();
             if (use_alpha) {
-                __enable_BLEND();
+                __enable_ADDITIVE_BLEND();
                 __disable_DEPTH_TEST();
             } else {
                 __disable_BLEND();
@@ -623,7 +623,7 @@ void Render::drawMeshWithOnlyPerlin(const Mesh& mesh, const glm::mat4& modelMatr
         glBindTexture(GL_TEXTURE_2D, m_materialPerlin->model()->texture);
         glUniform1i(glGetUniformLocation(m_shaders.perlin, "u_texturePerlin"), 0);
 
-        __drawMesh(mesh);
+        __drawMesh(mesh, /*use_alpha*/true);
     }
 }
 
