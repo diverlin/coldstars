@@ -6,6 +6,8 @@ set(PROJECT coldstars)
 project(${PROJECT})
 
 set(COLDSTARS_DEPLOY_DIR "/media/yeti/ext_workspace/dist_gcc54/coldstars")
+set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+set(CMAKE_INSTALL_PREFIX "${DEPLOY_DIR}")
 
 set(USE_TEST OFF)
 if(USE_TEST)
@@ -28,8 +30,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif ()
 
 #set( CMAKE_VERBOSE_MAKEFILE true )
-
-set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 #SET(COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")

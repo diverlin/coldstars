@@ -1,27 +1,8 @@
 cmake_minimum_required (VERSION 2.8)
 
-if (NOT PROJECT_CETI)
-    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../macros/cmake")
-
-    set(PROJECT_JETI "jeti")
-    project(${PROJECT_JETI})
-
-    if(NOT CMAKE_BUILD_TYPE)
-        set(CMAKE_BUILD_TYPE "Debug")
-    endif()
-
-    if(NOT COMPILE_FLAGS)
-        set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
-    endif()
-
-    if(COLDSTARS_DEPLOY_DIR)
-        set(COLDSTARS_DEPLOY_DIR ${COLDSTARS_DEPLOY_DIR} CACHE INTERNAL "" FORCE)
-        set(CMAKE_INSTALL_PREFIX "${COLDSTARS_DEPLOY_DIR}")
-    endif()
-endif()
-
-# vars
-set(PROJECT ${PROJECT_JETI})
+set(CUSTOM_CMAKE_MODULE_RELPATH "../../macros/cmake/macros.cmake")
+include(${CUSTOM_CMAKE_MODULE_RELPATH})
+MACRO_INIT_PROJECT("jeti")
 
 ### deps
 # opengl
@@ -58,7 +39,7 @@ find_package(CETI REQUIRED)
 #include_directories(${CETI_INCLUDE_DIRS})
 
 # add
-add_subdirectory(src/jeti)
+MACRO_BUILD_MODULE()
 
 set(USE_APP OFF)
 if (USE_APP)
@@ -70,7 +51,10 @@ if (USE_APP2)
     add_subdirectory(app2)
 endif()
 
-if (USE_TEST)
-    add_subdirectory(test)
-endif ()
+
+
+
+
+
+
 

@@ -1,0 +1,39 @@
+macro(MACRO_INIT_PROJECT PROJECT_NAME)
+	#string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPERCASE)
+	
+	if (NOT CUSTOM_CMAKE_MODULE_RELPATH)
+		message(FATAL_ERROR "CUSTOM_CMAKE_MODULE_RELPATH is not specified. please specify it")
+	endif()
+	
+	get_filename_component(CUSTOM_CMAKE_MODULE_ABSPATH
+						   "${CMAKE_CURRENT_LIST_DIR}/${CUSTOM_CMAKE_MODULE_RELPATH}"
+						   ABSOLUTE)
+	list(APPEND CMAKE_MODULE_PATH ${CUSTOM_CMAKE_MODULE_ABSPATH})
+	list(REMOVE_DUPLICATES CMAKE_MODULE_PATH)
+	
+	set(PROJECT ${PROJECT_NAME})
+	project(${PROJECT_NAME})
+	
+	if(NOT CMAKE_BUILD_TYPE)
+		set(CMAKE_BUILD_TYPE "Debug")
+	endif()
+
+	if(NOT COMPILE_FLAGS)
+		set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
+	endif()
+
+	if(COLDSTARS_DEPLOY_DIR)
+		set(COLDSTARS_DEPLOY_DIR ${COLDSTARS_DEPLOY_DIR} CACHE INTERNAL "" FORCE)
+		set(CMAKE_INSTALL_PREFIX "${COLDSTARS_DEPLOY_DIR}")
+	endif()
+
+endmacro(MACRO_INIT_PROJECT)
+
+
+macro(MACRO_BUILD_MODULE)
+	add_subdirectory(src/${PROJECT})
+
+	if(USE_TEST)
+		add_subdirectory(test)
+	endif()
+endmacro(MACRO_BUILD_MODULE)
