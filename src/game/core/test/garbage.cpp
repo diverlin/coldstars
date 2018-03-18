@@ -45,55 +45,56 @@
 
 TEST(garbage, ship_with_items)
 {
-    auto& garbage = core::manager::Garbage::get();
-    auto& entities = core::manager::Entity::get();
+    assert(false);
+//    auto& garbage = core::manager::Garbage::get();
+//    auto& entities = core::manager::Entity::get();
 
-    auto ship = builder::Ship::gen();
-    builder::Ship::equip(ship);
-    auto items = ship->__items();
-    auto npc = ship->npc();
+//    auto ship = builder::Ship::gen();
+//    builder::Ship::equip(ship);
+//    auto items = ship->__items();
+//    auto npc = ship->npc();
 
-    // collect ids
-    ceti::pack<int_t> ids;
+//    // collect ids
+//    ceti::pack<int_t> ids;
 
-    ids.add(ship->id());
-    if (npc) {
-        ids.add(npc->id());
-    }
-    for(auto item: items) {
-        ids.add(item->id());
-    }
+//    ids.add(ship->id());
+//    if (npc) {
+//        ids.add(npc->id());
+//    }
+//    for(auto item: items) {
+//        ids.add(item->id());
+//    }
 
-    // not in the garbage
-    for(int_t id: ids) {
-        EXPECT_FALSE(garbage.contain(id));
-    }
+//    // not in the garbage
+//    for(int_t id: ids) {
+//        EXPECT_FALSE(garbage.contain(id));
+//    }
 
-    // kill
-    ship->die();
-    garbage.add(ship);
+//    // kill
+//    ship->die();
+//    garbage.add(ship);
 
-    // in the garbage
-    for(int_t id: ids) {
-        EXPECT_TRUE(garbage.contain(id));
-    }
+//    // in the garbage
+//    for(int_t id: ids) {
+//        EXPECT_TRUE(garbage.contain(id));
+//    }
 
-    // in the entities manager
-    for(int_t id: ids) {
-        EXPECT_TRUE(entities.contain(id));
-    }
+//    // in the entities manager
+//    for(int_t id: ids) {
+//        EXPECT_TRUE(entities.contain(id));
+//    }
 
-    // delete objects
-    garbage.erase();
+//    // delete objects
+//    garbage.erase();
 
-    // not in the garbage
-    for(int_t id: ids) {
-        EXPECT_FALSE(garbage.contain(id));
-    }
+//    // not in the garbage
+//    for(int_t id: ids) {
+//        EXPECT_FALSE(garbage.contain(id));
+//    }
 
-    // not in the entities manager
-    for(int_t id: ids) {
-        EXPECT_FALSE(entities.contain(id));
-    }
+//    // not in the entities manager
+//    for(int_t id: ids) {
+//        EXPECT_FALSE(entities.contain(id));
+//    }
 }
 

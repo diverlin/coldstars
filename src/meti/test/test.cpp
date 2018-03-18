@@ -21,15 +21,17 @@
 #include <glm/gtc/epsilon.hpp>
 //#include <glm/gtc/constants.hpp>
 
+#include <ceti/StringUtils.hpp>
+
 #include <meti/VectorUtils.hpp>
 #include <meti/QuaternionUtils.hpp>
 
 namespace {
 void print(const glm::vec3& orig, const glm::vec3& expect, const glm::vec3& actual)
 {
-    std::cout<<"orig  : "<<meti::str(orig)<<std::endl;
-    std::cout<<"expect: "<<meti::str(expect)<<std::endl;
-    std::cout<<"actual: "<<meti::str(actual)<<std::endl;
+    std::cout<<"orig  : "<<ceti::to_string(orig)<<std::endl;
+    std::cout<<"expect: "<<ceti::to_string(expect)<<std::endl;
+    std::cout<<"actual: "<<ceti::to_string(actual)<<std::endl;
 }
 } // namespace
 

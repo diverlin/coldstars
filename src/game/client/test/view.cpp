@@ -25,53 +25,57 @@
 
 #include <client/view/spaceobject/ALL>
 
-#include <client/common/global.hpp>
+#include <core/common/Global.hpp>
 #include <client/view/StarSystem.hpp>
 
+#include <jeti/view/Base.hpp>
 #include <jeti/Camera.hpp>
 
 #include <gtest/gtest.h>
 
 namespace {
 
-void validate(descriptor::Base* descr, jeti::Base* view) {
-    descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
-    descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
+//void validate(descriptor::Base* descr, jeti::Base* view) {
+//    descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
+//    descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
 
-    EXPECT_NE(descr->texture(), NONE);
-    EXPECT_NE(material_descr->texturePath(), "");
+//    EXPECT_NE(descr->texture(), NONE);
+//    EXPECT_NE(material_descr->texturePath(), "");
 
-    EXPECT_NE(descr->mesh(), NONE);
-    EXPECT_NE(mesh_descr->modelPath(), "");
-}
+//    EXPECT_NE(descr->mesh(), NONE);
+//    EXPECT_NE(mesh_descr->modelPath(), "");
+//}
 
 } // namespace
 
 TEST(view, star)
 {
-    client::global::get().init();
-    control::Star* star = builder::Star::gen();
-    view::Star* view = new view::Star(star);
+    assert(false);
+//    client::global::get().init();
+//    control::Star* star = builder::Star::gen();
+//    view::Star* view = new view::Star(star);
 
-    validate(star->descriptor(), view);
+//    validate(star->descriptor(), view);
 }
 
 TEST(view, planet)
 {
-    client::global::get().init();
-    control::Planet* planet = builder::Planet::gen();
-    view::Planet* view = new view::Planet(planet);
+    assert(false);
+//    client::global::get().init();
+//    control::Planet* planet = builder::Planet::gen();
+//    view::Planet* view = new view::Planet(planet);
 
-    validate(planet->descriptor(), view);
+//    validate(planet->descriptor(), view);
 }
 
 TEST(view, asteroid)
 {
-    client::global::get().init();
-    control::Asteroid* asteroid = builder::Asteroid::gen();
-    view::Asteroid* view = new view::Asteroid(asteroid);
+    assert(false);
+//    client::global::get().init();
+//    control::Asteroid* asteroid = builder::Asteroid::gen();
+//    view::Asteroid* view = new view::Asteroid(asteroid);
 
-    validate(asteroid->descriptor(), view);
+//    validate(asteroid->descriptor(), view);
 }
 
 //TEST(view, ship)

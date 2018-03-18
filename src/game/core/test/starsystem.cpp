@@ -382,7 +382,7 @@ TEST(starsystem, add_remove_bullet)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Bullet* bullet = builder::Bullet::gen();
+        control::Bullet* bullet = builder::Bullet::gen(1);
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, bullet->place());

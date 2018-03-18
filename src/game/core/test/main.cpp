@@ -26,10 +26,13 @@
 #include <core/spaceobject/Ship.hpp>
 #include <core/spaceobject/Planet.hpp>
 #include <core/spaceobject/Asteroid.hpp>
+#include <core/type/TelegramType.hpp>
 
 #include <core/model/spaceobject/Ship.hpp>
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/model/world/starsystem.hpp>
+#include <core/model/world/Sector.hpp>
+#include <core/model/world/galaxy.hpp>
 
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/builder/spaceobject/ShipBuilder.hpp>
@@ -44,8 +47,8 @@
 #include <core/descriptor/Base.hpp>
 #include <core/descriptor/spaceobject/Container.hpp>
 
-#include <core/descriptor/comm/Hit.hpp>
-#include <core/descriptor/comm/AddToStarsystemDescriptor.hpp>
+#include <core/communication/descriptor/Hit.hpp>
+#include <core/communication/descriptor/AddToStarsystem.hpp>
 
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/descriptor/world/SectorDescriptor.hpp>
@@ -53,7 +56,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/communication/TelegrammHub.hpp>
+#include <core/communication/TelegramHub.hpp>
 
 #include <core/builder/item/equipment/ALL>
 #ifdef USE_MODULES
@@ -82,16 +85,16 @@ TEST(descriptor, accessors)
 
 TEST(base, hit)
 {
-    core::comm::TelegrammHub& messageHub = core::global::get().telegrammHub();
+    core::comm::TelegramHub& messageHub = core::global::get().telegramHub();
 
     control::Ship* ship1 = builder::Ship::gen();
     control::Ship* ship2 = builder::Ship::gen();
 
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
-
     assert(false);
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+
     //messageHub.runLoop();
 
     EXPECT_FALSE(ship2->isAlive());
@@ -99,17 +102,17 @@ TEST(base, hit)
 
 TEST(base, critical_hit)
 {
-    core::comm::TelegrammHub& messageHub = core::global::get().telegrammHub();
-
-    control::Ship* ship1 = builder::Ship::gen();
-    control::Ship* ship2 = builder::Ship::gen();
-
-    messageHub.add(core::comm::Telegramm(core::comm::Telegramm::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
-
     assert(false);
-    //messageManager.runLoop();
+//    core::comm::TelegramHub& messageHub = core::global::get().TelegramHub();
 
-    EXPECT_TRUE(ship2->isAlive());
+//    control::Ship* ship1 = builder::Ship::gen();
+//    control::Ship* ship2 = builder::Ship::gen();
+
+//    messageHub.add(core::comm::Telegram(core::comm::Telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+
+//    //messageManager.runLoop();
+
+//    EXPECT_TRUE(ship2->isAlive());
 }
 
 TEST(base, bomb)

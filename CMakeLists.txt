@@ -9,7 +9,7 @@ set(COLDSTARS_DEPLOY_DIR "/media/yeti/ext_workspace/dist_gcc54/coldstars")
 set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(CMAKE_INSTALL_PREFIX "${DEPLOY_DIR}")
 
-set(USE_TEST OFF)
+set(USE_TEST ON)
 if(USE_TEST)
     add_definitions(-DUSE_TEST)
 endif()
@@ -19,7 +19,8 @@ if(DUMP_DESCRIPTORS)
     add_definitions(-DDUMP_DESCRIPTORS)
 endif()
 
-set(GTEST_ROOT "/workspace/dist/gtest")
+#set(GTEST_ROOT "/workspace/dist/gtest")
+find_package(GTest REQUIRED)
 set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glm-0.9.7.5/")
 
 set(CMAKE_BUILD_TYPE "Debug")

@@ -35,7 +35,7 @@ TEST(descriptor, clone_droid) {
     EXPECT_EQ(descr->type(), descriptor::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->slotType(), entity::Type::DROID_SLOT);
+    //EXPECT_EQ(descr->slotType(), entity::Type::DROID_SLOT);
 
     EXPECT_EQ(descr->repair(), copy->repair());
     EXPECT_EQ(descr->data(), copy->data());
