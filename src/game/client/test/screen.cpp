@@ -21,7 +21,7 @@
 
 #include <core/builder/spaceobject/ALL>
 #include <core/spaceobject/ALL>
-#include <client/common/global.hpp>
+#include <core/common/Global.hpp>
 //#include <core/manager/DescriptorManager.hpp>
 
 //#include <core/descriptor/spaceobject/ALL>
@@ -59,103 +59,106 @@ bool epsilonEqual(const glm::vec3& v1, const glm::vec3& v2) {
 
 TEST(coords, screen2word)
 {
-    client::global::get().init();
-    jeti::Render& render = client::global::get().render();
-    int w = render.width();
-    int h = render.height();
-    assert(w>0);
-    assert(h>0);
+    assert(false);
+//    client::global::get().init();
+//    jeti::Render& render = client::global::get().render();
+//    int w = render.width();
+//    int h = render.height();
+//    assert(w>0);
+//    assert(h>0);
 
 
-    std::vector<float> scales;
-    scales.push_back(0.1f);
-    scales.push_back(1.0f);
-    scales.push_back(2.0f);
-    scales.push_back(10.0f);
+//    std::vector<float> scales;
+//    scales.push_back(0.1f);
+//    scales.push_back(1.0f);
+//    scales.push_back(2.0f);
+//    scales.push_back(10.0f);
 
-    for (const float scale: scales) {
-        render.camera()->setPosition(glm::vec3(0));
-        render.setScaleBase(scale);
+//    for (const float scale: scales) {
+//        render.camera()->setPosition(glm::vec3(0));
+//        render.setScaleBase(scale);
 
-        glm::vec3 screen_coord = render.camera()->position();
-        glm::vec3 zero(0,0,0);
+//        glm::vec3 screen_coord = render.camera()->position();
+//        glm::vec3 zero(0,0,0);
 
-        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
+//        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
 
-        {
-            glm::vec3 mouse_pos(w/2,h/2,0);
-            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
-            EXPECT_TRUE(epsilonEqual(zero, world_coord));
-        }
+//        {
+//            glm::vec3 mouse_pos(w/2,h/2,0);
+//            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+//            EXPECT_TRUE(epsilonEqual(zero, world_coord));
+//        }
 
-        {
-            glm::vec3 mouse_pos(w,h,0);
-            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
-            EXPECT_TRUE(epsilonEqual(glm::vec3(scale*w/2,scale*h/2,0), world_coord));
-        }
+//        {
+//            glm::vec3 mouse_pos(w,h,0);
+//            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+//            EXPECT_TRUE(epsilonEqual(glm::vec3(scale*w/2,scale*h/2,0), world_coord));
+//        }
 
-        {
-            glm::vec3 mouse_pos(w,h,0);
-            render.camera()->setPosition(glm::vec3(-w/2,-h/2,0));
-            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
-            EXPECT_TRUE(epsilonEqual(zero, world_coord));
-        }
-    }
+//        {
+//            glm::vec3 mouse_pos(w,h,0);
+//            render.camera()->setPosition(glm::vec3(-w/2,-h/2,0));
+//            glm::vec3 world_coord = render.toWorldCoord(mouse_pos);
+//            EXPECT_TRUE(epsilonEqual(zero, world_coord));
+//        }
+//    }
 }
 
 
 TEST(coords, word2screen)
 {
-    client::global::get().init();
-    jeti::Render& render = client::global::get().render();
-    int w = render.width();
-    int h = render.height();
-    assert(w>0);
-    assert(h>0);
+    assert(false);
+//    client::global::get().init();
+//    jeti::Render& render = client::global::get().render();
+//    int w = render.width();
+//    int h = render.height();
+//    assert(w>0);
+//    assert(h>0);
 
 
-    std::vector<float> scales;
-    scales.push_back(0.1f);
-    scales.push_back(1.0f);
-    scales.push_back(2.0f);
-    scales.push_back(10.0f);
+//    std::vector<float> scales;
+//    scales.push_back(0.1f);
+//    scales.push_back(1.0f);
+//    scales.push_back(2.0f);
+//    scales.push_back(10.0f);
 
-    for (const float scale: scales) {
-        render.camera()->setPosition(glm::vec3(0));
-        render.setScaleBase(scale);
+//    for (const float scale: scales) {
+//        render.camera()->setPosition(glm::vec3(0));
+//        render.setScaleBase(scale);
 
-        glm::vec3 screen_coord = render.camera()->position();
-        glm::vec3 zero(0,0,0);
+//        glm::vec3 screen_coord = render.camera()->position();
+//        glm::vec3 zero(0,0,0);
 
-        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
+//        EXPECT_TRUE(epsilonEqual(zero, screen_coord));
 
-        {
-            glm::vec3 world_coord(zero);
-            glm::vec3 screen_coord;
-            render.toScreenCoord(world_coord, screen_coord);
-            EXPECT_TRUE(epsilonEqual(glm::vec3(w/2,h/2,0), screen_coord));
-        }
+//        {
+//            glm::vec3 world_coord(zero);
+//            glm::vec3 screen_coord;
+//            render.toScreenCoord(world_coord, screen_coord);
+//            EXPECT_TRUE(epsilonEqual(glm::vec3(w/2,h/2,0), screen_coord));
+//        }
 
-        {
-            glm::vec3 world_coord(w/2*scale,h/2*scale,0);
-            glm::vec3 screen_coord;
-            render.toScreenCoord(world_coord, screen_coord);
-            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
-        }
+//        {
+//            glm::vec3 world_coord(w/2*scale,h/2*scale,0);
+//            glm::vec3 screen_coord;
+//            render.toScreenCoord(world_coord, screen_coord);
+//            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
+//        }
 
-        {
-            glm::vec3 world_coord(zero);
-            render.camera()->setPosition(glm::vec3(-w/2*scale,-h/2*scale,0));
-            glm::vec3 screen_coord;
-            render.toScreenCoord(world_coord, screen_coord);
-            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
-        }
-    }
+//        {
+//            glm::vec3 world_coord(zero);
+//            render.camera()->setPosition(glm::vec3(-w/2*scale,-h/2*scale,0));
+//            glm::vec3 screen_coord;
+//            render.toScreenCoord(world_coord, screen_coord);
+//            EXPECT_TRUE(epsilonEqual(glm::vec3(w,h,0), screen_coord));
+//        }
+//    }
 }
 
 TEST(view, visibility)
 {
-    client::global::get().init();
-    control::Ship* star = builder::Ship::gen();
-    view::Ship* view = new view::Ship(star);
+    assert(false);
+//    client::global::get().init();
+//    control::Ship* star = builder::Ship::gen();
+//    view::Ship* view = new view::Ship(star);
 }

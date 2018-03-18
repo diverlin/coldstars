@@ -35,7 +35,7 @@ TEST(descriptor, clone_lazer) {
     EXPECT_EQ(descr->type(), descriptor::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);
+    //EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);
 
     EXPECT_EQ(descr->damage(), copy->damage());
     EXPECT_EQ(descr->radius(), copy->radius());

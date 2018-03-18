@@ -32,7 +32,7 @@ void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy)
     EXPECT_EQ(descr->obGroup(), copy->obGroup());
     EXPECT_EQ(descr->obClass(), copy->obClass());
     EXPECT_EQ(descr->mesh(), copy->mesh());
-    EXPECT_EQ(descr->texture(), copy->texture());
+    //EXPECT_EQ(descr->texture(), copy->texture());
 }
 
 //void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy)

@@ -16,9 +16,9 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <test/descriptor/base.hpp>
-#include <test/descriptor/item/item.hpp>
-#include <test/descriptor/item/equipment/equipment.hpp>
+#include <core/test/descriptor/base.hpp>
+#include <core/test/descriptor/item/item.hpp>
+#include <core/test/descriptor/item/equipment/equipment.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/descriptor/item/equipment/Drive.hpp>
@@ -34,7 +34,7 @@ TEST(descriptor, clone_drive) {
     EXPECT_EQ(descr->type(), descriptor::Type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
-    EXPECT_EQ(descr->slotType(), entity::Type::DRIVE_SLOT);
+    //EXPECT_EQ(descr->slotType(), entity::Type::DRIVE_SLOT);
 
     EXPECT_EQ(descr->speed(), copy->speed());
     EXPECT_EQ(descr->hyper(), copy->hyper());

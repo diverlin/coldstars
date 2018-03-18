@@ -133,11 +133,11 @@ TEST(vehicle, item_bak_and_drive)
 
     /// bak
     // event: lock item
-    bak->doLock();
+    bak->lock();
     EXPECT_EQ(0, ship->properties().hyper);
 
     // event: unlock item
-    bak->doUnlock();
+    bak->unlock();
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
@@ -150,11 +150,11 @@ TEST(vehicle, item_bak_and_drive)
 
     /// drive
     // event: lock item
-    drive->doLock();
+    drive->lock();
     EXPECT_EQ(0, ship->properties().hyper);
 
     // event: unlock item
-    drive->doUnlock();
+    drive->unlock();
     EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
@@ -183,11 +183,11 @@ TEST(vehicle, item_droid)
     EXPECT_EQ(droid, ship->droidSlots().front()->item());
 
     // event: lock item
-    droid->doLock();
+    droid->lock();
     EXPECT_EQ(0, ship->properties().repair);
 
     // event: unlock item
-    droid->doUnlock();
+    droid->unlock();
     EXPECT_EQ(droid->model()->repair(), ship->properties().repair);
 
     // event: damage item
@@ -218,12 +218,12 @@ TEST(vehicle, item_grapple)
     EXPECT_EQ(grapple->model()->radius(), ship->properties().grab_radius);
 
     // event: lock item
-    grapple->doLock();
+    grapple->lock();
     EXPECT_EQ(0, ship->properties().grab_strength);
     EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: unlock item
-    grapple->doUnlock();
+    grapple->unlock();
     EXPECT_EQ(grapple->model()->strength(), ship->properties().grab_strength);
     EXPECT_EQ(grapple->model()->radius(), ship->properties().grab_radius);
 
@@ -255,11 +255,11 @@ TEST(vehicle, item_scaner)
     EXPECT_EQ(scaner->model()->scan(), ship->properties().scan);
 
     // event: lock item
-    scaner->doLock();
+    scaner->lock();
     EXPECT_EQ(0, ship->properties().scan);
 
     // event: unlock item
-    scaner->doUnlock();
+    scaner->unlock();
     EXPECT_EQ(scaner->model()->scan(), ship->properties().scan);
 
     // event: damage item
@@ -288,11 +288,11 @@ TEST(vehicle, item_radar)
     EXPECT_EQ(radar->model()->radius(), ship->properties().radar);
 
     // event: lock item
-    radar->doLock();
+    radar->lock();
     EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: unlock item
-    radar->doUnlock();
+    radar->unlock();
     EXPECT_EQ(radar->model()->radius(), ship->properties().radar);
 
     // event: damage item
@@ -322,11 +322,11 @@ TEST(vehicle, item_protector)
     EXPECT_EQ(protection, ship->properties().protection);
 
     // event: lock item
-    protector->doLock();
+    protector->lock();
     EXPECT_EQ(ship->descriptor()->protection(), ship->properties().protection);
 
     // event: unlock item
-    protector->doUnlock();
+    protector->unlock();
     EXPECT_EQ(protection, ship->properties().protection);
 
     // event: damage item

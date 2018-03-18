@@ -29,8 +29,9 @@
 
 TEST(star, create)
 {
-    descriptor::Star* descr = descriptor::Manager::get().randStar();
-    control::Star* star = builder::Star::gen(descr);
+    assert(false);
+//    descriptor::Star* descr = descriptor::Manager::get().randStar();
+//    control::Star* star = builder::Star::gen(descr);
 
-    EXPECT_EQ(descr->armor(), star->model()->armor());
+//    EXPECT_EQ(descr->armor(), star->model()->armor());
 }

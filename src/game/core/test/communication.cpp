@@ -42,11 +42,11 @@
 #include <core/descriptor/spaceobject/ALL>
 #include <core/descriptor/item/equipment/ALL>
 
-#include <core/descriptor/comm/Creation.hpp>
+#include <core/communication/descriptor/Create.hpp>
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-#include <core/communication/TelegrammHub.hpp>
+#include <core/communication/TelegramHub.hpp>
 #include <core/manager/EntityManager.hpp>
 
 #include <ceti/IdGenerator.hpp>
@@ -54,41 +54,44 @@
 
 TEST(communication, create_starsystem)
 {
-    int_t ob_id = core::manager::Entity::get().genId();
+    assert(false);
+//    int_t ob_id = core::manager::Entity::get().genId();
 
-    descriptor::StarSystem* descriptor = descriptor::genStarSystem();
-    descriptor::comm::Creation creation(ob_id, descriptor->id());
+//    descriptor::StarSystem* descriptor = descriptor::genStarSystem();
+//    descriptor::comm::Create create(ob_id, descriptor->id());
 
-    core::global::get().telegrammHub().add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_STARSYSTEM, creation.data()));
+//    core::global::get().TelegramHub().add(core::comm::Telegram(telegram::Type::CREATE_STARSYSTEM, creation.data()));
 
-    control::StarSystem* starsystem = core::manager::Entity::get().starsystem(ob_id);
-    EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
+//    control::StarSystem* starsystem = core::manager::Entity::get().starsystem(ob_id);
+//    EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
 }
 
 TEST(communication, create_ship)
 {
-    int_t ob_id = core::manager::Entity::get().genId();
+    assert(false);
+//    int_t ob_id = core::manager::Entity::get().genId();
 
-    descriptor::Ship* descriptor = descriptor::genShip();
-    descriptor::comm::Creation creation(ob_id, descriptor->id());
+//    descriptor::Ship* descriptor = descriptor::genShip();
+//    descriptor::comm::Create create(ob_id, descriptor->id());
 
-    core::global::get().telegrammHub().add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_SHIP, creation.data()));
+//    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_SHIP, creation.data()));
 
-    control::Ship* ship = core::manager::Entity::get().ship(ob_id);
-    EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
+//    control::Ship* ship = core::manager::Entity::get().ship(ob_id);
+//    EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
 }
 
 TEST(communication, create_bak)
 {
-    int_t ob_id = core::manager::Entity::get().genId();
+    assert(false);
+//    int_t ob_id = core::manager::Entity::get().genId();
 
-    descriptor::item::Bak* descriptor = descriptor::item::genBak();
-    descriptor::comm::Creation creation(ob_id, descriptor->id());
+//    descriptor::item::Bak* descriptor = descriptor::item::genBak();
+//    descriptor::comm::Create create(ob_id, descriptor->id());
 
-    core::global::get().telegrammHub().add(core::comm::Telegramm(core::comm::Telegramm::Type::CREATE_BAK, creation.data()));
+//    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_BAK, creation.data()));
 
-    control::item::Bak* bak = core::manager::Entity::get().bak(ob_id);
-    EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
+//    control::item::Bak* bak = core::manager::Entity::get().bak(ob_id);
+//    EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
 }
 
 TEST(communication, inject_ship)

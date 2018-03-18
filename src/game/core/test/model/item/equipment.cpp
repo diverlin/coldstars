@@ -30,7 +30,8 @@ namespace {
 
 void init()
 {
-    descriptor::Manager::get().generate();
+    assert(false);
+//    descriptor::Manager::generate();
 }
 
 void compareEquipment(model::Equipment* model, model::Equipment* copy)
