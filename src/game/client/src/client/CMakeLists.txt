@@ -48,6 +48,5 @@ add_custom_target(data_symlinks ALL
 
 # deploy
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_CLIENT} DESTINATION ${DEPLOY_DIR})
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/jeti/shaders DESTINATION ${DEPLOY_DIR}) # inject to jeti
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/data DESTINATION ${DEPLOY_DIR})
 install(FILES ${CMAKE_SOURCE_DIR}/config/config.info DESTINATION ${DEPLOY_DIR}) # inject to data
