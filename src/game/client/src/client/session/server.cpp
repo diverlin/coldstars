@@ -80,11 +80,12 @@ Server::Server(int id)
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*server*/true); // why we need it on server?
-    m_world = new control::World;
+    m_world = std::shared_ptr<control::World>(new control::World);
 }
 
 Server::~Server()
 {
+    core::global::get().telegramHub().unsubscribe(m_telegramHandler);
 }
 
 void Server::__activate() const {

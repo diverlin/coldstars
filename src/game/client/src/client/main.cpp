@@ -84,8 +84,8 @@
 
 #include <memory>
 
-#include "client.hpp"
-#include "server.hpp"
+#include <client/session/client.hpp>
+#include <client/session/server.hpp>
 
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 

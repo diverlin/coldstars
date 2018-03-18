@@ -40,7 +40,7 @@ public:
 
 private:
     int m_id = -1;
-    control::World* m_world = nullptr;
+    std::shared_ptr<control::World> m_world;
     std::vector<core::Player*> m_players;
 
     std::shared_ptr<core::comm::TelegramHandler> m_telegramHandler;

@@ -12,6 +12,11 @@ void TelegramHub::subscribe(const std::shared_ptr<BTelegramHandler>& listener)
     m_listeners.push_back(listener);
 }
 
+void TelegramHub::unsubscribe(const std::shared_ptr<BTelegramHandler>& listener)
+{
+    m_listeners.remove(listener);
+}
+
 void TelegramHub::add(const Telegram& telegram)
 {
     //LOG_COMM("--server: TelegramHub got telegram "+telegram::to_string(telegram.type()));
