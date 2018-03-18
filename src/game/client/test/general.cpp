@@ -18,12 +18,31 @@
 
 #include <gtest/gtest.h>
 
+#include <client/session/server.hpp>
+#include <client/session/client.hpp>
+
 TEST(world, dummy)
 {
-    // create server;
-    // create client;
+    Server server(0);
+    //Client client(1);
 
     // create dummy world;
     // bind world to server;
+//    descr =
+//    {
+//    "galaxy"
+//        {
+//        "sector"
+//            {
+//            "starsystem"
+//                {
+//                "star"
+//              , "planet"
+//                }
+//            }
+//        }
+//    ""
+//    ""
+//    }
 }
 

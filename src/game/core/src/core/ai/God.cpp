@@ -72,7 +72,7 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld(  )
+void God::createWorld()
 {
     descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
     core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
