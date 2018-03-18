@@ -84,6 +84,9 @@
 
 #include <memory>
 
+#include "client.hpp"
+#include "server.hpp"
+
 //enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
 //void render(Starsystem* starsystem, glm::vec3& center) {
@@ -108,7 +111,6 @@
 //    run_scenario->Init(player);
 //}
 
-namespace {
 //class base {
 //public:
 //    base(int i):
@@ -138,178 +140,13 @@ namespace {
 //    exit(1);
 //}
 
-core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
-
-enum Machine { server, client };
-
-
-class Server {
-private:
-    control::World* m_world = nullptr;
-    std::vector<core::Player*> m_players;
-
-    std::shared_ptr<core::comm::TelegramHandler> m_telegramHandler;
-
-public:
-    Server()
-    {
-        core::Sessions::get().add(Machine::server, new core::Session(core::Session::Type::SERVER));
-        __activate();
-
-        m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
-        core::global::get().telegramHub().subscribe(m_telegramHandler);
-
-        Data data(/*server*/true);
-        m_world = new control::World;
-    }
-
-    ~Server()
-    {
-    }
-
-    void update()
-    {
-        __activate();
-        m_telegramHandler->update();
-
-//        if (!m_players.size()) {
-//            __create_player();
-//        }
-
-        core::global::get().telegramHub().broadcast();
-        m_world->update();
-    }
-
-    void __create_player() {
-//        int_t id = core::shortcuts::entities()->nextId();
-//        core::Player* player = new core::Player(id);
-//        m_players.push_back(player);
-
-//        control::StarSystem* starsystem = m_world->galaxy()->randomSector()->randomStarSystem();
-//        assert(starsystem->ships().size());
-//        control::Npc* npc = starsystem->ships().front()->npc();
-//        assert(npc);
-//        player->setNpc(npc);
-
-//        int_t npc_id = composer().createNpc();
-//        int_t ship_id = composer().createShip();
-//        composer().putNpcToShip(npc_id, ship_id);
-//        int_t player_id = composer().createPlayer(npc_id);
-//        composer().putShipToSpace(ship_id, starsystem_id);
-//        composer().bindPlayerWithNpc(player_id, npc_id);
-    }
-
-private:
-    void __activate() const {
-        core::Sessions::get().activate(Machine::server);
-    }
-};
-
-class Client {
-private:
-    client::Player* m_player = nullptr;
-    jeti::Camera* m_camera = nullptr;
-    jeti::Render* m_render= nullptr;
-    view::StarSystem* m_view = nullptr;
-    gui::UserInputInSpace* m_inputs = nullptr;
-    jeti::Screen* m_screen = nullptr;
-
-    std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;
-
-public:
-
-    bool sessionIsRunning() {
-        return m_screen->window().isOpen();
-    }
-
-    Client()
-    {
-        core::Sessions::get().add(Machine::client, new client::Session(core::Session::Type::CLIENT));
-
-        __activate();
-
-        core::shortcuts::session()->init();
-
-        m_camera = client::shortcuts::camera();
-        m_inputs = client::shortcuts::inputs();
-        m_render = client::shortcuts::render();
-        m_screen = client::shortcuts::screen();
-        m_view = client::shortcuts::view();
-
-        m_telegramHandler = std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler());
-        core::global::get().telegramHub().subscribe(m_telegramHandler);
-    }
-
-    ~Client()
-    {
-    }
-
-    void update() {
-        __activate();
-
-        gui::Manager& gui = gui::Manager::get();
-
-        m_telegramHandler->update();
-
-        if (!m_player) {
-            __create_player();
-            m_view->setPlayer(m_player);
-            return;
-        }
-
-        control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
-        assert(starsystem);
-
-        // simulate model(repeate what server is doing)
-        //std::cout<<core::shortcuts::session()->turnTimer().ticksLeft()<<std::endl;
-        core::shortcuts::session()->turnTimer().update(/*threshold*/-100);
-        starsystem->update_client(core::shortcuts::session()->turnTimer().ticksLeft());
-
-        m_inputs->update(m_player);
-        m_player->cursor().updateMouseInput(*m_render);
-
-        m_view->update(m_inputs->scrollAccel());
-        m_view->render(starsystem);
-
-        gui.update(m_player);
-        gui.render(*m_render, m_player);
-
-        m_screen->draw();
-    }
-
-    bool is_running() { return m_inputs->runSession() && m_screen->window().isOpen(); }
-
-private:
-    void __activate() const {
-        core::Sessions::get().activate(Machine::client);
-    }
-
-    void __create_player() {
-        control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
-        if (!galaxy) {
-//            if (meti::rand::gen_int(1000) == 1000)
-//                std::cout<<"galaxy is null"<<std::endl;
-            return;
-        }
-
-        int_t id = core::shortcuts::entities()->nextId();
-        m_player = new client::Player(id);
-
-        control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
-        assert(starsystem->ships().size());
-        control::Npc* npc = starsystem->ships().front()->npc();
-        assert(npc);
-        m_player->setNpc(npc);
-    }
-};
-
-
-} // namespace
 
 int main()
 {
-    Server server;
-    Client client;
+    int server_id = 0;
+    int client_id = 1;
+    Server server(server_id);
+    Client client(client_id);
 
     //client::shortcuts::screen()->window().close()
 
