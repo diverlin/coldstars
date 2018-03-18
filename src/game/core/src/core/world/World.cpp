@@ -16,11 +16,46 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <core/world/World.hpp>
+#include "World.hpp"
 
-int main()
+#include <common/Global.hpp>
+
+#include <ai/God.hpp>
+
+#include <world/galaxy.hpp>
+
+#include <core/descriptor/world/GalaxyDescriptor.hpp>
+
+#include <core/session/Session.hpp>
+#include <core/manager/DescriptorManager.hpp>
+
+namespace control {
+
+World::World()
 {
-    control::World game;
-    return game.run();
+    core::global::get().god().createWorld();
 }
 
+World::~World()
+{
+}
+
+Galaxy*
+World::galaxy() const {
+    return core::global::get().god().galaxy();
+}
+
+bool World::run() const
+{
+    while (m_isRunning) {
+       core::global::get().god().update();
+    }
+    return EXIT_SUCCESS;
+}
+
+void World::update()
+{
+   core::global::get().god().update();
+}
+
+} // namespace control
