@@ -18,68 +18,33 @@
 
 #include "client.hpp"
 
-#include <iostream>
-
-#include "builder/world/GalaxyBuilder.hpp"
-#include <common/Config.hpp>
-
-#include <core/communication/TelegramCreator.hpp>
 #include <core/communication/TelegramHandler.hpp>
 #include <core/session/Session.hpp>
 #include <core/session/Sessions.hpp>
 #include <core/session/Shortcuts.hpp>
-
-#include <jeti/Mesh.hpp>
-#include <jeti/Screen.hpp>
-#include <jeti/Camera.hpp>
-#include <jeti/GlErrorHelper.hpp>
-
-#include <meti/RandUtils.hpp>
-
-#include <client/session/Session.hpp>
-#include <client/session/Shortcuts.hpp>
-#include <client/resources/Data.hpp>
-#include <client/gui/UserInputManagerInSpace.hpp>
-#include <client/gui/UserInput.hpp>
-
-#include <client/gui/ButtonTrigger.hpp>
-#include <client/gui/GuiActions.hpp>
-
-#include "common/TurnTimer.hpp"
-
 #include <core/pilot/Npc.hpp>
-#include <client/pilot/Player.hpp>
-
 #include <core/spaceobject/Planet.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/Ship.hpp>
-
-#include <common/Global.hpp>
+#include <core/common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
-
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
-#include <world/starsystem.hpp>
-#include <Game.hpp>
-#include <ai/God.hpp>
-
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <core/manager/DescriptorManager.hpp>
-#include "dock/Land.hpp"
-
-#include "run_scenario/NormalRunScenario.hpp"
-#include "run_scenario/TestParticlesRunScenario.hpp"
-#include "run_scenario/TestTextRunScenario.hpp"
-#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
-
-#include <client/view/StarSystem.hpp>
-
+#include <core/world/galaxy.hpp>
+#include <core/world/Sector.hpp>
+#include <core/world/starsystem.hpp>
 #include <core/communication/TelegramHub.hpp>
+
+#include <client/session/Session.hpp>
+#include <client/session/Shortcuts.hpp>
+#include <client/gui/UserInputManagerInSpace.hpp>
+#include <client/gui/UserInput.hpp>
+#include <client/pilot/Player.hpp>
+#include <client/view/StarSystem.hpp>
+#include <client/gui/GuiManager.hpp>
 #include <client/communication/TelegramHandler.hpp>
 
-#include <client/gui/GuiManager.hpp>
-
-#include <memory>
+#include <jeti/Screen.hpp>
+#include <jeti/Camera.hpp>
+#include <jeti/Render.hpp>
 
 Client::Client(int id):
     m_id(id)

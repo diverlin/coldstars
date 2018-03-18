@@ -57,30 +57,17 @@
 #include <common/Global.hpp>
 #include <core/manager/EntityManager.hpp>
 
-#include <world/galaxy.hpp>
-#include <world/Sector.hpp>
-#include <world/starsystem.hpp>
-#include <Game.hpp>
-#include <ai/God.hpp>
-
+//#include <world/galaxy.hpp>
+//#include <world/Sector.hpp>
+//#include <world/starsystem.hpp>
+//#include <Game.hpp>
+//#include <ai/God.hpp>
+#include <core/world/World.hpp>
 #include <core/descriptor/world/GalaxyDescriptor.hpp>
 #include <core/manager/DescriptorManager.hpp>
-#include "dock/Land.hpp"
-
-#include "run_scenario/NormalRunScenario.hpp"
-#include "run_scenario/TestParticlesRunScenario.hpp"
-#include "run_scenario/TestTextRunScenario.hpp"
-#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
-
-#include <client/view/StarSystem.hpp>
 
 #include <core/communication/TelegramHub.hpp>
 #include <client/communication/TelegramHandler.hpp>
-
-#include <client/gui/GuiManager.hpp>
-
-#include <memory>
-
 
 Server::Server(int id)
     :
