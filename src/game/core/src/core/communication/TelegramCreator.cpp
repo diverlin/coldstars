@@ -57,157 +57,97 @@ TelegramCreator::TelegramCreator()
 
 }
 
-void TelegramCreator::__createSectors(descriptor::Galaxy* galaxy_descriptor, int_t galaxy_id) const
+int_t TelegramCreator::__createSector(int_t sector_descriptor_id) const
 {
-    for(int_t sector_descriptor_id: galaxy_descriptor->sectors) {
-        int_t sector_id = shortcuts::entities()->nextId();
+    int_t sector_id = shortcuts::entities()->nextId();
 
-        {
-        descriptor::comm::Create telegram_descriptor(sector_descriptor_id, sector_id);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_SECTOR, telegram_descriptor.data()));
-        }
+    descriptor::comm::Create telegram_descriptor(sector_descriptor_id, sector_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_SECTOR, telegram_descriptor.data()));
 
-        {
-        glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
-        descriptor::comm::AddPositional telegram_descriptor(sector_id, galaxy_id, position);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_SECTOR_TO_GALAXY, telegram_descriptor.data()));
-        }
-
-        __createStarsystems(sector_descriptor_id, sector_id);
-    }
+    return sector_id;
 }
 
-void TelegramCreator::__createStarsystems(int_t sector_descriptor_id, int_t sector_id) const
+int_t TelegramCreator::__createStarsystem(int_t starsystem_descriptor_id) const
 {
-    descriptor::Sector* sector_descriptor = core::shortcuts::descriptors()->sector(sector_descriptor_id);
-    for(const auto& starsystem_descriptor_id: sector_descriptor->starsystems) {
-        int_t starsystem_id = shortcuts::entities()->nextId();
+    int_t starsystem_id = shortcuts::entities()->nextId();
 
-        {
-        descriptor::comm::Create telegram_descriptor(starsystem_descriptor_id, starsystem_id);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_STARSYSTEM, telegram_descriptor.data()));
-        }
+    descriptor::comm::Create telegram_descriptor(starsystem_descriptor_id, starsystem_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_STARSYSTEM, telegram_descriptor.data()));
 
-        {
-        glm::vec3 position = meti::rand::gen_vec3xy(3, 8);
-        descriptor::comm::AddPositional telegram_descriptor(starsystem_id, sector_id, position);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_STARSYSTEM_TO_SECTOR, telegram_descriptor.data()));
-        }
-
-        __createStarsystemInternalls(starsystem_descriptor_id, starsystem_id);
-    }
+    return starsystem_id;
 }
 
-void TelegramCreator::__createStarsystemInternalls(int_t descriptor_starsystem_id, int_t starsystem_id) const
-{
-    __createStar(starsystem_id);
-    __createPlanets(starsystem_id, meti::rand::gen_int(2,5));
-    __createShips(starsystem_id, 10);
-}
-
-
-void TelegramCreator::__createStar(int_t starsystem_id) const
+int_t TelegramCreator::__createStar(int_t star_descriptor_id) const
 {
     int_t star_id = shortcuts::entities()->nextId();
-    int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
-
-    {
     descriptor::comm::Create telegram_descriptor(star_descriptor_id, star_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_STAR, telegram_descriptor.data()));
-    }
+    return star_id;
+}
 
-    {
+int_t TelegramCreator::__createPlanet(int_t planet_descriptor_id) const
+{
+    int_t planet_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(planet_descriptor_id, planet_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_PLANET, telegram_descriptor.data()));
+    return planet_id;
+}
+
+int_t TelegramCreator::__createShip(int_t descriptor_id) const
+{
+    int_t ship_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, ship_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_SHIP, telegram_descriptor.data()));
+    return ship_id;
+}
+
+int_t TelegramCreator::__createNpc(int_t descriptor_id) const
+{
+    int_t npc_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, npc_id);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_NPC, telegram_descriptor.data()));
+    return npc_id;
+}
+
+void TelegramCreator::__addSectorToGalaxy(int_t sector_id, int_t galaxy_id) const
+{
+    glm::vec3 position = meti::rand::gen_vec3xy(0, ENTITY::GALAXY::PARSEC/2);
+    descriptor::comm::AddPositional telegram_descriptor(sector_id, galaxy_id, position);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_SECTOR_TO_GALAXY, telegram_descriptor.data()));
+}
+
+void TelegramCreator::__addStarsystemToSector(int_t starsystem_id, int_t sector_id) const
+{
+    glm::vec3 position = meti::rand::gen_vec3xy(3, 8);
+    descriptor::comm::AddPositional telegram_descriptor(starsystem_id, sector_id, position);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_STARSYSTEM_TO_SECTOR, telegram_descriptor.data()));
+}
+
+void TelegramCreator::__addStarToStarsystem(int_t star_id, int_t starsystem_id) const
+{
     meti::vec3 position;
     descriptor::comm::AddPositional telegram_descriptor(star_id, starsystem_id, position);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_STAR_TO_STARSYSTEM, telegram_descriptor.data()));
-    }
 }
 
-void TelegramCreator::__createPlanets(int_t starsystem_id, int planet_per_system) const
+void TelegramCreator::__addPlanetToStarsystem(int_t planet_id, int_t starsystem_id) const
 {
-    for(int i=0; i<planet_per_system; ++i) {
-        int_t planet_id = shortcuts::entities()->nextId();
-        int_t planet_descriptor_id = shortcuts::descriptors()->randPlanet()->id();
-
-        {
-        descriptor::comm::Create telegram_descriptor(planet_descriptor_id, planet_id);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_PLANET, telegram_descriptor.data()));
-        }
-
-        {
-        meti::vec3 position;
-        descriptor::comm::AddPositional telegram_descriptor(planet_id, starsystem_id, position);
-        m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_PLANET_TO_STARSYSTEM, telegram_descriptor.data()));
-        }
-    }
+    meti::vec3 position;
+    descriptor::comm::AddPositional telegram_descriptor(planet_id, starsystem_id, position);
+    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_PLANET_TO_STARSYSTEM, telegram_descriptor.data()));
 }
 
-void TelegramCreator::__createShips(int_t starsystem_id, int ship_num) const
-{
-    entity::Type group = entity::Type::NONE;
-    entity::Type subgroup = entity::Type::NONE;
-
-    entity::Type npc_group = entity::Type::NONE;
-    entity::Type npc_subgroup = entity::Type::NONE;
-
-    race::Type npc_race_id = race::Type::R0;
-
-    for(int i=0; i<ship_num; ++i) {
-        // VERY UGLY LOGIC START (TODO)
-        if (group == entity::Type::NONE) {
-            npc_group = getRandNpcSubTypeId(npc_race_id);
-        } else {
-            npc_group = group;
-        }
-
-        if (subgroup == entity::Type::NONE) {
-            npc_subgroup = getRandNpcClass(npc_group);
-        } else {
-            npc_subgroup = subgroup;
-        }
-        // VERY UGLY LOGIC END
-
-        int_t ship_descriptor_id = shortcuts::descriptors()->randShip()->id();
-        int_t ship_id = shortcuts::entities()->nextId();
-        __createShip(ship_descriptor_id, ship_id);
-
-        __equipShip(ship_id);
-
-        int_t npc_descriptor_id = shortcuts::descriptors()->randNpc()->id();
-        int_t npc_id = shortcuts::entities()->nextId();
-        __createNpc(npc_descriptor_id, npc_id);
-
-        __addNpcToShip(ship_id, npc_id);
-
-        glm::vec3 center = meti::rand::gen_vec3xy(300, 1200);
-        __addShipToStarSystem(starsystem_id, ship_id, center);
-    }
-}
-
-void TelegramCreator::__createShip(int_t descriptor_id, int_t id) const
-{
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
-    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_SHIP, telegram_descriptor.data()));
-}
-
-void TelegramCreator::__createNpc(int_t descriptor_id, int_t id) const
-{
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
-    m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_NPC, telegram_descriptor.data()));
-}
-
-void TelegramCreator::__addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center) const
+void TelegramCreator::__addShipToStarSystem(int_t ship_id, int_t starsystem_id, const glm::vec3& center) const
 {
     descriptor::comm::AddToStarsystem telegram_descriptor(ship_id, starsystem_id, center);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_SHIP_TO_STARSYSTEM, telegram_descriptor.data()));
 }
 
-void TelegramCreator::__addNpcToShip(int_t ship_id, int_t npc_id) const
+void TelegramCreator::__addNpcToShip(int_t npc_id, int_t ship_id) const
 {
     descriptor::comm::ObjectSubject telegram_descriptor(npc_id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_NPC_TO_SHIP, telegram_descriptor.data()));
 }
-
 
 void TelegramCreator::__createBak(int_t descriptor_id, int_t id) const
 {
@@ -359,7 +299,49 @@ void TelegramCreator::createGalaxy(descriptor::Galaxy* galaxy_descriptor)
     descriptor::comm::Create telegram_descriptor(galaxy_descriptor->id(), galaxy_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_GALAXY, telegram_descriptor.data()));
 
-    __createSectors(galaxy_descriptor, galaxy_id);
+    // create sectors
+    for(int_t sector_descriptor_id: galaxy_descriptor->sectors) {
+        int_t sector_id = __createSector(sector_descriptor_id);
+        __addSectorToGalaxy(sector_id, galaxy_id);
+
+        // create starsystems
+        descriptor::Sector* sector_descriptor = core::shortcuts::descriptors()->sector(sector_descriptor_id);
+        for(const auto& starsystem_descriptor_id: sector_descriptor->starsystems) {
+            int_t starsystem_id = __createStarsystem(starsystem_descriptor_id);
+            __addStarsystemToSector(starsystem_id, sector_id);
+
+            // create star
+            int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
+            int star_id = __createStar(star_descriptor_id);
+            __addStarToStarsystem(star_id, starsystem_id);
+
+            // create planets
+            int planets_num = meti::rand::gen_int(2,5);
+            for(int i=0; i<planets_num; ++i) {
+                int_t planet_descriptor_id = shortcuts::descriptors()->randPlanet()->id();
+                int_t planet_id = __createPlanet(planet_descriptor_id);
+                __addPlanetToStarsystem(planet_id, starsystem_id);
+            }
+
+            // create ships
+            int ships_num = 10;
+            for(int i=0; i<ships_num; ++i) {
+                int_t ship_descriptor_id = shortcuts::descriptors()->randShip()->id();
+                int_t ship_id = __createShip(ship_descriptor_id);
+
+                int_t npc_descriptor_id = shortcuts::descriptors()->randNpc()->id();
+                int_t npc_id = __createNpc(npc_descriptor_id);
+                __addNpcToShip(npc_id, ship_id);
+
+                __equipShip(ship_id);
+
+                glm::vec3 ship_pos = meti::rand::gen_vec3xy(300, 1200);
+                __addShipToStarSystem(ship_id, starsystem_id, ship_pos);
+            }
+            //__createShips(starsystem_id, 10);
+        }
+    }
+    //__createSectors(galaxy_descriptor, galaxy_id);
 }
 
 std::vector<glm::vec3>
