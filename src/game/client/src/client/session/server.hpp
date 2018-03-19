@@ -33,7 +33,7 @@ class World;
 class Server {
 
 public:
-    Server(int id);
+    Server(int id, bool dummy=false);
     ~Server();
 
     void update();

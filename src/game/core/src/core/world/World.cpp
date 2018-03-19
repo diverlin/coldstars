@@ -31,9 +31,9 @@
 
 namespace control {
 
-World::World()
+World::World(bool dummy)
 {
-    core::global::get().god().createWorld();
+    core::global::get().god().createWorld(dummy);
 }
 
 World::~World()
