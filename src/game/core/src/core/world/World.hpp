@@ -24,7 +24,7 @@ class Galaxy;
 
 class World {
 public:
-    World();
+    World(bool dummy=false);
     ~World();
 
     Galaxy* galaxy() const;

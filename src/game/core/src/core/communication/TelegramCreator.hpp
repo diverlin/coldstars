@@ -69,7 +69,8 @@ public:
 
     void createPlayer(int_t, int_t);
 //    void bindPlayerWithNpc(int_t, int_t);
-    void createGalaxy(descriptor::Galaxy*);
+    void createDummyGalaxy(int ships_num=2, int planets_num=1) const;
+    void createGalaxy(descriptor::Galaxy*) const;
 
     void moveVehicle(int_t, const glm::vec3&) const;
     void endTurn() const;
@@ -87,30 +88,33 @@ private:
 
     std::vector<glm::vec3> __genImpulses(int num) const;
 
-    int_t __createSector(int_t sector_descriptor_id) const;
-    int_t __createStarsystem(int_t starsystem_descriptor_id) const;
-    int_t __createStar(int_t) const;
-    int_t __createPlanet(int_t planet_descriptor_id) const;
-    int_t __createShip(int_t descriptor_id) const;
-    int_t __createNpc(int_t descriptor_id) const;
+    int_t __createPureGalaxy(int_t galaxy_descriptor_id) const;
+    int_t __createPureSector(int_t sector_descriptor_id) const;
+    int_t __createPureStarsystem(int_t starsystem_descriptor_id) const;
+    int_t __createPureStar(int_t) const;
+    int_t __createPurePlanet(int_t planet_descriptor_id) const;
+    int_t __createPureShip(int_t descriptor_id) const;
+    int_t __createPureNpc(int_t descriptor_id) const;
 
     void __addSectorToGalaxy(int_t sector_id, int_t galaxy_id) const;
     void __addStarsystemToSector(int_t starsystem_id, int_t sector_id) const;
     void __addStarToStarsystem(int_t star_id, int_t starsystem_id) const;
     void __addPlanetToStarsystem(int_t planet_id, int_t starsystem_id) const;
     void __addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;
-
     void __addNpcToShip(int_t npc_id, int_t ship_id) const;
     void __equipShip(int_t ship_id) const;
 
-    int_t __createBak(int_t descriptor_id) const;
-    int_t __createDrive(int_t descriptor_id) const;
-    int_t __createProtector(int_t descriptor_id) const;
-    int_t __createScaner(int_t descriptor_id) const;
-    int_t __createRadar(int_t descriptor_id) const;
-    int_t __createGrapple(int_t descriptor_id) const;
-    int_t __createLazer(int_t descriptor_id) const;
-    int_t __createRocket(int_t descriptor_id) const;
+    void __createPlanets(int_t starsystem_id, int num) const;
+    void __createShips(int_t starsystem_id, int num) const;
+
+    int_t __createPureBak(int_t descriptor_id) const;
+    int_t __createPureDrive(int_t descriptor_id) const;
+    int_t __createPureProtector(int_t descriptor_id) const;
+    int_t __createPureScaner(int_t descriptor_id) const;
+    int_t __createPureRadar(int_t descriptor_id) const;
+    int_t __createPureGrapple(int_t descriptor_id) const;
+    int_t __createPureLazer(int_t descriptor_id) const;
+    int_t __createPureRocket(int_t descriptor_id) const;
 
     void __mountItem(int_t ship_id, int_t item_id) const;
     void __loadItem(int_t ship_id, int_t item_id) const;

@@ -72,27 +72,14 @@ God::God()
 God::~God()
 {}
 
-void God::createWorld()
+void God::createWorld(bool dummy)
 {
-    descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
-    core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
-
-//    __createLife(m_galaxy, galaxy_descriptor);
-//    //    if (descr->allow_invasion) {
-////        __createInvasion(m_galaxy, descr);
-////    }
-
-//    bool player2space = true;
-//    //control::StarSystem* starsystem = m_galaxy->randomSector()->randomStarSystem();
-//    if (player2space == true) {
-//        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
-//        glm::vec3 angle(0,0,0);
-//        //starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
-//    } else {
-//        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
-//    }
-
-//    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
+    if (!dummy) {
+        descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+        core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
+    } else {
+        core::TelegramCreator::get().createDummyGalaxy();
+    }
 }
 
 void God::update()

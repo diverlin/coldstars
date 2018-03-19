@@ -69,7 +69,7 @@
 #include <core/communication/TelegramHub.hpp>
 #include <client/communication/TelegramHandler.hpp>
 
-Server::Server(int id)
+Server::Server(int id, bool dummy)
     :
       m_id(id)
 {
@@ -80,7 +80,7 @@ Server::Server(int id)
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*server*/true); // why we need it on server?
-    m_world = std::shared_ptr<control::World>(new control::World);
+    m_world = std::shared_ptr<control::World>(new control::World(dummy));
 }
 
 Server::~Server()
