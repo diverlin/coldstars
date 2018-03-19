@@ -87,18 +87,21 @@ private:
 
     std::vector<glm::vec3> __genImpulses(int num) const;
 
-    void __createSectors(descriptor::Galaxy*, int_t) const;
-    void __createStarsystems(int_t, int_t) const;
-    void __createStarsystemInternalls(int_t, int_t) const;
-    void __createStar(int_t) const;
-    void __createPlanets(int_t starsystem_id, int planet_num) const;
-    void __createShips(int_t, int ship_num) const;
-    void __createShip(int_t descriptor_id, int_t id) const;
-    void __createNpc(int_t descriptor_id, int_t id) const;
-    void __addNpcToShip(int_t ship_id, int_t npc_id) const;
-    void __equipShip(int_t ship_id) const;
+    int_t __createSector(int_t sector_descriptor_id) const;
+    int_t __createStarsystem(int_t starsystem_descriptor_id) const;
+    int_t __createStar(int_t) const;
+    int_t __createPlanet(int_t planet_descriptor_id) const;
+    int_t __createShip(int_t descriptor_id) const;
+    int_t __createNpc(int_t descriptor_id) const;
 
+    void __addSectorToGalaxy(int_t sector_id, int_t galaxy_id) const;
+    void __addStarsystemToSector(int_t starsystem_id, int_t sector_id) const;
+    void __addStarToStarsystem(int_t star_id, int_t starsystem_id) const;
+    void __addPlanetToStarsystem(int_t planet_id, int_t starsystem_id) const;
     void __addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;
+
+    void __addNpcToShip(int_t npc_id, int_t ship_id) const;
+    void __equipShip(int_t ship_id) const;
 
     void __createBak(int_t descriptor_id, int_t id) const;
     void __createDrive(int_t descriptor_id, int_t id) const;
