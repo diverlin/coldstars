@@ -322,9 +322,11 @@ void TelegramCreator::createGalaxy(descriptor::Galaxy* galaxy_descriptor)
             // create ships
             int ships_num = 10;
             for(int i=0; i<ships_num; ++i) {
+                // create ship
                 int_t ship_descriptor_id = shortcuts::descriptors()->randShip()->id();
                 int_t ship_id = __createShip(ship_descriptor_id);
 
+                // create npc
                 int_t npc_descriptor_id = shortcuts::descriptors()->randNpc()->id();
                 int_t npc_id = __createNpc(npc_descriptor_id);
                 __addNpcToShip(npc_id, ship_id);
@@ -334,10 +336,8 @@ void TelegramCreator::createGalaxy(descriptor::Galaxy* galaxy_descriptor)
                 glm::vec3 ship_pos = meti::rand::gen_vec3xy(300, 1200);
                 __addShipToStarSystem(ship_id, starsystem_id, ship_pos);
             }
-            //__createShips(starsystem_id, 10);
         }
     }
-    //__createSectors(galaxy_descriptor, galaxy_id);
 }
 
 std::vector<glm::vec3>
