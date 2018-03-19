@@ -149,63 +149,79 @@ void TelegramCreator::__addNpcToShip(int_t npc_id, int_t ship_id) const
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::ADD_NPC_TO_SHIP, telegram_descriptor.data()));
 }
 
-void TelegramCreator::__createBak(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createBak(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_BAK, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createDrive(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createDrive(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_DRIVE, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createProtector(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createProtector(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_PROTECTOR, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createScaner(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createScaner(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_SCANER, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createRadar(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createRadar(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_RADAR, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createGrapple(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createGrapple(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_GRAPPLE, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createLazer(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createLazer(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_LAZER, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__createRocket(int_t descriptor_id, int_t id) const
+int_t TelegramCreator::__createRocket(int_t descriptor_id) const
 {
-    descriptor::comm::Create telegram_descriptor(descriptor_id, id);
+    int_t item_id = shortcuts::entities()->nextId();
+    descriptor::comm::Create telegram_descriptor(descriptor_id, item_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::CREATE_ROCKET, telegram_descriptor.data()));
+    return item_id;
 }
 
-void TelegramCreator::__mountItem(int_t ship_id, int_t id) const
+void TelegramCreator::__mountItem(int_t ship_id, int_t item_id) const
 {
-    descriptor::comm::ObjectSubject telegram_descriptor(id, ship_id);
+    descriptor::comm::ObjectSubject telegram_descriptor(item_id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::MOUNT_ITEM, telegram_descriptor.data()));
 }
 
-void TelegramCreator::__loadItem(int_t ship_id, int_t id) const
+void TelegramCreator::__loadItem(int_t ship_id, int_t item_id) const
 {
-    descriptor::comm::ObjectSubject telegram_descriptor(id, ship_id);
+    descriptor::comm::ObjectSubject telegram_descriptor(item_id, ship_id);
     m_telegramHub.add(core::comm::ServerTelegram(telegram::Type::LOAD_ITEM, telegram_descriptor.data()));
 }
 
@@ -213,82 +229,62 @@ void TelegramCreator::__equipShip(int_t ship_id) const
 {
     {
         int_t descriptor_id = shortcuts::descriptors()->randBak()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createBak(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createBak(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randDrive()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createDrive(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createDrive(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randProtector()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createProtector(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createProtector(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randScaner()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createScaner(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createScaner(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randRadar()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createRadar(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createRadar(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randGrapple()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createGrapple(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createGrapple(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randLazer()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createLazer(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createLazer(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createRocket(descriptor_id, id);
-        __mountItem(ship_id, id);
+        int_t item_id = __createRocket(descriptor_id);
+        __mountItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createRocket(descriptor_id, id);
-        __loadItem(ship_id, id);
+        int_t item_id = __createRocket(descriptor_id);
+        __loadItem(ship_id, item_id);
     }
 
     {
         int_t descriptor_id = shortcuts::descriptors()->randRocket()->id();
-        int_t id = shortcuts::entities()->nextId();
-
-        __createLazer(descriptor_id, id);
-        __loadItem(ship_id, id);
+        int_t item_id = __createLazer(descriptor_id);
+        __loadItem(ship_id, item_id);
     }
 }
 
