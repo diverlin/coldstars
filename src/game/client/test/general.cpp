@@ -23,26 +23,7 @@
 
 TEST(world, dummy)
 {
-    Server server(0);
+    Server server(0, true);
     //Client client(1);
-
-    // create dummy world;
-    // bind world to server;
-//    descr =
-//    {
-//    "galaxy"
-//        {
-//        "sector"
-//            {
-//            "starsystem"
-//                {
-//                "star"
-//              , "planet"
-//                }
-//            }
-//        }
-//    ""
-//    ""
-//    }
 }
 
