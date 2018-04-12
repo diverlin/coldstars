@@ -24,6 +24,6 @@
 TEST(world, dummy)
 {
     Server server(0, true);
-    //Client client(1);
+    Client client(1);
 }
 

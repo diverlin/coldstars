@@ -29,6 +29,12 @@ Sessions::get()
     return instance;
 }
 
+void Sessions::remove(int id) {
+    auto it = m_sessions.find(id);
+    m_sessions.erase(it);
+    delete it->second;
+}
+
 void Sessions::add(int id, Session* session)
 {
     if (m_sessions.find(id) != m_sessions.end()) {
