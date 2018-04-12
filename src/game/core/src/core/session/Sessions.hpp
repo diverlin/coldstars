@@ -37,6 +37,7 @@ public:
     static Sessions& get();
 
     void add(int, Session*);
+    void remove(int);
     void activate(int);
 
     Session* session() const;

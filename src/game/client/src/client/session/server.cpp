@@ -85,6 +85,7 @@ Server::Server(int id, bool dummy)
 
 Server::~Server()
 {
+    core::Sessions::get().remove(m_id);
     core::global::get().telegramHub().unsubscribe(m_telegramHandler);
 }
 
