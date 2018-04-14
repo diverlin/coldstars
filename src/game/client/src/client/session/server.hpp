@@ -20,12 +20,13 @@
 #include <memory>
 
 namespace core {
+
 class Player;
 class Session;
+
 namespace comm {
 class TelegramHandler;
 } // namepsace comm
-} // namespace core
 
 namespace control {
 class World;
@@ -38,19 +39,21 @@ public:
     Server(int id, bool dummy=false);
     ~Server();
 
-    core::Session* session() const { return m_session; }
+    Session* session() const { return m_session; }
     control::World* world() const { return m_world.get(); }
 
     void update();
 
 private:
     int m_id = -1;
-    core::Session* m_session = nullptr;
+    Session* m_session = nullptr;
     control::WorldPtr m_world;
-    std::vector<core::Player*> m_players;
+    std::vector<Player*> m_players;
 
-    std::shared_ptr<core::comm::TelegramHandler> m_telegramHandler;
+    std::shared_ptr<comm::TelegramHandler> m_telegramHandler;
 
     void __activate() const;
     void __create_player();
 };
+
+} // namespace core

@@ -24,19 +24,20 @@
 
 #include <vector>
 
-namespace control {
+namespace core {
 
-class Vehicle;
-} // namespace control
+
 
 namespace control {
 class SpaceObject;
+class Vehicle;
 
 } // namespace control
 
 namespace slot {
 class Item;
 } // namespace slot
+
 
 
 namespace complex {
@@ -61,8 +62,8 @@ public:
 
     Action action() const { return m_action; }
 
-    std::vector<slot::Item*> driveSlots() const { return m_driveSlots; }
-    std::vector<slot::Item*> bakSlots() const { return m_bakSlots; }
+    std::vector<core::slot::Item*> driveSlots() const { return m_driveSlots; }
+    std::vector<core::slot::Item*> bakSlots() const { return m_bakSlots; }
 
     control::SpaceObject* target() const { return m_target; }
 
@@ -77,8 +78,8 @@ public:
     void update();
 
 private:
-    std::vector<slot::Item*> m_driveSlots;
-    std::vector<slot::Item*> m_bakSlots;
+    std::vector<core::slot::Item*> m_driveSlots;
+    std::vector<core::slot::Item*> m_bakSlots;
 
     control::Vehicle* m_ownerVehicle = nullptr;
     control::SpaceObject* m_target = nullptr;
@@ -103,3 +104,4 @@ private:
 };
 
 } // namespace complex
+} // namespace core

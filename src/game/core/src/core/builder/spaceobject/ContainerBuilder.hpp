@@ -27,9 +27,11 @@ namespace descriptor {
 class Container;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Container;
 } // namespace control
+} // namespace core
 
 namespace item {
 class Base;
@@ -40,11 +42,11 @@ namespace builder {
 class Container
 {
 public:
-    static control::Container* gen();
+    static core::control::Container* gen();
 //    static model::Container* gen(const std::string& data);
-    static control::Container* gen(descriptor::Container*);
-    static control::Container* gen(int_t, int_t);
-    static control::Container* gen(int_t, int_t, int_t);
+    static core::control::Container* gen(descriptor::Container*);
+    static core::control::Container* gen(int_t, int_t);
+    static core::control::Container* gen(int_t, int_t, int_t);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
     //        Container* create(item::Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
@@ -53,8 +55,8 @@ private:
     Container() = default;
     ~Container() = default;
 
-    static control::Container* __genTemplate(descriptor::Container*, int_t obId = NONE);
-    static void __createInternals(control::Container*, descriptor::Container*);
+    static core::control::Container* __genTemplate(descriptor::Container*, int_t obId = NONE);
+    static void __createInternals(core::control::Container*, descriptor::Container*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

@@ -24,21 +24,23 @@ namespace descriptor {
 class Asteroid;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Asteroid;
 } // namespace control
+}
 
 namespace builder {
 
 class Asteroid
 {
 public:
-    static control::Asteroid* gen();
-    static control::Asteroid* gen(int_t, int_t id);
-    static control::Asteroid* gen(descriptor::Asteroid*, int_t id = NONE);
+    static core::control::Asteroid* gen();
+    static core::control::Asteroid* gen(int_t, int_t id);
+    static core::control::Asteroid* gen(descriptor::Asteroid*, int_t id = NONE);
 
 private:
-    static control::Asteroid* __genTemplate(descriptor::Asteroid*, int_t id);
+    static core::control::Asteroid* __genTemplate(descriptor::Asteroid*, int_t id);
 }; 
 
 } // namespace builder

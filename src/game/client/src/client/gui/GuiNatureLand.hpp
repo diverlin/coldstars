@@ -23,6 +23,8 @@
 #include <ceti/rect.hpp>
 #include "MouseData.hpp"
 
+namespace core {
+
 namespace control {
 class NatureLand;
 } // namespace control
@@ -30,6 +32,8 @@ class NatureLand;
 namespace slot {
 class Item;
 } // namespace slot
+
+} // namespace core
 
 namespace gui {
 
@@ -39,7 +43,7 @@ public:
     GuiNatureLand();
     ~GuiNatureLand();
 
-    void BindNatureLand(control::NatureLand*);
+    void BindNatureLand(core::control::NatureLand*);
 
     bool UpdateMouseInteractionWithEquipedItemSlots(const MouseData&);
 
@@ -49,9 +53,9 @@ public:
     void RenderEquipedItemSlots() const;
 
 private:
-    control::NatureLand* m_natureland = nullptr;
+    core::control::NatureLand* m_natureland = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, slot::Item*>> m_rects_itemslots;
+    std::vector<GuiPair<ceti::Rect, core::slot::Item*>> m_rects_itemslots;
 };
 
 } // namespace gui

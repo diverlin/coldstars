@@ -45,7 +45,7 @@ Protector::Protector()
     setType(descriptor::Type::PROTECTOR_EQUIPMENT);
     setObType(entity::Type::PROTECTOR_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(slot::Type::PROTECTOR);
+    setSlotType(core::slot::Type::PROTECTOR);
 }
 
 Protector::Protector(const std::string& data)

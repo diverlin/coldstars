@@ -58,6 +58,7 @@ class Material;
 
 } // namespace jeti
 
+namespace core {
 namespace control {
 class Base;
 class StarSystem;
@@ -71,6 +72,7 @@ class Ship;
 class Satellite;
 class Bullet;
 } // namespace control
+} // namespace core
 
 namespace effect {
 class DistantStars;
@@ -108,7 +110,7 @@ public:
     Base* mouseInterraction(const glm::vec3&) const;
 
     void update(const glm::vec3&);
-    void render(control::StarSystem*);
+    void render(core::control::StarSystem*);
 
     void add(std::shared_ptr<jeti::particlesystem::Base>, const glm::vec3&);
 
@@ -165,22 +167,22 @@ private:
 
     void __applyConstantRotationAnimation(const glm::vec3&, Base*);
 
-    void __updateVisible(control::StarSystem* starsystem);
+    void __updateVisible(core::control::StarSystem* starsystem);
 
     void __render(jeti::Render&);
     void __drawCollisionRadius(const jeti::Render&) const;
     void __drawAxis(const jeti::Render&) const;
 
     /// visible entities
-    bool __addIfVisible(control::Star*);
-    bool __addIfVisible(control::Planet*);
-    bool __addIfVisible(control::Asteroid* data);
-    bool __addIfVisible(control::Container* data);
-    bool __addIfVisible(control::Bullet* data);
-    bool __addIfVisible(control::WormHole* data);
-    bool __addIfVisible(control::Ship*);
-    bool __addIfVisible(control::SpaceStation*);
-    bool __addIfVisible(control::Satellite*);
+    bool __addIfVisible(core::control::Star*);
+    bool __addIfVisible(core::control::Planet*);
+    bool __addIfVisible(core::control::Asteroid* data);
+    bool __addIfVisible(core::control::Container* data);
+    bool __addIfVisible(core::control::Bullet* data);
+    bool __addIfVisible(core::control::WormHole* data);
+    bool __addIfVisible(core::control::Ship*);
+    bool __addIfVisible(core::control::SpaceStation*);
+    bool __addIfVisible(core::control::Satellite*);
 
     /// visible effects
 //    void addIfVisible(ShockWaveEffect*, const VisibilityData&);

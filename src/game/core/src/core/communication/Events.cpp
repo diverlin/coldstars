@@ -85,38 +85,38 @@ void loadItem(int_t object, int_t parent) {
 
 /** CREATE */
 void createGalaxy(int_t descriptor, int_t object) {
-    control::Galaxy* galaxy = builder::Galaxy::gen(descriptor, object);
+    core::control::Galaxy* galaxy = builder::Galaxy::gen(descriptor, object);
     core::shortcuts::entities()->add(galaxy);
     core::shortcuts::entities()->setGalaxy(galaxy);
 }
 void createSector(int_t descriptor, int_t object) {
-    control::Sector* sector = builder::Sector::gen(descriptor, object);
+    core::control::Sector* sector = builder::Sector::gen(descriptor, object);
     core::shortcuts::entities()->add(sector);
 }
 void createStarSystem(int_t descriptor, int_t object) {
-    control::StarSystem* starsystem = builder::StarSystem::gen(descriptor, object);
+    core::control::StarSystem* starsystem = builder::StarSystem::gen(descriptor, object);
     core::shortcuts::entities()->add(starsystem);
 }
 void createNpc(int_t descriptor, int_t object) {
-    control::Npc* npc = builder::Npc::gen(descriptor, object);
+    core::control::Npc* npc = builder::Npc::gen(descriptor, object);
     core::shortcuts::entities()->add(npc);
 }
 
 // spaceobjects
 void createStar(int_t descriptor, int_t object) {
-    control::Star* star = builder::Star::gen(descriptor, object);
+    core::control::Star* star = builder::Star::gen(descriptor, object);
     core::shortcuts::entities()->add(star);
 }
 void createPlanet(int_t descriptor, int_t object) {
-    control::Planet* planet = builder::Planet::gen(descriptor, object);
+    core::control::Planet* planet = builder::Planet::gen(descriptor, object);
     core::shortcuts::entities()->add(planet);
 }
 void createAsteroid(int_t descriptor, int_t object) {
-    control::Asteroid* asteroid = builder::Asteroid::gen(descriptor, object);
+    core::control::Asteroid* asteroid = builder::Asteroid::gen(descriptor, object);
     core::shortcuts::entities()->add(asteroid);
 }
 void createShip(int_t descriptor, int_t object) {
-    control::Ship* ship = builder::Ship::gen(descriptor, object);
+    core::control::Ship* ship = builder::Ship::gen(descriptor, object);
     core::shortcuts::entities()->add(ship);
 }
 
@@ -125,12 +125,12 @@ void createBomb(int_t descriptor, int_t object) {
 }
 
 void createGoods(int_t descriptor, int_t object) {
-    control::item::Goods* goods = builder::item::Goods::gen(descriptor, object);
+    core::control::item::Goods* goods = builder::item::Goods::gen(descriptor, object);
     assert(false);
     core::shortcuts::entities()->add(goods); // is it needed?
 }
 void createContainer(int_t descriptor, int_t object, int_t item) {
-    control::Container* container = builder::Container::gen(descriptor, object, item);
+    core::control::Container* container = builder::Container::gen(descriptor, object, item);
     core::shortcuts::entities()->add(container);
 }
 

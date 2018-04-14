@@ -42,14 +42,14 @@ MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence()
 {}
 
 /*virtual*/
-void MacroScenarioStarSystemDefence::enter(control::Npc* npc) const
+void MacroScenarioStarSystemDefence::enter(core::control::Npc* npc) const
 {    
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemDefence");
 }
 
 /*virtual*/
-void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(control::Npc* npc) const
+void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(core::control::Npc* npc) const
 {
     assert(false);
 //    Starsystem* target_starsystem = npc->stateMachine().macroTaskManager().target()->starsystem();
@@ -90,7 +90,7 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(control::Npc* npc) co
 }
 
 /*virtual*/
-void MacroScenarioStarSystemDefence::exit(control::Npc* npc) const
+void MacroScenarioStarSystemDefence::exit(core::control::Npc* npc) const
 {
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemDefence");
@@ -98,7 +98,7 @@ void MacroScenarioStarSystemDefence::exit(control::Npc* npc) const
 
 
 /*virtual*/
-std::string MacroScenarioStarSystemDefence::GetDescription(control::Npc* npc) const
+std::string MacroScenarioStarSystemDefence::GetDescription(core::control::Npc* npc) const
 {
     assert(false);
     //return "MacroScenarioStarSystemDefence: ss_id = " + std::to_string(npc->stateMachine().macroTaskManager().target()->id());

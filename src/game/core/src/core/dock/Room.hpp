@@ -29,6 +29,7 @@ namespace model {
 class Room;
 } // model descriptor
 
+namespace core {
 namespace control {
 
 class Kosmoport;
@@ -66,4 +67,4 @@ protected:
 };
 
 } // namespace control
-
+} // namespace core

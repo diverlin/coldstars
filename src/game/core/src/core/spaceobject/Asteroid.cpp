@@ -34,6 +34,7 @@
 #include <core/model/spaceobject/Asteroid.hpp>
 #include <core/spaceobject/Container.hpp>
 
+namespace core {
 namespace control {
 
 Asteroid::Asteroid(descriptor::Asteroid* descr, model::Asteroid* model)
@@ -96,7 +97,7 @@ void Asteroid::_postDeathUniqueEvent(bool show_effect)
 
 
 } // namespace control
-
+} // namespace core
 
 //Asteroid::Asteroid(int id)
 //{

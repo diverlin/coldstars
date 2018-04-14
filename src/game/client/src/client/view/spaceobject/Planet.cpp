@@ -32,7 +32,7 @@
 
 namespace view {
 
-Planet::Planet(control::Planet* planet)
+Planet::Planet(core::control::Planet* planet)
     :
       Base(planet)
     , m_control(planet)

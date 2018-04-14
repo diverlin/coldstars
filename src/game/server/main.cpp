@@ -20,7 +20,7 @@
 
 int main()
 {
-    control::World game;
+    core::control::World game;
     return game.run();
 }
 

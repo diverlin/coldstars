@@ -38,6 +38,7 @@ namespace model {
 class Base;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Base : private NonCopyable
@@ -66,7 +67,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 //class Base : private NonCopyable
 //{

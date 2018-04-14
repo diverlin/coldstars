@@ -36,7 +36,7 @@
 
 namespace builder {
 
-control::Star*
+core::control::Star*
 Star::gen()
 {
     descriptor::Star* descr = nullptr;
@@ -49,17 +49,17 @@ Star::gen()
     return gen(descr);
 } 
 
-control::Star*
+core::control::Star*
 Star::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Star* descriptor = core::shortcuts::descriptors()->star(descriptor_id);
     return gen(descriptor, id);
 }
 
-control::Star*
+core::control::Star*
 Star::gen(descriptor::Star* descr, int_t id)
 {
-    control::Star* star = __genTemplate(descr, id);
+    core::control::Star* star = __genTemplate(descr, id);
 
     // Orientation
     star->setSize(descr->size());
@@ -70,13 +70,13 @@ Star::gen(descriptor::Star* descr, int_t id)
     return star;
 }
 
-control::Star*
+core::control::Star*
 Star::__genTemplate(descriptor::Star* descr, int_t id)
 {
     model::Star* model = new model::Star(descr->id(), id);
     assert(model);
 
-    control::Star* star = new control::Star(descr, model);
+    core::control::Star* star = new core::control::Star(descr, model);
     assert(star);
 
     return star;

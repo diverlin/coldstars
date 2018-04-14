@@ -25,7 +25,7 @@
 
 namespace builder {
 
-void Equipment::_createInternals(control::Equipment* equipment, descriptor::Equipment* descr)
+void Equipment::_createInternals(core::control::Equipment* equipment, descriptor::Equipment* descr)
 {
 }
 

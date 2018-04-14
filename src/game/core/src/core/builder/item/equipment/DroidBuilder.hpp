@@ -31,11 +31,13 @@ class Droid;
 } // namespace item
 } // namespace descriptor
 
+namespace core {
 namespace control {
 namespace item {
 class Droid;
 } // namespace item
 } // namespace control
+}
 
 namespace builder {
 namespace item {
@@ -43,16 +45,16 @@ namespace item {
 class Droid : public Equipment
 {
 public:
-    static control::item::Droid* gen();
-    static control::item::Droid* gen(int_t, int_t ob_id = NONE);
-    static control::item::Droid* gen(descriptor::item::Droid*);
+    static core::control::item::Droid* gen();
+    static core::control::item::Droid* gen(int_t, int_t ob_id = NONE);
+    static core::control::item::Droid* gen(descriptor::item::Droid*);
 
 private:
     Droid() = delete;
     ~Droid() = delete;
 
-    static control::item::Droid* __genTemplate(descriptor::item::Droid*, int ob_id = NONE);
-    static void __createInternals(control::item::Droid*, descriptor::item::Droid*);
+    static core::control::item::Droid* __genTemplate(descriptor::item::Droid*, int ob_id = NONE);
+    static void __createInternals(core::control::item::Droid*, descriptor::item::Droid*);
 }; 
 
 } // namespace item

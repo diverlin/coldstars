@@ -23,15 +23,6 @@
 
 #include <vector>
 
-namespace control {
-class Npc; 
-class Galaxy;
-class StarSystem;
-class Asteroid;
-class Container;
-class Vehicle;
-} // namespace model
-
 template <class TYPE>
 class Pair
 {
@@ -56,6 +47,16 @@ struct Visible
     bool diplomat = false;
 };
 
+namespace core {
+
+namespace control {
+class Npc;
+class Galaxy;
+class StarSystem;
+class Asteroid;
+class Container;
+class Vehicle;
+} // namespace control
 
 class Observation 
 {
@@ -95,4 +96,4 @@ private:
     void __findVisibleVehicles();
 };
 
-
+} // namespace core

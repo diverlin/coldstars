@@ -30,6 +30,7 @@ namespace model {
 class HyperSpace;
 } // naemspace model
 
+namespace core {
 namespace control {
 
 class Vehicle;
@@ -62,7 +63,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 
 

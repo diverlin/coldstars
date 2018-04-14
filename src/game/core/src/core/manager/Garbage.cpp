@@ -27,7 +27,7 @@
 namespace core {
 namespace manager {
 
-void Garbage::add(control::Base* ob)
+void Garbage::add(Base* ob)
 {
     if (ob->isAlive()) {
         // executaed for children
@@ -43,7 +43,7 @@ void Garbage::add(control::Base* ob)
 void Garbage::erase()
 {
     for(const auto& pair: m_entities) {
-        control::Base* ob = pair.second;
+        Base* ob = pair.second;
         core::shortcuts::entities()->remove(ob);
         delete ob->model();
         delete ob;

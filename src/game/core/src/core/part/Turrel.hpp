@@ -40,6 +40,7 @@ private:
 
 } // namespace control
 
+namespace core {
 namespace control {
 
 class Turrel : public ceti::control::Orientation, public Base
@@ -60,4 +61,4 @@ private:
 }; 
 
 } // namespace control
-
+} // namespace core

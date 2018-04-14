@@ -24,6 +24,7 @@
 
 #include <core/world/starsystem.hpp>
 
+namespace core {
 namespace control {
 
 Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
@@ -122,4 +123,4 @@ void Bullet::_postDeathUniqueEvent(bool show_effect)
 //}
 
 } // namespace control
-
+} // namespace core

@@ -32,7 +32,7 @@ class SpaceStation;
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/dock/Land.hpp>
    
-   
+namespace core {
 namespace control {
 
 class SpaceStation : public Vehicle
@@ -66,7 +66,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 
 //class SpaceStation : public Vehicle

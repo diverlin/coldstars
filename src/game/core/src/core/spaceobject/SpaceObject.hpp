@@ -27,6 +27,7 @@
 
 #include <ceti/Orientation.hpp>
 
+namespace core {
 namespace control {
 
 class StarSystem;
@@ -92,6 +93,7 @@ protected:
 };
 
 } // namespace control
+} // namespace core
 
 //class SpaceObject : public ceti::control::Orientation, public core::Base
 //{

@@ -30,27 +30,27 @@
 
 namespace builder {
 
-control::Satellite*
+core::control::Satellite*
 Satellite::__genTemplate(descriptor::Satellite* descr)
 {
     model::Satellite* model = new model::Satellite(descr->id());
     assert(model);
 
-    control::Satellite* satellite = new control::Satellite(descr, model);
+    core::control::Satellite* satellite = new core::control::Satellite(descr, model);
     assert(satellite);
 
     return satellite;
 }
 
-control::Satellite*
+core::control::Satellite*
 Satellite::gen(descriptor::Satellite* descr)
 {
-    control::Satellite* satellite = __genTemplate(descr);
+    core::control::Satellite* satellite = __genTemplate(descr);
     __createInternals(satellite, descr);
     return satellite;
 }
 
-control::Satellite*
+core::control::Satellite*
 Satellite::gen()
 {
     descriptor::Satellite* descr = nullptr;
@@ -63,7 +63,7 @@ Satellite::gen()
     return gen(descr);
 }
 
-void Satellite::__createInternals(control::Satellite* satellite, descriptor::Satellite* descr)
+void Satellite::__createInternals(core::control::Satellite* satellite, descriptor::Satellite* descr)
 {
     satellite->setSize(descr->size());
 

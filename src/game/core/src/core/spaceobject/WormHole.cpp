@@ -23,6 +23,7 @@
 #include <ceti/Logger.hpp>
 #include "../world/starsystem.hpp"
 
+namespace core {
 namespace control {
 
 WormHole::WormHole(descriptor::WormHole* descr, model::WormHole* model)
@@ -77,7 +78,7 @@ void WormHole::updateInSpace(int time)
 //}
 
 } // namespace control
-
+} // naemspace core
 
 
 //BlackHole::BlackHole(int id)

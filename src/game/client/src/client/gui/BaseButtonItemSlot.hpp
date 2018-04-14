@@ -21,17 +21,21 @@
 
 #include "BaseButton.hpp"
 
+namespace core {
+
 namespace control {
 class Item;
 } // namespace control
 
-namespace gui {
-class Item;
-} // namespace view
-
 namespace slot {
 class Item;
 } // namespace slot
+
+} // namespace core
+
+namespace gui {
+class Item;
+} // namespace view
 
 namespace jeti {
 
@@ -48,10 +52,10 @@ namespace gui {
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(slot::Item*);
+    BaseButtonItemSlot(core::slot::Item*);
     ~BaseButtonItemSlot();
 
-    slot::Item* itemSlot() const { return m_slot; }
+    core::slot::Item* itemSlot() const { return m_slot; }
     void invalidate();
 
     void updateGeometry();
@@ -63,11 +67,11 @@ protected:
     void _updateAnimation();
     void _drawSlot(const jeti::Render&) const;
     void _drawItem(const jeti::Render&) const;
-    void _drawMarkEmptySlot(const jeti::Render&, const glm::vec2&, slot::Type) const;
+    void _drawMarkEmptySlot(const jeti::Render&, const glm::vec2&, core::slot::Type) const;
     void _drawMarkTarget() const;
 
 private:
-    slot::Item* m_slot = nullptr;
+    core::slot::Item* m_slot = nullptr;
     gui::Item* m_itemView = nullptr;
 
     jeti::control::Material* m_material_mark_accept = nullptr;
@@ -75,7 +79,7 @@ private:
     jeti::control::Material* m_material_slot = nullptr;
 
     void __reset();
-    void __createItemView(control::Item*);
+    void __createItemView(core::control::Item*);
 };
 
 } // namespace gui

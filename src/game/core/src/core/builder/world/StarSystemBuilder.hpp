@@ -26,25 +26,27 @@ namespace descriptor {
 class StarSystem;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class StarSystem;
 } // namespace control
+} // namespace core
 
 namespace builder {
 
 class StarSystem
 {
 public:
-    static control::StarSystem* gen(descriptor::StarSystem*);
-    static control::StarSystem* gen(int_t, int_t object = NONE);
-    static control::StarSystem* gen();
+    static core::control::StarSystem* gen(descriptor::StarSystem*);
+    static core::control::StarSystem* gen(int_t, int_t object = NONE);
+    static core::control::StarSystem* gen();
 
 private:
     StarSystem()=delete;
     ~StarSystem()=delete;
 
-    static void __createInternals(control::StarSystem*, descriptor::StarSystem*);
-    static control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t object = NONE);
+    static void __createInternals(core::control::StarSystem*, descriptor::StarSystem*);
+    static core::control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t object = NONE);
 }; 
 
 } // namespace builder

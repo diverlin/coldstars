@@ -58,7 +58,7 @@ void ButtonItemSlot::_renderUnique(const jeti::Render& render, client::Player* p
 {
     _drawSlot(render);
     _drawItem(render);
-    control::Item* taken_item = player->cursor().itemSlot()->item();
+    core::control::Item* taken_item = player->cursor().itemSlot()->item();
     if (taken_item) {
         _drawMarkEmptySlot(render,
                            player->cursor().mouseData().screenCoordGui(),

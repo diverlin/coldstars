@@ -28,6 +28,7 @@
 
 //#include <meti/RandUtils.hpp>
 
+namespace core {
 namespace control {
 
 HyperSpace::HyperSpace(descriptor::HyperSpace* descr, model::HyperSpace* model)
@@ -83,3 +84,4 @@ HyperSpace::remove(Vehicle* vehicle)
 //}
 
 } // namespace control
+} // namespace core

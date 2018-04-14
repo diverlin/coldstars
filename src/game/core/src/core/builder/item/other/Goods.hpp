@@ -31,11 +31,13 @@ class Goods;
 } // namespace item
 } // namespace descriptor
 
+namespace core {
 namespace control {
 namespace item {
 class Goods;
 } // namespace item
 } // namespace control
+}
 
 namespace builder {
 namespace item {
@@ -43,16 +45,16 @@ namespace item {
 class Goods : public Item
 {
 public:
-    static control::item::Goods* gen(descriptor::item::Goods*);
-    static control::item::Goods* gen(int_t, int_t object_id = NONE);
-    static control::item::Goods* gen();
+    static core::control::item::Goods* gen(descriptor::item::Goods*);
+    static core::control::item::Goods* gen(int_t, int_t object_id = NONE);
+    static core::control::item::Goods* gen();
 
 private:
     Goods() = delete;
     ~Goods() = delete;
 
-    static control::item::Goods* __genTemplate(descriptor::item::Goods*, int_t object_id = NONE);
-    static void __createInternals(control::item::Goods*, descriptor::item::Goods*);
+    static core::control::item::Goods* __genTemplate(descriptor::item::Goods*, int_t object_id = NONE);
+    static void __createInternals(core::control::item::Goods*, descriptor::item::Goods*);
 }; 
 
 } // namespace item

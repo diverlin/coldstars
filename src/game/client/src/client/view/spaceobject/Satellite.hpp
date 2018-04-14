@@ -20,26 +20,28 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Satellite;
 } // namespace descriptor
+} // namespace core
 
 namespace view {
 
 class Satellite : public Base
 {
 public:
-    Satellite(control::Satellite*);
+    Satellite(core::control::Satellite*);
     ~Satellite() override final;
 
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
-    control::Satellite* control() const { return m_satellite; }
+    core::control::Satellite* control() const { return m_satellite; }
 
 private:
-    control::Satellite* m_satellite = nullptr;
+    core::control::Satellite* m_satellite = nullptr;
 };
 
 } // namespace view

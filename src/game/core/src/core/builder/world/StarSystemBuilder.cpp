@@ -37,7 +37,7 @@
 
 namespace builder {
 
-control::StarSystem*
+core::control::StarSystem*
 StarSystem::gen()
 {
     descriptor::StarSystem* descr = nullptr;
@@ -50,36 +50,36 @@ StarSystem::gen()
     return gen(descr);
 }
 
-control::StarSystem*
+core::control::StarSystem*
 StarSystem::gen(descriptor::StarSystem* descr)
 {
-    control::StarSystem* starsystem = __genTemplate(descr);
+    core::control::StarSystem* starsystem = __genTemplate(descr);
     __createInternals(starsystem, descr);
     return starsystem;
 } 
 
-control::StarSystem*
+core::control::StarSystem*
 StarSystem::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::StarSystem* descriptor = core::shortcuts::descriptors()->starSystem(descriptor_id);
-    control::StarSystem* starsystem = __genTemplate(descriptor, object_id);
+    core::control::StarSystem* starsystem = __genTemplate(descriptor, object_id);
     __createInternals(starsystem, descriptor);
     return starsystem;
 }
 
-control::StarSystem*
+core::control::StarSystem*
 StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
 {
     model::StarSystem* model = new model::StarSystem(descr->id(), ob_id);
     assert(model);
 
-    control::StarSystem* starsystem = new control::StarSystem(descr, model);
+    core::control::StarSystem* starsystem = new core::control::StarSystem(descr, model);
     assert(starsystem);
 
     return starsystem;
 }
 
-void StarSystem::__createInternals(control::StarSystem* starsystem, descriptor::StarSystem* descr)
+void StarSystem::__createInternals(core::control::StarSystem* starsystem, descriptor::StarSystem* descr)
 {
 }
 

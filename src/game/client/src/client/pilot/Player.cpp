@@ -93,7 +93,7 @@ void Player::toggleWeapon(int offset)
     gui::Manager::get().vehiclePanel()->toggle(gui::Type::WEAPON_SLOT_SELECTOR, offset);
 }
 
-bool Player::enterScan(control::Vehicle* vehicle)
+bool Player::enterScan(core::control::Vehicle* vehicle)
 {
     gui::Manager::get().enterScan(this);
     m_blockSpaceNavigation = true;

@@ -26,37 +26,37 @@
 
 class Task
 {
-    public:
-        Task(ai::type scenario_type_id = ai::type::NONE, int_t target_id = NONE, int reward = 0, int expiriance = 0):
+public:
+    Task(ai::type scenario_type_id = ai::type::NONE, int_t target_id = NONE, int reward = 0, int expiriance = 0):
         m_reward(reward),
         m_expiriance(expiriance),
         m_scenario_type_id(scenario_type_id),
         m_target_id(target_id)
-        {}
-        
-        ~Task() {}
+    {}
 
-        void SetResult(int result)  { m_result = result; }
-                
-        ai::type GetScenarioTypeId() const { return m_scenario_type_id; }
-        int_t targetId() const { return m_target_id; }
-                
-        int result() const { return m_result; }
-        
-        void reset();
-                
-        void save(boost::property_tree::ptree&, const std::string&) const;
-        void load(const boost::property_tree::ptree&);
-                
-    protected:
-        int m_result = NONE;
+    ~Task() {}
+
+    void SetResult(int result)  { m_result = result; }
+
+    ai::type GetScenarioTypeId() const { return m_scenario_type_id; }
+    int_t targetId() const { return m_target_id; }
+
+    int result() const { return m_result; }
+
+    void reset();
+
+    void save(boost::property_tree::ptree&, const std::string&) const;
+    void load(const boost::property_tree::ptree&);
+
+protected:
+    int m_result = NONE;
     
-        int m_reward = 0;
-        int m_expiriance = 0;
-        
-        ai::type m_scenario_type_id = ai::type::NONE;
-        int_t m_target_id = 0;
+    int m_reward = 0;
+    int m_expiriance = 0;
+
+    ai::type m_scenario_type_id = ai::type::NONE;
+    int_t m_target_id = 0;
 };
 
 
-     
+

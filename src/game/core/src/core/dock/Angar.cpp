@@ -38,6 +38,7 @@
 #include <core/descriptor/dock/Angar.hpp>
 #include <core/model/dock/Angar.hpp>
 
+namespace core {
 namespace control {
 
 Angar::Angar(descriptor::Angar* descr, model::Angar* model)
@@ -285,3 +286,4 @@ std::string Angar::vehiclesStr() const
 //}
 
 } // namespace control
+} // namespace core

@@ -42,14 +42,14 @@ MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation()
 {}
 
 /*virtual*/
-void MacroScenarioStarSystemLiberation::enter(control::Npc* npc) const
+void MacroScenarioStarSystemLiberation::enter(core::control::Npc* npc) const
 {    
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/
-void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(control::Npc* npc) const
+void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(core::control::Npc* npc) const
 {
     assert(false);
 //    Starsystem* target_starsystem = npc->stateMachine().macroTaskManager().target()->starsystem();
@@ -95,14 +95,14 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(control::Npc* npc)
 }
 
 /*virtual*/
-void MacroScenarioStarSystemLiberation::exit(control::Npc* npc) const
+void MacroScenarioStarSystemLiberation::exit(core::control::Npc* npc) const
 {
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/
-std::string MacroScenarioStarSystemLiberation::GetDescription(control::Npc* npc) const
+std::string MacroScenarioStarSystemLiberation::GetDescription(core::control::Npc* npc) const
 {
     assert(false);
     //return "MacroScenarioStarSystemLiberation: ss_id = " + std::to_string(npc->stateMachine().macroTaskManager().target()->id());

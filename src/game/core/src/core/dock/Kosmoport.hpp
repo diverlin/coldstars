@@ -28,6 +28,7 @@ namespace model {
 class Kosmoport;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Angar;
@@ -85,4 +86,4 @@ private:
 };
 
 } // namespace control
-
+} // namespace core

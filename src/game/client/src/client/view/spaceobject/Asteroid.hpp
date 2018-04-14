@@ -20,24 +20,26 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Asteroid;
 } // namespace control
+} // namespace core
 
 namespace view {
 
 class Asteroid : public Base
 {
 public:
-    Asteroid(control::Asteroid*);
+    Asteroid(core::control::Asteroid*);
     virtual ~Asteroid() override final;
 
-    control::Asteroid* control() const  { return m_control; }
+    core::control::Asteroid* control() const  { return m_control; }
 
     void draw(const jeti::Render& render) const;
 
 private:
-    control::Asteroid* m_control = nullptr;
+    core::control::Asteroid* m_control = nullptr;
     //        virtual void UpdateInfo() override final;
 }; 
 

@@ -28,6 +28,8 @@ namespace model {
 class Angar;
 } // namespace model
 
+namespace core {
+
 namespace slot {
 class Vehicle;
 class Item;
@@ -51,8 +53,8 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void add(slot::Vehicle*);
-    void add(slot::Item*);
+    void add(core::slot::Vehicle*);
+    void add(core::slot::Item*);
 
     void updateInStatic() const;
 
@@ -79,20 +81,20 @@ public:
     descriptor::Angar* desriptor() const { return m_descriptor_angar; }
     model::Angar* model() const { return m_model_angar; }
 
-    const std::vector<slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
-    const std::vector<slot::Item*>& itemSlots() const { return m_item_slots; }
+    const std::vector<core::slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
+    const std::vector<core::slot::Item*>& itemSlots() const { return m_item_slots; }
 
 private:
     descriptor::Angar* m_descriptor_angar = nullptr;
     model::Angar* m_model_angar = nullptr;
 
-    std::vector<slot::Vehicle*> m_vehicle_slots;
-    std::vector<slot::Item*> m_item_slots;
+    std::vector<core::slot::Vehicle*> m_vehicle_slots;
+    std::vector<core::slot::Item*> m_item_slots;
 
     int m_fuelPrice = 0;
 
-    slot::Vehicle* __freeSlot() const;
-    slot::Vehicle* __slot(Vehicle*) const;
+    core::slot::Vehicle* __freeSlot() const;
+    core::slot::Vehicle* __slot(Vehicle*) const;
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
@@ -100,3 +102,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

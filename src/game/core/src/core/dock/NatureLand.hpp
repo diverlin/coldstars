@@ -29,6 +29,10 @@ namespace model {
 class NatureLand;
 } // namespace model
 
+
+
+namespace core {
+
 namespace slot {
 class Item;
 } // namespace slot
@@ -49,7 +53,7 @@ public:
 
     //jeti::control::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-    void add(slot::Item*);
+    void add(core::slot::Item*);
 
     bool add(control::Item*);
     bool canAcceptNewItem() const;
@@ -71,7 +75,7 @@ public:
     descriptor::NatureLand* descriptor() const { return m_descriptor_natureland; }
     model::NatureLand* model() const { return m_model_natureland; }
 
-    const std::vector<slot::Item*>& itemSlots() const { return m_itemslots; }
+    const std::vector<core::slot::Item*>& itemSlots() const { return m_itemslots; }
 
 private:
     descriptor::NatureLand* m_descriptor_natureland = nullptr;
@@ -80,7 +84,7 @@ private:
     //jeti::control::TextureOb* textureOb_background;
 
     std::vector<Vehicle*> m_vehicles;
-    std::vector<slot::Item*> m_itemslots;
+    std::vector<core::slot::Item*> m_itemslots;
 
 //    UnresolvedDataNatureLand data_unresolved_NatureLand;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
@@ -89,3 +93,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

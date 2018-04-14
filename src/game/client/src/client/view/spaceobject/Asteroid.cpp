@@ -25,7 +25,7 @@
 
 namespace view {
 
-Asteroid::Asteroid(control::Asteroid* asteroid)
+Asteroid::Asteroid(core::control::Asteroid* asteroid)
     :
       Base(asteroid)
     , m_control(asteroid)

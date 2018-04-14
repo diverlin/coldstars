@@ -25,24 +25,26 @@ namespace descriptor {
 class NatureLand;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class NatureLand;
 } // namespace control
+}
 
 namespace builder {
 
 class NatureLand
 {
 public:
-    static control::NatureLand* gen();
-    static control::NatureLand* gen(descriptor::NatureLand*);
+    static core::control::NatureLand* gen();
+    static core::control::NatureLand* gen(descriptor::NatureLand*);
 
 private:
     NatureLand() = delete;
     ~NatureLand() = delete;
 
-    static control::NatureLand* __createTemplate(descriptor::NatureLand*);
-    static void __createInternals(control::NatureLand*);
+    static core::control::NatureLand* __createTemplate(descriptor::NatureLand*);
+    static void __createInternals(core::control::NatureLand*);
 }; 
 
 } // namespace builder

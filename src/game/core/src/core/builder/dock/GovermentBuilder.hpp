@@ -24,24 +24,26 @@ namespace descriptor {
 class Goverment;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Goverment;
 } // namespace control
+}
 
 namespace builder {
 
 class Goverment
 {
 public:
-    static control::Goverment* gen();
-    static control::Goverment* gen(descriptor::Goverment*);
+    static core::control::Goverment* gen();
+    static core::control::Goverment* gen(descriptor::Goverment*);
 
 private:
     Goverment() = delete;
     ~Goverment() = delete;
 
-    static control::Goverment* __createTemplate(descriptor::Goverment*);
-    static void __createInternals(control::Goverment*);
+    static core::control::Goverment* __createTemplate(descriptor::Goverment*);
+    static void __createInternals(core::control::Goverment*);
 }; 
 
 } // namespace builder

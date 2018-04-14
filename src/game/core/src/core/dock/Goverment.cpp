@@ -27,6 +27,7 @@
 #include <core/descriptor/dock/Goverment.hpp>
 #include <core/model/dock/Goverment.hpp>
 
+namespace core {
 namespace control {
 
 Goverment::Goverment(descriptor::Goverment* descr, model::Goverment* model)
@@ -41,6 +42,7 @@ Goverment::~Goverment()
 {}
 
 } // namespace control
+} // namespace core
 
 //void Goverment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{

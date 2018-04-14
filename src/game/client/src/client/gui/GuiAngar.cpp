@@ -84,16 +84,16 @@ GuiAngar::~GuiAngar()
     delete m_charge_slot;
 }    
 
-void GuiAngar::BindAngar(control::Angar* angar)
+void GuiAngar::BindAngar(core::control::Angar* angar)
 {
     m_angar = angar;
     
     int column_counter = 1;
     int row_counter = 0;
-    for (slot::Vehicle* slot: angar->vehicleSlots()) {
+    for (core::slot::Vehicle* slot: angar->vehicleSlots()) {
         ceti::Rect rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, slot::Vehicle*>(rect, slot));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Vehicle*>(rect, slot));
 
         column_counter++;
     }
@@ -111,10 +111,10 @@ void GuiAngar::BindAngar(control::Angar* angar)
     
     column_counter = 0;
     row_counter = 0;
-    for (slot::Item* slot: angar->itemSlots()) {
+    for (core::slot::Item* slot: angar->itemSlots()) {
         ceti::Rect rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR,
                    GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Item*>(rect, slot));
 
         row_counter++;
     }
@@ -123,14 +123,14 @@ void GuiAngar::BindAngar(control::Angar* angar)
         ceti::Rect rect(gui::itemslot::WIDTH_FOR_SHIP,
                   3*gui::itemslot::HEIGHT_FOR_SHIP,
                   gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_repair_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Item*>(rect, m_repair_slot));
     }
 
     {
         ceti::Rect rect(gui::itemslot::WIDTH_FOR_SHIP,
                   4*gui::itemslot::HEIGHT_FOR_SHIP,
                   gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, m_charge_slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Item*>(rect, m_charge_slot));
     }
 }
 

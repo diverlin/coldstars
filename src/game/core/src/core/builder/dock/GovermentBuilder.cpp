@@ -30,7 +30,7 @@
 
 namespace builder {
 
-control::Goverment*
+core::control::Goverment*
 Goverment::gen()
 {
     descriptor::Goverment* descr = nullptr;
@@ -42,22 +42,22 @@ Goverment::gen()
     return gen(descr);
 }
 
-control::Goverment*
+core::control::Goverment*
 Goverment::gen(descriptor::Goverment* descr)
 {
-    control::Goverment* goverment = __createTemplate(descr);
+    core::control::Goverment* goverment = __createTemplate(descr);
     __createInternals(goverment);
 
     return goverment;
 } 
 
-control::Goverment*
+core::control::Goverment*
 Goverment::__createTemplate(descriptor::Goverment* descr)
 {
     model::Goverment* model = new model::Goverment(descr->id());
     assert(model);
 
-    control::Goverment* goverment = new control::Goverment(descr, model);
+    core::control::Goverment* goverment = new core::control::Goverment(descr, model);
     assert(goverment);
 
     core::shortcuts::entities()->add(goverment);
@@ -66,7 +66,7 @@ Goverment::__createTemplate(descriptor::Goverment* descr)
 }
 
 void
-Goverment::__createInternals(control::Goverment* goverment)
+Goverment::__createInternals(core::control::Goverment* goverment)
 {
     //jeti::control::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND);
     //goverment->SetTextureObFace(textureOb_face);

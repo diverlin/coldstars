@@ -25,9 +25,11 @@ namespace descriptor {
 class Bullet;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Bullet;
 } // namespace control
+}
 
 class BulletData;
 
@@ -36,15 +38,15 @@ namespace builder {
 class Bullet
 {
 public:
-    static control::Bullet* gen(int damage);
-    static control::Bullet* gen(descriptor::Bullet*, int damage);
+    static core::control::Bullet* gen(int damage);
+    static core::control::Bullet* gen(descriptor::Bullet*, int damage);
 
 private:
     Bullet() = delete;
     ~Bullet() = delete;
 
-    static void createInternals(control::Bullet*, descriptor::Bullet*, int damage);
-    static control::Bullet* __genTemplate(descriptor::Bullet*);
+    static void createInternals(core::control::Bullet*, descriptor::Bullet*, int damage);
+    static core::control::Bullet* __genTemplate(descriptor::Bullet*);
 }; 
 
 } // namespace builder

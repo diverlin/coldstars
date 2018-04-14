@@ -34,7 +34,7 @@
 
 namespace builder {
 
-control::Kosmoport*
+core::control::Kosmoport*
 Kosmoport::gen()
 {
     descriptor::Kosmoport* descr = nullptr;
@@ -47,21 +47,21 @@ Kosmoport::gen()
     return gen(descr);
 } 
 
-control::Kosmoport*
+core::control::Kosmoport*
 Kosmoport::gen(descriptor::Kosmoport* descr)
 {
-    control::Kosmoport* kosmoport = __createTemplate(descr);
+    core::control::Kosmoport* kosmoport = __createTemplate(descr);
     __createInternals(kosmoport, descr);
     return kosmoport;
 }
 
-control::Kosmoport*
+core::control::Kosmoport*
 Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
 {
     model::Kosmoport* model = new model::Kosmoport(descr->id());
     assert(model);
 
-    control::Kosmoport* kosmoport = new control::Kosmoport(descr, model);
+    core::control::Kosmoport* kosmoport = new core::control::Kosmoport(descr, model);
     assert(kosmoport);
 
     core::shortcuts::entities()->add(kosmoport);
@@ -69,7 +69,7 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
 }
 
 void
-Kosmoport::__createInternals(control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
+Kosmoport::__createInternals(core::control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
 {
     kosmoport->bindAngar(builder::Angar::gen());
     kosmoport->bindStore(builder::Store::gen());

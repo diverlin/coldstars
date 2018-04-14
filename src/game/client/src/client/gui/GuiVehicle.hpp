@@ -21,6 +21,8 @@
 
 #include <client/gui/BaseGuiElement.hpp>
 
+namespace core {
+
 namespace slot {
 class Item;
 } // namespace slot
@@ -28,6 +30,8 @@ class Item;
 namespace control {
 class Vehicle;
 } // namespace control
+
+} // namespace core
 
 class Store;
 class MouseData; // to be removed
@@ -46,7 +50,7 @@ public:
     bool blockManualExit() const { return m_blockManualExit; }
     bool allowFullControl() const { return m_allowFullControl; }
 
-    void bindVehicle(control::Vehicle*,
+    void bindVehicle(core::control::Vehicle*,
                      const glm::vec2& offset,
                      bool full_control_on,
                      bool block_manual_closing = false,
@@ -63,17 +67,17 @@ private:
     bool m_blockManualExit = false;
     bool m_allowFullControl = false;
 
-    slot::Item* m_slot_gate = nullptr;
-    control::Vehicle* m_vehicle = nullptr;
+    core::slot::Item* m_slot_gate = nullptr;
+    core::control::Vehicle* m_vehicle = nullptr;
     std::vector<ButtonItemSlot*> m_buttonslots;
 
     bool __updateMouseInteractionWithSlot(ButtonItemSlot*, client::Player*, const MouseData&);
 
     void __renderKorpus(const jeti::Render&, client::Player*) const;
 
-    void __createKorpusGui(control::Vehicle*, float);
-    void __createItemSlotsGeometry(control::Vehicle*);
-    void __createFunctionalItemSlotsCircleGeometry(control::Vehicle*, float);
+    void __createKorpusGui(core::control::Vehicle*, float);
+    void __createItemSlotsGeometry(core::control::Vehicle*);
+    void __createFunctionalItemSlotsCircleGeometry(core::control::Vehicle*, float);
 };
 
 } // namespace gui

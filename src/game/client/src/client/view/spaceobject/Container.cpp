@@ -24,7 +24,7 @@
 
 namespace view {
 
-Container::Container(control::Container* container)
+Container::Container(core::control::Container* container)
     :
       Base(container)
     , m_control(container)

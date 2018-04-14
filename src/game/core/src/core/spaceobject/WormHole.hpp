@@ -25,6 +25,7 @@
 #include <core/descriptor/spaceobject/WormHole.hpp>
 #include <core/model/spaceobject/WormHole.hpp>
 
+namespace core {
 namespace control {
 
 class WormHole : public Planetoid
@@ -52,6 +53,7 @@ private:
 };
 
 } // namespace control
+} // naemspace core
 
 //class BlackHole : public Planetoid
 //{

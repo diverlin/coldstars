@@ -26,7 +26,7 @@
 
 namespace view {
 
-Bullet::Bullet(control::Bullet* control)
+Bullet::Bullet(core::control::Bullet* control)
     :
       Base(control)
     , m_control(control)

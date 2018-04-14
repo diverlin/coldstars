@@ -27,23 +27,25 @@ class Material;
 class Render;
 } // namespace jeti
 
+namespace core {
 namespace control {
 class Item;
 } // namespace control
+} // namespace core
 
 namespace gui {
 
 class Item : public Base
 {
 public:
-    Item(control::Item*, const ceti::Box2D&);
+    Item(core::control::Item*, const ceti::Box2D&);
     ~Item();
 
-    control::Item* item() const { return m_item; }
+    core::control::Item* item() const { return m_item; }
     void render(const jeti::Render&);
 
 private:
-    control::Item* m_item;
+    core::control::Item* m_item = nullptr;
 };
 
 } // namespace gui

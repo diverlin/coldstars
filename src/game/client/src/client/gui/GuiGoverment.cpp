@@ -20,7 +20,7 @@
     
 namespace gui {
 
-void GuiGoverment::bind(control::Goverment* goverment)
+void GuiGoverment::bind(core::control::Goverment* goverment)
 {
     this->m_goverment = goverment;
 }

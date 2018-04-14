@@ -63,6 +63,7 @@
 
 #include <ceti/Logger.hpp>
 
+namespace core {
 
 God::God()
     :
@@ -317,11 +318,11 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
         }
         // VERY UGLY LOGIC END
 
-        control::Ship* new_ship = builder::Ship::gen();
+        core::control::Ship* new_ship = builder::Ship::gen();
         builder::Ship::equip(new_ship);
 
         // npc_race_id, npc_group, npc_subgroup
-        control::Npc* new_npc = builder::Npc::gen();
+        core::control::Npc* new_npc = builder::Npc::gen();
         new_ship->bindNpc(new_npc);
 
         glm::vec3 center = meti::rand::gen_vec3xy(300, 1200);
@@ -329,3 +330,5 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
         starsystem->add(new_ship, center);
     }
 }
+
+} // namespace core

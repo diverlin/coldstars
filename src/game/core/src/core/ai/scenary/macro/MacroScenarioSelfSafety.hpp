@@ -28,7 +28,7 @@ class MacroScenarioSelfSafety : public BaseScenario
         MacroScenarioSelfSafety();
         virtual ~MacroScenarioSelfSafety();
         
-        virtual void UpdateInStaticInSpace(control::Npc*) const;
-        virtual std::string GetDescription(control::Npc*) const;
+        virtual void UpdateInStaticInSpace(core::control::Npc*) const;
+        virtual std::string GetDescription(core::control::Npc*) const;
 }; 
 

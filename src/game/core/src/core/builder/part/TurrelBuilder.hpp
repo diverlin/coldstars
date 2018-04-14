@@ -24,20 +24,22 @@ namespace descriptor {
 class Turrel;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Turrel;
 } // namespace control
+}
 
 namespace builder {
 
 class Turrel
 {
 public:
-    static control::Turrel* gen();
-    static control::Turrel* gen(descriptor::Turrel*);
+    static core::control::Turrel* gen();
+    static core::control::Turrel* gen(descriptor::Turrel*);
 
 private:
-    static control::Turrel* __genTemplate(descriptor::Turrel*);
+    static core::control::Turrel* __genTemplate(descriptor::Turrel*);
 }; 
 
 } // namespace builder

@@ -30,7 +30,7 @@
 
 namespace builder {
 
-control::Shop*
+core::control::Shop*
 Shop::gen()
 {
     descriptor::Shop* descr = nullptr;
@@ -42,22 +42,22 @@ Shop::gen()
     return gen(descr);
 }
 
-control::Shop*
+core::control::Shop*
 Shop::gen(descriptor::Shop* descr)
 {
-    control::Shop* shop = __createTemplate(descr);
+    core::control::Shop* shop = __createTemplate(descr);
     __createInternals(shop);
 
     return shop;
 }
 
-control::Shop*
+core::control::Shop*
 Shop::__createTemplate(descriptor::Shop* descr)
 {
     model::Shop* model = new model::Shop(descr->id());
     assert(model);
 
-    control::Shop* shop = new control::Shop(descr, model);
+    core::control::Shop* shop = new core::control::Shop(descr, model);
     assert(shop);
 
     core::shortcuts::entities()->add(shop);
@@ -65,7 +65,7 @@ Shop::__createTemplate(descriptor::Shop* descr)
 } 
 
 void
-Shop::__createInternals(control::Shop* shop)
+Shop::__createInternals(core::control::Shop* shop)
 {    
     //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND);
     //shop->SetTextureObBackground(textureOb_background);

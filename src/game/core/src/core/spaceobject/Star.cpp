@@ -33,6 +33,7 @@
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
 
+namespace core {
 namespace control {
 
 Star::Star(descriptor::Star* descr, model::Star* model)
@@ -122,7 +123,7 @@ void Star::_postDeathUniqueEvent(bool)
 {}
 
 } // namespace control
-
+} // namespace core
 
 //Star::Star(int id)
 //:

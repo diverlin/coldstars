@@ -22,31 +22,35 @@
 
 #include <core/type/StatusType.hpp>
 
+namespace core {
 namespace control {
 class SpaceObject;
 class Vehicle;
 } // namespace control
+} // namespace core
 
+namespace core {
 namespace complex {
 
 class Base
 {
 public:
-    Base(control::Vehicle*);
+    Base(core::control::Vehicle*);
     ~Base() = default;
 
 protected:
-    control::Vehicle* _vehicle() const { return m_vehicle; }
+    core::control::Vehicle* _vehicle() const { return m_vehicle; }
 
-    bool _checkDistanceToTarget(control::SpaceObject*, int) const;
-    STATUS _checkTarget(control::SpaceObject*) const;
+    bool _checkDistanceToTarget(core::control::SpaceObject*, int) const;
+    STATUS _checkTarget(core::control::SpaceObject*) const;
 
 private:
-    control::Vehicle* m_vehicle = nullptr;
+    core::control::Vehicle* m_vehicle = nullptr;
 
-    bool __isTargetAlive(control::SpaceObject*) const;
-    bool __isTargetInSpace(control::SpaceObject*) const;
-    bool __isTargetInSameStarSystem(control::SpaceObject*) const;
+    bool __isTargetAlive(core::control::SpaceObject*) const;
+    bool __isTargetInSpace(core::control::SpaceObject*) const;
+    bool __isTargetInSameStarSystem(core::control::SpaceObject*) const;
 };
 
 } // namespace complex
+} // naemspace core

@@ -41,6 +41,7 @@ Planetoid::data() const
 
 } // namespace model
 
+namespace core {
 namespace control {
 
 Planetoid::Planetoid(descriptor::Planetoid* descr, model::Planetoid* model)
@@ -100,7 +101,7 @@ void Planetoid::_updatePosition()
 //}
 
 } // namespace control
-
+} // namespace core
 
 //Planetoid::Planetoid()
 //{}

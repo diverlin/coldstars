@@ -27,9 +27,10 @@
 #include <core/item/Item.hpp>
 #include <core/slot/ItemSlot.hpp>
 
+namespace core {
 namespace complex {
 
-Weapon::Weapon(control::Vehicle* vehicle)
+Weapon::Weapon(core::control::Vehicle* vehicle)
     :
       Base(vehicle)
 {}
@@ -97,7 +98,7 @@ void Weapon::__reload()
 {
     m_slots_reloaded.clear();
     for (slot::Item* slot: m_slots) {
-        control::item::Weapon* weapon = slot->weapon();
+        core::control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
                 if (weapon->checkAmmo()) {
@@ -164,7 +165,7 @@ bool Weapon::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-bool Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
+bool Weapon::setTarget(core::control::SpaceObject* target, slot::Item* subtarget)
 {
     STATUS status = _checkTarget(target);
     if (status != STATUS::TARGET_OK) {
@@ -174,7 +175,7 @@ bool Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
     bool result = false;
     for (slot::Item* slot: m_slots) {
         if (slot->isSelected()) {
-            control::item::Weapon* weapon = slot->weapon();
+            core::control::item::Weapon* weapon = slot->weapon();
             if (weapon) {
                 if (weapon->isFunctioning()) {
                     if (!slot->target()) {
@@ -205,7 +206,7 @@ int Weapon::guessDamage(int dist)
 slot::Item*
 Weapon::__nextSlotReadyToFire() const {
     for(slot::Item* slot: m_slots_reloaded) {
-        control::item::Weapon* weapon = slot->weapon(); // shortcut
+        core::control::item::Weapon* weapon = slot->weapon(); // shortcut
         if (_checkDistanceToTarget(slot->target(), weapon->radius())) {
             return slot;
         }
@@ -320,3 +321,4 @@ void Weapon::updateFireAbility()
 //}
 
 } // namespace complex
+} // namespace core

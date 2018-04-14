@@ -35,6 +35,7 @@
 
 #include <core/descriptor/spaceobject/Ship.hpp>
 
+namespace core {
 namespace control {
 
 Ship::Ship(descriptor::Ship* descr, model::Ship* model)
@@ -153,7 +154,7 @@ void Ship::update(int time)
 //}
 
 } // namespace control
-
+} // namespace core
 
 
 //Ship::Ship(int id)

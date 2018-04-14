@@ -32,7 +32,7 @@
 
 #include <core/manager/EntityManager.hpp>
 
-
+namespace core {
 namespace control {
 
 Planet::Planet(descriptor::Planet* descr, model::Planet* model)
@@ -105,7 +105,7 @@ void Planet::_postDeathUniqueEvent(bool)
 {}
 
 } // namespace control
-
+} // namespace core
 
 
 

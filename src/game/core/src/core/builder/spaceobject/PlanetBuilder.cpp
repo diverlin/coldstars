@@ -33,7 +33,7 @@
 
 namespace builder {
 
-control::Planet*
+core::control::Planet*
 Planet::gen()
 {
     descriptor::Planet* descr = nullptr;
@@ -46,23 +46,23 @@ Planet::gen()
     return gen(descr);
 } 
 
-control::Planet*
+core::control::Planet*
 Planet::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Planet* descr = core::shortcuts::descriptors()->planet(descriptor_id);
     return gen(descr, id);
 }
 
-control::Planet*
+core::control::Planet*
 Planet::gen(descriptor::Planet* descr, int_t id)
 {
-    control::Planet* planet = __genTemplate(descr, id);
+    core::control::Planet* planet = __genTemplate(descr, id);
     __createInternals(planet, descr);
     return planet;
 }
 
 void
-Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
+Planet::__createInternals(core::control::Planet* planet, descriptor::Planet* descr)
 {
     /// Orientation
     planet->setSize(descr->size());
@@ -71,7 +71,7 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
     /// SpaceObject
     planet->model()->setArmor(descr->armor());
 
-    control::Kosmoport* kosmoport = builder::Kosmoport::gen();
+    core::control::Kosmoport* kosmoport = builder::Kosmoport::gen();
     planet->bindLand(kosmoport);
 
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
@@ -104,13 +104,13 @@ Planet::__createInternals(control::Planet* planet, descriptor::Planet* descr)
     */
 }
 
-control::Planet*
+core::control::Planet*
 Planet::__genTemplate(descriptor::Planet* descr, int_t id)
 {
     model::Planet* model = new model::Planet(descr->id(), id);
     assert(model);
 
-    control::Planet* planet = new control::Planet(descr, model);
+    core::control::Planet* planet = new core::control::Planet(descr, model);
     assert(planet);
 
     return planet;

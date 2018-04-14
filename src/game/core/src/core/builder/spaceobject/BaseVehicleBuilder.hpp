@@ -24,16 +24,18 @@
 
 class Vehicle;
 
+namespace core {
 namespace control {
 class Vehicle;
 } // namespace control
+}
 
 namespace builder {
 
 class BaseVehicle
 {
 public:
-    static void equip(control::Vehicle*);
+    static void equip(core::control::Vehicle*);
 
     static void equip(Vehicle* vehicle, descriptor::Vehicle* descriptor);
     static void equip(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);

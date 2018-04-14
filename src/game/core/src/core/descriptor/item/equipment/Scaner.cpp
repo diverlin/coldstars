@@ -47,7 +47,7 @@ Scaner::Scaner()
     setType(descriptor::Type::SCANER_EQUIPMENT);
     setObType(entity::Type::SCANER_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(slot::Type::SCANER);
+    setSlotType(core::slot::Type::SCANER);
 }
 
 Scaner::Scaner(const std::string& data)

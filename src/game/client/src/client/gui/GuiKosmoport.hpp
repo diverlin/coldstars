@@ -38,7 +38,7 @@ public:
     ~GuiKosmoport();
 
     void SetPlayer(client::Player*);
-    void BindKosmoport(control::Kosmoport*);
+    void BindKosmoport(core::control::Kosmoport*);
     void UnbindKosmoport();
 
     void BindSharedGuis(GuiGalaxyMap*, Vehicle*, GuiSkills*, Slider*);
@@ -64,7 +64,7 @@ private:
 
     int m_activeScreenId;
 
-    control::Kosmoport* m_kosmoport = nullptr;
+    core::control::Kosmoport* m_kosmoport = nullptr;
 
     GuiAngar m_gui_angar;
     GuiStore m_gui_store;

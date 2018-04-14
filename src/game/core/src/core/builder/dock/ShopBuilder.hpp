@@ -25,24 +25,26 @@ namespace descriptor {
 class Shop;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Shop;
 } // namespace control
+}
 
 namespace builder {
 
 class Shop
 {
 public:
-    static control::Shop* gen();
-    static control::Shop* gen(descriptor::Shop*);
+    static core::control::Shop* gen();
+    static core::control::Shop* gen(descriptor::Shop*);
 
 private:
     Shop() = delete;
     ~Shop() = delete;
 
-    static control::Shop* __createTemplate(descriptor::Shop*);
-    static void __createInternals(control::Shop*);
+    static core::control::Shop* __createTemplate(descriptor::Shop*);
+    static void __createInternals(core::control::Shop*);
 }; 
 
 } // namespace builder

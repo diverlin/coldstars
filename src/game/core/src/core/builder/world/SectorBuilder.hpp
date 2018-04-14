@@ -25,25 +25,27 @@ namespace descriptor {
 class Sector;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Sector;
 } // namespace control
+} // namespace core
 
 namespace builder {
 
 class Sector
 {
 public:
-    static control::Sector* gen();
-    static control::Sector* gen(int_t, int_t object = NONE);
-    static control::Sector* gen(descriptor::Sector*);
+    static core::control::Sector* gen();
+    static core::control::Sector* gen(int_t, int_t object = NONE);
+    static core::control::Sector* gen(descriptor::Sector*);
 
 private:
     Sector()=delete;
     ~Sector()=delete;
 
-    static void __createInternals(control::Sector*, descriptor::Sector*);
-    static control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);
+    static void __createInternals(core::control::Sector*, descriptor::Sector*);
+    static core::control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);
 }; 
 
 } // namespace builder

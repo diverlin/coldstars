@@ -29,7 +29,7 @@ namespace gui {
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot2(slot::Item*);
+    ButtonItemSlot2(core::slot::Item*);
     ~ButtonItemSlot2();
 
     virtual void onPressEventMBL(client::Player*) override final;

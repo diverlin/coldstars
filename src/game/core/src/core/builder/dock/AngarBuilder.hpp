@@ -25,9 +25,11 @@ namespace descriptor {
 class Angar;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Angar;
 } // namespace control
+}
 
 const unsigned int ANGAR_ITEM_SLOTS_NUM = 10;
 const unsigned int ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM = 6;
@@ -39,15 +41,15 @@ namespace builder {
 class Angar
 {
 public:
-    static control::Angar* gen();
-    static control::Angar* gen(descriptor::Angar*);
+    static core::control::Angar* gen();
+    static core::control::Angar* gen(descriptor::Angar*);
 
 private:
     Angar() = delete;
     ~Angar() = delete;
 
-    static void __createInternals(control::Angar*);
-    static control::Angar* __createTemplate(descriptor::Angar*);
+    static void __createInternals(core::control::Angar*);
+    static core::control::Angar* __createTemplate(descriptor::Angar*);
 }; 
 
 } // namespace builder

@@ -50,7 +50,7 @@ Lazer::Lazer()
     setType(descriptor::Type::LAZER_EQUIPMENT);
     setObType(entity::Type::LAZER_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(slot::Type::WEAPON);
+    setSlotType(core::slot::Type::WEAPON);
 }
 
 Lazer::Lazer(const std::string& data)

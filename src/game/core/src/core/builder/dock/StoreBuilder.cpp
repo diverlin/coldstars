@@ -46,7 +46,7 @@
 
 namespace builder {
 
-control::Store*
+core::control::Store*
 Store::gen()
 {
     descriptor::Store* descr = nullptr;
@@ -58,23 +58,23 @@ Store::gen()
     return gen(descr);
 } 
 
-control::Store*
+core::control::Store*
 Store::gen(descriptor::Store* descr)
 {
-    control::Store* store = __createTemplate(descr);
+    core::control::Store* store = __createTemplate(descr);
     __createInternals(store);
     __putRandomEquipment(store);
 
     return store;
 }
 
-control::Store*
+core::control::Store*
 Store::__createTemplate(descriptor::Store* descr)
 {
     model::Store* model = new model::Store(descr->id());
     assert(model);
 
-    control::Store* store = new control::Store(descr, model);
+    core::control::Store* store = new core::control::Store(descr, model);
     assert(store);
 
     core::shortcuts::entities()->add(store);
@@ -83,13 +83,13 @@ Store::__createTemplate(descriptor::Store* descr)
 }
 
 void
-Store::__createInternals(control::Store* store)
+Store::__createInternals(core::control::Store* store)
 {
 
 }
 
 void
-Store::__putRandomEquipment(control::Store* store)
+Store::__putRandomEquipment(core::control::Store* store)
 {
     //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
     //int revision_id = 0;

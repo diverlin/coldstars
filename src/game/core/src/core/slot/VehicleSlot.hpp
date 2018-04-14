@@ -21,6 +21,10 @@
 
 #include <core/slot/BaseSlot.hpp>
 
+
+
+namespace core {
+
 namespace control {
 class Vehicle;
 } // naemspace control
@@ -55,3 +59,4 @@ private:
 }; 
 
 } // namespace slot
+} // namespace core

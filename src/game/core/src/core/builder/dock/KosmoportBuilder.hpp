@@ -25,24 +25,26 @@ namespace descriptor {
 class Kosmoport;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Kosmoport;
 } // namespace control
+}
 
 namespace builder {
 
 class Kosmoport
 {
 public:
-    static control::Kosmoport* gen();
-    static control::Kosmoport* gen(descriptor::Kosmoport*);
+    static core::control::Kosmoport* gen();
+    static core::control::Kosmoport* gen(descriptor::Kosmoport*);
 
 private:
     Kosmoport() = delete;
     ~Kosmoport() = delete;
 
-    static control::Kosmoport* __createTemplate(descriptor::Kosmoport*);
-    static void __createInternals(control::Kosmoport*, descriptor::Kosmoport*);
+    static core::control::Kosmoport* __createTemplate(descriptor::Kosmoport*);
+    static void __createInternals(core::control::Kosmoport*, descriptor::Kosmoport*);
 }; 
 
 } // namespace builder

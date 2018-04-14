@@ -33,7 +33,7 @@
 
 namespace builder {
 
-control::Galaxy*
+core::control::Galaxy*
 Galaxy::gen()
 {
     descriptor::Galaxy* descr = nullptr;
@@ -45,36 +45,36 @@ Galaxy::gen()
     return gen(descr);
 }
 
-control::Galaxy*
+core::control::Galaxy*
 Galaxy::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::Galaxy* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
-    control::Galaxy* sector = __genTemplate(descriptor, object_id);
+    core::control::Galaxy* sector = __genTemplate(descriptor, object_id);
     __createInternals(sector, descriptor);
     return sector;
 }
 
-control::Galaxy*
+core::control::Galaxy*
 Galaxy::gen(descriptor::Galaxy* descriptor)
 {
-    control::Galaxy* galaxy = __genTemplate(descriptor);
+    core::control::Galaxy* galaxy = __genTemplate(descriptor);
     __createInternals(galaxy, descriptor);
     return galaxy;
 } 
 
-control::Galaxy*
+core::control::Galaxy*
 Galaxy::__genTemplate(descriptor::Galaxy* descriptor, int_t object_id)
 {
     model::Galaxy* model = new model::Galaxy(descriptor->id(), object_id);
     assert(model);
 
-    control::Galaxy* galaxy = new control::Galaxy(descriptor, model);
+    core::control::Galaxy* galaxy = new core::control::Galaxy(descriptor, model);
     assert(galaxy);
 
     return galaxy;
 }
 
-void Galaxy::__createInternals(control::Galaxy* galaxy, descriptor::Galaxy* descr)
+void Galaxy::__createInternals(core::control::Galaxy* galaxy, descriptor::Galaxy* descr)
 {
      // see composer, all logic there
 }

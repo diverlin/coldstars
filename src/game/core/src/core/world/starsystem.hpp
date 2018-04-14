@@ -32,35 +32,6 @@
 
 #include <vector>
 
-namespace model {
-class StarSystem;
-class Star;
-class Planet;
-class Asteroid;
-class WormHole;
-class Container;
-class Bullet;
-class Vehicle;
-class SpaceStation;
-class Ship;
-class Satellite;
-class Npc;
-} // namespace model
-
-namespace control {
-class Star;
-class Planet;
-class Asteroid;
-class WormHole;
-class Container;
-class Bullet;
-class SpaceStation;
-class Ship;
-class Satellite;
-class Vehicle;
-} // namespace model
-
-
 class Player;
 
 class Sector;
@@ -86,6 +57,36 @@ private:
     int m_damage = 0;
     int m_radius = 0;
 };
+
+namespace model {
+class StarSystem;
+class Star;
+class Planet;
+class Asteroid;
+class WormHole;
+class Container;
+class Bullet;
+class Vehicle;
+class SpaceStation;
+class Ship;
+class Satellite;
+class Npc;
+} // namespace model
+
+namespace core {
+
+namespace control {
+class Star;
+class Planet;
+class Asteroid;
+class WormHole;
+class Container;
+class Bullet;
+class SpaceStation;
+class Ship;
+class Satellite;
+class Vehicle;
+} // namespace control
 
 namespace control {
 
@@ -238,3 +239,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

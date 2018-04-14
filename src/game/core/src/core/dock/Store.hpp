@@ -29,6 +29,8 @@ namespace model {
 class Store;
 } // namespace model
 
+namespace core {
+
 namespace slot {
 class Vehicle;
 class Item;
@@ -84,6 +86,6 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 

@@ -25,9 +25,11 @@ namespace descriptor {
 class Star;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Star;
 } // namespace control
+}
 
 namespace builder {
 
@@ -37,12 +39,12 @@ public:
     Star();
     ~Star();
 
-    static control::Star* gen();
-    static control::Star* gen(int_t, int_t);
-    static control::Star* gen(descriptor::Star*, int_t id = NONE);
+    static core::control::Star* gen();
+    static core::control::Star* gen(int_t, int_t);
+    static core::control::Star* gen(descriptor::Star*, int_t id = NONE);
 
 private:
-    static control::Star* __genTemplate(descriptor::Star*, int_t id = NONE);
+    static core::control::Star* __genTemplate(descriptor::Star*, int_t id = NONE);
 };
 
 } // namespace builder

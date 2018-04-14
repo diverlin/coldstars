@@ -30,6 +30,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -117,3 +118,4 @@ void Lazer::addUniqueInfo()
 
 } // namespace item
 } // namespace control
+} // namespace core

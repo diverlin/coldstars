@@ -32,7 +32,7 @@
 
 namespace gui {
 
-Item::Item(control::Item* item, const ceti::Box2D& box)
+Item::Item(core::control::Item* item, const ceti::Box2D& box)
     :
       m_item(item)
 {

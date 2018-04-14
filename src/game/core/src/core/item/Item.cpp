@@ -29,7 +29,7 @@
 
 #include <ceti/Logger.hpp>
 
-
+namespace core {
 namespace control {
 
 Item::Item(descriptor::Item* descr, model::Item* model)
@@ -109,3 +109,4 @@ void Item::_updateLock()
 }     
 
 } // namespace control
+} // namespace core

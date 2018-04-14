@@ -38,7 +38,7 @@
 
 namespace builder {
 
-control::Npc*
+core::control::Npc*
 Npc::gen()
 {
     descriptor::Npc* descriptor = nullptr;
@@ -51,36 +51,36 @@ Npc::gen()
     return gen(descriptor);
 }
 
-control::Npc*
+core::control::Npc*
 Npc::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Npc* descriptor = core::shortcuts::descriptors()->npc(descriptor_id);
     return gen(descriptor, id);
 }
 
-control::Npc*
+core::control::Npc*
 Npc::gen(descriptor::Npc* descriptor, int_t id)
 {
-    control::Npc* npc = __createTemplate(descriptor, id);
+    core::control::Npc* npc = __createTemplate(descriptor, id);
     __createInternals(npc, descriptor);
     
     return npc;
 }
 
-control::Npc*
+core::control::Npc*
 Npc::__createTemplate(descriptor::Npc* descr, int_t id)
 {
     model::Npc* model = new model::Npc(descr->id(), id);
     assert(model);
 
-    control::Npc* npc = new control::Npc(descr, model);
+    core::control::Npc* npc = new core::control::Npc(descr, model);
     assert(npc);
 
     return npc;
 }
 
 void
-Npc::__createInternals(control::Npc* npc, descriptor::Npc* descr)
+Npc::__createInternals(core::control::Npc* npc, descriptor::Npc* descr)
 {
     // assert(false); assert(false);
 //    //LifeData data_life;

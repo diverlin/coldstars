@@ -32,7 +32,7 @@
 namespace builder {
 namespace item {
 
-control::item::Protector*
+core::control::item::Protector*
 Protector::gen()
 {
     descriptor::item::Protector* descr = nullptr;
@@ -45,45 +45,45 @@ Protector::gen()
     return gen(descr);
 } 
 
-std::vector<control::item::Protector*>
+std::vector<core::control::item::Protector*>
 Protector::gen(int num)
 {
-    std::vector<control::item::Protector*> result;
+    std::vector<core::control::item::Protector*> result;
     for (int i=0; i<num; ++i) {
         result.push_back(gen());
     }
     return result;
 }
 
-control::item::Protector*
+core::control::item::Protector*
 Protector::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
-    control::item::Protector* protector = __genTemplate(descr, ob_id);
+    core::control::item::Protector* protector = __genTemplate(descr, ob_id);
     __createInternals(protector, descr);
     return protector;
 }
 
-control::item::Protector*
+core::control::item::Protector*
 Protector::gen(descriptor::item::Protector* descr)
 {
-    control::item::Protector* protector = __genTemplate(descr);
+    core::control::item::Protector* protector = __genTemplate(descr);
     __createInternals(protector, descr);
     return protector;
 }
 
-control::item::Protector*
+core::control::item::Protector*
 Protector::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
 {
     model::item::Protector* model = new model::item::Protector(descriptor->id(), id);
     assert(model);
-    control::item::Protector* protector = new control::item::Protector(descriptor, model);
+    core::control::item::Protector* protector = new core::control::item::Protector(descriptor, model);
     assert(protector);
     return protector;
 }
 
 void
-Protector::__createInternals(control::item::Protector* protector, descriptor::item::Protector* descr)
+Protector::__createInternals(core::control::item::Protector* protector, descriptor::item::Protector* descr)
 {     
     Item::_createInternals(protector, descr);
     Equipment::_createInternals(protector, descr);

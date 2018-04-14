@@ -95,7 +95,7 @@ GuiShop::GuiShop()
 GuiShop::~GuiShop()
 {}
 
-void GuiShop::bind(control::Shop* shop)
+void GuiShop::bind(core::control::Shop* shop)
 {
     m_shop = shop;
 }

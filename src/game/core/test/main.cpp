@@ -87,8 +87,8 @@ TEST(base, hit)
 {
     core::comm::TelegramHub& messageHub = core::global::get().telegramHub();
 
-    control::Ship* ship1 = builder::Ship::gen();
-    control::Ship* ship2 = builder::Ship::gen();
+    core::control::Ship* ship1 = builder::Ship::gen();
+    core::control::Ship* ship2 = builder::Ship::gen();
 
     assert(false);
 //    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
@@ -163,11 +163,11 @@ TEST(descriptor, manager)
 
 TEST(clone, galaxy)
 {
-    control::Galaxy* galaxy = builder::Galaxy::gen();
+    core::control::Galaxy* galaxy = builder::Galaxy::gen();
 
     // clone
     model::Galaxy* model = new model::Galaxy(galaxy->model()->data());
-    control::Galaxy* clone = new control::Galaxy(galaxy->descriptor(), model);
+    core::control::Galaxy* clone = new core::control::Galaxy(galaxy->descriptor(), model);
 
     EXPECT_EQ(galaxy->model()->data(), clone->model()->data());
 
@@ -178,11 +178,11 @@ TEST(clone, galaxy)
 
 TEST(clone, sector)
 {
-    control::Sector* sector = builder::Sector::gen();
+    core::control::Sector* sector = builder::Sector::gen();
 
     // clone
     model::Sector* model = new model::Sector(sector->model()->data());
-    control::Sector* clone = new control::Sector(sector->descriptor(), model);
+    core::control::Sector* clone = new core::control::Sector(sector->descriptor(), model);
 
     EXPECT_EQ(sector->model()->data(), clone->model()->data());
 
@@ -193,11 +193,11 @@ TEST(clone, sector)
 
 TEST(clone, starsystem)
 {
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     // clone
     model::StarSystem* model = new model::StarSystem(starsystem->model()->data());
-    control::StarSystem* clone = new control::StarSystem(starsystem->descriptor(), model);
+    core::control::StarSystem* clone = new core::control::StarSystem(starsystem->descriptor(), model);
 
     EXPECT_EQ(starsystem->model()->data(), clone->model()->data());
 
@@ -208,11 +208,11 @@ TEST(clone, starsystem)
 
 TEST(clone, asteroid)
 {
-    control::Asteroid* asteroid = builder::Asteroid::gen();
+    core::control::Asteroid* asteroid = builder::Asteroid::gen();
 
     // clone
     model::Asteroid* model = new model::Asteroid(asteroid->model()->data());
-    control::Asteroid* clone = new control::Asteroid(asteroid->descriptor(), model);
+    core::control::Asteroid* clone = new core::control::Asteroid(asteroid->descriptor(), model);
 
     EXPECT_EQ(asteroid->model()->data(), clone->model()->data());
 

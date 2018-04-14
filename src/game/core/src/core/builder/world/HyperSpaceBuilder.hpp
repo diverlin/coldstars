@@ -26,24 +26,26 @@ namespace descriptor {
 class HyperSpace;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class HyperSpace;
 } // namespace control
+}
 
 namespace builder {
 
 class HyperSpace
 {
 public:
-    static control::HyperSpace* gen(descriptor::HyperSpace*);
-    static control::HyperSpace* gen(int_t, int_t ob_id = NONE);
-    static control::HyperSpace* gen();
+    static core::control::HyperSpace* gen(descriptor::HyperSpace*);
+    static core::control::HyperSpace* gen(int_t, int_t ob_id = NONE);
+    static core::control::HyperSpace* gen();
 
 private:
     HyperSpace()=delete;
     ~HyperSpace()=delete;
 
-    static control::HyperSpace* __genTemplate(descriptor::HyperSpace*, int_t ob_id = NONE);
+    static core::control::HyperSpace* __genTemplate(descriptor::HyperSpace*, int_t ob_id = NONE);
 }; 
 
 } // namespace builder

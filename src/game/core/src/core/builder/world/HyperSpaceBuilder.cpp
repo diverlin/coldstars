@@ -32,7 +32,7 @@
 
 namespace builder {
 
-control::HyperSpace*
+core::control::HyperSpace*
 HyperSpace::gen()
 {
     descriptor::HyperSpace* descr = nullptr;
@@ -45,28 +45,28 @@ HyperSpace::gen()
     return gen(descr);
 }
 
-control::HyperSpace*
+core::control::HyperSpace*
 HyperSpace::gen(descriptor::HyperSpace* descr)
 {
-    control::HyperSpace* hyperspace = __genTemplate(descr);
+    core::control::HyperSpace* hyperspace = __genTemplate(descr);
     return hyperspace;
 } 
 
-control::HyperSpace*
+core::control::HyperSpace*
 HyperSpace::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::HyperSpace* descr = core::shortcuts::descriptors()->hyperSpace(descriptor_id);
-    control::HyperSpace* hyperspace = __genTemplate(descr, ob_id);
+    core::control::HyperSpace* hyperspace = __genTemplate(descr, ob_id);
     return hyperspace;
 }
 
-control::HyperSpace*
+core::control::HyperSpace*
 HyperSpace::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
 {
     model::HyperSpace* model = new model::HyperSpace(descr->id(), ob_id);
     assert(model);
 
-    control::HyperSpace* hyperspace = new control::HyperSpace(descr, model);
+    core::control::HyperSpace* hyperspace = new core::control::HyperSpace(descr, model);
     assert(hyperspace);
 
     core::shortcuts::entities()->setHyperSpace(hyperspace);

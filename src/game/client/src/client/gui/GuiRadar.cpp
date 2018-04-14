@@ -101,7 +101,7 @@ void Radar::_updateUnique(client::Player* player)
 
     // fill with entitites
     __reset();
-    control::StarSystem* starsystem = player->npc()->vehicle()->starsystem();
+    core::control::StarSystem* starsystem = player->npc()->vehicle()->starsystem();
     for (auto* star: starsystem->stars()) {
         __add(star);
     }
@@ -124,7 +124,7 @@ void Radar::_updateUnique(client::Player* player)
     }
 }
              
-void Radar::__add(control::SpaceObject* object)
+void Radar::__add(core::control::SpaceObject* object)
 {
     m_entities.push_back(object);
 
@@ -163,7 +163,7 @@ void Radar::__add(control::SpaceObject* object)
     }
 }
 
-void Radar::__addVisible(control::SpaceObject* object, control::Vehicle* vehicle)
+void Radar::__addVisible(core::control::SpaceObject* object, core::control::Vehicle* vehicle)
 {
     if (vehicle->canRadarObject(object)) {
         __add(object);

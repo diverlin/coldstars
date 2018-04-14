@@ -29,15 +29,17 @@ namespace model {
 class Container;
 } // namespace model
 
-namespace control {
-class Item;
-} // namespace control
+
+
+namespace core {
 
 namespace slot {
 class Item;
 } // namespace slot
 
 namespace control {
+
+class Item;
 
 class Container : public SpaceObject
 {
@@ -69,7 +71,7 @@ private:
     model::Container* m_model_container = nullptr;
 
     [[warning("remove this at all, we don't need slot here")]]
-    slot::Item* m_itemSlot = nullptr;
+    core::slot::Item* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;
 
@@ -77,6 +79,7 @@ private:
 };
 
 } // namespace control
+} // namespace core
 
 //class Container : public SpaceObject
 //{

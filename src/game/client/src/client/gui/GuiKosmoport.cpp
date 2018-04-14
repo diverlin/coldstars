@@ -125,7 +125,7 @@ void GuiKosmoport::SetPlayer(client::Player* player)
     //gui_store.SetPlayer(player);
 }    
 
-void GuiKosmoport::BindKosmoport(control::Kosmoport* kosmoport)
+void GuiKosmoport::BindKosmoport(core::control::Kosmoport* kosmoport)
 {
 #if GUI_LOG_ENABLED == 1
     Logger::Instance().Log("GuiKosmoport::BindKosmoport", GUI_LOG_DIP);

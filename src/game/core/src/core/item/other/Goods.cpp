@@ -21,6 +21,7 @@
 #include <core/descriptor/item/other/Goods.hpp>
 #include <core/model/item/other/Goods.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -62,7 +63,7 @@ void Goods::decrease(int amount) { m_model_goods->setAmount(m_model_goods->amoun
  
 } // namespace item
 } // namespace control
-
+} // namespace core
 
 //Goods* GetNewGoodsPack(entity::Type group, int_t id)
 //{

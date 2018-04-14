@@ -25,7 +25,7 @@
 
 namespace view {
 
-Star::Star(control::Star* star)
+Star::Star(core::control::Star* star)
     :
       Base(star)
     , m_star(star)

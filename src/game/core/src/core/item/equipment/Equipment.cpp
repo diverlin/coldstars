@@ -27,6 +27,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 
 Equipment::Equipment(descriptor::Item* descr, model::Item* model)
@@ -139,3 +140,4 @@ bool Equipment::InsertModule(BaseModule* module)
 //}
 
 } // namespace control
+} // namespace core

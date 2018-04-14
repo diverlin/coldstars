@@ -34,6 +34,7 @@
 #include <core/descriptor/dock/Shop.hpp>
 #include <core/model/dock/Shop.hpp>
 
+namespace core {
 namespace control {
 
 Shop::Shop(descriptor::Shop* descr, model::Shop* model)
@@ -283,4 +284,4 @@ void Shop::__updateExclusivePrice()
 //}
 
 } // namespace control
-
+} // namespace core

@@ -82,7 +82,7 @@
 
 //} // namespace model
 
-
+namespace core {
 namespace slot {
 
 Item::Item(slot::Type type)
@@ -386,3 +386,4 @@ void Item::log(const std::string& func_name) const
 }
 
 } // naespace slot
+} // namespace core

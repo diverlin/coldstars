@@ -22,15 +22,16 @@
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 
+namespace core {
 namespace complex {
 
-Base::Base(control::Vehicle* vehicle)
+Base::Base(core::control::Vehicle* vehicle)
     :
       m_vehicle(vehicle)
 {}
 
 bool
-Base::_checkDistanceToTarget(control::SpaceObject* target, int radius) const
+Base::_checkDistanceToTarget(core::control::SpaceObject* target, int radius) const
 {
     float dist = meti::distance(m_vehicle->position(), target->position());
     if (dist <= radius) {
@@ -40,7 +41,7 @@ Base::_checkDistanceToTarget(control::SpaceObject* target, int radius) const
 }
 
 STATUS
-Base::_checkTarget(control::SpaceObject* target) const
+Base::_checkTarget(core::control::SpaceObject* target) const
 {
     if (!__isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
@@ -55,21 +56,22 @@ Base::_checkTarget(control::SpaceObject* target) const
 }
 
 bool
-Base::__isTargetAlive(control::SpaceObject* target) const
+Base::__isTargetAlive(core::control::SpaceObject* target) const
 {
     return target->model()->isAlive();
 }
 
 bool
-Base::__isTargetInSpace(control::SpaceObject* target) const
+Base::__isTargetInSpace(core::control::SpaceObject* target) const
 {
     return (target->model()->place() == place::Type::SPACE);
 }
 
 bool
-Base::__isTargetInSameStarSystem(control::SpaceObject* target) const
+Base::__isTargetInSameStarSystem(core::control::SpaceObject* target) const
 {
     return (target->starsystem()->id() == m_vehicle->starsystem()->id());
 }
 
 } // namespace complex
+} // namespace core

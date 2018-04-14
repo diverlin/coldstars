@@ -20,16 +20,18 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Turrel;
 } // namespace control
+} // namespace core
 
 namespace view {
 
 class Turrel : public Base
 {
 public:
-    Turrel(control::Turrel*);
+    Turrel(core::control::Turrel*);
     ~Turrel();
 }; 
 

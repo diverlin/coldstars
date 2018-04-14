@@ -20,7 +20,7 @@
 
 #include <cassert>
 
-
+namespace core {
 namespace slot {
 
 std::string to_string(Type type)
@@ -49,6 +49,7 @@ std::string to_string(Type type)
 }
 
 } // namespace slot
+} // namespace core
 
 namespace entity {
 

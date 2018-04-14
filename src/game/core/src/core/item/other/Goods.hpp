@@ -32,6 +32,7 @@ class Goods;
 } // namespace item
 } // namespace model
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -53,6 +54,7 @@ private:
 
 } // namespace item
 } // namespace control
+} // namespace core
 
 //control::GoodsPack* GetNewGoodsPack(entity::Type, int_t id = NONE);
 

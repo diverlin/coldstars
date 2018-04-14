@@ -27,6 +27,7 @@ namespace model {
 class Asteroid;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Asteroid : public Planetoid
@@ -51,5 +52,5 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 

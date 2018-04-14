@@ -23,7 +23,7 @@
 
 namespace view {
 
-Satellite::Satellite(control::Satellite* satellite)
+Satellite::Satellite(core::control::Satellite* satellite)
     :
       Base(satellite)
     , m_satellite(satellite)

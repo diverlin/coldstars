@@ -34,6 +34,7 @@
 #include <core/descriptor/dock/Store.hpp>
 #include <core/model/dock/Store.hpp>
 
+namespace core {
 namespace control {
 
 Store::Store(descriptor::Store* descr, model::Store* model)
@@ -197,3 +198,4 @@ void Store::sellVehicle(Npc* npc, slot::Vehicle* vehicle_slot, int price)
 //}
 
 } // namespace control
+} // namespace core

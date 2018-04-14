@@ -27,6 +27,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -69,3 +70,4 @@ std::string Protector::protectionStr()
 
 } // namespace item
 } // namespace control
+} // namespace core

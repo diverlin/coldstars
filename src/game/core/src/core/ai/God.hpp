@@ -23,24 +23,23 @@
 #include <core/common/GameDate.hpp>
 #include <core/struct/StarSystemsConditionData.hpp>
 
-namespace control {
-class StarSystem;
-class Planet;
-}
 
 namespace model {
 class Galaxy;
 } // namespace model
-
-namespace control {
-class Galaxy;
-} // namespace control
 
 namespace descriptor {
 class Galaxy;
 } // namespace descriptor
 
 class StarSystemDescriptor;
+
+namespace core {
+namespace control {
+class Galaxy;
+class StarSystem;
+class Planet;
+} // namespace control
 
 class God
 {
@@ -71,7 +70,7 @@ private:
     control::Galaxy* m_galaxy = nullptr;
 }; 
 
-
+} // namespace core
 
 
 

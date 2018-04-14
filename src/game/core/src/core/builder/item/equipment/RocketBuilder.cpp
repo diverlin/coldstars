@@ -29,7 +29,7 @@
 namespace builder {
 namespace item {
 
-control::item::Rocket*
+core::control::item::Rocket*
 Rocket::gen()
 {
     descriptor::item::Rocket* descr = nullptr;
@@ -42,36 +42,36 @@ Rocket::gen()
     return gen(descr);
 }
 
-control::item::Rocket*
+core::control::item::Rocket*
 Rocket::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Rocket* descr = core::shortcuts::descriptors()->rocket(descriptor_id);
-    control::item::Rocket* rocket = __genTemplate(descr, ob_id);
+    core::control::item::Rocket* rocket = __genTemplate(descr, ob_id);
     __createInternals(rocket, descr);
     return rocket;
 }
 
-control::item::Rocket*
+core::control::item::Rocket*
 Rocket::gen(descriptor::item::Rocket* descr)
 {
-    control::item::Rocket* rocket = __genTemplate(descr);
+    core::control::item::Rocket* rocket = __genTemplate(descr);
     __createInternals(rocket, descr);
     return rocket;
 }
 
 
-control::item::Rocket*
+core::control::item::Rocket*
 Rocket::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
 {
     model::item::Rocket* model = new model::item::Rocket(descriptor->id(), id);
     assert(model);
-    control::item::Rocket* rocket = new control::item::Rocket(descriptor, model);
+    core::control::item::Rocket* rocket = new core::control::item::Rocket(descriptor, model);
     assert(rocket);
     return rocket;
 }
 
 void
-Rocket::__createInternals(control::item::Rocket* rocket, descriptor::item::Rocket* descr)
+Rocket::__createInternals(core::control::item::Rocket* rocket, descriptor::item::Rocket* descr)
 {     
     Item::_createInternals(rocket, descr);
     Equipment::_createInternals(rocket, descr);

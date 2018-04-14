@@ -103,7 +103,7 @@ StarSystem::add(std::shared_ptr<jeti::particlesystem::Base> ps, const glm::vec3&
 }
 
 void
-StarSystem::__updateVisible(control::StarSystem* starsystem)
+StarSystem::__updateVisible(core::control::StarSystem* starsystem)
 {
     __clear();
 
@@ -275,7 +275,7 @@ void StarSystem::__applyConstantRotationAnimation(const glm::vec3& axis, Base* v
 }
 
 bool
-StarSystem::__addIfVisible(control::Star* star)
+StarSystem::__addIfVisible(core::control::Star* star)
 {
     assert(star);
     if (!__isObjectOnScreen(star)) {
@@ -296,7 +296,7 @@ StarSystem::__addIfVisible(control::Star* star)
 }
 
 bool
-StarSystem::__addIfVisible(control::Planet* planet)
+StarSystem::__addIfVisible(core::control::Planet* planet)
 {
     assert(planet);
     if (!__isObjectOnScreen(planet)) {
@@ -317,7 +317,7 @@ StarSystem::__addIfVisible(control::Planet* planet)
 }
 
 bool
-StarSystem::__addIfVisible(control::Asteroid* asteroid)
+StarSystem::__addIfVisible(core::control::Asteroid* asteroid)
 {
     assert(asteroid);
     if (!__isObjectOnScreen(asteroid)) {
@@ -342,7 +342,7 @@ StarSystem::__addIfVisible(control::Asteroid* asteroid)
 
 
 bool
-StarSystem::__addIfVisible(control::Ship* ship)
+StarSystem::__addIfVisible(core::control::Ship* ship)
 {
     assert(ship);
     if (!__isObjectOnScreen(ship)) {
@@ -366,7 +366,7 @@ StarSystem::__addIfVisible(control::Ship* ship)
 }
 
 bool
-StarSystem::__addIfVisible(control::SpaceStation* spacestation)
+StarSystem::__addIfVisible(core::control::SpaceStation* spacestation)
 {
     assert(spacestation);
     if (!__isObjectOnScreen(spacestation)) {
@@ -389,7 +389,7 @@ StarSystem::__addIfVisible(control::SpaceStation* spacestation)
 }
 
 bool
-StarSystem::__addIfVisible(control::Satellite* satellite)
+StarSystem::__addIfVisible(core::control::Satellite* satellite)
 {
     assert(satellite);
     if (!__isObjectOnScreen(satellite)) {
@@ -411,7 +411,7 @@ StarSystem::__addIfVisible(control::Satellite* satellite)
     return true;
 }
 
-bool StarSystem::__addIfVisible(control::Container* container)
+bool StarSystem::__addIfVisible(core::control::Container* container)
 {
     assert(container);
     if (!__isObjectOnScreen(container)) {
@@ -434,7 +434,7 @@ bool StarSystem::__addIfVisible(control::Container* container)
     return true;
 }
 
-bool StarSystem::__addIfVisible(control::Bullet* bullet)
+bool StarSystem::__addIfVisible(core::control::Bullet* bullet)
 {
     assert(bullet);
     if (!__isObjectOnScreen(bullet)) {
@@ -456,7 +456,7 @@ bool StarSystem::__addIfVisible(control::Bullet* bullet)
     return true;
 }
 
-bool StarSystem::__addIfVisible(control::WormHole* wormhole)
+bool StarSystem::__addIfVisible(core::control::WormHole* wormhole)
 {
     assert(wormhole);
     if (!__isObjectOnScreen(wormhole)) {
@@ -939,7 +939,7 @@ void StarSystem::update(const glm::vec3& camera_accel)
     m_camera.update();
 }
 
-void StarSystem::render(control::StarSystem* starsystem)
+void StarSystem::render(core::control::StarSystem* starsystem)
 {   
 //    const auto now_time = std::chrono::steady_clock::now();
 //    float msec_diff = std::chrono::duration_cast<std::chrono::milliseconds>(now_time-m_lastTime).count();

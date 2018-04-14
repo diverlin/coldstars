@@ -21,6 +21,7 @@
 #include <vector>
 #include <string>
 
+namespace core {
 namespace slot {
 
 enum class Type {
@@ -42,6 +43,7 @@ enum class Type {
 
 std::string to_string(Type);
 } // namespace slot
+} // naemspace core
 
 namespace entity
 {

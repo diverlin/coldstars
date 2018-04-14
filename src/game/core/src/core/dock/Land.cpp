@@ -29,6 +29,7 @@
 #include <core/descriptor/dock/Land.hpp>
 #include <core/model/dock/Land.hpp>
 
+namespace core {
 namespace control {
 
 Land::Land(descriptor::Land* descr, model::Land* model)
@@ -43,6 +44,7 @@ Land::~Land()
 {}
 
 } // namespace control
+} // namespace core
 
 //void Land::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{
