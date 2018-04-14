@@ -29,6 +29,7 @@ class TelegramHandler;
 
 namespace control {
 class World;
+using WorldPtr = std::shared_ptr<World>;
 } // namespace control
 
 class Server {
@@ -37,12 +38,15 @@ public:
     Server(int id, bool dummy=false);
     ~Server();
 
+    core::Session* session() const { return m_session; }
+    control::World* world() const { return m_world.get(); }
+
     void update();
 
 private:
     int m_id = -1;
     core::Session* m_session = nullptr;
-    std::shared_ptr<control::World> m_world;
+    control::WorldPtr m_world;
     std::vector<core::Player*> m_players;
 
     std::shared_ptr<core::comm::TelegramHandler> m_telegramHandler;

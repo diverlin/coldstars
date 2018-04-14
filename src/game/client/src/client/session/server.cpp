@@ -88,6 +88,7 @@ Server::~Server()
 {
     core::Sessions::get().remove(m_id);
     core::global::get().telegramHub().unsubscribe(m_telegramHandler);
+    delete m_session;
 }
 
 void Server::__activate() const {
