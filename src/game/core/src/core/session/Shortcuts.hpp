@@ -21,10 +21,6 @@
 
 #include <memory>
 
-namespace descriptor {
-class Descriptors;
-} // namespace descriptor
-
 namespace type {
 class Collector;
 } // namespace type
@@ -34,13 +30,14 @@ namespace core {
 class Session;
 
 namespace manager {
+class Descriptors;
 class Entities;
 class Garbage;
 }; // namespace manager
 
 namespace shortcuts {
 core::Session* session();
-std::shared_ptr<descriptor::Descriptors> descriptors();
+std::shared_ptr<manager::Descriptors> descriptors();
 std::shared_ptr<core::manager::Entities> entities();
 std::shared_ptr<core::manager::Garbage> garbage();
 const type::Collector& types();
