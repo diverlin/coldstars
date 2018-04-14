@@ -21,6 +21,7 @@
 
 namespace core {
 class Player;
+class Session;
 namespace comm {
 class TelegramHandler;
 } // namepsace comm
@@ -40,6 +41,7 @@ public:
 
 private:
     int m_id = -1;
+    core::Session* m_session = nullptr;
     std::shared_ptr<control::World> m_world;
     std::vector<core::Player*> m_players;
 

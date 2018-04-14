@@ -18,12 +18,29 @@
 
 #include <gtest/gtest.h>
 
+#include <ceti/type/IdType.hpp>
+
 #include <client/session/server.hpp>
 #include <client/session/client.hpp>
+
+namespace {
+int_t createNewShip(Server& server) {
+    int_t id;
+
+    //server.session();
+    return id;
+}
+} // namespace
 
 TEST(world, dummy)
 {
     Server server(0, true);
     Client client(1);
+
+    int_t id = createNewShip(server);
+    // create ship on server side
+    // createShip(server, id);
+    // run loop
+    // validate server and client identity
 }
 

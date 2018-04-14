@@ -32,7 +32,6 @@ Sessions::get()
 void Sessions::remove(int id) {
     auto it = m_sessions.find(id);
     m_sessions.erase(it);
-    delete it->second;
 }
 
 void Sessions::add(int id, Session* session)
@@ -50,7 +49,8 @@ void Sessions::activate(int id) {
     m_active = id;
 }
 
-Session* Sessions::session() const {
+Session*
+Sessions::session() const {
     assert(m_sessions.size()>0);
     assert(m_active != -1);
     const auto& it = m_sessions.find(m_active);
