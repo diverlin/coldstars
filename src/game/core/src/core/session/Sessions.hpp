@@ -20,12 +20,10 @@
 # pragma once
 
 #include <map>
-#include <memory>
 
 namespace core {
 
 class Session;
-using SessionPtr = std::shared_ptr<Session*>;
 
 class Sessions
 {
@@ -46,7 +44,7 @@ public:
 
 private:
     int m_active = -1;
-    std::map<int, SessionPtr> m_sessions;
+    std::map<int, Session*> m_sessions;
 };
 
 } // namespace core
