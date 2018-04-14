@@ -22,7 +22,7 @@
 #include <memory>
 
 namespace descriptor {
-class Manager;
+class Descriptors;
 } // namespace descriptor
 
 namespace type {
@@ -40,7 +40,7 @@ class Garbage;
 
 namespace shortcuts {
 core::Session* session();
-std::shared_ptr<descriptor::Manager> descriptors();
+std::shared_ptr<descriptor::Descriptors> descriptors();
 std::shared_ptr<core::manager::Entities> entities();
 std::shared_ptr<core::manager::Garbage> garbage();
 const type::Collector& types();
