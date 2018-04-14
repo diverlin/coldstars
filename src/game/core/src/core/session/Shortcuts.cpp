@@ -32,7 +32,7 @@ core::Session* session() {
     return core::Sessions::get().session();
 }
 
-std::shared_ptr<descriptor::Descriptors> descriptors() {
+std::shared_ptr<manager::Descriptors> descriptors() {
     return core::Sessions::get().session()->descriptors();
 }
 

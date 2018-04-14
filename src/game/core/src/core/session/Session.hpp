@@ -38,10 +38,6 @@ class StarSystem;
 } // namespace view
 // workaround
 
-namespace descriptor {
-class Descriptors;
-}
-
 namespace type {
 class Collector;
 } // namespace type
@@ -49,6 +45,7 @@ class Collector;
 namespace core {
 
 namespace manager {
+class Descriptors;
 class Entities;
 class Garbage;
 } // namespace manager
@@ -60,7 +57,7 @@ public:
     Session(Type);
     virtual ~Session()=default;
 
-    std::shared_ptr<descriptor::Descriptors> descriptors() const { return m_descriptors; }
+    std::shared_ptr<manager::Descriptors> descriptors() const { return m_descriptors; }
     std::shared_ptr<manager::Entities> entities() const { return m_entities; }
     std::shared_ptr<manager::Garbage> garbage() const { return m_garbage; }
     const type::Collector& types() const { return *m_types; }
@@ -84,7 +81,7 @@ private:
     Type m_type = Type::NONE;
     TurnTimer m_turnTimer;
 
-    std::shared_ptr<descriptor::Descriptors> m_descriptors;
+    std::shared_ptr<manager::Descriptors> m_descriptors;
     std::shared_ptr<manager::Entities> m_entities;
     std::shared_ptr<manager::Garbage> m_garbage;
     type::Collector* m_types = nullptr;
