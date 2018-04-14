@@ -82,13 +82,13 @@ class Goods;
 
 class Turrel;
 
-class Manager
+class Descriptors
 {
 public:
-    Manager();
-    Manager(const Manager&) = delete;
-    ~Manager() = default;
-    Manager& operator=(const Manager&) = delete;
+    Descriptors();
+    Descriptors(const Descriptors&) = delete;
+    ~Descriptors() = default;
+    Descriptors& operator=(const Descriptors&) = delete;
 
     void add(Base*);
     void add(Mesh*);

@@ -46,7 +46,7 @@ const std::string descriptor_materials_fname = "material_descriptors.txt";
 } // namespace
 
 
-Manager::Manager()
+Descriptors::Descriptors()
     :
       m_meshes(new Collector<Mesh>(""))
     , m_materials(new Collector<Material>(""))
@@ -65,7 +65,7 @@ Manager::Manager()
 }
 
 void
-Manager::add(Base* descr)
+Descriptors::add(Base* descr)
 {
     __resolveId(descr);
 
@@ -94,28 +94,28 @@ Manager::add(Base* descr)
 }
 
 void
-Manager::add(Mesh* descr)
+Descriptors::add(Mesh* descr)
 {
     __resolveId(descr);
     m_meshes->add(descr);
 }
 
 void
-Manager::add(Material* descr)
+Descriptors::add(Material* descr)
 {
     __resolveId(descr);
     m_materials->add(descr);
 }
 
 bool
-Manager::hasType(Type type) const
+Descriptors::hasType(Type type) const
 {
     std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
     return (it != m_descriptorsTypes.end());
 }
 
 Base*
-Manager::get(int_t id) const
+Descriptors::get(int_t id) const
 {
     assert(id != NONE);
     const auto it = m_descriptors.find(id);
@@ -127,7 +127,7 @@ Manager::get(int_t id) const
 }
 
 Base*
-Manager::rand(Type type) const
+Descriptors::rand(Type type) const
 {
     std::map<Type, std::vector<Base*>>::const_iterator it = m_descriptorsTypes.find(type);
     if (it == m_descriptorsTypes.end()) {
@@ -139,28 +139,28 @@ Manager::rand(Type type) const
 }
 
 Galaxy*
-Manager::randGalaxy() const
+Descriptors::randGalaxy() const
 {
     Galaxy* descr = static_cast<Galaxy*>(rand(Type::GALAXY));
     assert(descr);
     return descr;
 }
 Sector*
-Manager::randSector() const
+Descriptors::randSector() const
 {
     Sector* descr = static_cast<Sector*>(rand(Type::SECTOR));
     assert(descr);
     return descr;
 }
 StarSystem*
-Manager::randStarSystem() const
+Descriptors::randStarSystem() const
 {
     StarSystem* descr = static_cast<StarSystem*>(rand(Type::STARSYSTEM));
     assert(descr);
     return descr;
 }
 HyperSpace*
-Manager::randHyperSpace() const
+Descriptors::randHyperSpace() const
 {
     HyperSpace* descr = static_cast<HyperSpace*>(rand(Type::HYPERSPACE));
     assert(descr);
@@ -168,42 +168,42 @@ Manager::randHyperSpace() const
 }
 
 Star*
-Manager::randStar() const
+Descriptors::randStar() const
 {
     Star* descr = static_cast<Star*>(rand(Type::STAR));
     assert(descr);
     return descr;
 }
 Planet*
-Manager::randPlanet() const
+Descriptors::randPlanet() const
 {
     Planet* descr = static_cast<Planet*>(rand(Type::PLANET));
     assert(descr);
     return descr;
 }
 WormHole*
-Manager::randWormHole() const
+Descriptors::randWormHole() const
 {
     WormHole* descr = static_cast<WormHole*>(rand(Type::WORMHOLE));
     assert(descr);
     return descr;
 }
 Asteroid*
-Manager::randAsteroid() const
+Descriptors::randAsteroid() const
 {
     Asteroid* descr = static_cast<Asteroid*>(rand(Type::ASTEROID));
     assert(descr);
     return descr;
 }
 Container*
-Manager::randContainer() const
+Descriptors::randContainer() const
 {
     Container* descr = static_cast<Container*>(rand(Type::CONTAINER));
     assert(descr);
     return descr;
 }
 Bullet*
-Manager::randBullet() const
+Descriptors::randBullet() const
 {
     Bullet* descr = static_cast<Bullet*>(rand(Type::BULLET));
     assert(descr);
@@ -211,7 +211,7 @@ Manager::randBullet() const
 }
 
 Npc*
-Manager::randNpc() const
+Descriptors::randNpc() const
 {
     Npc* descr = static_cast<Npc*>(rand(Type::NPC));
     assert(descr);
@@ -219,21 +219,21 @@ Manager::randNpc() const
 }
 
 Ship*
-Manager::randShip() const
+Descriptors::randShip() const
 {
     Ship* descr = static_cast<Ship*>(rand(Type::SHIP));
     assert(descr);
     return descr;
 }
 Satellite*
-Manager::randSatellite() const
+Descriptors::randSatellite() const
 {
     Satellite* descr = static_cast<Satellite*>(rand(Type::SATELLITE));
     assert(descr);
     return descr;
 }
 SpaceStation*
-Manager::randSpaceStation() const
+Descriptors::randSpaceStation() const
 {
     SpaceStation* descr = static_cast<SpaceStation*>(rand(Type::SPACESTATION));
     assert(descr);
@@ -242,42 +242,42 @@ Manager::randSpaceStation() const
 
 // dock
 Kosmoport*
-Manager::randKosmoport() const
+Descriptors::randKosmoport() const
 {
     Kosmoport* descr = static_cast<Kosmoport*>(rand(Type::KOSMOPORT));
     assert(descr);
     return descr;
 }
 NatureLand*
-Manager::randNatureLand() const
+Descriptors::randNatureLand() const
 {
     NatureLand* descr = static_cast<NatureLand*>(rand(Type::NATURELAND));
     assert(descr);
     return descr;
 }
 Angar*
-Manager::randAngar() const
+Descriptors::randAngar() const
 {
     Angar* descr = static_cast<Angar*>(rand(Type::ANGAR));
     assert(descr);
     return descr;
 }
 Store*
-Manager::randStore() const
+Descriptors::randStore() const
 {
     Store* descr = static_cast<Store*>(rand(Type::STORE));
     assert(descr);
     return descr;
 }
 Shop*
-Manager::randShop() const
+Descriptors::randShop() const
 {
     Shop* descr = static_cast<Shop*>(rand(Type::SHOP));
     assert(descr);
     return descr;
 }
 Goverment*
-Manager::randGoverment() const
+Descriptors::randGoverment() const
 {
     Goverment* descr = static_cast<Goverment*>(rand(Type::GOVERMENT));
     assert(descr);
@@ -286,7 +286,7 @@ Manager::randGoverment() const
 
 // items
 item::Scaner*
-Manager::randScaner() const
+Descriptors::randScaner() const
 {
     item::Scaner* descr = static_cast<item::Scaner*>(rand(Type::SCANER_EQUIPMENT));
     assert(descr);
@@ -294,7 +294,7 @@ Manager::randScaner() const
 }
 
 item::Drive*
-Manager::randDrive() const
+Descriptors::randDrive() const
 {
     item::Drive* descr = static_cast<item::Drive*>(rand(Type::DRIVE_EQUIPMENT));
     assert(descr);
@@ -302,7 +302,7 @@ Manager::randDrive() const
 }
 
 item::Bak*
-Manager::randBak() const
+Descriptors::randBak() const
 {
     item::Bak* descr = static_cast<item::Bak*>(rand(Type::BAK_EQUIPMENT));
     assert(descr);
@@ -310,7 +310,7 @@ Manager::randBak() const
 }
 
 item::Droid*
-Manager::randDroid() const
+Descriptors::randDroid() const
 {
     item::Droid* descr = static_cast<item::Droid*>(rand(Type::DROID_EQUIPMENT));
     assert(descr);
@@ -318,7 +318,7 @@ Manager::randDroid() const
 }
 
 item::Grapple*
-Manager::randGrapple() const
+Descriptors::randGrapple() const
 {
     item::Grapple* descr = static_cast<item::Grapple*>(rand(Type::GRAPPLE_EQUIPMENT));
     assert(descr);
@@ -326,7 +326,7 @@ Manager::randGrapple() const
 }
 
 item::Lazer*
-Manager::randLazer() const
+Descriptors::randLazer() const
 {
     item::Lazer* descr = static_cast<item::Lazer*>(rand(Type::LAZER_EQUIPMENT));
     assert(descr);
@@ -334,7 +334,7 @@ Manager::randLazer() const
 }
 
 item::Protector*
-Manager::randProtector() const
+Descriptors::randProtector() const
 {
     item::Protector* descr = static_cast<item::Protector*>(rand(Type::PROTECTOR_EQUIPMENT));
     assert(descr);
@@ -342,7 +342,7 @@ Manager::randProtector() const
 }
 
 item::Radar*
-Manager::randRadar() const
+Descriptors::randRadar() const
 {
     item::Radar* descr = static_cast<item::Radar*>(rand(Type::RADAR_EQUIPMENT));
     assert(descr);
@@ -350,7 +350,7 @@ Manager::randRadar() const
 }
 
 item::Rocket*
-Manager::randRocket() const
+Descriptors::randRocket() const
 {
     item::Rocket* descr = static_cast<item::Rocket*>(rand(Type::ROCKET_EQUIPMENT));
     assert(descr);
@@ -358,7 +358,7 @@ Manager::randRocket() const
 }
 
 item::Goods*
-Manager::randGoods() const
+Descriptors::randGoods() const
 {
     item::Goods* descriptor = static_cast<item::Goods*>(rand(Type::GOODS));
     assert(descriptor);
@@ -367,7 +367,7 @@ Manager::randGoods() const
 
 // parts
 Turrel*
-Manager::randTurrel() const
+Descriptors::randTurrel() const
 {
     Turrel* descr = static_cast<Turrel*>(rand(Type::TURREL));
     assert(descr);
@@ -375,28 +375,28 @@ Manager::randTurrel() const
 }
 
 Galaxy*
-Manager::galaxy(int_t id) const
+Descriptors::galaxy(int_t id) const
 {
     Galaxy* descr = static_cast<Galaxy*>(get(id));
     assert(descr);
     return descr;
 }
 Sector*
-Manager::sector(int_t id) const
+Descriptors::sector(int_t id) const
 {
     Sector* descr = static_cast<Sector*>(get(id));
     assert(descr);
     return descr;
 }
 StarSystem*
-Manager::starSystem(int_t id) const
+Descriptors::starSystem(int_t id) const
 {
     StarSystem* descr = static_cast<StarSystem*>(get(id));
     assert(descr);
     return descr;
 }
 HyperSpace*
-Manager::hyperSpace(int_t id) const
+Descriptors::hyperSpace(int_t id) const
 {
     HyperSpace* descr = static_cast<HyperSpace*>(get(id));
     assert(descr);
@@ -404,42 +404,42 @@ Manager::hyperSpace(int_t id) const
 }
 
 Star*
-Manager::star(int_t id) const
+Descriptors::star(int_t id) const
 {
     Star* descr = static_cast<Star*>(get(id));
     assert(descr);
     return descr;
 }
 Planet*
-Manager::planet(int_t id) const
+Descriptors::planet(int_t id) const
 {
     Planet* descr = static_cast<Planet*>(get(id));
     assert(descr);
     return descr;
 }
 WormHole*
-Manager::wormHole(int_t id) const
+Descriptors::wormHole(int_t id) const
 {
     WormHole* descr = static_cast<WormHole*>(get(id));
     assert(descr);
     return descr;
 }
 Asteroid*
-Manager::asteroid(int_t id) const
+Descriptors::asteroid(int_t id) const
 {
     Asteroid* descr = static_cast<Asteroid*>(get(id));
     assert(descr);
     return descr;
 }
 Container*
-Manager::container(int_t id) const
+Descriptors::container(int_t id) const
 {
     Container* descr = static_cast<Container*>(get(id));
     assert(descr);
     return descr;
 }
 Bullet*
-Manager::bullet(int_t id) const
+Descriptors::bullet(int_t id) const
 {
     Bullet* descr = static_cast<Bullet*>(get(id));
     assert(descr);
@@ -447,7 +447,7 @@ Manager::bullet(int_t id) const
 }
 
 Npc*
-Manager::npc(int_t id) const
+Descriptors::npc(int_t id) const
 {
     Npc* descr = static_cast<Npc*>(get(id));
     assert(descr);
@@ -455,21 +455,21 @@ Manager::npc(int_t id) const
 }
 
 Ship*
-Manager::ship(int_t id) const
+Descriptors::ship(int_t id) const
 {
     Ship* descr = static_cast<Ship*>(get(id));
     assert(descr);
     return descr;
 }
 Satellite*
-Manager::satellite(int_t id) const
+Descriptors::satellite(int_t id) const
 {
     Satellite* descr = static_cast<Satellite*>(get(id));
     assert(descr);
     return descr;
 }
 SpaceStation*
-Manager::spaceStation(int_t id) const
+Descriptors::spaceStation(int_t id) const
 {
     SpaceStation* descr = static_cast<SpaceStation*>(get(id));
     assert(descr);
@@ -478,42 +478,42 @@ Manager::spaceStation(int_t id) const
 
 // dock
 Kosmoport*
-Manager::kosmoport(int_t id) const
+Descriptors::kosmoport(int_t id) const
 {
     Kosmoport* descr = static_cast<Kosmoport*>(get(id));
     assert(descr);
     return descr;
 }
 NatureLand*
-Manager::natureLand(int_t id) const
+Descriptors::natureLand(int_t id) const
 {
     NatureLand* descr = static_cast<NatureLand*>(get(id));
     assert(descr);
     return descr;
 }
 Angar*
-Manager::angar(int_t id) const
+Descriptors::angar(int_t id) const
 {
     Angar* descr = static_cast<Angar*>(get(id));
     assert(descr);
     return descr;
 }
 Store*
-Manager::store(int_t id) const
+Descriptors::store(int_t id) const
 {
     Store* descr = static_cast<Store*>(get(id));
     assert(descr);
     return descr;
 }
 Shop*
-Manager::shop(int_t id) const
+Descriptors::shop(int_t id) const
 {
     Shop* descr = static_cast<Shop*>(get(id));
     assert(descr);
     return descr;
 }
 Goverment*
-Manager::goverment(int_t id) const
+Descriptors::goverment(int_t id) const
 {
     Goverment* descr = static_cast<Goverment*>(get(id));
     assert(descr);
@@ -523,7 +523,7 @@ Manager::goverment(int_t id) const
 
 // items
 item::Scaner*
-Manager::scaner(int_t id) const
+Descriptors::scaner(int_t id) const
 {
     item::Scaner* descr = static_cast<item::Scaner*>(get(id));
     assert(descr);
@@ -531,14 +531,14 @@ Manager::scaner(int_t id) const
 }
 
 item::Drive*
-Manager::drive(int_t id) const
+Descriptors::drive(int_t id) const
 {
     item::Drive* descr = static_cast<item::Drive*>(get(id));
     assert(descr);
     return descr;
 }
 item::Bak*
-Manager::bak(int_t id) const
+Descriptors::bak(int_t id) const
 {
     item::Bak* descr = static_cast<item::Bak*>(get(id));
     assert(descr);
@@ -546,7 +546,7 @@ Manager::bak(int_t id) const
 }
 
 item::Droid*
-Manager::droid(int_t id) const
+Descriptors::droid(int_t id) const
 {
     Base* base = get(id);
     item::Droid* descr = static_cast<item::Droid*>(base);
@@ -555,7 +555,7 @@ Manager::droid(int_t id) const
 }
 
 item::Grapple*
-Manager::grapple(int_t id) const
+Descriptors::grapple(int_t id) const
 {
     item::Grapple* descr = static_cast<item::Grapple*>(get(id));
     assert(descr);
@@ -563,7 +563,7 @@ Manager::grapple(int_t id) const
 }
 
 item::Lazer*
-Manager::lazer(int_t id) const
+Descriptors::lazer(int_t id) const
 {
     item::Lazer* descr = static_cast<item::Lazer*>(get(id));
     assert(descr);
@@ -571,7 +571,7 @@ Manager::lazer(int_t id) const
 }
 
 item::Protector*
-Manager::protector(int_t id) const
+Descriptors::protector(int_t id) const
 {
     item::Protector* descr = static_cast<item::Protector*>(get(id));
     assert(descr);
@@ -579,7 +579,7 @@ Manager::protector(int_t id) const
 }
 
 item::Radar*
-Manager::radar(int_t id) const
+Descriptors::radar(int_t id) const
 {
     item::Radar* descr = static_cast<item::Radar*>(get(id));
     assert(descr);
@@ -587,7 +587,7 @@ Manager::radar(int_t id) const
 }
 
 item::Rocket*
-Manager::rocket(int_t id) const
+Descriptors::rocket(int_t id) const
 {
     item::Rocket* descr = static_cast<item::Rocket*>(get(id));
     assert(descr);
@@ -596,7 +596,7 @@ Manager::rocket(int_t id) const
 
 // other
 item::Goods*
-Manager::goods(int_t id) const
+Descriptors::goods(int_t id) const
 {
     item::Goods* descriptor = static_cast<item::Goods*>(get(id));
     assert(descriptor);
@@ -605,7 +605,7 @@ Manager::goods(int_t id) const
 
 
 Mesh*
-Manager::mesh(int_t id) const
+Descriptors::mesh(int_t id) const
 {
     Mesh* mesh = m_meshes->get(id);
     assert(mesh);
@@ -613,7 +613,7 @@ Manager::mesh(int_t id) const
 }
 
 Material*
-Manager::material(int_t id) const
+Descriptors::material(int_t id) const
 {
     Material* material = m_materials->get(id);
     assert(material);
@@ -621,7 +621,7 @@ Manager::material(int_t id) const
 }
 
 Mesh*
-Manager::randMesh(mesh::Type type) const
+Descriptors::randMesh(mesh::Type type) const
 {
     Mesh* mesh = m_meshes->random(int_t(type));
     assert(mesh);
@@ -629,7 +629,7 @@ Manager::randMesh(mesh::Type type) const
 }
 
 Material*
-Manager::randMaterial(texture::Type type) const
+Descriptors::randMaterial(texture::Type type) const
 {
     Material* material = m_materials->random(int_t(type));
     assert(material);
@@ -637,7 +637,7 @@ Manager::randMaterial(texture::Type type) const
 }
 
 void
-Manager::__save()
+Descriptors::__save()
 {
 //    assert(false);
 //    std::fstream filestream;
@@ -656,7 +656,7 @@ Manager::__save()
 }
 
 void
-Manager::__load()
+Descriptors::__load()
 {
     assert(false);
 //    __clear();
@@ -676,14 +676,14 @@ Manager::__load()
 }
 
 void
-Manager::__clear()
+Descriptors::__clear()
 {
     m_descriptors.clear();
     m_descriptorsTypes.clear();
 }
 
 void
-Manager::generate()
+Descriptors::generate()
 {
     ceti::filesystem::create_file(descriptors_fname);
 
@@ -747,7 +747,7 @@ Manager::generate()
 }
 
 void
-Manager::clear()
+Descriptors::clear()
 {
     if (m_meshes) {
         assert(false);
@@ -769,7 +769,7 @@ Manager::clear()
 }
 
 void
-Manager::__resolveId(Base* descr) {
+Descriptors::__resolveId(Base* descr) {
 
     if (descr->id() == NONE) {
         descr->setId(m_idGenerator.nextId());
@@ -777,14 +777,14 @@ Manager::__resolveId(Base* descr) {
 }
 
 void
-Manager::__resolveId(ceti::descriptor::Base* descr) {
+Descriptors::__resolveId(ceti::descriptor::Base* descr) {
     if (descr->id() == NONE) {
         descr->setId(m_idGenerator.nextId());
     }
 }
 
 ceti::pack<int_t>
-Manager::__ids(Type type) const
+Descriptors::__ids(Type type) const
 {
     ceti::pack<int_t> result;
 

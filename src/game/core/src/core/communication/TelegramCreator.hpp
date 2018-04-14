@@ -28,7 +28,7 @@
 
 namespace descriptor {
 class Galaxy;
-class Manager;
+class Descriptors;
 } // namespace descriptor
 
 namespace control {

@@ -33,7 +33,7 @@ class GameDate;
 class RaceDescriptors;
 
 namespace descriptor {
-class Manager;
+class Descriptors;
 } // namespace descriptor
 
 namespace core {
