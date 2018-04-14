@@ -33,15 +33,15 @@ core::Session* session() {
 }
 
 std::shared_ptr<descriptor::Manager> descriptors() {
-    return core::Sessions::get().session()->descriptorsManager();
+    return core::Sessions::get().session()->descriptors();
 }
 
-std::shared_ptr<core::manager::Entity> entities() {
-    return core::Sessions::get().session()->entitiesManager();
+std::shared_ptr<core::manager::Entities> entities() {
+    return core::Sessions::get().session()->entities();
 }
 
 std::shared_ptr<core::manager::Garbage> garbage() {
-    return core::Sessions::get().session()->garbageManager();
+    return core::Sessions::get().session()->garbage();
 }
 
 const type::Collector& types() {

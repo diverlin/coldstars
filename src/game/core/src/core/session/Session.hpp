@@ -49,7 +49,7 @@ class Collector;
 namespace core {
 
 namespace manager {
-class Entity;
+class Entities;
 class Garbage;
 } // namespace manager
 
@@ -60,9 +60,9 @@ public:
     Session(Type);
     virtual ~Session()=default;
 
-    std::shared_ptr<descriptor::Manager> descriptorsManager() const { return m_descriptorsManager; }
-    std::shared_ptr<manager::Entity> entitiesManager() const { return m_entitiesManager; }
-    std::shared_ptr<manager::Garbage> garbageManager() const { return m_garbageManager; }
+    std::shared_ptr<descriptor::Manager> descriptors() const { return m_descriptors; }
+    std::shared_ptr<manager::Entities> entities() const { return m_entities; }
+    std::shared_ptr<manager::Garbage> garbage() const { return m_garbage; }
     const type::Collector& types() const { return *m_types; }
 
     // interface
@@ -84,9 +84,9 @@ private:
     Type m_type = Type::NONE;
     TurnTimer m_turnTimer;
 
-    std::shared_ptr<descriptor::Manager> m_descriptorsManager;
-    std::shared_ptr<manager::Entity> m_entitiesManager;
-    std::shared_ptr<manager::Garbage> m_garbageManager;
+    std::shared_ptr<descriptor::Manager> m_descriptors;
+    std::shared_ptr<manager::Entities> m_entities;
+    std::shared_ptr<manager::Garbage> m_garbage;
     type::Collector* m_types = nullptr;
 };
 

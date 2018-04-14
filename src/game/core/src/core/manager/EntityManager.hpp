@@ -71,13 +71,13 @@ class Rocket;
 namespace core {
 namespace manager {
 
-class Entity
+class Entities
 {
 public:
-    Entity() = default;
-    Entity(const Entity&) = delete;
-    ~Entity() = default;
-    Entity& operator=(const Entity&) = delete;
+    Entities() = default;
+    Entities(const Entities&) = delete;
+    ~Entities() = default;
+    Entities& operator=(const Entities&) = delete;
 
 //    void saveRequest() { m_save_request = true; }
 //    void loadRequest() { m_load_request = true; }
