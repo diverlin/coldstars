@@ -30,6 +30,7 @@ namespace model {
 class Shop;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Npc;
@@ -102,3 +103,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

@@ -20,9 +20,11 @@
 
 #include <client/gui/MouseData.hpp>
 
+namespace core {
 namespace slot {
 class Item;
 } // namespace slot
+} // namespace core
 
 namespace model {
 class SpaceObject;
@@ -55,14 +57,14 @@ public:
     ~Cursor();
 
     void setFocusedView(view::Base* view) { m_focusedView = view; }
-    void setFocusedItemSlot(slot::Item* slot) { m_focusedItemSlot = slot; }
+    void setFocusedItemSlot(core::slot::Item* slot) { m_focusedItemSlot = slot; }
     void setFocusedGuiElement(Base* gui_element) { m_focusedGuiElement = gui_element; }
 
     view::Base* focusedView() const { return m_focusedView; }
 
     const MouseData& mouseData() const { return m_dataMouse; }
     MouseData& mouseData() { return m_dataMouse; }
-    slot::Item* itemSlot() const { return m_itemSlot; }
+    core::slot::Item* itemSlot() const { return m_itemSlot; }
 
     void update(client::Player*, const jeti::Render& render);
 
@@ -79,8 +81,8 @@ public:
 private:
     view::Base* m_focusedView = nullptr;
 
-    slot::Item* m_focusedItemSlot = nullptr;
-    slot::Item* m_itemSlot = nullptr;
+    core::slot::Item* m_focusedItemSlot = nullptr;
+    core::slot::Item* m_itemSlot = nullptr;
     gui::ButtonItemSlot* m_itemSlotGui = nullptr;
 
     MouseData m_dataMouse;

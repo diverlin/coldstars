@@ -59,7 +59,7 @@ GuiNatureLand::GuiNatureLand()
 GuiNatureLand::~GuiNatureLand()
 {}    
     
-void GuiNatureLand::BindNatureLand(control::NatureLand* natureland)
+void GuiNatureLand::BindNatureLand(core::control::NatureLand* natureland)
 {
 //    int screen_w = core::global::get().configVideo().width;
 //    int screen_h = core::global::get().configVideo().height;
@@ -71,7 +71,7 @@ void GuiNatureLand::BindNatureLand(control::NatureLand* natureland)
     
     m_rects_itemslots.clear();
 
-    for (slot::Item* slot: natureland->itemSlots())
+    for (core::slot::Item* slot: natureland->itemSlots())
     {
         // gen slot positions
         assert(false);

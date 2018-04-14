@@ -17,8 +17,7 @@
 */
 
 
-#ifndef STATUSTYPES_HPP
-#define STATUSTYPES_HPP
+#pragma once
 
 #include <string>
 
@@ -35,4 +34,4 @@ enum class STATUS
 std::string getTargetStatusStr(STATUS);
 
 
-#endif
+

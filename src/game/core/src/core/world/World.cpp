@@ -29,6 +29,7 @@
 #include <core/session/Session.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+namespace core {
 namespace control {
 
 World::World(bool dummy)
@@ -42,7 +43,7 @@ World::~World()
 
 Galaxy*
 World::galaxy() const {
-    return core::global::get().god().galaxy();
+    return global::get().god().galaxy();
 }
 
 bool World::run() const
@@ -59,3 +60,4 @@ void World::update()
 }
 
 } // namespace control
+} // namespace core

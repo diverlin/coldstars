@@ -20,9 +20,11 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class WormHole;
 } // namespace control
+} //
 
 //class ShockWaveEffect;
 
@@ -31,7 +33,7 @@ namespace view {
 class WormHole : public Base
 {
 public:
-    WormHole(control::WormHole*);
+    WormHole(core::control::WormHole*);
     virtual ~WormHole() override final;
 
 //    void bindShockWaveEffect(ShockWaveEffect* shockwave) { m_shockwave = shockwave; }
@@ -39,10 +41,10 @@ public:
 
 //    void UpdateInSpace(int, bool);
     void draw(const jeti::Render& render) const override final;
-    control::WormHole* control() const { return m_control; }
+    core::control::WormHole* control() const { return m_control; }
 
 private:
-    control::WormHole* m_control = nullptr;
+    core::control::WormHole* m_control = nullptr;
 //    ShockWaveEffect* m_shockwave;
 
     //        virtual void UpdateInfo() override final;

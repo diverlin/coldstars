@@ -37,9 +37,9 @@
 
 namespace gui {
 
-BaseButtonItemSlot::BaseButtonItemSlot(slot::Item* slot)
+BaseButtonItemSlot::BaseButtonItemSlot(core::slot::Item* slot)
     :
-      BaseButton(Type::NONE, Type::NONE, slot::to_string(slot->type()))
+      BaseButton(Type::NONE, Type::NONE, core::slot::to_string(slot->type()))
     , m_slot(slot)
 {
     m_material_mark_accept = new jeti::control::Material(gui::MaterialCollector::get().slot_mark_accept);
@@ -74,7 +74,7 @@ void BaseButtonItemSlot::__reset()
     m_itemView = nullptr;
 }
 
-void BaseButtonItemSlot::__createItemView(control::Item* item)
+void BaseButtonItemSlot::__createItemView(core::control::Item* item)
 {
     if (m_itemView) {
         __reset();
@@ -123,7 +123,7 @@ void BaseButtonItemSlot::_updateAnimation()
     if (!m_slot) {
         return;
     }
-    if (m_slot->type() == slot::Type::CARGO) {
+    if (m_slot->type() == core::slot::Type::CARGO) {
         return;
     }
     if (!m_slot->item()) {
@@ -158,15 +158,15 @@ void BaseButtonItemSlot::_drawItem(const jeti::Render& render) const
 
 void BaseButtonItemSlot::_drawMarkEmptySlot(const jeti::Render& render,
                                             const glm::vec2& screen_coord,
-                                            slot::Type type_to_mark) const
+                                            core::slot::Type type_to_mark) const
 {
     if (m_slot->item()) {
         return;
     }
-    if (m_slot->type() == slot::Type::GATE)  {
+    if (m_slot->type() == core::slot::Type::GATE)  {
         return;
     }
-    if ((type_to_mark == m_slot->type()) || (m_slot->type() == slot::Type::CARGO)) {
+    if ((type_to_mark == m_slot->type()) || (m_slot->type() == core::slot::Type::CARGO)) {
         render.drawQuad_HUD(box(), *m_material_mark_accept);
     } else {
         if (box().checkInteraction(screen_coord)) {

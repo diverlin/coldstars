@@ -29,14 +29,14 @@
 
 TEST(planet, create)
 {
-    control::Planet* planet = builder::Planet::gen();
+    core::control::Planet* planet = builder::Planet::gen();
     assert(planet->land());
 }
 
 TEST(planet, add_to_starsystem)
 {
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Planet* planet = builder::Planet::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Planet* planet = builder::Planet::gen();
 
     unsigned int planets_num_init = starsystem->planets().size();
     EXPECT_EQ(nullptr, planet->starsystem());

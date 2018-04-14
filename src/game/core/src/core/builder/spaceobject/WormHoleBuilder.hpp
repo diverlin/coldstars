@@ -25,9 +25,11 @@ namespace descriptor {
 class WormHole;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class WormHole;
 } // namespace control
+}
 
 namespace builder {
 
@@ -37,12 +39,12 @@ public:
     WormHole() = default;
     ~WormHole() = default;
 
-    static control::WormHole* gen();
-    static control::WormHole* gen(descriptor::WormHole*);
+    static core::control::WormHole* gen();
+    static core::control::WormHole* gen(descriptor::WormHole*);
 
 private:
-    static void __createInternals(control::WormHole*);
-    static control::WormHole* __genTemplate(descriptor::WormHole*);
+    static void __createInternals(core::control::WormHole*);
+    static core::control::WormHole* __genTemplate(descriptor::WormHole*);
 };
 
 } // namespace builder

@@ -29,7 +29,7 @@
 
 namespace builder {
 
-control::Turrel*
+core::control::Turrel*
 Turrel::gen()
 {
     descriptor::Turrel* descr = nullptr;
@@ -42,10 +42,10 @@ Turrel::gen()
     return gen(descr);
 }
 
-control::Turrel*
+core::control::Turrel*
 Turrel::gen(descriptor::Turrel* descr)
 {
-    control::Turrel* turrel = __genTemplate(descr);
+    core::control::Turrel* turrel = __genTemplate(descr);
 
     /// Base
 
@@ -56,13 +56,13 @@ Turrel::gen(descriptor::Turrel* descr)
     return turrel;
 } 
 
-control::Turrel*
+core::control::Turrel*
 Turrel::__genTemplate(descriptor::Turrel* descr)
 {
     model::Turrel* model = new model::Turrel(descr->id());
     assert(model);
 
-    control::Turrel* turrel = new control::Turrel(descr, model);
+    core::control::Turrel* turrel = new core::control::Turrel(descr, model);
     assert(turrel);
 
     //manager::Entities::get().add(turrel);

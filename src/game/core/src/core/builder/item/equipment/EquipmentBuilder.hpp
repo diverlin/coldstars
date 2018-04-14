@@ -24,17 +24,18 @@ namespace descriptor {
 class Equipment;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Equipment;
 } // namespace control
-
+}
 
 namespace builder {
 
 class Equipment : public Item
 {
 protected:
-    static void _createInternals(control::Equipment*, descriptor::Equipment*);
+    static void _createInternals(core::control::Equipment*, descriptor::Equipment*);
 
 private:
     Equipment() = delete;

@@ -28,6 +28,7 @@ namespace model {
 class Goverment;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Goverment : public Room
@@ -57,3 +58,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

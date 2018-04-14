@@ -22,43 +22,47 @@
 
 #include <ceti/Pack.hpp>
 
+namespace core {
+namespace slot {
+class Item;
+} // namespace slot
 namespace control {
 class Vehicle;
 class SpaceObject;
 } // namespace control
+} // namespace core
 
-namespace slot {
-class Item;
-} // namespace slot
 
+
+namespace core {
 namespace complex {
 
 class Grapple : public Base
 {
 public:
-    Grapple(control::Vehicle*);
+    Grapple(core::control::Vehicle*);
     ~Grapple() = default;
 
     void setStrength(int strength) { m_strength = strength; }
 
-    bool isObjectIsTarget(control::SpaceObject*) const;
-    bool addTarget(control::SpaceObject*);
-    bool removeTarget(control::SpaceObject*);
+    bool isObjectIsTarget(core::control::SpaceObject*) const;
+    bool addTarget(core::control::SpaceObject*);
+    bool removeTarget(core::control::SpaceObject*);
 
     void resetTargets();
 
-    void addGrappleSlot(slot::Item* slot) { m_grappleSlots.add(slot); }
-    bool canBeManaged(control::SpaceObject*) const;
+    void addGrappleSlot(core::slot::Item* slot) { m_grappleSlots.add(slot); }
+    bool canBeManaged(core::control::SpaceObject*) const;
 
-    ceti::pack<slot::Item*> grappleSlots() const { return m_grappleSlots; }
+    ceti::pack<core::slot::Item*> grappleSlots() const { return m_grappleSlots; }
 
     void UpdateGrabScenarioProgram_inDynamic();
 
-    const ceti::pack<control::SpaceObject*>& targets() const { return m_targets; }
+    const ceti::pack<core::control::SpaceObject*>& targets() const { return m_targets; }
 
 private:
-    ceti::pack<slot::Item*> m_grappleSlots;
-    ceti::pack<control::SpaceObject*> m_targets;
+    ceti::pack<core::slot::Item*> m_grappleSlots;
+    ceti::pack<core::control::SpaceObject*> m_targets;
 
     int m_free_strength = 0;
     int m_strength = 0;
@@ -67,3 +71,4 @@ private:
 };
 
 } // namespace complex
+} // naemspace core

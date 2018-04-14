@@ -31,6 +31,8 @@ class Galaxy;
 class Descriptors;
 } // namespace descriptor
 
+namespace core {
+
 namespace control {
 class SpaceObject;
 class StarSystem;
@@ -39,8 +41,6 @@ class Asteroid;
 class Bullet;
 class Container;
 } // namespace control
-
-namespace core {
 
 class Player;
 

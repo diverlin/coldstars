@@ -30,6 +30,7 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace core {
 
 Observation::Observation(control::Npc* owner)
     :
@@ -216,5 +217,6 @@ void Observation::__findVisibleVehicles()
     __sort(m_vehicle_pairs);
 }
 
+} // namespace core
 
 

@@ -22,9 +22,11 @@
 #include <client/gui/BaseGuiElement.hpp>
 #include <client/gui/Slider.hpp>
 
+namespace core {
 namespace control {
 class Shop;
 } // namespace control
+} // namespace core
 
 namespace gui {
 
@@ -34,16 +36,16 @@ public:
     GuiShop();
     ~GuiShop();
 
-    void bind(control::Shop*);
+    void bind(core::control::Shop*);
     void release();
 
-    control::Shop* shop() const { return m_shop; }
+    core::control::Shop* shop() const { return m_shop; }
 
     void UpdateLables() const;
     void ButtonsAction(Slider&);
 
 private:
-    control::Shop* m_shop = nullptr;
+    core::control::Shop* m_shop = nullptr;
 };
 
 } // namespace gui

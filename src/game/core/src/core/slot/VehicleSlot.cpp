@@ -29,6 +29,7 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/model/spaceobject/Vehicle.hpp>
 
+namespace core {
 namespace slot {
 
 Vehicle::Vehicle(int offset)
@@ -131,3 +132,4 @@ void Vehicle::swapVehicle(Vehicle* vehicle_slot)
 //}
 
 } // namespace slot
+} // namespace core

@@ -149,7 +149,7 @@ void Manager::enterScan(client::Player* player)
 {
     Logger::get().log("gui::Manager enterScan", Logger::Code::GUI);
 
-    control::Vehicle* scan_target = player->npc()->scanTarget();
+    core::control::Vehicle* scan_target = player->npc()->scanTarget();
     assert(scan_target);
     if (m_vehicle->isActive()) {
         m_vehicle->unbindVehicle();

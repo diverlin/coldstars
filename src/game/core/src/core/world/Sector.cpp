@@ -36,7 +36,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-
+namespace core {
 namespace control {
 
 Sector::Sector(descriptor::Sector* descr, model::Sector* model)
@@ -171,5 +171,5 @@ void Sector::update(int time)
 //}
 
 } // namespace control
-
+} // namespace core
 

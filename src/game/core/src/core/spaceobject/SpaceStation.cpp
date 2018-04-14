@@ -40,6 +40,7 @@
 
 #include <core/descriptor/spaceobject/SpaceStation.hpp>
 
+namespace core {
 namespace control {
 
 
@@ -123,6 +124,7 @@ void SpaceStation::update(int time)
 //}
 
 } // namespace control
+} // namespace core
 
 
 //SpaceStation::SpaceStation(int id)

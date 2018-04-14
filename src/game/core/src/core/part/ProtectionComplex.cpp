@@ -22,9 +22,10 @@
 //#include "../effects/Shield.hpp"
 #include "../common/constants.hpp"
 
+namespace core {
 namespace complex {
 
-Protector::Protector(control::Vehicle* vehicle)
+Protector::Protector(core::control::Vehicle* vehicle)
     :
       Base(vehicle)
 {        
@@ -39,3 +40,4 @@ Protector::~Protector()
 }
 
 } // namespace complex
+} // namespace core

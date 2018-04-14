@@ -22,20 +22,23 @@
 
 #include <vector>
 
+namespace core {
 namespace control {
 class Vehicle;
 } // namespace control
+} // namespace core
 
 namespace slot {
 class Item;
 } // namespace slot
 
+namespace core {
 namespace complex {
 
 class Protector : public Base
 {
 public:
-    Protector(control::Vehicle*);
+    Protector(core::control::Vehicle*);
     ~Protector();
 
     void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
@@ -47,3 +50,4 @@ private:
 };
 
 } // namepsace complex
+} // namespace core

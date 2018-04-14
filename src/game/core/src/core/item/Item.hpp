@@ -28,10 +28,11 @@ namespace model {
 class Item;
 } // namespace model
 
+namespace core {
+
 namespace slot {
 class Item;
 } // namespace slot
-
 
 namespace control {
 
@@ -74,3 +75,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

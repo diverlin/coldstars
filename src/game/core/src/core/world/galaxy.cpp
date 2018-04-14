@@ -33,7 +33,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-
+namespace core {
 namespace control {
 
 Galaxy::Galaxy(descriptor::Galaxy* descr, model::Galaxy* model)
@@ -139,6 +139,6 @@ void Galaxy::analizeStarSystemsCondition(StarSystemsConditionData& data_starsyst
 //}
 
 } // namespace control
-
+} // namespace core
 
 

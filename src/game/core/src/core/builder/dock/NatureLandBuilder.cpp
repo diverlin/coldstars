@@ -45,7 +45,7 @@
 
 namespace builder {
 
-control::NatureLand*
+core::control::NatureLand*
 NatureLand::gen()
 {
     descriptor::NatureLand* descr = nullptr;
@@ -58,22 +58,22 @@ NatureLand::gen()
     return gen(descr);
 } 
 
-control::NatureLand*
+core::control::NatureLand*
 NatureLand::gen(descriptor::NatureLand* descr)
 {
-    control::NatureLand* natureland = __createTemplate(descr);
+    core::control::NatureLand* natureland = __createTemplate(descr);
     __createInternals(natureland);
 
     return natureland;
 }
 
-control::NatureLand*
+core::control::NatureLand*
 NatureLand::__createTemplate(descriptor::NatureLand* descr)
 {
     model::NatureLand* model = new model::NatureLand(descr->id());
     assert(model);
 
-    control::NatureLand* natureland = new control::NatureLand(descr, model);
+    core::control::NatureLand* natureland = new core::control::NatureLand(descr, model);
     assert(natureland);
 
     core::shortcuts::entities()->add(natureland);
@@ -82,13 +82,13 @@ NatureLand::__createTemplate(descriptor::NatureLand* descr)
 }
 
 void
-NatureLand::__createInternals(control::NatureLand* natureland)
+NatureLand::__createInternals(core::control::NatureLand* natureland)
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
 
     unsigned int item_slot_num = meti::rand::gen_int(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++) {
-        slot::Item* slot = new slot::Item(slot::Type::CARGO);
+        core::slot::Item* slot = new core::slot::Item(core::slot::Type::CARGO);
         slot->setOffset(i);
         natureland->add(slot);
     }

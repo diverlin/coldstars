@@ -29,7 +29,7 @@
 
 namespace builder {
 
-control::Bullet*
+core::control::Bullet*
 Bullet::gen(int damage)
 {
     descriptor::Bullet* descr = nullptr;
@@ -42,29 +42,29 @@ Bullet::gen(int damage)
     return gen(descr, damage);
 }
 
-control::Bullet*
+core::control::Bullet*
 Bullet::gen(descriptor::Bullet* descriptor, int damage)
 {
-    control::Bullet* bullet = __genTemplate(descriptor);
+    core::control::Bullet* bullet = __genTemplate(descriptor);
     createInternals(bullet, descriptor, damage);
 
     return bullet;
 }
 
-control::Bullet*
+core::control::Bullet*
 Bullet::__genTemplate(descriptor::Bullet* descr)
 {
     model::Bullet* model = new model::Bullet();
     assert(model);
 
-    control::Bullet* bullet = new control::Bullet(descr, model);
+    core::control::Bullet* bullet = new core::control::Bullet(descr, model);
     assert(bullet);
 
     return bullet;
 }
 
 void
-Bullet::createInternals(control::Bullet* bullet, descriptor::Bullet* descriptor, int damage)
+Bullet::createInternals(core::control::Bullet* bullet, descriptor::Bullet* descriptor, int damage)
 {
     bullet->model()->setArmor(descriptor->armor());
     bullet->model()->setDamage(damage);

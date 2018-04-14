@@ -19,6 +19,8 @@
 
 #pragma once
 
+namespace core {
+
 
 namespace control {
 class SpaceObject;
@@ -34,9 +36,9 @@ public:
     Weapon();
     ~Weapon() = default;
 
-    void setTarget(control::SpaceObject* target, slot::Item* subtarget = nullptr);
+    void setTarget(core::control::SpaceObject* target, slot::Item* subtarget = nullptr);
 
-    control::SpaceObject* target() const { return m_target; }
+    core::control::SpaceObject* target() const { return m_target; }
     slot::Item* subtarget() const { return m_subtarget; }
 
     bool validateSubTarget() const;
@@ -46,9 +48,9 @@ public:
     void resetSubTarget();
 
 private:
-    control::SpaceObject* m_target = nullptr;
-    slot::Item* m_subtarget = nullptr;
+    core::control::SpaceObject* m_target = nullptr;
+    core::slot::Item* m_subtarget = nullptr;
 };
 
 } // namespace slot
-
+} // naemspace core

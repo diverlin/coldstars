@@ -38,16 +38,16 @@
 
 namespace view {
 
-Ship::Ship(control::Ship* control)
+Ship::Ship(core::control::Ship* control)
     :
       Base(control)
     , m_control(control)
 {
     _setOrientation(control);
 
-    for(slot::Item* slot: control->weaponSlots()) {
+    for(core::slot::Item* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache
-        control::Turrel* turrel_control = builder::Turrel().gen();
+        core::control::Turrel* turrel_control = builder::Turrel().gen();
         glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);
         turrel_control->setPosition(pos);
 

@@ -26,7 +26,7 @@
 
 namespace view {
 
-WormHole::WormHole(control::WormHole* wormHole)
+WormHole::WormHole(core::control::WormHole* wormHole)
     :
       Base(wormHole)
     , m_control(wormHole)

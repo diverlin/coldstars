@@ -63,7 +63,7 @@
 namespace builder {
 
 void
-BaseVehicle::equip(control::Vehicle* vehicle)
+BaseVehicle::equip(core::control::Vehicle* vehicle)
 {
     vehicle->manage(builder::item::Drive::gen());
     vehicle->manage(builder::item::Bak::gen());

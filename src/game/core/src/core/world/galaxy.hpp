@@ -36,7 +36,7 @@ class Galaxy;
 
 class StarSystemsConditionData;
 
-
+namespace core {
 namespace control {
 
 class Sector;
@@ -84,3 +84,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

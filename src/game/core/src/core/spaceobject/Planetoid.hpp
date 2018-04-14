@@ -69,7 +69,7 @@ private:
 
 } // namespace model
 
-
+namespace core {
 namespace control {
 
 class Planetoid : public SpaceObject
@@ -104,6 +104,7 @@ private:
 };
 
 } // namespace control
+} // namespace core
 
 
 

@@ -24,6 +24,8 @@
 #include "MouseData.hpp"
 #include <ceti/rect.hpp>
 
+namespace core {
+
 namespace control {
 class Angar;
 } // namespace control
@@ -33,6 +35,8 @@ class Item;
 class Vehicle;
 } // namespace control
 
+} // namespace core
+
 namespace gui {
 
 class GuiAngar : public Base
@@ -41,10 +45,10 @@ public:
     GuiAngar();
     ~GuiAngar();
 
-    void BindAngar(control::Angar*);
+    void BindAngar(core::control::Angar*);
     void UnbindAngar();
 
-    control::Angar* GetAngar() const { return m_angar; }
+    core::control::Angar* GetAngar() const { return m_angar; }
 
     bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
 
@@ -54,13 +58,13 @@ public:
     void RenderVehicleAndItemSlots() const;
 
 private:
-    control::Angar* m_angar = nullptr;
+    core::control::Angar* m_angar = nullptr;
 
-    slot::Item* m_repair_slot = nullptr;
-    slot::Item* m_charge_slot = nullptr;
+    core::slot::Item* m_repair_slot = nullptr;
+    core::slot::Item* m_charge_slot = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, slot::Vehicle*>> m_vehicleslot_rects;
-    std::vector<GuiPair<ceti::Rect, slot::Item*>> m_itemslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::Vehicle*>> m_vehicleslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::Item*>> m_itemslot_rects;
 };
 
 } // namespace gui

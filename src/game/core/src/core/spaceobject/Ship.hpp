@@ -29,6 +29,7 @@ namespace model {
 class Ship;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Ship : public Vehicle
@@ -53,7 +54,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 //class Ship : public Vehicle
 //{

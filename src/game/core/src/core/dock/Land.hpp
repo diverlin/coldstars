@@ -31,6 +31,7 @@ namespace model {
 class Land;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class SpaceObject;
@@ -71,3 +72,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

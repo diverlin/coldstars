@@ -46,7 +46,7 @@ Radar::Radar()
     setType(descriptor::Type::RADAR_EQUIPMENT);
     setObType(entity::Type::RADAR_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(slot::Type::RADAR);
+    setSlotType(core::slot::Type::RADAR);
 }
 
 Radar::Radar(const std::string& data)

@@ -23,7 +23,7 @@
 #include <core/builder/spaceobject/AsteroidBuilder.hpp>
 #include <core/spaceobject/Asteroid.hpp>
 
-void AsteroidManager::update(control::StarSystem* starsystem)
+void AsteroidManager::update(core::control::StarSystem* starsystem)
 {
     assert(false); // use telegram
 //    while (starsystem->asteroids().size() < m_asteroidsNum) {

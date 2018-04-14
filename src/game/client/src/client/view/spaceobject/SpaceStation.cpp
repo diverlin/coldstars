@@ -23,7 +23,7 @@
 
 namespace view {
 
-SpaceStation::SpaceStation(control::SpaceStation* spacestation)
+SpaceStation::SpaceStation(core::control::SpaceStation* spacestation)
     :
       Base(spacestation)
     , m_spacestation(spacestation)

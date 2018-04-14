@@ -24,11 +24,12 @@
 
 #include <meti/VectorUtils.hpp>
 
+
+namespace core {
+
 namespace control {
 class Npc;
 } // namespace control
-
-namespace core {
 
 class Player
 {

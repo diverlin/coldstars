@@ -45,7 +45,7 @@ namespace test {
 TEST(starsystem, add_remove_star)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> star_ids = starsystem->model()->stars();
 
@@ -54,7 +54,7 @@ TEST(starsystem, add_remove_star)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Star* star = builder::Star::gen();
+        core::control::Star* star = builder::Star::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, star->place());
@@ -69,7 +69,7 @@ TEST(starsystem, add_remove_star)
         EXPECT_EQ(starsystem->model()->stars(), star_ids);
     }
 
-    for(control::Star* star: starsystem->stars()) {
+    for(core::control::Star* star: starsystem->stars()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, star->place());
 
@@ -86,7 +86,7 @@ TEST(starsystem, add_remove_star)
 TEST(starsystem, add_remove_planet)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> planet_ids = starsystem->model()->planets();
 
@@ -95,7 +95,7 @@ TEST(starsystem, add_remove_planet)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Planet* planet = builder::Planet::gen();
+        core::control::Planet* planet = builder::Planet::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, planet->place());
@@ -110,7 +110,7 @@ TEST(starsystem, add_remove_planet)
         EXPECT_EQ(starsystem->model()->planets(), planet_ids);
     }
 
-    for(control::Planet* planet: starsystem->planets()) {
+    for(core::control::Planet* planet: starsystem->planets()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, planet->place());
 
@@ -127,7 +127,7 @@ TEST(starsystem, add_remove_planet)
 TEST(starsystem, add_remove_asteroid)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> asteroid_ids = starsystem->model()->asteroids();
 
@@ -136,7 +136,7 @@ TEST(starsystem, add_remove_asteroid)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Asteroid* asteroid = builder::Asteroid::gen();
+        core::control::Asteroid* asteroid = builder::Asteroid::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, asteroid->place());
@@ -151,7 +151,7 @@ TEST(starsystem, add_remove_asteroid)
         EXPECT_EQ(starsystem->model()->asteroids(), asteroid_ids);
     }
 
-    for(control::Asteroid* asteroid: starsystem->asteroids()) {
+    for(core::control::Asteroid* asteroid: starsystem->asteroids()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, asteroid->place());
 
@@ -168,7 +168,7 @@ TEST(starsystem, add_remove_asteroid)
 TEST(starsystem, add_remove_wormhole)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> wormhole_ids = starsystem->model()->wormholes();
 
@@ -177,7 +177,7 @@ TEST(starsystem, add_remove_wormhole)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::WormHole* wormhole = builder::WormHole::gen();
+        core::control::WormHole* wormhole = builder::WormHole::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, wormhole->place());
@@ -192,7 +192,7 @@ TEST(starsystem, add_remove_wormhole)
         EXPECT_EQ(starsystem->model()->wormholes(), wormhole_ids);
     }
 
-    for(control::WormHole* wormhole: starsystem->wormholes()) {
+    for(core::control::WormHole* wormhole: starsystem->wormholes()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, wormhole->place());
 
@@ -209,7 +209,7 @@ TEST(starsystem, add_remove_wormhole)
 TEST(starsystem, add_remove_spacestation)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> spacestation_ids = starsystem->model()->spacestations();
 
@@ -218,7 +218,7 @@ TEST(starsystem, add_remove_spacestation)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::SpaceStation* spacestation = builder::SpaceStation::gen();
+        core::control::SpaceStation* spacestation = builder::SpaceStation::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, spacestation->place());
@@ -233,7 +233,7 @@ TEST(starsystem, add_remove_spacestation)
         EXPECT_EQ(starsystem->model()->spacestations(), spacestation_ids);
     }
 
-    for(control::SpaceStation* spacestation: starsystem->spacestations()) {
+    for(core::control::SpaceStation* spacestation: starsystem->spacestations()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, spacestation->place());
 
@@ -250,7 +250,7 @@ TEST(starsystem, add_remove_spacestation)
 TEST(starsystem, add_remove_ship)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> ship_ids = starsystem->model()->ships();
 
@@ -259,7 +259,7 @@ TEST(starsystem, add_remove_ship)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Ship* ship = builder::Ship::gen();
+        core::control::Ship* ship = builder::Ship::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, ship->place());
@@ -274,7 +274,7 @@ TEST(starsystem, add_remove_ship)
         EXPECT_EQ(starsystem->model()->ships(), ship_ids);
     }
 
-    for(control::Ship* ship: starsystem->ships()) {
+    for(core::control::Ship* ship: starsystem->ships()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, ship->place());
 
@@ -291,7 +291,7 @@ TEST(starsystem, add_remove_ship)
 TEST(starsystem, add_remove_satellite)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> satellite_ids = starsystem->model()->satellites();
 
@@ -300,7 +300,7 @@ TEST(starsystem, add_remove_satellite)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Satellite* satellite = builder::Satellite::gen();
+        core::control::Satellite* satellite = builder::Satellite::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, satellite->place());
@@ -315,7 +315,7 @@ TEST(starsystem, add_remove_satellite)
         EXPECT_EQ(starsystem->model()->satellites(), satellite_ids);
     }
 
-    for(control::Satellite* satellite: starsystem->satellites()) {
+    for(core::control::Satellite* satellite: starsystem->satellites()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, satellite->place());
 
@@ -332,7 +332,7 @@ TEST(starsystem, add_remove_satellite)
 TEST(starsystem, add_remove_container)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> container_ids = starsystem->model()->containers();
 
@@ -341,7 +341,7 @@ TEST(starsystem, add_remove_container)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Container* container = builder::Container::gen();
+        core::control::Container* container = builder::Container::gen();
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, container->place());
@@ -356,7 +356,7 @@ TEST(starsystem, add_remove_container)
         EXPECT_EQ(starsystem->model()->containers(), container_ids);
     }
 
-    for(control::Container* container: starsystem->containers()) {
+    for(core::control::Container* container: starsystem->containers()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, container->place());
 
@@ -373,7 +373,7 @@ TEST(starsystem, add_remove_container)
 TEST(starsystem, add_remove_bullet)
 {
     /* create opbjects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
 
     ceti::pack<int_t> bullet_ids = starsystem->model()->bullets();
 
@@ -382,7 +382,7 @@ TEST(starsystem, add_remove_bullet)
 
     int iterations = 5;
     for(int i=1; i<iterations; ++i) {
-        control::Bullet* bullet = builder::Bullet::gen(1);
+        core::control::Bullet* bullet = builder::Bullet::gen(1);
 
         /* pre-add check */
         EXPECT_EQ(place::Type::NONE, bullet->place());
@@ -397,7 +397,7 @@ TEST(starsystem, add_remove_bullet)
         EXPECT_EQ(starsystem->model()->containers(), bullet_ids);
     }
 
-    for(control::Bullet* bullet: starsystem->bullets()) {
+    for(core::control::Bullet* bullet: starsystem->bullets()) {
         /* pre-remove check */
         EXPECT_EQ(place::Type::SPACE, bullet->place());
 

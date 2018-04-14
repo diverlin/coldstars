@@ -23,7 +23,7 @@
 
 Bomb::Bomb(int_t id)
     :
-      control::Item(nullptr, nullptr)
+      core::control::Item(nullptr, nullptr)
 {
     assert(false);
 //    setId(id);

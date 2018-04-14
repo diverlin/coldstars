@@ -69,16 +69,18 @@
 #include <core/communication/TelegramHub.hpp>
 #include <client/communication/TelegramHandler.hpp>
 
+namespace core {
+
 Server::Server(int id, bool dummy)
     :
       m_id(id)
-    , m_session(new core::Session(core::Session::Type::SERVER))
+    , m_session(new Session(core::Session::Type::SERVER))
 {
-    core::Sessions::get().add(id, m_session);
+    Sessions::get().add(id, m_session);
     __activate();
 
-    m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
-    core::global::get().telegramHub().subscribe(m_telegramHandler);
+    m_telegramHandler = std::shared_ptr<comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
+    global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*server*/true); // why we need it on server?
     m_world = std::shared_ptr<control::World>(new control::World(dummy));
@@ -86,13 +88,13 @@ Server::Server(int id, bool dummy)
 
 Server::~Server()
 {
-    core::Sessions::get().remove(m_id);
-    core::global::get().telegramHub().unsubscribe(m_telegramHandler);
+    Sessions::get().remove(m_id);
+    global::get().telegramHub().unsubscribe(m_telegramHandler);
     delete m_session;
 }
 
 void Server::__activate() const {
-    core::Sessions::get().activate(m_id);
+    Sessions::get().activate(m_id);
 }
 
 void Server::update()
@@ -104,7 +106,7 @@ void Server::update()
     //            __create_player();
     //        }
 
-    core::global::get().telegramHub().broadcast();
+    global::get().telegramHub().broadcast();
     m_world->update();
 }
 
@@ -127,4 +129,5 @@ void Server::__create_player() {
     //        composer().bindPlayerWithNpc(player_id, npc_id);
 }
 
+} // namespace core
 

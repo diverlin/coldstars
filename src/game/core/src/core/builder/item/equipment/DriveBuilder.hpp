@@ -31,11 +31,13 @@ class Drive;
 } // namespace item
 } // namespace descriptor
 
+namespace core {
 namespace control {
 namespace item {
 class Drive;
 } // namespace item
 } // namespace control
+}
 
 namespace builder {
 namespace item {
@@ -43,16 +45,16 @@ namespace item {
 class Drive : public Equipment
 {
 public:
-    static control::item::Drive* gen();
-    static control::item::Drive* gen(int_t, int_t ob_id = NONE);
-    static control::item::Drive* gen(descriptor::item::Drive*);
+    static core::control::item::Drive* gen();
+    static core::control::item::Drive* gen(int_t, int_t ob_id = NONE);
+    static core::control::item::Drive* gen(descriptor::item::Drive*);
 
 private:
     Drive() = delete;
     ~Drive() = delete;
 
-    static control::item::Drive* __genTemplate(descriptor::item::Drive*, int_t ob_id = NONE);
-    static void __createInternals(control::item::Drive*, descriptor::item::Drive*);
+    static core::control::item::Drive* __genTemplate(descriptor::item::Drive*, int_t ob_id = NONE);
+    static void __createInternals(core::control::item::Drive*, descriptor::item::Drive*);
 }; 
 
 } // namespace item

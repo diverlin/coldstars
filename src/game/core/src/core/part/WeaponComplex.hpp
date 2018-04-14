@@ -25,6 +25,12 @@
 
 #include <ceti/Pack.hpp>
 
+namespace core {
+
+namespace slot {
+class Item;
+} // namespace slot
+
 namespace control {
 class Vehicle;
 class SpaceObject;
@@ -35,31 +41,27 @@ class Weapon;
 
 } // namespace control
 
-namespace slot {
-class Item;
-} // namespace slot
-
 namespace complex {
 
 class Weapon : public Base
 {
 public:
-    Weapon(control::Vehicle*);
+    Weapon(core::control::Vehicle*);
     ~Weapon() = default;
 
     int radiusMin() const { return m_radiusMin; }
     int radiusMax() const { return m_radiusMax; }
     int damage() const { return m_damage; }
 
-    std::vector<slot::Item*> weaponSlots() const { return m_slots; }
+    std::vector<core::slot::Item*> weaponSlots() const { return m_slots; }
 
-    bool addSlot(slot::Item*);
-    slot::Item* freeSlot() const;
-    slot::Item* equipedWeakestSlot() const;
+    bool addSlot(core::slot::Item*);
+    core::slot::Item* freeSlot() const;
+    core::slot::Item* equipedWeakestSlot() const;
     
     void prepare();
 
-    bool setTarget(control::SpaceObject*, slot::Item* item_slot = nullptr);
+    bool setTarget(core::control::SpaceObject*, slot::Item* item_slot = nullptr);
 
     void updateFire(int, float);
 
@@ -80,7 +82,7 @@ public:
 
 //    void RenderTurrels() const;
 
-    std::vector<control::item::Weapon*> rockets() const;
+    std::vector<core::control::item::Weapon*> rockets() const;
 
     std::vector<int> radiusesOfSelectedWeapons() const;
 
@@ -92,15 +94,15 @@ private:
 //    Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
-    ceti::pack<slot::Item*> m_slots;
-    ceti::pack<slot::Item*> m_slots_reloaded;
+    ceti::pack<core::slot::Item*> m_slots;
+    ceti::pack<core::slot::Item*> m_slots_reloaded;
 
     void __reload();
     void __validateTargets();
 
-    slot::Item* __nextSlotReadyToFire() const;
-    std::vector<control::item::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
+    core::slot::Item* __nextSlotReadyToFire() const;
+    std::vector<core::control::item::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
 };
 
 } // namespace complex
-
+} // namespace core

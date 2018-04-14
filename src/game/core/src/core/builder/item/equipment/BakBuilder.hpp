@@ -31,11 +31,13 @@ class Bak;
 } // namespace item
 } // namespace descriptor
 
+namespace core {
 namespace control {
 namespace item {
 class Bak;
 } // namespace item
 } // namespace control
+}
 
 namespace builder {
 namespace item {
@@ -43,16 +45,16 @@ namespace item {
 class Bak : public Equipment
 {
 public:
-    static control::item::Bak* gen(descriptor::item::Bak*);
-    static control::item::Bak* gen(int_t, int_t ob_id = NONE);
-    static control::item::Bak* gen();
+    static core::control::item::Bak* gen(descriptor::item::Bak*);
+    static core::control::item::Bak* gen(int_t, int_t ob_id = NONE);
+    static core::control::item::Bak* gen();
 
 private:
     Bak() = delete;
     ~Bak() = delete;
 
-    static control::item::Bak* __genTemplate(descriptor::item::Bak*, int_t ob_id = NONE);
-    static void __createInternals(control::item::Bak*, descriptor::item::Bak*);
+    static core::control::item::Bak* __genTemplate(descriptor::item::Bak*, int_t ob_id = NONE);
+    static void __createInternals(core::control::item::Bak*, descriptor::item::Bak*);
 }; 
 
 } // namespace item

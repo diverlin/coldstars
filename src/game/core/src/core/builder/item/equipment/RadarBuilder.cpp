@@ -31,7 +31,7 @@
 namespace builder {
 namespace item {
 
-control::item::Radar*
+core::control::item::Radar*
 Radar::gen()
 {
     descriptor::item::Radar* descr = nullptr;
@@ -44,35 +44,35 @@ Radar::gen()
     return gen(descr);
 }
 
-control::item::Radar*
+core::control::item::Radar*
 Radar::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Radar* descr = core::shortcuts::descriptors()->radar(descriptor_id);
-    control::item::Radar* radar = __genTemplate(descr, ob_id);
+    core::control::item::Radar* radar = __genTemplate(descr, ob_id);
     __createInternals(radar, descr);
     return radar;
 }
 
-control::item::Radar*
+core::control::item::Radar*
 Radar::gen(descriptor::item::Radar* descr)
 {
-    control::item::Radar* radar = __genTemplate(descr);
+    core::control::item::Radar* radar = __genTemplate(descr);
     __createInternals(radar, descr);
     return radar;
 } 
 
-control::item::Radar*
+core::control::item::Radar*
 Radar::__genTemplate(descriptor::item::Radar* descriptor, int_t id)
 {
     model::item::Radar* model = new model::item::Radar(descriptor->id(), id);
     assert(model);
-    control::item::Radar* radar = new control::item::Radar(descriptor, model);
+    core::control::item::Radar* radar = new core::control::item::Radar(descriptor, model);
     assert(radar);
     return radar;
 }
 
 void
-Radar::__createInternals(control::item::Radar* radar, descriptor::item::Radar* descr)
+Radar::__createInternals(core::control::item::Radar* radar, descriptor::item::Radar* descr)
 {
     Item::_createInternals(radar, descr);
     Equipment::_createInternals(radar, descr);

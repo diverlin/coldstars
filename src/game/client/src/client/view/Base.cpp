@@ -37,7 +37,7 @@ Base::Base() // used for effects
 //    m_control_base = new control::Base(new model::Base); // TODO clear this!
 }
 
-Base::Base(control::Base* base)
+Base::Base(core::control::Base* base)
     :
       jeti::view::Base()
     , m_control_base(base)

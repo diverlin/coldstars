@@ -30,24 +30,24 @@
 namespace builder {
 namespace item {
 
-control::item::Bak*
+core::control::item::Bak*
 Bak::gen(descriptor::item::Bak* descr)
 {
-    control::item::Bak* bak = __genTemplate(descr);
+    core::control::item::Bak* bak = __genTemplate(descr);
     __createInternals(bak, descr);
     return bak;
 }
 
-control::item::Bak*
+core::control::item::Bak*
 Bak::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Bak* descr = core::shortcuts::descriptors()->bak(descriptor_id);
-    control::item::Bak* bak = __genTemplate(descr, ob_id);
+    core::control::item::Bak* bak = __genTemplate(descr, ob_id);
     __createInternals(bak, descr);
     return bak;
 }
 
-control::item::Bak*
+core::control::item::Bak*
 Bak::gen()
 {
     descriptor::item::Bak* descr = nullptr;
@@ -61,18 +61,18 @@ Bak::gen()
 }
 
 
-control::item::Bak*
+core::control::item::Bak*
 Bak::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
 {
     model::item::Bak* model = new model::item::Bak(descriptor->id(), id);
     assert(model);
-    control::item::Bak* bak = new control::item::Bak(descriptor, model);
+    core::control::item::Bak* bak = new core::control::item::Bak(descriptor, model);
     assert(bak);
     return bak;
 }
 
 void
-Bak::__createInternals(control::item::Bak* bak, descriptor::item::Bak* descr)
+Bak::__createInternals(core::control::item::Bak* bak, descriptor::item::Bak* descr)
 {
     Item::_createInternals(bak, descr);
     Equipment::_createInternals(bak, descr);

@@ -31,10 +31,12 @@
 
 #include <vector>
 
+namespace core {
 namespace control {
 class Npc;
 class Vehicle;
 } // namespace control
+} // namespace core
 
 class TurnTimer;
 
@@ -81,7 +83,7 @@ public:
     void UpdatePostTransaction();
     void UpdatePostTransactionEvent(TurnTimer&);
 
-    bool enterScan(control::Vehicle*);
+    bool enterScan(core::control::Vehicle*);
     void exitScan();
 
     // events

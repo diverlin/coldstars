@@ -26,17 +26,15 @@
 
 #include "../common/constants.hpp"
 
-namespace control {
-class Galaxy;
-class StarSystem;
-} // namespace control
-
 namespace model {
 class Sector;
 } // namespace model
 
-
+namespace core {
 namespace control {
+
+class Galaxy;
+class StarSystem;
 
 class Sector : public Base
 {
@@ -74,5 +72,5 @@ private:
 };
 
 } // namespace control
-
+} // naemspace core
 

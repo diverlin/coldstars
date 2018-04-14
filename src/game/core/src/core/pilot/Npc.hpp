@@ -37,13 +37,6 @@ class Npc;
 
 class BaseAiModel;
 
-namespace control {
-class Vehicle;
-class SpaceObject;
-class StarSystem;
-class Planet;
-} // namespace control
-
 class Player;
 class GoodsPack;
 
@@ -108,7 +101,13 @@ private:
 
 } // namespace model
 
+namespace core {
 namespace control {
+
+class Vehicle;
+class SpaceObject;
+class StarSystem;
+class Planet;
 
 class Npc : public Base
 {
@@ -200,7 +199,7 @@ private:
 
 
 } // namespace controller
-
+} // namespace core
 
 
 //class Npc : public model::Base

@@ -28,7 +28,7 @@ public:
     StateMachine();
     ~StateMachine();
 
-    void setNpc(control::Npc* npc) { m_npc = npc; }
+    void setNpc(core::control::Npc* npc) { m_npc = npc; }
 
     void setCurrentMacroTask(const Task&);
     void setCurrentMicroTask(const Task&);
@@ -44,7 +44,7 @@ public:
     void reset(); // was private
 
 private:
-    control::Npc* m_npc = nullptr;
+    core::control::Npc* m_npc = nullptr;
 
     MacroTaskManager m_macrotaskManager;
     MicroTaskManager m_microtaskManager;

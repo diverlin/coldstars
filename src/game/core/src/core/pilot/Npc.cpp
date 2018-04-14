@@ -68,6 +68,7 @@ Npc::data() const
 
 } // namespace model
 
+namespace core {
 namespace control {
 
 Npc::Npc(descriptor::Npc* descr, model::Npc* model)
@@ -448,3 +449,4 @@ Npc::agressorSetString() const
 }
 
 } // namespace control
+} // namespace core

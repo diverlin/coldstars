@@ -49,6 +49,7 @@
 #include <core/descriptor/item/equipment/Bak.hpp>
 #include <core/descriptor/dock/Land.hpp>
 
+namespace core {
 namespace control {
 
 Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
@@ -1821,7 +1822,7 @@ std::vector<slot::Item*> Vehicle::__equipedAndFunctionalSlots(const std::vector<
 //}
 
 } // namespace control
-
+} // namespace core
 
 
 

@@ -36,19 +36,19 @@ GuiStore::GuiStore()
 GuiStore::~GuiStore()
 {}
 
-void GuiStore::bindStore(control::Store* store)
+void GuiStore::bindStore(core::control::Store* store)
 {
     this->m_store = store;
 
     int clm = 0;
     int row = 0;
-    for (slot::Item* slot: store->itemSlots()) {
+    for (core::slot::Item* slot: store->itemSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, slot::Item*>(rect, slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Item*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {
@@ -58,13 +58,13 @@ void GuiStore::bindStore(control::Store* store)
     }
 
 
-    for (slot::Vehicle* slot: store->vehicleSlots()) {
+    for (core::slot::Vehicle* slot: store->vehicleSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, slot::Vehicle*>(rect, slot));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Vehicle*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {

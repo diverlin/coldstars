@@ -24,7 +24,7 @@
 #include <client/session/client.hpp>
 
 namespace {
-int_t createNewShip(Server& server) {
+int_t createNewShip(core::Server& server) {
     int_t id;
 
     //server.session();
@@ -34,7 +34,7 @@ int_t createNewShip(Server& server) {
 
 TEST(world, dummy)
 {
-    Server server(0, true);
+    core::Server server(0, true);
     Client client(1);
 
     int_t id = createNewShip(server);

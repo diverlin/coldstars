@@ -33,6 +33,7 @@ class Grapple;
 } // namespace item
 } // namespace model
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -67,3 +68,4 @@ private:
 
 } // namespace item
 } // namespace control
+} // namespace core

@@ -32,6 +32,7 @@ namespace model {
 class Satellite;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Satellite : public Vehicle
@@ -61,7 +62,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 
 //class Satellite : public Vehicle

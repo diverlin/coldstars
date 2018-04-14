@@ -60,6 +60,7 @@ namespace {
 core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 } // namespace
 
+namespace core {
 namespace control {
 
 StarSystem::StarSystem(descriptor::StarSystem* descr, model::StarSystem* model)
@@ -1103,3 +1104,4 @@ void StarSystem::_postDeathUniqueEvent(bool)
 {}
 
 } // namespace control
+} // namespace core

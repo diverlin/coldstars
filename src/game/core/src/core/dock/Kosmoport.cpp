@@ -33,6 +33,7 @@
 #include <core/descriptor/dock/Kosmoport.hpp>
 #include <core/model/dock/Kosmoport.hpp>
 
+namespace core {
 namespace control {
 
 Kosmoport::Kosmoport(descriptor::Kosmoport* descr, model::Kosmoport* model)
@@ -165,3 +166,4 @@ std::string Kosmoport::vehiclesStr() const
 //}
 
 } // namespace control
+} // namespace core

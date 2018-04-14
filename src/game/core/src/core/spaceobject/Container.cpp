@@ -41,6 +41,7 @@
 #include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 
+namespace core {
 namespace control {
 namespace {
 
@@ -196,7 +197,7 @@ void Container::updateInSpace(int time)
 //}
 
 } // namespace control
-
+} // namespace core
 
 
 //Container::Container(int_t id)

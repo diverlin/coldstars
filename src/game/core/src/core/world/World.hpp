@@ -18,6 +18,7 @@
 
 #pragma once
 
+namespace core {
 namespace control {
 
 class Galaxy;
@@ -37,3 +38,4 @@ private:
 };
 
 } // namespace control
+} // namespace core

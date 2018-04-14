@@ -27,7 +27,7 @@
 
 namespace builder {
 
-control::Asteroid*
+core::control::Asteroid*
 Asteroid::gen()
 {
     descriptor::Asteroid* descr = nullptr;
@@ -40,17 +40,17 @@ Asteroid::gen()
     return gen(descr);
 }
 
-control::Asteroid*
+core::control::Asteroid*
 Asteroid::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Asteroid* descriptor = core::shortcuts::descriptors()->asteroid(descriptor_id);
     return gen(descriptor, id);
 }
 
-control::Asteroid*
+core::control::Asteroid*
 Asteroid::gen(descriptor::Asteroid* descr, int_t id)
 {
-    control::Asteroid* asteroid = __genTemplate(descr, id);
+    core::control::Asteroid* asteroid = __genTemplate(descr, id);
 
     /// Orientation
     asteroid->setSize(descr->size());
@@ -90,13 +90,13 @@ Asteroid::gen(descriptor::Asteroid* descr, int_t id)
     //    model->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 } 
 
-control::Asteroid*
+core::control::Asteroid*
 Asteroid::__genTemplate(descriptor::Asteroid* descr, int_t id)
 {
     model::Asteroid* model = new model::Asteroid(descr->id(), id);
     assert(model);
 
-    control::Asteroid* asteroid = new control::Asteroid(descr, model);
+    core::control::Asteroid* asteroid = new core::control::Asteroid(descr, model);
     assert(asteroid);
 
     return asteroid;

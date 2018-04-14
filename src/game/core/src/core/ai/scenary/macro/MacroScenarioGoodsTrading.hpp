@@ -27,16 +27,16 @@ class MacroScenarioGoodsTrading : public BaseScenario
         MacroScenarioGoodsTrading();
         virtual ~MacroScenarioGoodsTrading();
         
-        virtual void enter(control::Npc*) const;
-        virtual bool Validation(control::Npc*) const;
-        virtual void UpdateInStaticInSpace(control::Npc*) const;
-        virtual void UpdateInStaticInDock(control::Npc*) const;
-        virtual void exit(control::Npc*) const;
+        virtual void enter(core::control::Npc*) const;
+        virtual bool Validation(core::control::Npc*) const;
+        virtual void UpdateInStaticInSpace(core::control::Npc*) const;
+        virtual void UpdateInStaticInDock(core::control::Npc*) const;
+        virtual void exit(core::control::Npc*) const;
                 
-        virtual std::string GetDescription(control::Npc*) const;
+        virtual std::string GetDescription(core::control::Npc*) const;
         
     private:
-        bool IsAbleToBuyGoods(control::Npc*) const;
+        bool IsAbleToBuyGoods(core::control::Npc*) const;
 }; 
 
 

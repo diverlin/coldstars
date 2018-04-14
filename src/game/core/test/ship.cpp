@@ -58,7 +58,7 @@ namespace test {
 
 TEST(ship, create)
 {
-    control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::Ship::gen();
 
     EXPECT_EQ(ship->descriptor()->bakSlotNum(), ship->bakSlots().size());
     EXPECT_EQ(ship->descriptor()->driveSlotNum(), ship->driveSlots().size());
@@ -74,11 +74,11 @@ TEST(ship, create)
 TEST(ship, drop_item)
 {
     /* create objects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Ship* ship = builder::Ship::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Ship* ship = builder::Ship::gen();
 
     /* equip ship */
-    control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Drive* drive = builder::item::Drive::gen();
     ship->mount(drive);
 
     /* add ship */
@@ -94,7 +94,7 @@ TEST(ship, drop_item)
     EXPECT_EQ(1, starsystem->containers().size());
     assert(starsystem->containers().front());
 
-    control::Container* container = starsystem->containers().front();
+    core::control::Container* container = starsystem->containers().front();
     EXPECT_EQ(ship->position(), container->position());
     EXPECT_EQ(place::Type::SPACE, container->place());
     EXPECT_EQ(drive, container->item());
@@ -105,13 +105,13 @@ TEST(ship, drop_item)
 TEST(ship, grab_container)
 {
     /* create objects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Ship* ship = builder::Ship::gen();
-    control::item::Grapple* grapple = builder::item::Grapple::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Ship* ship = builder::Ship::gen();
+    core::control::item::Grapple* grapple = builder::item::Grapple::gen();
     EXPECT_TRUE(ship->mount(grapple));
 
-    control::Container* container = builder::Container::gen();
-    control::item::Lazer* lazer = builder::item::Lazer::gen();
+    core::control::Container* container = builder::Container::gen();
+    core::control::item::Lazer* lazer = builder::item::Lazer::gen();
     EXPECT_TRUE(container->insert(lazer));
 
     /* add to starsystem */
@@ -133,10 +133,10 @@ TEST(ship, grab_container)
 TEST(ship, move)
 {
     /* create objects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Ship* ship = builder::Ship::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
-    control::item::Bak* bak = builder::item::Bak::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Ship* ship = builder::Ship::gen();
+    core::control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Bak* bak = builder::item::Bak::gen();
 
     EXPECT_TRUE(ship->mount(drive));
     EXPECT_TRUE(ship->mount(bak));
@@ -163,15 +163,15 @@ TEST(ship, move)
 TEST(ship, shoot_ship)
 {
     /* create objects */
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Ship* ship = builder::Ship::gen();
-    control::item::Lazer* lazer1 = builder::item::Lazer::gen();
-    control::item::Lazer* lazer2 = builder::item::Lazer::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Ship* ship = builder::Ship::gen();
+    core::control::item::Lazer* lazer1 = builder::item::Lazer::gen();
+    core::control::item::Lazer* lazer2 = builder::item::Lazer::gen();
     EXPECT_TRUE(ship->mount(lazer1));
     EXPECT_TRUE(ship->mount(lazer2));
 
-    control::Ship* target = builder::Ship::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::Ship* target = builder::Ship::gen();
+    core::control::item::Drive* drive = builder::item::Drive::gen();
     EXPECT_TRUE(target->mount(drive));
 
     /* add to starsystem */
@@ -233,7 +233,7 @@ TEST(ship, shoot_ship_presize)
 TEST(ship, kill)
 {
     /* create objects */
-    control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::Ship::gen();
 
     ship->hit(100000);
     EXPECT_EQ(0, ship->model()->armor());
@@ -274,7 +274,7 @@ void compareShipModels(model::Ship* m1, model::Ship* m2)
     compareVehileModels(m1, m2);
 }
 
-void compareVehicleProperties(const control::Vehicle::Propetries& origin, const control::Vehicle::Propetries& clone)
+void compareVehicleProperties(const core::control::Vehicle::Propetries& origin, const core::control::Vehicle::Propetries& clone)
 {
     EXPECT_EQ(origin.free_space, clone.free_space);
     EXPECT_EQ(origin.protection, clone.protection);
@@ -301,12 +301,12 @@ void compareVehicleProperties(const control::Vehicle::Propetries& origin, const 
 } // namespace
 
 
-void testShipCloneScenario(control::Ship* ship)
+void testShipCloneScenario(core::control::Ship* ship)
 {
-    control::Vehicle::Propetries properties = ship->properties(); // we need copy, not reference
+    core::control::Vehicle::Propetries properties = ship->properties(); // we need copy, not reference
 
     model::Ship* model = new model::Ship(ship->model()->data());
-    control::Ship* clone = new control::Ship(ship->descriptor(), model);
+    core::control::Ship* clone = new core::control::Ship(ship->descriptor(), model);
 
     compareShipModels(ship->model(), model);
     compareVehicleProperties(properties, clone->properties());
@@ -314,7 +314,7 @@ void testShipCloneScenario(control::Ship* ship)
 
 TEST(ship, equip_and_clone)
 {
-    control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::Ship::gen();
     ship->manage( builder::item::Bak::gen() );
     ship->manage( builder::item::Drive::gen() );
     ship->manage( builder::item::Scaner::gen() );
@@ -331,13 +331,13 @@ TEST(ship, equip_and_clone)
 TEST(ship, dock)
 {
     // create
-    control::StarSystem* starsystem = builder::StarSystem::gen();
-    control::Star* star = builder::Star::gen();
-    control::Planet* planet = builder::Planet::gen();
-    control::Ship* ship = builder::Ship::gen();
+    core::control::StarSystem* starsystem = builder::StarSystem::gen();
+    core::control::Star* star = builder::Star::gen();
+    core::control::Planet* planet = builder::Planet::gen();
+    core::control::Ship* ship = builder::Ship::gen();
 
-    control::item::Bak* bak = builder::item::Bak::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Bak* bak = builder::item::Bak::gen();
+    core::control::item::Drive* drive = builder::item::Drive::gen();
     EXPECT_TRUE(ship->mount(bak));
     EXPECT_TRUE(ship->mount(drive));
 
@@ -359,13 +359,13 @@ TEST(ship, dock)
 
         // drive complex
         EXPECT_EQ(nullptr, ship->navigator().target());
-        EXPECT_EQ(complex::Drive::Action::NONE, ship->navigator().action());
+        EXPECT_EQ(core::complex::Drive::Action::NONE, ship->navigator().action());
 
         ship->dock(planet);
 
         // drive complex
         EXPECT_EQ(planet, ship->navigator().target());
-        EXPECT_EQ(complex::Drive::Action::DOCKING, ship->navigator().action());
+        EXPECT_EQ(core::complex::Drive::Action::DOCKING, ship->navigator().action());
 
         core::comm::event::dockShip(ship->id(), planet->land()->id());
 
@@ -399,13 +399,13 @@ TEST(ship, dock)
 TEST(ship, jump)
 {
     // create
-    control::HyperSpace* hyper = builder::HyperSpace::gen();
-    control::StarSystem* starsystem_jumpFrom = builder::StarSystem::gen();
-    control::StarSystem* starsystem_jumpTo = builder::StarSystem::gen();
-    control::Ship* ship = builder::Ship::gen();
+    core::control::HyperSpace* hyper = builder::HyperSpace::gen();
+    core::control::StarSystem* starsystem_jumpFrom = builder::StarSystem::gen();
+    core::control::StarSystem* starsystem_jumpTo = builder::StarSystem::gen();
+    core::control::Ship* ship = builder::Ship::gen();
 
-    control::item::Bak* bak = builder::item::Bak::gen();
-    control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Bak* bak = builder::item::Bak::gen();
+    core::control::item::Drive* drive = builder::item::Drive::gen();
     EXPECT_TRUE(ship->mount(bak));
     EXPECT_TRUE(ship->mount(drive));
 

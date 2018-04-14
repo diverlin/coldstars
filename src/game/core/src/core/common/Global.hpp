@@ -19,8 +19,6 @@
 
 #pragma once
 
-class God;
-
 namespace core {
 namespace comm {
 class TelegramHub;
@@ -37,6 +35,8 @@ class Descriptors;
 } // namespace descriptor
 
 namespace core {
+
+class God;
 
 class global
 {

@@ -26,7 +26,7 @@
 
 namespace builder {
 
-void Item::_createInternals(control::Item* item, descriptor::Item* descr)
+void Item::_createInternals(core::control::Item* item, descriptor::Item* descr)
 {
     item->model()->setCondition(descr->condition());
 }

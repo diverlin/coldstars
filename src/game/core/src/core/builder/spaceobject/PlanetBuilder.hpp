@@ -25,22 +25,24 @@ namespace descriptor {
 class Planet;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Planet;
 } // namespace control
+}
 
 namespace builder {
 
 class Planet
 {
 public:
-    static control::Planet* gen();
-    static control::Planet* gen(int_t, int_t);
-    static control::Planet* gen(descriptor::Planet*, int_t id = NONE);
+    static core::control::Planet* gen();
+    static core::control::Planet* gen(int_t, int_t);
+    static core::control::Planet* gen(descriptor::Planet*, int_t id = NONE);
 
 private:
-    static control::Planet* __genTemplate(descriptor::Planet*, int_t id = NONE);
-    static void __createInternals(control::Planet*, descriptor::Planet*);
+    static core::control::Planet* __genTemplate(descriptor::Planet*, int_t id = NONE);
+    static void __createInternals(core::control::Planet*, descriptor::Planet*);
 }; 
 
 } // namespace builder

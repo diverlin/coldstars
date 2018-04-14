@@ -40,7 +40,7 @@
 
 #include <glm/gtx/transform.hpp>
 
-
+namespace core {
 namespace complex {
 
 bool Drive::pathExists() const
@@ -282,3 +282,4 @@ void Drive::update()
 //}
 
 } // namespace complex
+} // namespace core

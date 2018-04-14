@@ -25,6 +25,8 @@
 #include <cassert>
 #include <string>
 
+namespace core {
+
 class Player;
 
 namespace control {
@@ -68,7 +70,6 @@ class Rocket;
 
 } // namespace control
 
-namespace core {
 namespace manager {
 
 class Entities

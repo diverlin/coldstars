@@ -28,6 +28,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -66,6 +67,6 @@ std::string Scaner::scanStr()
     }
 }
 
-
 } // namespace item
 } // namespace control
+} // namespace core

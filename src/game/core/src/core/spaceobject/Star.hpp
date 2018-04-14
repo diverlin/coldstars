@@ -27,6 +27,7 @@ namespace model {
 class Star;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Star : public Planetoid
@@ -65,7 +66,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 
 //class Star : public Planetoid

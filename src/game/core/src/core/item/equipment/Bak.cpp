@@ -27,7 +27,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
-
+namespace core {
 namespace control {
 namespace item {
 
@@ -82,3 +82,4 @@ std::string Bak::fuelStr()
 
 } // namespace item
 } // namespace control
+} // namespace core

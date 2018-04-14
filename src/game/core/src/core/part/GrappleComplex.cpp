@@ -24,17 +24,18 @@
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/spaceobject/SpaceObject.hpp>
 
+namespace core {
 namespace complex {
 
-Grapple::Grapple(control::Vehicle* vehicle)
+Grapple::Grapple(core::control::Vehicle* vehicle)
     :
       Base(vehicle)
 {}
 
 bool
-Grapple::isObjectIsTarget(control::SpaceObject* object) const
+Grapple::isObjectIsTarget(core::control::SpaceObject* object) const
 {
-    for (control::SpaceObject* target: m_targets) {
+    for (core::control::SpaceObject* target: m_targets) {
         if (object->id() == target->id()) {
             return true;
         }
@@ -44,7 +45,7 @@ Grapple::isObjectIsTarget(control::SpaceObject* object) const
 }
 
 bool
-Grapple::addTarget(control::SpaceObject* target)
+Grapple::addTarget(core::control::SpaceObject* target)
 {
     m_targets.add(target);
     m_free_strength -= target->mass();
@@ -52,7 +53,7 @@ Grapple::addTarget(control::SpaceObject* target)
 }
 
 bool
-Grapple::removeTarget(control::SpaceObject* target)
+Grapple::removeTarget(core::control::SpaceObject* target)
 {
     if (!isObjectIsTarget(target)) {
         return false;
@@ -70,7 +71,7 @@ Grapple::resetTargets()
 }
 
 bool
-Grapple::canBeManaged(control::SpaceObject* object) const
+Grapple::canBeManaged(core::control::SpaceObject* object) const
 {
     // avoiding dublicated items in the vector
     // maybe better to inherit ceti::pack from std::set?
@@ -86,9 +87,9 @@ Grapple::canBeManaged(control::SpaceObject* object) const
 void
 Grapple::UpdateGrabScenarioProgram_inDynamic()
 {
-    ceti::pack<control::SpaceObject*> targetsToForget;
+    ceti::pack<core::control::SpaceObject*> targetsToForget;
 
-    for (control::SpaceObject* target: m_targets) {
+    for (core::control::SpaceObject* target: m_targets) {
         if (_checkTarget(target) != STATUS::TARGET_OK ||
             !_checkDistanceToTarget(target, m_radius)) {
             targetsToForget.add(target);
@@ -101,7 +102,7 @@ Grapple::UpdateGrabScenarioProgram_inDynamic()
             if (dist < 0.5*_vehicle()->collisionRadius()) {
                 switch(target->descriptor()->obType()) {
                 case entity::Type::CONTAINER: {
-                    control::Container* container = reinterpret_cast<control::Container*>(target);
+                    core::control::Container* container = reinterpret_cast<core::control::Container*>(target);
                     if (_vehicle()->unpackContainerItemToCargoSlot(container)) {
                         targetsToForget.add(target);
                     }
@@ -150,3 +151,4 @@ Grapple::UpdateGrabScenarioProgram_inDynamic()
 
 
 } // namespace complex
+} // namespace core

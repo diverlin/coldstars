@@ -89,7 +89,7 @@ void Client::update() {
         return;
     }
 
-    control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
+    core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
     assert(starsystem);
 
     // simulate model(repeate what server is doing)
@@ -115,7 +115,7 @@ void Client::__activate() const {
 }
 
 void Client::__create_player() {
-    control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
+    core::control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
     if (!galaxy) {
         //            if (meti::rand::gen_int(1000) == 1000)
         //                std::cout<<"galaxy is null"<<std::endl;
@@ -125,9 +125,9 @@ void Client::__create_player() {
     int_t id = core::shortcuts::entities()->nextId();
     m_player = new client::Player(id);
 
-    control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
+    core::control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
     assert(starsystem->ships().size());
-    control::Npc* npc = starsystem->ships().front()->npc();
+    core::control::Npc* npc = starsystem->ships().front()->npc();
     assert(npc);
     m_player->setNpc(npc);
 }

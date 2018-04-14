@@ -21,9 +21,11 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Planet;
 } // namespace control
+} // namespace core
 
 namespace view {
 
@@ -34,16 +36,16 @@ class Atmosphere;
 class Planet : public Base
 {
 public:
-    Planet(control::Planet*);
+    Planet(core::control::Planet*);
     virtual ~Planet() override final;
 
     void update() override final;
     void draw(const jeti::Render&) const override final;
 
-    control::Planet* control() const { return m_control; }
+    core::control::Planet* control() const { return m_control; }
 
 private:
-    control::Planet* m_control = nullptr;
+    core::control::Planet* m_control = nullptr;
     //virtual void UpdateInfo() override final;
     effect::Atmosphere* atmosphere = nullptr;
 }; 

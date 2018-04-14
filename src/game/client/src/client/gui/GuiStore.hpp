@@ -24,6 +24,8 @@
 #include <ceti/rect.hpp>
 #include "MouseData.hpp"
 
+namespace core {
+
 namespace control {
 class Store;
 } // namespace control
@@ -33,6 +35,8 @@ class Item;
 class Vehicle;
 } // namespace slot
 
+} // namespace core
+
 namespace gui {
 
 class GuiStore : public Base
@@ -41,20 +45,20 @@ public:
     GuiStore();
     ~GuiStore();
 
-    void bindStore(control::Store*);
+    void bindStore(core::control::Store*);
     void UnbindStore();
 
-    control::Store* store() const { return m_store; }
+    core::control::Store* store() const { return m_store; }
 
     bool updateMouseInteraction(const MouseData&);
 
     void renderSlots(int) const;
 
 private:
-    control::Store* m_store = nullptr;
+    core::control::Store* m_store = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, slot::Item*>> m_itemslot_rects;
-    std::vector<GuiPair<ceti::Rect, slot::Vehicle*>> m_vehicleslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::Item*>> m_itemslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::Vehicle*>> m_vehicleslot_rects;
 };
 
 } // namepsace gui

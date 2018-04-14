@@ -29,7 +29,7 @@
 namespace builder {
 namespace item {
 
-control::item::Lazer*
+core::control::item::Lazer*
 Lazer::gen()
 {
     descriptor::item::Lazer* descr = nullptr;
@@ -42,35 +42,35 @@ Lazer::gen()
     return gen(descr);
 }
 
-control::item::Lazer*
+core::control::item::Lazer*
 Lazer::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Lazer* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
-    control::item::Lazer* lazer = __genTemplate(descr, ob_id);
+    core::control::item::Lazer* lazer = __genTemplate(descr, ob_id);
     __createInternals(lazer, descr);
     return lazer;
 }
 
-control::item::Lazer*
+core::control::item::Lazer*
 Lazer::gen(descriptor::item::Lazer* descr)
 {
-    control::item::Lazer* lazer = __genTemplate(descr);
+    core::control::item::Lazer* lazer = __genTemplate(descr);
     __createInternals(lazer, descr);
     return lazer;
 }
 
-control::item::Lazer*
+core::control::item::Lazer*
 Lazer::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
 { 
     model::item::Lazer* model = new model::item::Lazer(descriptor->id(), id);
     assert(model);
-    control::item::Lazer* lazer = new control::item::Lazer(descriptor, model);
+    core::control::item::Lazer* lazer = new core::control::item::Lazer(descriptor, model);
     assert(lazer);
     return lazer;
 } 
 
 void
-Lazer::__createInternals(control::item::Lazer* lazer, descriptor::item::Lazer* descr)
+Lazer::__createInternals(core::control::item::Lazer* lazer, descriptor::item::Lazer* descr)
 {     
     Item::_createInternals(lazer, descr);
     Equipment::_createInternals(lazer, descr);

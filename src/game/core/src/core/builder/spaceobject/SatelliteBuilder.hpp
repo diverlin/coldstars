@@ -25,24 +25,26 @@ namespace descriptor {
 class Satellite;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Satellite;
 } // namespace control
+}
 
 namespace builder {
 
 class Satellite : public BaseVehicle
 {
 public:
-    static control::Satellite* gen();
-    static control::Satellite* gen(descriptor::Satellite*);
+    static core::control::Satellite* gen();
+    static core::control::Satellite* gen(descriptor::Satellite*);
 
 private:
     Satellite() = default;
     ~Satellite() = default;
 
-    static void __createInternals(control::Satellite*, descriptor::Satellite*);
-    static control::Satellite* __genTemplate(descriptor::Satellite*);
+    static void __createInternals(core::control::Satellite*, descriptor::Satellite*);
+    static core::control::Satellite* __genTemplate(descriptor::Satellite*);
 }; 
 
 } // namespace builder

@@ -23,7 +23,7 @@
 
 #include <core/item/Item.hpp>
 
-class Bomb : public control::Item
+class Bomb : public core::control::Item
 {
 public:
     Bomb(int_t id = NONE);

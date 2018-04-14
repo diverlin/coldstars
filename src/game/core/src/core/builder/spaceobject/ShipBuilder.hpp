@@ -28,25 +28,27 @@ namespace descriptor {
 class Ship;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Ship;
 } // namespace control
+}
 
 namespace builder {
 
 class Ship : public BaseVehicle
 {
 public:
-    static control::Ship* gen(descriptor::Ship*);
-    static control::Ship* gen(int_t, int_t ob_id = NONE);
-    static control::Ship* gen();
+    static core::control::Ship* gen(descriptor::Ship*);
+    static core::control::Ship* gen(int_t, int_t ob_id = NONE);
+    static core::control::Ship* gen();
 
 private:
     Ship() = delete;
     ~Ship() = delete;
 
-    static control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
-    static void __createInternals(control::Ship*, descriptor::Ship*);
+    static core::control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
+    static void __createInternals(core::control::Ship*, descriptor::Ship*);
 }; 
 
 } // namespace builder

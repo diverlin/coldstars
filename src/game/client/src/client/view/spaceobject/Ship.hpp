@@ -22,6 +22,7 @@
 
 #include <map>
 
+namespace core {
 
 namespace control {
 class Ship;
@@ -31,6 +32,7 @@ namespace slot {
 class Item;
 } // namespace slot
 
+} // namespace core
 
 namespace view {
 
@@ -43,18 +45,18 @@ class Jet;
 class Ship : public Base
 {
 public:
-    Ship(control::Ship*);
+    Ship(core::control::Ship*);
     ~Ship() override final;
 
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
     void draw(const jeti::Render& render) const override final;
 
-    control::Ship* control() const { return m_control; }
+    core::control::Ship* control() const { return m_control; }
 
 private:
-    std::map<slot::Item*, view::Turrel*> m_slots_turrels;
+    std::map<core::slot::Item*, view::Turrel*> m_slots_turrels;
 
-    control::Ship* m_control = nullptr;
+    core::control::Ship* m_control = nullptr;
     std::vector<view::effect::Jet*> m_driveJets;
 
 protected:

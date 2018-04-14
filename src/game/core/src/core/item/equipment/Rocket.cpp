@@ -28,6 +28,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -190,3 +191,4 @@ std::string Rocket::ammoStr()
 
 } // namespace item
 } // namespace control
+} // namespace core

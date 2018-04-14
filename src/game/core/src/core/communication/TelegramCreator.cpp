@@ -398,15 +398,15 @@ TelegramCreator::__genImpulses(int num) const
     return result;
 }
 
-void TelegramCreator::death_spaceobject(control::SpaceObject* object)
+void TelegramCreator::death_spaceobject(core::control::SpaceObject* object)
 {
     switch(object->type()) {
-    case entity::Type::ASTEROID: death(static_cast<control::Asteroid*>(object)); break;
-    case entity::Type::CONTAINER: __death(static_cast<control::Container*>(object)); break;
-    case entity::Type::BULLET: death(static_cast<control::Bullet*>(object)); break;
+    case entity::Type::ASTEROID: death(static_cast<core::control::Asteroid*>(object)); break;
+    case entity::Type::CONTAINER: __death(static_cast<core::control::Container*>(object)); break;
+    case entity::Type::BULLET: death(static_cast<core::control::Bullet*>(object)); break;
     case entity::Type::SHIP:
     case entity::Type::SPACESTATION:
-    case entity::Type::SATELLITE: __death(static_cast<control::Vehicle*>(object)); break;
+    case entity::Type::SATELLITE: __death(static_cast<core::control::Vehicle*>(object)); break;
     default: assert(false);
     }
 }

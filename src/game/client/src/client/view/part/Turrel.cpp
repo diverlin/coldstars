@@ -25,7 +25,7 @@
 
 namespace view {
 
-Turrel::Turrel(control::Turrel* turrel)
+Turrel::Turrel(core::control::Turrel* turrel)
     :
       Base(turrel)
 {

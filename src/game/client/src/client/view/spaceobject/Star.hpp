@@ -20,24 +20,26 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Star;
 } // namespace descriptor
+} // namespace core
 
 namespace view {
 
 class Star : public Base
 {
 public:
-    Star(control::Star*);
+    Star(core::control::Star*);
     ~Star() override final;
 
     void draw(const jeti::Render& render) const override final;
 
-    control::Star* star() const { return m_star; }
+    core::control::Star* star() const { return m_star; }
 
 private:
-    control::Star* m_star = nullptr;
+    core::control::Star* m_star = nullptr;
 }; 
 
 } // namespace view

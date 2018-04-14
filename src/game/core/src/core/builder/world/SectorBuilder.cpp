@@ -34,7 +34,7 @@
 
 namespace builder {
 
-control::Sector*
+core::control::Sector*
 Sector::gen()
 {
     descriptor::Sector* descr = nullptr;
@@ -46,37 +46,37 @@ Sector::gen()
     return gen(descr);
 }
 
-control::Sector*
+core::control::Sector*
 Sector::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::Sector* descriptor = core::shortcuts::descriptors()->sector(descriptor_id);
-    control::Sector* sector = __genTemplate(descriptor, object_id);
+    core::control::Sector* sector = __genTemplate(descriptor, object_id);
     __createInternals(sector, descriptor);
     return sector;
 }
 
-control::Sector*
+core::control::Sector*
 Sector::gen(descriptor::Sector* descriptor)
 {
-    control::Sector* sector = __genTemplate(descriptor);
+    core::control::Sector* sector = __genTemplate(descriptor);
     __createInternals(sector, descriptor);
     return sector;
 } 
 
-control::Sector*
+core::control::Sector*
 Sector::__genTemplate(descriptor::Sector* descriptor, int_t object_id)
 {
     model::Sector* model = new model::Sector(descriptor->id(), object_id);
     assert(model);
 
-    control::Sector* sector = new control::Sector(descriptor, model);
+    core::control::Sector* sector = new core::control::Sector(descriptor, model);
     assert(sector);
 
     return sector;
 }
 
 void
-Sector::__createInternals(control::Sector* sector, descriptor::Sector* descriptor)
+Sector::__createInternals(core::control::Sector* sector, descriptor::Sector* descriptor)
 {
      // see composer, all logic there
 }

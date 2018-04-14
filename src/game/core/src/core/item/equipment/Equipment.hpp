@@ -24,6 +24,7 @@
 #include <core/item/modules/BaseModule.hpp>
 #endif
 
+namespace core {
 namespace control {
 
 class Equipment : public Item
@@ -48,4 +49,4 @@ protected:
 };
 
 } // namespace control
-
+} // namespace core

@@ -30,12 +30,12 @@ namespace model {
 class Planet;
 } // namespace model
 
-namespace control {
-class Land;
-class Vehicle;
-} // namespace control
+namespace core {
 
 namespace control {
+
+class Land;
+class Vehicle;
 
 class Planet : public Planetoid
 {
@@ -73,7 +73,7 @@ private:
 };
 
 } // namespace control
-
+} // namespace core
 
 
 

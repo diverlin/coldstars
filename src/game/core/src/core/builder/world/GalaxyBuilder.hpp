@@ -25,25 +25,27 @@ namespace descriptor {
 class Galaxy;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Galaxy;
 } // namespace control
+} // naemspace core
 
 namespace builder {
 
 class Galaxy
 {
 public:
-    static control::Galaxy* gen();
-    static control::Galaxy* gen(int_t, int_t object = NONE);
-    static control::Galaxy* gen(descriptor::Galaxy*);
+    static core::control::Galaxy* gen();
+    static core::control::Galaxy* gen(int_t, int_t object = NONE);
+    static core::control::Galaxy* gen(descriptor::Galaxy*);
 
 private:
     Galaxy() = delete;
     ~Galaxy() = delete;
 
-    static void __createInternals(control::Galaxy*, descriptor::Galaxy*);
-    static control::Galaxy* __genTemplate(descriptor::Galaxy*, int_t object = NONE);
+    static void __createInternals(core::control::Galaxy*, descriptor::Galaxy*);
+    static core::control::Galaxy* __genTemplate(descriptor::Galaxy*, int_t object = NONE);
 }; 
 
 } // namespace builder

@@ -23,11 +23,13 @@
 
 #include <map>
 
+namespace core {
+
 namespace control {
 class Base;
 }
+using namespace control;
 
-namespace core {
 namespace manager {
 
 class Garbage
@@ -39,11 +41,11 @@ public:
     Garbage& operator=(const Garbage&) = delete;
 
     bool contain(int_t id) const { return (m_entities.count(id) == 1); }
-    void add(control::Base*);
+    void add(Base*);
     void erase();
 
 private:
-    std::map<int_t, control::Base*> m_entities;
+    std::map<int_t, Base*> m_entities;
 };
 
 } // namespace manager

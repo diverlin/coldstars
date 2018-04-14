@@ -28,13 +28,13 @@
 
 namespace builder {
 
-control::WormHole*
+core::control::WormHole*
 WormHole::__genTemplate(descriptor::WormHole* descr)
 {
     model::WormHole* model = new model::WormHole(descr->id());
     assert(model);
 
-    control::WormHole* wormhole = new control::WormHole(descr, model);
+    core::control::WormHole* wormhole = new core::control::WormHole(descr, model);
     assert(wormhole);
 
     int size = 4;
@@ -44,7 +44,7 @@ WormHole::__genTemplate(descriptor::WormHole* descr)
     return wormhole;
 } 
 
-control::WormHole*
+core::control::WormHole*
 WormHole::gen()
 {
     descriptor::WormHole* descr = nullptr;
@@ -57,15 +57,15 @@ WormHole::gen()
     return gen(descr);
 } 
 
-control::WormHole*
+core::control::WormHole*
 WormHole::gen(descriptor::WormHole* descr)
 {
-    control::WormHole* wormhole = __genTemplate(descr);
+    core::control::WormHole* wormhole = __genTemplate(descr);
     return wormhole;
 }
 
 void
-WormHole::__createInternals(control::WormHole* wormhole)
+WormHole::__createInternals(core::control::WormHole* wormhole)
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     

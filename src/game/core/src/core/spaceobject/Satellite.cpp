@@ -29,6 +29,7 @@
 #include <core/model/spaceobject/Satellite.hpp>
 #include <core/descriptor/spaceobject/Satellite.hpp>
 
+namespace core {
 namespace control {
 
 Satellite::Satellite(descriptor::Satellite* descr, model::Satellite* model)
@@ -121,7 +122,7 @@ void Satellite::update(int time)
 //}
 
 } // namespace control
-
+} // namespace core
 
 
 

@@ -20,23 +20,25 @@
 
 #include <client/view/Base.hpp>
 
+namespace core {
 namespace control {
 class Container;
 } // namespace control
+} // namespace core
 
 namespace view {
 
 class Container : public Base
 {
 public:
-    Container(control::Container*);
+    Container(core::control::Container*);
     ~Container() final override;
 
     void draw(const jeti::Render& render) const override final;
-    control::Container* control() { return m_control; }
+    core::control::Container* control() { return m_control; }
 
 private:
-    control::Container* m_control = nullptr;
+    core::control::Container* m_control = nullptr;
 
     //virtual void UpdateInfo() override final;
 };

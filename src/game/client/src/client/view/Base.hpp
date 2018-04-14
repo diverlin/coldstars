@@ -38,9 +38,11 @@ class Material;
 
 } // namespace jeti
 
+namespace core {
 namespace control {
 class Base;
 } // namespace control
+} // namespace core
 
 namespace view {
 
@@ -52,7 +54,7 @@ class Base : public jeti::view::Base
 {
 public:
     Base(); // used for effects
-    Base(control::Base*);
+    Base(core::control::Base*);
     ~Base();
 
     // check all these in jeti::view::Base
@@ -67,7 +69,7 @@ public:
     const std::vector<Base*>& children() const { return m_children; }
     void update();
 
-    control::Base* control() const { return m_control_base; }
+    core::control::Base* control() const { return m_control_base; }
 
 protected:
     void _updatePoints() const;
@@ -83,7 +85,7 @@ protected:
     jeti::view::Path* _path() const { return m_path; }
 
 private:
-    control::Base* m_control_base = nullptr;
+    core::control::Base* m_control_base = nullptr;
     std::vector<jeti::Point*> m_points;
     std::vector<Base*> m_children;
     effect::Shield* m_shield = nullptr;

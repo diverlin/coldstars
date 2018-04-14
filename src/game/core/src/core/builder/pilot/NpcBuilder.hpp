@@ -25,25 +25,27 @@ namespace descriptor {
 class Npc;
 } // namespace descriptor
 
+namespace core {
 namespace control {
 class Npc;
 } // namespace control
+}
 
 namespace builder {
 
 class Npc
 {
 public:
-    static control::Npc* gen();
-    static control::Npc* gen(int_t descriptor_id, int_t id);
-    static control::Npc* gen(descriptor::Npc*, int_t id = NONE);
+    static core::control::Npc* gen();
+    static core::control::Npc* gen(int_t descriptor_id, int_t id);
+    static core::control::Npc* gen(descriptor::Npc*, int_t id = NONE);
 
 private:
     Npc() = delete;
     ~Npc() = delete;
 
-    static control::Npc* __createTemplate(descriptor::Npc*, int_t id);
-    static void __createInternals(control::Npc*, descriptor::Npc*);
+    static core::control::Npc* __createTemplate(descriptor::Npc*, int_t id);
+    static void __createInternals(core::control::Npc*, descriptor::Npc*);
 }; 
 
 } // namespace builder

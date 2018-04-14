@@ -28,10 +28,10 @@ public:
     MacroScenarioStarSystemLiberation();
     virtual ~MacroScenarioStarSystemLiberation();
 
-    virtual void enter(control::Npc*) const;
-    virtual void UpdateInStaticInSpace(control::Npc*) const;
-    virtual std::string GetDescription(control::Npc*) const;
-    virtual void exit(control::Npc*) const;
+    virtual void enter(core::control::Npc*) const;
+    virtual void UpdateInStaticInSpace(core::control::Npc*) const;
+    virtual std::string GetDescription(core::control::Npc*) const;
+    virtual void exit(core::control::Npc*) const;
 }; 
 
 

@@ -27,6 +27,7 @@
 #include <ceti/serialization/macro.hpp>
 #include <ceti/Logger.hpp>
 
+namespace core {
 namespace control {
 namespace item {
 
@@ -94,3 +95,4 @@ std::string Grapple::speedStr()
 
 } // namespace item
 } // namespace control
+} // naemspace core

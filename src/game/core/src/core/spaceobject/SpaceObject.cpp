@@ -26,6 +26,7 @@
 #include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
 
+namespace core {
 namespace control {
 
 SpaceObject::SpaceObject(descriptor::SpaceObject* descriptor, model::SpaceObject* model)
@@ -127,7 +128,7 @@ void SpaceObject::_checkDeath(bool show_effect)
 //}
 
 } // namespace control
-
+} // namespace core
 
 
 

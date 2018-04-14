@@ -23,7 +23,7 @@
 
 #include <ceti/StringUtils.hpp>
 
-
+namespace core {
 namespace control {
 
 Base::Base(descriptor::Base* descr, model::Base* model)
@@ -58,3 +58,4 @@ Base::die()
 }
 
 } // namespace control
+} // namespace core

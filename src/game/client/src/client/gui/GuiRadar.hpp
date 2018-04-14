@@ -20,10 +20,12 @@
 
 #include "BaseGuiElement.hpp"
 
+namespace core {
 namespace control {
 class SpaceObject;
 class Vehicle;
 } // namespace model
+} // namespace core
 
 namespace jeti {
 class Mesh;
@@ -71,7 +73,7 @@ private:
     ceti::Box2D m_box_screenrect;
     ceti::Box2D m_box_range;
 
-    std::vector<control::SpaceObject*> m_entities;
+    std::vector<core::control::SpaceObject*> m_entities;
     jeti::Mesh* m_entitiesMesh = nullptr;
 
     std::vector<glm::vec3> m_positions;
@@ -80,8 +82,8 @@ private:
 
     void __reset();
 
-    void __add(control::SpaceObject*);
-    void __addVisible(control::SpaceObject*, control::Vehicle*);
+    void __add(core::control::SpaceObject*);
+    void __addVisible(core::control::SpaceObject*, core::control::Vehicle*);
 };
 
 } // namespace gui

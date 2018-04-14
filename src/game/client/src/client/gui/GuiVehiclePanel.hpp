@@ -21,9 +21,11 @@
 
 #include "BaseGuiElement.hpp"
 
+namespace core {
 namespace control {
 class Vehicle;
 } // namespace control
+} // namespace core
 
 namespace gui {
 
@@ -42,14 +44,14 @@ protected:
     virtual void _updateUnique(client::Player*) override final;
 
 private:
-    control::Vehicle* m_vehicle = nullptr;
+    core::control::Vehicle* m_vehicle = nullptr;
     std::vector<ButtonItemSlot2*> m_slotbuttons;
 
     ButtonItemSlot2* __button(gui::Type, int offset) const;
 
     void __clear();
-    void __bindVehicle(control::Vehicle*);
-    void __createFunctionalItemSlotsWithCircleGeometry(control::Vehicle*);
+    void __bindVehicle(core::control::Vehicle*);
+    void __createFunctionalItemSlotsWithCircleGeometry(core::control::Vehicle*);
 };
 
 } // namespace gui

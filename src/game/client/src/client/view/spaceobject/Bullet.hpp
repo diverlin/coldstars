@@ -20,10 +20,11 @@
 
 #include <client/view/Base.hpp>
 
-
+namespace core {
 namespace control {
 class Bullet;
 } // namespace control
+} // namespace core
 
 namespace view {
 
@@ -34,14 +35,14 @@ class Jet;
 class Bullet : public Base
 {
 public:
-    Bullet(control::Bullet*);
+    Bullet(core::control::Bullet*);
     ~Bullet() final override;
 
     void draw(const jeti::Render& render) const override final;
-    control::Bullet* control() { return m_control; }
+    core::control::Bullet* control() { return m_control; }
 
 private:
-    control::Bullet* m_control = nullptr;
+    core::control::Bullet* m_control = nullptr;
     view::effect::Jet* m_driveJet = nullptr;
     //virtual void UpdateInfo() override final;
 };

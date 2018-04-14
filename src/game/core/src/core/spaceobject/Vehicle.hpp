@@ -45,20 +45,15 @@ class StarSystem;
 class Item;
 } // namespace model
 
+namespace core {
 namespace slot {
 class Vehicle;
 } // namespace slot
 
-namespace control {
-class Container;
-class Npc;
-class Item;
-class Land;
-} //namespace control
-
 namespace slot {
 class Item;
 } // namespace slot
+} // namespace core
 
 class Equipment;
 class BaseParticleSystem;
@@ -81,7 +76,14 @@ enum class VEHICLE_SPECIAL_ACTION_TYPE {
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
+namespace core {
+
 namespace control {
+
+class Container;
+class Npc;
+class Item;
+class Land;
 
 class Vehicle : public SpaceObject
 {
@@ -137,9 +139,9 @@ public:
     bool manage(Item*);
     bool remove(Item*);
 
-    complex::Weapon& weapons() { return m_weapon_complex; }
-    const complex::Drive& navigator() const { return m_drive_complex; }
-    complex::Drive& navigator() { return m_drive_complex; }
+    core::complex::Weapon& weapons() { return m_weapon_complex; }
+    const core::complex::Drive& navigator() const { return m_drive_complex; }
+    core::complex::Drive& navigator() { return m_drive_complex; }
     //
 
     void resetTargets();
@@ -161,7 +163,7 @@ public:
     Land* land() const { return m_Land; }
     VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_specialActionId; }
 
-    slot::Vehicle* parentVehicleSlot() const { return m_parentVehicleSlot; }
+    core::slot::Vehicle* parentVehicleSlot() const { return m_parentVehicleSlot; }
 
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
@@ -200,20 +202,20 @@ public:
 
 public:
     [[warning("used only for tests")]]
-    std::vector<slot::Item*> bakSlots() const { return m_drive_complex.bakSlots(); }
-    std::vector<slot::Item*> driveSlots() const { return m_drive_complex.driveSlots(); }
-    std::vector<slot::Item*> radarSlots() const { return m_radarSlots; }
-    std::vector<slot::Item*> scanerSlots() const { return m_scanerSlots; }
+    std::vector<core::slot::Item*> bakSlots() const { return m_drive_complex.bakSlots(); }
+    std::vector<core::slot::Item*> driveSlots() const { return m_drive_complex.driveSlots(); }
+    std::vector<core::slot::Item*> radarSlots() const { return m_radarSlots; }
+    std::vector<core::slot::Item*> scanerSlots() const { return m_scanerSlots; }
 #ifdef USE_EXTRA_EQUIPMENT
 //    slot::ItemSlot* energizerSlot() const { return m_energizerSlot; }
 //    slot::ItemSlot* freezerSlot()   const { return m_freezerSlot; }
 #endif // USE_EXTRA_EQUIPMENT
-    std::vector<slot::Item*> grappleSlots() const { return m_grapple_complex.grappleSlots(); }
-    std::vector<slot::Item*> droidSlots() const { return m_droidSlots; }
-    std::vector<slot::Item*> protectorSlots() const { return m_protector_complex.protectorSlots(); }
+    std::vector<core::slot::Item*> grappleSlots() const { return m_grapple_complex.grappleSlots(); }
+    std::vector<core::slot::Item*> droidSlots() const { return m_droidSlots; }
+    std::vector<core::slot::Item*> protectorSlots() const { return m_protector_complex.protectorSlots(); }
 
-    std::vector<slot::Item*> weaponSlots() const { return m_weapon_complex.weaponSlots(); }
-    std::vector<slot::Item*> cargoSlots() const { return m_cargoSlots; }
+    std::vector<core::slot::Item*> weaponSlots() const { return m_weapon_complex.weaponSlots(); }
+    std::vector<core::slot::Item*> cargoSlots() const { return m_cargoSlots; }
 
 private:
     void __updateSpecialAction();
@@ -336,7 +338,7 @@ private:
 
     control::Npc* m_npc = nullptr;
 
-    slot::Vehicle* m_parentVehicleSlot = nullptr;
+    core::slot::Vehicle* m_parentVehicleSlot = nullptr;
 
     Land* m_Land = nullptr;
 
@@ -354,10 +356,10 @@ private:
 
     Propetries m_properties;
     VehicleNeeds m_needs;
-    complex::Weapon m_weapon_complex;
-    complex::Drive m_drive_complex;
-    complex::Protector m_protector_complex;
-    complex::Grapple m_grapple_complex;
+    core::complex::Weapon m_weapon_complex;
+    core::complex::Drive m_drive_complex;
+    core::complex::Protector m_protector_complex;
+    core::complex::Grapple m_grapple_complex;
 
     std::map<int, slot::Item*> m_slots;
 
@@ -378,9 +380,9 @@ private:
 
     bool __installItem(Item*);
     bool __installEquipment(Item*);
-    slot::Item* __freeFunctionalSlot(const slot::Type&) const;
+    core::slot::Item* __freeFunctionalSlot(const core::slot::Type&) const;
 
-    std::vector<slot::Item*> __equipedSlotsByType(const slot::Type&);
+    std::vector<slot::Item*> __equipedSlotsByType(const core::slot::Type&);
 
     void __loadModel();
     void __loadItemsFromModel();
@@ -390,7 +392,7 @@ private:
 
 
 } // namespace control
-
+} // namespace core
 
 
 

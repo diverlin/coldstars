@@ -31,18 +31,17 @@
 
 #include <meti/RandUtils.hpp>
 
-
 namespace builder {
 
-control::SpaceStation*
+core::control::SpaceStation*
 SpaceStation::gen(descriptor::SpaceStation* descr)
 {
-    control::SpaceStation* spacestation = __genTemplate(descr);
+    core::control::SpaceStation* spacestation = __genTemplate(descr);
     __createInternals(spacestation, descr);
     return spacestation;
 }
 
-control::SpaceStation*
+core::control::SpaceStation*
 SpaceStation::gen()
 {
     descriptor::SpaceStation* descr = nullptr;
@@ -56,7 +55,7 @@ SpaceStation::gen()
 }
 
 void
-SpaceStation::__createInternals(control::SpaceStation* spacestation, descriptor::SpaceStation* descr)
+SpaceStation::__createInternals(core::control::SpaceStation* spacestation, descriptor::SpaceStation* descr)
 {
     spacestation->setSize(descr->size());
 //    //jeti::Mesh* mesh = nullptr;
@@ -144,13 +143,13 @@ SpaceStation::__createInternals(control::SpaceStation* spacestation, descriptor:
 ////    spacestation->bindLand(core::global::get().kosmoportBuilder().create());
 }
 
-control::SpaceStation*
+core::control::SpaceStation*
 SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
 {
     model::SpaceStation* model = new model::SpaceStation(descr->id());
     assert(model);
 
-    control::SpaceStation* spacestation = new control::SpaceStation(descr, model);
+    core::control::SpaceStation* spacestation = new core::control::SpaceStation(descr, model);
     assert(spacestation);
 
     return spacestation;

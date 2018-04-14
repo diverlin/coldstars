@@ -33,6 +33,7 @@ class Weapon;
 } // namespace item
 } // namespace model
 
+namespace core {
 namespace control {
 
 class SpaceObject;
@@ -72,3 +73,4 @@ private:
 
 } // namespace item
 } // namespace control
+} // namespace core

@@ -27,6 +27,7 @@
 #include <core/descriptor/dock/Room.hpp>
 #include <core/model/dock/Room.hpp>
 
+namespace core {
 namespace control {    
 
 Room::Room(descriptor::Room* descr, model::Room* model)
@@ -43,6 +44,7 @@ Room::Room(descriptor::Room* descr, model::Room* model)
 //}
 
 } // namespace control
+} // namespace core
 
 //void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 //{

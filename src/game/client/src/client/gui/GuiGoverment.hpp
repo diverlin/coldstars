@@ -20,10 +20,11 @@
 
 #include "BaseGuiElement.hpp"
 
+namespace core {
 namespace control {
 class Goverment;
 } // namespace control
-
+} // namespace core
 
 namespace gui {
 
@@ -33,13 +34,13 @@ public:
     GuiGoverment() = default;
     ~GuiGoverment() = default;
 
-    void bind(control::Goverment*);
+    void bind(core::control::Goverment*);
     void release();
 
-    control::Goverment* goverment() const { return m_goverment; }
+    core::control::Goverment* goverment() const { return m_goverment; }
 
 private:
-    control::Goverment* m_goverment = nullptr;
+    core::control::Goverment* m_goverment = nullptr;
 };
 
 } // namespace gui

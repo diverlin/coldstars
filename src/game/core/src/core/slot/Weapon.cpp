@@ -20,7 +20,7 @@
 
 #include <core/slot/ItemSlot.hpp>
 
-
+namespace core {
 namespace slot {
 
 Weapon::Weapon()
@@ -62,4 +62,4 @@ bool Weapon::validateSubTarget() const
 }
 
 } // namespace slot
-
+} // namespace core

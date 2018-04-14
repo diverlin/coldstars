@@ -33,14 +33,14 @@ MicroScenarioExploration::~MicroScenarioExploration()
 {}
     
 /* virtual */
-void MicroScenarioExploration::enter(control::Npc* npc) const
+void MicroScenarioExploration::enter(core::control::Npc* npc) const
 {    
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioExploration");
 }
 
 /* virtual */
-void MicroScenarioExploration::UpdateInStaticInSpace(control::Npc* npc) const
+void MicroScenarioExploration::UpdateInStaticInSpace(core::control::Npc* npc) const
 {
     assert(false);
     //    if (npc->vehicle()->driveComplex().PathExists() == false)
@@ -51,18 +51,18 @@ void MicroScenarioExploration::UpdateInStaticInSpace(control::Npc* npc) const
 }
 
 /* virtual */
-void MicroScenarioExploration::UpdateInDynamicInSpace(control::Npc* npc) const
+void MicroScenarioExploration::UpdateInDynamicInSpace(core::control::Npc* npc) const
 {}
 
 /* virtual */
-void MicroScenarioExploration::exit(control::Npc* npc) const
+void MicroScenarioExploration::exit(core::control::Npc* npc) const
 {
     assert(false);
     //LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioExploration");
 }
 
 /* virtual */
-std::string MicroScenarioExploration::GetDescription(control::Npc* npc) const
+std::string MicroScenarioExploration::GetDescription(core::control::Npc* npc) const
 {
     return "MicroScenarioExploration";
 }

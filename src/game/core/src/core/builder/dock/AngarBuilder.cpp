@@ -33,7 +33,7 @@
 
 namespace builder {
 
-control::Angar*
+core::control::Angar*
 Angar::gen()
 {
     descriptor::Angar* descr = nullptr;
@@ -45,21 +45,21 @@ Angar::gen()
     return gen(descr);
 } 
 
-control::Angar*
+core::control::Angar*
 Angar::gen(descriptor::Angar* descr)
 {
-    control::Angar* angar = __createTemplate(descr);
+    core::control::Angar* angar = __createTemplate(descr);
     __createInternals(angar);
     return angar;
 }
 
-control::Angar*
+core::control::Angar*
 Angar::__createTemplate(descriptor::Angar* descr)
 {
     model::Angar* model = new model::Angar(descr->id());
     assert(model);
 
-    control::Angar* angar = new control::Angar(descr, model);
+    core::control::Angar* angar = new core::control::Angar(descr, model);
     assert(angar);
 
     core::shortcuts::entities()->add(angar);
@@ -68,15 +68,15 @@ Angar::__createTemplate(descriptor::Angar* descr)
 }
 
 void
-Angar::__createInternals(control::Angar* angar)
+Angar::__createInternals(core::control::Angar* angar)
 { 
     for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
-        slot::Vehicle* slot = new slot::Vehicle(i);
+        core::slot::Vehicle* slot = new core::slot::Vehicle(i);
         angar->add(slot);
     }
 
     for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
-        slot::Item* slot = new slot::Item(slot::Type::CARGO);
+        core::slot::Item* slot = new core::slot::Item(core::slot::Type::CARGO);
         slot->setOffset(i);
         angar->add(slot);
     }

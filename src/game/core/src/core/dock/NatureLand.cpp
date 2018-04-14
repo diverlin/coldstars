@@ -30,6 +30,7 @@
 #include <core/descriptor/dock/NatureLand.hpp>
 #include <core/model/dock/NatureLand.hpp>
 
+namespace core {
 namespace control {
 
 NatureLand::NatureLand(descriptor::NatureLand* descr, model::NatureLand* model)
@@ -188,3 +189,4 @@ std::string NatureLand::vehiclesStr() const
 //}
 
 } // namespace control
+} // namespace core

@@ -27,6 +27,7 @@
 
 #include <ceti/type/IdType.hpp>
 
+namespace core {
 namespace control {
 
 class SpaceObject;
@@ -48,11 +49,8 @@ class Drive;
 class Grapple;
 } // namespace item
 
-} // naemspace control
-
-namespace control {
-
 } // namespace control
+} // namespace core
 
 #ifdef USE_MODULES
 class RocketModule;
@@ -71,6 +69,7 @@ class GrappleModule;
 class Bomb; 
 class GoodsPack; 
 
+namespace core {
 namespace slot {
 
 class Item : public Base, public Weapon
@@ -86,23 +85,23 @@ public:
 
     int hitProbability() const { return m_hitProbability; }
 
-    control::item::Weapon* weapon() const { return static_cast<control::item::Weapon*>(m_item); }
-    control::Item* item() const { return m_item; }
+    core::control::item::Weapon* weapon() const { return static_cast<core::control::item::Weapon*>(m_item); }
+    core::control::Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
-    control::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<control::item::Rocket*>(m_item); }
-    control::item::Lazer*     lazerEquipment()     const { return reinterpret_cast<control::item::Lazer*>(m_item); }
-    control::item::Radar*     radarEquipment()     const { return reinterpret_cast<control::item::Radar*>(m_item); }
-    control::item::Drive*     driveEquipment()     const { return reinterpret_cast<control::item::Drive*>(m_item); }
-    control::item::Bak*       bakEquipment()       const { return reinterpret_cast<control::item::Bak*>(m_item); }
+    core::control::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<core::control::item::Rocket*>(m_item); }
+    core::control::item::Lazer*     lazerEquipment()     const { return reinterpret_cast<core::control::item::Lazer*>(m_item); }
+    core::control::item::Radar*     radarEquipment()     const { return reinterpret_cast<core::control::item::Radar*>(m_item); }
+    core::control::item::Drive*     driveEquipment()     const { return reinterpret_cast<core::control::item::Drive*>(m_item); }
+    core::control::item::Bak*       bakEquipment()       const { return reinterpret_cast<core::control::item::Bak*>(m_item); }
 #ifdef USE_EXTRA_EQUIPMENT
     control::item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<control::item::EnergizerEquipment*>(m_item); }
     control::item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<control::item::FreezerEquipment*>(m_item); }
 #endif
-    control::item::Protector* protectorEquipment() const { return reinterpret_cast<control::item::Protector*>(m_item); }
-    control::item::Droid*     droidEquipment()     const { return reinterpret_cast<control::item::Droid*>(m_item); }
-    control::item::Scaner*    scanerEquipment()    const { return reinterpret_cast<control::item::Scaner*>(m_item); }
-    control::item::Grapple*   grappleEquipment()   const { return reinterpret_cast<control::item::Grapple*>(m_item); }
+    core::control::item::Protector* protectorEquipment() const { return reinterpret_cast<core::control::item::Protector*>(m_item); }
+    core::control::item::Droid*     droidEquipment()     const { return reinterpret_cast<core::control::item::Droid*>(m_item); }
+    core::control::item::Scaner*    scanerEquipment()    const { return reinterpret_cast<core::control::item::Scaner*>(m_item); }
+    core::control::item::Grapple*   grappleEquipment()   const { return reinterpret_cast<core::control::item::Grapple*>(m_item); }
 
 #ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
@@ -121,8 +120,8 @@ public:
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
-    bool insert(control::Item*);
-    control::Item* takeItem();
+    bool insert(core::control::Item*);
+    core::control::Item* takeItem();
     void release();
 
     void updateVehiclePropetries() const;
@@ -133,11 +132,11 @@ public:
     void deselectEvent();
 
 private:
-    control::Item* m_item = nullptr;
+    core::control::Item* m_item = nullptr;
 
     int m_hitProbability = 0;
 
-    bool __checkItemInsertion(control::Item*) const;
+    bool __checkItemInsertion(core::control::Item*) const;
 
     void log(const std::string&) const;
 
@@ -154,5 +153,5 @@ private:
 };
 
 } // namespace slot
-
+} // namespace core
 

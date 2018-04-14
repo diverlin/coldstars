@@ -28,6 +28,7 @@ namespace model {
 class Bullet;
 } // namespace model
 
+namespace core {
 namespace control {
 
 class Bullet : public SpaceObject
@@ -58,10 +59,10 @@ private:
     descriptor::Bullet* m_descriptor_bullet = nullptr;
     model::Bullet* m_model_bullet = nullptr;
 
-    control::SpaceObject* m_target = nullptr;
+    core::control::SpaceObject* m_target = nullptr;
 
     bool __checkTarget() const;
 };
 
 } // namespace control
-
+} // namespace core
