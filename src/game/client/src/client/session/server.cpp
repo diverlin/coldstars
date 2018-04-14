@@ -72,8 +72,9 @@
 Server::Server(int id, bool dummy)
     :
       m_id(id)
+    , m_session(new core::Session(core::Session::Type::SERVER))
 {
-    core::Sessions::get().add(id, new core::Session(core::Session::Type::SERVER));
+    core::Sessions::get().add(id, m_session);
     __activate();
 
     m_telegramHandler = std::shared_ptr<core::comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
