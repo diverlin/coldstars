@@ -52,7 +52,7 @@
 namespace core {
 namespace control {
 
-Vehicle::Vehicle(VehicleDescr* descr, model::VehicleModel* model)
+Vehicle::Vehicle(VehicleDescr* descr, VehicleModel* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_vehicle(descr)
@@ -848,7 +848,7 @@ void Vehicle::__updateSpecialAction()
 }
 
 //// ******** dock/LAUNCHING ********
-void Vehicle::HyperJumpEvent(model::StarSystemModel* starsystem)
+void Vehicle::HyperJumpEvent(StarSystemModel* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
 
@@ -1469,7 +1469,7 @@ void Vehicle::_updateArtefactInfluence()
 //    }
 //}
 
-bool Vehicle::isAbleToJumpTo(model::StarSystemModel* target_starsystem) const
+bool Vehicle::isAbleToJumpTo(StarSystemModel* target_starsystem) const
 {
     assert(false);
 //    float dist = meti::distance(starsystem()->position(), target_starsystem->position());

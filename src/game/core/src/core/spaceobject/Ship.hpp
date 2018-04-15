@@ -25,7 +25,7 @@ namespace core {
 class ShipDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class ShipModel;
 } // namespace model
 
@@ -35,7 +35,7 @@ namespace control {
 class Ship : public Vehicle
 {
 public:
-    Ship(ShipDescr*, model::ShipModel*);
+    Ship(ShipDescr*, ShipModel*);
     ~Ship() override final;
 
     virtual void update(int time=1) override final;
@@ -46,11 +46,11 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
 
     ShipDescr* descriptor() const { return m_descriptor_ship; }
-    model::ShipModel* model() const { return m_model_ship; }
+    ShipModel* model() const { return m_model_ship; }
 
 private:
     ShipDescr* m_descriptor_ship = nullptr;
-    model::ShipModel* m_model_ship = nullptr;
+    ShipModel* m_model_ship = nullptr;
 };
 
 } // namespace control

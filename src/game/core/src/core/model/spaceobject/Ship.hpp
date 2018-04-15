@@ -25,7 +25,7 @@
 
 #include <string>
 
-namespace model {
+namespace core {
 
 class ShipModel : public VehicleModel
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = VehicleModel::info();
-        result.add("model::Ship");
+        result.add("Ship");
         return result;
     }
 

@@ -24,7 +24,7 @@ namespace core {
 class ItemSlot;
 } // namespace core
 
-namespace model {
+namespace core {
 class SpaceObjectModel;
 } // namespace model
 

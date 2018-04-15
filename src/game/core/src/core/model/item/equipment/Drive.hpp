@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class DriveModel : public EquipmentModel
 {
@@ -39,7 +39,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Drive");
+        result.add("Drive");
         result.add("speed", m_speed);
         result.add("hyper", m_hyper);
         return result;

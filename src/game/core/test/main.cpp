@@ -75,6 +75,8 @@
 
 #include <ctime>
 
+using namespace core;
+
 TEST(core, accessors)
 {
     core::HitComDescr descriptor(22, 33, 44);
@@ -166,7 +168,7 @@ TEST(clone, galaxy)
     core::control::Galaxy* galaxy = core::GalaxyBuilder::gen();
 
     // clone
-    model::GalaxyModel* model = new model::GalaxyModel(galaxy->model()->data());
+    core::GalaxyModel* model = new core::GalaxyModel(galaxy->model()->data());
     core::control::Galaxy* clone = new core::control::Galaxy(galaxy->descriptor(), model);
 
     EXPECT_EQ(galaxy->model()->data(), clone->model()->data());
@@ -181,7 +183,7 @@ TEST(clone, sector)
     core::control::Sector* sector = core::SectorBuilder::gen();
 
     // clone
-    model::SectorModel* model = new model::SectorModel(sector->model()->data());
+    SectorModel* model = new SectorModel(sector->model()->data());
     core::control::Sector* clone = new core::control::Sector(sector->descriptor(), model);
 
     EXPECT_EQ(sector->model()->data(), clone->model()->data());
@@ -196,7 +198,7 @@ TEST(clone, starsystem)
     core::control::StarSystem* starsystem = core::StarSystemBuilder::gen();
 
     // clone
-    model::StarSystemModel* model = new model::StarSystemModel(starsystem->model()->data());
+    StarSystemModel* model = new StarSystemModel(starsystem->model()->data());
     core::control::StarSystem* clone = new core::control::StarSystem(starsystem->descriptor(), model);
 
     EXPECT_EQ(starsystem->model()->data(), clone->model()->data());
@@ -211,7 +213,7 @@ TEST(clone, asteroid)
     core::control::Asteroid* asteroid = core::AsteroidBuilder::gen();
 
     // clone
-    model::AsteroidModel* model = new model::AsteroidModel(asteroid->model()->data());
+    AsteroidModel* model = new AsteroidModel(asteroid->model()->data());
     core::control::Asteroid* clone = new core::control::Asteroid(asteroid->descriptor(), model);
 
     EXPECT_EQ(asteroid->model()->data(), clone->model()->data());

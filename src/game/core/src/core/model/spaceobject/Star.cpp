@@ -34,7 +34,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace model {
+namespace core {
 
 StarModel::StarModel(int_t descriptor_id, int_t id)
 {

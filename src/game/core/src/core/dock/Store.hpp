@@ -25,7 +25,7 @@ namespace core {
 class StoreDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class StoreModel;
 } // namespace model
 
@@ -43,7 +43,7 @@ class Npc;
 class Store : public Room
 {
 public:
-    Store(StoreDescr*, model::StoreModel*);
+    Store(StoreDescr*, StoreModel*);
     ~Store();
 
     virtual void putChildrenToGarbage() const;
@@ -71,10 +71,10 @@ private:
     std::vector<VehicleSlot*> m_vehicle_slots;
 
     StoreDescr* m_descriptor_store = nullptr;
-    model::StoreModel* m_model_store = nullptr;
+    StoreModel* m_model_store = nullptr;
 
     StoreDescr* descriptor() const { return m_descriptor_store; }
-    model::StoreModel* model() const { return m_model_store; }
+    StoreModel* model() const { return m_model_store; }
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);

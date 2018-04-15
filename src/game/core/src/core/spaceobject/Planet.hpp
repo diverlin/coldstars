@@ -26,7 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace model {
+namespace core {
 class PlanetModel;
 } // namespace model
 
@@ -40,7 +40,7 @@ class Vehicle;
 class Planet : public Planetoid
 {
 public:
-    Planet(PlanetDescr*, model::PlanetModel*);
+    Planet(PlanetDescr*, PlanetModel*);
     virtual ~Planet();
 
     void bindLand(Land*);
@@ -56,11 +56,11 @@ public:
     void updateInSpaceInStatic();
 
     PlanetDescr* descriptor() const { return m_descriptor_planet; }
-    model::PlanetModel* model() const { return m_model_planet; }
+    PlanetModel* model() const { return m_model_planet; }
 
 private:
     PlanetDescr* m_descriptor_planet = nullptr;
-    model::PlanetModel* m_model_planet = nullptr;
+    PlanetModel* m_model_planet = nullptr;
 
     Land* m_land = nullptr;
 

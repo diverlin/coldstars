@@ -74,7 +74,7 @@ AsteroidBuilder::gen(core::AsteroidDescr* descr, int_t id)
     //    data_life.dying_time = 50;
     //    model->setLifeData(data_life);
 
-    //    float scale_comp = meti::getRandInt(model::Asteroid::SCALE_MIN, model::Asteroid::SCALE_MAX);
+    //    float scale_comp = meti::getRandInt(Asteroid::SCALE_MIN, Asteroid::SCALE_MAX);
     //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
 
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE_DEFORMED);
@@ -93,7 +93,7 @@ AsteroidBuilder::gen(core::AsteroidDescr* descr, int_t id)
 core::control::Asteroid*
 AsteroidBuilder::__genTemplate(core::AsteroidDescr* descr, int_t id)
 {
-    model::AsteroidModel* model = new model::AsteroidModel(descr->id(), id);
+    AsteroidModel* model = new AsteroidModel(descr->id(), id);
     assert(model);
 
     core::control::Asteroid* asteroid = new core::control::Asteroid(descr, model);

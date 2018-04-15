@@ -50,7 +50,7 @@ createMaterialFromDescriptorId(int_t id) {
     assert(id != NONE);
     ceti::MaterialDescr* descriptor = core::shortcuts::descriptors()->materials()->get(id);
     assert(descriptor);
-    jeti::model::Material* model = new jeti::model::Material(descriptor);
+    jeti::MaterialModel* model = new jeti::MaterialModel(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
     assert(material);
     return material;
@@ -61,7 +61,7 @@ createMaterialByDescriptorType(texture::Type type) {
     //assert(type != texture::Type::NONE);
     ceti::MaterialDescr* descriptor = core::shortcuts::descriptors()->materials()->random(int(type));
     assert(descriptor);
-    jeti::model::Material* model = new jeti::model::Material(descriptor);
+    jeti::MaterialModel* model = new jeti::MaterialModel(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
     assert(material);
     return material;

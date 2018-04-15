@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 StoreModel::StoreModel(int_t descriptor_id)
 {

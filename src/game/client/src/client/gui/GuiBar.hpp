@@ -27,7 +27,7 @@ class Bar : public Base
 public:
     enum class Orientation: int {top, bottom};
 
-    Bar(jeti::model::Material*, Orientation orientation);
+    Bar(jeti::MaterialModel*, Orientation orientation);
     virtual ~Bar();
 
 protected:

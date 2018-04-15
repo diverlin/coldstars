@@ -63,7 +63,7 @@ core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 namespace core {
 namespace control {
 
-StarSystem::StarSystem(StarSystemDescr* descr, model::StarSystemModel* model)
+StarSystem::StarSystem(StarSystemDescr* descr, StarSystemModel* model)
     :
       Base(descr, model)
     , m_descriptor_starsystem(descr)
@@ -139,10 +139,10 @@ void StarSystem::putChildrenToGarbage() const
     //for(unsigned int i=0; i<m_vehicles.size(); i++)   { manager::EntityManager::get().addToGarbage(m_vehicles[i]); }
 }      
 
-model::Npc*
+NpcModel*
 StarSystem::freeLeaderByRaceId(race::Type race_id) const
 {
-    std::vector<model::Npc*> npcs;
+    std::vector<NpcModel*> npcs;
     for (Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        if (vehicle->npc()->raceId() == race_id) {
@@ -151,8 +151,8 @@ StarSystem::freeLeaderByRaceId(race::Type race_id) const
     }
     
     int leader_skill_max = 0;
-    model::Npc* result = nullptr;
-    for (model::Npc* npc: npcs) {
+    NpcModel* result = nullptr;
+    for (NpcModel* npc: npcs) {
         int leader_skill = npc->skills().leader();
         if (leader_skill > leader_skill_max) {
             leader_skill_max = leader_skill;
@@ -163,9 +163,9 @@ StarSystem::freeLeaderByRaceId(race::Type race_id) const
     return result;
 }
 
-void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* target_starsystem, int num_max) const
+void StarSystem::createGroupAndShareTask(NpcModel* npc_leader, StarSystem* target_starsystem, int num_max) const
 {    
-    std::vector<model::Npc*> npcs;
+    std::vector<NpcModel*> npcs;
     for (Vehicle* vehicle: m_vehicles) {
         assert(false);
         //        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
@@ -174,7 +174,7 @@ void StarSystem::createGroupAndShareTask(model::Npc* npc_leader, StarSystem* tar
     }
     
     int num = 0;
-    for (model::Npc* npc: npcs) {
+    for (NpcModel* npc: npcs) {
         if (num>num_max)
             break;
 
@@ -218,7 +218,7 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
     m_ships.push_back(ship);
 }
 
-void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& direction, const model::SpaceObjectModel* const parent)
+void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& direction, const SpaceObjectModel* const parent)
 {
     __addVehicleCommon(satellite, position, direction);
     model()->addSatellite(satellite->id());

@@ -30,8 +30,6 @@
 
 namespace ceti {
 
-namespace model {
-
 class OrientationModel
 {
 public:
@@ -53,7 +51,7 @@ public:
 public:
     virtual ceti::InfoTable info() const {
         ceti::InfoTable result;
-        result.add("ceti::model::Orientation");
+        result.add("ceti::Orientation");
         result.add("position", m_position);
         result.add("size", m_size);
         result.add("scale", m_scale);
@@ -78,15 +76,13 @@ private:
     }
 };
 
-} // namespace model
-
 namespace control {
 
 class Orientation
 {
 public:
     Orientation();
-    Orientation(model::OrientationModel* model);
+    Orientation(OrientationModel* model);
     virtual ~Orientation();
 
     void setPosition(float x, float y, float z);
@@ -113,11 +109,11 @@ public:
 
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
-    model::OrientationModel* model() const { return m_model_orientation; }
+    OrientationModel* model() const { return m_model_orientation; }
 
 private:
     bool m_own_model = false;
-    model::OrientationModel* m_model_orientation = nullptr;
+    OrientationModel* m_model_orientation = nullptr;
 
     bool m_isUpdated = false;
     float m_collisionRadius = 0;

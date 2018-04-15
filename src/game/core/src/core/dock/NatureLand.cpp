@@ -33,7 +33,7 @@
 namespace core {
 namespace control {
 
-NatureLand::NatureLand(NatureLandDescr* descr, model::NatureLandModel* model)
+NatureLand::NatureLand(NatureLandDescr* descr, NatureLandModel* model)
     :
       Land(descr, model)
     , m_descriptor_natureland(descr)

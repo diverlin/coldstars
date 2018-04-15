@@ -32,7 +32,7 @@ BaseButton::BaseButton(Type id,
                        Type group,
                        const std::string& info,
                        void (*pAction)(client::Player*),
-                       jeti::model::Material* material)
+                       jeti::MaterialModel* material)
     :
       Base(id, group, info, material),
       m_action(pAction)

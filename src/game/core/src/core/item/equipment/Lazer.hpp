@@ -24,7 +24,7 @@ namespace core {
 class LazerDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class LazerModel;
 } // namespace model
 
@@ -34,18 +34,18 @@ namespace control {
 class Lazer : public Weapon
 {
 public:
-    Lazer(LazerDescr*, model::LazerModel*);
+    Lazer(LazerDescr*, LazerModel*);
     virtual ~Lazer() = default;
 
     bool checkAmmo() const override final;
     void fire(control::SpaceObject*, float rate=1.0f) override final;
 
     LazerDescr* descriptor() const { m_descriptor_lazer; }
-    model::LazerModel* model() const { return m_model_lazer; }
+    LazerModel* model() const { return m_model_lazer; }
 
 private:
     LazerDescr* m_descriptor_lazer = nullptr;
-    model::LazerModel* m_model_lazer = nullptr;
+    LazerModel* m_model_lazer = nullptr;
 
     //              jeti::control::TextureOb* texOb_turrel;
     //              jeti::control::TextureOb* texOb_lazerEffect;

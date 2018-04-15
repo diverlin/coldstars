@@ -47,31 +47,30 @@
 #include "../common/GameDate.hpp" 
 #include <core/type/RaceType.hpp>
 
-namespace model {
 
-Npc::Npc(int_t descriptor_id, int_t id)
+namespace core {
+
+
+NpcModel::NpcModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Npc::Npc(const std::string& data)
+NpcModel::NpcModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Npc::data() const
+NpcModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace model
-
-namespace core {
 namespace control {
 
-Npc::Npc(NpcDescr* descr, model::Npc* model)
+Npc::Npc(NpcDescr* descr, NpcModel* model)
     :
       Base(descr, model)
     , m_descriptor_npc(descr)
@@ -102,7 +101,7 @@ bool Npc::isAgressor(int_t id) const
 StarSystem*
 Npc::starsystem() const {    return m_vehicle->starsystem(); }
 
-void Npc::cloneMacroTaskFrom(model::Npc* npc)
+void Npc::cloneMacroTaskFrom(Npc* npc)
 {
     assert(false);
     //m_stateMachine.setCurrentMacroTask(npc->stateMachine().macroTaskManager().task());

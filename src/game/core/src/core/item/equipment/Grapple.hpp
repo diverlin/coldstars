@@ -25,7 +25,7 @@ namespace core {
 class GrappleDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class GrappleModel;
 } // namespace model
 
@@ -35,14 +35,14 @@ namespace control {
 class Grapple : public Equipment
 {
 public:
-    Grapple(GrappleDescr*, model::GrappleModel*);
+    Grapple(GrappleDescr*, GrappleModel*);
     virtual ~Grapple() = default;
 
     void UpdateGrabScenarioProgram_inDynamic();
 
     virtual void updateProperties();
 
-    model::GrappleModel* model() const { return m_model_grapple; }
+    GrappleModel* model() const { return m_model_grapple; }
     GrappleDescr* descriptor() const { return m_descriptor_grapple; }
 
 private:
@@ -52,7 +52,7 @@ private:
 
     int m_free_strength = 0;
 
-    model::GrappleModel* m_model_grapple = nullptr;
+    GrappleModel* m_model_grapple = nullptr;
     GrappleDescr* m_descriptor_grapple = nullptr;
 
     void virtual addUniqueInfo();

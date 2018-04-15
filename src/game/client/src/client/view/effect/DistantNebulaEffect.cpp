@@ -184,7 +184,7 @@ DistantNebulas* genDistantNebulas(int color_id)
 //            glm::vec3 size = base_size*paralaxFactor;
 //            DistantNebula* dn = new DistantNebula(paralaxFactor);
 
-//            dn->setOrientation(new ceti::control::Orientation(new ceti::model::Orientation()));
+//            dn->setOrientation(new ceti::control::Orientation(new ceti::Orientation()));
 //            dn->setMaterial(material);
 //            dn->setMesh(mesh);
 //            dn->setPosition(position);

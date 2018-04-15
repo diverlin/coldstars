@@ -58,7 +58,8 @@ private:
     int m_radius = 0;
 };
 
-namespace model {
+namespace core {
+
 class StarSystemModel;
 class StarModel;
 class PlanetModel;
@@ -70,10 +71,7 @@ class VehicleModel;
 class SpaceStationModel;
 class ShipModel;
 class SatelliteModel;
-class Npc;
-} // namespace model
-
-namespace core {
+class NpcModel;
 
 namespace control {
 class Star;
@@ -93,7 +91,7 @@ namespace control {
 class StarSystem : public Base
 {
 public:
-    StarSystem(StarSystemDescr*, model::StarSystemModel*);
+    StarSystem(StarSystemDescr*, StarSystemModel*);
     ~StarSystem();
 
     // model interface
@@ -115,8 +113,8 @@ public:
     Star* star() const;
     Sector* sector()      const { return m_sector; }
 
-    model::Npc* freeLeaderByRaceId(race::Type) const;
-    void createGroupAndShareTask(model::Npc*, StarSystem*, int) const;
+    NpcModel* freeLeaderByRaceId(race::Type) const;
+    void createGroupAndShareTask(NpcModel*, StarSystem*, int) const;
 
     void explosionEvent(const glm::vec3&, int, float) const;
 
@@ -125,7 +123,7 @@ public:
 public:
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
-    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObjectModel* const parent = nullptr);
+    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const SpaceObjectModel* const parent = nullptr);
     void add(Bullet*, const glm::vec3&, const glm::vec3&);
     void add(Star*);
     void add(Planet*, SpaceObject* parent = nullptr);
@@ -170,11 +168,11 @@ public:
     //
 
     StarSystemDescr* descriptor() const { return m_descriptor_starsystem; }
-    model::StarSystemModel* model() const { return m_model_starsystem; }
+    StarSystemModel* model() const { return m_model_starsystem; }
 
 private:
     StarSystemDescr* m_descriptor_starsystem = nullptr;
-    model::StarSystemModel* m_model_starsystem = nullptr;
+    StarSystemModel* m_model_starsystem = nullptr;
 
     race::Type m_race_id = race::Type::R0;
     race::Type m_conqueror_race_id = race::Type::NONE;

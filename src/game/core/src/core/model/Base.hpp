@@ -36,7 +36,7 @@ class BaseDescr;
 
 class EntityManager;
 
-namespace model {
+namespace core {
 
 class BaseModel : public NonCopyable
 {
@@ -56,7 +56,7 @@ public:
 
     virtual ceti::InfoTable info() const {
         ceti::InfoTable result;
-        result.add("model::Base");
+        result.add("Base");
         result.add("isAlive", m_isAlive);
         result.add("id", m_id);
         result.add("descriptor", m_descriptor);

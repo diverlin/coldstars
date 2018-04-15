@@ -32,7 +32,7 @@ std::map<Type, Base*> Base::m_elements;
 Base::Base(Type id,
            Type group,
            const std::string& info,
-           jeti::model::Material* material)
+           jeti::MaterialModel* material)
     :
       m_id(id),
       m_type(group),

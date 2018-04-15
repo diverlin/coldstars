@@ -23,7 +23,7 @@
 
 #include <core/descriptor/spaceobject/Star.hpp>
 
-namespace model {
+namespace core {
 
 class StarModel : public PlanetoidModel {
 
@@ -40,7 +40,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidModel::info();
-        result.add("model::Star");
+        result.add("Star");
         result.add("turnSinceLastSparkCounter", m_turnSinceLastSparkCounter);
         result.add("turnSparkThreshold", m_turnSparkThreshold);
         return result;

@@ -23,7 +23,7 @@
 //#include <ceti/Logger.hpp>
 //#include "../world/starsystem.hpp"
 
-namespace model {
+namespace core {
 
 WormHoleModel::WormHoleModel(int_t descriptor_id)
 {

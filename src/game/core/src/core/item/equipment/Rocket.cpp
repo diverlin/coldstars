@@ -31,7 +31,7 @@
 namespace core {
 namespace control {
 
-Rocket::Rocket(RocketDescr* descr, model::RocketModel* model)
+Rocket::Rocket(RocketDescr* descr, RocketModel* model)
     : Weapon(descr, model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)
@@ -69,7 +69,7 @@ void Rocket::fire(control::SpaceObject* target, float rate)
 
 //    if (fire_atOnce>=1)
 //    {
-//        model::Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
+//        Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
 //        rocket_bullet->setDamageRate(attack_rate_normalized);
 
 //        assert(false);
@@ -142,7 +142,7 @@ std::string Rocket::ammoStr()
 
 //    if (fire_atOnce>=1)
 //    {
-//        model::Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
+//        Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
 //        rocket_bullet->setDamageRate(attack_rate_normalized);
 
 //        assert(false);

@@ -308,12 +308,12 @@ void Render::init(int w, int h)
     __makeShortCuts();
 
     {
-        auto model = new model::Material("data/other/radius.png");
+        auto model = new MaterialModel("data/other/radius.png");
         m_materialCollisionRadius = new control::Material(model);
     }
 
     {
-        auto model = new model::Material("data/other/perlin.png");
+        auto model = new MaterialModel("data/other/perlin.png");
         m_materialPerlin = new control::Material(model);
     }
 
@@ -662,7 +662,7 @@ void Render::drawMeshWithLight(const Mesh& mesh, const control::Material& materi
 
     float ambient_factor = 0.25;
     const glm::vec3& eye_pos = m_camera->position();
-    const model::Material& material = *materialc.model();
+    const MaterialModel& material = *materialc.model();
  	 	
     __useProgram(m_programLight);
     {
@@ -715,7 +715,7 @@ void Render::drawMeshLightNormalMap(const Mesh& mesh, const control::Material& t
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.specular"), 1, glm::value_ptr(m_light.specular));
         glUniform3fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Light.attenuation"), 1, glm::value_ptr(m_light.attenuation));
 
-        const model::Material& material = *textureOb.model();
+        const MaterialModel& material = *textureOb.model();
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
         glUniform4fv(glGetUniformLocation(m_shaders.light_normalmap, "u_Material.specular"), 1, glm::value_ptr(material.specular));

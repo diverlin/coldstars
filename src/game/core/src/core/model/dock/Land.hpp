@@ -20,7 +20,7 @@
 
 #include <core/model/Base.hpp>
 
-namespace model {
+namespace core {
 
 class LandModel : public BaseModel
 {

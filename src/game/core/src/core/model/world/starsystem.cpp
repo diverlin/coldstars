@@ -64,7 +64,7 @@
 //int Starsystem::m_counter = 0;
 
 
-namespace model {
+namespace core {
 
 StarSystemModel::StarSystemModel(int_t descriptor_id, int_t ob_id)
 {

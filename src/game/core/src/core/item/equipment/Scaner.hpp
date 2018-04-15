@@ -25,7 +25,7 @@ namespace core {
 class ScanerDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class ScanerModel;
 } // namespace model
 
@@ -35,18 +35,18 @@ namespace control {
 class Scaner : public Equipment
 {
 public:
-    Scaner(ScanerDescr*, model::ScanerModel*);
+    Scaner(ScanerDescr*, ScanerModel*);
     virtual ~Scaner() = default;
 
 private:
     virtual void updateProperties();
 
 public:
-    model::ScanerModel* model() const { return m_model_scaner; }
+    ScanerModel* model() const { return m_model_scaner; }
     ScanerDescr* descriptor() const { return m_descriptor_scaner; }
 
 private:
-    model::ScanerModel* m_model_scaner = nullptr;
+    ScanerModel* m_model_scaner = nullptr;
     ScanerDescr* m_descriptor_scaner = nullptr;
 
     int m_scan_add = 0;

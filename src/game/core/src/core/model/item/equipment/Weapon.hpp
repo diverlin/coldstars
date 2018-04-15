@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class WeaponModel : public EquipmentModel
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Weapon");
+        result.add("Weapon");
         result.add("radius", m_radius);
         result.add("damage", m_damage);
         return result;

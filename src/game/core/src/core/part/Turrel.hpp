@@ -25,28 +25,26 @@
 #include <core/descriptor/part/Turrel.hpp>
 
 
-namespace model {
+namespace core {
 
-class Turrel : public ceti::model::OrientationModel, public BaseModel
+class TurrelModel : public ceti::OrientationModel, public BaseModel
 {
 public:
-    Turrel(int_t descriptor_id) {
+    TurrelModel(int_t descriptor_id) {
         setDescriptor(descriptor_id);
     }
-    ~Turrel() {}
+    ~TurrelModel() {}
 
 private:
 };
 
-} // namespace control
 
-namespace core {
 namespace control {
 
 class Turrel : public ceti::control::Orientation, public Base
 {
 public:
-    Turrel(TurrelDescr* descr, model::Turrel* model)
+    Turrel(TurrelDescr* descr, TurrelModel* model)
         :
           ceti::control::Orientation(model)
         , Base(descr, model)
@@ -54,10 +52,10 @@ public:
     {}
     ~Turrel() {}
 
-    model::Turrel* model() const { return m_model_turrel; }
+    TurrelModel* model() const { return m_model_turrel; }
 
 private:
-    model::Turrel* m_model_turrel = nullptr;
+    TurrelModel* m_model_turrel = nullptr;
 }; 
 
 } // namespace control

@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class GrappleModel : public EquipmentModel
 {
@@ -41,7 +41,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Grapple");
+        result.add("Grapple");
         result.add("strength", m_strength);
         result.add("radius", m_radius);
         result.add("speed", m_speed);

@@ -70,7 +70,7 @@ NatureLandBuilder::gen(core::NatureLandDescr* descr)
 core::control::NatureLand*
 NatureLandBuilder::__createTemplate(core::NatureLandDescr* descr)
 {
-    model::NatureLandModel* model = new model::NatureLandModel(descr->id());
+    NatureLandModel* model = new NatureLandModel(descr->id());
     assert(model);
 
     core::control::NatureLand* natureland = new core::control::NatureLand(descr, model);

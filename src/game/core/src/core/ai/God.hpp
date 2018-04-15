@@ -24,7 +24,7 @@
 #include <core/struct/StarSystemsConditionData.hpp>
 
 
-namespace model {
+namespace core {
 class GalaxyModel;
 } // namespace model
 

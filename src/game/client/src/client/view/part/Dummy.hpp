@@ -29,7 +29,7 @@ public:
     ~Dummy();
 
 private:
-    ceti::model::OrientationModel* m_model_orientation = nullptr;
+    ceti::OrientationModel* m_model_orientation = nullptr;
     ceti::control::Orientation* m_control_orientation = nullptr;
 }; 
 

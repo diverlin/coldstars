@@ -26,7 +26,7 @@
 
 #include "../common/constants.hpp"
 
-namespace model {
+namespace core {
 class SectorModel;
 } // namespace model
 
@@ -39,7 +39,7 @@ class StarSystem;
 class Sector : public Base
 {
 public:
-    Sector(SectorDescr*, model::SectorModel*);
+    Sector(SectorDescr*, SectorModel*);
     ~Sector();
 
     void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
@@ -56,11 +56,11 @@ public:
     void update(int);
 
     SectorDescr* descriptor() const { return m_descriptor_sector; }
-    model::SectorModel* model() const { return m_model_sector; }
+    SectorModel* model() const { return m_model_sector; }
 
 private:
     SectorDescr* m_descriptor_sector = nullptr;
-    model::SectorModel* m_model_sector = nullptr;
+    SectorModel* m_model_sector = nullptr;
 
     Galaxy* m_galaxy = nullptr;
 

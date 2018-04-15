@@ -22,7 +22,7 @@
 
 #include <core/type/RaceType.hpp>
 
-namespace model {
+namespace core {
 
 class KosmoportModel : public LandModel
 {

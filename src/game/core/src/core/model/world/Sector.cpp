@@ -21,7 +21,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace model {
+namespace core {
 
 SectorModel::SectorModel(int_t descriptor_id, int_t object_id)
 {

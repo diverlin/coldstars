@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Planetoid.hpp>
 
-namespace model {
+namespace core {
 
 class WormHoleModel : public PlanetoidModel {
 public:

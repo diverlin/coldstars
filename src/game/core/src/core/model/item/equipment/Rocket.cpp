@@ -21,7 +21,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace model {
+namespace core {
 
 RocketModel::RocketModel(int_t descriptor_id, int_t id)
 {

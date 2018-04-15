@@ -68,7 +68,7 @@ ShipBuilder::gen()
 core::control::Ship*
 ShipBuilder::__genTemplate(core::ShipDescr* descr, int_t ob_id)
 {
-    model::ShipModel* model = new model::ShipModel(descr->id(), ob_id);
+    ShipModel* model = new ShipModel(descr->id(), ob_id);
     assert(model);
 
     core::control::Ship* ship = new core::control::Ship(descr, model);

@@ -35,14 +35,12 @@ class MaterialDescr;
 
 namespace jeti {
 
-namespace model {
-
-class Material
+class MaterialModel
 {
 public:
-    Material(const std::string&);
-    Material(ceti::MaterialDescr*);
-    Material() = default;
+    MaterialModel(const std::string&);
+    MaterialModel(ceti::MaterialDescr*);
+    MaterialModel() = default;
 
     int_t descriptor() const { return m_descriptor; }
 
@@ -87,15 +85,13 @@ public:
     void unloadFromVRAM();
 };
 
-} // namespace model
-
 namespace control {
 
 class Material
 {
 public:
     Material();
-    Material(model::Material* material);
+    Material(MaterialModel* material);
     ~Material();
 
     int id() const { return m_id; }
@@ -109,11 +105,11 @@ public:
     bool isLoaded() const { return m_model->is_loaded; }
     void load() const { m_model->load(); }
 
-    model::Material* model() const { return m_model; }
+    MaterialModel* model() const { return m_model; }
 
 private:
     int m_id = 0;
-    model::Material* m_model = nullptr;
+    MaterialModel* m_model = nullptr;
 
     unsigned int m_currentFrame = 0;
     unsigned int m_framesCount = 1;

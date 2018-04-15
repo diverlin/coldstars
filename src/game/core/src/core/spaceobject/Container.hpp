@@ -25,7 +25,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
+namespace core {
 class ContainerModel;
 } // namespace model
 
@@ -40,7 +40,7 @@ class Item;
 class Container : public SpaceObject
 {
 public:
-    Container(ContainerDescr*, model::ContainerModel*);
+    Container(ContainerDescr*, ContainerModel*);
     virtual ~Container();
 
     void bindItemSlot(ItemSlot*);
@@ -60,11 +60,11 @@ public:
     //        void Render(const jeti::Renderer&);
 
     ContainerDescr* descriptor() const { return m_descriptor_container; }
-    model::ContainerModel* model() const { return m_model_container; }
+    ContainerModel* model() const { return m_model_container; }
 
 private:
     ContainerDescr* m_descriptor_container = nullptr;
-    model::ContainerModel* m_model_container = nullptr;
+    ContainerModel* m_model_container = nullptr;
 
     [[warning("remove this at all, we don't need slot here")]]
     ItemSlot* m_itemSlot = nullptr;

@@ -23,7 +23,7 @@
 
 #include <ceti/Pack.hpp>
 
-namespace model {
+namespace core {
 
 class NatureLandModel : public LandModel
 {

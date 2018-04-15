@@ -20,7 +20,7 @@
 
 #include "Weapon.hpp"
 
-namespace model {
+namespace core {
 
 class LazerModel : public WeaponModel
 {
@@ -32,7 +32,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = WeaponModel::info();
-        result.add("model::Lazer");
+        result.add("Lazer");
         return result;
     }
 

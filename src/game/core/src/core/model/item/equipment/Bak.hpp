@@ -20,7 +20,7 @@
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class BakModel : public EquipmentModel
 {
@@ -36,7 +36,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Bak");
+        result.add("Bak");
         result.add("fuel", m_fuel);
         return result;
     }

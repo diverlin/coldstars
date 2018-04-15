@@ -177,7 +177,7 @@ void God::__proceedInvasion(control::Galaxy* galaxy) const
 //        return;
 //    }
     
-//    model::Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
+//    Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
 //    assert(npc_leader);
 //    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION, starsystem_invade_to->id());
 //    assert(false);
@@ -281,11 +281,11 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
 //        starsystem->add(spacestation, center3/*, dir*/);
         
 //        {
-//            model::Satellite* satellite = core::global::get().satelliteBuilder().create();
+//            Satellite* satellite = core::global::get().satelliteBuilder().create();
 //            assert(false);
 //            //core::global::get().satelliteBuilder().equip(satellite);                   // improove
 
-//            model::Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_group, npc_subgroup);
+//            Npc* new_npc = core::global::get().npcBuilder().create(npc_race_id, npc_group, npc_subgroup);
 //            assert(false);
 //            //satellite->bindNpc(new_npc);
             

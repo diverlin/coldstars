@@ -21,7 +21,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 SpaceStationModel::SpaceStationModel(int_t descriptor_id)
 {

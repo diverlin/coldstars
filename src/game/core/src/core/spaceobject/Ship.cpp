@@ -38,7 +38,7 @@
 namespace core {
 namespace control {
 
-Ship::Ship(ShipDescr* descr, model::ShipModel* model)
+Ship::Ship(ShipDescr* descr, ShipModel* model)
     :
       Vehicle(descr, model)
     , m_descriptor_ship(descr)

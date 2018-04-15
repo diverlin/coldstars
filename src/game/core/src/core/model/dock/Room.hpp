@@ -21,7 +21,7 @@
 
 #include <core/model/Base.hpp>
 
-namespace model {
+namespace core {
 
 class RoomModel : public BaseModel {
 public:

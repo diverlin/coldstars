@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 ScanerModel::ScanerModel(int_t descriptor, int_t id)
 {

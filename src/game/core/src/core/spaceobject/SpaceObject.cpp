@@ -29,7 +29,7 @@
 namespace core {
 namespace control {
 
-SpaceObject::SpaceObject(SpaceObjectDescr* descriptor, model::SpaceObjectModel* model)
+SpaceObject::SpaceObject(SpaceObjectDescr* descriptor, SpaceObjectModel* model)
     :
       ceti::control::Orientation(model)
     , Base(descriptor, model)
@@ -148,7 +148,7 @@ void SpaceObject::_checkDeath(bool show_effect)
 
 //SpaceObject::SpaceObject()
 //    :
-//      ceti::control::Orientation(new ceti::model::Orientation)
+//      ceti::control::Orientation(new ceti::Orientation)
 //{}
 
 ///* virtual override */

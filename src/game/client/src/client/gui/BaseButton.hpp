@@ -34,7 +34,7 @@ public:
                gui::Type,
                const std::string&,
                void (*pAction)(client::Player*) = nullptr,
-               jeti::model::Material* material = nullptr);
+               jeti::MaterialModel* material = nullptr);
     virtual ~BaseButton();
 
     void SetTextureObAdditional(jeti::control::Material* textureOb_additional) { m_material_additional = textureOb_additional; }

@@ -28,7 +28,7 @@ public:
     ButtonTrigger(Type id,
                   const std::string& info,
                   void (*pAction)(client::Player*),
-                  jeti::model::Material* material)
+                  jeti::MaterialModel* material)
         :
           BaseButton(id,
                      Type::BUTTON_TRIGGER,
