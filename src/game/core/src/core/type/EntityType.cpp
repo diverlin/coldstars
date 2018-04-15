@@ -21,34 +21,32 @@
 #include <cassert>
 
 namespace core {
-namespace slot {
 
-std::string to_string(Type type)
+std::string to_string(SlotType type)
 {
     switch(type)
     {
-    case Type::NONE:     { return "slot::Type::NONE"; }
-    case Type::WEAPON:   { return "slot::Type::WEAPON"; }
-    case Type::CARGO:    { return "slot::Type::CARGO"; }
-    case Type::ARTEFACT: { return "slot::Type::ARTEFACT"; }
+    case SlotType::NONE:     { return "slot::Type::NONE"; }
+    case SlotType::WEAPON:   { return "slot::Type::WEAPON"; }
+    case SlotType::CARGO:    { return "slot::Type::CARGO"; }
+    case SlotType::ARTEFACT: { return "slot::Type::ARTEFACT"; }
 
-    case Type::DRIVE:     { return "slot::Type::DRIVE"; }
-    case Type::RADAR:     { return "slot::Type::RADAR"; }
-    case Type::BAK:       { return "slot::Type::BAK"; }
-    case Type::ENERGIZER: { return "slot::Type::ENERGIZER"; }
-    case Type::PROTECTOR: { return "slot::Type::PROTECTOR"; }
-    case Type::DROID:     { return "slot::Type::DROID"; }
-    case Type::FREEZER:   { return "slot::Type::FREEZER"; }
-    case Type::GRAPPLE:   { return "slot::Type::GRAPPLE"; }
-    case Type::SCANER:    { return "slot::Type::SCANER"; }
-    case Type::GATE:      { return "slot::Type::GATE"; }
+    case SlotType::DRIVE:     { return "slot::Type::DRIVE"; }
+    case SlotType::RADAR:     { return "slot::Type::RADAR"; }
+    case SlotType::BAK:       { return "slot::Type::BAK"; }
+    case SlotType::ENERGIZER: { return "slot::Type::ENERGIZER"; }
+    case SlotType::PROTECTOR: { return "slot::Type::PROTECTOR"; }
+    case SlotType::DROID:     { return "slot::Type::DROID"; }
+    case SlotType::FREEZER:   { return "slot::Type::FREEZER"; }
+    case SlotType::GRAPPLE:   { return "slot::Type::GRAPPLE"; }
+    case SlotType::SCANER:    { return "slot::Type::SCANER"; }
+    case SlotType::GATE:      { return "slot::Type::GATE"; }
     }
 
     assert(false);
     return "UNDEFINED";
 }
 
-} // namespace slot
 } // namespace core
 
 namespace entity {

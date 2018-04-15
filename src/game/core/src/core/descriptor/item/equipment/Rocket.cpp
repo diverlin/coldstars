@@ -55,7 +55,7 @@ Rocket::Rocket()
     setType(descriptor::Type::ROCKET_EQUIPMENT);
     setObType(entity::Type::ROCKET_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(core::slot::Type::WEAPON);
+    setSlotType(core::SlotType::WEAPON);
 }
 
 Rocket::Rocket(const std::string& data)

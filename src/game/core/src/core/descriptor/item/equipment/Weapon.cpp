@@ -25,7 +25,7 @@ namespace item {
 
 Weapon::Weapon()
 {
-    setSlotType(core::slot::Type::WEAPON);
+    setSlotType(core::SlotType::WEAPON);
 }
 
 } // namespce item

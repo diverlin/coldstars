@@ -73,7 +73,7 @@ void Lazer::addUniqueInfo()
 //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
-//void Lazer::FireEvent(SpaceObject* target, slot::ItemSlot* subtarget, float damage_rate, bool show_effect)
+//void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 //{
 //    assert(false);
 ////    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)

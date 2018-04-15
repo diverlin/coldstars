@@ -26,19 +26,13 @@
 
 namespace core {
 
-
-
 namespace control {
 class SpaceObject;
 class Vehicle;
 
 } // namespace control
 
-namespace slot {
 class ItemSlot;
-} // namespace slot
-
-
 
 namespace complex {
 
@@ -54,16 +48,16 @@ public:
 
     const path::Path& path() const { return m_path; }
 
-    void addDriveSlot(slot::ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
-    void addBakSlot(slot::ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
+    void addDriveSlot(ItemSlot* drive_slot) { m_driveSlots.push_back(drive_slot); }
+    void addBakSlot(ItemSlot* bak_slot)     { m_bakSlots.push_back(bak_slot); }
 
     void setTarget(control::SpaceObject*, Action action = Action::KEEP_CLOSE);
     void setTarget(const glm::vec3&);
 
     Action action() const { return m_action; }
 
-    std::vector<core::slot::ItemSlot*> driveSlots() const { return m_driveSlots; }
-    std::vector<core::slot::ItemSlot*> bakSlots() const { return m_bakSlots; }
+    std::vector<ItemSlot*> driveSlots() const { return m_driveSlots; }
+    std::vector<ItemSlot*> bakSlots() const { return m_bakSlots; }
 
     control::SpaceObject* target() const { return m_target; }
 
@@ -78,8 +72,8 @@ public:
     void update();
 
 private:
-    std::vector<core::slot::ItemSlot*> m_driveSlots;
-    std::vector<core::slot::ItemSlot*> m_bakSlots;
+    std::vector<ItemSlot*> m_driveSlots;
+    std::vector<ItemSlot*> m_bakSlots;
 
     control::Vehicle* m_ownerVehicle = nullptr;
     control::SpaceObject* m_target = nullptr;

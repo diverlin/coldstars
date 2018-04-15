@@ -48,7 +48,7 @@ namespace gui {
 
 Cursor::Cursor()
 {
-    m_itemSlot = new core::slot::ItemSlot(core::slot::Type::CARGO);
+    m_itemSlot = new core::ItemSlot(core::SlotType::CARGO);
 
     m_markTargetMaterial = new jeti::control::Material(MaterialCollector::get().mark_target);
 

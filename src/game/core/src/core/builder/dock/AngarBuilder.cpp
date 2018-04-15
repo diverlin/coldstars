@@ -76,7 +76,7 @@ Angar::__createInternals(core::control::Angar* angar)
     }
 
     for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++) {
-        core::slot::ItemSlot* slot = new core::slot::ItemSlot(core::slot::Type::CARGO);
+        core::ItemSlot* slot = new core::ItemSlot(core::SlotType::CARGO);
         slot->setOffset(i);
         angar->add(slot);
     }

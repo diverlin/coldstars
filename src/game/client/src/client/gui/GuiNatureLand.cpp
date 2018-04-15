@@ -71,7 +71,7 @@ void GuiNatureLand::BindNatureLand(core::control::NatureLand* natureland)
     
     m_rects_itemslots.clear();
 
-    for (core::slot::ItemSlot* slot: natureland->itemSlots())
+    for (core::ItemSlot* slot: natureland->itemSlots())
     {
         // gen slot positions
         assert(false);
