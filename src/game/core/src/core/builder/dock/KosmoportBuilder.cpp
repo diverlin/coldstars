@@ -74,7 +74,7 @@ KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descrip
     kosmoport->bindAngar(builder::AngarBuilder::gen());
     kosmoport->bindStore(builder::StoreBuilder::gen());
     kosmoport->bindShop(builder::ShopBuilder::gen());
-    kosmoport->bindGoverment(builder::Goverment::gen());
+    kosmoport->bindGoverment(builder::GovermentBuilder::gen());
 }
 
 } // namespace builder
