@@ -62,7 +62,7 @@ GoodsBuilder::gen()
 core::control::Goods*
 GoodsBuilder::__genTemplate(GoodsDescr* descriptor, int_t object_id)
 {
-    model::Goods* model = new model::Goods(descriptor->id(), object_id);
+    model::GoodsPackModel* model = new model::GoodsPackModel(descriptor->id(), object_id);
     assert(model);
     core::control::Goods* control = new core::control::Goods(descriptor, model);
     assert(control);

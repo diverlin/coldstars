@@ -62,7 +62,7 @@ GrappleItemBuilder::gen(core::GrappleDescr* descr)
 core::control::Grapple*
 GrappleItemBuilder::__genTemplate(GrappleDescr* descriptor, int_t id)
 {
-    model::Grapple* model = new model::Grapple(descriptor->id(), id);
+    model::GrappleModel* model = new model::GrappleModel(descriptor->id(), id);
     assert(model);
     core::control::Grapple* grapple = new core::control::Grapple(descriptor, model);
     assert(grapple);

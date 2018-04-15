@@ -63,7 +63,7 @@ HyperSpaceBuilder::gen(int_t descriptor_id, int_t ob_id)
 core::control::HyperSpace*
 HyperSpaceBuilder::__genTemplate(core::HyperSpaceDescr* descr, int_t ob_id)
 {
-    model::HyperSpace* model = new model::HyperSpace(descr->id(), ob_id);
+    model::HyperSpaceModel* model = new model::HyperSpaceModel(descr->id(), ob_id);
     assert(model);
 
     core::control::HyperSpace* hyperspace = new core::control::HyperSpace(descr, model);

@@ -24,7 +24,7 @@ Dummy::Dummy()
     :
       Base(nullptr)
 {
-    ceti::model::Orientation* m_model_orientation = new ceti::model::Orientation;
+    ceti::model::OrientationModel* m_model_orientation = new ceti::model::OrientationModel;
     ceti::control::Orientation* m_control_orientation = new ceti::control::Orientation(m_model_orientation);
 
     //setOrientation(m_control_orientation);

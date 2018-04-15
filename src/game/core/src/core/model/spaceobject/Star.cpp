@@ -36,19 +36,19 @@
 
 namespace model {
 
-Star::Star(int_t descriptor_id, int_t id)
+StarModel::StarModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Star::Star(const std::string& data)
+StarModel::StarModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Star::data() const
+StarModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

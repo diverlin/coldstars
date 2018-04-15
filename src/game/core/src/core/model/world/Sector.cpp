@@ -23,28 +23,28 @@
 
 namespace model {
 
-Sector::Sector(int_t descriptor_id, int_t object_id)
+SectorModel::SectorModel(int_t descriptor_id, int_t object_id)
 {
     setId(object_id);
     setDescriptor(descriptor_id);
 }
 
-Sector::Sector(const std::string& data)
+SectorModel::SectorModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Sector::data() const
+SectorModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-bool Sector::operator==(const Sector& rhs) const {
+bool SectorModel::operator==(const SectorModel& rhs) const {
     return data() == rhs.data();
 }
 
-bool Sector::operator!=(const Sector& rhs) const {
+bool SectorModel::operator!=(const SectorModel& rhs) const {
     return !(*this == rhs);
 }
 

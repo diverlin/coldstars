@@ -22,12 +22,12 @@
 
 namespace model {
 
-class Bak : public Equipment
+class BakModel : public EquipmentModel
 {
 public:
-    Bak(int_t, int_t);
-    ~Bak() = default;
-    Bak(const std::string& data);
+    BakModel(int_t, int_t);
+    ~BakModel() = default;
+    BakModel(const std::string& data);
     std::string data() const;
 
     void setFuel(int fuel) { m_fuel = fuel; }
@@ -35,7 +35,7 @@ public:
     int fuel() const { return m_fuel; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Bak");
         result.add("fuel", m_fuel);
         return result;
@@ -48,7 +48,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_fuel;
     }
 };

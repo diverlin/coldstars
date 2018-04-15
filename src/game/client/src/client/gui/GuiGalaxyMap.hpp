@@ -25,7 +25,7 @@
 #include <jeti/PathVisual.hpp>
 
 namespace model {
-class Galaxy;
+class GalaxyModel;
 class Starsystem;
 } // namespace model
 
@@ -41,15 +41,15 @@ public:
     GuiGalaxyMap();
     ~GuiGalaxyMap();
 
-    void BindGalaxy(model::Galaxy*);
+    void BindGalaxy(model::GalaxyModel*);
     void UnbindGalaxy();
 
-    model::Galaxy* GetGalaxy() const { return m_galaxy; }
+    model::GalaxyModel* GetGalaxy() const { return m_galaxy; }
 
 private:
     float m_ScaleParsecToScreenCoord;
 
-    model::Galaxy* m_galaxy = nullptr;
+    model::GalaxyModel* m_galaxy = nullptr;
 
 //    jeti::PathView m_VisualHyperJumpRange;
 //    jeti::PathView m_VisualHyperJumpPath;

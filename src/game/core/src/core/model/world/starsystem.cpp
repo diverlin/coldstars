@@ -66,7 +66,7 @@
 
 namespace model {
 
-StarSystem::StarSystem(int_t descriptor_id, int_t ob_id)
+StarSystemModel::StarSystemModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
@@ -74,23 +74,23 @@ StarSystem::StarSystem(int_t descriptor_id, int_t ob_id)
     m_status = int(ENTITY::STARSYSTEM::CONDITION::SAFE);
 }
 
-StarSystem::StarSystem(const std::string& data)
+StarSystemModel::StarSystemModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-StarSystem::data() const
+StarSystemModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-bool StarSystem::operator==(const StarSystem& rhs) const
+bool StarSystemModel::operator==(const StarSystemModel& rhs) const
 {
     return (data() == rhs.data());
 }
 
-bool StarSystem::operator!=(const StarSystem& rhs) const
+bool StarSystemModel::operator!=(const StarSystemModel& rhs) const
 {
     return !(*this == rhs);
 }

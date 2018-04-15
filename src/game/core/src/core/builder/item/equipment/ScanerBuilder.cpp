@@ -62,7 +62,7 @@ ScanerItemBuilder::gen(core::ScanerDescr* descr)
 core::control::Scaner*
 ScanerItemBuilder::__genTemplate(core::ScanerDescr* descr, int_t ob_id)
 {
-    model::Scaner* model = new model::Scaner(descr->id(), ob_id);
+    model::ScanerModel* model = new model::ScanerModel(descr->id(), ob_id);
     assert(model);
     core::control::Scaner* scaner = new core::control::Scaner(descr, model);
     assert(scaner);

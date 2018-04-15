@@ -39,7 +39,7 @@
 namespace core {
 namespace control {
 
-Sector::Sector(SectorDescr* descr, model::Sector* model)
+Sector::Sector(SectorDescr* descr, model::SectorModel* model)
     :
       Base(descr, model)
     , m_descriptor_sector(descr)

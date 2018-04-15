@@ -26,7 +26,7 @@ class RoomDescr;
 } // namespace core
 
 namespace model {
-class Room;
+class RoomModel;
 } // model descriptor
 
 namespace core {
@@ -37,7 +37,7 @@ class Kosmoport;
 class Room : public Base
 {
 public:
-    Room(RoomDescr*, model::Room*);
+    Room(RoomDescr*, model::RoomModel*);
     ~Room() = default;
 
     virtual void putChildrenToGarbage() const {}
@@ -54,10 +54,10 @@ protected:
     Kosmoport* m_kosmoport = nullptr;
 
     RoomDescr* m_descriptor_room = nullptr;
-    model::Room* m_model_room = nullptr;
+    model::RoomModel* m_model_room = nullptr;
 
     RoomDescr* descriptor() const { return m_descriptor_room; }
-    model::Room* model() const { return m_model_room; }
+    model::RoomModel* model() const { return m_model_room; }
 //    jeti::control::Material* m_textureOb_background = nullptr;
 
 //    UnresolvedDataRoom data_unresolved_Room;

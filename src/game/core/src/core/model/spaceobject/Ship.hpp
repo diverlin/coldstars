@@ -27,16 +27,16 @@
 
 namespace model {
 
-class Ship : public Vehicle
+class ShipModel : public VehicleModel
 {
 public:
-    Ship(int_t, int_t ob_id = NONE);
-    ~Ship() = default;
-    Ship(const std::string& data);
+    ShipModel(int_t, int_t ob_id = NONE);
+    ~ShipModel() = default;
+    ShipModel(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Vehicle::info();
+        ceti::InfoTable result = VehicleModel::info();
         result.add("model::Ship");
         return result;
     }
@@ -48,7 +48,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & boost::serialization::base_object<VehicleModel>(*this);
         //ar & ..;
     }
 };

@@ -23,19 +23,19 @@
 
 namespace model {
 
-Lazer::Lazer(int_t descriptor_id, int_t id)
+LazerModel::LazerModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Lazer::Lazer(const std::string& data)
+LazerModel::LazerModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Lazer::data() const
+LazerModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

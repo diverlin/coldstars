@@ -25,10 +25,10 @@
 
 namespace model {
 
-class Vehicle : public SpaceObject {
+class VehicleModel : public SpaceObjectModel {
 public:
-    Vehicle()=default;
-    ~Vehicle() = default;
+    VehicleModel()=default;
+    ~VehicleModel() = default;
 
     int_t npc() const { return m_npc; }
     int_t dock() const { return m_dock; }
@@ -41,7 +41,7 @@ public:
     ceti::pack<int_t> items() const { return m_items; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectModel::info();
         result.add("model::Vehicle");
         result.add("npc", m_npc);
         result.add("dock", m_dock);
@@ -61,7 +61,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectModel>(*this);
         ar & m_npc;
         ar & m_dock;
         ar & m_land;

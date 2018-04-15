@@ -56,7 +56,7 @@ AngarBuilder::gen(core::AngarDescr* descr)
 core::control::Angar*
 AngarBuilder::__createTemplate(core::AngarDescr* descr)
 {
-    model::Angar* model = new model::Angar(descr->id());
+    model::AngarModel* model = new model::AngarModel(descr->id());
     assert(model);
 
     core::control::Angar* angar = new core::control::Angar(descr, model);

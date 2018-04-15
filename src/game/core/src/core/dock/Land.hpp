@@ -28,7 +28,7 @@ class LandDescr;
 } // namespace core
 
 namespace model {
-class Land;
+class LandModel;
 } // namespace model
 
 namespace core {
@@ -40,7 +40,7 @@ class Vehicle;
 class Land : public Base
 {
 public:
-    Land(LandDescr*, model::Land*);
+    Land(LandDescr*, model::LandModel*);
     virtual ~Land();
 
     void setOwner(SpaceObject* owner)  { m_owner = owner; }
@@ -57,13 +57,13 @@ public:
     virtual std::string vehiclesStr() const = 0;
 
     LandDescr* descriptor() const { return m_descriptor_land; }
-    model::Land* model() const { return m_model_land; }
+    model::LandModel* model() const { return m_model_land; }
 
 private:
     SpaceObject* m_owner = nullptr;
 
     LandDescr* m_descriptor_land = nullptr;
-    model::Land* m_model_land = nullptr;
+    model::LandModel* m_model_land = nullptr;
 
 //    UnresolvedDataLand data_unresolved_Land;
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

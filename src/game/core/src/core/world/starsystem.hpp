@@ -59,17 +59,17 @@ private:
 };
 
 namespace model {
-class StarSystem;
-class Star;
-class Planet;
-class Asteroid;
-class WormHole;
-class Container;
-class Bullet;
-class Vehicle;
-class SpaceStation;
-class Ship;
-class Satellite;
+class StarSystemModel;
+class StarModel;
+class PlanetModel;
+class AsteroidModel;
+class WormHoleModel;
+class ContainerModel;
+class BulletModel;
+class VehicleModel;
+class SpaceStationModel;
+class ShipModel;
+class SatelliteModel;
 class Npc;
 } // namespace model
 
@@ -93,7 +93,7 @@ namespace control {
 class StarSystem : public Base
 {
 public:
-    StarSystem(StarSystemDescr*, model::StarSystem*);
+    StarSystem(StarSystemDescr*, model::StarSystemModel*);
     ~StarSystem();
 
     // model interface
@@ -125,7 +125,7 @@ public:
 public:
     void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
     void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY);
-    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObject* const parent = nullptr);
+    void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = meti::OY, const model::SpaceObjectModel* const parent = nullptr);
     void add(Bullet*, const glm::vec3&, const glm::vec3&);
     void add(Star*);
     void add(Planet*, SpaceObject* parent = nullptr);
@@ -170,11 +170,11 @@ public:
     //
 
     StarSystemDescr* descriptor() const { return m_descriptor_starsystem; }
-    model::StarSystem* model() const { return m_model_starsystem; }
+    model::StarSystemModel* model() const { return m_model_starsystem; }
 
 private:
     StarSystemDescr* m_descriptor_starsystem = nullptr;
-    model::StarSystem* m_model_starsystem = nullptr;
+    model::StarSystemModel* m_model_starsystem = nullptr;
 
     race::Type m_race_id = race::Type::R0;
     race::Type m_conqueror_race_id = race::Type::NONE;

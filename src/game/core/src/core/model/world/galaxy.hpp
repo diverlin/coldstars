@@ -34,12 +34,12 @@ class GalaxyDescr;
 
 namespace model {
 
-class Galaxy : public Base {
+class GalaxyModel : public BaseModel {
 
 public:
-    Galaxy(int_t, int_t);
-    ~Galaxy() = default;
-    Galaxy(const std::string& data);
+    GalaxyModel(int_t, int_t);
+    ~GalaxyModel() = default;
+    GalaxyModel(const std::string& data);
     std::string data() const;
 
     void add(int_t sector) { m_sectors.add(sector); }
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::Base>(*this);
+        ar & boost::serialization::base_object<model::BaseModel>(*this);
         ar & m_sectors;
     }
 };

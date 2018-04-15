@@ -25,12 +25,12 @@
 
 namespace model {
 
-class Store : public Room
+class StoreModel : public RoomModel
 {
 public:
-    Store(int_t);
-    ~Store() = default;
-    Store(const std::string& data);
+    StoreModel(int_t);
+    ~StoreModel() = default;
+    StoreModel(const std::string& data);
     std::string data() const;
 
     const ceti::pack<int_t>& items() const { return m_items; }
@@ -46,7 +46,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomModel>(*this);
         ar & m_items;
         ar & m_vehicles;
     }

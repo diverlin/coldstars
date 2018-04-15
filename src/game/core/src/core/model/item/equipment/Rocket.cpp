@@ -23,19 +23,19 @@
 
 namespace model {
 
-Rocket::Rocket(int_t descriptor_id, int_t id)
+RocketModel::RocketModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Rocket::Rocket(const std::string& data)
+RocketModel::RocketModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Rocket::data() const
+RocketModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

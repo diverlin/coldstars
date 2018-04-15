@@ -25,7 +25,7 @@ class KosmoportDescr;
 } // namespace core
 
 namespace model {
-class Kosmoport;
+class KosmoportModel;
 } // namespace model
 
 namespace core {
@@ -39,7 +39,7 @@ class Goverment;
 class Kosmoport : public Land
 {
 public:
-    Kosmoport(KosmoportDescr*, model::Kosmoport*);
+    Kosmoport(KosmoportDescr*, model::KosmoportModel*);
     virtual ~Kosmoport();
 
     Angar* angar() const { return m_angar; }
@@ -67,7 +67,7 @@ public:
 //    void Resolve();
 
     KosmoportDescr* descriptor() const { return m_descriptor_kosmoport; }
-    model::Kosmoport* model() const { return m_model_kosmoport; }
+    model::KosmoportModel* model() const { return m_model_kosmoport; }
 
 private:
     Angar* m_angar = nullptr;
@@ -76,7 +76,7 @@ private:
     Goverment* m_goverment = nullptr;
 
     KosmoportDescr* m_descriptor_kosmoport = nullptr;
-    model::Kosmoport* m_model_kosmoport = nullptr;
+    model::KosmoportModel* m_model_kosmoport = nullptr;
 
     virtual void putChildrenToGarbage() const;
 

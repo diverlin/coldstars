@@ -22,17 +22,17 @@
 
 namespace model {
 
-NatureLand::NatureLand(int_t descriptor_id)
+NatureLandModel::NatureLandModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
-NatureLand::NatureLand(const std::string& data)
+NatureLandModel::NatureLandModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-NatureLand::data() const
+NatureLandModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

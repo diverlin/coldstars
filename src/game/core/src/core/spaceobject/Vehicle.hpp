@@ -39,10 +39,10 @@ class VehicleDescr;
 } // namespace core
 
 namespace model {
-class Vehicle;
-class Container;
-class StarSystem;
-class Item;
+class VehicleModel;
+class ContainerModel;
+class StarSystemModel;
+class ItemModel;
 } // namespace model
 
 namespace core {
@@ -121,7 +121,7 @@ public:
     };
 
 public:
-    Vehicle(VehicleDescr*, model::Vehicle*);
+    Vehicle(VehicleDescr*, model::VehicleModel*);
     ~Vehicle() override;
 
     bool canRadarObject(SpaceObject* ob) const;
@@ -167,7 +167,7 @@ public:
     VehicleNeeds& needs() { return m_needs; }
 
     VehicleDescr* descriptor() const { return m_descriptor_vehicle; }
-    model::Vehicle* model() const { return m_model_vehicle; }
+    model::VehicleModel* model() const { return m_model_vehicle; }
 
     virtual int givenExpirience() const override final;
     bool isSlotTypePresent(const entity::Type&) const;
@@ -255,7 +255,7 @@ protected:
 public:
     //    void process();
 
-    void HyperJumpEvent(model::StarSystem*);
+    void HyperJumpEvent(model::StarSystemModel*);
     //    void LaunchingEvent();
 
     void UpdateSpecialEffect();
@@ -268,7 +268,7 @@ public:
     //        void RenderRadarRange();
     //        void RenderGrappleRange();
 
-    bool isAbleToJumpTo(model::StarSystem*) const;
+    bool isAbleToJumpTo(model::StarSystemModel*) const;
 
     bool isArmorFull() const;
     int armorMiss() const;
@@ -303,7 +303,7 @@ private:
 
 protected:
     VehicleDescr* m_descriptor_vehicle = nullptr;
-    model::Vehicle* m_model_vehicle = nullptr;
+    model::VehicleModel* m_model_vehicle = nullptr;
 
     ItemSlot* _freeArtefactSlot() const;
     ItemSlot* _cargoSlotWithGoods(place::Type);

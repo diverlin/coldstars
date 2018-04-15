@@ -22,16 +22,16 @@
 
 namespace model {
 
-Bullet::Bullet()
+BulletModel::BulletModel()
 {}
 
-Bullet::Bullet(const std::string& data)
+BulletModel::BulletModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Bullet::data() const
+BulletModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -24,7 +24,7 @@
 #include <core/descriptor/spaceobject/Star.hpp>
 
 namespace model {
-class Star;
+class StarModel;
 } // namespace model
 
 namespace core {
@@ -33,7 +33,7 @@ namespace control {
 class Star : public Planetoid
 {
 public:
-    Star(StarDescr*, model::Star*);
+    Star(StarDescr*, model::StarModel*);
     virtual ~Star();
 
     void hit(int) {}
@@ -49,11 +49,11 @@ public:
     void updateInSpace(int);
 
     StarDescr* descriptor() const { return m_descriptor_star; }
-    model::Star* model() const { return m_model_star; }
+    model::StarModel* model() const { return m_model_star; }
 
 private:
     StarDescr* m_descriptor_star = nullptr;
-    model::Star* m_model_star = nullptr;
+    model::StarModel* m_model_star = nullptr;
 
     float m_deltaColor = 0.0f;
     bool m_sparkActive = false;

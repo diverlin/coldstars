@@ -23,12 +23,12 @@
 
 namespace model {
 
-class Droid : public Equipment
+class DroidModel : public EquipmentModel
 {
 public:
-    Droid(int_t, int_t);
-    ~Droid() = default;
-    Droid(const std::string& data);
+    DroidModel(int_t, int_t);
+    ~DroidModel() = default;
+    DroidModel(const std::string& data);
     std::string data() const;
 
     void setRepair(int repair) { m_repair = repair; }
@@ -36,7 +36,7 @@ public:
     int repair() const { return m_repair; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Droid");
         result.add("repair", m_repair);
         return result;
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_repair;
     }
 };

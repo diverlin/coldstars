@@ -25,7 +25,7 @@ class GovermentDescr;
 } // namespace core
 
 namespace model {
-class Goverment;
+class GovermentModel;
 } // namespace model
 
 namespace core {
@@ -34,7 +34,7 @@ namespace control {
 class Goverment : public Room
 {
 public:
-    Goverment(GovermentDescr*, model::Goverment*);
+    Goverment(GovermentDescr*, model::GovermentModel*);
     ~Goverment();
 
 //    void SetTextureObFace(jeti::control::Material* textureOb_face) { this->textureOb_face = textureOb_face; };
@@ -45,10 +45,10 @@ public:
 
 private:
     GovermentDescr* m_descriptor_goverment = nullptr;
-    model::Goverment* m_model_goverment = nullptr;
+    model::GovermentModel* m_model_goverment = nullptr;
 
     GovermentDescr* descriptor() const { return m_descriptor_goverment; }
-    model::Goverment* model() const { return m_model_goverment; }
+    model::GovermentModel* model() const { return m_model_goverment; }
 
 //    jeti::control::Material* textureOb_face;
 

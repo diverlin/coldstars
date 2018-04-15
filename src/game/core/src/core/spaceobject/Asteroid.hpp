@@ -24,7 +24,7 @@
 #include <core/descriptor/spaceobject/Asteroid.hpp>
 
 namespace model {
-class Asteroid;
+class AsteroidModel;
 } // namespace model
 
 namespace core {
@@ -33,7 +33,7 @@ namespace control {
 class Asteroid : public Planetoid
 {
 public:
-    Asteroid(AsteroidDescr*, model::Asteroid*);
+    Asteroid(AsteroidDescr*, model::AsteroidModel*);
     virtual ~Asteroid();
 
     int damage() const { return mass()*10; }
@@ -42,13 +42,13 @@ public:
     void collisionEvent();
 
     AsteroidDescr* descriptor() const { return m_descriptor_asteroid; }
-    model::Asteroid* model() const { return m_model_asteroid; }
+    model::AsteroidModel* model() const { return m_model_asteroid; }
 
 private:
     void _postDeathUniqueEvent(bool);
 
     AsteroidDescr* m_descriptor_asteroid = nullptr;
-    model::Asteroid* m_model_asteroid = nullptr;
+    model::AsteroidModel* m_model_asteroid = nullptr;
 };
 
 } // namespace control

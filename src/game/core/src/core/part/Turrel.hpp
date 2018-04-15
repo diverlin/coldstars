@@ -27,7 +27,7 @@
 
 namespace model {
 
-class Turrel : public ceti::model::Orientation, public Base
+class Turrel : public ceti::model::OrientationModel, public BaseModel
 {
 public:
     Turrel(int_t descriptor_id) {

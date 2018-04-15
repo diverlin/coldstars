@@ -27,7 +27,7 @@ class HyperSpaceDescr;
 } // naemspace descriptor
 
 namespace model {
-class HyperSpace;
+class HyperSpaceModel;
 } // naemspace model
 
 namespace core {
@@ -39,7 +39,7 @@ class Vehicle;
 class HyperSpace : public Base
 {
 public:
-    HyperSpace(HyperSpaceDescr*, model::HyperSpace*);
+    HyperSpace(HyperSpaceDescr*, model::HyperSpaceModel*);
     ~HyperSpace() = default;
 
     void add(Vehicle*);
@@ -54,10 +54,10 @@ public:
 
 private:
     HyperSpaceDescr* m_descriptor_hyperspace = nullptr;
-    model::HyperSpace* m_model_hyperspace = nullptr;
+    model::HyperSpaceModel* m_model_hyperspace = nullptr;
 
     HyperSpaceDescr* descriptor() const { return m_descriptor_hyperspace; }
-    model::HyperSpace* model() const { return m_model_hyperspace; }
+    model::HyperSpaceModel* model() const { return m_model_hyperspace; }
 
     ceti::pack<Vehicle*> m_vehicles;
 };

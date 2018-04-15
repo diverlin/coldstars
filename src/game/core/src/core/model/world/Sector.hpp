@@ -28,16 +28,16 @@
 
 namespace model {
 
-class Sector : public Base
+class SectorModel : public BaseModel
 {
 public:
-    Sector(int_t, int_t);
-    ~Sector() = default;
-    Sector(const std::string& data);
+    SectorModel(int_t, int_t);
+    ~SectorModel() = default;
+    SectorModel(const std::string& data);
     std::string data() const;
 
-    bool operator==(const Sector& rhs) const;
-    bool operator!=(const Sector& rhs) const;
+    bool operator==(const SectorModel& rhs) const;
+    bool operator!=(const SectorModel& rhs) const;
 
     void setGalaxy(int_t galaxy)  { m_galaxy = galaxy; }
     void setPosition(const meti::vec3& center) { m_position = center; }
@@ -57,7 +57,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_galaxy;
         ar & m_position;
         ar & m_starsystems;

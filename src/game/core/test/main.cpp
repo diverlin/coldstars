@@ -166,7 +166,7 @@ TEST(clone, galaxy)
     core::control::Galaxy* galaxy = core::GalaxyBuilder::gen();
 
     // clone
-    model::Galaxy* model = new model::Galaxy(galaxy->model()->data());
+    model::GalaxyModel* model = new model::GalaxyModel(galaxy->model()->data());
     core::control::Galaxy* clone = new core::control::Galaxy(galaxy->descriptor(), model);
 
     EXPECT_EQ(galaxy->model()->data(), clone->model()->data());
@@ -181,7 +181,7 @@ TEST(clone, sector)
     core::control::Sector* sector = core::SectorBuilder::gen();
 
     // clone
-    model::Sector* model = new model::Sector(sector->model()->data());
+    model::SectorModel* model = new model::SectorModel(sector->model()->data());
     core::control::Sector* clone = new core::control::Sector(sector->descriptor(), model);
 
     EXPECT_EQ(sector->model()->data(), clone->model()->data());
@@ -196,7 +196,7 @@ TEST(clone, starsystem)
     core::control::StarSystem* starsystem = core::StarSystemBuilder::gen();
 
     // clone
-    model::StarSystem* model = new model::StarSystem(starsystem->model()->data());
+    model::StarSystemModel* model = new model::StarSystemModel(starsystem->model()->data());
     core::control::StarSystem* clone = new core::control::StarSystem(starsystem->descriptor(), model);
 
     EXPECT_EQ(starsystem->model()->data(), clone->model()->data());
@@ -211,7 +211,7 @@ TEST(clone, asteroid)
     core::control::Asteroid* asteroid = core::AsteroidBuilder::gen();
 
     // clone
-    model::Asteroid* model = new model::Asteroid(asteroid->model()->data());
+    model::AsteroidModel* model = new model::AsteroidModel(asteroid->model()->data());
     core::control::Asteroid* clone = new core::control::Asteroid(asteroid->descriptor(), model);
 
     EXPECT_EQ(asteroid->model()->data(), clone->model()->data());

@@ -22,17 +22,17 @@
 
 namespace model {
 
-Store::Store(int_t descriptor_id)
+StoreModel::StoreModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
-Store::Store(const std::string& data)
+StoreModel::StoreModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Store::data() const
+StoreModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

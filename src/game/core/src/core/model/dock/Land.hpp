@@ -22,11 +22,11 @@
 
 namespace model {
 
-class Land : public Base
+class LandModel : public BaseModel
 {
 public:
-    Land() = default;
-    ~Land() = default;
+    LandModel() = default;
+    ~LandModel() = default;
 
     void setOwner(int_t owner)  { m_owner = owner; }
 
@@ -36,7 +36,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_owner;
     }
 

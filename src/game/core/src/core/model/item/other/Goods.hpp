@@ -27,12 +27,12 @@
 
 namespace model {
 
-class Goods : public Item
+class GoodsPackModel : public ItemModel
 {
 public:
-    Goods(int_t, int_t);
-    ~Goods() = default;
-    Goods(const std::string& data);
+    GoodsPackModel(int_t, int_t);
+    ~GoodsPackModel() = default;
+    GoodsPackModel(const std::string& data);
     std::string data() const;
 
     void setAmount(int amount) { m_amount = amount; assert(amount>=0); }
@@ -46,7 +46,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
+        ar & boost::serialization::base_object<ItemModel>(*this);
         ar & m_amount;
     }
 };

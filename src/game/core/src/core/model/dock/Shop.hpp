@@ -22,12 +22,12 @@
 
 namespace model {
 
-class Shop : public Room
+class ShopModel : public RoomModel
 {
 public:
-    Shop(int_t);
-    ~Shop() = default;
-    Shop(const std::string& data);
+    ShopModel(int_t);
+    ~ShopModel() = default;
+    ShopModel(const std::string& data);
     std::string data() const;
 
     int mineralsAmount() const { return m_mineralsAmount; }
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomModel>(*this);
         ar & m_mineralsAmount;
         ar & m_foodAmount;
         ar & m_medicineAmount;

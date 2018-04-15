@@ -24,13 +24,13 @@ namespace ceti {
 
 namespace model {
 
-Orientation::Orientation(const std::string& data)
+OrientationModel::OrientationModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Orientation::data() const
+OrientationModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
@@ -41,12 +41,12 @@ namespace control {
 
 Orientation::Orientation()
 {
-    m_model_orientation = new model::Orientation;
+    m_model_orientation = new model::OrientationModel;
     m_own_model = true;
     __updateCollisionRadius();
 }
 
-Orientation::Orientation(model::Orientation* model)
+Orientation::Orientation(model::OrientationModel* model)
     :
       m_model_orientation(model)
 {

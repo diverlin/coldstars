@@ -28,19 +28,19 @@
 
 namespace model {
 
-class SpaceStation : public Vehicle
+class SpaceStationModel : public VehicleModel
 {
 public:
-    SpaceStation(int_t);
-    ~SpaceStation() = default;
-    SpaceStation(const std::string& data);
+    SpaceStationModel(int_t);
+    ~SpaceStationModel() = default;
+    SpaceStationModel(const std::string& data);
     std::string data() const;
 
     int_t innerLand() const { return m_innerLand; }
     void setInnerLand(int_t inner_land) { m_innerLand = inner_land; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SpaceStation::info();
+        ceti::InfoTable result = SpaceStationModel::info();
         result.add("model::SpaceStation");
         result.add("innerLand", m_innerLand);
         return result;
@@ -53,7 +53,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & boost::serialization::base_object<VehicleModel>(*this);
         ar & m_innerLand;
     }
 };

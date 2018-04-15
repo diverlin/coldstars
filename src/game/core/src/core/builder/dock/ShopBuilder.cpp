@@ -54,7 +54,7 @@ ShopBuilder::gen(core::ShopDescr* descr)
 core::control::Shop*
 ShopBuilder::__createTemplate(core::ShopDescr* descr)
 {
-    model::Shop* model = new model::Shop(descr->id());
+    model::ShopModel* model = new model::ShopModel(descr->id());
     assert(model);
 
     core::control::Shop* shop = new core::control::Shop(descr, model);

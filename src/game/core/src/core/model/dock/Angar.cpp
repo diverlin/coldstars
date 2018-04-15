@@ -22,18 +22,18 @@
 
 namespace model {
 
-Angar::Angar(int_t descriptor_id)
+AngarModel::AngarModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
 
-Angar::Angar(const std::string& data)
+AngarModel::AngarModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Angar::data() const
+AngarModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

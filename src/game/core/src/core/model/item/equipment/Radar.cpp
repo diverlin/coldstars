@@ -23,19 +23,19 @@
 
 namespace model {
 
-Radar::Radar(int_t descriptor_id, int_t id)
+RadarModel::RadarModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Radar::Radar(const std::string& data)
+RadarModel::RadarModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Radar::data() const
+RadarModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

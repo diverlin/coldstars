@@ -26,7 +26,7 @@ class WeaponDescr;
 } // namespace core
 
 namespace model {
-class Weapon;
+class WeaponModel;
 } // namespace model
 
 namespace core {
@@ -37,7 +37,7 @@ class SpaceObject;
 class Weapon : public Equipment
 { 
 public:
-    Weapon(WeaponDescr*, model::Weapon*);
+    Weapon(WeaponDescr*, model::WeaponModel*);
     virtual ~Weapon() = default;
 
     virtual void updateProperties();
@@ -50,11 +50,11 @@ public:
 
 public:
     WeaponDescr* descriptor() const { return m_descriptor_weapon; }
-    model::Weapon* model() const { return m_model_weapon; }
+    model::WeaponModel* model() const { return m_model_weapon; }
 
 private:
     WeaponDescr* m_descriptor_weapon = nullptr;
-    model::Weapon* m_model_weapon = nullptr;
+    model::WeaponModel* m_model_weapon = nullptr;
 
     int m_damage_add = 0;
     int m_radius_add = 0;

@@ -24,11 +24,11 @@
 
 namespace model {
 
-class Angar : public Room {
+class AngarModel : public RoomModel {
 public:
-    Angar(int_t);
-    ~Angar() = default;
-    Angar(const std::string& data);
+    AngarModel(int_t);
+    ~AngarModel() = default;
+    AngarModel(const std::string& data);
     std::string data() const;
 
     void setFuelprice(int fuelPrice) { m_fuelPrice = fuelPrice; }
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomModel>(*this);
     }
 
 private:

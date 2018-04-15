@@ -25,7 +25,7 @@ class BulletDescr;
 } // namespace core
 
 namespace model {
-class Bullet;
+class BulletModel;
 } // namespace model
 
 namespace core {
@@ -34,7 +34,7 @@ namespace control {
 class Bullet : public SpaceObject
 {
 public:
-    Bullet(BulletDescr*, model::Bullet*);
+    Bullet(BulletDescr*, model::BulletModel*);
     virtual ~Bullet();
 
     void setOwnerId(int_t) const;
@@ -53,11 +53,11 @@ public:
     int damage() const;
 
     BulletDescr* descriptor() const { return m_descriptor_bullet; }
-    model::Bullet* model() const { return m_model_bullet; }
+    model::BulletModel* model() const { return m_model_bullet; }
 
 private:
     BulletDescr* m_descriptor_bullet = nullptr;
-    model::Bullet* m_model_bullet = nullptr;
+    model::BulletModel* m_model_bullet = nullptr;
 
     core::control::SpaceObject* m_target = nullptr;
 

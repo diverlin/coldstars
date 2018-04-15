@@ -24,12 +24,12 @@
 
 namespace model {
 
-class HyperSpace : public Base
+class HyperSpaceModel : public BaseModel
 {
 public:
-    HyperSpace(int_t, int_t ob_id = NONE);
-    ~HyperSpace() = default;
-    HyperSpace(const std::string& data);
+    HyperSpaceModel(int_t, int_t ob_id = NONE);
+    ~HyperSpaceModel() = default;
+    HyperSpaceModel(const std::string& data);
     std::string data() const;
 
     void addVehicle(int_t ship) { if (_isWritable()) m_vehicles.add(ship); }
@@ -52,7 +52,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_vehicles;
     }
 };

@@ -23,12 +23,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace model {
 
-class Radar : public Equipment
+class RadarModel : public EquipmentModel
 {
 public:
-    Radar(int_t, int_t);
-    ~Radar() = default;
-    Radar(const std::string& data);
+    RadarModel(int_t, int_t);
+    ~RadarModel() = default;
+    RadarModel(const std::string& data);
     std::string data() const;
 
     void setRadius(int radius) { m_radius = radius; }
@@ -36,7 +36,7 @@ public:
     int radius() const { return m_radius; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Radar");
         result.add("radius", m_radius);
         return result;
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_radius;
     }
 };

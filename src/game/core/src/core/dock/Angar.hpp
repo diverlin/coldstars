@@ -25,7 +25,7 @@ class AngarDescr;
 } // namespace core
 
 namespace model {
-class Angar;
+class AngarModel;
 } // namespace model
 
 namespace core {
@@ -44,7 +44,7 @@ class Npc;
 class Angar : public Room
 {
 public:
-    Angar(AngarDescr*, model::Angar*);
+    Angar(AngarDescr*, model::AngarModel*);
     ~Angar();
 
     virtual void putChildrenToGarbage() const;
@@ -75,14 +75,14 @@ public:
 //    void Resolve();
 
     AngarDescr* desriptor() const { return m_descriptor_angar; }
-    model::Angar* model() const { return m_model_angar; }
+    model::AngarModel* model() const { return m_model_angar; }
 
     const std::vector<VehicleSlot*>& vehicleSlots() const { return m_vehicle_slots; }
     const std::vector<ItemSlot*>& itemSlots() const { return m_item_slots; }
 
 private:
     AngarDescr* m_descriptor_angar = nullptr;
-    model::Angar* m_model_angar = nullptr;
+    model::AngarModel* m_model_angar = nullptr;
 
     std::vector<VehicleSlot*> m_vehicle_slots;
     std::vector<ItemSlot*> m_item_slots;

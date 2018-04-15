@@ -35,7 +35,7 @@ class BaseDescr;
 } // namespace core
 
 namespace model {
-class Base;
+class BaseModel;
 } // namespace model
 
 namespace core {
@@ -44,7 +44,7 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
-    Base(BaseDescr*, model::Base*);
+    Base(BaseDescr*, model::BaseModel*);
     virtual ~Base() = default;
 
     void setId(int_t id);
@@ -57,11 +57,11 @@ public:
     void die();
 
     BaseDescr* descriptor() const { return m_descriptor_base; }
-    model::Base* model() const { return m_model_base; }
+    model::BaseModel* model() const { return m_model_base; }
 
 private:
     BaseDescr* m_descriptor_base = nullptr;
-    model::Base* m_model_base = nullptr;
+    model::BaseModel* m_model_base = nullptr;
 
     virtual void __putChildrenToGarbage() const {}
 };

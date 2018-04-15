@@ -25,12 +25,12 @@
 
 namespace model {
 
-class Container : public SpaceObject {
+class ContainerModel : public SpaceObjectModel {
 
 public:
-    Container(int_t, int_t id = NONE);
-    ~Container() = default;
-    Container(const std::string& data);
+    ContainerModel(int_t, int_t id = NONE);
+    ~ContainerModel() = default;
+    ContainerModel(const std::string& data);
     std::string data() const;
 
     int_t item() const { return m_item; }
@@ -39,7 +39,7 @@ public:
     { m_targetPos = target_pos; m_velocity = velocity; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectModel::info();
         result.add("model::Container");
         result.add("model::item", m_item);
         result.add("model::targetPos", m_targetPos);
@@ -56,7 +56,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectModel>(*this);
         ar & m_item;
         ar & m_targetPos;
         ar & m_velocity;

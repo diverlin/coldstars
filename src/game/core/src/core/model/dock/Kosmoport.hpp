@@ -24,12 +24,12 @@
 
 namespace model {
 
-class Kosmoport : public Land
+class KosmoportModel : public LandModel
 {
 public:
-    Kosmoport(int_t);
-    ~Kosmoport() = default;
-    Kosmoport(const std::string& data);
+    KosmoportModel(int_t);
+    ~KosmoportModel() = default;
+    KosmoportModel(const std::string& data);
     std::string data() const;
 
     int_t angar() const { return m_angar; }
@@ -46,7 +46,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Land>(*this);
+        ar & boost::serialization::base_object<LandModel>(*this);
         ar & m_angar;
         ar & m_store;
         ar & m_shop;

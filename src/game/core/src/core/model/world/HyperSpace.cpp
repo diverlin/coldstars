@@ -22,19 +22,19 @@
 
 namespace model {
 
-HyperSpace::HyperSpace(int_t descriptor_id, int_t ob_id)
+HyperSpaceModel::HyperSpaceModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-HyperSpace::HyperSpace(const std::string& data)
+HyperSpaceModel::HyperSpaceModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-HyperSpace::data() const
+HyperSpaceModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -23,19 +23,19 @@
 
 namespace model {
 
-Drive::Drive(int_t descriptor_id, int_t ob_id)
+DriveModel::DriveModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-Drive::Drive(const std::string& data)
+DriveModel::DriveModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Drive::data() const
+DriveModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

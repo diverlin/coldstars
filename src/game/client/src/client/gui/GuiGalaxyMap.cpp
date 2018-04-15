@@ -76,7 +76,7 @@ glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const model::Starsystem& s
 //    return starsystem_pos;
 }
 
-void GuiGalaxyMap::BindGalaxy(model::Galaxy* galaxy)
+void GuiGalaxyMap::BindGalaxy(model::GalaxyModel* galaxy)
 {
     m_galaxy = galaxy;
 }

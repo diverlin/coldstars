@@ -36,7 +36,7 @@
 namespace core {
 namespace control {
 
-Galaxy::Galaxy(GalaxyDescr* descr, model::Galaxy* model)
+Galaxy::Galaxy(GalaxyDescr* descr, model::GalaxyModel* model)
     :
     Base(descr, model)
   , m_descriptor_galaxy(descr)
