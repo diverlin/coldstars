@@ -30,11 +30,11 @@ namespace slot {
 
 class ItemSlot;
 
-class Weapon
+class WeaponSlot
 { 
 public:
-    Weapon();
-    ~Weapon() = default;
+    WeaponSlot();
+    ~WeaponSlot() = default;
 
     void setTarget(core::control::SpaceObject* target, slot::ItemSlot* subtarget = nullptr);
 

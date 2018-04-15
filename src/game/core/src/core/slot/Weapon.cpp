@@ -23,34 +23,34 @@
 namespace core {
 namespace slot {
 
-Weapon::Weapon()
+WeaponSlot::WeaponSlot()
 {
 }
 
-void Weapon::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
+void WeaponSlot::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
 {
     m_target = target;
     m_subtarget = subtarget;
 }
 
-void Weapon::reset()
+void WeaponSlot::reset()
 {
     resetTarget();
     resetSubTarget();
 }
 
-void Weapon::resetTarget()
+void WeaponSlot::resetTarget()
 {
     m_target = nullptr;
     resetSubTarget();
 }
 
-void Weapon::resetSubTarget()
+void WeaponSlot::resetSubTarget()
 {
     m_subtarget = nullptr;
 }
 
-bool Weapon::validateSubTarget() const
+bool WeaponSlot::validateSubTarget() const
 {
     if (!m_subtarget) {
         return false;
