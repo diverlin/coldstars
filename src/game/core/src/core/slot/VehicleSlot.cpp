@@ -30,7 +30,6 @@
 #include <core/model/spaceobject/Vehicle.hpp>
 
 namespace core {
-namespace slot {
 
 VehicleSlot::VehicleSlot(int offset)
     : BaseSlot()
@@ -131,5 +130,4 @@ void VehicleSlot::swapVehicle(VehicleSlot* vehicle_slot)
 ////    }
 //}
 
-} // namespace slot
 } // namespace core

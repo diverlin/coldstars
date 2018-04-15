@@ -58,13 +58,13 @@ void GuiStore::bindStore(core::control::Store* store)
     }
 
 
-    for (core::slot::VehicleSlot* slot: store->vehicleSlots()) {
+    for (core::VehicleSlot* slot: store->vehicleSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::slot::VehicleSlot*>(rect, slot));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::VehicleSlot*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {
