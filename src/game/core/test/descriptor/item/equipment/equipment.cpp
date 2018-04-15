@@ -23,7 +23,7 @@
 
 namespace test {
 
-void testEquipmentEquality(descriptor::Equipment* descr, descriptor::Equipment* copy)
+void testEquipmentEquality(descriptor::EquipmentDescr* descr, descriptor::EquipmentDescr* copy)
 {
     EXPECT_EQ(descr->modules(), copy->modules());
 }

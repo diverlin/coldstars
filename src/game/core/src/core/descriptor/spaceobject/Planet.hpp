@@ -22,7 +22,7 @@
 
 namespace descriptor {
 
-class Planet : public Planetoid
+class PlanetDescr : public PlanetoidDescr
 {
 public:
     static const int SCALE_MIN;
@@ -35,14 +35,14 @@ public:
     static const int SPEED_MAX;
 
 public:
-    Planet();
-    Planet(const std::string& data) {
+    PlanetDescr();
+    PlanetDescr(const std::string& data) {
         MACRO_READ_SERIALIZED_DATA
     }
-    ~Planet() = default;
+    ~PlanetDescr() = default;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidDescr::info();
         result.add("descriptor::Planet");
         return result;
     }
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidDescr>(*this);
     }
 };
 

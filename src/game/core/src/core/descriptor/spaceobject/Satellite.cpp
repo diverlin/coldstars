@@ -22,20 +22,20 @@
 
 namespace descriptor {
 
-Satellite::Satellite()
+SatelliteDescr::SatelliteDescr()
 {
     setType(descriptor::Type::SATELLITE);
     setObType(entity::Type::SATELLITE);
     setObGroup(entity::Type::VEHICLE);
 }
 
-Satellite::Satellite(const std::string& data)
+SatelliteDescr::SatelliteDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Satellite::data() const
+SatelliteDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

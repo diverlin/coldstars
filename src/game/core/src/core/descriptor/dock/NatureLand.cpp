@@ -24,20 +24,20 @@
 
 namespace descriptor {
 
-NatureLand::NatureLand()
+NatureLandDescr::NatureLandDescr()
 {
     setType(descriptor::Type::NATURELAND);
     setObType(entity::Type::NATURELAND);
     setPlace(place::Type::NATURELAND);
 }
 
-NatureLand::NatureLand(const std::string& data)
+NatureLandDescr::NatureLandDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-NatureLand::data() const
+NatureLandDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

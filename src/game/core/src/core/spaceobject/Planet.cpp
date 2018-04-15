@@ -35,7 +35,7 @@
 namespace core {
 namespace control {
 
-Planet::Planet(descriptor::Planet* descr, model::Planet* model)
+Planet::Planet(descriptor::PlanetDescr* descr, model::Planet* model)
     :
       Planetoid(descr, model)
     , m_descriptor_planet(descr)

@@ -21,7 +21,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Asteroid;
+class AsteroidDescr;
 } // namespace descriptor
 
 namespace core {
@@ -37,10 +37,10 @@ class AsteroidBuilder
 public:
     static core::control::Asteroid* gen();
     static core::control::Asteroid* gen(int_t, int_t id);
-    static core::control::Asteroid* gen(descriptor::Asteroid*, int_t id = NONE);
+    static core::control::Asteroid* gen(descriptor::AsteroidDescr*, int_t id = NONE);
 
 private:
-    static core::control::Asteroid* __genTemplate(descriptor::Asteroid*, int_t id);
+    static core::control::Asteroid* __genTemplate(descriptor::AsteroidDescr*, int_t id);
 }; 
 
 } // namespace core

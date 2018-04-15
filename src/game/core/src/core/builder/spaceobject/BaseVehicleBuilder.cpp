@@ -155,7 +155,7 @@ VehicleBuilder::equip(core::control::Vehicle* vehicle)
 ////    }
 //}
 
-void VehicleBuilder::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
+void VehicleBuilder::equip(Vehicle* vehicle, descriptor::VehicleDescr* descr)
 {
 //    entity::Type type = (entity::Type)descriptor.type();
 //    switch(type) {

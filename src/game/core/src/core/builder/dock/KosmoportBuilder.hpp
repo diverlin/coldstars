@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Kosmoport;
+class KosmoportDescr;
 } // namespace descriptor
 
 namespace core {
@@ -37,14 +37,14 @@ class KosmoportBuilder
 {
 public:
     static core::control::Kosmoport* gen();
-    static core::control::Kosmoport* gen(descriptor::Kosmoport*);
+    static core::control::Kosmoport* gen(descriptor::KosmoportDescr*);
 
 private:
     KosmoportBuilder() = delete;
     ~KosmoportBuilder() = delete;
 
-    static core::control::Kosmoport* __createTemplate(descriptor::Kosmoport*);
-    static void __createInternals(core::control::Kosmoport*, descriptor::Kosmoport*);
+    static core::control::Kosmoport* __createTemplate(descriptor::KosmoportDescr*);
+    static void __createInternals(core::control::Kosmoport*, descriptor::KosmoportDescr*);
 }; 
 
 } // namespace core

@@ -35,7 +35,7 @@ namespace core {
 core::control::HyperSpace*
 HyperSpaceBuilder::gen()
 {
-    descriptor::HyperSpace* descr = nullptr;
+    descriptor::HyperSpaceDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::HYPERSPACE)) {
         descr = descriptor::genHyperSpace();
     } else {
@@ -46,7 +46,7 @@ HyperSpaceBuilder::gen()
 }
 
 core::control::HyperSpace*
-HyperSpaceBuilder::gen(descriptor::HyperSpace* descr)
+HyperSpaceBuilder::gen(descriptor::HyperSpaceDescr* descr)
 {
     core::control::HyperSpace* hyperspace = __genTemplate(descr);
     return hyperspace;
@@ -55,13 +55,13 @@ HyperSpaceBuilder::gen(descriptor::HyperSpace* descr)
 core::control::HyperSpace*
 HyperSpaceBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::HyperSpace* descr = core::shortcuts::descriptors()->hyperSpace(descriptor_id);
+    descriptor::HyperSpaceDescr* descr = core::shortcuts::descriptors()->hyperSpace(descriptor_id);
     core::control::HyperSpace* hyperspace = __genTemplate(descr, ob_id);
     return hyperspace;
 }
 
 core::control::HyperSpace*
-HyperSpaceBuilder::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
+HyperSpaceBuilder::__genTemplate(descriptor::HyperSpaceDescr* descr, int_t ob_id)
 {
     model::HyperSpace* model = new model::HyperSpace(descr->id(), ob_id);
     assert(model);

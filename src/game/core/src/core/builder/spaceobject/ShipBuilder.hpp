@@ -25,7 +25,7 @@
 #include <string>
 
 namespace descriptor {
-class Ship;
+class ShipDescr;
 } // namespace descriptor
 
 namespace core {
@@ -39,7 +39,7 @@ namespace core {
 class ShipBuilder : public VehicleBuilder
 {
 public:
-    static core::control::Ship* gen(descriptor::Ship*);
+    static core::control::Ship* gen(descriptor::ShipDescr*);
     static core::control::Ship* gen(int_t, int_t ob_id = NONE);
     static core::control::Ship* gen();
 
@@ -47,8 +47,8 @@ private:
     ShipBuilder() = delete;
     ~ShipBuilder() = delete;
 
-    static core::control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
-    static void __createInternals(core::control::Ship*, descriptor::Ship*);
+    static core::control::Ship* __genTemplate(descriptor::ShipDescr* descr, int_t ob_id = NONE);
+    static void __createInternals(core::control::Ship*, descriptor::ShipDescr*);
 }; 
 
 } // namespace core

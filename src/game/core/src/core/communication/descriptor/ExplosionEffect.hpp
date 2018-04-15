@@ -30,12 +30,12 @@ namespace descriptor {
 namespace comm {
 namespace effect {
 
-class Explosion
+class ExplosionEffectComDescr
 {
 public:
-    Explosion(float, const glm::vec3&);
-    Explosion(const std::string& data);
-    ~Explosion() = default;
+    ExplosionEffectComDescr(float, const glm::vec3&);
+    ExplosionEffectComDescr(const std::string& data);
+    ~ExplosionEffectComDescr() = default;
     std::string data() const;
 
     float size() const { return m_size; }

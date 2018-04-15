@@ -24,32 +24,32 @@
 
 namespace descriptor {
 
-const int Grapple::STRENGTH_MIN = 6;
-const int Grapple::STRENGTH_MAX = 50;
-const float Grapple::STRENGTH_TECH_RATE = 0.1f;
+const int GrappleDescr::STRENGTH_MIN = 6;
+const int GrappleDescr::STRENGTH_MAX = 50;
+const float GrappleDescr::STRENGTH_TECH_RATE = 0.1f;
 
-const int Grapple::RADIUS_MIN = 100;
-const int Grapple::RADIUS_MAX = 200;
-const float Grapple::RADIUS_TECH_RATE = 0.1f;
+const int GrappleDescr::RADIUS_MIN = 100;
+const int GrappleDescr::RADIUS_MAX = 200;
+const float GrappleDescr::RADIUS_TECH_RATE = 0.1f;
 
-const int Grapple::SPEED_MIN = 100;
-const int Grapple::SPEED_MAX = 170;
-const float Grapple::SPEED_TECH_RATE = 0.1f;
+const int GrappleDescr::SPEED_MIN = 100;
+const int GrappleDescr::SPEED_MAX = 170;
+const float GrappleDescr::SPEED_TECH_RATE = 0.1f;
 
-const int Grapple::MODULES_NUM_MIN = 0;
-const int Grapple::MODULES_NUM_MAX = 2;
-const int Grapple::MASS_MIN = 10;
-const int Grapple::MASS_MAX = 40;
-const int Grapple::CONDITION_MIN = 100;
-const int Grapple::CONDITION_MAX = 1000;
+const int GrappleDescr::MODULES_NUM_MIN = 0;
+const int GrappleDescr::MODULES_NUM_MAX = 2;
+const int GrappleDescr::MASS_MIN = 10;
+const int GrappleDescr::MASS_MAX = 40;
+const int GrappleDescr::CONDITION_MIN = 100;
+const int GrappleDescr::CONDITION_MAX = 1000;
 
-const float Grapple::STRENGTH_WEIGHT = 0.4f;
-const float Grapple::RADIUS_WEIGHT = 0.3f;
-const float Grapple::SPEED_WEIGHT = 0.2f;
-const float Grapple::MAXNUMITEM_WEIGHT = 0.1f;
-const float Grapple::MODULES_NUM_WEIGHT = 0.1f;
+const float GrappleDescr::STRENGTH_WEIGHT = 0.4f;
+const float GrappleDescr::RADIUS_WEIGHT = 0.3f;
+const float GrappleDescr::SPEED_WEIGHT = 0.2f;
+const float GrappleDescr::MAXNUMITEM_WEIGHT = 0.1f;
+const float GrappleDescr::MODULES_NUM_WEIGHT = 0.1f;
 
-Grapple::Grapple()
+GrappleDescr::GrappleDescr()
 {
     setType(descriptor::Type::GRAPPLE_EQUIPMENT);
     setObType(entity::Type::GRAPPLE_EQUIPMENT);
@@ -57,13 +57,13 @@ Grapple::Grapple()
     setSlotType(core::SlotType::GRAPPLE);
 }
 
-Grapple::Grapple(const std::string& data)
+GrappleDescr::GrappleDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Grapple::data() const
+GrappleDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -24,7 +24,7 @@
 
 namespace descriptor {
 
-class Scaner : public Equipment
+class ScanerDescr : public EquipmentDescr
 {
 public:
 
@@ -44,9 +44,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 
-    Scaner();
-    ~Scaner() = default;
-    Scaner(const std::string& data);
+    ScanerDescr();
+    ~ScanerDescr() = default;
+    ScanerDescr(const std::string& data);
     std::string data() const;
 
     void setScan(int scan) { m_scan = scan; }
@@ -54,7 +54,7 @@ public:
     int scan() const { return m_scan; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Scaner");
         result.add("scan", m_scan);
         return result;
@@ -67,7 +67,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_scan;
     }
 };

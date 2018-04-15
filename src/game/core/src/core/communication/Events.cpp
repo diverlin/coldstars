@@ -140,7 +140,7 @@ void createBullet(int_t owner, int_t weapon, int_t target_id) {
     control::SpaceObject* target = core::shortcuts::entities()->spaceObject(target_id);
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
-    descriptor::Bullet* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
+    descriptor::BulletDescr* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
     control::Bullet* bullet = core::BulletBuilder::gen(bullet_descriptor, rocket->damage());
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);

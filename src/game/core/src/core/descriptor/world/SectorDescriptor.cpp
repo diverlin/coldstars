@@ -20,7 +20,7 @@
 
 namespace descriptor {
 
-Sector::Sector()
+SectorDescr::SectorDescr()
 {
     setType(descriptor::Type::SECTOR);
     setObType(entity::Type::SECTOR);

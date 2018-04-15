@@ -27,12 +27,12 @@
 
 namespace descriptor {
 
-class Vehicle : public SpaceObject
+class VehicleDescr : public SpaceObjectDescr
 {
 
 public:
-    Vehicle() = default;
-    virtual ~Vehicle() = default;
+    VehicleDescr() = default;
+    virtual ~VehicleDescr() = default;
 
     const std::vector<meti::vec3>& turrelPoints() const { return m_turrelPoints; }
     const std::vector<meti::vec3>& drivePoints() const { return m_drivePoints; }
@@ -90,7 +90,7 @@ public:
     void setCargoSlotNum(int otsecSlotNum) { m_cargoSlotNum = otsecSlotNum; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectDescr::info();
         result.add("descriptor::Vehicle");
         result.add("space", m_space);
         result.add("protection", m_protection);
@@ -151,7 +151,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectDescr>(*this);
 
         ar & m_turrelPoints;
         ar & m_drivePoints;

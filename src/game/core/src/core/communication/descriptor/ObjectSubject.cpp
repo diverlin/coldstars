@@ -25,20 +25,20 @@
 namespace descriptor {
 namespace comm {
 
-ObjectSubject::ObjectSubject(int_t object, int_t parent)
+ObjectSubjectComDescr::ObjectSubjectComDescr(int_t object, int_t parent)
     :
-      Object(object)
+      ObjectDescr(object)
     , m_subject(parent)
 {}
 
 
-ObjectSubject::ObjectSubject(const std::string& data)
+ObjectSubjectComDescr::ObjectSubjectComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-ObjectSubject::data() const
+ObjectSubjectComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

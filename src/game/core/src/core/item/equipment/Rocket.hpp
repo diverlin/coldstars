@@ -22,7 +22,7 @@
 #include "Weapon.hpp"
 
 namespace descriptor {
-class Rocket;
+class RocketDescr;
 } // namespace descriptor
 
 namespace model {
@@ -37,7 +37,7 @@ class SpaceObject;
 class Rocket : public Weapon
 { 
 public:
-    Rocket(descriptor::Rocket*, model::Rocket*);
+    Rocket(descriptor::RocketDescr*, model::Rocket*);
     virtual ~Rocket() = default;
 
     bool checkAmmo() const override final;
@@ -45,11 +45,11 @@ public:
 
     virtual void updateProperties();
 
-    descriptor::Rocket* descriptor() const { return m_descriptor_rocket; }
+    descriptor::RocketDescr* descriptor() const { return m_descriptor_rocket; }
     model::Rocket* model() const { return m_model_rocket; }
 
 private:
-    descriptor::Rocket* m_descriptor_rocket = nullptr;
+    descriptor::RocketDescr* m_descriptor_rocket = nullptr;
     model::Rocket* m_model_rocket = nullptr;
 
     int m_ammo_add = 0;

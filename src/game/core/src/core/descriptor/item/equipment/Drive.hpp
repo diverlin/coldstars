@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace descriptor {
 
-class Drive : public Equipment
+class DriveDescr : public EquipmentDescr
 {
 public:
     static const float OVERLOAD_RATE;
@@ -51,9 +51,9 @@ public:
 
 
 public:
-    Drive();
-    Drive(const std::string& data);
-    ~Drive() = default;
+    DriveDescr();
+    DriveDescr(const std::string& data);
+    ~DriveDescr() = default;
     std::string data() const;
 
     void setSpeed(int speed) { m_speed = speed; }
@@ -63,7 +63,7 @@ public:
     int hyper() const { return m_hyper; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Drive");
         result.add("speed", m_speed);
         result.add("hyper", m_hyper);
@@ -78,7 +78,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_speed;
         ar & m_hyper;
     }

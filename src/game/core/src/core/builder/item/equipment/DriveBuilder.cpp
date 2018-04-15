@@ -33,7 +33,7 @@ namespace core {
 core::control::Drive*
 DriveItemBuilder::gen()
 {
-    descriptor::Drive* descr = nullptr;
+    descriptor::DriveDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
         descr = descriptor::genDrive();
     } else {
@@ -46,14 +46,14 @@ DriveItemBuilder::gen()
 core::control::Drive*
 DriveItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::Drive* descr = core::shortcuts::descriptors()->drive(descriptor_id);
+    descriptor::DriveDescr* descr = core::shortcuts::descriptors()->drive(descriptor_id);
     core::control::Drive* drive = __genTemplate(descr, ob_id);
     __createInternals(drive, descr);
     return drive;
 }
 
 core::control::Drive*
-DriveItemBuilder::gen(descriptor::Drive* descr)
+DriveItemBuilder::gen(descriptor::DriveDescr* descr)
 {
     core::control::Drive* drive = __genTemplate(descr);
     __createInternals(drive, descr);
@@ -61,7 +61,7 @@ DriveItemBuilder::gen(descriptor::Drive* descr)
 }        
 
 core::control::Drive*
-DriveItemBuilder::__genTemplate(descriptor::Drive* descriptor, int_t id)
+DriveItemBuilder::__genTemplate(descriptor::DriveDescr* descriptor, int_t id)
 {
     model::Drive* model = new model::Drive(descriptor->id(), id);
     assert(model);
@@ -70,7 +70,7 @@ DriveItemBuilder::__genTemplate(descriptor::Drive* descriptor, int_t id)
     return drive;
 }
 
-void DriveItemBuilder::__createInternals(core::control::Drive* drive, descriptor::Drive* descr)
+void DriveItemBuilder::__createInternals(core::control::Drive* drive, descriptor::DriveDescr* descr)
 {
     ItemBuilder::_createInternals(drive, descr);
     EquipmentBuilder::_createInternals(drive, descr);

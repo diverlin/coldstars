@@ -37,7 +37,7 @@
 namespace core {
 namespace control {
 
-Asteroid::Asteroid(descriptor::Asteroid* descr, model::Asteroid* model)
+Asteroid::Asteroid(descriptor::AsteroidDescr* descr, model::Asteroid* model)
     :
       Planetoid(descr, model)
     , m_descriptor_asteroid(descr)

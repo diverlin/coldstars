@@ -32,7 +32,7 @@
 namespace core {
 namespace control {
 
-Satellite::Satellite(descriptor::Satellite* descr, model::Satellite* model)
+Satellite::Satellite(descriptor::SatelliteDescr* descr, model::Satellite* model)
     :
       Vehicle(descr, model)
     , m_descriptor_satellite(descr)

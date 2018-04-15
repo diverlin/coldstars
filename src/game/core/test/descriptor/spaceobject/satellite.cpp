@@ -28,7 +28,7 @@
 namespace test {
 
 namespace {
-void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* copy) {
+void testSatelliteEquality(descriptor::SatelliteDescr* descr, descriptor::SatelliteDescr* copy) {
     EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
     EXPECT_EQ(descr->obType(), entity::Type::SATELLITE);
     EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
@@ -36,8 +36,8 @@ void testSatelliteEquality(descriptor::Satellite* descr, descriptor::Satellite* 
 } // namespace
 
 TEST(descriptor, clone_satellite) {
-    descriptor::Satellite* descr = descriptor::genSatellite();
-    descriptor::Satellite* copy = new descriptor::Satellite(descr->data());
+    descriptor::SatelliteDescr* descr = descriptor::genSatellite();
+    descriptor::SatelliteDescr* copy = new descriptor::SatelliteDescr(descr->data());
 
     testSatelliteEquality(descr, copy);
     testVehicleEquality(descr, copy);

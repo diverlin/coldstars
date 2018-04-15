@@ -29,13 +29,13 @@
 namespace descriptor {
 namespace comm {
 
-class CreatePlayer
+class CreatePlayerComDescr
 {
 public:
-    CreatePlayer(int_t, int_t);
-    CreatePlayer(const std::string& data);
-    CreatePlayer() = default;
-    ~CreatePlayer() = default;
+    CreatePlayerComDescr(int_t, int_t);
+    CreatePlayerComDescr(const std::string& data);
+    CreatePlayerComDescr() = default;
+    ~CreatePlayerComDescr() = default;
     std::string data() const;
 
     int_t player() const { return m_player; }

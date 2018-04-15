@@ -31,13 +31,13 @@ namespace descriptor {
 namespace comm {
 
 
-class Object
+class ObjectDescr
 {
 public:
-    Object(int_t);
-    Object()=default;
-    Object(const std::string& data);
-    ~Object() = default;
+    ObjectDescr(int_t);
+    ObjectDescr()=default;
+    ObjectDescr(const std::string& data);
+    ~ObjectDescr() = default;
     std::string data() const;
 
     int_t object() const { return m_object; }

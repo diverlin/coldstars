@@ -32,7 +32,7 @@ namespace core {
 core::control::Scaner*
 ScanerItemBuilder::gen()
 {
-    descriptor::Scaner* descr = nullptr;
+    descriptor::ScanerDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SCANER_EQUIPMENT)) {
         descr = descriptor::genScaner();
     } else {
@@ -45,14 +45,14 @@ ScanerItemBuilder::gen()
 core::control::Scaner*
 ScanerItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::Scaner* descr = core::shortcuts::descriptors()->scaner(descriptor_id);
+    descriptor::ScanerDescr* descr = core::shortcuts::descriptors()->scaner(descriptor_id);
     core::control::Scaner* scaner = __genTemplate(descr, ob_id);
     __createInternals(scaner, descr);
     return scaner;
 }
 
 core::control::Scaner*
-ScanerItemBuilder::gen(descriptor::Scaner* descr)
+ScanerItemBuilder::gen(descriptor::ScanerDescr* descr)
 {
     core::control::Scaner* scaner = __genTemplate(descr);
     __createInternals(scaner, descr);
@@ -60,7 +60,7 @@ ScanerItemBuilder::gen(descriptor::Scaner* descr)
 } 
 
 core::control::Scaner*
-ScanerItemBuilder::__genTemplate(descriptor::Scaner* descr, int_t ob_id)
+ScanerItemBuilder::__genTemplate(descriptor::ScanerDescr* descr, int_t ob_id)
 {
     model::Scaner* model = new model::Scaner(descr->id(), ob_id);
     assert(model);
@@ -70,7 +70,7 @@ ScanerItemBuilder::__genTemplate(descriptor::Scaner* descr, int_t ob_id)
 }
 
 void
-ScanerItemBuilder::__createInternals(core::control::Scaner* scaner, descriptor::Scaner* descr)
+ScanerItemBuilder::__createInternals(core::control::Scaner* scaner, descriptor::ScanerDescr* descr)
 {
     ItemBuilder::_createInternals(scaner, descr);
     EquipmentBuilder::_createInternals(scaner, descr);

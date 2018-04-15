@@ -23,7 +23,7 @@
 
 namespace descriptor {
 
-class Protector : public Equipment
+class ProtectorDescr : public EquipmentDescr
 {
 public:
     static const int PROTECTION_MIN;
@@ -42,9 +42,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Protector();
-    ~Protector() = default;
-    Protector(const std::string& data);
+    ProtectorDescr();
+    ~ProtectorDescr() = default;
+    ProtectorDescr(const std::string& data);
     std::string data() const;
 
     void setProtection(int protection) { m_protection = protection; }
@@ -52,7 +52,7 @@ public:
     int protection() const { return m_protection; }
 
     ceti::InfoTable info() const {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Protector");
         result.add("protection", m_protection);
         return result;
@@ -65,7 +65,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_protection;
     }
 };

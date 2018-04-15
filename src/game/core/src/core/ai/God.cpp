@@ -76,7 +76,7 @@ God::~God()
 void God::createWorld(bool dummy)
 {
     if (!dummy) {
-        descriptor::Galaxy* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
+        descriptor::GalaxyDescr* galaxy_descriptor = core::shortcuts::descriptors()->randGalaxy();
         core::TelegramCreator::get().createGalaxy(galaxy_descriptor);
     } else {
         core::TelegramCreator::get().createDummyGalaxy();
@@ -131,7 +131,7 @@ void God::update()
 
 }
 
-void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
+void God::__createLife(control::Galaxy* galaxy, descriptor::GalaxyDescr* descriptor) const
 {
 //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
 //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
@@ -147,7 +147,7 @@ void God::__createLife(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) 
     //    __createShips(starsystem, /*ships_num=*/20, race::Type::R0);   // fake
 }
 
-void God::__createInvasion(control::Galaxy* galaxy, descriptor::Galaxy* descriptor) const
+void God::__createInvasion(control::Galaxy* galaxy, descriptor::GalaxyDescr* descriptor) const
 {
     //!!!!
     return;

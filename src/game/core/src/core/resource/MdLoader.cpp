@@ -59,7 +59,7 @@ MdLoader::value(const std::string& key)
 
 
 void
-InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
+InfoLoader::read(const std::string& path, descriptor::MeshDescr* mesh)
 {
     LOG_DATA("managing "+path);
     boost::property_tree::ptree root;
@@ -99,7 +99,7 @@ InfoLoader::read(const std::string& path, descriptor::Mesh* mesh)
 }
 
 void
-InfoLoader::read(const std::string& path, descriptor::Material* material)
+InfoLoader::read(const std::string& path, descriptor::MaterialDescr* material)
 {
     LOG_DATA("managing "+path);
     boost::property_tree::ptree root;

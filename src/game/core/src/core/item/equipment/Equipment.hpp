@@ -30,7 +30,7 @@ namespace control {
 class Equipment : public Item
 {
 public:
-    Equipment(descriptor::Item*, model::Item*);
+    Equipment(descriptor::ItemDescr*, model::Item*);
     virtual ~Equipment() = default;
 
     virtual void putChildrenToGarbage() const;

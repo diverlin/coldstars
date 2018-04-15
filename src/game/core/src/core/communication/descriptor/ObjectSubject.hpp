@@ -28,18 +28,18 @@
 namespace descriptor {
 namespace comm {
 
-class ObjectSubject : public Object {
+class ObjectSubjectComDescr : public ObjectDescr {
 public:
-    ObjectSubject(int_t, int_t);
-    ObjectSubject(const std::string& data);
-    ObjectSubject() = default;
-    ~ObjectSubject() = default;
+    ObjectSubjectComDescr(int_t, int_t);
+    ObjectSubjectComDescr(const std::string& data);
+    ObjectSubjectComDescr() = default;
+    ~ObjectSubjectComDescr() = default;
     std::string data() const;
 
     int_t subject() const { return m_subject; }
 
     std::string info() const {
-        std::string result = Object::info();
+        std::string result = ObjectDescr::info();
         result += "descriptor::comm::ObjectSubject:\n";
         result += std::string(" subject = ") + std::to_string(m_subject) + "\n";
         return result;
@@ -52,7 +52,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Object>(*this);
+        ar & boost::serialization::base_object<ObjectDescr>(*this);
         ar & m_subject;
     }
 };

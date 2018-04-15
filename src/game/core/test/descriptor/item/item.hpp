@@ -18,11 +18,11 @@
 
 
 namespace descriptor {
-class Item;
+class ItemDescr;
 } // namespace descriptor
 
 namespace test {
 
-void testItemEquality(descriptor::Item* descr, descriptor::Item* copy);
+void testItemEquality(descriptor::ItemDescr* descr, descriptor::ItemDescr* copy);
 
 } // namespace test

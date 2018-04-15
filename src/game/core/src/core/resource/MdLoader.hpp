@@ -5,8 +5,8 @@
 #include <map>
 
 namespace descriptor {
-class Mesh;
-class Material;
+class MeshDescr;
+class MaterialDescr;
 }
 
 class MdLoader
@@ -28,7 +28,7 @@ public:
     InfoLoader()=default;
     ~InfoLoader()=default;
 
-    static void read(const std::string&, descriptor::Mesh*);
-    static void read(const std::string&, descriptor::Material*);
+    static void read(const std::string&, descriptor::MeshDescr*);
+    static void read(const std::string&, descriptor::MaterialDescr*);
 };
 

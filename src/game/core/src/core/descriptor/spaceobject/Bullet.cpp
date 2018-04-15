@@ -23,19 +23,19 @@
 
 namespace descriptor {
 
-Bullet::Bullet()
+BulletDescr::BulletDescr()
 {
     setType(descriptor::Type::BULLET);
     setObType(entity::Type::BULLET);
 }
 
-Bullet::Bullet(const std::string& data)
+BulletDescr::BulletDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Bullet::data() const
+BulletDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

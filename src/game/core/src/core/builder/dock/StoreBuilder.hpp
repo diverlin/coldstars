@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Store;
+class StoreDescr;
 } // namespace descriptor
 
 namespace core {
@@ -37,13 +37,13 @@ class StoreBuilder
 {
 public:
     static core::control::Store* gen();
-    static core::control::Store* gen(descriptor::Store*);
+    static core::control::Store* gen(descriptor::StoreDescr*);
 
 private:
     StoreBuilder() = delete;
     ~StoreBuilder() = delete;
 
-    static core::control::Store* __createTemplate(descriptor::Store*);
+    static core::control::Store* __createTemplate(descriptor::StoreDescr*);
     static void __createInternals(core::control::Store*);
     static void __putRandomEquipment(core::control::Store*);
 }; 

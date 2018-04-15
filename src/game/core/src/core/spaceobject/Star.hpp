@@ -33,7 +33,7 @@ namespace control {
 class Star : public Planetoid
 {
 public:
-    Star(descriptor::Star*, model::Star*);
+    Star(descriptor::StarDescr*, model::Star*);
     virtual ~Star();
 
     void hit(int) {}
@@ -48,11 +48,11 @@ public:
     void updateInSpaceInStatic();
     void updateInSpace(int);
 
-    descriptor::Star* descriptor() const { return m_descriptor_star; }
+    descriptor::StarDescr* descriptor() const { return m_descriptor_star; }
     model::Star* model() const { return m_model_star; }
 
 private:
-    descriptor::Star* m_descriptor_star = nullptr;
+    descriptor::StarDescr* m_descriptor_star = nullptr;
     model::Star* m_model_star = nullptr;
 
     float m_deltaColor = 0.0f;

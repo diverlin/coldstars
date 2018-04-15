@@ -31,18 +31,18 @@
 namespace descriptor {
 namespace comm {
 
-class CreateGoodsPack : public Create
+class CreateGoodsPackComDescr : public CreateComDescr
 {
 public:
-    CreateGoodsPack(int_t, int_t, int);
-    CreateGoodsPack(const std::string& data);
-    ~CreateGoodsPack() = default;
+    CreateGoodsPackComDescr(int_t, int_t, int);
+    CreateGoodsPackComDescr(const std::string& data);
+    ~CreateGoodsPackComDescr() = default;
     std::string data() const;
 
     int mass() const { return m_mass; }
 
     std::string info() const {
-        std::string result = Create::info();
+        std::string result = CreateComDescr::info();
         result += "descriptor::comm::CreateGoodsPack:\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
         return result;
@@ -55,7 +55,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Create>(*this);
+        ar & boost::serialization::base_object<CreateComDescr>(*this);
         ar & m_mass;
     }
 };

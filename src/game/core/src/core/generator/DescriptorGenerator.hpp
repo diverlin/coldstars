@@ -27,90 +27,90 @@
 
 namespace descriptor {
 
-class Galaxy;
-class Sector;
-class StarSystem;
-class HyperSpace;
+class GalaxyDescr;
+class SectorDescr;
+class StarSystemDescr;
+class HyperSpaceDescr;
 
-class Star;
-class Planet;
-class WormHole;
-class Asteroid;
-class Npc;
-class Ship;
-class SpaceStation;
-class Satellite;
-class Container;
-class Bullet;
+class StarDescr;
+class PlanetDescr;
+class WormHoleDescr;
+class AsteroidDescr;
+class NpcDescr;
+class ShipDescr;
+class SpaceStationDescr;
+class SatelliteDescr;
+class ContainerDescr;
+class BulletDescr;
 
 // dock
-class Kosmoport;
-class NatureLand;
-class Angar;
-class Store;
-class Shop;
-class Goverment;
+class KosmoportDescr;
+class NatureLandDescr;
+class AngarDescr;
+class StoreDescr;
+class ShopDescr;
+class GovermentDescr;
 
-class Bak;
-class Drive;
-class Droid;
-class Grapple;
-class Lazer;
-class Protector;
-class Radar;
-class Rocket;
-class Scaner;
+class BakDescr;
+class DriveDescr;
+class DroidDescr;
+class GrappleDescr;
+class LazerDescr;
+class ProtectorDescr;
+class RadarDescr;
+class RocketDescr;
+class ScanerDescr;
 
 // other
-class Goods;
+class GoodsDescr;
 
 // parts
-class Turrel;
+class TurrelDescr;
 
 /* world */
-descriptor::Galaxy* genGalaxy(const std::vector<int_t>&);
-descriptor::Sector* genSector(const std::vector<int_t>&);
-descriptor::StarSystem* genStarSystem(race::Type race = race::Type::NONE);
-descriptor::HyperSpace* genHyperSpace();
+descriptor::GalaxyDescr* genGalaxy(const std::vector<int_t>&);
+descriptor::SectorDescr* genSector(const std::vector<int_t>&);
+descriptor::StarSystemDescr* genStarSystem(race::Type race = race::Type::NONE);
+descriptor::HyperSpaceDescr* genHyperSpace();
 
 /* spaceobjects */
-descriptor::Star* genStar();
-descriptor::Planet* genPlanet();
-descriptor::WormHole* genWormHole();
-descriptor::Asteroid* genAsteroid();
+descriptor::StarDescr* genStar();
+descriptor::PlanetDescr* genPlanet();
+descriptor::WormHoleDescr* genWormHole();
+descriptor::AsteroidDescr* genAsteroid();
 
-descriptor::Npc* genNpc();
-descriptor::Ship* genShip();
-descriptor::SpaceStation* genSpaceStation();
-descriptor::Satellite* genSatellite();
+descriptor::NpcDescr* genNpc();
+descriptor::ShipDescr* genShip();
+descriptor::SpaceStationDescr* genSpaceStation();
+descriptor::SatelliteDescr* genSatellite();
 
-descriptor::Container* genContainer();
-descriptor::Bullet* genBullet();
+descriptor::ContainerDescr* genContainer();
+descriptor::BulletDescr* genBullet();
 
 // dock
-Kosmoport* genKosmoport(race::Type race = race::Type::NONE);
-NatureLand* genNatureLand();
-Angar* genAngar(race::Type race = race::Type::NONE);
-Store* genStore(race::Type race = race::Type::NONE);
-Shop* genShop(race::Type race = race::Type::NONE);
-Goverment* genGoverment(race::Type race = race::Type::NONE);
+KosmoportDescr* genKosmoport(race::Type race = race::Type::NONE);
+NatureLandDescr* genNatureLand();
+AngarDescr* genAngar(race::Type race = race::Type::NONE);
+StoreDescr* genStore(race::Type race = race::Type::NONE);
+ShopDescr* genShop(race::Type race = race::Type::NONE);
+GovermentDescr* genGoverment(race::Type race = race::Type::NONE);
 
 /* items */
-Bak* genBak(int race = NONE, int tech_level = NONE);
-Drive* genDrive(int race = NONE, int tech_level = NONE);
-Droid* genDroid(int race = NONE, int tech_level = NONE);
-Grapple* genGrapple(int race = NONE, int tech_level = NONE);
-Lazer* genLazer(int race = NONE, int tech_level = NONE);
-Protector* genProtector(int race = NONE, int tech_level = NONE);
-Radar* genRadar(int race = NONE, int tech_level = NONE);
-Rocket* genRocket(int race = NONE, int tech_level = NONE);
-Scaner* genScaner(int race = NONE, int tech_level = NONE);
+BakDescr* genBak(int race = NONE, int tech_level = NONE);
+DriveDescr* genDrive(int race = NONE, int tech_level = NONE);
+DroidDescr* genDroid(int race = NONE, int tech_level = NONE);
+GrappleDescr* genGrapple(int race = NONE, int tech_level = NONE);
+LazerDescr* genLazer(int race = NONE, int tech_level = NONE);
+ProtectorDescr* genProtector(int race = NONE, int tech_level = NONE);
+RadarDescr* genRadar(int race = NONE, int tech_level = NONE);
+RocketDescr* genRocket(int race = NONE, int tech_level = NONE);
+ScanerDescr* genScaner(int race = NONE, int tech_level = NONE);
 
 // other
-Goods* genGoods();
+GoodsDescr* genGoods();
 //Bomb* genBomb(int damage = NONE, int radius = NONE);
 
 //parts
-Turrel* genTurrel();
+TurrelDescr* genTurrel();
 
 } // namespace descriptor

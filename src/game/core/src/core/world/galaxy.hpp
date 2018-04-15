@@ -27,7 +27,7 @@
 #include <ceti/Pack.hpp>
 
 namespace descriptor {
-class Galaxy;
+class GalaxyDescr;
 } // namespace descriptor
 
 namespace model {
@@ -45,7 +45,7 @@ class StarSystem;
 class Galaxy : public Base
 {
 public:
-    Galaxy(descriptor::Galaxy*, model::Galaxy*);
+    Galaxy(descriptor::GalaxyDescr*, model::Galaxy*);
     ~Galaxy();
 
     virtual void putChildrenToGarbage() const;
@@ -64,11 +64,11 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    descriptor::Galaxy* descriptor() const { return m_descriptor_galaxy; }
+    descriptor::GalaxyDescr* descriptor() const { return m_descriptor_galaxy; }
     model::Galaxy* model() const { return m_model_galaxy; }
 
 private:
-    descriptor::Galaxy* m_descriptor_galaxy = nullptr;
+    descriptor::GalaxyDescr* m_descriptor_galaxy = nullptr;
     model::Galaxy* m_model_galaxy = nullptr;
 
     std::vector<Sector*> m_sectors;

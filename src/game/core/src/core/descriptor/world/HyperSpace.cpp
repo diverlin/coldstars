@@ -22,18 +22,18 @@
 
 namespace descriptor {
 
-HyperSpace::HyperSpace()
+HyperSpaceDescr::HyperSpaceDescr()
 {
     setType(Type::HYPERSPACE);
     setObType(entity::Type::HYPERSPACE);
 }
 
-HyperSpace::HyperSpace(const std::string& data) {
+HyperSpaceDescr::HyperSpaceDescr(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-HyperSpace::data() const
+HyperSpaceDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

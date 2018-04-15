@@ -17,7 +17,7 @@
 */
 
 namespace descriptor {
-class Base;
+class BaseDescr;
 } // namespace descriptor
 
 namespace ceti {
@@ -28,7 +28,7 @@ class BaseView;
 
 namespace  test {
 
-void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy);
+void testBaseEquality(descriptor::BaseDescr* descr, descriptor::BaseDescr* copy);
 //void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy);
 
 } // namespace test

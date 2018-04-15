@@ -23,12 +23,12 @@
 
 namespace descriptor {
 
-class Goods : public Item
+class GoodsDescr : public ItemDescr
 {
 public:
-    Goods();
-    ~Goods() = default;
-    Goods(const std::string& data);
+    GoodsDescr();
+    ~GoodsDescr() = default;
+    GoodsDescr(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const {
@@ -41,7 +41,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
+        ar & boost::serialization::base_object<ItemDescr>(*this);
     }
 };
 

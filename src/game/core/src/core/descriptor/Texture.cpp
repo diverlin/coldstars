@@ -23,25 +23,25 @@
 
 namespace descriptor {
 
-Material::Material(int_t type)
+MaterialDescr::MaterialDescr(int_t type)
 {
     setType(int_t(Type::MATERIAL));
     setObType(type);
 }
 
-Material::Material(const std::string& data)
+MaterialDescr::MaterialDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 bool
-Material::operator==(const Material& rhs) const
+MaterialDescr::operator==(const MaterialDescr& rhs) const
 {
     return data() == rhs.data();
 }
 
 std::string
-Material::data() const
+MaterialDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace descriptor {
 
-class Radar : public Equipment
+class RadarDescr : public EquipmentDescr
 {
 public:
     static const int RADIUS_MIN;
@@ -42,9 +42,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Radar();
-    ~Radar() = default;
-    Radar(const std::string& data);
+    RadarDescr();
+    ~RadarDescr() = default;
+    RadarDescr(const std::string& data);
     std::string data() const;
 
     void setRadius(int radius) { m_radius = radius; }
@@ -52,7 +52,7 @@ public:
     int radius() const { return m_radius; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Radar");
         result.add("radius", m_radius);
         return result;
@@ -65,7 +65,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_radius;
     }
 };

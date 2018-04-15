@@ -22,8 +22,8 @@
 
 TEST(descriptor, clone_hit)
 {
-    descriptor::comm::Hit descr(11, 22, 33);
-    descriptor::comm::Hit copy(descr.data());
+    descriptor::comm::HitComDescr descr(11, 22, 33);
+    descriptor::comm::HitComDescr copy(descr.data());
 
     EXPECT_EQ(11, copy.owner());
     EXPECT_EQ(22, copy.target());

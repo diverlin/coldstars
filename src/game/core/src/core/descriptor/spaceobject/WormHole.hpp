@@ -23,18 +23,18 @@
 
 namespace descriptor {
 
-class WormHole : public Planetoid {
+class WormHoleDescr : public PlanetoidDescr {
 public:
-    WormHole();
-    ~WormHole() = default;
-    WormHole(const std::string& data);
+    WormHoleDescr();
+    ~WormHoleDescr() = default;
+    WormHoleDescr(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidDescr>(*this);
     }
 };
 

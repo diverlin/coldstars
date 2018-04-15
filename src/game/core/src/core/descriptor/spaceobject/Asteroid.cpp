@@ -20,16 +20,16 @@
 
 namespace descriptor {
 
-const int Asteroid::ARMOR_MIN = 10;
-const int Asteroid::ARMOR_MAX = 100;
-const int Asteroid::SCALE_MIN = 50;
-const int Asteroid::SCALE_MAX = 100;
-const int Asteroid::DISTANCE_MIN = 400;
-const int Asteroid::DISTANCE_MAX = 1600;
-const int Asteroid::SPEED_MIN = 40;
-const int Asteroid::SPEED_MAX = 100;
+const int AsteroidDescr::ARMOR_MIN = 10;
+const int AsteroidDescr::ARMOR_MAX = 100;
+const int AsteroidDescr::SCALE_MIN = 50;
+const int AsteroidDescr::SCALE_MAX = 100;
+const int AsteroidDescr::DISTANCE_MIN = 400;
+const int AsteroidDescr::DISTANCE_MAX = 1600;
+const int AsteroidDescr::SPEED_MIN = 40;
+const int AsteroidDescr::SPEED_MAX = 100;
 
-Asteroid::Asteroid()
+AsteroidDescr::AsteroidDescr()
 {
     setType(Type::ASTEROID);
     setObType(entity::Type::ASTEROID);

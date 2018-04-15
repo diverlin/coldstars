@@ -23,20 +23,20 @@
 
 namespace descriptor {
 
-class Mesh : public ceti::descriptor::Mesh, public Association
+class MeshDescr : public ceti::descriptor::Mesh, public AssociationDescr
 {
 public:
-    Mesh() = default;
+    MeshDescr() = default;
 //    Mesh(int_t type = -1);
-    Mesh(const std::string& data);
-    ~Mesh() = default;
+    MeshDescr(const std::string& data);
+    ~MeshDescr() = default;
 
     bool isFlat() const { return m_isFlat; }
     void setIsPlane() { m_isFlat = true; }
 
     std::string data() const;
 
-    bool operator==(const Mesh& rhs) const;
+    bool operator==(const MeshDescr& rhs) const;
 
 private:
     bool m_isFlat;
@@ -45,7 +45,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::descriptor::Mesh>(*this);
-        ar & boost::serialization::base_object<Association>(*this);
+        ar & boost::serialization::base_object<AssociationDescr>(*this);
         ar & m_isFlat;
     }
 };

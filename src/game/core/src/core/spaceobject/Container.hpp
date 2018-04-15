@@ -40,7 +40,7 @@ class Item;
 class Container : public SpaceObject
 {
 public:
-    Container(descriptor::Container*, model::Container*);
+    Container(descriptor::ContainerDescr*, model::Container*);
     virtual ~Container();
 
     void bindItemSlot(ItemSlot*);
@@ -59,11 +59,11 @@ public:
 
     //        void Render(const jeti::Renderer&);
 
-    descriptor::Container* descriptor() const { return m_descriptor_container; }
+    descriptor::ContainerDescr* descriptor() const { return m_descriptor_container; }
     model::Container* model() const { return m_model_container; }
 
 private:
-    descriptor::Container* m_descriptor_container = nullptr;
+    descriptor::ContainerDescr* m_descriptor_container = nullptr;
     model::Container* m_model_container = nullptr;
 
     [[warning("remove this at all, we don't need slot here")]]

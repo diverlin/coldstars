@@ -34,7 +34,7 @@ namespace core {
 core::control::Protector*
 ProtectorItemBuilder::gen()
 {
-    descriptor::Protector* descr = nullptr;
+    descriptor::ProtectorDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
         descr = descriptor::genProtector();
     } else {
@@ -57,14 +57,14 @@ ProtectorItemBuilder::gen(int num)
 core::control::Protector*
 ProtectorItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
+    descriptor::ProtectorDescr* descr = core::shortcuts::descriptors()->protector(descriptor_id);
     core::control::Protector* protector = __genTemplate(descr, ob_id);
     __createInternals(protector, descr);
     return protector;
 }
 
 core::control::Protector*
-ProtectorItemBuilder::gen(descriptor::Protector* descr)
+ProtectorItemBuilder::gen(descriptor::ProtectorDescr* descr)
 {
     core::control::Protector* protector = __genTemplate(descr);
     __createInternals(protector, descr);
@@ -72,7 +72,7 @@ ProtectorItemBuilder::gen(descriptor::Protector* descr)
 }
 
 core::control::Protector*
-ProtectorItemBuilder::__genTemplate(descriptor::Protector* descriptor, int_t id)
+ProtectorItemBuilder::__genTemplate(descriptor::ProtectorDescr* descriptor, int_t id)
 {
     model::Protector* model = new model::Protector(descriptor->id(), id);
     assert(model);
@@ -82,7 +82,7 @@ ProtectorItemBuilder::__genTemplate(descriptor::Protector* descriptor, int_t id)
 }
 
 void
-ProtectorItemBuilder::__createInternals(core::control::Protector* protector, descriptor::Protector* descr)
+ProtectorItemBuilder::__createInternals(core::control::Protector* protector, descriptor::ProtectorDescr* descr)
 {     
     ItemBuilder::_createInternals(protector, descr);
     EquipmentBuilder::_createInternals(protector, descr);

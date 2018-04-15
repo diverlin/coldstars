@@ -23,19 +23,19 @@
 
 namespace descriptor {
 
-Shop::Shop()
+ShopDescr::ShopDescr()
 {
     setType(Type::SHOP);
     setObType(entity::Type::SHOP);
 }
 
-Shop::Shop(const std::string& data)
+ShopDescr::ShopDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Shop::data() const
+ShopDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -48,7 +48,7 @@ namespace core {
 core::control::NatureLand*
 NatureLandBuilder::gen()
 {
-    descriptor::NatureLand* descr = nullptr;
+    descriptor::NatureLandDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::NATURELAND)) {
         descr = descriptor::genNatureLand();
     } else {
@@ -59,7 +59,7 @@ NatureLandBuilder::gen()
 } 
 
 core::control::NatureLand*
-NatureLandBuilder::gen(descriptor::NatureLand* descr)
+NatureLandBuilder::gen(descriptor::NatureLandDescr* descr)
 {
     core::control::NatureLand* natureland = __createTemplate(descr);
     __createInternals(natureland);
@@ -68,7 +68,7 @@ NatureLandBuilder::gen(descriptor::NatureLand* descr)
 }
 
 core::control::NatureLand*
-NatureLandBuilder::__createTemplate(descriptor::NatureLand* descr)
+NatureLandBuilder::__createTemplate(descriptor::NatureLandDescr* descr)
 {
     model::NatureLand* model = new model::NatureLand(descr->id());
     assert(model);

@@ -37,7 +37,7 @@ namespace core {
 core::control::Kosmoport*
 KosmoportBuilder::gen()
 {
-    descriptor::Kosmoport* descr = nullptr;
+    descriptor::KosmoportDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::KOSMOPORT)) {
         descr = descriptor::genKosmoport();
     } else {
@@ -48,7 +48,7 @@ KosmoportBuilder::gen()
 } 
 
 core::control::Kosmoport*
-KosmoportBuilder::gen(descriptor::Kosmoport* descr)
+KosmoportBuilder::gen(descriptor::KosmoportDescr* descr)
 {
     core::control::Kosmoport* kosmoport = __createTemplate(descr);
     __createInternals(kosmoport, descr);
@@ -56,7 +56,7 @@ KosmoportBuilder::gen(descriptor::Kosmoport* descr)
 }
 
 core::control::Kosmoport*
-KosmoportBuilder::__createTemplate(descriptor::Kosmoport* descr)
+KosmoportBuilder::__createTemplate(descriptor::KosmoportDescr* descr)
 {
     model::Kosmoport* model = new model::Kosmoport(descr->id());
     assert(model);
@@ -69,7 +69,7 @@ KosmoportBuilder::__createTemplate(descriptor::Kosmoport* descr)
 }
 
 void
-KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
+KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descriptor::KosmoportDescr* descr)
 {
     kosmoport->bindAngar(core::AngarBuilder::gen());
     kosmoport->bindStore(core::StoreBuilder::gen());

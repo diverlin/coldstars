@@ -24,7 +24,7 @@
 #include <string>
 
 namespace descriptor {
-class Land;
+class LandDescr;
 } // namespace descriptor
 
 namespace model {
@@ -40,7 +40,7 @@ class Vehicle;
 class Land : public Base
 {
 public:
-    Land(descriptor::Land*, model::Land*);
+    Land(descriptor::LandDescr*, model::Land*);
     virtual ~Land();
 
     void setOwner(SpaceObject* owner)  { m_owner = owner; }
@@ -56,13 +56,13 @@ public:
 
     virtual std::string vehiclesStr() const = 0;
 
-    descriptor::Land* descriptor() const { return m_descriptor_land; }
+    descriptor::LandDescr* descriptor() const { return m_descriptor_land; }
     model::Land* model() const { return m_model_land; }
 
 private:
     SpaceObject* m_owner = nullptr;
 
-    descriptor::Land* m_descriptor_land = nullptr;
+    descriptor::LandDescr* m_descriptor_land = nullptr;
     model::Land* m_model_land = nullptr;
 
 //    UnresolvedDataLand data_unresolved_Land;

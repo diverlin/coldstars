@@ -24,20 +24,20 @@
 
 namespace descriptor {
 
-Kosmoport::Kosmoport()
+KosmoportDescr::KosmoportDescr()
 {
     setType(Type::KOSMOPORT);
     setObType(entity::Type::KOSMOPORT);
     setPlace(place::Type::KOSMOPORT);
 }
 
-Kosmoport::Kosmoport(const std::string& data)
+KosmoportDescr::KosmoportDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Kosmoport::data() const
+KosmoportDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

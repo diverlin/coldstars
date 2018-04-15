@@ -28,14 +28,14 @@
 
 namespace descriptor {
 
-struct Orientation : public Base
+struct OrientationDescr : public BaseDescr
 {
 public:
-    Orientation() = default;
-    ~Orientation() = default;
+    OrientationDescr() = default;
+    ~OrientationDescr() = default;
 
     ceti::InfoTable info() const {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseDescr::info();
         result.add("descriptor::Orientation");
         result.add("size", m_size);
         result.add("direction", m_direction);
@@ -55,7 +55,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
         ar & m_size;
         ar & m_direction;
     }

@@ -23,7 +23,7 @@
 
 namespace descriptor {
 
-class Bak : public Equipment
+class BakDescr : public EquipmentDescr
 {
 public:
     static const int FUEL_MIN;
@@ -42,9 +42,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Bak();
-    ~Bak() = default;
-    Bak(const std::string& data);
+    BakDescr();
+    ~BakDescr() = default;
+    BakDescr(const std::string& data);
     std::string data() const;
 
     void setFuel(int fuel) { m_fuel = fuel; }
@@ -52,7 +52,7 @@ public:
     int fuel() const { return m_fuel; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Bak");
         result.add("fuel", m_fuel);
         return result;
@@ -65,7 +65,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_fuel;
     }
 };

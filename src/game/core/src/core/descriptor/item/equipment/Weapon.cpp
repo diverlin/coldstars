@@ -22,7 +22,7 @@
 
 namespace descriptor {
 
-Weapon::Weapon()
+WeaponDescr::WeaponDescr()
 {
     setSlotType(core::SlotType::WEAPON);
 }

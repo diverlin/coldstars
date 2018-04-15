@@ -51,19 +51,19 @@ const int DISTANT_NEBULA_MAX = 8;
 
 namespace descriptor {
 
-struct StarSystem : public Base
+struct StarSystemDescr : public BaseDescr
 {
 public:
-    StarSystem();
-    StarSystem(const std::string&);
+    StarSystemDescr();
+    StarSystemDescr(const std::string&);
     std::string data() const;
-    ~StarSystem() = default;
+    ~StarSystemDescr() = default;
 
     const std::vector<int_t>& stars() const { return m_stars; }
     const std::vector<int_t>& planets() const { return m_planets; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseDescr::info();
         result.add("descriptor::StarSystem");
         result.add("stars", m_stars);
         result.add("planets", m_planets);
@@ -78,7 +78,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
         ar & m_stars;
         ar & m_planets;
     }

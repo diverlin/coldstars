@@ -23,19 +23,19 @@
 
 namespace descriptor {
 
-Goverment::Goverment()
+GovermentDescr::GovermentDescr()
 {
     setType(Type::GOVERMENT);
     setObType(entity::Type::GOVERMENT);
 }
 
-Goverment::Goverment(const std::string& data)
+GovermentDescr::GovermentDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Goverment::data() const
+GovermentDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

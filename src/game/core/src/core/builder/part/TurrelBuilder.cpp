@@ -32,7 +32,7 @@ namespace core {
 core::control::Turrel*
 TurrelBuilder::gen()
 {
-    descriptor::Turrel* descr = nullptr;
+    descriptor::TurrelDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::TURREL)) {
         descr = descriptor::genTurrel();
     } else {
@@ -43,7 +43,7 @@ TurrelBuilder::gen()
 }
 
 core::control::Turrel*
-TurrelBuilder::gen(descriptor::Turrel* descr)
+TurrelBuilder::gen(descriptor::TurrelDescr* descr)
 {
     core::control::Turrel* turrel = __genTemplate(descr);
 
@@ -57,7 +57,7 @@ TurrelBuilder::gen(descriptor::Turrel* descr)
 } 
 
 core::control::Turrel*
-TurrelBuilder::__genTemplate(descriptor::Turrel* descr)
+TurrelBuilder::__genTemplate(descriptor::TurrelDescr* descr)
 {
     model::Turrel* model = new model::Turrel(descr->id());
     assert(model);

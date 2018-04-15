@@ -22,7 +22,7 @@
 
 namespace descriptor {
 
-class Lazer : public Weapon
+class LazerDescr : public WeaponDescr
 {
 public:
     static const int RADIUS_MIN;
@@ -46,13 +46,13 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Lazer();
-    ~Lazer() = default;
-    Lazer(const std::string& data);
+    LazerDescr();
+    ~LazerDescr() = default;
+    LazerDescr(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Weapon::info();
+        ceti::InfoTable result = WeaponDescr::info();
         result.add("descriptor::Lazer");
         return result;
     }
@@ -64,7 +64,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
+        ar & boost::serialization::base_object<WeaponDescr>(*this);
     }
 };
 

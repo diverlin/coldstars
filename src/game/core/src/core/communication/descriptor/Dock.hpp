@@ -28,18 +28,18 @@
 namespace descriptor {
 namespace comm {
 
-class Dock : public Object
+class DockComDescr : public ObjectDescr
 {
 public:
-    Dock(int_t, int_t);
-    Dock(const std::string& data);
-    ~Dock() = default;
+    DockComDescr(int_t, int_t);
+    DockComDescr(const std::string& data);
+    ~DockComDescr() = default;
     std::string data() const;
 
     int_t target() const { return m_destination; }
 
     std::string info() const {
-        std::string result = Object::info();
+        std::string result = ObjectDescr::info();
         result += "descriptor::comm::Dock:\n";
         result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
         return result;
@@ -52,7 +52,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Object>(*this);
+        ar & boost::serialization::base_object<ObjectDescr>(*this);
         ar & m_destination;
     }
 };

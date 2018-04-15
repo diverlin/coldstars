@@ -22,11 +22,11 @@
 
 namespace descriptor {
 
-class Equipment : public Item
+class EquipmentDescr : public ItemDescr
 {
 public:
-    Equipment() = default;
-    ~Equipment() = default;
+    EquipmentDescr() = default;
+    ~EquipmentDescr() = default;
 
     void setModules(int modules) { m_modules = modules; }
 
@@ -47,7 +47,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
+        ar & boost::serialization::base_object<ItemDescr>(*this);
         ar & m_modules;
     }
 };

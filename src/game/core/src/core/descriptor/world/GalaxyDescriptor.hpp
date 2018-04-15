@@ -26,17 +26,17 @@
 
 namespace descriptor {
 
-struct Galaxy : public Base
+struct GalaxyDescr : public BaseDescr
 {
 public:
     bool allow_invasion = true;
     std::vector<int_t> sectors;
 
-    Galaxy();
-    ~Galaxy() = default;
+    GalaxyDescr();
+    ~GalaxyDescr() = default;
 
     ceti::InfoTable info() const {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseDescr::info();
         result.add("descriptor::Galaxy");
         result.add("sectors", ceti::to_string(sectors));
         return result;

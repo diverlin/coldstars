@@ -26,7 +26,7 @@
 #include <string>
 
 namespace descriptor {
-class Scaner;
+class ScanerDescr;
 } // namespace descriptor
 
 namespace core {
@@ -42,14 +42,14 @@ class ScanerItemBuilder : public EquipmentBuilder
 public:
     static core::control::Scaner* gen();
     static core::control::Scaner* gen(int_t, int_t ob_id = NONE);
-    static core::control::Scaner* gen(descriptor::Scaner*);
+    static core::control::Scaner* gen(descriptor::ScanerDescr*);
 
 private:
     ScanerItemBuilder() = delete;
     ~ScanerItemBuilder() = delete;
 
-    static core::control::Scaner* __genTemplate(descriptor::Scaner*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Scaner*, descriptor::Scaner*);
+    static core::control::Scaner* __genTemplate(descriptor::ScanerDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Scaner*, descriptor::ScanerDescr*);
 }; 
 
 } // namespace core

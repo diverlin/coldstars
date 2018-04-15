@@ -24,7 +24,7 @@
 
 namespace descriptor {
 
-class Grapple : public Equipment
+class GrappleDescr : public EquipmentDescr
 {
 public:
     static const int STRENGTH_MIN;
@@ -53,9 +53,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Grapple();
-    ~Grapple() = default;
-    Grapple(const std::string& data);
+    GrappleDescr();
+    ~GrappleDescr() = default;
+    GrappleDescr(const std::string& data);
     std::string data() const;
 
     void setStrength(int strength)     { m_strength = strength; }
@@ -67,7 +67,7 @@ public:
     int speed() const { return m_speed; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Grapple");
         result.add("strength", m_strength);
         result.add("radius", m_radius);
@@ -84,7 +84,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_strength;
         ar & m_radius;
         ar & m_speed;

@@ -24,31 +24,31 @@
 
 namespace descriptor {
 
-const float Drive::OVERLOAD_RATE = 1.5f;
-const float Drive::OVERLOAD_DETERIORATION_RATE = 4.0f;
+const float DriveDescr::OVERLOAD_RATE = 1.5f;
+const float DriveDescr::OVERLOAD_DETERIORATION_RATE = 4.0f;
 
-const int Drive::SPEED_MIN = 3;
-const int Drive::SPEED_MAX = 4;
-const float Drive::SPEED_TECH_RATE = 0.1f;
+const int DriveDescr::SPEED_MIN = 3;
+const int DriveDescr::SPEED_MAX = 4;
+const float DriveDescr::SPEED_TECH_RATE = 0.1f;
 
-const int Drive::HYPER_MIN = 7;
-const int Drive::HYPER_MAX = 20;
-const float Drive::HYPER_TECH_RATE = 0.1f;
+const int DriveDescr::HYPER_MIN = 7;
+const int DriveDescr::HYPER_MAX = 20;
+const float DriveDescr::HYPER_TECH_RATE = 0.1f;
 
-const int Drive::MODULES_NUM_MIN = 0;
-const int Drive::MODULES_NUM_MAX = 2;
+const int DriveDescr::MODULES_NUM_MIN = 0;
+const int DriveDescr::MODULES_NUM_MAX = 2;
 
-const int Drive::MASS_MIN = 20;
-const int Drive::MASS_MAX = 70;
-const int Drive::CONDITION_MIN = 500;
-const int Drive::CONDITION_MAX = 2000;
+const int DriveDescr::MASS_MIN = 20;
+const int DriveDescr::MASS_MAX = 70;
+const int DriveDescr::CONDITION_MIN = 500;
+const int DriveDescr::CONDITION_MAX = 2000;
 
-const float Drive::SPEED_WEIGHT = 0.4f;
-const float Drive::HYPER_WEIGHT = 0.4f;
-const float Drive::MODULES_NUM_WEIGHT = 0.2f;
+const float DriveDescr::SPEED_WEIGHT = 0.4f;
+const float DriveDescr::HYPER_WEIGHT = 0.4f;
+const float DriveDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 
-Drive::Drive()
+DriveDescr::DriveDescr()
 {
     setType(descriptor::Type::DRIVE_EQUIPMENT);
     setObType(entity::Type::DRIVE_EQUIPMENT);
@@ -56,13 +56,13 @@ Drive::Drive()
     setSlotType(core::SlotType::DRIVE);
 }
 
-Drive::Drive(const std::string& data)
+DriveDescr::DriveDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Drive::data() const
+DriveDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

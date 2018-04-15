@@ -22,16 +22,16 @@
 
 namespace descriptor {
 
-struct HyperSpace : public Base
+struct HyperSpaceDescr : public BaseDescr
 {
 public:
-    HyperSpace();
-    HyperSpace(const std::string&);
+    HyperSpaceDescr();
+    HyperSpaceDescr(const std::string&);
     std::string data() const;
-    ~HyperSpace() = default;
+    ~HyperSpaceDescr() = default;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseDescr::info();
         result.add("descriptor::HyperSpace");
         return result;
     }
@@ -40,7 +40,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
     }
 };
 

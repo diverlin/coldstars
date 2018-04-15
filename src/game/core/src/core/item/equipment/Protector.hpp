@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-class Protector;
+class ProtectorDescr;
 } // namespace descriptor
 
 namespace model {
@@ -35,16 +35,16 @@ namespace control {
 class Protector : public Equipment
 {
 public:
-    Protector(descriptor::Protector*, model::Protector*);
+    Protector(descriptor::ProtectorDescr*, model::Protector*);
     virtual ~Protector() = default;
 
     virtual void updateProperties();
 
-    descriptor::Protector* descriptor() const { return m_descriptor_protector; }
+    descriptor::ProtectorDescr* descriptor() const { return m_descriptor_protector; }
     model::Protector* model() const { return m_model_protector; }
 
 private:
-    descriptor::Protector* m_descriptor_protector = nullptr;
+    descriptor::ProtectorDescr* m_descriptor_protector = nullptr;
     model::Protector* m_model_protector = nullptr;
 
     int m_protection_add = 0;

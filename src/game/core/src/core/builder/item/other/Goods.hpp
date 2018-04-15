@@ -26,7 +26,7 @@
 #include <string>
 
 namespace descriptor {
-class Goods;
+class GoodsDescr;
 } // namespace descriptor
 
 namespace core {
@@ -40,7 +40,7 @@ namespace core {
 class GoodsBuilder : public ItemBuilder
 {
 public:
-    static core::control::Goods* gen(descriptor::Goods*);
+    static core::control::Goods* gen(descriptor::GoodsDescr*);
     static core::control::Goods* gen(int_t, int_t object_id = NONE);
     static core::control::Goods* gen();
 
@@ -48,8 +48,8 @@ private:
     GoodsBuilder() = delete;
     ~GoodsBuilder() = delete;
 
-    static core::control::Goods* __genTemplate(descriptor::Goods*, int_t object_id = NONE);
-    static void __createInternals(core::control::Goods*, descriptor::Goods*);
+    static core::control::Goods* __genTemplate(descriptor::GoodsDescr*, int_t object_id = NONE);
+    static void __createInternals(core::control::Goods*, descriptor::GoodsDescr*);
 }; 
 
 } // namespace core

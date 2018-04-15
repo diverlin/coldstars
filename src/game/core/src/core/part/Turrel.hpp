@@ -46,7 +46,7 @@ namespace control {
 class Turrel : public ceti::control::Orientation, public Base
 {
 public:
-    Turrel(descriptor::Turrel* descr, model::Turrel* model)
+    Turrel(descriptor::TurrelDescr* descr, model::Turrel* model)
         :
           ceti::control::Orientation(model)
         , Base(descr, model)

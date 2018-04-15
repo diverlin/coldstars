@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Sector;
+class SectorDescr;
 } // namespace descriptor
 
 namespace core {
@@ -38,14 +38,14 @@ class SectorBuilder
 public:
     static core::control::Sector* gen();
     static core::control::Sector* gen(int_t, int_t object = NONE);
-    static core::control::Sector* gen(descriptor::Sector*);
+    static core::control::Sector* gen(descriptor::SectorDescr*);
 
 private:
     SectorBuilder()=delete;
     ~SectorBuilder()=delete;
 
-    static void __createInternals(core::control::Sector*, descriptor::Sector*);
-    static core::control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);
+    static void __createInternals(core::control::Sector*, descriptor::SectorDescr*);
+    static core::control::Sector* __genTemplate(descriptor::SectorDescr*, int_t object = NONE);
 }; 
 
 } // namespace core

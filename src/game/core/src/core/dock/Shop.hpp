@@ -23,7 +23,7 @@
 class GoodsPack; 
 
 namespace descriptor {
-class Shop;
+class ShopDescr;
 } // namespace descriptor
 
 namespace model {
@@ -38,7 +38,7 @@ class Npc;
 class Shop : public Room
 {
 public:
-    Shop(descriptor::Shop*, model::Shop*);
+    Shop(descriptor::ShopDescr*, model::Shop*);
     ~Shop();
 
     int mineralsAmount()     const { return m_mineralsAmount; }
@@ -66,10 +66,10 @@ public:
 //    void Resolve();
 
 private:
-    descriptor::Shop* m_descriptor_shop = nullptr;
+    descriptor::ShopDescr* m_descriptor_shop = nullptr;
     model::Shop* m_model_shop = nullptr;
 
-    descriptor::Shop* descriptor() const { return m_descriptor_shop; }
+    descriptor::ShopDescr* descriptor() const { return m_descriptor_shop; }
     model::Shop* model() const { return m_model_shop; }
 
     int m_mineralsAmount = 0;

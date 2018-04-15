@@ -77,7 +77,7 @@
 
 TEST(descriptor, accessors)
 {
-    descriptor::comm::Hit descriptor(22, 33, 44);
+    descriptor::comm::HitComDescr descriptor(22, 33, 44);
     EXPECT_EQ(descriptor.owner(), 22);
     EXPECT_EQ(descriptor.target(), 33);
     EXPECT_EQ(descriptor.damage(), 44);

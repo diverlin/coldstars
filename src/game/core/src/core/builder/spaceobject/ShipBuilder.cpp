@@ -36,7 +36,7 @@
 namespace core {
 
 core::control::Ship*
-ShipBuilder::gen(descriptor::Ship* descr)
+ShipBuilder::gen(descriptor::ShipDescr* descr)
 {
     core::control::Ship* ship = __genTemplate(descr);
     __createInternals(ship, descr);
@@ -46,7 +46,7 @@ ShipBuilder::gen(descriptor::Ship* descr)
 core::control::Ship*
 ShipBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::Ship* descr = core::shortcuts::descriptors()->ship(descriptor_id);
+    descriptor::ShipDescr* descr = core::shortcuts::descriptors()->ship(descriptor_id);
     core::control::Ship* ship = __genTemplate(descr, ob_id);
     __createInternals(ship, descr);
     return ship;
@@ -55,7 +55,7 @@ ShipBuilder::gen(int_t descriptor_id, int_t ob_id)
 core::control::Ship*
 ShipBuilder::gen()
 {
-    descriptor::Ship* descr = nullptr;
+    descriptor::ShipDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHIP)) {
         descr = descriptor::genShip();
     } else {
@@ -66,7 +66,7 @@ ShipBuilder::gen()
 }
 
 core::control::Ship*
-ShipBuilder::__genTemplate(descriptor::Ship* descr, int_t ob_id)
+ShipBuilder::__genTemplate(descriptor::ShipDescr* descr, int_t ob_id)
 {
     model::Ship* model = new model::Ship(descr->id(), ob_id);
     assert(model);
@@ -79,7 +79,7 @@ ShipBuilder::__genTemplate(descriptor::Ship* descr, int_t ob_id)
 
 
 void
-ShipBuilder::__createInternals(core::control::Ship* ship, descriptor::Ship* descr)
+ShipBuilder::__createInternals(core::control::Ship* ship, descriptor::ShipDescr* descr)
 {
 //    assert(false);
     //assert(descr->type() == (int)descriptor::Type::VEHICLE);

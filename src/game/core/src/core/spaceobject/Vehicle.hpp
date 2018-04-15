@@ -35,7 +35,7 @@
 class GoodsPack;
 
 namespace descriptor {
-class Vehicle;
+class VehicleDescr;
 } // namespace descriptor
 
 namespace model {
@@ -121,7 +121,7 @@ public:
     };
 
 public:
-    Vehicle(descriptor::Vehicle*, model::Vehicle*);
+    Vehicle(descriptor::VehicleDescr*, model::Vehicle*);
     ~Vehicle() override;
 
     bool canRadarObject(SpaceObject* ob) const;
@@ -155,7 +155,7 @@ public:
 
     void setLand(Land* land);
 
-    void setKorpusData(descriptor::Vehicle*);
+    void setKorpusData(descriptor::VehicleDescr*);
 
     bool godMode() const { return m_godMode; }
     Land* land() const { return m_Land; }
@@ -166,7 +166,7 @@ public:
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
 
-    descriptor::Vehicle* descriptor() const { return m_descriptor_vehicle; }
+    descriptor::VehicleDescr* descriptor() const { return m_descriptor_vehicle; }
     model::Vehicle* model() const { return m_model_vehicle; }
 
     virtual int givenExpirience() const override final;
@@ -302,7 +302,7 @@ private:
     ceti::pack<control::Item*> __items() const;
 
 protected:
-    descriptor::Vehicle* m_descriptor_vehicle = nullptr;
+    descriptor::VehicleDescr* m_descriptor_vehicle = nullptr;
     model::Vehicle* m_model_vehicle = nullptr;
 
     ItemSlot* _freeArtefactSlot() const;
@@ -369,7 +369,7 @@ private:
     bool _checkInstallEquipment(const core::Id&);
 
     std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);
-    void __createSlots(descriptor::Vehicle*);
+    void __createSlots(descriptor::VehicleDescr*);
 
     bool __manage(Item*);
     bool __insertItem(ItemSlot*, Item*);

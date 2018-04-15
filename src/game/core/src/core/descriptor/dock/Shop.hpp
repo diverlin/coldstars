@@ -22,19 +22,19 @@
 
 namespace descriptor {
 
-class Shop : public Room
+class ShopDescr : public RoomDescr
 {
 public:
-    Shop();
-    ~Shop() = default;
-    Shop(const std::string& data);
+    ShopDescr();
+    ~ShopDescr() = default;
+    ShopDescr(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomDescr>(*this);
     }
 };
 

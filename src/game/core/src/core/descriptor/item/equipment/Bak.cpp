@@ -24,22 +24,22 @@
 
 namespace descriptor {
 
-const int Bak::FUEL_MIN = 10;
-const int Bak::FUEL_MAX = 30;
-const float Bak::FUEL_TECH_RATE = 0.1f;
+const int BakDescr::FUEL_MIN = 10;
+const int BakDescr::FUEL_MAX = 30;
+const float BakDescr::FUEL_TECH_RATE = 0.1f;
 
-const int Bak::MODULES_NUM_MIN = 0;
-const int Bak::MODULES_NUM_MAX = 2;
+const int BakDescr::MODULES_NUM_MIN = 0;
+const int BakDescr::MODULES_NUM_MAX = 2;
 
-const int Bak::MASS_MIN = 10;
-const int Bak::MASS_MAX = 40;
-const int Bak::CONDITION_MIN = 30;
-const int Bak::CONDITION_MAX = 100;
+const int BakDescr::MASS_MIN = 10;
+const int BakDescr::MASS_MAX = 40;
+const int BakDescr::CONDITION_MIN = 30;
+const int BakDescr::CONDITION_MAX = 100;
 
-const float Bak::FUEL_WEIGHT = 0.7f;
-const float Bak::MODULES_NUM_WEIGHT = 0.3f;
+const float BakDescr::FUEL_WEIGHT = 0.7f;
+const float BakDescr::MODULES_NUM_WEIGHT = 0.3f;
 
-Bak::Bak()
+BakDescr::BakDescr()
 {
     setType(descriptor::Type::BAK_EQUIPMENT);
     setObType(entity::Type::BAK_EQUIPMENT);
@@ -47,13 +47,13 @@ Bak::Bak()
     setSlotType(core::SlotType::BAK);
 }
 
-Bak::Bak(const std::string& data)
+BakDescr::BakDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Bak::data() const
+BakDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

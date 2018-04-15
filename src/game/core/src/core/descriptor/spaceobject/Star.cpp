@@ -20,20 +20,20 @@
 
 namespace descriptor {
 
-const int Star::SCALE_MIN = 200;
-const int Star::SCALE_MAX = 300;
-const int Star::DISTANCE_MIN = 50;
-const int Star::DISTANCE_MAX = 100;
-const int Star::SPEED_MIN = 5;
-const int Star::SPEED_MAX = 10;
+const int StarDescr::SCALE_MIN = 200;
+const int StarDescr::SCALE_MAX = 300;
+const int StarDescr::DISTANCE_MIN = 50;
+const int StarDescr::DISTANCE_MAX = 100;
+const int StarDescr::SPEED_MIN = 5;
+const int StarDescr::SPEED_MAX = 10;
 
-Star::Star()
+StarDescr::StarDescr()
 {
     setType(Type::STAR);
     setObType(entity::Type::STAR);
 }
 
-Star::Star(const std::string& data) {
+StarDescr::StarDescr(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 

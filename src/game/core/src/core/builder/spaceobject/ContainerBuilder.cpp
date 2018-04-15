@@ -41,7 +41,7 @@ namespace core {
 core::control::Container*
 ContainerBuilder::gen()
 {
-    descriptor::Container* descr = nullptr;
+    descriptor::ContainerDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::CONTAINER)) {
         descr = descriptor::genContainer();
     } else {
@@ -52,7 +52,7 @@ ContainerBuilder::gen()
 }
 
 core::control::Container*
-ContainerBuilder::gen(descriptor::Container* descr)
+ContainerBuilder::gen(descriptor::ContainerDescr* descr)
 {
     core::control::Container* container = __genTemplate(descr);
     __createInternals(container, descr);
@@ -62,7 +62,7 @@ ContainerBuilder::gen(descriptor::Container* descr)
 core::control::Container*
 ContainerBuilder::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::Container* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
+    descriptor::ContainerDescr* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
     core::control::Container* container = __genTemplate(descriptor, object_id);
     __createInternals(container, descriptor);
     return container;
@@ -71,7 +71,7 @@ ContainerBuilder::gen(int_t descriptor_id, int_t object_id)
 core::control::Container*
 ContainerBuilder::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 {
-    descriptor::Container* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
+    descriptor::ContainerDescr* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
     core::control::Container* container = __genTemplate(descriptor, object_id);
     __createInternals(container, descriptor);
 
@@ -82,7 +82,7 @@ ContainerBuilder::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 }
 
 core::control::Container*
-ContainerBuilder::__genTemplate(descriptor::Container* descriptor, int_t object_id)
+ContainerBuilder::__genTemplate(descriptor::ContainerDescr* descriptor, int_t object_id)
 {
     model::Container* model = new model::Container(descriptor->id(), object_id);
     assert(model);
@@ -167,7 +167,7 @@ ContainerBuilder::__genTemplate(descriptor::Container* descriptor, int_t object_
 //}
 
 void
-ContainerBuilder::__createInternals(core::control::Container* container, descriptor::Container* desr)
+ContainerBuilder::__createInternals(core::control::Container* container, descriptor::ContainerDescr* desr)
 {
     container->model()->setArmor(1);
 }

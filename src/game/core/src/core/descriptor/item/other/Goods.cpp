@@ -25,19 +25,19 @@
 
 namespace descriptor {
 
-Goods::Goods()
+GoodsDescr::GoodsDescr()
 {
     setType(descriptor::Type::GOODS);
     setObType(entity::Type::GOODS);
 }
 
-Goods::Goods(const std::string& data)
+GoodsDescr::GoodsDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Goods::data() const
+GoodsDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

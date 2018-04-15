@@ -36,7 +36,7 @@
 namespace core {
 namespace control {
 
-Star::Star(descriptor::Star* descr, model::Star* model)
+Star::Star(descriptor::StarDescr* descr, model::Star* model)
     :
       Planetoid(descr, model)
     , m_descriptor_star(descr)

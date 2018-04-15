@@ -32,7 +32,7 @@
 #include <set>
 
 namespace descriptor {
-class Npc;
+class NpcDescr;
 } // namespace descriptor
 
 class BaseAiModel;
@@ -112,7 +112,7 @@ class Planet;
 class Npc : public Base
 {
 public:
-    Npc(descriptor::Npc*, model::Npc*);
+    Npc(descriptor::NpcDescr*, model::Npc*);
     virtual ~Npc();
 
     // model interface
@@ -174,7 +174,7 @@ protected:
     void _setScanTarget(Vehicle* scanTarget);
 
 private:
-    descriptor::Npc* m_descriptor_npc = nullptr;
+    descriptor::NpcDescr* m_descriptor_npc = nullptr;
     model::Npc* m_model_npc = nullptr;
 
     //bool m_isAlive = true;

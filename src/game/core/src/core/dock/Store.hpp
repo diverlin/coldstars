@@ -22,7 +22,7 @@
 #include "Room.hpp"
 
 namespace descriptor {
-class Store;
+class StoreDescr;
 } // namespace descriptor
 
 namespace model {
@@ -43,7 +43,7 @@ class Npc;
 class Store : public Room
 {
 public:
-    Store(descriptor::Store*, model::Store*);
+    Store(descriptor::StoreDescr*, model::Store*);
     ~Store();
 
     virtual void putChildrenToGarbage() const;
@@ -70,10 +70,10 @@ private:
     std::vector<ItemSlot*> m_item_slots;
     std::vector<VehicleSlot*> m_vehicle_slots;
 
-    descriptor::Store* m_descriptor_store = nullptr;
+    descriptor::StoreDescr* m_descriptor_store = nullptr;
     model::Store* m_model_store = nullptr;
 
-    descriptor::Store* descriptor() const { return m_descriptor_store; }
+    descriptor::StoreDescr* descriptor() const { return m_descriptor_store; }
     model::Store* model() const { return m_model_store; }
 
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;

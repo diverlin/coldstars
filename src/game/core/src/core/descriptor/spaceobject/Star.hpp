@@ -22,7 +22,7 @@
 
 namespace descriptor {
 
-class Star : public Planetoid
+class StarDescr : public PlanetoidDescr
 {
 
 public:
@@ -34,12 +34,12 @@ public:
     static const int SPEED_MAX;
 
 public:
-    Star();
-    Star(const std::string&);
-    ~Star() = default;
+    StarDescr();
+    StarDescr(const std::string&);
+    ~StarDescr() = default;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidDescr::info();
         result.add("descriptor::Star");
         return result;
     }
@@ -48,7 +48,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidDescr>(*this);
     }
 }; 
 

@@ -26,11 +26,11 @@
 
 namespace descriptor {
 
-class Item : public Base
+class ItemDescr : public BaseDescr
 {
 public:
-    Item() = default;
-    ~Item() = default;
+    ItemDescr() = default;
+    ~ItemDescr() = default;
 
     void setRace(race::Type race) { m_race = race; }
     void setTech(tech::Type tech) { m_tech = tech; }
@@ -59,7 +59,7 @@ private:
 
 protected:
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = ::descriptor::Base::info();
+        ceti::InfoTable result = ::descriptor::BaseDescr::info();
         result.add("descriptor::Item");
         result.add("race", race::to_string(m_race));
         result.add("tech", tech::to_string(m_tech));
@@ -75,7 +75,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<::descriptor::Base>(*this);
+        ar & boost::serialization::base_object<::descriptor::BaseDescr>(*this);
         ar & m_race;
         ar & m_tech;
         ar & m_slotType;

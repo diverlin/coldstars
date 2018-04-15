@@ -22,7 +22,7 @@
 #include <core/Base.hpp>
 
 namespace descriptor {
-class Room;
+class RoomDescr;
 } // namespace descriptor
 
 namespace model {
@@ -37,7 +37,7 @@ class Kosmoport;
 class Room : public Base
 {
 public:
-    Room(descriptor::Room*, model::Room*);
+    Room(descriptor::RoomDescr*, model::Room*);
     ~Room() = default;
 
     virtual void putChildrenToGarbage() const {}
@@ -53,10 +53,10 @@ public:
 protected:
     Kosmoport* m_kosmoport = nullptr;
 
-    descriptor::Room* m_descriptor_room = nullptr;
+    descriptor::RoomDescr* m_descriptor_room = nullptr;
     model::Room* m_model_room = nullptr;
 
-    descriptor::Room* descriptor() const { return m_descriptor_room; }
+    descriptor::RoomDescr* descriptor() const { return m_descriptor_room; }
     model::Room* model() const { return m_model_room; }
 //    jeti::control::Material* m_textureOb_background = nullptr;
 

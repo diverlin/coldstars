@@ -36,7 +36,7 @@ namespace core {
 core::control::Galaxy*
 GalaxyBuilder::gen()
 {
-    descriptor::Galaxy* descr = nullptr;
+    descriptor::GalaxyDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GALAXY)) {
         descr = descriptor::genGalaxy({0});
     } else {
@@ -48,14 +48,14 @@ GalaxyBuilder::gen()
 core::control::Galaxy*
 GalaxyBuilder::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::Galaxy* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
+    descriptor::GalaxyDescr* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
     core::control::Galaxy* sector = __genTemplate(descriptor, object_id);
     __createInternals(sector, descriptor);
     return sector;
 }
 
 core::control::Galaxy*
-GalaxyBuilder::gen(descriptor::Galaxy* descriptor)
+GalaxyBuilder::gen(descriptor::GalaxyDescr* descriptor)
 {
     core::control::Galaxy* galaxy = __genTemplate(descriptor);
     __createInternals(galaxy, descriptor);
@@ -63,7 +63,7 @@ GalaxyBuilder::gen(descriptor::Galaxy* descriptor)
 } 
 
 core::control::Galaxy*
-GalaxyBuilder::__genTemplate(descriptor::Galaxy* descriptor, int_t object_id)
+GalaxyBuilder::__genTemplate(descriptor::GalaxyDescr* descriptor, int_t object_id)
 {
     model::Galaxy* model = new model::Galaxy(descriptor->id(), object_id);
     assert(model);
@@ -74,7 +74,7 @@ GalaxyBuilder::__genTemplate(descriptor::Galaxy* descriptor, int_t object_id)
     return galaxy;
 }
 
-void GalaxyBuilder::__createInternals(core::control::Galaxy* galaxy, descriptor::Galaxy* descr)
+void GalaxyBuilder::__createInternals(core::control::Galaxy* galaxy, descriptor::GalaxyDescr* descr)
 {
      // see composer, all logic there
 }

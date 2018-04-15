@@ -30,27 +30,27 @@
 
 namespace descriptor {
 
-class Material : public ceti::descriptor::Material, public Association
+class MaterialDescr : public ceti::descriptor::Material, public AssociationDescr
 {
 public:
 //    Material(int type,
 //            const std::string& path,
 //            bool alpha = true);
 
-    Material(int_t type = NONE);
-    Material(const std::string& data);
-    ~Material() = default;
+    MaterialDescr(int_t type = NONE);
+    MaterialDescr(const std::string& data);
+    ~MaterialDescr() = default;
 
     std::string data() const;
 
-    bool operator==(const Material& rhs) const;
+    bool operator==(const MaterialDescr& rhs) const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & boost::serialization::base_object<ceti::descriptor::Material>(*this);
-        ar & boost::serialization::base_object<Association>(*this);
+        ar & boost::serialization::base_object<AssociationDescr>(*this);
     }
 };
 

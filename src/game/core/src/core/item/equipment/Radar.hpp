@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 namespace descriptor {
-class Radar;
+class RadarDescr;
 } // namespace descriptor
 
 namespace model {
@@ -36,17 +36,17 @@ namespace control {
 class Radar : public Equipment
 {
 public:
-    Radar(descriptor::Radar*, model::Radar*);
+    Radar(descriptor::RadarDescr*, model::Radar*);
     virtual ~Radar() = default;
 
     virtual void updateProperties();
 
 public:
-    descriptor::Radar* descriptor() const { return m_descriptor_radar; }
+    descriptor::RadarDescr* descriptor() const { return m_descriptor_radar; }
     model::Radar* model() const { return m_model_radar; }
 
 private:
-    descriptor::Radar* m_descriptor_radar = nullptr;
+    descriptor::RadarDescr* m_descriptor_radar = nullptr;
     model::Radar* m_model_radar = nullptr;
 
     int m_radius_add = 0;
