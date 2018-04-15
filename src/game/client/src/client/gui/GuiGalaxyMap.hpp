@@ -27,7 +27,7 @@
 namespace core {
 class GalaxyModel;
 class Starsystem;
-} // namespace model
+} // namespace core
 
 namespace jeti {
 class Render;

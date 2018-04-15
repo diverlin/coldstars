@@ -27,7 +27,7 @@ class BakDescr;
 
 namespace core {
 class BakModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

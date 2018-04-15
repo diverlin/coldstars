@@ -32,7 +32,7 @@ class GalaxyDescr;
 
 namespace core {
 class GalaxyModel;
-} // namespace model
+} // namespace core
 
 class StarSystemsConditionData;
 

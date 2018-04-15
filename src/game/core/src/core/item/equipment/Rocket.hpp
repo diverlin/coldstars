@@ -27,7 +27,7 @@ class RocketDescr;
 
 namespace core {
 class RocketModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

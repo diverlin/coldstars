@@ -25,7 +25,7 @@
 
 namespace core {
 class AsteroidModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

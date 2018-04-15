@@ -27,7 +27,7 @@ class GrappleDescr;
 
 namespace core {
 class GrappleModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

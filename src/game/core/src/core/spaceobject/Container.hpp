@@ -27,7 +27,7 @@
 
 namespace core {
 class ContainerModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

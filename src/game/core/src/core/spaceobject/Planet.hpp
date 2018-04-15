@@ -28,7 +28,7 @@
 
 namespace core {
 class PlanetModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

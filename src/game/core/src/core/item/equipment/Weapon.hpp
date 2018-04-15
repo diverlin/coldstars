@@ -27,7 +27,7 @@ class WeaponDescr;
 
 namespace core {
 class WeaponModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

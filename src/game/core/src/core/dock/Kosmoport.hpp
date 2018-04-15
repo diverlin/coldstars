@@ -26,7 +26,7 @@ class KosmoportDescr;
 
 namespace core {
 class KosmoportModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

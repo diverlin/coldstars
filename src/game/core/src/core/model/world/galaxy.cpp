@@ -58,5 +58,5 @@ GalaxyModel::data() const
 //    return *this == rhs;
 //}
 
-} // namespace model
+} // namespace core
 

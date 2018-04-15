@@ -36,7 +36,7 @@ class BaseDescr;
 
 namespace core {
 class BaseModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

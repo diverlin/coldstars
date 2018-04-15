@@ -30,7 +30,7 @@ class SatelliteDescr;
 
 namespace core {
 class SatelliteModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

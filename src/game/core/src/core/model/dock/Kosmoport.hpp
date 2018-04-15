@@ -60,5 +60,5 @@ private:
     int_t m_goverment = NONE;
 };
 
-} // namespace model
+} // namespace core
 

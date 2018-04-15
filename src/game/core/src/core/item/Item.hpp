@@ -26,7 +26,7 @@ class ItemDescr;
 
 namespace core {
 class ItemModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

@@ -62,5 +62,5 @@ private:
     int m_fuelPrice = 0;
 };
 
-} // namespace model
+} // namespace core
 

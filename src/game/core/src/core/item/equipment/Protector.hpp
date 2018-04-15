@@ -27,7 +27,7 @@ class ProtectorDescr;
 
 namespace core {
 class ProtectorModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

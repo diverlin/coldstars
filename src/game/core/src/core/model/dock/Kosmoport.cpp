@@ -37,4 +37,4 @@ KosmoportModel::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace model
+} // namespace core

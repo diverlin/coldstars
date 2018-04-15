@@ -44,4 +44,4 @@ private:
     int_t m_owner = NONE;
 };
 
-} // namespace model
+} // namespace core

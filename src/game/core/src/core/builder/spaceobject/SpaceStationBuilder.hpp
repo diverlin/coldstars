@@ -31,7 +31,7 @@ class SpaceStationDescr;
 namespace core {
 namespace control {
 class SpaceStation;
-} // namespace model
+} // namespace core
 }
 
 namespace ENTITY

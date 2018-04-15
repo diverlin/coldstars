@@ -24,7 +24,7 @@ namespace core {
 namespace control {
 class SpaceObject;
 class Vehicle;
-} // namespace model
+} // namespace core
 } // namespace core
 
 namespace jeti {
