@@ -78,5 +78,4 @@ RadarItemBuilder::__createInternals(core::control::Radar* radar, descriptor::Rad
     radar->model()->setRadius(descr->radius());
 }
 
-} // namespace item
-} // namespace builder
+} // namespace core

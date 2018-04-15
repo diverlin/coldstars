@@ -74,4 +74,4 @@ GoodsBuilder::__createInternals(core::control::Goods* control, descriptor::Goods
 {
 }
 
-} // namespace builder
+} // namespace core

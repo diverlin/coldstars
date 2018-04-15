@@ -62,4 +62,4 @@ private:
     static core::control::SpaceStation* __genTemplate(descriptor::SpaceStation*);
 }; 
 
-} // namespace builder
+} // namespace core

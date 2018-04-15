@@ -102,7 +102,7 @@ ContainerBuilder::__genTemplate(descriptor::Container* descriptor, int_t object_
 //    return container;
 //}
 
-//Container* ContainerBuilder::create(item::Base* item) const
+//Container* ContainerBuilder::create(Base* item) const
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, item);
@@ -172,5 +172,5 @@ ContainerBuilder::__createInternals(core::control::Container* container, descrip
     container->model()->setArmor(1);
 }
 
-} // namespace builder
+} // namespace core
 

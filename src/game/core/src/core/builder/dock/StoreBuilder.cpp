@@ -149,4 +149,4 @@ StoreBuilder::__putRandomEquipment(core::control::Store* store)
 #endif
 }
 
-} // namespace builder
+} // namespace core

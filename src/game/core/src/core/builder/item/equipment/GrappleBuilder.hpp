@@ -52,4 +52,4 @@ private:
     static void __createInternals(core::control::Grapple*, descriptor::Grapple*);
 }; 
 
-} // namespace builder
+} // namespace core

@@ -110,4 +110,4 @@ LazerItemBuilder::__createInternals(core::control::Lazer* lazer, descriptor::Laz
 //    lazer->countPrice();
 }
 
-} // namespace builder
+} // namespace core

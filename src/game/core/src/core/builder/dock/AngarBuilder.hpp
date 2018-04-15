@@ -52,7 +52,7 @@ private:
     static core::control::Angar* __createTemplate(descriptor::Angar*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

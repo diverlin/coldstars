@@ -42,4 +42,4 @@ private:
     ~EquipmentBuilder() = delete;
 };
 
-} // namespace builder
+} // namespace core

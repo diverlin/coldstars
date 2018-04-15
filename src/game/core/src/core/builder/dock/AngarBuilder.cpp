@@ -84,4 +84,4 @@ AngarBuilder::__createInternals(core::control::Angar* angar)
     //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND));
 }
 
-} // namespace builder
+} // namespace core

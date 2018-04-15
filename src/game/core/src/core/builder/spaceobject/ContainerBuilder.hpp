@@ -27,17 +27,15 @@ namespace descriptor {
 class Container;
 } // namespace descriptor
 
+//namespace item {
+//class Base;
+//} // namespace item
+
 namespace core {
+
 namespace control {
 class Container;
 } // namespace control
-} // namespace core
-
-namespace item {
-class Base;
-} // namespace item
-
-namespace core {
 
 class ContainerBuilder
 {
@@ -48,7 +46,7 @@ public:
     static core::control::Container* gen(int_t, int_t);
     static core::control::Container* gen(int_t, int_t, int_t);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
-    //        Container* create(item::Base*) const;
+    //        Container* create(Base*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
@@ -61,4 +59,4 @@ private:
     //        void createInternals(Container*, BaseItem*) const;
 }; 
 
-} // namespace builder
+} // namespace core

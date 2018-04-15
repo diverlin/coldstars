@@ -48,4 +48,4 @@ private:
     static core::control::HyperSpace* __genTemplate(descriptor::HyperSpace*, int_t ob_id = NONE);
 }; 
 
-} // namespace builder
+} // namespace core

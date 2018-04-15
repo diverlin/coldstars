@@ -116,5 +116,5 @@ NatureLandBuilder::__createInternals(core::control::NatureLand* natureland)
     }
 }
 
-} // namespace builder
+} // namespace core
 

@@ -52,4 +52,4 @@ private:
     static void __createInternals(core::control::Radar*, descriptor::Radar*);
 }; 
 
-} // namespace builder
+} // namespace core

@@ -103,7 +103,7 @@ AsteroidBuilder::__genTemplate(descriptor::Asteroid* descr, int_t id)
 }
 
 
-} // namespace builder
+} // namespace core
 
 
 

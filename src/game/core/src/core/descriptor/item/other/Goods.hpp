@@ -32,7 +32,7 @@ public:
     std::string data() const;
 
     ceti::InfoTable info() const {
-        ceti::InfoTable result = Item::info();
+        ceti::InfoTable result = info();
         result.add("descriptor::Goods");
         return result;
     }

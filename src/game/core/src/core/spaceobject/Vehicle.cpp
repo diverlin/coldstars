@@ -138,47 +138,47 @@ Vehicle::__loadItemsFromModel()
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obGroup()) {
         case entity::Type::SCANER_EQUIPMENT: {
-            item::Scaner* item = core::shortcuts::entities()->scaner(id);
+            Scaner* item = core::shortcuts::entities()->scaner(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DRIVE_EQUIPMENT: {
-            item::Drive* item = core::shortcuts::entities()->drive(id);
+            Drive* item = core::shortcuts::entities()->drive(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::BAK_EQUIPMENT: {
-            item::Bak* item = core::shortcuts::entities()->bak(id);
+            Bak* item = core::shortcuts::entities()->bak(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::DROID_EQUIPMENT: {
-            item::Droid* item = core::shortcuts::entities()->droid(id);
+            Droid* item = core::shortcuts::entities()->droid(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::GRAPPLE_EQUIPMENT: {
-            item::Grapple* item = core::shortcuts::entities()->grapple(id);
+            Grapple* item = core::shortcuts::entities()->grapple(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::LAZER_EQUIPMENT: {
-            item::Lazer* item = core::shortcuts::entities()->lazer(id);
+            Lazer* item = core::shortcuts::entities()->lazer(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::PROTECTOR_EQUIPMENT: {
-            item::Protector* item = core::shortcuts::entities()->protector(id);
+            Protector* item = core::shortcuts::entities()->protector(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::RADAR_EQUIPMENT: {
-            item::Radar* item = core::shortcuts::entities()->radar(id);
+            Radar* item = core::shortcuts::entities()->radar(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
         case entity::Type::ROCKET_EQUIPMENT: {
-            item::Rocket* item = core::shortcuts::entities()->rocket(id);
+            Rocket* item = core::shortcuts::entities()->rocket(id);
             __insertItem(__itemSlot(item->model()->slot()), item);
             break;
         }
@@ -531,7 +531,7 @@ bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 }
 
 #ifdef USE_MODULES
-bool Vehicle::installModule(item::Base* item)
+bool Vehicle::installModule(Base* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
         if (m_SlotFunct_vec[i]->item()) {
@@ -545,7 +545,7 @@ bool Vehicle::installModule(item::Base* item)
 #endif
 
 #ifdef EANBLE_ARTEFACTS
-bool Vehicle::installArtefact(item::Base* item)
+bool Vehicle::installArtefact(Base* item)
 {
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
     if (artef_slot) {
@@ -1051,7 +1051,7 @@ void Vehicle::checkNeedsInStatic()
     ItemSlot* bak_slot = navigator().bakSlots().front();
     if (bak_slot) {
         if (bak_slot->item()) {
-            item::Bak* bak = bak_slot->bakEquipment();
+            Bak* bak = bak_slot->bakEquipment();
             if (bak->model()->fuel() < 0.8*bak->descriptor()->fuel()) {
                 needs().get_fuel = true;
             }
@@ -2020,7 +2020,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    return result;
 //}
 
-//bool Vehicle::_installItem(item::Base* item)
+//bool Vehicle::_installItem(Base* item)
 //{
 //    switch(item->type()) {
 //    case entity::Type::EQUIPMENT:    { return _installEquipment(item); break; }
@@ -2066,12 +2066,12 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    return false;
 //}
 
-//bool Vehicle::_installGoodsPack(item::Base* item)
+//bool Vehicle::_installGoodsPack(Base* item)
 //{
 //    return __mergeIdenticalGoods(item);
 //}
 
-//bool Vehicle::_installEquipment(item::Base* item)
+//bool Vehicle::_installEquipment(Base* item)
 //{
 //    if (item->parentSubtype() == entity::Type::WEAPON_SLOT) {
 //        ItemSlot* slot = m_weaponComplex.freeSlot();
@@ -2119,7 +2119,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //}
 
 //#ifdef USE_MODULES
-//bool Vehicle::installModule(item::Base* item)
+//bool Vehicle::installModule(Base* item)
 //{
 //    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
 //        if (m_SlotFunct_vec[i]->item()) {
@@ -2133,7 +2133,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //#endif
 
 //#ifdef EANBLE_ARTEFACTS
-//bool Vehicle::installArtefact(item::Base* item)
+//bool Vehicle::installArtefact(Base* item)
 //{
 //    ItemSlot* artef_slot = GetEmptyArtefactSlot();
 //    if (artef_slot) {
@@ -2215,7 +2215,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    return false;
 //}
 
-//bool Vehicle::addItemToCargoSlot(item::Base* item)
+//bool Vehicle::addItemToCargoSlot(Base* item)
 //{
 //    _increaseMass(item->mass());
 //    if (item->type() == entity::Type::GOODS) {
@@ -2233,7 +2233,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //}
 
 //bool
-//Vehicle::manage(item::Base* item)
+//Vehicle::manage(Base* item)
 //{
 //    if (addItemToCargoSlot(item)) {
 //        _installItem(item);
@@ -2260,7 +2260,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    }
 //}
 
-//bool Vehicle::sellItem(item::Base* item)
+//bool Vehicle::sellItem(Base* item)
 //{
 //    //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
 //    //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
@@ -2294,7 +2294,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    }
 //}
 
-//bool Vehicle::buyItem(item::Base* item)
+//bool Vehicle::buyItem(Base* item)
 //{
 //    if (addItemToCargoSlot(item) == true)
 //    {
@@ -2306,7 +2306,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //    return false;
 //}
 
-//bool Vehicle::__mergeIdenticalGoods(item::Base* item)
+//bool Vehicle::__mergeIdenticalGoods(Base* item)
 //{
 //    ItemSlot* item_slot = _cargoSlotWithGoods(item->subtype());
 //    if (item_slot != nullptr)
@@ -3155,7 +3155,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 
 ////    for (ItemSlot* slot: m_slots) {
 ////        if (slot->subtype() == type && slot->item()) {
-////            item::Base* item = slot->takeItem();
+////            Base* item = slot->takeItem();
 ////            Container* container = __wrapItemToContainer(item);
 ////            //    float impulse_strength = 0.5;
 ////            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
@@ -3170,7 +3170,7 @@ std::vector<ItemSlot*> Vehicle::__equipedAndFunctionalSlots(const std::vector<It
 //}
 
 //Container*
-//Vehicle::__wrapItemToContainer(item::Base* item)
+//Vehicle::__wrapItemToContainer(Base* item)
 //{
 ////    Container* container = ContainerBuilder::gen();
 ////    container->insertItem(item);

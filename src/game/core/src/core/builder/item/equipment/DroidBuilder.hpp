@@ -52,5 +52,5 @@ private:
     static void __createInternals(core::control::Droid*, descriptor::Droid*);
 }; 
 
-} // namespace builder
+} // namespace core
 

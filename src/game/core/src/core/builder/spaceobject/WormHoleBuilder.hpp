@@ -47,4 +47,4 @@ private:
     static core::control::WormHole* __genTemplate(descriptor::WormHole*);
 };
 
-} // namespace builder
+} // namespace core

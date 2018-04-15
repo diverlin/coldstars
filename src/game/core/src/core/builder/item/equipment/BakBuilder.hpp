@@ -52,7 +52,7 @@ private:
     static void __createInternals(core::control::Bak*, descriptor::Bak*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

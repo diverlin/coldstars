@@ -49,4 +49,4 @@ private:
     static core::control::Bullet* __genTemplate(descriptor::Bullet*);
 }; 
 
-} // namespace builder
+} // namespace core

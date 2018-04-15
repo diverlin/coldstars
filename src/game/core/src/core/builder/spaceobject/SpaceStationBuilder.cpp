@@ -155,4 +155,4 @@ SpaceStationBuilder::__genTemplate(descriptor::SpaceStation* descr)
     return spacestation;
 }
 
-} // namespace builder
+} // namespace core

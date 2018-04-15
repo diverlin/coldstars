@@ -36,7 +36,7 @@ private:
     static core::Player* __genTemplate(int_t);
 };  
 
-} // namespace builder
+} // namespace core
 
 
 

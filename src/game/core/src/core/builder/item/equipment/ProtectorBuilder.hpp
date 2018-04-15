@@ -54,4 +54,4 @@ private:
     static void __createInternals(core::control::Protector*, descriptor::Protector*);
 }; 
 
-} // namespace builder
+} // namespace core

@@ -47,7 +47,7 @@ private:
     static void __createInternals(core::control::NatureLand*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

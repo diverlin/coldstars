@@ -34,7 +34,7 @@ public:
 
 protected:
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = Item::info();
+        ceti::InfoTable result = info();
         result.add("descriptor::Equipment");
         result.add("modules", m_modules);
         return result;

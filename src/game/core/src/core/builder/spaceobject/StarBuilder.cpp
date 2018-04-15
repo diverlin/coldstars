@@ -82,6 +82,6 @@ StarBuilder::__genTemplate(descriptor::Star* descr, int_t id)
     return star;
 }
 
-} // namespace builder
+} // namespace core
 
 

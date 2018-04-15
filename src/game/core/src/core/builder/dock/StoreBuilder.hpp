@@ -48,4 +48,4 @@ private:
     static void __putRandomEquipment(core::control::Store*);
 }; 
 
-} // namespace builder
+} // namespace core

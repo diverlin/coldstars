@@ -42,4 +42,4 @@ private:
     static core::control::Turrel* __genTemplate(descriptor::Turrel*);
 }; 
 
-} // namespace builder
+} // namespace core

@@ -78,4 +78,4 @@ BakItemBuilder::__createInternals(core::control::Bak* bak, descriptor::Bak* desc
     bak->model()->setFuel(descr->fuel());
 }
 
-} // namespace builder
+} // namespace core

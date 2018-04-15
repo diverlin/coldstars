@@ -150,4 +150,4 @@ NpcBuilder::__createInternals(core::control::Npc* npc, descriptor::Npc* descr)
 //    }
 }
 
-} // namespace builder
+} // namespace core

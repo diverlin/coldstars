@@ -47,4 +47,4 @@ protected:
     static void _createSlots(Vehicle*);
 }; 
 
-} // namespace builder
+} // namespace core

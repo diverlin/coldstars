@@ -73,4 +73,4 @@ HyperSpaceBuilder::__genTemplate(descriptor::HyperSpace* descr, int_t ob_id)
     return hyperspace;
 }
 
-} // namespace builder
+} // namespace core

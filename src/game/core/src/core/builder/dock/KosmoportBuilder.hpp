@@ -47,7 +47,7 @@ private:
     static void __createInternals(core::control::Kosmoport*, descriptor::Kosmoport*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

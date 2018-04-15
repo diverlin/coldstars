@@ -89,4 +89,4 @@ ProtectorItemBuilder::__createInternals(core::control::Protector* protector, des
     protector->model()->setProtection(descr->protection());
 }
 
-} // namespace builder
+} // namespace core

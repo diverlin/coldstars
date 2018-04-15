@@ -29,4 +29,4 @@ void EquipmentBuilder::_createInternals(core::control::Equipment* equipment, des
 {
 }
 
-} // namespace builder
+} // namespace core
