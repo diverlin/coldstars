@@ -23,13 +23,13 @@
 namespace builder {
 
 client::Player*
-Player::gen(int_t id)
+PlayerBuilder::gen(int_t id)
 {
     return __genTemplate(id);
 }
 
 client::Player*
-Player::__genTemplate(int_t id)
+PlayerBuilder::__genTemplate(int_t id)
 {
     client::Player* player = new client::Player(id);
     assert(player);

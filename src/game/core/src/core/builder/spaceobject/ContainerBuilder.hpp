@@ -39,7 +39,7 @@ class Base;
 
 namespace builder {
 
-class Container
+class ContainerBuilder
 {
 public:
     static core::control::Container* gen();
@@ -52,8 +52,8 @@ public:
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
-    Container() = default;
-    ~Container() = default;
+    ContainerBuilder() = default;
+    ~ContainerBuilder() = default;
 
     static core::control::Container* __genTemplate(descriptor::Container*, int_t obId = NONE);
     static void __createInternals(core::control::Container*, descriptor::Container*);

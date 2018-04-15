@@ -33,11 +33,11 @@ class WormHole;
 
 namespace builder {
 
-class WormHole
+class WormHoleBuilder
 {
 public:
-    WormHole() = default;
-    ~WormHole() = default;
+    WormHoleBuilder() = default;
+    ~WormHoleBuilder() = default;
 
     static core::control::WormHole* gen();
     static core::control::WormHole* gen(descriptor::WormHole*);

@@ -33,7 +33,7 @@ class Planet;
 
 namespace builder {
 
-class Planet
+class PlanetBuilder
 {
 public:
     static core::control::Planet* gen();

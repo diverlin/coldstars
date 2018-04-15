@@ -37,7 +37,7 @@
 namespace builder {
 
 core::control::Star*
-Star::gen()
+StarBuilder::gen()
 {
     descriptor::Star* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STAR)) {
@@ -50,14 +50,14 @@ Star::gen()
 } 
 
 core::control::Star*
-Star::gen(int_t descriptor_id, int_t id)
+StarBuilder::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Star* descriptor = core::shortcuts::descriptors()->star(descriptor_id);
     return gen(descriptor, id);
 }
 
 core::control::Star*
-Star::gen(descriptor::Star* descr, int_t id)
+StarBuilder::gen(descriptor::Star* descr, int_t id)
 {
     core::control::Star* star = __genTemplate(descr, id);
 
@@ -71,7 +71,7 @@ Star::gen(descriptor::Star* descr, int_t id)
 }
 
 core::control::Star*
-Star::__genTemplate(descriptor::Star* descr, int_t id)
+StarBuilder::__genTemplate(descriptor::Star* descr, int_t id)
 {
     model::Star* model = new model::Star(descr->id(), id);
     assert(model);

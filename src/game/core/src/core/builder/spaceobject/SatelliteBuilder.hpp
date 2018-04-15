@@ -33,15 +33,15 @@ class Satellite;
 
 namespace builder {
 
-class Satellite : public BaseVehicle
+class SatelliteBuilder : public VehicleBuilder
 {
 public:
     static core::control::Satellite* gen();
     static core::control::Satellite* gen(descriptor::Satellite*);
 
 private:
-    Satellite() = default;
-    ~Satellite() = default;
+    SatelliteBuilder() = default;
+    ~SatelliteBuilder() = default;
 
     static void __createInternals(core::control::Satellite*, descriptor::Satellite*);
     static core::control::Satellite* __genTemplate(descriptor::Satellite*);

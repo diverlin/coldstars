@@ -36,7 +36,7 @@ class Ship;
 
 namespace builder {
 
-class Ship : public BaseVehicle
+class ShipBuilder : public VehicleBuilder
 {
 public:
     static core::control::Ship* gen(descriptor::Ship*);
@@ -44,8 +44,8 @@ public:
     static core::control::Ship* gen();
 
 private:
-    Ship() = delete;
-    ~Ship() = delete;
+    ShipBuilder() = delete;
+    ~ShipBuilder() = delete;
 
     static core::control::Ship* __genTemplate(descriptor::Ship* descr, int_t ob_id = NONE);
     static void __createInternals(core::control::Ship*, descriptor::Ship*);

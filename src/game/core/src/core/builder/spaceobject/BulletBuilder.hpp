@@ -35,15 +35,15 @@ class BulletData;
 
 namespace builder {
 
-class Bullet
+class BulletBuilder
 {
 public:
     static core::control::Bullet* gen(int damage);
     static core::control::Bullet* gen(descriptor::Bullet*, int damage);
 
 private:
-    Bullet() = delete;
-    ~Bullet() = delete;
+    BulletBuilder() = delete;
+    ~BulletBuilder() = delete;
 
     static void createInternals(core::control::Bullet*, descriptor::Bullet*, int damage);
     static core::control::Bullet* __genTemplate(descriptor::Bullet*);

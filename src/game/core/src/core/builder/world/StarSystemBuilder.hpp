@@ -20,8 +20,6 @@
 
 #include <ceti/type/IdType.hpp>
 
-//#include <string>
-
 namespace descriptor {
 class StarSystem;
 } // namespace descriptor
@@ -34,7 +32,7 @@ class StarSystem;
 
 namespace builder {
 
-class StarSystem
+class StarSystemBuilder
 {
 public:
     static core::control::StarSystem* gen(descriptor::StarSystem*);
@@ -42,8 +40,8 @@ public:
     static core::control::StarSystem* gen();
 
 private:
-    StarSystem()=delete;
-    ~StarSystem()=delete;
+    StarSystemBuilder()=delete;
+    ~StarSystemBuilder()=delete;
 
     static void __createInternals(core::control::StarSystem*, descriptor::StarSystem*);
     static core::control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t object = NONE);

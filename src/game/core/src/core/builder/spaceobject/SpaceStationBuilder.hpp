@@ -48,15 +48,15 @@ const int MASS_MAX = 2000;
 
 namespace builder {
 
-class SpaceStation : public BaseVehicle
+class SpaceStationBuilder : public VehicleBuilder
 {
 public:
     static core::control::SpaceStation* gen();
     static core::control::SpaceStation* gen(descriptor::SpaceStation*);
 
 private:
-    SpaceStation() = default;
-    ~SpaceStation() = default;
+    SpaceStationBuilder() = default;
+    ~SpaceStationBuilder() = default;
 
     static void __createInternals(core::control::SpaceStation*, descriptor::SpaceStation*);
     static core::control::SpaceStation* __genTemplate(descriptor::SpaceStation*);

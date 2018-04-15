@@ -110,7 +110,7 @@ Store::__putRandomEquipment(core::control::Store* store)
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->add(builder::Ship::gen());
+        store->add(builder::ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
         store->add(builder::item::Lazer::gen());

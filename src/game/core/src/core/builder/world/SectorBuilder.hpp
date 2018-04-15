@@ -33,7 +33,7 @@ class Sector;
 
 namespace builder {
 
-class Sector
+class SectorBuilder
 {
 public:
     static core::control::Sector* gen();
@@ -41,8 +41,8 @@ public:
     static core::control::Sector* gen(descriptor::Sector*);
 
 private:
-    Sector()=delete;
-    ~Sector()=delete;
+    SectorBuilder()=delete;
+    ~SectorBuilder()=delete;
 
     static void __createInternals(core::control::Sector*, descriptor::Sector*);
     static core::control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);

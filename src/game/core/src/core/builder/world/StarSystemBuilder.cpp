@@ -38,7 +38,7 @@
 namespace builder {
 
 core::control::StarSystem*
-StarSystem::gen()
+StarSystemBuilder::gen()
 {
     descriptor::StarSystem* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STARSYSTEM)) {
@@ -51,7 +51,7 @@ StarSystem::gen()
 }
 
 core::control::StarSystem*
-StarSystem::gen(descriptor::StarSystem* descr)
+StarSystemBuilder::gen(descriptor::StarSystem* descr)
 {
     core::control::StarSystem* starsystem = __genTemplate(descr);
     __createInternals(starsystem, descr);
@@ -59,7 +59,7 @@ StarSystem::gen(descriptor::StarSystem* descr)
 } 
 
 core::control::StarSystem*
-StarSystem::gen(int_t descriptor_id, int_t object_id)
+StarSystemBuilder::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::StarSystem* descriptor = core::shortcuts::descriptors()->starSystem(descriptor_id);
     core::control::StarSystem* starsystem = __genTemplate(descriptor, object_id);
@@ -68,7 +68,7 @@ StarSystem::gen(int_t descriptor_id, int_t object_id)
 }
 
 core::control::StarSystem*
-StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
+StarSystemBuilder::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
 {
     model::StarSystem* model = new model::StarSystem(descr->id(), ob_id);
     assert(model);
@@ -79,7 +79,7 @@ StarSystem::__genTemplate(descriptor::StarSystem* descr, int_t ob_id)
     return starsystem;
 }
 
-void StarSystem::__createInternals(core::control::StarSystem* starsystem, descriptor::StarSystem* descr)
+void StarSystemBuilder::__createInternals(core::control::StarSystem* starsystem, descriptor::StarSystem* descr)
 {
 }
 

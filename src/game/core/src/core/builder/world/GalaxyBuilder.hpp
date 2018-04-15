@@ -33,7 +33,7 @@ class Galaxy;
 
 namespace builder {
 
-class Galaxy
+class GalaxyBuilder
 {
 public:
     static core::control::Galaxy* gen();
@@ -41,8 +41,8 @@ public:
     static core::control::Galaxy* gen(descriptor::Galaxy*);
 
 private:
-    Galaxy() = delete;
-    ~Galaxy() = delete;
+    GalaxyBuilder() = delete;
+    ~GalaxyBuilder() = delete;
 
     static void __createInternals(core::control::Galaxy*, descriptor::Galaxy*);
     static core::control::Galaxy* __genTemplate(descriptor::Galaxy*, int_t object = NONE);

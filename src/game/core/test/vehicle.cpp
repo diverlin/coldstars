@@ -35,7 +35,7 @@
 
 TEST(vehicle, item_lazer)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
     core::control::item::Lazer* lazer = builder::item::Lazer::gen();
 
     assert(ship->weaponSlots().front());
@@ -56,7 +56,7 @@ TEST(vehicle, item_lazer)
 
 TEST(vehicle, item_rocket)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
     core::control::item::Rocket* rocket = builder::item::Rocket::gen();
 
     assert(ship->weaponSlots().front());
@@ -77,7 +77,7 @@ TEST(vehicle, item_rocket)
 
 TEST(vehicle, item_bak)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
     core::control::item::Bak* bak = builder::item::Bak::gen();
 
     assert(ship->bakSlots().front());
@@ -96,7 +96,7 @@ TEST(vehicle, item_bak)
 
 TEST(vehicle, item_drive)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
     core::control::item::Drive* drive = builder::item::Drive::gen();
 
     assert(ship->driveSlots().front());
@@ -115,7 +115,7 @@ TEST(vehicle, item_drive)
 
 TEST(vehicle, item_bak_and_drive)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto bak = builder::item::Bak::gen();
     auto drive = builder::item::Drive::gen();
 
@@ -168,7 +168,7 @@ TEST(vehicle, item_bak_and_drive)
 
 TEST(vehicle, item_droid)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto droid = builder::item::Droid::gen();
 
     assert(ship->droidSlots().front());
@@ -201,7 +201,7 @@ TEST(vehicle, item_droid)
 
 TEST(vehicle, item_grapple)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto grapple = builder::item::Grapple::gen();
 
     assert(ship->grappleSlots().front());
@@ -240,7 +240,7 @@ TEST(vehicle, item_grapple)
 
 TEST(vehicle, item_scaner)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto scaner = builder::item::Scaner::gen();
 
     assert(ship->scanerSlots().front());
@@ -273,7 +273,7 @@ TEST(vehicle, item_scaner)
 
 TEST(vehicle, item_radar)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto radar = builder::item::Radar::gen();
 
     assert(ship->radarSlots().front());
@@ -306,7 +306,7 @@ TEST(vehicle, item_radar)
 
 TEST(vehicle, item_protector)
 {
-    auto ship = builder::Ship::gen();
+    auto ship = builder::ShipBuilder::gen();
     auto protector = builder::item::Protector::gen();
 
     assert(ship->protectorSlots().front());
@@ -340,7 +340,7 @@ TEST(vehicle, item_protector)
 
 TEST(vehicle, cargo_load)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
 
     int cargo_num = ship->descriptor()->cargoSlotNum();
     for(int i=0; i<cargo_num; ++i) {
@@ -356,7 +356,7 @@ TEST(vehicle, cargo_load)
 
 TEST(vehicle, freespace)
 {
-    core::control::Ship* ship = builder::Ship::gen();
+    core::control::Ship* ship = builder::ShipBuilder::gen();
 
     // init
     EXPECT_EQ(ship->descriptor()->space(), ship->freeSpace());

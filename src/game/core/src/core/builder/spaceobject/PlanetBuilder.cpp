@@ -34,7 +34,7 @@
 namespace builder {
 
 core::control::Planet*
-Planet::gen()
+PlanetBuilder::gen()
 {
     descriptor::Planet* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PLANET)) {
@@ -47,14 +47,14 @@ Planet::gen()
 } 
 
 core::control::Planet*
-Planet::gen(int_t descriptor_id, int_t id)
+PlanetBuilder::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Planet* descr = core::shortcuts::descriptors()->planet(descriptor_id);
     return gen(descr, id);
 }
 
 core::control::Planet*
-Planet::gen(descriptor::Planet* descr, int_t id)
+PlanetBuilder::gen(descriptor::Planet* descr, int_t id)
 {
     core::control::Planet* planet = __genTemplate(descr, id);
     __createInternals(planet, descr);
@@ -62,7 +62,7 @@ Planet::gen(descriptor::Planet* descr, int_t id)
 }
 
 void
-Planet::__createInternals(core::control::Planet* planet, descriptor::Planet* descr)
+PlanetBuilder::__createInternals(core::control::Planet* planet, descriptor::Planet* descr)
 {
     /// Orientation
     planet->setSize(descr->size());
@@ -105,7 +105,7 @@ Planet::__createInternals(core::control::Planet* planet, descriptor::Planet* des
 }
 
 core::control::Planet*
-Planet::__genTemplate(descriptor::Planet* descr, int_t id)
+PlanetBuilder::__genTemplate(descriptor::Planet* descr, int_t id)
 {
     model::Planet* model = new model::Planet(descr->id(), id);
     assert(model);
