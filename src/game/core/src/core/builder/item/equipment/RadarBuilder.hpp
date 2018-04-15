@@ -42,7 +42,7 @@ class Radar;
 namespace builder {
 namespace item {
 
-class Radar : public Equipment
+class RadarItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Radar* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Radar* gen(descriptor::item::Radar*);
 
 private:
-    Radar() = delete;
-    ~Radar() = delete;
+    RadarItemBuilder() = delete;
+    ~RadarItemBuilder() = delete;
 
     static core::control::item::Radar* __genTemplate(descriptor::item::Radar*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Radar*, descriptor::item::Radar*);

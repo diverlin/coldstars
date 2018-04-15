@@ -42,7 +42,7 @@ class Rocket;
 namespace builder {
 namespace item {
 
-class Rocket : public Equipment
+class RocketItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Rocket* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Rocket* gen(descriptor::item::Rocket*);
 
 private:
-    Rocket() = delete;
-    ~Rocket() = delete;
+    RocketItemBuilder() = delete;
+    ~RocketItemBuilder() = delete;
 
     static core::control::item::Rocket* __genTemplate(descriptor::item::Rocket*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Rocket*, descriptor::item::Rocket*);

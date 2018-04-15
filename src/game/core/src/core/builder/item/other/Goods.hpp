@@ -42,7 +42,7 @@ class Goods;
 namespace builder {
 namespace item {
 
-class Goods : public Item
+class GoodsBuilder : public ItemBuilder
 {
 public:
     static core::control::item::Goods* gen(descriptor::item::Goods*);
@@ -50,8 +50,8 @@ public:
     static core::control::item::Goods* gen();
 
 private:
-    Goods() = delete;
-    ~Goods() = delete;
+    GoodsBuilder() = delete;
+    ~GoodsBuilder() = delete;
 
     static core::control::item::Goods* __genTemplate(descriptor::item::Goods*, int_t object_id = NONE);
     static void __createInternals(core::control::item::Goods*, descriptor::item::Goods*);

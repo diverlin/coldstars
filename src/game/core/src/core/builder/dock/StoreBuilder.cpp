@@ -113,31 +113,31 @@ StoreBuilder::__putRandomEquipment(core::control::Store* store)
         store->add(builder::ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->add(builder::item::Lazer::gen());
+        store->add(builder::item::LazerItemBuilder::gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->add(builder::item::Rocket::gen());
+        store->add(builder::item::RocketItemBuilder::gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->add(builder::item::Radar::gen());
+        store->add(builder::item::RadarItemBuilder::gen());
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->add(builder::item::Grapple::gen());
+        store->add(builder::item::GrappleItemBuilder::gen());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->add(builder::item::Drive::gen());
+        store->add(builder::item::DriveItemBuilder::gen());
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->add(builder::item::Protector::gen());
+        store->add(builder::item::ProtectorItemBuilder::gen());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->add(builder::item::Bak::gen());
+        store->add(builder::item::BakItemBuilder::gen());
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->add(builder::item::Droid::gen());
+        store->add(builder::item::DroidItemBuilder::gen());
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->add(builder::item::Scaner::gen());
+        store->add(builder::item::ScanerItemBuilder::gen());
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

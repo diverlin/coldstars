@@ -78,7 +78,7 @@ TEST(ship, drop_item)
     core::control::Ship* ship = builder::ShipBuilder::gen();
 
     /* equip ship */
-    core::control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Drive* drive = builder::item::DriveItemBuilder::gen();
     ship->mount(drive);
 
     /* add ship */
@@ -107,11 +107,11 @@ TEST(ship, grab_container)
     /* create objects */
     core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen();
     core::control::Ship* ship = builder::ShipBuilder::gen();
-    core::control::item::Grapple* grapple = builder::item::Grapple::gen();
+    core::control::item::Grapple* grapple = builder::item::GrappleItemBuilder::gen();
     EXPECT_TRUE(ship->mount(grapple));
 
     core::control::Container* container = builder::ContainerBuilder::gen();
-    core::control::item::Lazer* lazer = builder::item::Lazer::gen();
+    core::control::item::Lazer* lazer = builder::item::LazerItemBuilder::gen();
     EXPECT_TRUE(container->insert(lazer));
 
     /* add to starsystem */
@@ -135,8 +135,8 @@ TEST(ship, move)
     /* create objects */
     core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen();
     core::control::Ship* ship = builder::ShipBuilder::gen();
-    core::control::item::Drive* drive = builder::item::Drive::gen();
-    core::control::item::Bak* bak = builder::item::Bak::gen();
+    core::control::item::Drive* drive = builder::item::DriveItemBuilder::gen();
+    core::control::item::Bak* bak = builder::item::BakItemBuilder::gen();
 
     EXPECT_TRUE(ship->mount(drive));
     EXPECT_TRUE(ship->mount(bak));
@@ -165,13 +165,13 @@ TEST(ship, shoot_ship)
     /* create objects */
     core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen();
     core::control::Ship* ship = builder::ShipBuilder::gen();
-    core::control::item::Lazer* lazer1 = builder::item::Lazer::gen();
-    core::control::item::Lazer* lazer2 = builder::item::Lazer::gen();
+    core::control::item::Lazer* lazer1 = builder::item::LazerItemBuilder::gen();
+    core::control::item::Lazer* lazer2 = builder::item::LazerItemBuilder::gen();
     EXPECT_TRUE(ship->mount(lazer1));
     EXPECT_TRUE(ship->mount(lazer2));
 
     core::control::Ship* target = builder::ShipBuilder::gen();
-    core::control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Drive* drive = builder::item::DriveItemBuilder::gen();
     EXPECT_TRUE(target->mount(drive));
 
     /* add to starsystem */
@@ -315,15 +315,15 @@ void testShipCloneScenario(core::control::Ship* ship)
 TEST(ship, equip_and_clone)
 {
     core::control::Ship* ship = builder::ShipBuilder::gen();
-    ship->manage( builder::item::Bak::gen() );
-    ship->manage( builder::item::Drive::gen() );
-    ship->manage( builder::item::Scaner::gen() );
-    ship->manage( builder::item::Droid::gen() );
-    ship->manage( builder::item::Radar::gen() );
-    ship->manage( builder::item::Protector::gen() );
-    ship->load( builder::item::Protector::gen() );
-    ship->load( builder::item::Lazer::gen() );
-    ship->load( builder::item::Rocket::gen() );
+    ship->manage( builder::item::BakItemBuilder::gen() );
+    ship->manage( builder::item::DriveItemBuilder::gen() );
+    ship->manage( builder::item::ScanerItemBuilder::gen() );
+    ship->manage( builder::item::DroidItemBuilder::gen() );
+    ship->manage( builder::item::RadarItemBuilder::gen() );
+    ship->manage( builder::item::ProtectorItemBuilder::gen() );
+    ship->load( builder::item::ProtectorItemBuilder::gen() );
+    ship->load( builder::item::LazerItemBuilder::gen() );
+    ship->load( builder::item::RocketItemBuilder::gen() );
 
     testShipCloneScenario(ship);
 }
@@ -336,8 +336,8 @@ TEST(ship, dock)
     core::control::Planet* planet = builder::PlanetBuilder::gen();
     core::control::Ship* ship = builder::ShipBuilder::gen();
 
-    core::control::item::Bak* bak = builder::item::Bak::gen();
-    core::control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Bak* bak = builder::item::BakItemBuilder::gen();
+    core::control::item::Drive* drive = builder::item::DriveItemBuilder::gen();
     EXPECT_TRUE(ship->mount(bak));
     EXPECT_TRUE(ship->mount(drive));
 
@@ -404,8 +404,8 @@ TEST(ship, jump)
     core::control::StarSystem* starsystem_jumpTo = builder::StarSystemBuilder::gen();
     core::control::Ship* ship = builder::ShipBuilder::gen();
 
-    core::control::item::Bak* bak = builder::item::Bak::gen();
-    core::control::item::Drive* drive = builder::item::Drive::gen();
+    core::control::item::Bak* bak = builder::item::BakItemBuilder::gen();
+    core::control::item::Drive* drive = builder::item::DriveItemBuilder::gen();
     EXPECT_TRUE(ship->mount(bak));
     EXPECT_TRUE(ship->mount(drive));
 

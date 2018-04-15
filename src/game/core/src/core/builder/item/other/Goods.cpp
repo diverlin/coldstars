@@ -30,7 +30,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Goods*
-Goods::gen(descriptor::item::Goods* descriptor)
+GoodsBuilder::gen(descriptor::item::Goods* descriptor)
 {
     core::control::item::Goods* control = __genTemplate(descriptor);
     __createInternals(control, descriptor);
@@ -38,7 +38,7 @@ Goods::gen(descriptor::item::Goods* descriptor)
 }
 
 core::control::item::Goods*
-Goods::gen(int_t descriptor_id, int_t object_id)
+GoodsBuilder::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::item::Goods* descriptor = core::shortcuts::descriptors()->goods(descriptor_id);
     core::control::item::Goods* control = __genTemplate(descriptor, object_id);
@@ -47,7 +47,7 @@ Goods::gen(int_t descriptor_id, int_t object_id)
 }
 
 core::control::item::Goods*
-Goods::gen()
+GoodsBuilder::gen()
 {
     descriptor::item::Goods* descriptor = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GOODS)) {
@@ -61,7 +61,7 @@ Goods::gen()
 
 
 core::control::item::Goods*
-Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
+GoodsBuilder::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
 {
     model::item::Goods* model = new model::item::Goods(descriptor->id(), object_id);
     assert(model);
@@ -71,7 +71,7 @@ Goods::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
 }
 
 void
-Goods::__createInternals(core::control::item::Goods* control, descriptor::item::Goods* descriptor)
+GoodsBuilder::__createInternals(core::control::item::Goods* control, descriptor::item::Goods* descriptor)
 {
 }
 

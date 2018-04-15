@@ -33,7 +33,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Protector*
-Protector::gen()
+ProtectorItemBuilder::gen()
 {
     descriptor::item::Protector* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
@@ -46,7 +46,7 @@ Protector::gen()
 } 
 
 std::vector<core::control::item::Protector*>
-Protector::gen(int num)
+ProtectorItemBuilder::gen(int num)
 {
     std::vector<core::control::item::Protector*> result;
     for (int i=0; i<num; ++i) {
@@ -56,7 +56,7 @@ Protector::gen(int num)
 }
 
 core::control::item::Protector*
-Protector::gen(int_t descriptor_id, int_t ob_id)
+ProtectorItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
     core::control::item::Protector* protector = __genTemplate(descr, ob_id);
@@ -65,7 +65,7 @@ Protector::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Protector*
-Protector::gen(descriptor::item::Protector* descr)
+ProtectorItemBuilder::gen(descriptor::item::Protector* descr)
 {
     core::control::item::Protector* protector = __genTemplate(descr);
     __createInternals(protector, descr);
@@ -73,7 +73,7 @@ Protector::gen(descriptor::item::Protector* descr)
 }
 
 core::control::item::Protector*
-Protector::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
+ProtectorItemBuilder::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
 {
     model::item::Protector* model = new model::item::Protector(descriptor->id(), id);
     assert(model);
@@ -83,10 +83,10 @@ Protector::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
 }
 
 void
-Protector::__createInternals(core::control::item::Protector* protector, descriptor::item::Protector* descr)
+ProtectorItemBuilder::__createInternals(core::control::item::Protector* protector, descriptor::item::Protector* descr)
 {     
-    Item::_createInternals(protector, descr);
-    Equipment::_createInternals(protector, descr);
+    ItemBuilder::_createInternals(protector, descr);
+    EquipmentBuilder::_createInternals(protector, descr);
     protector->model()->setProtection(descr->protection());
 }
 

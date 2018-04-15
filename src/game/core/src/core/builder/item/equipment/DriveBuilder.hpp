@@ -42,7 +42,7 @@ class Drive;
 namespace builder {
 namespace item {
 
-class Drive : public Equipment
+class DriveItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Drive* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Drive* gen(descriptor::item::Drive*);
 
 private:
-    Drive() = delete;
-    ~Drive() = delete;
+    DriveItemBuilder() = delete;
+    ~DriveItemBuilder() = delete;
 
     static core::control::item::Drive* __genTemplate(descriptor::item::Drive*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Drive*, descriptor::item::Drive*);

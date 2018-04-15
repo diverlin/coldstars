@@ -30,7 +30,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Rocket*
-Rocket::gen()
+RocketItemBuilder::gen()
 {
     descriptor::item::Rocket* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ROCKET_EQUIPMENT)) {
@@ -43,7 +43,7 @@ Rocket::gen()
 }
 
 core::control::item::Rocket*
-Rocket::gen(int_t descriptor_id, int_t ob_id)
+RocketItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Rocket* descr = core::shortcuts::descriptors()->rocket(descriptor_id);
     core::control::item::Rocket* rocket = __genTemplate(descr, ob_id);
@@ -52,7 +52,7 @@ Rocket::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Rocket*
-Rocket::gen(descriptor::item::Rocket* descr)
+RocketItemBuilder::gen(descriptor::item::Rocket* descr)
 {
     core::control::item::Rocket* rocket = __genTemplate(descr);
     __createInternals(rocket, descr);
@@ -61,7 +61,7 @@ Rocket::gen(descriptor::item::Rocket* descr)
 
 
 core::control::item::Rocket*
-Rocket::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
+RocketItemBuilder::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
 {
     model::item::Rocket* model = new model::item::Rocket(descriptor->id(), id);
     assert(model);
@@ -71,10 +71,10 @@ Rocket::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
 }
 
 void
-Rocket::__createInternals(core::control::item::Rocket* rocket, descriptor::item::Rocket* descr)
+RocketItemBuilder::__createInternals(core::control::item::Rocket* rocket, descriptor::item::Rocket* descr)
 {     
-    Item::_createInternals(rocket, descr);
-    Equipment::_createInternals(rocket, descr);
+    ItemBuilder::_createInternals(rocket, descr);
+    EquipmentBuilder::_createInternals(rocket, descr);
     rocket->model()->setAmmo(descr->ammo());
     rocket->model()->setDamage(descr->damage());
     rocket->model()->setRadius(descr->radius());

@@ -42,7 +42,7 @@ class Droid;
 namespace builder {
 namespace item {
 
-class Droid : public Equipment
+class DroidItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Droid* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Droid* gen(descriptor::item::Droid*);
 
 private:
-    Droid() = delete;
-    ~Droid() = delete;
+    DroidItemBuilder() = delete;
+    ~DroidItemBuilder() = delete;
 
     static core::control::item::Droid* __genTemplate(descriptor::item::Droid*, int ob_id = NONE);
     static void __createInternals(core::control::item::Droid*, descriptor::item::Droid*);

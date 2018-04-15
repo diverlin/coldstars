@@ -26,15 +26,15 @@
 class FreezerEquipment;
 
 
-class FreezerBuilder
+class FreezerItemBuilder
 {
     public:
-        FreezerBuilder();
-        ~FreezerBuilder();
+        FreezerItemBuilder();
+        ~FreezerItemBuilder();
         
-        FreezerEquipment* createTemplate(id_type id = NONE_ID) const;
-        FreezerEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
+        FreezerItemBuilder* createTemplate(id_type id = NONE_ID) const;
+        FreezerItemBuilder* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
                                      
     private:
-        void createInternals(FreezerEquipment*, TYPE::TECH, TYPE::RACE, int) const;
+        void createInternals(FreezerItemBuilder*, TYPE::TECH, TYPE::RACE, int) const;
 }; 

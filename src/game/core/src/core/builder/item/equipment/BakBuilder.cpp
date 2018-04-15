@@ -31,7 +31,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Bak*
-Bak::gen(descriptor::item::Bak* descr)
+BakItemBuilder::gen(descriptor::item::Bak* descr)
 {
     core::control::item::Bak* bak = __genTemplate(descr);
     __createInternals(bak, descr);
@@ -39,7 +39,7 @@ Bak::gen(descriptor::item::Bak* descr)
 }
 
 core::control::item::Bak*
-Bak::gen(int_t descriptor_id, int_t ob_id)
+BakItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Bak* descr = core::shortcuts::descriptors()->bak(descriptor_id);
     core::control::item::Bak* bak = __genTemplate(descr, ob_id);
@@ -48,7 +48,7 @@ Bak::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Bak*
-Bak::gen()
+BakItemBuilder::gen()
 {
     descriptor::item::Bak* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::BAK_EQUIPMENT)) {
@@ -62,7 +62,7 @@ Bak::gen()
 
 
 core::control::item::Bak*
-Bak::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
+BakItemBuilder::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
 {
     model::item::Bak* model = new model::item::Bak(descriptor->id(), id);
     assert(model);
@@ -72,10 +72,10 @@ Bak::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
 }
 
 void
-Bak::__createInternals(core::control::item::Bak* bak, descriptor::item::Bak* descr)
+BakItemBuilder::__createInternals(core::control::item::Bak* bak, descriptor::item::Bak* descr)
 {
-    Item::_createInternals(bak, descr);
-    Equipment::_createInternals(bak, descr);
+    ItemBuilder::_createInternals(bak, descr);
+    EquipmentBuilder::_createInternals(bak, descr);
     bak->model()->setFuel(descr->fuel());
 }
 
