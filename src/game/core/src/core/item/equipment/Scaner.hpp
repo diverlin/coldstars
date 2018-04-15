@@ -35,19 +35,19 @@ namespace control {
 class Scaner : public Equipment
 {
 public:
-    Scaner(descriptor::item::Scaner*, model::item::Scaner*);
+    Scaner(descriptor::Scaner*, model::Scaner*);
     virtual ~Scaner() = default;
 
 private:
     virtual void updateProperties();
 
 public:
-    model::item::Scaner* model() const { return m_model_scaner; }
-    descriptor::item::Scaner* descriptor() const { return m_descriptor_scaner; }
+    model::Scaner* model() const { return m_model_scaner; }
+    descriptor::Scaner* descriptor() const { return m_descriptor_scaner; }
 
 private:
-    model::item::Scaner* m_model_scaner = nullptr;
-    descriptor::item::Scaner* m_descriptor_scaner = nullptr;
+    model::Scaner* m_model_scaner = nullptr;
+    descriptor::Scaner* m_descriptor_scaner = nullptr;
 
     int m_scan_add = 0;
 

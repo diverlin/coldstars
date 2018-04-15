@@ -255,81 +255,81 @@ Entities::item(int_t id) const {
     return control;
 }
 
-control::item::Weapon*
+control::Weapon*
 Entities::weapon(int_t id) const {
-    control::item::Weapon* control = static_cast<control::item::Weapon*>(base(id));
+    control::Weapon* control = static_cast<control::Weapon*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Scaner*
+control::Scaner*
 Entities::scaner(int_t id) const
 {
-    control::item::Scaner* control = static_cast<control::item::Scaner*>(base(id));
+    control::Scaner* control = static_cast<control::Scaner*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Drive*
+control::Drive*
 Entities::drive(int_t id) const
 {
-    control::item::Drive* control = static_cast<control::item::Drive*>(base(id));
+    control::Drive* control = static_cast<control::Drive*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Bak*
+control::Bak*
 Entities::bak(int_t id) const
 {
-    control::item::Bak* control = static_cast<control::item::Bak*>(base(id));
+    control::Bak* control = static_cast<control::Bak*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Droid*
+control::Droid*
 Entities::droid(int_t id) const
 {
-    control::item::Droid* control = static_cast<control::item::Droid*>(base(id));
+    control::Droid* control = static_cast<control::Droid*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Grapple*
+control::Grapple*
 Entities::grapple(int_t id) const
 {
-    control::item::Grapple* control = static_cast<control::item::Grapple*>(base(id));
+    control::Grapple* control = static_cast<control::Grapple*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Lazer*
+control::Lazer*
 Entities::lazer(int_t id) const
 {
-    control::item::Lazer* control = static_cast<control::item::Lazer*>(base(id));
+    control::Lazer* control = static_cast<control::Lazer*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Protector*
+control::Protector*
 Entities::protector(int_t id) const
 {
-    control::item::Protector* control = static_cast<control::item::Protector*>(base(id));
+    control::Protector* control = static_cast<control::Protector*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Radar*
+control::Radar*
 Entities::radar(int_t id) const
 {
-    control::item::Radar* control = static_cast<control::item::Radar*>(base(id));
+    control::Radar* control = static_cast<control::Radar*>(base(id));
     assert(control);
     return control;
 }
 
-control::item::Rocket*
+control::Rocket*
 Entities::rocket(int_t id) const
 {
-    control::item::Rocket* control = static_cast<control::item::Rocket*>(base(id));
+    control::Rocket* control = static_cast<control::Rocket*>(base(id));
     assert(control);
     return control;
 }

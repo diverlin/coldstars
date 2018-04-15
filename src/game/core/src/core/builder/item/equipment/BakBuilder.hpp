@@ -48,8 +48,8 @@ private:
     BakItemBuilder() = delete;
     ~BakItemBuilder() = delete;
 
-    static core::control::item::Bak* __genTemplate(descriptor::item::Bak*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Bak*, descriptor::item::Bak*);
+    static core::control::Bak* __genTemplate(descriptor::Bak*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Bak*, descriptor::Bak*);
 }; 
 
 } // namespace builder

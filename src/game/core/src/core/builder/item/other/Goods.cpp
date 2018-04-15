@@ -28,29 +28,29 @@
 
 namespace core {
 
-core::control::item::Goods*
-GoodsBuilder::gen(descriptor::item::Goods* descriptor)
+core::control::Goods*
+GoodsBuilder::gen(descriptor::Goods* descriptor)
 {
-    core::control::item::Goods* control = __genTemplate(descriptor);
+    core::control::Goods* control = __genTemplate(descriptor);
     __createInternals(control, descriptor);
     return control;
 }
 
-core::control::item::Goods*
+core::control::Goods*
 GoodsBuilder::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::item::Goods* descriptor = core::shortcuts::descriptors()->goods(descriptor_id);
-    core::control::item::Goods* control = __genTemplate(descriptor, object_id);
+    descriptor::Goods* descriptor = core::shortcuts::descriptors()->goods(descriptor_id);
+    core::control::Goods* control = __genTemplate(descriptor, object_id);
     __createInternals(control, descriptor);
     return control;
 }
 
-core::control::item::Goods*
+core::control::Goods*
 GoodsBuilder::gen()
 {
-    descriptor::item::Goods* descriptor = nullptr;
+    descriptor::Goods* descriptor = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GOODS)) {
-        descriptor = descriptor::item::genGoods();
+        descriptor = descriptor::genGoods();
     } else {
         descriptor = core::shortcuts::descriptors()->randGoods();
     }
@@ -59,18 +59,18 @@ GoodsBuilder::gen()
 }
 
 
-core::control::item::Goods*
-GoodsBuilder::__genTemplate(descriptor::item::Goods* descriptor, int_t object_id)
+core::control::Goods*
+GoodsBuilder::__genTemplate(descriptor::Goods* descriptor, int_t object_id)
 {
-    model::item::Goods* model = new model::item::Goods(descriptor->id(), object_id);
+    model::Goods* model = new model::Goods(descriptor->id(), object_id);
     assert(model);
-    core::control::item::Goods* control = new core::control::item::Goods(descriptor, model);
+    core::control::Goods* control = new core::control::Goods(descriptor, model);
     assert(control);
     return control;
 }
 
 void
-GoodsBuilder::__createInternals(core::control::item::Goods* control, descriptor::item::Goods* descriptor)
+GoodsBuilder::__createInternals(core::control::Goods* control, descriptor::Goods* descriptor)
 {
 }
 

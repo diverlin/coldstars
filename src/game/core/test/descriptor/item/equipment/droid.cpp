@@ -29,8 +29,8 @@
 namespace test {
 
 TEST(descriptor, clone_droid) {
-    descriptor::item::Droid* descr = descriptor::item::genDroid();
-    descriptor::item::Droid* copy = new descriptor::item::Droid(descr->data());
+    descriptor::Droid* descr = descriptor::genDroid();
+    descriptor::Droid* copy = new descriptor::Droid(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::DROID_EQUIPMENT);

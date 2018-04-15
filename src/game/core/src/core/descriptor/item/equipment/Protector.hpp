@@ -53,7 +53,7 @@ public:
 
     ceti::InfoTable info() const {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Protector");
+        result.add("descriptor::Protector");
         result.add("protection", m_protection);
         return result;
     }

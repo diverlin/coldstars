@@ -35,11 +35,11 @@ namespace control {
 class Droid : public Equipment
 {
 public:
-    Droid(descriptor::item::Droid*, model::item::Droid*);
+    Droid(descriptor::Droid*, model::Droid*);
     virtual ~Droid() = default;
 
-    descriptor::item::Droid* descriptor() const { return m_descriptor_droid; }
-    model::item::Droid* model() const { return m_model_droid; }
+    descriptor::Droid* descriptor() const { return m_descriptor_droid; }
+    model::Droid* model() const { return m_model_droid; }
 
 private:
     virtual void updateProperties();
@@ -48,8 +48,8 @@ private:
 private:
     int m_repair_add = 0;
 
-    descriptor::item::Droid* m_descriptor_droid = nullptr;
-    model::item::Droid* m_model_droid = nullptr;
+    descriptor::Droid* m_descriptor_droid = nullptr;
+    model::Droid* m_model_droid = nullptr;
 
     void virtual addUniqueInfo();
     std::string GetRepairStr();

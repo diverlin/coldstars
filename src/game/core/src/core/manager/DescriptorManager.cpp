@@ -286,82 +286,82 @@ Descriptors::randGoverment() const
 }
 
 // items
-descriptor::item::Scaner*
+descriptor::Scaner*
 Descriptors::randScaner() const
 {
-    descriptor::item::Scaner* descr = static_cast<descriptor::item::Scaner*>(rand(descriptor::Type::SCANER_EQUIPMENT));
+    descriptor::Scaner* descr = static_cast<descriptor::Scaner*>(rand(descriptor::Type::SCANER_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Drive*
+descriptor::Drive*
 Descriptors::randDrive() const
 {
-    descriptor::item::Drive* descr = static_cast<descriptor::item::Drive*>(rand(descriptor::Type::DRIVE_EQUIPMENT));
+    descriptor::Drive* descr = static_cast<descriptor::Drive*>(rand(descriptor::Type::DRIVE_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Bak*
+descriptor::Bak*
 Descriptors::randBak() const
 {
-    descriptor::item::Bak* descr = static_cast<descriptor::item::Bak*>(rand(descriptor::Type::BAK_EQUIPMENT));
+    descriptor::Bak* descr = static_cast<descriptor::Bak*>(rand(descriptor::Type::BAK_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Droid*
+descriptor::Droid*
 Descriptors::randDroid() const
 {
-    descriptor::item::Droid* descr = static_cast<descriptor::item::Droid*>(rand(descriptor::Type::DROID_EQUIPMENT));
+    descriptor::Droid* descr = static_cast<descriptor::Droid*>(rand(descriptor::Type::DROID_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Grapple*
+descriptor::Grapple*
 Descriptors::randGrapple() const
 {
-    descriptor::item::Grapple* descr = static_cast<descriptor::item::Grapple*>(rand(descriptor::Type::GRAPPLE_EQUIPMENT));
+    descriptor::Grapple* descr = static_cast<descriptor::Grapple*>(rand(descriptor::Type::GRAPPLE_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Lazer*
+descriptor::Lazer*
 Descriptors::randLazer() const
 {
-    descriptor::item::Lazer* descr = static_cast<descriptor::item::Lazer*>(rand(descriptor::Type::LAZER_EQUIPMENT));
+    descriptor::Lazer* descr = static_cast<descriptor::Lazer*>(rand(descriptor::Type::LAZER_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Protector*
+descriptor::Protector*
 Descriptors::randProtector() const
 {
-    descriptor::item::Protector* descr = static_cast<descriptor::item::Protector*>(rand(descriptor::Type::PROTECTOR_EQUIPMENT));
+    descriptor::Protector* descr = static_cast<descriptor::Protector*>(rand(descriptor::Type::PROTECTOR_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Radar*
+descriptor::Radar*
 Descriptors::randRadar() const
 {
-    descriptor::item::Radar* descr = static_cast<descriptor::item::Radar*>(rand(descriptor::Type::RADAR_EQUIPMENT));
+    descriptor::Radar* descr = static_cast<descriptor::Radar*>(rand(descriptor::Type::RADAR_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Rocket*
+descriptor::Rocket*
 Descriptors::randRocket() const
 {
-    descriptor::item::Rocket* descr = static_cast<descriptor::item::Rocket*>(rand(descriptor::Type::ROCKET_EQUIPMENT));
+    descriptor::Rocket* descr = static_cast<descriptor::Rocket*>(rand(descriptor::Type::ROCKET_EQUIPMENT));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Goods*
+descriptor::Goods*
 Descriptors::randGoods() const
 {
-    descriptor::item::Goods* descriptor = static_cast<descriptor::item::Goods*>(rand(descriptor::Type::GOODS));
+    descriptor::Goods* descriptor = static_cast<descriptor::Goods*>(rand(descriptor::Type::GOODS));
     assert(descriptor);
     return descriptor;
 }
@@ -523,82 +523,82 @@ Descriptors::goverment(int_t id) const
 
 
 // items
-descriptor::item::Scaner*
+descriptor::Scaner*
 Descriptors::scaner(int_t id) const
 {
-    descriptor::item::Scaner* descr = static_cast<descriptor::item::Scaner*>(get(id));
+    descriptor::Scaner* descr = static_cast<descriptor::Scaner*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Drive*
+descriptor::Drive*
 Descriptors::drive(int_t id) const
 {
-    descriptor::item::Drive* descr = static_cast<descriptor::item::Drive*>(get(id));
+    descriptor::Drive* descr = static_cast<descriptor::Drive*>(get(id));
     assert(descr);
     return descr;
 }
-descriptor::item::Bak*
+descriptor::Bak*
 Descriptors::bak(int_t id) const
 {
-    descriptor::item::Bak* descr = static_cast<descriptor::item::Bak*>(get(id));
+    descriptor::Bak* descr = static_cast<descriptor::Bak*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Droid*
+descriptor::Droid*
 Descriptors::droid(int_t id) const
 {
-    descriptor:: item::Droid* descr = static_cast<descriptor::item::Droid*>(get(id));
+    descriptor:: Droid* descr = static_cast<descriptor::Droid*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Grapple*
+descriptor::Grapple*
 Descriptors::grapple(int_t id) const
 {
-    descriptor::item::Grapple* descr = static_cast<descriptor::item::Grapple*>(get(id));
+    descriptor::Grapple* descr = static_cast<descriptor::Grapple*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Lazer*
+descriptor::Lazer*
 Descriptors::lazer(int_t id) const
 {
-    descriptor::item::Lazer* descr = static_cast<descriptor::item::Lazer*>(get(id));
+    descriptor::Lazer* descr = static_cast<descriptor::Lazer*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Protector*
+descriptor::Protector*
 Descriptors::protector(int_t id) const
 {
-    descriptor::item::Protector* descr = static_cast<descriptor::item::Protector*>(get(id));
+    descriptor::Protector* descr = static_cast<descriptor::Protector*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Radar*
+descriptor::Radar*
 Descriptors::radar(int_t id) const
 {
-    descriptor::item::Radar* descr = static_cast<descriptor::item::Radar*>(get(id));
+    descriptor::Radar* descr = static_cast<descriptor::Radar*>(get(id));
     assert(descr);
     return descr;
 }
 
-descriptor::item::Rocket*
+descriptor::Rocket*
 Descriptors::rocket(int_t id) const
 {
-    descriptor::item::Rocket* descr = static_cast<descriptor::item::Rocket*>(get(id));
+    descriptor::Rocket* descr = static_cast<descriptor::Rocket*>(get(id));
     assert(descr);
     return descr;
 }
 
 // other
-descriptor::item::Goods*
+descriptor::Goods*
 Descriptors::goods(int_t id) const
 {
-    descriptor::item::Goods* descr = static_cast<descriptor::item::Goods*>(get(id));
+    descriptor::Goods* descr = static_cast<descriptor::Goods*>(get(id));
     assert(descr);
     return descr;
 }
@@ -692,21 +692,21 @@ Descriptors::generate()
     for (int i=0; i<5; ++i) {
         descriptor::genBullet(); // nested for rocket, so must be generated firstly
     }
-    descriptor::item::genGoods();
+    descriptor::genGoods();
 
     int base = 1;
     int num = base * 20;
     // items
     for(int i=0; i<num; ++i) {
-        descriptor::item::genBak();
-        descriptor::item::genDrive();
-        descriptor::item::genDroid();
-        descriptor::item::genGrapple();
-        descriptor::item::genProtector();
-        descriptor::item::genRadar();
-        descriptor::item::genScaner();
-        descriptor::item::genLazer();
-        descriptor::item::genRocket();
+        descriptor::genBak();
+        descriptor::genDrive();
+        descriptor::genDroid();
+        descriptor::genGrapple();
+        descriptor::genProtector();
+        descriptor::genRadar();
+        descriptor::genScaner();
+        descriptor::genLazer();
+        descriptor::genRocket();
 //        add(getNewBomb());
     }
 

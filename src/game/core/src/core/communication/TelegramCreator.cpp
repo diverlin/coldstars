@@ -507,11 +507,11 @@ void TelegramCreator::genBullets_DEBUG(control::StarSystem* starsystem, int num)
     int_t owner_id = vehicle->id();
     int_t target_id = target->id();
 
-    std::vector<control::item::Weapon*> rockets = vehicle->weapons().rockets();
+    std::vector<control::Weapon*> rockets = vehicle->weapons().rockets();
     if (rockets.empty()) { //ugly workaround
         return;
     }
-    control::item::Weapon* rocket = meti::rand::get_pointer(rockets);
+    control::Weapon* rocket = meti::rand::get_pointer(rockets);
     if (!rocket) {
         return;
     }

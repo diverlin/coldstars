@@ -28,12 +28,12 @@
 
 namespace core {
 
-core::control::item::Lazer*
+core::control::Lazer*
 LazerItemBuilder::gen()
 {
-    descriptor::item::Lazer* descr = nullptr;
+    descriptor::Lazer* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::LAZER_EQUIPMENT)) {
-        descr = descriptor::item::genLazer();
+        descr = descriptor::genLazer();
     } else {
         descr = core::shortcuts::descriptors()->randLazer();
     }
@@ -41,35 +41,35 @@ LazerItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Lazer*
+core::control::Lazer*
 LazerItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Lazer* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
-    core::control::item::Lazer* lazer = __genTemplate(descr, ob_id);
+    descriptor::Lazer* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
+    core::control::Lazer* lazer = __genTemplate(descr, ob_id);
     __createInternals(lazer, descr);
     return lazer;
 }
 
-core::control::item::Lazer*
-LazerItemBuilder::gen(descriptor::item::Lazer* descr)
+core::control::Lazer*
+LazerItemBuilder::gen(descriptor::Lazer* descr)
 {
-    core::control::item::Lazer* lazer = __genTemplate(descr);
+    core::control::Lazer* lazer = __genTemplate(descr);
     __createInternals(lazer, descr);
     return lazer;
 }
 
-core::control::item::Lazer*
-LazerItemBuilder::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
+core::control::Lazer*
+LazerItemBuilder::__genTemplate(descriptor::Lazer* descriptor, int_t id)
 { 
-    model::item::Lazer* model = new model::item::Lazer(descriptor->id(), id);
+    model::Lazer* model = new model::Lazer(descriptor->id(), id);
     assert(model);
-    core::control::item::Lazer* lazer = new core::control::item::Lazer(descriptor, model);
+    core::control::Lazer* lazer = new core::control::Lazer(descriptor, model);
     assert(lazer);
     return lazer;
 } 
 
 void
-LazerItemBuilder::__createInternals(core::control::item::Lazer* lazer, descriptor::item::Lazer* descr)
+LazerItemBuilder::__createInternals(core::control::Lazer* lazer, descriptor::Lazer* descr)
 {     
     ItemBuilder::_createInternals(lazer, descr);
     EquipmentBuilder::_createInternals(lazer, descr);

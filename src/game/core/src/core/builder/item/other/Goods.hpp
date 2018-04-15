@@ -40,16 +40,16 @@ namespace core {
 class GoodsBuilder : public ItemBuilder
 {
 public:
-    static core::control::item::Goods* gen(descriptor::item::Goods*);
-    static core::control::item::Goods* gen(int_t, int_t object_id = NONE);
-    static core::control::item::Goods* gen();
+    static core::control::Goods* gen(descriptor::Goods*);
+    static core::control::Goods* gen(int_t, int_t object_id = NONE);
+    static core::control::Goods* gen();
 
 private:
     GoodsBuilder() = delete;
     ~GoodsBuilder() = delete;
 
-    static core::control::item::Goods* __genTemplate(descriptor::item::Goods*, int_t object_id = NONE);
-    static void __createInternals(core::control::item::Goods*, descriptor::item::Goods*);
+    static core::control::Goods* __genTemplate(descriptor::Goods*, int_t object_id = NONE);
+    static void __createInternals(core::control::Goods*, descriptor::Goods*);
 }; 
 
 } // namespace builder

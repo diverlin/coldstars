@@ -29,8 +29,8 @@
 namespace test {
 
 TEST(descriptor, clone_lazer) {
-    descriptor::item::Lazer* descr = descriptor::item::genLazer();
-    descriptor::item::Lazer* copy = new descriptor::item::Lazer(descr->data());
+    descriptor::Lazer* descr = descriptor::genLazer();
+    descriptor::Lazer* copy = new descriptor::Lazer(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::LAZER_EQUIPMENT);

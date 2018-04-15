@@ -53,7 +53,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Radar");
+        result.add("descriptor::Radar");
         result.add("radius", m_radius);
         return result;
     }

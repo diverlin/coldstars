@@ -78,7 +78,7 @@ public:
 
 //    void RenderTurrels() const;
 
-    std::vector<control::item::Weapon*> rockets() const;
+    std::vector<control::Weapon*> rockets() const;
 
     std::vector<int> radiusesOfSelectedWeapons() const;
 
@@ -97,7 +97,7 @@ private:
     void __validateTargets();
 
     ItemSlot* __nextSlotReadyToFire() const;
-    std::vector<control::item::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
+    std::vector<control::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
 };
 
 } // namespace complex

@@ -55,7 +55,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Scaner");
+        result.add("descriptor::Scaner");
         result.add("scan", m_scan);
         return result;
     }

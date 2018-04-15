@@ -54,7 +54,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Droid");
+        result.add("descriptor::Droid");
         result.add("repair", m_repair);
         return result;
     }

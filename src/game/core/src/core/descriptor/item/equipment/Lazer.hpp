@@ -53,7 +53,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = Weapon::info();
-        result.add("descriptor::item::Lazer");
+        result.add("descriptor::Lazer");
         return result;
     }
 

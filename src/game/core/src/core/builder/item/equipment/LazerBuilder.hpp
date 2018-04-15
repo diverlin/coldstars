@@ -40,16 +40,16 @@ namespace core {
 class LazerItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Lazer* gen();
-    static core::control::item::Lazer* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Lazer* gen(descriptor::item::Lazer*);
+    static core::control::Lazer* gen();
+    static core::control::Lazer* gen(int_t, int_t ob_id = NONE);
+    static core::control::Lazer* gen(descriptor::Lazer*);
 
 private:
     LazerItemBuilder() = delete;
     ~LazerItemBuilder() = delete;
 
-    static core::control::item::Lazer* __genTemplate(descriptor::item::Lazer*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Lazer*, descriptor::item::Lazer*);
+    static core::control::Lazer* __genTemplate(descriptor::Lazer*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Lazer*, descriptor::Lazer*);
 }; 
 
 } // namespace builder

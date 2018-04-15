@@ -114,16 +114,16 @@ public:
     control::Land* land(int_t id) const;
 
     control::Item* item(int_t) const;
-    control::item::Weapon* weapon(int_t) const;
-    control::item::Scaner* scaner(int_t) const;
-    control::item::Drive* drive(int_t) const;
-    control::item::Bak* bak(int_t) const;
-    control::item::Droid* droid(int_t) const;
-    control::item::Grapple* grapple(int_t) const;
-    control::item::Lazer* lazer(int_t) const;
-    control::item::Protector* protector(int_t) const;
-    control::item::Radar* radar(int_t) const;
-    control::item::Rocket* rocket(int_t) const;
+    control::Weapon* weapon(int_t) const;
+    control::Scaner* scaner(int_t) const;
+    control::Drive* drive(int_t) const;
+    control::Bak* bak(int_t) const;
+    control::Droid* droid(int_t) const;
+    control::Grapple* grapple(int_t) const;
+    control::Lazer* lazer(int_t) const;
+    control::Protector* protector(int_t) const;
+    control::Radar* radar(int_t) const;
+    control::Rocket* rocket(int_t) const;
 
     Player* player() const;
 

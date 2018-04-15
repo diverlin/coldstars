@@ -40,16 +40,16 @@ namespace core {
 class GrappleItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Grapple* gen();
-    static core::control::item::Grapple* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Grapple* gen(descriptor::item::Grapple*);
+    static core::control::Grapple* gen();
+    static core::control::Grapple* gen(int_t, int_t ob_id = NONE);
+    static core::control::Grapple* gen(descriptor::Grapple*);
 
 private:
     GrappleItemBuilder() = delete;
     ~GrappleItemBuilder() = delete;
 
-    static core::control::item::Grapple* __genTemplate(descriptor::item::Grapple*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Grapple*, descriptor::item::Grapple*);
+    static core::control::Grapple* __genTemplate(descriptor::Grapple*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Grapple*, descriptor::Grapple*);
 }; 
 
 } // namespace builder

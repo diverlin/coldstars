@@ -34,7 +34,7 @@ namespace control {
 class Goods : public Item
 {
 public:
-    Goods(descriptor::item::Goods*, model::item::Goods*);
+    Goods(descriptor::Goods*, model::Goods*);
     virtual ~Goods();
 
     void increase(int amount);
@@ -43,8 +43,8 @@ public:
     virtual void updateOwnerAbilities() {}
 
 private:
-    descriptor::item::Goods* m_descriptor_goods = nullptr;
-    model::item::Goods* m_model_goods = nullptr;
+    descriptor::Goods* m_descriptor_goods = nullptr;
+    model::Goods* m_model_goods = nullptr;
 };
 
 } // namespace control

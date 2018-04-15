@@ -23,9 +23,8 @@
 
 namespace core {
 namespace control {
-namespace item {
 
-Goods::Goods(descriptor::item::Goods* descriptor, model::item::Goods* model)
+Goods::Goods(descriptor::Goods* descriptor, model::Goods* model)
     :
       Item(descriptor, model)
     , m_descriptor_goods(descriptor)
@@ -61,7 +60,6 @@ void Goods::decrease(int amount) { m_model_goods->setAmount(m_model_goods->amoun
 //    //info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 //}
  
-} // namespace item
 } // namespace control
 } // namespace core
 

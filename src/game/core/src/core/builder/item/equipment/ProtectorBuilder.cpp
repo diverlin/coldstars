@@ -31,12 +31,12 @@
 
 namespace core {
 
-core::control::item::Protector*
+core::control::Protector*
 ProtectorItemBuilder::gen()
 {
-    descriptor::item::Protector* descr = nullptr;
+    descriptor::Protector* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
-        descr = descriptor::item::genProtector();
+        descr = descriptor::genProtector();
     } else {
         descr = core::shortcuts::descriptors()->randProtector();
     }
@@ -44,45 +44,45 @@ ProtectorItemBuilder::gen()
     return gen(descr);
 } 
 
-std::vector<core::control::item::Protector*>
+std::vector<core::control::Protector*>
 ProtectorItemBuilder::gen(int num)
 {
-    std::vector<core::control::item::Protector*> result;
+    std::vector<core::control::Protector*> result;
     for (int i=0; i<num; ++i) {
         result.push_back(gen());
     }
     return result;
 }
 
-core::control::item::Protector*
+core::control::Protector*
 ProtectorItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
-    core::control::item::Protector* protector = __genTemplate(descr, ob_id);
+    descriptor::Protector* descr = core::shortcuts::descriptors()->protector(descriptor_id);
+    core::control::Protector* protector = __genTemplate(descr, ob_id);
     __createInternals(protector, descr);
     return protector;
 }
 
-core::control::item::Protector*
-ProtectorItemBuilder::gen(descriptor::item::Protector* descr)
+core::control::Protector*
+ProtectorItemBuilder::gen(descriptor::Protector* descr)
 {
-    core::control::item::Protector* protector = __genTemplate(descr);
+    core::control::Protector* protector = __genTemplate(descr);
     __createInternals(protector, descr);
     return protector;
 }
 
-core::control::item::Protector*
-ProtectorItemBuilder::__genTemplate(descriptor::item::Protector* descriptor, int_t id)
+core::control::Protector*
+ProtectorItemBuilder::__genTemplate(descriptor::Protector* descriptor, int_t id)
 {
-    model::item::Protector* model = new model::item::Protector(descriptor->id(), id);
+    model::Protector* model = new model::Protector(descriptor->id(), id);
     assert(model);
-    core::control::item::Protector* protector = new core::control::item::Protector(descriptor, model);
+    core::control::Protector* protector = new core::control::Protector(descriptor, model);
     assert(protector);
     return protector;
 }
 
 void
-ProtectorItemBuilder::__createInternals(core::control::item::Protector* protector, descriptor::item::Protector* descr)
+ProtectorItemBuilder::__createInternals(core::control::Protector* protector, descriptor::Protector* descr)
 {     
     ItemBuilder::_createInternals(protector, descr);
     EquipmentBuilder::_createInternals(protector, descr);

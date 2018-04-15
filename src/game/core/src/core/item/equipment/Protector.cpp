@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Protector::Protector(descriptor::item::Protector* descr, model::item::Protector* model)
+Protector::Protector(descriptor::Protector* descr, model::Protector* model)
     :
       Equipment(descr, model)
     , m_descriptor_protector(descr)

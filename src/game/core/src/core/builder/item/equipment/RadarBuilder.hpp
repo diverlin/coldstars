@@ -40,16 +40,16 @@ namespace core {
 class RadarItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Radar* gen();
-    static core::control::item::Radar* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Radar* gen(descriptor::item::Radar*);
+    static core::control::Radar* gen();
+    static core::control::Radar* gen(int_t, int_t ob_id = NONE);
+    static core::control::Radar* gen(descriptor::Radar*);
 
 private:
     RadarItemBuilder() = delete;
     ~RadarItemBuilder() = delete;
 
-    static core::control::item::Radar* __genTemplate(descriptor::item::Radar*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Radar*, descriptor::item::Radar*);
+    static core::control::Radar* __genTemplate(descriptor::Radar*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Radar*, descriptor::Radar*);
 }; 
 
 } // namespace builder
