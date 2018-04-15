@@ -23,7 +23,7 @@
 
 class Bomb;
 
-namespace descriptor {
+namespace core {
 class BaseOLD;
 }
 
@@ -31,13 +31,13 @@ class BombBuilder
 {
 public:
     static Bomb* gen();
-    static Bomb* gen(descriptor::BaseOLD*);
+//    static Bomb* gen(/*core::BaseOLD**/);
 
 private:
     BombBuilder() = default;
     ~BombBuilder() = default;
 
-    static void __createInternals(Bomb*, descriptor::BaseOLD*);
+    static void __createInternals(Bomb*, core::BaseOLD*);
 }; 
 
 

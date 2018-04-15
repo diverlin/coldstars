@@ -36,9 +36,9 @@ namespace core {
 core::control::Angar*
 AngarBuilder::gen()
 {
-    descriptor::AngarDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ANGAR)) {
-        descr = descriptor::genAngar();
+    core::AngarDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::ANGAR)) {
+        descr = core::genAngar();
     } else {
         descr = core::shortcuts::descriptors()->randAngar();
     }
@@ -46,7 +46,7 @@ AngarBuilder::gen()
 } 
 
 core::control::Angar*
-AngarBuilder::gen(descriptor::AngarDescr* descr)
+AngarBuilder::gen(core::AngarDescr* descr)
 {
     core::control::Angar* angar = __createTemplate(descr);
     __createInternals(angar);
@@ -54,7 +54,7 @@ AngarBuilder::gen(descriptor::AngarDescr* descr)
 }
 
 core::control::Angar*
-AngarBuilder::__createTemplate(descriptor::AngarDescr* descr)
+AngarBuilder::__createTemplate(core::AngarDescr* descr)
 {
     model::Angar* model = new model::Angar(descr->id());
     assert(model);

@@ -29,9 +29,9 @@
 //TEST(base,perfomance1)
 //{
 //    clock_t begin = std::clock();
-//    descriptor::Hit hit1(1, 2, 33);
+//    Hit hit1(1, 2, 33);
 //    for (int i=0; i<interation_num; ++i) {
-//        descriptor::Hit hit2(hit1.data());
+//        Hit hit2(hit1.data());
 //        hit2.owner() == hit1.owner();
 //        hit2.target() == hit1.target();
 //        hit2.damage() == hit1.damage();
@@ -46,9 +46,9 @@
 //TEST(base,perfomance2)
 //{
 //    clock_t begin = std::clock();
-//    descriptor::Hit hit1(1, 2, 33);
+//    Hit hit1(1, 2, 33);
 //    for (int i=0; i<interation_num; ++i) {
-//        descriptor::Hit hit2(hit1.data());
+//        Hit hit2(hit1.data());
 //        hit2.owner() == hit1.owner();
 //        hit2.target() == hit1.target();
 //        hit2.damage() == hit1.damage();

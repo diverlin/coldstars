@@ -20,7 +20,7 @@
 
 #include <sstream>
 
-namespace descriptor {
+namespace core {
 
 //Mesh::Mesh(int_t type)
 //    :

@@ -30,7 +30,7 @@
 
 #include <vector>
 
-namespace descriptor {
+namespace core {
 class BaseDescr;
 } // namespace descriptor
 

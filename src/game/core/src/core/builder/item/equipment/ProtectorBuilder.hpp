@@ -26,7 +26,7 @@
 #include <vector>
 #include <string>
 
-namespace descriptor {
+namespace core {
 class ProtectorDescr;
 } // namespace descriptor
 
@@ -44,14 +44,14 @@ public:
     static core::control::Protector* gen();
     static std::vector<core::control::Protector*> gen(int);
     static core::control::Protector* gen(int_t, int_t ob_id = NONE);
-    static core::control::Protector* gen(descriptor::ProtectorDescr*);
+    static core::control::Protector* gen(core::ProtectorDescr*);
 
 private:
     ProtectorItemBuilder() = delete;
     ~ProtectorItemBuilder() = delete;
 
-    static core::control::Protector* __genTemplate(descriptor::ProtectorDescr*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Protector*, descriptor::ProtectorDescr*);
+    static core::control::Protector* __genTemplate(core::ProtectorDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Protector*, core::ProtectorDescr*);
 }; 
 
 } // namespace core

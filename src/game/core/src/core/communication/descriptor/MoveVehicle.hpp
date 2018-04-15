@@ -27,7 +27,7 @@
 #include <boost/archive/text_iarchive.hpp>
 
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 class MoveVehicleComDescr : public ObjectDescr {
@@ -42,7 +42,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "descriptor::comm::MoveVehicle:\n";
+        result += "comm::MoveVehicle:\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }

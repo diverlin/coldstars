@@ -20,7 +20,7 @@
 
 #include "Land.hpp"
 
-namespace descriptor {
+namespace core {
 class KosmoportDescr;
 } // namespace descriptor
 
@@ -39,7 +39,7 @@ class Goverment;
 class Kosmoport : public Land
 {
 public:
-    Kosmoport(descriptor::KosmoportDescr*, model::Kosmoport*);
+    Kosmoport(KosmoportDescr*, model::Kosmoport*);
     virtual ~Kosmoport();
 
     Angar* angar() const { return m_angar; }
@@ -66,7 +66,7 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    descriptor::KosmoportDescr* descriptor() const { return m_descriptor_kosmoport; }
+    KosmoportDescr* descriptor() const { return m_descriptor_kosmoport; }
     model::Kosmoport* model() const { return m_model_kosmoport; }
 
 private:
@@ -75,7 +75,7 @@ private:
     Shop* m_shop = nullptr;
     Goverment* m_goverment = nullptr;
 
-    descriptor::KosmoportDescr* m_descriptor_kosmoport = nullptr;
+    KosmoportDescr* m_descriptor_kosmoport = nullptr;
     model::Kosmoport* m_model_kosmoport = nullptr;
 
     virtual void putChildrenToGarbage() const;

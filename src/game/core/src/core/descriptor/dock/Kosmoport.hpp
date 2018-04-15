@@ -22,7 +22,7 @@
 
 #include <core/type/RaceType.hpp>
 
-namespace descriptor {
+namespace core {
 
 class KosmoportDescr : public LandDescr
 {

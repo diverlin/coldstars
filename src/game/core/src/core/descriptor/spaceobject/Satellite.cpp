@@ -20,11 +20,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 SatelliteDescr::SatelliteDescr()
 {
-    setType(descriptor::Type::SATELLITE);
+    setType(core::Type::SATELLITE);
     setObType(entity::Type::SATELLITE);
     setObGroup(entity::Type::VEHICLE);
 }

@@ -24,7 +24,7 @@
 #include <core/spaceobject/Vehicle.hpp>
 #include <core/part/orbit.hpp>
 
-namespace descriptor {
+namespace core {
 class SatelliteDescr;
 } // namespace descriptor
 
@@ -38,7 +38,7 @@ namespace control {
 class Satellite : public Vehicle
 {
 public:
-    Satellite(descriptor::SatelliteDescr*, model::Satellite*);
+    Satellite(SatelliteDescr*, model::Satellite*);
     virtual ~Satellite();
 
     void BindParent(const SpaceObject* const);
@@ -48,11 +48,11 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&);
 
-    descriptor::SatelliteDescr* descriptor() const { return m_descriptor_satellite; }
+    SatelliteDescr* descriptor() const { return m_descriptor_satellite; }
     model::Satellite* model() const { return m_model_satellite; }
 
 private:
-    descriptor::SatelliteDescr* m_descriptor_satellite = nullptr;
+    SatelliteDescr* m_descriptor_satellite = nullptr;
     model::Satellite* m_model_satellite = nullptr;
 
     Orbit m_Orbit;

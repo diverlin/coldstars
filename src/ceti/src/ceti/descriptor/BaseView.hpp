@@ -39,7 +39,7 @@
 //    void setMesh(int_t mesh) { m_mesh = mesh; }
 
 //    std::string info() const {
-//        std::string result = "ceti::descriptor::BaseView:\n";
+//        std::string result = "ceti::BaseView:\n";
 //        result += std::string(" texture = ") + std::to_string(m_texture) + "\n";
 //        result += std::string(" mesh = ") + std::to_string(m_mesh) + "\n";
 //        return result;

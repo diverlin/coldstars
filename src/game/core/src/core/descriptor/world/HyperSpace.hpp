@@ -20,7 +20,7 @@
 
 #include <core/descriptor/Base.hpp>
 
-namespace descriptor {
+namespace core {
 
 struct HyperSpaceDescr : public BaseDescr
 {
@@ -32,7 +32,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
-        result.add("descriptor::HyperSpace");
+        result.add("HyperSpace");
         return result;
     }
 

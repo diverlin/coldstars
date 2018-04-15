@@ -75,7 +75,7 @@ namespace control {
 class Planetoid : public SpaceObject
 {
 public:
-    Planetoid(descriptor::PlanetoidDescr*, model::Planetoid*);
+    Planetoid(PlanetoidDescr*, model::Planetoid*);
     virtual ~Planetoid();
 
     void calibrateOrbit(float offset_radius = 0);
@@ -94,10 +94,10 @@ protected:
 private:
     Orbit m_orbit;
 
-    descriptor::PlanetoidDescr* m_descriptor_planetoid = nullptr;
+    PlanetoidDescr* m_descriptor_planetoid = nullptr;
     model::Planetoid* m_model_planetoid = nullptr;
 
-    descriptor::PlanetoidDescr* descriptor() const { return m_descriptor_planetoid; }
+    PlanetoidDescr* descriptor() const { return m_descriptor_planetoid; }
     model::Planetoid* model() const { return m_model_planetoid; }
 
     void __createOrbit();
@@ -136,7 +136,7 @@ private:
 //    void ResolveData();
 
 //private:
-//    descriptor::Planet m_planet_descriptor;
+//    Planet m_planet_descriptor;
 //    Orbit m_orbit;
 
 //    void __createOrbit();

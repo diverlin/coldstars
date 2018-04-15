@@ -26,7 +26,7 @@
 
 #include <meti/VectorUtils.hpp>
 
-namespace descriptor {
+namespace core {
 
 struct OrientationDescr : public BaseDescr
 {
@@ -36,7 +36,7 @@ public:
 
     ceti::InfoTable info() const {
         ceti::InfoTable result = BaseDescr::info();
-        result.add("descriptor::Orientation");
+        result.add("Orientation");
         result.add("size", m_size);
         result.add("direction", m_direction);
         return result;

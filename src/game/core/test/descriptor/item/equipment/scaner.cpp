@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_scaner) {
-    descriptor::ScanerDescr* descr = descriptor::genScaner();
-    descriptor::ScanerDescr* copy = new descriptor::ScanerDescr(descr->data());
+TEST(core, clone_scaner) {
+    core::ScanerDescr* descr = core::genScaner();
+    core::ScanerDescr* copy = new core::ScanerDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::SCANER_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::SCANER_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::SCANER_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::SCANER_SLOT);

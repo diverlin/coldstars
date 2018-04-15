@@ -20,7 +20,7 @@
 
 #include <core/spaceobject/SpaceObject.hpp>
 
-namespace descriptor {
+namespace core {
 
 class BulletDescr : public SpaceObjectDescr {
 
@@ -41,7 +41,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = SpaceObjectDescr::info();
-        result.add("descriptor::Bullet");
+        result.add("Bullet");
         result.add("speedMin", m_speedMin);
         result.add("speedMax", m_speedMax);
         result.add("deltaSpeed", m_deltaSpeed);

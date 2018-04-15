@@ -28,7 +28,7 @@ namespace utils {
 
 jeti::Mesh*
 createMeshByDescriptorId(int_t id) {
-    ceti::descriptor::Mesh* descriptor = core::shortcuts::descriptors()->meshes()->get(id);
+    ceti::MeshDescr* descriptor = core::shortcuts::descriptors()->meshes()->get(id);
     assert(descriptor);
     jeti::Mesh* mesh = new jeti::Mesh(descriptor);
     assert(mesh);
@@ -37,7 +37,7 @@ createMeshByDescriptorId(int_t id) {
 
 jeti::Mesh*
 createMeshByDescriptorType(mesh::Type type) {
-    ceti::descriptor::Mesh* descriptor = core::shortcuts::descriptors()->meshes()->random(int(type));
+    ceti::MeshDescr* descriptor = core::shortcuts::descriptors()->meshes()->random(int(type));
     assert(descriptor);
     jeti::Mesh* mesh = new jeti::Mesh(descriptor);
     assert(mesh);
@@ -48,7 +48,7 @@ createMeshByDescriptorType(mesh::Type type) {
 jeti::control::Material*
 createMaterialFromDescriptorId(int_t id) {
     assert(id != NONE);
-    ceti::descriptor::Material* descriptor = core::shortcuts::descriptors()->materials()->get(id);
+    ceti::MaterialDescr* descriptor = core::shortcuts::descriptors()->materials()->get(id);
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);
@@ -59,7 +59,7 @@ createMaterialFromDescriptorId(int_t id) {
 jeti::control::Material*
 createMaterialByDescriptorType(texture::Type type) {
     //assert(type != texture::Type::NONE);
-    ceti::descriptor::Material* descriptor = core::shortcuts::descriptors()->materials()->random(int(type));
+    ceti::MaterialDescr* descriptor = core::shortcuts::descriptors()->materials()->random(int(type));
     assert(descriptor);
     jeti::model::Material* model = new jeti::model::Material(descriptor);
     jeti::control::Material* material = new jeti::control::Material(model);

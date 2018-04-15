@@ -22,7 +22,7 @@
 
 #include <ceti/Pack.hpp>
 
-namespace descriptor {
+namespace core {
 
 class AngarDescr : public RoomDescr {
 public:

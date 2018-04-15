@@ -36,9 +36,9 @@ namespace core {
 core::control::Galaxy*
 GalaxyBuilder::gen()
 {
-    descriptor::GalaxyDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GALAXY)) {
-        descr = descriptor::genGalaxy({0});
+    core::GalaxyDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::GALAXY)) {
+        descr = core::genGalaxy({0});
     } else {
         descr = core::shortcuts::descriptors()->randGalaxy();
     }
@@ -48,14 +48,14 @@ GalaxyBuilder::gen()
 core::control::Galaxy*
 GalaxyBuilder::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::GalaxyDescr* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
+    GalaxyDescr* descriptor = core::shortcuts::descriptors()->galaxy(descriptor_id);
     core::control::Galaxy* sector = __genTemplate(descriptor, object_id);
     __createInternals(sector, descriptor);
     return sector;
 }
 
 core::control::Galaxy*
-GalaxyBuilder::gen(descriptor::GalaxyDescr* descriptor)
+GalaxyBuilder::gen(GalaxyDescr* descriptor)
 {
     core::control::Galaxy* galaxy = __genTemplate(descriptor);
     __createInternals(galaxy, descriptor);
@@ -63,7 +63,7 @@ GalaxyBuilder::gen(descriptor::GalaxyDescr* descriptor)
 } 
 
 core::control::Galaxy*
-GalaxyBuilder::__genTemplate(descriptor::GalaxyDescr* descriptor, int_t object_id)
+GalaxyBuilder::__genTemplate(GalaxyDescr* descriptor, int_t object_id)
 {
     model::Galaxy* model = new model::Galaxy(descriptor->id(), object_id);
     assert(model);
@@ -74,7 +74,7 @@ GalaxyBuilder::__genTemplate(descriptor::GalaxyDescr* descriptor, int_t object_i
     return galaxy;
 }
 
-void GalaxyBuilder::__createInternals(core::control::Galaxy* galaxy, descriptor::GalaxyDescr* descr)
+void GalaxyBuilder::__createInternals(core::control::Galaxy* galaxy, core::GalaxyDescr* descr)
 {
      // see composer, all logic there
 }

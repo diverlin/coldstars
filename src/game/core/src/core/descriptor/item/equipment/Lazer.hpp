@@ -20,7 +20,7 @@
 
 #include "Weapon.hpp"
 
-namespace descriptor {
+namespace core {
 
 class LazerDescr : public WeaponDescr
 {
@@ -53,7 +53,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = WeaponDescr::info();
-        result.add("descriptor::Lazer");
+        result.add("Lazer");
         return result;
     }
 

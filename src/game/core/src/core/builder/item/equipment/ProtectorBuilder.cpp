@@ -34,9 +34,9 @@ namespace core {
 core::control::Protector*
 ProtectorItemBuilder::gen()
 {
-    descriptor::ProtectorDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::PROTECTOR_EQUIPMENT)) {
-        descr = descriptor::genProtector();
+    core::ProtectorDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::PROTECTOR_EQUIPMENT)) {
+        descr = core::genProtector();
     } else {
         descr = core::shortcuts::descriptors()->randProtector();
     }
@@ -57,14 +57,14 @@ ProtectorItemBuilder::gen(int num)
 core::control::Protector*
 ProtectorItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::ProtectorDescr* descr = core::shortcuts::descriptors()->protector(descriptor_id);
+    core::ProtectorDescr* descr = core::shortcuts::descriptors()->protector(descriptor_id);
     core::control::Protector* protector = __genTemplate(descr, ob_id);
     __createInternals(protector, descr);
     return protector;
 }
 
 core::control::Protector*
-ProtectorItemBuilder::gen(descriptor::ProtectorDescr* descr)
+ProtectorItemBuilder::gen(core::ProtectorDescr* descr)
 {
     core::control::Protector* protector = __genTemplate(descr);
     __createInternals(protector, descr);
@@ -72,7 +72,7 @@ ProtectorItemBuilder::gen(descriptor::ProtectorDescr* descr)
 }
 
 core::control::Protector*
-ProtectorItemBuilder::__genTemplate(descriptor::ProtectorDescr* descriptor, int_t id)
+ProtectorItemBuilder::__genTemplate(ProtectorDescr* descriptor, int_t id)
 {
     model::Protector* model = new model::Protector(descriptor->id(), id);
     assert(model);
@@ -82,7 +82,7 @@ ProtectorItemBuilder::__genTemplate(descriptor::ProtectorDescr* descriptor, int_
 }
 
 void
-ProtectorItemBuilder::__createInternals(core::control::Protector* protector, descriptor::ProtectorDescr* descr)
+ProtectorItemBuilder::__createInternals(core::control::Protector* protector, core::ProtectorDescr* descr)
 {     
     ItemBuilder::_createInternals(protector, descr);
     EquipmentBuilder::_createInternals(protector, descr);

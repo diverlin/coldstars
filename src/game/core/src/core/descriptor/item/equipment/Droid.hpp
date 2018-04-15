@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 
 class DroidDescr : public EquipmentDescr
 {
@@ -53,8 +53,8 @@ public:
     int repair() const { return m_repair; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Droid");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Droid");
         result.add("repair", m_repair);
         return result;
     }

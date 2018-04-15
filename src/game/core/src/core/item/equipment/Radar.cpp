@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Radar::Radar(descriptor::RadarDescr* descr, model::Radar* model)
+Radar::Radar(RadarDescr* descr, model::Radar* model)
     :
       Equipment(descr, model)
     , m_descriptor_radar(descr)

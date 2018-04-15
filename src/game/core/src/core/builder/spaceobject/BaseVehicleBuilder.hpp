@@ -37,7 +37,7 @@ class VehicleBuilder
 public:
     static void equip(core::control::Vehicle*);
 
-    static void equip(Vehicle* vehicle, descriptor::VehicleDescr* descriptor);
+    static void equip(Vehicle* vehicle, core::VehicleDescr* core);
     static void equip(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
     static void equipModules(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);
     static void equipArtefacts(Vehicle*, tech::Type tech_leve = tech::Type::LEVEL0);

@@ -21,7 +21,7 @@
 #include <vector>
 #include <string>
 
-namespace descriptor {
+namespace core {
 
 enum class Type {
     NONE=0,

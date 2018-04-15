@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 AddPositionalComDescr::AddPositionalComDescr(int_t object, int_t parent, const meti::vec3& position)

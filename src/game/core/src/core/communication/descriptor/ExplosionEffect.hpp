@@ -26,9 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
-namespace comm {
-namespace effect {
+namespace core {
 
 class ExplosionEffectComDescr
 {
@@ -42,7 +40,7 @@ public:
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::effect::Explosion:\n";
+        std::string result = "comm::effect::Explosion:\n";
         result += std::string(" size = ") + std::to_string(m_size) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
@@ -61,8 +59,6 @@ private:
     }
 };
 
-} // namespace effect
-} // namespace comm
 } // namespace descriptor
 
 

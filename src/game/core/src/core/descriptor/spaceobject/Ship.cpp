@@ -20,11 +20,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 ShipDescr::ShipDescr()
 {
-    setType(descriptor::Type::SHIP);
+    setType(core::Type::SHIP);
     setObType(entity::Type::SHIP);
     setObGroup(entity::Type::VEHICLE);
 }

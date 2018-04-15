@@ -21,7 +21,7 @@
 
 #include <sstream>
 
-namespace descriptor {
+namespace core {
 
 MaterialDescr::MaterialDescr(int_t type)
 {

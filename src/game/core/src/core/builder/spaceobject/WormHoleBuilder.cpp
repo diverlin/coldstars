@@ -29,7 +29,7 @@
 namespace core {
 
 core::control::WormHole*
-WormHoleBuilder::__genTemplate(descriptor::WormHoleDescr* descr)
+WormHoleBuilder::__genTemplate(core::WormHoleDescr* descr)
 {
     model::WormHole* model = new model::WormHole(descr->id());
     assert(model);
@@ -47,9 +47,9 @@ WormHoleBuilder::__genTemplate(descriptor::WormHoleDescr* descr)
 core::control::WormHole*
 WormHoleBuilder::gen()
 {
-    descriptor::WormHoleDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::WORMHOLE)) {
-        descr = descriptor::genWormHole();
+    core::WormHoleDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::WORMHOLE)) {
+        descr = core::genWormHole();
     } else {
         descr = core::shortcuts::descriptors()->randWormHole();
     }
@@ -58,7 +58,7 @@ WormHoleBuilder::gen()
 } 
 
 core::control::WormHole*
-WormHoleBuilder::gen(descriptor::WormHoleDescr* descr)
+WormHoleBuilder::gen(core::WormHoleDescr* descr)
 {
     core::control::WormHole* wormhole = __genTemplate(descr);
     return wormhole;

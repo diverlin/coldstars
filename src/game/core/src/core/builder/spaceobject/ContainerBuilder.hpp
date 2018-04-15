@@ -23,7 +23,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 class ContainerDescr;
 } // namespace descriptor
 
@@ -42,7 +42,7 @@ class ContainerBuilder
 public:
     static core::control::Container* gen();
 //    static model::Container* gen(const std::string& data);
-    static core::control::Container* gen(descriptor::ContainerDescr*);
+    static core::control::Container* gen(core::ContainerDescr*);
     static core::control::Container* gen(int_t, int_t);
     static core::control::Container* gen(int_t, int_t, int_t);
     //        Container* create(jeti::control::TextureOb*, BaseItem*) const;
@@ -53,8 +53,8 @@ private:
     ContainerBuilder() = default;
     ~ContainerBuilder() = default;
 
-    static core::control::Container* __genTemplate(descriptor::ContainerDescr*, int_t obId = NONE);
-    static void __createInternals(core::control::Container*, descriptor::ContainerDescr*);
+    static core::control::Container* __genTemplate(core::ContainerDescr*, int_t obId = NONE);
+    static void __createInternals(core::control::Container*, core::ContainerDescr*);
     //        void createInternals(Container*, jeti::control::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

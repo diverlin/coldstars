@@ -20,7 +20,7 @@
 
 #include "Planetoid.hpp"
 
-namespace descriptor {
+namespace core {
 
 class PlanetDescr : public PlanetoidDescr
 {
@@ -43,7 +43,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidDescr::info();
-        result.add("descriptor::Planet");
+        result.add("Planet");
         return result;
     }
 

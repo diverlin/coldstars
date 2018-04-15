@@ -27,19 +27,18 @@
 #include <string>
 
 namespace ceti {
-namespace descriptor {
 
-class Mesh : public Base
+class MeshDescr : public BaseDescr
 {
 public:
-    Mesh()=default;
+    MeshDescr()=default;
 
 //    Mesh(int_t type,
 //         const std::string& path,
 //         const std::string& materialPath = "",
 //         const meti::vec3& orientation = DEFAULT_DIRECTION);
 
-    ~Mesh()=default;
+    ~MeshDescr()=default;
 
     void setModelPath(const std::string& model_path) { m_modelPath = model_path; }
     void setMaterialPath(const std::string& material_path) { m_materialPath = material_path; }
@@ -58,12 +57,11 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
         ar & m_modelPath;
         ar & m_materialPath;
         ar & m_orientation;
     }
 };
 
-} // namespace descriptor
 } // namespace ceti

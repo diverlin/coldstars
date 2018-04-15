@@ -22,11 +22,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 NatureLandDescr::NatureLandDescr()
 {
-    setType(descriptor::Type::NATURELAND);
+    setType(core::Type::NATURELAND);
     setObType(entity::Type::NATURELAND);
     setPlace(place::Type::NATURELAND);
 }

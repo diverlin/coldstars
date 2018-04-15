@@ -33,9 +33,9 @@ namespace core {
 core::control::Shop*
 ShopBuilder::gen()
 {
-    descriptor::ShopDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHOP)) {
-        descr = descriptor::genShop();
+    core::ShopDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::SHOP)) {
+        descr = core::genShop();
     } else {
         descr = core::shortcuts::descriptors()->randShop();
     }
@@ -43,7 +43,7 @@ ShopBuilder::gen()
 }
 
 core::control::Shop*
-ShopBuilder::gen(descriptor::ShopDescr* descr)
+ShopBuilder::gen(core::ShopDescr* descr)
 {
     core::control::Shop* shop = __createTemplate(descr);
     __createInternals(shop);
@@ -52,7 +52,7 @@ ShopBuilder::gen(descriptor::ShopDescr* descr)
 }
 
 core::control::Shop*
-ShopBuilder::__createTemplate(descriptor::ShopDescr* descr)
+ShopBuilder::__createTemplate(core::ShopDescr* descr)
 {
     model::Shop* model = new model::Shop(descr->id());
     assert(model);

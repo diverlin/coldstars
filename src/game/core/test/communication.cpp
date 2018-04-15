@@ -57,8 +57,8 @@ TEST(communication, create_starsystem)
     assert(false);
 //    int_t ob_id = core::manager::Entity::get().genId();
 
-//    descriptor::StarSystem* descriptor = descriptor::genStarSystem();
-//    descriptor::comm::Create create(ob_id, descriptor->id());
+//    StarSystem* descriptor = genStarSystem();
+//    comm::Create create(ob_id, descriptor->id());
 
 //    core::global::get().TelegramHub().add(core::comm::Telegram(telegram::Type::CREATE_STARSYSTEM, creation.data()));
 
@@ -71,8 +71,8 @@ TEST(communication, create_ship)
     assert(false);
 //    int_t ob_id = core::manager::Entity::get().genId();
 
-//    descriptor::Ship* descriptor = descriptor::genShip();
-//    descriptor::comm::Create create(ob_id, descriptor->id());
+//    Ship* descriptor = genShip();
+//    comm::Create create(ob_id, descriptor->id());
 
 //    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_SHIP, creation.data()));
 
@@ -85,8 +85,8 @@ TEST(communication, create_bak)
     assert(false);
 //    int_t ob_id = core::manager::Entity::get().genId();
 
-//    descriptor::Bak* descriptor = descriptor::genBak();
-//    descriptor::comm::Create create(ob_id, descriptor->id());
+//    Bak* descriptor = genBak();
+//    comm::Create create(ob_id, descriptor->id());
 
 //    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_BAK, creation.data()));
 
@@ -101,7 +101,7 @@ TEST(communication, inject_ship)
 
 //Bomb* getNewBomb(int damage, int radius)
 //{
-//    descriptor::Base* descriptor = descriptor::Manager::get().getRand(descriptor::Type::BOMB);
+//    Base* descriptor = Manager::get().getRand(Type::BOMB);
 //    core::global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
 //    Bomb* bomb = static_cast<Bomb*>(manager::EntityManager::get().get(descriptor.id()));
@@ -111,7 +111,7 @@ TEST(communication, inject_ship)
 
 //Container* getNewContainer(const id_type& child_id)
 //{
-//    auto descriptor = descriptor::Container(child_id);
+//    auto descriptor = Container(child_id);
 //   core::global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
 //    Container* container = static_cast<Container*>(manager::EntityManager::get().get(descriptor.id()));

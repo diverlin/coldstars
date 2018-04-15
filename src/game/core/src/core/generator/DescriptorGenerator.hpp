@@ -25,7 +25,7 @@
 
 #include <vector>
 
-namespace descriptor {
+namespace core {
 
 class GalaxyDescr;
 class SectorDescr;
@@ -68,24 +68,24 @@ class GoodsDescr;
 class TurrelDescr;
 
 /* world */
-descriptor::GalaxyDescr* genGalaxy(const std::vector<int_t>&);
-descriptor::SectorDescr* genSector(const std::vector<int_t>&);
-descriptor::StarSystemDescr* genStarSystem(race::Type race = race::Type::NONE);
-descriptor::HyperSpaceDescr* genHyperSpace();
+core::GalaxyDescr* genGalaxy(const std::vector<int_t>&);
+core::SectorDescr* genSector(const std::vector<int_t>&);
+core::StarSystemDescr* genStarSystem(race::Type race = race::Type::NONE);
+core::HyperSpaceDescr* genHyperSpace();
 
 /* spaceobjects */
-descriptor::StarDescr* genStar();
-descriptor::PlanetDescr* genPlanet();
-descriptor::WormHoleDescr* genWormHole();
-descriptor::AsteroidDescr* genAsteroid();
+core::StarDescr* genStar();
+core::PlanetDescr* genPlanet();
+core::WormHoleDescr* genWormHole();
+core::AsteroidDescr* genAsteroid();
 
-descriptor::NpcDescr* genNpc();
-descriptor::ShipDescr* genShip();
-descriptor::SpaceStationDescr* genSpaceStation();
-descriptor::SatelliteDescr* genSatellite();
+core::NpcDescr* genNpc();
+core::ShipDescr* genShip();
+core::SpaceStationDescr* genSpaceStation();
+core::SatelliteDescr* genSatellite();
 
-descriptor::ContainerDescr* genContainer();
-descriptor::BulletDescr* genBullet();
+core::ContainerDescr* genContainer();
+core::BulletDescr* genBullet();
 
 // dock
 KosmoportDescr* genKosmoport(race::Type race = race::Type::NONE);

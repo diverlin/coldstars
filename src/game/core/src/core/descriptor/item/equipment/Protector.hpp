@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 
 class ProtectorDescr : public EquipmentDescr
 {
@@ -52,8 +52,8 @@ public:
     int protection() const { return m_protection; }
 
     ceti::InfoTable info() const {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Protector");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Protector");
         result.add("protection", m_protection);
         return result;
     }

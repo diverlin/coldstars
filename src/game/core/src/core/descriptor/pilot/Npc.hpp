@@ -20,7 +20,7 @@
 
 #include <core/descriptor/Base.hpp>
 
-namespace descriptor {
+namespace core {
 
 class NpcDescr : public BaseDescr {
 

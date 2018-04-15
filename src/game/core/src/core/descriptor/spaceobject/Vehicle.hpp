@@ -25,7 +25,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 
-namespace descriptor {
+namespace core {
 
 class VehicleDescr : public SpaceObjectDescr
 {
@@ -91,7 +91,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = SpaceObjectDescr::info();
-        result.add("descriptor::Vehicle");
+        result.add("Vehicle");
         result.add("space", m_space);
         result.add("protection", m_protection);
 #ifdef USE_EXTRA_EQUIPMENT

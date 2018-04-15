@@ -30,7 +30,7 @@
 namespace core {
 namespace control {    
 
-Room::Room(descriptor::RoomDescr* descr, model::Room* model)
+Room::Room(RoomDescr* descr, model::Room* model)
     :
       Base(descr, model)
     , m_descriptor_room(descr)

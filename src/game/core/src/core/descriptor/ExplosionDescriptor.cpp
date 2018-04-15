@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-namespace descriptor {
+namespace core {
 
 ExplosionDescr::ExplosionDescr(int_t starsystem_id, const glm::vec3& center, int damage, int radius)
     :

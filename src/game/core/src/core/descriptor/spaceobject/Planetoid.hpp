@@ -20,7 +20,7 @@
 
 #include "SpaceObject.hpp"
 
-namespace descriptor {
+namespace core {
 
 struct PlanetoidDescr : public SpaceObjectDescr
 {

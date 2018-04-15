@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_drive) {
-    descriptor::DriveDescr* descr = descriptor::genDrive();
-    descriptor::DriveDescr* copy = new descriptor::DriveDescr(descr->data());
+TEST(core, clone_drive) {
+    core::DriveDescr* descr = core::genDrive();
+    core::DriveDescr* copy = new core::DriveDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::DRIVE_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::DRIVE_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::DRIVE_SLOT);

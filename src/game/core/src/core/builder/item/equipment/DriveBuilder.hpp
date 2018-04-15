@@ -25,7 +25,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 class DriveDescr;
 } // namespace descriptor
 
@@ -42,14 +42,14 @@ class DriveItemBuilder : public EquipmentBuilder
 public:
     static core::control::Drive* gen();
     static core::control::Drive* gen(int_t, int_t ob_id = NONE);
-    static core::control::Drive* gen(descriptor::DriveDescr*);
+    static core::control::Drive* gen(core::DriveDescr*);
 
 private:
     DriveItemBuilder() = delete;
     ~DriveItemBuilder() = delete;
 
-    static core::control::Drive* __genTemplate(descriptor::DriveDescr*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Drive*, descriptor::DriveDescr*);
+    static core::control::Drive* __genTemplate(core::DriveDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Drive*, core::DriveDescr*);
 }; 
 
 } // namespace core

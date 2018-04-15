@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class GalaxyDescr;
 } // namespace descriptor
 
@@ -38,14 +38,14 @@ class GalaxyBuilder
 public:
     static core::control::Galaxy* gen();
     static core::control::Galaxy* gen(int_t, int_t object = NONE);
-    static core::control::Galaxy* gen(descriptor::GalaxyDescr*);
+    static core::control::Galaxy* gen(core::GalaxyDescr*);
 
 private:
     GalaxyBuilder() = delete;
     ~GalaxyBuilder() = delete;
 
-    static void __createInternals(core::control::Galaxy*, descriptor::GalaxyDescr*);
-    static core::control::Galaxy* __genTemplate(descriptor::GalaxyDescr*, int_t object = NONE);
+    static void __createInternals(core::control::Galaxy*, core::GalaxyDescr*);
+    static core::control::Galaxy* __genTemplate(core::GalaxyDescr*, int_t object = NONE);
 }; 
 
 } // namespace core

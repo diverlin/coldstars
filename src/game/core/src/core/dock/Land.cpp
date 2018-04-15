@@ -32,7 +32,7 @@
 namespace core {
 namespace control {
 
-Land::Land(descriptor::LandDescr* descr, model::Land* model)
+Land::Land(LandDescr* descr, model::Land* model)
     :
       Base(descr, model)
     , m_descriptor_land(descr)

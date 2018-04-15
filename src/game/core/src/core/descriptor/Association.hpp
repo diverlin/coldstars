@@ -23,7 +23,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 
 class AssociationDescr {
 public:

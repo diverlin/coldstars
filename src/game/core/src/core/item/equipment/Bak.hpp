@@ -21,7 +21,7 @@
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 class BakDescr;
 } // namespace descriptor
 
@@ -35,14 +35,14 @@ namespace control {
 class Bak : public Equipment
 {
 public:
-    Bak(descriptor::BakDescr*, model::Bak*);
+    Bak(BakDescr*, model::Bak*);
     virtual ~Bak() = default;
 
     void increaseFuel(int fuel);
     int fuelMiss() const;
 
 public:
-    descriptor::BakDescr* descriptor() const { return m_descriptor_bak; }
+    BakDescr* descriptor() const { return m_descriptor_bak; }
     model::Bak* model() const { return m_model_bak; }
 
 private:
@@ -52,7 +52,7 @@ private:
     int m_fuelMax_add = 0;
     int m_fuelMax = 0;
 
-    descriptor::BakDescr* m_descriptor_bak = nullptr;
+    BakDescr* m_descriptor_bak = nullptr;
     model::Bak* m_model_bak = nullptr;
 
     void virtual addUniqueInfo();

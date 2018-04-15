@@ -11,11 +11,8 @@
 
 
 namespace ceti {
-namespace descriptor {
-class Mesh;
-} // namespace descriptor
+class MeshDescr;
 } // namespace ceti
-
 
 namespace jeti {
 
@@ -29,7 +26,7 @@ public:
 
     Mesh(bool circle = false);
     Mesh(const std::string&);
-    Mesh(ceti::descriptor::Mesh*);
+    Mesh(ceti::MeshDescr*);
     ~Mesh();
 
     int_t id() const { return m_id; }

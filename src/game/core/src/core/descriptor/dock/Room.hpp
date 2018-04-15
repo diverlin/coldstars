@@ -21,7 +21,7 @@
 
 #include <core/descriptor/Base.hpp>
 
-namespace descriptor {
+namespace core {
 
 class RoomDescr : public BaseDescr {
 public:

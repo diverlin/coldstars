@@ -108,7 +108,7 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 
 // player
 void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const {
-//    descriptor::comm::CreatePlayer data(telegram.data());
+//    comm::CreatePlayer data(telegram.data());
 
 //    client::Player* player = new client::Player(data.player());
 //    control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
@@ -117,7 +117,7 @@ void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const 
 }
 
 void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
-    descriptor::comm::effect::ExplosionEffectComDescr descriptor(telegram.data());
+    core::ExplosionEffectComDescr descriptor(telegram.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::shortcuts::view()->add(explosion, descriptor.position());
 }

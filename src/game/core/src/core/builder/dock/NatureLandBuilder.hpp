@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class NatureLandDescr;
 } // namespace descriptor
 
@@ -37,13 +37,13 @@ class NatureLandBuilder
 {
 public:
     static core::control::NatureLand* gen();
-    static core::control::NatureLand* gen(descriptor::NatureLandDescr*);
+    static core::control::NatureLand* gen(core::NatureLandDescr*);
 
 private:
     NatureLandBuilder() = delete;
     ~NatureLandBuilder() = delete;
 
-    static core::control::NatureLand* __createTemplate(descriptor::NatureLandDescr*);
+    static core::control::NatureLand* __createTemplate(core::NatureLandDescr*);
     static void __createInternals(core::control::NatureLand*);
 }; 
 

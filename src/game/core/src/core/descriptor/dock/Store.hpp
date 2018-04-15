@@ -21,7 +21,7 @@
 
 #include "Room.hpp"
 
-namespace descriptor {
+namespace core {
 
 class StoreDescr : public RoomDescr
 {

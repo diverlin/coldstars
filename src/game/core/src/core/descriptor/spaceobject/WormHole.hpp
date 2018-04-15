@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Planetoid.hpp>
 
-namespace descriptor {
+namespace core {
 
 class WormHoleDescr : public PlanetoidDescr {
 public:

@@ -20,7 +20,7 @@
 
 #include <builder/item/ItemBuilder.hpp>
 
-namespace descriptor {
+namespace core {
 class EquipmentDescr;
 } // namespace descriptor
 
@@ -35,7 +35,7 @@ namespace core {
 class EquipmentBuilder : public ItemBuilder
 {
 protected:
-    static void _createInternals(core::control::Equipment*, descriptor::EquipmentDescr*);
+    static void _createInternals(core::control::Equipment*, core::EquipmentDescr*);
 
 private:
     EquipmentBuilder() = delete;

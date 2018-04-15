@@ -40,7 +40,7 @@ class Vehicle;
 class Planet : public Planetoid
 {
 public:
-    Planet(descriptor::PlanetDescr*, model::Planet*);
+    Planet(PlanetDescr*, model::Planet*);
     virtual ~Planet();
 
     void bindLand(Land*);
@@ -55,11 +55,11 @@ public:
     void updateInSpace(int);
     void updateInSpaceInStatic();
 
-    descriptor::PlanetDescr* descriptor() const { return m_descriptor_planet; }
+    PlanetDescr* descriptor() const { return m_descriptor_planet; }
     model::Planet* model() const { return m_model_planet; }
 
 private:
-    descriptor::PlanetDescr* m_descriptor_planet = nullptr;
+    PlanetDescr* m_descriptor_planet = nullptr;
     model::Planet* m_model_planet = nullptr;
 
     Land* m_land = nullptr;

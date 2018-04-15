@@ -22,7 +22,7 @@
 
 #include <core/descriptor/Base.hpp>
 
-namespace descriptor {
+namespace core {
 
 class LandDescr : public BaseDescr
 {

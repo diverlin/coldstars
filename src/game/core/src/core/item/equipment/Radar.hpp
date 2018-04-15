@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 class RadarDescr;
 } // namespace descriptor
 
@@ -36,17 +36,17 @@ namespace control {
 class Radar : public Equipment
 {
 public:
-    Radar(descriptor::RadarDescr*, model::Radar*);
+    Radar(RadarDescr*, model::Radar*);
     virtual ~Radar() = default;
 
     virtual void updateProperties();
 
 public:
-    descriptor::RadarDescr* descriptor() const { return m_descriptor_radar; }
+    RadarDescr* descriptor() const { return m_descriptor_radar; }
     model::Radar* model() const { return m_model_radar; }
 
 private:
-    descriptor::RadarDescr* m_descriptor_radar = nullptr;
+    RadarDescr* m_descriptor_radar = nullptr;
     model::Radar* m_model_radar = nullptr;
 
     int m_radius_add = 0;

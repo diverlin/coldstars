@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 class DriveDescr;
 } // namespace descriptor
 
@@ -35,13 +35,13 @@ namespace control {
 class Drive : public Equipment
 {
 public:
-    Drive(descriptor::DriveDescr*, model::Drive*);
+    Drive(DriveDescr*, model::Drive*);
     virtual ~Drive() = default;
 
     int speed() const;
 
 public:
-    descriptor::DriveDescr* descriptor() const { return m_descriptor_drive; }
+    DriveDescr* descriptor() const { return m_descriptor_drive; }
     model::Drive* model() const { return m_model_drive; }
 
 private:
@@ -51,7 +51,7 @@ private:
     int m_speed_add = 0;
     int m_hyper_add = 0;
 
-    descriptor::DriveDescr* m_descriptor_drive = nullptr;
+    DriveDescr* m_descriptor_drive = nullptr;
     model::Drive* m_model_drive = nullptr;
 
     void virtual addUniqueInfo();

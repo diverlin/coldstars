@@ -34,7 +34,7 @@
 
 class GoodsPack;
 
-namespace descriptor {
+namespace core {
 class VehicleDescr;
 } // namespace descriptor
 
@@ -121,7 +121,7 @@ public:
     };
 
 public:
-    Vehicle(descriptor::VehicleDescr*, model::Vehicle*);
+    Vehicle(VehicleDescr*, model::Vehicle*);
     ~Vehicle() override;
 
     bool canRadarObject(SpaceObject* ob) const;
@@ -155,7 +155,7 @@ public:
 
     void setLand(Land* land);
 
-    void setKorpusData(descriptor::VehicleDescr*);
+    void setKorpusData(VehicleDescr*);
 
     bool godMode() const { return m_godMode; }
     Land* land() const { return m_Land; }
@@ -166,7 +166,7 @@ public:
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
 
-    descriptor::VehicleDescr* descriptor() const { return m_descriptor_vehicle; }
+    VehicleDescr* descriptor() const { return m_descriptor_vehicle; }
     model::Vehicle* model() const { return m_model_vehicle; }
 
     virtual int givenExpirience() const override final;
@@ -302,7 +302,7 @@ private:
     ceti::pack<control::Item*> __items() const;
 
 protected:
-    descriptor::VehicleDescr* m_descriptor_vehicle = nullptr;
+    VehicleDescr* m_descriptor_vehicle = nullptr;
     model::Vehicle* m_model_vehicle = nullptr;
 
     ItemSlot* _freeArtefactSlot() const;
@@ -369,7 +369,7 @@ private:
     bool _checkInstallEquipment(const core::Id&);
 
     std::vector<ItemSlot*> __equipedAndFunctionalSlots(const std::vector<ItemSlot*>&);
-    void __createSlots(descriptor::VehicleDescr*);
+    void __createSlots(VehicleDescr*);
 
     bool __manage(Item*);
     bool __insertItem(ItemSlot*, Item*);
@@ -438,7 +438,7 @@ private:
 
 //    void setLand(Land* land) { m_Land = land; }
 
-//    void setKorpusData(descriptor::Vehicle*);
+//    void setKorpusData(Vehicle*);
 
 //    bool godMode() const { return m_godMode; }
 //    Land* const land() const { return m_Land; }
@@ -448,7 +448,7 @@ private:
 
 //    const VehiclePropetries& properties() const { return m_properties; }
 //    const VehicleNeeds& needs() const { return m_needs; }
-//    descriptor::Vehicle* vehicleDescriptor() const { return m_vehicleDescriptor; }
+//    Vehicle* vehicleDescriptor() const { return m_vehicleDescriptor; }
 
 //    virtual int givenExpirience() const override final;
 //    bool isSlotTypePresent(const entity::Type&) const;
@@ -630,7 +630,7 @@ private:
 
 //    VehiclePropetries m_properties;
 //    VehicleNeeds m_needs;
-//    descriptor::Vehicle m_vehicleDescriptor;
+//    Vehicle m_vehicleDescriptor;
 
 //    [[deprecated("use predetermentistic way")]]
 ////    void __dropRandomItemToSpace();

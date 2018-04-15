@@ -46,7 +46,7 @@ Mesh::Mesh(const std::string& obj_path)
     __validate();
 }
 
-Mesh::Mesh(ceti::descriptor::Mesh* descriptor)
+Mesh::Mesh(ceti::MeshDescr* descriptor)
     :
       m_originDirection(descriptor->orientation())
 {     

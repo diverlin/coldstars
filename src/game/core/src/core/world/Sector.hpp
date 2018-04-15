@@ -39,7 +39,7 @@ class StarSystem;
 class Sector : public Base
 {
 public:
-    Sector(descriptor::SectorDescr*, model::Sector*);
+    Sector(SectorDescr*, model::Sector*);
     ~Sector();
 
     void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
@@ -55,11 +55,11 @@ public:
 
     void update(int);
 
-    descriptor::SectorDescr* descriptor() const { return m_descriptor_sector; }
+    SectorDescr* descriptor() const { return m_descriptor_sector; }
     model::Sector* model() const { return m_model_sector; }
 
 private:
-    descriptor::SectorDescr* m_descriptor_sector = nullptr;
+    SectorDescr* m_descriptor_sector = nullptr;
     model::Sector* m_model_sector = nullptr;
 
     Galaxy* m_galaxy = nullptr;

@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_protector) {
-    descriptor::ProtectorDescr* descr = descriptor::genProtector();
-    descriptor::ProtectorDescr* copy = new descriptor::ProtectorDescr(descr->data());
+TEST(core, clone_protector) {
+    core::ProtectorDescr* descr = core::genProtector();
+    core::ProtectorDescr* copy = new core::ProtectorDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::PROTECTOR_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::PROTECTOR_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::PROTECTOR_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::PROTECTOR_SLOT);

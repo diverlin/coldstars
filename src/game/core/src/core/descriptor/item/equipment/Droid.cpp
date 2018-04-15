@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int DroidDescr::REPAIR_MIN = 1;
 const int DroidDescr::REPAIR_MAX = 15;
@@ -39,7 +39,7 @@ const float DroidDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 DroidDescr::DroidDescr()
 {
-    setType(descriptor::Type::DROID_EQUIPMENT);
+    setType(core::Type::DROID_EQUIPMENT);
     setObType(entity::Type::DROID_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::DROID);

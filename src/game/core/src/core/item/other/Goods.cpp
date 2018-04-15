@@ -24,7 +24,7 @@
 namespace core {
 namespace control {
 
-Goods::Goods(descriptor::GoodsDescr* descriptor, model::Goods* model)
+Goods::Goods(GoodsDescr* descriptor, model::Goods* model)
     :
       Item(descriptor, model)
     , m_descriptor_goods(descriptor)

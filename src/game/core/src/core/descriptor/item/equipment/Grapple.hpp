@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 
 class GrappleDescr : public EquipmentDescr
 {
@@ -67,8 +67,8 @@ public:
     int speed() const { return m_speed; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Grapple");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Grapple");
         result.add("strength", m_strength);
         result.add("radius", m_radius);
         result.add("speed", m_speed);

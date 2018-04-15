@@ -8,7 +8,7 @@
 
 #include <glm/glm.hpp>
 
-namespace descriptor {
+namespace core {
 
 class ExplosionDescr {
 public:
@@ -23,7 +23,7 @@ public:
     std::string data() const;
 
     std::string info() const {
-        std::string result = "descriptor::Explosion:\n";
+        std::string result = "Explosion:\n";
         result += std::string(" starsystem = ") + std::to_string(starsystem) + "\n";
         result += std::string(" center = ") + ceti::to_string(center) + "\n";
         result += std::string(" damage = ") + std::to_string(damage) + "\n";

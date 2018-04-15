@@ -20,7 +20,7 @@
 
 #include <core/descriptor/spaceobject/OrientationDescriptor.hpp>
 
-namespace descriptor {
+namespace core {
 
 struct TurrelDescr : public OrientationDescr
 {

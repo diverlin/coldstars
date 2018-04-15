@@ -18,11 +18,11 @@
 
 #include "GalaxyDescriptor.hpp"
 
-namespace descriptor {
+namespace core {
 
 GalaxyDescr::GalaxyDescr()
 {
-    setType(descriptor::Type::GALAXY);
+    setType(core::Type::GALAXY);
     setObType(entity::Type::GALAXY);
 }
 

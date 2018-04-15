@@ -21,7 +21,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 GovermentDescr::GovermentDescr()
 {

@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int GrappleDescr::STRENGTH_MIN = 6;
 const int GrappleDescr::STRENGTH_MAX = 50;
@@ -51,7 +51,7 @@ const float GrappleDescr::MODULES_NUM_WEIGHT = 0.1f;
 
 GrappleDescr::GrappleDescr()
 {
-    setType(descriptor::Type::GRAPPLE_EQUIPMENT);
+    setType(core::Type::GRAPPLE_EQUIPMENT);
     setObType(entity::Type::GRAPPLE_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::GRAPPLE);

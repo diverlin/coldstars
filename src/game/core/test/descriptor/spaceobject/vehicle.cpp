@@ -23,7 +23,7 @@
 
 namespace test {
 
-void testVehicleEquality(descriptor::VehicleDescr* descr, descriptor::VehicleDescr* copy)
+void testVehicleEquality(core::VehicleDescr* descr, core::VehicleDescr* copy)
 {
     EXPECT_EQ(descr->race(), copy->race());
     EXPECT_EQ(descr->turrelPoints(), copy->turrelPoints());

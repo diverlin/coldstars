@@ -28,16 +28,16 @@
 namespace test {
 
 namespace {
-void testSatelliteEquality(descriptor::SatelliteDescr* descr, descriptor::SatelliteDescr* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SATELLITE);
+void testSatelliteEquality(core::SatelliteDescr* descr, core::SatelliteDescr* copy) {
+    EXPECT_EQ(descr->type(), core::Type::SATELLITE);
     EXPECT_EQ(descr->obType(), entity::Type::SATELLITE);
     EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
 }
 } // namespace
 
-TEST(descriptor, clone_satellite) {
-    descriptor::SatelliteDescr* descr = descriptor::genSatellite();
-    descriptor::SatelliteDescr* copy = new descriptor::SatelliteDescr(descr->data());
+TEST(core, clone_satellite) {
+    core::SatelliteDescr* descr = core::genSatellite();
+    core::SatelliteDescr* copy = new core::SatelliteDescr(descr->data());
 
     testSatelliteEquality(descr, copy);
     testVehicleEquality(descr, copy);

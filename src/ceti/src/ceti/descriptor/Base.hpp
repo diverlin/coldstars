@@ -25,13 +25,12 @@
 #include <string>
 
 namespace ceti {
-namespace descriptor {
 
-class Base
+class BaseDescr
 {
 public:
-    Base() = default;
-    ~Base() = default;
+    BaseDescr() = default;
+    ~BaseDescr() = default;
 
     int_t id() const { return m_id; }
     int_t type() const { return m_type; }
@@ -56,5 +55,4 @@ private:
     }
 };
 
-} // namespace descriptor
 } // namespace ceti

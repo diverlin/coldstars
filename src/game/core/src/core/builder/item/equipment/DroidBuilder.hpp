@@ -25,7 +25,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 class DroidDescr;
 } // namespace descriptor
 
@@ -42,14 +42,14 @@ class DroidItemBuilder : public EquipmentBuilder
 public:
     static core::control::Droid* gen();
     static core::control::Droid* gen(int_t, int_t ob_id = NONE);
-    static core::control::Droid* gen(descriptor::DroidDescr*);
+    static core::control::Droid* gen(core::DroidDescr*);
 
 private:
     DroidItemBuilder() = delete;
     ~DroidItemBuilder() = delete;
 
-    static core::control::Droid* __genTemplate(descriptor::DroidDescr*, int ob_id = NONE);
-    static void __createInternals(core::control::Droid*, descriptor::DroidDescr*);
+    static core::control::Droid* __genTemplate(core::DroidDescr*, int ob_id = NONE);
+    static void __createInternals(core::control::Droid*, core::DroidDescr*);
 }; 
 
 } // namespace core

@@ -23,7 +23,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace descriptor {
+namespace core {
 
 const int RadarDescr::RADIUS_MIN = 700;
 const int RadarDescr::RADIUS_MAX = 1500;
@@ -42,7 +42,7 @@ const float RadarDescr::MODULES_NUM_WEIGHT = 0.4;
 
 RadarDescr::RadarDescr()
 {
-    setType(descriptor::Type::RADAR_EQUIPMENT);
+    setType(core::Type::RADAR_EQUIPMENT);
     setObType(entity::Type::RADAR_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::RADAR);

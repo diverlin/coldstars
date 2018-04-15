@@ -31,7 +31,7 @@ namespace {
 void init()
 {
     assert(false);
-//    descriptor::Manager::generate();
+//    Manager::generate();
 }
 
 void compareEquipment(model::Equipment* model, model::Equipment* copy)

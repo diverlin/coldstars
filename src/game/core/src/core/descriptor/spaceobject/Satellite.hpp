@@ -26,7 +26,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 
 class SatelliteDescr : public VehicleDescr {
 public:

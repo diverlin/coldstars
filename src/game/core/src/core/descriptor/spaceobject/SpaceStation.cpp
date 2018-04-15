@@ -20,11 +20,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 SpaceStationDescr::SpaceStationDescr()
 {
-    setType(descriptor::Type::SPACESTATION);
+    setType(core::Type::SPACESTATION);
     setObType(entity::Type::SPACESTATION);
     setObGroup(entity::Type::VEHICLE);
 }

@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int ProtectorDescr::PROTECTION_MIN = 3;
 const int ProtectorDescr::PROTECTION_MAX = 30;
@@ -41,7 +41,7 @@ const float ProtectorDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 ProtectorDescr::ProtectorDescr()
 {
-    setType(descriptor::Type::PROTECTOR_EQUIPMENT);
+    setType(core::Type::PROTECTOR_EQUIPMENT);
     setObType(entity::Type::PROTECTOR_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::PROTECTOR);

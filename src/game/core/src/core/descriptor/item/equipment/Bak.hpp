@@ -21,7 +21,7 @@
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 
 class BakDescr : public EquipmentDescr
 {
@@ -52,8 +52,8 @@ public:
     int fuel() const { return m_fuel; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Bak");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Bak");
         result.add("fuel", m_fuel);
         return result;
     }

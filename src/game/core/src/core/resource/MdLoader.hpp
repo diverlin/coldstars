@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-namespace descriptor {
+namespace core {
 class MeshDescr;
 class MaterialDescr;
 }
@@ -28,7 +28,7 @@ public:
     InfoLoader()=default;
     ~InfoLoader()=default;
 
-    static void read(const std::string&, descriptor::MeshDescr*);
-    static void read(const std::string&, descriptor::MaterialDescr*);
+    static void read(const std::string&, core::MeshDescr*);
+    static void read(const std::string&, core::MaterialDescr*);
 };
 

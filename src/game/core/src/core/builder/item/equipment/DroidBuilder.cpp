@@ -32,9 +32,9 @@ namespace core {
 core::control::Droid*
 DroidItemBuilder::gen()
 {
-    descriptor::DroidDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::DROID_EQUIPMENT)) {
-        descr = descriptor::genDroid();
+    core::DroidDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::DROID_EQUIPMENT)) {
+        descr = core::genDroid();
     } else {
         descr = core::shortcuts::descriptors()->randDroid();
     }
@@ -45,14 +45,14 @@ DroidItemBuilder::gen()
 core::control::Droid*
 DroidItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::DroidDescr* descr = core::shortcuts::descriptors()->droid(descriptor_id);
+    core::DroidDescr* descr = core::shortcuts::descriptors()->droid(descriptor_id);
     core::control::Droid* droid = __genTemplate(descr, ob_id);
     __createInternals(droid, descr);
     return droid;
 }
 
 core::control::Droid*
-DroidItemBuilder::gen(descriptor::DroidDescr* descr)
+DroidItemBuilder::gen(core::DroidDescr* descr)
 {
     core::control::Droid* droid = __genTemplate(descr);
     __createInternals(droid, descr);
@@ -60,7 +60,7 @@ DroidItemBuilder::gen(descriptor::DroidDescr* descr)
 }  
 
 core::control::Droid*
-DroidItemBuilder::__genTemplate(descriptor::DroidDescr* descriptor, int id)
+DroidItemBuilder::__genTemplate(DroidDescr* descriptor, int id)
 {
     model::Droid* model = new model::Droid(descriptor->id(), id);
     assert(model);
@@ -69,7 +69,7 @@ DroidItemBuilder::__genTemplate(descriptor::DroidDescr* descriptor, int id)
     return droid;
 }
 
-void DroidItemBuilder::__createInternals(core::control::Droid* droid, descriptor::DroidDescr* descr)
+void DroidItemBuilder::__createInternals(core::control::Droid* droid, core::DroidDescr* descr)
 {     
     ItemBuilder::_createInternals(droid, descr);
     EquipmentBuilder::_createInternals(droid, descr);

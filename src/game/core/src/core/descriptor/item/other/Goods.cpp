@@ -23,11 +23,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 GoodsDescr::GoodsDescr()
 {
-    setType(descriptor::Type::GOODS);
+    setType(core::Type::GOODS);
     setObType(entity::Type::GOODS);
 }
 

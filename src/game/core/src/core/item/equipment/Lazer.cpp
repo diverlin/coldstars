@@ -33,7 +33,7 @@
 namespace core {
 namespace control {
 
-Lazer::Lazer(descriptor::LazerDescr* descr, model::Lazer* model)
+Lazer::Lazer(LazerDescr* descr, model::Lazer* model)
     :
       Weapon(descr, model)
     , m_descriptor_lazer(descr)

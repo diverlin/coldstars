@@ -18,11 +18,11 @@
 
 #include "WormHole.hpp"
 
-namespace descriptor {
+namespace core {
 
 WormHoleDescr::WormHoleDescr()
 {
-    setType(descriptor::Type::WORMHOLE);
+    setType(core::Type::WORMHOLE);
 }
 
 WormHoleDescr::WormHoleDescr(const std::string& data)

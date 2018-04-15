@@ -20,7 +20,7 @@
 
 #include <core/Base.hpp>
 
-namespace descriptor {
+namespace core {
 class ItemDescr;
 } // namespace descriptor
 
@@ -37,10 +37,10 @@ namespace control {
 class Item : public Base
 {
 public:
-    Item(descriptor::ItemDescr*, model::Item*);
+    Item(ItemDescr*, model::Item*);
     virtual ~Item() = default;
 
-    descriptor::ItemDescr* descriptor() const { return m_descriptor_item; }
+    ItemDescr* descriptor() const { return m_descriptor_item; }
     model::Item* model() const { return m_model_item; }
     ItemSlot* slot() const { return m_slot; }
 
@@ -66,7 +66,7 @@ protected:
     void _updateLock();
 
 private:
-    descriptor::ItemDescr* m_descriptor_item = nullptr;
+    ItemDescr* m_descriptor_item = nullptr;
     model::Item* m_model_item = nullptr;
 
     ItemSlot* m_slot = nullptr;

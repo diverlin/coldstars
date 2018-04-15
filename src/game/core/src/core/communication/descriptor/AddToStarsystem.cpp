@@ -2,7 +2,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 AddToStarsystemComDescr::AddToStarsystemComDescr(int_t object,

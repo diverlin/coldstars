@@ -21,16 +21,14 @@
 #include <string>
 
 namespace ceti {
-namespace descriptor {
 
-
-struct Id {
-    Id(int c, const std::string& n)
+struct IdDescr {
+    IdDescr(int c, const std::string& n)
         :
           code(c)
         , name(n)
     {}
-    Id(const Id& id)
+    IdDescr(const IdDescr& id)
         :
           code(id.code)
         , name(id.name)
@@ -39,6 +37,4 @@ struct Id {
     std::string name = "";
 };
 
-
-} // namespace descriptor
 } // namespace ceti

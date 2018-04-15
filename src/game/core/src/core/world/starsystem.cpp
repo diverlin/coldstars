@@ -63,7 +63,7 @@ core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 namespace core {
 namespace control {
 
-StarSystem::StarSystem(descriptor::StarSystemDescr* descr, model::StarSystem* model)
+StarSystem::StarSystem(StarSystemDescr* descr, model::StarSystem* model)
     :
       Base(descr, model)
     , m_descriptor_starsystem(descr)

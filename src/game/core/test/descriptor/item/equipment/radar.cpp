@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_radar) {
-    descriptor::RadarDescr* descr = descriptor::genRadar();
-    descriptor::RadarDescr* copy = new descriptor::RadarDescr(descr->data());
+TEST(core, clone_radar) {
+    core::RadarDescr* descr = core::genRadar();
+    core::RadarDescr* copy = new core::RadarDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::RADAR_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::RADAR_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::RADAR_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::RADAR_SLOT);

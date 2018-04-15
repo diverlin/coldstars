@@ -17,12 +17,12 @@
 */
 
 
-namespace descriptor {
+namespace core {
 class VehicleDescr;
 } // namespace descriptor
 
 namespace test {
 
-void testVehicleEquality(descriptor::VehicleDescr* descr, descriptor::VehicleDescr* copy);
+void testVehicleEquality(core::VehicleDescr* descr, core::VehicleDescr* copy);
 
 } // namespace test

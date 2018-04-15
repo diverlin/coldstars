@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 
 class DriveDescr : public EquipmentDescr
 {
@@ -63,8 +63,8 @@ public:
     int hyper() const { return m_hyper; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Drive");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Drive");
         result.add("speed", m_speed);
         result.add("hyper", m_hyper);
         return result;

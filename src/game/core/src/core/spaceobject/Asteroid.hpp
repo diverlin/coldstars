@@ -33,7 +33,7 @@ namespace control {
 class Asteroid : public Planetoid
 {
 public:
-    Asteroid(descriptor::AsteroidDescr*, model::Asteroid*);
+    Asteroid(AsteroidDescr*, model::Asteroid*);
     virtual ~Asteroid();
 
     int damage() const { return mass()*10; }
@@ -41,13 +41,13 @@ public:
     void updateInSpace(int);
     void collisionEvent();
 
-    descriptor::AsteroidDescr* descriptor() const { return m_descriptor_asteroid; }
+    AsteroidDescr* descriptor() const { return m_descriptor_asteroid; }
     model::Asteroid* model() const { return m_model_asteroid; }
 
 private:
     void _postDeathUniqueEvent(bool);
 
-    descriptor::AsteroidDescr* m_descriptor_asteroid = nullptr;
+    AsteroidDescr* m_descriptor_asteroid = nullptr;
     model::Asteroid* m_model_asteroid = nullptr;
 };
 

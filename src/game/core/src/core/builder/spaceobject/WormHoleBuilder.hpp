@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class WormHoleDescr;
 } // namespace descriptor
 
@@ -40,11 +40,11 @@ public:
     ~WormHoleBuilder() = default;
 
     static core::control::WormHole* gen();
-    static core::control::WormHole* gen(descriptor::WormHoleDescr*);
+    static core::control::WormHole* gen(core::WormHoleDescr*);
 
 private:
     static void __createInternals(core::control::WormHole*);
-    static core::control::WormHole* __genTemplate(descriptor::WormHoleDescr*);
+    static core::control::WormHole* __genTemplate(core::WormHoleDescr*);
 };
 
 } // namespace core

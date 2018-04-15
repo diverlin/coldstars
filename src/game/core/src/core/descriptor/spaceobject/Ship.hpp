@@ -24,7 +24,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
+namespace core {
 
 class ShipDescr : public VehicleDescr {
 public:    
@@ -35,7 +35,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = VehicleDescr::info();
-        result.add("descriptor::Ship");
+        result.add("Ship");
         return result;
     }
 

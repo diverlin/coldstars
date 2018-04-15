@@ -20,7 +20,7 @@
 
 #include "OrientationDescriptor.hpp"
 
-namespace descriptor {
+namespace core {
 
 struct SpaceObjectDescr : public OrientationDescr
 {
@@ -30,7 +30,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = OrientationDescr::info();
-        result.add("descriptor::SpaceObject");
+        result.add("SpaceObject");
         result.add("armor", m_armor);
         return result;
     }

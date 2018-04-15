@@ -20,10 +20,10 @@
 
 #include <gtest/gtest.h>
 
-TEST(descriptor, clone_hit)
+TEST(core, clone_hit)
 {
-    descriptor::comm::HitComDescr descr(11, 22, 33);
-    descriptor::comm::HitComDescr copy(descr.data());
+    core::comm::HitComDescr descr(11, 22, 33);
+    core::comm::HitComDescr copy(descr.data());
 
     EXPECT_EQ(11, copy.owner());
     EXPECT_EQ(22, copy.target());

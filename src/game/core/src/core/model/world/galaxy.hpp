@@ -27,7 +27,7 @@
 
 #include <boost/serialization/vector.hpp>
 
-namespace descriptor {
+namespace core {
 class GalaxyDescr;
 } // namespace descriptor
 

@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Vehicle.hpp>
 
-namespace descriptor {
+namespace core {
 class ShipDescr;
 } // namespace descriptor
 
@@ -35,7 +35,7 @@ namespace control {
 class Ship : public Vehicle
 {
 public:
-    Ship(descriptor::ShipDescr*, model::Ship*);
+    Ship(ShipDescr*, model::Ship*);
     ~Ship() override final;
 
     virtual void update(int time=1) override final;
@@ -45,11 +45,11 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
     //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
 
-    descriptor::ShipDescr* descriptor() const { return m_descriptor_ship; }
+    ShipDescr* descriptor() const { return m_descriptor_ship; }
     model::Ship* model() const { return m_model_ship; }
 
 private:
-    descriptor::ShipDescr* m_descriptor_ship = nullptr;
+    ShipDescr* m_descriptor_ship = nullptr;
     model::Ship* m_model_ship = nullptr;
 };
 

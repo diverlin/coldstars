@@ -75,9 +75,9 @@
 
 #include <ctime>
 
-TEST(descriptor, accessors)
+TEST(core, accessors)
 {
-    descriptor::comm::HitComDescr descriptor(22, 33, 44);
+    core::comm::HitComDescr descriptor(22, 33, 44);
     EXPECT_EQ(descriptor.owner(), 22);
     EXPECT_EQ(descriptor.target(), 33);
     EXPECT_EQ(descriptor.damage(), 44);
@@ -91,9 +91,9 @@ TEST(base, hit)
     core::control::Ship* ship2 = core::ShipBuilder::gen();
 
     assert(false);
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     //messageHub.runLoop();
 
@@ -108,7 +108,7 @@ TEST(base, critical_hit)
 //    control::Ship* ship1 = builder::Ship::gen();
 //    control::Ship* ship2 = builder::Ship::gen();
 
-//    messageHub.add(core::comm::Telegram(core::comm::Telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+//    messageHub.add(core::comm::Telegram(core::comm::Telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
 
 //    //messageManager.runLoop();
 
@@ -129,7 +129,7 @@ TEST(base, bomb)
 
 //    // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, AddToStarsystemDescriptor(starsystem->id(), ship->id(), ship_pos, ship_angle).data()));
 //    // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, AddToStarsystemDescriptor(starsystem->id(), container->id(), ship_pos, ship_angle).data()));
-//    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship->id(), container->id(), container->armor()).data()));
+//    messageManager.add(Message(TELEGRAM::HIT, Hit(ship->id(), container->id(), container->armor()).data()));
 
 //    messageManager.runLoop();
 
@@ -143,22 +143,22 @@ TEST(base, bomb)
     //    EXPECT_TRUE(ship->isDying());
 }
 
-TEST(descriptor, manager)
+TEST(core, manager)
 {
     // TODO fix fail
 //    DescriptorManager& descriptor_manager = core::global::get().descriptorManager();
-//    descriptor::Hit descriptor_hit(1, 2, 3);
-//    descriptor::Base descriptor_starsystem = generateStarSystemDescriptor();
-//    descriptor::Base descriptor_bak = generateBakDescriptor();
+//    Hit descriptor_hit(1, 2, 3);
+//    Base descriptor_starsystem = generateStarSystemDescriptor();
+//    Base descriptor_bak = generateBakDescriptor();
 //    descriptor_manager.add(descriptor_hit);
 //    descriptor_manager.add(descriptor_starsystem);
 //    descriptor_manager.add(descriptor_bak);
 
 //    EXPECT_EQ(descriptor_manager.get(descriptor_hit.id()), descriptor_hit);
 
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::HIT).type(), int(descriptor::Type::HIT));
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::STARSYSTEM).type(), int(descriptor::Type::STARSYSTEM));
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::BAK).type(), int(descriptor::Type::BAK));
+//    EXPECT_EQ(descriptor_manager.getRandom(Type::HIT).type(), int(Type::HIT));
+//    EXPECT_EQ(descriptor_manager.getRandom(Type::STARSYSTEM).type(), int(Type::STARSYSTEM));
+//    EXPECT_EQ(descriptor_manager.getRandom(Type::BAK).type(), int(Type::BAK));
 }
 
 TEST(clone, galaxy)

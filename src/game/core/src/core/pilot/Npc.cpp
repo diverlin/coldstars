@@ -71,7 +71,7 @@ Npc::data() const
 namespace core {
 namespace control {
 
-Npc::Npc(descriptor::NpcDescr* descr, model::Npc* model)
+Npc::Npc(NpcDescr* descr, model::Npc* model)
     :
       Base(descr, model)
     , m_descriptor_npc(descr)

@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 ObjectSubjectComDescr::ObjectSubjectComDescr(int_t object, int_t parent)

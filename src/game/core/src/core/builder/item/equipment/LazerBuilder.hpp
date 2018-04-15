@@ -25,7 +25,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 class LazerDescr;
 } // namespace descriptor
 
@@ -42,14 +42,14 @@ class LazerItemBuilder : public EquipmentBuilder
 public:
     static core::control::Lazer* gen();
     static core::control::Lazer* gen(int_t, int_t ob_id = NONE);
-    static core::control::Lazer* gen(descriptor::LazerDescr*);
+    static core::control::Lazer* gen(core::LazerDescr*);
 
 private:
     LazerItemBuilder() = delete;
     ~LazerItemBuilder() = delete;
 
-    static core::control::Lazer* __genTemplate(descriptor::LazerDescr*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Lazer*, descriptor::LazerDescr*);
+    static core::control::Lazer* __genTemplate(core::LazerDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Lazer*, core::LazerDescr*);
 }; 
 
 } // namespace core

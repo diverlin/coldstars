@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int LazerDescr::RADIUS_MIN = 200;
 const int LazerDescr::RADIUS_MAX = 400;
@@ -46,7 +46,7 @@ const float LazerDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 LazerDescr::LazerDescr()
 {
-    setType(descriptor::Type::LAZER_EQUIPMENT);
+    setType(core::Type::LAZER_EQUIPMENT);
     setObType(entity::Type::LAZER_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::WEAPON);
