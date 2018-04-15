@@ -23,7 +23,7 @@
 
 namespace core {
 class ShipDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Ship;

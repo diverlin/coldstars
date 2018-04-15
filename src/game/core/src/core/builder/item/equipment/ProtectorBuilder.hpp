@@ -28,7 +28,7 @@
 
 namespace core {
 class ProtectorDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

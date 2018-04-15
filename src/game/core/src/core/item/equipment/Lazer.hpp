@@ -22,7 +22,7 @@
 
 namespace core {
 class LazerDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Lazer;

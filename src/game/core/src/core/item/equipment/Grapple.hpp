@@ -23,7 +23,7 @@
 
 namespace core {
 class GrappleDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Grapple;

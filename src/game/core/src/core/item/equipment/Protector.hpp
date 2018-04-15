@@ -23,7 +23,7 @@
 
 namespace core {
 class ProtectorDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Protector;

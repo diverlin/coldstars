@@ -35,4 +35,4 @@ PlanetDescr::PlanetDescr()
     setObType(entity::Type::PLANET);
 }
 
-} // namespace descriptor
+} // namespace core

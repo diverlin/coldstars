@@ -25,7 +25,7 @@
 
 namespace core {
 class ContainerDescr;
-} // namespace descriptor
+} // namespace core
 
 //namespace item {
 //class Base;

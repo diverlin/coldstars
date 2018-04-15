@@ -23,7 +23,7 @@
 
 namespace core {
 class RoomDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Room;

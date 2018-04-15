@@ -105,6 +105,6 @@ enum class Type {
 
 std::string to_string(Type);
 
-} // namespace descriptor
+} // namespace core
 
 

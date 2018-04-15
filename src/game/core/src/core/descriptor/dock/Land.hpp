@@ -46,4 +46,4 @@ private:
     place::Type m_place = place::Type::NONE;
 };
 
-} // namespace descriptor
+} // namespace core

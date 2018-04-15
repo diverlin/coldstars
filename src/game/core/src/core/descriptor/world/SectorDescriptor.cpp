@@ -26,7 +26,7 @@ SectorDescr::SectorDescr()
     setObType(entity::Type::SECTOR);
 }
 
-} // namespace descriptor
+} // namespace core
 
 
 

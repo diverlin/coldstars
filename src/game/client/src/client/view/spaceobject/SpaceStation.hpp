@@ -23,7 +23,7 @@
 namespace core {
 namespace control {
 class SpaceStation;
-} // namespace descriptor
+} // namespace core
 } // namespace core
 
 namespace view {

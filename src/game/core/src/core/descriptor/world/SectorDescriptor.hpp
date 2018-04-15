@@ -43,7 +43,7 @@ public:
     }
 }; 
 
-} // namespace descriptor
+} // namespace core
 
 
 

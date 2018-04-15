@@ -19,7 +19,7 @@
 
 namespace core {
 class VehicleDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace test {
 

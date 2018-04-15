@@ -24,7 +24,7 @@
 
 namespace core {
 class HyperSpaceDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

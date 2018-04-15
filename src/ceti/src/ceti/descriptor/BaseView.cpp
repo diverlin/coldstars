@@ -21,5 +21,5 @@
 namespace ceti {
 namespace descriptor {
 
-} // namespace descriptor
+} // namespace core
 } // namespace ceti

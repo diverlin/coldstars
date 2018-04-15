@@ -18,12 +18,12 @@
 
 namespace core {
 class BaseDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace ceti {
 namespace descriptor {
 class BaseView;
-} // namespace descriptor
+} // namespace core
 } // namespace ceti
 
 namespace  test {

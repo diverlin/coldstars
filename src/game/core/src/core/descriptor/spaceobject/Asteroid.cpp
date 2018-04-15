@@ -35,4 +35,4 @@ AsteroidDescr::AsteroidDescr()
     setObType(entity::Type::ASTEROID);
 }
 
-} // namespace descriptor
+} // namespace core

@@ -27,7 +27,7 @@
 
 namespace core {
 class GrappleDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

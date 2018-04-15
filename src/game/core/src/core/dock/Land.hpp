@@ -25,7 +25,7 @@
 
 namespace core {
 class LandDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Land;

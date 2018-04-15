@@ -23,7 +23,7 @@
 
 namespace core {
 class DroidDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Droid;

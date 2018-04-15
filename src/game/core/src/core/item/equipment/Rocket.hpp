@@ -23,7 +23,7 @@
 
 namespace core {
 class RocketDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Rocket;

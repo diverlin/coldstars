@@ -23,7 +23,7 @@
 
 namespace core {
 class WeaponDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Weapon;

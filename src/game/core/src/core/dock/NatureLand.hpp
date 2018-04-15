@@ -23,7 +23,7 @@
 
 namespace core {
 class NatureLandDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class NatureLand;

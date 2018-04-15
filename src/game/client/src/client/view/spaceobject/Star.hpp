@@ -23,7 +23,7 @@
 namespace core {
 namespace control {
 class Star;
-} // namespace descriptor
+} // namespace core
 } // namespace core
 
 namespace view {

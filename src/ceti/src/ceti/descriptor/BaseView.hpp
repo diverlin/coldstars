@@ -58,5 +58,5 @@
 //    int_t m_mesh = NONE;
 //};
 
-//} // namespace descriptor
+//} // namespace core
 //} // namespace ceti

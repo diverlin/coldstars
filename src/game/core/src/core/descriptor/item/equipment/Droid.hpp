@@ -71,5 +71,5 @@ private:
     }
 };
 
-} // namespace descriptor
+} // namespace core
 

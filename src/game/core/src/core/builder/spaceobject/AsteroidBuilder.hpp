@@ -22,7 +22,7 @@
 
 namespace core {
 class AsteroidDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

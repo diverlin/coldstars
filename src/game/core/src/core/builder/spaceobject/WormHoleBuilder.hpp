@@ -23,7 +23,7 @@
 
 namespace core {
 class WormHoleDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

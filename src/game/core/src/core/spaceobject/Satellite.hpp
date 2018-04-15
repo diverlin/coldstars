@@ -26,7 +26,7 @@
 
 namespace core {
 class SatelliteDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Satellite;

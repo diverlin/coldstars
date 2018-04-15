@@ -23,7 +23,7 @@
 
 namespace core {
 class ScanerDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Scaner;
