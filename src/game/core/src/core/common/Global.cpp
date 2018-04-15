@@ -38,7 +38,7 @@ global& global::get()
 global::global()
     :
       m_god(new God)
-    , m_telegramHub(new comm::TelegramHub)
+    , m_telegramHub(new TelegramHub)
     , m_config(new Config)
 //    , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)

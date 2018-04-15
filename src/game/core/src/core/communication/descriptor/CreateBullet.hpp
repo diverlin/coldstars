@@ -27,7 +27,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
-namespace comm {
 
 class CreateBulletComDescr
 {
@@ -42,7 +41,7 @@ public:
     int_t target() const { return m_target; }
 
     std::string info() const {
-        std::string result = "comm::BulletShoot:\n";
+        std::string result = "BulletShoot:\n";
         result += std::string(" owner = ") + std::to_string(m_owner) + "\n";
         result += std::string(" item = ") + std::to_string(m_item) + "\n";
         result += std::string(" target = ") + std::to_string(m_target) + "\n";
@@ -64,7 +63,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 

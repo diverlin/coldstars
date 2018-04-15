@@ -40,7 +40,7 @@ public:
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = "comm::effect::Explosion:\n";
+        std::string result = "effect::Explosion:\n";
         result += std::string(" size = ") + std::to_string(m_size) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;

@@ -24,10 +24,8 @@
 #include <glm/glm.hpp>
 
 namespace core {
-namespace comm {
 class TelegramHub;
-} // namespace comm
-} // anemspace core
+} // namespace core
 
 namespace client {
 
@@ -40,7 +38,7 @@ private:
     TelegramCreator& operator=(const TelegramCreator&) = delete;
 
 private:
-    core::comm::TelegramHub& m_telegramHub;
+    core::TelegramHub& m_telegramHub;
 
 public:
     static TelegramCreator& get();

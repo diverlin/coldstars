@@ -23,8 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
-
 
 CreatePlayerComDescr::CreatePlayerComDescr(int_t player, int_t npc)
     :
@@ -44,6 +42,5 @@ CreatePlayerComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

@@ -61,7 +61,7 @@ Client::Client(int id):
     m_screen = client::shortcuts::screen();
     m_view = client::shortcuts::view();
 
-    m_telegramHandler = std::shared_ptr<client::comm::TelegramHandler>(new client::comm::TelegramHandler());
+    m_telegramHandler = std::shared_ptr<client::TelegramHandler>(new client::TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 }
 

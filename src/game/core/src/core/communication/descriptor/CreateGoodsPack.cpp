@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
 
 ////////////////////////
 /// \brief CreateGoodsPack::CreateGoodsPack
@@ -49,6 +48,5 @@ CreateGoodsPackComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

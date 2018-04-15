@@ -18,9 +18,8 @@
 #include <memory>
 
 namespace client {
-namespace comm {
 
-void TelegramHandler::_process(const core::comm::Telegram& telegram) const
+void TelegramHandler::_process(const core::Telegram& telegram) const
 {
     LOG_COMM("--client: process telegram="+telegram::to_string(telegram.type()));
 
@@ -107,8 +106,8 @@ void TelegramHandler::_process(const core::comm::Telegram& telegram) const
 }
 
 // player
-void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const {
-//    comm::CreatePlayer data(telegram.data());
+void TelegramHandler::_createPlayer(const core::Telegram& telegram) const {
+//    CreatePlayer data(telegram.data());
 
 //    client::Player* player = new client::Player(data.player());
 //    control::Npc* npc = core::shortcuts::entities()->npc(data.npc());
@@ -116,13 +115,12 @@ void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const 
 //    client::global::get().setPlayer(player);
 }
 
-void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
+void TelegramHandler::_createExplosionEffect(const core::Telegram& telegram) const {
     core::ExplosionEffectComDescr descriptor(telegram.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::shortcuts::view()->add(explosion, descriptor.position());
 }
 
-} // namespace comm
 } // namespace client
 
 

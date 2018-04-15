@@ -26,7 +26,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
-namespace comm {
 
 class CreateComDescr : public ObjectDescr
 {
@@ -41,7 +40,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "comm::Create:\n";
+        result += "Create:\n";
         result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
         return result;
     }
@@ -58,7 +57,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 

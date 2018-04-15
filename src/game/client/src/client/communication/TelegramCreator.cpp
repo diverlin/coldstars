@@ -42,20 +42,20 @@ TelegramCreator::TelegramCreator()
 
 void TelegramCreator::playerRequestMove(int_t player, const glm::vec3& position)
 {
-    core::comm::MoveVehicleComDescr telegram_descriptor(player, position);
-    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
+    core::MoveVehicleComDescr telegram_descriptor(player, position);
+    m_telegramHub.add(core::ClientTelegram(telegram::Type::PLAYER_REQUEST_MOVE, telegram_descriptor.data()));
 }
 
 void TelegramCreator::playerRequestTurnEnd(int_t player)
 {
-    core::comm::ObjectDescr telegram_descriptor(player);
-    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_END_TURN, telegram_descriptor.data()));
+    core::ObjectDescr telegram_descriptor(player);
+    m_telegramHub.add(core::ClientTelegram(telegram::Type::PLAYER_REQUEST_END_TURN, telegram_descriptor.data()));
 }
 
 void TelegramCreator::playerRequestSetSpaceObjectTarget(int_t vehicle_id, int_t target_id)
 {
-    core::comm::ObjectSubjectComDescr telegram_descriptor(vehicle_id, target_id);
-    m_telegramHub.add(core::comm::ClientTelegram(telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT, telegram_descriptor.data()));
+    core::ObjectSubjectComDescr telegram_descriptor(vehicle_id, target_id);
+    m_telegramHub.add(core::ClientTelegram(telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT, telegram_descriptor.data()));
 }
 
 } // namespace client

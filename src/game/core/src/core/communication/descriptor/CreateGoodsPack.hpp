@@ -29,7 +29,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
-namespace comm {
 
 class CreateGoodsPackComDescr : public CreateComDescr
 {
@@ -43,7 +42,7 @@ public:
 
     std::string info() const {
         std::string result = CreateComDescr::info();
-        result += "comm::CreateGoodsPack:\n";
+        result += "CreateGoodsPack:\n";
         result += std::string(" mass = ") + std::to_string(m_mass) + "\n";
         return result;
     }
@@ -60,7 +59,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 

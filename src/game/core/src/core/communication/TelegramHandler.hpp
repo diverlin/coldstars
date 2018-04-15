@@ -4,7 +4,6 @@
 #include <communication/TelegramCreator.hpp>
 
 namespace core {
-namespace comm {
 
 class TelegramHandler : public BTelegramHandler
 {
@@ -27,5 +26,4 @@ private:
     TelegramCreator& m_telegramCreator;
 };
 
-} // namespace comm
 } // namespace core

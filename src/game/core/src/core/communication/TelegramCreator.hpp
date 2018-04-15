@@ -44,9 +44,7 @@ class Container;
 
 class Player;
 
-namespace comm {
 class TelegramHub;
-} // namespace comm
 
 class TelegramCreator
 {
@@ -77,7 +75,7 @@ public:
     void targetingSpaceObject(int_t vehicle_id, int_t target_id) const;
 
 private:
-    core::comm::TelegramHub& m_telegramHub;
+    TelegramHub& m_telegramHub;
 
     void __addSpaceObjectToGarbage(control::SpaceObject*);
     void __removeSpaceObjectFromStarSystem(control::SpaceObject*);

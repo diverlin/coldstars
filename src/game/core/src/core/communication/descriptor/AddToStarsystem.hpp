@@ -12,7 +12,6 @@
 #include <glm/glm.hpp>
 
 namespace core {
-namespace comm {
 
 class AddToStarsystemComDescr : public AddPositionalComDescr {
 public:
@@ -31,7 +30,7 @@ public:
 
     std::string info() const {
         std::string result = AddPositionalComDescr::info();
-        result += "comm::AddToStarsystemDescriptor:\n";
+        result += "AddToStarsystemDescriptor:\n";
         result += std::string(" impulse = ") + ceti::to_string(impulse) + "\n";
         result += std::string(" angle = ") + ceti::to_string(angle) + "\n";
         return result;
@@ -47,5 +46,4 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor

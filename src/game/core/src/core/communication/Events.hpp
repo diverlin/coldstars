@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 
 namespace core {
-namespace comm {
 namespace event {
 
 /** TRANSITION */
@@ -89,5 +88,4 @@ void endTurn();
 void targetSpaceObject(int_t, int_t);
 
 } // namespace event
-} // namespace comm
 } // namespace core

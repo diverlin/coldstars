@@ -26,7 +26,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
-namespace comm {
 
 class DockComDescr : public ObjectDescr
 {
@@ -40,7 +39,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "comm::Dock:\n";
+        result += "Dock:\n";
         result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
         return result;
     }
@@ -57,7 +56,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 

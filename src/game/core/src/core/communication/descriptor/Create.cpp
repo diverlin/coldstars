@@ -23,8 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
-
 
 CreateComDescr::CreateComDescr(int_t descriptor, int_t object)
     :
@@ -44,6 +42,5 @@ CreateComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

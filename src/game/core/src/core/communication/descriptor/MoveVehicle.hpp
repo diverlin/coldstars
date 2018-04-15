@@ -28,7 +28,6 @@
 
 
 namespace core {
-namespace comm {
 
 class MoveVehicleComDescr : public ObjectDescr {
 public:
@@ -42,7 +41,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "comm::MoveVehicle:\n";
+        result += "MoveVehicle:\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
     }
@@ -60,7 +59,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 
