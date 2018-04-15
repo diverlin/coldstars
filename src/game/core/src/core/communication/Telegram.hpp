@@ -6,7 +6,6 @@
 
 #include <string>
 
-
 namespace core {
 
 enum class Machine: int {SERVER, CLIENT};
@@ -14,7 +13,7 @@ enum class Machine: int {SERVER, CLIENT};
 class Telegram
 {
 public:
-    Telegram(const Machine& sender, telegram::Type, const std::string& data, double delay = -1.0);
+    Telegram(telegram::Type, const std::string& data, double delay = -1.0);
     bool operator<(const Telegram&) const;
 
     const Machine& sender() const { return m_sender; }
@@ -34,23 +33,9 @@ private:
 
     double m_delay = -1.0;
     double m_dispatchTime = 0.0;
-};
 
-
-class ServerTelegram : public Telegram {
-public:
-    ServerTelegram(telegram::Type type, const std::string& data, double delay = -1.0)
-        :
-          Telegram(Machine::SERVER, type, data, delay)
-    {}
-};
-
-class ClientTelegram : public Telegram {
-public:
-    ClientTelegram(telegram::Type type, const std::string& data, double delay = -1.0)
-        :
-          Telegram(Machine::CLIENT, type, data, delay)
-    {}
+protected:
+    void _setMachine(Machine machine) { m_sender = machine; }
 };
 
 } // namespace core

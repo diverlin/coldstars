@@ -6,10 +6,9 @@
 
 namespace core {
 
-Telegram::Telegram(const Machine& sender, telegram::Type type, const std::string& data, double delay)
+Telegram::Telegram(telegram::Type type, const std::string& data, double delay)
     :
-      m_sender(sender)
-    , m_type(type)
+      m_type(type)
     , m_data(data)
     , m_delay(delay)
 {}
