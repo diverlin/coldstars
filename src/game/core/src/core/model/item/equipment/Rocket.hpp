@@ -23,12 +23,12 @@
 
 namespace model {
 
-class Rocket : public Weapon
+class RocketModel : public WeaponModel
 {
 public:
-    Rocket(int_t, int_t);
-    ~Rocket() = default;
-    Rocket(const std::string& data);
+    RocketModel(int_t, int_t);
+    ~RocketModel() = default;
+    RocketModel(const std::string& data);
     std::string data() const;
 
     void setAmmo(int ammo) { m_ammo = ammo; }
@@ -36,7 +36,7 @@ public:
     int ammo() const { return m_ammo; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Weapon::info();
+        ceti::InfoTable result = WeaponModel::info();
         result.add("model::Rocket");
         result.add("ammo", m_ammo);
         return result;
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
+        ar & boost::serialization::base_object<WeaponModel>(*this);
         ar & m_ammo;
     }
 };

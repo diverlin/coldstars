@@ -22,11 +22,11 @@
 
 namespace model {
 
-class Equipment : public Item
+class EquipmentModel : public ItemModel
 {
 public:
-    Equipment() = default;
-    ~Equipment() = default;
+    EquipmentModel() = default;
+    ~EquipmentModel() = default;
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = info();
@@ -41,7 +41,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Item>(*this);
+        ar & boost::serialization::base_object<ItemModel>(*this);
     }
 
 };

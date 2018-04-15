@@ -38,11 +38,11 @@ class EntityManager;
 
 namespace model {
 
-class Base : public NonCopyable
+class BaseModel : public NonCopyable
 {
 public:
-    Base() = default;
-    virtual ~Base() = default;
+    BaseModel() = default;
+    virtual ~BaseModel() = default;
 
     void setIsAlive(bool alive) { m_isAlive = alive; }
     void setId(int_t id) { m_id = id; }

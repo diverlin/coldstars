@@ -32,12 +32,12 @@ namespace ceti {
 
 namespace model {
 
-class Orientation
+class OrientationModel
 {
 public:
-    Orientation() = default;
-    virtual ~Orientation() = default;
-    Orientation(const std::string& data);
+    OrientationModel() = default;
+    virtual ~OrientationModel() = default;
+    OrientationModel(const std::string& data);
     std::string data() const;
 
     void setPosition(const meti::vec3& position) { m_position = position; }
@@ -86,7 +86,7 @@ class Orientation
 {
 public:
     Orientation();
-    Orientation(model::Orientation* model);
+    Orientation(model::OrientationModel* model);
     virtual ~Orientation();
 
     void setPosition(float x, float y, float z);
@@ -113,11 +113,11 @@ public:
 
     void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
-    model::Orientation* model() const { return m_model_orientation; }
+    model::OrientationModel* model() const { return m_model_orientation; }
 
 private:
     bool m_own_model = false;
-    model::Orientation* m_model_orientation = nullptr;
+    model::OrientationModel* m_model_orientation = nullptr;
 
     bool m_isUpdated = false;
     float m_collisionRadius = 0;

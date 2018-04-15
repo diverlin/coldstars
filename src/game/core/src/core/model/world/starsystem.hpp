@@ -34,17 +34,17 @@
 #include <vector>
 
 namespace model {
-class Star;
-class Planet;
-class Asteroid;
-class Satellite;
-class SpaceStation;
-class Ship;
+class StarModel;
+class PlanetModel;
+class AsteroidModel;
+class SatelliteModel;
+class SpaceStationModel;
+class ShipModel;
 class Npc;
-class Vehicle;
-class WormHole;
-class Container;
-class Bullet;
+class VehicleModel;
+class WormHoleModel;
+class ContainerModel;
+class BulletModel;
 } // namespace model
 
 namespace control {
@@ -82,16 +82,16 @@ enum CONDITION {
 
 namespace model {
 
-class StarSystem : public Base
+class StarSystemModel : public BaseModel
 {
 public:
-    StarSystem(int_t, int_t ob_id = NONE);
-    ~StarSystem() = default;
-    StarSystem(const std::string& data);
+    StarSystemModel(int_t, int_t ob_id = NONE);
+    ~StarSystemModel() = default;
+    StarSystemModel(const std::string& data);
     std::string data() const;
 
-    bool operator==(const StarSystem& rhs) const;
-    bool operator!=(const StarSystem& rhs) const;
+    bool operator==(const StarSystemModel& rhs) const;
+    bool operator!=(const StarSystemModel& rhs) const;
 
     void setSector(int_t sector)  { m_sector = sector; }
     void setPosition(const meti::vec3& position) { m_position = position; }
@@ -179,7 +179,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_race;
         ar & m_invader;
         ar & m_status;

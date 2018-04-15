@@ -23,12 +23,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace model {
 
-class Drive : public Equipment
+class DriveModel : public EquipmentModel
 {
 public:
-    Drive(int_t, int_t);
-    ~Drive() = default;
-    Drive(const std::string& data);
+    DriveModel(int_t, int_t);
+    ~DriveModel() = default;
+    DriveModel(const std::string& data);
     std::string data() const;
 
     void setSpeed(int speed) { m_speed = speed; }
@@ -38,7 +38,7 @@ public:
     int hyper() const { return m_hyper; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Drive");
         result.add("speed", m_speed);
         result.add("hyper", m_hyper);
@@ -53,7 +53,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_speed;
         ar & m_hyper;
     }

@@ -22,19 +22,19 @@
 
 namespace model {
 
-Droid::Droid(int_t descriptor_id, int_t ob_id)
+DroidModel::DroidModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-Droid::Droid(const std::string& data)
+DroidModel::DroidModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Droid::data() const
+DroidModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

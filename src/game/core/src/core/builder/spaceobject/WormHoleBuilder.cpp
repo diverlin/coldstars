@@ -31,7 +31,7 @@ namespace core {
 core::control::WormHole*
 WormHoleBuilder::__genTemplate(core::WormHoleDescr* descr)
 {
-    model::WormHole* model = new model::WormHole(descr->id());
+    model::WormHoleModel* model = new model::WormHoleModel(descr->id());
     assert(model);
 
     core::control::WormHole* wormhole = new core::control::WormHole(descr, model);

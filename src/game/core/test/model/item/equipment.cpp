@@ -34,7 +34,7 @@ void init()
 //    Manager::generate();
 }
 
-void compareEquipment(model::Equipment* model, model::Equipment* copy)
+void compareEquipment(model::EquipmentModel* model, model::EquipmentModel* copy)
 {
     // model::Base
     EXPECT_EQ(model->id(), copy->id());
@@ -50,8 +50,8 @@ void compareEquipment(model::Equipment* model, model::Equipment* copy)
 } // namespace
 
 TEST(model, bak) {
-    model::Bak* model = core::BakItemBuilder::gen()->model();
-    model::Bak* copy = new model::Bak(model->data());
+    model::BakModel* model = core::BakItemBuilder::gen()->model();
+    model::BakModel* copy = new model::BakModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -63,8 +63,8 @@ TEST(model, bak) {
 }
 
 TEST(model, drive) {
-    model::Drive* model = core::DriveItemBuilder::gen()->model();
-    model::Drive* copy = new model::Drive(model->data());
+    model::DriveModel* model = core::DriveItemBuilder::gen()->model();
+    model::DriveModel* copy = new model::DriveModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -77,8 +77,8 @@ TEST(model, drive) {
 }
 
 TEST(model, droid) {
-    model::Droid* model = core::DroidItemBuilder::gen()->model();
-    model::Droid* copy = new model::Droid(model->data());
+    model::DroidModel* model = core::DroidItemBuilder::gen()->model();
+    model::DroidModel* copy = new model::DroidModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -90,8 +90,8 @@ TEST(model, droid) {
 }
 
 TEST(model, grapple) {
-    model::Grapple* model = core::GrappleItemBuilder::gen()->model();
-    model::Grapple* copy = new model::Grapple(model->data());
+    model::GrappleModel* model = core::GrappleItemBuilder::gen()->model();
+    model::GrappleModel* copy = new model::GrappleModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -105,8 +105,8 @@ TEST(model, grapple) {
 }
 
 TEST(model, lazer) {
-    model::Lazer* model = core::LazerItemBuilder::gen()->model();
-    model::Lazer* copy = new model::Lazer(model->data());
+    model::LazerModel* model = core::LazerItemBuilder::gen()->model();
+    model::LazerModel* copy = new model::LazerModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -119,8 +119,8 @@ TEST(model, lazer) {
 }
 
 TEST(model, protector) {
-    model::Protector* model = core::ProtectorItemBuilder::gen()->model();
-    model::Protector* copy = new model::Protector(model->data());
+    model::ProtectorModel* model = core::ProtectorItemBuilder::gen()->model();
+    model::ProtectorModel* copy = new model::ProtectorModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -132,8 +132,8 @@ TEST(model, protector) {
 }
 
 TEST(model, radar) {
-    model::Radar* model = core::RadarItemBuilder::gen()->model();
-    model::Radar* copy = new model::Radar(model->data());
+    model::RadarModel* model = core::RadarItemBuilder::gen()->model();
+    model::RadarModel* copy = new model::RadarModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -145,8 +145,8 @@ TEST(model, radar) {
 }
 
 TEST(model, rocket) {
-    model::Rocket* model = core::RocketItemBuilder::gen()->model();
-    model::Rocket* copy = new model::Rocket(model->data());
+    model::RocketModel* model = core::RocketItemBuilder::gen()->model();
+    model::RocketModel* copy = new model::RocketModel(model->data());
 
     compareEquipment(model, copy);
 
@@ -160,8 +160,8 @@ TEST(model, rocket) {
 }
 
 TEST(model, scaner) {
-    model::Scaner* model = core::ScanerItemBuilder::gen()->model();
-    model::Scaner* copy = new model::Scaner(model->data());
+    model::ScanerModel* model = core::ScanerItemBuilder::gen()->model();
+    model::ScanerModel* copy = new model::ScanerModel(model->data());
 
     compareEquipment(model, copy);
 

@@ -23,18 +23,18 @@
 
 namespace model {
 
-Goverment::Goverment(int_t descriptor_id)
+GovermentModel::GovermentModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
 
-Goverment::Goverment(const std::string& data)
+GovermentModel::GovermentModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Goverment::data() const
+GovermentModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -25,7 +25,7 @@ class ItemDescr;
 } // namespace core
 
 namespace model {
-class Item;
+class ItemModel;
 } // namespace model
 
 namespace core {
@@ -37,11 +37,11 @@ namespace control {
 class Item : public Base
 {
 public:
-    Item(ItemDescr*, model::Item*);
+    Item(ItemDescr*, model::ItemModel*);
     virtual ~Item() = default;
 
     ItemDescr* descriptor() const { return m_descriptor_item; }
-    model::Item* model() const { return m_model_item; }
+    model::ItemModel* model() const { return m_model_item; }
     ItemSlot* slot() const { return m_slot; }
 
     void setSlot(ItemSlot* slot)  { m_slot = slot; }
@@ -67,7 +67,7 @@ protected:
 
 private:
     ItemDescr* m_descriptor_item = nullptr;
-    model::Item* m_model_item = nullptr;
+    model::ItemModel* m_model_item = nullptr;
 
     ItemSlot* m_slot = nullptr;
 };

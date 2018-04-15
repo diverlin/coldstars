@@ -63,7 +63,7 @@ DriveItemBuilder::gen(core::DriveDescr* descr)
 core::control::Drive*
 DriveItemBuilder::__genTemplate(DriveDescr* descriptor, int_t id)
 {
-    model::Drive* model = new model::Drive(descriptor->id(), id);
+    model::DriveModel* model = new model::DriveModel(descriptor->id(), id);
     assert(model);
     core::control::Drive* drive = new core::control::Drive(descriptor, model);
     assert(drive);

@@ -33,7 +33,7 @@ namespace core {
 core::control::Satellite*
 SatelliteBuilder::__genTemplate(core::SatelliteDescr* descr)
 {
-    model::Satellite* model = new model::Satellite(descr->id());
+    model::SatelliteModel* model = new model::SatelliteModel(descr->id());
     assert(model);
 
     core::control::Satellite* satellite = new core::control::Satellite(descr, model);

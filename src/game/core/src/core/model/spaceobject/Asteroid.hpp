@@ -23,15 +23,15 @@
 
 namespace model {
 
-class Asteroid : public Planetoid {
+class AsteroidModel : public PlanetoidModel {
 public:
-    Asteroid(int_t, int_t);
-    ~Asteroid() = default;
-    Asteroid(const std::string& data);
+    AsteroidModel(int_t, int_t);
+    ~AsteroidModel() = default;
+    AsteroidModel(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidModel::info();
         result.add("model::Asteroid");
         return result;
     }
@@ -40,7 +40,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidModel>(*this);
     }
 };
 

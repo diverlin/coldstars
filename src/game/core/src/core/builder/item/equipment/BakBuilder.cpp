@@ -63,7 +63,7 @@ BakItemBuilder::gen()
 core::control::Bak*
 BakItemBuilder::__genTemplate(BakDescr* descriptor, int_t id)
 {
-    model::Bak* model = new model::Bak(descriptor->id(), id);
+    model::BakModel* model = new model::BakModel(descriptor->id(), id);
     assert(model);
     core::control::Bak* bak = new core::control::Bak(descriptor, model);
     assert(bak);

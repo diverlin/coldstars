@@ -22,19 +22,19 @@
 
 namespace model {
 
-Goods::Goods(int_t descriptor_id, int_t ob_id)
+GoodsPackModel::GoodsPackModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-Goods::Goods(const std::string& data)
+GoodsPackModel::GoodsPackModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Goods::data() const
+GoodsPackModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

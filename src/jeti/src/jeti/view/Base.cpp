@@ -75,7 +75,7 @@ void Base::_genOrientation()
 {
     assert(m_orientation==nullptr);
     m_clear_orientation = true;
-    m_orientation = new ceti::control::Orientation(new ceti::model::Orientation);
+    m_orientation = new ceti::control::Orientation(new ceti::model::OrientationModel);
 }
 
 void

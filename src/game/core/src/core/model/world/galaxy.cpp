@@ -33,19 +33,19 @@
 
 namespace model {
 
-Galaxy::Galaxy(int_t descriptor, int_t object)
+GalaxyModel::GalaxyModel(int_t descriptor, int_t object)
 {
     setId(object);
     setDescriptor(descriptor);
 }
 
-Galaxy::Galaxy(const std::string& data)
+GalaxyModel::GalaxyModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Galaxy::data() const
+GalaxyModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

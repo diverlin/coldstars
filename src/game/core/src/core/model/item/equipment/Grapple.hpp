@@ -23,12 +23,12 @@
 
 namespace model {
 
-class Grapple : public Equipment
+class GrappleModel : public EquipmentModel
 {
 public:
-    Grapple(int_t, int_t);
-    ~Grapple() = default;
-    Grapple(const std::string& data);
+    GrappleModel(int_t, int_t);
+    ~GrappleModel() = default;
+    GrappleModel(const std::string& data);
     std::string data() const;
 
     void setStrength(int strength)     { m_strength = strength; }
@@ -40,7 +40,7 @@ public:
     int speed() const { return m_speed; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Grapple");
         result.add("strength", m_strength);
         result.add("radius", m_radius);
@@ -57,7 +57,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_strength;
         ar & m_radius;
         ar & m_speed;

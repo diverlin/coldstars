@@ -31,12 +31,12 @@
 
 namespace model {
 
-class Planetoid : public SpaceObject
+class PlanetoidModel : public SpaceObjectModel
 {
 public:
-    Planetoid() = default;
-    ~Planetoid() = default;
-    Planetoid(const std::string& data);
+    PlanetoidModel() = default;
+    ~PlanetoidModel() = default;
+    PlanetoidModel(const std::string& data);
     std::string data() const;
 
     void setRadiusA(int radiusA) { m_radiusA = radiusA; }
@@ -46,7 +46,7 @@ public:
     int radiusB() const { return m_radiusB; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectModel::info();
         result.add("model::Planetoid");
         result.add("radiusA", m_radiusA);
         result.add("radiusB", m_radiusB);
@@ -61,7 +61,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectModel>(*this);
         ar & m_radiusA;
         ar & m_radiusB;
     }
@@ -75,7 +75,7 @@ namespace control {
 class Planetoid : public SpaceObject
 {
 public:
-    Planetoid(PlanetoidDescr*, model::Planetoid*);
+    Planetoid(PlanetoidDescr*, model::PlanetoidModel*);
     virtual ~Planetoid();
 
     void calibrateOrbit(float offset_radius = 0);
@@ -95,10 +95,10 @@ private:
     Orbit m_orbit;
 
     PlanetoidDescr* m_descriptor_planetoid = nullptr;
-    model::Planetoid* m_model_planetoid = nullptr;
+    model::PlanetoidModel* m_model_planetoid = nullptr;
 
     PlanetoidDescr* descriptor() const { return m_descriptor_planetoid; }
-    model::Planetoid* model() const { return m_model_planetoid; }
+    model::PlanetoidModel* model() const { return m_model_planetoid; }
 
     void __createOrbit();
 };

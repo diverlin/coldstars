@@ -24,7 +24,7 @@ class SpaceStationDescr;
 } // namespace core
 
 namespace model {
-class SpaceStation;
+class SpaceStationModel;
 } // namespace core
 
 #include <core/model/spaceobject/Vehicle.hpp>
@@ -38,7 +38,7 @@ namespace control {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation(SpaceStationDescr*, model::SpaceStation*);
+    SpaceStation(SpaceStationDescr*, model::SpaceStationModel*);
     virtual ~SpaceStation();
 
     [[warning("incapsulate this shit")]]
@@ -51,11 +51,11 @@ public:
     //        void RenderInSpace(const jeti::Renderer&, float);
 
     SpaceStationDescr* descriptor() const { return m_descriptor_spacestation; }
-    model::SpaceStation* model() const { return m_model_spacestation; }
+    model::SpaceStationModel* model() const { return m_model_spacestation; }
 
 private:
     SpaceStationDescr* m_descriptor_spacestation = nullptr;
-    model::SpaceStation* m_model_spacestation = nullptr;
+    model::SpaceStationModel* m_model_spacestation = nullptr;
 
     Land* m_innerLand = nullptr;
 

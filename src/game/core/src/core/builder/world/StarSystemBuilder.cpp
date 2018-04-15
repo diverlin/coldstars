@@ -70,7 +70,7 @@ StarSystemBuilder::gen(int_t descriptor_id, int_t object_id)
 core::control::StarSystem*
 StarSystemBuilder::__genTemplate(core::StarSystemDescr* descr, int_t ob_id)
 {
-    model::StarSystem* model = new model::StarSystem(descr->id(), ob_id);
+    model::StarSystemModel* model = new model::StarSystemModel(descr->id(), ob_id);
     assert(model);
 
     core::control::StarSystem* starsystem = new core::control::StarSystem(descr, model);

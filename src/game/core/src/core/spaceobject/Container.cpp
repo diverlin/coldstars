@@ -90,7 +90,7 @@ bool itemInsertHelper(ItemSlot* slot, int_t id) {
 }
 } // namespace
 
-Container::Container(ContainerDescr* descr, model::Container* model)
+Container::Container(ContainerDescr* descr, model::ContainerModel* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_container(descr)

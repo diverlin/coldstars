@@ -22,19 +22,19 @@
 
 namespace model {
 
-Scaner::Scaner(int_t descriptor, int_t id)
+ScanerModel::ScanerModel(int_t descriptor, int_t id)
 {
     setId(id);
     setDescriptor(descriptor);
 }
 
-Scaner::Scaner(const std::string& data)
+ScanerModel::ScanerModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Scaner::data() const
+ScanerModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

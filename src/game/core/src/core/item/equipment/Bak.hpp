@@ -26,7 +26,7 @@ class BakDescr;
 } // namespace core
 
 namespace model {
-class Bak;
+class BakModel;
 } // namespace model
 
 namespace core {
@@ -35,7 +35,7 @@ namespace control {
 class Bak : public Equipment
 {
 public:
-    Bak(BakDescr*, model::Bak*);
+    Bak(BakDescr*, model::BakModel*);
     virtual ~Bak() = default;
 
     void increaseFuel(int fuel);
@@ -43,7 +43,7 @@ public:
 
 public:
     BakDescr* descriptor() const { return m_descriptor_bak; }
-    model::Bak* model() const { return m_model_bak; }
+    model::BakModel* model() const { return m_model_bak; }
 
 private:
     void updateProperties() override final;
@@ -53,7 +53,7 @@ private:
     int m_fuelMax = 0;
 
     BakDescr* m_descriptor_bak = nullptr;
-    model::Bak* m_model_bak = nullptr;
+    model::BakModel* m_model_bak = nullptr;
 
     void virtual addUniqueInfo();
     std::string fuelStr();

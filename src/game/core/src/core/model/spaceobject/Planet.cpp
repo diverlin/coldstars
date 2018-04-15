@@ -23,19 +23,19 @@
 
 namespace model {
 
-Planet::Planet(int_t descriptor_id, int_t id)
+PlanetModel::PlanetModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Planet::Planet(const std::string& data)
+PlanetModel::PlanetModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Planet::data() const
+PlanetModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

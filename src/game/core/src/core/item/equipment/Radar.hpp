@@ -27,7 +27,7 @@ class RadarDescr;
 } // namespace core
 
 namespace model {
-class Radar;
+class RadarModel;
 } // namespace model
 
 namespace core {
@@ -36,18 +36,18 @@ namespace control {
 class Radar : public Equipment
 {
 public:
-    Radar(RadarDescr*, model::Radar*);
+    Radar(RadarDescr*, model::RadarModel*);
     virtual ~Radar() = default;
 
     virtual void updateProperties();
 
 public:
     RadarDescr* descriptor() const { return m_descriptor_radar; }
-    model::Radar* model() const { return m_model_radar; }
+    model::RadarModel* model() const { return m_model_radar; }
 
 private:
     RadarDescr* m_descriptor_radar = nullptr;
-    model::Radar* m_model_radar = nullptr;
+    model::RadarModel* m_model_radar = nullptr;
 
     int m_radius_add = 0;
 

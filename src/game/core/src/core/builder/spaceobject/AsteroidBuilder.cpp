@@ -93,7 +93,7 @@ AsteroidBuilder::gen(core::AsteroidDescr* descr, int_t id)
 core::control::Asteroid*
 AsteroidBuilder::__genTemplate(core::AsteroidDescr* descr, int_t id)
 {
-    model::Asteroid* model = new model::Asteroid(descr->id(), id);
+    model::AsteroidModel* model = new model::AsteroidModel(descr->id(), id);
     assert(model);
 
     core::control::Asteroid* asteroid = new core::control::Asteroid(descr, model);

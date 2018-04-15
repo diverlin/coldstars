@@ -23,10 +23,10 @@
 
 namespace model {
 
-class Room : public Base {
+class RoomModel : public BaseModel {
 public:
-    Room() = default;
-    ~Room() = default;
+    RoomModel() = default;
+    ~RoomModel() = default;
 
     void setKosmoport(int_t kosmoport) { m_kosmoport = kosmoport; }
 
@@ -36,7 +36,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_kosmoport;
     }
 

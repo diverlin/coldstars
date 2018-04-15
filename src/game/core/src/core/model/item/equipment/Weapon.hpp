@@ -23,11 +23,11 @@
 
 namespace model {
 
-class Weapon : public Equipment
+class WeaponModel : public EquipmentModel
 {
 public:
-    Weapon() = default;
-    ~Weapon() = default;
+    WeaponModel() = default;
+    ~WeaponModel() = default;
 
     void setRadius(int radius) { m_radius = radius; }
     void setDamage(int damage) { m_damage = damage; }
@@ -36,7 +36,7 @@ public:
     int damage() const { return m_damage; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Weapon");
         result.add("radius", m_radius);
         result.add("damage", m_damage);
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_radius;
         ar & m_damage;
     }

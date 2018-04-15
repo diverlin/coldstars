@@ -22,19 +22,19 @@
 
 namespace model {
 
-class Goverment : public Room
+class GovermentModel : public RoomModel
 {
 public:
-    Goverment(int_t);
-    ~Goverment() = default;
-    Goverment(const std::string& data);
+    GovermentModel(int_t);
+    ~GovermentModel() = default;
+    GovermentModel(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomModel>(*this);
     }
 };
 

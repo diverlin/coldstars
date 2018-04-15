@@ -22,19 +22,19 @@
 
 namespace model {
 
-Asteroid::Asteroid(int_t descriptor_id, int_t id)
+AsteroidModel::AsteroidModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Asteroid::Asteroid(const std::string& data)
+AsteroidModel::AsteroidModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Asteroid::data() const
+AsteroidModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

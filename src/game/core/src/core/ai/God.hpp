@@ -25,7 +25,7 @@
 
 
 namespace model {
-class Galaxy;
+class GalaxyModel;
 } // namespace model
 
 namespace core {

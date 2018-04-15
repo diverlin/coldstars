@@ -23,12 +23,12 @@
 
 namespace model {
 
-class Scaner : public Equipment
+class ScanerModel : public EquipmentModel
 {
 public:
-    Scaner(int_t, int_t);
-    ~Scaner() = default;
-    Scaner(const std::string& data);
+    ScanerModel(int_t, int_t);
+    ~ScanerModel() = default;
+    ScanerModel(const std::string& data);
     std::string data() const;
 
     void setScan(int scan) { m_scan = scan; }
@@ -36,7 +36,7 @@ public:
     int scan() const { return m_scan; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Scaner");
         result.add("scan", m_scan);
         return result;
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_scan;
     }
 };

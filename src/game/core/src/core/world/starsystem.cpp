@@ -63,7 +63,7 @@ core::TelegramCreator& composer() { return core::TelegramCreator::get(); }
 namespace core {
 namespace control {
 
-StarSystem::StarSystem(StarSystemDescr* descr, model::StarSystem* model)
+StarSystem::StarSystem(StarSystemDescr* descr, model::StarSystemModel* model)
     :
       Base(descr, model)
     , m_descriptor_starsystem(descr)
@@ -218,7 +218,7 @@ void StarSystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir
     m_ships.push_back(ship);
 }
 
-void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& direction, const model::SpaceObject* const parent)
+void StarSystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& direction, const model::SpaceObjectModel* const parent)
 {
     __addVehicleCommon(satellite, position, direction);
     model()->addSatellite(satellite->id());

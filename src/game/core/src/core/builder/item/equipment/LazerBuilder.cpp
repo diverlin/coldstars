@@ -61,7 +61,7 @@ LazerItemBuilder::gen(core::LazerDescr* descr)
 core::control::Lazer*
 LazerItemBuilder::__genTemplate(LazerDescr* descriptor, int_t id)
 { 
-    model::Lazer* model = new model::Lazer(descriptor->id(), id);
+    model::LazerModel* model = new model::LazerModel(descriptor->id(), id);
     assert(model);
     core::control::Lazer* lazer = new core::control::Lazer(descriptor, model);
     assert(lazer);

@@ -28,12 +28,12 @@
 
 namespace model {
 
-class Planet : public Planetoid {
+class PlanetModel : public PlanetoidModel {
 
 public:
-    Planet(int_t, int_t);
-    ~Planet() = default;
-    Planet(const std::string& data);
+    PlanetModel(int_t, int_t);
+    ~PlanetModel() = default;
+    PlanetModel(const std::string& data);
     std::string data() const;
 
     void setPopulation(int_t population)  { m_population = population; }
@@ -43,7 +43,7 @@ public:
     int_t land() const { return m_land; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidModel::info();
         result.add("model::Planet");
         result.add("land", m_land);
         result.add("population", m_population);
@@ -58,7 +58,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidModel>(*this);
         ar & m_land;
         ar & m_population;
     }

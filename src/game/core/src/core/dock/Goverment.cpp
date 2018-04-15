@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Goverment::Goverment(GovermentDescr* descr, model::Goverment* model)
+Goverment::Goverment(GovermentDescr* descr, model::GovermentModel* model)
     :
       Room(descr, model)
     , m_descriptor_goverment(descr)

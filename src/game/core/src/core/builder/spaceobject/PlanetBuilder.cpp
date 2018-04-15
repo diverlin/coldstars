@@ -107,7 +107,7 @@ PlanetBuilder::__createInternals(core::control::Planet* planet, core::PlanetDesc
 core::control::Planet*
 PlanetBuilder::__genTemplate(core::PlanetDescr* descr, int_t id)
 {
-    model::Planet* model = new model::Planet(descr->id(), id);
+    model::PlanetModel* model = new model::PlanetModel(descr->id(), id);
     assert(model);
 
     core::control::Planet* planet = new core::control::Planet(descr, model);

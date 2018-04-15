@@ -74,7 +74,7 @@ ProtectorItemBuilder::gen(core::ProtectorDescr* descr)
 core::control::Protector*
 ProtectorItemBuilder::__genTemplate(ProtectorDescr* descriptor, int_t id)
 {
-    model::Protector* model = new model::Protector(descriptor->id(), id);
+    model::ProtectorModel* model = new model::ProtectorModel(descriptor->id(), id);
     assert(model);
     core::control::Protector* protector = new core::control::Protector(descriptor, model);
     assert(protector);

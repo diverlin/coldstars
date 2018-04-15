@@ -26,7 +26,7 @@ class DriveDescr;
 } // namespace core
 
 namespace model {
-class Drive;
+class DriveModel;
 } // namespace model
 
 namespace core {
@@ -35,14 +35,14 @@ namespace control {
 class Drive : public Equipment
 {
 public:
-    Drive(DriveDescr*, model::Drive*);
+    Drive(DriveDescr*, model::DriveModel*);
     virtual ~Drive() = default;
 
     int speed() const;
 
 public:
     DriveDescr* descriptor() const { return m_descriptor_drive; }
-    model::Drive* model() const { return m_model_drive; }
+    model::DriveModel* model() const { return m_model_drive; }
 
 private:
     virtual void updateProperties();
@@ -52,7 +52,7 @@ private:
     int m_hyper_add = 0;
 
     DriveDescr* m_descriptor_drive = nullptr;
-    model::Drive* m_model_drive = nullptr;
+    model::DriveModel* m_model_drive = nullptr;
 
     void virtual addUniqueInfo();
     std::string speedStr();

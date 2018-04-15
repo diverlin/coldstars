@@ -24,11 +24,11 @@
 
 namespace model {
 
-class Item : public Base
+class ItemModel : public BaseModel
 {
 public:
-    Item() = default;
-    ~Item() = default;
+    ItemModel() = default;
+    ~ItemModel() = default;
 
     void setSlot(int slot)  { m_slot = slot; }
     void setLockedTurns(int lockedTurns) { m_lockedTurns = lockedTurns; }
@@ -39,7 +39,7 @@ public:
     int condition() const { return m_condition; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseModel::info();
         result.add("model::Item");
         result.add("slot", m_slot);
         result.add("lockedTurns", m_lockedTurns);
@@ -56,7 +56,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<::model::Base>(*this);
+        ar & boost::serialization::base_object<::model::BaseModel>(*this);
         ar & m_slot;
         ar & m_lockedTurns;
         ar & m_condition;

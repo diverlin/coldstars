@@ -84,7 +84,7 @@ ContainerBuilder::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 core::control::Container*
 ContainerBuilder::__genTemplate(ContainerDescr* descriptor, int_t object_id)
 {
-    model::Container* model = new model::Container(descriptor->id(), object_id);
+    model::ContainerModel* model = new model::ContainerModel(descriptor->id(), object_id);
     assert(model);
 
     core::control::Container* container = new core::control::Container(descriptor, model);

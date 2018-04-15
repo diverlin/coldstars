@@ -32,11 +32,11 @@
 
 namespace model {
 
-class SpaceObject : public ceti::model::Orientation, public Base
+class SpaceObjectModel : public ceti::model::OrientationModel, public BaseModel
 {
 public:
-    SpaceObject() = default;
-    ~SpaceObject() = default;
+    SpaceObjectModel() = default;
+    ~SpaceObjectModel() = default;
 
     void addArmor(int armor) { m_armor += armor; }
     void setArmor(int armor) { m_armor = armor; }
@@ -57,8 +57,8 @@ public:
     int givenExpirience() const { return m_expirienceToGive; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = ceti::model::Orientation::info();
-        ceti::InfoTable result2 = model::Base::info();
+        ceti::InfoTable result = ceti::model::OrientationModel::info();
+        ceti::InfoTable result2 = model::BaseModel::info();
         result.insert(result.begin(), result2.begin(), result2.end());
         result.add("model::SpaceObject");
         result.add("armor", m_armor);
@@ -82,8 +82,8 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::model::Orientation>(*this);
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<ceti::model::OrientationModel>(*this);
+        ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_armor;
         ar & m_lifeTime;
         ar & m_parent;

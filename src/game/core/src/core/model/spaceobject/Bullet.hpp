@@ -24,12 +24,12 @@
 
 namespace model {
 
-class Bullet : public SpaceObject {
+class BulletModel : public SpaceObjectModel {
 
 public:
-    Bullet();
-    ~Bullet() = default;
-    Bullet(const std::string& data);
+    BulletModel();
+    ~BulletModel() = default;
+    BulletModel(const std::string& data);
     std::string data() const;
 
     void setDamage(int damage) {m_damage = damage; }
@@ -46,7 +46,7 @@ public:
     int_t owner() const { return m_owner; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectModel::info();
         result.add("model::Bullet");
         result.add("damage", m_damage);
         result.add("liveTime", m_liveTime);
@@ -70,7 +70,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectModel>(*this);
         ar & m_damage;
         ar & m_liveTime;
         ar & m_speed;

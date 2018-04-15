@@ -23,12 +23,12 @@
 
 namespace model {
 
-class Protector : public Equipment
+class ProtectorModel : public EquipmentModel
 {
 public:
-    Protector(int_t, int_t);
-    ~Protector() = default;
-    Protector(const std::string& data);
+    ProtectorModel(int_t, int_t);
+    ~ProtectorModel() = default;
+    ProtectorModel(const std::string& data);
     std::string data() const;
 
     void setProtection(int protection) { m_protection = protection; }
@@ -36,7 +36,7 @@ public:
     int protection() const { return m_protection; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Equipment::info();
+        ceti::InfoTable result = EquipmentModel::info();
         result.add("model::Protector");
         result.add("protection", m_protection);
         return result;
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentModel>(*this);
         ar & m_protection;
     }
 };

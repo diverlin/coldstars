@@ -22,19 +22,19 @@
 
 namespace model {
 
-Container::Container(int_t descriptor_id, int_t id)
+ContainerModel::ContainerModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Container::Container(const std::string& data)
+ContainerModel::ContainerModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Container::data() const
+ContainerModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

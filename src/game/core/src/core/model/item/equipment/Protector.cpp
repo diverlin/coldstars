@@ -23,19 +23,19 @@
 
 namespace model {
 
-Protector::Protector(int_t descriptor_id, int_t id)
+ProtectorModel::ProtectorModel(int_t descriptor_id, int_t id)
 {
     setId(id);
     setDescriptor(descriptor_id);
 }
 
-Protector::Protector(const std::string& data)
+ProtectorModel::ProtectorModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Protector::data() const
+ProtectorModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

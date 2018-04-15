@@ -22,19 +22,19 @@
 
 namespace model {
 
-Bak::Bak(int_t descriptor_id, int_t ob_id)
+BakModel::BakModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-Bak::Bak(const std::string& data)
+BakModel::BakModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Bak::data() const
+BakModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

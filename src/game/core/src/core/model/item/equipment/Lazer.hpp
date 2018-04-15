@@ -22,16 +22,16 @@
 
 namespace model {
 
-class Lazer : public Weapon
+class LazerModel : public WeaponModel
 {
 public:
-    Lazer(int_t, int_t);
-    ~Lazer() = default;
-    Lazer(const std::string& data);
+    LazerModel(int_t, int_t);
+    ~LazerModel() = default;
+    LazerModel(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Weapon::info();
+        ceti::InfoTable result = WeaponModel::info();
         result.add("model::Lazer");
         return result;
     }
@@ -43,7 +43,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
+        ar & boost::serialization::base_object<WeaponModel>(*this);
     }
 };
 

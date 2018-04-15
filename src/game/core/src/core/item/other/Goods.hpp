@@ -25,7 +25,7 @@ class GoodsDescr;
 } // namespace core
 
 namespace model {
-class Goods;
+class GoodsPackModel;
 } // namespace model
 
 namespace core {
@@ -34,7 +34,7 @@ namespace control {
 class Goods : public Item
 {
 public:
-    Goods(GoodsDescr*, model::Goods*);
+    Goods(GoodsDescr*, model::GoodsPackModel*);
     virtual ~Goods();
 
     void increase(int amount);
@@ -44,7 +44,7 @@ public:
 
 private:
     GoodsDescr* m_descriptor_goods = nullptr;
-    model::Goods* m_model_goods = nullptr;
+    model::GoodsPackModel* m_model_goods = nullptr;
 };
 
 } // namespace control

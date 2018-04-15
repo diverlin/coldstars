@@ -26,7 +26,7 @@
 namespace core {
 namespace control {
 
-Base::Base(BaseDescr* descr, model::Base* model)
+Base::Base(BaseDescr* descr, model::BaseModel* model)
     :
       m_descriptor_base(descr)
     , m_model_base(model)

@@ -37,7 +37,7 @@
 namespace core {
 namespace control {
 
-Shop::Shop(ShopDescr* descr, model::Shop* model)
+Shop::Shop(ShopDescr* descr, model::ShopModel* model)
     :
       Room(descr, model)
     , m_descriptor_shop(descr)

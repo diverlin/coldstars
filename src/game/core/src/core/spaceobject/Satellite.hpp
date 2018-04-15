@@ -29,7 +29,7 @@ class SatelliteDescr;
 } // namespace core
 
 namespace model {
-class Satellite;
+class SatelliteModel;
 } // namespace model
 
 namespace core {
@@ -38,7 +38,7 @@ namespace control {
 class Satellite : public Vehicle
 {
 public:
-    Satellite(SatelliteDescr*, model::Satellite*);
+    Satellite(SatelliteDescr*, model::SatelliteModel*);
     virtual ~Satellite();
 
     void BindParent(const SpaceObject* const);
@@ -49,11 +49,11 @@ public:
     //        void RenderAtPlanet(const jeti::Renderer&);
 
     SatelliteDescr* descriptor() const { return m_descriptor_satellite; }
-    model::Satellite* model() const { return m_model_satellite; }
+    model::SatelliteModel* model() const { return m_model_satellite; }
 
 private:
     SatelliteDescr* m_descriptor_satellite = nullptr;
-    model::Satellite* m_model_satellite = nullptr;
+    model::SatelliteModel* m_model_satellite = nullptr;
 
     Orbit m_Orbit;
 

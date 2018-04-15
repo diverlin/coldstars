@@ -28,13 +28,13 @@
 
 namespace model {
 
-Planetoid::Planetoid(const std::string& data)
+PlanetoidModel::PlanetoidModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Planetoid::data() const
+PlanetoidModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
@@ -44,7 +44,7 @@ Planetoid::data() const
 namespace core {
 namespace control {
 
-Planetoid::Planetoid(PlanetoidDescr* descr, model::Planetoid* model)
+Planetoid::Planetoid(PlanetoidDescr* descr, model::PlanetoidModel* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_planetoid(descr)

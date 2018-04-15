@@ -23,19 +23,19 @@
 
 namespace model {
 
-Ship::Ship(int_t descriptor_id, int_t ob_id)
+ShipModel::ShipModel(int_t descriptor_id, int_t ob_id)
 {
     setId(ob_id);
     setDescriptor(descriptor_id);
 }
 
-Ship::Ship(const std::string& data)
+ShipModel::ShipModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Ship::data() const
+ShipModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

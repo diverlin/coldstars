@@ -29,7 +29,7 @@
 namespace core {
 namespace control {
 
-SpaceObject::SpaceObject(SpaceObjectDescr* descriptor, model::SpaceObject* model)
+SpaceObject::SpaceObject(SpaceObjectDescr* descriptor, model::SpaceObjectModel* model)
     :
       ceti::control::Orientation(model)
     , Base(descriptor, model)

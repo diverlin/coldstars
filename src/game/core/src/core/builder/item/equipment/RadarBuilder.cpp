@@ -63,7 +63,7 @@ RadarItemBuilder::gen(core::RadarDescr* descr)
 core::control::Radar*
 RadarItemBuilder::__genTemplate(RadarDescr* descriptor, int_t id)
 {
-    model::Radar* model = new model::Radar(descriptor->id(), id);
+    model::RadarModel* model = new model::RadarModel(descriptor->id(), id);
     assert(model);
     core::control::Radar* radar = new core::control::Radar(descriptor, model);
     assert(radar);

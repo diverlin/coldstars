@@ -25,18 +25,18 @@
 
 namespace model {
 
-WormHole::WormHole(int_t descriptor_id)
+WormHoleModel::WormHoleModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
 
-WormHole::WormHole(const std::string& data)
+WormHoleModel::WormHoleModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-WormHole::data() const
+WormHoleModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

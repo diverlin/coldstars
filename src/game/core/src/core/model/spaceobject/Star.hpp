@@ -25,12 +25,12 @@
 
 namespace model {
 
-class Star : public Planetoid {
+class StarModel : public PlanetoidModel {
 
 public:
-    Star(int_t, int_t);
-    ~Star() = default;
-    Star(const std::string& data);
+    StarModel(int_t, int_t);
+    ~StarModel() = default;
+    StarModel(const std::string& data);
     std::string data() const;
 
     void setTurnSinceLastSparkCounter(int turnSinceLastSparkCounter) { m_turnSinceLastSparkCounter = turnSinceLastSparkCounter; }
@@ -39,7 +39,7 @@ public:
     int turnSparkThreshold() const { return m_turnSparkThreshold; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidModel::info();
         result.add("model::Star");
         result.add("turnSinceLastSparkCounter", m_turnSinceLastSparkCounter);
         result.add("turnSparkThreshold", m_turnSparkThreshold);
@@ -54,7 +54,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidModel>(*this);
         ar & m_turnSinceLastSparkCounter;
         ar & m_turnSparkThreshold;
     }

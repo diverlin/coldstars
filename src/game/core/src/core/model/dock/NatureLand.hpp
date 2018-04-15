@@ -25,12 +25,12 @@
 
 namespace model {
 
-class NatureLand : public Land
+class NatureLandModel : public LandModel
 {
 public:
-    NatureLand(int_t);
-    ~NatureLand() = default;
-    NatureLand(const std::string& data);
+    NatureLandModel(int_t);
+    ~NatureLandModel() = default;
+    NatureLandModel(const std::string& data);
     std::string data() const;
 
     const ceti::pack<int_t>& items() const { return m_items; }
@@ -46,7 +46,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Land>(*this);
+        ar & boost::serialization::base_object<LandModel>(*this);
         ar & m_items;
         ar & m_vehicles;
     }

@@ -58,7 +58,7 @@ KosmoportBuilder::gen(core::KosmoportDescr* descr)
 core::control::Kosmoport*
 KosmoportBuilder::__createTemplate(core::KosmoportDescr* descr)
 {
-    model::Kosmoport* model = new model::Kosmoport(descr->id());
+    model::KosmoportModel* model = new model::KosmoportModel(descr->id());
     assert(model);
 
     core::control::Kosmoport* kosmoport = new core::control::Kosmoport(descr, model);

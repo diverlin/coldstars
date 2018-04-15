@@ -22,17 +22,17 @@
 
 namespace model {
 
-Kosmoport::Kosmoport(int_t descriptor_id)
+KosmoportModel::KosmoportModel(int_t descriptor_id)
 {
     setDescriptor(descriptor_id);
 }
-Kosmoport::Kosmoport(const std::string& data)
+KosmoportModel::KosmoportModel(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Kosmoport::data() const
+KosmoportModel::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

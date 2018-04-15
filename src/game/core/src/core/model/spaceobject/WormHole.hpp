@@ -23,15 +23,15 @@
 
 namespace model {
 
-class WormHole : public Planetoid {
+class WormHoleModel : public PlanetoidModel {
 public:
-    WormHole(int_t);
-    ~WormHole() = default;
-    WormHole(const std::string& data);
+    WormHoleModel(int_t);
+    ~WormHoleModel() = default;
+    WormHoleModel(const std::string& data);
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Planetoid::info();
+        ceti::InfoTable result = PlanetoidModel::info();
         return result;
     }
 
@@ -39,7 +39,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Planetoid>(*this);
+        ar & boost::serialization::base_object<PlanetoidModel>(*this);
     }
 };
 
