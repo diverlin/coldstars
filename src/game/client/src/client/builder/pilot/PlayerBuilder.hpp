@@ -22,21 +22,19 @@
 #include <ceti/type/IdType.hpp>
 
 namespace client {
-class Player;
-} // namespace core
 
-namespace builder {
+class Player;
 
 class PlayerBuilder
 {
 public:
-    static client::Player* gen(int_t);
+    static Player* gen(int_t);
 
 private:
-    static client::Player* __genTemplate(int_t);
+    static Player* __genTemplate(int_t);
 };  
 
-} // namespace builder
+} // namespace client
 
 
 
