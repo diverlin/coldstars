@@ -22,20 +22,15 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 class Scaner;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Scaner;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Scaner : public Equipment
 {
@@ -61,6 +56,5 @@ private:
     std::string scanStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

@@ -22,20 +22,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 class Drive;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Drive;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Drive : public Equipment
 {
@@ -64,6 +59,5 @@ private:
     std::string hyperStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

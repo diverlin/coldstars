@@ -22,7 +22,6 @@
 
 
 namespace model {
-namespace item {
 
 Rocket::Rocket(int_t descriptor_id, int_t id)
 {
@@ -41,6 +40,5 @@ Rocket::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace model
 

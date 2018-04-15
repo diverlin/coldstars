@@ -32,7 +32,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Lazer::Lazer(descriptor::item::Lazer* descr, model::item::Lazer* model)
     :
@@ -116,6 +115,5 @@ void Lazer::addUniqueInfo()
 ////    }
 //}
 
-} // namespace item
 } // namespace control
 } // namespace core

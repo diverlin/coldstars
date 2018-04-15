@@ -22,7 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 
 class Drive : public Equipment
 {
@@ -85,7 +84,6 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 
 

@@ -33,7 +33,6 @@ namespace control {
 class SpaceObject;
 class Item;
 
-namespace item {
 class Radar;
 class Rocket;
 class Lazer;
@@ -47,7 +46,6 @@ class Droid;
 class Scaner;
 class Drive;
 class Grapple;
-} // namespace item
 
 } // namespace control
 } // namespace core

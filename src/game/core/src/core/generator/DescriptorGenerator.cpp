@@ -683,9 +683,6 @@ genGoverment(race::Type race)
 }
 
 
-
-namespace item {
-
 Bak*
 genBak(int race, int tech_level)
 {
@@ -1215,9 +1212,6 @@ genGoods()
 
     return descriptor;
 }
-
-} // namespace item
-
 
 descriptor::Turrel*
 genTurrel()

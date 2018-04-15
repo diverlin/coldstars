@@ -26,21 +26,16 @@
 #include <string>
 
 namespace descriptor {
-namespace item {
 class Grapple;
-} // namespace item
 } // namespace descriptor
 
 namespace core {
 namespace control {
-namespace item {
 class Grapple;
-} // namespace item
 } // namespace control
 }
 
 namespace core {
-namespace item {
 
 class GrappleItemBuilder : public EquipmentBuilder
 {
@@ -57,5 +52,4 @@ private:
     static void __createInternals(core::control::item::Grapple*, descriptor::item::Grapple*);
 }; 
 
-} // namespace item
 } // namespace builder

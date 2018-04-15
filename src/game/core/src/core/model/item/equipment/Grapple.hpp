@@ -22,7 +22,6 @@
 #include "Equipment.hpp"
 
 namespace model {
-namespace item {
 
 class Grapple : public Equipment
 {
@@ -65,6 +64,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model
 

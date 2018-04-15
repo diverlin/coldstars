@@ -23,7 +23,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 class Droid : public Equipment
 {
@@ -72,6 +71,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

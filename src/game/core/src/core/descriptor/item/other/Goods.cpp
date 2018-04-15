@@ -24,7 +24,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 Goods::Goods()
 {
@@ -43,5 +42,4 @@ Goods::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace descriptor

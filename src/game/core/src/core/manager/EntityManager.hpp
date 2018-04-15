@@ -55,7 +55,6 @@ class SpaceObject;
 
 class Item;
 
-namespace item {
 class Weapon;
 class Scaner;
 class Drive;
@@ -66,7 +65,6 @@ class Lazer;
 class Protector;
 class Radar;
 class Rocket;
-} // namespace item
 
 } // namespace control
 

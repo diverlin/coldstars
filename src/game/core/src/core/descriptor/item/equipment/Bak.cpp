@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Bak::FUEL_MIN = 10;
 const int Bak::FUEL_MAX = 30;
@@ -59,5 +58,4 @@ Bak::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace descriptor

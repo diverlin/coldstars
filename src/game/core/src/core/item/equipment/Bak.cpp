@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Bak::Bak(descriptor::item::Bak* descr, model::item::Bak* model)
     :
@@ -80,6 +79,5 @@ std::string Bak::fuelStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core

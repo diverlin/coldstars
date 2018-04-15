@@ -21,7 +21,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Droid::REPAIR_MIN = 1;
 const int Droid::REPAIR_MAX = 15;
@@ -57,6 +56,5 @@ Droid::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace descriptor
 

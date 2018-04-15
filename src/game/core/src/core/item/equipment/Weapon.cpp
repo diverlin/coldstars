@@ -27,7 +27,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Weapon::Weapon(descriptor::item::Weapon* descr, model::item::Weapon* model)
     : Equipment(descr, model)
@@ -140,6 +139,5 @@ std::string Weapon::radiusStr()
 //    deteriorationEvent();
 //}
 
-} // namespace item
 } // namespace control
 } // namespace core

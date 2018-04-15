@@ -24,7 +24,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 const int Scaner::SCAN_MIN = 2;
 const int Scaner::SCAN_MAX = 40;
@@ -61,6 +60,5 @@ Scaner::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespce item
 } // namespace descriptor
 

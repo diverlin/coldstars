@@ -30,7 +30,6 @@
 #include <ceti/Logger.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Protector*
 ProtectorItemBuilder::gen()
@@ -90,5 +89,4 @@ ProtectorItemBuilder::__createInternals(core::control::item::Protector* protecto
     protector->model()->setProtection(descr->protection());
 }
 
-} // namespace item
 } // namespace builder

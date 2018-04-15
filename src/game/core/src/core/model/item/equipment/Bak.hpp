@@ -21,7 +21,6 @@
 #include "Equipment.hpp"
 
 namespace model {
-namespace item {
 
 class Bak : public Equipment
 {
@@ -54,7 +53,6 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model
 
 

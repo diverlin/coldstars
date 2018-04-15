@@ -24,7 +24,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 const int Radar::RADIUS_MIN = 700;
 const int Radar::RADIUS_MAX = 1500;
@@ -60,6 +59,5 @@ Radar::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespce item
 } // namespace descriptor
 

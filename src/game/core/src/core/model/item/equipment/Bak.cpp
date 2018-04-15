@@ -21,7 +21,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
-namespace item {
 
 Bak::Bak(int_t descriptor_id, int_t ob_id)
 {
@@ -40,6 +39,5 @@ Bak::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace model
 

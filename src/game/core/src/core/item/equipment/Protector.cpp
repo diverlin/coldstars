@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Protector::Protector(descriptor::item::Protector* descr, model::item::Protector* model)
     :
@@ -68,6 +67,5 @@ std::string Protector::protectionStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core

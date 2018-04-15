@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const float Drive::OVERLOAD_RATE = 1.5f;
 const float Drive::OVERLOAD_DETERIORATION_RATE = 4.0f;
@@ -68,6 +67,5 @@ Drive::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace descriptor
 

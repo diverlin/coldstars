@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Grapple::STRENGTH_MIN = 6;
 const int Grapple::STRENGTH_MAX = 50;
@@ -69,7 +68,6 @@ Grapple::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace descriptor
 
 

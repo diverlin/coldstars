@@ -21,13 +21,11 @@
 #include <core/type/EntityType.hpp>
 
 namespace descriptor {
-namespace item {
 
 Weapon::Weapon()
 {
     setSlotType(core::SlotType::WEAPON);
 }
 
-} // namespce item
 } // namespace descriptor
 

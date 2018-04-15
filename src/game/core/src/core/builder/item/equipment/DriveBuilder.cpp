@@ -29,7 +29,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Drive*
 DriveItemBuilder::gen()
@@ -79,5 +78,4 @@ void DriveItemBuilder::__createInternals(core::control::item::Drive* drive, desc
     drive->model()->setHyper(descr->hyper());
 }
 
-} // namespace item
 } // namespace builder

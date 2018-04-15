@@ -66,7 +66,6 @@ class Store;
 class Shop;
 class Goverment;
 
-namespace item {
 class Scaner;
 class Drive;
 class Bak;
@@ -78,7 +77,6 @@ class Radar;
 class Rocket;
 
 class Goods;
-} // namespace item
 
 class Turrel;
 

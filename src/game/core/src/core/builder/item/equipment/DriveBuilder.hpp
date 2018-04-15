@@ -26,38 +26,32 @@
 #include <string>
 
 namespace descriptor {
-namespace item {
 class Drive;
-} // namespace item
 } // namespace descriptor
 
 namespace core {
 namespace control {
-namespace item {
 class Drive;
-} // namespace item
 } // namespace control
 }
 
 namespace core {
-namespace item {
 
 class DriveItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Drive* gen();
-    static core::control::item::Drive* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Drive* gen(descriptor::item::Drive*);
+    static core::control::Drive* gen();
+    static core::control::Drive* gen(int_t, int_t ob_id = NONE);
+    static core::control::Drive* gen(descriptor::Drive*);
 
 private:
     DriveItemBuilder() = delete;
     ~DriveItemBuilder() = delete;
 
-    static core::control::item::Drive* __genTemplate(descriptor::item::Drive*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Drive*, descriptor::item::Drive*);
+    static core::control::Drive* __genTemplate(descriptor::Drive*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Drive*, descriptor::Drive*);
 }; 
 
-} // namespace item
 } // namespace builder
 
 

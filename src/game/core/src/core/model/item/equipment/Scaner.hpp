@@ -22,7 +22,6 @@
 #include "Equipment.hpp"
 
 namespace model {
-namespace item {
 
 class Scaner : public Equipment
 {
@@ -55,6 +54,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model
 

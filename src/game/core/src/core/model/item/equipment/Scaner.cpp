@@ -21,7 +21,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
-namespace item {
 
 Scaner::Scaner(int_t descriptor, int_t id)
 {
@@ -40,6 +39,5 @@ Scaner::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace model
 

@@ -22,20 +22,15 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 class Grapple;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Grapple;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Grapple : public Equipment
 {
@@ -66,6 +61,5 @@ private:
     std::string speedStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

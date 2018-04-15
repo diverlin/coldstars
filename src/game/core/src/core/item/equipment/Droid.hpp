@@ -22,20 +22,15 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 class Droid;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Droid;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Droid : public Equipment
 {
@@ -60,6 +55,5 @@ private:
     std::string GetRepairStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

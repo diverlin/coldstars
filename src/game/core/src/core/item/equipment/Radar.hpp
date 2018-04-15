@@ -23,20 +23,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 namespace descriptor {
-namespace item {
 class Radar;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Radar;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Radar : public Equipment
 {
@@ -60,7 +55,6 @@ private:
     std::string radiusStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core
 

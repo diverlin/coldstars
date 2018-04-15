@@ -22,23 +22,17 @@
 #include "Weapon.hpp"
 
 namespace descriptor {
-namespace item {
 class Rocket;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Rocket;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
 
 class SpaceObject;
-
-namespace item {
 
 class Rocket : public Weapon
 { 
@@ -65,6 +59,5 @@ private:
     std::string ammoStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core
