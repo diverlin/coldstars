@@ -27,7 +27,7 @@ namespace gui {
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 public:
-    ButtonItemSlot(core::slot::ItemSlot* slot)
+    ButtonItemSlot(core::ItemSlot* slot)
         :
           BaseButtonItemSlot(slot)
     {}

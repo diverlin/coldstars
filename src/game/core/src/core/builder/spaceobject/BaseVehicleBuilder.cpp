@@ -82,33 +82,33 @@ BaseVehicle::equip(core::control::Vehicle* vehicle)
 ////    // WEAPON SLOTS
 ////    unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;
 ////    for (unsigned int i=0; i<slot_weapon_num; i++) {
-////        slot::ItemSlot* weapon_slot = getNewItemSlot(entity::Type::WEAPON_SLOT);
+////        ItemSlot* weapon_slot = getNewItemSlot(entity::Type::WEAPON_SLOT);
 ////        weapon_slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);
 ////        vehicle->addItemSlot(weapon_slot);
 ////    }
         
 ////    if (vehicle->vehicleDescriptor().slot_radar_num) {
-////        slot::ItemSlot* radar_slot = getNewItemSlot(entity::Type::RADAR_SLOT);
+////        ItemSlot* radar_slot = getNewItemSlot(entity::Type::RADAR_SLOT);
 ////        vehicle->addItemSlot(radar_slot);
 ////    }
             
 ////    if (vehicle->vehicleDescriptor().slot_scaner_num) {
-////        slot::ItemSlot* scaner_slot = getNewItemSlot(entity::Type::SCANER_SLOT);
+////        ItemSlot* scaner_slot = getNewItemSlot(entity::Type::SCANER_SLOT);
 ////        vehicle->addItemSlot(scaner_slot);
 ////    }
 
 ////    if (vehicle->vehicleDescriptor().slot_energizer_num) {
-////        slot::ItemSlot* energizer_slot = getNewItemSlot(entity::Type::ENERGIZER_SLOT);
+////        ItemSlot* energizer_slot = getNewItemSlot(entity::Type::ENERGIZER_SLOT);
 ////        vehicle->addItemSlot(energizer_slot);
 ////    }
     
 ////    if (vehicle->vehicleDescriptor().slot_grapple_num) {
-////        slot::ItemSlot* grapple_slot = getNewItemSlot(entity::Type::GRAPPLE_SLOT);
+////        ItemSlot* grapple_slot = getNewItemSlot(entity::Type::GRAPPLE_SLOT);
 ////        vehicle->addItemSlot(grapple_slot);
 ////    }
     
 ////    if (vehicle->vehicleDescriptor().slot_droid_num) {
-////        slot::ItemSlot* droid_slot = getNewItemSlot(entity::Type::DROID_SLOT);
+////        ItemSlot* droid_slot = getNewItemSlot(entity::Type::DROID_SLOT);
 ////        vehicle->addItemSlot(droid_slot);
 ////    }
     
@@ -118,24 +118,24 @@ BaseVehicle::equip(core::control::Vehicle* vehicle)
 ////    }
     
 ////    if (vehicle->vehicleDescriptor().slot_protector_num) {
-////        slot::ItemSlot* protector_slot = getNewItemSlot(entity::Type::PROTECTOR_SLOT);
+////        ItemSlot* protector_slot = getNewItemSlot(entity::Type::PROTECTOR_SLOT);
 ////        vehicle->addItemSlot(protector_slot);
 ////    }
     
 ////    if (vehicle->vehicleDescriptor().slot_drive_num) {
-////        slot::ItemSlot* drive_slot = getNewItemSlot(entity::Type::DRIVE_SLOT);
+////        ItemSlot* drive_slot = getNewItemSlot(entity::Type::DRIVE_SLOT);
 ////        vehicle->addItemSlot(drive_slot);
 ////    }
     
 ////    if (vehicle->vehicleDescriptor().slot_bak_num) {
-////        slot::ItemSlot* bak_slot = getNewItemSlot(entity::Type::BAK_SLOT);
+////        ItemSlot* bak_slot = getNewItemSlot(entity::Type::BAK_SLOT);
 ////        vehicle->addItemSlot(bak_slot);
 ////    }
     
 ////    //////////// ARTEFACT SLOT /////////////////////////
 ////    int artefact_num = vehicle->vehicleDescriptor().slot_artefact_num;
 ////    for (int i=0; i<artefact_num; i++) {
-////        slot::ItemSlot* artefact_slot = getNewItemSlot(entity::Type::ARTEFACT_SLOT);
+////        ItemSlot* artefact_slot = getNewItemSlot(entity::Type::ARTEFACT_SLOT);
 ////        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);
 ////        vehicle->addItemSlot(artefact_slot);
 ////    }
@@ -143,14 +143,14 @@ BaseVehicle::equip(core::control::Vehicle* vehicle)
 ////    //////// OTSEC SLOT ////////////////////////////////
 ////    int otsec_num = vehicle->vehicleDescriptor().slot_otsec_num;
 ////    for (int i=0; i<otsec_num; i++) {
-////        slot::ItemSlot* otsec_slot = getNewItemSlot(entity::Type::CARGO_SLOT);
+////        ItemSlot* otsec_slot = getNewItemSlot(entity::Type::CARGO_SLOT);
 ////        otsec_slot->setSubSubTypeId(SLOT_CARGO_TYPES[i]);
 ////        vehicle->addItemSlot(otsec_slot);
 ////    }
 
 ////    // GATE SLOT
 ////    {
-////        slot::ItemSlot* gate_slot = getNewItemSlot(entity::Type::GATE_SLOT);
+////        ItemSlot* gate_slot = getNewItemSlot(entity::Type::GATE_SLOT);
 ////        vehicle->addItemSlot(gate_slot);
 ////    }
 //}

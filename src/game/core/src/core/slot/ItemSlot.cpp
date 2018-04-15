@@ -83,9 +83,8 @@
 //} // namespace model
 
 namespace core {
-namespace slot {
 
-ItemSlot::ItemSlot(slot::Type type)
+ItemSlot::ItemSlot(const SlotType& type)
     :
       m_type(type)
 {
@@ -106,7 +105,7 @@ ItemSlot::~ItemSlot()
 
 bool ItemSlot::__checkItemInsertion(control::Item* item) const
 {
-    if (type() == slot::Type::CARGO) {
+    if (type() == SlotType::CARGO) {
         return true;
     }
     if (type() == item->descriptor()->slotType()) {
@@ -118,7 +117,7 @@ bool ItemSlot::__checkItemInsertion(control::Item* item) const
 
 bool ItemSlot::insert(control::Item* item)
 {
-    if ((type() == slot::Type::CARGO) || (type() == item->descriptor()->slotType())) {
+    if ((type() == SlotType::CARGO) || (type() == item->descriptor()->slotType())) {
         m_item = item;
         if (item->slot()) {
             item->slot()->release();
@@ -141,14 +140,14 @@ void ItemSlot::release()
         return;
     }
 
-    if (type() == slot::Type::WEAPON) {
+    if (type() == SlotType::WEAPON) {
         reset();
     }
 
     // make it oop
     m_item = nullptr;
 
-    if (type() != slot::Type::CARGO) {
+    if (type() != SlotType::CARGO) {
         updateVehiclePropetries();
     }
 }
@@ -193,31 +192,31 @@ void ItemSlot::updateVehiclePropetries() const
 
     switch(type())
     {
-    case slot::Type::CARGO: { break; }
-    case slot::Type::WEAPON: { vehicleOwner()->_updatePropFire(); break; }
-    case slot::Type::ARTEFACT: { vehicleOwner()->_updateArtefactInfluence(); break; }
-    case slot::Type::SCANER:     { vehicleOwner()->_updatePropScan(); break; }
-    case slot::Type::BAK:         {
+    case SlotType::CARGO: { break; }
+    case SlotType::WEAPON: { vehicleOwner()->_updatePropFire(); break; }
+    case SlotType::ARTEFACT: { vehicleOwner()->_updateArtefactInfluence(); break; }
+    case SlotType::SCANER:     { vehicleOwner()->_updatePropScan(); break; }
+    case SlotType::BAK:         {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
 
         break;
     }
 
-    case slot::Type::DRIVE:       {
+    case SlotType::DRIVE:       {
         vehicleOwner()->_updatePropSpeed();
         vehicleOwner()->_updatePropJump();
         break;
     }
 
-    case slot::Type::DROID:     { vehicleOwner()->_updatePropRepair(); break; }
+    case SlotType::DROID:     { vehicleOwner()->_updatePropRepair(); break; }
 #ifdef USE_EXTRA_EQUIPMENT
-    case slot::Type::ENERGIZER: { vehicleOwner()->_updatePropEnergy(); break; }
-    case slot::Type::FREEZER:     { vehicleOwner()->_updatePropFreeze(); break; }
+    case SlotType::ENERGIZER: { vehicleOwner()->_updatePropEnergy(); break; }
+    case SlotType::FREEZER:     { vehicleOwner()->_updatePropFreeze(); break; }
 #endif // USE_EXTRA_EQUIPMENT
-    case slot::Type::GRAPPLE:     { vehicleOwner()->_updatePropGrab(); break; }
-    case slot::Type::PROTECTOR: { vehicleOwner()->_updatePropProtection(); break; }
-    case slot::Type::RADAR:     { vehicleOwner()->_updatePropRadar(); break; }
+    case SlotType::GRAPPLE:     { vehicleOwner()->_updatePropGrab(); break; }
+    case SlotType::PROTECTOR: { vehicleOwner()->_updatePropProtection(); break; }
+    case SlotType::RADAR:     { vehicleOwner()->_updatePropRadar(); break; }
 
     default:
         assert(false);
@@ -257,7 +256,7 @@ ItemSlot::takeItem()
     return item;
 }
 
-bool ItemSlot::swapItem(slot::ItemSlot* slot)
+bool ItemSlot::swapItem(ItemSlot* slot)
 {
     assert(slot);
     if (!m_item && slot->item()) {
@@ -360,7 +359,7 @@ bool ItemSlot::swapItem(slot::ItemSlot* slot)
 ////    }
 
 ////    if (m_unresolved_ItemSlot.subtarget_id != NONE) {
-////        m_subtarget = (slot::ItemSlot*)manager::EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
+////        m_subtarget = (ItemSlot*)manager::EntityManager::get().get(m_unresolved_ItemSlot.subtarget_id);
 ////    }
 
 ////    switch(owner->typeId())
@@ -385,5 +384,4 @@ void ItemSlot::log(const std::string& func_name) const
     //    LOG(str);
 }
 
-} // naespace slot
 } // namespace core

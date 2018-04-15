@@ -43,7 +43,7 @@ Droid::Droid()
     setType(descriptor::Type::DROID_EQUIPMENT);
     setObType(entity::Type::DROID_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
-    setSlotType(core::slot::Type::DROID);
+    setSlotType(core::SlotType::DROID);
 }
 
 Droid::Droid(const std::string& data)

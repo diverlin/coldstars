@@ -34,7 +34,7 @@ public:
 
     void setRace(race::Type race) { m_race = race; }
     void setTech(tech::Type tech) { m_tech = tech; }
-    void setSlotType(core::slot::Type slotType) { m_slotType = slotType; }
+    void setSlotType(const core::SlotType& slotType) { m_slotType = slotType; }
     void setCondition(int condition) { m_condition = condition; }
     void setDeterioration(int deterioration) { m_deterioration = deterioration; }
     void setMass(int mass) { m_mass = mass; }
@@ -42,7 +42,7 @@ public:
 
     race::Type race() const { return m_race; }
     tech::Type tech() const { return m_tech; }
-    core::slot::Type slotType() const { return m_slotType; }
+    const core::SlotType& slotType() const { return m_slotType; }
     int condition() const { return m_condition; }
     int deterioration() const { return m_deterioration; }
     int mass() const { return m_mass; }
@@ -51,7 +51,7 @@ public:
 private:
     race::Type m_race = race::Type::NONE;
     tech::Type m_tech = tech::Type::NONE;
-    core::slot::Type m_slotType = core::slot::Type::NONE;
+    core::SlotType m_slotType = core::SlotType::NONE;
     int m_condition = 0;
     int m_deterioration = 0;
     int m_mass = 0;
@@ -63,7 +63,7 @@ protected:
         result.add("descriptor::Item");
         result.add("race", race::to_string(m_race));
         result.add("tech", tech::to_string(m_tech));
-        result.add("slotType", core::slot::to_string(m_slotType));
+        result.add("slotType", core::to_string(m_slotType));
         result.add("condition", m_condition);
         result.add("deterioration", m_deterioration);
         result.add("mass", m_mass);

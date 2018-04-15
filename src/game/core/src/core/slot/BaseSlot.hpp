@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <core/Base.hpp>
+//#include <core/Base.hpp>
 
 #include <ceti/type/IdType.hpp>
 
@@ -28,18 +28,17 @@ namespace core {
 
 namespace control {
 class Vehicle;
+class Base;
 } // namespace control
 
-namespace slot {
-
-class BaseSlot /*: public ::Base*/
+class BaseSlot
 {
 public:
     BaseSlot() = default;
     virtual ~BaseSlot() = default;
 
     void setId(int id) { m_id = id; }
-    void setOwner(core::control::Base* owner) { m_owner = owner; }
+    void setOwner(control::Base* owner) { m_owner = owner; }
     void setPosition(const glm::vec2& position) { m_position = position; }
     void setSelected(bool selected) { m_selected = selected; }
     void selectEvent() { m_selected = true; }
@@ -49,20 +48,19 @@ public:
 
     const glm::vec2& position() const { return m_position; }
 
-    core::control::Vehicle* vehicleOwner() const;
+    control::Vehicle* vehicleOwner() const;
 
-    core::control::Base* owner() const { return m_owner; }
+    control::Base* owner() const { return m_owner; }
 
 private:
     int m_id = 0;
     bool m_selected = false;
 
-    core::control::Base* m_owner = nullptr;
+    control::Base* m_owner = nullptr;
 
     glm::vec2 m_position;
 };
 
-} // namespace slot
 } // namespace core
 
 //class BaseSlot : public ::control::Base

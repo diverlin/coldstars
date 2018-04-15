@@ -21,13 +21,12 @@
 #include <core/slot/ItemSlot.hpp>
 
 namespace core {
-namespace slot {
 
 WeaponSlot::WeaponSlot()
 {
 }
 
-void WeaponSlot::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
+void WeaponSlot::setTarget(control::SpaceObject* target, ItemSlot* subtarget)
 {
     m_target = target;
     m_subtarget = subtarget;
@@ -61,5 +60,4 @@ bool WeaponSlot::validateSubTarget() const
     return false;
 }
 
-} // namespace slot
 } // namespace core

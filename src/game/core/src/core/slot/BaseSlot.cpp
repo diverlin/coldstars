@@ -27,16 +27,14 @@
 #include <core/spaceobject/Vehicle.hpp>
 
 namespace core {
-namespace slot {
 
 core::control::Vehicle*
 BaseSlot::vehicleOwner() const {
-    core::control::Vehicle* vehicle = static_cast<core::control::Vehicle*>(m_owner);
+    control::Vehicle* vehicle = static_cast<control::Vehicle*>(m_owner);
     assert(vehicle);
     return vehicle;
 }
 
-} // namespace slot
 } // namespace core
 
 //BaseSlot::BaseSlot()

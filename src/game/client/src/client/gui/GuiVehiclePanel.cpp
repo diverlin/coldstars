@@ -60,7 +60,7 @@ VehiclePanel::unselect(gui::Type type, int offset)
         return;
     }
 
-    core::slot::ItemSlot* slot = button->itemSlot();
+    core::ItemSlot* slot = button->itemSlot();
     if (slot->item()) {
         slot->deselectEvent();
     }
@@ -76,7 +76,7 @@ VehiclePanel::toggle(gui::Type type, int offset)
         return;
     }
 
-    core::slot::ItemSlot* slot = button->itemSlot();
+    core::ItemSlot* slot = button->itemSlot();
     if (slot->item()) {
         if (button->isPressed()) {
             slot->deselectEvent();
@@ -110,8 +110,8 @@ void VehiclePanel::__bindVehicle(core::control::Vehicle* vehicle)
 void VehiclePanel::__createFunctionalItemSlotsWithCircleGeometry(core::control::Vehicle* vehicle)
 {   
     int angle = 0;
-    for (core::slot::ItemSlot* slot: vehicle->slots()) {
-        if (slot->type() != core::slot::Type::CARGO && slot->type() != core::slot::Type::ARTEFACT) {
+    for (core::ItemSlot* slot: vehicle->slots()) {
+        if (slot->type() != core::SlotType::CARGO && slot->type() != core::SlotType::ARTEFACT) {
             ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
             glm::vec2 size(gui::itemslot::WIDTH_FOR_RADAR, gui::itemslot::HEIGHT_FOR_RADAR);

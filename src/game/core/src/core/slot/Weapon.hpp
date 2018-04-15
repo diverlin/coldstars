@@ -21,12 +21,9 @@
 
 namespace core {
 
-
 namespace control {
 class SpaceObject;
 } // namespace control
-
-namespace slot {
 
 class ItemSlot;
 
@@ -36,10 +33,10 @@ public:
     WeaponSlot();
     ~WeaponSlot() = default;
 
-    void setTarget(core::control::SpaceObject* target, slot::ItemSlot* subtarget = nullptr);
+    void setTarget(control::SpaceObject* target, ItemSlot* subtarget = nullptr);
 
-    core::control::SpaceObject* target() const { return m_target; }
-    slot::ItemSlot* subtarget() const { return m_subtarget; }
+    control::SpaceObject* target() const { return m_target; }
+    ItemSlot* subtarget() const { return m_subtarget; }
 
     bool validateSubTarget() const;
 
@@ -48,9 +45,8 @@ public:
     void resetSubTarget();
 
 private:
-    core::control::SpaceObject* m_target = nullptr;
-    core::slot::ItemSlot* m_subtarget = nullptr;
+    control::SpaceObject* m_target = nullptr;
+    ItemSlot* m_subtarget = nullptr;
 };
 
-} // namespace slot
 } // naemspace core

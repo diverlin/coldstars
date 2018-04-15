@@ -45,7 +45,7 @@ Ship::Ship(core::control::Ship* control)
 {
     _setOrientation(control);
 
-    for(core::slot::ItemSlot* slot: control->weaponSlots()) {
+    for(core::ItemSlot* slot: control->weaponSlots()) {
         // don't create resources, try to get existed from cache
         core::control::Turrel* turrel_control = builder::Turrel().gen();
         glm::vec3 pos(meti::rand::gen_float(-0.7f, 0.7f), meti::rand::gen_float(-0.7f, 0.7f), 0);

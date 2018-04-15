@@ -70,15 +70,14 @@ class Bomb;
 class GoodsPack; 
 
 namespace core {
-namespace slot {
 
 class ItemSlot : public BaseSlot, public WeaponSlot
 {
 public:
-    ItemSlot(Type type);
+    ItemSlot(const SlotType& type);
     virtual ~ItemSlot();
 
-    Type type() const { return m_type; }
+    SlotType type() const { return m_type; }
     int offset() const { return m_offset; }
 
     void setOffset(int offset) { m_offset = offset; }
@@ -126,7 +125,7 @@ public:
 
     void updateVehiclePropetries() const;
 
-    bool swapItem(slot::ItemSlot*);
+    bool swapItem(ItemSlot*);
 
     void selectEvent();
     void deselectEvent();
@@ -141,7 +140,7 @@ private:
     void log(const std::string&) const;
 
     int m_offset = NONE;
-    Type m_type = Type::NONE;
+    SlotType m_type = SlotType::NONE;
 
     //    virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
     //    virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
@@ -152,6 +151,5 @@ private:
     //    void drawRange(const glm::vec2&);
 };
 
-} // namespace slot
 } // namespace core
 

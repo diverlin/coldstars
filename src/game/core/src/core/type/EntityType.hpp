@@ -22,9 +22,8 @@
 #include <string>
 
 namespace core {
-namespace slot {
 
-enum class Type {
+enum class SlotType {
     NONE = 0,
     WEAPON,
     CARGO,
@@ -41,8 +40,8 @@ enum class Type {
     GATE
 };
 
-std::string to_string(Type);
-} // namespace slot
+std::string to_string(SlotType);
+
 } // naemspace core
 
 namespace entity

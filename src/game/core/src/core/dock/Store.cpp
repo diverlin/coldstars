@@ -44,7 +44,7 @@ Store::Store(descriptor::Store* descr, model::Store* model)
     , m_model_store(model)
 {
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++) {
-        slot::ItemSlot* slot = new slot::ItemSlot(slot::Type::CARGO);
+        ItemSlot* slot = new ItemSlot(SlotType::CARGO);
         __add(slot);
     }
 
@@ -69,7 +69,7 @@ void Store::putChildrenToGarbage() const
     //    }
 }
 
-void Store::__add(slot::ItemSlot* item_slot)
+void Store::__add(ItemSlot* item_slot)
 { 
     item_slot->setOwner(this);
     m_item_slots.push_back(item_slot);
@@ -83,7 +83,7 @@ void Store::__add(slot::Vehicle* vehicle_slot)
 
 bool Store::add(Item* item)
 {
-    slot::ItemSlot* slot = freeItemSlot();
+    ItemSlot* slot = freeItemSlot();
     if (slot) {
         slot->insert(item);
         return true;
@@ -108,7 +108,7 @@ bool Store::add(Vehicle* vehicle)
     return true;
 }
 
-slot::ItemSlot*
+ItemSlot*
 Store::freeItemSlot() const
 {
     for (auto* slot: m_item_slots) {
@@ -133,7 +133,7 @@ Store::freeVehicleSlot() const
 int
 Store::buyItem(Item* item)
 {
-    slot::ItemSlot* slot = freeItemSlot();
+    ItemSlot* slot = freeItemSlot();
     if (slot) {
         if (slot->insert(item)) {
             return item->descriptor()->price();

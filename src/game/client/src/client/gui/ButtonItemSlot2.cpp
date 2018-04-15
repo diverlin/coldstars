@@ -23,22 +23,22 @@
 
 namespace {
 
-gui::Type guiTypeFromSlotType(core::slot::Type slot) {
+gui::Type guiTypeFromSlotType(const core::SlotType& slot) {
     switch(slot)
     {
-    case core::slot::Type::CARGO:     { return gui::Type::CARGO_SLOT_SELECTOR; break; }
-    case core::slot::Type::WEAPON:    { return gui::Type::WEAPON_SLOT_SELECTOR; break; }
-    case core::slot::Type::DRIVE:     { return gui::Type::DRIVE_SLOT_SELECTOR; break; }
-    case core::slot::Type::RADAR:     { return gui::Type::RADAR_SLOT_SELECTOR; break; }
-    case core::slot::Type::BAK:       { return gui::Type::BAK_SLOT_SELECTOR; break; }
-        //case slot::Type::ENERGIZER:   { return gui::Type::ENERGIZER_SLOT_SELECTOR; break; }
-        //case slot::Type::PROTECTOR:   { return gui::Type::PROTECTOR_SLOT_SELECTOR; break; }
-    case core::slot::Type::DROID:     { return gui::Type::DROID_SLOT_SELECTOR; break; }
-    case core::slot::Type::FREEZER:   { return gui::Type::FREEZER_SLOT_SELECTOR; break; }
-    case core::slot::Type::GRAPPLE:   { return gui::Type::GRAPPLE_SLOT_SELECTOR; break; }
-    case core::slot::Type::SCANER:    { return gui::Type::SCANER_SLOT_SELECTOR; break; }
-        //            case entity::Type::ARTEFACT_SLOT:   { return gui::type::ARTEFACT_SLOT; break; }
-        //            case entity::Type::GATE_SLOT:   { return gui::type::GATE_SLOT; break; }
+    case core::SlotType::CARGO:     { return gui::Type::CARGO_SLOT_SELECTOR; break; }
+    case core::SlotType::WEAPON:    { return gui::Type::WEAPON_SLOT_SELECTOR; break; }
+    case core::SlotType::DRIVE:     { return gui::Type::DRIVE_SLOT_SELECTOR; break; }
+    case core::SlotType::RADAR:     { return gui::Type::RADAR_SLOT_SELECTOR; break; }
+    case core::SlotType::BAK:       { return gui::Type::BAK_SLOT_SELECTOR; break; }
+        //case core::SlotType::ENERGIZER:   { return gui::Type::ENERGIZER_SLOT_SELECTOR; break; }
+        //case core::SlotType::PROTECTOR:   { return gui::Type::PROTECTOR_SLOT_SELECTOR; break; }
+    case core::SlotType::DROID:     { return gui::Type::DROID_SLOT_SELECTOR; break; }
+    case core::SlotType::FREEZER:   { return gui::Type::FREEZER_SLOT_SELECTOR; break; }
+    case core::SlotType::GRAPPLE:   { return gui::Type::GRAPPLE_SLOT_SELECTOR; break; }
+    case core::SlotType::SCANER:    { return gui::Type::SCANER_SLOT_SELECTOR; break; }
+        //            case core::SlotType::ARTEFACT_SLOT:   { return gui::type::ARTEFACT_SLOT; break; }
+        //            case core::SlotType::GATE_SLOT:   { return gui::type::GATE_SLOT; break; }
     }
 
     return gui::Type::NONE;
@@ -48,7 +48,7 @@ gui::Type guiTypeFromSlotType(core::slot::Type slot) {
 
 namespace gui {
 
-ButtonItemSlot2::ButtonItemSlot2(core::slot::ItemSlot* slot)
+ButtonItemSlot2::ButtonItemSlot2(core::ItemSlot* slot)
     :
       BaseButtonItemSlot(slot)
 {
