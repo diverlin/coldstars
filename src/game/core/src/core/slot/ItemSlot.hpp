@@ -72,7 +72,7 @@ class GoodsPack;
 namespace core {
 namespace slot {
 
-class ItemSlot : public BaseSlot, public Weapon
+class ItemSlot : public BaseSlot, public WeaponSlot
 {
 public:
     ItemSlot(Type type);
