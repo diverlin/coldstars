@@ -20,7 +20,7 @@
 
 namespace core {
 class ItemDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

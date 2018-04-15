@@ -22,7 +22,7 @@
 
 namespace core {
 class TurrelDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

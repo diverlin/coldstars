@@ -86,4 +86,4 @@ std::string to_string(Type type)
     }
 }
 
-} // namespace descriptor
+} // namespace core

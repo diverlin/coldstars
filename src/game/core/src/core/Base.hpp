@@ -32,7 +32,7 @@
 
 namespace core {
 class BaseDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Base;

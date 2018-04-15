@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace core {
 class DriveDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Drive;

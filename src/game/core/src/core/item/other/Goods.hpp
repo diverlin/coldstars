@@ -22,7 +22,7 @@
 
 namespace core {
 class GoodsDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Goods;

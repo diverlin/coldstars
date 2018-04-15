@@ -113,4 +113,4 @@ GoodsDescr* genGoods();
 //parts
 TurrelDescr* genTurrel();
 
-} // namespace descriptor
+} // namespace core

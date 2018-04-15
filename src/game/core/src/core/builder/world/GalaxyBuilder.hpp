@@ -23,7 +23,7 @@
 
 namespace core {
 class GalaxyDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

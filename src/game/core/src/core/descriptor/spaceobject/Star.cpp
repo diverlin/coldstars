@@ -37,4 +37,4 @@ StarDescr::StarDescr(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 
-} // namespace descriptor
+} // namespace core

@@ -60,5 +60,5 @@ ScanerDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace descriptor
+} // namespace core
 

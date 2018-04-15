@@ -29,7 +29,7 @@
 namespace core {
 class GalaxyDescr;
 class Descriptors;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 

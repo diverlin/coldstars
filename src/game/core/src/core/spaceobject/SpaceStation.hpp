@@ -21,11 +21,11 @@
 
 namespace core {
 class SpaceStationDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class SpaceStation;
-} // namespace descriptor
+} // namespace core
 
 #include <core/model/spaceobject/Vehicle.hpp>
 

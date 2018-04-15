@@ -30,7 +30,7 @@ class Galaxy;
 
 namespace core {
 class GalaxyDescr;
-} // namespace descriptor
+} // namespace core
 
 class StarSystemDescriptor;
 

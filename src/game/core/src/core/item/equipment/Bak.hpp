@@ -23,7 +23,7 @@
 
 namespace core {
 class BakDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Bak;

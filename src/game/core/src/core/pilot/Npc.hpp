@@ -33,7 +33,7 @@
 
 namespace core {
 class NpcDescr;
-} // namespace descriptor
+} // namespace core
 
 class BaseAiModel;
 

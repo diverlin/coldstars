@@ -26,7 +26,7 @@ GalaxyDescr::GalaxyDescr()
     setObType(entity::Type::GALAXY);
 }
 
-} // namespace descriptor
+} // namespace core
 
 
 

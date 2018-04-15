@@ -36,7 +36,7 @@ class GoodsPack;
 
 namespace core {
 class VehicleDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Vehicle;

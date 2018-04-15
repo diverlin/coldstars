@@ -19,7 +19,7 @@
 
 namespace core {
 class EquipmentDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace test {
 

@@ -22,7 +22,7 @@
 
 namespace core {
 class GovermentDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Goverment;

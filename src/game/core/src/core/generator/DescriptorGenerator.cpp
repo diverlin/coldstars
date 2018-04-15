@@ -1230,6 +1230,6 @@ genTurrel()
 }
 
 
-} // namespace descriptor
+} // namespace core
 
 

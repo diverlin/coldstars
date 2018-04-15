@@ -19,7 +19,7 @@
 
 namespace core {
 class ItemDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace test {
 

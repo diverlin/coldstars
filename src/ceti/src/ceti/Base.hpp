@@ -59,7 +59,7 @@ namespace ceti {
 //    }
 //};
 
-//} // namespace descriptor
+//} // namespace core
 
 //namespace model {
 

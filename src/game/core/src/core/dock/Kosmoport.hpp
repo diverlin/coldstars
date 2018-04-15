@@ -22,7 +22,7 @@
 
 namespace core {
 class KosmoportDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Kosmoport;

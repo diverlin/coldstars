@@ -27,7 +27,7 @@
 
 namespace core {
 class GoodsDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace core {
 namespace control {

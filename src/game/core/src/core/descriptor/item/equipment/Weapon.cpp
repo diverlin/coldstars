@@ -27,5 +27,5 @@ WeaponDescr::WeaponDescr()
     setSlotType(core::SlotType::WEAPON);
 }
 
-} // namespace descriptor
+} // namespace core
 

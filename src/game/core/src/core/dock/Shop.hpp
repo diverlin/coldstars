@@ -24,7 +24,7 @@ class GoodsPack;
 
 namespace core {
 class ShopDescr;
-} // namespace descriptor
+} // namespace core
 
 namespace model {
 class Shop;
