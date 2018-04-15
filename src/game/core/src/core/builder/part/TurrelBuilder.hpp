@@ -30,7 +30,7 @@ class Turrel;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class TurrelBuilder
 {

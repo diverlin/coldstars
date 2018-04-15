@@ -46,7 +46,7 @@ const int MASS_MAX = 2000;
 }
 }
 
-namespace builder {
+namespace core {
 
 class SpaceStationBuilder : public VehicleBuilder
 {

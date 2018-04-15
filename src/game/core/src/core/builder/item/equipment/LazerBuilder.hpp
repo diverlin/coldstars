@@ -39,7 +39,7 @@ class Lazer;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 namespace item {
 
 class LazerItemBuilder : public EquipmentBuilder

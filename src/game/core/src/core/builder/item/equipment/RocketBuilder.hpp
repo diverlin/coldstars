@@ -39,7 +39,7 @@ class Rocket;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 namespace item {
 
 class RocketItemBuilder : public EquipmentBuilder

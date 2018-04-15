@@ -32,7 +32,7 @@
 
 //#include <common/Config.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::Sector*
 SectorBuilder::gen()

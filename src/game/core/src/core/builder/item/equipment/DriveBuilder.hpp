@@ -39,7 +39,7 @@ class Drive;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 namespace item {
 
 class DriveItemBuilder : public EquipmentBuilder

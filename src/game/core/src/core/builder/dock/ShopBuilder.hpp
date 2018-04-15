@@ -31,7 +31,7 @@ class Shop;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class ShopBuilder
 {

@@ -85,38 +85,38 @@ void loadItem(int_t object, int_t parent) {
 
 /** CREATE */
 void createGalaxy(int_t descriptor, int_t object) {
-    core::control::Galaxy* galaxy = builder::GalaxyBuilder::gen(descriptor, object);
+    core::control::Galaxy* galaxy = core::GalaxyBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(galaxy);
     core::shortcuts::entities()->setGalaxy(galaxy);
 }
 void createSector(int_t descriptor, int_t object) {
-    core::control::Sector* sector = builder::SectorBuilder::gen(descriptor, object);
+    core::control::Sector* sector = core::SectorBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(sector);
 }
 void createStarSystem(int_t descriptor, int_t object) {
-    core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen(descriptor, object);
+    core::control::StarSystem* starsystem = core::StarSystemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(starsystem);
 }
 void createNpc(int_t descriptor, int_t object) {
-    core::control::Npc* npc = builder::NpcBuilder::gen(descriptor, object);
+    core::control::Npc* npc = core::NpcBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(npc);
 }
 
 // spaceobjects
 void createStar(int_t descriptor, int_t object) {
-    core::control::Star* star = builder::StarBuilder::gen(descriptor, object);
+    core::control::Star* star = core::StarBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(star);
 }
 void createPlanet(int_t descriptor, int_t object) {
-    core::control::Planet* planet = builder::PlanetBuilder::gen(descriptor, object);
+    core::control::Planet* planet = core::PlanetBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(planet);
 }
 void createAsteroid(int_t descriptor, int_t object) {
-    core::control::Asteroid* asteroid = builder::AsteroidBuilder::gen(descriptor, object);
+    core::control::Asteroid* asteroid = core::AsteroidBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(asteroid);
 }
 void createShip(int_t descriptor, int_t object) {
-    core::control::Ship* ship = builder::ShipBuilder::gen(descriptor, object);
+    core::control::Ship* ship = core::ShipBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(ship);
 }
 
@@ -125,12 +125,12 @@ void createBomb(int_t descriptor, int_t object) {
 }
 
 void createGoods(int_t descriptor, int_t object) {
-    core::control::item::Goods* goods = builder::item::GoodsBuilder::gen(descriptor, object);
+    core::control::item::Goods* goods = core::item::GoodsBuilder::gen(descriptor, object);
     assert(false);
     core::shortcuts::entities()->add(goods); // is it needed?
 }
 void createContainer(int_t descriptor, int_t object, int_t item) {
-    core::control::Container* container = builder::ContainerBuilder::gen(descriptor, object, item);
+    core::control::Container* container = core::ContainerBuilder::gen(descriptor, object, item);
     core::shortcuts::entities()->add(container);
 }
 
@@ -141,7 +141,7 @@ void createBullet(int_t owner, int_t weapon, int_t target_id) {
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
-    control::Bullet* bullet = builder::BulletBuilder::gen(bullet_descriptor, rocket->damage());
+    control::Bullet* bullet = core::BulletBuilder::gen(bullet_descriptor, rocket->damage());
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);
     vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());
@@ -150,39 +150,39 @@ void createBullet(int_t owner, int_t weapon, int_t target_id) {
 
 // items
 void createBak(int_t descriptor, int_t object) {
-    control::item::Bak* bak = builder::item::BakItemBuilder::gen(descriptor, object);
+    control::item::Bak* bak = core::item::BakItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(bak);
 }
 void createDrive(int_t descriptor, int_t object) {
-    control::item::Drive* drive = builder::item::DriveItemBuilder::gen(descriptor, object);
+    control::item::Drive* drive = core::item::DriveItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(drive);
 }
 void createDroid(int_t descriptor, int_t object) {
-    control::item::Droid* droid = builder::item::DroidItemBuilder::gen(descriptor, object);
+    control::item::Droid* droid = core::item::DroidItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(droid);
 }
 void createGrapple(int_t descriptor, int_t object) {
-    control::item::Grapple* grapple = builder::item::GrappleItemBuilder::gen(descriptor, object);
+    control::item::Grapple* grapple = core::item::GrappleItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(grapple);
 }
 void createProtector(int_t descriptor, int_t object) {
-    control::item::Protector* protector = builder::item::ProtectorItemBuilder::gen(descriptor, object);
+    control::item::Protector* protector = core::item::ProtectorItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(protector);
 }
 void createScaner(int_t descriptor, int_t object) {
-    control::item::Scaner* scaner = builder::item::ScanerItemBuilder::gen(descriptor, object);
+    control::item::Scaner* scaner = core::item::ScanerItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(scaner);
 }
 void createRadar(int_t descriptor, int_t object) {
-    control::item::Radar* radar = builder::item::RadarItemBuilder::gen(descriptor, object);
+    control::item::Radar* radar = core::item::RadarItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(radar);
 }
 void createLazer(int_t descriptor, int_t object) {
-    control::item::Lazer* lazer = builder::item::LazerItemBuilder::gen(descriptor, object);
+    control::item::Lazer* lazer = core::item::LazerItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(lazer);
 }
 void createRocket(int_t descriptor, int_t object) {
-    control::item::Rocket* rocket = builder::item::RocketItemBuilder::gen(descriptor, object);
+    control::item::Rocket* rocket = core::item::RocketItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(rocket);
 }
 /** */
@@ -303,7 +303,7 @@ void dropItem(int_t object, int_t target) {
     ship->remove(item);
 
     // add
-    control::Container* container = builder::ContainerBuilder::gen();
+    control::Container* container = core::ContainerBuilder::gen();
     container->insert(item);
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);

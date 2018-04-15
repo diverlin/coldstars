@@ -31,7 +31,7 @@ class Npc;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class NpcBuilder
 {

@@ -27,7 +27,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::Bullet*
 BulletBuilder::gen(int damage)

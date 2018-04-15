@@ -39,7 +39,7 @@ class Bak;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 namespace item {
 
 class BakItemBuilder : public EquipmentBuilder

@@ -44,7 +44,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::Store*
 StoreBuilder::gen()
@@ -110,34 +110,34 @@ StoreBuilder::__putRandomEquipment(core::control::Store* store)
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->add(builder::ShipBuilder::gen());
+        store->add(core::ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->add(builder::item::LazerItemBuilder::gen());
+        store->add(core::item::LazerItemBuilder::gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->add(builder::item::RocketItemBuilder::gen());
+        store->add(core::item::RocketItemBuilder::gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->add(builder::item::RadarItemBuilder::gen());
+        store->add(core::item::RadarItemBuilder::gen());
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->add(builder::item::GrappleItemBuilder::gen());
+        store->add(core::item::GrappleItemBuilder::gen());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->add(builder::item::DriveItemBuilder::gen());
+        store->add(core::item::DriveItemBuilder::gen());
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->add(builder::item::ProtectorItemBuilder::gen());
+        store->add(core::item::ProtectorItemBuilder::gen());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->add(builder::item::BakItemBuilder::gen());
+        store->add(core::item::BakItemBuilder::gen());
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->add(builder::item::DroidItemBuilder::gen());
+        store->add(core::item::DroidItemBuilder::gen());
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->add(builder::item::ScanerItemBuilder::gen());
+        store->add(core::item::ScanerItemBuilder::gen());
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

@@ -26,7 +26,7 @@
 #include <core/common/Global.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace core {
 namespace item {
 
 core::control::item::Rocket*

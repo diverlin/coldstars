@@ -30,7 +30,7 @@ class Equipment;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class EquipmentBuilder : public ItemBuilder
 {

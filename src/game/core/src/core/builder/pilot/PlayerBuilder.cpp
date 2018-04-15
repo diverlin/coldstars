@@ -23,7 +23,7 @@
 #include <core/session/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
-namespace builder {
+namespace core {
 
 core::Player*
 PlayerBuilder::gen(int_t id)

@@ -31,7 +31,7 @@ class Planet;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class PlanetBuilder
 {

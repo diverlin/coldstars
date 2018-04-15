@@ -32,7 +32,7 @@ class HyperSpace;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class HyperSpaceBuilder
 {

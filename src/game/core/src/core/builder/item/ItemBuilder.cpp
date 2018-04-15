@@ -24,7 +24,7 @@
 
 #include <descriptor/item/Item.hpp>
 
-namespace builder {
+namespace core {
 
 void ItemBuilder::_createInternals(core::control::Item* item, descriptor::Item* descr)
 {

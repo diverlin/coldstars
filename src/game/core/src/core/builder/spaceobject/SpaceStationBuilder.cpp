@@ -31,7 +31,7 @@
 
 #include <meti/RandUtils.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::SpaceStation*
 SpaceStationBuilder::gen(descriptor::SpaceStation* descr)

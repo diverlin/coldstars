@@ -28,7 +28,7 @@ class Item;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class ItemBuilder
 {

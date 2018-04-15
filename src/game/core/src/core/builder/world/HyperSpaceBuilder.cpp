@@ -30,7 +30,7 @@
 #include <core/generator/DescriptorGenerator.hpp>
 #include <core/manager/EntityManager.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::HyperSpace*
 HyperSpaceBuilder::gen()

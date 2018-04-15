@@ -31,7 +31,7 @@ class Satellite;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class SatelliteBuilder : public VehicleBuilder
 {
