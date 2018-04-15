@@ -33,7 +33,7 @@ class Store;
 class ItemSlot;
 
 namespace slot {
-class Vehicle;
+class VehicleSlot;
 } // namespace slot
 
 } // namespace core
@@ -59,7 +59,7 @@ private:
     core::control::Store* m_store = nullptr;
 
     std::vector<GuiPair<ceti::Rect, core::ItemSlot*>> m_itemslot_rects;
-    std::vector<GuiPair<ceti::Rect, core::slot::Vehicle*>> m_vehicleslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::VehicleSlot*>> m_vehicleslot_rects;
 };
 
 } // namepsace gui

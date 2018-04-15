@@ -90,10 +90,10 @@ void GuiAngar::BindAngar(core::control::Angar* angar)
     
     int column_counter = 1;
     int row_counter = 0;
-    for (core::slot::Vehicle* slot: angar->vehicleSlots()) {
+    for (core::slot::VehicleSlot* slot: angar->vehicleSlots()) {
         ceti::Rect rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Vehicle*>(rect, slot));
+        m_vehicleslot_rects.push_back(GuiPair<ceti::Rect, core::slot::VehicleSlot*>(rect, slot));
 
         column_counter++;
     }

@@ -31,18 +31,18 @@ class Vehicle;
 
 namespace slot {
 
-class Vehicle : public BaseSlot
+class VehicleSlot : public BaseSlot
 {
 public:
-    Vehicle(int);
-    ~Vehicle();
+    VehicleSlot(int);
+    ~VehicleSlot();
 
     virtual void putChildrenToGarbage() const;
 
     control::Vehicle* vehicle() const { return m_vehicle; }
     bool insert(control::Vehicle*);
     bool release();
-    void swapVehicle(Vehicle*);
+    void swapVehicle(VehicleSlot*);
 
 //    void Render(const ceti::Rect&) const;
 
