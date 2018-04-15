@@ -31,4 +31,4 @@ void ItemBuilder::_createInternals(core::control::Item* item, descriptor::Item* 
     item->model()->setCondition(descr->condition());
 }
 
-} // namespace builder
+} // namespace core

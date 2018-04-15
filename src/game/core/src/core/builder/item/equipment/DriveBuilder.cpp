@@ -78,4 +78,4 @@ void DriveItemBuilder::__createInternals(core::control::Drive* drive, descriptor
     drive->model()->setHyper(descr->hyper());
 }
 
-} // namespace builder
+} // namespace core

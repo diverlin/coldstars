@@ -135,4 +135,4 @@ ShipBuilder::__createInternals(core::control::Ship* ship, descriptor::Ship* desc
 //    _createSlots(ship);
 }
 
-} // namespace builder
+} // namespace core

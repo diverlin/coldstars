@@ -293,7 +293,7 @@ void VehicleBuilder::equipBomb(Vehicle* vehicle, tech::Type tech_level)
     }    
 }
 
-} // namespace builder
+} // namespace core
 
 
 

@@ -52,7 +52,7 @@ private:
     static void __createInternals(core::control::Drive*, descriptor::Drive*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

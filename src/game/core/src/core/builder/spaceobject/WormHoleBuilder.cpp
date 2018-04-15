@@ -83,7 +83,7 @@ WormHoleBuilder::__createInternals(core::control::WormHole* wormhole)
     //blackhole->SetRenderAnimation(animation_program);
 }
 
-} // namespace builder
+} // namespace core
 
 
 

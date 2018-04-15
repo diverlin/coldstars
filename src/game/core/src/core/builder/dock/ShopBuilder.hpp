@@ -47,4 +47,4 @@ private:
     static void __createInternals(core::control::Shop*);
 }; 
 
-} // namespace builder
+} // namespace core

@@ -52,4 +52,4 @@ private:
     static void __createInternals(core::control::Scaner*, descriptor::Scaner*);
 }; 
 
-} // namespace builder
+} // namespace core

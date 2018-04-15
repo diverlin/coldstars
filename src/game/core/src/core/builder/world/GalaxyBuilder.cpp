@@ -79,4 +79,4 @@ void GalaxyBuilder::__createInternals(core::control::Galaxy* galaxy, descriptor:
      // see composer, all logic there
 }
 
-} // namespace builder
+} // namespace core

@@ -51,4 +51,4 @@ private:
     static void __createInternals(core::control::Ship*, descriptor::Ship*);
 }; 
 
-} // namespace builder
+} // namespace core

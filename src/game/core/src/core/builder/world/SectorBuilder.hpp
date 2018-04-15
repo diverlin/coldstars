@@ -48,7 +48,7 @@ private:
     static core::control::Sector* __genTemplate(descriptor::Sector*, int_t object = NONE);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

@@ -48,4 +48,4 @@ private:
     static void __createInternals(core::control::Npc*, descriptor::Npc*);
 }; 
 
-} // namespace builder
+} // namespace core

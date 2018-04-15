@@ -70,7 +70,7 @@ TurrelBuilder::__genTemplate(descriptor::Turrel* descr)
     return turrel;
 }
 
-} // namespace builder
+} // namespace core
 
 
 

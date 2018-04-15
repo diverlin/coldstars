@@ -458,8 +458,8 @@ private:
 //    [[deprecated("ship swap items in different logic")]]
 //    bool grabItemsFromVehicle(Vehicle*);
 
-//    bool addItemToCargoSlot(item::Base*);
-//    bool manage(item::Base*);
+//    bool addItemToCargoSlot(Base*);
+//    bool manage(Base*);
 
 //    bool isSlotFree(const entity::Type&) const;
 //    bool checkManage(const core::Id&);
@@ -469,9 +469,9 @@ private:
 //    void sellItemsInCargo();
 
 //    [[deprecated("move to ext")]]
-//    bool sellItem(item::Base*);
+//    bool sellItem(Base*);
 //    [[deprecated("move to ext")]]
-//    bool buyItem(item::Base*);
+//    bool buyItem(Base*);
 
 //    bool unpackContainerItemToCargoSlot(Container*);
 
@@ -572,15 +572,15 @@ private:
 //    ItemSlot* const _freeArtefactSlot() const;
 //    ItemSlot* const _cargoSlotWithGoods(entity::Type);
 
-//    bool _installItem(item::Base*);
-//    bool _installEquipment(item::Base*);
+//    bool _installItem(Base*);
+//    bool _installEquipment(Base*);
 //#ifdef USE_MODULES
-//    bool installModule(item::Base*);
+//    bool installModule(Base*);
 //#endif // USE_MODULES
 //#ifdef USE_ARTEFACTS
-//    bool installArtefact(item::Base*);
+//    bool installArtefact(Base*);
 //#endif // USE_ARTEFACTS
-//    bool _installGoodsPack(item::Base*);
+//    bool _installGoodsPack(Base*);
 
 //    //        virtual void UpdateInfo() = 0;
 
@@ -634,9 +634,9 @@ private:
 
 //    [[deprecated("use predetermentistic way")]]
 ////    void __dropRandomItemToSpace();
-//    bool __mergeIdenticalGoods(item::Base*);
+//    bool __mergeIdenticalGoods(Base*);
 
-//    Container* __wrapItemToContainer(item::Base*);
+//    Container* __wrapItemToContainer(Base*);
 //    bool _checkInstallEquipment(const core::Id&);
 //    ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 

@@ -126,4 +126,4 @@ RocketItemBuilder::__createInternals(core::control::Rocket* rocket, descriptor::
 //    rocket->countPrice();
 }
 
-} // namespace builder
+} // namespace core

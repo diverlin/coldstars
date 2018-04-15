@@ -40,4 +40,4 @@ private:
     ~ItemBuilder() = delete;
 };
 
-} // namespace builder
+} // namespace core

@@ -52,7 +52,7 @@ private:
     static void __createInternals(core::control::Goods*, descriptor::Goods*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

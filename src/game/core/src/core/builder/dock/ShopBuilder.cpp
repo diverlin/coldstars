@@ -71,4 +71,4 @@ ShopBuilder::__createInternals(core::control::Shop* shop)
     //shop->SetTextureObBackground(textureOb_background);
 }
 
-} // namespace builder
+} // namespace core

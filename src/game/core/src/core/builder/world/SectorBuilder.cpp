@@ -81,7 +81,7 @@ SectorBuilder::__createInternals(core::control::Sector* sector, descriptor::Sect
      // see composer, all logic there
 }
 
-} // namespace builder
+} // namespace core
 
 
 

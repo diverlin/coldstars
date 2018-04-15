@@ -77,4 +77,4 @@ KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descrip
     kosmoport->bindGoverment(core::GovermentBuilder::gen());
 }
 
-} // namespace builder
+} // namespace core

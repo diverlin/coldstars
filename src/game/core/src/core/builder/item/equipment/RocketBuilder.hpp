@@ -52,4 +52,4 @@ private:
     static void __createInternals(core::control::Rocket*, descriptor::Rocket*);
 }; 
 
-} // namespace builder
+} // namespace core

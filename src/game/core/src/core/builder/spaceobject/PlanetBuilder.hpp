@@ -45,4 +45,4 @@ private:
     static void __createInternals(core::control::Planet*, descriptor::Planet*);
 }; 
 
-} // namespace builder
+} // namespace core

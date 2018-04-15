@@ -77,4 +77,4 @@ ScanerItemBuilder::__createInternals(core::control::Scaner* scaner, descriptor::
     scaner->model()->setScan(descr->scan());
 }
 
-} // namespace builder
+} // namespace core

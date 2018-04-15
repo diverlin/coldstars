@@ -87,7 +87,7 @@ private:
 //    void bindItemSlot(ItemSlot*);
 
 //    ItemSlot* const itemSlot() const { return m_itemSlot; }
-//    bool insertItem(item::Base*);
+//    bool insertItem(Base*);
 
 //    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 

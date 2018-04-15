@@ -47,4 +47,4 @@ private:
     static core::control::StarSystem* __genTemplate(descriptor::StarSystem*, int_t object = NONE);
 }; 
 
-} // namespace builder
+} // namespace core

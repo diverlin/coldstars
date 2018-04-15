@@ -47,5 +47,5 @@ private:
     static core::control::Star* __genTemplate(descriptor::Star*, int_t id = NONE);
 };
 
-} // namespace builder
+} // namespace core
 

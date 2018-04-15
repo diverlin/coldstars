@@ -79,5 +79,4 @@ GrappleItemBuilder::__createInternals(core::control::Grapple* grapple, descripto
     grapple->model()->setSpeed(descr->speed());
 }
 
-} // namespace item
-} // namespace builder
+} // namespace core

@@ -122,4 +122,4 @@ void SatelliteBuilder::__createInternals(core::control::Satellite* satellite, de
 ////    _createSlots(satellite);
 }
 
-} // namespace builder
+} // namespace core

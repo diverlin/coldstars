@@ -116,4 +116,4 @@ PlanetBuilder::__genTemplate(descriptor::Planet* descr, int_t id)
     return planet;
 }
 
-} // namespace builder
+} // namespace core

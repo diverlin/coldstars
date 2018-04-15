@@ -52,5 +52,5 @@ private:
     static void __createInternals(core::control::Lazer*, descriptor::Lazer*);
 }; 
 
-} // namespace builder
+} // namespace core
 

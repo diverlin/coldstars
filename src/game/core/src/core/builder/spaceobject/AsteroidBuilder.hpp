@@ -43,4 +43,4 @@ private:
     static core::control::Asteroid* __genTemplate(descriptor::Asteroid*, int_t id);
 }; 
 
-} // namespace builder
+} // namespace core

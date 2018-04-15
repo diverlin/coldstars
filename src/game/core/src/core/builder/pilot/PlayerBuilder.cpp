@@ -40,5 +40,5 @@ PlayerBuilder::__genTemplate(int_t id)
     return player;
 }
 
-} // namespace builder
+} // namespace core
 

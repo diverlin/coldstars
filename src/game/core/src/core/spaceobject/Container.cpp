@@ -51,39 +51,39 @@ bool itemInsertHelper(ItemSlot* slot, int_t id) {
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obGroup()) {
     case entity::Type::SCANER_EQUIPMENT: {
-        item::Scaner* item = core::shortcuts::entities()->scaner(id);
+        Scaner* item = core::shortcuts::entities()->scaner(id);
         return slot->insert(item);
     }
     case entity::Type::DRIVE_EQUIPMENT: {
-        item::Drive* item = core::shortcuts::entities()->drive(id);
+        Drive* item = core::shortcuts::entities()->drive(id);
         return slot->insert(item);
     }
     case entity::Type::BAK_EQUIPMENT: {
-        item::Bak* item = core::shortcuts::entities()->bak(id);
+        Bak* item = core::shortcuts::entities()->bak(id);
         return slot->insert(item);
     }
     case entity::Type::DROID_EQUIPMENT: {
-        item::Droid* item = core::shortcuts::entities()->droid(id);
+        Droid* item = core::shortcuts::entities()->droid(id);
         return slot->insert(item);
     }
     case entity::Type::GRAPPLE_EQUIPMENT: {
-        item::Grapple* item = core::shortcuts::entities()->grapple(id);
+        Grapple* item = core::shortcuts::entities()->grapple(id);
         return slot->insert(item);
     }
     case entity::Type::LAZER_EQUIPMENT: {
-        item::Lazer* item = core::shortcuts::entities()->lazer(id);
+        Lazer* item = core::shortcuts::entities()->lazer(id);
         return slot->insert(item);
     }
     case entity::Type::PROTECTOR_EQUIPMENT: {
-        item::Protector* item = core::shortcuts::entities()->protector(id);
+        Protector* item = core::shortcuts::entities()->protector(id);
         return slot->insert(item);
     }
     case entity::Type::RADAR_EQUIPMENT: {
-        item::Radar* item = core::shortcuts::entities()->radar(id);
+        Radar* item = core::shortcuts::entities()->radar(id);
         return slot->insert(item);
     }
     case entity::Type::ROCKET_EQUIPMENT: {
-        item::Rocket* item = core::shortcuts::entities()->rocket(id);
+        Rocket* item = core::shortcuts::entities()->rocket(id);
         return slot->insert(item);
     }
     }
@@ -219,7 +219,7 @@ void Container::updateInSpace(int time)
 //}
 
 //bool
-//Container::insertItem(item::Base* item)
+//Container::insertItem(Base* item)
 //{
 //    return m_itemSlot->insert(item);
 //}

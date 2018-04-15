@@ -76,4 +76,4 @@ void DroidItemBuilder::__createInternals(core::control::Droid* droid, descriptor
     droid->model()->setRepair(descr->repair());
 }
 
-} // namespace builder
+} // namespace core

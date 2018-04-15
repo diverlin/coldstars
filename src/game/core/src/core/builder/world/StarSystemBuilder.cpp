@@ -83,4 +83,4 @@ void StarSystemBuilder::__createInternals(core::control::StarSystem* starsystem,
 {
 }
 
-} // namespace builder
+} // namespace core

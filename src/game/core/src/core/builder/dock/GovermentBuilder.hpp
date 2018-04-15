@@ -46,7 +46,7 @@ private:
     static void __createInternals(core::control::Goverment*);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 

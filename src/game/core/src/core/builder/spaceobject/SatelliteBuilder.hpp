@@ -47,4 +47,4 @@ private:
     static core::control::Satellite* __genTemplate(descriptor::Satellite*);
 }; 
 
-} // namespace builder
+} // namespace core

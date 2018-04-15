@@ -70,4 +70,4 @@ BulletBuilder::createInternals(core::control::Bullet* bullet, descriptor::Bullet
     bullet->model()->setDamage(damage);
 }
 
-} // namespace builder
+} // namespace core

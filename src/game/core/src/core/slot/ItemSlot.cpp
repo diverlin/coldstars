@@ -95,7 +95,7 @@ ItemSlot::~ItemSlot()
 {}  
 
 ///* virtual */
-//void Item::putChildrenToGarbage() const
+//void putChildrenToGarbage() const
 //{
 //    assert(false);
 ////    if (m_item) {
@@ -301,13 +301,13 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 //    //    m_VisualPath.FillData(_texOb, radius, size);
 //}
 
-//void Item::drawRange(const glm::vec2& offset)
+//void drawRange(const glm::vec2& offset)
 //{
 //    m_VisualPath.Draw(offset);
 //}
 
 ///* virtual override final */
-//void Item::Save(boost::property_tree::ptree& save_ptree) const
+//void Save(boost::property_tree::ptree& save_ptree) const
 //{
 ////    const std::string root = "item_slot." + std::to_string(id()) + ".";
 ////    Base::SaveData(save_ptree, root);
@@ -316,7 +316,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 //}
 
 ///* virtual override final */
-//void Item::Load(const boost::property_tree::ptree& load_ptree)
+//void Load(const boost::property_tree::ptree& load_ptree)
 //{
 ////    Base::LoadData(load_ptree);
 ////    BaseSlot::LoadData(load_ptree);
@@ -324,7 +324,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 //}
 
 ///* virtual override final */
-//void Item::Resolve()
+//void Resolve()
 //{
 ////    Base::ResolveData();
 ////    BaseSlot::ResolveData();

@@ -48,7 +48,7 @@ private:
     static core::control::Galaxy* __genTemplate(descriptor::Galaxy*, int_t object = NONE);
 }; 
 
-} // namespace builder
+} // namespace core
 
 
 
