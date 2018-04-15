@@ -71,7 +71,7 @@ void
 Angar::__createInternals(core::control::Angar* angar)
 { 
     for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
-        core::slot::Vehicle* slot = new core::slot::Vehicle(i);
+        core::slot::VehicleSlot* slot = new core::slot::VehicleSlot(i);
         angar->add(slot);
     }
 

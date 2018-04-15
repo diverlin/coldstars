@@ -47,7 +47,7 @@ class Item;
 
 namespace core {
 namespace slot {
-class Vehicle;
+class VehicleSlot;
 } // namespace slot
 
 } // namespace core
@@ -152,7 +152,7 @@ public:
 
     void setGodMode(bool god_mode) { m_godMode = god_mode; }
     void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_specialActionId = special_action_id; }
-    void setParentVehicleSlot(slot::Vehicle* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
+    void setParentVehicleSlot(slot::VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
 
     void setLand(Land* land);
 
@@ -162,7 +162,7 @@ public:
     Land* land() const { return m_Land; }
     VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_specialActionId; }
 
-    core::slot::Vehicle* parentVehicleSlot() const { return m_parentVehicleSlot; }
+    core::slot::VehicleSlot* parentVehicleSlot() const { return m_parentVehicleSlot; }
 
     const Propetries& properties() const { return m_properties; }
     VehicleNeeds& needs() { return m_needs; }
@@ -337,7 +337,7 @@ private:
 
     control::Npc* m_npc = nullptr;
 
-    core::slot::Vehicle* m_parentVehicleSlot = nullptr;
+    core::slot::VehicleSlot* m_parentVehicleSlot = nullptr;
 
     Land* m_Land = nullptr;
 

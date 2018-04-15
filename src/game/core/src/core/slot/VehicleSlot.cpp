@@ -32,16 +32,16 @@
 namespace core {
 namespace slot {
 
-Vehicle::Vehicle(int offset)
+VehicleSlot::VehicleSlot(int offset)
     : BaseSlot()
 {
     setId(offset);
 }
    
-Vehicle::~Vehicle()
+VehicleSlot::~VehicleSlot()
 {}
       
-void Vehicle::putChildrenToGarbage() const
+void VehicleSlot::putChildrenToGarbage() const
 {
     assert(false);
 //    if (m_vehicle) {
@@ -49,7 +49,7 @@ void Vehicle::putChildrenToGarbage() const
 //    }
 }
                       
-bool Vehicle::insert(control::Vehicle* vehicle)
+bool VehicleSlot::insert(control::Vehicle* vehicle)
 {
     m_vehicle = vehicle;
 
@@ -59,13 +59,13 @@ bool Vehicle::insert(control::Vehicle* vehicle)
     return true;
 }
 
-bool Vehicle::release()
+bool VehicleSlot::release()
 {
     m_vehicle = nullptr;
     return true;
 } 
 
-void Vehicle::swapVehicle(Vehicle* vehicle_slot)
+void VehicleSlot::swapVehicle(VehicleSlot* vehicle_slot)
 {
     control::Vehicle* tmp_vehicle = vehicle_slot->vehicle();
     vehicle_slot->insert(m_vehicle);
