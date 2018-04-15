@@ -33,6 +33,6 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Camera* m_camera = nullptr;
     jeti::Mesh* m_mesh = nullptr;
-    jeti::model::Material* m_material_model = nullptr;
+    jeti::MaterialModel* m_material_model = nullptr;
     jeti::control::Material* m_material_control = nullptr;
 };

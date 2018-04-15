@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Drive::Drive(DriveDescr* descr, model::DriveModel* model)
+Drive::Drive(DriveDescr* descr, DriveModel* model)
     :
       Equipment(descr, model)
     , m_descriptor_drive(descr)

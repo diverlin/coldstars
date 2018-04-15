@@ -71,7 +71,7 @@ StoreBuilder::gen(core::StoreDescr* descr)
 core::control::Store*
 StoreBuilder::__createTemplate(core::StoreDescr* descr)
 {
-    model::StoreModel* model = new model::StoreModel(descr->id());
+    StoreModel* model = new StoreModel(descr->id());
     assert(model);
 
     core::control::Store* store = new core::control::Store(descr, model);

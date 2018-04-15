@@ -31,7 +31,7 @@
 namespace core {
 namespace control {
 
-HyperSpace::HyperSpace(HyperSpaceDescr* descr, model::HyperSpaceModel* model)
+HyperSpace::HyperSpace(HyperSpaceDescr* descr, HyperSpaceModel* model)
     :
       Base(descr, model)
     , m_descriptor_hyperspace(descr)

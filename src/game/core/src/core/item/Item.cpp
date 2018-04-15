@@ -32,7 +32,7 @@
 namespace core {
 namespace control {
 
-Item::Item(ItemDescr* descr, model::ItemModel* model)
+Item::Item(ItemDescr* descr, ItemModel* model)
     :
       Base(descr, model)
     , m_descriptor_item(descr)

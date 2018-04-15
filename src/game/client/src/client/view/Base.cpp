@@ -34,7 +34,7 @@ Base::Base() // used for effects
       jeti::view::Base()
 {
     _genOrientation();
-//    m_control_base = new control::Base(new model::Base); // TODO clear this!
+//    m_control_base = new control::Base(new Base); // TODO clear this!
 }
 
 Base::Base(core::control::Base* base)

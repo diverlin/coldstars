@@ -66,7 +66,7 @@ SectorBuilder::gen(SectorDescr* descriptor)
 core::control::Sector*
 SectorBuilder::__genTemplate(SectorDescr* descriptor, int_t object_id)
 {
-    model::SectorModel* model = new model::SectorModel(descriptor->id(), object_id);
+    SectorModel* model = new SectorModel(descriptor->id(), object_id);
     assert(model);
 
     core::control::Sector* sector = new core::control::Sector(descriptor, model);

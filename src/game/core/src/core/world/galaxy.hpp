@@ -30,7 +30,7 @@ namespace core {
 class GalaxyDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class GalaxyModel;
 } // namespace model
 
@@ -45,7 +45,7 @@ class StarSystem;
 class Galaxy : public Base
 {
 public:
-    Galaxy(GalaxyDescr*, model::GalaxyModel*);
+    Galaxy(GalaxyDescr*, GalaxyModel*);
     ~Galaxy();
 
     virtual void putChildrenToGarbage() const;
@@ -65,11 +65,11 @@ public:
 //    void Resolve();
 
     GalaxyDescr* descriptor() const { return m_descriptor_galaxy; }
-    model::GalaxyModel* model() const { return m_model_galaxy; }
+    GalaxyModel* model() const { return m_model_galaxy; }
 
 private:
     GalaxyDescr* m_descriptor_galaxy = nullptr;
-    model::GalaxyModel* m_model_galaxy = nullptr;
+    GalaxyModel* m_model_galaxy = nullptr;
 
     std::vector<Sector*> m_sectors;
 

@@ -25,7 +25,7 @@ namespace core {
 class NatureLandDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class NatureLandModel;
 } // namespace model
 
@@ -41,7 +41,7 @@ class Item;
 class NatureLand : public Land
 {
 public:
-    NatureLand(NatureLandDescr*, model::NatureLandModel*);
+    NatureLand(NatureLandDescr*, NatureLandModel*);
     virtual ~NatureLand();
 
     virtual void putChildrenToGarbage() const;
@@ -70,13 +70,13 @@ public:
 //    void Resolve();
 
     NatureLandDescr* descriptor() const { return m_descriptor_natureland; }
-    model::NatureLandModel* model() const { return m_model_natureland; }
+    NatureLandModel* model() const { return m_model_natureland; }
 
     const std::vector<ItemSlot*>& itemSlots() const { return m_itemslots; }
 
 private:
     NatureLandDescr* m_descriptor_natureland = nullptr;
-    model::NatureLandModel* m_model_natureland = nullptr;
+    NatureLandModel* m_model_natureland = nullptr;
 
     //jeti::control::TextureOb* textureOb_background;
 

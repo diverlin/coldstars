@@ -185,10 +185,10 @@ genPlanet()
 
     return descr;
 
-    //model::Planet*
+    //Planet*
     //Planet::gen(BaseOLD* descr)
     //{
-    //    model::Planet* model = __genTemplate();
+    //    Planet* model = __genTemplate();
 
     //    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::SPHERE);
     //    //jeti::control::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET);
@@ -198,14 +198,14 @@ genPlanet()
     //    model->setRadiusA(orbit_radius);
     //    model->setRadiusB(orbit_radius);
     //    model->setOrbitPhi(0);
-    //    model->setSpeed(meti::getRandInt(model::Planet::SPEED_MIN, model::Planet::SPEED_MAX) / float(orbit_radius));
+    //    model->setSpeed(meti::getRandInt(Planet::SPEED_MIN, Planet::SPEED_MAX) / float(orbit_radius));
     //    model->setClockwise(meti::getRandBool());
 
     //    LifeData data_life;
     //    data_life.armor = descr.armor();
     //    model->setLifeData(data_life);
 
-    //    float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
+    //    float scale_comp = meti::getRandInt(Planet::SCALE_MIN, Planet::SCALE_MAX);
     //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //    //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
 

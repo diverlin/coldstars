@@ -54,6 +54,9 @@
 
 #include <gtest/gtest.h>
 
+
+using namespace core;
+
 namespace test {
 
 TEST(ship, create)
@@ -241,7 +244,7 @@ TEST(ship, kill)
 
 namespace {
 
-void compareSpaceObjectModels(model::SpaceObjectModel* m1, model::SpaceObjectModel* m2)
+void compareSpaceObjectModels(core::SpaceObjectModel* m1, core::SpaceObjectModel* m2)
 {
     EXPECT_EQ(m1->armor(), m2->armor());
     EXPECT_EQ(m1->parent(), m2->parent());
@@ -254,7 +257,7 @@ void compareSpaceObjectModels(model::SpaceObjectModel* m1, model::SpaceObjectMod
 //    EXPECT_EQ(m1->needs(), m2->needs());
 }
 
-void compareVehileModels(model::VehicleModel* m1, model::VehicleModel* m2)
+void compareVehileModels(core::VehicleModel* m1, core::VehicleModel* m2)
 {
     EXPECT_EQ(m1->npc(), m2->npc());
     EXPECT_EQ(m1->dock(), m2->dock());
@@ -267,7 +270,7 @@ void compareVehileModels(model::VehicleModel* m1, model::VehicleModel* m2)
     compareSpaceObjectModels(m1, m2);
 }
 
-void compareShipModels(model::ShipModel* m1, model::ShipModel* m2)
+void compareShipModels(core::ShipModel* m1, core::ShipModel* m2)
 {
     EXPECT_EQ(m1->data(), m2->data());
 
@@ -305,7 +308,7 @@ void testShipCloneScenario(core::control::Ship* ship)
 {
     core::control::Vehicle::Propetries properties = ship->properties(); // we need copy, not reference
 
-    model::ShipModel* model = new model::ShipModel(ship->model()->data());
+    ShipModel* model = new ShipModel(ship->model()->data());
     core::control::Ship* clone = new core::control::Ship(ship->descriptor(), model);
 
     compareShipModels(ship->model(), model);

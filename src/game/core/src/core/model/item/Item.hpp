@@ -22,7 +22,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
+namespace core {
 
 class ItemModel : public BaseModel
 {
@@ -40,7 +40,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = BaseModel::info();
-        result.add("model::Item");
+        result.add("Item");
         result.add("slot", m_slot);
         result.add("lockedTurns", m_lockedTurns);
         result.add("condition", m_condition);
@@ -56,7 +56,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<::model::BaseModel>(*this);
+        ar & boost::serialization::base_object<::core::BaseModel>(*this);
         ar & m_slot;
         ar & m_lockedTurns;
         ar & m_condition;

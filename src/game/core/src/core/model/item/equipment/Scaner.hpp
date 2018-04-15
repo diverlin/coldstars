@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class ScanerModel : public EquipmentModel
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Scaner");
+        result.add("Scaner");
         result.add("scan", m_scan);
         return result;
     }

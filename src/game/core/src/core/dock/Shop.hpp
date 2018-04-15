@@ -26,7 +26,7 @@ namespace core {
 class ShopDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class ShopModel;
 } // namespace model
 
@@ -38,7 +38,7 @@ class Npc;
 class Shop : public Room
 {
 public:
-    Shop(ShopDescr*, model::ShopModel*);
+    Shop(ShopDescr*, ShopModel*);
     ~Shop();
 
     int mineralsAmount()     const { return m_mineralsAmount; }
@@ -67,10 +67,10 @@ public:
 
 private:
     ShopDescr* m_descriptor_shop = nullptr;
-    model::ShopModel* m_model_shop = nullptr;
+    ShopModel* m_model_shop = nullptr;
 
     ShopDescr* descriptor() const { return m_descriptor_shop; }
-    model::ShopModel* model() const { return m_model_shop; }
+    ShopModel* model() const { return m_model_shop; }
 
     int m_mineralsAmount = 0;
     int m_foodAmount = 0;

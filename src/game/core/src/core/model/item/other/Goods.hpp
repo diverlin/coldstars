@@ -25,7 +25,7 @@
 #include <string>
 #include <cassert>
 
-namespace model {
+namespace core {
 
 class GoodsPackModel : public ItemModel
 {

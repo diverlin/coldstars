@@ -30,9 +30,9 @@
 #include <boost/serialization/vector.hpp>
 
 
-namespace model {
+namespace core {
 
-class SpaceObjectModel : public ceti::model::OrientationModel, public BaseModel
+class SpaceObjectModel : public ceti::OrientationModel, public BaseModel
 {
 public:
     SpaceObjectModel() = default;
@@ -57,10 +57,10 @@ public:
     int givenExpirience() const { return m_expirienceToGive; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = ceti::model::OrientationModel::info();
-        ceti::InfoTable result2 = model::BaseModel::info();
+        ceti::InfoTable result = ceti::OrientationModel::info();
+        ceti::InfoTable result2 = core::BaseModel::info();
         result.insert(result.begin(), result2.begin(), result2.end());
-        result.add("model::SpaceObject");
+        result.add("SpaceObject");
         result.add("armor", m_armor);
         result.add("lifeTime", m_lifeTime);
         result.add("parent", m_parent);
@@ -82,7 +82,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::model::OrientationModel>(*this);
+        ar & boost::serialization::base_object<ceti::OrientationModel>(*this);
         ar & boost::serialization::base_object<BaseModel>(*this);
         ar & m_armor;
         ar & m_lifeTime;

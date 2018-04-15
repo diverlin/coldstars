@@ -26,7 +26,7 @@
 //#include <ceti/StringUtils.hpp>
 
 
-namespace model {
+namespace core {
 
 PlanetoidModel::PlanetoidModel(const std::string& data)
 {
@@ -44,7 +44,7 @@ PlanetoidModel::data() const
 namespace core {
 namespace control {
 
-Planetoid::Planetoid(PlanetoidDescr* descr, model::PlanetoidModel* model)
+Planetoid::Planetoid(PlanetoidDescr* descr, PlanetoidModel* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_planetoid(descr)

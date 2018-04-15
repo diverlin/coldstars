@@ -40,14 +40,14 @@ class BaseAiModel;
 class Player;
 class GoodsPack;
 
-namespace model {
+namespace core {
 
-class Npc : public BaseModel {
+class NpcModel : public BaseModel {
 
 public:
-    Npc(int_t, int_t);
-    ~Npc() = default;
-    Npc(const std::string& data);
+    NpcModel(int_t, int_t);
+    ~NpcModel() = default;
+    NpcModel(const std::string& data);
     std::string data() const;
 
     //    void setRaceId(race::type race_id)            { m_raceId = race_id; }
@@ -99,9 +99,6 @@ private:
     }
 };
 
-} // namespace model
-
-namespace core {
 namespace control {
 
 class Vehicle;
@@ -112,7 +109,7 @@ class Planet;
 class Npc : public Base
 {
 public:
-    Npc(NpcDescr*, model::Npc*);
+    Npc(NpcDescr*, NpcModel*);
     virtual ~Npc();
 
     // model interface
@@ -135,7 +132,7 @@ public:
     bool withdrawCredits(int_t);
     void addExpirience(int, bool);
 
-    void cloneMacroTaskFrom(model::Npc*);
+    void cloneMacroTaskFrom(Npc*);
 
     // AI
     void remeberAgressor(SpaceObject*);
@@ -164,7 +161,7 @@ public:
 
     std::string agressorSetString() const;
 
-    model::Npc* model() const { return m_model_npc; }
+    NpcModel* model() const { return m_model_npc; }
 
     bool isAgressor(int_t) const;
 
@@ -175,7 +172,7 @@ protected:
 
 private:
     NpcDescr* m_descriptor_npc = nullptr;
-    model::Npc* m_model_npc = nullptr;
+    NpcModel* m_model_npc = nullptr;
 
     //bool m_isAlive = true;
     int_t m_race = NONE;
@@ -202,7 +199,7 @@ private:
 } // namespace core
 
 
-//class Npc : public model::Base
+//class Npc : public Base
 //{
 //public:
 //    Npc(int, entity::Type, entity::Type);

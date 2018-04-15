@@ -54,7 +54,7 @@ GovermentBuilder::gen(core::GovermentDescr* descr)
 core::control::Goverment*
 GovermentBuilder::__createTemplate(core::GovermentDescr* descr)
 {
-    model::GovermentModel* model = new model::GovermentModel(descr->id());
+    GovermentModel* model = new GovermentModel(descr->id());
     assert(model);
 
     core::control::Goverment* goverment = new core::control::Goverment(descr, model);

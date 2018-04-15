@@ -41,7 +41,7 @@ class ContainerBuilder
 {
 public:
     static core::control::Container* gen();
-//    static model::Container* gen(const std::string& data);
+//    static Container* gen(const std::string& data);
     static core::control::Container* gen(core::ContainerDescr*);
     static core::control::Container* gen(int_t, int_t);
     static core::control::Container* gen(int_t, int_t, int_t);

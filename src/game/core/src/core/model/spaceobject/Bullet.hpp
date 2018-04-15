@@ -22,7 +22,7 @@
 
 #include <ceti/StringUtils.hpp>
 
-namespace model {
+namespace core {
 
 class BulletModel : public SpaceObjectModel {
 
@@ -47,7 +47,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = SpaceObjectModel::info();
-        result.add("model::Bullet");
+        result.add("Bullet");
         result.add("damage", m_damage);
         result.add("liveTime", m_liveTime);
         result.add("speed", m_speed);

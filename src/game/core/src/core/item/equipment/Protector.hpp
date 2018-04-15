@@ -25,7 +25,7 @@ namespace core {
 class ProtectorDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class ProtectorModel;
 } // namespace model
 
@@ -35,17 +35,17 @@ namespace control {
 class Protector : public Equipment
 {
 public:
-    Protector(ProtectorDescr*, model::ProtectorModel*);
+    Protector(ProtectorDescr*, ProtectorModel*);
     virtual ~Protector() = default;
 
     virtual void updateProperties();
 
     ProtectorDescr* descriptor() const { return m_descriptor_protector; }
-    model::ProtectorModel* model() const { return m_model_protector; }
+    ProtectorModel* model() const { return m_model_protector; }
 
 private:
     ProtectorDescr* m_descriptor_protector = nullptr;
-    model::ProtectorModel* m_model_protector = nullptr;
+    ProtectorModel* m_model_protector = nullptr;
 
     int m_protection_add = 0;
 

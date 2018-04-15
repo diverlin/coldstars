@@ -65,7 +65,7 @@ GalaxyBuilder::gen(GalaxyDescr* descriptor)
 core::control::Galaxy*
 GalaxyBuilder::__genTemplate(GalaxyDescr* descriptor, int_t object_id)
 {
-    model::GalaxyModel* model = new model::GalaxyModel(descriptor->id(), object_id);
+    GalaxyModel* model = new GalaxyModel(descriptor->id(), object_id);
     assert(model);
 
     core::control::Galaxy* galaxy = new core::control::Galaxy(descriptor, model);

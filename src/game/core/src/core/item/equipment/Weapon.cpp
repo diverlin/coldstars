@@ -28,7 +28,7 @@
 namespace core {
 namespace control {
 
-Weapon::Weapon(WeaponDescr* descr, model::WeaponModel* model)
+Weapon::Weapon(WeaponDescr* descr, WeaponModel* model)
     : Equipment(descr, model)
     , m_descriptor_weapon(descr)
     , m_model_weapon(model)
@@ -93,7 +93,7 @@ std::string Weapon::radiusStr()
 
 //    if (fire_atOnce>=1)
 //    {
-//        model::Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
+//        Bullet* rocket_bullet = core::global::get().BulletBuilder().gen(data_bullet);
 //        rocket_bullet->setDamageRate(attack_rate_normalized);
 
 //        assert(false);

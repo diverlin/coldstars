@@ -54,7 +54,7 @@ BulletBuilder::gen(BulletDescr* descriptor, int damage)
 core::control::Bullet*
 BulletBuilder::__genTemplate(core::BulletDescr* descr)
 {
-    model::BulletModel* model = new model::BulletModel();
+    BulletModel* model = new BulletModel();
     assert(model);
 
     core::control::Bullet* bullet = new core::control::Bullet(descr, model);

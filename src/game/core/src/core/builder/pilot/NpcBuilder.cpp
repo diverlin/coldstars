@@ -70,7 +70,7 @@ NpcBuilder::gen(NpcDescr* descriptor, int_t id)
 core::control::Npc*
 NpcBuilder::__createTemplate(core::NpcDescr* descr, int_t id)
 {
-    model::Npc* model = new model::Npc(descr->id(), id);
+    NpcModel* model = new NpcModel(descr->id(), id);
     assert(model);
 
     core::control::Npc* npc = new core::control::Npc(descr, model);

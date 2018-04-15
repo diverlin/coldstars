@@ -35,7 +35,7 @@ class StarSystem;
 class SpaceObject : public ceti::control::Orientation, public Base
 {
 public:
-    SpaceObject(SpaceObjectDescr*, model::SpaceObjectModel*);
+    SpaceObject(SpaceObjectDescr*, SpaceObjectModel*);
     ~SpaceObject() override = default;
 
     place::Type place() const { return model()->place(); }
@@ -66,7 +66,7 @@ public:
     int mass() const { return m_mass; }
 
     SpaceObjectDescr* descriptor() const { return m_descriptor_spaceobject; }
-    model::SpaceObjectModel* model() const { return m_model_spaceobject; }
+    SpaceObjectModel* model() const { return m_model_spaceobject; }
 
 private:
     StarSystem* m_starsystem = nullptr;
@@ -78,7 +78,7 @@ protected:
     meti::vec3 m_nextTurnPosition;
 
     SpaceObjectDescr* m_descriptor_spaceobject = nullptr;
-    model::SpaceObjectModel* m_model_spaceobject = nullptr;
+    SpaceObjectModel* m_model_spaceobject = nullptr;
 
     void _addMass(int d_mass) { m_mass += d_mass; }
 

@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 AngarModel::AngarModel(int_t descriptor_id)
 {

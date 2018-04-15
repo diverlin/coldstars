@@ -96,14 +96,12 @@ void loadToVRAM(GLuint& texture, int& w, int& h)
 
 namespace jeti {
 
-namespace model {
-
-Material::Material(const std::string& path)
+MaterialModel::MaterialModel(const std::string& path)
     :
       texture_path(path)
 {}
 
-Material::Material(ceti::MaterialDescr* descriptor)
+MaterialModel::MaterialModel(ceti::MaterialDescr* descriptor)
 {
     m_descriptor = descriptor->id();
     texture_path = descriptor->texturePath();
@@ -117,7 +115,7 @@ Material::Material(ceti::MaterialDescr* descriptor)
     brightThreshold = descriptor->brightThreshold();
 }
 
-void Material::load()
+void MaterialModel::load()
 {
     if (is_loaded) {
         return;
@@ -135,19 +133,16 @@ void Material::load()
     is_loaded = true;
 }
 
-void Material::unloadFromVRAM()
+void MaterialModel::unloadFromVRAM()
 {
     is_loaded = false;
 }
-
-} // namespace model
-
 
 namespace control {
 
 Material::Material()
     :
-      m_model(new model::Material)
+      m_model(new MaterialModel)
 {
     m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
 
@@ -164,11 +159,11 @@ Material::Material()
     //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }
 
-Material::Material(model::Material* material)
+Material::Material(MaterialModel* model)
     :
-      m_model(material)
+      m_model(model)
 { 
-    assert(material);
+    assert(model);
     m_model->id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
     
     if ( ((m_model->col_num == 1) && (m_model->row_num == 1)) || (m_model->fps == 0) ) {

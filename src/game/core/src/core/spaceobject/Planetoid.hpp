@@ -29,7 +29,7 @@
 #include <boost/archive/text_iarchive.hpp>
 
 
-namespace model {
+namespace core {
 
 class PlanetoidModel : public SpaceObjectModel
 {
@@ -47,7 +47,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = SpaceObjectModel::info();
-        result.add("model::Planetoid");
+        result.add("Planetoid");
         result.add("radiusA", m_radiusA);
         result.add("radiusB", m_radiusB);
         return result;
@@ -75,7 +75,7 @@ namespace control {
 class Planetoid : public SpaceObject
 {
 public:
-    Planetoid(PlanetoidDescr*, model::PlanetoidModel*);
+    Planetoid(PlanetoidDescr*, PlanetoidModel*);
     virtual ~Planetoid();
 
     void calibrateOrbit(float offset_radius = 0);
@@ -95,10 +95,10 @@ private:
     Orbit m_orbit;
 
     PlanetoidDescr* m_descriptor_planetoid = nullptr;
-    model::PlanetoidModel* m_model_planetoid = nullptr;
+    PlanetoidModel* m_model_planetoid = nullptr;
 
     PlanetoidDescr* descriptor() const { return m_descriptor_planetoid; }
-    model::PlanetoidModel* model() const { return m_model_planetoid; }
+    PlanetoidModel* model() const { return m_model_planetoid; }
 
     void __createOrbit();
 };

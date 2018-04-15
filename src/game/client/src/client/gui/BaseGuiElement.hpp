@@ -32,9 +32,7 @@ class Player;
 namespace jeti {
 class AnimationEffect2D;
 
-namespace model {
-class Material;
-} // namespace model
+class MaterialModel;
 
 namespace control {
 class Material;
@@ -51,7 +49,7 @@ public:
     Base(gui::Type id=gui::Type::NONE,
          gui::Type type=gui::Type::NONE,
          const std::string& _info="",
-         jeti::model::Material* material=nullptr);
+         jeti::MaterialModel* material=nullptr);
     virtual ~Base();
 
     bool isRoot() const { return (m_parent == nullptr); }

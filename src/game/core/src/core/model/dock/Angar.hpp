@@ -22,7 +22,7 @@
 
 #include <ceti/Pack.hpp>
 
-namespace model {
+namespace core {
 
 class AngarModel : public RoomModel {
 public:

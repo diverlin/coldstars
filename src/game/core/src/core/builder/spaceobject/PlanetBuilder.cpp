@@ -74,7 +74,7 @@ PlanetBuilder::__createInternals(core::control::Planet* planet, core::PlanetDesc
     core::control::Kosmoport* kosmoport = core::KosmoportBuilder::gen();
     planet->bindLand(kosmoport);
 
-    //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);
+    //float scale_comp = meti::getRandInt(Planet::SCALE_MIN, Planet::SCALE_MAX);
     //glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
 
@@ -107,7 +107,7 @@ PlanetBuilder::__createInternals(core::control::Planet* planet, core::PlanetDesc
 core::control::Planet*
 PlanetBuilder::__genTemplate(core::PlanetDescr* descr, int_t id)
 {
-    model::PlanetModel* model = new model::PlanetModel(descr->id(), id);
+    PlanetModel* model = new PlanetModel(descr->id(), id);
     assert(model);
 
     core::control::Planet* planet = new core::control::Planet(descr, model);

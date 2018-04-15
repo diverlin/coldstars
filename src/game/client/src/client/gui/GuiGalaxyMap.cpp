@@ -66,7 +66,7 @@ int h = 300;
 GuiGalaxyMap::~GuiGalaxyMap()
 {}
 
-glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const model::Starsystem& starsystem) const
+glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const core::Starsystem& starsystem) const
 {
     assert(false);
 //    glm::vec3 starsystem_pos = (starsystem.sector()->position() + starsystem.position())*m_ScaleParsecToScreenCoord;
@@ -76,7 +76,7 @@ glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const model::Starsystem& s
 //    return starsystem_pos;
 }
 
-void GuiGalaxyMap::BindGalaxy(model::GalaxyModel* galaxy)
+void GuiGalaxyMap::BindGalaxy(core::GalaxyModel* galaxy)
 {
     m_galaxy = galaxy;
 }

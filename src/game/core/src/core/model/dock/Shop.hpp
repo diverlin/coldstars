@@ -20,7 +20,7 @@
 
 #include "Room.hpp"
 
-namespace model {
+namespace core {
 
 class ShopModel : public RoomModel
 {

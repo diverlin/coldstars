@@ -23,7 +23,7 @@
 
 namespace gui {
 
-Bar::Bar(jeti::model::Material* material, Orientation orientation)
+Bar::Bar(jeti::MaterialModel* material, Orientation orientation)
     :
       Base(Type::NONE,
            Type::NONE,

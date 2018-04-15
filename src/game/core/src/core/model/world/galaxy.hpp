@@ -32,7 +32,7 @@ class GalaxyDescr;
 } // namespace core
 
 
-namespace model {
+namespace core {
 
 class GalaxyModel : public BaseModel {
 
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<model::BaseModel>(*this);
+        ar & boost::serialization::base_object<core::BaseModel>(*this);
         ar & m_sectors;
     }
 };

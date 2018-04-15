@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Equipment::Equipment(ItemDescr* descr, model::ItemModel* model)
+Equipment::Equipment(ItemDescr* descr, ItemModel* model)
     :
       Item(descr, model)
 {

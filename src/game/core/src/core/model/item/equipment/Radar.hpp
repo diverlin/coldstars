@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Equipment.hpp"
 
-namespace model {
+namespace core {
 
 class RadarModel : public EquipmentModel
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = EquipmentModel::info();
-        result.add("model::Radar");
+        result.add("Radar");
         result.add("radius", m_radius);
         return result;
     }

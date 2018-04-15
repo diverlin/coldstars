@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 BulletModel::BulletModel()
 {}

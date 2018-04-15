@@ -62,7 +62,7 @@ RocketItemBuilder::gen(core::RocketDescr* descr)
 core::control::Rocket*
 RocketItemBuilder::__genTemplate(RocketDescr* descriptor, int_t id)
 {
-    model::RocketModel* model = new model::RocketModel(descriptor->id(), id);
+    RocketModel* model = new RocketModel(descriptor->id(), id);
     assert(model);
     core::control::Rocket* rocket = new core::control::Rocket(descriptor, model);
     assert(rocket);

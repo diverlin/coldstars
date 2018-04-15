@@ -23,7 +23,7 @@
 
 #include <core/ai/scenary/BaseScenario.hpp>
 
-namespace model {
+namespace core {
 class SpaceObjectModel;
 } // namespace model
 
@@ -35,14 +35,14 @@ public:
 
     void setTask(const Task&);
 
-    model::SpaceObjectModel* target() const { return m_target; }
+    core::SpaceObjectModel* target() const { return m_target; }
     const Task& task() const { return m_macrotask; }
     BaseScenario* scenario() const { return m_scenario; }
 
 private:
     Task m_macrotask;
     BaseScenario* m_scenario = nullptr;
-    model::SpaceObjectModel* m_target = nullptr;
+    core::SpaceObjectModel* m_target = nullptr;
 
     void __reset();
 

@@ -59,7 +59,7 @@ TurrelBuilder::gen(core::TurrelDescr* descr)
 core::control::Turrel*
 TurrelBuilder::__genTemplate(core::TurrelDescr* descr)
 {
-    model::Turrel* model = new model::Turrel(descr->id());
+    TurrelModel* model = new TurrelModel(descr->id());
     assert(model);
 
     core::control::Turrel* turrel = new core::control::Turrel(descr, model);

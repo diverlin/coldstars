@@ -26,43 +26,43 @@ namespace gui {
 class MaterialCollector
 {
 public:
-    jeti::model::Material* starsystem_mark_war = nullptr;
-    jeti::model::Material* starsystem_mark_captured = nullptr;
-    jeti::model::Material* starsystem_mark_player = nullptr;
+    jeti::MaterialModel* starsystem_mark_war = nullptr;
+    jeti::MaterialModel* starsystem_mark_captured = nullptr;
+    jeti::MaterialModel* starsystem_mark_player = nullptr;
     
-    jeti::model::Material* icon_minus = nullptr;
-    jeti::model::Material* icon_plus = nullptr;
-    jeti::model::Material* skill = nullptr;
-    jeti::model::Material* skill_transparent = nullptr;
+    jeti::MaterialModel* icon_minus = nullptr;
+    jeti::MaterialModel* icon_plus = nullptr;
+    jeti::MaterialModel* skill = nullptr;
+    jeti::MaterialModel* skill_transparent = nullptr;
     
-    jeti::model::Material* icon_map = nullptr;
-    jeti::model::Material* grapple_trail = nullptr;
+    jeti::MaterialModel* icon_map = nullptr;
+    jeti::MaterialModel* grapple_trail = nullptr;
 
-    jeti::model::Material* dot_blue = nullptr;
-    jeti::model::Material* dot_red = nullptr;
-    jeti::model::Material* dot_green = nullptr;
-    jeti::model::Material* dot_black = nullptr;
-    jeti::model::Material* dot_yellow = nullptr;
-    jeti::model::Material* dot_purple = nullptr;
-    jeti::model::Material* dot = nullptr;
+    jeti::MaterialModel* dot_blue = nullptr;
+    jeti::MaterialModel* dot_red = nullptr;
+    jeti::MaterialModel* dot_green = nullptr;
+    jeti::MaterialModel* dot_black = nullptr;
+    jeti::MaterialModel* dot_yellow = nullptr;
+    jeti::MaterialModel* dot_purple = nullptr;
+    jeti::MaterialModel* dot = nullptr;
 
-    jeti::model::Material* radar_screenrect = nullptr;
-    jeti::model::Material* radar_background = nullptr;
-    jeti::model::Material* radar_bar = nullptr;
-    jeti::model::Material* radar_range = nullptr;
-    jeti::model::Material* bar_bottom = nullptr;
-    jeti::model::Material* bar_left = nullptr;
-    jeti::model::Material* bar_top = nullptr;
-    jeti::model::Material* bar_right = nullptr;
+    jeti::MaterialModel* radar_screenrect = nullptr;
+    jeti::MaterialModel* radar_background = nullptr;
+    jeti::MaterialModel* radar_bar = nullptr;
+    jeti::MaterialModel* radar_range = nullptr;
+    jeti::MaterialModel* bar_bottom = nullptr;
+    jeti::MaterialModel* bar_left = nullptr;
+    jeti::MaterialModel* bar_top = nullptr;
+    jeti::MaterialModel* bar_right = nullptr;
     
-    jeti::model::Material* text_background = nullptr;
+    jeti::MaterialModel* text_background = nullptr;
 
-    jeti::model::Material* slot_mark_accept = nullptr;
-    jeti::model::Material* slot_mark_reject = nullptr;
-    jeti::model::Material* mask_round = nullptr;
-    jeti::model::Material* mark_target = nullptr;
-    jeti::model::Material* mark_target_slot = nullptr;
-    jeti::model::Material* slot = nullptr;
+    jeti::MaterialModel* slot_mark_accept = nullptr;
+    jeti::MaterialModel* slot_mark_reject = nullptr;
+    jeti::MaterialModel* mask_round = nullptr;
+    jeti::MaterialModel* mark_target = nullptr;
+    jeti::MaterialModel* mark_target_slot = nullptr;
+    jeti::MaterialModel* slot = nullptr;
 
     static MaterialCollector& get();
 
@@ -75,9 +75,9 @@ private:
     MaterialCollector(const MaterialCollector&) = delete;
     MaterialCollector& operator=(const MaterialCollector&) = delete;
 
-    std::vector<jeti::model::Material*> m_models;
+    std::vector<jeti::MaterialModel*> m_models;
 
-    jeti::model::Material* __create(const std::string&);
+    jeti::MaterialModel* __create(const std::string&);
 };
 
 } // namespace gui

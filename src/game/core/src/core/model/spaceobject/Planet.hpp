@@ -26,7 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace model {
+namespace core {
 
 class PlanetModel : public PlanetoidModel {
 
@@ -44,7 +44,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidModel::info();
-        result.add("model::Planet");
+        result.add("Planet");
         result.add("land", m_land);
         result.add("population", m_population);
         return result;

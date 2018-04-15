@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 BakModel::BakModel(int_t descriptor_id, int_t ob_id)
 {

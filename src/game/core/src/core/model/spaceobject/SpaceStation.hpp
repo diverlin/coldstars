@@ -26,7 +26,7 @@
 
 #include <string>
 
-namespace model {
+namespace core {
 
 class SpaceStationModel : public VehicleModel
 {
@@ -41,7 +41,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = SpaceStationModel::info();
-        result.add("model::SpaceStation");
+        result.add("SpaceStation");
         result.add("innerLand", m_innerLand);
         return result;
     }

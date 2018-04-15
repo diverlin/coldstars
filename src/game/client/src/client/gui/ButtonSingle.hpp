@@ -28,7 +28,7 @@ public:
     ButtonSingle(Type group,
                  const std::string& info,
                  void (*pAction)(client::Player*),
-                 jeti::model::Material* material)
+                 jeti::MaterialModel* material)
         :
           BaseButton(Type::BUTTON_SINGLE,
                      group,

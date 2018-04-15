@@ -31,7 +31,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace model {
+namespace core {
 
 GalaxyModel::GalaxyModel(int_t descriptor, int_t object)
 {

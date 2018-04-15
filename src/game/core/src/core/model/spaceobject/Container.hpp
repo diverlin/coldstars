@@ -23,7 +23,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace model {
+namespace core {
 
 class ContainerModel : public SpaceObjectModel {
 
@@ -40,10 +40,10 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = SpaceObjectModel::info();
-        result.add("model::Container");
-        result.add("model::item", m_item);
-        result.add("model::targetPos", m_targetPos);
-        result.add("model::velocity", m_velocity);
+        result.add("Container");
+        result.add("item", m_item);
+        result.add("targetPos", m_targetPos);
+        result.add("velocity", m_velocity);
         return result;
     }
 

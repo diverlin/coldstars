@@ -26,7 +26,7 @@
 #include <boost/serialization/vector.hpp>
 
 
-namespace model {
+namespace core {
 
 class SectorModel : public BaseModel
 {

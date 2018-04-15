@@ -21,7 +21,7 @@
 
 #include <core/spaceobject/Planetoid.hpp>
 
-namespace model {
+namespace core {
 
 class AsteroidModel : public PlanetoidModel {
 public:
@@ -32,7 +32,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidModel::info();
-        result.add("model::Asteroid");
+        result.add("Asteroid");
         return result;
     }
 

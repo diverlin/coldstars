@@ -34,41 +34,41 @@ void init()
 //    Manager::generate();
 }
 
-void compareEquipment(model::EquipmentModel* model, model::EquipmentModel* copy)
+void compareEquipment(core::EquipmentModel* model, core::EquipmentModel* copy)
 {
-    // model::Base
+    // Base
     EXPECT_EQ(model->id(), copy->id());
     EXPECT_EQ(model->descriptor(), copy->descriptor());
 
-    // model::Item
+    // Item
     EXPECT_EQ(model->condition(), copy->condition());
 
-    // model::Equipment
+    // Equipment
 
 }
 
 } // namespace
 
-TEST(model, bak) {
-    model::BakModel* model = core::BakItemBuilder::gen()->model();
-    model::BakModel* copy = new model::BakModel(model->data());
+TEST(core, bak) {
+    core::BakModel* model = core::BakItemBuilder::gen()->model();
+    core::BakModel* copy = new core::BakModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Bak
+    // Bak
     EXPECT_EQ(model->fuel(), copy->fuel());
 
     // general
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, drive) {
-    model::DriveModel* model = core::DriveItemBuilder::gen()->model();
-    model::DriveModel* copy = new model::DriveModel(model->data());
+TEST(core, drive) {
+    core::DriveModel* model = core::DriveItemBuilder::gen()->model();
+    core::DriveModel* copy = new core::DriveModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Drive
+    // Drive
     EXPECT_EQ(model->speed(), copy->speed());
     EXPECT_EQ(model->hyper(), copy->hyper());
 
@@ -76,26 +76,26 @@ TEST(model, drive) {
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, droid) {
-    model::DroidModel* model = core::DroidItemBuilder::gen()->model();
-    model::DroidModel* copy = new model::DroidModel(model->data());
+TEST(core, droid) {
+    core::DroidModel* model = core::DroidItemBuilder::gen()->model();
+    core::DroidModel* copy = new core::DroidModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Droid
+    // Droid
     EXPECT_EQ(model->repair(), copy->repair());
 
     // general
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, grapple) {
-    model::GrappleModel* model = core::GrappleItemBuilder::gen()->model();
-    model::GrappleModel* copy = new model::GrappleModel(model->data());
+TEST(core, grapple) {
+    core::GrappleModel* model = core::GrappleItemBuilder::gen()->model();
+    core::GrappleModel* copy = new core::GrappleModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Grapple
+    // Grapple
     EXPECT_EQ(model->strength(), copy->strength());
     EXPECT_EQ(model->radius(), copy->radius());
     EXPECT_EQ(model->speed(), copy->speed());
@@ -104,13 +104,13 @@ TEST(model, grapple) {
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, lazer) {
-    model::LazerModel* model = core::LazerItemBuilder::gen()->model();
-    model::LazerModel* copy = new model::LazerModel(model->data());
+TEST(core, lazer) {
+    core::LazerModel* model = core::LazerItemBuilder::gen()->model();
+    core::LazerModel* copy = new core::LazerModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Lazer
+    // Lazer
     EXPECT_EQ(model->damage(), copy->damage());
     EXPECT_EQ(model->radius(), copy->radius());
 
@@ -118,39 +118,39 @@ TEST(model, lazer) {
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, protector) {
-    model::ProtectorModel* model = core::ProtectorItemBuilder::gen()->model();
-    model::ProtectorModel* copy = new model::ProtectorModel(model->data());
+TEST(core, protector) {
+    core::ProtectorModel* model = core::ProtectorItemBuilder::gen()->model();
+    core::ProtectorModel* copy = new core::ProtectorModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Protector
+    // Protector
     EXPECT_EQ(model->protection(), copy->protection());
 
     // general
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, radar) {
-    model::RadarModel* model = core::RadarItemBuilder::gen()->model();
-    model::RadarModel* copy = new model::RadarModel(model->data());
+TEST(core, radar) {
+    core::RadarModel* model = core::RadarItemBuilder::gen()->model();
+    core::RadarModel* copy = new core::RadarModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Radar
+    // Radar
     EXPECT_EQ(model->radius(), copy->radius());
 
     // general
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, rocket) {
-    model::RocketModel* model = core::RocketItemBuilder::gen()->model();
-    model::RocketModel* copy = new model::RocketModel(model->data());
+TEST(core, rocket) {
+    core::RocketModel* model = core::RocketItemBuilder::gen()->model();
+    core::RocketModel* copy = new core::RocketModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Rocket
+    // Rocket
     EXPECT_EQ(model->ammo(), copy->ammo());
     EXPECT_EQ(model->damage(), copy->damage());
     EXPECT_EQ(model->radius(), copy->radius());
@@ -159,13 +159,13 @@ TEST(model, rocket) {
     EXPECT_EQ(model->data(), copy->data());
 }
 
-TEST(model, scaner) {
-    model::ScanerModel* model = core::ScanerItemBuilder::gen()->model();
-    model::ScanerModel* copy = new model::ScanerModel(model->data());
+TEST(core, scaner) {
+    core::ScanerModel* model = core::ScanerItemBuilder::gen()->model();
+    core::ScanerModel* copy = new core::ScanerModel(model->data());
 
     compareEquipment(model, copy);
 
-    // model::Scaner
+    // Scaner
     EXPECT_EQ(model->scan(), copy->scan());
 
     // general

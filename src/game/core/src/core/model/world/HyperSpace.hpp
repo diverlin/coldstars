@@ -22,7 +22,7 @@
 
 #include <ceti/Pack.hpp>
 
-namespace model {
+namespace core {
 
 class HyperSpaceModel : public BaseModel
 {
@@ -40,7 +40,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result;
-        result.add("model::HyperSpace");
+        result.add("HyperSpace");
         result.add("vehicles", m_vehicles);
         return result;
     }

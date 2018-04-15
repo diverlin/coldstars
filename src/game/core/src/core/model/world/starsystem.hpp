@@ -33,7 +33,7 @@
 
 #include <vector>
 
-namespace model {
+namespace core {
 class StarModel;
 class PlanetModel;
 class AsteroidModel;
@@ -80,7 +80,7 @@ enum CONDITION {
 } // namespace STARSYSTEM
 } // namespace ENTITY
 
-namespace model {
+namespace core {
 
 class StarSystemModel : public BaseModel
 {
@@ -138,7 +138,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result;
-        result.add("model::StarSystem");
+        result.add("StarSystem");
         result.add("race", m_race);
         result.add("invader", m_invader);
         result.add("status", m_status);

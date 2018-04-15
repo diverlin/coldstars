@@ -25,7 +25,7 @@ namespace core {
 class RocketDescr;
 } // namespace core
 
-namespace model {
+namespace core {
 class RocketModel;
 } // namespace model
 
@@ -37,7 +37,7 @@ class SpaceObject;
 class Rocket : public Weapon
 { 
 public:
-    Rocket(RocketDescr*, model::RocketModel*);
+    Rocket(RocketDescr*, RocketModel*);
     virtual ~Rocket() = default;
 
     bool checkAmmo() const override final;
@@ -46,11 +46,11 @@ public:
     virtual void updateProperties();
 
     RocketDescr* descriptor() const { return m_descriptor_rocket; }
-    model::RocketModel* model() const { return m_model_rocket; }
+    RocketModel* model() const { return m_model_rocket; }
 
 private:
     RocketDescr* m_descriptor_rocket = nullptr;
-    model::RocketModel* m_model_rocket = nullptr;
+    RocketModel* m_model_rocket = nullptr;
 
     int m_ammo_add = 0;
 

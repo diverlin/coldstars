@@ -23,7 +23,7 @@
 
 #include <ceti/Pack.hpp>
 
-namespace model {
+namespace core {
 
 class VehicleModel : public SpaceObjectModel {
 public:
@@ -42,7 +42,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = SpaceObjectModel::info();
-        result.add("model::Vehicle");
+        result.add("Vehicle");
         result.add("npc", m_npc);
         result.add("dock", m_dock);
         result.add("land", m_land);

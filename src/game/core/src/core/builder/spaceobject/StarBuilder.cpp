@@ -73,7 +73,7 @@ StarBuilder::gen(core::StarDescr* descr, int_t id)
 core::control::Star*
 StarBuilder::__genTemplate(core::StarDescr* descr, int_t id)
 {
-    model::StarModel* model = new model::StarModel(descr->id(), id);
+    StarModel* model = new StarModel(descr->id(), id);
     assert(model);
 
     core::control::Star* star = new core::control::Star(descr, model);

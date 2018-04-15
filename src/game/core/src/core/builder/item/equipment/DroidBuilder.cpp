@@ -62,7 +62,7 @@ DroidItemBuilder::gen(core::DroidDescr* descr)
 core::control::Droid*
 DroidItemBuilder::__genTemplate(DroidDescr* descriptor, int id)
 {
-    model::DroidModel* model = new model::DroidModel(descriptor->id(), id);
+    DroidModel* model = new DroidModel(descriptor->id(), id);
     assert(model);
     core::control::Droid* droid = new core::control::Droid(descriptor, model);
     assert(droid);

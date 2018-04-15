@@ -20,7 +20,7 @@
 
 #include <core/model/item/Item.hpp>
 
-namespace model {
+namespace core {
 
 class EquipmentModel : public ItemModel
 {
@@ -30,7 +30,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = info();
-        result.add("model::Equipment");
+        result.add("Equipment");
         return result;
     }
 
