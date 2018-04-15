@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
 
 AddPositionalComDescr::AddPositionalComDescr(int_t object, int_t parent, const meti::vec3& position)
     :
@@ -44,6 +43,5 @@ AddPositionalComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

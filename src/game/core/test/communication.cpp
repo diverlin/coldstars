@@ -58,9 +58,9 @@ TEST(communication, create_starsystem)
 //    int_t ob_id = core::manager::Entity::get().genId();
 
 //    StarSystem* descriptor = genStarSystem();
-//    comm::Create create(ob_id, descriptor->id());
+//    Create create(ob_id, descriptor->id());
 
-//    core::global::get().TelegramHub().add(core::comm::Telegram(telegram::Type::CREATE_STARSYSTEM, creation.data()));
+//    core::global::get().TelegramHub().add(Telegram(telegram::Type::CREATE_STARSYSTEM, creation.data()));
 
 //    control::StarSystem* starsystem = core::manager::Entity::get().starsystem(ob_id);
 //    EXPECT_EQ(descriptor->id(), starsystem->model()->descriptor());
@@ -72,9 +72,9 @@ TEST(communication, create_ship)
 //    int_t ob_id = core::manager::Entity::get().genId();
 
 //    Ship* descriptor = genShip();
-//    comm::Create create(ob_id, descriptor->id());
+//    Create create(ob_id, descriptor->id());
 
-//    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_SHIP, creation.data()));
+//    core::global::get().TelegramHub().add(Telegram(Telegram::Type::CREATE_SHIP, creation.data()));
 
 //    control::Ship* ship = core::manager::Entity::get().ship(ob_id);
 //    EXPECT_EQ(descriptor->id(), ship->model()->descriptor());
@@ -86,9 +86,9 @@ TEST(communication, create_bak)
 //    int_t ob_id = core::manager::Entity::get().genId();
 
 //    Bak* descriptor = genBak();
-//    comm::Create create(ob_id, descriptor->id());
+//    Create create(ob_id, descriptor->id());
 
-//    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_BAK, creation.data()));
+//    core::global::get().TelegramHub().add(Telegram(Telegram::Type::CREATE_BAK, creation.data()));
 
 //    control::Bak* bak = core::manager::Entity::get().bak(ob_id);
 //    EXPECT_EQ(descriptor->id(), bak->model()->descriptor());

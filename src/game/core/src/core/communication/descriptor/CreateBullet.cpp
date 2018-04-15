@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
 
 // BulletShoot
 CreateBulletComDescr::CreateBulletComDescr(int_t owner, int_t item, int_t target)
@@ -44,6 +43,5 @@ CreateBulletComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

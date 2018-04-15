@@ -49,7 +49,6 @@
 #include <ceti/Logger.hpp>
 
 namespace core {
-namespace comm {
 namespace event {
 
 /** TRANSITION */
@@ -357,6 +356,5 @@ void targetSpaceObject(int_t object_id, int_t subject_id)
 }
 
 } // namespace event
-} // namespace comm
 } // namespace core
 

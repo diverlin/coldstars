@@ -28,7 +28,6 @@
 
 
 namespace core {
-namespace comm {
 
 class AddPositionalComDescr : public ObjectDescr {
 public:
@@ -43,7 +42,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "comm::AddPositional:\n";
+        result += "AddPositional:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
@@ -63,7 +62,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 

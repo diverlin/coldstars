@@ -2,22 +2,24 @@
 
 # include <core/communication/BTelegramHandler.hpp>
 
-namespace client {
-namespace comm {
+namespace core {
+class Telegram;
+} // naemspace core
 
-class TelegramHandler : public core::comm::BTelegramHandler
+namespace client {
+
+class TelegramHandler : public core::BTelegramHandler
 {
 public:
-    TelegramHandler():BTelegramHandler(core::comm::Machine::CLIENT) {}
+    TelegramHandler():BTelegramHandler(core::Machine::CLIENT) {}
     virtual ~TelegramHandler()=default;
 
 protected:
-    void _process(const core::comm::Telegram&) const override final;
+    void _process(const core::Telegram&) const override final;
 
     // player
-    void _createPlayer(const core::comm::Telegram&) const;
-    void _createExplosionEffect(const core::comm::Telegram&) const;
+    void _createPlayer(const core::Telegram&) const;
+    void _createExplosionEffect(const core::Telegram&) const;
 };
 
-} // namespace comm
 } // namespace client

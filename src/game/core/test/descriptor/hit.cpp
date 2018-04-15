@@ -22,8 +22,8 @@
 
 TEST(core, clone_hit)
 {
-    core::comm::HitComDescr descr(11, 22, 33);
-    core::comm::HitComDescr copy(descr.data());
+    core::HitComDescr descr(11, 22, 33);
+    core::HitComDescr copy(descr.data());
 
     EXPECT_EQ(11, copy.owner());
     EXPECT_EQ(22, copy.target());

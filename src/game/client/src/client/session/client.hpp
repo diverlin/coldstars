@@ -20,9 +20,7 @@
 
 namespace client {
 class Player;
-namespace comm {
 class TelegramHandler;
-} // namespace comm
 } // namespace client
 
 namespace jeti {
@@ -60,7 +58,7 @@ private:
     view::StarSystem* m_view = nullptr;
     gui::UserInputInSpace* m_inputs = nullptr;
 
-    std::shared_ptr<client::comm::TelegramHandler> m_telegramHandler;
+    std::shared_ptr<client::TelegramHandler> m_telegramHandler;
 
     void __activate() const;
     void __create_player();

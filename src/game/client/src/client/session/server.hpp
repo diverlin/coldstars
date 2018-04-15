@@ -23,10 +23,7 @@ namespace core {
 
 class Player;
 class Session;
-
-namespace comm {
 class TelegramHandler;
-} // namepsace comm
 
 namespace control {
 class World;
@@ -50,7 +47,7 @@ private:
     control::WorldPtr m_world;
     std::vector<Player*> m_players;
 
-    std::shared_ptr<comm::TelegramHandler> m_telegramHandler;
+    std::shared_ptr<TelegramHandler> m_telegramHandler;
 
     void __activate() const;
     void __create_player();

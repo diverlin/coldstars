@@ -79,7 +79,7 @@ Server::Server(int id, bool dummy)
     Sessions::get().add(id, m_session);
     __activate();
 
-    m_telegramHandler = std::shared_ptr<comm::TelegramHandler>(new core::comm::TelegramHandler(core::TelegramCreator::get()));
+    m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler(core::TelegramCreator::get()));
     global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*server*/true); // why we need it on server?

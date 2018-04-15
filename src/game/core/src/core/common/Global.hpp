@@ -19,23 +19,15 @@
 
 #pragma once
 
-namespace core {
-namespace comm {
-class TelegramHub;
-} // namespace comm
-} // namespace core
-
 class Config;
 //class TurnTimer;
 class GameDate;
 class RaceDescriptors;
 
 namespace core {
+
 class Descriptors;
-} // namespace descriptor
-
-namespace core {
-
+class TelegramHub;
 class God;
 
 class global
@@ -44,7 +36,7 @@ public:
     static global& get();
 
     God& god() { return *m_god; }
-    comm::TelegramHub& telegramHub() { return *m_telegramHub; }
+    TelegramHub& telegramHub() { return *m_telegramHub; }
     Config& config() { return *m_config; }
 //    TurnTimer& turnTimer() { return *m_turnTimer; }
     GameDate& gameDate() { return *m_gameDate; }
@@ -57,7 +49,7 @@ private:
     global& operator=(const global&) = delete;
 
     God* m_god = nullptr;
-    comm::TelegramHub* m_telegramHub = nullptr;
+    TelegramHub* m_telegramHub = nullptr;
     Config* m_config = nullptr;
     GameDate* m_gameDate = nullptr;
     RaceDescriptors* m_raceDescriptors = nullptr;

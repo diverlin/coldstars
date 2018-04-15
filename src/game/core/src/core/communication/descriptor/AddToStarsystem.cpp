@@ -3,7 +3,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
 
 AddToStarsystemComDescr::AddToStarsystemComDescr(int_t object,
                                  int_t parent,
@@ -26,6 +25,5 @@ AddToStarsystemComDescr::data() const {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

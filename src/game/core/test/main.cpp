@@ -77,7 +77,7 @@
 
 TEST(core, accessors)
 {
-    core::comm::HitComDescr descriptor(22, 33, 44);
+    core::HitComDescr descriptor(22, 33, 44);
     EXPECT_EQ(descriptor.owner(), 22);
     EXPECT_EQ(descriptor.target(), 33);
     EXPECT_EQ(descriptor.damage(), 44);
@@ -85,15 +85,15 @@ TEST(core, accessors)
 
 TEST(base, hit)
 {
-    core::comm::TelegramHub& messageHub = core::global::get().telegramHub();
+    core::TelegramHub& messageHub = core::global::get().telegramHub();
 
     core::control::Ship* ship1 = core::ShipBuilder::gen();
     core::control::Ship* ship2 = core::ShipBuilder::gen();
 
     assert(false);
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
-//    messageHub.add(core::comm::Telegram(telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
+//    messageHub.add(Telegram(telegram::Type::HIT, Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+//    messageHub.add(Telegram(telegram::Type::HIT, Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+//    messageHub.add(Telegram(telegram::Type::HIT, Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     //messageHub.runLoop();
 
@@ -103,12 +103,12 @@ TEST(base, hit)
 TEST(base, critical_hit)
 {
     assert(false);
-//    core::comm::TelegramHub& messageHub = core::global::get().TelegramHub();
+//    TelegramHub& messageHub = core::global::get().TelegramHub();
 
 //    control::Ship* ship1 = builder::Ship::gen();
 //    control::Ship* ship2 = builder::Ship::gen();
 
-//    messageHub.add(core::comm::Telegram(core::comm::Telegram::Type::HIT, comm::Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
+//    messageHub.add(Telegram(Telegram::Type::HIT, Hit(ship1->id(), ship2->id(), 100000).data(), 0.4));
 
 //    //messageManager.runLoop();
 

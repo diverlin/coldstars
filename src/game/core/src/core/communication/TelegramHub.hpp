@@ -8,7 +8,6 @@
 #include <memory>
 
 namespace core {
-namespace comm {
 
 class BTelegramHandler;
 
@@ -30,5 +29,4 @@ private:
     ceti::pack<std::shared_ptr<BTelegramHandler>> m_listeners;
 };
 
-} // namespace comm
 } // namespace core

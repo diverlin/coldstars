@@ -5,7 +5,6 @@
 #include <ceti/Logger.hpp>
 
 namespace core {
-namespace comm {
 
 void TelegramHub::subscribe(const std::shared_ptr<BTelegramHandler>& listener)
 {
@@ -39,6 +38,5 @@ void TelegramHub::broadcast()
     m_telegrams.clear();
 }
 
-} // namespace comm
 } // namespace core
 

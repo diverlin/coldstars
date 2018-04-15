@@ -8,7 +8,6 @@
 
 
 namespace core {
-namespace comm {
 
 enum class Machine: int {SERVER, CLIENT};
 
@@ -54,5 +53,4 @@ public:
     {}
 };
 
-} // namespace comm
 } // namespace core

@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
-namespace comm {
 
 MoveVehicleComDescr::MoveVehicleComDescr(int_t object, const meti::vec3& position)
     :
@@ -43,6 +42,5 @@ MoveVehicleComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace comm
 } // namespace descriptor
 

@@ -52,9 +52,8 @@
 #include <core/communication/descriptor/ObjectSubject.hpp>
 
 namespace core {
-namespace comm {
 
-void TelegramHandler::_process(const comm::Telegram& telegram) const
+void TelegramHandler::_process(const Telegram& telegram) const
 {
     LOG_COMM("--server: process telegram="+telegram::to_string(telegram.type()));
 
@@ -146,22 +145,21 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 
 void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
-    core::comm::MoveVehicleComDescr telegram_descriptor(telegram.data());
+    MoveVehicleComDescr telegram_descriptor(telegram.data());
     m_telegramCreator.moveVehicle(telegram_descriptor.object(), telegram_descriptor.position());
 }
 
 void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
-    core::comm::ObjectDescr telegram_descriptor(telegram.data()); // actually no needed it
+    ObjectDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.endTurn();
 }
 
 void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram) const
 {
-    core::comm::ObjectSubjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
+    ObjectSubjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.targetingSpaceObject(telegram_descriptor.object(), telegram_descriptor.subject());
 }
 
-} // namespace comm
 } // namespace core
 

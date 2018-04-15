@@ -8,7 +8,6 @@
 #include <vector>
 
 namespace core {
-namespace comm {
 
 class BTelegramHandler
 {
@@ -29,81 +28,81 @@ protected:
     virtual void _process(const Telegram&) const = 0;
 
     /** TRANSITION */
-    void _addSectorToGalaxy(const comm::Telegram& telegram) const;
-    void _addStarSystemToSector(const comm::Telegram& telegram) const;
-    void _addNpcToShip(const comm::Telegram&) const;
+    void _addSectorToGalaxy(const Telegram& telegram) const;
+    void _addStarSystemToSector(const Telegram& telegram) const;
+    void _addNpcToShip(const Telegram&) const;
 
     // items
-    void _mountItem(const comm::Telegram&) const;
-    void _loadItem(const comm::Telegram&) const;
+    void _mountItem(const Telegram&) const;
+    void _loadItem(const Telegram&) const;
     /** */
 
     /** CREATE */
-    void _createGalaxy(const comm::Telegram&) const;
-    void _createSector(const comm::Telegram&) const;
-    void _createStarSystem(const comm::Telegram&) const;
-    void _createNpc(const comm::Telegram&) const;
+    void _createGalaxy(const Telegram&) const;
+    void _createSector(const Telegram&) const;
+    void _createStarSystem(const Telegram&) const;
+    void _createNpc(const Telegram&) const;
 
     // spaceobjects
-    void _createStar(const comm::Telegram&) const;
-    void _createPlanet(const comm::Telegram&) const;
-    void _createAsteroid(const comm::Telegram&) const;
-    void _createShip(const comm::Telegram&) const;
+    void _createStar(const Telegram&) const;
+    void _createPlanet(const Telegram&) const;
+    void _createAsteroid(const Telegram&) const;
+    void _createShip(const Telegram&) const;
 
     // items
-    void _createBomb(const comm::Telegram&) const;
-    void _createGoods(const comm::Telegram&) const;
-    void _createContainer(const comm::Telegram&) const;
-    void _createBullet(const comm::Telegram&) const;
+    void _createBomb(const Telegram&) const;
+    void _createGoods(const Telegram&) const;
+    void _createContainer(const Telegram&) const;
+    void _createBullet(const Telegram&) const;
 
     // items
-    void _createBak(const comm::Telegram&) const;
-    void _createDrive(const comm::Telegram&) const;
-    void _createDroid(const comm::Telegram&) const;
-    void _createGrapple(const comm::Telegram&) const;
-    void _createProtector(const comm::Telegram&) const;
-    void _createScaner(const comm::Telegram&) const;
-    void _createRadar(const comm::Telegram&) const;
-    void _createLazer(const comm::Telegram&) const;
-    void _createRocket(const comm::Telegram&) const;
+    void _createBak(const Telegram&) const;
+    void _createDrive(const Telegram&) const;
+    void _createDroid(const Telegram&) const;
+    void _createGrapple(const Telegram&) const;
+    void _createProtector(const Telegram&) const;
+    void _createScaner(const Telegram&) const;
+    void _createRadar(const Telegram&) const;
+    void _createLazer(const Telegram&) const;
+    void _createRocket(const Telegram&) const;
     /** */
 
     /** ADD TO STARSYSTEM */
-    void _addStarToStarSystem(const comm::Telegram&) const;
-    void _addPlanetToStarSystem(const comm::Telegram&) const;
-    void _addAsteroidToStarSystem(const comm::Telegram&) const;
-    void _addShipToStarSystem(const comm::Telegram&) const;
-    void _addContainerToStarSystem(const comm::Telegram&) const;
+    void _addStarToStarSystem(const Telegram&) const;
+    void _addPlanetToStarSystem(const Telegram&) const;
+    void _addAsteroidToStarSystem(const Telegram&) const;
+    void _addShipToStarSystem(const Telegram&) const;
+    void _addContainerToStarSystem(const Telegram&) const;
 
     /** DOCK */
-    void _dockShip(const comm::Telegram&) const;
-    void _launchShip(const comm::Telegram&) const;
+    void _dockShip(const Telegram&) const;
+    void _launchShip(const Telegram&) const;
 
     /** JUMP */
-    void _jumpIn(const comm::Telegram&) const;
-    void _jumpOut(const comm::Telegram&) const;
+    void _jumpIn(const Telegram&) const;
+    void _jumpOut(const Telegram&) const;
 
     /** DROP/TAKE */
-    void _dropItem(const comm::Telegram&) const;
-    void _pickContainer(const comm::Telegram&) const;
+    void _dropItem(const Telegram&) const;
+    void _pickContainer(const Telegram&) const;
     /** */
 
-    void _hit(const comm::Telegram&) const;
-    void _explode(const comm::Telegram&) const;
+    void _hit(const Telegram&) const;
+    void _explode(const Telegram&) const;
 
     // GARBAGE
-    void _garbageSpaceObject(const comm::Telegram&) const;
+    void _garbageSpaceObject(const Telegram&) const;
 
     // game states
-    void _endTurn(const comm::Telegram&) const;
+    void _endTurn(const Telegram&) const;
 
     // REMOVE
-    void _removeSpaceObjectFromStarSystem(const comm::Telegram&) const;
+    void _removeSpaceObjectFromStarSystem(const Telegram&) const;
 
     // move
-    void _moveVehicle(const comm::Telegram&) const;
+    void _moveVehicle(const Telegram&) const;
 
-    void _vehicleTargetSpaceOject(const comm::Telegram& telegram) const;
+    void _vehicleTargetSpaceOject(const Telegram& telegram) const;
 
 private:
     Machine m_machine = Machine::SERVER;
@@ -113,5 +112,4 @@ private:
     double __currentTime() const;
 };
 
-} // namespace comm
 } // namespace core

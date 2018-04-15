@@ -5,7 +5,6 @@
 #include <assert.h>
 
 namespace core {
-namespace comm {
 
 Telegram::Telegram(const Machine& sender, telegram::Type type, const std::string& data, double delay)
     :
@@ -20,5 +19,4 @@ bool Telegram::operator<(const Telegram& rhs) const
     return (m_dispatchTime < rhs.dispatchTime());
 }
 
-} // namespace comm
 } // namespace core

@@ -28,8 +28,6 @@
 #include <boost/archive/text_iarchive.hpp>
 
 namespace core {
-namespace comm {
-
 
 class ObjectDescr
 {
@@ -43,7 +41,7 @@ public:
     int_t object() const { return m_object; }
 
     std::string info() const {
-        std::string result = "comm::Object:\n";
+        std::string result = "Object:\n";
         result += std::string(" object = ") + std::to_string(m_object) + "\n";
         return result;
     }
@@ -59,7 +57,6 @@ private:
     }
 };
 
-} // namespace comm
 } // namespace descriptor
 
 
