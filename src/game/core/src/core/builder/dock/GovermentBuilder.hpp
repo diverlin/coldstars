@@ -32,15 +32,15 @@ class Goverment;
 
 namespace builder {
 
-class Goverment
+class GovermentBuilder
 {
 public:
     static core::control::Goverment* gen();
     static core::control::Goverment* gen(descriptor::Goverment*);
 
 private:
-    Goverment() = delete;
-    ~Goverment() = delete;
+    GovermentBuilder() = delete;
+    ~GovermentBuilder() = delete;
 
     static core::control::Goverment* __createTemplate(descriptor::Goverment*);
     static void __createInternals(core::control::Goverment*);
