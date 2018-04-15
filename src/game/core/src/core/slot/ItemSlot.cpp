@@ -80,7 +80,7 @@
 //    MACRO_SAVE_SERIALIZED_DATA
 //}
 
-//} // namespace model
+//} // namespace core
 
 namespace core {
 

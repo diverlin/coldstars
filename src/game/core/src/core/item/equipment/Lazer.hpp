@@ -26,7 +26,7 @@ class LazerDescr;
 
 namespace core {
 class LazerModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

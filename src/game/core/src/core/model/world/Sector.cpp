@@ -48,5 +48,5 @@ bool SectorModel::operator!=(const SectorModel& rhs) const {
     return !(*this == rhs);
 }
 
-} // namespace model
+} // namespace core
 

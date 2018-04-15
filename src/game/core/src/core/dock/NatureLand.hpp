@@ -27,7 +27,7 @@ class NatureLandDescr;
 
 namespace core {
 class NatureLandModel;
-} // namespace model
+} // namespace core
 
 
 namespace core {

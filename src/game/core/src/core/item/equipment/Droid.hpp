@@ -27,7 +27,7 @@ class DroidDescr;
 
 namespace core {
 class DroidModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

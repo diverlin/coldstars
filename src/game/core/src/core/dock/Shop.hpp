@@ -28,7 +28,7 @@ class ShopDescr;
 
 namespace core {
 class ShopModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

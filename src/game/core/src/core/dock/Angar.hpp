@@ -26,7 +26,7 @@ class AngarDescr;
 
 namespace core {
 class AngarModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

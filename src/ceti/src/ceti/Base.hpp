@@ -90,6 +90,6 @@ namespace ceti {
 //    }
 //};
 
-//} // namespace model
+//} // namespace core
 
 } // namespace ceti

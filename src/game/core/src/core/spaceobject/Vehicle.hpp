@@ -43,7 +43,7 @@ class VehicleModel;
 class ContainerModel;
 class StarSystemModel;
 class ItemModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

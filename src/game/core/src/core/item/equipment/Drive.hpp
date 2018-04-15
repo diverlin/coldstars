@@ -27,7 +27,7 @@ class DriveDescr;
 
 namespace core {
 class DriveModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

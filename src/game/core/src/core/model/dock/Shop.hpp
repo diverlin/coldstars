@@ -83,4 +83,4 @@ private:
     int m_exclusivePrice = 0;
 };
 
-} // namespace model
+} // namespace core

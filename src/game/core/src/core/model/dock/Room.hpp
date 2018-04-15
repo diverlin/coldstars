@@ -44,4 +44,4 @@ private:
     int_t m_kosmoport = NONE;
 };
 
-} // namespace model
+} // namespace core

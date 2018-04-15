@@ -27,7 +27,7 @@ class ShipDescr;
 
 namespace core {
 class ShipModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

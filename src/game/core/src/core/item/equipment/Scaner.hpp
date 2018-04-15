@@ -27,7 +27,7 @@ class ScanerDescr;
 
 namespace core {
 class ScanerModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

@@ -26,7 +26,7 @@ class ItemSlot;
 
 namespace core {
 class SpaceObjectModel;
-} // namespace model
+} // namespace core
 
 namespace client {
 class Player;

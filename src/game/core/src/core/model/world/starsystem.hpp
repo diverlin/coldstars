@@ -45,7 +45,7 @@ class VehicleModel;
 class WormHoleModel;
 class ContainerModel;
 class BulletModel;
-} // namespace model
+} // namespace core
 
 namespace control {
 class Star;
@@ -199,5 +199,5 @@ private:
     }
 };
 
-} // namespace model
+} // namespace core
 

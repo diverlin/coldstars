@@ -28,7 +28,7 @@ class RadarDescr;
 
 namespace core {
 class RadarModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

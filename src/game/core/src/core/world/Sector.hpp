@@ -28,7 +28,7 @@
 
 namespace core {
 class SectorModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

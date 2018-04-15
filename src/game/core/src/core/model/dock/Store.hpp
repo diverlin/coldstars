@@ -56,7 +56,7 @@ private:
     ceti::pack<int_t> m_vehicles;
 };
 
-} // namespace model
+} // namespace core
 
 
 

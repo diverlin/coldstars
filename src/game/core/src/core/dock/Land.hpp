@@ -29,7 +29,7 @@ class LandDescr;
 
 namespace core {
 class LandModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

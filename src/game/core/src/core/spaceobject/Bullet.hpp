@@ -26,7 +26,7 @@ class BulletDescr;
 
 namespace core {
 class BulletModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

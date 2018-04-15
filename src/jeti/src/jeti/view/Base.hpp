@@ -34,11 +34,11 @@ class Orientation;
 
 namespace model {
 class Base;
-} // namespace model
+} // namespace core
 
 namespace descriptor {
 class BaseView;
-} // namespace model
+} // namespace core
 
 } // namespace ceti
 

@@ -27,7 +27,7 @@ class StoreDescr;
 
 namespace core {
 class StoreModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 

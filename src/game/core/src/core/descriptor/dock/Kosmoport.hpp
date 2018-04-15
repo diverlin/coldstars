@@ -44,5 +44,5 @@ private:
     race::Type m_race = race::Type::NONE;
 };
 
-} // namespace model
+} // namespace core
 

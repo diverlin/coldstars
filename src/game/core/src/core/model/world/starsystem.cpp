@@ -95,5 +95,5 @@ bool StarSystemModel::operator!=(const StarSystemModel& rhs) const
     return !(*this == rhs);
 }
 
-} // namespace model
+} // namespace core
 

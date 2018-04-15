@@ -67,7 +67,7 @@ private:
     }
 };
 
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

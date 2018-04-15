@@ -26,7 +26,7 @@ class GovermentDescr;
 
 namespace core {
 class GovermentModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

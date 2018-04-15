@@ -26,7 +26,7 @@ class GoodsDescr;
 
 namespace core {
 class GoodsPackModel;
-} // namespace model
+} // namespace core
 
 namespace core {
 namespace control {

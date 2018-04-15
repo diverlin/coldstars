@@ -25,7 +25,7 @@
 
 namespace core {
 class SpaceObjectModel;
-} // namespace model
+} // namespace core
 
 class MacroTaskManager
 {
