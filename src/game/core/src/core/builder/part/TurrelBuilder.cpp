@@ -27,10 +27,10 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Turrel*
-Turrel::gen()
+TurrelBuilder::gen()
 {
     descriptor::Turrel* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::TURREL)) {
@@ -43,7 +43,7 @@ Turrel::gen()
 }
 
 core::control::Turrel*
-Turrel::gen(descriptor::Turrel* descr)
+TurrelBuilder::gen(descriptor::Turrel* descr)
 {
     core::control::Turrel* turrel = __genTemplate(descr);
 
@@ -57,7 +57,7 @@ Turrel::gen(descriptor::Turrel* descr)
 } 
 
 core::control::Turrel*
-Turrel::__genTemplate(descriptor::Turrel* descr)
+TurrelBuilder::__genTemplate(descriptor::Turrel* descr)
 {
     model::Turrel* model = new model::Turrel(descr->id());
     assert(model);

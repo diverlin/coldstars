@@ -31,17 +31,17 @@ class Store;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Store
+class StoreBuilder
 {
 public:
     static core::control::Store* gen();
     static core::control::Store* gen(descriptor::Store*);
 
 private:
-    Store() = delete;
-    ~Store() = delete;
+    StoreBuilder() = delete;
+    ~StoreBuilder() = delete;
 
     static core::control::Store* __createTemplate(descriptor::Store*);
     static void __createInternals(core::control::Store*);

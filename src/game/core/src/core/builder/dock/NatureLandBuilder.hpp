@@ -31,17 +31,17 @@ class NatureLand;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class NatureLand
+class NatureLandBuilder
 {
 public:
     static core::control::NatureLand* gen();
     static core::control::NatureLand* gen(descriptor::NatureLand*);
 
 private:
-    NatureLand() = delete;
-    ~NatureLand() = delete;
+    NatureLandBuilder() = delete;
+    ~NatureLandBuilder() = delete;
 
     static core::control::NatureLand* __createTemplate(descriptor::NatureLand*);
     static void __createInternals(core::control::NatureLand*);

@@ -43,10 +43,10 @@
 
 //#include <meti/RandUtils.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::NatureLand*
-NatureLand::gen()
+NatureLandBuilder::gen()
 {
     descriptor::NatureLand* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::NATURELAND)) {
@@ -59,7 +59,7 @@ NatureLand::gen()
 } 
 
 core::control::NatureLand*
-NatureLand::gen(descriptor::NatureLand* descr)
+NatureLandBuilder::gen(descriptor::NatureLand* descr)
 {
     core::control::NatureLand* natureland = __createTemplate(descr);
     __createInternals(natureland);
@@ -68,7 +68,7 @@ NatureLand::gen(descriptor::NatureLand* descr)
 }
 
 core::control::NatureLand*
-NatureLand::__createTemplate(descriptor::NatureLand* descr)
+NatureLandBuilder::__createTemplate(descriptor::NatureLand* descr)
 {
     model::NatureLand* model = new model::NatureLand(descr->id());
     assert(model);
@@ -82,7 +82,7 @@ NatureLand::__createTemplate(descriptor::NatureLand* descr)
 }
 
 void
-NatureLand::__createInternals(core::control::NatureLand* natureland)
+NatureLandBuilder::__createInternals(core::control::NatureLand* natureland)
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND));
 

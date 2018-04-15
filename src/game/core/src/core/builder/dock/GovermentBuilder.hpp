@@ -30,7 +30,7 @@ class Goverment;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
 class Goverment
 {

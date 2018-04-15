@@ -30,7 +30,7 @@ class Vehicle;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
 class VehicleBuilder
 {

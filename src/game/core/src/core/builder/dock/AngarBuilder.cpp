@@ -31,10 +31,10 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Angar*
-Angar::gen()
+AngarBuilder::gen()
 {
     descriptor::Angar* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ANGAR)) {
@@ -46,7 +46,7 @@ Angar::gen()
 } 
 
 core::control::Angar*
-Angar::gen(descriptor::Angar* descr)
+AngarBuilder::gen(descriptor::Angar* descr)
 {
     core::control::Angar* angar = __createTemplate(descr);
     __createInternals(angar);
@@ -54,7 +54,7 @@ Angar::gen(descriptor::Angar* descr)
 }
 
 core::control::Angar*
-Angar::__createTemplate(descriptor::Angar* descr)
+AngarBuilder::__createTemplate(descriptor::Angar* descr)
 {
     model::Angar* model = new model::Angar(descr->id());
     assert(model);
@@ -68,7 +68,7 @@ Angar::__createTemplate(descriptor::Angar* descr)
 }
 
 void
-Angar::__createInternals(core::control::Angar* angar)
+AngarBuilder::__createInternals(core::control::Angar* angar)
 { 
     for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++) {
         core::VehicleSlot* slot = new core::VehicleSlot(i);

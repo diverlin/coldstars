@@ -31,17 +31,17 @@ class Shop;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Shop
+class ShopBuilder
 {
 public:
     static core::control::Shop* gen();
     static core::control::Shop* gen(descriptor::Shop*);
 
 private:
-    Shop() = delete;
-    ~Shop() = delete;
+    ShopBuilder() = delete;
+    ~ShopBuilder() = delete;
 
     static core::control::Shop* __createTemplate(descriptor::Shop*);
     static void __createInternals(core::control::Shop*);

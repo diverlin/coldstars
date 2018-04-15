@@ -25,7 +25,7 @@ namespace client {
 class Player;
 } // namespace core
 
-namespace builder {
+namespace GovermentBuilder {
 
 class PlayerBuilder
 {

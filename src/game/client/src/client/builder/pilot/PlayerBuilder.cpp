@@ -20,7 +20,7 @@
 
 #include <client/pilot/Player.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 client::Player*
 PlayerBuilder::gen(int_t id)

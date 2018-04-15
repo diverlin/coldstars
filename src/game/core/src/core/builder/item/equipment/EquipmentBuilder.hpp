@@ -30,7 +30,7 @@ class Equipment;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
 class Equipment : public Item
 {

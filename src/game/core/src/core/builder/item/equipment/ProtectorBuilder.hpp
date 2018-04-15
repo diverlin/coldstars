@@ -40,7 +40,7 @@ class Protector;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 namespace item {
 
 class Protector : public Equipment

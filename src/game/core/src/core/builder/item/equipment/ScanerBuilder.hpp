@@ -39,7 +39,7 @@ class Scaner;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 namespace item {
 
 class Scaner : public Equipment

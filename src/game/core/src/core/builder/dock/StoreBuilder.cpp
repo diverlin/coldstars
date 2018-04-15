@@ -44,10 +44,10 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Store*
-Store::gen()
+StoreBuilder::gen()
 {
     descriptor::Store* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STORE)) {
@@ -59,7 +59,7 @@ Store::gen()
 } 
 
 core::control::Store*
-Store::gen(descriptor::Store* descr)
+StoreBuilder::gen(descriptor::Store* descr)
 {
     core::control::Store* store = __createTemplate(descr);
     __createInternals(store);
@@ -69,7 +69,7 @@ Store::gen(descriptor::Store* descr)
 }
 
 core::control::Store*
-Store::__createTemplate(descriptor::Store* descr)
+StoreBuilder::__createTemplate(descriptor::Store* descr)
 {
     model::Store* model = new model::Store(descr->id());
     assert(model);
@@ -83,13 +83,13 @@ Store::__createTemplate(descriptor::Store* descr)
 }
 
 void
-Store::__createInternals(core::control::Store* store)
+StoreBuilder::__createInternals(core::control::Store* store)
 {
 
 }
 
 void
-Store::__putRandomEquipment(core::control::Store* store)
+StoreBuilder::__putRandomEquipment(core::control::Store* store)
 {
     //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
     //int revision_id = 0;
@@ -110,34 +110,34 @@ Store::__putRandomEquipment(core::control::Store* store)
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->add(builder::ShipBuilder::gen());
+        store->add(GovermentBuilder::ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->add(builder::item::Lazer::gen());
+        store->add(GovermentBuilder::item::Lazer::gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->add(builder::item::Rocket::gen());
+        store->add(GovermentBuilder::item::Rocket::gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->add(builder::item::Radar::gen());
+        store->add(GovermentBuilder::item::Radar::gen());
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->add(builder::item::Grapple::gen());
+        store->add(GovermentBuilder::item::Grapple::gen());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->add(builder::item::Drive::gen());
+        store->add(GovermentBuilder::item::Drive::gen());
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->add(builder::item::Protector::gen());
+        store->add(GovermentBuilder::item::Protector::gen());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->add(builder::item::Bak::gen());
+        store->add(GovermentBuilder::item::Bak::gen());
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->add(builder::item::Droid::gen());
+        store->add(GovermentBuilder::item::Droid::gen());
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->add(builder::item::Scaner::gen());
+        store->add(GovermentBuilder::item::Scaner::gen());
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

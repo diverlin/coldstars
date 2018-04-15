@@ -31,7 +31,7 @@ class Galaxy;
 } // namespace control
 } // naemspace core
 
-namespace builder {
+namespace GovermentBuilder {
 
 class GalaxyBuilder
 {

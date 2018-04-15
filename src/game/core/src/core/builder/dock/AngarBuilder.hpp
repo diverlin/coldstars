@@ -36,17 +36,17 @@ const unsigned int ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM = 6;
 const unsigned int ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM = 6;
 const unsigned int ANGAR_VEHICLE_SLOTS_NUM = ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM + ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM;
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Angar
+class AngarBuilder
 {
 public:
     static core::control::Angar* gen();
     static core::control::Angar* gen(descriptor::Angar*);
 
 private:
-    Angar() = delete;
-    ~Angar() = delete;
+    AngarBuilder() = delete;
+    ~AngarBuilder() = delete;
 
     static void __createInternals(core::control::Angar*);
     static core::control::Angar* __createTemplate(descriptor::Angar*);
