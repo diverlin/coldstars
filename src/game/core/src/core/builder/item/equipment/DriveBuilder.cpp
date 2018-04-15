@@ -32,7 +32,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Drive*
-Drive::gen()
+DriveItemBuilder::gen()
 {
     descriptor::item::Drive* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
@@ -45,7 +45,7 @@ Drive::gen()
 }
 
 core::control::item::Drive*
-Drive::gen(int_t descriptor_id, int_t ob_id)
+DriveItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Drive* descr = core::shortcuts::descriptors()->drive(descriptor_id);
     core::control::item::Drive* drive = __genTemplate(descr, ob_id);
@@ -54,7 +54,7 @@ Drive::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Drive*
-Drive::gen(descriptor::item::Drive* descr)
+DriveItemBuilder::gen(descriptor::item::Drive* descr)
 {
     core::control::item::Drive* drive = __genTemplate(descr);
     __createInternals(drive, descr);
@@ -62,7 +62,7 @@ Drive::gen(descriptor::item::Drive* descr)
 }        
 
 core::control::item::Drive*
-Drive::__genTemplate(descriptor::item::Drive* descriptor, int_t id)
+DriveItemBuilder::__genTemplate(descriptor::item::Drive* descriptor, int_t id)
 {
     model::item::Drive* model = new model::item::Drive(descriptor->id(), id);
     assert(model);
@@ -71,10 +71,10 @@ Drive::__genTemplate(descriptor::item::Drive* descriptor, int_t id)
     return drive;
 }
 
-void Drive::__createInternals(core::control::item::Drive* drive, descriptor::item::Drive* descr)
+void DriveItemBuilder::__createInternals(core::control::item::Drive* drive, descriptor::item::Drive* descr)
 {
-    Item::_createInternals(drive, descr);
-    Equipment::_createInternals(drive, descr);
+    ItemBuilder::_createInternals(drive, descr);
+    EquipmentBuilder::_createInternals(drive, descr);
     drive->model()->setSpeed(descr->speed());
     drive->model()->setHyper(descr->hyper());
 }

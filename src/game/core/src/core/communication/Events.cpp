@@ -125,7 +125,7 @@ void createBomb(int_t descriptor, int_t object) {
 }
 
 void createGoods(int_t descriptor, int_t object) {
-    core::control::item::Goods* goods = builder::item::Goods::gen(descriptor, object);
+    core::control::item::Goods* goods = builder::item::GoodsBuilder::gen(descriptor, object);
     assert(false);
     core::shortcuts::entities()->add(goods); // is it needed?
 }
@@ -150,39 +150,39 @@ void createBullet(int_t owner, int_t weapon, int_t target_id) {
 
 // items
 void createBak(int_t descriptor, int_t object) {
-    control::item::Bak* bak = builder::item::Bak::gen(descriptor, object);
+    control::item::Bak* bak = builder::item::BakItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(bak);
 }
 void createDrive(int_t descriptor, int_t object) {
-    control::item::Drive* drive = builder::item::Drive::gen(descriptor, object);
+    control::item::Drive* drive = builder::item::DriveItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(drive);
 }
 void createDroid(int_t descriptor, int_t object) {
-    control::item::Droid* droid = builder::item::Droid::gen(descriptor, object);
+    control::item::Droid* droid = builder::item::DroidItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(droid);
 }
 void createGrapple(int_t descriptor, int_t object) {
-    control::item::Grapple* grapple = builder::item::Grapple::gen(descriptor, object);
+    control::item::Grapple* grapple = builder::item::GrappleItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(grapple);
 }
 void createProtector(int_t descriptor, int_t object) {
-    control::item::Protector* protector = builder::item::Protector::gen(descriptor, object);
+    control::item::Protector* protector = builder::item::ProtectorItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(protector);
 }
 void createScaner(int_t descriptor, int_t object) {
-    control::item::Scaner* scaner = builder::item::Scaner::gen(descriptor, object);
+    control::item::Scaner* scaner = builder::item::ScanerItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(scaner);
 }
 void createRadar(int_t descriptor, int_t object) {
-    control::item::Radar* radar = builder::item::Radar::gen(descriptor, object);
+    control::item::Radar* radar = builder::item::RadarItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(radar);
 }
 void createLazer(int_t descriptor, int_t object) {
-    control::item::Lazer* lazer = builder::item::Lazer::gen(descriptor, object);
+    control::item::Lazer* lazer = builder::item::LazerItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(lazer);
 }
 void createRocket(int_t descriptor, int_t object) {
-    control::item::Rocket* rocket = builder::item::Rocket::gen(descriptor, object);
+    control::item::Rocket* rocket = builder::item::RocketItemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(rocket);
 }
 /** */

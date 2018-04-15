@@ -42,7 +42,7 @@ class Scaner;
 namespace builder {
 namespace item {
 
-class Scaner : public Equipment
+class ScanerItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Scaner* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Scaner* gen(descriptor::item::Scaner*);
 
 private:
-    Scaner() = delete;
-    ~Scaner() = delete;
+    ScanerItemBuilder() = delete;
+    ~ScanerItemBuilder() = delete;
 
     static core::control::item::Scaner* __genTemplate(descriptor::item::Scaner*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Scaner*, descriptor::item::Scaner*);

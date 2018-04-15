@@ -43,7 +43,7 @@ class Protector;
 namespace builder {
 namespace item {
 
-class Protector : public Equipment
+class ProtectorItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Protector* gen();
@@ -52,8 +52,8 @@ public:
     static core::control::item::Protector* gen(descriptor::item::Protector*);
 
 private:
-    Protector() = delete;
-    ~Protector() = delete;
+    ProtectorItemBuilder() = delete;
+    ~ProtectorItemBuilder() = delete;
 
     static core::control::item::Protector* __genTemplate(descriptor::item::Protector*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Protector*, descriptor::item::Protector*);

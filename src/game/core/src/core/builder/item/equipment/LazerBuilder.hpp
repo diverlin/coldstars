@@ -42,7 +42,7 @@ class Lazer;
 namespace builder {
 namespace item {
 
-class Lazer : public Equipment
+class LazerItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Lazer* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Lazer* gen(descriptor::item::Lazer*);
 
 private:
-    Lazer() = delete;
-    ~Lazer() = delete;
+    LazerItemBuilder() = delete;
+    ~LazerItemBuilder() = delete;
 
     static core::control::item::Lazer* __genTemplate(descriptor::item::Lazer*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Lazer*, descriptor::item::Lazer*);

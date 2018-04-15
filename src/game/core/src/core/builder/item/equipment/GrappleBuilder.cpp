@@ -31,7 +31,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Grapple*
-Grapple::gen()
+GrappleItemBuilder::gen()
 {
     descriptor::item::Grapple* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GRAPPLE_EQUIPMENT)) {
@@ -44,7 +44,7 @@ Grapple::gen()
 }
 
 core::control::item::Grapple*
-Grapple::gen(int_t descriptor_id, int_t ob_id)
+GrappleItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Grapple* descr = core::shortcuts::descriptors()->grapple(descriptor_id);
     core::control::item::Grapple* grapple = __genTemplate(descr, ob_id);
@@ -53,7 +53,7 @@ Grapple::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Grapple*
-Grapple::gen(descriptor::item::Grapple* descr)
+GrappleItemBuilder::gen(descriptor::item::Grapple* descr)
 {
     core::control::item::Grapple* grapple = __genTemplate(descr);
     __createInternals(grapple, descr);
@@ -61,7 +61,7 @@ Grapple::gen(descriptor::item::Grapple* descr)
 } 
 
 core::control::item::Grapple*
-Grapple::__genTemplate(descriptor::item::Grapple* descriptor, int_t id)
+GrappleItemBuilder::__genTemplate(descriptor::item::Grapple* descriptor, int_t id)
 {
     model::item::Grapple* model = new model::item::Grapple(descriptor->id(), id);
     assert(model);
@@ -71,10 +71,10 @@ Grapple::__genTemplate(descriptor::item::Grapple* descriptor, int_t id)
 }
 
 void
-Grapple::__createInternals(core::control::item::Grapple* grapple, descriptor::item::Grapple* descr)
+GrappleItemBuilder::__createInternals(core::control::item::Grapple* grapple, descriptor::item::Grapple* descr)
 {
-    Item::_createInternals(grapple, descr);
-    Equipment::_createInternals(grapple, descr);
+    ItemBuilder::_createInternals(grapple, descr);
+    EquipmentBuilder::_createInternals(grapple, descr);
     grapple->model()->setStrength(descr->strength());
     grapple->model()->setRadius(descr->radius());
     grapple->model()->setSpeed(descr->speed());

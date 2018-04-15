@@ -32,14 +32,14 @@ class Equipment;
 
 namespace builder {
 
-class Equipment : public Item
+class EquipmentBuilder : public ItemBuilder
 {
 protected:
     static void _createInternals(core::control::Equipment*, descriptor::Equipment*);
 
 private:
-    Equipment() = delete;
-    ~Equipment() = delete;
+    EquipmentBuilder() = delete;
+    ~EquipmentBuilder() = delete;
 };
 
 } // namespace builder

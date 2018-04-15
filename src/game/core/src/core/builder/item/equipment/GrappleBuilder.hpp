@@ -42,7 +42,7 @@ class Grapple;
 namespace builder {
 namespace item {
 
-class Grapple : public Equipment
+class GrappleItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Grapple* gen();
@@ -50,8 +50,8 @@ public:
     static core::control::item::Grapple* gen(descriptor::item::Grapple*);
 
 private:
-    Grapple() = delete;
-    ~Grapple() = delete;
+    GrappleItemBuilder() = delete;
+    ~GrappleItemBuilder() = delete;
 
     static core::control::item::Grapple* __genTemplate(descriptor::item::Grapple*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Grapple*, descriptor::item::Grapple*);

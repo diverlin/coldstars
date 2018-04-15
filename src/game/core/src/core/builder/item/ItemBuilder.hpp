@@ -30,14 +30,14 @@ class Item;
 
 namespace builder {
 
-class Item
+class ItemBuilder
 {
 protected:
     static void _createInternals(core::control::Item*, descriptor::Item*);
 
 private:
-    Item() = delete;
-    ~Item() = delete;
+    ItemBuilder() = delete;
+    ~ItemBuilder() = delete;
 };
 
 } // namespace builder

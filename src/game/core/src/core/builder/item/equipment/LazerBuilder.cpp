@@ -30,7 +30,7 @@ namespace builder {
 namespace item {
 
 core::control::item::Lazer*
-Lazer::gen()
+LazerItemBuilder::gen()
 {
     descriptor::item::Lazer* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::LAZER_EQUIPMENT)) {
@@ -43,7 +43,7 @@ Lazer::gen()
 }
 
 core::control::item::Lazer*
-Lazer::gen(int_t descriptor_id, int_t ob_id)
+LazerItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
     descriptor::item::Lazer* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
     core::control::item::Lazer* lazer = __genTemplate(descr, ob_id);
@@ -52,7 +52,7 @@ Lazer::gen(int_t descriptor_id, int_t ob_id)
 }
 
 core::control::item::Lazer*
-Lazer::gen(descriptor::item::Lazer* descr)
+LazerItemBuilder::gen(descriptor::item::Lazer* descr)
 {
     core::control::item::Lazer* lazer = __genTemplate(descr);
     __createInternals(lazer, descr);
@@ -60,7 +60,7 @@ Lazer::gen(descriptor::item::Lazer* descr)
 }
 
 core::control::item::Lazer*
-Lazer::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
+LazerItemBuilder::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
 { 
     model::item::Lazer* model = new model::item::Lazer(descriptor->id(), id);
     assert(model);
@@ -70,10 +70,10 @@ Lazer::__genTemplate(descriptor::item::Lazer* descriptor, int_t id)
 } 
 
 void
-Lazer::__createInternals(core::control::item::Lazer* lazer, descriptor::item::Lazer* descr)
+LazerItemBuilder::__createInternals(core::control::item::Lazer* lazer, descriptor::item::Lazer* descr)
 {     
-    Item::_createInternals(lazer, descr);
-    Equipment::_createInternals(lazer, descr);
+    ItemBuilder::_createInternals(lazer, descr);
+    EquipmentBuilder::_createInternals(lazer, descr);
     lazer->model()->setDamage(descr->damage());
     lazer->model()->setRadius(descr->radius());
 

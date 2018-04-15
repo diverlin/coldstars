@@ -65,15 +65,15 @@ namespace builder {
 void
 VehicleBuilder::equip(core::control::Vehicle* vehicle)
 {
-    vehicle->manage(builder::item::Drive::gen());
-    vehicle->manage(builder::item::Bak::gen());
-    vehicle->manage(builder::item::Protector::gen());
-    vehicle->manage(builder::item::Scaner::gen());
-    vehicle->manage(builder::item::Radar::gen());
-    vehicle->manage(builder::item::Grapple::gen());
-    vehicle->manage(builder::item::Lazer::gen());
-    vehicle->manage(builder::item::Rocket::gen());
-    vehicle->load(builder::item::Rocket::gen());
+    vehicle->manage(builder::item::DriveItemBuilder::gen());
+    vehicle->manage(builder::item::BakItemBuilder::gen());
+    vehicle->manage(builder::item::ProtectorItemBuilder::gen());
+    vehicle->manage(builder::item::ScanerItemBuilder::gen());
+    vehicle->manage(builder::item::RadarItemBuilder::gen());
+    vehicle->manage(builder::item::GrappleItemBuilder::gen());
+    vehicle->manage(builder::item::LazerItemBuilder::gen());
+    vehicle->manage(builder::item::RocketItemBuilder::gen());
+    vehicle->load(builder::item::RocketItemBuilder::gen());
 }
 
 //void BaseVehicle::_createSlots(Vehicle* vehicle)

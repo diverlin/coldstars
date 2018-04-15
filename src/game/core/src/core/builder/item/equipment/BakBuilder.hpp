@@ -42,7 +42,7 @@ class Bak;
 namespace builder {
 namespace item {
 
-class Bak : public Equipment
+class BakItemBuilder : public EquipmentBuilder
 {
 public:
     static core::control::item::Bak* gen(descriptor::item::Bak*);
@@ -50,8 +50,8 @@ public:
     static core::control::item::Bak* gen();
 
 private:
-    Bak() = delete;
-    ~Bak() = delete;
+    BakItemBuilder() = delete;
+    ~BakItemBuilder() = delete;
 
     static core::control::item::Bak* __genTemplate(descriptor::item::Bak*, int_t ob_id = NONE);
     static void __createInternals(core::control::item::Bak*, descriptor::item::Bak*);
