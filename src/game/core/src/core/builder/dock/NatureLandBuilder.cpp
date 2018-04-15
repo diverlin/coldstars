@@ -43,7 +43,7 @@
 
 //#include <meti/RandUtils.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::NatureLand*
 NatureLandBuilder::gen()

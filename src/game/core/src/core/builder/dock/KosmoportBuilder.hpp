@@ -31,7 +31,7 @@ class Kosmoport;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class KosmoportBuilder
 {

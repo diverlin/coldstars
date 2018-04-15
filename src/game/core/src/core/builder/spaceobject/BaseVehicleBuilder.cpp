@@ -60,20 +60,20 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 
-namespace builder {
+namespace core {
 
 void
 VehicleBuilder::equip(core::control::Vehicle* vehicle)
 {
-    vehicle->manage(builder::item::DriveItemBuilder::gen());
-    vehicle->manage(builder::item::BakItemBuilder::gen());
-    vehicle->manage(builder::item::ProtectorItemBuilder::gen());
-    vehicle->manage(builder::item::ScanerItemBuilder::gen());
-    vehicle->manage(builder::item::RadarItemBuilder::gen());
-    vehicle->manage(builder::item::GrappleItemBuilder::gen());
-    vehicle->manage(builder::item::LazerItemBuilder::gen());
-    vehicle->manage(builder::item::RocketItemBuilder::gen());
-    vehicle->load(builder::item::RocketItemBuilder::gen());
+    vehicle->manage(core::item::DriveItemBuilder::gen());
+    vehicle->manage(core::item::BakItemBuilder::gen());
+    vehicle->manage(core::item::ProtectorItemBuilder::gen());
+    vehicle->manage(core::item::ScanerItemBuilder::gen());
+    vehicle->manage(core::item::RadarItemBuilder::gen());
+    vehicle->manage(core::item::GrappleItemBuilder::gen());
+    vehicle->manage(core::item::LazerItemBuilder::gen());
+    vehicle->manage(core::item::RocketItemBuilder::gen());
+    vehicle->load(core::item::RocketItemBuilder::gen());
 }
 
 //void BaseVehicle::_createSlots(Vehicle* vehicle)

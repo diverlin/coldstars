@@ -34,7 +34,7 @@ class Ship;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class ShipBuilder : public VehicleBuilder
 {

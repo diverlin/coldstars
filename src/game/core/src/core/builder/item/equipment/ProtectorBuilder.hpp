@@ -40,7 +40,7 @@ class Protector;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 namespace item {
 
 class ProtectorItemBuilder : public EquipmentBuilder

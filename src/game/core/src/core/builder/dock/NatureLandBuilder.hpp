@@ -31,7 +31,7 @@ class NatureLand;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class NatureLandBuilder
 {

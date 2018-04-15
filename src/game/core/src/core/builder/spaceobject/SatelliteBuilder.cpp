@@ -28,7 +28,7 @@
 #include <meti/RandUtils.hpp>
 
 
-namespace builder {
+namespace core {
 
 core::control::Satellite*
 SatelliteBuilder::__genTemplate(descriptor::Satellite* descr)

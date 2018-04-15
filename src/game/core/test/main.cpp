@@ -87,8 +87,8 @@ TEST(base, hit)
 {
     core::comm::TelegramHub& messageHub = core::global::get().telegramHub();
 
-    core::control::Ship* ship1 = builder::ShipBuilder::gen();
-    core::control::Ship* ship2 = builder::ShipBuilder::gen();
+    core::control::Ship* ship1 = core::ShipBuilder::gen();
+    core::control::Ship* ship2 = core::ShipBuilder::gen();
 
     assert(false);
 //    messageHub.add(core::comm::Telegram(telegram::Type::HIT, descriptor::comm::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
@@ -163,7 +163,7 @@ TEST(descriptor, manager)
 
 TEST(clone, galaxy)
 {
-    core::control::Galaxy* galaxy = builder::GalaxyBuilder::gen();
+    core::control::Galaxy* galaxy = core::GalaxyBuilder::gen();
 
     // clone
     model::Galaxy* model = new model::Galaxy(galaxy->model()->data());
@@ -178,7 +178,7 @@ TEST(clone, galaxy)
 
 TEST(clone, sector)
 {
-    core::control::Sector* sector = builder::SectorBuilder::gen();
+    core::control::Sector* sector = core::SectorBuilder::gen();
 
     // clone
     model::Sector* model = new model::Sector(sector->model()->data());
@@ -193,7 +193,7 @@ TEST(clone, sector)
 
 TEST(clone, starsystem)
 {
-    core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen();
+    core::control::StarSystem* starsystem = core::StarSystemBuilder::gen();
 
     // clone
     model::StarSystem* model = new model::StarSystem(starsystem->model()->data());
@@ -208,7 +208,7 @@ TEST(clone, starsystem)
 
 TEST(clone, asteroid)
 {
-    core::control::Asteroid* asteroid = builder::AsteroidBuilder::gen();
+    core::control::Asteroid* asteroid = core::AsteroidBuilder::gen();
 
     // clone
     model::Asteroid* model = new model::Asteroid(asteroid->model()->data());

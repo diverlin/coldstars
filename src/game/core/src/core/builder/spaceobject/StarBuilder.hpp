@@ -31,7 +31,7 @@ class Star;
 } // namespace control
 }
 
-namespace builder {
+namespace core {
 
 class StarBuilder
 {

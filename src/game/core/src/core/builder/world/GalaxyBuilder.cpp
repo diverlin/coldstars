@@ -31,7 +31,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::Galaxy*
 GalaxyBuilder::gen()

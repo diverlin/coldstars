@@ -1633,7 +1633,7 @@ Vehicle::__equipedSlotsByType(const SlotType& type) {
 Container*
 Vehicle::__wrapItemToContainer(Item* item)
 {
-    Container* container = builder::ContainerBuilder::gen();
+    Container* container = core::ContainerBuilder::gen();
     container->insert(item);
     return container;
 }

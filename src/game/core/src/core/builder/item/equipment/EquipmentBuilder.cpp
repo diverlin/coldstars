@@ -23,7 +23,7 @@
 #include <core/model/item/equipment/Equipment.hpp>
 #include <descriptor/item/equipment/Equipment.hpp>
 
-namespace builder {
+namespace core {
 
 void EquipmentBuilder::_createInternals(core::control::Equipment* equipment, descriptor::Equipment* descr)
 {

@@ -29,7 +29,7 @@
 
 #include <ceti/Logger.hpp>
 
-namespace builder {
+namespace core {
 namespace item {
 
 core::control::item::Protector*

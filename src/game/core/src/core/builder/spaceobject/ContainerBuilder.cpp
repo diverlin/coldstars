@@ -36,7 +36,7 @@
 
 #include <meti/RandUtils.hpp>
 
-namespace builder {
+namespace core {
 
 core::control::Container*
 ContainerBuilder::gen()
