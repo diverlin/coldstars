@@ -31,7 +31,7 @@ class Store;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class StoreBuilder
 {

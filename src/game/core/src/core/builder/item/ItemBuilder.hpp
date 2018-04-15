@@ -28,7 +28,7 @@ class Item;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class Item
 {

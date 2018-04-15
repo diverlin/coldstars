@@ -36,7 +36,7 @@
 #include <ai/aiModel/AiModelRanger.hpp>
 #include <ai/aiModel/AiModelTrader.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Npc*
 NpcBuilder::gen()

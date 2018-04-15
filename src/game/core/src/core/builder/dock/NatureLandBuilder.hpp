@@ -31,7 +31,7 @@ class NatureLand;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class NatureLandBuilder
 {

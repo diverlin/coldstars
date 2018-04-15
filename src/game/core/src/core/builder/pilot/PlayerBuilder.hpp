@@ -25,7 +25,7 @@ namespace core {
 class Player;
 } // namespace core
 
-namespace GovermentBuilder {
+namespace builder {
 
 class PlayerBuilder
 {

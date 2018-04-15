@@ -31,7 +31,7 @@ class Npc;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class NpcBuilder
 {

@@ -39,7 +39,7 @@ class Grapple;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 class Grapple : public Equipment

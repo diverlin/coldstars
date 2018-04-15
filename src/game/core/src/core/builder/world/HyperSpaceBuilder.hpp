@@ -32,7 +32,7 @@ class HyperSpace;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class HyperSpaceBuilder
 {

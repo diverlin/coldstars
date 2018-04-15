@@ -31,7 +31,7 @@ class Sector;
 } // namespace control
 } // namespace core
 
-namespace GovermentBuilder {
+namespace builder {
 
 class SectorBuilder
 {

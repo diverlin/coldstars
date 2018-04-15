@@ -26,7 +26,7 @@
 
 //#include <meti/RandUtils.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::WormHole*
 WormHoleBuilder::__genTemplate(descriptor::WormHole* descr)

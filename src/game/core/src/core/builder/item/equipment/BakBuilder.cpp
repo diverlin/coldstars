@@ -27,7 +27,7 @@
 #include <core/manager/EntityManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 core::control::item::Bak*

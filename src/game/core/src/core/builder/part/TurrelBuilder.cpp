@@ -27,7 +27,7 @@
 
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Turrel*
 TurrelBuilder::gen()

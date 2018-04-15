@@ -44,7 +44,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Store*
 StoreBuilder::gen()
@@ -110,34 +110,34 @@ StoreBuilder::__putRandomEquipment(core::control::Store* store)
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->add(GovermentBuilder::ShipBuilder::gen());
+        store->add(builder::ShipBuilder::gen());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->add(GovermentBuilder::item::Lazer::gen());
+        store->add(builder::item::Lazer::gen());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->add(GovermentBuilder::item::Rocket::gen());
+        store->add(builder::item::Rocket::gen());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->add(GovermentBuilder::item::Radar::gen());
+        store->add(builder::item::Radar::gen());
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->add(GovermentBuilder::item::Grapple::gen());
+        store->add(builder::item::Grapple::gen());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->add(GovermentBuilder::item::Drive::gen());
+        store->add(builder::item::Drive::gen());
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->add(GovermentBuilder::item::Protector::gen());
+        store->add(builder::item::Protector::gen());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->add(GovermentBuilder::item::Bak::gen());
+        store->add(builder::item::Bak::gen());
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->add(GovermentBuilder::item::Droid::gen());
+        store->add(builder::item::Droid::gen());
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->add(GovermentBuilder::item::Scaner::gen());
+        store->add(builder::item::Scaner::gen());
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

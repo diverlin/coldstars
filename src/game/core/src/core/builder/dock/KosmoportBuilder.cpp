@@ -32,7 +32,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Kosmoport*
 KosmoportBuilder::gen()
@@ -71,10 +71,10 @@ KosmoportBuilder::__createTemplate(descriptor::Kosmoport* descr)
 void
 KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
 {
-    kosmoport->bindAngar(GovermentBuilder::AngarBuilder::gen());
-    kosmoport->bindStore(GovermentBuilder::StoreBuilder::gen());
-    kosmoport->bindShop(GovermentBuilder::ShopBuilder::gen());
-    kosmoport->bindGoverment(GovermentBuilder::Goverment::gen());
+    kosmoport->bindAngar(builder::AngarBuilder::gen());
+    kosmoport->bindStore(builder::StoreBuilder::gen());
+    kosmoport->bindShop(builder::ShopBuilder::gen());
+    kosmoport->bindGoverment(builder::Goverment::gen());
 }
 
 } // namespace builder

@@ -39,7 +39,7 @@ class Drive;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 class Drive : public Equipment

@@ -35,7 +35,7 @@
 
 #include <meti/RandUtils.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::StarSystem*
 StarSystemBuilder::gen()

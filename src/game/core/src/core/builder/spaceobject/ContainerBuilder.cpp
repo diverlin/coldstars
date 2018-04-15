@@ -36,7 +36,7 @@
 
 #include <meti/RandUtils.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Container*
 ContainerBuilder::gen()

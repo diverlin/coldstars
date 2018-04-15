@@ -31,7 +31,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Planet*
 PlanetBuilder::gen()
@@ -71,7 +71,7 @@ PlanetBuilder::__createInternals(core::control::Planet* planet, descriptor::Plan
     /// SpaceObject
     planet->model()->setArmor(descr->armor());
 
-    core::control::Kosmoport* kosmoport = GovermentBuilder::KosmoportBuilder::gen();
+    core::control::Kosmoport* kosmoport = builder::KosmoportBuilder::gen();
     planet->bindLand(kosmoport);
 
     //float scale_comp = meti::getRandInt(model::Planet::SCALE_MIN, model::Planet::SCALE_MAX);

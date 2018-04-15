@@ -31,7 +31,7 @@ class Planet;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class PlanetBuilder
 {

@@ -60,20 +60,20 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 
-namespace GovermentBuilder {
+namespace builder {
 
 void
 VehicleBuilder::equip(core::control::Vehicle* vehicle)
 {
-    vehicle->manage(GovermentBuilder::item::Drive::gen());
-    vehicle->manage(GovermentBuilder::item::Bak::gen());
-    vehicle->manage(GovermentBuilder::item::Protector::gen());
-    vehicle->manage(GovermentBuilder::item::Scaner::gen());
-    vehicle->manage(GovermentBuilder::item::Radar::gen());
-    vehicle->manage(GovermentBuilder::item::Grapple::gen());
-    vehicle->manage(GovermentBuilder::item::Lazer::gen());
-    vehicle->manage(GovermentBuilder::item::Rocket::gen());
-    vehicle->load(GovermentBuilder::item::Rocket::gen());
+    vehicle->manage(builder::item::Drive::gen());
+    vehicle->manage(builder::item::Bak::gen());
+    vehicle->manage(builder::item::Protector::gen());
+    vehicle->manage(builder::item::Scaner::gen());
+    vehicle->manage(builder::item::Radar::gen());
+    vehicle->manage(builder::item::Grapple::gen());
+    vehicle->manage(builder::item::Lazer::gen());
+    vehicle->manage(builder::item::Rocket::gen());
+    vehicle->load(builder::item::Rocket::gen());
 }
 
 //void BaseVehicle::_createSlots(Vehicle* vehicle)
