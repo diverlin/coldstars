@@ -20,22 +20,22 @@
 
 #include <client/pilot/Player.hpp>
 
-namespace builder {
+namespace client {
 
-client::Player*
+Player*
 PlayerBuilder::gen(int_t id)
 {
     return __genTemplate(id);
 }
 
-client::Player*
+Player*
 PlayerBuilder::__genTemplate(int_t id)
 {
-    client::Player* player = new client::Player(id);
+    Player* player = new Player(id);
     assert(player);
 
     return player;
 }
 
-} // namespace builder
+} // namespace client
 
