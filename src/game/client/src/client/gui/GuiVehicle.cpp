@@ -41,7 +41,7 @@ Vehicle::Vehicle(const glm::vec2& size)
     :
       Base(Type::SCAN_VEHICLE, Type::SCAN_VEHICLE)
 {
-    m_slot_gate = new core::slot::Item(core::slot::Type::GATE);
+    m_slot_gate = new core::slot::ItemSlot(core::slot::Type::GATE);
     setSize(size);
     setMaterial(new jeti::control::Material(gui::MaterialCollector::get().slot));
 }
@@ -55,7 +55,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
     float dist_rate = 2.1f;
     /** WEAPON SLOTS */
     int i=0;
-    for (core::slot::Item* slot: vehicle->weaponSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->weaponSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -68,7 +68,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
     }
 
     /** EQUIPMENT SLOTS */
-    for (core::slot::Item* slot: vehicle->radarSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->radarSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -79,7 +79,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
         m_buttonslots.push_back(button);
     }
 
-    for (core::slot::Item* slot: vehicle->scanerSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->scanerSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -112,7 +112,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
     //        m_buttonslots.push_back(button);
     //}
 
-    for (core::slot::Item* slot: vehicle->grappleSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->grappleSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -123,7 +123,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
         m_buttonslots.push_back(button);
     }
 
-    for (core::slot::Item* slot: vehicle->droidSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->droidSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -134,7 +134,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
         m_buttonslots.push_back(button);
     }
 
-    for (core::slot::Item* slot: vehicle->protectorSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->protectorSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -145,7 +145,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
         m_buttonslots.push_back(button);
     }
 
-    for (core::slot::Item* slot: vehicle->driveSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->driveSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -156,7 +156,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
         m_buttonslots.push_back(button);
     }
 
-    for (core::slot::Item* slot: vehicle->bakSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->bakSlots()) {
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 
         glm::vec2 size(gui::itemslot::WIDTH_FOR_SHIP, gui::itemslot::HEIGHT_FOR_SHIP);
@@ -185,7 +185,7 @@ void Vehicle::__createItemSlotsGeometry(core::control::Vehicle* vehicle)
 
     /** CARGO SLOTS */
     i=0;
-    for (core::slot::Item* slot: vehicle->cargoSlots()) {
+    for (core::slot::ItemSlot* slot: vehicle->cargoSlots()) {
         float scale_size =1/1.5f;
         ButtonItemSlot* button = new ButtonItemSlot(slot);
 

@@ -40,7 +40,7 @@ std::vector<int>
 Weapon::radiusesOfSelectedWeapons() const
 {
     std::vector<int> radiuses;
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->item() && slot->isSelected()) {
             radiuses.push_back(slot->weapon()->radius());
         }
@@ -49,7 +49,7 @@ Weapon::radiusesOfSelectedWeapons() const
 }
 
 bool
-Weapon::addSlot(slot::Item* slot)
+Weapon::addSlot(slot::ItemSlot* slot)
 {
     assert(slot);
     m_slots.push_back(slot);
@@ -57,10 +57,10 @@ Weapon::addSlot(slot::Item* slot)
 }
 
 
-slot::Item*
+slot::ItemSlot*
 Weapon::freeSlot() const
 {
-    for(slot::Item* slot: m_slots) {
+    for(slot::ItemSlot* slot: m_slots) {
         if (!slot->item()) {
             return slot;
         }
@@ -69,12 +69,12 @@ Weapon::freeSlot() const
     return nullptr;
 }
 
-slot::Item*
+slot::ItemSlot*
 Weapon::equipedWeakestSlot() const
 {
     int price_min = 0;
-    slot::Item* result = nullptr;
-    for(slot::Item* slot: m_slots) {
+    slot::ItemSlot* result = nullptr;
+    for(slot::ItemSlot* slot: m_slots) {
         if (slot->item()) {
 //            int price = slot->item()->price();
 //            if ((price_min > price) || (price_min == 0)) {
@@ -97,7 +97,7 @@ void Weapon::prepare()
 void Weapon::__reload()
 {
     m_slots_reloaded.clear();
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         core::control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
@@ -114,21 +114,21 @@ void Weapon::__reload()
 
 void Weapon::activate()
 {
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         slot->selectEvent();
     }
 }
 
 void Weapon::deactivate()
 {
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         slot->deselectEvent();
     }
 }
 
 void Weapon::activate(const entity::Type& weapon_group)
 {
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obGroup() == weapon_group) {
             slot->selectEvent();
         }
@@ -137,7 +137,7 @@ void Weapon::activate(const entity::Type& weapon_group)
 
 void Weapon::deactivate(const entity::Type& weapon_group)
 {
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->item()->descriptor()->obGroup() == weapon_group) {
             slot->deselectEvent();
         }
@@ -146,7 +146,7 @@ void Weapon::deactivate(const entity::Type& weapon_group)
 
 bool Weapon::isAnyWeaponSelected() const
 {
-    for (slot::Item* slot: m_slots/*_reloaded*/) {
+    for (slot::ItemSlot* slot: m_slots/*_reloaded*/) {
         if (slot->isSelected()) {
             return true;
         }
@@ -165,7 +165,7 @@ bool Weapon::isAnyWeaponSelected() const
 //    return itemsNum;
 //}
 
-bool Weapon::setTarget(core::control::SpaceObject* target, slot::Item* subtarget)
+bool Weapon::setTarget(core::control::SpaceObject* target, slot::ItemSlot* subtarget)
 {
     STATUS status = _checkTarget(target);
     if (status != STATUS::TARGET_OK) {
@@ -173,7 +173,7 @@ bool Weapon::setTarget(core::control::SpaceObject* target, slot::Item* subtarget
     }
 
     bool result = false;
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         if (slot->isSelected()) {
             core::control::item::Weapon* weapon = slot->weapon();
             if (weapon) {
@@ -195,7 +195,7 @@ bool Weapon::setTarget(core::control::SpaceObject* target, slot::Item* subtarget
 int Weapon::guessDamage(int dist)
 {
     int damage = 0;
-    for (slot::Item* slot: m_slots_reloaded) {
+    for (slot::ItemSlot* slot: m_slots_reloaded) {
         if (slot->weapon()->radius() >= dist) {
             damage += slot->weapon()->damage();
         }
@@ -203,9 +203,9 @@ int Weapon::guessDamage(int dist)
     return damage;
 }
 
-slot::Item*
+slot::ItemSlot*
 Weapon::__nextSlotReadyToFire() const {
-    for(slot::Item* slot: m_slots_reloaded) {
+    for(slot::ItemSlot* slot: m_slots_reloaded) {
         core::control::item::Weapon* weapon = slot->weapon(); // shortcut
         if (_checkDistanceToTarget(slot->target(), weapon->radius())) {
             return slot;
@@ -217,7 +217,7 @@ Weapon::__nextSlotReadyToFire() const {
 void Weapon::updateFire(int timer, float attack_rate)
 {
     //if (timer < TURN_TIME - fire_delay) {
-    slot::Item* slot = __nextSlotReadyToFire();
+    slot::ItemSlot* slot = __nextSlotReadyToFire();
     if (slot) {
         slot->weapon()->fire(slot->target(), attack_rate);
         m_slots_reloaded.remove(slot);
@@ -227,7 +227,7 @@ void Weapon::updateFire(int timer, float attack_rate)
 
 void Weapon::__validateTargets()
 {
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (slot->target()) {
@@ -250,7 +250,7 @@ std::vector<control::item::Weapon*>
 Weapon::__functionalWeapons(entity::Type requested_type) const
 {
     std::vector<control::item::Weapon*> result;
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
@@ -267,7 +267,7 @@ void Weapon::updateFireAbility()
     m_damage = 0;
     m_radiusMax = 0;
     m_radiusMin = 0;
-    for (slot::Item* slot: m_slots) {
+    for (slot::ItemSlot* slot: m_slots) {
         control::item::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {

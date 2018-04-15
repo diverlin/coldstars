@@ -85,14 +85,14 @@
 namespace core {
 namespace slot {
 
-Item::Item(slot::Type type)
+ItemSlot::ItemSlot(slot::Type type)
     :
       m_type(type)
 {
     m_hitProbability = meti::rand::gen_int(100); // (tmp) move to builder
 }
 
-Item::~Item()
+ItemSlot::~ItemSlot()
 {}  
 
 ///* virtual */
@@ -104,7 +104,7 @@ Item::~Item()
 ////    }
 //}
 
-bool Item::__checkItemInsertion(control::Item* item) const
+bool ItemSlot::__checkItemInsertion(control::Item* item) const
 {
     if (type() == slot::Type::CARGO) {
         return true;
@@ -116,7 +116,7 @@ bool Item::__checkItemInsertion(control::Item* item) const
     return false;
 }
 
-bool Item::insert(control::Item* item)
+bool ItemSlot::insert(control::Item* item)
 {
     if ((type() == slot::Type::CARGO) || (type() == item->descriptor()->slotType())) {
         m_item = item;
@@ -135,7 +135,7 @@ bool Item::insert(control::Item* item)
     return false;
 }
 
-void Item::release()
+void ItemSlot::release()
 {
     if (!m_item) {
         return;
@@ -153,7 +153,7 @@ void Item::release()
     }
 }
 
-void Item::selectEvent()
+void ItemSlot::selectEvent()
 {
     setSelected(true);
 
@@ -164,7 +164,7 @@ void Item::selectEvent()
     //    }
 }
 
-void Item::deselectEvent()
+void ItemSlot::deselectEvent()
 {
     // make it oop
     setSelected(false);
@@ -186,7 +186,7 @@ void Item::deselectEvent()
 
 }
 
-void Item::updateVehiclePropetries() const
+void ItemSlot::updateVehiclePropetries() const
 {
     // TODO: make it oop
     assert(vehicleOwner());
@@ -250,14 +250,14 @@ void Item::updateVehiclePropetries() const
 //}
 
 control::Item*
-Item::takeItem()
+ItemSlot::takeItem()
 {
     control::Item* item = m_item;
     release();
     return item;
 }
 
-bool Item::swapItem(slot::Item* slot)
+bool ItemSlot::swapItem(slot::ItemSlot* slot)
 {
     assert(slot);
     if (!m_item && slot->item()) {
@@ -373,7 +373,7 @@ bool Item::swapItem(slot::Item* slot)
 ////    }
 //}
 
-void Item::log(const std::string& func_name) const
+void ItemSlot::log(const std::string& func_name) const
 {
     //    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
     

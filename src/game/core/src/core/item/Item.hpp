@@ -31,7 +31,7 @@ class Item;
 namespace core {
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -44,9 +44,9 @@ public:
 
     descriptor::Item* descriptor() const { return m_descriptor_item; }
     model::Item* model() const { return m_model_item; }
-    slot::Item* slot() const { return m_slot; }
+    slot::ItemSlot* slot() const { return m_slot; }
 
-    void setSlot(slot::Item* slot)  { m_slot = slot; }
+    void setSlot(slot::ItemSlot* slot)  { m_slot = slot; }
 
     bool isDamaged() const;
     bool isLocked() const;
@@ -71,7 +71,7 @@ private:
     descriptor::Item* m_descriptor_item = nullptr;
     model::Item* m_model_item = nullptr;
 
-    slot::Item* m_slot = nullptr;
+    slot::ItemSlot* m_slot = nullptr;
 };
 
 } // namespace control

@@ -72,11 +72,11 @@ class GoodsPack;
 namespace core {
 namespace slot {
 
-class Item : public Base, public Weapon
+class ItemSlot : public BaseSlot, public Weapon
 {
 public:
-    Item(Type type);
-    virtual ~Item();
+    ItemSlot(Type type);
+    virtual ~ItemSlot();
 
     Type type() const { return m_type; }
     int offset() const { return m_offset; }
@@ -126,7 +126,7 @@ public:
 
     void updateVehiclePropetries() const;
 
-    bool swapItem(slot::Item*);
+    bool swapItem(slot::ItemSlot*);
 
     void selectEvent();
     void deselectEvent();

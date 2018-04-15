@@ -29,7 +29,7 @@ class Ship;
 } // namespace control
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 } // namespace core
@@ -54,7 +54,7 @@ public:
     core::control::Ship* control() const { return m_control; }
 
 private:
-    std::map<core::slot::Item*, view::Turrel*> m_slots_turrels;
+    std::map<core::slot::ItemSlot*, view::Turrel*> m_slots_turrels;
 
     core::control::Ship* m_control = nullptr;
     std::vector<view::effect::Jet*> m_driveJets;

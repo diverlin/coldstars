@@ -29,7 +29,7 @@ class Vehicle;
 } // namespace core
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace core {
@@ -41,12 +41,12 @@ public:
     Protector(core::control::Vehicle*);
     ~Protector();
 
-    void addProtectorSlot(slot::Item* slot) { m_protectorSlots.push_back(slot); }
+    void addProtectorSlot(slot::ItemSlot* slot) { m_protectorSlots.push_back(slot); }
 
-    std::vector<slot::Item*> protectorSlots() const { return m_protectorSlots; }
+    std::vector<slot::ItemSlot*> protectorSlots() const { return m_protectorSlots; }
 
 private:
-    std::vector<slot::Item*> m_protectorSlots;
+    std::vector<slot::ItemSlot*> m_protectorSlots;
 };
 
 } // namepsace complex

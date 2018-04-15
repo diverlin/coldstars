@@ -48,7 +48,7 @@ gui::Type guiTypeFromSlotType(core::slot::Type slot) {
 
 namespace gui {
 
-ButtonItemSlot2::ButtonItemSlot2(core::slot::Item* slot)
+ButtonItemSlot2::ButtonItemSlot2(core::slot::ItemSlot* slot)
     :
       BaseButtonItemSlot(slot)
 {

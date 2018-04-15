@@ -30,7 +30,7 @@ class NatureLand;
 } // namespace control
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 } // namespace core
@@ -55,7 +55,7 @@ public:
 private:
     core::control::NatureLand* m_natureland = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, core::slot::Item*>> m_rects_itemslots;
+    std::vector<GuiPair<ceti::Rect, core::slot::ItemSlot*>> m_rects_itemslots;
 };
 
 } // namespace gui

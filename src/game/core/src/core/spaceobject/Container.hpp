@@ -34,7 +34,7 @@ class Container;
 namespace core {
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -47,9 +47,9 @@ public:
     Container(descriptor::Container*, model::Container*);
     virtual ~Container();
 
-    void bindItemSlot(slot::Item*);
+    void bindItemSlot(slot::ItemSlot*);
 
-    slot::Item* const itemSlot() const { return m_itemSlot; }
+    slot::ItemSlot* const itemSlot() const { return m_itemSlot; }
     bool insert(Item*);
     Item* item() const;
 
@@ -71,7 +71,7 @@ private:
     model::Container* m_model_container = nullptr;
 
     [[warning("remove this at all, we don't need slot here")]]
-    core::slot::Item* m_itemSlot = nullptr;
+    core::slot::ItemSlot* m_itemSlot = nullptr;
 
     //        virtual void UpdateInfo() override final;
 

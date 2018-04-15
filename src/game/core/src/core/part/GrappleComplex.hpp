@@ -24,7 +24,7 @@
 
 namespace core {
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 namespace control {
 class Vehicle;
@@ -51,17 +51,17 @@ public:
 
     void resetTargets();
 
-    void addGrappleSlot(core::slot::Item* slot) { m_grappleSlots.add(slot); }
+    void addGrappleSlot(core::slot::ItemSlot* slot) { m_grappleSlots.add(slot); }
     bool canBeManaged(core::control::SpaceObject*) const;
 
-    ceti::pack<core::slot::Item*> grappleSlots() const { return m_grappleSlots; }
+    ceti::pack<core::slot::ItemSlot*> grappleSlots() const { return m_grappleSlots; }
 
     void UpdateGrabScenarioProgram_inDynamic();
 
     const ceti::pack<core::control::SpaceObject*>& targets() const { return m_targets; }
 
 private:
-    ceti::pack<core::slot::Item*> m_grappleSlots;
+    ceti::pack<core::slot::ItemSlot*> m_grappleSlots;
     ceti::pack<core::control::SpaceObject*> m_targets;
 
     int m_free_strength = 0;

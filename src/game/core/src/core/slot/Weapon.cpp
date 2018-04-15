@@ -27,7 +27,7 @@ Weapon::Weapon()
 {
 }
 
-void Weapon::setTarget(control::SpaceObject* target, slot::Item* subtarget)
+void Weapon::setTarget(control::SpaceObject* target, slot::ItemSlot* subtarget)
 {
     m_target = target;
     m_subtarget = subtarget;
