@@ -37,7 +37,7 @@ class SpaceObject;
 class Rocket : public Weapon
 { 
 public:
-    Rocket(descriptor::item::Rocket*, model::item::Rocket*);
+    Rocket(descriptor::Rocket*, model::Rocket*);
     virtual ~Rocket() = default;
 
     bool checkAmmo() const override final;
@@ -45,12 +45,12 @@ public:
 
     virtual void updateProperties();
 
-    descriptor::item::Rocket* descriptor() const { return m_descriptor_rocket; }
-    model::item::Rocket* model() const { return m_model_rocket; }
+    descriptor::Rocket* descriptor() const { return m_descriptor_rocket; }
+    model::Rocket* model() const { return m_model_rocket; }
 
 private:
-    descriptor::item::Rocket* m_descriptor_rocket = nullptr;
-    model::item::Rocket* m_model_rocket = nullptr;
+    descriptor::Rocket* m_descriptor_rocket = nullptr;
+    model::Rocket* m_model_rocket = nullptr;
 
     int m_ammo_add = 0;
 

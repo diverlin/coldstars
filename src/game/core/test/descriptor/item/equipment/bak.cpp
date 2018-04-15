@@ -28,8 +28,8 @@
 namespace test {
 
 TEST(descriptor, clone_bak) {
-    descriptor::item::Bak* descr = descriptor::item::genBak();
-    descriptor::item::Bak* copy = new descriptor::item::Bak(descr->data());
+    descriptor::Bak* descr = descriptor::genBak();
+    descriptor::Bak* copy = new descriptor::Bak(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::BAK_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::BAK_EQUIPMENT);

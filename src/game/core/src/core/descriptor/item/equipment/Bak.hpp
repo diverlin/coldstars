@@ -53,7 +53,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Bak");
+        result.add("descriptor::Bak");
         result.add("fuel", m_fuel);
         return result;
     }

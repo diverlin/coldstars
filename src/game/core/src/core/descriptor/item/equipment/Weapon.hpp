@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Weapon");
+        result.add("descriptor::Weapon");
         result.add("radius", m_radius);
         result.add("damage", m_damage);
         return result;

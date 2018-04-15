@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Bak::Bak(descriptor::item::Bak* descr, model::item::Bak* model)
+Bak::Bak(descriptor::Bak* descr, model::Bak* model)
     :
       Equipment(descr, model)
     , m_descriptor_bak(descr)

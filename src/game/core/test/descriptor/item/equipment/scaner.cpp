@@ -28,8 +28,8 @@
 namespace test {
 
 TEST(descriptor, clone_scaner) {
-    descriptor::item::Scaner* descr = descriptor::item::genScaner();
-    descriptor::item::Scaner* copy = new descriptor::item::Scaner(descr->data());
+    descriptor::Scaner* descr = descriptor::genScaner();
+    descriptor::Scaner* copy = new descriptor::Scaner(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::SCANER_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::SCANER_EQUIPMENT);

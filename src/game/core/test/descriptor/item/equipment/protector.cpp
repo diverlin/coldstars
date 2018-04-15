@@ -28,8 +28,8 @@
 namespace test {
 
 TEST(descriptor, clone_protector) {
-    descriptor::item::Protector* descr = descriptor::item::genProtector();
-    descriptor::item::Protector* copy = new descriptor::item::Protector(descr->data());
+    descriptor::Protector* descr = descriptor::genProtector();
+    descriptor::Protector* copy = new descriptor::Protector(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::PROTECTOR_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::PROTECTOR_EQUIPMENT);

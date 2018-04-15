@@ -35,15 +35,15 @@ namespace control {
 class Grapple : public Equipment
 {
 public:
-    Grapple(descriptor::item::Grapple*, model::item::Grapple*);
+    Grapple(descriptor::Grapple*, model::Grapple*);
     virtual ~Grapple() = default;
 
     void UpdateGrabScenarioProgram_inDynamic();
 
     virtual void updateProperties();
 
-    model::item::Grapple* model() const { return m_model_grapple; }
-    descriptor::item::Grapple* descriptor() const { return m_descriptor_grapple; }
+    model::Grapple* model() const { return m_model_grapple; }
+    descriptor::Grapple* descriptor() const { return m_descriptor_grapple; }
 
 private:
     int m_strength_add = 0;
@@ -52,8 +52,8 @@ private:
 
     int m_free_strength = 0;
 
-    model::item::Grapple* m_model_grapple = nullptr;
-    descriptor::item::Grapple* m_descriptor_grapple = nullptr;
+    model::Grapple* m_model_grapple = nullptr;
+    descriptor::Grapple* m_descriptor_grapple = nullptr;
 
     void virtual addUniqueInfo();
     std::string strengthStr();

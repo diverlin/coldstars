@@ -40,16 +40,16 @@ namespace core {
 class RocketItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Rocket* gen();
-    static core::control::item::Rocket* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Rocket* gen(descriptor::item::Rocket*);
+    static core::control::Rocket* gen();
+    static core::control::Rocket* gen(int_t, int_t ob_id = NONE);
+    static core::control::Rocket* gen(descriptor::Rocket*);
 
 private:
     RocketItemBuilder() = delete;
     ~RocketItemBuilder() = delete;
 
-    static core::control::item::Rocket* __genTemplate(descriptor::item::Rocket*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Rocket*, descriptor::item::Rocket*);
+    static core::control::Rocket* __genTemplate(descriptor::Rocket*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Rocket*, descriptor::Rocket*);
 }; 
 
 } // namespace builder

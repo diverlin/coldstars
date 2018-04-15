@@ -125,18 +125,18 @@ public:
     descriptor::Shop* randShop() const;
     descriptor::Goverment* randGoverment() const;
 
-    descriptor::item::Scaner* randScaner() const;
-    descriptor::item::Drive* randDrive() const;
-    descriptor::item::Bak* randBak() const;
-    descriptor::item::Droid* randDroid() const;
-    descriptor::item::Grapple* randGrapple() const;
-    descriptor::item::Lazer* randLazer() const;
-    descriptor::item::Protector* randProtector() const;
-    descriptor::item::Radar* randRadar() const;
-    descriptor::item::Rocket* randRocket() const;
+    descriptor::Scaner* randScaner() const;
+    descriptor::Drive* randDrive() const;
+    descriptor::Bak* randBak() const;
+    descriptor::Droid* randDroid() const;
+    descriptor::Grapple* randGrapple() const;
+    descriptor::Lazer* randLazer() const;
+    descriptor::Protector* randProtector() const;
+    descriptor::Radar* randRadar() const;
+    descriptor::Rocket* randRocket() const;
 
     // other
-    descriptor::item::Goods* randGoods() const;
+    descriptor::Goods* randGoods() const;
 
     descriptor::Turrel* randTurrel() const;
 
@@ -164,17 +164,17 @@ public:
     descriptor::Shop* shop(int_t) const;
     descriptor::Goverment* goverment(int_t) const;
 
-    descriptor::item::Scaner* scaner(int_t) const;
-    descriptor::item::Drive* drive(int_t) const;
-    descriptor::item::Bak* bak(int_t) const;
-    descriptor::item::Droid* droid(int_t) const;
-    descriptor::item::Grapple* grapple(int_t) const;
-    descriptor::item::Lazer* lazer(int_t) const;
-    descriptor::item::Protector* protector(int_t) const;
-    descriptor::item::Radar* radar(int_t) const;
-    descriptor::item::Rocket* rocket(int_t) const;
+    descriptor::Scaner* scaner(int_t) const;
+    descriptor::Drive* drive(int_t) const;
+    descriptor::Bak* bak(int_t) const;
+    descriptor::Droid* droid(int_t) const;
+    descriptor::Grapple* grapple(int_t) const;
+    descriptor::Lazer* lazer(int_t) const;
+    descriptor::Protector* protector(int_t) const;
+    descriptor::Radar* radar(int_t) const;
+    descriptor::Rocket* rocket(int_t) const;
     // other
-    descriptor::item::Goods* goods(int_t) const;
+    descriptor::Goods* goods(int_t) const;
 
     descriptor::Mesh* mesh(int_t) const;
     descriptor::Material* material(int_t) const;

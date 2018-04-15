@@ -29,12 +29,12 @@
 
 namespace core {
 
-core::control::item::Scaner*
+core::control::Scaner*
 ScanerItemBuilder::gen()
 {
-    descriptor::item::Scaner* descr = nullptr;
+    descriptor::Scaner* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SCANER_EQUIPMENT)) {
-        descr = descriptor::item::genScaner();
+        descr = descriptor::genScaner();
     } else {
         descr = core::shortcuts::descriptors()->randScaner();
     }
@@ -42,35 +42,35 @@ ScanerItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Scaner*
+core::control::Scaner*
 ScanerItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Scaner* descr = core::shortcuts::descriptors()->scaner(descriptor_id);
-    core::control::item::Scaner* scaner = __genTemplate(descr, ob_id);
+    descriptor::Scaner* descr = core::shortcuts::descriptors()->scaner(descriptor_id);
+    core::control::Scaner* scaner = __genTemplate(descr, ob_id);
     __createInternals(scaner, descr);
     return scaner;
 }
 
-core::control::item::Scaner*
-ScanerItemBuilder::gen(descriptor::item::Scaner* descr)
+core::control::Scaner*
+ScanerItemBuilder::gen(descriptor::Scaner* descr)
 {
-    core::control::item::Scaner* scaner = __genTemplate(descr);
+    core::control::Scaner* scaner = __genTemplate(descr);
     __createInternals(scaner, descr);
     return scaner;
 } 
 
-core::control::item::Scaner*
-ScanerItemBuilder::__genTemplate(descriptor::item::Scaner* descr, int_t ob_id)
+core::control::Scaner*
+ScanerItemBuilder::__genTemplate(descriptor::Scaner* descr, int_t ob_id)
 {
-    model::item::Scaner* model = new model::item::Scaner(descr->id(), ob_id);
+    model::Scaner* model = new model::Scaner(descr->id(), ob_id);
     assert(model);
-    core::control::item::Scaner* scaner = new core::control::item::Scaner(descr, model);
+    core::control::Scaner* scaner = new core::control::Scaner(descr, model);
     assert(scaner);
     return scaner;
 }
 
 void
-ScanerItemBuilder::__createInternals(core::control::item::Scaner* scaner, descriptor::item::Scaner* descr)
+ScanerItemBuilder::__createInternals(core::control::Scaner* scaner, descriptor::Scaner* descr)
 {
     ItemBuilder::_createInternals(scaner, descr);
     EquipmentBuilder::_createInternals(scaner, descr);

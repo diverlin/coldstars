@@ -35,17 +35,17 @@ namespace control {
 class Protector : public Equipment
 {
 public:
-    Protector(descriptor::item::Protector*, model::item::Protector*);
+    Protector(descriptor::Protector*, model::Protector*);
     virtual ~Protector() = default;
 
     virtual void updateProperties();
 
-    descriptor::item::Protector* descriptor() const { return m_descriptor_protector; }
-    model::item::Protector* model() const { return m_model_protector; }
+    descriptor::Protector* descriptor() const { return m_descriptor_protector; }
+    model::Protector* model() const { return m_model_protector; }
 
 private:
-    descriptor::item::Protector* m_descriptor_protector = nullptr;
-    model::item::Protector* m_model_protector = nullptr;
+    descriptor::Protector* m_descriptor_protector = nullptr;
+    model::Protector* m_model_protector = nullptr;
 
     int m_protection_add = 0;
 

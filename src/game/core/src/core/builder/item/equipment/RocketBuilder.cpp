@@ -28,12 +28,12 @@
 
 namespace core {
 
-core::control::item::Rocket*
+core::control::Rocket*
 RocketItemBuilder::gen()
 {
-    descriptor::item::Rocket* descr = nullptr;
+    descriptor::Rocket* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ROCKET_EQUIPMENT)) {
-        descr = descriptor::item::genRocket();
+        descr = descriptor::genRocket();
     } else {
         descr = core::shortcuts::descriptors()->randRocket();
     }
@@ -41,36 +41,36 @@ RocketItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Rocket*
+core::control::Rocket*
 RocketItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Rocket* descr = core::shortcuts::descriptors()->rocket(descriptor_id);
-    core::control::item::Rocket* rocket = __genTemplate(descr, ob_id);
+    descriptor::Rocket* descr = core::shortcuts::descriptors()->rocket(descriptor_id);
+    core::control::Rocket* rocket = __genTemplate(descr, ob_id);
     __createInternals(rocket, descr);
     return rocket;
 }
 
-core::control::item::Rocket*
-RocketItemBuilder::gen(descriptor::item::Rocket* descr)
+core::control::Rocket*
+RocketItemBuilder::gen(descriptor::Rocket* descr)
 {
-    core::control::item::Rocket* rocket = __genTemplate(descr);
+    core::control::Rocket* rocket = __genTemplate(descr);
     __createInternals(rocket, descr);
     return rocket;
 }
 
 
-core::control::item::Rocket*
-RocketItemBuilder::__genTemplate(descriptor::item::Rocket* descriptor, int_t id)
+core::control::Rocket*
+RocketItemBuilder::__genTemplate(descriptor::Rocket* descriptor, int_t id)
 {
-    model::item::Rocket* model = new model::item::Rocket(descriptor->id(), id);
+    model::Rocket* model = new model::Rocket(descriptor->id(), id);
     assert(model);
-    core::control::item::Rocket* rocket = new core::control::item::Rocket(descriptor, model);
+    core::control::Rocket* rocket = new core::control::Rocket(descriptor, model);
     assert(rocket);
     return rocket;
 }
 
 void
-RocketItemBuilder::__createInternals(core::control::item::Rocket* rocket, descriptor::item::Rocket* descr)
+RocketItemBuilder::__createInternals(core::control::Rocket* rocket, descriptor::Rocket* descr)
 {     
     ItemBuilder::_createInternals(rocket, descr);
     EquipmentBuilder::_createInternals(rocket, descr);

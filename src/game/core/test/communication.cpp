@@ -85,12 +85,12 @@ TEST(communication, create_bak)
     assert(false);
 //    int_t ob_id = core::manager::Entity::get().genId();
 
-//    descriptor::item::Bak* descriptor = descriptor::item::genBak();
+//    descriptor::Bak* descriptor = descriptor::genBak();
 //    descriptor::comm::Create create(ob_id, descriptor->id());
 
 //    core::global::get().TelegramHub().add(core::comm::Telegram(core::comm::Telegram::Type::CREATE_BAK, creation.data()));
 
-//    control::item::Bak* bak = core::manager::Entity::get().bak(ob_id);
+//    control::Bak* bak = core::manager::Entity::get().bak(ob_id);
 //    EXPECT_EQ(descriptor->id(), bak->model()->descriptor());
 }
 

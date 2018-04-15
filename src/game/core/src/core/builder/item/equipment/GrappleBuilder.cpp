@@ -29,12 +29,12 @@
 
 namespace core {
 
-core::control::item::Grapple*
+core::control::Grapple*
 GrappleItemBuilder::gen()
 {
-    descriptor::item::Grapple* descr = nullptr;
+    descriptor::Grapple* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GRAPPLE_EQUIPMENT)) {
-        descr = descriptor::item::genGrapple();
+        descr = descriptor::genGrapple();
     } else {
         descr = core::shortcuts::descriptors()->randGrapple();
     }
@@ -42,35 +42,35 @@ GrappleItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Grapple*
+core::control::Grapple*
 GrappleItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Grapple* descr = core::shortcuts::descriptors()->grapple(descriptor_id);
-    core::control::item::Grapple* grapple = __genTemplate(descr, ob_id);
+    descriptor::Grapple* descr = core::shortcuts::descriptors()->grapple(descriptor_id);
+    core::control::Grapple* grapple = __genTemplate(descr, ob_id);
     __createInternals(grapple, descr);
     return grapple;
 }
 
-core::control::item::Grapple*
-GrappleItemBuilder::gen(descriptor::item::Grapple* descr)
+core::control::Grapple*
+GrappleItemBuilder::gen(descriptor::Grapple* descr)
 {
-    core::control::item::Grapple* grapple = __genTemplate(descr);
+    core::control::Grapple* grapple = __genTemplate(descr);
     __createInternals(grapple, descr);
     return grapple;
 } 
 
-core::control::item::Grapple*
-GrappleItemBuilder::__genTemplate(descriptor::item::Grapple* descriptor, int_t id)
+core::control::Grapple*
+GrappleItemBuilder::__genTemplate(descriptor::Grapple* descriptor, int_t id)
 {
-    model::item::Grapple* model = new model::item::Grapple(descriptor->id(), id);
+    model::Grapple* model = new model::Grapple(descriptor->id(), id);
     assert(model);
-    core::control::item::Grapple* grapple = new core::control::item::Grapple(descriptor, model);
+    core::control::Grapple* grapple = new core::control::Grapple(descriptor, model);
     assert(grapple);
     return grapple;
 }
 
 void
-GrappleItemBuilder::__createInternals(core::control::item::Grapple* grapple, descriptor::item::Grapple* descr)
+GrappleItemBuilder::__createInternals(core::control::Grapple* grapple, descriptor::Grapple* descr)
 {
     ItemBuilder::_createInternals(grapple, descr);
     EquipmentBuilder::_createInternals(grapple, descr);

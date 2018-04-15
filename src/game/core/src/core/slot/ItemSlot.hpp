@@ -82,23 +82,23 @@ public:
 
     int hitProbability() const { return m_hitProbability; }
 
-    core::control::item::Weapon* weapon() const { return static_cast<core::control::item::Weapon*>(m_item); }
+    core::control::Weapon* weapon() const { return static_cast<core::control::Weapon*>(m_item); }
     core::control::Item* item() const { return m_item; }
     bool isEmpty() const { return !m_item; }
 
-    core::control::item::Rocket*    rocketEquipment()    const { return reinterpret_cast<core::control::item::Rocket*>(m_item); }
-    core::control::item::Lazer*     lazerEquipment()     const { return reinterpret_cast<core::control::item::Lazer*>(m_item); }
-    core::control::item::Radar*     radarEquipment()     const { return reinterpret_cast<core::control::item::Radar*>(m_item); }
-    core::control::item::Drive*     driveEquipment()     const { return reinterpret_cast<core::control::item::Drive*>(m_item); }
-    core::control::item::Bak*       bakEquipment()       const { return reinterpret_cast<core::control::item::Bak*>(m_item); }
+    core::control::Rocket*    rocketEquipment()    const { return reinterpret_cast<core::control::Rocket*>(m_item); }
+    core::control::Lazer*     lazerEquipment()     const { return reinterpret_cast<core::control::Lazer*>(m_item); }
+    core::control::Radar*     radarEquipment()     const { return reinterpret_cast<core::control::Radar*>(m_item); }
+    core::control::Drive*     driveEquipment()     const { return reinterpret_cast<core::control::Drive*>(m_item); }
+    core::control::Bak*       bakEquipment()       const { return reinterpret_cast<core::control::Bak*>(m_item); }
 #ifdef USE_EXTRA_EQUIPMENT
-    control::item::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<control::item::EnergizerEquipment*>(m_item); }
-    control::item::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<control::item::FreezerEquipment*>(m_item); }
+    control::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<control::EnergizerEquipment*>(m_item); }
+    control::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<control::FreezerEquipment*>(m_item); }
 #endif
-    core::control::item::Protector* protectorEquipment() const { return reinterpret_cast<core::control::item::Protector*>(m_item); }
-    core::control::item::Droid*     droidEquipment()     const { return reinterpret_cast<core::control::item::Droid*>(m_item); }
-    core::control::item::Scaner*    scanerEquipment()    const { return reinterpret_cast<core::control::item::Scaner*>(m_item); }
-    core::control::item::Grapple*   grappleEquipment()   const { return reinterpret_cast<core::control::item::Grapple*>(m_item); }
+    core::control::Protector* protectorEquipment() const { return reinterpret_cast<core::control::Protector*>(m_item); }
+    core::control::Droid*     droidEquipment()     const { return reinterpret_cast<core::control::Droid*>(m_item); }
+    core::control::Scaner*    scanerEquipment()    const { return reinterpret_cast<core::control::Scaner*>(m_item); }
+    core::control::Grapple*   grappleEquipment()   const { return reinterpret_cast<core::control::Grapple*>(m_item); }
 
 #ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }

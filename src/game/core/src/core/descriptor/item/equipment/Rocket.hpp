@@ -65,7 +65,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = Weapon::info();
-        result.add("descriptor::item::Rocket");
+        result.add("descriptor::Rocket");
         result.add("ammo", m_ammo);
         result.add("bulletDescriptor", m_bulletDescriptor);
         return result;

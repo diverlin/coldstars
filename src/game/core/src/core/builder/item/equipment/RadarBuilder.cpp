@@ -30,12 +30,12 @@
 
 namespace core {
 
-core::control::item::Radar*
+core::control::Radar*
 RadarItemBuilder::gen()
 {
-    descriptor::item::Radar* descr = nullptr;
+    descriptor::Radar* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::RADAR_EQUIPMENT)) {
-        descr = descriptor::item::genRadar();
+        descr = descriptor::genRadar();
     } else {
         descr = core::shortcuts::descriptors()->randRadar();
     }
@@ -43,35 +43,35 @@ RadarItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Radar*
+core::control::Radar*
 RadarItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Radar* descr = core::shortcuts::descriptors()->radar(descriptor_id);
-    core::control::item::Radar* radar = __genTemplate(descr, ob_id);
+    descriptor::Radar* descr = core::shortcuts::descriptors()->radar(descriptor_id);
+    core::control::Radar* radar = __genTemplate(descr, ob_id);
     __createInternals(radar, descr);
     return radar;
 }
 
-core::control::item::Radar*
-RadarItemBuilder::gen(descriptor::item::Radar* descr)
+core::control::Radar*
+RadarItemBuilder::gen(descriptor::Radar* descr)
 {
-    core::control::item::Radar* radar = __genTemplate(descr);
+    core::control::Radar* radar = __genTemplate(descr);
     __createInternals(radar, descr);
     return radar;
 } 
 
-core::control::item::Radar*
-RadarItemBuilder::__genTemplate(descriptor::item::Radar* descriptor, int_t id)
+core::control::Radar*
+RadarItemBuilder::__genTemplate(descriptor::Radar* descriptor, int_t id)
 {
-    model::item::Radar* model = new model::item::Radar(descriptor->id(), id);
+    model::Radar* model = new model::Radar(descriptor->id(), id);
     assert(model);
-    core::control::item::Radar* radar = new core::control::item::Radar(descriptor, model);
+    core::control::Radar* radar = new core::control::Radar(descriptor, model);
     assert(radar);
     return radar;
 }
 
 void
-RadarItemBuilder::__createInternals(core::control::item::Radar* radar, descriptor::item::Radar* descr)
+RadarItemBuilder::__createInternals(core::control::Radar* radar, descriptor::Radar* descr)
 {
     ItemBuilder::_createInternals(radar, descr);
     EquipmentBuilder::_createInternals(radar, descr);

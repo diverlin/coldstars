@@ -41,17 +41,17 @@ namespace core {
 class ProtectorItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Protector* gen();
-    static std::vector<core::control::item::Protector*> gen(int);
-    static core::control::item::Protector* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Protector* gen(descriptor::item::Protector*);
+    static core::control::Protector* gen();
+    static std::vector<core::control::Protector*> gen(int);
+    static core::control::Protector* gen(int_t, int_t ob_id = NONE);
+    static core::control::Protector* gen(descriptor::Protector*);
 
 private:
     ProtectorItemBuilder() = delete;
     ~ProtectorItemBuilder() = delete;
 
-    static core::control::item::Protector* __genTemplate(descriptor::item::Protector*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Protector*, descriptor::item::Protector*);
+    static core::control::Protector* __genTemplate(descriptor::Protector*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Protector*, descriptor::Protector*);
 }; 
 
 } // namespace builder

@@ -30,12 +30,12 @@
 
 namespace core {
 
-core::control::item::Drive*
+core::control::Drive*
 DriveItemBuilder::gen()
 {
-    descriptor::item::Drive* descr = nullptr;
+    descriptor::Drive* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::DRIVE_EQUIPMENT)) {
-        descr = descriptor::item::genDrive();
+        descr = descriptor::genDrive();
     } else {
         descr = core::shortcuts::descriptors()->randDrive();
     }
@@ -43,34 +43,34 @@ DriveItemBuilder::gen()
     return gen(descr);
 }
 
-core::control::item::Drive*
+core::control::Drive*
 DriveItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Drive* descr = core::shortcuts::descriptors()->drive(descriptor_id);
-    core::control::item::Drive* drive = __genTemplate(descr, ob_id);
+    descriptor::Drive* descr = core::shortcuts::descriptors()->drive(descriptor_id);
+    core::control::Drive* drive = __genTemplate(descr, ob_id);
     __createInternals(drive, descr);
     return drive;
 }
 
-core::control::item::Drive*
-DriveItemBuilder::gen(descriptor::item::Drive* descr)
+core::control::Drive*
+DriveItemBuilder::gen(descriptor::Drive* descr)
 {
-    core::control::item::Drive* drive = __genTemplate(descr);
+    core::control::Drive* drive = __genTemplate(descr);
     __createInternals(drive, descr);
     return drive;
 }        
 
-core::control::item::Drive*
-DriveItemBuilder::__genTemplate(descriptor::item::Drive* descriptor, int_t id)
+core::control::Drive*
+DriveItemBuilder::__genTemplate(descriptor::Drive* descriptor, int_t id)
 {
-    model::item::Drive* model = new model::item::Drive(descriptor->id(), id);
+    model::Drive* model = new model::Drive(descriptor->id(), id);
     assert(model);
-    core::control::item::Drive* drive = new core::control::item::Drive(descriptor, model);
+    core::control::Drive* drive = new core::control::Drive(descriptor, model);
     assert(drive);
     return drive;
 }
 
-void DriveItemBuilder::__createInternals(core::control::item::Drive* drive, descriptor::item::Drive* descr)
+void DriveItemBuilder::__createInternals(core::control::Drive* drive, descriptor::Drive* descr)
 {
     ItemBuilder::_createInternals(drive, descr);
     EquipmentBuilder::_createInternals(drive, descr);

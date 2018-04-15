@@ -64,7 +64,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Drive");
+        result.add("descriptor::Drive");
         result.add("speed", m_speed);
         result.add("hyper", m_hyper);
         return result;

@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Grapple::Grapple(descriptor::item::Grapple* descr, model::item::Grapple* model)
+Grapple::Grapple(descriptor::Grapple* descr, model::Grapple* model)
     :
       Equipment(descr, model)
     , m_descriptor_grapple(descr)

@@ -29,29 +29,29 @@
 
 namespace core {
 
-core::control::item::Bak*
-BakItemBuilder::gen(descriptor::item::Bak* descr)
+core::control::Bak*
+BakItemBuilder::gen(descriptor::Bak* descr)
 {
-    core::control::item::Bak* bak = __genTemplate(descr);
+    core::control::Bak* bak = __genTemplate(descr);
     __createInternals(bak, descr);
     return bak;
 }
 
-core::control::item::Bak*
+core::control::Bak*
 BakItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::item::Bak* descr = core::shortcuts::descriptors()->bak(descriptor_id);
-    core::control::item::Bak* bak = __genTemplate(descr, ob_id);
+    descriptor::Bak* descr = core::shortcuts::descriptors()->bak(descriptor_id);
+    core::control::Bak* bak = __genTemplate(descr, ob_id);
     __createInternals(bak, descr);
     return bak;
 }
 
-core::control::item::Bak*
+core::control::Bak*
 BakItemBuilder::gen()
 {
-    descriptor::item::Bak* descr = nullptr;
+    descriptor::Bak* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::BAK_EQUIPMENT)) {
-        descr = descriptor::item::genBak();
+        descr = descriptor::genBak();
     } else {
         descr = core::shortcuts::descriptors()->randBak();
     }
@@ -60,18 +60,18 @@ BakItemBuilder::gen()
 }
 
 
-core::control::item::Bak*
-BakItemBuilder::__genTemplate(descriptor::item::Bak* descriptor, int_t id)
+core::control::Bak*
+BakItemBuilder::__genTemplate(descriptor::Bak* descriptor, int_t id)
 {
-    model::item::Bak* model = new model::item::Bak(descriptor->id(), id);
+    model::Bak* model = new model::Bak(descriptor->id(), id);
     assert(model);
-    core::control::item::Bak* bak = new core::control::item::Bak(descriptor, model);
+    core::control::Bak* bak = new core::control::Bak(descriptor, model);
     assert(bak);
     return bak;
 }
 
 void
-BakItemBuilder::__createInternals(core::control::item::Bak* bak, descriptor::item::Bak* descr)
+BakItemBuilder::__createInternals(core::control::Bak* bak, descriptor::Bak* descr)
 {
     ItemBuilder::_createInternals(bak, descr);
     EquipmentBuilder::_createInternals(bak, descr);

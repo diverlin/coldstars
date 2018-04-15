@@ -31,7 +31,7 @@
 namespace core {
 namespace control {
 
-Scaner::Scaner(descriptor::item::Scaner* descr, model::item::Scaner* model)
+Scaner::Scaner(descriptor::Scaner* descr, model::Scaner* model)
     :
       Equipment(descr, model)
     , m_descriptor_scaner(descr)

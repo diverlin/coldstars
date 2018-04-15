@@ -59,7 +59,7 @@ public:
     int shipsNum() const;
 
     bool repairItem(Npc*, Item*) const;
-    bool chargeRocketEquipment(Npc*, item::Rocket*) const;
+    bool chargeRocketEquipment(Npc*, Rocket*) const;
 
     bool repairVehicle(Vehicle*) const;
     bool tankUpVehicle(Vehicle*) const;

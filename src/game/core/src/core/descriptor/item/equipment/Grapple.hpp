@@ -68,7 +68,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = descriptor::Equipment::info();
-        result.add("descriptor::item::Grapple");
+        result.add("descriptor::Grapple");
         result.add("strength", m_strength);
         result.add("radius", m_radius);
         result.add("speed", m_speed);

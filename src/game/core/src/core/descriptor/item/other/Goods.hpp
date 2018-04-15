@@ -33,7 +33,7 @@ public:
 
     ceti::InfoTable info() const {
         ceti::InfoTable result = Item::info();
-        result.add("descriptor::item::Goods");
+        result.add("descriptor::Goods");
         return result;
     }
 

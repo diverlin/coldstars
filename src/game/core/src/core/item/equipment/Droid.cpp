@@ -30,7 +30,7 @@
 namespace core {
 namespace control {
 
-Droid::Droid(descriptor::item::Droid* descr, model::item::Droid* model)
+Droid::Droid(descriptor::Droid* descr, model::Droid* model)
     :
       Equipment(descr, model)
     , m_descriptor_droid(descr)

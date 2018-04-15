@@ -98,7 +98,7 @@ void Weapon::__reload()
 {
     m_slots_reloaded.clear();
     for (ItemSlot* slot: m_slots) {
-        core::control::item::Weapon* weapon = slot->weapon();
+        core::control::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
                 if (weapon->checkAmmo()) {
@@ -175,7 +175,7 @@ bool Weapon::setTarget(core::control::SpaceObject* target, ItemSlot* subtarget)
     bool result = false;
     for (ItemSlot* slot: m_slots) {
         if (slot->isSelected()) {
-            core::control::item::Weapon* weapon = slot->weapon();
+            core::control::Weapon* weapon = slot->weapon();
             if (weapon) {
                 if (weapon->isFunctioning()) {
                     if (!slot->target()) {
@@ -206,7 +206,7 @@ int Weapon::guessDamage(int dist)
 ItemSlot*
 Weapon::__nextSlotReadyToFire() const {
     for(ItemSlot* slot: m_slots_reloaded) {
-        core::control::item::Weapon* weapon = slot->weapon(); // shortcut
+        core::control::Weapon* weapon = slot->weapon(); // shortcut
         if (_checkDistanceToTarget(slot->target(), weapon->radius())) {
             return slot;
         }
@@ -228,7 +228,7 @@ void Weapon::updateFire(int timer, float attack_rate)
 void Weapon::__validateTargets()
 {
     for (ItemSlot* slot: m_slots) {
-        control::item::Weapon* weapon = slot->weapon();
+        control::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (slot->target()) {
                 if (!slot->validateSubTarget()) {
@@ -242,16 +242,16 @@ void Weapon::__validateTargets()
     }
 }
 
-std::vector<control::item::Weapon*> Weapon::rockets() const {
+std::vector<control::Weapon*> Weapon::rockets() const {
     return __functionalWeapons(entity::Type::ROCKET_EQUIPMENT);
 }
 
-std::vector<control::item::Weapon*>
+std::vector<control::Weapon*>
 Weapon::__functionalWeapons(entity::Type requested_type) const
 {
-    std::vector<control::item::Weapon*> result;
+    std::vector<control::Weapon*> result;
     for (ItemSlot* slot: m_slots) {
-        control::item::Weapon* weapon = slot->weapon();
+        control::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
                 if (weapon->type() == requested_type || entity::Type::ANY == requested_type)
@@ -268,7 +268,7 @@ void Weapon::updateFireAbility()
     m_radiusMax = 0;
     m_radiusMin = 0;
     for (ItemSlot* slot: m_slots) {
-        control::item::Weapon* weapon = slot->weapon();
+        control::Weapon* weapon = slot->weapon();
         if (weapon) {
             if (weapon->isFunctioning()) {
                 int radius = weapon->radius();

@@ -40,16 +40,16 @@ namespace core {
 class ScanerItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Scaner* gen();
-    static core::control::item::Scaner* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Scaner* gen(descriptor::item::Scaner*);
+    static core::control::Scaner* gen();
+    static core::control::Scaner* gen(int_t, int_t ob_id = NONE);
+    static core::control::Scaner* gen(descriptor::Scaner*);
 
 private:
     ScanerItemBuilder() = delete;
     ~ScanerItemBuilder() = delete;
 
-    static core::control::item::Scaner* __genTemplate(descriptor::item::Scaner*, int_t ob_id = NONE);
-    static void __createInternals(core::control::item::Scaner*, descriptor::item::Scaner*);
+    static core::control::Scaner* __genTemplate(descriptor::Scaner*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Scaner*, descriptor::Scaner*);
 }; 
 
 } // namespace builder

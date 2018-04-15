@@ -726,7 +726,7 @@ genBak(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Bak
+    // descriptor::Bak
     descr->setFuel(fuel);
 
     core::shortcuts::descriptors()->add(descr);
@@ -782,7 +782,7 @@ genDrive(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Drive
+    // descriptor::Drive
     descr->setSpeed(speed);
     descr->setHyper(hyper);
 
@@ -817,8 +817,8 @@ genDroid(int race, int tech_level)
         float effectiveness_rate = Droid::REPAIR_WEIGHT * repair_rate +
                 Droid::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / descriptor::item::Droid::MASS_MIN;
-        float condition_rate     = float(condition) / descriptor::item::Droid::CONDITION_MAX;
+        float mass_rate          = float(mass) / descriptor::Droid::MASS_MIN;
+        float condition_rate     = float(condition) / descriptor::Droid::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
@@ -836,7 +836,7 @@ genDroid(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Droid
+    // descriptor::Droid
     descr->setRepair(repair);
 
     core::shortcuts::descriptors()->add(descr);
@@ -895,7 +895,7 @@ genGrapple(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Grapple
+    // descriptor::Grapple
     descr->setStrength(strength);
     descr->setRadius(radius);
     descr->setSpeed(speed);
@@ -951,7 +951,7 @@ genLazer(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Lazer
+    // descriptor::Lazer
     descr->setDamage(damage);
     descr->setRadius(radius);
 
@@ -1003,7 +1003,7 @@ genProtector(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Protector
+    // descriptor::Protector
     descr->setProtection(protection);
 
     core::shortcuts::descriptors()->add(descr);
@@ -1053,7 +1053,7 @@ genRadar(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Radar
+    // descriptor::Radar
     descr->setRadius(radius);
 
     core::shortcuts::descriptors()->add(descr);
@@ -1110,11 +1110,11 @@ genRocket(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Weapon
+    // descriptor::Weapon
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    // descriptor::item::Rocket
+    // descriptor::Rocket
     descr->setBulletDescriptor(core::shortcuts::descriptors()->randBullet()->id());
     descr->setAmmo(ammo);
 
@@ -1172,7 +1172,7 @@ genScaner(int race, int tech_level)
     // descriptor::Equipment
     descr->setModules(modules);
 
-    // descriptor::item::Radar
+    // descriptor::Radar
     descr->setScan(scan);
 
     core::shortcuts::descriptors()->add(descr);

@@ -37,7 +37,7 @@ class SpaceObject;
 class Weapon : public Equipment
 { 
 public:
-    Weapon(descriptor::item::Weapon*, model::item::Weapon*);
+    Weapon(descriptor::Weapon*, model::Weapon*);
     virtual ~Weapon() = default;
 
     virtual void updateProperties();
@@ -49,12 +49,12 @@ public:
     int damage() const;
 
 public:
-    descriptor::item::Weapon* descriptor() const { return m_descriptor_weapon; }
-    model::item::Weapon* model() const { return m_model_weapon; }
+    descriptor::Weapon* descriptor() const { return m_descriptor_weapon; }
+    model::Weapon* model() const { return m_model_weapon; }
 
 private:
-    descriptor::item::Weapon* m_descriptor_weapon = nullptr;
-    model::item::Weapon* m_model_weapon = nullptr;
+    descriptor::Weapon* m_descriptor_weapon = nullptr;
+    model::Weapon* m_model_weapon = nullptr;
 
     int m_damage_add = 0;
     int m_radius_add = 0;

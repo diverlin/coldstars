@@ -40,16 +40,16 @@ namespace core {
 class DroidItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::item::Droid* gen();
-    static core::control::item::Droid* gen(int_t, int_t ob_id = NONE);
-    static core::control::item::Droid* gen(descriptor::item::Droid*);
+    static core::control::Droid* gen();
+    static core::control::Droid* gen(int_t, int_t ob_id = NONE);
+    static core::control::Droid* gen(descriptor::Droid*);
 
 private:
     DroidItemBuilder() = delete;
     ~DroidItemBuilder() = delete;
 
-    static core::control::item::Droid* __genTemplate(descriptor::item::Droid*, int ob_id = NONE);
-    static void __createInternals(core::control::item::Droid*, descriptor::item::Droid*);
+    static core::control::Droid* __genTemplate(descriptor::Droid*, int ob_id = NONE);
+    static void __createInternals(core::control::Droid*, descriptor::Droid*);
 }; 
 
 } // namespace builder

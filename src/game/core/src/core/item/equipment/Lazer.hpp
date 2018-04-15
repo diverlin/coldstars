@@ -34,18 +34,18 @@ namespace control {
 class Lazer : public Weapon
 {
 public:
-    Lazer(descriptor::item::Lazer*, model::item::Lazer*);
+    Lazer(descriptor::Lazer*, model::Lazer*);
     virtual ~Lazer() = default;
 
     bool checkAmmo() const override final;
     void fire(control::SpaceObject*, float rate=1.0f) override final;
 
-    descriptor::item::Lazer* descriptor() const { m_descriptor_lazer; }
-    model::item::Lazer* model() const { return m_model_lazer; }
+    descriptor::Lazer* descriptor() const { m_descriptor_lazer; }
+    model::Lazer* model() const { return m_model_lazer; }
 
 private:
-    descriptor::item::Lazer* m_descriptor_lazer = nullptr;
-    model::item::Lazer* m_model_lazer = nullptr;
+    descriptor::Lazer* m_descriptor_lazer = nullptr;
+    model::Lazer* m_model_lazer = nullptr;
 
     //              jeti::control::TextureOb* texOb_turrel;
     //              jeti::control::TextureOb* texOb_lazerEffect;
