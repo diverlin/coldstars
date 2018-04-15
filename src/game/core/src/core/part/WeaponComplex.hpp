@@ -33,9 +33,7 @@ namespace control {
 class Vehicle;
 class SpaceObject;
 
-namespace item {
 class Weapon;
-} // namespace item
 
 } // namespace control
 

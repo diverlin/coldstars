@@ -21,20 +21,15 @@
 #include "Weapon.hpp"
 
 namespace descriptor {
-namespace item {
 class Lazer;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Lazer;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Lazer : public Weapon
 {
@@ -58,6 +53,5 @@ private:
     void virtual addUniqueInfo();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

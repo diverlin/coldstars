@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Drive::Drive(descriptor::item::Drive* descr, model::item::Drive* model)
     :
@@ -82,7 +81,6 @@ std::string Drive::hyperStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core
 

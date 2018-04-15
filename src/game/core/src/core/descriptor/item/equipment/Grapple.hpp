@@ -23,7 +23,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 class Grapple : public Equipment
 {
@@ -92,6 +91,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

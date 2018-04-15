@@ -21,7 +21,6 @@
 #include "Weapon.hpp"
 
 namespace model {
-namespace item {
 
 class Lazer : public Weapon
 {
@@ -48,5 +47,4 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model

@@ -28,7 +28,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Scaner*
 ScanerItemBuilder::gen()
@@ -78,5 +77,4 @@ ScanerItemBuilder::__createInternals(core::control::item::Scaner* scaner, descri
     scaner->model()->setScan(descr->scan());
 }
 
-} // namespace item
 } // namespace builder

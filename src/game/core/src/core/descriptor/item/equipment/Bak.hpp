@@ -22,7 +22,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 class Bak : public Equipment
 {
@@ -71,6 +70,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

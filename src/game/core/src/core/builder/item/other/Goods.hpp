@@ -26,21 +26,16 @@
 #include <string>
 
 namespace descriptor {
-namespace item {
 class Goods;
-} // namespace item
 } // namespace descriptor
 
 namespace core {
 namespace control {
-namespace item {
 class Goods;
-} // namespace item
 } // namespace control
 }
 
 namespace core {
-namespace item {
 
 class GoodsBuilder : public ItemBuilder
 {
@@ -57,7 +52,6 @@ private:
     static void __createInternals(core::control::item::Goods*, descriptor::item::Goods*);
 }; 
 
-} // namespace item
 } // namespace builder
 
 

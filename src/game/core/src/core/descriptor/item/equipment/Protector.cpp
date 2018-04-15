@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Protector::PROTECTION_MIN = 3;
 const int Protector::PROTECTION_MAX = 30;
@@ -59,6 +58,5 @@ Protector::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespce item
 } // namespace descriptor
 

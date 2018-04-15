@@ -28,7 +28,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Droid*
 DroidItemBuilder::gen()
@@ -77,5 +76,4 @@ void DroidItemBuilder::__createInternals(core::control::item::Droid* droid, desc
     droid->model()->setRepair(descr->repair());
 }
 
-} // namespace item
 } // namespace builder

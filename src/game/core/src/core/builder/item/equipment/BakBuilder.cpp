@@ -28,7 +28,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Bak*
 BakItemBuilder::gen(descriptor::item::Bak* descr)
@@ -79,5 +78,4 @@ BakItemBuilder::__createInternals(core::control::item::Bak* bak, descriptor::ite
     bak->model()->setFuel(descr->fuel());
 }
 
-} // namespace item
 } // namespace builder

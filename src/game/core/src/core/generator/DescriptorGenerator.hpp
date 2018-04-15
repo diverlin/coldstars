@@ -51,7 +51,6 @@ class Store;
 class Shop;
 class Goverment;
 
-namespace item {
 class Bak;
 class Drive;
 class Droid;
@@ -64,7 +63,6 @@ class Scaner;
 
 // other
 class Goods;
-} // namespace item
 
 // parts
 class Turrel;
@@ -98,7 +96,6 @@ Shop* genShop(race::Type race = race::Type::NONE);
 Goverment* genGoverment(race::Type race = race::Type::NONE);
 
 /* items */
-namespace item {
 Bak* genBak(int race = NONE, int tech_level = NONE);
 Drive* genDrive(int race = NONE, int tech_level = NONE);
 Droid* genDroid(int race = NONE, int tech_level = NONE);
@@ -112,7 +109,6 @@ Scaner* genScaner(int race = NONE, int tech_level = NONE);
 // other
 Goods* genGoods();
 //Bomb* genBomb(int damage = NONE, int radius = NONE);
-} // namespace item
 
 //parts
 Turrel* genTurrel();

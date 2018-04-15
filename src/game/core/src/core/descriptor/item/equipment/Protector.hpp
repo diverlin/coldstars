@@ -22,7 +22,6 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 
 class Protector : public Equipment
 {
@@ -71,6 +70,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

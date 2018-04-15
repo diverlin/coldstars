@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Lazer::RADIUS_MIN = 200;
 const int Lazer::RADIUS_MAX = 400;
@@ -64,6 +63,5 @@ Lazer::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespce item
 } // namespace descriptor
 

@@ -23,7 +23,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 class Scaner : public Equipment
 {
@@ -73,5 +72,4 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor

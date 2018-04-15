@@ -27,7 +27,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Rocket*
 RocketItemBuilder::gen()
@@ -127,5 +126,4 @@ RocketItemBuilder::__createInternals(core::control::item::Rocket* rocket, descri
 //    rocket->countPrice();
 }
 
-} // namespace item
 } // namespace builder

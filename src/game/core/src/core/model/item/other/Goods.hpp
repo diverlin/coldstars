@@ -26,7 +26,6 @@
 #include <cassert>
 
 namespace model {
-namespace item {
 
 class Goods : public Item
 {
@@ -52,6 +51,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model
 

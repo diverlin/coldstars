@@ -27,7 +27,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Goods*
 GoodsBuilder::gen(descriptor::item::Goods* descriptor)
@@ -75,5 +74,4 @@ GoodsBuilder::__createInternals(core::control::item::Goods* control, descriptor:
 {
 }
 
-} // namespace item
 } // namespace builder

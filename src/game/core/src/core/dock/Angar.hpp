@@ -35,9 +35,7 @@ class VehicleSlot;
 
 namespace control {
 
-namespace item {
 class Rocket;
-} // namespace item
 
 class Vehicle;
 class Item;

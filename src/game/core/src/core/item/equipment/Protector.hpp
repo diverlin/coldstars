@@ -22,20 +22,15 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-namespace item {
 class Protector;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Protector;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Protector : public Equipment
 {
@@ -58,6 +53,5 @@ private:
     std::string protectionStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core

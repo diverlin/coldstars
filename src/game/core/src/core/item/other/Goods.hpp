@@ -21,20 +21,15 @@
 #include <core/item/Item.hpp>
 
 namespace descriptor {
-namespace item {
 class Goods;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Goods;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Goods : public Item
 {
@@ -52,7 +47,6 @@ private:
     model::item::Goods* m_model_goods = nullptr;
 };
 
-} // namespace item
 } // namespace control
 } // namespace core
 

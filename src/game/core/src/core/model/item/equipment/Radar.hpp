@@ -22,7 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Equipment.hpp"
 
 namespace model {
-namespace item {
 
 class Radar : public Equipment
 {
@@ -55,6 +54,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace model
 

@@ -30,7 +30,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Scaner::Scaner(descriptor::item::Scaner* descr, model::item::Scaner* model)
     :
@@ -67,6 +66,5 @@ std::string Scaner::scanStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core

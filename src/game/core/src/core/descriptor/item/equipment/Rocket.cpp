@@ -23,7 +23,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace descriptor {
-namespace item {
 
 const int Rocket::AMMO_MIN = 20;
 const int Rocket::AMMO_MAX = 40;
@@ -69,6 +68,5 @@ Rocket::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespce item
 } // namespace descriptor
 

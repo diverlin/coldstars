@@ -30,7 +30,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Rocket::Rocket(descriptor::item::Rocket* descr, model::item::Rocket* model)
     : Weapon(descr, model)
@@ -189,6 +188,5 @@ std::string Rocket::ammoStr()
 //    deteriorationEvent();
 //}
 
-} // namespace item
 } // namespace control
 } // namespace core

@@ -29,7 +29,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Radar*
 RadarItemBuilder::gen()

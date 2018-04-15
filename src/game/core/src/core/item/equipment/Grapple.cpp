@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Grapple::Grapple(descriptor::item::Grapple* descr, model::item::Grapple* model)
     :
@@ -93,6 +92,5 @@ std::string Grapple::speedStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // naemspace core

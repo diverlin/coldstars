@@ -21,7 +21,6 @@
 #include "Weapon.hpp"
 
 namespace descriptor {
-namespace item {
 
 class Lazer : public Weapon
 {
@@ -69,6 +68,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

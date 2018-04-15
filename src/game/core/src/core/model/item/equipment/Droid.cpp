@@ -21,7 +21,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
-namespace item {
 
 Droid::Droid(int_t descriptor_id, int_t ob_id)
 {
@@ -40,7 +39,6 @@ Droid::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace model
 
 

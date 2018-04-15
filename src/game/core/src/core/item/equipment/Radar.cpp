@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Radar::Radar(descriptor::item::Radar* descr, model::item::Radar* model)
     :
@@ -66,6 +65,5 @@ std::string Radar::radiusStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core

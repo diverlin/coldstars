@@ -29,7 +29,6 @@
 
 namespace core {
 namespace control {
-namespace item {
 
 Droid::Droid(descriptor::item::Droid* descr, model::item::Droid* model)
     :
@@ -79,6 +78,5 @@ std::string Droid::GetRepairStr()
     }
 }
 
-} // namespace item
 } // namespace control
 } // namespace core

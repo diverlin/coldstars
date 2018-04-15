@@ -22,20 +22,15 @@
 
 
 namespace descriptor {
-namespace item {
 class Bak;
-} // namespace item
 } // namespace descriptor
 
 namespace model {
-namespace item {
 class Bak;
-} // namespace item
 } // namespace model
 
 namespace core {
 namespace control {
-namespace item {
 
 class Bak : public Equipment
 {
@@ -64,7 +59,6 @@ private:
     std::string fuelStr();
 };
 
-} // namespace item
 } // namespace control
 } // namespace core
 

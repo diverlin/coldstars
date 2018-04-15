@@ -22,7 +22,6 @@
 
 
 namespace descriptor {
-namespace item {
 
 class Goods : public Item
 {
@@ -46,6 +45,5 @@ private:
     }
 };
 
-} // namespace item
 } // namespace descriptor
 

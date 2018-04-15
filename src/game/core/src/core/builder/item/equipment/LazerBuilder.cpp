@@ -27,7 +27,6 @@
 #include <core/generator/DescriptorGenerator.hpp>
 
 namespace core {
-namespace item {
 
 core::control::item::Lazer*
 LazerItemBuilder::gen()
@@ -111,5 +110,4 @@ LazerItemBuilder::__createInternals(core::control::item::Lazer* lazer, descripto
 //    lazer->countPrice();
 }
 
-} // namespace item
 } // namespace builder

@@ -21,7 +21,6 @@
 #include <ceti/serialization/macro.hpp>
 
 namespace model {
-namespace item {
 
 Goods::Goods(int_t descriptor_id, int_t ob_id)
 {
@@ -40,5 +39,4 @@ Goods::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace item
 } // namespace model
