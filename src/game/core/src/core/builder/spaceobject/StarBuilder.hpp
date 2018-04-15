@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Star;
+class StarDescr;
 } // namespace descriptor
 
 namespace core {
@@ -41,10 +41,10 @@ public:
 
     static core::control::Star* gen();
     static core::control::Star* gen(int_t, int_t);
-    static core::control::Star* gen(descriptor::Star*, int_t id = NONE);
+    static core::control::Star* gen(descriptor::StarDescr*, int_t id = NONE);
 
 private:
-    static core::control::Star* __genTemplate(descriptor::Star*, int_t id = NONE);
+    static core::control::Star* __genTemplate(descriptor::StarDescr*, int_t id = NONE);
 };
 
 } // namespace core

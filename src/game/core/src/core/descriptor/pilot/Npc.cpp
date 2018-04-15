@@ -22,19 +22,19 @@
 
 namespace descriptor {
 
-Npc::Npc()
+NpcDescr::NpcDescr()
 {
     setType(descriptor::Type::NPC);
     setObType(entity::Type::NPC);
 }
 
-Npc::Npc(const std::string& data)
+NpcDescr::NpcDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Npc::data() const
+NpcDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -24,7 +24,7 @@
 
 namespace descriptor {
 
-class Droid : public Equipment
+class DroidDescr : public EquipmentDescr
 {
 public:
     static const int REPAIR_MIN;
@@ -43,9 +43,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Droid();
-    ~Droid() = default;
-    Droid(const std::string& data);
+    DroidDescr();
+    ~DroidDescr() = default;
+    DroidDescr(const std::string& data);
     std::string data() const;
 
     void setRepair(int repair) { m_repair = repair; }
@@ -53,7 +53,7 @@ public:
     int repair() const { return m_repair; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Droid");
         result.add("repair", m_repair);
         return result;
@@ -66,7 +66,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_repair;
     }
 };

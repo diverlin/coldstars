@@ -22,7 +22,7 @@
 #include <core/builder/spaceobject/BaseVehicleBuilder.hpp>
 
 namespace descriptor {
-class Satellite;
+class SatelliteDescr;
 } // namespace descriptor
 
 namespace core {
@@ -37,14 +37,14 @@ class SatelliteBuilder : public VehicleBuilder
 {
 public:
     static core::control::Satellite* gen();
-    static core::control::Satellite* gen(descriptor::Satellite*);
+    static core::control::Satellite* gen(descriptor::SatelliteDescr*);
 
 private:
     SatelliteBuilder() = default;
     ~SatelliteBuilder() = default;
 
-    static void __createInternals(core::control::Satellite*, descriptor::Satellite*);
-    static core::control::Satellite* __genTemplate(descriptor::Satellite*);
+    static void __createInternals(core::control::Satellite*, descriptor::SatelliteDescr*);
+    static core::control::Satellite* __genTemplate(descriptor::SatelliteDescr*);
 }; 
 
 } // namespace core

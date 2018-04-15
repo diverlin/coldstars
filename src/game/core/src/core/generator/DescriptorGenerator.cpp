@@ -57,9 +57,9 @@ glm::vec3 randPlanetoidDirection() {
 } // namespace
 
 /* world */
-descriptor::Galaxy*
+descriptor::GalaxyDescr*
 genGalaxy(const std::vector<int_t>& sectors) {
-    descriptor::Galaxy* descr = new descriptor::Galaxy;
+    descriptor::GalaxyDescr* descr = new descriptor::GalaxyDescr;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::rand::get_element_or_die(sectors));
@@ -68,9 +68,9 @@ genGalaxy(const std::vector<int_t>& sectors) {
     return descr;
 }
 
-descriptor::Sector*
+descriptor::SectorDescr*
 genSector(const std::vector<int_t>& starsystems) {
-    descriptor::Sector* descr = new descriptor::Sector;
+    descriptor::SectorDescr* descr = new descriptor::SectorDescr;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::rand::get_element_or_die(starsystems));
@@ -79,10 +79,10 @@ genSector(const std::vector<int_t>& starsystems) {
     return descr;
 }
 
-descriptor::StarSystem*
+descriptor::StarSystemDescr*
 genStarSystem(race::Type race)
 {
-    descriptor::StarSystem* descr = new descriptor::StarSystem;
+    descriptor::StarSystemDescr* descr = new descriptor::StarSystemDescr;
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
@@ -93,10 +93,10 @@ genStarSystem(race::Type race)
     return descr;
 }
 
-descriptor::HyperSpace*
+descriptor::HyperSpaceDescr*
 genHyperSpace()
 {
-    descriptor::HyperSpace* descr = new descriptor::HyperSpace;
+    descriptor::HyperSpaceDescr* descr = new descriptor::HyperSpaceDescr;
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
@@ -106,7 +106,7 @@ genHyperSpace()
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::Type& type) {
-    descriptor::Mesh* descr = core::shortcuts::descriptors()->randMesh(type);
+    descriptor::MeshDescr* descr = core::shortcuts::descriptors()->randMesh(type);
     if (type == mesh::Type::PLANE) {
         descr->setIsPlane();
     }
@@ -115,31 +115,31 @@ int_t meshDescriptorIdFromType(const mesh::Type& type) {
 }
 
 int_t textureDescriptorIdFromType(const texture::Type& type) {
-    descriptor::Material* descr = core::shortcuts::descriptors()->randMaterial(type);
+    descriptor::MaterialDescr* descr = core::shortcuts::descriptors()->randMaterial(type);
     assert(descr->id() != NONE);
     return descr->id();
 }
 
 } // namespace
 
-descriptor::Star*
+descriptor::StarDescr*
 genStar()
 {
-    descriptor::Star* descr = new descriptor::Star;
+    descriptor::StarDescr* descr = new descriptor::StarDescr;
     descr->setArmor(10000000);
 
-    int orbit_radius = meti::rand::gen_int(descriptor::Star::DISTANCE_MIN,
-                                        descriptor::Star::DISTANCE_MAX);
+    int orbit_radius = meti::rand::gen_int(descriptor::StarDescr::DISTANCE_MIN,
+                                        descriptor::StarDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::Star::SPEED_MIN,
-                                   descriptor::Star::SPEED_MAX) / float(orbit_radius);
+    float speed = meti::rand::gen_int(descriptor::StarDescr::SPEED_MIN,
+                                   descriptor::StarDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::Star::SCALE_MIN,
-                                  descriptor::Star::SCALE_MAX);
+    float size = meti::rand::gen_int(descriptor::StarDescr::SCALE_MIN,
+                                  descriptor::StarDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
 
@@ -154,24 +154,24 @@ genStar()
     return descr;
 }
 
-descriptor::Planet*
+descriptor::PlanetDescr*
 genPlanet()
 {
-    descriptor::Planet* descr = new descriptor::Planet;
+    descriptor::PlanetDescr* descr = new descriptor::PlanetDescr;
     descr->setArmor(100000);
 
-    int orbit_radius = meti::rand::gen_int(descriptor::Planet::DISTANCE_MIN,
-                                        descriptor::Planet::DISTANCE_MAX);
+    int orbit_radius = meti::rand::gen_int(descriptor::PlanetDescr::DISTANCE_MIN,
+                                        descriptor::PlanetDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::Planet::SPEED_MIN,
-                                   descriptor::Planet::SPEED_MAX) / float(orbit_radius);
+    float speed = meti::rand::gen_int(descriptor::PlanetDescr::SPEED_MIN,
+                                   descriptor::PlanetDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::Planet::SCALE_MIN,
-                                     descriptor::Planet::SCALE_MAX);
+    float size = meti::rand::gen_int(descriptor::PlanetDescr::SCALE_MIN,
+                                     descriptor::PlanetDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::PLANET));
@@ -238,27 +238,27 @@ genPlanet()
 
 }
 
-descriptor::Asteroid*
+descriptor::AsteroidDescr*
 genAsteroid()
 {
-    descriptor::Asteroid* descr = new descriptor::Asteroid;
-    descr->setArmor(meti::rand::gen_int(descriptor::Asteroid::ARMOR_MIN,
-                                    descriptor::Asteroid::ARMOR_MAX));
+    descriptor::AsteroidDescr* descr = new descriptor::AsteroidDescr;
+    descr->setArmor(meti::rand::gen_int(descriptor::AsteroidDescr::ARMOR_MIN,
+                                    descriptor::AsteroidDescr::ARMOR_MAX));
 
-    int orbit_radiusA = meti::rand::gen_int(descriptor::Asteroid::DISTANCE_MIN,
-                                        descriptor::Asteroid::DISTANCE_MAX);
-    int orbit_radiusB = meti::rand::gen_int(descriptor::Asteroid::DISTANCE_MIN,
-                                        descriptor::Asteroid::DISTANCE_MAX);
+    int orbit_radiusA = meti::rand::gen_int(descriptor::AsteroidDescr::DISTANCE_MIN,
+                                        descriptor::AsteroidDescr::DISTANCE_MAX);
+    int orbit_radiusB = meti::rand::gen_int(descriptor::AsteroidDescr::DISTANCE_MIN,
+                                        descriptor::AsteroidDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radiusA);
     descr->setRadiusB(orbit_radiusB);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::Asteroid::SPEED_MIN,
-                                   descriptor::Asteroid::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
+    float speed = meti::rand::gen_int(descriptor::AsteroidDescr::SPEED_MIN,
+                                   descriptor::AsteroidDescr::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::Asteroid::SCALE_MIN,
-                                  descriptor::Asteroid::SCALE_MAX);
+    float size = meti::rand::gen_int(descriptor::AsteroidDescr::SCALE_MIN,
+                                  descriptor::AsteroidDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::ASTEROID));
@@ -272,19 +272,19 @@ genAsteroid()
     return descr;
 }
 
-descriptor::WormHole*
+descriptor::WormHoleDescr*
 genWormHole()
 {
-    descriptor::WormHole* descr = new descriptor::WormHole;
+    descriptor::WormHoleDescr* descr = new descriptor::WormHoleDescr;
 
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
 
-descriptor::Container*
+descriptor::ContainerDescr*
 genContainer()
 {
-    descriptor::Container* descr = new descriptor::Container;
+    descriptor::ContainerDescr* descr = new descriptor::ContainerDescr;
 
     descr->setSize(meti::vec3(1.0f));
     descr->setDirection(randPlanetoidDirection());
@@ -298,10 +298,10 @@ genContainer()
     return descr;
 }
 
-descriptor::Bullet*
+descriptor::BulletDescr*
 genBullet()
 {
-    descriptor::Bullet* descriptor = new descriptor::Bullet;
+    descriptor::BulletDescr* descriptor = new descriptor::BulletDescr;
 
     texture::Type material_type;
     if (meti::rand::gen_bool()) {
@@ -321,16 +321,16 @@ genBullet()
     return descriptor;
 }
 
-descriptor::Npc*
+descriptor::NpcDescr*
 genNpc()
 {
-    descriptor::Npc* descr = new descriptor::Npc;
+    descriptor::NpcDescr* descr = new descriptor::NpcDescr;
 
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
 
-descriptor::Ship*
+descriptor::ShipDescr*
 genShip()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -366,7 +366,7 @@ genShip()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::Ship* descr = new descriptor::Ship;
+    descriptor::ShipDescr* descr = new descriptor::ShipDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         float length = meti::rand::gen_float(-0.8f, 0.8f);
@@ -422,7 +422,7 @@ genShip()
 }
 
 
-descriptor::SpaceStation*
+descriptor::SpaceStationDescr*
 genSpaceStation()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -458,7 +458,7 @@ genSpaceStation()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::SpaceStation* descr = new descriptor::SpaceStation;
+    descriptor::SpaceStationDescr* descr = new descriptor::SpaceStationDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
@@ -508,7 +508,7 @@ genSpaceStation()
     return descr;
 }
 
-descriptor::Satellite*
+descriptor::SatelliteDescr*
 genSatellite()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -544,7 +544,7 @@ genSatellite()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::Satellite* descr = new descriptor::Satellite;
+    descriptor::SatelliteDescr* descr = new descriptor::SatelliteDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
@@ -596,14 +596,14 @@ genSatellite()
 
 
 // dock
-Kosmoport*
+KosmoportDescr*
 genKosmoport(race::Type race)
 {
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
 
-    Kosmoport* descr = new Kosmoport;
+    KosmoportDescr* descr = new KosmoportDescr;
     descr->setRace(race);
 
     core::shortcuts::descriptors()->add(descr);
@@ -611,10 +611,10 @@ genKosmoport(race::Type race)
     return descr;
 }
 
-NatureLand*
+NatureLandDescr*
 genNatureLand()
 {
-    NatureLand* descr = new NatureLand;
+    NatureLandDescr* descr = new NatureLandDescr;
 
     core::shortcuts::descriptors()->add(descr);
 
@@ -622,14 +622,14 @@ genNatureLand()
 }
 
 
-Angar*
+AngarDescr*
 genAngar(race::Type race)
 {
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
 
-    Angar* descr = new Angar;
+    AngarDescr* descr = new AngarDescr;
     descr->setRace(race);
 
     core::shortcuts::descriptors()->add(descr);
@@ -637,14 +637,14 @@ genAngar(race::Type race)
     return descr;
 }
 
-Store*
+StoreDescr*
 genStore(race::Type race)
 {
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
 
-    Store* descr = new Store;
+    StoreDescr* descr = new StoreDescr;
     descr->setRace(race);
 
     core::shortcuts::descriptors()->add(descr);
@@ -652,14 +652,14 @@ genStore(race::Type race)
     return descr;
 }
 
-Shop*
+ShopDescr*
 genShop(race::Type race)
 {
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
 
-    Shop* descr = new Shop;
+    ShopDescr* descr = new ShopDescr;
     descr->setRace(race);
 
     core::shortcuts::descriptors()->add(descr);
@@ -667,14 +667,14 @@ genShop(race::Type race)
     return descr;
 }
 
-Goverment*
+GovermentDescr*
 genGoverment(race::Type race)
 {
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
 
-    Goverment* descr = new Goverment;
+    GovermentDescr* descr = new GovermentDescr;
     descr->setRace(race);
 
     core::shortcuts::descriptors()->add(descr);
@@ -683,7 +683,7 @@ genGoverment(race::Type race)
 }
 
 
-Bak*
+BakDescr*
 genBak(int race, int tech_level)
 {
     if (race == NONE) {
@@ -693,28 +693,28 @@ genBak(int race, int tech_level)
         tech_level = int (tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::gen_int(Bak::MODULES_NUM_MIN, Bak::MODULES_NUM_MAX);
-    int mass          = meti::rand::gen_int(Bak::MASS_MIN, Bak::MASS_MAX);
-    int condition     = meti::rand::gen_int(Bak::CONDITION_MIN, Bak::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(BakDescr::MODULES_NUM_MIN, BakDescr::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(BakDescr::MASS_MIN, BakDescr::MASS_MAX);
+    int condition     = meti::rand::gen_int(BakDescr::CONDITION_MIN, BakDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int fuel = meti::rand::gen_int(Bak::FUEL_MIN, Bak::FUEL_MAX) * (1 + int(Bak::FUEL_TECH_RATE * tech_level));
+    int fuel = meti::rand::gen_int(BakDescr::FUEL_MIN, BakDescr::FUEL_MAX) * (1 + int(BakDescr::FUEL_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int fuel, int modules, int mass, int condition) {
-        float fuel_rate          = float(fuel) / Bak::FUEL_MIN;
-        float modules_num_rate   = float(modules) / Bak::MODULES_NUM_MAX;
+        float fuel_rate          = float(fuel) / BakDescr::FUEL_MIN;
+        float modules_num_rate   = float(modules) / BakDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Bak::FUEL_WEIGHT * fuel_rate +
-                Bak::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = BakDescr::FUEL_WEIGHT * fuel_rate +
+                BakDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / Bak::MASS_MIN;
-        float condition_rate     = float(condition) / Bak::CONDITION_MAX;
+        float mass_rate          = float(mass) / BakDescr::MASS_MIN;
+        float condition_rate     = float(condition) / BakDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(fuel, modules, mass, condition);
 
-    Bak* descr = new Bak;
+    BakDescr* descr = new BakDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::BAK_EQUIPMENT));
 
     // descriptor::Item
@@ -735,7 +735,7 @@ genBak(int race, int tech_level)
 }
 
 
-Drive*
+DriveDescr*
 genDrive(int race, int tech_level)
 {
     if (race == NONE) {
@@ -745,32 +745,32 @@ genDrive(int race, int tech_level)
         tech_level = int (tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::gen_int(Drive::MODULES_NUM_MIN, Drive::MODULES_NUM_MAX);
-    int mass          = meti::rand::gen_int(Drive::MASS_MIN, Drive::MASS_MAX);
-    int condition     = meti::rand::gen_int(Drive::CONDITION_MIN, Drive::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(DriveDescr::MODULES_NUM_MIN, DriveDescr::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(DriveDescr::MASS_MIN, DriveDescr::MASS_MAX);
+    int condition     = meti::rand::gen_int(DriveDescr::CONDITION_MIN, DriveDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int speed = meti::rand::gen_int(Drive::SPEED_MIN, Drive::SPEED_MAX) * (1 + int(Drive::SPEED_TECH_RATE * tech_level));
-    int hyper = meti::rand::gen_int(Drive::HYPER_MIN, Drive::HYPER_MAX) * (1 + int(Drive::HYPER_TECH_RATE * tech_level));
+    int speed = meti::rand::gen_int(DriveDescr::SPEED_MIN, DriveDescr::SPEED_MAX) * (1 + int(DriveDescr::SPEED_TECH_RATE * tech_level));
+    int hyper = meti::rand::gen_int(DriveDescr::HYPER_MIN, DriveDescr::HYPER_MAX) * (1 + int(DriveDescr::HYPER_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int speed, int hyper, int modules, int mass, int condition) {
-        float speed_rate         = float(speed) / Drive::SPEED_MIN;
-        float hyper_rate         = float(hyper) / Drive::HYPER_MIN;
-        float modules_num_rate   = float(modules) / Drive::MODULES_NUM_MAX;
+        float speed_rate         = float(speed) / DriveDescr::SPEED_MIN;
+        float hyper_rate         = float(hyper) / DriveDescr::HYPER_MIN;
+        float modules_num_rate   = float(modules) / DriveDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Drive::SPEED_WEIGHT * speed_rate +
-                Drive::HYPER_WEIGHT * hyper_rate +
-                Drive::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = DriveDescr::SPEED_WEIGHT * speed_rate +
+                DriveDescr::HYPER_WEIGHT * hyper_rate +
+                DriveDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / Drive::MASS_MIN;
-        float condition_rate     = float(condition) / Drive::CONDITION_MAX;
+        float mass_rate          = float(mass) / DriveDescr::MASS_MIN;
+        float condition_rate     = float(condition) / DriveDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(speed, hyper, modules, mass, condition);
 
 
-    Drive* descr = new Drive;
+    DriveDescr* descr = new DriveDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::DRIVE_EQUIPMENT));
 
     // descriptor::Item
@@ -791,7 +791,7 @@ genDrive(int race, int tech_level)
     return descr;
 }
 
-Droid*
+DroidDescr*
 genDroid(int race, int tech_level)
 {
     if (race == NONE) {
@@ -801,30 +801,30 @@ genDroid(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::gen_int(Droid::MODULES_NUM_MIN, Droid::MODULES_NUM_MAX);
-    int mass          = meti::rand::gen_int(Droid::MASS_MIN,        Droid::MASS_MAX);
-    int condition     = meti::rand::gen_int(Droid::CONDITION_MIN,   Droid::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(DroidDescr::MODULES_NUM_MIN, DroidDescr::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(DroidDescr::MASS_MIN,        DroidDescr::MASS_MAX);
+    int condition     = meti::rand::gen_int(DroidDescr::CONDITION_MIN,   DroidDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int repair = meti::rand::gen_int(Droid::REPAIR_MIN, Droid::REPAIR_MAX) * (1 + int(Droid::REPAIR_TECH_RATE * tech_level));
+    int repair = meti::rand::gen_int(DroidDescr::REPAIR_MIN, DroidDescr::REPAIR_MAX) * (1 + int(DroidDescr::REPAIR_TECH_RATE * tech_level));
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT);
 
     auto funcCountPrice = [](int repair, int modules, int mass, int condition) {
-        float repair_rate        = float(repair) / Droid::REPAIR_MIN;
-        float modules_num_rate   = float(modules) / Droid::MODULES_NUM_MAX;
+        float repair_rate        = float(repair) / DroidDescr::REPAIR_MIN;
+        float modules_num_rate   = float(modules) / DroidDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Droid::REPAIR_WEIGHT * repair_rate +
-                Droid::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = DroidDescr::REPAIR_WEIGHT * repair_rate +
+                DroidDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / descriptor::Droid::MASS_MIN;
-        float condition_rate     = float(condition) / descriptor::Droid::CONDITION_MAX;
+        float mass_rate          = float(mass) / descriptor::DroidDescr::MASS_MIN;
+        float condition_rate     = float(condition) / descriptor::DroidDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(repair, modules, mass, condition);
 
-    Droid* descr = new Droid;
+    DroidDescr* descr = new DroidDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::DROID_EQUIPMENT));
 
     // descriptor::Item
@@ -845,7 +845,7 @@ genDroid(int race, int tech_level)
 }
 
 
-Grapple*
+GrappleDescr*
 genGrapple(int race, int tech_level)
 {
     if (race == NONE) {
@@ -855,35 +855,35 @@ genGrapple(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::gen_int(Grapple::MODULES_NUM_MIN, Grapple::MODULES_NUM_MAX);
-    int mass = meti::rand::gen_int(Grapple::MASS_MIN,        Grapple::MASS_MAX);
-    int condition = meti::rand::gen_int(Grapple::CONDITION_MIN,   Grapple::CONDITION_MAX);
+    int modules = meti::rand::gen_int(GrappleDescr::MODULES_NUM_MIN, GrappleDescr::MODULES_NUM_MAX);
+    int mass = meti::rand::gen_int(GrappleDescr::MASS_MIN,        GrappleDescr::MASS_MAX);
+    int condition = meti::rand::gen_int(GrappleDescr::CONDITION_MIN,   GrappleDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int strength   = meti::rand::gen_int(Grapple::STRENGTH_MIN, Grapple::STRENGTH_MAX) * (1 + int(Grapple::STRENGTH_TECH_RATE * tech_level));
-    int radius     = meti::rand::gen_int(Grapple::RADIUS_MIN,   Grapple::RADIUS_MAX)   * (1 + int(Grapple::RADIUS_TECH_RATE * tech_level));
-    int speed      = meti::rand::gen_int(Grapple::SPEED_MIN,    Grapple::SPEED_MAX)    * (1 + int(Grapple::SPEED_TECH_RATE * tech_level));
+    int strength   = meti::rand::gen_int(GrappleDescr::STRENGTH_MIN, GrappleDescr::STRENGTH_MAX) * (1 + int(GrappleDescr::STRENGTH_TECH_RATE * tech_level));
+    int radius     = meti::rand::gen_int(GrappleDescr::RADIUS_MIN,   GrappleDescr::RADIUS_MAX)   * (1 + int(GrappleDescr::RADIUS_TECH_RATE * tech_level));
+    int speed      = meti::rand::gen_int(GrappleDescr::SPEED_MIN,    GrappleDescr::SPEED_MAX)    * (1 + int(GrappleDescr::SPEED_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int strength, int radius, int speed, int modules, int mass, int condition) {
-        float strength_rate      = float(strength) / Grapple::STRENGTH_MIN;
-        float radius_rate        = float(radius) / Grapple::RADIUS_MIN;
-        float speed_rate         = float(speed) / Grapple::SPEED_MIN;
+        float strength_rate      = float(strength) / GrappleDescr::STRENGTH_MIN;
+        float radius_rate        = float(radius) / GrappleDescr::RADIUS_MIN;
+        float speed_rate         = float(speed) / GrappleDescr::SPEED_MIN;
 
-        float modules_num_rate   = float(modules) / Grapple::MODULES_NUM_MAX;
+        float modules_num_rate   = float(modules) / GrappleDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Grapple::STRENGTH_WEIGHT * strength_rate +
-                Grapple::RADIUS_WEIGHT * radius_rate +
-                Grapple::SPEED_WEIGHT * speed_rate +
-                Grapple::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = GrappleDescr::STRENGTH_WEIGHT * strength_rate +
+                GrappleDescr::RADIUS_WEIGHT * radius_rate +
+                GrappleDescr::SPEED_WEIGHT * speed_rate +
+                GrappleDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / Grapple::MASS_MIN;
-        float condition_rate     = float(condition) / Grapple::CONDITION_MAX;
+        float mass_rate          = float(mass) / GrappleDescr::MASS_MIN;
+        float condition_rate     = float(condition) / GrappleDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(strength, radius, speed, modules, mass, condition);
 
-    Grapple* descr = new Grapple;
+    GrappleDescr* descr = new GrappleDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::GRAPPLE_EQUIPMENT));
 
     // descriptor::Item
@@ -905,7 +905,7 @@ genGrapple(int race, int tech_level)
     return descr;
 }
 
-Lazer*
+LazerDescr*
 genLazer(int race, int tech_level)
 {
     if (race == NONE) {
@@ -915,31 +915,31 @@ genLazer(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules       = meti::rand::gen_int(Lazer::MODULES_NUM_MIN, Lazer::MODULES_NUM_MAX);
-    int mass          = meti::rand::gen_int(Lazer::MASS_MIN,        Lazer::MASS_MAX);
-    int condition     = meti::rand::gen_int(Lazer::CONDITION_MIN,   Lazer::CONDITION_MAX);
+    int modules       = meti::rand::gen_int(LazerDescr::MODULES_NUM_MIN, LazerDescr::MODULES_NUM_MAX);
+    int mass          = meti::rand::gen_int(LazerDescr::MASS_MIN,        LazerDescr::MASS_MAX);
+    int condition     = meti::rand::gen_int(LazerDescr::CONDITION_MIN,   LazerDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int damage = meti::rand::gen_int(Lazer::DAMAGE_MIN, Lazer::DAMAGE_MAX) * (1 + int(Lazer::DAMAGE_TECH_RATE * tech_level));
-    int radius = meti::rand::gen_int(Lazer::RADIUS_MIN, Lazer::RADIUS_MAX) * (1 + int(Lazer::RADIUS_TECH_RATE * tech_level));
+    int damage = meti::rand::gen_int(LazerDescr::DAMAGE_MIN, LazerDescr::DAMAGE_MAX) * (1 + int(LazerDescr::DAMAGE_TECH_RATE * tech_level));
+    int radius = meti::rand::gen_int(LazerDescr::RADIUS_MIN, LazerDescr::RADIUS_MAX) * (1 + int(LazerDescr::RADIUS_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int damage, int radius, int modules, int mass, int condition) {
-        float damage_rate        = float(damage) / Lazer::DAMAGE_MIN;
-        float radius_rate        = float(radius) / Lazer::RADIUS_MIN;
-        float modules_num_rate   = float(modules) / Lazer::MODULES_NUM_MAX;
+        float damage_rate        = float(damage) / LazerDescr::DAMAGE_MIN;
+        float radius_rate        = float(radius) / LazerDescr::RADIUS_MIN;
+        float modules_num_rate   = float(modules) / LazerDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Lazer::DAMAGE_WEIGHT * damage_rate +
-                Lazer::RADIUS_WEIGHT * radius_rate +
-                Lazer::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = LazerDescr::DAMAGE_WEIGHT * damage_rate +
+                LazerDescr::RADIUS_WEIGHT * radius_rate +
+                LazerDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate      = float(mass) / Lazer::MASS_MIN;
-        float condition_rate = float(condition) / Lazer::CONDITION_MAX;
+        float mass_rate      = float(mass) / LazerDescr::MASS_MIN;
+        float condition_rate = float(condition) / LazerDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(damage, radius, modules, mass, condition);
 
-    Lazer* descr = new Lazer;
+    LazerDescr* descr = new LazerDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::LAZER_EQUIPMENT));
 
     // descriptor::Item
@@ -960,7 +960,7 @@ genLazer(int race, int tech_level)
     return descr;
 }
 
-Protector*
+ProtectorDescr*
 genProtector(int race, int tech_level)
 {
     if (race == NONE) {
@@ -970,28 +970,28 @@ genProtector(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::gen_int(Protector::MODULES_NUM_MIN, Protector::MODULES_NUM_MAX);
-    int mass    = meti::rand::gen_int(Protector::MASS_MIN,        Protector::MASS_MAX);
-    int condition = meti::rand::gen_int(Protector::CONDITION_MIN, Protector::CONDITION_MAX);
+    int modules = meti::rand::gen_int(ProtectorDescr::MODULES_NUM_MIN, ProtectorDescr::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(ProtectorDescr::MASS_MIN,        ProtectorDescr::MASS_MAX);
+    int condition = meti::rand::gen_int(ProtectorDescr::CONDITION_MIN, ProtectorDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int protection = meti::rand::gen_int(Protector::PROTECTION_MIN, Protector::PROTECTION_MAX);
+    int protection = meti::rand::gen_int(ProtectorDescr::PROTECTION_MIN, ProtectorDescr::PROTECTION_MAX);
 
     auto funcCountPrice = [](int protection, int modules, int mass, int condition) {
-        float protection_rate    = float(protection) / Protector::PROTECTION_MIN;
-        float modules_num_rate   = float(modules) / Protector::MODULES_NUM_MAX;
+        float protection_rate    = float(protection) / ProtectorDescr::PROTECTION_MIN;
+        float modules_num_rate   = float(modules) / ProtectorDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Protector::PROTECTION_WEIGHT * protection_rate +
-                Protector::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = ProtectorDescr::PROTECTION_WEIGHT * protection_rate +
+                ProtectorDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate      = float(mass) / Protector::MASS_MIN;
-        float condition_rate = float(condition) / Protector::CONDITION_MAX;
+        float mass_rate      = float(mass) / ProtectorDescr::MASS_MIN;
+        float condition_rate = float(condition) / ProtectorDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(protection, modules, mass, condition);
 
-    Protector* descr = new Protector;
+    ProtectorDescr* descr = new ProtectorDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::PROTECTOR_EQUIPMENT));
 
     // descriptor::Item
@@ -1011,7 +1011,7 @@ genProtector(int race, int tech_level)
     return descr;
 }
 
-Radar*
+RadarDescr*
 genRadar(int race, int tech_level)
 {
     if (race == NONE) {
@@ -1021,27 +1021,27 @@ genRadar(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::gen_int(Radar::MODULES_NUM_MIN, Radar::MODULES_NUM_MAX);
-    int mass    = meti::rand::gen_int(Radar::MASS_MIN,        Radar::MASS_MAX);
-    int condition = meti::rand::gen_int(Radar::CONDITION_MIN, Radar::CONDITION_MAX);
+    int modules = meti::rand::gen_int(RadarDescr::MODULES_NUM_MIN, RadarDescr::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(RadarDescr::MASS_MIN,        RadarDescr::MASS_MAX);
+    int condition = meti::rand::gen_int(RadarDescr::CONDITION_MIN, RadarDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int radius = meti::rand::gen_int(Radar::RADIUS_MIN, Radar::RADIUS_MAX);
+    int radius = meti::rand::gen_int(RadarDescr::RADIUS_MIN, RadarDescr::RADIUS_MAX);
 
     auto funcCountPrice = [](int radius, int modules, int mass, int condition) {
-        float radius_rate      = float(radius) / Radar::RADIUS_MIN;
-        float modules_num_rate = float(modules) / Radar::MODULES_NUM_MAX;
+        float radius_rate      = float(radius) / RadarDescr::RADIUS_MIN;
+        float modules_num_rate = float(modules) / RadarDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Radar::RADIUS_WEIGHT * radius_rate + Radar::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = RadarDescr::RADIUS_WEIGHT * radius_rate + RadarDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate      = float(mass) / Radar::MASS_MIN;
-        float condition_rate = float(condition) / Radar::CONDITION_MAX;
+        float mass_rate      = float(mass) / RadarDescr::MASS_MIN;
+        float condition_rate = float(condition) / RadarDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(radius, modules, mass, condition);
 
-    Radar* descr = new Radar;
+    RadarDescr* descr = new RadarDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::RADAR_EQUIPMENT));
 
     // descriptor::Item
@@ -1061,7 +1061,7 @@ genRadar(int race, int tech_level)
     return descr;
 }
 
-Rocket*
+RocketDescr*
 genRocket(int race, int tech_level)
 {
     if (race == NONE) {
@@ -1071,34 +1071,34 @@ genRocket(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::gen_int(Rocket::MODULES_NUM_MIN, Rocket::MODULES_NUM_MAX);
-    int mass    = meti::rand::gen_int(Rocket::MASS_MIN,        Rocket::MASS_MAX);
-    int condition = meti::rand::gen_int(Rocket::CONDITION_MIN, Rocket::CONDITION_MAX);
+    int modules = meti::rand::gen_int(RocketDescr::MODULES_NUM_MIN, RocketDescr::MODULES_NUM_MAX);
+    int mass    = meti::rand::gen_int(RocketDescr::MASS_MIN,        RocketDescr::MASS_MAX);
+    int condition = meti::rand::gen_int(RocketDescr::CONDITION_MIN, RocketDescr::CONDITION_MAX);
     int deterioration = 1;
 
-    int ammo = meti::rand::gen_int(Rocket::AMMO_MIN, Rocket::AMMO_MAX);
-    int damage = meti::rand::gen_int(Rocket::DAMAGE_MIN, Rocket::DAMAGE_MAX);
-    int radius = meti::rand::gen_int(Rocket::RADIUS_MIN, Rocket::RADIUS_MAX);
+    int ammo = meti::rand::gen_int(RocketDescr::AMMO_MIN, RocketDescr::AMMO_MAX);
+    int damage = meti::rand::gen_int(RocketDescr::DAMAGE_MIN, RocketDescr::DAMAGE_MAX);
+    int radius = meti::rand::gen_int(RocketDescr::RADIUS_MIN, RocketDescr::RADIUS_MAX);
 
     auto funcCountPrice = [](int ammo, int damage, int radius, int modules, int mass, int condition) {
-        float ammo_rate     = float(ammo) / Rocket::AMMO_MIN;
-        float damage_rate   = float(damage) / Rocket::DAMAGE_MIN;
-        float radius_rate   = float(radius) / Rocket::RADIUS_MIN;
-        float modules_num_rate   = float(modules) / Rocket::MODULES_NUM_MAX;
+        float ammo_rate     = float(ammo) / RocketDescr::AMMO_MIN;
+        float damage_rate   = float(damage) / RocketDescr::DAMAGE_MIN;
+        float radius_rate   = float(radius) / RocketDescr::RADIUS_MIN;
+        float modules_num_rate   = float(modules) / RocketDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Rocket::AMMO_WEIGHT * ammo_rate +
-                Rocket::DAMAGE_WEIGHT * damage_rate +
-                Rocket::RADIUS_WEIGHT * radius_rate +
-                Rocket::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = RocketDescr::AMMO_WEIGHT * ammo_rate +
+                RocketDescr::DAMAGE_WEIGHT * damage_rate +
+                RocketDescr::RADIUS_WEIGHT * radius_rate +
+                RocketDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate      = float(mass) / Rocket::MASS_MIN;
-        float condition_rate = float(condition) / Rocket::CONDITION_MAX;
+        float mass_rate      = float(mass) / RocketDescr::MASS_MIN;
+        float condition_rate = float(condition) / RocketDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(ammo, damage, radius, modules, mass, condition);
 
-    Rocket* descr = new Rocket;
+    RocketDescr* descr = new RocketDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::ROCKET_EQUIPMENT));
 
     // descriptor::Item
@@ -1126,7 +1126,7 @@ genRocket(int race, int tech_level)
     return descr;
 }
 
-Scaner*
+ScanerDescr*
 genScaner(int race, int tech_level)
 {
     if (race == NONE) {
@@ -1136,31 +1136,31 @@ genScaner(int race, int tech_level)
         tech_level = int(tech::Type::LEVEL0);
     }
 
-    int modules = meti::rand::gen_int(Scaner::MODULES_NUM_MIN, Scaner::MODULES_NUM_MAX);
-    int mass = meti::rand::gen_int(Scaner::MASS_MIN,        Scaner::MASS_MAX);
-    int condition = meti::rand::gen_int(Scaner::CONDITION_MIN,   Scaner::CONDITION_MAX);
+    int modules = meti::rand::gen_int(ScanerDescr::MODULES_NUM_MIN, ScanerDescr::MODULES_NUM_MAX);
+    int mass = meti::rand::gen_int(ScanerDescr::MASS_MIN,        ScanerDescr::MASS_MAX);
+    int condition = meti::rand::gen_int(ScanerDescr::CONDITION_MIN,   ScanerDescr::CONDITION_MAX);
     int deterioration = 1;
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //jeti::control::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT);
 
-    int scan = meti::rand::gen_int(Scaner::SCAN_MIN, Scaner::SCAN_MAX) * (1 + int(Scaner::SCAN_TECH_RATE * tech_level));
+    int scan = meti::rand::gen_int(ScanerDescr::SCAN_MIN, ScanerDescr::SCAN_MAX) * (1 + int(ScanerDescr::SCAN_TECH_RATE * tech_level));
 
     auto funcCountPrice = [](int scan, int modules, int mass, int condition) {
-        float scan_rate          = float(scan) / Scaner::SCAN_MIN;
-        float modules_num_rate   = float(modules) / Scaner::MODULES_NUM_MAX;
+        float scan_rate          = float(scan) / ScanerDescr::SCAN_MIN;
+        float modules_num_rate   = float(modules) / ScanerDescr::MODULES_NUM_MAX;
 
-        float effectiveness_rate = Scaner::SCAN_WEIGHT * scan_rate +
-                Scaner::MODULES_NUM_WEIGHT * modules_num_rate;
+        float effectiveness_rate = ScanerDescr::SCAN_WEIGHT * scan_rate +
+                ScanerDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / Scaner::MASS_MIN;
-        float condition_rate     = float(condition) / Scaner::CONDITION_MIN;
+        float mass_rate          = float(mass) / ScanerDescr::MASS_MIN;
+        float condition_rate     = float(condition) / ScanerDescr::CONDITION_MIN;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
     int price = funcCountPrice(scan, modules, mass, condition);
 
-    Scaner* descr = new Scaner;
+    ScanerDescr* descr = new ScanerDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::SCANER_EQUIPMENT));
 
     // descriptor::Item
@@ -1200,10 +1200,10 @@ genScaner(int race, int tech_level)
 //}
 
 // other
-Goods*
+GoodsDescr*
 genGoods()
 {
-    Goods* descriptor = new Goods;
+    GoodsDescr* descriptor = new GoodsDescr;
 
     descriptor->setMaterial(textureDescriptorIdFromType(texture::Type::GOODS));
     descriptor->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));
@@ -1213,10 +1213,10 @@ genGoods()
     return descriptor;
 }
 
-descriptor::Turrel*
+descriptor::TurrelDescr*
 genTurrel()
 {
-    descriptor::Turrel* descr = new descriptor::Turrel;
+    descriptor::TurrelDescr* descr = new descriptor::TurrelDescr;
 
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));

@@ -22,11 +22,11 @@
 
 namespace descriptor {
 
-struct Planetoid : public SpaceObject
+struct PlanetoidDescr : public SpaceObjectDescr
 {
 public:
-    Planetoid() = default;
-    ~Planetoid() = default;
+    PlanetoidDescr() = default;
+    ~PlanetoidDescr() = default;
 
     void setRadiusA(int radiusA) { m_radiusA = radiusA; }
     void setRadiusB(int radiusB) { m_radiusB = radiusB; }
@@ -43,7 +43,7 @@ public:
     int_t atmosphereMaterial() const { return m_atmosphereMaterial; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectDescr::info();
         result.add("Planetoid descriptor");
         result.add("radius", m_radiusA);
         result.add("radiusB", m_radiusB);
@@ -65,7 +65,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectDescr>(*this);
         ar & m_radiusA;
         ar & m_radiusB;
         ar & m_orbitPhi;

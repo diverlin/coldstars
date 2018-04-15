@@ -31,20 +31,20 @@ namespace comm {
 /// \param descriptor
 /// \param mass
 ///
-CreateGoodsPack::CreateGoodsPack(int_t descriptor, int_t object, int mass)
+CreateGoodsPackComDescr::CreateGoodsPackComDescr(int_t descriptor, int_t object, int mass)
     :
-      Create(descriptor, object)
+      CreateComDescr(descriptor, object)
     , m_mass(mass)
 {
 }
 
-CreateGoodsPack::CreateGoodsPack(const std::string& data)
+CreateGoodsPackComDescr::CreateGoodsPackComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-CreateGoodsPack::data() const
+CreateGoodsPackComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -22,12 +22,12 @@
 
 namespace descriptor {
 
-class Bullet : public SpaceObject {
+class BulletDescr : public SpaceObjectDescr {
 
 public:
-    Bullet();
-    ~Bullet() = default;
-    Bullet(const std::string& data);
+    BulletDescr();
+    ~BulletDescr() = default;
+    BulletDescr(const std::string& data);
     std::string data() const;
 
     float speedMin() const { return m_speedMin; }
@@ -40,7 +40,7 @@ public:
     void setDeltaSpeed(float deltaSpeed) { m_deltaSpeed = deltaSpeed; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectDescr::info();
         result.add("descriptor::Bullet");
         result.add("speedMin", m_speedMin);
         result.add("speedMax", m_speedMax);
@@ -57,7 +57,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectDescr>(*this);
         ar & m_speedMin;
         ar & m_speedMax;
         ar & m_deltaSpeed;

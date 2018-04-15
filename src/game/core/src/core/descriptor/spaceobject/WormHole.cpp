@@ -20,18 +20,18 @@
 
 namespace descriptor {
 
-WormHole::WormHole()
+WormHoleDescr::WormHoleDescr()
 {
     setType(descriptor::Type::WORMHOLE);
 }
 
-WormHole::WormHole(const std::string& data)
+WormHoleDescr::WormHoleDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-WormHole::data() const
+WormHoleDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

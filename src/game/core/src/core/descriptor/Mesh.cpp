@@ -39,19 +39,19 @@ namespace descriptor {
 //{
 //}
 
-Mesh::Mesh(const std::string& data)
+MeshDescr::MeshDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 bool
-Mesh::operator==(const Mesh& rhs) const
+MeshDescr::operator==(const MeshDescr& rhs) const
 {
     return data() == rhs.data();
 }
 
 std::string
-Mesh::data() const
+MeshDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

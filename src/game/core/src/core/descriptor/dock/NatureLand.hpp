@@ -23,19 +23,19 @@
 
 namespace descriptor {
 
-class NatureLand : public Land
+class NatureLandDescr : public LandDescr
 {
 public:
-    NatureLand();
-    ~NatureLand() = default;
-    NatureLand(const std::string& data);
+    NatureLandDescr();
+    ~NatureLandDescr() = default;
+    NatureLandDescr(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Land>(*this);
+        ar & boost::serialization::base_object<LandDescr>(*this);
     }
 };
 

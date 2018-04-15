@@ -21,7 +21,7 @@
 #include <core/spaceobject/SpaceObject.hpp>
 
 namespace descriptor {
-class Bullet;
+class BulletDescr;
 } // namespace descriptor
 
 namespace model {
@@ -34,7 +34,7 @@ namespace control {
 class Bullet : public SpaceObject
 {
 public:
-    Bullet(descriptor::Bullet*, model::Bullet*);
+    Bullet(descriptor::BulletDescr*, model::Bullet*);
     virtual ~Bullet();
 
     void setOwnerId(int_t) const;
@@ -52,11 +52,11 @@ public:
 
     int damage() const;
 
-    descriptor::Bullet* descriptor() const { return m_descriptor_bullet; }
+    descriptor::BulletDescr* descriptor() const { return m_descriptor_bullet; }
     model::Bullet* model() const { return m_model_bullet; }
 
 private:
-    descriptor::Bullet* m_descriptor_bullet = nullptr;
+    descriptor::BulletDescr* m_descriptor_bullet = nullptr;
     model::Bullet* m_model_bullet = nullptr;
 
     core::control::SpaceObject* m_target = nullptr;

@@ -41,7 +41,7 @@
 namespace core {
 namespace control {
 
-Angar::Angar(descriptor::Angar* descr, model::Angar* model)
+Angar::Angar(descriptor::AngarDescr* descr, model::Angar* model)
     :
       Room(descr, model)
     , m_descriptor_angar(descr)

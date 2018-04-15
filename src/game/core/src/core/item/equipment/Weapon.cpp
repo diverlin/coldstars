@@ -28,7 +28,7 @@
 namespace core {
 namespace control {
 
-Weapon::Weapon(descriptor::Weapon* descr, model::Weapon* model)
+Weapon::Weapon(descriptor::WeaponDescr* descr, model::Weapon* model)
     : Equipment(descr, model)
     , m_descriptor_weapon(descr)
     , m_model_weapon(model)

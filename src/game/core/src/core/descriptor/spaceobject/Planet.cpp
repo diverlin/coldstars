@@ -20,16 +20,16 @@
 
 namespace descriptor {
 
-const int Planet::SCALE_MIN = 100;
-const int Planet::SCALE_MAX = 190;
-const int Planet::POPULATION_MIN = 6000;
-const int Planet::POPULATION_MAX = 20000;
-const int Planet::DISTANCE_MIN = 600;
-const int Planet::DISTANCE_MAX = 800;
-const int Planet::SPEED_MIN = 40;
-const int Planet::SPEED_MAX = 50;
+const int PlanetDescr::SCALE_MIN = 100;
+const int PlanetDescr::SCALE_MAX = 190;
+const int PlanetDescr::POPULATION_MIN = 6000;
+const int PlanetDescr::POPULATION_MAX = 20000;
+const int PlanetDescr::DISTANCE_MIN = 600;
+const int PlanetDescr::DISTANCE_MAX = 800;
+const int PlanetDescr::SPEED_MIN = 40;
+const int PlanetDescr::SPEED_MAX = 50;
 
-Planet::Planet()
+PlanetDescr::PlanetDescr()
 {
     setType(Type::PLANET);
     setObType(entity::Type::PLANET);

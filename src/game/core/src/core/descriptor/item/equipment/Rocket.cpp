@@ -24,32 +24,32 @@
 
 namespace descriptor {
 
-const int Rocket::AMMO_MIN = 20;
-const int Rocket::AMMO_MAX = 40;
-const float Rocket::AMMO_TECH_RATE = 0.1f;
+const int RocketDescr::AMMO_MIN = 20;
+const int RocketDescr::AMMO_MAX = 40;
+const float RocketDescr::AMMO_TECH_RATE = 0.1f;
 
-const int Rocket::RADIUS_MIN = 350;
-const int Rocket::RADIUS_MAX = 550;
-const float Rocket::RADIUS_TECH_RATE = 0.1f;
+const int RocketDescr::RADIUS_MIN = 350;
+const int RocketDescr::RADIUS_MAX = 550;
+const float RocketDescr::RADIUS_TECH_RATE = 0.1f;
 
-const int Rocket::DAMAGE_MIN = 10;
-const int Rocket::DAMAGE_MAX = 20;
-const float Rocket::DAMAGE_TECH_RATE = 0.1f;
+const int RocketDescr::DAMAGE_MIN = 10;
+const int RocketDescr::DAMAGE_MAX = 20;
+const float RocketDescr::DAMAGE_TECH_RATE = 0.1f;
 
-const int Rocket::MODULES_NUM_MIN = 0;
-const int Rocket::MODULES_NUM_MAX = 2;
+const int RocketDescr::MODULES_NUM_MIN = 0;
+const int RocketDescr::MODULES_NUM_MAX = 2;
 
-const int Rocket::MASS_MIN = 30;
-const int Rocket::MASS_MAX = 60;
-const int Rocket::CONDITION_MIN = 100;
-const int Rocket::CONDITION_MAX = 900;
+const int RocketDescr::MASS_MIN = 30;
+const int RocketDescr::MASS_MAX = 60;
+const int RocketDescr::CONDITION_MIN = 100;
+const int RocketDescr::CONDITION_MAX = 900;
 
-const float Rocket::AMMO_WEIGHT = 0.3f;
-const float Rocket::DAMAGE_WEIGHT = 0.3f;
-const float Rocket::RADIUS_WEIGHT = 0.2f;
-const float Rocket::MODULES_NUM_WEIGHT = 0.2f;
+const float RocketDescr::AMMO_WEIGHT = 0.3f;
+const float RocketDescr::DAMAGE_WEIGHT = 0.3f;
+const float RocketDescr::RADIUS_WEIGHT = 0.2f;
+const float RocketDescr::MODULES_NUM_WEIGHT = 0.2f;
 
-Rocket::Rocket()
+RocketDescr::RocketDescr()
 {
     setType(descriptor::Type::ROCKET_EQUIPMENT);
     setObType(entity::Type::ROCKET_EQUIPMENT);
@@ -57,13 +57,13 @@ Rocket::Rocket()
     setSlotType(core::SlotType::WEAPON);
 }
 
-Rocket::Rocket(const std::string& data)
+RocketDescr::RocketDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Rocket::data() const
+RocketDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -26,20 +26,20 @@ namespace descriptor {
 namespace comm {
 
 
-Create::Create(int_t descriptor, int_t object)
+CreateComDescr::CreateComDescr(int_t descriptor, int_t object)
     :
-      Object(object)
+      ObjectDescr(object)
     , m_descriptor(descriptor)
 {
 }
 
-Create::Create(const std::string& data)
+CreateComDescr::CreateComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Create::data() const
+CreateComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

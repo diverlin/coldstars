@@ -26,7 +26,7 @@
 #include <string>
 
 namespace descriptor {
-class Rocket;
+class RocketDescr;
 } // namespace descriptor
 
 namespace core {
@@ -42,14 +42,14 @@ class RocketItemBuilder : public EquipmentBuilder
 public:
     static core::control::Rocket* gen();
     static core::control::Rocket* gen(int_t, int_t ob_id = NONE);
-    static core::control::Rocket* gen(descriptor::Rocket*);
+    static core::control::Rocket* gen(descriptor::RocketDescr*);
 
 private:
     RocketItemBuilder() = delete;
     ~RocketItemBuilder() = delete;
 
-    static core::control::Rocket* __genTemplate(descriptor::Rocket*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Rocket*, descriptor::Rocket*);
+    static core::control::Rocket* __genTemplate(descriptor::RocketDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Rocket*, descriptor::RocketDescr*);
 }; 
 
 } // namespace core

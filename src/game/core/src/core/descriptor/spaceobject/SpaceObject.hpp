@@ -22,14 +22,14 @@
 
 namespace descriptor {
 
-struct SpaceObject : public Orientation
+struct SpaceObjectDescr : public OrientationDescr
 {
 public:
-    SpaceObject() = default;
-    ~SpaceObject() = default;
+    SpaceObjectDescr() = default;
+    ~SpaceObjectDescr() = default;
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = Orientation::info();
+        ceti::InfoTable result = OrientationDescr::info();
         result.add("descriptor::SpaceObject");
         result.add("armor", m_armor);
         return result;
@@ -45,7 +45,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Orientation>(*this);
+        ar & boost::serialization::base_object<OrientationDescr>(*this);
         ar & m_armor;
     }
 }; 

@@ -23,7 +23,7 @@
 #include <string>
 
 namespace descriptor {
-class HyperSpace;
+class HyperSpaceDescr;
 } // namespace descriptor
 
 namespace core {
@@ -37,7 +37,7 @@ namespace core {
 class HyperSpaceBuilder
 {
 public:
-    static core::control::HyperSpace* gen(descriptor::HyperSpace*);
+    static core::control::HyperSpace* gen(descriptor::HyperSpaceDescr*);
     static core::control::HyperSpace* gen(int_t, int_t ob_id = NONE);
     static core::control::HyperSpace* gen();
 
@@ -45,7 +45,7 @@ private:
     HyperSpaceBuilder()=delete;
     ~HyperSpaceBuilder()=delete;
 
-    static core::control::HyperSpace* __genTemplate(descriptor::HyperSpace*, int_t ob_id = NONE);
+    static core::control::HyperSpace* __genTemplate(descriptor::HyperSpaceDescr*, int_t ob_id = NONE);
 }; 
 
 } // namespace core

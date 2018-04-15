@@ -22,20 +22,20 @@
 
 namespace descriptor {
 
-SpaceStation::SpaceStation()
+SpaceStationDescr::SpaceStationDescr()
 {
     setType(descriptor::Type::SPACESTATION);
     setObType(entity::Type::SPACESTATION);
     setObGroup(entity::Type::VEHICLE);
 }
 
-SpaceStation::SpaceStation(const std::string& data)
+SpaceStationDescr::SpaceStationDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-SpaceStation::data() const
+SpaceStationDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

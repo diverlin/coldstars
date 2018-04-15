@@ -28,8 +28,8 @@
 namespace test {
 
 TEST(descriptor, clone_rocket) {
-    descriptor::Rocket* descr = descriptor::genRocket();
-    descriptor::Rocket* copy = new descriptor::Rocket(descr->data());
+    descriptor::RocketDescr* descr = descriptor::genRocket();
+    descriptor::RocketDescr* copy = new descriptor::RocketDescr(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::ROCKET_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::ROCKET_EQUIPMENT);

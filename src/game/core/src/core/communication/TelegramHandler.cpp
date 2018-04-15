@@ -146,19 +146,19 @@ void TelegramHandler::_process(const comm::Telegram& telegram) const
 
 void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
-    descriptor::comm::MoveVehicle telegram_descriptor(telegram.data());
+    descriptor::comm::MoveVehicleComDescr telegram_descriptor(telegram.data());
     m_telegramCreator.moveVehicle(telegram_descriptor.object(), telegram_descriptor.position());
 }
 
 void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
-    descriptor::comm::Object telegram_descriptor(telegram.data()); // actually no needed it
+    descriptor::comm::ObjectDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.endTurn();
 }
 
 void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram) const
 {
-    descriptor::comm::ObjectSubject telegram_descriptor(telegram.data()); // actually no needed it
+    descriptor::comm::ObjectSubjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.targetingSpaceObject(telegram_descriptor.object(), telegram_descriptor.subject());
 }
 

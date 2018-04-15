@@ -30,11 +30,11 @@
 
 namespace descriptor {
 
-class Base
+class BaseDescr
 {
 public:
-    Base() = default;
-    virtual ~Base() = default;
+    BaseDescr() = default;
+    virtual ~BaseDescr() = default;
 
     void setId(int_t id) { m_id = id; }
     void setType(const descriptor::Type& type)   { m_type = type; }

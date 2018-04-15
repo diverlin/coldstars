@@ -21,7 +21,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Goverment;
+class GovermentDescr;
 } // namespace descriptor
 
 namespace core {
@@ -36,13 +36,13 @@ class GovermentBuilder
 {
 public:
     static core::control::Goverment* gen();
-    static core::control::Goverment* gen(descriptor::Goverment*);
+    static core::control::Goverment* gen(descriptor::GovermentDescr*);
 
 private:
     GovermentBuilder() = delete;
     ~GovermentBuilder() = delete;
 
-    static core::control::Goverment* __createTemplate(descriptor::Goverment*);
+    static core::control::Goverment* __createTemplate(descriptor::GovermentDescr*);
     static void __createInternals(core::control::Goverment*);
 }; 
 

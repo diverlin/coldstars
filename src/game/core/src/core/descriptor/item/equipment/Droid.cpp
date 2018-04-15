@@ -22,22 +22,22 @@
 
 namespace descriptor {
 
-const int Droid::REPAIR_MIN = 1;
-const int Droid::REPAIR_MAX = 15;
-const float Droid::REPAIR_TECH_RATE = 0.1f;
+const int DroidDescr::REPAIR_MIN = 1;
+const int DroidDescr::REPAIR_MAX = 15;
+const float DroidDescr::REPAIR_TECH_RATE = 0.1f;
 
-const int Droid::MODULES_NUM_MIN = 0;
-const int Droid::MODULES_NUM_MAX = 2;
+const int DroidDescr::MODULES_NUM_MIN = 0;
+const int DroidDescr::MODULES_NUM_MAX = 2;
 
-const int Droid::MASS_MIN = 10;
-const int Droid::MASS_MAX = 50;
-const int Droid::CONDITION_MIN = 300;
-const int Droid::CONDITION_MAX = 2000;
+const int DroidDescr::MASS_MIN = 10;
+const int DroidDescr::MASS_MAX = 50;
+const int DroidDescr::CONDITION_MIN = 300;
+const int DroidDescr::CONDITION_MAX = 2000;
 
-const float Droid::REPAIR_WEIGHT = 0.8f;
-const float Droid::MODULES_NUM_WEIGHT = 0.2f;
+const float DroidDescr::REPAIR_WEIGHT = 0.8f;
+const float DroidDescr::MODULES_NUM_WEIGHT = 0.2f;
 
-Droid::Droid()
+DroidDescr::DroidDescr()
 {
     setType(descriptor::Type::DROID_EQUIPMENT);
     setObType(entity::Type::DROID_EQUIPMENT);
@@ -45,13 +45,13 @@ Droid::Droid()
     setSlotType(core::SlotType::DROID);
 }
 
-Droid::Droid(const std::string& data)
+DroidDescr::DroidDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Droid::data() const
+DroidDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

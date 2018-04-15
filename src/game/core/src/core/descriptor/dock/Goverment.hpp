@@ -22,19 +22,19 @@
 
 namespace descriptor {
 
-class Goverment : public Room
+class GovermentDescr : public RoomDescr
 {
 public:
-    Goverment();
-    ~Goverment() = default;
-    Goverment(const std::string& data);
+    GovermentDescr();
+    ~GovermentDescr() = default;
+    GovermentDescr(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomDescr>(*this);
     }
 };
 

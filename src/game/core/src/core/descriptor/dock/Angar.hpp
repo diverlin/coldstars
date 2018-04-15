@@ -24,18 +24,18 @@
 
 namespace descriptor {
 
-class Angar : public Room {
+class AngarDescr : public RoomDescr {
 public:
-    Angar();
-    ~Angar() = default;
-    Angar(const std::string& data);
+    AngarDescr();
+    ~AngarDescr() = default;
+    AngarDescr(const std::string& data);
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Room>(*this);
+        ar & boost::serialization::base_object<RoomDescr>(*this);
     }
 };
 

@@ -27,7 +27,7 @@
 #include <vector>
 
 namespace descriptor {
-class Galaxy;
+class GalaxyDescr;
 class Descriptors;
 } // namespace descriptor
 
@@ -70,7 +70,7 @@ public:
     void createPlayer(int_t, int_t);
 //    void bindPlayerWithNpc(int_t, int_t);
     void createDummyGalaxy(int ships_num=2, int planets_num=1) const;
-    void createGalaxy(descriptor::Galaxy*) const;
+    void createGalaxy(descriptor::GalaxyDescr*) const;
 
     void moveVehicle(int_t, const glm::vec3&) const;
     void endTurn() const;

@@ -37,7 +37,7 @@ namespace core {
 core::control::Sector*
 SectorBuilder::gen()
 {
-    descriptor::Sector* descr = nullptr;
+    descriptor::SectorDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SECTOR)) {
         descr = descriptor::genSector({0});
     } else {
@@ -49,14 +49,14 @@ SectorBuilder::gen()
 core::control::Sector*
 SectorBuilder::gen(int_t descriptor_id, int_t object_id)
 {
-    descriptor::Sector* descriptor = core::shortcuts::descriptors()->sector(descriptor_id);
+    descriptor::SectorDescr* descriptor = core::shortcuts::descriptors()->sector(descriptor_id);
     core::control::Sector* sector = __genTemplate(descriptor, object_id);
     __createInternals(sector, descriptor);
     return sector;
 }
 
 core::control::Sector*
-SectorBuilder::gen(descriptor::Sector* descriptor)
+SectorBuilder::gen(descriptor::SectorDescr* descriptor)
 {
     core::control::Sector* sector = __genTemplate(descriptor);
     __createInternals(sector, descriptor);
@@ -64,7 +64,7 @@ SectorBuilder::gen(descriptor::Sector* descriptor)
 } 
 
 core::control::Sector*
-SectorBuilder::__genTemplate(descriptor::Sector* descriptor, int_t object_id)
+SectorBuilder::__genTemplate(descriptor::SectorDescr* descriptor, int_t object_id)
 {
     model::Sector* model = new model::Sector(descriptor->id(), object_id);
     assert(model);
@@ -76,7 +76,7 @@ SectorBuilder::__genTemplate(descriptor::Sector* descriptor, int_t object_id)
 }
 
 void
-SectorBuilder::__createInternals(core::control::Sector* sector, descriptor::Sector* descriptor)
+SectorBuilder::__createInternals(core::control::Sector* sector, descriptor::SectorDescr* descriptor)
 {
      // see composer, all logic there
 }

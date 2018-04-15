@@ -25,20 +25,20 @@
 namespace descriptor {
 namespace comm {
 
-MoveVehicle::MoveVehicle(int_t object, const meti::vec3& position)
+MoveVehicleComDescr::MoveVehicleComDescr(int_t object, const meti::vec3& position)
     :
-      Object(object)
+      ObjectDescr(object)
     , m_position(position)
 {}
 
 
-MoveVehicle::MoveVehicle(const std::string& data)
+MoveVehicleComDescr::MoveVehicleComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-MoveVehicle::data() const
+MoveVehicleComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -31,7 +31,7 @@
 namespace core {
 namespace control {
 
-Rocket::Rocket(descriptor::Rocket* descr, model::Rocket* model)
+Rocket::Rocket(descriptor::RocketDescr* descr, model::Rocket* model)
     : Weapon(descr, model)
     , m_descriptor_rocket(descr)
     , m_model_rocket(model)

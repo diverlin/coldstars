@@ -21,7 +21,7 @@
 #include <core/item/Item.hpp>
 
 namespace descriptor {
-class Goods;
+class GoodsDescr;
 } // namespace descriptor
 
 namespace model {
@@ -34,7 +34,7 @@ namespace control {
 class Goods : public Item
 {
 public:
-    Goods(descriptor::Goods*, model::Goods*);
+    Goods(descriptor::GoodsDescr*, model::Goods*);
     virtual ~Goods();
 
     void increase(int amount);
@@ -43,7 +43,7 @@ public:
     virtual void updateOwnerAbilities() {}
 
 private:
-    descriptor::Goods* m_descriptor_goods = nullptr;
+    descriptor::GoodsDescr* m_descriptor_goods = nullptr;
     model::Goods* m_model_goods = nullptr;
 };
 

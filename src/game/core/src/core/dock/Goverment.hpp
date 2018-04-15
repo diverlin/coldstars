@@ -21,7 +21,7 @@
 #include "Room.hpp"
 
 namespace descriptor {
-class Goverment;
+class GovermentDescr;
 } // namespace descriptor
 
 namespace model {
@@ -34,7 +34,7 @@ namespace control {
 class Goverment : public Room
 {
 public:
-    Goverment(descriptor::Goverment*, model::Goverment*);
+    Goverment(descriptor::GovermentDescr*, model::Goverment*);
     ~Goverment();
 
 //    void SetTextureObFace(jeti::control::Material* textureOb_face) { this->textureOb_face = textureOb_face; };
@@ -44,10 +44,10 @@ public:
 //    void Resolve();
 
 private:
-    descriptor::Goverment* m_descriptor_goverment = nullptr;
+    descriptor::GovermentDescr* m_descriptor_goverment = nullptr;
     model::Goverment* m_model_goverment = nullptr;
 
-    descriptor::Goverment* descriptor() const { return m_descriptor_goverment; }
+    descriptor::GovermentDescr* descriptor() const { return m_descriptor_goverment; }
     model::Goverment* model() const { return m_model_goverment; }
 
 //    jeti::control::Material* textureOb_face;

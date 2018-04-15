@@ -21,19 +21,19 @@
 
 namespace descriptor {
 
-Container::Container()
+ContainerDescr::ContainerDescr()
 {
     setType(Type::CONTAINER);
     setObType(entity::Type::CONTAINER);
 }
 
-Container::Container(const std::string& data)
+ContainerDescr::ContainerDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Container::data() const
+ContainerDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

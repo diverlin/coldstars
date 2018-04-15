@@ -14,15 +14,15 @@
 namespace descriptor {
 namespace comm {
 
-class AddToStarsystem : public AddPositional {
+class AddToStarsystemComDescr : public AddPositionalComDescr {
 public:
-    AddToStarsystem(int_t object,
+    AddToStarsystemComDescr(int_t object,
                               int_t parent,
                               const meti::vec3& position = meti::vec3(0.0f),
                               const meti::vec3& impulse = meti::vec3(0.0f),
                               const meti::vec3& angle = meti::vec3(0.0f));
 
-    AddToStarsystem(const std::string& data);
+    AddToStarsystemComDescr(const std::string& data);
 
     meti::vec3 impulse;
     meti::vec3 angle;
@@ -30,7 +30,7 @@ public:
     std::string data() const;
 
     std::string info() const {
-        std::string result = AddPositional::info();
+        std::string result = AddPositionalComDescr::info();
         result += "descriptor::comm::AddToStarsystemDescriptor:\n";
         result += std::string(" impulse = ") + ceti::to_string(impulse) + "\n";
         result += std::string(" angle = ") + ceti::to_string(angle) + "\n";
@@ -41,7 +41,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<AddPositional>(*this);
+        ar & boost::serialization::base_object<AddPositionalComDescr>(*this);
         ar & impulse;
         ar & angle;
     }

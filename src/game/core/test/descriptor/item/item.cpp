@@ -23,7 +23,7 @@
 
 namespace test {
 
-void testItemEquality(descriptor::Item* descr, descriptor::Item* copy)
+void testItemEquality(descriptor::ItemDescr* descr, descriptor::ItemDescr* copy)
 {
     EXPECT_EQ(descr->race(), copy->race());
     EXPECT_EQ(descr->tech(), copy->tech());

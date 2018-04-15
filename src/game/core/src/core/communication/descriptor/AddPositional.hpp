@@ -30,19 +30,19 @@
 namespace descriptor {
 namespace comm {
 
-class AddPositional : public Object {
+class AddPositionalComDescr : public ObjectDescr {
 public:
-    AddPositional(int_t, int_t, const meti::vec3& position);
-    AddPositional(const std::string& data);
-    AddPositional() = default;
-    ~AddPositional() = default;
+    AddPositionalComDescr(int_t, int_t, const meti::vec3& position);
+    AddPositionalComDescr(const std::string& data);
+    AddPositionalComDescr() = default;
+    ~AddPositionalComDescr() = default;
     std::string data() const;
 
     int_t parent() const { return m_parent; }
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = Object::info();
+        std::string result = ObjectDescr::info();
         result += "descriptor::comm::AddPositional:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
@@ -57,7 +57,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Object>(*this);
+        ar & boost::serialization::base_object<ObjectDescr>(*this);
         ar & m_parent;
         ar & m_position;
     }

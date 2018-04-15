@@ -30,18 +30,18 @@
 namespace descriptor {
 namespace comm {
 
-class MoveVehicle : public Object {
+class MoveVehicleComDescr : public ObjectDescr {
 public:
-    MoveVehicle(int_t, const meti::vec3& position);
-    MoveVehicle(const std::string& data);
-    MoveVehicle() = default;
-    ~MoveVehicle() = default;
+    MoveVehicleComDescr(int_t, const meti::vec3& position);
+    MoveVehicleComDescr(const std::string& data);
+    MoveVehicleComDescr() = default;
+    ~MoveVehicleComDescr() = default;
     std::string data() const;
 
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = Object::info();
+        std::string result = ObjectDescr::info();
         result += "descriptor::comm::MoveVehicle:\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;
@@ -55,7 +55,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Object>(*this);
+        ar & boost::serialization::base_object<ObjectDescr>(*this);
         ar & m_position;
     }
 };

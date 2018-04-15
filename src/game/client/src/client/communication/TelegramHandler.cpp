@@ -117,7 +117,7 @@ void TelegramHandler::_createPlayer(const core::comm::Telegram& telegram) const 
 }
 
 void TelegramHandler::_createExplosionEffect(const core::comm::Telegram& telegram) const {
-    descriptor::comm::effect::Explosion descriptor(telegram.data());
+    descriptor::comm::effect::ExplosionEffectComDescr descriptor(telegram.data());
     std::shared_ptr<jeti::particlesystem::Explosion> explosion(jeti::particlesystem::genExplosion(utils::createMaterialByDescriptorType(texture::Type::DISTANTSTAR), descriptor.size()));
     client::shortcuts::view()->add(explosion, descriptor.position());
 }

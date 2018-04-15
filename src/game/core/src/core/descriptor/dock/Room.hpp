@@ -23,16 +23,16 @@
 
 namespace descriptor {
 
-class Room : public Base {
+class RoomDescr : public BaseDescr {
 public:
-    Room() = default;
-    ~Room() = default;
+    RoomDescr() = default;
+    ~RoomDescr() = default;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
     }
 };
 

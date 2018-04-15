@@ -22,12 +22,12 @@
 
 namespace descriptor {
 
-class Npc : public Base {
+class NpcDescr : public BaseDescr {
 
 public:
-    Npc();
-    ~Npc() = default;
-    Npc(const std::string& data);
+    NpcDescr();
+    ~NpcDescr() = default;
+    NpcDescr(const std::string& data);
     std::string data() const;
 
 private:
@@ -37,7 +37,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
     }
 };
 

@@ -22,20 +22,20 @@
 
 namespace descriptor {
 
-Ship::Ship()
+ShipDescr::ShipDescr()
 {
     setType(descriptor::Type::SHIP);
     setObType(entity::Type::SHIP);
     setObGroup(entity::Type::VEHICLE);
 }
 
-Ship::Ship(const std::string& data)
+ShipDescr::ShipDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Ship::data() const
+ShipDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

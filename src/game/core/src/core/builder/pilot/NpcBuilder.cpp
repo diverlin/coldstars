@@ -41,7 +41,7 @@ namespace core {
 core::control::Npc*
 NpcBuilder::gen()
 {
-    descriptor::Npc* descriptor = nullptr;
+    descriptor::NpcDescr* descriptor = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::NPC)) {
         descriptor = descriptor::genNpc();
     } else {
@@ -54,12 +54,12 @@ NpcBuilder::gen()
 core::control::Npc*
 NpcBuilder::gen(int_t descriptor_id, int_t id)
 {
-    descriptor::Npc* descriptor = core::shortcuts::descriptors()->npc(descriptor_id);
+    descriptor::NpcDescr* descriptor = core::shortcuts::descriptors()->npc(descriptor_id);
     return gen(descriptor, id);
 }
 
 core::control::Npc*
-NpcBuilder::gen(descriptor::Npc* descriptor, int_t id)
+NpcBuilder::gen(descriptor::NpcDescr* descriptor, int_t id)
 {
     core::control::Npc* npc = __createTemplate(descriptor, id);
     __createInternals(npc, descriptor);
@@ -68,7 +68,7 @@ NpcBuilder::gen(descriptor::Npc* descriptor, int_t id)
 }
 
 core::control::Npc*
-NpcBuilder::__createTemplate(descriptor::Npc* descr, int_t id)
+NpcBuilder::__createTemplate(descriptor::NpcDescr* descr, int_t id)
 {
     model::Npc* model = new model::Npc(descr->id(), id);
     assert(model);
@@ -80,7 +80,7 @@ NpcBuilder::__createTemplate(descriptor::Npc* descr, int_t id)
 }
 
 void
-NpcBuilder::__createInternals(core::control::Npc* npc, descriptor::Npc* descr)
+NpcBuilder::__createInternals(core::control::Npc* npc, descriptor::NpcDescr* descr)
 {
     // assert(false); assert(false);
 //    //LifeData data_life;

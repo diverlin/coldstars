@@ -24,22 +24,22 @@
 
 namespace descriptor {
 
-const int Protector::PROTECTION_MIN = 3;
-const int Protector::PROTECTION_MAX = 30;
-const float Protector::PROTECTION_TECH_RATE = 0.1f;
+const int ProtectorDescr::PROTECTION_MIN = 3;
+const int ProtectorDescr::PROTECTION_MAX = 30;
+const float ProtectorDescr::PROTECTION_TECH_RATE = 0.1f;
 
-const int Protector::MODULES_NUM_MIN = 0;
-const int Protector::MODULES_NUM_MAX = 2;
+const int ProtectorDescr::MODULES_NUM_MIN = 0;
+const int ProtectorDescr::MODULES_NUM_MAX = 2;
 
-const int Protector::CONDITION_MIN = 2000;
-const int Protector::CONDITION_MAX = 10000;
-const int Protector::MASS_MIN = 20;
-const int Protector::MASS_MAX = 80;
+const int ProtectorDescr::CONDITION_MIN = 2000;
+const int ProtectorDescr::CONDITION_MAX = 10000;
+const int ProtectorDescr::MASS_MIN = 20;
+const int ProtectorDescr::MASS_MAX = 80;
 
-const float Protector::PROTECTION_WEIGHT = 0.8f;
-const float Protector::MODULES_NUM_WEIGHT = 0.2f;
+const float ProtectorDescr::PROTECTION_WEIGHT = 0.8f;
+const float ProtectorDescr::MODULES_NUM_WEIGHT = 0.2f;
 
-Protector::Protector()
+ProtectorDescr::ProtectorDescr()
 {
     setType(descriptor::Type::PROTECTOR_EQUIPMENT);
     setObType(entity::Type::PROTECTOR_EQUIPMENT);
@@ -47,13 +47,13 @@ Protector::Protector()
     setSlotType(core::SlotType::PROTECTOR);
 }
 
-Protector::Protector(const std::string& data)
+ProtectorDescr::ProtectorDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Protector::data() const
+ProtectorDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

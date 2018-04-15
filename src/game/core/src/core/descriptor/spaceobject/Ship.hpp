@@ -26,15 +26,15 @@
 
 namespace descriptor {
 
-class Ship : public Vehicle {
+class ShipDescr : public VehicleDescr {
 public:    
-    Ship();
-    Ship(const std::string& data);
-    ~Ship() = default;
+    ShipDescr();
+    ShipDescr(const std::string& data);
+    ~ShipDescr() = default;
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Vehicle::info();
+        ceti::InfoTable result = VehicleDescr::info();
         result.add("descriptor::Ship");
         return result;
     }
@@ -43,7 +43,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & boost::serialization::base_object<VehicleDescr>(*this);
     }
 };
 

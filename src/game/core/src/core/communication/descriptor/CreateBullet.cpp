@@ -26,20 +26,20 @@ namespace descriptor {
 namespace comm {
 
 // BulletShoot
-CreateBullet::CreateBullet(int_t owner, int_t item, int_t target)
+CreateBulletComDescr::CreateBulletComDescr(int_t owner, int_t item, int_t target)
     :
     m_owner(owner)
   , m_item(item)
   , m_target(target)
 {}
 
-CreateBullet::CreateBullet(const std::string& data)
+CreateBulletComDescr::CreateBulletComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-CreateBullet::data() const
+CreateBulletComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

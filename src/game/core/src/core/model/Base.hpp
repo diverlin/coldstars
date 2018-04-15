@@ -31,7 +31,7 @@
 #include <vector>
 
 namespace descriptor {
-class Base;
+class BaseDescr;
 } // namespace descriptor
 
 class EntityManager;

@@ -26,20 +26,20 @@ namespace descriptor {
 namespace comm {
 
 
-CreatePlayer::CreatePlayer(int_t player, int_t npc)
+CreatePlayerComDescr::CreatePlayerComDescr(int_t player, int_t npc)
     :
       m_player(player)
     , m_npc(npc)
 {
 }
 
-CreatePlayer::CreatePlayer(const std::string& data)
+CreatePlayerComDescr::CreatePlayerComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-CreatePlayer::data() const
+CreatePlayerComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

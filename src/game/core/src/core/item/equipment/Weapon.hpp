@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-class Weapon;
+class WeaponDescr;
 } // namespace descriptor
 
 namespace model {
@@ -37,7 +37,7 @@ class SpaceObject;
 class Weapon : public Equipment
 { 
 public:
-    Weapon(descriptor::Weapon*, model::Weapon*);
+    Weapon(descriptor::WeaponDescr*, model::Weapon*);
     virtual ~Weapon() = default;
 
     virtual void updateProperties();
@@ -49,11 +49,11 @@ public:
     int damage() const;
 
 public:
-    descriptor::Weapon* descriptor() const { return m_descriptor_weapon; }
+    descriptor::WeaponDescr* descriptor() const { return m_descriptor_weapon; }
     model::Weapon* model() const { return m_model_weapon; }
 
 private:
-    descriptor::Weapon* m_descriptor_weapon = nullptr;
+    descriptor::WeaponDescr* m_descriptor_weapon = nullptr;
     model::Weapon* m_model_weapon = nullptr;
 
     int m_damage_add = 0;

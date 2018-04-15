@@ -8,12 +8,12 @@
 namespace descriptor {
 namespace comm {
 
-class Hit {
+class HitComDescr {
 public:
-    Hit(int_t agressor, int_t victim, int damage);
-    Hit(const std::string&);
+    HitComDescr(int_t agressor, int_t victim, int damage);
+    HitComDescr(const std::string&);
     std::string data() const;
-    ~Hit() = default;
+    ~HitComDescr() = default;
 
     int_t owner() const { return m_owner; }
     int_t target() const { return m_target; }

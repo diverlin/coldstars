@@ -27,16 +27,16 @@
 
 namespace descriptor {
 
-struct Sector : public Base
+struct SectorDescr : public BaseDescr
 {
 public:
     std::vector<int_t> starsystems;
 
-    Sector();
-    ~Sector() = default;
+    SectorDescr();
+    ~SectorDescr() = default;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Base::info();
+        ceti::InfoTable result = BaseDescr::info();
         result.add("descriptor::Sector");
         result.add("starsystems", ceti::to_string(starsystems));
         return result;

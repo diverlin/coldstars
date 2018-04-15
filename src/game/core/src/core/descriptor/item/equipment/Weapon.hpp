@@ -23,11 +23,11 @@
 
 namespace descriptor {
 
-class Weapon : public Equipment
+class WeaponDescr : public EquipmentDescr
 {
 public:
-    Weapon();
-    ~Weapon() = default;
+    WeaponDescr();
+    ~WeaponDescr() = default;
 
     void setRadius(int radius) { m_radius = radius; }
     void setDamage(int damage) { m_damage = damage; }
@@ -36,7 +36,7 @@ public:
     int damage() const { return m_damage; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = descriptor::Equipment::info();
+        ceti::InfoTable result = descriptor::EquipmentDescr::info();
         result.add("descriptor::Weapon");
         result.add("radius", m_radius);
         result.add("damage", m_damage);
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Equipment>(*this);
+        ar & boost::serialization::base_object<EquipmentDescr>(*this);
         ar & m_radius;
         ar & m_damage;
     }

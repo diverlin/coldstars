@@ -49,7 +49,7 @@ namespace core {
 core::control::Store*
 StoreBuilder::gen()
 {
-    descriptor::Store* descr = nullptr;
+    descriptor::StoreDescr* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::STORE)) {
         descr = descriptor::genStore();
     } else {
@@ -59,7 +59,7 @@ StoreBuilder::gen()
 } 
 
 core::control::Store*
-StoreBuilder::gen(descriptor::Store* descr)
+StoreBuilder::gen(descriptor::StoreDescr* descr)
 {
     core::control::Store* store = __createTemplate(descr);
     __createInternals(store);
@@ -69,7 +69,7 @@ StoreBuilder::gen(descriptor::Store* descr)
 }
 
 core::control::Store*
-StoreBuilder::__createTemplate(descriptor::Store* descr)
+StoreBuilder::__createTemplate(descriptor::StoreDescr* descr)
 {
     model::Store* model = new model::Store(descr->id());
     assert(model);

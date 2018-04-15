@@ -19,12 +19,12 @@
 
 namespace descriptor {
 
-class SpaceObject;
+class SpaceObjectDescr;
 
 } // naemspace descriptor
 
 namespace test {
 
-void testSpaceObjectEquality(descriptor::SpaceObject* descr, descriptor::SpaceObject* copy);
+void testSpaceObjectEquality(descriptor::SpaceObjectDescr* descr, descriptor::SpaceObjectDescr* copy);
 
 } // namespace test

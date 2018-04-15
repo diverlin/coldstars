@@ -26,7 +26,7 @@
 #include <string>
 
 namespace descriptor {
-class Grapple;
+class GrappleDescr;
 } // namespace descriptor
 
 namespace core {
@@ -42,14 +42,14 @@ class GrappleItemBuilder : public EquipmentBuilder
 public:
     static core::control::Grapple* gen();
     static core::control::Grapple* gen(int_t, int_t ob_id = NONE);
-    static core::control::Grapple* gen(descriptor::Grapple*);
+    static core::control::Grapple* gen(descriptor::GrappleDescr*);
 
 private:
     GrappleItemBuilder() = delete;
     ~GrappleItemBuilder() = delete;
 
-    static core::control::Grapple* __genTemplate(descriptor::Grapple*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Grapple*, descriptor::Grapple*);
+    static core::control::Grapple* __genTemplate(descriptor::GrappleDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Grapple*, descriptor::GrappleDescr*);
 }; 
 
 } // namespace core

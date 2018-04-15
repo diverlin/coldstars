@@ -22,14 +22,14 @@
 
 namespace descriptor {
 
-struct Turrel : public Orientation
+struct TurrelDescr : public OrientationDescr
 {
 public:
-    Turrel() = default;
-    ~Turrel() = default;
+    TurrelDescr() = default;
+    ~TurrelDescr() = default;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Orientation::info();
+        ceti::InfoTable result = OrientationDescr::info();
         result.add("Turrel descriptor");
         return result;
     }
@@ -39,7 +39,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Orientation>(*this);
+        ar & boost::serialization::base_object<OrientationDescr>(*this);
     }
 }; 
 

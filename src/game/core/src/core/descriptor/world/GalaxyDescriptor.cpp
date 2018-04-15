@@ -20,7 +20,7 @@
 
 namespace descriptor {
 
-Galaxy::Galaxy()
+GalaxyDescr::GalaxyDescr()
 {
     setType(descriptor::Type::GALAXY);
     setObType(entity::Type::GALAXY);

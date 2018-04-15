@@ -22,7 +22,7 @@
 #include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class Planet;
+class PlanetDescr;
 } // namespace descriptor
 
 namespace core {
@@ -38,11 +38,11 @@ class PlanetBuilder
 public:
     static core::control::Planet* gen();
     static core::control::Planet* gen(int_t, int_t);
-    static core::control::Planet* gen(descriptor::Planet*, int_t id = NONE);
+    static core::control::Planet* gen(descriptor::PlanetDescr*, int_t id = NONE);
 
 private:
-    static core::control::Planet* __genTemplate(descriptor::Planet*, int_t id = NONE);
-    static void __createInternals(core::control::Planet*, descriptor::Planet*);
+    static core::control::Planet* __genTemplate(descriptor::PlanetDescr*, int_t id = NONE);
+    static void __createInternals(core::control::Planet*, descriptor::PlanetDescr*);
 }; 
 
 } // namespace core

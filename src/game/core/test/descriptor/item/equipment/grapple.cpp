@@ -28,8 +28,8 @@
 namespace test {
 
 TEST(descriptor, clone_grapple) {
-    descriptor::Grapple* descr = descriptor::genGrapple();
-    descriptor::Grapple* copy = new descriptor::Grapple(descr->data());
+    descriptor::GrappleDescr* descr = descriptor::genGrapple();
+    descriptor::GrappleDescr* copy = new descriptor::GrappleDescr(descr->data());
 
     EXPECT_EQ(descr->type(), descriptor::Type::GRAPPLE_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::GRAPPLE_EQUIPMENT);

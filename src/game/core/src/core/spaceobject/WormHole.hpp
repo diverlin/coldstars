@@ -31,7 +31,7 @@ namespace control {
 class WormHole : public Planetoid
 {
 public:
-    WormHole(descriptor::WormHole*, model::WormHole*);
+    WormHole(descriptor::WormHoleDescr*, model::WormHole*);
     virtual ~WormHole();
 
     //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
@@ -42,11 +42,11 @@ public:
 
     void updateInSpace(int);
 
-    descriptor::WormHole* descriptor() const { return m_descriptor_wormhole; }
+    descriptor::WormHoleDescr* descriptor() const { return m_descriptor_wormhole; }
     model::WormHole* model() const { return m_model_wormhole; }
 
 private:
-    descriptor::WormHole* m_descriptor_wormhole = nullptr;
+    descriptor::WormHoleDescr* m_descriptor_wormhole = nullptr;
     model::WormHole* m_model_wormhole = nullptr;
 
     //        virtual void UpdateInfo() override final;

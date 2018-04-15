@@ -24,27 +24,27 @@
 
 namespace descriptor {
 
-const int Lazer::RADIUS_MIN = 200;
-const int Lazer::RADIUS_MAX = 400;
-const float Lazer::RADIUS_TECH_RATE = 0.1f;
+const int LazerDescr::RADIUS_MIN = 200;
+const int LazerDescr::RADIUS_MAX = 400;
+const float LazerDescr::RADIUS_TECH_RATE = 0.1f;
 
-const int Lazer::DAMAGE_MIN = 40;
-const int Lazer::DAMAGE_MAX = 200;
-const float Lazer::DAMAGE_TECH_RATE = 0.1f;
+const int LazerDescr::DAMAGE_MIN = 40;
+const int LazerDescr::DAMAGE_MAX = 200;
+const float LazerDescr::DAMAGE_TECH_RATE = 0.1f;
 
-const int Lazer::MODULES_NUM_MIN = 0;
-const int Lazer::MODULES_NUM_MAX = 2;
+const int LazerDescr::MODULES_NUM_MIN = 0;
+const int LazerDescr::MODULES_NUM_MAX = 2;
 
-const int Lazer::MASS_MIN = 10;
-const int Lazer::MASS_MAX = 40;
-const int Lazer::CONDITION_MIN = 100;
-const int Lazer::CONDITION_MAX = 1000;
+const int LazerDescr::MASS_MIN = 10;
+const int LazerDescr::MASS_MAX = 40;
+const int LazerDescr::CONDITION_MIN = 100;
+const int LazerDescr::CONDITION_MAX = 1000;
 
-const float Lazer::DAMAGE_WEIGHT = 0.4f;
-const float Lazer::RADIUS_WEIGHT = 0.4f;
-const float Lazer::MODULES_NUM_WEIGHT = 0.2f;
+const float LazerDescr::DAMAGE_WEIGHT = 0.4f;
+const float LazerDescr::RADIUS_WEIGHT = 0.4f;
+const float LazerDescr::MODULES_NUM_WEIGHT = 0.2f;
 
-Lazer::Lazer()
+LazerDescr::LazerDescr()
 {
     setType(descriptor::Type::LAZER_EQUIPMENT);
     setObType(entity::Type::LAZER_EQUIPMENT);
@@ -52,13 +52,13 @@ Lazer::Lazer()
     setSlotType(core::SlotType::WEAPON);
 }
 
-Lazer::Lazer(const std::string& data)
+LazerDescr::LazerDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Lazer::data() const
+LazerDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

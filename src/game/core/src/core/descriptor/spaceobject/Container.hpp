@@ -25,16 +25,16 @@
 
 namespace descriptor {
 
-class Container : public SpaceObject
+class ContainerDescr : public SpaceObjectDescr
 {
 public:
-    Container();
-    Container(const std::string& data);
-    ~Container() = default;
+    ContainerDescr();
+    ContainerDescr(const std::string& data);
+    ~ContainerDescr() = default;
     std::string data() const;
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = SpaceObject::info();
+        ceti::InfoTable result = SpaceObjectDescr::info();
         result.add("SpaceObject descriptor");
         return result;
     }
@@ -43,7 +43,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SpaceObject>(*this);
+        ar & boost::serialization::base_object<SpaceObjectDescr>(*this);
     }
 };
 

@@ -31,7 +31,7 @@
 //#include <vector>
 
 namespace descriptor {
-class Base;
+class BaseDescr;
 } // namespace descriptor
 
 namespace model {
@@ -44,7 +44,7 @@ namespace control {
 class Base : private NonCopyable
 {
 public:
-    Base(descriptor::Base*, model::Base*);
+    Base(descriptor::BaseDescr*, model::Base*);
     virtual ~Base() = default;
 
     void setId(int_t id);
@@ -56,11 +56,11 @@ public:
     bool isAlive() const;
     void die();
 
-    descriptor::Base* descriptor() const { return m_descriptor_base; }
+    descriptor::BaseDescr* descriptor() const { return m_descriptor_base; }
     model::Base* model() const { return m_model_base; }
 
 private:
-    descriptor::Base* m_descriptor_base = nullptr;
+    descriptor::BaseDescr* m_descriptor_base = nullptr;
     model::Base* m_model_base = nullptr;
 
     virtual void __putChildrenToGarbage() const {}

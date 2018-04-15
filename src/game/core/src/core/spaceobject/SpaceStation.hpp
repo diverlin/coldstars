@@ -20,7 +20,7 @@
 #pragma once
 
 namespace descriptor {
-class SpaceStation;
+class SpaceStationDescr;
 } // namespace descriptor
 
 namespace model {
@@ -38,7 +38,7 @@ namespace control {
 class SpaceStation : public Vehicle
 {
 public:
-    SpaceStation(descriptor::SpaceStation*, model::SpaceStation*);
+    SpaceStation(descriptor::SpaceStationDescr*, model::SpaceStation*);
     virtual ~SpaceStation();
 
     [[warning("incapsulate this shit")]]
@@ -50,11 +50,11 @@ public:
 
     //        void RenderInSpace(const jeti::Renderer&, float);
 
-    descriptor::SpaceStation* descriptor() const { return m_descriptor_spacestation; }
+    descriptor::SpaceStationDescr* descriptor() const { return m_descriptor_spacestation; }
     model::SpaceStation* model() const { return m_model_spacestation; }
 
 private:
-    descriptor::SpaceStation* m_descriptor_spacestation = nullptr;
+    descriptor::SpaceStationDescr* m_descriptor_spacestation = nullptr;
     model::SpaceStation* m_model_spacestation = nullptr;
 
     Land* m_innerLand = nullptr;

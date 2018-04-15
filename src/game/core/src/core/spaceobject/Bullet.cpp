@@ -27,7 +27,7 @@
 namespace core {
 namespace control {
 
-Bullet::Bullet(descriptor::Bullet* descr, model::Bullet* model)
+Bullet::Bullet(descriptor::BulletDescr* descr, model::Bullet* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_bullet(descr)

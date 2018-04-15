@@ -26,18 +26,18 @@
 
 namespace descriptor {
 
-class SpaceStation : public Vehicle {
+class SpaceStationDescr : public VehicleDescr {
 public:
-    SpaceStation();
-    SpaceStation(const std::string& data);
-    ~SpaceStation() = default;
+    SpaceStationDescr();
+    SpaceStationDescr(const std::string& data);
+    ~SpaceStationDescr() = default;
     std::string data() const;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Vehicle>(*this);
+        ar & boost::serialization::base_object<VehicleDescr>(*this);
     }
 };
 

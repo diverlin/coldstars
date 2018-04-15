@@ -10,10 +10,10 @@
 
 namespace descriptor {
 
-class Explosion {
+class ExplosionDescr {
 public:
-    Explosion(int_t starsystem, const glm::vec3& center, int damage, int radius);
-    Explosion(const std::string& data);
+    ExplosionDescr(int_t starsystem, const glm::vec3& center, int damage, int radius);
+    ExplosionDescr(const std::string& data);
 
     int_t starsystem = 0;
     glm::vec3 center;

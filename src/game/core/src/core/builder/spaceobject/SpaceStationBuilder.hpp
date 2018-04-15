@@ -25,7 +25,7 @@
 //#include <ceti/type/IdType.hpp>
 
 namespace descriptor {
-class SpaceStation;
+class SpaceStationDescr;
 } // namespace descriptor
 
 namespace core {
@@ -52,14 +52,14 @@ class SpaceStationBuilder : public VehicleBuilder
 {
 public:
     static core::control::SpaceStation* gen();
-    static core::control::SpaceStation* gen(descriptor::SpaceStation*);
+    static core::control::SpaceStation* gen(descriptor::SpaceStationDescr*);
 
 private:
     SpaceStationBuilder() = default;
     ~SpaceStationBuilder() = default;
 
-    static void __createInternals(core::control::SpaceStation*, descriptor::SpaceStation*);
-    static core::control::SpaceStation* __genTemplate(descriptor::SpaceStation*);
+    static void __createInternals(core::control::SpaceStation*, descriptor::SpaceStationDescr*);
+    static core::control::SpaceStation* __genTemplate(descriptor::SpaceStationDescr*);
 }; 
 
 } // namespace core

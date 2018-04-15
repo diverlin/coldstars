@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 namespace descriptor {
-class Droid;
+class DroidDescr;
 } // namespace descriptor
 
 namespace model {
@@ -35,10 +35,10 @@ namespace control {
 class Droid : public Equipment
 {
 public:
-    Droid(descriptor::Droid*, model::Droid*);
+    Droid(descriptor::DroidDescr*, model::Droid*);
     virtual ~Droid() = default;
 
-    descriptor::Droid* descriptor() const { return m_descriptor_droid; }
+    descriptor::DroidDescr* descriptor() const { return m_descriptor_droid; }
     model::Droid* model() const { return m_model_droid; }
 
 private:
@@ -48,7 +48,7 @@ private:
 private:
     int m_repair_add = 0;
 
-    descriptor::Droid* m_descriptor_droid = nullptr;
+    descriptor::DroidDescr* m_descriptor_droid = nullptr;
     model::Droid* m_model_droid = nullptr;
 
     void virtual addUniqueInfo();

@@ -23,7 +23,7 @@
 #include <ceti/Pack.hpp>
 
 namespace descriptor {
-class HyperSpace;
+class HyperSpaceDescr;
 } // naemspace descriptor
 
 namespace model {
@@ -39,7 +39,7 @@ class Vehicle;
 class HyperSpace : public Base
 {
 public:
-    HyperSpace(descriptor::HyperSpace*, model::HyperSpace*);
+    HyperSpace(descriptor::HyperSpaceDescr*, model::HyperSpace*);
     ~HyperSpace() = default;
 
     void add(Vehicle*);
@@ -53,10 +53,10 @@ public:
 //    int queueSize() const { return m_vehicles.size(); }
 
 private:
-    descriptor::HyperSpace* m_descriptor_hyperspace = nullptr;
+    descriptor::HyperSpaceDescr* m_descriptor_hyperspace = nullptr;
     model::HyperSpace* m_model_hyperspace = nullptr;
 
-    descriptor::HyperSpace* descriptor() const { return m_descriptor_hyperspace; }
+    descriptor::HyperSpaceDescr* descriptor() const { return m_descriptor_hyperspace; }
     model::HyperSpace* model() const { return m_model_hyperspace; }
 
     ceti::pack<Vehicle*> m_vehicles;

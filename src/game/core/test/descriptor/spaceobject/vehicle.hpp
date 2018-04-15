@@ -18,11 +18,11 @@
 
 
 namespace descriptor {
-class Vehicle;
+class VehicleDescr;
 } // namespace descriptor
 
 namespace test {
 
-void testVehicleEquality(descriptor::Vehicle* descr, descriptor::Vehicle* copy);
+void testVehicleEquality(descriptor::VehicleDescr* descr, descriptor::VehicleDescr* copy);
 
 } // namespace test

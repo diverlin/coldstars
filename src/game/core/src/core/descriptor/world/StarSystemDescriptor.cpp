@@ -22,17 +22,17 @@
 
 namespace descriptor {
 
-StarSystem::StarSystem()
+StarSystemDescr::StarSystemDescr()
 {
     setType(Type::STARSYSTEM);
 }
 
-StarSystem::StarSystem(const std::string& data) {
+StarSystemDescr::StarSystemDescr(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-StarSystem::data() const
+StarSystemDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

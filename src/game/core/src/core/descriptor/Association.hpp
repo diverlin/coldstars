@@ -25,9 +25,9 @@
 
 namespace descriptor {
 
-class Association {
+class AssociationDescr {
 public:
-    Association()
+    AssociationDescr()
     {}
 
 public:

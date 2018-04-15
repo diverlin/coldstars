@@ -25,22 +25,22 @@
 
 namespace descriptor {
 
-const int Radar::RADIUS_MIN = 700;
-const int Radar::RADIUS_MAX = 1500;
-const float Radar::RADIUS_TECH_RATE = 0.1f;
+const int RadarDescr::RADIUS_MIN = 700;
+const int RadarDescr::RADIUS_MAX = 1500;
+const float RadarDescr::RADIUS_TECH_RATE = 0.1f;
 
-const int Radar::MODULES_NUM_MIN = 0;
-const int Radar::MODULES_NUM_MAX = 2;
+const int RadarDescr::MODULES_NUM_MIN = 0;
+const int RadarDescr::MODULES_NUM_MAX = 2;
 
-const int Radar::MASS_MIN = 10;
-const int Radar::MASS_MAX = 50;
-const int Radar::CONDITION_MIN = 2000;
-const int Radar::CONDITION_MAX = 10000;
+const int RadarDescr::MASS_MIN = 10;
+const int RadarDescr::MASS_MAX = 50;
+const int RadarDescr::CONDITION_MIN = 2000;
+const int RadarDescr::CONDITION_MAX = 10000;
 
-const float Radar::RADIUS_WEIGHT = 0.6;
-const float Radar::MODULES_NUM_WEIGHT = 0.4;
+const float RadarDescr::RADIUS_WEIGHT = 0.6;
+const float RadarDescr::MODULES_NUM_WEIGHT = 0.4;
 
-Radar::Radar()
+RadarDescr::RadarDescr()
 {
     setType(descriptor::Type::RADAR_EQUIPMENT);
     setObType(entity::Type::RADAR_EQUIPMENT);
@@ -48,13 +48,13 @@ Radar::Radar()
     setSlotType(core::SlotType::RADAR);
 }
 
-Radar::Radar(const std::string& data)
+RadarDescr::RadarDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Radar::data() const
+RadarDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

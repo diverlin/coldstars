@@ -25,23 +25,23 @@
 
 namespace descriptor {
 
-const int Scaner::SCAN_MIN = 2;
-const int Scaner::SCAN_MAX = 40;
-const float Scaner::SCAN_TECH_RATE = 0.1f;
+const int ScanerDescr::SCAN_MIN = 2;
+const int ScanerDescr::SCAN_MAX = 40;
+const float ScanerDescr::SCAN_TECH_RATE = 0.1f;
 
-const int Scaner::MODULES_NUM_MIN = 0;
-const int Scaner::MODULES_NUM_MAX = 2;
+const int ScanerDescr::MODULES_NUM_MIN = 0;
+const int ScanerDescr::MODULES_NUM_MAX = 2;
 
-const int Scaner::MASS_MIN = 7;
-const int Scaner::MASS_MAX = 38;
-const int Scaner::CONDITION_MIN = 30;
-const int Scaner::CONDITION_MAX = 100;
+const int ScanerDescr::MASS_MIN = 7;
+const int ScanerDescr::MASS_MAX = 38;
+const int ScanerDescr::CONDITION_MIN = 30;
+const int ScanerDescr::CONDITION_MAX = 100;
 
-const float Scaner::SCAN_WEIGHT = 0.7f;
-const float Scaner::MODULES_NUM_WEIGHT = 0.3f;
+const float ScanerDescr::SCAN_WEIGHT = 0.7f;
+const float ScanerDescr::MODULES_NUM_WEIGHT = 0.3f;
 
 
-Scaner::Scaner()
+ScanerDescr::ScanerDescr()
 {
     setType(descriptor::Type::SCANER_EQUIPMENT);
     setObType(entity::Type::SCANER_EQUIPMENT);
@@ -49,13 +49,13 @@ Scaner::Scaner()
     setSlotType(core::SlotType::SCANER);
 }
 
-Scaner::Scaner(const std::string& data)
+ScanerDescr::ScanerDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-Scaner::data() const
+ScanerDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

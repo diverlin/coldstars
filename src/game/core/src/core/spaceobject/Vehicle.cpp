@@ -52,7 +52,7 @@
 namespace core {
 namespace control {
 
-Vehicle::Vehicle(descriptor::Vehicle* descr, model::Vehicle* model)
+Vehicle::Vehicle(descriptor::VehicleDescr* descr, model::Vehicle* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_vehicle(descr)
@@ -134,7 +134,7 @@ Vehicle::__loadItemsFromModel()
 {
     for(int_t id: model()->items()) {
         control::Base* model_base = core::shortcuts::entities()->base(id);
-        descriptor::Base* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
+        descriptor::BaseDescr* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
         assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
         switch(descriptor_base->obGroup()) {
         case entity::Type::SCANER_EQUIPMENT: {
@@ -202,7 +202,7 @@ int Vehicle::space() const
 }
 
 void
-Vehicle::__createSlots(descriptor::Vehicle* descr)
+Vehicle::__createSlots(descriptor::VehicleDescr* descr)
 {
     assert(m_slots.size()==0);
 
@@ -322,7 +322,7 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
     //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
-void Vehicle::setKorpusData(descriptor::Vehicle* korpus_data)
+void Vehicle::setKorpusData(descriptor::VehicleDescr* korpus_data)
 {
     m_descriptor_vehicle = korpus_data;
     m_properties.protection = m_descriptor_vehicle->protection();

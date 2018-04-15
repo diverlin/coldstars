@@ -24,7 +24,7 @@
 
 namespace  test {
 
-void testBaseEquality(descriptor::Base* descr, descriptor::Base* copy)
+void testBaseEquality(descriptor::BaseDescr* descr, descriptor::BaseDescr* copy)
 {
     EXPECT_EQ(descr->id(), copy->id());
     EXPECT_EQ(descr->type(), copy->type());

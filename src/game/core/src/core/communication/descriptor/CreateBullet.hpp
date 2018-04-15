@@ -29,12 +29,12 @@
 namespace descriptor {
 namespace comm {
 
-class CreateBullet
+class CreateBulletComDescr
 {
 public:
-    CreateBullet(int_t, int_t, int_t);
-    CreateBullet(const std::string& data);
-    ~CreateBullet() = default;
+    CreateBulletComDescr(int_t, int_t, int_t);
+    CreateBulletComDescr(const std::string& data);
+    ~CreateBulletComDescr() = default;
     std::string data() const;
 
     int_t owner() const { return m_owner; }

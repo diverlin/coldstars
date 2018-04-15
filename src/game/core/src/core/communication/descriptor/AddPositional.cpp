@@ -25,21 +25,21 @@
 namespace descriptor {
 namespace comm {
 
-AddPositional::AddPositional(int_t object, int_t parent, const meti::vec3& position)
+AddPositionalComDescr::AddPositionalComDescr(int_t object, int_t parent, const meti::vec3& position)
     :
-      Object(object)
+      ObjectDescr(object)
     , m_parent(parent)
     , m_position(position)
 {}
 
 
-AddPositional::AddPositional(const std::string& data)
+AddPositionalComDescr::AddPositionalComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-AddPositional::data() const
+AddPositionalComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

@@ -23,7 +23,7 @@
 
 namespace descriptor {
 
-class Rocket : public Weapon
+class RocketDescr : public WeaponDescr
 {
 public:
     static const int AMMO_MIN;
@@ -52,9 +52,9 @@ public:
     static const float MODULES_NUM_WEIGHT;
 
 public:
-    Rocket();
-    ~Rocket() = default;
-    Rocket(const std::string& data);
+    RocketDescr();
+    ~RocketDescr() = default;
+    RocketDescr(const std::string& data);
     std::string data() const;
 
     void setBulletDescriptor(int_t bulletDescriptor) { m_bulletDescriptor = bulletDescriptor; }
@@ -64,7 +64,7 @@ public:
     int ammo() const { return m_ammo; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = Weapon::info();
+        ceti::InfoTable result = WeaponDescr::info();
         result.add("descriptor::Rocket");
         result.add("ammo", m_ammo);
         result.add("bulletDescriptor", m_bulletDescriptor);
@@ -79,7 +79,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Weapon>(*this);
+        ar & boost::serialization::base_object<WeaponDescr>(*this);
         ar & m_ammo;
         ar & m_bulletDescriptor;
     }

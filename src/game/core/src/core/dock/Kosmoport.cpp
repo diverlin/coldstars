@@ -36,7 +36,7 @@
 namespace core {
 namespace control {
 
-Kosmoport::Kosmoport(descriptor::Kosmoport* descr, model::Kosmoport* model)
+Kosmoport::Kosmoport(descriptor::KosmoportDescr* descr, model::Kosmoport* model)
     :
       Land(descr, model)
     , m_descriptor_kosmoport(descr)

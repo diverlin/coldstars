@@ -24,11 +24,11 @@
 
 namespace descriptor {
 
-class Land : public Base
+class LandDescr : public BaseDescr
 {
 public:
-    Land() = default;
-    ~Land() = default;
+    LandDescr() = default;
+    ~LandDescr() = default;
 
     void setPlace(place::Type place) { m_place = place; }
 
@@ -38,7 +38,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
         ar & m_place;
     }
 

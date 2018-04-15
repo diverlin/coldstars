@@ -26,7 +26,7 @@
 #include <string>
 
 namespace descriptor {
-class Radar;
+class RadarDescr;
 } // namespace descriptor
 
 namespace core {
@@ -42,14 +42,14 @@ class RadarItemBuilder : public EquipmentBuilder
 public:
     static core::control::Radar* gen();
     static core::control::Radar* gen(int_t, int_t ob_id = NONE);
-    static core::control::Radar* gen(descriptor::Radar*);
+    static core::control::Radar* gen(descriptor::RadarDescr*);
 
 private:
     RadarItemBuilder() = delete;
     ~RadarItemBuilder() = delete;
 
-    static core::control::Radar* __genTemplate(descriptor::Radar*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Radar*, descriptor::Radar*);
+    static core::control::Radar* __genTemplate(descriptor::RadarDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Radar*, descriptor::RadarDescr*);
 }; 
 
 } // namespace core
