@@ -33,7 +33,7 @@
 
 #include <core/descriptor/spaceobject/Ship.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Ship*
 ShipBuilder::gen(descriptor::Ship* descr)

@@ -28,10 +28,10 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Shop*
-Shop::gen()
+ShopBuilder::gen()
 {
     descriptor::Shop* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHOP)) {
@@ -43,7 +43,7 @@ Shop::gen()
 }
 
 core::control::Shop*
-Shop::gen(descriptor::Shop* descr)
+ShopBuilder::gen(descriptor::Shop* descr)
 {
     core::control::Shop* shop = __createTemplate(descr);
     __createInternals(shop);
@@ -52,7 +52,7 @@ Shop::gen(descriptor::Shop* descr)
 }
 
 core::control::Shop*
-Shop::__createTemplate(descriptor::Shop* descr)
+ShopBuilder::__createTemplate(descriptor::Shop* descr)
 {
     model::Shop* model = new model::Shop(descr->id());
     assert(model);
@@ -65,7 +65,7 @@ Shop::__createTemplate(descriptor::Shop* descr)
 } 
 
 void
-Shop::__createInternals(core::control::Shop* shop)
+ShopBuilder::__createInternals(core::control::Shop* shop)
 {    
     //jeti::control::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND);
     //shop->SetTextureObBackground(textureOb_background);

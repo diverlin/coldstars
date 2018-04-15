@@ -31,9 +31,9 @@ class Npc;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Npc
+class NpcBuilder
 {
 public:
     static core::control::Npc* gen();
@@ -41,8 +41,8 @@ public:
     static core::control::Npc* gen(descriptor::Npc*, int_t id = NONE);
 
 private:
-    Npc() = delete;
-    ~Npc() = delete;
+    NpcBuilder() = delete;
+    ~NpcBuilder() = delete;
 
     static core::control::Npc* __createTemplate(descriptor::Npc*, int_t id);
     static void __createInternals(core::control::Npc*, descriptor::Npc*);

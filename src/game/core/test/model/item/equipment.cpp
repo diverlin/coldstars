@@ -50,7 +50,7 @@ void compareEquipment(model::Equipment* model, model::Equipment* copy)
 } // namespace
 
 TEST(model, bak) {
-    model::item::Bak* model = builder::item::Bak::gen()->model();
+    model::item::Bak* model = GovermentBuilder::item::Bak::gen()->model();
     model::item::Bak* copy = new model::item::Bak(model->data());
 
     compareEquipment(model, copy);
@@ -63,7 +63,7 @@ TEST(model, bak) {
 }
 
 TEST(model, drive) {
-    model::item::Drive* model = builder::item::Drive::gen()->model();
+    model::item::Drive* model = GovermentBuilder::item::Drive::gen()->model();
     model::item::Drive* copy = new model::item::Drive(model->data());
 
     compareEquipment(model, copy);
@@ -77,7 +77,7 @@ TEST(model, drive) {
 }
 
 TEST(model, droid) {
-    model::item::Droid* model = builder::item::Droid::gen()->model();
+    model::item::Droid* model = GovermentBuilder::item::Droid::gen()->model();
     model::item::Droid* copy = new model::item::Droid(model->data());
 
     compareEquipment(model, copy);
@@ -90,7 +90,7 @@ TEST(model, droid) {
 }
 
 TEST(model, grapple) {
-    model::item::Grapple* model = builder::item::Grapple::gen()->model();
+    model::item::Grapple* model = GovermentBuilder::item::Grapple::gen()->model();
     model::item::Grapple* copy = new model::item::Grapple(model->data());
 
     compareEquipment(model, copy);
@@ -105,7 +105,7 @@ TEST(model, grapple) {
 }
 
 TEST(model, lazer) {
-    model::item::Lazer* model = builder::item::Lazer::gen()->model();
+    model::item::Lazer* model = GovermentBuilder::item::Lazer::gen()->model();
     model::item::Lazer* copy = new model::item::Lazer(model->data());
 
     compareEquipment(model, copy);
@@ -119,7 +119,7 @@ TEST(model, lazer) {
 }
 
 TEST(model, protector) {
-    model::item::Protector* model = builder::item::Protector::gen()->model();
+    model::item::Protector* model = GovermentBuilder::item::Protector::gen()->model();
     model::item::Protector* copy = new model::item::Protector(model->data());
 
     compareEquipment(model, copy);
@@ -132,7 +132,7 @@ TEST(model, protector) {
 }
 
 TEST(model, radar) {
-    model::item::Radar* model = builder::item::Radar::gen()->model();
+    model::item::Radar* model = GovermentBuilder::item::Radar::gen()->model();
     model::item::Radar* copy = new model::item::Radar(model->data());
 
     compareEquipment(model, copy);
@@ -145,7 +145,7 @@ TEST(model, radar) {
 }
 
 TEST(model, rocket) {
-    model::item::Rocket* model = builder::item::Rocket::gen()->model();
+    model::item::Rocket* model = GovermentBuilder::item::Rocket::gen()->model();
     model::item::Rocket* copy = new model::item::Rocket(model->data());
 
     compareEquipment(model, copy);
@@ -160,7 +160,7 @@ TEST(model, rocket) {
 }
 
 TEST(model, scaner) {
-    model::item::Scaner* model = builder::item::Scaner::gen()->model();
+    model::item::Scaner* model = GovermentBuilder::item::Scaner::gen()->model();
     model::item::Scaner* copy = new model::item::Scaner(model->data());
 
     compareEquipment(model, copy);

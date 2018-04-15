@@ -39,7 +39,7 @@ class Droid;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 namespace item {
 
 class Droid : public Equipment

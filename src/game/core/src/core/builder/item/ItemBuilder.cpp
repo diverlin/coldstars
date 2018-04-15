@@ -24,7 +24,7 @@
 
 #include <descriptor/item/Item.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 void Item::_createInternals(core::control::Item* item, descriptor::Item* descr)
 {

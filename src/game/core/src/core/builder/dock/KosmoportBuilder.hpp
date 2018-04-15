@@ -31,17 +31,17 @@ class Kosmoport;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Kosmoport
+class KosmoportBuilder
 {
 public:
     static core::control::Kosmoport* gen();
     static core::control::Kosmoport* gen(descriptor::Kosmoport*);
 
 private:
-    Kosmoport() = delete;
-    ~Kosmoport() = delete;
+    KosmoportBuilder() = delete;
+    ~KosmoportBuilder() = delete;
 
     static core::control::Kosmoport* __createTemplate(descriptor::Kosmoport*);
     static void __createInternals(core::control::Kosmoport*, descriptor::Kosmoport*);

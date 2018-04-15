@@ -31,7 +31,7 @@ class WormHole;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
 class WormHoleBuilder
 {

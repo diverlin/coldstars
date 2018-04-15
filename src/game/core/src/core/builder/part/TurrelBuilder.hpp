@@ -30,9 +30,9 @@ class Turrel;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 
-class Turrel
+class TurrelBuilder
 {
 public:
     static core::control::Turrel* gen();

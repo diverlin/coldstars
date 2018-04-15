@@ -39,7 +39,7 @@ class Radar;
 } // namespace control
 }
 
-namespace builder {
+namespace GovermentBuilder {
 namespace item {
 
 class Radar : public Equipment

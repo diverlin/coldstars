@@ -36,10 +36,10 @@
 #include <ai/aiModel/AiModelRanger.hpp>
 #include <ai/aiModel/AiModelTrader.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Npc*
-Npc::gen()
+NpcBuilder::gen()
 {
     descriptor::Npc* descriptor = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::NPC)) {
@@ -52,14 +52,14 @@ Npc::gen()
 }
 
 core::control::Npc*
-Npc::gen(int_t descriptor_id, int_t id)
+NpcBuilder::gen(int_t descriptor_id, int_t id)
 {
     descriptor::Npc* descriptor = core::shortcuts::descriptors()->npc(descriptor_id);
     return gen(descriptor, id);
 }
 
 core::control::Npc*
-Npc::gen(descriptor::Npc* descriptor, int_t id)
+NpcBuilder::gen(descriptor::Npc* descriptor, int_t id)
 {
     core::control::Npc* npc = __createTemplate(descriptor, id);
     __createInternals(npc, descriptor);
@@ -68,7 +68,7 @@ Npc::gen(descriptor::Npc* descriptor, int_t id)
 }
 
 core::control::Npc*
-Npc::__createTemplate(descriptor::Npc* descr, int_t id)
+NpcBuilder::__createTemplate(descriptor::Npc* descr, int_t id)
 {
     model::Npc* model = new model::Npc(descr->id(), id);
     assert(model);
@@ -80,7 +80,7 @@ Npc::__createTemplate(descriptor::Npc* descr, int_t id)
 }
 
 void
-Npc::__createInternals(core::control::Npc* npc, descriptor::Npc* descr)
+NpcBuilder::__createInternals(core::control::Npc* npc, descriptor::Npc* descr)
 {
     // assert(false); assert(false);
 //    //LifeData data_life;

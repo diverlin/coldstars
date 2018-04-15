@@ -32,10 +32,10 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace builder {
+namespace GovermentBuilder {
 
 core::control::Kosmoport*
-Kosmoport::gen()
+KosmoportBuilder::gen()
 {
     descriptor::Kosmoport* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::KOSMOPORT)) {
@@ -48,7 +48,7 @@ Kosmoport::gen()
 } 
 
 core::control::Kosmoport*
-Kosmoport::gen(descriptor::Kosmoport* descr)
+KosmoportBuilder::gen(descriptor::Kosmoport* descr)
 {
     core::control::Kosmoport* kosmoport = __createTemplate(descr);
     __createInternals(kosmoport, descr);
@@ -56,7 +56,7 @@ Kosmoport::gen(descriptor::Kosmoport* descr)
 }
 
 core::control::Kosmoport*
-Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
+KosmoportBuilder::__createTemplate(descriptor::Kosmoport* descr)
 {
     model::Kosmoport* model = new model::Kosmoport(descr->id());
     assert(model);
@@ -69,12 +69,12 @@ Kosmoport::__createTemplate(descriptor::Kosmoport* descr)
 }
 
 void
-Kosmoport::__createInternals(core::control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
+KosmoportBuilder::__createInternals(core::control::Kosmoport* kosmoport, descriptor::Kosmoport* descr)
 {
-    kosmoport->bindAngar(builder::Angar::gen());
-    kosmoport->bindStore(builder::Store::gen());
-    kosmoport->bindShop(builder::Shop::gen());
-    kosmoport->bindGoverment(builder::Goverment::gen());
+    kosmoport->bindAngar(GovermentBuilder::AngarBuilder::gen());
+    kosmoport->bindStore(GovermentBuilder::StoreBuilder::gen());
+    kosmoport->bindShop(GovermentBuilder::ShopBuilder::gen());
+    kosmoport->bindGoverment(GovermentBuilder::Goverment::gen());
 }
 
 } // namespace builder
