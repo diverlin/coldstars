@@ -21,7 +21,6 @@
 #include <sstream>
 
 namespace ceti {
-namespace descriptor {
 
 //Mesh::Mesh(int_t type,
 //           const std::string& model,
@@ -33,5 +32,4 @@ namespace descriptor {
 //{
 //}
 
-} // namespace descriptor
 } // namespace ceti

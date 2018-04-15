@@ -18,7 +18,7 @@
 
 #include "Asteroid.hpp"
 
-namespace descriptor {
+namespace core {
 
 const int AsteroidDescr::ARMOR_MIN = 10;
 const int AsteroidDescr::ARMOR_MAX = 100;

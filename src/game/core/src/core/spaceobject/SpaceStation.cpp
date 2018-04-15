@@ -44,7 +44,7 @@ namespace core {
 namespace control {
 
 
-SpaceStation::SpaceStation(descriptor::SpaceStationDescr* descr, model::SpaceStation* model)
+SpaceStation::SpaceStation(SpaceStationDescr* descr, model::SpaceStation* model)
     :
       Vehicle(descr, model)
     , m_descriptor_spacestation(descr)

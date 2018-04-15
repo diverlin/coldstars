@@ -27,43 +27,42 @@
 #include <string>
 
 namespace ceti {
-namespace descriptor {
 
-class Property : public Id {
+class PropertyDescr : public IdDescr {
 public:
     enum {INT, FLOAT, STR, VEC3};
 
-    Property(const Id& id, int_t value)
+    PropertyDescr(const IdDescr& id, int_t value)
         :
-          Id(id)
+          IdDescr(id)
         , valueType(INT)
         , intValue(value)
     {}
 
-    Property(const Id& id, int value)
+    PropertyDescr(const IdDescr& id, int value)
         :
-          Id(id)
+          IdDescr(id)
         , valueType(INT)
         , intValue(value)
     {}
 
-    Property(const Id& id, float value)
+    PropertyDescr(const IdDescr& id, float value)
         :
-          Id(id)
+          IdDescr(id)
         , valueType(FLOAT)
         , floatValue(value)
     {}
 
-    Property(const Id& id, const std::string& value)
+    PropertyDescr(const IdDescr& id, const std::string& value)
         :
-          Id(id)
+          IdDescr(id)
         , valueType(STR)
         , strValue(value)
     {}
 
-    Property(const Id& id, const meti::vec3& value)
+    PropertyDescr(const IdDescr& id, const meti::vec3& value)
         :
-          Id(id)
+          IdDescr(id)
         , valueType(VEC3)
         , vec3Value(value)
     {}
@@ -75,5 +74,4 @@ public:
     meti::vec3 vec3Value = meti::vec3(0.0f);
 };
 
-} // namespace descriptor
 } // namespace ceti

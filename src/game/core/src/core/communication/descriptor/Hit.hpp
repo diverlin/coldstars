@@ -5,7 +5,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 class HitComDescr {
@@ -20,7 +20,7 @@ public:
     int damage() const { return m_damage; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::Hit:\n";
+        std::string result = "comm::Hit:\n";
         result += std::string(" owner = ") + std::to_string(m_owner) + "\n";
         result += std::string(" target = ") + std::to_string(m_target) + "\n";
         result += std::string(" damage = ") + std::to_string(m_damage) + "\n";

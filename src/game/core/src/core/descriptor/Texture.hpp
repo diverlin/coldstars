@@ -28,9 +28,9 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 
-class MaterialDescr : public ceti::descriptor::Material, public AssociationDescr
+class MaterialDescr : public ceti::MaterialDescr, public AssociationDescr
 {
 public:
 //    Material(int type,
@@ -49,7 +49,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::descriptor::Material>(*this);
+        ar & boost::serialization::base_object<ceti::MaterialDescr>(*this);
         ar & boost::serialization::base_object<AssociationDescr>(*this);
     }
 };

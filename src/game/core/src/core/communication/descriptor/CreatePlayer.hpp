@@ -26,7 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 class CreatePlayerComDescr
@@ -42,7 +42,7 @@ public:
     int_t npc() const { return m_npc; }
 
     std::string info() const {
-        std::string result = "descriptor::comm::CreatePlayer:\n";
+        std::string result = "comm::CreatePlayer:\n";
         result += std::string(" player = ") + std::to_string(m_player) + "\n";
         result += std::string(" npc = ") + std::to_string(m_npc) + "\n";
         return result;

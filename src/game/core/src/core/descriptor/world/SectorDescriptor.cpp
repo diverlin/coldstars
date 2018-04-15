@@ -18,11 +18,11 @@
 
 #include "SectorDescriptor.hpp"
 
-namespace descriptor {
+namespace core {
 
 SectorDescr::SectorDescr()
 {
-    setType(descriptor::Type::SECTOR);
+    setType(core::Type::SECTOR);
     setObType(entity::Type::SECTOR);
 }
 

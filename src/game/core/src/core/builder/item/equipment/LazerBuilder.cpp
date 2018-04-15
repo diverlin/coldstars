@@ -31,9 +31,9 @@ namespace core {
 core::control::Lazer*
 LazerItemBuilder::gen()
 {
-    descriptor::LazerDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::LAZER_EQUIPMENT)) {
-        descr = descriptor::genLazer();
+    core::LazerDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::LAZER_EQUIPMENT)) {
+        descr = core::genLazer();
     } else {
         descr = core::shortcuts::descriptors()->randLazer();
     }
@@ -44,14 +44,14 @@ LazerItemBuilder::gen()
 core::control::Lazer*
 LazerItemBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::LazerDescr* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
+    core::LazerDescr* descr = core::shortcuts::descriptors()->lazer(descriptor_id);
     core::control::Lazer* lazer = __genTemplate(descr, ob_id);
     __createInternals(lazer, descr);
     return lazer;
 }
 
 core::control::Lazer*
-LazerItemBuilder::gen(descriptor::LazerDescr* descr)
+LazerItemBuilder::gen(core::LazerDescr* descr)
 {
     core::control::Lazer* lazer = __genTemplate(descr);
     __createInternals(lazer, descr);
@@ -59,7 +59,7 @@ LazerItemBuilder::gen(descriptor::LazerDescr* descr)
 }
 
 core::control::Lazer*
-LazerItemBuilder::__genTemplate(descriptor::LazerDescr* descriptor, int_t id)
+LazerItemBuilder::__genTemplate(LazerDescr* descriptor, int_t id)
 { 
     model::Lazer* model = new model::Lazer(descriptor->id(), id);
     assert(model);
@@ -69,7 +69,7 @@ LazerItemBuilder::__genTemplate(descriptor::LazerDescr* descriptor, int_t id)
 } 
 
 void
-LazerItemBuilder::__createInternals(core::control::Lazer* lazer, descriptor::LazerDescr* descr)
+LazerItemBuilder::__createInternals(core::control::Lazer* lazer, core::LazerDescr* descr)
 {     
     ItemBuilder::_createInternals(lazer, descr);
     EquipmentBuilder::_createInternals(lazer, descr);

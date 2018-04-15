@@ -28,7 +28,7 @@ namespace model {
 class Galaxy;
 } // namespace model
 
-namespace descriptor {
+namespace core {
 class GalaxyDescr;
 } // namespace descriptor
 
@@ -64,8 +64,8 @@ private:
 
     void __proceedInvasion(control::Galaxy*) const;
 
-    void __createLife(control::Galaxy*, descriptor::GalaxyDescr*) const;
-    void __createInvasion(control::Galaxy*, descriptor::GalaxyDescr*) const;
+    void __createLife(control::Galaxy*, core::GalaxyDescr*) const;
+    void __createInvasion(control::Galaxy*, core::GalaxyDescr*) const;
 
     control::Galaxy* m_galaxy = nullptr;
 }; 

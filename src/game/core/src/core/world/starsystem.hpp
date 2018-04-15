@@ -93,7 +93,7 @@ namespace control {
 class StarSystem : public Base
 {
 public:
-    StarSystem(descriptor::StarSystemDescr*, model::StarSystem*);
+    StarSystem(StarSystemDescr*, model::StarSystem*);
     ~StarSystem();
 
     // model interface
@@ -169,11 +169,11 @@ public:
     Vehicle* randomVehicle(const std::vector<race::Type>&) const;
     //
 
-    descriptor::StarSystemDescr* descriptor() const { return m_descriptor_starsystem; }
+    StarSystemDescr* descriptor() const { return m_descriptor_starsystem; }
     model::StarSystem* model() const { return m_model_starsystem; }
 
 private:
-    descriptor::StarSystemDescr* m_descriptor_starsystem = nullptr;
+    StarSystemDescr* m_descriptor_starsystem = nullptr;
     model::StarSystem* m_model_starsystem = nullptr;
 
     race::Type m_race_id = race::Type::R0;

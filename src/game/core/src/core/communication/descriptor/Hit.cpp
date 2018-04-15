@@ -2,7 +2,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 HitComDescr::HitComDescr(int_t owner, int_t target, int damage)

@@ -35,9 +35,9 @@
 
 namespace {
 
-//void validate(descriptor::Base* descr, jeti::Base* view) {
-//    descriptor::Material* material_descr = descriptor::Manager::get().material(descr->texture());
-//    descriptor::Mesh* mesh_descr = descriptor::Manager::get().mesh(descr->mesh());
+//void validate(Base* descr, jeti::Base* view) {
+//    Material* material_descr = Manager::get().material(descr->texture());
+//    Mesh* mesh_descr = Manager::get().mesh(descr->mesh());
 
 //    EXPECT_NE(descr->texture(), NONE);
 //    EXPECT_NE(material_descr->texturePath(), "");

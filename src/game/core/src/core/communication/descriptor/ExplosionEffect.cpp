@@ -22,9 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
-namespace comm {
-namespace effect {
+namespace core {
 
 ExplosionEffectComDescr::ExplosionEffectComDescr(float size, const glm::vec3& position)
     :
@@ -44,7 +42,5 @@ ExplosionEffectComDescr::data() const
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-} // namespace effect
-} // namespace comm
 } // namespace descriptor
 

@@ -21,9 +21,9 @@
 #include "Association.hpp"
 #include <ceti/descriptor/Mesh.hpp>
 
-namespace descriptor {
+namespace core {
 
-class MeshDescr : public ceti::descriptor::Mesh, public AssociationDescr
+class MeshDescr : public ceti::MeshDescr, public AssociationDescr
 {
 public:
     MeshDescr() = default;
@@ -44,7 +44,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ceti::descriptor::Mesh>(*this);
+        ar & boost::serialization::base_object<ceti::MeshDescr>(*this);
         ar & boost::serialization::base_object<AssociationDescr>(*this);
         ar & m_isFlat;
     }

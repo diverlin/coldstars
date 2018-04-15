@@ -27,7 +27,7 @@
 #include <boost/archive/text_iarchive.hpp>
 
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 class AddPositionalComDescr : public ObjectDescr {
@@ -43,7 +43,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "descriptor::comm::AddPositional:\n";
+        result += "comm::AddPositional:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
         return result;

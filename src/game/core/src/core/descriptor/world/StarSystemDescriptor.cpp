@@ -20,7 +20,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 StarSystemDescr::StarSystemDescr()
 {

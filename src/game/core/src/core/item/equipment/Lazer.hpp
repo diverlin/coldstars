@@ -20,7 +20,7 @@
 
 #include "Weapon.hpp"
 
-namespace descriptor {
+namespace core {
 class LazerDescr;
 } // namespace descriptor
 
@@ -34,17 +34,17 @@ namespace control {
 class Lazer : public Weapon
 {
 public:
-    Lazer(descriptor::LazerDescr*, model::Lazer*);
+    Lazer(LazerDescr*, model::Lazer*);
     virtual ~Lazer() = default;
 
     bool checkAmmo() const override final;
     void fire(control::SpaceObject*, float rate=1.0f) override final;
 
-    descriptor::LazerDescr* descriptor() const { m_descriptor_lazer; }
+    LazerDescr* descriptor() const { m_descriptor_lazer; }
     model::Lazer* model() const { return m_model_lazer; }
 
 private:
-    descriptor::LazerDescr* m_descriptor_lazer = nullptr;
+    LazerDescr* m_descriptor_lazer = nullptr;
     model::Lazer* m_model_lazer = nullptr;
 
     //              jeti::control::TextureOb* texOb_turrel;

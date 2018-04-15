@@ -17,7 +17,7 @@
 */
 
 
-namespace descriptor {
+namespace core {
 
 class SpaceObjectDescr;
 
@@ -25,6 +25,6 @@ class SpaceObjectDescr;
 
 namespace test {
 
-void testSpaceObjectEquality(descriptor::SpaceObjectDescr* descr, descriptor::SpaceObjectDescr* copy);
+void testSpaceObjectEquality(core::SpaceObjectDescr* descr, core::SpaceObjectDescr* copy);
 
 } // namespace test

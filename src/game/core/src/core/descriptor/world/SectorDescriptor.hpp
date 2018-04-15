@@ -25,7 +25,7 @@
 
 #include <vector>
 
-namespace descriptor {
+namespace core {
 
 struct SectorDescr : public BaseDescr
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
-        result.add("descriptor::Sector");
+        result.add("Sector");
         result.add("starsystems", ceti::to_string(starsystems));
         return result;
     }

@@ -29,16 +29,16 @@
 namespace test {
 
 namespace {
-void testShipEquality(descriptor::ShipDescr* descr, descriptor::ShipDescr* copy) {
-    EXPECT_EQ(descr->type(), descriptor::Type::SHIP);
+void testShipEquality(core::ShipDescr* descr, core::ShipDescr* copy) {
+    EXPECT_EQ(descr->type(), core::Type::SHIP);
     EXPECT_EQ(descr->obType(), entity::Type::SHIP);
     EXPECT_EQ(descr->obGroup(), entity::Type::VEHICLE);
 }
 } // namespace
 
-TEST(descriptor, clone_ship) {
-    descriptor::ShipDescr* descr = descriptor::genShip();
-    descriptor::ShipDescr* copy = new descriptor::ShipDescr(descr->data());
+TEST(core, clone_ship) {
+    core::ShipDescr* descr = core::genShip();
+    core::ShipDescr* copy = new core::ShipDescr(descr->data());
 
     testShipEquality(descr, copy);
     testVehicleEquality(descr, copy);

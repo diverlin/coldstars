@@ -33,9 +33,9 @@ namespace core {
 core::control::Goverment*
 GovermentBuilder::gen()
 {
-    descriptor::GovermentDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::GOVERMENT)) {
-        descr = descriptor::genGoverment();
+    core::GovermentDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::GOVERMENT)) {
+        descr = core::genGoverment();
     } else {
         descr = core::shortcuts::descriptors()->randGoverment();
     }
@@ -43,7 +43,7 @@ GovermentBuilder::gen()
 }
 
 core::control::Goverment*
-GovermentBuilder::gen(descriptor::GovermentDescr* descr)
+GovermentBuilder::gen(core::GovermentDescr* descr)
 {
     core::control::Goverment* goverment = __createTemplate(descr);
     __createInternals(goverment);
@@ -52,7 +52,7 @@ GovermentBuilder::gen(descriptor::GovermentDescr* descr)
 } 
 
 core::control::Goverment*
-GovermentBuilder::__createTemplate(descriptor::GovermentDescr* descr)
+GovermentBuilder::__createTemplate(core::GovermentDescr* descr)
 {
     model::Goverment* model = new model::Goverment(descr->id());
     assert(model);

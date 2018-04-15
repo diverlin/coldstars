@@ -25,7 +25,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 class ObjectSubjectComDescr : public ObjectDescr {
@@ -40,7 +40,7 @@ public:
 
     std::string info() const {
         std::string result = ObjectDescr::info();
-        result += "descriptor::comm::ObjectSubject:\n";
+        result += "comm::ObjectSubject:\n";
         result += std::string(" subject = ") + std::to_string(m_subject) + "\n";
         return result;
     }

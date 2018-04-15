@@ -24,7 +24,7 @@
 
 namespace  test {
 
-void testBaseEquality(descriptor::BaseDescr* descr, descriptor::BaseDescr* copy)
+void testBaseEquality(core::BaseDescr* descr, core::BaseDescr* copy)
 {
     EXPECT_EQ(descr->id(), copy->id());
     EXPECT_EQ(descr->type(), copy->type());
@@ -35,7 +35,7 @@ void testBaseEquality(descriptor::BaseDescr* descr, descriptor::BaseDescr* copy)
     //EXPECT_EQ(descr->texture(), copy->texture());
 }
 
-//void testBaseViewEquality(ceti::descriptor::BaseView* descr, ceti::descriptor::BaseView* copy)
+//void testBaseViewEquality(ceti::BaseView* descr, ceti::BaseView* copy)
 //{
 //    EXPECT_EQ(descr->texture(), copy->texture());
 //    EXPECT_EQ(descr->mesh(), copy->mesh());

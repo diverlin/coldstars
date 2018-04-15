@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int RocketDescr::AMMO_MIN = 20;
 const int RocketDescr::AMMO_MAX = 40;
@@ -51,7 +51,7 @@ const float RocketDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 RocketDescr::RocketDescr()
 {
-    setType(descriptor::Type::ROCKET_EQUIPMENT);
+    setType(core::Type::ROCKET_EQUIPMENT);
     setObType(entity::Type::ROCKET_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::WEAPON);

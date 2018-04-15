@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 namespace comm {
 
 CreateContainerComDescr::CreateContainerComDescr(int_t descriptor, int_t object, int_t item)

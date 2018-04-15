@@ -21,11 +21,11 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace descriptor {
+namespace core {
 
 BulletDescr::BulletDescr()
 {
-    setType(descriptor::Type::BULLET);
+    setType(core::Type::BULLET);
     setObType(entity::Type::BULLET);
 }
 

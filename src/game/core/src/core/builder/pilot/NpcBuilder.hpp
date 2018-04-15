@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class NpcDescr;
 } // namespace descriptor
 
@@ -38,14 +38,14 @@ class NpcBuilder
 public:
     static core::control::Npc* gen();
     static core::control::Npc* gen(int_t descriptor_id, int_t id);
-    static core::control::Npc* gen(descriptor::NpcDescr*, int_t id = NONE);
+    static core::control::Npc* gen(core::NpcDescr*, int_t id = NONE);
 
 private:
     NpcBuilder() = delete;
     ~NpcBuilder() = delete;
 
-    static core::control::Npc* __createTemplate(descriptor::NpcDescr*, int_t id);
-    static void __createInternals(core::control::Npc*, descriptor::NpcDescr*);
+    static core::control::Npc* __createTemplate(core::NpcDescr*, int_t id);
+    static void __createInternals(core::control::Npc*, core::NpcDescr*);
 }; 
 
 } // namespace core

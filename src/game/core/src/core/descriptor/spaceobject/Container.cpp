@@ -19,7 +19,7 @@
 
 #include "Container.hpp"
 
-namespace descriptor {
+namespace core {
 
 ContainerDescr::ContainerDescr()
 {

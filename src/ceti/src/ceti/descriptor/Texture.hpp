@@ -27,13 +27,12 @@
 #include <string>
 
 namespace ceti {
-namespace descriptor {
 
-class Material : public Base
+class MaterialDescr : public BaseDescr
 {
 public:
-    Material() = default;
-    ~Material() = default;
+    MaterialDescr() = default;
+    ~MaterialDescr() = default;
 
     void setTexturePath(const std::string& path) { m_texturePath = path; }
     void setNormalmapPath(const std::string& path) { m_normalmapPath = path; }
@@ -68,7 +67,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<Base>(*this);
+        ar & boost::serialization::base_object<BaseDescr>(*this);
         ar & m_texturePath;
         ar & m_normalmapPath;
         ar & m_alpha;
@@ -80,5 +79,4 @@ private:
     }
 };
 
-} // namespace descriptor
 } // namespace ceti

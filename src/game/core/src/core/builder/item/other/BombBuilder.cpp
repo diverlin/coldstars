@@ -36,26 +36,26 @@ Bomb*
 BombBuilder::gen()
 {
     assert(false);
-    //    descriptor::BaseOLD* descriptor = core::shortcuts::descriptors()->getRand(descriptor::TypeOLD::BOMB);
+    //    BaseOLD* descriptor = core::shortcuts::descriptors()->getRand(TypeOLD::BOMB);
     //    return gen(descriptor);
 }
 
-Bomb*
-BombBuilder::gen(descriptor::BaseOLD* descriptor)
-{
-    Bomb* bomb = new Bomb;
-    assert(bomb);
+//Bomb*
+//BombBuilder::gen(/*BaseOLD* descriptor*/)
+//{
+//    Bomb* bomb = new Bomb;
+//    assert(bomb);
 
-    assert(false);
-//    manager::EntityManager::get().reg(bomb);
+//    assert(false);
+////    manager::EntityManager::get().reg(bomb);
 
-    __createInternals(bomb, descriptor);
+////    __createInternals(bomb, descriptor);
 
-    return bomb;
-} 
+////    return bomb;
+//}
 
 void
-BombBuilder::__createInternals(Bomb* bomb, descriptor::BaseOLD* descr)
+BombBuilder::__createInternals(Bomb* bomb, core::BaseOLD* descr)
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(mesh::type::PLANE);
     //    jeti::control::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB);

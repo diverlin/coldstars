@@ -24,7 +24,7 @@
 
 #include <vector>
 
-namespace descriptor {
+namespace core {
 
 struct GalaxyDescr : public BaseDescr
 {
@@ -37,7 +37,7 @@ public:
 
     ceti::InfoTable info() const {
         ceti::InfoTable result = BaseDescr::info();
-        result.add("descriptor::Galaxy");
+        result.add("Galaxy");
         result.add("sectors", ceti::to_string(sectors));
         return result;
     }

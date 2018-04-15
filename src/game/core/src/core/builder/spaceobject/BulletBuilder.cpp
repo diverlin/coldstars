@@ -32,9 +32,9 @@ namespace core {
 core::control::Bullet*
 BulletBuilder::gen(int damage)
 {
-    descriptor::BulletDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::CONTAINER)) {
-        descr = descriptor::genBullet();
+    core::BulletDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::CONTAINER)) {
+        descr = core::genBullet();
     } else {
         descr = core::shortcuts::descriptors()->randBullet();
     }
@@ -43,7 +43,7 @@ BulletBuilder::gen(int damage)
 }
 
 core::control::Bullet*
-BulletBuilder::gen(descriptor::BulletDescr* descriptor, int damage)
+BulletBuilder::gen(BulletDescr* descriptor, int damage)
 {
     core::control::Bullet* bullet = __genTemplate(descriptor);
     createInternals(bullet, descriptor, damage);
@@ -52,7 +52,7 @@ BulletBuilder::gen(descriptor::BulletDescr* descriptor, int damage)
 }
 
 core::control::Bullet*
-BulletBuilder::__genTemplate(descriptor::BulletDescr* descr)
+BulletBuilder::__genTemplate(core::BulletDescr* descr)
 {
     model::Bullet* model = new model::Bullet();
     assert(model);
@@ -64,7 +64,7 @@ BulletBuilder::__genTemplate(descriptor::BulletDescr* descr)
 }
 
 void
-BulletBuilder::createInternals(core::control::Bullet* bullet, descriptor::BulletDescr* descriptor, int damage)
+BulletBuilder::createInternals(core::control::Bullet* bullet, BulletDescr* descriptor, int damage)
 {
     bullet->model()->setArmor(descriptor->armor());
     bullet->model()->setDamage(damage);

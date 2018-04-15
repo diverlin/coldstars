@@ -18,7 +18,7 @@
 
 #include "Star.hpp"
 
-namespace descriptor {
+namespace core {
 
 const int StarDescr::SCALE_MIN = 200;
 const int StarDescr::SCALE_MAX = 300;

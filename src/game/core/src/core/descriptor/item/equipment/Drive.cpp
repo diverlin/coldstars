@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const float DriveDescr::OVERLOAD_RATE = 1.5f;
 const float DriveDescr::OVERLOAD_DETERIORATION_RATE = 4.0f;
@@ -50,7 +50,7 @@ const float DriveDescr::MODULES_NUM_WEIGHT = 0.2f;
 
 DriveDescr::DriveDescr()
 {
-    setType(descriptor::Type::DRIVE_EQUIPMENT);
+    setType(core::Type::DRIVE_EQUIPMENT);
     setObType(entity::Type::DRIVE_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::DRIVE);

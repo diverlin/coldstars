@@ -28,11 +28,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_droid) {
-    descriptor::DroidDescr* descr = descriptor::genDroid();
-    descriptor::DroidDescr* copy = new descriptor::DroidDescr(descr->data());
+TEST(core, clone_droid) {
+    core::DroidDescr* descr = core::genDroid();
+    core::DroidDescr* copy = new core::DroidDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::DROID_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::DROID_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::DROID_SLOT);

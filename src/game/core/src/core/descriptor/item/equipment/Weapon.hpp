@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 
 class WeaponDescr : public EquipmentDescr
 {
@@ -36,8 +36,8 @@ public:
     int damage() const { return m_damage; }
 
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Weapon");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Weapon");
         result.add("radius", m_radius);
         result.add("damage", m_damage);
         return result;

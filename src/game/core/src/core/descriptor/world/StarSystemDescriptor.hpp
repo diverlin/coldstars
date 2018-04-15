@@ -49,7 +49,7 @@ const int DISTANT_NEBULA_MAX = 8;
 
 //const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
-namespace descriptor {
+namespace core {
 
 struct StarSystemDescr : public BaseDescr
 {
@@ -64,7 +64,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
-        result.add("descriptor::StarSystem");
+        result.add("StarSystem");
         result.add("stars", m_stars);
         result.add("planets", m_planets);
         return result;

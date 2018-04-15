@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_rocket) {
-    descriptor::RocketDescr* descr = descriptor::genRocket();
-    descriptor::RocketDescr* copy = new descriptor::RocketDescr(descr->data());
+TEST(core, clone_rocket) {
+    core::RocketDescr* descr = core::genRocket();
+    core::RocketDescr* copy = new core::RocketDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::ROCKET_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::ROCKET_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::ROCKET_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);

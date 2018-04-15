@@ -22,7 +22,7 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 const int BakDescr::FUEL_MIN = 10;
 const int BakDescr::FUEL_MAX = 30;
@@ -41,7 +41,7 @@ const float BakDescr::MODULES_NUM_WEIGHT = 0.3f;
 
 BakDescr::BakDescr()
 {
-    setType(descriptor::Type::BAK_EQUIPMENT);
+    setType(core::Type::BAK_EQUIPMENT);
     setObType(entity::Type::BAK_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::BAK);

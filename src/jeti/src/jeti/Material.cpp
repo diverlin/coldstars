@@ -103,7 +103,7 @@ Material::Material(const std::string& path)
       texture_path(path)
 {}
 
-Material::Material(ceti::descriptor::Material* descriptor)
+Material::Material(ceti::MaterialDescr* descriptor)
 {
     m_descriptor = descriptor->id();
     texture_path = descriptor->texturePath();

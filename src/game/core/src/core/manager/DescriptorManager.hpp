@@ -40,7 +40,7 @@
 #include <map>
 #include <string>
 
-namespace descriptor {
+namespace core {
 
 class GalaxyDescr;
 class SectorDescr;
@@ -93,116 +93,116 @@ public:
     ~Descriptors() = default;
     Descriptors& operator=(const Descriptors&) = delete;
 
-    void add(descriptor::BaseDescr*);
-    void add(descriptor::MeshDescr*);
-    void add(descriptor::MaterialDescr*);
+    void add(core::BaseDescr*);
+    void add(core::MeshDescr*);
+    void add(core::MaterialDescr*);
 
-    descriptor::BaseDescr* get(int_t) const;
-    descriptor::BaseDescr* rand(descriptor::Type) const;
-    bool hasType(descriptor::Type) const;
+    core::BaseDescr* get(int_t) const;
+    core::BaseDescr* rand(core::Type) const;
+    bool hasType(core::Type) const;
 
-    descriptor::GalaxyDescr* randGalaxy() const;
-    descriptor::SectorDescr* randSector() const;
-    descriptor::StarSystemDescr* randStarSystem() const;
-    descriptor::HyperSpaceDescr* randHyperSpace() const;
+    core::GalaxyDescr* randGalaxy() const;
+    core::SectorDescr* randSector() const;
+    core::StarSystemDescr* randStarSystem() const;
+    core::HyperSpaceDescr* randHyperSpace() const;
 
-    descriptor::StarDescr* randStar() const;
-    descriptor::PlanetDescr* randPlanet() const;
-    descriptor::WormHoleDescr* randWormHole() const;
-    descriptor::AsteroidDescr* randAsteroid() const;
-    descriptor::ContainerDescr* randContainer() const;
-    descriptor::BulletDescr* randBullet() const;
-    descriptor::NpcDescr* randNpc() const;
-    descriptor::ShipDescr* randShip() const;
-    descriptor::SatelliteDescr* randSatellite() const;
-    descriptor::SpaceStationDescr* randSpaceStation() const;
-
-    // dock
-    descriptor::KosmoportDescr* randKosmoport() const;
-    descriptor::NatureLandDescr* randNatureLand() const;
-    descriptor::AngarDescr* randAngar() const;
-    descriptor::StoreDescr* randStore() const;
-    descriptor::ShopDescr* randShop() const;
-    descriptor::GovermentDescr* randGoverment() const;
-
-    descriptor::ScanerDescr* randScaner() const;
-    descriptor::DriveDescr* randDrive() const;
-    descriptor::BakDescr* randBak() const;
-    descriptor::DroidDescr* randDroid() const;
-    descriptor::GrappleDescr* randGrapple() const;
-    descriptor::LazerDescr* randLazer() const;
-    descriptor::ProtectorDescr* randProtector() const;
-    descriptor::RadarDescr* randRadar() const;
-    descriptor::RocketDescr* randRocket() const;
-
-    // other
-    descriptor::GoodsDescr* randGoods() const;
-
-    descriptor::TurrelDescr* randTurrel() const;
-
-    descriptor::GalaxyDescr* galaxy(int_t) const;
-    descriptor::SectorDescr* sector(int_t) const;
-    descriptor::StarSystemDescr* starSystem(int_t) const;
-    descriptor::HyperSpaceDescr* hyperSpace(int_t) const;
-
-    descriptor::StarDescr* star(int_t) const;
-    descriptor::PlanetDescr* planet(int_t) const;
-    descriptor::WormHoleDescr* wormHole(int_t) const;
-    descriptor::AsteroidDescr* asteroid(int_t) const;
-    descriptor::ContainerDescr* container(int_t) const;
-    descriptor::BulletDescr* bullet(int_t) const;
-    descriptor::NpcDescr* npc(int_t) const;
-    descriptor::ShipDescr* ship(int_t) const;
-    descriptor::SatelliteDescr* satellite(int_t) const;
-    descriptor::SpaceStationDescr* spaceStation(int_t) const;
+    core::StarDescr* randStar() const;
+    core::PlanetDescr* randPlanet() const;
+    core::WormHoleDescr* randWormHole() const;
+    core::AsteroidDescr* randAsteroid() const;
+    core::ContainerDescr* randContainer() const;
+    core::BulletDescr* randBullet() const;
+    core::NpcDescr* randNpc() const;
+    core::ShipDescr* randShip() const;
+    core::SatelliteDescr* randSatellite() const;
+    core::SpaceStationDescr* randSpaceStation() const;
 
     // dock
-    descriptor::KosmoportDescr* kosmoport(int_t) const;
-    descriptor::NatureLandDescr* natureLand(int_t) const;
-    descriptor::AngarDescr* angar(int_t) const;
-    descriptor::StoreDescr* store(int_t) const;
-    descriptor::ShopDescr* shop(int_t) const;
-    descriptor::GovermentDescr* goverment(int_t) const;
+    core::KosmoportDescr* randKosmoport() const;
+    core::NatureLandDescr* randNatureLand() const;
+    core::AngarDescr* randAngar() const;
+    core::StoreDescr* randStore() const;
+    core::ShopDescr* randShop() const;
+    core::GovermentDescr* randGoverment() const;
 
-    descriptor::ScanerDescr* scaner(int_t) const;
-    descriptor::DriveDescr* drive(int_t) const;
-    descriptor::BakDescr* bak(int_t) const;
-    descriptor::DroidDescr* droid(int_t) const;
-    descriptor::GrappleDescr* grapple(int_t) const;
-    descriptor::LazerDescr* lazer(int_t) const;
-    descriptor::ProtectorDescr* protector(int_t) const;
-    descriptor::RadarDescr* radar(int_t) const;
-    descriptor::RocketDescr* rocket(int_t) const;
+    core::ScanerDescr* randScaner() const;
+    core::DriveDescr* randDrive() const;
+    core::BakDescr* randBak() const;
+    core::DroidDescr* randDroid() const;
+    core::GrappleDescr* randGrapple() const;
+    core::LazerDescr* randLazer() const;
+    core::ProtectorDescr* randProtector() const;
+    core::RadarDescr* randRadar() const;
+    core::RocketDescr* randRocket() const;
+
     // other
-    descriptor::GoodsDescr* goods(int_t) const;
+    core::GoodsDescr* randGoods() const;
 
-    descriptor::MeshDescr* mesh(int_t) const;
-    descriptor::MaterialDescr* material(int_t) const;
+    core::TurrelDescr* randTurrel() const;
 
-    descriptor::MeshDescr* randMesh(mesh::Type) const;
-    descriptor::MaterialDescr* randMaterial(texture::Type) const;
+    core::GalaxyDescr* galaxy(int_t) const;
+    core::SectorDescr* sector(int_t) const;
+    core::StarSystemDescr* starSystem(int_t) const;
+    core::HyperSpaceDescr* hyperSpace(int_t) const;
 
-    Collector<descriptor::MeshDescr>* meshes() const { return m_meshes; }
-    Collector<descriptor::MaterialDescr>* materials() const { return m_materials; }
+    core::StarDescr* star(int_t) const;
+    core::PlanetDescr* planet(int_t) const;
+    core::WormHoleDescr* wormHole(int_t) const;
+    core::AsteroidDescr* asteroid(int_t) const;
+    core::ContainerDescr* container(int_t) const;
+    core::BulletDescr* bullet(int_t) const;
+    core::NpcDescr* npc(int_t) const;
+    core::ShipDescr* ship(int_t) const;
+    core::SatelliteDescr* satellite(int_t) const;
+    core::SpaceStationDescr* spaceStation(int_t) const;
+
+    // dock
+    core::KosmoportDescr* kosmoport(int_t) const;
+    core::NatureLandDescr* natureLand(int_t) const;
+    core::AngarDescr* angar(int_t) const;
+    core::StoreDescr* store(int_t) const;
+    core::ShopDescr* shop(int_t) const;
+    core::GovermentDescr* goverment(int_t) const;
+
+    core::ScanerDescr* scaner(int_t) const;
+    core::DriveDescr* drive(int_t) const;
+    core::BakDescr* bak(int_t) const;
+    core::DroidDescr* droid(int_t) const;
+    core::GrappleDescr* grapple(int_t) const;
+    core::LazerDescr* lazer(int_t) const;
+    core::ProtectorDescr* protector(int_t) const;
+    core::RadarDescr* radar(int_t) const;
+    core::RocketDescr* rocket(int_t) const;
+    // other
+    core::GoodsDescr* goods(int_t) const;
+
+    core::MeshDescr* mesh(int_t) const;
+    core::MaterialDescr* material(int_t) const;
+
+    core::MeshDescr* randMesh(mesh::Type) const;
+    core::MaterialDescr* randMaterial(texture::Type) const;
+
+    Collector<core::MeshDescr>* meshes() const { return m_meshes; }
+    Collector<core::MaterialDescr>* materials() const { return m_materials; }
 
     void generate();
     void clear();
 
 private:
-    Collector<descriptor::MeshDescr>* m_meshes = nullptr;
-    Collector<descriptor::MaterialDescr>* m_materials = nullptr;
+    Collector<core::MeshDescr>* m_meshes = nullptr;
+    Collector<core::MaterialDescr>* m_materials = nullptr;
 
-    std::map<int_t, descriptor::BaseDescr*> m_descriptors;
-    std::map<descriptor::Type, std::vector<descriptor::BaseDescr*>> m_descriptorsTypes;
+    std::map<int_t, core::BaseDescr*> m_descriptors;
+    std::map<core::Type, std::vector<core::BaseDescr*>> m_descriptorsTypes;
 
     void __clear();
     void __save();
     void __load();
 
-    void __resolveId(descriptor::BaseDescr*);
-    void __resolveId(ceti::descriptor::Base*);
+    void __resolveId(core::BaseDescr*);
+    void __resolveId(ceti::BaseDescr*);
 
-    ceti::pack<int_t> __ids(descriptor::Type) const;
+    ceti::pack<int_t> __ids(core::Type) const;
 
     IdGenerator m_idGenerator;
 }; 

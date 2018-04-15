@@ -28,11 +28,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_lazer) {
-    descriptor::LazerDescr* descr = descriptor::genLazer();
-    descriptor::LazerDescr* copy = new descriptor::LazerDescr(descr->data());
+TEST(core, clone_lazer) {
+    core::LazerDescr* descr = core::genLazer();
+    core::LazerDescr* copy = new core::LazerDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::LAZER_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::LAZER_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::WEAPON_SLOT);

@@ -21,7 +21,7 @@
 
 #include "Land.hpp"
 
-namespace descriptor {
+namespace core {
 
 class NatureLandDescr : public LandDescr
 {

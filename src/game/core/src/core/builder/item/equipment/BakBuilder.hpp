@@ -25,7 +25,7 @@
 
 #include <string>
 
-namespace descriptor {
+namespace core {
 class BakDescr;
 } // namespace descriptor
 
@@ -40,7 +40,7 @@ namespace core {
 class BakItemBuilder : public EquipmentBuilder
 {
 public:
-    static core::control::Bak* gen(descriptor::BakDescr*);
+    static core::control::Bak* gen(core::BakDescr*);
     static core::control::Bak* gen(int_t, int_t ob_id = NONE);
     static core::control::Bak* gen();
 
@@ -48,8 +48,8 @@ private:
     BakItemBuilder() = delete;
     ~BakItemBuilder() = delete;
 
-    static core::control::Bak* __genTemplate(descriptor::BakDescr*, int_t ob_id = NONE);
-    static void __createInternals(core::control::Bak*, descriptor::BakDescr*);
+    static core::control::Bak* __genTemplate(core::BakDescr*, int_t ob_id = NONE);
+    static void __createInternals(core::control::Bak*, core::BakDescr*);
 }; 
 
 } // namespace core

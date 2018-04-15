@@ -30,9 +30,9 @@ namespace core {
 core::control::Asteroid*
 AsteroidBuilder::gen()
 {
-    descriptor::AsteroidDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::ASTEROID)) {
-        descr = descriptor::genAsteroid();
+    core::AsteroidDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::ASTEROID)) {
+        descr = core::genAsteroid();
     } else {
         descr = core::shortcuts::descriptors()->randAsteroid();
     }
@@ -43,12 +43,12 @@ AsteroidBuilder::gen()
 core::control::Asteroid*
 AsteroidBuilder::gen(int_t descriptor_id, int_t id)
 {
-    descriptor::AsteroidDescr* descriptor = core::shortcuts::descriptors()->asteroid(descriptor_id);
+    AsteroidDescr* descriptor = core::shortcuts::descriptors()->asteroid(descriptor_id);
     return gen(descriptor, id);
 }
 
 core::control::Asteroid*
-AsteroidBuilder::gen(descriptor::AsteroidDescr* descr, int_t id)
+AsteroidBuilder::gen(core::AsteroidDescr* descr, int_t id)
 {
     core::control::Asteroid* asteroid = __genTemplate(descr, id);
 
@@ -91,7 +91,7 @@ AsteroidBuilder::gen(descriptor::AsteroidDescr* descr, int_t id)
 } 
 
 core::control::Asteroid*
-AsteroidBuilder::__genTemplate(descriptor::AsteroidDescr* descr, int_t id)
+AsteroidBuilder::__genTemplate(core::AsteroidDescr* descr, int_t id)
 {
     model::Asteroid* model = new model::Asteroid(descr->id(), id);
     assert(model);

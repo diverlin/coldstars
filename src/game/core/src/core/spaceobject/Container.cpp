@@ -47,7 +47,7 @@ namespace {
 
 bool itemInsertHelper(ItemSlot* slot, int_t id) {
     control::Base* model_base = core::shortcuts::entities()->base(id);
-    descriptor::BaseDescr* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
+    core::BaseDescr* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
     switch(descriptor_base->obGroup()) {
     case entity::Type::SCANER_EQUIPMENT: {
@@ -90,7 +90,7 @@ bool itemInsertHelper(ItemSlot* slot, int_t id) {
 }
 } // namespace
 
-Container::Container(descriptor::ContainerDescr* descr, model::Container* model)
+Container::Container(ContainerDescr* descr, model::Container* model)
     :
       SpaceObject(descr, model)
     , m_descriptor_container(descr)

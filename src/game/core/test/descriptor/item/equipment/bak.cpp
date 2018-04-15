@@ -27,11 +27,11 @@
 
 namespace test {
 
-TEST(descriptor, clone_bak) {
-    descriptor::BakDescr* descr = descriptor::genBak();
-    descriptor::BakDescr* copy = new descriptor::BakDescr(descr->data());
+TEST(core, clone_bak) {
+    core::BakDescr* descr = core::genBak();
+    core::BakDescr* copy = new core::BakDescr(descr->data());
 
-    EXPECT_EQ(descr->type(), descriptor::Type::BAK_EQUIPMENT);
+    EXPECT_EQ(descr->type(), core::Type::BAK_EQUIPMENT);
     EXPECT_EQ(descr->obType(), entity::Type::BAK_EQUIPMENT);
     EXPECT_EQ(descr->obGroup(), entity::Type::EQUIPMENT);
     //EXPECT_EQ(descr->slotType(), entity::Type::BAK_SLOT);

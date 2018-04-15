@@ -22,7 +22,7 @@
 #include "Equipment.hpp"
 
 
-namespace descriptor {
+namespace core {
 
 class ScanerDescr : public EquipmentDescr
 {
@@ -54,8 +54,8 @@ public:
     int scan() const { return m_scan; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Scaner");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Scaner");
         result.add("scan", m_scan);
         return result;
     }

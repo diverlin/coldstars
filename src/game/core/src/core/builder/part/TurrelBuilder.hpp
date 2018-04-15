@@ -20,7 +20,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class TurrelDescr;
 } // namespace descriptor
 
@@ -36,10 +36,10 @@ class TurrelBuilder
 {
 public:
     static core::control::Turrel* gen();
-    static core::control::Turrel* gen(descriptor::TurrelDescr*);
+    static core::control::Turrel* gen(core::TurrelDescr*);
 
 private:
-    static core::control::Turrel* __genTemplate(descriptor::TurrelDescr*);
+    static core::control::Turrel* __genTemplate(core::TurrelDescr*);
 }; 
 
 } // namespace core

@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class BulletDescr;
 } // namespace descriptor
 
@@ -39,14 +39,14 @@ class BulletBuilder
 {
 public:
     static core::control::Bullet* gen(int damage);
-    static core::control::Bullet* gen(descriptor::BulletDescr*, int damage);
+    static core::control::Bullet* gen(core::BulletDescr*, int damage);
 
 private:
     BulletBuilder() = delete;
     ~BulletBuilder() = delete;
 
-    static void createInternals(core::control::Bullet*, descriptor::BulletDescr*, int damage);
-    static core::control::Bullet* __genTemplate(descriptor::BulletDescr*);
+    static void createInternals(core::control::Bullet*, core::BulletDescr*, int damage);
+    static core::control::Bullet* __genTemplate(core::BulletDescr*);
 }; 
 
 } // namespace core

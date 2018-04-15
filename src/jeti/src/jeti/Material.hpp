@@ -30,9 +30,7 @@
 #include <vector>
 
 namespace ceti {
-namespace descriptor {
-class Material;
-} // descriptor
+class MaterialDescr;
 } // ceti
 
 namespace jeti {
@@ -43,7 +41,7 @@ class Material
 {
 public:
     Material(const std::string&);
-    Material(ceti::descriptor::Material*);
+    Material(ceti::MaterialDescr*);
     Material() = default;
 
     int_t descriptor() const { return m_descriptor; }

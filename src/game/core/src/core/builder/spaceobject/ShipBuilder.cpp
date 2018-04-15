@@ -36,7 +36,7 @@
 namespace core {
 
 core::control::Ship*
-ShipBuilder::gen(descriptor::ShipDescr* descr)
+ShipBuilder::gen(core::ShipDescr* descr)
 {
     core::control::Ship* ship = __genTemplate(descr);
     __createInternals(ship, descr);
@@ -46,7 +46,7 @@ ShipBuilder::gen(descriptor::ShipDescr* descr)
 core::control::Ship*
 ShipBuilder::gen(int_t descriptor_id, int_t ob_id)
 {
-    descriptor::ShipDescr* descr = core::shortcuts::descriptors()->ship(descriptor_id);
+    core::ShipDescr* descr = core::shortcuts::descriptors()->ship(descriptor_id);
     core::control::Ship* ship = __genTemplate(descr, ob_id);
     __createInternals(ship, descr);
     return ship;
@@ -55,9 +55,9 @@ ShipBuilder::gen(int_t descriptor_id, int_t ob_id)
 core::control::Ship*
 ShipBuilder::gen()
 {
-    descriptor::ShipDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SHIP)) {
-        descr = descriptor::genShip();
+    core::ShipDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::SHIP)) {
+        descr = core::genShip();
     } else {
         descr = core::shortcuts::descriptors()->randShip();
     }
@@ -66,7 +66,7 @@ ShipBuilder::gen()
 }
 
 core::control::Ship*
-ShipBuilder::__genTemplate(descriptor::ShipDescr* descr, int_t ob_id)
+ShipBuilder::__genTemplate(core::ShipDescr* descr, int_t ob_id)
 {
     model::Ship* model = new model::Ship(descr->id(), ob_id);
     assert(model);
@@ -79,10 +79,10 @@ ShipBuilder::__genTemplate(descriptor::ShipDescr* descr, int_t ob_id)
 
 
 void
-ShipBuilder::__createInternals(core::control::Ship* ship, descriptor::ShipDescr* descr)
+ShipBuilder::__createInternals(core::control::Ship* ship, core::ShipDescr* descr)
 {
 //    assert(false);
-    //assert(descr->type() == (int)descriptor::Type::VEHICLE);
+    //assert(descr->type() == (int)Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
     //jeti::control::TextureOb* texOb = nullptr;
     glm::vec3 size;

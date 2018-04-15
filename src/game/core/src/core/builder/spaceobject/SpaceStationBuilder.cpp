@@ -34,7 +34,7 @@
 namespace core {
 
 core::control::SpaceStation*
-SpaceStationBuilder::gen(descriptor::SpaceStationDescr* descr)
+SpaceStationBuilder::gen(core::SpaceStationDescr* descr)
 {
     core::control::SpaceStation* spacestation = __genTemplate(descr);
     __createInternals(spacestation, descr);
@@ -44,9 +44,9 @@ SpaceStationBuilder::gen(descriptor::SpaceStationDescr* descr)
 core::control::SpaceStation*
 SpaceStationBuilder::gen()
 {
-    descriptor::SpaceStationDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SPACESTATION)) {
-        descr = descriptor::genSpaceStation();
+    core::SpaceStationDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::SPACESTATION)) {
+        descr = core::genSpaceStation();
     } else {
         descr = core::shortcuts::descriptors()->randSpaceStation();
     }
@@ -55,7 +55,7 @@ SpaceStationBuilder::gen()
 }
 
 void
-SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation, descriptor::SpaceStationDescr* descr)
+SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation, core::SpaceStationDescr* descr)
 {
     spacestation->setSize(descr->size());
 //    //jeti::Mesh* mesh = nullptr;
@@ -82,7 +82,7 @@ SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation
 //    //protection_rate = 5;
 //    //}
     
-//    descriptor::Vehicle data_korpus;
+//    Vehicle data_korpus;
 //    data_korpus.setSpace(2500 + meti::getRandInt(1000));
 //    data_korpus.setArmor(data_korpus.space());
 //    data_korpus.setProtection(protection_rate);
@@ -144,7 +144,7 @@ SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation
 }
 
 core::control::SpaceStation*
-SpaceStationBuilder::__genTemplate(descriptor::SpaceStationDescr* descr)
+SpaceStationBuilder::__genTemplate(core::SpaceStationDescr* descr)
 {
     model::SpaceStation* model = new model::SpaceStation(descr->id());
     assert(model);

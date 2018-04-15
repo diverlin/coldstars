@@ -21,7 +21,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-namespace descriptor {
+namespace core {
 class AngarDescr;
 } // namespace descriptor
 
@@ -42,14 +42,14 @@ class AngarBuilder
 {
 public:
     static core::control::Angar* gen();
-    static core::control::Angar* gen(descriptor::AngarDescr*);
+    static core::control::Angar* gen(core::AngarDescr*);
 
 private:
     AngarBuilder() = delete;
     ~AngarBuilder() = delete;
 
     static void __createInternals(core::control::Angar*);
-    static core::control::Angar* __createTemplate(descriptor::AngarDescr*);
+    static core::control::Angar* __createTemplate(core::AngarDescr*);
 }; 
 
 } // namespace core

@@ -28,7 +28,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-namespace descriptor {
+namespace core {
 
 class BaseDescr
 {
@@ -37,7 +37,7 @@ public:
     virtual ~BaseDescr() = default;
 
     void setId(int_t id) { m_id = id; }
-    void setType(const descriptor::Type& type)   { m_type = type; }
+    void setType(const core::Type& type)   { m_type = type; }
     void setObType(const entity::Type& obType)   { m_obType = obType; }
     void setObGroup(const entity::Type& obGroup) { m_obGroup = obGroup; }
     void setObClass(const entity::Type& obClass) { m_obClass = obClass; }
@@ -46,7 +46,7 @@ public:
     void setMaterial(int_t texture) { m_texture = texture; }
 
     int_t id() const { return m_id; }
-    descriptor::Type type() const { return m_type; }
+    core::Type type() const { return m_type; }
     const entity::Type& obType() const { return m_obType; }
     const entity::Type& obGroup() const { return m_obGroup; }
     const entity::Type& obClass() const { return m_obClass; }
@@ -56,9 +56,9 @@ public:
 
     virtual ceti::InfoTable info() const {
         ceti::InfoTable result;
-        result.add("descriptor::Base");
+        result.add("Base");
         result.add("id", m_id);
-        result.add("type", descriptor::to_string(m_type));
+        result.add("type", core::to_string(m_type));
         result.add("obType", entity::to_string(m_obType));
         result.add("obGroup", entity::to_string(m_obGroup));
         result.add("obClass", entity::to_string(m_obClass));
@@ -69,11 +69,11 @@ public:
     }
 
 protected:
-    void setObType(descriptor::Type type) { m_type = type; }
+    void setObType(core::Type type) { m_type = type; }
 
 private:
     int_t m_id = NONE;
-    descriptor::Type m_type = descriptor::Type::NONE;
+    core::Type m_type = core::Type::NONE;
     entity::Type m_obType = entity::Type::NONE;
     entity::Type m_obGroup = entity::Type::NONE;
     entity::Type m_obClass = entity::Type::NONE;

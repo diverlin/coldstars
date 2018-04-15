@@ -46,7 +46,7 @@
 #include <ceti/IdGenerator.hpp>
 
 
-namespace descriptor {
+namespace core {
 
 namespace {
 
@@ -57,9 +57,9 @@ glm::vec3 randPlanetoidDirection() {
 } // namespace
 
 /* world */
-descriptor::GalaxyDescr*
+core::GalaxyDescr*
 genGalaxy(const std::vector<int_t>& sectors) {
-    descriptor::GalaxyDescr* descr = new descriptor::GalaxyDescr;
+    core::GalaxyDescr* descr = new core::GalaxyDescr;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->sectors.push_back(meti::rand::get_element_or_die(sectors));
@@ -68,9 +68,9 @@ genGalaxy(const std::vector<int_t>& sectors) {
     return descr;
 }
 
-descriptor::SectorDescr*
+core::SectorDescr*
 genSector(const std::vector<int_t>& starsystems) {
-    descriptor::SectorDescr* descr = new descriptor::SectorDescr;
+    core::SectorDescr* descr = new core::SectorDescr;
     int num = meti::rand::gen_int(1,3);
     for(int i=0; i<num; ++i) {
         descr->starsystems.push_back(meti::rand::get_element_or_die(starsystems));
@@ -79,10 +79,10 @@ genSector(const std::vector<int_t>& starsystems) {
     return descr;
 }
 
-descriptor::StarSystemDescr*
+core::StarSystemDescr*
 genStarSystem(race::Type race)
 {
-    descriptor::StarSystemDescr* descr = new descriptor::StarSystemDescr;
+    core::StarSystemDescr* descr = new core::StarSystemDescr;
     if (race == race::Type::NONE) {
         race = race::Type::R0;
     }
@@ -93,10 +93,10 @@ genStarSystem(race::Type race)
     return descr;
 }
 
-descriptor::HyperSpaceDescr*
+core::HyperSpaceDescr*
 genHyperSpace()
 {
-    descriptor::HyperSpaceDescr* descr = new descriptor::HyperSpaceDescr;
+    core::HyperSpaceDescr* descr = new core::HyperSpaceDescr;
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
@@ -106,7 +106,7 @@ genHyperSpace()
 namespace {
 
 int_t meshDescriptorIdFromType(const mesh::Type& type) {
-    descriptor::MeshDescr* descr = core::shortcuts::descriptors()->randMesh(type);
+    core::MeshDescr* descr = core::shortcuts::descriptors()->randMesh(type);
     if (type == mesh::Type::PLANE) {
         descr->setIsPlane();
     }
@@ -115,31 +115,31 @@ int_t meshDescriptorIdFromType(const mesh::Type& type) {
 }
 
 int_t textureDescriptorIdFromType(const texture::Type& type) {
-    descriptor::MaterialDescr* descr = core::shortcuts::descriptors()->randMaterial(type);
+    core::MaterialDescr* descr = core::shortcuts::descriptors()->randMaterial(type);
     assert(descr->id() != NONE);
     return descr->id();
 }
 
 } // namespace
 
-descriptor::StarDescr*
+core::StarDescr*
 genStar()
 {
-    descriptor::StarDescr* descr = new descriptor::StarDescr;
+    core::StarDescr* descr = new core::StarDescr;
     descr->setArmor(10000000);
 
-    int orbit_radius = meti::rand::gen_int(descriptor::StarDescr::DISTANCE_MIN,
-                                        descriptor::StarDescr::DISTANCE_MAX);
+    int orbit_radius = meti::rand::gen_int(core::StarDescr::DISTANCE_MIN,
+                                        core::StarDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::StarDescr::SPEED_MIN,
-                                   descriptor::StarDescr::SPEED_MAX) / float(orbit_radius);
+    float speed = meti::rand::gen_int(core::StarDescr::SPEED_MIN,
+                                   core::StarDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::StarDescr::SCALE_MIN,
-                                  descriptor::StarDescr::SCALE_MAX);
+    float size = meti::rand::gen_int(core::StarDescr::SCALE_MIN,
+                                  core::StarDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
 
@@ -154,24 +154,24 @@ genStar()
     return descr;
 }
 
-descriptor::PlanetDescr*
+core::PlanetDescr*
 genPlanet()
 {
-    descriptor::PlanetDescr* descr = new descriptor::PlanetDescr;
+    core::PlanetDescr* descr = new core::PlanetDescr;
     descr->setArmor(100000);
 
-    int orbit_radius = meti::rand::gen_int(descriptor::PlanetDescr::DISTANCE_MIN,
-                                        descriptor::PlanetDescr::DISTANCE_MAX);
+    int orbit_radius = meti::rand::gen_int(core::PlanetDescr::DISTANCE_MIN,
+                                        core::PlanetDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::PlanetDescr::SPEED_MIN,
-                                   descriptor::PlanetDescr::SPEED_MAX) / float(orbit_radius);
+    float speed = meti::rand::gen_int(core::PlanetDescr::SPEED_MIN,
+                                   core::PlanetDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::PlanetDescr::SCALE_MIN,
-                                     descriptor::PlanetDescr::SCALE_MAX);
+    float size = meti::rand::gen_int(core::PlanetDescr::SCALE_MIN,
+                                     core::PlanetDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::PLANET));
@@ -186,7 +186,7 @@ genPlanet()
     return descr;
 
     //model::Planet*
-    //Planet::gen(descriptor::BaseOLD* descr)
+    //Planet::gen(BaseOLD* descr)
     //{
     //    model::Planet* model = __genTemplate();
 
@@ -238,27 +238,27 @@ genPlanet()
 
 }
 
-descriptor::AsteroidDescr*
+core::AsteroidDescr*
 genAsteroid()
 {
-    descriptor::AsteroidDescr* descr = new descriptor::AsteroidDescr;
-    descr->setArmor(meti::rand::gen_int(descriptor::AsteroidDescr::ARMOR_MIN,
-                                    descriptor::AsteroidDescr::ARMOR_MAX));
+    core::AsteroidDescr* descr = new core::AsteroidDescr;
+    descr->setArmor(meti::rand::gen_int(core::AsteroidDescr::ARMOR_MIN,
+                                    core::AsteroidDescr::ARMOR_MAX));
 
-    int orbit_radiusA = meti::rand::gen_int(descriptor::AsteroidDescr::DISTANCE_MIN,
-                                        descriptor::AsteroidDescr::DISTANCE_MAX);
-    int orbit_radiusB = meti::rand::gen_int(descriptor::AsteroidDescr::DISTANCE_MIN,
-                                        descriptor::AsteroidDescr::DISTANCE_MAX);
+    int orbit_radiusA = meti::rand::gen_int(core::AsteroidDescr::DISTANCE_MIN,
+                                        core::AsteroidDescr::DISTANCE_MAX);
+    int orbit_radiusB = meti::rand::gen_int(core::AsteroidDescr::DISTANCE_MIN,
+                                        core::AsteroidDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radiusA);
     descr->setRadiusB(orbit_radiusB);
     descr->setOrbitPhi(0);
-    float speed = meti::rand::gen_int(descriptor::AsteroidDescr::SPEED_MIN,
-                                   descriptor::AsteroidDescr::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
+    float speed = meti::rand::gen_int(core::AsteroidDescr::SPEED_MIN,
+                                   core::AsteroidDescr::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
-    float size = meti::rand::gen_int(descriptor::AsteroidDescr::SCALE_MIN,
-                                  descriptor::AsteroidDescr::SCALE_MAX);
+    float size = meti::rand::gen_int(core::AsteroidDescr::SCALE_MIN,
+                                  core::AsteroidDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::ASTEROID));
@@ -272,19 +272,19 @@ genAsteroid()
     return descr;
 }
 
-descriptor::WormHoleDescr*
+core::WormHoleDescr*
 genWormHole()
 {
-    descriptor::WormHoleDescr* descr = new descriptor::WormHoleDescr;
+    core::WormHoleDescr* descr = new core::WormHoleDescr;
 
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
 
-descriptor::ContainerDescr*
+core::ContainerDescr*
 genContainer()
 {
-    descriptor::ContainerDescr* descr = new descriptor::ContainerDescr;
+    core::ContainerDescr* descr = new core::ContainerDescr;
 
     descr->setSize(meti::vec3(1.0f));
     descr->setDirection(randPlanetoidDirection());
@@ -298,10 +298,10 @@ genContainer()
     return descr;
 }
 
-descriptor::BulletDescr*
+core::BulletDescr*
 genBullet()
 {
-    descriptor::BulletDescr* descriptor = new descriptor::BulletDescr;
+    BulletDescr* descriptor = new BulletDescr;
 
     texture::Type material_type;
     if (meti::rand::gen_bool()) {
@@ -321,16 +321,16 @@ genBullet()
     return descriptor;
 }
 
-descriptor::NpcDescr*
+core::NpcDescr*
 genNpc()
 {
-    descriptor::NpcDescr* descr = new descriptor::NpcDescr;
+    core::NpcDescr* descr = new core::NpcDescr;
 
     core::shortcuts::descriptors()->add(descr);
     return descr;
 }
 
-descriptor::ShipDescr*
+core::ShipDescr*
 genShip()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -366,7 +366,7 @@ genShip()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::ShipDescr* descr = new descriptor::ShipDescr;
+    core::ShipDescr* descr = new core::ShipDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         float length = meti::rand::gen_float(-0.8f, 0.8f);
@@ -422,7 +422,7 @@ genShip()
 }
 
 
-descriptor::SpaceStationDescr*
+core::SpaceStationDescr*
 genSpaceStation()
 {
     race::Type race_id =  race::Type::R0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -458,7 +458,7 @@ genSpaceStation()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::SpaceStationDescr* descr = new descriptor::SpaceStationDescr;
+    core::SpaceStationDescr* descr = new core::SpaceStationDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
@@ -508,7 +508,7 @@ genSpaceStation()
     return descr;
 }
 
-descriptor::SatelliteDescr*
+core::SatelliteDescr*
 genSatellite()
 {
     race::Type race_id =  (race::Type)0;//meti::getRand(core::global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -544,7 +544,7 @@ genSatellite()
     int slot_artefact_num = meti::rand::gen_int(1, 4);
     int slot_cargo_num    = meti::rand::gen_int(5, 10) * otsec_rate;
 
-    descriptor::SatelliteDescr* descr = new descriptor::SatelliteDescr;
+    core::SatelliteDescr* descr = new core::SatelliteDescr;
     descr->setRace(race_id);
     for(int i=0; i<slot_weapon_num; ++i) {
         int length = meti::rand::gen_int(100);
@@ -717,16 +717,16 @@ genBak(int race, int tech_level)
     BakDescr* descr = new BakDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::BAK_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Bak
+    // Bak
     descr->setFuel(fuel);
 
     core::shortcuts::descriptors()->add(descr);
@@ -773,16 +773,16 @@ genDrive(int race, int tech_level)
     DriveDescr* descr = new DriveDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::DRIVE_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Drive
+    // Drive
     descr->setSpeed(speed);
     descr->setHyper(hyper);
 
@@ -817,8 +817,8 @@ genDroid(int race, int tech_level)
         float effectiveness_rate = DroidDescr::REPAIR_WEIGHT * repair_rate +
                 DroidDescr::MODULES_NUM_WEIGHT * modules_num_rate;
 
-        float mass_rate          = float(mass) / descriptor::DroidDescr::MASS_MIN;
-        float condition_rate     = float(condition) / descriptor::DroidDescr::CONDITION_MAX;
+        float mass_rate          = float(mass) / core::DroidDescr::MASS_MIN;
+        float condition_rate     = float(condition) / core::DroidDescr::CONDITION_MAX;
 
         return int(3 * effectiveness_rate - mass_rate - condition_rate) * 100;
     };
@@ -827,16 +827,16 @@ genDroid(int race, int tech_level)
     DroidDescr* descr = new DroidDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::DROID_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Droid
+    // Droid
     descr->setRepair(repair);
 
     core::shortcuts::descriptors()->add(descr);
@@ -886,16 +886,16 @@ genGrapple(int race, int tech_level)
     GrappleDescr* descr = new GrappleDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::GRAPPLE_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Grapple
+    // Grapple
     descr->setStrength(strength);
     descr->setRadius(radius);
     descr->setSpeed(speed);
@@ -942,16 +942,16 @@ genLazer(int race, int tech_level)
     LazerDescr* descr = new LazerDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::LAZER_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Lazer
+    // Lazer
     descr->setDamage(damage);
     descr->setRadius(radius);
 
@@ -994,16 +994,16 @@ genProtector(int race, int tech_level)
     ProtectorDescr* descr = new ProtectorDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::PROTECTOR_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Protector
+    // Protector
     descr->setProtection(protection);
 
     core::shortcuts::descriptors()->add(descr);
@@ -1044,16 +1044,16 @@ genRadar(int race, int tech_level)
     RadarDescr* descr = new RadarDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::RADAR_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Radar
+    // Radar
     descr->setRadius(radius);
 
     core::shortcuts::descriptors()->add(descr);
@@ -1101,20 +1101,20 @@ genRocket(int race, int tech_level)
     RocketDescr* descr = new RocketDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::ROCKET_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Weapon
+    // Weapon
     descr->setDamage(damage);
     descr->setRadius(radius);
 
-    // descriptor::Rocket
+    // Rocket
     descr->setBulletDescriptor(core::shortcuts::descriptors()->randBullet()->id());
     descr->setAmmo(ammo);
 
@@ -1163,16 +1163,16 @@ genScaner(int race, int tech_level)
     ScanerDescr* descr = new ScanerDescr;
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::SCANER_EQUIPMENT));
 
-    // descriptor::Item
+    // Item
     descr->setMass(mass);
     descr->setCondition(condition);
     descr->setDeterioration(deterioration);
     descr->setPrice(price);
 
-    // descriptor::Equipment
+    // Equipment
     descr->setModules(modules);
 
-    // descriptor::Radar
+    // Radar
     descr->setScan(scan);
 
     core::shortcuts::descriptors()->add(descr);
@@ -1213,10 +1213,10 @@ genGoods()
     return descriptor;
 }
 
-descriptor::TurrelDescr*
+core::TurrelDescr*
 genTurrel()
 {
-    descriptor::TurrelDescr* descr = new descriptor::TurrelDescr;
+    core::TurrelDescr* descr = new core::TurrelDescr;
 
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::TURREL));
     descr->setMesh(meshDescriptorIdFromType(mesh::Type::PLANE));

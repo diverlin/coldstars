@@ -23,7 +23,7 @@
 #include <ceti/serialization/macro.hpp>
 
 
-namespace descriptor {
+namespace core {
 
 const int ScanerDescr::SCAN_MIN = 2;
 const int ScanerDescr::SCAN_MAX = 40;
@@ -43,7 +43,7 @@ const float ScanerDescr::MODULES_NUM_WEIGHT = 0.3f;
 
 ScanerDescr::ScanerDescr()
 {
-    setType(descriptor::Type::SCANER_EQUIPMENT);
+    setType(core::Type::SCANER_EQUIPMENT);
     setObType(entity::Type::SCANER_EQUIPMENT);
     setObGroup(entity::Type::EQUIPMENT);
     setSlotType(core::SlotType::SCANER);

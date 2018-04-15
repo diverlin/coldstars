@@ -21,7 +21,7 @@
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 class ScanerDescr;
 } // namespace descriptor
 
@@ -35,7 +35,7 @@ namespace control {
 class Scaner : public Equipment
 {
 public:
-    Scaner(descriptor::ScanerDescr*, model::Scaner*);
+    Scaner(ScanerDescr*, model::Scaner*);
     virtual ~Scaner() = default;
 
 private:
@@ -43,11 +43,11 @@ private:
 
 public:
     model::Scaner* model() const { return m_model_scaner; }
-    descriptor::ScanerDescr* descriptor() const { return m_descriptor_scaner; }
+    ScanerDescr* descriptor() const { return m_descriptor_scaner; }
 
 private:
     model::Scaner* m_model_scaner = nullptr;
-    descriptor::ScanerDescr* m_descriptor_scaner = nullptr;
+    ScanerDescr* m_descriptor_scaner = nullptr;
 
     int m_scan_add = 0;
 

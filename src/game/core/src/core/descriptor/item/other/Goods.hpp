@@ -21,7 +21,7 @@
 #include <core/descriptor/item/Item.hpp>
 
 
-namespace descriptor {
+namespace core {
 
 class GoodsDescr : public ItemDescr
 {
@@ -33,7 +33,7 @@ public:
 
     ceti::InfoTable info() const {
         ceti::InfoTable result = info();
-        result.add("descriptor::Goods");
+        result.add("Goods");
         return result;
     }
 

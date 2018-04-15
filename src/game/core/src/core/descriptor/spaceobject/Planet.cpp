@@ -18,7 +18,7 @@
 
 #include "Planet.hpp"
 
-namespace descriptor {
+namespace core {
 
 const int PlanetDescr::SCALE_MIN = 100;
 const int PlanetDescr::SCALE_MAX = 190;

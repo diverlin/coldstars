@@ -20,7 +20,7 @@
 
 #include "Room.hpp"
 
-namespace descriptor {
+namespace core {
 
 class ShopDescr : public RoomDescr
 {

@@ -24,7 +24,7 @@
 
 namespace test {
 
-void testSpaceObjectEquality(descriptor::SpaceObjectDescr* descr, descriptor::SpaceObjectDescr* copy)
+void testSpaceObjectEquality(core::SpaceObjectDescr* descr, core::SpaceObjectDescr* copy)
 {
     // todo: implement
 }

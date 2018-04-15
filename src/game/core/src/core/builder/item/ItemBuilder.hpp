@@ -18,7 +18,7 @@
 
 #pragma once
 
-namespace descriptor {
+namespace core {
 class ItemDescr;
 } // namespace descriptor
 
@@ -33,7 +33,7 @@ namespace core {
 class ItemBuilder
 {
 protected:
-    static void _createInternals(core::control::Item*, descriptor::ItemDescr*);
+    static void _createInternals(core::control::Item*, core::ItemDescr*);
 
 private:
     ItemBuilder() = delete;

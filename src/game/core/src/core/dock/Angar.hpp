@@ -20,7 +20,7 @@
 
 #include "Room.hpp"
 
-namespace descriptor {
+namespace core {
 class AngarDescr;
 } // namespace descriptor
 
@@ -44,7 +44,7 @@ class Npc;
 class Angar : public Room
 {
 public:
-    Angar(descriptor::AngarDescr*, model::Angar*);
+    Angar(AngarDescr*, model::Angar*);
     ~Angar();
 
     virtual void putChildrenToGarbage() const;
@@ -74,14 +74,14 @@ public:
 //    void Load(const boost::property_tree::ptree&);
 //    void Resolve();
 
-    descriptor::AngarDescr* desriptor() const { return m_descriptor_angar; }
+    AngarDescr* desriptor() const { return m_descriptor_angar; }
     model::Angar* model() const { return m_model_angar; }
 
     const std::vector<VehicleSlot*>& vehicleSlots() const { return m_vehicle_slots; }
     const std::vector<ItemSlot*>& itemSlots() const { return m_item_slots; }
 
 private:
-    descriptor::AngarDescr* m_descriptor_angar = nullptr;
+    AngarDescr* m_descriptor_angar = nullptr;
     model::Angar* m_model_angar = nullptr;
 
     std::vector<VehicleSlot*> m_vehicle_slots;

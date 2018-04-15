@@ -31,7 +31,7 @@
 namespace core {
 
 core::control::Satellite*
-SatelliteBuilder::__genTemplate(descriptor::SatelliteDescr* descr)
+SatelliteBuilder::__genTemplate(core::SatelliteDescr* descr)
 {
     model::Satellite* model = new model::Satellite(descr->id());
     assert(model);
@@ -43,7 +43,7 @@ SatelliteBuilder::__genTemplate(descriptor::SatelliteDescr* descr)
 }
 
 core::control::Satellite*
-SatelliteBuilder::gen(descriptor::SatelliteDescr* descr)
+SatelliteBuilder::gen(core::SatelliteDescr* descr)
 {
     core::control::Satellite* satellite = __genTemplate(descr);
     __createInternals(satellite, descr);
@@ -53,9 +53,9 @@ SatelliteBuilder::gen(descriptor::SatelliteDescr* descr)
 core::control::Satellite*
 SatelliteBuilder::gen()
 {
-    descriptor::SatelliteDescr* descr = nullptr;
-    if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SATELLITE)) {
-        descr = descriptor::genSatellite();
+    core::SatelliteDescr* descr = nullptr;
+    if (!core::shortcuts::descriptors()->hasType(core::Type::SATELLITE)) {
+        descr = core::genSatellite();
     } else {
         descr = core::shortcuts::descriptors()->randSatellite();
     }
@@ -63,7 +63,7 @@ SatelliteBuilder::gen()
     return gen(descr);
 }
 
-void SatelliteBuilder::__createInternals(core::control::Satellite* satellite, descriptor::SatelliteDescr* descr)
+void SatelliteBuilder::__createInternals(core::control::Satellite* satellite, core::SatelliteDescr* descr)
 {
     satellite->setSize(descr->size());
 
@@ -76,7 +76,7 @@ void SatelliteBuilder::__createInternals(core::control::Satellite* satellite, de
 //    //protection_rate = 1;
 //    //}
     
-//    descriptor::Vehicle data_korpus;
+//    Vehicle data_korpus;
 //    data_korpus.setSpace(60 + meti::getRandInt(20));
 //    data_korpus.setArmor(10*data_korpus.space());
 //    data_korpus.setProtection(2*protection_rate);

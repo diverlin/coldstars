@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Equipment.hpp"
 
-namespace descriptor {
+namespace core {
 
 class RadarDescr : public EquipmentDescr
 {
@@ -52,8 +52,8 @@ public:
     int radius() const { return m_radius; }
 
     ceti::InfoTable info() const override final {
-        ceti::InfoTable result = descriptor::EquipmentDescr::info();
-        result.add("descriptor::Radar");
+        ceti::InfoTable result = core::EquipmentDescr::info();
+        result.add("Radar");
         result.add("radius", m_radius);
         return result;
     }

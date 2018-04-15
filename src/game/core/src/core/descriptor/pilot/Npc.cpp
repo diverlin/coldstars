@@ -20,11 +20,11 @@
 
 #include <ceti/serialization/macro.hpp>
 
-namespace descriptor {
+namespace core {
 
 NpcDescr::NpcDescr()
 {
-    setType(descriptor::Type::NPC);
+    setType(core::Type::NPC);
     setObType(entity::Type::NPC);
 }
 

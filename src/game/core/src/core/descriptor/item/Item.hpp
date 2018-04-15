@@ -24,7 +24,7 @@
 #include <core/type/TechLevelType.hpp>
 #include <core/type/RaceType.hpp>
 
-namespace descriptor {
+namespace core {
 
 class ItemDescr : public BaseDescr
 {
@@ -59,8 +59,8 @@ private:
 
 protected:
     ceti::InfoTable info() const override {
-        ceti::InfoTable result = ::descriptor::BaseDescr::info();
-        result.add("descriptor::Item");
+        ceti::InfoTable result = ::core::BaseDescr::info();
+        result.add("Item");
         result.add("race", race::to_string(m_race));
         result.add("tech", tech::to_string(m_tech));
         result.add("slotType", core::to_string(m_slotType));
@@ -75,7 +75,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<::descriptor::BaseDescr>(*this);
+        ar & boost::serialization::base_object<::core::BaseDescr>(*this);
         ar & m_race;
         ar & m_tech;
         ar & m_slotType;

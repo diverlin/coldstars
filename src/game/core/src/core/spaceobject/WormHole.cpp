@@ -26,7 +26,7 @@
 namespace core {
 namespace control {
 
-WormHole::WormHole(descriptor::WormHoleDescr* descr, model::WormHole* model)
+WormHole::WormHole(WormHoleDescr* descr, model::WormHole* model)
     :
       Planetoid(descr, model)
     , m_descriptor_wormhole(descr)

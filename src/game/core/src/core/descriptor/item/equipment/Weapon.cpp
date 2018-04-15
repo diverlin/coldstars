@@ -20,7 +20,7 @@
 
 #include <core/type/EntityType.hpp>
 
-namespace descriptor {
+namespace core {
 
 WeaponDescr::WeaponDescr()
 {

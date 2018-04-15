@@ -21,7 +21,7 @@
 
 #include "Weapon.hpp"
 
-namespace descriptor {
+namespace core {
 
 class RocketDescr : public WeaponDescr
 {
@@ -65,7 +65,7 @@ public:
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = WeaponDescr::info();
-        result.add("descriptor::Rocket");
+        result.add("Rocket");
         result.add("ammo", m_ammo);
         result.add("bulletDescriptor", m_bulletDescriptor);
         return result;
