@@ -24,7 +24,7 @@
 namespace core {
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -67,7 +67,7 @@ private:
     bool m_blockManualExit = false;
     bool m_allowFullControl = false;
 
-    core::slot::Item* m_slot_gate = nullptr;
+    core::slot::ItemSlot* m_slot_gate = nullptr;
     core::control::Vehicle* m_vehicle = nullptr;
     std::vector<ButtonItemSlot*> m_buttonslots;
 

@@ -61,7 +61,7 @@ void NatureLand::putChildrenToGarbage() const
 //// ******* TRANSITION ******* 
 bool NatureLand::canAcceptNewItem() const
 {
-    for (slot::Item* slot: m_itemslots) {
+    for (slot::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {
             return true;
         }
@@ -70,7 +70,7 @@ bool NatureLand::canAcceptNewItem() const
     return false;
 }
                 
-void NatureLand::add(slot::Item* item_slot)
+void NatureLand::add(slot::ItemSlot* item_slot)
 {
     assert(false);
 //    item_slot->setOwner(this);
@@ -79,7 +79,7 @@ void NatureLand::add(slot::Item* item_slot)
 
 bool NatureLand::add(control::Item* item)
 {
-    for (slot::Item* slot: m_itemslots) {
+    for (slot::ItemSlot* slot: m_itemslots) {
         if (!slot->item()) {
             slot->insert(item);
             //slot->setPosition(glm::vec2(meti::getRandInt(100), meti::getRandInt(100)));

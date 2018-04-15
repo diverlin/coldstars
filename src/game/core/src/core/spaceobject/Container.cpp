@@ -45,7 +45,7 @@ namespace core {
 namespace control {
 namespace {
 
-bool itemInsertHelper(slot::Item* slot, int_t id) {
+bool itemInsertHelper(slot::ItemSlot* slot, int_t id) {
     control::Base* model_base = core::shortcuts::entities()->base(id);
     descriptor::Base* descriptor_base = core::shortcuts::descriptors()->get(model_base->descriptor()->id());
     assert(descriptor_base->obType() == entity::Type::EQUIPMENT);
@@ -97,7 +97,7 @@ Container::Container(descriptor::Container* descr, model::Container* model)
     , m_model_container(model)
 {
 
-    slot::Item* slot = new slot::Item(slot::Type::CARGO);
+    slot::ItemSlot* slot = new slot::ItemSlot(slot::Type::CARGO);
     bindItemSlot(slot);
 
     if (m_model_container->item() != NONE) {
@@ -140,7 +140,7 @@ void Container::hit(int damage, SpaceObject* agressor) {
 //    }
 }
             
-void Container::bindItemSlot(slot::Item* item_slot)
+void Container::bindItemSlot(slot::ItemSlot* item_slot)
 {
     m_itemSlot = item_slot;
     m_itemSlot->setOwner(this);

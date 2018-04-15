@@ -37,7 +37,7 @@
 
 namespace gui {
 
-BaseButtonItemSlot::BaseButtonItemSlot(core::slot::Item* slot)
+BaseButtonItemSlot::BaseButtonItemSlot(core::slot::ItemSlot* slot)
     :
       BaseButton(Type::NONE, Type::NONE, core::slot::to_string(slot->type()))
     , m_slot(slot)

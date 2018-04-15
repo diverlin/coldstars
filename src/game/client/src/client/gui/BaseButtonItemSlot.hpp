@@ -28,7 +28,7 @@ class Item;
 } // namespace control
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 } // namespace core
@@ -52,10 +52,10 @@ namespace gui {
 class BaseButtonItemSlot : public BaseButton
 {
 public:
-    BaseButtonItemSlot(core::slot::Item*);
+    BaseButtonItemSlot(core::slot::ItemSlot*);
     ~BaseButtonItemSlot();
 
-    core::slot::Item* itemSlot() const { return m_slot; }
+    core::slot::ItemSlot* itemSlot() const { return m_slot; }
     void invalidate();
 
     void updateGeometry();
@@ -71,7 +71,7 @@ protected:
     void _drawMarkTarget() const;
 
 private:
-    core::slot::Item* m_slot = nullptr;
+    core::slot::ItemSlot* m_slot = nullptr;
     gui::Item* m_itemView = nullptr;
 
     jeti::control::Material* m_material_mark_accept = nullptr;

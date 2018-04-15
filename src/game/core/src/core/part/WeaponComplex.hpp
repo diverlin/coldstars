@@ -28,7 +28,7 @@
 namespace core {
 
 namespace slot {
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -53,15 +53,15 @@ public:
     int radiusMax() const { return m_radiusMax; }
     int damage() const { return m_damage; }
 
-    std::vector<core::slot::Item*> weaponSlots() const { return m_slots; }
+    std::vector<core::slot::ItemSlot*> weaponSlots() const { return m_slots; }
 
-    bool addSlot(core::slot::Item*);
-    core::slot::Item* freeSlot() const;
-    core::slot::Item* equipedWeakestSlot() const;
+    bool addSlot(core::slot::ItemSlot*);
+    core::slot::ItemSlot* freeSlot() const;
+    core::slot::ItemSlot* equipedWeakestSlot() const;
     
     void prepare();
 
-    bool setTarget(core::control::SpaceObject*, slot::Item* item_slot = nullptr);
+    bool setTarget(core::control::SpaceObject*, slot::ItemSlot* item_slot = nullptr);
 
     void updateFire(int, float);
 
@@ -94,13 +94,13 @@ private:
 //    Vehicle* owner_vehicle = nullptr;
 
 //    int fire_delay = 0, d_fire_delay = 0;
-    ceti::pack<core::slot::Item*> m_slots;
-    ceti::pack<core::slot::Item*> m_slots_reloaded;
+    ceti::pack<core::slot::ItemSlot*> m_slots;
+    ceti::pack<core::slot::ItemSlot*> m_slots_reloaded;
 
     void __reload();
     void __validateTargets();
 
-    core::slot::Item* __nextSlotReadyToFire() const;
+    core::slot::ItemSlot* __nextSlotReadyToFire() const;
     std::vector<core::control::item::Weapon*> __functionalWeapons(entity::Type type = entity::Type::ANY) const;
 };
 

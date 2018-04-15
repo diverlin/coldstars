@@ -28,7 +28,7 @@ class SpaceObject;
 
 namespace slot {
 
-class Item;
+class ItemSlot;
 
 class Weapon
 { 
@@ -36,10 +36,10 @@ public:
     Weapon();
     ~Weapon() = default;
 
-    void setTarget(core::control::SpaceObject* target, slot::Item* subtarget = nullptr);
+    void setTarget(core::control::SpaceObject* target, slot::ItemSlot* subtarget = nullptr);
 
     core::control::SpaceObject* target() const { return m_target; }
-    slot::Item* subtarget() const { return m_subtarget; }
+    slot::ItemSlot* subtarget() const { return m_subtarget; }
 
     bool validateSubTarget() const;
 
@@ -49,7 +49,7 @@ public:
 
 private:
     core::control::SpaceObject* m_target = nullptr;
-    core::slot::Item* m_subtarget = nullptr;
+    core::slot::ItemSlot* m_subtarget = nullptr;
 };
 
 } // namespace slot

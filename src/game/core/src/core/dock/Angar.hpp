@@ -32,7 +32,7 @@ namespace core {
 
 namespace slot {
 class Vehicle;
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -54,7 +54,7 @@ public:
     virtual void putChildrenToGarbage() const;
 
     void add(core::slot::Vehicle*);
-    void add(core::slot::Item*);
+    void add(core::slot::ItemSlot*);
 
     void updateInStatic() const;
 
@@ -82,14 +82,14 @@ public:
     model::Angar* model() const { return m_model_angar; }
 
     const std::vector<core::slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
-    const std::vector<core::slot::Item*>& itemSlots() const { return m_item_slots; }
+    const std::vector<core::slot::ItemSlot*>& itemSlots() const { return m_item_slots; }
 
 private:
     descriptor::Angar* m_descriptor_angar = nullptr;
     model::Angar* m_model_angar = nullptr;
 
     std::vector<core::slot::Vehicle*> m_vehicle_slots;
-    std::vector<core::slot::Item*> m_item_slots;
+    std::vector<core::slot::ItemSlot*> m_item_slots;
 
     int m_fuelPrice = 0;
 

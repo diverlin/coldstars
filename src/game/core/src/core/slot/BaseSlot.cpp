@@ -30,7 +30,7 @@ namespace core {
 namespace slot {
 
 core::control::Vehicle*
-Base::vehicleOwner() const {
+BaseSlot::vehicleOwner() const {
     core::control::Vehicle* vehicle = static_cast<core::control::Vehicle*>(m_owner);
     assert(vehicle);
     return vehicle;

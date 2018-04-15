@@ -33,7 +33,7 @@ namespace core {
 namespace slot {
 
 Vehicle::Vehicle(int offset)
-    : Base()
+    : BaseSlot()
 {
     setId(offset);
 }

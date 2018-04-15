@@ -32,11 +32,11 @@ class Vehicle;
 
 namespace slot {
 
-class Base /*: public ::Base*/
+class BaseSlot /*: public ::Base*/
 {
 public:
-    Base() = default;
-    virtual ~Base() = default;
+    BaseSlot() = default;
+    virtual ~BaseSlot() = default;
 
     void setId(int id) { m_id = id; }
     void setOwner(core::control::Base* owner) { m_owner = owner; }

@@ -1,0 +1,11 @@
+1) remove namespace <control>
+2) remove namespace <complex> and add suffix complex to the class
+??  or use <using>
+3) wrap <model> and <descriptor> namespaces to <core> namespace
+4) rename <descriptor> to the <descr>
+5) remove namespace <manager>, add suffix to classes instead ( this will simplify logic)
+??  or use <using>
+6) remove namespace slot, add Slot to suffix
+7) remove namespace item, add Item to suffix
+8) remove namespace comm
+9) remove ns builder, move it to suffix

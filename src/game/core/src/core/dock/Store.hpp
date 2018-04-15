@@ -33,7 +33,7 @@ namespace core {
 
 namespace slot {
 class Vehicle;
-class Item;
+class ItemSlot;
 } // namespace slot
 
 namespace control {
@@ -53,14 +53,14 @@ public:
     bool add(Item*);
     bool add(Vehicle*);
 
-    slot::Item* freeItemSlot() const;
+    slot::ItemSlot* freeItemSlot() const;
     slot::Vehicle* freeVehicleSlot() const;
 
     int buyItem(Item*);
     void sellVehicle(Npc*, slot::Vehicle*, int);
 
     [[deprecated("tmp")]]
-    const std::vector<slot::Item*>& itemSlots() const { return m_item_slots; }
+    const std::vector<slot::ItemSlot*>& itemSlots() const { return m_item_slots; }
     [[deprecated("tmp")]]
     const std::vector<slot::Vehicle*>& vehicleSlots() const { return m_vehicle_slots; }
 
@@ -69,7 +69,7 @@ public:
 //    void Resolve();
 
 private:
-    std::vector<slot::Item*> m_item_slots;
+    std::vector<slot::ItemSlot*> m_item_slots;
     std::vector<slot::Vehicle*> m_vehicle_slots;
 
     descriptor::Store* m_descriptor_store = nullptr;
@@ -82,7 +82,7 @@ private:
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
     void __add(slot::Vehicle*);
-    void __add(slot::Item*);
+    void __add(slot::ItemSlot*);
 };
 
 } // namespace control

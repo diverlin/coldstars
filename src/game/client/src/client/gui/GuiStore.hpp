@@ -31,7 +31,7 @@ class Store;
 } // namespace control
 
 namespace slot {
-class Item;
+class ItemSlot;
 class Vehicle;
 } // namespace slot
 
@@ -57,7 +57,7 @@ public:
 private:
     core::control::Store* m_store = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, core::slot::Item*>> m_itemslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::slot::ItemSlot*>> m_itemslot_rects;
     std::vector<GuiPair<ceti::Rect, core::slot::Vehicle*>> m_vehicleslot_rects;
 };
 

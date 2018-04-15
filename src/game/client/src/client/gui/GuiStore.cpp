@@ -42,13 +42,13 @@ void GuiStore::bindStore(core::control::Store* store)
 
     int clm = 0;
     int row = 0;
-    for (core::slot::Item* slot: store->itemSlots()) {
+    for (core::slot::ItemSlot* slot: store->itemSlots()) {
         ceti::Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                   GUI::ITEMSLOT::WIDTH_FOR_STORE,
                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
 
-        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::Item*>(rect, slot));
+        m_itemslot_rects.push_back(GuiPair<ceti::Rect, core::slot::ItemSlot*>(rect, slot));
 
         clm++;
         if (clm > GUI::STORE_SLOTS_INROW) {

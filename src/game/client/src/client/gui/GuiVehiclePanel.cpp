@@ -60,7 +60,7 @@ VehiclePanel::unselect(gui::Type type, int offset)
         return;
     }
 
-    core::slot::Item* slot = button->itemSlot();
+    core::slot::ItemSlot* slot = button->itemSlot();
     if (slot->item()) {
         slot->deselectEvent();
     }
@@ -76,7 +76,7 @@ VehiclePanel::toggle(gui::Type type, int offset)
         return;
     }
 
-    core::slot::Item* slot = button->itemSlot();
+    core::slot::ItemSlot* slot = button->itemSlot();
     if (slot->item()) {
         if (button->isPressed()) {
             slot->deselectEvent();
@@ -110,7 +110,7 @@ void VehiclePanel::__bindVehicle(core::control::Vehicle* vehicle)
 void VehiclePanel::__createFunctionalItemSlotsWithCircleGeometry(core::control::Vehicle* vehicle)
 {   
     int angle = 0;
-    for (core::slot::Item* slot: vehicle->slots()) {
+    for (core::slot::ItemSlot* slot: vehicle->slots()) {
         if (slot->type() != core::slot::Type::CARGO && slot->type() != core::slot::Type::ARTEFACT) {
             ButtonItemSlot2* button = new ButtonItemSlot2(slot);
 
