@@ -29,8 +29,6 @@ namespace control {
 class Vehicle;
 } // naemspace control
 
-namespace slot {
-
 class VehicleSlot : public BaseSlot
 {
 public:
@@ -58,5 +56,4 @@ private:
 //    void ResolveData();
 }; 
 
-} // namespace slot
 } // namespace core

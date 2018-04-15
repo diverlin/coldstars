@@ -31,11 +31,8 @@ class Store;
 
 namespace core {
 
-namespace slot {
-class VehicleSlot;
-} // namespace slot
-
 class ItemSlot;
+class VehicleSlot;
 
 namespace control {
 
@@ -55,15 +52,15 @@ public:
     bool add(Vehicle*);
 
     ItemSlot* freeItemSlot() const;
-    slot::VehicleSlot* freeVehicleSlot() const;
+    VehicleSlot* freeVehicleSlot() const;
 
     int buyItem(Item*);
-    void sellVehicle(Npc*, slot::VehicleSlot*, int);
+    void sellVehicle(Npc*, VehicleSlot*, int);
 
     [[deprecated("tmp")]]
     const std::vector<ItemSlot*>& itemSlots() const { return m_item_slots; }
     [[deprecated("tmp")]]
-    const std::vector<slot::VehicleSlot*>& vehicleSlots() const { return m_vehicle_slots; }
+    const std::vector<VehicleSlot*>& vehicleSlots() const { return m_vehicle_slots; }
 
 //    void Save(boost::property_tree::ptree&) const;
 //    void Load(const boost::property_tree::ptree&);
@@ -71,7 +68,7 @@ public:
 
 private:
     std::vector<ItemSlot*> m_item_slots;
-    std::vector<slot::VehicleSlot*> m_vehicle_slots;
+    std::vector<VehicleSlot*> m_vehicle_slots;
 
     descriptor::Store* m_descriptor_store = nullptr;
     model::Store* m_model_store = nullptr;
@@ -82,7 +79,7 @@ private:
 //    void SaveData(boost::property_tree::ptree&, const std::string&) const;
 //    void LoadData(const boost::property_tree::ptree&);
 //    void ResolveData();
-    void __add(slot::VehicleSlot*);
+    void __add(VehicleSlot*);
     void __add(ItemSlot*);
 };
 

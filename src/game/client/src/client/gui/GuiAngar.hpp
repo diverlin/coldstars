@@ -31,10 +31,7 @@ class Angar;
 } // namespace control
 
 class ItemSlot;
-
-namespace slot {
 class VehicleSlot;
-} // namespace control
 
 } // namespace core
 
@@ -64,7 +61,7 @@ private:
     core::ItemSlot* m_repair_slot = nullptr;
     core::ItemSlot* m_charge_slot = nullptr;
 
-    std::vector<GuiPair<ceti::Rect, core::slot::VehicleSlot*>> m_vehicleslot_rects;
+    std::vector<GuiPair<ceti::Rect, core::VehicleSlot*>> m_vehicleslot_rects;
     std::vector<GuiPair<ceti::Rect, core::ItemSlot*>> m_itemslot_rects;
 };
 

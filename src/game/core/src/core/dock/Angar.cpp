@@ -69,7 +69,7 @@ void Angar::putChildrenToGarbage() const
     //    }
 }
 
-void Angar::add(slot::VehicleSlot* slot)
+void Angar::add(VehicleSlot* slot)
 {
     slot->setOwner(this);
     m_vehicle_slots.push_back(slot);
@@ -171,10 +171,10 @@ int Angar::freeVehicleSlotTotalNum() const
     return sum_free;
 }
 
-slot::VehicleSlot*
+VehicleSlot*
 Angar::__freeSlot() const
 {
-    for (slot::VehicleSlot* slot: m_vehicle_slots) {
+    for (VehicleSlot* slot: m_vehicle_slots) {
         if (!slot->vehicle()) {
             return slot;
         }
@@ -182,10 +182,10 @@ Angar::__freeSlot() const
     return nullptr;
 }
 
-slot::VehicleSlot*
+VehicleSlot*
 Angar::__slot(Vehicle* vehicle) const
 {
-    for (slot::VehicleSlot* slot: m_vehicle_slots) {
+    for (VehicleSlot* slot: m_vehicle_slots) {
         if (slot->vehicle()) {
             if (slot->vehicle()->id() == vehicle->id()) {
                 return slot;
@@ -199,7 +199,7 @@ Angar::__slot(Vehicle* vehicle) const
 bool
 Angar::add(Vehicle* vehicle)
 {
-    slot::VehicleSlot* slot = __freeSlot();
+    VehicleSlot* slot = __freeSlot();
     if (slot) {
         return slot->insert(vehicle);
     }
@@ -209,7 +209,7 @@ Angar::add(Vehicle* vehicle)
 bool
 Angar::remove(Vehicle* vehicle)
 {
-    slot::VehicleSlot* slot = __slot(vehicle);
+    VehicleSlot* slot = __slot(vehicle);
     if (slot) {
         if (slot->release()) {
             model()->removeGuest(vehicle->id());
