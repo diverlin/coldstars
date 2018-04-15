@@ -46,7 +46,7 @@ const int MASS_MAX = 2000;
 }
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class SpaceStationBuilder : public VehicleBuilder
 {

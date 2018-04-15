@@ -30,7 +30,7 @@ class Asteroid;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 
 class AsteroidBuilder
 {

@@ -37,7 +37,7 @@ namespace item {
 class Base;
 } // namespace item
 
-namespace GovermentBuilder {
+namespace builder {
 
 class ContainerBuilder
 {

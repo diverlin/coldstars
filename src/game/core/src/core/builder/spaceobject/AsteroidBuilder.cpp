@@ -25,7 +25,7 @@
 #include <core/manager/DescriptorManager.hpp>
 #include <core/generator/DescriptorGenerator.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 
 core::control::Asteroid*
 AsteroidBuilder::gen()

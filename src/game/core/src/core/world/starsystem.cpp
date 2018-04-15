@@ -884,10 +884,10 @@ void StarSystem::__shipManager_s(unsigned int num)
         int weapons_num = 7;
 
         // prace_id, pgroup, psubgroup
-        control::Npc* new_npc = GovermentBuilder::NpcBuilder::gen();
-        control::Ship* new_pship = GovermentBuilder::ShipBuilder::gen();
+        control::Npc* new_npc = builder::NpcBuilder::gen();
+        control::Ship* new_pship = builder::ShipBuilder::gen();
 
-        GovermentBuilder::VehicleBuilder::equip(new_pship);
+        builder::VehicleBuilder::equip(new_pship);
         new_pship->bindNpc(new_npc);
 
         glm::vec2 center = meti::rand::gen_vec2(100, 800);

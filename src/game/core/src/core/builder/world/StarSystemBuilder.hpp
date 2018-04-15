@@ -30,7 +30,7 @@ class StarSystem;
 } // namespace control
 } // namespace core
 
-namespace GovermentBuilder {
+namespace builder {
 
 class StarSystemBuilder
 {

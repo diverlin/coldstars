@@ -39,7 +39,7 @@ class Lazer;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 class Lazer : public Equipment

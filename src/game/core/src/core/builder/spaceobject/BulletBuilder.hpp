@@ -33,7 +33,7 @@ class Bullet;
 
 class BulletData;
 
-namespace GovermentBuilder {
+namespace builder {
 
 class BulletBuilder
 {

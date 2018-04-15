@@ -39,7 +39,7 @@ class Goods;
 } // namespace control
 }
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 class Goods : public Item

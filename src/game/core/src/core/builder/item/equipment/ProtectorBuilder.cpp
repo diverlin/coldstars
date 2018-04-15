@@ -29,7 +29,7 @@
 
 #include <ceti/Logger.hpp>
 
-namespace GovermentBuilder {
+namespace builder {
 namespace item {
 
 core::control::item::Protector*
