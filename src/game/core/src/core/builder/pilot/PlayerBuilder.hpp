@@ -27,7 +27,7 @@ class Player;
 
 namespace builder {
 
-class Player
+class PlayerBuilder
 {
 public:
     static core::Player* gen(int_t);

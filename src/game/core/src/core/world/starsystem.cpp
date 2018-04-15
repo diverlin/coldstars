@@ -885,9 +885,9 @@ void StarSystem::__shipManager_s(unsigned int num)
 
         // prace_id, pgroup, psubgroup
         control::Npc* new_npc = builder::Npc::gen();
-        control::Ship* new_pship = builder::Ship::gen();
+        control::Ship* new_pship = builder::ShipBuilder::gen();
 
-        builder::BaseVehicle::equip(new_pship);
+        builder::VehicleBuilder::equip(new_pship);
         new_pship->bindNpc(new_npc);
 
         glm::vec2 center = meti::rand::gen_vec2(100, 800);

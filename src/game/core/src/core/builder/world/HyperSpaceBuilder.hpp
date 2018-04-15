@@ -34,7 +34,7 @@ class HyperSpace;
 
 namespace builder {
 
-class HyperSpace
+class HyperSpaceBuilder
 {
 public:
     static core::control::HyperSpace* gen(descriptor::HyperSpace*);
@@ -42,8 +42,8 @@ public:
     static core::control::HyperSpace* gen();
 
 private:
-    HyperSpace()=delete;
-    ~HyperSpace()=delete;
+    HyperSpaceBuilder()=delete;
+    ~HyperSpaceBuilder()=delete;
 
     static core::control::HyperSpace* __genTemplate(descriptor::HyperSpace*, int_t ob_id = NONE);
 }; 

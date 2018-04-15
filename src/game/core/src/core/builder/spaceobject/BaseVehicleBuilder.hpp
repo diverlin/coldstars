@@ -32,7 +32,7 @@ class Vehicle;
 
 namespace builder {
 
-class BaseVehicle
+class VehicleBuilder
 {
 public:
     static void equip(core::control::Vehicle*);

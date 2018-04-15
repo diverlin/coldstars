@@ -266,8 +266,8 @@ void God::__createSpaceStations(control::StarSystem* starsystem, int spacestatio
         //entity::Type ship_group = npc_group;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        control::SpaceStation* spacestation = builder::SpaceStation::gen();
-        builder::BaseVehicle::equip(spacestation);
+        control::SpaceStation* spacestation = builder::SpaceStationBuilder::gen();
+        builder::VehicleBuilder::equip(spacestation);
 
         // npc_race_id, npc_group, npc_subgroup
         control::Npc* npc = builder::Npc::gen();
@@ -318,8 +318,8 @@ void God::__createShips(control::StarSystem* starsystem, int ship_num, race::Typ
         }
         // VERY UGLY LOGIC END
 
-        core::control::Ship* new_ship = builder::Ship::gen();
-        builder::Ship::equip(new_ship);
+        core::control::Ship* new_ship = builder::ShipBuilder::gen();
+        builder::ShipBuilder::equip(new_ship);
 
         // npc_race_id, npc_group, npc_subgroup
         core::control::Npc* new_npc = builder::Npc::gen();

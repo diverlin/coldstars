@@ -34,7 +34,7 @@
 namespace builder {
 
 core::control::SpaceStation*
-SpaceStation::gen(descriptor::SpaceStation* descr)
+SpaceStationBuilder::gen(descriptor::SpaceStation* descr)
 {
     core::control::SpaceStation* spacestation = __genTemplate(descr);
     __createInternals(spacestation, descr);
@@ -42,7 +42,7 @@ SpaceStation::gen(descriptor::SpaceStation* descr)
 }
 
 core::control::SpaceStation*
-SpaceStation::gen()
+SpaceStationBuilder::gen()
 {
     descriptor::SpaceStation* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SPACESTATION)) {
@@ -55,7 +55,7 @@ SpaceStation::gen()
 }
 
 void
-SpaceStation::__createInternals(core::control::SpaceStation* spacestation, descriptor::SpaceStation* descr)
+SpaceStationBuilder::__createInternals(core::control::SpaceStation* spacestation, descriptor::SpaceStation* descr)
 {
     spacestation->setSize(descr->size());
 //    //jeti::Mesh* mesh = nullptr;
@@ -144,7 +144,7 @@ SpaceStation::__createInternals(core::control::SpaceStation* spacestation, descr
 }
 
 core::control::SpaceStation*
-SpaceStation::__genTemplate(descriptor::SpaceStation* descr)
+SpaceStationBuilder::__genTemplate(descriptor::SpaceStation* descr)
 {
     model::SpaceStation* model = new model::SpaceStation(descr->id());
     assert(model);

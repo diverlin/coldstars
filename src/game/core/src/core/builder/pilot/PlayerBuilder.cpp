@@ -26,13 +26,13 @@
 namespace builder {
 
 core::Player*
-Player::gen(int_t id)
+PlayerBuilder::gen(int_t id)
 {
     return __genTemplate(id);
 }
 
 core::Player*
-Player::__genTemplate(int_t id)
+PlayerBuilder::__genTemplate(int_t id)
 {
     core::Player* player = new core::Player(id);
     assert(player);

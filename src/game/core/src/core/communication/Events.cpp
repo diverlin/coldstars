@@ -85,16 +85,16 @@ void loadItem(int_t object, int_t parent) {
 
 /** CREATE */
 void createGalaxy(int_t descriptor, int_t object) {
-    core::control::Galaxy* galaxy = builder::Galaxy::gen(descriptor, object);
+    core::control::Galaxy* galaxy = builder::GalaxyBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(galaxy);
     core::shortcuts::entities()->setGalaxy(galaxy);
 }
 void createSector(int_t descriptor, int_t object) {
-    core::control::Sector* sector = builder::Sector::gen(descriptor, object);
+    core::control::Sector* sector = builder::SectorBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(sector);
 }
 void createStarSystem(int_t descriptor, int_t object) {
-    core::control::StarSystem* starsystem = builder::StarSystem::gen(descriptor, object);
+    core::control::StarSystem* starsystem = builder::StarSystemBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(starsystem);
 }
 void createNpc(int_t descriptor, int_t object) {
@@ -104,19 +104,19 @@ void createNpc(int_t descriptor, int_t object) {
 
 // spaceobjects
 void createStar(int_t descriptor, int_t object) {
-    core::control::Star* star = builder::Star::gen(descriptor, object);
+    core::control::Star* star = builder::StarBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(star);
 }
 void createPlanet(int_t descriptor, int_t object) {
-    core::control::Planet* planet = builder::Planet::gen(descriptor, object);
+    core::control::Planet* planet = builder::PlanetBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(planet);
 }
 void createAsteroid(int_t descriptor, int_t object) {
-    core::control::Asteroid* asteroid = builder::Asteroid::gen(descriptor, object);
+    core::control::Asteroid* asteroid = builder::AsteroidBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(asteroid);
 }
 void createShip(int_t descriptor, int_t object) {
-    core::control::Ship* ship = builder::Ship::gen(descriptor, object);
+    core::control::Ship* ship = builder::ShipBuilder::gen(descriptor, object);
     core::shortcuts::entities()->add(ship);
 }
 
@@ -130,7 +130,7 @@ void createGoods(int_t descriptor, int_t object) {
     core::shortcuts::entities()->add(goods); // is it needed?
 }
 void createContainer(int_t descriptor, int_t object, int_t item) {
-    core::control::Container* container = builder::Container::gen(descriptor, object, item);
+    core::control::Container* container = builder::ContainerBuilder::gen(descriptor, object, item);
     core::shortcuts::entities()->add(container);
 }
 
@@ -141,7 +141,7 @@ void createBullet(int_t owner, int_t weapon, int_t target_id) {
     assert(rocket->type() == entity::Type::ROCKET_EQUIPMENT);
 
     descriptor::Bullet* bullet_descriptor = core::shortcuts::descriptors()->bullet(rocket->descriptor()->bulletDescriptor());
-    control::Bullet* bullet = builder::Bullet::gen(bullet_descriptor, rocket->damage());
+    control::Bullet* bullet = builder::BulletBuilder::gen(bullet_descriptor, rocket->damage());
     bullet->setOwnerId(vehicle->id());
     bullet->setTarget(target);
     vehicle->starsystem()->add(bullet, vehicle->position(), vehicle->direction());
@@ -303,7 +303,7 @@ void dropItem(int_t object, int_t target) {
     ship->remove(item);
 
     // add
-    control::Container* container = builder::Container::gen();
+    control::Container* container = builder::ContainerBuilder::gen();
     container->insert(item);
     control::StarSystem* starsystem = ship->starsystem();
     assert(starsystem);

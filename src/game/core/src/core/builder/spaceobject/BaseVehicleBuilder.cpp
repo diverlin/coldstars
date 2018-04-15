@@ -63,7 +63,7 @@
 namespace builder {
 
 void
-BaseVehicle::equip(core::control::Vehicle* vehicle)
+VehicleBuilder::equip(core::control::Vehicle* vehicle)
 {
     vehicle->manage(builder::item::Drive::gen());
     vehicle->manage(builder::item::Bak::gen());
@@ -155,7 +155,7 @@ BaseVehicle::equip(core::control::Vehicle* vehicle)
 ////    }
 //}
 
-void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
+void VehicleBuilder::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 {
 //    entity::Type type = (entity::Type)descriptor.type();
 //    switch(type) {
@@ -186,7 +186,7 @@ void BaseVehicle::equip(Vehicle* vehicle, descriptor::Vehicle* descr)
 //    }
 }
 
-void BaseVehicle::equip(Vehicle* vehicle, tech::Type tech_level)
+void VehicleBuilder::equip(Vehicle* vehicle, tech::Type tech_level)
 {
     assert(false);
 //    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
@@ -286,7 +286,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, tech::Type tech_level)
 }
 #endif // USE_ARTEFACTS
 
-void BaseVehicle::equipBomb(Vehicle* vehicle, tech::Type tech_level)
+void VehicleBuilder::equipBomb(Vehicle* vehicle, tech::Type tech_level)
 {
     for (unsigned int i=0; i<2; i++) {
         //vehicle->AddItemToCargoSlot(core::global::get().bombBuilder().create());

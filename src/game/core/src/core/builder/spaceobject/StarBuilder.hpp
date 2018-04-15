@@ -33,11 +33,11 @@ class Star;
 
 namespace builder {
 
-class Star
+class StarBuilder
 {
 public:
-    Star();
-    ~Star();
+    StarBuilder();
+    ~StarBuilder();
 
     static core::control::Star* gen();
     static core::control::Star* gen(int_t, int_t);

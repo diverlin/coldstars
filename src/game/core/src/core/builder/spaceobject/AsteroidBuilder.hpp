@@ -32,7 +32,7 @@ class Asteroid;
 
 namespace builder {
 
-class Asteroid
+class AsteroidBuilder
 {
 public:
     static core::control::Asteroid* gen();

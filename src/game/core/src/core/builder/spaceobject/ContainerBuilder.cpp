@@ -39,7 +39,7 @@
 namespace builder {
 
 core::control::Container*
-Container::gen()
+ContainerBuilder::gen()
 {
     descriptor::Container* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::CONTAINER)) {
@@ -52,7 +52,7 @@ Container::gen()
 }
 
 core::control::Container*
-Container::gen(descriptor::Container* descr)
+ContainerBuilder::gen(descriptor::Container* descr)
 {
     core::control::Container* container = __genTemplate(descr);
     __createInternals(container, descr);
@@ -60,7 +60,7 @@ Container::gen(descriptor::Container* descr)
 }
 
 core::control::Container*
-Container::gen(int_t descriptor_id, int_t object_id)
+ContainerBuilder::gen(int_t descriptor_id, int_t object_id)
 {
     descriptor::Container* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
     core::control::Container* container = __genTemplate(descriptor, object_id);
@@ -69,7 +69,7 @@ Container::gen(int_t descriptor_id, int_t object_id)
 }
 
 core::control::Container*
-Container::gen(int_t descriptor_id, int_t object_id, int_t item_id)
+ContainerBuilder::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 {
     descriptor::Container* descriptor = core::shortcuts::descriptors()->container(descriptor_id);
     core::control::Container* container = __genTemplate(descriptor, object_id);
@@ -82,7 +82,7 @@ Container::gen(int_t descriptor_id, int_t object_id, int_t item_id)
 }
 
 core::control::Container*
-Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
+ContainerBuilder::__genTemplate(descriptor::Container* descriptor, int_t object_id)
 {
     model::Container* model = new model::Container(descriptor->id(), object_id);
     assert(model);
@@ -167,7 +167,7 @@ Container::__genTemplate(descriptor::Container* descriptor, int_t object_id)
 //}
 
 void
-Container::__createInternals(core::control::Container* container, descriptor::Container* desr)
+ContainerBuilder::__createInternals(core::control::Container* container, descriptor::Container* desr)
 {
     container->model()->setArmor(1);
 }

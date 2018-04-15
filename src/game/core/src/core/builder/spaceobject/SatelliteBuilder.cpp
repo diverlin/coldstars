@@ -31,7 +31,7 @@
 namespace builder {
 
 core::control::Satellite*
-Satellite::__genTemplate(descriptor::Satellite* descr)
+SatelliteBuilder::__genTemplate(descriptor::Satellite* descr)
 {
     model::Satellite* model = new model::Satellite(descr->id());
     assert(model);
@@ -43,7 +43,7 @@ Satellite::__genTemplate(descriptor::Satellite* descr)
 }
 
 core::control::Satellite*
-Satellite::gen(descriptor::Satellite* descr)
+SatelliteBuilder::gen(descriptor::Satellite* descr)
 {
     core::control::Satellite* satellite = __genTemplate(descr);
     __createInternals(satellite, descr);
@@ -51,7 +51,7 @@ Satellite::gen(descriptor::Satellite* descr)
 }
 
 core::control::Satellite*
-Satellite::gen()
+SatelliteBuilder::gen()
 {
     descriptor::Satellite* descr = nullptr;
     if (!core::shortcuts::descriptors()->hasType(descriptor::Type::SATELLITE)) {
@@ -63,7 +63,7 @@ Satellite::gen()
     return gen(descr);
 }
 
-void Satellite::__createInternals(core::control::Satellite* satellite, descriptor::Satellite* descr)
+void SatelliteBuilder::__createInternals(core::control::Satellite* satellite, descriptor::Satellite* descr)
 {
     satellite->setSize(descr->size());
 
