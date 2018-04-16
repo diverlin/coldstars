@@ -37,6 +37,8 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
+namespace client {
+
 class Client {
 public:
     Client(int id);
@@ -64,3 +66,4 @@ private:
     void __create_player();
 };
 
+} // namespace client

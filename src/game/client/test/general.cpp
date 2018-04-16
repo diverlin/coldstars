@@ -35,7 +35,7 @@ int_t createNewShip(core::Server& server) {
 TEST(world, dummy)
 {
     core::Server server(0, true);
-    Client client(1);
+    client::Client client(1);
 
     int_t id = createNewShip(server);
     // create ship on server side

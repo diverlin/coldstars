@@ -46,6 +46,8 @@
 #include <jeti/Camera.hpp>
 #include <jeti/Render.hpp>
 
+namespace client {
+
 Client::Client(int id):
     m_id(id)
 {
@@ -131,3 +133,5 @@ void Client::__create_player() {
     assert(npc);
     m_player->setNpc(npc);
 }
+
+} // namespace client
