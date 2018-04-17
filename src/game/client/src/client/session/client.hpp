@@ -43,6 +43,8 @@ public:
     Client(int id);
     ~Client();
 
+    Session* session() const { return m_session; }
+
     bool sessionIsRunning() const;
     bool isRunning() const;
 
