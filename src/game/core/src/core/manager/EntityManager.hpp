@@ -127,6 +127,8 @@ public:
 
     Player* player() const;
 
+    int_t nextId() const { return m_idGenerator.nextId(); }
+
 //    bool updateSaveRequest();
 //    bool updateLoadRequest();
 

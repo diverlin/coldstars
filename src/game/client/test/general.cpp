@@ -20,16 +20,25 @@
 
 #include <ceti/type/IdType.hpp>
 
+#include <core/session/Session.hpp>
+#include <core/manager/EntityManager.hpp>
+
+#include <client/session/Session.hpp>
 #include <client/session/server.hpp>
 #include <client/session/client.hpp>
 
 namespace {
-int_t createNewShip(core::Server& server) {
-    int_t id;
 
-    //server.session();
+core::control::Ship* getShip(core::Session* session, int_t id) {
+    return session->entities()->ship(id);
+}
+
+int_t createShip(core::Server& server) {
+    int_t id = server.session()->entities()->nextId();
+    assert(false);
     return id;
 }
+
 } // namespace
 
 TEST(world, dummy)
@@ -37,10 +46,14 @@ TEST(world, dummy)
     core::Server server(0, true);
     client::Client client(1);
 
-    int_t id = createNewShip(server);
-    // create ship on server side
-    // createShip(server, id);
-    // run loop
+    int_t id = createShip(server);
+
+    server.update();
+    client.update();
+
+    core::control::Ship* ship_from_server = getShip(server.session(), id);
+    core::control::Ship* ship_from_client = getShip(client.session(), id);
+
     // validate server and client identity
 }
 
