@@ -20,6 +20,7 @@
 
 #include <ceti/type/IdType.hpp>
 
+#include <core/communication/TelegramCreator.hpp>
 #include <core/session/Session.hpp>
 #include <core/manager/EntityManager.hpp>
 
@@ -33,10 +34,16 @@ core::control::Ship* getShip(core::Session* session, int_t id) {
     return session->entities()->ship(id);
 }
 
+int_t createStarSystem(core::Server& server) {
+    return core::TelegramCreator::get().createPureStarsystem();
+}
+
 int_t createShip(core::Server& server) {
-    int_t id = server.session()->entities()->nextId();
-    assert(false);
-    return id;
+    return core::TelegramCreator::get().createEquipedShipWithNpc();
+}
+
+void addShipToStarSystem(int_t starsystem_id, int_t ship_id) {
+    core::TelegramCreator::get().addShipToStarSystem(starsystem_id, ship_id);
 }
 
 } // namespace
@@ -46,13 +53,15 @@ TEST(world, dummy)
     core::Server server(0, true);
     client::Client client(1);
 
-    int_t id = createShip(server);
+    int_t starsystem_id = createStarSystem(server);
+    int_t ship_id = createShip(server);
+    addShipToStarSystem(starsystem_id, ship_id);
 
     server.update();
     client.update();
 
-    core::control::Ship* ship_from_server = getShip(server.session(), id);
-    core::control::Ship* ship_from_client = getShip(client.session(), id);
+    core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
+    core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
 
     // validate server and client identity
 }
