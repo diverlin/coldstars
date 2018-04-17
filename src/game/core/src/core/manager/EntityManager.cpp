@@ -93,11 +93,6 @@ namespace manager {
 
 IdGenerator Entities::m_idGenerator;
 
-int_t
-Entities::nextId() {
-    return m_idGenerator.nextId();
-}
-
 //void
 //Entities::clear()
 //{
@@ -354,6 +349,17 @@ void Entities::remove(control::Base* ob)
     } else {
         ceti::abort("attempt to remove not existed id = " + std::to_string(ob->id()));
     }
+}
+
+int_t Entities::firstIdByType(entity::Type type) const {
+    int_t result = -1;
+    for(std::map<int_t, control::Base*>::const_iterator it = m_entities.begin(); it != m_entities.end(); ++it) {
+        if (it->second->type() == type) {
+            return it->second->id();
+        }
+    }
+    assert(false);
+    return result;
 }
 
 //void EntityManager::saveEvent(const std::string& filename)

@@ -132,7 +132,8 @@ public:
 //    bool updateSaveRequest();
 //    bool updateLoadRequest();
 
-    int_t nextId();
+    int_t firstIdByType(entity::Type) const;
+
 
 //    void clear();
 
