@@ -35,10 +35,12 @@ core::control::Ship* getShip(core::Session* session, int_t id) {
 }
 
 int_t createStarSystem(core::Server& server) {
+    assert(false); // activate session
     return core::TelegramCreator::get().createPureStarsystem();
 }
 
 int_t createShip(core::Server& server) {
+    assert(false); // activate session
     return core::TelegramCreator::get().createEquipedShipWithNpc();
 }
 
