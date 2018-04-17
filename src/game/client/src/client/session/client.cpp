@@ -50,25 +50,28 @@ namespace client {
 
 Client::Client(int id):
     m_id(id)
+  , m_session(new Session(core::Session::Type::CLIENT))
 {
-    core::Sessions::get().add(id, new client::Session(core::Session::Type::CLIENT));
-
+    core::Sessions::get().add(id, m_session);
     __activate();
 
     core::shortcuts::session()->init();
 
-    m_camera = client::shortcuts::camera();
-    m_inputs = client::shortcuts::inputs();
-    m_render = client::shortcuts::render();
-    m_screen = client::shortcuts::screen();
-    m_view = client::shortcuts::view();
+    m_camera = shortcuts::camera();
+    m_inputs = shortcuts::inputs();
+    m_render = shortcuts::render();
+    m_screen = shortcuts::screen();
+    m_view = shortcuts::view();
 
-    m_telegramHandler = std::shared_ptr<client::TelegramHandler>(new client::TelegramHandler());
+    m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 }
 
 Client::~Client()
 {
+    core::Sessions::get().remove(m_id);
+//    global::get().telegramHub().unsubscribe(m_telegramHandler); // ??
+    delete m_session;
 }
 
 bool Client::sessionIsRunning() const {
@@ -111,7 +114,6 @@ void Client::update() {
     m_screen->draw();
 }
 
-
 void Client::__activate() const {
     core::Sessions::get().activate(m_id);
 }
@@ -125,7 +127,7 @@ void Client::__create_player() {
     }
 
     int_t id = core::shortcuts::entities()->nextId();
-    m_player = new client::Player(id);
+    m_player = new Player(id);
 
     core::control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
     assert(starsystem->ships().size());

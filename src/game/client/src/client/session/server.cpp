@@ -74,7 +74,7 @@ namespace core {
 Server::Server(int id, bool dummy)
     :
       m_id(id)
-    , m_session(new Session(core::Session::Type::SERVER))
+    , m_session(new Session(Session::Type::SERVER))
 {
     Sessions::get().add(id, m_session);
     __activate();
@@ -83,7 +83,7 @@ Server::Server(int id, bool dummy)
     global::get().telegramHub().subscribe(m_telegramHandler);
 
     Data data(/*server*/true); // why we need it on server?
-    m_world = std::shared_ptr<control::World>(new control::World(dummy));
+    m_world = WorldPtr(new control::World(dummy));
 }
 
 Server::~Server()
@@ -111,8 +111,8 @@ void Server::update()
 }
 
 void Server::__create_player() {
-    //        int_t id = core::shortcuts::entities()->nextId();
-    //        core::Player* player = new core::Player(id);
+    //        int_t id = shortcuts::entities()->nextId();
+    //        Player* player = new Player(id);
     //        m_players.push_back(player);
 
     //        control::StarSystem* starsystem = m_world->galaxy()->randomSector()->randomStarSystem();

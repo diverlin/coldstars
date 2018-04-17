@@ -18,11 +18,6 @@
 
 #include <memory>
 
-namespace client {
-class Player;
-class TelegramHandler;
-} // namespace client
-
 namespace jeti {
 class Camera;
 class Render;
@@ -39,6 +34,10 @@ class UserInputInSpace;
 
 namespace client {
 
+class Player;
+class TelegramHandler;
+class Session;
+
 class Client {
 public:
     Client(int id);
@@ -51,7 +50,8 @@ public:
 
 private:
     int m_id = -1;
-    client::Player* m_player = nullptr;
+    Player* m_player = nullptr;
+    Session* m_session = nullptr;
 
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render= nullptr;
@@ -60,7 +60,7 @@ private:
     view::StarSystem* m_view = nullptr;
     gui::UserInputInSpace* m_inputs = nullptr;
 
-    std::shared_ptr<client::TelegramHandler> m_telegramHandler;
+    std::shared_ptr<TelegramHandler> m_telegramHandler;
 
     void __activate() const;
     void __create_player();
