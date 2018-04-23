@@ -108,7 +108,7 @@ std::string to_string(Type type)
     case Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: { return "telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT"; }
     case Type::PLAYER_REQUEST_CREATE_NPC: { return "telegram::Type::PLAYER_REQUEST_CREATE_NPC"; }
     case Type::PLAYER_REQUEST_BIND_NPC: { return "telegram::Type::PLAYER_REQUEST_BIND_NPC"; }
-    case Type::PLAYER_REQUEST_BIND_NPC_AND_SHIP: { return "telegram::Type::PLAYER_REQUEST_BIND_NPC_AND_SHIP"; }
+    case Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: { return "telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP"; }
 
     default: {
         assert(false);

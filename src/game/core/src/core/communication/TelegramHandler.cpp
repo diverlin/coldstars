@@ -137,7 +137,7 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __playerCreateNpcReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_BIND_NPC_AND_SHIP: __playerBindNpcAndShipReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerBindNpcAndShipReply(telegram); break;
 
     default: {
         assert(false);
