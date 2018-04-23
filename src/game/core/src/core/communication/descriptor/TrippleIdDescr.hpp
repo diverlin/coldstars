@@ -18,36 +18,36 @@
 
 #pragma once
 
-#include "SingleIdDescr.hpp"
+#include "DoubleIdDescr.hpp"
 
 namespace core {
 
-class DoubleIdDescr : public SingleIdDescr {
+class TrippleIdDescr : public DoubleIdDescr {
 public:
-    DoubleIdDescr(int_t, int_t);
-    DoubleIdDescr(const std::string& data);
-    DoubleIdDescr() = default;
-    ~DoubleIdDescr() = default;
+    TrippleIdDescr(int_t, int_t, int_t);
+    TrippleIdDescr(const std::string& data);
+    TrippleIdDescr() = default;
+    ~TrippleIdDescr() = default;
     std::string data() const;
 
-    int_t secondId() const { return m_secondId; }
+    int_t thirdId() const { return m_thirdId; }
 
     std::string info() const {
-        std::string result = SingleIdDescr::info();
-        result += "DoubleIdDescr:\n";
-        result += std::string(" second id = ") + std::to_string(m_secondId) + "\n";
+        std::string result = DoubleIdDescr::info();
+        result += "TrippleIdDescr:\n";
+        result += std::string(" third id = ") + std::to_string(m_thirdId) + "\n";
         return result;
     }
 
 private:
-    int_t m_secondId = NONE;
+    int_t m_thirdId = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SingleIdDescr>(*this);
-        ar & m_secondId;
+        ar & boost::serialization::base_object<DoubleIdDescr>(*this);
+        ar & m_thirdId;
     }
 };
 
