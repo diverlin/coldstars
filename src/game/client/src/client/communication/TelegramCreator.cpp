@@ -20,7 +20,7 @@
 
 #include <core/common/Global.hpp>
 #include <core/communication/descriptor/MoveVehicle.hpp>
-#include <core/communication/descriptor/ObjectSubject.hpp>
+#include <core/communication/descriptor/DoubleIdDescr.hpp>
 #include <core/communication/TelegramHub.hpp>
 
 #include <client/communication/Telegram.hpp>
@@ -49,19 +49,19 @@ void TelegramCreator::playerRequestMove(int_t player, const glm::vec3& position)
 
 void TelegramCreator::playerRequestTurnEnd(int_t player)
 {
-    core::ObjectComDescr telegram_descriptor(player);
+    core::SingleIdDescr telegram_descriptor(player);
     m_telegramHub.add(Telegram(telegram::Type::PLAYER_REQUEST_END_TURN, telegram_descriptor.data()));
 }
 
 void TelegramCreator::playerRequestSetSpaceObjectTarget(int_t vehicle_id, int_t target_id)
 {
-    core::ObjectSubjectComDescr telegram_descriptor(vehicle_id, target_id);
+    core::DoubleIdDescr telegram_descriptor(vehicle_id, target_id);
     m_telegramHub.add(Telegram(telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT, telegram_descriptor.data()));
 }
 
 void TelegramCreator::playerRequestCreateNpc(int_t player_id, int_t npc_descriptor_id)
 {
-    core::ObjectComDescr telegram_descriptor(player_id);
+    core::SingleIdDescr telegram_descriptor(player_id);
     assert(false);
 }
 

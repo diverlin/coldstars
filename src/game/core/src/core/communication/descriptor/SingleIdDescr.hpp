@@ -18,29 +18,45 @@
 
 #pragma once
 
-#include "ObjectSubject.hpp"
 
-#include <ceti/serialization/macro.hpp>
+#include <ceti/type/IdType.hpp>
+#include <ceti/StringUtils.hpp>
+
+//#include <meti/VectorUtils.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 namespace core {
 
-ObjectSubjectComDescr::ObjectSubjectComDescr(int_t object, int_t parent)
-    :
-      ObjectComDescr(object)
-    , m_subject(parent)
-{}
-
-
-ObjectSubjectComDescr::ObjectSubjectComDescr(const std::string& data)
+class SingleIdDescr
 {
-    MACRO_READ_SERIALIZED_DATA
-}
+public:
+    SingleIdDescr(int_t);
+    SingleIdDescr()=default;
+    SingleIdDescr(const std::string& data);
+    ~SingleIdDescr() = default;
+    std::string data() const;
 
-std::string
-ObjectSubjectComDescr::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}
+    int_t firstId() const { return m_firstId; }
+
+    std::string info() const {
+        std::string result = "SingleIdDescr:\n";
+        result += std::string(" first id = ") + std::to_string(m_firstId) + "\n";
+        return result;
+    }
+
+private:
+    int_t m_firstId = NONE;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_firstId;
+    }
+};
 
 } // namespace core
+
 

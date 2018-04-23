@@ -18,45 +18,29 @@
 
 #pragma once
 
+#include "DoubleIdDescr.hpp"
 
-#include <ceti/type/IdType.hpp>
-#include <ceti/StringUtils.hpp>
-
-//#include <meti/VectorUtils.hpp>
-
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
+#include <ceti/serialization/macro.hpp>
 
 namespace core {
 
-class ObjectComDescr
+DoubleIdDescr::DoubleIdDescr(int_t object, int_t parent)
+    :
+      SingleIdDescr(object)
+    , m_secondId(parent)
+{}
+
+
+DoubleIdDescr::DoubleIdDescr(const std::string& data)
 {
-public:
-    ObjectComDescr(int_t);
-    ObjectComDescr()=default;
-    ObjectComDescr(const std::string& data);
-    ~ObjectComDescr() = default;
-    std::string data() const;
+    MACRO_READ_SERIALIZED_DATA
+}
 
-    int_t object() const { return m_object; }
-
-    std::string info() const {
-        std::string result = "Object:\n";
-        result += std::string(" object = ") + std::to_string(m_object) + "\n";
-        return result;
-    }
-
-private:
-    int_t m_object = NONE;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_object;
-    }
-};
+std::string
+DoubleIdDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace core
-
 

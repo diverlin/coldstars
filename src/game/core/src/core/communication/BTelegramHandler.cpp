@@ -47,30 +47,30 @@ void BTelegramHandler::update()
 void BTelegramHandler::_addSectorToGalaxy(const Telegram& telegram) const {
     AddPositionalComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addSectorToGalaxy(data.object(), data.parent(), data.position());
+    event::addSectorToGalaxy(data.firstId(), data.parent(), data.position());
 }
 
 void BTelegramHandler::_addStarSystemToSector(const Telegram& telegram) const {
     AddPositionalComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addStarSystemToSector(data.object(), data.parent(), data.position());
+    event::addStarSystemToSector(data.firstId(), data.parent(), data.position());
 }
 void BTelegramHandler::_addNpcToShip(const Telegram& telegram) const {
-    ObjectSubjectComDescr data(telegram.data());
+    DoubleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addNpcToShip(data.object(), data.subject());
+    event::addNpcToShip(data.firstId(), data.secondId());
 }
 
 // items
 void BTelegramHandler::_mountItem(const Telegram& telegram) const {
-    ObjectSubjectComDescr data(telegram.data());
+    DoubleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::mountItem(data.object(), data.subject());
+    event::mountItem(data.firstId(), data.secondId());
 }
 void BTelegramHandler::_loadItem(const Telegram& telegram) const {
-    ObjectSubjectComDescr data(telegram.data());
+    DoubleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::loadItem(data.object(), data.subject());
+    event::loadItem(data.firstId(), data.secondId());
 }
 /** */
 
@@ -79,62 +79,62 @@ void BTelegramHandler::_loadItem(const Telegram& telegram) const {
 void BTelegramHandler::_createGalaxy(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createGalaxy(data.descriptor(), data.object());
+    event::createGalaxy(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createSector(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createSector(data.descriptor(), data.object());
+    event::createSector(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createStarSystem(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createStarSystem(data.descriptor(), data.object());
+    event::createStarSystem(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createNpc(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createNpc(data.descriptor(), data.object());
+    event::createNpc(data.descriptor(), data.firstId());
 }
 
 // spaceobjects
 void BTelegramHandler::_createStar(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createStar(data.descriptor(), data.object());
+    event::createStar(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createPlanet(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createPlanet(data.descriptor(), data.object());
+    event::createPlanet(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createAsteroid(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createAsteroid(data.descriptor(), data.object());
+    event::createAsteroid(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createShip(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createShip(data.descriptor(), data.object());
+    event::createShip(data.descriptor(), data.firstId());
 }
 
 // items
 void BTelegramHandler::_createBomb(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createBomb(data.descriptor(), data.object());
+    event::createBomb(data.descriptor(), data.firstId());
 }
 
 void BTelegramHandler::_createGoods(const Telegram& telegram) const {
     CreateGoodsPackComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createGoods(data.descriptor(), data.object());
+    event::createGoods(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createContainer(const Telegram& telegram) const {
     CreateContainerComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createContainer(data.descriptor(), data.object(), data.item());
+    event::createContainer(data.descriptor(), data.firstId(), data.item());
 }
 void BTelegramHandler::_createBullet(const Telegram& telegram) const {
     CreateBulletComDescr data(telegram.data());
@@ -146,47 +146,47 @@ void BTelegramHandler::_createBullet(const Telegram& telegram) const {
 void BTelegramHandler::_createBak(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createBak(data.descriptor(), data.object());
+    event::createBak(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createDrive(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createDrive(data.descriptor(), data.object());
+    event::createDrive(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createDroid(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createDroid(data.descriptor(), data.object());
+    event::createDroid(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createGrapple(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createGrapple(data.descriptor(), data.object());
+    event::createGrapple(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createProtector(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createProtector(data.descriptor(), data.object());
+    event::createProtector(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createScaner(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createScaner(data.descriptor(), data.object());
+    event::createScaner(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createRadar(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createRadar(data.descriptor(), data.object());
+    event::createRadar(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createLazer(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createLazer(data.descriptor(), data.object());
+    event::createLazer(data.descriptor(), data.firstId());
 }
 void BTelegramHandler::_createRocket(const Telegram& telegram) const {
     CreateComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::createRocket(data.descriptor(), data.object());
+    event::createRocket(data.descriptor(), data.firstId());
 }
 /** */
 
@@ -194,64 +194,64 @@ void BTelegramHandler::_createRocket(const Telegram& telegram) const {
 void BTelegramHandler::_addStarToStarSystem(const Telegram& telegram) const {
     AddPositionalComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addStarToStarSystem(data.object(), data.parent());
+    event::addStarToStarSystem(data.firstId(), data.parent());
 }
 void BTelegramHandler::_addPlanetToStarSystem(const Telegram& telegram) const {
     AddPositionalComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addPlanetToStarSystem(data.object(), data.parent());
+    event::addPlanetToStarSystem(data.firstId(), data.parent());
 }
 void BTelegramHandler::_addAsteroidToStarSystem(const Telegram& telegram) const {
     AddToStarsystemComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addAsteroidToStarSystem(data.object(), data.parent());
+    event::addAsteroidToStarSystem(data.firstId(), data.parent());
 }
 
 void BTelegramHandler::_addShipToStarSystem(const Telegram& telegram) const {
     AddToStarsystemComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addShipToStarSystem(data.object(), data.parent(), data.position());
+    event::addShipToStarSystem(data.firstId(), data.parent(), data.position());
 }
 void BTelegramHandler::_addContainerToStarSystem(const Telegram& telegram) const {
     AddToStarsystemComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::addContainerToStarSystem(data.object(), data.parent(), data.position(), data.impulse);
+    event::addContainerToStarSystem(data.firstId(), data.parent(), data.position(), data.impulse);
 }
 
 /** DOCK */
 void BTelegramHandler::_dockShip(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::dockShip(data.object(), data.target());
+    event::dockShip(data.firstId(), data.target());
 }
 void BTelegramHandler::_launchShip(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::launchShip(data.object(), data.target());
+    event::launchShip(data.firstId(), data.target());
 }
 
 /** JUMP */
 void BTelegramHandler::_jumpIn(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::jumpIn(data.object());
+    event::jumpIn(data.firstId());
 }
 void BTelegramHandler::_jumpOut(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::jumpOut(data.object(), data.target());
+    event::jumpOut(data.firstId(), data.target());
 }
 
 /** DROP/TAKE */
 void BTelegramHandler::_dropItem(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::dropItem(data.object(), data.target());
+    event::dropItem(data.firstId(), data.target());
 }
 void BTelegramHandler::_pickContainer(const Telegram& telegram) const {
     DockComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::takeContainer(data.object(), data.target());
+    event::takeContainer(data.firstId(), data.target());
 }
 
 /** */
@@ -270,23 +270,23 @@ void BTelegramHandler::_explode(const Telegram& telegram) const {
 
 // GARBAGE
 void BTelegramHandler::_garbageSpaceObject(const Telegram& telegram) const {
-    ObjectComDescr data(telegram.data());
+    SingleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::garbageSpaceObject(data.object());
+    event::garbageSpaceObject(data.firstId());
 }
 
 // REMOVE
 void BTelegramHandler::_removeSpaceObjectFromStarSystem(const Telegram& telegram) const {
-    ObjectSubjectComDescr data(telegram.data());
+    DoubleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::removeSpaceObjectFromStarSystem(data.object(), data.subject());
+    event::removeSpaceObjectFromStarSystem(data.firstId(), data.secondId());
 }
 
 // MOVE
 void BTelegramHandler::_moveVehicle(const Telegram& telegram) const {
     MoveVehicleComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::moveVehicle(data.object(), data.position());
+    event::moveVehicle(data.firstId(), data.position());
 }
 
 // game states
@@ -298,9 +298,9 @@ void BTelegramHandler::_endTurn(const Telegram&) const
 
 void BTelegramHandler::_vehicleTargetSpaceOject(const Telegram& telegram) const
 {
-    ObjectSubjectComDescr data(telegram.data());
+    DoubleIdDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
-    event::targetSpaceObject(data.object(), data.subject());
+    event::targetSpaceObject(data.firstId(), data.secondId());
 }
 
 } // namespace core

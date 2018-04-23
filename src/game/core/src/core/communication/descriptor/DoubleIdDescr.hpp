@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Object.hpp"
+#include "SingleIdDescr.hpp"
 
 #include <ceti/StringUtils.hpp>
 
@@ -27,32 +27,32 @@
 
 namespace core {
 
-class ObjectSubjectComDescr : public ObjectComDescr {
+class DoubleIdDescr : public SingleIdDescr {
 public:
-    ObjectSubjectComDescr(int_t, int_t);
-    ObjectSubjectComDescr(const std::string& data);
-    ObjectSubjectComDescr() = default;
-    ~ObjectSubjectComDescr() = default;
+    DoubleIdDescr(int_t, int_t);
+    DoubleIdDescr(const std::string& data);
+    DoubleIdDescr() = default;
+    ~DoubleIdDescr() = default;
     std::string data() const;
 
-    int_t subject() const { return m_subject; }
+    int_t secondId() const { return m_secondId; }
 
     std::string info() const {
-        std::string result = ObjectComDescr::info();
-        result += "ObjectSubject:\n";
-        result += std::string(" subject = ") + std::to_string(m_subject) + "\n";
+        std::string result = SingleIdDescr::info();
+        result += "DoubleIdDescr:\n";
+        result += std::string(" second id = ") + std::to_string(m_secondId) + "\n";
         return result;
     }
 
 private:
-    int_t m_subject = NONE;
+    int_t m_secondId = NONE;
 
 private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectComDescr>(*this);
-        ar & m_subject;
+        ar & boost::serialization::base_object<SingleIdDescr>(*this);
+        ar & m_secondId;
     }
 };
 

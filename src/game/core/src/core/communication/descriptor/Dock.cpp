@@ -26,7 +26,7 @@ namespace core {
 
 DockComDescr::DockComDescr(int_t object, int_t dock)
     :
-      ObjectComDescr(object)
+      SingleIdDescr(object)
     , m_destination(dock)
 {
 }

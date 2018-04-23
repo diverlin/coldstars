@@ -18,25 +18,25 @@
 
 #pragma once
 
-#include "Object.hpp"
+#include "SingleIdDescr.hpp"
 
 #include <ceti/serialization/macro.hpp>
 
 namespace core {
 
-ObjectComDescr::ObjectComDescr(int_t object)
+SingleIdDescr::SingleIdDescr(int_t object)
     :
-      m_object(object)
+      m_firstId(object)
 {
 }
 
-ObjectComDescr::ObjectComDescr(const std::string& data)
+SingleIdDescr::SingleIdDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-ObjectComDescr::data() const
+SingleIdDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
