@@ -18,39 +18,29 @@
 
 #pragma once
 
-#include "SingleIdDescr.hpp"
+#include "TrippleIdDescr.hpp"
+
+#include <ceti/serialization/macro.hpp>
 
 namespace core {
 
-class DoubleIdDescr : public SingleIdDescr {
-public:
-    DoubleIdDescr(int_t, int_t);
-    DoubleIdDescr(const std::string& data);
-    DoubleIdDescr() = default;
-    ~DoubleIdDescr() = default;
-    std::string data() const;
+TrippleIdDescr::TrippleIdDescr(int_t firstId, int_t secondId, int_t thirdId)
+    :
+      DoubleIdDescr(firstId, secondId)
+    , m_thirdId(thirdId)
+{}
 
-    int_t secondId() const { return m_secondId; }
 
-    std::string info() const {
-        std::string result = SingleIdDescr::info();
-        result += "DoubleIdDescr:\n";
-        result += std::string(" second id = ") + std::to_string(m_secondId) + "\n";
-        return result;
-    }
+TrippleIdDescr::TrippleIdDescr(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-private:
-    int_t m_secondId = NONE;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<SingleIdDescr>(*this);
-        ar & m_secondId;
-    }
-};
+std::string
+TrippleIdDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace core
-
 
