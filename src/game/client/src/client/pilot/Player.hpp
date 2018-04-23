@@ -87,6 +87,7 @@ public:
     void exitScan();
 
     // events
+    void requestCreateNpc();
     void endTurnEvent();
     void pressLeftMouseButtonEvent();
     void pressRightMouseButtonEvent();

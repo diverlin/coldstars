@@ -29,6 +29,9 @@
 #include <core/pilot/Npc.hpp>
 #include <core/slot/ItemSlot.hpp>
 #include <core/part/WeaponComplex.hpp>
+#include <core/session/Shortcuts.hpp>
+#include <core/manager/DescriptorManager.hpp>
+#include <core/descriptor/pilot/Npc.hpp>
 
 #include <client/view/effect/Beam.hpp>
 #include <client/text/VerticalFlowText.hpp>
@@ -111,9 +114,15 @@ void Player::exitScan()
     m_blockSpaceNavigation = false;
 }
 
+void Player::requestCreateNpc()
+{
+    int_t npc_descriptor_id = core::shortcuts::descriptors()->randNpc()->id();
+    TelegramCreator::get().playerRequestCreateNpc(id(), npc_descriptor_id);
+}
+
 void Player::endTurnEvent()
 {
-    client::TelegramCreator::get().playerRequestTurnEnd(id());
+    TelegramCreator::get().playerRequestTurnEnd(id());
 }
 
 void Player::pressLeftMouseButtonEvent()
@@ -206,8 +215,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
 //    if (starsystem->id() != npc->vehicle()->starsystem()->id())
 //    {
-//        //client::shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
-//        //client::shortcuts::screen()->GetRect().setCenter(npc->vehicle()->center());
+//        //shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
+//        //shortcuts::screen()->GetRect().setCenter(npc->vehicle()->center());
 //        starsystem = npc->vehicle()->starsystem();
 //    }
     
@@ -220,7 +229,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //client::shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
+                    //shortcuts::screen()->InitiateScrollTo(npc->vehicle()->center());
                 //}
             //}
             
@@ -246,7 +255,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
-//                    client::shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                    shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                    turn_timer.NextTurn();
 //                }
 //            }
@@ -258,7 +267,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
-//                client::shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
+//                shortcuts::screen()->InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                turn_timer.NextTurn();
 //            }
             
@@ -276,10 +285,10 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //    bool draw_shockwave     = true;
 //    bool draw_robustSpaceObjects = true;
 
-//    float scale = client::global::get().render().scaleBase();
-//    int w = client::shortcuts::screen()->width();
-//    int h = client::shortcuts::screen()->height();
-////    glm::vec2 world_coord(client::shortcuts::screen()->bottomLeft());
+//    float scale = global::get().render().scaleBase();
+//    int w = shortcuts::screen()->width();
+//    int h = shortcuts::screen()->height();
+////    glm::vec2 world_coord(shortcuts::screen()->bottomLeft());
     
 //    render.clearColorAndDepthBuffers();
     
@@ -479,13 +488,13 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
 //void Player::RenderInSpace(control::StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 //{
-//    jeti::Render& renderer = client::global::get().render();
-//    jeti::Camera& camera = client::global::get().camera();
+//    jeti::Render& renderer = global::get().render();
+//    jeti::Camera& camera = global::get().camera();
 //    camera.update();
     
 //    renderer.composeViewMatrix(camera.viewMatrix());
 
-//    //float scale = client::shortcuts::screen()->GetScale();
+//    //float scale = shortcuts::screen()->GetScale();
 
 //    RenderInSpace_NEW(renderer, starsystem);
 
@@ -776,13 +785,13 @@ void Player::__clickOn(view::Star* star)
 void Player::__requestServerMoveVehicle(const glm::vec3& target_pos) const
 {
     // it's more proper to send player id instead, and on server got the id of vehicle which belongs to the certain player
-//    client::TelegramCreator::get().playerRequestMove(id(), target_pos);
-    client::TelegramCreator::get().playerRequestMove(npc()->vehicle()->id(), target_pos);
+//    TelegramCreator::get().playerRequestMove(id(), target_pos);
+    TelegramCreator::get().playerRequestMove(npc()->vehicle()->id(), target_pos);
 }
 
 void Player::__requestServerSetSpaceObjectTarget(int_t target_id) const
 {
-    client::TelegramCreator::get().playerRequestSetSpaceObjectTarget(npc()->vehicle()->id(), target_id);
+    TelegramCreator::get().playerRequestSetSpaceObjectTarget(npc()->vehicle()->id(), target_id);
 }
 
 void Player::__navigate() const
@@ -874,7 +883,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
 //    m_cursor.update(this);
     //m_cursor.RenderFocusedObjectInfo();
-//    client::shortcuts::screen()->draw();
+//    shortcuts::screen()->draw();
 }
 
 void Player::resetStateMachine() const
