@@ -16,6 +16,8 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <ceti/type/IdType.hpp>
+
 #include <memory>
 
 namespace jeti {
@@ -45,9 +47,13 @@ public:
 
     Session* session() const { return m_session; }
 
-    bool sessionIsRunning() const;
-    bool isRunning() const;
 
+    void create_player(int_t npc_id);
+
+    bool sessionIsRunning() const; // why both?
+    bool isRunning() const; // why both?
+
+    void request_new_player();
     void update();
 
 private:
@@ -65,7 +71,7 @@ private:
     std::shared_ptr<TelegramHandler> m_telegramHandler;
 
     void __activate() const;
-    void __create_player();
+//    void __create_player();
 };
 
 } // namespace client

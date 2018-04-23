@@ -89,8 +89,9 @@ void Client::update() {
     m_telegramHandler->update();
 
     if (!m_player) {
-        __create_player();
-        m_view->setPlayer(m_player);
+        assert(false);
+        //__create_player();
+        //m_view->setPlayer(m_player);
         return;
     }
 
@@ -118,22 +119,37 @@ void Client::__activate() const {
     core::Sessions::get().activate(m_id);
 }
 
-void Client::__create_player() {
-    core::control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
-    if (!galaxy) {
-        //            if (meti::rand::gen_int(1000) == 1000)
-        //                std::cout<<"galaxy is null"<<std::endl;
-        return;
-    }
+void Client::request_new_player() {
+    int_t descriptor_npc_id = 0;
+    assert(false);
+//    requestCreateNpc();
+}
 
-    int_t id = core::shortcuts::entities()->nextId();
-    m_player = new Player(id);
+void Client::create_player(int_t npc_id)
+{
+    m_player = new Player(m_id);
 
-    core::control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
-    assert(starsystem->ships().size());
-    core::control::Npc* npc = starsystem->ships().front()->npc();
+    core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
     assert(npc);
     m_player->setNpc(npc);
 }
+
+//void Client::__create_player() {
+//    core::control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
+//    if (!galaxy) {
+//        //            if (meti::rand::gen_int(1000) == 1000)
+//        //                std::cout<<"galaxy is null"<<std::endl;
+//        return;
+//    }
+
+//    int_t id = core::shortcuts::entities()->nextId();
+//    m_player = new Player(id);
+
+//    core::control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
+//    assert(starsystem->ships().size());
+//    core::control::Npc* npc = starsystem->ships().front()->npc();
+//    assert(npc);
+//    m_player->setNpc(npc);
+//}
 
 } // namespace client

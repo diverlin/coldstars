@@ -323,25 +323,23 @@ void TelegramCreator::createDummyGalaxy(int ships_num, int planets_num) const
     int_t galaxy_descriptor_id = shortcuts::descriptors()->randGalaxy()->id();
     int_t galaxy_id = createPureGalaxy(galaxy_descriptor_id);
 
-    // create sector
-    int_t sector_descriptor_id = shortcuts::descriptors()->randSector()->id();
-    int_t sector_id = createPureSector(sector_descriptor_id);
-    __addSectorToGalaxy(sector_id, galaxy_id);
+//    // create sector
+//    int_t sector_id = createPureSector();
+//    __addSectorToGalaxy(sector_id, galaxy_id);
 
-    // create starsystem
-    int_t starsystem_id = createPureStarsystem();
-    __addStarsystemToSector(starsystem_id, sector_id);
+//    // create starsystem
+//    int_t starsystem_id = createPureStarsystem();
+//    __addStarsystemToSector(starsystem_id, sector_id);
 
-    // create star
-    int_t star_descriptor_id = shortcuts::descriptors()->randStar()->id();
-    int_t star_id = createPureStar(star_descriptor_id);
-    __addStarToStarsystem(star_id, starsystem_id);
+//    // create star
+//    int_t star_id = createPureStar();
+//    __addStarToStarsystem(star_id, starsystem_id);
 
-    // create planet
-    __createPlanets(starsystem_id, planets_num);
+//    // create planet
+//    __createPlanets(starsystem_id, planets_num);
 
-    // create ships
-    createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
+//    // create ships
+//    createEquipedShipsWithNpcInStarsystem(starsystem_id, ships_num);
 }
 
 void TelegramCreator::createGalaxy(core::GalaxyDescr* galaxy_descriptor) const

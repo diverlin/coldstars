@@ -59,4 +59,20 @@ void TelegramCreator::playerRequestSetSpaceObjectTarget(int_t vehicle_id, int_t 
     m_telegramHub.add(Telegram(telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT, telegram_descriptor.data()));
 }
 
+void TelegramCreator::playerRequestCreateNpc(int_t player_id, int_t descriptor_id)
+{
+    core::ObjectDescr telegram_descriptor(player_id);
+    assert(false);
+}
+
+void TelegramCreator::playerRequestBindNpc()
+{
+    assert(false);
+}
+
+void TelegramCreator::playerRequestInsertNpcToShip()
+{
+    assert(false);
+}
+
 } // namespace client

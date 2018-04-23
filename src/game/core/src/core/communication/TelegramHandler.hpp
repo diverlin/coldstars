@@ -20,8 +20,11 @@ protected:
 
 private:
     void __playerMoveReply(const Telegram&) const;
-    void __playerTurnEndReply(const Telegram& telegram) const;
-    void __playerSetSpaceObjectTargetReply(const Telegram& telegram) const;
+    void __playerTurnEndReply(const Telegram&) const;
+    void __playerSetSpaceObjectTargetReply(const Telegram&) const;
+    void __playerCreateNpcReply(const Telegram&) const;
+    void __playerBindNpcReply(const Telegram&) const;
+    void __playerBindNpcAndShipReply(const Telegram&) const;
 
     TelegramCreator& m_telegramCreator;
 };
