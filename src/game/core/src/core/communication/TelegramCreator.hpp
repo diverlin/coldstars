@@ -94,6 +94,9 @@ public:
     void __addNpcToShip(int_t npc_id, int_t ship_id) const;
     void __equipShip(int_t ship_id) const;
 
+    void replyPlayerCreateNpc(int_t, int_t) const;
+    void replyPlayerBindNpc(int_t, int_t) const;
+    void replyPlayerInsertNpcToShip(int_t, int_t, int_t) const;
 
 private:
     TelegramHub& m_telegramHub;

@@ -24,7 +24,7 @@ private:
     void __playerSetSpaceObjectTargetReply(const Telegram&) const;
     void __playerCreateNpcReply(const Telegram&) const;
     void __playerBindNpcReply(const Telegram&) const;
-    void __playerBindNpcAndShipReply(const Telegram&) const;
+    void __playerInsertNpcToShipReply(const Telegram&) const;
 
     TelegramCreator& m_telegramCreator;
 };

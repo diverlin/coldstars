@@ -10,6 +10,7 @@
 #include "Hit.hpp"
 #include "SingleIdDescr.hpp"
 #include "DoubleIdDescr.hpp"
+#include "TrippleIdDescr.hpp"
 #include "MoveVehicle.hpp"
 
 

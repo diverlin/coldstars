@@ -584,6 +584,8 @@ void TelegramCreator::createPlayer(int_t player_id, int_t npc_id)
     m_telegramHub.add(Telegram(telegram::Type::CREATE_PLAYER, descriptor.data()));
 }
 
+
+// client
 void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) const
 {
     MoveVehicleComDescr descriptor(vehicle_id, position);
@@ -596,11 +598,30 @@ void TelegramCreator::endTurn() const
     m_telegramHub.add(Telegram(telegram::Type::END_TURN, descriptor.data()));
 }
 
-
 void TelegramCreator::targetingSpaceObject(int_t vehicle_id, int_t target_id) const
 {
     DoubleIdDescr descriptor(vehicle_id, target_id);
     m_telegramHub.add(Telegram(telegram::Type::VEHICLE_TARGET_SPACEOBJECT, descriptor.data()));
+}
+
+void TelegramCreator::replyPlayerCreateNpc(int_t player_id, int_t npc_descriptor_id) const
+{
+    int_t npc_id = createPureNpc(npc_descriptor_id);
+    DoubleIdDescr descr(player_id, npc_id);
+    m_telegramHub.add(Telegram(telegram::Type::REPLY_PLAYER_CREATE_NPC, descr.data()));
+}
+
+void TelegramCreator::replyPlayerBindNpc(int_t player_id, int_t npc_id) const
+{
+    DoubleIdDescr descr(player_id, npc_id);
+    m_telegramHub.add(Telegram(telegram::Type::REPLY_PLAYER_BIND_NPC, descr.data()));
+}
+
+void TelegramCreator::replyPlayerInsertNpcToShip(int_t player_id, int_t npc_id, int_t ship_id) const
+{
+    __addNpcToShip(npc_id, ship_id);
+    TrippleIdDescr descr(player_id, npc_id, ship_id);
+    m_telegramHub.add(Telegram(telegram::Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP, descr.data()));
 }
 
 } // namespace core

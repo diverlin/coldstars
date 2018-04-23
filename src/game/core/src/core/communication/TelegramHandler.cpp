@@ -49,7 +49,7 @@
 #include <ceti/Logger.hpp>
 
 #include <core/communication/descriptor/MoveVehicle.hpp>
-#include <core/communication/descriptor/DoubleIdDescr.hpp>
+#include <core/communication/descriptor/TrippleIdDescr.hpp>
 
 namespace core {
 
@@ -137,7 +137,7 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __playerCreateNpcReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerBindNpcAndShipReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerInsertNpcToShipReply(telegram); break;
 
     default: {
         assert(false);
@@ -149,35 +149,38 @@ void TelegramHandler::_process(const Telegram& telegram) const
 
 void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
-    MoveVehicleComDescr telegram_descriptor(telegram.data());
-    m_telegramCreator.moveVehicle(telegram_descriptor.firstId(), telegram_descriptor.position());
+    MoveVehicleComDescr descr(telegram.data());
+    m_telegramCreator.moveVehicle(descr.firstId(), descr.position());
 }
 
 void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
-    SingleIdDescr telegram_descriptor(telegram.data()); // actually no needed it
+    SingleIdDescr descr(telegram.data());
     m_telegramCreator.endTurn();
 }
 
 void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram) const
 {
-    DoubleIdDescr telegram_descriptor(telegram.data()); // actually no needed it
-    m_telegramCreator.targetingSpaceObject(telegram_descriptor.firstId(), telegram_descriptor.secondId());
+    DoubleIdDescr descr(telegram.data());
+    m_telegramCreator.targetingSpaceObject(descr.firstId(), descr.secondId());
 }
 
 void TelegramHandler::__playerCreateNpcReply(const Telegram& telegram) const
 {
-    assert(false);
+    DoubleIdDescr descr(telegram.data());
+    m_telegramCreator.replyPlayerCreateNpc(descr.firstId(), descr.secondId());
 }
 
 void TelegramHandler::__playerBindNpcReply(const Telegram& telegram) const
 {
-    assert(false);
+    DoubleIdDescr descr(telegram.data());
+    m_telegramCreator.replyPlayerBindNpc(descr.firstId(), descr.secondId());
 }
 
-void TelegramHandler::__playerBindNpcAndShipReply(const Telegram& telegram) const
+void TelegramHandler::__playerInsertNpcToShipReply(const Telegram& telegram) const
 {
-    assert(false);
+    TrippleIdDescr descr(telegram.data());
+    m_telegramCreator.replyPlayerInsertNpcToShip(descr.firstId(), descr.secondId(), descr.thirdId());
 }
 
 } // namespace core
