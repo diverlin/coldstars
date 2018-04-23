@@ -49,7 +49,7 @@
 #include <ceti/Logger.hpp>
 
 #include <core/communication/descriptor/MoveVehicle.hpp>
-#include <core/communication/descriptor/ObjectSubject.hpp>
+#include <core/communication/descriptor/DoubleIdDescr.hpp>
 
 namespace core {
 
@@ -150,19 +150,19 @@ void TelegramHandler::_process(const Telegram& telegram) const
 void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 {
     MoveVehicleComDescr telegram_descriptor(telegram.data());
-    m_telegramCreator.moveVehicle(telegram_descriptor.object(), telegram_descriptor.position());
+    m_telegramCreator.moveVehicle(telegram_descriptor.firstId(), telegram_descriptor.position());
 }
 
 void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
-    ObjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
+    SingleIdDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.endTurn();
 }
 
 void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram) const
 {
-    ObjectSubjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
-    m_telegramCreator.targetingSpaceObject(telegram_descriptor.object(), telegram_descriptor.subject());
+    DoubleIdDescr telegram_descriptor(telegram.data()); // actually no needed it
+    m_telegramCreator.targetingSpaceObject(telegram_descriptor.firstId(), telegram_descriptor.secondId());
 }
 
 void TelegramHandler::__playerCreateNpcReply(const Telegram& telegram) const

@@ -174,7 +174,7 @@ void TelegramCreator::addShipToStarSystem(int_t ship_id, int_t starsystem_id, co
 
 void TelegramCreator::__addNpcToShip(int_t npc_id, int_t ship_id) const
 {
-    ObjectSubjectComDescr telegram_descriptor(npc_id, ship_id);
+    DoubleIdDescr telegram_descriptor(npc_id, ship_id);
     m_telegramHub.add(Telegram(telegram::Type::ADD_NPC_TO_SHIP, telegram_descriptor.data()));
 }
 
@@ -244,13 +244,13 @@ int_t TelegramCreator::__createPureRocket(int_t descriptor_id) const
 
 void TelegramCreator::__mountItem(int_t ship_id, int_t item_id) const
 {
-    ObjectSubjectComDescr telegram_descriptor(item_id, ship_id);
+    DoubleIdDescr telegram_descriptor(item_id, ship_id);
     m_telegramHub.add(Telegram(telegram::Type::MOUNT_ITEM, telegram_descriptor.data()));
 }
 
 void TelegramCreator::__loadItem(int_t ship_id, int_t item_id) const
 {
-    ObjectSubjectComDescr telegram_descriptor(item_id, ship_id);
+    DoubleIdDescr telegram_descriptor(item_id, ship_id);
     m_telegramHub.add(Telegram(telegram::Type::LOAD_ITEM, telegram_descriptor.data()));
 }
 
@@ -556,13 +556,13 @@ void TelegramCreator::genBullets_DEBUG(control::StarSystem* starsystem, int num)
 
 void TelegramCreator::__removeSpaceObjectFromStarSystem(control::SpaceObject* object)
 {
-    ObjectSubjectComDescr descriptor(object->id(), object->starsystem()->id());
+    DoubleIdDescr descriptor(object->id(), object->starsystem()->id());
     m_telegramHub.add(Telegram(telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM, descriptor.data()));
 }
 
 void TelegramCreator::__addSpaceObjectToGarbage(control::SpaceObject* object)
 {
-    ObjectComDescr descriptor(object->id());
+    SingleIdDescr descriptor(object->id());
     m_telegramHub.add(Telegram(telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
 }
 
@@ -592,14 +592,14 @@ void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) c
 
 void TelegramCreator::endTurn() const
 {
-    ObjectComDescr descriptor(-1);
+    SingleIdDescr descriptor(-1);
     m_telegramHub.add(Telegram(telegram::Type::END_TURN, descriptor.data()));
 }
 
 
 void TelegramCreator::targetingSpaceObject(int_t vehicle_id, int_t target_id) const
 {
-    ObjectSubjectComDescr descriptor(vehicle_id, target_id);
+    DoubleIdDescr descriptor(vehicle_id, target_id);
     m_telegramHub.add(Telegram(telegram::Type::VEHICLE_TARGET_SPACEOBJECT, descriptor.data()));
 }
 

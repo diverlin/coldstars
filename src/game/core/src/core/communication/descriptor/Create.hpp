@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Object.hpp"
+#include "SingleIdDescr.hpp"
 
 #include <ceti/type/IdType.hpp>
 
@@ -27,7 +27,7 @@
 
 namespace core {
 
-class CreateComDescr : public ObjectComDescr
+class CreateComDescr : public SingleIdDescr
 {
 public:
     CreateComDescr(int_t, int_t);
@@ -39,7 +39,7 @@ public:
     int_t descriptor() const { return m_descriptor; }
 
     std::string info() const {
-        std::string result = ObjectComDescr::info();
+        std::string result = SingleIdDescr::info();
         result += "Create:\n";
         result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
         return result;
@@ -52,7 +52,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectComDescr>(*this);
+        ar & boost::serialization::base_object<SingleIdDescr>(*this);
         ar & m_descriptor;
     }
 };

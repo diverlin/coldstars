@@ -15,7 +15,7 @@ namespace core {
 
 class AddToStarsystemComDescr : public AddPositionalComDescr {
 public:
-    AddToStarsystemComDescr(int_t object,
+    AddToStarsystemComDescr(int_t firstId,
                               int_t parent,
                               const meti::vec3& position = meti::vec3(0.0f),
                               const meti::vec3& impulse = meti::vec3(0.0f),

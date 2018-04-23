@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "Object.hpp"
+#include "SingleIdDescr.hpp"
 
 #include <meti/VectorUtils.hpp>
 #include <ceti/StringUtils.hpp>
@@ -29,7 +29,7 @@
 
 namespace core {
 
-class AddPositionalComDescr : public ObjectComDescr {
+class AddPositionalComDescr : public SingleIdDescr {
 public:
     AddPositionalComDescr(int_t, int_t, const meti::vec3& position);
     AddPositionalComDescr(const std::string& data);
@@ -41,7 +41,7 @@ public:
     const meti::vec3& position() const { return m_position; }
 
     std::string info() const {
-        std::string result = ObjectComDescr::info();
+        std::string result = SingleIdDescr::info();
         result += "AddPositional:\n";
         result += std::string(" parent = ") + std::to_string(m_parent) + "\n";
         result += std::string(" position = ") + ceti::to_string(m_position) + "\n";
@@ -56,7 +56,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectComDescr>(*this);
+        ar & boost::serialization::base_object<SingleIdDescr>(*this);
         ar & m_parent;
         ar & m_position;
     }
