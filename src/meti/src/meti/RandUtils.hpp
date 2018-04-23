@@ -52,6 +52,7 @@ const T& get_element_or_die(const std::vector<T>& v) {
     if (!v.empty()) {
         return v[gen_int(v.size()-1)];
     }
+    assert(false);
     throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
 }
 

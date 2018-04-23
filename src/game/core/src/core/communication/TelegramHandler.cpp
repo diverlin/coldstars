@@ -135,6 +135,10 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __playerCreateNpcReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_BIND_NPC_AND_SHIP: __playerBindNpcAndShipReply(telegram); break;
+
     default: {
         assert(false);
         break;
@@ -159,6 +163,21 @@ void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram
 {
     ObjectSubjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.targetingSpaceObject(telegram_descriptor.object(), telegram_descriptor.subject());
+}
+
+void TelegramHandler::__playerCreateNpcReply(const Telegram& telegram) const
+{
+    assert(false);
+}
+
+void TelegramHandler::__playerBindNpcReply(const Telegram& telegram) const
+{
+    assert(false);
+}
+
+void TelegramHandler::__playerBindNpcAndShipReply(const Telegram& telegram) const
+{
+    assert(false);
 }
 
 } // namespace core

@@ -45,6 +45,9 @@ public:
     void playerRequestMove(int_t, const glm::vec3&);
     void playerRequestTurnEnd(int_t);
     void playerRequestSetSpaceObjectTarget(int_t, int_t);
+    void playerRequestCreateNpc();
+    void playerRequestBindNpc();
+    void playerRequestInsertNpcToShip();
 };
 
 } // namespace core

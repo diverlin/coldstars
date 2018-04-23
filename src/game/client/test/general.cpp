@@ -35,13 +35,12 @@ core::control::Ship* getShip(core::Session* session, int_t id) {
 }
 
 int_t createStarSystem(core::Server& server) {
-    assert(false); // activate session
     return core::TelegramCreator::get().createPureStarsystem();
 }
 
 int_t createShip(core::Server& server) {
-    assert(false); // activate session
-    return core::TelegramCreator::get().createEquipedShipWithNpc();
+//    return core::TelegramCreator::get().createEquipedShipWithNpc();
+    return core::TelegramCreator::get().createPureShip();
 }
 
 void addShipToStarSystem(int_t starsystem_id, int_t ship_id) {
@@ -55,15 +54,17 @@ TEST(world, dummy)
     core::Server server(0, true);
     client::Client client(1);
 
-    int_t starsystem_id = createStarSystem(server);
-    int_t ship_id = createShip(server);
-    addShipToStarSystem(starsystem_id, ship_id);
+//    server.update();
+
+//   int_t starsystem_id = createStarSystem(server);
+//    int_t ship_id = createShip(server);
+//    addShipToStarSystem(starsystem_id, ship_id);
 
     server.update();
     client.update();
 
-    core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
-    core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
+    //core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
+    //core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
 
     // validate server and client identity
 }
