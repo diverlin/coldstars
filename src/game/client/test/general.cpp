@@ -49,10 +49,26 @@ void addShipToStarSystem(int_t starsystem_id, int_t ship_id) {
 
 } // namespace
 
+TEST(world, player_creation)
+{
+    core::Server server(0, true);
+    client::Client client(1);
+
+    client.request_create_player();
+    client.update();
+
+    server.update();
+    client.update();
+
+}
+
 TEST(world, dummy)
 {
     core::Server server(0, true);
     client::Client client(1);
+
+    server.update();
+    client.update();
 
 //    server.update();
 

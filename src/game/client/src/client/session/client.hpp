@@ -48,12 +48,12 @@ public:
     Session* session() const { return m_session; }
 
 
-    void create_player(int_t npc_id);
+    void reply_create_player(int_t npc_id);
 
     bool sessionIsRunning() const; // why both?
     bool isRunning() const; // why both?
 
-    void request_new_player();
+    void request_create_player();
     void update();
 
 private:

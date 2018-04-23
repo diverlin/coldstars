@@ -63,6 +63,8 @@ Client::Client(int id):
     m_screen = shortcuts::screen();
     m_view = shortcuts::view();
 
+    m_player = new Player(m_id);
+
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 }
@@ -88,12 +90,12 @@ void Client::update() {
 
     m_telegramHandler->update();
 
-    if (!m_player) {
+    //if (!m_player) {
         assert(false);
         //__create_player();
         //m_view->setPlayer(m_player);
         return;
-    }
+    //}
 
     core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
     assert(starsystem);
@@ -119,16 +121,12 @@ void Client::__activate() const {
     core::Sessions::get().activate(m_id);
 }
 
-void Client::request_new_player() {
-    int_t descriptor_npc_id = 0;
-    assert(false);
-//    requestCreateNpc();
+void Client::request_create_player() {
+    m_player->requestCreateNpc();
 }
 
-void Client::create_player(int_t npc_id)
+void Client::reply_create_player(int_t npc_id)
 {
-    m_player = new Player(m_id);
-
     core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
     assert(npc);
     m_player->setNpc(npc);
