@@ -27,7 +27,7 @@
 
 namespace core {
 
-class ObjectSubjectComDescr : public ObjectDescr {
+class ObjectSubjectComDescr : public ObjectComDescr {
 public:
     ObjectSubjectComDescr(int_t, int_t);
     ObjectSubjectComDescr(const std::string& data);
@@ -38,7 +38,7 @@ public:
     int_t subject() const { return m_subject; }
 
     std::string info() const {
-        std::string result = ObjectDescr::info();
+        std::string result = ObjectComDescr::info();
         result += "ObjectSubject:\n";
         result += std::string(" subject = ") + std::to_string(m_subject) + "\n";
         return result;
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectDescr>(*this);
+        ar & boost::serialization::base_object<ObjectComDescr>(*this);
         ar & m_subject;
     }
 };

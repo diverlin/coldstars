@@ -27,7 +27,7 @@
 
 namespace core {
 
-class CreateComDescr : public ObjectDescr
+class CreateComDescr : public ObjectComDescr
 {
 public:
     CreateComDescr(int_t, int_t);
@@ -39,7 +39,7 @@ public:
     int_t descriptor() const { return m_descriptor; }
 
     std::string info() const {
-        std::string result = ObjectDescr::info();
+        std::string result = ObjectComDescr::info();
         result += "Create:\n";
         result += std::string(" descriptor = ") + std::to_string(m_descriptor) + "\n";
         return result;
@@ -52,7 +52,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectDescr>(*this);
+        ar & boost::serialization::base_object<ObjectComDescr>(*this);
         ar & m_descriptor;
     }
 };

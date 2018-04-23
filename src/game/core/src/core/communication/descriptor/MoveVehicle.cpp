@@ -26,7 +26,7 @@ namespace core {
 
 MoveVehicleComDescr::MoveVehicleComDescr(int_t object, const meti::vec3& position)
     :
-      ObjectDescr(object)
+      ObjectComDescr(object)
     , m_position(position)
 {}
 

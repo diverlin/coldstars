@@ -26,7 +26,7 @@ namespace core {
 
 CreateComDescr::CreateComDescr(int_t descriptor, int_t object)
     :
-      ObjectDescr(object)
+      ObjectComDescr(object)
     , m_descriptor(descriptor)
 {
 }

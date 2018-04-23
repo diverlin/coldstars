@@ -270,7 +270,7 @@ void BTelegramHandler::_explode(const Telegram& telegram) const {
 
 // GARBAGE
 void BTelegramHandler::_garbageSpaceObject(const Telegram& telegram) const {
-    ObjectDescr data(telegram.data());
+    ObjectComDescr data(telegram.data());
     LOG_COMM(__FUNCTION__+std::string("(), ")+data.info());
     event::garbageSpaceObject(data.object());
 }

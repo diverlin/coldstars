@@ -562,7 +562,7 @@ void TelegramCreator::__removeSpaceObjectFromStarSystem(control::SpaceObject* ob
 
 void TelegramCreator::__addSpaceObjectToGarbage(control::SpaceObject* object)
 {
-    ObjectDescr descriptor(object->id());
+    ObjectComDescr descriptor(object->id());
     m_telegramHub.add(Telegram(telegram::Type::ADD_SPACEOBJECT_TO_GARBAGE, descriptor.data()));
 }
 
@@ -592,7 +592,7 @@ void TelegramCreator::moveVehicle(int_t vehicle_id, const glm::vec3& position) c
 
 void TelegramCreator::endTurn() const
 {
-    ObjectDescr descriptor(-1);
+    ObjectComDescr descriptor(-1);
     m_telegramHub.add(Telegram(telegram::Type::END_TURN, descriptor.data()));
 }
 

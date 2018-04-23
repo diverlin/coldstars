@@ -24,19 +24,19 @@
 
 namespace core {
 
-ObjectDescr::ObjectDescr(int_t object)
+ObjectComDescr::ObjectComDescr(int_t object)
     :
       m_object(object)
 {
 }
 
-ObjectDescr::ObjectDescr(const std::string& data)
+ObjectComDescr::ObjectComDescr(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
 std::string
-ObjectDescr::data() const
+ObjectComDescr::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }
