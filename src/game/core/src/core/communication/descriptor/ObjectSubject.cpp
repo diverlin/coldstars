@@ -26,7 +26,7 @@ namespace core {
 
 ObjectSubjectComDescr::ObjectSubjectComDescr(int_t object, int_t parent)
     :
-      ObjectDescr(object)
+      ObjectComDescr(object)
     , m_subject(parent)
 {}
 

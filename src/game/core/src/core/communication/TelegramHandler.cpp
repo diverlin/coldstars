@@ -155,7 +155,7 @@ void TelegramHandler::__playerMoveReply(const Telegram& telegram) const
 
 void TelegramHandler::__playerTurnEndReply(const Telegram& telegram) const
 {
-    ObjectDescr telegram_descriptor(telegram.data()); // actually no needed it
+    ObjectComDescr telegram_descriptor(telegram.data()); // actually no needed it
     m_telegramCreator.endTurn();
 }
 

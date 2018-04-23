@@ -26,7 +26,7 @@ namespace core {
 
 AddPositionalComDescr::AddPositionalComDescr(int_t object, int_t parent, const meti::vec3& position)
     :
-      ObjectDescr(object)
+      ObjectComDescr(object)
     , m_parent(parent)
     , m_position(position)
 {}

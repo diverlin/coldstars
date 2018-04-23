@@ -27,7 +27,7 @@
 
 namespace core {
 
-class DockComDescr : public ObjectDescr
+class DockComDescr : public ObjectComDescr
 {
 public:
     DockComDescr(int_t, int_t);
@@ -38,7 +38,7 @@ public:
     int_t target() const { return m_destination; }
 
     std::string info() const {
-        std::string result = ObjectDescr::info();
+        std::string result = ObjectComDescr::info();
         result += "Dock:\n";
         result += std::string(" destination = ") + std::to_string(m_destination) + "\n";
         return result;
@@ -51,7 +51,7 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
-        ar & boost::serialization::base_object<ObjectDescr>(*this);
+        ar & boost::serialization::base_object<ObjectComDescr>(*this);
         ar & m_destination;
     }
 };

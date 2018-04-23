@@ -29,13 +29,13 @@
 
 namespace core {
 
-class ObjectDescr
+class ObjectComDescr
 {
 public:
-    ObjectDescr(int_t);
-    ObjectDescr()=default;
-    ObjectDescr(const std::string& data);
-    ~ObjectDescr() = default;
+    ObjectComDescr(int_t);
+    ObjectComDescr()=default;
+    ObjectComDescr(const std::string& data);
+    ~ObjectComDescr() = default;
     std::string data() const;
 
     int_t object() const { return m_object; }
