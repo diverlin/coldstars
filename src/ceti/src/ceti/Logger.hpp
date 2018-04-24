@@ -31,11 +31,14 @@
     #define LOG( ... )          Logger::get().log(__VA_ARGS__)
     #define LOG_DATA( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::DATA)
     #define LOG_COMM( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
+    //#define LOG_COMM_DIP1( ... ) Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
+    #define LOG_COMM_DIP1( ... )
     #define LOG_ERROR( ... )    Logger::get().log_error(__VA_ARGS__)
 #else
     #define LOG( ... )
     #define LOG_DATA( ... )
     #define LOG_COMM( ... )
+    #define LOG_COMM_DIP1( ... )
     #define LOG_ERROR( ... )
 #endif
 
