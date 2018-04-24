@@ -323,13 +323,13 @@ void TelegramCreator::createDummyGalaxy(int ships_num, int planets_num) const
     int_t galaxy_descriptor_id = shortcuts::descriptors()->randGalaxy()->id();
     int_t galaxy_id = createPureGalaxy(galaxy_descriptor_id);
 
-//    // create sector
-//    int_t sector_id = createPureSector();
-//    __addSectorToGalaxy(sector_id, galaxy_id);
+    // create sector
+    int_t sector_id = createPureSector();
+    __addSectorToGalaxy(sector_id, galaxy_id);
 
-//    // create starsystem
-//    int_t starsystem_id = createPureStarsystem();
-//    __addStarsystemToSector(starsystem_id, sector_id);
+    // create starsystem
+    int_t starsystem_id = createPureStarsystem();
+    __addStarsystemToSector(starsystem_id, sector_id);
 
 //    // create star
 //    int_t star_id = createPureStar();

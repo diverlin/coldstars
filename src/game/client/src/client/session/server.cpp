@@ -98,13 +98,15 @@ void Server::__activate() const {
 void Server::update()
 {
     __activate();
+
+    global::get().telegramHub().broadcast();
+
     m_telegramHandler->update();
 
     //        if (!m_players.size()) {
     //            __create_player();
     //        }
 
-    global::get().telegramHub().broadcast();
     m_world->update();
 }
 
