@@ -26,6 +26,7 @@
 #include <core/session/Session.hpp>
 #include <core/session/Sessions.hpp>
 #include <core/session/Shortcuts.hpp>
+#include <core/resource/Data.hpp>
 
 #include <jeti/Mesh.hpp>
 #include <jeti/Screen.hpp>
@@ -36,10 +37,8 @@
 
 #include <client/session/Session.hpp>
 #include <client/session/Shortcuts.hpp>
-#include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
-
 #include <client/gui/ButtonTrigger.hpp>
 #include <client/gui/GuiActions.hpp>
 

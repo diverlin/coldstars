@@ -684,9 +684,11 @@ Descriptors::__clear()
 }
 
 void
-Descriptors::generate()
+Descriptors::generate(bool save)
 {
-    ceti::filesystem::create_file(descriptors_fname);
+    if (save) {
+        ceti::filesystem::create_file(descriptors_fname);
+    }
 
     __clear();
 
@@ -744,7 +746,9 @@ Descriptors::generate()
     const auto& ids = __ids(core::Type::SECTOR).random(2);
     core::genGalaxy(ids);
 
-    __save();
+    if (save) {
+        __save();
+    }
 }
 
 void

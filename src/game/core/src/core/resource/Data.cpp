@@ -25,20 +25,15 @@
 
 namespace core {
 
-Data::Data()
+Data::Data(bool save)
 {
-    __generate();
+    __generateMeshDescriptors();
+    __generateMaterialDescriptors();
+    __generateGameObjectDescriptors(save);
 }
 
 Data::~Data()
 {
-}
-
-void Data::__generate()
-{
-    __generateMeshDescriptors();
-    __generateMaterialDescriptors();
-    __generateGameObjectDescriptors();
 }
 
 void Data::__generateMeshDescriptors()
@@ -51,9 +46,9 @@ void Data::__generateMeshDescriptors()
     }
 }
 
-void Data::__generateGameObjectDescriptors()
+void Data::__generateGameObjectDescriptors(bool save)
 {
-    core::shortcuts::descriptors()->generate();
+    core::shortcuts::descriptors()->generate(save);
 }
 
 void Data::__generateMaterialDescriptors()

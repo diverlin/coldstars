@@ -37,9 +37,9 @@ Session::Session(Type type)
 
 }
 
-void Session::init()
+void Session::init(bool save)
 {
-    Data data;
+    Data data(save);
 }
 
 } // core
