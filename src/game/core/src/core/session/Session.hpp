@@ -42,6 +42,11 @@ namespace type {
 class Collector;
 } // namespace type
 
+
+namespace client {
+class Player;
+} // namespace client
+
 namespace core {
 
 namespace manager {
@@ -68,6 +73,7 @@ public:
     virtual jeti::Screen* screen() const { assert(false); return nullptr; }
     virtual gui::UserInputInSpace* inputs() const { assert(false); return nullptr; }
     virtual view::StarSystem* view() const { assert(false); return nullptr; }
+    virtual client::Player* player() const { assert(false); return nullptr; }
     //
 
     virtual void init(bool);

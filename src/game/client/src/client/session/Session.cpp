@@ -23,6 +23,7 @@
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/view/StarSystem.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
+#include <client/pilot/Player.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -40,6 +41,7 @@ Session::Session(core::Session::Type type)
     , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
     , m_inputs(new gui::UserInputInSpace)
+    , m_player(new Player())
 {
 }
 
@@ -50,6 +52,7 @@ Session::~Session()
     delete m_screen;
     delete m_inputs;
     delete m_view;
+    delete m_player;
 }
 
 void

@@ -26,6 +26,8 @@ private:
     void __playerBindNpcReply(const Telegram&) const;
     void __playerInsertNpcToShipReply(const Telegram&) const;
 
+    void __replyPlayerCreateNpc(const Telegram&) const;
+
     TelegramCreator& m_telegramCreator;
 };
 

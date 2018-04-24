@@ -98,11 +98,18 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
     case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
     case telegram::Type::CREATE_EXPLOSION_EFFECT: _createExplosionEffect(telegram); break;
     case telegram::Type::VEHICLE_TARGET_SPACEOBJECT: _vehicleTargetSpaceOject(telegram); break;
+    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __replyPlayerCreateNpc(telegram); break;
     default: {
         assert(false);
         break;
     }
     }
+}
+
+void TelegramHandler::__replyPlayerCreateNpc(const core::Telegram& telegram) const
+{
+        //npc =
+        //client::shortcuts::player()->setNpc(npc);
 }
 
 // player
