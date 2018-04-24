@@ -23,14 +23,13 @@ namespace core {
 
 class Data {
 public:
-    Data();
+    Data(bool save);
     ~Data();
 
 private:
-    void __generate();
     void __generateMeshDescriptors();
     void __generateMaterialDescriptors();
-    void __generateGameObjectDescriptors();
+    void __generateGameObjectDescriptors(bool save);
 };
 
 } // namespace core

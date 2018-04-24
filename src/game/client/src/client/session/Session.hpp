@@ -46,7 +46,7 @@ public:
     Session(core::Session::Type);
     virtual ~Session();
 
-    void init() override final;
+    void init(bool) override final;
 
     jeti::Render* render() const override final { return m_render; }
     jeti::Camera* camera() const override final { return m_camera; }

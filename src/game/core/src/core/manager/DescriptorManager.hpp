@@ -185,7 +185,7 @@ public:
     Collector<core::MeshDescr>* meshes() const { return m_meshes; }
     Collector<core::MaterialDescr>* materials() const { return m_materials; }
 
-    void generate();
+    void generate(bool);
     void clear();
 
 private:

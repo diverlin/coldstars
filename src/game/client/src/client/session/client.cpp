@@ -32,7 +32,7 @@
 #include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/communication/TelegramHub.hpp>
-#include <client/resources/Data.hpp>
+#include <core/resource/Data.hpp>
 
 #include <client/session/Session.hpp>
 #include <client/session/Shortcuts.hpp>
@@ -62,7 +62,8 @@ Client::Client(int id, bool graphic):
     core::Sessions::get().add(id, m_session);
     __activate();
 
-    core::shortcuts::session()->init();
+    bool save = false;
+    core::shortcuts::session()->init(save);
 
     if (m_graphic) {
         m_camera = shortcuts::camera();

@@ -18,7 +18,8 @@
 
 #include "Session.hpp"
 
-#include <client/resources/Data.hpp>
+#include <core/resource/Data.hpp>
+
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/view/StarSystem.hpp>
 #include <client/resources/GuiTextureObCollector.hpp>
@@ -52,7 +53,7 @@ Session::~Session()
 }
 
 void
-Session::init() {
+Session::init(bool save) {
     if (m_init) {
         return;
     }
@@ -63,7 +64,7 @@ Session::init() {
     m_screen->init();
     m_render->init(m_screen->width(), m_screen->height());
 
-    Data data;
+    core::Data data(save);
     gui::MaterialCollector::get().load();
 
     m_view = new view::StarSystem(*m_render, *m_screen);
