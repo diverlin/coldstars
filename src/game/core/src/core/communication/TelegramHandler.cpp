@@ -139,6 +139,8 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerInsertNpcToShipReply(telegram); break;
 
+    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __replyPlayerCreateNpc(telegram); break;
+
     default: {
         assert(false);
         break;
@@ -181,6 +183,11 @@ void TelegramHandler::__playerInsertNpcToShipReply(const Telegram& telegram) con
 {
     TrippleIdDescr descr(telegram.data());
     m_telegramCreator.replyPlayerInsertNpcToShip(descr.firstId(), descr.secondId(), descr.thirdId());
+}
+
+void TelegramHandler::__replyPlayerCreateNpc(const Telegram& telegram) const
+{
+    DoubleIdDescr descr(telegram.data());
 }
 
 } // namespace core

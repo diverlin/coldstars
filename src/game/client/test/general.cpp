@@ -60,6 +60,9 @@ TEST(world, player_creation)
     server.update();
     client.update();
 
+    server.update();
+    client.update();
+
 }
 
 TEST(world, dummy)

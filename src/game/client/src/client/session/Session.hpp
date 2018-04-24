@@ -52,6 +52,7 @@ public:
     jeti::Camera* camera() const override final { return m_camera; }
     jeti::Screen* screen() const override final { return m_screen; }
     view::StarSystem* view() const override final { return m_view; }
+    Player* player() const override final { return m_player; }
 
     gui::UserInputInSpace* inputs() const override final { return m_inputs; }
 
@@ -62,6 +63,7 @@ private:
     jeti::Render* m_render = nullptr;
     jeti::Screen* m_screen = nullptr;
     view::StarSystem* m_view = nullptr;
+    Player* m_player = nullptr;
 
     gui::UserInputInSpace* m_inputs = nullptr;
 };

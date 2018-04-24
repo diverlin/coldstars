@@ -50,5 +50,9 @@ view::StarSystem* view() {
     return core::Sessions::get().session()->view();
 }
 
+client::Player* player() {
+    return core::Sessions::get().session()->player();
+}
+
 } // namespace shortcuts
 } // client
