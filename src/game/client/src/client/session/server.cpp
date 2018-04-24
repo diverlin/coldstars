@@ -82,7 +82,7 @@ Server::Server(int id, bool dummy)
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler(core::TelegramCreator::get()));
     global::get().telegramHub().subscribe(m_telegramHandler);
 
-    Data data(/*server*/true); // why we need it on server?
+    Data data(/*graphic*/false); // q: why we need it on server? a: to generate/load descriptors
     m_world = WorldPtr(new control::World(dummy));
 }
 

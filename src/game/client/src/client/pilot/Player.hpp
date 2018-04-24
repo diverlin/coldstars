@@ -58,7 +58,7 @@ namespace client {
 class Player : public core::Player
 {
 public:
-    Player(int_t);
+    Player(int_t, bool graphic = false);
     ~Player();
 
     Show& show() { return m_show; }
@@ -71,7 +71,7 @@ public:
     const meti::vec3& position() const;
     float radius() const;
 
-    gui::Cursor& cursor() { return m_cursor; }
+    gui::Cursor& cursor() { return *m_cursor; }
 
     bool isAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
 
@@ -93,7 +93,7 @@ public:
     void pressRightMouseButtonEvent();
 
 private:
-    gui::Cursor m_cursor;
+    gui::Cursor* m_cursor = nullptr;
     Show m_show;
 
     bool m_blockSpaceNavigation = false;

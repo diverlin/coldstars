@@ -21,6 +21,7 @@
 #include <client/resources/Data.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/view/StarSystem.hpp>
+#include <client/resources/GuiTextureObCollector.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -63,6 +64,7 @@ Session::init() {
     m_render->init(m_screen->width(), m_screen->height());
 
     Data data;
+    gui::MaterialCollector::get().load();
 
     m_view = new view::StarSystem(*m_render, *m_screen);
     ///

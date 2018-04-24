@@ -34,19 +34,21 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
+namespace core {
+class Session;
+} // namespace core
+
 namespace client {
 
 class Player;
 class TelegramHandler;
-class Session;
 
 class Client {
 public:
-    Client(int id);
+    Client(int id, bool graphic = false);
     ~Client();
 
-    Session* session() const { return m_session; }
-
+    core::Session* session() const { return m_session; }
 
     void reply_create_player(int_t npc_id);
 
@@ -57,9 +59,10 @@ public:
     void update();
 
 private:
+    int m_graphic = false;
     int m_id = -1;
     Player* m_player = nullptr;
-    Session* m_session = nullptr;
+    core::Session* m_session = nullptr;
 
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render= nullptr;

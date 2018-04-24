@@ -56,11 +56,14 @@
 
 namespace client {
 
-Player::Player(int_t id)
+Player::Player(int_t id, bool graphic)
     :
       core::Player(id)
 { 
-    gui::Manager::get().setPlayer(this);
+    if (graphic) {
+        gui::Manager::get().setPlayer(this);
+        m_cursor = new gui::Cursor;
+    }
 
     bool debug = false;
     if (debug) {
@@ -127,12 +130,12 @@ void Player::endTurnEvent()
 
 void Player::pressLeftMouseButtonEvent()
 {
-    m_cursor.mouseData().setEvent(MouseData::Event::LeftButtonPress);
+    m_cursor->mouseData().setEvent(MouseData::Event::LeftButtonPress);
 }
 
 void Player::pressRightMouseButtonEvent()
 {
-    m_cursor.mouseData().setEvent(MouseData::Event::RightButtonPress);
+    m_cursor->mouseData().setEvent(MouseData::Event::RightButtonPress);
 }
 
 
@@ -521,16 +524,16 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 ////        }
 //    }
     
-//    //m_cursor.RenderFocusedObjectStuff();
+//    //m_cursor->RenderFocusedObjectStuff();
 //}
 
 void Player::__manageMouseClickEventInSpace()
 {
-    if (m_cursor.mouseData().event() == MouseData::Event::None) {
+    if (m_cursor->mouseData().event() == MouseData::Event::None) {
         return;
     }
 
-    if (view::Base* base = m_cursor.focusedView()) {
+    if (view::Base* base = m_cursor->focusedView()) {
         switch (base->type()) {
         case entity::Type::BULLET: {
             __clickOn(static_cast<view::Bullet*>(base));
@@ -578,7 +581,7 @@ void Player::__manageMouseClickEventInSpace()
 
 void Player::__clickOn(view::Bullet* bullet)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
 //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
 //            npc->vehicle()->GetComplexWeapon().SetTarget(bullet);
@@ -641,7 +644,7 @@ void Player::__clickOn(view::Satellite* satellite)
 
 void Player::__clickOn(view::Asteroid* asteroid)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         //        if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected()) {
         //            npc->vehicle()->GetComplexWeapon().SetTarget(asteroid);
@@ -658,7 +661,7 @@ void Player::__clickOn(view::Asteroid* asteroid)
 
 void Player::__clickOn(view::Ship* ship)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         if (npc()->vehicle()->weapons().isAnyWeaponSelected()) {
             __requestServerSetSpaceObjectTarget(ship->control()->id());
@@ -711,7 +714,7 @@ void Player::__clickOn(view::Ship* ship)
 
 void Player::__clickOn(view::WormHole* wormhole)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         // ..
         break;
@@ -753,7 +756,7 @@ void Player::__clickOn(view::SpaceStation* spacestation)
 
 void Player::__clickOn(view::Planet* planet)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         //        Task microtask(type::AISCENARIO::MICRO_DOCKING, planet->id());
         //        npc->GetStateMachine().SetCurrentMicroTask(microtask);
@@ -770,7 +773,7 @@ void Player::__clickOn(view::Planet* planet)
 
 void Player::__clickOn(view::Star* star)
 {
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         // ..
         break;
@@ -800,10 +803,10 @@ void Player::__navigate() const
         return;
     }
 
-    switch(m_cursor.mouseData().event()) {
+    switch(m_cursor->mouseData().event()) {
     case MouseData::Event::LeftButtonPress: {
         assert(npc());
-        __requestServerMoveVehicle(m_cursor.mouseData().worldCoord());
+        __requestServerMoveVehicle(m_cursor->mouseData().worldCoord());
         break;
     }
     case MouseData::Event::RightButtonPress: {
@@ -826,21 +829,21 @@ void Player::__navigate() const
 ////    if (turn_timer.GetTurnEnded() == true)
 ////    {
 ////        GuiManager::Instance().GetGuiSpace().Update(this);
-////        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(m_cursor.GetMouseData().pos_screencoord);
+////        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(m_cursor->GetMouseData().pos_screencoord);
 ////        if (gui_element == nullptr)
 ////        {
 ////            if ( (GuiManager::Instance().GetGuiVehicleScan()->vehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 ////            {
-////                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(m_cursor.GetMouseData());
+////                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(m_cursor->GetMouseData());
 ////                if (mouse_interaction == false)
 ////                {
-////                    MouseNavigation(m_cursor.GetMouseData());
+////                    MouseNavigation(m_cursor->GetMouseData());
 ////                }
 ////            }
 ////        }
 ////        else
 ////        {
-////            m_cursor.SetFocusedGuiElement(gui_element);
+////            m_cursor->SetFocusedGuiElement(gui_element);
 ////        }
 ////    }
 
@@ -849,24 +852,24 @@ void Player::__navigate() const
 //    GuiManager::Instance().UpdateSessionInSpace();
 //    //GuiManager::Instance().GetGuiSpace().Render(this);
     
-//    //m_cursor.RenderItem();
+//    //m_cursor->RenderItem();
 //}
 
 
 //void Player::SessionInKosmoport()
 //{
-//    GuiManager::Instance().RunSessionInKosmoport(m_cursor.mouseData());
+//    GuiManager::Instance().RunSessionInKosmoport(m_cursor->mouseData());
 //}
 
 //void Player::SessionInNatureLand()
 //{
-//    GuiManager::Instance().RunSessionInNatureLand(m_cursor.mouseData());
+//    GuiManager::Instance().RunSessionInNatureLand(m_cursor->mouseData());
 //}
 
 void Player::update(const jeti::Render& render, view::Base* focusedView)
 {
-    m_cursor.setFocusedView(focusedView);
-    m_cursor.update(this, render);
+    m_cursor->setFocusedView(focusedView);
+    m_cursor->update(this, render);
     __manageMouseClickEventInSpace();
 }
 
@@ -881,8 +884,8 @@ void Player::RunSession(const TurnTimer& turn_timer)
 //        case type::place::LAND:      { SessionInNatureLand(); break; }
 //    }
 
-//    m_cursor.update(this);
-    //m_cursor.RenderFocusedObjectInfo();
+//    m_cursor->update(this);
+    //m_cursor->RenderFocusedObjectInfo();
 //    shortcuts::screen()->draw();
 }
 

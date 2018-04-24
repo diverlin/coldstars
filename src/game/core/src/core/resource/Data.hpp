@@ -16,30 +16,21 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Session.hpp"
 
-#include <core/manager/DescriptorManager.hpp>
-#include <core/manager/EntityManager.hpp>
-#include <core/manager/Garbage.hpp>
-#include <core/resource/Data.hpp>
-#include <core/type/CollectorType.hpp>
+#pragma once
 
 namespace core {
 
-Session::Session(Type type)
-    :
-      m_type(type)
-    , m_descriptors(new manager::Descriptors)
-    , m_entities(new manager::Entities)
-    , m_garbage(new manager::Garbage)
-    , m_types(new type::Collector)
-{
+class Data {
+public:
+    Data();
+    ~Data();
 
-}
+private:
+    void __generate();
+    void __generateMeshDescriptors();
+    void __generateMaterialDescriptors();
+    void __generateGameObjectDescriptors();
+};
 
-void Session::init()
-{
-    Data data;
-}
-
-} // core
+} // namespace core
