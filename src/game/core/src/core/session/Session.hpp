@@ -70,7 +70,7 @@ public:
     virtual view::StarSystem* view() const { assert(false); return nullptr; }
     //
 
-    virtual void init() {}
+    virtual void init();
 
     bool isServer() const { return m_type == Type::SERVER; }
 

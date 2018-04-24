@@ -132,6 +132,7 @@ Descriptors::rand(core::Type type) const
 {
     std::map<core::Type, std::vector<core::BaseDescr*>>::const_iterator it = m_descriptorsTypes.find(type);
     if (it == m_descriptorsTypes.end()) {
+        assert(false);
         throw std::runtime_error("Base* Manager::randdescriptor type = " + to_string(type) + " doesn't exist");
     }
     core::BaseDescr* descr = meti::rand::get_element_or_die(it->second);

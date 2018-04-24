@@ -17,43 +17,17 @@
 */
 
 #include "Data.hpp"
-#include <common/constants.hpp>
-#include <common/Config.hpp>
-#include <common/Global.hpp>
 
 #include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
-#include <core/generator/DescriptorGenerator.hpp>
 
-//#include <jeti/ShaderLoader.hpp>
-#include <jeti/Mesh.hpp>
-//#include <jeti/Screen.hpp>
-//#include <ceti/descriptor/Collector.hpp>
 #include <ceti/FsUtils.hpp>
-//#include <ceti/MdLoader.hpp>
-#include <ceti/StringUtils.hpp>
 
-#include "TextureCollector.hpp"
-#include "GuiTextureObCollector.hpp"
+namespace core {
 
-#include <core/session/Shortcuts.hpp>
-
-#include <ceti/type/IdType.hpp>
-#include <core/type/RaceType.hpp>
-#include <core/type/MeshType.hpp>
-#include <core/type/TechLevelType.hpp>
-#include <core/type/TextureType.hpp>
-
-#include <string>
-
-
-Data::Data(bool graphic)
+Data::Data()
 {
     __generate();
-
-    if (graphic) {
-        gui::MaterialCollector::get().load();
-    }
 }
 
 Data::~Data()
@@ -92,4 +66,5 @@ void Data::__generateMaterialDescriptors()
     }
 }
 
+} // namespace core
 

@@ -21,7 +21,7 @@
 
 class Data {
 public:
-    Data(bool server = false);
+    Data(bool graphic = false);
     ~Data();
 
 private:

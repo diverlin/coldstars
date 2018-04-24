@@ -32,6 +32,7 @@
 #include <core/world/Sector.hpp>
 #include <core/world/starsystem.hpp>
 #include <core/communication/TelegramHub.hpp>
+#include <client/resources/Data.hpp>
 
 #include <client/session/Session.hpp>
 #include <client/session/Shortcuts.hpp>
@@ -48,20 +49,28 @@
 
 namespace client {
 
-Client::Client(int id):
+Client::Client(int id, bool graphic):
     m_id(id)
-  , m_session(new Session(core::Session::Type::CLIENT))
+  , m_graphic(graphic)
 {
+    if (m_graphic) {
+        m_session = new Session(core::Session::Type::CLIENT);
+    } else {
+        m_session = new core::Session(core::Session::Type::CLIENT);
+    }
+
     core::Sessions::get().add(id, m_session);
     __activate();
 
     core::shortcuts::session()->init();
 
-    m_camera = shortcuts::camera();
-    m_inputs = shortcuts::inputs();
-    m_render = shortcuts::render();
-    m_screen = shortcuts::screen();
-    m_view = shortcuts::view();
+    if (m_graphic) {
+        m_camera = shortcuts::camera();
+        m_inputs = shortcuts::inputs();
+        m_render = shortcuts::render();
+        m_screen = shortcuts::screen();
+        m_view = shortcuts::view();
+    }
 
     m_player = new Player(m_id);
 
@@ -77,44 +86,62 @@ Client::~Client()
 }
 
 bool Client::sessionIsRunning() const {
-    return m_screen->window().isOpen();
+    if (m_graphic)
+        return m_screen->window().isOpen();
+    else
+        return true;
 }
 
-bool Client::isRunning() const { return m_inputs->runSession() && m_screen->window().isOpen(); }
+bool Client::isRunning() const
+{
+    if (m_graphic)
+        return m_inputs->runSession() && m_screen->window().isOpen();
+    else
+        return true;
+}
 
 
 void Client::update() {
     __activate();
 
-    gui::Manager& gui = gui::Manager::get();
-
     m_telegramHandler->update();
 
     //if (!m_player) {
-        assert(false);
+        //assert(false);
         //__create_player();
         //m_view->setPlayer(m_player);
-        return;
+        //return;
     //}
 
+    if (!m_player->npc()) {
+        return;
+    }
+    if (!m_player->npc()->vehicle()) {
+        return;
+    }
+    if (!m_player->npc()->vehicle()->starsystem()) {
+        return;
+    }
+
     core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
-    assert(starsystem);
 
     // simulate model(repeate what server is doing)
     //std::cout<<core::shortcuts::session()->turnTimer().ticksLeft()<<std::endl;
     core::shortcuts::session()->turnTimer().update(/*threshold*/-100);
     starsystem->update_client(core::shortcuts::session()->turnTimer().ticksLeft());
 
-    m_inputs->update(m_player);
-    m_player->cursor().updateMouseInput(*m_render);
+    if (m_graphic) {
+        m_inputs->update(m_player);
+        m_player->cursor().updateMouseInput(*m_render);
 
-    m_view->update(m_inputs->scrollAccel());
-    m_view->render(starsystem);
+        m_view->update(m_inputs->scrollAccel());
+        m_view->render(starsystem);
 
-    gui.update(m_player);
-    gui.render(*m_render, m_player);
+        gui::Manager::get().update(m_player);
+        gui::Manager::get().render(*m_render, m_player);
 
-    m_screen->draw();
+        m_screen->draw();
+    }
 }
 
 void Client::__activate() const {
