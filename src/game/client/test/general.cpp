@@ -23,10 +23,13 @@
 #include <core/communication/TelegramCreator.hpp>
 #include <core/session/Session.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/pilot/Npc.hpp>
+#include <core/spaceobject/Vehicle.hpp>
 
 #include <client/session/Session.hpp>
 #include <client/session/server.hpp>
 #include <client/session/client.hpp>
+#include <client/pilot/Player.hpp>
 
 namespace {
 
@@ -63,6 +66,10 @@ TEST(world, player_creation)
     server.update();
     client.update();
 
+    EXPECT_TRUE(client.player());
+    EXPECT_TRUE(client.player()->npc());
+    EXPECT_TRUE(client.player()->npc()->vehicle());
+    EXPECT_TRUE(client.player()->npc()->vehicle()->starsystem());
 }
 
 TEST(world, dummy)

@@ -87,18 +87,20 @@ Client::~Client()
 }
 
 bool Client::sessionIsRunning() const {
-    if (m_graphic)
+    if (m_graphic) {
         return m_screen->window().isOpen();
-    else
+    } else {
         return true;
+    }
 }
 
 bool Client::isRunning() const
 {
-    if (m_graphic)
+    if (m_graphic) {
         return m_inputs->runSession() && m_screen->window().isOpen();
-    else
+    } else {
         return true;
+    }
 }
 
 
@@ -107,22 +109,27 @@ void Client::update() {
 
     m_telegramHandler->update();
 
-    //if (!m_player) {
+    if (!m_player) {
+        request_create_player();
         //assert(false);
         //__create_player();
         //m_view->setPlayer(m_player);
         //return;
-    //}
+    }
 
+    std::cout<<"111"<<std::endl;
     if (!m_player->npc()) {
         return;
     }
+    std::cout<<"222"<<std::endl;
     if (!m_player->npc()->vehicle()) {
         return;
     }
+    std::cout<<"333"<<std::endl;
     if (!m_player->npc()->vehicle()->starsystem()) {
         return;
     }
+    std::cout<<"444"<<std::endl;
 
     core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
 
