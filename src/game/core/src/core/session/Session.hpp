@@ -42,12 +42,9 @@ namespace type {
 class Collector;
 } // namespace type
 
-
-namespace client {
-class Player;
-} // namespace client
-
 namespace core {
+
+class Player;
 
 namespace manager {
 class Descriptors;
@@ -73,7 +70,7 @@ public:
     virtual jeti::Screen* screen() const { assert(false); return nullptr; }
     virtual gui::UserInputInSpace* inputs() const { assert(false); return nullptr; }
     virtual view::StarSystem* view() const { assert(false); return nullptr; }
-    virtual client::Player* player() const { assert(false); return nullptr; }
+    virtual Player* player() const { return m_player; }
     //
 
     virtual void init(bool);
@@ -86,6 +83,7 @@ public:
 private:
     Type m_type = Type::NONE;
     TurnTimer m_turnTimer;
+    Player* m_player = nullptr;
 
     std::shared_ptr<manager::Descriptors> m_descriptors;
     std::shared_ptr<manager::Entities> m_entities;

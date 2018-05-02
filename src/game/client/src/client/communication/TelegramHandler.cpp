@@ -113,7 +113,7 @@ void TelegramHandler::__replyPlayerCreateNpc(const core::Telegram& telegram) con
     core::DoubleIdDescr descr(telegram.data());
     int_t player_id = descr.firstId();
     int_t npc_id = descr.secondId();
-    Player* player = client::shortcuts::player();
+    core::Player* player = client::shortcuts::player();
     if (player_id != player->id()) {
         return;
     }

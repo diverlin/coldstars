@@ -35,9 +35,11 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
-namespace client {
-
+namespace core {
 class Player;
+} // namespace core
+
+namespace client {
 
 namespace shortcuts {
 jeti::Render* render();
@@ -45,7 +47,7 @@ jeti::Camera* camera();
 jeti::Screen* screen();
 gui::UserInputInSpace* inputs();
 view::StarSystem* view();
-client::Player* player();
+core::Player* player();
 } // namespace shortcuts
 
 } // namespace core
