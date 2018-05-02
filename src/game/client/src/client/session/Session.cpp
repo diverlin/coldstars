@@ -40,8 +40,8 @@ Session::Session(core::Session::Type type)
     , m_camera(new jeti::Camera(1))
     , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
+    , m_player(new Player(int(type)))
     , m_inputs(new gui::UserInputInSpace)
-    , m_player(new Player())
 {
 }
 

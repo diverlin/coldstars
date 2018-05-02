@@ -2,10 +2,12 @@
 
 #include <core/communication/descriptor/ExplosionEffect.hpp>
 
+#include <core/session/Shortcuts.hpp>
 #include <core/pilot/Npc.hpp>
-#include <client/session/Shortcuts.hpp>
 #include <core/manager/EntityManager.hpp>
+#include <core/communication/descriptor/DoubleIdDescr.hpp>
 
+#include <client/session/Shortcuts.hpp>
 #include <client/resources/Utils.hpp>
 #include <client/view/StarSystem.hpp>
 
@@ -108,8 +110,15 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
 
 void TelegramHandler::__replyPlayerCreateNpc(const core::Telegram& telegram) const
 {
-        //npc =
-        //client::shortcuts::player()->setNpc(npc);
+    core::DoubleIdDescr descr(telegram.data());
+    int_t player_id = descr.firstId();
+    int_t npc_id = descr.secondId();
+    Player* player = client::shortcuts::player();
+    if (player_id != player->id()) {
+        return;
+    }
+    core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
+    player->setNpc(npc);
 }
 
 // player

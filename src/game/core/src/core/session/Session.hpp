@@ -67,7 +67,7 @@ public:
     std::shared_ptr<manager::Garbage> garbage() const { return m_garbage; }
     const type::Collector& types() const { return *m_types; }
 
-    // interface
+    // client interface
     virtual jeti::Render* render() const { assert(false); return nullptr; }
     virtual jeti::Camera* camera() const { assert(false); return nullptr; }
     virtual jeti::Screen* screen() const { assert(false); return nullptr; }
