@@ -23,12 +23,14 @@
 #include <core/manager/Garbage.hpp>
 #include <core/resource/Data.hpp>
 #include <core/type/CollectorType.hpp>
+#include <core/pilot/Player.hpp>
 
 namespace core {
 
 Session::Session(Type type)
     :
       m_type(type)
+    , m_player(new Player(int(type)))
     , m_descriptors(new manager::Descriptors)
     , m_entities(new manager::Entities)
     , m_garbage(new manager::Garbage)

@@ -50,7 +50,7 @@ view::StarSystem* view() {
     return core::Sessions::get().session()->view();
 }
 
-client::Player* player() {
+core::Player* player() {
     return core::Sessions::get().session()->player();
 }
 
