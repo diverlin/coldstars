@@ -88,7 +88,7 @@ public:
         return false;
     }
 
-    ceti::pack<T> operator<<(T val) {
+    ceti::pack<T> operator<<(const T& val) {
         add(val);
         return *this;
     }

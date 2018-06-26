@@ -36,3 +36,24 @@ TEST(string_utils, replace)
 {
     EXPECT_EQ("/path/to/file.png", ceti::replace("/path/to/file.md", ".md", ".png"));
 }
+
+TEST(string_utils, split)
+{
+    std::string input = "star,planet,asteroid";
+    std::vector<std::string> result = ceti::split(input, ",");
+    std::vector<std::string> expected = {"star", "planet", "asteroid"};
+    EXPECT_EQ(expected, result);
+}
+
+TEST(string_utils, strip)
+{
+    std::string input1("           star      ");
+    std::string input2(" star");
+    std::string input3("star ");
+    ceti::strip(input1);
+    ceti::strip(input2);
+    ceti::strip(input3);
+    EXPECT_EQ("star", input1);
+    EXPECT_EQ("star", input2);
+    EXPECT_EQ("star", input3);
+}

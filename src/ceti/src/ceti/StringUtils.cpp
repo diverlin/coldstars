@@ -19,6 +19,7 @@
 #include "StringUtils.hpp"
 
 #include <iomanip>
+#include <algorithm>
 #include <sstream>
 
 namespace {
@@ -116,6 +117,10 @@ std::string replace(const std::string& src, const std::string& from, const std::
         result.replace(it, from.size(), to);
     }
     return result;
+}
+
+void strip(std::string& str) {
+    str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
 }
 
 } // namespace ceti

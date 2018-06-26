@@ -40,5 +40,6 @@ bool to_bool(const std::string&);
 std::vector<std::string> split(const std::string& to_string, const std::string& delim);
 std::string join(const std::vector<std::string>& v, const std::string& delim);
 std::string replace(const std::string&, const std::string&, const std::string&);
+void strip(std::string&) ;
 
 } // namespace ceti
