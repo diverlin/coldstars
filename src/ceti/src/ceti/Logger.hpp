@@ -111,6 +111,8 @@ private:
     std::string m_sessionInfo;
     std::ofstream m_file;
 
+    std::string decorate(std::string) const;
+
     void toScreen(const std::string&, Code);
     void toFile(const std::string&, Code);
 };

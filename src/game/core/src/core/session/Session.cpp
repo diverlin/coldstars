@@ -37,7 +37,7 @@ Session::Session(int id)
     , m_types(new type::Collector)
 {
     m_info = isServer() ? "server" : "client";
-    m_info += "(" + std::to_string(m_id)+ "): ";
+    m_info += "(" + std::to_string(m_id)+ ")";
 }
 
 void Session::init(bool save)

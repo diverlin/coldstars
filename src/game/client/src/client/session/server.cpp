@@ -69,9 +69,9 @@
 
 namespace core {
 
-Server::Server(int id, bool dummy)
+Server::Server(bool dummy)
     :
-      m_id(id)
+      m_id(0)
     , m_session(new Session)
 {
     Sessions::get().add(m_session);

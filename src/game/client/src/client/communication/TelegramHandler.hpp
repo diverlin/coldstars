@@ -20,7 +20,9 @@ protected:
     // player
     void _createPlayer(const core::Telegram&) const;
     void _createExplosionEffect(const core::Telegram&) const;
-    void __replyPlayerCreateNpc(const core::Telegram&) const;
+
+private:
+    void __handleReplyPlayerCreateNpc(const core::Telegram&) const;
 };
 
 } // namespace client

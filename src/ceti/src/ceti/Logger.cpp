@@ -69,16 +69,22 @@ void Logger::log(const std::string& file, const std::string& func, const std::st
 //        return;
 //    }
     std::string final_msg;
-    final_msg += m_sessionInfo;
+    final_msg += decorate(m_sessionInfo);
 //    msg2 += file + ": ";
-    final_msg += func + ": ";
-    final_msg += msg;
+    final_msg += decorate("::"+func);
+    final_msg += decorate(msg);
     if (m_toFile) {
         toFile(final_msg, code);
     }
     if (m_onScreen) {
         toScreen(final_msg, code);
     }
+}
+
+std::string Logger::decorate(std::string str) const
+{
+    str = "["+str+"]";
+    return str;
 }
             
 void Logger::toScreen(const std::string& msg, Code code)

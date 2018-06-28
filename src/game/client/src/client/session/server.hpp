@@ -34,7 +34,7 @@ using WorldPtr = std::shared_ptr<control::World>;
 class Server {
 
 public:
-    Server(int id, bool dummy=false);
+    Server(bool dummy=false);
     ~Server();
 
     Session* session() const { return m_session; }

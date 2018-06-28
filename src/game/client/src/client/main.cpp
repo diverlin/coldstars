@@ -142,10 +142,8 @@
 
 int main()
 {
-    int server_id = 0;
-    int client_id = 1;
-    core::Server server(server_id, true);
-    client::Client client(client_id);
+    core::Server server(true);
+    client::Client client(1);
 
     //client::shortcuts::screen()->window().close()
 

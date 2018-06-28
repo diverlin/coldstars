@@ -23,7 +23,7 @@ namespace client {
 
 void TelegramHandler::_process(const core::Telegram& telegram) const
 {
-    LOG_COMM("process telegram="+telegram::to_string(telegram.type()));
+    LOG_COMM("process "+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */
@@ -100,7 +100,7 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
     case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
     case telegram::Type::CREATE_EXPLOSION_EFFECT: _createExplosionEffect(telegram); break;
     case telegram::Type::VEHICLE_TARGET_SPACEOBJECT: _vehicleTargetSpaceOject(telegram); break;
-    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __replyPlayerCreateNpc(telegram); break;
+    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __handleReplyPlayerCreateNpc(telegram); break;
     default: {
         assert(false);
         break;
@@ -108,7 +108,7 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
     }
 }
 
-void TelegramHandler::__replyPlayerCreateNpc(const core::Telegram& telegram) const
+void TelegramHandler::__handleReplyPlayerCreateNpc(const core::Telegram& telegram) const
 {
     core::DoubleIdDescr descr(telegram.data());
     int_t player_id = descr.firstId();
