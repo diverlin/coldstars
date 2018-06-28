@@ -23,7 +23,7 @@ namespace client {
 
 void TelegramHandler::_process(const core::Telegram& telegram) const
 {
-    LOG_COMM("--client: process telegram="+telegram::to_string(telegram.type()));
+    LOG_COMM("process telegram="+telegram::to_string(telegram.type()));
 
     switch(telegram.type()) {
     /** CREATE */

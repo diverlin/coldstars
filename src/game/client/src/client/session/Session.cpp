@@ -34,13 +34,13 @@
 
 namespace client {
 
-Session::Session(core::Session::Type type)
+Session::Session(int id)
     :
-      core::Session(type)
+      core::Session(id)
     , m_camera(new jeti::Camera(1))
     , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
-    , m_player(new Player(int(type)))
+    , m_player(new Player(id))
     , m_inputs(new gui::UserInputInSpace)
 {
 }

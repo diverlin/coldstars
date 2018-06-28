@@ -18,6 +18,8 @@
 
 #include "Sessions.hpp"
 
+#include <core/session/Session.hpp>
+
 #include <ceti/Logger.hpp>
 
 namespace core {
@@ -34,8 +36,9 @@ void Sessions::remove(int id) {
     m_sessions.erase(it);
 }
 
-void Sessions::add(int id, Session* session)
+void Sessions::add(Session* session)
 {
+    int id = session->id();
     if (m_sessions.find(id) != m_sessions.end()) {
         ceti::abort("attempt to registry id =" + std::to_string(id) + " which already exists");
     }
@@ -43,9 +46,12 @@ void Sessions::add(int id, Session* session)
 }
 
 void Sessions::activate(int id) {
-    if (m_sessions.find(id) == m_sessions.end()) {
+    auto it = m_sessions.find(id);
+    if (it == m_sessions.end()) {
         ceti::abort("attempt to activate id =" + std::to_string(id) + " which doesn't exists");
     }
+
+    LOG_SET_SESSION_INFO(it->second->info());
     m_active = id;
 }
 

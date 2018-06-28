@@ -43,7 +43,7 @@ namespace client {
 
 class Session : public core::Session {
 public:
-    Session(core::Session::Type);
+    Session(int);
     ~Session() override;
 
     void init(bool) override final;

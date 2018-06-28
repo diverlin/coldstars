@@ -54,10 +54,10 @@ class Garbage;
 
 class Session {
 public:
-    enum class Type : int { NONE, SERVER, CLIENT };
-
-    Session(Type);
+    Session(int id=0);
     virtual ~Session()=default;
+
+    int id() const { return m_id; }
 
     std::shared_ptr<manager::Descriptors> descriptors() const { return m_descriptors; }
     std::shared_ptr<manager::Entities> entities() const { return m_entities; }
@@ -75,13 +75,17 @@ public:
 
     virtual void init(bool);
 
-    bool isServer() const { return m_type == Type::SERVER; }
+    const std::string& info() const { return m_info; }
+
+    bool isServer() const { return (m_id == 0); }
+    bool isClient() const { return (m_id > 0); }
 
     TurnTimer& turnTimer() { return m_turnTimer; }
     void endTurn() { m_turnTimer.nextTurn(); }
 
 private:
-    Type m_type = Type::NONE;
+    std::string m_info;
+    int m_id = -1;  // id with 0 is server, id above 0 are clients
     TurnTimer m_turnTimer;
     Player* m_player = nullptr;
 

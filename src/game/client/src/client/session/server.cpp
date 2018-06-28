@@ -72,9 +72,9 @@ namespace core {
 Server::Server(int id, bool dummy)
     :
       m_id(id)
-    , m_session(new Session(Session::Type::SERVER))
+    , m_session(new Session)
 {
-    Sessions::get().add(id, m_session);
+    Sessions::get().add(m_session);
     __activate();
 
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler(core::TelegramCreator::get()));

@@ -39,7 +39,6 @@ Logger& Logger::get()
 
 Logger::Logger()
 {
-    m_mode = Mode::SCREEN;
     m_codes.add(Code::GUI);
     //m_codes.add(Code::ANY);
     //m_codes.add(Code::DATA);
@@ -51,34 +50,34 @@ Logger::~Logger()
     m_file.close();
 }
 
-void Logger::warn(const std::string& msg)
+void Logger::warn(const std::string& file, const std::string& func, const std::string& msg)
 {
     std::string text = "WARNING!!!: "+ msg;
-    log(text);
+    log(file, func, text);
 }
 
-void Logger::error(const std::string& msg)
+void Logger::error(const std::string& file, const std::string& func, const std::string& msg)
 {
     std::string text = "ERROR!!!: "+ msg;
-    log(text);
+    log(file, func, text);
     throw std::runtime_error(text);
 }
 
-void Logger::log(const std::string& msg, Code code)
+void Logger::log(const std::string& file, const std::string& func, const std::string& msg, Code code)
 {
-    if (!m_codes.contains(code)) {
-        return;
+//    if (!m_codes.contains(code)) {
+//        return;
+//    }
+    std::string final_msg;
+    final_msg += m_sessionInfo;
+//    msg2 += file + ": ";
+    final_msg += func + ": ";
+    final_msg += msg;
+    if (m_toFile) {
+        toFile(final_msg, code);
     }
-
-    switch(m_mode) {
-        case Mode::SCREEN: { toScreen(msg, code); break; }
-        case Mode::FILE: { toFile(msg, code); break;  }
-        case Mode::SCREENFILE: {
-            toScreen(msg, code);
-            toFile(msg, code);
-            break;
-        }
-        case Mode::NONE: { break; }
+    if (m_onScreen) {
+        toScreen(final_msg, code);
     }
 }
             

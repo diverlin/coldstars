@@ -54,12 +54,12 @@ Client::Client(int id, bool graphic):
   , m_graphic(graphic)
 {
     if (m_graphic) {
-        m_session = new Session(core::Session::Type::CLIENT);
+        m_session = new Session(id);
     } else {
-        m_session = new core::Session(core::Session::Type::CLIENT);
+        m_session = new core::Session(id);
     }
 
-    core::Sessions::get().add(id, m_session);
+    core::Sessions::get().add(m_session);
     __activate();
 
     bool save = false;
@@ -117,15 +117,15 @@ void Client::update() {
         //return;
     }
 
-    std::cout<<"111"<<std::endl;
+    //std::cout<<"111"<<std::endl;
     if (!m_player->npc()) {
         return;
     }
-    std::cout<<"222"<<std::endl;
+    //std::cout<<"222"<<std::endl;
     if (!m_player->npc()->vehicle()) {
         return;
     }
-    std::cout<<"333"<<std::endl;
+    //std::cout<<"333"<<std::endl;
     if (!m_player->npc()->vehicle()->starsystem()) {
         return;
     }

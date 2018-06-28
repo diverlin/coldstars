@@ -28,17 +28,54 @@
 //    #define LOGs( ... )         std::cout  << __VA_ARGS__ << " "
 //    #define LOG( ... )          std::cout  << __VA_ARGS__ << std::endl
 //    #define LOG_ERROR( ... )    std::cout  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
-    #define LOG( ... )          Logger::get().log(__VA_ARGS__)
-    #define LOG_DATA( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::DATA)
-    #define LOG_COMM( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
+//    #define LOG( ... )          Logger::get().log(__VA_ARGS__)
+//    #define LOG_DATA( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::DATA)
+//    #define LOG_COMM( ... )     Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
     //#define LOG_COMM_DIP1( ... ) Logger::get().log(__VA_ARGS__, Logger::Code::COMM)
-    #define LOG_COMM_DIP1( ... )
-    #define LOG_ERROR( ... )    Logger::get().log_error(__VA_ARGS__)
+//    #define LOG_ERROR( ... )    Logger::get().log_error(__VA_ARGS__)
+#else
+//    #define LOG( ... )
+//    #define LOG_DATA( ... )
+//    #define LOG_COMM( ... )
+//    #define LOG_COMM_DIP1( ... )
+//    #define LOG_ERROR( ... )
+#endif
+
+#define USE_LOG_COMMON 0
+#define USE_LOG_DATA 0
+#define USE_LOG_COMM 1
+#define USE_LOG_COMM_DIP1 0
+#define USE_LOG_ERROR 0
+
+#define LOG_SET_SESSION_INFO( ... )  Logger::get().setSessionInfo(__VA_ARGS__)
+
+#if USE_LOG_COMMON
+    #define LOG( ... )              Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__)
 #else
     #define LOG( ... )
+#endif
+
+#if USE_LOG_DATA
+    #define LOG_DATA( ... )         Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::DATA)
+#else
     #define LOG_DATA( ... )
+#endif
+
+#if USE_LOG_COMM
+    #define LOG_COMM( ... )         Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::COMM)
+#else
     #define LOG_COMM( ... )
+#endif
+
+#if USE_LOG_COMM_DIP1
+    #define LOG_COMM_DIP1( ... )    Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::COMM)
+#else
     #define LOG_COMM_DIP1( ... )
+#endif
+
+#if USE_LOG_ERROR
+    #define LOG_ERROR( ... )        Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::EROR)
+#else
     #define LOG_ERROR( ... )
 #endif
 
@@ -56,20 +93,22 @@ public:
     static Logger& get();
     ~Logger();
 
-    void log(const std::string&, Code code=Code::ANY);
-    void warn(const std::string&);
-    void error(const std::string&);
+    void setSessionInfo(const std::string& sessionInfo) { m_sessionInfo = sessionInfo; }
+
+    void log(const std::string& file, const std::string& func, const std::string&, Code code=Code::ANY);
+    void warn(const std::string& file, const std::string& func, const std::string&);
+    void error(const std::string& file, const std::string& func, const std::string&);
 
 private:
-    enum class Mode: int { NONE=0, SCREEN, FILE, SCREENFILE };
-
     Logger();
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
     ceti::pack<Code> m_codes;
-    Mode m_mode;
+    bool m_onScreen = true;
+    bool m_toFile = false;
 
+    std::string m_sessionInfo;
     std::ofstream m_file;
 
     void toScreen(const std::string&, Code);

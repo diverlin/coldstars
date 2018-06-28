@@ -36,7 +36,7 @@ private:
 public:
     static Sessions& get();
 
-    void add(int, Session* session);
+    void add(Session* session);
     void remove(int);
     void activate(int);
 

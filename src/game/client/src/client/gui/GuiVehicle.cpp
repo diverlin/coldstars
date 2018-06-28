@@ -225,7 +225,7 @@ void Vehicle::bindVehicle(core::control::Vehicle* vehicle,
     if (m_vehicle == vehicle) {
         return;
     }
-    Logger::get().log("Vehicle::bindVehicle", Logger::Code::GUI);
+    LOG("", Logger::Code::GUI);
     m_vehicle = vehicle;
 
     m_allowFullControl = allow_full_control;
@@ -237,7 +237,7 @@ void Vehicle::bindVehicle(core::control::Vehicle* vehicle,
 
 void Vehicle::unbindVehicle()
 { 
-    Logger::get().log("Vehicle::unbindVehicle", Logger::Code::GUI);
+    LOG("", Logger::Code::GUI);
     for (auto* child : _children()) {
         delete child;
     }

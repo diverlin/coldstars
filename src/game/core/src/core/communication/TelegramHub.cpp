@@ -18,7 +18,7 @@ void TelegramHub::unsubscribe(const std::shared_ptr<BTelegramHandler>& listener)
 
 void TelegramHub::add(const Telegram& telegram)
 {
-    //LOG_COMM("--server: TelegramHub got telegram "+telegram::to_string(telegram.type()));
+    //LOG_COMM("TelegramHub got telegram "+telegram::to_string(telegram.type()));
     m_telegrams.push_back(telegram);
 }
 

@@ -27,16 +27,17 @@
 
 namespace core {
 
-Session::Session(Type type)
+Session::Session(int id)
     :
-      m_type(type)
-    , m_player(new Player(int(type)))
+      m_id(id)
+    , m_player(new Player(id))
     , m_descriptors(new manager::Descriptors)
     , m_entities(new manager::Entities)
     , m_garbage(new manager::Garbage)
     , m_types(new type::Collector)
 {
-
+    m_info = isServer() ? "server" : "client";
+    m_info += "(" + std::to_string(m_id)+ "): ";
 }
 
 void Session::init(bool save)
