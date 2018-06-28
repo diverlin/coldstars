@@ -58,7 +58,7 @@ public:
     void requestCreatePlayerNpc();
     void update();
 
-//    Player* player() const { return m_player; }
+    Player* player() const { return m_player; }
 
 private:
     int m_graphic = false;
