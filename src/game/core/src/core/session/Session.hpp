@@ -52,10 +52,10 @@ class Entities;
 class Garbage;
 } // namespace manager
 
-class Session {
+class BaseSession {
 public:
-    Session(int id=0);
-    virtual ~Session()=default;
+    BaseSession(int id=0);
+    virtual ~BaseSession()=default;
 
     int id() const { return m_id; }
 
@@ -84,7 +84,6 @@ public:
     void endTurn() { m_turnTimer.nextTurn(); }
 
 private:
-    std::string m_info;
     int m_id = -1;  // id with 0 is server, id above 0 are clients
     TurnTimer m_turnTimer;
     Player* m_player = nullptr;
@@ -93,6 +92,8 @@ private:
     std::shared_ptr<manager::Entities> m_entities;
     std::shared_ptr<manager::Garbage> m_garbage;
     type::Collector* m_types = nullptr;
+
+    std::string m_info;
 };
 
 } // namespace core

@@ -72,7 +72,7 @@ namespace core {
 Server::Server(bool dummy)
     :
       m_id(0)
-    , m_session(new Session)
+    , m_session(new BaseSession)
 {
     Sessions::get().add(m_session);
     __activate();

@@ -39,12 +39,10 @@ namespace view {
 class StarSystem;
 } // namespace view
 
-namespace client {
-
-class Session : public core::Session {
+class ClientSession : public core::BaseSession {
 public:
-    Session(int);
-    ~Session() override;
+    ClientSession(int);
+    ~ClientSession() override;
 
     void init(bool) override final;
 
@@ -68,6 +66,5 @@ private:
     gui::UserInputInSpace* m_inputs = nullptr;
 };
 
-} // namespace client
 
 

@@ -33,7 +33,7 @@
 
 namespace {
 
-core::control::Ship* getShip(core::Session* session, int_t id) {
+core::control::Ship* getShip(core::BaseSession* session, int_t id) {
     return session->entities()->ship(id);
 }
 

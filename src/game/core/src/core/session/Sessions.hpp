@@ -23,28 +23,28 @@
 
 namespace core {
 
-class Session;
+class BaseSession;
 
 class Sessions
 {
 private:
     Sessions() = default;
-    Sessions(const Session&) = delete;
+    Sessions(const BaseSession&) = delete;
     ~Sessions() = default;
     Sessions& operator=(const Sessions&) = delete;
 
 public:
     static Sessions& get();
 
-    void add(Session* session);
+    void add(BaseSession* session);
     void remove(int);
     void activate(int);
 
-    Session* session() const;
+    BaseSession* session() const;
 
 private:
     int m_active = -1;
-    std::map<int, Session*> m_sessions;
+    std::map<int, BaseSession*> m_sessions;
 };
 
 } // namespace core

@@ -36,7 +36,7 @@ void Sessions::remove(int id) {
     m_sessions.erase(it);
 }
 
-void Sessions::add(Session* session)
+void Sessions::add(BaseSession* session)
 {
     int id = session->id();
     if (m_sessions.find(id) != m_sessions.end()) {
@@ -55,7 +55,7 @@ void Sessions::activate(int id) {
     m_active = id;
 }
 
-Session*
+BaseSession*
 Sessions::session() const {
     assert(m_sessions.size()>0);
     assert(m_active != -1);

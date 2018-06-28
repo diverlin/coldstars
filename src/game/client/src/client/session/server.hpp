@@ -22,7 +22,7 @@
 namespace core {
 
 class Player;
-class Session;
+class BaseSession;
 class TelegramHandler;
 
 namespace control {
@@ -37,14 +37,14 @@ public:
     Server(bool dummy=false);
     ~Server();
 
-    Session* session() const { return m_session; }
+    BaseSession* session() const { return m_session; }
     control::World* world() const { return m_world.get(); }
 
     void update();
 
 private:
     int m_id = -1;
-    Session* m_session = nullptr;
+    BaseSession* m_session = nullptr;
     WorldPtr m_world;
     std::vector<Player*> m_players;
 

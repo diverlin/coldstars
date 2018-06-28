@@ -54,9 +54,9 @@ Client::Client(int id, bool graphic):
   , m_graphic(graphic)
 {
     if (m_graphic) {
-        m_session = new Session(id);
+        m_session = new ClientSession(id);
     } else {
-        m_session = new core::Session(id);
+        m_session = new core::BaseSession(id);
     }
 
     core::Sessions::get().add(m_session);

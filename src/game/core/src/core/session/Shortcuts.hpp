@@ -27,7 +27,7 @@ class Collector;
 
 namespace core {
 
-class Session;
+class BaseSession;
 
 namespace manager {
 class Descriptors;
@@ -36,7 +36,7 @@ class Garbage;
 }; // namespace manager
 
 namespace shortcuts {
-core::Session* session();
+core::BaseSession* session();
 std::shared_ptr<manager::Descriptors> descriptors();
 std::shared_ptr<core::manager::Entities> entities();
 std::shared_ptr<core::manager::Garbage> garbage();

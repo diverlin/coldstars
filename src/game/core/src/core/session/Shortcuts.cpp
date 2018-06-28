@@ -28,7 +28,7 @@ namespace core {
 
 namespace shortcuts {
 
-core::Session* session() {
+core::BaseSession* session() {
     return core::Sessions::get().session();
 }
 

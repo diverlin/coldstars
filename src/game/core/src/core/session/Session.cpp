@@ -27,7 +27,7 @@
 
 namespace core {
 
-Session::Session(int id)
+BaseSession::BaseSession(int id)
     :
       m_id(id)
     , m_player(new Player(id))
@@ -40,7 +40,7 @@ Session::Session(int id)
     m_info += "(" + std::to_string(m_id)+ ")";
 }
 
-void Session::init(bool save)
+void BaseSession::init(bool save)
 {
     Data data(save);
 }

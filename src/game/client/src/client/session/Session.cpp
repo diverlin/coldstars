@@ -32,20 +32,18 @@
 #include <ceti/Logger.hpp>
 
 
-namespace client {
-
-Session::Session(int id)
+ClientSession::ClientSession(int id)
     :
-      core::Session(id)
+      core::BaseSession(id)
     , m_camera(new jeti::Camera(1))
     , m_render(new jeti::Render(m_camera))
     , m_screen(new jeti::Screen)
-    , m_player(new Player(id))
+    , m_player(new client::Player(id))
     , m_inputs(new gui::UserInputInSpace)
 {
 }
 
-Session::~Session()
+ClientSession::~ClientSession()
 {
     delete m_render;
     delete m_camera;
@@ -56,7 +54,7 @@ Session::~Session()
 }
 
 void
-Session::init(bool save) {
+ClientSession::init(bool save) {
     if (m_init) {
         return;
     }
@@ -76,4 +74,3 @@ Session::init(bool save) {
     m_init = true;
 }
 
-} // client
