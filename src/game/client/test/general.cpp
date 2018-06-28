@@ -57,7 +57,7 @@ TEST(world, player_creation)
     core::Server server(true);
     client::Client client(1);
 
-    client.request_create_player();
+    client.requestCreatePlayerNpc();
     client.update();
 
     server.update();

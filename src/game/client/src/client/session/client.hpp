@@ -55,10 +55,10 @@ public:
     bool sessionIsRunning() const; // why both?
     bool isRunning() const; // why both?
 
-    void request_create_player();
+    void requestCreatePlayerNpc();
     void update();
 
-    Player* player() const { return m_player; }
+//    Player* player() const { return m_player; }
 
 private:
     int m_graphic = false;

@@ -63,7 +63,7 @@ Client::Client(int id, bool graphic):
     __activate();
 
     bool save = false;
-    core::shortcuts::session()->init(save);
+    m_session->init(save);
 
     if (m_graphic) {
         m_camera = shortcuts::camera();
@@ -74,6 +74,7 @@ Client::Client(int id, bool graphic):
     }
 
     m_player = new Player(m_id);
+    //m_session->setPlayer(m_player);
 
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
@@ -109,27 +110,27 @@ void Client::update() {
 
     m_telegramHandler->update();
 
-    if (!m_player) {
-        request_create_player();
+    //    //std::cout<<"111"<<std::endl;
+    if (!m_player->npc()) {
+        requestCreatePlayerNpc();
+        return;
         //assert(false);
         //__create_player();
         //m_view->setPlayer(m_player);
-        //return;
     }
 
-    //std::cout<<"111"<<std::endl;
-    if (!m_player->npc()) {
-        return;
-    }
     //std::cout<<"222"<<std::endl;
     if (!m_player->npc()->vehicle()) {
+        assert(false);
+        //requestCreatePlayerVehicle();
         return;
     }
     //std::cout<<"333"<<std::endl;
     if (!m_player->npc()->vehicle()->starsystem()) {
         return;
     }
-    std::cout<<"444"<<std::endl;
+
+    //std::cout<<"444"<<std::endl;
 
     core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
 
@@ -139,6 +140,10 @@ void Client::update() {
     starsystem->update_client(core::shortcuts::session()->turnTimer().ticksLeft());
 
     if (m_graphic) {
+
+        //if (!m_view->player()) {
+            m_view->setPlayer(m_player);
+        //}
         m_inputs->update(m_player);
         m_player->cursor().updateMouseInput(*m_render);
 
@@ -156,7 +161,7 @@ void Client::__activate() const {
     core::Sessions::get().activate(m_id);
 }
 
-void Client::request_create_player() {
+void Client::requestCreatePlayerNpc() {
     m_player->requestCreateNpc();
 }
 
