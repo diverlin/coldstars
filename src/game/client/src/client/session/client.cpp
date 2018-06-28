@@ -105,27 +105,19 @@ void Client::update() {
 
     m_telegramHandler->update();
 
-    //    //std::cout<<"111"<<std::endl;
     if (!player()->npc()) {
         requestCreatePlayerNpc();
         return;
-        //assert(false);
-        //__create_player();
-        //m_view->setPlayer(m_player);
     }
 
-    //std::cout<<"222"<<std::endl;
     if (!player()->npc()->vehicle()) {
-        //assert(false);
-        //requestCreatePlayerVehicle();
+        requestCreatePlayerVehicle();
         return;
     }
-    //std::cout<<"333"<<std::endl;
+
     if (!player()->npc()->vehicle()->starsystem()) {
         return;
     }
-
-    //std::cout<<"444"<<std::endl;
 
     core::control::StarSystem* starsystem = player()->npc()->vehicle()->starsystem();
 
@@ -136,9 +128,9 @@ void Client::update() {
 
     if (m_graphic) {
 
-        //if (!m_view->player()) {
+        if (!m_view->player()) {
             m_view->setPlayer(player());
-        //}
+        }
         m_inputs->update(player());
         player()->cursor().updateMouseInput(*m_render);
 
@@ -160,29 +152,9 @@ void Client::requestCreatePlayerNpc() {
     player()->requestCreateNpc();
 }
 
-void Client::reply_create_player(int_t npc_id)
+void Client::requestCreatePlayerVehicle()
 {
-    core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
-    assert(npc);
-    player()->setNpc(npc);
+    // assert(false);
 }
-
-//void Client::__create_player() {
-//    core::control::Galaxy* galaxy = core::shortcuts::entities()->galaxy();
-//    if (!galaxy) {
-//        //            if (meti::rand::gen_int(1000) == 1000)
-//        //                std::cout<<"galaxy is null"<<std::endl;
-//        return;
-//    }
-
-//    int_t id = core::shortcuts::entities()->nextId();
-//    m_player = new Player(id);
-
-//    core::control::StarSystem* starsystem = galaxy->randomSector()->randomStarSystem();
-//    assert(starsystem->ships().size());
-//    core::control::Npc* npc = starsystem->ships().front()->npc();
-//    assert(npc);
-//    m_player->setNpc(npc);
-//}
 
 } // namespace client

@@ -49,12 +49,14 @@ public:
 
     ClientSession* session() const { return m_session; }
 
-    void reply_create_player(int_t npc_id);
+//    void reply_create_player(int_t npc_id);
 
     bool sessionIsRunning() const; // why both?
     bool isRunning() const; // why both?
 
     void requestCreatePlayerNpc();
+    void requestCreatePlayerVehicle();
+
     void update();
 
     Player* player() const;

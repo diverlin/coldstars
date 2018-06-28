@@ -106,6 +106,8 @@ public:
     StarSystem(jeti::Render&, jeti::Screen&);
     ~StarSystem();
 
+    client::Player* player() const { return m_player; }
+
     void setPlayer(client::Player* player) { m_player = player; }
     Base* mouseInterraction(const glm::vec3&) const;
 

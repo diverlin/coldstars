@@ -30,7 +30,6 @@ namespace core {
 BaseSession::BaseSession(int id)
     :
       m_id(id)
-//    , m_player(new Player(id))
     , m_descriptors(new manager::Descriptors)
     , m_entities(new manager::Entities)
     , m_garbage(new manager::Garbage)
