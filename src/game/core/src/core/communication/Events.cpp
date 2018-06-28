@@ -44,7 +44,7 @@
 
 #include <core/builder/world/StarSystemBuilder.hpp>
 
-#include <core/session/Session.hpp>
+#include <core/session/BaseSession.hpp>
 
 #include <ceti/Logger.hpp>
 

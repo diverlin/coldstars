@@ -19,8 +19,8 @@
 #include "Shortcuts.hpp"
 
 #include <core/session/Sessions.hpp>
-#include <core/session/Session.hpp>
 
+#include <client/session/ClientSession.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 
 #include <jeti/Render.hpp>
@@ -31,27 +31,27 @@ namespace client {
 namespace shortcuts {
 
 jeti::Render* render() {
-    return core::Sessions::get().session()->render();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->render();
 }
 
 jeti::Camera* camera() {
-    return core::Sessions::get().session()->camera();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->camera();
 }
 
 jeti::Screen* screen() {
-    return core::Sessions::get().session()->screen();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->screen();
 }
 
 gui::UserInputInSpace* inputs() {
-    return core::Sessions::get().session()->inputs();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->inputs();
 }
 
 view::StarSystem* view() {
-    return core::Sessions::get().session()->view();
+    return static_cast<ClientSession*>(core::Sessions::get().session())->view();
 }
 
-core::Player* player() {
-    return core::Sessions::get().session()->player();
+client::Player* player() {
+    return static_cast<ClientSession*>(core::Sessions::get().session())->player();
 }
 
 } // namespace shortcuts

@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Session.hpp"
+#include "ClientSession.hpp"
 
 #include <core/resource/Data.hpp>
 
@@ -32,15 +32,19 @@
 #include <ceti/Logger.hpp>
 
 
-ClientSession::ClientSession(int id)
+ClientSession::ClientSession(int id, bool use_graphic)
     :
       core::BaseSession(id)
-    , m_camera(new jeti::Camera(1))
-    , m_render(new jeti::Render(m_camera))
-    , m_screen(new jeti::Screen)
-    , m_player(new client::Player(id))
-    , m_inputs(new gui::UserInputInSpace)
+    , m_use_graphic(use_graphic)
 {
+    if (m_use_graphic) {
+        m_camera = new jeti::Camera;
+        m_render = new jeti::Render(m_camera);
+        m_screen = new jeti::Screen;
+        m_inputs = new gui::UserInputInSpace;
+    }
+
+    m_player = new client::Player(id);
 }
 
 ClientSession::~ClientSession()
@@ -61,14 +65,19 @@ ClientSession::init(bool save) {
 
     srand(time(0));
 
-    /// in a name of god don't change order below
-    m_screen->init();
-    m_render->init(m_screen->width(), m_screen->height());
+    if (m_use_graphic) {
+        /// in a name of god don't change order below
+        m_screen->init();
+        m_render->init(m_screen->width(), m_screen->height());
+    }
 
     core::Data data(save);
-    gui::MaterialCollector::get().load();
 
-    m_view = new view::StarSystem(*m_render, *m_screen);
+    if (m_use_graphic) {
+        gui::MaterialCollector::get().load();
+
+        m_view = new view::StarSystem(*m_render, *m_screen);
+    }
     ///
 
     m_init = true;

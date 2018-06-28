@@ -1,3 +1,4 @@
+
 /*
      Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -16,48 +17,25 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "World.hpp"
-
-#include <common/Global.hpp>
-
-#include <ai/God.hpp>
-
-#include <world/galaxy.hpp>
-
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
+# pragma once
 
 #include <core/session/BaseSession.hpp>
-#include <core/manager/DescriptorManager.hpp>
+
+#include <vector>
 
 namespace core {
-namespace control {
 
-World::World(bool dummy)
-{
-    core::global::get().god().createWorld(dummy);
-}
+class Player;
 
-World::~World()
-{
-}
+class ServerSession : public core::BaseSession {
+    ServerSession();
+    ~ServerSession() override final;
 
-Galaxy*
-World::galaxy() const {
-    return global::get().god().galaxy();
-}
+private:
+    std::vector<core::Player*> m_players;
+};
 
-bool World::run() const
-{
-    while (m_isRunning) {
-       core::global::get().god().update();
-    }
-    return EXIT_SUCCESS;
-}
 
-void World::update()
-{
-   core::global::get().god().update();
-}
-
-} // namespace control
 } // namespace core
+
+

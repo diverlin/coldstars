@@ -33,7 +33,7 @@ class Camera : public NonCopyable
     const float INERTIA_RATE = 0.95f;
 
 public:
-    Camera(float radius)
+    Camera(float radius = 1.0f)
         :
           m_radius(radius)
     {

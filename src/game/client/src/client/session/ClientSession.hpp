@@ -19,7 +19,7 @@
 
 # pragma once
 
-#include <core/session/Session.hpp>
+#include <core/session/BaseSession.hpp>
 
 namespace gui {
 class UserInputInSpace;
@@ -39,29 +39,34 @@ namespace view {
 class StarSystem;
 } // namespace view
 
+namespace client {
+class Player;
+} // namespace client
+
 class ClientSession : public core::BaseSession {
 public:
-    ClientSession(int);
-    ~ClientSession() override;
+    ClientSession(int, bool use_graphic = true);
+    ~ClientSession() override final;
 
     void init(bool) override final;
 
-    jeti::Render* render() const override final { return m_render; }
-    jeti::Camera* camera() const override final { return m_camera; }
-    jeti::Screen* screen() const override final { return m_screen; }
-    view::StarSystem* view() const override final { return m_view; }
-    core::Player* player() const override final { return m_player; }
+    client::Player* player() const { return m_player; }
 
-    gui::UserInputInSpace* inputs() const override final { return m_inputs; }
+    jeti::Render* render() const { assert(m_use_graphic); return m_render; }
+    jeti::Camera* camera() const { assert(m_use_graphic); return m_camera; }
+    jeti::Screen* screen() const { assert(m_use_graphic); return m_screen; }
+    view::StarSystem* view() const { assert(m_use_graphic); return m_view; }
+    gui::UserInputInSpace* inputs() const { assert(m_use_graphic); return m_inputs; }
 
 private:
+    bool m_use_graphic = true;
     bool m_init = false;
 
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render = nullptr;
     jeti::Screen* m_screen = nullptr;
     view::StarSystem* m_view = nullptr;
-    core::Player* m_player = nullptr;
+    client::Player* m_player = nullptr;
 
     gui::UserInputInSpace* m_inputs = nullptr;
 };

@@ -18,7 +18,7 @@
 
 #include "Shortcuts.hpp"
 #include <core/session/Sessions.hpp>
-#include <core/session/Session.hpp>
+#include <core/session/BaseSession.hpp>
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>

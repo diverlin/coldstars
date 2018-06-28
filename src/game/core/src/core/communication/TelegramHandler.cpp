@@ -7,7 +7,7 @@
 
 #include <core/type/EntityType.hpp> // test
 
-#include <core/session/Session.hpp>
+#include <core/session/BaseSession.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/Garbage.hpp>
 

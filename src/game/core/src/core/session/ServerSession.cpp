@@ -16,29 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
-
-#include <core/pilot/Player.hpp>
-
-//#include <core/session/Session.hpp>
-//#include <core/manager/EntityManager.hpp>
+#include "ServerSession.hpp"
 
 namespace core {
 
-core::Player*
-PlayerBuilder::gen(int_t id)
-{
-    return __genTemplate(id);
+ServerSession::ServerSession():
+core::BaseSession(0) {
+
 }
 
-core::Player*
-PlayerBuilder::__genTemplate(int_t id)
+ServerSession::~ServerSession()
 {
-    core::Player* player = new core::Player(id);
-    assert(player);
-
-    return player;
+    // delete all players, but before that send disconnect command
 }
 
-} // namespace core
-
+} // core

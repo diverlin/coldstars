@@ -24,19 +24,19 @@
 #include <memory>
 #include <cassert>
 
-// workaround
-namespace gui {
-class UserInputInSpace;
-} // namespace gui
-namespace jeti {
-class Render;
-class Camera;
-class Screen;
-} // namespace jeti
-namespace view {
-class StarSystem;
-} // namespace view
-// workaround
+//// workaround
+//namespace gui {
+//class UserInputInSpace;
+//} // namespace gui
+//namespace jeti {
+//class Render;
+//class Camera;
+//class Screen;
+//} // namespace jeti
+//namespace view {
+//class StarSystem;
+//} // namespace view
+//// workaround
 
 namespace type {
 class Collector;
@@ -65,12 +65,12 @@ public:
     const type::Collector& types() const { return *m_types; }
 
     // client interface
-    virtual jeti::Render* render() const { assert(false); return nullptr; }
-    virtual jeti::Camera* camera() const { assert(false); return nullptr; }
-    virtual jeti::Screen* screen() const { assert(false); return nullptr; }
-    virtual gui::UserInputInSpace* inputs() const { assert(false); return nullptr; }
-    virtual view::StarSystem* view() const { assert(false); return nullptr; }
-    virtual Player* player() const { return m_player; }
+//    virtual jeti::Render* render() const { assert(false); return nullptr; }
+//    virtual jeti::Camera* camera() const { assert(false); return nullptr; }
+//    virtual jeti::Screen* screen() const { assert(false); return nullptr; }
+//    virtual gui::UserInputInSpace* inputs() const { assert(false); return nullptr; }
+//    virtual view::StarSystem* view() const { assert(false); return nullptr; }
+//    virtual Player* player() const { return m_player; }
     //
 
     virtual void init(bool);
@@ -86,7 +86,7 @@ public:
 private:
     int m_id = -1;  // id with 0 is server, id above 0 are clients
     TurnTimer m_turnTimer;
-    Player* m_player = nullptr;
+//    Player* m_player = nullptr;
 
     std::shared_ptr<manager::Descriptors> m_descriptors;
     std::shared_ptr<manager::Entities> m_entities;

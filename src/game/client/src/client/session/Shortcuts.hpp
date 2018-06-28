@@ -19,7 +19,7 @@
 
 # pragma once
 
-#include <memory>
+//#include <memory>
 
 namespace jeti {
 class Render;
@@ -35,9 +35,9 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
-namespace core {
+namespace client {
 class Player;
-} // namespace core
+} // namespace client
 
 namespace client {
 
@@ -47,7 +47,7 @@ jeti::Camera* camera();
 jeti::Screen* screen();
 gui::UserInputInSpace* inputs();
 view::StarSystem* view();
-core::Player* player();
+client::Player* player();
 } // namespace shortcuts
 
 } // namespace core

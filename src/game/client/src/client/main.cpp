@@ -23,7 +23,7 @@
 
 #include <core/communication/TelegramCreator.hpp>
 #include <core/communication/TelegramHandler.hpp>
-#include <core/session/Session.hpp>
+#include <core/session/ServerSession.hpp>
 #include <core/session/Sessions.hpp>
 #include <core/session/Shortcuts.hpp>
 #include <core/resource/Data.hpp>
@@ -35,7 +35,7 @@
 
 #include <meti/RandUtils.hpp>
 
-#include <client/session/Session.hpp>
+#include <client/session/ClientSession.hpp>
 #include <client/session/Shortcuts.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>

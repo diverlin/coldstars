@@ -55,7 +55,7 @@
 #include <math/rand.hpp>
 
 #include <core/manager/EntityManager.hpp>
-#include <core/session/Session.hpp>
+#include <core/session/BaseSession.hpp>
 #include <core/manager/Garbage.hpp>
 
 #include <meti/RandUtils.hpp>

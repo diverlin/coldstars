@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Session.hpp"
+#include "BaseSession.hpp"
 
 #include <core/manager/DescriptorManager.hpp>
 #include <core/manager/EntityManager.hpp>
@@ -30,7 +30,7 @@ namespace core {
 BaseSession::BaseSession(int id)
     :
       m_id(id)
-    , m_player(new Player(id))
+//    , m_player(new Player(id))
     , m_descriptors(new manager::Descriptors)
     , m_entities(new manager::Entities)
     , m_garbage(new manager::Garbage)

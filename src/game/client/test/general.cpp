@@ -21,12 +21,12 @@
 #include <ceti/type/IdType.hpp>
 
 #include <core/communication/TelegramCreator.hpp>
-#include <core/session/Session.hpp>
+#include <core/session/ServerSession.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/pilot/Npc.hpp>
 #include <core/spaceobject/Vehicle.hpp>
 
-#include <client/session/Session.hpp>
+#include <client/session/ClientSession.hpp>
 #include <client/session/server.hpp>
 #include <client/session/client.hpp>
 #include <client/pilot/Player.hpp>

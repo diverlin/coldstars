@@ -19,7 +19,7 @@
 #include "client.hpp"
 
 #include <core/communication/TelegramHandler.hpp>
-#include <core/session/Session.hpp>
+#include <core/session/ServerSession.hpp>
 #include <core/session/Sessions.hpp>
 #include <core/session/Shortcuts.hpp>
 #include <core/pilot/Npc.hpp>
@@ -34,7 +34,7 @@
 #include <core/communication/TelegramHub.hpp>
 #include <core/resource/Data.hpp>
 
-#include <client/session/Session.hpp>
+#include <client/session/ClientSession.hpp>
 #include <client/session/Shortcuts.hpp>
 #include <client/gui/UserInputManagerInSpace.hpp>
 #include <client/gui/UserInput.hpp>
@@ -53,11 +53,7 @@ Client::Client(int id, bool graphic):
     m_id(id)
   , m_graphic(graphic)
 {
-    if (m_graphic) {
-        m_session = new ClientSession(id);
-    } else {
-        m_session = new core::BaseSession(id);
-    }
+    m_session = new ClientSession(id, m_graphic);
 
     core::Sessions::get().add(m_session);
     __activate();
@@ -73,9 +69,6 @@ Client::Client(int id, bool graphic):
         m_view = shortcuts::view();
     }
 
-    m_player = new Player(m_id);
-    //m_session->setPlayer(m_player);
-
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
 }
@@ -86,6 +79,8 @@ Client::~Client()
 //    global::get().telegramHub().unsubscribe(m_telegramHandler); // ??
     delete m_session;
 }
+
+Player* Client::player() const { return m_session->player(); }
 
 bool Client::sessionIsRunning() const {
     if (m_graphic) {
@@ -111,7 +106,7 @@ void Client::update() {
     m_telegramHandler->update();
 
     //    //std::cout<<"111"<<std::endl;
-    if (!m_player->npc()) {
+    if (!player()->npc()) {
         requestCreatePlayerNpc();
         return;
         //assert(false);
@@ -120,19 +115,19 @@ void Client::update() {
     }
 
     //std::cout<<"222"<<std::endl;
-    if (!m_player->npc()->vehicle()) {
-        assert(false);
+    if (!player()->npc()->vehicle()) {
+        //assert(false);
         //requestCreatePlayerVehicle();
         return;
     }
     //std::cout<<"333"<<std::endl;
-    if (!m_player->npc()->vehicle()->starsystem()) {
+    if (!player()->npc()->vehicle()->starsystem()) {
         return;
     }
 
     //std::cout<<"444"<<std::endl;
 
-    core::control::StarSystem* starsystem = m_player->npc()->vehicle()->starsystem();
+    core::control::StarSystem* starsystem = player()->npc()->vehicle()->starsystem();
 
     // simulate model(repeate what server is doing)
     //std::cout<<core::shortcuts::session()->turnTimer().ticksLeft()<<std::endl;
@@ -142,16 +137,16 @@ void Client::update() {
     if (m_graphic) {
 
         //if (!m_view->player()) {
-            m_view->setPlayer(m_player);
+            m_view->setPlayer(player());
         //}
-        m_inputs->update(m_player);
-        m_player->cursor().updateMouseInput(*m_render);
+        m_inputs->update(player());
+        player()->cursor().updateMouseInput(*m_render);
 
         m_view->update(m_inputs->scrollAccel());
         m_view->render(starsystem);
 
-        gui::Manager::get().update(m_player);
-        gui::Manager::get().render(*m_render, m_player);
+        gui::Manager::get().update(player());
+        gui::Manager::get().render(*m_render, player());
 
         m_screen->draw();
     }
@@ -162,14 +157,14 @@ void Client::__activate() const {
 }
 
 void Client::requestCreatePlayerNpc() {
-    m_player->requestCreateNpc();
+    player()->requestCreateNpc();
 }
 
 void Client::reply_create_player(int_t npc_id)
 {
     core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
     assert(npc);
-    m_player->setNpc(npc);
+    player()->setNpc(npc);
 }
 
 //void Client::__create_player() {

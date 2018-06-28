@@ -34,9 +34,8 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
-namespace core {
-class BaseSession;
-} // namespace core
+
+class ClientSession;
 
 namespace client {
 
@@ -48,7 +47,7 @@ public:
     Client(int id, bool graphic = false);
     ~Client();
 
-    core::BaseSession* session() const { return m_session; }
+    ClientSession* session() const { return m_session; }
 
     void reply_create_player(int_t npc_id);
 
@@ -58,13 +57,12 @@ public:
     void requestCreatePlayerNpc();
     void update();
 
-    Player* player() const { return m_player; }
+    Player* player() const;
 
 private:
-    int m_graphic = false;
+    bool m_graphic = false;
     int m_id = -1;
-    Player* m_player = nullptr;
-    core::BaseSession* m_session = nullptr;
+    ClientSession* m_session = nullptr;
 
     jeti::Camera* m_camera = nullptr;
     jeti::Render* m_render= nullptr;
