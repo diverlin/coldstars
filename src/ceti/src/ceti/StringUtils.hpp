@@ -26,11 +26,15 @@
 #include <string>
 #include <vector>
 
+namespace {
+const int STRING_FLOAT_PRECISION = 2;
+}
+
 namespace ceti {
 
-std::string to_string(const glm::vec2&);
-std::string to_string(const glm::vec3&);
-std::string to_string(float);
+std::string to_string(const glm::vec2&, int digits = STRING_FLOAT_PRECISION);
+std::string to_string(const glm::vec3&, int digits = STRING_FLOAT_PRECISION);
+std::string to_string(float, int digits = STRING_FLOAT_PRECISION);
 std::string to_string(const std::vector<int_t>&);
 std::string to_string(const std::string& label, const std::vector<int_t>& ids);
 

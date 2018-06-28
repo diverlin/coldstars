@@ -25,11 +25,21 @@
 
 TEST(string_utils, base)
 {
-    glm::vec3 v(-100.994f, 100.123f, 99999.9988f);
-    EXPECT_EQ(std::string("(-100.994,100.123,100000)"), ceti::to_string(v));
+    {
+        glm::vec3 v(-100.94f, 100.123f, 99999.9988f);
+        EXPECT_EQ(std::string("(-100.9400, 100.1230, 100000.0000)"), ceti::to_string(v, /*digits*/4));
 
-    float f = -1.9991f;
-    EXPECT_EQ(std::string("-1.9991"), ceti::to_string(f));
+        float f = -1.9991f;
+        EXPECT_EQ("-1.9991", ceti::to_string(f, /*digits*/4));
+    }
+
+    {
+        glm::vec3 v(-100.94f, 100.123f, 99999.9988f);
+        EXPECT_EQ(std::string("(-100.94, 100.12, 100000.00)"), ceti::to_string(v, /*digits*/2));
+
+        float f = -1.9991f;
+        EXPECT_EQ("-2.00", ceti::to_string(f, /*digits*/2));
+    }
 }
 
 TEST(string_utils, replace)

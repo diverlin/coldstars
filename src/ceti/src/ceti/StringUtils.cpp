@@ -22,34 +22,29 @@
 #include <algorithm>
 #include <sstream>
 
-namespace {
-const int FLOAT_PRECISION = 2;
-} // namespace
-
 namespace ceti {
 
-
-std::string to_string(float val)
+std::string to_string(float val, int digits)
 {
     std::ostringstream out;
-    out << std::setprecision(FLOAT_PRECISION) << std::fixed << val;
+    out << std::setprecision(digits) << std::fixed << val;
     return out.str();
 }
 
 std::string
-to_string(const glm::vec2& v)
+to_string(const glm::vec2& v, int digits)
 {
     std::ostringstream out;
-    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
+    out << std::setprecision(digits) << std::fixed;
     out << "(" << v.x << ", " << v.y << ")";
     return out.str();
 }
 
 std::string
-to_string(const glm::vec3& v)
+to_string(const glm::vec3& v, int digits)
 {
     std::ostringstream out;
-    out << std::setprecision(FLOAT_PRECISION) << std::fixed;
+    out << std::setprecision(digits) << std::fixed;
     out << "(" << v.x << ", " << v.y << ", " << v.z << ")";
     return out.str();
 }
