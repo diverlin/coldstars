@@ -56,7 +56,7 @@ public:
 
     virtual ceti::InfoTable info() const {
         ceti::InfoTable result;
-        result.add("Base");
+        result.add("BaseModel");
         result.add("isAlive", m_isAlive);
         result.add("id", m_id);
         result.add("descriptor", m_descriptor);

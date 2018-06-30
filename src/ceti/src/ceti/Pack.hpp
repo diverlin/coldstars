@@ -122,6 +122,16 @@ public:
         return result;
     }
 
+    ceti::pack<T> unite(const ceti::pack<T>& other) const {
+        ceti::pack<T> result = *this;
+        for (const auto& element: other) {
+            if (!contains(element)) {
+                result.add(element);
+            }
+        }
+        return result;
+    }
+
 private:
     friend class boost::serialization::access;
     template<class Archive>

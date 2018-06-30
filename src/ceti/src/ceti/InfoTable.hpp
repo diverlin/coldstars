@@ -19,6 +19,7 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/Pack.hpp>
 
 #include <glm/glm.hpp>
 
@@ -41,7 +42,12 @@ public:
     void add(const std::string&, const glm::vec3&);
     void add(const std::string&, const std::vector<int_t>&);
 
-//    std::string str() const;
+    std::string str() const;
+    std::string diff(const InfoTable&) const;
+
+private:
+    ceti::pack<std::string> __keys() const;
+    std::string __getValue(const std::string& key) const;
 };
 
 } // namespace ceti

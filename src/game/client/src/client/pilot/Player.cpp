@@ -32,6 +32,7 @@
 #include <core/session/Shortcuts.hpp>
 #include <core/manager/DescriptorManager.hpp>
 #include <core/descriptor/pilot/Npc.hpp>
+#include <core/descriptor/spaceobject/Ship.hpp>
 
 #include <client/view/effect/Beam.hpp>
 #include <client/text/VerticalFlowText.hpp>
@@ -117,10 +118,16 @@ void Player::exitScan()
     m_blockSpaceNavigation = false;
 }
 
-void Player::requestCreateNpc()
+void Player::requestCreateNpc() const
 {
     int_t npc_descriptor_id = core::shortcuts::descriptors()->randNpc()->id();
     TelegramCreator::get().playerRequestCreateNpc(id(), npc_descriptor_id);
+}
+
+void Player::requestCreateVehicle() const
+{
+    int_t vehicle_descriptor_id = core::shortcuts::descriptors()->randShip()->id();
+    TelegramCreator::get().playerRequestCreateVehicle(id(), vehicle_descriptor_id);
 }
 
 void Player::endTurnEvent()

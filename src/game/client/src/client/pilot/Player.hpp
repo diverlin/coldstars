@@ -86,8 +86,10 @@ public:
     bool enterScan(core::control::Vehicle*);
     void exitScan();
 
+    void requestCreateNpc() const;
+    void requestCreateVehicle() const;
+
     // events
-    void requestCreateNpc();
     void endTurnEvent();
     void pressLeftMouseButtonEvent();
     void pressRightMouseButtonEvent();

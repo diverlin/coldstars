@@ -16,6 +16,7 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <client/session/imachine.hpp>
 #include <ceti/type/IdType.hpp>
 
 #include <memory>
@@ -34,7 +35,6 @@ namespace gui {
 class UserInputInSpace;
 } // namespace gui
 
-
 class ClientSession;
 
 namespace client {
@@ -42,12 +42,16 @@ namespace client {
 class Player;
 class TelegramHandler;
 
-class Client {
+class Client : public core::IMachine {
 public:
     Client(int id, bool graphic = false);
-    ~Client();
+    ~Client() override final;
 
     ClientSession* session() const { return m_session; }
+
+    Player* player() const;
+
+    void connect();
 
     bool sessionIsRunning() const; // why both?
     bool isRunning() const; // why both?
@@ -55,26 +59,23 @@ public:
     void requestCreatePlayerNpc();
     void requestCreatePlayerVehicle();
 
-    void update();
+    void update() override final;
 
-    Player* player() const;
+protected:
+    jeti::Camera* _camera() const;
+    jeti::Render* _render() const;
+    jeti::Screen* _screen() const;
+    view::StarSystem* _view() const;
+    gui::UserInputInSpace* _inputs() const;
 
 private:
+    bool m_isConnected = false;
+    bool m_wait_npc = false;
+    bool m_wait_vehicle = false;
     bool m_graphic = false;
-    int m_id = -1;
     ClientSession* m_session = nullptr;
 
-    jeti::Camera* m_camera = nullptr;
-    jeti::Render* m_render= nullptr;
-    jeti::Screen* m_screen = nullptr;
-
-    view::StarSystem* m_view = nullptr;
-    gui::UserInputInSpace* m_inputs = nullptr;
-
     std::shared_ptr<TelegramHandler> m_telegramHandler;
-
-    void __activate() const;
-//    void __create_player();
 };
 
 } // namespace client

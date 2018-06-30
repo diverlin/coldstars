@@ -50,24 +50,16 @@
 namespace client {
 
 Client::Client(int id, bool graphic):
-    m_id(id)
+    IMachine(id)
   , m_graphic(graphic)
 {
     m_session = new ClientSession(id, m_graphic);
 
     core::Sessions::get().add(m_session);
-    __activate();
+    _activate();
 
     bool save = false;
     m_session->init(save);
-
-    if (m_graphic) {
-        m_camera = shortcuts::camera();
-        m_inputs = shortcuts::inputs();
-        m_render = shortcuts::render();
-        m_screen = shortcuts::screen();
-        m_view = shortcuts::view();
-    }
 
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler());
     core::global::get().telegramHub().subscribe(m_telegramHandler);
@@ -75,16 +67,21 @@ Client::Client(int id, bool graphic):
 
 Client::~Client()
 {
-    core::Sessions::get().remove(m_id);
+    core::Sessions::get().remove(id());
 //    global::get().telegramHub().unsubscribe(m_telegramHandler); // ??
     delete m_session;
 }
 
+jeti::Camera* Client::_camera() const { return m_session->camera(); }
+jeti::Render* Client::_render() const { return m_session->render(); }
+jeti::Screen* Client::_screen() const { return m_session->screen(); }
+view::StarSystem* Client::_view() const { return m_session->view(); }
+gui::UserInputInSpace* Client::_inputs() const { return m_session->inputs(); }
 Player* Client::player() const { return m_session->player(); }
 
 bool Client::sessionIsRunning() const {
     if (m_graphic) {
-        return m_screen->window().isOpen();
+        return _screen()->window().isOpen();
     } else {
         return true;
     }
@@ -93,7 +90,7 @@ bool Client::sessionIsRunning() const {
 bool Client::isRunning() const
 {
     if (m_graphic) {
-        return m_inputs->runSession() && m_screen->window().isOpen();
+        return _inputs()->runSession() && _screen()->window().isOpen();
     } else {
         return true;
     }
@@ -101,9 +98,13 @@ bool Client::isRunning() const
 
 
 void Client::update() {
-    __activate();
+    _activate();
 
     m_telegramHandler->update();
+
+    if (!m_isConnected) {
+        return; // used for testing
+    }
 
     if (!player()->npc()) {
         requestCreatePlayerNpc();
@@ -128,33 +129,47 @@ void Client::update() {
 
     if (m_graphic) {
 
-        if (!m_view->player()) {
-            m_view->setPlayer(player());
+        if (!_view()->player()) {
+            _view()->setPlayer(player());
         }
-        m_inputs->update(player());
-        player()->cursor().updateMouseInput(*m_render);
+        _inputs()->update(player());
+        player()->cursor().updateMouseInput(*_render());
 
-        m_view->update(m_inputs->scrollAccel());
-        m_view->render(starsystem);
+        _view()->update(_inputs()->scrollAccel());
+        _view()->render(starsystem);
 
         gui::Manager::get().update(player());
-        gui::Manager::get().render(*m_render, player());
+        gui::Manager::get().render(*_render(), player());
 
-        m_screen->draw();
+        _screen()->draw();
     }
 }
 
-void Client::__activate() const {
-    core::Sessions::get().activate(m_id);
+void Client::connect()
+{
+    if (m_isConnected) {
+        return;
+    }
+
+    // TODO: put valid logic here
+    m_isConnected = true;
 }
 
 void Client::requestCreatePlayerNpc() {
+    if (m_wait_npc) {
+        return;
+    }
+
     player()->requestCreateNpc();
+    m_wait_npc = true;
 }
 
-void Client::requestCreatePlayerVehicle()
-{
-    // assert(false);
+void Client::requestCreatePlayerVehicle() {
+    if (m_wait_vehicle) {
+        return;
+    }
+    player()->requestCreateVehicle();
+    m_wait_vehicle = true;
 }
 
 } // namespace client

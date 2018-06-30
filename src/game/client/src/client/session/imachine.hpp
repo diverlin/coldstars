@@ -16,42 +16,24 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <client/session/imachine.hpp>
-
-#include <vector>
-#include <memory>
+#pragma once
 
 namespace core {
 
-class Player;
-class BaseSession;
-class TelegramHandler;
-
-namespace control {
-class World;
-} // namespace control
-
-using WorldPtr = std::shared_ptr<control::World>;
-
-class Server : public IMachine {
-
+class IMachine {
 public:
-    Server(bool dummy=false);
-    virtual ~Server();
+    IMachine(int id);
+    virtual ~IMachine();
 
-    BaseSession* session() const { return m_session; }
-    control::World* world() const { return m_world.get(); }
+    int id() const { return m_id; }
 
-    void update() override final;
+    virtual void update() = 0;
 
 private:
-    BaseSession* m_session = nullptr;
-    WorldPtr m_world;
-    std::vector<Player*> m_players;
+    int m_id = -1;
 
-    std::shared_ptr<TelegramHandler> m_telegramHandler;
-
-    void __create_player();
+protected:
+    void _activate() const;
 };
 
 } // namespace core

@@ -19,6 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <ceti/StringUtils.hpp>
+#include <ceti/Logger.hpp>
 
 #include <glm/glm.hpp>
 
@@ -67,3 +68,4 @@ TEST(string_utils, strip)
     EXPECT_EQ("star", input2);
     EXPECT_EQ("star", input3);
 }
+

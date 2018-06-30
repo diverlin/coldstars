@@ -136,10 +136,12 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __playerCreateNpcReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_CREATE_SHIP: __playerCreateShipReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerInsertNpcToShipReply(telegram); break;
 
     case telegram::Type::REPLY_PLAYER_CREATE_NPC: __replyPlayerCreateNpc(telegram); break;
+    case telegram::Type::REPLY_PLAYER_CREATE_SHIP: __replyPlayerCreateShip(telegram); break;
 
     default: {
         assert(false);
@@ -173,6 +175,12 @@ void TelegramHandler::__playerCreateNpcReply(const Telegram& telegram) const
     m_telegramCreator.replyPlayerCreateNpc(descr.firstId(), descr.secondId());
 }
 
+void TelegramHandler::__playerCreateShipReply(const Telegram& telegram) const
+{
+    DoubleIdDescr descr(telegram.data());
+    m_telegramCreator.replyPlayerCreateShip(descr.firstId(), descr.secondId());
+}
+
 void TelegramHandler::__playerBindNpcReply(const Telegram& telegram) const
 {
     DoubleIdDescr descr(telegram.data());
@@ -186,6 +194,11 @@ void TelegramHandler::__playerInsertNpcToShipReply(const Telegram& telegram) con
 }
 
 void TelegramHandler::__replyPlayerCreateNpc(const Telegram& telegram) const
+{
+    DoubleIdDescr descr(telegram.data());
+}
+
+void TelegramHandler::__replyPlayerCreateShip(const Telegram& telegram) const
 {
     DoubleIdDescr descr(telegram.data());
 }

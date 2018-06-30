@@ -65,7 +65,7 @@ public:
 
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
-    void createPlayer(int_t, int_t);
+//    void createPlayer(int_t, int_t);
 //    void bindPlayerWithNpc(int_t, int_t);
     void createDummyGalaxy(int ships_num=2, int planets_num=1) const;
     void createGalaxy(core::GalaxyDescr*) const;
@@ -95,6 +95,7 @@ public:
     void __equipShip(int_t ship_id) const;
 
     void replyPlayerCreateNpc(int_t, int_t) const;
+    void replyPlayerCreateShip(int_t, int_t) const;
     void replyPlayerBindNpc(int_t, int_t) const;
     void replyPlayerInsertNpcToShip(int_t, int_t, int_t) const;
 

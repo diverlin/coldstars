@@ -147,7 +147,7 @@ void Manager::quitSpace()
 
 void Manager::enterScan(client::Player* player)
 {
-    LOG("", Logger::Code::GUI);
+    LOG_GUI("");
 
     core::control::Vehicle* scan_target = player->npc()->scanTarget();
     assert(scan_target);
@@ -163,7 +163,7 @@ void Manager::enterScan(client::Player* player)
 
 void Manager::exitScan(client::Player* player)
 {
-    LOG("", Logger::Code::GUI);
+    LOG_GUI("");
 
     m_vehicle->unbindVehicle();
     m_vehicle->hide();

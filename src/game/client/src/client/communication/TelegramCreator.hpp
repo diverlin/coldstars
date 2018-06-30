@@ -46,6 +46,7 @@ public:
     void playerRequestTurnEnd(int_t);
     void playerRequestSetSpaceObjectTarget(int_t, int_t);
     void playerRequestCreateNpc(int_t, int_t);
+    void playerRequestCreateVehicle(int_t, int_t);
     void playerRequestBindNpc(int_t, int_t);
     void playerRequestInsertNpcToShip(int_t, int_t, int_t);
 };

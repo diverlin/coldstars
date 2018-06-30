@@ -44,10 +44,10 @@ ShipBuilder::gen(core::ShipDescr* descr)
 }
 
 core::control::Ship*
-ShipBuilder::gen(int_t descriptor_id, int_t ob_id)
+ShipBuilder::gen(int_t descriptor_id, int_t id)
 {
     core::ShipDescr* descr = core::shortcuts::descriptors()->ship(descriptor_id);
-    core::control::Ship* ship = __genTemplate(descr, ob_id);
+    core::control::Ship* ship = __genTemplate(descr, id);
     __createInternals(ship, descr);
     return ship;
 }
@@ -66,9 +66,10 @@ ShipBuilder::gen()
 }
 
 core::control::Ship*
-ShipBuilder::__genTemplate(core::ShipDescr* descr, int_t ob_id)
+ShipBuilder::__genTemplate(core::ShipDescr* descr, int_t id)
 {
-    ShipModel* model = new ShipModel(descr->id(), ob_id);
+    LOG_CREATION("create ship id=" + std::to_string(id))
+    ShipModel* model = new ShipModel(descr->id(), id);
     assert(model);
 
     core::control::Ship* ship = new core::control::Ship(descr, model);

@@ -31,7 +31,7 @@ std::string to_string(Type type)
     case Type::CREATE_GALAXY: { return "telegram::Type::CREATE_GALAXY"; }
     case Type::CREATE_SECTOR: { return "telegram::Type::CREATE_SECTOR"; }
     case Type::CREATE_STARSYSTEM: { return "telegram::Type::CREATE_STARSYSTEM"; }
-    case Type::CREATE_PLAYER: { return "telegram::Type::CREATE_PLAYER"; }
+//    case Type::CREATE_PLAYER: { return "telegram::Type::CREATE_PLAYER"; }
     case Type::CREATE_NPC: { return "telegram::Type::CREATE_NPC"; }
 
         // spaceobjects
@@ -107,10 +107,12 @@ std::string to_string(Type type)
     case Type::PLAYER_REQUEST_END_TURN: { return "telegram::Type::PLAYER_REQUEST_END_TURN"; }
     case Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: { return "telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT"; }
     case Type::PLAYER_REQUEST_CREATE_NPC: { return "telegram::Type::PLAYER_REQUEST_CREATE_NPC"; }
+    case Type::PLAYER_REQUEST_CREATE_SHIP: { return "telegram::Type::PLAYER_REQUEST_CREATE_SHIP"; }
     case Type::PLAYER_REQUEST_BIND_NPC: { return "telegram::Type::PLAYER_REQUEST_BIND_NPC"; }
     case Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: { return "telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP"; }
 
     case Type::REPLY_PLAYER_CREATE_NPC: { return "telegram::Type::REPLY_PLAYER_CREATE_NPC"; }
+    case Type::REPLY_PLAYER_CREATE_SHIP: { return "telegram::Type::REPLY_PLAYER_CREATE_SHIP"; }
     case Type::REPLY_PLAYER_BIND_NPC: { return "telegram::Type::REPLY_PLAYER_BIND_NPC"; }
     case Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP: { return "telegram::Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP"; }
 

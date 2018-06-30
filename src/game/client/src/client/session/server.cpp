@@ -71,11 +71,11 @@ namespace core {
 
 Server::Server(bool dummy)
     :
-      m_id(0)
+      IMachine(0)
     , m_session(new BaseSession)
 {
     Sessions::get().add(m_session);
-    __activate();
+    _activate();
 
     m_telegramHandler = std::shared_ptr<TelegramHandler>(new TelegramHandler(core::TelegramCreator::get()));
     global::get().telegramHub().subscribe(m_telegramHandler);
@@ -86,18 +86,14 @@ Server::Server(bool dummy)
 
 Server::~Server()
 {
-    Sessions::get().remove(m_id);
+    Sessions::get().remove(id());
     global::get().telegramHub().unsubscribe(m_telegramHandler);
     delete m_session;
 }
 
-void Server::__activate() const {
-    Sessions::get().activate(m_id);
-}
-
 void Server::update()
 {
-    __activate();
+    _activate();
 
     global::get().telegramHub().broadcast();
 

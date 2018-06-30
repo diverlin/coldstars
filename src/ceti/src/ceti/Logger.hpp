@@ -18,10 +18,12 @@
 
 #pragma once
 
+#include <ceti/type/IdType.hpp>
 #include <ceti/Pack.hpp>
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #ifdef USE_LOG
@@ -45,41 +47,67 @@
 #define USE_LOG_DATA 0
 #define USE_LOG_COMM 1
 #define USE_LOG_COMM_DIP1 0
+#define USE_LOG_CREATION 1
 #define USE_LOG_ERROR 0
 
-#define LOG_SET_SESSION_INFO( ... )  Logger::get().setSessionInfo(__VA_ARGS__)
+#define LOG_SET_SESSION_INFO( arg )  Logger::get().setSessionInfo(arg);
+#define LOG_TEST( arg )              Logger::get().log(__FILE__, __FUNCTION__, arg);
 
 #if USE_LOG_COMMON
-    #define LOG( ... )              Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__)
+    #define LOG( arg )              Logger::get().log(__FILE__, __FUNCTION__, arg);
 #else
-    #define LOG( ... )
+    #define LOG( arg )
+#endif
+
+#if USE_LOG_GUI
+    #define LOG_GUI( arg )              Logger::get().log(__FILE__, __FUNCTION__, arg, Logger::Code::GUI);
+#else
+    #define LOG_GUI( arg )
 #endif
 
 #if USE_LOG_DATA
-    #define LOG_DATA( ... )         Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::DATA)
+    #define LOG_DATA( arg )         Logger::get().log(__FILE__, __FUNCTION__, arg, Logger::Code::DATA);
 #else
-    #define LOG_DATA( ... )
+    #define LOG_DATA( arg )
 #endif
 
 #if USE_LOG_COMM
-    #define LOG_COMM( ... )         Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::COMM)
+    #define LOG_COMM( arg )         Logger::get().log(__FILE__, __FUNCTION__, arg, Logger::Code::COMM);
 #else
-    #define LOG_COMM( ... )
+    #define LOG_COMM( arg )
 #endif
 
 #if USE_LOG_COMM_DIP1
-    #define LOG_COMM_DIP1( ... )    Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::COMM)
+    #define LOG_COMM_DIP1( arg )    Logger::get().log(__FILE__, __FUNCTION__, arg, Logger::Code::COMM);
 #else
-    #define LOG_COMM_DIP1( ... )
+    #define LOG_COMM_DIP1( arg )
+#endif
+
+#if USE_LOG_CREATION
+#define LOG_CREATION( arg ) Logger::get().log( __FILE__, __FUNCTION__, arg );
+#else
+    #define LOG_CREATION( arg )
 #endif
 
 #if USE_LOG_ERROR
-    #define LOG_ERROR( ... )        Logger::get().log(__FILE__, __FUNCTION__, __VA_ARGS__, Logger::Code::EROR)
+    #define LOG_ERROR( arg )        Logger::get().log(__FILE__, __FUNCTION__, arg, Logger::Code::ERROR);
 #else
-    #define LOG_ERROR( ... )
+    #define LOG_ERROR( arg )
 #endif
 
 namespace ceti {
+
+
+template <class T>
+std::string to_string( std::initializer_list<T> list )
+{
+    std::stringstream ss;
+    for(const auto& elem : list ) {
+        ss << elem;
+    }
+    return ss.str();
+}
+
 
 void abort(const std::string& msg = "no info");
 

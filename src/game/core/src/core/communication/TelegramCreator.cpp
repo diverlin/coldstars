@@ -578,11 +578,11 @@ void TelegramCreator::hit(control::SpaceObject* object, int damage)
     m_telegramHub.add(Telegram(telegram::Type::HIT, descriptor.data()));
 }
 
-void TelegramCreator::createPlayer(int_t player_id, int_t npc_id)
-{
-    CreatePlayerComDescr descriptor(player_id, npc_id);
-    m_telegramHub.add(Telegram(telegram::Type::CREATE_PLAYER, descriptor.data()));
-}
+//void TelegramCreator::createPlayer(int_t player_id, int_t npc_id)
+//{
+//    CreatePlayerComDescr descriptor(player_id, npc_id);
+//    m_telegramHub.add(Telegram(telegram::Type::CREATE_PLAYER, descriptor.data()));
+//}
 
 
 // client
@@ -609,6 +609,13 @@ void TelegramCreator::replyPlayerCreateNpc(int_t player_id, int_t npc_descriptor
     int_t npc_id = createPureNpc(npc_descriptor_id);
     DoubleIdDescr descr(player_id, npc_id);
     m_telegramHub.add(Telegram(telegram::Type::REPLY_PLAYER_CREATE_NPC, descr.data()));
+}
+
+void TelegramCreator::replyPlayerCreateShip(int_t player_id, int_t ship_descriptor_id) const
+{
+    int_t ship_id = createPureShip(ship_descriptor_id);
+    DoubleIdDescr descr(player_id, ship_id);
+    m_telegramHub.add(Telegram(telegram::Type::REPLY_PLAYER_CREATE_SHIP, descr.data()));
 }
 
 void TelegramCreator::replyPlayerBindNpc(int_t player_id, int_t npc_id) const

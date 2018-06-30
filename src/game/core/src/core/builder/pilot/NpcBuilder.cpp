@@ -70,6 +70,7 @@ NpcBuilder::gen(NpcDescr* descriptor, int_t id)
 core::control::Npc*
 NpcBuilder::__createTemplate(core::NpcDescr* descr, int_t id)
 {
+    LOG_CREATION("create npc id=" + std::to_string(id))
     NpcModel* model = new NpcModel(descr->id(), id);
     assert(model);
 

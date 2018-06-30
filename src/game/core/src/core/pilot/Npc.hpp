@@ -68,9 +68,24 @@ public:
     Skills& skills() { return m_skills; }
     ceti::pack<int_t> agressors() const { return m_agressors; }
 
+    virtual ceti::InfoTable info() const {
+        ceti::InfoTable result = BaseModel::info();
+        result.add("NpcModel");
+        result.add("race", int(m_race)); // in descriptor??
+        result.add("credits", m_credits);
+        result.add("player", m_player);
+        result.add("vehicle", m_vehicle);
+        //result.add("skills", m_skills);
+        result.add("aiModel", m_aiModel);
+        result.add("scanTarget", m_scanTarget);
+        result.add("agressors", m_agressors);
+
+        return result;
+    }
+
 private:
     race::Type m_race = race::Type::NONE;
-    int_t m_credits;
+    int_t m_credits = 0;
 
     int_t m_player = NONE;
     int_t m_vehicle = NONE;
