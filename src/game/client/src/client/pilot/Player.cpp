@@ -127,7 +127,8 @@ void Player::requestCreateNpc() const
 void Player::requestCreateVehicle() const
 {
     int_t vehicle_descriptor_id = core::shortcuts::descriptors()->randShip()->id();
-    TelegramCreator::get().playerRequestCreateVehicle(id(), vehicle_descriptor_id);
+    assert(npc());
+    TelegramCreator::get().playerRequestCreateShip(npc()->id(), vehicle_descriptor_id);
 }
 
 void Player::endTurnEvent()

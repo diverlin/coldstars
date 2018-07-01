@@ -98,7 +98,7 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::ADD_ASTEROID_TO_STARSYSTEM: _addAsteroidToStarSystem(telegram); break;
     case telegram::Type::ADD_SHIP_TO_STARSYSTEM: _addShipToStarSystem(telegram); break;
     case telegram::Type::ADD_CONTAINER_TO_STARSYSTEM: _addContainerToStarSystem(telegram); break;
-    case telegram::Type::ADD_NPC_TO_SHIP: _addNpcToShip(telegram); break;
+    case telegram::Type::INSERT_NPC_TO_SHIP: _addNpcToShip(telegram); break;
 
     /** REMOVE FROM STARSYSTEM */
     case telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: _removeSpaceObjectFromStarSystem(telegram); break;
@@ -135,13 +135,13 @@ void TelegramHandler::_process(const Telegram& telegram) const
     case telegram::Type::PLAYER_REQUEST_MOVE: __playerMoveReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_END_TURN: __playerTurnEndReply(telegram); break;
     case telegram::Type::PLAYER_REQUEST_TARGET_SPACE_OBJECT: __playerSetSpaceObjectTargetReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __playerCreateNpcReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_CREATE_SHIP: __playerCreateShipReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpcReply(telegram); break;
-    case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerInsertNpcToShipReply(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_CREATE_NPC: __replyOnPlayerCreateNpcRequest(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_CREATE_SHIP: __replyOnPlayerCreateShipRequest(telegram); break;
+    case telegram::Type::PLAYER_REQUEST_BIND_NPC: __playerBindNpc(telegram); break;
+//    case telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: __playerInsertNpcToShipReply(telegram); break;
 
-    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __replyPlayerCreateNpc(telegram); break;
-    case telegram::Type::REPLY_PLAYER_CREATE_SHIP: __replyPlayerCreateShip(telegram); break;
+    case telegram::Type::PLAYER_BIND_NPC: __playerBindNpc(telegram); break;
+    //case telegram::Type::REPLY_PLAYER_CREATE_SHIP: __replyPlayerCreateShip(telegram); break;
 
     default: {
         assert(false);
@@ -169,39 +169,39 @@ void TelegramHandler::__playerSetSpaceObjectTargetReply(const Telegram& telegram
     m_telegramCreator.targetingSpaceObject(descr.firstId(), descr.secondId());
 }
 
-void TelegramHandler::__playerCreateNpcReply(const Telegram& telegram) const
+void TelegramHandler::__replyOnPlayerCreateNpcRequest(const Telegram& telegram) const
 {
     DoubleIdDescr descr(telegram.data());
-    m_telegramCreator.replyPlayerCreateNpc(descr.firstId(), descr.secondId());
+    int_t player_id = descr.firstId();
+    int_t npc_descriptor_id = descr.secondId();
+
+    int_t npc_id = m_telegramCreator.createPureNpc(npc_descriptor_id);
+    m_telegramCreator.playerBindNpc(player_id, npc_id);
 }
 
-void TelegramHandler::__playerCreateShipReply(const Telegram& telegram) const
+void TelegramHandler::__replyOnPlayerCreateShipRequest(const Telegram& telegram) const
 {
     DoubleIdDescr descr(telegram.data());
-    m_telegramCreator.replyPlayerCreateShip(descr.firstId(), descr.secondId());
+
+    int_t npc_id = descr.firstId();
+    int_t ship_descriptor_id = descr.secondId();
+
+    int_t ship_id = m_telegramCreator.createPureShip(ship_descriptor_id);
+    m_telegramCreator.insertNpcToShip(npc_id, ship_id);
 }
 
-void TelegramHandler::__playerBindNpcReply(const Telegram& telegram) const
+void TelegramHandler::__playerBindNpc(const Telegram& telegram) const
 {
-    DoubleIdDescr descr(telegram.data());
-    m_telegramCreator.replyPlayerBindNpc(descr.firstId(), descr.secondId());
+    // TODO
+//    DoubleIdDescr descr(telegram.data());
+//    m_telegramCreator.playerBindNpc(descr.firstId(), descr.secondId());
 }
 
-void TelegramHandler::__playerInsertNpcToShipReply(const Telegram& telegram) const
-{
-    TrippleIdDescr descr(telegram.data());
-    m_telegramCreator.replyPlayerInsertNpcToShip(descr.firstId(), descr.secondId(), descr.thirdId());
-}
-
-void TelegramHandler::__replyPlayerCreateNpc(const Telegram& telegram) const
-{
-    DoubleIdDescr descr(telegram.data());
-}
-
-void TelegramHandler::__replyPlayerCreateShip(const Telegram& telegram) const
-{
-    DoubleIdDescr descr(telegram.data());
-}
+//void TelegramHandler::__playerInsertNpcToShipReply(const Telegram& telegram) const
+//{
+//    TrippleIdDescr descr(telegram.data());
+//    m_telegramCreator.replyPlayerInsertNpcToShip(descr.firstId(), descr.secondId(), descr.thirdId());
+//}
 
 } // namespace core
 

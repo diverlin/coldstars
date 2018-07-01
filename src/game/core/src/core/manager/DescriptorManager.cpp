@@ -52,17 +52,18 @@ Descriptors::Descriptors()
       m_meshes(new Collector<core::MeshDescr>(""))
     , m_materials(new Collector<core::MaterialDescr>(""))
 {
-    bool regenerate = true;
-    if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
+    bool force_generation = false;
+    if (ceti::filesystem::is_file_exists(descriptors_fname) && !force_generation) {
         __load();
-    } /*else {
-       generate();
-    }*/
+    } else {
+       __generate();
+       __save();
+    }
 
-#ifdef USE_FAILBACK_RESOURCES
-    __resolveId(m_meshes->failback());
-    __resolveId(m_materials->failback());
-#endif // USE_FAILBACK_RESOURCES
+//#ifdef USE_FAILBACK_RESOURCES
+//    __resolveId(m_meshes->failback());
+//    __resolveId(m_materials->failback());
+//#endif // USE_FAILBACK_RESOURCES
 }
 
 void
@@ -640,40 +641,40 @@ Descriptors::randMaterial(texture::Type type) const
 void
 Descriptors::__save()
 {
-//    assert(false);
-//    std::fstream filestream;
-//    filestream.open(descriptors_fname);
-//    if(filestream.is_open()) {
-//        for(const auto& lists: m_descriptorsTypesOLD) {
-//            const auto& list = lists.second;
-//            for(BaseOLD* descr: list) {
-//                filestream<<descr->data()<<std::endl;
-//            }
-//        }
-//    } else {
-//        throw std::runtime_error("not able to open file="+descriptors_fname);
-//    }
-//    filestream.close();
+    ceti::filesystem::touch_file(descriptors_fname);
+
+    std::fstream filestream;
+    filestream.open(descriptors_fname);
+    if(filestream.is_open()) {
+        for(const auto& lists: m_descriptorsTypesOLD) {
+            const auto& list = lists.second;
+            for(BaseOLD* descr: list) {
+                filestream<<descr->data()<<std::endl;
+            }
+        }
+    } else {
+        throw std::runtime_error("not able to open file="+descriptors_fname);
+    }
+    filestream.close();
 }
 
 void
 Descriptors::__load()
 {
-    assert(false);
-//    __clear();
+    __clear();
 
-//    std::fstream filestream;
-//    std::string line;
-//    filestream.open(descriptors_fname);
-//    if(filestream.is_open()) {
-//        while(std::getline(filestream, line)) {
-//            if (!line.empty()) {
-//                BaseOLD* descr = new BaseOLD(line);
-//                add(descr);
-//            }
-//        }
-//    }
-//    filestream.close();
+    std::fstream filestream;
+    std::string line;
+    filestream.open(descriptors_fname);
+    if(filestream.is_open()) {
+        while(std::getline(filestream, line)) {
+            if (!line.empty()) {
+                BaseOLD* descr = new BaseOLD(line);
+                add(descr);
+            }
+        }
+    }
+    filestream.close();
 }
 
 void
@@ -684,12 +685,8 @@ Descriptors::__clear()
 }
 
 void
-Descriptors::generate(bool save)
+Descriptors::generate()
 {
-    if (save) {
-        ceti::filesystem::create_file(descriptors_fname);
-    }
-
     __clear();
 
     for (int i=0; i<5; ++i) {
@@ -745,33 +742,29 @@ Descriptors::generate(bool save)
 
     const auto& ids = __ids(core::Type::SECTOR).random(2);
     core::genGalaxy(ids);
-
-    if (save) {
-        __save();
-    }
 }
 
-void
-Descriptors::clear()
-{
-    if (m_meshes) {
-        assert(false);
-        //m_meshes->clear();
-        m_meshes = nullptr;
-    }
-    if (m_materials) {
-        assert(false);
-        //m_materials->clear();
-        m_materials = nullptr;
-    }
+//void
+//Descriptors::clear()
+//{
+//    if (m_meshes) {
+//        assert(false);
+//        //m_meshes->clear();
+//        m_meshes = nullptr;
+//    }
+//    if (m_materials) {
+//        assert(false);
+//        //m_materials->clear();
+//        m_materials = nullptr;
+//    }
 
-    for (std::map<int_t, core::BaseDescr*>::iterator it = m_descriptors.begin(); it != m_descriptors.end(); ++it) {
-        delete it->second;
-    }
+//    for (std::map<int_t, core::BaseDescr*>::iterator it = m_descriptors.begin(); it != m_descriptors.end(); ++it) {
+//        delete it->second;
+//    }
 
-    m_descriptors.clear();
-    m_descriptorsTypes.clear();
-}
+//    m_descriptors.clear();
+//    m_descriptorsTypes.clear();
+//}
 
 void
 Descriptors::__resolveId(core::BaseDescr* descr) {

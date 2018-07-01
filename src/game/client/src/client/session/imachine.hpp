@@ -28,6 +28,7 @@ public:
     int id() const { return m_id; }
 
     virtual void update() = 0;
+    virtual int telegramsNum() const = 0;
 
 private:
     int m_id = -1;

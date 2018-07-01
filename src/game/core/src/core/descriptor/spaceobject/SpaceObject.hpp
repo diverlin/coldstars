@@ -26,7 +26,7 @@ struct SpaceObjectDescr : public OrientationDescr
 {
 public:
     SpaceObjectDescr() = default;
-    ~SpaceObjectDescr() = default;
+    ~SpaceObjectDescr() override = default;
 
     ceti::InfoTable info() const override {
         ceti::InfoTable result = OrientationDescr::info();

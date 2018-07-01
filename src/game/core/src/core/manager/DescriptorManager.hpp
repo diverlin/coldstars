@@ -185,15 +185,15 @@ public:
     Collector<core::MeshDescr>* meshes() const { return m_meshes; }
     Collector<core::MaterialDescr>* materials() const { return m_materials; }
 
-    void generate(bool);
-    void clear();
-
 private:
     Collector<core::MeshDescr>* m_meshes = nullptr;
     Collector<core::MaterialDescr>* m_materials = nullptr;
 
     std::map<int_t, core::BaseDescr*> m_descriptors;
     std::map<core::Type, std::vector<core::BaseDescr*>> m_descriptorsTypes;
+
+    void __generate();
+//    void clear();
 
     void __clear();
     void __save();

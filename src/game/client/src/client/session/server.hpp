@@ -43,6 +43,7 @@ public:
     control::World* world() const { return m_world.get(); }
 
     void update() override final;
+    int telegramsNum() const override final;
 
 private:
     BaseSession* m_session = nullptr;

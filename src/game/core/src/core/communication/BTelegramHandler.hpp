@@ -21,6 +21,7 @@ public:
     void runLoop();
     void update();
 
+    int telegramsNum() const { return m_telegrams.size(); }
 
     const Machine& machine() const { return m_machine; }
 

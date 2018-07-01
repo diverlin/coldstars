@@ -29,7 +29,7 @@ public:
 private:
     void __generateMeshDescriptors();
     void __generateMaterialDescriptors();
-    void __generateGameObjectDescriptors(bool save);
+//    void __generateGameObjectDescriptors(bool save);
 };
 
 } // namespace core

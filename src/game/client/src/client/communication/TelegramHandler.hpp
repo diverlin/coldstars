@@ -22,7 +22,8 @@ protected:
 
 private:
     void __handleReplyPlayerCreateNpc(const core::Telegram&) const;
-    void __handleReplyPlayerCreateShip(const core::Telegram&) const;
+    void __playerBindNpc(const core::Telegram&) const;
+//    void __handleReplyPlayerCreateShip(const core::Telegram&) const;
 };
 
 } // namespace client

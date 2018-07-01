@@ -81,7 +81,7 @@ std::string to_string(Type type)
     case Type::ADD_ASTEROID_TO_STARSYSTEM: { return "telegram::Type::ADD_ASTEROID_TO_STARSYSTEM"; }
     case Type::ADD_SHIP_TO_STARSYSTEM: { return "telegram::Type::ADD_SHIP_TO_STARSYSTEM"; }
     case Type::ADD_CONTAINER_TO_STARSYSTEM: { return "telegram::Type::ADD_CONTAINER_TO_STARSYSTEM"; }
-    case Type::ADD_NPC_TO_SHIP: { return "telegram::Type::ADD_NPC_TO_SHIP"; }
+    case Type::INSERT_NPC_TO_SHIP: { return "telegram::Type::INSERT_NPC_TO_SHIP"; }
     case Type::INSERT: { return "telegram::Type::INSERT"; }
     case Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: { return "telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM"; }
     case Type::REMOVE: { return "telegram::Type::REMOVE"; }
@@ -109,12 +109,12 @@ std::string to_string(Type type)
     case Type::PLAYER_REQUEST_CREATE_NPC: { return "telegram::Type::PLAYER_REQUEST_CREATE_NPC"; }
     case Type::PLAYER_REQUEST_CREATE_SHIP: { return "telegram::Type::PLAYER_REQUEST_CREATE_SHIP"; }
     case Type::PLAYER_REQUEST_BIND_NPC: { return "telegram::Type::PLAYER_REQUEST_BIND_NPC"; }
-    case Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: { return "telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP"; }
+//    case Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP: { return "telegram::Type::PLAYER_REQUEST_INSERT_NPC_TO_SHIP"; }
 
-    case Type::REPLY_PLAYER_CREATE_NPC: { return "telegram::Type::REPLY_PLAYER_CREATE_NPC"; }
-    case Type::REPLY_PLAYER_CREATE_SHIP: { return "telegram::Type::REPLY_PLAYER_CREATE_SHIP"; }
-    case Type::REPLY_PLAYER_BIND_NPC: { return "telegram::Type::REPLY_PLAYER_BIND_NPC"; }
-    case Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP: { return "telegram::Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP"; }
+    case Type::PLAYER_BIND_NPC: { return "telegram::Type::PLAYER_BIND_NPC"; }
+    //case Type::REPLY_PLAYER_CREATE_SHIP: { return "telegram::Type::REPLY_PLAYER_CREATE_SHIP"; }
+    //case Type::REPLY_PLAYER_BIND_NPC: { return "telegram::Type::REPLY_PLAYER_BIND_NPC"; }
+    //case Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP: { return "telegram::Type::REPLY_PLAYER_INSERT_NPC_TO_SHIP"; }
 
     default: {
         assert(false);

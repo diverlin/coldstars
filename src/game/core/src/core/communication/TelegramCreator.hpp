@@ -66,7 +66,6 @@ public:
     void genBullets_DEBUG(control::StarSystem*, int) const;
 
 //    void createPlayer(int_t, int_t);
-//    void bindPlayerWithNpc(int_t, int_t);
     void createDummyGalaxy(int ships_num=2, int planets_num=1) const;
     void createGalaxy(core::GalaxyDescr*) const;
 
@@ -91,13 +90,13 @@ public:
     void __addStarToStarsystem(int_t star_id, int_t starsystem_id) const;
     void __addPlanetToStarsystem(int_t planet_id, int_t starsystem_id) const;
     void addShipToStarSystem(int_t starsystem_id, int_t ship_id, const glm::vec3& center = glm::vec3()) const;
-    void __addNpcToShip(int_t npc_id, int_t ship_id) const;
+    void insertNpcToShip(int_t npc_id, int_t ship_id) const;
     void __equipShip(int_t ship_id) const;
 
-    void replyPlayerCreateNpc(int_t, int_t) const;
-    void replyPlayerCreateShip(int_t, int_t) const;
-    void replyPlayerBindNpc(int_t, int_t) const;
-    void replyPlayerInsertNpcToShip(int_t, int_t, int_t) const;
+    void playerBindNpc(int_t, int_t) const;
+//    void replyPlayerCreateNpc(int_t, int_t) const;
+//    void replyPlayerCreateShip(int_t, int_t) const;
+//    void replyPlayerInsertNpcToShip(int_t, int_t, int_t) const;
 
 private:
     TelegramHub& m_telegramHub;

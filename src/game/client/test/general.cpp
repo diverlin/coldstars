@@ -28,6 +28,7 @@
 #include <core/spaceobject/Vehicle.hpp>
 
 #include <core/model/ALL>
+#include <core/descriptor/ALL>
 
 #include <client/session/ClientSession.hpp>
 #include <client/session/server.hpp>
@@ -58,12 +59,24 @@ void addShipToStarSystem(int_t starsystem_id, int_t ship_id) {
     core::TelegramCreator::get().addShipToStarSystem(starsystem_id, ship_id);
 }
 
-void updateMachines(const std::vector<core::IMachine*>& machines, int ticks) {
-    for (int i=0; i<ticks; ++i) {
-        LOG_TEST("---tick="+std::to_string(i))
+void update(const std::vector<core::IMachine*>& machines/*, int ticks*/) {
+    bool running = true;
+    int counter = 0;
+    int sleep_counter = 0;
+    while (running) {
+        std::cout<<"---tick="<<std::to_string(counter)<<std::endl;
+        int telegrams_num = 0;
         for (core::IMachine* machine: machines) {
             machine->update();
+            telegrams_num += machine->telegramsNum();
         }
+        if (telegrams_num == 0 || counter > 1000) {
+            sleep_counter++;
+        }
+        if (sleep_counter > 6) {
+            running = false;
+        }
+        counter++;
     }
 }
 
@@ -72,11 +85,16 @@ bool check_matches(T* left, T* right)
 {
     assert(left);
     assert(right);
+    if (left->descriptor()->id() != right->descriptor()->id()) {
+        std::cout<<"left descriptor id="<<left->descriptor()->id()<<" right descriptor id="<<right->descriptor()->id();
+        assert(false);
+    }
+
     bool result = (left->model()->data() == right->model()->data());
     if (!result) {
-        std::cout<<left->model()->data()<<std::endl;
-        std::cout<<right->model()->data()<<std::endl;
-        std::cout<<"DIFF: "<<left->model()->info().diff(right->model()->info())<<std::endl;
+//        std::cout<<left->model()->data()<<std::endl;
+//        std::cout<<right->model()->data()<<std::endl;
+        std::cout<<"DIFF: \n"<<left->model()->info().diff(right->model()->info())<<std::endl;
     }
 
     return result;
@@ -85,17 +103,26 @@ bool check_matches(T* left, T* right)
 
 } // namespace
 
+TEST(world, simple)
+{
+
+}
+
 TEST(world, player_creation)
 {
     core::Server server(true);
     client::Client client(1);
+    //client.connect();
 
     std::vector<core::IMachine*> machines = {&server, &client};
 
     client.requestCreatePlayerNpc();
+
+    update(machines);
+
     client.requestCreatePlayerVehicle();
 
-    updateMachines(machines, 3);
+    update(machines);
 
     core::control::Npc* client_npc = client.player()->npc();
     core::control::Npc* server_npc = getNpc(server.session(), client_npc->id());

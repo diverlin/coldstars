@@ -145,6 +145,10 @@ void Client::update() {
     }
 }
 
+int Client::telegramsNum() const {
+    return m_telegramHandler->telegramsNum();
+}
+
 void Client::connect()
 {
     if (m_isConnected) {

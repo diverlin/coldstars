@@ -36,7 +36,7 @@ class SpaceObjectModel : public ceti::OrientationModel, public BaseModel
 {
 public:
     SpaceObjectModel() = default;
-    ~SpaceObjectModel() = default;
+    ~SpaceObjectModel() override = default;
 
     void addArmor(int armor) { m_armor += armor; }
     void setArmor(int armor) { m_armor = armor; }

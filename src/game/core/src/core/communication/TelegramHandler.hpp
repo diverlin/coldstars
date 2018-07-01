@@ -13,7 +13,7 @@ public:
           BTelegramHandler(Machine::SERVER)
         , m_telegramCreator(telegramCreator)
     {}
-    ~TelegramHandler()=default;
+    ~TelegramHandler() override {}
 
 protected:
     void _process(const Telegram&) const override final;
@@ -22,13 +22,10 @@ private:
     void __playerMoveReply(const Telegram&) const;
     void __playerTurnEndReply(const Telegram&) const;
     void __playerSetSpaceObjectTargetReply(const Telegram&) const;
-    void __playerCreateNpcReply(const Telegram&) const;
-    void __playerCreateShipReply(const Telegram&) const;
-    void __playerBindNpcReply(const Telegram&) const;
-    void __playerInsertNpcToShipReply(const Telegram&) const;
-
-    void __replyPlayerCreateNpc(const Telegram&) const;
-    void __replyPlayerCreateShip(const Telegram&) const;
+    void __replyOnPlayerCreateNpcRequest(const Telegram&) const;
+    void __replyOnPlayerCreateShipRequest(const Telegram&) const;
+    void __playerBindNpc(const Telegram&) const;
+//    void __playerInsertNpcToShipReply(const Telegram&) const;
 
     TelegramCreator& m_telegramCreator;
 };

@@ -27,8 +27,8 @@ namespace core {
 
 class VehicleModel : public SpaceObjectModel {
 public:
-    VehicleModel()=default;
-    ~VehicleModel() = default;
+    VehicleModel() = default;
+    ~VehicleModel() override = default;
 
     int_t npc() const { return m_npc; }
     int_t dock() const { return m_dock; }

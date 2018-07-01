@@ -67,7 +67,7 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
     case telegram::Type::ADD_ASTEROID_TO_STARSYSTEM: _addAsteroidToStarSystem(telegram); break;
     case telegram::Type::ADD_SHIP_TO_STARSYSTEM: _addShipToStarSystem(telegram); break;
     case telegram::Type::ADD_CONTAINER_TO_STARSYSTEM: _addContainerToStarSystem(telegram); break;
-    case telegram::Type::ADD_NPC_TO_SHIP: _addNpcToShip(telegram); break;
+    case telegram::Type::INSERT_NPC_TO_SHIP: _addNpcToShip(telegram); break;
 
     /** REMOVE FROM STARSYSTEM */
     case telegram::Type::REMOVE_SPACEOBJECT_FROM_STARSYSTEM: _removeSpaceObjectFromStarSystem(telegram); break;
@@ -101,8 +101,8 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
 //    case telegram::Type::CREATE_PLAYER: _createPlayer(telegram); break;
     case telegram::Type::CREATE_EXPLOSION_EFFECT: _createExplosionEffect(telegram); break;
     case telegram::Type::VEHICLE_TARGET_SPACEOBJECT: _vehicleTargetSpaceOject(telegram); break;
-    case telegram::Type::REPLY_PLAYER_CREATE_NPC: __handleReplyPlayerCreateNpc(telegram); break;
-    case telegram::Type::REPLY_PLAYER_CREATE_SHIP: __handleReplyPlayerCreateShip(telegram); break;
+    case telegram::Type::PLAYER_BIND_NPC: __playerBindNpc(telegram); break;
+    //case telegram::Type::REPLY_PLAYER_CREATE_SHIP: __handleReplyPlayerCreateShip(telegram); break;
     default: {
         assert(false);
         break;
@@ -111,6 +111,20 @@ void TelegramHandler::_process(const core::Telegram& telegram) const
 }
 
 void TelegramHandler::__handleReplyPlayerCreateNpc(const core::Telegram& telegram) const
+{
+assert(false);
+    //    core::DoubleIdDescr descr(telegram.data());
+//    int_t player_id = descr.firstId();
+//    int_t npc_id = descr.secondId();
+//    core::Player* player = client::shortcuts::player();
+//    if (player_id != player->id()) {  // workaround, TODO: we must send this telegram only to specific player id
+//        return;
+//    }
+//    core::control::Npc* npc = core::shortcuts::entities()->npc(npc_id);
+//    player->setNpc(npc);
+}
+
+void TelegramHandler::__playerBindNpc(const core::Telegram& telegram) const
 {
     core::DoubleIdDescr descr(telegram.data());
     int_t player_id = descr.firstId();
@@ -123,19 +137,19 @@ void TelegramHandler::__handleReplyPlayerCreateNpc(const core::Telegram& telegra
     player->setNpc(npc);
 }
 
-void TelegramHandler::__handleReplyPlayerCreateShip(const core::Telegram& telegram) const
-{
-    core::DoubleIdDescr descr(telegram.data());
-    int_t player_id = descr.firstId();
-    int_t ship_id = descr.secondId();
-    core::Player* player = client::shortcuts::player();
-    if (player_id != player->id()) { // workaround, TODO: we must send this telegram only to specific player id
-        return;
-    }
-    core::control::Ship* ship = core::shortcuts::entities()->ship(ship_id);
-    assert(player->npc());
-    ship->bindNpc(player->npc());
-}
+//void TelegramHandler::__handleReplyPlayerCreateShip(const core::Telegram& telegram) const
+//{
+//    core::DoubleIdDescr descr(telegram.data());
+//    int_t player_id = descr.firstId();
+//    int_t ship_id = descr.secondId();
+//    core::Player* player = client::shortcuts::player();
+//    if (player_id != player->id()) { // workaround, TODO: we must send this telegram only to specific player id
+//        return;
+//    }
+//    core::control::Ship* ship = core::shortcuts::entities()->ship(ship_id);
+//    assert(player->npc());
+//    ship->bindNpc(player->npc());
+//}
 
 // player
 //void TelegramHandler::_createPlayer(const core::Telegram& telegram) const {

@@ -106,6 +106,10 @@ void Server::update()
     m_world->update();
 }
 
+int Server::telegramsNum() const {
+    return m_telegramHandler->telegramsNum();
+}
+
 void Server::__create_player() {
     //        int_t id = shortcuts::entities()->nextId();
     //        Player* player = new Player(id);

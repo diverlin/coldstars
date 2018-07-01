@@ -60,6 +60,7 @@ public:
     void requestCreatePlayerVehicle();
 
     void update() override final;
+    int telegramsNum() const override final;
 
 protected:
     jeti::Camera* _camera() const;
