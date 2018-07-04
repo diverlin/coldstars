@@ -35,4 +35,14 @@ PlanetDescr::PlanetDescr()
     setObType(entity::Type::PLANET);
 }
 
+PlanetDescr::PlanetDescr(const std::string& data) {
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+PlanetDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace core

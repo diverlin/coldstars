@@ -32,9 +32,9 @@ struct OrientationDescr : public BaseDescr
 {
 public:
     OrientationDescr() = default;
-    ~OrientationDescr() = default;
+    ~OrientationDescr() override = default;
 
-    ceti::InfoTable info() const {
+    ceti::InfoTable info() const override {
         ceti::InfoTable result = BaseDescr::info();
         result.add("Orientation");
         result.add("size", m_size);

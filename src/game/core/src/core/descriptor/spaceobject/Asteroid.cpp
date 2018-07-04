@@ -35,4 +35,14 @@ AsteroidDescr::AsteroidDescr()
     setObType(entity::Type::ASTEROID);
 }
 
+AsteroidDescr::AsteroidDescr(const std::string& data) {
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+AsteroidDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace core

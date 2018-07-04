@@ -16,38 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Turrel.hpp"
 
-#include <core/descriptor/Base.hpp>
-
-#include <ceti/StringUtils.hpp>
-#include <ceti/type/IdType.hpp>
-
-#include <vector>
+#include <ceti/serialization/macro.hpp>
 
 namespace core {
 
-struct SectorDescr : public BaseDescr
+TurrelDescr::TurrelDescr()
 {
-public:
-    std::vector<int_t> starsystems;
+    setType(core::Type::NPC);
+    setObType(entity::Type::NPC);
+}
 
-    SectorDescr();
-    SectorDescr(const std::string& data);
-    ~SectorDescr() override final = default;
-    std::string data() const override final;
+TurrelDescr::TurrelDescr(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
 
-    ceti::InfoTable info() const override final {
-        ceti::InfoTable result = BaseDescr::info();
-        result.add("Sector");
-        result.add("starsystems", ceti::to_string(starsystems));
-        return result;
-    }
-}; 
+std::string
+TurrelDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
 
 } // namespace core
-
-
-
-
 

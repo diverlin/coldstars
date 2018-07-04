@@ -37,4 +37,10 @@ StarDescr::StarDescr(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 
+std::string
+StarDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
 } // namespace core

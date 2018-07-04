@@ -29,17 +29,27 @@ namespace core {
 struct GalaxyDescr : public BaseDescr
 {
 public:
-    bool allow_invasion = true;
-    std::vector<int_t> sectors;
-
     GalaxyDescr();
-    ~GalaxyDescr() = default;
+    GalaxyDescr(const std::string&);
+    ~GalaxyDescr() override = default;
+    std::string data() const override final;
 
-    ceti::InfoTable info() const {
+    ceti::InfoTable info() const override final {
         ceti::InfoTable result = BaseDescr::info();
         result.add("Galaxy");
         result.add("sectors", ceti::to_string(sectors));
         return result;
+    }
+
+public:
+    std::vector<int_t> sectors;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<BaseDescr>(*this);
+        ar & sectors;
     }
 }; 
 

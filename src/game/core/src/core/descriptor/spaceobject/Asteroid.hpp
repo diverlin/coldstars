@@ -24,7 +24,6 @@ namespace core {
 
 class AsteroidDescr : public PlanetoidDescr
 {
-
 public:
     static const int ARMOR_MIN;
     static const int ARMOR_MAX;
@@ -37,10 +36,9 @@ public:
 
 public:
     AsteroidDescr();
-    AsteroidDescr(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    ~AsteroidDescr() = default;
+    AsteroidDescr(const std::string& data);
+    ~AsteroidDescr() override = default;
+    std::string data() const override final;
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidDescr::info();

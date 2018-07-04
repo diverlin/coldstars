@@ -25,8 +25,10 @@ namespace core {
 struct TurrelDescr : public OrientationDescr
 {
 public:
-    TurrelDescr() = default;
-    ~TurrelDescr() = default;
+    TurrelDescr();
+    TurrelDescr(const std::string& data);
+    ~TurrelDescr() override = default;
+    std::string data() const override final;
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = OrientationDescr::info();

@@ -18,12 +18,24 @@
 
 #include "GalaxyDescriptor.hpp"
 
+#include <ceti/serialization/macro.hpp>
+
 namespace core {
 
 GalaxyDescr::GalaxyDescr()
 {
     setType(core::Type::GALAXY);
     setObType(entity::Type::GALAXY);
+}
+
+GalaxyDescr::GalaxyDescr(const std::string& data) {
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+GalaxyDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace core

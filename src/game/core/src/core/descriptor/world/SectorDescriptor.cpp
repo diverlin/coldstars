@@ -18,12 +18,25 @@
 
 #include "SectorDescriptor.hpp"
 
+#include <ceti/serialization/macro.hpp>
+
 namespace core {
 
 SectorDescr::SectorDescr()
 {
     setType(core::Type::SECTOR);
     setObType(entity::Type::SECTOR);
+}
+
+SectorDescr::SectorDescr(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+SectorDescr::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace core

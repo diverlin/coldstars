@@ -36,10 +36,9 @@ public:
 
 public:
     PlanetDescr();
-    PlanetDescr(const std::string& data) {
-        MACRO_READ_SERIALIZED_DATA
-    }
-    ~PlanetDescr() = default;
+    PlanetDescr(const std::string& data);
+    ~PlanetDescr() override = default;
+    std::string data() const override final;
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidDescr::info();

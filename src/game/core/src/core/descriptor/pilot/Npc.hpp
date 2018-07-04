@@ -28,7 +28,7 @@ public:
     NpcDescr();
     NpcDescr(const std::string& data);
     ~NpcDescr() override = default;
-    std::string data() const;
+    std::string data() const override final;
 
 private:
     // ..

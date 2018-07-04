@@ -36,7 +36,8 @@ public:
 public:
     StarDescr();
     StarDescr(const std::string&);
-    ~StarDescr() = default;
+    ~StarDescr() override = default;
+    std::string data() const override final;
 
     ceti::InfoTable info() const override final {
         ceti::InfoTable result = PlanetoidDescr::info();

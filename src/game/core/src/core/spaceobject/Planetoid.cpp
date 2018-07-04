@@ -19,11 +19,8 @@
 
 #include "Planetoid.hpp"
 
-//#include <jeti/Render.hpp>
-
-#include <ceti/Logger.hpp> 
+//#include <ceti/Logger.hpp>
 #include <ceti/serialization/macro.hpp>
-//#include <ceti/StringUtils.hpp>
 
 
 namespace core {

@@ -103,11 +103,6 @@ bool check_matches(T* left, T* right)
 
 } // namespace
 
-TEST(world, simple)
-{
-
-}
-
 TEST(world, player_creation)
 {
     core::Server server(true);
@@ -131,26 +126,27 @@ TEST(world, player_creation)
     EXPECT_TRUE(check_matches(server_npc->vehicle(), client_npc->vehicle()));
 }
 
-TEST(world, dummy)
+TEST(world, world_creation)
 {
-    core::Server server(true);
+    core::Server server;
     client::Client client(1);
 
-    server.update();
-    client.update();
+    std::vector<core::IMachine*> machines = {&server, &client};
+
+    update(machines);
+
+////    server.update();
+
+////   int_t starsystem_id = createStarSystem(server);
+////    int_t ship_id = createShip(server);
+////    addShipToStarSystem(starsystem_id, ship_id);
 
 //    server.update();
+//    client.update();
 
-//   int_t starsystem_id = createStarSystem(server);
-//    int_t ship_id = createShip(server);
-//    addShipToStarSystem(starsystem_id, ship_id);
+//    //core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
+//    //core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
 
-    server.update();
-    client.update();
-
-    //core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
-    //core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
-
-    // validate server and client identity
+//    // validate server and client identity
 }
 

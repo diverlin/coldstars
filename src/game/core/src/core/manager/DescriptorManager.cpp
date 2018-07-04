@@ -138,8 +138,8 @@ Descriptors::rand(core::Type type) const
 {
     std::map<core::Type, std::vector<core::BaseDescr*>>::const_iterator it = m_descriptorsTypes.find(type);
     if (it == m_descriptorsTypes.end()) {
-        assert(false);
         throw std::runtime_error("Base* Manager::randdescriptor type = " + to_string(type) + " doesn't exist");
+        assert(false);
     }
     core::BaseDescr* descr = meti::rand::get_element_or_die(it->second);
     assert(descr);
@@ -681,9 +681,10 @@ Descriptors::__load()
                     data = vdata[2];
                     core::BaseDescr* descr = __build_descriptor(type, data);
                     add(descr);
+                } else {
+                    std::cout<<"descriptor line - "<<line<<" - is bad"<<std::endl;
+                    assert(false);
                 }
-            } else {
-                //assert(false);
             }
         }
     }
@@ -696,12 +697,12 @@ Descriptors::__build_descriptor(Type type, const std::string& data) const
 {
     core::BaseDescr* descr = nullptr;
     switch(type) {
-//    case Type::GALAXY:         { descr = new GalaxyDescr(data); break; }
-    case Type::STARSYSTEM:     { descr = new StarSystemDescr(data); break; }
-//    case Type::SECTOR:     { descr = new SectorDescr(data); break; }
+    case Type::GALAXY:       { descr = new GalaxyDescr(data); break; }
+    case Type::STARSYSTEM:   { descr = new StarSystemDescr(data); break; }
+    case Type::SECTOR:       { descr = new SectorDescr(data); break; }
 
     // pilots
-    case Type::NPC:             { descr = new NpcDescr(data); break; }
+    case Type::NPC:          { descr = new NpcDescr(data); break; }
 
     // space object
     case Type::STAR:         { descr = new StarDescr(data); break; }
