@@ -138,7 +138,7 @@ void test_sessions_matches(core::BaseSession* session1, core::BaseSession* sessi
 
 } // namespace
 
-TEST(world, player_creation)
+TEST(sessions, player_creation)
 {
     core::Server server(true);
     client::Client client(1);
@@ -161,7 +161,7 @@ TEST(world, player_creation)
     EXPECT_TRUE(check_matches(server_npc->vehicle(), client_npc->vehicle()));
 }
 
-TEST(world, world_creation)
+TEST(sessions, world_creation)
 {
     core::Server server;
     client::Client client(1);
