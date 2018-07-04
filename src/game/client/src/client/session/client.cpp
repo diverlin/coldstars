@@ -159,6 +159,16 @@ void Client::connect()
     m_isConnected = true;
 }
 
+void Client::disconnect()
+{
+    if (!m_isConnected) {
+        return;
+    }
+
+    // TODO: put valid logic here
+    m_isConnected = false;
+}
+
 void Client::requestCreatePlayerNpc() {
     if (m_wait_npc) {
         return;

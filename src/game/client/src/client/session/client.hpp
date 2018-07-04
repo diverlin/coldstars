@@ -52,6 +52,7 @@ public:
     Player* player() const;
 
     void connect();
+    void disconnect();
 
     bool sessionIsRunning() const; // why both?
     bool isRunning() const; // why both?

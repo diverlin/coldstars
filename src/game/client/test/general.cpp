@@ -112,15 +112,9 @@ TEST(world, player_creation)
 {
     core::Server server(true);
     client::Client client(1);
-    //client.connect();
+    client.connect();
 
     std::vector<core::IMachine*> machines = {&server, &client};
-
-    client.requestCreatePlayerNpc();
-
-    update(machines);
-
-    client.requestCreatePlayerVehicle();
 
     update(machines);
 
