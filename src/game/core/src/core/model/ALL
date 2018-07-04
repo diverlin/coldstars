@@ -1,3 +1,4 @@
 #include "item/equipment/ALL"
 #include "spaceobject/ALL"
+#include "world/ALL"
 

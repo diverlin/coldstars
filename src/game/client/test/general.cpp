@@ -25,8 +25,9 @@
 #include <core/session/ServerSession.hpp>
 #include <core/manager/EntityManager.hpp>
 #include <core/pilot/Npc.hpp>
-#include <core/spaceobject/Vehicle.hpp>
+#include <core/spaceobject/Ship.hpp>
 
+#include <core/world/ALL>
 #include <core/model/ALL>
 #include <core/descriptor/ALL>
 
@@ -45,19 +46,30 @@ core::control::Npc* getNpc(core::BaseSession* session, int_t id) {
     return session->entities()->npc(id);
 }
 
-
-int_t createStarSystem(core::Server& server) {
-    return core::TelegramCreator::get().createPureStarsystem();
+core::control::Galaxy* getGalaxy(core::BaseSession* session) {
+    return session->entities()->galaxy();
 }
 
-int_t createShip(core::Server& server) {
-//    return core::TelegramCreator::get().createEquipedShipWithNpc();
-    return core::TelegramCreator::get().createPureShip();
+core::control::Sector* getSector(core::BaseSession* session, int_t id) {
+    return session->entities()->sector(id);
 }
 
-void addShipToStarSystem(int_t starsystem_id, int_t ship_id) {
-    core::TelegramCreator::get().addShipToStarSystem(starsystem_id, ship_id);
+core::control::StarSystem* getStarSystem(core::BaseSession* session, int_t id) {
+    return session->entities()->starsystem(id);
 }
+
+core::control::Star* getStar(core::BaseSession* session, int_t id) {
+    return session->entities()->star(id);
+}
+
+core::control::Planet* getPlanet(core::BaseSession* session, int_t id) {
+    return session->entities()->planet(id);
+}
+
+core::control::Asteroid* getAsteroid(core::BaseSession* session, int_t id) {
+    return session->entities()->asteroid(id);
+}
+
 
 void update(const std::vector<core::IMachine*>& machines/*, int ticks*/) {
     bool running = true;
@@ -92,12 +104,35 @@ bool check_matches(T* left, T* right)
 
     bool result = (left->model()->data() == right->model()->data());
     if (!result) {
-//        std::cout<<left->model()->data()<<std::endl;
-//        std::cout<<right->model()->data()<<std::endl;
         std::cout<<"DIFF: \n"<<left->model()->info().diff(right->model()->info())<<std::endl;
     }
 
     return result;
+}
+
+void test_sessions_matches(core::BaseSession* session1, core::BaseSession* session2) {
+    core::control::Galaxy* session1_galaxy = getGalaxy(session1);
+    core::control::Galaxy* session2_galaxy = getGalaxy(session2);
+    EXPECT_TRUE(check_matches(session1_galaxy, session2_galaxy));
+
+    for (int_t sector_id: session1_galaxy->descriptor()->sectors) {
+        core::control::Sector* session1_sector = getSector(session1, sector_id);
+        core::control::Sector* session2_sector = getSector(session2, sector_id);
+        EXPECT_TRUE(check_matches(session1_sector, session2_sector));
+
+        for (int_t starsystem_id: session1_sector->descriptor()->starsystems) {
+            core::control::StarSystem* session1_starsystem = getStarSystem(session1, starsystem_id);
+            core::control::StarSystem* session2_starsystem = getStarSystem(session2, starsystem_id);
+            EXPECT_TRUE(check_matches(session1_starsystem, session2_starsystem));
+
+            for (int_t ship_id: session1_starsystem->model()->ships()) {
+                core::control::Ship* session1_ship = getShip(session1, ship_id);
+                core::control::Ship* session2_ship = getShip(session2, ship_id);
+                EXPECT_TRUE(check_matches(session1_ship, session2_ship));
+                EXPECT_TRUE(check_matches(session1_ship->npc(), session2_ship->npc()));
+            }
+        }
+    }
 }
 
 
@@ -135,18 +170,6 @@ TEST(world, world_creation)
 
     update(machines);
 
-////    server.update();
-
-////   int_t starsystem_id = createStarSystem(server);
-////    int_t ship_id = createShip(server);
-////    addShipToStarSystem(starsystem_id, ship_id);
-
-//    server.update();
-//    client.update();
-
-//    //core::control::Ship* ship_from_server = getShip(server.session(), ship_id);
-//    //core::control::Ship* ship_from_client = getShip(client.session(), ship_id);
-
-//    // validate server and client identity
+    test_sessions_matches(server.session(), client.session());
 }
 
