@@ -129,17 +129,17 @@ genStar()
     descr->setArmor(10000000);
 
     int orbit_radius = meti::rand::gen_int(core::StarDescr::DISTANCE_MIN,
-                                        core::StarDescr::DISTANCE_MAX);
+                                           core::StarDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
     float speed = meti::rand::gen_int(core::StarDescr::SPEED_MIN,
-                                   core::StarDescr::SPEED_MAX) / float(orbit_radius);
+                                      core::StarDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
     float size = meti::rand::gen_int(core::StarDescr::SCALE_MIN,
-                                  core::StarDescr::SCALE_MAX);
+                                     core::StarDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
 
@@ -161,12 +161,12 @@ genPlanet()
     descr->setArmor(100000);
 
     int orbit_radius = meti::rand::gen_int(core::PlanetDescr::DISTANCE_MIN,
-                                        core::PlanetDescr::DISTANCE_MAX);
+                                           core::PlanetDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radius);
     descr->setRadiusB(orbit_radius);
     descr->setOrbitPhi(0);
     float speed = meti::rand::gen_int(core::PlanetDescr::SPEED_MIN,
-                                   core::PlanetDescr::SPEED_MAX) / float(orbit_radius);
+                                      core::PlanetDescr::SPEED_MAX) / float(orbit_radius);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
@@ -243,22 +243,22 @@ genAsteroid()
 {
     core::AsteroidDescr* descr = new core::AsteroidDescr;
     descr->setArmor(meti::rand::gen_int(core::AsteroidDescr::ARMOR_MIN,
-                                    core::AsteroidDescr::ARMOR_MAX));
+                                        core::AsteroidDescr::ARMOR_MAX));
 
     int orbit_radiusA = meti::rand::gen_int(core::AsteroidDescr::DISTANCE_MIN,
-                                        core::AsteroidDescr::DISTANCE_MAX);
+                                            core::AsteroidDescr::DISTANCE_MAX);
     int orbit_radiusB = meti::rand::gen_int(core::AsteroidDescr::DISTANCE_MIN,
-                                        core::AsteroidDescr::DISTANCE_MAX);
+                                            core::AsteroidDescr::DISTANCE_MAX);
     descr->setRadiusA(orbit_radiusA);
     descr->setRadiusB(orbit_radiusB);
     descr->setOrbitPhi(0);
     float speed = meti::rand::gen_int(core::AsteroidDescr::SPEED_MIN,
-                                   core::AsteroidDescr::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
+                                      core::AsteroidDescr::SPEED_MAX) / float((orbit_radiusA+orbit_radiusB)/2.0);
     descr->setSpeed(speed);
     descr->setClockwise(meti::rand::gen_bool());
 
     float size = meti::rand::gen_int(core::AsteroidDescr::SCALE_MIN,
-                                  core::AsteroidDescr::SCALE_MAX);
+                                     core::AsteroidDescr::SCALE_MAX);
     descr->setSize(meti::vec3(size));
     descr->setDirection(randPlanetoidDirection());
     descr->setMaterial(textureDescriptorIdFromType(texture::Type::ASTEROID));
@@ -341,8 +341,8 @@ genShip()
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::Type::WARRIOR: { protection_rate = 2; break; }
-        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
+    case entity::Type::WARRIOR: { protection_rate = 2; break; }
+    case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::rand::gen_int(100);
@@ -373,16 +373,16 @@ genShip()
         float angle = meti::rand::gen_angle();
         descr->addTurrelPoint(meti::get_vec3(length, angle));
     }
-//    for(int i=0; i<slot_drive_num; ++i) {
-//        int length = meti::getRandInt(100);
-//        float angle = meti::rand::get_angle();
-//        descr->addDrivePoint(meti::genVec3f(length, angle));
-//    }
-//    for(int i=0; i<slot_protector_num; ++i) {
-//        int length = meti::getRandInt(100);
-//        float angle = meti::rand::get_angle();
-//        descr->addProtectorPoint(meti::genVec3f(length, angle));
-//    }
+    //    for(int i=0; i<slot_drive_num; ++i) {
+    //        int length = meti::getRandInt(100);
+    //        float angle = meti::rand::get_angle();
+    //        descr->addDrivePoint(meti::genVec3f(length, angle));
+    //    }
+    //    for(int i=0; i<slot_protector_num; ++i) {
+    //        int length = meti::getRandInt(100);
+    //        float angle = meti::rand::get_angle();
+    //        descr->addProtectorPoint(meti::genVec3f(length, angle));
+    //    }
     descr->setSize(size_id);
 
     descr->setSpace(space);
@@ -433,8 +433,8 @@ genSpaceStation()
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::Type::WARRIOR: { protection_rate = 2; break; }
-        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
+    case entity::Type::WARRIOR: { protection_rate = 2; break; }
+    case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::rand::gen_int(100);
@@ -519,8 +519,8 @@ genSatellite()
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case entity::Type::WARRIOR: { protection_rate = 2; break; }
-        case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
+    case entity::Type::WARRIOR: { protection_rate = 2; break; }
+    case entity::Type::TRADER:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::rand::gen_int(100);

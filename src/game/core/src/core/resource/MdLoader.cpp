@@ -21,7 +21,7 @@ MdLoader::MdLoader(const std::string& filepath)
     std::ifstream filestream;
     filestream.open(filepath.c_str());
      if (!filestream.is_open()) {
-         std::cout<<"FAULT: Not abe to open file:"<<filepath;
+         std::cout<<"FAULT: Not abe to open file:"<<filepath<<std::endl;
          exit(EXIT_FAILURE);
      }
  

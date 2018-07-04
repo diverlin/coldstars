@@ -33,6 +33,7 @@
 #include <core/manager/DescriptorManager.hpp>
 
 #include <core/descriptor/spaceobject/ALL>
+#include <core/descriptor/world/ALL>
 #include <core/descriptor/pilot/Npc.hpp>
 #include <core/communication/descriptor/ALL>
 

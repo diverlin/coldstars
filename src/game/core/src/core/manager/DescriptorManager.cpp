@@ -52,7 +52,12 @@ Descriptors::Descriptors()
       m_meshes(new Collector<core::MeshDescr>(""))
     , m_materials(new Collector<core::MaterialDescr>(""))
 {
-    bool force_generation = false;
+
+}
+
+void Descriptors::init()
+{
+    bool force_generation = true;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !force_generation) {
         __load();
     } else {
@@ -646,11 +651,10 @@ Descriptors::__save()
     std::fstream filestream;
     filestream.open(descriptors_fname);
     if(filestream.is_open()) {
-        for(const auto& lists: m_descriptorsTypesOLD) {
-            const auto& list = lists.second;
-            for(BaseOLD* descr: list) {
-                filestream<<descr->data()<<std::endl;
-            }
+        for(const auto& it: m_descriptors) {
+            core::BaseDescr* descr = it.second;
+//            filestream<<descr->data()<<std::endl;
+//            std::cout<<"save="<<to_string(descr->type())<<std::endl;
         }
     } else {
         throw std::runtime_error("not able to open file="+descriptors_fname);
@@ -669,11 +673,16 @@ Descriptors::__load()
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
-                BaseOLD* descr = new BaseOLD(line);
-                add(descr);
+                // define type
+//                core::BaseDescr descr(line);
+//                std::cout<<"load="<<to_string(descr.type())<<std::endl;
+                // make proper descr
+//                BaseOLD* descr = new BaseOLD(line);
+//                add(descr);
             }
         }
     }
+    assert(false);
     filestream.close();
 }
 
@@ -685,14 +694,14 @@ Descriptors::__clear()
 }
 
 void
-Descriptors::generate()
+Descriptors::__generate()
 {
     __clear();
 
     for (int i=0; i<5; ++i) {
         core::genBullet(); // nested for rocket, so must be generated firstly
     }
-    core::genGoods();
+    //core::genGoods();
 
     int base = 1;
     int num = base * 20;

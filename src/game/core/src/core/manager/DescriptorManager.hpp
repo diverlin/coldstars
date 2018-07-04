@@ -20,12 +20,6 @@
 
 #include <core/descriptor/Base.hpp>
 
-#include <core/descriptor/world/GalaxyDescriptor.hpp>
-#include <core/descriptor/world/SectorDescriptor.hpp>
-#include <core/descriptor/world/StarSystemDescriptor.hpp>
-
-#include <core/descriptor/spaceobject/Container.hpp>
-
 #include <core/descriptor/Mesh.hpp>
 #include <core/descriptor/Texture.hpp>
 #include <core/resource/Collector.hpp>
@@ -92,6 +86,7 @@ public:
     Descriptors(const Descriptors&) = delete;
     ~Descriptors() = default;
     Descriptors& operator=(const Descriptors&) = delete;
+    void init();
 
     void add(core::BaseDescr*);
     void add(core::MeshDescr*);
@@ -205,7 +200,7 @@ private:
     ceti::pack<int_t> __ids(core::Type) const;
 
     IdGenerator m_idGenerator;
-}; 
+};
 
 } // namespace manager
 } // namespace core

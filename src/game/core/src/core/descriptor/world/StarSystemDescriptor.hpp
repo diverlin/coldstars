@@ -56,8 +56,8 @@ struct StarSystemDescr : public BaseDescr
 public:
     StarSystemDescr();
     StarSystemDescr(const std::string&);
+    ~StarSystemDescr() override = default;
     std::string data() const;
-    ~StarSystemDescr() = default;
 
     const std::vector<int_t>& stars() const { return m_stars; }
     const std::vector<int_t>& planets() const { return m_planets; }

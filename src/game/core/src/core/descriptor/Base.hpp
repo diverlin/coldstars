@@ -32,8 +32,10 @@ namespace core {
 
 class BaseDescr
 {
-public:
+protected:
     BaseDescr() = default;
+
+public:
     virtual ~BaseDescr() = default;
 
     void setId(int_t id) { m_id = id; }

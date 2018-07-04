@@ -26,8 +26,8 @@ class NpcDescr : public BaseDescr {
 
 public:
     NpcDescr();
-    ~NpcDescr() = default;
     NpcDescr(const std::string& data);
+    ~NpcDescr() override = default;
     std::string data() const;
 
 private:

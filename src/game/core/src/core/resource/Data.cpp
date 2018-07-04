@@ -30,6 +30,8 @@ Data::Data(bool save)
     __generateMeshDescriptors();
     __generateMaterialDescriptors();
 //    __generateGameObjectDescriptors(save);
+
+    core::shortcuts::descriptors()->init();
 }
 
 Data::~Data()
