@@ -57,7 +57,7 @@ Descriptors::Descriptors()
 
 void Descriptors::init()
 {
-    bool force_generation = true;
+    bool force_generation = false;
     if (ceti::filesystem::is_file_exists(descriptors_fname) && !force_generation) {
         __load();
     } else {
@@ -653,8 +653,9 @@ Descriptors::__save()
     if(filestream.is_open()) {
         for(const auto& it: m_descriptors) {
             core::BaseDescr* descr = it.second;
-//            filestream<<descr->data()<<std::endl;
-//            std::cout<<"save="<<to_string(descr->type())<<std::endl;
+            filestream<<to_string(descr->type())<<"|"<<
+                        std::to_string(int(descr->type()))<<"|"<<
+                        descr->data()<<std::endl;
         }
     } else {
         throw std::runtime_error("not able to open file="+descriptors_fname);
@@ -673,17 +674,82 @@ Descriptors::__load()
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
-                // define type
-//                core::BaseDescr descr(line);
-//                std::cout<<"load="<<to_string(descr.type())<<std::endl;
-                // make proper descr
-//                BaseOLD* descr = new BaseOLD(line);
-//                add(descr);
+                auto vdata = ceti::split(line, "|");
+                std::string data = "";
+                if (vdata.size() == 3) {
+                    Type type = Type(std::atoi(vdata[1].c_str()));
+                    data = vdata[2];
+                    core::BaseDescr* descr = __build_descriptor(type, data);
+                    add(descr);
+                }
+            } else {
+                //assert(false);
             }
         }
     }
-    assert(false);
     filestream.close();
+}
+
+
+core::BaseDescr*
+Descriptors::__build_descriptor(Type type, const std::string& data) const
+{
+    core::BaseDescr* descr = nullptr;
+    switch(type) {
+//    case Type::GALAXY:         { descr = new GalaxyDescr(data); break; }
+    case Type::STARSYSTEM:     { descr = new StarSystemDescr(data); break; }
+//    case Type::SECTOR:     { descr = new SectorDescr(data); break; }
+
+    // pilots
+    case Type::NPC:             { descr = new NpcDescr(data); break; }
+
+    // space object
+    case Type::STAR:         { descr = new StarDescr(data); break; }
+    case Type::ASTEROID:     { descr = new AsteroidDescr(data); break; }
+    case Type::PLANET:       { descr = new PlanetDescr(data); break; }
+    case Type::WORMHOLE:     { descr = new WormHoleDescr(data); break; }
+    case Type::SHIP:         { descr = new ShipDescr(data); break; }
+    case Type::SPACESTATION: { descr = new SpaceStationDescr(data); break; }
+    case Type::SATELLITE:    { descr = new SatelliteDescr(data); break; }
+    case Type::CONTAINER:    { descr = new ContainerDescr(data); break; }
+    case Type::BULLET:       { descr = new BulletDescr(data); break; }
+
+    // equipment
+    case Type::LAZER_EQUIPMENT:     { descr = new LazerDescr(data); break; }
+    case Type::ROCKET_EQUIPMENT:    { descr = new RocketDescr(data); break; }
+    case Type::DRIVE_EQUIPMENT:     { descr = new DriveDescr(data); break; }
+    case Type::RADAR_EQUIPMENT:     { descr = new RadarDescr(data); break; }
+    case Type::BAK_EQUIPMENT:       { descr = new BakDescr(data); break; }
+//    case Type::ENERGIZER_EQUIPMENT: { descr = new EnergizerDescr(data); break; }
+    case Type::PROTECTOR_EQUIPMENT: { descr = new ProtectorDescr(data); break; }
+    case Type::DROID_EQUIPMENT:     { descr = new DroidDescr(data); break; }
+//    case Type::FREEZER_EQUIPMENT:   { descr = new FreezerDescr(data); break; }
+    case Type::GRAPPLE_EQUIPMENT:   { descr = new GrappleDescr(data); break; }
+    case Type::SCANER_EQUIPMENT:    { descr = new ScanerDescr(data); break; }
+
+    // module
+//    case Type::LAZER_MODULE:     { return "Type::LAZER_MODULE"; break; }
+//    case Type::ROCKET_MODULE:     { return "Type::ROCKET_MODULE"; break; }
+//    case Type::DRIVE_MODULE:     { return "Type::DRIVE_MODULE"; break; }
+//    case Type::RADAR_MODULE:     { return "Type::RADAR_MODULE"; break; }
+//    case Type::BAK_MODULE:         { return "Type::BAK_MODULE"; break; }
+//    case Type::ENERGIZER_MODULE: { return "Type::ENERGIZER_MODULE"; break; }
+//    case Type::PROTECTOR_MODULE: { return "Type::PROTECTOR_MODULE"; break; }
+//    case Type::DROID_MODULE:     { return "Type::DROID_MODULE"; break; }
+//    case Type::FREEZER_MODULE:     { return "Type::FREEZER_MODULE"; break; }
+//    case Type::GRAPPLE_MODULE:     { return "Type::GRAPPLE_MODULE"; break; }
+//    case Type::SCANER_MODULE:     { return "Type::SCANER_MODULE"; break; }
+
+//    // artefact
+//    case Type::GRAVITY_ARTEFACT:     { return "Type::GRAVITY_ARTEFACT"; break; }
+//    case Type::PROTECTOR_ARTEFACT:     { return "Type::PROTECTOR_ARTEFACT"; break; }
+
+//    // other
+//    case Type::HIT:     { return "Type::HIT"; }
+         default: std::cout<<to_string(type)<<std::endl; assert(false);
+    }
+
+    return descr;
 }
 
 void

@@ -194,6 +194,8 @@ private:
     void __save();
     void __load();
 
+    core::BaseDescr* __build_descriptor(Type type, const std::string& data) const;
+
     void __resolveId(core::BaseDescr*);
     void __resolveId(ceti::BaseDescr*);
 

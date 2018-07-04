@@ -37,6 +37,8 @@ protected:
 
 public:
     virtual ~BaseDescr() = default;
+    //virtual std::string data() const = 0;
+    virtual std::string data() const { return ""; }
 
     void setId(int_t id) { m_id = id; }
     void setType(const core::Type& type)   { m_type = type; }
